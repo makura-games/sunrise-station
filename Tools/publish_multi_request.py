@@ -4,26 +4,56 @@ import argparse
 import requests
 import os
 import subprocess
+# Sunrise added start - разбираем и проверяем адрес CDN
+from urllib.parse import urlparse
+# Sunrise added end
 from typing import Iterable
 
 PUBLISH_TOKEN = os.environ["PUBLISH_TOKEN"]
-VERSION = os.environ["GITHUB_SHA"]
+# Sunrise edit start - публикуем хеш реально собранного коммита
+VERSION = subprocess.check_output(["git", "rev-parse", "HEAD"], encoding="UTF-8").strip()
+# Sunrise edit end
 
 RELEASE_DIR = "release"
 
-#
-# CONFIGURATION PARAMETERS
-# Forks should change these to publish to their own infrastructure.
-#
-ROBUST_CDN_URL = "https://cdn.finland.ss14.org/" # Sunrise-Edit
-FORK_ID = "sunrise_station" # Sunrise-Edit - это fallback, настоящее значение передается как аргумент
+# Sunrise edit start - используем единый настраиваемый адрес CDN
+# Параметры инфраструктуры передаются через переменные окружения.
+INVALID_ROBUST_CDN_URL_MESSAGE = (
+    "ROBUST_CDN_URL must be an HTTPS URL with a host and "
+    "without user credentials, query, or fragment"
+)
+_robust_cdn_url = os.environ["ROBUST_CDN_URL"].strip()
+try:
+    _parsed_cdn_url = urlparse(_robust_cdn_url)
+    _hostname = _parsed_cdn_url.hostname
+    _ = _parsed_cdn_url.port  # Проверяем корректность порта.
+except ValueError as error:
+    raise ValueError(INVALID_ROBUST_CDN_URL_MESSAGE) from error
+
+if (
+    _parsed_cdn_url.scheme != "https"
+    or not _hostname
+    or _parsed_cdn_url.username is not None
+    or _parsed_cdn_url.password is not None
+    or _parsed_cdn_url.query
+    or _parsed_cdn_url.fragment
+):
+    raise ValueError(INVALID_ROBUST_CDN_URL_MESSAGE)
+
+ROBUST_CDN_URL = _robust_cdn_url.rstrip("/") + "/"
+# Sunrise edit end
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--fork-id", default=FORK_ID)
+    # Sunrise edit start - требуем непустой настраиваемый идентификатор сборки
+    parser.add_argument("--fork-id", required=True)
 
     args = parser.parse_args()
-    fork_id = args.fork_id
+    if not args.fork_id.strip():
+        parser.error("--fork-id must not be empty or contain only whitespace")
+
+    fork_id = args.fork_id.strip()
+    # Sunrise edit end
 
     session = requests.Session()
     session.headers = {

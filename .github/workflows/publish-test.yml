@@ -1,63 +1,35 @@
+# Sunrise added start - пресет тестовой публикации
 name: Publish Test
-
-concurrency:
-  group: publish
-  cancel-in-progress: true
 
 on:
   workflow_dispatch:
+    inputs:
+      commit_hash:
+        description: 'Commit hash for this repository (leave empty for latest). USE ONLY IF YOU KNOW WHAT YOU ARE DOING'
+        required: false
+        type: string
+        default: ''
+      use_private_content:
+        description: 'Include content from SunrisePrivate'
+        required: false
+        type: boolean
+        default: true
+      private_commit_hash:
+        description: 'Commit hash for SunrisePrivate (leave empty for latest). USE ONLY IF YOU KNOW WHAT YOU ARE DOING'
+        required: false
+        type: string
+        default: ''
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-
-    - name: Install Dependencies
-      run: pip install pyyaml requests
-
-    - uses: actions/checkout@v4.2.2
-      with:
-        submodules: 'recursive'
-
-    - name: Checkout SunrisePrivate
-      uses: actions/checkout@v4.2.2
-      with:
-        repository: ${{ secrets.SUNRISE_PRIVATE_REPO }}
-        path: SunrisePrivate
-        ssh-key: ${{ secrets.SUNRISE_PRIVATE_REPO_SSH_KEY }}
-
-    - name: Move Sunrise Private files
-      run: python3 Tools/_sunrise/move_private.py --clone-dir "SunrisePrivate" --target-dirs "Resources"
-
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v4.1.0
-      with:
-        dotnet-version: 10.0.x
-
-    - name: Get Engine Tag
-      run: |
-        cd RobustToolbox
-        git fetch --depth=1
-
-    - name: Install dependencies
-      run: dotnet restore
-
-    - name: Build Packaging
-      run: dotnet build Content.Packaging --configuration Release --no-restore /m
-
-    - name: Package server
-      run: dotnet run --project Content.Packaging server --platform win-x64 --platform win-arm64 --platform linux-x64 --platform linux-arm64 --platform osx-x64 --platform osx-arm64
-
-    - name: Package client
-      run: dotnet run --project Content.Packaging client --no-wipe-release
-
-    - name: Publish version
-      run: Tools/publish_multi_request.py --fork-id sunrise_station_test
-      env:
-        PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
-        GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
+  publish:
+    uses: ./.github/workflows/publish.yml
+    with:
+      commit_hash: ${{ inputs.commit_hash }}
+      publish_fork_id: ${{ vars.PUBLISH_TEST_FORK_ID }}
+      use_private_content: ${{ inputs.use_private_content }}
+      private_commit_hash: ${{ inputs.private_commit_hash }}
+    secrets:
+      PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+      PRIVATE_REPOSITORY: ${{ secrets.PRIVATE_REPOSITORY }}
+      PRIVATE_REPOSITORY_SSH_KEY: ${{ secrets.PRIVATE_REPOSITORY_SSH_KEY }}
+# Sunrise added end

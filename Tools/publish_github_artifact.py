@@ -10,12 +10,11 @@ ARTIFACT_ID = os.environ["ARTIFACT_ID"]
 GITHUB_REPOSITORY = os.environ["GITHUB_REPOSITORY"]
 VERSION = os.environ['GITHUB_SHA']
 
-#
-# CONFIGURATION PARAMETERS
-# Forks should change these to publish to their own infrastructure.
-#
-ROBUST_CDN_URL = "https://wizards.cdn.spacestation14.com/"
-FORK_ID = "wizards"
+# Sunrise edit start - используем общие настройки публикации вместо значений конкретного проекта
+# Параметры инфраструктуры передаются через переменные окружения.
+ROBUST_CDN_URL = os.environ["ROBUST_CDN_URL"].rstrip("/") + "/"
+FORK_ID = os.environ["PUBLISH_FORK_ID"]
+# Sunrise edit end
 
 def main():
     print("Fetching artifact URL from API...")
