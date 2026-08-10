@@ -19,6 +19,7 @@ knowledge_base:
 
 reviews:
   profile: assertive
+  request_changes_workflow: true
   path_instructions:
     - path: "**/*"
       instructions: |

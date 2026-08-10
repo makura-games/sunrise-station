@@ -1,0 +1,15 @@
+name: "PR: Review State Changed"
+
+on:
+  pull_request_review:
+    types: [submitted, edited, dismissed]
+
+permissions:
+  contents: read
+
+jobs:
+  signal:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Signal privileged sync
+        run: echo "Review state changed; privileged sync will run through workflow_run."
