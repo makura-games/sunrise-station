@@ -1,6 +1,9 @@
 using Content.Client._Sunrise.BloodCult;
+using Content.Client._Sunrise.Humanoid;
 using Content.Shared._Sunrise.Abilities.Milira;
 using Content.Shared._Sunrise.Mood;
+using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Markings;
 using Robust.Client.GameObjects;
 using Robust.Shared.Utility;
 
@@ -9,85 +12,115 @@ namespace Content.Client._Sunrise.Mood;
 /// <summary>
 /// Обрабатывает отображение эффектов настроения на сущностях с компонентом настроения.
 /// </summary>
-public sealed class MoodVisualizerSystem : VisualizerSystem<MoodVisualsComponent>
+public sealed class MoodVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly MarkingManager _marking = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MoodVisualsComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<MoodVisualsComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<MoodVisualsComponent, AppearanceChangeEvent>(OnAppearanceChange);
+        SubscribeLocalEvent<MoodVisualsComponent, HumanoidAppearanceUpdatedEvent>(OnHumanoidAppearanceUpdated);
     }
 
-    private void OnShutdown(Entity<MoodVisualsComponent> ent, ref ComponentShutdown args)
+    private void OnHumanoidAppearanceUpdated(Entity<MoodVisualsComponent> ent, ref HumanoidAppearanceUpdatedEvent args)
+        => UpdateAppearance(ent);
+
+    private void OnAppearanceChange(Entity<MoodVisualsComponent> ent, ref AppearanceChangeEvent args)
     {
-        if (!TryComp<SpriteComponent>(ent.Owner, out var sprite))
+        if (args.Sprite is not { } sprite)
             return;
 
-        if (_spriteSystem.LayerMapTryGet((ent.Owner, sprite), MoodVisualLayers.Mood, out var layer, false))
-            _spriteSystem.RemoveLayer((ent.Owner, sprite), layer);
+        UpdateAppearance((ent, ent.Comp, sprite), args.Component);
     }
 
-    private void OnComponentInit(Entity<MoodVisualsComponent> ent, ref ComponentInit args)
+    private void UpdateAppearance(Entity<MoodVisualsComponent> ent)
     {
-        if (!TryComp<SpriteComponent>(ent.Owner, out var sprite))
-            return;
-
-        _spriteSystem.LayerMapReserve((ent.Owner, sprite), MoodVisualLayers.Mood);
-        _spriteSystem.LayerSetVisible((ent.Owner, sprite), MoodVisualLayers.Mood, false);
-        sprite.LayerSetShader(MoodVisualLayers.Mood, "unshaded");
-        if (ent.Comp.Sprite != null)
-            _spriteSystem.LayerSetSprite((ent.Owner, sprite), MoodVisualLayers.Mood, ent.Comp.Sprite);
-
-        if (TryComp<AppearanceComponent>(ent.Owner, out var appearance))
-            UpdateAppearance(ent, sprite, appearance);
-    }
-
-    protected override void OnAppearanceChange(EntityUid uid, MoodVisualsComponent component, ref AppearanceChangeEvent args)
-    {
-        if (args.Sprite != null)
-            UpdateAppearance((uid, component), args.Sprite, args.Component);
-    }
-
-    private bool ShouldHideMoodVisuals(Entity<MoodVisualsComponent> ent)
-    {
-        return HasComp<PentagramComponent>(ent) && HasComp<WingToggleComponent>(ent);
-    }
-
-    private void UpdateAppearance(Entity<MoodVisualsComponent> ent, SpriteComponent sprite, AppearanceComponent appearance)
-    {
-        if (!_spriteSystem.LayerMapTryGet((ent, sprite), MoodVisualLayers.Mood, out var index, false))
-            return;
-
-        if (ShouldHideMoodVisuals(ent))
+        if (!TryComp<SpriteComponent>(ent, out var sprite) ||
+            !TryComp<AppearanceComponent>(ent, out var appearance))
         {
-            _spriteSystem.LayerSetVisible((ent, sprite), index, false);
             return;
         }
 
-        if (!_appearanceSystem.TryGetData<MoodThreshold>(ent.Owner, MoodVisuals.CurrentMoodThreshold, out var moodThreshold, appearance))
-        {
-            _spriteSystem.LayerSetVisible((ent.Owner, sprite), index, false);
-            return;
-        }
-
-        // Проверяем, есть ли состояние спрайта для этого порога настроения
-        if (!ent.Comp.MoodStates.TryGetValue(moodThreshold, out var state))
-        {
-            _spriteSystem.LayerSetVisible((ent.Owner, sprite), index, false);
-            return;
-        }
-
-        // Показываем слой спрайта и устанавливаем состояние
-        _spriteSystem.LayerSetVisible((ent.Owner, sprite), index, true);
-        _spriteSystem.LayerSetRsiState((ent.Owner, sprite), index, state);
+        UpdateAppearance((ent, ent.Comp, sprite), appearance);
     }
-}
 
-public enum MoodVisualLayers : byte
-{
-    Mood
+    private void UpdateAppearance(Entity<MoodVisualsComponent, SpriteComponent> ent, AppearanceComponent appearance)
+    {
+        var moodVisuals = ent.Comp1;
+        var sprite = ent.Comp2;
+
+        if (!TryGetMoodLayer(ent, out var layer))
+            return;
+
+        sprite.LayerSetShader(layer, "unshaded");
+
+        if (HasComp<PentagramComponent>(ent) && HasComp<WingToggleComponent>(ent))
+        {
+            _sprite.LayerSetVisible((ent, sprite), layer, false);
+            return;
+        }
+
+        if (!_appearance.TryGetData<MoodThreshold>(ent, MoodVisuals.CurrentMoodThreshold, out var moodThreshold, appearance))
+        {
+            _sprite.LayerSetVisible((ent, sprite), layer, moodVisuals.VisibleWithoutMood);
+            return;
+        }
+
+        if (!moodVisuals.MoodStates.TryGetValue(moodThreshold, out var state))
+        {
+            _sprite.LayerSetVisible((ent, sprite), layer, false);
+            return;
+        }
+
+        _sprite.LayerSetVisible((ent, sprite), layer, true);
+        _sprite.LayerSetRsiState((ent, sprite), layer, state);
+    }
+
+    private bool TryGetMoodLayer(Entity<MoodVisualsComponent, SpriteComponent> ent, out int layer)
+    {
+        var moodVisuals = ent.Comp1;
+        var sprite = ent.Comp2;
+        layer = default;
+
+        if (!TryComp<HumanoidAppearanceComponent>(ent, out var humanoid))
+            return false;
+
+        if (!humanoid.MarkingSet.Markings.TryGetValue(moodVisuals.MarkingCategory, out var markings))
+            return false;
+
+        foreach (var marking in markings)
+        {
+            if (!moodVisuals.MoodMarkings.Contains(marking.MarkingId))
+                continue;
+
+            if (!_marking.TryGetMarking(marking, out var prototype))
+                continue;
+
+            if (TryGetMarkingLayer((ent, sprite), prototype, out layer))
+                return true;
+        }
+
+        return false;
+    }
+
+    private bool TryGetMarkingLayer(Entity<SpriteComponent?> ent, MarkingPrototype prototype, out int layer)
+    {
+        layer = default;
+
+        foreach (var markingSprite in prototype.Sprites)
+        {
+            if (markingSprite is not SpriteSpecifier.Rsi rsi)
+                continue;
+
+            var layerKey = $"{prototype.ID}-{rsi.RsiState}";
+            if (_sprite.LayerMapTryGet(ent, layerKey, out layer, false))
+                return true;
+        }
+
+        return false;
+    }
 }

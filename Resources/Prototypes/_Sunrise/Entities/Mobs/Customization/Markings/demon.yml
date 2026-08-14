@@ -80,7 +80,7 @@
   id: DemonCowHorns
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: cow_horns
@@ -89,7 +89,7 @@
   id: DemonHornsDeer
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: deer_antlers_horns
@@ -98,7 +98,7 @@
   id: DemonHornsSmall
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: small_horns
@@ -169,7 +169,7 @@
   id: DemonHornsDouble
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_double
@@ -178,7 +178,7 @@
   id: DemonHornsDoubleAlt
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_double_alt
@@ -187,7 +187,7 @@
   id: DemonHornsNarrow
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_narrow
@@ -196,7 +196,7 @@
   id: DemonHornsGoatee
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_goatee
@@ -205,7 +205,7 @@
   id: DemonHornsGoateeAlt
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_goatee_alt
@@ -214,7 +214,7 @@
   id: DemonHornsSharp
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_sharp
@@ -223,7 +223,7 @@
   id: DemonHornsGrowths
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_growths
@@ -232,7 +232,7 @@
   id: DemonHornsBrokenOne
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_broken_one
@@ -241,7 +241,7 @@
   id: DemonHornsStout
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_stout
@@ -250,7 +250,7 @@
   id: DemonHornsEnormous
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_enormous
@@ -259,7 +259,7 @@
   id: DemonHornsScythe
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_scythe
@@ -268,7 +268,7 @@
   id: DemonHornsTapering
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_tapering
@@ -277,7 +277,7 @@
   id: DemonHornsDirectional
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_directional
@@ -286,7 +286,7 @@
   id: DemonHornsThick
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_thick
@@ -295,7 +295,7 @@
   id: DemonHornsSickle
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_sickle
@@ -304,7 +304,7 @@
   id: DemonHornsSlim
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  speciesRestriction: [Demon, Milira]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_slim

@@ -564,7 +564,8 @@ namespace Content.Shared.Preferences
             }
 
             // Sunrise-Sponsors-Start: Reset to human if player not sponsor
-            if (speciesPrototype.SponsorOnly && !sponsorPrototypes.Contains(Species.Id))
+            if (collection.TryResolveType<ISharedSponsorsManager>(out _) && // Проверка что менеджер спонсоров доступен, нужно для тестов разработки
+                speciesPrototype.SponsorOnly && !sponsorPrototypes.Contains(Species.Id))
             {
                 Species = SharedHumanoidAppearanceSystem.DefaultSpecies;
                 speciesPrototype = prototypeManager.Index<SpeciesPrototype>(Species);

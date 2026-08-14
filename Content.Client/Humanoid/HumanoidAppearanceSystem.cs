@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Client._Sunrise.Humanoid;
 using Content.Client._Sunrise.MarkingEffectsClient;
 using Content.Client.DisplacementMap;
 using Content.Shared.CCVar;
@@ -64,6 +65,11 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         _sprite.SetScale(entity.Owner, scale);
         // Sunrise-end
         sprite[_sprite.LayerMapReserve((entity.Owner, sprite), HumanoidVisualLayers.Eyes)].Color = humanoidAppearance.EyeColor;
+
+        // Sunrise-Start событие, которое поднимается после перестроения клиентских слоёв внешности гуманоида
+        var ev = new HumanoidAppearanceUpdatedEvent();
+        RaiseLocalEvent(entity.Owner, ref ev);
+        // Sunrise-End
     }
 
     private static bool IsHidden(HumanoidAppearanceComponent humanoid, HumanoidVisualLayers layer)

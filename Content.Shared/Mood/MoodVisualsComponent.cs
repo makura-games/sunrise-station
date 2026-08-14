@@ -1,20 +1,31 @@
-using Content.Shared._Sunrise.Mood;
+using Content.Shared.Humanoid.Markings;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._Sunrise.Mood;
 
 /// <summary>
-/// Устанавливает, какой спрайт RSI используется для отображения визуальных эффектов настроения и какое состояние использовать в зависимости от текущего порога настроения.
+/// Устанавливает, какие markings отображают настроение и какое состояние использовать для текущего порога.
 /// </summary>
 [RegisterComponent]
 public sealed partial class MoodVisualsComponent : Component
 {
     /// <summary>
-    /// Спрайт RSI, используемый для визуализации настроения.
+    /// Категория, в которой система ищет выбранный marking.
     /// </summary>
     [DataField]
-    public SpriteSpecifier? Sprite;
+    public MarkingCategories MarkingCategory = MarkingCategories.Special;
+
+    /// <summary>
+    /// Markings, на которые распространяется визуализация настроения.
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<MarkingPrototype>> MoodMarkings = [];
+
+    /// <summary>
+    /// Отображать marking, если данные настроения ещё не получены.
+    /// </summary>
+    [DataField]
+    public bool VisibleWithoutMood;
 
     /// <summary>
     /// Словарь, сопоставляющий пороги настроения с состояниями спрайта.

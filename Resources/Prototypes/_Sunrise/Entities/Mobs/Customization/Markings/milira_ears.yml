@@ -1,7 +1,7 @@
 - type: marking
   id: MiliraEars
-  bodyPart: HeadTop
-  markingCategory: HeadTop
+  bodyPart: HeadSide
+  markingCategory: HeadSide
   forcedColoring: true
   followSkinColor: true
   speciesRestriction: [Milira]
@@ -11,8 +11,8 @@
 
 - type: marking
   id: MiliraEarsShortened
-  bodyPart: HeadTop
-  markingCategory: HeadTop
+  bodyPart: HeadSide
+  markingCategory: HeadSide
   forcedColoring: true
   followSkinColor: true
   speciesRestriction: [Milira]
@@ -22,8 +22,8 @@
 
 - type: marking
   id: MiliraEarsStraight
-  bodyPart: HeadTop
-  markingCategory: HeadTop
+  bodyPart: HeadSide
+  markingCategory: HeadSide
   forcedColoring: true
   followSkinColor: true
   speciesRestriction: [Milira]
@@ -33,8 +33,8 @@
 
 - type: marking
   id: MiliraEarsCurved
-  bodyPart: HeadTop
-  markingCategory: HeadTop
+  bodyPart: HeadSide
+  markingCategory: HeadSide
   forcedColoring: true
   followSkinColor: true
   speciesRestriction: [Milira]
@@ -44,8 +44,8 @@
 
 - type: marking
   id: MiliraEarsCurvedShortened
-  bodyPart: HeadTop
-  markingCategory: HeadTop
+  bodyPart: HeadSide
+  markingCategory: HeadSide
   forcedColoring: true
   followSkinColor: true
   speciesRestriction: [Milira]

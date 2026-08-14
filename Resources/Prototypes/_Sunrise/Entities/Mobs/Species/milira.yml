@@ -8,9 +8,9 @@
   - type: Interactions
   - type: WingToggle
   - type: MoodVisuals
-    sprite:
-      sprite: _Sunrise/Mobs/Effects/Milira/mood.rsi
-      state: mood_neutral
+    markingCategory: HeadTop
+    moodMarkings:
+    - MiliraHalo
     moodStates:
       Insane: mood_bad
       Horrible: mood_bad
@@ -82,7 +82,7 @@
   - type: HumanoidAppearance
     species: Milira
   - type: MoodVisuals
-    sprite:
-      sprite: _Sunrise/Mobs/Effects/Milira/mood.rsi
-      state: mood_neutral
-
+    markingCategory: HeadTop
+    moodMarkings:
+    - MiliraHalo
+    visibleWithoutMood: true
