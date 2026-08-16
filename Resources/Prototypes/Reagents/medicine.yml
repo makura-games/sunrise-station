@@ -1244,6 +1244,11 @@
         conditions:
         - !type:TotalDamageCondition
           max: 50
+        # Sunrise-Start
+        - !type:MetabolizerTypeCondition
+          type: [ Vampire ]
+          inverted: true
+        # Sunrise-End
         damage:
           types:
             # Sunrise-Start

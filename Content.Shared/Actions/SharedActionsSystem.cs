@@ -46,6 +46,8 @@ public abstract partial class SharedActionsSystem : EntitySystem
         InitializeActionDoAfter();
 
         _actionQuery = GetEntityQuery<ActionComponent>();
+        // Sunrise-Edit - инициализация query для динамических параметров target action
+        _targetActionQuery = GetEntityQuery<TargetActionComponent>();
         _actionsQuery = GetEntityQuery<ActionsComponent>();
         _mindQuery = GetEntityQuery<MindComponent>();
 
@@ -1075,6 +1077,17 @@ public abstract partial class SharedActionsSystem : EntitySystem
         ent.Comp.CheckCanAccess = value;
         DirtyField(ent, ent.Comp, nameof(TargetActionComponent.CheckCanAccess));
     }
+
+    // Sunrise added start - настройка дальности динамических action
+    public void SetRange(Entity<TargetActionComponent?> ent, float value)
+    {
+        if (!_targetActionQuery.Resolve(ent, ref ent.Comp) || ent.Comp.Range.Equals(value))
+            return;
+
+        ent.Comp.Range = value;
+        DirtyField(ent, ent.Comp, nameof(TargetActionComponent.Range));
+    }
+    // Sunrise added end
 
     public void SetIgnoreContainer(Entity<TargetActionComponent?> ent, bool value)
     {

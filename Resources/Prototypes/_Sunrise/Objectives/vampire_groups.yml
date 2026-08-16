@@ -1,0 +1,26 @@
+- type: weightedRandom
+  id: VampireObjectiveGroupsStealOnly
+  weights:
+    VampireObjectiveGroupSteal: 1
+
+- type: weightedRandom
+  id: VampireObjectiveGroupsStateOnly
+  weights:
+    VampireObjectiveGroupState: 1
+
+- type: weightedRandom
+  id: VampireObjectiveGroupSteal
+  weights:
+    CMOHyposprayVampireStealObjective: 1
+    RDHardsuitVampireStealObjective: 1
+    MagbootsVampireStealObjective: 1
+    ClipboardVampireStealObjective: 1
+    CaptainIDVampireStealObjective: 1
+    CaptainJetpackVampireStealObjective: 1
+    CaptainGunVampireStealObjective: 1
+
+- type: weightedRandom
+  id: VampireObjectiveGroupState
+  weights:
+    VampireSurviveObjective: 1
+    VampireEscapeObjective: 1

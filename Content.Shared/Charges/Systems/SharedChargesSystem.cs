@@ -243,6 +243,30 @@ public abstract class SharedChargesSystem : EntitySystem
         Dirty(action);
     }
 
+    // Sunrise added start - динамическая настройка восстановления зарядов
+    /// <summary>
+    /// Изменяет длительность восстановления и сохраняет указанную долю прогресса текущего заряда.
+    /// </summary>
+    public void SetRechargeDuration(
+        Entity<LimitedChargesComponent?, AutoRechargeComponent?> action,
+        TimeSpan duration,
+        float rechargeProgress = 0f)
+    {
+        if (!Resolve(action.Owner, ref action.Comp1, ref action.Comp2))
+            return;
+
+        var adjustedDuration = duration < TimeSpan.Zero ? TimeSpan.Zero : duration;
+        var adjustedProgress = Math.Clamp(rechargeProgress, 0f, 1f);
+
+        action.Comp2.RechargeDuration = adjustedDuration;
+        action.Comp1.LastUpdate = _timing.CurTime -
+                                  TimeSpan.FromTicks((long)(adjustedDuration.Ticks * adjustedProgress));
+
+        Dirty(action.Owner, action.Comp1);
+        Dirty(action.Owner, action.Comp2);
+    }
+    // Sunrise added end
+
     /// <summary>
     /// The next time a charge will be considered to be filled.
     /// </summary>

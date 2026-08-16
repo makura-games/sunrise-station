@@ -1,6 +1,7 @@
 using Content.Server._Sunrise.AssaultOps;
 using Content.Server._Sunrise.BloodCult.GameRule;
 using Content.Server._Sunrise.FleshCult.GameRule;
+using Content.Server._Sunrise.Antags.Vampires.Systems;
 using Content.Server._Sunrise.GameTicking.Rules.Components;
 using Content.Server.Administration.Commands;
 using Content.Server.Antag;
@@ -27,6 +28,9 @@ public sealed partial class AdminVerbSystem
     [Dependency] private readonly ZombieSystem _zombie = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly OutfitSystem _outfit = default!;
+    // Sunrise edit start
+    [Dependency] private readonly VampireSystem _vampire = default!;
+    // Sunrise edit end
 
     private static readonly EntProtoId DefaultTraitorRule = "Traitor";
     private static readonly EntProtoId DefaultInitialInfectedRule = "Zombie";
@@ -187,6 +191,28 @@ public sealed partial class AdminVerbSystem
             Message = string.Join(": ", changelingName, Loc.GetString("admin-verb-make-changeling")),
         };
         args.Verbs.Add(changeling);
+
+        // Sunrise edit start - админский верб вампира
+        if (_vampire.CanMakeVampire(args.Target))
+        {
+            var vampireName = Loc.GetString("admin-verb-text-make-vampire");
+            Verb vampire = new()
+            {
+                Text = vampireName,
+                Category = VerbCategory.Antag,
+                Icon = new SpriteSpecifier.Rsi(
+                    new ResPath("/Textures/_Sunrise/Vampire/actions_vampire.rsi"),
+                    "fangs_extended"),
+                Act = () =>
+                {
+                    _vampire.TryMakeVampire(args.Target);
+                },
+                Impact = LogImpact.High,
+                Message = string.Join(": ", vampireName, Loc.GetString("admin-verb-make-vampire")),
+            };
+            args.Verbs.Add(vampire);
+        }
+        // Sunrise edit end
 
         var paradoxCloneName = Loc.GetString("admin-verb-text-make-paradox-clone");
         Verb paradox = new()

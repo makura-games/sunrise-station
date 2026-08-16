@@ -78,3 +78,14 @@
     subtype: roles-antag-selfagent-name
     exclusiveAntag: true
   - type: SELFAgentRole
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleVampire
+  name: Vampire Role
+  components:
+  - type: MindRole
+    antagPrototype: Vampire
+    roleType: SoloAntagonist
+    subtype: role-subtype-vampire
+  - type: VampireRole

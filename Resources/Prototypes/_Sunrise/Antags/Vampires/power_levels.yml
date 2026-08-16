@@ -1,0 +1,312 @@
+- type: vampirePowerLevel
+  id: SunriseVampirePowerNeonate
+  level: Neonate
+  requiredTotalBlood: 0
+  maxBloodFullness: 200
+  fullnessDecayPerSecond: 0.15
+  fangs:
+    sipInterval: 1.25
+    bloodGain: 10
+    targetBloodDrain: 20
+    animalEfficiency: 0.05
+    corpseEfficiency: 0.1
+    pierceDamage: 0.5
+    bleedAmount: 1
+    range: 1.5
+    maxBloodPerTarget: 200
+    healBrute: 1
+    healBurn: 1
+    healPoison: 2
+    healAsphyxiation: 4
+  glare:
+    action:
+      maxCharges: 1
+      rechargeDuration: 55
+      useDelay: 12
+    range: 1
+    frontParalyzeDuration: 3
+    sideParalyzeDuration: 1
+    staminaDamage: 20
+    muteToxinAmount: 0.25
+    flashProtectionEffectScale: 0
+  sleep:
+    action:
+      maxCharges: 1
+      rechargeDuration: 110
+      useDelay: 15
+    channelTime: 6
+    targetRange: 2
+    breakRange: 2.5
+    duration: 20
+    bloodCost: 20
+  rejuvenation:
+    action:
+      maxCharges: 1
+      rechargeDuration: 75
+      useDelay: 8
+
+- type: vampirePowerLevel
+  id: SunriseVampirePowerAwakened
+  level: Awakened
+  requiredTotalBlood: 200
+  maxBloodFullness: 225
+  fullnessDecayPerSecond: 0.14
+  fangs:
+    sipInterval: 1.2
+    bloodGain: 12
+    targetBloodDrain: 20
+    animalEfficiency: 0.08
+    corpseEfficiency: 0.15
+    pierceDamage: 0.6
+    bleedAmount: 1
+    range: 1.5
+    maxBloodPerTarget: 225
+    healBrute: 1.5
+    healBurn: 1.5
+    healPoison: 3
+    healAsphyxiation: 5
+  glare:
+    action:
+      maxCharges: 1
+      rechargeDuration: 52
+      useDelay: 12
+    range: 1.25
+    frontParalyzeDuration: 4
+    sideParalyzeDuration: 1.5
+    staminaDamage: 23
+    muteToxinAmount: 0.4
+    flashProtectionEffectScale: 0.35
+  sleep:
+    action:
+      maxCharges: 1
+      rechargeDuration: 105
+      useDelay: 15
+    channelTime: 5.75
+    targetRange: 2
+    breakRange: 2.5
+    duration: 20
+    bloodCost: 18
+  rejuvenation:
+    action:
+      maxCharges: 1
+      rechargeDuration: 70
+      useDelay: 8
+
+- type: vampirePowerLevel
+  id: SunriseVampirePowerNightborn
+  level: Nightborn
+  requiredTotalBlood: 600
+  maxBloodFullness: 260
+  fullnessDecayPerSecond: 0.12
+  fangs:
+    sipInterval: 1.15
+    bloodGain: 14
+    targetBloodDrain: 20
+    animalEfficiency: 0.12
+    corpseEfficiency: 0.2
+    pierceDamage: 0.7
+    bleedAmount: 1
+    range: 1.5
+    maxBloodPerTarget: 250
+    healBrute: 2
+    healBurn: 2
+    healPoison: 4
+    healAsphyxiation: 6
+  glare:
+    action:
+      maxCharges: 2
+      rechargeDuration: 48
+      useDelay: 11
+    range: 1.5
+    frontParalyzeDuration: 5
+    sideParalyzeDuration: 2
+    staminaDamage: 26
+    muteToxinAmount: 0.6
+    flashProtectionEffectScale: 0.55
+  sleep:
+    action:
+      maxCharges: 2
+      rechargeDuration: 95
+      useDelay: 14
+    channelTime: 5.5
+    targetRange: 2.25
+    breakRange: 2.75
+    duration: 20
+    bloodCost: 15
+  rejuvenation:
+    action:
+      maxCharges: 2
+      rechargeDuration: 65
+      useDelay: 7
+    reagentPurgeAmount: 10
+    healTicks: 5
+    healTickInterval: 3.5
+    healBrute: 4
+    healBurn: 4
+    healPoison: 4
+    healAsphyxiation: 5
+
+- type: vampirePowerLevel
+  id: SunriseVampirePowerAncient
+  level: Ancient
+  requiredTotalBlood: 1000
+  maxBloodFullness: 300
+  fullnessDecayPerSecond: 0.1
+  fangs:
+    sipInterval: 1.1
+    bloodGain: 16
+    targetBloodDrain: 20
+    animalEfficiency: 0.18
+    corpseEfficiency: 0.25
+    pierceDamage: 0.8
+    bleedAmount: 1
+    range: 1.5
+    maxBloodPerTarget: 275
+    healBrute: 2.5
+    healBurn: 2.5
+    healPoison: 5
+    healAsphyxiation: 8
+  glare:
+    action:
+      maxCharges: 2
+      rechargeDuration: 45
+      useDelay: 10
+    range: 1.75
+    frontParalyzeDuration: 5.5
+    sideParalyzeDuration: 2.5
+    staminaDamage: 30
+    muteToxinAmount: 0.75
+    flashProtectionEffectScale: 0.7
+  sleep:
+    action:
+      maxCharges: 2
+      rechargeDuration: 90
+      useDelay: 13
+    channelTime: 5.25
+    targetRange: 2.5
+    breakRange: 3
+    duration: 20
+    bloodCost: 13
+    ignoresFaith: true
+  rejuvenation:
+    action:
+      maxCharges: 2
+      rechargeDuration: 60
+      useDelay: 7
+    reagentPurgeAmount: 15
+    healTicks: 5
+    healTickInterval: 3.25
+    healBrute: 5
+    healBurn: 5
+    healPoison: 5
+    healAsphyxiation: 6
+
+# Этот уровень будет выдаваться отдельной механикой возвышения.
+- type: vampirePowerLevel
+  id: SunriseVampirePowerAscendant
+  level: Ascendant
+  maxBloodFullness: 350
+  fullnessDecayPerSecond: 0.08
+  fangs:
+    sipInterval: 1
+    bloodGain: 19
+    targetBloodDrain: 22
+    animalEfficiency: 0.25
+    corpseEfficiency: 0.35
+    pierceDamage: 0.95
+    bleedAmount: 1.25
+    range: 1.75
+    maxBloodPerTarget: 325
+    healBrute: 3
+    healBurn: 3
+    healPoison: 6
+    healAsphyxiation: 10
+  glare:
+    action:
+      maxCharges: 3
+      rechargeDuration: 40
+      useDelay: 9
+    range: 2
+    frontParalyzeDuration: 6
+    sideParalyzeDuration: 3
+    staminaDamage: 34
+    muteToxinAmount: 1
+    flashProtectionEffectScale: 0.85
+  sleep:
+    action:
+      maxCharges: 3
+      rechargeDuration: 85
+      useDelay: 12
+    channelTime: 5
+    targetRange: 3
+    breakRange: 3.5
+    duration: 22
+    bloodCost: 10
+    ignoresFaith: true
+  rejuvenation:
+    action:
+      maxCharges: 3
+      rechargeDuration: 55
+      useDelay: 6
+    reagentPurgeAmount: 20
+    healTicks: 6
+    healTickInterval: 3
+    healBrute: 5
+    healBurn: 5
+    healPoison: 6
+    healAsphyxiation: 7
+
+# Этот уровень выставляется только администрацией.
+- type: vampirePowerLevel
+  id: SunriseVampirePowerAbsolute
+  level: Absolute
+  maxBloodFullness: 500
+  fullnessDecayPerSecond: 0
+  fangs:
+    sipInterval: 0.9
+    bloodGain: 22
+    targetBloodDrain: 24
+    animalEfficiency: 0.5
+    corpseEfficiency: 0.5
+    pierceDamage: 1.1
+    bleedAmount: 1.5
+    range: 2
+    maxBloodPerTarget: 400
+    healBrute: 3.5
+    healBurn: 3.5
+    healPoison: 7
+    healAsphyxiation: 12
+  glare:
+    action:
+      maxCharges: 6
+      rechargeDuration: 35
+      useDelay: 8
+    range: 2.5
+    frontParalyzeDuration: 7
+    sideParalyzeDuration: 3.5
+    staminaDamage: 40
+    muteToxinAmount: 1.25
+    flashProtectionEffectScale: 1
+  sleep:
+    action:
+      maxCharges: 6
+      rechargeDuration: 70
+      useDelay: 10
+    channelTime: 4.5
+    targetRange: 3.5
+    breakRange: 4
+    duration: 25
+    bloodCost: 5
+    ignoresFaith: true
+  rejuvenation:
+    action:
+      maxCharges: 6
+      rechargeDuration: 45
+      useDelay: 5
+    reagentPurgeAmount: 25
+    healTicks: 6
+    healTickInterval: 2.75
+    healBrute: 6
+    healBurn: 6
+    healPoison: 7
+    healAsphyxiation: 8
