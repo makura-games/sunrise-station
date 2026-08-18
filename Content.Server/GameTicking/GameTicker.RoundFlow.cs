@@ -217,7 +217,8 @@ namespace Content.Server.GameTicking
             if (ev.GameMap.IsGrid)
             {
                 var mapUid = _map.CreateMap(out mapId, runMapInit: options?.InitializeMaps ?? false);
-                if (!_loader.TryLoadGrid(mapId,
+                // Sunrise-Edit - учитываем источник карты раунда
+                if (!TryLoadSunriseGameMapGrid(mapId,
                         ev.GameMap.MapPath,
                         out var grid,
                         ev.Options,
@@ -233,7 +234,8 @@ namespace Content.Server.GameTicking
                 return g;
             }
 
-            if (!_loader.TryLoadMap(ev.GameMap.MapPath,
+            // Sunrise-Edit - учитываем источник карты раунда
+            if (!TryLoadSunriseGameMap(ev.GameMap.MapPath,
                     out var map,
                     out var grids,
                     ev.Options,
