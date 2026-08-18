@@ -4,9 +4,11 @@ using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Doors;
 using Content.Shared.Doors.Components;
+using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Server.GameObjects;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.Doors.Systems;
 
@@ -16,26 +18,34 @@ namespace Content.Server._Sunrise.Doors.Systems;
 /// </summary>
 public sealed class SunriseMultiTileAirtightSystem : EntitySystem
 {
-    private const string BlockerPrototype = "SunriseMultiTileAirtightBlocker";
-
     [Dependency] private readonly AirtightSystem _airtight = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
 
+    private static readonly EntProtoId BlockerPrototype = "SunriseMultiTileAirtightBlocker";
+
     private EntityQuery<AirtightComponent> _airtightQuery;
+    private EntityQuery<SunriseMultiTileAirtightBlockerComponent> _blockerQuery;
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<MapGridComponent> _gridQuery;
+    private EntityQuery<SunriseMultiTileAirtightComponent> _multiTileQuery;
     private EntityQuery<TransformComponent> _xformQuery;
+
+    private readonly List<EntityUid> _anchoredEntities = new();
 
     public override void Initialize()
     {
         base.Initialize();
 
         _airtightQuery = GetEntityQuery<AirtightComponent>();
+        _blockerQuery = GetEntityQuery<SunriseMultiTileAirtightBlockerComponent>();
         _doorQuery = GetEntityQuery<DoorComponent>();
         _gridQuery = GetEntityQuery<MapGridComponent>();
+        _multiTileQuery = GetEntityQuery<SunriseMultiTileAirtightComponent>();
         _xformQuery = GetEntityQuery<TransformComponent>();
 
         SubscribeLocalEvent<SunriseMultiTileAirtightComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<SunriseMultiTileAirtightComponent, EntityUnpausedEvent>(OnUnpaused);
         SubscribeLocalEvent<SunriseMultiTileAirtightComponent, ComponentShutdown>(OnShutdown);
 
         SubscribeLocalEvent<SunriseMultiTileAirtightComponent, AirtightChanged>(OnAirtightChanged);
@@ -47,6 +57,22 @@ public sealed class SunriseMultiTileAirtightSystem : EntitySystem
 
     private void OnMapInit(Entity<SunriseMultiTileAirtightComponent> ent, ref MapInitEvent args)
     {
+        RefreshGeometry(ent);
+        RefreshAirblock(ent);
+    }
+
+    private void OnUnpaused(Entity<SunriseMultiTileAirtightComponent> ent, ref EntityUnpausedEvent args) =>
+        Timer.Spawn(0, () => RefreshAfterUnpause(ent.Owner));
+
+    private void RefreshAfterUnpause(EntityUid uid)
+    {
+        if (TerminatingOrDeleted(uid))
+            return;
+
+        if (!_multiTileQuery.TryGetComponent(uid, out var component))
+            return;
+
+        var ent = (uid, component);
         RefreshGeometry(ent);
         RefreshAirblock(ent);
     }
@@ -94,6 +120,9 @@ public sealed class SunriseMultiTileAirtightSystem : EntitySystem
     /// </summary>
     private void RefreshGeometry(Entity<SunriseMultiTileAirtightComponent> ent)
     {
+        if (Paused(ent))
+            return;
+
         DeleteBlockers(ent);
 
         if (!_xformQuery.TryGetComponent(ent.Owner, out var xform))
@@ -110,6 +139,8 @@ public sealed class SunriseMultiTileAirtightSystem : EntitySystem
             var rotated = rotation.RotateVec(new Vector2(local.X, local.Y));
             var offset = new Vector2i((int)MathF.Round(rotated.X), (int)MathF.Round(rotated.Y));
             var tile = baseTile + offset;
+
+            DeleteStaleBlockersOnTile((gridUid, grid), tile, ent.Owner);
 
             var coords = GetTileCenter(gridUid, grid, tile);
             var blocker = Spawn(BlockerPrototype, coords);
@@ -162,6 +193,45 @@ public sealed class SunriseMultiTileAirtightSystem : EntitySystem
         }
 
         ent.Comp.Blockers.Clear();
+    }
+
+    // удаляем блокер если не привязан шлюз
+    private void DeleteStaleBlockersOnTile(Entity<MapGridComponent> gridEnt, Vector2i tile, EntityUid sourceDoor)
+    {
+        _anchoredEntities.Clear();
+        _map.GetAnchoredEntities(gridEnt, tile, _anchoredEntities);
+
+        foreach (var blocker in _anchoredEntities)
+        {
+            if (!_blockerQuery.HasComp(blocker))
+                continue;
+
+            if (TerminatingOrDeleted(blocker))
+                continue;
+
+            if (IsManagedByOtherDoor(blocker, sourceDoor))
+                continue;
+
+            Del(blocker);
+        }
+
+        _anchoredEntities.Clear();
+    }
+
+    // Проверка привязки блокера к шлюзу
+    private bool IsManagedByOtherDoor(EntityUid blocker, EntityUid sourceDoor)
+    {
+        var query = EntityQueryEnumerator<SunriseMultiTileAirtightComponent>();
+        while (query.MoveNext(out var door, out var multiTile))
+        {
+            if (door == sourceDoor || TerminatingOrDeleted(door))
+                continue;
+
+            if (multiTile.Blockers.Contains(blocker))
+                return true;
+        }
+
+        return false;
     }
 
     private static EntityCoordinates GetTileCenter(EntityUid gridUid, MapGridComponent grid, Vector2i tile)
