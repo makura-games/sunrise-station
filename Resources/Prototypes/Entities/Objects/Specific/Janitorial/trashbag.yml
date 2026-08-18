@@ -9,18 +9,20 @@
       - state: icon-0
         map: ["enum.StorageFillLayers.Fill"]
   - type: Storage
-    maxItemSize: Normal
+    maxItemSize: Small # Sunrise-edit
     grid:
-    - 0,0,7,5
+    - 0,0,6,3 # Sunrise-edit
     quickInsert: true
     areaInsert: true
     storageOpenSound:
       collection: trashBagRustle
     storageInsertSound:
       collection: trashBagRustle
-    whitelist:
-      tags:
-        - Trash
+  # Sunrise-start
+    #whitelist:
+    #  tags:
+    #    - Trash
+  # Sunrise-end
   - type: UseDelay
     delay: 0.5
   - type: Tag
@@ -35,7 +37,7 @@
     slots: [belt]
     sprite: Objects/Specific/Janitorial/trashbag.rsi
   - type: Item
-    size: Normal
+    size: Huge # Sunrise-edit
 
 - type: entity
   name: trash bag
