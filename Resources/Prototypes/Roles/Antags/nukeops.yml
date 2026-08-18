@@ -66,7 +66,7 @@
     ears: ClothingHeadsetAltSyndicate
     gloves: ClothingHandsGlovesCombatCQC
     outerClothing: ClothingOuterHardsuitSyndieBiocode # Sunrise-Edit
-    shoes: ClothingShoesBootsCombatFilled
+    shoes: ClothingShoesBootsSyndieFilled # Sunrise-Edit
     id: SyndiOperativePDA
     pocket2: PlushieCarp
     belt: ClothingBeltMilitaryWebbing
@@ -83,7 +83,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitOperative
     back: ClothingBackpackDuffelSyndicate
-    shoes: ClothingShoesBootsCombatFilled
+    shoes: ClothingShoesBootsSyndieFilled # Sunrise-Edit
     id: SyndiOperativePDA
     pocket1: BaseUplinkRadio0TC # Sunrise-Edit
   storage:
