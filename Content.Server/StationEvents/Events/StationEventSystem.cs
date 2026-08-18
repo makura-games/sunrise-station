@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
@@ -6,10 +7,15 @@ using Content.Server.Station.Systems;
 using Content.Server.StationEvents.Components;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Station.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+
+// Sunrise edit start - добавлен помощник для проверки игровой станции
+using Content.Server._Sunrise.StationEvents;
+// Sunrise edit end
 
 namespace Content.Server.StationEvents.Events;
 
@@ -25,12 +31,14 @@ public abstract class StationEventSystem<T> : GameRuleSystem<T> where T : ICompo
     [Dependency] protected readonly StationSystem StationSystem = default!;
 
     protected ISawmill Sawmill = default!;
+    private EntityQuery<DelayedStartRuleComponent> _delayedStartQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
         Sawmill = Logger.GetSawmill("stationevents");
+        _delayedStartQuery = GetEntityQuery<DelayedStartRuleComponent>();
     }
 
     /// <inheritdoc/>
@@ -41,6 +49,15 @@ public abstract class StationEventSystem<T> : GameRuleSystem<T> where T : ICompo
         if (!TryComp<StationEventComponent>(uid, out var stationEvent))
             return;
 
+        // Sunrise edit start - удаление события, если нет игровой станции
+        if (!StationEventHelper.HasValidPlayerStation(StationSystem, EntityManager))
+        {
+            Sawmill.Info($"Event {ToPrettyString(uid)} removed: no player station available");
+            QueueDel(uid);
+            return;
+        }
+        // Sunrise edit end
+
         AdminLogManager.Add(LogType.EventAnnounced, $"Event added / announced: {ToPrettyString(uid)}");
 
         // we don't want to send to players who aren't in game (i.e. in the lobby)
@@ -50,8 +67,8 @@ public abstract class StationEventSystem<T> : GameRuleSystem<T> where T : ICompo
         if (stationEvent.StartAnnouncement != null)
             ChatSystem.DispatchFilteredAnnouncement(allPlayersInGame,
                 Loc.GetString(stationEvent.StartAnnouncement),
-                playDefault: false, // Sunrise-Edit
-                announcementSound: stationEvent.StartAudio, // Sunrise-Edit
+                playDefault: false,
+                announcementSound: stationEvent.StartAudio,
                 colorOverride: stationEvent.StartAnnouncementColor);
         else
         {
@@ -100,8 +117,8 @@ public abstract class StationEventSystem<T> : GameRuleSystem<T> where T : ICompo
         if (stationEvent.EndAnnouncement != null)
             ChatSystem.DispatchFilteredAnnouncement(allPlayersInGame,
                 Loc.GetString(stationEvent.EndAnnouncement),
-                playDefault: false, // Sunrise-Edit
-                announcementSound: stationEvent.EndAudio, // Sunrise-Edit
+                playDefault: false,
+                announcementSound: stationEvent.EndAudio,
                 colorOverride: stationEvent.EndAnnouncementColor);
         else
         {
@@ -128,9 +145,21 @@ public abstract class StationEventSystem<T> : GameRuleSystem<T> where T : ICompo
             if (!GameTicker.IsGameRuleAdded(uid, ruleData))
                 continue;
 
-            if (!GameTicker.IsGameRuleActive(uid, ruleData) && !HasComp<DelayedStartRuleComponent>(uid))
+            if (!GameTicker.IsGameRuleActive(uid, ruleData))
             {
-                GameTicker.StartGameRule(uid, ruleData);
+                // Sunrise edit start - проверка станции для всех неактивных правил (включая delayed)
+                if (!StationEventHelper.HasValidPlayerStation(StationSystem, EntityManager))
+                {
+                    Sawmill.Info($"Event {ToPrettyString(uid)} removed before start: no player station available");
+                    QueueDel(uid);
+                    continue;
+                }
+                // Sunrise edit end
+
+                if (!_delayedStartQuery.HasComponent(uid))
+                {
+                    GameTicker.StartGameRule(uid, ruleData);
+                }
             }
             else if (stationEvent.EndTime != null && Timing.CurTime >= stationEvent.EndTime && GameTicker.IsGameRuleActive(uid, ruleData))
             {
