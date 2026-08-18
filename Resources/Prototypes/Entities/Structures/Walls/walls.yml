@@ -60,14 +60,14 @@
 
 - type: entity
   abstract: true
-  parent: BaseStructureWall
+  parent: [BaseStructureWall, SunriseWallDamageVisualsBase] # Sunrise-Edit
   id: BaseWall
   components:
   - type: Occluder # Breaks on diagonal walls
 
 - type: entity
   abstract: true
-  parent: BaseStructureWall
+  parent: [BaseStructureWall, SunriseWallDamageVisualsBase] # Sunrise-Edit
   id: WallDiagonalBase
   suffix: Diagonal
   components:
@@ -558,7 +558,7 @@
         acts: [ "Destruction" ]
 
 - type: entity
-  parent: WallDiagonalBaseSunrise # Sunrise-Edit
+  parent: SunriseWallDiagonalBase # Sunrise-Edit
   id: WallPlastitaniumDiagonalIndestructible
   name: plastitanium wall
   suffix: diagonal, indestructible
@@ -720,7 +720,7 @@
         acts: ["Destruction"]
 
 - type: entity
-  parent: WallDiagonalBaseSunrise # Sunrise-Edit
+  parent: SunriseWallDiagonalBase # Sunrise-Edit
   id: WallReinforcedDiagonal
   name: reinforced wall
   components:
@@ -1054,7 +1054,7 @@
     base: solid
 
 - type: entity
-  parent: WallDiagonalBaseSunrise # Sunrise-Edit
+  parent: SunriseWallDiagonalBase # Sunrise-Edit
   id: WallSolidDiagonal
   name: solid wall
   components:
@@ -1475,7 +1475,7 @@
   - type: Appearance
 
 - type: entity
-  parent: WallDiagonalBaseSunrise # Sunrise-Edit
+  parent: SunriseWallDiagonalBase # Sunrise-Edit
   id: WallMiningDiagonal
   name: mining wall
   components:
