@@ -1484,7 +1484,7 @@
   id: UplinkReinforcementRadioSyndicateCyborgAssault
   name: uplink-reinforcement-radio-syndicate-cyborg-assault-name
   description: uplink-reinforcement-radio-syndicate-cyborg-assault-desc
-  productEntity: ReinforcementRadioSyndicateCyborgAssault
+  productEntity: CrateBorgSyndicateAssaultBattery
   icon: { sprite: Mobs/Silicon/chassis.rsi, state: synd_sec }
   discountCategory: veryRareDiscounts
   discountDownTo:
@@ -1509,7 +1509,7 @@
   id: UplinkReinforcementRadioSyndicateCyborgHeavy
   name: uplink-reinforcement-radio-syndicate-cyborg-heavy-name
   description: uplink-reinforcement-radio-syndicate-cyborg-heavy-desc
-  productEntity: ReinforcementRadioSyndicateCyborgHeavy
+  productEntity: CrateBorgHeavySyndicateCombatBattery
   icon: { sprite: _Sunrise/Mobs/Silicon/heavy_syndicate_borg.rsi, state: heavy }
   discountCategory: veryRareDiscounts
   discountDownTo:
@@ -1534,7 +1534,7 @@
   id: UplinkReinforcementRadioSyndicateCyborgSaboteur
   name: uplink-reinforcement-radio-syndicate-cyborg-spider-name
   description: uplink-reinforcement-radio-syndicate-cyborg-spider-name
-  productEntity: ReinforcementRadioSyndicateCyborgSaboteur
+  productEntity: CrateBorgSyndicateSaboteurBattery
   icon: { sprite: _Sunrise/Mobs/Silicon/chassis.rsi, state: spider }
   discountCategory: veryRareDiscounts
   discountDownTo:
@@ -1559,7 +1559,7 @@
   id: UplinkReinforcementRadioSyndicateCyborgMedical
   name: uplink-reinforcement-radio-syndicate-cyborg-medical-name
   description: uplink-reinforcement-radio-syndicate-cyborg-medical-desc
-  productEntity: ReinforcementRadioSyndicateCyborgMedical
+  productEntity: CrateBorgSyndicateMedicalBattery
   icon: { sprite: Mobs/Silicon/chassis.rsi, state: synd_medical }
   discountCategory: veryRareDiscounts
   discountDownTo:
@@ -3570,8 +3570,8 @@
   id: UplinkReinforcementRadioSyndicateCyborgChassisSpider
   name: uplink-reinforcement-radio-syndicate-cyborg-infiltrator-name
   description: uplink-reinforcement-radio-syndicate-cyborg-infiltrator-desc
-  productEntity: ReinforcementRadioSyndicateCyborgChassisSpider
-  icon: { sprite: _Sunrise/Mobs/Silicon/chassis.rsi, state: spider }
+  productEntity: CrateBorgChassisSyndicateSpiderBattery
+  icon: { sprite: Mobs/Silicon/chassis.rsi, state: synd_sec }
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 30

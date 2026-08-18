@@ -1864,7 +1864,7 @@
 
 - type: listing
   id: ERTUplinkBorgERT
-  productEntity: PlayerBorgChassisERTBattery
+  productEntity: CrateBorgChassisERTBattery
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: cyborg_ert }
   cost:
     Bluecrystal: 40

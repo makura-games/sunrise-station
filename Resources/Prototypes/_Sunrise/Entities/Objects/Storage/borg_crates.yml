@@ -1,0 +1,94 @@
+# region ERT
+
+- type: entity
+  parent: CrateCommandSecure
+  id: CrateBorgChassisERTBattery
+  name: ERT borg crate
+  suffix: ERT, Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: PlayerBorgChassisERTBattery
+        - id: MindBearer
+
+# region Syndicate
+
+- type: entity
+  parent: [ CrateSyndicate, BaseSyndicateContraband ]
+  id: CrateBorgSyndicateMedicalBattery
+  name: Syndicate medical borg crate
+  suffix: Borg, Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: PlayerBorgSyndicateMedicalBatteryGhostRole
+        - id: MindBearer
+
+- type: entity
+  parent: [ CrateSyndicate, BaseSyndicateContraband ]
+  id: CrateBorgSyndicateReaperBattery
+  name: Syndicate reaper borg crate
+  suffix: Borg, Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: PlayerBorgSyndicateReaperBatteryGhostRole
+        - id: MindBearer
+
+- type: entity
+  parent: [ CrateSyndicate, BaseSyndicateContraband ]
+  id: CrateBorgHeavySyndicateCombatBattery
+  name: Syndicate heavy combat borg crate
+  suffix: Borg, Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: PlayerBorgHeavySyndicateCombatBatteryGhostRole
+        - id: MindBearer
+
+- type: entity
+  parent: [ CrateSyndicate, BaseSyndicateContraband ]
+  id: CrateBorgSyndicateAssaultBattery
+  name: Syndicate assault borg crate
+  suffix: Borg, Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: PlayerBorgSyndicateAssaultBatteryGhostRole
+        - id: MindBearer
+
+- type: entity
+  parent: [ CrateSyndicate, BaseSyndicateContraband ]
+  id: CrateBorgSyndicateSaboteurBattery
+  name: Syndicate saboteur borg crate
+  suffix: Borg, Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: PlayerBorgSyndicateSaboteurBatteryGhostRole
+        - id: MindBearer
+
+- type: entity
+  parent: [ CrateSyndicate, BaseSyndicateContraband ]
+  id: CrateBorgChassisSyndicateSpiderBattery
+  name: Syndicate "Infiltrator" borg crate
+  suffix: Borg, Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: PlayerBorgChassisSyndicateSpiderBatteryGhostRole
+        - id: MindBearer
