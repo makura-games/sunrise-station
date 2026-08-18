@@ -1,0 +1,113 @@
+# region Salvage
+- type: shipyardVessel
+  id: SalvageShipMining
+  name: shipyard-vessel-salvage-mining-name
+  description: shipyard-vessel-salvage-mining-description
+  price: 12000
+  group: salvage
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/mining.yml
+
+- type: shipyardVessel
+  id: SalvageShipAsteroidcracker
+  name: shipyard-vessel-salvage-asteroidcracker-name
+  description: shipyard-vessel-salvage-asteroidcracker-description
+  price: 15000
+  group: salvage
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/asteroidcracker.yml
+
+- type: shipyardVessel
+  id: SalvageShipBison
+  name: shipyard-vessel-salvage-bison-name
+  description: shipyard-vessel-salvage-bison-description
+  price: 75000
+  group: salvage
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/bison.yml
+
+- type: shipyardVessel
+  id: SalvageShipChisel
+  name: shipyard-vessel-salvage-chisel-name
+  description: shipyard-vessel-salvage-chisel-description
+  price: 12000
+  group: salvage
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/chisel.yml
+
+- type: shipyardVessel
+  id: SalvageShipExpeditioneer
+  name: shipyard-vessel-salvage-expeditioneer-name
+  description: shipyard-vessel-salvage-expeditioneer-description
+  price: 18000
+  group: salvage
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/expeditioneer.yml
+
+- type: shipyardVessel
+  id: SalvageShipNomad
+  name: shipyard-vessel-salvage-nomad-name
+  description: shipyard-vessel-salvage-nomad-description
+  price: 30000
+  group: salvage
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/nomad.yml
+
+- type: shipyardVessel
+  id: SalvageShipOredozer
+  name: shipyard-vessel-salvage-oredozer-name
+  description: shipyard-vessel-salvage-oredozer-description
+  price: 50000
+  group: salvage
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/oredozer.yml
+
+- type: shipyardVessel
+  id: SalvageShipPickaxe
+  name: shipyard-vessel-salvage-pickaxe-name
+  description: shipyard-vessel-salvage-pickaxe-description
+  price: 14000
+  group: salvage
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/pickaxe.yml
+
+- type: shipyardVessel
+  id: SalvageShipSiera
+  name: shipyard-vessel-salvage-siera-name
+  description: shipyard-vessel-salvage-siera-description
+  price: 28000
+  group: salvage
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/siera.yml
+
+# region Security
+- type: shipyardVessel
+  id: SecurityShipPatrol
+  name: shipyard-vessel-security-patrol-name
+  description: shipyard-vessel-security-patrol-description
+  price: 20000
+  group: security
+  gridPath: /Maps/_Sunrise/Shuttles/Security/security.yml
+
+- type: shipyardVessel
+  id: SecurityShipAvangard
+  name: shipyard-vessel-security-avangard-name
+  description: shipyard-vessel-security-avangard-description
+  price: 45000
+  group: security
+  gridPath: /Maps/_Sunrise/Shuttles/Security/avangard.yml
+
+- type: shipyardVessel
+  id: SecurityShipMosquitt
+  name: shipyard-vessel-security-mosquitt-name
+  description: shipyard-vessel-security-mosquitt-description
+  price: 28000
+  group: security
+  gridPath: /Maps/_Sunrise/Shuttles/Security/mosquitt.yml
+
+- type: shipyardVessel
+  id: SecurityShipShitcurity
+  name: shipyard-vessel-security-shitcurity-name
+  description: shipyard-vessel-security-shitcurity-description
+  price: 80000
+  group: security
+  gridPath: /Maps/_Sunrise/Shuttles/Security/shitcurity.yml
+
+- type: shipyardVessel
+  id: SecurityShipStargaze
+  name: shipyard-vessel-security-stargaze-name
+  description: shipyard-vessel-security-stargaze-description
+  price: 60000
+  group: security
+  gridPath: /Maps/_Sunrise/Shuttles/Security/stargaze.yml

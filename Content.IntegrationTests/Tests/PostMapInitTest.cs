@@ -127,8 +127,6 @@ namespace Content.IntegrationTests.Tests
             "/Maps/_Sunrise/Shuttles/Salvage/bison.yml", // Как нибудь убрать, там невидимые вентиляторы
             "/Maps/_Sunrise/Shuttles/Salvage/nomad.yml", // Как нибудь убрать, там невидимые вентиляторы
             "/Maps/_Sunrise/Shuttles/Salvage/oredozer.yml", // Как нибудь убрать, там невидимые вентиляторы
-            "/Maps/_Sunrise/Shuttles/Security/avangard_test.yml", // Пушки
-            "/Maps/_Sunrise/Shuttles/Security/duster_test.yml", // Пушки
             "/Maps/_Sunrise/Shuttles/Security/security.yml", // Пушки
             "/Maps/_Sunrise/Shuttles/DSO/ERT/ERT_Assault_Amber.yml", // Печать ЦК
             "/Maps/_Sunrise/Shuttles/DSO/ERT/ERT_Assault_Gamma.yml", // Печать ЦК

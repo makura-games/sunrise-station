@@ -1,0 +1,6 @@
+- type: constructionGraph
+  id: SunriseShipyardComputer
+  start: computer
+  graph:
+  - node: computer
+    entity: !type:BoardNodeEntity { container: board }

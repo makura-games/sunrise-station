@@ -17,12 +17,6 @@
           prefixCreator: '14'
       - type: StationEmergencyShuttle
         emergencyShuttlePath: /Maps/_Sunrise/Shuttles/Evac/emergency-centipede.yml
-      - type: SpawnGridAndDockToStation
-        grids:
-          - gridPath: /Maps/_Sunrise/Shuttles/Salvage/mining.yml
-            priorityTag: DockMining                
-          - gridPath: /Maps/_Sunrise/Shuttles/Security/mosquitt.yml
-            priorityTag: DockSecurity
       - type: StationJobs
         availableJobs:
           #command

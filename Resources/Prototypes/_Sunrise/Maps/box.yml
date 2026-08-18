@@ -14,12 +14,6 @@
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: 'TG'
-        - type: SpawnGridAndDockToStation
-          grids:
-          - gridPath: /Maps/_Sunrise/Shuttles/Salvage/pickaxe.yml
-            priorityTag: DockMining
-          - gridPath: /Maps/_Sunrise/Shuttles/Security/mosquitt.yml
-            priorityTag: DockSecurity
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/_Sunrise/Shuttles/Evac/emergency-centipede.yml
         - type: StationJobs

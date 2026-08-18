@@ -15,10 +15,6 @@
             prefixCreator: 'B'
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/_Sunrise/Shuttles/Evac/emergency_syndicate.yml
-        - type: SpawnGridAndDockToStation
-          grids:
-          - gridPath: /Maps/_Sunrise/Shuttles/Salvage/chisel.yml
-            priorityTag: DockMining
         - type: StationCargoShuttle
           path: /Maps/_Sunrise/Shuttles/cargo_syndicate.yml
         - type: StationJobs
