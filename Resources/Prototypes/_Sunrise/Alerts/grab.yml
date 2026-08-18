@@ -1,0 +1,29 @@
+- type: alert
+  id: Grabbed
+  icons:
+  - sprite: /Textures/_Sunrise/Interface/Alerts/grab.rsi
+    state: grabbed-soft
+  - sprite: /Textures/_Sunrise/Interface/Alerts/grab.rsi
+    state: grabbed-hard
+  - sprite: /Textures/_Sunrise/Interface/Alerts/grab.rsi
+    state: grabbed-choke
+  clickEvent: !type:StopBeingPulledAlertEvent
+  name: alerts-grabbed-name
+  description: alerts-grabbed-desc
+  minSeverity: 1
+  maxSeverity: 3
+
+- type: alert
+  id: Grabbing
+  icons:
+  - sprite: /Textures/_Sunrise/Interface/Alerts/grab.rsi
+    state: grab-soft
+  - sprite: /Textures/_Sunrise/Interface/Alerts/grab.rsi
+    state: grab-hard
+  - sprite: /Textures/_Sunrise/Interface/Alerts/grab.rsi
+    state: grab-choke
+  clickEvent: !type:StopPullingAlertEvent
+  name: alerts-grabbing-name
+  description: alerts-grabbing-desc
+  minSeverity: 1
+  maxSeverity: 3

@@ -6,8 +6,23 @@
   - type: Sprite
     sprite: _Sunrise/Effects/attacks.rsi
     noRot: true
-    state: grab
+    layers:
+    - state: grab
+      map: [ "enum.GrabVisualLayers.Base" ]
     drawdepth: Effects
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.GrabVisuals.Stage:
+        enum.GrabVisualLayers.Base:
+          No:
+            color: "#FFFFFF"
+          Soft:
+            color: "#FFFFFF"
+          Hard:
+            color: "#FF8080"
+          Suffocate:
+            color: "#FF0000"
   - type: Tag
     tags:
     - HideContextMenu

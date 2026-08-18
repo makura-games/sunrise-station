@@ -150,11 +150,18 @@ namespace Content.Shared.Hands
     {
         public EntityUid BlockingEntity;
         public EntityUid User;
+        // Sunrise added start - let virtual item owners distinguish base virtual items from extra stage items.
+        public EntityUid VirtualItem;
+        public bool Handled;
+        // Sunrise added end
 
-        public VirtualItemDeletedEvent(EntityUid blockingEntity, EntityUid user)
+        public VirtualItemDeletedEvent(EntityUid blockingEntity, EntityUid user, EntityUid virtualItem)
         {
             BlockingEntity = blockingEntity;
             User = user;
+            // Sunrise added start
+            VirtualItem = virtualItem;
+            // Sunrise added end
         }
     }
 
