@@ -24,6 +24,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using ActivePullerComponent = Content.Shared.Movement.Pulling.Components.ActivePullerComponent; // Sunrise-Edit - preserve rotation toward the pulled entity while moving
 using PullableComponent = Content.Shared.Movement.Pulling.Components.PullableComponent;
 
 namespace Content.Shared.Movement.Systems;
@@ -48,6 +49,7 @@ public abstract partial class SharedMoverController : VirtualController
     [Dependency] private   readonly SharedTransformSystem _transform = default!;
     [Dependency] private   readonly TagSystem _tags = default!;
 
+    protected EntityQuery<ActivePullerComponent> ActivePullerQuery; // Sunrise-Edit - fast active pulling check
     protected EntityQuery<CanMoveInAirComponent> CanMoveInAirQuery;
     protected EntityQuery<FootstepModifierComponent> FootstepModifierQuery;
     protected EntityQuery<FTLComponent> FTLQuery;
@@ -84,6 +86,7 @@ public abstract partial class SharedMoverController : VirtualController
         UpdatesBefore.Add(typeof(TileFrictionController));
         base.Initialize();
 
+        ActivePullerQuery = GetEntityQuery<ActivePullerComponent>(); // Sunrise-Edit - cache the query for the movement hot path
         MoverQuery = GetEntityQuery<InputMoverComponent>();
         MobMoverQuery = GetEntityQuery<MobMoverComponent>();
         ModifierQuery = GetEntityQuery<MovementSpeedModifierComponent>();
@@ -352,7 +355,7 @@ public abstract partial class SharedMoverController : VirtualController
         // Handle footsteps at the end
         if (wishDir != Vector2.Zero)
         {
-            if (!NoRotateQuery.HasComponent(uid))
+            if (!NoRotateQuery.HasComponent(uid) && !ActivePullerQuery.HasComponent(uid)) // Sunrise-Edit - rotation toward the pulled entity takes priority
             {
                 // TODO apparently this results in a duplicate move event because "This should have its event run during
                 // island solver"??. So maybe SetRotation needs an argument to avoid raising an event?
