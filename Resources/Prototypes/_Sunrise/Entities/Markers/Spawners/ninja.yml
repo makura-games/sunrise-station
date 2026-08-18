@@ -1,0 +1,11 @@
+- type: entity
+  id: SpawnPointNinja
+  parent: MarkerBase
+  name: ninja spawn point
+  components:
+  - type: SpawnPoint
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _Sunrise/Interface/Misc/antag_preview.rsi
+      state: space_ninja

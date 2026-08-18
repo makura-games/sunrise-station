@@ -29,17 +29,19 @@
     - JetpackBlackFilled
   storage:
     back: # belt holds katana so satchel has the tools for sabotaging things
-    - Crowbar
-    - Wrench
-    - Screwdriver
-    - Wirecutter
-    - Welder
-    - Multitool
+    # Sunrise-Start
+    # - Crowbar
+    # - Wrench
+    # - Screwdriver
+    # - Wirecutter
+    # - Welder
+    # - Multitool
+    - RemoteNinjaShuttleController
+    # Sunrise-End
     - EmergencyMedipen
     - Flare
     # - FoodSnackNutribrick  # Sunrise-Edit
     # - DrinkWaterBottleFull  # Sunrise-Edit
-    - MedkitCombatFilled  # Sunrise-Add
 
 - type: chameleonOutfit
   id: NinjaChameleonOutfit

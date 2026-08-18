@@ -1,0 +1,10 @@
+- type: entity
+  parent: [BaseNinjaObjective, BaseCodeObjective]
+  id: NinjaReturnToBaseObjective
+  name: Return to your outpost
+  description: After completing all your objectives, board the shuttle on the outpost and escape.
+  components:
+  - type: Objective
+    icon:
+      sprite: Structures/Furniture/chairs.rsi
+      state: shuttle

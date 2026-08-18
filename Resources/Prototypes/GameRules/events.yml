@@ -232,13 +232,27 @@
   parent: BaseGameRule
   id: NinjaSpawn
   components:
+  # Sunrise-start
+  - type: GameRule
+    delay:
+      min: 60
+      max: 600
+  - type: RuleGrids
+  - type: LoadMapRule
+    mapPath: /Maps/_Sunrise/Nonstations/ninja_outpost.yml
+  - type: NinjaRule
+    returnObjectiveProto: NinjaReturnToBaseObjective
+    ftlMapWhitelist:
+      components:
+      - NinjaShuttle
+  # Sunrise-end
   - type: StationEvent
     weight: 6
     duration: null
     earliestStart: 30
     reoccurrenceDelay: 20
     minimumPlayers: 30
-  - type: SpaceSpawnRule
+  #- type: SpaceSpawnRule # Sunrise-edit
   - type: AntagLoadProfileRule
   - type: AntagObjectives
     objectives:
@@ -247,7 +261,9 @@
     - SpiderChargeObjective
     - TerrorObjective
     - MassArrestObjective
-    - NinjaSurviveObjective
+    # Sunrise edit start
+    - NinjaReturnToBaseObjective
+    # Sunrise edit end
   - type: AntagSelection
     agentName: ninja-round-end-agent-name
     definitions:

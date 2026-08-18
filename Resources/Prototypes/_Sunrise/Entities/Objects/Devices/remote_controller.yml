@@ -36,6 +36,18 @@
     - type: AssaultOpsShuttle
 
 - type: entity
+  id: RemoteNinjaShuttleController
+  parent: RemoteShuttleControllerBase
+  name: Remote Shuttle Controller (Space Ninja)
+  description: Control your outpost shuttle from anywhere. Discretion is advised.
+  components:
+  - type: Sprite
+    state: syndicate
+  - type: DroneConsole
+    components:
+    - type: NinjaShuttle
+
+- type: entity
   id: RemoteNukeOpShuttleController
   parent: RemoteShuttleControllerBase
   name: Remote Shuttle Control Controller (Nuclear Operatives)
