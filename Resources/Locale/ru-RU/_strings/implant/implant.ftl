@@ -26,6 +26,15 @@ implanter-contained-implant-text = [color=green]{ $desc }[/color]
 action-name-toggle-fake-mindshield = [color=green]Контроль защиты разума[/color]
 action-description-toggle-fake-mindshield = Активирует/деактивирует передачу сигнала имитатора защиты разума
 
+mind-control-user-freed = Вы больше не находитесь под действием импланта. Вы не помните, что происходило под его воздействием, и кто вас имплантировал.
+mind-control-user-briefing =
+    Вам имплантировали имплант контроля разума. Ваш хозяин: [color=darkred]{$master-name}[/color].
+    Выполняйте его приказы. Старайтесь не погибнуть, не получить травмы и не выдать имплант...
+    Если только [color=darkred]{$master-name}[/color] не прикажет обратное.
+mind-control-prevented = Имплантации помешал имплант защиты разума!
+mind-control-prevents-mindshield = На пути оказался другой имплант.
+mind-control-invalid = Цель должна быть живой.
+
 ## Implanter Actions
 
 scramble-implant-activated-popup = Вы превратились в { $identity }

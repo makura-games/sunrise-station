@@ -233,7 +233,7 @@
   - type: RadioImplant
     radioChannels:
     - DeathSquad
-  
+
 - type: entity
   parent: BaseSubdermalImplant
   id: DeathRattleImplantTSF
@@ -242,6 +242,15 @@
   components:
   - type: RattleOnTrigger
     radioChannel: TSF
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: MindControlImplant
+  name: mind control implant
+  description: A knock-off of the Mindshield. This implant ensures the user is on the side of the syndicate.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: MindControlImplant
 
 - type: entity
   parent: BaseSubdermalImplant

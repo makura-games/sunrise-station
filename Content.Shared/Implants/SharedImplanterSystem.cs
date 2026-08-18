@@ -197,7 +197,9 @@ public abstract class SharedImplanterSystem : EntitySystem
         }
 
         var ev = new AddImplantAttemptEvent(user, target, implant.Value, implanter);
-        RaiseLocalEvent(target, ev);
+        // Sunrise-Start - raise on implant entity so implant-specific attempt handlers can run
+        RaiseLocalEvent(implant.Value, ev);
+        // Sunrise-End
         return !ev.Cancelled;
     }
 
