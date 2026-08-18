@@ -36,6 +36,10 @@ public sealed class HitscanBasicDamageSystem : EntitySystem
         {
             Target = args.Data.HitEntity.Value,
             DamageDealt = damageDealt,
+            // Sunrise added start - сохраняет данные попадания для визуальных эффектов
+            HitPosition = args.Data.HitPosition,
+            Direction = args.Data.ShotDirection,
+            // Sunrise added end
         };
 
         RaiseLocalEvent(ent, ref damageEvent);
@@ -62,6 +66,10 @@ public sealed class HitscanBasicDamageSystem : EntitySystem
         {
             Target = args.Data.HitEntity.Value,
             DamageDealt = damageDealt,
+            // Sunrise added start - сохраняет данные попадания для визуальных эффектов
+            HitPosition = args.Data.HitPosition,
+            Direction = args.Data.ShotDirection,
+            // Sunrise added end
         };
 
         RaiseLocalEvent(ent, ref damageEvent);
