@@ -247,6 +247,7 @@
     - id: VariantCubeBoxSunrise
     - id: LeftArmCyberRipper
       prob: 0.35
+    - id: MedipenCaseChiefMedicalOfficier
     - id: FlippoLighterSunriseCmo
     #Sunrise-end
 

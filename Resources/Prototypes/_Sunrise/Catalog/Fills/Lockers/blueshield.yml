@@ -13,6 +13,7 @@
         - id: ClothingHeadsetAltCommand
         - id: HandheldBSOCrewMonitor
         - id: WeaponMultiphaseGun
+        - id: MedipenCaseBlueShield
 
 - type: entity
   id: LockerBlueshieldFilledHardsuit
@@ -31,3 +32,4 @@
         - id: WeaponMultiphaseGun
         - id: ClothingOuterHardsuitBlueShield
         - id: OxygenTankFilled
+        - id: MedipenCaseBlueShield

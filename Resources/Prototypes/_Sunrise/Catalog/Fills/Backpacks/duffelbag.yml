@@ -395,10 +395,6 @@
         - id: DefibrillatorCompact
         - id: MedkitCombatFilled
           amount: 3
-        - id: Tourniquet
-          amount: 2
-        - id: MedipenCombatInjector
-          amount: 2
         - id: CombatMedipen
           amount: 4
         - id: PunctAutoInjector
@@ -407,6 +403,10 @@
           amount: 4
         - id: AirlossAutoInjector
           amount: 4
+        - id: MedipenCaseERTMedic
+          amount: 2
+        - id: MedipenCombatInjector
+          amount: 2
 
 - type: entity
   parent: ClothingBackpackDuffelAbductorBundle

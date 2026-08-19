@@ -17,6 +17,8 @@
           amount: 2
         - id: ClothingOuterHardsuitBrigmedicSunrise
           amount: 2
+        - id: MedipenCaseBrigmedic
+          amount: 2
         - id: BoxSterileMask
         - id: ClothingHeadHatBeretBrigmedic
         - id: ClothingOuterCoatAMG
