@@ -66,3 +66,10 @@ ent-ClothingBeltSalvageMercWebbing = разгрузка мусорщика
     .desc = Идеально подходит для хранения инструментов, боеприпасов и добычи.
 ent-ClothingSovietBandolier = советский патронташ
     .desc = Пахнет маслом, потом и сомнительными решениями.
+
+ent-ClothingBeltMedicalAdvanced = продвинутый пояс медика
+    .desc = Может хранить множество медицинских принадлежностей.
+ent-ClothingBeltMedicalEMTAdvanced = продвинутый пояс парамедика
+    .desc = { ent-ClothingBeltMedicalAdvanced.desc }
+ent-ClothingBeltMedicalCMOAdvanced = продвинутый пояс главного врача
+    .desc = { ent-ClothingBeltMedicalAdvanced.desc }

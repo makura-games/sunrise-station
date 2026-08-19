@@ -231,6 +231,9 @@
     sprite: _Sunrise/Clothing/Belt/cmo.rsi
   - type: Clothing
     sprite: _Sunrise/Clothing/Belt/cmo.rsi
+  - type: Tag
+    tags:
+    - BeltMedicalCMO
 
 - type: entity
   parent: [ClothingBeltStorageBase, ContentsExplosionResistanceBase]
@@ -556,3 +559,77 @@
     sprite: _Sunrise/Clothing/Belt/tsf_webbing.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.1
+
+- type: entity
+  parent: ClothingBeltMedical
+  id: ClothingBeltMedicalAdvanced
+  name: advanced medical belt
+  description: Can hold a lot of various medical equipment.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Belt/medical_advanced.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Belt/medical_advanced.rsi
+  - type: Storage
+    grid:
+    - 0,0,5,1
+    - 7,0,7,1
+    - 0,3,7,4
+    whitelist:
+      tags:
+      - Wrench
+      - Bottle
+      - Spray
+      - Brutepack
+      - Bloodpack
+      - Gauze
+      - Ointment
+      - Tourniquet
+      - CigPack
+      - PillCanister
+      - Radio
+      - DiscreteHealthAnalyzer
+      - SurgeryTool
+      - Dropper
+      - Patch
+      - PatchPack
+      - AutoMender
+      - Medkit
+      components:
+      - Injector
+      - Pill
+      - HandLabeler
+      - FitsInDispenser
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: Construction
+    graph: ClothingBeltMedicalAdvanced
+    node: upgradebeltmedical
+
+- type: entity
+  parent: ClothingBeltMedicalAdvanced
+  id: ClothingBeltMedicalEMTAdvanced
+  name: advanced emt medical belt
+  description: Can hold a lot of various medical equipment.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Belt/emt_advanced.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Belt/emt_advanced.rsi
+  - type: Construction
+    graph: ClothingBeltMedicalEMTAdvanced
+    node: upgradebeltmedicalemt
+
+- type: entity
+  parent: ClothingBeltMedicalAdvanced
+  id: ClothingBeltMedicalCMOAdvanced
+  name: advanced cmo medical belt
+  description: Can hold a lot of various medical equipment.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Belt/cmo_advanced.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Belt/cmo_advanced.rsi
+  - type: Construction
+    graph: ClothingBeltMedicalCMOAdvanced
+    node: upgradebeltmedicalcmo

@@ -618,6 +618,9 @@
 - type: Tag
   id: WhiteLily
 
+- type: Tag
+  id: Lighter
+
 # region Dungeon
 - type: Tag
   id: SalvageSyndicateBase
@@ -785,3 +788,15 @@
 # region Medicine
 - type: Tag
   id: AutoMender  # Используется для whitelist у ClothingBeltMedical =3
+
+- type: Tag
+  id: PouchMedical  # Используется для улучшения ClothingBeltMedical
+
+- type: Tag
+  id: BeltMedical # Используется для крафта ClothingBeltMedicalAdvanced
+
+- type: Tag
+  id: BeltMedicalEMT # Используется для крафта ClothingBeltMedicalEMTAdvanced
+
+- type: Tag
+  id: BeltMedicalCMO # Используется для крафта ClothingBeltMedicalCMOAdvanced

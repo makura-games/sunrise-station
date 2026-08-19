@@ -48,6 +48,12 @@
     shape: # Yes, this is cursed, but it breaks otherwise, dont question it.
     - 0,0,0,1
   - type: Storage
+    # Sunrise-Start
+    whitelist:
+      tags:
+      - Cigarette
+      - Lighter
+  # Sunrise-End
     grid:
     - 0,0,4,1
   - type: EntityTableContainerFill
@@ -118,6 +124,12 @@
     shape: # Yes, this is cursed, but it breaks otherwise, dont question it.
     - 0,0,0,1
   - type: Storage
+  # Sunrise-Start
+    whitelist:
+      tags:
+      - Cigarette
+      - Lighter
+  # Sunrise-End
     grid:
     - 0,0,4,1
   - type: ItemCounter

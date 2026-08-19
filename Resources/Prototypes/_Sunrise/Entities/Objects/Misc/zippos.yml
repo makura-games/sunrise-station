@@ -82,6 +82,9 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 260
+  - type: Tag
+    tags:
+    - Lighter
 
 - type: entity
   parent: FlippoLighterSunriseBase

@@ -173,3 +173,22 @@
   materials:
     Glass: 200
     Steel: 50
+
+- type: latheRecipe
+  id: ChemistryEmptyBottleDurable01
+  result: ChemistryEmptyBottleDurable01
+  completetime: 2
+  materials:
+    Glass: 100
+    Steel: 50
+    Plasma: 50
+
+- type: latheRecipe
+  id: PouchMedical
+  result: PouchMedical
+  completetime: 15
+  materials:
+    Durathread: 1000
+    Plastic: 500
+    Plasma: 200
+    Silver: 200

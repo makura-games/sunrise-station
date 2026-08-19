@@ -10,3 +10,8 @@ construction-graph-tag-white-lily-desc = { ent-FoodWhiteLily.desc }
 construction-graph-tag-welding-mask = { ent-ClothingHeadHatWelding }
 construction-graph-tag-welding-mask-desc = { ent-ClothingHeadHatWelding.desc }
 construction-graph-tag-upgrade-lecter-mk3 = Lecter Mk3 upgrade kit
+  # Advanced belts craft
+construction-graph-tag-beltmedical = medical belt
+construction-graph-tag-beltmedicalemt = EMT belt
+construction-graph-tag-beltmedicalcmo = CMO's medical belt
+construction-graph-tag-upgradebeltmedical =  medical pouch

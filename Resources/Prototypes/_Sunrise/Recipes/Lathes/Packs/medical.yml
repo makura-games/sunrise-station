@@ -28,6 +28,8 @@
   - DefibrillatorCompact
   - AdvancedDefibrillatorCompact
   - DnaInjector
+  - ChemistryEmptyBottleDurable01
+  - PouchMedical
 
 - type: latheRecipePack
   id: SurgeryDynamicSunrise

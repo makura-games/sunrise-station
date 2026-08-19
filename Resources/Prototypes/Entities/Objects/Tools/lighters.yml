@@ -98,6 +98,11 @@
     color: orange
   - type: ItemTogglePointLight
   - type: PhysicalComposition
+  # Sunrise-Start
+  - type: Tag
+    tags:
+    - Lighter
+  # Sunrise-End
 
 - type: entity
   name: cheap lighter
@@ -220,6 +225,11 @@
   - type: UseDelay
   - type: IgnitionSource
     ignited: false
+  # Sunrise-Start
+  - type: Tag
+    tags:
+    - Lighter
+  # Sunrise-End
 
 - type: entity
   name: flippo engraved lighter
@@ -319,6 +329,11 @@
   - type: UseDelay
   - type: IgnitionSource
     ignited: false
+  # Sunrise-Start
+  - type: Tag
+    tags:
+    - Lighter
+  # Sunrise-End
 
 - type: entity
   parent: [BaseBrandedLighter, BaseSyndicateContraband]

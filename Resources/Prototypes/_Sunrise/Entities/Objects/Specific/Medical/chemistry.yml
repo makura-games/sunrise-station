@@ -108,6 +108,7 @@
   - type: Tag
     tags:
     - CentrifugeCompatible
+    - Bottle
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Chemistry/vial_bluespace.rsi
     layers:
@@ -229,3 +230,101 @@
     lifetime: 25
   - type: SpawnOnDespawn
     prototype: AcidifierItem
+
+- type: entity
+  name: explosion-proof bottle
+  parent: BaseItem
+  id: BaseChemistryEmptyBottleDurable
+  abstract: true
+  description: A small metal bottle.
+  components:
+  - type: Tag
+    tags:
+    - Bottle
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 25
+  - type: SpaceGarbage
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Chemistry/bottle_durable1.rsi
+    state: bottle-1
+  - type: Edible
+    edible: Drink
+    solution: drink
+    destroyOnEmpty: false
+    utensil: None
+  - type: SolutionContainerManager
+    solutions:
+      drink: # This solution name and target volume is hard-coded in ChemMasterComponent
+        maxVol: 30
+  - type: MixableSolution
+    solution: drink
+  - type: RefillableSolution
+    solution: drink
+  - type: DrainableSolution
+    solution: drink
+  - type: ExaminableSolution
+    solution: drink
+    exactVolume: true
+  - type: DrawableSolution
+    solution: drink
+  - type: SolutionTransfer
+    maxTransferAmount: 30
+    canChangeTransferAmount: true
+  - type: SolutionItemStatus
+    solution: drink
+  - type: UserInterface
+    interfaces:
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
+  - type: Item
+    size: Tiny
+    sprite: _Sunrise/Objects/Specific/Chemistry/bottle_durable1.rsi
+  - type: Spillable
+    solution: drink
+  - type: MeleeWeapon
+    soundNoDamage:
+      path: "/Audio/Effects/Fluids/splat.ogg"
+    damage:
+      types:
+        Blunt: 0
+  - type: StaticPrice
+    price: 0
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 5
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 4
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 190
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior { }
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlass:
+            min: 0
+            max: 1
+          SheetSteel1:
+            min: 0
+            max: 1
+        transferForensics: true
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DnaSubstanceTrace
+
+- type: entity
+  parent: BaseChemistryEmptyBottleDurable
+  id: ChemistryEmptyBottleDurable01

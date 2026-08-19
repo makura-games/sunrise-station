@@ -1,0 +1,92 @@
+- type: constructionGraph
+  id: ClothingBeltMedicalAdvanced
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: upgradebeltmedical
+          steps:
+            - tag: BeltMedical
+              name: construction-graph-tag-beltmedical
+              icon:
+                sprite: Clothing/Belt/medical.rsi
+                state: icon
+              doAfter: 5
+            - tag: PouchMedical
+              name: construction-graph-tag-upgradebeltmedical
+              icon:
+                sprite: _Sunrise/Clothing/Pouches/medicine_pouch.rsi
+                state: icon
+              doAfter: 5
+    - node: upgradebeltmedical
+      entity: ClothingBeltMedicalAdvanced
+
+- type: constructionGraph
+  id: ClothingBeltMedicalEMTAdvanced
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: upgradebeltmedicalemt
+          steps:
+            - tag: BeltMedicalEMT
+              name: construction-graph-tag-beltmedicalemt
+              icon:
+                sprite: Clothing/Belt/emt.rsi
+                state: icon
+              doAfter: 5
+            - tag: PouchMedical
+              name: construction-graph-tag-upgradebeltmedical
+              icon:
+                sprite: _Sunrise/Clothing/Pouches/medicine_pouch.rsi
+                state: icon
+              doAfter: 5
+    - node: upgradebeltmedicalemt
+      entity: ClothingBeltMedicalEMTAdvanced
+
+- type: constructionGraph
+  id: ClothingBeltMedicalCMOAdvanced
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: upgradebeltmedicalcmo
+          steps:
+            - tag: BeltMedicalCMO
+              name: construction-graph-tag-beltmedicalcmo
+              icon:
+                sprite: _Sunrise/Clothing/Belt/cmo.rsi
+                state: icon
+              doAfter: 5
+            - tag: PouchMedical
+              name: construction-graph-tag-upgradebeltmedical
+              icon:
+                sprite: _Sunrise/Clothing/Pouches/medicine_pouch.rsi
+                state: icon
+              doAfter: 5
+    - node: upgradebeltmedicalcmo
+      entity: ClothingBeltMedicalCMOAdvanced
+
+- type: construction
+  id: ClothingBeltMedicalAdvanced
+  graph: ClothingBeltMedicalAdvanced
+  startNode: start
+  targetNode: upgradebeltmedical
+  category: construction-category-clothing
+  objectType: Item
+
+- type: construction
+  id: ClothingBeltMedicalEMTAdvanced
+  graph: ClothingBeltMedicalEMTAdvanced
+  startNode: start
+  targetNode: upgradebeltmedicalemt
+  category: construction-category-clothing
+  objectType: Item
+
+- type: construction
+  id: ClothingBeltMedicalCMOAdvanced
+  graph: ClothingBeltMedicalCMOAdvanced
+  startNode: start
+  targetNode: upgradebeltmedicalcmo
+  category: construction-category-clothing
+  objectType: Item

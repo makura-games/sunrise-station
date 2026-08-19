@@ -17,3 +17,6 @@ ent-MiniSyringeDexPlusSaline = oxygenation mini syringe
 
 ent-MiniSyringeEphedrine = stimulant mini syringe
     .desc = A compact disposable syringe filled with a stimulant dose.
+
+ent-ChemistryEmptyBottleDurable01 = explosion-proof bottle
+    .desc = A small metal bottle.

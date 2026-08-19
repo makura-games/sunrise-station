@@ -1,6 +1,7 @@
 research-discipline-biochemical = Биохимия
 research-technology-basic-surgery = Базовая хирургия
 research-technology-basic-cyberlimbs = Базовые кибер-конечности
+research-technology-advanced-equipment = Продвинутая экипировка
 research-technology-implant-extractor-safety = Безопасное извлечение имплантов
 research-technology-implant-extractor = Извлечение имплантов
 research-technology-advanced-surgery = Продвинутая хирургия

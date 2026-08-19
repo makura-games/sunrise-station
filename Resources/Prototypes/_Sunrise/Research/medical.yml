@@ -34,6 +34,19 @@
     - LeftLegCyber
     - LeftFootCyber
 
+- type: technology
+  id: AdvancedEquipment
+  name: research-technology-advanced-equipment
+  icon:
+    sprite: _Sunrise/Objects/Specific/Chemistry/bottle_durable1.rsi
+    state: bottle-1
+  discipline: Biochemical
+  tier: 1
+  cost: 6000
+  recipeUnlocks:
+    - ChemistryEmptyBottleDurable01
+    - PouchMedical
+
 # Tier 2
 - type: technology
   id: ImplantExtractor
