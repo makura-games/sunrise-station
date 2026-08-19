@@ -125,6 +125,67 @@
       path: /Audio/_Sunrise/Weapons/Guns/SMGs/mp5/mp5_cocked.ogg
 
 - type: entity
+  name: Scorpion VZ-61
+  parent: BaseWeaponSubMachineGun
+  id: WeaponSubMachineGunSkorpion
+  components:
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,1
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/skorpion.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/skorpion.rsi
+    quickEquip: False
+    slots:
+    - Back
+    - suitStorage
+    - Belt
+  - type: GunWieldBonus
+    minAngle: -6
+    maxAngle: -25
+  - type: Gun
+    minAngle: 9.5
+    maxAngle: 40
+    angleIncrease: 5.4
+    angleDecay: 25
+    fireRate: 6
+    soundGunshot:
+      path: /Audio/_Sunrise/Weapons/Guns/SMGs/scorpion/scorpion_shot.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineScorpion
+        insertSound: /Audio/_Sunrise/Weapons/Guns/SMGs/scorpion/scorpion_reload.ogg
+        ejectSound: /Audio/_Sunrise/Weapons/Guns/SMGs/scorpion/scorpion_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazinePistolSubMachineGun
+          - MagazinePistolHighCapacity
+          - MagazineScorpion
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgePistolSP  # 57x28
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgePistol  # 57x28
+  - type: Wieldable
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+
+- type: entity
   name: New Vector
   parent: WeaponSubMachineGunDrozd
   id: WeaponSubMachineGunNewVector

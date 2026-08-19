@@ -76,7 +76,7 @@
   - type: AccessReader
     access: [["BlueShield"]]
   - type: Item
-    size: Normal
+    size: Small # Sunrise-Edit
     shape:
     - 0, 0, 1, 1
     heldPrefix: disabler

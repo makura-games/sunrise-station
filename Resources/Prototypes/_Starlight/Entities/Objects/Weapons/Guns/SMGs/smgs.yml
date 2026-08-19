@@ -39,9 +39,9 @@
   description: Lightweight submachine gun with a 32-round magazine that has single or 4 round firing modes.
   components:
   - type: Item
-    size: Normal
+    size: Small
     shape:
-    - 0,0,1,1 # Starlight
+    - 0,0,1,1
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/SMGs/uzi.rsi
     layers:
