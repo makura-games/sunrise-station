@@ -33,6 +33,7 @@ public sealed class FollowerSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physicsSystem = default!;
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly ISharedAdminManager _adminManager = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!; //* SUNRISE ADD
 
     private static readonly ProtoId<TagPrototype> ForceableFollowTag = "ForceableFollow";
     private static readonly ProtoId<TagPrototype> PreventGhostnadoWarpTag = "NotGhostnadoWarpable";
@@ -184,7 +185,9 @@ public sealed class FollowerSystem : EntitySystem
     /// <param name="entity">The entity to be followed</param>
     public void StartFollowingEntity(EntityUid follower, EntityUid entity)
     {
-        if (follower == entity || TerminatingOrDeleted(entity))
+        if (follower == entity ||
+            TerminatingOrDeleted(entity) ||
+            !_entityManager.HasComponent<GhostComponent>(follower)) //* SUNRISE ADD - ADMIN FOLLOW BUGFIX
             return;
 
         // No recursion for you
