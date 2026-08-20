@@ -210,6 +210,9 @@
   # Sunrise-start
   - type: FootprintEmitter
   - type: Interactions
+  - type: FlashbangVulnerable 
+    effectMultiplier: 1.33
+    bypassProtection: false
   # Sunrise-end
 
 - type: entity

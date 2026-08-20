@@ -363,6 +363,9 @@
   - type: FootprintEmitter
     leftBareFootState: [ footprint-left-bare-cat ]
     rightBareFootState: [ footprint-right-bare-cat ]
+  - type: FlashbangVulnerable 
+    effectMultiplier: 1.33
+    bypassProtection: false
   # Sunrise edit end
   - type: Bloodstream
     bloodReferenceSolution:

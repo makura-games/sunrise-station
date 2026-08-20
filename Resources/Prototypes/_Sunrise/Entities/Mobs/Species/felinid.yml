@@ -36,6 +36,9 @@
   id: MobFelinidBase
   abstract: true
   components:
+  - type: FlashbangVulnerable
+    effectMultiplier: 2
+    bypassProtection: false
   - type: Interactions
   - type: MultiHandedItem
   - type: OwOAccent

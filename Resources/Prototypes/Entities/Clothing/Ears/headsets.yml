@@ -243,10 +243,16 @@
       key_slots:
       - EncryptionKeySecurity
       - EncryptionKeyCommon
+  # Sunrise-Edit start
   - type: Sprite
-    sprite: _Sunrise/Clothing/Ears/Headsets/security.rsi # Sunrise-Edit
+    sprite: _Sunrise/Clothing/Ears/Headsets/security.rsi
+    state: icon_alt
   - type: Clothing
-    sprite: _Sunrise/Clothing/Ears/Headsets/security.rsi # Sunrise-Edit
+    sprite: _Sunrise/Clothing/Ears/Headsets/security.rsi
+    equippedPrefix: alt
+  - type: FlashbangProtection
+    protectionRangeCoefficient: 0.25
+  # Sunrise-Edit end
 
 - type: entity
   parent: [ClothingHeadset, BaseSecurityContraband]
@@ -264,6 +270,7 @@
     sprite: _Sunrise/Clothing/Ears/Headsets/brigmedic.rsi # Sunrise-Edit
   - type: Clothing
     sprite: _Sunrise/Clothing/Ears/Headsets/brigmedic.rsi # Sunrise-Edit
+
 
 - type: entity
   parent: ClothingHeadset

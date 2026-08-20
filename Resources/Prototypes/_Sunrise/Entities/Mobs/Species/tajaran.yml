@@ -31,6 +31,9 @@
   id: BaseMobTajaran
   abstract: true
   components:
+  - type: FlashbangVulnerable
+    effectMultiplier: 0.7
+    bypassProtection: false
   - type: MessyDrinker
     spillChance: 0.2
   - type: Interactions

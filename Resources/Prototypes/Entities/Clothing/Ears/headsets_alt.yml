@@ -9,6 +9,7 @@
     state: icon_alt
   - type: Clothing
     equippedPrefix: alt
+  - type: FlashbangProtection # Sunrise-Edit
 
 - type: entity
   parent: ClothingHeadsetAlt
@@ -22,7 +23,7 @@
       - EncryptionKeyCommand
       - EncryptionKeyCommon
   - type: Sprite
-    sprite:  _Sunrise/Clothing/Ears/Headsets/cargo.rsi # Sunrise-Edit
+    sprite: _Sunrise/Clothing/Ears/Headsets/cargo.rsi # Sunrise-Edit
   - type: Clothing
     sprite: _Sunrise/Clothing/Ears/Headsets/cargo.rsi # Sunrise-Edit
 
@@ -138,6 +139,8 @@
     sprite: _Sunrise/Clothing/Ears/Headsets/syndicate.rsi # Sunrise-Edit
   - type: Clothing
     sprite: _Sunrise/Clothing/Ears/Headsets/syndicate.rsi # Sunrise-Edit
+  - type: FlashbangProtection # Sunrise-Edit
+    protectionRangeCoefficient: 0.65
 
 - type: entity
   parent: ClothingHeadsetAlt

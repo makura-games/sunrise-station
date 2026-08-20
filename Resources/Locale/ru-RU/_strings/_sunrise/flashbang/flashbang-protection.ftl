@@ -1,0 +1,2 @@
+flashbang-protection-examine = [color=yellow]Ослабляет светошумовой эффект на {$percent}%.[/color]
+flashbang-protection-examine-immunity = [color=yellow]Полностью защищает от светошумового эффекта.[/color]

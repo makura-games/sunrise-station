@@ -192,6 +192,7 @@
       key_slots:
       - EncryptionKeyUSSPSec
       - EncryptionKeyUSSPCom
+  - type: FlashbangProtection
 
 
 - type: entity
@@ -207,6 +208,7 @@
     sprite: _Sunrise/Abductor/Clothing/Ears/Headsets/abductor.rsi
   - type: Clothing
     sprite: _Sunrise/Abductor/Clothing/Ears/Headsets/abductor.rsi
+  - type: FlashbangProtection
 
 - type: entity
   parent: [ClothingHeadset, BaseCommandContraband]
@@ -238,6 +240,7 @@
     sprite: _Sunrise/Clothing/Ears/Headsets/centcom.rsi
   - type: Clothing
     sprite: _Sunrise/Clothing/Ears/Headsets/centcom.rsi
+  - type: FlashbangProtection
 
 - type: entity
   parent: ClothingHeadsetNokey
@@ -314,6 +317,7 @@
   - type: Clothing
     sprite: _Sunrise/Clothing/Ears/Headsets/ert.rsi
   - type: EncryptionKeyHolder
+  - type: FlashbangProtection
 
 - type: entity
   parent: ClothingHeadsetAlt
@@ -334,6 +338,7 @@
     sprite: _Sunrise/Clothing/Ears/Headsets/deathsquad.rsi
   - type: EncryptionKeyHolder
     keySlots: 5
+  - type: FlashbangProtection
 
 - type: entity
   parent: ClothingHeadsetAlt
@@ -355,6 +360,7 @@
     sprite: _Sunrise/Clothing/Ears/Headsets/specopsofficer.rsi
   - type: EncryptionKeyHolder
     keySlots: 6
+  - type: FlashbangProtection
 
 - type: entity
   parent: [ClothingHeadsetAlt, BaseCommandContraband]
@@ -371,3 +377,4 @@
     sprite: _Sunrise/Clothing/Ears/Headsets/representative.rsi
   - type: Clothing
     sprite: _Sunrise/Clothing/Ears/Headsets/representative.rsi
+  - type: FlashbangProtection

@@ -185,6 +185,9 @@
   - type: ToggleableNightVision
     effect: EffectNightVisionPirate
   - type: FootprintEmitter
+  - type: FlashbangVulnerable 
+    effectMultiplier: 0.5
+    bypassProtection: false
   # Sunrise-End
 
 - type: entity

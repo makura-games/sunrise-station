@@ -1,0 +1,23 @@
+# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+
+- type: entity
+  id: GrenadeFlashbangEffect
+  parent: GrenadeFlashEffect
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: TriggerOnSpawn
+    - type: FlashbangRadiusOnTrigger
+      range: 7
+      stunDuration: 5
+      knockdownDuration: 10
+
+- type: entity
+  id: PayloadFlashbangEffect
+  parent: GrenadeFlashEffect
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: TriggerOnSpawn
+    - type: FlashbangRadiusOnTrigger
+      range: 6
+      stunDuration: 5
+      knockdownDuration: 10

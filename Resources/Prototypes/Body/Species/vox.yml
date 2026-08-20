@@ -259,6 +259,9 @@
   - type: Wagging
   # Sunrise start
   - type: Interactions
+  - type: FlashbangVulnerable 
+    effectMultiplier: 0.5
+    bypassProtection: false
   # Sunrise end
 
 - type: entity

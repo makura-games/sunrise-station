@@ -91,6 +91,8 @@
     - type: DeleteOnTrigger
     - type: FlashOnTrigger
       range: 6
+    - type: SpawnOnTrigger # Sunrise-Edit
+      proto: PayloadFlashbangEffect
     - type: EmitSoundOnTrigger
       sound:
         path: "/Audio/Effects/flash_bang.ogg"

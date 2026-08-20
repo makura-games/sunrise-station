@@ -418,7 +418,7 @@
   - type: FlashOnTrigger
     range: 7
   - type: SpawnOnTrigger
-    proto: GrenadeFlashEffect
+    proto: GrenadeFlashbangEffect
     predicted: true
   - type: DeleteOnTrigger
 
@@ -684,7 +684,7 @@
   - type: SpawnOnTrigger
     keysIn:
     - timer
-    proto: GrenadeFlashEffect
+    proto: GrenadeFlashbangEffect
   - type: DeleteOnTrigger
     keysIn:
     - timer

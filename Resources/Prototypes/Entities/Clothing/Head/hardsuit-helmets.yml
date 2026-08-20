@@ -316,6 +316,8 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+  - type: FlashbangProtection # Sunrise-Edit
+    protectionRangeCoefficient: 1
   - type: Tag
     tags:
     - WhitelistChameleon
@@ -714,6 +716,9 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+  - type: FlashbangProtection # Sunrise-Edit
+    protectionRangeCoefficient: 1
+  - type: FlashImmunity # Sunrise-Edit
   - type: Tag
     tags:
     - WhitelistChameleon

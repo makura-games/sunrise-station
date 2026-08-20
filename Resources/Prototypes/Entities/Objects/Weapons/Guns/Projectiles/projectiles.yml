@@ -919,7 +919,7 @@
   - type: FlashOnTrigger
     range: 7
   - type: SpawnOnTrigger
-    proto: GrenadeFlashEffect
+    proto: GrenadeFlashbangEffect # Sunrise-Edit
   - type: DeleteOnTrigger
 
 - type: entity

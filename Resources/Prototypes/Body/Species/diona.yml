@@ -179,6 +179,9 @@
       - "footprint-left-bare-diona"
     rightBareFootState:
       - "footprint-right-bare-diona"
+  - type: FlashbangVulnerable 
+    effectMultiplier: 0.5
+    bypassProtection: false
   # Sunrise end
 
 - type: entity
