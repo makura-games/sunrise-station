@@ -27,6 +27,7 @@
     solution: absorbed
     spillWhenThrown: false
     preventMelee: false
+    maxMeleeSpillAmount: 0 # Sunrise-Edit: не передаём жидкость при ударе мопом
   - type: DrainableSolution
     solution: absorbed
   - type: Wieldable
