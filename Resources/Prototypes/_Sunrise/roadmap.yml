@@ -1,141 +1,61 @@
 - type: roadmapVersions
   id: SunriseRoadmap
   versions:
-  - name: roadmap-available-now
+  - name: roadmap-visual-and-sound
     goals:
-    - id: planet-prison-name
-      name: roadmap-goal-planet-prison-name
-      desc: roadmap-goal-planet-prison-desc
+    - id: light-shader-improvement-name
+      name: roadmap-goal-light-shader-improvement-name
+      desc: roadmap-goal-light-shader-improvement-desc
+      state: InProgress
+    - id: object-shadows-name
+      name: roadmap-goal-object-shadows-name
+      desc: roadmap-goal-object-shadows-desc
+      state: InProgress
+    - id: walking-animations-name
+      name: roadmap-goal-walking-animations-name
+      desc: roadmap-goal-walking-animations-desc
+      state: InProgress
+    - id: atmospheric-visual-effects-name
+      name: roadmap-goal-atmospheric-visual-effects-name
+      desc: roadmap-goal-atmospheric-visual-effects-desc
+      state: InProgress
+    - id: background-music-name
+      name: roadmap-goal-background-music-name
+      desc: roadmap-goal-background-music-desc
+      state: Planned
+    - id: particles-name
+      name: roadmap-goal-particles-name
+      desc: roadmap-goal-particles-desc
+      state: Planned
+  - name: roadmap-quality-of-life
+    goals:
+    - id: starting-guides-name
+      name: roadmap-goal-starting-guides-name
+      desc: roadmap-goal-starting-guides-desc
+      state: InProgress
+    - id: loadout-improvements-name
+      name: roadmap-goal-loadout-improvements-name
+      desc: roadmap-goal-loadout-improvements-desc
+      state: InProgress
+    - id: department-guides-name
+      name: roadmap-goal-department-guides-name
+      desc: roadmap-goal-department-guides-desc
+      state: Planned
+    - id: ingame-tutorial-name
+      name: roadmap-goal-ingame-tutorial-name
+      desc: roadmap-goal-ingame-tutorial-desc
       state: Complete
-    - id: shooting-name
-      name: roadmap-goal-shooting-name
-      desc: roadmap-goal-shooting-desc
-      state: Complete
-    - id: surgery-name
-      name: roadmap-goal-surgery-name
-      desc: roadmap-goal-surgery-desc
-      state: Complete
-    - id: new-guns-name
-      name: roadmap-goal-new-guns-name
-      desc: roadmap-goal-new-guns-desc
-      state: Complete
-    - id: smart-viruse-name
-      name: roadmap-goal-smart-viruse-name
-      desc: roadmap-goal-smart-viruse-desc
-      state: Complete
-    - id: assault-ops-name
-      name: roadmap-goal-assault-ops-name
-      desc: roadmap-goal-assault-ops-desc
-      state: Complete
-    - id: flesh-cult-name
-      name: roadmap-goal-flesh-cult-name
-      desc: roadmap-goal-flesh-cult-desc
-      state: Complete
-    - id: blood-cult-name
-      name: roadmap-goal-blood-cult-name
-      desc: roadmap-goal-blood-cult-desc
-      state: Complete
-    - id: mechs-name
-      name: roadmap-goal-mechs-name
-      desc: roadmap-goal-mechs-desc
-      state: Complete
-    - id: alt-jobs-name
-      name: roadmap-goal-alt-jobs-name
-      desc: roadmap-goal-alt-jobs-desc
-      state: Complete
-    - id: new-gases-name
-      name: roadmap-goal-new-gases-name
-      desc: roadmap-goal-new-gases-desc
-      state: Complete
-    - id: cyborg-update-name
-      name: roadmap-goal-cyborg-update-name
-      desc: roadmap-goal-cyborg-update-desc
-      state: Complete
-    - id: angels-name
-      name: roadmap-goal-angels-name
-      desc: roadmap-goal-angels-desc
-      state: Complete
-    - id: collective-mind-name
-      name: roadmap-goal-collective-mind-name
-      desc: roadmap-goal-collective-mind-desc
-      state: Complete
-    - id: syndicate-cyborgs-name
-      name: roadmap-goal-syndicate-cyborgs-name
-      desc: roadmap-goal-syndicate-cyborgs-desc
-      state: Complete
-    - id: cargo-rework-name
-      name: roadmap-goal-cargo-rework-name
-      desc: roadmap-goal-cargo-rework-desc
-      state: Complete
-    - id: new-maps-name
-      name: roadmap-goal-new-maps-name
-      desc: roadmap-goal-new-maps-desc
-      state: Complete
-    - id: fully-translating-name
-      name: roadmap-goal-fully-translating-name
-      desc: roadmap-goal-fully-translating-desc
-      state: Complete
-    - id: vent-crawling-name
-      name: roadmap-goal-vent-crawling-name
-      desc: roadmap-goal-vent-crawling-desc
-      state: Complete
-    - id: fugitive-name
-      name: roadmap-goal-fugitive-name
-      desc: roadmap-goal-fugitive-desc
-      state: Complete
-  - name: roadmap-in-progress
+  - name: roadmap-new-content
     goals:
     - id: virusology-name
       name: roadmap-goal-virusology-name
       desc: roadmap-goal-virusology-desc
       state: InProgress
-    - id: ingame-tutorial-name
-      name: roadmap-goal-ingame-tutorial-name
-      desc: roadmap-goal-ingame-tutorial-desc
+    - id: station-ai-body-name
+      name: roadmap-goal-station-ai-body-name
+      desc: roadmap-goal-station-ai-body-desc
       state: InProgress
-    - id: vampires-name
-      name: roadmap-goal-vampires-name
-      desc: roadmap-goal-vampires-desc
+    - id: species-languages-name
+      name: roadmap-goal-species-languages-name
+      desc: roadmap-goal-species-languages-desc
       state: InProgress
-    - id: pirates-name
-      name: roadmap-goal-pirates-name
-      desc: roadmap-goal-pirates-desc
-      state: InProgress
-  - name: roadmap-planned
-    goals:
-    - id: economy-name
-      name: roadmap-goal-economy-name
-      desc: roadmap-goal-economy-desc
-      state: Planned
-    - id: ipc-name
-      name: roadmap-goal-ipc-name
-      desc: roadmap-goal-ipc-desc
-      state: Planned
-    - id: blob-name
-      name: roadmap-goal-blob-name
-      desc: roadmap-goal-blob-desc
-      state: Planned
-    - id: perks-name
-      name: roadmap-goal-perks-name
-      desc: roadmap-goal-perks-desc
-      state: Planned
-    - id: station-goals-rework-name
-      name: roadmap-goal-station-goals-rework-name
-      desc: roadmap-goal-station-goals-rework-desc
-      state: Planned
-    - id: ert-call-name
-      name: roadmap-goal-ert-call-name
-      desc: roadmap-goal-ert-call-desc
-      state: Planned
-    - id: borer-name
-      name: roadmap-goal-borer-name
-      desc: roadmap-goal-borer-desc
-      state: Planned
-    - id: arena-name
-      name: roadmap-goal-arena-name
-      desc: roadmap-goal-arena-desc
-      state: Planned
-    - id: limbo-name
-      name: roadmap-goal-limbo-name
-      desc: roadmap-goal-limbo-desc
-      state: Planned

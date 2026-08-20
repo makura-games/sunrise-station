@@ -21,9 +21,8 @@
                         MinHeight="35"
                         StyleClasses="NoStyle">
                     <BoxContainer Orientation="Horizontal" Margin="10 0 0 0">
-                        <Label Name="HeaderLabel"
-                               StyleClasses="LabelText"
-                               HorizontalExpand="True"/>
+                        <RichTextLabel Name="HeaderLabel"
+                                       HorizontalExpand="True"/>
                         <Label Name="StateText"
                                Access="Public"
                                StyleClasses="LabelSubText"
