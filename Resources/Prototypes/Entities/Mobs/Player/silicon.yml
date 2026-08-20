@@ -526,6 +526,11 @@
     - state: ai_camera
       shader: unshaded
       map: ["base"]
+  # Sunrise-Start
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 12
+    baseWalkSpeed: 30
+  # Sunrise-End
 
 # The holographic representation of the AI that is projected from a holopad.
 - type: entity
