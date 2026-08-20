@@ -1,0 +1,25 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-4.0",
+    "copyright": "Sprited by vecortys",
+        "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon",
+            "directions": 4
+        },
+        {
+            "name": "water",
+            "directions": 4,
+            "delays": [
+                [0.1, 0.1, 0.1],
+                [0.1, 0.1, 0.1],
+                [0.1, 0.1, 0.1],
+                [0.1, 0.1, 0.1]
+            ]
+        }
+    ]
+}
