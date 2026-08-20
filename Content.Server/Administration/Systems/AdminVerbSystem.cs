@@ -130,31 +130,35 @@ namespace Content.Server.Administration.Systems
                     prayerVerb.Impact = LogImpact.Low;
                     args.Verbs.Add(prayerVerb);
 
-                    // Spawn - Like respawn but on the spot.
-                    args.Verbs.Add(new Verb()
-                    {
-                        Text = Loc.GetString("admin-player-actions-spawn"),
-                        Category = VerbCategory.Admin,
-                        Act = () =>
-                        {
-                            if (!_transformSystem.TryGetMapOrGridCoordinates(args.Target, out var coords))
-                            {
-                                _popup.PopupEntity(Loc.GetString("admin-player-spawn-failed"), args.User, args.User);
-                                return;
-                            }
+                    // Sunrise edit start - добавляем выбор сохранённого персонажа для Spawn Here
+                    // // Spawn - Like respawn but on the spot.
+                    // args.Verbs.Add(new Verb()
+                    // {
+                    //     Text = Loc.GetString("admin-player-actions-spawn"),
+                    //     Category = VerbCategory.Admin,
+                    //     Act = () =>
+                    //     {
+                    //         if (!_transformSystem.TryGetMapOrGridCoordinates(args.Target, out var coords))
+                    //         {
+                    //             _popup.PopupEntity(Loc.GetString("admin-player-spawn-failed"), args.User, args.User);
+                    //             return;
+                    //         }
 
-                            var stationUid = _stations.GetOwningStation(args.Target);
+                    //         var stationUid = _stations.GetOwningStation(args.Target);
 
-                            var profile = _gameTicker.GetPlayerProfile(targetActor.PlayerSession);
-                            var mobUid = _spawning.SpawnPlayerMob(coords.Value, null, profile, stationUid);
+                    //         var profile = _gameTicker.GetPlayerProfile(targetActor.PlayerSession);
+                    //         var mobUid = _spawning.SpawnPlayerMob(coords.Value, null, profile, stationUid);
 
-                            if (_mindSystem.TryGetMind(args.Target, out var mindId, out var mindComp))
-                                _mindSystem.TransferTo(mindId, mobUid, true, mind: mindComp);
+                    //         if (_mindSystem.TryGetMind(args.Target, out var mindId, out var mindComp))
+                    //             _mindSystem.TransferTo(mindId, mobUid, true, mind: mindComp);
 
-                        },
-                        ConfirmationPopup = true,
-                        Impact = LogImpact.High,
-                    });
+                    //     },
+                    //     ConfirmationPopup = true,
+                    //     Impact = LogImpact.High,
+                    // });
+                    // Sunrise edit
+                    AddSpawnHereVerbs(args, targetActor);
+                    // Sunrise edit end
 
                     // Clone - Spawn but without the mind transfer, also spawns at the user's coordinates not the target's
                     args.Verbs.Add(new Verb()
