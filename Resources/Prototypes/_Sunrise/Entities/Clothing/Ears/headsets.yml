@@ -49,6 +49,7 @@
         - EncryptionKeyLaw
         - EncryptionKeySecurity
         - EncryptionKeyCommon
+        - EncryptionKeyCommand
     - type: Sprite
       sprite: _Sunrise/Clothing/Ears/Headsets/service_security.rsi
 
