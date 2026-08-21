@@ -955,6 +955,7 @@
   id: ClothingHeadHelmetHardsuitMurmillo
   name: murmillo hardsuit helmet
   suffix: Pirate
+  categories: [ HideSpawnMenu ]
   description: A heavy helmet with a glowing green night-vision visor.
   components:
   - type: Sprite

@@ -59,17 +59,6 @@
     Telecrystal: 8
   categories:
   - UplinkWeaponry
-  #Sunrise-start
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - AssaultOpsUplink
-      - SubdermalImplant
-      - NukeOpsUplink
-  - !type:ListingLimitedStockCondition
-    stock: 1
-  #Sunrise-end
 
 - type: listing
   id: UplinkEnergyDagger
@@ -91,10 +80,10 @@
   description: uplink-energycrossbow-desc
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 2 # Sunrise-edit
+    Telecrystal: 3
   productEntity: WeaponEnergyCrossbow
   cost:
-    Telecrystal: 3 # Sunrise-edit
+    Telecrystal: 5
   categories:
   - UplinkWeaponry
   conditions:
@@ -111,7 +100,7 @@
   discountDownTo:
     Telecrystal: 3
   cost:
-    Telecrystal: 5 # Sunrise-Edit
+    Telecrystal: 6
   categories:
     - UplinkWeaponry
 
@@ -124,7 +113,7 @@
   discountDownTo:
     Telecrystal: 4
   cost:
-    Telecrystal: 7 # Sunrise-Edit
+    Telecrystal: 8
   categories:
   - UplinkWeaponry
 
@@ -134,11 +123,11 @@
   description: uplink-gloves-knuckleduster-desc
   icon: { sprite: Clothing/Hands/Gloves/KnuckleDusters/syndicateknuckleduster.rsi, state: syndicateknuckleduster }
   productEntity: ClothingHandsKnuckleDustersSyndicate
-  # discountCategory: veryRareDiscounts # Sunrise-edit
-  # discountDownTo:
-  #   Telecrystal: 2
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 2
   cost:
-    Telecrystal: 1  # Starlight-edit
+    Telecrystal: 4
   categories:
   - UplinkWeaponry
 
@@ -170,9 +159,9 @@
   productEntity: ClothingHandsGlovesBoxingRiggedBlue # TODO Replace this with the random spawner when it's not bugged
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 7 # Sunrise-Edit
+    Telecrystal: 8
   cost:
-    Telecrystal: 8 # Sunrise-Edit
+    Telecrystal: 10
   categories:
   - UplinkWeaponry
 
@@ -189,6 +178,14 @@
     Telecrystal: 10
   categories:
   - UplinkWeaponry
+  # Sunrise-start
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+  # Sunrise-end
 
 - type: listing
   id: UplinkHushpup
@@ -198,9 +195,9 @@
   productEntity: BriefcaseWeaponHushpupFilled
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 6 # Sunrise-Edit
+    Telecrystal: 8
   cost:
-    Telecrystal: 8 # Sunrise-Edit
+    Telecrystal: 10
   categories:
   - UplinkWeaponry
 
@@ -1914,7 +1911,7 @@
   icon: { sprite: /Textures/Clothing/OuterClothing/Hardsuits/syndieelite.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateEliteHardsuitBundle
   cost:
-    Telecrystal: 9 # Sunrise-Edit
+    Telecrystal: 10 # Sunrise-Edit
   categories:
   - UplinkWearables
   conditions:
@@ -1931,7 +1928,7 @@
   icon: { sprite: /Textures/Structures/Storage/Crates/syndicate.rsi, state: icon }
   productEntity: CrateCybersunJuggernautBundle
   cost:
-    Telecrystal: 13 #Sunrise-edit
+    Telecrystal: 12
   categories:
   - UplinkWearables
   conditions:

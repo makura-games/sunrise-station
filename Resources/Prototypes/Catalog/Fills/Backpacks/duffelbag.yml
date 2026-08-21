@@ -70,7 +70,7 @@
         - id: WeaponShotgunBulldogBiocode # Sunrise-edit
         - id: MagazineShotgun
           amount: 3
-        - id: MagazineShotgunSlug
+        - id: ShotGunKitSmall # Sunrise-edit
         - id: ClothingEyesGlassesThermalSyndie # Sunrise-edit
 
 - type: entity
@@ -86,9 +86,8 @@
         - id: WeaponSubMachineGunC20rBiocode # Sunrise-edit
         - id: MagazinePistolSubMachineGun
           amount: 2
-        - id: MagazinePistolSubMachineGunFMJ  # Sunrise-edit
+        - id: SMGAmmoKit  # Sunrise-edit
           amount: 2
-        - id: MagazinePistolSubMachineGunHP # Sunrise-add
 #       - id: SMGSuppressor
 
 - type: entity
@@ -104,9 +103,8 @@
         - id: WeaponRifleEstocBiocode # Sunrise-edit
         - id: MagazineRifle
           amount: 2
-        - id: MagazineRifleFMJ  # Sunrise-edit
+        - id: RifleAmmoKit  # Sunrise-edit
           amount: 2
-        - id: MagazineRifleAP # Sunrise-edit
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
@@ -156,8 +154,7 @@
           amount: 1
         - id: GrenadeBlastTimer
           amount: 2
-        - id: GrenadeFragTimer
-          amount: 2
+        - id: PouchExplosiveGrenadeFragTimerFilled
         - id: GrenadeEMPTimer
           amount: 2
 

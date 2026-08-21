@@ -367,6 +367,16 @@
 
 - type: entity
   parent: CyberArmMantisBox
+  id: ClothingBeltMilitaryBeltGrenadeBox
+  name: packaged grenade belt
+  description: A compact package containing a grenade belt. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingBeltMilitaryBeltGrenade
+
+- type: entity
+  parent: CyberArmMantisBox
   id: CyberArmRipperBox
   name: Cyber-Arm "Ripper" box
   components:

@@ -146,6 +146,9 @@
   - type: NpcFactionMember
     factions:
     - Pirate
+  - type: Access
+    tags:
+    - Pirate
   - type: NpcVeteranFollower
   - type: CollectiveMind
     minds:

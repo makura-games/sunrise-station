@@ -427,14 +427,14 @@
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledMinotaurShotgun
   name: Minotaur bundle
-  description: "Lean and mean: Contains smooth, powerful, highly illegal Shotgun, a 5 12g buckshot drums."
+  description: "Lean and mean: Contains a smooth, powerful, highly illegal shotgun and five drums of assorted ammunition."
   components:
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
         children:
         - id: WeaponShotgunMinotaurBiocode
-        - id: MagazineShotgunXL
+        - id: ShotGunKitLarge
         - id: MagazineShotgunBreach
 
 - type: entity
@@ -579,57 +579,29 @@
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
-  id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherM79
-  name: M79 grenade launcher bundle
-  description: "An old m79 grenade launcher bundled with 11 rounds of various destruction capability."
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: WeaponLauncherM79
-        - id: GrenadeBlast
-          amount: 1
-        - id: GrenadeFrag
-          amount: 1
-        - id: GrenadeEMP
-          amount: 1
-        - id: GrenadeBlastTimer
-          amount: 2
-        - id: GrenadeFragTimer
-          amount: 2
-        - id: GrenadeEMPTimer
-          amount: 2
-
-- type: entity
-  parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherGL70
-  name: L70 grenade launcher bundle
-  description: "GL70 grenade launcher bundled with 11 rounds of various destruction capability."
+  name: GL-70 grenade launcher bundle
+  description: An automatic GL-70 grenade launcher bundled with 17 grenades, two grenade pouches, and a packaged grenade belt.
   components:
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
         children:
         - id: WeaponGrenadeLauncherGL70
+        - id: PouchExplosiveGrenadeFragTimerFilled
+        - id: PouchExplosiveGrenadeFragContactFilled
+        - id: ClothingBeltMilitaryBeltGrenadeBox
+        - id: SmokeGrenade
         - id: GrenadeBlast
-          amount: 1
-        - id: GrenadeFrag
-          amount: 1
-        - id: GrenadeEMP
-          amount: 1
         - id: GrenadeBlastTimer
-          amount: 2
-        - id: GrenadeFragTimer
-          amount: 2
         - id: GrenadeEMPTimer
-          amount: 2
+        - id: GrenadeEMP
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledSMG40
   name: C-40r bundle
-  description: "Old faithful: The classic C-40r Submachine Gun, bundled with three magazines."
+  description: "Old faithful: The classic C-40r submachine gun, bundled with twelve assorted magazines."
   components:
   - type: EntityTableContainerFill
     containers:
@@ -637,16 +609,17 @@
         children:
         - id: WeaponSubMachineGunC40rBiocode
         - id: MagazinePistol40SubMachineGunSP
-          amount: 2
+          amount: 6
         - id: MagazinePistol40SubMachineGunFMJ
-          amount: 2
+          amount: 4
         - id: MagazinePistol40SubMachineGunHP
+          amount: 2
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledLMGMax
   name: L6 MAX bundle
-  description: "More dakka: The reinforced L6 MAX machine gun, bundled with three 100-round .308 ammunition boxes: two SP and one FMJ. Its reinforced barrel and powerful cartridge can suppress enemies and tear their cover to splinters, at the cost of bulk and mobility."
+  description: "More dakka: The reinforced L6 MAX machine gun, bundled with four 100-round .308 ammunition boxes: three SP and one FMJ. Its reinforced barrel and powerful cartridge can suppress enemies and tear their cover to splinters, at the cost of bulk and mobility."
   components:
   - type: EntityTableContainerFill
     containers:
@@ -655,3 +628,4 @@
         - id: WeaponLightMachineGunL6MaxBiocode
         - id: RifleHeavyMagazineSP
           amount: 3
+        - id: RifleHeavyMagazineFMJ

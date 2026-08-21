@@ -716,7 +716,6 @@
       - id: GunSafeRifleSKM24
       - id: GunSafeRifleLecterMk2
       - id: GunSafeRifleM16A4
-      - id: GunSafeSuperDMR
     - id: SpawnerSafeLethal
       weight: 15
 
@@ -871,7 +870,6 @@
       - id: GunSafeRifleSKM24
       - id: GunSafeRifleLecterMk2
       - id: GunSafeRifleM16A4
-      - id: GunSafeSuperDMR
     - !type:GroupSelector
       weight: 10
       children:

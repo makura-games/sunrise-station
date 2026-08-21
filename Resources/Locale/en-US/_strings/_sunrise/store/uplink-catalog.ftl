@@ -115,6 +115,8 @@ uplink-clothing-belt-syndicate-utility-name = Syndicate Utility Belt
 uplink-clothing-belt-syndicate-utility-desc = A toolbelt that passes a glance, but feels too deliberate in the hand.
 uplink-clothing-belt-syndicate-utility-chameleon-name = Chameleon Syndicate Utility Belt
 uplink-clothing-belt-syndicate-utility-chameleon-desc = A toolbelt for agents who prefer their equipment to look ordinary until it matters.
+uplink-grenade-belt-name = Grenade belt
+uplink-grenade-belt-desc = An empty tactical belt for hand grenades and grenade magazines. Can be worn on the belt or suit storage slot.
 uplink-syndie-maid-raid-name = Maid Raider
 uplink-syndie-maid-raid-desc = Syndicate developed this specifically for female agents, yet for some reason only men ever wear it.
 
@@ -142,7 +144,9 @@ uplink-goldendeagle-desc = Uses .45 magnum rounds. Engraved: "All I have left of
 uplink-cornivoregloves-name = Cornivore Crimson Harvest Gloves
 uplink-cornivoregloves-desc = We can't say if you thirst for blood... but these gloves certainly do. Each claw is a surgical tool for bloodletting, filling its target with our signature chemical cocktail. Your victim will bleed and bleed and bleed... while you contemplate the next incision. Remember: red is the new black. And it's always in fashion.
 uplink-l6-sawmax-bundle-name = L6 MAX bundle
-uplink-l6-sawmax-bundle-desc = More dakka: The reinforced L6 MAX machine gun, bundled with three 100-round .308 ammunition boxes: two SP and one FMJ. Its reinforced barrel and powerful cartridge can suppress enemies and tear their cover to splinters, at the cost of bulk and mobility.
+uplink-l6-sawmax-bundle-desc = More dakka: The reinforced L6 MAX machine gun, bundled with four 100-round .308 ammunition boxes: three SP and one FMJ. Its reinforced barrel and powerful cartridge can suppress enemies and tear their cover to splinters, at the cost of bulk and mobility.
+uplink-grenade-launcher-gl70-name = GL-70 bundle
+uplink-grenade-launcher-gl70-desc = An automatic GL-70 grenade launcher, two pouches with 12 fragmentation grenades, five additional assorted grenades, and a packaged grenade belt.
 uplink-pizza-bomb-name = Nefarious Pizza bomb
 uplink-pizza-bomb-desc = Originally developed covertly by DONK Co to dissuade the heretics who prefer their pizza not in pocket form. This pizza box is wired, and explodes within moments of being opened.
 
@@ -362,3 +366,5 @@ uplink-ecronizer-name = Ecronizer
 uplink-ecronizer-desc = A small device that can be used to bypass most scanning devices, making you and your items invisible to them.
 uplink-estoc-name = Estoc DMR
 uplink-estoc-desc = A designated marksman rifle, fitted with a mid-range optic for longer-range combat.
+uplink-syndicate-ring-name = Syndicate Ring
+uplink-syndicate-ring-desc = A black-and-red ring that serves as the coupling core for assembling a double-bladed energy sword.

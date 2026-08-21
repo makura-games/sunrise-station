@@ -43,7 +43,7 @@
       types:
         Slash: 15
         Heat: 15
-        Structural: 20
+        Structural: 12
   - type: MeleeWeapon
     wideAnimationRotation: -135
     attackRate: 1
@@ -340,7 +340,6 @@
       types:
         Slash: 12
         Heat: 12
-        Structural: 15
   - type: ItemToggleActiveSound
     activeSound:
       path: /Audio/Weapons/ebladehum.ogg
@@ -357,7 +356,7 @@
     wieldSound: null # esword light sound instead
   - type: MeleeWeapon
     wideAnimationRotation: -135
-    attackRate: 2
+    attackRate: 1.5
     autoAttack: true
     angle: 100
     damage:

@@ -556,3 +556,23 @@
     sprite: _Sunrise/Clothing/Belt/tsf_webbing.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.1
+
+- type: entity
+  parent: [ClothingBeltStorageBase, ClothingBeltMilitaryWebbing]
+  id: ClothingBeltMilitaryBeltGrenade
+  name: grenade belt
+  description: A tactical belt rig used by Gorlex Marauder grenadier operatives. has additional pouches for carrying grenades and other explosives. Can be equipped on belt or suit storage slot.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Belt/grenadebelt.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Belt/grenadebelt.rsi
+    slots:
+    - BELT
+    - SUITSTORAGE
+  - type: Storage
+    whitelist:
+      tags:
+      - HandGrenadeAmmo
+      - MagazineGrenade
+      - Grenade

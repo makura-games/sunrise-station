@@ -30,6 +30,75 @@
   - type: Magboots
 
 - type: entity
+  abstract: true
+  parent: [ClothingShoesMilitaryBase, ClothingShoesBootsMag]
+  id: BaseSunriseClothingShoesBootsMagPirateMurmillo
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Shoes/magboots_pirate.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Shoes/magboots_pirate.rsi
+    equipDelay: 3
+    unequipDelay: 9
+    stripDelay: 18
+  - type: ClothingSpeedModifier
+    walkModifier: 0.4
+    sprintModifier: 0.4
+    requireActivated: false
+  - type: Modsuit
+  - type: ToggleableClothing
+    clothingPrototype: ClothingOuterHardsuitMurmillo
+    requiredSlot: feet
+    slot: outerClothing
+
+- type: entity
+  parent: BaseSunriseClothingShoesBootsMagPirateMurmillo
+  id: SunriseClothingShoesBootsMagPirateMurmilloActive
+  name: murmillo MOD-boots
+  description: Heavy pirate magnetic boots with a Murmillo hardsuit ready to deploy without a MOD core.
+  suffix: Pirate, MOD, Active
+  components:
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot
+      item: !type:ContainerSlot
+  - type: Modsuit
+    isActivated: true
+
+- type: entity
+  parent: BaseSunriseClothingShoesBootsMagPirateMurmillo
+  id: SunriseClothingShoesBootsMagPirateMurmillo
+  name: murmillo MOD-boots
+  description: Heavy pirate magnetic boots with a Murmillo hardsuit deployment system awaiting a MOD core.
+  suffix: Pirate, MOD, Inactive
+  components:
+  - type: ItemSlots
+    slots:
+      modsuit_core:
+        name: power-cell-slot-component-slot-name-default
+        disableEject: true
+        swap: false
+        whitelist:
+          tags:
+          - ModsuitCore
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot
+      modsuit_core: !type:ContainerSlot
+      item: !type:ContainerSlot
+
+- type: entity
+  parent: SunriseClothingShoesBootsMagPirateMurmillo
+  id: SunriseClothingShoesBootsMagPirateMurmilloDamaged
+  name: murmillo MOD-boots
+  description: Heavy pirate magnetic boots containing a damaged Murmillo hardsuit and awaiting a MOD core.
+  suffix: Pirate, MOD, Damaged, Inactive
+  components:
+  - type: ToggleableClothing
+    clothingPrototype: ClothingOuterHardsuitMurmilloDamaged
+
+- type: entity
   parent: [ClothingShoesBootsMagBase, BaseSecurityContraband]
   id: ClothingShoesBootsMagSec
   name: Security magboots

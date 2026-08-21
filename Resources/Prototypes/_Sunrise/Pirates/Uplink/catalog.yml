@@ -718,9 +718,9 @@
   name: uplink-grenade-launcher-m79-name
   description: uplink-grenade-launcher-m79-desc
   icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Launchers/m79/big.rsi, state: base }
-  productEntity: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherM79
+  productEntity: BriefcaseWeaponM79Filled
   cost:
-    Doubloon: 17
+    Doubloon: 15
   categories:
   - UplinkPirateRangedWeaponry
   conditions:

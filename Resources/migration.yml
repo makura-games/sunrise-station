@@ -1216,6 +1216,7 @@ WeaponDL6902Biocode: WeaponDL6902PowerPack
 MobPirateT1ExpeditionSpawner: MobPirateT1Spawner
 MobPirateT2ExpeditionSpawner: MobPirateT2Spawner
 MobPirateT3ExpeditionSpawner: MobPirateT3Spawner
+ClothingBackpackDuffelSyndicateFilledGrenadeLauncherM79: BriefcaseWeaponM79Filled
 # 2026-08-18
 CartridgeRifleHP: CartridgeRifleSP
 CartridgeLightRifleHP: CartridgeLightRifleSP

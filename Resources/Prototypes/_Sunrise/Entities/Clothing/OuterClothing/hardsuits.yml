@@ -601,6 +601,7 @@
   id: ClothingOuterHardsuitMurmillo
   name: murmillo hardsuit
   suffix: Pirate
+  categories: [ HideSpawnMenu ]
   description: A brutal heavy hardsuit. You will be clad in a heavily armored ancient spacesuit featuring an integrated berserker chemical delivery system that keeps you fighting through the worst. Slow but incredibly resilient.
   components:
   - type: Sprite
@@ -611,8 +612,8 @@
     unequipDelay: 9
     stripDelay: 18
   - type: ClothingSpeedModifier
-    walkModifier: 0.3
-    sprintModifier: 0.3
+    walkModifier: 0.6
+    sprintModifier: 0.6
   - type: EmitSoundOnWearerMove
     sound:
       path: /Audio/_Sunrise/Cyborg/robot_legs1.ogg
@@ -627,13 +628,13 @@
         Blunt: 0.4
         Slash: 0.3
         Piercing: 0.2
-        Heat: 0.2
-        Radiation: 0.3
-        Caustic: 0.3
+        Heat: 0.4
+        Radiation: 0.4
+        Caustic: 0.4
       flatReductions:
-        Piercing: 8
+        Piercing: 9
   - type: StaminaResistance
-    damageCoefficient: 0.15
+    damageCoefficient: 0.2
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitMurmillo
   - type: ActivatableUI
@@ -714,6 +715,7 @@
   parent: ClothingOuterHardsuitMurmillo
   id: ClothingOuterHardsuitMurmilloDamaged
   name: damaged murmillo hardsuit
+  categories: [ HideSpawnMenu ]
   description: A damaged Murmillo hardsuit. Its pressure seals are no longer functional.
   components:
   - type: Armor
@@ -933,8 +935,8 @@
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitInfiltration
   - type: ClothingSpeedModifier
-    walkModifier: 1
-    sprintModifier: 1
+    walkModifier: 0.9
+    sprintModifier: 0.9
     requireActivated: false
   - type: HeldSpeedModifier
   - type: Tag

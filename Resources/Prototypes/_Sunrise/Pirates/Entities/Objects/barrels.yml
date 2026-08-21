@@ -18,6 +18,8 @@
   id: ChemicalBarrelRum
   suffix: Rum, Red Rum
   components:
+  - type: Sprite
+    color: "#b0890a"
   - type: SolutionContainerManager
     solutions:
       tank:

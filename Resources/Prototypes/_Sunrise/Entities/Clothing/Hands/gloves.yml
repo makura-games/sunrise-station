@@ -181,23 +181,23 @@
 - type: entity
   parent: ClothingHandsBase
   id: ClothingHandsGlovesCombatCQC
-  name: combat gloves
+  name: blood-red combat gloves
   description: These high-grade tactical gloves are fireproof and shock resistant.
   components:
   - type: Sprite
-    sprite: _Sunrise/Clothing/Hands/Gloves/klawsbattle.rsi
+    sprite: _Sunrise/Clothing/Hands/Gloves/combatcqc.rsi
   - type: Clothing
-    sprite: _Sunrise/Clothing/Hands/Gloves/klawsbattle.rsi
+    sprite: _Sunrise/Clothing/Hands/Gloves/combatcqc.rsi
   - type: Insulated
   - type: Fiber
     fiberMaterial: fibers-insulative
   - type: MeleeWeapon
     autoAttack: true
-    attackRate: 1.7
+    attackRate: 2
     damage:
       types:
         Blunt: 6
-        Slash: 4
+        Slash: 1
     bluntStaminaDamageFactor: 4
     soundHit:
       collection: Punch
@@ -258,7 +258,7 @@
     mustBeEquippedToUse: true
 
 - type: entity
-  parent: ClothingHandsGlovesNorthStar
+  parent: [ClothingHandsGlovesColorYellow, ClothingHandsGlovesNorthStar]
   id: CornivoreGloves
   name: gloves of cornivore
   description: We don't know if you're thirsty for blood... but... these gloves definitely are!!! They're saturated with a special toxin.
@@ -269,19 +269,19 @@
     sprite: _Sunrise/Clothing/Hands/Gloves/cornivoregloves.rsi
   - type: MeleeWeapon
     autoAttack: true
-    attackRate: 4
+    attackRate: 3
     damage:
       types:
-        Slash: 8
+        Slash: 6
   - type: InjectOnHit
     limit: 20
     reagents:
       - ReagentId: Hemorrhinol
-        Quantity: 5
+        Quantity: 2
       - ReagentId: Heparin
-        Quantity: 5
+        Quantity: 2
       - ReagentId: Lexorin
-        Quantity: 0.2
+        Quantity: 0.25
   - type: Fiber
     fiberMaterial: fibers-leather
     fiberColor: fibers-blue
@@ -295,7 +295,6 @@
     interfaces:
       enum.MeleeSpeechUiKey.Key:
         type: MeleeSpeechBoundUserInterface
-  - type: Insulated
   - type: StaticPrice
     price: 2500
   - type: Tag

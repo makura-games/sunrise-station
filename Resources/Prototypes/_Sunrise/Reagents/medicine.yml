@@ -179,6 +179,28 @@
             Mangleness: -1
             Poison: -1
 
+- type: entityEffect
+  id: SunriseDarkRedRumOverdose
+  effects:
+  - !type:HealthChange
+    damage:
+      types:
+        Mangleness: 1
+        Poison: 2
+  - !type:ModifyKnockdown
+    time: 1
+    type: Add
+    probability: 0.025
+
+- type: entityEffect
+  id: SunriseDarkRedRumSideEffect
+  effects:
+  - !type:HealthChange
+    damage:
+      types:
+        Poison: 0.25
+        Mangleness: 0.25
+
 - type: reagent
   id: DarkRedRum
   parent: RedRum
@@ -208,48 +230,28 @@
         damage:
           Burn: -2
           Brute: -3
-          Toxin: -2
+          Toxin: -4
       - !type:HealthChange
         damage:
           types:
             Bloodloss: -1
             Asphyxiation: -1
       - !type:ModifyBleed
-        amount: -1.5
+        amount: -2
       - !type:GenericStatusEffect
         key: Adrenaline
         component: IgnoreSlowOnDamage
         time: 9
     Bloodstream:
       effects:
-      - !type:MovementSpeedModifier
-        walkSpeedModifier: 1.5
-        sprintSpeedModifier: 1.5
-      - !type:ModifyStatusEffect
-        effectProto: StatusEffectStimulantsStamina
-        time: 3
-      - !type:ModifyStatusEffect
-        effectProto: StatusEffectStunned
-        time: 3.5
-        type: Remove
-      - !type:ModifyKnockdown
-        time: 3.5
-        type: Remove
-      - !type:ModifyStatusEffect
-        effectProto: StatusEffectForcedSleeping
-        time: 3
-        type: Remove
-      - !type:Jitter
-      - !type:Emote
-        emote: Scream
-        showInChat: true
-        force: true
-        probability: 0.05
-      - !type:Emote
-        emote: Growl
-        showInChat: true
-        force: true
-        probability: 0.05
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: DarkRedRum
+          max: 5
+        damage:
+          types:
+            Mangleness: 1
       - !type:Emote
         emote: Laugh
         showInChat: true
@@ -266,6 +268,38 @@
         - !type:ReagentCondition
           reagent: DarkRedRum
           max: 5
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 1.5
+        sprintSpeedModifier: 1.5
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectStimulantsStamina
+        time: 3
+      - !type:GenericStatusEffect
+        key: Adrenaline
+        component: IgnoreSlowOnDamage
+        time: 9
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectStunned
+        time: 4
+        type: Remove
+      - !type:ModifyKnockdown
+        time: 4
+        type: Remove
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectForcedSleeping
+        time: 4
+        type: Remove
+      - !type:Jitter
+      - !type:Emote
+        emote: Scream
+        showInChat: true
+        force: true
+        probability: 0.05
+      - !type:Emote
+        emote: Growl
+        showInChat: true
+        force: true
+        probability: 0.05
       - !type:PopupMessage
         type: Local
         visualType: Medium
@@ -282,10 +316,10 @@
         conditions:
         - !type:ReagentCondition
           reagent: DarkRedRum
-          min: 10
+          min: 21
         damage:
           types:
-            Mangleness: 1.5
+            Mangleness: 2
       - !type:ModifyStatusEffect
         conditions:
         - !type:ReagentCondition
@@ -304,18 +338,16 @@
       - !type:EvenHealthChange
         damage:
           Burn: -3
-          Brute: -5
+          Brute: -6
       - !type:HealthChange
         damage:
           types:
-            Mangleness: -0.5
-            Poison: -0.5
-      - !type:ModifyBleed
-        amount: -1.5
+            Mangleness: -1
+            Poison: -1
       - !type:EvenHealthChange
         damage:
-          Burn: -0.5
-          Brute: -0.5
+          Burn: -1
+          Brute: -1
       - !type:HealthChange
         damage:
           types:
@@ -338,30 +370,34 @@
           mobstate: Critical
         - !type:ReagentCondition
           reagent: DarkRedRum
-          max: 20
+          max: 10
         damage:
           types:
-            Asphyxiation: -1
-            Poison: -0.5
+            Asphyxiation: -2
+            Poison: -2
+            Mangleness: -2
+      - !type:HealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Critical
+        - !type:ReagentCondition
+          reagent: DarkRedRum
+          min: 15
+        damage:
+          types:
+            Asphyxiation: -25
+            Poison: -25
+            Mangleness: -25
       - !type:EvenHealthChange
         conditions:
         - !type:MobStateCondition
           mobstate: Critical
         - !type:ReagentCondition
           reagent: DarkRedRum
-          max: 20
+          max: 10
         damage:
           Brute: -1
           Burn: -1
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentCondition
-          reagent: DarkRedRum
-          min: 20
-        damage:
-          types:
-            Asphyxiation: 1
-            Poison: 1
       - !type:AdjustReagent
         reagent: HeartbreakerToxin
         amount: -2
@@ -374,11 +410,42 @@
         amount: -1
       - !type:ModifyStatusEffect
         effectProto: StatusEffectStunned
-        time: 0.75
+        time: 1
         type: Remove
       - !type:ModifyKnockdown
-        time: 0.75
+        time: 1
         type: Remove
       - !type:CleanBloodstream
         excluded: DarkRedRum
         cleanseRate: 3
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentCondition
+          reagent: DarkRedRum
+          min: 50
+        reagent: DarkRedRum
+        amount: -1
+      - !type:NestedEffect
+        proto: SunriseDarkRedRumSideEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: DarkRedRum
+          min: 1
+      - !type:NestedEffect
+        proto: SunriseDarkRedRumOverdose
+        conditions:
+        - !type:ReagentCondition
+          reagent: DarkRedRum
+          min: 20
+      - !type:Vomit
+        probability: 0.025
+        conditions:
+        - !type:ReagentCondition
+          reagent: DarkRedRum
+          min: 15
+      - !type:Vomit
+        probability: 0.1
+        conditions:
+        - !type:ReagentCondition
+          reagent: DarkRedRum
+          min: 25

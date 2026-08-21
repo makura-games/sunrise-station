@@ -331,6 +331,9 @@
   id: EnergySword
 
 - type: Tag
+  id: SunriseSyndicateRing
+
+- type: Tag
   id: GorillaUpgradeKit
 
 - type: Tag

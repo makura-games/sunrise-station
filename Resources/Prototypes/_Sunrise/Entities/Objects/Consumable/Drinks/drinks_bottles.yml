@@ -65,7 +65,7 @@
       drink:
         reagents:
         - ReagentId: DarkRedRum
-          Quantity: 60
+          Quantity: 50
   - type: Label
     currentLabel: reagent-name-dark-red-rum
   - type: Sprite

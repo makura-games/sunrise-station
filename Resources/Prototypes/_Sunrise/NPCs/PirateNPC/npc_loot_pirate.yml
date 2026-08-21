@@ -1468,11 +1468,23 @@
       amount: 3
       prob: 0.5
     # Items
-    - id: ClothingOuterHardsuitMurmilloDamaged
-      prob: 0.15
+    - id: ClothingHeadHatGladiator
+      prob: 0.1
       orGroup: MurmilloHardsuitPool
-    - id: ClothingOuterHardsuitMurmillo
-      prob: 0.05
+    - id: ClothingOuterArmorScrap
+      prob: 0.1
+      orGroup: MurmilloHardsuitPool
+    - id: DrinkDarkRedRumBottleFull
+      prob: 0.33
+      orGroup: MurmilloHardsuitPool
+    - id: SunriseClothingShoesBootsMagPirateMurmilloDamaged
+      prob: 0.25
+      orGroup: MurmilloHardsuitPool
+    - id: SunriseClothingShoesBootsMagPirateMurmillo
+      prob: 0.5
+      orGroup: MurmilloHardsuitPool
+    - id: SunriseClothingShoesBootsMagPirateMurmilloActive
+      prob: 0.1
       orGroup: MurmilloHardsuitPool
     - id: PirateMedSpawner03
     # Bonus Loot T2
@@ -2447,9 +2459,6 @@
       orGroup: Grenadier
     - id: BriefcaseWeaponM79Filled
       prob: 0.25
-      orGroup: Grenadier
-    - id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherM79
-      prob: 0.1
       orGroup: Grenadier
     # Items
     - id: GrenadeBlastTimer
@@ -4146,18 +4155,25 @@
       prob: 0.8
     - id: ScrapSteel
       prob: 0.75
-    - id: ClothingOuterArmorPodWars
-      prob: 0.6
+    - id: ClothingHeadHatGladiator
+      prob: 0.1
+      orGroup: MurmilloHardsuitPool
     - id: ClothingOuterArmorScrap
-      prob: 0.5
-    - id: ClothingUniformJumpsuitGladiator
-      prob: 0.5
-    - id: ClothingOuterHardsuitMurmilloDamaged
-      prob: 0.15
+      prob: 0.1
       orGroup: MurmilloHardsuitPool
-    - id: ClothingOuterHardsuitMurmillo
-      prob: 0.05
+    - id: DrinkDarkRedRumBottleFull
+      prob: 0.33
       orGroup: MurmilloHardsuitPool
+    - id: SunriseClothingShoesBootsMagPirateMurmilloDamaged
+      prob: 0.25
+      orGroup: MurmilloHardsuitPool
+    - id: SunriseClothingShoesBootsMagPirateMurmillo
+      prob: 0.5
+      orGroup: MurmilloHardsuitPool
+    - id: SunriseClothingShoesBootsMagPirateMurmilloActive
+      prob: 0.1
+      orGroup: MurmilloHardsuitPool
+    - id: PirateMedSpawner03
     - id: WeaponCrusherBroadAxe
       prob: 0.7
     # Bonus Loot T3

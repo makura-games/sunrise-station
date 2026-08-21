@@ -2,7 +2,7 @@
   id: EnergyBarriers
   name: research-technology-energy_barriers
   icon:
-    sprite: Objects/Tools/EnergyDome/reinhardt.rsi
+    sprite: _Sunrise/Objects/Tools/EnergyDome/reinhardt.rsi
     state: icon
   discipline: Arsenal
   tier: 2
