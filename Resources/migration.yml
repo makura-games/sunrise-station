@@ -1146,6 +1146,7 @@ CratePirateChestSun: null
 SunriseAirlockSyndicateGlassPirateAccessLocked: SunriseAirlockPirateGlassLocked
 # 2026-06-29
 ClothingBackpackMessengerPirateBundleSKM24Scrap: CratePirateAkScrap
+
 # 2026-07-30
 RifleHeavyMagazineArtillery: RifleHeavyMagazineSP
 RifleHeavyMagazineArtilleryLarge: RifleHeavyMagazineFMJ
@@ -1232,4 +1233,14 @@ MagazineBoxHeavyRifleHP: MagazineBoxHeavyRifleSP
 RifleHeavyMagazineHP: RifleHeavyMagazineSP
 MagazineDragunovHP: MagazineDragunovSP
 MagazineBoxRifleMachineHP: MagazineBoxRifleMachineSP
+
+# 2026-08-21
+SprayPaintBlue: null
+SprayPaintRed: null
+SprayPaintGreen: null
+SprayPaintBlack: null
+SprayPaintOrange: null
+SprayPaintPurple: null
+SprayPaintWhite: null
+
 # region Sunrise-End

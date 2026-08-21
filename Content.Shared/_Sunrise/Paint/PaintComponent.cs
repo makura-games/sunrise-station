@@ -10,8 +10,8 @@ namespace Content.Shared._Sunrise.Paint;
 /// <summary>
 /// Entity when used on another entity will paint target entity.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedPaintSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[Access(typeof(SharedPaintSystem), typeof(PaintConfigurationSystem))]
 public sealed partial class PaintComponent : Component
 {
     /// <summary>

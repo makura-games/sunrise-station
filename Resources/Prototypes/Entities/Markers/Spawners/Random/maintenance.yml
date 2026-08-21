@@ -297,10 +297,6 @@
       - id: LidSalami
         weight: 0.10
       # Sunrise-start
-      - id: SprayPaintBlue
-      - id: SprayPaintRed
-      - id: SprayPaintGreen
-      - id: SprayPaintOrange
       - id: DeathPaint
       - id: MechPaintRipleyZairjah
       - id: MechPaintRipleyHauler

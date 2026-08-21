@@ -1,13 +1,6 @@
 - type: vendingMachineInventory
   id: PaintVendInventory
   startingInventory:
-    SprayPaintRed: 5
-    SprayPaintOrange: 5
-    SprayPaintGreen: 5
-    SprayPaintBlue: 5
-    SprayPaintPurple: 5
-    SprayPaintWhite: 5
-  contrabandInventory:
-    SprayPaintBlack: 2
+    SprayPaint: 4
   emaggedInventory:
     MechPaintRipleyReaper: 1
