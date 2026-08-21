@@ -59,6 +59,7 @@
         shader: unshaded
   - type: PointLight
     color: "#adffe6"
+    radius: 8 # Sunrise-Edit
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -127,6 +128,7 @@
         shader: unshaded
   - type: PointLight
     color: "#ffdbad"
+    radius: 8 # Sunrise-Edit
   - type: PressureProtection
     highPressureMultiplier: 0.1
     lowPressureMultiplier: 1000
@@ -445,6 +447,7 @@
         shader: unshaded
   - type: PointLight
     color: "#e6aa5c" # Sunrise-Edit
+    radius: 8 # Sunrise-Edit
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000

@@ -161,3 +161,42 @@
         - id: ExtendedEmergencyNitrogenTankFilled
         - id: JetpackBlackFilled
         - id: BoxHardsuitChameleon
+
+# вед инжинер шкаф со скафом
+- type: entity
+  id: LockerCompactEngineerFilledHardsuit
+  name: leader enginer locker
+  suffix: Filled, Hardsuit
+  parent: LockerEngineer
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - !type:NestedSelector
+          tableId: FillCompactEngineerHardsuit
+        - !type:NestedSelector
+          tableId: RandomHandsGlovesYellowtTable # пранк
+    
+- type: entityTable
+  id: FillCompactEngineerHardsuit
+  table: !type:AllSelector
+    children:
+    - id: ClothingOuterHardsuitEngineeringCompact
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled
+    - id: ClothingShoesBootsMagAtmos
+    - id: ClothingMaskBreath
+
+- type: entityTable
+  id: RandomHandsGlovesYellowtTable
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector
+      weight: 99
+      children:
+      - id: ClothingHandsGlovesColorYellow
+    - !type:GroupSelector
+      weight: 1
+      children:
+      - id: ClothingHandsGlovesConducting

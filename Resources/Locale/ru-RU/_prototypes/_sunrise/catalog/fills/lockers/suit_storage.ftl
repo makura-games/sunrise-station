@@ -16,3 +16,6 @@ ent-SuitStoragePirateCapSun = { ent-SuitStorageBase }
 ent-SuitStorageSyndieChameleon = { ent-SuitStorageBase }
     .suffix = Синдикат, Хамелеон
     .desc = { ent-SuitStorageBase.desc }
+ent-LockerCompactEngineerFilledHardsuit = шкаф ведущего инжинера
+    .suffix = Инженер, Скафандр
+    .desc = { ent-SuitStorageBase.desc }

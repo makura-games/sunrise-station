@@ -108,6 +108,41 @@
     back:
     - ToyFigurineChiefEngineer
 
+- type: loadout
+  id: TrinketsEngineeringWI
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:DepartmentTimeRequirement
+      department: Engineering
+      time: 360000 # 100hr
+  storage:
+    back:
+    - WelderIndustrial
+
+- type: loadout
+  id: TrinketsEngineeringWIA
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:DepartmentTimeRequirement
+      department: Engineering
+      time: 1080000 # 300hr
+  storage:
+    back:
+    - WelderIndustrialAdvanced
+
+- type: loadout
+  id: TrinketsEngineeringWE
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:DepartmentTimeRequirement
+      department: Engineering
+      time: 2160000 # 600 hour
+  storage:
+    back:
+    - WelderExperimental
 
 - type: loadout
   id: TrinketsEngineeringTFAT

@@ -268,6 +268,7 @@
     sprite: _Sunrise/Clothing/Head/Hardsuits/engineering_compact.rsi
   - type: PointLight
     color: cyan
+    radius: 8
   - type: PressureProtection
     highPressureMultiplier: 0.1
     lowPressureMultiplier: 1000
