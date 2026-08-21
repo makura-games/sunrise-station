@@ -54,9 +54,10 @@ public sealed partial class NetTexturesManager
     #endregion
 
     #region Preparation Payloads
-    private sealed class PreparedTexture(Image<Rgba32> image) : IDisposable
+    private sealed class PreparedTexture(Image<Rgba32> image, TextureLoadParameters loadParameters) : IDisposable
     {
         public Image<Rgba32> Image { get; private set; } = image;
+        public readonly TextureLoadParameters? LoadParameters = loadParameters;
 
         public void Dispose()
         {
@@ -113,7 +114,8 @@ public sealed partial class NetTexturesManager
 
             _texture ??= manager._clyde.CreateBlankTexture<Rgba32>(
                 (prepared.Image.Width, prepared.Image.Height),
-                ResourceKey);
+                ResourceKey,
+                prepared.LoadParameters);
 
             var tileWidth = Math.Min(UploadTileSize, prepared.Image.Width - _nextTileX);
             var tileHeight = Math.Min(UploadTileSize, prepared.Image.Height - _nextTileY);

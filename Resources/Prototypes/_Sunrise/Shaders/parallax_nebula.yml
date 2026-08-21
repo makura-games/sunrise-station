@@ -1,0 +1,131 @@
+- type: shader
+  id: SunriseParallaxNebulaMagenta
+  kind: source
+  path: "/Textures/_Sunrise/Shaders/parallax_nebula.swsl"
+  params:
+    center: 0.27, 0.72
+    size: 0.42, 0.24
+    maskScale: 1.05, 0.9
+    maskOffset: -0.02, 0.04
+    rotation: -0.28
+    detailScale: 2.7
+    detailOffset: 0.13, 0.47
+    maskThreshold: 0.34
+    maskExponent: 1.35
+    edgeSoftness: 0.3
+    warpStrength: 0.065
+    detailStrength: 0.38
+    filamentStrength: 0.26
+    opacityScale: 0.24
+    nebulaColor: "#FF267FFF"
+    secondaryColor: "#50105FFF"
+
+- type: shader
+  id: SunriseParallaxNebulaCyan
+  kind: source
+  path: "/Textures/_Sunrise/Shaders/parallax_nebula.swsl"
+  params:
+    center: 0.7, 0.3
+    size: 0.27, 0.16
+    maskScale: 0.92, 1.08
+    maskOffset: 0.04, -0.03
+    rotation: 0.37
+    detailScale: 3.15
+    detailOffset: 0.61, 0.18
+    maskThreshold: 0.37
+    maskExponent: 1.2
+    edgeSoftness: 0.26
+    warpStrength: 0.052
+    detailStrength: 0.34
+    filamentStrength: 0.2
+    opacityScale: 0.28
+    nebulaColor: "#00FFADFF"
+    secondaryColor: "#1648A8FF"
+
+- type: shader
+  id: SunriseParallaxNebulaViolet
+  kind: source
+  path: "/Textures/_Sunrise/Shaders/parallax_nebula.swsl"
+  params:
+    center: 0.72, 0.73
+    size: 0.36, 0.2
+    maskScale: 1.12, 0.88
+    maskOffset: -0.05, -0.02
+    rotation: -0.43
+    detailScale: 2.35
+    detailOffset: 0.32, 0.76
+    maskThreshold: 0.29
+    maskExponent: 1.45
+    edgeSoftness: 0.3
+    warpStrength: 0.074
+    detailStrength: 0.42
+    filamentStrength: 0.32
+    opacityScale: 0.22
+    nebulaColor: "#4C00FFFF"
+    secondaryColor: "#A31568FF"
+
+- type: shader
+  id: SunriseParallaxNebulaAzure
+  kind: source
+  path: "/Textures/_Sunrise/Shaders/parallax_nebula.swsl"
+  params:
+    center: 0.14, 0.24
+    size: 0.29, 0.12
+    maskScale: 1.18, 0.82
+    maskOffset: 0.03, -0.06
+    rotation: 0.16
+    detailScale: 3.45
+    detailOffset: 0.82, 0.29
+    maskThreshold: 0.4
+    maskExponent: 1.3
+    edgeSoftness: 0.25
+    warpStrength: 0.048
+    detailStrength: 0.36
+    filamentStrength: 0.18
+    opacityScale: 0.2
+    nebulaColor: "#367BFFFF"
+    secondaryColor: "#00BFD0FF"
+
+- type: shader
+  id: SunriseParallaxNebulaRose
+  kind: source
+  path: "/Textures/_Sunrise/Shaders/parallax_nebula.swsl"
+  params:
+    center: 0.49, 0.48
+    size: 0.22, 0.14
+    maskScale: 0.86, 1.2
+    maskOffset: -0.07, 0.03
+    rotation: -0.62
+    detailScale: 2.55
+    detailOffset: 0.24, 0.91
+    maskThreshold: 0.36
+    maskExponent: 1.4
+    edgeSoftness: 0.28
+    warpStrength: 0.07
+    detailStrength: 0.44
+    filamentStrength: 0.28
+    opacityScale: 0.19
+    nebulaColor: "#C51F68FF"
+    secondaryColor: "#48116EFF"
+
+- type: shader
+  id: SunriseParallaxNebulaTeal
+  kind: source
+  path: "/Textures/_Sunrise/Shaders/parallax_nebula.swsl"
+  params:
+    center: 0.88, 0.49
+    size: 0.17, 0.23
+    maskScale: 1.08, 0.94
+    maskOffset: 0.05, 0.06
+    rotation: 0.51
+    detailScale: 3.7
+    detailOffset: 0.73, 0.55
+    maskThreshold: 0.43
+    maskExponent: 1.25
+    edgeSoftness: 0.24
+    warpStrength: 0.045
+    detailStrength: 0.32
+    filamentStrength: 0.34
+    opacityScale: 0.18
+    nebulaColor: "#00C8A0FF"
+    secondaryColor: "#174A82FF"

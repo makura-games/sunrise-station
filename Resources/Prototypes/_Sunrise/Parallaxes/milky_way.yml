@@ -1,0 +1,91 @@
+- type: parallax
+  id: SunriseMilkyWayEarth
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/NetTextures/Parallaxes/MilkyWay/milky_way_earth.png"
+      slowness: 0.9993
+      tiled: false
+      scale: "0.5, 0.5"
+      rotation: 45
+      shader: SunriseParallaxMilkyWayEarth
+    - texture:
+        !type:ShaderParallaxTextureSource
+      slowness: 0.996625
+      shader: SunriseParallaxStarsBright
+    - texture:
+        !type:ShaderParallaxTextureSource
+      slowness: 0.989375
+      shader: SunriseParallaxStarsDim
+    - texture:
+        !type:ShaderParallaxTextureSource
+      slowness: 0.987265625
+      shader: SunriseParallaxStarsBrightFar
+    - texture:
+        !type:ShaderParallaxTextureSource
+      slowness: 0.984352
+      shader: SunriseParallaxStarsDimFar
+  layersLQ:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/NetTextures/Parallaxes/MilkyWay/milky_way_earth.png"
+      slowness: 0.9993
+      tiled: false
+      scale: "0.9, 0.9"
+      rotation: 45
+      shader: SunriseParallaxMilkyWayEarth
+    - texture:
+        !type:ShaderParallaxTextureSource
+      slowness: 0.95
+      shader: SunriseParallaxStarsDim
+    - texture:
+        !type:ShaderParallaxTextureSource
+      slowness: 0.875
+      shader: SunriseParallaxStarsLowQuality
+  layersLQUseHQ: false
+
+- type: parallax
+  id: SunriseMilkyWayDisk
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/NetTextures/Parallaxes/MilkyWay/milky_way_disk.png"
+      slowness: 0.9978
+      tiled: false
+      scale: "0.32, 0.32"
+      rotation: 90
+      shader: SunriseParallaxMilkyWayDisk
+    - texture:
+        !type:ShaderParallaxTextureSource
+      slowness: 0.996625
+      shader: SunriseParallaxStarsBright
+    - texture:
+        !type:ShaderParallaxTextureSource
+      slowness: 0.989375
+      shader: SunriseParallaxStarsDim
+    - texture:
+        !type:ShaderParallaxTextureSource
+      slowness: 0.987265625
+      shader: SunriseParallaxStarsBrightFar
+    - texture:
+        !type:ShaderParallaxTextureSource
+      slowness: 0.984352
+      shader: SunriseParallaxStarsDimFar
+  layersLQ:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/NetTextures/Parallaxes/MilkyWay/milky_way_disk.png"
+      slowness: 0.9978
+      tiled: false
+      scale: "0.52, 0.52"
+      rotation: 45
+      shader: SunriseParallaxMilkyWayDisk
+    - texture:
+        !type:ShaderParallaxTextureSource
+      slowness: 0.95
+      shader: SunriseParallaxStarsDim
+    - texture:
+        !type:ShaderParallaxTextureSource
+      slowness: 0.875
+      shader: SunriseParallaxStarsLowQuality
+  layersLQUseHQ: false

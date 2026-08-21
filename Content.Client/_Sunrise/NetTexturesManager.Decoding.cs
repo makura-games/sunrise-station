@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using Robust.Shared.Graphics;
 using Robust.Shared.Utility;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
+using YamlDotNet.RepresentationModel;
 
 namespace Content.Client._Sunrise;
 
@@ -107,6 +109,7 @@ public sealed partial class NetTexturesManager
         _pendingResources.Remove(resourceKey);
         _failedResources.Add(resourceKey);
         _sawmill.Warning($"Failed to prepare NetTexture {resourceKey}: {reason}");
+        ResourceLoadFailed?.Invoke(resourceKey);
     }
     #endregion
 
@@ -185,9 +188,24 @@ public sealed partial class NetTexturesManager
         cancellationToken.ThrowIfCancellationRequested();
 
         var uploadedPath = GetUploadedPath(resourcePath.ToString());
+        var loadParameters = TextureLoadParameters.Default;
+        var metadataPath = new ResPath($"{uploadedPath.CanonPath}.yml");
+        if (_resourceManager.ContentFileExists(metadataPath))
+        {
+            using var metadataStream = _resourceManager.ContentFileRead(metadataPath);
+            using var reader = new StreamReader(metadataStream, EncodingHelpers.UTF8);
+            var yaml = new YamlStream();
+            yaml.Load(reader);
+
+            if (yaml.Documents.Count != 1 || yaml.Documents[0].RootNode is not YamlMappingNode root)
+                throw new InvalidDataException($"Texture metadata for {resourcePath} must contain one mapping");
+
+            loadParameters = TextureLoadParameters.FromYaml(root);
+        }
+
         using var stream = _resourceManager.ContentFileRead(uploadedPath);
         var image = Image.Load<Rgba32>(stream);
-        return new PreparedTexture(image);
+        return new PreparedTexture(image, loadParameters);
     }
 
     /// <summary>

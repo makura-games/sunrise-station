@@ -76,6 +76,19 @@ public sealed partial class NetTexturesManager
     }
 
     /// <summary>
+    /// Checks whether preparation of a requested resource has failed in the current session.
+    /// </summary>
+    /// <param name="resourcePath">Rooted or relative path passed to <see cref="EnsureResource"/>.</param>
+    /// <returns><see langword="true"/> when the resource is in the failed set.</returns>
+    public bool IsResourceLoadFailed(string resourcePath)
+    {
+        if (string.IsNullOrWhiteSpace(resourcePath))
+            return true;
+
+        return _failedResources.Contains(ToResPath(resourcePath).ToString());
+    }
+
+    /// <summary>
     /// Возвращает готовое к использованию состояние RSI-анимации, загруженное через pipeline NetTextures.
     /// </summary>
     /// <param name="resourcePath">Путь RSI-ресурса, ранее запрошенный через <see cref="EnsureResource"/>.</param>

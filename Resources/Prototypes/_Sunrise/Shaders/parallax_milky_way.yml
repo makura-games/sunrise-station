@@ -1,0 +1,19 @@
+- type: shader
+  id: SunriseParallaxMilkyWayEarth
+  kind: source
+  path: "/Textures/_Sunrise/Shaders/parallax_milky_way.swsl"
+  params:
+    brightnessScale: 0.46
+    opacityScale: 0.32
+    saturationScale: 0.5
+    edgeFadeWidth: 0.3
+
+- type: shader
+  id: SunriseParallaxMilkyWayDisk
+  kind: source
+  path: "/Textures/_Sunrise/Shaders/parallax_milky_way.swsl"
+  params:
+    brightnessScale: 0.2
+    opacityScale: 0.46
+    saturationScale: 0.3
+    edgeFadeWidth: 0.0

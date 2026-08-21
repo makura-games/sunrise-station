@@ -8,7 +8,8 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client.Parallax.Managers;
 
-public sealed class ParallaxManager : IParallaxManager
+// Sunrise-Edit — partial-расширение подготавливает и освобождает shader-ресурсы слоёв.
+public sealed partial class ParallaxManager : IParallaxManager
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
@@ -47,21 +48,16 @@ public sealed class ParallaxManager : IParallaxManager
 
         _sawmill.Debug($"Unloading parallax {name}");
 
-        if (_parallaxesLQ.Remove(name, out var layers))
-        {
-            foreach (var layer in layers)
-            {
-                layer.Config.Texture.Unload(_deps);
-            }
-        }
+        var removedLq = _parallaxesLQ.Remove(name, out var layersLq);
+        var removedHq = _parallaxesHQ.Remove(name, out var layersHq);
 
-        if (_parallaxesHQ.Remove(name, out layers))
-        {
-            foreach (var layer in layers)
-            {
-                layer.Config.Texture.Unload(_deps);
-            }
-        }
+        // Sunrise added start - общий HQ/LQ-массив владеет ресурсами только один раз.
+        if (removedLq)
+            UnloadPreparedLayers(layersLq);
+
+        if (removedHq && !ReferenceEquals(layersLq, layersHq))
+            UnloadPreparedLayers(layersHq);
+        // Sunrise added end
     }
 
     public async void LoadDefaultParallax()
@@ -119,15 +115,18 @@ public sealed class ParallaxManager : IParallaxManager
         catch (OperationCanceledException)
         {
             _sawmill.Verbose($"Loading parallax {name} cancelled");
-
-            foreach (var loadedLayer in loadedLayers)
-            {
-                loadedLayer.Config.Texture.Unload(_deps);
-            }
+            UnloadPreparedLayers(loadedLayers); // Sunrise-Edit — освобождаем уже подготовленные ресурсы слоя.
         }
         catch (Exception ex)
         {
-            _sawmill.Error($"Failed to loaded parallax {name}: {ex}");
+            _sawmill.Error($"Failed to load parallax {name}: {ex}");
+            UnloadPreparedLayers(loadedLayers); // Sunrise-Edit — ошибка не оставляет загруженные ресурсы и shader instances.
+        }
+        finally
+        {
+            // Sunrise-Edit — после ошибки загрузку этого параллакса можно повторить.
+            _loadingParallaxes.Remove(name);
+            token.Dispose();
         }
     }
 
@@ -151,15 +150,33 @@ public sealed class ParallaxManager : IParallaxManager
         List<ParallaxLayerPrepared> loadedLayers,
         CancellationToken cancel = default)
     {
-        var prepared = new ParallaxLayerPrepared()
+        // Sunrise added start - обычные звёзды карт заменяются GPU-слоем без изменения upstream-прототипов.
+        var textureSource = ResolveLayerTextureSource(config, out var shaderId);
+        var shader = CreateLayerShader(textureSource, shaderId, out var ownsShader);
+        try
         {
-            Texture = await config.Texture.GenerateTexture(cancel),
-            Config = config
-        };
+            var texture = await textureSource.GenerateTexture(cancel);
+            var prepared = new ParallaxLayerPrepared
+            {
+                Texture = texture,
+                TextureSource = textureSource,
+                Config = config,
+                TextureSize = GetLayerTextureSize(textureSource, texture),
+                Shader = shader,
+                OwnsShader = ownsShader,
+            };
 
-        loadedLayers.Add(prepared);
+            loadedLayers.Add(prepared);
+            return prepared;
+        }
+        catch
+        {
+            if (ownsShader)
+                shader?.Dispose();
 
-        return prepared;
+            throw;
+        }
+        // Sunrise added end
     }
 }
 

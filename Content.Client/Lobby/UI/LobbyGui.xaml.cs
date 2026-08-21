@@ -7,6 +7,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System.Numerics;
+using Content.Client.Parallax; // Sunrise-Edit — общая отрисовка повёрнутых слоёв параллакса.
 using Content.Client.Parallax.Managers;
 using Content.Client.Resources;
 using Content.Client.Stylesheets;
@@ -328,11 +329,17 @@ namespace Content.Client.Lobby.UI
             foreach (var layer in _parallaxManager.GetParallaxLayers(LobbyParallax))
             {
                 var tex = layer.Texture;
+                var rotation = layer.Config.Rotation; // Sunrise-Edit — вращаем геометрию слоя без UV-обрезки.
                 var texSize = new Vector2i(
-                    (tex.Size.X * (int)Size.X * 1) / 1920,
-                    (tex.Size.Y * (int)Size.X * 1) / 1920
+                    Math.Max(1, (int)(layer.TextureSize.X * Size.X * layer.Config.Scale.X / 1920)),
+                    Math.Max(1, (int)(layer.TextureSize.Y * Size.X * layer.Config.Scale.Y / 1920))
                 );
                 var ourSize = PixelSize;
+
+                // Sunrise added start - лобби использует тот же shader-контракт и безопасное восстановление state.
+                ParallaxDrawingHelpers.UpdateShaderParameters(layer, new Vector2(texSize.X, texSize.Y));
+                using var shaderScope = ParallaxDrawingHelpers.PushShader(handle, layer.Shader);
+                // Sunrise added end
 
                 var currentTime = (float) _timing.RealTime.TotalSeconds;
                 var offset = Offset + new Vector2(currentTime * 100f, currentTime * 0f);
@@ -353,14 +360,22 @@ namespace Content.Client.Lobby.UI
                     {
                         for (var y = -scaledOffset.Y; y < ourSize.Y; y += texSize.Y)
                         {
-                            handle.DrawTextureRect(tex, UIBox2.FromDimensions(new Vector2(x, y), texSize));
+                            ParallaxDrawingHelpers.DrawTextureRect(
+                                handle,
+                                tex,
+                                UIBox2.FromDimensions(new Vector2(x, y), texSize),
+                                rotation);
                         }
                     }
                 }
                 else
                 {
                     var origin = ((ourSize - texSize) / 2) + layer.Config.ControlHomePosition;
-                    handle.DrawTextureRect(tex, UIBox2.FromDimensions(origin, texSize));
+                    ParallaxDrawingHelpers.DrawTextureRect(
+                        handle,
+                        tex,
+                        UIBox2.FromDimensions(origin, texSize),
+                        rotation);
                 }
             }
         }

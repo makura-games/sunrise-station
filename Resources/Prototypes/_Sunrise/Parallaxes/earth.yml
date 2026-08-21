@@ -7,25 +7,21 @@
       slowness: 0.998046875
       scale: "1, 1"
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "hq_wizard_stars"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.996625
+      shader: SunriseParallaxStarsBright
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "hq_wizard_stars_dim"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.989375
+      shader: SunriseParallaxStarsDim
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "hq_wizard_stars_faster"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars-2.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.987265625
+      shader: SunriseParallaxStarsBrightFar
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "hq_wizard_stars_dim_faster"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim-2.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.984352
+      shader: SunriseParallaxStarsDimFar
     - texture:
         !type:ImageParallaxTextureSource
         path: "/NetTextures/Parallaxes/planet3.png"
@@ -34,8 +30,7 @@
       tiled: false
   layersLQ:
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: ""
-        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.875
+      shader: SunriseParallaxStarsLowQuality
   layersLQUseHQ: false

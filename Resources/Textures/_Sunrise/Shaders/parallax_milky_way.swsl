@@ -1,0 +1,24 @@
+// Регулирует яркость и прозрачность изображения Млечного Пути в параллаксе.
+light_mode unshaded;
+
+uniform mediump float brightnessScale;
+uniform mediump float opacityScale;
+uniform mediump float saturationScale;
+uniform mediump float edgeFadeWidth;
+
+void fragment()
+{
+    lowp vec4 galaxy = zTexture(UV);
+    mediump float luminance = dot(galaxy.rgb, vec3(0.2126, 0.7152, 0.0722));
+    lowp vec3 desaturatedColor = mix(vec3(luminance), galaxy.rgb, saturationScale);
+
+    mediump float edgeOpacity = 1.0;
+    if (edgeFadeWidth > 0.0)
+    {
+        highp vec2 distanceToEdge = min(UV, vec2(1.0) - UV);
+        mediump float nearestEdge = min(distanceToEdge.x, distanceToEdge.y);
+        edgeOpacity = smoothstep(0.0, edgeFadeWidth, nearestEdge);
+    }
+
+    COLOR = vec4(desaturatedColor * brightnessScale, galaxy.a * opacityScale * edgeOpacity);
+}

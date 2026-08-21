@@ -367,17 +367,27 @@ public sealed class NetTexturesManager
     {
         var filesToSend = new List<TransferResourceEntry>();
         var relativeUploadPath = resourcePath.ToRelativePath();
-        var files = _resourceManager.ContentFindFiles(resourcePath).ToList();
-
-        if (files.Count == 0)
+        if (_resourceManager.ContentFileExists(resourcePath))
         {
-            if (!_resourceManager.ContentFileExists(resourcePath))
+            // Sunrise added start - одиночная текстура передаёт SS14 sidecar с параметрами фильтрации.
+            var metadataPath = new ResPath($"{resourcePath.CanonPath}.yml");
+            if (_resourceManager.ContentFileExists(metadataPath))
+            {
+                var relativeMetadataPath = new ResPath($"{relativeUploadPath.CanonPath}.yml");
+                TryAddContentFile(metadataPath, relativeMetadataPath, filesToSend);
+            }
+            // Sunrise added end
+
+            // Основной файл идёт после metadata, чтобы fallback-клиент не начал подготовку раньше времени.
+            if (!TryAddContentFile(resourcePath, relativeUploadPath, filesToSend))
                 return null;
 
-            return TryAddContentFile(resourcePath, relativeUploadPath, filesToSend)
-                ? new StaticTransferBundle(filesToSend.ToArray())
-                : null;
+            return new StaticTransferBundle(filesToSend.ToArray());
         }
+
+        var files = _resourceManager.ContentFindFiles(resourcePath).ToList();
+        if (files.Count == 0)
+            return null;
 
         foreach (var filePath in files)
         {

@@ -1,0 +1,47 @@
+- type: shader
+  id: SunriseParallaxStarsBright
+  kind: source
+  path: "/Textures/_Sunrise/Shaders/parallax_stars.swsl"
+  params:
+    starGridSize: 480, 270
+    uvPixelSpan: 0.0005208333, 0.0009259259
+    seed: 3472.0
+    cutoffThreshold: 0.998
+    minRadius: 0.8
+    maxRadius: 1
+    brightnessScale: 1.05
+    opacityScale: 1.0
+    twinkleSpeed: 3.0
+    twinkleAmount: 0.6
+
+- type: shader
+  id: SunriseParallaxStarsBrightFar
+  kind: source
+  path: "/Textures/_Sunrise/Shaders/parallax_stars.swsl"
+  params:
+    starGridSize: 480, 270
+    uvPixelSpan: 0.0005208333, 0.0009259259
+    seed: 4810.0
+    cutoffThreshold: 0.9941
+    minRadius: 0.345
+    maxRadius: 0.72
+    brightnessScale: 0.88
+    opacityScale: 0.82
+    twinkleSpeed: 3.0
+    twinkleAmount: 0.6
+
+- type: shader
+  id: SunriseParallaxStarsLowQuality
+  kind: source
+  path: "/Textures/_Sunrise/Shaders/parallax_stars.swsl"
+  params:
+    starGridSize: 640, 360
+    uvPixelSpan: 0.0005208333, 0.0009259259
+    seed: 7832.0
+    cutoffThreshold: 0.987
+    minRadius: 0.34
+    maxRadius: 0.72
+    brightnessScale: 0.82
+    opacityScale: 0.72
+    twinkleSpeed: 3.0
+    twinkleAmount: 0.55

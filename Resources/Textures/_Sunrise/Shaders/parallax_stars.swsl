@@ -1,0 +1,164 @@
+// Редкие цветные звёзды на основе StarPrimitiveShader из Wrath of the Gods.
+light_mode unshaded;
+
+uniform highp vec2 starGridSize;
+uniform highp vec2 uvPixelSpan;
+uniform highp float seed;
+uniform mediump float cutoffThreshold;
+uniform mediump float minRadius;
+uniform mediump float maxRadius;
+uniform mediump float brightnessScale;
+uniform mediump float opacityScale;
+uniform mediump float twinkleSpeed;
+uniform mediump float twinkleAmount;
+
+highp float starHash(highp vec2 value)
+{
+    // Sin-хеш референса образует полосы при ограниченной точности SWSL.
+    highp vec2 cell = mod(floor(value), vec2(4096.0));
+    highp vec3 hashValue = fract(
+        vec3(cell.x, cell.y, cell.x) * vec3(0.1031, 0.1030, 0.0973)
+    );
+    hashValue += dot(hashValue, hashValue.yzx + vec3(33.33));
+    return fract((hashValue.x + hashValue.y) * hashValue.z);
+}
+
+mediump vec3 sampleStarPalette(highp float selector)
+{
+    // Палитра: DarkOrange -> Orange -> OrangeRed -> LightSkyBlue -> White.
+    mediump float palettePosition = pow(selector, 2.0) * 4.0;
+    mediump vec3 paletteColor = vec3(1.0);
+
+    if (palettePosition < 1.0)
+    {
+        paletteColor = mix(
+            vec3(1.0, 0.549, 0.0),
+            vec3(1.0, 0.647, 0.0),
+            palettePosition
+        );
+    }
+    else if (palettePosition < 2.0)
+    {
+        paletteColor = mix(
+            vec3(1.0, 0.647, 0.0),
+            vec3(1.0, 0.271, 0.0),
+            palettePosition - 1.0
+        );
+    }
+    else if (palettePosition < 3.0)
+    {
+        paletteColor = mix(
+            vec3(1.0, 0.271, 0.0),
+            vec3(0.529, 0.808, 0.98),
+            palettePosition - 2.0
+        );
+    }
+    else
+    {
+        paletteColor = mix(
+            vec3(0.529, 0.808, 0.98),
+            vec3(1.0),
+            palettePosition - 3.0
+        );
+    }
+
+    return mix(paletteColor, vec3(1.0), 0.45);
+}
+
+mediump vec4 renderBloomStar(
+    highp vec2 starCoordinate,
+    highp vec2 starCell,
+    highp vec2 gridPixelSpan)
+{
+    highp vec2 wrappedCell = mod(starCell, starGridSize);
+    highp vec2 seededCell = wrappedCell + vec2(seed, seed * 0.417);
+    if (starHash(seededCell) < cutoffThreshold)
+        return vec4(0.0);
+
+    highp vec2 offsetRandom = vec2(
+        starHash(seededCell + vec2(37.0, 17.0)),
+        starHash(seededCell + vec2(11.0, 83.0))
+    );
+    highp vec2 starCenter = starCell + vec2(0.03) + offsetRandom * 0.94;
+    highp vec2 pixelOffset = (starCoordinate - starCenter) / gridPixelSpan;
+    highp float distanceToCenter = length(pixelOffset);
+
+    highp float sizeRandom = starHash(seededCell + vec2(53.0, 47.0));
+    mediump float radiusInterpolant = pow(sizeRandom, 11.0);
+    mediump float radiusCell = mix(minRadius, maxRadius, radiusInterpolant);
+    mediump float referenceCellSize = 1920.0 / starGridSize.x;
+    mediump float radius = radiusCell * referenceCellSize;
+    mediump float normalizedDistance = distanceToCenter / radius;
+    if (normalizedDistance >= 1.25)
+        return vec4(0.0);
+
+    mediump float edgeWidth = 0.28;
+    mediump float coverage = 1.0 - smoothstep(
+        radius - edgeWidth,
+        radius + edgeWidth,
+        distanceToCenter
+    );
+    mediump float bloomProfile = pow(
+        clamp(1.0 - normalizedDistance * 0.82, 0.0, 1.0),
+        2.0
+    ) * coverage;
+
+    mediump float textureDistance = normalizedDistance * 0.5;
+    mediump float twinkle = 1.0 + cos(
+        textureDistance * 5.25 + TIME * twinkleSpeed
+    ) * twinkleAmount;
+    mediump float breathingDistance = normalizedDistance + abs(twinkle - 1.0) * 0.1;
+    mediump float coreEdge = max(0.12 / radius, 0.015);
+    mediump float core = 1.0 - smoothstep(
+        0.06 - coreEdge,
+        0.48 + coreEdge,
+        breathingDistance
+    );
+
+    mediump float radiusBrightness = pow(radiusCell / maxRadius, 1.5);
+    highp float colorSelector = starHash(seededCell + vec2(97.0, 31.0));
+    mediump vec3 paletteColor = sampleStarPalette(colorSelector);
+    mediump vec3 texturedColor = paletteColor * bloomProfile * radiusBrightness;
+    mediump vec3 coloredBloom = texturedColor * texturedColor * texturedColor * 3.0;
+    mediump vec3 brightColor = clamp(
+        (coloredBloom + vec3(core)) * twinkle * brightnessScale,
+        vec3(0.0),
+        vec3(1.0)
+    );
+    mediump float opacity = clamp(
+        (core + bloomProfile * radiusBrightness * 0.62) * twinkle * opacityScale,
+        0.0,
+        1.0
+    );
+
+    if (opacity <= 0.001)
+        return vec4(0.0);
+
+    mediump vec3 visibleColor = mix(paletteColor, brightColor, max(core, 0.28));
+    return vec4(visibleColor, opacity);
+}
+
+void fragment()
+{
+    highp vec2 safePixelSpan = max(uvPixelSpan, vec2(1.0 / 65536.0));
+    highp vec2 gridPixelSpan = max(safePixelSpan * starGridSize, vec2(1.0 / 65536.0));
+    highp vec2 starCoordinate = UV * starGridSize;
+    highp vec2 starCell = floor(starCoordinate);
+
+    mediump vec4 result = vec4(0.0);
+    for (lowp int y = -1; y <= 1; y++)
+    {
+        for (lowp int x = -1; x <= 1; x++)
+        {
+            mediump vec4 candidate = renderBloomStar(
+                starCoordinate,
+                starCell + vec2(float(x), float(y)),
+                gridPixelSpan
+            );
+            if (candidate.a > result.a)
+                result = candidate;
+        }
+    }
+
+    COLOR = result;
+}

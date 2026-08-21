@@ -16,7 +16,7 @@ public sealed class ParallaxOverlay : Overlay
 {
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    // [Dependency] private readonly IPrototypeManager _prototypeManager = default!; // Sunrise-edit
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
     [Dependency] private readonly IParallaxManager _manager = default!;
     private readonly SharedMapSystem _mapSystem;
@@ -56,18 +56,22 @@ public sealed class ParallaxOverlay : Overlay
 
         foreach (var layer in layers)
         {
-            ShaderInstance? shader;
-
-            if (!string.IsNullOrEmpty(layer.Config.Shader))
-                shader = _prototypeManager.Index<ShaderPrototype>(layer.Config.Shader).Instance();
-            else
-                shader = null;
-
-            worldHandle.UseShader(shader);
             var tex = layer.Texture;
+            var rotation = layer.Config.Rotation; // Sunrise-Edit — вращаем геометрию слоя без UV-обрезки.
 
             // Size of the texture in world units.
-            var size = (tex.Size / (float) EyeManager.PixelsPerMeter) * layer.Config.Scale;
+            // Sunrise-Edit — процедурный слой использует логический размер вместо backing texture 1x1.
+            var size = (layer.TextureSize / EyeManager.PixelsPerMeter) * layer.Config.Scale;
+
+            // Sunrise added start - размер процедурной звезды остаётся стабильным при изменении camera zoom.
+            var eyeScale = args.Viewport.Eye?.Scale ?? Vector2.One;
+            var renderedTextureSize = layer.TextureSize
+                * layer.Config.Scale
+                * args.Viewport.RenderScale
+                * eyeScale;
+            ParallaxDrawingHelpers.UpdateShaderParameters(layer, renderedTextureSize);
+            using var shaderScope = ParallaxDrawingHelpers.PushShader(worldHandle, layer.Shader);
+            // Sunrise added end
 
             // The "home" position is the effective origin of this layer.
             // Parallax shifting is relative to the home, and shifts away from the home and towards the Eye centre.
@@ -104,17 +108,23 @@ public sealed class ParallaxOverlay : Overlay
                 {
                     for (var y = flooredBL.Y; y < args.WorldAABB.Top; y += size.Y)
                     {
-                        worldHandle.DrawTextureRect(tex, Box2.FromDimensions(new Vector2(x, y), size));
+                        ParallaxDrawingHelpers.DrawTextureRect(
+                            worldHandle,
+                            tex,
+                            Box2.FromDimensions(new Vector2(x, y), size),
+                            rotation);
                     }
                 }
             }
             else
             {
-                worldHandle.DrawTextureRect(tex, Box2.FromDimensions(originBL, size));
+                ParallaxDrawingHelpers.DrawTextureRect(
+                    worldHandle,
+                    tex,
+                    Box2.FromDimensions(originBL, size),
+                    rotation);
             }
         }
-
-        worldHandle.UseShader(null);
     }
 }
 
