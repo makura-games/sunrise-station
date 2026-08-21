@@ -217,3 +217,171 @@
         - Ingot
   - type: OreSiloClient
   - type: Godmode
+
+# Варианты автолата и протолата с настраиваемыми доступами для маппинга.
+- type: entity
+  id: BaseSunriseFabricatorAccessNone
+  abstract: true
+  components:
+  - type: AccessReader
+
+- type: entity
+  id: BaseSunriseFabricatorAccessCommand
+  abstract: true
+  components:
+  - type: AccessReader
+    access: [["Command"]]
+
+- type: entity
+  id: BaseSunriseFabricatorAccessCargo
+  abstract: true
+  components:
+  - type: AccessReader
+    access: [["Cargo"]]
+
+- type: entity
+  id: BaseSunriseFabricatorAccessEngineering
+  abstract: true
+  components:
+  - type: AccessReader
+    access: [["Engineering"]]
+
+- type: entity
+  id: BaseSunriseFabricatorAccessMedical
+  abstract: true
+  components:
+  - type: AccessReader
+    access: [["Medical"]]
+
+- type: entity
+  id: BaseSunriseFabricatorAccessResearch
+  abstract: true
+  components:
+  - type: AccessReader
+    access: [["Research"]]
+
+- type: entity
+  id: BaseSunriseFabricatorAccessSecurity
+  abstract: true
+  components:
+  - type: AccessReader
+    access: [["Security"]]
+
+- type: entity
+  id: BaseSunriseFabricatorAccessService
+  abstract: true
+  components:
+  - type: AccessReader
+    access: [["Service"]]
+
+- type: entity
+  id: SunriseAutolathe
+  parent: [Autolathe, BaseSunriseFabricatorAccessNone]
+  name: autolathe
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAutolatheCommand
+  parent: [Autolathe, BaseSunriseFabricatorAccessCommand]
+  name: autolathe
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAutolatheCargo
+  parent: [Autolathe, BaseSunriseFabricatorAccessCargo]
+  name: autolathe
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAutolatheEngineering
+  parent: [Autolathe, BaseSunriseFabricatorAccessEngineering]
+  name: autolathe
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAutolatheMedical
+  parent: [Autolathe, BaseSunriseFabricatorAccessMedical]
+  name: autolathe
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAutolatheResearch
+  parent: [Autolathe, BaseSunriseFabricatorAccessResearch]
+  name: autolathe
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAutolatheSecurity
+  parent: [Autolathe, BaseSunriseFabricatorAccessSecurity]
+  name: autolathe
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAutolatheService
+  parent: [Autolathe, BaseSunriseFabricatorAccessService]
+  name: autolathe
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseProtolathe
+  parent: [Protolathe, BaseSunriseFabricatorAccessNone]
+  name: protolathe
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseProtolatheCommand
+  parent: [Protolathe, BaseSunriseFabricatorAccessCommand]
+  name: protolathe
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseProtolatheCargo
+  parent: [Protolathe, BaseSunriseFabricatorAccessCargo]
+  name: protolathe
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseProtolatheEngineering
+  parent: [Protolathe, BaseSunriseFabricatorAccessEngineering]
+  name: protolathe
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseProtolatheMedical
+  parent: [Protolathe, BaseSunriseFabricatorAccessMedical]
+  name: protolathe
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseProtolatheResearch
+  parent: [Protolathe, BaseSunriseFabricatorAccessResearch]
+  name: protolathe
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseProtolatheSecurity
+  parent: [Protolathe, BaseSunriseFabricatorAccessSecurity]
+  name: protolathe
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseProtolatheService
+  parent: [Protolathe, BaseSunriseFabricatorAccessService]
+  name: protolathe
+  suffix: Service Access
+  categories: [ForkFiltered]
