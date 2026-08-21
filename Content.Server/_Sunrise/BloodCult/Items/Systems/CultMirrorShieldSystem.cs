@@ -22,15 +22,15 @@ using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.NPC.Prototypes;
+using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SSDIndicator;
+using Content.Shared.Stealth.Components;
 using Content.Shared.Strip.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 
@@ -41,6 +41,8 @@ namespace Content.Server._Sunrise.BloodCult.Items.Systems;
 /// </summary>
 public sealed partial class CultMirrorShieldSystem : EntitySystem
 {
+    private const string FactionBloodCult = "BloodCult";
+    private const string FactionPassive = "Passive";
     [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -55,9 +57,6 @@ public sealed partial class CultMirrorShieldSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly NpcFactionSystem _faction = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-
-    private static readonly ProtoId<NpcFactionPrototype> BloodCultFaction = "BloodCult";
-    private static readonly ProtoId<NpcFactionPrototype> PassiveFaction = "Passive";
 
     private ISawmill _sawmill = default!;
 
@@ -349,12 +348,12 @@ public sealed partial class CultMirrorShieldSystem : EntitySystem
             // Она должна атаковать всех не культистов
             if (agressive)
             {
-                _faction.AddFaction(mobUid.Value, BloodCultFaction);
+                _faction.AddFaction(mobUid.Value, FactionBloodCult);
                 _console.ExecuteCommand($"addnpc {mobUid.Value} HostileIllusionCompound");
             }
             else
             {
-                _faction.AddFaction(mobUid.Value, PassiveFaction);
+                _faction.AddFaction(mobUid.Value, FactionPassive);
                 EnsureComp<NPCRetaliationComponent>(mobUid.Value);
                 _console.ExecuteCommand($"addnpc {mobUid.Value} IdleCompound");
             }
@@ -362,10 +361,14 @@ public sealed partial class CultMirrorShieldSystem : EntitySystem
         else
         {
             if (userUid != null)
-            {
-                _faction.AggroEntity(mobUid.Value, userUid.Value);
-                _console.ExecuteCommand($"addnpc {mobUid.Value} HostileIllusionCompound");
-            }
+                //* Добавлено исключение для NoTarget
+                if (!HasComp<NoTargetComponent>(userUid.Value)
+                    || !TryComp(userUid.Value, out StealthComponent? stealth)
+                    || !stealth.NoTarget)
+                {
+                    _faction.AggroEntity(mobUid.Value, userUid.Value);
+                    _console.ExecuteCommand($"addnpc {mobUid.Value} HostileIllusionCompound");
+                }
         }
 
         return true;

@@ -20,6 +20,9 @@ public sealed partial class StealthComponent : Component
     public bool Enabled = true;
 
     // Sunrise-Start
+    [DataField("noTarget")]
+    public bool NoTarget = true;
+
     [DataField("mirage")]
     public bool Mirage;
     // Sunrise-End
