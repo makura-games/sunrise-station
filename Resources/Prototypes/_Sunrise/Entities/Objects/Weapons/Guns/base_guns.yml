@@ -27,9 +27,9 @@
     range: 1
     damage:
       types:
-        Blunt: 8
-        Structural: 2
-    bluntStaminaDamageFactor: 2.0
+        Blunt: 12
+        Structural: 4
+    bluntStaminaDamageFactor: 2.5
     soundHit:
       collection: MetalThud
   - type: AltFireMelee
@@ -61,9 +61,9 @@
     range: 1.5
     damage:
       types:
-        Blunt: 12
-        Structural: 8
-    bluntStaminaDamageFactor: 2.0
+        Blunt: 18
+        Structural: 10
+    bluntStaminaDamageFactor: 2.5
     attackRate: 1
     autoAttack: false
   - type: AltFireMelee
@@ -95,9 +95,9 @@
     range: 1.5
     damage:
       types:
-        Blunt: 18
-        Structural: 10
-    bluntStaminaDamageFactor: 2.0
+        Blunt: 25
+        Structural: 15
+    bluntStaminaDamageFactor: 2.5
     attackRate: 0.75
     autoAttack: false
   - type: AltFireMelee
@@ -129,9 +129,9 @@
     range: 1.5
     damage:
       types:
-        Blunt: 20
-        Structural: 10
-    bluntStaminaDamageFactor: 2.0
+        Blunt: 30
+        Structural: 20
+    bluntStaminaDamageFactor: 2.5
     attackRate: 0.75
     autoAttack: false
   - type: AltFireMelee

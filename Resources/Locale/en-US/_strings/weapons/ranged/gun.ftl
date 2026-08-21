@@ -25,6 +25,8 @@ gun-ballistic-transfer-target-full = {CAPITALIZE(THE($entity))} is already fully
 # CartridgeAmmo
 gun-cartridge-spent = It is [color=red]spent[/color].
 gun-cartridge-unspent = It is [color=lime]not spent[/color].
+gun-cartridge-armor-penetration = Armor penetration: [color=yellow]{$percent}%[/color].
+gun-cartridge-armor-penetration-negative = Armor penetration: [color=red]{$percent}%[/color] (reduced vs armor).
 
 # BatteryAmmoProvider
 gun-battery-examine = It has enough charge for [color={$color}]{$count}[/color] shots.

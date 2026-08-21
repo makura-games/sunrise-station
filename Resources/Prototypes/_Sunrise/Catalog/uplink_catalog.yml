@@ -124,6 +124,11 @@
     Telecrystal: 6
   categories:
   - UplinkWearables
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkClothingOuterVestWebEliteChameleon
@@ -132,6 +137,11 @@
     Telecrystal: 6
   categories:
   - UplinkWearables
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkClothingBeltSyndicateUtility
@@ -182,7 +192,7 @@
   description: uplink-pistol-magnum-magazine-ap-desc
   productEntity: MagazineMagnumAP
   cost:
-    Telecrystal: 2 # Бронебойные больше не игнорят всю броню
+    Telecrystal: 2
   categories:
   - UplinkAmmo
 
@@ -1742,6 +1752,11 @@
     Telecrystal: 4
   categories:
   - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkEswordNuke

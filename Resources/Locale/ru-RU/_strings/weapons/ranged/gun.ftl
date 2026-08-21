@@ -23,6 +23,8 @@ gun-ballistic-transfer-target-full = { CAPITALIZE($entity) } уже полнос
 # CartridgeAmmo
 gun-cartridge-spent = Он [color=red]израсходован[/color].
 gun-cartridge-unspent = Он [color=lime]не израсходован[/color].
+gun-cartridge-armor-penetration = Бронепробитие: [color=yellow]{$percent}%[/color].
+gun-cartridge-armor-penetration-negative = Бронепробитие: [color=red]{$percent}%[/color] (снижено против брони).
 # BatteryAmmoProvider
 gun-battery-examine =
     Заряда хватит на [color={ $color }]{ $count }[/color] { $count ->
@@ -43,9 +45,9 @@ gun-chamber-rack = Передёрнуть затвор
 # MagazineAmmoProvider
 gun-magazine-examine =
     Тут [color={ $color }]{ $count }[/color] { $count ->
-        [one] выстрел
-        [few] выстрела
-       *[other] выстрелов
+        [one] патрон
+        [few] патрона
+       *[other] патронов
     }.
 # 🌟Starlight - Start🌟
 gun-magazine-ammo-type = Содержит [color={$color}]{$type}[/color].

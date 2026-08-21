@@ -289,18 +289,16 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.4
-        Slash: 0.4
+        Blunt: 0.35
+        Slash: 0.35
         Piercing: 0.35
         Heat: 0.35
         Caustic: 0.5
-  - type: ExplosionResistance
-    damageCoefficient: 0.35
   - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
     damageCoefficient: 0.45
   - type: ClothingSpeedModifier
-    walkModifier: 1 # Sunrise-Edit
-    sprintModifier: 1 # Sunrise-Edit
+    walkModifier: 0.95 # Sunrise-Edit
+    sprintModifier: 0.95 # Sunrise-Edit
   #Shoulder mounted flashlight
   - type: ToggleableVisuals
     spriteLayer: light

@@ -47,6 +47,25 @@ public sealed class ProjectileSystem : SharedProjectileSystem
             return;
 
         var target = args.OtherEntity;
+
+        // Sunrise edit start
+        if (component.IgnoreShooter)
+        {
+            if (target == component.Shooter || target == component.Weapon)
+                return;
+
+            if (component.Shooter is { } shooter
+                && shooter.IsValid()
+                && TryComp<Content.Shared.Mech.Components.MechPilotComponent>(shooter, out var pilot)
+                && pilot.Mech.IsValid()
+                && target == pilot.Mech)
+                return;
+        }
+
+        if (TryComp<ProjectilePierceComponent>(uid, out var checkPierce) && checkPierce.PiercedEntities.Contains(target))
+            return;
+        // Sunrise edit end
+
         // it's here so this check is only done once before possible hit
         var attemptEv = new ProjectileReflectAttemptEvent(uid, component, false);
         RaiseLocalEvent(target, ref attemptEv);
@@ -153,11 +172,12 @@ public sealed class ProjectileSystem : SharedProjectileSystem
                             var projXform = Transform(uid);
                             // Sunrise edit start - Use original flight angle derived from rotation to bypass any post-collision physics state changes
                             var velocityAngle = projXform.WorldRotation - component.Angle;
-                            // Sunrise edit end
                             var newDir = (velocityAngle + random).ToWorldVec();
-                            _physics.SetLinearVelocity(uid, newDir * physics.LinearVelocity.Length(), body: physics);
-                            _transformSystem.SetWorldRotation(uid, newDir.ToWorldAngle() + component.Angle);
-
+                            var currentSpeed = physics.LinearVelocity.Length();
+                            var speed = currentSpeed > 5f ? currentSpeed : 25f;
+                            _physics.SetLinearVelocity(uid, newDir * speed, body: physics);
+                            _transformSystem.SetWorldRotation(projXform, newDir.ToWorldAngle() + component.Angle);
+                            // Sunrise edit end
                         }
                     }
                 }

@@ -12,7 +12,7 @@ public sealed partial class EnergyShieldComponent : Component
     /// Стоимость энергии за единицу урона
     /// </summary>
     [DataField]
-    public float EnergyCostPerDamage = 30f;
+    public float EnergyCostPerDamage = 15f;
 
     /// <summary>
     /// Звук поглощения урона
@@ -30,5 +30,5 @@ public sealed partial class EnergyShieldComponent : Component
     /// При скольки процентах заряда можно включить щит
     /// </summary>
     [DataField]
-    public float MinChargeFractionForActivation = 0.5f;
+    public float MinChargeFractionForActivation = 0.05f;
 }

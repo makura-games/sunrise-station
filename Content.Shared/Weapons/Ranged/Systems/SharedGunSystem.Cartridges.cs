@@ -30,11 +30,51 @@ public abstract partial class SharedGunSystem
     {
         var damageSpec = GetProjectileDamage(ent.Comp.Prototype);
 
-        if (damageSpec == null)
-            return;
+        if (damageSpec != null)
+            _damageExamine.AddDamageExamine(args.Message, Damageable.ApplyUniversalAllModifiers(damageSpec), Loc.GetString("damage-projectile"));
 
-        _damageExamine.AddDamageExamine(args.Message, Damageable.ApplyUniversalAllModifiers(damageSpec), Loc.GetString("damage-projectile"));
+    // Sunrise-Start
+        var ap = GetProjectileArmorPenetration(ent.Comp.Prototype);
+        if (ap != null && MathF.Abs(ap.Value) > 0.001f)
+        {
+            var percent = (int)MathF.Round(ap.Value * 100f);
+            args.Message.PushNewline();
+            if (ap.Value >= 0)
+                args.Message.AddMarkupOrThrow(Loc.GetString("gun-cartridge-armor-penetration", ("percent", percent)));
+            else
+                args.Message.AddMarkupOrThrow(Loc.GetString("gun-cartridge-armor-penetration-negative", ("percent", percent)));
+        }
     }
+
+    /// <summary>
+    /// Returns armor penetration for a projectile or hitscan prototype.
+    /// </summary>
+    public float? GetProjectileArmorPenetration(EntProtoId proto)
+    {
+        if (!ProtoManager.TryIndex(proto, out var entityProto))
+            return null;
+
+        if (entityProto.TryGetComponent<ProjectileComponent>(out var projectile, Factory))
+        {
+            if (projectile.IgnoreResistances)
+                return 1.0f;
+
+            if (MathF.Abs(projectile.ArmorPenetration) > 0.001f)
+                return projectile.ArmorPenetration;
+        }
+
+        if (entityProto.TryGetComponent<Hitscan.Components.HitscanBasicDamageComponent>(out var hitscan, Factory))
+        {
+            if (hitscan.IgnoreResistances)
+                return 1.0f;
+
+            if (MathF.Abs(hitscan.ArmorPenetration) > 0.001f)
+                return hitscan.ArmorPenetration;
+        }
+
+        return null;
+    }
+    // Sunrise-End
 
     private DamageSpecifier? GetProjectileDamage(EntProtoId proto)
     {

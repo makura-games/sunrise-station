@@ -1,10 +1,9 @@
 
 - type: entity
-  parent: [BaseItem, BaseSyndicateContraband]
+  parent: [BaseItem, PowerCellSlotMediumItem, BaseSyndicateContraband]
   id: SunriseEnergyShield
   name: experimental energy shield
-  suffix: Self-Recharging
-  description: Exotic energy shield, when folded, can even fit in your pocket. That experimenal shield can recharge itself.
+  description: Exotic energy shield, when folded, can even fit in your pocket.
   components:
     - type: EnergySword
     - type: EmpImmune
@@ -60,7 +59,7 @@
       color: white
     - type: ItemTogglePointLight
     - type: Reflect
-      reflectProb: 0.75
+      reflectProb: 1
       reflects:
         - Energy
     - type: Blocking
@@ -84,12 +83,4 @@
       damageContainer: Shield
     - type: StaticPrice
       price: 7000
-    - type: BatterySelfRecharger
-      autoRechargeRate: 250
-      autoRechargePauseTime: 30
     - type: EnergyShield
-      energyCostPerDamage: 15
-    - type: ExaminableBattery
-    - type: Battery
-      maxCharge: 1500
-      startingCharge: 1500

@@ -100,6 +100,12 @@
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
+  # Sunrise-start
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+  # Sunrise-end
 
 - type: listing
   id: UplinkThrowingKnivesKit
@@ -1808,6 +1814,7 @@
     blacklist:
       tags:
       - AssaultOpsUplink
+      - NukeOpsUplink
   #Sunrise-end
 
 - type: listing
@@ -1828,6 +1835,7 @@
     blacklist:
       tags:
       - AssaultOpsUplink
+      - NukeOpsUplink
   #Sunrise-end
 
 - type: listing
