@@ -232,3 +232,24 @@
     - id: RandomSentience
     - id: SolarFlare
     - id: VentClog
+    - id: SunriseSyndicateDeadDrop
+
+# Синдикатский тайник
+- type: entity
+  parent: BaseGameRule
+  id: SunriseSyndicateDeadDrop
+  components:
+  - type: StationEvent
+    startAnnouncement: station-syndicate-dead-drop-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 15
+    duration: 1
+    minimumPlayers: 10
+    maxOccurrences: 2
+    weight: 10
+  - type: RandomSpawnRule
+    prototype: SunriseSyndicateDeadDropSpawner
+    radioMessage:
+      channel: Syndicate
+      message: syndicate-dead-drop-announcement

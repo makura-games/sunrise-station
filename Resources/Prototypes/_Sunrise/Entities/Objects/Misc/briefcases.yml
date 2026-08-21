@@ -1,0 +1,12 @@
+# Чёрный синдикатский портфель
+- type: entity
+  parent: [ BriefcaseBase, BaseMinorContraband ]
+  id: SunriseSyndicateRedspaceBriefcase
+  name: syndicate briefcase
+  suffix: Empty
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/Briefcases/syndicate_briefcase.rsi
+    state: icon
+  - type: Item
+    sprite: _Sunrise/Objects/Storage/Briefcases/syndicate_briefcase.rsi
