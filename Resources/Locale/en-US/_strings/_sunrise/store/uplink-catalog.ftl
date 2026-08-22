@@ -252,6 +252,9 @@ uplink-cleaner-kit-desc = Clean up any evidence, make sure it can't be traced ba
 uplink-homerun-bat-name = Homerun Bat
 uplink-homerun-bat-desc = Send your enemies flying. Hey batta batta batta SWING batta!
 
+uplink-skewer-rapier-name = skewer rapier
+uplink-skewer-rapier-desc = A suspiciously well-made skewer for a chef who takes kebabs and workplace disputes equally seriously. Supplied without a sheath or seasoning.
+
 uplink-ammo-crate-ammokit-bundle-name = Syndicate super ammo bundle
 uplink-ammo-crate-ammokit-bundle-desc = Reloading! Reloading! Reloading! Contains various ammo kit except for big gun.
 

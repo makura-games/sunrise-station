@@ -6,7 +6,7 @@
   - type: ContainerFill
     containers:
       item:
-      - SyndicateRapierBiocode
+      - SyndicateRapier
 
 - type: entity
   parent: [BaseItem, BaseSyndicateContraband]

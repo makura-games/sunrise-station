@@ -1,5 +1,7 @@
 ent-SyndicateRapier = Рапира Синдиката
     .desc = Тонкое лезвие из пластитана с алмазным наконечником.
+ent-SunriseSkewerRapier = { ent-FoodKebabSkewer }
+    .desc = { ent-FoodKebabSkewer.desc }
 ent-GutsSword = убийца драконов
     .desc = Что вершит судьбу человечества в этом мире? Некое незримое существо или закон, подобно длани господней, парящей над миром? По крайней мере, истинно то, что человек не властен даже над своей волей.
 ent-WeaponMeleeMimicry = клинок Мимикрии
