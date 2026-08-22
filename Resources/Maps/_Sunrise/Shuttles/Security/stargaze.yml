@@ -3472,7 +3472,7 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
-- proto: PowerCageHigh
+- proto: PowerCageOmega
   entities:
   - uid: 168
     components:
