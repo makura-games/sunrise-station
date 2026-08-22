@@ -94,7 +94,7 @@
         Heat: -6
         Shock: -6
         Caustic: -6
-        Mangleness: -1
+        Deterioration: -1
     # #Sunrise-End
 
 - type: entity
@@ -154,7 +154,7 @@
           Quantity: 2
   # Sunrise-start
   - type: Healing
-    delay: 0.75
+    delay: 1
     damageContainers:
     - Synth
     - Silicon
@@ -164,7 +164,7 @@
         Heat: -6
         Shock: -6
         Caustic: -6
-        Mangleness: -1
+        Deterioration: -1
     # #Sunrise-End
 
 - type: entity
@@ -233,7 +233,7 @@
         Heat: -6
         Shock: -6
         Caustic: -6
-        Mangleness: -1
+        Deterioration: -1
     # #Sunrise-End
 
 - type: entity

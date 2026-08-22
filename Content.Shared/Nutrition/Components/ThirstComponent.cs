@@ -7,7 +7,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Nutrition.Components;
 
-[RegisterComponent, NetworkedComponent, Access(typeof(ThirstSystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(ThirstSystem), Other = AccessPermissions.ReadWriteExecute)]
 [AutoGenerateComponentState(fieldDeltas: true), AutoGenerateComponentPause]
 public sealed partial class ThirstComponent : Component
 {
@@ -46,11 +46,6 @@ public sealed partial class ThirstComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField, AutoNetworkedField]
     public TimeSpan UpdateRate = TimeSpan.FromSeconds(1);
-
-    // Sunrise-Start
-    [DataField]
-    public DamageSpecifier? DehydrationDamage;
-    // Sunrise-End
 
     [DataField("thresholds")]
     [AutoNetworkedField]

@@ -153,3 +153,17 @@ reagent-desc-haloperidol = Removes most stimulating and hallucinogenic drugs. Re
 
 reagent-name-heparin = heparin
 reagent-desc-heparin = Commonly used as an anticoagulant medication. Causes blood to have difficulty forming clots. Can cause internal bleeding when overdosed.
+
+# Sunrise-Start
+reagent-name-apoptodon = apoptodon
+reagent-desc-apoptodon = An advanced radioactive solution for regenerating the body in cold conditions. Offsets rotting, but inflicts radiation and cellular damage. Works on both dead and living.
+
+reagent-name-h-32 = h-32
+reagent-desc-h-32 = A cryo-based reagent developed in the field with increased radiation. Works on both dead and living.
+
+reagent-name-antidon = antidon
+reagent-desc-antidon = A cryo-based specialized poison treatment reagent that effectively neutralizes toxic damage. Works on both dead and living.
+
+reagent-name-brutedon = brutedon
+reagent-desc-brutedon = A cryo-based advanced brute damage treatment that heals all types of physical trauma. Works on both dead and living.
+# Sunrise-End

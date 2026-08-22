@@ -34,13 +34,17 @@
   components:
   - type: Interactions
   - type: Hunger
+    starvationDamage:
+      types:
+        Mangleness: 0.5
   - type: Icon # It will not have an icon in the adminspawn menu without this. Body parts seem fine for whatever reason.
     sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
     state: full
   - type: Thirst
     dehydrationDamage:
       types:
-        Bloodloss: 0.5
+        # Bloodloss: 0.5
+        Mangleness: 0.5
         Asphyxiation: 0.5
   - type: Perishable
   - type: HumanoidProfile

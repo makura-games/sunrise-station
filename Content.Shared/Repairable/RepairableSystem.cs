@@ -5,7 +5,10 @@ using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Damage.Prototypes; // Sunrise-Edit
+using Content.Shared.FixedPoint; // Sunrise-Edit
 using Content.Shared.Tools.Systems;
+using Robust.Shared.Prototypes; // Sunrise-Edit
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Repairable;
@@ -106,8 +109,8 @@ public sealed partial class RepairableSystem : EntitySystem
         if (damage.GetTotal() == 0)
             return;
 
-        // Sunrise-start
-        if (!CanRepair(damage, ent.Comp))
+        // Sunrise-start - check unrepairable component
+        if (!CanRepair(ent.Owner, damage.DamageDict, ent.Comp))
             return;
         // Sunrise-end
 
@@ -126,6 +129,38 @@ public sealed partial class RepairableSystem : EntitySystem
         args.Handled = _toolSystem.UseTool(args.Used, args.User, ent.Owner, delay, ent.Comp.QualityNeeded, new RepairDoAfterEvent(), ent.Comp.FuelCost);
     }
 
+    // Sunrise-start - use unrepairable types from component
+    private bool CanRepair(EntityUid uid, Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> damage, RepairableComponent component)
+    {
+        var unrepairableTypes = new HashSet<ProtoId<DamageTypePrototype>>();
+        if (TryComp<UnrepairableDamageComponent>(uid, out var unrepairable))
+        {
+            unrepairableTypes = unrepairable.Types;
+        }
+
+        if (component.Damage == null)
+        {
+            foreach (var type in damage)
+            {
+                if (type.Value > 0 && !unrepairableTypes.Contains(type.Key))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        foreach (var type in component.Damage.DamageDict)
+        {
+            if (damage.TryGetValue(type.Key, out var value) && value > 0 && !unrepairableTypes.Contains(type.Key))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    // Sunrise-end
 }
 
 /// <summary>

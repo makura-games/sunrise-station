@@ -47,11 +47,15 @@
     state: full
   - type: Hunger
     baseDecayRate: 0.015
+    starvationDamage:
+      types:
+        Mangleness: 0.5
   - type: Thirst
     baseDecayRate: 0.05
     dehydrationDamage:
       types:
-        Bloodloss: 0.5
+        # Bloodloss: 0.5
+        Mangleness: 0.5
         Asphyxiation: 0.5
   - type: Butcherable
     butcheringType: Spike

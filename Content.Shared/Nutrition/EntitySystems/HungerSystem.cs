@@ -3,7 +3,11 @@ using Content.Shared._Sunrise.Mood;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.Alert;
 using Content.Shared.CCVar;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Nutrition.Components;
@@ -17,7 +21,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Nutrition.EntitySystems;
 
-public sealed class HungerSystem : EntitySystem
+// Sunrise edit start - make partial
+public sealed partial class HungerSystem : EntitySystem
+// Sunrise edit end
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -42,6 +48,7 @@ public sealed class HungerSystem : EntitySystem
         SubscribeLocalEvent<HungerComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<HungerComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed);
         SubscribeLocalEvent<HungerComponent, RejuvenateEvent>(OnRejuvenate);
+        SubscribeLocalEvent<HungerComponent, HungerManglenessChangedEvent>(OnHungerManglenessChanged);
     }
 
     private void OnMapInit(EntityUid uid, HungerComponent component, MapInitEvent args)
@@ -171,9 +178,12 @@ public sealed class HungerSystem : EntitySystem
 
         if (component.HungerThresholdDecayModifiers.TryGetValue(component.CurrentThreshold, out var modifier))
         {
-            component.ActualDecayRate = component.BaseDecayRate * modifier;
+            var preservedHunger = GetHunger(component);
+            var ev = new HungerDecayRateModifierEvent(component, component.BaseDecayRate * modifier);
+            RaiseLocalEvent(uid, ev);
+            component.ActualDecayRate = ev.ActualDecayRate;
             DirtyField(uid, component, nameof(HungerComponent.ActualDecayRate));
-            SetAuthoritativeHungerValue((uid, component), GetHunger(component));
+            SetAuthoritativeHungerValue((uid, component), preservedHunger);
         }
 
         component.LastThreshold = component.CurrentThreshold;
@@ -287,4 +297,13 @@ public sealed class HungerSystem : EntitySystem
             DoContinuousHungerEffects(uid, hunger);
         }
     }
+
+    // Sunrise-Start - Migrated to HungerSystem.Sunrise.cs
+    /*
+    private void OnHungerManglenessChanged(EntityUid uid, HungerComponent component, HungerManglenessChangedEvent args)
+    {
+        DoHungerThresholdEffects(uid, component, force: true);
+    }
+    */
+    // Sunrise-End
 }

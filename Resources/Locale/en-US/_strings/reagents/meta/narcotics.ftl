@@ -1,3 +1,6 @@
+reagent-name-desoantizyne = desoantizyne
+reagent-desc-desoantizyne = A potent narcotic that induces profound relaxation and euphoria while suppressing pain sensation. Highly addictive with severe withdrawal effects.
+
 reagent-name-desoxyephedrine = desoxyephedrine
 reagent-desc-desoxyephedrine = A more effective ephedrine, with more active downsides. Requires less doses to cure narcolepsy.
 

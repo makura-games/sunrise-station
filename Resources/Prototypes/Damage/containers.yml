@@ -6,11 +6,13 @@
     - Toxin
     - Airloss
     - Genetic
+    - Mangleness # Sunrise-Edit
 
 - type: damageContainer
   id: Inorganic
   supportedGroups:
     - Brute
+    - Deterioration # Sunrise-Edit
   supportedTypes:
     - Heat
     - Shock
@@ -28,6 +30,7 @@
   id: Silicon
   supportedGroups:
     - Brute
+    - Deterioration # Sunrise-Edit
   supportedTypes:
     - Heat
     - Shock
@@ -75,4 +78,5 @@
   - Toxin
   - Airloss
   - Genetic
+  - Mangleness # Sunrise-Edit
   - Metaphysical

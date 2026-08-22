@@ -15,13 +15,17 @@ using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Damage.Systems;
+using Content.Shared.FixedPoint;
 
 namespace Content.Shared.Nutrition.EntitySystems;
 
 [UsedImplicitly]
-public sealed class ThirstSystem : EntitySystem
+// Sunrise edit start - make partial
+public sealed partial class ThirstSystem : EntitySystem
+// Sunrise edit end
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -44,6 +48,7 @@ public sealed class ThirstSystem : EntitySystem
         SubscribeLocalEvent<ThirstComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed);
         SubscribeLocalEvent<ThirstComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ThirstComponent, RejuvenateEvent>(OnRejuvenate);
+        SubscribeLocalEvent<ThirstComponent, ThirstManglenessChangedEvent>(OnThirstManglenessChanged);
     }
 
     private void OnMapInit(EntityUid uid, ThirstComponent component, MapInitEvent args)
@@ -198,18 +203,18 @@ public sealed class ThirstSystem : EntitySystem
         {
             case ThirstThreshold.OverHydrated:
                 component.LastThirstThreshold = component.CurrentThirstThreshold;
-                component.ActualDecayRate = component.BaseDecayRate * 1.2f;
+                component.ActualDecayRate = RaiseThirstDecayRateModifier(uid, component, component.BaseDecayRate * 1.2f);
                 return;
 
             case ThirstThreshold.Okay:
                 component.LastThirstThreshold = component.CurrentThirstThreshold;
-                component.ActualDecayRate = component.BaseDecayRate;
+                component.ActualDecayRate = RaiseThirstDecayRateModifier(uid, component, component.BaseDecayRate);
                 return;
 
             case ThirstThreshold.Thirsty:
                 // Same as okay except with UI icon saying drink soon.
                 component.LastThirstThreshold = component.CurrentThirstThreshold;
-                component.ActualDecayRate = component.BaseDecayRate * 0.8f;
+                component.ActualDecayRate = RaiseThirstDecayRateModifier(uid, component, component.BaseDecayRate * 0.8f);
                 return;
             case ThirstThreshold.Parched:
                 _movement.RefreshMovementSpeedModifiers(uid);
@@ -240,6 +245,7 @@ public sealed class ThirstSystem : EntitySystem
 
             ModifyThirst(uid, thirst, -thirst.ActualDecayRate);
             DoContinuousThirstEffects(uid, thirst);
+
             var calculatedThirstThreshold = GetThirstThreshold(thirst, thirst.CurrentThirst);
 
             if (calculatedThirstThreshold == thirst.CurrentThirstThreshold)
@@ -249,4 +255,20 @@ public sealed class ThirstSystem : EntitySystem
             UpdateEffects(uid, thirst);
         }
     }
+
+    private float RaiseThirstDecayRateModifier(EntityUid uid, ThirstComponent component, float actualDecayRate)
+    {
+        var ev = new ThirstDecayRateModifierEvent(component, actualDecayRate);
+        RaiseLocalEvent(uid, ev);
+        return ev.ActualDecayRate;
+    }
+
+    // Sunrise-Start - Migrated to ThirstSystem.Sunrise.cs
+    /*
+    private void OnThirstManglenessChanged(EntityUid uid, ThirstComponent component, ThirstManglenessChangedEvent args)
+    {
+        UpdateEffects(uid, component);
+    }
+    */
+    // Sunrise-End
 }

@@ -125,7 +125,7 @@
             Blunt: -0.23
             Slash: -0.23
             Piercing: -0.24
-            Mangleness: 0.015
+            Mangleness: -0.1
       - !type:ModifyBleed
         amount: -0.15
       - !type:PopupMessage
@@ -186,7 +186,7 @@
         ignoreResistances: true
         damage:
           types:
-            Mangleness: 0.2
+            Mangleness: 0.02
       - !type:HealthChange
         conditions:
           - !type:ReagentCondition
@@ -202,12 +202,11 @@
           min: 1
         reagent: ChloralHydrate
         amount: -10
-      - !type:GenericStatusEffect
-        key: Stun
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectStunned
         time: 10
         type: Remove
-      - !type:GenericStatusEffect
-        key: KnockedDown
+      - !type:ModifyKnockdown
         time: 10
         type: Remove
       - !type:GenericStatusEffect

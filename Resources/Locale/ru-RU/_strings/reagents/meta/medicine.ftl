@@ -157,7 +157,6 @@ reagent-desc-hemostatic-powder = Кровоостанавливающий пор
 
 reagent-name-retroindralyne = ретроиндралин
 reagent-desc-retroindralyne = очень старое противорадиационное средство, доведённое учёными современности до ума, имеет побочные эффекты.
-
 reagent-name-barozine-plus = барозин плюс
 reagent-desc-barozine-plus = барозин, усовершенствованная версия специально для медипенов. Менее токсичен.
 

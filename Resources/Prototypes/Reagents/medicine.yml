@@ -32,8 +32,8 @@
       - !type:HealthChange
         damage:
           types:
-            Poison: -1.5 # Sunrise-Edit # Бафф диловена из-за того что яды порой очень тяжело лечатся
-            Mangleness: 0.05 #Sunrise-Edit
+            Poison: -1 
+            Mangleness: 0.15 # Sunrise-Edit # 15% of 1.5 poison healing
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -98,7 +98,7 @@
         damage:
           types:
             Poison: -3
-            Mangleness: 0.225 #Sunrise-Edit
+            Mangleness: 0.45 # Sunrise-Edit # 15% of 3 poison healing
 
 - type: reagent
   id: Ethylredoxrazine
@@ -119,7 +119,7 @@
         damage:
           types:
             Poison: -0.5
-            Mangleness: 0.05 #Sunrise-Edit
+            Mangleness: 0.075 #Sunrise-Edit
 
 - type: reagent
   id: Arithrazine
@@ -137,7 +137,7 @@
           types:
             Radiation: -3
             Blunt: 1.5
-            Mangleness: 0.225 #Sunrise-Edit
+            Mangleness: 0.45 # Sunrise-Edit
 
 - type: reagent
   id: Bicaridine
@@ -154,7 +154,7 @@
       - !type:HealthChange
         damage:
           types:
-            Mangleness: 0.05
+            Mangleness: 0.075 # Sunrise-Edit # 15% of 1.5/3 (it's an even split so 0.5 for one group) brute healing (EvenHealthChange)
         #Sunrise-End
       - !type:EvenHealthChange
         damage:
@@ -209,15 +209,7 @@
             Brute: -2
             Burn: -2
             Toxin: -2
-        #Sunrise-Start
-        - !type:HealthChange
-          conditions:
-          - !type:TemperatureCondition
-            max: 213.0
-          damage:
-            types:
-              Mangleness: -0.5
-        #Sunrise-End
+            Mangleness: -2
 
 - type: reagent
   id: Doxarubixadone
@@ -255,7 +247,7 @@
             Heat: -1.5
             Shock: -1.5
             Cold: -1.5
-            Mangleness: 0.1 #Sunrise-Edit
+            Mangleness: 0.225 # Sunrise-Edit # 15% of 4.5 burn healing (Heat+Shock)
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -429,7 +421,7 @@
         damage:
           types:
             Radiation: -1
-            Mangleness: 0.05 #Sunrise-Edit
+            Mangleness: 0.15 # Sunrise-Edit # 15% of 1 radiation healing
       - !type:Vomit
         probability: 0.02
       - !type:HealthChange
@@ -506,7 +498,7 @@
             Heat: -0.33
             Shock: -0.33
             Cold: -0.33
-            Mangleness: 0.025 #Sunrise-Edit
+            Mangleness: 0.0495 #Sunrise-Edit
       - !type:SatiateThirst
         factor: -10
         conditions:
@@ -540,7 +532,7 @@
         damage:
           types:
             Cold: -4
-            Mangleness: 0.025 #Sunrise-Edit
+            Mangleness: 0.4 # Sunrise-Edit # 10% of 4 cold healing
       - !type:AdjustTemperature
         conditions:
         - !type:TemperatureCondition
@@ -571,12 +563,6 @@
   metabolisms:
     Bloodstream:
       effects:
-      #Sunrise-Start
-      - !type:HealthChange
-        damage:
-          types:
-            Mangleness: 0.025
-      #Sunrise-End
       - !type:HealthChange
         probability: 0.3
         damage:
@@ -635,6 +621,7 @@
             Cellular: -0.3
             Radiation: 0.15
             Caustic: 0.15
+            Mangleness: 0.003 # Sunrise-Edit # 1% of 0.3 cellular healing
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -671,7 +658,7 @@
       - !type:HealthChange
         damage:
           types:
-            Mangleness: 0.05
+            Mangleness: 0.15 # Sunrise-Edit # 15% of 3.5 brute (0.525) - 1% of 2.5 airloss (-0.025) = 0.5
       # Sunrise edit end
       - !type:HealthChange
         conditions:
@@ -856,12 +843,6 @@
       # but still technically stop your bleeding.
       - !type:ModifyBleed
         amount: -1.5
-      #Sunrise-Start
-      - !type:HealthChange
-        damage:
-          types:
-            Mangleness: 0.15
-        #Sunrise-End
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -977,7 +958,7 @@
         damage:
           types:
             Blunt: 1.5
-            Mangleness: 0.05 #Sunrise-Edit
+            Mangleness: 0.9 # Sunrise-Edit
       - !type:EvenHealthChange
         conditions:
         - !type:ReagentCondition
@@ -1110,7 +1091,7 @@
         damage:
           types:
             Caustic: -2 # Sunrise-Edit # 5 per u # Бафф сигината ибо он слабовато лечил, а требовал работы ботаников, которые иногда забивали хрен
-            Mangleness: 0.125 # Sunrise-Edit
+            Mangleness: 0.2 # Sunrise-Edit 10%
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -1172,7 +1153,7 @@
           types:
             Slash: -2 # 8 per u
             Heat: 0.2 # 0.8 per u
-            Mangleness: 0.125 #Sunrise-Edit
+            Mangleness: 0.2 #Sunrise-Edit 10%
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -1199,7 +1180,7 @@
           types:
             Piercing: -2.5 # 10 per u
             Radiation: 0 # Sunrise-Edit
-            Mangleness: 0.125 #Sunrise-Edit
+            Mangleness: 0.25 #Sunrise-Edit 10%
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -1225,7 +1206,7 @@
         damage:
           types:
             Blunt: -2.25 # 9 per u
-            Mangleness: 0.125 #Sunrise-Edit
+            Mangleness: 0.225 #Sunrise-Edit
       - !type:SatiateHunger
         factor: -1
       - !type:HealthChange
@@ -1271,7 +1252,6 @@
             Heat: -0.5
             Shock: -0.5
             Cold: -0.5
-            Mangleness: -0.1
             # Sunrise-End
   reactiveEffects:
     Unholy:
@@ -1317,7 +1297,7 @@
         damage:
           types:
             Heat: -1
-            Mangleness: 0.05 #Sunrise-Edit
+            Mangleness: 0.1  # Sunrise-Edit # 10% of 1 heat healing
       # od causes massive bleeding
       - !type:HealthChange
         conditions:
@@ -1359,7 +1339,7 @@
         damage:
           types:
             Shock: -1.5 # 6 per u
-            Mangleness: 0.125 #Sunrise-Edit
+            Mangleness: 0.15 # Sunrise-Edit # 10% of 1.5 shock healing
       - !type:AdjustReagent
         reagent: Licoxide
         amount: -2
@@ -1430,6 +1410,43 @@
         damage:
           Brute: -3
           Burn: -3
+          Mangleness: -3 # Sunrise-Edit
+
+# Sunrise-Start
+- type: reagent
+  id: Necrosol
+  name: reagent-name-necrosol
+  group: Medicine
+  desc: reagent-desc-necrosol
+  physicalDesc: reagent-physical-desc-necrotic
+  flavor: medicine
+  color: "#86a5bd"
+  worksOnTheDead: true
+  plantMetabolism:
+  - !type:PlantAdjustToxins
+    amount: -5
+  - !type:PlantAdjustHealth
+    amount: 5
+  - !type:PlantCryoxadone {}
+  metabolisms:
+    Bloodstream:
+      effects:
+        - !type:EvenHealthChange
+          conditions:
+          - !type:TemperatureCondition
+            max: 213.0
+          damage:
+            Brute: -2
+            Burn: -2
+        - !type:HealthChange
+          conditions:
+          - !type:TemperatureCondition
+            max: 213.0
+          damage:
+            types:
+              Poison: -4 # Sunrise-Edit
+              Mangleness: -5 #Sunrise-Edit
+# Sunrise-End
 
 - type: reagent
   id : Aloxadone

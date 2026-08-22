@@ -250,10 +250,12 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         if (TryComp<UnrevivableComponent>(entity, out var unrevivableComp) && unrevivableComp.Analyzable)
             unrevivable = true;
 
-        // Sunrise-Edit start - collect hunger, thirst, and raise analyze event
+        // start - collect hunger, thirst, and raise analyze event
         // Collect hunger and thirst data as percentages
-        float hungerLevel = -1;
-        float thirstLevel = -1;
+        // Sunrise-Start - collect hunger and thirst levels
+        float? hungerLevel = null;
+        float? thirstLevel = null;
+        // Sunrise-End
 
         if (TryComp<HungerComponent>(entity, out var hunger))
         {

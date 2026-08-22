@@ -56,8 +56,15 @@
   text: "/ServerInfo/Guidebook/Science/Robotics.xml"
   children:
   - Cyborgs
+  - CyborgRepair # Sunrise-edit
 
 - type: guideEntry
   id: Cyborgs
   name: guide-entry-cyborgs
   text: "/ServerInfo/Guidebook/Science/Cyborgs.xml"
+# Sunrise-start
+- type: guideEntry
+  id: CyborgRepair
+  name: guide-entry-cyborg-repair
+  text: "/ServerInfo/Guidebook/Science/CyborgRepair.xml"
+# Sunrise-end

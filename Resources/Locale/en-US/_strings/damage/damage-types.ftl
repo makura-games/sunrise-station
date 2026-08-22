@@ -13,3 +13,4 @@ damage-type-slash = Slash
 damage-type-structural = Structural
 damage-type-holy = Holy
 damage-type-mangleness = Mangleness
+damage-type-deterioration = Deterioration

@@ -8,3 +8,5 @@ guidebook-error-message = Error Message
 
 guidebook-monkey-unspin = Unspin Monkey
 guidebook-monkey-disco = Disco Monkey
+
+guide-entry-mangleness = Mangleness

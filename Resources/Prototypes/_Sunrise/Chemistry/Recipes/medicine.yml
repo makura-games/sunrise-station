@@ -66,6 +66,8 @@
       amount: 1
     Fersilicite:
       amount: 1
+    Bicaridine:
+      amount: 1
   products:
     HemostaticPowder: 2
 
@@ -86,3 +88,4 @@
       amount: 1
   products:
     Retroindralyne: 3
+
