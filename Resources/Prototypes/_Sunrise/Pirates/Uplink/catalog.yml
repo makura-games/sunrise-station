@@ -1977,10 +1977,10 @@
 
 - type: listing
   id: UplinkPirateDeathAcidifierImplanterAgent
-  name: uplink-death-acidifier-implant-name
-  description: uplink-death-acidifier-implant-desc
+  name: uplink-gear-acidifier-implant-name
+  description: uplink-gear-acidifier-implant-desc
   icon: { sprite: /Textures/Objects/Magic/magicactions.rsi, state: gib }
-  productEntity: DeathAcidifierImplanter
+  productEntity: GearAcidifierImplanter
   categories:
     - UplinkPirateImplants
   conditions:

@@ -20,7 +20,11 @@ public sealed class GibOnTriggerSystem : XOnTriggerSystem<GibOnTriggerComponent>
             }
         }
 
-        _gibbing.Gib(target, user: args.User);
+        // Sunrise edit start - support gear acidifier without deleting the body
+        if (ent.Comp.GibBody)
+            _gibbing.Gib(target, dropGiblets: ent.Comp.GibOrgans, user: args.User);
+        // Sunrise edit end
+
         args.Handled = true;
     }
 }

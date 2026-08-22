@@ -34,6 +34,15 @@
 
 #Syndie implanters   #PR Wiz #31782
 - type: entity
+  id: GearAcidifierImplanter
+  name: gear acidifier implanter
+  parent: BaseImplantOnlyImplanterSyndi
+  components:
+  - type: Implanter
+    implant: GearAcidifierImplant
+    onlySelfImplant: true
+
+- type: entity
   id: SmokeScreenImplanter
   suffix: smoke screen
   parent: BaseImplantOnlyImplanterSyndi
