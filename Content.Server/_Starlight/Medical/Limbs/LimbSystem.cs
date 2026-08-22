@@ -13,8 +13,8 @@ namespace Content.Server._Starlight.Medical.Limbs;
 
 public sealed partial class LimbSystem : SharedLimbSystem
 {
-    [Dependency] private readonly ContainerSystem _containers = default!;
-    [Dependency] private readonly SunriseHumanoidBodySystem _sunriseBody = default!;
+    [Dependency] private ContainerSystem _containers = default!;
+    [Dependency] private SunriseHumanoidBodySystem _sunriseBody = default!;
 
     private static readonly MethodInfo? RaiseLocalEventRefMethod = typeof(LimbSystem)
         .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)

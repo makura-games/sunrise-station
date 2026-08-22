@@ -24,19 +24,19 @@ namespace Content.Server._Sunrise.CriminalRecords.Systems;
 
 public sealed partial class PrisonerManagementConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly IdCardSystem _idCard = default!;
-    [Dependency] private readonly PrisonLockerSystem _locker = default!;
-    [Dependency] private readonly PrisonTimerSystem _timer = default!;
-    [Dependency] private readonly PrisonCellDoorSystem _door = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly StationCorporateLawSystem _stationLaw = default!;
-    [Dependency] private readonly CriminalRecordsSystem _criminalRecords = default!;
-    [Dependency] private readonly SharedSunriseCriminalRecordsSystem _sunriseCriminalRecords = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private StationRecordsSystem _stationRecords = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private DeviceLinkSystem _deviceLink = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private IdCardSystem _idCard = default!;
+    [Dependency] private PrisonLockerSystem _locker = default!;
+    [Dependency] private PrisonTimerSystem _timer = default!;
+    [Dependency] private PrisonCellDoorSystem _door = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private StationCorporateLawSystem _stationLaw = default!;
+    [Dependency] private CriminalRecordsSystem _criminalRecords = default!;
+    [Dependency] private SharedSunriseCriminalRecordsSystem _sunriseCriminalRecords = default!;
 
     private const int NumCells = 10;
     private const int EscapePenalty = 10;

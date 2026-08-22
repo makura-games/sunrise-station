@@ -12,11 +12,11 @@ namespace Content.Server._Sunrise.StationCentComm;
 
 public sealed partial class StationCentCommSystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ShuttleSystem _shuttle = default!;
-    [Dependency] private readonly MapSystem _map = default!;
+    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ShuttleSystem _shuttle = default!;
+    [Dependency] private MapSystem _map = default!;
 
     private ISawmill _sawmill = default!;
 

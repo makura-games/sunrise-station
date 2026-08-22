@@ -10,11 +10,11 @@ using Robust.Shared.Player;
 namespace Content.Client.RoundEnd;
 
 [UsedImplicitly]
-public sealed class RoundEndSummaryUIController : UIController,
+public sealed partial class RoundEndSummaryUIController : UIController,
     IOnSystemLoaded<ClientGameTicker>
 {
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
 
     private RoundEndSummaryWindow? _window;
 

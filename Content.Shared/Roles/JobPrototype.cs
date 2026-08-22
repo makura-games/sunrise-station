@@ -84,9 +84,6 @@ namespace Content.Shared.Roles
         [DataField]
         public bool? OverrideConsoleVisibility { get; private set; } = null;
 
-        [DataField]
-        public bool CanBeAntag { get; private set; } = true;
-
         // Sunrise-Start
         [DataField("radioBold")]
         public bool RadioIsBold { get; private set; }

@@ -10,14 +10,22 @@
     - FreeBorgsObjective
   - type: AntagSelection
     agentName: self-round-end-agent-name
-    selectionTime: IntraPlayerSpawn
-    definitions:
-    - prefRoles: [ SELFAgent ]
-      max: 3
-      startingGear: SELFAgentGear
-      mindRoles:
-      - MindRoleSELFAgent
-      briefing:
-        sound: "/Audio/_Sunrise/Ambience/Antag/self_greeting.ogg"
+    selectionTime: JobsAssigned
+    antags:
+    - !type:LinearAntagCount
+      proto: SunriseSELFAgent
+      range:
+        min: 1
+        max: 3
   - type: DynamicRuleCost
     cost: 70
+
+- type: antagSpecifier
+  parent: BaseAntagSpecifier
+  id: SunriseSELFAgent
+  prefRoles: [ SELFAgent ]
+  startingGear: SELFAgentGear
+  mindRoles:
+  - MindRoleSELFAgent
+  briefing:
+    sound: /Audio/_Sunrise/Ambience/Antag/self_greeting.ogg

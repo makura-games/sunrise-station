@@ -12,15 +12,15 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._Sunrise.PlanetPrison;
 
-public sealed class StayFreeConditionSystem : EntitySystem
+public sealed partial class StayFreeConditionSystem : EntitySystem
 {
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly EmergencyShuttleSystem _emergencyShuttle = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private SharedObjectivesSystem _objectives = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
 
     private readonly EntProtoId _stayFreeObjective = "PlanetPrisonerStayFreeObjective";
 

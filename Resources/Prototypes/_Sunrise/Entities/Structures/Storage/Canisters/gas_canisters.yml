@@ -9,7 +9,7 @@
     layers:
     - state: bz
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1000
       moles:
         BZ: 1871.71051
@@ -51,7 +51,7 @@
     layers:
     - state: healium
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1000
       moles:
         Healium: 1871.71051
@@ -93,7 +93,7 @@
     layers:
     - state: nitrium
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1000
       moles:
         Nitrium: 1871.71051
@@ -135,7 +135,7 @@
     layers:
     - state: pluoxium
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1000
       moles:
         Pluoxium: 1871.71051
@@ -177,7 +177,7 @@
     layers:
     - state: h2
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1000
       moles:
         Hydrogen: 1871.71051
@@ -219,7 +219,7 @@
     layers:
     - state: nob
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1000
       moles:
         HyperNoblium: 1871.71051
@@ -261,7 +261,7 @@
     layers:
     - state: proto_nitrate
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1000
       moles:
         ProtoNitrate: 1871.71051
@@ -303,7 +303,7 @@
     layers:
     - state: zauker
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1000
       moles:
         Zauker: 1871.71051
@@ -345,7 +345,7 @@
     layers:
     - state: halon
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1000
       moles:
         Halon: 1871.71051
@@ -387,7 +387,7 @@
     layers:
     - state: helium
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1000
       moles:
         Helium: 1871.71051
@@ -429,7 +429,7 @@
     layers:
     - state: antinob
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1000
       moles:
         AntiNoblium: 1871.71051
@@ -467,7 +467,7 @@
   description: A canister that can contain any type of gas. This one is supposed to contain liquid plasma. It can be attached to connector ports using a wrench.
   components:
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1500
       moles:
         Plasma: 18710.71051
@@ -486,7 +486,7 @@
     layers:
     - state: electrovae
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1500
       moles:
         Electrovae: 2769.36
@@ -528,7 +528,7 @@
     layers:
     - state: chargedelectrovae
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1500
       moles:
         ChargedElectrovae: 2769.36

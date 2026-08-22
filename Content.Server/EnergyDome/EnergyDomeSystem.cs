@@ -25,16 +25,16 @@ namespace Content.Server.EnergyDome;
 
 public sealed partial class EnergyDomeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly BatterySystem _battery = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly DeviceLinkSystem _signalSystem = default!;
-    [Dependency] private readonly ContainerSystem _containerSystem = default!;
-    [Dependency] private readonly BiocodeSystem _biocodeSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private BatterySystem _battery = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private DeviceLinkSystem _signalSystem = default!;
+    [Dependency] private ContainerSystem _containerSystem = default!;
+    [Dependency] private BiocodeSystem _biocodeSystem = default!;
 
     public override void Initialize()
     {

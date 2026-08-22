@@ -5,10 +5,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._Sunrise.FactionClothingBlockerSystem;
 
-public sealed class FactionClothingBlockerSystem : EntitySystem
+public sealed partial class FactionClothingBlockerSystem : EntitySystem
 {
-    [Dependency] private readonly BiocodeSystem _biocodeSystem = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private BiocodeSystem _biocodeSystem = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

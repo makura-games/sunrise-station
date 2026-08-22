@@ -8,10 +8,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Humanoid;
 
-public sealed class HumanoidPhysicalStatsSystem : EntitySystem
+public sealed partial class HumanoidPhysicalStatsSystem : EntitySystem
 {
-    [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {

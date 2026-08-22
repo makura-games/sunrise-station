@@ -140,7 +140,6 @@
   - type: RandomSpawner
     prototypes:
     - MobRogueSiliconT3Tesla
-    - MobRogueSiliconT3Terminator
     - MobRogueSiliconT2DerelictBorgAssaultHeavy
     - MobRogueSiliconT3DerelictBorgSyndicateSaboteur
     chance: 1

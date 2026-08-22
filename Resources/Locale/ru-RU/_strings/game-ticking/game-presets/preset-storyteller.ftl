@@ -191,7 +191,6 @@ storyteller-metadata-paradoxclonespawn-start = Ткань реальности �
 storyteller-metadata-assaultops-start = Прозвучал сигнал боевой тревоги: профессиональный штурмовой отряд Синдиката начал прямую атаку на станцию!
 storyteller-metadata-powergridcheck-start = Инженеры объявили о начале масштабных профилактических работ в энергосети станции.
 storyteller-metadata-thief-start = В толпе экипажа скрылся ловкий карманник, нацеленный на личные вещи сотрудников.
-storyteller-metadata-terminatorspawn-start = Блюспейс-вспышка озарила отсек: из далёкого будущего прибыл безжалостный Терминатор, чтобы забрать жизнь своей цели.
 storyteller-metadata-spiderclownspawnhorde-start = Безумный цирковой кошмар воплотился наяву: на борту материализовался ужасающий Паук-Клоун.
 storyteller-metadata-abductors-end = Чуждые сигналы утихли: биологическая активность Абдукторов в секторе прекратилась.
 storyteller-metadata-revolutionary-end = Волна мятежа спала, и революционный запал среди бунтовщиков сошёл на нет.

@@ -9,11 +9,11 @@ using Robust.Shared.GameStates;
 
 namespace Content.Client._Sunrise.Humanoid;
 
-public sealed class SunriseHumanoidProfileVisualSystem : EntitySystem
+public sealed partial class SunriseHumanoidProfileVisualSystem : EntitySystem
 {
-    [Dependency] private readonly ClientClothingSystem _clothing = default!;
-    [Dependency] private readonly VisualBodySystem _visualBody = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private ClientClothingSystem _clothing = default!;
+    [Dependency] private VisualBodySystem _visualBody = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

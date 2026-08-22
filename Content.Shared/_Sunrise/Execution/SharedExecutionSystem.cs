@@ -13,9 +13,9 @@ namespace Content.Shared._Sunrise.Execution;
 
 public abstract partial class SharedExecutionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly RandomPredictedSystem _predictedRandom = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private RandomPredictedSystem _predictedRandom = default!;
 
     protected const float MeleeExecutionTimeModifier = 5.0f;
     protected const float SuicideFastChance = 0.25f;

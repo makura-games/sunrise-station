@@ -1,4 +1,4 @@
-﻿# spawn animation, spawns actual narsie when it ends
+# spawn animation, spawns actual narsie when it ends
 - type: entity
   id: MobHellspawnBossSpawn
   suffix: Spawn
@@ -62,8 +62,9 @@
     components:
     - type: RadarBlip
   - type: Damageable
-    damageContainer: BiologicalMetaphysical
     damageModifierSet: HellSpawnBoss
+  - type: Injurable
+    damageContainer: BiologicalMetaphysical
   - type: ExplosionResistance
     damageCoefficient: 0.25
   - type: Fixtures

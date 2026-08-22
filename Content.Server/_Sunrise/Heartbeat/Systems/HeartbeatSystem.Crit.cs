@@ -8,7 +8,7 @@ namespace Content.Server._Sunrise.Heartbeat.Systems;
 
 public sealed partial class HeartbeatSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     // Минимальное и максимальное время между ударами сердца
     private const float MinimumCooldown = 0.5f;

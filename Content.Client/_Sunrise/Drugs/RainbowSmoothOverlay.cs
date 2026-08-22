@@ -14,13 +14,13 @@ using Robust.Shared.Random;
 
 namespace Content.Client._Sunrise.Drugs;
 
-public sealed class RainbowSmoothOverlaySystem : EntitySystem
+public sealed partial class RainbowSmoothOverlaySystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IEntitySystemManager _sysMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IEntitySystemManager _sysMan = default!;
     private StatusEffectsSystem _status = default!;
 
     private RainbowSmoothOverlay? _overlay;
@@ -101,15 +101,15 @@ public sealed class RainbowSmoothOverlaySystem : EntitySystem
     }
 }
 
-public sealed class RainbowSmoothOverlay : Overlay
+public sealed partial class RainbowSmoothOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> Shader = "Rainbow";
 
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;

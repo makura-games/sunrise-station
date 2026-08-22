@@ -195,14 +195,14 @@
     soundHit:
       collection: MetalThud
   - type: RefillableSolution
-    solution: Welder
-  - type: SolutionContainerManager
-    solutions:
-      Welder:
-        reagents:
-        - ReagentId: WeldingFuel
-          Quantity: 250 # Sunrise-edit
-        maxVol: 250 # Sunrise-edit
+    solution: welder
+  - type: Solution
+    id: welder
+    solution:
+      reagents:
+      - ReagentId: WeldingFuel
+        Quantity: 250 # Sunrise-edit
+      maxVol: 250 # Sunrise-edit
   - type: Tool
     speedModifier: 1.75
     useSound:
@@ -330,19 +330,18 @@
         enum.ToggleableVisuals.Layer:
           True: { visible: true }
           False: { visible: false }
-  - type: SolutionContainerManager
-    solutions:
-      Welder:
-        reagents:
-        - ReagentId: WeldingFuel
-          Quantity: 500
-        maxVol: 500
+  - type: Solution
+    id: welder
+    solution:
+      reagents:
+      - ReagentId: WeldingFuel
+        Quantity: 500
+      maxVol: 500
   - type: PointLight
     enabled: false
     radius: 1.5
     color: lightblue
   - type: SolutionRegeneration
-    solution: Welder
     generated:
       reagents:
       - ReagentId: WeldingFuel
@@ -490,17 +489,15 @@
     - type: UseDelay
       delay: 0.5
     - type: SolutionRegeneration
-      solution: absorbed
       generated:
         reagents:
         - ReagentId: Water
           Quantity: 0.5
     - type: SolutionPurge
-      solution: absorbed
       preserve:
       - Water
       quantity: 10
-    - type: SolutionContainerManager
-      solutions:
-        absorbed:
-          maxVol: 100
+    - type: Solution
+      id: absorbed
+      solution:
+        maxVol: 100

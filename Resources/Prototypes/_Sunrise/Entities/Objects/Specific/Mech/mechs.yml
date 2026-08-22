@@ -123,6 +123,7 @@
   - type: Loadout
     prototypes: [ MechArmorLightLoadout ]
   - type: Damageable
+  - type: Injurable
     damageContainer: Mech
   - type: GuideHelp
     guides:

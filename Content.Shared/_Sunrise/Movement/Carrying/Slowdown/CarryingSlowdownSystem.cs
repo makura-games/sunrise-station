@@ -3,9 +3,9 @@ using JetBrains.Annotations;
 
 namespace Content.Shared._Sunrise.Movement.Carrying.Slowdown;
 
-public sealed class CarryingSlowdownSystem : EntitySystem
+public sealed partial class CarryingSlowdownSystem : EntitySystem
 {
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

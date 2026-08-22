@@ -15,11 +15,11 @@ using GhostWarpsResponseEvent = Content.Shared.Ghost.SharedGhostSystem.GhostWarp
 namespace Content.Client.UserInterface.Systems.Ghost;
 
 // TODO hud refactor BEFORE MERGE fix ghost gui being too far up
-public sealed class GhostUIController : UIController, IOnSystemChanged<GhostSystem>
+public sealed partial class GhostUIController : UIController, IOnSystemChanged<GhostSystem>
 {
-    [Dependency] private readonly IEntityNetworkManager _net = default!;
-    [Dependency] private readonly ServersHubManager _serversHubManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IEntityNetworkManager _net = default!;
+    [Dependency] private ServersHubManager _serversHubManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
     private ISharedSponsorsManager? _sponsorsManager; // Sunrise-Sponsors
 
     [UISystemDependency] private readonly GhostSystem? _system = default;

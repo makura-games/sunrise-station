@@ -20,15 +20,15 @@ namespace Content.Server.StationRecords.Systems;
 
 public sealed partial class GeneralStationRecordConsoleSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly AccessReaderSystem _access = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly JobSystem _job = default!;
-    [Dependency] private readonly PaperSystem _paper = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private AccessReaderSystem _access = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private JobSystem _job = default!;
+    [Dependency] private PaperSystem _paper = default!;
 
     private void InitializeSunrise()
     {

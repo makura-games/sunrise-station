@@ -9244,7 +9244,6 @@ entities:
   - uid: 2962
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 50.5,41.5
       parent: 2
 - proto: CyberPen

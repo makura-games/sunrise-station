@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Client.Shuttles.UI;
 using Content.Shared._Starlight.Weapons.Gunnery;
 using Content.Shared.Shuttles.BUIStates;
@@ -31,12 +31,15 @@ namespace Content.Client._Starlight.Weapons.Gunnery;
 /// • Hold RMB on open space (with cannon selected) → automatic fire at cursor.
 /// • Hold RMB while guided projectile is active → steer rocket toward cursor.
 /// </summary>
-public sealed class GunneryRadarControl : BaseShuttleControl
+public sealed partial class GunneryRadarControl : BaseShuttleControl
 {
-    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private IMapManager _mapManager = default!;
 
     private readonly SharedShuttleSystem  _shuttles;
     private readonly SharedTransformSystem _transform;
+    private readonly EntityQuery<TransformComponent> _xformQuery;
+    private readonly EntityQuery<FixturesComponent> _fixturesQuery;
+    private readonly EntityQuery<PhysicsComponent> _bodyQuery;
 
     // ── State received from server ─────────────────────────────────────────
 
@@ -90,6 +93,9 @@ public sealed class GunneryRadarControl : BaseShuttleControl
         RobustXamlLoader.Load(this);
         _shuttles  = EntManager.System<SharedShuttleSystem>();
         _transform = EntManager.System<SharedTransformSystem>();
+        _xformQuery = EntManager.GetEntityQuery<TransformComponent>();
+        _fixturesQuery = EntManager.GetEntityQuery<FixturesComponent>();
+        _bodyQuery = EntManager.GetEntityQuery<PhysicsComponent>();
     }
 
     // ── Public API ─────────────────────────────────────────────────────────
@@ -252,11 +258,7 @@ public sealed class GunneryRadarControl : BaseShuttleControl
         if (_coordinates == null || _rotation == null)
             return;
 
-        var xformQuery    = EntManager.GetEntityQuery<TransformComponent>();
-        var fixturesQuery = EntManager.GetEntityQuery<FixturesComponent>();
-        var bodyQuery     = EntManager.GetEntityQuery<PhysicsComponent>();
-
-        if (!xformQuery.TryGetComponent(_coordinates.Value.EntityId, out var xform)
+        if (!_xformQuery.TryGetComponent(_coordinates.Value.EntityId, out var xform)
             || xform.MapID == MapId.Nullspace)
             return;
 
@@ -273,7 +275,7 @@ public sealed class GunneryRadarControl : BaseShuttleControl
         var ourGridId = xform.GridUid;
         if (ourGridId != null
             && EntManager.TryGetComponent<MapGridComponent>(ourGridId, out var ourGrid)
-            && fixturesQuery.HasComponent(ourGridId.Value))
+            && _fixturesQuery.HasComponent(ourGridId.Value))
         {
             var ourGridToWorld   = _transform.GetWorldMatrix(ourGridId.Value);
             var ourGridToShuttle = Matrix3x2.Multiply(ourGridToWorld, worldToShuttle);
@@ -309,10 +311,10 @@ public sealed class GunneryRadarControl : BaseShuttleControl
         foreach (var grid in _grids)
         {
             var gUid = grid.Owner;
-            if (gUid == ourGridId || !fixturesQuery.HasComponent(gUid))
+            if (gUid == ourGridId || !_fixturesQuery.HasComponent(gUid))
                 continue;
 
-            var gridBody = bodyQuery.GetComponent(gUid);
+            var gridBody = _bodyQuery.GetComponent(gUid);
             EntManager.TryGetComponent<IFFComponent>(gUid, out var iff);
             if (!_shuttles.CanDraw(gUid, gridBody, iff))
                 continue;
@@ -330,7 +332,7 @@ public sealed class GunneryRadarControl : BaseShuttleControl
 
             if (labelName != null)
             {
-                var gridBody2    = bodyQuery.GetComponent(gUid);
+                var gridBody2    = _bodyQuery.GetComponent(gUid);
                 var gridCentre   = Vector2.Transform(gridBody2.LocalCenter, curGridToView);
                 handle.DrawString(Font, gridCentre, labelName, labelColor);
             }
@@ -466,8 +468,7 @@ public sealed class GunneryRadarControl : BaseShuttleControl
         if (_coordinates == null || _rotation == null)
             return default;
 
-        var xformQuery = EntManager.GetEntityQuery<TransformComponent>();
-        if (!xformQuery.TryGetComponent(_coordinates.Value.EntityId, out var xform)
+        if (!_xformQuery.TryGetComponent(_coordinates.Value.EntityId, out var xform)
             || xform.MapID == MapId.Nullspace)
             return default;
 
@@ -510,8 +511,7 @@ public sealed class GunneryRadarControl : BaseShuttleControl
         if (_coordinates == null || _rotation == null)
             return false;
 
-        var xformQuery = EntManager.GetEntityQuery<TransformComponent>();
-        if (!xformQuery.TryGetComponent(_coordinates.Value.EntityId, out var xform)
+        if (!_xformQuery.TryGetComponent(_coordinates.Value.EntityId, out var xform)
             || xform.MapID == MapId.Nullspace)
             return false;
 

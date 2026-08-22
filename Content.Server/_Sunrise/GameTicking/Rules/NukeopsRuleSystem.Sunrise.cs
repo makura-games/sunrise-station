@@ -7,8 +7,8 @@ namespace Content.Server.GameTicking.Rules;
 
 public sealed partial class NukeopsRuleSystem
 {
-    [Dependency] private readonly AlertLevelSystem _alertLevelSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private AlertLevelSystem _alertLevelSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     public override void Update(float frameTime)
     {

@@ -1,11 +1,11 @@
-﻿using Content.Shared._Sunrise.BloodCult.Components;
+using Content.Shared._Sunrise.BloodCult.Components;
 using Content.Shared.Interaction;
 
 namespace Content.Server._Sunrise.BloodCult.Structures;
 
-public sealed class RunicGirderSystem : EntitySystem
+public sealed partial class RunicGirderSystem : EntitySystem
 {
-    [Dependency] private readonly EntityManager _entMan = default!;
+    [Dependency] private EntityManager _entMan = default!;
 
     public override void Initialize()
     {

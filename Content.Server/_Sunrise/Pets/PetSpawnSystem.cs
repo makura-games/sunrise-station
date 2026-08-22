@@ -8,12 +8,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Pets;
 
-public sealed class PetSpawnSystem : EntitySystem
+public sealed partial class PetSpawnSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SponsorValidationSystem _validationSystem = default!;
-    [Dependency] private readonly PlayerCacheManager _playerCache = default!;
-    [Dependency] private readonly SharedPettingSystem _pettingSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SponsorValidationSystem _validationSystem = default!;
+    [Dependency] private PlayerCacheManager _playerCache = default!;
+    [Dependency] private SharedPettingSystem _pettingSystem = default!;
 
     public override void Initialize()
     {

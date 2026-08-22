@@ -77,7 +77,7 @@ public sealed partial class AtmosphereSystem
 
     public void ChargedElectrovaeExpose(Entity<GridAtmosphereComponent?> ent, TileAtmosphere tile, float intensity)
     {
-        if (!_atmosQuery.Resolve(ent, ref ent.Comp))
+        if (!_gridAtmosQuery.Resolve(ent, ref ent.Comp))
             return;
 
         if (!tile.ChargedEffect.Active)

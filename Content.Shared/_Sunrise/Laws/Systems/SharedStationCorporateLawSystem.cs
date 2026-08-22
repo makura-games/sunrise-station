@@ -7,11 +7,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Sunrise.Laws.Systems;
 
-public abstract class SharedStationCorporateLawSystem : EntitySystem
+public abstract partial class SharedStationCorporateLawSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStationSystem _station = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     public Entity<StationCorporateLawComponent>? GetStationLawset(EntityUid uid)
     {

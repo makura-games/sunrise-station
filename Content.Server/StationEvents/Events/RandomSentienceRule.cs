@@ -9,12 +9,13 @@ using Robust.Shared.Random;
 
 namespace Content.Server.StationEvents.Events;
 
-public sealed class RandomSentienceRule : StationEventSystem<RandomSentienceRuleComponent>
+public sealed partial class RandomSentienceRule : StationEventSystem<RandomSentienceRuleComponent>
 {
     private static readonly ProtoId<LocalizedDatasetPrototype> DataSourceNames = "RandomSentienceEventData";
     private static readonly ProtoId<LocalizedDatasetPrototype> IntelligenceLevelNames = "RandomSentienceEventStrength";
 
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     protected override void Started(EntityUid uid, RandomSentienceRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
@@ -75,8 +76,8 @@ public sealed class RandomSentienceRule : StationEventSystem<RandomSentienceRule
             station.Value,
             Loc.GetString("station-event-random-sentience-announcement",
                 ("kind1", kind1), ("kind2", kind2), ("kind3", kind3), ("amount", groupList.Count),
-                ("data", _random.Pick(_prototype.Index(DataSourceNames))),
-                ("strength", _random.Pick(_prototype.Index(IntelligenceLevelNames)))
+                ("data", _random.Pick(PrototypeManager.Index(DataSourceNames))),
+                ("strength", _random.Pick(PrototypeManager.Index(IntelligenceLevelNames)))
             ),
             playDefault: false,
             colorOverride: Color.Gold

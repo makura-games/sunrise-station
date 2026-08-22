@@ -2,7 +2,7 @@ using System.Linq;
 using Content.Server.Nutrition.Components;
 using Content.Shared._Sunrise.FleshCult;
 using Content.Shared.CombatMode.Pacification;
-using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Hands;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement.Components;
@@ -11,6 +11,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Player;
@@ -19,6 +20,8 @@ namespace Content.Server._Sunrise.FleshCult;
 
 public sealed partial class FleshCultSystem
 {
+    [Dependency] private StatusEffectsSystem _huggerStatusEffects = default!;
+
     public void InitializeHugger()
     {
         SubscribeLocalEvent<FleshHuggerComponent, MapInitEvent>(OnMapInit);
@@ -90,8 +93,8 @@ public sealed partial class FleshCultSystem
     {
         if (args.Slot != "mask")
             return;
-        component.EquipedOn = args.Equipee;
-        EnsureComp<TemporaryBlindnessComponent>(args.Equipee);
+        component.EquipedOn = args.EquipTarget;
+        _huggerStatusEffects.TrySetStatusEffectDuration(args.EquipTarget, BlindnessSystem.BlindingStatusEffect);
         EnsureComp<PacifiedComponent>(uid);
     }
 
@@ -112,8 +115,7 @@ public sealed partial class FleshCultSystem
             return;
         if (HasComp<PacifiedComponent>(uid))
             RemComp<PacifiedComponent>(uid);
-        if (HasComp<TemporaryBlindnessComponent>(component.EquipedOn))
-            RemComp<TemporaryBlindnessComponent>(args.Equipee);
+        _huggerStatusEffects.TryRemoveStatusEffect(args.EquipTarget, BlindnessSystem.BlindingStatusEffect);
         _stunSystem.TryAddParalyzeDuration(uid, TimeSpan.FromSeconds(3));
         component.EquipedOn = new EntityUid();
     }

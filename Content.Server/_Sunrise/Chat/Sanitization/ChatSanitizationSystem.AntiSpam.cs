@@ -14,9 +14,9 @@ namespace Content.Server._Sunrise.Chat.Sanitization;
 
 public sealed partial class ChatSanitizationSystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private static readonly EntProtoId SpamMuteStatusEffect = "StatusEffectMuted";
 

@@ -23,7 +23,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    temporary: true
+    temporary: false # Удаляется BloodCultRuleSystem, чтобы клиент не предсказывал удаление при полном сбросе состояния.
     useDelay: 3
     icon:
       sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi

@@ -48,11 +48,12 @@ public sealed class MappingAccessOutlineOverlay : Overlay
         IPrototypeManager prototypeManager,
         IClyde clyde,
         MappingAccessReaderResolver readerResolver,
-        MappingAccessTightBounds tightBounds)
+        MappingAccessTightBounds tightBounds,
+        EntityQuery<PhysicsComponent> physicsQuery)
     {
         _clyde = clyde;
         _ent = entityManager;
-        _physicsQuery = _ent.GetEntityQuery<PhysicsComponent>();
+        _physicsQuery = physicsQuery;
         _readerResolver = readerResolver;
         _spriteSystem = spriteSystem;
         _tightBounds = tightBounds;

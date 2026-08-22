@@ -1,6 +1,6 @@
 - type: entity
   name: spear
-  parent: [BaseItem, BaseMinorContraband]
+  parent: [BaseItem, SolutionDart, BaseMinorContraband]
   id: Spear
   description: Definition of a Classic. Keeping murder affordable since 200,000 BCE.
   components:
@@ -58,10 +58,6 @@
   - type: Construction
     graph: Spear
     node: spear
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        maxVol: 5 # Sunrise-Edit
   - type: MeleeChemicalInjector
     solution: melee
   - type: RefillableSolution
@@ -69,16 +65,17 @@
   - type: InjectableSolution
     solution: melee
   - type: SolutionInjectOnEmbed
-    transferAmount: 1 # Sunrise-Edit
+    transferAmount: 2
     solution: melee
   - type: SolutionTransfer
-    maxTransferAmount: 1 # Sunrise-Edit
+    maxTransferAmount: 2
   - type: Wieldable
   - type: IncreaseDamageOnWield
     damage:
       types:
         Piercing: 4
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
@@ -117,7 +114,6 @@
     inHandsMaxFillLevels: 1
     equippedFillBaseName: -fill-
     equippedMaxFillLevels: 1
-
 
 - type: entity
   name: reinforced spear

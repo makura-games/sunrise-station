@@ -1,27 +1,24 @@
-using System.Numerics;
 using Content.Server.GameTicking;
 using Content.Server.Spawners.Components;
 using Content.Shared.EntityTable;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.Tag; // Sunrise-Edit
 using JetBrains.Annotations;
-using Robust.Shared.Map;
-using Robust.Shared.Prototypes; // Sunrise-Edit
+using Robust.Server.GameObjects;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
+// TODO: This whole system is a mess. A lot of this should be marked obsolete.
+// TODO: It should probably use interfaces with entity tables *if* more than one component is needed.
+// TODO: Remove the TransformSystem Dependency when engine SpawnAtPosition EntityCoordinates override is fixed.
 namespace Content.Server.Spawners.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class ConditionalSpawnerSystem : EntitySystem
+    public sealed partial class ConditionalSpawnerSystem : EntitySystem
     {
-        [Dependency] private readonly IRobustRandom _robustRandom = default!;
-        [Dependency] private readonly GameTicker _ticker = default!;
-        [Dependency] private readonly EntityTableSystem _entityTable = default!;
-        [Dependency] private readonly TagSystem _tag = default!; // Sunrise-Edit
-
-        // Sunrise-Edit start
-        private static readonly ProtoId<TagPrototype> StorytellerIgnoreMessTag = "StorytellerIgnoreMess";
-        // Sunrise-Edit end
+        [Dependency] private IRobustRandom _robustRandom = default!;
+        [Dependency] private GameTicker _ticker = default!;
+        [Dependency] private EntityTableSystem _entityTable = default!;
+        [Dependency] private TransformSystem _xform = default!;
 
         public override void Initialize()
         {
@@ -95,51 +92,66 @@ namespace Content.Server.Spawners.EntitySystems
                 return;
             }
 
-            if (!Deleted(uid))
-            {
-                var spawned = Spawn(_robustRandom.Pick(component.Prototypes), Transform(uid).Coordinates);
-                // Sunrise-Edit start
-                if (_tag.HasTag(uid, StorytellerIgnoreMessTag))
-                    _tag.AddTag(spawned, StorytellerIgnoreMessTag);
-                // Sunrise-Edit end
-            }
+            if (Deleted(uid))
+                return;
+
+            var xform = Transform(uid);
+            var coords = _xform.GetMapCoordinates(uid, xform);
+            var rotation = _xform.GetWorldRotation(xform);
+
+            var spawned = Spawn(_robustRandom.Pick(component.Prototypes), coords, rotation: rotation);
+            PropagateStorytellerIgnoreMess(uid, spawned); // Sunrise-Edit
         }
 
         private void Spawn(EntityUid uid, RandomSpawnerComponent component)
         {
-            if (component.RarePrototypes.Count > 0 && (component.RareChance == 1.0f || _robustRandom.Prob(component.RareChance)))
-            {
-                var spawned = Spawn(_robustRandom.Pick(component.RarePrototypes), Transform(uid).Coordinates);
-                // Sunrise-Edit start
-                if (_tag.HasTag(uid, StorytellerIgnoreMessTag))
-                    _tag.AddTag(spawned, StorytellerIgnoreMessTag);
-                // Sunrise-Edit end
-                return;
-            }
-
-            if (component.Chance != 1.0f && !_robustRandom.Prob(component.Chance))
-                return;
-
-            if (component.Prototypes.Count == 0)
-            {
-                Log.Warning($"Prototype list in RandomSpawnerComponent is empty! Entity: {ToPrettyString(uid)}");
-                return;
-            }
-
             if (Deleted(uid))
                 return;
 
+            if (GetPrototype((uid, component)) is not { } proto)
+                return;
+
             var offset = component.Offset;
-            var xOffset = _robustRandom.NextFloat(-offset, offset);
-            var yOffset = _robustRandom.NextFloat(-offset, offset);
+            var vOffset = _robustRandom.NextVector2Box(-offset, offset);
 
-            var coordinates = Transform(uid).Coordinates.Offset(new Vector2(xOffset, yOffset));
+            var xform = Transform(uid);
+            var coords = _xform.GetMapCoordinates(uid, xform).Offset(vOffset);
+            var rotation = _xform.GetWorldRotation(xform);
 
-            var spawnedResult = Spawn(_robustRandom.Pick(component.Prototypes), coordinates);
-            // Sunrise-Edit start
-            if (_tag.HasTag(uid, StorytellerIgnoreMessTag))
-                _tag.AddTag(spawnedResult, StorytellerIgnoreMessTag);
-            // Sunrise-Edit end
+            var spawned = Spawn(proto, coords, rotation: rotation);
+            PropagateStorytellerIgnoreMess(uid, spawned); // Sunrise-Edit
+        }
+
+        private EntProtoId? GetPrototype(Entity<RandomSpawnerComponent> spawner)
+        {
+            if (GetPrototypes(spawner) is not { } list)
+                return null;
+
+            return _robustRandom.Pick(list);
+        }
+
+        private List<EntProtoId>? GetPrototypes(Entity<RandomSpawnerComponent> spawner)
+        {
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            if (spawner.Comp.RarePrototypes.Count > 0 &&
+                (spawner.Comp.RareChance == 1.0f || _robustRandom.Prob(spawner.Comp.RareChance)))
+            {
+                return spawner.Comp.RarePrototypes;
+            }
+
+            if (spawner.Comp.Prototypes.Count == 0)
+            {
+                Log.Warning($"Prototype list in RandomSpawnerComponent is empty! Entity: {ToPrettyString(spawner)}");
+                return null;
+            }
+
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            if (spawner.Comp.Chance == 1.0f || !_robustRandom.Prob(spawner.Comp.Chance))
+            {
+                return spawner.Comp.Prototypes;
+            }
+
+            return null;
         }
 
         private void Spawn(Entity<EntityTableSpawnerComponent> ent)
@@ -147,25 +159,19 @@ namespace Content.Server.Spawners.EntitySystems
             if (TerminatingOrDeleted(ent) || !Exists(ent))
                 return;
 
-            var coords = Transform(ent).Coordinates;
+            var xform = Transform(ent);
+            var coords = _xform.GetMapCoordinates(ent, xform);
+            var rotation = _xform.GetWorldRotation(xform);
             var offset = ent.Comp.Offset;
-
-            // Sunrise-Edit start
-            var hasIgnoreMess = _tag.HasTag(ent, StorytellerIgnoreMessTag);
-            // Sunrise-Edit end
 
             var spawns = _entityTable.GetSpawns(ent.Comp.Table);
             foreach (var proto in spawns)
             {
-                var xOffset = _robustRandom.NextFloat(-offset, offset);
-                var yOffset = _robustRandom.NextFloat(-offset, offset);
-                var trueCoords = coords.Offset(new Vector2(xOffset, yOffset));
+                var vOffset = _robustRandom.NextVector2(-offset, offset);
+                var trueCoords = coords.Offset(vOffset);
 
-                var spawned = SpawnAttachedTo(proto, trueCoords);
-                // Sunrise-Edit start
-                if (hasIgnoreMess)
-                    _tag.AddTag(spawned, StorytellerIgnoreMessTag);
-                // Sunrise-Edit end
+                var spawned = Spawn(proto, trueCoords, rotation: rotation);
+                PropagateStorytellerIgnoreMess(ent, spawned); // Sunrise-Edit
             }
         }
     }

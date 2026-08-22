@@ -96,26 +96,28 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
     private static readonly ProtoId<TagPrototype> StorytellerIgnoreMessTag = "StorytellerIgnoreMess";
     private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
 
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
-    [Dependency] private readonly SharedJobSystem _jobSystem = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly EventManagerSystem _eventManager = default!;
-    [Dependency] private readonly SharedCargoSystem _cargoSystem = default!;
-    [Dependency] private readonly GhostRoleSystem _ghostRoleSystem = default!;
-    [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
-    [Dependency] private readonly SharedBatterySystem _batterySystem = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly SharedMaterialStorageSystem _materialStorage = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private SharedMindSystem _mindSystem = default!;
+    [Dependency] private SharedJobSystem _jobSystem = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
+    [Dependency] private EventManagerSystem _eventManager = default!;
+    [Dependency] private SharedCargoSystem _cargoSystem = default!;
+    [Dependency] private GhostRoleSystem _ghostRoleSystem = default!;
+    [Dependency] private SharedRoleSystem _roleSystem = default!;
+    [Dependency] private SharedBatterySystem _batterySystem = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private SharedMaterialStorageSystem _materialStorage = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobStateQuery = default!;
 
     private readonly List<TimeSpan> _joinTimestamps = new();
     private readonly List<TimeSpan> _leaveTimestamps = new();
@@ -1435,17 +1437,14 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
     private int CountCrewWeapons()
     {
         var armedMobs = new HashSet<EntityUid>();
-        var xformQuery = GetEntityQuery<TransformComponent>();
-        var mobQuery = GetEntityQuery<MobStateComponent>();
-
         var gunQuery = EntityQueryEnumerator<GunComponent>();
         while (gunQuery.MoveNext(out var uid, out _))
         {
             if (IsToyWeapon(uid))
                 continue;
 
-            var mob = FindCarryingMob(uid, xformQuery, mobQuery);
-            if (mob != null && mobQuery.TryGetComponent(mob.Value, out var mobState))
+            var mob = FindCarryingMob(uid);
+            if (mob != null && _mobStateQuery.TryGetComponent(mob.Value, out var mobState))
             {
                 if (mobState.CurrentState == MobState.Alive || mobState.CurrentState == MobState.Critical)
                 {
@@ -1462,8 +1461,8 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
         {
             if (IsFirearm(uid))
             {
-                var mob = FindCarryingMob(uid, xformQuery, mobQuery);
-                if (mob != null && mobQuery.TryGetComponent(mob.Value, out var mobState))
+                var mob = FindCarryingMob(uid);
+                if (mob != null && _mobStateQuery.TryGetComponent(mob.Value, out var mobState))
                 {
                     if (mobState.CurrentState == MobState.Alive || mobState.CurrentState == MobState.Critical)
                     {
@@ -1479,8 +1478,8 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
             if (melee.Damage.GetTotal().Float() <= 15) // TODO: Магическое число должно быть обьявлено переменной
                 continue;
 
-            var mob2 = FindCarryingMob(uid, xformQuery, mobQuery);
-            if (mob2 != null && mobQuery.TryGetComponent(mob2.Value, out var mobState2))
+            var mob2 = FindCarryingMob(uid);
+            if (mob2 != null && _mobStateQuery.TryGetComponent(mob2.Value, out var mobState2))
             {
                 if (mobState2.CurrentState == MobState.Alive || mobState2.CurrentState == MobState.Critical)
                 {
@@ -1497,17 +1496,14 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
     private float CountArmedCrewNotAntags()
     {
         var mobWeights = new Dictionary<EntityUid, float>();
-        var xformQuery = GetEntityQuery<TransformComponent>();
-        var mobQuery = GetEntityQuery<MobStateComponent>();
-
         var gunQuery = EntityQueryEnumerator<GunComponent>();
         while (gunQuery.MoveNext(out var uid, out _))
         {
             if (IsToyWeapon(uid))
                 continue;
 
-            var mob = FindCarryingMob(uid, xformQuery, mobQuery);
-            if (mob != null && mobQuery.TryGetComponent(mob.Value, out var mobState))
+            var mob = FindCarryingMob(uid);
+            if (mob != null && _mobStateQuery.TryGetComponent(mob.Value, out var mobState))
             {
                 if (mobState.CurrentState == MobState.Alive || mobState.CurrentState == MobState.Critical)
                 {
@@ -1526,8 +1522,8 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
             if (IsFirearm(uid))
                 continue;
 
-            var mob = FindCarryingMob(uid, xformQuery, mobQuery);
-            if (mob != null && mobQuery.TryGetComponent(mob.Value, out var mobState))
+            var mob = FindCarryingMob(uid);
+            if (mob != null && _mobStateQuery.TryGetComponent(mob.Value, out var mobState))
             {
                 if (mobState.CurrentState == MobState.Alive || mobState.CurrentState == MobState.Critical)
                 {
@@ -1582,18 +1578,18 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
         return false;
     }
 
-    private EntityUid? FindCarryingMob(EntityUid uid, EntityQuery<TransformComponent> xformQuery, EntityQuery<MobStateComponent> mobQuery)
+    private EntityUid? FindCarryingMob(EntityUid uid)
     {
         var current = uid;
         while (true)
         {
-            if (!xformQuery.TryGetComponent(current, out var xform))
+            if (!_xformQuery.TryGetComponent(current, out var xform))
                 break;
 
             if (!xform.ParentUid.Valid)
                 break;
 
-            if (mobQuery.HasComponent(xform.ParentUid))
+            if (_mobStateQuery.HasComponent(xform.ParentUid))
                 return xform.ParentUid;
 
             current = xform.ParentUid;

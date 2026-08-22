@@ -22,6 +22,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
+using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Slippery;
 using Content.Shared.Tag;
 using Robust.Shared.Network;
@@ -33,15 +34,15 @@ using Content.Shared.Damage.Systems;
 
 namespace Content.Server.StatsBoard;
 
-public sealed class StatsBoardSystem : EntitySystem
+public sealed partial class StatsBoardSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly MindSystem _mindSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private MindSystem _mindSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
 
     private static readonly ProtoId<TagPrototype> HamsterTag = "Hamster";
     private static readonly ProtoId<TagPrototype> MouseTag = "Mouse";

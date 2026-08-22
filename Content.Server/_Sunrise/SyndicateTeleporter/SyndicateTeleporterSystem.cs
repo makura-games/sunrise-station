@@ -17,16 +17,16 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Sunrise.SyndicateTeleporter;
 
-public sealed class SyndicateTeleporterSystem : EntitySystem
+public sealed partial class SyndicateTeleporterSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedChargesSystem _charges = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly BiocodeSystem _biocode = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedChargesSystem _charges = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private BiocodeSystem _biocode = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
     private const string SourceEffectPrototype = "TeleportEffectSource";
     private const string TargetEffectPrototype = "TeleportEffectTarget";

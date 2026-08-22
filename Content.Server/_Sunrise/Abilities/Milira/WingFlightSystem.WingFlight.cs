@@ -31,13 +31,13 @@ namespace Content.Server._Sunrise.Abilities.Milira;
 /// </summary>
 public sealed partial class WingFlightSystem : SharedWingFlightSystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly SunriseHumanoidMarkingSystem _sunriseMarking = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private SunriseHumanoidMarkingSystem _sunriseMarking = default!;
 
     public override void Initialize()
     {

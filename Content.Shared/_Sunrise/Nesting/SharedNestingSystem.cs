@@ -20,13 +20,13 @@ namespace Content.Shared._Sunrise.Nesting;
 // 1. Использовать Entity<T>
 // 2. Нормальное форматирование
 // 3. Нормальный и понятный нейминг + документация
-public abstract class SharedNestingSystem : EntitySystem
+public abstract partial class SharedNestingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
     public const string BaseStorageId = "storagebase";
 
     public override void Initialize()

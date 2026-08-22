@@ -14,9 +14,9 @@ namespace Content.Client._Sunrise.Jump;
 
 public sealed partial class JumpSystem : SharedJumpSystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private INetManager _netManager = default!;
 
     private TimeSpan _lastJumpTime;
     private static TimeSpan _jumpCooldown;

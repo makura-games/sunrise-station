@@ -12,7 +12,7 @@ namespace Content.Shared._Sunrise.Tutorial.Conditions;
 public abstract partial class EventListenedConditionSystemBase<TCondition> : TutorialConditionSystem<TutorialPlayerComponent, TCondition>
     where TCondition : EventListenedConditionBase<TCondition>
 {
-    [Dependency] protected readonly SharedTutorialSystem Tutorial = default!;
+    [Dependency] protected SharedTutorialSystem Tutorial = default!;
 
     /// <summary>
     /// Counter target used when the condition accepts any prototype.

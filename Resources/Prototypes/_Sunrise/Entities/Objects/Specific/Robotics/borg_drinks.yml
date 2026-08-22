@@ -10,15 +10,14 @@
   parent: [ DrinkCoconutWaterJug, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: CoconutWater
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: CoconutWater
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: CoconutWater
@@ -29,15 +28,14 @@
   parent: [ DrinkCoffeeJug, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Coffee
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Coffee
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Coffee
@@ -48,15 +46,14 @@
   parent: [ DrinkColaBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Cola
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Cola
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Cola
@@ -67,15 +64,14 @@
   parent: [ DrinkCreamCartonXL, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Cream
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Cream
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Cream
@@ -86,15 +82,14 @@
   parent: [ DrinkDrGibbJug, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: DrGibb
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: DrGibb
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: DrGibb
@@ -105,15 +100,14 @@
   parent: [ DrinkEnergyDrinkJug, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: EnergyDrink
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: EnergyDrink
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: EnergyDrink
@@ -124,15 +118,14 @@
   parent: [ DrinkGreenTeaJug, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: GreenTea
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: GreenTea
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: GreenTea
@@ -143,15 +136,14 @@
   parent: [ DrinkIceJug, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Ice
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Ice
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Ice
@@ -162,15 +154,14 @@
   parent: [ DrinkBottlePlasticBaseFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: JuiceLemon
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: JuiceLemon
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: JuiceLemon
@@ -183,15 +174,14 @@
   parent: [ DrinkJuiceLimeCartonXL, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: JuiceLime
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: JuiceLime
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: JuiceLime
@@ -202,15 +192,14 @@
   parent: [ DrinkJuiceOrangeCartonXL, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: JuiceOrange
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: JuiceOrange
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: JuiceOrange
@@ -221,15 +210,14 @@
   parent: [ DrinkLemonLimeJug, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: LemonLime
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: LemonLime
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: LemonLime
@@ -240,15 +228,14 @@
   parent: [ DrinkBottlePlasticBaseFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Milk
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Milk
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Milk
@@ -261,15 +248,14 @@
   parent: [ DrinkRootBeerJug, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: RootBeer
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: RootBeer
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: RootBeer
@@ -280,15 +266,14 @@
   parent: [ DrinkSodaWaterBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: SodaWater
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: SodaWater
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: SodaWater
@@ -299,15 +284,14 @@
   parent: [ DrinkSpaceMountainWindBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: SpaceMountainWind
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: SpaceMountainWind
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: SpaceMountainWind
@@ -318,15 +302,14 @@
   parent: [ DrinkBottlePlasticBaseFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: SolDry
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: SolDry
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: SolDry
@@ -339,15 +322,14 @@
   parent: [ DrinkSpaceUpBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: SpaceUp
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: SpaceUp
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: SpaceUp
@@ -358,15 +340,14 @@
   parent: [ DrinkSugarJug, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Sugar
@@ -377,15 +358,14 @@
   parent: [ DrinkTeaJug, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Tea
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Tea
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Tea
@@ -396,15 +376,14 @@
   parent: [ DrinkTonicWaterBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: TonicWater
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: TonicWater
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: TonicWater
@@ -415,15 +394,14 @@
   parent: [ DrinkWaterMelonJuiceJug, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: JuiceWatermelon
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: JuiceWatermelon
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: JuiceWatermelon
@@ -436,15 +414,14 @@
   parent: [ DrinkAbsintheBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Absinthe
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Absinthe
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Absinthe
@@ -455,15 +432,14 @@
   parent: [ DrinkAleBottleFullGrowler, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Ale
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Ale
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Ale
@@ -474,15 +450,14 @@
   parent: [ DrinkBeerGrowler, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Beer
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Beer
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Beer
@@ -493,15 +468,14 @@
   parent: [ DrinkBlueCuracaoBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: BlueCuracao
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: BlueCuracao
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: BlueCuracao
@@ -512,15 +486,14 @@
   parent: [ DrinkChampagneBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Champagne
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Champagne
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Champagne
@@ -531,15 +504,14 @@
   parent: [ DrinkCoffeeLiqueurBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: CoffeeLiqueur
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: CoffeeLiqueur
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: CoffeeLiqueur
@@ -550,15 +522,14 @@
   parent: [ DrinkCognacBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Cognac
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Cognac
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Cognac
@@ -569,15 +540,14 @@
   parent: [ DrinkGrenadineBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Grenadine
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Grenadine
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Grenadine
@@ -588,15 +558,14 @@
   parent: [ DrinkGinBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Gin
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Gin
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Gin
@@ -607,15 +576,14 @@
   parent: [ DrinkMeadJug, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Mead
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Mead
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Mead
@@ -626,15 +594,14 @@
   parent: [ DrinkRumBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Rum
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Rum
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Rum
@@ -645,15 +612,14 @@
   parent: [ DrinkTequilaBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Tequila
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Tequila
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Tequila
@@ -664,15 +630,14 @@
   parent: [ DrinkVermouthBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Vermouth
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Vermouth
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Vermouth
@@ -683,15 +648,14 @@
   parent: [ DrinkVodkaBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Vodka
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Vodka
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Vodka
@@ -702,15 +666,14 @@
   parent: [ DrinkWhiskeyBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Whiskey
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Whiskey
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Whiskey
@@ -721,15 +684,14 @@
   parent: [ DrinkWineBottleFull, BaseDrinkBorg ]
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: Wine
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Wine
+        Quantity: 50
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Wine

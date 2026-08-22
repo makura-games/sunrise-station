@@ -647,7 +647,7 @@
       gasTank:
         length: 1.0
   - type: GasTank
-    outputPressure: 42.6
+    releasePressure: 42.6
     air:
       volume: 10
       temperature: 293.15
@@ -1217,7 +1217,7 @@
     sprintModifier: 0.9
   - type: EmitSoundOnWearerMove
     sound:
-      collection: FootstepHeavy
+      collection: FootstepBoots
       params:
         volume: -6
         variation: 0.09
@@ -1315,7 +1315,7 @@
       gasTank:
         length: 1.0
   - type: GasTank
-    outputPressure: 42.6
+    releasePressure: 42.6
     air:
       volume: 10
       temperature: 293.15

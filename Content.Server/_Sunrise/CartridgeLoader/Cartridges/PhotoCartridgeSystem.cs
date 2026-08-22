@@ -15,18 +15,18 @@ using Robust.Shared.Configuration;
 
 namespace Content.Server._Sunrise.CartridgeLoader.Cartridges;
 
-public sealed class PhotoCartridgeSystem : EntitySystem
+public sealed partial class PhotoCartridgeSystem : EntitySystem
 {
-    [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoader = default!;
-    [Dependency] private readonly NetTexturesManager _netTexturesManager = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly MessengerServerSystem _messengerServer = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly SingletonDeviceNetServerSystem _singletonServer = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
+    [Dependency] private NetTexturesManager _netTexturesManager = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private MessengerServerSystem _messengerServer = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private SingletonDeviceNetServerSystem _singletonServer = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private ISawmill _sawmill = default!;
 

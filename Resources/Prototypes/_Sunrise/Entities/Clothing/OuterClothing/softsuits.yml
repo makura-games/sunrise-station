@@ -338,7 +338,7 @@
   - type: HeldSpeedModifier
   - type: EmitSoundOnWearerMove
     sound:
-      collection: FootstepHeavy
+      collection: FootstepBoots
       params:
         volume: -6
         variation: 0.09

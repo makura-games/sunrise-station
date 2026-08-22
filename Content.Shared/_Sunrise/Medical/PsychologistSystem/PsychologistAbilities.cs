@@ -11,10 +11,10 @@ namespace Content.Shared._Sunrise.Medical.PsychologistSystem;
 
 public sealed partial class PsychologistSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
 
     private readonly string _actionProto = "PsychologistAlcoholBlock";
 

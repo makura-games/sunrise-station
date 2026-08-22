@@ -7,11 +7,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Explosion;
 
-public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscriber
+public sealed partial class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscriber
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private SharedTransformSystem? _xformSystem;
 

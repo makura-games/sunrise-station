@@ -12,11 +12,11 @@ namespace Content.Server._Sunrise.StationEvents.Events;
 /// <summary>
 /// Game rule for changing borg laws to Epsilon during Epsilon alert level.
 /// </summary>
-public sealed class EpsilonDeathSquadLawsetRule : StationEventSystem<EpsilonDeathSquadLawsetComponent>
+public sealed partial class EpsilonDeathSquadLawsetRule : StationEventSystem<EpsilonDeathSquadLawsetComponent>
 {
     private EntityUid? _targetStation;
-    [Dependency] private readonly SiliconLawSystem _siliconLaw = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SiliconLawSystem _siliconLaw = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private const string DeathSquadLawsetId = "DeathSquadLawset";
 

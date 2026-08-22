@@ -43,30 +43,30 @@ using Content.Shared._Sunrise.Kitchen.Components; //Sunrise-Edit
 
 namespace Content.Server.Kitchen.EntitySystems
 {
-    public sealed partial class MicrowaveSystem : EntitySystem //Sunrise-Edit
+    public sealed partial class MicrowaveSystem : EntitySystem
     {
-        [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
-        [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-        [Dependency] private readonly PowerReceiverSystem _power = default!;
-        [Dependency] private readonly RecipeManager _recipeManager = default!;
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
-        [Dependency] private readonly LightningSystem _lightning = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly ExplosionSystem _explosion = default!;
-        [Dependency] private readonly SharedContainerSystem _container = default!;
-        [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-        [Dependency] private readonly TagSystem _tag = default!;
-        [Dependency] private readonly TemperatureSystem _temperature = default!;
-        [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-        [Dependency] private readonly HandsSystem _handsSystem = default!;
-        [Dependency] private readonly SharedItemSystem _item = default!;
-        [Dependency] private readonly SharedStackSystem _stack = default!;
-        [Dependency] private readonly IPrototypeManager _prototype = default!;
-        [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly SharedSuicideSystem _suicide = default!;
-        [Dependency] private readonly SharedPowerStateSystem _powerState = default!;
+        [Dependency] private DeviceLinkSystem _deviceLink = default!;
+        [Dependency] private SharedPopupSystem _popupSystem = default!;
+        [Dependency] private PowerReceiverSystem _power = default!;
+        [Dependency] private RecipeManager _recipeManager = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
+        [Dependency] private SharedAudioSystem _audio = default!;
+        [Dependency] private LightningSystem _lightning = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private ExplosionSystem _explosion = default!;
+        [Dependency] private SharedContainerSystem _container = default!;
+        [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+        [Dependency] private TagSystem _tag = default!;
+        [Dependency] private TemperatureSystem _temperature = default!;
+        [Dependency] private UserInterfaceSystem _userInterface = default!;
+        [Dependency] private HandsSystem _handsSystem = default!;
+        [Dependency] private SharedItemSystem _item = default!;
+        [Dependency] private SharedStackSystem _stack = default!;
+        [Dependency] private IPrototypeManager _prototype = default!;
+        [Dependency] private IAdminLogManager _adminLogger = default!;
+        [Dependency] private SharedSuicideSystem _suicide = default!;
+        [Dependency] private SharedPowerStateSystem _powerState = default!;
 
         private static readonly EntProtoId MalfunctionSpark = "Spark";
 
@@ -79,7 +79,7 @@ namespace Content.Server.Kitchen.EntitySystems
 
             SubscribeLocalEvent<MicrowaveComponent, ComponentInit>(OnInit);
             SubscribeLocalEvent<MicrowaveComponent, MapInitEvent>(OnMapInit);
-            SubscribeLocalEvent<MicrowaveComponent, SolutionContainerChangedEvent>(OnSolutionChange);
+            SubscribeLocalEvent<MicrowaveComponent, SolutionChangedEvent>(OnSolutionChange);
             SubscribeLocalEvent<MicrowaveComponent, EntInsertedIntoContainerMessage>(OnContentUpdate);
             SubscribeLocalEvent<MicrowaveComponent, EntRemovedFromContainerMessage>(OnContentUpdate);
             SubscribeLocalEvent<MicrowaveComponent, InteractUsingEvent>(OnInteractUsing, after: new[] { typeof(AnchorableSystem) });
@@ -188,9 +188,7 @@ namespace Content.Server.Kitchen.EntitySystems
                 if (TryComp<TemperatureComponent>(entity, out var tempComp))
                     _temperature.ChangeHeat(entity, heatToAdd * component.ObjectHeatMultiplier, false, tempComp);
 
-                if (!TryComp<SolutionContainerManagerComponent>(entity, out var solutions))
-                    continue;
-                foreach (var (_, soln) in _solutionContainer.EnumerateSolutions((entity, solutions)))
+                foreach (var (_, soln) in _solutionContainer.EnumerateSolutions(entity))
                 {
                     var solution = soln.Comp.Solution;
                     if (solution.Temperature > component.TemperatureUpperThreshold)
@@ -329,7 +327,7 @@ namespace Content.Server.Kitchen.EntitySystems
             args.Handled = true;
         }
 
-        private void OnSolutionChange(Entity<MicrowaveComponent> ent, ref SolutionContainerChangedEvent args)
+        private void OnSolutionChange(Entity<MicrowaveComponent> ent, ref SolutionChangedEvent args)
         {
             UpdateUserInterfaceState(ent, ent.Comp);
         }

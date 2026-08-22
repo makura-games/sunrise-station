@@ -12,9 +12,9 @@ namespace Content.Server.Instruments;
 
 public sealed partial class InstrumentSystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly InteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private InteractionSystem _interaction = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     // Надеюсь у нас не будет раундов по 100000000 часов
     private readonly Dictionary<NetUserId, SessionMidiRateLimitData> _sessionMidiRateLimits = [];

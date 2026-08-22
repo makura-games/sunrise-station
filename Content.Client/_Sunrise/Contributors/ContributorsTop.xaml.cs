@@ -9,7 +9,7 @@ namespace Content.Client._Sunrise.Contributors;
 [GenerateTypedNameReferences]
 public sealed partial class ContributorsTop : Control
 {
-    [Dependency] private readonly ContributorsManager _contributorsManager = default!;
+    [Dependency] private ContributorsManager _contributorsManager = default!;
 
     private readonly Dictionary<int, ContributorEntryControl> _contributorControls = new();
 

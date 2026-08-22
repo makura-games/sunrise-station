@@ -14,15 +14,15 @@ using Robust.Shared.Random;
 
 namespace Content.Client._Sunrise.LoveVision;
 
-public sealed class LoveVisionOverlay : Overlay
+public sealed partial class LoveVisionOverlay : Overlay
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IEntitySystemManager _sysMan = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IEntitySystemManager _sysMan = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     private readonly SpriteSystem _sprite;
     public override bool RequestScreenTexture => true;

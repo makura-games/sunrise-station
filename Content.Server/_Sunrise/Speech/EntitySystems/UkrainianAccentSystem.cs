@@ -7,9 +7,9 @@ using Content.Shared.Speech;
 
 namespace Content.Server._Sunrise.Speech.EntitySystems;
 
-public sealed class UkrainianAccentSystem : EntitySystem
+public sealed partial class UkrainianAccentSystem : EntitySystem
 {
-    [Dependency] private readonly ReplacementAccentSystem _replacement = default!;
+    [Dependency] private ReplacementAccentSystem _replacement = default!;
 
     private static readonly Regex UkrainianIRegex = new("[іІ]");
     private static readonly Regex UkrainianYiRegex = new("[їЇ]");

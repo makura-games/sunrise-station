@@ -15,6 +15,7 @@
     - SheetOfficePaper
     - NoPaint
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
@@ -24,10 +25,10 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: SolutionContainerManager
-    solutions:
-      officepaper:
-        canReact: false
+  - type: Solution
+    id: officepaper
+    solution:
+      canReact: false
 
 - type: entity
   parent: SheetOfficePaperBase
@@ -56,13 +57,13 @@
   - type: Appearance
   - type: Extractable
     grindableSolutionName: officepaper
-  - type: SolutionContainerManager
-    solutions:
-      officepaper:
-        canReact: false
-        reagents:
-        - ReagentId: Cellulose
-          Quantity: 3
+  - type: Solution
+    id: officepaper
+    solution:
+      canReact: false
+      reagents:
+      - ReagentId: Cellulose
+        Quantity: 3
   - type: Tag
     tags:
     - SheetOfficePaper

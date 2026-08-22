@@ -11,9 +11,9 @@ namespace Content.Shared._Sunrise.Tutorial.Conditions;
 public sealed partial class ItemPlacedNearMarkerConditionSystem
     : TutorialConditionSystem<TutorialPlayerComponent, ItemPlacedNearMarkerCondition>
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private readonly HashSet<EntityUid> _nearbyEntities = [];
 

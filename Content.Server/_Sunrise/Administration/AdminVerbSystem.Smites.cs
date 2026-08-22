@@ -27,10 +27,11 @@ namespace Content.Server.Administration.Systems;
 /// </summary>
 public sealed partial class AdminVerbSystem
 {
-    [Dependency] private readonly SharedJobSystem _jobSystem = default!;
-    [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly ObjectivesSystem _objectivesSystem = default!;
+    [Dependency] private SharedJobSystem _jobSystem = default!;
+    [Dependency] private TargetObjectiveSystem _targetObjective = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private ObjectivesSystem _objectivesSystem = default!;
+    [Dependency] private EntityQuery<AntagSelectionComponent> _antagSelectionQuery = default!;
     private const string AdminBountyKillObjectiveProto = "AdminBountyKillObjective";
 
     private static readonly SpriteSpecifier BountyVerbIcon =
@@ -79,11 +80,9 @@ public sealed partial class AdminVerbSystem
 
         var traitorCount = 0;
         var query = EntityQueryEnumerator<TraitorRuleComponent>();
-        var antagQuery = GetEntityQuery<AntagSelectionComponent>();
-
         while (query.MoveNext(out var ruleUid, out _))
         {
-            if (!antagQuery.HasComponent(ruleUid))
+            if (!_antagSelectionQuery.HasComponent(ruleUid))
                 continue;
 
             foreach (var mind in _antag.GetAntagMinds(ruleUid))

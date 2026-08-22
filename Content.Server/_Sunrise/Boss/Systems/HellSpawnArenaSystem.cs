@@ -40,17 +40,17 @@ using Robust.Shared.Maths;
 namespace Content.Server._Sunrise.Boss.Systems;
 
 /// <inheritdoc />
-public sealed class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
+public sealed partial class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
 {
-    [Dependency] private readonly IConsoleHost _console = default!;
-    [Dependency] private readonly MapLoaderSystem _loader = default!;
-    [Dependency] private readonly ILogManager _log = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private IConsoleHost _console = default!;
+    [Dependency] private MapLoaderSystem _loader = default!;
+    [Dependency] private ILogManager _log = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     private ISawmill _sawmill = default!;
 

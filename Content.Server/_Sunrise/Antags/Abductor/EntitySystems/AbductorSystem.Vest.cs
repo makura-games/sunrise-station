@@ -16,7 +16,7 @@ namespace Content.Server._Sunrise.Antags.Abductor;
 
 public sealed partial class AbductorSystem : SharedAbductorSystem
 {
-    [Dependency] private readonly ClothingSystem _clothing = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
     public void InitializeVest()
     {
         SubscribeLocalEvent<AbductorVestComponent, AfterInteractEvent>(OnVestInteract);

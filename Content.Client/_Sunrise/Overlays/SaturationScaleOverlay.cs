@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._Sunrise.Mood;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -7,10 +7,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._Sunrise.Overlays;
 
-public sealed class SaturationScaleOverlay : Overlay
+public sealed partial class SaturationScaleOverlay : Overlay
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] IEntityManager _entityManager = default!;
 
     public override bool RequestScreenTexture => true;

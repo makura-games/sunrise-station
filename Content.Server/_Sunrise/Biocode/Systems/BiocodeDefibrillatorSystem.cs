@@ -7,10 +7,10 @@ namespace Content.Server._Sunrise.Biocode.Systems;
 /// <summary>
 /// System that handles biocode checks for defibrillators.
 /// </summary>
-public sealed class BiocodeDefibrillatorSystem : EntitySystem
+public sealed partial class BiocodeDefibrillatorSystem : EntitySystem
 {
-    [Dependency] private readonly BiocodeSystem _biocode = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private BiocodeSystem _biocode = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     public override void Initialize()
     {

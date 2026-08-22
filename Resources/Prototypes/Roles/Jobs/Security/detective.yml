@@ -10,7 +10,6 @@
   startingGear: DetectiveGear
   icon: "JobIconDetective"
   supervisors: job-supervisors-hos
-  canBeAntag: false
   displayWeight: 20  # Sunrise
   # Sunrise-Start
   alternativeTitles:

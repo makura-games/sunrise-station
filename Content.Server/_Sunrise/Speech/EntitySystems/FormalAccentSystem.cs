@@ -8,9 +8,9 @@ namespace Content.Server._Sunrise.Speech.EntitySystems;
 /// <summary>
 /// System that gives the speaker a formal accent by expanding abbreviations.
 /// </summary>
-public sealed class FormalAccentSystem : EntitySystem // Fish-edit
+public sealed partial class FormalAccentSystem : EntitySystem // Fish-edit
 {
-    [Dependency] private readonly ReplacementAccentSystem _replacement = default!;
+    [Dependency] private ReplacementAccentSystem _replacement = default!;
 
     public override void Initialize()
     {

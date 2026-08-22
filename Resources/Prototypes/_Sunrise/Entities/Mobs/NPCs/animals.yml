@@ -1,4 +1,15 @@
 - type: entity
+  parent: [SolutionWeapon, SolutionTiny]
+  id: SolutionVenomClownSpider
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Laughter
+        Quantity: 50
+
+- type: entity
   name: inferior vulpkanin
   id: MobBaseInferiorVulpkanin
   parent: MobBaseAncestor

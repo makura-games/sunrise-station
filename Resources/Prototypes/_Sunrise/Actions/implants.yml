@@ -44,7 +44,7 @@
   description: Activates your creepy laugh implant, which will produce the signature sound of the Syndicate cyborg.
   components:
   - type: Action
-    icon: { sprite: Mobs/Species/Terminator/parts.rsi, state: skull_icon }
+    icon: { sprite: Mobs/Species/Skeleton/parts.rsi, state: skull_icon }
     useDelay: 3
     itemIconStyle: BigAction
 

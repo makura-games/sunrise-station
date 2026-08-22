@@ -8,8 +8,8 @@ namespace Content.Shared.Item.ItemToggle;
 
 public sealed partial class ItemToggleSystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly BiocodeSystem _biocode = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private BiocodeSystem _biocode = default!;
 
     private void InitializeSunriseItemToggle()
     {

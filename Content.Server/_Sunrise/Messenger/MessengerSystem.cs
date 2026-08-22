@@ -9,12 +9,12 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server._Sunrise.Messenger;
 
-public sealed class MessengerSystem : EntitySystem
+public sealed partial class MessengerSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoader = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

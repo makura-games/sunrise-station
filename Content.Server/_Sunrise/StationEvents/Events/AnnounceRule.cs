@@ -7,9 +7,9 @@ using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Server.StationEvents.Events;
 
-public sealed class AnnounceRule : StationEventSystem<AnnounceRuleComponent>
+public sealed partial class AnnounceRule : StationEventSystem<AnnounceRuleComponent>
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private ChatSystem _chat = default!;
 
     protected override void Started(EntityUid uid, AnnounceRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {

@@ -5,7 +5,7 @@
 #Basic armor vest for inheritance
 - type: entity
   abstract: true
-  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseSecurityContraband]
+  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing ]
   id: ClothingOuterArmorBase
   name: armor vest
   description: A standard Type I armored vest that provides decent protection against most types of damage.
@@ -38,9 +38,9 @@
     damageCoefficient: 0.9
   # Sunrise-End
 
-#Standard armor vest, allowed for security and bartenders
+#Standard armor vest, allowed for security only
 - type: entity
-  parent: ClothingOuterArmorBase #[ BaseSecurityBartenderContraband, ClothingOuterArmorBase] # Sunrise-Edit
+  parent: [ BaseSecurityContraband, ClothingOuterArmorBase ]
   id: ClothingOuterArmorBasic
   components:
   - type: Tag
@@ -57,9 +57,9 @@
     node: start
   # Sunrise-end
 
-#Alternate / slim basic armor vest
+#Alternate / slim basic armor vest, allowed for security and bartenders
 - type: entity
-  parent: ClothingOuterArmorBasic
+  parent: [ BaseSecurityBartenderContraband, ClothingOuterArmorBasic ]
   id: ClothingOuterArmorBasicSlim
   name: armor vest
   suffix: slim
@@ -127,7 +127,7 @@
 
 #Detective's vest
 - type: entity
-  parent: [ClothingOuterArmorBase, BaseSecurityContraband]
+  parent: [ClothingOuterArmorBasic, BaseSecurityContraband]
   id: ClothingOuterVestDetective
   name: detective's vest
   description: A hard-boiled private investigator's armored vest.
@@ -214,7 +214,7 @@
 
 #Elite web vest
 - type: entity
-  parent: [ClothingOuterArmorBase, AllowSuitStorageClothing, ClothingOuterStorageBase, BaseSyndicateContraband] # Sunrise-Edit
+  parent: [ClothingOuterArmorBase, ClothingOuterStorageBase, BaseSyndicateContraband]
   id: ClothingOuterVestWebElite
   name: elite web vest
   description: A synthetic armor vest. This one has added webbing and heat resistant fibers.

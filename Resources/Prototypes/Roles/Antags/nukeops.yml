@@ -56,6 +56,101 @@
     state: nuke_commander
   storytellerStress: 5.0 # Sunrise-Edit
 
+- type: antagSpecifier
+  abstract: true
+  parent: RestrictedAntag
+  id: BaseNukeops
+  prefRoles:
+  - GenericTeamAntagonist # For antag ban purposes
+  roleLoadout:
+  - RoleSurvivalNukie
+  components:
+  # Sunrise edit start - маркер антагониста для панели призраков
+  - type: GhostPanelAntagonistMarker
+    name: ghost-panel-antagonist-nukeops-name
+    description: ghost-panel-antagonist-nukeops-description
+    priority: 10
+  # Sunrise edit end
+  - type: NukeOperative
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+
+- type: antagSpecifier
+  parent: BaseNukeops
+  id: NukeopsCommander
+  prefRoles:
+  - NukeopsCommander
+  fallbackRoles: # Sunrise-Edit
+  - Nukeops
+  - NukeopsMedic
+  spawnerPrototype: SpawnPointNukeopsCommander
+  startingGear: SyndicateCommanderGearFull
+  components:
+  - type: RandomMetadata
+    nameSegments:
+    - NamesSyndicateElite
+    nameFormat: name-format-nukie-commander
+  mindRoles:
+  - MindRoleNukeopsCommander
+
+- type: antagSpecifier
+  parent: BaseNukeops
+  id: NukeopsMedic
+  prefRoles:
+  - NukeopsMedic
+  fallbackRoles: # Sunrise-Edit
+  - Nukeops
+  - NukeopsCommander
+  spawnerPrototype: SpawnPointNukeopsMedic
+  startingGear: SyndicateOperativeMedicFull
+  components:
+  - type: RandomMetadata
+    nameSegments:
+    - NamesSyndicateNormal
+    nameFormat: name-format-nukie-agent
+  mindRoles:
+  - MindRoleNukeopsMedic
+
+- type: antagSpecifier
+  parent: BaseNukeops
+  id: NukeopsOperative
+  prefRoles:
+  - Nukeops
+  fallbackRoles: # Sunrise-Edit
+  - NukeopsCommander
+  - NukeopsMedic
+  spawnerPrototype: SpawnPointNukeopsOperative
+  startingGear: SyndicateOperativeGearFull
+  components:
+  - type: RandomMetadata
+    nameSegments:
+    - NamesSyndicateNormal
+    nameFormat: name-format-nukie-operator
+  mindRoles:
+  - MindRoleNukeops
+
+- type: antagSpecifier
+  parent: BaseNukeops
+  id: LoneOp
+  spawnerPrototype: SpawnPointLoneNukeOperative
+  pickPlayer: false
+  startingGear: SyndicateLoneOperativeGearFull
+  components:
+  # Sunrise edit start - маркер одиночного оперативника для панели призраков
+  - type: GhostPanelAntagonistMarker
+    name: ghost-panel-antagonist-loneops-name
+    description: ghost-panel-antagonist-loneops-description
+    priority: 20
+  # Sunrise edit end
+  - type: RandomMetadata
+    nameSegments:
+    - NamesSyndicatePrefix
+    - NamesSyndicateNormal
+    nameFormat: name-format-nukie-generic
+  mindRoles:
+  - MindRoleLoneops
+
 - type: startingGear
   id: SyndicateOperativeGearFullNoUplink
   equipment:

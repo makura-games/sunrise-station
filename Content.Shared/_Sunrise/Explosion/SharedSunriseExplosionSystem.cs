@@ -1,13 +1,13 @@
-﻿using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Explosion;
 using Content.Shared.Explosion;
 using Content.Shared.Explosion.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Sunrise.Explosion;
 
-public sealed class SharedSunriseExplosionSystem : EntitySystem
+public sealed partial class SharedSunriseExplosionSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {

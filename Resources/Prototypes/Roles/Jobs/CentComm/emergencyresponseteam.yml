@@ -9,7 +9,6 @@
   icon: "JobIconERTLeader"
   overrideConsoleVisibility: false # Sunrise added
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
@@ -124,7 +123,6 @@
   icon: "JobIconERTChaplain"
   overrideConsoleVisibility: false # Sunrise added
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
   access:
@@ -203,7 +201,6 @@
   icon: "JobIconERTEngineer"
   overrideConsoleVisibility: false # Sunrise added
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
@@ -305,7 +302,6 @@
   icon: "JobIconERTSecurity"
   overrideConsoleVisibility: false # Sunrise added
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
@@ -497,7 +493,6 @@
   icon: "JobIconERTMedic"
   overrideConsoleVisibility: false # Sunrise added
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
@@ -605,7 +600,6 @@
   icon: "JobIconERTJanitor"
   overrideConsoleVisibility: false # Sunrise added
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
   access:

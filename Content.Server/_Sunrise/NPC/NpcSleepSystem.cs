@@ -15,12 +15,12 @@ namespace Content.Server._Sunrise.NPC;
 
 public sealed partial class NpcSleepSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
 
     public bool Enabled = true;
     public bool DisableWithoutPlayers = true;
@@ -30,9 +30,9 @@ public sealed partial class NpcSleepSystem : EntitySystem
     private TimeSpan _nextCheckTime = TimeSpan.Zero;
     private static readonly TimeSpan CheckCooldown = TimeSpan.FromSeconds(5);
 
-    private EntityQuery<ActorComponent> _actorQuery;
-    private EntityQuery<ActiveNPCComponent> _activeQuery;
-    private EntityQuery<GhostComponent> _ghostQuery;
+    [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
+    [Dependency] private EntityQuery<ActiveNPCComponent> _activeQuery = default!;
+    [Dependency] private EntityQuery<GhostComponent> _ghostQuery = default!;
 
     private readonly HashSet<Entity<ActorComponent>> _players = [];
 
@@ -44,9 +44,6 @@ public sealed partial class NpcSleepSystem : EntitySystem
         Subs.CVar(_configuration, SunriseCCVars.NpcDisableWithoutPlayers, obj => DisableWithoutPlayers = obj, true);
         Subs.CVar(_configuration, SunriseCCVars.NpcDisableDistance, obj => DisableDistance = obj, true);
 
-        _actorQuery = GetEntityQuery<ActorComponent>();
-        _activeQuery = GetEntityQuery<ActiveNPCComponent>();
-        _ghostQuery = GetEntityQuery<GhostComponent>();
     }
 
     public override void Update(float frameTime)

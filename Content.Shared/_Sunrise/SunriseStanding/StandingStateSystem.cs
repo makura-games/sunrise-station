@@ -13,13 +13,13 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Sunrise.SunriseStanding;
 
-public sealed class SunriseStandingStateSystem : EntitySystem
+public sealed partial class SunriseStandingStateSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private SharedGravitySystem _gravity = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
 
     private readonly EntProtoId _fallStatusEffectKey = "StatusEffectFall";
     public const float FallModifier = 0.2f;

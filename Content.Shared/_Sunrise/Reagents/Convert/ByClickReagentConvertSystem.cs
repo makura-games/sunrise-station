@@ -14,14 +14,14 @@ namespace Content.Shared._Sunrise.Reagents.Convert;
 /// <summary>
 /// Конвертирует реагенты внутри сущности по клику на нее
 /// </summary>
-public sealed class ByClickReagentConvertSystem : EntitySystem
+public sealed partial class ByClickReagentConvertSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

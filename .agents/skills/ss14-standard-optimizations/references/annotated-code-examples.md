@@ -75,7 +75,7 @@ public override void Update(float frameTime)
 }
 ```
 
-## Example 3: cache `EntityQuery<T>` in `Initialize()`
+## Example 3: получать `EntityQuery<T>` как dependency системы
 
 - Subsystem: proximity detector
 - Signature: `public override void Initialize()`
@@ -83,12 +83,12 @@ public override void Update(float frameTime)
 - Relevance: `2025-05`
 
 ```csharp
-private EntityQuery<TransformComponent> _xformQuery;
+[Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
 
 public override void Initialize()
 {
+    base.Initialize();
     SubscribeLocalEvent<ProximityDetectorComponent, MapInitEvent>(OnMapInit);
-    _xformQuery = GetEntityQuery<TransformComponent>(); // We cache once.
 }
 
 private void UpdateTarget(Entity<ProximityDetectorComponent> detector)
@@ -181,20 +181,15 @@ private void SendToConnections(ReadOnlySpan<DeviceNetworkComponent> connections,
 }
 ```
 
-## Example 7: `EntityQuery<T>` in the system API instead of repeating general checks
+## Example 7: dependency `EntityQuery<T>` в API системы вместо повторных общих проверок
 
 - Subsystem: tags
-- Signature: `public override void Initialize()` / `public bool HasTag(...)`
+- Signature: `[Dependency] EntityQuery<T>` / `public bool HasTag(...)`
 - Layer: `shared`
 - Relevance: `2024-05`
 
 ```csharp
-private EntityQuery<TagComponent> _tagQuery;
-
-public override void Initialize()
-{
-    _tagQuery = GetEntityQuery<TagComponent>();
-}
+[Dependency] private EntityQuery<TagComponent> _tagQuery = default!;
 
 public bool HasTag(EntityUid uid, ProtoId<TagPrototype> tag)
 {

@@ -33,16 +33,16 @@ namespace Content.Server._Sunrise.GameplayMetrics;
 /// Server-side system that reports gameplay metrics to Prometheus.
 /// Covers: retention, balance, general stats, job popularity.
 /// </summary>
-public sealed class MetricsSystem : EntitySystem
+public sealed partial class MetricsSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly MindSystem _minds = default!;
-    [Dependency] private readonly RoleSystem _roles = default!;
-    [Dependency] private readonly ObjectivesSystem _objectives = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IServerPreferencesManager _prefs = default!;
-    [Dependency] private readonly SharedJobSystem _jobs = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private MindSystem _minds = default!;
+    [Dependency] private RoleSystem _roles = default!;
+    [Dependency] private ObjectivesSystem _objectives = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IServerPreferencesManager _prefs = default!;
+    [Dependency] private SharedJobSystem _jobs = default!;
 
     private static readonly Counter PlayerDisconnectsTotal = PrometheusMetrics.CreateCounter(
         "ss14_player_disconnect_total",

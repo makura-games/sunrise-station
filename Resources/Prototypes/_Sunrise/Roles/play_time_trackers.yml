@@ -212,9 +212,6 @@
   id: AntagSubvertedSilicon
 
 - type: playTimeTracker
-  id: AntagTerminator
-
-- type: playTimeTracker
   id: AntagThief
 
 - type: playTimeTracker

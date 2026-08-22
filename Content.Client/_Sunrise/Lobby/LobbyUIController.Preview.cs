@@ -25,7 +25,7 @@ namespace Content.Client.Lobby;
 
 public sealed partial class LobbyUIController
 {
-    [Dependency] private readonly PlayerCacheManager _playerCache = default!;
+    [Dependency] private PlayerCacheManager _playerCache = default!;
     [UISystemDependency] private readonly VisualBodySystem _visualBody = default!;
     [UISystemDependency] private readonly HumanoidProfileSystem _humanoidProfile = default!;
     [UISystemDependency] private readonly SunriseHumanoidProfileSystem _sunriseProfile = default!;

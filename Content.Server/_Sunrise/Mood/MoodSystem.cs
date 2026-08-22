@@ -1,4 +1,4 @@
-﻿using Content.Server.Chat.Managers;
+using Content.Server.Chat.Managers;
 using Content.Shared._Sunrise.Mood;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.Alert;
@@ -19,18 +19,18 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.Mood;
 
-public sealed class MoodSystem : EntitySystem
+public sealed partial class MoodSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
-    [Dependency] private readonly SharedJetpackSystem _jetpack = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
+    [Dependency] private SharedJetpackSystem _jetpack = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Client._Sunrise.UserInterface.Radial;
 using Content.Shared._Sunrise.BloodCult.UI;
 using Robust.Client.GameObjects;
@@ -8,10 +8,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._Sunrise.BloodCult.UI.CultistFactory;
 
-public sealed class CultistFactoryBUI : BoundUserInterface
+public sealed partial class CultistFactoryBUI : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private RadialContainer? _menu;
 

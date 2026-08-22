@@ -7,9 +7,9 @@ using Content.Shared.Speech;
 
 namespace Content.Server._Sunrise.Speech.EntitySystems;
 
-public sealed class ItalianAccentSystem : EntitySystem
+public sealed partial class ItalianAccentSystem : EntitySystem
 {
-    [Dependency] private readonly ReplacementAccentSystem _replacement = default!;
+    [Dependency] private ReplacementAccentSystem _replacement = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<ItalianAccentComponent, AccentGetEvent>(OnAccent);

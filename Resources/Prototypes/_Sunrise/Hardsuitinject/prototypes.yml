@@ -14,10 +14,10 @@
   - type: Item
     sprite: _Sunrise/HardsuitInjection/ampula.rsi
     size: Small
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 20
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 20
   - type: Ampula
   - type: Tag
     tags:
@@ -35,10 +35,10 @@
       - state: beaker1
         map: ["enum.SolutionContainerLayers.Fill"]
         visible: false
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 25
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 25
   - type: Destructible
     thresholds:
     - trigger:
@@ -94,21 +94,21 @@
   id: AmpulaCombat
   suffix: Combat
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 20
-        reagents:
-        - ReagentId: Epinephrine
-          Quantity: 3.75
-        - ReagentId: Omnizine
-          Quantity: 3.75
-        - ReagentId: Saline
-          Quantity: 3.75
-        - ReagentId: Rororium
-          Quantity: 5
-        - ReagentId: Dermaline
-          Quantity: 3.75
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 20
+      reagents:
+      - ReagentId: Epinephrine
+        Quantity: 3.75
+      - ReagentId: Omnizine
+        Quantity: 3.75
+      - ReagentId: Saline
+        Quantity: 3.75
+      - ReagentId: Rororium
+        Quantity: 5
+      - ReagentId: Dermaline
+        Quantity: 3.75
 
 - type: entity
   parent: Ampula
@@ -116,13 +116,13 @@
   id: AmpulaTric
   suffix: Tricordrazine
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 20
-        reagents:
-        - ReagentId: Tricordrazine
-          Quantity: 20
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 20
+      reagents:
+      - ReagentId: Tricordrazine
+        Quantity: 20
 
 - type: entity
   parent: Ampula
@@ -130,15 +130,15 @@
   id: AmpulaBica
   suffix: Bicaridine
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 20
-        reagents:
-        - ReagentId: Bicaridine
-          Quantity: 15
-        - ReagentId: Epinephrine
-          Quantity: 5
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 20
+      reagents:
+      - ReagentId: Bicaridine
+        Quantity: 15
+      - ReagentId: Epinephrine
+        Quantity: 5
 
 - type: entity
   parent: Ampula
@@ -146,17 +146,17 @@
   id: AmpulaDerm
   suffix: Dermaline
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 20
-        reagents:
-        - ReagentId: Dermaline
-          Quantity: 10
-        - ReagentId: Epinephrine
-          Quantity: 5
-        - ReagentId: Leporazine
-          Quantity: 5
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 20
+      reagents:
+      - ReagentId: Dermaline
+        Quantity: 10
+      - ReagentId: Epinephrine
+        Quantity: 5
+      - ReagentId: Leporazine
+        Quantity: 5
 
 - type: entity
   parent: Ampula
@@ -164,13 +164,13 @@
   id: AmpulaDylo
   suffix: Dylovene
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 20
-        reagents:
-        - ReagentId: Dylovene
-          Quantity: 20
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 20
+      reagents:
+      - ReagentId: Dylovene
+        Quantity: 20
 
 - type: entity
   parent: Ampula
@@ -178,13 +178,13 @@
   id: AmpulaDexa
   suffix: Dexalin
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 20
-        reagents:
-        - ReagentId: Dexalin
-          Quantity: 20
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 20
+      reagents:
+      - ReagentId: Dexalin
+        Quantity: 20
 
 - type: entity
   parent: Ampula
@@ -192,13 +192,13 @@
   id: AmpulaHyro
   suffix: Hyronalin
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 20
-        reagents:
-        - ReagentId: Hyronalin
-          Quantity: 20
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 20
+      reagents:
+      - ReagentId: Hyronalin
+        Quantity: 20
 
 - type: entity
   parent: AmpulaPirate
@@ -206,19 +206,19 @@
   id: AmpulaBuccaneerSpirit
   suffix: Buccaneer spirit
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 30
-        reagents:
-        - ReagentId: Stimulants
-          Quantity: 10
-        - ReagentId: Vodkizine
-          Quantity: 10
-        - ReagentId: Omnizine
-          Quantity: 5
-        - ReagentId: Rororium
-          Quantity: 5
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 30
+      reagents:
+      - ReagentId: Stimulants
+        Quantity: 10
+      - ReagentId: Vodkizine
+        Quantity: 10
+      - ReagentId: Omnizine
+        Quantity: 5
+      - ReagentId: Rororium
+        Quantity: 5
 
 - type: entity
   parent: AmpulaPirate
@@ -226,15 +226,14 @@
   id: AmpulaMurmillo
   suffix: Murmillo, auto-recharge
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 30
-        reagents:
-        - ReagentId: DarkRedRum
-          Quantity: 30
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 30
+      reagents:
+      - ReagentId: DarkRedRum
+        Quantity: 30
   - type: SolutionRegeneration
-    solution: beaker
     generated:
       reagents:
       - ReagentId: DarkRedRum

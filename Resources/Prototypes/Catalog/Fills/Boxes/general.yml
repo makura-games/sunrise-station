@@ -321,6 +321,7 @@
     whitelist:
       tags:
         - TrashBag
+        - TrashBagBlue
   - type: Sprite
     layers:
       - state: box

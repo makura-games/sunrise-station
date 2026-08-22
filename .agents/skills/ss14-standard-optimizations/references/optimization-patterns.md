@@ -8,7 +8,7 @@ Use the table as a quick solution router in reviews and refactorings.
 | Reduced allocations | GC spikes on mass shots | Reuse `ValueList/List`, apply `ArrayPool`, transfer collections/spans | Leaks in the pool when `Return` is forgotten, dirty data without `Clear` |
 | Abandoning LINQ | LINQ in hot-path (`Where/Select/Any/Count`) | Rewrite to `for/foreach` with early exits | Loss of readability if rewritten without structure |
 | `Component + ActiveComponent` | Many "inactive" entities in the overall iteration | Enter active marker and iterate only active ones | Inconsistent state transitions when remove/add is forgotten |
-| `EntityQuery` for `TryComp/HasComp/Resolve` | Frequent component rechecks | Cache `EntityQuery<T>` in `Initialize()` and use its methods | False "optimization" in rarely called code |
+| `EntityQuery` for `TryComp/HasComp/Resolve` | Частые повторные проверки компонента | В `EntitySystem` получить `EntityQuery<T>` через `[Dependency]` и использовать его методы | Инъекция query в несистемный класс через глобальную IoC или ложная оптимизация редкого вызова |
 | Order in `EntityQueryEnumerator` | Dear multi-component query | Put the rare component first, then the more widespread ones | Incorrect ordering worsens iteration time |
 | `ByRef record struct` events | Frequent local events in the gameplay loop | `[ByRefEvent] public record struct ...` + transfer `ref` | Handlers break due to inconsistent signature |
 | `DirtyField` vs `Dirty` | Large component with many network fields | For point changes, use `DirtyField` | Skip the required field and get out of sync |

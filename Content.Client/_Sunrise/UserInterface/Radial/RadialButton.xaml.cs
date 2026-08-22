@@ -8,7 +8,7 @@ using Robust.Shared.Animations;
 namespace Content.Client._Sunrise.UserInterface.Radial;
 
 [GenerateTypedNameReferences, Virtual, PublicAPI]
-public sealed partial class RadialButton : Control
+public partial class RadialButton : Control
 {
     [Animatable] public Vector2 Offset { get; set; }
     public string? Content { get; set; }

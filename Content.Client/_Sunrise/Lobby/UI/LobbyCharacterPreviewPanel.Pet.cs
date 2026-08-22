@@ -13,7 +13,7 @@ namespace Content.Client.Lobby.UI;
 
 public sealed partial class LobbyCharacterPreviewPanel
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     public event Action? OnChangePetRequested;
 

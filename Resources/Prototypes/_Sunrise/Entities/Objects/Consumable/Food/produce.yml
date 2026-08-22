@@ -1,10 +1,22 @@
 - type: entity
+  id: SolutionExplosiveBananaBeaker
+  parent: Solution
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 40
+      canReact: false
+
+- type: entity
   name: explosive banana
   description: explosive banana
   parent: [FoodProduceBase, ItemHeftyBase]
   id: ExplosiveBanana
   components:
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: DamageOnHighSpeedImpact
     minimumSpeed: 0.1
@@ -32,21 +44,21 @@
     state: produce
   - type: Produce
     seedId: ExplosiveBanana
-  - type: SolutionContainerManager
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 5
+      canReact: false
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: Potassium
+        Quantity: 1
+      - ReagentId: Water
+        Quantity: 1
+  - type: SolutionManager
     solutions:
-      beaker:
-        maxVol: 40
-        canReact: false
-      food:
-        maxVol: 5
-        canReact: false
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Potassium
-          Quantity: 1
-        - ReagentId: Water
-          Quantity: 1
+    - SolutionExplosiveBananaBeaker
   - type: Tag
     tags:
     - Fruit
@@ -65,13 +77,13 @@
     state: produce
   - type: Produce
     seedId: CoffeeArabica
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: Grcoffee
-          Quantity: 1
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: Grcoffee
+        Quantity: 1
   - type: Tag
     tags:
     - Fruit
@@ -90,15 +102,15 @@
     state: produce
   - type: Produce
     seedId: CoffeeRobust
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Grcoffee
-          Quantity: 2
-        - ReagentId: Ephedrine
-          Quantity: 1
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 10
+      reagents:
+      - ReagentId: Grcoffee
+        Quantity: 2
+      - ReagentId: Ephedrine
+        Quantity: 1
   - type: Tag
     tags:
     - Fruit
@@ -116,15 +128,15 @@
   - type: FlavorProfile
     flavors:
     - medicine
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 22
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Lacerinol
-          Quantity: 20
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 22
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: Lacerinol
+        Quantity: 20
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/geranium.rsi
   - type: Produce
@@ -143,7 +155,7 @@
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/glasscap.rsi
-  - type: SolutionContainerManager
+  - type: SolutionManager
   - type: MeleeWeapon
     damage:
       types:
@@ -162,7 +174,7 @@
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/plaststeelcap.rsi
-  - type: SolutionContainerManager
+  - type: SolutionManager
   - type: MeleeWeapon
     damage:
       types:
@@ -184,15 +196,15 @@
   - type: FlavorProfile
     flavors:
     - watermelon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 25
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-        - ReagentId: Moonshine
-          Quantity: 15
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 25
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
+      - ReagentId: Moonshine
+        Quantity: 15
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/barrelmelon.rsi
   - type: Produce
@@ -203,6 +215,7 @@
       - ReagentId: Moonshine
         Quantity: 20
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: DamageOnHighSpeedImpact
     minimumSpeed: 0.1
@@ -242,15 +255,15 @@
     - watermelon
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/barrelmelon.rsi
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Moonshine
-          Quantity: 3
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: Moonshine
+        Quantity: 3
   - type: Extractable
     juiceSolution:
       reagents:
@@ -280,17 +293,17 @@
     state: produce
   - type: Produce
     seedId: Lanternfruit
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20
-        reagents:
-        - ReagentId: PulverizedLantern
-          Quantity: 5
-        - ReagentId: Sulfur
-          Quantity: 10
-        - ReagentId: Licoxide
-          Quantity: 5
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 20
+      reagents:
+      - ReagentId: PulverizedLantern
+        Quantity: 5
+      - ReagentId: Sulfur
+        Quantity: 10
+      - ReagentId: Licoxide
+        Quantity: 5
   - type: Tag
     tags:
     - Fruit
@@ -309,15 +322,15 @@
     state: produce
   - type: Produce # TODO добавить флавор цветка когда офы сделают цветомат
     seedId: Redrose
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 4
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Vitamin
-          Quantity: 2
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 4
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: Vitamin
+        Quantity: 2
   - type: Tag
     tags:
     - Fruit
@@ -334,15 +347,15 @@
   - type: Edible
     trash:
     - FoodCornTrash
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 45
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 35
-        - ReagentId: Water
-          Quantity: 10
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 45
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 35
+      - ReagentId: Water
+        Quantity: 10
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/snapcorn.rsi
   - type: Produce
@@ -362,15 +375,15 @@
     state: produce
   - type: Produce # TODO добавить флавор цветка когда офы сделают цветомат
     seedId: Whiterose
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 4
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Vitamin
-          Quantity: 2
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 4
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: Vitamin
+        Quantity: 2
   - type: Tag
     tags:
     - Fruit
@@ -389,17 +402,17 @@
     state: produce
   - type: Produce
     seedId: Sunflower
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 6
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Vitamin
-          Quantity: 2
-        - ReagentId: Oil
-          Quantity: 2
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 6
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: Vitamin
+        Quantity: 2
+      - ReagentId: Oil
+        Quantity: 2
   - type: Extractable
     juiceSolution:
       reagents:
@@ -424,15 +437,15 @@
     state: produce
   - type: Produce
     seedId: WhiteLily
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 4
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Vitamin
-          Quantity: 2
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 4
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: Vitamin
+        Quantity: 2
   - type: Tag
     tags:
     - Fruit

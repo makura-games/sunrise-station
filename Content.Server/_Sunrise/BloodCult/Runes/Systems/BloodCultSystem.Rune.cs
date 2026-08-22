@@ -19,7 +19,7 @@ using Content.Shared._Sunrise.BloodCult.UI;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Components;
 using Content.Shared.Chat;
-using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage;
@@ -327,17 +327,11 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
 
         private void HandleCollision(EntityUid uid, CultRuneBaseComponent component, ref StartCollideEvent args)
         {
-            if (!TryComp<SolutionContainerManagerComponent>(args.OtherEntity, out var solution))
-            {
-                return;
-            }
-
-            if (!_solutionContainer.TryGetSolution((args.OtherEntity, solution),
-                    VaporComponent.SolutionName,
-                    out var vapor))
+            if (!HasComp<VaporComponent>(args.OtherEntity) ||
+                !TryComp<SolutionComponent>(args.OtherEntity, out var vapor))
                 return;
 
-            if (vapor.Value.Comp.Solution.Contents.Any(x => x.Reagent.Prototype == "Holywater"))
+            if (vapor.Solution.Contents.Any(x => x.Reagent.Prototype == "Holywater"))
             {
                 Del(uid);
             }
@@ -1112,8 +1106,7 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
                 return false;
             }
 
-            var xformQuery = GetEntityQuery<TransformComponent>();
-            var xform = xformQuery.GetComponent(rune);
+            var xform = _xformQuery.GetComponent(rune);
 
             var projectileCount =
                 (int)MathF.Round(MathHelper.Lerp(component.MinProjectiles, component.MaxProjectiles, severity));
@@ -1148,10 +1141,9 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
             while (projectileCount > 0)
             {
                 var target = _random.Pick(list);
-                var targetCoords = xformQuery.GetComponent(target).Coordinates.Offset(_random.NextVector2(0.5f));
-                var flammable = GetEntityQuery<FlammableComponent>();
+                var targetCoords = _xformQuery.GetComponent(target).Coordinates.Offset(_random.NextVector2(0.5f));
 
-                if (!flammable.TryGetComponent(target, out var fl))
+                if (!_flammableQuery.TryGetComponent(target, out var fl))
                     continue;
 
                 fl.FireStacks += _random.Next(1, 3);

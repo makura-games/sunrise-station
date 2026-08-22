@@ -13,7 +13,6 @@ admin-smite-stomach-removal-self = Вы ощущаете пустоту в же�
 admin-smite-run-walk-swap-prompt = Для бега вы должны нажать Shift!
 admin-smite-super-speed-prompt = Вы двигаетесь почти со скоростью звука!
 admin-smite-lung-removal-self = Вы не можете вдохнуть!
-admin-smite-terminate-prompt = Я вернусь
 
 ## Smite names
 
@@ -55,7 +54,6 @@ admin-smite-disarm-prone-name = Обезоруживание и арест
 admin-smite-garbage-can-name = Мусор
 admin-smite-super-bonk-name = СуперБонк
 admin-smite-super-bonk-lite-name = СуперБонк-Лайт
-admin-smite-terminate-name = Экстерминировать
 admin-smite-super-slip-name = Суперскольжение
 admin-smite-omni-accent-name = Омни-акцент
 admin-smite-random-death-name = Случайная смерть
@@ -100,7 +98,6 @@ admin-smite-disarm-prone-description = Шанс обезоружить цель 
 admin-smite-garbage-can-description = Превратите цель в мусорку, чтобы подчеркнуть, о чём она вам напоминает.
 admin-trick-unbolt-description = Разболтирует целевой шлюз.
 admin-smite-super-bonk-description = Заставляет цель удариться о каждый стол на станции и за её пределами.
-admin-smite-terminate-description = Создаёт экстерминатора с ролью призрака, с единственной задачей - убить выбранную цель.
 admin-smite-super-slip-description = Очень сильно поскальзывает цель.
 admin-smite-omni-accent-description = Заставляет цель говорить практически со всеми доступными акцентами.
 admin-smite-random-death-description = Случайно выбирает очень трудно восстанавливаемую смерть.

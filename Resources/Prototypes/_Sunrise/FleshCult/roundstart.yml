@@ -13,64 +13,76 @@
     - FleshCultSurviveObjective
   - type: AntagSelection
     agentName: flesh-cult-round-end-agent-name
-    definitions:
-    - prefRoles: [ FleshCultistLeader ]
-      fallbackRoles: [ FleshCultist ]
-      max: 1
-      startingGear: FleshCultistLeaderGear
-      components:
-      - type: FleshCultist
-        startingMutationPoints: 15
-      - type: NpcFactionMember
-        factions:
-        - FleshHuman
-      whitelist:
-        species:
-          - Human
-          - Reptilian
-          - Dwarf
-          - Vulpkanin
-          - Felinid
-          - Moth
-          - Arachnid
-          - Swine
-          - Demon
-          - Vox
-          - Tajaran
-      blacklist:
-        components:
-        - AntagImmune
-        #- Synth # SUNRISE-TODO: КПБ
-        - BibleUser
-      mindRoles:
-      - MindRoleFleshCultistLeader
-    - prefRoles: [ FleshCultist ]
-      fallbackRoles: [ FleshCultistLeader ]
-      max: 3
+    selectionTime: JobsAssigned
+    antags:
+    - !type:FixedAntagCount
+      proto: SunriseFleshCultistLeader
+    - !type:LinearAntagCount
+      proto: SunriseFleshCultist
       playerRatio: 15
-      components:
-      - type: FleshCultist
-        startingMutationPoints: 5
-      - type: NpcFactionMember
-        factions:
-        - FleshHuman
-      whitelist:
-        species:
-        - Human
-        - Reptilian
-        - Dwarf
-        - Vulpkanin
-        - Felinid
-        - Moth
-        - Arachnid
-        - Swine
-        - Demon
-        - Vox
-        - Tajaran
-      blacklist:
-        components:
-        - AntagImmune
-        #- Synth # SUNRISE-TODO: КПБ
-        - BibleUser
-      mindRoles:
-      - MindRoleFleshCultist
+      range:
+        min: 1
+        max: 3
+
+- type: antagSpecifier
+  parent: BaseAntagSpecifier
+  id: SunriseFleshCultistLeader
+  prefRoles: [ FleshCultistLeader ]
+  fallbackRoles: [ FleshCultist ]
+  startingGear: FleshCultistLeaderGear
+  components:
+  - type: FleshCultist
+    startingMutationPoints: 15
+  - type: NpcFactionMember
+    factions:
+    - FleshHuman
+  whitelist:
+    species:
+    - Human
+    - Reptilian
+    - Dwarf
+    - Vulpkanin
+    - Felinid
+    - Moth
+    - Arachnid
+    - Swine
+    - Demon
+    - Vox
+    - Tajaran
+  blacklist:
+    components:
+    # - Synth # Sunrise-TODO: КПБ
+    - BibleUser
+  mindRoles:
+  - MindRoleFleshCultistLeader
+
+- type: antagSpecifier
+  parent: BaseAntagSpecifier
+  id: SunriseFleshCultist
+  prefRoles: [ FleshCultist ]
+  fallbackRoles: [ FleshCultistLeader ]
+  components:
+  - type: FleshCultist
+    startingMutationPoints: 5
+  - type: NpcFactionMember
+    factions:
+    - FleshHuman
+  whitelist:
+    species:
+    - Human
+    - Reptilian
+    - Dwarf
+    - Vulpkanin
+    - Felinid
+    - Moth
+    - Arachnid
+    - Swine
+    - Demon
+    - Vox
+    - Tajaran
+  blacklist:
+    components:
+    # - Synth # Sunrise-TODO: КПБ
+    - BibleUser
+  mindRoles:
+  - MindRoleFleshCultist

@@ -9,11 +9,11 @@ using Robust.Shared.Random;
 namespace Content.Server.GameTicking.Rules.VariationPass;
 
 /// <inheritdoc cref="PuddleMessVariationPassComponent"/>
-public sealed class PuddleMessVariationPassSystem : VariationPassSystem<PuddleMessVariationPassComponent>
+public sealed partial class PuddleMessVariationPassSystem : VariationPassSystem<PuddleMessVariationPassComponent>
 {
-    [Dependency] private readonly PuddleSystem _puddle = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly TagSystem _tag = default!; // Sunrise-Edit
+    [Dependency] private PuddleSystem _puddle = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     // Sunrise-Edit
     private static readonly ProtoId<TagPrototype> StorytellerIgnoreMessTag = "StorytellerIgnoreMess";

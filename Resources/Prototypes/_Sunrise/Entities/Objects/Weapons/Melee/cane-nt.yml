@@ -64,10 +64,10 @@
           True: {state: cane-nt-active}
           False: {state: cane-nt}
   - type: Riggable
-  - type: SolutionContainerManager
-    solutions:
-      battery:
-        maxVol: 5
+  - type: Solution
+    id: battery
+    solution:
+      maxVol: 5
   - type: InjectableSolution
     solution: battery
   - type: DrawableSolution

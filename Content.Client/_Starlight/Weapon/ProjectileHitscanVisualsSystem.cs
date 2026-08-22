@@ -4,9 +4,9 @@ using Robust.Shared.GameObjects;
 
 namespace Content.Client._Starlight.Weapon;
 
-public sealed class ProjectileHitscanVisualsSystem : EntitySystem
+public sealed partial class ProjectileHitscanVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
+    [Dependency] private SpriteSystem _spriteSystem = default!;
 
     public override void Initialize()
     {

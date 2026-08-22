@@ -11,7 +11,6 @@
   startingGear: SecurityOfficerGear
   icon: "JobIconSecurityOfficer"
   supervisors: job-supervisors-hos
-  canBeAntag: false
   displayWeight: 10
   # Sunrise-Start
   alternativeTitles:

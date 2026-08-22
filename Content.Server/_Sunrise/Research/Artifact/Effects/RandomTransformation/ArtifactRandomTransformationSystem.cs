@@ -19,12 +19,12 @@ public sealed partial class ArtifactRandomTransformationSystem : BaseXAESystem<A
      * Entry-point and lifecycle part of the system.
      */
 
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly HashSet<Entity<ItemComponent>> _items = [];
     private readonly HashSet<Entity<InventoryComponent>> _inventories = [];

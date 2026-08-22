@@ -43,24 +43,24 @@ using Content.Sunrise.Interfaces.Shared; // Sunrise-Sponsors
 namespace Content.Server.Ghost.Roles;
 
 [UsedImplicitly]
-public sealed class GhostRoleSystem : EntitySystem
+public sealed partial class GhostRoleSystem : EntitySystem
 {
-    [Dependency] private readonly IBanManager _ban = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IEntityManager _ent = default!;
-    [Dependency] private readonly EuiManager _euiManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly FollowerSystem _followerSystem = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
-    [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private IBanManager _ban = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private EuiManager _euiManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private FollowerSystem _followerSystem = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private SharedMindSystem _mindSystem = default!;
+    [Dependency] private SharedRoleSystem _roleSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     private ISharedSponsorsManager? _sponsorsManager; // Sunrise-Sponsors
 
@@ -670,8 +670,7 @@ public sealed class GhostRoleSystem : EntitySystem
     /// </summary>
     public int GetGhostRoleCount()
     {
-        var metaQuery = GetEntityQuery<MetaDataComponent>();
-        return _ghostRoles.Count(pair => metaQuery.GetComponent(pair.Value.Owner).EntityPaused == false);
+        return _ghostRoles.Count(pair => MetaData(pair.Value.Owner).EntityPaused == false);
     }
 
     /// <summary>
@@ -683,14 +682,13 @@ public sealed class GhostRoleSystem : EntitySystem
     public GhostRoleInfo[] GetGhostRolesInfo(ICommonSession? player)
     {
         var roles = new List<GhostRoleInfo>();
-        var metaQuery = GetEntityQuery<MetaDataComponent>();
 
         foreach (var (id, (uid, role)) in _ghostRoles)
         {
-            if (metaQuery.GetComponent(uid).EntityPaused)
+            if (MetaData(uid).EntityPaused)
                 continue;
 
-            var prototypeId = metaQuery.GetComponent(uid).EntityPrototype!.ID; // Sunrise-Sponsors
+            var prototypeId = MetaData(uid).EntityPrototype!.ID; // Sunrise-Sponsors
 
             var kind = GhostRoleKind.FirstComeFirstServe;
             GhostRoleRaffleComponent? raffle = null;
@@ -974,9 +972,9 @@ public sealed class GhostRoleSystem : EntitySystem
 }
 
 [AnyCommand]
-public sealed class GhostRoles : IConsoleCommand
+public sealed partial class GhostRoles : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _e = default!;
+    [Dependency] private IEntityManager _e = default!;
 
     public string Command => "ghostroles";
     public string Description => "Opens the ghost role request window.";

@@ -9,9 +9,9 @@ namespace Content.Server._Sunrise.Chat.Commands;
 
 [UsedImplicitly]
 [AdminCommand(AdminFlags.Debug)]
-public sealed class SpawnArrivalsShuttleCommand : LocalizedCommands
+public sealed partial class SpawnArrivalsShuttleCommand : LocalizedCommands
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private IEntityManager _entities = default!;
 
     public override string Command => "spawnarrivalsshuttle";
 

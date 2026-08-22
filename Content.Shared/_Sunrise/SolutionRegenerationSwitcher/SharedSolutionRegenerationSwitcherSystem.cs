@@ -5,9 +5,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._Sunrise.SolutionRegenerationSwitcher
 {
-    public abstract class SharedSolutionRegenerationSwitcherSystem : EntitySystem
+    public abstract partial class SharedSolutionRegenerationSwitcherSystem : EntitySystem
     {
-        [Dependency] protected readonly IPrototypeManager PrototypeManager = null!;
+        [Dependency] protected IPrototypeManager PrototypeManager = null!;
 
         private ISawmill _sawmill = null!;
 

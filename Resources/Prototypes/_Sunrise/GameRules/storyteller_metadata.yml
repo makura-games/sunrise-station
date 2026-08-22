@@ -217,19 +217,19 @@
   maxStress: 90
 
 - type: storytellerMetadata
-  id: GameRuleSpaceDustMinor
+  id: SpaceDustMinor
   threatType: MinorCalm
   threatCost: 5
   maxStress: 80
 
 - type: storytellerMetadata
-  id: GameRuleSpaceDustMajor
+  id: SpaceDustMajor
   threatType: MinorCalm
   threatCost: 10
   maxStress: 80
 
 - type: storytellerMetadata
-  id: GameRuleMeteorSwarmSmall
+  id: MeteorSwarmSmall
   threatType: MinorCalm
   threatCost: 20
   maxStress: 70
@@ -327,14 +327,14 @@
   maxStress: 70
 
 - type: storytellerMetadata
-  id: GameRuleMeteorSwarmMedium
+  id: MeteorSwarmMedium
   threatType: MajorCalm
   threatCost: 90
   minStationStrength: 10
   maxStress: 80
 
 - type: storytellerMetadata
-  id: GameRuleMeteorSwarmLarge
+  id: MeteorSwarmLarge
   threatType: MajorCalm
   threatCost: 110
   minStationStrength: 15
@@ -397,14 +397,6 @@
   maxStress: 80
   minStationStrength: 0
   weightModifier: 2.0
-
-- type: storytellerMetadata
-  id: TerminatorSpawn
-  threatType: MinorAntag
-  threatCost: 40
-  maxStress: 80
-  minStationStrength: 10
-  weightModifier: 3.0
 
 - type: storytellerMetadata
   id: SpiderClownSpawnHorde

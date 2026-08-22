@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server._Sunrise.Helpers;
 using Content.Server.Power.Components;
 using Content.Server.Station.Systems;
@@ -16,13 +16,13 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Sunrise.Xenoarchaeology;
 
-public sealed class RandomXenoArtifactsSystem : EntitySystem
+public sealed partial class RandomXenoArtifactsSystem : EntitySystem
 {
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly SunriseHelpersSystem _helpers = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private SunriseHelpersSystem _helpers = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
 
     /// <summary>
     /// Соотношение предметов к предметам-артефактам. В % процентах.
@@ -34,13 +34,13 @@ public sealed class RandomXenoArtifactsSystem : EntitySystem
     private static readonly EntProtoId BaseParent = "BaseRandomItemXenoArtifactComponents";
     private static EntityPrototype? _baseParentPrototype;
 
-    private EntityQuery<TransformComponent> _xform;
+    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
 
-    private EntityQuery<DoorElectronicsComponent> _doorElectronics;
-    private EntityQuery<ApcElectronicsComponent> _apcElectronics;
-    private EntityQuery<OrganComponent> _organs;
+    [Dependency] private EntityQuery<DoorElectronicsComponent> _doorElectronicsQuery = default!;
+    [Dependency] private EntityQuery<ApcElectronicsComponent> _apcElectronicsQuery = default!;
+    [Dependency] private EntityQuery<OrganComponent> _organQuery = default!;
 
-    private EntityQuery<StationRandomXenoArtifactComponent> _avaliableStations;
+    [Dependency] private EntityQuery<StationRandomXenoArtifactComponent> _availableStationQuery = default!;
 
     public override void Initialize()
     {
@@ -51,13 +51,6 @@ public sealed class RandomXenoArtifactsSystem : EntitySystem
 
         SubscribeLocalEvent<RoundStartedEvent>(OnRoundStarted);
 
-        _xform = GetEntityQuery<TransformComponent>();
-
-        _doorElectronics = GetEntityQuery<DoorElectronicsComponent>();
-        _apcElectronics = GetEntityQuery<ApcElectronicsComponent>();
-        _organs = GetEntityQuery<OrganComponent>();
-
-        _avaliableStations = GetEntityQuery<StationRandomXenoArtifactComponent>();
     }
 
     private void OnRoundStarted(RoundStartedEvent ev)
@@ -105,25 +98,25 @@ public sealed class RandomXenoArtifactsSystem : EntitySystem
     /// </summary>
     private bool IsAppropriate(Entity<TransformComponent?> ent)
     {
-        if (!_xform.Resolve(ref ent))
+        if (!_xformQuery.Resolve(ref ent))
             return false;
 
         var station = _station.GetOwningStation(ent, ent.Comp);
 
-        if (!_avaliableStations.HasComp(station))
+        if (!_availableStationQuery.HasComp(station))
             return false;
 
         // Блеклист компонентов, которые не должны становиться артефактами.
         // Все это какие-то предметы, внутри других предметов, которые достаются через жопу.
         // Поэтому делать их артефактами ну такое себе
 
-        if (_doorElectronics.HasComp(ent))
+        if (_doorElectronicsQuery.HasComp(ent))
             return false;
 
-        if (_apcElectronics.HasComp(ent))
+        if (_apcElectronicsQuery.HasComp(ent))
             return false;
 
-        if (_organs.HasComp(ent))
+        if (_organQuery.HasComp(ent))
             return false;
 
         return true;

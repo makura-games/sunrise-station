@@ -44,6 +44,7 @@
       types:
         Blunt: 100
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: MultiHandedItem
 
@@ -411,6 +412,7 @@
       types:
         Blunt: 150
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
 
 # Leviathan 240mm HE Shell

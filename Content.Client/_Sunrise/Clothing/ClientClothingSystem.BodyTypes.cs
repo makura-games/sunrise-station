@@ -15,8 +15,8 @@ namespace Content.Client.Clothing;
 
 public sealed partial class ClientClothingSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private readonly string _hardsuitTag = "Hardsuit";
 

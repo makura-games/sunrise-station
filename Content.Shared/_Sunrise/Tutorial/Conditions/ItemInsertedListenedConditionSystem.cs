@@ -11,7 +11,7 @@ namespace Content.Shared._Sunrise.Tutorial.Conditions;
 public sealed partial class ItemInsertedListenedConditionSystem
     : EventListenedConditionSystemBase<ItemInsertedListenedCondition>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

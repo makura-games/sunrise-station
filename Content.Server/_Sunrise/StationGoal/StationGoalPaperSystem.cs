@@ -13,14 +13,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._Sunrise.StationGoal
 {
-    public sealed class StationGoalPaperSystem : EntitySystem
+    public sealed partial class StationGoalPaperSystem : EntitySystem
     {
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly ContainerSystem _containerSystem = default!;
-        [Dependency] private readonly PaperSystem _paperSystem = default!;
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private ContainerSystem _containerSystem = default!;
+        [Dependency] private PaperSystem _paperSystem = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private IRobustRandom _random = default!;
 
         public override void Initialize()
         {

@@ -15,15 +15,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.PlanetPrison
 {
-    public sealed class PlanetPrisonSystem : EntitySystem
+    public sealed partial class PlanetPrisonSystem : EntitySystem
     {
-        [Dependency] private readonly MindSystem _mindSystem = default!;
-        [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
-        [Dependency] private readonly GameTicker _gameTicker = default!;
-        [Dependency] private readonly TransformSystem _transformSystem = default!;
-        [Dependency] private readonly NewLifeSystem _newLifeSystem = default!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly ISharedPlayerManager _player = default!;
+        [Dependency] private MindSystem _mindSystem = default!;
+        [Dependency] private SharedRoleSystem _roleSystem = default!;
+        [Dependency] private GameTicker _gameTicker = default!;
+        [Dependency] private TransformSystem _transformSystem = default!;
+        [Dependency] private NewLifeSystem _newLifeSystem = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private ISharedPlayerManager _player = default!;
 
         [ValidatePrototypeId<EntityPrototype>]
         private const string MindRole = "MindRolePlanetPrisoner";

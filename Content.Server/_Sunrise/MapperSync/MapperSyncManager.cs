@@ -12,13 +12,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._Sunrise.MapperSync;
 
-public sealed class MapperSyncManager
+public sealed partial class MapperSyncManager
 {
-    [Dependency] private readonly IStatusHost _statusHost = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IResourceManager _res = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IStatusHost _statusHost = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IResourceManager _res = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     // Client state
     private readonly HttpClient _httpClient = new();

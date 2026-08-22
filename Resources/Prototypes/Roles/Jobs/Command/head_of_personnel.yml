@@ -23,7 +23,6 @@
   startingGear: HoPGear
   icon: "JobIconHeadOfPersonnel"
   supervisors: job-supervisors-captain
-  canBeAntag: false
   radioBold: true # Sunrise-Edit
   displayWeight: 90 # Sunrise-Edit
   # Sunrise-Start

@@ -8,14 +8,14 @@ using static Robust.Client.GameObjects.SpriteComponent;
 
 namespace Content.Client._Sunrise.Paint
 {
-    public sealed class PaintedVisualizerSystem : VisualizerSystem<SprayPaintedComponent>
+    public sealed partial class PaintedVisualizerSystem : VisualizerSystem<SprayPaintedComponent>
     {
         /// <summary>
         /// Visualizer for Paint which applies a shader and colors the entity.
         /// </summary>
 
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-        [Dependency] private readonly IPrototypeManager _protoMan = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
+        [Dependency] private IPrototypeManager _protoMan = default!;
 
         public ShaderInstance? Shader; // in Robust.Client.Graphics so cannot move to shared component.
 

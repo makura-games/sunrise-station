@@ -12,7 +12,7 @@ namespace Content.Client.Administration.UI.Bwoink
     [GenerateTypedNameReferences]
     public sealed partial class BwoinkPanel : BoxContainer
     {
-        [Dependency] private readonly IUserInterfaceManager _ui = default!;
+        [Dependency] private IUserInterfaceManager _ui = default!;
 
         private readonly Action<string> _messageSender;
 

@@ -7,7 +7,7 @@ namespace Content.Server._Sunrise.Tutorial.Conditions;
 public sealed partial class StepDelayConditionSystem
     : TutorialConditionSystem<TutorialPlayerComponent, StepDelayCondition>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     protected override void Condition(Entity<TutorialPlayerComponent> entity, ref TutorialConditionEvent<StepDelayCondition> args)
     {

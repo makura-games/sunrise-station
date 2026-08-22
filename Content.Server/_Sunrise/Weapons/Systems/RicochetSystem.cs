@@ -13,8 +13,8 @@ namespace Content.Server._Sunrise.Weapons.Systems;
 
 public sealed partial class RicochetSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _rand = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private IRobustRandom _rand = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

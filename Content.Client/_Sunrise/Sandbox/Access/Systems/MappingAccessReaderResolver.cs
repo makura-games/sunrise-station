@@ -20,10 +20,13 @@ public sealed class MappingAccessReaderResolver : IDisposable
 
     private bool _accessReaderLookupDirty = true;
 
-    public MappingAccessReaderResolver(IEntityManager entityManager, IPrototypeManager prototypeManager)
+    public MappingAccessReaderResolver(
+        IEntityManager entityManager,
+        IPrototypeManager prototypeManager,
+        EntityQuery<ContainerFillComponent> containerFillQuery)
     {
         _ent = entityManager;
-        _containerFillQuery = _ent.GetEntityQuery<ContainerFillComponent>();
+        _containerFillQuery = containerFillQuery;
         _containerSystem = _ent.System<SharedContainerSystem>();
         _prototypeManager = prototypeManager;
         _prototypeManager.PrototypesReloaded += OnPrototypesReloaded;

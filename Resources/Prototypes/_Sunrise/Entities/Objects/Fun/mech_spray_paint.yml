@@ -25,13 +25,13 @@
   - type: Item
     sprite: Objects/Fun/spraycans.rsi
     heldPrefix: spray
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 50
-        reagents:
-        - ReagentId: SpaceGlue
-          Quantity: 50
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: SpaceGlue
+        Quantity: 50
   - type: TrashOnSolutionEmpty
     solution: drink
   - type: Sealable

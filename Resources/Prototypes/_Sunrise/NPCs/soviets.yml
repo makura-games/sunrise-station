@@ -41,7 +41,7 @@
   - type: FootprintEmitter
   - type: FootstepModifier
     footstepSoundCollection:
-      collection: FootstepHeavy
+      collection: FootstepBoots
   - type: MobThresholds
     thresholds:
       0: Alive

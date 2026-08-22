@@ -4,4 +4,5 @@
   components:
   - type: FunctionalOrgan
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic

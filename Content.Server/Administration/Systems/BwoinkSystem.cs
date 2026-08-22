@@ -36,19 +36,19 @@ namespace Content.Server.Administration.Systems
     {
         private const string RateLimitKey = "AdminHelp";
 
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly IAdminManager _adminManager = default!;
-        [Dependency] private readonly IConfigurationManager _config = default!;
-        [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly IPlayerLocator _playerLocator = default!;
-        [Dependency] private readonly GameTicker _gameTicker = default!;
-        [Dependency] private readonly SharedMindSystem _minds = default!;
-        [Dependency] private readonly IAfkManager _afkManager = default!;
-        [Dependency] private readonly IServerDbManager _dbManager = default!;
-        [Dependency] private readonly PlayerRateLimitManager _rateLimit = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
+        [Dependency] private IAdminManager _adminManager = default!;
+        [Dependency] private IConfigurationManager _config = default!;
+        [Dependency] private IGameTiming _timing = default!;
+        [Dependency] private IPlayerLocator _playerLocator = default!;
+        [Dependency] private GameTicker _gameTicker = default!;
+        [Dependency] private SharedMindSystem _minds = default!;
+        [Dependency] private IAfkManager _afkManager = default!;
+        [Dependency] private IServerDbManager _dbManager = default!;
+        [Dependency] private PlayerRateLimitManager _rateLimit = default!;
         private ISharedSponsorsManager? _sponsorsManager; // Sunrise-Sponsors
-        [Dependency] private readonly IBanManager _banManager = default!; // Sunrise-Ahelp-Antispam, based on Starlight Build: https://github.com/ss14Starlight/space-station-14/pull/85
-        [Dependency] private readonly DiscordWebhook _discord = default!;
+        [Dependency] private IBanManager _banManager = default!; // Sunrise-Ahelp-Antispam, based on Starlight Build: https://github.com/ss14Starlight/space-station-14/pull/85
+        [Dependency] private DiscordWebhook _discord = default!;
 
         [GeneratedRegex(@"^https://discord\.com/api/webhooks/(\d+)/((?!.*/).*)$")]
         private static partial Regex DiscordRegex();

@@ -17,7 +17,7 @@
         <!-- Sunrise-Start -->
         <BoxContainer Orientation="Horizontal" Margin="5" Visible="False" Name="TTSContainer">
             <Label Text="{Loc 'voice-mask-voice-change-info'}" />
-            <OptionButton Name="VoiceSelector" /> <!-- Populated in LoadVerbs -->
+            <OptionButton Name="VoiceSelector" /> <!-- Populated in ReloadVoices -->
         </BoxContainer>
         <!-- Sunrise-End -->
     </BoxContainer>

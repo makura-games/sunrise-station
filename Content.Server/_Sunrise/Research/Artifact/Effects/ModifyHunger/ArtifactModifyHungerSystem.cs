@@ -1,4 +1,4 @@
-﻿using Content.Shared.Nutrition.Components;
+using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Xenoarchaeology.Artifact;
 using Content.Shared.Xenoarchaeology.Artifact.XAE;
@@ -6,11 +6,11 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Sunrise.Research.Artifact.Effects.ModifyHunger;
 
-public sealed class ArtifactModifyHungerSystem : BaseXAESystem<ArtifactModifyHungerComponent>
+public sealed partial class ArtifactModifyHungerSystem : BaseXAESystem<ArtifactModifyHungerComponent>
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly HungerSystem _hunger = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private readonly HashSet<Entity<HungerComponent>> _entities = [];
 

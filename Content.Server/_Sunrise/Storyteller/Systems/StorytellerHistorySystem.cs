@@ -43,16 +43,16 @@ namespace Content.Server._Sunrise.Storyteller.Systems;
 /// Dedicated system that records significant timeline events during the round
 /// and formats them into a narrative history of the active storyteller.
 /// </summary>
-public sealed class StorytellerHistorySystem : EntitySystem
+public sealed partial class StorytellerHistorySystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly MindSystem _mindSystem = default!;
-    [Dependency] private readonly SharedJobSystem _jobSystem = default!;
-    [Dependency] private readonly SharedResearchSystem _researchSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private MindSystem _mindSystem = default!;
+    [Dependency] private SharedJobSystem _jobSystem = default!;
+    [Dependency] private SharedResearchSystem _researchSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
 
     private readonly List<StorytellerHistoryEntry> _history = new();
     private readonly HashSet<string> _researchedDisciplines = new();
@@ -663,7 +663,10 @@ public sealed class StorytellerHistorySystem : EntitySystem
         if (component.AssignedMinds.Count == 0)
             return;
 
-        var names = component.AssignedMinds.Select(m => m.Item2).ToList();
+        var names = component.AssignedMinds
+            .SelectMany(entry => entry.Value)
+            .Select(assigned => assigned.name)
+            .ToList();
         var playersList = string.Join(", ", names);
 
         var key = $"storyteller-metadata-{lowercaseId}-assigned";

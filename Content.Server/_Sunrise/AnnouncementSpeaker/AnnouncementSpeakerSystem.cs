@@ -20,7 +20,7 @@ namespace Content.Server._Sunrise.AnnouncementSpeaker;
 /// System that manages announcement speakers distributed across stations.
 /// Replaces global announcements with spatial audio from speaker networks.
 /// </summary>
-public sealed class AnnouncementSpeakerSystem : EntitySystem
+public sealed partial class AnnouncementSpeakerSystem : EntitySystem
 {
     /// <summary>
     /// Represents a queued announcement waiting to be played.
@@ -31,11 +31,11 @@ public sealed class AnnouncementSpeakerSystem : EntitySystem
         public TimeSpan QueuedAt { get; init; }
     }
 
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TTSSystem _ttsSystem = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TTSSystem _ttsSystem = default!;
 
     private static readonly ProtoId<TTSVoicePrototype> FallbackVoice = "FatherGrigori";
 

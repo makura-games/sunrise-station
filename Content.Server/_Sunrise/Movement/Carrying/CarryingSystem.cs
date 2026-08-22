@@ -6,10 +6,10 @@ using Content.Shared.Movement.Systems;
 
 namespace Content.Server._Sunrise.Movement.Carrying;
 
-public sealed class CarryingSystem : SharedCarryingSystem
+public sealed partial class CarryingSystem : SharedCarryingSystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly EscapeInventorySystem _escapeInventory = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private EscapeInventorySystem _escapeInventory = default!;
 
     private const float MultiplierDivisor = 2f;
 

@@ -16,11 +16,11 @@ namespace Content.Server._Sunrise.Jobs;
 /// Читает выбранный альтернативный титул из профиля игрока и применяет его
 /// к ID-карте и записи в манифесте экипажа при спавне.
 /// </summary>
-public sealed class AlternativeJobTitleSystem : EntitySystem
+public sealed partial class AlternativeJobTitleSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedIdCardSystem _card = default!;
-    [Dependency] private readonly StationRecordsSystem _records = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedIdCardSystem _card = default!;
+    [Dependency] private StationRecordsSystem _records = default!;
 
     public override void Initialize()
     {

@@ -14,8 +14,8 @@ public sealed partial class DeviceLinkOverlaySystem : EntitySystem
     /// </summary>
     public const string ToggleCommand = "showdevicelink";
 
-    [Dependency] private readonly IClientAdminManager _admin = default!;
-    [Dependency] private readonly IClientConsoleHost _console = default!;
+    [Dependency] private IClientAdminManager _admin = default!;
+    [Dependency] private IClientConsoleHost _console = default!;
 
     /// <summary>
     /// Raised after the overlay state or command availability changes.

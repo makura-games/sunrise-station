@@ -82,8 +82,9 @@
         layer:
         - MobLayer
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Felinid
+  - type: Injurable
+    damageContainer: Biological
   - type: Destructible
     thresholds:
     - trigger:

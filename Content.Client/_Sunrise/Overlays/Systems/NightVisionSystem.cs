@@ -9,12 +9,12 @@ using Content.Shared._Sunrise.NightVision;
 
 namespace Content.Client._Sunrise.Overlays;
 
-public sealed class NightVisionSystem : EntitySystem
+public sealed partial class NightVisionSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
-    [Dependency] private readonly TransformSystem _xformSys = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
+    [Dependency] private TransformSystem _xformSys = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
     private const string NightVisionShaderPrototype = "ModernNightVisionShader";
     private NightVisionOverlay _overlay = default!;
     [ViewVariables]

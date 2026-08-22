@@ -115,13 +115,17 @@ def extract_groups(tests, timings, total_shards):
         method_cases.setdefault((fixture, method, full_method), []).append(test)
 
     estimates = {}
+    unmeasured_methods = set()
     total_seconds = 0.0
     for key, cases in method_cases.items():
         full_method = key[2]
         method_default = timings["methodCaseSeconds"].get(full_method)
         exact = timings["caseSeconds"]
+        unmeasured_method = method_default is None and not any(test in exact for test in cases)
+        if unmeasured_method:
+            unmeasured_methods.add(key)
 
-        if method_default is None and not any(test in exact for test in cases):
+        if unmeasured_method:
             method_total = max(
                 timings["defaultMethodSeconds"],
                 len(cases) * timings["defaultCaseSeconds"],
@@ -137,10 +141,12 @@ def extract_groups(tests, timings, total_shards):
     target_seconds = total_seconds / total_shards
     group_counts = {}
     group_seconds = {}
-    for (fixture, method, full_method), cases in method_cases.items():
-        case_estimates = estimates[(fixture, method, full_method)]
+    for key, cases in method_cases.items():
+        fixture, method, full_method = key
+        case_estimates = estimates[key]
         split_cases = len(set(cases)) > 1 and (
-            len(cases) > PARAMETERIZED_CASE_SPLIT_THRESHOLD
+            key in unmeasured_methods
+            or len(cases) > PARAMETERIZED_CASE_SPLIT_THRESHOLD
             or sum(case_estimates) > target_seconds
         )
 

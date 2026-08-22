@@ -196,8 +196,9 @@
     - enum.BorgUiKey.Key
   - type: LockedWiresPanel
   - type: Damageable
-    damageContainer: Silicon
     damageModifierSet: Silicon # Sunrise-Edit
+  - type: Injurable
+    damageContainer: Silicon
   - type: Destructible
     thresholds:
     - trigger:

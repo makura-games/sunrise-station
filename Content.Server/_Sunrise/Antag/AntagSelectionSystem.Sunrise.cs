@@ -1,19 +1,20 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Antag.Components;
 using Content.Shared.Antag;
 using Content.Shared.GameTicking;
-using Content.Shared.Random.Helpers;
 using Content.Sunrise.Interfaces.Shared;
 using Robust.Shared.Player;
-using Robust.Shared.Random;
+using Robust.Shared.Prototypes;
+using AntagPrototype = Content.Shared.Roles.AntagPrototype;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace Content.Server.Antag;
 
 public sealed partial class AntagSelectionSystem
 {
-    /* Политика выбора Sunrise и приоритет спонсоров. */
+    private const int SunrisePrimaryPreferencePriority = 1;
+    private const int SunriseFallbackPreferencePriority = 0;
+
     private ISharedSponsorsManager? _sponsorsManager;
 
     private void InitializeSunriseAntagSelection()
@@ -26,12 +27,137 @@ public sealed partial class AntagSelectionSystem
         return args.CanBeAntag;
     }
 
-    private bool CanSelectSunriseCommandStaff(
-        Entity<AntagSelectionComponent> ent,
-        ICommonSession session,
-        AntagSelectionDefinition definition)
+    private static HashSet<string> GetSunrisePreferenceRoles(IEnumerable<AntagSpecifierPrototype> definitions)
     {
-        if (!_jobs.IsCommandStaff(session))
+        var roles = new HashSet<string>();
+        foreach (var definition in definitions)
+        {
+            foreach (var role in definition.PrefRoles)
+                roles.Add(role.Id);
+        }
+
+        return roles;
+    }
+
+    private Dictionary<ICommonSession, float> GetSunriseWeightedPlayerPool(
+        IEnumerable<ICommonSession> players,
+        IEnumerable<AntagSpecifierPrototype> definitions)
+    {
+        var preferenceRoles = GetSunrisePreferenceRoles(definitions);
+        var weightedPool = GetWeightedPlayerPool(players);
+        foreach (var player in weightedPool.Keys.ToArray())
+            weightedPool[player] = GetSunriseAntagWeight(player, preferenceRoles);
+
+        return weightedPool;
+    }
+
+    private float GetSunriseAntagWeight(ICommonSession player, HashSet<string> preferenceRoles)
+    {
+        if (_sponsorsManager?.TryGetPriorityAntags(player.UserId, out var priorities) == true)
+        {
+            foreach (var priority in priorities)
+            {
+                if (preferenceRoles.Contains(priority))
+                    return 2f;
+            }
+        }
+
+        return 1f;
+    }
+
+    private bool HasSunriseAntagPreference(ICommonSession player, AntagSpecifierPrototype definition)
+    {
+        if (!ShouldCheckSunriseAntagPreference(definition))
+            return true;
+
+        return TryGetValidAntagPreferences(player, out var preferences) &&
+               HasSunriseAntagPreference(preferences, definition);
+    }
+
+    private bool HasSunriseAntagPreference(
+        List<ProtoId<AntagPrototype>> preferences,
+        AntagSpecifierPrototype definition)
+    {
+        return !ShouldCheckSunriseAntagPreference(definition) ||
+               PrefsContain(preferences, definition.PrefRoles) ||
+               PrefsContain(preferences, definition.FallbackRoles);
+    }
+
+    /// <summary>
+    /// Проверяет предпочтение для поэтапного назначения: сначала основное либо роль без требований,
+    /// и только после этого резервное.
+    /// </summary>
+    private bool MatchesSunriseAntagPreference(
+        bool hasPreferences,
+        List<ProtoId<AntagPrototype>> preferences,
+        AntagSpecifierPrototype definition,
+        int priority)
+    {
+        if (!ShouldCheckSunriseAntagPreference(definition))
+            return priority == SunrisePrimaryPreferencePriority;
+
+        if (!hasPreferences)
+            return false;
+
+        return priority switch
+        {
+            SunrisePrimaryPreferencePriority => PrefsContain(preferences, definition.PrefRoles),
+            SunriseFallbackPreferencePriority => PrefsContain(preferences, definition.FallbackRoles),
+            _ => false
+        };
+    }
+
+    private IEnumerable<int> GetSunriseAntagAssignmentOrder(
+        bool hasPreferences,
+        List<ProtoId<AntagPrototype>> preferences,
+        IReadOnlyList<AntagRule> antags)
+    {
+        for (var priority = SunrisePrimaryPreferencePriority;
+             priority >= SunriseFallbackPreferencePriority;
+            priority--)
+        {
+            for (var i = antags.Count - 1; i >= 0; i--)
+            {
+                if (antags[i].Count <= 0)
+                    continue;
+
+                if (MatchesSunriseAntagPreference(hasPreferences, preferences, antags[i].Definition, priority))
+                    yield return i;
+            }
+        }
+    }
+
+    private IEnumerable<int> GetSunriseAntagAssignmentOrder(
+        bool hasPreferences,
+        List<ProtoId<AntagPrototype>> preferences,
+        IReadOnlyList<AntagCount> antags)
+    {
+        for (var priority = SunrisePrimaryPreferencePriority;
+             priority >= SunriseFallbackPreferencePriority;
+            priority--)
+        {
+            for (var i = antags.Count - 1; i >= 0; i--)
+            {
+                if (antags[i].Count <= 0)
+                    continue;
+
+                if (MatchesSunriseAntagPreference(hasPreferences, preferences, antags[i].Definition, priority))
+                    yield return i;
+            }
+        }
+    }
+
+    private static bool ShouldCheckSunriseAntagPreference(AntagSpecifierPrototype definition)
+    {
+        return definition.PrefRoles.Count != 0 || definition.FallbackRoles.Count != 0;
+    }
+
+    private bool CanSelectSunriseCommandStaff(
+        Entity<AntagSelectionComponent> gameRule,
+        ICommonSession player,
+        AntagSpecifierPrototype definition)
+    {
+        if (!_jobs.IsCommandStaff(player))
             return true;
 
         if (!definition.PickCommandStaff)
@@ -40,115 +166,42 @@ public sealed partial class AntagSelectionSystem
         if (definition.MaxCommandStaff == 0)
             return true;
 
-        var selected = new HashSet<ICommonSession>(ent.Comp.AssignedSessions);
-        foreach (var sessions in ent.Comp.PreSelectedSessions.Values)
-        {
-            foreach (var selectedSession in sessions)
-            {
-                selected.Add(selectedSession);
-            }
-        }
+        var selected = new HashSet<ICommonSession>();
+        foreach (var sessions in gameRule.Comp.PreSelectedSessions.Values)
+            selected.UnionWith(sessions);
 
-        var selectedCommandStaff = 0;
+        var commandCount = 0;
         foreach (var selectedSession in selected)
         {
             if (_jobs.IsCommandStaff(selectedSession))
-                selectedCommandStaff++;
+                commandCount++;
         }
 
-        return selectedCommandStaff < definition.MaxCommandStaff;
+        return commandCount < definition.MaxCommandStaff;
     }
 
-    private List<List<ICommonSession>> GetSunrisePlayerPools(
-        Entity<AntagSelectionComponent> ent,
-        IList<ICommonSession> sessions,
-        AntagSelectionDefinition definition)
+    private void RaiseSunriseAntagSelectionComplete(Entity<AntagSelectionComponent> gameRule)
     {
-        var preferred = new List<ICommonSession>();
-        var fallback = new List<ICommonSession>();
+        if (gameRule.Comp.SunriseSelectionComplete)
+            return;
 
-        foreach (var session in sessions)
-        {
-            if (!IsSessionValid(ent, session, definition) || !IsEntityValid(session.AttachedEntity, definition))
-                continue;
-
-            if (ent.Comp.PreSelectedSessions.Values.Any(selected => selected.Contains(session)))
-                continue;
-
-            if (!CanSelectSunriseCommandStaff(ent, session, definition))
-                continue;
-
-            if (!ShouldCheckSunriseAntagPreference(definition) || ValidAntagPreference(session, definition.PrefRoles))
-                preferred.Add(session);
-            else if (ValidAntagPreference(session, definition.FallbackRoles))
-                fallback.Add(session);
-        }
-
-        return [preferred, fallback];
+        gameRule.Comp.SunriseSelectionComplete = true;
+        var ev = new AntagSelectionCompleteEvent(gameRule);
+        RaiseLocalEvent(gameRule, ref ev, true);
     }
 
-    private bool TryPickSunriseAntagSession(
-        Entity<AntagSelectionComponent> ent,
-        List<List<ICommonSession>> orderedPools,
-        AntagSelectionDefinition definition,
-        [NotNullWhen(true)] out ICommonSession? session)
+    private static HashSet<Entity<AntagSelectionComponent>> GetSunriseSelectionRules(IEnumerable<AntagRule> antags)
     {
-        session = null;
+        var rules = new HashSet<Entity<AntagSelectionComponent>>();
+        foreach (var antag in antags)
+            rules.Add(antag.GameRule);
 
-        foreach (var pool in orderedPools)
-        {
-            pool.RemoveAll(candidate => !CanSelectSunriseCommandStaff(ent, candidate, definition));
-        }
-
-        if (_sponsorsManager != null)
-        {
-            foreach (var preferenceRole in definition.PrefRoles)
-            {
-                foreach (var pool in orderedPools)
-                {
-                    var prioritySessions = _sponsorsManager.PickPrioritySessions(pool, preferenceRole);
-                    if (prioritySessions.Count == 0)
-                        continue;
-
-                    var selected = RobustRandom.Pick(prioritySessions);
-                    pool.Remove(selected);
-                    session = selected;
-                    return true;
-                }
-            }
-        }
-
-        foreach (var pool in orderedPools)
-        {
-            if (pool.Count == 0)
-                continue;
-
-            session = RobustRandom.PickAndTake(pool);
-            return true;
-        }
-
-        return false;
+        return rules;
     }
 
-    private void RaiseSunriseAntagSelectionComplete(Entity<AntagSelectionComponent> ent)
+    private void RaiseSunriseAntagSelectionComplete(IEnumerable<Entity<AntagSelectionComponent>> gameRules)
     {
-        var selectionComplete = new AntagSelectionCompleteEvent(ent);
-        RaiseLocalEvent(ent, ref selectionComplete, true);
-    }
-
-    private static bool ShouldCheckSunriseAntagPreference(AntagSelectionDefinition definition)
-    {
-        return !definition.IgnorePrefCheck;
-    }
-
-    private static bool CanIgnoreSunriseAntagRestriction(AntagSelectionDefinition definition)
-    {
-        return definition.IgnoreCanBeAntag;
-    }
-
-    private static void TrackSunriseAntagSpawner(Entity<AntagSelectionComponent> ent)
-    {
-        ent.Comp.UseSpawners = true;
-        ent.Comp.SpawnersCount++;
+        foreach (var gameRule in gameRules)
+            RaiseSunriseAntagSelectionComplete(gameRule);
     }
 }

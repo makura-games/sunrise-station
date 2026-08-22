@@ -47,6 +47,7 @@
   - type: FireVisuals
     alternateState: Standing
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: Tag
     tags:

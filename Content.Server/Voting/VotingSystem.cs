@@ -21,17 +21,17 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Voting;
 
-public sealed class VotingSystem : EntitySystem
+public sealed partial class VotingSystem : EntitySystem
 {
 
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly IServerDbManager _dbManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly ISharedPlaytimeManager _playtimeManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private IServerDbManager _dbManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ISharedPlaytimeManager _playtimeManager = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     public override void Initialize()
     {
@@ -79,7 +79,7 @@ public sealed class VotingSystem : EntitySystem
     public string GetPlayerVoteListName(EntityUid attached)
     {
         TryComp<MindContainerComponent>(attached, out var mind);
-        
+
         var jobName = GetNonAntagJobName(mind?.Mind);
         var playerInfo = $"{Comp<MetaDataComponent>(attached).EntityName} ({jobName})";
 
@@ -109,7 +109,7 @@ public sealed class VotingSystem : EntitySystem
                 continue;
 
             // We found a non-antagonist role with a job
-            if (roleComponent.JobPrototype != null && 
+            if (roleComponent.JobPrototype != null &&
                 _prototypes.TryIndex(roleComponent.JobPrototype.Value, out var jobPrototype))
             {
                 return jobPrototype.LocalizedName;

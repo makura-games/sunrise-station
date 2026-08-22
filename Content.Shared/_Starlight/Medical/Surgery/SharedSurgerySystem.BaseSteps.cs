@@ -18,7 +18,7 @@ namespace Content.Shared.Starlight.Medical.Surgery;
 // https://github.com/RMC-14/RMC-14
 public abstract partial class SharedSurgerySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
     private void InitializeSteps()
     {
         SubscribeLocalEvent<SurgeryStepComponent, SurgeryStepCompleteEvent>(OnStepComplete);

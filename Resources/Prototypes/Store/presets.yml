@@ -17,7 +17,7 @@
     - UplinkWearables
     - UplinkJob
     - UplinkPointless
-    - UplinkObjectives
+    - UplinkObjective
     - UplinkLootBoxes # Sunrise-Edit
     - UplinkMechs #Sunrise-added
     - UplinkShuttle #Sunrise-added
@@ -52,6 +52,15 @@
   - type: Store
     name: store-preset-name-changeling
     categories:
-    - ChangelingAbilities
+    - ChangelingStoreCombat
+    - ChangelingStoreStealth
+    - ChangelingStoreUtility
     currencyWhitelist:
     - ChangelingDNA
+
+- type: entity
+  parent: StorePresetUplink
+  id: StorePresetRemoteUplink
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RingerAccessUplink

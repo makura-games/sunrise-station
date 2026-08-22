@@ -103,8 +103,13 @@ public sealed partial class HumanoidCharacterAppearance : IEquatable<HumanoidCha
             _ => strategy.ClosestSkinColor(new Color(random.NextFloat(1), random.NextFloat(1), random.NextFloat(1), 1)),
         };
 
-        // Sunrise-Edit - обязательные видовые маркировки также должны применяться к случайным персонажам
-        return EnsureValid(new HumanoidCharacterAppearance(newEyeColor, newSkinColor, markings), species, sex);
+        // Safety step. Most systems which called Random() also called this, and not doing so caused issues with markings.
+        // In the future it could *maybe* be removed, but it's probably worth the extra CPU cycles to validate this info.
+        return EnsureValid(
+            // Sunrise-Edit: сохраняем случайные волосы и обязательные видовые маркировки.
+            new HumanoidCharacterAppearance(newEyeColor, newSkinColor, markings),
+            species,
+            sex);
     }
 
     public static Color ClampColor(Color color)

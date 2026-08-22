@@ -36,22 +36,23 @@ namespace Content.Server._Sunrise.Tutorial;
 /// </summary>
 public sealed partial class TutorialSystem : SharedTutorialSystem
 {
-    [Dependency] private readonly TTSSystem _tts = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly AccountCreationManager _accountCreation = default!;
-    [Dependency] private readonly TutorialMetricsSystem _tutorialMetrics = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly EuiManager _eui = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly UserDbDataManager _userDb = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private TTSSystem _tts = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private AccountCreationManager _accountCreation = default!;
+    [Dependency] private TutorialMetricsSystem _tutorialMetrics = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private EuiManager _eui = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private MapLoaderSystem _mapLoader = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private UserDbDataManager _userDb = default!;
+    [Dependency] private IGameTiming _timing = default!;
+
     private TimeSpan _cooldown;
     private int _maxTutorials;
     private Dictionary<NetUserId, TimeSpan> _cooldownData = new();

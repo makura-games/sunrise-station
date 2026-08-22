@@ -52,8 +52,9 @@
   suffix: AI, Rogue silicon
   components:
   - type: Damageable
-    damageContainer: Silicon
     damageModifierSet: MobRogueSilicon
+  - type: Injurable
+    damageContainer: Silicon
   - type: Insulated
   - type: NpcFactionMember
     factions:
@@ -810,13 +811,13 @@
       params:
         volume: 1
         variation: 0.050
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        reagents:
-        - ReagentId: Heparin
-          Quantity: 90
-        maxVol: 90
+  - type: Solution
+    id: melee
+    solution:
+      reagents:
+      - ReagentId: Heparin
+        Quantity: 90
+      maxVol: 90
   - type: MeleeChemicalInjector
     solution: melee
     transferAmount: 1
@@ -836,8 +837,9 @@
   suffix: AI, Syndicate
   components:
   - type: Damageable
-    damageContainer: Silicon
     damageModifierSet: MobRogueSilicon
+  - type: Injurable
+    damageContainer: Silicon
   - type: Insulated
   - type: NpcFactionMember
     factions:
@@ -924,13 +926,13 @@
       params:
         volume: 1
         variation: 0.050
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        reagents:
-        - ReagentId: Heparin
-          Quantity: 90
-        maxVol: 90
+  - type: Solution
+    id: melee
+    solution:
+      reagents:
+      - ReagentId: Heparin
+        Quantity: 90
+      maxVol: 90
   - type: MeleeChemicalInjector
     solution: melee
     transferAmount: 1
@@ -1161,68 +1163,6 @@
     soundGunshot: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
 
 #region Tier 3
-- type: entity
-  parent:
-  - MobTerminatorEndoskeleton
-  - MobRogueSiliconPassiveRegen
-  - MobHumanoidInvetorySimplified
-  - MobRogueSiliconAISimpleMelee
-  id: MobRogueSiliconT3Terminator
-  name: nt-800 "exterminator"
-  description: A captured NT-800 endoskeleton repurposed by a rogue silicon hive. Extremely durable and relentless.
-
-  components:
-  - type: NpcFactionMember
-    factions:
-    - SiliconsExpedition
-  - type: Loadout
-    prototypes:
-    - MobRogueSiliconLootT3
-  - type: NameIdentifier
-    group: Silicon
-  - type: GhostPanelAntagonistMarker
-    name: ghost-panel-antagonist-silicon-name
-    description: ghost-panel-antagonist-silicon-description
-    priority: 45
-  - type: Tag
-    tags:
-    - CanPilot
-    - FootstepSound
-    - DoorBumpOpener
-    - CannotSuicide
-    - MindTransferTarget
-    - Unimplantable
-    - RogueSiliconHealTarget
-    - NpcVeteranLeader
-  - type: SlowOnDamage
-    speedModifierThresholds:
-      120: 1.1
-      160: 1.25
-  - type: MeleeWeapon
-    attackRate: 1.1
-    animation: WeaponArcPunch
-    damage:
-      types:
-        Blunt: 20
-        Structural: 20
-  - type: GhostRole
-    allowMovement: true
-    name: ghost-role-information-terminator-unit-dungeon-name
-    description: ghost-role-information-one-star-unit-dungeon-description
-    rules: ghost-role-information-dungeon-boss-rules
-    raffle:
-      settings: default
-    mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
-  - type: GhostTakeoverAvailable
-  - type: FootstepModifier
-    footstepSoundCollection:
-      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
-      params:
-        volume: -8
-        pitch: 0.35
-        variation: 0.02
-
 - type: entity
   parent:
   - MobMovementSpeedModifierMelee
@@ -2375,13 +2315,13 @@
       path: /Audio/Weapons/punchmiss.ogg
     soundSwing:
       path: /Audio/Weapons/punchmiss.ogg
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        reagents:
-        - ReagentId: Nocturine
-          Quantity: 120
-        maxVol: 120
+  - type: Solution
+    id: melee
+    solution:
+      reagents:
+      - ReagentId: Nocturine
+        Quantity: 120
+      maxVol: 120
   - type: MeleeChemicalInjector
     solution: melee
     transferAmount: 3

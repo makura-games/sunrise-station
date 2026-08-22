@@ -12,7 +12,6 @@
       time: 7200 # 2 hrs
   weight: 3
   alwaysUseSpawner: true
-  canBeAntag: false
   startingGear: PrisonScientistGear
   icon: "JobIconPrisonScientist"
   overrideConsoleVisibility: false

@@ -64,7 +64,7 @@
 
 - type: entity
   name: Kardashev-Mosin
-  parent: [BaseWeaponSniper, BaseGunWieldable, BaseMajorContraband]
+  parent: [BaseWeaponSniper, BaseGunWieldable, SolutionDart, BaseMajorContraband]
   id: WeaponSniperMosin
   description: A true relic, the Kardashev-Mosin has served in nearly every armed conflict since its creation 670 years ago. The bolt-action design of the rifle remains virtually identical to its original design, whether used for hunting, sniping, or endless trench warfare. Loads 10 rounds of .30 rifle.
   components:
@@ -95,10 +95,6 @@
   - type: MeleeRequiresWield
   - type: AltFireMelee
     attackType: Heavy
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        maxVol: 2
   - type: MeleeChemicalInjector
     solution: melee
   - type: RefillableSolution
@@ -221,10 +217,10 @@
   - type: MeleeRequiresWield
   - type: AltFireMelee
     attackType: Heavy
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        maxVol: 5
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 5
   - type: MeleeChemicalInjector
     solution: melee
   - type: RefillableSolution

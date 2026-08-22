@@ -8,7 +8,6 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Random;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
-using Prometheus;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Configuration;
@@ -16,24 +15,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.GameTicking.Rules;
 
-public sealed class SecretRuleSystem : GameRuleSystem<SecretRuleComponent>
+public sealed partial class SecretRuleSystem : GameRuleSystem<SecretRuleComponent>
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
 
     private string _ruleCompName = default!;
-    // Sunrise-Start
-    private readonly Counter _secretPresetSelectedCounter = Metrics.CreateCounter(
-        "secret_preset_selected",
-        "Amount of times each preset was selected in secret mode",
-        new CounterConfiguration
-        {
-            LabelNames = ["preset"]
-        });
-    // Sunrise-End
-
     public override void Initialize()
     {
         base.Initialize();
@@ -54,10 +43,13 @@ public sealed class SecretRuleSystem : GameRuleSystem<SecretRuleComponent>
 
         Log.Info($"Selected {preset.ID} as the secret preset.");
         _adminLogger.Add(LogType.EventStarted, $"Selected {preset.ID} as the secret preset.");
-        _secretPresetSelectedCounter.WithLabels(preset.ID).Inc(); // Sunrise-Edit
+        TrackSunriseSecretPreset(preset); // Sunrise-Edit
 
         foreach (var rule in preset.Rules)
         {
+            if (GameTicker.IsIgnored(rule))
+                continue;
+
             EntityUid ruleEnt;
 
             // if we're pre-round (i.e. will only be added)
@@ -161,8 +153,6 @@ public sealed class SecretRuleSystem : GameRuleSystem<SecretRuleComponent>
     /// </summary>
     private bool CanPick([NotNullWhen(true)] GamePresetPrototype? selected, int players)
     {
-        // Sunrise edit start - используем общую проверку доступности пресета
-        return GameTicker.IsPresetEligible(selected, players, _ruleCompName);
-        // Sunrise edit end
+        return CanPickSunrisePreset(selected, players, _ruleCompName); // Sunrise-Edit
     }
 }

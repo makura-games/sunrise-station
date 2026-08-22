@@ -7,12 +7,12 @@ using Content.Shared.Slippery;
 
 namespace Content.Shared._Sunrise.Abilities;
 
-public sealed class SharedBorgMagbootsSystem : EntitySystem
+public sealed partial class SharedBorgMagbootsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _sharedActions = default!;
-    [Dependency] private readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifierSystem = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private SharedActionsSystem _sharedActions = default!;
+    [Dependency] private SharedGravitySystem _gravity = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeedModifierSystem = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
 
     public override void Initialize()
     {

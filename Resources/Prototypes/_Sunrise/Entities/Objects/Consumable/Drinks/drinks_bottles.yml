@@ -4,12 +4,12 @@
   name: campari bottle
   description: Tincture based on aromatic herbs and citrus fruits. Non-GMO!
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        reagents:
-        - ReagentId: Campari
-          Quantity: 100
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Campari
+        Quantity: 100
   - type: Sprite
     sprite: _Sunrise/Objects/Consumable/Drinks/campari.rsi
   - type: SolutionContainerVisuals
@@ -23,12 +23,12 @@
   name: Vodkizine bottle
   description: The best cure for and cause of a hangover.
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        reagents:
-        - ReagentId: Vodkizine
-          Quantity: 100
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Vodkizine
+        Quantity: 100
   - type: Label
     currentLabel: reagent-name-vodkizine
   - type: Sprite
@@ -43,12 +43,12 @@
   name: red rum bottle
   description: A bottle of strong red rum.
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        reagents:
-        - ReagentId: RedRum
-          Quantity: 100
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: RedRum
+        Quantity: 100
   - type: Label
     currentLabel: reagent-name-redrum
   - type: Sprite
@@ -60,12 +60,12 @@
   name: dark-red rum bottle
   description: A bottle of dangerously strong dark red rum.
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        reagents:
-        - ReagentId: DarkRedRum
-          Quantity: 60
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: DarkRedRum
+        Quantity: 60
   - type: Label
     currentLabel: reagent-name-dark-red-rum
   - type: Sprite

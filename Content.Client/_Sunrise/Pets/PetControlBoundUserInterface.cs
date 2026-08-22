@@ -8,11 +8,11 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._Sunrise.Pets;
 
 [UsedImplicitly]
-public sealed class PetControlBoundUserInterface : BoundUserInterface
+public sealed partial class PetControlBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly EntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private EntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     private RadialContainer? _menu;
 

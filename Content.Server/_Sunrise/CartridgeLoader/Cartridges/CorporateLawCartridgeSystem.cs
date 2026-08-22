@@ -7,11 +7,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.CartridgeLoader.Cartridges;
 
-public sealed class CorporateLawCartridgeSystem : EntitySystem
+public sealed partial class CorporateLawCartridgeSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoader = default!;
-    [Dependency] private readonly StationCorporateLawSystem _stationLaw = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
+    [Dependency] private StationCorporateLawSystem _stationLaw = default!;
 
     private static readonly Color MitigatingColor = Color.FromHex("#00ff9d");
     private static readonly Color AggravatingColor = Color.FromHex("#ff4d4d");

@@ -16,8 +16,8 @@ namespace Content.Client._Sunrise.Razor;
 [GenerateTypedNameReferences]
 public sealed partial class RazorSingleMarkingPicker : BoxContainer
 {
-    [Dependency] private readonly MarkingManager _markingManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private MarkingManager _markingManager = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public Action<(int slot, string id)>? OnMarkingSelect;
     public Action<int>? OnSlotRemove;

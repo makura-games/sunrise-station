@@ -7,6 +7,8 @@ namespace Content.Shared.DeviceLinking;
 
 public abstract partial class SharedDeviceLinkSystem
 {
+    [Dependency] private EntityQuery<TransformComponent> _saveCleanupXformQuery = default!;
+
     /*
      * Save-cleanup helpers for device links before map serialization.
      */
@@ -28,9 +30,6 @@ public abstract partial class SharedDeviceLinkSystem
         var result = new DeviceLinkSaveCleanupResult();
         var invalidLinks = new List<(ProtoId<SourcePortPrototype> Source, ProtoId<SinkPortPrototype> Sink)>();
         var sinksToRemove = new List<(EntityUid SinkUid, DeviceLinkSinkComponent? SinkComponent, string Reason)>();
-        var sinkQuery = GetEntityQuery<DeviceLinkSinkComponent>();
-        var xformQuery = GetEntityQuery<TransformComponent>();
-
         var sourceEnumerator = EntityQueryEnumerator<DeviceLinkSourceComponent, TransformComponent>();
         while (sourceEnumerator.MoveNext(out var sourceUid, out var sourceComponent, out var sourceXform))
         {
@@ -42,14 +41,14 @@ public abstract partial class SharedDeviceLinkSystem
 
             foreach (var (sinkUid, links) in sourceComponent.LinkedPorts)
             {
-                if (!sinkQuery.TryComp(sinkUid, out var sinkComponent))
+                if (!_deviceLinkSinkQuery.TryComp(sinkUid, out var sinkComponent))
                 {
                     sinksToRemove.Add((sinkUid, null, "missing sink component or entity"));
                     result = result with { RemovedSinkEntries = result.RemovedSinkEntries + 1 };
                     continue;
                 }
 
-                if (!xformQuery.TryComp(sinkUid, out var sinkXform) || !mapIds.Contains(sinkXform.MapID))
+                if (!_saveCleanupXformQuery.TryComp(sinkUid, out var sinkXform) || !mapIds.Contains(sinkXform.MapID))
                 {
                     sinksToRemove.Add((sinkUid, sinkComponent, "sink is not on the saved map set"));
                     result = result with { RemovedSinkEntries = result.RemovedSinkEntries + 1 };

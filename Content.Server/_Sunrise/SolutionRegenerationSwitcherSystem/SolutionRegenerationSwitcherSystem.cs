@@ -7,11 +7,11 @@ using Content.Server._Sunrise.Medical;
 
 namespace Content.Server._Sunrise.SolutionRegenerationSwitcherSystem
 {
-    public sealed class SolutionRegenerationSwitcherSystem : SharedSolutionRegenerationSwitcherSystem
+    public sealed partial class SolutionRegenerationSwitcherSystem : SharedSolutionRegenerationSwitcherSystem
     {
-        [Dependency] private readonly SharedSolutionContainerSystem _solutionSystem = null!;
-        [Dependency] private readonly SharedPopupSystem _popups = null!;
-        [Dependency] private readonly BorgHypospraySystem _borgHypospray = null!;
+        [Dependency] private SharedSolutionContainerSystem _solutionSystem = null!;
+        [Dependency] private SharedPopupSystem _popups = null!;
+        [Dependency] private BorgHypospraySystem _borgHypospray = null!;
 
         private ISawmill _sawmill = null!;
 
@@ -36,21 +36,15 @@ namespace Content.Server._Sunrise.SolutionRegenerationSwitcherSystem
             SolutionRegenerationSwitcherComponent component,
             EntityUid user)
         {
-            if (!TryComp<SolutionRegenerationComponent>(uid, out var solutionRegenerationComponent))
+            if (!TryComp<SolutionRegenerationComponent>(uid, out var solutionRegeneration))
             {
                 _sawmill.Warning($"{ToPrettyString(uid)} has no SolutionRegenerationComponent.");
                 return;
             }
 
-            if (!_solutionSystem.TryGetSolution(uid, solutionRegenerationComponent.SolutionName, out var solution))
+            if (!TryComp<SolutionComponent>(uid, out var solution))
             {
                 _sawmill.Error($"Can't get SolutionRegeneration.Solution for {ToPrettyString(uid)}");
-                return;
-            }
-
-            if (!TryComp<SolutionRegenerationComponent>(uid, out var solutionRegeneration))
-            {
-                _sawmill.Error($"Entity {ToPrettyString(uid)} not have SolutionRegenerationComponent");
                 return;
             }
 
@@ -62,7 +56,7 @@ namespace Content.Server._Sunrise.SolutionRegenerationSwitcherSystem
 
             // Empty out the current solution.
             if (!component.KeepSolution)
-                _solutionSystem.RemoveAllSolution(solution.Value);
+                _solutionSystem.RemoveAllSolution((uid, solution));
 
             solutionRegeneration.ChangeGenerated(reagent);
 

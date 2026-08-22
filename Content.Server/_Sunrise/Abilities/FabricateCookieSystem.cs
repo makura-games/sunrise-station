@@ -4,10 +4,10 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Sunrise.Abilities
 {
-    public sealed class FabricateCookieSystem : EntitySystem
+    public sealed partial class FabricateCookieSystem : EntitySystem
     {
-        [Dependency] private readonly SharedActionsSystem _actions = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
+        [Dependency] private SharedActionsSystem _actions = default!;
+        [Dependency] private IRobustRandom _random = default!;
         public override void Initialize()
         {
             base.Initialize();

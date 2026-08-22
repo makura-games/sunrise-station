@@ -19,18 +19,18 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._Sunrise.CartridgeLoader.Cartridges;
 
-public sealed class PhotoCartridgeClientSystem : EntitySystem
+public sealed partial class PhotoCartridgeClientSystem : EntitySystem
 {
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly IStateManager _stateManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
-    [Dependency] private readonly NetTexturesManager _netTexturesManager = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private IStateManager _stateManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private NetTexturesManager _netTexturesManager = default!;
 
     private TimeSpan _nextCaptureTime = TimeSpan.Zero;
     public bool CameraReady => _timing.CurTime >= _nextCaptureTime;

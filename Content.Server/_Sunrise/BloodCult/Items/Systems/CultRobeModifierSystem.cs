@@ -1,4 +1,4 @@
-﻿using Content.Server._Sunrise.BloodCult.Items.Components;
+using Content.Server._Sunrise.BloodCult.Items.Components;
 using Content.Shared._Sunrise.BloodCult.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -9,10 +9,10 @@ using Content.Shared.Movement.Systems;
 
 namespace Content.Server._Sunrise.BloodCult.Items.Systems;
 
-public sealed class CultRobeModifierSystem : EntitySystem
+public sealed partial class CultRobeModifierSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MovementSpeedModifierSystem _movement = default!;
 
     public override void Initialize()
     {
@@ -24,26 +24,26 @@ public sealed class CultRobeModifierSystem : EntitySystem
 
     private void OnEquip(EntityUid uid, CultRobeModifierComponent component, GotEquippedEvent args)
     {
-        if (!HasComp<BloodCultistComponent>(args.Equipee))
+        if (!HasComp<BloodCultistComponent>(args.EquipTarget))
             return;
 
         if (args.Slot != "outerClothing")
             return;
 
-        ModifySpeed(args.Equipee, component, true);
-        ModifyDamage(args.Equipee, component, true);
+        ModifySpeed(args.EquipTarget, component, true);
+        ModifyDamage(args.EquipTarget, component, true);
     }
 
     private void OnUnequip(EntityUid uid, CultRobeModifierComponent component, GotUnequippedEvent args)
     {
-        if (!HasComp<BloodCultistComponent>(args.Equipee))
+        if (!HasComp<BloodCultistComponent>(args.EquipTarget))
             return;
 
         if (args.Slot != "outerClothing")
             return;
 
-        ModifySpeed(args.Equipee, component, false);
-        ModifyDamage(args.Equipee, component, false);
+        ModifySpeed(args.EquipTarget, component, false);
+        ModifyDamage(args.EquipTarget, component, false);
     }
 
     private void ModifySpeed(EntityUid uid, CultRobeModifierComponent comp, bool increase)

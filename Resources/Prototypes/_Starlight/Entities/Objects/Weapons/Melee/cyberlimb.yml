@@ -15,11 +15,11 @@
       map: [ "blade" ]
   - type: ItemToggleMeleeWeapon
     activatedSoundOnHit:
-     path: /Audio/Weapons/chainsaw.ogg
+     path: /Audio/Weapons/chainsaw_rev.ogg
      params:
        variation: 0.250
     activatedSoundOnHitNoDamage:
-     path: /Audio/Weapons/chainsaw.ogg
+     path: /Audio/Weapons/chainsaw_rev.ogg
      params:
        variation: 0.250
        volume: -10
@@ -46,9 +46,9 @@
   - type: SurgeryTool
     successRate: 0.01
     startSound:
-      path: /Audio/Weapons/chainsaw.ogg
+      path: /Audio/Weapons/chainsaw_rev.ogg
     endSound:
-      path: /Audio/Weapons/chainsaw.ogg
+      path: /Audio/Weapons/chainsaw_rev.ogg
   - type: Reflect
     reflectProb: 0.1
 

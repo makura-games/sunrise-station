@@ -14,12 +14,12 @@ namespace Content.Shared._Sunrise.Weapons.DualWield;
 ///     Manages activation and deactivation of dual-wielding based on equipped weapons.
 ///     Applies dual-wield penalties via GunRefreshModifiersEvent.
 /// </summary>
-public sealed class SharedDualWieldSystem : EntitySystem
+public sealed partial class SharedDualWieldSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedGunSystem _gunSystem = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedGunSystem _gunSystem = default!;
 
     private static readonly ProtoId<AlertPrototype> DualWieldAlertId = "DualWieldActive";
 

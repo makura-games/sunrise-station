@@ -846,6 +846,15 @@ CrateVendingMachineRestockChangFilled: VendingMachineRestockChang
 CrateVendingMachineRestockDiscountDansFilled: VendingMachineRestockDiscountDans
 CrateVendingMachineRestockDonutFilled: VendingMachineRestockDonut
 
+# 2026-03-28
+# The great solutions YAML nuke
+FoodMeatSnail: MobSnail
+
+# 2026-04-25
+CratePartsT3: null
+CratePartsT3T4: null
+CratePartsT4: null
+
 # region Sunrise-Start
 AirlockExternalGlassShuttleArrivals: AirlockExternalGlassShuttleArrivalsLocked
 AirlockHatchSyndicate: AirlockHatchSyndicateLocked
@@ -1123,7 +1132,6 @@ MobRogueSiliconCatcher: MobRogueSiliconT2Catcher
 MobRogueSiliconDerelictBorgAssaultT1: MobRogueSiliconT2DerelictBorgAssault
 MobRogueSiliconDerelictBorgAssaultT2: MobRogueSiliconT2DerelictBorgAssaultHeavy
 MobRogueSiliconDerelictBorgSyndicateMedical: MobRogueSiliconT2DerelictBorgSyndicateMedical
-MobRogueSiliconTerminatorT3: MobRogueSiliconT3Terminator
 MobRogueSiliconTesla: MobRogueSiliconT3Tesla
 MobRogueSiliconDerelictBorgAssaultT3: MobRogueSiliconT3DerelictBorgAssault
 MobRogueSiliconDerelictBorgSyndicateSaboteur: MobRogueSiliconT3DerelictBorgSyndicateSaboteur
@@ -1132,7 +1140,6 @@ MobRogueSiliconGuardianLCG: MobRogueSiliconBossGuardianLCG
 SpawnMobRogueSiliconVisceratorSquad: SpawnMobRogueSiliconT1VisceratorSquad
 SpawnMobRogueSiliconGuardian: SpawnMobRogueSiliconBossGuardian
 SpawnMobRogueSiliconGuardianLCG: SpawnMobRogueSiliconBossGuardianLCG
-SpawnMobRogueSiliconTerminator: SpawnMobRogueSiliconT3Terminator
 HyposprayERT: Hypospray
 BoxErtLeaderKit: BoxErtBaseKit
 # 2026-06-24
@@ -1216,6 +1223,33 @@ WeaponDL6902Biocode: WeaponDL6902PowerPack
 MobPirateT1ExpeditionSpawner: MobPirateT1Spawner
 MobPirateT2ExpeditionSpawner: MobPirateT2Spawner
 MobPirateT3ExpeditionSpawner: MobPirateT3Spawner
+# 2026-08-17
+PartTerminator: null
+TorsoTerminator: null
+HeadTerminator: null
+LeftArmTerminator: null
+RightArmTerminator: null
+LeftHandTerminator: null
+RightHandTerminator: null
+LeftLegTerminator: null
+RightLegTerminator: null
+LeftFootTerminator: null
+RightFootTerminator: null
+BaseTerminatorObjective: null
+TerminateObjective: null
+ShutDownObjective: null
+Exterminator: null
+TerminatorSpawn: null
+MobTerminatorBase: null
+MobHumanTerminator: null
+AppearanceTerminator: null
+MobTerminatorEndoskeleton: null
+SpawnPointGhostTerminator: null
+MobRogueSiliconT3Terminator: null
+SpawnMobRogueSiliconT3Terminator: null
+MindRoleTerminator: null
+MobRogueSiliconTerminatorT3: null
+SpawnMobRogueSiliconTerminator: null
 # 2026-08-18
 CartridgeRifleHP: CartridgeRifleSP
 CartridgeLightRifleHP: CartridgeLightRifleSP

@@ -15,9 +15,9 @@ namespace Content.Server._Sunrise.Heartbeat.Systems;
 
 public sealed partial class HeartbeatSystem : EntitySystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private static readonly SoundSpecifier HeartbeatSound =
         new SoundPathSpecifier("/Audio/_Sunrise/Effects/heartbeat.ogg", AudioParams.Default.WithVolume(-3f));

@@ -3,7 +3,6 @@ using System.Linq;
 using Content.Server.Kitchen.Components;
 using Content.Server.Power.Components;
 using Content.Shared._Sunrise.Kitchen.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.FixedPoint;
 using Content.Shared.Kitchen;
 using Content.Shared.Stacks;
@@ -59,10 +58,7 @@ public sealed partial class MicrowaveSystem : EntitySystem
                 solidsDict.Add(solidID, amountToAdd);
             }
 
-            if (!TryComp<SolutionContainerManagerComponent>(item, out var solMan))
-                continue;
-
-            foreach (var (_, soln) in _solutionContainer.EnumerateSolutions((item, solMan)))
+            foreach (var (_, soln) in _solutionContainer.EnumerateSolutions(item))
             {
                 var solution = soln.Comp.Solution;
                 foreach (var (reagent, quantity) in solution.Contents)

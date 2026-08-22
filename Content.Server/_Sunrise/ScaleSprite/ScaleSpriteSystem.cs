@@ -3,9 +3,9 @@ using System.Numerics;
 
 namespace Content.Server._Sunrise.ScaleSprite;
 
-public sealed class ScaleSpriteSystem : EntitySystem
+public sealed partial class ScaleSpriteSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

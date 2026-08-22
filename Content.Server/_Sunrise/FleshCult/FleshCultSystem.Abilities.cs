@@ -572,11 +572,11 @@ public sealed partial class FleshCultSystem
 
         var offsetValue = Vector2Helpers.Normalized(xform.LocalRotation.ToWorldVec());
         var targetCord = xform.Coordinates.Offset(offsetValue).SnapToGrid(EntityManager);
-        var tilerefs = Enumerable.ToArray(grid.GetLocalTilesIntersecting(
+        var tilerefs = Enumerable.ToArray(_mapSystem.GetLocalTilesIntersecting(xform.GridUid.Value, grid,
             new Box2(targetCord.Position + new Vector2(-radius, -radius), targetCord.Position + new Vector2(radius, radius))));
         foreach (var tileref in tilerefs)
         {
-            var tileCoordinates = grid.GridTileToLocal(tileref.GridIndices);
+            var tileCoordinates = _mapSystem.GridTileToLocal(xform.GridUid.Value, grid, tileref.GridIndices);
             foreach (var entity in _turf.GetEntitiesInTile(tileCoordinates))
             {
                 PhysicsComponent? physics = null; // We use this to check if it's impassable

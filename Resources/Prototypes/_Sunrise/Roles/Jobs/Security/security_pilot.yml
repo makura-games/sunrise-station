@@ -10,7 +10,6 @@
   startingGear: SecurityPilotGear
   icon: JobIconSecurityPilot
   supervisors: job-supervisors-hos
-  canBeAntag: false
   displayWeight: 50
   alternativeTitles:
   - job-alt-title-security-aviator

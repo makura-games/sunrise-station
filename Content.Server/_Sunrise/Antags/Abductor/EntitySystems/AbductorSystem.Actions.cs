@@ -21,12 +21,12 @@ namespace Content.Server._Sunrise.Antags.Abductor;
 
 public sealed partial class AbductorSystem : SharedAbductorSystem
 {
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly PullingSystem _pullingSystem = default!;
-    [Dependency] private readonly InventorySystem _inv = default!;
-    [Dependency] private readonly StarlightActionsSystem _starlightActions = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private PullingSystem _pullingSystem = default!;
+    [Dependency] private InventorySystem _inv = default!;
+    [Dependency] private StarlightActionsSystem _starlightActions = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
 
     private static readonly EntProtoId<InstantActionComponent> _gizmoMark = "ActionGizmoMark";
     private static readonly EntProtoId<InstantActionComponent> _sendAgent = "ActionSendAgent";

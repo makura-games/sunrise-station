@@ -8,7 +8,7 @@ namespace Content.Shared._Sunrise.Tutorial.Conditions;
 public sealed partial class StorageContainsConditionSystem
     : TutorialConditionSystem<TutorialPlayerComponent, StorageContainsCondition>
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     protected override void Condition(Entity<TutorialPlayerComponent> entity, ref TutorialConditionEvent<StorageContainsCondition> args)
     {

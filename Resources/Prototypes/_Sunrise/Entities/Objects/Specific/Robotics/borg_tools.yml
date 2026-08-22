@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: PowerCellMedium
   id: PowerCellRobotTool
   name: robot tool power cell
@@ -108,14 +108,13 @@
     state: borghypo
   - type: Item
     sprite: Objects/Specific/Medical/hypospray.rsi
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 10 #Sunrise-Start
+  - type: Solution
+    id: hypospray
+    solution:
+      maxVol: 10 #Sunrise-Start
   - type: ExaminableSolution
     solution: hypospray
   - type: SolutionRegeneration
-    solution: hypospray
     generated:
       reagents:
       - ReagentId: Epinephrine
@@ -136,12 +135,11 @@
   description: A cyborg version of hypospray that automatically regenerates pax.
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 30
+  - type: Solution
+    id: hypospray
+    solution:
+      maxVol: 30
   - type: SolutionRegeneration
-    solution: hypospray
     generated:
       reagents:
       - ReagentId: Pax
@@ -160,12 +158,11 @@
   description: A hypospray that can switch through several reagents.
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 15
+  - type: Solution
+    id: hypospray
+    solution:
+      maxVol: 15
   - type: SolutionRegeneration
-    solution: hypospray
     generated:
       reagents:
       - ReagentId: Dexalin
@@ -190,12 +187,11 @@
   description: A cyborg hypospray that can switch between a wide range of advanced medical chemicals.
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 20
+  - type: Solution
+    id: hypospray
+    solution:
+      maxVol: 20
   - type: SolutionRegeneration
-    solution: hypospray
     generated:
       reagents:
       - ReagentId: DexalinPlus
@@ -270,12 +266,11 @@
     state: hypo
   - type: Item
     sprite: Objects/Specific/Medical/syndihypo.rsi
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 20
+  - type: Solution
+    id: hypospray
+    solution:
+      maxVol: 20
   - type: SolutionRegeneration
-    solution: hypospray
     generated:
       reagents:
       - ReagentId: Ephedrine
@@ -302,12 +297,11 @@
     state: hypo
   - type: Item
     sprite: _Sunrise/Objects/Specific/Medical/syndihypo.rsi
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 10
+  - type: Solution
+    id: hypospray
+    solution:
+      maxVol: 10
   - type: SolutionRegeneration
-    solution: hypospray
     generated:
       reagents:
       - ReagentId: Epinephrine
@@ -425,13 +419,13 @@
       map: ["enum.ToggleableVisuals.Layer"]
   - type: Item
     size: Small
-  - type: SolutionContainerManager
-    solutions:
-      Welder:
-        reagents:
-        - ReagentId: WeldingFuel
-          Quantity: 500
-        maxVol: 500
+  - type: Solution
+    id: welder
+    solution:
+      reagents:
+      - ReagentId: WeldingFuel
+        Quantity: 500
+      maxVol: 500
 
 - type: entity
   name: advanced borg welder
@@ -442,7 +436,6 @@
   - type: Tool
     speedModifier: 1.3
   - type: SolutionRegeneration
-    solution: Welder
     generated:
       reagents:
       - ReagentId: WeldingFuel
@@ -686,12 +679,11 @@
     state: borghypo_s
   - type: Item
     sprite: Objects/Specific/Medical/hypospray.rsi
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 15
+  - type: Solution
+    id: hypospray
+    solution:
+      maxVol: 15
   - type: SolutionRegeneration
-    solution: hypospray
     generated:
       reagents:
       - ReagentId: Nocturine
@@ -778,12 +770,11 @@
     state: combat_hypo
   - type: Item
     sprite: Objects/Specific/Medical/hypospray.rsi
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 10
+  - type: Solution
+    id: hypospray
+    solution:
+      maxVol: 10
   - type: SolutionRegeneration
-    solution: hypospray
     generated:
       reagents:
       - ReagentId: Epinephrine
@@ -860,7 +851,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Water
@@ -913,7 +903,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SolutionRegeneration
-    solution: drink
     generated:
       reagents:
       - ReagentId: Beer
@@ -957,10 +946,10 @@
     state: borghypo
   - type: Item
     sprite: Objects/Specific/Medical/hypospray.rsi
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 30
   - type: MixableSolution
     solution: drink
   - type: Shakeable
@@ -1002,7 +991,6 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: SolutionRegeneration
-      solution: spray
       generated:
         reagents:
         - ReagentId: Water

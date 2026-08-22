@@ -7,7 +7,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
 using System.Collections.Concurrent;
-using System.Threading.Tasks;
 using System.Threading;
 using Content.Server._Sunrise.Shuttles.Components;
 
@@ -41,10 +40,10 @@ public sealed partial class DockingSystem
     /// Checks if 2 docks can be connected by moving the shuttle directly onto docks.
     /// </summary>
     private bool CanDock(
+        EntityUid shuttleDockUid,
         DockingComponent shuttleDock,
-        TransformComponent shuttleDockXform,
+        EntityUid gridDockUid,
         DockingComponent gridDock,
-        TransformComponent gridDockXform,
         Box2 shuttleAABB,
         Angle targetGridRotation,
         FixturesComponent shuttleFixtures,
@@ -58,6 +57,9 @@ public sealed partial class DockingSystem
         shuttleDockedAABB = Box2.UnitCentered;
         gridRotation = Angle.Zero;
         matty = Matrix3x2.Identity;
+
+        var shuttleDockXform = Transform(shuttleDockUid);
+        var gridDockXform = Transform(gridDockUid);
 
         if (shuttleDock.Docked ||
             gridDock.Docked ||
@@ -204,7 +206,7 @@ public sealed partial class DockingSystem
         }
 
         var targetGridGrid = _gridQuery.GetComponent(targetGrid);
-        var targetGridXform = _xformQuery.GetComponent(targetGrid);
+        var targetGridXform = Transform(targetGrid);
         var targetGridAngle = _transform.GetWorldRotation(targetGridXform).Reduced();
         var shuttleFixturesComp = Comp<FixturesComponent>(shuttleUid);
         var shuttleAABB = _gridQuery.GetComponent(shuttleUid).LocalAABB;
@@ -227,28 +229,22 @@ public sealed partial class DockingSystem
 
         if (shuttleDocks.Count > 0)
         {
-            Parallel.ForEach(shuttleDocks, (shuttleDockEntity) =>
+            // Sunrise-Edit: после перехода EntityQuery на dependency-генератор нельзя обращаться к ECS из worker-потоков.
+            foreach (var shuttleDockEntity in shuttleDocks)
             {
                 var (dockUid, shuttleDock) = shuttleDockEntity;
 
-                if (!Exists(dockUid) || !TryComp<DockingComponent>(dockUid, out var dockComp))
-                    return;
-
-                var shuttleDockXform = _xformQuery.GetComponent(dockUid);
-
                 foreach (var (gridDockUid, gridDock) in gridDocks)
                 {
-                    if (!Exists(gridDockUid) || !TryComp<DockingComponent>(gridDockUid, out var gridDockComp))
-                        continue;
-
                     Interlocked.Increment(ref totalIterations);
-                    var gridXform = _xformQuery.GetComponent(gridDockUid);
 
                     if (!dockCache.TryGetValue((dockUid, gridDockUid), out var cacheResult))
                     {
                         if (!CanDock(
-                                dockComp, shuttleDockXform,
-                                gridDockComp, gridXform,
+                                dockUid,
+                                shuttleDock,
+                                gridDockUid,
+                                gridDock,
                                 shuttleAABB,
                                 targetGridAngle,
                                 shuttleFixturesComp,
@@ -292,7 +288,7 @@ public sealed partial class DockingSystem
 
                     var dockedPorts = new List<(EntityUid DockAUid, EntityUid DockBUid, DockingComponent DockA, DockingComponent DockB)>()
                     {
-                        (dockUid, gridDockUid, dockComp, gridDockComp),
+                        (dockUid, gridDockUid, shuttleDock, gridDock),
                     };
 
                     cacheDockedAABB = cacheDockedAABB.Rounded(DockRoundingDigits);
@@ -320,15 +316,9 @@ public sealed partial class DockingSystem
                         if (other == shuttleDock)
                             continue;
 
-                        if (!Exists(otherUid) || !TryComp<DockingComponent>(otherUid, out var otherDockComp))
-                            continue;
-
                         foreach (var (otherGridUid, otherGrid) in gridDocks)
                         {
                             if (otherGrid == gridDock)
-                                continue;
-
-                            if (!Exists(otherGridUid) || !TryComp<DockingComponent>(otherGridUid, out var otherGridDockComp))
                                 continue;
 
                             Interlocked.Increment(ref totalIterations);
@@ -336,10 +326,10 @@ public sealed partial class DockingSystem
                             if (!dockCache.TryGetValue((otherUid, otherGridUid), out var otherCacheResult))
                             {
                                 if (!CanDock(
-                                        otherDockComp,
-                                        _xformQuery.GetComponent(otherUid),
-                                        otherGridDockComp,
-                                        _xformQuery.GetComponent(otherGridUid),
+                                        otherUid,
+                                        other,
+                                        otherGridUid,
+                                        otherGrid,
                                         shuttleAABB,
                                         targetGridAngle,
                                         shuttleFixturesComp,
@@ -373,7 +363,7 @@ public sealed partial class DockingSystem
                                 continue;
                             }
 
-                            dockedPorts.Add((otherUid, otherGridUid, otherDockComp, otherGridDockComp));
+                            dockedPorts.Add((otherUid, otherGridUid, other, otherGrid));
                         }
                     }
 
@@ -386,7 +376,7 @@ public sealed partial class DockingSystem
                         TargetGrid = targetGrid,
                     });
                 }
-            });
+            }
         }
 
         stopwatch.Stop();

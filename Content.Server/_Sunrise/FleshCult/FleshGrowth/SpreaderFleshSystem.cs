@@ -16,11 +16,11 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Sunrise.FleshCult.FleshGrowth;
 
-public sealed class SpreaderFleshSystem : EntitySystem
+public sealed partial class SpreaderFleshSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
 
     private const int GrowthsPerInterval = 5;
     private const float UpdateInterval = 1.0f;
@@ -33,18 +33,15 @@ public sealed class SpreaderFleshSystem : EntitySystem
 
     private float _accumulatedFrameTime;
     private readonly HashSet<EntityUid> _edgeGrowths = new();
-    private EntityQuery<SpreaderFleshComponent> _spreaderQuery;
-    private EntityQuery<TransformComponent> _transformQuery;
-    private EntityQuery<MapGridComponent> _gridQuery;
+    [Dependency] private EntityQuery<SpreaderFleshComponent> _spreaderQuery = default!;
+    [Dependency] private EntityQuery<TransformComponent> _transformQuery = default!;
+    [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<SpreaderFleshComponent, ComponentAdd>(SpreaderAddHandler);
         SubscribeLocalEvent<AirtightChanged>(OnAirtightChanged);
 
-        _spreaderQuery = GetEntityQuery<SpreaderFleshComponent>();
-        _transformQuery = GetEntityQuery<TransformComponent>();
-        _gridQuery = GetEntityQuery<MapGridComponent>();
     }
 
     private void OnAirtightChanged(ref AirtightChanged ev)
@@ -66,7 +63,7 @@ public sealed class SpreaderFleshSystem : EntitySystem
         if (!_gridQuery.TryGetComponent(transform.GridUid, out var grid))
             return;
 
-        var tile = grid.TileIndicesFor(transform.Coordinates);
+        var tile = _mapSystem.TileIndicesFor(transform.GridUid.Value, grid, transform.Coordinates);
 
         for (var i = 0; i < Atmospherics.Directions; i++)
         {
@@ -74,7 +71,7 @@ public sealed class SpreaderFleshSystem : EntitySystem
             if (!comp.AirBlockedDirection.IsFlagSet(direction))
                 continue;
 
-            var directionEnumerator = grid.GetAnchoredEntitiesEnumerator(
+            var directionEnumerator = _mapSystem.GetAnchoredEntitiesEnumerator(transform.GridUid.Value, grid,
                 SharedMapSystem.GetDirection(tile, direction.ToDirection()));
 
             while (directionEnumerator.MoveNext(out var ent))
@@ -124,7 +121,7 @@ public sealed class SpreaderFleshSystem : EntitySystem
             var direction = (DirectionFlag)(1 << i);
             var coords = transform.Coordinates.Offset(direction.AsDir().ToVec());
 
-            if (grid.GetTileRef(coords).Tile.IsEmpty || _robustRandom.Prob(1 - spreader.Chance))
+            if (_mapSystem.GetTileRef(transform.GridUid.Value, grid, coords).Tile.IsEmpty || _robustRandom.Prob(1 - spreader.Chance))
                 continue;
 
             var ents = _mapSystem.GetLocal(transform.GridUid.Value, grid, coords);

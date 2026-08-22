@@ -9,8 +9,9 @@ namespace Content.Server.Pinpointer;
 
 public sealed partial class PinpointerSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly PopupSystem _popups = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private PopupSystem _popups = default!;
+    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
 
     private void InitializeSunrise()
     {

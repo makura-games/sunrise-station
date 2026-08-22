@@ -8,9 +8,9 @@ namespace Content.Server.Humanoid.Systems;
 
 public sealed partial class RandomHumanoidAppearanceSystem
 {
-    [Dependency] private readonly SunriseHumanoidBodySystem _sunriseBody = default!;
-    [Dependency] private readonly SunriseHumanoidMarkingSystem _sunriseMarking = default!;
-    [Dependency] private readonly SunriseHumanoidProfileSystem _sunriseProfile = default!;
+    [Dependency] private SunriseHumanoidBodySystem _sunriseBody = default!;
+    [Dependency] private SunriseHumanoidMarkingSystem _sunriseMarking = default!;
+    [Dependency] private SunriseHumanoidProfileSystem _sunriseProfile = default!;
 
     public void ApplySunriseProfileTo(EntityUid uid, HumanoidCharacterProfile profile)
     {

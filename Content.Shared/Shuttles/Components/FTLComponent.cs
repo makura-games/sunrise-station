@@ -38,7 +38,7 @@ public sealed partial class FTLComponent : Component
     /// <summary>
     /// Coordinates to arrive it: May be relative to another grid (for docking) or map coordinates.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField] // Sunrise-Edit: цель используется только сервером и может быть удалена до завершения FTL.
     public EntityCoordinates TargetCoordinates;
 
     [DataField, AutoNetworkedField]

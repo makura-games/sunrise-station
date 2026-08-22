@@ -7,11 +7,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Sunrise.Humanoid;
 
-public sealed class SunriseHumanoidMarkingSystem : EntitySystem
+public sealed partial class SunriseHumanoidMarkingSystem : EntitySystem
 {
-    [Dependency] private readonly MarkingManager _marking = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private MarkingManager _marking = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
 
     public bool TryGetLayerMarkings(EntityUid uid, HumanoidVisualLayers layer, out List<Marking> markings)
     {

@@ -11,27 +11,16 @@ namespace Content.Server._Sunrise.Mapping;
 /// <summary>
 /// Applies content-defined replacement rules before mapper placement falls back to engine behavior.
 /// </summary>
-public sealed class MappingReplacementSystem : EntitySystem
+public sealed partial class MappingReplacementSystem : EntitySystem
 {
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly IComponentFactory _factory = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private IComponentFactory _factory = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private EntityQuery<MapGridComponent> _mapGridQuery = default!;
+    [Dependency] private EntityQuery<MappingReplacementComponent> _replacementQuery = default!;
 
     private readonly List<EntityUid> _anchoredEntities = [];
-    private EntityQuery<MapGridComponent> _mapGridQuery;
-    private EntityQuery<MappingReplacementComponent> _replacementQuery;
-
-    /// <summary>
-    /// Caches the component queries used by mapping replacement handling.
-    /// </summary>
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _mapGridQuery = GetEntityQuery<MapGridComponent>();
-        _replacementQuery = GetEntityQuery<MappingReplacementComponent>();
-    }
 
     /// <summary>
     /// Removes entities approved by content replacement rules and then allows placement to continue.

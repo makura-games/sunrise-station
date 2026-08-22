@@ -10,12 +10,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Sunrise.Paws
 {
-    public sealed class PawsSystem : EntitySystem
+    public sealed partial class PawsSystem : EntitySystem
     {
-        [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-        [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly ChatSystem _chatSystem = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
+        [Dependency] private MobStateSystem _mobStateSystem = default!;
+        [Dependency] private IGameTiming _timing = default!;
+        [Dependency] private ChatSystem _chatSystem = default!;
+        [Dependency] private IRobustRandom _random = default!;
 
         public override void Initialize()
         {

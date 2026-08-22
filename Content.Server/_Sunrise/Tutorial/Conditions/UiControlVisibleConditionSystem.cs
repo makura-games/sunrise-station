@@ -13,7 +13,7 @@ namespace Content.Server._Sunrise.Tutorial.Conditions;
 public sealed partial class UiControlVisibleConditionSystem
     : TutorialConditionSystem<TutorialPlayerComponent, UiControlVisibleCondition>
 {
-    [Dependency] private readonly SharedTutorialSystem _tutorial = default!;
+    [Dependency] private SharedTutorialSystem _tutorial = default!;
 
     public override void Initialize()
     {

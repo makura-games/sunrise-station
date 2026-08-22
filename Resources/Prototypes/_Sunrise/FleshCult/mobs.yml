@@ -26,8 +26,9 @@
         Flammable: [Touch]
         Extinguish: [Touch]
     - type: Damageable
-      damageContainer: Biological
       damageModifierSet: FleshMob
+    - type: Injurable
+      damageContainer: Biological
     - type: HTN
       rootTask:
         task: SimpleHostileCompound

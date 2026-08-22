@@ -10,9 +10,9 @@ using Robust.Shared.Random;
 namespace Content.Shared._Sunrise.Restrict;
 public abstract partial class SharedRestrictSystem : EntitySystem
 {
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<RestrictByUserTagComponent, AttemptMeleeEvent>(OnAttemptMelee);

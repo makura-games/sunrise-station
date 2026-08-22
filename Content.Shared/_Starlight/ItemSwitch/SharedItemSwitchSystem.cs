@@ -15,22 +15,20 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 
 namespace Content.Shared.Starlight.ItemSwitch;
-public abstract class SharedItemSwitchSystem : EntitySystem
+public abstract partial class SharedItemSwitchSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly ClothingSystem _clothing = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
 
-    private EntityQuery<ItemSwitchComponent> _query;
+    [Dependency] private EntityQuery<ItemSwitchComponent> _itemSwitchQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<ItemSwitchComponent>();
 
         SubscribeLocalEvent<ItemSwitchComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ItemSwitchComponent, UseInHandEvent>(OnUseInHand);
@@ -121,7 +119,7 @@ public abstract class SharedItemSwitchSystem : EntitySystem
     /// <returns>Same as <see cref="TrySetActive"/></returns>
     public bool Switch(Entity<ItemSwitchComponent?> ent, string key, EntityUid? user = null, bool predicted = true)
     {
-        if (!_query.Resolve(ent, ref ent.Comp, false) || !ent.Comp.States.TryGetValue(key, out var state))
+        if (!_itemSwitchQuery.Resolve(ent, ref ent.Comp, false) || !ent.Comp.States.TryGetValue(key, out var state))
             return false;
 
         var uid = ent.Owner;

@@ -13,6 +13,7 @@ using Content.Shared.Store.Components;
 using Content.Shared.StoreDiscount.Components;
 using Content.Shared.Tag;
 using Robust.Server.Audio;
+using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -25,19 +26,20 @@ using static Content.Shared.Examine.ExamineSystemShared;
 
 namespace Content.Server._Sunrise.Fugitive
 {
-    public sealed class FugitiveSpawnerSystem : EntitySystem
+    public sealed partial class FugitiveSpawnerSystem : EntitySystem
     {
-        [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly PopupSystem _popupSystem = default!;
-        [Dependency] private readonly AudioSystem _audioSystem = default!;
-        [Dependency] private readonly StunSystem _stun = default!;
-        [Dependency] private readonly TileSystem _tile = default!;
-        [Dependency] private readonly MindSystem _mindSystem = default!;
-        [Dependency] private readonly TagSystem _tagSystem = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly SharedSubdermalImplantSystem _subdermalImplant = default!;
-        [Dependency] private readonly ExamineSystemShared _examine = default!;
-        [Dependency] private readonly UplinkSystem _uplinkSystem = default!;
+        [Dependency] private IGameTiming _timing = default!;
+        [Dependency] private PopupSystem _popupSystem = default!;
+        [Dependency] private AudioSystem _audioSystem = default!;
+        [Dependency] private StunSystem _stun = default!;
+        [Dependency] private TileSystem _tile = default!;
+        [Dependency] private MindSystem _mindSystem = default!;
+        [Dependency] private TagSystem _tagSystem = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private SharedSubdermalImplantSystem _subdermalImplant = default!;
+        [Dependency] private ExamineSystemShared _examine = default!;
+        [Dependency] private UplinkSystem _uplinkSystem = default!;
+        [Dependency] private MapSystem _map = default!;
 
         private static readonly ProtoId<TagPrototype> FugitiveUplinkTag = "FugitiveUplink";
 
@@ -65,7 +67,7 @@ namespace Content.Server._Sunrise.Fugitive
 
             if (!TryComp<MapGridComponent>(xform.GridUid, out var map))
                 return;
-            var currentTile = map.GetTileRef(xform.Coordinates);
+            var currentTile = _map.GetTileRef(xform.GridUid.Value, map, xform.Coordinates);
             _tile.PryTile(currentTile);
 
             if (!_mindSystem.TryGetMind(args.Player.UserId, out var mindId, out var mind))
@@ -94,7 +96,7 @@ namespace Content.Server._Sunrise.Fugitive
                     {
                         if (!TryComp<StoreComponent>(containedEntity, out var storeComponent))
                             continue;
-                        _uplinkSystem.SetUplink(fugitive, containedEntity, _random.Next(5, 10), true);
+                        _uplinkSystem.SetSunriseUplink(fugitive, containedEntity, _random.Next(5, 10), true);
                         _tagSystem.AddTag(containedEntity, FugitiveUplinkTag);
                     }
                 }

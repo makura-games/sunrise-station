@@ -45,15 +45,14 @@ namespace Content.Server.Chemistry.EntitySystems
                 _storageSystem.Insert(container, item, out _, user: user, storage);
                 _labelSystem.Label(item, message.Label);
 
-                _solutionContainerSystem.EnsureSolutionEntity(item, SharedChemMaster.PatchSolutionName, out var itemSolution, message.Dosage);
-                if (!itemSolution.HasValue)
-                    return;
+                _solutionContainerSystem.EnsureSolution(item, SharedChemMaster.PatchSolutionName, out var itemSolution);
+                _solutionContainerSystem.SetCapacity(itemSolution, message.Dosage);
 
-                _solutionContainerSystem.TryAddSolution(itemSolution.Value, withdrawal.SplitSolution(message.Dosage));
+                _solutionContainerSystem.TryAddSolution(itemSolution, withdrawal.SplitSolution(message.Dosage));
 
                 // Log patch creation by a user
                 _adminLogger.Add(LogType.Action, LogImpact.Low,
-                     $"{ToPrettyString(user):user} printed {ToPrettyString(item):patch} {SharedSolutionContainerSystem.ToPrettyString(itemSolution.Value.Comp.Solution)}");
+                     $"{ToPrettyString(user):user} printed {ToPrettyString(item):patch} {SharedSolutionContainerSystem.ToPrettyString(itemSolution.Comp.Solution)}");
             }
 
             UpdateUiState(chemMaster);

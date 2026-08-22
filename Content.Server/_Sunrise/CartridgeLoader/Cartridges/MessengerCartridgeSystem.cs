@@ -19,17 +19,17 @@ namespace Content.Server._Sunrise.CartridgeLoader.Cartridges;
 /// </summary>
 public sealed partial class MessengerCartridgeSystem : EntitySystem
 {
-    [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoader = default!;
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetwork = default!;
-    [Dependency] private readonly SingletonDeviceNetServerSystem _singletonServer = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly RingerSystem _ringer = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetwork = default!;
+    [Dependency] private SingletonDeviceNetServerSystem _singletonServer = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private RingerSystem _ringer = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     private ISawmill Sawmill { get; set; } = default!;
     private const string MessengerFrequencyId = "Messenger";

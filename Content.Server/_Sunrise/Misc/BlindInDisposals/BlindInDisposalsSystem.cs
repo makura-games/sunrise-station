@@ -10,9 +10,9 @@ namespace Content.Server._Sunrise.Misc.BlindInDisposals;
 /// Простая система, делающая персонажа слепым, пока он находится в трубах.
 /// Из труб не должно быть видно реальный мир!!
 /// </summary>
-public sealed class BlindInDisposalsSystem : EntitySystem
+public sealed partial class BlindInDisposalsSystem : EntitySystem
 {
-    [Dependency] private readonly BlindableSystem _blindable = default!;
+    [Dependency] private BlindableSystem _blindable = default!;
 
     public override void Initialize()
     {

@@ -51,8 +51,9 @@
     # only show after making the announcement at 50%
     enabled: false
   - type: Damageable
-    damageContainer: Rift #Sunrise-edit
     damageModifierSet: Rift #Sunrise-edit
+  - type: Injurable
+    damageContainer: Rift #Sunrise-edit
   - type: Destructible
     thresholds:
     - trigger:

@@ -37523,7 +37523,7 @@ entities:
         discountCategory: null
         description: uplink-core-extraction-toolbox-desc
         categories:
-        - UplinkObjectives
+        - UplinkObjective
         originalCost: {}
         conditions:
         - !type:ObjectiveUnlockCondition {}

@@ -5,7 +5,7 @@ using Content.Shared.Speech;
 
 namespace Content.Server.Speech.EntitySystems;
 
-public sealed class LizardAccentSystem : EntitySystem
+public sealed partial class LizardAccentSystem : EntitySystem
 {
     private static readonly Regex RegexLowerS = new("s+");
     private static readonly Regex RegexUpperS = new("S+");
@@ -21,7 +21,7 @@ public sealed class LizardAccentSystem : EntitySystem
     private static readonly Regex LowerCheRegex = new("ч+");
     private static readonly Regex UpperCheRegex = new("Ч+");
 
-    [Dependency] private readonly IRobustRandom _random = default!; // Russian-Localization
+    [Dependency] private IRobustRandom _random = default!; // Russian-Localization
 
     public override void Initialize()
     {

@@ -13,10 +13,10 @@ namespace Content.Client._Sunrise.Roadmap;
 [GenerateTypedNameReferences]
 public sealed partial class Roadmap : DefaultWindow
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
+    [Dependency] private IEntityManager _entMan = default!;
     private readonly RoadmapSystem _roadmap = default!;
 
     private readonly Dictionary<string, RoadmapItem> _goalItems = new();

@@ -39,22 +39,22 @@ namespace Content.Server.Zombies
     {
         private static readonly Regex ColorTagRegex = new(@"\[\s*\/?\s*color(?:=[^\]]*)?\]", RegexOptions.IgnoreCase);
 
-        [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly IPrototypeManager _protoManager = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-        [Dependency] private readonly DamageableSystem _damageable = default!;
-        [Dependency] private readonly ChatSystem _chat = default!;
-        [Dependency] private readonly AutoEmoteSystem _autoEmote = default!;
-        [Dependency] private readonly EmoteOnDamageSystem _emoteOnDamage = default!;
-        [Dependency] private readonly MobStateSystem _mobState = default!;
-        [Dependency] private readonly SharedPopupSystem _popup = default!;
-        [Dependency] private readonly SharedRoleSystem _role = default!;
-        [Dependency] private readonly ThrowingSystem _throwing = default!;
-        [Dependency] private readonly ActionsSystem _action = default!;
-        [Dependency] private readonly SharedStunSystem _stun = default!;
-        [Dependency] private readonly NavMapSystem _navMap = default!; // Sunrise-Zombies
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private IGameTiming _timing = default!;
+        [Dependency] private IPrototypeManager _protoManager = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private BloodstreamSystem _bloodstream = default!;
+        [Dependency] private DamageableSystem _damageable = default!;
+        [Dependency] private ChatSystem _chat = default!;
+        [Dependency] private AutoEmoteSystem _autoEmote = default!;
+        [Dependency] private EmoteOnDamageSystem _emoteOnDamage = default!;
+        [Dependency] private MobStateSystem _mobState = default!;
+        [Dependency] private SharedPopupSystem _popup = default!;
+        [Dependency] private SharedRoleSystem _role = default!;
+        [Dependency] private ThrowingSystem _throwing = default!;
+        [Dependency] private ActionsSystem _action = default!;
+        [Dependency] private SharedStunSystem _stun = default!;
+        [Dependency] private NavMapSystem _navMap = default!; // Sunrise-Zombies
+        [Dependency] private SharedTransformSystem _transform = default!;
 
         public readonly ProtoId<NpcFactionPrototype> Faction = "Zombie";
 

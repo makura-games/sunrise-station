@@ -5,7 +5,8 @@ namespace Content.Shared.Bed;
 
 public sealed partial class BedSystem
 {
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private EntityQuery<BedHealModifierClothingComponent> _bedHealModifierClothingQuery = default!;
 
     private float GetSunriseHealingMultiplier(EntityUid healedEntity)
     {

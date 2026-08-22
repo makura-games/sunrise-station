@@ -65,13 +65,19 @@ class TestShardFilterTests(unittest.TestCase):
         self.assertEqual(tests, ["Content.Tests.Fixture.Test"])
 
     def test_groups_identically_named_methods_by_fixture(self):
+        timings = {
+            **TIMINGS,
+            "methodCaseSeconds": {
+                "Content.Tests.SecondFixture.Test": 1.0,
+            },
+        }
         groups, seconds = SHARD_FILTER.extract_groups(
             [
                 "Content.Tests.FirstFixture.Test",
                 "Content.Tests.SecondFixture.Test",
                 "Content.Tests.SecondFixture.Test(1)",
             ],
-            TIMINGS,
+            timings,
             1,
         )
 
@@ -83,6 +89,22 @@ class TestShardFilterTests(unittest.TestCase):
             },
         )
         self.assertEqual(seconds["Content.Tests.FirstFixture", "Test", None], 2.0)
+
+    def test_splits_unmeasured_parameterized_methods_into_individual_cases(self):
+        tests = [
+            "Content.Tests.Fixture.Test(1)",
+            "Content.Tests.Fixture.Test(2)",
+        ]
+
+        groups, _ = SHARD_FILTER.extract_groups(tests, TIMINGS, 8)
+
+        self.assertEqual(
+            groups,
+            {
+                ("Content.Tests.Fixture", "Test", tests[0]): 1,
+                ("Content.Tests.Fixture", "Test", tests[1]): 1,
+            },
+        )
 
     def test_splits_large_parameterized_methods_into_individual_cases(self):
         case_count = SHARD_FILTER.PARAMETERIZED_CASE_SPLIT_THRESHOLD + 1

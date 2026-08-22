@@ -64,6 +64,7 @@
       Female: FemaleHuman
       Unsexed: FemaleHuman
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: MeleeWeapon
     hidden: true

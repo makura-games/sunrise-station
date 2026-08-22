@@ -6,8 +6,8 @@ namespace Content.Shared.Holosign;
 
 public sealed partial class HolosignSystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
 
     private const float SunriseTileSearchRadius = 0.1f;
 

@@ -1,4 +1,4 @@
-﻿using Content.Shared._Sunrise.Antags.Abductor;
+using Content.Shared._Sunrise.Antags.Abductor;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.RichText;
@@ -11,9 +11,9 @@ using Content.Shared.Weapons.Ranged;
 namespace Content.Client._Sunrise.Antags.Abductor;
 
 [UsedImplicitly]
-public sealed class AbductorConsoleBui : BoundUserInterface
+public sealed partial class AbductorConsoleBui : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
 
     [ViewVariables]
     private AbductorConsoleWindow? _window;

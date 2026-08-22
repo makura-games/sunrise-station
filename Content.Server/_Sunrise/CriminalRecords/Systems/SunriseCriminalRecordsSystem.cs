@@ -16,15 +16,15 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.CriminalRecords.Systems;
 
-public sealed class SunriseCriminalRecordsSystem : SharedSunriseCriminalRecordsSystem
+public sealed partial class SunriseCriminalRecordsSystem : SharedSunriseCriminalRecordsSystem
 {
-    [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly Robust.Shared.Timing.IGameTiming _timing = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly StationCorporateLawSystem _stationLaw = default!;
-    [Dependency] private readonly CriminalRecordsSystem _criminalRecords = default!;
+    [Dependency] private StationRecordsSystem _stationRecords = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private Robust.Shared.Timing.IGameTiming _timing = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private StationCorporateLawSystem _stationLaw = default!;
+    [Dependency] private CriminalRecordsSystem _criminalRecords = default!;
 
     private const int MaxLaws = 20;
     private const int MaxCircumstances = 10;

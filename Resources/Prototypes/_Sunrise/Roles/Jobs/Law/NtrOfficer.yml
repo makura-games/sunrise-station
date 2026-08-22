@@ -13,7 +13,6 @@
   startingGear: NtrOfficerGear
   icon: "JobIconNtrGuard"
   supervisors: job-supervisors-ntrg
-  canBeAntag: false
   displayWeight: 40
   access:
   - Command

@@ -25,13 +25,13 @@ namespace Content.Server._Sunrise.Antags.Abductor;
 
 public sealed partial class AbductorSystem : SharedAbductorSystem
 {
-    [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly RoleSystem _role = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly SunriseHumanoidMarkingSystem _sunriseMarking = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
+    [Dependency] private IGameTiming _time = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private RoleSystem _role = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private SunriseHumanoidMarkingSystem _sunriseMarking = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutions = default!;
     private static readonly EntProtoId DefaultRule = "AbductorVictim";
 
 

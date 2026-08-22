@@ -5,7 +5,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._Sunrise.BloodCult;
 
-public sealed class CultPentagramSystem : EntitySystem
+public sealed partial class CultPentagramSystem : EntitySystem
 {
     private const string Rsi = "_Sunrise/BloodCult/pentagram.rsi";
 
@@ -19,7 +19,7 @@ public sealed class CultPentagramSystem : EntitySystem
         "halo6"
     };
 
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
 
     public override void Initialize()
     {

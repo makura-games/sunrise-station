@@ -223,37 +223,29 @@
   - !type:EntityTableDunGen
     minCount: 25
     maxCount: 40
-    # Sunrise-Start
     perDungeon: true
     ignoreReserved: true
-    # Sunrise-Start
     table: !type:NestedSelector
       tableId: SalvageScrapSpawnerCommon
   - !type:EntityTableDunGen
     minCount: 30
     maxCount: 40
-    # Sunrise-Start
     perDungeon: true
     ignoreReserved: true
-    # Sunrise-Start
     table: !type:NestedSelector
       tableId: SalvageScrapSpawnerValuable
   - !type:EntityTableDunGen
     minCount: 30
     maxCount: 45
-    # Sunrise-Start
     perDungeon: true
     ignoreReserved: true
-    # Sunrise-Start
     table: !type:NestedSelector
       tableId: SalvageTreasureSpawnerCommon
   - !type:EntityTableDunGen
     minCount: 30
     maxCount: 45
-    # Sunrise-Start
     perDungeon: true
     ignoreReserved: true
-    # Sunrise-Start
     table: !type:NestedSelector
       tableId: SalvageTreasureSpawnerValuable
   - !type:MobsDunGen

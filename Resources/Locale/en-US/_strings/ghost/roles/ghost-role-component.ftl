@@ -217,10 +217,6 @@ ghost-role-information-Cak-description = You are the chef's favorite child. You'
 ghost-role-information-BreadDog-name = BreadDog
 ghost-role-information-BreadDog-description = You are the chef's favorite child. You're a living bread dog.
 
-ghost-role-information-exterminator-name = Exterminator
-ghost-role-information-exterminator-description = You been been sent back in time to terminate a target with high importance to the future.
-ghost-role-information-exterminator-rules = You are an antagonist and may kill anyone that tries to stop you, but killing the target is always your top priority.
-
 ghost-role-information-space-ninja-name = Space Ninja
 ghost-role-information-space-ninja-description = Use stealth and deception to sabotage the station.
 

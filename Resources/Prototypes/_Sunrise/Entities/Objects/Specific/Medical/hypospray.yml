@@ -1,6 +1,6 @@
 - type: entity
   name: Combat medi-injector
-  parent: [BaseItem, BaseCentcommContraband]
+  parent: [BaseHypospray, BaseCentcommContraband]
   description: A sterile injector for 4-use. Containing chemicals that regenerate most types of damage.
   id: MedipenCombatInjector
   components:
@@ -10,25 +10,22 @@
   - type: Item
     sprite: Objects/Specific/Medical/hypospray.rsi
     size: Small
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 80
-        reagents:
-        - ReagentId: Epinephrine
-          Quantity: 15
-        - ReagentId: Omnizine
-          Quantity: 15
-        - ReagentId: Saline
-          Quantity: 15
-        - ReagentId: Rororium
-          Quantity: 20
-        - ReagentId: Dermaline
-          Quantity: 15
-  - type: ExaminableSolution
-    solution: pen
+  - type: Solution
+    solution:
+      maxVol: 80
+      reagents:
+      - ReagentId: Epinephrine
+        Quantity: 15
+      - ReagentId: Omnizine
+        Quantity: 15
+      - ReagentId: Saline
+        Quantity: 15
+      - ReagentId: Rororium
+        Quantity: 20
+      - ReagentId: Dermaline
+        Quantity: 15
   - type: Injector
-    solutionName: pen
+    solutionName: hypospray
     activeModeProtoId: HyposprayInjectMode
     allowedModes:
     - HyposprayInjectMode
@@ -46,7 +43,7 @@
   - type: StaticPrice
     price: 750
   - type: TrashOnSolutionEmpty
-    solution: pen
+    solution: hypospray
 
 # Medipens
 - type: entity
@@ -74,23 +71,22 @@
     layers:
     - state: stimpen
       map: ["enum.SolutionContainerLayers.Fill"]
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 35
-        reagents:
-        - ReagentId: Ephedrine
-          Quantity: 15
-        - ReagentId: Epinephrine
-          Quantity: 10
-        - ReagentId: Tricordrazine
-          Quantity: 10
+  - type: Solution
+    solution:
+      maxVol: 35
+      reagents:
+      - ReagentId: Ephedrine
+        Quantity: 15
+      - ReagentId: Epinephrine
+        Quantity: 10
+      - ReagentId: Tricordrazine
+        Quantity: 10
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: stimpen_empty
   - type: Injector
-    solutionName: pen
+    solutionName: hypospray
     currentTransferAmount: 35
     activeModeProtoId: HyposprayInjectMode
     allowedModes:
@@ -124,21 +120,20 @@
     layers:
     - state: microstimpen
       map: ["enum.SolutionContainerLayers.Fill"]
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 20
-        reagents:
-        - ReagentId: Ephedrine
-          Quantity: 15
-        - ReagentId: Tricordrazine
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 20
+      reagents:
+      - ReagentId: Ephedrine
+        Quantity: 15
+      - ReagentId: Tricordrazine
+        Quantity: 5
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: microstimpen_empty
   - type: Injector
-    solutionName: pen
+    solutionName: hypospray
     currentTransferAmount: 20
     activeModeProtoId: HyposprayInjectMode
     allowedModes:
@@ -172,15 +167,14 @@
       map: ["enum.SolutionContainerLayers.Fill"]
   - type: SolutionContainerVisuals
     emptySpriteName: lacerpen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 15
-        reagents:
-        - ReagentId: Lacerinol
-          Quantity: 10
-        - ReagentId: TranexamicAcid
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 15
+      reagents:
+      - ReagentId: Lacerinol
+        Quantity: 10
+      - ReagentId: TranexamicAcid
+        Quantity: 5
 
 - type: entity
   name: bruizine auto-injector
@@ -207,15 +201,14 @@
       map: ["enum.SolutionContainerLayers.Fill"]
   - type: SolutionContainerVisuals
     emptySpriteName: bruizpen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 15
-        reagents:
-        - ReagentId: Bruizine
-          Quantity: 10
-        - ReagentId: TranexamicAcid
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 15
+      reagents:
+      - ReagentId: Bruizine
+        Quantity: 10
+      - ReagentId: TranexamicAcid
+        Quantity: 5
 
 - type: entity
   name: polypyrylium oligomers auto-injector
@@ -242,15 +235,14 @@
       map: ["enum.SolutionContainerLayers.Fill"]
   - type: SolutionContainerVisuals
     emptySpriteName: polypen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 20
-        reagents:
-        - ReagentId: PolypyryliumOligomers
-          Quantity: 20
+  - type: Solution
+    solution:
+      maxVol: 20
+      reagents:
+      - ReagentId: PolypyryliumOligomers
+        Quantity: 20
   - type: Injector
-    solutionName: pen
+    solutionName: hypospray
     currentTransferAmount: 20
     activeModeProtoId: HyposprayInjectMode
     allowedModes:
@@ -282,13 +274,12 @@
       map: ["enum.SolutionContainerLayers.Fill"]
   - type: SolutionContainerVisuals
     emptySpriteName: stellipen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 10
-        reagents:
-        - ReagentId: Stellibinin
-          Quantity: 10
+  - type: Solution
+    solution:
+      maxVol: 10
+      reagents:
+      - ReagentId: Stellibinin
+        Quantity: 10
 
 - type: entity
   name: empty medipen
@@ -341,15 +332,14 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: medipen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 15
-        reagents:
-        - ReagentId: Beer
-          Quantity: 11
-        - ReagentId: Vodkizine
-          Quantity: 4
+  - type: Solution
+    solution:
+      maxVol: 15
+      reagents:
+      - ReagentId: Beer
+        Quantity: 11
+      - ReagentId: Vodkizine
+        Quantity: 4
 
 - type: entity
   name: coal auto-injector
@@ -378,15 +368,14 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: coalpen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 15
-        reagents:
-        - ReagentId: Charcoal
-          Quantity: 15
+  - type: Solution
+    solution:
+      maxVol: 15
+      reagents:
+      - ReagentId: Charcoal
+        Quantity: 15
   - type: Injector
-    solutionName: pen
+    solutionName: hypospray
     currentTransferAmount: 15
     activeModeProtoId: HyposprayInjectMode
     allowedModes:

@@ -13,7 +13,7 @@ namespace Content.Server._Sunrise.NPC.HTN;
 /// </summary>
 public sealed partial class StandUpOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
     private StandingStateSystem _standing = default!;
 
     [DataField("shutdownState")]

@@ -20,4 +20,35 @@
   guides: [ Wizard ]
   storytellerStress: 5.0 # Sunrise-Edit
 
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: Wizard
+  spawnerPrototype: SpawnPointGhostWizard
+  startingGear: WizardBlueGear
+  roleLoadout:
+  - RoleSurvivalExtended
+  briefing:
+    text: wizard-role-greeting
+    color: Turquoise
+    # TODO: Need Wizard Start sound
+    #sound: "/Audio/Ambience/Antag/wizard_start.ogg"
+  # TODO: WizardComp as needed
+  components:
+  # Sunrise edit start - маркер мага для панели призраков
+  - type: GhostPanelAntagonistMarker
+    name: ghost-panel-antagonist-wizard-name
+    description: ghost-panel-antagonist-wizard-description
+    priority: 5
+  # Sunrise edit end
+  - type: NpcFactionMember
+    factions:
+    - Wizard
+  - type: RandomMetadata
+    nameSegments:
+    - NamesWizardFirst
+    - NamesWizardLast
+    nameFormat: name-format-wizard
+  mindRoles:
+  - MindRoleWizard
+
 # See wizard_startinggear for wiz start gear options

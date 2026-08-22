@@ -3,6 +3,7 @@
   - SunriseHumanBodyTypeDisplacements # Sunrise-Edit
   - AppearanceHuman
   id: AppearanceDwarf
+  categories: [ HideSpawnMenu ]
   name: dwarf appearance
   components:
   - type: Inventory # Sunrise-Edit - карты одежды для телосложений наследуются общим набором

@@ -18,16 +18,16 @@ using Robust.Shared.Utility;
 namespace Content.Client._Sunrise.Radials;
 
 [UsedImplicitly]
-public sealed class RadialSystem : SharedRadialSystem
+public sealed partial class RadialSystem : SharedRadialSystem
 {
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly ExamineSystem _examineSystem = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly IStateManager _stateManager = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private ExamineSystem _examineSystem = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private IStateManager _stateManager = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
 
     /// <summary>
     ///     When a user right clicks somewhere, how large is the box we use to get entities for the context menu?

@@ -34,10 +34,10 @@ namespace Content.Server.GameTicking
 {
     public sealed partial class GameTicker
     {
-        [Dependency] private readonly DiscordWebhook _discord = default!;
-        [Dependency] private readonly RoleSystem _role = default!;
-        [Dependency] private readonly ITaskManager _taskManager = default!;
-        [Dependency] private readonly StatsBoardSystem _statsBoardSystem = default!;
+        [Dependency] private DiscordWebhook _discord = default!;
+        [Dependency] private RoleSystem _role = default!;
+        [Dependency] private ITaskManager _taskManager = default!;
+        [Dependency] private StatsBoardSystem _statsBoardSystem = default!;
 
         private static readonly Counter RoundNumberMetric = Metrics.CreateCounter(
             "ss14_round_number",

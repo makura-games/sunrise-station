@@ -6,10 +6,10 @@ using Content.Shared.StatusIcon.Components;
 
 namespace Content.Client.Overlays;
 
-public sealed class ShowHungerIconsSystem : EquipmentHudSystem<ShowHungerIconsComponent>
+public sealed partial class ShowHungerIconsSystem : EquipmentHudSystem<ShowHungerIconsComponent>
 {
-    [Dependency] private readonly HungerSystem _hunger = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
 
     public override void Initialize()
     {

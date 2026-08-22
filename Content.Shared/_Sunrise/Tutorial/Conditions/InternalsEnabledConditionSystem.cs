@@ -9,7 +9,7 @@ namespace Content.Shared._Sunrise.Tutorial.Conditions;
 public sealed partial class InternalsEnabledConditionSystem
     : TutorialConditionSystem<TutorialPlayerComponent, InternalsEnabledCondition>
 {
-    [Dependency] private readonly SharedInternalsSystem _internals = default!;
+    [Dependency] private SharedInternalsSystem _internals = default!;
 
     protected override void Condition(Entity<TutorialPlayerComponent> entity, ref TutorialConditionEvent<InternalsEnabledCondition> args)
     {

@@ -29,11 +29,11 @@ public sealed partial class TutorialSoftLockSystem : EntitySystem
 {
     private static readonly TimeSpan PopupCooldown = TimeSpan.FromSeconds(1);
 
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly Dictionary<EntityUid, TimeSpan> _lastPopupTimes = new();
 

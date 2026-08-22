@@ -12,15 +12,15 @@ using Content.Server._Sunrise.StationEvents.Events;
 
 namespace Content.Server.AlertLevel;
 
-public sealed class AlertLevelSystem : EntitySystem
+public sealed partial class AlertLevelSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    // Sunrise-Start
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    // Sunrise-End
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private GameTicker _gameTicker = default!; // Sunrise edit
+    [Dependency] private RoundEndSystem _roundEnd = default!; // Sunrise edit
 
     // Until stations are a prototype, this is how it's going to have to be.
     public const string DefaultAlertLevelSet = "stationAlerts";

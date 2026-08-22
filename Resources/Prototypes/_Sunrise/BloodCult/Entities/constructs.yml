@@ -36,6 +36,7 @@
           layer:
             - FlyingMobLayer
     - type: Damageable
+    - type: Injurable
       damageContainer: Biological
     - type: BecomeDustOnDeath
     - type: MobThresholds

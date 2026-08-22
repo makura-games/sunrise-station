@@ -28,14 +28,14 @@ namespace Content.Client._Sunrise.MentorHelp
     [GenerateTypedNameReferences]
     public sealed partial class MentorHelpControl : Control
     {
-        [Dependency] private readonly IUserInterfaceManager _ui = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly ILocalizationManager _loc = default!;
-        [Dependency] private readonly IEntityManager _entManager = default!;
-        [Dependency] private readonly IClientAdminManager _adminManager = default!;
-        [Dependency] private readonly IClientConsoleHost _console = default!;
-        [Dependency] private readonly IPlayerManager _player = default!;
+        [Dependency] private IUserInterfaceManager _ui = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private IGameTiming _timing = default!;
+        [Dependency] private ILocalizationManager _loc = default!;
+        [Dependency] private IEntityManager _entManager = default!;
+        [Dependency] private IClientAdminManager _adminManager = default!;
+        [Dependency] private IClientConsoleHost _console = default!;
+        [Dependency] private IPlayerManager _player = default!;
 
         private const double CloseConfirmTimeoutSeconds = 2;
         private const double TypingIndicatorTimeoutSeconds = 10;

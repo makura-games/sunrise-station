@@ -18,10 +18,10 @@ namespace Content.Client.Movement.Systems;
 
 public sealed partial class EyeCursorOffsetSystem : EntitySystem
 {
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly InputSystem _inputSystem = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private InputSystem _inputSystem = default!;
 
     // Sunrise-Start
     private bool _holdLookUp;

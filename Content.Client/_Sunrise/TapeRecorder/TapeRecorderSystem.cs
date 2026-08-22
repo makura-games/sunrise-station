@@ -7,9 +7,9 @@ namespace Content.Client._Sunrise.TapeRecorder;
 /// <summary>
 /// Client-side system for tape recorder functionality.
 /// </summary>
-public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
+public sealed partial class TapeRecorderSystem : SharedTapeRecorderSystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

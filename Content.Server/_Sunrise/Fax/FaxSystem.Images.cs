@@ -21,10 +21,10 @@ namespace Content.Server.Fax;
 public sealed partial class FaxSystem
 {
     /* Передача изображений бумаги и размещение распечаток переносного факса. */
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly StorageSystem _storage = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private StorageSystem _storage = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     private static FaxPrintout CreateSunriseNetworkPrintout(
         NetworkPayload payload,

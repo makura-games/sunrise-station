@@ -87,8 +87,9 @@
     sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
     state: full
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Resomi
+  - type: Injurable
+    damageContainer: Biological
   - type: Butcherable
     butcheringType: Spike
     spawned:

@@ -1,36 +1,35 @@
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
-using Content.Shared.Item.ItemToggle.Components; 
+using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Storage.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
-using Content.Shared.Silicons.Borgs.Components; 
+using Content.Shared.Silicons.Borgs.Components;
 
 namespace Content.Shared.Storage.EntitySystems;
 
 /// <summary>
 /// <see cref="MagnetPickupComponent"/>
 /// </summary>
-public sealed class MagnetPickupSystem : EntitySystem
+public sealed partial class MagnetPickupSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private EntityQuery<BorgChassisComponent> _borgQuery = default!; // Sunrise Edit
 
     private static readonly TimeSpan ScanDelay = TimeSpan.FromSeconds(1);
-
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<BorgChassisComponent> _borgQuery; // Sunrise Edit
 
     public override void Initialize()
     {
         base.Initialize();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _borgQuery = GetEntityQuery<BorgChassisComponent>(); // Sunrise Edit
         SubscribeLocalEvent<MagnetPickupComponent, MapInitEvent>(OnMagnetMapInit);
     }
 
@@ -66,12 +65,24 @@ public sealed class MagnetPickupSystem : EntitySystem
                 }
             }
             // Sunrise Edit End
+            var parentUid = xform.ParentUid;
+
+            if (comp.RequireActiveHand && (!_hands.TryGetActiveItem(parentUid, out var activeItem) || activeItem != uid))
+                continue;
+
+            if (comp.SlotFlags != null)
+            {
+                if (!_inventory.TryGetContainingSlot((uid, xform, meta), out var slotDef))
+                    continue;
+
+                if ((slotDef.SlotFlags & comp.SlotFlags) == 0x0)
+                    continue;
+            }
 
             // No space
             if (!_storage.HasSpace((uid, storage)))
                 continue;
 
-            var parentUid = xform.ParentUid;
             var playedSound = false;
             var finalCoords = xform.Coordinates;
             var moverCoords = _transform.GetMoverCoordinates(uid, xform);

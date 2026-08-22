@@ -8,6 +8,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
+using Content.Shared.DragDrop;
 using Content.Shared.FixedPoint;
 using Content.Shared.Labels.EntitySystems;
 using Content.Shared.Storage;
@@ -20,7 +21,6 @@ using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Shared.Chemistry.Components.SolutionManager;
 
 namespace Content.Server.Chemistry.EntitySystems
 {
@@ -34,14 +34,14 @@ namespace Content.Server.Chemistry.EntitySystems
     public sealed partial class ChemMasterSystem : EntitySystem
     // Sunrise edit end
     {
-        [Dependency] private readonly PopupSystem _popupSystem = default!;
-        [Dependency] private readonly AudioSystem _audioSystem = default!;
-        [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-        [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
-        [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
-        [Dependency] private readonly StorageSystem _storageSystem = default!;
-        [Dependency] private readonly LabelSystem _labelSystem = default!;
-        [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+        [Dependency] private PopupSystem _popupSystem = default!;
+        [Dependency] private AudioSystem _audioSystem = default!;
+        [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
+        [Dependency] private ItemSlotsSystem _itemSlotsSystem = default!;
+        [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
+        [Dependency] private StorageSystem _storageSystem = default!;
+        [Dependency] private LabelSystem _labelSystem = default!;
+        [Dependency] private ISharedAdminLogManager _adminLogger = default!;
 
         private static readonly EntProtoId PillPrototypeId = "Pill";
         private static readonly ProtoId<TagPrototype> PatchPackTag = "PatchPack";
@@ -51,9 +51,12 @@ namespace Content.Server.Chemistry.EntitySystems
             base.Initialize();
 
             SubscribeLocalEvent<ChemMasterComponent, ComponentStartup>(SubscribeUpdateUiState);
-            SubscribeLocalEvent<ChemMasterComponent, SolutionContainerChangedEvent>(SubscribeUpdateUiState);
+            SubscribeLocalEvent<ChemMasterComponent, SolutionChangedEvent>(SubscribeUpdateUiState);
             SubscribeLocalEvent<ChemMasterComponent, EntInsertedIntoContainerMessage>(SubscribeUpdateUiState);
             SubscribeLocalEvent<ChemMasterComponent, EntRemovedFromContainerMessage>(SubscribeUpdateUiState);
+            // Subscribing to DragDropTargetEvent is a quick fix to ensure the UI updates when fluids are dragged and dropped into the ChemMaster, since Shared.Fluids.EntitySystems.SolutionDumpingSystem.cs bypasses UpdateChemicals().
+            // TODO: Remove when proper support for infinite volume solutions is added.
+            SubscribeLocalEvent<ChemMasterComponent, DragDropTargetEvent>(SubscribeUpdateUiState);
             SubscribeLocalEvent<ChemMasterComponent, BoundUIOpenedEvent>(SubscribeUpdateUiState);
 
             SubscribeLocalEvent<ChemMasterComponent, ChemMasterSetModeMessage>(OnSetModeMessage);
@@ -241,22 +244,17 @@ namespace Content.Server.Chemistry.EntitySystems
                 _storageSystem.Insert(container, item, out _, user: user, storage);
                 _labelSystem.Label(item, message.Label);
 
-                _solutionContainerSystem.EnsureSolutionEntity(item,
-                    SharedChemMaster.PillSolutionName,
-                    out var itemSolution,
-                    message.Dosage);
-                if (!itemSolution.HasValue)
-                    return;
+                _solutionContainerSystem.EnsureSolution(item, SharedChemMaster.PillSolutionName, out var itemSolution);
+                itemSolution.Comp.Solution.MaxVolume = message.Dosage;
 
-                _solutionContainerSystem.TryAddSolution(itemSolution.Value, withdrawal.SplitSolution(message.Dosage));
+                _solutionContainerSystem.TryAddSolution(itemSolution, withdrawal.SplitSolution(message.Dosage));
 
                 var pill = EnsureComp<PillComponent>(item);
                 pill.PillType = chemMaster.Comp.PillType;
                 Dirty(item, pill);
 
                 // Log pill creation by a user
-                _adminLogger.Add(LogType.Action, LogImpact.Low,
-                    $"{ToPrettyString(user):user} printed {ToPrettyString(item):pill} {SharedSolutionContainerSystem.ToPrettyString(itemSolution.Value.Comp.Solution)}");
+                _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(user):user} printed {ToPrettyString(item):pill} {SharedSolutionContainerSystem.ToPrettyString(itemSolution.Comp.Solution)}");
             }
 
             UpdateUiState(chemMaster);
@@ -394,14 +392,11 @@ namespace Content.Server.Chemistry.EntitySystems
                 return null;
 
             var name = Name(container.Value);
-            // Sunrise-Edit start - Safely check SolutionContainerManagerComponent on output container to avoid ComponentNotFoundException
-            if (HasComp<SolutionContainerManagerComponent>(container.Value))
+            // Sunrise-Edit start - безопасно получаем раствор без привязки к конкретному компоненту контейнера
+            if (_solutionContainerSystem.TryGetSolution(
+                    container.Value, SharedChemMaster.BottleSolutionName, out _, out var solution))
             {
-                if (_solutionContainerSystem.TryGetSolution(
-                        container.Value, SharedChemMaster.BottleSolutionName, out _, out var solution))
-                {
-                    return BuildContainerInfo(name, solution);
-                }
+                return BuildContainerInfo(name, solution);
             }
             // Sunrise-Edit end
 
@@ -413,15 +408,13 @@ namespace Content.Server.Chemistry.EntitySystems
             // Sunrise-Edit end
             var pills = storage.Container.ContainedEntities.Select((Func<EntityUid, (string, FixedPoint2 quantity)>) (pill =>
             {
-                // Sunrise-Edit start - Safely check SolutionContainerManagerComponent on contained entities to avoid ComponentNotFoundException
-                if (HasComp<SolutionContainerManagerComponent>(pill) &&
-                    _solutionContainerSystem.TryGetSolution(pill, SharedChemMaster.PillSolutionName, out _, out var solution))
+                // Sunrise-Edit start - безопасно получаем растворы таблеток и пластырей без привязки к компоненту контейнера
+                if (_solutionContainerSystem.TryGetSolution(pill, SharedChemMaster.PillSolutionName, out _, out var solution))
                 {
                     var quantity = solution?.Volume ?? FixedPoint2.Zero;
                     return (Name(pill), quantity);
                 }
-                else if (HasComp<SolutionContainerManagerComponent>(pill) &&
-                         _solutionContainerSystem.TryGetSolution(pill, SharedChemMaster.PatchSolutionName, out _, out var patchSolution))
+                else if (_solutionContainerSystem.TryGetSolution(pill, SharedChemMaster.PatchSolutionName, out _, out var patchSolution))
                 {
                     var patchQuantity = patchSolution?.Volume ?? FixedPoint2.Zero;
                     return (Name(pill), patchQuantity);

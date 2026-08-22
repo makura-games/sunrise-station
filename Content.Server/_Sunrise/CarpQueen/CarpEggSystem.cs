@@ -26,23 +26,23 @@ using Robust.Shared.Maths;
 
 namespace Content.Server._Sunrise.CarpQueen;
 
-public sealed class CarpEggSystem : CarpQueenAccessSystem
+public sealed partial class CarpEggSystem : CarpQueenAccessSystem
 {
-    [Dependency] private readonly PuddleSystem _puddles = default!;
-    [Dependency] private readonly IPrototypeManager _protos = default!;
-    [Dependency] private readonly IRobustRandom _rand = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedTransformSystem _xformSys = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly HTNSystem _htn = default!;
-    [Dependency] private readonly CarpQueenSystem _carpQueenSystem = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+    [Dependency] private PuddleSystem _puddles = default!;
+    [Dependency] private IPrototypeManager _protos = default!;
+    [Dependency] private IRobustRandom _rand = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _xformSys = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private HTNSystem _htn = default!;
+    [Dependency] private CarpQueenSystem _carpQueenSystem = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedDestructibleSystem _destructible = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
 
     private static readonly ProtoId<ReagentPrototype> WaterReagent = "Water";
 

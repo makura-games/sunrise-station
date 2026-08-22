@@ -50,10 +50,10 @@ public sealed partial class ClientClothingSystem : ClothingSystem
         {"suitstorage", "SUITSTORAGE"},
     };
 
-    [Dependency] private readonly IResourceCache _cache = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly DisplacementMapSystem _displacement = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IResourceCache _cache = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private DisplacementMapSystem _displacement = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -232,7 +232,7 @@ public sealed partial class ClientClothingSystem : ClothingSystem
     {
         base.OnGotEquipped(uid, component, args);
 
-        RenderEquipment(args.Equipee, uid, args.Slot, clothingComponent: component);
+        RenderEquipment(args.EquipTarget, uid, args.Slot, clothingComponent: component);
     }
 
     private void RenderEquipment(EntityUid equipee, EntityUid equipment, string slot,

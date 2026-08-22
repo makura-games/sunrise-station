@@ -67,8 +67,9 @@
   - type: TypingIndicator
     proto: alien
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Predator
+  - type: Injurable
+    damageContainer: Biological
   - type: Tag
     tags:
       - Predator

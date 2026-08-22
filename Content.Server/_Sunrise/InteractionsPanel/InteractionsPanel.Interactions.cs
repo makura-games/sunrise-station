@@ -21,7 +21,7 @@ namespace Content.Server._Sunrise.InteractionsPanel;
 
 public partial class InteractionsPanel
 {
-    [Dependency] private readonly PlayerCacheManager _playerCacheManager = default!;
+    [Dependency] private PlayerCacheManager _playerCacheManager = default!;
 
     private void InitializeInteractions()
     {

@@ -14,7 +14,6 @@
   overrideConsoleVisibility: false
   alwaysUseSpawner: true
   supervisors: job-supervisors-head-of-prison
-  canBeAntag: false
   displayWeight: 80
   access:
   - Security

@@ -7,7 +7,7 @@ namespace Content.Server.GameTicking;
 
 public sealed partial class GameTicker
 {
-    [Dependency] private readonly SunriseServerJoinPipelineSystem _sunriseServerJoinPipeline = default!;
+    [Dependency] private SunriseServerJoinPipelineSystem _sunriseServerJoinPipeline = default!;
 
     private void SendToJoinPipeline(ICommonSession session)
     {

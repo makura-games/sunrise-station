@@ -24,18 +24,18 @@ using Content.Sunrise.Interfaces.Shared;
 namespace Content.Server._Sunrise.NewLife;
 
 [UsedImplicitly]
-public sealed class NewLifeSystem : SharedNewLifeSystem
+public sealed partial class NewLifeSystem : SharedNewLifeSystem
 {
-    [Dependency] private readonly EuiManager _euiManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly StationJobsSystem _stationJobs = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly IServerPreferencesManager _prefsManager = default!;
-    [Dependency] private readonly PlayTimeTrackingSystem _playTimeTrackings = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IServerNetManager _netMgr = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private EuiManager _euiManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private StationJobsSystem _stationJobs = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private IServerPreferencesManager _prefsManager = default!;
+    [Dependency] private PlayTimeTrackingSystem _playTimeTrackings = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IServerNetManager _netMgr = default!;
+    [Dependency] private IGameTiming _timing = default!;
     private ISharedSponsorsManager? _sponsorsManager; // Sunrise-Sponsors
 
     private readonly Dictionary<ICommonSession, NewLifeEui> _openUis = new();
