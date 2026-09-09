@@ -7,11 +7,20 @@ from .github import GitHubError
 
 
 def enrich_event(event: str, payload: dict, github, config: dict, log) -> None:
-    if event not in {"pull_request_target", "pull_request", "issues"}:
-        return
     subject = payload.get("pull_request") or payload.get("issue") or {}
     number = subject.get("number")
     if type(number) is not int or number <= 0:
+        return
+    if payload.get("pull_request") or subject.get("pull_request"):
+        try:
+            payload["_discord_pr_status"] = github.pull_status(number)
+        except GitHubError as error:
+            payload.pop("_discord_pr_status", None)
+            log(
+                f"Статус PR #{number} недоступен: {error}. "
+                "Не подменяем его результатом одного ревью."
+            )
+    if event not in {"pull_request_target", "pull_request", "issues"}:
         return
     if config["display"]["show_reactions"]:
         try:

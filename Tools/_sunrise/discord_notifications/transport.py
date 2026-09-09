@@ -1,5 +1,6 @@
 """Отправка JSON и вложений Discord с ограниченными повторами."""
 
+import base64
 import copy
 import json
 import math
@@ -89,6 +90,18 @@ def send_message(
     """Повторяет временные отказы, не печатая URL, ответы или секреты."""
     address = webhook_url(address)
     message = copy.deepcopy(payload)
+    encoded_files = message.pop("_files", {})
+    if encoded_files:
+        files = list(files or [])
+        for name, encoded in encoded_files.items():
+            if not re.fullmatch(r"[a-zA-Z0-9_-]{1,64}\.png", name):
+                raise ValueError("Некорректное имя вложения")
+            if not isinstance(encoded, str) or len(encoded) > 8_000_000:
+                raise ValueError("Вложение слишком велико")
+            data = base64.b64decode(encoded, validate=True)
+            if not data.startswith(b"\x89PNG\r\n\x1a\n"):
+                raise ValueError("Ожидалось вложение PNG")
+            files.append((f"files[{len(files)}]", (name, data, "image/png")))
     message.setdefault("allowed_mentions", {"parse": []})
     if message.get("flags", 0) & (1 << 15):
         address += "&with_components=true"

@@ -78,6 +78,46 @@ class GitHub:
                 return
             page += 1
 
+    def pull_status(self, number: int) -> dict:
+        if type(number) is not int or number <= 0:
+            raise ValueError("Некорректный номер PR")
+        owner, name = self.repository.split("/")
+        query = (
+            "query($owner:String!,$name:String!,$number:Int!){"
+            "repository(owner:$owner,name:$name){pullRequest(number:$number){"
+            "state isDraft reviewDecision headRefOid "
+            "author{login avatarUrl url}}}}"
+        )
+        try:
+            response = self.session.post(
+                "https://api.github.com/graphql",
+                json={
+                    "query": query,
+                    "variables": {
+                        "owner": owner,
+                        "name": name,
+                        "number": number,
+                    },
+                },
+                timeout=30,
+                allow_redirects=False,
+            )
+            if response.status_code != 200:
+                raise GitHubError(
+                    f"Статус PR: GitHub HTTP {response.status_code}"
+                )
+            result = response.json()
+            if result.get("errors"):
+                raise GitHubError("GitHub не предоставил общий статус ревью")
+            status = result["data"]["repository"]["pullRequest"]
+            if not isinstance(status, dict):
+                raise GitHubError("Статус PR отсутствует в ответе GitHub")
+            return status
+        except (requests.RequestException, ValueError, KeyError, TypeError):
+            raise GitHubError(
+                "Не удалось получить статус PR из GitHub"
+            ) from None
+
     def event_artifact(self, run_id: int) -> dict:
         artifacts = list(
             self.pages(

@@ -14,7 +14,7 @@ import requests
 from discord_notifications import deliver, transport
 from discord_notifications.config import load_config
 from discord_notifications.formatting import format_event
-from discord_notifications.github import GitHubError
+from discord_notifications.github import GitHub, GitHubError
 
 ADDRESS = "https://discord.com/api/webhooks/123/test-token"
 CONFIG = Path(__file__).with_name("config.toml")
@@ -81,7 +81,14 @@ class NotificationTests(unittest.TestCase):
                 payload["review"] = {"state": review}
                 message, _ = format_event(event, payload, self.config)
                 self.assertEqual(
-                    int(self.config["styles"][style]["color"][1:], 16),
+                    int(
+                        self.config[
+                            "reviews"
+                            if event == "pull_request_review"
+                            else "styles"
+                        ][style]["color"][1:],
+                        16,
+                    ),
                     message["embeds"][0]["color"],
                 )
 
@@ -182,6 +189,46 @@ class NotificationTests(unittest.TestCase):
         self.assertEqual(0.1, sleep.call_args.args[0])
         self.assertNotIn("test-token", "\n".join(logs))
 
+    def test_graphql_uses_current_repository_and_rejects_partial_errors(self):
+        github = GitHub("owner/repo", "test-token")
+        github.session = Mock()
+        status = {
+            "state": "OPEN",
+            "isDraft": True,
+            "reviewDecision": "REVIEW_REQUIRED",
+        }
+        github.session.post.return_value = response(
+            200, {"data": {"repository": {"pullRequest": status}}}
+        )
+        self.assertEqual(status, github.pull_status(12))
+        self.assertEqual(
+            {"owner": "owner", "name": "repo", "number": 12},
+            github.session.post.call_args.kwargs["json"]["variables"],
+        )
+        github.session.post.return_value = response(
+            200, {"errors": [{"message": "private details"}]}
+        )
+        with self.assertRaises(GitHubError):
+            github.pull_status(12)
+
+    def test_serialized_icons_use_multipart_without_leaking_internal_data(
+        self,
+    ):
+        payload = event_payload()
+        payload["action"] = "submitted"
+        payload["review"] = {"state": "approved"}
+        message = format_event("pull_request_review", payload, self.config)[0]
+        with patch.object(
+            transport.requests,
+            "post",
+            return_value=response(200, {"id": "42"}),
+        ) as post:
+            transport.send_message(ADDRESS, message)
+        request = post.call_args.kwargs
+        self.assertNotIn("_files", json.loads(request["data"]["payload_json"]))
+        self.assertEqual("review.png", request["files"][0][1][0])
+        self.assertTrue(request["files"][0][1][1].startswith(b"\x89PNG"))
+
     def test_permanent_error_does_not_retry_and_redacts_response(self):
         with patch.object(
             transport.requests,
@@ -251,6 +298,11 @@ class NotificationTests(unittest.TestCase):
         state = Mock()
         state.github.json.return_value = []
         state.github.pages.return_value = []
+        state.github.pull_status.return_value = {
+            "state": "OPEN",
+            "isDraft": False,
+            "reviewDecision": "REVIEW_REQUIRED",
+        }
         state.github.repository = "owner/repo"
         state.data = {
             "pending": {},

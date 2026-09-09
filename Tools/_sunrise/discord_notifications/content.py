@@ -184,6 +184,13 @@ def split_message(message: dict) -> list[dict]:
         count += size
     if batch:
         result.append({**message, "embeds": batch})
+    for part in result:
+        if "_files" in part:
+            part["_files"] = {
+                name: encoded
+                for name, encoded in part["_files"].items()
+                if f"attachment://{name}" in str(part["embeds"])
+            }
     return result
 
 

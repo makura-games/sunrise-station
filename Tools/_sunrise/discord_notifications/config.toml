@@ -15,7 +15,6 @@ max_commits = 11
 commit_length = 67
 username = "MoMMI"
 avatar_url = "https://raw.githubusercontent.com/PJB3005/MoMMI/1a10f345dbb709dcae46e6495e522d4d7d6dfbbf/Files/MoMMIv2.png"
-repository_label = ""
 show_checks = true
 show_reactions = true
 
@@ -29,13 +28,12 @@ push_to = "to"
 force_push = "[FORCE PUSHED]"
 ellipsis = "..."
 overflow = "<.....>"
-by = "by"
+reviewer = "Reviewer"
 checks = "Checks"
 status = "status"
 conflicts = "🚨CONFLICTS🚨"
 upvote = "＋"
 downvote = "−"
-source = "Открыть на GitHub"
 pull_request = "pull request"
 issue = "issue"
 commit = "commit"
@@ -45,23 +43,54 @@ discussion_answered = "Answered"
 discussion_unanswered = "Unanswered"
 discussion_commented = "Commented"
 
-[checks]
-unknown = "❓"
-queued = "⏳"
-in_progress = "⏳"
-pending = "⏳"
-waiting = "⏳"
-requested = "⏳"
-neutral = "😐"
-success = "✔"
-success_icon = "https://cdn.discordapp.com/emojis/828260365908836423.png"
-failure = "❌"
-cancelled = "🛑"
-timed_out = "❌"
-action_required = "❌"
-error = "❌"
-stale = "❌"
-skipped = "⏭️"
+[check_card]
+width = 640
+font_size = 20
+font = ""
+background = "#00000000"
+text_color = "#C9D1D9"
+success_icon = "check.png"
+success_color = "#6CC644"
+failure_icon = "x.png"
+failure_color = "#FF4444"
+pending_icon = "hourglass.png"
+pending_color = "#D29922"
+neutral_icon = "dash.png"
+neutral_color = "#8B949E"
+
+[pr_status]
+open = "Open"
+closed = "Closed"
+merged = "Merged"
+draft = "Draft"
+unknown = "Unavailable"
+
+[review_status]
+approved = "Approved"
+changes_requested = "Changes requested"
+review_required = "Waiting for review"
+none = "No review decision"
+unknown = "Unavailable"
+
+[reviews.approved]
+label = "Approved"
+color = "#6CC644"
+icon = "check.png"
+
+[reviews.changes_requested]
+label = "Changes requested"
+color = "#FF4444"
+icon = "file-diff.png"
+
+[reviews.commented]
+label = "Comment"
+color = "#8B949E"
+icon = "comment.png"
+
+[reviews.dismissed]
+label = "Dismissed"
+color = "#8B949E"
+icon = "comment.png"
 
 [filters]
 ignore_bots = true

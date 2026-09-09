@@ -1,6 +1,8 @@
 """Контракт карточек из основной ветки v2 MoMMI, без его зависимостей."""
 
+import base64
 import copy
+import io
 import unittest
 from unittest.mock import Mock
 
@@ -15,6 +17,7 @@ from discord_notifications.formatting import format_event
 from discord_notifications.github import GitHubError
 from discord_notifications.metadata import enrich_event
 from discord_notifications.test_notifications import CONFIG, event_payload
+from PIL import Image
 
 
 class MoMMIVisualTests(unittest.TestCase):
@@ -46,6 +49,11 @@ class MoMMIVisualTests(unittest.TestCase):
             {"name": "Build", "status": "completed", "conclusion": "success"},
             {"name": "Tests", "status": "in_progress", "conclusion": None},
         ]
+        self.payload["_discord_pr_status"] = {
+            "state": "OPEN",
+            "isDraft": False,
+            "reviewDecision": "REVIEW_REQUIRED",
+        }
 
     def render(self, event="pull_request"):
         return format_event(event, self.payload, self.config)[0]["embeds"][0]
@@ -60,28 +68,26 @@ class MoMMIVisualTests(unittest.TestCase):
                     "**Description**\nSecond line\n＋ 3   − 1\u200b"
                 ),
                 "author": {
-                    "name": "Human",
-                    "url": "https://github.com/Human",
-                    "icon_url": "https://avatars.githubusercontent.com/u/1",
+                    "name": "Author",
+                    "icon_url": "https://avatars.githubusercontent.com/u/2",
                 },
+                "footer": {"text": "PR: Open · Review: Waiting for review"},
+                "fields": [
+                    {
+                        "name": "status",
+                        "value": "🚨CONFLICTS🚨",
+                        "inline": True,
+                    }
+                ],
             },
             self.render(),
         )
         embeds = format_event("pull_request", self.payload, self.config)[0][
             "embeds"
         ]
-        self.assertEqual("Build", embeds[1]["author"]["name"])
-        self.assertEqual(
-            self.config["checks"]["success_icon"],
-            embeds[1]["author"]["icon_url"],
-        )
-        self.assertEqual("⏳ Tests", embeds[2]["author"]["name"])
-        self.assertEqual("🚨CONFLICTS🚨", embeds[-1]["fields"][0]["value"])
-        self.assertEqual(
-            r"[#1 · A \*\*formatted\*\* title](https://github.com/owner/repo/pull/1)"
-            " · by [Author](https://github.com/Author)",
-            embeds[-1]["fields"][-1]["value"],
-        )
+        self.assertEqual(2, len(embeds))
+        self.assertEqual("Checks", embeds[1]["title"])
+        self.assertEqual("attachment://checks.png", embeds[1]["image"]["url"])
 
     def test_closed_and_merged_icons_and_palette(self):
         self.payload["action"] = "closed"
@@ -97,6 +103,51 @@ class MoMMIVisualTests(unittest.TestCase):
                     emoji + " A **formatted** title", embed["title"]
                 )
 
+    def test_reviews_share_layout_and_keep_aggregate_github_status(self):
+        self.payload["action"] = "submitted"
+        self.payload["_discord_pr_status"]["reviewDecision"] = (
+            "CHANGES_REQUESTED"
+        )
+        for state, label in (
+            ("approved", "Approved"),
+            ("changes_requested", "Changes requested"),
+            ("commented", "Comment"),
+        ):
+            self.payload["review"] = {
+                "state": state,
+                "body": "Текст ревью",
+                "user": self.payload["sender"],
+            }
+            message = format_event(
+                "pull_request_review", self.payload, self.config
+            )[0]
+            embed = message["embeds"][0]
+            self.assertEqual(1, len(message["embeds"]))
+            self.assertEqual("Author", embed["author"]["name"])
+            self.assertEqual(
+                label + " · A **formatted** title", embed["title"]
+            )
+            self.assertEqual("Текст ревью", embed["description"])
+            self.assertEqual("Reviewer", embed["fields"][0]["name"])
+            self.assertEqual(
+                "attachment://review.png", embed["thumbnail"]["url"]
+            )
+            self.assertEqual(
+                "PR: Open · Review: Changes requested", embed["footer"]["text"]
+            )
+            self.assertIn("review.png", message["_files"])
+        self.payload["_discord_pr_status"]["isDraft"] = True
+        self.assertIn("PR: Draft", self.render()["footer"]["text"])
+        self.payload["_discord_pr_status"] = {
+            "state": "MERGED",
+            "reviewDecision": "APPROVED",
+        }
+        self.assertEqual(
+            "PR: Merged · Review: Approved", self.render()["footer"]["text"]
+        )
+        self.payload.pop("_discord_pr_status")
+        self.assertIn("Review: Unavailable", self.render()["footer"]["text"])
+
     def test_issue_uses_its_own_icons_and_no_checks(self):
         self.payload["issue"] = self.payload.pop("pull_request")
         for action, emoji, color in (
@@ -107,7 +158,7 @@ class MoMMIVisualTests(unittest.TestCase):
             embed = self.render("issues")
             self.assertEqual(emoji + " A **formatted** title", embed["title"])
             self.assertEqual(color, embed["color"])
-            self.assertEqual(1, len(embed["fields"]))
+            self.assertNotIn("fields", embed)
 
     def test_comment_uses_github_heading_and_clickable_source(self):
         self.payload["action"] = "created"
@@ -124,9 +175,11 @@ class MoMMIVisualTests(unittest.TestCase):
             embed["title"],
         )
         self.assertEqual("A **comment**", embed["description"])
-        self.assertNotIn("footer", embed)
+        self.assertEqual(
+            "PR: Open · Review: Waiting for review", embed["footer"]["text"]
+        )
         self.assertNotIn("color", embed)
-        self.assertEqual(1, len(embed["fields"]))
+        self.assertNotIn("fields", embed)
         self.assertIn("author", embed)
 
     def test_description_is_not_cut_at_old_mommi_limit(self):
@@ -195,13 +248,22 @@ class MoMMIVisualTests(unittest.TestCase):
             )
 
     def test_disallowed_avatar_is_not_embedded(self):
-        self.payload["sender"]["avatar_url"] = "http://127.0.0.1/private"
+        self.payload["pull_request"]["user"]["avatar_url"] = (
+            "http://127.0.0.1/private"
+        )
         self.assertNotIn("icon_url", self.render()["author"])
 
     def test_large_checks_fit_without_losing_whole_notification(self):
         self.payload["_discord_checks"] *= 100
         message = format_event("pull_request", self.payload, self.config)[0]
-        self.assertEqual(201, len(message["embeds"]))
+        self.assertEqual(2, len(message["embeds"]))
+        with Image.open(
+            io.BytesIO(base64.b64decode(message["_files"]["checks.png"]))
+        ) as image:
+            self.assertEqual(self.config["check_card"]["width"], image.width)
+            self.assertGreater(
+                image.height, 200 * self.config["check_card"]["font_size"]
+            )
         self.assertTrue(
             all(len(part["embeds"]) <= 10 for part in split_message(message))
         )
@@ -214,6 +276,7 @@ class MoMMIVisualTests(unittest.TestCase):
             [],
         ]
         github.json.return_value = {"mergeable": True}
+        github.pull_status.return_value = self.payload["_discord_pr_status"]
         enrich_event("pull_request", self.payload, github, self.config, Mock())
         self.assertEqual(
             {"+1": 2, "-1": 1}, self.payload["pull_request"]["reactions"]
@@ -242,6 +305,7 @@ class MoMMIVisualTests(unittest.TestCase):
             embed["image"]["url"]
             for embed in message["embeds"]
             if "image" in embed
+            and not embed["image"]["url"].startswith("attachment:")
         ]
         self.assertEqual([screenshot, second], images)
         visible = "".join(

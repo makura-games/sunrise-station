@@ -5,6 +5,7 @@ from fnmatch import fnmatchcase
 from urllib.parse import urlsplit
 
 from .content import body_base, prepare_body, split_body
+from .visuals import check_image, encode_image, icon_image
 
 
 def truncate(value: str, limit: int) -> str:
@@ -100,26 +101,28 @@ def conflict_fields(subject: dict, config: dict) -> list[dict]:
     return fields
 
 
-def checks_embeds(payload: dict, config: dict) -> list[dict]:
-    embeds = []
-    for check in payload.get("_discord_checks", []):
-        status = check.get("status")
-        if status == "completed":
-            status = check.get("conclusion")
-        name = truncate(plain(check.get("name")), 200)
-        icon = config["checks"].get(status, config["checks"]["unknown"])
-        entry = {"author": {"name": f"{icon} {name}"}}
-        success_icon = avatar_url(config["checks"]["success_icon"])
-        if status == "success" and success_icon:
-            entry["author"] = {"name": name, "icon_url": success_icon}
-        url = safe_url(
-            check.get("html_url"), payload["repository"]["full_name"]
+def status_footer(payload: dict, subject: dict, config: dict) -> dict:
+    status = payload.get("_discord_pr_status")
+    if isinstance(status, dict):
+        state = str(status.get("state", "unknown")).lower()
+        draft = status.get("isDraft")
+        decision = status.get("reviewDecision")
+        review = str(decision).lower() if decision else "none"
+    else:
+        state = (
+            "merged"
+            if subject.get("merged")
+            else subject.get("state", "unknown")
         )
-        entry["author"]["url"] = url
-        embeds.append(entry)
-    if embeds:
-        embeds[0]["title"] = config["mommi"]["checks"]
-    return embeds
+        draft = subject.get("draft")
+        review = "unknown"
+    if state == "open" and draft:
+        state = "draft"
+    pr_label = config["pr_status"].get(state, config["pr_status"]["unknown"])
+    review_label = config["review_status"].get(
+        review, config["review_status"]["unknown"]
+    )
+    return {"text": f"PR: {pr_label} · Review: {review_label}"}
 
 
 def render_embed(
@@ -144,8 +147,13 @@ def render_embed(
         ),
         "description": plain(body).strip(),
     }
-    if sender.get("login"):
-        embed["author"] = author(sender)
+    displayed_author = (
+        subject.get("user")
+        if event in {"pull_request", "pull_request_review"}
+        else sender
+    )
+    if displayed_author and displayed_author.get("login"):
+        embed["author"] = author(displayed_author)
     set_color(embed, style)
     if event in {"pull_request", "issues"}:
         votes = []
@@ -160,6 +168,22 @@ def render_embed(
             fields = conflict_fields(subject, config)
             if fields:
                 embed["fields"] = fields
+    elif event == "pull_request_review":
+        style = config["reviews"].get(state, config["reviews"]["commented"])
+        set_color(embed, style)
+        embed["title"] = f"{style['label']} · {title}"
+        reviewer = author(comment.get("user") or sender)
+        reviewer_name = text(reviewer["name"], 100)
+        if reviewer.get("url"):
+            reviewer_name = f"[{reviewer_name}]({reviewer['url']})"
+        embed["fields"] = [
+            {
+                "name": config["mommi"]["reviewer"],
+                "value": reviewer_name,
+                "inline": False,
+            }
+        ]
+        embed["thumbnail"] = {"url": "attachment://review.png"}
     elif event in {
         "issue_comment",
         "pull_request_review_comment",
@@ -345,6 +369,14 @@ def format_event(
         f"{event}/{action} · {repository} · {prefix}{title} · {style['label']}"
     )
     embed = render_embed(event, action, payload, subject, state, config)
+    is_pull = event in {
+        "pull_request",
+        "pull_request_review",
+        "pull_request_review_comment",
+        "issue_comment",
+    } and bool(pull or issue.get("pull_request"))
+    if is_pull:
+        embed["footer"] = status_footer(payload, subject, config)
     body, images = prepare_body(
         embed["description"], body_base(repository, subject)
     )
@@ -363,31 +395,32 @@ def format_event(
             embeds[-1]["image"] = {"url": address}
         else:
             embeds.append({"image": {"url": address}})
-    if event == "pull_request" and config["display"]["show_checks"]:
-        embeds.extend(checks_embeds(payload, config))
-    source_url = safe_url(subject.get("html_url") or embed["url"], repository)
-    label = config["display"]["repository_label"] or repository.split("/")[-1]
-    if number is not None:
-        label = f"#{number} · {plain(subject.get('title'))}"
-    link = f"[{text(label, 150)}]({source_url})"
-    owner = subject.get("user", {}).get("login")
-    if owner:
-        profile = author(subject["user"]).get("url")
-        if not profile and re.fullmatch(r"[A-Za-z0-9-]+(?:\[bot\])?", owner):
-            profile = f"https://github.com/{owner}"
-        owner_label = text(owner, 100)
-        if profile:
-            owner_label = f"[{owner_label}]({profile})"
-        link += f" · {config['mommi']['by']} {owner_label}"
-    fields.append(
-        {"name": config["mommi"]["source"], "value": link, "inline": False}
-    )
-    embeds[-1]["fields"] = fields
+    if fields:
+        embeds[0]["fields"] = fields
+    files = {}
+    checks = payload.get("_discord_checks", [])
+    if event == "pull_request" and config["display"]["show_checks"] and checks:
+        files["checks.png"] = check_image(checks, config)
+        embeds.append(
+            {
+                "title": config["mommi"]["checks"],
+                "url": safe_url(subject.get("html_url"), repository)
+                + "/checks",
+                "image": {"url": "attachment://checks.png"},
+            }
+        )
+    if event == "pull_request_review":
+        style = config["reviews"].get(state, config["reviews"]["commented"])
+        files["review.png"] = encode_image(
+            icon_image(style["icon"], style["color"], 64)
+        )
     message = {
         "username": truncate(plain(config["display"]["username"]), 80),
         "embeds": embeds,
         "allowed_mentions": {"parse": []},
     }
+    if files:
+        message["_files"] = files
     icon = avatar_url(config["display"]["avatar_url"])
     if icon:
         message["avatar_url"] = icon

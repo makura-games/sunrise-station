@@ -146,6 +146,7 @@ def collect(state: State, config: dict, log: Journal, deadline: float) -> int:
             if pull_numbers and number not in pull_numbers:
                 raise ValueError("Номер PR не совпадает с данными запуска")
             payload.pop("_discord_checks", None)
+            payload.pop("_discord_pr_status", None)
             if format_event(run["event"], payload, config)[0] is not None:
                 enrich_event(run["event"], payload, github, config, log)
             enqueue(state, key, run["event"], payload, config, log)
@@ -307,6 +308,8 @@ def deliver_pending(
                 )
                 for field in embed.get("fields", []):
                     log(f"{field['name']}: {field['value']}")
+                if embed.get("footer"):
+                    log(f"Статусы: {embed['footer']['text']}")
         if all(name in item["sent"] for name in item["targets"]):
             del state.data["pending"][key]
             state.save()
