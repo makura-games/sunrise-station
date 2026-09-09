@@ -145,7 +145,6 @@ def collect(state: State, config: dict, log: Journal, deadline: float) -> int:
             number = payload.get("pull_request", {}).get("number")
             if pull_numbers and number not in pull_numbers:
                 raise ValueError("Номер PR не совпадает с данными запуска")
-            payload.pop("_discord_checks", None)
             payload.pop("_discord_pr_status", None)
             payload.pop("_discord_review_state", None)
             if format_event(run["event"], payload, config)[0] is not None:

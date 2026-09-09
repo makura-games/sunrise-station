@@ -87,19 +87,6 @@ def set_color(embed: dict, style: dict) -> None:
         embed["color"] = int(style["color"].removeprefix("#"), 16)
 
 
-def conflict_fields(subject: dict, config: dict) -> list[dict]:
-    fields = []
-    if subject.get("mergeable") is False:
-        fields.append(
-            {
-                "name": config["mommi"]["status"],
-                "value": config["mommi"]["conflicts"],
-                "inline": True,
-            }
-        )
-    return fields
-
-
 def status_footer(payload: dict, subject: dict, config: dict) -> dict:
     status = payload.get("_discord_pr_status")
     if isinstance(status, dict):
@@ -107,6 +94,7 @@ def status_footer(payload: dict, subject: dict, config: dict) -> dict:
         draft = status.get("isDraft")
         decision = status.get("reviewDecision")
         review = str(decision).lower() if decision else "none"
+        conflicts = status.get("mergeable") == "CONFLICTING"
     else:
         state = (
             "merged"
@@ -115,46 +103,17 @@ def status_footer(payload: dict, subject: dict, config: dict) -> dict:
         )
         draft = subject.get("draft")
         review = "unknown"
+        conflicts = subject.get("mergeable") is False
     if state == "open" and draft:
         state = "draft"
     pr_label = config["pr_status"].get(state, config["pr_status"]["unknown"])
     review_label = config["review_status"].get(
         review, config["review_status"]["unknown"]
     )
-    return {"text": f"PR: {pr_label} · Review: {review_label}"}
-
-
-def check_cards(checks: list[dict], url: str, config: dict) -> list[dict]:
-    rows = []
-    for check in checks:
-        status = check.get("status")
-        if status == "completed":
-            status = check.get("conclusion")
-        icon = "neutral"
-        if status == "success":
-            icon = "approved"
-        elif status in {
-            "failure",
-            "error",
-            "timed_out",
-            "action_required",
-            "stale",
-        }:
-            icon = "failure"
-        elif status in {
-            "queued",
-            "in_progress",
-            "pending",
-            "waiting",
-            "requested",
-        }:
-            icon = "pending"
-        name = text(plain(check.get("name")).replace("\n", " "), 400)
-        rows.append(f"{config['icons'][icon]} {name}")
-    return [
-        {"title": config["mommi"]["checks"], "url": url, "description": chunk}
-        for chunk in split_body("\n".join(rows), 4096)
-    ]
+    footer = f"PR: {pr_label} · Review: {review_label}"
+    if conflicts:
+        footer += " · " + config["pr_status"]["conflicts"]
+    return {"text": footer}
 
 
 def render_embed(
@@ -179,7 +138,11 @@ def render_embed(
         ),
         "description": plain(body).strip(),
     }
-    displayed_author = comment.get("user") or sender
+    displayed_author = (
+        subject.get("user")
+        if event == "pull_request"
+        else comment.get("user") or sender
+    )
     if displayed_author and displayed_author.get("login"):
         embed["author"] = author(displayed_author)
     set_color(embed, style)
@@ -190,12 +153,8 @@ def render_embed(
             for key, name in (("+1", "upvote"), ("-1", "downvote")):
                 count = reactions.get(key, 0)
                 if type(count) is int and count > 0:
-                    votes.append(f"{config['mommi'][name]} {count}")
+                    votes.append(f"{config['labels'][name]} {count}")
         embed["description"] += "\n" + "   ".join(votes) + "\u200b"
-        if event == "pull_request" and config["display"]["show_checks"]:
-            fields = conflict_fields(subject, config)
-            if fields:
-                embed["fields"] = fields
     elif event == "pull_request_review":
         style = config["reviews"].get(state, config["reviews"]["commented"])
         set_color(embed, style)
@@ -210,9 +169,9 @@ def render_embed(
             .get(review_state, {})
             .get("label", config["review_status"]["unknown"])
         )
-        prefix = config["mommi"]["review_comment"]
+        prefix = config["labels"]["review_comment"]
         if action in {"edited", "deleted"}:
-            prefix = config["mommi"][f"{action}_review_comment"]
+            prefix = config["labels"][f"{action}_review_comment"]
         embed["title"] = (
             f"{config['icons']['review']} {prefix} · {review_label} "
             f"· #{number} {title}"
@@ -223,7 +182,7 @@ def render_embed(
             location = f"{path}:{line}" if line else path
             embed["fields"] = [
                 {
-                    "name": config["mommi"]["file"],
+                    "name": config["labels"]["file"],
                     "value": text(location, 1000),
                     "inline": False,
                 }
@@ -232,12 +191,12 @@ def render_embed(
         "issue_comment",
         "commit_comment",
     }:
-        prefix = config["mommi"]["new_comment"]
+        prefix = config["labels"]["new_comment"]
         if action in {"edited", "deleted"}:
-            prefix = config["mommi"][f"{action}_comment"]
+            prefix = config["labels"][f"{action}_comment"]
         if event == "commit_comment":
             title = str(comment.get("commit_id", ""))[:7]
-            target = config["mommi"]["commit"] + " " + title
+            target = config["labels"]["commit"] + " " + title
         else:
             kind = (
                 "pull_request"
@@ -248,7 +207,7 @@ def render_embed(
                 )
                 else "issue"
             )
-            target = f"{config['mommi'][kind]} #{number}: {title}"
+            target = f"{config['labels'][kind]} #{number}: {title}"
         embed["title"] = (
             f"{config['icons']['comment']} [{repository.split('/')[-1]}] "
             f"{prefix} {target}"
@@ -256,15 +215,15 @@ def render_embed(
         embed.pop("color", None)
         set_color(embed, config["styles"]["commented"])
     elif event in {"discussion", "discussion_comment"}:
-        action_label = config["mommi"].get(f"discussion_{action}", action)
+        action_label = config["labels"].get(f"discussion_{action}", action)
         if event == "discussion_comment":
-            action_label = config["mommi"]["discussion_commented"]
+            action_label = config["labels"]["discussion_commented"]
         else:
             embed["description"] += "\n"
             if action != "created":
                 embed.pop("author", None)
         embed["title"] = (
-            f"{config['mommi']['discussion']} {action_label}: {title}"
+            f"{config['labels']['discussion']} {action_label}: {title}"
         )
         if action == "created" or event == "discussion_comment":
             embed.pop("color", None)
@@ -274,13 +233,13 @@ def render_embed(
         noun = "commit_singular" if count == 1 else "commit_plural"
         ref = plain(payload.get("ref"))
         embed["title"] = (
-            f"**{count}** {config['mommi'][noun]} "
-            f"{config['mommi']['push_to']} **{ref}**"
+            f"**{count}** {config['labels'][noun]} "
+            f"{config['labels']['push_to']} **{ref}**"
         )
         embed["url"] = safe_url(payload.get("compare"), repository)
         if payload.get("forced"):
             embed["title"] = (
-                config["mommi"]["force_push"] + " " + embed["title"]
+                config["labels"]["force_push"] + " " + embed["title"]
             )
             set_color(embed, config["styles"]["force_push"])
         lines = []
@@ -288,12 +247,12 @@ def render_embed(
         for commit in commits[: config["display"]["max_commits"]]:
             message = plain(commit.get("message"))
             if len(message) > limit:
-                message = message[:limit] + config["mommi"]["ellipsis"]
+                message = message[:limit] + config["labels"]["ellipsis"]
             sha = str(commit.get("id", ""))[:7]
             url = safe_url(commit.get("url"), repository)
             lines.append(f"[`{sha}`]({url}) {message}\n")
         if count >= config["display"]["max_commits"]:
-            lines.append(config["mommi"]["overflow"])
+            lines.append(config["labels"]["overflow"])
         embed["description"] = "".join(lines)
     elif event in {"create", "delete"}:
         embed["title"] = (
@@ -383,8 +342,6 @@ def format_event(
         state = "review_comment"
     elif event.endswith("comment") and action == "created":
         state = "commented"
-    elif event in {"check_run", "check_suite"}:
-        state = payload[event].get("conclusion") or action
     if event in {"pull_request", "issues"}:
         closed = action == "closed" or subject.get("state") == "closed"
         if event == "pull_request":
@@ -455,15 +412,6 @@ def format_event(
             embeds.append({"image": {"url": address}})
     if fields:
         embeds[0]["fields"] = fields
-    checks = payload.get("_discord_checks", [])
-    if event == "pull_request" and config["display"]["show_checks"] and checks:
-        embeds.extend(
-            check_cards(
-                checks,
-                safe_url(subject.get("html_url"), repository) + "/checks",
-                config,
-            )
-        )
     message = {
         "username": truncate(plain(config["display"]["username"]), 80),
         "embeds": embeds,

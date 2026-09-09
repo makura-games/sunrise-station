@@ -46,7 +46,7 @@ def load_config(path: Path) -> dict:
                 raise ValueError(
                     f"styles.{name}.{field}: слишком длинный текст"
                 )
-    for section in ("mommi", "pr_status", "review_status", "icons"):
+    for section in ("labels", "pr_status", "review_status", "icons"):
         for name, value in config[section].items():
             if not isinstance(value, str) or len(value) > 100:
                 raise ValueError(
@@ -62,9 +62,8 @@ def load_config(path: Path) -> dict:
                 raise ValueError(
                     "reviews.icon: требуется имя из раздела icons"
                 )
-    for name in ("show_checks", "show_reactions"):
-        if type(config["display"][name]) is not bool:
-            raise ValueError(f"display.{name}: требуется true или false")
+    if type(config["display"]["show_reactions"]) is not bool:
+        raise ValueError("display.show_reactions: требуется true или false")
     for name, destination in config["destinations"].items():
         if not re.fullmatch(r"[A-Z][A-Z0-9_]+", destination["webhook_env"]):
             raise ValueError(f"destinations.{name}: неверное имя секрета")

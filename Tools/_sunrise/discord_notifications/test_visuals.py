@@ -1,4 +1,4 @@
-"""Контракт карточек из основной ветки v2 MoMMI, без его зависимостей."""
+"""Проверка оформления карточек GitHub."""
 
 import copy
 import unittest
@@ -17,7 +17,7 @@ from discord_notifications.metadata import enrich_event
 from discord_notifications.test_notifications import CONFIG, event_payload
 
 
-class MoMMIVisualTests(unittest.TestCase):
+class NotificationVisualTests(unittest.TestCase):
     def setUp(self):
         self.config = load_config(CONFIG)
         self.payload = event_payload()
@@ -32,20 +32,15 @@ class MoMMIVisualTests(unittest.TestCase):
                 "title": "A **formatted** title",
                 "body": "**Description**<!-- hidden -->\nSecond line",
                 "state": "open",
-                "head": {"sha": "a" * 40},
                 "reactions": {"+1": 3, "-1": 1},
-                "mergeable": False,
             }
         )
         self.payload["pull_request"]["user"].update(
             {
                 "avatar_url": "https://avatars.githubusercontent.com/u/2",
+                "html_url": "https://github.com/Author",
             }
         )
-        self.payload["_discord_checks"] = [
-            {"name": "Build", "status": "completed", "conclusion": "success"},
-            {"name": "Tests", "status": "in_progress", "conclusion": None},
-        ]
         self.payload["_discord_pr_status"] = {
             "state": "OPEN",
             "isDraft": False,
@@ -55,7 +50,7 @@ class MoMMIVisualTests(unittest.TestCase):
     def render(self, event="pull_request"):
         return format_event(event, self.payload, self.config)[0]["embeds"][0]
 
-    def test_pr_matches_mommi_card(self):
+    def test_pr_card_uses_creator_and_github_identity(self):
         self.assertEqual(
             {
                 "title": "<:propen:896496081960054827> A **formatted** title",
@@ -65,28 +60,21 @@ class MoMMIVisualTests(unittest.TestCase):
                     "**Description**\nSecond line\n＋ 3   − 1\u200b"
                 ),
                 "author": {
-                    "name": "Human",
-                    "url": "https://github.com/Human",
-                    "icon_url": "https://avatars.githubusercontent.com/u/1",
+                    "name": "Author",
+                    "url": "https://github.com/Author",
+                    "icon_url": "https://avatars.githubusercontent.com/u/2",
                 },
                 "footer": {"text": "PR: Open · Review: Waiting for review"},
-                "fields": [
-                    {
-                        "name": "status",
-                        "value": "🚨CONFLICTS🚨",
-                        "inline": True,
-                    }
-                ],
             },
             self.render(),
         )
-        embeds = format_event("pull_request", self.payload, self.config)[0][
-            "embeds"
-        ]
-        self.assertEqual(2, len(embeds))
-        self.assertEqual("Checks", embeds[1]["title"])
-        self.assertEqual("✓ Build\n⏳ Tests", embeds[1]["description"])
-        self.assertNotIn("image", embeds[1])
+        message = format_event("pull_request", self.payload, self.config)[0]
+        self.assertEqual(1, len(message["embeds"]))
+        self.assertEqual("GitHub", message["username"])
+        self.assertEqual(
+            "https://avatars.githubusercontent.com/u/9919?v=4",
+            message["avatar_url"],
+        )
 
     def test_closed_and_merged_icons_and_palette(self):
         self.payload["action"] = "closed"
@@ -97,7 +85,7 @@ class MoMMIVisualTests(unittest.TestCase):
             with self.subTest(merged=merged):
                 self.payload["pull_request"]["merged"] = merged
                 embed = self.render()
-                self.assertEqual("Human", embed["author"]["name"])
+                self.assertEqual("Author", embed["author"]["name"])
                 self.assertEqual(color, embed["color"])
                 self.assertEqual(
                     emoji + " A **formatted** title", embed["title"]
@@ -150,7 +138,21 @@ class MoMMIVisualTests(unittest.TestCase):
         self.payload.pop("_discord_pr_status")
         self.assertIn("Review: Unavailable", self.render()["footer"]["text"])
 
-    def test_issue_uses_its_own_icons_and_no_checks(self):
+    def test_only_confirmed_conflicts_appear_in_status_footer(self):
+        for state in ("CONFLICTING", "MERGEABLE", "UNKNOWN", None):
+            with self.subTest(state=state):
+                self.payload["_discord_pr_status"]["mergeable"] = state
+                embed = self.render()
+                self.assertEqual(
+                    state == "CONFLICTING",
+                    "Merge conflicts" in embed["footer"]["text"],
+                )
+                self.assertNotIn("fields", embed)
+        self.payload.pop("_discord_pr_status")
+        self.payload["pull_request"]["mergeable"] = False
+        self.assertIn("Merge conflicts", self.render()["footer"]["text"])
+
+    def test_issue_uses_its_own_icons(self):
         self.payload["issue"] = self.payload.pop("pull_request")
         for action, emoji, color in (
             ("opened", "<:issueopened:896502343288381521>", 0x6CC644),
@@ -192,7 +194,9 @@ class MoMMIVisualTests(unittest.TestCase):
         self.assertEqual("banumbas", embed["author"]["name"])
         self.assertEqual(0xFF4444, embed["color"])
         self.assertTrue(
-            embed["title"].startswith("👁 Review comment · Comment")
+            embed["title"].startswith(
+                self.config["icons"]["review"] + " Review comment · Comment"
+            )
         )
         self.assertEqual(self.payload["comment"]["body"], embed["description"])
         self.assertIn("demon.yml:99", embed["fields"][0]["value"])
@@ -254,7 +258,8 @@ class MoMMIVisualTests(unittest.TestCase):
         }
         embed = self.render("issue_comment")
         self.assertEqual(
-            "💬 [repo] New comment on pull request #1: A **formatted** title",
+            self.config["icons"]["comment"]
+            + " [repo] New comment on pull request #1: A **formatted** title",
             embed["title"],
         )
         self.assertEqual("A **comment**", embed["description"])
@@ -269,12 +274,12 @@ class MoMMIVisualTests(unittest.TestCase):
             "Commenter", self.render("issue_comment")["author"]["name"]
         )
 
-    def test_description_is_not_cut_at_old_mommi_limit(self):
+    def test_description_is_not_cut_at_short_limit(self):
         self.payload["pull_request"]["body"] = "x" * 501
         self.payload["pull_request"]["reactions"] = {}
         self.assertEqual("x" * 501 + "\n\u200b", self.render()["description"])
 
-    def test_push_matches_mommi(self):
+    def test_push_layout(self):
         self.payload["ref"] = "refs/heads/master"
         self.payload["commits"] = [
             {
@@ -314,7 +319,7 @@ class MoMMIVisualTests(unittest.TestCase):
         self.assertIn("x" * 67 + "...", embed["description"])
         self.assertTrue(embed["description"].endswith("<.....>"))
 
-    def test_discussion_lifecycle_matches_mommi(self):
+    def test_discussion_lifecycle_layout(self):
         self.payload["discussion"] = self.payload.pop("pull_request")
         for action, label, color in (
             ("created", "Created", None),
@@ -335,52 +340,31 @@ class MoMMIVisualTests(unittest.TestCase):
             )
 
     def test_disallowed_avatar_is_not_embedded(self):
-        self.payload["sender"]["avatar_url"] = "http://127.0.0.1/private"
-        self.assertNotIn("icon_url", self.render()["author"])
-
-    def test_large_checks_fit_without_losing_whole_notification(self):
-        self.payload["_discord_checks"] *= 100
-        message = format_event("pull_request", self.payload, self.config)[0]
-        self.assertEqual(2, len(message["embeds"]))
-        self.assertNotIn("_files", message)
-        description = message["embeds"][1]["description"]
-        self.assertEqual(100, description.count("✓ Build"))
-        self.assertEqual(100, description.count("⏳ Tests"))
-        self.config["icons"]["approved"] = "<:gh_approved:1234567890123456789>"
-        message = format_event("pull_request", self.payload, self.config)[0]
-        descriptions = [
-            embed["description"] for embed in message["embeds"][1:]
-        ]
-        self.assertTrue(all(units(value) <= 4096 for value in descriptions))
-        self.assertEqual(100, "".join(descriptions).count("Build"))
-        self.assertTrue(
-            all(len(part["embeds"]) <= 10 for part in split_message(message))
+        self.payload["pull_request"]["user"]["avatar_url"] = (
+            "http://127.0.0.1/private"
         )
+        self.assertNotIn("icon_url", self.render()["author"])
 
     def test_read_only_metadata_and_partial_failure(self):
         github = Mock(root="/repos/owner/repo")
         github.pages.side_effect = [
             [{"content": "+1"}, {"content": "+1"}, {"content": "-1"}],
-            [{"name": "Build", "status": "queued"}],
-            [],
         ]
-        github.json.return_value = {"mergeable": True}
         github.pull_status.return_value = self.payload["_discord_pr_status"]
         enrich_event("pull_request", self.payload, github, self.config, Mock())
         self.assertEqual(
             {"+1": 2, "-1": 1}, self.payload["pull_request"]["reactions"]
         )
-        self.assertTrue(self.payload["pull_request"]["mergeable"])
-        self.assertTrue(
-            all(call.args[0] == "GET" for call in github.json.call_args_list)
+        github.json.assert_not_called()
+        github.pages.assert_called_once_with(
+            "/repos/owner/repo/issues/1/reactions"
         )
-        github.json.side_effect = GitHubError("HTTP 403")
         github.pages.side_effect = GitHubError("HTTP 403")
         saved = copy.deepcopy(self.payload)
         log = Mock()
         enrich_event("pull_request", self.payload, github, self.config, log)
         self.assertEqual(saved, self.payload)
-        self.assertEqual(3, log.call_count)
+        self.assertEqual(1, log.call_count)
 
     def test_complete_markdown_images_and_discord_limits(self):
         screenshot = "https://github.com/user-attachments/assets/example"
@@ -394,7 +378,6 @@ class MoMMIVisualTests(unittest.TestCase):
             embed["image"]["url"]
             for embed in message["embeds"]
             if "image" in embed
-            and not embed["image"]["url"].startswith("attachment:")
         ]
         self.assertEqual([screenshot, second], images)
         visible = "".join(
@@ -440,52 +423,6 @@ class MoMMIVisualTests(unittest.TestCase):
             ["https://raw.githubusercontent.com/owner/repo/main/image.png"],
             images,
         )
-
-    def test_actual_head_merge_checks_and_latest_legacy_status(self):
-        github = Mock(root="/repos/owner/repo")
-        self.config["display"]["show_reactions"] = False
-        github.json.return_value = {
-            "head": {"sha": "a" * 40},
-            "state": "open",
-            "merge_commit_sha": "b" * 40,
-        }
-        github.pages.side_effect = [
-            [{"id": 1, "name": "Lint", "status": "queued"}],
-            [
-                {
-                    "id": 2,
-                    "name": "Lint",
-                    "status": "completed",
-                    "conclusion": "success",
-                },
-                {
-                    "id": 3,
-                    "name": "Server integration",
-                    "status": "in_progress",
-                },
-            ],
-            [
-                {
-                    "context": "External test",
-                    "state": "failure",
-                    "target_url": "",
-                },
-                {
-                    "context": "External test",
-                    "state": "pending",
-                    "target_url": "",
-                },
-            ],
-        ]
-        enrich_event("pull_request", self.payload, github, self.config, Mock())
-        checks = self.payload["_discord_checks"]
-        self.assertEqual(
-            ["Lint", "Server integration", "External test"],
-            [check["name"] for check in checks],
-        )
-        self.assertEqual("success", checks[0]["conclusion"])
-        self.assertEqual("failure", checks[-1]["conclusion"])
-        self.assertIn("b" * 40, github.pages.call_args_list[1].args[0])
 
 
 if __name__ == "__main__":

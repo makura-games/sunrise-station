@@ -13,12 +13,11 @@ max_retry_interval = 3600
 body_length = 3500
 max_commits = 11
 commit_length = 67
-username = "MoMMI"
-avatar_url = "https://raw.githubusercontent.com/PJB3005/MoMMI/1a10f345dbb709dcae46e6495e522d4d7d6dfbbf/Files/MoMMIv2.png"
-show_checks = true
+username = "GitHub"
+avatar_url = "https://avatars.githubusercontent.com/u/9919?v=4"
 show_reactions = true
 
-[mommi]
+[labels]
 new_comment = "New comment on"
 edited_comment = "Edited comment on"
 deleted_comment = "Deleted comment on"
@@ -32,9 +31,6 @@ review_comment = "Review comment"
 edited_review_comment = "Edited review comment"
 deleted_review_comment = "Deleted review comment"
 file = "File"
-checks = "Checks"
-status = "status"
-conflicts = "🚨CONFLICTS🚨"
 upvote = "＋"
 downvote = "−"
 pull_request = "pull request"
@@ -47,15 +43,13 @@ discussion_unanswered = "Unanswered"
 discussion_commented = "Commented"
 
 [icons]
-approved = "✓"
-changes_requested = "📝"
-review = "👁"
-comment = "💬"
-failure = "❌"
-pending = "⏳"
-neutral = "−"
+approved = "<:gh_approved:1547308683753558071>"
+changes_requested = "<:gh_changes_requested:1547308723221823498>"
+review = "<:gh_review:1547308818478800916>"
+comment = "<:gh_comment:1547308750971474061>"
 
 [pr_status]
+conflicts = "Merge conflicts"
 open = "Open"
 closed = "Closed"
 merged = "Merged"
@@ -111,8 +105,6 @@ create = ["*"]
 delete = ["*"]
 release = ["*"]
 public = ["*"]
-check_run = ["completed"]
-check_suite = ["completed"]
 
 [destinations.primary]
 webhook_env = "DISCORD_EVENTS_WEBHOOK"
@@ -268,16 +260,6 @@ label = "Добавлена звезда"
 color = "#6E5494"
 emoji = "🚀"
 label = "Опубликован выпуск"
-
-[styles.success]
-color = "#1F883D"
-emoji = "✅"
-label = "Проверка пройдена"
-
-[styles.failure]
-color = "#CF222E"
-emoji = "❌"
-label = "Проверка не пройдена"
 
 [styles.public]
 color = "#1F883D"

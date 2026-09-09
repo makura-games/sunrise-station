@@ -85,8 +85,7 @@ class GitHub:
         query = (
             "query($owner:String!,$name:String!,$number:Int!){"
             "repository(owner:$owner,name:$name){pullRequest(number:$number){"
-            "state isDraft reviewDecision headRefOid "
-            "author{login avatarUrl url}}}}"
+            "state isDraft reviewDecision mergeable}}}"
         )
         try:
             response = self.session.post(
