@@ -147,6 +147,7 @@ def collect(state: State, config: dict, log: Journal, deadline: float) -> int:
                 raise ValueError("Номер PR не совпадает с данными запуска")
             payload.pop("_discord_checks", None)
             payload.pop("_discord_pr_status", None)
+            payload.pop("_discord_review_state", None)
             if format_event(run["event"], payload, config)[0] is not None:
                 enrich_event(run["event"], payload, github, config, log)
             enqueue(state, key, run["event"], payload, config, log)

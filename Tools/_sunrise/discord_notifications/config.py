@@ -46,29 +46,22 @@ def load_config(path: Path) -> dict:
                 raise ValueError(
                     f"styles.{name}.{field}: слишком длинный текст"
                 )
-    for section in ("mommi", "pr_status", "review_status"):
+    for section in ("mommi", "pr_status", "review_status", "icons"):
         for name, value in config[section].items():
             if not isinstance(value, str) or len(value) > 100:
                 raise ValueError(
                     f"{section}.{name}: требуется короткая строка"
                 )
-    for name, maximum in (("width", 1200), ("font_size", 40)):
-        value = config["check_card"][name]
-        minimum = 320 if name == "width" else 12
-        if type(value) is not int or not minimum <= value <= maximum:
-            raise ValueError(
-                f"check_card.{name}: требуется {minimum}–{maximum}"
-            )
-    for section in [config["check_card"], *config["reviews"].values()]:
+    for section in config["reviews"].values():
         for name, value in section.items():
             if name.endswith("color") and not re.fullmatch(
                 r"#[0-9a-fA-F]{6}", value
             ):
                 raise ValueError(f"{name}: требуется #RRGGBB")
-            if name.endswith("icon") and not re.fullmatch(
-                r"[a-z-]+\.png", value
-            ):
-                raise ValueError(f"{name}: требуется имя PNG из assets")
+            if name == "icon" and value not in config["icons"]:
+                raise ValueError(
+                    "reviews.icon: требуется имя из раздела icons"
+                )
     for name in ("show_checks", "show_reactions"):
         if type(config["display"][name]) is not bool:
             raise ValueError(f"display.{name}: требуется true или false")

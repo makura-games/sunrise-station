@@ -20,6 +20,17 @@ def enrich_event(event: str, payload: dict, github, config: dict, log) -> None:
                 f"Статус PR #{number} недоступен: {error}. "
                 "Не подменяем его результатом одного ревью."
             )
+    if event == "pull_request_review_comment":
+        review_id = payload.get("comment", {}).get("pull_request_review_id")
+        if type(review_id) is int and review_id > 0:
+            try:
+                review = github.json(
+                    "GET", f"{github.root}/pulls/{number}/reviews/{review_id}"
+                )
+                payload["_discord_review_state"] = str(review["state"]).lower()
+            except GitHubError as error:
+                payload.pop("_discord_review_state", None)
+                log(f"Статус ревью #{review_id} недоступен: {error}.")
     if event not in {"pull_request_target", "pull_request", "issues"}:
         return
     if config["display"]["show_reactions"]:

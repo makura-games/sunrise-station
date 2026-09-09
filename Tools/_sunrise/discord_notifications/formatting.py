@@ -5,7 +5,6 @@ from fnmatch import fnmatchcase
 from urllib.parse import urlsplit
 
 from .content import body_base, prepare_body, split_body
-from .visuals import check_image, encode_image, icon_image
 
 
 def truncate(value: str, limit: int) -> str:
@@ -125,6 +124,39 @@ def status_footer(payload: dict, subject: dict, config: dict) -> dict:
     return {"text": f"PR: {pr_label} · Review: {review_label}"}
 
 
+def check_cards(checks: list[dict], url: str, config: dict) -> list[dict]:
+    rows = []
+    for check in checks:
+        status = check.get("status")
+        if status == "completed":
+            status = check.get("conclusion")
+        icon = "neutral"
+        if status == "success":
+            icon = "approved"
+        elif status in {
+            "failure",
+            "error",
+            "timed_out",
+            "action_required",
+            "stale",
+        }:
+            icon = "failure"
+        elif status in {
+            "queued",
+            "in_progress",
+            "pending",
+            "waiting",
+            "requested",
+        }:
+            icon = "pending"
+        name = text(plain(check.get("name")).replace("\n", " "), 400)
+        rows.append(f"{config['icons'][icon]} {name}")
+    return [
+        {"title": config["mommi"]["checks"], "url": url, "description": chunk}
+        for chunk in split_body("\n".join(rows), 4096)
+    ]
+
+
 def render_embed(
     event: str,
     action: str,
@@ -147,11 +179,7 @@ def render_embed(
         ),
         "description": plain(body).strip(),
     }
-    displayed_author = (
-        subject.get("user")
-        if event in {"pull_request", "pull_request_review"}
-        else sender
-    )
+    displayed_author = comment.get("user") or sender
     if displayed_author and displayed_author.get("login"):
         embed["author"] = author(displayed_author)
     set_color(embed, style)
@@ -171,22 +199,37 @@ def render_embed(
     elif event == "pull_request_review":
         style = config["reviews"].get(state, config["reviews"]["commented"])
         set_color(embed, style)
-        embed["title"] = f"{style['label']} · {title}"
-        reviewer = author(comment.get("user") or sender)
-        reviewer_name = text(reviewer["name"], 100)
-        if reviewer.get("url"):
-            reviewer_name = f"[{reviewer_name}]({reviewer['url']})"
-        embed["fields"] = [
-            {
-                "name": config["mommi"]["reviewer"],
-                "value": reviewer_name,
-                "inline": False,
-            }
-        ]
-        embed["thumbnail"] = {"url": "attachment://review.png"}
+        embed["title"] = (
+            f"{config['icons'][style['icon']]} {style['label']} · {title}"
+        ).strip()
+    elif event == "pull_request_review_comment":
+        set_color(embed, config["styles"]["review_comment"])
+        review_state = payload.get("_discord_review_state")
+        review_label = (
+            config["reviews"]
+            .get(review_state, {})
+            .get("label", config["review_status"]["unknown"])
+        )
+        prefix = config["mommi"]["review_comment"]
+        if action in {"edited", "deleted"}:
+            prefix = config["mommi"][f"{action}_review_comment"]
+        embed["title"] = (
+            f"{config['icons']['review']} {prefix} · {review_label} "
+            f"· #{number} {title}"
+        ).strip()
+        path = plain(comment.get("path"))
+        line = comment.get("line") or comment.get("original_line")
+        if path:
+            location = f"{path}:{line}" if line else path
+            embed["fields"] = [
+                {
+                    "name": config["mommi"]["file"],
+                    "value": text(location, 1000),
+                    "inline": False,
+                }
+            ]
     elif event in {
         "issue_comment",
-        "pull_request_review_comment",
         "commit_comment",
     }:
         prefix = config["mommi"]["new_comment"]
@@ -206,7 +249,10 @@ def render_embed(
                 else "issue"
             )
             target = f"{config['mommi'][kind]} #{number}: {title}"
-        embed["title"] = f"[{repository.split('/')[-1]}] {prefix} {target}"
+        embed["title"] = (
+            f"{config['icons']['comment']} [{repository.split('/')[-1]}] "
+            f"{prefix} {target}"
+        ).strip()
         embed.pop("color", None)
         set_color(embed, config["styles"]["commented"])
     elif event in {"discussion", "discussion_comment"}:
@@ -297,6 +343,16 @@ def format_event(
             None,
             f"Служебная активность {text(actor.get('login'), 100)} исключена",
         )
+    if (
+        event == "pull_request_review"
+        and action != "dismissed"
+        and str(review.get("state", "")).lower() == "commented"
+        and not plain(review.get("body")).strip()
+    ):
+        return None, (
+            "Общий текст ревью пуст. Замечания к строкам кода "
+            "обрабатываются отдельными событиями pull_request_review_comment"
+        )
     labels = {item["name"].casefold() for item in subject.get("labels", [])}
     if labels & {
         name.casefold() for name in config["filters"]["ignored_labels"]
@@ -323,6 +379,8 @@ def format_event(
         state = "issue_closed"
     elif event == "pull_request_review" and action != "dismissed":
         state = review.get("state", "commented").lower()
+    elif event == "pull_request_review_comment":
+        state = "review_comment"
     elif event.endswith("comment") and action == "created":
         state = "commented"
     elif event in {"check_run", "check_suite"}:
@@ -397,30 +455,20 @@ def format_event(
             embeds.append({"image": {"url": address}})
     if fields:
         embeds[0]["fields"] = fields
-    files = {}
     checks = payload.get("_discord_checks", [])
     if event == "pull_request" and config["display"]["show_checks"] and checks:
-        files["checks.png"] = check_image(checks, config)
-        embeds.append(
-            {
-                "title": config["mommi"]["checks"],
-                "url": safe_url(subject.get("html_url"), repository)
-                + "/checks",
-                "image": {"url": "attachment://checks.png"},
-            }
-        )
-    if event == "pull_request_review":
-        style = config["reviews"].get(state, config["reviews"]["commented"])
-        files["review.png"] = encode_image(
-            icon_image(style["icon"], style["color"], 64)
+        embeds.extend(
+            check_cards(
+                checks,
+                safe_url(subject.get("html_url"), repository) + "/checks",
+                config,
+            )
         )
     message = {
         "username": truncate(plain(config["display"]["username"]), 80),
         "embeds": embeds,
         "allowed_mentions": {"parse": []},
     }
-    if files:
-        message["_files"] = files
     icon = avatar_url(config["display"]["avatar_url"])
     if icon:
         message["avatar_url"] = icon

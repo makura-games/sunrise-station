@@ -28,7 +28,10 @@ push_to = "to"
 force_push = "[FORCE PUSHED]"
 ellipsis = "..."
 overflow = "<.....>"
-reviewer = "Reviewer"
+review_comment = "Review comment"
+edited_review_comment = "Edited review comment"
+deleted_review_comment = "Deleted review comment"
+file = "File"
 checks = "Checks"
 status = "status"
 conflicts = "🚨CONFLICTS🚨"
@@ -43,20 +46,14 @@ discussion_answered = "Answered"
 discussion_unanswered = "Unanswered"
 discussion_commented = "Commented"
 
-[check_card]
-width = 640
-font_size = 20
-font = ""
-background = "#00000000"
-text_color = "#C9D1D9"
-success_icon = "check.png"
-success_color = "#6CC644"
-failure_icon = "x.png"
-failure_color = "#FF4444"
-pending_icon = "hourglass.png"
-pending_color = "#D29922"
-neutral_icon = "dash.png"
-neutral_color = "#8B949E"
+[icons]
+approved = "✓"
+changes_requested = "📝"
+review = "👁"
+comment = "💬"
+failure = "❌"
+pending = "⏳"
+neutral = "−"
 
 [pr_status]
 open = "Open"
@@ -75,22 +72,22 @@ unknown = "Unavailable"
 [reviews.approved]
 label = "Approved"
 color = "#6CC644"
-icon = "check.png"
+icon = "approved"
 
 [reviews.changes_requested]
 label = "Changes requested"
 color = "#FF4444"
-icon = "file-diff.png"
+icon = "changes_requested"
 
 [reviews.commented]
 label = "Comment"
 color = "#8B949E"
-icon = "comment.png"
+icon = "review"
 
 [reviews.dismissed]
 label = "Dismissed"
 color = "#8B949E"
-icon = "comment.png"
+icon = "review"
 
 [filters]
 ignore_bots = true
@@ -176,6 +173,11 @@ label = "Запрошены исправления"
 color = ""
 emoji = ""
 label = "Комментарий"
+
+[styles.review_comment]
+color = "#FF4444"
+emoji = ""
+label = "Комментарий к ревью"
 
 [styles.dismissed]
 color = "#6E7781"

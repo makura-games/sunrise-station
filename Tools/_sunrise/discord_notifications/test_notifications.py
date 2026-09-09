@@ -1,5 +1,6 @@
 """Локальные проверки не обращаются к настоящему Discord или GitHub."""
 
+import base64
 import copy
 import io
 import json
@@ -211,13 +212,17 @@ class NotificationTests(unittest.TestCase):
         with self.assertRaises(GitHubError):
             github.pull_status(12)
 
-    def test_serialized_icons_use_multipart_without_leaking_internal_data(
+    def test_old_queued_pngs_still_use_multipart_without_internal_data(
         self,
     ):
-        payload = event_payload()
-        payload["action"] = "submitted"
-        payload["review"] = {"state": "approved"}
-        message = format_event("pull_request_review", payload, self.config)[0]
+        message = {
+            "embeds": [{"image": {"url": "attachment://review.png"}}],
+            "_files": {
+                "review.png": base64.b64encode(
+                    (CONFIG.parent / "assets/check.png").read_bytes()
+                ).decode()
+            },
+        }
         with patch.object(
             transport.requests,
             "post",

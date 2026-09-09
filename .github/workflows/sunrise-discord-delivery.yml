@@ -38,7 +38,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Установить библиотеку HTTP
-        run: python -m pip install --disable-pip-version-check requests==2.32.4 Pillow==12.3.0
+        run: python -m pip install --disable-pip-version-check requests==2.32.4
       - name: Доставить сообщения и показать понятный отчёт
         env:
           PYTHONPATH: Tools/_sunrise
