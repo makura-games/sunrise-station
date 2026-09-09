@@ -4,7 +4,7 @@ import re
 from fnmatch import fnmatchcase
 from urllib.parse import urlsplit
 
-from .content import body_base, prepare_body, split_body
+from .content import body_base, prepare_body, units
 
 
 def truncate(value: str, limit: int) -> str:
@@ -81,10 +81,10 @@ def author(account: dict) -> dict:
     return result
 
 
-def set_color(embed: dict, style: dict) -> None:
-    embed.pop("color", None)
+def set_color(card: dict, style: dict) -> None:
+    card.pop("color", None)
     if style["color"]:
-        embed["color"] = int(style["color"].removeprefix("#"), 16)
+        card["color"] = int(style["color"].removeprefix("#"), 16)
 
 
 def status_footer(payload: dict, subject: dict, config: dict) -> dict:
@@ -116,7 +116,7 @@ def status_footer(payload: dict, subject: dict, config: dict) -> dict:
     return {"text": footer}
 
 
-def render_embed(
+def render_card(
     event: str,
     action: str,
     payload: dict,
@@ -131,7 +131,7 @@ def render_embed(
     style = config["styles"].get(state, config["styles"]["default"])
     comment = payload.get("comment") or payload.get("review") or {}
     body = comment.get("body") if comment else subject.get("body")
-    embed = {
+    card = {
         "title": f"{style['emoji']} {title}".strip(),
         "url": safe_url(
             comment.get("html_url") or subject.get("html_url"), repository
@@ -144,8 +144,8 @@ def render_embed(
         else comment.get("user") or sender
     )
     if displayed_author and displayed_author.get("login"):
-        embed["author"] = author(displayed_author)
-    set_color(embed, style)
+        card["author"] = author(displayed_author)
+    set_color(card, style)
     if event in {"pull_request", "issues"}:
         votes = []
         if config["display"]["show_reactions"]:
@@ -154,15 +154,15 @@ def render_embed(
                 count = reactions.get(key, 0)
                 if type(count) is int and count > 0:
                     votes.append(f"{config['labels'][name]} {count}")
-        embed["description"] += "\n" + "   ".join(votes) + "\u200b"
+        card["description"] += "\n" + "   ".join(votes) + "\u200b"
     elif event == "pull_request_review":
         style = config["reviews"].get(state, config["reviews"]["commented"])
-        set_color(embed, style)
-        embed["title"] = (
+        set_color(card, style)
+        card["title"] = (
             f"{config['icons'][style['icon']]} {style['label']} · {title}"
         ).strip()
     elif event == "pull_request_review_comment":
-        set_color(embed, config["styles"]["review_comment"])
+        set_color(card, config["styles"]["review_comment"])
         review_state = payload.get("_discord_review_state")
         review_label = (
             config["reviews"]
@@ -172,7 +172,7 @@ def render_embed(
         prefix = config["labels"]["review_comment"]
         if action in {"edited", "deleted"}:
             prefix = config["labels"][f"{action}_review_comment"]
-        embed["title"] = (
+        card["title"] = (
             f"{config['icons']['review']} {prefix} · {review_label} "
             f"· #{number} {title}"
         ).strip()
@@ -180,7 +180,7 @@ def render_embed(
         line = comment.get("line") or comment.get("original_line")
         if path:
             location = f"{path}:{line}" if line else path
-            embed["fields"] = [
+            card["fields"] = [
                 {
                     "name": config["labels"]["file"],
                     "value": text(location, 1000),
@@ -204,40 +204,40 @@ def render_embed(
                 else "issue"
             )
             target = f"{config['labels'][kind]} #{number}: {title}"
-        embed["title"] = (
+        card["title"] = (
             f"{config['icons']['comment']} [{repository.split('/')[-1]}] "
             f"{prefix} {target}"
         ).strip()
-        embed.pop("color", None)
-        set_color(embed, config["styles"]["commented"])
+        card.pop("color", None)
+        set_color(card, config["styles"]["commented"])
     elif event in {"discussion", "discussion_comment"}:
         action_label = config["labels"].get(f"discussion_{action}", action)
         if event == "discussion_comment":
             action_label = config["labels"]["discussion_commented"]
         else:
-            embed["description"] += "\n"
+            card["description"] += "\n"
             if action != "created":
-                embed.pop("author", None)
-        embed["title"] = (
+                card.pop("author", None)
+        card["title"] = (
             f"{config['labels']['discussion']} {action_label}: {title}"
         )
         if action == "created" or event == "discussion_comment":
-            embed.pop("color", None)
+            card.pop("color", None)
     elif event == "push":
         commits = payload["commits"]
         count = len(commits)
         noun = "commit_singular" if count == 1 else "commit_plural"
         ref = plain(payload.get("ref"))
-        embed["title"] = (
+        card["title"] = (
             f"**{count}** {config['labels'][noun]} "
             f"{config['labels']['push_to']} **{ref}**"
         )
-        embed["url"] = safe_url(payload.get("compare"), repository)
+        card["url"] = safe_url(payload.get("compare"), repository)
         if payload.get("forced"):
-            embed["title"] = (
-                config["labels"]["force_push"] + " " + embed["title"]
+            card["title"] = (
+                config["labels"]["force_push"] + " " + card["title"]
             )
-            set_color(embed, config["styles"]["force_push"])
+            set_color(card, config["styles"]["force_push"])
         lines = []
         limit = config["display"]["commit_length"]
         for commit in commits[: config["display"]["max_commits"]]:
@@ -249,21 +249,19 @@ def render_embed(
             lines.append(f"[`{sha}`]({url}) {message}\n")
         if count >= config["display"]["max_commits"]:
             lines.append(config["labels"]["overflow"])
-        embed["description"] = "".join(lines)
+        card["description"] = "".join(lines)
     elif event in {"create", "delete"}:
-        embed["title"] = (
-            f"{style['emoji']} {plain(payload.get('ref'))}".strip()
-        )
+        card["title"] = f"{style['emoji']} {plain(payload.get('ref'))}".strip()
     elif event == "fork":
         fork = payload.get("forkee", {}).get("full_name", title)
-        embed["title"] = f"{style['emoji']} {fork}"
-    embed["title"] = truncate(embed["title"], 256)
+        card["title"] = f"{style['emoji']} {fork}"
+    card["title"] = truncate(card["title"], 256)
     if (
         event == "push"
-        and len(embed["description"].encode("utf-16-le")) // 2 > 3500
+        and len(card["description"].encode("utf-16-le")) // 2 > 3500
     ):
-        embed["description"] = truncate(embed["description"], 3500)
-    return embed
+        card["description"] = truncate(card["description"], 3500)
+    return card
 
 
 def format_event(
@@ -379,7 +377,7 @@ def format_event(
     summary = (
         f"{event}/{action} · {repository} · {prefix}{title} · {style['label']}"
     )
-    embed = render_embed(event, action, payload, subject, state, config)
+    card = render_card(event, action, payload, subject, state, config)
     is_pull = event in {
         "pull_request",
         "pull_request_review",
@@ -387,30 +385,77 @@ def format_event(
         "issue_comment",
     } and bool(pull or issue.get("pull_request"))
     if is_pull:
-        embed["footer"] = status_footer(payload, subject, config)
-    body, images = prepare_body(
-        embed["description"], body_base(repository, subject)
+        card["footer"] = status_footer(payload, subject, config)
+    heading = re.sub(
+        r"(<a?:[A-Za-z0-9_]+:\d+>)|([\\`*_[\]()~|])",
+        lambda match: match[1] or "\\" + match[2],
+        card["title"],
     )
-    chunks = split_body(body, config["display"]["body_length"])
-    embeds = []
-    fields = embed.pop("fields", [])
-    for index, chunk in enumerate(chunks):
-        part = {**embed, "description": chunk}
-        if index:
-            part["title"] = truncate(
-                f"{embed['title']} ({index + 1}/{len(chunks)})", 256
-            )
-        embeds.append(part)
-    for index, address in enumerate(images):
-        if index == 0:
-            embeds[-1]["image"] = {"url": address}
+    header = []
+    account = card.get("author", {})
+    if account:
+        name = text(account["name"], 256)
+        profile = account.get("url")
+        header.append(
+            {
+                "type": 10,
+                "content": f"-# [{name}](<{profile}>)"
+                if profile
+                else f"-# {name}",
+            }
+        )
+    header.append(
+        {
+            "type": 10,
+            "content": f"**[{heading}](<{card['url']}>)**",
+        }
+    )
+    if account.get("icon_url"):
+        header = [
+            {
+                "type": 9,
+                "components": header,
+                "accessory": {
+                    "type": 11,
+                    "media": {"url": account["icon_url"]},
+                },
+            }
+        ]
+    components = [
+        *header,
+        *prepare_body(
+            card["description"],
+            body_base(repository, subject),
+            config["display"]["body_length"],
+        ),
+    ]
+    for field in card.get("fields", []):
+        components.append(
+            {
+                "type": 10,
+                "content": f"**{field['name']}**\n{field['value']}",
+            }
+        )
+    if card.get("footer"):
+        footer = "-# " + card["footer"]["text"]
+        tail = components[-1]
+        if (
+            tail["type"] == 10
+            and units(tail["content"]) + units(footer) + 2 <= 4000
+        ):
+            tail["content"] += "\n\n" + footer
         else:
-            embeds.append({"image": {"url": address}})
-    if fields:
-        embeds[0]["fields"] = fields
+            components.append({"type": 10, "content": footer})
     message = {
         "username": truncate(plain(config["display"]["username"]), 80),
-        "embeds": embeds,
+        "flags": 1 << 15,
+        "components": [
+            {
+                "type": 17,
+                "accent_color": card.get("color"),
+                "components": components,
+            }
+        ],
         "allowed_mentions": {"parse": []},
     }
     icon = avatar_url(config["display"]["avatar_url"])

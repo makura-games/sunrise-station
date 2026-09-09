@@ -9,7 +9,7 @@ from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from .config import load_config
-from .content import split_message
+from .content import split_message, walk_components
 from .formatting import format_event
 from .github import GitHub, GitHubError, State
 from .metadata import enrich_event
@@ -70,6 +70,8 @@ def enqueue(
     payload: dict,
     config: dict,
     log: Journal,
+    *,
+    created_at: str | None = None,
 ) -> None:
     if (
         not isinstance(payload, dict)
@@ -94,7 +96,7 @@ def enqueue(
         log(f"Пропущено: для {explanation} не включён ни один получатель.")
         return
     parts = split_message(message)
-    created_at = utc_now()
+    created_at = created_at or utc_now()
     for index, part in enumerate(parts):
         part_key = key if len(parts) == 1 else f"{key}:part{index + 1:05d}"
         state.data["pending"].setdefault(
@@ -107,6 +109,7 @@ def enqueue(
                 "targets": targets,
                 "sent": {},
                 "created_at": created_at,
+                "previous": f"{key}:part{index:05d}" if index else None,
             },
         )
     log(
@@ -172,9 +175,15 @@ def collect(state: State, config: dict, log: Journal, deadline: float) -> int:
             payload.pop("_discord_review_state", None)
             if format_event(run["event"], payload, config)[0] is not None:
                 enrich_event(run["event"], payload, github, config, log)
-            enqueue(state, key, run["event"], payload, config, log)
-            if key in state.data["pending"]:
-                state.data["pending"][key]["created_at"] = run["created_at"]
+            enqueue(
+                state,
+                key,
+                run["event"],
+                payload,
+                config,
+                log,
+                created_at=run["created_at"],
+            )
         except (GitHubError, ValueError, KeyError, TypeError) as error:
             failures.append(run["created_at"])
             errors += 1
@@ -280,6 +289,10 @@ def deliver_pending(
         for name in item["targets"]:
             if name in item["sent"]:
                 continue
+            previous = state.data["pending"].get(item.get("previous"))
+            if previous and name not in previous["sent"]:
+                log(f"Часть {key} для {name} ждёт доставки предыдущей части.")
+                continue
             retry = item.setdefault("retry", {}).get(name, {})
             if not force_retry and retry.get("after", 0) > time.time():
                 log(
@@ -355,7 +368,17 @@ def deliver_pending(
                 f"Успешно отправлено в {name}: {item['explanation']}. "
                 f"ID сообщения: {receipt.get('id', 'не предоставлен')}."
             )
-            for embed in item["message"]["embeds"]:
+            for component in walk_components(
+                item["message"].get("components", [])
+            ):
+                if component["type"] == 10:
+                    log(f"Текст: {component['content']}")
+                elif component["type"] == 12:
+                    for media in component["items"]:
+                        log(f"Изображение: {media['media']['url']}")
+                elif component["type"] == 11:
+                    log(f"Аватар автора: {component['media']['url']}")
+            for embed in item["message"].get("embeds", []):
                 author_name = embed.get("author", {}).get("name", "")
                 heading = embed.get("title") or embed.get("author", {}).get(
                     "name", "Изображение"

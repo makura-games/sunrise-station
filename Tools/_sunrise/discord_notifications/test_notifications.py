@@ -15,11 +15,20 @@ from unittest.mock import Mock, patch
 import requests
 from discord_notifications import deliver, transport
 from discord_notifications.config import load_config
+from discord_notifications.content import split_message, units, walk_components
 from discord_notifications.formatting import format_event
 from discord_notifications.github import GitHub, GitHubError, State
 
 ADDRESS = "https://discord.com/api/webhooks/123/test-token"
 CONFIG = Path(__file__).with_name("config.toml")
+
+
+def message_text(message):
+    return "\n".join(
+        node["content"]
+        for node in walk_components(message["components"])
+        if node["type"] == 10
+    )
 
 
 def event_payload() -> dict:
@@ -91,7 +100,7 @@ class NotificationTests(unittest.TestCase):
                         ][style]["color"][1:],
                         16,
                     ),
-                    message["embeds"][0]["color"],
+                    message["components"][0]["accent_color"],
                 )
 
     def test_all_previous_visible_event_categories(self):
@@ -111,7 +120,8 @@ class NotificationTests(unittest.TestCase):
                 payload = event_payload()
                 payload["action"] = "created"
                 message, _ = format_event(event, payload, self.config)
-                self.assertIn("embeds", message)
+                self.assertIn("components", message)
+                self.assertNotIn("embeds", message)
 
     def test_bots_and_machine_users_but_not_human_pr_merges(self):
         for actor in (
@@ -136,20 +146,17 @@ class NotificationTests(unittest.TestCase):
             "<!-- private template -->@everyone " + "😀" * 10000
         )
         message, _ = format_event("pull_request", payload, self.config)
-        embed = message["embeds"][0]
-        self.assertLessEqual(len(embed["title"].encode("utf-16-le")) // 2, 256)
-        self.assertLessEqual(
-            len(embed["description"].encode("utf-16-le")) // 2, 4096
-        )
-        self.assertNotIn("private template", embed["description"])
-        self.assertIn("@everyone", embed["description"])
+        for part in split_message(message):
+            self.assertLessEqual(units(message_text(part)), 4000)
+        self.assertNotIn("private template", message_text(message))
+        self.assertIn("@everyone", message_text(message))
         self.assertEqual({"parse": []}, message["allowed_mentions"])
 
     def test_whitespace_cannot_bypass_discord_size_limits(self):
         payload = event_payload()
         payload["pull_request"]["body"] = " " * 20000 + "hello" + " " * 20000
         message, _ = format_event("pull_request", payload, self.config)
-        self.assertLess(len(message["embeds"][0]["description"]), 1000)
+        self.assertLess(len(message_text(message)), 1000)
 
     def test_large_push_and_per_commit_filter(self):
         payload = event_payload()
@@ -163,10 +170,10 @@ class NotificationTests(unittest.TestCase):
             for index in range(598)
         ] + [{"message": "Hidden", "author": {"username": "Sunrise-Bot"}}]
         message, _ = format_event("push", payload, self.config)
-        description = message["embeds"][0]["description"]
+        description = message_text(message)
         self.assertNotIn("Hidden", description)
         self.assertIn("full body", description)
-        self.assertIn("598", message["embeds"][0]["title"])
+        self.assertIn("598", message_text(message))
         self.assertNotIn("Изменение 11", description)
 
     def test_transport_retries_network_server_and_rate_limit(self):
@@ -401,6 +408,154 @@ class NotificationTests(unittest.TestCase):
             self.assertEqual(count - 1, send.call_count)
             self.assertFalse(state.data["pending"])
 
+    def test_failed_first_part_blocks_only_its_own_following_parts(self):
+        state = self.new_state()
+        payload = event_payload()
+        payload["pull_request"]["body"] = "Длинный текст\n" * 1000
+        deliver.enqueue(
+            state,
+            "run:1",
+            "pull_request",
+            payload,
+            self.config,
+            Mock(),
+        )
+        count = len(state.data["pending"])
+        self.assertGreater(count, 1)
+        deliver.enqueue(
+            state,
+            "run:2",
+            "pull_request",
+            event_payload(),
+            self.config,
+            Mock(),
+        )
+        with (
+            patch.dict(os.environ, {"DISCORD_EVENTS_WEBHOOK": ADDRESS}),
+            patch.object(
+                deliver,
+                "send_message",
+                side_effect=[
+                    transport.DiscordError(503, "temporary"),
+                    {"id": "other"},
+                ],
+            ) as send,
+        ):
+            deliver.deliver_pending(
+                state,
+                self.config,
+                Mock(),
+                time.monotonic() + 100,
+            )
+        self.assertEqual(2, send.call_count)
+        self.assertNotIn("run:2", state.data["pending"])
+        self.assertEqual(count, len(state.data["pending"]))
+        state.data = json.loads(json.dumps(state.data))
+        with (
+            patch.dict(os.environ, {"DISCORD_EVENTS_WEBHOOK": ADDRESS}),
+            patch.object(
+                deliver, "send_message", return_value={"id": "ok"}
+            ) as send,
+        ):
+            deliver.deliver_pending(
+                state,
+                self.config,
+                Mock(),
+                time.monotonic() + 100,
+            )
+            send.assert_not_called()
+            deliver.deliver_pending(
+                state,
+                self.config,
+                Mock(),
+                time.monotonic() + 100,
+                force_retry=True,
+            )
+        self.assertEqual(count, send.call_count)
+        self.assertFalse(state.data["pending"])
+
+    def test_order_is_independent_for_each_destination(self):
+        state = self.new_state()
+        secondary = ADDRESS.replace("/123/", "/456/")
+        payload = event_payload()
+        payload["pull_request"]["body"] = "Длинный текст\n" * 1000
+        environment = {
+            "DISCORD_EVENTS_WEBHOOK": ADDRESS,
+            "DISCORD_EVENTS_WEBHOOK_SECONDARY": secondary,
+        }
+
+        def send(address, message, **options):
+            if address == secondary:
+                raise transport.DiscordError(503, "temporary")
+            return {"id": "primary-ok"}
+
+        with patch.dict(os.environ, environment):
+            deliver.enqueue(
+                state,
+                "run:1",
+                "pull_request",
+                payload,
+                self.config,
+                Mock(),
+            )
+            count = len(state.data["pending"])
+            with patch.object(
+                deliver, "send_message", side_effect=send
+            ) as post:
+                deliver.deliver_pending(
+                    state,
+                    self.config,
+                    Mock(),
+                    time.monotonic() + 100,
+                )
+            self.assertEqual(count + 1, post.call_count)
+            self.assertTrue(
+                all(
+                    list(item["sent"]) == ["primary"]
+                    for item in state.data["pending"].values()
+                )
+            )
+            with patch.object(
+                deliver,
+                "send_message",
+                return_value={"id": "secondary-ok"},
+            ) as post:
+                deliver.deliver_pending(
+                    state,
+                    self.config,
+                    Mock(),
+                    time.monotonic() + 100,
+                    force_retry=True,
+                )
+            self.assertEqual(count, post.call_count)
+            self.assertTrue(
+                all(call.args[0] == secondary for call in post.call_args_list)
+            )
+        self.assertFalse(state.data["pending"])
+
+    def test_legacy_queued_embed_still_delivers_and_logs(self):
+        state = self.new_state()
+        state.data["pending"]["legacy"] = {
+            "message": {"embeds": [{"title": "Старая карточка"}]},
+            "explanation": "Старый формат",
+            "created_at": "2026-01-01",
+            "targets": ["primary"],
+            "sent": {},
+        }
+        log = Mock()
+        with (
+            patch.dict(os.environ, {"DISCORD_EVENTS_WEBHOOK": ADDRESS}),
+            patch.object(deliver, "send_message", return_value={"id": "ok"}),
+        ):
+            deliver.deliver_pending(
+                state,
+                self.config,
+                log,
+                time.monotonic() + 100,
+            )
+        self.assertFalse(state.data["pending"])
+        self.assertIn("Старая карточка", str(log.call_args_list))
+
     def test_already_confirmed_destination_is_not_sent_again(self):
         state = self.new_state()
         deliver.enqueue(
@@ -607,8 +762,8 @@ class NotificationTests(unittest.TestCase):
             {"author": {"username": "Human"}, "message": "human"},
         ]
         message = format_event("push", payload, self.config)[0]
-        self.assertNotIn("bot", message["embeds"][0]["description"])
-        self.assertIn("human", message["embeds"][0]["description"])
+        self.assertNotIn("bot", message_text(message))
+        self.assertIn("human", message_text(message))
 
     def test_thousand_messages_resume_in_bounded_batches(self):
         state = self.new_state()
@@ -860,7 +1015,7 @@ class NotificationTests(unittest.TestCase):
     def test_custom_color_and_event_filter(self):
         self.config["styles"]["opened"]["color"] = "#123456"
         message, _ = format_event("pull_request", event_payload(), self.config)
-        self.assertEqual(0x123456, message["embeds"][0]["color"])
+        self.assertEqual(0x123456, message["components"][0]["accent_color"])
         self.config["events"]["pull_request"] = []
         self.assertIsNone(
             format_event("pull_request", event_payload(), self.config)[0]
