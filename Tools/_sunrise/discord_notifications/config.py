@@ -1,9 +1,8 @@
 """Загрузка проверяемых пользовательских правил TOML."""
 
 import re
-from pathlib import Path
-
 import tomllib
+from pathlib import Path
 
 
 def load_config(path: Path) -> dict:
@@ -16,6 +15,7 @@ def load_config(path: Path) -> dict:
         "run_timeout": (1, 600),
         "bootstrap_hours": (1, 2160),
         "max_messages_per_run": (1, 200),
+        "max_pending_messages": (1, 10000),
         "retry_interval": (1, 3600),
         "max_retry_interval": (1, 86400),
     }
@@ -64,7 +64,11 @@ def load_config(path: Path) -> dict:
                 )
     if type(config["display"]["show_reactions"]) is not bool:
         raise ValueError("display.show_reactions: требуется true или false")
+    if type(config["filters"]["ignore_bots"]) is not bool:
+        raise ValueError("filters.ignore_bots: требуется true или false")
     for name, destination in config["destinations"].items():
+        if type(destination["required"]) is not bool:
+            raise ValueError(f"destinations.{name}.required: требуется bool")
         if not re.fullmatch(r"[A-Z][A-Z0-9_]+", destination["webhook_env"]):
             raise ValueError(f"destinations.{name}: неверное имя секрета")
     lists = [*config["events"].values()]

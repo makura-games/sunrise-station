@@ -31,7 +31,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from discord_notifications.transport import (
     DiscordPublishTimeoutError,
     UnexpectedDiscordStatusError,
-    retry_after,
     send_message,
 )
 
@@ -40,7 +39,6 @@ DEBUG_CHANGELOG_FILE_OLD = Path("Resources/Changelog/Old.yml")
 GITHUB_API_URL    = os.environ.get("GITHUB_API_URL", "https://api.github.com")
 HTTP_REQUEST_TIMEOUT = 30
 DISCORD_RETRY_LIMIT = 5
-DISCORD_DEFAULT_RETRY_AFTER = 1
 DISCORD_PUBLISH_TIMEOUT = 14 * 60
 DISCORD_COMPONENTS_V2_FLAG = 1 << 15
 MEDIA_MAX_SIZE = 10 * 1024 * 1024
@@ -693,24 +691,6 @@ def diff_changelog(
         for entry in current_entries
         if changelog_entry_identity(entry) not in old_identities
     )
-
-
-def get_discord_body(content: str):
-    return {
-        "content": content,
-        # Запрещаем любые упоминания.
-        "allowed_mentions": {"parse": []},
-        # Флаг SUPPRESS_EMBEDS.
-        "flags": 1 << 2,
-    }
-
-
-def send_discord(content: str):
-    _send_discord_payload(get_discord_body(content))
-
-
-def get_retry_after(response: requests.Response) -> int | float:
-    return retry_after(response, DISCORD_DEFAULT_RETRY_AFTER)
 
 
 def _send_discord_payload(

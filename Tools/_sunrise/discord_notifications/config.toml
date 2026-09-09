@@ -6,6 +6,7 @@ message_timeout = 180
 run_timeout = 480
 bootstrap_hours = 24
 max_messages_per_run = 40
+max_pending_messages = 1000
 retry_interval = 300
 max_retry_interval = 3600
 

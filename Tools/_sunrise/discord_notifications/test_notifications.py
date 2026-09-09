@@ -5,6 +5,7 @@ import copy
 import io
 import json
 import os
+import tempfile
 import time
 import unittest
 from contextlib import redirect_stdout
@@ -15,7 +16,7 @@ import requests
 from discord_notifications import deliver, transport
 from discord_notifications.config import load_config
 from discord_notifications.formatting import format_event
-from discord_notifications.github import GitHub, GitHubError
+from discord_notifications.github import GitHub, GitHubError, State
 
 ADDRESS = "https://discord.com/api/webhooks/123/test-token"
 CONFIG = Path(__file__).with_name("config.toml")
@@ -235,13 +236,15 @@ class NotificationTests(unittest.TestCase):
         self.assertTrue(request["files"][0][1][1].startswith(b"\x89PNG"))
 
     def test_permanent_error_does_not_retry_and_redacts_response(self):
-        with patch.object(
-            transport.requests,
-            "post",
-            return_value=response(404, {"secret": ADDRESS}),
-        ) as post:
-            with self.assertRaises(transport.DiscordError) as raised:
-                transport.send_message(ADDRESS, {"content": "Hello"})
+        with (
+            patch.object(
+                transport.requests,
+                "post",
+                return_value=response(404, {"secret": ADDRESS}),
+            ) as post,
+            self.assertRaises(transport.DiscordError) as raised,
+        ):
+            transport.send_message(ADDRESS, {"content": "Hello"})
         self.assertEqual(1, post.call_count)
         self.assertNotIn("test-token", str(raised.exception))
 
@@ -257,14 +260,14 @@ class NotificationTests(unittest.TestCase):
                 return_value=response(429, {"retry_after": 1000}),
             ),
             patch.object(transport.time, "sleep") as sleep,
+            self.assertRaises(transport.DiscordError),
         ):
-            with self.assertRaises(transport.DiscordError):
-                transport.send_message(
-                    ADDRESS,
-                    {},
-                    deadline=time.monotonic() + 1,
-                    report=lambda message: None,
-                )
+            transport.send_message(
+                ADDRESS,
+                {},
+                deadline=time.monotonic() + 1,
+                report=lambda message: None,
+            )
         sleep.assert_not_called()
 
     def test_legacy_suffix_components_and_explicit_mentions(self):
@@ -449,14 +452,14 @@ class NotificationTests(unittest.TestCase):
             patch.object(
                 deliver, "send_message", return_value={"id": "42"}
             ) as send,
+            self.assertRaises(GitHubError),
         ):
-            with self.assertRaises(GitHubError):
-                deliver.deliver_pending(
-                    state,
-                    self.config,
-                    lambda message: None,
-                    time.monotonic() + 100,
-                )
+            deliver.deliver_pending(
+                state,
+                self.config,
+                lambda message: None,
+                time.monotonic() + 100,
+            )
         self.assertEqual(1, send.call_count)
 
     def test_log_cannot_inject_workflow_commands(self):
@@ -546,10 +549,13 @@ class NotificationTests(unittest.TestCase):
             "body": "Comment",
             "user": {"login": "Human", "type": "User"},
         }
-        state.github.pages.return_value = [comment]
+        state.github.json.return_value = [comment]
         for _ in range(2):
             deliver.collect_commit_comments(
-                state, self.config, lambda message: None
+                state,
+                self.config,
+                lambda message: None,
+                time.monotonic() + 100,
             )
         self.assertEqual(1, len(state.data["pending"]))
 
@@ -578,6 +584,278 @@ class NotificationTests(unittest.TestCase):
         )
         self.assertFalse(state.data["pending"])
         self.assertFalse(state.data["seen"])
+
+    def test_bot_comments_reviews_and_typeless_commit_authors_are_filtered(
+        self,
+    ):
+        for event, field in (
+            ("issue_comment", "comment"),
+            ("pull_request_review", "review"),
+            ("pull_request_review_comment", "comment"),
+            ("commit_comment", "comment"),
+        ):
+            payload = event_payload()
+            payload[field] = {
+                "user": {"login": "coderabbitai[bot]"},
+                "body": "Автоматическое сообщение",
+                "state": "COMMENTED",
+            }
+            self.assertIsNone(format_event(event, payload, self.config)[0])
+        payload = event_payload()
+        payload["commits"] = [
+            {"author": {"username": "coderabbitai[bot]"}, "message": "bot"},
+            {"author": {"username": "Human"}, "message": "human"},
+        ]
+        message = format_event("push", payload, self.config)[0]
+        self.assertNotIn("bot", message["embeds"][0]["description"])
+        self.assertIn("human", message["embeds"][0]["description"])
+
+    def test_thousand_messages_resume_in_bounded_batches(self):
+        state = self.new_state()
+        for number in range(1000):
+            deliver.enqueue(
+                state,
+                f"run:{number:05d}",
+                "pull_request",
+                event_payload(),
+                self.config,
+                Mock(),
+            )
+        with (
+            patch.dict(os.environ, {"DISCORD_EVENTS_WEBHOOK": ADDRESS}),
+            patch.object(
+                deliver, "send_message", return_value={"id": "42"}
+            ) as send,
+        ):
+            for remaining in range(960, -1, -40):
+                deliver.deliver_pending(
+                    state,
+                    self.config,
+                    Mock(),
+                    time.monotonic() + 100,
+                )
+                self.assertEqual(remaining, len(state.data["pending"]))
+                state.data = json.loads(json.dumps(state.data))
+        self.assertEqual(1000, send.call_count)
+        self.assertEqual(1000, state.save.call_count)
+
+    def test_full_queue_keeps_capture_cursor_and_artifacts(self):
+        state = self.new_state()
+        self.config["delivery"]["max_pending_messages"] = 1
+        deliver.enqueue(
+            state,
+            "run:1",
+            "pull_request",
+            event_payload(),
+            self.config,
+            Mock(),
+        )
+        state.github.pages.return_value = [
+            {"id": 2, "created_at": "2026-01-02T00:00:00Z"}
+        ]
+        deliver.collect(state, self.config, Mock(), time.monotonic() + 100)
+        self.assertEqual("2026-01-01T00:00:00Z", state.data["cursor"])
+        state.github.event_artifact.assert_not_called()
+        self.assertFalse(state.data["seen"])
+
+    def test_commit_comment_scan_resumes_page_and_original_cursor(self):
+        state = self.new_state()
+        self.config["delivery"]["max_pending_messages"] = 100
+        comments = [
+            {
+                "id": number,
+                "created_at": "2026-01-02T00:00:00Z",
+                "body": "Комментарий",
+                "user": {"login": "Human"},
+            }
+            for number in range(101)
+        ]
+        state.github.json.side_effect = [comments[:100], comments[100:]]
+        deliver.collect_commit_comments(
+            state,
+            self.config,
+            Mock(),
+            time.monotonic() + 100,
+        )
+        self.assertEqual(2, state.data["comments_page"])
+        state.data["pending"].clear()
+        state.data["cursor"] = "2026-01-03T00:00:00Z"
+        deliver.collect_commit_comments(
+            state,
+            self.config,
+            Mock(),
+            time.monotonic() + 100,
+        )
+        self.assertEqual(1, len(state.data["pending"]))
+        self.assertEqual(
+            2, state.github.json.call_args.kwargs["params"]["page"]
+        )
+        self.assertNotIn("comments_page", state.data)
+
+    def test_main_reserves_delivery_time_and_reports_failures(self):
+        state = self.new_state()
+        deliver.enqueue(
+            state,
+            "run:1",
+            "pull_request",
+            event_payload(),
+            self.config,
+            Mock(),
+        )
+        clock = [1000.0]
+
+        def consume_collection_time(state, config, log, deadline):
+            clock[0] = deadline
+            return 0
+
+        environment = {
+            "DISCORD_EVENTS_WEBHOOK": ADDRESS,
+            "GITHUB_REPOSITORY": "owner/repo",
+            "GITHUB_TOKEN": "fake",
+            "GITHUB_EVENT_NAME": "workflow_dispatch",
+        }
+        with (
+            patch.dict(os.environ, environment),
+            patch.object(deliver, "GitHub"),
+            patch.object(deliver, "State", return_value=state),
+            patch.object(deliver, "Journal") as journal,
+            patch.object(
+                deliver.time, "monotonic", side_effect=lambda: clock[0]
+            ),
+            patch.object(deliver, "collect_commit_comments"),
+            patch.object(
+                deliver, "collect", side_effect=consume_collection_time
+            ),
+            patch.object(
+                deliver,
+                "send_message",
+                side_effect=[
+                    transport.DiscordError(503, "тестовый сбой"),
+                    {"id": "42"},
+                ],
+            ) as send,
+        ):
+            self.assertEqual(1, deliver.main())
+            self.assertIn("run:1", state.data["pending"])
+            self.assertIn(
+                "Ошибка отправки", str(journal.return_value.call_args_list)
+            )
+            self.assertEqual(0, deliver.main())
+            self.assertFalse(state.data["pending"])
+            self.assertEqual(2, send.call_count)
+            self.assertEqual(2, journal.return_value.finish.call_count)
+
+    def test_state_skips_unchanged_writes_but_retries_failed_checkpoint(self):
+        github = Mock(root="/repos/owner/repo")
+        github.json.return_value = {"default_branch": "main"}
+        github.request.return_value = response(
+            200,
+            {
+                "sha": "original",
+                "encoding": "base64",
+                "content": base64.b64encode(
+                    b'{"version":1,"pending":{}}'
+                ).decode(),
+            },
+        )
+        state = State(github, "discord-notification-state", "unused")
+        github.json.reset_mock()
+        state.save()
+        github.json.assert_not_called()
+        state.data["pending"]["test"] = {}
+        github.json.side_effect = GitHubError("HTTP 503")
+        with self.assertRaises(GitHubError):
+            state.save()
+        self.assertEqual("original", state.sha)
+        github.json.side_effect = None
+        github.json.return_value = {"content": {"sha": "updated"}}
+        state.save()
+        self.assertEqual("updated", state.sha)
+        github.json.reset_mock()
+        state.save()
+        github.json.assert_not_called()
+
+    def test_summary_stays_below_github_limit_without_truncating_console(self):
+        with tempfile.TemporaryDirectory() as directory:
+            summary = Path(directory) / "summary.md"
+            output = io.StringIO()
+            with (
+                patch.dict(os.environ, {"GITHUB_STEP_SUMMARY": str(summary)}),
+                redirect_stdout(output),
+            ):
+                journal = deliver.Journal()
+                for _ in range(100):
+                    journal("&" * 4000)
+                journal("Последняя ошибка")
+                journal.finish()
+            self.assertLess(summary.stat().st_size, 1024 * 1024)
+            self.assertIn(
+                "Сводка сокращена", summary.read_text(encoding="utf-8")
+            )
+            self.assertIn("Последняя ошибка", output.getvalue())
+
+    def test_bad_archive_and_api_rate_limit_have_explanatory_errors(self):
+        github = GitHub("owner/repo", "fake")
+        limited = response(403)
+        limited.headers["X-RateLimit-Remaining"] = "0"
+        with (
+            patch.object(github, "request", return_value=limited),
+            self.assertRaisesRegex(GitHubError, "частоту"),
+        ):
+            github.json("GET", github.root)
+        redirect = response(302)
+        redirect.headers["Location"] = "https://example.org/archive"
+        download = Mock(status_code=200)
+        download.iter_content.return_value = [b"not a zip"]
+        with (
+            patch.object(
+                github,
+                "pages",
+                return_value=[
+                    {"name": "discord-event", "id": 1, "expired": False},
+                ],
+            ),
+            patch.object(github, "request", return_value=redirect),
+            patch("discord_notifications.github.requests.get") as get,
+            self.assertRaisesRegex(GitHubError, "Архив события"),
+        ):
+            get.return_value.__enter__.return_value = download
+            github.event_artifact(1)
+
+    def test_missing_receipt_keeps_message_for_retry(self):
+        state = self.new_state()
+        deliver.enqueue(
+            state,
+            "run:1",
+            "pull_request",
+            event_payload(),
+            self.config,
+            Mock(),
+        )
+        with (
+            patch.dict(os.environ, {"DISCORD_EVENTS_WEBHOOK": ADDRESS}),
+            patch.object(deliver, "send_message", return_value={}),
+        ):
+            failures = deliver.deliver_pending(
+                state,
+                self.config,
+                Mock(),
+                time.monotonic() + 100,
+            )
+        self.assertEqual(1, failures)
+        self.assertIn("run:1", state.data["pending"])
+
+    def test_filter_booleans_cannot_be_strings(self):
+        original = CONFIG.read_text(encoding="utf-8")
+        with tempfile.TemporaryDirectory() as directory:
+            config = Path(directory) / "config.toml"
+            for field in ("ignore_bots", "required"):
+                config.write_text(
+                    original.replace(f"{field} = true", f'{field} = "false"'),
+                    encoding="utf-8",
+                )
+                with self.assertRaisesRegex(ValueError, field):
+                    load_config(config)
 
     def test_custom_color_and_event_filter(self):
         self.config["styles"]["opened"]["color"] = "#123456"

@@ -54,12 +54,22 @@ class GitHub:
                     return response
                 if method != "GET":
                     return response
+            if attempt == 3:
+                break
             time.sleep(2**attempt)
         raise GitHubError("GitHub временно отклоняет запросы; повторите позже")
 
     def json(self, method: str, path: str, **kwargs):
         response = self.request(method, path, **kwargs)
         if not 200 <= response.status_code < 300:
+            if response.status_code in {403, 429} and (
+                response.status_code == 429
+                or response.headers.get("X-RateLimit-Remaining") == "0"
+                or response.headers.get("Retry-After")
+            ):
+                raise GitHubError(
+                    "GitHub ограничил частоту запросов; повторите позже"
+                )
             raise GitHubError(
                 f"GitHub HTTP {response.status_code}: "
                 "проверьте доступ и наличие объекта"
@@ -152,13 +162,18 @@ class GitHub:
             raise GitHubError(
                 "Хранилище событий временно недоступно"
             ) from None
-        with zipfile.ZipFile(archive) as bundle:
-            items = bundle.infolist()
-            if len(items) != 1 or items[0].filename != "event.json":
-                raise GitHubError("Ожидался единственный файл event.json")
-            if items[0].file_size > 26 * 1024 * 1024:
-                raise GitHubError("Распакованное событие слишком велико")
-            return json.loads(bundle.read(items[0]))
+        try:
+            with zipfile.ZipFile(archive) as bundle:
+                items = bundle.infolist()
+                if len(items) != 1 or items[0].filename != "event.json":
+                    raise GitHubError("Ожидался единственный файл event.json")
+                if items[0].file_size > 26 * 1024 * 1024:
+                    raise GitHubError("Распакованное событие слишком велико")
+                return json.loads(bundle.read(items[0]))
+        except (zipfile.BadZipFile, RuntimeError, ValueError) as error:
+            raise GitHubError(
+                "Архив события повреждён или нечитаем"
+            ) from error
 
 
 class State:
@@ -244,18 +259,23 @@ class State:
             raise GitHubError(
                 f"Не удалось прочитать очередь: HTTP {response.status_code}"
             )
+        self.saved = json.dumps(
+            self.data, ensure_ascii=False, separators=(",", ":")
+        )
 
     def save(self) -> None:
+        serialized = json.dumps(
+            self.data, ensure_ascii=False, separators=(",", ":")
+        )
+        if serialized == self.saved:
+            return
         body = {
             "message": "chore(discord): checkpoint notification delivery",
             "branch": self.branch,
-            "content": base64.b64encode(
-                json.dumps(
-                    self.data, ensure_ascii=False, separators=(",", ":")
-                ).encode()
-            ).decode(),
+            "content": base64.b64encode(serialized.encode()).decode(),
         }
         if self.sha:
             body["sha"] = self.sha
         result = self.github.json("PUT", self.path, json=body)
         self.sha = result["content"]["sha"]
+        self.saved = serialized

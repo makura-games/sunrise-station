@@ -5,7 +5,7 @@ import os
 import re
 import sys
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from .config import load_config
@@ -24,12 +24,14 @@ COLLECTOR = "sunrise-discord-events.yml"
 
 
 def utc_now() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 class Journal:
     def __init__(self) -> None:
         self.lines = ["# Доставка уведомлений GitHub → Discord", ""]
+        self.summary_size = 0
+        self.summary_truncated = False
 
     def __call__(self, message: str) -> None:
         message = re.sub(
@@ -41,13 +43,24 @@ class Journal:
         message = re.sub(r"\\([\\`*_{}\[\]()<>|~])", r"\1", message)
         message = message[:4000]
         print(f"[Discord] {message}", flush=True)
-        self.lines.append(f"- {html.escape(message)}")
+        line = f"- {html.escape(message)}"
+        size = len(line.encode("utf-8")) + 1
+        if self.summary_size + size <= 900_000:
+            self.lines.append(line)
+            self.summary_size += size
+        else:
+            self.summary_truncated = True
 
     def finish(self) -> None:
         summary = os.environ.get("GITHUB_STEP_SUMMARY")
         if summary:
             with Path(summary).open("a", encoding="utf-8") as stream:
                 stream.write("\n".join(self.lines) + "\n")
+                if self.summary_truncated:
+                    stream.write(
+                        "\nСводка сокращена из-за размера. "
+                        "Все последующие записи доступны в журнале шага.\n"
+                    )
 
 
 def enqueue(
@@ -104,7 +117,7 @@ def enqueue(
 
 def collect(state: State, config: dict, log: Journal, deadline: float) -> int:
     github = state.github
-    cutoff = (datetime.now(timezone.utc) - timedelta(minutes=5)).strftime(
+    cutoff = (datetime.now(UTC) - timedelta(minutes=5)).strftime(
         "%Y-%m-%dT%H:%M:%SZ"
     )
     cursor = state.data["cursor"]
@@ -123,6 +136,16 @@ def collect(state: State, config: dict, log: Journal, deadline: float) -> int:
             log(
                 "Сбор продолжится следующим запуском: "
                 "заканчивается время задачи."
+            )
+            break
+        if (
+            len(state.data["pending"])
+            >= config["delivery"]["max_pending_messages"]
+        ):
+            failures.append(cursor)
+            log(
+                "Очередь заполнена. Новые события остаются в файлах GitHub; "
+                "сначала доставим накопившиеся сообщения."
             )
             break
         key = f"run:{run['id']}"
@@ -180,33 +203,58 @@ def collect(state: State, config: dict, log: Journal, deadline: float) -> int:
     return errors
 
 
-def collect_commit_comments(state: State, config: dict, log: Journal) -> None:
+def collect_commit_comments(
+    state: State, config: dict, log: Journal, deadline: float
+) -> None:
     if not config["events"].get("commit_comment"):
         return
     github = state.github
-    for comment in github.pages(f"{github.root}/comments"):
-        key = str(comment["id"])
-        stamp = comment.get("updated_at") or comment["created_at"]
-        previous = state.data["commit_comments"].get(key)
-        if previous == stamp:
-            continue
-        if previous or stamp >= state.data["cursor"]:
-            action = "edited" if previous else "created"
-            enqueue(
-                state,
-                f"comment:{key}:{stamp}",
-                "commit_comment",
-                {
-                    "repository": {"full_name": github.repository},
-                    "action": action,
-                    "comment": comment,
-                    "sender": comment["user"],
-                },
-                config,
-                log,
-            )
-        state.data["commit_comments"][key] = stamp
-    state.save()
+    cursor = state.data.setdefault("comments_cursor", state.data["cursor"])
+    page = state.data.get("comments_page", 1)
+    while True:
+        if (
+            time.monotonic() >= deadline - 30
+            or len(state.data["pending"])
+            >= config["delivery"]["max_pending_messages"]
+        ):
+            log("Сбор комментариев продолжится со сохранённой страницы.")
+            state.save()
+            return
+        comments = github.json(
+            "GET",
+            f"{github.root}/comments",
+            params={"per_page": 100, "page": page},
+        )
+        for comment in comments:
+            key = str(comment["id"])
+            stamp = comment.get("updated_at") or comment["created_at"]
+            previous = state.data["commit_comments"].get(key)
+            if previous == stamp:
+                continue
+            if previous or stamp >= cursor:
+                action = "edited" if previous else "created"
+                enqueue(
+                    state,
+                    f"comment:{key}:{stamp}",
+                    "commit_comment",
+                    {
+                        "repository": {"full_name": github.repository},
+                        "action": action,
+                        "comment": comment,
+                        "sender": comment["user"],
+                    },
+                    config,
+                    log,
+                )
+            state.data["commit_comments"][key] = stamp
+        if len(comments) < 100:
+            state.data.pop("comments_cursor", None)
+            state.data.pop("comments_page", None)
+            state.save()
+            return
+        page += 1
+        state.data["comments_page"] = page
+        state.save()
 
 
 def deliver_pending(
@@ -225,6 +273,10 @@ def deliver_pending(
         key=lambda entry: (entry[1]["created_at"], entry[0]),
     )
     for key, item in pending:
+        if all(name in item["sent"] for name in item["targets"]):
+            del state.data["pending"][key]
+            state.save()
+            continue
         for name in item["targets"]:
             if name in item["sent"]:
                 continue
@@ -241,7 +293,9 @@ def deliver_pending(
             ):
                 log(
                     "Остаток очереди сохранён; "
-                    "следующий запуск продолжит отправку."
+                    "следующий запуск продолжит отправку. "
+                    f"Отправлено: {sent_count}; ошибок: {failures}; "
+                    f"в очереди: {len(state.data['pending'])}."
                 )
                 return failures
             attempted_count += 1
@@ -271,6 +325,11 @@ def deliver_pending(
                     ),
                     report=log,
                 )
+                if not receipt.get("id"):
+                    raise ValueError(
+                        "Discord не вернул ID сообщения; "
+                        "доставка не подтверждена"
+                    )
             except (
                 DiscordError,
                 DiscordPublishTimeoutError,
@@ -288,6 +347,8 @@ def deliver_pending(
                 "message_id": receipt.get("id"),
                 "at": utc_now(),
             }
+            if all(target in item["sent"] for target in item["targets"]):
+                del state.data["pending"][key]
             state.save()
             sent_count += 1
             log(
@@ -301,7 +362,7 @@ def deliver_pending(
                 )
                 log(
                     f"Карточка: {heading}. "
-                    f"Автор/проверка: {author_name}. "
+                    f"Автор: {author_name}. "
                     f"Текст: {embed.get('description', '')} "
                     f"Ссылка: {embed.get('url', '')} "
                     f"Изображение: {embed.get('image', {}).get('url', '')}"
@@ -310,9 +371,6 @@ def deliver_pending(
                     log(f"{field['name']}: {field['value']}")
                 if embed.get("footer"):
                     log(f"Статусы: {embed['footer']['text']}")
-        if all(name in item["sent"] for name in item["targets"]):
-            del state.data["pending"][key]
-            state.save()
     log(
         f"Итог: отправлено {sent_count}; ошибок {failures}; "
         f"сообщений в очереди {len(state.data['pending'])}."
@@ -341,7 +399,7 @@ def main() -> int:
         )
         deadline = time.monotonic() + config["delivery"]["run_timeout"]
         initial = (
-            datetime.now(timezone.utc)
+            datetime.now(UTC)
             - timedelta(hours=config["delivery"]["bootstrap_hours"])
         ).strftime("%Y-%m-%dT%H:%M:%SZ")
         state = State(github, config["delivery"]["state_branch"], initial)
@@ -351,8 +409,18 @@ def main() -> int:
         )
         errors = 0
         try:
-            collect_commit_comments(state, config, log)
-            errors += collect(state, config, log, deadline)
+            collect_commit_comments(
+                state,
+                config,
+                log,
+                deadline - config["delivery"]["run_timeout"] * 0.75,
+            )
+            errors += collect(
+                state,
+                config,
+                log,
+                deadline - config["delivery"]["run_timeout"] * 0.5,
+            )
         except (GitHubError, ValueError, KeyError, TypeError) as error:
             log(
                 f"Ошибка сбора: {error}. "

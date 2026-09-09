@@ -38,11 +38,11 @@ def safe_url(value: object, repository: str) -> str:
 
 def is_ignored(account: dict, config: dict) -> bool:
     filters = config["filters"]
+    login = str(account.get("login", "")).casefold()
     return (
         filters["ignore_bots"]
-        and account.get("type") == "Bot"
-        or str(account.get("login", "")).casefold()
-        in {name.casefold() for name in filters["ignored_users"]}
+        and (account.get("type") == "Bot" or login.endswith("[bot]"))
+        or login in {name.casefold() for name in filters["ignored_users"]}
     )
 
 
@@ -200,11 +200,7 @@ def render_embed(
         else:
             kind = (
                 "pull_request"
-                if (
-                    payload.get("pull_request")
-                    or subject.get("pull_request")
-                    or event == "pull_request_review_comment"
-                )
+                if (payload.get("pull_request") or subject.get("pull_request"))
                 else "issue"
             )
             target = f"{config['labels'][kind]} #{number}: {title}"

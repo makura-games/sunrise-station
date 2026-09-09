@@ -1449,7 +1449,7 @@ class ChangelogActionsTests(unittest.TestCase):
                 ), patch.object(discord_changelog.time, "sleep") as sleep:
                     discord_changelog.send_embed_discord({"description": "test"})
 
-                sleep.assert_called_once_with(discord_changelog.DISCORD_DEFAULT_RETRY_AFTER)
+                sleep.assert_called_once_with(1)
 
     def test_discord_accepts_message_and_no_content_statuses(self):
         for status_code in (200, 204):
