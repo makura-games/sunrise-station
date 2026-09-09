@@ -15,10 +15,8 @@ def enrich_event(event: str, payload: dict, github, config: dict, log) -> None:
         return
     if config["display"]["show_reactions"]:
         try:
-            reactions = github.json(
-                "GET",
-                f"{github.root}/issues/{number}/reactions",
-                params={"per_page": 100},
+            reactions = github.pages(
+                f"{github.root}/issues/{number}/reactions"
             )
             subject["reactions"] = dict(
                 Counter(reaction["content"] for reaction in reactions)
@@ -33,7 +31,39 @@ def enrich_event(event: str, payload: dict, github, config: dict, log) -> None:
     try:
         details = github.json("GET", f"{github.root}/pulls/{number}")
         subject["mergeable"] = details.get("mergeable")
-        checks = github.json("GET", f"{github.root}/commits/{head}/check-runs")
-        payload["_discord_checks"] = checks["check_runs"]
+        revisions = [head]
+        merge = details.get("merge_commit_sha")
+        if (
+            details.get("state") == "open"
+            and details.get("head", {}).get("sha") == head
+            and isinstance(merge, str)
+            and re.fullmatch(r"[0-9a-f]{40,64}", merge)
+            and merge != head
+        ):
+            revisions.append(merge)
+        checks = {}
+        for revision in revisions:
+            for check in github.pages(
+                f"{github.root}/commits/{revision}/check-runs", "check_runs"
+            ):
+                key = (check.get("app", {}).get("id"), check["name"])
+                if check.get("id", 0) >= checks.get(key, {}).get("id", 0):
+                    checks[key] = check
+        payload["_discord_checks"] = list(checks.values())
     except GitHubError as error:
         log(f"Не удалось обновить проверки PR #{number}: {error}.")
+    try:
+        statuses = {}
+        for status in github.pages(f"{github.root}/commits/{head}/statuses"):
+            statuses.setdefault(status["context"], status)
+        payload.setdefault("_discord_checks", []).extend(
+            {
+                "name": status["context"],
+                "status": "completed",
+                "conclusion": status["state"],
+                "html_url": status["target_url"],
+            }
+            for status in statuses.values()
+        )
+    except GitHubError as error:
+        log(f"Не удалось обновить внешние статусы PR #{number}: {error}.")

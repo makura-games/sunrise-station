@@ -250,6 +250,7 @@ class NotificationTests(unittest.TestCase):
     def new_state(self):
         state = Mock()
         state.github.json.return_value = []
+        state.github.pages.return_value = []
         state.github.repository = "owner/repo"
         state.data = {
             "pending": {},
@@ -300,6 +301,45 @@ class NotificationTests(unittest.TestCase):
                 )
                 self.assertEqual({}, state.data["pending"])
                 self.assertEqual(1, send.call_count)
+
+    def test_long_message_resumes_only_undelivered_parts(self):
+        state = self.new_state()
+        payload = event_payload()
+        payload["pull_request"]["body"] = "Длинный текст\n" * 1000
+        with patch.dict(os.environ, {"DISCORD_EVENTS_WEBHOOK": ADDRESS}):
+            deliver.enqueue(
+                state,
+                "run:1",
+                "pull_request",
+                payload,
+                self.config,
+                lambda message: None,
+            )
+            count = len(state.data["pending"])
+            self.assertGreater(count, 1)
+            replies = [{"id": "42"}] + [
+                transport.DiscordError(503, "temporary")
+            ] * (count - 1)
+            with patch.object(deliver, "send_message", side_effect=replies):
+                deliver.deliver_pending(
+                    state,
+                    self.config,
+                    lambda message: None,
+                    time.monotonic() + 100,
+                )
+            self.assertEqual(count - 1, len(state.data["pending"]))
+            with patch.object(
+                deliver, "send_message", return_value={"id": "43"}
+            ) as send:
+                deliver.deliver_pending(
+                    state,
+                    self.config,
+                    lambda message: None,
+                    time.monotonic() + 100,
+                    force_retry=True,
+                )
+            self.assertEqual(count - 1, send.call_count)
+            self.assertFalse(state.data["pending"])
 
     def test_already_confirmed_destination_is_not_sent_again(self):
         state = self.new_state()
@@ -378,35 +418,58 @@ class NotificationTests(unittest.TestCase):
         }
         with patch.dict(os.environ, environment):
             deliver.enqueue(
-                state, "run:1", "pull_request", event_payload(),
-                self.config, lambda message: None,
+                state,
+                "run:1",
+                "pull_request",
+                event_payload(),
+                self.config,
+                lambda message: None,
             )
-            with patch.object(deliver, "send_message", side_effect=[
-                {"id": "42"}, transport.DiscordError(503, "temporary"),
-            ]):
+            with patch.object(
+                deliver,
+                "send_message",
+                side_effect=[
+                    {"id": "42"},
+                    transport.DiscordError(503, "temporary"),
+                ],
+            ):
                 deliver.deliver_pending(
-                    state, self.config, lambda message: None,
+                    state,
+                    self.config,
+                    lambda message: None,
                     time.monotonic() + 100,
                 )
             with patch.object(
                 deliver, "send_message", return_value={"id": "43"}
             ) as send:
                 deliver.deliver_pending(
-                    state, self.config, lambda message: None,
-                    time.monotonic() + 100, force_retry=True,
+                    state,
+                    self.config,
+                    lambda message: None,
+                    time.monotonic() + 100,
+                    force_retry=True,
                 )
             self.assertEqual(1, send.call_count)
             self.assertFalse(state.data["pending"])
 
     def test_unfinished_capture_holds_cursor_without_losing_ready_events(self):
         state = self.new_state()
+        self.config["display"]["show_reactions"] = False
         state.github.root = "/repos/owner/repo"
         state.github.pages.return_value = [
-            {"id": 2, "created_at": "2026-01-03T00:00:00Z",
-             "status": "completed", "conclusion": "success",
-             "event": "pull_request_target", "actor": {"login": "Human"}},
-            {"id": 1, "created_at": "2026-01-02T00:00:00Z",
-             "status": "queued"},
+            {
+                "id": 2,
+                "created_at": "2026-01-03T00:00:00Z",
+                "status": "completed",
+                "conclusion": "success",
+                "event": "pull_request_target",
+                "actor": {"login": "Human"},
+            },
+            {
+                "id": 1,
+                "created_at": "2026-01-02T00:00:00Z",
+                "status": "queued",
+            },
         ]
         state.github.event_artifact.return_value = event_payload()
         deliver.collect(
@@ -420,8 +483,10 @@ class NotificationTests(unittest.TestCase):
         state = self.new_state()
         state.github.root = "/repos/owner/repo"
         comment = {
-            "id": 12, "created_at": "2026-01-02T00:00:00Z",
-            "updated_at": "2026-01-02T00:00:00Z", "body": "Comment",
+            "id": 12,
+            "created_at": "2026-01-02T00:00:00Z",
+            "updated_at": "2026-01-02T00:00:00Z",
+            "body": "Comment",
             "user": {"login": "Human", "type": "User"},
         }
         state.github.pages.return_value = [comment]
@@ -434,28 +499,37 @@ class NotificationTests(unittest.TestCase):
     def test_source_actor_mismatch_is_not_delivered(self):
         state = self.new_state()
         state.github.root = "/repos/owner/repo"
-        state.github.pages.return_value = [{
-            "id": 1, "created_at": "2026-01-02T00:00:00Z",
-            "status": "completed", "conclusion": "success",
-            "event": "pull_request_target", "actor": {"login": "Other"},
-        }]
+        state.github.pages.return_value = [
+            {
+                "id": 1,
+                "created_at": "2026-01-02T00:00:00Z",
+                "status": "completed",
+                "conclusion": "success",
+                "event": "pull_request_target",
+                "actor": {"login": "Other"},
+            }
+        ]
         state.github.event_artifact.return_value = event_payload()
-        self.assertEqual(1, deliver.collect(
-            state, self.config, lambda message: None, time.monotonic() + 100
-        ))
+        self.assertEqual(
+            1,
+            deliver.collect(
+                state,
+                self.config,
+                lambda message: None,
+                time.monotonic() + 100,
+            ),
+        )
         self.assertFalse(state.data["pending"])
         self.assertFalse(state.data["seen"])
 
     def test_custom_color_and_event_filter(self):
         self.config["styles"]["opened"]["color"] = "#123456"
-        message, _ = format_event(
-            "pull_request", event_payload(), self.config
-        )
+        message, _ = format_event("pull_request", event_payload(), self.config)
         self.assertEqual(0x123456, message["embeds"][0]["color"])
         self.config["events"]["pull_request"] = []
-        self.assertIsNone(format_event(
-            "pull_request", event_payload(), self.config
-        )[0])
+        self.assertIsNone(
+            format_event("pull_request", event_payload(), self.config)[0]
+        )
 
 
 if __name__ == "__main__":

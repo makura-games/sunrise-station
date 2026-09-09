@@ -27,13 +27,15 @@ def load_config(path: Path) -> dict:
     if not re.fullmatch(r"[a-z][a-z0-9-]{2,80}", branch):
         raise ValueError("Некорректное имя служебной ветки")
     for name, maximum in (
-        ("body_length", 2000),
+        ("body_length", 3500),
         ("max_commits", 20),
         ("commit_length", 200),
     ):
         value = config["display"][name]
         if type(value) is not int or not 1 <= value <= maximum:
             raise ValueError(f"display.{name}: требуется 1–{maximum}")
+    if config["display"]["body_length"] < 128:
+        raise ValueError("display.body_length: требуется не менее 128")
     for name, style in config["styles"].items():
         if style["color"] != "" and not re.fullmatch(
             r"#[0-9a-fA-F]{6}", style["color"]

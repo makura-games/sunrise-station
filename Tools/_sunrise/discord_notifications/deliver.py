@@ -9,6 +9,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from .config import load_config
+from .content import split_message
 from .formatting import format_event
 from .github import GitHub, GitHubError, State
 from .metadata import enrich_event
@@ -79,16 +80,22 @@ def enqueue(
     if not targets:
         log(f"Пропущено: для {explanation} не включён ни один получатель.")
         return
-    state.data["pending"].setdefault(
-        key,
-        {
-            "message": message,
-            "explanation": explanation,
-            "targets": targets,
-            "sent": {},
-            "created_at": utc_now(),
-        },
-    )
+    parts = split_message(message)
+    created_at = utc_now()
+    for index, part in enumerate(parts):
+        part_key = key if len(parts) == 1 else f"{key}:part{index + 1:05d}"
+        state.data["pending"].setdefault(
+            part_key,
+            {
+                "message": part,
+                "explanation": (
+                    f"{explanation} · часть {index + 1}/{len(parts)}"
+                ),
+                "targets": targets,
+                "sent": {},
+                "created_at": created_at,
+            },
+        )
     log(
         f"Сохранено в очередь: {explanation}. "
         f"Получатели: {', '.join(targets)}."
@@ -202,8 +209,12 @@ def collect_commit_comments(state: State, config: dict, log: Journal) -> None:
 
 
 def deliver_pending(
-    state: State, config: dict, log: Journal, deadline: float,
-    *, force_retry: bool = False,
+    state: State,
+    config: dict,
+    log: Journal,
+    deadline: float,
+    *,
+    force_retry: bool = False,
 ) -> int:
     failures = 0
     sent_count = 0
@@ -278,12 +289,24 @@ def deliver_pending(
             }
             state.save()
             sent_count += 1
-            embed = item["message"]["embeds"][0]
             log(
-                f"Успешно отправлено в {name}: {embed['title']}. "
-                f"Текст: {embed['description']} Ссылка: {embed['url']} "
+                f"Успешно отправлено в {name}: {item['explanation']}. "
                 f"ID сообщения: {receipt.get('id', 'не предоставлен')}."
             )
+            for embed in item["message"]["embeds"]:
+                author_name = embed.get("author", {}).get("name", "")
+                heading = embed.get("title") or embed.get("author", {}).get(
+                    "name", "Изображение"
+                )
+                log(
+                    f"Карточка: {heading}. "
+                    f"Автор/проверка: {author_name}. "
+                    f"Текст: {embed.get('description', '')} "
+                    f"Ссылка: {embed.get('url', '')} "
+                    f"Изображение: {embed.get('image', {}).get('url', '')}"
+                )
+                for field in embed.get("fields", []):
+                    log(f"{field['name']}: {field['value']}")
         if all(name in item["sent"] for name in item["targets"]):
             del state.data["pending"][key]
             state.save()
@@ -336,7 +359,11 @@ def main() -> int:
             state.save()
         manual = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
         failed = deliver_pending(
-            state, config, log, deadline, force_retry=manual,
+            state,
+            config,
+            log,
+            deadline,
+            force_retry=manual,
         )
         return int(failed + errors > 0)
     except Exception as error:

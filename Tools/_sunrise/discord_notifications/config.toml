@@ -10,7 +10,7 @@ retry_interval = 300
 max_retry_interval = 3600
 
 [display]
-body_length = 500
+body_length = 3500
 max_commits = 11
 commit_length = 67
 username = "MoMMI"
@@ -20,9 +20,9 @@ show_checks = true
 show_reactions = true
 
 [mommi]
-new_comment = "New Comment: "
-edited_comment = "Edited Comment: "
-deleted_comment = "Deleted Comment: "
+new_comment = "New comment on"
+edited_comment = "Edited comment on"
+deleted_comment = "Deleted comment on"
 commit_singular = "New Commit"
 commit_plural = "New Commits"
 push_to = "to"
@@ -33,8 +33,12 @@ by = "by"
 checks = "Checks"
 status = "status"
 conflicts = "🚨CONFLICTS🚨"
-upvote = "<:upvote:590257887826411590>"
-downvote = "<:downvote:590257835447812207>"
+upvote = "＋"
+downvote = "−"
+source = "Открыть на GitHub"
+pull_request = "pull request"
+issue = "issue"
+commit = "commit"
 discussion = "<:ghdiscussion:1082078543770554429>"
 discussion_created = "Created"
 discussion_answered = "Answered"
@@ -43,14 +47,21 @@ discussion_commented = "Commented"
 
 [checks]
 unknown = "❓"
-queued = "😴"
-in_progress = "🏃"
+queued = "⏳"
+in_progress = "⏳"
+pending = "⏳"
+waiting = "⏳"
+requested = "⏳"
 neutral = "😐"
-success = "😄"
-failure = "😭"
+success = "✔"
+success_icon = "https://cdn.discordapp.com/emojis/828260365908836423.png"
+failure = "❌"
 cancelled = "🛑"
-timed_out = "⌛"
-action_required = "🚧"
+timed_out = "❌"
+action_required = "❌"
+error = "❌"
+stale = "❌"
+skipped = "⏭️"
 
 [filters]
 ignore_bots = true

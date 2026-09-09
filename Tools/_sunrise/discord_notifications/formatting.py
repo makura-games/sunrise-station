@@ -1,8 +1,10 @@
-"""Преобразование недоверенных данных GitHub в небольшую карточку."""
+"""Преобразование недоверенных данных GitHub в карточки Discord."""
 
 import re
 from fnmatch import fnmatchcase
 from urllib.parse import urlsplit
+
+from .content import body_base, prepare_body, split_body
 
 
 def truncate(value: str, limit: int) -> str:
@@ -48,14 +50,6 @@ def plain(value: object) -> str:
     return re.sub(r"[\x00-\x08\x0b-\x1f\x7f]", "", str(value or ""))
 
 
-def body_text(value: object, config: dict) -> str:
-    body = re.sub(r"<!--[\s\S]*?-->", "", plain(value))
-    limit = config["display"]["body_length"]
-    if len(body) > limit:
-        body = body[:limit] + config["mommi"]["ellipsis"]
-    return body
-
-
 def avatar_url(value: object) -> str:
     value = str(value or "")
     parsed = urlsplit(value)
@@ -93,29 +87,8 @@ def set_color(embed: dict, style: dict) -> None:
         embed["color"] = int(style["color"].removeprefix("#"), 16)
 
 
-def checks_fields(payload: dict, subject: dict, config: dict) -> list[dict]:
+def conflict_fields(subject: dict, config: dict) -> list[dict]:
     fields = []
-    rows = []
-    for check in payload.get("_discord_checks", []):
-        status = check.get("status")
-        if status == "completed":
-            status = check.get("conclusion")
-        icon = config["checks"].get(status, config["checks"]["unknown"])
-        name = plain(check.get("name")).replace("`", "'").replace("\n", " ")
-        row = f"`{truncate(name, 200)} {icon}`\n"
-        candidate = "".join(rows) + row + config["mommi"]["overflow"]
-        if len(candidate.encode("utf-16-le")) // 2 > 1024:
-            rows.append(config["mommi"]["overflow"])
-            break
-        rows.append(row)
-    if rows:
-        fields.append(
-            {
-                "name": config["mommi"]["checks"],
-                "value": "".join(rows),
-                "inline": True,
-            }
-        )
     if subject.get("mergeable") is False:
         fields.append(
             {
@@ -127,6 +100,28 @@ def checks_fields(payload: dict, subject: dict, config: dict) -> list[dict]:
     return fields
 
 
+def checks_embeds(payload: dict, config: dict) -> list[dict]:
+    embeds = []
+    for check in payload.get("_discord_checks", []):
+        status = check.get("status")
+        if status == "completed":
+            status = check.get("conclusion")
+        name = truncate(plain(check.get("name")), 200)
+        icon = config["checks"].get(status, config["checks"]["unknown"])
+        entry = {"author": {"name": f"{icon} {name}"}}
+        success_icon = avatar_url(config["checks"]["success_icon"])
+        if status == "success" and success_icon:
+            entry["author"] = {"name": name, "icon_url": success_icon}
+        url = safe_url(
+            check.get("html_url"), payload["repository"]["full_name"]
+        )
+        entry["author"]["url"] = url
+        embeds.append(entry)
+    if embeds:
+        embeds[0]["title"] = config["mommi"]["checks"]
+    return embeds
+
+
 def render_embed(
     event: str,
     action: str,
@@ -136,9 +131,7 @@ def render_embed(
     config: dict,
 ) -> dict:
     repository = payload["repository"]["full_name"]
-    repo_label = config["display"]["repository_label"] or repository
     sender = payload.get("sender") or {}
-    owner = subject.get("user") or {}
     number = subject.get("number")
     title = plain(subject.get("title") or subject.get("name") or repository)
     style = config["styles"].get(state, config["styles"]["default"])
@@ -149,21 +142,12 @@ def render_embed(
         "url": safe_url(
             comment.get("html_url") or subject.get("html_url"), repository
         ),
-        "description": body_text(body, config),
-        "footer": {"text": repo_label},
+        "description": plain(body).strip(),
     }
     if sender.get("login"):
         embed["author"] = author(sender)
-    if number is not None:
-        embed["footer"]["text"] = (
-            f"{repo_label}#{number} {config['mommi']['by']} "
-            f"{plain(owner.get('login'))}"
-        )
     set_color(embed, style)
     if event in {"pull_request", "issues"}:
-        icon = avatar_url(owner.get("avatar_url"))
-        if icon:
-            embed["footer"]["icon_url"] = icon
         votes = []
         if config["display"]["show_reactions"]:
             reactions = subject.get("reactions") or {}
@@ -173,7 +157,7 @@ def render_embed(
                     votes.append(f"{config['mommi'][name]} {count}")
         embed["description"] += "\n" + "   ".join(votes) + "\u200b"
         if event == "pull_request" and config["display"]["show_checks"]:
-            fields = checks_fields(payload, subject, config)
+            fields = conflict_fields(subject, config)
             if fields:
                 embed["fields"] = fields
     elif event in {
@@ -186,7 +170,19 @@ def render_embed(
             prefix = config["mommi"][f"{action}_comment"]
         if event == "commit_comment":
             title = str(comment.get("commit_id", ""))[:7]
-        embed["title"] = prefix + title
+            target = config["mommi"]["commit"] + " " + title
+        else:
+            kind = (
+                "pull_request"
+                if (
+                    payload.get("pull_request")
+                    or subject.get("pull_request")
+                    or event == "pull_request_review_comment"
+                )
+                else "issue"
+            )
+            target = f"{config['mommi'][kind]} #{number}: {title}"
+        embed["title"] = f"[{repository.split('/')[-1]}] {prefix} {target}"
         embed.pop("color", None)
         set_color(embed, config["styles"]["commented"])
     elif event in {"discussion", "discussion_comment"}:
@@ -194,9 +190,6 @@ def render_embed(
         if event == "discussion_comment":
             action_label = config["mommi"]["discussion_commented"]
         else:
-            icon = avatar_url(owner.get("avatar_url"))
-            if icon:
-                embed["footer"]["icon_url"] = icon
             embed["description"] += "\n"
             if action != "created":
                 embed.pop("author", None)
@@ -215,7 +208,6 @@ def render_embed(
             f"{config['mommi']['push_to']} **{ref}**"
         )
         embed["url"] = safe_url(payload.get("compare"), repository)
-        embed["footer"] = {"text": repo_label}
         if payload.get("forced"):
             embed["title"] = (
                 config["mommi"]["force_push"] + " " + embed["title"]
@@ -241,9 +233,11 @@ def render_embed(
         fork = payload.get("forkee", {}).get("full_name", title)
         embed["title"] = f"{style['emoji']} {fork}"
     embed["title"] = truncate(embed["title"], 256)
-    if len(embed["description"].encode("utf-16-le")) // 2 > 3500:
+    if (
+        event == "push"
+        and len(embed["description"].encode("utf-16-le")) // 2 > 3500
+    ):
         embed["description"] = truncate(embed["description"], 3500)
-    embed["footer"]["text"] = truncate(embed["footer"]["text"], 2048)
     return embed
 
 
@@ -350,11 +344,48 @@ def format_event(
     summary = (
         f"{event}/{action} · {repository} · {prefix}{title} · {style['label']}"
     )
+    embed = render_embed(event, action, payload, subject, state, config)
+    body, images = prepare_body(
+        embed["description"], body_base(repository, subject)
+    )
+    chunks = split_body(body, config["display"]["body_length"])
+    embeds = []
+    fields = embed.pop("fields", [])
+    for index, chunk in enumerate(chunks):
+        part = {**embed, "description": chunk}
+        if index:
+            part["title"] = truncate(
+                f"{embed['title']} ({index + 1}/{len(chunks)})", 256
+            )
+        embeds.append(part)
+    for index, address in enumerate(images):
+        if index == 0:
+            embeds[-1]["image"] = {"url": address}
+        else:
+            embeds.append({"image": {"url": address}})
+    if event == "pull_request" and config["display"]["show_checks"]:
+        embeds.extend(checks_embeds(payload, config))
+    source_url = safe_url(subject.get("html_url") or embed["url"], repository)
+    label = config["display"]["repository_label"] or repository.split("/")[-1]
+    if number is not None:
+        label = f"#{number} · {plain(subject.get('title'))}"
+    link = f"[{text(label, 150)}]({source_url})"
+    owner = subject.get("user", {}).get("login")
+    if owner:
+        profile = author(subject["user"]).get("url")
+        if not profile and re.fullmatch(r"[A-Za-z0-9-]+(?:\[bot\])?", owner):
+            profile = f"https://github.com/{owner}"
+        owner_label = text(owner, 100)
+        if profile:
+            owner_label = f"[{owner_label}]({profile})"
+        link += f" · {config['mommi']['by']} {owner_label}"
+    fields.append(
+        {"name": config["mommi"]["source"], "value": link, "inline": False}
+    )
+    embeds[-1]["fields"] = fields
     message = {
         "username": truncate(plain(config["display"]["username"]), 80),
-        "embeds": [
-            render_embed(event, action, payload, subject, state, config)
-        ],
+        "embeds": embeds,
         "allowed_mentions": {"parse": []},
     }
     icon = avatar_url(config["display"]["avatar_url"])
