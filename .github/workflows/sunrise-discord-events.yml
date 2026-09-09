@@ -1,0 +1,54 @@
+name: Discord Event Capture
+
+on:
+  pull_request_target:
+    types: [opened, edited, closed, reopened, synchronize, assigned, unassigned, labeled, unlabeled, review_requested, review_request_removed, ready_for_review, converted_to_draft, locked, unlocked, auto_merge_enabled, auto_merge_disabled, milestoned, demilestoned, enqueued, dequeued]
+  pull_request_review:
+    types: [submitted, edited, dismissed]
+  pull_request_review_comment:
+    types: [created, edited, deleted]
+  issues:
+  issue_comment:
+  discussion:
+  discussion_comment:
+  fork:
+  watch:
+    types: [started]
+  push:
+    branches-ignore: [discord-notification-state]
+  create:
+  delete:
+  release:
+  public:
+  check_run:
+    types: [completed]
+  check_suite:
+    types: [completed]
+
+permissions: {}
+
+jobs:
+  capture:
+    if: vars.DISCORD_NOTIFICATIONS_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Сохранить событие без доступа к секретам Discord
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: discord-event
+          path: ${{ github.event_path }}
+          if-no-files-found: error
+          retention-days: 90
+          overwrite: true
+      - name: Объяснить результат сохранения
+        if: always()
+        env:
+          CAPTURE_STATUS: ${{ job.status }}
+        run: |
+          echo '## Сохранение события GitHub' >> "$GITHUB_STEP_SUMMARY"
+          if [ "$CAPTURE_STATUS" = success ]; then
+            echo 'Событие сохранено. Отправку и повторы выполнит Discord Notification Delivery; это ещё не подтверждение доставки в Discord.' | tee -a "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'Сохранить событие не удалось. Проверьте ошибку загрузки файла выше. Отправитель попробует повторить неудачный сбор; до получения файла сообщение не считается доставленным.' | tee -a "$GITHUB_STEP_SUMMARY"
+          fi

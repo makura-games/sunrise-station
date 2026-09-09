@@ -1,0 +1,186 @@
+[delivery]
+state_branch = "discord-notification-state"
+attempts = 6
+request_timeout = 30
+message_timeout = 180
+run_timeout = 480
+bootstrap_hours = 24
+max_messages_per_run = 40
+retry_interval = 300
+max_retry_interval = 3600
+
+[display]
+body_length = 500
+max_commits = 8
+username = "GitHub"
+repository_label = ""
+
+[filters]
+ignore_bots = true
+ignored_users = ["Sunrise-Bot", "PJBot"]
+branches = []
+ignored_labels = []
+
+[events]
+pull_request = ["*"]
+pull_request_review = ["*"]
+pull_request_review_comment = ["*"]
+issue_comment = ["*"]
+issues = ["*"]
+discussion = ["*"]
+discussion_comment = ["*"]
+commit_comment = ["*"]
+fork = ["*"]
+watch = ["*"]
+push = ["*"]
+create = ["*"]
+delete = ["*"]
+release = ["*"]
+public = ["*"]
+check_run = ["completed"]
+check_suite = ["completed"]
+
+[destinations.primary]
+webhook_env = "DISCORD_EVENTS_WEBHOOK"
+required = true
+excluded_events = []
+
+[destinations.secondary]
+webhook_env = "DISCORD_EVENTS_WEBHOOK_SECONDARY"
+required = false
+excluded_events = ["fork"]
+
+[styles.default]
+color = "#5865F2"
+emoji = "📋"
+label = "Изменение"
+
+[styles.opened]
+color = "#1F883D"
+emoji = "📬"
+label = "Открыто"
+
+[styles.created]
+color = "#1F883D"
+emoji = "➕"
+label = "Создано"
+
+[styles.merged]
+color = "#8250DF"
+emoji = "🟣"
+label = "Изменения приняты"
+
+[styles.closed]
+color = "#CF222E"
+emoji = "⛔"
+label = "Закрыто без слияния"
+
+[styles.issue_closed]
+color = "#8250DF"
+emoji = "✅"
+label = "Задача закрыта"
+
+[styles.approved]
+color = "#1F883D"
+emoji = "✅"
+label = "Изменения одобрены"
+
+[styles.changes_requested]
+color = "#CF222E"
+emoji = "🛠️"
+label = "Запрошены исправления"
+
+[styles.commented]
+color = "#0969DA"
+emoji = "💬"
+label = "Комментарий"
+
+[styles.dismissed]
+color = "#6E7781"
+emoji = "↩️"
+label = "Результат рассмотрения отменён"
+
+[styles.edited]
+color = "#BF8700"
+emoji = "✏️"
+label = "Отредактировано"
+
+[styles.deleted]
+color = "#CF222E"
+emoji = "🗑️"
+label = "Удалено"
+
+[styles.reopened]
+color = "#1F883D"
+emoji = "🔄"
+label = "Открыто повторно"
+
+[styles.converted_to_draft]
+color = "#6E7781"
+emoji = "📝"
+label = "Переведено в черновик"
+
+[styles.ready_for_review]
+color = "#1F883D"
+emoji = "👀"
+label = "Готово к рассмотрению"
+
+[styles.review_requested]
+color = "#BF8700"
+emoji = "👀"
+label = "Запрошено рассмотрение"
+
+[styles.labeled]
+color = "#0969DA"
+emoji = "🏷️"
+label = "Добавлена метка"
+
+[styles.unlabeled]
+color = "#6E7781"
+emoji = "🏷️"
+label = "Удалена метка"
+
+[styles.assigned]
+color = "#0969DA"
+emoji = "👤"
+label = "Назначен ответственный"
+
+[styles.unassigned]
+color = "#6E7781"
+emoji = "👤"
+label = "Снято назначение"
+
+[styles.push]
+color = "#0969DA"
+emoji = "📦"
+label = "Отправлены коммиты"
+
+[styles.fork]
+color = "#0969DA"
+emoji = "🍴"
+label = "Создана копия репозитория"
+
+[styles.watch]
+color = "#BF8700"
+emoji = "⭐"
+label = "Добавлена звезда"
+
+[styles.published]
+color = "#8250DF"
+emoji = "🚀"
+label = "Опубликован выпуск"
+
+[styles.success]
+color = "#1F883D"
+emoji = "✅"
+label = "Проверка пройдена"
+
+[styles.failure]
+color = "#CF222E"
+emoji = "❌"
+label = "Проверка не пройдена"
+
+[styles.public]
+color = "#1F883D"
+emoji = "🌐"
+label = "Репозиторий стал публичным"
