@@ -11,6 +11,7 @@ from pathlib import Path
 from .config import load_config
 from .formatting import format_event
 from .github import GitHub, GitHubError, State
+from .metadata import enrich_event
 from .transport import (
     DiscordError,
     DiscordPublishTimeoutError,
@@ -137,6 +138,9 @@ def collect(state: State, config: dict, log: Journal, deadline: float) -> int:
             number = payload.get("pull_request", {}).get("number")
             if pull_numbers and number not in pull_numbers:
                 raise ValueError("Номер PR не совпадает с данными запуска")
+            payload.pop("_discord_checks", None)
+            if format_event(run["event"], payload, config)[0] is not None:
+                enrich_event(run["event"], payload, github, config, log)
             enqueue(state, key, run["event"], payload, config, log)
             if key in state.data["pending"]:
                 state.data["pending"][key]["created_at"] = run["created_at"]

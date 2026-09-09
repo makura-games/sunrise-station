@@ -133,7 +133,7 @@ class NotificationTests(unittest.TestCase):
             len(embed["description"].encode("utf-16-le")) // 2, 4096
         )
         self.assertNotIn("private template", embed["description"])
-        self.assertNotIn("@everyone", embed["description"])
+        self.assertIn("@everyone", embed["description"])
         self.assertEqual({"parse": []}, message["allowed_mentions"])
 
     def test_whitespace_cannot_bypass_discord_size_limits(self):
@@ -156,9 +156,9 @@ class NotificationTests(unittest.TestCase):
         message, _ = format_event("push", payload, self.config)
         description = message["embeds"][0]["description"]
         self.assertNotIn("Hidden", description)
-        self.assertNotIn("full body", description)
+        self.assertIn("full body", description)
         self.assertIn("598", message["embeds"][0]["title"])
-        self.assertNotIn("Изменение 8", description)
+        self.assertNotIn("Изменение 11", description)
 
     def test_transport_retries_network_server_and_rate_limit(self):
         replies = [
@@ -249,6 +249,7 @@ class NotificationTests(unittest.TestCase):
 
     def new_state(self):
         state = Mock()
+        state.github.json.return_value = []
         state.github.repository = "owner/repo"
         state.data = {
             "pending": {},

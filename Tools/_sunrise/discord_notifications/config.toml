@@ -11,9 +11,46 @@ max_retry_interval = 3600
 
 [display]
 body_length = 500
-max_commits = 8
-username = "GitHub"
+max_commits = 11
+commit_length = 67
+username = "MoMMI"
+avatar_url = "https://raw.githubusercontent.com/PJB3005/MoMMI/1a10f345dbb709dcae46e6495e522d4d7d6dfbbf/Files/MoMMIv2.png"
 repository_label = ""
+show_checks = true
+show_reactions = true
+
+[mommi]
+new_comment = "New Comment: "
+edited_comment = "Edited Comment: "
+deleted_comment = "Deleted Comment: "
+commit_singular = "New Commit"
+commit_plural = "New Commits"
+push_to = "to"
+force_push = "[FORCE PUSHED]"
+ellipsis = "..."
+overflow = "<.....>"
+by = "by"
+checks = "Checks"
+status = "status"
+conflicts = "🚨CONFLICTS🚨"
+upvote = "<:upvote:590257887826411590>"
+downvote = "<:downvote:590257835447812207>"
+discussion = "<:ghdiscussion:1082078543770554429>"
+discussion_created = "Created"
+discussion_answered = "Answered"
+discussion_unanswered = "Unanswered"
+discussion_commented = "Commented"
+
+[checks]
+unknown = "❓"
+queued = "😴"
+in_progress = "🏃"
+neutral = "😐"
+success = "😄"
+failure = "😭"
+cancelled = "🛑"
+timed_out = "⌛"
+action_required = "🚧"
 
 [filters]
 ignore_bots = true
@@ -51,48 +88,53 @@ required = false
 excluded_events = ["fork"]
 
 [styles.default]
-color = "#5865F2"
-emoji = "📋"
+color = ""
+emoji = ""
 label = "Изменение"
 
 [styles.opened]
-color = "#1F883D"
-emoji = "📬"
+color = "#6CC644"
+emoji = "<:propen:896496081960054827>"
 label = "Открыто"
 
 [styles.created]
-color = "#1F883D"
+color = "#6CC644"
 emoji = "➕"
 label = "Создано"
 
 [styles.merged]
-color = "#8250DF"
-emoji = "🟣"
+color = "#6E5494"
+emoji = "<:prmerge:896496082324979772>"
 label = "Изменения приняты"
 
 [styles.closed]
-color = "#CF222E"
-emoji = "⛔"
+color = "#FF4444"
+emoji = "<:prclosed:896496081976827986>"
 label = "Закрыто без слияния"
 
 [styles.issue_closed]
-color = "#8250DF"
-emoji = "✅"
+color = "#FF4444"
+emoji = "<:issueclosed:896502343565185031>"
 label = "Задача закрыта"
 
+[styles.issue_opened]
+color = "#6CC644"
+emoji = "<:issueopened:896502343288381521>"
+label = "Задача открыта"
+
 [styles.approved]
-color = "#1F883D"
+color = "#6CC644"
 emoji = "✅"
 label = "Изменения одобрены"
 
 [styles.changes_requested]
-color = "#CF222E"
+color = "#FF4444"
 emoji = "🛠️"
 label = "Запрошены исправления"
 
 [styles.commented]
-color = "#0969DA"
-emoji = "💬"
+color = ""
+emoji = ""
 label = "Комментарий"
 
 [styles.dismissed]
@@ -111,7 +153,7 @@ emoji = "🗑️"
 label = "Удалено"
 
 [styles.reopened]
-color = "#1F883D"
+color = "#6CC644"
 emoji = "🔄"
 label = "Открыто повторно"
 
@@ -121,7 +163,7 @@ emoji = "📝"
 label = "Переведено в черновик"
 
 [styles.ready_for_review]
-color = "#1F883D"
+color = "#6CC644"
 emoji = "👀"
 label = "Готово к рассмотрению"
 
@@ -151,9 +193,24 @@ emoji = "👤"
 label = "Снято назначение"
 
 [styles.push]
-color = "#0969DA"
-emoji = "📦"
+color = ""
+emoji = ""
 label = "Отправлены коммиты"
+
+[styles.force_push]
+color = "#FF0000"
+emoji = ""
+label = "История ветки перезаписана"
+
+[styles.answered]
+color = "#6CC644"
+emoji = ""
+label = "Дан ответ"
+
+[styles.unanswered]
+color = "#FF4444"
+emoji = ""
+label = "Ответ отменён"
 
 [styles.fork]
 color = "#0969DA"
@@ -166,7 +223,7 @@ emoji = "⭐"
 label = "Добавлена звезда"
 
 [styles.published]
-color = "#8250DF"
+color = "#6E5494"
 emoji = "🚀"
 label = "Опубликован выпуск"
 

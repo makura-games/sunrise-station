@@ -26,18 +26,33 @@ def load_config(path: Path) -> dict:
     branch = config["delivery"]["state_branch"]
     if not re.fullmatch(r"[a-z][a-z0-9-]{2,80}", branch):
         raise ValueError("Некорректное имя служебной ветки")
-    for name, maximum in (("body_length", 2000), ("max_commits", 20)):
+    for name, maximum in (
+        ("body_length", 2000),
+        ("max_commits", 20),
+        ("commit_length", 200),
+    ):
         value = config["display"][name]
         if type(value) is not int or not 1 <= value <= maximum:
             raise ValueError(f"display.{name}: требуется 1–{maximum}")
     for name, style in config["styles"].items():
-        if not re.fullmatch(r"#[0-9a-fA-F]{6}", style["color"]):
-            raise ValueError(f"styles.{name}.color: требуется #RRGGBB")
+        if style["color"] != "" and not re.fullmatch(
+            r"#[0-9a-fA-F]{6}", style["color"]
+        ):
+            raise ValueError(f"styles.{name}.color: требуется #RRGGBB или ''")
         for field in ("emoji", "label"):
             if not isinstance(style[field], str) or len(style[field]) > 100:
                 raise ValueError(
                     f"styles.{name}.{field}: слишком длинный текст"
                 )
+    for section in ("mommi", "checks"):
+        for name, value in config[section].items():
+            if not isinstance(value, str) or len(value) > 100:
+                raise ValueError(
+                    f"{section}.{name}: требуется короткая строка"
+                )
+    for name in ("show_checks", "show_reactions"):
+        if type(config["display"][name]) is not bool:
+            raise ValueError(f"display.{name}: требуется true или false")
     for name, destination in config["destinations"].items():
         if not re.fullmatch(r"[A-Z][A-Z0-9_]+", destination["webhook_env"]):
             raise ValueError(f"destinations.{name}: неверное имя секрета")

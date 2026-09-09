@@ -11,6 +11,9 @@ on:
 permissions:
   contents: write
   actions: write
+  checks: read
+  issues: read
+  pull-requests: read
 
 concurrency:
   group: discord-notification-delivery
