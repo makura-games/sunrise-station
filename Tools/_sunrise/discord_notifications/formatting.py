@@ -267,6 +267,10 @@ def format_event(
     accepted = config["events"].get(event, [])
     if "*" not in accepted and action not in accepted:
         return None, f"Событие {event}/{action} выключено в конфигурации"
+    if event == "push" and payload.get("ref") != "refs/heads/master":
+        return None, "Уведомления о коммитах разрешены только для master"
+    if event == "pull_request" and action == "synchronize":
+        return None, "Обновление коммитов PR отдельно не публикуется"
     repository = payload["repository"]["full_name"]
     pull = payload.get("pull_request") or {}
     issue = payload.get("issue") or {}

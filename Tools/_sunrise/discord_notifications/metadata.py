@@ -1,11 +1,45 @@
-"""Реакции и статусы PR для карточек GitHub."""
+"""Связи коммитов, реакции и статусы PR для карточек GitHub."""
 
+import re
 from collections import Counter
 
 from .github import GitHubError
 
 
 def enrich_event(event: str, payload: dict, github, config: dict, log) -> None:
+    if event == "push":
+        commits = []
+        for commit in payload.get("commits", []):
+            sha = commit.get("id", "")
+            if not re.fullmatch(r"[0-9a-fA-F]{40}", sha):
+                raise ValueError("Некорректный идентификатор коммита")
+            try:
+                pulls = github.pages(f"{github.root}/commits/{sha}/pulls")
+                merged = next(
+                    (
+                        pull
+                        for pull in pulls
+                        if pull["merged_at"]
+                        and pull["base"]["ref"] == "master"
+                        and pull["base"]["repo"]["full_name"].casefold()
+                        == github.repository.casefold()
+                    ),
+                    None,
+                )
+            except GitHubError as error:
+                raise GitHubError(
+                    f"Не удалось проверить связь коммита {sha[:7]} с PR: "
+                    f"{error}. Проверка будет повторена"
+                ) from error
+            if merged:
+                log(
+                    f"Коммит {sha[:7]} пропущен: вошёл в master "
+                    f"через PR #{merged['number']}."
+                )
+            else:
+                commits.append(commit)
+        payload["commits"] = commits
+        return
     subject = payload.get("pull_request") or payload.get("issue") or {}
     number = subject.get("number")
     if type(number) is not int or number <= 0:

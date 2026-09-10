@@ -2,7 +2,7 @@ name: Discord Event Capture
 
 on:
   pull_request_target:
-    types: [opened, edited, closed, reopened, synchronize, assigned, unassigned, labeled, unlabeled, review_requested, review_request_removed, ready_for_review, converted_to_draft, locked, unlocked, auto_merge_enabled, auto_merge_disabled, milestoned, demilestoned, enqueued, dequeued]
+    types: [opened, edited, closed, reopened, assigned, unassigned, labeled, unlabeled, review_requested, review_request_removed, ready_for_review, converted_to_draft, locked, unlocked, auto_merge_enabled, auto_merge_disabled, milestoned, demilestoned, enqueued, dequeued]
   pull_request_review:
     types: [submitted, edited, dismissed]
   pull_request_review_comment:
@@ -15,7 +15,7 @@ on:
   watch:
     types: [started]
   push:
-    branches-ignore: [discord-notification-state]
+    branches: [master]
   delete:
   release:
   public:
