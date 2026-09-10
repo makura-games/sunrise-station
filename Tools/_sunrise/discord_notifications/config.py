@@ -62,18 +62,10 @@ def load_config(path: Path) -> dict:
         raise ValueError("display.show_reactions: требуется true или false")
     if type(config["filters"]["ignore_bots"]) is not bool:
         raise ValueError("filters.ignore_bots: требуется true или false")
-    for name, destination in config["destinations"].items():
-        if type(destination["required"]) is not bool:
-            raise ValueError(f"destinations.{name}.required: требуется bool")
-        if not re.fullmatch(r"[A-Z][A-Z0-9_]+", destination["webhook_env"]):
-            raise ValueError(f"destinations.{name}: неверное имя секрета")
     lists = [*config["events"].values()]
     lists += [
         config["filters"][name]
         for name in ("ignored_users", "branches", "ignored_labels")
-    ]
-    lists += [
-        item["excluded_events"] for item in config["destinations"].values()
     ]
     if any(
         not isinstance(items, list)

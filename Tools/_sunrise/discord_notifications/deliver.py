@@ -85,16 +85,6 @@ def enqueue(
     if message is None:
         log(f"Пропущено: {explanation}.")
         return
-    canonical = "pull_request" if event == "pull_request_target" else event
-    targets = [
-        name
-        for name, target in config["destinations"].items()
-        if canonical not in target["excluded_events"]
-        and (target["required"] or os.environ.get(target["webhook_env"]))
-    ]
-    if not targets:
-        log(f"Пропущено: для {explanation} не включён ни один получатель.")
-        return
     parts = split_message(message)
     created_at = utc_now()
     for index, part in enumerate(parts):
@@ -106,15 +96,10 @@ def enqueue(
                 "explanation": (
                     f"{explanation} · часть {index + 1}/{len(parts)}"
                 ),
-                "targets": targets,
-                "sent": {},
                 "created_at": created_at,
             },
         )
-    log(
-        f"Сохранено в очередь: {explanation}. "
-        f"Получатели: {', '.join(targets)}."
-    )
+    log(f"Сохранено в очередь: {explanation}.")
 
 
 def collect(state: State, config: dict, log: Journal, deadline: float) -> int:
@@ -268,6 +253,9 @@ def deliver_pending(
     *,
     force_retry: bool = False,
 ) -> int:
+    address = os.environ.get("DISCORD_EVENTS_WEBHOOK", "")
+    if not address:
+        raise ValueError("Не задан секрет DISCORD_EVENTS_WEBHOOK")
     failures = 0
     sent_count = 0
     attempted_count = 0
@@ -276,104 +264,75 @@ def deliver_pending(
         key=lambda entry: (entry[1]["created_at"], entry[0]),
     )
     for key, item in pending:
-        if all(name in item["sent"] for name in item["targets"]):
-            del state.data["pending"][key]
-            state.save()
+        retry = item.get("retry", {})
+        if not force_retry and retry.get("after", 0) > time.time():
+            log(f"Сообщение {key} ожидает назначенного повтора.")
             continue
-        for name in item["targets"]:
-            if name in item["sent"]:
-                continue
-            retry = item.setdefault("retry", {}).get(name, {})
-            if not force_retry and retry.get("after", 0) > time.time():
-                log(
-                    f"Сообщение {key} для {name} ожидает назначенного повтора."
-                )
-                continue
-            if (
-                time.monotonic() >= deadline - 30
-                or attempted_count
-                >= config["delivery"]["max_messages_per_run"]
-            ):
-                log(
-                    "Остаток очереди сохранён; "
-                    "следующий запуск продолжит отправку. "
-                    f"Отправлено: {sent_count}; ошибок: {failures}; "
-                    f"в очереди: {len(state.data['pending'])}."
-                )
-                return failures
-            attempted_count += 1
-            target = config["destinations"].get(name)
-            address = (
-                os.environ.get(target["webhook_env"], "") if target else ""
-            )
-            log(f"Сообщение {key}; получатель {name}; {item['explanation']}.")
-            if not address:
-                failures += 1
-                log(
-                    f"Ошибка: не задан секрет получателя {name}. "
-                    "Сообщение остаётся в очереди."
-                )
-                defer(state, item, name, config)
-                continue
-            try:
-                receipt = send_message(
-                    address,
-                    item["message"],
-                    attempts=config["delivery"]["attempts"],
-                    timeout=config["delivery"]["request_timeout"],
-                    deadline=min(
-                        deadline - 20,
-                        time.monotonic()
-                        + config["delivery"]["message_timeout"],
-                    ),
-                    report=log,
-                )
-                if not receipt.get("id"):
-                    raise ValueError(
-                        "Discord не вернул ID сообщения; "
-                        "доставка не подтверждена"
-                    )
-            except (
-                DiscordError,
-                DiscordPublishTimeoutError,
-                UnexpectedDiscordStatusError,
-                ValueError,
-            ) as error:
-                failures += 1
-                log(
-                    f"Ошибка отправки: {error}. "
-                    "Сообщение сохранено для следующего запуска."
-                )
-                defer(state, item, name, config)
-                continue
-            item["sent"][name] = {
-                "message_id": receipt.get("id"),
-                "at": utc_now(),
-            }
-            if all(target in item["sent"] for target in item["targets"]):
-                del state.data["pending"][key]
-            state.save()
-            sent_count += 1
+        if (
+            time.monotonic() >= deadline - 30
+            or attempted_count >= config["delivery"]["max_messages_per_run"]
+        ):
             log(
-                f"Успешно отправлено в {name}: {item['explanation']}. "
-                f"ID сообщения: {receipt.get('id', 'не предоставлен')}."
+                "Остаток очереди сохранён; "
+                "следующий запуск продолжит отправку. "
+                f"Отправлено: {sent_count}; ошибок: {failures}; "
+                f"в очереди: {len(state.data['pending'])}."
             )
-            for embed in item["message"]["embeds"]:
-                author_name = embed.get("author", {}).get("name", "")
-                heading = embed.get("title") or embed.get("author", {}).get(
-                    "name", "Изображение"
+            return failures
+        attempted_count += 1
+        log(f"Сообщение {key}; {item['explanation']}.")
+        try:
+            receipt = send_message(
+                address,
+                item["message"],
+                attempts=config["delivery"]["attempts"],
+                timeout=config["delivery"]["request_timeout"],
+                deadline=min(
+                    deadline - 20,
+                    time.monotonic() + config["delivery"]["message_timeout"],
+                ),
+                report=log,
+            )
+            if not receipt.get("id"):
+                raise ValueError(
+                    "Discord не вернул ID сообщения; доставка не подтверждена"
                 )
-                log(
-                    f"Карточка: {heading}. "
-                    f"Автор: {author_name}. "
-                    f"Текст: {embed.get('description', '')} "
-                    f"Ссылка: {embed.get('url', '')} "
-                    f"Изображение: {embed.get('image', {}).get('url', '')}"
-                )
-                for field in embed.get("fields", []):
-                    log(f"{field['name']}: {field['value']}")
-                if embed.get("footer"):
-                    log(f"Статусы: {embed['footer']['text']}")
+        except (
+            DiscordError,
+            DiscordPublishTimeoutError,
+            UnexpectedDiscordStatusError,
+            ValueError,
+        ) as error:
+            failures += 1
+            log(
+                f"Ошибка отправки: {error}. "
+                "Сообщение сохранено для следующего запуска."
+            )
+            defer(state, item, config)
+            continue
+        del state.data["pending"][key]
+        state.save()
+        sent_count += 1
+        log(
+            f"Успешно отправлено: {item['explanation']}. "
+            f"ID сообщения: {receipt.get('id', 'не предоставлен')}."
+        )
+        for embed in item["message"]["embeds"]:
+            author_name = embed.get("author", {}).get("name", "")
+            heading = embed.get("title") or embed.get("author", {}).get(
+                "name", "Изображение"
+            )
+            log(
+                f"Карточка: {heading}. "
+                f"Автор: {author_name}. "
+                f"Текст: {embed.get('description', '')} "
+                f"Ссылка: {embed.get('url', '')} "
+                f"Изображение: {embed.get('image', {}).get('url', '')}"
+            )
+            for field in embed.get("fields", []):
+                log(f"{field['name']}: {field['value']}")
+            if embed.get("footer"):
+                log(f"Статусы: {embed['footer']['text']}")
     log(
         f"Итог: отправлено {sent_count}; ошибок {failures}; "
         f"сообщений в очереди {len(state.data['pending'])}."
@@ -381,15 +340,13 @@ def deliver_pending(
     return failures
 
 
-def defer(state: State, item: dict, name: str, config: dict) -> None:
-    attempts = (
-        item.setdefault("retry", {}).get(name, {}).get("attempts", 0) + 1
-    )
+def defer(state: State, item: dict, config: dict) -> None:
+    attempts = item.get("retry", {}).get("attempts", 0) + 1
     delay = min(
         config["delivery"]["retry_interval"] * 2 ** min(attempts - 1, 12),
         config["delivery"]["max_retry_interval"],
     )
-    item["retry"][name] = {"attempts": attempts, "after": time.time() + delay}
+    item["retry"] = {"attempts": attempts, "after": time.time() + delay}
     state.save()
 
 
@@ -403,7 +360,7 @@ def main(phase: str = "send") -> int:
         deadline = time.monotonic() + config["delivery"]["run_timeout"] / 2
         state = State(github, Path(os.environ["DISCORD_STATE_PATH"]))
         log(
-            "Состояние очереди прочитано. Уже подтверждённые получатели "
+            "Состояние очереди прочитано. Уже доставленные сообщения "
             "не будут отправлены повторно."
         )
         if phase == "collect":

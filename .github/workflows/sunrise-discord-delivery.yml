@@ -16,12 +16,11 @@ permissions:
 
 concurrency:
   group: discord-notification-delivery
-  queue: max
   cancel-in-progress: false
 
 jobs:
   deliver:
-    if: vars.DISCORD_NOTIFICATIONS_ENABLED == 'true' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     runs-on: ubuntu-latest
     timeout-minutes: 12
     env:
@@ -47,8 +46,6 @@ jobs:
       - name: Собрать новые события в очередь
         id: collect
         timeout-minutes: 4
-        env:
-          DISCORD_EVENTS_WEBHOOK_SECONDARY: ${{ secrets.DISCORD_EVENTS_WEBHOOK_SECONDARY }}
         run: python -m discord_notifications.deliver collect
       - name: Сохранить очередь до отправки
         id: queue
@@ -66,7 +63,6 @@ jobs:
         timeout-minutes: 5
         env:
           DISCORD_EVENTS_WEBHOOK: ${{ secrets.DISCORD_EVENTS_WEBHOOK }}
-          DISCORD_EVENTS_WEBHOOK_SECONDARY: ${{ secrets.DISCORD_EVENTS_WEBHOOK_SECONDARY }}
         run: python -m discord_notifications.deliver send
       - name: Сохранить результат даже после ошибки отправки
         id: state

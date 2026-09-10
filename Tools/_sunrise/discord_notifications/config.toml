@@ -122,16 +122,6 @@ delete = ["*"]
 release = ["*"]
 public = ["*"]
 
-[destinations.primary]
-webhook_env = "DISCORD_EVENTS_WEBHOOK"
-required = true
-excluded_events = []
-
-[destinations.secondary]
-webhook_env = "DISCORD_EVENTS_WEBHOOK_SECONDARY"
-required = false
-excluded_events = ["fork"]
-
 [styles.default]
 color = ""
 
