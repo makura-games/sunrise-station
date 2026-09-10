@@ -2,15 +2,19 @@ name: Discord Event Capture
 
 on:
   pull_request_target:
-    types: [opened, edited, closed, reopened, assigned, unassigned, labeled, unlabeled, review_requested, review_request_removed, ready_for_review, converted_to_draft, locked, unlocked, auto_merge_enabled, auto_merge_disabled, milestoned, demilestoned, enqueued, dequeued]
+    types: [opened, edited, closed, reopened, ready_for_review, converted_to_draft]
   pull_request_review:
-    types: [submitted, edited, dismissed]
+    types: [submitted]
   pull_request_review_comment:
     types: [created, edited, deleted]
   issues:
+    types: [opened, edited, closed, reopened]
   issue_comment:
+    types: [created, edited, deleted]
   discussion:
+    types: [created, edited, deleted, answered, unanswered]
   discussion_comment:
+    types: [created, edited, deleted]
   fork:
   watch:
     types: [started]
@@ -18,6 +22,7 @@ on:
     branches: [master]
   delete:
   release:
+    types: [published]
   public:
 
 permissions: {}

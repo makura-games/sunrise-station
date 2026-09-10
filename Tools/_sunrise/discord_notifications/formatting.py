@@ -178,6 +178,19 @@ def render_embed(
         embed["author"] = author(displayed_author)
     set_color(embed, style)
     if event in {"pull_request", "issues"}:
+        if action == "reopened":
+            kind = "pull_request" if event == "pull_request" else "issue"
+            closed_icon = (
+                "closed" if event == "pull_request" else "issue_closed"
+            )
+            opened_icon = (
+                "opened" if event == "pull_request" else "issue_opened"
+            )
+            embed["title"] = (
+                f"{config['icons'][closed_icon]} → "
+                f"{config['icons'][opened_icon]} "
+                f"{config['text'][f'{kind}_reopened']} · {title}"
+            )
         votes = []
         if config["display"]["show_reactions"]:
             reactions = subject.get("reactions") or {}
@@ -250,7 +263,7 @@ def render_embed(
     elif event in {"discussion", "discussion_comment"}:
         action_text = config["text"].get(f"discussion_{action}", action)
         if event == "discussion_comment":
-            action_text = config["text"]["discussion_commented"]
+            action_text = config["text"][f"discussion_comment_{action}"]
         else:
             embed["description"] += "\n"
             if action != "created":
@@ -340,7 +353,6 @@ def format_event(
         )
     if (
         event == "pull_request_review"
-        and action != "dismissed"
         and str(review.get("state", "")).lower() == "commented"
         and not plain(review.get("body")).strip()
     ):
@@ -368,7 +380,7 @@ def format_event(
         state = "force_push" if payload.get("forced") else "push"
     elif event == "delete":
         state = "deleted"
-    elif event == "pull_request_review" and action != "dismissed":
+    elif event == "pull_request_review":
         state = review.get("state", "commented").lower()
     elif event == "pull_request_review_comment":
         state = (

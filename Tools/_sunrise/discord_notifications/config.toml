@@ -37,17 +37,13 @@ commit = "коммиту"
 discussion_created = "Создано обсуждение"
 discussion_edited = "Обсуждение изменено"
 discussion_deleted = "Обсуждение удалено"
-discussion_transferred = "Обсуждение перенесено"
-discussion_pinned = "Обсуждение закреплено"
-discussion_unpinned = "Обсуждение откреплено"
-discussion_labeled = "Добавлена метка"
-discussion_unlabeled = "Удалена метка"
-discussion_locked = "Обсуждение заблокировано"
-discussion_unlocked = "Обсуждение разблокировано"
-discussion_category_changed = "Изменена категория обсуждения"
 discussion_answered = "Ответ выбран"
 discussion_unanswered = "Ответ снят"
-discussion_commented = "Новый комментарий"
+discussion_comment_created = "Новый комментарий"
+discussion_comment_edited = "Изменён комментарий"
+discussion_comment_deleted = "Удалён комментарий"
+pull_request_reopened = "PR переоткрыт"
+issue_reopened = "Задача переоткрыта"
 
 [icons]
 approved = "<:gh_approved:1547308683753558071>"
@@ -96,10 +92,6 @@ icon = "changes_requested"
 color = "#8B949E"
 icon = "review"
 
-[reviews.dismissed]
-color = "#8B949E"
-icon = "review"
-
 [filters]
 ignore_bots = true
 ignored_users = ["Sunrise-Bot", "PJBot"]
@@ -107,19 +99,19 @@ branches = []
 ignored_labels = []
 
 [events]
-pull_request = ["*"]
-pull_request_review = ["*"]
-pull_request_review_comment = ["*"]
-issue_comment = ["*"]
-issues = ["*"]
-discussion = ["*"]
-discussion_comment = ["*"]
-commit_comment = ["*"]
+pull_request = ["opened", "edited", "closed", "reopened", "ready_for_review", "converted_to_draft"]
+pull_request_review = ["submitted"]
+pull_request_review_comment = ["created", "edited", "deleted"]
+issue_comment = ["created", "edited", "deleted"]
+issues = ["opened", "edited", "closed", "reopened"]
+discussion = ["created", "edited", "deleted", "answered", "unanswered"]
+discussion_comment = ["created", "edited", "deleted"]
+commit_comment = ["created", "edited"]
 fork = ["*"]
 watch = ["*"]
-push = ["*"]
-delete = ["*"]
-release = ["*"]
+push = ["push"]
+delete = ["delete"]
+release = ["published"]
 public = ["*"]
 
 [styles.default]
@@ -159,12 +151,6 @@ icon = "edited"
 [styles.deleted]
 color = "#CF222E"
 icon = "deleted"
-
-[styles.labeled]
-color = "#0969DA"
-
-[styles.unlabeled]
-color = "#6E7781"
 
 [styles.push]
 color = ""
