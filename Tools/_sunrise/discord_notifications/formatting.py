@@ -23,6 +23,12 @@ def text(value: object, limit: int = 500) -> str:
     return truncate(value, limit)
 
 
+def link_text(value: object, limit: int = 1000) -> str:
+    value = plain(value).replace("@", "＠")
+    value = value.replace("[", "［").replace("]", "］")
+    return truncate(value, limit)
+
+
 def safe_url(value: object, repository: str) -> str:
     value = str(value or "")
     parsed = urlsplit(value)
@@ -205,7 +211,7 @@ def render_embed(
                 address = repository_file_url(
                     repository, revision, comment.get("path"), line
                 )
-                value = text(location, 1000)
+                value = link_text(location)
                 if address:
                     value = f"[{value}]({address})"
                 embed["fields"] = [
