@@ -4,7 +4,38 @@ import ipaddress
 import re
 from html import unescape
 from html.parser import HTMLParser
+from pathlib import PurePosixPath
 from urllib.parse import quote, urljoin, urlsplit
+
+CODE_LANGUAGES = {
+    ".c": "c",
+    ".cpp": "cpp",
+    ".cs": "csharp",
+    ".csproj": "xml",
+    ".css": "css",
+    ".ftl": "ini",
+    ".go": "go",
+    ".h": "cpp",
+    ".html": "html",
+    ".json": "json",
+    ".js": "javascript",
+    ".jsx": "javascript",
+    ".md": "markdown",
+    ".ps1": "powershell",
+    ".py": "python",
+    ".rs": "rust",
+    ".scss": "scss",
+    ".sh": "bash",
+    ".sql": "sql",
+    ".swsl": "glsl",
+    ".toml": "toml",
+    ".ts": "typescript",
+    ".tsx": "typescript",
+    ".xaml": "xml",
+    ".xml": "xml",
+    ".yaml": "yaml",
+    ".yml": "yaml",
+}
 
 
 def units(value: str) -> int:
@@ -38,6 +69,32 @@ def media_url(value: str, base: str) -> str:
         value = value.replace("github.com/", "raw.githubusercontent.com/", 1)
         value = value.replace("/blob/", "/", 1)
     return value
+
+
+def add_code_language(body: str, path: object) -> str:
+    suffix = PurePosixPath(str(path or "")).suffix.lower()
+    language = CODE_LANGUAGES.get(suffix)
+    if not language:
+        return body
+    result = []
+    fence = ""
+    for line in body.splitlines(keepends=True):
+        match = re.match(
+            r"^([ \t]*(?:>[ \t]*)*)(```|~~~)([^\r\n]*)(\r?\n)?$", line
+        )
+        if match:
+            marker = match.group(2)
+            info = match.group(3).strip()
+            if fence:
+                if marker == fence and not info:
+                    fence = ""
+            else:
+                fence = marker
+                if not info or info.casefold().startswith("suggestion"):
+                    ending = match.group(4) or ""
+                    line = f"{match.group(1)}{marker}{language}{ending}"
+        result.append(line)
+    return "".join(result)
 
 
 class Images(HTMLParser):

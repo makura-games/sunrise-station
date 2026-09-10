@@ -4,7 +4,7 @@ import re
 from fnmatch import fnmatchcase
 from urllib.parse import quote, urlsplit
 
-from .content import body_base, prepare_body, split_body
+from .content import add_code_language, body_base, prepare_body, split_body
 
 
 def truncate(value: str, limit: int) -> str:
@@ -160,6 +160,8 @@ def render_embed(
     icon = config["icons"].get(style.get("icon", ""), "")
     comment = payload.get("comment") or payload.get("review") or {}
     body = comment.get("body") if comment else subject.get("body")
+    if event == "pull_request_review_comment":
+        body = add_code_language(str(body or ""), comment.get("path"))
     embed = {
         "title": f"{icon} {title}".strip(),
         "url": safe_url(
