@@ -83,6 +83,7 @@ def send_message(
     *,
     message_id: str | None = None,
     files: list | None = None,
+    delete: bool = False,
     attempts: int = 6,
     timeout: float = 30,
     deadline: float | None = None,
@@ -91,6 +92,8 @@ def send_message(
     """Повторяет временные отказы, не печатая URL, ответы или секреты."""
     address = webhook_url(address)
     message = copy.deepcopy(payload)
+    if delete and message_id is None:
+        raise ValueError("Для удаления нужен ID сообщения Discord")
     if message_id is not None:
         if not re.fullmatch(r"\d{1,30}", message_id):
             raise ValueError("Некорректный ID сообщения Discord")
@@ -118,6 +121,22 @@ def send_message(
             if not data.startswith(b"\x89PNG\r\n\x1a\n"):
                 raise ValueError("Ожидалось вложение PNG")
             files.append((f"files[{len(files)}]", (name, data, "image/png")))
+    if message_id is not None and not delete:
+        attachments = message.setdefault("attachments", [])
+        if not isinstance(attachments, list):
+            raise ValueError("Поле attachments должно быть списком")
+        for file in files or []:
+            try:
+                field, body = file
+                match = re.fullmatch(r"files\[(\d+)]", field)
+                filename = body[0]
+            except (TypeError, ValueError, IndexError):
+                raise ValueError("Некорректное вложение Discord") from None
+            if not match or not isinstance(filename, str) or not filename:
+                raise ValueError("Некорректное вложение Discord")
+            attachments.append(
+                {"id": int(match.group(1)), "filename": filename}
+            )
     message.setdefault("allowed_mentions", {"parse": []})
     if message.get("flags", 0) & (1 << 15):
         address += "&with_components=true"
@@ -142,10 +161,13 @@ def send_message(
                 "timeout": min(timeout, remaining),
                 "allow_redirects": False,
             }
-            request = requests.patch if message_id else requests.post
-            if not files:
+            if delete:
+                response = requests.delete(address, **options)
+            elif not files:
+                request = requests.patch if message_id else requests.post
                 response = request(address, json=message, **options)
             else:
+                request = requests.patch if message_id else requests.post
                 response = request(
                     address,
                     data={
@@ -155,9 +177,14 @@ def send_message(
                     **options,
                 )
             status = response.status_code
+            if delete and status == 404:
+                report("Сообщение Discord уже отсутствует.")
+                return {"id": message_id}
             if status in {200, 204}:
                 confirmation = (
-                    "Изменение подтверждено"
+                    "Удаление подтверждено"
+                    if delete
+                    else "Изменение подтверждено"
                     if message_id
                     else "Доставка подтверждена"
                 )
@@ -166,6 +193,8 @@ def send_message(
                     result = response.json()
                 except ValueError:
                     result = {}
+                if delete:
+                    return {"id": message_id}
                 return result if isinstance(result, dict) else {}
             if 200 <= status < 400:
                 raise UnexpectedDiscordStatusError(status)

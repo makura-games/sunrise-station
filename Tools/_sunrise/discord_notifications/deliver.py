@@ -126,15 +126,7 @@ def enqueue(
     parts = split_message(message)
     record_key, editing, forget = message_reference(event, payload)
     messages = state.data.setdefault("messages", {})
-    if editing:
-        message_ids = messages.get(record_key, [])
-        if len(message_ids) != len(parts) or not all(message_ids):
-            log(
-                f"Пропущено изменение: {explanation}. "
-                "Исходные части сообщения Discord не найдены "
-                "или их количество изменилось."
-            )
-            return
+    message_ids = messages.get(record_key, []) if editing else []
     created_at = utc_now()
     for index, part in enumerate(parts):
         part_key = key if len(parts) == 1 else f"{key}:part{index + 1:05d}"
@@ -148,12 +140,33 @@ def enqueue(
             pending["part_index"] = index
             pending["part_count"] = len(parts)
         if editing:
-            pending["message_id"] = message_ids[index]
             pending["forget_record"] = forget
+            if index < len(message_ids) and message_ids[index]:
+                pending["message_id"] = message_ids[index]
         state.data["pending"].setdefault(
             part_key,
             pending,
         )
+    if editing:
+        for index, message_id in enumerate(
+            message_ids[len(parts) :], start=len(parts)
+        ):
+            if not message_id:
+                continue
+            state.data["pending"].setdefault(
+                f"{key}:remove{index + 1:05d}",
+                {
+                    "message": {"embeds": []},
+                    "message_id": message_id,
+                    "delete": True,
+                    "record_key": record_key,
+                    "part_count": len(parts),
+                    "explanation": (
+                        f"{explanation} · удаление лишней части {index + 1}"
+                    ),
+                    "created_at": created_at,
+                },
+            )
     operation = "изменение" if editing else "сообщение"
     log(f"Сохранено в очередь {operation}: {explanation}.")
 
@@ -346,6 +359,7 @@ def deliver_pending(
                 address,
                 item["message"],
                 message_id=message_id,
+                delete=item.get("delete", False),
                 attempts=config["delivery"]["attempts"],
                 timeout=config["delivery"]["request_timeout"],
                 deadline=min(
@@ -394,16 +408,26 @@ def deliver_pending(
         if record_key:
             if item.get("forget_record"):
                 state.data["messages"].pop(record_key, None)
-            elif not message_id:
+            elif item.get("delete"):
+                if record_key in state.data["messages"]:
+                    state.data["messages"][record_key] = state.data[
+                        "messages"
+                    ][record_key][: item["part_count"]]
+            else:
                 part_count = item["part_count"]
                 message_ids = state.data["messages"].get(record_key, [])
-                if len(message_ids) != part_count:
-                    message_ids = [None] * part_count
+                message_ids = (message_ids[:part_count] + [None] * part_count)[
+                    :part_count
+                ]
                 message_ids[item["part_index"]] = str(receipt["id"])
                 state.data["messages"][record_key] = message_ids
         state.save()
         sent_count += 1
-        operation = "изменено" if message_id else "отправлено"
+        operation = (
+            "удалено"
+            if item.get("delete")
+            else "изменено" if message_id else "отправлено"
+        )
         log(
             f"Успешно {operation}: {item['explanation']}. "
             f"ID сообщения: {receipt.get('id', 'не предоставлен')}."
