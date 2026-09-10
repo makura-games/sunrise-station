@@ -15,10 +15,16 @@
       map: ["enum.LockVisualLayers.Lock"]
   - type: Appearance
   - type: LockVisuals
+  # Sunrise edit - Добавлен Wall tag для корректной работы систем, проверяющих стены.
   - type: InteractionOutline
+  - type: Tag
+    tags:
+    - Wall
+  # Sunrise edit - Включена физическая коллизия для проверки блокировки снарядов.
   - type: Physics
     bodyType: Dynamic
-    canCollide: false
+    canCollide: true
+  - type: Airtight
   - type: Fixtures
     fixtures:
       base:
@@ -28,35 +34,45 @@
         density: 75
         mask:
         - MachineMask
+      # Sunrise edit - Изменена коллизия барьера для более точного взаимодействия со снарядами.
       barrier:
         shape:
-          !type:PhysShapeCircle
-          radius: 0.45
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 150
+        mask:
+        - SpecialWallLayer
         layer:
-        - WallLayer
+        - SpecialWallLayer
   - type: DeployableBarrier
     fixture: barrier
+  # Sunrise edit - Добавлен Pierceable для корректного взаимодействия DeployableBarrier с системой пробития снарядов.
+  - type: Pierceable
+    level: Rock
   - type: AccessReader
     access: [["Security"]]
   - type: Lock
     locked: false
-    lockOnClick: true # toggle lock just by clicking on barrier
+    lockOnClick: true
     lockTime: 5
     unlockTime: 5
+  # Sunrise edit - Барьер получает урон от атак.
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Metallic
+  - type: Armor
+    modifiers:
+      coefficients:
+        Piercing: 0.15
+        Blunt: 0.25
+        Slash: 0.2
+        Heat: 0.4
+        Caustic: 0.5
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 600
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 300
+        damage: 800
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -67,7 +83,8 @@
         sound:
           collection: MetalBreak
       - !type:DoActsBehavior
-        acts: [ "Destruction" ]
+        acts:
+        - Destruction
   - type: PointLight
     enabled: false
     radius: 3

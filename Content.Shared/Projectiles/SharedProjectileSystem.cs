@@ -1,10 +1,12 @@
 using System.Numerics;
 using Content.Shared.Damage;
+using Content.Shared.EnergyDome;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Throwing;
+using Content.Shared._Sunrise.Weapons.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -14,7 +16,6 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
-
 namespace Content.Shared.Projectiles;
 
 public abstract partial class SharedProjectileSystem : EntitySystem
@@ -210,7 +211,9 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             }
 
             // Sunrise edit start - ignore shooter's mech
-            if (component.Shooter != null && TryComp<Mech.Components.MechPilotComponent>(component.Shooter.Value, out var pilot) && args.OtherEntity == pilot.Mech)
+            if (component.Shooter != null &&
+                TryComp<Mech.Components.MechPilotComponent>(component.Shooter.Value, out var pilot) &&
+                args.OtherEntity == pilot.Mech)
             {
                 args.Cancelled = true;
                 return;
@@ -219,7 +222,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         }
 
         // Sunrise edit start - Projectile pierce collision prevention
-        if (TryComp<Content.Shared._Sunrise.Weapons.Components.ProjectilePierceComponent>(uid, out var pierce) && pierce.PiercedEntities.Contains(args.OtherEntity))
+        if (TryComp<ProjectilePierceComponent>(uid, out var pierce) &&
+            pierce.PiercedEntities.Contains(args.OtherEntity))
         {
             args.Cancelled = true;
             return;
