@@ -85,22 +85,18 @@ none = "Нет решения"
 unknown = "Недоступно"
 
 [reviews.approved]
-label = "Approved"
 color = "#6CC644"
 icon = "approved"
 
 [reviews.changes_requested]
-label = "Changes requested"
 color = "#FF4444"
 icon = "changes_requested"
 
 [reviews.commented]
-label = "Comment"
 color = "#8B949E"
 icon = "review"
 
 [reviews.dismissed]
-label = "Dismissed"
 color = "#8B949E"
 icon = "review"
 

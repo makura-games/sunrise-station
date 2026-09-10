@@ -187,7 +187,7 @@ def render_embed(
                     votes.append(f"{config['icons'][name]} {count}")
         embed["description"] += "\n" + "   ".join(votes) + "\u200b"
     elif event == "pull_request_review":
-        embed["title"] = f"{icon} {style['label']} · {title}".strip()
+        embed["title"] = f"{icon} {title}".strip()
     elif event == "pull_request_review_comment":
         if comment.get("in_reply_to_id") is not None:
             prefix = config["text"]["new_comment"]
@@ -202,9 +202,7 @@ def render_embed(
             prefix = config["text"]["review_comment"]
             if action in {"edited", "deleted"}:
                 prefix = config["text"][f"{action}_review_comment"]
-            embed["title"] = (
-                f"{icon} {prefix} · {style['label']} · #{number} {title}"
-            ).strip()
+            embed["title"] = f"{icon} {prefix} · #{number} {title}".strip()
             path = plain(comment.get("path"))
             revision = comment.get("original_commit_id")
             line = comment.get("original_line")
