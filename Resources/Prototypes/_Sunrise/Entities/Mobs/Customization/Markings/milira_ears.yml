@@ -1,6 +1,6 @@
 - type: marking
   id: MiliraEars
-  bodyPart: HeadTop
+  bodyPart: HeadSide
   forcedColoring: true
   groupWhitelist: [ Milira ]
   sprites:
@@ -9,7 +9,7 @@
 
 - type: marking
   id: MiliraEarsShortened
-  bodyPart: HeadTop
+  bodyPart: HeadSide
   forcedColoring: true
   groupWhitelist: [ Milira ]
   sprites:
@@ -18,7 +18,7 @@
 
 - type: marking
   id: MiliraEarsStraight
-  bodyPart: HeadTop
+  bodyPart: HeadSide
   forcedColoring: true
   groupWhitelist: [ Milira ]
   sprites:
@@ -27,7 +27,7 @@
 
 - type: marking
   id: MiliraEarsCurved
-  bodyPart: HeadTop
+  bodyPart: HeadSide
   forcedColoring: true
   groupWhitelist: [ Milira ]
   sprites:
@@ -36,7 +36,7 @@
 
 - type: marking
   id: MiliraEarsCurvedShortened
-  bodyPart: HeadTop
+  bodyPart: HeadSide
   forcedColoring: true
   groupWhitelist: [ Milira ]
   sprites:

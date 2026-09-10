@@ -92,6 +92,10 @@
     enum.HumanoidVisualLayers.HeadTop:
       limit: 1
       required: true
+      default: [ SunriseMiliraHalo ]
+    enum.HumanoidVisualLayers.HeadSide:
+      limit: 1
+      required: true
       default: [ MiliraEars ]
     enum.HumanoidVisualLayers.Chest:
       limit: 1

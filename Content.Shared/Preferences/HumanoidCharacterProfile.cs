@@ -495,7 +495,9 @@ namespace Content.Shared.Preferences
 
             if (!prototypeManager.TryIndex(Species, out var speciesPrototype) ||
                 !speciesPrototype.RoundStart ||
-                speciesPrototype.SponsorOnly && !sponsorPrototypes.Contains(Species.Id)) // Sunrise-Edit
+                (collection.TryResolveType<ISharedSponsorsManager>(out _) &&
+                    speciesPrototype.SponsorOnly &&
+                    !sponsorPrototypes.Contains(Species.Id))) // Sunrise-Edit
             {
                 Species = HumanoidCharacterProfile.DefaultSpecies;
                 speciesPrototype = prototypeManager.Index(Species);

@@ -133,6 +133,12 @@ public sealed partial class VisualBodySystem
             : layer;
     }
 
+    private void RaiseSunriseMarkingsUpdated(EntityUid target)
+    {
+        var ev = new SunriseMarkingsUpdatedEvent();
+        RaiseLocalEvent(target, ref ev);
+    }
+
     private bool HasSunriseAliasedMarkingLayer(
         Entity<VisualOrganMarkingsComponent> ent,
         HumanoidVisualLayers visualLayer)
@@ -249,3 +255,9 @@ public sealed partial class VisualBodySystem
         return markings.MarkingsDisplacement.GetValueOrDefault(layer);
     }
 }
+
+/// <summary>
+/// Вызывается на теле после перестроения клиентских слоёв markings.
+/// </summary>
+[ByRefEvent]
+public readonly record struct SunriseMarkingsUpdatedEvent;

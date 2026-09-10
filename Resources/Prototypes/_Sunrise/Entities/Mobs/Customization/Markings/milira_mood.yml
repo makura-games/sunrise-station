@@ -1,0 +1,13 @@
+- type: marking
+  id: SunriseMiliraHalo
+  bodyPart: HeadTop
+  groupWhitelist: [ Milira ]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: _Sunrise/Mobs/Effects/Milira/mood.rsi
+    state: mood_neutral
