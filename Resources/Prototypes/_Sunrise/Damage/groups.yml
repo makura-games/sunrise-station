@@ -1,0 +1,14 @@
+#Sunrise-Start
+- type: damageGroup
+  id: Mangleness
+  name: damage-group-mangleness
+  damageTypes:
+    - Mangleness
+
+# Deterioration damage for silicon/cyborg entities representing wear and degradation
+- type: damageGroup
+  id: Deterioration
+  name: damage-group-deterioration
+  damageTypes:
+    - Deterioration
+#Sunrise-End

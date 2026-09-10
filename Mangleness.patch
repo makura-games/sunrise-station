@@ -1,0 +1,442 @@
+diff --git a/Content.Shared/Nutrition/EntitySystems/HungerSystem.cs b/Content.Shared/Nutrition/EntitySystems/HungerSystem.cs
+index a06a3fbe59..1aa0c31558 100644
+--- a/Content.Shared/Nutrition/EntitySystems/HungerSystem.cs
++++ b/Content.Shared/Nutrition/EntitySystems/HungerSystem.cs
+@@ -190,7 +190,18 @@ private void DoContinuousHungerEffects(EntityUid uid, HungerComponent? component
+             component.StarvationDamage is { } damage &&
+             !_mobState.IsDead(uid))
+         {
+-            _damageable.TryChangeDamage(uid, damage, true, false);
++            // Sunrise-Start: Replace bloodloss with mangleness when starving
++            // _damageable.TryChangeDamage(uid, damage, true, false);
++
++            // Create modified damage that replaces Bloodloss with Mangleness
++            var modifiedDamage = new DamageSpecifier(damage);
++            if (modifiedDamage.DamageDict.TryGetValue("Bloodloss", out var bloodlossDamage))
++            {
++                modifiedDamage.DamageDict.Remove("Bloodloss");
++                modifiedDamage.DamageDict["Mangleness"] = bloodlossDamage;
++            }
++            _damageable.TryChangeDamage(uid, modifiedDamage, true, false);
++            // Sunrise-End
+         }
+     }
+ 
+@@ -287,24 +298,65 @@ public override void Update(float frameTime)
+             UpdateCurrentThreshold(uid, hunger);
+             DoContinuousHungerEffects(uid, hunger);
+ 
++            // Sunrise-Start: Tiered mangleness healing based on hunger levels
+             // Fish-start: Consume extra hunger to heal mangleness
++            // if (TryComp<DamageableComponent>(uid, out var damageable))
++            // {
++            //     if (damageable.Damage.DamageDict.TryGetValue("Mangleness", out var manglenessDamage) && manglenessDamage.Value > 0)
++            //     {
++            //         var currentHunger = GetHunger(hunger);
++            //         // Fish-Edit: Consume 0.1 extra points of hunger per tick to heal 0.01 mangleness
++            //         var normalizedConsumption = 0.1f * (float)hunger.ThresholdUpdateRate.TotalSeconds;
++            //         if (currentHunger > hunger.Thresholds[HungerThreshold.Dead] + normalizedConsumption)
++            //         {
++            //             ModifyHunger(uid, -normalizedConsumption, hunger);
++            //             var healAmount = new DamageSpecifier();
++            //             healAmount.DamageDict["Mangleness"] = -0.01f * (float)hunger.ThresholdUpdateRate.TotalSeconds;
++            //             _damageable.TryChangeDamage(uid, healAmount, true, false);
++            //         }
++            //     }
++            // }
++            // Fish-End
++
+             if (TryComp<DamageableComponent>(uid, out var damageable))
+             {
+                 if (damageable.Damage.DamageDict.TryGetValue("Mangleness", out var manglenessDamage) && manglenessDamage.Value > 0)
+                 {
+                     var currentHunger = GetHunger(hunger);
+-                    // Fish-Edit: Consume 0.1 extra points of hunger per tick to heal 0.01 mangleness
+-                    var normalizedConsumption = 0.1f * (float)hunger.ThresholdUpdateRate.TotalSeconds;
+-                    if (currentHunger > hunger.Thresholds[HungerThreshold.Dead] + normalizedConsumption)
++                    var maxHunger = hunger.Thresholds[HungerThreshold.Overfed];
++                    var hungerPercent = currentHunger / maxHunger;
++
++                    float consumptionMultiplier = 0f;
++                    float healAmount = 0f;
++
++                    // >50% of max capacity: 300% more consumption, heal 0.03
++                    if (hungerPercent > 0.5f)
+                     {
+-                        ModifyHunger(uid, -normalizedConsumption, hunger);
+-                        var healAmount = new DamageSpecifier();
+-                        healAmount.DamageDict["Mangleness"] = -0.01f * (float)hunger.ThresholdUpdateRate.TotalSeconds;
+-                        _damageable.TryChangeDamage(uid, healAmount, true, false);
++                        consumptionMultiplier = 3.0f;
++                        healAmount = 0.03f;
++                    }
++                    // 25-50% of max capacity: 100% more consumption, heal 0.01
++                    else if (hungerPercent >= 0.25f)
++                    {
++                        consumptionMultiplier = 1.0f;
++                        healAmount = 0.01f;
++                    }
++                    // <25%: no healing
++
++                    if (consumptionMultiplier > 0f)
++                    {
++                        var normalizedConsumption = consumptionMultiplier * 0.1f * (float)hunger.ThresholdUpdateRate.TotalSeconds;
++                        if (currentHunger > hunger.Thresholds[HungerThreshold.Dead] + normalizedConsumption)
++                        {
++                            ModifyHunger(uid, -normalizedConsumption, hunger);
++                            var healSpec = new DamageSpecifier();
++                            healSpec.DamageDict["Mangleness"] = -healAmount * (float)hunger.ThresholdUpdateRate.TotalSeconds;
++                            _damageable.TryChangeDamage(uid, healSpec, true, false);
++                        }
+                     }
+                 }
+             }
+-            // Fish-End
++            // Sunrise-End
+         }
+     }
+ }
+diff --git a/Content.Shared/Nutrition/EntitySystems/ThirstSystem.cs b/Content.Shared/Nutrition/EntitySystems/ThirstSystem.cs
+index 6bebe02688..6765ed207f 100644
+--- a/Content.Shared/Nutrition/EntitySystems/ThirstSystem.cs
++++ b/Content.Shared/Nutrition/EntitySystems/ThirstSystem.cs
+@@ -164,7 +164,18 @@ private void DoContinuousThirstEffects(EntityUid uid, ThirstComponent? component
+             component.DehydrationDamage is { } damage &&
+             !_mobState.IsDead(uid))
+         {
+-            _damageable.TryChangeDamage(uid, damage, true, false);
++            // Sunrise-Start: Replace bloodloss with mangleness when dehydrated
++            // _damageable.TryChangeDamage(uid, damage, true, false);
++
++            // Create modified damage that replaces Bloodloss with Mangleness
++            var modifiedDamage = new DamageSpecifier(damage);
++            if (modifiedDamage.DamageDict.TryGetValue("Bloodloss", out var bloodlossDamage))
++            {
++                modifiedDamage.DamageDict.Remove("Bloodloss");
++                modifiedDamage.DamageDict["Mangleness"] = bloodlossDamage;
++            }
++            _damageable.TryChangeDamage(uid, modifiedDamage, true, false);
++            // Sunrise-End
+         }
+     }
+ 
+@@ -240,23 +251,63 @@ public override void Update(float frameTime)
+             ModifyThirst(uid, thirst, -thirst.ActualDecayRate);
+             DoContinuousThirstEffects(uid, thirst);
+ 
++            // Sunrise-Start: Tiered mangleness healing based on thirst levels
+             // Fish-Start: Consume extra thirst to heal mangleness
++            // if (TryComp<DamageableComponent>(uid, out var damageable))
++            // {
++            //     if (damageable.Damage.DamageDict.TryGetValue("Mangleness", out var manglenessDamage) && manglenessDamage.Value > 0)
++            //     {
++            //         // Fish-Edit: Consume 0.1 extra points of thirst per tick to heal 0.01 mangleness
++            //         var normalizedConsumption = 0.1f * (float)thirst.UpdateRate.TotalSeconds;
++            //         if (thirst.CurrentThirst > thirst.ThirstThresholds[ThirstThreshold.Dead] + normalizedConsumption)
++            //         {
++            //             ModifyThirst(uid, thirst, -normalizedConsumption);
++            //             var healAmount = new DamageSpecifier();
++            //             healAmount.DamageDict["Mangleness"] = -0.01f * (float)thirst.UpdateRate.TotalSeconds;
++            //             _damageable.TryChangeDamage(uid, healAmount, true, false);
++            //         }
++            //     }
++            // }
++            // Fish-End
++
+             if (TryComp<DamageableComponent>(uid, out var damageable))
+             {
+                 if (damageable.Damage.DamageDict.TryGetValue("Mangleness", out var manglenessDamage) && manglenessDamage.Value > 0)
+                 {
+-                    // Fish-Edit: Consume 0.1 extra points of thirst per tick to heal 0.01 mangleness
+-                    var normalizedConsumption = 0.1f * (float)thirst.UpdateRate.TotalSeconds;
+-                    if (thirst.CurrentThirst > thirst.ThirstThresholds[ThirstThreshold.Dead] + normalizedConsumption)
++                    var maxThirst = thirst.ThirstThresholds[ThirstThreshold.OverHydrated];
++                    var thirstPercent = thirst.CurrentThirst / maxThirst;
++
++                    float consumptionMultiplier = 0f;
++                    float healAmount = 0f;
++
++                    // >50% of max capacity: 300% more consumption, heal 0.03
++                    if (thirstPercent > 0.5f)
+                     {
+-                        ModifyThirst(uid, thirst, -normalizedConsumption);
+-                        var healAmount = new DamageSpecifier();
+-                        healAmount.DamageDict["Mangleness"] = -0.01f * (float)thirst.UpdateRate.TotalSeconds;
+-                        _damageable.TryChangeDamage(uid, healAmount, true, false);
++                        consumptionMultiplier = 3.0f;
++                        healAmount = 0.03f;
++                    }
++                    // 25-50% of max capacity: 100% more consumption, heal 0.01
++                    else if (thirstPercent >= 0.25f)
++                    {
++                        consumptionMultiplier = 1.0f;
++                        healAmount = 0.01f;
++                    }
++                    // <25%: no healing
++
++                    if (consumptionMultiplier > 0f)
++                    {
++                        var normalizedConsumption = consumptionMultiplier * 0.1f * (float)thirst.UpdateRate.TotalSeconds;
++                        if (thirst.CurrentThirst > thirst.ThirstThresholds[ThirstThreshold.Dead] + normalizedConsumption)
++                        {
++                            ModifyThirst(uid, thirst, -normalizedConsumption);
++                            var healSpec = new DamageSpecifier();
++                            healSpec.DamageDict["Mangleness"] = -healAmount * (float)thirst.UpdateRate.TotalSeconds;
++                            _damageable.TryChangeDamage(uid, healSpec, true, false);
++                        }
+                     }
+                 }
+             }
+-            // Fish-End
++            // Sunrise-End
+ 
+             var calculatedThirstThreshold = GetThirstThreshold(thirst, thirst.CurrentThirst);
+ 
+diff --git a/Resources/Locale/en-US/_strings/damage/damage-groups.ftl b/Resources/Locale/en-US/_strings/damage/damage-groups.ftl
+index c03117138c..fd5260c793 100644
+--- a/Resources/Locale/en-US/_strings/damage/damage-groups.ftl
++++ b/Resources/Locale/en-US/_strings/damage/damage-groups.ftl
+@@ -4,4 +4,7 @@ damage-group-airloss = Airloss
+ damage-group-toxin = Toxin
+ damage-group-genetic = Genetic
+ damage-group-mangleness = Mangleness
++# Sunrise-Start: Deterioration damage group localization
++damage-group-deterioration = Deterioration
++# Sunrise-End
+ damage-group-metaphysical = Metaphysical
+diff --git a/Resources/Locale/en-US/_strings/damage/damage-types.ftl b/Resources/Locale/en-US/_strings/damage/damage-types.ftl
+index dcbdba159d..852c733dd5 100644
+--- a/Resources/Locale/en-US/_strings/damage/damage-types.ftl
++++ b/Resources/Locale/en-US/_strings/damage/damage-types.ftl
+@@ -13,3 +13,6 @@ damage-type-slash = Slash
+ damage-type-structural = Structural
+ damage-type-holy = Holy
+ damage-type-mangleness = Mangleness
++# Sunrise-Start: Deterioration damage type localization
++damage-type-deterioration = Deterioration
++# Sunrise-End
+diff --git a/Resources/Locale/ru-RU/_strings/damage/damage-groups.ftl b/Resources/Locale/ru-RU/_strings/damage/damage-groups.ftl
+index 7990817229..3e89a0e573 100644
+--- a/Resources/Locale/ru-RU/_strings/damage/damage-groups.ftl
++++ b/Resources/Locale/ru-RU/_strings/damage/damage-groups.ftl
+@@ -4,4 +4,7 @@ damage-group-airloss = Нехватка воздуха
+ damage-group-toxin = Токсины
+ damage-group-genetic = Генетические
+ damage-group-mangleness = Истощение
++# Sunrise-Start: Deterioration damage group localization
++damage-group-deterioration = Износ
++# Sunrise-End
+ damage-group-metaphysical = Метафизический
+diff --git a/Resources/Locale/ru-RU/_strings/damage/damage-types.ftl b/Resources/Locale/ru-RU/_strings/damage/damage-types.ftl
+index c7c8ddf939..064dd2faf0 100644
+--- a/Resources/Locale/ru-RU/_strings/damage/damage-types.ftl
++++ b/Resources/Locale/ru-RU/_strings/damage/damage-types.ftl
+@@ -13,3 +13,6 @@ damage-type-slash = Порезы
+ damage-type-structural = Структурные
+ damage-type-holy = Святой
+ damage-type-mangleness = Истощение
++# Sunrise-Start: Deterioration damage type localization
++damage-type-deterioration = Износ
++# Sunrise-End
+diff --git a/Resources/Prototypes/Damage/containers.yml b/Resources/Prototypes/Damage/containers.yml
+index 6a5173d090..f287bc85d8 100644
+--- a/Resources/Prototypes/Damage/containers.yml
++++ b/Resources/Prototypes/Damage/containers.yml
+@@ -12,6 +12,9 @@
+   id: Inorganic
+   supportedGroups:
+     - Brute
++    # Sunrise-Start: Deterioration for robots
++    - Deterioration
++    # Sunrise-End
+   supportedTypes:
+     - Heat
+     - Shock
+@@ -29,6 +32,9 @@
+   id: Silicon
+   supportedGroups:
+     - Brute
++    # Sunrise-Start: Deterioration for cyborgs
++    - Deterioration
++    # Sunrise-End
+   supportedTypes:
+     - Heat
+     - Shock
+diff --git a/Resources/Prototypes/Damage/groups.yml b/Resources/Prototypes/Damage/groups.yml
+index 0a7726131a..aad477109c 100644
+--- a/Resources/Prototypes/Damage/groups.yml
++++ b/Resources/Prototypes/Damage/groups.yml
+@@ -47,6 +47,14 @@
+   name: damage-group-mangleness
+   damageTypes:
+     - Mangleness
++
++# Sunrise-Start: Deterioration damage group for robots and cyborgs
++- type: damageGroup
++  id: Deterioration
++  name: damage-group-deterioration
++  damageTypes:
++    - Deterioration
++# Sunrise-End
+ # Fish-End
+ 
+ # Metaphysical damage types should be used very sparingly, and likely not affect normal crew entities.
+diff --git a/Resources/Prototypes/Damage/types.yml b/Resources/Prototypes/Damage/types.yml
+index 9a3d35540b..dfd294fa20 100644
+--- a/Resources/Prototypes/Damage/types.yml
++++ b/Resources/Prototypes/Damage/types.yml
+@@ -98,5 +98,17 @@
+   name: damage-type-mangleness
+   armorCoefficientPrice: 1
+   armorFlatPrice: 1
++  # Sunrise-Edit: Using Poison sprite icon for Mangleness
++  icon: /Textures/Interface/Alerts/Xeno/toxin.png
++
++# Sunrise-Start: Deterioration damage type for robots and cyborgs
++- type: damageType
++  id: Deterioration
++  name: damage-type-deterioration
++  armorCoefficientPrice: 1
++  armorFlatPrice: 1
++  # Sunrise-Edit: Using Poison sprite icon for Deterioration
++  icon: /Textures/Interface/Alerts/Xeno/toxin.png
++# Sunrise-End
+ #Sunrise-End
+ 
+diff --git a/Resources/Prototypes/Entities/Mobs/Species/arachnid.yml b/Resources/Prototypes/Entities/Mobs/Species/arachnid.yml
+index d0b6efc4f4..157c76e9a5 100644
+--- a/Resources/Prototypes/Entities/Mobs/Species/arachnid.yml
++++ b/Resources/Prototypes/Entities/Mobs/Species/arachnid.yml
+@@ -17,9 +17,9 @@
+     baseDecayRate: 0.04
+   - type: Thirst
+     baseDecayRate: 0.15
+-    dehydrationDamage:
++    dehydrationDamage: # Sunrise-Edit: Changed from Bloodloss to Mangleness
+       types:
+-        Bloodloss: 0.5
++        Mangleness: 0.5
+         Asphyxiation: 0.5
+   - type: Sericulture
+     productionLength: 2
+diff --git a/Resources/Prototypes/Entities/Mobs/Species/diona.yml b/Resources/Prototypes/Entities/Mobs/Species/diona.yml
+index 566a078b3b..34eb9fc159 100644
+--- a/Resources/Prototypes/Entities/Mobs/Species/diona.yml
++++ b/Resources/Prototypes/Entities/Mobs/Species/diona.yml
+@@ -11,9 +11,9 @@
+     baseDecayRate: 0.015
+   - type: Thirst
+     baseDecayRate: 0.05
+-    dehydrationDamage:
++    dehydrationDamage: # Sunrise-Edit: Changed from Bloodloss to Mangleness
+       types:
+-        Bloodloss: 0.5
++        Mangleness: 0.5
+         Asphyxiation: 0.5
+   - type: Icon
+     sprite: Mobs/Species/Diona/parts.rsi
+@@ -32,7 +32,7 @@
+       groups:
+         Brute: -0.5
+       #Sunrise-Start
+-      types: 
++      types:
+         Mangleness: -0.02
+       #Sunrise-End
+   - type: DamageVisuals
+diff --git a/Resources/Prototypes/Entities/Mobs/Species/dwarf.yml b/Resources/Prototypes/Entities/Mobs/Species/dwarf.yml
+index 694e5c4df9..fcc515ed81 100644
+--- a/Resources/Prototypes/Entities/Mobs/Species/dwarf.yml
++++ b/Resources/Prototypes/Entities/Mobs/Species/dwarf.yml
+@@ -11,9 +11,9 @@
+   - type: Hunger
+   - type: Thirst
+     baseDecayRate: 0.2
+-    dehydrationDamage:
++    dehydrationDamage: # Sunrise-Edit: Changed from Bloodloss to Mangleness
+       types:
+-        Bloodloss: 0.5
++        Mangleness: 0.5
+         Asphyxiation: 0.5
+   - type: Icon
+     sprite: Mobs/Species/Human/parts.rsi
+diff --git a/Resources/Prototypes/Entities/Mobs/Species/human.yml b/Resources/Prototypes/Entities/Mobs/Species/human.yml
+index 4716812156..c092b86bbd 100644
+--- a/Resources/Prototypes/Entities/Mobs/Species/human.yml
++++ b/Resources/Prototypes/Entities/Mobs/Species/human.yml
+@@ -13,9 +13,9 @@
+     sprite: _Sunrise/Mobs/Species/Human/Basic/parts.rsi
+     state: full
+   - type: Thirst
+-    dehydrationDamage:
++    dehydrationDamage: # Sunrise-Edit: Changed from Bloodloss to Mangleness
+       types:
+-        Bloodloss: 0.5
++        Mangleness: 0.5
+         Asphyxiation: 0.5
+   - type: Butcherable
+     butcheringType: Spike
+diff --git a/Resources/Prototypes/Entities/Mobs/Species/moth.yml b/Resources/Prototypes/Entities/Mobs/Species/moth.yml
+index 7b07866344..c35c361118 100644
+--- a/Resources/Prototypes/Entities/Mobs/Species/moth.yml
++++ b/Resources/Prototypes/Entities/Mobs/Species/moth.yml
+@@ -14,9 +14,9 @@
+     - HeadTop
+   - type: Hunger
+   - type: Thirst
+-    dehydrationDamage:
++    dehydrationDamage: # Sunrise-Edit: Changed from Bloodloss to Mangleness
+       types:
+-        Bloodloss: 0.5
++        Mangleness: 0.5
+         Asphyxiation: 0.5
+   - type: Icon
+     sprite: Mobs/Species/Moth/parts.rsi
+diff --git a/Resources/Prototypes/Entities/Mobs/Species/reptilian.yml b/Resources/Prototypes/Entities/Mobs/Species/reptilian.yml
+index c759c3bddd..e1a8ad5376 100644
+--- a/Resources/Prototypes/Entities/Mobs/Species/reptilian.yml
++++ b/Resources/Prototypes/Entities/Mobs/Species/reptilian.yml
+@@ -18,9 +18,9 @@
+   - type: Puller
+     needsHands: false
+   - type: Thirst
+-    dehydrationDamage:
++    dehydrationDamage: # Sunrise-Edit: Changed from Bloodloss to Mangleness
+       types:
+-        Bloodloss: 0.5
++        Mangleness: 0.5
+         Asphyxiation: 0.5
+   - type: Icon
+     sprite: Mobs/Species/Reptilian/parts.rsi
+diff --git a/Resources/Prototypes/Entities/Mobs/Species/slime.yml b/Resources/Prototypes/Entities/Mobs/Species/slime.yml
+index 3090e2af38..eb3fcfd705 100644
+--- a/Resources/Prototypes/Entities/Mobs/Species/slime.yml
++++ b/Resources/Prototypes/Entities/Mobs/Species/slime.yml
+@@ -10,9 +10,9 @@
+   - type: Hunger
+   - type: Thirst
+     baseDecayRate: 0.3
+-    dehydrationDamage:
++    dehydrationDamage: # Sunrise-Edit: Changed from Bloodloss to Mangleness
+       types:
+-        Bloodloss: 0.5
++        Mangleness: 0.5
+         Asphyxiation: 0.5
+   - type: Icon
+     sprite: Mobs/Species/Slime/parts.rsi
+diff --git a/Resources/Prototypes/Entities/Mobs/Species/vox.yml b/Resources/Prototypes/Entities/Mobs/Species/vox.yml
+index 4d1ac429c5..bfea8c9647 100644
+--- a/Resources/Prototypes/Entities/Mobs/Species/vox.yml
++++ b/Resources/Prototypes/Entities/Mobs/Species/vox.yml
+@@ -8,9 +8,9 @@
+   # SUNRISE EDIT
+   - type: Hunger
+   - type: Thirst
+-    dehydrationDamage:
++    dehydrationDamage: # Sunrise-Edit: Changed from Bloodloss to Mangleness
+       types:
+-        Bloodloss: 0.5
++        Mangleness: 0.5
+         Asphyxiation: 0.5
+   - type: Icon
+     sprite: Mobs/Species/Vox/parts.rsi

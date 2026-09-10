@@ -4,3 +4,5 @@ damage-group-airloss = Airloss
 damage-group-toxin = Toxin
 damage-group-genetic = Genetic
 damage-group-metaphysical = Metaphysical
+damage-group-deterioration = Deterioration
+damage-group-mangleness = Mangleness

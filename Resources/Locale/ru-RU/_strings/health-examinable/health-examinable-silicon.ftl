@@ -17,4 +17,7 @@ health-examinable-silicon-Heat-75 = [color=orange]{ CAPITALIZE(POSS-ADJ($target)
 
 health-examinable-silicon-Shock-50 = [color=lightgoldenrodyellow]{ CAPITALIZE(POSS-ADJ($target)) } микросхемы, похоже, неплохо поджарились![/color]
 
-health-examinable-silicon-Mangleness-15 = [color=gray]{ CAPITALIZE(POSS-ADJ($target)) } шасси покрыто следами кустарного ремонта.[/color]
+health-examinable-silicon-Deterioration-10 = [color=gray]{ CAPITALIZE(POSS-ADJ($target)) } шасси выглядит немного изношенным.[/color]
+health-examinable-silicon-Deterioration-25 = [color=gray]{ CAPITALIZE(POSS-ADJ($target)) } шасси выглядит изношенным.[/color]
+health-examinable-silicon-Deterioration-50 = [color=gray]{ CAPITALIZE(POSS-ADJ($target)) } шасси начинает деформироваться.[/color]
+health-examinable-silicon-Deterioration-75 = [color=gray]{ CAPITALIZE(POSS-ADJ($target)) } шасси сильно деформировано![/color]

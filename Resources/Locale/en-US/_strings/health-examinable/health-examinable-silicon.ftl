@@ -18,3 +18,8 @@ health-examinable-silicon-Heat-75 = [color=orange]{ CAPITALIZE(POSS-ADJ($target)
 health-examinable-silicon-Shock-50 = [color=lightgoldenrodyellow]{ CAPITALIZE(POSS-ADJ($target)) } circuits seem partially fried![/color]
 
 health-examinable-silicon-Mangleness-15 = [color=gray]{ CAPITALIZE(POSS-ADJ($target)) } chassis is covered with traces of field repairs.[/color]
+
+health-examinable-silicon-Deterioration-10 = [color=gray]{ CAPITALIZE(POSS-ADJ($target)) } chassis looks slightly worn out.[/color]
+health-examinable-silicon-Deterioration-25 = [color=gray]{ CAPITALIZE(POSS-ADJ($target)) } chassis looks worn out.[/color]
+health-examinable-silicon-Deterioration-50 = [color=gray]{ CAPITALIZE(POSS-ADJ($target)) } chassis is starting to deform.[/color]
+health-examinable-silicon-Deterioration-75 = [color=gray]{ CAPITALIZE(POSS-ADJ($target)) } chassis is heavily deformed![/color]

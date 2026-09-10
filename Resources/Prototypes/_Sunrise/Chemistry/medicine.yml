@@ -10,25 +10,22 @@
     Bloodstream:
       effects:
       - !type:ModifyBleed
-        amount: -4.2
+        amount: -4
+      - !type:EvenHealthChange
+        damage:
+          Brute: -2
       - !type:HealthChange
         damage:
           types:
-            Blunt: -1.07
-            Slash: -1.07
-            Piercing: -1.06
-      - !type:HealthChange
-        damage:
-          types:
-            Mangleness: 0.1 #Sunrise-Edit
+            Mangleness: 0.1 # Sunrise-Edit # 15% of 2/3 brute healing (EvenHealthChange)
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
           reagent: HemostaticPowder
-          min: 10.1
+          min: 11
         damage:
           types:
-            Poison: 6
+            Poison: 3
 
 - type: reagent
   id: Retroindralyne
@@ -45,7 +42,7 @@
           damage:
             types:
               Radiation: -3
-              Mangleness: 0.25 #Sunrise-Edit
+              Mangleness: 0.45 # Sunrise-Edit # 15% of 3 radiation healing
         - !type:ModifyStatusEffect
           effectProto: StatusEffectSeeingRainbow
           type: Update

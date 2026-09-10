@@ -1,5 +1,13 @@
+#Sunrise-Start
 - type: damageType
   id: Mangleness
   name: damage-type-mangleness
   armorCoefficientPrice: 1
   armorFlatPrice: 1
+
+- type: damageType
+  id: Deterioration
+  name: damage-type-deterioration
+  armorCoefficientPrice: 1
+  armorFlatPrice: 1
+#Sunrise-End

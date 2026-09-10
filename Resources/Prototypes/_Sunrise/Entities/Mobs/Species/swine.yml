@@ -39,11 +39,15 @@
   - type: SunriseHumanoidBaseLayers
   - type: Hunger
     baseDecayRate: 0.08
+    starvationDamage:
+      types:
+        Mangleness: 0.5
   - type: Thirst
     baseDecayRate: 0.15
     dehydrationDamage:
       types:
-        Bloodloss: 0.5
+        # Bloodloss: 0.5
+        Mangleness: 0.5
         Asphyxiation: 0.5
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Swine/parts.rsi

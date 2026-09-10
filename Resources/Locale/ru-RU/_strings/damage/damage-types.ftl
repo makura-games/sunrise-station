@@ -13,3 +13,4 @@ damage-type-slash = Порезы
 damage-type-structural = Структурные
 damage-type-holy = Святой
 damage-type-mangleness = Истощение
+damage-type-deterioration = Износ

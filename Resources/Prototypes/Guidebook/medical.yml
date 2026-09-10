@@ -7,7 +7,14 @@
   - Chemist
   - Cloning
   - Cryogenics
+  - Mangleness # Sunrise-Edit
 
+# Sunrise-Start
+- type: guideEntry
+  id: Mangleness
+  name: guide-entry-mangleness
+  text: "/ServerInfo/Guidebook/Medical/Mangleness.xml"
+# Sunrise-End
 - type: guideEntry
   id: MedicalDoctor
   name: guide-entry-medicaldoctor

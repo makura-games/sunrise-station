@@ -213,7 +213,9 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
 
     private Texture GetTexture(string texture)
     {
-        var rsiPath = new ResPath("/Textures/Objects/Devices/health_analyzer.rsi");
+        // Sunrise-Start - Use custom RSI to support Mangleness and Deterioration icons
+        var rsiPath = new ResPath("/Textures/_Sunrise/Objects/Devices/health_analyzer.rsi");
+        // Sunrise-End
         var rsiSprite = new SpriteSpecifier.Rsi(rsiPath, texture);
 
         var rsi = _cache.GetResource<RSIResource>(rsiSprite.RsiPath).RSI;

@@ -78,6 +78,20 @@
   # Sunrise-start
   - type: QuickConstructable
     category: Steel
+  - type: Healing
+    delay: 4.0
+    damageContainers:
+    - Silicon
+    - Synth
+    - Mech
+    damage:
+      types:
+        Blunt: -10
+        Slash: -10
+        Piercing: -10
+        Deterioration: -5
+    healingBeginSound:
+      path: /Audio/Machines/airlock_creaking.ogg
   # Sunrise-end
 
 - type: entity

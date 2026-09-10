@@ -45,13 +45,17 @@
       amount: 5
   - type: TajaranAccent
   - type: Hunger
+    starvationDamage:
+      types:
+        Mangleness: 0.5
   - type: Speech
     speechVerb: Felinid
     allowedEmotes: ['Mew', 'Meow', 'Hisses', 'Purr', 'Growl']
   - type: Thirst
     dehydrationDamage:
       types:
-        Bloodloss: 0.5
+        # Bloodloss: 0.5
+        Mangleness: 0.5
         Asphyxiation: 0.5
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi

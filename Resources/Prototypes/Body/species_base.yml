@@ -201,8 +201,17 @@
   id: BaseSpeciesMobOrganic
   save: false
   components:
+  # Sunrise-Start
   - type: Hunger
+    starvationDamage:
+      types:
+        Mangleness: 0.5
   - type: Thirst
+    dehydrationDamage:
+      types:
+        Mangleness: 0.5
+        Asphyxiation: 0.5
+  # Sunrise-End
   - type: Barotrauma
     damage:
       types:

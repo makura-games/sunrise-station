@@ -91,7 +91,8 @@
         Blunt: -0.2
         Piercing: -0.1 #SUNRISE-EDIT
         Slash: -0.1 #SUNRISE-EDIT
-        Mangleness: -0.2 #SUNRISE-EDIT
+        Mangleness: -0.4 #SUNRISE-EDIT
+    sleepMultiplier: 2 #SUNRISE-EDIT
   - type: Construction
     graph: bed
     node: medicalbed

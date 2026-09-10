@@ -9,7 +9,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Generic;
 
 namespace Content.Shared.Nutrition.Components;
 
-[RegisterComponent, NetworkedComponent, Access(typeof(HungerSystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(HungerSystem), Other = AccessPermissions.ReadWriteExecute)]
 [AutoGenerateComponentState(fieldDeltas: true), AutoGenerateComponentPause]
 public sealed partial class HungerComponent : Component
 {

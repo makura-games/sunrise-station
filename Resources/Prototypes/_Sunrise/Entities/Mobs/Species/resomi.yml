@@ -80,9 +80,16 @@
         layer:
         - MobLayer
   - type: Hunger
+    starvationDamage:
+      types:
+        Mangleness: 0.5
   - type: Puller
     needsHands: false
   - type: Thirst
+    dehydrationDamage:
+      types:
+        Mangleness: 0.5
+        Asphyxiation: 0.5
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
     state: full

@@ -61,7 +61,7 @@
       - Piercing
       - Heat
       - Shock
-      - Mangleness #Sunrise-Edit
+      - Deterioration #Sunrise-Edit
     locPrefix: silicon
   - type: UserInterface
     interfaces:
@@ -123,7 +123,7 @@
         Shock: -5
         Caustic: -5
         Structural: -10
-        Mangleness: 1
+  - type: UnrepairableDamage # Sunrise - типы урона, которые нельзя починить сваркой
   - type: Loadout
     prototypes: [ BorgArmorSiliconLoadout ]
   # Sunrise-End

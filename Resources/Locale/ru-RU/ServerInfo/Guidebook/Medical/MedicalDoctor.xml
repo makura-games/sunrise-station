@@ -1,0 +1,135 @@
+<Document>
+  [head=1][color=#66ccff]Врач[/color][/head]
+
+  [color=#cccccc]Пришло время лечить. Или, по крайней мере, попытаться вылечить. Врачи - это основные специалисты по уходу за всеми бо-бо и ой, которые члены экипажа получают на станции, будь то маленькая царапина или обгоревшая кожа.[/color]
+
+  [color=#cccccc]В этом руководстве вы найдете основные сведения о доступных вам вариантах лечения, о приоритетах и других способах оказания помощи.[/color]
+
+  [head=2][color=#66ccff]Основы диагностики[/color][/head]
+
+  [color=#dddddd]Есть два способа понять, что не так с пациентом перед вами:[/color]
+
+  - [bold][color=#99ccff]Анализатор здоровья[/color][/bold]: [color=#dddddd]Просканируйте пациента анализатором здоровья или медицинским КПК - покажет максимально подробную информацию[/color]
+  - [bold][color=#99ccff]Визуальный осмотр[/color][/bold]: [color=#dddddd]Используйте Shift+ЛКМ → символ сердца на персонаже для быстрой оценки состояния[/color]
+
+  [color=#dddddd]По возможности всегда используйте анализатор или КПК, так как в них отображается намного больше информации, чем при визуальном осмотре.[/color]
+
+  <Box>
+    <GuideEntityEmbed Entity="SignExamroom" Caption="осмотрите пациента"/>
+    <GuideEntityEmbed Entity="MedicalPDA"/>
+    <GuideEntityEmbed Entity="MedicalInternPDA" Caption="КПК интерна"/>
+    <GuideEntityEmbed Entity="HandheldHealthAnalyzer"/>
+  </Box>
+
+  [head=2][color=#66ccff]Лекарства и варианты лечения[/color][/head]
+
+  [color=#dddddd]Прежде чем мы пойдём дальше, вероятно, будет полезно рассказать о типах повреждений и о том, что их лечит. В руководстве "Химические вещества" можно найти более подробную информацию о точных свойствах лекарств.[/color]
+
+  [head=3][color=#88ddff]Важные замечания[/color][/head]
+
+  - [color=#ff9999]У большинства лекарств есть уровень передозировки[/color] [color=#dddddd](Максимальная безопасная доза - не больше 10 единиц)[/color]
+  - [color=#ff9999]Таблетки метаболизируются 20 секунд[/color] [color=#dddddd]. Для быстрого действия используйте шприц[/color]
+  - [color=#ff9999]Медицинский гипоспрей[/color] [color=#dddddd]вкалывает 5 единиц химикатов почти мгновенно, но имеет долгую перезарядку[/color]
+
+  [head=3][color=#88ddff]Механические повреждения[/color][/head]
+
+  - [bold][color=#ff9999]Урон Ушибами[/color][/bold]: [color=#dddddd]Бикаридин, Бруизин (НЕ ИСПОЛЬЗОВАТЬ ВМЕСТЕ) или набор для ушибов[/color]
+  - [bold][color=#ff9999]Урон Уколами[/color][/bold]: [color=#dddddd]Бикаридин, Пунктураз (НЕ ИСПОЛЬЗОВАТЬ ВМЕСТЕ), бинт или набор для ушибов[/color]
+  - [bold][color=#ff9999]Урон Порезами[/color][/bold]: [color=#dddddd]Бикаридин, Лацеринол (НЕ ИСПОЛЬЗОВАТЬ ВМЕСТЕ), бинт или набор для ушибов[/color]
+
+  [head=3][color=#88ddff]Физические повреждения[/color][/head]
+
+  - [bold][color=#ff9999]Урон Ожогами[/color][/bold]: [color=#dddddd]Дермалин, Келотан, Пиразин или мазь[/color]
+  - [bold][color=#ff9999]Урон Обморожением[/color][/bold]: [color=#dddddd]Дермалин или Лепоразин[/color]
+  - [bold][color=#ff9999]Урон Электричеством[/color][/bold]: [color=#dddddd]Инсузин[/color]
+  - [bold][color=#ff9999]Урон Кислотой[/color][/bold]: [color=#dddddd]Сигинат или Сидерлак[/color]
+
+  [head=3][color=#88ddff]Токсины[/color][/head]
+
+  - [bold][color=#ff9999]Токсин (яд)[/color][/bold]: [color=#dddddd]Диловен или Дифенгидрамин[/color]
+  - [bold][color=#ff9999]Токсин (радиация)[/color][/bold]: [color=#dddddd]Хироналин или Аритразин[/color]
+
+  [head=3][color=#88ddff]Нехватка воздуха[/color][/head]
+
+  - [bold][color=#ff9999]Потеря воздуха[/color][/bold]: [color=#dddddd]Дексалин, Дексалин+ или Инапровалин (только для критических пациентов)[/color]
+  - [bold][color=#ff9999]Кровопотеря[/color][/bold]: [color=#dddddd]Дексалин, Дексалин+, железо или пакет крови[/color]
+  - [bold][color=#ff9999]Кровотечение[/color][/bold]: [color=#dddddd]Транексамовая кислота, экстренный медипен или бинт[/color]
+
+  [color=#dddddd]На многих станциях хранятся аптечки для разных типов урона, и у всех медиков есть некоторое оборудование в стартовом поясе. Аптечки можно найти в хранилище медотсека или заказать в Отделе Снабжения.[/color]
+
+  <Box>
+    <GuideEntityEmbed Entity="MedkitFilled"/>
+    <GuideEntityEmbed Entity="MedkitBruteFilled" Caption="аптечка для тупого урона"/>
+    <GuideEntityEmbed Entity="MedkitRadiationFilled" Caption="аптечка для радиации"/>
+    <GuideEntityEmbed Entity="MedkitBurnFilled" Caption="аптечка для ожогов"/>
+    <GuideEntityEmbed Entity="MedkitToxinFilled" Caption="аптечка для токсинов"/>
+  </Box>
+
+  <Box>
+    <GuideEntityEmbed Entity="Brutepack"/>
+    <GuideEntityEmbed Entity="Ointment"/>
+    <GuideEntityEmbed Entity="EmergencyMedipen"/>
+    <GuideEntityEmbed Entity="Bloodpack"/>
+    <GuideEntityEmbed Entity="Gauze"/>
+  </Box>
+
+  [head=2][color=#66ccff]Основное лечение и сортировка приоритетов[/color][/head]
+
+  [color=#dddddd]Осмотрите пациента и обратите внимание на важные детали: Жив ли он? Кровотечение? Какой тип повреждения?[/color]
+
+  [head=3][color=#88ddff]Критическое состояние[/color][/head]
+
+  [color=#dddddd]Пациенты находятся в критическом состоянии при 100 повреждениях и мертвы при 200, по крайней мере для стандартных типов гуманойдов. Помните об этом, выбирая способ лечения.[/color]
+
+  - [bold][color=#99ccff]Эпинефрин[/color][/bold]: [color=#dddddd]Незначительно лечит большинство видов повреждений (в т.ч удушье от критического состояния). Работает только на пациентах в критическом состоянии (не мертвых!).[/color]
+  - [bold][color=#99ccff]Медипены[/color][/bold]: [color=#dddddd]Используются для экстренного лечения критических пациентов[/color]
+  - [bold][color=#99ccff]Транексамовая кислота[/color][/bold]: [color=#dddddd]Останавливает кровотечение[/color]
+
+  [head=3][color=#88ddff]Кровотечение[/color][/head]
+
+  [color=#dddddd]Если есть кровотечение - немедленно забинтуйте все кровоточащие раны при помощи бинта или медицинской нити.[/color]
+
+  - [bold][color=#99ccff]Бинт/медицинская нить[/color][/bold]: [color=#dddddd]Основной способ остановки кровотечения[/color]
+  - [bold][color=#99ccff]Транексамовая кислота[/color][/bold]: [color=#dddddd]Химическая остановка кровотечения[/color]
+  - [bold][color=#99ccff]Прижигание[/color][/bold]: [color=#dddddd]Экстренный способ остановки кровотечения[/color]
+
+  [head=3][color=#88ddff]Медицинские койки[/color][/head]
+
+  [color=#dddddd]Если возможно, пристегните пациента к медицинской койке. Если вам нужно время для лечения, используйте стазисную кровать.[/color]
+
+  - [bold][color=#99ccff]Медицинская кровать[/color][/bold]: [color=#dddddd]Стандартное место для лечения пациентов[/color]
+  - [bold][color=#99ccff]Стазисная кровать[/color][/bold]: [color=#dddddd]Замедляет метаболизм и негативные эффекты (кровотечение, удушье, яды). Лекарства в стазисе почти не действуют.[/color]
+
+  <Box>
+    <GuideEntityEmbed Entity="MedicalBed"/>
+    <GuideEntityEmbed Entity="StasisBed"/>
+  </Box>
+
+  [head=2][color=#66ccff]Смерть и возрождение[/color][/head]
+
+  [color=#dddddd]Вы не можете спасти всех, иногда смерть случается. В зависимости от состояния тела, наличия души, а также если тело начало гнить, пациента всё ещё можно вернуть к жизни.[/color]
+
+  [head=3][color=#88ddff]Диагностика состояния[/color][/head]
+
+  1. [bold][color=#ff9999]Есть ли у них душа?[/color][/bold] [color=#dddddd]При осмотре: "Его душа покинула тело. Восстановление маловероятно." Если не отображается - можно реанимировать.[/color]
+
+  2. [bold][color=#ff9999]Гниет ли тело?[/color][/bold] [color=#dddddd]Если да - необходимо клонирование. Гниющее тело нельзя оживить дефибриллятором.[/color]
+
+  3. [bold][color=#ff9999]Общий урон менее 200?[/color][/bold] [color=#dddddd]Дефибрилляторы могут оживить пациентов с уроном менее 200, однако каждое использование даёт немного электроожогов, так что безопасней это делать с уроном менее 190 единиц.[/color]
+
+  [head=3][color=#88ddff]Процесс реанимации[/color][/head]
+
+  [color=#dddddd]Химикаты не метаболизируются в мертвом организме, но медикаменты по типу набора от ушибов и мази все равно могут подлатать пациента.[/color]
+
+  - [bold][color=#99ccff]Используйте наборы от ушибов и мазь[/color][/bold]: [color=#dddddd]Чтобы снизить количество урона до уровня, при котором возможна реанимация[/color]
+  - [bold][color=#99ccff]Дефибриллятор[/color][/bold]: [color=#dddddd]Моментально лечит 40 удушения при использовании[/color]
+  - [bold][color=#99ccff]Оппорозидон[/color][/bold]: [color=#dddddd]Регенерирует гниение, но сложен в синтезе[/color]
+
+  <Box>
+    <GuideEntityEmbed Entity="Brutepack"/>
+    <GuideEntityEmbed Entity="Ointment"/>
+    <GuideEntityEmbed Entity="Defibrillator"/>
+    <GuideReagentEmbed Reagent="Opporozidone"/>
+  </Box>
+
+</Document>

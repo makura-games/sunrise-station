@@ -152,7 +152,7 @@
     - type: Cartridge
       programName: med-tek-program-name
       icon:
-        sprite: Objects/Specific/Medical/healthanalyzer.rsi
+        sprite: _Sunrise/Objects/Devices/health_analyzer.rsi # Sunrise-Edit
         state: icon
     - type: MedTekCartridge
 

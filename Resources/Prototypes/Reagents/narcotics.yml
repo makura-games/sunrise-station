@@ -18,7 +18,7 @@
           types:
             Poison: 0.55
             Blunt: 1.1 # meant to be slightly more than tricordrazine heals
-            Mangleness: 0.025 # Sunrise edit
+            Mangleness: 0.15 # Sunrise-Edit
       # OD
       - !type:HealthChange
         conditions:
@@ -79,6 +79,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      # Sunrise-Start
+      - !type:HealthChange
+        damage:
+          types:
+            Mangleness: 0.15
+      # Sunrise-End
       # Main effects
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.15
@@ -137,6 +143,12 @@
   metabolisms:
     Bloodstream:
       effects:
+      # Sunrise-Start
+      - !type:HealthChange
+        damage:
+          types:
+            Mangleness: 0.1 # a little bit
+      # Sunrise-End
       # Main effects
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.25
@@ -240,15 +252,15 @@
   flavor: bitter
   color: "#C0C0C0"
   physicalDesc: reagent-physical-desc-strong-smelling
-  #Sunrise-Start
-  metabolisms:
-    Bloodstream:
-      effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Mangleness: -0.75
-  #Sunrise-End
+  # Sunrise edit start - убираем лечение истощения от никотина
+  # metabolisms:
+  #   Bloodstream:
+  #     effects:
+  #     - !type:HealthChange
+  #       damage:
+  #         types:
+  #           Mangleness: -0.75
+  # Sunrise edit end
   plantMetabolism:
   - !type:PlantAdjustHealth
     amount: -5
