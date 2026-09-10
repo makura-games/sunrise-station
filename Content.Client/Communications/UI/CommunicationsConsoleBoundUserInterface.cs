@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Communications.UI
 {
-    public sealed class CommunicationsConsoleBoundUserInterface : BoundUserInterface
+    public sealed partial class CommunicationsConsoleBoundUserInterface : BoundUserInterface // Sunrise-Edit
     {
         [Dependency] private readonly IConfigurationManager _cfg = default!;
 
@@ -26,13 +26,15 @@ namespace Content.Client.Communications.UI
             _menu.OnAnnounce += AnnounceButtonPressed;
             _menu.OnBroadcast += BroadcastButtonPressed;
             _menu.OnAlertLevel += AlertLevelSelected;
+            _menu.OnAdditionalAlertLevel += AdditionalAlertLevelSelected; // Sunrise-Edit
+            _menu.OnAlertStation += AlertStationSelected; // Sunrise-Edit
             _menu.OnEmergencyLevel += EmergencyShuttleButtonPressed;
             _menu.OnToggleRelay += ToggleRelayPressed; // Sunrise-Edit
         }
 
         public void AlertLevelSelected(string level)
         {
-            if (_menu!.AlertLevelSelectable)
+            if (_menu!.AlertLevelSelectable && HasAccess()) // Sunrise-Edit
             {
                 _menu.CurrentLevel = level;
                 SendMessage(new CommunicationsConsoleSelectAlertLevelMessage(level));
@@ -85,16 +87,25 @@ namespace Content.Client.Communications.UI
 
             if (_menu != null)
             {
+                var hasAccess = HasAccess(); // Sunrise-Edit
                 _menu.CanAnnounce = commsState.CanAnnounce;
                 _menu.CanBroadcast = commsState.CanBroadcast;
                 _menu.CanCall = commsState.CanCall;
                 _menu.CountdownStarted = commsState.CountdownStarted;
-                _menu.AlertLevelSelectable = commsState.AlertLevels != null && !float.IsNaN(commsState.CurrentAlertDelay) && commsState.CurrentAlertDelay <= 0;
+                _menu.AlertLevelSelectable = hasAccess
+                    && commsState.AlertLevels != null
+                    && !float.IsNaN(commsState.CurrentAlertDelay)
+                    && commsState.CurrentAlertDelay <= 0; // Sunrise-Edit
                 _menu.CurrentLevel = commsState.CurrentAlert;
                 _menu.CountdownEnd = commsState.ExpectedCountdownEnd;
 
                 _menu.UpdateCountdown();
+                _menu.UpdateAlertStations(
+                    commsState.AlertStations,
+                    commsState.SelectedAlertStation,
+                    hasAccess); // Sunrise-Edit
                 _menu.UpdateAlertLevels(commsState.AlertLevels, _menu.CurrentLevel);
+                _menu.UpdateAdditionalAlertLevels(commsState.AdditionalAlertLevels, hasAccess); // Sunrise-Edit
                 _menu.AlertLevelButton.Disabled = !_menu.AlertLevelSelectable;
                 _menu.EmergencyShuttleButton.Disabled = !_menu.CanCall;
                 _menu.AnnounceButton.Disabled = !_menu.CanAnnounce;
@@ -109,5 +120,6 @@ namespace Content.Client.Communications.UI
                 // Sunrise-End
             }
         }
+
     }
 }

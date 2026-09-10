@@ -1,4 +1,5 @@
 alert-level-announcement = Внимание! Уровень угрозы станции теперь { $name }! { $announcement }
+alert-level-additional-disabled-announcement = Дополнительный код угрозы «{ $name }» отменён.
 alert-level-unknown = Неизвестный.
 alert-level-unknown-instructions = Неизвестно.
 alert-level-green = Зелёный

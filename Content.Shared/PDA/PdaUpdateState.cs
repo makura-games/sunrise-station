@@ -48,6 +48,10 @@ namespace Content.Shared.PDA
         public string? IdOwner;
         public string? JobTitle;
         public string? StationAlertLevel;
+        /// <summary>
+        /// Primary and additional station alert levels sent to the PDA interface.
+        /// </summary>
+        public List<PdaAlertLevelInfo>? StationAlertLevels; // Sunrise-Edit
         public Color StationAlertColor;
         public TimeSpan? EvacShuttleTime; // Sunrise-edit
         public EvacShuttleStatus EvacShuttleStatus; // Sunrise-edit

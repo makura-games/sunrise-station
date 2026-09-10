@@ -21,7 +21,7 @@ public sealed partial class AccessReaderComponent : Component
     #region ExtendedAccess
 
     /// <summary>
-    /// Именно от Group происходит проверка аварийных доступов
+    /// The primary access group temporarily granted by the current alert level.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public ProtoId<AccessGroupPrototype>? Group;
@@ -128,7 +128,7 @@ public readonly partial record struct AccessRecord(
 }
 
 [Serializable, NetSerializable]
-public sealed class AccessReaderComponentState : ComponentState
+public sealed partial class AccessReaderComponentState : ComponentState // Sunrise-Edit
 {
     public bool Enabled;
     public HashSet<ProtoId<AccessLevelPrototype>> DenyTags;
@@ -145,6 +145,7 @@ public sealed class AccessReaderComponentState : ComponentState
         List<HashSet<ProtoId<AccessLevelPrototype>>> accessLists,
         List<HashSet<ProtoId<AccessLevelPrototype>>>? accessListsOriginal,
         ProtoId<AccessGroupPrototype>? group, //Sunrise added
+        HashSet<ProtoId<AccessGroupPrototype>> additionalGroups, // Sunrise-Edit
         List<(NetEntity, uint)> accessKeys,
         Queue<AccessRecord> accessLog,
         int accessLogLimit)
@@ -157,6 +158,7 @@ public sealed class AccessReaderComponentState : ComponentState
         AccessLog = accessLog;
         AccessLogLimit = accessLogLimit;
         Group = group; // Sunrise added for alertAccesses
+        AdditionalGroups = additionalGroups; // Sunrise-Edit
     }
 }
 

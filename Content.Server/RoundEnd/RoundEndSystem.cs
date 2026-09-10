@@ -16,7 +16,6 @@ using Content.Shared.GameTicking;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Station.Components;
@@ -38,7 +37,6 @@ namespace Content.Server.RoundEnd
         [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
         [Dependency] private readonly GameTicker _gameTicker = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly IPrototypeManager _protoManager = default!;
         [Dependency] private readonly EmergencyShuttleSystem _shuttle = default!;
         [Dependency] private readonly StationSystem _stationSystem = default!;
         private bool _autoCalledBefore = false;
@@ -146,11 +144,7 @@ namespace Content.Server.RoundEnd
             {
                 var stationUid = _stationSystem.GetOwningStation(requester.Value);
                 if (TryComp<AlertLevelComponent>(stationUid, out var alertLevel))
-                {
-                    duration = _protoManager
-                        .Index<AlertLevelPrototype>(AlertLevelSystem.DefaultAlertLevelSet)
-                        .Levels[alertLevel.CurrentLevel].ShuttleTime;
-                }
+                    duration = GetAlertLevelShuttleTime((stationUid!.Value, alertLevel), duration); // Sunrise-Edit
             }
 
             RequestRoundEnd(duration, requester, machine, checkCooldown, text, name, cantRecall);

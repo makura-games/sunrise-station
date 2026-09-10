@@ -8,7 +8,7 @@ namespace Content.Shared.Communications
     }
 
     [Serializable, NetSerializable]
-    public sealed class CommunicationsConsoleInterfaceState : BoundUserInterfaceState
+    public sealed partial class CommunicationsConsoleInterfaceState : BoundUserInterfaceState // Sunrise-Edit
     {
         public readonly bool CanAnnounce;
         public readonly bool CanBroadcast = true;
@@ -25,7 +25,20 @@ namespace Content.Shared.Communications
         public readonly float RelayTimeRemaining;
         // Sunrise-End
 
-        public CommunicationsConsoleInterfaceState(bool canAnnounce, bool canCall, List<string>? alertLevels, string currentAlert, float currentAlertDelay, TimeSpan? expectedCountdownEnd = null, bool canRelay = false, bool isRelaying = false, float relayCooldownRemaining = 0f, float relayTimeRemaining = 0f) // Sunrise-Edit
+        public CommunicationsConsoleInterfaceState(
+            bool canAnnounce,
+            bool canCall,
+            List<string>? alertLevels,
+            string currentAlert,
+            float currentAlertDelay,
+            TimeSpan? expectedCountdownEnd = null,
+            bool canRelay = false,
+            bool isRelaying = false,
+            float relayCooldownRemaining = 0f,
+            float relayTimeRemaining = 0f,
+            List<CommunicationsConsoleAdditionalAlertLevelState>? additionalAlertLevels = null,
+            List<CommunicationsConsoleAlertStationState>? alertStations = null,
+            NetEntity? selectedAlertStation = null) // Sunrise-Edit
         {
             CanAnnounce = canAnnounce;
             CanCall = canCall;
@@ -34,6 +47,9 @@ namespace Content.Shared.Communications
             AlertLevels = alertLevels;
             CurrentAlert = currentAlert;
             CurrentAlertDelay = currentAlertDelay;
+            AdditionalAlertLevels = additionalAlertLevels ?? []; // Sunrise-Edit
+            AlertStations = alertStations ?? []; // Sunrise-Edit
+            SelectedAlertStation = selectedAlertStation; // Sunrise-Edit
             // Sunrise-Start
             CanRelay = canRelay;
             IsRelaying = isRelaying;

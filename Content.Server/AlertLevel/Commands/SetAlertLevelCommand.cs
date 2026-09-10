@@ -37,14 +37,14 @@ namespace Content.Server.AlertLevel.Commands
 
         public override void Execute(IConsoleShell shell, string argStr, string[] args)
         {
-            if (args.Length < 1)
+            if (args.Length is < 1 or > 2)
             {
                 shell.WriteError(LocalizationManager.GetString("shell-wrong-arguments-number"));
                 return;
             }
 
-            var locked = false;
-            if (args.Length > 1 && !bool.TryParse(args[1], out locked))
+            var option = false;
+            if (args.Length > 1 && !bool.TryParse(args[1], out option))
             {
                 shell.WriteLine(LocalizationManager.GetString("shell-argument-must-be-boolean"));
                 return;
@@ -65,14 +65,35 @@ namespace Content.Server.AlertLevel.Commands
             }
 
             var level = args[0];
-            var levelNames = GetStationLevelNames(stationUid.Value);
-            if (!levelNames.Contains(level))
+            if (!EntityManager.TryGetComponent<AlertLevelComponent>(stationUid.Value, out var alertLevelComp)
+                || alertLevelComp.AlertLevels == null
+                || !alertLevelComp.AlertLevels.Levels.TryGetValue(level, out var detail))
             {
                 shell.WriteLine(LocalizationManager.GetString("cmd-setalertlevel-invalid-level"));
                 return;
             }
 
-            _alertLevelSystem.SetLevel(stationUid.Value, level, true, true, true, locked);
+            // Sunrise edit start - второй параметр управляет состоянием дополнительного кода
+            if (detail.IsAdditional)
+            {
+                var enabled = args.Length == 1 || option;
+                if (!_alertLevelSystem.TrySetAdditionalLevel(
+                        stationUid.Value,
+                        level,
+                        enabled,
+                        true,
+                        true,
+                        true,
+                        alertLevelComp))
+                {
+                    shell.WriteError(LocalizationManager.GetString("cmd-setalertlevel-change-failed"));
+                }
+
+                return;
+            }
+
+            _alertLevelSystem.SetLevel(stationUid.Value, level, true, true, true, option);
+            // Sunrise edit end
         }
 
         private string[] GetStationLevelNames(EntityUid station)

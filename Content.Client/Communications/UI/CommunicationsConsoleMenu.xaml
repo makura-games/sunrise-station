@@ -45,6 +45,19 @@
         <BoxContainer Orientation="Vertical"
                       Margin="0 2">
 
+            <!-- Sunrise added start - выбор станции для удалённого управления кодами -->
+            <BoxContainer Name="AlertStationSelectorContainer"
+                          Orientation="Horizontal"
+                          Margin="0 0 0 4"
+                          Visible="False">
+                <Label Text="{Loc 'comms-console-menu-alert-station'}"
+                       VAlign="Center"
+                       Margin="0 0 6 0"/>
+                <OptionButton Name="AlertStationButton"
+                              HorizontalExpand="True"/>
+            </BoxContainer>
+            <!-- Sunrise added end -->
+
             <controls:StripeBack>
                 <BoxContainer Orientation="Horizontal">
                     <Label HorizontalExpand="True" Text="{Loc 'comms-console-menu-alert-level-header'}"
@@ -57,6 +70,19 @@
                           Access="Public"
                           ToolTip="{Loc 'comms-console-menu-alert-level-button-tooltip'}"
                           StyleClasses="OpenRight"/>
+
+            <!-- Sunrise added start - дополнительные коды -->
+            <BoxContainer Name="AdditionalAlertLevelsSection" Orientation="Vertical" Margin="0 4 0 0">
+                <controls:StripeBack>
+                    <Label HorizontalExpand="True"
+                           Text="{Loc 'comms-console-menu-additional-alert-level-header'}"
+                           VAlign="Center"
+                           StyleClasses="LabelHeading"
+                           Align="Center"/>
+                </controls:StripeBack>
+                <GridContainer Name="AdditionalAlertLevelsContainer" Columns="2"/>
+            </BoxContainer>
+            <!-- Sunrise added end -->
         </BoxContainer>
 
         <BoxContainer Orientation="Vertical"

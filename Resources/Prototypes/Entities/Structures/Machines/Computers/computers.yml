@@ -818,6 +818,7 @@
     global: true #announce to everyone they're about to fuck shit up
     announceSentBy: false # The title already says who they are.
     sound: /Audio/Announcements/war.ogg
+    allowedAlertLevels: [] # Sunrise-Edit - вражеская консоль не управляет кодами станции
   - type: Computer
     board: SyndicateCommsComputerCircuitboard
   - type: PointLight
@@ -852,6 +853,7 @@
     global: true #announce to everyone they're about to fuck shit up
     announceSentBy: false
     sound: /Audio/Announcements/war.ogg
+    allowedAlertLevels: [] # Sunrise-Edit - консоль мага не управляет кодами станции
   - type: Computer
     board: WizardCommsComputerCircuitboard
   - type: PointLight
@@ -884,6 +886,9 @@
     color: "#1d8bad"
     canShuttle: false
     global: true
+    allowedAlertLevels: [green, blue, violet, yellow, red, gamma, delta] # Sunrise-Edit
+    forceAlertLevelChanges: true # Sunrise-Edit
+    canSelectAlertStation: true # Sunrise-Edit
   - type: Computer
     board: CentcommCommsComputerCircuitboard
   - type: PointLight

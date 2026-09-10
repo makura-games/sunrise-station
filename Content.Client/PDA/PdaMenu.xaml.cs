@@ -216,17 +216,14 @@ namespace Content.Client.PDA
                 ("time", remaining.ToString("hh\\:mm\\:ss"))));
             // Sunrise-end
 
-            var alertLevel = state.PdaOwnerInfo.StationAlertLevel;
             var alertColor = state.PdaOwnerInfo.StationAlertColor;
-            var alertLevelKey = alertLevel != null ? $"alert-level-{alertLevel}" : "alert-level-unknown";
-            _alertLevel = Loc.GetString(alertLevelKey);
+            UpdateAlertLevelState(state.PdaOwnerInfo); // Sunrise-Edit
 
             StationAlertLevelLabel.SetMarkup(Loc.GetString(
                 "comp-pda-ui-station-alert-level",
                 ("color", alertColor),
                 ("level", _alertLevel)
             ));
-            _instructions = Loc.GetString($"{alertLevelKey}-instructions");
             StationAlertLevelInstructions.SetMarkup(Loc.GetString(
                 "comp-pda-ui-station-alert-level-instructions",
                 ("instructions", _instructions))

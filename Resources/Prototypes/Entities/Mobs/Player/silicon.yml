@@ -86,6 +86,7 @@
     color: "#5ed7aa"
     announceVoice: PortalGlados # Sunrise-Edit
     sound: /Audio/_Sunrise/Announcements/announce_dig.ogg # Sunrise-Edit
+    allowedAlertLevels: [] # Sunrise-Edit - ИИ не управляет кодами через встроенную консоль
   - type: ShowJobIcons
   - type: ShowCrewIcons
   - type: DamagedSiliconAccent

@@ -12,7 +12,7 @@ using Content.Server._Sunrise.StationEvents.Events;
 
 namespace Content.Server.AlertLevel;
 
-public sealed class AlertLevelSystem : EntitySystem
+public sealed partial class AlertLevelSystem : EntitySystem // Sunrise-Edit
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -82,6 +82,7 @@ public sealed class AlertLevelSystem : EntitySystem
         while (query.MoveNext(out var uid, out var comp))
         {
             comp.AlertLevels = alerts;
+            PruneAdditionalLevels((uid, comp)); // Sunrise-Edit
             if (!comp.AlertLevels.Levels.ContainsKey(comp.CurrentLevel))
             {
                 var defaultLevel = comp.AlertLevels.DefaultLevel;
@@ -128,7 +129,7 @@ public sealed class AlertLevelSystem : EntitySystem
     /// Set the alert level based on the station's entity ID.
     /// </summary>
     /// <param name="station">Station entity UID.</param>
-    /// <param name="level">Level to change the station's alert level to.</param>
+    /// <param name="level">Level to change. Additional levels are always enabled without replacing the primary level; use <see cref="TrySetAdditionalLevel"/> to disable them.</param>
     /// <param name="playSound">Play the alert level's sound.</param>
     /// <param name="announce">Say the alert level's announcement.</param>
     /// <param name="force">Force the alert change. This applies if the alert level is not selectable or not.</param>
@@ -138,16 +139,26 @@ public sealed class AlertLevelSystem : EntitySystem
     {
         if (!Resolve(station, ref component, ref dataComponent)
             || component.AlertLevels == null
-            || !component.AlertLevels.Levels.TryGetValue(level, out var detail)
-            || component.CurrentLevel == level)
+            || !component.AlertLevels.Levels.TryGetValue(level, out var detail))
         {
             return;
         }
+
+        // Sunrise edit start - дополнительные коды не заменяют основной
+        if (detail.IsAdditional)
+        {
+            TrySetAdditionalLevel(station, level, true, playSound, announce, force, component);
+            return;
+        }
+
+        if (component.CurrentLevel == level)
+            return;
+        // Sunrise edit end
         if (!force)
         {
             if (!detail.Selectable
                 || component.CurrentDelay > 0
-                || component.IsLevelLocked)
+                || !IsSelectable((station, component))) // Sunrise-Edit
             {
                 return;
             }
@@ -187,22 +198,7 @@ public sealed class AlertLevelSystem : EntitySystem
                 colorOverride: detail.Color,
                 sender: stationName);
         }
-        // Sunrise-Start
-        // Handle special alert level behaviors
-        if (detail.ForceEndRound)
-        {
-            _roundEnd.EndRound();
-        }
-        // Handle Epsilon alert level
-        if (level == EpsilonAlertLevel)
-        {
-            var eventEnt = _gameTicker.AddGameRule(EpsilonBorgLawChanges);
-            // Use the system to set the station
-            var epsilonRule = EntityManager.System<EpsilonDeathSquadLawsetRule>();
-            epsilonRule.StartEvent(eventEnt, station);
-            _gameTicker.StartGameRule(eventEnt);
-        }
-        // Sunrise-End
+        ApplySpecialAlertLevelBehavior(station, level, detail); // Sunrise-Edit
         // Sunrise edit - добавил прежний уровень для системы автодоступов
         // Raise event with previous level for auto access system
         RaiseLocalEvent(new AlertLevelChangedEvent(station, level, previousLevel));

@@ -57,6 +57,7 @@
     sound: /Audio/Announcements/announce.ogg # Starlight used /Audio/_Starlight/Announcements/announce2.ogg.
     color: "#b48b57"
     canShuttle: false
+    allowedAlertLevels: []
   - type: Computer
     # Starlight department comms boards are not ported.
     board: CommsComputerCircuitboard
@@ -90,6 +91,7 @@
     sound: /Audio/Announcements/announce.ogg
     color: "#f37746"
     canShuttle: false
+    allowedAlertLevels: [yellow]
   - type: Computer
     board: CommsComputerCircuitboard
   - type: PointLight
@@ -122,6 +124,7 @@
     sound: /Audio/Announcements/announce.ogg
     color: "#ff178b"
     canShuttle: false
+    allowedAlertLevels: []
   - type: Computer
     board: CommsComputerCircuitboard
   - type: PointLight
@@ -154,6 +157,7 @@
     sound: /Audio/Announcements/announce.ogg
     color: "#52b4e9"
     canShuttle: false
+    allowedAlertLevels: [violet]
   - type: Computer
     board: CommsComputerCircuitboard
   - type: PointLight
@@ -186,6 +190,7 @@
     sound: /Audio/Announcements/announce.ogg
     color: "#c68cfa"
     canShuttle: false
+    allowedAlertLevels: []
   - type: Computer
     board: CommsComputerCircuitboard
   - type: PointLight
@@ -250,6 +255,7 @@
     sound: /Audio/Announcements/announce.ogg
     color: "#539c00"
     canShuttle: false
+    allowedAlertLevels: []
   - type: Computer
     board: CommsComputerCircuitboard
   - type: PointLight

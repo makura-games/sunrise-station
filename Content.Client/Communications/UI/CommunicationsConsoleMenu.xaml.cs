@@ -79,6 +79,8 @@ namespace Content.Client.Communications.UI
                 }
             };
 
+            InitializeAdditionalAlertLevelControls(); // Sunrise-Edit
+
 
             AlertLevelButton.Disabled = !AlertLevelSelectable;
 

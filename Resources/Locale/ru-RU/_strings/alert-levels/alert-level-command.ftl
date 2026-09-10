@@ -1,6 +1,9 @@
 cmd-setalertlevel-desc = Изменяет уровень угрозы на станции, на сетке которой находится игрок.
-cmd-setalertlevel-help = Использование: setalertlevel <level> [locked]
+# Sunrise edit start - описание отдельной семантики основного и дополнительного кодов.
+cmd-setalertlevel-help = Использование: setalertlevel <уровень> [блокировка/включён]. Для основного кода необязательное логическое значение блокирует смену кода экипажем. Для дополнительного кода отсутствие значения или true включает код, а false снимает его.
 cmd-setalertlevel-invalid-grid = Вы должны находиться на сетке станции, код которой собираетесь изменить.
 cmd-setalertlevel-invalid-level = Указанный уровень угрозы не существует на этой сетке.
-cmd-setalertlevel-hint-1 = <level>
-cmd-setalertlevel-hint-2 = [locked]
+cmd-setalertlevel-change-failed = Запрошенное изменение кода запрещено или уже применено.
+cmd-setalertlevel-hint-1 = <уровень>
+cmd-setalertlevel-hint-2 = [блокировка/включён]
+# Sunrise edit end

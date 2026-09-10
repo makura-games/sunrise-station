@@ -23,7 +23,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Access.Systems;
 
-public sealed class AccessReaderSystem : EntitySystem
+public sealed partial class AccessReaderSystem : EntitySystem // Sunrise-Edit
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
@@ -110,6 +110,7 @@ public sealed class AccessReaderSystem : EntitySystem
             component.AccessLists,
             component.AccessListsOriginal,
             component.Group, //Sunrise added
+            component.AdditionalGroups, // Sunrise-Edit
             _recordsSystem.Convert(component.AccessKeys),
             component.AccessLog,
             component.AccessLogLimit); // Sunrise-edit
@@ -135,6 +136,7 @@ public sealed class AccessReaderSystem : EntitySystem
         component.DenyTags = new(state.DenyTags);
         component.AccessLog = new(state.AccessLog);
         component.Group = state.Group != null ? new (state.Group) : null; // Sunrise added - автодоступы по коду
+        component.AdditionalGroups = new(state.AdditionalGroups); // Sunrise-Edit
         component.AccessLogLimit = state.AccessLogLimit;
 
         // Sunrise added start - уведомляем client-side UI/overlays после изменения replicated access settings
@@ -340,20 +342,11 @@ public sealed class AccessReaderSystem : EntitySystem
 
     // Sunrise-start
     /// <summary>
-    /// Сравнивает список аварийных доступов с доступами на карте.
+    /// Checks whether any alert-level access group grants access to the supplied tags.
     /// </summary>
     public bool IsAccessAllowedByExtendedAccess(ICollection<ProtoId<AccessLevelPrototype>> access, AccessReaderComponent reader)
     {
-        if (!_prototype.TryIndex(reader.Group, out var accessTags))
-            return false;
-
-        if (accessTags.Tags.Count == 0)
-            return false;
-
-        if (!accessTags.Tags.Any(access.Contains))
-            return false;
-
-        return true;
+        return IsAccessAllowedByAlertLevel(access, reader); // Sunrise-Edit
     }
     // Sunrise-end
 
@@ -983,6 +976,7 @@ public sealed class AccessReaderSystem : EntitySystem
 
     public void UpdateAccess(Entity<AccessReaderComponent> ent, string currentLevel)
     {
+        ent.Comp.AdditionalGroups.Clear();
         if (ent.Comp.AlertAccesses.TryGetValue(currentLevel, out var value))
             ent.Comp.Group = value;
         else

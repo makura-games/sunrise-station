@@ -505,11 +505,14 @@
   name: centcom communications computer
   components:
   - type: AccessReader
-    access: [[ "Command" ]]
+    access: [[ "CentralCommand" ]]
   - type: CommunicationsConsole
     title: comms-console-announcement-title-centcom
     global: true
     announceVoice: NecoArcTwo
+    allowedAlertLevels: [green, blue, violet, yellow, red, gamma, delta]
+    forceAlertLevelChanges: true
+    canSelectAlertStation: true
 
 - type: entity
   parent: BaseComputerShuttle

@@ -1,4 +1,5 @@
 alert-level-announcement = Attention! Station alert level is now {$name}! {$announcement}
+alert-level-additional-disabled-announcement = Additional alert code { $name } has been lifted.
 
 alert-level-unknown = Unknown.
 alert-level-unknown-instructions = Unknown.
