@@ -121,18 +121,18 @@ def render_embed(
     action: str,
     payload: dict,
     subject: dict,
-    state: str,
+    style: dict,
     config: dict,
 ) -> dict:
     repository = payload["repository"]["full_name"]
     sender = payload.get("sender") or {}
     number = subject.get("number")
     title = plain(subject.get("title") or subject.get("name") or repository)
-    style = config["styles"].get(state, config["styles"]["default"])
+    icon = config["icons"].get(style.get("icon", ""), "")
     comment = payload.get("comment") or payload.get("review") or {}
     body = comment.get("body") if comment else subject.get("body")
     embed = {
-        "title": f"{style['emoji']} {title}".strip(),
+        "title": f"{icon} {title}".strip(),
         "url": safe_url(
             comment.get("html_url") or subject.get("html_url"), repository
         ),
@@ -153,14 +153,10 @@ def render_embed(
             for key, name in (("+1", "upvote"), ("-1", "downvote")):
                 count = reactions.get(key, 0)
                 if type(count) is int and count > 0:
-                    votes.append(f"{config['labels'][name]} {count}")
+                    votes.append(f"{config['icons'][name]} {count}")
         embed["description"] += "\n" + "   ".join(votes) + "\u200b"
     elif event == "pull_request_review":
-        style = config["reviews"].get(state, config["reviews"]["commented"])
-        set_color(embed, style)
-        embed["title"] = (
-            f"{config['icons'][style['icon']]} {style['label']} · {title}"
-        ).strip()
+        embed["title"] = f"{icon} {style['label']} · {title}".strip()
     elif event == "pull_request_review_comment":
         set_color(embed, config["styles"]["review_comment"])
         review_state = payload.get("_discord_review_state")
@@ -219,7 +215,7 @@ def render_embed(
             if action != "created":
                 embed.pop("author", None)
         embed["title"] = (
-            f"{config['labels']['discussion']} {action_label}: {title}"
+            f"{config['icons']['discussion']} {action_label}: {title}"
         )
         if action == "created" or event == "discussion_comment":
             embed.pop("color", None)
@@ -237,7 +233,6 @@ def render_embed(
             embed["title"] = (
                 config["labels"]["force_push"] + " " + embed["title"]
             )
-            set_color(embed, config["styles"]["force_push"])
         lines = []
         limit = config["display"]["commit_length"]
         for commit in commits[: config["display"]["max_commits"]]:
@@ -250,13 +245,11 @@ def render_embed(
         if count >= config["display"]["max_commits"]:
             lines.append(config["labels"]["overflow"])
         embed["description"] = "".join(lines)
-    elif event in {"create", "delete"}:
-        embed["title"] = (
-            f"{style['emoji']} {plain(payload.get('ref'))}".strip()
-        )
+    elif event == "delete":
+        embed["title"] = f"{icon} {plain(payload.get('ref'))}".strip()
     elif event == "fork":
         fork = payload.get("forkee", {}).get("full_name", title)
-        embed["title"] = f"{style['emoji']} {fork}"
+        embed["title"] = f"{icon} {fork}"
     embed["title"] = truncate(embed["title"], 256)
     if (
         event == "push"
@@ -325,13 +318,9 @@ def format_event(
         return None, "Ветка исключена конфигурацией"
     state = action
     if event == "push":
-        state = "push"
-    if event in {"create", "delete"}:
-        state = "created" if event == "create" else "deleted"
-    if merged:
-        state = "merged"
-    elif event == "issues" and action == "closed":
-        state = "issue_closed"
+        state = "force_push" if payload.get("forced") else "push"
+    elif event == "delete":
+        state = "deleted"
     elif event == "pull_request_review" and action != "dismissed":
         state = review.get("state", "commented").lower()
     elif event == "pull_request_review_comment":
@@ -351,6 +340,8 @@ def format_event(
         else:
             state = "issue_closed" if closed else "issue_opened"
     style = config["styles"].get(state, config["styles"]["default"])
+    if event == "pull_request_review":
+        style = config["reviews"].get(state, config["reviews"]["commented"])
     title = (
         subject.get("title")
         or subject.get("name")
@@ -379,7 +370,7 @@ def format_event(
     summary = (
         f"{event}/{action} · {repository} · {prefix}{title} · {style['label']}"
     )
-    embed = render_embed(event, action, payload, subject, state, config)
+    embed = render_embed(event, action, payload, subject, style, config)
     is_pull = event in {
         "pull_request",
         "pull_request_review",

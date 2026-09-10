@@ -16,7 +16,6 @@ on:
     types: [started]
   push:
     branches-ignore: [discord-notification-state]
-  create:
   delete:
   release:
   public:

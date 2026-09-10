@@ -41,11 +41,12 @@ def load_config(path: Path) -> dict:
             r"#[0-9a-fA-F]{6}", style["color"]
         ):
             raise ValueError(f"styles.{name}.color: требуется #RRGGBB или ''")
-        for field in ("emoji", "label"):
-            if not isinstance(style[field], str) or len(style[field]) > 100:
-                raise ValueError(
-                    f"styles.{name}.{field}: слишком длинный текст"
-                )
+        if not isinstance(style["label"], str) or len(style["label"]) > 100:
+            raise ValueError(f"styles.{name}.label: слишком длинный текст")
+        if "icon" in style and style["icon"] not in config["icons"]:
+            raise ValueError(
+                f"styles.{name}.icon: требуется имя из раздела icons"
+            )
     for section in ("labels", "pr_status", "review_status", "icons"):
         for name, value in config[section].items():
             if not isinstance(value, str) or len(value) > 100:
