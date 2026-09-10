@@ -158,31 +158,33 @@ def render_embed(
     elif event == "pull_request_review":
         embed["title"] = f"{icon} {style['label']} · {title}".strip()
     elif event == "pull_request_review_comment":
-        set_color(embed, config["styles"]["review_comment"])
-        review_state = payload.get("_discord_review_state")
-        review_label = (
-            config["reviews"]
-            .get(review_state, {})
-            .get("label", config["review_status"]["unknown"])
-        )
-        prefix = config["text"]["review_comment"]
-        if action in {"edited", "deleted"}:
-            prefix = config["text"][f"{action}_review_comment"]
-        embed["title"] = (
-            f"{config['icons']['review']} {prefix} · {review_label} "
-            f"· #{number} {title}"
-        ).strip()
-        path = plain(comment.get("path"))
-        line = comment.get("line") or comment.get("original_line")
-        if path:
-            location = f"{path}:{line}" if line else path
-            embed["fields"] = [
-                {
-                    "name": config["text"]["file"],
-                    "value": text(location, 1000),
-                    "inline": False,
-                }
-            ]
+        if comment.get("in_reply_to_id") is not None:
+            prefix = config["text"]["new_comment"]
+            if action in {"edited", "deleted"}:
+                prefix = config["text"][f"{action}_comment"]
+            embed["title"] = (
+                f"{config['icons']['comment']} "
+                f"[{repository.split('/')[-1]}] {prefix} "
+                f"{config['text']['pull_request']} #{number}: {title}"
+            ).strip()
+        else:
+            prefix = config["text"]["review_comment"]
+            if action in {"edited", "deleted"}:
+                prefix = config["text"][f"{action}_review_comment"]
+            embed["title"] = (
+                f"{icon} {prefix} · {style['label']} · #{number} {title}"
+            ).strip()
+            path = plain(comment.get("path"))
+            line = comment.get("line") or comment.get("original_line")
+            if path:
+                location = f"{path}:{line}" if line else path
+                embed["fields"] = [
+                    {
+                        "name": config["text"]["file"],
+                        "value": text(location, 1000),
+                        "inline": False,
+                    }
+                ]
     elif event in {
         "issue_comment",
         "commit_comment",
@@ -327,7 +329,11 @@ def format_event(
     elif event == "pull_request_review" and action != "dismissed":
         state = review.get("state", "commented").lower()
     elif event == "pull_request_review_comment":
-        state = "review_comment"
+        state = (
+            "commented"
+            if comment.get("in_reply_to_id") is not None
+            else str(payload.get("_discord_review_state", "commented")).lower()
+        )
     elif event.endswith("comment") and action == "created":
         state = "commented"
     if event in {"pull_request", "issues"}:
@@ -343,7 +349,10 @@ def format_event(
         else:
             state = "issue_closed" if closed else "issue_opened"
     style = config["styles"].get(state, config["styles"]["default"])
-    if event == "pull_request_review":
+    if event == "pull_request_review" or (
+        event == "pull_request_review_comment"
+        and comment.get("in_reply_to_id") is None
+    ):
         style = config["reviews"].get(state, config["reviews"]["commented"])
     title = (
         subject.get("title")

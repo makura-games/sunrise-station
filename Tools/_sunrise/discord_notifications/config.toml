@@ -165,9 +165,6 @@ icon = "issue_opened"
 [styles.commented]
 color = ""
 
-[styles.review_comment]
-color = "#FF4444"
-
 [styles.edited]
 color = "#BF8700"
 icon = "edited"
