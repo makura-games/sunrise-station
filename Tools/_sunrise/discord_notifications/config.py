@@ -38,8 +38,6 @@ def load_config(path: Path) -> dict:
             r"#[0-9a-fA-F]{6}", style["color"]
         ):
             raise ValueError(f"styles.{name}.color: требуется #RRGGBB или ''")
-        if not isinstance(style["label"], str) or len(style["label"]) > 100:
-            raise ValueError(f"styles.{name}.label: слишком длинный текст")
         if "icon" in style and style["icon"] not in config["icons"]:
             raise ValueError(
                 f"styles.{name}.icon: требуется имя из раздела icons"

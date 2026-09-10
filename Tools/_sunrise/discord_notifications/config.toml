@@ -128,91 +128,71 @@ excluded_events = ["fork"]
 
 [styles.default]
 color = ""
-label = "Изменение"
 
 [styles.opened]
 color = "#6CC644"
 icon = "opened"
-label = "Открыто"
 
 [styles.created]
 color = "#6CC644"
 icon = "created"
-label = "Создано"
 
 [styles.merged]
 color = "#6E5494"
 icon = "merged"
-label = "Изменения приняты"
 
 [styles.closed]
 color = "#FF4444"
 icon = "closed"
-label = "Закрыто без слияния"
 
 [styles.issue_closed]
 color = "#FF4444"
 icon = "issue_closed"
-label = "Задача закрыта"
 
 [styles.issue_opened]
 color = "#6CC644"
 icon = "issue_opened"
-label = "Задача открыта"
 
 [styles.commented]
 color = ""
-label = "Комментарий"
 
 [styles.review_comment]
 color = "#FF4444"
-label = "Комментарий к ревью"
 
 [styles.edited]
 color = "#BF8700"
 icon = "edited"
-label = "Отредактировано"
 
 [styles.deleted]
 color = "#CF222E"
 icon = "deleted"
-label = "Удалено"
 
 [styles.labeled]
 color = "#0969DA"
-label = "Добавлена метка"
 
 [styles.unlabeled]
 color = "#6E7781"
-label = "Удалена метка"
 
 [styles.push]
 color = ""
-label = "Отправлены коммиты"
 
 [styles.force_push]
 color = "#FF0000"
-label = "История ветки перезаписана"
 
 [styles.answered]
 color = "#6CC644"
-label = "Дан ответ"
 
 [styles.unanswered]
 color = "#FF4444"
-label = "Ответ отменён"
 
 [styles.fork]
 color = "#0969DA"
 icon = "fork"
-label = "Создана копия репозитория"
 
 [styles.published]
 color = "#6E5494"
 icon = "published"
-label = "Опубликован выпуск"
 
 [styles.public]
 color = "#1F883D"
 icon = "public"
-label = "Репозиторий стал публичным"

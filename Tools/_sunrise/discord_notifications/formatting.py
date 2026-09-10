@@ -371,9 +371,7 @@ def format_event(
             return None, "Отправка не содержит отображаемых коммитов"
         title = f"{branch}: {len(commits)} коммитов в полученном событии"
         payload = {**payload, "commits": commits}
-    summary = (
-        f"{event}/{action} · {repository} · {prefix}{title} · {style['label']}"
-    )
+    summary = f"{event}/{action} · {repository} · {prefix}{title}"
     embed = render_embed(event, action, payload, subject, style, config)
     is_pull = event in {
         "pull_request",
