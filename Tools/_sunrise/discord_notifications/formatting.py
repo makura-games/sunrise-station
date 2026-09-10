@@ -241,7 +241,7 @@ def render_embed(
             sha = str(commit.get("id", ""))[:7]
             url = safe_url(commit.get("url"), repository)
             lines.append(f"[`{sha}`]({url}) {message}\n")
-        if count >= config["display"]["max_commits"]:
+        if count > config["display"]["max_commits"]:
             lines.append(config["text"]["overflow"])
         embed["description"] = "".join(lines)
     elif event == "delete":
