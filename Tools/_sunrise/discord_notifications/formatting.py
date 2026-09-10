@@ -165,9 +165,9 @@ def render_embed(
             .get(review_state, {})
             .get("label", config["review_status"]["unknown"])
         )
-        prefix = config["labels"]["review_comment"]
+        prefix = config["text"]["review_comment"]
         if action in {"edited", "deleted"}:
-            prefix = config["labels"][f"{action}_review_comment"]
+            prefix = config["text"][f"{action}_review_comment"]
         embed["title"] = (
             f"{config['icons']['review']} {prefix} · {review_label} "
             f"· #{number} {title}"
@@ -178,7 +178,7 @@ def render_embed(
             location = f"{path}:{line}" if line else path
             embed["fields"] = [
                 {
-                    "name": config["labels"]["file"],
+                    "name": config["text"]["file"],
                     "value": text(location, 1000),
                     "inline": False,
                 }
@@ -187,19 +187,19 @@ def render_embed(
         "issue_comment",
         "commit_comment",
     }:
-        prefix = config["labels"]["new_comment"]
+        prefix = config["text"]["new_comment"]
         if action in {"edited", "deleted"}:
-            prefix = config["labels"][f"{action}_comment"]
+            prefix = config["text"][f"{action}_comment"]
         if event == "commit_comment":
             title = str(comment.get("commit_id", ""))[:7]
-            target = config["labels"]["commit"] + " " + title
+            target = config["text"]["commit"] + " " + title
         else:
             kind = (
                 "pull_request"
                 if (payload.get("pull_request") or subject.get("pull_request"))
                 else "issue"
             )
-            target = f"{config['labels'][kind]} #{number}: {title}"
+            target = f"{config['text'][kind]} #{number}: {title}"
         embed["title"] = (
             f"{config['icons']['comment']} [{repository.split('/')[-1]}] "
             f"{prefix} {target}"
@@ -207,43 +207,42 @@ def render_embed(
         embed.pop("color", None)
         set_color(embed, config["styles"]["commented"])
     elif event in {"discussion", "discussion_comment"}:
-        action_label = config["labels"].get(f"discussion_{action}", action)
+        action_text = config["text"].get(f"discussion_{action}", action)
         if event == "discussion_comment":
-            action_label = config["labels"]["discussion_commented"]
+            action_text = config["text"]["discussion_commented"]
         else:
             embed["description"] += "\n"
             if action != "created":
                 embed.pop("author", None)
         embed["title"] = (
-            f"{config['icons']['discussion']} {action_label}: {title}"
+            f"{config['icons']['discussion']} {action_text}: {title}"
         )
         if action == "created" or event == "discussion_comment":
             embed.pop("color", None)
     elif event == "push":
         commits = payload["commits"]
         count = len(commits)
-        noun = "commit_singular" if count == 1 else "commit_plural"
-        ref = plain(payload.get("ref"))
+        ref = plain(payload.get("ref")).removeprefix("refs/heads/")
         embed["title"] = (
-            f"**{count}** {config['labels'][noun]} "
-            f"{config['labels']['push_to']} **{ref}**"
+            f"{config['text']['commits']}: **{count}** · "
+            f"{config['text']['branch']}: **{ref}**"
         )
         embed["url"] = safe_url(payload.get("compare"), repository)
         if payload.get("forced"):
             embed["title"] = (
-                config["labels"]["force_push"] + " " + embed["title"]
+                config["text"]["force_push"] + " " + embed["title"]
             )
         lines = []
         limit = config["display"]["commit_length"]
         for commit in commits[: config["display"]["max_commits"]]:
             message = plain(commit.get("message"))
             if len(message) > limit:
-                message = message[:limit] + config["labels"]["ellipsis"]
+                message = message[:limit] + config["text"]["ellipsis"]
             sha = str(commit.get("id", ""))[:7]
             url = safe_url(commit.get("url"), repository)
             lines.append(f"[`{sha}`]({url}) {message}\n")
         if count >= config["display"]["max_commits"]:
-            lines.append(config["labels"]["overflow"])
+            lines.append(config["text"]["overflow"])
         embed["description"] = "".join(lines)
     elif event == "delete":
         embed["title"] = f"{icon} {plain(payload.get('ref'))}".strip()

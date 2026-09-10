@@ -42,7 +42,7 @@ def load_config(path: Path) -> dict:
             raise ValueError(
                 f"styles.{name}.icon: требуется имя из раздела icons"
             )
-    for section in ("labels", "pr_status", "review_status", "icons"):
+    for section in ("text", "pr_status", "review_status", "icons"):
         for name, value in config[section].items():
             if not isinstance(value, str) or len(value) > 100:
                 raise ValueError(
