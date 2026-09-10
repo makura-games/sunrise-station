@@ -178,9 +178,9 @@ def prepare_body(body: str, base: str) -> tuple[str, list[str]]:
         parts[index] = part
     images.extend(parser.sources)
     urls = [media_url(source, base) for source in images]
-    return "".join(parts).strip(), list(
-        dict.fromkeys(url for url in urls if url)
-    )
+    visible = "".join(parts).replace("\r\n", "\n").replace("\r", "\n")
+    visible = re.sub(r"\n(?:[^\S\n]*\n){2,}", "\n\n", visible).strip()
+    return visible, list(dict.fromkeys(url for url in urls if url))
 
 
 def split_body(body: str, limit: int) -> list[str]:
