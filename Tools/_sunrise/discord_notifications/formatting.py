@@ -2,7 +2,7 @@
 
 import re
 from fnmatch import fnmatchcase
-from urllib.parse import urlsplit
+from urllib.parse import quote, urlsplit
 
 from .content import body_base, prepare_body, split_body
 
@@ -34,6 +34,26 @@ def safe_url(value: object, repository: str) -> str:
     ):
         return value
     return f"https://github.com/{repository}"
+
+
+def repository_file_url(
+    repository: str, revision: object, path: object, line: object
+) -> str:
+    revision = str(revision or "")
+    path = str(path or "")
+    parts = path.split("/")
+    if (
+        not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repository)
+        or not re.fullmatch(r"[0-9a-fA-F]{40}", revision)
+        or not parts
+        or any(part in {"", ".", ".."} for part in parts)
+    ):
+        return ""
+    encoded_path = "/".join(quote(part, safe="") for part in parts)
+    address = f"https://github.com/{repository}/blob/{revision}/{encoded_path}"
+    if type(line) is int and line > 0:
+        address += f"#L{line}"
+    return address
 
 
 def is_ignored(account: dict, config: dict) -> bool:
@@ -175,13 +195,23 @@ def render_embed(
                 f"{icon} {prefix} · {style['label']} · #{number} {title}"
             ).strip()
             path = plain(comment.get("path"))
-            line = comment.get("line") or comment.get("original_line")
+            revision = comment.get("original_commit_id")
+            line = comment.get("original_line")
+            if not revision:
+                revision = comment.get("commit_id")
+                line = comment.get("line")
             if path:
                 location = f"{path}:{line}" if line else path
+                address = repository_file_url(
+                    repository, revision, comment.get("path"), line
+                )
+                value = text(location, 1000)
+                if address:
+                    value = f"[{value}]({address})"
                 embed["fields"] = [
                     {
                         "name": config["text"]["file"],
-                        "value": text(location, 1000),
+                        "value": value,
                         "inline": False,
                     }
                 ]
