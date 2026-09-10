@@ -255,8 +255,8 @@
   - type: Gun
     minAngle: 10
     maxAngle: 35
-    angleIncrease: 2
-    angleDecay: 16
+    angleIncrease: 1.5
+    angleDecay: 18
     fireRate: 5.5
     selectedMode: FullAuto
     soundGunshot:
@@ -265,8 +265,8 @@
     - FullAuto
   - type: Wieldable
   - type: GunWieldBonus
-    minAngle: -8
-    maxAngle: -22
+    minAngle: -9
+    maxAngle: -25
   - type: ItemSlots
     slots:
       gun_magazine:

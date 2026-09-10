@@ -17,20 +17,8 @@
     anchored: true
   - type: Physics
     bodyType: Static
-    canCollide: true #Sunrise-edit
+    canCollide: false
   - type: Fixtures
-#Sunrise-start
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.25,-0.48,0.25,0.48"
-        density: 75
-        mask:
-        - MachineMask
-        layer:
-        - MachineLayer
-#Sunrise-end
   - type: Sprite
     layers:
     - sprite: Structures/Specific/carp_rift.rsi
@@ -51,8 +39,7 @@
     # only show after making the announcement at 50%
     enabled: false
   - type: Damageable
-    damageContainer: Rift #Sunrise-edit
-    damageModifierSet: Rift #Sunrise-edit
+    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -71,17 +58,17 @@
     damage:
       # Это немного: 160 проникающих ранений вылечатся наполовину примерно за две минуты.
       types:
-        Blunt: -2.67
-        Slash: -2.67
-        Piercing: -2.66
-        Heat: -1.25
-        Shock: -1.25
-        Cold: -1.25
-        Caustic: -1.25
-        Asphyxiation: -2.5
-        Bloodloss: -2.5
-        Poison: -2.5
-        Radiation: -2.5 # Sunrise-Edit
+        Blunt: -1
+        Slash: -1
+        Piercing: -2
+        Heat: -1
+        Shock: -1
+        Cold: -1
+        Caustic: -1
+        Asphyxiation: -1
+        Bloodloss: -1
+        Poison: -1
+        Radiation: -1
     whitelist:
       tags:
       - CarpRiftHealTarget

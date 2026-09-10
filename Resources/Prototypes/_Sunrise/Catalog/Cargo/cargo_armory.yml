@@ -57,3 +57,15 @@
   cost: 9900
   category: cargoproduct-category-name-armory
   group: market
+
+- type: cargoProduct
+  id: SunriseArmoryRandomWeaponSafe
+  name: cargoproduct-name-armory-random-weapon-safe
+  description: cargoproduct-description-armory-random-weapon-safe
+  icon:
+    sprite: _Sunrise/Structures/Storage/Gunsafes/lethal.rsi
+    state: base
+  product: SpawnerSafeLethal
+  cost: 11984
+  category: cargoproduct-category-name-armory
+  group: market

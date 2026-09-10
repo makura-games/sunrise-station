@@ -247,7 +247,7 @@
     maxAngle: 30
     angleIncrease: 3
     angleDecay: 15
-    fireRate: 2.85
+    fireRate: 2.95
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/ash12/fire.ogg
       params:

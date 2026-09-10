@@ -85,12 +85,12 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      600: Critical # Sunrise-Edit
-      650: Dead # Sunrise-Edit
+      450: Critical
+      500: Dead
   - type: SlowOnDamage
     speedModifierThresholds:
-      350: 0.7 # Sunrise-Edit
-      500: 0.5 # Sunrise-Edit
+      250: 0.7
+      400: 0.5
   # disable taking damage from fire, since its a fire breathing dragon
   - type: Flammable
     damage:

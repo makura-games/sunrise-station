@@ -92,7 +92,7 @@
     ears: ClothingHeadsetAltERT
     belt: ClothingBeltMilitaryWebbingERT
     pocket1: DoubleEmergencyOxygenTankFilled
-    pocket2: PouchAmmo
+    pocket2: PouchAmmoFilledPistol40
   inhand:
   - WeaponPistolM1911
   - WeaponRifleLecterXL8
@@ -106,10 +106,6 @@
     - HoloprojectorField
     - WeaponAdvancedTaser
     - DoorRemoteOmni
-    - MagazineMagnumFMJ
-    - MagazineMagnum
-    - MagazineMagnum
-    - MagazineMagnum
     - ClothingHandsPowerGlovesUplinkNTERTGammaLeader
     belt:
     - Handcuffs

@@ -68,19 +68,11 @@
 - type: damageModifierSet
   id: Dragon
   coefficients:
-    Blunt: 1.3
-    Slash: 1.3
-    Piercing: 0.95
-    Heat: 0.95
+    Blunt: 1
+    Slash: 1
+    Piercing: 0.9
+    Heat: 0.9
     Shock: 0.5
-
-- type: damageModifierSet
-  id: Rift
-  coefficients:
-    Blunt: 0.75
-    Slash: 0.75
-    Piercing: 0.5
-    Heat: 0.8
 
 - type: damageModifierSet
   id: CultRobe
