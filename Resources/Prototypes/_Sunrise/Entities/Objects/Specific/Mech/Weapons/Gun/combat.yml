@@ -8,9 +8,9 @@
     sprite: _Sunrise/Objects/Specific/Mech/mecha_vindictor.rsi
     state: mecha_vindictor
   - type: Gun
-    minAngle: -25
-    maxAngle: 25
-    fireRate: 12
+    minAngle: -20
+    maxAngle: 20
+    fireRate: 15
     selectedMode: FullAuto
     availableModes:
       - FullAuto
@@ -116,6 +116,40 @@
     price: 10000
 
 - type: entity
+  id: WeaponMechCombatUVM51
+  name: UVM-51 "Dragon"
+  description: A heavy weapon of mass destruction developed by Cybersun. BURN EM, BURN!
+  suffix: Mech Weapon, Gun, Combat, Laser
+  parent: [ BaseMechWeaponRange, CombatMechEquipment ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Mech/mecha_uvm31.rsi
+    state: mecha_uvm51
+  - type: Gun
+    minAngle: 1
+    maxAngle: 25
+    angleIncrease: 6
+    angleDecay: 25
+    burstCooldown: 12
+    burstFireRate: 6
+    shotsPerBurst: 3
+    projectileSpeed: 6
+    selectedMode: Burst
+    availableModes:
+      - Burst
+    soundGunshot:
+      collection: syndi_plasma
+      params:
+        volume: -1
+  - type: BatteryAmmoProvider
+    proto: ProjectileDragonsBreath
+    fireCost: 75
+  - type: Appearance
+  - type: AmmoCounter
+  - type: StaticPrice
+    price: 10000
+
+- type: entity
   id: WeaponMechCombatDuster
   name: Mounted EXP-220 Duster
   description: An  heavy Auto Cannon as a mech-mounted gun with Frag ammo
@@ -126,17 +160,29 @@
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_autocannon
   - type: Gun
-    fireRate: 0.25
-    selectedMode: FullAuto
+    projectileSpeed: 16
+    minAngle: 1
+    maxAngle: 20
+    angleIncrease: 8
+    angleDecay: 10
+    fireRate: 2
+    burstFireRate: 4
+    selectedMode: Burst
     availableModes:
+      - Burst
       - FullAuto
+    shotsPerBurst: 3
+    burstCooldown: 1.5
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ship_duster.ogg
   - type: BatteryAmmoProvider
     proto: GrenadeFragTimer
-    fireCost: 250
+    fireCost: 200
   - type: Appearance
   - type: AmmoCounter
+  - type: Battery
+    maxCharge: 1200
+    startingCharge: 1200
 
 - type: entity
   id: WeaponMechCombatMissileRack8Frag
@@ -189,7 +235,7 @@
 
 - type: entity
   id: WeaponMechCombatShotgunAuto
-  name: LBX AC 20 "Minotaur"
+  name: mounted AS-12 "Minotaur"
   description: A mounted Auto-Shotgun.
   suffix: Mech Weapon, Gun, Combat, Shotgun
   parent: [ BaseMechWeaponRange, CombatMechEquipment ]

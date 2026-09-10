@@ -202,7 +202,7 @@
   id: BaseHandheldRoboAnalyzer
   parent: BaseItem
   name: cyborg analyzer
-  description: A hand-held cyborg scaner.
+  description: A hand-held cyborg scanner.
   abstract: true
   components:
   - type: Sprite
@@ -235,34 +235,7 @@
 
 - type: entity
   id: HandheldRoboAnalyzer
-  parent:
-  - BaseHandheldRoboAnalyzer
-  - BaseHandheldComputer
-  suffix: HandHeld, Powered
-
-- type: entity
-  id: HandheldRoboAnalyzerEmpty
-  parent: HandheldRoboAnalyzer
-  suffix: HandHeld, Empty
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Devices/roboanalyzer.rsi
-    state: icon
-    layers:
-    - state: icon
-    - state: analyzer
-      shader: unshaded
-      visible: false
-      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-
-- type: entity
-  id: HandheldRoboAnalyzerUnpowered
   parent: BaseHandheldRoboAnalyzer
-  suffix: Handheld, Unpowered
 
 # Handheld Mech Analyzer
 
@@ -270,7 +243,7 @@
   id: BaseHandheldMechAnalyzer
   parent: BaseItem
   name: mech analyzer
-  description: A hand-held mech scaner.
+  description: A hand-held mech scanner.
   abstract: true
   components:
   - type: Sprite
@@ -300,36 +273,10 @@
     tags:
     - DiscreteHealthAnalyzer
   - type: Appearance
+
 - type: entity
   id: HandheldMechAnalyzer
-  parent:
-  - BaseHandheldMechAnalyzer
-  - BaseHandheldComputer
-  suffix: HandHeld, Powered
-
-- type: entity
-  id: HandheldMechAnalyzerEmpty
-  parent: HandheldMechAnalyzer
-  suffix: HandHeld, Empty
-  components:
-  - type: Sprite
-    sprite: Objects/Specific/Mech/mecha_equipment.rsi
-    state: mecha_analyzer
-    layers:
-    - state: mecha_analyzer
-    - state: mecha_analyzer_anim
-      shader: unshaded
-      visible: false
-      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-
-- type: entity
-  id: HandheldMechAnalyzerUnpowered
   parent: BaseHandheldMechAnalyzer
-  suffix: Handheld, Unpowered
 
 # Handheld Camera
 

@@ -4,6 +4,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Magboots
+  - type: ComplexInteraction # Sunrise-added - боевые мехи поддерживают сложные взаимодействия
   - type: Mech
     equipmentWhitelist:
       tags:
@@ -40,6 +41,7 @@
   abstract: true
   categories: [ HideSpawnMenu ]
   components:
+  - type: ComplexInteraction # Sunrise-added - специальные мехи поддерживают сложные взаимодействия
   - type: Mech
     equipmentWhitelist:
       tags:
@@ -54,6 +56,7 @@
   abstract: true
   categories: [ HideSpawnMenu ]
   components:
+  - type: ComplexInteraction # Sunrise-added - малые мехи поддерживают сложные взаимодействия
   - type: Mech
     equipmentWhitelist:
       tags:
@@ -250,7 +253,6 @@
   - type: ExplosionResistance # Sunrise-Edit
     damageCoefficient: 0.9 # Sunrise-Edit
   - type: ProtectedFromStepTriggers # Sunrise-added
-  - type: ComplexInteraction # Sunrise-added
 
 # Ripley MK-I
 - type: entity
@@ -596,6 +598,7 @@
   name: Vim
   description: A miniature exosuit from Nanotrasen, developed to let the irreplaceable station pets live a little longer.
   components:
+  - type: ComplexInteraction # Sunrise-added - Vim не относится к промышленным мехам
   - type: FootprintEmitter # Sunrise-Add
   - type: Sprite
     drawdepth: Mobs
@@ -1180,8 +1183,4 @@
   components:
   - type: Mech
     startingEquipment:
-      - WeaponMechCombatMG
-      - WeaponMechCombatShotgun
-      - WeaponMechCombatMissileRack6
-
-
+      - WeaponMechCombatUltraRifle

@@ -306,6 +306,10 @@
     whitelist:
       tags:
       - Ore
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
   - type: Speech
     speechSounds: Borg
   - type: TTS

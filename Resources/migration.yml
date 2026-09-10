@@ -1233,4 +1233,10 @@ MagazineBoxHeavyRifleHP: MagazineBoxHeavyRifleSP
 RifleHeavyMagazineHP: RifleHeavyMagazineSP
 MagazineDragunovHP: MagazineDragunovSP
 MagazineBoxRifleMachineHP: MagazineBoxRifleMachineSP
+# 2026-08-27
+PottedPlantAlt9: PottedPlantRose5
+HandheldRoboAnalyzerEmpty: HandheldRoboAnalyzer
+HandheldRoboAnalyzerUnpowered: HandheldRoboAnalyzer
+HandheldMechAnalyzerEmpty: HandheldMechAnalyzer
+HandheldMechAnalyzerUnpowered: HandheldMechAnalyzer
 # region Sunrise-End

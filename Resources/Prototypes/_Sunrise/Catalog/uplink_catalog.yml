@@ -1862,13 +1862,13 @@
   id: UplinkDarkGygax
   name: uplink-mech-teleporter-assault-name
   description: uplink-mech-teleporter-assault-desc
-  icon: { sprite: Objects/Specific/Mech/gygax.rsi, state: darkgygax }
+  icon: { sprite: _Sunrise/Objects/Specific/Mech/mecha.rsi, state: darkgygax }
   productEntity: CrateCybersunDarkGygaxBundle
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 35
-  cost:
     Telecrystal: 60
+  cost:
+    Telecrystal: 80
   categories:
   - UplinkMechs
   conditions:
@@ -1884,7 +1884,7 @@
   id: UplinkDarkGygaxLoneOps
   name: uplink-mech-teleporter-assault-name
   description: uplink-mech-teleporter-assault-desc
-  icon: { sprite: Objects/Specific/Mech/gygax.rsi, state: darkgygax }
+  icon: { sprite: _Sunrise/Objects/Specific/Mech/mecha.rsi, state: darkgygax }
   productEntity: CrateCybersunDarkGygaxBundle
   cost:
     Telecrystal: 40
@@ -1905,10 +1905,10 @@
   id: UplinkMaulerLoneOps
   name: uplink-mech-teleporter-heavy-name
   description: uplink-mech-teleporter-heavy-desc
-  icon: { sprite: Objects/Specific/Mech/mecha.rsi, state: mauler }
+  icon: { sprite: _Sunrise/Objects/Specific/Mech/mecha.rsi, state: mauler }
   productEntity: CrateCybersunMaulerBundle
   cost:
-    Telecrystal: 45
+    Telecrystal: 55
   categories:
   - UplinkMechs
   conditions:
@@ -1926,13 +1926,13 @@
   id: UplinkMauler
   name: uplink-mech-teleporter-heavy-name
   description: uplink-mech-teleporter-heavy-desc
-  icon: { sprite: Objects/Specific/Mech/mecha.rsi, state: mauler }
+  icon: { sprite: _Sunrise/Objects/Specific/Mech/mecha.rsi, state: mauler }
   productEntity: CrateCybersunMaulerBundle
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 60
-  cost:
     Telecrystal: 100
+  cost:
+    Telecrystal: 150
   categories:
   - UplinkMechs
   conditions:
@@ -1957,26 +1957,6 @@
     Telecrystal: 3
   cost:
     Telecrystal: 5
-  categories:
-  - UplinkMechs
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
-    blacklist:
-      components:
-      - SurplusBundle
-
-- type: listing
-  id: UplinkMechShotgun
-  name: uplink-mech-equipment-shotgun-name
-  description: uplink-mech-equipment-shotgun-desc
-  icon: { sprite: Objects/Specific/Mech/mecha_equipment.rsi, state: mecha_scatter }
-  productEntity: WeaponMechCombatShotgun
-  cost:
-    Telecrystal: 1
   categories:
   - UplinkMechs
   conditions:
@@ -2105,24 +2085,6 @@
       - SurplusBundle
 
 - type: listing
-  id: UplinkWeaponMechCombatKord
-  name: uplink-mech-equipment-kord-name
-  description: uplink-mech-equipment-kord-desc
-  productEntity: WeaponMechCombatKord
-  cost:
-    Telecrystal: 20
-  categories:
-  - UplinkMechs
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-    blacklist:
-      components:
-      - SurplusBundle
-
-- type: listing
   id: UplinkMechAMLG90
   name: uplink-mech-equipment-amlg90-name
   description: uplink-mech-equipment-amlg90-desc
@@ -2141,100 +2103,6 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
-    blacklist:
-      components:
-      - SurplusBundle
-
-- type: listing
-  id: UplinkMechVindictor
-  name: uplink-mech-equipment-vindictor-name
-  description: uplink-mech-equipment-vindictor-desc
-  icon: { sprite: _Sunrise/Objects/Specific/Mech/mecha_vindictor.rsi, state:  mecha_vindictor }
-  productEntity: WeaponMechCombatVindictor
-  cost:
-    Telecrystal: 15
-  categories:
-  - UplinkMechs
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-    blacklist:
-      components:
-      - SurplusBundle
-
-- type: listing
-  id: UplinkMechChaingun
-  name: uplink-mech-equipment-chaingun-name
-  description: uplink-mech-equipment-chaingun-desc
-  productEntity: WeaponMechCombatChaingun
-  cost:
-    Telecrystal: 10
-  categories:
-  - UplinkMechs
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
-    blacklist:
-      components:
-      - SurplusBundle
-
-- type: listing
-  id: UplinkMechMaxim
-  name: uplink-mech-equipment-maxim-name
-  description: uplink-mech-equipment-maxim-desc
-  productEntity: WeaponMechCombatMaxim
-  cost:
-    Telecrystal: 12
-  categories:
-  - UplinkMechs
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-    blacklist:
-      components:
-      - SurplusBundle
-
-- type: listing
-  id: UplinkMechHeavyRifle
-  name: uplink-mech-equipment-heavy-rifle-name
-  description: uplink-mech-equipment-heavy-rifle-desc
-  productEntity: WeaponMechCombatHeavyRifle
-  cost:
-    Telecrystal: 13
-  categories:
-  - UplinkMechs
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
-    blacklist:
-      components:
-      - SurplusBundle
-
-- type: listing
-  id: UplinkMechUVM31
-  name: uplink-mech-equipment-uvm31-name
-  description: uplink-mech-equipment-uvm31-desc
-  icon: { sprite: _Sunrise/Objects/Specific/Mech/mecha_uvm31.rsi, state: mecha_uvm31 }
-  productEntity: WeaponMechCombatUVM31
-  cost:
-    Telecrystal: 14
-  categories:
-  - UplinkMechs
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
     blacklist:
       components:
       - SurplusBundle
@@ -2760,7 +2628,7 @@
   id: UplinkDarkGygaxRoboticist
   name: uplink-mech-teleporter-assault-name
   description: uplink-mech-teleporter-assault-desc
-  icon: { sprite: Objects/Specific/Mech/gygax.rsi, state: darkgygax }
+  icon: { sprite: _Sunrise/Objects/Specific/Mech/mecha.rsi, state: darkgygax }
   productEntity: CrateCybersunDarkGygaxBundle
   discountCategory: usualDiscounts
   discountDownTo:

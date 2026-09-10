@@ -134,14 +134,6 @@
     state: plant-8
 
 - type: entity
-  id: PottedPlantAlt9
-  parent: PottedPlantBase
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Structures/Furniture/potted_plants.rsi
-    state: plant-9
-
-- type: entity
   id: PottedPlantAlt10
   parent: PottedPlantBase
   name: plastic christmas tree
@@ -157,6 +149,7 @@
   suffix: Blue
   components:
   - type: Sprite
+    scale: 0.85,0.85
     sprite: _Sunrise/Structures/Furniture/roses_in_pots.rsi
     state: blue
 
@@ -166,6 +159,7 @@
   suffix: Bright-blue
   components:
   - type: Sprite
+    scale: 0.85,0.85
     sprite: _Sunrise/Structures/Furniture/roses_in_pots.rsi
     state: bright_blue
 
@@ -175,6 +169,7 @@
   suffix: Ginger-red
   components:
   - type: Sprite
+    scale: 0.85,0.85
     sprite: _Sunrise/Structures/Furniture/roses_in_pots.rsi
     state: ginger_red
 
@@ -184,6 +179,7 @@
   suffix: Pink
   components:
   - type: Sprite
+    scale: 0.85,0.85
     sprite: _Sunrise/Structures/Furniture/roses_in_pots.rsi
     state: pink
 
@@ -193,6 +189,7 @@
   suffix: Purple
   components:
   - type: Sprite
+    scale: 0.85,0.85
     sprite: _Sunrise/Structures/Furniture/roses_in_pots.rsi
     state: purple
 
@@ -202,6 +199,7 @@
   suffix: Red
   components:
   - type: Sprite
+    scale: 0.85,0.85
     sprite: _Sunrise/Structures/Furniture/roses_in_pots.rsi
     state: red
 
@@ -211,5 +209,6 @@
   suffix: White
   components:
   - type: Sprite
+    scale: 0.85,0.85
     sprite: _Sunrise/Structures/Furniture/roses_in_pots.rsi
     state: white

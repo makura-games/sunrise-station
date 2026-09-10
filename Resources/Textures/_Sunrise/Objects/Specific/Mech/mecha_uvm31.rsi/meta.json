@@ -3,12 +3,15 @@
   "license": "CLA",
   "copyright": "SUNRISE",
   "size": {
-    "x": 64,
+    "x": 48,
     "y": 32
   },
   "states": [
     {
       "name": "mecha_uvm31"
+    },
+    {
+      "name": "mecha_uvm51"
     }
   ]
 }

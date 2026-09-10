@@ -1,0 +1,78 @@
+- type: thiefBackpackSet
+  id: SunriseMechWeaponMGSet
+  name: sunrise-mech-weapon-set-mg-name
+  description: sunrise-mech-weapon-set-mg-description
+  sprite:
+    sprite: _Sunrise/Objects/Specific/Mech/mecha_mg.rsi
+    state: mecha_mg
+  content:
+  - WeaponMechCombatMG
+  - WeaponMechCombatMissileRack6
+  - ClothingOuterHardsuitSyndie
+  - ClothingEyesHudSyndicateMech
+  - SunrisePortableRechargerPowerCage
+  - PowerCageSyndicate
+
+- type: thiefBackpackSet
+  id: SunriseMechWeaponRocketLeagueSet
+  name: sunrise-mech-weapon-set-rocket-name
+  description: sunrise-mech-weapon-set-rocket-description
+  sprite:
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_missilerack
+  content:
+  - WeaponMechCombatDuster
+  - WeaponMechCombatMissileRack8
+  - WeaponMechCombatMissileRack6
+  - WeaponMechCombatMissileRack8Frag
+  - SunrisePortableRechargerPowerCage
+  - PowerCageSyndicate
+
+- type: thiefBackpackSet
+  id: SunriseMechWeaponHeavyRifleSet
+  name: sunrise-mech-weapon-set-heavy-rifle-name
+  description: sunrise-mech-weapon-set-heavy-rifle-description
+  sprite:
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_antimatrifle
+  content:
+  - WeaponMechCombatHeavyRifle
+  - WeaponMechCombatShotgunAuto
+  - WeaponMechCombatMissileRack8Frag
+  - Binoculars
+
+- type: thiefBackpackSet
+  id: SunriseMechWeaponUVM31Set
+  name: sunrise-mech-weapon-set-uvm31-name
+  description: sunrise-mech-weapon-set-uvm31-description
+  sprite:
+    sprite: _Sunrise/Objects/Specific/Mech/mecha_uvm31.rsi
+    state: mecha_uvm31
+  content:
+  - WeaponMechCombatUVM31
+  - WeaponMechCombatUVM51
+  - ClothingOuterHardsuitSyndieEliteBiocode
+  - FoodTacoDragon
+  - ToyFigurineSpaceDragon
+
+- type: thiefBackpackSet
+  id: SunriseMechWeaponKordSet
+  name: sunrise-mech-weapon-set-kord-name
+  description: sunrise-mech-weapon-set-kord-description
+  sprite:
+    sprite: _Sunrise/Objects/Specific/Mech/mecha_kord.rsi
+    state: mecha_kord
+  content:
+  - WeaponMechCombatMissileRack8
+  - WeaponMechCombatKord
+
+- type: thiefBackpackSet
+  id: SunriseMechWeaponVindictorSet
+  name: sunrise-mech-weapon-set-vindictor-name
+  description: sunrise-mech-weapon-set-vindictor-description
+  sprite:
+    sprite: _Sunrise/Objects/Specific/Mech/mecha_vindictor.rsi
+    state: mecha_vindictor
+  content:
+  - WeaponMechCombatMissileRack8
+  - WeaponMechCombatVindictor

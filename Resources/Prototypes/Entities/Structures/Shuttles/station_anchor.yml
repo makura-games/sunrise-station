@@ -206,8 +206,8 @@
 - type: entity
   parent: StationAnchorBaseDespawn
   id: StationAnchorDespawn
-  suffix: 3minDelete
+  suffix: 5minDelete
   components:
   - type: TimedDespawn
-    lifetime: 180
+    lifetime: 300
 #Sunrise-End
