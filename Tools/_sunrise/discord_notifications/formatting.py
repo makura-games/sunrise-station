@@ -309,6 +309,9 @@ def format_event(
         return None, f"Событие {event}/{action} выключено в конфигурации"
     if event == "push" and payload.get("ref") != "refs/heads/master":
         return None, "Уведомления о коммитах разрешены только для master"
+    related_pr = payload.get("_discord_related_pr")
+    if event == "delete" and type(related_pr) is int:
+        return None, f"Удалённая ветка связана с PR #{related_pr}"
     if event == "pull_request" and action == "synchronize":
         return None, "Обновление коммитов PR отдельно не публикуется"
     repository = payload["repository"]["full_name"]

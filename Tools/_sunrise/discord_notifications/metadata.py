@@ -7,6 +7,34 @@ from .github import GitHubError
 
 
 def enrich_event(event: str, payload: dict, github, config: dict, log) -> None:
+    if event == "delete" and payload.get("ref_type") == "branch":
+        branch = str(payload.get("ref") or "")
+        if not branch:
+            raise ValueError("В событии удаления отсутствует имя ветки")
+        owner = github.repository.split("/", 1)[0]
+        try:
+            pull = next(
+                iter(
+                    github.pages(
+                        f"{github.root}/pulls",
+                        state="all",
+                        head=f"{owner}:{branch}",
+                    )
+                ),
+                None,
+            )
+        except GitHubError as error:
+            raise GitHubError(
+                f"Не удалось проверить связь удалённой ветки {branch} с PR: "
+                f"{error}. Проверка будет повторена"
+            ) from error
+        if pull:
+            payload["_discord_related_pr"] = pull["number"]
+            log(
+                f"Удаление ветки {branch} пропущено: "
+                f"она связана с PR #{pull['number']}."
+            )
+        return
     if event == "push":
         commits = []
         for commit in payload.get("commits", []):
