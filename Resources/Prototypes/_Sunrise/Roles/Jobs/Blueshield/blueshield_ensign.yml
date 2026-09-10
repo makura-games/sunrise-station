@@ -39,7 +39,7 @@
     - BlueShieldEnsign
   special:
     - !type:AddImplantSpecial
-      implants: [ MindShieldImplant ]
+      implants: [ MindShieldImplant, BluespaceImplant, ReviverImplant, ProtoAdrenalImplant, DeathRattleImplantBlueShield ]
 
 - type: startingGear
   id: BlueShieldEnsignGear

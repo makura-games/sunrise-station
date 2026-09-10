@@ -9,7 +9,6 @@
         children:
         - id: OxygenTankFilled
         - id: ClothingOuterHardsuitBlueShield
-        - id: ClothingMaskGasBlueShield
         - id: ClothingShoesBootsMagSec
   - type: AccessReader
     access: [["BlueShield"]]

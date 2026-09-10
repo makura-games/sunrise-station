@@ -81117,17 +81117,6 @@ entities:
     - type: Transform
       pos: -15.243141,32.524296
       parent: 2
-- proto: ClothingMaskGasBlueShield
-  entities:
-  - uid: 10795
-    components:
-    - type: Transform
-      parent: 10791
-    - type: Clothing
-      inSlot: mask
-      inSlotFlag: MASK
-    - type: Physics
-      canCollide: False
 - proto: ClothingMaskGasExplorer
   entities:
   - uid: 10945
@@ -142541,7 +142530,7 @@ entities:
         mask: !type:ContainerSlot
           showEnts: False
           occludes: False
-          ent: 10795
+          ent: null
         eyes: !type:ContainerSlot
           showEnts: False
           occludes: False

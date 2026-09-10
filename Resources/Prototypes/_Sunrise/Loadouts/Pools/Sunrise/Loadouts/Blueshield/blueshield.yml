@@ -45,6 +45,19 @@
       time: 50h
 
 - type: loadout
+  id: SunriseLoadoutClothingMaskGasBlueShieldHalf
+  equipment:
+    mask: ClothingMaskGasBlueShieldHalf
+
+- type: loadout
+  id: SunriseLoadoutClothingMaskGasBlueShield
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MisterBlueShit20
+  equipment:
+    mask: ClothingMaskGasBlueShield
+
+- type: loadout
   id: BlueShieldBeret
   equipment:
     head: ClothingHeadHatBeretBlueShield

@@ -11,6 +11,7 @@ loadout-group-atmospheric-technician-neck = { loadout-group-neck }
 loadout-group-backntr = { loadout-group-back }
 loadout-group-barber-jumpsuit = { loadout-group-jumpsuit }
 loadout-group-blueshield-head = { loadout-group-head }
+loadout-group-blueshield-mask = { loadout-group-mask }
 loadout-group-blueshield-belt = { loadout-group-belt }
 loadout-group-blueshield-neck = { loadout-group-neck }
 loadout-group-blueshield-gun = { loadout-group-weapon }
