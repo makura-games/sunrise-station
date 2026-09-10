@@ -126,7 +126,7 @@ def send_message(
                 "timeout": min(timeout, remaining),
                 "allow_redirects": False,
             }
-            if files is None:
+            if not files:
                 response = requests.post(address, json=message, **options)
             else:
                 response = requests.post(

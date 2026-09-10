@@ -6,7 +6,7 @@ import json
 import re
 import time
 import zipfile
-from urllib.parse import urlsplit
+from urllib.parse import urljoin, urlsplit
 
 import requests
 
@@ -145,19 +145,45 @@ class GitHub:
         )
         if response.status_code != 302:
             raise GitHubError("GitHub не предоставил файл события")
-        address = response.headers["Location"]
-        parsed = urlsplit(address)
-        if parsed.scheme != "https" or parsed.username or parsed.password:
-            raise GitHubError("Небезопасный адрес хранилища GitHub")
+        address = response.headers.get("Location", "")
         try:
-            with requests.get(address, stream=True, timeout=30) as download:
-                if download.status_code != 200:
-                    raise GitHubError("Не удалось скачать файл события")
-                archive = io.BytesIO()
-                for chunk in download.iter_content(65536):
-                    archive.write(chunk)
-                    if archive.tell() > 32 * 1024 * 1024:
-                        raise GitHubError("Файл события превышает 32 МБ")
+            for redirect in range(6):
+                parsed = urlsplit(address)
+                if (
+                    parsed.scheme != "https"
+                    or not parsed.hostname
+                    or parsed.username is not None
+                    or parsed.password is not None
+                    or re.search(r"[\s\x00-\x1f\x7f]", address)
+                ):
+                    raise GitHubError("Небезопасный адрес хранилища GitHub")
+                with requests.get(
+                    address, stream=True, timeout=30, allow_redirects=False
+                ) as download:
+                    if download.status_code in {301, 302, 303, 307, 308}:
+                        location = download.headers.get("Location")
+                        if not location:
+                            raise GitHubError("Нет адреса перенаправления")
+                        if re.search(r"[\s\x00-\x1f\x7f]", location):
+                            raise GitHubError("Небезопасное перенаправление")
+                        if redirect == 5:
+                            raise GitHubError("Слишком много перенаправлений")
+                        address = (
+                            location
+                            if urlsplit(location).scheme
+                            else urljoin(address, location)
+                        )
+                        continue
+                    if download.status_code != 200:
+                        raise GitHubError("Не удалось скачать файл события")
+                    archive = io.BytesIO()
+                    for chunk in download.iter_content(65536):
+                        archive.write(chunk)
+                        if archive.tell() > 32 * 1024 * 1024:
+                            raise GitHubError("Файл события превышает 32 МБ")
+                    break
+        except ValueError:
+            raise GitHubError("Небезопасный адрес хранилища GitHub") from None
         except requests.RequestException:
             raise GitHubError(
                 "Хранилище событий временно недоступно"

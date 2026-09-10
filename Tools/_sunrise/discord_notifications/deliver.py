@@ -173,8 +173,9 @@ def collect(state: State, config: dict, log: Journal, deadline: float) -> int:
             if format_event(run["event"], payload, config)[0] is not None:
                 enrich_event(run["event"], payload, github, config, log)
             enqueue(state, key, run["event"], payload, config, log)
-            if key in state.data["pending"]:
-                state.data["pending"][key]["created_at"] = run["created_at"]
+            for pending_key, pending in state.data["pending"].items():
+                if pending_key == key or pending_key.startswith(key + ":part"):
+                    pending["created_at"] = run["created_at"]
         except (GitHubError, ValueError, KeyError, TypeError) as error:
             failures.append(run["created_at"])
             errors += 1

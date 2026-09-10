@@ -105,11 +105,8 @@ def prepare_body(body: str, base: str) -> tuple[str, list[str]]:
         def html_image(match):
             image = Images()
             image.feed(match.group(0))
-            return (
-                f"[Изображение]({image.sources[0]})"
-                if image.sources
-                else match.group(0)
-            )
+            link = media_url(image.sources[0], base) if image.sources else ""
+            return f"[Изображение]({link})" if link else match.group(0)
 
         part = re.sub(r"<img\b[^>]*>", html_image, part, flags=re.IGNORECASE)
         part = re.sub(r"<br\s*/?>", "\n", part, flags=re.IGNORECASE)
