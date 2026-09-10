@@ -1,6 +1,5 @@
-"""Минимальный клиент GitHub и постоянное состояние очереди."""
+"""Минимальный клиент GitHub и чтение артефактов Actions."""
 
-import base64
 import io
 import json
 import re
@@ -140,8 +139,11 @@ class GitHub:
             raise GitHubError(
                 "Файл события отсутствует или истёк срок хранения"
             )
+        return self.artifact_json(artifacts[0]["id"], "event.json")
+
+    def artifact_json(self, artifact_id: int, filename: str) -> dict:
         response = self.request(
-            "GET", f"{self.root}/actions/artifacts/{artifacts[0]['id']}/zip"
+            "GET", f"{self.root}/actions/artifacts/{artifact_id}/zip"
         )
         if response.status_code != 302:
             raise GitHubError("GitHub не предоставил файл события")
@@ -191,8 +193,8 @@ class GitHub:
         try:
             with zipfile.ZipFile(archive) as bundle:
                 items = bundle.infolist()
-                if len(items) != 1 or items[0].filename != "event.json":
-                    raise GitHubError("Ожидался единственный файл event.json")
+                if len(items) != 1 or items[0].filename != filename:
+                    raise GitHubError(f"Ожидался единственный файл {filename}")
                 if items[0].file_size > 26 * 1024 * 1024:
                     raise GitHubError("Распакованное событие слишком велико")
                 return json.loads(bundle.read(items[0]))
@@ -200,108 +202,3 @@ class GitHub:
             raise GitHubError(
                 "Архив события повреждён или нечитаем"
             ) from error
-
-
-class State:
-    def __init__(
-        self, github: GitHub, branch: str, initial_cursor: str
-    ) -> None:
-        self.github = github
-        self.branch = branch
-        self.path = f"{github.root}/contents/discord-state.json"
-        self.sha = None
-        repo = github.json("GET", github.root)
-        if branch == repo["default_branch"]:
-            raise ValueError("Очередь нельзя хранить в основной ветке")
-        response = github.request("GET", self.path, params={"ref": branch})
-        if response.status_code == 404:
-            reference = github.request(
-                "GET", f"{github.root}/git/ref/heads/{branch}"
-            )
-            if reference.status_code != 404:
-                raise GitHubError(
-                    "Служебная ветка существует, но состояние отсутствует"
-                )
-            self.data = {
-                "version": 1,
-                "cursor": initial_cursor,
-                "seen": {},
-                "pending": {},
-                "commit_comments": {},
-            }
-            blob = github.json(
-                "POST",
-                f"{github.root}/git/blobs",
-                json={
-                    "content": json.dumps(self.data),
-                    "encoding": "utf-8",
-                },
-            )
-            tree = github.json(
-                "POST",
-                f"{github.root}/git/trees",
-                json={
-                    "tree": [
-                        {
-                            "path": "discord-state.json",
-                            "mode": "100644",
-                            "type": "blob",
-                            "sha": blob["sha"],
-                        }
-                    ],
-                },
-            )
-            commit = github.json(
-                "POST",
-                f"{github.root}/git/commits",
-                json={
-                    "message": "chore(discord): initialize delivery state",
-                    "tree": tree["sha"],
-                    "parents": [],
-                },
-            )
-            github.json(
-                "POST",
-                f"{github.root}/git/refs",
-                json={
-                    "ref": f"refs/heads/{branch}",
-                    "sha": commit["sha"],
-                },
-            )
-            self.sha = blob["sha"]
-        elif response.status_code == 200:
-            document = response.json()
-            self.sha = document["sha"]
-            if document.get("encoding") != "base64":
-                document = github.json(
-                    "GET", f"{github.root}/git/blobs/{self.sha}"
-                )
-            self.data = json.loads(base64.b64decode(document["content"]))
-            if self.data.get("version") != 1:
-                raise GitHubError(
-                    "Неизвестная версия состояния; очередь не изменена"
-                )
-        else:
-            raise GitHubError(
-                f"Не удалось прочитать очередь: HTTP {response.status_code}"
-            )
-        self.saved = json.dumps(
-            self.data, ensure_ascii=False, separators=(",", ":")
-        )
-
-    def save(self) -> None:
-        serialized = json.dumps(
-            self.data, ensure_ascii=False, separators=(",", ":")
-        )
-        if serialized == self.saved:
-            return
-        body = {
-            "message": "chore(discord): checkpoint notification delivery",
-            "branch": self.branch,
-            "content": base64.b64encode(serialized.encode()).decode(),
-        }
-        if self.sha:
-            body["sha"] = self.sha
-        result = self.github.json("PUT", self.path, json=body)
-        self.sha = result["content"]["sha"]
-        self.saved = serialized

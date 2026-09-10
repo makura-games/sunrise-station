@@ -1,5 +1,6 @@
 """Сбор сохранённых событий и доставка постоянной очереди в Discord."""
 
+import argparse
 import html
 import os
 import re
@@ -11,8 +12,9 @@ from pathlib import Path
 from .config import load_config
 from .content import split_message
 from .formatting import format_event
-from .github import GitHub, GitHubError, State
+from .github import GitHub, GitHubError
 from .metadata import enrich_event
+from .state import State
 from .transport import (
     DiscordError,
     DiscordPublishTimeoutError,
@@ -391,44 +393,30 @@ def defer(state: State, item: dict, name: str, config: dict) -> None:
     state.save()
 
 
-def main() -> int:
+def main(phase: str = "send") -> int:
     log = Journal()
     try:
         config = load_config(Path(__file__).with_name("config.toml"))
         github = GitHub(
             os.environ["GITHUB_REPOSITORY"], os.environ["GITHUB_TOKEN"]
         )
-        deadline = time.monotonic() + config["delivery"]["run_timeout"]
-        initial = (
-            datetime.now(UTC)
-            - timedelta(hours=config["delivery"]["bootstrap_hours"])
-        ).strftime("%Y-%m-%dT%H:%M:%SZ")
-        state = State(github, config["delivery"]["state_branch"], initial)
+        deadline = time.monotonic() + config["delivery"]["run_timeout"] / 2
+        state = State(github, Path(os.environ["DISCORD_STATE_PATH"]))
         log(
             "Состояние очереди прочитано. Уже подтверждённые получатели "
             "не будут отправлены повторно."
         )
-        errors = 0
-        try:
-            collect_commit_comments(
-                state,
-                config,
-                log,
-                deadline - config["delivery"]["run_timeout"] * 0.75,
-            )
-            errors += collect(
-                state,
-                config,
-                log,
-                deadline - config["delivery"]["run_timeout"] * 0.5,
-            )
-        except (GitHubError, ValueError, KeyError, TypeError) as error:
-            log(
-                f"Ошибка сбора: {error}. "
-                "Попробуем доставить ранее сохранённые сообщения."
-            )
-            errors += 1
-            state.save()
+        if phase == "collect":
+            try:
+                collect_commit_comments(
+                    state,
+                    config,
+                    log,
+                    deadline - config["delivery"]["run_timeout"] * 0.25,
+                )
+                return int(collect(state, config, log, deadline) > 0)
+            finally:
+                state.save()
         manual = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
         failed = deliver_pending(
             state,
@@ -437,7 +425,7 @@ def main() -> int:
             deadline,
             force_retry=manual,
         )
-        return int(failed + errors > 0)
+        return int(failed > 0)
     except Exception as error:
         log(
             f"Работа остановлена: {type(error).__name__}: {error}. "
@@ -449,4 +437,6 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("phase", choices=("collect", "send"))
+    sys.exit(main(parser.parse_args().phase))

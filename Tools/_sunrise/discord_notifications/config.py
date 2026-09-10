@@ -23,9 +23,6 @@ def load_config(path: Path) -> dict:
         value = config["delivery"][name]
         if type(value) is not int or not minimum <= value <= maximum:
             raise ValueError(f"delivery.{name}: требуется {minimum}–{maximum}")
-    branch = config["delivery"]["state_branch"]
-    if not re.fullmatch(r"[a-z][a-z0-9-]{2,80}", branch):
-        raise ValueError("Некорректное имя служебной ветки")
     for name, maximum in (
         ("body_length", 3500),
         ("max_commits", 20),

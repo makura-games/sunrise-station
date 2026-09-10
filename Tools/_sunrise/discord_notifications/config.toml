@@ -1,5 +1,4 @@
 [delivery]
-state_branch = "discord-notification-state"
 attempts = 6
 request_timeout = 30
 message_timeout = 180

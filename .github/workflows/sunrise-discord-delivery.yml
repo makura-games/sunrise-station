@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   actions: write
   issues: read
   pull-requests: read
@@ -21,9 +21,13 @@ concurrency:
 
 jobs:
   deliver:
-    if: vars.DISCORD_NOTIFICATIONS_ENABLED == 'true'
+    if: vars.DISCORD_NOTIFICATIONS_ENABLED == 'true' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     runs-on: ubuntu-latest
     timeout-minutes: 12
+    env:
+      PYTHONPATH: Tools/_sunrise
+      GITHUB_TOKEN: ${{ github.token }}
+      DISCORD_STATE_PATH: ${{ github.workspace }}/discord-state.json
     steps:
       - name: Получить только доверенный код основной ветки
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -37,10 +41,45 @@ jobs:
           python-version: '3.12'
       - name: Установить библиотеку HTTP
         run: python -m pip install --disable-pip-version-check requests==2.32.4
-      - name: Доставить сообщения и показать понятный отчёт
+      - name: Восстановить очередь из последнего артефакта
+        id: restore
+        run: python -m discord_notifications.state restore
+      - name: Собрать новые события в очередь
+        id: collect
+        timeout-minutes: 4
         env:
-          PYTHONPATH: Tools/_sunrise
-          GITHUB_TOKEN: ${{ github.token }}
+          DISCORD_EVENTS_WEBHOOK_SECONDARY: ${{ secrets.DISCORD_EVENTS_WEBHOOK_SECONDARY }}
+        run: python -m discord_notifications.deliver collect
+      - name: Сохранить очередь до отправки
+        id: queue
+        if: always() && steps.restore.outcome == 'success'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: discord-notification-queue
+          path: ${{ env.DISCORD_STATE_PATH }}
+          if-no-files-found: error
+          retention-days: 90
+          overwrite: true
+      - name: Отправить очередь в Discord
+        id: send
+        if: ${{ !cancelled() && steps.queue.outcome == 'success' }}
+        timeout-minutes: 5
+        env:
           DISCORD_EVENTS_WEBHOOK: ${{ secrets.DISCORD_EVENTS_WEBHOOK }}
           DISCORD_EVENTS_WEBHOOK_SECONDARY: ${{ secrets.DISCORD_EVENTS_WEBHOOK_SECONDARY }}
-        run: python -m discord_notifications.deliver
+        run: python -m discord_notifications.deliver send
+      - name: Сохранить результат даже после ошибки отправки
+        id: state
+        if: always() && steps.queue.outcome == 'success'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: discord-notification-state
+          path: ${{ env.DISCORD_STATE_PATH }}
+          if-no-files-found: error
+          retention-days: 90
+          overwrite: true
+      - name: Оставить последние резервные снимки очереди
+        if: ${{ !cancelled() && steps.state.outcome == 'success' }}
+        env:
+          DISCORD_STATE_ARTIFACT_ID: ${{ steps.state.outputs.artifact-id }}
+        run: python -m discord_notifications.state prune
