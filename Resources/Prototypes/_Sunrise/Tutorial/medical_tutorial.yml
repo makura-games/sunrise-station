@@ -45,9 +45,10 @@
     components:
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 8
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 8
 
 - type: tutorialStep
   id: MedicalTutFindPatient
@@ -64,9 +65,10 @@
     components:
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:ExamineListenedCondition
-    target: MedicalTutorialPatient
+  completion:
+    all:
+    - !type:ExamineObjectiveCondition
+      target: MedicalTutorialPatient
 
 - type: tutorialStep
   id: MedicalTutTakeAnalyzer
@@ -93,9 +95,10 @@
     - type: TutorialPickupSoftLock
       allowedItems:
       - HandheldHealthAnalyzer
-  conditions:
-  - !type:PickupListenedCondition
-    target: HandheldHealthAnalyzer
+  completion:
+    all:
+    - !type:PickupObjectiveCondition
+      target: HandheldHealthAnalyzer
 
 - type: tutorialStep
   id: MedicalTutScanPatient
@@ -116,18 +119,20 @@
     - type: TutorialPickupSoftLock
       allowedItems:
       - HandheldHealthAnalyzer
-  conditions:
-  - !type:HealthAnalyzerScanListenedCondition
-    target: MedicalTutorialPatient
-  - !type:UseListenedCondition
-    target: HandheldHealthAnalyzer
+  completion:
+    all:
+    - !type:HealthAnalyzerScanObjectiveCondition
+      target: MedicalTutorialPatient
+    - !type:UseObjectiveCondition
+      target: HandheldHealthAnalyzer
 
 - type: tutorialStep
   id: MedicalTutAnalyzerUpdate
   parent: BaseTutorialStepBase
-  conditions:
-  - !type:StepDelayCondition
-    delay: 1
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 1
 
 - type: tutorialStep
   id: MedicalTutExplainAnalyzerPatient
@@ -150,9 +155,10 @@
       blockUse: false
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 14
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 14
 
 - type: tutorialStep
   id: MedicalTutExplainAnalyzerVitals
@@ -177,9 +183,10 @@
       blockUse: false
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 10
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 10
 
 - type: tutorialStep
   id: MedicalTutExplainAnalyzerAlerts
@@ -202,9 +209,10 @@
       blockUse: false
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 9
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 9
 
 - type: tutorialStep
   id: MedicalTutExplainAnalyzerDamage
@@ -227,9 +235,10 @@
       blockUse: false
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 9
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 9
 
 - type: tutorialStep
   id: MedicalTutExplainAnalyzerGroups
@@ -252,9 +261,10 @@
       blockUse: false
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 9
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 9
 
 - type: tutorialStep
   id: MedicalTutTakeGauze
@@ -279,9 +289,10 @@
       allowedItems:
       - HandheldHealthAnalyzer
       - Gauze1
-  conditions:
-  - !type:PickupListenedCondition
-    target: Gauze1
+  completion:
+    all:
+    - !type:PickupObjectiveCondition
+      target: Gauze1
 
 - type: tutorialStep
   id: MedicalTutApplyGauze
@@ -311,10 +322,11 @@
       items:
       - Gauze1
       popup: medical-tut-softlock-keep-gauze
-  conditions:
-  - !type:HealingListenedCondition
-    target: MedicalTutorialPatient
-    item: Gauze1
+  completion:
+    all:
+    - !type:HealingObjectiveCondition
+      target: MedicalTutorialPatient
+      item: Gauze1
 
 - type: tutorialStep
   id: MedicalTutTakeBrutepack
@@ -336,9 +348,10 @@
       allowedItems:
       - HandheldHealthAnalyzer
       - Brutepack1
-  conditions:
-  - !type:PickupListenedCondition
-    target: Brutepack1
+  completion:
+    all:
+    - !type:PickupObjectiveCondition
+      target: Brutepack1
 
 - type: tutorialStep
   id: MedicalTutApplyBrutepack
@@ -368,10 +381,11 @@
       items:
       - Brutepack1
       popup: medical-tut-softlock-keep-brutepack
-  conditions:
-  - !type:HealingListenedCondition
-    target: MedicalTutorialPatient
-    item: Brutepack1
+  completion:
+    all:
+    - !type:HealingObjectiveCondition
+      target: MedicalTutorialPatient
+      item: Brutepack1
 
 - type: tutorialStep
   id: MedicalTutTakeOintment
@@ -392,9 +406,10 @@
     - type: TutorialPickupSoftLock
       allowedItems:
       - Ointment1
-  conditions:
-  - !type:PickupListenedCondition
-    target: Ointment1
+  completion:
+    all:
+    - !type:PickupObjectiveCondition
+      target: Ointment1
 
 - type: tutorialStep
   id: MedicalTutApplyOintment
@@ -423,10 +438,11 @@
       items:
       - Ointment1
       popup: medical-tut-softlock-keep-ointment
-  conditions:
-  - !type:HealingListenedCondition
-    target: MedicalTutorialPatient
-    item: Ointment1
+  completion:
+    all:
+    - !type:HealingObjectiveCondition
+      target: MedicalTutorialPatient
+      item: Ointment1
 
 - type: tutorialStep
   id: MedicalTutSelfCareIntro
@@ -454,9 +470,10 @@
     components:
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 12
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 12
 
 - type: tutorialStep
   id: MedicalTutTakeSelfOintment
@@ -477,9 +494,10 @@
     - type: TutorialPickupSoftLock
       allowedItems:
       - SunriseMedicalTutorialSelfOintment
-  conditions:
-  - !type:PickupListenedCondition
-    target: SunriseMedicalTutorialSelfOintment
+  completion:
+    all:
+    - !type:PickupObjectiveCondition
+      target: SunriseMedicalTutorialSelfOintment
 
 - type: tutorialStep
   id: MedicalTutApplySelfOintment
@@ -506,10 +524,11 @@
       items:
       - SunriseMedicalTutorialSelfOintment
       popup: medical-tut-softlock-keep-self-ointment
-  conditions:
-  - !type:HealingListenedCondition
-    target: MedicalTutorialPlayer
-    item: SunriseMedicalTutorialSelfOintment
+  completion:
+    all:
+    - !type:HealingObjectiveCondition
+      target: MedicalTutorialPlayer
+      item: SunriseMedicalTutorialSelfOintment
 
 - type: tutorialStep
   id: MedicalTutFinish
@@ -524,9 +543,10 @@
     removeOnExit: false
     components:
     - type: Godmode
-  conditions:
-  - !type:StepDelayCondition
-    delay: 11
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 11
 
 - type: startingGear
   id: MedicalTutorialPlayerGear

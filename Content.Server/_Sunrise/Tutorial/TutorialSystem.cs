@@ -27,7 +27,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Configuration;
 using Robust.Server.GameStates;
-using Content.Shared._Sunrise.Tutorial.Components.Trackers;
 
 namespace Content.Server._Sunrise.Tutorial;
 
@@ -626,8 +625,6 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
             var plainMessage = $"{senderText} {messageText}";
             var wrappedMessage = $"[color=#B8860B][bold]{FormattedMessage.EscapeText(senderText)}[/bold][/color] {FormattedMessage.EscapeText(messageText)}";
             _chat.ChatMessageToOne(ChatChannel.Emotes, plainMessage, wrappedMessage, EntityUid.Invalid, false, session.Channel);
-
-            RemComp<TutorialDistanceTrackerComponent>(uid);
 
             var tts = await GenerateTtsForTutorial(step.TtsMessage, voice);
             if (tts == null)

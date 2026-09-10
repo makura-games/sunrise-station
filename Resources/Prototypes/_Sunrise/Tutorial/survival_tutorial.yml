@@ -41,9 +41,10 @@
     components:
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 12
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 12
 
 - type: tutorialStep
   id: SurvivalTutOpenEmergencyEquipment
@@ -60,9 +61,10 @@
     components:
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StorageOpenListenedCondition
-    target: TutorialClosetEmergencyFilledOxygen
+  completion:
+    all:
+    - !type:StorageOpenObjectiveCondition
+      target: TutorialClosetEmergencyFilledOxygen
 
 - type: tutorialStep
   id: SurvivalTutAlertsIntro
@@ -79,9 +81,10 @@
     components:
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 15
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 15
 
 - type: tutorialStep
   id: SurvivalTutOxygenWarning
@@ -107,9 +110,10 @@
     - type: TutorialSimulatedAlert
       alert: TutorialLowOxygen
       severity: 2
-  conditions:
-  - !type:StepDelayCondition
-    delay: 14
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 14
 
 - type: tutorialStep
   id: SurvivalTutTakeMask
@@ -137,9 +141,10 @@
     - type: TutorialPickupSoftLock
       allowedItems:
       - ClothingMaskBreath
-  conditions:
-  - !type:PickupListenedCondition
-    target: ClothingMaskBreath
+  completion:
+    all:
+    - !type:PickupObjectiveCondition
+      target: ClothingMaskBreath
 
 - type: tutorialStep
   id: SurvivalTutTakeOxygenTank
@@ -166,9 +171,10 @@
     - type: TutorialPickupSoftLock
       allowedItems:
       - SunriseSurvivalTutorialOxygenTankFilled
-  conditions:
-  - !type:PickupListenedCondition
-    target: SunriseSurvivalTutorialOxygenTankFilled
+  completion:
+    all:
+    - !type:PickupObjectiveCondition
+      target: SunriseSurvivalTutorialOxygenTankFilled
 
 - type: tutorialStep
   id: SurvivalTutOpenInventory
@@ -189,14 +195,15 @@
       allowedItems:
       - ClothingMaskBreath
       - SunriseSurvivalTutorialOxygenTankFilled
-  conditions:
-  - !type:UiControlVisibleCondition
-    control: InventoryHeadSlot
-    selectors:
-    - !type:UiByName
-      name: Inventory
-    - !type:UiByName
-      name: SlotButton_head
+  completion:
+    all:
+    - !type:UiControlVisibleObjectiveCondition
+      control: InventoryHeadSlot
+      selectors:
+      - !type:UiByName
+        name: Inventory
+      - !type:UiByName
+        name: SlotButton_head
 
 - type: tutorialStep
   id: SurvivalTutEquipMask
@@ -222,10 +229,11 @@
     - type: TutorialEquipSoftLock
       item: ClothingMaskBreath
       slot: MASK
-  conditions:
-  - !type:EquipListenedCondition
-    target: ClothingMaskBreath
-    slot: MASK
+  completion:
+    all:
+    - !type:EquipObjectiveCondition
+      target: ClothingMaskBreath
+      slot: MASK
 
 - type: tutorialStep
   id: SurvivalTutEnableInternals
@@ -243,8 +251,9 @@
     - type: TutorialPickupSoftLock
       allowedItems:
       - SunriseSurvivalTutorialOxygenTankFilled
-  conditions:
-  - !type:InternalsEnabledCondition
+  completion:
+    all:
+    - !type:InternalsEnabledObjectiveCondition
 
 - type: tutorialStep
   id: SurvivalTutOxygenRestored
@@ -261,9 +270,10 @@
     components:
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 9
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 9
 
 - type: tutorialStep
   id: SurvivalTutPressureWarning
@@ -289,9 +299,10 @@
     - type: TutorialSimulatedAlert
       alert: TutorialLowPressure
       severity: 2
-  conditions:
-  - !type:StepDelayCondition
-    delay: 11
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 11
 
 - type: tutorialStep
   id: SurvivalTutTakeEVA
@@ -312,9 +323,10 @@
     - type: TutorialPickupSoftLock
       allowedItems:
       - ClothingOuterSuitEmergency
-  conditions:
-  - !type:PickupListenedCondition
-    target: ClothingOuterSuitEmergency
+  completion:
+    all:
+    - !type:PickupObjectiveCondition
+      target: ClothingOuterSuitEmergency
 
 - type: tutorialStep
   id: SurvivalTutEquipEVA
@@ -337,10 +349,11 @@
     - type: TutorialEquipSoftLock
       item: ClothingOuterSuitEmergency
       slot: OUTERCLOTHING
-  conditions:
-  - !type:EquipListenedCondition
-    target: ClothingOuterSuitEmergency
-    slot: OUTERCLOTHING
+  completion:
+    all:
+    - !type:EquipObjectiveCondition
+      target: ClothingOuterSuitEmergency
+      slot: OUTERCLOTHING
 
 - type: tutorialStep
   id: SurvivalTutEnableEVAHelmet
@@ -353,17 +366,19 @@
   - !type:UiByEntityPrototype
     prototype: ActionToggleSuitPiece
   preconditions:
-  - !type:InventorySlotContainsCondition
-    slot: OUTERCLOTHING
-    item: ClothingOuterSuitEmergency
+    all:
+    - !type:InventorySlotContainsObjectiveCondition
+      slot: OUTERCLOTHING
+      item: ClothingOuterSuitEmergency
   preconditionFailStep: SurvivalTutEquipEVA
-  conditions:
-  - !type:InventorySlotContainsCondition
-    slot: OUTERCLOTHING
-    item: ClothingOuterSuitEmergency
-  - !type:InventorySlotContainsCondition
-    slot: HEAD
-    item: ClothingHeadHelmetEVALarge
+  completion:
+    all:
+    - !type:InventorySlotContainsObjectiveCondition
+      slot: OUTERCLOTHING
+      item: ClothingOuterSuitEmergency
+    - !type:InventorySlotContainsObjectiveCondition
+      slot: HEAD
+      item: ClothingHeadHelmetEVALarge
 
 - type: tutorialStep
   id: SurvivalTutPressureRestored
@@ -380,9 +395,10 @@
     components:
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 11
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 11
 
 - type: tutorialStep
   id: SurvivalTutFinish
@@ -399,9 +415,10 @@
     components:
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 13
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 13
 
 - type: startingGear
   id: SurvivalTutorialPlayerGear

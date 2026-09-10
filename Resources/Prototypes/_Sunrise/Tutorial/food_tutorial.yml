@@ -43,9 +43,10 @@
     components:
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 10
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 10
 
 - type: tutorialStep
   id: FoodTutReachBar
@@ -60,9 +61,10 @@
     components:
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:ReachMarkerCondition
-    marker: FoodTutorialBarMarker
+  completion:
+    all:
+    - !type:ReachMarkerObjectiveCondition
+      marker: FoodTutorialBarMarker
 
 - type: tutorialStep
   id: FoodTutExplainHunger
@@ -81,9 +83,10 @@
     components:
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 10
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 10
 
 - type: tutorialStep
   id: FoodTutExplainThirst
@@ -102,9 +105,10 @@
     components:
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 10
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 10
 
 - type: tutorialStep
   id: FoodTutTakeDrink
@@ -130,9 +134,10 @@
       targets:
       - DrinkLemonadeGlass
       popup: food-tut-softlock-ingest-blocked
-  conditions:
-  - !type:PickupListenedCondition
-    target: DrinkLemonadeGlass
+  completion:
+    all:
+    - !type:PickupObjectiveCondition
+      target: DrinkLemonadeGlass
 
 - type: tutorialStep
   id: FoodTutDrink
@@ -161,21 +166,24 @@
       blockAllSlots: true
       popup: food-tut-softlock-keep-drink
   preconditions:
-  - !type:HoldInHandsCondition
-    item: DrinkLemonadeGlass
+    all:
+    - !type:HoldInHandsObjectiveCondition
+      item: DrinkLemonadeGlass
   preconditionFailStep: FoodTutTakeDrink
   failures:
-  - conditions:
-    - !type:HoldInHandsCondition
-      item: DrinkLemonadeGlass
-      inverted: true
-    - !type:ConsumeListenedCondition
-      target: DrinkLemonadeGlass
-      inverted: true
+  - when:
+      all:
+      - !type:HoldInHandsObjectiveCondition
+        item: DrinkLemonadeGlass
+        inverted: true
+      - !type:ConsumeObjectiveCondition
+        target: DrinkLemonadeGlass
+        inverted: true
     repairStep: FoodTutTakeDrink
-  conditions:
-  - !type:ConsumeListenedCondition
-    target: DrinkLemonadeGlass
+  completion:
+    all:
+    - !type:ConsumeObjectiveCondition
+      target: DrinkLemonadeGlass
 
 - type: tutorialStep
   id: FoodTutPutDrinkDown
@@ -203,11 +211,12 @@
       - DrinkLemonadeGlass
       blockAllSlots: true
       popup: food-tut-softlock-put-drink-down
-  conditions:
-  - !type:ItemPlacedNearMarkerCondition
-    target: DrinkLemonadeGlass
-    marker: FoodTutorialDishReturnMarker
-    distance: 1
+  completion:
+    all:
+    - !type:ItemPlacedNearMarkerObjectiveCondition
+      target: DrinkLemonadeGlass
+      marker: FoodTutorialDishReturnMarker
+      distance: 1
 
 - type: tutorialStep
   id: FoodTutTakeMeal
@@ -246,9 +255,10 @@
       - FoodMealNachos
       blockAllSlots: true
       popup: food-tut-softlock-keep-dishes
-  conditions:
-  - !type:PickupListenedCondition
-    target: FoodMealNachos
+  completion:
+    all:
+    - !type:PickupObjectiveCondition
+      target: FoodMealNachos
 
 - type: tutorialStep
   id: FoodTutEatMeal
@@ -283,17 +293,19 @@
       blockAllSlots: true
       popup: food-tut-softlock-keep-meal
   failures:
-  - conditions:
-    - !type:HoldInHandsCondition
-      item: FoodMealNachos
-      inverted: true
-    - !type:ConsumeListenedCondition
-      target: FoodMealNachos
-      inverted: true
+  - when:
+      all:
+      - !type:HoldInHandsObjectiveCondition
+        item: FoodMealNachos
+        inverted: true
+      - !type:ConsumeObjectiveCondition
+        target: FoodMealNachos
+        inverted: true
     repairStep: FoodTutTakeMeal
-  conditions:
-  - !type:HoldInHandsCondition
-    item: FoodPlateSmall
+  completion:
+    all:
+    - !type:HoldInHandsObjectiveCondition
+      item: FoodPlateSmall
 
 - type: tutorialStep
   id: FoodTutReagentWarning
@@ -322,9 +334,10 @@
       - FoodPlateSmall
       blockAllSlots: true
       popup: food-tut-softlock-keep-dishes
-  conditions:
-  - !type:StepDelayCondition
-    delay: 12
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 12
 
 - type: tutorialStep
   id: FoodTutExamineSuspiciousDrink
@@ -354,9 +367,10 @@
       - FoodPlateSmall
       blockAllSlots: true
       popup: food-tut-softlock-keep-dishes
-  conditions:
-  - !type:ExamineListenedCondition
-    target: DrinkPoisonBerryJuice
+  completion:
+    all:
+    - !type:ExamineObjectiveCondition
+      target: DrinkPoisonBerryJuice
 
 - type: tutorialStep
   id: FoodTutUnsafeItems
@@ -383,9 +397,10 @@
       - FoodPlateSmall
       blockAllSlots: true
       popup: food-tut-softlock-keep-dishes
-  conditions:
-  - !type:StepDelayCondition
-    delay: 12
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 12
 
 - type: tutorialStep
   id: FoodTutReturnDish
@@ -413,11 +428,12 @@
       - FoodPlateSmall
       blockAllSlots: true
       popup: food-tut-softlock-return-dish
-  conditions:
-  - !type:ItemPlacedNearMarkerCondition
-    target: FoodPlateSmall
-    marker: FoodTutorialDishReturnMarker
-    distance: 1
+  completion:
+    all:
+    - !type:ItemPlacedNearMarkerObjectiveCondition
+      target: FoodPlateSmall
+      marker: FoodTutorialDishReturnMarker
+      distance: 1
 
 - type: tutorialStep
   id: FoodTutFinish
@@ -426,9 +442,10 @@
     text: food-tut-finish-bubble
   chatMessage: food-tut-finish-chat
   ttsMessage: food-tut-finish-tts
-  conditions:
-  - !type:StepDelayCondition
-    delay: 11
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 11
 
 - type: startingGear
   id: FoodTutorialPlayerGear

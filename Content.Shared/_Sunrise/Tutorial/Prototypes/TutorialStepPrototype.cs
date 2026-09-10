@@ -1,5 +1,5 @@
+using Content.Shared._Sunrise.Objectives;
 using Content.Shared._Sunrise.TTS;
-using Content.Shared._Sunrise.Tutorial.Conditions;
 using Content.Shared._Sunrise.Tutorial.Effects;
 using Content.Shared.Alert;
 using Robust.Shared.Prototypes;
@@ -89,22 +89,16 @@ public sealed partial class TutorialStepPrototype : IPrototype, IInheritingProto
     public int ObserveRange = 10;
 
     /// <summary>
-    ///     Conditions that must be satisfied to complete this tutorial step.
+    ///     Objective definition that completes this tutorial step.
     /// </summary>
     [DataField]
-    public List<TutorialCondition> Conditions = [];
-
-    /// <summary>
-    ///     Alternative conditions. If set, any of these must be satisfied in addition to <see cref="Conditions"/>.
-    /// </summary>
-    [DataField]
-    public List<TutorialCondition> AnyConditions = [];
+    public ObjectiveDefinition Completion = new();
 
     /// <summary>
     ///     Conditions that must be met before this step is considered active.
     /// </summary>
     [DataField]
-    public List<TutorialCondition> Preconditions = [];
+    public ObjectiveDefinition? Preconditions;
 
     /// <summary>
     ///     Conditions that temporarily switch the player to a repair step when the current step can no longer proceed normally.
@@ -133,16 +127,10 @@ public sealed partial class TutorialStepPrototype : IPrototype, IInheritingProto
 public sealed partial class TutorialFailureRule
 {
     /// <summary>
-    ///     Conditions that all must be satisfied to enter the repair step.
+    ///     Objective definition that activates this repair rule.
     /// </summary>
-    [DataField]
-    public List<TutorialCondition> Conditions = [];
-
-    /// <summary>
-    ///     Alternative conditions. If set, any of these must also be satisfied to enter the repair step.
-    /// </summary>
-    [DataField]
-    public List<TutorialCondition> AnyConditions = [];
+    [DataField(required: true)]
+    public ObjectiveDefinition When = new();
 
     /// <summary>
     ///     Step shown until the player repairs the failed state.

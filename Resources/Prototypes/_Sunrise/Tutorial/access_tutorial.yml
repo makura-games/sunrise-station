@@ -31,9 +31,10 @@
     text: access-tut-welcome-bubble
   chatMessage: access-tut-welcome-chat
   ttsMessage: access-tut-welcome-tts
-  conditions:
-  - !type:StepDelayCondition
-    delay: 15
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 15
 
 - type: tutorialStep
   id: AccessTutIdCard
@@ -49,9 +50,10 @@
     name: SecondHotbar
   - !type:UiByName
     name: SlotButton_id
-  conditions:
-  - !type:ExamineListenedCondition
-    target: TechnicalAssistantIDCard
+  completion:
+    all:
+    - !type:ExamineObjectiveCondition
+      target: TechnicalAssistantIDCard
 
 - type: tutorialStep
   id: AccessTutOpenNormalDoor
@@ -63,9 +65,10 @@
   chatMessage: access-tut-open-normal-door-chat
   ttsMessage: access-tut-open-normal-door-tts
   observeRange: 12
-  conditions:
-  - !type:DoorOpenListenedCondition
-    target: TripleGlassAirlock
+  completion:
+    all:
+    - !type:DoorOpenObjectiveCondition
+      target: TripleGlassAirlock
 
 - type: tutorialStep
   id: AccessTutTryRestrictedDoor
@@ -77,9 +80,10 @@
   chatMessage: access-tut-try-restricted-door-chat
   ttsMessage: access-tut-try-restricted-door-tts
   observeRange: 12
-  conditions:
-  - !type:InteractListenedCondition
-    target: AccessTutRestrictedDoor
+  completion:
+    all:
+    - !type:InteractObjectiveCondition
+      target: AccessTutRestrictedDoor
 
 - type: tutorialStep
   id: AccessTutOpenAuthorizedDoor
@@ -91,9 +95,10 @@
   chatMessage: access-tut-open-authorized-door-chat
   ttsMessage: access-tut-open-authorized-door-tts
   observeRange: 12
-  conditions:
-  - !type:DoorOpenListenedCondition
-    target: AccessTutAuthorizedDoor
+  completion:
+    all:
+    - !type:DoorOpenObjectiveCondition
+      target: AccessTutAuthorizedDoor
 
 - type: tutorialStep
   id: AccessTutClosedRoute
@@ -105,10 +110,11 @@
   chatMessage: access-tut-closed-route-chat
   ttsMessage: access-tut-closed-route-tts
   observeRange: 20
-  conditions:
-  - !type:ReachMarkerCondition
-    marker: AccessTutClosedRouteMarker
-    distance: 1.5
+  completion:
+    all:
+    - !type:ReachMarkerObjectiveCondition
+      marker: AccessTutClosedRouteMarker
+      distance: 1.5
 
 - type: tutorialStep
   id: AccessTutFindDetour
@@ -120,10 +126,11 @@
   chatMessage: access-tut-find-detour-chat
   ttsMessage: access-tut-find-detour-tts
   observeRange: 20
-  conditions:
-  - !type:ReachMarkerCondition
-    marker: AccessTutDetourMarker
-    distance: 1.5
+  completion:
+    all:
+    - !type:ReachMarkerObjectiveCondition
+      marker: AccessTutDetourMarker
+      distance: 1.5
 
 - type: tutorialStep
   id: AccessTutTryBoltedDoor
@@ -135,9 +142,10 @@
   chatMessage: access-tut-try-bolted-door-chat
   ttsMessage: access-tut-try-bolted-door-tts
   observeRange: 12
-  conditions:
-  - !type:InteractListenedCondition
-    target: AccessTutBoltedDoor
+  completion:
+    all:
+    - !type:InteractObjectiveCondition
+      target: AccessTutBoltedDoor
 
 - type: tutorialStep
   id: AccessTutPressSignalButton
@@ -149,9 +157,10 @@
   chatMessage: access-tut-press-signal-button-chat
   ttsMessage: access-tut-press-signal-button-tts
   observeRange: 12
-  conditions:
-  - !type:InteractListenedCondition
-    target: SignalButton
+  completion:
+    all:
+    - !type:InteractObjectiveCondition
+      target: SignalButton
 
 - type: tutorialStep
   id: AccessTutOpenBoltedDoor
@@ -163,9 +172,10 @@
   chatMessage: access-tut-open-bolted-door-chat
   ttsMessage: access-tut-open-bolted-door-tts
   observeRange: 12
-  conditions:
-  - !type:DoorOpenListenedCondition
-    target: AccessTutBoltedDoor
+  completion:
+    all:
+    - !type:DoorOpenObjectiveCondition
+      target: AccessTutBoltedDoor
 
 - type: tutorialStep
   id: AccessTutFinish
@@ -174,9 +184,10 @@
     text: access-tut-finish-bubble
   chatMessage: access-tut-finish-chat
   ttsMessage: access-tut-finish-tts
-  conditions:
-  - !type:StepDelayCondition
-    delay: 13
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 13
 
 - type: startingGear
   id: AccessTutorialPlayerGear

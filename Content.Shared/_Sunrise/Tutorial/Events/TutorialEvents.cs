@@ -27,6 +27,20 @@ public sealed class TutorialStepsCompletedEvent() : EntityEventArgs
 {
 }
 
+/// <summary>
+/// Server-local notification that a tutorial player activated a new step.
+/// </summary>
+[ByRefEvent]
+public readonly record struct TutorialStepActivatedEvent(
+    EntityUid Player,
+    ProtoId<TutorialStepPrototype> Step);
+
+/// <summary>
+/// Server-local notification that objective tracking for a tutorial player must be cleared.
+/// </summary>
+[ByRefEvent]
+public readonly record struct TutorialTrackingEndedEvent(EntityUid Player);
+
 [NetSerializable, Serializable]
 public sealed class TutorialStartRequestEvent(ProtoId<TutorialSequencePrototype> sequenceId) : EntityEventArgs
 {

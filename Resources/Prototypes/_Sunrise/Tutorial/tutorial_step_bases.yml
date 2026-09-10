@@ -17,9 +17,10 @@
     name: TopBar
   - !type:UiByName
     name: MHelpButton
-  conditions:
-  - !type:StepDelayCondition
-    delay: 9
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 9
 
 # Steps where the player moves/walks.
 - type: tutorialStep
@@ -28,9 +29,10 @@
   abstract: true
   chatMessage: tutorial-base-walk-chat
   ttsMessage: tutorial-base-walk-tts
-  conditions:
-  - !type:TravelDistanceCondition
-    distance: 10
+  completion:
+    all:
+    - !type:TravelDistanceObjectiveCondition
+      distance: 10
 
 # Steps where the player picks up an item from the world.
 - type: tutorialStep
@@ -39,8 +41,9 @@
   abstract: true
   chatMessage: tutorial-base-step-pickup-chat
   ttsMessage: tutorial-base-step-pickup-tts
-  conditions:
-  - !type:PickupListenedCondition
+  completion:
+    all:
+    - !type:PickupObjectiveCondition
 
 # Steps where the player picks up an item from the world.
 - type: tutorialStep
@@ -49,8 +52,9 @@
   abstract: true
   chatMessage: tutorial-base-step-activate-action-chat
   ttsMessage: tutorial-base-step-activate-action-tts
-  conditions:
-  - !type:ActivateActionListenedCondition
+  completion:
+    all:
+    - !type:ActivateActionObjectiveCondition
 
 
 # Steps where the player equips an item into a clothing slot.
@@ -60,8 +64,9 @@
   abstract: true
   chatMessage: tutorial-base-step-equip-chat
   ttsMessage: tutorial-base-step-equip-tts
-  conditions:
-  - !type:EquipListenedCondition
+  completion:
+    all:
+    - !type:EquipObjectiveCondition
 
 # Steps where the player interacts with or activates an entity in the world.
 - type: tutorialStep
@@ -70,8 +75,9 @@
   abstract: true
   chatMessage: tutorial-base-step-interact-chat
   ttsMessage: tutorial-base-step-interact-tts
-  conditions:
-  - !type:InteractListenedCondition
+  completion:
+    all:
+    - !type:InteractObjectiveCondition
 
 # Steps where the player uses/activates a held item.
 - type: tutorialStep
@@ -80,8 +86,9 @@
   abstract: true
   chatMessage: tutorial-base-step-use-chat
   ttsMessage: tutorial-base-step-use-tts
-  conditions:
-  - !type:UseListenedCondition
+  completion:
+    all:
+    - !type:UseObjectiveCondition
 
 # Steps where the player drops a held item.
 - type: tutorialStep
@@ -90,8 +97,9 @@
   abstract: true
   chatMessage: tutorial-base-step-drop-chat
   ttsMessage: tutorial-base-step-drop-tts
-  conditions:
-  - !type:DropListenedCondition
+  completion:
+    all:
+    - !type:DropObjectiveCondition
 
 # Steps where the player must reach a goal marker on the map.
 - type: tutorialStep
@@ -100,8 +108,9 @@
   abstract: true
   chatMessage: tutorial-base-step-reach-chat
   ttsMessage: tutorial-base-step-reach-tts
-  conditions:
-  - !type:ReachMarkerCondition
+  completion:
+    all:
+    - !type:ReachMarkerObjectiveCondition
 
 # Steps where the player attacks an entity.
 - type: tutorialStep
@@ -110,5 +119,6 @@
   abstract: true
   chatMessage: tutorial-base-step-attack-chat
   ttsMessage: tutorial-base-step-attack-tts
-  conditions:
-  - !type:AttackListenedCondition
+  completion:
+    all:
+    - !type:AttackObjectiveCondition
