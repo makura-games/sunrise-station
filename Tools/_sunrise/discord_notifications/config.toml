@@ -81,7 +81,7 @@ unknown = "Недоступен"
 approved = "Апрув"
 changes_requested = "Запрошены изменения"
 review_required = "Ожидает ревью"
-none = "Нет решения"
+none = "Без ревью"
 unknown = "Недоступно"
 
 [reviews.approved]
