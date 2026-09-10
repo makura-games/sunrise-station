@@ -22,6 +22,10 @@ import changelog_targets
 import dispatch_changelogs
 import manual_changelog
 
+discord_changelog.DISCORD_WEBHOOK_URL = (
+    "https://discord.com/api/webhooks/123/test-token"
+)
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 WORKFLOW_PATH = REPO_ROOT / ".github/workflows/sunrise-changelog.yml"
@@ -1445,7 +1449,7 @@ class ChangelogActionsTests(unittest.TestCase):
                 ), patch.object(discord_changelog.time, "sleep") as sleep:
                     discord_changelog.send_embed_discord({"description": "test"})
 
-                sleep.assert_called_once_with(discord_changelog.DISCORD_DEFAULT_RETRY_AFTER)
+                sleep.assert_called_once_with(1)
 
     def test_discord_accepts_message_and_no_content_statuses(self):
         for status_code in (200, 204):
@@ -1802,7 +1806,12 @@ class ChangelogActionsTests(unittest.TestCase):
             )
 
         self.assertEqual(
-            {"payload_json": json.dumps(payload, ensure_ascii=False)},
+            {
+                "payload_json": json.dumps(
+                    {**payload, "allowed_mentions": {"parse": []}},
+                    ensure_ascii=False,
+                )
+            },
             post.call_args_list[0].kwargs["data"],
         )
         self.assertEqual(files, post.call_args_list[0].kwargs["files"])
@@ -1810,16 +1819,27 @@ class ChangelogActionsTests(unittest.TestCase):
     def test_components_v2_payload_enables_webhook_components(self):
         payload = {"flags": discord_changelog.DISCORD_COMPONENTS_V2_FLAG, "components": []}
 
-        with patch.object(discord_changelog, "DISCORD_WEBHOOK_URL", "https://discord.example/webhook"), patch.object(
-            discord_changelog.requests, "post", return_value=Mock(status_code=204)
-        ) as post:
+        with (
+            patch.object(
+                discord_changelog, "DISCORD_WEBHOOK_URL",
+                "https://discord.com/api/webhooks/123/test-token",
+            ),
+            patch.object(
+                discord_changelog.requests, "post",
+                return_value=Mock(status_code=204),
+            ) as post,
+        ):
             discord_changelog.send_multipart_discord(
                 payload,
                 [],
                 deadline=discord_changelog.time.monotonic() + 10,
             )
 
-        self.assertEqual("https://discord.example/webhook?with_components=true", post.call_args.args[0])
+        self.assertEqual(
+            "https://discord.com/api/webhooks/123/test-token"
+            "?wait=true&with_components=true",
+            post.call_args.args[0],
+        )
 
     def test_media_send_failure_falls_back_to_text_and_warns(self):
         entry = {
