@@ -1,0 +1,50 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:paint="clr-namespace:Content.Client._Sunrise.Paint.UI"
+                      Title="{Loc 'paint-color-window-title'}"
+                      MinSize="560 260"
+                      SetSize="600 270">
+    <BoxContainer Orientation="Vertical" Margin="8 8 12 8" SeparationOverride="6">
+        <BoxContainer Orientation="Horizontal"
+                      SeparationOverride="0"
+                      HorizontalExpand="True">
+
+            <!-- Предпросмотр цвета -->
+            <PanelContainer Name="ColorPreview"
+                            MinSize="140 140"
+                            MaxSize="140 140" />
+
+            <!-- Выбор цвета -->
+            <paint:SaturationValueSelector Name="SaturationValueSelector"
+                                           StyleIdentifier="{x:Static paint:SaturationValueSelector.StyleIdentifierSelector}"
+                                           MinSize="380 140"
+                                           MaxHeight="140"
+                                           HorizontalExpand="True" />
+        </BoxContainer>
+
+        <ColorableSlider Name="HueSlider" MinHeight="20" MaxValue="1" HorizontalExpand="True" />
+
+        <BoxContainer Orientation="Horizontal" SeparationOverride="6" HorizontalExpand="True">
+            <!-- RGB -->
+            <Label Text="{Loc 'paint-color-window-rgb'}" MinWidth="36" VAlign="Center" />
+            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
+                <Label Text="R" VAlign="Center" />
+                <SpinBox Name="RedInput" MinWidth="52" MaxWidth="58" />
+                <Label Text="G" VAlign="Center" />
+                <SpinBox Name="GreenInput" MinWidth="52" MaxWidth="58" />
+                <Label Text="B" VAlign="Center" />
+                <SpinBox Name="BlueInput" MinWidth="52" MaxWidth="58" />
+            </BoxContainer>
+
+            <!-- Hex -->
+            <Label Text="{Loc 'paint-color-window-hex'}" MinWidth="36" VAlign="Center" />
+            <LineEdit Name="HexInput" PlaceHolder="#RRGGBB" SelectAllOnFocus="True" MinWidth="96" HorizontalExpand="True" />
+
+            <!-- Применить -->
+            <Button Name="ApplyButton"
+                    Text="{Loc 'paint-color-window-apply'}"
+                    StyleClasses="positive" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

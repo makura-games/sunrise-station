@@ -9,32 +9,12 @@
     containers:
       entity_storage: !type:AllSelector
         children:
-        - id: SprayPaintBlue
-          amount: 2
-          prob: 0.33
-        - id: SprayPaintRed
-          amount: 2
-          prob: 0.33
-        - id: SprayPaintOrange
-          amount: 2
-          prob: 0.33
-        - id: SprayPaintBlack
-          amount: 2
-          prob: 0.33
-        - id: SprayPaintGreen
-          amount: 2
-          prob: 0.33
-        - id: SprayPaintPurple
-          amount: 2
-          prob: 0.33
-        - id: SprayPaintWhite
-          amount: 2
-          prob: 0.33
+        - id: SprayPaint
+          amount: 3
         - id: DeathPaint
           amount: 2
         - id: DeathPaintTwo
           amount: 2
-
 - type: entity
   id: CrateGreytide
   parent: CrateGenericSteel
