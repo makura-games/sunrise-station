@@ -136,7 +136,10 @@ def status_footer(payload: dict, subject: dict, config: dict) -> dict:
     review_label = config["review_status"].get(
         review, config["review_status"]["unknown"]
     )
-    footer = f"PR: {pr_label} · Review: {review_label}"
+    footer = (
+        f"{config['text']['pull_request']}: {pr_label} · "
+        f"{config['text']['review']}: {review_label}"
+    )
     if conflicts:
         footer += " · " + config["pr_status"]["conflicts"]
     return {"text": footer}
