@@ -23,10 +23,48 @@ from .transport import (
 )
 
 COLLECTOR = "sunrise-discord-events.yml"
+EDIT_ACTIONS = {
+    "pull_request": {"edited", "ready_for_review", "converted_to_draft"},
+    "issues": {"edited"},
+    "issue_comment": {"edited", "deleted"},
+    "pull_request_review_comment": {"edited", "deleted"},
+    "discussion": {"edited", "deleted", "answered", "unanswered"},
+    "discussion_comment": {"edited", "deleted"},
+    "commit_comment": {"edited"},
+}
 
 
 def utc_now() -> str:
     return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def message_reference(event: str, payload: dict) -> tuple[str, bool, bool]:
+    event = "pull_request" if event == "pull_request_target" else event
+    action = payload.get("action", event)
+    source = {
+        "pull_request": payload.get("pull_request"),
+        "issues": payload.get("issue"),
+        "discussion": payload.get("discussion"),
+        "issue_comment": payload.get("comment"),
+        "pull_request_review_comment": payload.get("comment"),
+        "discussion_comment": payload.get("comment"),
+        "commit_comment": payload.get("comment"),
+    }.get(event)
+    identifier = None
+    if source:
+        field = (
+            "number"
+            if event in {"pull_request", "issues", "discussion"}
+            else "id"
+        )
+        identifier = source.get(field)
+    key = (
+        f"{event}:{identifier}"
+        if type(identifier) is int and identifier > 0
+        else ""
+    )
+    editing = action in EDIT_ACTIONS.get(event, set())
+    return key, editing, editing and action == "deleted"
 
 
 class Journal:
@@ -86,20 +124,38 @@ def enqueue(
         log(f"Пропущено: {explanation}.")
         return
     parts = split_message(message)
+    record_key, editing, forget = message_reference(event, payload)
+    messages = state.data.setdefault("messages", {})
+    if editing:
+        message_ids = messages.get(record_key, [])
+        if len(message_ids) != len(parts) or not all(message_ids):
+            log(
+                f"Пропущено изменение: {explanation}. "
+                "Исходные части сообщения Discord не найдены "
+                "или их количество изменилось."
+            )
+            return
     created_at = utc_now()
     for index, part in enumerate(parts):
         part_key = key if len(parts) == 1 else f"{key}:part{index + 1:05d}"
+        pending = {
+            "message": part,
+            "explanation": (f"{explanation} · часть {index + 1}/{len(parts)}"),
+            "created_at": created_at,
+        }
+        if record_key:
+            pending["record_key"] = record_key
+            pending["part_index"] = index
+            pending["part_count"] = len(parts)
+        if editing:
+            pending["message_id"] = message_ids[index]
+            pending["forget_record"] = forget
         state.data["pending"].setdefault(
             part_key,
-            {
-                "message": part,
-                "explanation": (
-                    f"{explanation} · часть {index + 1}/{len(parts)}"
-                ),
-                "created_at": created_at,
-            },
+            pending,
         )
-    log(f"Сохранено в очередь: {explanation}.")
+    operation = "изменение" if editing else "сообщение"
+    log(f"Сохранено в очередь {operation}: {explanation}.")
 
 
 def collect(state: State, config: dict, log: Journal, deadline: float) -> int:
@@ -264,6 +320,8 @@ def deliver_pending(
         key=lambda entry: (entry[1]["created_at"], entry[0]),
     )
     for key, item in pending:
+        if key not in state.data["pending"]:
+            continue
         retry = item.get("retry", {})
         if not force_retry and retry.get("after", 0) > time.time():
             log(f"Сообщение {key} ожидает назначенного повтора.")
@@ -280,11 +338,14 @@ def deliver_pending(
             )
             return failures
         attempted_count += 1
-        log(f"Сообщение {key}; {item['explanation']}.")
+        message_id = item.get("message_id")
+        operation = "Изменение" if message_id else "Сообщение"
+        log(f"{operation} {key}; {item['explanation']}.")
         try:
             receipt = send_message(
                 address,
                 item["message"],
+                message_id=message_id,
                 attempts=config["delivery"]["attempts"],
                 timeout=config["delivery"]["request_timeout"],
                 deadline=min(
@@ -303,6 +364,24 @@ def deliver_pending(
             UnexpectedDiscordStatusError,
             ValueError,
         ) as error:
+            if (
+                message_id
+                and isinstance(error, DiscordError)
+                and error.status_code == 404
+            ):
+                record_key = item.get("record_key", "")
+                state.data["messages"].pop(record_key, None)
+                for pending_key, pending_item in list(
+                    state.data["pending"].items()
+                ):
+                    if pending_item.get("record_key") == record_key:
+                        del state.data["pending"][pending_key]
+                state.save()
+                log(
+                    "Изменение пропущено: исходное сообщение Discord "
+                    "удалено или принадлежит другому вебхуку."
+                )
+                continue
             failures += 1
             log(
                 f"Ошибка отправки: {error}. "
@@ -311,10 +390,22 @@ def deliver_pending(
             defer(state, item, config)
             continue
         del state.data["pending"][key]
+        record_key = item.get("record_key")
+        if record_key:
+            if item.get("forget_record"):
+                state.data["messages"].pop(record_key, None)
+            elif not message_id:
+                part_count = item["part_count"]
+                message_ids = state.data["messages"].get(record_key, [])
+                if len(message_ids) != part_count:
+                    message_ids = [None] * part_count
+                message_ids[item["part_index"]] = str(receipt["id"])
+                state.data["messages"][record_key] = message_ids
         state.save()
         sent_count += 1
+        operation = "изменено" if message_id else "отправлено"
         log(
-            f"Успешно отправлено: {item['explanation']}. "
+            f"Успешно {operation}: {item['explanation']}. "
             f"ID сообщения: {receipt.get('id', 'не предоставлен')}."
         )
         for embed in item["message"]["embeds"]:

@@ -16,10 +16,24 @@ SEND_STEP = "Отправить очередь в Discord"
 def validate(document: dict) -> None:
     if not isinstance(document, dict) or document.get("version") != 1:
         raise ValueError("Неизвестный формат состояния; очередь не сброшена")
+    document.setdefault("messages", {})
     datetime.strptime(document["cursor"], "%Y-%m-%dT%H:%M:%SZ")
-    for name in ("seen", "pending", "commit_comments"):
+    for name in ("seen", "pending", "commit_comments", "messages"):
         if not isinstance(document.get(name), dict):
             raise ValueError(f"Повреждено поле состояния {name}")
+    for key, message_ids in document["messages"].items():
+        if isinstance(message_ids, str):
+            message_ids = document["messages"][key] = [message_ids]
+        if not isinstance(message_ids, list) or any(
+            message_id is not None
+            and (
+                not isinstance(message_id, str)
+                or not message_id.isdecimal()
+                or len(message_id) > 30
+            )
+            for message_id in message_ids
+        ):
+            raise ValueError("Повреждены ID сообщений Discord")
 
 
 class State:
@@ -134,6 +148,7 @@ def restore(github: GitHub, current: dict, path: Path, hours: int) -> None:
             "seen": {},
             "pending": {},
             "commit_comments": {},
+            "messages": {},
         }
         print("Первое включение: создана пустая очередь уведомлений.")
     document["checkpoint"] = {

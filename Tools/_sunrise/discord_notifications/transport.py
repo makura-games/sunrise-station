@@ -81,6 +81,7 @@ def send_message(
     address: str,
     payload: dict,
     *,
+    message_id: str | None = None,
     files: list | None = None,
     attempts: int = 6,
     timeout: float = 30,
@@ -90,6 +91,21 @@ def send_message(
     """Повторяет временные отказы, не печатая URL, ответы или секреты."""
     address = webhook_url(address)
     message = copy.deepcopy(payload)
+    if message_id is not None:
+        if not re.fullmatch(r"\d{1,30}", message_id):
+            raise ValueError("Некорректный ID сообщения Discord")
+        parsed = urlsplit(address)
+        address = urlunsplit(
+            (
+                parsed.scheme,
+                parsed.netloc,
+                f"{parsed.path}/messages/{message_id}",
+                parsed.query,
+                "",
+            )
+        )
+        message.pop("username", None)
+        message.pop("avatar_url", None)
     encoded_files = message.pop("_files", {})
     if encoded_files:
         files = list(files or [])
@@ -126,10 +142,11 @@ def send_message(
                 "timeout": min(timeout, remaining),
                 "allow_redirects": False,
             }
+            request = requests.patch if message_id else requests.post
             if not files:
-                response = requests.post(address, json=message, **options)
+                response = request(address, json=message, **options)
             else:
-                response = requests.post(
+                response = request(
                     address,
                     data={
                         "payload_json": json.dumps(message, ensure_ascii=False)
@@ -139,7 +156,12 @@ def send_message(
                 )
             status = response.status_code
             if status in {200, 204}:
-                report(f"Доставка подтверждена Discord: HTTP {status}.")
+                confirmation = (
+                    "Изменение подтверждено"
+                    if message_id
+                    else "Доставка подтверждена"
+                )
+                report(f"{confirmation} Discord: HTTP {status}.")
                 try:
                     result = response.json()
                 except ValueError:
