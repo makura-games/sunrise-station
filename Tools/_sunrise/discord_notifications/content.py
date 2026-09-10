@@ -80,13 +80,18 @@ def add_code_language(body: str, path: object) -> str:
     fence = ""
     for line in body.splitlines(keepends=True):
         match = re.match(
-            r"^([ \t]*(?:>[ \t]*)*)(```|~~~)([^\r\n]*)(\r?\n)?$", line
+            r"^([ \t]*(?:>[ \t]*)*)(`{3,}|~{3,})([^\r\n]*)(\r?\n)?$",
+            line,
         )
         if match:
             marker = match.group(2)
             info = match.group(3).strip()
             if fence:
-                if marker == fence and not info:
+                if (
+                    marker[0] == fence[0]
+                    and len(marker) >= len(fence)
+                    and not info
+                ):
                     fence = ""
             else:
                 fence = marker
