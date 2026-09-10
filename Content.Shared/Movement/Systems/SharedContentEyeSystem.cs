@@ -14,7 +14,8 @@ namespace Content.Shared.Movement.Systems;
 /// <summary>
 /// Lets specific sessions scroll and set their zoom directly.
 /// </summary>
-public abstract class SharedContentEyeSystem : EntitySystem
+// Sunrise-Edit — partial-расширение для временного поворота камеры
+public abstract partial class SharedContentEyeSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminManager _admin = default!;
 

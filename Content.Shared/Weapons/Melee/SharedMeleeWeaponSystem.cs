@@ -46,7 +46,8 @@ using ItemToggleMeleeWeaponComponent = Content.Shared.Item.ItemToggle.Components
 
 namespace Content.Shared.Weapons.Melee;
 
-public abstract class SharedMeleeWeaponSystem : EntitySystem
+// Sunrise-Edit — partial-расширение для экранной тряски от сильных ударов
+public abstract partial class SharedMeleeWeaponSystem : EntitySystem
 {
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly IMapManager MapManager = default!;
@@ -578,6 +579,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (damageResult.GetTotal() > FixedPoint2.Zero)
         {
             DoDamageEffect(targets, user, targetXform);
+            AddSunriseMeleeScreenShake(meleeUid, damageResult, user, targets); // Sunrise-Edit — тряска от сильного удара
         }
     }
 
@@ -748,6 +750,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (appliedDamage.GetTotal() > FixedPoint2.Zero)
         {
             DoDamageEffect(targets, user, Transform(targets[0]));
+            AddSunriseMeleeScreenShake(meleeUid, damage, user, targets); // Sunrise-Edit — тряска от сильного удара
         }
 
         return true;

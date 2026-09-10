@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Eye;
 
-public sealed class EyeLerpingSystem : EntitySystem
+public sealed partial class EyeLerpingSystem : EntitySystem // Sunrise-Edit — partial-расширение для базового угла шумовой тряски
 {
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -36,6 +36,7 @@ public sealed class EyeLerpingSystem : EntitySystem
         UpdatesAfter.Add(typeof(TransformSystem));
         UpdatesAfter.Add(typeof(Robust.Client.Physics.PhysicsSystem));
         UpdatesBefore.Add(typeof(SharedEyeSystem));
+        UpdatesBefore.Add(typeof(EyeSystem)); // Sunrise-Edit — базовый угол должен обновиться до применения тряски
         UpdatesOutsidePrediction = true;
     }
 
@@ -66,7 +67,7 @@ public sealed class EyeLerpingSystem : EntitySystem
 
         if (component.Eye != null)
         {
-            _eye.SetRotation(uid, lerpInfo.TargetRotation, component);
+            SetSunriseBaseRotation(uid, lerpInfo.TargetRotation, component); // Sunrise-Edit — тряска накладывается поверх этого угла
             _eye.SetZoom(uid, lerpInfo.TargetZoom, component);
         }
     }
@@ -199,7 +200,7 @@ public sealed class EyeLerpingSystem : EntitySystem
 
             if (!NeedsLerp(mover))
             {
-                _eye.SetRotation(entity, lerpInfo.TargetRotation, eye);
+                SetSunriseBaseRotation(entity, lerpInfo.TargetRotation, eye); // Sunrise-Edit
                 continue;
             }
 
@@ -207,11 +208,11 @@ public sealed class EyeLerpingSystem : EntitySystem
 
             if (Math.Abs(shortest.Theta) < lerpMinimum)
             {
-                _eye.SetRotation(entity, lerpInfo.TargetRotation, eye);
+                SetSunriseBaseRotation(entity, lerpInfo.TargetRotation, eye); // Sunrise-Edit
                 continue;
             }
 
-            _eye.SetRotation(entity, shortest * tickFraction + lerpInfo.LastRotation, eye);
+            SetSunriseBaseRotation(entity, shortest * tickFraction + lerpInfo.LastRotation, eye); // Sunrise-Edit
         }
     }
 }
