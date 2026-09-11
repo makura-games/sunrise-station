@@ -246,6 +246,8 @@ class ReadinessTests(unittest.TestCase):
         self.assertTrue(inspect(checks=[CHECK], now=after_wait)["code_rabbit_absent"])
         skipped = limited_comment("Review skipped\n\nAutomatic reviews are disabled on this target branch.")
         self.assertTrue(inspect(checks=[CHECK], comments=[skipped], now=after_wait)["code_rabbit_absent"])
+        skipped_status = {**RABBIT, "description": "Review skipped: reviews are disabled for this base branch."}
+        self.assertTrue(inspect(checks=[CHECK, skipped_status], now=after_wait)["code_rabbit_absent"])
         copied = {**skipped, "user": {"type": "User", "login": "contributor"}}
         self.assertTrue(inspect(checks=[CHECK], comments=[copied], now=after_wait)["code_rabbit_absent"])
         active = limited_comment("Review in progress")

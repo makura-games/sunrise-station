@@ -82,6 +82,14 @@ def is_rabbit(check):
     return ((check.get("checkSuite") or {}).get("app") or {}).get("slug") == "coderabbitai"
 
 
+def is_unavailable_rabbit_check(check):
+    if not REVIEW_UNAVAILABLE.search(check.get("description") or check.get("title") or ""):
+        return False
+    if check["__typename"] == "StatusContext":
+        return check.get("state") != "PENDING"
+    return check.get("status") == "COMPLETED"
+
+
 def load_readiness(*, github, owner, repo, pull_request, rules_cache, comments_github=None,
                    report_app_slug="github-actions", now=None):
     comments_github = comments_github or github
@@ -124,6 +132,7 @@ def load_readiness(*, github, owner, repo, pull_request, rules_cache, comments_g
             latest[key] = check
     current_checks = list(latest.values())
     rabbit_checks = [check for check in current_checks if is_rabbit(check)]
+    active_rabbit_checks = [check for check in rabbit_checks if not is_unavailable_rabbit_check(check)]
     reviewed = any(succeeded(check) and re.match(r"^Review completed\b", check.get("description") or check.get("title") or "", re.I)
                    for check in rabbit_checks)
 
@@ -134,7 +143,7 @@ def load_readiness(*, github, owner, repo, pull_request, rules_cache, comments_g
     code_rabbit_wait_minutes = 10
     has_rabbit_activity = any(not REVIEW_UNAVAILABLE.search(comment.get("body") or "")
                               for comment in rabbit_comments)
-    code_rabbit_absent = (not rabbit_checks and not has_rabbit_review and not has_rabbit_activity
+    code_rabbit_absent = (not active_rabbit_checks and not has_rabbit_review and not has_rabbit_activity
                           and now - timestamp(created_at) >= code_rabbit_wait_minutes * 60)
 
     rate_limited = False
