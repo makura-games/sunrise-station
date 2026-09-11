@@ -43,7 +43,7 @@ jobs:
       - name: Checkout path filter
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
-          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+          ref: ${{ github.sha }}
           persist-credentials: false
           sparse-checkout: |
             .github/workflows/sunrise-test-packaging.yml

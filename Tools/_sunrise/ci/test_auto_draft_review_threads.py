@@ -171,7 +171,7 @@ class WorkflowTests(unittest.TestCase):
         self.assertNotIn("paths:", pull_request)
         self.assertNotIn("pull_request.draft", self.packaging_workflow)
         self.assertIn("name: Check packaging paths", self.packaging_workflow)
-        self.assertIn("ref: ${{ github.event.pull_request.base.sha || github.sha }}", self.packaging_workflow)
+        self.assertIn("ref: ${{ github.sha }}", self.packaging_workflow)
         self.assertEqual(self.packaging_workflow.count("persist-credentials: false"), 2)
         self.assertIn("actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2", self.packaging_workflow)
         self.assertIn("space-wizards/submodule-dependency@548a726da00ca348ce9e1ea9f026da8f528caa71 # v0.1.5", self.packaging_workflow)
