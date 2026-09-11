@@ -229,18 +229,32 @@ class PackagingPathTests(unittest.TestCase):
 
         for path in (
             "Content.Server/Foo.cs",
-            "Content.Server/Content.Server.csproj",
-            "SpaceStation14.sln",
+            "Content.Client/Content.Client.csproj",
+            "Content.Packaging/Program.cs",
+            "Content.Server.Database/Database.cs",
+            "Content.Shared/Serialization.cs",
+            "Content.Shared.Database/Database.cs",
+            "Directory.Packages.props",
+            "global.json",
             ".gitmodules",
+            "MSBuild/Content.props",
+            "nuget.config",
             "Resources/Prototypes/foo.yml",
             "RobustToolbox",
             "RobustToolbox/Robust.Shared/Foo.txt",
+            "SpaceStation14.slnx",
+            "Sunrise/Content.Sunrise.Interfaces.Shared/Foo.cs",
         ):
             with self.subTest(path=path):
                 self.assertTrue(packaging_needed([path], patterns))
 
-        self.assertFalse(packaging_needed(["README.md", "Resources/Textures/foo.png"], patterns))
-        self.assertFalse(packaging_needed(["Other/RobustToolbox/foo.txt"], patterns))
+        self.assertFalse(packaging_needed([
+            ".github/workflows/sunrise-test-packaging.yml",
+            "README.md",
+            "Tools/_sunrise/auto_draft/review_threads.py",
+            "Tools/_sunrise/auto_draft/config.toml",
+            "Other/RobustToolbox/foo.txt",
+        ], patterns))
 
 
 class PolicyTests(unittest.TestCase):

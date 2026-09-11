@@ -4,15 +4,22 @@ on:
   push:
     branches: [ master, staging, stable ]
     paths:
-      - '**.cs'
-      - '**.csproj'
-      - '**.sln'
-      - '**.git**'
-      - '**.yml'
-      # no docs on which one of these is supposed to work, so
-      # why not just do both
+      - '.gitmodules'
+      - 'Content.Client/**'
+      - 'Content.Packaging/**'
+      - 'Content.Server/**'
+      - 'Content.Server.Database/**'
+      - 'Content.Shared/**'
+      - 'Content.Shared.Database/**'
+      - 'Directory.Packages.props'
+      - 'global.json'
+      - 'MSBuild/**'
+      - 'nuget.config'
       - 'RobustToolbox'
       - 'RobustToolbox/**'
+      - 'SpaceStation14.slnx'
+      - 'Sunrise/**'
+      - 'Resources/**'
   merge_group:
   pull_request:
     types: [ opened, reopened, synchronize, ready_for_review ]
