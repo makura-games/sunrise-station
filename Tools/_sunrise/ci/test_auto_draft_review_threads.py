@@ -133,6 +133,7 @@ class WorkflowTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.workflow = (REPO_ROOT / ".github" / "workflows" / "sunrise-auto-draft-review-threads.yml").read_text(encoding="utf-8")
+        cls.packaging_workflow = (REPO_ROOT / ".github" / "workflows" / "test-packaging.yml").read_text(encoding="utf-8-sig")
         cls.signal_workflow = (REPO_ROOT / ".github" / "workflows" / "sunrise-auto-draft-review-state-changed.yml").read_text(encoding="utf-8")
         cls.coderabbit = (REPO_ROOT / ".coderabbit.yaml").read_text(encoding="utf-8")
 
@@ -153,6 +154,13 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn('workflows: ["PR: Automatic Draft Management - Review Events", "Build & Test Debug", "YAML Linter"]', self.workflow)
         self.assertIn("request_changes_workflow: true", self.coderabbit)
         self.assertIn("drafts: true", self.coderabbit)
+
+    def test_packaging_keeps_path_filter_and_runs_for_drafts(self):
+        pull_request = self.packaging_workflow.split("  pull_request:\n", 1)[1].split("\n\n", 1)[0]
+        self.assertIn("paths:", pull_request)
+        self.assertIn("'**.cs'", pull_request)
+        self.assertNotIn("pull_request.draft", self.packaging_workflow)
+        self.assertIn("name: Test Packaging", self.packaging_workflow)
 
     def test_toml_config_contains_localized_label_and_migration_name(self):
         config = load_config()
@@ -290,6 +298,12 @@ class ReadinessTests(unittest.TestCase):
             self.assertTrue(inspect(checks=[{**CHECK, "conclusion": conclusion}, RABBIT])["checks_ready"])
         self.assertTrue(inspect(checks=[{**CHECK, "conclusion": "FAILURE"}, {**CHECK, "databaseId": 2}, RABBIT])["checks_ready"])
         self.assertFalse(inspect(checks=[CHECK, {**CHECK, "databaseId": 2, "conclusion": None}, RABBIT])["checks_ready"])
+
+    def test_skipped_packaging_is_accepted_but_missing_check_is_not(self):
+        packaging = {**CHECK, "name": "Test Packaging", "conclusion": "SKIPPED"}
+        requirement = {"context": "Test Packaging", "integration_id": 15368}
+        self.assertTrue(inspect(checks=[packaging, RABBIT], requirements=[requirement])["checks_ready"])
+        self.assertFalse(inspect(checks=[RABBIT], requirements=[requirement])["checks_ready"])
 
     def test_coderabbit_skip_timeout_and_real_activity(self):
         after_wait = timestamp(PULL_REQUEST["createdAt"]) + 10 * 60

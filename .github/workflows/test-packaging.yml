@@ -36,7 +36,7 @@ jobs:
   # Sunrise edit start - распределяем независимые цели упаковки по матрице и сохраняем единый обязательный статус
   package:
     name: Package ${{ matrix.name }}
-    if: github.actor != 'Sunrise-Bot' && github.actor != 'PJBot' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
+    if: github.actor != 'Sunrise-Bot' && github.actor != 'PJBot'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -97,7 +97,7 @@ jobs:
   build:
     name: Test Packaging
     needs: package
-    if: ${{ always() && github.actor != 'Sunrise-Bot' && github.actor != 'PJBot' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false) }}
+    if: ${{ always() && github.actor != 'Sunrise-Bot' && github.actor != 'PJBot' }}
     runs-on: ubuntu-latest
     steps:
       - name: Verify packaging jobs
