@@ -122,16 +122,22 @@ jobs:
   build:
     name: Test Packaging
     needs: [changes, package]
-    if: ${{ always() && github.actor != 'Sunrise-Bot' && github.actor != 'PJBot' }}
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
       - name: Verify packaging jobs
         env:
+          PACKAGING_ACTOR: ${{ github.actor }}
           PACKAGING_NEEDED: ${{ needs.changes.outputs.packaging }}
           PACKAGE_RESULT: ${{ needs.package.result }}
         run: |
           if [[ "$PACKAGING_NEEDED" == "false" ]]; then
             echo "Packaging is not required for the changed files."
+            exit 0
+          fi
+
+          if [[ "$PACKAGE_RESULT" == "skipped" && ( "$PACKAGING_ACTOR" == "Sunrise-Bot" || "$PACKAGING_ACTOR" == "PJBot" ) ]]; then
+            echo "Packaging was skipped for the automation bot."
             exit 0
           fi
 

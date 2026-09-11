@@ -28,6 +28,8 @@ class HTTPSRedirectHandler(HTTPRedirectHandler):
 class GitHub:
     def __init__(self, token, api_url="https://api.github.com"):
         self.token = token
+        if urlsplit(api_url).scheme != "https":
+            raise ValueError("GitHub API должен использовать HTTPS.")
         self.api_url = api_url.rstrip("/")
         self._opener = build_opener(HTTPSRedirectHandler())
 

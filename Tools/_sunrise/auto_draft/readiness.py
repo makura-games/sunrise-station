@@ -138,8 +138,8 @@ def load_readiness(*, github, owner, repo, pull_request, rules_cache, comments_g
 
     comments = comments_github.paginate(f"/repos/{owner}/{repo}/issues/{pull_request['number']}/comments")
     rabbit_comments = [comment for comment in comments
-                       if comment.get("user", {}).get("type") == "Bot"
-                       and comment["user"].get("login") == "coderabbitai[bot]"]
+                       if (comment.get("user") or {}).get("type") == "Bot"
+                       and (comment.get("user") or {}).get("login") == "coderabbitai[bot]"]
     code_rabbit_wait_minutes = 10
     has_rabbit_activity = any(not REVIEW_UNAVAILABLE.search(comment.get("body") or "")
                               for comment in rabbit_comments)

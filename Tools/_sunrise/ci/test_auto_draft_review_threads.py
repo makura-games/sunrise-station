@@ -152,6 +152,8 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("run: python3 Tools/_sunrise/auto_draft/review_threads.py", self.workflow)
         self.assertIn("uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0", self.workflow)
         self.assertIn('python-version: "3.11"', self.workflow)
+        self.assertIn("# Sunrise edit start - фиксируем Python с поддержкой tomllib", self.workflow)
+        self.assertIn("# Sunrise edit end", self.workflow)
         self.assertNotIn("actions/github-script", self.workflow)
         self.assertNotIn("AUTO_DRAFT_TOKEN", self.workflow)
         self.assertIn("sparse-checkout: Tools/_sunrise/auto_draft", self.workflow)
@@ -184,6 +186,8 @@ class WorkflowTests(unittest.TestCase):
             self.assertNotIn(pattern, self.packaging_script)
         self.assertIn("needs: [changes, package]", self.packaging_workflow)
         self.assertIn('if [[ "$PACKAGING_NEEDED" == "false" ]]', self.packaging_workflow)
+        self.assertIn('if: ${{ always() }}', self.packaging_workflow)
+        self.assertIn('PACKAGING_ACTOR\" == \"Sunrise-Bot\"', self.packaging_workflow)
         self.assertIn("name: Test Packaging", self.packaging_workflow)
 
     def test_upstream_packaging_workflow_is_disabled(self):
@@ -236,6 +240,10 @@ class GitHubApiTests(unittest.TestCase):
         self.assertEqual(open_request.call_count, 3)
         self.assertEqual(open_request.call_args_list[0].args[0].headers["Authorization"], "Bearer token")
         self.assertIn("page=2", open_request.call_args_list[2].args[0].full_url)
+
+    def test_api_url_requires_https(self):
+        with self.assertRaisesRegex(ValueError, "должен использовать HTTPS"):
+            GitHub("token", "http://api.github.com")
 
     def test_graphql_errors_preserve_metadata_and_rate_limit(self):
         class Response:
@@ -432,6 +440,7 @@ class ReadinessTests(unittest.TestCase):
         self.assertTrue(inspect(checks=[CHECK], comments=[copied], now=after_wait)["code_rabbit_absent"])
         active = limited_comment("Review in progress")
         self.assertFalse(inspect(checks=[CHECK], comments=[active], now=after_wait)["code_rabbit_absent"])
+        self.assertTrue(inspect(checks=[CHECK], comments=[{"user": None, "body": ""}], now=after_wait)["code_rabbit_absent"])
         pending = {**RABBIT, "state": "PENDING"}
         self.assertFalse(inspect(checks=[CHECK, pending], comments=[skipped], now=after_wait)["code_rabbit_absent"])
         reviews = [{"author": {"__typename": "Bot", "login": "coderabbitai"}}]

@@ -59,10 +59,12 @@ jobs:
           persist-credentials: false
           sparse-checkout: Tools/_sunrise/auto_draft
           sparse-checkout-cone-mode: false
+      # Sunrise edit start - фиксируем Python с поддержкой tomllib
       - name: Setup Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.11"
+      # Sunrise edit end
       - name: Sync draft state
         env:
           AUTO_DRAFT_APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
