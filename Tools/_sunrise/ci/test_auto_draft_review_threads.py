@@ -155,11 +155,15 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("request_changes_workflow: true", self.coderabbit)
         self.assertIn("drafts: true", self.coderabbit)
 
-    def test_packaging_keeps_path_filter_and_runs_for_drafts(self):
+    def test_packaging_uses_fast_gate_and_runs_for_drafts(self):
         pull_request = self.packaging_workflow.split("  pull_request:\n", 1)[1].split("\n\n", 1)[0]
-        self.assertIn("paths:", pull_request)
-        self.assertIn("'**.cs'", pull_request)
+        self.assertNotIn("paths:", pull_request)
         self.assertNotIn("pull_request.draft", self.packaging_workflow)
+        self.assertIn("name: Check packaging paths", self.packaging_workflow)
+        self.assertIn("gh api --paginate", self.packaging_workflow)
+        self.assertIn("*.cs|*.csproj|*.sln|*.git*|*.yml|RobustToolbox|RobustToolbox/*", self.packaging_workflow)
+        self.assertIn("needs: [changes, package]", self.packaging_workflow)
+        self.assertIn('if [[ "$PACKAGING_NEEDED" == "false" ]]', self.packaging_workflow)
         self.assertIn("name: Test Packaging", self.packaging_workflow)
 
     def test_toml_config_contains_localized_label_and_migration_name(self):
