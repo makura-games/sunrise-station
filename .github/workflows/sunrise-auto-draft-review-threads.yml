@@ -60,17 +60,7 @@ jobs:
           sparse-checkout: Tools/_sunrise/auto_draft
           sparse-checkout-cone-mode: false
       - name: Sync draft state
-        uses: actions/github-script@v9
         env:
           AUTO_DRAFT_APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
-        with:
-          github-token: ${{ steps.app-token.outputs.token }}
-          script: |
-            try {
-              const run = require(`${process.env.GITHUB_WORKSPACE}/Tools/_sunrise/auto_draft/review_threads.js`);
-              await run({ github, context, core });
-            } catch (error) {
-              core.error(`Автодрафт не завершился: ${error.message}`);
-              await core.summary.addHeading('❌ Автодрафт не завершился').addCodeBlock(error.message).write();
-              throw error;
-            }
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: python3 Tools/_sunrise/auto_draft/review_threads.py

@@ -1,0 +1,5 @@
+[label]
+name = "🤖 автодрафт: нужны исправления"
+color = "fbca04"
+description = "Автоматический черновик: ожидаются исправления или обязательные проверки."
+previous_names = ["auto-draft: unresolved review"]
