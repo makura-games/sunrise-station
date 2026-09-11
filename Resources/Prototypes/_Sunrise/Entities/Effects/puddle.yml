@@ -44,3 +44,15 @@
   - type: SolutionContainerManager
     solutions:
       step: { maxVol: 5 }
+
+- type: entity
+  id: PuddleWater
+  parent: PuddleTemporary
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      puddle:
+        maxVol: 1000
+        reagents:
+        - ReagentId: Water
+          Quantity: 100

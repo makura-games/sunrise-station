@@ -83,3 +83,52 @@
       Manipulator: 4
       Glass: 1
       Cable: 1
+
+- type: entity
+  id: BaseShower
+  name: shower
+  description: A simple shower. It just stands there.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _Sunrise/Structures/Specific/shower.rsi
+    layers:
+    - state: icon
+      map: ["enum.ShowerVisualLayers.Base"]
+    - state: water
+      map: ["enum.ShowerVisualLayers.Water"]
+      visible: false
+      shader: unshaded
+  - type: Shower
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ShowerVisuals.Active:
+        enum.ShowerVisualLayers.Water:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Physics
+    bodyType: Static
+  - type: WallMount
+  - type: Anchorable
+  - type: Rotatable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Drain
+  - type: Construction
+    graph: Shower
+    node: shower

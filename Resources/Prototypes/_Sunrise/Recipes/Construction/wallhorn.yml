@@ -28,3 +28,16 @@
   alternativePrototypes:
   - SunriseWallhornBlack
   - SunriseWallhornWhite
+
+- type: construction
+  id: Shower
+  name: construction-shower
+  graph: Shower
+  startNode: start
+  targetNode: shower
+  category: construction-category-furniture
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
