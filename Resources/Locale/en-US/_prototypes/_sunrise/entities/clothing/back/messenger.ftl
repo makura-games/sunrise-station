@@ -14,6 +14,9 @@ ent-ClothingBackpackMessengerArcadia = arcadia messenger bag
     .desc = { ent-ClothingBackpackMessengerPassenger.desc }
 ent-ClothingBackpackMessengerPirate = pirate messenger bag
     .desc = A robust messenger bag for war crimes. Yarr.
-
-ent-ClothingBackpackMessengerMercenaryBundleARG = ARG bundle
-    .desc = Contains the standard assault rifle.
+ent-SunriseClothingBackpackMessengerPirateMurmilloActive = murmillo MOD-messenger
+    .desc = A pirate messenger bag containing a Murmillo MOD-suit ready to deploy without a MOD core.
+ent-SunriseClothingBackpackMessengerPirateMurmillo = murmillo MOD-messenger
+    .desc = A pirate messenger bag containing a Murmillo MOD-suit awaiting a MOD core.
+ent-SunriseClothingBackpackMessengerPirateMurmilloDamaged = murmillo MOD-messenger
+    .desc = A pirate messenger bag containing a damaged Murmillo MOD-suit awaiting a MOD core.

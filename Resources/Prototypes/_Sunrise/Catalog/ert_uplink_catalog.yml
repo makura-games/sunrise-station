@@ -104,24 +104,6 @@
       - CBURN
 
 - type: listing
-  id: ERTUplinkWeaponLecterMk3Filled
-  name: ntuplink-gun-bundle-lecter-mk3-name
-  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: lecter_mk3 }
-  productEntity: ClothingBackpackDuffelWeaponLecterMk3Filled
-  cost:
-    Bluecrystal: 15
-  categories:
-  - NTAutoGun
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 4
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - ERTGamma
-      - CBURN
-
-- type: listing
   id: ERTUplinkWeaponRifleSKM28Filled
   productEntity: ClothingBackpackDuffelWeaponRifleSKM28Filled
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: skm28nano }

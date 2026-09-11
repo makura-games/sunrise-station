@@ -23502,7 +23502,7 @@ entities:
     - type: Transform
       pos: 7.5157814,33.10359
       parent: 2
-- proto: WeaponShotgunCombat
+- proto: WeaponShotgunEnforcer
   entities:
   - uid: 3710
     components:

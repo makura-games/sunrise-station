@@ -1,0 +1,76 @@
+name: "PR: Automatic Draft Management"
+
+on:
+  workflow_run:
+    workflows: ["PR: Automatic Draft Management - Review Events", "Build & Test Debug", "YAML Linter"]
+    types: [completed]
+  pull_request_target:
+    types: [opened, reopened, synchronize, converted_to_draft, ready_for_review]
+  status:
+  issue_comment:
+    types: [created, edited, deleted]
+  workflow_dispatch:
+    inputs:
+      pr-number:
+        description: "PR number to check. Leave empty to scan all open PRs."
+        required: false
+        type: number
+  schedule:
+    # Резервная синхронизация нужна для Resolve conversation: у GitHub Actions нет такого триггера.
+    - cron: "2/5 * * * *"
+
+permissions: {}
+
+jobs:
+  sync-draft-state:
+    if: >-
+      github.event_name != 'issue_comment' ||
+      (github.event.issue.pull_request &&
+      ((github.event.sender.type == 'Bot' && github.event.sender.login == 'coderabbitai[bot]') ||
+      (github.event.action != 'created' && github.event.comment.user.type == 'Bot' &&
+      github.event.sender.login != github.event.comment.user.login)))
+    concurrency:
+      # ponytail: общая очередь исключает гонки; пропущенные задания в неё не попадают.
+      group: ${{ github.workflow }}
+      cancel-in-progress: false
+      queue: max
+    runs-on: ubuntu-latest
+    env:
+      AUTO_DRAFT_ALLOW_CODERABBIT_RATE_LIMIT: ${{ vars.AUTO_DRAFT_ALLOW_CODERABBIT_RATE_LIMIT != 'false' }}
+    steps:
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.AUTO_DRAFT_APP_CLIENT_ID }}
+          private-key: ${{ secrets.AUTO_DRAFT_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-issues: write
+          permission-pull-requests: write
+          permission-actions: read
+          permission-checks: write
+          permission-statuses: read
+      - name: Checkout trusted automation script
+        uses: actions/checkout@v6
+        with:
+          # Код берётся из коммита самого workflow; ручной запуск позволяет проверить ветку до мержа.
+          ref: ${{ github.workflow_sha }}
+          token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: false
+          sparse-checkout: Tools/_sunrise/auto_draft
+          sparse-checkout-cone-mode: false
+      - name: Sync draft state
+        uses: actions/github-script@v9
+        env:
+          AUTO_DRAFT_APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+        with:
+          github-token: ${{ steps.app-token.outputs.token }}
+          script: |
+            try {
+              const run = require(`${process.env.GITHUB_WORKSPACE}/Tools/_sunrise/auto_draft/review_threads.js`);
+              await run({ github, context, core });
+            } catch (error) {
+              core.error(`Автодрафт не завершился: ${error.message}`);
+              await core.summary.addHeading('❌ Автодрафт не завершился').addCodeBlock(error.message).write();
+              throw error;
+            }

@@ -93,18 +93,6 @@
     Gold: 50
 
 - type: latheRecipe
-  id: LecterMk3Upgrade
-  result: LecterMk3Upgrade
-  categories:
-  - Weapons
-  completetime: 24
-  materials:
-    Steel: 300
-    Plastic: 600
-    Gold: 100
-    Plasma: 100
-
-- type: latheRecipe
   id: EnergyDomeDirectionalTurtle
   result: EnergyDomeDirectionalTurtle
   completetime: 12

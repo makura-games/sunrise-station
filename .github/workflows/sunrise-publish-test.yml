@@ -1,0 +1,35 @@
+name: Publish Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_hash:
+        description: 'Commit hash for this repository (leave empty for latest). USE ONLY IF YOU KNOW WHAT YOU ARE DOING'
+        required: false
+        type: string
+        default: ''
+      use_private_content:
+        description: 'Include content from SunrisePrivate'
+        required: false
+        type: boolean
+        default: true
+      private_ref:
+        description: 'Full commit SHA or master/stable branch for SunrisePrivate (leave empty for default branch)'
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  publish:
+    uses: ./.github/workflows/sunrise-publish.yml
+    with:
+      commit_hash: ${{ inputs.commit_hash }}
+      # Пустую настройку отклонит валидатор; подмена обычной сборкой недопустима.
+      publish_fork_id: ${{ vars.PUBLISH_TEST_FORK_ID || ' ' }}
+      concurrency_group: 'publish-test'
+      use_private_content: ${{ inputs.use_private_content }}
+      private_commit_hash: ${{ inputs.private_ref }}
+    secrets:
+      PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+      MAKURA_PRIVATE_REPO: ${{ secrets.MAKURA_PRIVATE_REPO }}
+      MAKURA_PRIVATE_REPO_SSH_KEY: ${{ secrets.MAKURA_PRIVATE_REPO_SSH_KEY }}

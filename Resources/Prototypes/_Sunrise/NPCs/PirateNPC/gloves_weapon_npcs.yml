@@ -558,14 +558,14 @@
 
 - type: entity
   parent: BaseSunriseHandsNoGlovesPiratePrivateer
-  id: ClothingHandsSMGC40
-  suffix: C40 SMG
+  id: ClothingHandsSMGVectorSuper
+  suffix: Vector Super
   categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     clothingVisuals:
       gloves:
-      - sprite: _Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi
+      - sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi
         state: wielded-inhand-right
 
 - type: entity

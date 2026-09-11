@@ -551,17 +551,6 @@
   - UplinkPirateRangedWeaponry
 
 - type: listing
-  id: UplinkPirateARG
-  name: uplink-weapon-arg-name
-  description: uplink-weapon-arg-desc
-  productEntity: ClothingBackpackMessengerMercenaryBundleARG
-  icon: { sprite: _Starlight/Objects/Weapons/Guns/Rifles/arg.rsi, state: icon }
-  cost:
-    Doubloon: 25
-  categories:
-  - UplinkPirateRangedWeaponry
-
-- type: listing
   id: UplinkPirateSKM28
   productEntity: WeaponRifleSKM28
   cost:
@@ -760,11 +749,11 @@
   - UplinkPirateRangedWeaponry
 
 - type: listing
-  id: UplinkPirateC40RBundle
-  name: uplink-c40r-bundle-name
-  description: uplink-c40r-bundle-desc
-  icon: { sprite: /Textures/_Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi, state: icon }
-  productEntity: ClothingBackpackDuffelSyndicateFilledSMG40
+  id: UplinkPirateVectorSuperBundle
+  name: uplink-vector-super-bundle-name
+  description: uplink-vector-super-bundle-desc
+  icon: { sprite: /Textures/_Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateFilledVectorSuper
   cost:
     Doubloon: 29
   categories:

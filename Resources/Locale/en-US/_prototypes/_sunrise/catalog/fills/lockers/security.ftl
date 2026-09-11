@@ -30,10 +30,6 @@ ent-GunSafeSubMachineGunVector = safe
     .suffix = Vector
     .desc = { ent-GunSafe.desc }
 
-ent-GunSafeSubMachineGunMP5 = safe
-    .suffix = MP5, SUNRISE
-    .desc = { ent-GunSafeBaseSecure.desc }
-
 ent-GunSafeSubMachineGunDrozdMk2 = safe
     .suffix = Drozd Mk2, SUNRISE
     .desc = { ent-GunSafeBaseSecure.desc }
@@ -64,10 +60,6 @@ ent-GunSafeShotgunTrenchgun4034 = safe
 
 ent-GunSafeShotgunRiot = safe
     .suffix = Shotgun Riot
-    .desc = { ent-GunSafeBaseSecure.desc }
-
-ent-GunSafeShotgunCombat = safe
-    .suffix = Shotgun Combat
     .desc = { ent-GunSafeBaseSecure.desc }
 
 ent-GunSafeDoubleBarreled = safe

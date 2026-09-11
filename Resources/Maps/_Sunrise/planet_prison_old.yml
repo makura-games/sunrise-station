@@ -38275,11 +38275,11 @@ entities:
         discountDownTo: {}
         disableRefund: False
         costModifiersBySourceId: {}
-      - id: UplinkC40RBundle
-        productEntity: ClothingBackpackDuffelSyndicateFilledSMG40
-        name: uplink-c40r-bundle-name
+      - id: UplinkVectorSuperBundle
+        productEntity: ClothingBackpackDuffelSyndicateFilledVectorSuper
+        name: uplink-vector-super-bundle-name
         discountCategory: veryRareDiscounts
-        description: uplink-c40r-bundle-desc
+        description: uplink-vector-super-bundle-desc
         categories:
         - UplinkWeaponry
         originalCost:
@@ -38297,7 +38297,7 @@ entities:
             components: null
           whitelist: null
         icon:
-          sprite: _Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi
+          sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi
           state: icon
         priority: 0
         productAction: null
@@ -44176,31 +44176,6 @@ entities:
         restockTime: 0
         discountDownTo:
           Telecrystal: 1
-        disableRefund: False
-        costModifiersBySourceId: {}
-      - id: UplinkPirateARG
-        productEntity: ClothingBackpackMessengerMercenaryBundleARG
-        name: uplink-weapon-arg-name
-        discountCategory: null
-        description: uplink-weapon-arg-desc
-        categories:
-        - UplinkPirateWeaponry
-        originalCost:
-          Doubloon: 27
-        conditions: null
-        icon:
-          sprite: _Starlight/Objects/Weapons/Guns/Rifles/arg.rsi
-          state: icon
-        priority: 0
-        productAction: null
-        applyToMob: False
-        productUpgradeId: null
-        productActionEntity: null
-        productEvent: null
-        raiseProductEventOnUser: False
-        purchaseAmount: 0
-        restockTime: 0
-        discountDownTo: {}
         disableRefund: False
         costModifiersBySourceId: {}
       - id: UplinkSunriseClothingUniformColorRainbow
@@ -57735,11 +57710,11 @@ entities:
         discountDownTo: {}
         disableRefund: False
         costModifiersBySourceId: {}
-      - id: UplinkPirateC40RBundle
-        productEntity: ClothingBackpackDuffelSyndicateFilledSMG40
-        name: uplink-c40r-bundle-name
+      - id: UplinkPirateVectorSuperBundle
+        productEntity: ClothingBackpackDuffelSyndicateFilledVectorSuper
+        name: uplink-vector-super-bundle-name
         discountCategory: null
-        description: uplink-c40r-bundle-desc
+        description: uplink-vector-super-bundle-desc
         categories:
         - UplinkPirateWeaponry
         originalCost:
@@ -57748,7 +57723,7 @@ entities:
         - !type:ListingLimitedStockCondition
           stock: 2
         icon:
-          sprite: /Textures/_Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi
+          sprite: /Textures/_Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi
           state: icon
         priority: 0
         productAction: null

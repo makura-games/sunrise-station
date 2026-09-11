@@ -1477,13 +1477,13 @@
     - id: DrinkDarkRedRumBottleFull
       prob: 0.33
       orGroup: MurmilloHardsuitPool
-    - id: SunriseClothingShoesBootsMagPirateMurmilloDamaged
+    - id: SunriseClothingBackpackMessengerPirateMurmilloDamaged
       prob: 0.25
       orGroup: MurmilloHardsuitPool
-    - id: SunriseClothingShoesBootsMagPirateMurmillo
+    - id: SunriseClothingBackpackMessengerPirateMurmillo
       prob: 0.5
       orGroup: MurmilloHardsuitPool
-    - id: SunriseClothingShoesBootsMagPirateMurmilloActive
+    - id: SunriseClothingBackpackMessengerPirateMurmilloActive
       prob: 0.1
       orGroup: MurmilloHardsuitPool
     - id: PirateMedSpawner03
@@ -3747,12 +3747,12 @@
     - id: PirateCashSpawner01
     - id: PirateCashSpawner03
     # Weapons
-    - id: WeaponSubMachineGunC40r
+    - id: WeaponSubMachineGunVector
       prob: 0.4
-      orGroup: SMG40Pool
-    - id: WeaponSubMachineGunC40rBiocode
+      orGroup: VectorSuperPool
+    - id: WeaponSubMachineGunVectorBiocode
       prob: 0.5
-      orGroup: SMG40Pool
+      orGroup: VectorSuperPool
     # Items
     - id: PirateMedSpawner03
     - id: ClothingOuterHardsuitPrivateer
@@ -4164,13 +4164,13 @@
     - id: DrinkDarkRedRumBottleFull
       prob: 0.33
       orGroup: MurmilloHardsuitPool
-    - id: SunriseClothingShoesBootsMagPirateMurmilloDamaged
+    - id: SunriseClothingBackpackMessengerPirateMurmilloDamaged
       prob: 0.25
       orGroup: MurmilloHardsuitPool
-    - id: SunriseClothingShoesBootsMagPirateMurmillo
+    - id: SunriseClothingBackpackMessengerPirateMurmillo
       prob: 0.5
       orGroup: MurmilloHardsuitPool
-    - id: SunriseClothingShoesBootsMagPirateMurmilloActive
+    - id: SunriseClothingBackpackMessengerPirateMurmilloActive
       prob: 0.1
       orGroup: MurmilloHardsuitPool
     - id: PirateMedSpawner03

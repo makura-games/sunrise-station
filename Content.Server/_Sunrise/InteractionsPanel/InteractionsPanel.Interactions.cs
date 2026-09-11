@@ -16,6 +16,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
+using Content.Shared.IdentityManagement;
 
 namespace Content.Server._Sunrise.InteractionsPanel;
 
@@ -385,8 +386,8 @@ public partial class InteractionsPanel
 
     private string FormatInteractionMessage(string template, EntityUid user, EntityUid target)
     {
-        var userName = MetaData(user).EntityName;
-        var targetName = MetaData(target).EntityName;
+        var userName = Identity.Name(user, EntityManager);
+        var targetName = Identity.Name(target, EntityManager);
 
         var result = template
             .Replace("%user", userName)

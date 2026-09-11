@@ -101,22 +101,6 @@
 
 #ERT_Uplink
 - type: entity
-  id: ClothingBackpackDuffelWeaponSubMachineGunMP5Filled
-  parent: ClothingBackpackDuffelMilitary
-  name: Bundle MP5
-  description: MP5 with 4 raspy magazines.
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: WeaponSubMachineGunMP5
-        - id: MagazineMP5
-          amount: 1
-        - id: MagazineMP5Extended
-          amount: 4
-
-- type: entity
   id: ClothingBackpackDuffelWeaponSubMachineGunWt550
   parent: ClothingBackpackDuffelMilitary
   name: Bundle WT550
@@ -197,22 +181,6 @@
         - id: MagazineP90FMJ
 
 - type: entity
-  id: ClothingBackpackDuffelWeaponLecterMk3Filled
-  parent: ClothingBackpackDuffelMilitary
-  name: Bundle Lecter Mk3
-  description: Lecter Mk3 with 3 FMJ magazines and 3 SP magazines.
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: WeaponRifleLecterMk3
-        - id: MagazineRifleFMJ
-          amount: 3
-        - id: MagazineRifleSP
-          amount: 3
-
-- type: entity
   id: ClothingBackpackDuffelWeaponRifleLeikhaFilled
   parent: ClothingBackpackDuffelMilitary
   name: Bundle Leikha
@@ -260,14 +228,14 @@
 - type: entity
   id: ClothingBackpackDuffelWeaponShotgun12Filled
   parent: ClothingBackpackDuffelMilitary
-  name: Combat shotgun bundle
-  description: A combat shotgun with three boxes of ammunition.
+  name: Enforcer shotgun bundle
+  description: An Enforcer shotgun with three boxes of ammunition.
   components:
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: WeaponShotgunCombat
+        - id: WeaponShotgunEnforcer
         - id: BoxLethalshot
         - id: BoxShotgunFlare
         - id: BoxShotgunSlug
@@ -560,24 +528,6 @@
         - id: CheapLighter
 
 - type: entity
-  id: ClothingBackpackMessengerMercenaryBundleARG
-  parent: ClothingBackpackMessengerMercenary
-  name: ARG bundle
-  description: "Contains the normal assault rifle."
-  components:
-    - type: EntityTableContainerFill
-      containers:
-        storagebase: !type:AllSelector
-          children:
-          - id: WeaponRifleARG
-          - id: MagazineLightRifleFMJ
-          - id: MagazineLightRifleSP
-          - id: MagazineLightRifleSP
-          - id: MagazineLightRifleSP
-          - id: CigPackSyndicate
-          - id: CheapLighter
-
-- type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherGL70
   name: GL-70 grenade launcher bundle
@@ -599,15 +549,15 @@
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
-  id: ClothingBackpackDuffelSyndicateFilledSMG40
-  name: C-40r bundle
-  description: "Old faithful: The classic C-40r submachine gun, bundled with twelve assorted magazines."
+  id: ClothingBackpackDuffelSyndicateFilledVectorSuper
+  name: Vector Super bundle
+  description: "Old faithful: The classic Vector Super submachine gun, bundled with twelve assorted magazines."
   components:
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: WeaponSubMachineGunC40rBiocode
+        - id: WeaponSubMachineGunVectorBiocode
         - id: MagazinePistol40SubMachineGunSP
           amount: 6
         - id: MagazinePistol40SubMachineGunFMJ

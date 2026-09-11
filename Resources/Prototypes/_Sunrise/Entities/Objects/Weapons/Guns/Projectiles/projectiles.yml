@@ -1160,7 +1160,8 @@
     damage:
       types:
         Piercing: 75
-        Slash: 20
+        Blunt: 10
+        Slash: 10
   - type: StaminaDamageOnCollide
     damage: 40
 

@@ -229,7 +229,7 @@
 
 - type: listing
   id: UplinkMagazinePistol40SMGSP
-  description: uplink-pistol-magazine-c40r-desc
+  description: uplink-pistol-magazine-vector-super-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
   productEntity: MagazinePistol40SubMachineGunSP
   cost:
@@ -239,7 +239,7 @@
 
 - type: listing
   id: UplinkMagazinePistol40SMGHP
-  description: uplink-pistol-magazine-c40r-desc
+  description: uplink-pistol-magazine-vector-super-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
   productEntity: MagazinePistol40SubMachineGunHP
   cost:
@@ -249,7 +249,7 @@
 
 - type: listing
   id: UplinkMagazinePistol40SMGFMJ
-  description: uplink-pistol-magazine-c40r-desc
+  description: uplink-pistol-magazine-vector-super-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
   productEntity: MagazinePistol40SubMachineGunFMJ
   cost:
@@ -1231,11 +1231,11 @@
       - LoneOpsUplink
 
 - type: listing
-  id: UplinkC40R
-  name: uplink-c40r-name
-  description: uplink-c40r-desc
-  icon: { sprite: _Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi, state: icon }
-  productEntity: BriefcaseWeaponC40Filled
+  id: UplinkVectorSuper
+  name: uplink-vector-super-name
+  description: uplink-vector-super-desc
+  icon: { sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi, state: icon }
+  productEntity: BriefcaseWeaponVectorFilled
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 8
@@ -1251,11 +1251,11 @@
       - LoneOpsUplink
 
 - type: listing
-  id: UplinkC40RBundle
-  name: uplink-c40r-bundle-name
-  description: uplink-c40r-bundle-desc
-  icon: { sprite: _Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi, state: icon }
-  productEntity: ClothingBackpackDuffelSyndicateFilledSMG40
+  id: UplinkVectorSuperBundle
+  name: uplink-vector-super-bundle-name
+  description: uplink-vector-super-bundle-desc
+  icon: { sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateFilledVectorSuper
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 10

@@ -138,14 +138,6 @@
     proto: MisterBlueShit
 
 - type: loadout
-  id: BlueshieldLecterMk3
-  inhand:
-  - WeaponRifleLecterMk3
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: MisterBlueShit50
-
-- type: loadout
   id: BlueshieldAsh12
   inhand:
   - Ash12Box

@@ -5,7 +5,7 @@ on:
 
 jobs:
   labeler:
-    if: github.actor != 'Sunrise-Bot'
+    if: false # Sunrise-Edit - устаревший сценарий Wizden отключён
     permissions:
       contents: read
       pull-requests: write

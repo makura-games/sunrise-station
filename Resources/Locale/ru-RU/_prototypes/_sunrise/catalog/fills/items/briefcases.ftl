@@ -1,7 +1,7 @@
 ent-BriefcaseIAAFilled = { ent-BriefcaseBrown }
     .suffix = АВД
     .desc = { ent-BriefcaseBrown.desc }
-ent-BriefcaseWeaponC40Filled = кейс для C-40r
+ent-BriefcaseWeaponVectorFilled = кейс для «Вектора Супер»
     .desc = { ent-BriefcaseWeaponSmall.desc }
 ent-BriefcaseWeaponSIAR52Filled = кейс для SIAR-52
     .desc = { ent-BriefcaseWeaponSmall.desc }

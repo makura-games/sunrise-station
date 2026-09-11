@@ -74,16 +74,6 @@
     - UpgradeLecter
 
 - type: entity
-  id: LecterMk3Upgrade
-  name: Lecter Mk3 kit
-  description: An advanced modification kit that converts a Lecter Mk2 into a Lecter Mk3.
-  parent: BaseSecurityUpgrade
-  components:
-  - type: Tag
-    tags:
-    - UpgradeLecterMk3
-
-- type: entity
   name: G.O.R.I.L.L.A. gauntlet upgrade chip
   parent: [BaseItem, BaseSyndicateContraband]
   id:  GauntletGORILLAUpgradeKit

@@ -70,30 +70,6 @@
     deconstructionTarget: null
 
 - type: entity
-  name: combat shotgun
-  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
-  id: WeaponShotgunCombat
-  description: A semi automatic shotgun with tactical furniture and a six-shell capacity underneath.
-  components:
-  - type: Item
-    size: Large
-    shape:
-    - 0,0,3,0
-    sprite: _Starlight/Objects/Weapons/Guns/Shotguns/cshotgun_inhands_64x.rsi
-  - type: Gun
-    spread: 20
-    projectileSpeed: 25
-  - type: GunSpreadModifier # Sunrise-Add
-    spread: 1.2
-  - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Shotguns/cshotgun.rsi
-  - type: Clothing
-    sprite: _Starlight/Objects/Weapons/Guns/Shotguns/cshotgun.rsi
-  - type: GunRequiresWield
-  - type: BallisticAmmoProvider
-    capacity: 7
-
-- type: entity
   name: cycler shotgun
   parent: [BaseWeaponShotgunAny, BaseGunWieldable, BaseSecurityContraband] # , BaseSecuritySalvageContraband
   id: WeaponShotgunCycler

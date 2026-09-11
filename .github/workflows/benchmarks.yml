@@ -8,6 +8,7 @@ concurrency: benchmarks
 
 jobs:
   benchmark:
+    if: false # Sunrise-Edit - устаревший сценарий Wizden отключён
     name: Run Benchmarks
     runs-on: ubuntu-latest
     steps:

@@ -39,6 +39,7 @@ uplink-grenade-launcher-emp-extended-ammo-desc = An extended 15-shell EMP cartri
 uplink-magazine-siar52-name = SMG Magazine (.25 caseless)
 uplink-pistol-stechkin-magazine-name = Pistol Magazine .40
 uplink-pistol-stechkin-magazine-desc = A 10-round pistol magazine, compatible with Stechkin series pistols.
+uplink-pistol-magazine-vector-super-desc = A 24-round SMG magazine. Compatible with the Vector Super.
 uplink-magazine-siar52-desc = A 30-round SMG magazine. Compatible with SIAR-52.
 uplink-magazine-bulldog-uraniumslug-desc = Shotgun magazine with 8 shells filled with uranium slugs. Compatible with the Bulldog.
 uplink-magazine-bulldog-uranium-desc = Shotgun magazine with 8 shells filled with uranium pellet. Compatible with the Bulldog.
@@ -87,6 +88,13 @@ uplink-pirate-ammo-308-mixed-name = Bulk basic magazines (.308)
 
 uplink-magazine-127hp-desc = A Bauer SR-127 magazine with 7 hollow point rounds. Trades almost all breaching power for massive personnel damage.
 uplink-sniper-ammo-hp-desc = A box of 14 hollow point cartridges for the Hristov sniper rifle or SR-127. Trades almost all breaching power for massive personnel damage.
+
+## Weapons (Sunrise)
+
+uplink-vector-super-bundle-name = Vector Super Bundle
+uplink-vector-super-bundle-desc = The iconic Vector Super submachine gun bundled with 12 assorted magazines.
+uplink-vector-super-name = Vector Super
+uplink-vector-super-desc = The iconic Vector Super submachine gun bundled with a box of standard .40-caliber ammunition.
 
 ## Misc
 

@@ -229,7 +229,6 @@
 #  recipeUnlocks:
 #  - BaseMagazinePistolCaselessRifleExtended
 #  - MagazinePPSH41Extended
-#  - MagazineMP5Extended
 #  - MagazineMP7Extended
 #  - MagazineRifleExtended
 #  - MagazineDragunovExtended
@@ -271,7 +270,6 @@
   recipeUnlocks:
   - VestSecUpgradeBulletHeavy
   - VestSecUpgradeWeb
-  - LecterMk3Upgrade
   technologyPrerequisites:
   - CombatEquipment
   radioChannels:

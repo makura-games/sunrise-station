@@ -55,3 +55,6 @@ ent-WeaponGrenadeLauncherGL70Biocode = { ent-WeaponGrenadeLauncherGL70 }
 ent-WeaponShotgunMinotaurBiocode = { ent-WeaponShotgunMinotaur }
     .suffix = BIOCODE
     .desc = { ent-WeaponShotgunMinotaur.desc }
+ent-WeaponSubMachineGunVectorBiocode = { ent-WeaponSubMachineGunVector }
+    .suffix = BIOCODE
+    .desc = { ent-WeaponSubMachineGunVector.desc }

@@ -295,9 +295,6 @@
   id: MagazineMachineGunMG42
 
 - type: Tag
-  id: MagazineMP5
-
-- type: Tag
   id: MagazineMP7
 
 - type: Tag
@@ -380,9 +377,6 @@
 
 - type: Tag
   id: UpgradeLecter
-
-- type: Tag
-  id: UpgradeLecterMk3
 
 - type: Tag
   id: UpgradeWebVest

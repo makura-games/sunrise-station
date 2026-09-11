@@ -55,16 +55,16 @@ uplink-pistol-magnum-magazine-ap-name = Магазин (.45 магнум ББ)
 uplink-pistol-magnum-magazine-ap-desc = 7-зарядный однорядный магазин для пистолета. Содержит бронебойные патроны. Совместим с "Диглом".
 uplink-pistol-stechkin-magazine-name = пистолетный магазин .40
 uplink-pistol-stechkin-magazine-desc = Пистолетный магазин на 10 патронов, совместим с пистолетами серии Стечкин.
-uplink-pistol-magazine-c40r-desc = Магазин ПП на 24 патрона. Совместим с C-40r.
+uplink-pistol-magazine-vector-super-desc = Магазин ПП на 24 патрона. Совместим с «Вектором Супер».
 uplink-skm28-ammo-desc = Винтовочный магазин на 20 патронов. Совместим с SKM-28.
 uplink-skm24-ammo-desc = Винтовочный магазин на 30 патронов 7,62x39. Совместим с SKM-24.
 uplink-estoc-ammo-name = Магазин для винтовки (.20)
 uplink-estoc-ammo-desc = Магазин на 25 патронов. Совместим с Эсток.
 ## Weapon (Sunrise)
-uplink-c40r-bundle-name = Набор "C-40r"
-uplink-c40r-bundle-desc = Культовый пистолет-пулемёт C-40r в комплекте с 12 магазинами разных типов.
-uplink-c40r-name = C-40r
-uplink-c40r-desc = Культовый пистолет-пулемет C-40r в комплекте с коробкой стандартных патронов 40-го калибра.
+uplink-vector-super-bundle-name = Набор «Вектор Супер»
+uplink-vector-super-bundle-desc = Культовый пистолет-пулемёт «Вектор Супер» в комплекте с 12 магазинами разных типов.
+uplink-vector-super-name = Вектор Супер
+uplink-vector-super-desc = Культовый пистолет-пулемёт «Вектор Супер» в комплекте с коробкой стандартных патронов 40-го калибра.
 uplink-type88-amr-name = кейс Тип-88 АМР
 uplink-type88-amr-desc = Защищенный кейс с антиматериальной винтовкой Тип-88 АМР и двумя магазинами 15мм.
 

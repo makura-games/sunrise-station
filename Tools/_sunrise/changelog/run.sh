@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Sunrise added start - автоматическое обновление чейнджлога через GitHub Actions
 
 set -euo pipefail
 
@@ -80,4 +79,3 @@ done
 
 report_status error "❌" "Не удалось отправить чейнджлог после пяти попыток."
 exit 1
-# Sunrise added end

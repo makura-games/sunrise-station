@@ -1,17 +1,15 @@
 #!/usr/bin/env python3
-# Sunrise added start - публикация чейнджлога Sunrise в Discord
 #
 # Отправляет новые записи чейнджлога в вебхук Discord после последнего запуска публикации GitHub Actions.
 # Автоматически определяет последний запуск и получает чейнджлог через GitHub API.
 #
 import http.client
 import ipaddress
-import json
-import math
 import os
 import re
 import socket
 import ssl
+import sys
 import time
 import textwrap
 from collections.abc import Mapping
@@ -26,13 +24,21 @@ from typing import Any, Iterable
 from changelog_path import validate_changelog_path
 from changelog_schema import changelog_entry_identity
 from changelog_targets import validate_target_id
+from dispatch_changelogs import published_run_sha
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from discord_notifications.transport import (
+    DiscordPublishTimeoutError,
+    UnexpectedDiscordStatusError,
+    send_message,
+)
 
 DEBUG = False
 DEBUG_CHANGELOG_FILE_OLD = Path("Resources/Changelog/Old.yml")
 GITHUB_API_URL    = os.environ.get("GITHUB_API_URL", "https://api.github.com")
 HTTP_REQUEST_TIMEOUT = 30
 DISCORD_RETRY_LIMIT = 5
-DISCORD_DEFAULT_RETRY_AFTER = 1
 DISCORD_PUBLISH_TIMEOUT = 14 * 60
 DISCORD_COMPONENTS_V2_FLAG = 1 << 15
 MEDIA_MAX_SIZE = 10 * 1024 * 1024
@@ -141,17 +147,6 @@ class MediaError(ValueError):
 
 class UnsafeMediaUrlError(MediaError):
     pass
-
-
-class UnexpectedDiscordStatusError(RuntimeError):
-    def __init__(self, status_code: int) -> None:
-        self.status_code = status_code
-        super().__init__(f"Discord webhook вернул неожиданный статус {status_code}")
-
-
-class DiscordPublishTimeoutError(TimeoutError):
-    def __init__(self) -> None:
-        super().__init__("Истёк общий дедлайн публикации чейнжлога в Discord")
 
 
 def validate_media_url(url: str):
@@ -539,16 +534,13 @@ def get_source_release_before_attempt(
         (
             run
             for run in runs
-            if isinstance(run.get("head_commit"), Mapping)
-            and isinstance(run["head_commit"].get("id"), str)
-            and run["head_commit"]["id"]
+            if published_run_sha(run)
         ),
         None,
     )
     first_release_found = False
     for run in runs:
-        head_commit = run.get("head_commit")
-        sha = head_commit.get("id") if isinstance(head_commit, Mapping) else None
+        sha = published_run_sha(run)
         if not first_release_found:
             if sha == first_sha:
                 first_release_found = True
@@ -603,8 +595,7 @@ def get_last_changelog(changelog_file: Path | None = None) -> str:
             source_run,
             first_attempt,
         )
-        head_commit = most_recent.get("head_commit") if isinstance(most_recent, Mapping) else None
-        last_sha = head_commit.get("id") if isinstance(head_commit, Mapping) else None
+        last_sha = published_run_sha(most_recent) if isinstance(most_recent, Mapping) else None
 
     if not last_sha:
         raise RuntimeError("Не найден предыдущий успешный запуск с SHA опубликованного релиза")
@@ -702,38 +693,6 @@ def diff_changelog(
     )
 
 
-def get_discord_body(content: str):
-    return {
-        "content": content,
-        # Запрещаем любые упоминания.
-        "allowed_mentions": {"parse": []},
-        # Флаг SUPPRESS_EMBEDS.
-        "flags": 1 << 2,
-    }
-
-
-def send_discord(content: str):
-    body = get_discord_body(content)
-
-    response = requests.post(DISCORD_WEBHOOK_URL, json=body, timeout=HTTP_REQUEST_TIMEOUT)
-    response.raise_for_status()
-
-
-def get_retry_after(response: requests.Response) -> int | float:
-    try:
-        retry_after = response.json().get("retry_after")
-    except (AttributeError, TypeError, ValueError):
-        return DISCORD_DEFAULT_RETRY_AFTER
-
-    if isinstance(retry_after, bool):
-        return DISCORD_DEFAULT_RETRY_AFTER
-    if isinstance(retry_after, int):
-        return retry_after if retry_after >= 0 else DISCORD_DEFAULT_RETRY_AFTER
-    if not isinstance(retry_after, float) or not math.isfinite(retry_after) or retry_after < 0:
-        return DISCORD_DEFAULT_RETRY_AFTER
-    return retry_after
-
-
 def _send_discord_payload(
     payload: dict[str, Any],
     deadline: float | None = None,
@@ -741,45 +700,14 @@ def _send_discord_payload(
 ) -> None:
     if deadline is None:
         deadline = time.monotonic() + DISCORD_PUBLISH_TIMEOUT
-
-    webhook_url = DISCORD_WEBHOOK_URL
-    if payload.get("flags", 0) & DISCORD_COMPONENTS_V2_FLAG:
-        separator = "&" if "?" in webhook_url else "?"
-        webhook_url = f"{webhook_url}{separator}with_components=true"
-
-    for retry_count in range(DISCORD_RETRY_LIMIT + 1):
-        remaining = deadline - time.monotonic()
-        if remaining <= 0:
-            raise DiscordPublishTimeoutError
-
-        if files is None:
-            response = requests.post(
-                webhook_url,
-                json=payload,
-                headers={"Content-Type": "application/json"},
-                timeout=min(HTTP_REQUEST_TIMEOUT, remaining),
-            )
-        else:
-            response = requests.post(
-                webhook_url,
-                data={"payload_json": json.dumps(payload, ensure_ascii=False)},
-                files=files,
-                timeout=min(HTTP_REQUEST_TIMEOUT, remaining),
-            )
-
-        if response.status_code in (200, 204):
-            return
-        if response.status_code == 429 and retry_count < DISCORD_RETRY_LIMIT:
-            retry_after = get_retry_after(response)
-            remaining = deadline - time.monotonic()
-            if retry_after >= remaining:
-                response.raise_for_status()
-            print(f"Rate limited: sleep {retry_after} seconds")
-            time.sleep(retry_after)
-            continue
-
-        response.raise_for_status()
-        raise UnexpectedDiscordStatusError(response.status_code)
+    send_message(
+        DISCORD_WEBHOOK_URL,
+        payload,
+        files=files,
+        attempts=DISCORD_RETRY_LIMIT + 1,
+        timeout=HTTP_REQUEST_TIMEOUT,
+        deadline=deadline,
+    )
 
 
 def send_embed_discord(embed: dict, deadline: float | None = None) -> None:
@@ -1088,4 +1016,3 @@ def send_to_discord(entries: Iterable[ChangelogEntry]) -> None:
 
 if __name__ == "__main__":
     main()
-# Sunrise added end

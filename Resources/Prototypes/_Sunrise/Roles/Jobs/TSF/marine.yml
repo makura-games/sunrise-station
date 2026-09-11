@@ -33,7 +33,7 @@
     belt: ClothingBeltTSFMarineWebbing
     pocket1: FlashlightSeclite
     pocket2: WeaponPistolM1911
-    suitstorage: WeaponRifleARG
+    suitstorage: WeaponRifleM16A4
   storage:
     back:
     - BoxSurvivalSecurity
@@ -42,14 +42,14 @@
     - Ointment
     - Gauze
     belt:
-    - MagazineBoxLightRifleFMJ
-    - MagazineLightRifleFMJ
-    - MagazineLightRifleFMJ
-    - MagazineLightRifleFMJ
-    - MagazineLightRifleFMJ
-    - MagazineBoxMagnumSP
-    - MagazineMagnum
-    - MagazineMagnum
+    - MagazineBoxRifleFMJ
+    - MagazineRifleAP
+    - MagazineRifleAP
+    - MagazineRifleAP
+    - MagazineRifleAP
+    - MagazineBoxPistol40FMJ
+    - MagazinePistol40FMJ
+    - MagazinePistol40FMJ
 
 - type: startingGear
   id: TSFMarineLeaderGear
@@ -65,18 +65,18 @@
     belt: ClothingBeltTSFMarineWebbing
     pocket1: FlashlightSeclite
     pocket2: WeaponPistolDeagle
-    suitstorage: WeaponRifleARG
+    suitstorage: WeaponRifleM16A4
   storage:
     back:
     - BoxSurvivalSecurity
     - CrowbarRed
     - MedkitCombatFilled
     belt:
-    - MagazineBoxLightRifleFMJ
-    - MagazineLightRifleFMJ
-    - MagazineLightRifleFMJ
-    - MagazineLightRifleFMJ
-    - MagazineLightRifleFMJ
+    - MagazineBoxRifleFMJ
+    - MagazineRifleAP
+    - MagazineRifleAP
+    - MagazineRifleAP
+    - MagazineRifleAP
     - MagazineBoxMagnumSP
     - MagazineMagnum
     - MagazineMagnum
