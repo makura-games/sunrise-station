@@ -16,6 +16,7 @@ RESULTS = {
     "SKIPPED": "пропущена по условию",
     "NEUTRAL": "нейтральный результат",
     "ACTION_REQUIRED": "нужно действие человека",
+    "STARTUP_FAILURE": "не удалось запустить проверку",
 }
 FAILED_RESULTS = {"FAILURE", "ERROR", "CANCELLED", "TIMED_OUT", "ACTION_REQUIRED", "STARTUP_FAILURE"}
 
@@ -118,8 +119,9 @@ def publish_report(*, github, core, owner, repo, number, head, report, run_id=No
             params={"filter": "all"},
         )
         matching = [check for check in checks
-                    if (check.get("external_id") == prefix or check.get("external_id", "").startswith(prefix + ":"))
-                    and check.get("app", {}).get("slug") == check_app_slug]
+                    if (check.get("external_id") == prefix
+                        or (check.get("external_id") or "").startswith(prefix + ":"))
+                    and (check.get("app") or {}).get("slug") == check_app_slug]
         existing = max(matching, key=lambda check: check["id"], default=None)
     details_url = (f"https://github.com/{owner}/{repo}/actions/runs/{run_id}" if run_id
                    else f"https://github.com/{owner}/{repo}/pull/{number}")

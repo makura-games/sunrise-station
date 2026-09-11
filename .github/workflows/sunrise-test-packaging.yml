@@ -41,8 +41,10 @@ jobs:
       packaging: ${{ steps.filter.outputs.packaging }}
     steps:
       - name: Checkout path filter
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
+          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+          persist-credentials: false
           sparse-checkout: |
             .github/workflows/sunrise-test-packaging.yml
             Tools/_sunrise/ci/check_packaging_paths.py
@@ -80,14 +82,16 @@ jobs:
 
     steps:
       - name: Checkout Master
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: Setup Submodule
         run: |
           git submodule update --init --recursive
 
       - name: Pull engine updates
-        uses: space-wizards/submodule-dependency@v0.1.5
+        uses: space-wizards/submodule-dependency@548a726da00ca348ce9e1ea9f026da8f528caa71 # v0.1.5
 
       - name: Update Engine Submodules
         run: |
@@ -109,7 +113,7 @@ jobs:
       - name: Package ${{ matrix.name }}
         run: dotnet run --project Content.Packaging --configuration Release --no-build -- ${{ matrix.arguments }} --log-build
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: binlogs-${{ matrix.name }}
           path: release/*.binlog

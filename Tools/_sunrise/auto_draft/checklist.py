@@ -117,8 +117,9 @@ def sync_checklist(*, github, owner, repo, number, app_slug, comments=None, **st
         f"/repos/{owner}/{repo}/issues/{number}/comments"
     )
     owned = sorted((comment for comment in comments
-                    if comment.get("user", {}).get("type") == "Bot"
-                    and comment["user"].get("login") == f"{app_slug}[bot]"),
+                    if (comment.get("user") or {}).get("type") == "Bot"
+                    and (comment.get("user") or {}).get("login") == f"{app_slug}[bot]"
+                    and MARKER in (comment.get("body") or "")),
                    key=lambda comment: comment["id"])
     if not owned:
         github.request("POST", f"/repos/{owner}/{repo}/issues/{number}/comments", {"body": body})

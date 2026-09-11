@@ -270,8 +270,8 @@ class AutoDraft:
             pull_request["reviewThreads"]["nodes"], blocking_reviews
         )
         blocking_review_ids = {review["id"] for review in blocking_reviews}
-        blocking_authors = {review.get("author", {}).get("login") for review in blocking_reviews
-                            if review.get("author", {}).get("login")}
+        blocking_authors = {(review.get("author") or {}).get("login") for review in blocking_reviews
+                            if (review.get("author") or {}).get("login")}
         threads_by_review = {}
         unresolved_by_author = set()
         has_unresolved_blocking_threads = False
@@ -281,10 +281,10 @@ class AutoDraft:
             review = comments[0].get("pullRequestReview") if comments else None
             if (not review or not (review["id"] in blocking_review_ids
                     or review.get("state") == "CHANGES_REQUESTED"
-                    and review.get("author", {}).get("login") in blocking_authors)):
+                    and (review.get("author") or {}).get("login") in blocking_authors)):
                 continue
             has_unresolved_blocking_threads = has_unresolved_blocking_threads or not thread["isResolved"]
-            author = review.get("author", {}).get("login")
+            author = (review.get("author") or {}).get("login")
             if not thread["isResolved"] and author:
                 unresolved_by_author.add(author)
             threads_by_review.setdefault(review["id"], []).append(thread)
@@ -361,7 +361,7 @@ class AutoDraft:
             if is_coderabbit_review(review):
                 continue
             threads = threads_by_review.get(review["id"], [])
-            author = review.get("author", {}).get("login") or "ревьювера"
+            author = (review.get("author") or {}).get("login") or "ревьювера"
             suffix = "" if threads else ": требуется новое решение ревьювера, обсуждений у этого требования нет"
             feedback.append({
                 "text": f"Замечания {author}{suffix}",

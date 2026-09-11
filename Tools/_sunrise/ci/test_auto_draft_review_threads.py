@@ -5,6 +5,7 @@ import sys
 import tomllib
 import unittest
 from pathlib import Path
+from urllib.request import Request
 from unittest.mock import patch
 
 
@@ -14,9 +15,9 @@ CI_DIR = REPO_ROOT / "Tools" / "_sunrise" / "ci"
 sys.path.insert(0, str(AUTO_DRAFT_DIR))
 sys.path.insert(0, str(CI_DIR))
 
-from checklist import build_checklist, sync_checklist
+from checklist import MARKER, build_checklist, sync_checklist
 from check_packaging_paths import load_workflow_paths, packaging_needed
-from github_api import GitHub
+from github_api import GitHub, GitHubError, HTTPSRedirectHandler
 from readiness import load_readiness, timestamp
 from report import build_report, publish_report
 from review_threads import AutoDraft, coderabbit_conversation_state, decide_draft_state, load_config
@@ -120,13 +121,15 @@ class ReadinessGitHub:
         raise AssertionError((method, path, body))
 
 
-def inspect(*, now=None, **kwargs):
+def inspect(*, now=None, comments_github=None, report_app_slug="github-actions", **kwargs):
     github = ReadinessGitHub(**kwargs)
     return load_readiness(
         github=github,
+        comments_github=comments_github,
         owner="example",
         repo="repo",
         pull_request=PULL_REQUEST,
+        report_app_slug=report_app_slug,
         rules_cache={},
         now=timestamp(PULL_REQUEST["createdAt"]) + 60 if now is None else now,
     )
@@ -147,6 +150,8 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("uses: actions/create-github-app-token@v3", self.workflow)
         self.assertIn("GH_TOKEN: ${{ steps.app-token.outputs.token }}", self.workflow)
         self.assertIn("run: python3 Tools/_sunrise/auto_draft/review_threads.py", self.workflow)
+        self.assertIn("uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0", self.workflow)
+        self.assertIn('python-version: "3.11"', self.workflow)
         self.assertNotIn("actions/github-script", self.workflow)
         self.assertNotIn("AUTO_DRAFT_TOKEN", self.workflow)
         self.assertIn("sparse-checkout: Tools/_sunrise/auto_draft", self.workflow)
@@ -166,6 +171,12 @@ class WorkflowTests(unittest.TestCase):
         self.assertNotIn("paths:", pull_request)
         self.assertNotIn("pull_request.draft", self.packaging_workflow)
         self.assertIn("name: Check packaging paths", self.packaging_workflow)
+        self.assertIn("ref: ${{ github.event.pull_request.base.sha || github.sha }}", self.packaging_workflow)
+        self.assertEqual(self.packaging_workflow.count("persist-credentials: false"), 2)
+        self.assertIn("actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2", self.packaging_workflow)
+        self.assertIn("space-wizards/submodule-dependency@548a726da00ca348ce9e1ea9f026da8f528caa71 # v0.1.5", self.packaging_workflow)
+        self.assertIn("actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2", self.packaging_workflow)
+        self.assertNotIn("  pull_request_target:", self.packaging_workflow)
         self.assertIn("python3 Tools/_sunrise/ci/check_packaging_paths.py .github/workflows/sunrise-test-packaging.yml", self.packaging_workflow)
         self.assertNotIn("gh api", self.packaging_workflow)
         self.assertIn("gh\",\n            \"api\",", self.packaging_script)
@@ -177,10 +188,14 @@ class WorkflowTests(unittest.TestCase):
 
     def test_upstream_packaging_workflow_is_disabled(self):
         self.assertIn("name: Test Packaging (disabled)", self.disabled_packaging_workflow)
+        self.assertIn("# Sunrise edit start - отключаем автоматический запуск upstream-сценария", self.disabled_packaging_workflow)
+        self.assertIn("# Sunrise-Edit - upstream-сценарий оставлен только для ручного запуска", self.disabled_packaging_workflow)
+        self.assertIn("# Sunrise edit end", self.disabled_packaging_workflow)
         self.assertIn("  workflow_dispatch:", self.disabled_packaging_workflow)
         self.assertNotIn("  pull_request:", self.disabled_packaging_workflow)
         self.assertNotIn("  push:", self.disabled_packaging_workflow)
         self.assertNotIn("concurrency:", self.disabled_packaging_workflow)
+        self.assertIn("--configuration Release --no-build -- server --log-build", self.disabled_packaging_workflow)
 
     def test_toml_config_contains_localized_label_and_migration_name(self):
         config = load_config()
@@ -196,9 +211,10 @@ class WorkflowTests(unittest.TestCase):
 class GitHubApiTests(unittest.TestCase):
     def test_graphql_and_rest_pagination(self):
         class Response:
-            def __init__(self, data, link=""):
+            def __init__(self, data, link="", status=200):
                 self.data = json.dumps(data).encode()
                 self.headers = {"Link": link}
+                self.status = status
 
             def __enter__(self):
                 return self
@@ -212,14 +228,58 @@ class GitHubApiTests(unittest.TestCase):
         graphql = Response({"data": {"repository": {"name": "repo"}}})
         first = Response([{"id": 1}], '<https://api.github.com/items?page=2>; rel="next"')
         second = Response([{"id": 2}])
-        with patch("github_api.urlopen", side_effect=[graphql, first, second]) as urlopen:
-            github = GitHub("token")
+        github = GitHub("token")
+        with patch.object(github._opener, "open", side_effect=[graphql, first, second]) as open_request:
             self.assertEqual(github.graphql("query { viewer { login } }", {}),
                              {"repository": {"name": "repo"}})
             self.assertEqual(github.paginate("/items"), [{"id": 1}, {"id": 2}])
-        self.assertEqual(urlopen.call_count, 3)
-        self.assertEqual(urlopen.call_args_list[0].args[0].headers["Authorization"], "Bearer token")
-        self.assertIn("page=2", urlopen.call_args_list[2].args[0].full_url)
+        self.assertEqual(open_request.call_count, 3)
+        self.assertEqual(open_request.call_args_list[0].args[0].headers["Authorization"], "Bearer token")
+        self.assertIn("page=2", open_request.call_args_list[2].args[0].full_url)
+
+    def test_graphql_errors_preserve_metadata_and_rate_limit(self):
+        class Response:
+            status = 200
+            headers = {"X-RateLimit-Remaining": "0"}
+
+            def __init__(self, data):
+                self.data = json.dumps(data).encode()
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                pass
+
+            def read(self):
+                return self.data
+
+        github = GitHub("token")
+        rate_limited = Response({"errors": [{"type": "RATE_LIMITED", "message": "limit"}]})
+        empty = Response(None)
+        with patch.object(github._opener, "open", side_effect=[rate_limited, empty]):
+            with self.assertRaises(GitHubError) as caught:
+                github.graphql("query { viewer { login } }", {})
+            self.assertEqual(caught.exception.status, 429)
+            self.assertEqual(caught.exception.headers["x-ratelimit-remaining"], "0")
+            with self.assertRaisesRegex(GitHubError, "пустой ответ") as caught:
+                github.graphql("query { viewer { login } }", {})
+            self.assertEqual(caught.exception.status, 200)
+
+    def test_redirects_keep_credentials_only_on_same_https_origin(self):
+        handler = HTTPSRedirectHandler()
+        request = Request("https://api.github.com/items", headers={"Authorization": "Bearer secret"})
+
+        same_origin = handler.redirect_request(
+            request, None, 302, "Found", {}, "https://api.github.com/next"
+        )
+        self.assertEqual(same_origin.get_header("Authorization"), "Bearer secret")
+        other_origin = handler.redirect_request(
+            request, None, 302, "Found", {}, "https://uploads.github.com/next"
+        )
+        self.assertIsNone(other_origin.get_header("Authorization"))
+        with self.assertRaisesRegex(GitHubError, "не на HTTPS"):
+            handler.redirect_request(request, None, 302, "Found", {}, "http://api.github.com/next")
 
 
 class PackagingPathTests(unittest.TestCase):
@@ -376,6 +436,24 @@ class ReadinessTests(unittest.TestCase):
         self.assertFalse(inspect(checks=[CHECK, pending], comments=[skipped], now=after_wait)["code_rabbit_absent"])
         reviews = [{"author": {"__typename": "Bot", "login": "coderabbitai"}}]
         self.assertFalse(inspect(checks=[CHECK], reviews=reviews, now=after_wait)["code_rabbit_absent"])
+        self.assertTrue(inspect(checks=[CHECK], reviews=[{"author": None}], now=after_wait)["code_rabbit_absent"])
+
+    def test_separate_comment_client_and_report_app_slug(self):
+        comments_github = ReadinessGitHub(comments=[limited_comment("Review in progress")])
+        report_check = {
+            **CHECK,
+            "name": "Автодрафт",
+            "databaseId": 99,
+            "externalId": "auto-draft:1:hash",
+            "checkSuite": {"app": {"slug": "autodraft"}, "workflowRun": None},
+        }
+        result = inspect(
+            checks=[CHECK, RABBIT, report_check],
+            comments_github=comments_github,
+            report_app_slug="autodraft",
+        )
+        self.assertEqual(result["report_check"]["id"], 99)
+        self.assertEqual(result["comments"], comments_github.comments)
 
     def test_coderabbit_rate_limit_can_be_disabled(self):
         comment = limited_comment("Rate limit exceeded")
@@ -501,6 +579,22 @@ class ChecklistAndReportTests(unittest.TestCase):
         self.assertEqual(github.calls[-1][0], "PATCH")
         self.assertIn("New required test", github.calls[-1][2]["body"])
 
+    def test_checklist_ignores_unmarked_and_null_user_comments(self):
+        class Comments:
+            def __init__(self):
+                self.calls = []
+
+            def request(self, method, path, body=None):
+                self.calls.append((method, path, body))
+
+        github = Comments()
+        comments = [
+            {"id": 1, "user": None, "body": MARKER},
+            {"id": 2, "user": {"type": "Bot", "login": "autodraft[bot]"}, "body": "другой комментарий"},
+        ]
+        sync_checklist(github=github, comments=comments, **self.state())
+        self.assertEqual([call[0] for call in github.calls], ["POST"])
+
     def test_report_is_idempotent(self):
         class Checks:
             def __init__(self):
@@ -542,6 +636,42 @@ class ChecklistAndReportTests(unittest.TestCase):
             build_report(number=1, readiness=rabbit_readiness, action="draft")["title"],
             "Автодрафт: нужно закрыть обсуждения CodeRabbit",
         )
+
+    def test_report_handles_startup_failure_and_null_check_fields(self):
+        readiness = inspect()
+        readiness["checks_ready"] = False
+        readiness["check_items"] = [{"name": "Startup", "done": False, "result": "STARTUP_FAILURE"}]
+        report = build_report(number=1, readiness=readiness, action="draft")
+        self.assertIn("не удалось запустить проверку", report["summary"])
+
+        class Checks:
+            def __init__(self):
+                self.created = False
+
+            def paginate(self, *_args, **_kwargs):
+                return [{"id": 1, "external_id": None, "app": None}]
+
+            def request(self, method, _path, _body=None):
+                self.created = method == "POST"
+
+        class Core:
+            def info(self, _message):
+                pass
+
+            def summary(self, _message):
+                pass
+
+        github = Checks()
+        publish_report(
+            github=github,
+            core=Core(),
+            owner="example",
+            repo="repo",
+            number=1,
+            head=HEAD,
+            report=report,
+        )
+        self.assertTrue(github.created)
 
 
 class RuntimeTests(unittest.TestCase):

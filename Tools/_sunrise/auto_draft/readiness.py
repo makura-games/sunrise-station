@@ -110,7 +110,7 @@ def load_readiness(*, github, owner, repo, pull_request, rules_cache, comments_g
                 or current["baseRefName"] != pull_request["baseRefName"]):
             raise RuntimeError("ПР изменился во время чтения проверок; требуется повторная синхронизация.")
         created_at = current["createdAt"]
-        has_rabbit_review = any(review.get("author", {}).get("__typename") == "Bot"
+        has_rabbit_review = any((review.get("author") or {}).get("__typename") == "Bot"
                                 for review in current.get("reviews", {}).get("nodes", []))
         commits = current.get("commits", {}).get("nodes", [])
         connection = (((commits[0].get("commit") or {}).get("statusCheckRollup") or {}).get("contexts")
