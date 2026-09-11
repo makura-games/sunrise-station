@@ -1,3 +1,6 @@
+using Content.Shared._Sunrise.Grab.Systems;
+using Content.Shared._Sunrise.Grab;
+using Content.Shared._Sunrise.Grab.Events;
 using Content.Shared._Sunrise.Movement.Carrying;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
@@ -33,6 +36,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared._Sunrise.Grab.Components;
 
 namespace Content.Shared.Movement.Pulling.Systems;
 
@@ -247,6 +251,11 @@ public sealed class PullingSystem : EntitySystem
 
     private void OnVirtualItemDeleted(EntityUid uid, PullerComponent component, VirtualItemDeletedEvent args)
     {
+        // Sunrise added start - fork-specific virtual item handlers may consume extra pull-like items.
+        if (args.Handled)
+            return;
+        // Sunrise added end
+
         // If client deletes the virtual hand then stop the pull.
         if (component.Pulling == null)
             return;
@@ -317,8 +326,11 @@ public sealed class PullingSystem : EntitySystem
 
         var entity = args.Entity;
 
-        if (!_blocker.CanMove(entity))
+        // Sunrise added start - hard grabs still need movement input to reach their escape attempt logic.
+        if (!_blocker.CanMove(entity) &&
+            (!TryComp<GrabbedComponent>(uid, out var grabbed) || grabbed.Stage < GrabStage.Hard))
             return;
+        // Sunrise added end
 
         TryStopPull(uid, component, user: uid);
     }
@@ -497,6 +509,14 @@ public sealed class PullingSystem : EntitySystem
 
         if (pullable.Comp.Puller == pullerUid)
         {
+            // Sunrise added start - allow staged grabs to handle repeated pull toggles without changing pulling state.
+            var ev = new PullToggleAttemptEvent(pullerUid);
+            RaiseLocalEvent(pullable.Owner, ref ev, true);
+
+            if (ev.Handled)
+                return ev.Result;
+            // Sunrise added end
+
             return TryStopPull(pullable, pullable.Comp);
         }
 

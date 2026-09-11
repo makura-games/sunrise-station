@@ -3,6 +3,8 @@ using Content.Shared.Coordinates;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Weapons.Melee;
+using Content.Shared._Sunrise.Grab;
+using Content.Shared._Sunrise.Grab.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
@@ -10,13 +12,18 @@ namespace Content.Shared._Sunrise.Movement.Pulling;
 
 public sealed class SharedPullingAnimationSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
+    private EntityQuery<GrabbedComponent> _grabbedQuery;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        _grabbedQuery = GetEntityQuery<GrabbedComponent>();
 
         SubscribeLocalEvent<PullableComponent, PullStartedMessage>(OnPullStarted);
         SubscribeLocalEvent<PullableComponent, PullStoppedMessage>(OnPullStopped);
@@ -86,6 +93,10 @@ public sealed class SharedPullingAnimationSystem : EntitySystem
     {
         ent.Comp.Effect = PredictedSpawnAttachedTo(ent.Comp.EffectPrototype, ent.Owner.ToCoordinates());
         Dirty(ent);
+
+        var stage = _grabbedQuery.TryComp(ent.Owner, out var grabbed) ? grabbed.Stage : GrabStage.No;
+        if (ent.Comp.Effect is { } effect)
+            _appearance.SetData(effect, GrabVisuals.Stage, stage);
     }
 
     private void OnAnimationShutdown(Entity<ActivePullingAnimationComponent> ent, ref ComponentShutdown args)
@@ -100,7 +111,7 @@ public sealed class SharedPullingAnimationSystem : EntitySystem
     {
         var pullerXform = Transform(puller);
         var targetPos = _transform.GetWorldPosition(pulled);
-        // Переводим мировую позицию цели в локальные координаты тянущего для корректного направления рывка.
+
         var localPos = Vector2.Transform(targetPos, _transform.GetInvWorldMatrix(pullerXform));
         return pullerXform.LocalRotation.RotateVec(localPos);
     }
