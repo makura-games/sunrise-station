@@ -45,6 +45,10 @@ def build_report(*, number, feedback=None, readiness=None, manual_draft=False,
         reason = "ошибки проверок"
     elif not readiness.get("checks_ready"):
         reason = "повторный запуск тестов" if readiness.get("keep_ready_during_rerun") else "ждём проверки"
+    elif readiness.get("code_rabbit_blocking_without_threads", 0):
+        reason = "нужно новое решение CodeRabbit"
+    elif readiness.get("code_rabbit_conversations_unresolved", 0):
+        reason = "нужно закрыть обсуждения CodeRabbit"
     elif not readiness.get("code_rabbit_ready"):
         reason = "ждём CodeRabbit"
 
@@ -67,7 +71,12 @@ def build_report(*, number, feedback=None, readiness=None, manual_draft=False,
             icon = "✅" if item["done"] else "❌" if failed_item(item) else "⏳"
             result = RESULTS.get(item.get("result"), item.get("result") or ("успешно" if item["done"] else "ожидается"))
             lines.append(f"  - {icon} {plain(item['name'])}: {plain(result)}.")
+        rabbit_unresolved = readiness.get("code_rabbit_conversations_unresolved", 0)
         rabbit = (
+            "⏳ CodeRabbit запросил исправления: нужно новое решение"
+            if readiness.get("code_rabbit_blocking_without_threads", 0) else
+            f"⏳ Остались незакрытые обсуждения CodeRabbit: {rabbit_unresolved}"
+            if rabbit_unresolved else
             "ℹ️ CodeRabbit не появился за 10 минут: ожидание пропущено"
             if readiness.get("code_rabbit_absent") else
             "✅ CodeRabbit сообщил о лимите: исключение разрешено"

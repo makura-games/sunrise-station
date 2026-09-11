@@ -30,21 +30,42 @@ def build_checklist(*, owner, repo, number, feedback, readiness, manual_draft=Fa
         *(f"  {checkbox(item['done'], plain(item['text']))}" for item in feedback),
     ]
 
-    if readiness.get("code_rabbit_absent"):
+    rabbit_unresolved = readiness.get("code_rabbit_conversations_unresolved", 0)
+    rabbit_total = readiness.get("code_rabbit_conversations_total", 0)
+    rabbit_blocking_without_threads = readiness.get("code_rabbit_blocking_without_threads", 0)
+    rabbit_review_ready = readiness.get("code_rabbit_review_ready", readiness.get("code_rabbit_ready", False))
+    if readiness.get("code_rabbit_absent") and not rabbit_unresolved:
         lines.append(checkbox(
             True,
             f"~~Дождаться CodeRabbit~~ — бот не появился за {readiness['code_rabbit_wait_minutes']} минут, поэтому ожидание пропущено.",
         ))
     else:
-        lines.extend([
-            checkbox(
-                readiness.get("code_rabbit_ready", False),
+        if rabbit_blocking_without_threads:
+            rabbit_text = "Получить новое решение CodeRabbit: он запросил исправления, но не оставил обсуждений, которые можно закрыть."
+        elif rabbit_unresolved:
+            rabbit_text = (
+                f"Закрыть все обсуждения CodeRabbit во вкладке [Files changed — изменённые файлы]({pr_url}/files). "
+                f"Осталось незакрытых: {rabbit_unresolved}."
+                if rabbit_review_ready else
+                f"Дождаться CodeRabbit и закрыть все его обсуждения во вкладке "
+                f"[Files changed — изменённые файлы]({pr_url}/files). Осталось незакрытых: {rabbit_unresolved}."
+            )
+        else:
+            rabbit_text = (
                 "Проверка CodeRabbit: достигнут лимит запросов, поэтому сейчас разрешено продолжить без нового ревью."
-                if readiness.get("rate_limited")
-                else "Дождаться CodeRabbit: он должен проверить последнюю версию кода. Если бот не появится за 10 минут после создания ПР, этот пункт будет пропущен.",
-            ),
+                if readiness.get("rate_limited") else
+                "Дождаться CodeRabbit: он должен проверить последнюю версию кода. Если бот не появится за 10 минут после создания ПР, этот пункт будет пропущен."
+            )
+        lines.extend([
+            checkbox(readiness.get("code_rabbit_ready", False), rabbit_text),
             "  CodeRabbit — искусственный интеллект: он может ошибаться и предлагать бессмысленные исправления. Сам проверь, действительно ли найден баг. Исправляй настоящие ошибки, а с неверным замечанием объясни своё несогласие в обсуждении.",
         ])
+        if rabbit_total > 20 and rabbit_unresolved:
+            lines.extend([
+                "",
+                "> [!TIP]",
+                "> У CodeRabbit много обсуждений. Если галочка не закрывается, пролистай все изменённые файлы: возможно, где-то осталось незамеченное незакрытое обсуждение.",
+            ])
 
     lines.append(checkbox(
         readiness.get("checks_ready", False),

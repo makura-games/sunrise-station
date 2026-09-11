@@ -16,7 +16,7 @@ from checklist import build_checklist, sync_checklist
 from github_api import GitHub
 from readiness import load_readiness, timestamp
 from report import build_report, publish_report
-from review_threads import AutoDraft, decide_draft_state, load_config
+from review_threads import AutoDraft, coderabbit_conversation_state, decide_draft_state, load_config
 
 
 HEAD = "1234567890abcdef1234567890abcdef12345678"
@@ -217,12 +217,63 @@ class PolicyTests(unittest.TestCase):
               "all_blocking_threads_resolved": True}, "ready"),
             ({"has_marker": True, "latest_blocking_at": 10, "latest_ready_at": 20}, "cleanup"),
             ({"latest_blocking_at": 30, "latest_ready_at": 20}, "draft"),
+            ({"code_rabbit_ready": False}, "draft"),
             ({"is_draft": True}, "keep"),
             ({"is_draft": True, "has_marker": True}, "ready"),
         ]
         for state, expected in cases:
             with self.subTest(state=state):
                 self.assertEqual(self.state(**state), expected)
+
+
+class CodeRabbitConversationTests(unittest.TestCase):
+    @staticmethod
+    def thread(review_id, state="COMMENTED", resolved=False, login="coderabbitai"):
+        return {
+            "isResolved": resolved,
+            "comments": {"nodes": [{"pullRequestReview": {
+                "id": review_id,
+                "state": state,
+                "author": {"login": login},
+            }}]},
+        }
+
+    @staticmethod
+    def blocking(review_id="rabbit-blocking"):
+        return {"id": review_id, "author": {"login": "coderabbitai[bot]"}}
+
+    def test_comment_mode_requires_every_coderabbit_conversation(self):
+        rabbit = self.thread("rabbit-comment")
+        human = self.thread("human-comment", login="human-reviewer")
+        state = coderabbit_conversation_state([rabbit, human], [])
+        self.assertEqual(state, {"total": 1, "unresolved": 1,
+                                 "blocking_without_threads": 0, "resolved": False})
+        rabbit["isResolved"] = True
+        self.assertEqual(
+            coderabbit_conversation_state([rabbit, human], []),
+            {"total": 1, "unresolved": 0, "blocking_without_threads": 0, "resolved": True},
+        )
+
+    def test_request_changes_mode_stays_compatible(self):
+        blocking = self.blocking()
+        state = coderabbit_conversation_state([], [blocking])
+        self.assertFalse(state["resolved"])
+        self.assertEqual(state["blocking_without_threads"], 1)
+        thread = self.thread("rabbit-blocking", state="CHANGES_REQUESTED", resolved=True)
+        self.assertTrue(coderabbit_conversation_state([thread], [blocking])["resolved"])
+
+    def test_mixed_modes_count_all_coderabbit_threads(self):
+        blocking = self.blocking()
+        threads = [
+            self.thread("rabbit-blocking", state="CHANGES_REQUESTED", resolved=True),
+            self.thread("rabbit-comment", resolved=False),
+            self.thread("human", resolved=False, login="reviewer"),
+        ]
+        state = coderabbit_conversation_state(threads, [blocking])
+        self.assertEqual(state, {"total": 2, "unresolved": 1,
+                                 "blocking_without_threads": 0, "resolved": False})
+        threads[1]["isResolved"] = True
+        self.assertTrue(coderabbit_conversation_state(threads, [blocking])["resolved"])
 
 
 class ReadinessTests(unittest.TestCase):
@@ -320,6 +371,41 @@ class ChecklistAndReportTests(unittest.TestCase):
         self.assertNotIn("<script>", hostile)
         self.assertIn("он может ошибаться", body)
 
+    def test_coderabbit_uses_one_checkbox_and_large_review_hint(self):
+        state = self.state()
+        state["feedback"] = []
+        state["readiness"].update({
+            "code_rabbit_review_ready": True,
+            "code_rabbit_ready": False,
+            "code_rabbit_conversations_total": 21,
+            "code_rabbit_conversations_unresolved": 1,
+        })
+        body = build_checklist(**state)
+        rabbit_checkboxes = [line for line in body.splitlines()
+                            if line.startswith("- [") and "CodeRabbit" in line]
+        self.assertEqual(len(rabbit_checkboxes), 1)
+        self.assertIn("Осталось незакрытых: 1", rabbit_checkboxes[0])
+        self.assertIn("> [!TIP]", body)
+        self.assertIn("возможно, где-то осталось незамеченное незакрытое обсуждение", body)
+
+        state["readiness"]["code_rabbit_conversations_total"] = 20
+        self.assertNotIn("> [!TIP]", build_checklist(**state))
+        state["readiness"].update({
+            "code_rabbit_conversations_total": 21,
+            "code_rabbit_conversations_unresolved": 0,
+            "code_rabbit_ready": True,
+        })
+        self.assertNotIn("> [!TIP]", build_checklist(**state))
+
+        state["readiness"].update({
+            "code_rabbit_ready": False,
+            "code_rabbit_blocking_without_threads": 1,
+        })
+        body = build_checklist(**state)
+        self.assertIn("он запросил исправления, но не оставил обсуждений", body)
+        self.assertEqual(sum(line.startswith("- [") and "CodeRabbit" in line
+                             for line in body.splitlines()), 1)
+
     def test_checklist_is_updated_when_required_checks_change(self):
         class Comments:
             def __init__(self):
@@ -378,6 +464,15 @@ class ChecklistAndReportTests(unittest.TestCase):
         publish_report(**{**params, "report": blocked})
         self.assertEqual(github.writes, 2)
         self.assertEqual(github.check["id"], 9)
+        rabbit_readiness = inspect()
+        rabbit_readiness.update({
+            "code_rabbit_ready": False,
+            "code_rabbit_conversations_unresolved": 2,
+        })
+        self.assertEqual(
+            build_report(number=1, readiness=rabbit_readiness, action="draft")["title"],
+            "Автодрафт: нужно закрыть обсуждения CodeRabbit",
+        )
 
 
 class RuntimeTests(unittest.TestCase):
@@ -411,15 +506,15 @@ class RuntimeTests(unittest.TestCase):
             }, core=Core())
             self.assertEqual(status.target_pull_request_numbers(), [3])
 
-    def test_full_sync_converts_blocked_pull_request_to_draft(self):
+    def test_full_sync_converts_unresolved_coderabbit_comment_to_draft(self):
         class RuntimeGitHub:
             def __init__(self):
                 review = {
                     "id": "R1",
-                    "state": "CHANGES_REQUESTED",
+                    "state": "COMMENTED",
                     "submittedAt": "2026-09-01T00:00:00Z",
-                    "authorCanPushToRepository": True,
-                    "author": {"login": "alice"},
+                    "authorCanPushToRepository": False,
+                    "author": {"login": "coderabbitai"},
                 }
                 self.pull = {
                     "id": "PR1",
@@ -433,7 +528,7 @@ class RuntimeTests(unittest.TestCase):
                     "reviewThreads": {"nodes": [{
                         "isResolved": False,
                         "comments": {"nodes": [{"pullRequestReview": {
-                            "id": "R1", "state": "CHANGES_REQUESTED", "author": {"login": "alice"},
+                            "id": "R1", "state": "COMMENTED", "author": {"login": "coderabbitai"},
                         }}]},
                     }], "pageInfo": {"hasNextPage": False, "endCursor": None}},
                     "timelineItems": {"nodes": []},

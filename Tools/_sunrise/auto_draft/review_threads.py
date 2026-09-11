@@ -107,6 +107,39 @@ def latest_timestamp(items):
     return max((timestamp(item["submittedAt"]) for item in items), default=None)
 
 
+def is_coderabbit_review(review):
+    login = ((review or {}).get("author") or {}).get("login", "")
+    return login.removesuffix("[bot]") == "coderabbitai"
+
+
+def coderabbit_conversation_state(threads, blocking_reviews):
+    rabbit_threads = []
+    threads_by_review = {}
+    for thread in threads:
+        comments = thread.get("comments", {}).get("nodes", [])
+        review = comments[0].get("pullRequestReview") if comments else None
+        if not is_coderabbit_review(review):
+            continue
+        rabbit_threads.append(thread)
+        threads_by_review.setdefault(review["id"], []).append(thread)
+
+    rabbit_blocking_reviews = [review for review in blocking_reviews if is_coderabbit_review(review)]
+    unresolved = sum(not thread["isResolved"] for thread in rabbit_threads)
+    blocking_without_threads = sum(not threads_by_review.get(review["id"])
+                                   for review in rabbit_blocking_reviews)
+    blocking_resolved = all(
+        threads_by_review.get(review["id"])
+        and all(thread["isResolved"] for thread in threads_by_review[review["id"]])
+        for review in rabbit_blocking_reviews
+    )
+    return {
+        "total": len(rabbit_threads),
+        "unresolved": unresolved,
+        "blocking_without_threads": blocking_without_threads,
+        "resolved": unresolved == 0 and blocking_resolved,
+    }
+
+
 class AutoDraft:
     def __init__(self, *, github, context, core, config=None, read_github=None):
         self.github = github
@@ -233,6 +266,9 @@ class AutoDraft:
                    if review["authorCanPushToRepository"]]
         blocking_reviews = [review for review in reviews if review["state"] == "CHANGES_REQUESTED"]
         approvals = [review for review in reviews if review["state"] == "APPROVED"]
+        rabbit_conversations = coderabbit_conversation_state(
+            pull_request["reviewThreads"]["nodes"], blocking_reviews
+        )
         blocking_review_ids = {review["id"] for review in blocking_reviews}
         blocking_authors = {review.get("author", {}).get("login") for review in blocking_reviews
                             if review.get("author", {}).get("login")}
@@ -293,6 +329,13 @@ class AutoDraft:
             readiness["error"] = True
             self.core.warning(f"#{number}: не удалось получить готовность проверок: {error}")
 
+        readiness["code_rabbit_review_ready"] = readiness["code_rabbit_ready"]
+        readiness["code_rabbit_conversations_total"] = rabbit_conversations["total"]
+        readiness["code_rabbit_conversations_unresolved"] = rabbit_conversations["unresolved"]
+        readiness["code_rabbit_blocking_without_threads"] = rabbit_conversations["blocking_without_threads"]
+        readiness["code_rabbit_conversations_resolved"] = rabbit_conversations["resolved"]
+        readiness["code_rabbit_ready"] &= rabbit_conversations["resolved"]
+
         action = decide_draft_state(
             is_draft=pull_request["isDraft"],
             has_marker=has_marker,
@@ -307,12 +350,16 @@ class AutoDraft:
             f"#{number}: action={action}, draft={pull_request['isDraft']}, "
             f"blocking={len(blocking_reviews)}, approvals={len(approvals)}, "
             f"threadsResolved={all_blocking_threads_resolved}, checksReady={readiness['checks_ready']}, "
-            f"codeRabbitReady={readiness['code_rabbit_ready']}, rateLimited={readiness.get('rate_limited', False)}, "
+            f"codeRabbitReady={readiness['code_rabbit_ready']}, "
+            f"codeRabbitThreads={rabbit_conversations['total']}/{rabbit_conversations['unresolved']}, "
+            f"rateLimited={readiness.get('rate_limited', False)}, "
             f"pendingChecks={', '.join(plain(name) for name in readiness['pending_checks'])}."
         )
 
         feedback = []
         for review in blocking_reviews:
+            if is_coderabbit_review(review):
+                continue
             threads = threads_by_review.get(review["id"], [])
             author = review.get("author", {}).get("login") or "ревьювера"
             suffix = "" if threads else ": требуется новое решение ревьювера, обсуждений у этого требования нет"
