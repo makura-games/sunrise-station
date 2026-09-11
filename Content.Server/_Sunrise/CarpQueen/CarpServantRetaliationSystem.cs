@@ -5,6 +5,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
+using Content.Shared.Stealth.Components;
 
 namespace Content.Server._Sunrise.CarpQueen;
 
@@ -75,6 +76,13 @@ public sealed class CarpServantRetaliationSystem : EntitySystem
             {
                 Dirty(carpUid, memory);
             }
+
+            // Не агримся на носителя NoTarget.
+            if (HasComp<NoTargetComponent>(attacker)
+                || TryComp(attacker, out StealthComponent? stealth)
+                && stealth.NoTarget
+                && stealth.Enabled)
+                continue;
 
             // Снимаем игнор и агримся на атакующего, чтобы атака стала возможна после снятия дисциплины.
             _npcFaction.UnignoreEntity((carpUid, exception), attacker);

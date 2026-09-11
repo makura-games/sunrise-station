@@ -1,4 +1,5 @@
 using Content.Shared.NPC.Components;
+using Content.Shared.Stealth.Components;
 using System.Linq;
 
 namespace Content.Shared.NPC.Systems;
@@ -99,6 +100,14 @@ public sealed partial class NpcFactionSystem
     /// </summary>
     public void AggroEntity(Entity<FactionExceptionComponent?> ent, Entity<FactionExceptionTrackerComponent?> target)
     {
+        //* Sunrise-Start
+        if (HasComp<NoTargetComponent>(target)
+            || TryComp(target, out StealthComponent? stealth)
+            && stealth.NoTarget
+            && stealth.Enabled)
+            return;
+        //* Sunrise-End
+
         ent.Comp ??= EnsureComp<FactionExceptionComponent>(ent);
         ent.Comp.Hostiles.Add(target);
         target.Comp ??= EnsureComp<FactionExceptionTrackerComponent>(target);
@@ -150,3 +159,4 @@ public sealed partial class NpcFactionSystem
         }
     }
 }
+
