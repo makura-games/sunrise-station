@@ -138,7 +138,7 @@ class WorkflowTests(unittest.TestCase):
         cls.workflow = (REPO_ROOT / ".github" / "workflows" / "sunrise-auto-draft-review-threads.yml").read_text(encoding="utf-8")
         cls.packaging_workflow_path = REPO_ROOT / ".github" / "workflows" / "sunrise-test-packaging.yml"
         cls.packaging_workflow = cls.packaging_workflow_path.read_text(encoding="utf-8-sig")
-        cls.disabled_packaging_workflow = (REPO_ROOT / ".github" / "workflows" / "test-packaging.yml.disabled").read_text(encoding="utf-8-sig")
+        cls.disabled_packaging_workflow = (REPO_ROOT / ".github" / "workflows" / "test-packaging.yml").read_text(encoding="utf-8-sig")
         cls.packaging_script = (CI_DIR / "check_packaging_paths.py").read_text(encoding="utf-8")
         cls.signal_workflow = (REPO_ROOT / ".github" / "workflows" / "sunrise-auto-draft-review-state-changed.yml").read_text(encoding="utf-8")
         cls.coderabbit = (REPO_ROOT / ".coderabbit.yaml").read_text(encoding="utf-8")
@@ -176,10 +176,10 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("name: Test Packaging", self.packaging_workflow)
 
     def test_upstream_packaging_workflow_is_disabled(self):
-        self.assertFalse((REPO_ROOT / ".github" / "workflows" / "test-packaging.yml").exists())
-        self.assertIn("pull_request.draft == false", self.disabled_packaging_workflow)
-        self.assertIn("      - '**.cs'", self.disabled_packaging_workflow.split("  pull_request:\n", 1)[1])
-        self.assertNotIn("Sunrise", self.disabled_packaging_workflow)
+        self.assertIn("name: Test Packaging (disabled)", self.disabled_packaging_workflow)
+        self.assertIn("  workflow_dispatch:", self.disabled_packaging_workflow)
+        self.assertNotIn("  pull_request:", self.disabled_packaging_workflow)
+        self.assertNotIn("  push:", self.disabled_packaging_workflow)
         self.assertNotIn("concurrency:", self.disabled_packaging_workflow)
 
     def test_toml_config_contains_localized_label_and_migration_name(self):
