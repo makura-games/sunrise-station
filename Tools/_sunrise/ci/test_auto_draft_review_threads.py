@@ -249,7 +249,7 @@ for (const testCase of cases) {{
         harness = r"""
 const assert = require('node:assert/strict');
 const run = require('./Tools/_sunrise/auto_draft/review_threads.js');
-const marker = require('./Tools/_sunrise/auto_draft/config.json').label.name;
+const marker = require('./Tools/_sunrise/auto_draft/config.js').label.name;
 process.env.AUTO_DRAFT_APP_SLUG = 'auto-draft-app';
 const review = { id: 'R1', state: 'CHANGES_REQUESTED',
   submittedAt: '2026-09-01T00:00:00Z', authorCanPushToRepository: true,
@@ -278,7 +278,7 @@ function mock(pulls, fail = '') {
       } },
       repos: { listPullRequestsAssociatedWithCommit() {}, async getBranch() { return { data: {} }; } },
       issues: {
-        async getLabel() { return { data: require('./Tools/_sunrise/auto_draft/config.json').label }; },
+        async getLabel() { return { data: require('./Tools/_sunrise/auto_draft/config.js').label }; },
         async createLabel() {},
         async updateLabel() {},
         listComments() {},
@@ -599,7 +599,7 @@ function mock(pulls, fail = '') {
   }
   // Цвет и имя метки обновляются отдельно от её назначения ПР.
   env = mock([pull()]);
-  const config = structuredClone(require('./Tools/_sunrise/auto_draft/config.json'));
+  const config = structuredClone(require('./Tools/_sunrise/auto_draft/config.js'));
   config.label.previousNames = ['старое имя'];
   const labelWrites = [];
   env.config = config;
@@ -615,7 +615,7 @@ function mock(pulls, fail = '') {
   assert.equal(labelWrites[0].color, config.label.color);
   env = mock([pull()]);
   env.config = { label: { ...config.label, color: 'bad-color' } };
-  await assert.rejects(run(env), /config.json/);
+  await assert.rejects(run(env), /config.js/);
   assert.deepEqual(env.actions, []);
   // Полный обход не ограничивается первыми ста ПР.
   env = mock(Array.from({ length: 105 }, (_, index) => pull({ id: 'PR' + (index + 1), number: index + 1,

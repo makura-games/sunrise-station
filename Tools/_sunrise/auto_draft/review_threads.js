@@ -1,4 +1,4 @@
-module.exports = async ({ github, readGithub = github, context, core, config = require('./config.json') }) => {
+module.exports = async ({ github, readGithub = github, context, core, config = require('./config.js') }) => {
   const loadReadiness = require('./readiness.js');
   const { syncChecklist, plain } = require('./checklist.js');
   const { buildReport, publishReport } = require('./report.js');
@@ -9,7 +9,7 @@ module.exports = async ({ github, readGithub = github, context, core, config = r
   if (!label || !validName(label.name) || !/^[a-f0-9]{6}$/i.test(label.color) ||
       typeof label.description !== 'string' || label.description.length > 100 ||
       !Array.isArray(label.previousNames) || !label.previousNames.every(validName))
-    throw new Error('Некорректная метка в auto_draft/config.json: проверь name, шестизначный color, description и previousNames.');
+    throw new Error('Некорректная метка в auto_draft/config.js: проверь name, шестизначный color, description и previousNames.');
   const markerLabel = label.name;
   const markerNames = [...new Set([markerLabel, ...label.previousNames])];
   const appSlug = process.env.AUTO_DRAFT_APP_SLUG;

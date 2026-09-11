@@ -78,8 +78,10 @@ module.exports = async ({ github, commentsGithub = github, owner, repo, pullRequ
     owner, repo, issue_number: pullRequest.number, per_page: 100,
   });
   const rabbitComments = comments.filter(comment => comment.user?.type === 'Bot' && comment.user.login === 'coderabbitai[bot]');
+  const reviewUnavailable = text => /\breview\s+(?:was\s+)?skipped\b|auto(?:matic)?\s+reviews?\s+(?:are|is)\s+(?:disabled|not enabled)|(?:cannot|can't|unable to)\s+(?:perform\s+)?(?:an?\s+)?review\b/i.test(text || '');
   const codeRabbitWaitMinutes = 10;
-  const codeRabbitAbsent = rabbitChecks.length === 0 && !hasRabbitReview && rabbitComments.length === 0 &&
+  const hasRabbitActivity = rabbitComments.some(comment => !reviewUnavailable(comment.body));
+  const codeRabbitAbsent = rabbitChecks.length === 0 && !hasRabbitReview && !hasRabbitActivity &&
     now - Date.parse(createdAt) >= codeRabbitWaitMinutes * 60_000;
   // Формулировки и оформление уведомлений меняются; источник обязательно должен быть настоящим ботом.
   const mentionsLimit = text => /rate[\s_-]*limit(?:ed|ing)?|(?:review|usage|request)\s+(?:limit|quota)(?:\s+(?:has\s+been|is))?\s+(?:reached|exceeded|exhausted)|(?:used|exhausted)\s+(?:all\s+)?(?:\w+\s+){0,4}(?:reviews|quota)|(?:лимит|квота)\s+(?:[\p{L}]+\s+){0,3}(?:исчерпан|превышен|достигнут)|(?:исчерпан|превышен|достигнут)[а-я]*\s+(?:лимит|квота)/iu.test(text || '');

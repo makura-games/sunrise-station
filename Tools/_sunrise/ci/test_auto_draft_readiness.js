@@ -135,6 +135,16 @@ async function inspect({ checks = [check, rabbit], comments = [], requirements =
   result = await inspect({ checks: [check], now: afterWait });
   assert.equal(result.codeRabbitAbsent, true);
   assert.equal(result.codeRabbitReady, true);
+  result = await inspect({ checks: [check], now: afterWait, comments: [{
+    user: { type: 'Bot', login: 'coderabbitai[bot]' },
+    body: 'Review skipped\n\nAutomatic reviews are disabled on this target branch.',
+  }] });
+  assert.equal(result.codeRabbitAbsent, true);
+  assert.equal(result.codeRabbitReady, true);
+  result = await inspect({ checks: [check], now: afterWait, comments: [{
+    user: { type: 'User', login: 'contributor' }, body: 'Review skipped',
+  }] });
+  assert.equal(result.codeRabbitAbsent, true);
   result = await inspect({ checks: [{ ...check, conclusion: 'FAILURE' }], now: afterWait });
   assert.equal(result.checksReady, false);
   for (const evidence of [{ checks: [check, { ...rabbit, state: 'PENDING' }] },
@@ -214,6 +224,8 @@ async function inspect({ checks = [check, rabbit], comments = [], requirements =
   assert.ok(body.includes('Summary'));
   assert.ok(body.includes('Пролистай страницу ПР вниз'));
   assert.ok(body.includes('<details>\n<summary>Как найти список ошибок тестов</summary>'));
+  assert.ok(body.includes('<details>\n<summary>Показать обязательные проверки</summary>'));
+  assert.ok(body.indexOf('Tests') > body.indexOf('<summary>Показать обязательные проверки</summary>'));
   assert.ok(!body.includes('<details open'));
   assert.ok(body.includes('раскрой нужный шард'));
   assert.ok(body.includes('он может ошибаться'));
@@ -241,6 +253,12 @@ async function inspect({ checks = [check, rabbit], comments = [], requirements =
   comments = [owned];
   await syncChecklist({ github, ...state });
   assert.equal(calls.length, 0);
+  comments = [owned];
+  await syncChecklist({ github, ...state, readiness: { ...state.readiness,
+    checkItems: [...state.readiness.checkItems, { name: 'New required test', done: false }] } });
+  const requiredChecksUpdate = calls.pop();
+  assert.equal(requiredChecksUpdate[0], 'update', 'Изменившийся состав проверок должен обновить комментарий');
+  assert.ok(requiredChecksUpdate[1].body.includes('New required test'));
   comments = [{ ...owned, body: 'Всё готово, маркер тоже удалён' }];
   await syncChecklist({ github, ...state });
   assert.deepEqual(calls.pop(), ['update', { owner: 'example', repo: 'repo', comment_id: 7, body }]);
