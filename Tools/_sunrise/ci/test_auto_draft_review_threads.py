@@ -10,9 +10,12 @@ from unittest.mock import patch
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 AUTO_DRAFT_DIR = REPO_ROOT / "Tools" / "_sunrise" / "auto_draft"
+CI_DIR = REPO_ROOT / "Tools" / "_sunrise" / "ci"
 sys.path.insert(0, str(AUTO_DRAFT_DIR))
+sys.path.insert(0, str(CI_DIR))
 
 from checklist import build_checklist, sync_checklist
+from check_packaging_paths import load_workflow_paths, packaging_needed
 from github_api import GitHub
 from readiness import load_readiness, timestamp
 from report import build_report, publish_report
@@ -133,7 +136,10 @@ class WorkflowTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.workflow = (REPO_ROOT / ".github" / "workflows" / "sunrise-auto-draft-review-threads.yml").read_text(encoding="utf-8")
-        cls.packaging_workflow = (REPO_ROOT / ".github" / "workflows" / "test-packaging.yml").read_text(encoding="utf-8-sig")
+        cls.packaging_workflow_path = REPO_ROOT / ".github" / "workflows" / "sunrise-test-packaging.yml"
+        cls.packaging_workflow = cls.packaging_workflow_path.read_text(encoding="utf-8-sig")
+        cls.disabled_packaging_workflow = (REPO_ROOT / ".github" / "workflows" / "test-packaging.yml.disabled").read_text(encoding="utf-8-sig")
+        cls.packaging_script = (CI_DIR / "check_packaging_paths.py").read_text(encoding="utf-8")
         cls.signal_workflow = (REPO_ROOT / ".github" / "workflows" / "sunrise-auto-draft-review-state-changed.yml").read_text(encoding="utf-8")
         cls.coderabbit = (REPO_ROOT / ".coderabbit.yaml").read_text(encoding="utf-8")
 
@@ -160,11 +166,21 @@ class WorkflowTests(unittest.TestCase):
         self.assertNotIn("paths:", pull_request)
         self.assertNotIn("pull_request.draft", self.packaging_workflow)
         self.assertIn("name: Check packaging paths", self.packaging_workflow)
-        self.assertIn("gh api --paginate", self.packaging_workflow)
-        self.assertIn("*.cs|*.csproj|*.sln|*.git*|*.yml|RobustToolbox|RobustToolbox/*", self.packaging_workflow)
+        self.assertIn("python3 Tools/_sunrise/ci/check_packaging_paths.py .github/workflows/sunrise-test-packaging.yml", self.packaging_workflow)
+        self.assertNotIn("gh api", self.packaging_workflow)
+        self.assertIn("gh\",\n            \"api\",", self.packaging_script)
+        for pattern in load_workflow_paths(self.packaging_workflow_path):
+            self.assertNotIn(pattern, self.packaging_script)
         self.assertIn("needs: [changes, package]", self.packaging_workflow)
         self.assertIn('if [[ "$PACKAGING_NEEDED" == "false" ]]', self.packaging_workflow)
         self.assertIn("name: Test Packaging", self.packaging_workflow)
+
+    def test_upstream_packaging_workflow_is_disabled(self):
+        self.assertFalse((REPO_ROOT / ".github" / "workflows" / "test-packaging.yml").exists())
+        self.assertIn("pull_request.draft == false", self.disabled_packaging_workflow)
+        self.assertIn("      - '**.cs'", self.disabled_packaging_workflow.split("  pull_request:\n", 1)[1])
+        self.assertNotIn("Sunrise", self.disabled_packaging_workflow)
+        self.assertNotIn("concurrency:", self.disabled_packaging_workflow)
 
     def test_toml_config_contains_localized_label_and_migration_name(self):
         config = load_config()
@@ -204,6 +220,27 @@ class GitHubApiTests(unittest.TestCase):
         self.assertEqual(urlopen.call_count, 3)
         self.assertEqual(urlopen.call_args_list[0].args[0].headers["Authorization"], "Bearer token")
         self.assertIn("page=2", urlopen.call_args_list[2].args[0].full_url)
+
+
+class PackagingPathTests(unittest.TestCase):
+    def test_paths_come_from_workflow_and_match_changed_files(self):
+        workflow = REPO_ROOT / ".github" / "workflows" / "sunrise-test-packaging.yml"
+        patterns = load_workflow_paths(workflow)
+
+        for path in (
+            "Content.Server/Foo.cs",
+            "Content.Server/Content.Server.csproj",
+            "SpaceStation14.sln",
+            ".gitmodules",
+            "Resources/Prototypes/foo.yml",
+            "RobustToolbox",
+            "RobustToolbox/Robust.Shared/Foo.txt",
+        ):
+            with self.subTest(path=path):
+                self.assertTrue(packaging_needed([path], patterns))
+
+        self.assertFalse(packaging_needed(["README.md", "Resources/Textures/foo.png"], patterns))
+        self.assertFalse(packaging_needed(["Other/RobustToolbox/foo.txt"], patterns))
 
 
 class PolicyTests(unittest.TestCase):

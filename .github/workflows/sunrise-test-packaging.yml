@@ -1,4 +1,4 @@
-﻿name: Test Packaging
+name: Test Packaging
 
 on:
   push:
@@ -22,41 +22,30 @@ permissions:
   contents: read
   pull-requests: read
 
-# Sunrise added start - отменяем устаревший запуск этой проверки для того же PR
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
-# Sunrise added end
 
 jobs:
-  # Sunrise edit start - распределяем независимые цели упаковки по матрице и сохраняем единый обязательный статус
   changes:
     name: Check packaging paths
     runs-on: ubuntu-latest
     outputs:
       packaging: ${{ steps.filter.outputs.packaging }}
     steps:
+      - name: Checkout path filter
+        uses: actions/checkout@v4.2.2
+        with:
+          sparse-checkout: |
+            .github/workflows/sunrise-test-packaging.yml
+            Tools/_sunrise/ci/check_packaging_paths.py
+          sparse-checkout-cone-mode: false
+
       - name: Check changed files
         id: filter
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          if [[ "$GITHUB_EVENT_NAME" != "pull_request" ]]; then
-            echo "packaging=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          changed_files="$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/${{ github.event.pull_request.number }}/files" --jq '.[] | .filename, (.previous_filename // empty)')"
-          packaging=false
-          while IFS= read -r path; do
-            case "$path" in
-              *.cs|*.csproj|*.sln|*.git*|*.yml|RobustToolbox|RobustToolbox/*)
-                packaging=true
-                break
-                ;;
-            esac
-          done <<< "$changed_files"
-          echo "packaging=$packaging" >> "$GITHUB_OUTPUT"
+        run: python3 Tools/_sunrise/ci/check_packaging_paths.py .github/workflows/sunrise-test-packaging.yml >> "$GITHUB_OUTPUT"
 
   package:
     name: Package ${{ matrix.name }}
@@ -140,4 +129,3 @@ jobs:
             echo "::error title=Packaging failed::At least one packaging job did not succeed."
             exit 1
           fi
-  # Sunrise edit end
