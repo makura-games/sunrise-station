@@ -150,7 +150,7 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("uses: actions/create-github-app-token@v3", self.workflow)
         self.assertIn("GH_TOKEN: ${{ steps.app-token.outputs.token }}", self.workflow)
         self.assertIn("run: python3 Tools/_sunrise/auto_draft/review_threads.py", self.workflow)
-        self.assertIn("uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0", self.workflow)
+        self.assertIn("uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0", self.workflow)
         self.assertIn('python-version: "3.11"', self.workflow)
         self.assertIn("# Sunrise edit start - фиксируем Python с поддержкой tomllib", self.workflow)
         self.assertIn("# Sunrise edit end", self.workflow)
@@ -160,6 +160,7 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("permissions: {}", self.workflow)
         self.assertIn("cancel-in-progress: false", self.workflow)
         self.assertIn("queue: max", self.workflow)
+        self.assertIn('cron: "7/10 * * * *"', self.workflow)
 
     def test_review_events_and_coderabbit_settings_are_preserved(self):
         self.assertIn("pull_request_review:", self.signal_workflow)
@@ -171,6 +172,7 @@ class WorkflowTests(unittest.TestCase):
     def test_packaging_uses_fast_gate_and_runs_for_drafts(self):
         pull_request = self.packaging_workflow.split("  pull_request:\n", 1)[1].split("\n\n", 1)[0]
         self.assertNotIn("paths:", pull_request)
+        self.assertNotIn("ready_for_review", pull_request)
         self.assertNotIn("pull_request.draft", self.packaging_workflow)
         self.assertIn("name: Check packaging paths", self.packaging_workflow)
         self.assertIn("ref: ${{ github.sha }}", self.packaging_workflow)
@@ -561,6 +563,17 @@ class ChecklistAndReportTests(unittest.TestCase):
         self.assertIn("он запросил исправления, но не оставил обсуждений", body)
         self.assertEqual(sum(line.startswith("- [") and "CodeRabbit" in line
                              for line in body.splitlines()), 1)
+
+    def test_completed_coderabbit_checklist_text_is_not_stale(self):
+        state = self.state()
+        state["feedback"] = []
+        state["readiness"].update({
+            "code_rabbit_review_ready": True,
+            "code_rabbit_ready": True,
+        })
+        body = build_checklist(**state)
+        self.assertIn("- [x] CodeRabbit проверил последнюю версию кода.", body)
+        self.assertNotIn("Дождаться CodeRabbit", body)
 
     def test_checklist_is_updated_when_required_checks_change(self):
         class Comments:

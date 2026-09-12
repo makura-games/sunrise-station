@@ -54,6 +54,8 @@ def build_checklist(*, owner, repo, number, feedback, readiness, manual_draft=Fa
             rabbit_text = (
                 "Проверка CodeRabbit: достигнут лимит запросов, поэтому сейчас разрешено продолжить без нового ревью."
                 if readiness.get("rate_limited") else
+                "CodeRabbit проверил последнюю версию кода."
+                if rabbit_review_ready else
                 "Дождаться CodeRabbit: он должен проверить последнюю версию кода. Если бот не появится за 10 минут после создания ПР, этот пункт будет пропущен."
             )
         lines.extend([
