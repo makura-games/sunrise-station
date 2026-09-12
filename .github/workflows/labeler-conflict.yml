@@ -10,7 +10,6 @@ on:
 jobs:
   Label:
     if: false # Sunrise-Edit - устаревший сценарий Wizden отключён
-    # if: github.actor != 'Sunrise-Bot'
     runs-on: ubuntu-latest
     steps:
       - name: Check for Merge Conflicts

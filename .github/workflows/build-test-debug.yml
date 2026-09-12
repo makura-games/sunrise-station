@@ -16,7 +16,6 @@ concurrency:
 
 jobs:
   build:
-    if: github.actor != 'Sunrise-Bot'
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Master
@@ -184,7 +183,7 @@ jobs:
       - content-tests
       - integration-tests
     # Sunrise edit start - итоговый статус явно отражает падение, отмену или пропуск обязательной зависимости
-    if: ${{ always() && github.actor != 'Sunrise-Bot' }}
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

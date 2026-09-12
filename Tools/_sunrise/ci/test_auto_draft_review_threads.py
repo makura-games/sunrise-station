@@ -190,10 +190,13 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("CHANGES_RESULT: ${{ needs.changes.result }}", self.packaging_workflow)
         self.assertIn('if [[ "$PACKAGING_NEEDED" == "false" ]]', self.packaging_workflow)
         self.assertIn('if: ${{ always() }}', self.packaging_workflow)
-        self.assertIn('PACKAGING_ACTOR\" == \"Sunrise-Bot\"', self.packaging_workflow)
+        self.assertIn("if: needs.changes.outputs.packaging == 'true'", self.packaging_workflow)
+        self.assertNotIn("PACKAGING_ACTOR", self.packaging_workflow)
+        self.assertNotIn("Sunrise-Bot", self.packaging_workflow)
+        self.assertNotIn("PJBot", self.packaging_workflow)
         self.assertLess(
             self.packaging_workflow.index('if [[ "$CHANGES_RESULT" != "success" ]]'),
-            self.packaging_workflow.index('if [[ "$PACKAGE_RESULT" == "skipped"'),
+            self.packaging_workflow.index('if [[ "$PACKAGING_NEEDED" == "false" ]]'),
         )
         self.assertIn("name: Test Packaging", self.packaging_workflow)
 
@@ -206,6 +209,7 @@ class WorkflowTests(unittest.TestCase):
         self.assertNotIn("  pull_request:", self.disabled_packaging_workflow)
         self.assertNotIn("  push:", self.disabled_packaging_workflow)
         self.assertNotIn("concurrency:", self.disabled_packaging_workflow)
+        self.assertNotIn("PJBot", self.disabled_packaging_workflow)
         self.assertIn("--configuration Release --no-build -- server --log-build", self.disabled_packaging_workflow)
 
     def test_toml_config_contains_localized_label_and_migration_name(self):

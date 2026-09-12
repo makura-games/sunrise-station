@@ -59,7 +59,7 @@ jobs:
   package:
     name: Package ${{ matrix.name }}
     needs: changes
-    if: github.actor != 'Sunrise-Bot' && github.actor != 'PJBot' && needs.changes.outputs.packaging == 'true'
+    if: needs.changes.outputs.packaging == 'true'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -128,7 +128,6 @@ jobs:
       - name: Verify packaging jobs
         env:
           CHANGES_RESULT: ${{ needs.changes.result }}
-          PACKAGING_ACTOR: ${{ github.actor }}
           PACKAGING_NEEDED: ${{ needs.changes.outputs.packaging }}
           PACKAGE_RESULT: ${{ needs.package.result }}
         run: |
@@ -139,11 +138,6 @@ jobs:
 
           if [[ "$PACKAGING_NEEDED" == "false" ]]; then
             echo "Packaging is not required for the changed files."
-            exit 0
-          fi
-
-          if [[ "$PACKAGE_RESULT" == "skipped" && ( "$PACKAGING_ACTOR" == "Sunrise-Bot" || "$PACKAGING_ACTOR" == "PJBot" ) ]]; then
-            echo "Packaging was skipped for the automation bot."
             exit 0
           fi
 

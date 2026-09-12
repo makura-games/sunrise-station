@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Test Packaging
-    if: github.actor != 'PJBot' && github.event.pull_request.draft == false
+    if: github.event.pull_request.draft == false # Sunrise-Edit - ботам не нужны отдельные исключения CI
     runs-on: ubuntu-latest
 
     steps:

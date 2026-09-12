@@ -16,7 +16,6 @@ concurrency:
 jobs:
   build:
     name: YAML Linter
-    if: github.actor != 'Sunrise-Bot'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4.2.2
