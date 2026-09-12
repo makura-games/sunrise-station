@@ -164,6 +164,9 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("cancel-in-progress: false", self.workflow)
         self.assertIn("queue: max", self.workflow)
         self.assertIn('cron: "7/10 * * * *"', self.workflow)
+        self.assertIn("github.event.action != 'converted_to_draft'", self.workflow)
+        self.assertIn("github.event.action != 'ready_for_review'", self.workflow)
+        self.assertIn("github.event.sender.type != 'Bot'", self.workflow)
 
     def test_review_events_and_coderabbit_settings_are_preserved(self):
         self.assertIn("pull_request_review:", self.signal_workflow)
@@ -171,6 +174,7 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn('workflows: ["PR: Automatic Draft Management - Review Events", "Build & Test Debug", "YAML Linter"]', self.workflow)
         self.assertIn("request_changes_workflow: true", self.coderabbit)
         self.assertIn("drafts: true", self.coderabbit)
+        self.assertIn("auto_pause_after_reviewed_commits: 0", self.coderabbit)
 
     def test_packaging_uses_fast_gate_and_runs_for_drafts(self):
         pull_request = self.packaging_workflow.split("  pull_request:\n", 1)[1].split("\n\n", 1)[0]
@@ -391,20 +395,25 @@ class CodeRabbitConversationTests(unittest.TestCase):
         human = self.thread("human-comment", login="human-reviewer")
         state = coderabbit_conversation_state([rabbit, human], [])
         self.assertEqual(state, {"total": 1, "unresolved": 1,
-                                 "blocking_without_threads": 0, "resolved": False})
+                                 "blocking_without_threads": 0, "approval_required": False,
+                                 "resolved": False})
         rabbit["isResolved"] = True
         self.assertEqual(
             coderabbit_conversation_state([rabbit, human], []),
-            {"total": 1, "unresolved": 0, "blocking_without_threads": 0, "resolved": True},
+            {"total": 1, "unresolved": 0, "blocking_without_threads": 0,
+             "approval_required": False, "resolved": True},
         )
 
     def test_request_changes_mode_stays_compatible(self):
         blocking = self.blocking()
         state = coderabbit_conversation_state([], [blocking])
         self.assertFalse(state["resolved"])
+        self.assertTrue(state["approval_required"])
         self.assertEqual(state["blocking_without_threads"], 1)
         thread = self.thread("rabbit-blocking", state="CHANGES_REQUESTED", resolved=True)
-        self.assertTrue(coderabbit_conversation_state([thread], [blocking])["resolved"])
+        state = coderabbit_conversation_state([thread], [blocking])
+        self.assertTrue(state["resolved"])
+        self.assertTrue(state["approval_required"])
 
     def test_mixed_modes_count_all_coderabbit_threads(self):
         blocking = self.blocking()
@@ -415,7 +424,8 @@ class CodeRabbitConversationTests(unittest.TestCase):
         ]
         state = coderabbit_conversation_state(threads, [blocking])
         self.assertEqual(state, {"total": 2, "unresolved": 1,
-                                 "blocking_without_threads": 0, "resolved": False})
+                                 "blocking_without_threads": 0, "approval_required": True,
+                                 "resolved": False})
         threads[1]["isResolved"] = True
         self.assertTrue(coderabbit_conversation_state(threads, [blocking])["resolved"])
 
@@ -581,6 +591,12 @@ class ChecklistAndReportTests(unittest.TestCase):
 
         state["readiness"].update({
             "code_rabbit_ready": False,
+            "code_rabbit_approval_required": True,
+        })
+        self.assertIn("Дождаться одобрения CodeRabbit", build_checklist(**state))
+
+        state["readiness"].update({
+            "code_rabbit_ready": False,
             "code_rabbit_blocking_without_threads": 1,
         })
         body = build_checklist(**state)
@@ -681,6 +697,14 @@ class ChecklistAndReportTests(unittest.TestCase):
         self.assertEqual(
             build_report(number=1, readiness=rabbit_readiness, action="draft")["title"],
             "Автодрафт: нужно закрыть обсуждения CodeRabbit",
+        )
+        rabbit_readiness.update({
+            "code_rabbit_conversations_unresolved": 0,
+            "code_rabbit_approval_required": True,
+        })
+        self.assertEqual(
+            build_report(number=1, readiness=rabbit_readiness, action="draft")["title"],
+            "Автодрафт: ждём одобрение CodeRabbit",
         )
 
     def test_report_handles_startup_failure_and_null_check_fields(self):

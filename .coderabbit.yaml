@@ -22,6 +22,7 @@ reviews:
   request_changes_workflow: true
   auto_review:
     drafts: true
+    auto_pause_after_reviewed_commits: 0
   path_instructions:
     - path: "**/*"
       instructions: |

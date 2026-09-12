@@ -33,6 +33,7 @@ def build_checklist(*, owner, repo, number, feedback, readiness, manual_draft=Fa
     rabbit_unresolved = readiness.get("code_rabbit_conversations_unresolved", 0)
     rabbit_total = readiness.get("code_rabbit_conversations_total", 0)
     rabbit_blocking_without_threads = readiness.get("code_rabbit_blocking_without_threads", 0)
+    rabbit_approval_required = readiness.get("code_rabbit_approval_required", False)
     rabbit_review_ready = readiness.get("code_rabbit_review_ready", readiness.get("code_rabbit_ready", False))
     if readiness.get("code_rabbit_absent") and not rabbit_unresolved:
         lines.append(checkbox(
@@ -50,6 +51,8 @@ def build_checklist(*, owner, repo, number, feedback, readiness, manual_draft=Fa
                 f"Дождаться CodeRabbit и закрыть все его обсуждения во вкладке "
                 f"[Files changed — изменённые файлы]({pr_url}/files). Осталось незакрытых: {rabbit_unresolved}."
             )
+        elif rabbit_approval_required:
+            rabbit_text = "Дождаться одобрения CodeRabbit: обсуждения закрыты, но его GitHub-ревью всё ещё требует исправлений."
         else:
             rabbit_text = (
                 "Проверка CodeRabbit: достигнут лимит запросов, поэтому сейчас разрешено продолжить без нового ревью."

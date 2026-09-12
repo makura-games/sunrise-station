@@ -50,6 +50,8 @@ def build_report(*, number, feedback=None, readiness=None, manual_draft=False,
         reason = "нужно новое решение CodeRabbit"
     elif readiness.get("code_rabbit_conversations_unresolved", 0):
         reason = "нужно закрыть обсуждения CodeRabbit"
+    elif readiness.get("code_rabbit_approval_required"):
+        reason = "ждём одобрение CodeRabbit"
     elif not readiness.get("code_rabbit_ready"):
         reason = "ждём CodeRabbit"
 
@@ -78,6 +80,8 @@ def build_report(*, number, feedback=None, readiness=None, manual_draft=False,
             if readiness.get("code_rabbit_blocking_without_threads", 0) else
             f"⏳ Остались незакрытые обсуждения CodeRabbit: {rabbit_unresolved}"
             if rabbit_unresolved else
+            "⏳ CodeRabbit должен заменить требование исправлений на одобрение"
+            if readiness.get("code_rabbit_approval_required") else
             "ℹ️ CodeRabbit не появился за 10 минут: ожидание пропущено"
             if readiness.get("code_rabbit_absent") else
             "✅ CodeRabbit сообщил о лимите: исключение разрешено"

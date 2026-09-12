@@ -136,6 +136,7 @@ def coderabbit_conversation_state(threads, blocking_reviews):
         "total": len(rabbit_threads),
         "unresolved": unresolved,
         "blocking_without_threads": blocking_without_threads,
+        "approval_required": bool(rabbit_blocking_reviews),
         "resolved": unresolved == 0 and blocking_resolved,
     }
 
@@ -333,8 +334,10 @@ class AutoDraft:
         readiness["code_rabbit_conversations_total"] = rabbit_conversations["total"]
         readiness["code_rabbit_conversations_unresolved"] = rabbit_conversations["unresolved"]
         readiness["code_rabbit_blocking_without_threads"] = rabbit_conversations["blocking_without_threads"]
+        readiness["code_rabbit_approval_required"] = rabbit_conversations["approval_required"]
         readiness["code_rabbit_conversations_resolved"] = rabbit_conversations["resolved"]
-        readiness["code_rabbit_ready"] &= rabbit_conversations["resolved"]
+        readiness["code_rabbit_ready"] &= (rabbit_conversations["resolved"]
+                                             and not rabbit_conversations["approval_required"])
 
         action = decide_draft_state(
             is_draft=pull_request["isDraft"],
