@@ -38,6 +38,8 @@ def build_report(*, number, feedback=None, readiness=None, manual_draft=False,
         reason = "повторная проверка позже"
     elif readiness.get("has_merge_conflicts"):
         reason = "конфликты слияния"
+    elif readiness.get("merge_state_unknown"):
+        reason = "GitHub проверяет конфликты"
     elif manual_override:
         reason = "ручной режим"
     elif manual_draft:
@@ -95,7 +97,9 @@ def build_report(*, number, feedback=None, readiness=None, manual_draft=False,
             "⏳ Ожидается CodeRabbit"
         )
         lines.extend([f"- {rabbit}.", ""])
-        if readiness.get("has_merge_conflicts"):
+        if readiness.get("merge_state_unknown"):
+            lines.append("Состояние ПР не изменено: GitHub ещё вычисляет наличие конфликтов.")
+        elif readiness.get("has_merge_conflicts"):
             lines.append("ПР находится в черновике до решения конфликтов слияния.")
         elif manual_draft:
             lines.append("Ручной черновик сохранён: автор сам подтверждает готовность.")

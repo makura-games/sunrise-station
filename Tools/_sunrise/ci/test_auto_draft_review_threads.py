@@ -375,6 +375,20 @@ class PolicyTests(unittest.TestCase):
             with self.subTest(state=state):
                 self.assertEqual(self.state(**state), expected)
 
+    def test_manual_draft_stays_manual_when_conflicts_resolve(self):
+        self.assertEqual(self.state(is_draft=True, has_merge_conflicts=True), "keep")
+        self.assertEqual(self.state(is_draft=True, has_merge_conflicts=False), "keep")
+
+    def test_unknown_merge_state_preserves_current_state(self):
+        cases = [
+            {"has_marker": True},
+            {"checks_ready": False},
+            {"is_draft": True, "has_marker": True},
+        ]
+        for state in cases:
+            with self.subTest(state=state):
+                self.assertEqual(self.state(**state, merge_state_unknown=True), "keep")
+
 
 class CodeRabbitConversationTests(unittest.TestCase):
     @staticmethod
@@ -630,6 +644,8 @@ class ChecklistAndReportTests(unittest.TestCase):
             "Автодрафт: конфликты слияния",
         )
         state["readiness"]["has_merge_conflicts"] = False
+        self.assertNotIn("Решить конфликты слияния", build_checklist(**state))
+        state["readiness"]["merge_state_unknown"] = True
         self.assertNotIn("Решить конфликты слияния", build_checklist(**state))
 
     def test_checklist_is_updated_when_required_checks_change(self):
@@ -895,7 +911,7 @@ class RuntimeTests(unittest.TestCase):
         github.pull.update({"isDraft": True, "mergeable": "CONFLICTING"})
         with patch.dict(os.environ, {"AUTO_DRAFT_APP_SLUG": "autodraft"}):
             AutoDraft(github=github, context=context, core=Core()).run()
-        self.assertEqual(github.actions, ["comment", "label", "check"])
+        self.assertEqual(github.actions, ["comment", "check"])
 
 
 if __name__ == "__main__":
