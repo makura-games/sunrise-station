@@ -65,7 +65,7 @@ def limited_comment(body="Review rate limited."):
 class ReadinessGitHub:
     def __init__(self, *, checks=None, comments=None, requirements=None, classic=None,
                  pages=None, response_head=HEAD, workflows=None, runs=None, reviews=None,
-                 previous_attempt=None, fail=None):
+                 statuses=None, previous_attempt=None, fail=None):
         self.checks = [CHECK, RABBIT] if checks is None else checks
         self.comments = comments or []
         self.requirements = [REQUIREMENT] if requirements is None else requirements
@@ -75,6 +75,7 @@ class ReadinessGitHub:
         self.workflows = workflows or []
         self.runs = runs or []
         self.reviews = reviews or []
+        self.statuses = statuses or []
         self.previous_attempt = previous_attempt or {}
         self.fail = fail
 
@@ -106,6 +107,8 @@ class ReadinessGitHub:
             return self.comments
         if path.endswith("/actions/runs"):
             return self.runs
+        if path.endswith("/statuses"):
+            return self.statuses
         raise AssertionError(path)
 
     def request(self, method, path, body=None):
@@ -483,6 +486,19 @@ class ReadinessTests(unittest.TestCase):
             self.assertFalse(inspect(checks=[CHECK], comments=[comment])["code_rabbit_ready"])
         user_comment = {**comment, "user": {"type": "User", "login": "contributor"}}
         self.assertFalse(inspect(checks=[CHECK], comments=[user_comment])["code_rabbit_ready"])
+
+    def test_coderabbit_success_on_same_commit_survives_pending_rerun(self):
+        pending = {**RABBIT, "state": "PENDING", "description": "Review in progress"}
+        completed = {
+            "context": "CodeRabbit",
+            "state": "success",
+            "description": "Review completed",
+            "creator": {"type": "Bot", "login": "coderabbitai[bot]"},
+        }
+        self.assertTrue(inspect(checks=[CHECK, pending], statuses=[completed])["code_rabbit_ready"])
+        self.assertFalse(inspect(checks=[CHECK, pending])["code_rabbit_ready"])
+        failed = {**RABBIT, "state": "FAILURE", "description": "Review failed"}
+        self.assertFalse(inspect(checks=[CHECK, failed], statuses=[completed])["code_rabbit_ready"])
 
     def test_pagination_failures_and_required_workflows(self):
         self.assertTrue(inspect(pages=[[], [CHECK, RABBIT]])["checks_ready"])

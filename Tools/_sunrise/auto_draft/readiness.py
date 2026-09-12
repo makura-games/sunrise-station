@@ -133,8 +133,27 @@ def load_readiness(*, github, owner, repo, pull_request, rules_cache, comments_g
     current_checks = list(latest.values())
     rabbit_checks = [check for check in current_checks if is_rabbit(check)]
     active_rabbit_checks = [check for check in rabbit_checks if not is_unavailable_rabbit_check(check)]
-    reviewed = any(succeeded(check) and re.match(r"^Review completed\b", check.get("description") or check.get("title") or "", re.I)
-                   for check in rabbit_checks)
+    def review_completed(check):
+        return succeeded(check) and re.match(
+            r"^Review completed\b", check.get("description") or check.get("title") or "", re.I
+        )
+    reviewed = any(review_completed(check) for check in rabbit_checks)
+    rabbit_pending = any(check.get("state") == "PENDING"
+                         or check.get("status") in {"QUEUED", "IN_PROGRESS", "PENDING"}
+                         for check in rabbit_checks)
+    if not reviewed and rabbit_pending:
+        reviewed = any(review_completed(check) for check in checks if is_rabbit(check))
+    if not reviewed and any(check["__typename"] == "StatusContext"
+                            and check.get("state") == "PENDING" for check in rabbit_checks):
+        statuses = github.paginate(
+            f"/repos/{owner}/{repo}/commits/{pull_request['headRefOid']}/statuses"
+        )
+        reviewed = any(status.get("context") == "CodeRabbit"
+                       and status.get("state") == "success"
+                       and re.match(r"^Review completed\b", status.get("description") or "", re.I)
+                       and (status.get("creator") or {}).get("type") == "Bot"
+                       and (status.get("creator") or {}).get("login") == "coderabbitai[bot]"
+                       for status in statuses)
 
     comments = comments_github.paginate(f"/repos/{owner}/{repo}/issues/{pull_request['number']}/comments")
     rabbit_comments = [comment for comment in comments
