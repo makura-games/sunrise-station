@@ -366,6 +366,8 @@ class PolicyTests(unittest.TestCase):
             ({"has_marker": True, "latest_blocking_at": 10, "latest_ready_at": 20}, "cleanup"),
             ({"latest_blocking_at": 30, "latest_ready_at": 20}, "draft"),
             ({"code_rabbit_ready": False}, "draft"),
+            ({"has_merge_conflicts": True, "latest_ready_at": 20}, "draft"),
+            ({"is_draft": True, "has_marker": True, "has_merge_conflicts": True}, "keep"),
             ({"is_draft": True}, "keep"),
             ({"is_draft": True, "has_marker": True}, "ready"),
         ]
@@ -615,6 +617,21 @@ class ChecklistAndReportTests(unittest.TestCase):
         self.assertIn("- [x] CodeRabbit проверил последнюю версию кода.", body)
         self.assertNotIn("Дождаться CodeRabbit", body)
 
+    def test_merge_conflict_item_appears_only_while_conflicting(self):
+        state = self.state()
+        self.assertNotIn("Решить конфликты слияния", build_checklist(**state))
+        state["readiness"]["has_merge_conflicts"] = True
+        body = build_checklist(**state)
+        self.assertIn("- [ ] Решить конфликты слияния в IDE.", body)
+        self.assertIn("> [!WARNING]", body)
+        self.assertIn("GitHub не разрешит слить ПР", body)
+        self.assertEqual(
+            build_report(number=1, readiness=state["readiness"], action="draft")["title"],
+            "Автодрафт: конфликты слияния",
+        )
+        state["readiness"]["has_merge_conflicts"] = False
+        self.assertNotIn("Решить конфликты слияния", build_checklist(**state))
+
     def test_checklist_is_updated_when_required_checks_change(self):
         class Comments:
             def __init__(self):
@@ -831,7 +848,7 @@ class RuntimeTests(unittest.TestCase):
                     return {}
                 if method == "GET" and path.endswith("/pulls/1"):
                     return {"head": {"sha": HEAD}, "base": {"ref": "master"},
-                            "draft": False, "state": "open"}
+                            "draft": self.pull["isDraft"], "state": "open"}
                 if method == "POST" and path.endswith("/comments"):
                     self.actions.append("comment")
                     return {}
@@ -873,6 +890,12 @@ class RuntimeTests(unittest.TestCase):
         with patch.dict(os.environ, {"AUTO_DRAFT_APP_SLUG": "autodraft"}):
             AutoDraft(github=github, context=context, core=Core()).run()
         self.assertEqual(github.actions, ["comment", "label", "draft", "check"])
+
+        github = RuntimeGitHub()
+        github.pull.update({"isDraft": True, "mergeable": "CONFLICTING"})
+        with patch.dict(os.environ, {"AUTO_DRAFT_APP_SLUG": "autodraft"}):
+            AutoDraft(github=github, context=context, core=Core()).run()
+        self.assertEqual(github.actions, ["comment", "label", "check"])
 
 
 if __name__ == "__main__":

@@ -36,6 +36,8 @@ def build_report(*, number, feedback=None, readiness=None, manual_draft=False,
         reason = "ошибка синхронизации"
     elif skipped:
         reason = "повторная проверка позже"
+    elif readiness.get("has_merge_conflicts"):
+        reason = "конфликты слияния"
     elif manual_override:
         reason = "ручной режим"
     elif manual_draft:
@@ -67,6 +69,8 @@ def build_report(*, number, feedback=None, readiness=None, manual_draft=False,
     elif skipped:
         lines.append(plain(skipped))
     else:
+        if readiness.get("has_merge_conflicts"):
+            lines.extend(["- ❌ Найдены конфликты слияния: GitHub блокирует слияние ПР.", ""])
         lines.append(f"- {'⏳ Остались требования исправлений' if unresolved else '✅ Открытых требований исправлений нет'}.")
         lines.extend(f"  - {plain(item['text'])}" for item in unresolved)
         lines.append(f"- {'✅ Обязательные проверки пройдены' if readiness.get('checks_ready') else '⏳ Обязательные проверки не завершены успешно'}.")
@@ -91,7 +95,9 @@ def build_report(*, number, feedback=None, readiness=None, manual_draft=False,
             "⏳ Ожидается CodeRabbit"
         )
         lines.extend([f"- {rabbit}.", ""])
-        if manual_draft:
+        if readiness.get("has_merge_conflicts"):
+            lines.append("ПР находится в черновике до решения конфликтов слияния.")
+        elif manual_draft:
             lines.append("Ручной черновик сохранён: автор сам подтверждает готовность.")
         elif manual_override:
             lines.append("Сохранён ручной аварийный переход. Новое требование исправлений снова включит автоматику.")

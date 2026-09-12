@@ -23,6 +23,7 @@ query($owner: String!, $repo: String!, $number: Int!,
       number
       state
       isDraft
+      mergeable
       headRefOid
       baseRefName
       labels(first: 100, after: $labelsCursor) @include(if: $loadlabels) {
@@ -83,7 +84,10 @@ def load_config(path=CONFIG_PATH):
 # AUTO_DRAFT_POLICY_START
 def decide_draft_state(*, is_draft, has_marker, latest_blocking_at, latest_ready_at,
                        all_blocking_threads_resolved, checks_ready, code_rabbit_ready,
-                       keep_ready_during_rerun=False):
+                       keep_ready_during_rerun=False, has_merge_conflicts=False):
+    if has_merge_conflicts:
+        return "keep" if is_draft and has_marker else "draft"
+
     has_blocking_review = latest_blocking_at is not None
     should_be_ready = ((not has_blocking_review or all_blocking_threads_resolved)
                        and checks_ready and code_rabbit_ready)
@@ -262,6 +266,7 @@ class AutoDraft:
         if not pull_request or pull_request["state"] != "OPEN":
             self.core.info(f"#{number}: ПР закрыт или не найден, пропускаю.")
             return build_report(number=number, skipped="ПР закрыт или не найден: синхронизация не нужна.")
+        has_merge_conflicts = pull_request.get("mergeable") == "CONFLICTING"
 
         reviews = [review for review in pull_request["latestOpinionatedReviews"]["nodes"]
                    if review["authorCanPushToRepository"]]
@@ -303,7 +308,7 @@ class AutoDraft:
         latest_ready_at = (timestamp(latest_ready_event["createdAt"])
                            if latest_ready_event and not ready_by_app else None)
         has_marker = any(label["name"] in self.marker_names for label in pull_request["labels"]["nodes"])
-        manual_override = (not pull_request["isDraft"] and latest_ready_at is not None
+        manual_override = (not has_merge_conflicts and not pull_request["isDraft"] and latest_ready_at is not None
                            and (latest_blocking_at is None or latest_ready_at >= latest_blocking_at))
         readiness = {
             "checks_ready": False,
@@ -338,6 +343,7 @@ class AutoDraft:
         readiness["code_rabbit_conversations_resolved"] = rabbit_conversations["resolved"]
         readiness["code_rabbit_ready"] &= (rabbit_conversations["resolved"]
                                              and not rabbit_conversations["approval_required"])
+        readiness["has_merge_conflicts"] = has_merge_conflicts
 
         action = decide_draft_state(
             is_draft=pull_request["isDraft"],
@@ -348,6 +354,7 @@ class AutoDraft:
             checks_ready=readiness["checks_ready"],
             code_rabbit_ready=readiness["code_rabbit_ready"],
             keep_ready_during_rerun=readiness.get("keep_ready_during_rerun", False),
+            has_merge_conflicts=has_merge_conflicts,
         )
         self.core.info(
             f"#{number}: action={action}, draft={pull_request['isDraft']}, "
@@ -355,6 +362,7 @@ class AutoDraft:
             f"threadsResolved={all_blocking_threads_resolved}, checksReady={readiness['checks_ready']}, "
             f"codeRabbitReady={readiness['code_rabbit_ready']}, "
             f"codeRabbitThreads={rabbit_conversations['total']}/{rabbit_conversations['unresolved']}, "
+            f"mergeConflicts={has_merge_conflicts}, "
             f"rateLimited={readiness.get('rate_limited', False)}, "
             f"pendingChecks={', '.join(plain(name) for name in readiness['pending_checks'])}."
         )
@@ -371,7 +379,7 @@ class AutoDraft:
                 "done": bool(threads and all(thread["isResolved"] for thread in threads)
                              and author not in unresolved_by_author),
             })
-        manual_draft = pull_request["isDraft"] and not has_marker
+        manual_draft = pull_request["isDraft"] and not has_marker and not has_merge_conflicts
         report_state = {
             "number": number,
             "feedback": feedback,
@@ -417,6 +425,8 @@ class AutoDraft:
         if action == "draft":
             if not has_marker:
                 self.add_marker(number)
+            if pull_request["isDraft"]:
+                return build_report(**report_state)
             try:
                 self.convert_to_draft(pull_request["id"])
             except Exception:

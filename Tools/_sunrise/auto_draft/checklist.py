@@ -30,6 +30,15 @@ def build_checklist(*, owner, repo, number, feedback, readiness, manual_draft=Fa
         *(f"  {checkbox(item['done'], plain(item['text']))}" for item in feedback),
     ]
 
+    if readiness.get("has_merge_conflicts"):
+        lines.extend([
+            checkbox(False, "Решить конфликты слияния в IDE."),
+            "",
+            "> [!WARNING]",
+            "> GitHub не разрешит слить ПР, пока есть конфликты. Обнови свою ветку из целевой, открой отмеченные как конфликтующие файлы в IDE, выбери правильные изменения, создай коммит и отправь его.",
+            "",
+        ])
+
     rabbit_unresolved = readiness.get("code_rabbit_conversations_unresolved", 0)
     rabbit_total = readiness.get("code_rabbit_conversations_total", 0)
     rabbit_blocking_without_threads = readiness.get("code_rabbit_blocking_without_threads", 0)
