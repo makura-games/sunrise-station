@@ -1,0 +1,119 @@
+# Base abilities
+
+- type: entity
+  parent: BaseAction
+  id: ActionVampireToggleFangs
+  name: Extend Fangs
+  description: Drink from a blood-bearing creature with an empty hand, restoring fullness and mending wounds. Movement, damage, changing hands, a covered mouth or losing range interrupts feeding. Vampires are immune, and faith protects prey until you become Ancient.
+  components:
+  - type: Action
+    useDelay: 2
+    itemIconStyle: NoItem
+    priority: 1
+    icon:
+      sprite: _Sunrise/Vampire/actions_vampire.rsi
+      state: fangs_retracted
+    iconOn:
+      sprite: _Sunrise/Vampire/actions_vampire.rsi
+      state: fangs_extended
+  - type: InstantAction
+    event: !type:VampireToggleFangsActionEvent {}
+  - type: VampireAction
+
+- type: entity
+  parent: BaseAction
+  id: ActionVampireGlare
+  name: Glare
+  description: Drains the stamina of nearby creatures and paralyzes those in front of you. Blindness prevents its use, while flash protection weakens the effect. Range, strength and charges improve with your power level.
+  components:
+  - type: Action
+    useDelay: 12
+    itemIconStyle: NoItem
+    priority: 2
+    icon:
+      sprite: _Sunrise/Vampire/actions_vampire.rsi
+      state: glare
+  - type: InstantAction
+    event: !type:VampireGlareActionEvent {}
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: AutoRecharge
+    rechargeDuration: 55
+  - type: VampireAction
+
+- type: entity
+  parent: BaseAction
+  id: ActionVampireSleep
+  name: Sleep
+  description: Puts a humanoid to sleep after a short concentration. Movement, damage or losing proximity interrupts the attempt; protected eyes, a mindshield or faith may protect the target. Blood cost and concentration time decrease with your power level.
+  components:
+  - type: Action
+    useDelay: 15
+    itemIconStyle: NoItem
+    priority: 25
+    icon:
+      sprite: _Sunrise/Vampire/actions_vampire.rsi
+      state: sleep_icon
+  - type: TargetAction
+    range: 2
+    checkCanAccess: false
+    interactOnMiss: false
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      components:
+      - HumanoidProfile
+    event: !type:VampireSleepActionEvent
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: AutoRecharge
+    rechargeDuration: 110
+  - type: VampireAction
+    bloodCost: 20
+
+- type: entity
+  parent: BaseAction
+  id: ActionVampireRejuvenateI
+  name: Rejuvenation
+  description: Removes stuns and knockdown and restores stamina even while incapacitated. Its strength scales with vampire power. Does not heal wounds or purge chemicals.
+  components:
+  - type: Action
+    useDelay: 8
+    itemIconStyle: NoItem
+    priority: 3
+    checkCanInteract: false
+    checkConsciousness: false
+    icon:
+      sprite: _Sunrise/Vampire/actions_vampire.rsi
+      state: rejuvinate
+  - type: InstantAction
+    event: !type:VampireRejuvenateIActionEvent {}
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: AutoRecharge
+    rechargeDuration: 75
+  - type: VampireAction
+
+- type: entity
+  parent: BaseAction
+  id: ActionVampireRejuvenateII
+  name: Greater Rejuvenation
+  description: Removes stuns and knockdown, restores stamina, purges poisons and gradually heals wounds. Its strength scales with vampire power.
+  components:
+  - type: Action
+    useDelay: 7
+    itemIconStyle: NoItem
+    priority: 4
+    checkCanInteract: false
+    checkConsciousness: false
+    icon:
+      sprite: _Sunrise/Vampire/actions_vampire.rsi
+      state: rejuvinate
+  - type: InstantAction
+    event: !type:VampireRejuvenateIiActionEvent {}
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: AutoRecharge
+    rechargeDuration: 65
+  - type: VampireAction
+    requiredPowerLevel: Nightborn

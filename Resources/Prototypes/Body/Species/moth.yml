@@ -167,6 +167,9 @@
       reagents:
       - ReagentId: InsectBlood
         Quantity: 300
+  - type: BloodSource # Sunrise-Edit - кровь насекомых
+    kind: Insect
+    value: 0.75
   - type: DamageVisuals
     damageOverlayGroups:
       Brute:

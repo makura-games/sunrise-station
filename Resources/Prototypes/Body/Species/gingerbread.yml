@@ -62,6 +62,9 @@
         Quantity: 100
       - ReagentId: Butter
         Quantity: 200
+  - type: BloodSource # Sunrise-Edit вкусняшка
+    kind: Confectionery
+    value: 0
   - type: Fixtures
     fixtures:
       fix1:

@@ -152,6 +152,9 @@
       reagents:
       - ReagentId: Slime
         Quantity: 300
+  - type: BloodSource # Sunrise-Edit - слизь вместо крови
+    kind: Slime
+    value: 0
   - type: Barotrauma
     damage:
       types:

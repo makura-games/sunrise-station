@@ -22,7 +22,7 @@ using Robust.Shared.Timing;
 namespace Content.Shared.Metabolism;
 
 /// <inheritdoc/>
-public sealed class MetabolizerSystem : EntitySystem
+public sealed partial class MetabolizerSystem : EntitySystem // Sunrise-Edit
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -311,4 +311,3 @@ public sealed class MetabolizerSystem : EntitySystem
         return true;
     }
 }
-

@@ -1263,9 +1263,12 @@
       effects:
       - !type:HealthChange
         conditions:
+        # Sunrise-Start
+        - !type:MetabolizerTypeCondition
+          type: [ Vampire ]
+          inverted: true
         damage:
           types:
-            # Sunrise-Start
             Blunt: -0.5
             Poison: -0.5
             Heat: -0.5

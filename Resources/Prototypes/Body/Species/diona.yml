@@ -101,6 +101,9 @@
       reagents:
       - ReagentId: Sap
         Quantity: 300
+  - type: BloodSource # Sunrise-Edit - сок дион ммм...
+    kind: Sap
+    value: 0.25
   - type: Reactive
     groups:
       Flammable: [ Touch ]

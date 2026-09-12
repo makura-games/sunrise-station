@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Charges.Systems;
 
-public abstract class SharedChargesSystem : EntitySystem
+public abstract partial class SharedChargesSystem : EntitySystem // Sunrise - edit
 {
     [Dependency] protected readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;

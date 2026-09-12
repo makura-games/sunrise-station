@@ -369,6 +369,9 @@
       reagents:
       - ReagentId: SulfurBlood
         Quantity: 300
+  - type: BloodSource # Sunrise-Edit
+    kind: Sulfur
+    value: 0.6
 
 - type: entity
   parent: OrganBase

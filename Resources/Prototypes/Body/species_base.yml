@@ -201,6 +201,8 @@
   id: BaseSpeciesMobOrganic
   save: false
   components:
+  - type: BloodSource # Sunrise-Edit - полноценная кровь органических рас
+    value: 1
   - type: Hunger
   - type: Thirst
   - type: Barotrauma

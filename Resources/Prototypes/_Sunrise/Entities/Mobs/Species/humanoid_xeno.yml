@@ -83,6 +83,9 @@
       reagents:
       - ReagentId: FluorosulfuricAcidHumanoidXeno
         Quantity: 300
+  - type: BloodSource
+    kind: Acid
+    value: 0
   - type: ProtectedFromStepTriggers
   - type: Damageable
     damageContainer: Biological
@@ -385,4 +388,3 @@
           32:
             sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
             state: hardsuit
-

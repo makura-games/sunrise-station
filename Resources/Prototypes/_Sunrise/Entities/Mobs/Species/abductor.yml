@@ -74,6 +74,9 @@
       reagents:
       - ReagentId: AbductorBlood
         Quantity: 300
+  - type: BloodSource
+    kind: Alien
+    value: 0.8
   - type: CollectiveMind
     minds:
     - Abductor

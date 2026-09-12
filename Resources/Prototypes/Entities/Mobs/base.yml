@@ -327,6 +327,7 @@
     bloodlossHealDamage:
       types:
         Bloodloss: -1
+  - type: BloodSource # Sunrise-Edit
   - type: MeleeSound
     soundTypes:
       Slash:
