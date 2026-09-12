@@ -127,10 +127,16 @@ jobs:
     steps:
       - name: Verify packaging jobs
         env:
+          CHANGES_RESULT: ${{ needs.changes.result }}
           PACKAGING_ACTOR: ${{ github.actor }}
           PACKAGING_NEEDED: ${{ needs.changes.outputs.packaging }}
           PACKAGE_RESULT: ${{ needs.package.result }}
         run: |
+          if [[ "$CHANGES_RESULT" != "success" ]]; then
+            echo "::error title=Packaging path check failed::Could not determine whether packaging is required."
+            exit 1
+          fi
+
           if [[ "$PACKAGING_NEEDED" == "false" ]]; then
             echo "Packaging is not required for the changed files."
             exit 0

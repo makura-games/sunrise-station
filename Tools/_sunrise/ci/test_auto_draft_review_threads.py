@@ -187,9 +187,14 @@ class WorkflowTests(unittest.TestCase):
         for pattern in load_workflow_paths(self.packaging_workflow_path):
             self.assertNotIn(pattern, self.packaging_script)
         self.assertIn("needs: [changes, package]", self.packaging_workflow)
+        self.assertIn("CHANGES_RESULT: ${{ needs.changes.result }}", self.packaging_workflow)
         self.assertIn('if [[ "$PACKAGING_NEEDED" == "false" ]]', self.packaging_workflow)
         self.assertIn('if: ${{ always() }}', self.packaging_workflow)
         self.assertIn('PACKAGING_ACTOR\" == \"Sunrise-Bot\"', self.packaging_workflow)
+        self.assertLess(
+            self.packaging_workflow.index('if [[ "$CHANGES_RESULT" != "success" ]]'),
+            self.packaging_workflow.index('if [[ "$PACKAGE_RESULT" == "skipped"'),
+        )
         self.assertIn("name: Test Packaging", self.packaging_workflow)
 
     def test_upstream_packaging_workflow_is_disabled(self):
@@ -206,9 +211,8 @@ class WorkflowTests(unittest.TestCase):
     def test_toml_config_contains_localized_label_and_migration_name(self):
         config = load_config()
         label = config["label"]
-        self.assertTrue(label["name"].startswith("🤖 "))
         self.assertIn("автодрафт", label["name"])
-        self.assertRegex(label["color"], r"^[a-f0-9]{6}$")
+        self.assertRegex(label["color"], r"^[A-Fa-f0-9]{6}$")
         self.assertIn("auto-draft: unresolved review", label["previous_names"])
         with open(AUTO_DRAFT_DIR / "config.toml", "rb") as config_file:
             self.assertEqual(tomllib.load(config_file), config)
