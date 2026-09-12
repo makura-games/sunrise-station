@@ -63,3 +63,23 @@
     - AnomalyTrapSanta
     chance: 1
 
+- type: entity
+  name: temporary radiation
+  id: RadiationTemporary
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RadiationSource
+    intensity: 2
+    slope: 0.1 #should affect the entire room
+  - type: TimedDespawn
+    lifetime: 50
+  - type: PointLight
+    color: "#13FF4B" #tritum green
+    energy: 1
+    falloff: 10
+    radius: 10
+    softness: 1
+  - type: EmitSoundOnSpawn
+    sound:
+      collection:
+        RadiationPulse
