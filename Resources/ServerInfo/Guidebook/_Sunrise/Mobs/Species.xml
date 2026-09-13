@@ -29,6 +29,7 @@
   </Box>
   <Box>
     <GuideEntityEmbed Entity="MobMilira" Caption="Милира"/>
+    <GuideEntityEmbed Entity="MobIPC" Caption="Робот"/>
   </Box>
 
 </Document>

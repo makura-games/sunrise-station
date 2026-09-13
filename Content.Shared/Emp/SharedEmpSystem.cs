@@ -1,12 +1,14 @@
 using Content.Shared.Examine;
 using Content.Shared.Rejuvenate;
+using Content.Shared.Tag;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Shared.Emp;
 
@@ -19,7 +21,12 @@ public abstract partial class SharedEmpSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
 
     [Dependency] private EntityQuery<EmpResistanceComponent> _resistanceQuery = default!;
+    // Sunrise-Edit-Start
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
 
+    private static ProtoId<TagPrototype> IPCTag = "IPC";
+    // Sunrise-Edit-End
     private HashSet<EntityUid> _entSet = new();
 
     public override void Initialize()
@@ -121,6 +128,21 @@ public abstract partial class SharedEmpSystem : EntitySystem
             strMultiplier = resistance.StrengthMultiplier;
             durMultiplier = resistance.DurationMultiplier;
         }
+
+        // Sunrise-Edit-Start
+        if (_tagSystem.HasTag(uid, IPCTag))
+        {
+            var damage = new DamageSpecifier();
+            damage.DamageDict.Add("Shock", 60);
+            _damageable.TryChangeDamage(uid, damage, origin: user);
+
+            if (_net.IsServer)
+                Spawn(EmpDisabledEffectPrototype, Transform(uid).Coordinates);
+
+            return true;
+        }
+        // Sunrise-Edit-End
+
         var ev = new EmpPulseEvent(energyConsumption * strMultiplier, false, false, duration * durMultiplier, user);
         RaiseLocalEvent(uid, ref ev);
 

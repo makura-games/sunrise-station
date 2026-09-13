@@ -68,3 +68,11 @@
   frequency: 1782
   color: "#a15608"
   longRange: true
+
+- type: radioChannel
+  id: IPC
+  name: chat-radio-ipc
+  keycode: 'i'
+  frequency: 1985
+  color: "#5e94d7"
+  longRange: true

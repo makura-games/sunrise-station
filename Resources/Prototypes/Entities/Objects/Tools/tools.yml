@@ -8,6 +8,7 @@
     sound:
       path: /Audio/Items/wirecutter_drop.ogg
   # Sunrise start
+  - type: Hemostat
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Sunrise/Items/Handling/wirecutter_pickup.ogg
@@ -56,13 +57,10 @@
   - type: StaticPrice
     price: 30
   # Sunrise-start
-  - type: Scalpel
   - type: SurgeryTool
-    successRate: 0.35
+    speed: 1.5
     startSound:
-      path: /Audio/_Sunrise/Medical/Surgery/scalpel1.ogg
-    endSound:
-      path: /Audio/_Sunrise/Medical/Surgery/scalpel2.ogg
+      path: /Audio/_Sunrise/Medical/Surgery/hemostat1.ogg
   # Sunrise-end
 
 - type: entity
@@ -75,6 +73,7 @@
     sound:
       path: /Audio/Items/screwdriver_drop.ogg
   # Sunrise start
+  - type: SurgicalDrill
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Sunrise/Items/Handling/screwdriver_pickup.ogg
@@ -85,6 +84,10 @@
       path: /Audio/Items/screwdriver_drop.ogg
       params:
         volume: -2
+  - type: SurgeryTool
+    speed: 1.5
+    startSound:
+      path: /Audio/_Sunrise/Medical/Surgery/saw.ogg
   # Sunrise end
   - type: Tag
     tags:
@@ -131,6 +134,7 @@
     sound:
       path: /Audio/Items/wrench_drop.ogg
   # Sunrise start
+  - type: BoneSetter
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Sunrise/Items/Handling/wrench_pickup.ogg
@@ -141,6 +145,10 @@
       path: /Audio/Items/wrench_drop.ogg
       params:
         volume: -2
+  - type: SurgeryTool
+    speed: 1.5
+    startSound:
+      path: /Audio/_Sunrise/Medical/Surgery/bone_setter.ogg
   # Sunrise end
   - type: Tag
     tags:

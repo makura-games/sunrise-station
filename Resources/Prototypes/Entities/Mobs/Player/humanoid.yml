@@ -65,6 +65,7 @@
   - Predator
   - Resomi
   - Milira
+  - IPC
   randomizeName: false
   components:
     - type: GhostRole
@@ -122,6 +123,7 @@
   - Predator
   - Resomi
   - Milira
+  - IPC
   randomizeName: false
   components:
     - type: GhostRole
@@ -172,6 +174,7 @@
   - Predator
   - Resomi
   - Milira
+  - IPC
   parent: ERTLeader
   components:
     - type: Loadout
@@ -206,6 +209,7 @@
   - Predator
   - Resomi
   - Milira
+  - IPC
   components:
     - type: Loadout
       prototypes: [ ERTLeaderGearArmed ]
@@ -244,6 +248,7 @@
   - Predator
   - Resomi
   - Milira
+  - IPC
   parent: ERTLeader
   components:
     - type: BibleUser
@@ -295,6 +300,7 @@
   - Predator
   - Resomi
   - Milira
+  - IPC
   parent: ERTChaplain
   components:
     - type: Loadout
@@ -334,6 +340,7 @@
   - Predator
   - Resomi
   - Milira
+  - IPC
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -383,6 +390,7 @@
   - Predator
   - Resomi
   - Milira
+  - IPC
   parent: ERTJanitor
   components:
     - type: Loadout
@@ -422,6 +430,7 @@
   - Predator
   - Resomi
   - Milira
+  - IPC
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -471,6 +480,7 @@
   - Predator
   - Resomi
   - Milira
+  - IPC
   parent: ERTEngineer
   components:
     - type: Loadout
@@ -530,6 +540,7 @@
   - Predator
   - Resomi
   - Milira
+  - IPC
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -580,6 +591,7 @@
   - Predator
   - Resomi
   - Milira
+  - IPC
   parent: ERTSecurity
   components:
     - type: GhostRole
@@ -712,6 +724,7 @@
   - Predator
   - Resomi
   - Milira
+  - IPC
   parent: ERTLeader
   components:
     - type: GhostRole
@@ -761,6 +774,7 @@
   - Predator
   - Resomi
   - Milira
+  - IPC
   parent: ERTMedical
   components:
     - type: Loadout
@@ -820,6 +834,7 @@
   - Predator
   - Resomi
   - Milira
+  - IPC
   components:
     - type: Loadout
       prototypes: [CBURNGear]

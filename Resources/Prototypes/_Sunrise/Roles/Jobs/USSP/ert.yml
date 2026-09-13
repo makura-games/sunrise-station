@@ -34,6 +34,7 @@
   - HumanoidXeno
   - Predator
   - Resomi
+  - IPC
   parent: EventHumanoidERTSunrise
   randomizeName: false
   components:
@@ -557,6 +558,7 @@
   - Predator
   - Resomi
   - Resomi
+  - IPC
   components:
     - type: Loadout
       prototypes: [CBURNGearEVA]

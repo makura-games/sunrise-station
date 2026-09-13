@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: [ BaseItem , OrganBaseBrain ]
   id: Boris
   name: robotic brain
   description:
@@ -65,6 +65,41 @@
   - type: GuideHelp
     guides:
     - Cyborgs
+
+- type: entity
+  parent: [ PositronicBrain , OrganBaseBrain ]
+  id: BorisIPC
+  suffix: IPC
+  name: robotic brain
+  description:
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/boris.rsi
+    layers:
+    - state: boris_blank
+      map: ["base"]
+  - type: DoAfter
+  - type: Actions
+  - type: TypingIndicator
+    proto: robot
+  - type: Speech
+    speechSounds: Pai
+  - type: MobState
+    allowedStates:
+    - Alive
+  - type: Appearance
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - IPC
+  - type: ActiveRadio
+    channels:
+    - IPC
+  - type: Examiner
+  - type: BorgBrain
+  - type: BlockMovement
+    blockInteraction: false
+  - type: Input
+    context: human
 
 - type: entity
   parent: Boris

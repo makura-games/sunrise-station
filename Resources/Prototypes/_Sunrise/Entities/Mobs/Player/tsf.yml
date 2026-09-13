@@ -64,6 +64,7 @@
   - HumanoidXeno
   - Predator
   - Resomi
+  - IPC
   components:
     - type: GhostRole
       name: ghost-role-information-tsf-marine-name

@@ -32,7 +32,7 @@
       path: /Audio/Items/wirecutter.ogg
   - type: Scalpel
   - type: SurgeryTool
-    successRate: 0.9
+    successRate: 1.5
     startSound:
       path: /Audio/_Sunrise/Medical/Surgery/scalpel1.ogg
     endSound:

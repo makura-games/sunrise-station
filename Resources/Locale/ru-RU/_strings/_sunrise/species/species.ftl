@@ -8,3 +8,4 @@ species-name-resomi = Резоми
 species-name-abductor = Абдуктор
 species-name-milira = Милира
 species-name-vulpkanin = Вульпканин
+species-name-IPC = Робот

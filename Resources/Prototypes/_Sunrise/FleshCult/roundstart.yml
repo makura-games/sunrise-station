@@ -51,7 +51,7 @@
     - Tajaran
   blacklist:
     components:
-    # - Synth # Sunrise-TODO: КПБ
+    - ZombieImmune
     - BibleUser
   mindRoles:
   - MindRoleFleshCultistLeader
@@ -82,7 +82,7 @@
     - Tajaran
   blacklist:
     components:
-    # - Synth # Sunrise-TODO: КПБ
+    - ZombieImmune
     - BibleUser
   mindRoles:
   - MindRoleFleshCultist

@@ -3,7 +3,14 @@
   parent: [SolutionWelder, BaseItem]
   id: BaseWelder
   components:
-  # Sunrise edit start - уникальные звуки поднятия и сбрасывания сварочного аппарата
+  # Sunrise start
+  - type: Cautery
+  - type: SurgeryTool
+    speed: 1.5
+    startSound:
+      path: /Audio/_Sunrise/Medical/Surgery/cautery1.ogg
+    endSound:
+      path: /Audio/_Sunrise/Medical/Surgery/cautery2.ogg
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Sunrise/Items/Handling/weldingtool_pickup.ogg

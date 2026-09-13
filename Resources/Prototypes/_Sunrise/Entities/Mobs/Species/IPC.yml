@@ -1,0 +1,280 @@
+- type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceIPC
+  name: ipc appearance
+  components:
+  - type: InitialBody
+    organs:
+      Torso: TorsoIPC
+      Head: HeadIPC
+      ArmLeft: LeftArmIPC
+      ArmRight: RightArmIPC
+      HandRight: RightHandIPC
+      HandLeft: LeftHandIPC
+      LegLeft: LeftLegIPC
+      LegRight: RightLegIPC
+      FootLeft: LeftFootIPC
+      FootRight: RightFootIPC
+      Brain: BorisIPC
+      Eyes: OrganIPCEyes
+
+- type: entity
+  parent: 
+  - AppearanceIPC
+  - MobAtmosStandard
+  - MobFlammable
+  - BaseSpeciesMob
+  id: BaseMobIPC
+  abstract: true
+  components:
+  - type: Reactive
+    groups:
+      Acidic: [Touch]
+  - type: WiresPanel
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Mangleness: -0.02
+  - type: UnpoweredFlashlight
+  - type: PointLight
+    enabled: false
+    radius: 5
+    softness: 5
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
+  - type: Fingerprint
+  - type: Blindable
+  - type: Temperature
+    currentTemperature: 310.15
+    specificHeat: 46
+  - type: TemperatureDamage
+    heatDamageThreshold: 350
+    coldDamageThreshold: 230
+    coldDamage:
+      types:
+        Cold : 0.2
+    heatDamage:
+      types:
+        Heat : 0.1
+  - type: TemperatureSpeed
+    thresholds:
+      293: 0.9
+      280: 0.8
+      260: 0.7
+  - type: HealthExaminable
+    examinableTypes:
+      - Blunt
+      - Slash
+      - Piercing
+      - Heat
+      - Shock
+      - Mangleness
+    locPrefix: silicon
+  - type: DamageVisuals
+    thresholds: [ 10, 20, 30, 50, 70, 100 ]
+    targetLayers:
+    - "enum.HumanoidVisualLayers.Chest"
+    - "enum.HumanoidVisualLayers.Head"
+    - "enum.HumanoidVisualLayers.LArm"
+    - "enum.HumanoidVisualLayers.LLeg"
+    - "enum.HumanoidVisualLayers.RArm"
+    - "enum.HumanoidVisualLayers.RLeg"
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#000000"
+  - type: TypingIndicator
+    proto: robot
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Borg
+    allowedEmotes: ['Beep', 'Ping', 'Buzz', 'Buzz-Two', 'Chime', 'Honk']
+  - type: NameIdentifier
+    group: Silicon
+  - type: Repairable
+    doAfterDelay: 1
+    fuelCost: 3
+    allowSelfRepair: true
+    damage:
+      types:
+        Blunt: -12
+        Slash: -12
+        Piercing: -12
+        Heat: -5
+        Shock: -5
+        Caustic: -5
+        Structural: -10
+        Mangleness: 1
+  - type: Damageable
+    damageModifierSet: IPC
+  - type: ComplexInteraction
+  - type: IntrinsicRadioReceiver
+  - type: ThermalRegulator
+    metabolismHeat: 800
+    radiatedHeat: 100
+    implicitHeatRegulation: 500
+    sweatHeatRegulation: 2000
+    shiveringHeatRegulation: 2000
+    normalBodyTemperature: 310.15
+    thermalRegulationTemperatureThreshold: 2
+  - type: Perishable
+  - type: FireVisuals
+    alternateState: Standing
+  - type: StunVisuals
+  - type: MessyDrinker
+    spillChance: 0.2
+  - type: Interactions
+  - type: HumanoidProfile
+    species: IPC
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - IPC
+  - type: ActiveRadio
+    channels:
+    - IPC
+  - type: ZombieImmune
+  - type: Tag
+    tags:
+    - CanPilot
+    - FootstepSound
+    - DoorBumpOpener
+    - AnomalyHost
+    - IPC
+    - CannotSuicide
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: SheetSteel10
+    - id: SheetPlastic10
+    - id: SheetGlass10
+    - id: CableApcStack10
+  - type: SurgeryTarget
+  - type: DarkenedVision
+  - type: CanEscapeInventory
+  - type: Mood
+  - type: CritHeartbeat
+  - type: PetOnInteract
+  - type: MeleeWeapon
+    hidden: false
+    soundHit:
+      collection: Punch
+    angle: 30
+    animation: WeaponArcClaw
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 1
+        Slash: 5
+  - type: FlashModifier
+    modifier: 5
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Critical
+      200: Dead
+    stateAlertDict:
+      Alive: BorgHealth
+      Critical: BorgCrit
+      Dead: BorgDead
+    showOverlays: false
+    allowRevives: true
+  - type: FootprintEmitter
+    placementOffset: 0,0
+    leftBareFootState: [ footprint-tracked-heavy ]
+    rightBareFootState: [ footprint-tracked-heavy ]
+
+- type: entity
+  save: false
+  name: IPC McHands
+  parent: AppearanceIPC
+  id: MobIPCDummy
+  categories: [ HideSpawnMenu ]
+  description: A dummy ipc meant to be used in character setup.
+  components:
+  - type: HumanoidProfile
+    species: IPC
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers
+  - type: Inventory
+    speciesId: human
+    femaleDisplacements:
+      jumpsuit-body-curved-ipc:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
+            state: jumpsuit-female
+      head-body-curved-ipc:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Reptilian/displacement.rsi
+            state: head
+      mask-body-curved-ipc:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Reptilian/displacement.rsi
+            state: mask
+    displacements:
+      head-body-curved-ipc:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Reptilian/displacement.rsi
+            state: head
+      mask-body-curved-ipc:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Reptilian/displacement.rsi
+            state: mask
+      shoes-body-curved-ipc:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
+            state: shoes
+      socks-body-curved-ipc:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
+            state: socks
+      outerClothing-body-curved-ipc:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
+            state: outer
+      hardsuit-body-curved-ipc:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
+            state: hardsuit
+    maleDisplacements:
+      jumpsuit-body-curved-ipc:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
+            state: jumpsuit
+      shoes-body-curved-ipc:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
+            state: shoes
+      socks-body-curved-ipc:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
+            state: socks
+      outerClothing-body-curved-ipc:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
+            state: outer
+      hardsuit-body-curved-ipc:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
+            state: hardsuit

@@ -29,6 +29,9 @@
 - type: Tag
   id: ForceNoTileWalls
 
+- type: Tag
+  id: IPC
+
 # region Hardsuit injection
 - type: Tag
   id: FitsHardsuit

@@ -26,6 +26,17 @@
     Poison: 0.8
 
 - type: damageModifierSet
+  id: IPC
+  coefficients:
+    Blunt: 1.15
+    Shock: 1.20
+    Cold: 1.20
+    Structural: 0.5
+    Radiation: 0
+  flatReductions:
+    Blunt: 5
+
+- type: damageModifierSet
   id: Silicon
   coefficients:
     Blunt: 1

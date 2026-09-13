@@ -9,6 +9,7 @@ using Content.Shared.Internals;
 using Content.Shared.Inventory;
 using Content.Shared.Movement.Components;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
 using Robust.Shared.Utility;
@@ -25,6 +26,7 @@ public abstract partial class SharedInternalsSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedGasTankSystem _gasTank = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private TagSystem _tagSystem = default!; // Sunrise-IPC-Edit
 
     public override void Initialize()
     {
@@ -44,6 +46,11 @@ public abstract partial class SharedInternalsSystem : EntitySystem
     {
         if (!args.CanAccess || !args.CanInteract || args.Hands is null)
             return;
+
+        // Sunrise-IPC-Edit-Start
+        if (_tagSystem.HasTag(ent.Owner, "IPC"))
+            return;
+        // Sunrise-IPC-Edit-End
 
         if (!AreInternalsWorking(ent) && ent.Comp.BreathTools.Count == 0)
             return;
@@ -80,6 +87,11 @@ public abstract partial class SharedInternalsSystem : EntitySystem
     {
         if (!Resolve(target, ref internals, logMissing: false))
             return false;
+
+        // Sunrise-IPC-Edit-Start
+        if (_tagSystem.HasTag(target, "IPC"))
+            return false;
+        // Sunrise-IPC-Edit-End
 
         // Check if a mask is present.
         if (internals.BreathTools.Count == 0)
@@ -229,6 +241,11 @@ public abstract partial class SharedInternalsSystem : EntitySystem
 
     public bool AreInternalsWorking(EntityUid uid, InternalsComponent? component = null)
     {
+        // Sunrise-IPC-Edit-Start
+        if (_tagSystem.HasTag(uid, "IPC"))
+            return false;
+        // Sunrise-IPC-Edit-End
+
         return Resolve(uid, ref component, logMissing: false)
                && AreInternalsWorking(component);
     }

@@ -1,0 +1,269 @@
+# TODO: нарисуйте или украдите спрайты маркингов, по вопросам к @4_ydo
+# бошка
+- type: marking
+  id: ipc_Head1
+  bodyPart: Head
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_head.rsi
+      state: head_1
+
+- type: marking
+  id: ipc_Head2
+  bodyPart: Head
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_head.rsi
+      state: head_2
+
+- type: marking
+  id: ipc_Head3
+  bodyPart: Head
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_head.rsi
+      state: head_3
+
+- type: marking
+  id: ipc_Head4
+  bodyPart: Head
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_head.rsi
+      state: head_4
+
+- type: marking
+  id: ipc_Head5
+  bodyPart: Head
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_head.rsi
+      state: head_5
+
+- type: marking
+  id: ipc_Head6
+  bodyPart: Head
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_head.rsi
+      state: head_6
+
+- type: marking
+  id: ipc_Head7
+  bodyPart: Head
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_head.rsi
+      state: head_7
+
+- type: marking
+  id: ipc_Head8
+  bodyPart: Head
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_head.rsi
+      state: head_8
+
+- type: marking
+  id: ipc_Head9
+  bodyPart: Head
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_head.rsi
+      state: head_9
+
+- type: marking
+  id: ipc_Head10
+  bodyPart: Head
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_head.rsi
+      state: head_10
+
+- type: marking
+  id: ipc_Head11
+  bodyPart: Head
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_head.rsi
+      state: head_11
+
+- type: marking
+  id: ipc_Head12
+  bodyPart: Head
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_head.rsi
+      state: head_12
+
+- type: marking
+  id: ipc_Head13
+  bodyPart: Head
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_head.rsi
+      state: head_13
+
+- type: marking
+  id: ipc_Head14
+  bodyPart: Head
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_head.rsi
+      state: head_14
+
+- type: marking
+  id: ipc_Head15
+  bodyPart: Head
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_head.rsi
+      state: head_15
+
+# торс
+- type: marking
+  id: ipc_Torso1
+  bodyPart: Chest
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_torso.rsi
+      state: torso
+
+- type: marking
+  id: ipc_Torso2
+  bodyPart: Chest
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_torso.rsi
+      state: torso_f
+
+- type: marking
+  id: ipc_Torso3
+  bodyPart: Chest
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_torso.rsi
+      state: torso_m
+
+- type: marking
+  id: ipc_Torso4
+  bodyPart: Chest
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_torso.rsi
+      state: torso_f_1
+
+- type: marking
+  id: ipc_Torso5
+  bodyPart: Chest
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_torso.rsi
+      state: torso_m_1
+
+- type: marking
+  id: ipc_Torso6
+  bodyPart: Chest
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_torso.rsi
+      state: torso_w
+
+# руки
+
+- type: marking
+  id: IPC_RArm1
+  bodyPart: RArm
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_arm.rsi
+      state: r_arm
+
+- type: marking
+  id: IPC_RArm2
+  bodyPart: RArm
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_arm.rsi
+      state: r_arm_h
+
+- type: marking
+  id: IPC_RArm4
+  bodyPart: RArm
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_arm.rsi
+      state: r_arm_l
+
+- type: marking
+  id: IPC_LArm1
+  bodyPart: LArm
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_arm.rsi
+      state: l_arm
+
+- type: marking
+  id: IPC_LArm2
+  bodyPart: LArm
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_arm.rsi
+      state: l_arm_l
+
+- type: marking
+  id: IPC_LArm4
+  bodyPart: LArm
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_arm.rsi
+      state: l_arm_h
+
+- type: marking
+  id: IPC_RHand1
+  bodyPart: RHand
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_arm.rsi
+      state: r_hand
+
+- type: marking
+  id: IPC_RHand2
+  bodyPart: RHand
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_arm.rsi
+      state: r_hand_l
+
+- type: marking
+  id: IPC_RHand4
+  bodyPart: RHand
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_arm.rsi
+      state: r_hand_h
+
+- type: marking
+  id: IPC_LHand1
+  bodyPart: LHand
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_arm.rsi
+      state: l_hand
+
+- type: marking
+  id: IPC_LHand2
+  bodyPart: LHand
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_arm.rsi
+      state: l_hand_l
+
+- type: marking
+  id: IPC_LHand4
+  bodyPart: LHand
+  groupWhitelist: [ IPC ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/IPC/ipc_arm.rsi
+      state: l_hand_h
+

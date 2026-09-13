@@ -30,6 +30,7 @@
   - Demon
   - SlimePerson
   - Dwarf
+  - IPC
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
@@ -81,6 +82,7 @@
   - Demon
   - SlimePerson
   - Dwarf
+  - IPC
   parent: NtrLeader
   components:
     - type: GhostRole
