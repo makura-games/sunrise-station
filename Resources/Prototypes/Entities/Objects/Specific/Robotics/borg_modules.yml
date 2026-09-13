@@ -1465,6 +1465,7 @@
         whitelist:
           components:
           - PowerCell
+          - Healing # Sunrise-Edit
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-module-module }
 

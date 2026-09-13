@@ -57,6 +57,16 @@
 
 - type: latheRecipe
   parent: BaseXenoborgRecipeHigh
+  id: PositronicBrain
+  result: Boris
+  materials:
+    Steel: 3000
+    Glass: 1500
+    Silver: 1000
+    Gold: 1000
+
+- type: latheRecipe
+  parent: BaseXenoborgRecipeHigh
   id: PowerCellXenoborgAdvance
   result: PowerCellXenoborgAdvance
   materials:
