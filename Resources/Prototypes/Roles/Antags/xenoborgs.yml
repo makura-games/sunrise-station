@@ -14,6 +14,15 @@
   guides: [ Xenoborgs ]
   storytellerStress: 5.0 # Sunrise-Edit
 
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: MothershipCore
+  prefRoles: [ MothershipCore ]
+  fallbackRoles: [ Xenoborg ] # Sunrise-Edit
+  spawnerPrototype: SpawnPointGhostRoleMothershipCore
+  mindRoles:
+  - MindRoleMothershipCore
+
 - type: antag
   id: Xenoborg
   name: roles-antag-xenoborg-name
@@ -29,3 +38,17 @@
   # Sunrise-end
   guides: [ Xenoborgs ]
   storytellerStress: 0.5 # Sunrise-Edit
+
+- type: antagSpecifier
+  abstract: true
+  parent: RestrictedAntag
+  id: BaseXenoborg
+  prefRoles: [ Xenoborg ]
+  fallbackRoles: [ MothershipCore ] # Sunrise-Edit
+  spawnerPrototype: SpawnPointGhostRoleXenoborg
+  mindRoles:
+  - MindRoleXenoborg
+
+- type: antagSpecifier
+  parent: BaseXenoborg
+  id: Xenoborg

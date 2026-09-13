@@ -558,14 +558,14 @@
 
 - type: entity
   parent: BaseSunriseHandsNoGlovesPiratePrivateer
-  id: ClothingHandsSMGC40
-  suffix: C40 SMG
+  id: ClothingHandsSMGVectorSuper
+  suffix: Vector Super
   categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     clothingVisuals:
       gloves:
-      - sprite: _Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi
+      - sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi
         state: wielded-inhand-right
 
 - type: entity
@@ -638,18 +638,6 @@
     clothingVisuals:
       gloves:
       - sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Green/tiny.rsi
-        state: wielded-inhand-right
-
-- type: entity
-  parent: BaseSunriseHandsNoGlovesPirateEva
-  id: ClothingHandsMp38
-  suffix: mp38
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Clothing
-    clothingVisuals:
-      gloves:
-      - sprite: _Sunrise/Objects/Weapons/Guns/SMGs/mp38/tiny.rsi
         state: wielded-inhand-right
 
 - type: entity
@@ -925,9 +913,10 @@
       path: "/Audio/Items/drill_use.ogg"
     attackRate: 5
     damage:
-      groups:
-        Brute: 9
       types:
+        Blunt: 3
+        Slash: 3
+        Piercing: 3
         Structural: 25
     bluntStaminaDamageFactor: 1.5
 
@@ -1249,11 +1238,6 @@
 - type: entity
   parent: [SovietArmorNoArmor, ClothingHandsMercMosin, SovietMeleeNoArc]
   id: ClothingHandsMercMosinSovietNoOuter
-  categories: [ HideSpawnMenu ]
-
-- type: entity
-  parent: [SovietArmorNoArmor, ClothingHandsMp38, SovietMeleeNoArc]
-  id: ClothingHandsMp38SovietNoOuter
   categories: [ HideSpawnMenu ]
 
 - type: entity

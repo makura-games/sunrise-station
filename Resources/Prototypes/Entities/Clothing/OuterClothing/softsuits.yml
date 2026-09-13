@@ -13,7 +13,6 @@
     tags:
     - SuitEVA
     - MonkeyWearable
-    - CorgiWearable
     - FullBodyOuter # SUNRISE EDIT
     - WhitelistChameleon
     - Hardsuit # Sunrise Edit
@@ -180,6 +179,5 @@
       toggleable-clothing: !type:ContainerSlot {}
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
     - Hardsuit # Sunrise Edit

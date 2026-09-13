@@ -1,6 +1,6 @@
 - type: entity
   id: OrganSlimeHeart
-  parent: [BaseHumanOrgan, BaseOrganHeart]
+  parent: [SunriseOrganHuman, SunriseOrganBaseHeart]
   name: slime circulator
   description: "A little circulator what makes the fluid move through the slime body."
   components:
@@ -13,8 +13,4 @@
   - type: Metabolizer
     maxReagents: 6
     metabolizerTypes: [ Slime ]
-    removeEmpty: true
-    groups:
-    - id: Medicine
-    - id: Poison
-    - id: Narcotic
+    stages: [ Bloodstream ]

@@ -15,7 +15,6 @@ concurrency:
 jobs:
   yaml-schema-validation:
     name: YAML map schema validator
-    if: github.actor != 'Sunrise-Bot'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4.2.2

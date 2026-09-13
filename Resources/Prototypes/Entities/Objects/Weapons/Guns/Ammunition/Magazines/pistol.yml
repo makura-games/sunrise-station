@@ -89,6 +89,12 @@
       - state: inhand-right-mag
       - state: inhand-right-stripe
         color: "#00c1b8"
+  # Sunrise-Start
+  - type: Tag
+    tags:
+    - MagazinePistolHighCapacity
+    - MagazinePistolHighCapacityRubber
+  # Sunrise-End
 
 - type: entity
   id: MagazinePistolHighCapacitySP

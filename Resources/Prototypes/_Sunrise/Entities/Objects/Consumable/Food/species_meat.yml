@@ -5,10 +5,9 @@
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Consumable/Food/species_meat.rsi
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
+  - type: Solution
+    solution:
+      reagents:
         - ReagentId: UncookedAnimalProteins
           Quantity: 9
         - ReagentId: Fat
@@ -123,11 +122,10 @@
     tags:
     - Raw
     - Meat
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20
-        reagents:
+  - type: Solution
+    solution:
+      maxVol: 20
+      reagents:
         - ReagentId: Slime
           Quantity: 10
         - ReagentId: Nutriment
@@ -205,10 +203,9 @@
     - Cooked
     - Meat
     - Steak
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
+  - type: Solution
+    solution:
+      reagents:
         - ReagentId: Nutriment
           Quantity: 10
         - ReagentId: Protein

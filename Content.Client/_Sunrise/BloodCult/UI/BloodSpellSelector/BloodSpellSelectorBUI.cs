@@ -11,10 +11,10 @@ namespace Content.Client._Sunrise.BloodCult.UI.BloodSpellSelector;
 
 public sealed class BloodSpellSelectorBUI : BoundUserInterface
 {
-    [Dependency] private readonly IClyde _displayManager = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
-
     private RadialContainer? _menu;
+    private readonly string _bloodOrbProto = "CultBloodOrb";
+    private readonly string _bloodSpearProto = "BloodSpear";
+    private readonly string _bloodBoltBarrageProto = "BloodBoltBarrage";
 
     private bool _selected;
 
@@ -39,7 +39,7 @@ public sealed class BloodSpellSelectorBUI : BoundUserInterface
         var entityMan = IoCManager.Resolve<IEntityManager>();
         var sprite = entityMan.System<SpriteSystem>();
 
-        if (protoMan.TryIndex("CultBloodOrb", out EntityPrototype? bloodOrb))
+        if (protoMan.TryIndex(_bloodOrbProto, out var bloodOrb))
         {
             var texture = sprite.GetPrototypeIcon(bloodOrb);
             var button = _menu.AddButton($"{bloodOrb.Name} (50)", texture.Default);
@@ -53,7 +53,7 @@ public sealed class BloodSpellSelectorBUI : BoundUserInterface
             };
         }
 
-        if (protoMan.TryIndex("BloodSpear", out EntityPrototype? bloodSpear))
+        if (protoMan.TryIndex(_bloodSpearProto, out var bloodSpear))
         {
             var texture = sprite.GetPrototypeIcon(bloodSpear);
             var button = _menu.AddButton($"{bloodSpear.Name} (100)", texture.Default);
@@ -67,7 +67,7 @@ public sealed class BloodSpellSelectorBUI : BoundUserInterface
             };
         }
 
-        if (protoMan.TryIndex("BloodBoltBarrage", out EntityPrototype? bloodBoltBarrage))
+        if (protoMan.TryIndex(_bloodBoltBarrageProto, out var bloodBoltBarrage))
         {
             var texture = sprite.GetPrototypeIcon(bloodBoltBarrage);
             var button = _menu.AddButton($"{bloodBoltBarrage.Name} (200)", texture.Default);

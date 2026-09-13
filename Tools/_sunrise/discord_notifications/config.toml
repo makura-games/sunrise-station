@@ -1,0 +1,177 @@
+[delivery]
+attempts = 6
+request_timeout = 30
+message_timeout = 180
+run_timeout = 480
+bootstrap_hours = 24
+max_messages_per_run = 40
+max_pending_messages = 1000
+retry_interval = 300
+max_retry_interval = 3600
+
+[display]
+body_length = 3500
+max_commits = 11
+commit_length = 67
+username = "GitHub"
+avatar_url = "https://avatars.githubusercontent.com/u/9919?v=4"
+show_reactions = true
+
+[text]
+new_comment = "Новый комментарий к"
+edited_comment = "Изменён комментарий к"
+deleted_comment = "Удалён комментарий к"
+commits = "Коммиты"
+branch = "Ветка"
+force_push = "[FORCE PUSH]"
+ellipsis = "..."
+overflow = "…остальные коммиты не показаны"
+review_comment = "Комментарий к ревью"
+edited_review_comment = "Изменён комментарий к ревью"
+deleted_review_comment = "Удалён комментарий к ревью"
+file = "Файл"
+pull_request = "PR"
+review = "Ревью"
+issue = "задаче"
+commit = "коммиту"
+discussion_created = "Создано обсуждение"
+discussion_edited = "Обсуждение изменено"
+discussion_deleted = "Обсуждение удалено"
+discussion_answered = "Ответ выбран"
+discussion_unanswered = "Ответ снят"
+discussion_comment_created = "Новый комментарий"
+discussion_comment_edited = "Изменён комментарий"
+discussion_comment_deleted = "Удалён комментарий"
+pull_request_reopened = "PR переоткрыт"
+issue_reopened = "Задача переоткрыта"
+
+[icons]
+approved = "<:gh_approved:1547308683753558071>"
+changes_requested = "<:gh_changes_requested:1547308723221823498>"
+review = "<:gh_review:1547308818478800916>"
+comment = "<:gh_comment:1547308750971474061>"
+opened = "<:propen:896496081960054827>"
+merged = "<:prmerge:896496082324979772>"
+closed = "<:prclosed:896496081976827986>"
+issue_closed = "<:issueclosed:896502343565185031>"
+issue_opened = "<:issueopened:896502343288381521>"
+discussion = "<:ghdiscussion:1082078543770554429>"
+upvote = "<:gh_upvote:1547401495601877003>"
+downvote = "<:gh_downvote:1547401297635049563>"
+created = "<:gh_created:1547401318501449798>"
+edited = "<:gh_edited:1547401368078262302>"
+deleted = "<:gh_deleted:1547401336344150138>"
+fork = "<:gh_fork:1547401402266161152>"
+published = "<:gh_published:1547401472906625077>"
+public = "<:gh_public:1547401447908442283>"
+
+[pr_status]
+conflicts = "Конфликты!"
+open = "Открыт"
+closed = "Закрыт"
+merged = "Замержен"
+draft = "Драфт"
+unknown = "Недоступен"
+
+[review_status]
+approved = "Апрув"
+changes_requested = "Запрошены изменения"
+review_required = "Ожидает ревью"
+none = "Без ревью"
+unknown = "Недоступно"
+
+[reviews.approved]
+color = "#6CC644"
+icon = "approved"
+
+[reviews.changes_requested]
+color = "#FF4444"
+icon = "changes_requested"
+
+[reviews.commented]
+color = "#8B949E"
+icon = "review"
+
+[filters]
+ignore_bots = true
+ignored_users = ["Sunrise-Bot", "PJBot"]
+branches = []
+ignored_labels = []
+
+[events]
+pull_request = ["opened", "edited", "closed", "reopened", "ready_for_review", "converted_to_draft"]
+pull_request_review = ["submitted"]
+pull_request_review_comment = ["created", "edited", "deleted"]
+issue_comment = ["created", "edited", "deleted"]
+issues = ["opened", "edited", "closed", "reopened"]
+discussion = ["created", "edited", "deleted", "answered", "unanswered"]
+discussion_comment = ["created", "edited", "deleted"]
+commit_comment = ["created", "edited"]
+fork = ["*"]
+watch = ["*"]
+push = ["push"]
+delete = ["delete"]
+release = ["published"]
+public = ["*"]
+
+[styles.default]
+color = ""
+
+[styles.opened]
+color = "#6CC644"
+icon = "opened"
+
+[styles.created]
+color = "#6CC644"
+icon = "created"
+
+[styles.merged]
+color = "#6E5494"
+icon = "merged"
+
+[styles.closed]
+color = "#FF4444"
+icon = "closed"
+
+[styles.issue_closed]
+color = "#FF4444"
+icon = "issue_closed"
+
+[styles.issue_opened]
+color = "#6CC644"
+icon = "issue_opened"
+
+[styles.commented]
+color = ""
+
+[styles.edited]
+color = "#BF8700"
+icon = "edited"
+
+[styles.deleted]
+color = "#CF222E"
+icon = "deleted"
+
+[styles.push]
+color = ""
+
+[styles.force_push]
+color = "#FF0000"
+
+[styles.answered]
+color = "#6CC644"
+
+[styles.unanswered]
+color = "#FF4444"
+
+[styles.fork]
+color = "#0969DA"
+icon = "fork"
+
+[styles.published]
+color = "#6E5494"
+icon = "published"
+
+[styles.public]
+color = "#1F883D"
+icon = "public"

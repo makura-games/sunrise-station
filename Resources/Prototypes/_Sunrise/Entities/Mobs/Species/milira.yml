@@ -1,7 +1,35 @@
 - type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceMilira
+  name: milira appearance
+  components:
+  - type: InitialBody
+    organs:
+      Torso: TorsoMilira
+      Head: HeadMilira
+      ArmLeft: LeftArmMilira
+      ArmRight: RightArmMilira
+      HandRight: RightHandMilira
+      HandLeft: LeftHandMilira
+      LegLeft: LeftLegMilira
+      LegRight: RightLegMilira
+      FootLeft: LeftFootMilira
+      FootRight: RightFootMilira
+      Brain: OrganHumanBrain
+      Eyes: OrganHumanEyes
+      Tongue: OrganHumanTongue
+      Heart: OrganHumanHeart
+      Lungs: OrganHumanLungs
+      Stomach: OrganHumanStomach
+      Liver: OrganHumanLiver
+      Kidneys: OrganHumanKidneys
+
+- type: entity
   save: false
   name: Urist McMilira
-  parent: BaseMobSpeciesOrganic
+  parent:
+  - AppearanceMilira
+  - BaseSpeciesMobOrganic
   id: BaseMobMilira
   abstract: true
   components:
@@ -37,11 +65,10 @@
     spawned:
     - id: FoodMeatMilira
       amount: 5
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Milira
-  - type: Body
-    prototype: Milira
-    requiredLegs: 2
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers
   - type: Temperature
     currentTemperature: 310.15
     specificHeat: 42
@@ -74,13 +101,15 @@
 
 - type: entity
   save: false
-  parent: MobHumanDummy
+  parent: AppearanceMilira
   id: MobMiliraDummy
   categories: [ HideSpawnMenu ]
   description: A dummy milira meant to be used in character setup.
   components:
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Milira
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers
   - type: MoodVisuals
     sprite:
       sprite: _Sunrise/Mobs/Effects/Milira/mood.rsi

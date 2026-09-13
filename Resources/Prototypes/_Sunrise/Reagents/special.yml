@@ -6,7 +6,7 @@
   physicalDesc: reagent-physical-desc-glowing
   color: "#59b23a"
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 250
       effects:
       - !type:Polymorph
@@ -113,7 +113,7 @@
         emote: Scream
         probability: 0.5
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate : 3.00
       effects:
       - !type:HealthChange
@@ -137,7 +137,7 @@
   physicalDesc: reagent-physical-desc-bubbling
   color: "#4B0082"
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:

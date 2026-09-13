@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server._Sunrise.Helpers;
 using Content.Shared.Humanoid;
 using Content.Shared.Whitelist;
@@ -10,16 +10,16 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Sunrise.Research.Artifact.Effects.WhitelistSwap;
 
-public sealed class ArtifactWhitelistSwapSystem : BaseXAESystem<ArtifactWhitelistSwapComponent>
+public sealed partial class ArtifactWhitelistSwapSystem : BaseXAESystem<ArtifactWhitelistSwapComponent>
 {
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SunriseHelpersSystem _helpers = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SunriseHelpersSystem _helpers = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     protected override void OnActivated(Entity<ArtifactWhitelistSwapComponent> ent, ref XenoArtifactNodeActivatedEvent args)
     {
-        var humans = _helpers.GetAll<HumanoidAppearanceComponent, TransformComponent>().ToList();
+        var humans = _helpers.GetAll<HumanoidProfileComponent, TransformComponent>().ToList();
         if (humans.Count == 0)
             return;
 
@@ -37,7 +37,7 @@ public sealed class ArtifactWhitelistSwapSystem : BaseXAESystem<ArtifactWhitelis
     }
 
     private bool IsAllowedTarget(Entity<TransformComponent> target,
-        Entity<HumanoidAppearanceComponent, TransformComponent> player,
+        Entity<HumanoidProfileComponent, TransformComponent> player,
         Entity<ArtifactWhitelistSwapComponent> artifact)
     {
         if (!IsAllowedMap(target, player, artifact))
@@ -50,7 +50,7 @@ public sealed class ArtifactWhitelistSwapSystem : BaseXAESystem<ArtifactWhitelis
     }
 
     private bool IsAllowedMap(Entity<TransformComponent> target,
-        Entity<HumanoidAppearanceComponent, TransformComponent> player,
+        Entity<HumanoidProfileComponent, TransformComponent> player,
         Entity<ArtifactWhitelistSwapComponent> artifact)
     {
         if (target.Comp.MapID == MapId.Nullspace)

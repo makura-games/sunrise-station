@@ -73,6 +73,7 @@
           layer:
             - Opaque
     - type: Damageable
+    - type: Injurable
       damageContainer: Biological
     - type: MobState
       allowedStates:
@@ -112,6 +113,8 @@
     - type: Tag
       tags:
         - CannotSuicide
+        - StunImmune
+        - SlowImmune
         - NoPaint  # Sunrise-edit
     # Sunrise-Start
     - type: Puller
@@ -231,8 +234,6 @@
           map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
           color: "#8adaff"
           shader: unshaded
-    - type: Body
-      prototype: Primate
     - type: Tag
       tags:
         - CannotSuicide
@@ -241,6 +242,10 @@
     - type: Inventory
       templateId: holoclown
     - type: Hands
+      activeHandId: Hand
+      hands:
+        Hand:
+          location: Left
     - type: ComplexInteraction
     - type: MeleeWeapon
       angle: 30

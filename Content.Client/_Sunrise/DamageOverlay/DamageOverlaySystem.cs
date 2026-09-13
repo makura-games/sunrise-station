@@ -5,10 +5,10 @@ using Robust.Shared.Network;
 
 namespace Content.Client._Sunrise.DamageOverlay;
 
-public sealed class DamageOverlaySystem : EntitySystem
+public sealed partial class DamageOverlaySystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private INetManager _netManager = default!;
 
     private bool _damageOverlayEnabled;
     private bool _damageOverlaySelf;

@@ -11,15 +11,24 @@
   abstract: true
   components:
     - type: Body
-      prototype: Animal
+    - type: EntityTableContainerFill
+      containers:
+        body_organs: !type:AllSelector
+          children:
+          - id: OrganAnimalLungs
+          - id: OrganAnimalHeart
+          - id: OrganAnimalStomach
+          - id: OrganAnimalLiver
+          - id: OrganAnimalKidneys
     - type: Climbing 
     - type: Reactive
       groups:
         Flammable: [Touch]
         Extinguish: [Touch]
     - type: Damageable
-      damageContainer: Biological
       damageModifierSet: FleshMob
+    - type: Injurable
+      damageContainer: Biological
     - type: HTN
       rootTask:
         task: SimpleHostileCompound

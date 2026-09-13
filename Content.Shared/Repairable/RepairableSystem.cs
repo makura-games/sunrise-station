@@ -2,7 +2,6 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
-using Content.Shared.FixedPoint;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -13,10 +12,10 @@ namespace Content.Shared.Repairable;
 
 public sealed partial class RepairableSystem : EntitySystem
 {
-    [Dependency] private readonly SharedToolSystem _toolSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedToolSystem _toolSystem = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
 
     public override void Initialize()
     {
@@ -29,7 +28,11 @@ public sealed partial class RepairableSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (!TryComp(ent.Owner, out DamageableComponent? damageable) || damageable.TotalDamage == 0)
+        if (!TryComp(ent.Owner, out DamageableComponent? damageable))
+            return;
+
+        var totalDamage = _damageableSystem.GetTotalDamage((ent.Owner, damageable));
+        if (totalDamage == 0)
             return;
 
         if (ent.Comp.DamageValue != null)
@@ -39,7 +42,9 @@ public sealed partial class RepairableSystem : EntitySystem
         else
             RepairAllDamage((ent, damageable), args.User);
 
-        args.Repeat = ent.Comp.AutoDoAfter && damageable.TotalDamage > 0;
+        totalDamage = _damageableSystem.GetTotalDamage((ent.Owner, damageable));
+
+        args.Repeat = ent.Comp.AutoDoAfter && totalDamage > 0;
         args.Args.Event.Repeat = args.Repeat;
         args.Handled = true;
 
@@ -95,12 +100,14 @@ public sealed partial class RepairableSystem : EntitySystem
         if (args.Handled)
             return;
 
+        var damage = _damageableSystem.GetAllDamage(ent.Owner);
+
         // Only try repair the target if it is damaged
-        if (!TryComp<DamageableComponent>(ent.Owner, out var damageable) || damageable.TotalDamage == 0)
+        if (damage.GetTotal() == 0)
             return;
 
         // Sunrise-start
-        if (!CanRepair(damageable.Damage.DamageDict, ent.Comp))
+        if (!CanRepair(damage, ent.Comp))
             return;
         // Sunrise-end
 
@@ -119,25 +126,6 @@ public sealed partial class RepairableSystem : EntitySystem
         args.Handled = _toolSystem.UseTool(args.Used, args.User, ent.Owner, delay, ent.Comp.QualityNeeded, new RepairDoAfterEvent(), ent.Comp.FuelCost);
     }
 
-        // Sunrise-start
-        private bool CanRepair(Dictionary<string, FixedPoint2> damage, RepairableComponent component)
-        {
-            if (component.Damage == null)
-            {
-                return true;
-            }
-
-            foreach (var type in component.Damage.DamageDict)
-            {
-                if (damage[type.Key].Value > 0 && type.Key != "Mangleness")
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-        // Sunrise-end
 }
 
 /// <summary>

@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace Content.Server._Sunrise.Roadmap;
 
-public sealed class RoadmapLikesSystem : EntitySystem
+public sealed partial class RoadmapLikesSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     public override void Initialize()
     {

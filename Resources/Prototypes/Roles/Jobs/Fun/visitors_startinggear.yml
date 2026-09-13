@@ -299,7 +299,7 @@
     eyes: ClothingEyesGlassesSecurity
     outerClothing: ClothingOuterCoatDetectiveLoadout
     pocket1: ForensicScanner
-    pocket2: WeaponRevolverSpearheadBlack # Sunrise-Edit
+    pocket2: WeaponRevolverSpearhead # Sunrise-Edit
   inhand:
   - FlashlightSeclite
 

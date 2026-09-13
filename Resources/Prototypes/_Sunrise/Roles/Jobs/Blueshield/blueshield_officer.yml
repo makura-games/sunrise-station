@@ -12,7 +12,6 @@
   startingGear: BlueShieldOfficerGear
   icon: JobIconBlueShield
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   alternativeTitles:
   - job-alt-title-bodyguard
   access:

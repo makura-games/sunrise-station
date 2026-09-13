@@ -41,7 +41,6 @@
     templateId: FishXenoborgReaper
   - type: InventorySlots
   - type: Body
-    prototype: Reaper
   - type: Hands
     showInHands: true
   - type: DamageStateVisuals

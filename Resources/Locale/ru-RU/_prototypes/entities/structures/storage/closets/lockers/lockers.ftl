@@ -96,5 +96,5 @@ ent-LockerClown = шкаф клоуна
     .desc = { ent-LockerBaseSecure.desc }
 ent-LockerMime = шкаф мима
     .desc = { ent-LockerBaseSecure.desc }
-ent-LockerRepresentative = шкаф представителя NanoTrasen
+ent-LockerRepresentative = шкаф представителя нанотрейзен
     .desc = { ent-LockerBaseSecure.desc }

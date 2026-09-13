@@ -1,4 +1,4 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 
 using Content.Shared._Sunrise.InteractionsPanel.Data.UI;
 using Content.Shared._Sunrise.PlayerCache;
@@ -8,10 +8,10 @@ using Robust.Shared.Network;
 
 namespace Content.Client._Sunrise.PlayerCache;
 
-public sealed class PlayerCacheManager
+public sealed partial class PlayerCacheManager
 {
-    [Dependency] private readonly IClientNetManager _netManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private PlayerCacheData _cache = new();
 

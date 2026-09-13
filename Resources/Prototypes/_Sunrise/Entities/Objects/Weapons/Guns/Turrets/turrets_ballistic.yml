@@ -138,6 +138,7 @@
     - state: panel
       renderingStrategy: NoRotation
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
@@ -204,7 +205,7 @@
       params:
         pitch: 0.8
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleHeavyArtillery
+    proto: CartridgeRifleHeavySP
     capacity: 160
   - type: Destructible
     thresholds:
@@ -673,6 +674,8 @@
     fireModes:
     - proto: BulletEnergyTurretDisabler
       fireCost: 1
+  - type: BatterySelfRecharger
+    autoRechargeRate: 5
   - type: Destructible
     thresholds:
     - trigger:
@@ -726,23 +729,23 @@
         prob: 0.25
       - id: ScrapGlass
         prob: 0.25
-      - id: CartridgeRifleHeavyArtillery
+      - id: CartridgeRifleHeavySP
         prob: 0.25
-      - id: CartridgeRifleHeavyArtillery
+      - id: CartridgeRifleHeavySP
         prob: 0.25
-      - id: CartridgeRifleHeavyArtillery
+      - id: CartridgeRifleHeavySP
         prob: 0.25
-      - id: CartridgeRifleHeavyArtillery
+      - id: CartridgeRifleHeavySP
         prob: 0.25
-      - id: CartridgeRifleHeavyArtillery
+      - id: CartridgeRifleHeavySP
         prob: 0.25
-      - id: CartridgeRifleHeavyArtillery
+      - id: CartridgeRifleHeavySP
         prob: 0.25
-      - id: CartridgeRifleHeavyArtillery
+      - id: CartridgeRifleHeavySP
         prob: 0.25
-      - id: CartridgeRifleHeavyArtillery
+      - id: CartridgeRifleHeavySP
         prob: 0.25
-      - id: RifleHeavyMagazineArtillery
+      - id: RifleHeavyMagazineSP
         prob: 0.25
       - id: ShuttleGunSquallCircuitboard
         prob: 0.2
@@ -757,22 +760,57 @@
     offset: 0.0
     table: !type:AllSelector
       children:
+      - id: SpawnLootMagazineBoxBelt127
+        prob: 0.75
       - id: ScrapSteel
-        prob: 0.25
+        prob: 0.5
       - id: ScrapAirlock1
-        prob: 0.25
+        prob: 0.33
       - id: ScrapAirlock1
-        prob: 0.25
+        prob: 0.15
       - id: ScrapGlass
-        prob: 0.25
+        prob: 0.33
       - id: ScrapGlass
-        prob: 0.25
-      - id: MagazineBoxBelt127Empty
-        prob: 0.25
-      - id: MagazineBoxBelt127Empty
-        prob: 0.25
+        prob: 0.15
       - id: ShuttleGunQuadlingCircuitboard
         prob: 0.2
+
+- type: entity
+  id: SpawnLootMagazineBoxBelt127
+  name: 15mm ammo loot spawner
+  parent: MarkerBase
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: _Sunrise/Structures/Storage/Gunsafes/small_lethal.rsi
+          state: base
+        - sprite: _Sunrise/Structures/Storage/Gunsafes/small_lethal.rsi
+          state: pistol
+    - type: EntityTableSpawner
+      table: !type:NestedSelector
+        tableId: BoxBelt127
+
+- type: entityTable
+  id: BoxBelt127
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector
+      weight: 50
+      children:
+      - id: MagazineBoxBelt127Empty
+    - !type:GroupSelector
+      weight: 33
+      children:
+      - id: MagazineBoxBelt127Artillery
+      - id: MagazineBoxBelt127
+      - id: MagazineBoxBelt127Emp
+    - !type:GroupSelector
+      weight: 5
+      children:
+      - id: MagazineBoxBelt127Blast
+      - id: MagazineBoxBelt127Frag
 
 - type: entity
   id: SpawnLootRogueSiliconTurretVympel
@@ -785,22 +823,17 @@
     table: !type:AllSelector
       children:
       - id: ScrapSteel
-        prob: 0.25
+        prob: 0.75
       - id: ScrapAirlock1
-        prob: 0.25
+        prob: 0.33
       - id: ScrapAirlock1
-        prob: 0.25
+        prob: 0.33
       - id: ScrapGlass
-        prob: 0.25
-      - id: MagazineBoxBelt127Empty
-        prob: 0.25
-      - id: MagazineBoxBelt127Empty
-        prob: 0.25
-      - id: ScrapAirlock1
-        amount: 2
+        prob: 0.33
+      - id: SpawnLootMagazineBoxBelt127
+        prob: 0.75
       - id: ScrapGlass
-      - id: MagazineBoxBelt127Empty
-        amount: 2
+        prob: 0.33
       - id: ShuttleGunVympelCircuitboard
         prob: 0.2
 
@@ -917,6 +950,8 @@
     fireModes:
     - proto: BulletEnergyTurretLaser
       fireCost: 1
+  - type: BatterySelfRecharger
+    autoRechargeRate: 5
   - type: Destructible
     thresholds:
     - trigger:

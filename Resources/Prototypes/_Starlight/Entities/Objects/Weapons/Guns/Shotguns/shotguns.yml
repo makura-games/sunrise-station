@@ -70,27 +70,6 @@
     deconstructionTarget: null
 
 - type: entity
-  name: combat shotgun
-  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
-  id: WeaponShotgunCombat
-  description: A semi automatic shotgun with tactical furniture and a six-shell capacity underneath.
-  components:
-  - type: Item
-    sprite: _Starlight/Objects/Weapons/Guns/Shotguns/cshotgun_inhands_64x.rsi
-  - type: Gun
-    spread: 20
-    projectileSpeed: 25
-  - type: GunSpreadModifier # Sunrise-Add
-    spread: 1.2
-  - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Shotguns/cshotgun.rsi
-  - type: Clothing
-    sprite: _Starlight/Objects/Weapons/Guns/Shotguns/cshotgun.rsi
-  - type: GunRequiresWield
-  - type: BallisticAmmoProvider
-    capacity: 7
-
-- type: entity
   name: cycler shotgun
   parent: [BaseWeaponShotgunAny, BaseGunWieldable, BaseSecurityContraband] # , BaseSecuritySalvageContraband
   id: WeaponShotgunCycler
@@ -300,39 +279,3 @@
         knockback: 0.4
         staminaMultiplier: 15
   # Sunrise-End
-
-- type: entity
-  name: makeshift shotgun
-  parent: [WeaponFlareGunSecurity, BaseMinorContraband, BaseGunShotgunSound] # Sunrise edit - shotgun handling sounds
-  id: WeaponShotgunMakeshift
-  description: A small hand-cannon that fires .50 shotgun shells. Has no cloth to hold it together, so it has a high chance of falling apart with every shot.
-  components:
-  - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Shotguns/makeshift_shotgun.rsi
-    layers:
-      - state: base
-        map: ["enum.GunVisualLayers.Base"]
-  - type: Item
-    size: Small
-    sprite: _Starlight/Objects/Weapons/Guns/Shotguns/makeshift_shotgun.rsi
-  - type: Construction
-    graph: MakeshiftShotgunGraph
-    node: shotgun
-  - type: WeaponDismantleOnShoot
-    dismantleChance: 0.50
-    selfDamage:
-      types:
-        Blunt: 5
-        Heat: 5
-    items:
-      - id: ModularBarrel
-        launchAngle: 0
-        prob: 1
-      - id: ModularReceiver
-        launchAngle: 90
-        prob: 0.10
-      - id: RifleStock
-        launchAngle: 180
-        prob: 0.80
-  - type: Gun
-    projectileSpeed: 25

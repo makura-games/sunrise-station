@@ -33,8 +33,9 @@
       state: rock_asteroid_west
   - type: MiningScannerViewable
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Rock
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -849,8 +850,9 @@
       tags:
       - Pickaxe
   - type: Damageable
+    damageModifierSet: Rock # Sunrise-Edit
+  - type: Injurable
     damageContainer: StructuralInorganic
-    damageModifierSet: Rock #Sunrise-Edit
   - type: Destructible
     thresholds:
     - trigger:

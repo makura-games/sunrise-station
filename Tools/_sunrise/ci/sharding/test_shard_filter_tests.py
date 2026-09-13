@@ -1,7 +1,9 @@
 import importlib.util
+import io
 import json
 import tempfile
 import unittest
+from contextlib import redirect_stderr
 from pathlib import Path
 
 
@@ -63,13 +65,19 @@ class TestShardFilterTests(unittest.TestCase):
         self.assertEqual(tests, ["Content.Tests.Fixture.Test"])
 
     def test_groups_identically_named_methods_by_fixture(self):
+        timings = {
+            **TIMINGS,
+            "methodCaseSeconds": {
+                "Content.Tests.SecondFixture.Test": 1.0,
+            },
+        }
         groups, seconds = SHARD_FILTER.extract_groups(
             [
                 "Content.Tests.FirstFixture.Test",
                 "Content.Tests.SecondFixture.Test",
                 "Content.Tests.SecondFixture.Test(1)",
             ],
-            TIMINGS,
+            timings,
             1,
         )
 
@@ -81,6 +89,22 @@ class TestShardFilterTests(unittest.TestCase):
             },
         )
         self.assertEqual(seconds["Content.Tests.FirstFixture", "Test", None], 2.0)
+
+    def test_splits_unmeasured_parameterized_methods_into_individual_cases(self):
+        tests = [
+            "Content.Tests.Fixture.Test(1)",
+            "Content.Tests.Fixture.Test(2)",
+        ]
+
+        groups, _ = SHARD_FILTER.extract_groups(tests, TIMINGS, 8)
+
+        self.assertEqual(
+            groups,
+            {
+                ("Content.Tests.Fixture", "Test", tests[0]): 1,
+                ("Content.Tests.Fixture", "Test", tests[1]): 1,
+            },
+        )
 
     def test_splits_large_parameterized_methods_into_individual_cases(self):
         case_count = SHARD_FILTER.PARAMETERIZED_CASE_SPLIT_THRESHOLD + 1
@@ -154,6 +178,29 @@ class TestShardFilterTests(unittest.TestCase):
 
         self.assertEqual(loads, [2.0, 2.0])
         self.assertEqual([len(shard) for shard in shards], [2, 2])
+
+    def test_builds_single_profile_matrix_batch(self):
+        first, second = SHARD_FILTER.build_profile_matrices(20, 8)
+
+        self.assertEqual(len(first["include"]), 160)
+        self.assertEqual(second, {"include": []})
+        self.assertEqual(
+            {(entry["profile_run"], entry["shard"]) for entry in first["include"]},
+            {(profile_run, shard) for profile_run in range(1, 21) for shard in range(8)},
+        )
+
+    def test_splits_large_profile_matrix_without_duplicates(self):
+        first, second = SHARD_FILTER.build_profile_matrices(50, 8)
+        entries = first["include"] + second["include"]
+        pairs = [(entry["profile_run"], entry["shard"]) for entry in entries]
+
+        self.assertEqual(len(first["include"]), 200)
+        self.assertEqual(len(second["include"]), 200)
+        self.assertEqual(len(pairs), len(set(pairs)))
+        self.assertEqual(
+            set(pairs),
+            {(profile_run, shard) for profile_run in range(1, 51) for shard in range(8)},
+        )
 
     def test_builds_runsettings_with_escaped_filter(self):
         settings = SHARD_FILTER.build_runsettings("class=='Fixture'&&method=='Test'")
@@ -243,6 +290,47 @@ class TestShardFilterTests(unittest.TestCase):
 
         self.assertEqual(config["caseSeconds"], {measured: 1.0})
         self.assertEqual(missing_tests, [missing])
+
+    def test_merges_shard_samples_from_the_same_profile_run(self):
+        tests = ["Content.Tests.Fixture.First", "Content.Tests.Fixture.Second"]
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory)
+            (path / "run-1-shard-0.json").write_text(
+                json.dumps({"profileRun": 1, "caseSeconds": {tests[0]: 1.0}}),
+                encoding="utf-8",
+            )
+            (path / "run-1-shard-1.json").write_text(
+                json.dumps({"profileRun": 1, "caseSeconds": {tests[1]: 2.0}}),
+                encoding="utf-8",
+            )
+
+            observations = SHARD_FILTER.load_observations(path, tests)
+
+        self.assertEqual(observations, {tests[0]: {1: 1.0}, tests[1]: {1: 2.0}})
+
+    def test_ignores_invalid_profile_samples(self):
+        test = "Content.Tests.Fixture.Valid"
+        invalid_samples = {
+            "null-cases.json": {"profileRun": 1, "caseSeconds": None},
+            "zero-run.json": {"profileRun": 0, "caseSeconds": {test: 1.0}},
+            "boolean-run.json": {"profileRun": True, "caseSeconds": {test: 1.0}},
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory)
+            (path / "valid.json").write_text(
+                json.dumps({"profileRun": 1, "caseSeconds": {test: 2.0}}),
+                encoding="utf-8",
+            )
+            for filename, sample in invalid_samples.items():
+                (path / filename).write_text(json.dumps(sample), encoding="utf-8")
+
+            stderr = io.StringIO()
+            with redirect_stderr(stderr):
+                observations = SHARD_FILTER.load_observations(path, [test])
+
+        self.assertEqual(observations, {test: {1: 2.0}})
+        for filename in invalid_samples:
+            self.assertIn(filename, stderr.getvalue())
 
 
 if __name__ == "__main__":

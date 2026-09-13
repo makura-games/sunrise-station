@@ -1,3 +1,9 @@
+ent-Doubloon20 = doubloons
+    .desc = Dirty coins used for dubious pirate dealings.
+    .suffix = 20 DB
+ent-Doubloon29 = doubloons
+    .desc = Dirty coins used for dubious pirate dealings.
+    .suffix = 29 DB
 ent-ComputerPirateUplink = black market console
     .desc = An old, rusted console barely held together by loose wiring and luck. The screen flickers, but the black market network still responds to requests.
 ent-ComputerPirateExchanger = black market exchanger

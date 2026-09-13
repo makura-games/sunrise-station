@@ -1,19 +1,27 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Database;
+using Content.Shared.Body;
 using Content.Shared.CCVar;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Markings;
+using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
+using Content.Shared.Preferences.Loadouts;
+using Content.Shared.Roles;
+using Content.Shared.Traits;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
+using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Utility;
-using Content.Sunrise.Interfaces.Shared; // Sunrise-Sponsors
 
 namespace Content.Server.Preferences.Managers
 {
@@ -21,17 +29,18 @@ namespace Content.Server.Preferences.Managers
     /// Sends <see cref="MsgPreferencesAndSettings"/> before the client joins the lobby.
     /// Receives <see cref="MsgSelectCharacter"/> and <see cref="MsgUpdateCharacter"/> at any time.
     /// </summary>
-    public sealed class ServerPreferencesManager : IServerPreferencesManager, IPostInjectInit
+    public sealed partial class ServerPreferencesManager : IServerPreferencesManager, IPostInjectInit // Sunrise-Edit
     {
-        [Dependency] private readonly IServerNetManager _netManager = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly IServerDbManager _db = default!;
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly IDependencyCollection _dependencies = default!;
-        [Dependency] private readonly ILogManager _log = default!;
-        [Dependency] private readonly UserDbDataManager _userDb = default!;
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        private ISharedSponsorsManager? _sponsors;
+        [Dependency] private IServerNetManager _netManager = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private IServerDbManager _db = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
+        [Dependency] private IDependencyCollection _dependencies = default!;
+        [Dependency] private ILogManager _log = default!;
+        [Dependency] private UserDbDataManager _userDb = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private MarkingManager _marking = default!;
+        [Dependency] private ISerializationManager _serialization = default!;
 
         // Cache player prefs on the server so we don't need as much async hell related to them.
         private readonly Dictionary<NetUserId, PlayerPrefData> _cachedPlayerPrefs =
@@ -43,13 +52,142 @@ namespace Content.Server.Preferences.Managers
 
         public void Init()
         {
-            IoCManager.Instance!.TryResolveType(out _sponsors); // Sunrise-Sponsors
+            InitializeSunriseSponsors(); // Sunrise-Edit - подключаем данные спонсоров
             _netManager.RegisterNetMessage<MsgPreferencesAndSettings>();
             _netManager.RegisterNetMessage<MsgSelectCharacter>(HandleSelectCharacterMessage);
             _netManager.RegisterNetMessage<MsgUpdateCharacter>(HandleUpdateCharacterMessage);
             _netManager.RegisterNetMessage<MsgDeleteCharacter>(HandleDeleteCharacterMessage);
             _netManager.RegisterNetMessage<MsgUpdateConstructionFavorites>(HandleUpdateConstructionFavoritesMessage);
             _sawmill = _log.GetSawmill("prefs");
+        }
+
+        private static TValue? TryDeserialize<TValue>(JsonDocument document) where TValue : class
+        {
+            try
+            {
+                return document.Deserialize<TValue>();
+            }
+            catch (JsonException)
+            {
+                return null;
+            }
+        }
+
+        internal PlayerPreferences ConvertPreferences(Preference prefs)
+        {
+            var maxSlot = prefs.Profiles.Max(p => p.Slot) + 1;
+            var profiles = new Dictionary<int, HumanoidCharacterProfile>(maxSlot);
+            foreach (var profile in prefs.Profiles)
+            {
+                profiles[profile.Slot] = ConvertProfiles(profile);
+            }
+
+            var constructionFavorites = new List<ProtoId<ConstructionPrototype>>(prefs.ConstructionFavorites.Count);
+            foreach (var favorite in prefs.ConstructionFavorites)
+                constructionFavorites.Add(new ProtoId<ConstructionPrototype>(favorite));
+
+            return new PlayerPreferences(profiles, prefs.SelectedCharacterSlot, Color.FromHex(prefs.AdminOOCColor), constructionFavorites);
+        }
+
+        internal HumanoidCharacterProfile ConvertProfiles(Profile profile)
+        {
+
+            var jobs = profile.Jobs.ToDictionary(j => new ProtoId<JobPrototype>(j.JobName), j => (JobPriority) j.Priority);
+            var antags = profile.Antags.Select(a => new ProtoId<AntagPrototype>(a.AntagName));
+            var traits = profile.Traits.Select(t => new ProtoId<TraitPrototype>(t.TraitName));
+
+            var sex = Sex.Male;
+            if (Enum.TryParse<Sex>(profile.Sex, true, out var sexVal))
+                sex = sexVal;
+
+            var spawnPriority = (SpawnPriorityPreference) profile.SpawnPriority;
+
+            var gender = sex == Sex.Male ? Gender.Male : Gender.Female;
+            if (Enum.TryParse<Gender>(profile.Gender, true, out var genderVal))
+                gender = genderVal;
+
+
+            var markings =
+                new Dictionary<ProtoId<OrganCategoryPrototype>, Dictionary<HumanoidVisualLayers, List<Marking>>>();
+
+            var species = profile.Species;
+            if (!_prototypeManager.HasIndex<SpeciesPrototype>(species))
+                species = HumanoidCharacterProfile.DefaultSpecies;
+
+            if (profile.OrganMarkings?.RootElement is { } element)
+            {
+                var data = element.ToDataNode();
+                markings = _serialization
+                    .Read<Dictionary<ProtoId<OrganCategoryPrototype>, Dictionary<HumanoidVisualLayers, List<Marking>>>>(
+                        data,
+                        notNullableOverride: true);
+            }
+            else if (profile.Markings is { } profileMarkings && TryDeserialize<List<string>>(profileMarkings) is { } markingsRaw)
+            {
+                List<Marking> markingsList = new();
+
+                foreach (var marking in markingsRaw)
+                {
+                    var parsed = Marking.ParseFromDbString(marking);
+
+                    if (parsed is null) continue;
+
+                    markingsList.Add(parsed.Value);
+                }
+
+                AddSunriseLegacyHairMarkings(markingsList, profile); // Sunrise-Edit - восстанавливаем волосы и эффекты старых профилей
+
+                markings = _marking.ConvertMarkings(markingsList, species);
+            }
+
+            ApplySunriseLegacyHairEffects(markings, profile); // Sunrise-Edit - восстанавливаем эффекты волос старых профилей
+
+            var loadouts = new Dictionary<string, RoleLoadout>();
+
+            foreach (var role in profile.Loadouts)
+            {
+                var loadout = new RoleLoadout(role.RoleName)
+                {
+                    EntityName = role.EntityName,
+                };
+
+                foreach (var group in role.Groups)
+                {
+                    var groupLoadouts = loadout.SelectedLoadouts.GetOrNew(group.GroupName);
+                    foreach (var profLoadout in group.Loadouts)
+                    {
+                        groupLoadouts.Add(new Loadout()
+                        {
+                            Prototype = profLoadout.LoadoutName,
+                        });
+                    }
+                }
+
+                loadouts[role.RoleName] = loadout;
+            }
+
+            var humanoid = new HumanoidCharacterProfile(
+                profile.CharacterName,
+                profile.FlavorText,
+                species,
+                profile.Age,
+                sex,
+                gender,
+                new HumanoidCharacterAppearance
+                (
+                    Color.FromHex(profile.EyeColor),
+                    Color.FromHex(profile.SkinColor),
+                    markings
+                ),
+                spawnPriority,
+                jobs,
+                (PreferenceUnavailableMode) profile.PreferenceUnavailable,
+                antags.ToHashSet(),
+                traits.ToHashSet(),
+                loadouts
+            );
+
+            return ApplySunriseProfileData(humanoid, profile, sex); // Sunrise-Edit - загружаем fork-поля профиля
         }
 
         private async void HandleSelectCharacterMessage(MsgSelectCharacter message)
@@ -95,7 +233,7 @@ namespace Content.Server.Preferences.Managers
                 await SetProfile(userId, message.Slot, message.Profile);
         }
 
-        public async Task SetProfile(NetUserId userId, int slot, ICharacterProfile profile)
+        public async Task SetProfile(NetUserId userId, int slot, HumanoidCharacterProfile profile)
         {
             if (!_cachedPlayerPrefs.TryGetValue(userId, out var prefsData) || !prefsData.PrefsLoaded)
             {
@@ -109,14 +247,9 @@ namespace Content.Server.Preferences.Managers
             var curPrefs = prefsData.Prefs!;
             var session = _playerManager.GetSessionById(userId);
 
-            // Sunrise-Sponsors-Start
-            var sponsorPrototypes = _sponsors != null && _sponsors.TryGetPrototypes(session.UserId, out var prototypes)
-                ? prototypes.ToArray()
-                : [];
-            profile.EnsureValid(session, _dependencies, sponsorPrototypes);
-            // Sunrise-Sponsors-End
+            ValidateSunriseProfile(profile, session); // Sunrise-Edit - проверяем доступные спонсорские прототипы
 
-            var profiles = new Dictionary<int, ICharacterProfile>(curPrefs.Characters)
+            var profiles = new Dictionary<int, HumanoidCharacterProfile>(curPrefs.Characters)
             {
                 [slot] = profile
             };
@@ -172,7 +305,7 @@ namespace Content.Server.Preferences.Managers
                 nextSlot = ns;
             }
 
-            var arr = new Dictionary<int, ICharacterProfile>(curPrefs.Characters);
+            var arr = new Dictionary<int, HumanoidCharacterProfile>(curPrefs.Characters);
             arr.Remove(slot);
 
             prefsData.Prefs = new PlayerPreferences(arr, nextSlot ?? curPrefs.SelectedCharacterIndex, curPrefs.AdminOOCColor, curPrefs.ConstructionFavorites);
@@ -234,7 +367,7 @@ namespace Content.Server.Preferences.Managers
                 {
                     PrefsLoaded = true,
                     Prefs = new PlayerPreferences(
-                        new[] { new KeyValuePair<int, ICharacterProfile>(0, HumanoidCharacterProfile.Random()) },
+                        new[] { new KeyValuePair<int, HumanoidCharacterProfile>(0, HumanoidCharacterProfile.Random()) },
                         0, Color.Transparent, [])
                 };
 
@@ -251,17 +384,7 @@ namespace Content.Server.Preferences.Managers
                 async Task LoadPrefs()
                 {
                     var prefs = await GetOrCreatePreferencesAsync(session.UserId, cancel);
-                    // Sunrise-Sponsors-Start: Remove sponsor markings from expired sponsors
-                    var collection = IoCManager.Instance!;
-                    foreach (var (_, profile) in prefs.Characters)
-                    {
-                        var sponsorPrototypes = _sponsors != null && _sponsors.TryGetPrototypes(session.UserId, out var prototypes)
-                            ? prototypes.ToArray()
-                            : [];
-                        profile.EnsureValid(session, collection, sponsorPrototypes);
-                    }
-                    // Sunrise-Sponsors-End
-                    prefsData.Prefs = prefs;
+                    prefsData.Prefs = ConvertPreferences(prefs);
                 }
             }
         }
@@ -283,10 +406,7 @@ namespace Content.Server.Preferences.Managers
             {
                 MaxCharacterSlots = GetMaxUserCharacterSlots(session.UserId) // Sunrise-Sponsors
             };
-            // Sunrise-Start
-            if (msg.Preferences.SelectedCharacterIndex > GetMaxUserCharacterSlots(session.UserId))
-                msg.Preferences.SelectedCharacterIndex = prefsData.Prefs.Characters.FirstOrDefault().Key;
-            // Sunrise-End
+            EnsureSunriseSelectedCharacterIndex(msg.Preferences, msg.Settings.MaxCharacterSlots); // Sunrise-Edit - выбранный слот должен оставаться доступным
             _netManager.ServerSendMessage(msg, session.Channel);
         }
 
@@ -299,15 +419,6 @@ namespace Content.Server.Preferences.Managers
         {
             return _cachedPlayerPrefs.ContainsKey(session.UserId);
         }
-
-        // Sunrise-Sponsors-Start
-        private int GetMaxUserCharacterSlots(NetUserId userId)
-        {
-            var maxSlots = _cfg.GetCVar(CCVars.GameMaxCharacterSlots);
-            var extraSlots = _sponsors?.GetExtraCharSlots(userId) ?? 0;
-            return maxSlots + extraSlots;
-        }
-        // Sunrise-Sponsors-End
 
         /// <summary>
         /// Tries to get the preferences from the cache
@@ -355,7 +466,7 @@ namespace Content.Server.Preferences.Managers
             return null;
         }
 
-        private async Task<PlayerPreferences> GetOrCreatePreferencesAsync(NetUserId userId, CancellationToken cancel)
+        private async Task<Preference> GetOrCreatePreferencesAsync(NetUserId userId, CancellationToken cancel)
         {
             var prefs = await _db.GetPlayerPreferencesAsync(userId, cancel);
             if (prefs is null)
@@ -373,20 +484,20 @@ namespace Content.Server.Preferences.Managers
             // Clean up preferences in case of changes to the game,
             // such as removed jobs still being selected.
 
-            var sponsorPrototypes = _sponsors != null && _sponsors.TryGetPrototypes(session.UserId, out var prototypes) ? prototypes.ToArray() : []; // Sunrise-Sponsors
+            var sponsorPrototypes = GetSunriseSponsorPrototypes(session.UserId); // Sunrise-Edit
             return new PlayerPreferences(prefs.Characters.Select(p =>
             {
-                return new KeyValuePair<int, ICharacterProfile>(p.Key, p.Value.Validated(session, collection, sponsorPrototypes));
+                return new KeyValuePair<int, HumanoidCharacterProfile>(p.Key, p.Value.Validated(session, collection, sponsorPrototypes));
             }), prefs.SelectedCharacterIndex, prefs.AdminOOCColor, prefs.ConstructionFavorites);
         }
 
-        public IEnumerable<KeyValuePair<NetUserId, ICharacterProfile>> GetSelectedProfilesForPlayers(
+        public IEnumerable<KeyValuePair<NetUserId, HumanoidCharacterProfile>> GetSelectedProfilesForPlayers(
             List<NetUserId> usernames)
         {
             return usernames
                 .Select(p => (_cachedPlayerPrefs[p].Prefs, p))
                 .Where(p => p.Prefs != null)
-                .Select(p => new KeyValuePair<NetUserId, ICharacterProfile>(p.p, p.Prefs!.SelectedCharacter));
+                .Select(p => new KeyValuePair<NetUserId, HumanoidCharacterProfile>(p.p, p.Prefs!.SelectedCharacter));
         }
 
         internal static bool ShouldStorePrefs(LoginType loginType)

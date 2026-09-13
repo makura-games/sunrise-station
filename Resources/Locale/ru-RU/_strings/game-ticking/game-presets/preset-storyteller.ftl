@@ -1,12 +1,9 @@
 storyteller-preset-title = Рассказчик: Классический
 storyteller-preset-description = Судьба станции — в руках незримого режиссера. Он чутко реагирует на происходящее, создавая уникальную историю взлетов и падений вашего экипажа.
-
 storyteller-preset-calm-title = Рассказчик: Спокойный
 storyteller-preset-calm-description = Затишье в космосе. Рассказчик предпочитает размеренное развитие сюжета, давая экипажу больше времени на передышку и стараясь не разводить лишний хаос.
-
 storyteller-preset-insane-title = Рассказчик: Безумный
 storyteller-preset-insane-description = Абсолютный хаос. Рассказчик будет безжалостно бросать на станцию одну угрозу за другой, пуская в ход самые коварные и разрушительные события.
-
 ui-vote-storyteller-entry = Рассказчик
 ui-vote-preset-category-title = Выбор типа игрового режима
 ui-vote-preset-category-regular = Обычные режимы
@@ -15,21 +12,17 @@ ui-vote-preset-category-tie = Ничья! Случайно выбрана кат
 ui-vote-preset-category-win = Голосование завершено! Выбрана категория: { $category }
 ui-vote-storyteller-title = Выбор типа Рассказчика
 ui-vote-storyteller-auto-set = Доступен только один тип Рассказчика: { $type }. Голосование пропущено.
-
 ui-vote-storyteller-type-calm = Спокойный
 ui-vote-storyteller-type-classic = Классический
 ui-vote-storyteller-type-insane = Безумный
 ui-vote-storyteller-type-tie = Ничья! Случайно выбран тип Рассказчика: { $type }
 ui-vote-storyteller-type-win = Голосование завершено! Выбран тип Рассказчика: { $type }
-
 ui-vote-storyteller-type-calm-name = Спокойный
 ui-vote-storyteller-type-classic-name = Классический
 ui-vote-storyteller-type-insane-name = Безумный
-
 round-end-summary-window-storyteller-name-label = Активный рассказчик: [color=#7DF9FF]{$storyteller}[/color]
 round-end-summary-window-storyteller-history-tab-title = История Рассказчика
 round-end-summary-window-storyteller-history-empty = История пуста. В этом раунде не произошло ничего примечательного.
-
 storyteller-history-event-started = В логах станции зафиксировано начало события: [color=#FF8C00]{$name}[/color].
 storyteller-history-event-ended = Событие [color=#FF8C00]{$name}[/color] завершилось, продлившись {$duration} мин.
 storyteller-history-threat-started = Сенсоры зафиксировали возникновение угрозы: [color=#FF4500]{$name}[/color].
@@ -79,7 +72,6 @@ storyteller-history-filter-explosions = Взрывы
 storyteller-history-filter-research = Исследования
 storyteller-history-filter-arrivals = Прибытия
 storyteller-history-filter-cryo = Крио
-
 storyteller-history-arrival-no-job = Пассажир
 storyteller-history-location-unknown = Неизвестно
 storyteller-history-location-space = Космос
@@ -104,7 +96,6 @@ storyteller-metadata-solarflare-start = Светило разразилось м
 storyteller-metadata-solarflare-end = Солнечная активность стабилизировалась, [color=#FF8C00]Солнечная вспышка[/color] завершилась после {$duration} мин. буйства.
 storyteller-metadata-ionstorm-start = Космическая аномалия настигла энергосистемы: станция вошла в зону действия [color=#1E90FF]Ионного шторма[/color].
 storyteller-metadata-ionstorm-end = Напряжение в электросетях спало, [color=#1E90FF]Ионный шторм[/color] утих, продлившись {$duration} мин.
-
 storyteller-metadata-randomsentience-start = Нанотрейзен провела секретный эксперимент: некоторые обитатели фауны станции внезапно обрели полноценный разум.
 storyteller-metadata-anomalyspawn-start = Физическая реальность дала трещину: в одном из отсеков материализовалась загадочная космическая [color=#FF00FF]Аномалия[/color].
 storyteller-metadata-kudzugrowth-start = Биологическая тревога: быстрорастущие агрессивные споры [color=#228B22]Кудзу[/color] проросли сквозь обшивку станции.
@@ -119,9 +110,9 @@ storyteller-metadata-snailmigration-start = Медленная, но липка�
 storyteller-metadata-snailmigrationlowpop-start = Тихие коридоры наполнились шорохом раковин: зафиксирована небольшая миграция улиток.
 
 # Spawns
-storyteller-metadata-slimesspawn-start = Утечка биоопасных отходов привела к появлению агрессивных разноцветных слаймов.
-storyteller-metadata-snakespawn-start = Из заброшенных уголков станции выползли полчища ядовитых змей.
-storyteller-metadata-spiderspawn-start = Глубокие технические шахты заполнились паутиной: началось нашествие гигантских пауков.
+storyteller-metadata-slimesspawnhorde-start = Утечка биоопасных отходов привела к появлению агрессивных разноцветных слаймов.
+storyteller-metadata-snakespawnhorde-start = Из заброшенных уголков станции выползли полчища ядовитых змей.
+storyteller-metadata-spiderspawnhorde-start = Глубокие технические шахты заполнились паутиной: началось нашествие гигантских пауков.
 
 # Disasters
 storyteller-metadata-gamerulemeteorswarmsmall-start = Навигационные системы предупреждают о приближении небольшого метеоритного роя.
@@ -150,20 +141,20 @@ storyteller-metadata-giftsmedical-start = Медицинский отсек по
 storyteller-metadata-bluespacelocker-start = На палубе материализовался загадочный шкаф, окутанный мерцанием блюспейс-измерений.
 
 # Unknown Shuttles
-storyteller-metadata-unknownshuttlentquark-start = Вблизи станции появился научно-исследовательский шаттл "NT Quark".
-storyteller-metadata-unknownshuttleflatline-start = Сенсоры обнаружили дрейфующий шаттл "Flatline" с отключенными системами жизнеобеспечения.
+storyteller-metadata-unknownshuttlentquark-start = Вблизи станции появился научно-исследовательский шаттл «НТ Кварк».
+storyteller-metadata-unknownshuttleflatline-start = Сенсоры обнаружили дрейфующий шаттл «Флетлайн» с отключенными системами жизнеобеспечения.
 storyteller-metadata-unknownshuttlecruiser-start = В сектор вошел старый заброшенный крейсер, окутанный космической пылью.
 storyteller-metadata-unknownshuttlemeatzone-start = Сканеры биосигналов зафиксировали пугающее явление: неподалеку дрейфует шаттл "Мясная зона".
-storyteller-metadata-unknownshuttlentincorporation-start = В окрестностях станции появился представительский шаттл корпорации NanoTrasen.
+storyteller-metadata-unknownshuttlentincorporation-start = В окрестностях станции появился представительский шаттл корпорации нанотрейзен.
 storyteller-metadata-unknownshuttlemanowar-start = В сектор прибыл грозный боевой корабль типа "Мановар".
 storyteller-metadata-unknownshuttleeternal-start = Неподалеку от станции обнаружен древний шаттл "Вечный".
 storyteller-metadata-unknownshuttlelambordeere-start = В космосе замечен роскошный спортивный шаттл "Ламбордир", дрейфующий без экипажа.
 storyteller-metadata-unknownshuttlecargolost-start = Обнаружен потерянный грузовой шаттл с ценными контейнерами.
 storyteller-metadata-unknownshuttlejoe-start = Неподалеку от станции появился скромный шаттл странствующего торговца по имени Джо.
-storyteller-metadata-unknownshuttletravelingcuisine-start = Неподалеку от станции появился легендарный шаттл мобильной кухни "Traveling Cuisine".
+storyteller-metadata-unknownshuttletravelingcuisine-start = Неподалеку от станции появился легендарный шаттл мобильной кухни «Тревелинг Кьюзин».
 storyteller-metadata-unknownshuttlemicroshuttle-start = Вблизи станции появился крошечный экспериментальный микро-шаттл.
 storyteller-metadata-unknownshuttleinstigator-start = В безмолвной пустоте космоса показался зловещий и угрожающий силуэт шаттла класса "Провокатор".
-storyteller-metadata-unknownshuttleflatline-end = Дрейфующий среди звёзд пустой челнок "Flatline" медленно покинул окрестности станции.
+storyteller-metadata-unknownshuttleflatline-end = Дрейфующий среди звёзд пустой челнок «Флетлайн» медленно покинул окрестности станции.
 storyteller-metadata-unknownshuttlecargo-end = Потерянный грузовой шаттл, мигнув навигационными огнями, скрылся в гиперпространстве.
 
 # Derelict Cyborgs
@@ -192,7 +183,7 @@ storyteller-metadata-gamerulespacedustminor-start = Обшивку станци�
 storyteller-metadata-gamerulespacedustmajor-start = Корпус задрожал под ударами микрометеоритов: станция проходит сквозь плотное и опасное облако космической пыли.
 storyteller-metadata-breakerflip-start = Свет на мгновение погас: в распределительном щитке сработал один из главных выключателей.
 storyteller-metadata-sleeperagents-start = Засекреченные шифры активированы: среди экипажа пробудились законспирированные агенты Синдиката.
-storyteller-metadata-clericalerror-start = Бюрократические шестерни NanoTrasen дали сбой: из-за нелепой канцелярской ошибки на станции началась путаница.
+storyteller-metadata-clericalerror-start = Бюрократические шестерни нанотрейзен дали сбой: из-за нелепой канцелярской ошибки на станции началась путаница.
 storyteller-metadata-fugitive-start = Скрываясь в тенях коридоров, на борт пробрался разыскиваемый галактическим правосудием беглец.
 storyteller-metadata-ventfleshworms-start = Из решёток воздуховода начали выползать скользкие и отвратительные плотяные черви.
 storyteller-metadata-revolutionary-start = Глухой ропот недовольства перерос в открытый бунт: среди экипажа вспыхнуло пламя революции!
@@ -200,8 +191,7 @@ storyteller-metadata-paradoxclonespawn-start = Ткань реальности �
 storyteller-metadata-assaultops-start = Прозвучал сигнал боевой тревоги: профессиональный штурмовой отряд Синдиката начал прямую атаку на станцию!
 storyteller-metadata-powergridcheck-start = Инженеры объявили о начале масштабных профилактических работ в энергосети станции.
 storyteller-metadata-thief-start = В толпе экипажа скрылся ловкий карманник, нацеленный на личные вещи сотрудников.
-storyteller-metadata-terminatorspawn-start = Блюспейс-вспышка озарила отсек: из далёкого будущего прибыл безжалостный Терминатор, чтобы забрать жизнь своей цели.
-storyteller-metadata-spiderclownspawn-start = Безумный цирковой кошмар воплотился наяву: на борту материализовался ужасающий Паук-Клоун.
+storyteller-metadata-spiderclownspawnhorde-start = Безумный цирковой кошмар воплотился наяву: на борту материализовался ужасающий Паук-Клоун.
 storyteller-metadata-abductors-end = Чуждые сигналы утихли: биологическая активность Абдукторов в секторе прекратилась.
 storyteller-metadata-revolutionary-end = Волна мятежа спала, и революционный запал среди бунтовщиков сошёл на нет.
 storyteller-metadata-bloodcult-end = Тёмная скверна отступила: Кровавый культ был полностью изгнан со станции.

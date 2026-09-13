@@ -2,45 +2,43 @@ ent-WeaponTurretPirate = { ent-BaseWeaponBallisticTurret }
     .suffix = Пират
     .desc = { ent-BaseWeaponBallisticTurret.desc }
 
-
 ent-WeaponTurretPirateDisposable = { ent-WeaponTurretSyndicateDisposable }
     .suffix = Пират, Одноразовый
     .desc = { ent-WeaponTurretSyndicateDisposable.desc }
-
-ent-WeaponTurretRogueSiliconSquall = ИИ охранная турель
-    .suffix = Rogue Silicon, ИИ, Шквал
+ent-WeaponTurretRogueSiliconSquall = ии охранная турель
+    .suffix = Роуг Силикон, ИИ, Шквал
     .desc = { ent-WeaponEnergyTurretAI.desc }
 
-ent-WeaponTurretRogueSiliconQuadling = ИИ охранная турель
-    .suffix = Rogue Silicon, ИИ, Квадлинг
+ent-WeaponTurretRogueSiliconQuadling = ии охранная турель
+    .suffix = Роуг Силикон, ИИ, Квадлинг
     .desc = { ent-WeaponEnergyTurretAI.desc }
 
-ent-WeaponTurretRogueSiliconVympel = ИИ охранная турель
-    .suffix = Rogue Silicon, ИИ, Вымпел
+ent-WeaponTurretRogueSiliconVympel = ии охранная турель
+    .suffix = Роуг Силикон, ИИ, Вымпел
     .desc = { ent-WeaponEnergyTurretAI.desc }
 
-ent-WeaponTurretRogueSiliconLongbow = ИИ охранная турель
-    .suffix = Rogue Silicon, ИИ, Лонгбоу
+ent-WeaponTurretRogueSiliconLongbow = ии охранная турель
+    .suffix = Роуг Силикон, ИИ, Лонгбоу
     .desc = { ent-WeaponEnergyTurretAI.desc }
 
-ent-WeaponTurretRogueSiliconBullfrog = ИИ охранная турель
-    .suffix = Rogue Silicon, ИИ, Буллфрог
+ent-WeaponTurretRogueSiliconBullfrog = ии охранная турель
+    .suffix = Роуг Силикон, ИИ, Буллфрог
     .desc = { ent-WeaponEnergyTurretAI.desc }
 
-ent-WeaponTurretRogueSiliconAutocannon = ИИ охранная турель
-    .suffix = Rogue Silicon, ИИ, Автопушка
+ent-WeaponTurretRogueSiliconAutocannon = ии охранная турель
+    .suffix = Роуг Силикон, ИИ, Автопушка
     .desc = { ent-WeaponEnergyTurretAI.desc }
 
-ent-WeaponTurretRogueSiliconStunner = ИИ охранная турель
-    .suffix = Rogue Silicon, ИИ, Станнер
+ent-WeaponTurretRogueSiliconStunner = ии охранная турель
+    .suffix = Роуг Силикон, ИИ, Станнер
     .desc = { ent-WeaponEnergyTurretAI.desc }
 
-ent-WeaponTurretRogueSiliconLaser = ИИ охранная турель
-    .suffix = Rogue Silicon, ИИ, Лазер
+ent-WeaponTurretRogueSiliconLaser = ии охранная турель
+    .suffix = Роуг Силикон, ИИ, Лазер
     .desc = { ent-WeaponEnergyTurretAI.desc }
 
-ent-WeaponTurretRogueSiliconBroken = сломанная ИИ охранная турель
-    .suffix = Rogue Silicon, ИИ, Сломанная
+ent-WeaponTurretRogueSiliconBroken = сломанная ии охранная турель
+    .suffix = Роуг Силикон, ИИ, Сломанная
     .desc = Разбитая турельная подложка с заклинившей бронекрышкой.
 
 ent-SpawnWeaponTurretRogueSiliconRandom = спавнер турели ренегатских силиконов

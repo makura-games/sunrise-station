@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Client.DisplacementMap;
 using Content.Client.Inventory;
-using Content.Shared._Sunrise;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
@@ -10,11 +9,9 @@ using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
-using Content.Shared.Tag;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using Robust.Shared.Utility;
@@ -22,7 +19,7 @@ using static Robust.Client.GameObjects.SpriteComponent;
 
 namespace Content.Client.Clothing;
 
-public sealed class ClientClothingSystem : ClothingSystem
+public sealed partial class ClientClothingSystem : ClothingSystem
 {
     public const string Jumpsuit = "jumpsuit";
 
@@ -44,21 +41,19 @@ public sealed class ClientClothingSystem : ClothingSystem
         {"belt", "BELT"},
         {"gloves", "HAND"},
         {"shoes", "FEET"},
-        {"pants", "PANTS"}, // Sunrise-edit
-        {"socks", "SOCKS"}, // Sunrise-edit
-        {"bra", "BRA"}, // Sunrise-edit
+        {"pants", "PANTS"}, // Sunrise-Edit - дополнительные слоты одежды
+        {"socks", "SOCKS"}, // Sunrise-Edit - дополнительные слоты одежды
+        {"bra", "BRA"}, // Sunrise-Edit - дополнительные слоты одежды
         {"id", "IDCARD"},
         {"pocket1", "POCKET1"},
         {"pocket2", "POCKET2"},
         {"suitstorage", "SUITSTORAGE"},
     };
 
-    [Dependency] private readonly IResourceCache _cache = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly DisplacementMapSystem _displacement = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private IResourceCache _cache = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private DisplacementMapSystem _displacement = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -111,11 +106,7 @@ public sealed class ClientClothingSystem : ClothingSystem
 
         List<PrototypeLayerData>? layers = null;
 
-        if (TryComp(args.Equipee, out HumanoidAppearanceComponent? humanoid))
-        {
-            var bodyTypeName = _prototype.Index<BodyTypePrototype>(humanoid.BodyType).Name;
-            item.ClothingVisuals.TryGetValue($"{args.Slot}-{bodyTypeName}", out layers);
-        }
+        GetSunriseBodyTypeVisuals(args.Equipee, item, args.Slot, ref layers); // Sunrise-Edit - учет body type visuals
 
         // first attempt to get species specific data.
         if (inventory.SpeciesId != null)
@@ -181,12 +172,7 @@ public sealed class ClientClothingSystem : ClothingSystem
         if (clothing.EquippedState != null)
             state = $"{clothing.EquippedState}";
 
-        if (TryComp(target, out HumanoidAppearanceComponent? humanoid))
-        {
-            var bodyTypeName = _prototype.Index(humanoid.BodyType).Name;
-            if (rsi.TryGetState($"{state}-{bodyTypeName}", out _))
-                state = $"{state}-{bodyTypeName}";
-        }
+        state = GetSunriseBodyTypeState(target, rsi, state); // Sunrise-Edit - подбор state по body type
 
         // species specific
         if (speciesId != null && rsi.TryGetState($"{state}-{speciesId}", out _))
@@ -246,7 +232,7 @@ public sealed class ClientClothingSystem : ClothingSystem
     {
         base.OnGotEquipped(uid, component, args);
 
-        RenderEquipment(args.Equipee, uid, args.Slot, clothingComponent: component);
+        RenderEquipment(args.EquipTarget, uid, args.Slot, clothingComponent: component);
     }
 
     private void RenderEquipment(EntityUid equipee, EntityUid equipment, string slot,
@@ -294,45 +280,28 @@ public sealed class ClientClothingSystem : ClothingSystem
         // Select displacement maps
         var displacementData = inventory.Displacements.GetValueOrDefault(slot); //Default unsexed map
 
-        string? bodyTypeName = null;
-        if (TryComp(equipee, out HumanoidAppearanceComponent? humanoid))
-        {
-            bodyTypeName = _prototype.Index(humanoid.BodyType).Name;
+        // Sunrise edit start - удаление подбора markings официалов
+        // var equipeeSex = CompOrNull<HumanoidProfileComponent>(equipee)?.Sex;
+        // if (equipeeSex != null)
+        // {
+        //    switch (equipeeSex)
+        //    {
+        //        case Sex.Male:
+        //            if (inventory.MaleDisplacements.Count > 0)
+        //                displacementData = inventory.MaleDisplacements.GetValueOrDefault(slot);
+        //            break;
+        //        case Sex.Female:
+        //            if (inventory.FemaleDisplacements.Count > 0)
+        //                displacementData = inventory.FemaleDisplacements.GetValueOrDefault(slot);
+        //            break;
+        //    }
+        // }
+        // Sunrise edit end
 
-            var hardsuitKey = $"hardsuit-{bodyTypeName}";
-
-            switch (humanoid.Sex)
-            {
-                case Sex.Male:
-                    if (inventory.MaleDisplacements.Count > 0)
-                    {
-                        displacementData = inventory.MaleDisplacements.GetValueOrDefault($"{slot}-{bodyTypeName}")
-                            ?? inventory.MaleDisplacements.GetValueOrDefault(slot);
-
-                        if (_tagSystem.HasTag(equipment, "Hardsuit"))
-                        {
-                            displacementData = inventory.MaleDisplacements.GetValueOrDefault(hardsuitKey)
-                                               ?? inventory.Displacements.GetValueOrDefault(slot);
-                        }
-                    }
-
-                    break;
-                case Sex.Female:
-                    if (inventory.FemaleDisplacements.Count > 0)
-                    {
-                        displacementData = inventory.FemaleDisplacements.GetValueOrDefault($"{slot}-{bodyTypeName}")
-                            ?? inventory.FemaleDisplacements.GetValueOrDefault(slot);
-
-                        if (_tagSystem.HasTag(equipment, "Hardsuit"))
-                        {
-                            displacementData = inventory.FemaleDisplacements.GetValueOrDefault(hardsuitKey)
-                                               ?? inventory.FemaleDisplacements.GetValueOrDefault(slot);
-                        }
-                    }
-
-                    break;
-            }
-        }
+        // Sunrise edit start - подбор displacement по body type
+        var bodyTypeVisualKey = GetSunriseBodyTypeVisualKey(equipee);
+        displacementData = GetSunriseBodyTypeDisplacement(equipee, equipment, slot, inventory, bodyTypeVisualKey, displacementData);
+        // Sunrise edit end
 
         // add the new layers
         foreach (var (key, layerData) in ev.Layers)
@@ -377,7 +346,7 @@ public sealed class ClientClothingSystem : ClothingSystem
             {
                 //Checking that the state is not tied to the current race. In this case we don't need to use the displacement maps.
                 if (layerData.State is not null && (inventory.SpeciesId is not null && layerData.State.EndsWith(inventory.SpeciesId)
-                    || bodyTypeName is not null && layerData.State.EndsWith(bodyTypeName)))
+                    || bodyTypeVisualKey is not null && layerData.State.EndsWith(bodyTypeVisualKey))) // Sunrise-Edit - body type state не использует displacement
                     continue;
 
                 if (_displacement.TryAddDisplacement(displacementData, (equipee, sprite), index, key, out var displacementKey))

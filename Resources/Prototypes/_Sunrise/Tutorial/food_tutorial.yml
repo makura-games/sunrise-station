@@ -1,6 +1,9 @@
 - type: tutorialSequence
   id: FoodTutorial
   duration: 600
+  estimatedDuration:
+    minimum: 240
+    maximum: 480
   priority: 6
   name: food-tutorial-name
   tooltip: food-tutorial-tooltip
@@ -17,10 +20,10 @@
   - FoodTutPutDrinkDown
   - FoodTutTakeMeal
   - FoodTutEatMeal
+  - FoodTutReturnDish
   - FoodTutReagentWarning
   - FoodTutExamineSuspiciousDrink
   - FoodTutUnsafeItems
-  - FoodTutReturnDish
   - FoodTutFinish
   - TutorialMHelp
 
@@ -42,7 +45,7 @@
       blockAll: true
   conditions:
   - !type:StepDelayCondition
-    delay: 9
+    delay: 10
 
 - type: tutorialStep
   id: FoodTutReachBar
@@ -123,6 +126,10 @@
       allowedItems:
       - DrinkLemonadeGlass
       popup: food-tut-softlock-pickup-highlighted
+    - type: TutorialIngestSoftLock
+      targets:
+      - DrinkLemonadeGlass
+      popup: food-tut-softlock-ingest-blocked
   conditions:
   - !type:PickupListenedCondition
     target: DrinkLemonadeGlass
@@ -222,6 +229,10 @@
       allowedItems:
       - FoodMealNachos
       popup: food-tut-softlock-pickup-highlighted
+    - type: TutorialIngestSoftLock
+      targets:
+      - FoodMealNachos
+      popup: food-tut-softlock-ingest-blocked
     - type: TutorialDropSoftLock
       popup: food-tut-softlock-keep-dishes
     - type: TutorialStorageInsertSoftLock
@@ -313,7 +324,7 @@
       popup: food-tut-softlock-keep-dishes
   conditions:
   - !type:StepDelayCondition
-    delay: 11
+    delay: 12
 
 - type: tutorialStep
   id: FoodTutExamineSuspiciousDrink
@@ -417,7 +428,7 @@
   ttsMessage: food-tut-finish-tts
   conditions:
   - !type:StepDelayCondition
-    delay: 10
+    delay: 11
 
 - type: startingGear
   id: FoodTutorialPlayerGear

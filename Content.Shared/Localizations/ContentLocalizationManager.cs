@@ -5,9 +5,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Localizations
 {
-    public sealed class ContentLocalizationManager
+    public sealed partial class ContentLocalizationManager
     {
-        [Dependency] private readonly ILocalizationManager _loc = default!;
+        [Dependency] private ILocalizationManager _loc = default!;
 
         // If you want to change your codebase's language, do it here.
         private const string Culture = "ru-RU"; // Russian-Localization
@@ -55,7 +55,8 @@ namespace Content.Shared.Localizations
 
             _loc.AddFunction(cultureEn, "MAKEPLURAL", FormatMakePlural);
             _loc.AddFunction(cultureEn, "MANY", FormatMany);
-            _loc.AddFunction(cultureEn, "NATURALFIXED", FormatNaturalFixed);
+            _loc.AddFunction(cultureEn, "NATURALFIXED", FormatNaturalFixed); // Sunrise-Edit — функция используется в en-US guidebook.
+            _loc.AddFunction(cultureEn, "NATURALPERCENT", FormatNaturalPercent); // Sunrise-Edit — функция используется в en-US guidebook.
             _loc.AddFunction(cultureEn, "LOC", FormatLoc);
         }
 

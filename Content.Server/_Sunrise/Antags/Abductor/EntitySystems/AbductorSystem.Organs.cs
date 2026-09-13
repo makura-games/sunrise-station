@@ -8,12 +8,9 @@ using Content.Shared.Popups;
 using Robust.Shared.Timing;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
-using Content.Server.Atmos.EntitySystems;
-using Content.Server.Chat.Systems;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Server.Speech.Components;
-using Content.Server.Humanoid;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared._Sunrise.Humanoid;
 using Content.Shared.Coordinates;
 using Content.Server.Mind;
 using Content.Server.Roles;
@@ -28,15 +25,13 @@ namespace Content.Server._Sunrise.Antags.Abductor;
 
 public sealed partial class AbductorSystem : SharedAbductorSystem
 {
-    [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly RoleSystem _role = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
+    [Dependency] private IGameTiming _time = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private RoleSystem _role = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private SunriseHumanoidMarkingSystem _sunriseMarking = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutions = default!;
     private static readonly EntProtoId DefaultRule = "AbductorVictim";
 
 
@@ -130,8 +125,8 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         {
             RemComp<AbductorOwoTransformatedComponent>(args.Body);
             RemComp<OwOAccentComponent>(args.Body);
-            _humanoid.RemoveMarking(args.Body, "CatEars");
-            _humanoid.RemoveMarking(args.Body, "CatTail");
+            _sunriseMarking.RemoveMarking(args.Body, "CatEars");
+            _sunriseMarking.RemoveMarking(args.Body, "CatTail");
         }
     }
     public override void Update(float frameTime)
@@ -204,8 +199,6 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
                     return;
 
                 victim.LastActivation = curTime;
-                TryComp<SolutionContainerManagerComponent>(uid, out var solution);
-
                 if (_solutions.TryGetInjectableSolution(uid, out var injectable, out _))
                     _solutions.TryAddReagent(injectable.Value, "Ephedrine", 5f);
                 break;
@@ -220,8 +213,8 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
                     _audioSystem.PlayPvs(victim.Mew, uid);
                     SpawnAttachedTo("RMCExplosionEffectGrenadeShockWave", uid.ToCoordinates());
                     EnsureComp<OwOAccentComponent>(uid);
-                    _humanoid.AddMarking(uid, "CatTail");
-                    _humanoid.AddMarking(uid, "CatEars"); // На ласте еще добавлять костюм горничной и лапки, why not
+                    _sunriseMarking.AddMarking(uid, "CatTail");
+                    _sunriseMarking.AddMarking(uid, "CatEars"); // На ласте еще добавлять костюм горничной и лапки, why not
                 }
 
                 break;

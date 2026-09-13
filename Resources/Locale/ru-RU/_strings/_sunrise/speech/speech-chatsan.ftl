@@ -1,19 +1,19 @@
-﻿russian-chatsan-word-1 = нанотразен
-russian-chatsan-replacement-1 = NanoTrasen
+russian-chatsan-word-1 = нанотразен
+russian-chatsan-replacement-1 = Нанотрейзен
 russian-chatsan-word-2 = нанотрасен
-russian-chatsan-replacement-2 = NanoTrasen
+russian-chatsan-replacement-2 = Нанотрейзен
 russian-chatsan-word-3 = нанотрахен
-russian-chatsan-replacement-3 = NanoTrasen
+russian-chatsan-replacement-3 = Нанотрейзен
 russian-chatsan-word-4 = нанотрейзен
-russian-chatsan-replacement-4 = NanoTrasen
+russian-chatsan-replacement-4 = Нанотрейзен
 russian-chatsan-word-5 = нанотрейсен
-russian-chatsan-replacement-5 = NanoTrasen
+russian-chatsan-replacement-5 = Нанотрейзен
 russian-chatsan-word-6 = нт
-russian-chatsan-replacement-6 = NanoTrasen
+russian-chatsan-replacement-6 = Нанотрейзен
 russian-chatsan-word-7 = квиллу
-russian-chatsan-replacement-7 = Qillu
+russian-chatsan-replacement-7 = Киллу
 russian-chatsan-word-8 = квилу
-russian-chatsan-replacement-8 = Qillu
+russian-chatsan-replacement-8 = Киллу
 russian-chatsan-word-10 = адик
 russian-chatsan-replacement-10 = адъютант
 russian-chatsan-word-11 = аному
@@ -564,5 +564,5 @@ russian-chatsan-word-294 = №нра
 russian-chatsan-replacement-294 = научного руководителя
 russian-chatsan-word-295 = №нру
 russian-chatsan-replacement-295 = научному руководителю
-
-
+russian-chatsan-word-9 = варден
+russian-chatsan-replacement-9 = смотритель

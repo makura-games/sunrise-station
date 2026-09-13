@@ -12,13 +12,14 @@ using Robust.Shared.Containers;
 
 namespace Content.Server._Sunrise.VentCraw
 {
-    public sealed class VentCrawTubeSystem : SharedVentCrawableSystem
+    public sealed partial class VentCrawTubeSystem : SharedVentCrawableSystem
     {
-        [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-        [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-        [Dependency] private readonly PopupSystem _popup = default!;
-        [Dependency] private readonly SharedMoverController _mover = default!;
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private SharedContainerSystem _containerSystem = default!;
+        [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+        [Dependency] private PopupSystem _popup = default!;
+        [Dependency] private SharedMoverController _mover = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
+        [Dependency] private EntityQuery<VentCrawHolderComponent> _holderQuery = default!;
 
         public override void Initialize()
         {
@@ -185,10 +186,9 @@ namespace Content.Server._Sunrise.VentCraw
 
             tube.Connected = false;
 
-            var query = GetEntityQuery<VentCrawHolderComponent>();
             foreach (var entity in tube.Contents.ContainedEntities.ToArray())
             {
-                if (query.TryGetComponent(entity, out var holder))
+                if (_holderQuery.TryGetComponent(entity, out var holder))
                 {
                     var Exitev = new VentCrawExitEvent();
                     RaiseLocalEvent(entity, ref Exitev);

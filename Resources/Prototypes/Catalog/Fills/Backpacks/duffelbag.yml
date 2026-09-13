@@ -49,13 +49,9 @@
       storagebase: !type:AllSelector
         children:
         - id: JugBicaridine
-        - id: JugPuncturase
-        - id: JugDermaline
-        - id: JugDylovene
-        - id: JugHyronalin
-        - id: JugSaline
-        - id: JugDexalinPlus
-        - id: JugTranexamicAcid
+        - id: JugPunctTranex
+        - id: JugPyraDerma
+        - id: JugDexPlusSaline
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
@@ -70,7 +66,7 @@
         - id: WeaponShotgunBulldogBiocode # Sunrise-edit
         - id: MagazineShotgun
           amount: 3
-        - id: MagazineShotgunSlug
+        - id: ShotGunKitSmall # Sunrise-edit
         - id: ClothingEyesGlassesThermalSyndie # Sunrise-edit
 
 - type: entity
@@ -86,9 +82,8 @@
         - id: WeaponSubMachineGunC20rBiocode # Sunrise-edit
         - id: MagazinePistolSubMachineGun
           amount: 2
-        - id: MagazinePistolSubMachineGunFMJ  # Sunrise-edit
+        - id: SMGAmmoKit  # Sunrise-edit
           amount: 2
-        - id: MagazinePistolSubMachineGunHP # Sunrise-add
 #       - id: SMGSuppressor
 
 - type: entity
@@ -104,9 +99,8 @@
         - id: WeaponRifleEstocBiocode # Sunrise-edit
         - id: MagazineRifle
           amount: 2
-        - id: MagazineRifleFMJ  # Sunrise-edit
+        - id: RifleAmmoKit  # Sunrise-edit
           amount: 2
-        - id: MagazineRifleAP # Sunrise-edit
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
@@ -156,93 +150,9 @@
           amount: 1
         - id: GrenadeBlastTimer
           amount: 2
-        - id: GrenadeFragTimer
-          amount: 2
+        - id: PouchExplosiveGrenadeFragTimerFilled
         - id: GrenadeEMPTimer
           amount: 2
-
-# Sunrise-start
-- type: entity
-  parent: ClothingBackpackDuffelSyndicateBundle
-  id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherM79
-  name: China-Lake bundle
-  description: "An old m79 grenade launcher bundled with 11 rounds of various destruction capability."
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: WeaponLauncherM79
-        - id: GrenadeBlast
-          amount: 1
-        - id: GrenadeFrag
-          amount: 1
-        - id: GrenadeEMP
-          amount: 1
-        - id: GrenadeBlastTimer
-          amount: 2
-        - id: GrenadeFragTimer
-          amount: 2
-        - id: GrenadeEMPTimer
-          amount: 2
-
-- type: entity
-  parent: ClothingBackpackDuffelSyndicateBundle
-  id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherGL70
-  name: China-Lake bundle
-  description: "GL70 grenade launcher bundled with 11 rounds of various destruction capability."
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: WeaponGrenadeLauncherGL70
-        - id: GrenadeBlast
-          amount: 1
-        - id: GrenadeFrag
-          amount: 1
-        - id: GrenadeEMP
-          amount: 1
-        - id: GrenadeBlastTimer
-          amount: 2
-        - id: GrenadeFragTimer
-          amount: 2
-        - id: GrenadeEMPTimer
-          amount: 2
-
-- type: entity
-  parent: ClothingBackpackDuffelSyndicateBundle
-  id: ClothingBackpackDuffelSyndicateFilledSMG40
-  name: C-40r bundle
-  description: "Old faithful: The classic C-40r Submachine Gun, bundled with three magazines."
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: WeaponSubMachineGunC40rBiocode
-        - id: MagazinePistol40SubMachineGunSP
-          amount: 2
-        - id: MagazinePistol40SubMachineGunFMJ
-          amount: 2
-        - id: MagazinePistol40SubMachineGunHP
-
-- type: entity
-  parent: ClothingBackpackDuffelSyndicateBundle
-  id: ClothingBackpackDuffelSyndicateFilledLMGMax
-  name: L6 Saw bundle
-  suffix: L6 Saw-Max
-  description: "More dakka: The iconic L6 lightmachinegun, bundled with 2 box magazines."
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: WeaponLightMachineGunL6MaxBiocode
-        - id: MagazineRifleBoxSP
-          amount: 2
-        - id: MagazineRifleBoxFMJ
-# Sunrise-end
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
@@ -254,7 +164,7 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: WeaponRifleM90GrenadeLauncherBiocode # Sunrise-edit
+        - id: WeaponRifleM90GrenadeLauncher
         - id: MagazineRifle
           amount: 2
         - id: GrenadeBlastTimer # Sunrise-edit
@@ -553,14 +463,13 @@
         - id: WeaponSubMachineGunC20r
         - id: MagazinePistolSubMachineGun
           amount: 3
-        - id: MagazinePistol
+        - id: EnergySword
         - id: SyndicateJawsOfLife
         - id: C4
           amount: 2
         - id: MedkitCombatFilled
         - id: EmpImplanter
         - id: ClothingShoesBootsMagSyndie
-        - id: AgentIDCard
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle

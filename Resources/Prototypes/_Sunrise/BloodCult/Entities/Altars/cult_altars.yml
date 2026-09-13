@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: CultPylon
   parent: BaseStructure
   name: pylon
@@ -30,8 +30,9 @@
   - type: PylonVisuals
   - type: InteractionOutline
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Glass
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -51,15 +52,26 @@
   - type: Appearance
   - type: Pylon
     healingAuraDamage:
-      groups:
-        Brute: -10
-        Burn: -10
-        Toxin: -6
-        Genetic: -5
-        Airloss: -20
+      types:
+        Blunt: -3.33
+        Slash: -3.33
+        Piercing: -3.34
+        Heat: -2.5
+        Shock: -2.5
+        Cold: -2.5
+        Caustic: -2.5
+        Poison: -3
+        Radiation: -3
+        Cellular: -2.5
+        Mangleness: -2.5
+        Asphyxiation: -10
+        Bloodloss: -10
     burnDamageOnInteract:
-      groups:
-        Burn: 5
+      types:
+        Heat: 1.25
+        Shock: 1.25
+        Cold: 1.25
+        Caustic: 1.25
   - type: PointLight
     color: "#FF0000"
     radius: 2
@@ -102,8 +114,9 @@
       map: [ "enum.CultCraftStructureVisualsLayers.Activated" ]
   - type: InteractionOutline
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -167,8 +180,9 @@
       map: [ "enum.CultCraftStructureVisualsLayers.Activated" ]
   - type: InteractionOutline
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -231,8 +245,9 @@
       map: [ "enum.CultCraftStructureVisualsLayers.Activated" ]
   - type: InteractionOutline
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:

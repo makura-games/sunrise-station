@@ -18,3 +18,7 @@ admin-verb-text-make-paradox-clone = Создать парадоксальног
 admin-verb-text-make-thief = Сделать вором
 admin-verb-text-make-changeling = Сделать генокрадом
 admin-overlay-antag-classic = АНТАГОНИСТ
+admin-verb-make-wizard = Превратить цель в волшебника.
+admin-verb-make-space-ninja = Превратить цель в космического ниндзя.
+admin-verb-text-make-wizard = Сделать волшебника
+admin-verb-text-make-space-ninja = Сделать ниндзя

@@ -11,7 +11,12 @@
   - type: Item
     sprite: _Sunrise/Objects/Storage/glockbox.rsi
     heldPrefix: glockb
-    size: Normal
+    size: Huge
+    shape:
+    - 0,0,2,1
+    storedSprite:
+      state: icon
+      sprite: _Sunrise/Objects/Storage/glockbox.rsi
   - type: SpawnItemsOnUse
     items:
     - id: MagazinePistolRubber
@@ -21,36 +26,39 @@
 
 - type: entity
   parent: GlockBox
-  id: ACP14Box
-  name: ACP14 box
-  description: It contains a pistol and a magazine for it. Did you want something else?
-  components:
-  - type: SpawnItemsOnUse
-    items:
-      - id: MagazinePistol40HP
-      - id: WeaponPistolACP14
-
-- type: entity
-  parent: GlockBox
   id: MK58Box
   name: MK58 box
   description: It contains a MK58 and a rubber magazine for it. Did you want something else?
+  categories: [ HideSpawnMenu ]
   components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Pistols/mk58.rsi
+    layers:
+    - state: icon
   - type: SpawnItemsOnUse
     items:
       - id: WeaponPistolMk58
       - id: MagazinePistolRubber
+    sound:
+      path: /Audio/Effects/unwrap.ogg
 
 - type: entity
   parent: GlockBox
   id: MK58GoldBox
   name: Gold MK58 box
   description: It contains a Gold MK58 and a rubber magazine for it. Ave Security!
+  categories: [ HideSpawnMenu ]
   components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Weapons/Guns/Pistols/golden_mk58.rsi
+    layers:
+    - state: icon
   - type: SpawnItemsOnUse
     items:
       - id: WeaponPistolGoldenMk58
       - id: MagazinePistolRubber
+    sound:
+      path: /Audio/Effects/unwrap.ogg
 
 - type: entity
   parent: GlockBox
@@ -58,10 +66,16 @@
   name: snub-nosed revolver box
   description: Inside rests a snub-nosed revolver and a rubber speedloader. Old school, ready for action.
   components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Weapons/Guns/Revolvers/snub.rsi
+    layers:
+    - state: icon
   - type: SpawnItemsOnUse
     items:
       - id: WeaponRevolverSnubRevolver
       - id: SpeedLoaderMagnumRubber
+    sound:
+      path: /Audio/Effects/unwrap.ogg
 
 - type: entity
   parent: GlockBox
@@ -73,3 +87,44 @@
     items:
       - id: WeaponPistolVP78
       - id: PouchAmmoFilledPistol40
+
+- type: entity
+  parent: GlockBox
+  id: DeagleGoldBox
+  name: Deagle Gold
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/goldDeagle/big.rsi
+    layers:
+    - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: WeaponPistolDeagleGolden
+      - id: MagazineMagnumRubber
+      - id: BlueprintMagMagnumBasic
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+
+- type: entity
+  parent: BaseItem
+  id: Ash12Box
+  name: Ash12
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/ash12/big.rsi
+    layers:
+    - state: icon
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,4,2
+  - type: SpawnItemsOnUse
+    items:
+      - id: WeaponRifleAsh12
+      - id: MagazineAsh12Beanbag
+      - id: BlueprintMagAsh12Basic
+    sound:
+      path: /Audio/Effects/unwrap.ogg

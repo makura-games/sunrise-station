@@ -17,7 +17,6 @@ entity-effect-status-effect-RadiationProtection = радиационная за�
 entity-effect-status-effect-Drowsiness = сонливость
 entity-effect-status-effect-Adrenaline = адреналин
 entity-effect-status-effect-ShockProtection = защита от ударов током
-
 ent-StatusEffectDrunk = опьянение
     .desc = { ent-MobStatusEffectDebuff.desc }
 ent-StatusEffectWoozy = головокружение
@@ -38,7 +37,7 @@ ent-StatusEffectSlurred = невнятная речь
     .desc = { ent-MobStatusEffectDebuff.desc }
 ent-StatusEffectScrambled = спутанная речь
     .desc = { ent-MobStatusEffectDebuff.desc }
-ent-StatusEffectOwO = owo-акцент
+ent-StatusEffectOwO = ово-акцент
     .desc = { ent-MobStatusEffectDebuff.desc }
 ent-StatusEffectBark = гавкающий акцент
     .desc = { ent-MobStatusEffectDebuff.desc }

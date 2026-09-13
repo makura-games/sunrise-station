@@ -10,7 +10,7 @@ public sealed partial class CopyMachineSystem
     private void OnEntityStrapped(Entity<CopyMachineComponent> ent, ref StrappedEvent args) => QueueUIUpdate(ent);
     private void OnEntityUnstrapped(Entity<CopyMachineComponent> ent, ref UnstrappedEvent args) => QueueUIUpdate(ent);
 
-    private bool TryGetBuckledHumanoidAppearance(Entity<CopyMachineComponent> ent, [NotNullWhen(true)] out HumanoidAppearanceComponent? humanoidAppearance)
+    private bool TryGetBuckledHumanoidAppearance(Entity<CopyMachineComponent> ent, [NotNullWhen(true)] out HumanoidProfileComponent? humanoidAppearance)
     {
         humanoidAppearance = null;
 

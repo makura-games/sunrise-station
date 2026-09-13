@@ -1,0 +1,23 @@
+stack-dark-steel-horizontal-slats-tile-bordered = тёмная стальная плитка с окантованными горизонтальными планками
+stack-dark-steel-vertical-slats-tile-bordered = тёмная стальная плитка с окантованными вертикальными планками
+stack-dark-steel-slats-tile-continuous = тёмная стальная плитка со сплошными планками
+stack-steel-horizontal-slats-tile-bordered = стальная плитка с окантованными горизонтальными планками
+stack-steel-vertical-slats-tile-bordered = стальная плитка с окантованными вертикальными планками
+stack-steel-slats-tile-continuous = стальная плитка со сплошными планками
+stack-white-steel-horizontal-slats-tile-bordered = белая стальная плитка с окантованными горизонтальными планками
+stack-white-steel-vertical-slats-tile-bordered = белая стальная плитка с окантованными вертикальными планками
+stack-white-steel-slats-tile-continuous = белая стальная плитка со сплошными планками
+
+stack-black-carpet-tile = чёрная ковровая плитка
+stack-ironsand-concrete-tile = железопесчаная бетонная плитка
+stack-ironsand-concrete-mono-tile = железопесчаная бетонная моноплитка
+stack-ironsand-concrete-smooth = гладкий железопесчаный бетон
+stack-dark-astro-grass-floor = тёмный пол из астро-травы
+stack-light-astro-grass-floor = светлый пол из астро-травы
+stack-desert-astro-sand-floor = пол из пустынного астро-песка
+stack-white-marble-floor = белый мраморный пол
+stack-dark-marble-floor = тёмный мраморный пол
+stack-plasma-marble-floor = плазменный мраморный пол
+stack-uranium-marble-floor = урановый мраморный пол
+stack-astro-ironsand-floor = пол из астро-железопеска
+stack-astro-ironsand-floor-borderless = бесшовный пол из астро-железопеска

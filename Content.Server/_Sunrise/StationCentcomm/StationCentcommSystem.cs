@@ -12,16 +12,18 @@ namespace Content.Server._Sunrise.StationCentComm;
 
 public sealed partial class StationCentCommSystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ShuttleSystem _shuttle = default!;
-    [Dependency] private readonly MapSystem _map = default!;
+    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ShuttleSystem _shuttle = default!;
+    [Dependency] private MapSystem _map = default!;
 
     private ISawmill _sawmill = default!;
 
     public override void Initialize()
     {
+        base.Initialize();
+
         _sawmill = Logger.GetSawmill("station.centcomm");
         SubscribeLocalEvent<StationCentCommComponent, ComponentShutdown>(OnCentcommShutdown);
         SubscribeLocalEvent<StationCentCommComponent, ComponentInit>(OnCentcommInit);
@@ -41,7 +43,7 @@ public sealed partial class StationCentCommSystem : EntitySystem
     private void OnCentcommInit(EntityUid uid, StationCentCommComponent component, ComponentInit args)
     {
         // Post mapinit? fancy
-        if (TryComp<TransformComponent>(component.Entity, out var xform))
+        if (TryComp(component.Entity, out TransformComponent? xform))
         {
             component.MapId = xform.MapID;
             return;
@@ -68,6 +70,7 @@ public sealed partial class StationCentCommSystem : EntitySystem
             if (_prototypeManager.TryIndex<GameMapPrototype>(component.Station, out var gameMap))
             {
                 _gameTicker.LoadGameMap(gameMap, out var mapId);
+                component.MapId = mapId;
 
                 var mapEnt = _map.GetMapOrInvalid(mapId);
 

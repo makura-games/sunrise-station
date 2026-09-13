@@ -7,10 +7,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.Sandbox.DeviceLink;
 
-public sealed class DeviceLinkingVisualizationSystem : EntitySystem
+public sealed partial class DeviceLinkingVisualizationSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     private TimeSpan _nextOverlayUpdate = TimeSpan.Zero;
     private static readonly TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);

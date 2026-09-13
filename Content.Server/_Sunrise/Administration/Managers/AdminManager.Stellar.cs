@@ -23,8 +23,8 @@ public sealed partial class AdminManager
         PropertyNameCaseInsensitive = true,
     };
 
-    [Dependency] private readonly IStatusHost _stellarStatusHost = default!;
-    [Dependency] private readonly ITaskManager _stellarTaskManager = default!;
+    [Dependency] private IStatusHost _stellarStatusHost = default!;
+    [Dependency] private ITaskManager _stellarTaskManager = default!;
 
     private readonly HttpClient _stellarAdminHttpClient = new();
     private readonly object _stellarAdminCacheLock = new();

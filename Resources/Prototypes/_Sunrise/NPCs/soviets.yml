@@ -41,7 +41,7 @@
   - type: FootprintEmitter
   - type: FootstepModifier
     footstepSoundCollection:
-      collection: FootstepHeavy
+      collection: FootstepBoots
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -121,7 +121,6 @@
     allowedStates:
     - Alive
     - Critical
-    damageCap: 115
   - type: Stamina
     baseCritThreshold: 125
   - type: DamageStateVisuals
@@ -450,11 +449,18 @@
     threshold: 0.9
     aliveTargets: false
     damage:
-      groups:
-        Brute: -10
-        Burn: -8
-        Airloss: -10
-        Toxin: -10
+      types:
+        Blunt: -3.33
+        Slash: -3.33
+        Piercing: -3.34
+        Heat: -2
+        Shock: -2
+        Cold: -2
+        Caustic: -2
+        Asphyxiation: -5
+        Bloodloss: -5
+        Poison: -5
+        Radiation: -5
     whitelist:
       components:
       - NpcVeteranFollower
@@ -471,11 +477,18 @@
       threshold: 0.9
       aliveTargets: false
       damage:
-        groups:
-          Brute: -10
-          Burn: -8
-          Airloss: -10
-          Toxin: -10
+        types:
+          Blunt: -3.33
+          Slash: -3.33
+          Piercing: -3.34
+          Heat: -2
+          Shock: -2
+          Cold: -2
+          Caustic: -2
+          Asphyxiation: -5
+          Bloodloss: -5
+          Poison: -5
+          Radiation: -5
       whitelist:
         components:
         - NpcVeteranFollower
@@ -778,24 +791,22 @@
       state: equipped-HELMET
     - sprite: Clothing/Hands/Gloves/mercfingerless.rsi
       state: equipped-HAND
-    - sprite: _Sunrise/Objects/Weapons/Guns/SMGs/mp38/tiny.rsi
-      state: wielded-inhand-right
   - type: BasicEntityAmmoProvider
     proto: CartridgePistolFMJ
-    capacity: 32
-    count: 32
+    capacity: 35
+    count: 35
   - type: Gun
     showExamineText: false
-    fireRate: 5
+    fireRate: 9
     selectedMode: FullAuto
-    minAngle: 6
-    maxAngle: 25
-    angleIncrease: 1
-    angleDecay: 10
+    minAngle: 18
+    maxAngle: 30
+    angleIncrease: 5
+    angleDecay: 15
     availableModes:
     - FullAuto
     soundGunshot:
-      path: /Audio/_Sunrise/Weapons/Guns/SMGs/mp38/mp38_shot.ogg
+      path: /Audio/_Starlight/Weapons/Guns/Gunshots/ppsh.ogg
     soundEmpty:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/skm24/skm_cocked.ogg
 
@@ -1089,11 +1100,18 @@
     range: 7
     threshold: 0.9
     damage:
-      groups:
-        Brute: -15
-        Burn: -15
-        Airloss: -15
-        Toxin: -15
+      types:
+        Blunt: -5
+        Slash: -5
+        Piercing: -5
+        Heat: -3.75
+        Shock: -3.75
+        Cold: -3.75
+        Caustic: -3.75
+        Asphyxiation: -7.5
+        Bloodloss: -7.5
+        Poison: -7.5
+        Radiation: -7.5
     whitelist:
       components:
       - NpcVeteranFollower
@@ -1109,11 +1127,18 @@
       range: 7
       threshold: 0.9
       damage:
-        groups:
-          Brute: -15
-          Burn: -15
-          Airloss: -15
-          Toxin: -15
+        types:
+          Blunt: -5
+          Slash: -5
+          Piercing: -5
+          Heat: -3.75
+          Shock: -3.75
+          Cold: -3.75
+          Caustic: -3.75
+          Asphyxiation: -7.5
+          Bloodloss: -7.5
+          Poison: -7.5
+          Radiation: -7.5
       whitelist:
         components:
         - NpcVeteranFollower
@@ -1369,7 +1394,6 @@
     allowedStates:
     - Alive
     - Critical
-    damageCap: 350
   - type: SlowOnDamage
     speedModifierThresholds:
       150: 0.9
@@ -1483,7 +1507,7 @@
   - type: Sprite
     drawdepth: Mobs
     noRot: true
-    sprite: Objects/Specific/Mech/durand.rsi
+    sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
     scale: 1.08, 1.08
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -1563,7 +1587,6 @@
     allowedStates:
     - Alive
     - Critical
-    damageCap: 450
   - type: SlowOnDamage
     speedModifierThresholds:
       150: 0.9
@@ -2198,7 +2221,7 @@
     - state: red
     - sprite: _Sunrise/Structures/Decoration/banner.rsi
       state: banner_ussp
-    - sprite: Objects/Specific/Mech/durand.rsi
+    - sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
       state: dollhouse
   - type: EntityTableSpawner
     offset: 1

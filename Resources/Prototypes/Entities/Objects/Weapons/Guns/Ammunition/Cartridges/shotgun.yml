@@ -137,9 +137,9 @@
     proto: PelletShotgunPracticeSpreadTrace
 
 - type: entity
+  parent: [ SolutionAmmo, SolutionToolVeryTiny, BaseShellShotgun, BaseSecurityContraband ]
   id: ShellTranquilizer
   name: shell (.50 tranquilizer)
-  parent: [ BaseShellShotgun, BaseSecurityContraband ]
   components:
   - type: Tag
     tags:
@@ -155,12 +155,11 @@
   - type: CartridgeAmmo
     proto: PelletShotgunTranquilizer
   - type: ChemicalAmmo
-  - type: SolutionContainerManager
-    solutions:
-      ammo:
-        reagents:
-        - ReagentId: ChloralHydrate
-          Quantity: 9
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: ChloralHydrate
+        Quantity: 7.5
   - type: SolutionTransfer
     maxTransferAmount: 9
 

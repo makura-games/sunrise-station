@@ -1,4 +1,4 @@
-﻿using Content.Client.Fluids;
+using Content.Client.Fluids;
 using Content.Shared._Sunrise.Footprints;
 using Robust.Client.GameObjects;
 using Robust.Shared.Utility;
@@ -8,10 +8,10 @@ namespace Content.Client._Sunrise.Footprints;
 /// <summary>
 /// Handles the visual appearance and updates of footprint entities on the client
 /// </summary>
-public sealed class FootprintVisualizerSystem : EntitySystem
+public sealed partial class FootprintVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

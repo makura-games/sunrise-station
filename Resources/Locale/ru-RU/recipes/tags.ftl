@@ -62,7 +62,6 @@ construction-graph-tag-wheat-bushel = сноп пшеницы
 construction-graph-tag-rubber-ducky = резиновая уточка
 
 ## Improvised ammo ##
-
 construction-graph-tag-shell-shotgun-improvised-empty = импровизированная пустая гильза дробовика
 construction-graph-tag-shell-shotgun-improvised-empty-desc = описание импровизированной пустой гильзы дробовика
 construction-graph-tag-shell-shotgun-improvised = импровизированная гильза дробовика
@@ -261,3 +260,33 @@ construction-graph-tag-energy-sword-desc = описание энергетиче
 construction-graph-tag-ground-cannabis-vita-desc = описание молотой каннабис вита
 # New tag
 construction-graph-tag-smokeablejointvita = курительный косяк вита
+construction-graph-tag-boxhug = коробка объятий
+
+# mime
+construction-graph-tag-manipulator = модульная машинная деталь
+soil-construction-graph-any-mushroom = любой гриб
+construction-graph-tag-mop-basic = швабра
+construction-graph-tag-paper = офисная бумага
+construction-graph-tag-core-pinpointer-piece = деталь пинпоинтера ядра
+
+# toys
+construction-graph-tag-black-carpet = черный ковер
+construction-graph-tag-blue-carpet = синий ковер
+construction-graph-tag-cyan-carpet = голубой ковер
+construction-graph-tag-green-carpet = зеленый ковер
+construction-graph-tag-orange-carpet = оранжевый ковер
+construction-graph-tag-pink-carpet = розовый ковер
+construction-graph-tag-purple-carpet = фиолетовый ковер
+construction-graph-tag-red-carpet = красный ковер
+construction-graph-tag-white-carpet = белый ковер
+
+# mechs
+construction-graph-tag-turret-control-electronics = электроника панели управления турелью
+
+# crystals
+construction-graph-tag-red-crystal-shard = осколок красного кристалла
+construction-graph-tag-green-crystal-shard = осколок зеленого кристалла
+construction-graph-tag-backpack = рюкзак
+
+# chemistry
+construction-graph-tag-centrifuge-compatible = контейнер, пригодный для центрифугирования

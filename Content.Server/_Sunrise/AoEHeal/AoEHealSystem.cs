@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -11,14 +11,14 @@ namespace Content.Server._Sunrise.AoEHeal;
 /// <summary>
 /// Лечение по области
 /// </summary>
-public sealed class AoEHealSystem : EntitySystem
+public sealed partial class AoEHealSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private EntityLookupSystem _lookupSystem = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
 
     private TimeSpan? _prev = TimeSpan.Zero;
     private readonly TimeSpan _delay = TimeSpan.FromSeconds(2);
@@ -47,7 +47,7 @@ public sealed class AoEHealSystem : EntitySystem
 
                 if (aoEHealComponent.Threshold != null && // AoE компоненту важно хилить до какого-то уровня от макс здоровья
                     _mobThreshold.TryGetDeadThreshold(target, out var threshold) &&
-                    target.Comp.Damage.GetTotal() < threshold * (1f - aoEHealComponent.Threshold)) // Не лечим если урона мало
+                    _damageableSystem.GetTotalDamage(target.AsNullable()) < threshold * (1f - aoEHealComponent.Threshold)) // Не лечим если урона мало
                     continue;
 
                 _damageableSystem.TryChangeDamage(target.Owner, aoEHealComponent.Damage);

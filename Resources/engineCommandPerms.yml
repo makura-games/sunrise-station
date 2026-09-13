@@ -136,6 +136,7 @@
   - replay_recording_start
   - replay_recording_stop
   - spin # Sunrise-Edit
+  - transfer_test
 
 - Flags: QUERY
   Commands:

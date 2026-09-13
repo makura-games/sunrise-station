@@ -137,3 +137,11 @@
     seedId: WhiteLily
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/white_lily.rsi
+
+- type: entity
+  parent: KillerTomatoSeeds
+  id: SunriseJuicyTomatoKillerSeeds
+  name: packet of juicy tomato killer seeds
+  components:
+  - type: Seed
+    seedId: SunriseJuicyTomatoKiller

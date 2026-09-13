@@ -1,6 +1,6 @@
 using Content.Server.Actions;
-using Content.Server.Humanoid;
 using Content.Server.Popups;
+using Content.Shared._Sunrise.Humanoid;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Inventory;
@@ -20,12 +20,12 @@ namespace Content.Server._Sunrise.Abilities.Milira;
 /// </summary>
 public sealed partial class WingToggleSystem : SharedWingFlightSystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SunriseHumanoidMarkingSystem _sunriseMarking = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
 
     public override void Initialize()
     {
@@ -60,13 +60,13 @@ public sealed partial class WingToggleSystem : SharedWingFlightSystem
         args.Handled = TryToggleWings(ent);
     }
 
-    public bool TryToggleWings(Entity<WingToggleComponent> ent, HumanoidAppearanceComponent? humanoid = null, bool forceClose = false)
+    public bool TryToggleWings(Entity<WingToggleComponent> ent, bool forceClose = false)
     {
-        if (!Resolve(ent.Owner, ref humanoid, false))
+        if (!_sunriseMarking.TryGetLayerMarkings(ent, HumanoidVisualLayers.Tail, out var markings) ||
+            markings.Count == 0)
+        {
             return false;
-
-        if (!humanoid.MarkingSet.Markings.TryGetValue(MarkingCategories.Tail, out var markings) || markings.Count == 0)
-            return false;
+        }
 
         if (TryComp<WingFlightComponent>(ent, out var wingFlight) && wingFlight.InertiaActive && !forceClose)
             return false;
@@ -83,7 +83,7 @@ public sealed partial class WingToggleSystem : SharedWingFlightSystem
 
         for (var i = 0; i < markings.Count; i++)
         {
-            var current = markings[i].MarkingId;
+            var current = markings[i].MarkingId.Id;
             var desired = openTarget
                 ? (current.EndsWith(suffix) ? current : $"{current}{suffix}")
                 : (current.EndsWith(suffix) ? current[..^suffix.Length] : current);
@@ -94,7 +94,7 @@ public sealed partial class WingToggleSystem : SharedWingFlightSystem
             if (desired == current)
                 continue;
 
-            _appearance.SetMarkingId(ent.Owner, MarkingCategories.Tail, i, desired, humanoid: humanoid);
+            _sunriseMarking.SetMarkingId(ent.Owner, HumanoidVisualLayers.Tail, i, desired);
             changed = true;
         }
 

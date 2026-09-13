@@ -5,7 +5,6 @@ ent-FloorCosmicDecayAlt = ???
     .suffix = Не маппить
 ent-NothingEntity = пустой объект
     .desc = Технический пустой объект.
-
 ent-FloorTileItem3x3Black = чёрная плитка 3x3
     .desc = Набор чёрных плиток три на три.
 ent-FloorTileItem3x3Brown = коричневая плитка 3x3
@@ -70,16 +69,13 @@ ent-FloorTileItemAstroIronsand = астро-железопесок
     .desc = Искусственный красный песок. Импортирован с искусственного Марса.
 ent-FloorTileItemAstroIronsandBorderless = бесшовный астро-железопесок
     .desc = { ent-FloorTileItemAstroIronsand.desc }
-
 ent-CrateLawboards = ящик плат законов ИИ
     .desc = Ящик, наполненный различными платами законов ИИ.
-
 ent-ToolboxRoboticist = ящик инструментов робототехника
     .desc = Что, это просто ящик инструментов робототехника? Вы ожидали чего-то другого?
 ent-ToolboxRoboticistFilled = { ent-ToolboxRoboticist }
     .desc = { ent-ToolboxRoboticist.desc }
     .suffix = Заполненный
-
 ent-LockerLargeBase = большой шкаф
     .desc = { ent-LockerBase.desc }
 ent-LockerLargeBaseSecure = большой защищённый шкаф
@@ -123,24 +119,21 @@ ent-LockerSalvageSpecialistLargeFilledHardsuit = { ent-LockerSalvageSpecialistLa
 ent-LockerSecurityLargeFilled = { ent-LockerSecurityLarge }
     .desc = { ent-LockerSecurityLarge.desc }
     .suffix = Заполненный
-
 ent-SpawnPointMagistrate = магистрат
     .desc = { ent-SpawnPointJobBase.desc }
 ent-SpawnPointSalvageLead = ведущий утилизатор
     .desc = { ent-SpawnPointJobBase.desc }
-
 ent-DefaultStationBeaconIAA = маяк агента внутренних дел
     .desc = { ent-DefaultStationBeacon.desc }
     .suffix = АВД
 ent-DefaultStationBeaconLawyer = маяк юриста
     .desc = { ent-DefaultStationBeacon.desc }
     .suffix = Юрист
-ent-DefaultStationBeaconNCT = маяк представителя NanoTrasen
+ent-DefaultStationBeaconNCT = маяк представителя нанотрейзен
     .desc = { ent-DefaultStationBeacon.desc }
     .suffix = ПНТ
 ent-HandheldMachineAnalyzer = портативный анализатор машин
     .desc = Портативное устройство для диагностики машин.
-
 stack-carpet-deco-tile = декоративная ковровая плитка
 stack-dark-bitile-tile = тёмная двойная плитка
 stack-steel-bitile-tile = стальная двойная плитка
@@ -198,9 +191,8 @@ stack-empty-oilpack = пустой маслопакет
 stack-wizcoin = визкоин
 stack-abyssium-ore = абиссиумовая руда
 stack-abyssium-bar = абиссиумовый слиток
-
-ent-VendingMachineRestockDonk = коробка пополнения Donk on the Go
-    .desc = Коробка, полная того, что юридически считается едой. Загрузите её в автомат Donk on the Go для пополнения.
+ent-VendingMachineRestockDonk = коробка пополнения донк на ходу
+    .desc = Коробка, полная того, что юридически считается едой. Загрузите её в автомат Донк на ходу для пополнения.
 
 ent-AirlockBrigmedLocked = { ent-AirlockMedical }
     .desc = { ent-AirlockMedical.desc }
@@ -232,7 +224,6 @@ ent-AirlockSecurityInternalAffairsLocked = { ent-AirlockSecurity }
 ent-AirlockSecurityInternalAffairsGlassLocked = { ent-AirlockSecurityGlass }
     .desc = { ent-AirlockSecurityGlass.desc }
     .suffix = Служба безопасности, Внутренние дела, Стеклянный, Закрыт
-
 ent-BenchBlueComfyEndLeft = синяя удобная скамья
     .desc = { ent-BenchComfy.desc }
     .suffix = Левый край, Синяя
@@ -248,7 +239,6 @@ ent-BenchRedComfyEndRight = красная удобная скамья
 ent-ComfyChairRed = удобное кресло
     .desc = Выглядит удобным.
     .suffix = Красное
-
 ent-ComputerShuttleMining = консоль шахтёрского шаттла
     .desc = Используется для пилотирования шахтёрского шаттла.
 ent-ComputerCommsCargo = консоль связи снабжения
@@ -267,48 +257,44 @@ ent-ComputerCommsService = консоль связи сервисного отд
     .desc = { ent-ComputerComms.desc }
 ent-ComputerPersonalDesktop = персональный настольный компьютер
     .desc = Для всех ваших стационарных вычислительных нужд!
-
 ent-HolopadSecurityInternalAffairs = голопад внутренних дел
     .desc = { ent-Holopad.desc }
     .suffix = Служба безопасности, Внутренние дела
 ent-HolopadServiceLawyer = голопад юриста
     .desc = { ent-Holopad.desc }
     .suffix = Сервис, Юрист
-
-ent-VendingMachineDonk = Донк на ходу
-    .desc = Горячо и готово, когда вы в бегах! Donk Pockets: юридически это еда.
+ent-VendingMachineDonk = донк на ходу
+    .desc = Горячо и готово, когда вы в бегах! Донк-пакеты: юридически это еда.
 ent-VendingMachineLegalDrobe = ЮрШкаф
     .desc = Торговый автомат с одеждой для работников юридического отдела.
-ent-VendingMachineMedicalSyndicate = Interdyne Enterprise
-    .desc = Медицинский торговый автомат Interdyne Pharmaceutics.
-ent-VendingMachineWallMedicalCivilianSyndicate = коммерческая аптечка Interdyne
-    .desc = Настенный раздатчик медицинского оборудования от Interdyne Pharmaceutics.
+ent-VendingMachineMedicalSyndicate = интердайн энтерпрайз
+    .desc = Медицинский торговый автомат Интердайн Фармацевтикс.
+ent-VendingMachineWallMedicalCivilianSyndicate = коммерческая аптечка интердайн
+    .desc = Настенный раздатчик медицинского оборудования от Интердайн Фармацевтикс.
 ent-VendingMachineMedicalSecurity = НаноМед СБ
     .desc = Раздатчик медицинских препаратов для службы безопасности. Только натуральные химикаты!
 ent-VendingMachineMedicalSecuritySalvaged = потрёпанный НаноМед СБ
     .desc = Побитый раздатчик медицинских препаратов, внутри которого остались пожитки прошлой смены.
-
-ent-CybersunFlag = флаг CyberSun
+ent-CybersunFlag = флаг киберсан
     .desc = Бумага, костюм, прогресс.
 ent-DonkFlag = флаг DONK CO
     .desc = Поставьте на это DONK!
-ent-InterdyneFlag = флаг Interdyne Pharmaceutics
+ent-InterdyneFlag = флаг интердайн фармацевтикс
     .desc = Для здоровья каждого.
 
-ent-PosterContrabandComitas = Comitas Systems: мы ищем высокоинтеллектуальных людей
-    .desc = Старый плакат заброшенной компании Comitas Systems. Кажется, в нём спрятано сообщение.
-ent-PosterContrabandInterdyneSyndicate = Interdyne Pharmaceutics?
-    .desc = Кроваво-красная версия рекламы Interdyne Pharmaceutics. "Стань капитаном своей души."
-ent-PosterContrabandWaffleCorpTwo = Waffle Corp: доступно и практично
-    .desc = Плакат Waffle Corp. Почему вафельная компания производит огнестрельное оружие?
+ent-PosterContrabandComitas = системы комитас: мы ищем высокоинтеллектуальных людей
+    .desc = Старый плакат заброшенной компании Комитас Системс. Кажется, в нём спрятано сообщение.
+ent-PosterContrabandInterdyneSyndicate = интердайн фармацевтикс?
+    .desc = Кроваво-красная версия рекламы Интердайн Фармацевтикс. «Стань капитаном своей души.»
+ent-PosterContrabandWaffleCorpTwo = ваффл корп: доступно и практично
+    .desc = Плакат Ваффл Корп. Почему вафельная компания производит огнестрельное оружие?
 ent-PosterlegitLawPoster = реклама юридической помощи
     .desc = Плакат с рекламой одноимённой юридической фирмы Батчера А. Хеммеля, отлично подходящей для снятия обвинений в убийстве!
-
 ent-SignBrigmed = знак бригмеда
     .desc = Знак, указывающий на бригмедицинский отсек.
 ent-SignIAA = знак внутренних дел
     .desc = Знак, указывающий на офис внутренних дел.
 ent-SignMagistrate = знак магистрата
     .desc = Знак, указывающий на офис магистрата.
-ent-SignNTR = знак представителя NanoTrasen
-    .desc = Знак, указывающий на офис представителя NanoTrasen.
+ent-SignNTR = знак представителя нанотрейзен
+    .desc = Знак, указывающий на офис представителя Нанотрейзен.

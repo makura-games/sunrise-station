@@ -10,19 +10,21 @@
     sprite: Structures/Wallmounts/mirror.rsi
     state: mirror
   # Вырезал ввиду наличия багов + нелогичности в использовании зеркала для смены цвета волос и их размера.
-  # - type: MagicMirror #instant and silent # Sunrise Edit Start
-  #   changeHairSound: null
-  #   addSlotTime: 0
-  #   removeSlotTime: 0
-  #   selectSlotTime: 0
-  #   changeSlotTime: 0
-  # - type: ActivatableUI
-  #   key: enum.MagicMirrorUiKey.Key
-  #   singleUser: true
-  # - type: UserInterface
-  #   interfaces:
-  #     enum.MagicMirrorUiKey.Key:
-  #       type: MagicMirrorBoundUserInterface # Sunrise Edit End
+  #- type: MagicMirror
+  #  organs:
+  #  - Head
+  #  layers:
+  #  - Hair
+  #  - FacialHair
+  #  changeHairSound: null
+  #  modifyTime: 0
+  #- type: ActivatableUI
+  #  key: enum.MagicMirrorUiKey.Key
+  #  singleUser: true
+  #- type: UserInterface
+  #  interfaces:
+  #    enum.MagicMirrorUiKey.Key:
+  #      type: MagicMirrorBoundUserInterface
   - type: Destructible
     thresholds:
     - trigger:

@@ -11,3 +11,4 @@ janitorial-trolley-slot-component-slot-name-spray = Распылитель
 janitorial-trolley-slot-component-slot-name-bucket = Ведро
 janitorial-trolley-slot-component-slot-name-trashbag = Мусорный пакет
 janitorial-trolley-slot-component-slot-name-mop = Швабра
+janitorial-trolley-slot-component-slot-name-goldenplunger = Золотой вантуз

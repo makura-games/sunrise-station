@@ -60,3 +60,12 @@ steal-target-groups-animal-morty = Морти
 steal-target-groups-animal-renault = Алиса
 steal-target-groups-animal-shiva = Шива
 steal-target-groups-animal-tropico = Тропико
+steal-target-groups-clothing-hands-knuckledusters-qm = золотые кастеты
+steal-target-groups-officer-handguns = пистолет офицера службы безопасности
+steal-target-groups-huds = HUD
+
+# Thief single item
+steal-target-groups-belt-ce = ремень с инструментами главного инженера
+steal-target-groups-captain-sword = сабля капитана
+
+# Thief structures

@@ -1,7 +1,6 @@
 using System.Linq;
 using Content.Shared._Sunrise.Footprints;
 using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Standing;
@@ -13,11 +12,11 @@ namespace Content.Server._Sunrise.Footprints;
 /// <summary>
 /// Handles footprint creation when entities interact with puddles
 /// </summary>
-public sealed class PuddleFootprintSystem : EntitySystem
+public sealed partial class PuddleFootprintSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionSystem = default!;
-    [Dependency] private readonly StandingStateSystem _standingStateSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionSystem = default!;
+    [Dependency] private StandingStateSystem _standingStateSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -37,9 +36,7 @@ public sealed class PuddleFootprintSystem : EntitySystem
 
         if (!TryComp<PuddleComponent>(ent, out var puddle)
             || !TryComp<FootprintEmitterComponent>(args.OtherEntity, out var emitter)
-            || !TryComp<SolutionContainerManagerComponent>(ent, out var solutionManager)
-            || !_solutionSystem.ResolveSolution((ent, solutionManager), puddle.SolutionName, ref puddle.Solution, out var puddleSolutions)
-            || !TryComp<SolutionContainerManagerComponent>(args.OtherEntity, out var emitterSolutionManager))
+            || !_solutionSystem.ResolveSolution(ent.Owner, puddle.SolutionName, ref puddle.Solution, out var puddleSolutions))
             return;
 
         if (_gameTiming.CurTime < emitter.PuddleAbsorptionCooldownUntil)
@@ -47,12 +44,11 @@ public sealed class PuddleFootprintSystem : EntitySystem
 
         var stand = !_standingStateSystem.IsDown(args.OtherEntity);
 
-        var solCont = (args.OtherEntity, emitterSolutionManager);
         Solution solution;
         Entity<SolutionComponent> solComp;
         if (stand)
         {
-            if (!_solutionSystem.ResolveSolution(solCont, emitter.FootsSolutionName, ref emitter.FootsSolution, out var footsSolution))
+            if (!_solutionSystem.ResolveSolution(args.OtherEntity, emitter.FootsSolutionName, ref emitter.FootsSolution, out var footsSolution))
                 return;
 
             solution = footsSolution;
@@ -60,7 +56,7 @@ public sealed class PuddleFootprintSystem : EntitySystem
         }
         else
         {
-            if (!_solutionSystem.ResolveSolution(solCont, emitter.BodySurfaceSolutionName, ref emitter.BodySurfaceSolution, out var bodySurfaceSolution))
+            if (!_solutionSystem.ResolveSolution(args.OtherEntity, emitter.BodySurfaceSolutionName, ref emitter.BodySurfaceSolution, out var bodySurfaceSolution))
                 return;
 
             solution = bodySurfaceSolution;

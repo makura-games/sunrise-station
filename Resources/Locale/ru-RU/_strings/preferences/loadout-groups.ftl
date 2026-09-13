@@ -128,11 +128,9 @@ loadout-group-head-of-security-head = { loadout-group-head }
 loadout-group-head-of-security-jumpsuit = { loadout-group-jumpsuit }
 loadout-group-head-of-security-neck = { loadout-group-neck }
 loadout-group-head-of-security-outerclothing = { loadout-group-outer-clothing }
-
 loadout-group-warden-head = { loadout-group-head }
 loadout-group-warden-jumpsuit = { loadout-group-jumpsuit }
 loadout-group-warden-outerclothing = { loadout-group-outer-clothing }
-
 loadout-group-security-head = { loadout-group-head }
 loadout-group-security-jumpsuit = { loadout-group-jumpsuit }
 loadout-group-security-backpack = { loadout-group-back }
@@ -141,38 +139,31 @@ loadout-group-security-belt = { loadout-group-belt }
 loadout-group-security-outerclothing = { loadout-group-outer-clothing }
 loadout-group-security-shoes = { loadout-group-shoes }
 loadout-group-security-id = { loadout-group-id }
-
 loadout-group-detective-head = { loadout-group-head }
 loadout-group-detective-neck = { loadout-group-neck }
 loadout-group-detective-jumpsuit = { loadout-group-jumpsuit }
 loadout-group-detective-outerclothing = { loadout-group-outer-clothing }
-
 loadout-group-security-cadet-jumpsuit = { loadout-group-jumpsuit }
 loadout-group-security-star = { loadout-group-common-misc-items }
 
 # Medical
 loadout-group-medical-gloves = { loadout-group-gloves }
 loadout-group-medical-mask = { loadout-group-mask }
-
 loadout-group-chief-medical-officer-head = { loadout-group-head }
 loadout-group-chief-medical-officer-jumpsuit = { loadout-group-jumpsuit }
 loadout-group-chief-medical-officer-outerclothing = { loadout-group-outer-clothing }
 loadout-group-chief-medical-officer-shoes = { loadout-group-shoes }
 loadout-group-chief-medical-officer-neck = { loadout-group-neck }
-
 loadout-group-medical-doctor-head = { loadout-group-head }
 loadout-group-medical-doctor-jumpsuit = { loadout-group-jumpsuit }
 loadout-group-medical-doctor-outerclothing = { loadout-group-outer-clothing }
 loadout-group-medical-doctor-backpack = { loadout-group-back }
 loadout-group-medical-doctor-shoes = { loadout-group-shoes }
 loadout-group-medical-doctor-id = { loadout-group-id }
-
 loadout-group-medical-intern-jumpsuit = { loadout-group-jumpsuit }
-
 loadout-group-chemist-jumpsuit = { loadout-group-jumpsuit }
 loadout-group-chemist-outerclothing = { loadout-group-outer-clothing }
 loadout-group-chemist-backpack = { loadout-group-back }
-
 loadout-group-paramedic-head = { loadout-group-head }
 loadout-group-paramedic-jumpsuit = { loadout-group-jumpsuit }
 loadout-group-paramedic-outerclothing = { loadout-group-outer-clothing }
@@ -183,3 +174,12 @@ loadout-group-reporter-jumpsuit = { loadout-group-jumpsuit }
 loadout-group-psychologist-jumpsuit = { loadout-group-jumpsuit }
 loadout-group-boxer-jumpsuit = { loadout-group-jumpsuit }
 loadout-group-boxer-gloves = { loadout-group-gloves }
+loadout-group-survival-military = Смотри строку 14, никто этого никогда не увидит, так что :3
+loadout-group-bartender-shaker = Шейкер бармена
+
+loadout-group-chaplain-bible = Священная книга
+
+loadout-group-cargo-technician-id = ID-карта техника по снабжению
+
+loadout-group-reporter-head = Головной убор репортёра
+loadout-group-reporter-outerclothing = Жилет репортёра

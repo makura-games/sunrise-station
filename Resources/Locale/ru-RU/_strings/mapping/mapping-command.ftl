@@ -15,3 +15,6 @@ cmd-hint-mapping-id = [MapID]
 cmd-hint-mapping-path = [Path]
 cmd-mapping-exists = Карта { $mapId } уже существует.
 cmd-mapping-pullmap-error = Маппинг запрещен здесь. Для маппинга подключитесь к маппинговому серверу, для получения карт с маппинга используйте pullmap.
+cmd-mapping-try-grid = Не удалось загрузить файл как карту. Попытка загрузить файл как сетку...
+cmd-mapping-success-load-grid = Неинициализированная сетка загружена из файла {$path} на новую карту с ID {$mapId}.
+cmd-mapping-hint-grid = [Grid]

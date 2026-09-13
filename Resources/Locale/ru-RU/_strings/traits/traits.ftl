@@ -47,3 +47,6 @@ trait-moldovan-desc = Цыгания дам ын спацию космик!
 trait-formal-name = Формальный акцент
 trait-formal-desc = Вы говорите очень формально, разворачивая сокращения в полные значения.
 # Fish-edit-end
+
+trait-scottish-name = Шотландский акцент
+trait-scottish-desc = Вы говорите как настоящий шотландец!

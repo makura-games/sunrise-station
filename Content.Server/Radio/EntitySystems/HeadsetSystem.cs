@@ -15,10 +15,10 @@ namespace Content.Server.Radio.EntitySystems;
 
 public sealed partial class HeadsetSystem : SharedHeadsetSystem
 {
-    [Dependency] private readonly INetManager _netMan = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private INetManager _netMan = default!;
+    [Dependency] private RadioSystem _radio = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {
@@ -67,9 +67,9 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
         base.OnGotEquipped(ent, ref args);
         if (ent.Comp.IsEquipped && ent.Comp.Enabled)
         {
-            EnsureComp<WearingHeadsetComponent>(args.Equipee).Headset = ent;
+            EnsureComp<WearingHeadsetComponent>(args.EquipTarget).Headset = ent;
             UpdateRadioChannels(ent, ent.Comp);
-            _actions.AddAction(args.Equipee, ref ent.Comp.ToggleActionEntity, ent.Comp.ToggleAction, ent); // Sunrise-Add
+            _actions.AddAction(args.EquipTarget, ref ent.Comp.ToggleActionEntity, ent.Comp.ToggleAction, ent); // Sunrise-Add
         }
     }
 
@@ -77,11 +77,11 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
     {
         base.OnGotUnequipped(ent, ref args);
         RemComp<ActiveRadioComponent>(ent);
-        RemComp<WearingHeadsetComponent>(args.Equipee);
+        RemComp<WearingHeadsetComponent>(args.EquipTarget);
         // Sunrise-Start
-        if (TryComp<ActionComponent>(ent.Comp.ToggleActionEntity, out var action) && action.AttachedEntity == args.Equipee)
+        if (TryComp<ActionComponent>(ent.Comp.ToggleActionEntity, out var action) && action.AttachedEntity == args.EquipTarget)
         {
-            _actions.RemoveAction(args.Equipee, ent.Comp.ToggleActionEntity);
+            _actions.RemoveAction(args.EquipTarget, ent.Comp.ToggleActionEntity);
         }
         // Sunrise-End
     }

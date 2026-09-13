@@ -16,7 +16,6 @@ concurrency:
 
 jobs:
   build:
-    if: github.actor != 'Sunrise-Bot'
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Master
@@ -177,7 +176,6 @@ jobs:
         SEQUENCE_URL: ${{ steps.upload-sequences.outputs.artifact-url }}
         DUMP_URL: ${{ steps.upload-dumps.outputs.artifact-url }}
       run: bash Tools/_sunrise/ci/test_workflow.sh report-timeout
-
   ci-success:
     name: Build & Test Debug
     needs:
@@ -185,7 +183,7 @@ jobs:
       - content-tests
       - integration-tests
     # Sunrise edit start - итоговый статус явно отражает падение, отмену или пропуск обязательной зависимости
-    if: ${{ always() && github.actor != 'Sunrise-Bot' }}
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

@@ -16,6 +16,8 @@ strippable-component-alert-owner-interact = { $user } возится с ваши
 strip-verb-get-data-text = Обыскать
 
 ## UI
-
 strippable-bound-user-interface-stripping-menu-title = Инвентарь { $ownerName }
 strippable-bound-user-interface-stripping-menu-ensnare-button = Ограничители ног
+strip-all-verb-get-data-text = Снять всё
+
+## UI

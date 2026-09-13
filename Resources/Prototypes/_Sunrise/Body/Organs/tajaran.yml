@@ -3,15 +3,10 @@
   parent: OrganAnimalStomach
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      stomach:
-        maxVol: 50
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 5
+    - SolutionSunriseStomachSmall
+    - SolutionSunriseRawProteinFood
 
 - type: entity
   id: OrganTajaranEyes

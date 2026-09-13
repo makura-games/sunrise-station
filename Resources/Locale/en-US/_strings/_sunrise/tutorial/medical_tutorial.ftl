@@ -1,8 +1,8 @@
 medical-tutorial-name = Basic medicine
 medical-tutorial-tooltip = Learn how to examine a patient, recognize simple injuries, and provide first aid.
 
-medical-tut-welcome-bubble = This tutorial teaches you how to provide first aid.
-medical-tut-welcome-chat = First we will check the patient's condition and choose simple treatments.
+medical-tut-welcome-bubble = Welcome! This tutorial teaches you how to examine a patient and provide first aid.
+medical-tut-welcome-chat = Welcome! You will learn how to check a patient's condition and choose simple treatments.
 medical-tut-welcome-tts = Hello! This tutorial teaches you how to examine a patient and provide first aid.
 
 medical-tut-find-patient-bubble = Find the patient and examine them with [tutkeybind="ExamineEntity"].
@@ -82,3 +82,5 @@ medical-tut-softlock-keep-brutepack = Do not put away the trauma pack: use it on
 medical-tut-softlock-keep-ointment = Do not put away the ointment: use it on the patient first.
 medical-tut-softlock-keep-self-ointment = Do not put away the ointment: use it on yourself first.
 medical-tut-softlock-open-analyzer = Pick up the health analyzer first. Its interface will be needed in the next step.
+
+ent-SunriseMedicalTutorialSelfOintment = { ent-Ointment }

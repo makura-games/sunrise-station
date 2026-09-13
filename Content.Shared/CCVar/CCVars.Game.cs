@@ -48,6 +48,12 @@ public sealed partial class CCVars
         GameLobbyFallbackPreset = CVarDef.Create("game.fallbackpreset", "Traitor,Extra", CVar.ARCHIVE); // Sunrise-Edit
 
     /// <summary>
+    ///     The preset for the game to fall back to if the selected preset could not be used, and fallback is enabled.
+    /// </summary>
+    public static readonly CVarDef<string>
+        GameTickerIgnoredPresets = CVarDef.Create("game.ignoredpresets", "", CVar.ARCHIVE);
+
+    /// <summary>
     ///     Controls if people can win the game in Suspicion or Deathmatch.
     /// </summary>
     public static readonly CVarDef<bool>

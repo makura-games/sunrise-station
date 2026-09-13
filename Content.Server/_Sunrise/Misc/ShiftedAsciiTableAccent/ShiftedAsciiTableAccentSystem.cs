@@ -1,12 +1,12 @@
-﻿using Content.Server.Speech;
+using Content.Server.Speech;
 using Content.Shared.Speech;
 using Robust.Shared.Random;
 
 namespace Content.Server._Sunrise.Misc.ShiftedAsciiTableAccent;
 
-public sealed class AnomalyAccentSystem : EntitySystem
+public sealed partial class AnomalyAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     // Значения сдвига по юникоду
     private const int ShiftMin = 5;

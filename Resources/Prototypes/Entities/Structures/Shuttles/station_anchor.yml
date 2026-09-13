@@ -71,8 +71,9 @@
       powerLoad: 2500
     - type: ExtensionCableReceiver
     - type: Damageable
-      damageContainer: Inorganic
       damageModifierSet: Metallic
+    - type: Injurable
+      damageContainer: Inorganic
     - type: Repairable
       doAfterDelay: 5 # Sunrise-Edit
     - type: Destructible
@@ -206,8 +207,8 @@
 - type: entity
   parent: StationAnchorBaseDespawn
   id: StationAnchorDespawn
-  suffix: 5minDelete
+  suffix: 3minDelete
   components:
   - type: TimedDespawn
-    lifetime: 300
+    lifetime: 180
 #Sunrise-End

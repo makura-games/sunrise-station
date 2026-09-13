@@ -12,6 +12,8 @@
     - id: DoorRemoteCargo
     - id: AstroNavCartridge
     - id: ClothingHandsKnuckleDustersQM
+    - id: PlushieLizardJobQuartermaster
+      prob: 0.02
     # Sunrise-start: Flippos + Cargo suit
     - id: ClothingOuterSuitCargo
     - id: BluespaceBox
@@ -52,11 +54,13 @@
     - id: SpaceCash1000
     - id: WeaponDisabler
     - id: ClothingEyesGlassesCommand
-    - id: FlippoLighterSunriseCap  # Sunrise-Flippo
-    - id: HeadSkeleton # A skull to accompany your skeleton crew
+    - id: OrganSkeletonPersonHead # A skull to accompany your skeleton crew
+    - id: FlippoLighterSunriseCap  # Sunrise-edit
       conditions:
       - !type:PlayerCountCondition
         max: 15
+    - id: PlushieLizardJobCaptain
+      prob: 0.02
     - id: WeaponMiniEnergyGun #  Sunrise-edit
 
 # No laser table + Laser table
@@ -139,6 +143,8 @@
     - id: HoPIDCard
     - id: WeaponDisabler
     - id: ClothingEyesHudCommand
+    - id: PlushieLizardJobHeadofpersonnel
+      prob: 0.02
     # Sunrise-start
     - id: FlippoLighterSunriseHop
     - id: DrinkInc
@@ -176,6 +182,8 @@
     - id: RCDAmmo
     - id: RubberStampCE
     - id: MetalFoamGrenade
+    - id: PlushieLizardJobChiefengineer
+      prob: 0.02
     - id: FlippoLighterSunriseCe  # Sunrise-Flippo
 
 # Hardsuit table, used for suit storage as well
@@ -220,27 +228,28 @@
   id: LockerFillChiefMedicalOfficerNoHardsuit
   table: !type:AllSelector
     children:
-    - id: BoxEncryptionKeyMedical
-    - id: ClothingBackpackDuffelSurgeryFilled
     - id: ClothingEyesHudMedical
-    - id: ClothingHandsGlovesNitrile
-    - id: ClothingHeadsetAltMedical
-    - id: ClothingMaskSterile
-    - id: DoorRemoteMedical
+    - id: ClothingBeltMedicalFilled
     - id: HandheldCrewMonitor
     - id: Hypospray
+    - id: MedTekCartridge
+    # Standard command gear
+    - id: RubberStampCMO
+    - id: ClothingHeadsetAltMedical
+    - id: DoorRemoteMedical
+    - id: BoxEncryptionKeyMedical
+    - id: BoxCMOCircuitboards
+    - id: PlushieLizardJobChiefmedicalofficer
+      prob: 0.02
     #Sunrise-start
     - id: ClothingEyesUniversalMedicalHud
     - id: AdvancedDefibrillator
     - id: VariantCubeBoxSunrise
     - id: LeftArmCyberRipper
       prob: 0.35
+    - id: FlippoLighterSunriseCmo
+    - id: MedipenCaseChiefMedicalOfficer
     #Sunrise-end
-    - id: BoxCMOCircuitboards
-    - id: MedkitFilled
-    - id: RubberStampCMO
-    - id: MedTekCartridge
-    - id: FlippoLighterSunriseCmo  # Sunrise-Flippos
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
@@ -290,6 +299,8 @@
     - id: DoorRemoteResearch
     - id: HandTeleporter
     - id: RubberStampRd
+    - id: PlushieLizardJobResearchdirector
+      prob: 0.02
     - id: FlippoLighterSunriseRd  # Sunrise-Flippo
 
 # Hardsuit table, used for suit storage as well
@@ -351,9 +362,13 @@
     - id: WeaponTaser
     - id: WantedListCartridge
     - id: DrinkHosFlask
-    - id: FlippoLighterSunriseHos  # Sunrise-Flippo
-    - id: SunriseCriminalRecordsComputerCircuitboard  # Sunrise-Edit
-    - id: ComputerPrisonerManagementCircuitboard  # Sunrise-Edit
+    - id: PlushieLizardJobHeadofsecurity
+      prob: 0.02
+    # Sunrise start
+    - id: FlippoLighterSunriseHos
+    - id: SunriseCriminalRecordsComputerCircuitboard
+    - id: ComputerPrisonerManagementCircuitboard
+    # Sunrise end
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable

@@ -5,6 +5,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 SHARDING_SCRIPT="$ROOT_DIR/Tools/_sunrise/ci/sharding/test_shard_filter.py"
 RESULTS_DIR=/tmp/test-results
+PROFILE_SHARD_COUNT=8
 cd "$ROOT_DIR"
 
 setup_root_submodules() {
@@ -36,7 +37,8 @@ discover_profile() {
     dotnet test --list-tests --no-build --no-restore --configuration DebugOpt \
         Content.IntegrationTests/Content.IntegrationTests.csproj \
         -- NUnit.DisplayName=FullName 2>&1 \
-        | tee integration-test-discovery.log
+        | tee integration-test-discovery.log \
+        | python3 "$SHARDING_SCRIPT" generate "$PROFILE_SHARD_COUNT" .integration-filters
 }
 
 prune_build() {
@@ -95,7 +97,7 @@ archive_build() {
             cp Tools/_sunrise/ci/test_workflow.sh \
                 /tmp/integration-profile-build/Tools/_sunrise/ci/test_workflow.sh
             tar -I 'zstd -T0 -3' -cf /tmp/integration-profile-build/integration-profile-build.tar.zst \
-                Resources RobustToolbox/Resources Tools/_sunrise/ci \
+                Resources RobustToolbox/Resources .integration-filters Tools/_sunrise/ci \
                 bin/Content.Client bin/Content.Server bin/Content.IntegrationTests
             ;;
         *)
@@ -176,23 +178,28 @@ verify_required_jobs() {
 
 prepare_profile_matrix() {
     python3 "$SHARDING_SCRIPT" matrix \
-        "$PROFILE_RUNS" "$MAX_PARALLEL_RUNNERS" "$GITHUB_OUTPUT"
+        "$PROFILE_RUNS" "$MAX_PARALLEL_RUNNERS" "$PROFILE_SHARD_COUNT" "$GITHUB_OUTPUT"
 }
 
-run_profile() {
+run_profile_shard() {
+    : "${SHARD:?Не указан номер шарда}"
+    [[ "$SHARD" =~ ^[0-9]+$ ]]
+    local settings=".integration-filters/shard_${SHARD}.runsettings"
     mkdir -p "$RESULTS_DIR"
-    timeout --signal=TERM --kill-after=2m 22m \
+    timeout --signal=TERM --kill-after=2m 15m \
         dotnet test bin/Content.IntegrationTests/Content.IntegrationTests.dll \
+        --settings "$settings" \
         --logger "trx;LogFileName=results.trx" \
         --logger "console;verbosity=minimal" \
         --results-directory "$RESULTS_DIR" \
-        -- NUnit.DisplayName=FullName NUnit.ConsoleOut=0 NUnit.WorkDirectory="$RESULTS_DIR"
+        -- NUnit.ConsoleOut=0 NUnit.WorkDirectory="$RESULTS_DIR"
 }
 
 collect_profile() {
+    : "${SHARD:?Не указан номер шарда}"
     python3 "$SHARDING_SCRIPT" collect \
         "$PROFILE_RUN" "$RESULTS_DIR" \
-        "/tmp/integration-timing-${PROFILE_RUN}.json"
+        "/tmp/integration-timing-${PROFILE_RUN}-${SHARD}.json"
 }
 
 aggregate_profile() {
@@ -221,7 +228,7 @@ case "$command" in
     report-timeout) report_timeout "$@" ;;
     verify-required-jobs) verify_required_jobs "$@" ;;
     prepare-profile-matrix) prepare_profile_matrix "$@" ;;
-    run-profile) run_profile "$@" ;;
+    run-profile-shard) run_profile_shard "$@" ;;
     collect-profile) collect_profile "$@" ;;
     aggregate-profile) aggregate_profile "$@" ;;
     *)

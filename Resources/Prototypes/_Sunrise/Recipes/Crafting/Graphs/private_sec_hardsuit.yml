@@ -11,3 +11,17 @@
         doAfter: 5
   - node: privateSec
     entity: ClothingOuterHardsuitPrivateSec
+
+- type: constructionGraph
+  id: PrivateSecHardsuitDamaged
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: privateSecDamaged
+      steps:
+      - tag: Soap
+        name: ent-Soap
+        doAfter: 5
+  - node: privateSecDamaged
+    entity: ClothingOuterHardsuitPrivateSecDamaged

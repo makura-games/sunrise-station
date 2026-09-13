@@ -28,8 +28,8 @@ ent-ClothingHeadHatCatEars = кошачьи ушки
 ent-ClothingHeadHatCatEarsValid = { ent-ClothingHeadHatCatEars }
     .suffix = Действительное, НЕ МАППИТЬ!
     .desc = { ent-ClothingHeadHatCatEars.desc }
-ent-ActionBecomeValid = Становится действительным
-    .desc = *замечает ваш знак смерти* owo что это?
+ent-ActionBecomeValid = становится действительным
+    .desc = *Замечает ваш знак смерти* Ох, что это?
 ent-ClothingHeadHatDogEars = собачьи ушки
     .desc = Только для хороших мальчиков.
     .suffix = НЕ МАППИТЬ!
@@ -43,4 +43,3 @@ ent-ClothingHeadHatHairflower = цветок для волос
     .desc = Красивый цветок для волос, который можно вставить между локонами.
 ent-ClothingHeadPerformerWig = парик исполнителя
     .desc = При ближайшем рассмотрении видно, что он сделан из оптоволокна.
-

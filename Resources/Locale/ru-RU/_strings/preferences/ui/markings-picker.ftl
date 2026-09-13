@@ -29,3 +29,29 @@ markings-category-Legs = Ноги
 markings-category-Tail = Хвост
 markings-category-Overlay = Наложение
 markings-category-Back = Спина
+
+# Layers
+
+markings-layer-Special = Специальное
+markings-layer-Tail = Хвост
+markings-layer-Tail-Moth = Крылья
+markings-layer-Hair = Причёска
+markings-layer-FacialHair = Лицевая растительность
+markings-layer-UndergarmentTop = Верхнее бельё
+markings-layer-UndergarmentBottom = Нижнее бельё
+markings-layer-Chest = Грудь
+markings-layer-Head = Голова
+markings-layer-Snout = Морда
+markings-layer-SnoutCover = Морда (покров)
+markings-layer-HeadSide = Голова (бок)
+markings-layer-HeadTop = Голова (верх)
+markings-layer-Eyes = Глаза
+markings-layer-RArm = Правая рука
+markings-layer-LArm = Левая рука
+markings-layer-RHand = Правая кисть
+markings-layer-LHand = Левая кисть
+markings-layer-RLeg = Правая нога
+markings-layer-LLeg = Левая нога
+markings-layer-RFoot = Правая стопа
+markings-layer-LFoot = Левая стопа
+markings-layer-Overlay = Наложение

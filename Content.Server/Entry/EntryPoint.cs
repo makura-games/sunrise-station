@@ -5,6 +5,7 @@ using Content.Server._Sunrise.MapperSync;
 using Content.Server._Sunrise.PlayerCache;
 using Content.Server._Sunrise.ServersHub;
 using Content.Server._Sunrise.TTS;
+using System.Threading.Tasks;
 using Content.Server.Acz;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
@@ -18,6 +19,7 @@ using Content.Server.Database;
 using Content.Server.Discord;
 using Content.Server.Discord.DiscordLink;
 using Content.Server.EUI;
+using Content.Server.FeedbackSystem;
 using Content.Server.GameTicking;
 using Content.Server.GhostKick;
 using Content.Server.GuideGenerator;
@@ -33,6 +35,7 @@ using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
 using Content.Server.Voting.Managers;
 using Content.Shared.CCVar;
+using Content.Shared.FeedbackSystem;
 using Content.Shared.Kitchen;
 using Content.Shared.Localizations;
 using Content.Sunrise.Interfaces.Server;
@@ -42,61 +45,63 @@ using Robust.Server.ServerStatus;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Server._Sunrise.Auth;
 
 namespace Content.Server.Entry
 {
-    public sealed class EntryPoint : GameServer
+    public sealed partial class EntryPoint : GameServer
     {
         internal const string ConfigPresetsDir = "/ConfigPresets/";
         private const string ConfigPresetsDirBuild = $"{ConfigPresetsDir}Build/";
 
-        [Dependency] private readonly CVarControlManager _cvarCtrl = default!;
-        [Dependency] private readonly ContentLocalizationManager _loc = default!;
-        [Dependency] private readonly ContentNetworkResourceManager _netResMan = default!;
-        [Dependency] private readonly DiscordChatLink _discordChatLink = default!;
-        [Dependency] private readonly DiscordLink _discordLink = default!;
-        [Dependency] private readonly EuiManager _euiManager = default!;
-        [Dependency] private readonly GhostKickManager _ghostKick = default!;
-        [Dependency] private readonly IAdminManager _admin = default!;
-        [Dependency] private readonly IAdminLogManager _adminLog = default!;
-        [Dependency] private readonly IAfkManager _afk = default!;
-        [Dependency] private readonly IBanManager _ban = default!;
-        [Dependency] private readonly IChatManager _chatSan = default!;
-        [Dependency] private readonly IChatSanitizationManager _chat = default!;
-        [Dependency] private readonly IComponentFactory _factory = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly IConnectionManager _connection = default!;
-        [Dependency] private readonly IEntitySystemManager _entSys = default!;
-        [Dependency] private readonly IGameMapManager _gameMap = default!;
-        [Dependency] private readonly ILogManager _log = default!;
-        [Dependency] private readonly INodeGroupFactory _nodeFactory = default!;
-        [Dependency] private readonly IPrototypeManager _proto = default!;
-        [Dependency] private readonly IResourceManager _res = default!;
-        [Dependency] private readonly IServerDbManager _dbManager = default!;
-        [Dependency] private readonly IServerPreferencesManager _preferences = default!;
-        [Dependency] private readonly IStatusHost _host = default!;
-        [Dependency] private readonly IVoteManager _voteManager = default!;
-        [Dependency] private readonly IWatchlistWebhookManager _watchlistWebhookManager = default!;
-        [Dependency] private readonly JobWhitelistManager _job = default!;
-        [Dependency] private readonly MultiServerKickManager _multiServerKick = default!;
-        [Dependency] private readonly PlayTimeTrackingManager _playTimeTracking = default!;
-        [Dependency] private readonly PlayerRateLimitManager _rateLimit = default!;
-        [Dependency] private readonly RecipeManager _recipe = default!;
-        [Dependency] private readonly RulesManager _rules = default!;
-        [Dependency] private readonly ServerApi _serverApi = default!;
-        [Dependency] private readonly ServerInfoManager _serverInfo = default!;
-        [Dependency] private readonly ServerUpdateManager _updateManager = default!;
-        [Dependency] private readonly ServersHubManager _serversHubManager = default!; // Sunrise-Edit
-        [Dependency] private readonly ContributorsManager _contributorsManager = default!; // Sunrise-Edit
-        [Dependency] private readonly PlayerCacheManager _playerCacheManager = default!; // Sunrise-Edit
-        [Dependency] private readonly TTSManager _ttsManager = default!; // Sunrise-Edit
-        [Dependency] private readonly NetTexturesManager _netTexturesManager = default!; // Sunrise-Edit
-        [Dependency] private readonly DiscordWebhook _discord = default!; // Sunrise-Edit
-        [Dependency] private readonly MapperSyncManager _mapperSyncManager = default!; // Sunrise-Edit
-        [Dependency] private readonly AccountCreationManager _accountCreation = default!; // Sunrise-Edit
+        [Dependency] private CVarControlManager _cvarCtrl = default!;
+        [Dependency] private ContentLocalizationManager _loc = default!;
+        [Dependency] private ContentNetworkResourceManager _netResMan = default!;
+        [Dependency] private DiscordChatLink _discordChatLink = default!;
+        [Dependency] private DiscordLink _discordLink = default!;
+        [Dependency] private EuiManager _euiManager = default!;
+        [Dependency] private GhostKickManager _ghostKick = default!;
+        [Dependency] private IAdminManager _admin = default!;
+        [Dependency] private IAdminLogManager _adminLog = default!;
+        [Dependency] private IAfkManager _afk = default!;
+        [Dependency] private IBanManager _ban = default!;
+        [Dependency] private IChatManager _chatSan = default!;
+        [Dependency] private IChatSanitizationManager _chat = default!;
+        [Dependency] private IComponentFactory _factory = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private IConnectionManager _connection = default!;
+        [Dependency] private IEntitySystemManager _entSys = default!;
+        [Dependency] private IGameMapManager _gameMap = default!;
+        [Dependency] private ILogManager _log = default!;
+        [Dependency] private INodeGroupFactory _nodeFactory = default!;
+        [Dependency] private IPrototypeManager _proto = default!;
+        [Dependency] private IResourceManager _res = default!;
+        [Dependency] private IServerDbManager _dbManager = default!;
+        [Dependency] private IServerPreferencesManager _preferences = default!;
+        [Dependency] private IStatusHost _host = default!;
+        [Dependency] private IVoteManager _voteManager = default!;
+        [Dependency] private IWatchlistWebhookManager _watchlistWebhookManager = default!;
+        [Dependency] private JobWhitelistManager _job = default!;
+        [Dependency] private MultiServerKickManager _multiServerKick = default!;
+        [Dependency] private PlayTimeTrackingManager _playTimeTracking = default!;
+        [Dependency] private PlayerRateLimitManager _rateLimit = default!;
+        [Dependency] private RecipeManager _recipe = default!;
+        [Dependency] private RulesManager _rules = default!;
+        [Dependency] private ServerApi _serverApi = default!;
+        [Dependency] private ServerInfoManager _serverInfo = default!;
+        [Dependency] private ServerUpdateManager _updateManager = default!;
+        [Dependency] private ServerFeedbackManager _feedbackManager = null!;
+        [Dependency] private ServersHubManager _serversHubManager = default!; // Sunrise-Edit
+        [Dependency] private ContributorsManager _contributorsManager = default!; // Sunrise-Edit
+        [Dependency] private PlayerCacheManager _playerCacheManager = default!; // Sunrise-Edit
+        [Dependency] private TTSManager _ttsManager = default!; // Sunrise-Edit
+        [Dependency] private NetTexturesManager _netTexturesManager = default!; // Sunrise-Edit
+        [Dependency] private DiscordWebhook _discord = default!; // Sunrise-Edit
+        [Dependency] private MapperSyncManager _mapperSyncManager = default!; // Sunrise-Edit
+        [Dependency] private AccountCreationManager _accountCreation = default!; // Sunrise-Edit
         private IIPBlockingSystem? _ipBlockingSystem;
         private ITrustedProxyService? _trustedProxyService;
         private ISharedSponsorsManager? _sponsorsManager; // Sunrise-Sponsors
@@ -109,6 +114,8 @@ namespace Content.Server.Entry
                 var cast = (ServerModuleTestingCallbacks)callback;
                 cast.ServerBeforeIoC?.Invoke();
             }
+
+            Dependencies.Resolve<IRobustSerializer>().FloatFlags = SerializerFloatFlags.RemoveReadNan;
         }
 
         /// <inheritdoc />
@@ -209,6 +216,7 @@ namespace Content.Server.Entry
             _connection.PostInit();
             _multiServerKick.Initialize();
             _cvarCtrl.Initialize();
+            _feedbackManager.Initialize();
             _contributorsManager.Initialize(); // Sunrise-Edit
             _mapperSyncManager.Initialize(); // Sunrise-Edit
             _serversHubManager.Initialize(); // Sunrise-Edit
@@ -260,8 +268,8 @@ namespace Content.Server.Entry
 
             _serverApi.Shutdown();
 
-            // TODO Should this be awaited?
-            _discordLink.Shutdown();
+            // We don't care when or how this finishes, just spin the task off into the void.
+            _ = _discordLink.Shutdown();
             _discordChatLink.Shutdown();
 
             // Sunrise added start

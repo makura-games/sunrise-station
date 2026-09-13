@@ -9,11 +9,11 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._Sunrise.Tutorial.TutorialBubbleControl;
 
-public abstract class TutorialBubble : Control
+public abstract partial class TutorialBubble : Control
 {
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
     private readonly SharedTransformSystem _transformSystem;
 
     /// <summary>

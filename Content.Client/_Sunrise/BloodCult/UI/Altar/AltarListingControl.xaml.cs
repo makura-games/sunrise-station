@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._Sunrise.BloodCult.UI.Altar;
 
 [GenerateTypedNameReferences]
-public partial class AltarListingControl : Control
+public sealed partial class AltarListingControl : Control
 {
     public AltarListingControl(EntityPrototype prototype,
         Robust.Client.Graphics.Texture icon,

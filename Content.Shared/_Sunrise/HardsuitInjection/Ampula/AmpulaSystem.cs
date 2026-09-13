@@ -10,8 +10,8 @@ namespace Content.Shared._Sunrise.HardsuitInjection.EntitySystems;
 
 public sealed partial class AmpulaSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private IEntityManager _entManager = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<AmpulaComponent, AfterInteractEvent>(OnAfterInteract);

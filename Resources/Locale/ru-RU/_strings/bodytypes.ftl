@@ -1,5 +1,6 @@
 humanoid-profile-editor-body-type-label = Телосложение:
 body-normal = Стандартное
+body-slim = Худое
 body-slim-f = Худое
 body-slim-m = Худое
 body-fat-f = Полное
@@ -8,6 +9,8 @@ body-giga-f = Мускулистое
 body-giga-m = Мускулистое
 body-distrofik-f = Истощённое
 body-distrofik-m = Истощённое
+body-curved-tajaran = Изогнутые ноги
+body-slim-tajaran = Худое
 body-curved-small-muzzle = Изогнутые ноги (маленькая морда)
 body-straight-small-muzzle = Прямые ноги (маленькая морда)
 body-curved-big-muzzle = Изогнутые ноги (большая морда)

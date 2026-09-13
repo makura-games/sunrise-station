@@ -34,7 +34,6 @@ spellbook-item-recall-description = Отметьте удерживаемый п
 spellbook-mind-swap-description = Обменяйтесь телами с другим человеком!
 
 # Equipment
-
 spellbook-wand-polymorph-door-name = Волшебная палочка входа
 spellbook-wand-polymorph-door-description = На случай, когда нужен маршрут для побега.
 spellbook-wand-polymorph-carp-name = Волшебная палочка полиморфа карпа
@@ -49,7 +48,6 @@ spellbook-staff-animation-description = Оживляйте неодушевлё�
 spellbook-wand-locker-description = Стреляйте в своих врагов проклятыми шкафчиками и запирайте их!
 
 # Events
-
 spellbook-event-summon-ghosts-name = Призыв призраков
 spellbook-event-summon-ghosts-description = Кого вы позовёте?
 spellbook-event-summon-guns-name = Призыв оружия
@@ -61,3 +59,5 @@ spellbook-upgrade-fireball-name = Улучшение Огненного шара
 spellbook-upgrade-fireball-description = Позволяет улучшить Огненный шар до максимального 3-го уровня!
 spellbook-upgrade-jaunt-name = Улучшение Эфирной прогулки
 spellbook-upgrade-jaunt-description = Позволяет улучшить Эфирную прогулку до максимального 3-го уровня!
+spellbook-knock-name = Стук
+spellbook-knock-desc = Открывает все ближайшие воздушные шлюзы, ящики и шкафы.

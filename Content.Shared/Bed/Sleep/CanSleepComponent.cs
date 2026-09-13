@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.Bed.Sleep;
 
 [NetworkedComponent, RegisterComponent]
-[AutoGenerateComponentState, AutoGenerateComponentPause(Dirty = true)]
+[AutoGenerateComponentState]
 public sealed partial class CanSleepComponent : Component
 {
     [DataField]

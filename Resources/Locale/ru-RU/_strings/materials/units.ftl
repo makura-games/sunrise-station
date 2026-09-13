@@ -19,3 +19,7 @@ materials-unit-chunk = куски руды
 # bills of spesos... not very good but they are not (yet?) used for crafting anything
 # also the lathe/atm would need bigger denominations to output...
 materials-unit-bill = банкноты
+materials-unit-boll = болл
+
+# bills of spesos... not very good but they are not (yet?) used for crafting anything
+# also the lathe/atm would need bigger denominations to output...

@@ -48,3 +48,4 @@ highlights-psychologist = Психолог, Психология
 highlights-personal-ai = Персональный ИИ, "ПИИ"
 highlights-cyborg = Киборг, Борг, Робот
 highlights-station-ai = Станционный ИИ, "ИИ", "СИИ"
+highlights-musician = Музыкант, "Музыка", Театр, Театр, Сервис, "Серв"

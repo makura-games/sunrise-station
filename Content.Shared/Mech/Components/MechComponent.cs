@@ -1,9 +1,7 @@
 using Content.Shared.FixedPoint;
 using Content.Shared.Whitelist;
-using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Mech.Components;
@@ -15,13 +13,6 @@ namespace Content.Shared.Mech.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class MechComponent : Component
 {
-    /// <summary>
-    /// Whether or not an emag disables it.
-    /// </summary>
-    [DataField("breakOnEmag")]
-    [AutoNetworkedField]
-    public bool BreakOnEmag = true;
-
     /// <summary>
     /// How much "health" the mech has left.
     /// </summary>
@@ -71,12 +62,6 @@ public sealed partial class MechComponent : Component
     public bool Broken = false;
 
     /// <summary>
-    /// Whether the mech has toggled lights.
-    /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public bool Lights = false;
-
-    /// <summary>
     /// The slot the pilot is stored in.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
@@ -107,9 +92,6 @@ public sealed partial class MechComponent : Component
     [DataField]
     public EntityWhitelist? PilotWhitelist;
 
-    [DataField]
-    public EntityWhitelist? PilotBlacklist;
-
     /// <summary>
     /// A container for storing the equipment entities.
     /// </summary>
@@ -130,7 +112,7 @@ public sealed partial class MechComponent : Component
     /// outside of the mech. You can exit instantly yourself.
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public float ExitDelay = 6;
+    public float ExitDelay = 6; // Sunrise-Edit — больше времени на принудительное извлечение пилота
 
     /// <summary>
     /// How long it takes to pull out the battery.
@@ -155,32 +137,6 @@ public sealed partial class MechComponent : Component
     [DataField]
     public List<EntProtoId> StartingEquipment = new();
 
-    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public MechHealthState HealthState = MechHealthState.Normal;
-
-    #region Messages
-    [DataField]
-    public string MessageHello = "mech-message-hello";
-    [DataField]
-    public string MessageGoodbye = "mech-message-goodbye";
-    [DataField]
-    public string MessageEnableLight = "mech-message-enable-light";
-    [DataField]
-    public string MessageDisableLight = "mech-message-disable-light";
-    [DataField]
-    public string MessageAlert50 = "mech-message-alert_50";
-    [DataField]
-    public string MessageAlert25 = "mech-message-alert-25";
-    [DataField]
-    public string MessageAlert5 = "mech-message-alert-5";
-    [DataField]
-    public string MessageInsertEquipment = "mech-message-insert-equipment";
-    [DataField]
-    public string MessageRemoveEquipment = "mech-message-remove-equipment";
-    [DataField]
-    public string MessageCycleEquipment = "mech-message-cycle-equipment";
-    #endregion
-
     #region Action Prototypes
     [DataField]
     public EntProtoId MechCycleAction = "ActionMechCycleEquipment";
@@ -188,29 +144,18 @@ public sealed partial class MechComponent : Component
     public EntProtoId MechUiAction = "ActionMechOpenUI";
     [DataField]
     public EntProtoId MechEjectAction = "ActionMechEject";
-    [DataField]
-    public EntProtoId MechLightsAction = "ActionMechLights";
     #endregion
 
     #region Visualizer States
-    [DataField, AutoNetworkedField]
+    [DataField, AutoNetworkedField] // Sunrise-Edit — состояние используется клиентскими визуализаторами мехов
     public string? BaseState;
-    [DataField, AutoNetworkedField]
+    [DataField, AutoNetworkedField] // Sunrise-Edit — состояние используется клиентскими визуализаторами мехов
     public string? OpenState;
-    [DataField, AutoNetworkedField]
+    [DataField, AutoNetworkedField] // Sunrise-Edit — состояние используется клиентскими визуализаторами мехов
     public string? BrokenState;
     #endregion
 
     [DataField] public EntityUid? MechCycleActionEntity;
     [DataField] public EntityUid? MechUiActionEntity;
     [DataField] public EntityUid? MechEjectActionEntity;
-    [DataField] public EntityUid? MechLightsActionEntity;
-}
-
-public enum MechHealthState
-{
-    Normal,
-    Healthy,
-    Damaged,
-    Critical
 }

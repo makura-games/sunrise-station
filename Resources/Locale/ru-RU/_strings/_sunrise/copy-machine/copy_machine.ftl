@@ -95,7 +95,6 @@ doc-template-error-loading-form-header-name = ОШИБКА загрузки за
 doc-template-note-beginning-military-actions-name = ЗАМЕТКА о начале военных действий
 doc-template-notice-of-liquidation-name = УВЕДОМЛЕНИЕ о начале военных действий
 doc-template-report-accomplishment-goals-name = Отчёт: достижение целей
-
 doc-template-order-appointment-interim-name = Приказ: назначение на ВрИО
 doc-template-order-annulment-of-right-name = Приказ: аннулирование действия права
 doc-template-application-change-position-name = Заявление: смена должности
@@ -170,3 +169,6 @@ doc-template-product-manufacturing-order-engineering-name = Заказ: прои
 doc-template-ordering-special-equipment-centcom-standard-name = Заказ: специальное снаряжение (ЦК)
 doc-template-response-provide-cc-report-name = Ответ: отчёт по ЦЦК
 doc-template-report-decree-heads-presence-name = Отчёт: наличие глав станции
+copy-machine-default-document-title = Документ
+copy-machine-menu-cancel-job = Отмена
+doc-template-response-heads-presence-name = Ответ: присутствие руководителей станции

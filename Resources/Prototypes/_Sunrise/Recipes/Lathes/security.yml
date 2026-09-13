@@ -1,15 +1,4 @@
 - type: latheRecipe
-  id: WeaponEnergyGun
-  result: WeaponEnergyGun
-  categories:
-  - Weapons
-  completetime: 8
-  materials:
-    Steel: 2000
-    Glass: 800
-    Plastic: 500
-
-- type: latheRecipe
   id: WeaponMiniEnergyGun
   result: WeaponMiniEnergyGun
   categories:
@@ -19,6 +8,36 @@
     Steel: 600
     Glass: 200
     Plastic: 50
+
+- type: latheRecipe
+  id: WeaponEnergyGunPistol
+  result: WeaponEnergyGunPistol
+  categories:
+  - Weapons
+  completetime: 5
+  materials:
+    Steel: 1000
+    Glass: 400
+    Plastic: 200
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponLaserLNT620
+  result: SunriseWeaponLaserLNT620Empty
+  materials:
+    Steel: 2000
+    Gold: 900
+    Glass: 400
+    Plastic: 600
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: SunriseWeaponLaserCarbineBattery
+  result: SunriseWeaponLaserCarbineBattery
+  materials:
+    Steel: 2000
+    Glass: 800
+    Plastic: 500
 
 - type: latheRecipe
   id: WeaponSunriseLaserPistol

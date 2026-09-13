@@ -21,7 +21,7 @@ namespace Content.Client.Launcher
     [GenerateTypedNameReferences]
     public sealed partial class LauncherConnectingGui : Control
     {
-        [Dependency] private readonly IUriOpener _uri = default!; // Sunrise-Edit
+        [Dependency] private IUriOpener _uri = default!; // Sunrise-Edit
 
         private const float RedialWaitTimeSeconds = 10f; // Sunrise-Edit
         private readonly LauncherConnecting _state;

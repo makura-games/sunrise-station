@@ -5,7 +5,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
@@ -14,19 +13,18 @@ using Robust.Shared.Random;
 
 namespace Content.Shared._Sunrise.Flip;
 
-public abstract class SharedFlipSystem : EntitySystem
+public abstract partial class SharedFlipSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly StandingStateSystem _standingStateSystem = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private SharedGravitySystem _gravity = default!;
+    [Dependency] private StandingStateSystem _standingStateSystem = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
-    private EntityQuery<FixturesComponent> _fixturesQuery;
+    [Dependency] private EntityQuery<FixturesComponent> _fixturesQuery = default!;
 
     [ValidatePrototypeId<StatusEffectPrototype>]
     private const string FlipStatusEffectKey = "Flip";
@@ -44,7 +42,6 @@ public abstract class SharedFlipSystem : EntitySystem
 
         _cfg.OnValueChanged(SunriseCCVars.SunriseCCVars.FlipDeadChance, OnFlipDeadChanseChanged, true);
 
-        _fixturesQuery = GetEntityQuery<FixturesComponent>();
     }
 
     private void OnFlipDeadChanseChanged(float deadChanse)

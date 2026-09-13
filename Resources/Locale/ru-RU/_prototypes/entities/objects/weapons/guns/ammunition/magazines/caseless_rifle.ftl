@@ -16,3 +16,5 @@ ent-MagazineCaselessRifleShort = короткий магазин (.25 безги
     .desc = { ent-BaseMagazineCaselessRifleShort.desc }
 ent-MagazineCaselessRifleShortPractice = короткий магазин (.25 безгильзовые учебные)
     .desc = { ent-BaseMagazineCaselessRifleShort.desc }
+ent-MagazineCaselessRifle10x24 = коробчатый магазин (.25 безгильзовый)
+    .desc = { ent-BaseMagazineCaselessRifle.desc }

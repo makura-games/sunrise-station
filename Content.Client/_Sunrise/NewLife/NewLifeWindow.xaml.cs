@@ -10,7 +10,7 @@ namespace Content.Client._Sunrise.NewLife;
 [GenerateTypedNameReferences]
 public sealed partial class NewLifeWindow : DefaultWindow
 {
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     private readonly IGameTiming _timing;
 

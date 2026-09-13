@@ -23,17 +23,17 @@ namespace Content.Server._Sunrise.Messenger;
 /// </summary>
 public sealed partial class MessengerServerSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetwork = default!;
-    [Dependency] private readonly SingletonDeviceNetServerSystem _singletonServer = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoader = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetwork = default!;
+    [Dependency] private SingletonDeviceNetServerSystem _singletonServer = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private ISawmill Sawmill { get; set; } = default!;
     private bool _photoUploadEnabled = true;

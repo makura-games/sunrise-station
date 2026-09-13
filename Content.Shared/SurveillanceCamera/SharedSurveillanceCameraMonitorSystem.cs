@@ -1,6 +1,5 @@
 using Content.Shared.DeviceNetwork;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SurveillanceCamera;
@@ -20,41 +19,32 @@ public sealed class SurveillanceCameraMonitorUiState : BoundUserInterfaceState
 
     public string ActiveAddress;
 
-    // Known cameras, by address and name.
-    public Dictionary<NetEntity, CameraData> Cameras { get; } // Sunrise-edit
+    // Currently active subnet.
+    public string ActiveSubnet { get; }
 
-    public SurveillanceCameraMonitorUiState(NetEntity? activeCamera, HashSet<string> subnets, string activeAddress, Dictionary<NetEntity, CameraData> cameras) // Sunrise-edit
+    // Known cameras, by address and name.
+    public Dictionary<string, string> Cameras { get; }
+
+    public SurveillanceCameraMonitorUiState(NetEntity? activeCamera, HashSet<string> subnets, string activeAddress, string activeSubnet, Dictionary<string, string> cameras)
     {
         ActiveCamera = activeCamera;
         Subnets = subnets;
         ActiveAddress = activeAddress;
+        ActiveSubnet = activeSubnet;
         Cameras = cameras;
     }
 }
 
-// Sunrise-start
-[Serializable, NetSerializable]
-[DataDefinition]
-public partial class CameraData
-{
-    public string CameraAddress { get; set; }
-    public string SubnetAddress { get; set; }
-    public string Name { get; set; }
-    public NetCoordinates Coordinates { get; set; }
-    public Color SubnetColor { get; set; }
-}
-// Sunrise-end
-
 [Serializable, NetSerializable]
 public sealed class SurveillanceCameraMonitorSwitchMessage : BoundUserInterfaceMessage
 {
-    public string CameraAddress { get; } // Sunrise-edit
-    public string SubnetAddress { get; } // Sunrise-edit
+    public string Address { get; }
+    public string? CameraSubnet { get; }
 
-    public SurveillanceCameraMonitorSwitchMessage(string cameraAddress, string subnetAddress) // Sunrise-edit
+    public SurveillanceCameraMonitorSwitchMessage(string address, string? cameraSubnet = null)
     {
-        CameraAddress = cameraAddress; // Sunrise-edit
-        SubnetAddress = subnetAddress; // Sunrise-edit
+        Address = address;
+        CameraSubnet = cameraSubnet;
     }
 }
 

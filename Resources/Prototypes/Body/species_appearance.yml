@@ -1,0 +1,116 @@
+- type: entity
+  abstract: true
+  id: BaseSpeciesLayers
+  components:
+  - type: Sprite
+    layers:
+    # Torso
+    - map: [ "enum.HumanoidVisualLayers.Chest" ]
+
+    # Head
+    - map: [ "enum.HumanoidVisualLayers.Head" ]
+    - map: [ "enum.HumanoidVisualLayers.Snout" ]
+    - map: [ "enum.HumanoidVisualLayers.Eyes" ]
+
+    # Limbs
+    - map: [ "enum.HumanoidVisualLayers.RArm" ]
+    - map: [ "enum.HumanoidVisualLayers.LArm" ]
+    - map: [ "enum.HumanoidVisualLayers.RLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+
+    # Sunrise edit start - полнотелые маркировки должны отображаться ниже одежды
+    # Extremities
+    - map: ["enum.HumanoidVisualLayers.LFoot"]
+    - map: ["enum.HumanoidVisualLayers.RFoot"]
+
+    # Stuff that goes over the body but below equipment
+    - map: ["enum.HumanoidVisualLayers.Overlay"]
+
+    # Underwear & clothing
+    #- map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ] # Sunrise-edit
+    #- map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ] # Sunrise-edit
+    # - map: ["jumpsuit"] # Sunrise-edit
+    - map: [ "socks" ]
+    - map: [ "pants" ]
+    - map: [ "bra" ]
+    - map: ["jumpsuit"] # Sunrise-edit
+
+    # Кисти должны отображаться поверх комбинезона, но ниже перчаток
+    - map: ["enum.HumanoidVisualLayers.LHand"]
+    - map: ["enum.HumanoidVisualLayers.RHand"]
+    # Sunrise edit end
+
+    # More equipment
+    - map: [ "gloves" ]
+    - map: [ "shoes" ]
+    - map: [ "ears" ]
+    - map: [ "eyes" ]
+    - map: [ "belt" ]
+    - map: [ "id" ]
+    - map: [ "outerClothing" ]
+    - map: [ "back" ]
+    - map: [ "neck" ]
+    - map: [ "suitstorage" ]
+
+    # Stuff that goes in front of equipment
+    - map: [ "enum.HumanoidVisualLayers.SnoutCover" ]
+    - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    # Sunrise added start - опорные слои маркировок хищника
+    - map: [ "enum.HumanoidVisualLayers.Dreadlocks" ]
+    - map: [ "enum.HumanoidVisualLayers.Rings" ]
+    # Sunrise added end
+    - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
+    - map: [ "enum.HumanoidVisualLayers.Tail" ]
+    - map: [ "enum.HumanoidVisualLayers.TailOverlay" ]
+    - map: [ "enum.HumanoidVisualLayers.Back" ] # SUNRISE
+
+    # Stuff that goes in front of stuff that goes in front of equipment
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "pocket1" ]
+    - map: [ "pocket2" ]
+
+    # Extra stuff
+    - map: ["enum.HumanoidVisualLayers.Handcuffs"]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+
+- type: entity
+  id: BaseSpeciesAppearance
+  parent:
+  - InventoryBase
+  - BaseSpeciesLayers
+  abstract: true
+  save: false
+  components:
+  - type: Body
+  - type: VisualBody
+  # Sunrise-start
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers
+  # Sunrise-end
+  - type: Hands
+  - type: ComplexInteraction
+  - type: ContainerContainer
+  - type: Appearance
+  - type: HideableHumanoidLayers
+  - type: UserInterface
+    interfaces:
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      # Sunrise-Start
+      enum.SurgeryUIKey.Key:
+        type: SurgeryBui
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+      enum.SummonCultistUiKey.Key:
+        type: SummonCultistListWindowBUI
+      enum.CultSpellProviderUiKey.Key:
+        type: SpellSelectorBUI
+      # Sunrise-End

@@ -1,8 +1,7 @@
-﻿- type: marking
+- type: marking
   id: DemonTail1
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: tail
@@ -12,8 +11,7 @@
 - type: marking
   id: DemonTailLong
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: tail
@@ -23,8 +21,7 @@
 - type: marking
   id: DemonTailUp
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: tail
@@ -34,8 +31,7 @@
 - type: marking
   id: DemonTailArrowAnimated
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: tail_arrow_animated
@@ -43,8 +39,7 @@
 - type: marking
   id: DemonTailBroomAnimated
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: tail_broom_animated
@@ -52,8 +47,7 @@
 - type: marking
   id: DemonTailDefault
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: tail
@@ -61,8 +55,7 @@
 - type: marking
   id: DemonCowEars
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: cow_ears
@@ -70,8 +63,7 @@
 - type: marking
   id: DemonEars
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: demon_ears
@@ -79,8 +71,7 @@
 - type: marking
   id: DemonCowHorns
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: cow_horns
@@ -88,8 +79,7 @@
 - type: marking
   id: DemonHornsDeer
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: deer_antlers_horns
@@ -97,62 +87,55 @@
 - type: marking
   id: DemonHornsSmall
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: small_horns
 
 - type: marking
   id: DemonChestCowSpots
-  bodyPart: LLeg
-  markingCategory: Chest
-  speciesRestriction: [Demon]
+  bodyPart: Overlay
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: cow_spots
 
 - type: marking
   id: DemonChestGuard
-  bodyPart: LLeg
-  markingCategory: Chest
-  speciesRestriction: [Demon]
+  bodyPart: Overlay
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: guards_stripes
 
 - type: marking
   id: DemonChestLinesEmperos
-  bodyPart: LLeg
-  markingCategory: Chest
-  speciesRestriction: [Demon]
+  bodyPart: Overlay
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: lines_emperos
 
 - type: marking
   id: DemonChestQueenLines
-  bodyPart: LLeg
-  markingCategory: Chest
-  speciesRestriction: [Demon]
+  bodyPart: Overlay
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: queen_lines
 
 - type: marking
   id: DemonChestTreeLines
-  bodyPart: LLeg
-  markingCategory: Chest
-  speciesRestriction: [Demon]
+  bodyPart: Overlay
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: tree_lines
 
 - type: marking
   id: DemonChestTrinitySpots
-  bodyPart: LLeg
-  markingCategory: Chest
-  speciesRestriction: [Demon]
+  bodyPart: Overlay
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: trinity_spots
@@ -160,7 +143,6 @@
 - type: marking
   id: DemonGoatee
   bodyPart: FacialHair
-  markingCategory: FacialHair
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: goatee
@@ -168,8 +150,7 @@
 - type: marking
   id: DemonHornsDouble
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_double
@@ -177,8 +158,7 @@
 - type: marking
   id: DemonHornsDoubleAlt
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_double_alt
@@ -186,8 +166,7 @@
 - type: marking
   id: DemonHornsNarrow
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_narrow
@@ -195,8 +174,7 @@
 - type: marking
   id: DemonHornsGoatee
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_goatee
@@ -204,8 +182,7 @@
 - type: marking
   id: DemonHornsGoateeAlt
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_goatee_alt
@@ -213,8 +190,7 @@
 - type: marking
   id: DemonHornsSharp
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_sharp
@@ -222,8 +198,7 @@
 - type: marking
   id: DemonHornsGrowths
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_growths
@@ -231,8 +206,7 @@
 - type: marking
   id: DemonHornsBrokenOne
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_broken_one
@@ -240,8 +214,7 @@
 - type: marking
   id: DemonHornsStout
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_stout
@@ -249,8 +222,7 @@
 - type: marking
   id: DemonHornsEnormous
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_enormous
@@ -258,8 +230,7 @@
 - type: marking
   id: DemonHornsScythe
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_scythe
@@ -267,8 +238,7 @@
 - type: marking
   id: DemonHornsTapering
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_tapering
@@ -276,8 +246,7 @@
 - type: marking
   id: DemonHornsDirectional
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_directional
@@ -285,8 +254,7 @@
 - type: marking
   id: DemonHornsThick
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_thick
@@ -294,8 +262,7 @@
 - type: marking
   id: DemonHornsSickle
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_sickle
@@ -303,8 +270,7 @@
 - type: marking
   id: DemonHornsSlim
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_slim
@@ -312,8 +278,7 @@
 - type: marking
   id: DemonTailFishnet
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: tail
@@ -323,8 +288,7 @@
 - type: marking
   id: DemonTailFin
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: tail
@@ -334,8 +298,7 @@
 - type: marking
   id: DemonTailMermaid
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: tail
@@ -345,8 +308,7 @@
 - type: marking
   id: DemonTailArrow
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: tail
@@ -356,8 +318,7 @@
 - type: marking
   id: DemonTailTrident
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: tail
@@ -367,8 +328,7 @@
 - type: marking
   id: EarsArcanaAlt
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: arcana_ears_alt
@@ -376,8 +336,7 @@
 - type: marking
   id: EarsArcana
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: arcana_ears
@@ -385,8 +344,7 @@
 - type: marking
   id: SuccubusWingsDemon
   bodyPart: Back
-  markingCategory: Back
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/demonwings.rsi
     state: succubus_wings
@@ -394,8 +352,7 @@
 - type: marking
   id: SuccubusWingsDemonTwo
   bodyPart: Back
-  markingCategory: Back
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/demonwings.rsi
     state: succubus_wings-2
@@ -403,8 +360,7 @@
 - type: marking
   id: SuccubusWingsDemonAnimated
   bodyPart: Back
-  markingCategory: Back
-  speciesRestriction: [Demon]
+  groupWhitelist: [ Demon ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/demonwings.rsi
     state: succubus_wings_animated

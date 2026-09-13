@@ -1,5 +1,3 @@
-ent-MagazineBR64 = BR64 magazine
-    .desc = Standart EarthGov type of heavy magazines.
 ent-BaseMagazineBauer127 = magazine (15mm anti-materiel)
     .desc = A large magazine for a heavy weapon, holds 15×115mm anti-materiel rounds.
 ent-MagazineBauer127Large = large magazine (15mm space anti-materiel)
@@ -22,9 +20,6 @@ ent-MagazineDragunovExtended = magazine Dragunov (7,62R)
     .suffix = Sunrise
     .desc = { ent-BaseMagazineDragunov.desc }
 ent-MagazineDragunovSP = magazine Dragunov (7,62R SP)
-    .suffix = Sunrise
-    .desc = { ent-BaseMagazineDragunov.desc }
-ent-MagazineDragunovHP = magazine Dragunov (7,62R HP)
     .suffix = Sunrise
     .desc = { ent-BaseMagazineDragunov.desc }
 ent-MagazineDragunovFMJ = magazine Dragunov (7,62R FMJ)

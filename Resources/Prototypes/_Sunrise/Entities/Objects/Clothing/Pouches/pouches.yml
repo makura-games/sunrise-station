@@ -9,7 +9,7 @@
     - state: icon
   - type: Appearance
   - type: Item
-    size: Huge
+    size: Large
   - type: Clothing
     quickEquip: false
     slots:
@@ -61,6 +61,29 @@
         - id: SmokeGrenade
           amount: 2
 
+- type: entity
+  parent: PouchExplosive
+  id: PouchExplosiveGrenadeFragTimerFilled
+  suffix: Filled frag-timed
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: GrenadeFragTimer
+          amount: 6
+
+- type: entity
+  parent: PouchExplosive
+  id: PouchExplosiveGrenadeFragContactFilled
+  suffix: Filled frag-contact
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: GrenadeFrag
+          amount: 6
 #Ammo
 - type: entity
   parent: [Pouch]
@@ -118,6 +141,4 @@
         - id: MagazineLightRifleFMJ
           amount: 2
         - id: MagazineLightRifleSP
-          amount: 1
-        - id: MagazineLightRifleHP
-          amount: 1
+          amount: 2

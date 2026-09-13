@@ -13,6 +13,7 @@ role-type-crew-aligned-color = #eeeeee
 role-type-crew-aligned-alternate-color = #008000
 role-type-solo-antagonist-color = #d82000
 role-type-team-antagonist-color = #d82000
+role-type-head-revolutionary-color = #5e9cff
 role-type-free-agent-color = #ffff00
 role-type-familiar-color = #6495ed
 role-type-silicon-color = #6495ed

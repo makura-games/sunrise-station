@@ -17,6 +17,7 @@
     - BorgModuleScience #until sciborgs are added
 
   defaultModules:
+  - BorgModulePrying
   - BorgModuleTool
   - BorgModuleInflatable
   - BorgModuleArtifact
@@ -65,6 +66,7 @@
 
   defaultModules:
   - BorgModuleStandart
+  - BorgModulePrying
   - BorgModuleAdvancedTool
   - BorgModuleCable
   - BorgModuleConstruction
@@ -123,6 +125,7 @@
 
   defaultModules:
   - BorgModuleStandart
+  - BorgModulePrying
   - BorgModuleTool
   - BorgModuleMining
   - BorgModuleTraversal
@@ -175,6 +178,7 @@
 
   defaultModules:
   - BorgModuleStandart
+  - BorgModulePrying
   - BorgModuleCleaning
   - BorgModuleCustodial
 
@@ -187,7 +191,7 @@
     collection: FootstepJanitorBorg
     params:
       volume: -5
-  # Sunrise-Start
+  # Sunrise-End
 
   # Visual
   inventoryTemplateId: borgShort
@@ -204,10 +208,10 @@
   - type: FootprintAreaCleaner
   - type: Absorbent
     pickupAmount: 500
-  - type: SolutionContainerManager
-    solutions:
-      absorbed:
-        maxVol: 500
+  - type: Solution
+    id: absorbed
+    solution:
+      maxVol: 500
   - type: Spillable
     solution: absorbed
   - type: RefillableSolution
@@ -232,6 +236,7 @@
     - BorgModuleMedical
 
   defaultModules:
+  - BorgModulePrying
   - BorgModuleChemical
   - BorgModuleTopicals
   - BorgModuleRescue
@@ -301,6 +306,7 @@
   # Sunrise-Start
   defaultModules:
   - BorgModuleStandart
+  - BorgModulePrying
   - BorgModuleMusique
   - BorgModulePaperwork
   - BorgModuleBartender

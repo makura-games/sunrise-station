@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Alert;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
@@ -16,12 +17,13 @@ namespace Content.Shared.Prying.Systems;
 /// <summary>
 /// Handles prying of entities (e.g. doors)
 /// </summary>
-public sealed class PryingSystem : EntitySystem
+public sealed partial class PryingSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
 
     private static readonly TimeSpan InstantUnpoweredDoorPryThreshold = TimeSpan.FromSeconds(4); // Sunrise-Edit
 
@@ -29,10 +31,29 @@ public sealed class PryingSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<PryingComponent, ComponentStartup>(OnPryingStartup);
+        SubscribeLocalEvent<PryingComponent, ComponentShutdown>(OnPryingShutdown);
+
         // Mob prying doors
         SubscribeLocalEvent<DoorComponent, GetVerbsEvent<AlternativeVerb>>(OnDoorAltVerb);
         SubscribeLocalEvent<DoorComponent, DoorPryDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<DoorComponent, InteractUsingEvent>(TryPryDoor);
+    }
+
+    private void OnPryingStartup(Entity<PryingComponent> ent, ref ComponentStartup args)
+    {
+        if (ent.Comp.PryingAlertProtoId == null)
+            return;
+
+        _alerts.ShowAlert(ent.Owner, ent.Comp.PryingAlertProtoId.Value);
+    }
+
+    private void OnPryingShutdown(Entity<PryingComponent> ent, ref ComponentShutdown args)
+    {
+        if (ent.Comp.PryingAlertProtoId == null)
+            return;
+
+        _alerts.ClearAlert(ent.Owner, ent.Comp.PryingAlertProtoId.Value);
     }
 
     private void TryPryDoor(EntityUid uid, DoorComponent comp, InteractUsingEvent args)

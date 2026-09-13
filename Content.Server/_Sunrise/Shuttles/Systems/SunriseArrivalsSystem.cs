@@ -33,21 +33,21 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._Sunrise.Shuttles.Systems;
 
-public sealed class SunriseArrivalsSystem : EntitySystem
+public sealed partial class SunriseArrivalsSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly MapLoaderSystem _loader = default!;
-    [Dependency] private readonly MapSystem _mapSystem = default!;
-    [Dependency] private readonly ShuttleSystem _shuttle = default!;
-    [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly DockingSystem _docking = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private MapLoaderSystem _loader = default!;
+    [Dependency] private MapSystem _mapSystem = default!;
+    [Dependency] private ShuttleSystem _shuttle = default!;
+    [Dependency] private StationSpawningSystem _stationSpawning = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private DockingSystem _docking = default!;
 
     private bool _enabled;
     private bool _arrivalsEnabled;
@@ -72,6 +72,11 @@ public sealed class SunriseArrivalsSystem : EntitySystem
     /// Начальное время FTL-перелета для первого рейса прибытия.
     /// </summary>
     private const float InitialFtlTime = 15f;
+
+    /// <summary>
+    /// Время удерживающего FTL, пока шаттл ожидает свободный док.
+    /// </summary>
+    private const float HoldingFtlTime = 3600f;
 
     /// <summary>
     /// Задержка после завершения FTL перед удалением улетающего шаттла.
@@ -114,6 +119,11 @@ public sealed class SunriseArrivalsSystem : EntitySystem
     /// </summary>
     private static readonly TimeSpan StationWarnInterval = TimeSpan.FromMinutes(1);
 
+    /// <summary>
+    /// Минимальная задержка между проверками очереди прибывающих шаттлов.
+    /// </summary>
+    private static readonly TimeSpan DispatchRetryInterval = TimeSpan.FromSeconds(1);
+
     public override void Initialize()
     {
         base.Initialize();
@@ -122,19 +132,14 @@ public sealed class SunriseArrivalsSystem : EntitySystem
         SubscribeLocalEvent<SunriseArrivalsShuttleComponent, FTLCompletedEvent>(OnFTLCompleted);
         SubscribeLocalEvent<SunriseArrivalsShuttleComponent, ComponentShutdown>(OnShuttleShutdown);
 
-        _cfg.OnValueChanged(SunriseCCVars.ArrivalsSingleShuttle, b => _enabled = b, true);
-        _cfg.OnValueChanged(SunriseCCVars.ArrivalsSingleShuttlePath, s => _shuttlePath = s, true);
-        _cfg.OnValueChanged(CCVars.ArrivalsShuttles, b => _arrivalsEnabled = b, true);
+        Subs.CVar(_cfg, SunriseCCVars.ArrivalsSingleShuttle, OnSingleShuttleChanged, true);
+        Subs.CVar(_cfg, SunriseCCVars.ArrivalsSingleShuttlePath, OnShuttlePathChanged, true);
+        Subs.CVar(_cfg, CCVars.ArrivalsShuttles, OnArrivalsEnabledChanged, true);
     }
 
-    public override void Shutdown()
-    {
-        base.Shutdown();
-
-        _cfg.UnsubValueChanged(SunriseCCVars.ArrivalsSingleShuttle, b => _enabled = b);
-        _cfg.UnsubValueChanged(SunriseCCVars.ArrivalsSingleShuttlePath, s => _shuttlePath = s);
-        _cfg.UnsubValueChanged(CCVars.ArrivalsShuttles, b => _arrivalsEnabled = b);
-    }
+    private void OnSingleShuttleChanged(bool value) => _enabled = value;
+    private void OnShuttlePathChanged(string value) => _shuttlePath = value;
+    private void OnArrivalsEnabledChanged(bool value) => _arrivalsEnabled = value;
 
     #region Event Handlers
 
@@ -174,35 +179,72 @@ public sealed class SunriseArrivalsSystem : EntitySystem
                 return;
             }
 
-            EnsureComp<FTLSmashImmuneComponent>(ev.SpawnResult.Value);
-
-            var arrivals = EnsureComp<SunriseArrivalsShuttleComponent>(shuttleUid.Value);
-            arrivals.Station = station;
-            arrivals.Player = ev.SpawnResult.Value;
-            arrivals.SpawnTime = _timing.CurTime;
-            arrivals.State = SunriseArrivalsShuttleState.Queued;
-            arrivals.Attendant = FindAttendant(shuttleUid.Value);
-            arrivals.PlayerName = ev.HumanoidCharacterProfile?.Name ?? "Unknown";
-            arrivals.PlayerJob = ev.Job != null
-                ? _prototypeManager.Index(ev.Job.Value).LocalizedName
-                : Loc.GetString("job-name-unknown");
-            arrivals.Greeted = false;
-
-            EnqueueShuttle(shuttleUid.Value);
-
-            // Помещаем шаттл в бесконечный FTL, чтобы он выглядел находящимся в гиперпространстве
-            var shuttleComp = Comp<ShuttleComponent>(shuttleUid.Value);
-            _shuttle.FTLToCoordinates(shuttleUid.Value, shuttleComp,
-                Transform(shuttleUid.Value).Coordinates, Angle.Zero, hyperspaceTime: 3600f);
-
-            Log.Info($"Arrivals shuttle {ToPrettyString(shuttleUid.Value)} spawned for player " +
-                     $"'{arrivals.PlayerName}' heading to {ToPrettyString(station)}");
+            StartArrivalsShuttle(
+                shuttleUid.Value,
+                station,
+                ev.SpawnResult.Value,
+                ev.HumanoidCharacterProfile?.Name ?? "Unknown",
+                ev.Job != null
+                    ? _prototypeManager.Index(ev.Job.Value).LocalizedName
+                    : Loc.GetString("job-name-unknown"));
         }
         catch (Exception e)
         {
             Log.Error($"Exception in arrivals shuttle spawn: {e}");
             // Не задаем ev.SpawnResult, чтобы vanilla system обработала fallback
         }
+    }
+
+    public bool TrySpawnForPlayer(EntityUid station, EntityUid player)
+    {
+        if (!_enabled || !_arrivalsEnabled)
+            return false;
+
+        if (!Exists(station) || !Exists(player))
+            return false;
+
+        if (!HasComp<StationArrivalsComponent>(station))
+            return false;
+
+        var shuttleUid = SpawnShuttle(station);
+        if (shuttleUid == null)
+            return false;
+
+        _transform.SetCoordinates(player, FindShuttleSpawnPoint(shuttleUid.Value));
+        StartArrivalsShuttle(
+            shuttleUid.Value,
+            station,
+            player,
+            Name(player),
+            Loc.GetString("job-name-unknown"));
+        return true;
+    }
+
+    private void StartArrivalsShuttle(
+        EntityUid shuttleUid,
+        EntityUid station,
+        EntityUid player,
+        string playerName,
+        string playerJob)
+    {
+        EnsureComp<FTLSmashImmuneComponent>(player);
+
+        var arrivals = EnsureComp<SunriseArrivalsShuttleComponent>(shuttleUid);
+        arrivals.Station = station;
+        arrivals.Player = player;
+        arrivals.SpawnTime = _timing.CurTime;
+        arrivals.State = SunriseArrivalsShuttleState.Queued;
+        arrivals.Attendant = FindAttendant(shuttleUid);
+        arrivals.PlayerName = playerName;
+        arrivals.PlayerJob = playerJob;
+        arrivals.Greeted = false;
+
+        EnqueueShuttle(shuttleUid);
+
+        EnsureHoldingFtl(shuttleUid);
+
+        Log.Info($"arrivals shuttle {ToPrettyString(shuttleUid)} spawned for " +
+                 $"'{arrivals.PlayerName}' heading to {ToPrettyString(station)}");
     }
 
     private void OnFTLCompleted(EntityUid uid, SunriseArrivalsShuttleComponent component, ref FTLCompletedEvent args)
@@ -215,47 +257,40 @@ public sealed class SunriseArrivalsSystem : EntitySystem
             component.State = SunriseArrivalsShuttleState.Docked;
             component.DockTime = _timing.CurTime;
             component.Warned = false;
+            component.DockBlockedWarned = false;
 
             if (component.Attendant != null)
             {
-                var mapId = _transform.GetMapId(args.MapUid);
-                var station = _station.GetStationInMap(mapId);
-                var stationName = station != null ? Name(station.Value) : "Unknown";
+                var stationName = component.Station.IsValid() ? Name(component.Station) : "Unknown";
                 var msg = Loc.GetString("sunrise-arrivals-attendant-arrival", ("station", stationName));
                 _chat.TrySendInGameICMessage(component.Attendant.Value, msg, InGameICChatType.Speak, hideChat: false);
             }
 
             Log.Debug($"Arrivals shuttle {ToPrettyString(uid)} docked at station");
+            return;
         }
-        else
-        {
-            // Стыковка не удалась — возвращаем в очередь для повтора на следующем dispatch cycle
-            Log.Warning($"Arrivals shuttle {ToPrettyString(uid)} completed FTL but not docked, re-enqueueing");
-            component.State = SunriseArrivalsShuttleState.Queued;
-            EnqueueShuttle(uid);
 
-            // Возвращаем в бесконечный FTL
-            var shuttleComp = Comp<ShuttleComponent>(uid);
-            _shuttle.FTLToCoordinates(uid, shuttleComp,
-                Transform(uid).Coordinates, Angle.Zero, hyperspaceTime: 3600f);
-        }
+        Log.Warning($"Arrivals shuttle {ToPrettyString(uid)} completed FTL but not docked, re-enqueueing");
+        ReleaseDockReservations(uid, component);
+
+        component.State = SunriseArrivalsShuttleState.Queued;
+        EnqueueShuttle(uid);
+
+        RemComp<FTLComponent>(uid);
+
+        EnsureHoldingFtl(uid);
     }
 
     private void OnShuttleShutdown(EntityUid uid, SunriseArrivalsShuttleComponent component, ComponentShutdown args)
     {
-        // Очищаем резервирования доков.
-        foreach (var dock in component.ReservedDocks)
-        {
-            RemCompDeferred<FtlReservationComponent>(dock);
-        }
-        component.ReservedDocks.Clear();
+        ReleaseDockReservations(uid, component);
 
         // Удаляем из очереди, если там есть
         var poolQuery = EntityQueryEnumerator<SunriseArrivalsPoolComponent>();
         while (poolQuery.MoveNext(out _, out var pool))
-        {
             pool.Queue.Remove(uid);
-        }
+
+        RemovePlayerFtlImmunity(component);
     }
 
     #endregion
@@ -266,9 +301,6 @@ public sealed class SunriseArrivalsSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        if (!_enabled || !_arrivalsEnabled)
-            return;
-
         var curTime = _timing.CurTime;
 
         TryDispatchFromQueue(curTime);
@@ -277,12 +309,14 @@ public sealed class SunriseArrivalsSystem : EntitySystem
         while (query.MoveNext(out var uid, out var arrivals))
         {
             ProcessGreeting(uid, arrivals, curTime);
-            ProcessFailsafe(uid, arrivals, curTime);
+
+            if (ProcessFailsafe(uid, arrivals, curTime))
+                continue;
 
             switch (arrivals.State)
             {
                 case SunriseArrivalsShuttleState.Queued:
-                    // Обрабатывается в TryDispatchFromQueue
+                    // Обрабатывается в TryDispatchFromQueue.
                     break;
                 case SunriseArrivalsShuttleState.Travelling:
                     // Обрабатывается в OnFTLCompleted или аварийной защите.
@@ -342,8 +376,10 @@ public sealed class SunriseArrivalsSystem : EntitySystem
         var poolQuery = EntityQueryEnumerator<SunriseArrivalsPoolComponent>();
         while (poolQuery.MoveNext(out _, out var pool))
         {
-            if (pool.Queue.Count == 0)
+            if (pool.Queue.Count == 0 || curTime < pool.NextDispatchTime)
                 continue;
+
+            pool.NextDispatchTime = curTime + DispatchRetryInterval;
 
             // Обрабатываем очередь и пытаемся отправить столько шаттлов, сколько есть свободных docks
             for (var i = 0; i < pool.Queue.Count; i++)
@@ -365,7 +401,7 @@ public sealed class SunriseArrivalsSystem : EntitySystem
                 }
 
                 if (!TryDispatchShuttle(shuttleUid, arrivals))
-                    break; // Свободных docks нет — прекращаем попытки
+                    continue;
 
                 pool.Queue.RemoveAt(i);
                 i--;
@@ -379,6 +415,18 @@ public sealed class SunriseArrivalsSystem : EntitySystem
     /// </summary>
     private bool TryDispatchShuttle(EntityUid uid, SunriseArrivalsShuttleComponent arrivals)
     {
+        if (arrivals.ReservedDocks.Count > 0)
+            ReleaseDockReservations(uid, arrivals);
+
+        if (!TryComp<FTLComponent>(uid, out var ftl))
+        {
+            EnsureHoldingFtl(uid);
+            return false;
+        }
+
+        if (ftl.State != FTLState.Travelling)
+            return false;
+
         var station = arrivals.Station;
         var targetGrid = _station.GetLargestGrid(station) ?? station;
 
@@ -386,8 +434,14 @@ public sealed class SunriseArrivalsSystem : EntitySystem
         if (config == null)
             return false;
 
-        if (!TryComp<FTLComponent>(uid, out var ftl) || ftl.State != FTLState.Travelling)
-            return false;
+        foreach (var docks in config.Docks)
+        {
+            var reservation = EnsureComp<FtlReservationComponent>(docks.DockBUid);
+            reservation.ReservedBy = uid;
+            reservation.Area = config.Area;
+
+            arrivals.ReservedDocks.Add(docks.DockBUid);
+        }
 
         // Перенаправляем существующий бесконечный FTL к доку.
         ftl.TargetCoordinates = config.Coordinates;
@@ -396,15 +450,8 @@ public sealed class SunriseArrivalsSystem : EntitySystem
         ftl.TravelTime = DispatchFtlTime;
         ftl.StateTime = StartEndTime.FromCurTime(_timing, DispatchFtlTime);
 
-        // Резервируем docks
-        foreach (var docks in config.Docks)
-        {
-            var reservation = EnsureComp<FtlReservationComponent>(docks.DockBUid);
-            reservation.ReservedBy = uid;
-            arrivals.ReservedDocks.Add(docks.DockBUid);
-        }
-
         arrivals.State = SunriseArrivalsShuttleState.Travelling;
+        arrivals.DockBlockedWarned = false;
 
         Log.Debug($"Dispatched arrivals shuttle {ToPrettyString(uid)} to dock");
         return true;
@@ -442,30 +489,29 @@ public sealed class SunriseArrivalsSystem : EntitySystem
     /// <summary>
     /// Failsafe: если шаттл существует больше 2 минут, телепортирует игрока и удаляет шаттл.
     /// </summary>
-    private void ProcessFailsafe(EntityUid uid, SunriseArrivalsShuttleComponent arrivals, TimeSpan curTime)
+    private bool ProcessFailsafe(EntityUid uid, SunriseArrivalsShuttleComponent arrivals, TimeSpan curTime)
     {
         if (arrivals.State == SunriseArrivalsShuttleState.Leaving)
-            return;
+            return false;
 
         if (curTime <= arrivals.SpawnTime + FailsafeTimeout)
-            return;
+            return false;
 
         Log.Warning($"Failsafe triggered for arrivals shuttle {ToPrettyString(uid)}, " +
                      $"player: '{arrivals.PlayerName}', state: {arrivals.State}");
 
-        TryTeleportPlayer(uid, arrivals);
+        if (IsPlayerOnShuttle(uid, arrivals.Player) && !TryTeleportPlayer(uid, arrivals))
+            return true;
 
-        if (arrivals.Attendant != null)
+        var msg = Loc.GetString("sunrise-arrivals-failsafe-teleport");
+        if (arrivals.Player != null && TryComp<ActorComponent>(arrivals.Player.Value, out var actor))
         {
-            var msg = Loc.GetString("sunrise-arrivals-failsafe-teleport");
-            if (arrivals.Player != null && TryComp<ActorComponent>(arrivals.Player.Value, out var actor))
-            {
-                _chatManager.ChatMessageToOne(ChatChannel.Server, msg, msg,
-                    EntityUid.Invalid, false, actor.PlayerSession.Channel);
-            }
+            _chatManager.ChatMessageToOne(ChatChannel.Server, msg, msg,
+                EntityUid.Invalid, false, actor.PlayerSession.Channel);
         }
 
         CleanupShuttle(uid);
+        return true;
     }
 
     /// <summary>
@@ -473,12 +519,12 @@ public sealed class SunriseArrivalsSystem : EntitySystem
     /// </summary>
     private void ProcessDocked(EntityUid uid, SunriseArrivalsShuttleComponent arrivals, TimeSpan curTime)
     {
-        var playerOnShuttle = IsPlayerOnShuttle(uid);
+        var playerOnShuttle = IsPlayerOnShuttle(uid, arrivals.Player);
 
         if (!playerOnShuttle)
         {
-            if (arrivals.PlayerExitTime == null && arrivals.Player != null)
-                RemComp<FTLSmashImmuneComponent>(arrivals.Player.Value);
+            if (arrivals.PlayerExitTime == null)
+                RemovePlayerFtlImmunity(arrivals);
 
             // Игрок вышел — запускаем grace timer
             arrivals.PlayerExitTime ??= curTime;
@@ -492,6 +538,9 @@ public sealed class SunriseArrivalsSystem : EntitySystem
         }
         else
         {
+            if (arrivals.Player != null)
+                EnsureComp<FTLSmashImmuneComponent>(arrivals.Player.Value);
+
             // Игрок вернулся — сбрасываем exit timer
             arrivals.PlayerExitTime = null;
         }
@@ -510,11 +559,13 @@ public sealed class SunriseArrivalsSystem : EntitySystem
         }
 
         // Принудительное отправление после DockWaitTime
-        if (curTime >= dockTime + TimeSpan.FromSeconds(DockWaitTime))
-        {
-            TryTeleportPlayer(uid, arrivals);
-            StartDeparture(uid, arrivals);
-        }
+        if (curTime < dockTime + TimeSpan.FromSeconds(DockWaitTime))
+            return;
+
+        if (!TryTeleportPlayer(uid, arrivals))
+            return;
+
+        StartDeparture(uid, arrivals);
     }
 
     /// <summary>
@@ -553,12 +604,8 @@ public sealed class SunriseArrivalsSystem : EntitySystem
         component.State = SunriseArrivalsShuttleState.Leaving;
         component.LeaveStartTime = null;
 
-        // Сразу очищаем резервирования доков, чтобы шаттлы из очереди могли отправиться на следующем тике.
-        foreach (var dock in component.ReservedDocks)
-        {
-            RemCompDeferred<FtlReservationComponent>(dock);
-        }
-        component.ReservedDocks.Clear();
+        ReleaseDockReservations(uid, component);
+        RemovePlayerFtlImmunity(component);
 
         // Удаляем существующий FTL-компонент, например cooldown прибытия, который
         // заблокировал бы TrySetupFTL. Без этого FTLToCoordinates тихо падает,
@@ -567,40 +614,47 @@ public sealed class SunriseArrivalsSystem : EntitySystem
 
         Log.Debug($"Arrivals shuttle {ToPrettyString(uid)} departing");
 
-        if (TryComp<ShuttleComponent>(uid, out var shuttleComp))
+        if (!TryComp<ShuttleComponent>(uid, out var shuttleComp))
         {
-            _shuttle.FTLToCoordinates(uid, shuttleComp,
-                new EntityCoordinates(uid, Vector2.Zero), Angle.Zero,
-                startupTime: 0f,
-                hyperspaceTime: DepartFtlTime);
+            return;
         }
+
+        _shuttle.FTLToCoordinates(uid, shuttleComp,
+            new EntityCoordinates(uid, Vector2.Zero), Angle.Zero,
+            startupTime: 0f,
+            hyperspaceTime: DepartFtlTime);
     }
 
     /// <summary>
     /// Телепортирует игрока из шаттла в spawn point станции.
     /// </summary>
-    private void TryTeleportPlayer(EntityUid gridUid, SunriseArrivalsShuttleComponent arrivals)
+    private bool TryTeleportPlayer(EntityUid gridUid, SunriseArrivalsShuttleComponent arrivals)
     {
-        if (!IsPlayerOnShuttle(gridUid))
-            return;
+        if (arrivals.Player == null)
+            return false;
+
+        if (!IsPlayerOnShuttle(gridUid, arrivals.Player))
+            return false;
 
         var station = arrivals.Station;
         if (!station.IsValid())
-            return;
+            return false;
 
         var target = FindStationSpawnPoint(station);
+        if (target == null)
+            return false;
 
-        if (target != null && arrivals.Player != null)
+        _transform.SetCoordinates(arrivals.Player.Value, target.Value);
+        RemovePlayerFtlImmunity(arrivals);
+
+        if (TryComp<ActorComponent>(arrivals.Player.Value, out var actor))
         {
-            _transform.SetCoordinates(arrivals.Player.Value, target.Value);
-            if (TryComp<ActorComponent>(arrivals.Player.Value, out var actor))
-            {
-                _chatManager.ChatMessageToOne(ChatChannel.Server,
-                    Loc.GetString("sunrise-arrivals-forced-evac"),
-                    Loc.GetString("sunrise-arrivals-forced-evac"),
-                    EntityUid.Invalid, false, actor.PlayerSession.Channel);
-            }
+            var msg = Loc.GetString("sunrise-arrivals-forced-evac");
+            _chatManager.ChatMessageToOne(ChatChannel.Server, msg, msg,
+                EntityUid.Invalid, false, actor.PlayerSession.Channel);
         }
+
+        return true;
     }
 
     /// <summary>
@@ -641,11 +695,12 @@ public sealed class SunriseArrivalsSystem : EntitySystem
     {
         if (TryComp<SunriseArrivalsShuttleComponent>(uid, out var arrivals))
         {
-            // Безопасность: телепортируем игрока, если он все еще на шаттле
-            if (arrivals.Player != null && IsPlayerOnShuttle(uid))
-            {
-                TryTeleportPlayer(uid, arrivals);
-            }
+            // Безопасность: эвакуируем игрока перед удалением шаттла.
+            if (IsPlayerOnShuttle(uid, arrivals.Player) && !TryTeleportPlayer(uid, arrivals))
+                return;
+
+            ReleaseDockReservations(uid, arrivals);
+            RemovePlayerFtlImmunity(arrivals);
         }
 
         QueueDel(uid);
@@ -743,18 +798,44 @@ public sealed class SunriseArrivalsSystem : EntitySystem
         return null;
     }
 
-    /// <summary>
-    /// Проверяет, находится ли сейчас какой-либо игрок (actor) на grid шаттла.
-    /// </summary>
-    private bool IsPlayerOnShuttle(EntityUid gridUid)
+    private void ReleaseDockReservations(EntityUid shuttleUid, SunriseArrivalsShuttleComponent arrivals)
     {
-        var query = EntityQueryEnumerator<ActorComponent, TransformComponent>();
-        while (query.MoveNext(out _, out _, out var playerXform))
+        foreach (var dock in arrivals.ReservedDocks)
         {
-            if (playerXform.GridUid == gridUid)
-                return true;
+            if (!TryComp<FtlReservationComponent>(dock, out var reservation))
+                continue;
+
+            if (reservation.ReservedBy == shuttleUid)
+                RemCompDeferred<FtlReservationComponent>(dock);
         }
-        return false;
+
+        arrivals.ReservedDocks.Clear();
+    }
+
+    private void EnsureHoldingFtl(EntityUid uid)
+    {
+        if (HasComp<FTLComponent>(uid))
+            return;
+
+        if (!TryComp<ShuttleComponent>(uid, out var shuttleComp))
+            return;
+
+        _shuttle.FTLToCoordinates(uid, shuttleComp,
+            Transform(uid).Coordinates, Angle.Zero, hyperspaceTime: HoldingFtlTime);
+    }
+
+    private void RemovePlayerFtlImmunity(SunriseArrivalsShuttleComponent arrivals)
+    {
+        if (arrivals.Player != null)
+            RemComp<FTLSmashImmuneComponent>(arrivals.Player.Value);
+    }
+
+    private bool IsPlayerOnShuttle(EntityUid gridUid, EntityUid? player)
+    {
+        if (player == null || !TryComp(player.Value, out TransformComponent? playerXform))
+            return false;
+
+        return playerXform.GridUid == gridUid;
     }
 
     /// <summary>

@@ -76,16 +76,16 @@
       SouthEast: TrimlineCornerSmallSE
       NorthWest: TrimlineCornerSmallNW
       NorthEast: TrimlineCornerSmallNE
-    color: "#6E2323"
+    color: "#F9801DFF"
 
 - type: entityTable
   id: SyndicateBaseAirlock
   table: !type:GroupSelector
     children:
     - id: CableApcExtension
-    - id: AirlockSyndicateNukeopLocked
+    - id: AirlockSyndicatePirateLocked
       weight: 5
-    - id: AirlockSyndicateLocked
+    - id: SunriseAirlockPirateRandomSpawner
     - id: ScrapAirlock1
 
 - type: entityTable
@@ -101,10 +101,10 @@
   table: !type:GroupSelector
     children:
     - id: CableApcExtension
-    - id: AirlockSyndicateNukeopLocked
-    - id: AirlockSyndicateLocked
+    - id: AirlockSyndicatePirateLocked
+    - id: SunriseAirlockPirateRandomSpawner
     - id: LandMineModular
-      prob: 0.05
+      prob: 0.09
 
 - type: entityTable
   id: SyndicateBaseWallMounts

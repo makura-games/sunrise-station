@@ -4,14 +4,14 @@
 - files: ["lattice_s_r.png"] #S/N_L/R states to
   license: "CLA"
   copyright: "Sokol9BL"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["plating_s_r.png"] #S/N_L/R states to
   license: "CLA"
   copyright: "Sokol9BL"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["light-fancy-wood.png"]
   license: "CLA"
   copyright: "Taked from ParadiseSS13"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"

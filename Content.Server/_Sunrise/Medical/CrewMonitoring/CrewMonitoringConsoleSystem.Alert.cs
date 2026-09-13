@@ -12,10 +12,10 @@ namespace Content.Server.Medical.CrewMonitoring;
 
 public sealed partial class CrewMonitoringConsoleSystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
-    [Dependency] private readonly PowerReceiverSystem _powerReceiver = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
+    [Dependency] private PowerReceiverSystem _powerReceiver = default!;
 
     private const float CriticalDamagePercentage = 1.0f;
 

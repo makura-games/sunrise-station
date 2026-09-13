@@ -47,3 +47,7 @@ cmd-roleban-until = до { $expires }
 # Department bans
 cmd-departmentban-desc = Запрещает пользователю играть на ролях, входящих в отдел
 cmd-departmentban-help = Использование: departmentban <name or user ID> <department> <reason> [продолжительность в минутах, не указывать или 0 для навсегда]
+cmd-roleunban-unable-to-parse-id = Не удалось распознать {$id} как целочисленный ID бана.
+                                   {$help}
+
+## Completion result hints

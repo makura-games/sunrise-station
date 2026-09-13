@@ -6,6 +6,13 @@
   components:
   - type: MagnetPickup
     range: 3.75 # Sunrise-add
+  - type: ItemToggle # Sunrise start
+    activated: true
+    verbToggleOn: magnet-pickup-verb-enable
+    verbToggleOff: magnet-pickup-verb-disable
+    popupActivate: magnet-pickup-popup-enable
+    popupDeactivate: magnet-pickup-popup-disable
+    # Sunrise end
   - type: Sprite
     sprite: Objects/Specific/Mining/ore_bag.rsi
     state: icon
@@ -32,8 +39,11 @@
   parent: OreBag
   id: BorgOreBag
   name: integrated ore bag
-  description: A large ore bag built into the frame of a mining cyborg.
+  description: A large ore bag built into the frame of a mining cyborg. Magnetises any nearby ores when held.
   components:
+    - type: MagnetPickup
+      slotFlags: null
+      requireActiveHand: true
     - type: Storage
       grid:
       - 0,0,9,5

@@ -212,6 +212,33 @@
 #
 - type: entity
   parent: SurgeryBase
+  id: SurgeryImplantAppendix
+  name: Implant Appendix
+  components:
+  - type: Surgery
+    requirement:
+    - SurgeryOpenAbdomen
+    steps:
+    - SurgeryStepPrepareImplantSiteAppendix
+    - SurgeryStepInsertAppendix
+    - SurgeryStepAttachAppendix
+    - SurgeryStepRestoreAbdominalWalls
+    - SurgeryStepSutureMuscles
+  - type: SurgerySpeciesCondition
+    speciesBlacklist:
+    - SlimePerson
+  - type: SurgeryPartCondition
+    parts:
+    - Torso
+  - type: SurgeryOrganDontExistCondition
+    organ:
+    - type: OrganAppendix
+  - type: Sprite
+    sprite: Mobs/Species/Human/organs.rsi
+    state: appendix
+
+- type: entity
+  parent: SurgeryBase
   id: SurgeryExtractKidneys
   name: Extract Kidneys
   components:
@@ -338,7 +365,7 @@
     - Torso
   - type: SurgeryOrganExistCondition
     organ:
-    - type: OrganLungs
+    - type: Lung
   - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi
     layers:
@@ -362,10 +389,10 @@
     - SlimePerson
   - type: SurgeryPartCondition
     parts:
-    - Torso
+    - Torso # Sunrise-Edit - лёгкие не являются surgery target частью, операция должна висеть на torso
   - type: SurgeryOrganDontExistCondition
     organ:
-    - type: OrganLungs
+    - type: Lung
   - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi
     layers:
@@ -393,7 +420,7 @@
     - Torso
   - type: SurgeryOrganExistCondition
     organ:
-    - type: OrganLungs
+    - type: Lung
   - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi
     layers:
@@ -421,7 +448,7 @@
     - Torso
   - type: SurgeryOrganDontExistCondition
     organ:
-    - type: OrganLungs
+    - type: Lung
   - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi
     layers:
@@ -767,7 +794,7 @@
     - type: OrganBrain
   - type: Sprite
     sprite: Mobs/Species/Slime/organs.rsi
-    state: brain-slime
+    state: brain
 
 - type: entity
   parent: SurgeryBase
@@ -797,7 +824,7 @@
     - type: OrganBrain
   - type: Sprite
     sprite: Mobs/Species/Slime/organs.rsi
-    state: brain-slime
+    state: brain
 #
 # - type: entity #Sunrise-TODO: Port Пауков Ужаса
 #   parent: SurgeryBase

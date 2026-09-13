@@ -16,17 +16,17 @@ namespace Content.Shared._Sunrise.Tutorial.EntitySystems;
 /// </summary>
 public abstract partial class SharedTutorialSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTutorialConditionsSystem _tutorial = default!;
-    [Dependency] private readonly TutorialSoftLockSystem _softLock = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _entityEffects = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedTutorialConditionsSystem _tutorial = default!;
+    [Dependency] private TutorialSoftLockSystem _softLock = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private EntityLookupSystem _lookupSystem = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private SharedEntityEffectsSystem _entityEffects = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

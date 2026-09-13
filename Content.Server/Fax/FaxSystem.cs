@@ -15,6 +15,7 @@ using Content.Shared.Emag.Systems;
 using Content.Shared.Fax;
 using Content.Shared.Fax.Components;
 using Content.Shared.Fax.Systems;
+using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Labels.Components;
 using Content.Shared.Labels.EntitySystems;
@@ -30,44 +31,29 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-// sunrise-start
-using System.Linq;
-using System.Numerics;
-using Content.Shared.Ghost;
-using Content.Shared.Inventory;
-using Robust.Server.Containers;
-using Content.Server.Storage.EntitySystems;
-using Content.Shared.Item;
-using Robust.Shared.Utility;
-
-// sunrise-end
+using Robust.Shared.Timing;
 
 namespace Content.Server.Fax;
 
-public sealed class FaxSystem : EntitySystem
+public sealed partial class FaxSystem : EntitySystem
 {
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
-    [Dependency] private readonly PaperSystem _paperSystem = default!;
-    [Dependency] private readonly LabelSystem _labelSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly ToolSystem _toolSystem = default!;
-    [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly FaxecuteSystem _faxecute = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
-    //sunrise-start
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly EntityStorageSystem _storage = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    // sunrise-end
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private ItemSlotsSystem _itemSlotsSystem = default!;
+    [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private SharedGameTicker _gameTicker = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
+    [Dependency] private PaperSystem _paperSystem = default!;
+    [Dependency] private LabelSystem _labelSystem = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private ToolSystem _toolSystem = default!;
+    [Dependency] private QuickDialogSystem _quickDialog = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private FaxecuteSystem _faxecute = default!;
+    [Dependency] private EmagSystem _emag = default!;
 
     private static readonly ProtoId<ToolQualityPrototype> ScrewingQuality = "Screwing";
 
@@ -317,10 +303,17 @@ public sealed class FaxSystem : EntitySystem
                     args.Data.TryGetValue(FaxConstants.FaxPaperStampedByData, out List<StampDisplayInfo>? stampedBy);
                     args.Data.TryGetValue(FaxConstants.FaxPaperPrototypeData, out string? prototypeId);
                     args.Data.TryGetValue(FaxConstants.FaxPaperLockedData, out bool? locked);
-                    args.Data.TryGetValue(FaxConstants.FaxPaperImageData, out SpriteSpecifier? imageContent);
-                    args.Data.TryGetValue(FaxConstants.FaxPaperImageScaleData, out Vector2 scaleImage);
-
-                    var printout = new FaxPrintout(content, name, label, prototypeId, stampState, stampedBy, locked ?? false, imageContent, scaleImage);
+                    args.Data.TryGetValue(FaxConstants.FaxPaperSenderFaxNameData, out string? senderFaxName);
+                    var printout = CreateSunriseNetworkPrintout( // Sunrise-Edit — сохраняем изображение бумаги при передаче.
+                        args.Data,
+                        content,
+                        name,
+                        label,
+                        prototypeId,
+                        stampState,
+                        stampedBy,
+                        locked ?? false,
+                        senderFaxName);
                     Receive(uid, printout, args.SenderAddress);
 
                     break;
@@ -411,6 +404,7 @@ public sealed class FaxSystem : EntitySystem
             return;
 
         component.DestinationFaxAddress = destAddress;
+        component.DestinationFaxName = component.KnownFaxes[destAddress];
 
         UpdateUserInterface(uid, component);
     }
@@ -448,7 +442,7 @@ public sealed class FaxSystem : EntitySystem
 
         var name = Loc.GetString("fax-machine-printed-paper-name");
 
-        var printout = new FaxPrintout(args.Content, name, args.Label, prototype, imageContent: args.ImageContent, imageScale: args.ImageScale);
+        var printout = CreateSunriseFilePrintout(args, name, prototype); // Sunrise-Edit — печатаем изображения из файлов.
         component.PrintingQueue.Enqueue(printout);
         component.SendTimeoutRemaining += component.SendTimeout;
 
@@ -487,15 +481,12 @@ public sealed class FaxSystem : EntitySystem
         TryComp<NameModifierComponent>(sendEntity, out var nameMod);
 
         // TODO: See comment in 'Send()' about not being able to copy whole entities
-        var printout = new FaxPrintout(paper.Content,
-                                       nameMod?.BaseName ?? metadata.EntityName,
-                                       labelComponent?.CurrentLabel,
-                                       metadata.EntityPrototype?.ID ?? component.PrintPaperId,
-                                       paper.StampState,
-                                       paper.StampedBy,
-                                       paper.EditingDisabled,
-                                       paper.ImageContent,
-                                       paper.ImageScale);
+        var printout = CreateSunriseCopyPrintout( // Sunrise-Edit — копируем изображение бумаги.
+            paper,
+            metadata,
+            nameMod,
+            labelComponent,
+            component);
 
         component.PrintingQueue.Enqueue(printout);
         component.SendTimeoutRemaining += component.SendTimeout;
@@ -542,13 +533,35 @@ public sealed class FaxSystem : EntitySystem
 
         TryComp<LabelComponent>(sendEntity, out var labelComponent);
 
+        var content = paper.Content;
+
+        if (component.AddSenderInfo)
+        {
+            var faxMachineAddress = TryComp<DeviceNetworkComponent>(uid, out var deviceNetworkComponent)
+            ? deviceNetworkComponent.Address
+            : Loc.GetString("device-address-unknown");
+
+            var time = _gameTicker.RoundDuration();
+            var timeString = TimeSpan.FromSeconds(Math.Truncate(time.TotalSeconds)).ToString();
+
+            content += "\n";
+            content += Loc.GetString(component.SenderInfo,
+                ("sender_name", component.FaxName),
+                ("sender_addr", faxMachineAddress),
+                ("recipient_name", component.DestinationFaxName ?? Loc.GetString("fax-machine-popup-source-unknown")),
+                ("recipient_addr", component.DestinationFaxAddress),
+                ("time", timeString)
+            );
+        }
+
         var payload = new NetworkPayload()
         {
             { DeviceNetworkConstants.Command, FaxConstants.FaxPrintCommand },
             { FaxConstants.FaxPaperNameData, nameMod?.BaseName ?? metadata.EntityName },
             { FaxConstants.FaxPaperLabelData, labelComponent?.CurrentLabel },
-            { FaxConstants.FaxPaperContentData, paper.Content },
+            { FaxConstants.FaxPaperContentData, content },
             { FaxConstants.FaxPaperLockedData, paper.EditingDisabled },
+            { FaxConstants.FaxPaperSenderFaxNameData, component.FaxName ?? Loc.GetString("fax-machine-popup-source-unknown") }
         };
 
         if (metadata.EntityPrototype != null)
@@ -566,13 +579,7 @@ public sealed class FaxSystem : EntitySystem
             payload[FaxConstants.FaxPaperStampedByData] = paper.StampedBy;
         }
 
-        // Sunrise-Start
-        if (paper.ImageContent != null)
-        {
-            payload[FaxConstants.FaxPaperImageData] = paper.ImageContent;
-            payload[FaxConstants.FaxPaperImageScaleData] = paper.ImageScale ?? Vector2.One;
-        }
-        // Sunrise-End
+        AddSunriseFaxImageData(payload, paper); // Sunrise-Edit — передаём изображение и его масштаб.
 
         _deviceNetworkSystem.QueuePacket(uid, component.DestinationFaxAddress, payload);
 
@@ -599,15 +606,16 @@ public sealed class FaxSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
-        var faxName = Loc.GetString("fax-machine-popup-source-unknown");
-        if (fromAddress != null && component.KnownFaxes.TryGetValue(fromAddress, out var fax)) // If message received from unknown fax address
-            faxName = fax;
+        var faxName = printout.SenderFaxName ?? Loc.GetString("fax-machine-popup-source-unknown");
 
         _popupSystem.PopupEntity(Loc.GetString("fax-machine-popup-received", ("from", faxName)), uid);
         _appearanceSystem.SetData(uid, FaxMachineVisuals.VisualState, FaxMachineVisualState.Printing);
 
         if (component.NotifyAdmins)
-            NotifyAdmins(faxName, printout); // sunrise-edit
+        {
+            NotifyAdmins(faxName);
+            NotifySunriseGhostAdmins(printout); // Sunrise-Edit — выдаём копию активным администраторам-призракам.
+        }
 
         component.PrintingQueue.Enqueue(printout);
     }
@@ -621,36 +629,12 @@ public sealed class FaxSystem : EntitySystem
 
         var entityToSpawn = printout.PrototypeId.Length == 0 ? component.PrintPaperId.ToString() : printout.PrototypeId;
         var printed = Spawn(entityToSpawn, Transform(uid).Coordinates);
-        // Sunrise-start - For portable faxes (items), attempt to add to inventory instead of dropping to floor
-        if (HasComp<ItemComponent>(uid))
-        {
-            bool successfullyInserted = _container.TryGetContainingContainer(uid, out var parentContainer) &&
-                                        _container.Insert(printed, parentContainer);
-            // 1. Try to insert into the container that holds the fax (e.g. backpack)
-
-            // 2. If not suitable, try to put it in the fax's own storage (if it has one)
-            if (!successfullyInserted && _container.TryGetContainer(uid, "storagebase", out var container))
-            {
-                if (_container.Insert(printed, container))
-                    successfullyInserted = true;
-            }
-
-            // 3. Fallback: If we couldn't insert it anywhere, ensure it's on the grid/map (drop it)
-            // This handles cases where the fax is in a container but that container is full.
-            if (!successfullyInserted)
-            {
-                _transform.AttachToGridOrMap(printed);
-            }
-        }
-        // Sunrise-end
+        PlaceSunrisePortableFaxPrintout(uid, printed); // Sunrise-Edit — корректно размещаем бумагу от переносного факса.
 
         if (TryComp<PaperComponent>(printed, out var paper))
         {
             _paperSystem.SetContent((printed, paper), printout.Content);
-            // Sunrise-Start
-            if (printout.ImageContent != null)
-                _paperSystem.SetImageContent((printed, paper), printout.ImageContent, printout.ImageScale);
-            // Sunrise-End
+            ApplySunriseFaxImage((printed, paper), printout); // Sunrise-Edit
 
             // Apply stamps
             if (printout.StampState != null)
@@ -674,66 +658,9 @@ public sealed class FaxSystem : EntitySystem
         _adminLogger.Add(LogType.Action, LogImpact.Low, $"\"{component.FaxName}\" {ToPrettyString(uid):tool} printed {ToPrettyString(printed):subject}: {printout.Content}");
     }
 
-    private void NotifyAdmins(string faxName, FaxPrintout printout)
+    private void NotifyAdmins(string faxName)
     {
         _chat.SendAdminAnnouncement(Loc.GetString("fax-machine-chat-notify", ("fax", faxName)));
         _audioSystem.PlayGlobal("/Audio/Machines/high_tech_confirm.ogg", Filter.Empty().AddPlayers(_adminManager.ActiveAdmins), false, AudioParams.Default.WithVolume(-8f));
-
-
-        //sunrise-start
-        //get all admins that are attached to a ghost
-        var clients = _adminManager.ActiveAdmins;
-
-        //get their ghost entities
-        foreach (var client in clients)
-        {
-            //check if attached
-            if (client.AttachedEntity == null)
-                continue;
-
-            //check if they are a ghost
-            if (!TryComp<GhostComponent>(client.AttachedEntity.Value, out var ghostComp))
-                continue;
-
-            Logger.Info($"Admin {client.Name} is a ghost, sending fax to them.");
-
-            //get their inventory
-            if (_inventory.TryGetSlotEntity(client.AttachedEntity.Value, "back", out var worn))
-            {
-                Logger.Info($"Admin {client.Name} has a back slot, sending fax to them.");
-                //generate the entity
-                var entityToSpawn = printout.PrototypeId;
-                if (EntityManager.TrySpawnInContainer(entityToSpawn, worn.Value, "storagebase", out var printed))
-                {
-                    if (TryComp<PaperComponent>(printed.Value, out var paper))
-                    {
-                        _paperSystem.SetContent((printed.Value, paper), printout.Content);
-                        // Sunrise-Start
-                        if (printout.ImageContent != null)
-                            _paperSystem.SetImageContent((printed.Value, paper), printout.ImageContent, printout.ImageScale);
-                        // Sunrise-End
-
-                        // Apply stamps
-                        if (printout.StampState != null)
-                        {
-                            foreach (var stamp in printout.StampedBy)
-                            {
-                                _paperSystem.TryStamp((printed.Value, paper), stamp, printout.StampState);
-                            }
-                        }
-
-                        paper.EditingDisabled = printout.Locked;
-                    }
-
-                    _metaData.SetEntityName(printed.Value, printout.Name);
-
-                    if (printout.Label is { } label)
-                    {
-                        _labelSystem.Label(printed.Value, label);
-                    }
-                }
-            }
-        }
-        //sunrise-end
     }
 }

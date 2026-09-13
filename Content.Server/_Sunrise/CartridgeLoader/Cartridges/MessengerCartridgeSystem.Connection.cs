@@ -268,7 +268,7 @@ public sealed partial class MessengerCartridgeSystem
     {
         serverAddress = null;
 
-        if (!TryComp<TransformComponent>(pdaUid, out var pdaTransform))
+        if (!TryComp(pdaUid, out TransformComponent? pdaTransform))
             return false;
 
         var query = EntityQueryEnumerator<

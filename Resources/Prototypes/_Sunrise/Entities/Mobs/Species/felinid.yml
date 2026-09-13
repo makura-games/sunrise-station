@@ -1,7 +1,38 @@
 - type: entity
+  parent:
+  # Sunrise-Edit: миксин должен идти перед BaseSpeciesAppearance, чтобы сохранить Sunrise displacement-карты.
+  - SunriseHumanBodyTypeDisplacements
+  - BaseSpeciesAppearance
+  id: AppearanceFelinid
+  name: felinid appearance
+  components:
+  - type: InitialBody
+    organs:
+      Torso: OrganFelinidTorso
+      Head: OrganFelinidHead
+      ArmLeft: OrganFelinidArmLeft
+      ArmRight: OrganFelinidArmRight
+      HandRight: OrganFelinidHandRight
+      HandLeft: OrganFelinidHandLeft
+      LegLeft: OrganFelinidLegLeft
+      LegRight: OrganFelinidLegRight
+      FootLeft: OrganFelinidFootLeft
+      FootRight: OrganFelinidFootRight
+      Brain: OrganHumanBrain
+      Eyes: OrganFelinidEyes
+      Tongue: OrganHumanTongue
+      Heart: OrganFelinidHeart
+      Lungs: OrganHumanLungs
+      Stomach: OrganReptilianStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganHumanKidneys
+  - type: HumanoidProfile
+    species: Felinid
+
+- type: entity
   save: false
   name: Urist McFelinid
-  parent: [BaseMobSpeciesOrganic, BaseSpeciesPickupable]
+  parent: [AppearanceFelinid, BaseSpeciesMobOrganic, BaseSpeciesPickupable]
   id: MobFelinidBase
   abstract: true
   components:
@@ -27,380 +58,10 @@
     spawned:
     - id: FoodMeatFelinid
       amount: 2
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Felinid
-    hideLayersOnEquip:
-    - Hair
-    - Snout
-  - type: Inventory
-    ### Female
-    ## BASE
-    femaleDisplacements:
-      jumpsuit:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Basic/displacement.rsi
-            state: jumpsuit-female
-      ## SLIM
-      jumpsuit-body-slim-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: jumpsuit-female
-      shoes-body-slim-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: shoes
-      gloves-body-slim-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: gloves
-      pants-body-slim-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: panties
-      socks-body-slim-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: socks
-      bra-body-slim-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: bra
-      outerClothing-body-slim-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: outer
-      hardsuit-body-slim-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: hardsuit
-      back-body-slim-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: back
-      ## Giga
-      jumpsuit-body-giga-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-            state: jumpsuit-female
-      shoes-body-giga-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-            state: shoes
-      gloves-body-giga-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-            state: gloves
-      outerClothing-body-giga-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-            state: outer
-      hardsuit-body-giga-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-            state: hardsuit
-      back-body-giga-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-            state: back
-      neck-body-giga-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-            state: neck
-      ## Fat
-      jumpsuit-body-fat-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: jumpsuit-female
-      shoes-body-fat-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: shoes
-      gloves-body-fat-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: gloves
-      pants-body-fat-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: panties
-      socks-body-fat-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: socks
-      bra-body-fat-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: bra
-      outerClothing-body-fat-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: outer
-      hardsuit-body-fat-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: hardsuit
-      back-body-fat-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: back
-      head-body-fat-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: head
-      ## Distrofik
-      jumpsuit-body-distrofik-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: jumpsuit-female
-      shoes-body-distrofik-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: shoes
-      gloves-body-distrofik-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: gloves
-      pants-body-distrofik-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: panties
-      socks-body-distrofik-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: socks
-      bra-body-distrofik-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: bra
-      outerClothing-body-distrofik-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: outer
-      hardsuit-body-distrofik-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: hardsuit
-      back-body-distrofik-f:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: back
-      ### Male
-      ## Slim
-    maleDisplacements:
-      jumpsuit-body-slim-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: jumpsuit
-      shoes-body-slim-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: shoes
-      gloves-body-slim-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: gloves
-      pants-body-slim-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: panties
-      socks-body-slim-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: socks
-      bra-body-slim-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: bra
-      outerClothing-body-slim-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: outer
-      hardsuit-body-slim-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: hardsuit
-      back-body-slim-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
-            state: back
-      # Giga
-      jumpsuit-body-giga-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-            state: jumpsuit
-      shoes-body-giga-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-            state: shoes
-      gloves-body-giga-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-            state: gloves
-      outerClothing-body-giga-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-            state: outer
-      hardsuit-body-giga-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-            state: hardsuit
-      back-body-giga-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-            state: back
-      neck-body-giga-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
-            state: neck
-      # Fat
-      jumpsuit-body-fat-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: jumpsuit
-      shoes-body-fat-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: shoes
-      gloves-body-fat-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: gloves
-      pants-body-fat-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: panties
-      socks-body-fat-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: socks
-      bra-body-fat-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: bra
-      outerClothing-body-fat-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: outer
-      hardsuit-body-fat-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: hardsuit
-      back-body-fat-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: back
-      head-body-fat-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
-            state: head
-      # Distrofik
-      jumpsuit-body-distrofik-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: jumpsuit
-      shoes-body-distrofik-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: shoes
-      gloves-body-distrofik-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: gloves
-      pants-body-distrofik-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: panties
-      socks-body-distrofik-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: socks
-      bra-body-distrofik-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: bra
-      outerClothing-body-distrofik-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: outer
-      hardsuit-body-distrofik-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: hardsuit
-      back-body-distrofik-m:
-        sizeMaps:
-          32:
-            sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
-            state: back
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers
   - type: Tag
     tags:
     - CanPilot
@@ -420,11 +81,10 @@
         - MobMask
         layer:
         - MobLayer
-  - type: Body
-    prototype: Felinid
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Felinid
+  - type: Injurable
+    damageContainer: Biological
   - type: Destructible
     thresholds:
     - trigger:
@@ -470,6 +130,8 @@
   - type: Stamina
     baseCritThreshold: 100
   - type: FootprintEmitter
+    leftBareFootState: [ footprint-left-bare-cat ]
+    rightBareFootState: [ footprint-right-bare-cat ]
   - type: Vocal
     sounds:
       Male: MaleFelinid
@@ -534,7 +196,7 @@
 - type: entity
   save: false
   name: Urist McHands
-  parent: MobHumanDummy
+  parent: AppearanceFelinid
   id: MobFelinidDummy
   categories: [ HideSpawnMenu ]
   description: A dummy felinid meant to be used in character setup.

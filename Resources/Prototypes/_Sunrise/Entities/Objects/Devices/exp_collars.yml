@@ -20,8 +20,8 @@
     beepSound:
       path: /Audio/Effects/beep1.ogg
     damage:
-      groups:
-        Burn: 400
+      types:
+        Heat: 400
   - type: StaticPrice
     price: 3000
 

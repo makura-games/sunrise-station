@@ -203,6 +203,11 @@
 #Gloves
 
 - type: loadout
+  id: SunriseNitrileGloves
+  equipment:
+    gloves: ClothingHandsGlovesNitrile
+
+- type: loadout
   id: SunriseGlovesNitrileBlack
   equipment:
     gloves: ClothingHandsGlovesNitrileBlack

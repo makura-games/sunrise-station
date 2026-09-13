@@ -102035,7 +102035,7 @@ entities:
     - pos: 17.5,-4.5
       parent: 6747
       type: Transform
-- proto: HeadSkeleton
+- proto: OrganSkeletonPersonHead
   entities:
   - uid: 11411
     components:

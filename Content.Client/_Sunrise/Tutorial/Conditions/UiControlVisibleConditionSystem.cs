@@ -14,11 +14,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._Sunrise.Tutorial.Conditions;
 
-public sealed class UiControlVisibleConditionSystem : EntitySystem
+public sealed partial class UiControlVisibleConditionSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
-    [Dependency] private readonly SharedTutorialSystem _tutorial = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
+    [Dependency] private SharedTutorialSystem _tutorial = default!;
 
     private readonly List<UiControlVisibleCondition> _activeConditions = [];
     private readonly HashSet<string> _reportedControls = [];

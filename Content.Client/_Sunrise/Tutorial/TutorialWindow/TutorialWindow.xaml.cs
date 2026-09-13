@@ -12,7 +12,7 @@ namespace Content.Client._Sunrise.Tutorial.TutorialWindow;
 [GenerateTypedNameReferences]
 public sealed partial class TutorialWindow : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
     public Action<TutorialSequencePrototype>? OnTutorialButtonPressed;
     public Action? OnRequestCompletedTutorials;
     private TutorialCategoryButton? _selectedCategory;
@@ -73,7 +73,7 @@ public sealed partial class TutorialWindow : FancyWindow
                 CropFocus = proto.CropFocus,
                 DescriptionText = proto.Tooltip,
                 StatusText = Loc.GetString("tutorial-status", ("status", status)),
-                TimeText = Loc.GetString("tutorial-time", ("time", proto.Duration.ToString("mm\\:ss"))),
+                TimeText = Loc.GetString("tutorial-time", ("time", FormatDuration(proto.EstimatedDuration))),
                 StartText = Loc.GetString("tutorial-start"),
                 OnStartPressed = () => OnTutorialButtonPressed?.Invoke(proto),
             };
@@ -135,5 +135,15 @@ public sealed partial class TutorialWindow : FancyWindow
             "tutorial-category-progress",
             ("completed", completedCount),
             ("total", tutorials.Count));
+    }
+
+    private static string FormatDuration(TutorialDurationRange duration)
+    {
+        return $"{FormatDuration(duration.Minimum)}-{FormatDuration(duration.Maximum)}";
+    }
+
+    private static string FormatDuration(TimeSpan duration)
+    {
+        return $"{(int) duration.TotalMinutes}:{duration.Seconds:D2}";
     }
 }

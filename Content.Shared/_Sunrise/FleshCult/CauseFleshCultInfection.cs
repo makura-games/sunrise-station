@@ -10,6 +10,7 @@ namespace Content.Shared._Sunrise.FleshCult;
 
 public sealed partial class CauseFleshCultInfectionEntityEffectSystem : EntityEffectSystem<MobStateComponent, CauseFleshCultInfection>
 {
+    private readonly string _reagent = "UnstableMutagen";
 
     protected override void Effect(Entity<MobStateComponent> entity, ref EntityEffectEvent<CauseFleshCultInfection> args)
     {
@@ -23,7 +24,7 @@ public sealed partial class CauseFleshCultInfectionEntityEffectSystem : EntityEf
                 {
                     // Remove Carol reagent and replace with Unstable Mutagen if target has mindshield
                     chemSolution.RemoveReagent("Carol", FixedPoint2.New(5));
-                    chemSolution.AddReagent("UnstableMutagen", FixedPoint2.New(5));
+                    chemSolution.AddReagent(_reagent, FixedPoint2.New(5));
                 }
             }
         }

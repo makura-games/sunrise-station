@@ -28,9 +28,4 @@ public sealed partial class SurveillanceCameraRouterComponent : Component
 
     [DataField("setupAvailableNetworks")]
     public List<ProtoId<DeviceFrequencyPrototype>> AvailableNetworks { get; private set; } = new();
-
-    // Sunrise-start
-    [DataField("subnetColor")]
-    public Color SubnetColor;
-    // Sunrise-end
 }

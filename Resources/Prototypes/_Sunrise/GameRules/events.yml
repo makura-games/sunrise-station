@@ -11,19 +11,6 @@
     prototype: RevolutionarySmugglerStash
 
 - type: entity
-  parent: BaseGameRule
-  id: TerminatorSpawn
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: StationEvent
-    weight: 5
-    earliestStart: 30
-    minimumPlayers: 20
-    duration: null
-  - type: LateJoinSpawnRule
-    prototype: SpawnPointGhostTerminator
-
-- type: entity
   id: VentbullMigration
   parent: BaseGameRule
   categories: [ HideSpawnMenu ]
@@ -37,7 +24,7 @@
       prob: 0.03
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseAntagGhostRoleRule
   id: AbductorsSpawn
   components:
   - type: StationEvent
@@ -54,57 +41,11 @@
   - type: AntagSpawner # Sunrise-todo: починить AntagLoadProfileRule для бубукторов
     prototype: MobAbductor
   - type: AntagSelection
-    definitions:
-    - spawnerPrototype: AbductorScientistSpawner
-      min: 1
-      max: 1
-      pickPlayer: false
-      startingGear: AbductorScientistGear
-      briefing:
-        text: abductor-role-greeting
-        color: Green
-        sound: /Audio/_Sunrise/Abductor/abductor.ogg
-      components:
-      - type: Abductor
-      - type: Muted
-      - type: AbductorScientist
-      - type: ActionGrant
-        actions:
-        - ActionReturnToShip
-      - type: Tag
-        tags:
-          - Abductor
-          - AbductorScientist
-          - CanPilot
-          - DoorBumpOpener
-          - FootstepSound
-      - type: NpcFactionMember
-        factions:
-        - SimpleHostile
-      mindRoles:
-      - MindRoleLoneAbductor
-    - spawnerPrototype: AbductorAgentSpawner
-      min: 1
-      max: 1
-      pickPlayer: false
-      startingGear: AbductorAgentGear
-      briefing:
-        text: abductor-role-greeting
-        color: Green
-        sound: /Audio/_Sunrise/Abductor/abductor.ogg
-      components:
-      - type: Abductor
-      - type: Muted
-      - type: AbductorAgent
-      - type: Tag
-        tags:
-          - Abductor
-          - CanPilot
-      - type: NpcFactionMember
-        factions:
-        - SimpleHostile
-      mindRoles:
-      - MindRoleLoneAbductor
+    antags:
+    - !type:FixedAntagCount
+      proto: SunriseAbductorScientist
+    - !type:FixedAntagCount
+      proto: SunriseAbductorAgent
   - type: DynamicRuleCost
     cost: 100
 
@@ -124,17 +65,9 @@
     minPlayers: 1
   - type: AbductorVictimRule
   - type: AntagSelection
-    definitions:
-    - blacklist:
-        components:
-        - AntagImmune
-        - MindShield
-      briefing:
-        text: abductor-victim-role-greeting
-        color: Plum
-        sound: /Audio/_Sunrise/Abductor/abductor.ogg
-      mindRoles:
-      - AbductorVictimRole
+    antags:
+    - !type:FixedAntagCount
+      proto: SunriseAbductorVictim
   - type: DynamicRuleCost
     cost: 70
 
@@ -148,7 +81,7 @@
   - type: EpsilonDeathSquadLawset
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseAntagGhostRoleRule
   id: DerelictSyndicateReaperCyborgSpawn
   components:
   - type: StationEvent
@@ -162,14 +95,12 @@
   - type: AntagSpawner
     prototype: PlayerBorgSyndicateReaperDerelictGhostRoleSunrise
   - type: AntagSelection
-    definitions:
-    - spawnerPrototype: SpawnPointGhostDerelictSyndicateReaperCyborg
-      min: 1
-      max: 1
-      pickPlayer: false
+    antags:
+    - !type:FixedAntagCount
+      proto: SunriseDerelictSyndicateReaperCyborg
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseAntagGhostRoleRule
   id: DerelictSyndicateSaboteurCyborgSpawn
   components:
   - type: StationEvent
@@ -183,14 +114,12 @@
   - type: AntagSpawner
     prototype: PlayerBorgSyndicateSaboteurDerelictGhostRoleSunrise
   - type: AntagSelection
-    definitions:
-    - spawnerPrototype: SpawnPointGhostDerelictSyndicateSaboteurCyborg
-      min: 1
-      max: 1
-      pickPlayer: false
+    antags:
+    - !type:FixedAntagCount
+      proto: SunriseDerelictSyndicateSaboteurCyborg
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseAntagGhostRoleRule
   id: DerelictSyndicateMedicalCyborgSpawn
   components:
   - type: StationEvent
@@ -204,11 +133,94 @@
   - type: AntagSpawner
     prototype: PlayerBorgSyndicateMedicalDerelictGhostRoleSunrise
   - type: AntagSelection
-    definitions:
-    - spawnerPrototype: SpawnPointGhostDerelictSyndicateMedicalCyborg
-      min: 1
-      max: 1
-      pickPlayer: false
+    antags:
+    - !type:FixedAntagCount
+      proto: SunriseDerelictSyndicateMedicalCyborg
+
+- type: antagSpecifier
+  parent: BaseAntagSpecifier
+  id: SunriseAbductorScientist
+  pickPlayer: false
+  spawnerPrototype: AbductorScientistSpawner
+  startingGear: AbductorScientistGear
+  briefing:
+    text: abductor-role-greeting
+    color: Green
+    sound: /Audio/_Sunrise/Abductor/abductor.ogg
+  components:
+  - type: Abductor
+  - type: Muted
+  - type: AbductorScientist
+  - type: ActionGrant
+    actions:
+    - ActionReturnToShip
+  - type: Tag
+    tags:
+    - Abductor
+    - AbductorScientist
+    - CanPilot
+    - DoorBumpOpener
+    - FootstepSound
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  mindRoles:
+  - MindRoleLoneAbductor
+
+- type: antagSpecifier
+  parent: BaseAntagSpecifier
+  id: SunriseAbductorAgent
+  pickPlayer: false
+  spawnerPrototype: AbductorAgentSpawner
+  startingGear: AbductorAgentGear
+  briefing:
+    text: abductor-role-greeting
+    color: Green
+    sound: /Audio/_Sunrise/Abductor/abductor.ogg
+  components:
+  - type: Abductor
+  - type: Muted
+  - type: AbductorAgent
+  - type: Tag
+    tags:
+    - Abductor
+    - CanPilot
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  mindRoles:
+  - MindRoleLoneAbductor
+
+- type: antagSpecifier
+  parent: BaseAntagSpecifier
+  id: SunriseAbductorVictim
+  blacklist:
+    components:
+    - MindShield
+  briefing:
+    text: abductor-victim-role-greeting
+    color: Plum
+    sound: /Audio/_Sunrise/Abductor/abductor.ogg
+  mindRoles:
+  - AbductorVictimRole
+
+- type: antagSpecifier
+  parent: BaseAntagSpecifier
+  id: SunriseDerelictSyndicateReaperCyborg
+  pickPlayer: false
+  spawnerPrototype: SpawnPointGhostDerelictSyndicateReaperCyborg
+
+- type: antagSpecifier
+  parent: BaseAntagSpecifier
+  id: SunriseDerelictSyndicateSaboteurCyborg
+  pickPlayer: false
+  spawnerPrototype: SpawnPointGhostDerelictSyndicateSaboteurCyborg
+
+- type: antagSpecifier
+  parent: BaseAntagSpecifier
+  id: SunriseDerelictSyndicateMedicalCyborg
+  pickPlayer: false
+  spawnerPrototype: SpawnPointGhostDerelictSyndicateMedicalCyborg
 
 - type: entityTable
   id: BasicCalmEventsTableGreenShit

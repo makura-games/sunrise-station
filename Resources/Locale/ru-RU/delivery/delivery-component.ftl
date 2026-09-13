@@ -22,3 +22,7 @@ delivery-priority-examine = [color=orange]В ПРИОРИТЕТЕ![/color]. У �
 delivery-priority-expired-examine = [color=orange]В ПРИОРИТЕТЕ![/color]. Кажется, у вас закончилось время..
 delivery-fragile-examine = [color=red]ОСТОРОЖНО ХРУПКОЕ![/color]. Принесите в сохраности чтобы получить бонус.
 delivery-fragile-broken-examine = [color=red]ОСТОРОЖНО ХРУПКОЕ![/color]. Кажется там что-то уже разбилось...
+delivery-priority-delivered-examine = Это [color=orange]приоритетная {$type}[/color]. Доставлено вовремя.
+
+delivery-bomb-examine = Это [color=purple]{$type}-бомба[/color]. О нет.
+delivery-bomb-primed-examine = Это [color=purple]{$type}-бомба[/color]. Читать это — пустая трата вашего времени.

@@ -60,3 +60,7 @@ gun-revolver-spin = Вращать барабан
 gun-revolver-spun = Барабан вращается
 gun-speedloader-empty = Спидлоадер пуст
 examine-weapon-dismantle-on-shoot = Оружие может развалиться при выстреле ([color=yellow]{ $chance }%[/color]).
+gun-set-fire-mode-examine = Установлен режим [color=yellow]{$mode}[/color].
+gun-set-fire-mode-popup = Изменено на {$mode}
+examine-gun-spread-modifier-reduction = Разброс был уменьшен на [color=yellow]{$percentage}%[/color].
+examine-gun-spread-modifier-increase = Разброс был увеличен на [color=yellow]{$percentage}%[/color].

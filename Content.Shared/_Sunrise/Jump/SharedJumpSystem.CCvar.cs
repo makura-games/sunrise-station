@@ -3,8 +3,6 @@
 public abstract partial class SharedJumpSystem
 {
     private static bool _enabled;
-    private static float _deadChance;
-
     private static bool _bunnyHopEnabled;
     private static TimeSpan _bunnyHopSpeedBoostWindow;
     private static float _bunnyHopSpeedUpPerJump;

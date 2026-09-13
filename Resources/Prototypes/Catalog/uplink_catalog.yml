@@ -59,17 +59,6 @@
     Telecrystal: 8
   categories:
   - UplinkWeaponry
-  #Sunrise-start
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - AssaultOpsUplink
-      - SubdermalImplant
-      - NukeOpsUplink
-  - !type:ListingLimitedStockCondition
-    stock: 1
-  #Sunrise-end
 
 - type: listing
   id: UplinkEnergyDagger
@@ -91,10 +80,10 @@
   description: uplink-energycrossbow-desc
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 2 # Sunrise-edit
+    Telecrystal: 3
   productEntity: WeaponEnergyCrossbow
   cost:
-    Telecrystal: 3 # Sunrise-edit
+    Telecrystal: 5
   categories:
   - UplinkWeaponry
   conditions:
@@ -111,7 +100,7 @@
   discountDownTo:
     Telecrystal: 3
   cost:
-    Telecrystal: 5 # Sunrise-Edit
+    Telecrystal: 6
   categories:
     - UplinkWeaponry
 
@@ -124,7 +113,7 @@
   discountDownTo:
     Telecrystal: 4
   cost:
-    Telecrystal: 7 # Sunrise-Edit
+    Telecrystal: 8
   categories:
   - UplinkWeaponry
 
@@ -134,11 +123,11 @@
   description: uplink-gloves-knuckleduster-desc
   icon: { sprite: Clothing/Hands/Gloves/KnuckleDusters/syndicateknuckleduster.rsi, state: syndicateknuckleduster }
   productEntity: ClothingHandsKnuckleDustersSyndicate
-  # discountCategory: veryRareDiscounts # Sunrise-edit
-  # discountDownTo:
-  #   Telecrystal: 2
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 2
   cost:
-    Telecrystal: 1  # Starlight-edit
+    Telecrystal: 4
   categories:
   - UplinkWeaponry
 
@@ -170,9 +159,9 @@
   productEntity: ClothingHandsGlovesBoxingRiggedBlue # TODO Replace this with the random spawner when it's not bugged
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 7 # Sunrise-Edit
+    Telecrystal: 8
   cost:
-    Telecrystal: 8 # Sunrise-Edit
+    Telecrystal: 10
   categories:
   - UplinkWeaponry
 
@@ -189,6 +178,14 @@
     Telecrystal: 10
   categories:
   - UplinkWeaponry
+  # Sunrise-start
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+  # Sunrise-end
 
 - type: listing
   id: UplinkHushpup
@@ -198,9 +195,9 @@
   productEntity: BriefcaseWeaponHushpupFilled
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 6 # Sunrise-Edit
+    Telecrystal: 8
   cost:
-    Telecrystal: 8 # Sunrise-Edit
+    Telecrystal: 10
   categories:
   - UplinkWeaponry
 
@@ -281,26 +278,6 @@
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Add
-
-- type: listing
-  id: UplinkEstoc
-  name: uplink-estoc-name
-  description: uplink-estoc-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Rifles/estoc.rsi, state: icon }
-  productEntity: BriefcaseWeaponDMRFilled
-  discountCategory: veryRareDiscounts
-  discountDownTo:
-    Telecrystal: 9  # Sunrise-Edit
-  cost:
-    Telecrystal: 11 # Sunrise-Edit
-  categories:
-  - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
       tags:
       - NukeOpsUplink
       - LoneOpsUplink # Sunrise-Add
@@ -1243,6 +1220,16 @@
   categories:
   - UplinkDisruption
 
+- type: listing
+  id: UplinkTravelCamera
+  name: uplink-travel-camera-name
+  description: uplink-travel-camera-desc
+  productEntity: TravelCamera
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkDeception
+
 # Note: Removed for the time being until surgery/newmed is added. Considered bloat until then.
 - type: listing # Sunrise-edit
   id: UplinkDuffelSurgery
@@ -1271,10 +1258,11 @@
   - UplinkExplosives
 
 - type: listing
-  id: UplinkSyndimovCircuitBoard
+  id: UplinkSyndimovCircuitKit
   name: uplink-syndimov-law-name
   description: uplink-syndimov-law-desc
-  productEntity: SyndimovCircuitBoard
+  icon: { sprite: /Textures/Objects/Storage/boxicons.rsi, state: syndicate_circuit }
+  productEntity: SyndimovCircuitKit
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 6
@@ -1624,7 +1612,7 @@
   id: UplinkEmpImplanter
   name: uplink-emp-implanter-name
   description: uplink-emp-implanter-desc
-  icon: { sprite: /Textures/Objects/Magic/magicactions.rsi, state: shield }
+  icon: { sprite: /Textures/Effects/emp.rsi, state: emp_disable }
   productEntity: EmpImplanter
   discountCategory: veryRareDiscounts
   discountDownTo:
@@ -1933,7 +1921,7 @@
   icon: { sprite: /Textures/Clothing/OuterClothing/Hardsuits/syndieelite.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateEliteHardsuitBundle
   cost:
-    Telecrystal: 9 # Sunrise-Edit
+    Telecrystal: 10 # Sunrise-Edit
   categories:
   - UplinkWearables
   conditions:
@@ -1950,7 +1938,7 @@
   icon: { sprite: /Textures/Structures/Storage/Crates/syndicate.rsi, state: icon }
   productEntity: CrateCybersunJuggernautBundle
   cost:
-    Telecrystal: 13 #Sunrise-edit
+    Telecrystal: 12
   categories:
   - UplinkWearables
   conditions:
@@ -1970,11 +1958,11 @@
   categories:
     - UplinkWearables
   conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Edit
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - NukeOpsUplink
+          - LoneOpsUplink # Sunrise-Edit
 
 - type: listing
   id: UplinkBackpackSyndicate
@@ -2454,3 +2442,20 @@
   - !type:BuyerJobCondition
     whitelist:
     - Lawyer
+
+#Objective items
+
+- type: listing
+  id: uplinkHijackBeacon
+  name: uplink-hijack-beacon-name
+  description: uplink-hijack-beacon-desc
+  productEntity: HijackBeacon
+  categories:
+    - UplinkObjective
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:BuyerObjectiveWhitelistCondition
+    whitelist:
+      components:
+      - HijackTradeStationCondition

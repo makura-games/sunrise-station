@@ -13,3 +13,16 @@ admin-explosion-eui-label-angle = Угол
 admin-explosion-eui-label-spread = Радиус
 admin-explosion-eui-label-distance = Дистанция
 admin-explosion-eui-label-spawn = Бабах!
+
+cmd-explosionui-desc = Открывает окно для простого доступа к уничтожению станции.
+cmd-explosionui-help = Использование: explosionui
+
+cmd-explosion-desc = Поезд делает бум
+cmd-explosion-help = Использование: explosion [intensity] [slope] [maxIntensity] [x y] [mapId] [prototypeId]
+cmd-explosion-failed-to-parse-intensity = Не удалось обработать интенсивность: {$value}
+cmd-explosion-failed-to-parse-float = Не удалось обработать число с плавающей точкой: {$value}
+cmd-explosion-failed-to-parse-coords = Не удалось обработать координаты: {$value1} {$value2}
+cmd-explosion-failed-to-parse-map-id = Не удалось обработать ID карты: {$value}
+cmd-explosion-need-coords-explicit = Не удалось получить стандартные координаты/карту из положения игрока. Необходимо указать их явно.
+cmd-explosion-unknown-prototype = Неизвестный прототип взрыва: {$value}
+cmd-explosion-no-prototypes = В менеджере прототипов нет прототипов взрывов?

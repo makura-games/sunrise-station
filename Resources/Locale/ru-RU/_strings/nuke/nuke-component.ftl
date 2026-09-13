@@ -1,5 +1,5 @@
 nuke-component-cant-anchor-floor = Крепёжным болтам не удаётся закрепиться в полу!
-nuke-component-cant-anchor-toggle = The nuclear authentication disk is required to toggle the floor bolts!
+nuke-component-cant-anchor-toggle = Для переключения болтов пола требуется ядерный диск аутентификации!
 nuke-component-announcement-sender = Ядерная боеголовка
 nuke-component-announcement-armed = Внимание! Механизм самоуничтожения станции был активирован { $location }. До детонации { $time } секунд.
 nuke-component-announcement-unarmed = Механизм самоуничтожение станции деактивирован! Хорошего дня!
@@ -12,7 +12,6 @@ nuke-user-interface-anchor-button = ЗАКРЕПИТЬ
 nuke-user-interface-eject-button = ИЗВЛЕЧЬ
 
 ## Upper status
-
 nuke-user-interface-first-status-device-locked = УСТРОЙСТВО ЗАБЛОКИРОВАНО
 nuke-user-interface-first-status-input-code = ВВЕДИТЕ КОД
 nuke-user-interface-first-status-input-time = ВВЕДИТЕ ВРЕМЯ
@@ -22,7 +21,6 @@ nuke-user-interface-first-status-device-cooldown = ДЕАКТИВИРОВАНО
 nuke-user-interface-status-error = ОШИБКА
 
 ## Lower status
-
 nuke-user-interface-second-status-await-disk = ОЖИДАНИЕ ДИСКА
 nuke-user-interface-second-status-time = ВРЕМЯ: { $time }
 nuke-user-interface-second-status-current-code = КОД: { $code }
@@ -33,7 +31,6 @@ nuke-label-nanotrasen = NT-{ $serial }
 nuke-label-syndicate = СИН-{ $serial }
 
 # Codes
-
 nuke-codes-message = [color=red]СОВЕРШЕННО СЕКРЕТНО![/color]
 nuke-codes-list = Код { $name }: { $code }
 nuke-codes-fax-paper-name = коды ядерной аутентификации
@@ -41,3 +38,6 @@ nuke-codes-fax-paper-name = коды ядерной аутентификации
 nuke-slot-component-slot-name-disk = Диск
 nuke-examine-armed = Эй, а почему эта [color=red]красная лампочка[/color] мигает?
 nuke-examine-exploding = Ага... Похоже, уже слишком поздно, приятель.
+nuke-disk-component-microwave = Диск слегка искрится и потрескивает, но, похоже, в целом почти не повреждён?
+
+# Nuke UI

@@ -81,3 +81,10 @@ fax-label-mailroom = Почта
 fax-label-bar = Бар
 fax-label-courthhouse = Зал суда
 fax-label-representative = Представитель
+
+fax-machine-sender-info =
+    ─────────────────────────────────────
+    Факс отправлен
+    от: {$sender_name} [адрес: {$sender_addr}]
+    кому: {$recipient_name} [адрес: {$recipient_addr}]
+    в: {$time}

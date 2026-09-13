@@ -5,9 +5,9 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._Sunrise.Movement;
 
-public sealed class CarryingSystem : SharedCarryingSystem
+public sealed partial class CarryingSystem : SharedCarryingSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private readonly Dictionary<EntityUid, CarriedVisualState> _visualStates = new();
 

@@ -37,8 +37,9 @@
           layer:
             - MachineLayer
     - type: Damageable
-      damageContainer: Biological
       damageModifierSet: FleshHeart
+    - type: Injurable
+      damageContainer: Biological
     - type: Destructible
       thresholds:
         - trigger:

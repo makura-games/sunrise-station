@@ -17,7 +17,7 @@
     - UplinkWearables
     - UplinkJob
     - UplinkPointless
-    - UplinkObjectives
+    - UplinkObjective
     - UplinkLootBoxes # Sunrise-Edit
     - UplinkMechs #Sunrise-added
     - UplinkShuttle #Sunrise-added
@@ -25,6 +25,8 @@
     - Telecrystal
     balance:
       Telecrystal: 0
+    expectedFaction:
+    - Syndicate
 
 - type: entity
   id: StorePresetSpellbook
@@ -40,6 +42,8 @@
     - SpellbookEvents       #Summon Weapons, Summon Ghosts
     currencyWhitelist:
     - WizCoin
+    expectedFaction:
+    - Wizard
 
 - type: entity
   id: StorePresetChangeling
@@ -48,6 +52,15 @@
   - type: Store
     name: store-preset-name-changeling
     categories:
-    - ChangelingAbilities
+    - ChangelingStoreCombat
+    - ChangelingStoreStealth
+    - ChangelingStoreUtility
     currencyWhitelist:
     - ChangelingDNA
+
+- type: entity
+  parent: StorePresetUplink
+  id: StorePresetRemoteUplink
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RingerAccessUplink

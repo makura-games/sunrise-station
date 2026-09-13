@@ -10,3 +10,4 @@ comp-storage-window-weight = { $weight }/{ $maxWeight }, Макс. размер:
 comp-storage-window-slots = Слоты: { $itemCount }/{ $maxCount }, Макс. размер: { $size }
 comp-storage-verb-open-storage = Открыть хранилище
 comp-storage-verb-close-storage = Закрыть хранилище
+comp-storage-window-dummy = Заглушка

@@ -11,14 +11,16 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Zombies;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Server.Weapons.Melee.InfectOnMelee;
 
-public sealed class InfectOnMeleeSystem : EntitySystem
+public sealed partial class InfectOnMeleeSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {
@@ -33,7 +35,7 @@ public sealed class InfectOnMeleeSystem : EntitySystem
         {
             foreach (var entity in args.HitEntities)
             {
-                if (HasComp<HumanoidAppearanceComponent>(entity)
+                if (HasComp<HumanoidProfileComponent>(entity)
                     && !_mob.IsDead(entity)
                     && _random.Prob(GenerateHitChance(entity, component))
                     && !HasComp<ClumsyComponent>(entity)
@@ -52,7 +54,7 @@ public sealed class InfectOnMeleeSystem : EntitySystem
         float chance = component.InfectionChance;
         if (TryComp<DamageableComponent>(enemy, out var damage))
         {
-            var totalDamage = damage.TotalDamage;
+            var totalDamage = _damageable.GetTotalDamage((enemy, damage));
 
             var additionalChance = totalDamage * 0.01f;
 

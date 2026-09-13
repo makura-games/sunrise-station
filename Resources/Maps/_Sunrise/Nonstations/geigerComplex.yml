@@ -25482,7 +25482,7 @@ entities:
     - type: Transform
       pos: 16.631361,-30.5601
       parent: 2
-- proto: HeadHuman
+- proto: OrganHumanHead
   entities:
   - uid: 1991
     components:
@@ -26028,7 +26028,7 @@ entities:
     - type: Transform
       pos: -24.006077,23.898424
       parent: 2
-- proto: LeftArmSkeleton
+- proto: OrganSkeletonPersonArmLeft
   entities:
   - uid: 1741
     components:
@@ -26038,7 +26038,7 @@ entities:
       canCollide: False
     - type: InsideEntityStorage
       storage: 1738
-- proto: LeftFootSkeleton
+- proto: OrganSkeletonPersonFootLeft
   entities:
   - uid: 1742
     components:
@@ -26048,7 +26048,7 @@ entities:
       canCollide: False
     - type: InsideEntityStorage
       storage: 1738
-- proto: LeftHandSkeleton
+- proto: OrganSkeletonPersonHandLeft
   entities:
   - uid: 1743
     components:
@@ -26058,7 +26058,7 @@ entities:
       canCollide: False
     - type: InsideEntityStorage
       storage: 1738
-- proto: LeftLegSkeleton
+- proto: OrganSkeletonPersonLegLeft
   entities:
   - uid: 1744
     components:
@@ -30467,7 +30467,7 @@ entities:
     - type: Transform
       pos: 22.785767,9.80565
       parent: 2
-- proto: RightArmSkeleton
+- proto: OrganSkeletonPersonArmRight
   entities:
   - uid: 1745
     components:
@@ -30477,7 +30477,7 @@ entities:
       canCollide: False
     - type: InsideEntityStorage
       storage: 1738
-- proto: RightFootSkeleton
+- proto: OrganSkeletonPersonFootRight
   entities:
   - uid: 1746
     components:
@@ -30487,7 +30487,7 @@ entities:
       canCollide: False
     - type: InsideEntityStorage
       storage: 1738
-- proto: RightHandSkeleton
+- proto: OrganSkeletonPersonHandRight
   entities:
   - uid: 1747
     components:
@@ -30497,7 +30497,7 @@ entities:
       canCollide: False
     - type: InsideEntityStorage
       storage: 1738
-- proto: RightLegSkeleton
+- proto: OrganSkeletonPersonLegRight
   entities:
   - uid: 1748
     components:
@@ -32031,7 +32031,7 @@ entities:
     - type: Transform
       pos: 33.3615,-3.1076732
       parent: 2
-- proto: TorsoSkeleton
+- proto: OrganSkeletonPersonTorso
   entities:
   - uid: 1750
     components:
@@ -53110,7 +53110,7 @@ entities:
     - type: Transform
       pos: 19.602985,-32.30516
       parent: 2
-- proto: WeaponPistolHIB88M4
+- proto: WeaponPistolViper
   entities:
   - uid: 3788
     components:

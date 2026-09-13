@@ -7,14 +7,16 @@
   flavor: medicine
   color: "#8b0b47"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:ModifyBleed
         amount: -4.2
       - !type:HealthChange
         damage:
-          groups:
-            Brute: -3.2
+          types:
+            Blunt: -1.07
+            Slash: -1.07
+            Piercing: -1.06
       - !type:HealthChange
         damage:
           types:
@@ -37,15 +39,13 @@
   flavor: medicine
   color: "#bd020284"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
         - !type:HealthChange
           damage:
             types:
               Radiation: -3
               Mangleness: 0.25 #Sunrise-Edit
-    Poison:
-      effects:
         - !type:ModifyStatusEffect
           effectProto: StatusEffectSeeingRainbow
           type: Update
@@ -60,7 +60,7 @@
   flavor: medicine
   color: "#ff867d"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         probability: 0.3

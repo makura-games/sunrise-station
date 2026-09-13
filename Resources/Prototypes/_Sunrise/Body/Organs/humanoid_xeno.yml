@@ -1,6 +1,28 @@
-# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 - type: entity
-  id: BaseHumanoidXenoOrganUnGibbable
+  id: SolutionHumanoidXenoFood
+  parent: Solution
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: FluorosulfuricAcidHumanoidXeno
+        Quantity: 5
+
+- type: entity
+  id: SolutionHumanoidXenoStomach
+  parent: SolutionStomach
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      maxVol: 100
+
+- type: entity
+  id: BaseHumanoidXenoOrgan
   parent: BaseItem
   abstract: true
   components:
@@ -9,17 +31,10 @@
   - type: Organ
   - type: Extractable
     grindableSolutionName: organ
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      organ:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: FluorosulfuricAcidHumanoidXeno
-          Quantity: 5
+    - SolutionSunriseOrganNutriment
+    - SolutionHumanoidXenoFood
   - type: FlavorProfile
     flavors:
       - people
@@ -29,7 +44,7 @@
 
 - type: entity
   id: OrganHumanoidXenoBrain
-  parent: [BaseHumanoidXenoOrganUnGibbable, BaseOrganBrain]
+  parent: [BaseHumanoidXenoOrgan, SunriseOrganBaseBrain]
   name: brain
   description: The nexus of the alien mind. Thoughts you don't want to know.
   components:
@@ -46,24 +61,17 @@
   - type: Tag
     tags:
     - Meat
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      organ:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: GreyMatter
-          Quantity: 5
+    - SolutionSunriseOrganNutriment
+    - SolutionSunriseBrainFood
   - type: FlavorProfile
     flavors:
     - people
 
 - type: entity
   id: OrganHumanoidXenoTongue
-  parent: [BaseHumanoidXenoOrganUnGibbable, BaseOrganTongue]
+  parent: [BaseHumanoidXenoOrgan, SunriseOrganBaseTongue]
   name: tongue
   description: Long and flexible.
   components:
@@ -72,7 +80,7 @@
 
 - type: entity
   id: OrganHumanoidXenoAppendix
-  parent: [BaseHumanoidXenoOrganUnGibbable, BaseOrganAppendix]
+  parent: [BaseHumanoidXenoOrgan, SunriseOrganBaseAppendix]
   name: appendix
   description: An evolutionary greeting from the past.
   components:
@@ -84,7 +92,7 @@
 
 - type: entity
   id: OrganHumanoidXenoEars
-  parent: [BaseHumanoidXenoOrganUnGibbable, BaseOrganEars]
+  parent: [BaseHumanoidXenoOrgan, SunriseOrganBaseEars]
   name: ears
   description: Ultra-sensitive locators. Hear your fears.
   components:
@@ -93,7 +101,7 @@
 
 - type: entity
   id: OrganHumanoidXenoLungs
-  parent: [BaseHumanoidXenoOrganUnGibbable, BaseOrganLungs]
+  parent: [BaseHumanoidXenoOrgan, SunriseOrganBaseLungs]
   name: lungs
   description: They filter oxygen from the atmosphere and channel it into the bloodstream, where it is used as an electron carrier.
   components:
@@ -103,24 +111,15 @@
       - state: lung-r
   - type: Lung
   - type: Metabolizer
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      organ:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-      Lung:
-        maxVol: 100.0
-        canReact: false
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: FluorosulfuricAcidHumanoidXeno
-          Quantity: 5
+    - SolutionSunriseOrganNutriment
+    - SolutionLungGas
+    - SolutionHumanoidXenoFood
 
 - type: entity
   id: OrganHumanoidXenoHeart
-  parent: [BaseHumanoidXenoOrganUnGibbable, BaseOrganHeart]
+  parent: [BaseHumanoidXenoOrgan, SunriseOrganBaseHeart]
   name: xenomorph heart
   description: A powerful organ that pumps acidic blood through tough tissues and provides incredible stamina and strength to every xenomorph.
   components:
@@ -129,39 +128,30 @@
   - type: Metabolizer
     maxReagents: 2
     metabolizerTypes: [Animal]
-    groups:
-    - id: Medicine
-    - id: Poison
-    - id: Narcotic
+    stages: [ Bloodstream ]
 
 - type: entity
   id: OrganHumanoidXenoStomach
-  parent: [BaseHumanoidXenoOrganUnGibbable, BaseOrganStomach]
+  parent: [BaseHumanoidXenoOrgan, SunriseOrganBaseStomach]
   name: stomach
   description: A voracious pit.
   components:
   - type: Sprite
     state: stomach
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      stomach:
-        maxVol: 100
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: FluorosulfuricAcidHumanoidXeno
-          Quantity: 5
+    - SolutionSunriseOrganNutriment
+    - SolutionHumanoidXenoStomach
+    - SolutionHumanoidXenoFood
   - type: Stomach
   - type: Metabolizer
     maxReagents: 3
     metabolizerTypes: [Animal]
-    groups:
-    - id: Food
-    - id: Drink
+    stages: [ Digestion ]
 
 - type: entity
   id: OrganHumanoidXenoLiver
-  parent: [BaseHumanoidXenoOrganUnGibbable, BaseOrganLiver]
+  parent: [BaseHumanoidXenoOrgan, SunriseOrganBaseLiver]
   name: liver
   description: A powerful detoxifier that neutralizes dangerous substances with ease.
   components:
@@ -170,13 +160,12 @@
   - type: Metabolizer
     maxReagents: 1
     metabolizerTypes: [Human]
-    groups:
-    - id: Alcohol
-      rateModifier: 0.1
+    stages: [ Metabolites ]
+    updateIntervalMultiplier: 10
 
 - type: entity
   id: OrganHumanoidXenoKidneys
-  parent: [BaseHumanoidXenoOrganUnGibbable, BaseOrganKidneys]
+  parent: [BaseHumanoidXenoOrgan, SunriseOrganBaseKidneys]
   name: kidneys
   description: Paired filters, ruthlessly taking out anything superfluous.
   components:
@@ -187,13 +176,17 @@
   - type: Metabolizer
     maxReagents: 5
     metabolizerTypes: [Human]
-    removeEmpty: true
 
 - type: entity
   id: OrganHumanoidXenoEyes
-  parent: [BaseHumanoidXenoOrganUnGibbable, BaseOrganEyes]
+  parent: [BaseHumanoidXenoOrgan, SunriseOrganBaseEyes]
   name: eyes
   description: Eyes. They see
   components:
   - type: Sprite
     state: eyes
+  - type: VisualOrganMarkings
+    markingData:
+      layers:
+      - Eyes
+      group: HumanoidXeno

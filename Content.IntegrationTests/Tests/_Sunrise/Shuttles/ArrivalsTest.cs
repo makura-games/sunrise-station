@@ -1,3 +1,4 @@
+#nullable enable
 using System.Numerics;
 using Content.IntegrationTests.Pair;
 using Content.Server._Sunrise.Shuttles.Components;

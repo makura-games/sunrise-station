@@ -43,11 +43,13 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                 })
                 .ToList();
         }
-        
+
         //Sunrise-Start
-        private string GetLocalizedName(string displayName)
+        private static readonly Regex LocationKeyRegex = new(@"[^a-zA-Zа-яА-Я0-9\s]");
+
+        private static string GetLocalizedName(string displayName)
         {
-            var locationKey = $"location-{Regex.Replace(displayName, @"[^a-zA-Zа-яА-Я0-9\s]", string.Empty).Replace(" ", "-").ToLower()}";
+            var locationKey = $"location-{LocationKeyRegex.Replace(displayName, string.Empty).Replace(" ", "-").ToLower()}";
             var localizedName = Loc.GetString(locationKey);
             if (localizedName == locationKey)
             {

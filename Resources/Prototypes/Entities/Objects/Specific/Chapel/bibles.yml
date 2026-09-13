@@ -22,22 +22,34 @@
     delay: 10.0
   - type: Bible
     damage:
-      groups:
-        Brute: -15
-        Burn: -15
+      types:
+        Blunt: -5
+        Piercing: -5
+        Slash: -5
+        Heat: -5
+        Cold: -5
+        Shock: -5
     damageOnFail:
-      groups:
-        Brute: 15
-        Airloss: 15
+      types:
+        Blunt: 5
+        Piercing: 5
+        Slash: 5
+        Asphyxiation: 15
     damageOnUntrainedUse: ## What a non-chaplain takes when attempting to heal someone
       types:
         Heat: 10
     damageOnUnholyUse: ## What an unholy creature takes when picking up the bible
-      groups:
-        Burn: 30
+      types:
+        Heat: 7.5
+        Shock: 7.5
+        Cold: 7.5
+        Caustic: 7.5
     damageUnholy: ## What damage is dealt when a chaplain hits an unholy creature
-      groups:
-        Burn: 20
+      types:
+        Heat: 5
+        Shock: 5
+        Cold: 5
+        Caustic: 5
   - type: MeleeWeapon
     soundHit:
       collection: Punch
@@ -86,9 +98,11 @@
       types:
         Caustic: 20 ## ~15 dps
     damageOnFail:
-      groups:
-        Brute: 15
-        Airloss: 25
+      types:
+        Blunt: 5
+        Piercing: 5
+        Slash: 5
+        Asphyxiation: 25
     damageOnUntrainedUse:
       types:
         Caustic: 50
@@ -97,10 +111,11 @@
         Caustic: 50
     damageUnholy: ## What damage is dealt when a chaplain hits an unholy creature
       types:
-        types: 20
+        Caustic: 20
     failChance: 0
     locPrefix: "necro"
     healSound: "/Audio/Effects/lightburn.ogg"
+    healingLightEffect: EvilLightEffect
   - type: Summonable
     specialItem: SpawnPointGhostCerberus
     respawnTime: 300
@@ -186,3 +201,26 @@
     sprite: Objects/Specific/Chapel/ratvartablet.rsi
   - type: Item
     sprite: Objects/Specific/Chapel/ratvartablet.rsi
+
+- type: entity
+  id: HolyLightEffect
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: PointLight
+      enabled: true
+      radius: 1.5
+      energy: 20
+      color: lightgoldenrodyellow
+      netsync: false
+    - type: LightFade
+      duration: 0.7
+    - type: TimedDespawn
+      lifetime: 0.7
+
+- type: entity
+  id: EvilLightEffect
+  categories: [ HideSpawnMenu ]
+  parent: HolyLightEffect
+  components:
+    - type: PointLight
+      color: red

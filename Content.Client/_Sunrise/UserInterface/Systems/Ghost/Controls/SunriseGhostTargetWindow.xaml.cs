@@ -21,8 +21,8 @@ namespace Content.Client._Sunrise.UserInterface.Systems.Ghost.Controls;
 [GenerateTypedNameReferences]
 public sealed partial class SunriseGhostTargetWindow : DefaultWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IEntityManager _entity = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IEntityManager _entity = default!;
 
     private ChatIconsHelpersSystem _chatIcons = default!;
 

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Server.Actions;
 using Content.Server.Administration;
@@ -25,21 +25,21 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._Sunrise.Pets;
 
-public sealed class PettingSystem : SharedPettingSystem
+public sealed partial class PettingSystem : SharedPettingSystem
 {
-    [Dependency] private readonly HTNSystem _htn = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly AdminSystem _admin = default!;
-    [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly IConsoleHost _console = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+    [Dependency] private HTNSystem _htn = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private QuickDialogSystem _quickDialog = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private AdminSystem _admin = default!;
+    [Dependency] private GhostRoleSystem _ghostRole = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private IConsoleHost _console = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
 
     private const int MaxPetNameLenght = 30;
 

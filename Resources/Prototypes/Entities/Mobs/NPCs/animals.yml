@@ -91,7 +91,7 @@
 
 - type: entity
   name: bee
-  parent: [ SimpleMobBase, FlyingMobBase ]
+  parent: [ SolutionFood, SolutionTiny, SimpleMobBase, FlyingMobBase ]
   id: MobBee
   description: Nice to have, but you can't build a civilization on a foundation of honey alone.
   components:
@@ -134,12 +134,11 @@
         Base: dead
   - type: Extractable
     grindableSolutionName: food
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: GroundBee
-          Quantity: 1
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: GroundBee
+        Quantity: 1
   - type: Butcherable
     spawned:
     - id: null # Should give nothing when you butcher it so we set the item id it needs to spawn to null
@@ -293,7 +292,15 @@
     - Passive
   # Sunrise-start
   - type: Body
-    prototype: Chiken
+  - type: EntityTableContainerFill
+    containers:
+      body_organs: !type:AllSelector
+        children:
+        - id: OrganAnimalLungs
+        - id: OrganManeaterAnimalStomach
+        - id: OrganAnimalLiver
+        - id: OrganChikenHeart
+        - id: OrganAnimalKidneys
   - type: CanEscapeInventory
   - type: AttackOnInteractionFail
     attackMemoryLength: 10
@@ -356,7 +363,6 @@
   parent: FoodEgg
   suffix: Fertilized, Chicken
   components:
-  - type: Timer
   - type: TimedSpawner
     prototypes:
     - MobChicken
@@ -370,7 +376,7 @@
 
 - type: entity
   name: cockroach
-  parent: SimpleMobBase
+  parent: [SolutionFood, SolutionTiny, SimpleMobBase]
   id: MobCockroach
   description: This station is just crawling with bugs.
   components:
@@ -429,17 +435,15 @@
     baseDecayRate: 0.25
   - type: Extractable
     grindableSolutionName: food
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Slime
-          Quantity: 5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Slime
+        Quantity: 5
   - type: Butcherable
     spawned:
     - id: FoodMeatSlime
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Cockroach
   - type: Tag
     tags:
@@ -505,7 +509,7 @@
 
 - type: entity
   name: mothroach
-  parent: MobCockroach
+  parent: [ SunriseMothroachDarviniumBody, BaseMobMothroach, MobCockroach ] # Sunrise-Edit - подключаем метаболизатор Darvinium
   id: MobMothroach
   description: This is the adorable by-product of multiple attempts at genetically mixing mothpeople with cockroaches.
   components:
@@ -533,7 +537,7 @@
   - type: Speech
     speechVerb: Moth
     speechSounds: Squeak
-    allowedEmotes: ['Chitter', 'Squeak']
+    allowedEmotes: ['Chitter', 'Squeak', 'Flap']
   - type: FaxableObject
     insertingState: inserting_mothroach
   - type: MothAccent
@@ -578,7 +582,6 @@
     weightlessFriction: 1
     baseWeightlessModifier: 1
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Moth
   - type: Bloodstream
     bloodReferenceSolution:
@@ -609,6 +612,8 @@
       Female: UnisexMoth
       Unsexed: UnisexMoth
     wilhelmProbability: 0.001
+  - type: BodyEmotes
+    soundsId: MothBodyEmotes
   - type: MobPrice
     price: 150
   - type: Tag
@@ -620,8 +625,6 @@
   - type: NpcFactionMember
     factions:
     - Mouse
-  - type: Body
-    prototype: Mothroach
   - type: TypingIndicator
     proto: moth
   - type: Destructible
@@ -802,7 +805,6 @@
   parent: FoodEgg
   suffix: Fertilized, Duck
   components:
-    - type: Timer
     - type: TimedSpawner
       prototypes:
       - MobDuckMallard
@@ -816,7 +818,7 @@
 
 - type: entity
   name: butterfly
-  parent: [ SimpleMobBase, FlyingMobBase ]
+  parent: [ SolutionFood, SolutionTiny, SimpleMobBase, FlyingMobBase ]
   id: MobButterfly
   description: Despite popular misconceptions, it's not actually made of butter.
   components:
@@ -859,12 +861,11 @@
         Base: dead
   - type: Extractable
     grindableSolutionName: food
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 1
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 1
   - type: Butcherable
     spawned:
     - id: null # Should give nothing when you butcher it so we set the item id it needs to spawn to null
@@ -893,7 +894,7 @@
 
 - type: entity
   name: cow
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, BaseMobRuminant ]
   id: MobCow
   description: Moo.
   components:
@@ -934,16 +935,12 @@
         Base: dead
       Dead:
         Base: dead
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      udder:
-        maxVol: 500 #Sunrise-edit
-        reagents:
-        - ReagentId: Milk
-          Quantity: 30
+    - SolutionUdder
   - type: Udder
     reagentId: Milk
-    quantityPerUpdate: 50
+    quantityPerUpdate: 50 # Sunrise-edit
     growthDelay: 30
   - type: ExaminableHunger
   - type: Butcherable
@@ -966,8 +963,6 @@
   - type: NpcFactionMember
     factions:
     - Passive
-  - type: Body
-    prototype: AnimalRuminant
   - type: HTN
     rootTask:
       task: RuminantCompound
@@ -983,8 +978,20 @@
   # Sunrise-End
 
 - type: entity
+  parent: SolutionLarge
+  id: SolutionUdder
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: udder # TODO This should really use a different id...
+    solution:
+      reagents:
+      - ReagentId: Milk
+        Quantity: 30
+
+- type: entity
   name: crab
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, BaseMobHemocyanin ]
   id: MobCrab
   description: A folk legend goes around that his claw snaps spacemen out of existence over distasteful remarks. Be polite and tolerant for your own safety.
   components:
@@ -1050,8 +1057,6 @@
   - type: HTN
     rootTask:
       task: RuminantCompound
-  - type: Body
-    prototype: AnimalHemocyanin
   # Sunrise-start
   - type: CanEscapeInventory
   - type: AttackOnInteractionFail
@@ -1062,7 +1067,7 @@
 
 - type: entity
   name: goat
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, BaseMobRuminant ]
   id: MobGoat
   description: Her spine consists of long sharp segments, no wonder she is so grumpy.
   components:
@@ -1105,15 +1110,10 @@
         Base: dead
       Dead:
         Base: dead
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      udder:
-        maxVol: 250
-        reagents:
-        - ReagentId: MilkGoat
-          Quantity: 30
-      wool:
-        maxVol: 250
+    - SolutionUdderGoat
+    - SolutionWool
   - type: Udder
     reagentId: MilkGoat
     quantityPerUpdate: 25
@@ -1154,8 +1154,6 @@
   - type: NpcFactionMember
     factions:
     - Passive
-  - type: Body
-    prototype: AnimalRuminant
   - type: NPCRetaliation
     attackMemoryLength: 5
   - type: FactionException
@@ -1167,6 +1165,25 @@
   - type: AttackOnInteractionFail
     attackMemoryLength: 10
   # Sunrise-End
+
+- type: entity
+  parent: SolutionUdder
+  id: SolutionUdderGoat
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: MilkGoat
+        Quantity: 30
+
+- type: entity
+  parent: SolutionLarge
+  id: SolutionWool
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: wool
 
 # Note that we gotta make this bitch vomit someday when you feed it anthrax or sumthin. Needs to be a small item thief too and aggressive if attacked.
 - type: entity
@@ -1423,7 +1440,7 @@
 - type: entity
   name: genetic ancestor
   id: MobBaseAncestor
-  parent: [SimpleMobBase, StripableInventoryBase, BaseSpeciesPickupable] # Sunrise-Edit
+  parent: [BaseMobAnimal, SimpleMobBase, StripableInventoryBase, BaseSpeciesPickupable] # Sunrise-Edit
   description: The genetic bipedal ancestor of... Uh... Something. Yeah, there's definitely something on the station that descended from whatever this is.
   abstract: true
   components:
@@ -1464,26 +1481,20 @@
       state: body-overlay-2
       visible: false
     - map: [ "ears" ]
-    - map: [ "outerClothing" ] #Sunrise-edit
     - map: [ "id" ]
+    - map: [ "outerClothing" ]
     - map: [ "mask" ]
     - map: [ "head" ]
-    - map: [ "clownedon" ]
-      sprite: "Effects/creampie.rsi"
-      state: "creampie_human"
-      visible: false
   - type: Hands
+    activeHandId: Hand
+    hands:
+      Hand:
+        location: Left
   - type: ComplexInteraction
-  - type: GenericVisualizer
-    visuals:
-      enum.CreamPiedVisuals.Creamed:
-        clownedon:
-          True: {visible: true}
-          False: {visible: false}
-  - type: Body
-    prototype: Primate
-    requiredLegs: 1 # TODO: More than 1 leg
   - type: CreamPied
+    sprite:
+      sprite: Effects/creampie.rsi
+      state: creampie_monkey
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Monkey_burning
@@ -1521,7 +1532,10 @@
       - Passive
   - type: HTN
     rootTask:
-      task: SimpleHostileCompound
+      task: MonkeyCompound
+    blackboard:
+      NavInteract: !type:Bool
+        true
   - type: IdExaminable
   - type: Tag
     tags:
@@ -1540,6 +1554,8 @@
       - !type:WashCreamPie
   - type: Crawler
   - type: StatusIcon
+    bounds: -0.5,-0.5,0.5,0.5
+  - type: JobStatus # marks them as crew
   # Sunrise-start
   - type: AttackOnInteractionFail
     attackMemoryLength: 10
@@ -1550,7 +1566,7 @@
 - type: entity
   name: monkey
   id: MobMonkey
-  parent: MobBaseAncestor
+  parent: [ SunrisePrimateDarviniumBody, MobBaseAncestor ] # Sunrise-Edit - подключаем метаболизатор Darvinium
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   components:
   - type: NameIdentifier
@@ -1585,7 +1601,7 @@
 - type: entity
   name: monkey
   id: MobBaseSyndicateMonkey
-  parent: MobBaseAncestor
+  parent: [ SunrisePrimateDarviniumBody, MobBaseAncestor ] # Sunrise-Edit - подключаем метаболизатор Darvinium
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   suffix: syndicate base
   components:
@@ -1634,7 +1650,7 @@
 - type: entity
   name: kobold
   id: MobBaseKobold
-  parent: MobBaseAncestor
+  parent: [ SunriseKoboldDarviniumBody, MobBaseAncestor ] # Sunrise-Edit - подключаем метаболизатор Darvinium
   description: Cousins to the sentient race of lizard people, kobolds blend in with their natural habitat and are as nasty as monkeys; ready to pull out your hair and stab you to death.
   abstract: true
   components:
@@ -1709,10 +1725,6 @@
     - map: [ "id" ]
     - map: [ "mask" ]
     - map: [ "head" ]
-    - map: [ "clownedon" ]
-      sprite: "Effects/creampie.rsi"
-      state: "creampie_human"
-      visible: false
   - type: RandomSprite
     getAllGroups: true
     available:
@@ -1744,10 +1756,6 @@
     name: ghost-role-information-kobold-name
     description: ghost-role-information-kobold-description
     rules: ghost-role-information-nonantagonist-rules
-  # Sunrise Start
-  - type: Body
-    prototype: Kobold
-  # Sunrise-End
 
 - type: entity
   name: kobold
@@ -1810,13 +1818,11 @@
 
 - type: entity
   name: mouse
-  parent: SimpleMobBase
+  parent: [SimpleMobBase, BaseMobAnimal, SolutionVermin]
   id: MobMouse
   description: Squeak!
   components:
   - type: VentCrawler #Sunrise-edit
-  - type: Body
-    prototype: Mouse
   - type: GhostRole
     makeSentient: true
     allowSpeech: true
@@ -1847,8 +1853,6 @@
   - type: Item
     size: Tiny
     heldPrefix: 0
-  - type: ItemRepickupCooldown  # Sunrise-add
-    cooldown: 5                 # Sunrise-add
   - type: Clothing
     quickEquip: false
     sprite: Mobs/Animals/mouse.rsi
@@ -1923,12 +1927,6 @@
     baseDecayRate: 0.5 # I'm very hungry! Give me. The cheese.
   - type: Extractable
     grindableSolutionName: food
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 3
   - type: Butcherable
     spawned:
     - id: FoodMeatRat
@@ -1997,6 +1995,8 @@
       - !type:GibBehavior
         recursive: false
   # Sunrise-Start
+  - type: ItemRepickupCooldown
+    cooldown: 5
   - type: NightVision
   - type: HolidayVisuals
     holidays:
@@ -2006,6 +2006,17 @@
     sprite:
       festive: _Sunrise/Mobs/Animals/mouse_santa.rsi
   # Sunrise-End
+
+- type: entity
+  abstract: true
+  parent: [SolutionFood, SolutionTiny]
+  id: SolutionVermin
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 15
 
 - type: entity
   parent: MobMouse
@@ -2022,22 +2033,6 @@
         Asphyxiation: 4
         Slash: 7
         Blunt: 3
-
-- type: entity
-  parent: MobMouse
-  id: MobMouseAdmeme
-  suffix: Admeme
-  components:
-  # allow admeme mouse to eat pills
-  - type: IgnoreBadFood
-  # intended for swarms that eat pills so only temporary
-  - type: TimedDespawn
-    lifetime: 60
-  - type: Hunger
-    baseDecayRate: 10 # always hungry
-    starvingSlowdownModifier: 1
-  - type: Thirst
-    baseDecayRate: 10 # always thirsty
 
 - type: entity
   parent: MobMouse
@@ -2065,7 +2060,6 @@
       Dead:
         Base: splat-1
   - type: Item
-    size: Tiny
     heldPrefix: 1
 
 - type: entity
@@ -2094,7 +2088,6 @@
       Dead:
         Base: splat-2
   - type: Item
-    size: Tiny
     heldPrefix: 2
 
 - type: entity
@@ -2124,14 +2117,13 @@
       reagents:
       - ReagentId: UnstableMutagen
         Quantity: 50
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 3
-        - ReagentId: Uranium
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 5
+      - ReagentId: Uranium
+        Quantity: 10
   - type: Butcherable
     spawned:
     - id: FoodMeatRat
@@ -2139,7 +2131,6 @@
     - id: SheetUranium1
       amount: 1
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Zombie
 
 - type: entity
@@ -2194,7 +2185,6 @@
       - ReagentId: Blood
         Quantity: 150
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Scale
   - type: Tag
     tags:
@@ -2206,7 +2196,6 @@
   - type: NPCRetaliation
   - type: FactionException
   # Sunrise-End
-
 
 - type: entity
   name: slug
@@ -2553,8 +2542,8 @@
     angle: 0
     animation: WeaponArcBite
     damage:
-      groups:
-        Brute: 5
+      types:
+        Piercing: 5
   - type: Item
     size: Normal
     sprite: Mobs/Animals/grenadepenguin.rsi
@@ -2631,7 +2620,6 @@
       - ReagentId: Blood
         Quantity: 50
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Scale
   # Sunrise-Start
   - type: AttackOnInteractionFail
@@ -2644,7 +2632,7 @@
 # Code unique spider prototypes or combine them all into one spider and get a
 # random sprite state when you spawn it.
 - type: entity
-  parent: [ SimpleMobBase, MobCombat ]
+  parent: [ SimpleMobBase, BaseMobHemocyanin, MobCombat ]
   id: MobSpiderBase
   abstract: true
   components:
@@ -2666,18 +2654,14 @@
     - id: FoodMeatSpider
       amount: 2
   - type: CombatMode
-  - type: Body
-    prototype: AnimalHemocyanin
   - type: MobThresholds
     thresholds:
       0: Alive
       50: Dead # Sunrise-Edit
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      melee:
-        maxVol: 30
+    - SolutionVenomSpider
   - type: SolutionRegeneration
-    solution: melee
     generated:
       reagents:
       - ReagentId: Mechanotoxin
@@ -2728,13 +2712,15 @@
   - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute from base.yml.
     allowedStates:
     - Alive
-    damageCap: 89
     damage:
       types:
         Poison: -0.07
-      groups:
-        Brute: -0.07
-        Burn: -0.07
+        Blunt: -0.03
+        Slash: -0.03
+        Piercing: -0.03
+        Heat: -0.03
+        Cold: -0.03
+        Shock: -0.03
   # Sunrise-start
   - type: FootstepModifier
     footstepSoundCollection:
@@ -2750,6 +2736,11 @@
   - type: NPCRetaliation
   - type: FactionException
   # Sunrise-end
+
+- type: entity
+  parent: [SolutionWeapon, SolutionTiny]
+  id: SolutionVenomSpider
+  categories: [ HideSpawnMenu ]
 
 - type: entity
   parent: MobSpiderBase
@@ -2871,12 +2862,9 @@
         types:
           Piercing: 8
     # Sunrise edit start
-    - type: SolutionContainerManager
+    - type: SolutionManager
       solutions:
-        melee:
-          reagents:
-            - ReagentId: Laughter
-              Quantity: 50
+      - SolutionVenomClownSpider
     - type: MeleeChemicalInjector
       solution: melee
       transferAmount: 5
@@ -3172,6 +3160,11 @@
     price: 200
   - type: MessyDrinker
   - type: DogVision  # Sunrise-DogVision
+  # TODO: Fix the sprite offset
+  #- type: CreamPied
+  #  sprite:
+  #    sprite: Effects/creampie.rsi
+  #    state: creampie_corgi
 
 - type: entity
   parent: MobCorgiBase
@@ -3248,8 +3241,9 @@
       - ReagentId: DemonsBlood
         Quantity: 150
   - type: Damageable
-    damageContainer: BiologicalMetaphysical
     damageModifierSet: Infernal
+  - type: Injurable
+    damageContainer: BiologicalMetaphysical
   - type: Temperature
     currentTemperature: 310.15
     specificHeat: 42
@@ -3747,16 +3741,16 @@
     baseDecayRate: 0.3
   - type: Extractable
     grindableSolutionName: food
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-        - ReagentId: Blood
-          Quantity: 55
-        - ReagentId: Fat
-          Quantity: 5
+  - type: Solution
+    id: food
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
+      - ReagentId: Blood # TODO Instead of this, eat from the bloodstream directly
+        Quantity: 55
+      - ReagentId: Fat
+        Quantity: 5
   - type: Butcherable
     spawned:
     - id: FoodMeat
@@ -3898,7 +3892,15 @@
       task: RuminantCompound
     # Sunrise-start
   - type: Body
-    prototype: ManeaterAnimal
+  - type: EntityTableContainerFill
+    containers:
+      body_organs: !type:AllSelector
+        children:
+        - id: OrganAnimalLungs
+        - id: OrganManeaterAnimalStomach
+        - id: OrganAnimalLiver
+        - id: OrganPigHeart
+        - id: OrganAnimalKidneys
   - type: CanEscapeInventory
   - type: AttackOnInteractionFail
     attackMemoryLength: 10
@@ -3908,7 +3910,7 @@
 
 - type: entity
   name: diona nymph
-  parent: [SimpleMobBase, StripableInventoryBase]
+  parent: [BaseMobAnimal, SimpleMobBase, StripableInventoryBase]
   id: MobDionaNymph
   description: It's like a cat, only.... branch-ier.
   components:
@@ -4146,14 +4148,18 @@
             sprite: Mobs/Pets/displacements.rsi
             state: corgi_head_displacement
   - type: Hands # HANDS!
+    activeHandId: Right
+    hands:
+      Right:
+        location: Right
+      Left:
+        location: Left
   - type: Puller
   - type: Cuffable # bad dog!
   - type: BlockWriting # dogs can't write, paws unwieldy; mouth-writing is a myth
   - type: Stripping
   - type: ComplexInteraction
   # Implement custom borgi body type
-  - type: Body
-    prototype: SmartCorgi
   - type: RotationVisuals
     defaultRotation: 90
     horizontalRotation: 180
@@ -4166,8 +4172,9 @@
     - VimPilot
     - CanPilot
     - DoorBumpOpener
-  - type: StatusIcon # marks them as crew
+  - type: StatusIcon
     bounds: -0.5,-0.5,0.5,0.5
+  - type: JobStatus # marks them as crew
   - type: NpcFactionMember
     factions:
     - NanoTrasen
@@ -4202,6 +4209,7 @@
       baseWalkSpeed: 2
       baseSprintSpeed: 4
     - type: Damageable
-      damageContainer: Biological
       damageModifierSet: GorillaRampaging
+    - type: Injurable
+      damageContainer: Biological
 # Starlight-end

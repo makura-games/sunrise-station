@@ -71,9 +71,10 @@
   - type: ContainerFill
     containers:
       borg_brain:
-      - PositronicBrain
+      - Boris
       borg_module:
       - BorgModulePirate
+      - BorgModulePirateUtility
   - type: ItemSlots
     slots:
       cell_slot:

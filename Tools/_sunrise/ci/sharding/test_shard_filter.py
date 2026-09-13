@@ -14,6 +14,7 @@ from xml.sax.saxutils import escape
 
 
 PARAMETERIZED_CASE_SPLIT_THRESHOLD = 256
+PROFILE_MATRIX_BATCH_RUNS = 25
 TIMINGS_SCHEMA_VERSION = 1
 MIN_RECORDED_SECONDS = 0.000001
 TIMINGS_PATH = Path(__file__).with_name("integration_test_timings.json")
@@ -114,13 +115,17 @@ def extract_groups(tests, timings, total_shards):
         method_cases.setdefault((fixture, method, full_method), []).append(test)
 
     estimates = {}
+    unmeasured_methods = set()
     total_seconds = 0.0
     for key, cases in method_cases.items():
         full_method = key[2]
         method_default = timings["methodCaseSeconds"].get(full_method)
         exact = timings["caseSeconds"]
+        unmeasured_method = method_default is None and not any(test in exact for test in cases)
+        if unmeasured_method:
+            unmeasured_methods.add(key)
 
-        if method_default is None and not any(test in exact for test in cases):
+        if unmeasured_method:
             method_total = max(
                 timings["defaultMethodSeconds"],
                 len(cases) * timings["defaultCaseSeconds"],
@@ -136,10 +141,12 @@ def extract_groups(tests, timings, total_shards):
     target_seconds = total_seconds / total_shards
     group_counts = {}
     group_seconds = {}
-    for (fixture, method, full_method), cases in method_cases.items():
-        case_estimates = estimates[(fixture, method, full_method)]
+    for key, cases in method_cases.items():
+        fixture, method, full_method = key
+        case_estimates = estimates[key]
         split_cases = len(set(cases)) > 1 and (
-            len(cases) > PARAMETERIZED_CASE_SPLIT_THRESHOLD
+            key in unmeasured_methods
+            or len(cases) > PARAMETERIZED_CASE_SPLIT_THRESHOLD
             or sum(case_estimates) > target_seconds
         )
 
@@ -220,6 +227,17 @@ def distribute_groups(group_counts, group_seconds, total):
         shard_seconds[lightest] += group_seconds[group]
 
     return shards, shard_seconds
+
+
+def build_profile_matrices(profile_runs, total_shards):
+    """Строит две матрицы профилирования в пределах лимита GitHub Actions."""
+    entries = [
+        {"profile_run": profile_run, "shard": shard}
+        for profile_run in range(1, profile_runs + 1)
+        for shard in range(total_shards)
+    ]
+    split = PROFILE_MATRIX_BATCH_RUNS * total_shards
+    return {"include": entries[:split]}, {"include": entries[split:]}
 
 
 def _parse_trx_duration(value):
@@ -330,6 +348,32 @@ def build_timing_config(tests, observations, profile_runs, commit, source_run_id
     return config, missing
 
 
+def load_observations(directory, tests):
+    """Объединяет результаты разных шардов по тесту и номеру повтора."""
+    test_set = set(tests)
+    observations = {}
+    for path in Path(directory).glob("*.json"):
+        try:
+            sample = json.loads(path.read_text(encoding="utf-8"))
+            profile_run = sample["profileRun"]
+            values = sample["caseSeconds"]
+            if (
+                not isinstance(profile_run, int)
+                or isinstance(profile_run, bool)
+                or profile_run <= 0
+            ):
+                raise ValueError("profileRun must be a positive integer")
+            if not isinstance(values, dict):
+                raise ValueError("caseSeconds must be an object")
+        except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as error:
+            print(f"Warning: ignoring invalid sample {path}: {error}", file=sys.stderr)
+            continue
+        for test, seconds in values.items():
+            if test in test_set and _positive_number(seconds):
+                observations.setdefault(test, {}).setdefault(profile_run, seconds)
+    return observations
+
+
 def cmd_generate():
     if len(sys.argv) != 4:
         print(f"Usage: {sys.argv[0]} generate <total-shards> <output-dir>", file=sys.stderr)
@@ -383,9 +427,10 @@ def cmd_generate():
 
 
 def cmd_matrix():
-    if len(sys.argv) != 5:
+    if len(sys.argv) != 6:
         print(
-            f"Usage: {sys.argv[0]} matrix <profile-runs> <max-parallel> <github-output>",
+            f"Usage: {sys.argv[0]} matrix <profile-runs> <max-parallel> "
+            "<total-shards> <github-output>",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -393,8 +438,12 @@ def cmd_matrix():
     try:
         profile_runs = int(sys.argv[2])
         max_parallel = int(sys.argv[3])
+        total_shards = int(sys.argv[4])
     except ValueError:
-        print("Error: profile-runs and max-parallel must be integers", file=sys.stderr)
+        print(
+            "Error: profile-runs, max-parallel and total-shards must be integers",
+            file=sys.stderr,
+        )
         sys.exit(1)
 
     if profile_runs not in (10, 20, 30, 50):
@@ -403,11 +452,19 @@ def cmd_matrix():
     if not 1 <= max_parallel <= 20:
         print("Error: max-parallel must be between 1 and 20", file=sys.stderr)
         sys.exit(1)
+    if total_shards <= 0:
+        print("Error: total-shards must be a positive integer", file=sys.stderr)
+        sys.exit(1)
 
-    # ponytail: одно задание — один полный повтор; матрица не разрастается по числу шардов.
-    matrix = {"profile_run": list(range(1, profile_runs + 1))}
-    with open(sys.argv[4], "a", encoding="utf-8") as output:
-        output.write(f"matrix={json.dumps(matrix, separators=(',', ':'))}\n")
+    matrix_first, matrix_second = build_profile_matrices(profile_runs, total_shards)
+    with open(sys.argv[5], "a", encoding="utf-8") as output:
+        output.write(
+            f"matrix_first={json.dumps(matrix_first, separators=(',', ':'))}\n"
+        )
+        output.write(
+            f"matrix_second={json.dumps(matrix_second, separators=(',', ':'))}\n"
+        )
+        output.write(f"has_second={str(bool(matrix_second['include'])).lower()}\n")
         output.write(f"max_parallel={max_parallel}\n")
 
 
@@ -456,20 +513,7 @@ def cmd_aggregate():
     if not tests:
         print("Error: no tests discovered from discovery log", file=sys.stderr)
         sys.exit(1)
-    test_set = set(tests)
-
-    observations = {}
-    for path in Path(sys.argv[3]).glob("*.json"):
-        try:
-            sample = json.loads(path.read_text(encoding="utf-8"))
-            profile_run = int(sample["profileRun"])
-            values = sample["caseSeconds"]
-        except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as error:
-            print(f"Warning: ignoring invalid sample {path}: {error}", file=sys.stderr)
-            continue
-        for test, seconds in values.items():
-            if test in test_set and _positive_number(seconds):
-                observations.setdefault(test, {}).setdefault(profile_run, seconds)
+    observations = load_observations(sys.argv[3], tests)
 
     try:
         config, missing = build_timing_config(

@@ -19,7 +19,6 @@
   startingGear: CMOGear
   icon: "JobIconChiefMedicalOfficer"
   supervisors: job-supervisors-captain
-  canBeAntag: true # Sunrise-Edit
   radioBold: true # Sunrise-Edit
   displayWeight: 60 # Sunrise-Edit
   # Sunrise-Start
@@ -48,7 +47,6 @@
   equipment:
     id: CMOPDA
     ears: ClothingHeadsetCMO
-    belt: ClothingBeltMedicalFilled
   storage:
     back:
     - Flash

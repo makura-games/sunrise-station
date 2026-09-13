@@ -5,9 +5,9 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server.CartridgeLoader.Cartridges;
 
-public sealed class PlantAnalyzerCartridgeSystem : EntitySystem
+public sealed partial class PlantAnalyzerCartridgeSystem : EntitySystem
 {
-    [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoaderSystem = null!;
+    [Dependency] private CartridgeLoaderSystem _cartridgeLoaderSystem = null!;
 
     public override void Initialize()
     {

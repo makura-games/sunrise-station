@@ -120,8 +120,9 @@
   - type: Repairable
     doAfterDelay: 5 # Sunrise-Edit
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: RGlass
+  - type: Injurable
+    damageContainer: StructuralInorganic
 
 - type: entity
   id: PlastitaniumWindowDiagonalBase
@@ -217,5 +218,6 @@
   - type: Repairable
     doAfterDelay: 5 # Sunrise-Edit
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: RGlass
+  - type: Injurable
+    damageContainer: StructuralInorganic

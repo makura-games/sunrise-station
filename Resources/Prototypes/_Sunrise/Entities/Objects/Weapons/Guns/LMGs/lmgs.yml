@@ -136,7 +136,6 @@
         priority: 2
         whitelist:
           tags:
-          - MagazineRPD
           - LightRifleHeavy
       gun_chamber:
         name: Chamber
@@ -191,9 +190,9 @@
   - type: Gun
     minAngle: 6
     maxAngle: 90
-    angleIncrease: 2
+    angleIncrease: 4
     angleDecay: 60
-    fireRate: 12
+    fireRate: 11
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/LMGs/shot.ogg
       params:
@@ -242,80 +241,10 @@
   - type: HeldSpeedModifier
 
 - type: entity
-  name: DL6902 machine gun
-  id: WeaponDL6902
-  parent: BaseWeaponLightMachineGun
-  description: Cybersun heavy machine gun.
-  components:
-  - type: Item
-    size: Huge
-    shape:
-    - 0,0,6,3
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/LMGs/dl6902.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-3
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: GunWieldBonus
-    minAngle: 0
-    maxAngle: 0
-  - type: Gun
-    minAngle: 12
-    maxAngle: 90
-    angleIncrease: 1.75
-    angleDecay: 35
-    fireRate: 8
-    selectedMode: FullAuto
-    availableModes:
-      - FullAuto
-    soundGunshot:
-      collection: m249
-      params:
-        volume: 10
-    soundEmpty:
-      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
-  - type: MagazineVisuals
-    magState: mag
-    steps: 4
-    zeroVisible: true
-  - type: Appearance
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineDl6902
-        insertSound: /Audio/Weapons/Guns/MagIn/hpistol_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazineDl6902
-            - MagazineRPD
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgeLightRifleSP
-        priority: 1
-        whitelist:
-          tags:
-            - CartridgeLightRifle
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.85
-    sprintModifier: 0.85
-  - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
-  - type: HeldSpeedModifier
-  - type: GunRequiresWield
-  - type: StaticPrice
-    price: 10000
-
-- type: entity
-  name: L6 SAW
+  name: L6 MAX
   id: WeaponLightMachineGunL6Max
   parent: WeaponLightMachineGunL6
-  description: Developed by Waffle Corp, the L6 Squad Automatic Weapon is a deadly light machine gun often used by the Gorlex Marauders. Although bulky and cumbersome, its heavy barrel and high ammo capacity make it perfect for suppressing combatants with a hail of bullets. Feeds from .30 ammo belts.
+  description: Developed by Waffle Corporation, the L6 MAX is a heavily reinforced modification of the L6 machine gun that has gained popularity among the elite of the Gorlex Marauders. Its reinforced barrel and powerful .308 caliber allow it not only to suppress enemies with a hail of fire, but also to tear their cover to splinters. Feeds from .308 ammunition belts.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/LMGs/l6.rsi
@@ -343,9 +272,28 @@
       path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
     soundBoltOpened:
       path: /Audio/Weapons/Guns/Cock/shotgun_open.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RifleHeavyMagazineSP
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineMachineGunMG42
+          - MagazineMachineGunHeavyRifle
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeRifleHeavySP
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeHeavyRifle
   - type: SpeedModifiedOnWield
-    walkModifier: 0.90
-    sprintModifier: 0.90
+    walkModifier: 0.85
+    sprintModifier: 0.85
   - type: GunRequiresWield
   - type: ClothingSpeedModifier
     walkModifier: 1
@@ -357,9 +305,9 @@
   - type: Gun
     minAngle: 24
     maxAngle: 35
-    angleIncrease: 2
+    angleIncrease: 4
     angleDecay: 18
-    fireRate: 8
+    fireRate: 6
     soundGunshot:
       collection: m249 # Sunrise-Edit
       params:
@@ -367,5 +315,13 @@
         pitch: 1.1
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 4
-    pvsIncrease: 0.4
+    maxOffset: 2
+    pvsIncrease: 0.2
+  - type: KnockbackByUserTag
+    doestContain:
+      Resomi:
+        knockback: 2
+        staminaMultiplier: 15
+      Felinid:
+        knockback: 1 #half of what resomi take
+        staminaMultiplier: 15

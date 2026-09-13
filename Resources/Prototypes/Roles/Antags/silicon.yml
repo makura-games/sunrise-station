@@ -6,3 +6,50 @@
   playTimeTracker: AntagSubvertedSilicon # Sunrise-Edit
   objective: roles-antag-subverted-silicon-objective
   storytellerStress: 2.0 # Sunrise-Edit
+
+- type: antag
+  id: GenericSiliconAntagonist
+  name: roles-antag-generic-silicon-antagonist-name
+  antagonist: true
+  playTimeTracker: AntagSiliconAntagonist # Sunrise-Edit
+  objective: never-shown
+
+## Derelict Borgs
+
+- type: antagSpecifier
+  abstract: true
+  parent: RestrictedAntag
+  id: DerelictCyborg
+  pickPlayer: false
+  prefRoles:
+  - GenericSiliconAntagonist
+
+- type: antagSpecifier
+  parent: DerelictCyborg
+  id: DerelictGenericCyborg
+  spawnerPrototype: SpawnPointGhostDerelictCyborg
+
+- type: antagSpecifier
+  parent: DerelictCyborg
+  id: DerelictEngineeringCyborg
+  spawnerPrototype: SpawnPointGhostDerelictEngineeringCyborg
+
+- type: antagSpecifier
+  parent: DerelictCyborg
+  id: DerelictJanitorCyborg
+  spawnerPrototype: SpawnPointGhostDerelictJanitorCyborg
+
+- type: antagSpecifier
+  parent: DerelictCyborg
+  id: DerelictMedicalCyborg
+  spawnerPrototype: SpawnPointGhostDerelictMedicalCyborg
+
+- type: antagSpecifier
+  parent: DerelictCyborg
+  id: DerelictMiningCyborg
+  spawnerPrototype: SpawnPointGhostDerelictMiningCyborg
+
+- type: antagSpecifier
+  parent: DerelictCyborg
+  id: DerelictSyndicateAssaultCyborg
+  spawnerPrototype: SpawnPointGhostDerelictSyndicateAssaultCyborg

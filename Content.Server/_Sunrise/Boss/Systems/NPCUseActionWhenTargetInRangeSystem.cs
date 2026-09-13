@@ -9,11 +9,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.Boss.Systems;
 
-public sealed class NPCUseActionWhenTargetInRangeSystem : EntitySystem
+public sealed partial class NPCUseActionWhenTargetInRangeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

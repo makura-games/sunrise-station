@@ -9244,7 +9244,6 @@ entities:
   - uid: 2962
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 50.5,41.5
       parent: 2
 - proto: CyberPen
@@ -11134,7 +11133,7 @@ entities:
     - type: Transform
       pos: 5.6260986,45.23195
       parent: 2
-- proto: HeadHuman
+- proto: OrganHumanHead
   entities:
   - uid: 1669
     components:
@@ -11155,7 +11154,7 @@ entities:
     - type: Transform
       pos: 3.4219832,45.190285
       parent: 2
-- proto: HeadReptilian
+- proto: OrganReptilianHead
   entities:
   - uid: 1670
     components:
@@ -11169,7 +11168,7 @@ entities:
     - type: Transform
       pos: 4.0886497,45.384727
       parent: 2
-- proto: HeadSlime
+- proto: OrganSlimePersonHead
   entities:
   - uid: 1672
     components:
@@ -23450,7 +23449,7 @@ entities:
     - type: Transform
       pos: 30.504028,27.632332
       parent: 2
-- proto: WeaponPistolHIB88M4
+- proto: WeaponPistolViper
   entities:
   - uid: 823
     components:
@@ -23502,7 +23501,7 @@ entities:
     - type: Transform
       pos: 7.5157814,33.10359
       parent: 2
-- proto: WeaponShotgunCombat
+- proto: WeaponShotgunEnforcer
   entities:
   - uid: 3710
     components:

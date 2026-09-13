@@ -23,16 +23,16 @@ using Content.Shared.Chat;
 
 namespace Content.Server._Sunrise.CarpQueen;
 
-public sealed class CarpQueenSystem : SharedCarpQueenSystem
+public sealed partial class CarpQueenSystem : SharedCarpQueenSystem
 {
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly HTNSystem _htn = default!;
-    [Dependency] private readonly CarpEggSystem _carpEggs = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly HungerSystem _hunger = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private HTNSystem _htn = default!;
+    [Dependency] private CarpEggSystem _carpEggs = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
 
     public override void Initialize()
     {

@@ -7010,16 +7010,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 15.5,-0.5
       parent: 2
-- proto: HeadVulpkanin
-  entities:
-  - uid: 1662
-    components:
-    - type: MetaData
-      desc: Eat me
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -13.4150715,-18.70814
-      parent: 2
 - proto: HighSecCaptainLocked
   entities:
   - uid: 1965

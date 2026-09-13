@@ -16,7 +16,6 @@
   overrideConsoleVisibility: false
   requireAdminNotify: true
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   alwaysUseSpawner: true
   radioBold: true
   alternativeTitles:
@@ -39,8 +38,8 @@
     back: ClothingBackpackSatchelHeadOfPrisonMetus
     neck: ClothingNeckCloakHOSCloak
     shoes: ClothingShoesBootsJack
-    pocket1: WeaponPistolDeagleMetus
-    pocket2: MagazineDeagle
+    pocket1: WeaponPistolDeagle
+    pocket2: MagazineMagnum
     outerClothing: ClothingOuterArmorRiot
 
 - type: chameleonOutfit

@@ -13,7 +13,7 @@ namespace Content.Server.Voting.Managers;
 
 public sealed partial class VoteManager
 {
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     private const string RegularVoteOptionId = "__regular__";
     private const string StorytellerVoteOptionId = "__storyteller__";

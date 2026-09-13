@@ -196,6 +196,8 @@
       - outerClothing
       checkTags:
       - FullBodyOuter
+      unequipSlots:
+      - socks
 
 - type: entity
   parent: BaseAction

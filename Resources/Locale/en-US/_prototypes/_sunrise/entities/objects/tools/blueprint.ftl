@@ -1,11 +1,9 @@
 ent-TechnologyDiskBlueprint = technology disk
     .desc = A disk for the R&D server containing research technology.
-ent-BlueprintMagAsh12Slug = ash-12 magazine (12g slug) blueprint
-    .desc = A blueprint with a schematic of an ash-12 magazine with slugs. It can be inserted into an autolathe and security fabricator.
-ent-BlueprintMagAsh12Beanbag = ash-12 magazine beanbag blueprint
-    .desc = A blueprint with a schematic of an ash-12 magazine with beanbag. It can be inserted into an autolathe and security fabricator.
-ent-BlueprintMagAsh12Flare = ash-12 magazine flare blueprint
-    .desc = A blueprint with a schematic of an ash-12 magazine with flare. It can be inserted into an autolathe and security fabricator.
+ent-BlueprintMagAsh12Basic = ash-12 magazine blueprint
+    .desc = A blueprint with a schematic of an ash-12 magazine with all basic. It can be inserted into an autolathe and security fabricator.
+ent-BlueprintMagazineGarand = Garand clip blueprint
+    .desc = A blueprint for producing loaded .308 Garand clips in an autolathe.
 ent-BlueprintImplanterExtractor = { ent-TechnologyDiskBlueprint }
     .desc = { ent-TechnologyDiskBlueprint.desc }
 ent-BlueprintProtoAdrenalImplant = proto-adrenal implant blueprint

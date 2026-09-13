@@ -26,21 +26,30 @@
     spawned:
     - id: MaterialCloth1
       amount: 1
+  - type: PhysicalComposition
+    materialComposition:
+      Cloth: 50
+  - type: Tag
+    tags:
+    - ClothMade
+    - Recyclable
 
 - type: entity
   abstract: true
-  parent: ClothingPantsBase
+  parent: ClothingPantsBaseButcherable
   id: ClothingPantsStorageBase
   components:
-  - type: Storage
-    grid:
-    - 0,0,0,0
-    maxItemSize: Tiny
+  - type: ItemSlots
+    slots:
+      storagebase:
+        insertSound:
+          collection: EquipSounds
+          params:
+            maxDistance: 3
+        whitelist:
+          sizes:
+          - Tiny
+          - Small
   - type: ContainerContainer
     containers:
-      storagebase: !type:Container
-        ents: []
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
+      storagebase: !type:ContainerSlot

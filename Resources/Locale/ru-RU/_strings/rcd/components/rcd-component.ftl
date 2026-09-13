@@ -26,7 +26,6 @@ rcd-component-cannot-build-on-occupied-tile-message = Здесь нельзя с
 rcd-component-cannot-build-identical-tile = Эта клетка уже тут имеется!
 
 ### Category names
-
 rcd-component-walls-and-flooring = Стены и полы
 rcd-component-windows-and-grilles = Окна и решётки
 rcd-component-airlocks = Шлюзы
@@ -34,7 +33,10 @@ rcd-component-electrical = Электроприборы
 rcd-component-lighting = Освещение
 
 ### Prototype names (note: constructable items will be puralized)
-
 rcd-component-deconstruct = демонтаж
 rcd-component-floor-steel = стальной пол
 rcd-component-plating = корпусное покрытие
+rcd-component-cannot-build-identical-entity = Там уже есть такой объект!
+
+
+### Category names

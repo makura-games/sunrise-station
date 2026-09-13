@@ -31,6 +31,7 @@
           Piercing: 1
           Heat: 1
     - type: Damageable
+    - type: Injurable
       damageContainer: Shield
     - type: ExaminableDamage
       messages: ShieldMessages
@@ -71,9 +72,10 @@
   components:
   - type: Repairable # Negative values represent healing
     damage:
-      groups:
-        Brute: -60 # 20 of each Brute Type - 20% of a basic shield HP
       types:
+        Blunt: -20
+        Slash: -20
+        Piercing: -20
         Heat: -20
     fuelCost: 10 # 1/2 of a Welder for a full repair
     doAfterDelay: 5
@@ -171,6 +173,7 @@
           Blunt: 3
           Slash: 3
     - type: Damageable
+    - type: Injurable
       damageContainer: Shield
     - type: Destructible
       thresholds:
@@ -632,7 +635,8 @@
           Heat: 1
           Piercing: 1
     - type: Appearance
-    - type: Damageable # Sunrise-Edit: keep shield damage container on Damageable
+    - type: Damageable
+    - type: Injurable
       damageContainer: Shield
     - type: ExaminableDamage
       messages: EnergyShieldMessages

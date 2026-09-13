@@ -37,7 +37,6 @@ evolutionmenu-combat-strainedmuscles-desc =
         Без затрат.
 
 # укусы
-
 evolutionmenu-sting-blind-name = Ослепляющий укус
 evolutionmenu-sting-blind-desc =
     Тихо укусите органическую цель, полностью ослепив её на короткое время и сделав её близорукой, пока не будет применен окулин.
@@ -70,7 +69,6 @@ evolutionmenu-sting-armblade-desc =
         Стоимость: 50 химических веществ.
 
 # утилиты
-
 evolutionmenu-utility-panacea-name = Анатомическая панацея
 evolutionmenu-utility-panacea-desc =
     Излечите себя от болезней, недугов, радиации, токсинов, опьянения и повреждений мозга. В целом, покрывает то, что не лечит плоть.
@@ -109,3 +107,5 @@ evolutionmenu-utility-hivemindaccess-name = Доступ к коллективн
 evolutionmenu-utility-hivemindaccess-desc =
     Настройте наши химические рецепторы для связи с коллективным разумом, позволяя нам распознавать и общаться с другими оборотнями, которые также развили эту способность.
         Клавиша радиоканала по умолчанию: +г
+changeling-arm-blade-name = Выдвижной клинок на руке
+changeling-arm-blade-desc = Преобразуйте свою руку в устрашающий клинок из плоти. Можно переключать.

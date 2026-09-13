@@ -5,7 +5,7 @@ ent-ClothingUniformJumpsuitAerostatic = костюм воздухоплават�
 ent-ClothingUniformJumpsuitCentcomOfficerBlack = униформа офицера специальных операций
     .desc = Чёрная униформа Офицера Специальных Операций, ничего такого. Хотя... Если у вас есть время читать это, то уже поздно...
 ent-ClothingUniformJumpsuitCentcomAdmiral = униформа адмирала
-    .desc = Униформа, которую носят офицеры в звании адмирала флота NanoTrasen.
+    .desc = Униформа, которую носят офицеры в звании адмирала флота Нанотрейзен.
 ent-MagistratUniformSuit = костюм магистрата
     .desc = Увольте пару срочников!
 ent-ClothingUniformJumpsuitNtrep = костюм представителя NT
@@ -39,7 +39,7 @@ ent-ClothingUniformJumpsuitAdidasWhite = белая спортивка СССП
 ent-ClothingUniformJumpskirtChristmas = Рождественский женский комбинезон
     .desc = Украшен в тонах рождества, ушит специально для красивой части станции.
 ent-ClothingUniformJumpsuitBlackturtleneck = чёрная водолазка
-    .desc = Стильная водолазка с черными брюками. На бирке написано "Sokol & Kendrick production".
+    .desc = Стильная водолазка с черными брюками. На бирке написано "Сокол & Кендрик продакшн".
 ent-ClothingUniformMailCarrier = униформа почтальона
     .desc = Враг для собак номер один.
 ent-ClothingUniformJumpsuitMantis = униформа криминального богомола
@@ -91,13 +91,10 @@ ent-ClothingUniformPunksuit = панк-костюм
     .desc = Брось вызов гардеробу!
 ent-ClothingUSSPMarine = комбинезон космопехотинца СССП
     .desc = Полосатая тельняшка и простые брюки космопехоты СССП. Носятся под боевым скафандром, ведь даже броня должна знать, кто внутри.
-
 ent-ClothingUniformJumpsuitSoviet = советский комбинезон
     .desc = Стандартный комбинезон, который носят военнослужащие СССП.
-
 ent-ClothingUniformJumpsuitArbiter = форма Арбитра
     .desc = Черный китель с золотой прострочкой. Затянут так, что осанка становится прямой, как корешок новой книги. Главная беда - в нем почти невозможно вдохнуть или наклониться за упавшей ручкой без риска для швов.
-
 ent-ClothingUniformJumpsuitRedMist = костюм Красного Тумана
     .desc = Приталенный боевой костюм из тёмной ткани со светлыми металлическими акцентами. Рассчитан на движение, а не на утешение.
     

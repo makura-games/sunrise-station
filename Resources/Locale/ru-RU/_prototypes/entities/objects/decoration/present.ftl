@@ -13,7 +13,7 @@ ent-PresentRandom = { ent-PresentBase }
     .desc = { ent-PresentBase.desc }
     .suffix = Заполненный, Безопасный
 ent-PresentRandomCoal = { ent-PresentBase }
-    .suffix = Filled Coal
+    .suffix = Заполненный, Говно
     .desc = { ent-PresentBase.desc }
 ent-PresentRandomCash = { ent-PresentBase }
     .suffix = Заполненный, Деньги
@@ -23,4 +23,3 @@ ent-PresentTrash = обёрточная бумага
 ent-PresentRandomAsh = { ent-PresentBase }
     .suffix = Заполненный, Пепел
     .desc = { ent-PresentBase.desc }
-

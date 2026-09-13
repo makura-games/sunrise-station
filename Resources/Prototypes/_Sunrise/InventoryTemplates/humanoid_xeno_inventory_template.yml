@@ -29,9 +29,6 @@
     uiWindowPos: 1,1
     strippingWindowPos: 1,2
     displayName: Suit
-    blacklist:
-      tags:
-      - Hardsuit
   - name: gloves
     slotTexture: gloves
     slotFlags: GLOVES
@@ -64,6 +61,8 @@
     strippingWindowPos: 1,0
     displayName: Head
     blacklist:
+      components:
+      - BreathMask
       tags:
       - SecurityHelmet
       - HelmetEVA

@@ -87934,7 +87934,7 @@ entities:
     - type: Transform
       pos: 80.48647,32.56379
       parent: 2
-- proto: MagazineHIBrowning
+- proto: MagazinePistolHighCapacity
   entities:
   - uid: 11221
     mapInit: true
@@ -174215,7 +174215,6 @@ entities:
     - type: Transform
       pos: 41.5,24.5
       parent: 2
-    - type: Timer
   - uid: 28018
     components:
     - type: Transform
@@ -174333,7 +174332,6 @@ entities:
     - type: Transform
       pos: -29.5,16.5
       parent: 2
-    - type: Timer
   - uid: 28038
     components:
     - type: Transform
@@ -175234,7 +175232,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 57.5,6.5
       parent: 2
-    - type: Timer
   - uid: 28193
     components:
     - type: Transform
@@ -175388,7 +175385,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -19.5,1.5
       parent: 2
-    - type: Timer
   - uid: 28218
     components:
     - type: Transform
@@ -175537,7 +175533,6 @@ entities:
     - type: Transform
       pos: -7.5,2.5
       parent: 2
-    - type: Timer
   - uid: 28244
     components:
     - type: Transform
@@ -210131,7 +210126,7 @@ entities:
     - type: Transform
       pos: -87.24885,-12.430534
       parent: 2
-- proto: WeaponSubMachineGunMP38
+- proto: WeaponSubMachineGunForged
   entities:
   - uid: 34412
     components:

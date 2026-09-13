@@ -1,2 +1,2 @@
 ent-MobDisease = разумная болезнь
-    .desc = Plague inc 2.0
+  .desc = Чума 2.0

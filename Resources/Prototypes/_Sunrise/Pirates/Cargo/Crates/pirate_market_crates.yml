@@ -248,14 +248,12 @@
   parent: CratePiratePrivateSecure
   id: CratePirateRifleAmmo
   name: rifle ammo crate
-  description: Contains a stockpile of standard .30 rifle ammo in SP, HP, and FMJ loads.
+  description: Contains four boxes of standard .30 rifle ammo and two FMJ boxes.
   components:
   - type: StorageFill
     contents:
       - id: MagazineBoxLightRifleSP
-        amount: 2
-      - id: MagazineBoxLightRifleHP
-        amount: 2
+        amount: 4
       - id: MagazineBoxLightRifleFMJ
         amount: 2
 
@@ -582,7 +580,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingOuterHardsuitMurmillo
+      - id: SunriseClothingBackpackMessengerPirateMurmilloActive
 
 - type: entity
   parent: CratePiratePrivateSecure
@@ -866,9 +864,7 @@
   - type: StorageFill
     contents:
       - id: MagazineBoxRifleSP
-        amount: 2
-      - id: MagazineBoxRifleHP
-        amount: 2
+        amount: 4
       - id: MagazineBoxRifleFMJ
         amount: 2
 
@@ -892,9 +888,7 @@
   - type: StorageFill
     contents:
       - id: MagazineRifleSP
-        amount: 2
-      - id: MagazineRifleHP
-        amount: 2
+        amount: 4
       - id: MagazineRifleFMJ
         amount: 2
 
@@ -918,9 +912,7 @@
   - type: StorageFill
     contents:
       - id: MagazineBoxRifleMachineSP
-        amount: 2
-      - id: MagazineBoxRifleMachineHP
-        amount: 2
+        amount: 4
       - id: MagazineBoxRifleMachineFMJ
         amount: 2
 
@@ -988,9 +980,7 @@
   - type: StorageFill
     contents:
       - id: MagazineLightRifleBeltBox
-        amount: 2
-      - id: MagazineLightRifleBeltBoxHP
-        amount: 2
+        amount: 4
       - id: MagazineLightRifleBeltBoxFMJ
         amount: 2
 
@@ -1178,9 +1168,7 @@
   - type: StorageFill
     contents:
       - id: MagazineRifleHeavySP
-        amount: 2
-      - id: MagazineRifleHeavyHP
-        amount: 2
+        amount: 4
       - id: MagazineRifleHeavyFMJ
         amount: 2
 

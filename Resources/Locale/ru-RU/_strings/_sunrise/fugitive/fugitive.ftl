@@ -1,10 +1,10 @@
 station-event-fugitive-hunt-announcement = Пожалуйста, проверьте факс капитана для получения секретного сообщения.
-fugitive-spawn = { CAPITALIZE(THE($name)) } вылазит из под пола!
+fugitive-spawn = { CAPITALIZE($name) } вылазит из под пола!
 fugitive-announcement-GALPOL = ГАЛПОЛ
 fugi-report-ent-name = ДОНОС О БЕГЛЕЦЕ: { $name }
 fugi-report-title = РОЗЫСК: { $name }
 fugitive-report-first-line = Был замечен сбежавший заключённый { $name } в секторе. Он может быть прятан на одной из станций.
-fugitive-report-inhuman = { CAPITALIZE(THE($name)) } не гуманоид. У нас нет дополнительной информации.
+fugitive-report-inhuman = { CAPITALIZE($name) } не гуманоид. У нас нет дополнительной информации.
 fugitive-report-morphotype = МОРФОТИП: { $species }
 fugitive-report-sex-m = ПОЛ: М
 fugitive-report-sex-f = ПОЛ: Ж

@@ -3,7 +3,6 @@ using System.Linq;
 using Content.Server.Kitchen.Components;
 using Content.Server.Power.Components;
 using Content.Shared._Sunrise.Kitchen.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.FixedPoint;
 using Content.Shared.Kitchen;
 using Content.Shared.Stacks;
@@ -59,10 +58,7 @@ public sealed partial class MicrowaveSystem : EntitySystem
                 solidsDict.Add(solidID, amountToAdd);
             }
 
-            if (!TryComp<SolutionContainerManagerComponent>(item, out var solMan))
-                continue;
-
-            foreach (var (_, soln) in _solutionContainer.EnumerateSolutions((item, solMan)))
+            foreach (var (_, soln) in _solutionContainer.EnumerateSolutions(item))
             {
                 var solution = soln.Comp.Solution;
                 foreach (var (reagent, quantity) in solution.Contents)
@@ -104,12 +100,12 @@ public sealed partial class MicrowaveSystem : EntitySystem
                 return;
             }
 
-            if (_tag.HasTag(item, "Metal") && component.CanIrradiate)
+            if (_tag.HasTag(item, MetalTag) && component.CanIrradiate)
             {
                 malfunctioning = true;
             }
 
-            if (_tag.HasTag(item, "Plastic") && (component.CanHeat || component.CanIrradiate))
+            if (_tag.HasTag(item, PlasticTag) && (component.CanHeat || component.CanIrradiate))
             {
                 var junk = Spawn(component.BadRecipeEntityId, Transform(uid).Coordinates);
                 _container.Insert(junk, component.Storage);

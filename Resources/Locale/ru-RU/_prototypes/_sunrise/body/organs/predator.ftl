@@ -1,7 +1,5 @@
-ent-BasePredatorOrganUnGibbable = { ent-BaseItem }
+ent-BasePredatorOrgan = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
-ent-BasePredatorOrgan = { ent-BasePredatorOrganUnGibbable }
-    .desc = { ent-BasePredatorOrganUnGibbable.desc }
 ent-OrganPredatorBrain = мозг
     .desc = Нексус чужеродного разума. Мысли, которых вы не хотите знать.
 ent-OrganPredatorTongue = язык

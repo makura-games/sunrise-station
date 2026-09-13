@@ -4,27 +4,27 @@
 - files: ["tech_maint.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: [ "asteroid_red.png", "asteroid_tile.png", "elevator_shaft.png", "freezer.png", "green_circuit.png", "lino.png", "mono.png", "rock_vault.png", "showroom.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: [ "asteroid.png", "asteroid_dug.png", "asteroid0.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["steel.png", "dark.png", "hydro.png", "plating.png", "reinforced.png", "steel_dirty.png", "white.png", "bar.png", "laundry.png", "mime.png", "clown.png", "kitchen.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["blue_circuit.png", "cropped_parallax.png", "eighties.png", "gold.png", "grass.png", "ironsand1.png", "ironsand2.png", "ironsand3.png", "ironsand4.png", "junglegrass.png", "lattice.png", "plating.png", "reinforced.png", "silver.png", "snow.png", "wood.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["grass.png", "junglegrass.png", "grassdark.png", "grassjungle.png", "grasslight.png"]
   license: "CC-BY-SA-3.0"
@@ -34,37 +34,42 @@
 - files: ["super_reinforced.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["asteroid_plating.png, snow_plating.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["rglass.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["glass.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: [ "steel_diagonal.png", "steel_mini.png", "steel_offset.png", "steel_pavement.png", "white_diagonal.png", "white_mini.png", "white_offset.png", "white_pavement.png", "white_plastic.png", "dark_diagonal.png", "dark_mini.png", "dark_offset.png", "dark_pavement.png", "dark_plastic.png" ]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: [ "cafeteria.png", "checker_dark.png" ]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: [ "bar.png", "lime.png", "blue.png", "kitchen.png", "laundry.png", "mime.png", "steel.png", "steel_dirty.png", "steel_diagonal.png", "steel_mini.png", "steel_offset.png", "steel_pavement.png", "white.png", "white_diagonal.png", "white_mini.png", "white_offset.png", "white_pavement.png", "dark.png", "dark_diagonal.png", "dark_mini.png", "dark_offset.png", "dark_pavement.png", "hydro.png", "plastic.png", "dark_plastic.png", "white_plastic.png", "cafeteria.png", "checker_dark.png", "clown.png" ]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
+
+- files: [ "steel_vertical_slats_bordered.png", "steel_slats_continuous.png", "steel_horizontal_slats_bordered.png", "dark_vertical_slats_bordered.png", "dark_slats_continuous.png", "dark_horizontal_slats_bordered.png", "white_vertical_slats_bordered.png", "white_slats_continuous.png", "white_horizontal_slats_bordered.png" ]
+  license: "CC0-1.0"
+  copyright: "created by SeaWyrm (github Aearo-Deepwater)"
+  source: "https://github.com/space-wizards/space-station-14/pull/37832"
 
 - files: [ "steel_dirty.png" ]
   license: "CC-BY-SA-3.0"
@@ -74,72 +79,72 @@
 - files: ["arcadeblue.png", "arcadered.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["hull", "hull_reinforced.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["shuttleblue.png", "shuttleorange.png", "shuttlepurple.png", "shuttlered.png", "shuttlewhite.png", "shuttlegrey.png", "shuttleblack.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["deprecated.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["arcadeblue2.png", "boxing.png", "carpetclown.png", "carpetoffice.png", "gym.png", "metaldiamond.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["cave.png", "cavedrought.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["grassdark.png", "grasslight.png", "dirt.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["steel_maint.png", "grating_maint.png", "wood_tile.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["meat.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["wood_broken.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["chromite.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["mining_floor.png", "mining_floor_dark.png", "mining_floor_light.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["latticeTrain.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["wood_large.png"]
   license: "CLA"
   copyright: "Sprited by discord: odlieerr"
-  source: "https://github.com/space-sunrise/space-station-14"
+  source: "https://github.com/makura-games/sunrise-station"
 
 - files: ["xeno_flooring.png"]
   license: "CC-BY-SA-3.0"

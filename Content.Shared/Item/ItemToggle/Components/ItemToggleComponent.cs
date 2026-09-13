@@ -19,15 +19,6 @@ public sealed partial class ItemToggleComponent : Component
     [DataField, AutoNetworkedField]
     public bool Activated = false;
 
-
-    // Sunrise-start
-    /// <summary>
-    /// Можно ли нам активировать если предмет в руках
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool CanActivateInhand = true;
-    // Sunrise-end
-
     /// <summary>
     /// Can the entity be activated in the world.
     /// </summary>
@@ -91,9 +82,6 @@ public sealed partial class ItemToggleComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier? SoundFailToActivate;
-
-    [ViewVariables(VVAccess.ReadWrite), DataField]
-    public bool DeactivateUnequippedHand;
 }
 
 /// <summary>

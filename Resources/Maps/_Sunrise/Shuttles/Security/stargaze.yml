@@ -3472,7 +3472,7 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
-- proto: PowerCageHigh
+- proto: PowerCageOmega
   entities:
   - uid: 168
     components:
@@ -3607,7 +3607,6 @@ entities:
     - type: PoweredLight
       isBlinking: True
       lastGhostBlink: 624983.5
-    - type: Timer
   - uid: 621
     components:
     - type: Transform

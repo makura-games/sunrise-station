@@ -1,27 +1,53 @@
 - type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceAbductor
+  name: abductor appearance
+  components:
+  - type: InitialBody
+    organs:
+      Torso: TorsoAbductor
+      Head: HeadAbductor
+      ArmLeft: LeftArmAbductor
+      ArmRight: RightArmAbductor
+      HandRight: RightHandAbductor
+      HandLeft: LeftHandAbductor
+      LegLeft: LeftLegAbductor
+      LegRight: RightLegAbductor
+      FootLeft: LeftFootAbductor
+      FootRight: RightFootAbductor
+      Brain: OrganAbductorBrain
+      Eyes: OrganAbductorEyes
+      Heart: OrganAbductorHeart
+      Lungs: OrganAbductorLungs
+      Stomach: OrganAbductorStomach
+      Liver: OrganAbductorLiver
+      Kidneys: OrganAbductorKidneys
+
+- type: entity
   save: false
   name: Urist McAbductor
   parent:
   - MobBloodstream
   - MobFlammable
-  - BaseMobSpecies
+  - AppearanceAbductor
+  - BaseSpeciesMob
   id: BaseMobAbductor
   abstract: true
   components:
   - type: Muted
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Abductor
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers
   - type: Icon
     sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
     state: full
   - type: Fingerprint
   - type: Blindable
-  - type: Body
-    prototype: Abductor
-    requiredLegs: 2
   - type: FireVisuals
     alternateState: Standing
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: Tag
     tags:
@@ -38,12 +64,12 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 40
     damage:
       types:
         Heat: -0.14
-      groups:
-        Brute: -0.14
+        Blunt: -0.05
+        Slash: -0.05
+        Piercing: -0.04
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -54,9 +80,11 @@
     - Abductor
 
 - type: entity
-  parent: BaseSpeciesDummy
+  parent: AppearanceAbductor
   id: MobAbductorDummy
   categories: [ HideSpawnMenu ]
   components:
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Abductor
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers

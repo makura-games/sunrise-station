@@ -10,11 +10,10 @@ using Robust.Shared.Map;
 
 namespace Content.Server.Shuttles.Systems;
 
-// Sunrise-Edit - разделено с Sunrise partial для radar blips / laser traces.
 public sealed partial class RadarConsoleSystem : SharedRadarConsoleSystem
 {
-    [Dependency] private readonly ShuttleConsoleSystem _console = default!;
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private ShuttleConsoleSystem _console = default!;
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
 
     public override void Initialize()
     {

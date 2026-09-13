@@ -1,6 +1,6 @@
 
 - type: loadoutEffectGroup
-  id: BlueShieldLoadout20Hours
+  id: MisterBlueShit20
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -9,7 +9,7 @@
       time: 20h
 
 - type: loadoutEffectGroup
-  id: BlueShieldLoadout100Hours
+  id: MisterBlueShit100
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -53,25 +53,17 @@
   id: BlueShieldSwatHelmet
   effects:
   - !type:GroupLoadoutEffect
-    proto: BlueShieldLoadout20Hours
+    proto: MisterBlueShit20
   equipment:
-    head: ClothingHeadHelmetSwat
+    head: ClothingHeadHelmetBlueShield
 
 - type: loadout
   id: BlueShieldTSFMarineHelmet
   effects:
   - !type:GroupLoadoutEffect
-    proto: BlueShieldLoadout20Hours
+    proto: MisterBlueShit50
   equipment:
     head: ClothingHeadHelmetTSF
-
-- type: loadout
-  id: BlueShieldTSFMARSOCHelmet
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: BlueShieldLoadout100Hours
-  equipment:
-    head: ClothingHeadHelmetHardsuitTSF
 
 - type: loadout
   id: BlueShieldBackpack
@@ -99,19 +91,25 @@
     jumpsuit: ClothingUniformJumpsuitBlueShield
 
 - type: loadout
-  id: BlueShieldCoat
-  equipment:
-    neck: ClothingOuterCoatBlueshield
-
-- type: loadout
   id: BlueShieldTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueshieldJS
 
 - type: loadout
+  id: BlueShieldCoat
+  equipment:
+    neck: ClothingOuterCoatBlueshield
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MisterBlueShit50
+
+- type: loadout
   id: BlueShieldMantle
   equipment:
     neck: ClothingBSMantle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MisterBlueShit20
 
 - type: loadout
   id: BlueShieldWebbing
@@ -119,30 +117,22 @@
     belt: ClothingBeltBlueShieldWebbingFilled
 
 - type: loadout
-  id: BlueshieldACP14
+  id: BlueshieldLecterMk2
   inhand:
-  - ACP14Box
+  - WeaponRifleLecterMk2
 
 - type: loadout
   id: BlueshieldWT550
   inhand:
-  - ClothingBackpackDuffelWeaponSubMachineGunWt550
+  - WeaponSubMachineGunWt550
   effects:
   - !type:GroupLoadoutEffect
     proto: MisterBlueShit5
 
 - type: loadout
-  id: BlueshieldLecterMk2
+  id: BlueshieldWT550Blue
   inhand:
-  - ClothingBackpackDuffelWeaponRifleLecterFilled
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: MisterBlueShit5
-
-- type: loadout
-  id: BlueshieldVP78
-  inhand:
-  - VP78Box
+  - WeaponSubMachineGunWt550b
   effects:
   - !type:GroupLoadoutEffect
     proto: MisterBlueShit
@@ -150,10 +140,18 @@
 - type: loadout
   id: BlueshieldAsh12
   inhand:
-  - ClothingBackpackDuffelWeaponRifleAsh12
+  - Ash12Box
   effects:
   - !type:GroupLoadoutEffect
     proto: MisterBlueShit50
+
+- type: loadout
+  id: BlueshieldLecterXL8
+  inhand:
+  - WeaponRifleLecterXL8
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MisterBlueShit100
 
 - type: loadout
   id: BlueShieldBra

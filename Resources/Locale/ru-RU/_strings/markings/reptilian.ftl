@@ -75,3 +75,14 @@ marking-LizardChestBackspikes = Унатх, грудь, шипы на спине
 marking-LizardSnoutSplotch = Унатх, морда лица (Пятно)
 marking-LizardSnoutSplotch-snout_splotch_primary = Морда
 marking-LizardSnoutSplotch-snout_splotch_secondary = Нос
+marking-LizardTailAquatic-tail_aquatic = Хвост ящера (водный)
+marking-LizardTailAquatic = Хвост ящера (водный)
+
+marking-LizardChestFin-body_fin = Плавник ящера
+marking-LizardChestFin = Плавник ящера
+
+marking-LizardSnoutVisageSharp = Лицо ящера (острое)
+marking-LizardSnoutVisageSharp-visage_sharp = Лицо ящера (острое)
+
+marking-LizardSnoutVisageRound = Лицо ящера (круглое)
+marking-LizardSnoutVisageRound-visage_round = Лицо ящера (круглое)

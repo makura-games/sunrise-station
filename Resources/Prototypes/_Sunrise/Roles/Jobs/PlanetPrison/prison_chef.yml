@@ -16,7 +16,6 @@
   supervisors: job-supervisors-head-of-prison
   weight: 5
   alwaysUseSpawner: true
-  canBeAntag: false
   displayWeight: 40
   alternativeTitles:
   - job-alt-title-prison-cook

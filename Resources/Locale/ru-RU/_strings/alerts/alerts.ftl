@@ -80,3 +80,14 @@ alerts-changeling-chemicals-name = Химикаты
 alerts-changeling-chemicals-desc = Расходуйте химические вещества для использования своих способностей. Медленно регенерируются.
 alerts-changeling-biomass-name = Биомасса
 alerts-changeling-biomass-desc = Это ваше здоровье. Если оно достигнет 0 - это [color=red]конец игры[/color]. Поглощайте гуманоидов, чтобы восстановить часть его.
+alerts-knockdown-name = [color=yellow]Сбит с ног[/color]
+alerts-knockdown-desc = Ты [color=yellow]сбит с ног[/color]! Что-то подскользнулось или толкнуло тебя, затрудняя передвижение.
+
+alerts-rooted-name = Прирос
+alerts-rooted-desc = Ты прирос к земле. Ты не можешь скользить, но поглощаешь жидкости под собой.
+
+alerts-stealthy-name = Карманная кража
+alerts-stealthy-desc = Показывает, что ты сейчас крадёшься по карманам. Нажми, чтобы переключить.
+
+alerts-prying-name = Вскрытие
+alerts-prying-desc = Ты умеешь открывать двери, взламывая их через альтернативное взаимодействие.

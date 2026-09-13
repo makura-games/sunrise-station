@@ -152678,7 +152678,6 @@ entities:
       lastGhostBlink: 101159.45
     - type: ApcPowerReceiver
       powerLoad: 0
-    - type: Timer
   - uid: 19122
     components:
     - type: Transform
@@ -153878,7 +153877,6 @@ entities:
     - type: PoweredLight
       isBlinking: True
       lastGhostBlink: 42058.5
-    - type: Timer
   - uid: 19334
     components:
     - type: Transform

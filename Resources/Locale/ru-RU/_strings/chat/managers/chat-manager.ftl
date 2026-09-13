@@ -125,3 +125,11 @@ chat-speech-verb-name-electricity = Электричество
 chat-speech-verb-electricity-1 = трещит
 chat-speech-verb-electricity-2 = гудит
 chat-speech-verb-electricity-3 = скрипит
+chat-manager-send-hook-admin-wrap-message = ADMIN: [bold](D){$senderName}:[/bold] {$message}
+chat-speech-verb-vulpkanin = Вульпканин
+
+chat-speech-verb-name-wawa = Вава
+chat-speech-verb-wawa-1 = произносит
+chat-speech-verb-wawa-2 = сообщает
+chat-speech-verb-wawa-3 = объявляет
+chat-speech-verb-wawa-4 = размышляет

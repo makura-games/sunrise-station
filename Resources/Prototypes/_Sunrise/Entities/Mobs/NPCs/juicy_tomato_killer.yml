@@ -1,0 +1,62 @@
+- type: entity
+  parent: MobTomatoKiller
+  id: SunriseMobJuicyTomatoKiller # Fat ass tomato
+  name: juicy tomato killer
+  description: "Looks like it's not you eating tomatoes today, it's E X T R A   T H I C C tomatoes eating you."
+  components:
+  - type: Item
+    size: Large
+    shape:
+    - 2,2,4,3
+    - 0,0,3,3
+  - type: Sprite
+    scale: 1.15,1.15
+    sprite: _Sunrise/Mobs/Demons/juicy_tomato_killer.rsi
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: JuiceTomato
+        Quantity: 70
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatTomato
+      amount: 4
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 50
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodMeatTomato:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: gib
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      45: Dead
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/_Sunrise/Effects/Footsteps/timpani.ogg
+      params:
+        variation: 0.125
+  - type: Produce
+    seedId: SunriseJuicyTomatoKiller
+  - type: StaticPrice
+    price: 500
+  - type: GhostRole
+    prob: 0.15
+    makeSentient: true
+    allowSpeech: true
+    name: ghost-role-information-sunrise-juicy-tomato-killer-name
+    description: ghost-role-information-sunrise-juicy-tomato-killer-description
+    rules: ghost-role-information-familiar-rules
+    raffle:
+      settings: short

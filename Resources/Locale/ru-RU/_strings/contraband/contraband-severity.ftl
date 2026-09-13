@@ -13,3 +13,9 @@ contraband-department-plural = { $department }
 contraband-job-plural = { $job }
 contraband-examine-text-tsf = [color=cyan]Этот предмет является собственностью Транс-Солнечной Федерации![/color]
 contraband-examine-text-soviet = [color=orange]Этот предмет является нелегальной советской контрабандой![/color]
+
+contraband-examine-text-Highly-Illegal =
+    { $type ->
+        *[item] [color=crimson]Этот предмет является строго нелегальной контрабандой![/color]
+        [reagent] [color=crimson]Этот реагент является строго нелегальной контрабандой![/color]
+    }

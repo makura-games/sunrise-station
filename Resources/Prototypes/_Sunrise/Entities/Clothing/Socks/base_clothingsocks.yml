@@ -26,3 +26,10 @@
     spawned:
     - id: MaterialCloth1
       amount: 1
+  - type: PhysicalComposition
+    materialComposition:
+      Cloth: 50
+  - type: Tag
+    tags:
+    - ClothMade
+    - Recyclable

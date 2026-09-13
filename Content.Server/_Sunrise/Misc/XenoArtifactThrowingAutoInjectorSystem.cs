@@ -15,11 +15,9 @@ using Content.Shared.Humanoid;
 
 namespace Content.Server._Sunrise.Misc;
 
-public sealed class XenoArtifactThrowingAutoInjectorSystem : EntitySystem
+public sealed partial class XenoArtifactThrowingAutoInjectorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -44,14 +42,14 @@ public sealed class XenoArtifactThrowingAutoInjectorSystem : EntitySystem
     {
         var target = args.OtherEntity;
 
-        if (!HasComp<HumanoidAppearanceComponent>(target))
+        if (!HasComp<HumanoidProfileComponent>(target))
             return;
 
         if (HasComp<XenoArtifactThrowingAutoInjectorMarkComponent>(target))
             return;
 
-        EntityManager.AddComponent<XenoArtifactThrowingAutoInjectorMarkComponent>(target);
-        EntityManager.AddComponent<XenoArtifactComponent>(target);
+        AddComp<XenoArtifactThrowingAutoInjectorMarkComponent>(target);
+        AddComp<XenoArtifactComponent>(target);
         EnsureComp<UsedXenoArtifactThrowingAutoInjectorComponent>(uid);
         RemCompDeferred<EmbeddableProjectileComponent>(uid);
         comp.Used = true;

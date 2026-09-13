@@ -14,14 +14,10 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 1
@@ -42,14 +38,10 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 4
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
 
 - type: reagent
   id: ChangelingSting
@@ -84,21 +76,16 @@
   flavor: energydrink
   color: "#ffffbf"
   metabolisms:
-    Drink:
+    Digestion:
+      metabolites:
+        Theobromine: 0.2
       effects:
       - !type:SatiateThirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 2
         type: Remove
-      - !type:AdjustReagent
-        reagent: Theobromine
-        amount: 0.1
   fizziness: 0.4
 
 - type: reagent
@@ -154,19 +141,6 @@
   flavor: pwrgamesoda
   color: "#9385bf"
   fizziness: 0.9 # gamers crave the fizz
-  metabolisms:
-    Drink:
-      effects:
-      - !type:SatiateThirst
-        factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
-      - !type:ModifyStatusEffect
-        effectProto: StatusEffectDrowsiness
-        time: 1
-        type: Remove
 
 - type: reagent
   id: RootBeer
@@ -229,14 +203,10 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 4
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
 
 - type: reagent
   id: SpaceMountainWind
@@ -292,19 +262,12 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
+      metabolites:
+        Theobromine: 0.2
       effects:
       - !type:SatiateThirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
-      - !type:AdjustReagent
-        reagent: Theobromine
-        amount: 0.1
-    Poison:
-      effects:
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition

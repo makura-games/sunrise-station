@@ -1,4 +1,4 @@
-﻿using Content.Shared._Sunrise.AnnouncementSpeaker.Events;
+using Content.Shared._Sunrise.AnnouncementSpeaker.Events;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared._Sunrise.TTS;
 using Content.Shared.Ghost;
@@ -20,16 +20,16 @@ namespace Content.Client._Sunrise.TTS;
 /// Plays TTS audio in world
 /// </summary>
 // ReSharper disable once InconsistentNaming
-public sealed class TTSSystem : EntitySystem
+public sealed partial class TTSSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IResourceManager _res = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IDependencyCollection _dependencyCollection = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IResourceManager _res = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IDependencyCollection _dependencyCollection = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private SharedTransformSystem _xformSystem = default!;
 
     private ISawmill _sawmill = default!;
     private static readonly MemoryContentRoot ContentRoot = new();

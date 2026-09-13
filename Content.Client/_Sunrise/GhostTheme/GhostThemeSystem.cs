@@ -1,40 +1,66 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 using Content.Shared._Sunrise.GhostTheme;
-using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Client.GameObjects;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._Sunrise.GhostTheme;
 
-public sealed class GhostThemeSystem: EntitySystem
+public sealed partial class GhostThemeSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    private const string UpstreamGhostLayer = "ghostVariant";
+
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<GhostThemeComponent, AfterAutoHandleStateEvent>(OnInit);
+        SubscribeLocalEvent<GhostThemeComponent, ComponentShutdown>(OnShutdown);
     }
 
-    private void OnInit(EntityUid uid, GhostThemeComponent component, ref AfterAutoHandleStateEvent args)
+    private void OnInit(Entity<GhostThemeComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        if (component.GhostTheme == null
-            || !_prototypeManager.TryIndex<GhostThemePrototype>(component.GhostTheme, out var ghostThemePrototype))
+        if (!TryComp<SpriteComponent>(ent, out var sprite))
             return;
 
-        if (!EntityManager.TryGetComponent<SpriteComponent>(uid, out var sprite))
-            return;
-
-        if (!sprite.LayerMapTryGet(EffectLayers.Unshaded, out var layer))
+        if (ent.Comp.GhostTheme == null ||
+            !_proto.TryIndex<GhostThemePrototype>(ent.Comp.GhostTheme, out var ghostTheme) ||
+            ghostTheme.UseUpstreamSprite)
         {
-            sprite.LayerSetSprite(layer, ghostThemePrototype.Sprite);
-            sprite.LayerSetShader(layer, "unshaded");
-            sprite.LayerSetColor(layer, ghostThemePrototype.SpriteColor);
-            sprite.LayerSetScale(layer, ghostThemePrototype.Scale);
+            RestoreUpstreamSprite((ent, sprite));
+            return;
         }
 
-        sprite.DrawDepth = DrawDepth.Default + 11;
-        sprite.OverrideContainerOcclusion = true;
-        sprite.NoRotation = true;
+        var spriteEnt = (ent, sprite);
+        var layer = _sprite.LayerMapReserve(spriteEnt, GhostThemeVisualLayers.Theme);
+
+        _sprite.LayerSetSprite(spriteEnt, layer, ghostTheme.Sprite);
+        sprite.LayerSetShader(layer, "unshaded");
+        _sprite.LayerSetColor(spriteEnt, layer, ghostTheme.SpriteColor);
+        _sprite.LayerSetScale(spriteEnt, layer, ghostTheme.Scale);
+        _sprite.LayerSetVisible(spriteEnt, layer, true);
+
+        if (_sprite.LayerMapTryGet(spriteEnt, UpstreamGhostLayer, out var upstreamLayer, false))
+            _sprite.LayerSetVisible(spriteEnt, upstreamLayer, false);
+    }
+
+    private void OnShutdown(Entity<GhostThemeComponent> ent, ref ComponentShutdown args)
+    {
+        if (TryComp<SpriteComponent>(ent, out var sprite))
+            RestoreUpstreamSprite((ent, sprite));
+    }
+
+    private void RestoreUpstreamSprite(Entity<SpriteComponent?> ent)
+    {
+        _sprite.RemoveLayer(ent, GhostThemeVisualLayers.Theme, false);
+
+        if (_sprite.LayerMapTryGet(ent, UpstreamGhostLayer, out var upstreamLayer, false))
+            _sprite.LayerSetVisible(ent, upstreamLayer, true);
+    }
+
+    private enum GhostThemeVisualLayers : byte
+    {
+        Theme,
     }
 }

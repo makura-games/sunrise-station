@@ -219,6 +219,8 @@
   - type: ItemBorgModule
     hands:
     - item: JetpackBorg
+    - item: BorgHandheldGPSBasic
+    - item: HandHeldMassScannerBorg
   - type: BorgModuleIcon
     icon: { sprite: Objects/Tanks/Jetpacks/void.rsi, state: icon }
 
@@ -326,7 +328,6 @@
           components:
           - Flash
           - Battery
-          - BodyPart
           - TileFrictionModifier
           - CablePlacer
           - BorgModule
@@ -659,7 +660,6 @@
           - Organ
           - OrganDamage
           - FunctionalOrgan
-          - BodyPart
   - type: BorgModuleIcon
     icon:
       sprite: Interface/Actions/actions_borg.rsi

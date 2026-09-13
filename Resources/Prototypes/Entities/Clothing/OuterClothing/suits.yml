@@ -123,7 +123,6 @@
     slots: WITHOUT_POCKET
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
     - FullBodyOuter # Sunrise-Edit
   - type: HideLayerClothing
@@ -331,7 +330,6 @@
     slots: WITHOUT_POCKET
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
     - FullBodyOuter # Sunrise-Edit
   - type: AddAccentClothing

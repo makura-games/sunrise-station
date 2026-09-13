@@ -384,3 +384,21 @@ ui-options-admin-enable-overlay-starting-job = Показывать началь
 ui-options-admin-overlay-merge-distance = Дистанция группировки стека
 ui-options-admin-overlay-ghost-fade-distance = Расстояние затухания оверлея призраков от мыши
 ui-options-admin-overlay-ghost-hide-distance = Расстояние скрытия оверлея призраков от мыши
+ui-options-filter-label = Фильтр масштабирования:
+ui-options-filter-nearest = Ближайший (без сглаживания)
+ui-options-filter-bilinear = Билинейный (со сглаживанием)
+ui-options-ambient-occlusion = Показывать Ambient Occlusion
+
+ui-options-hold-to-attack-melee = Зажатие для атаки (ближний бой)
+ui-options-hold-to-attack-ranged = Зажатие для атаки (дальний бой)
+
+ui-options-function-toggle-knockdown = Переключить ползание
+
+ui-options-function-smart-equip-suit-storage = Умное снаряжение в крепление костюма
+ui-options-function-smart-equip-pocket1 = Умное снаряжение в карман 1
+ui-options-function-smart-equip-pocket2 = Умное снаряжение в карман 2
+ui-options-function-inspect-entity-tooltip = Открыть окно ViewVariables для сущности, на которую наведён курсор мыши.
+ui-options-function-inspect-server-component = Осмотреть серверный компонент
+ui-options-function-inspect-server-component-tooltip = Открыть окно ViewVariables с серверным компонентом, заданным командой «quickinspect», для сущности, на которую наведён курсор мыши.
+ui-options-function-inspect-client-component = Осмотреть клиентский компонент
+ui-options-function-inspect-client-component-tooltip = Открыть окно ViewVariables с клиентским компонентом, заданным командой «quickinspect», для сущности, на которую наведён курсор мыши.

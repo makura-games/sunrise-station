@@ -9,9 +9,9 @@
     noRot: false
   - type: Sprite
     drawdepth: FloorObjects
-  - type: SolutionContainerManager
-    solutions:
-      step: { maxVol: 2.5 }
+  - type: Solution
+    id: step
+    solution: { maxVol: 2.5 }
   - type: Footprint
     printType: Foot
   - type: Puddle
@@ -41,6 +41,6 @@
   components:
   - type: Footprint
     printType: DragMark
-  - type: SolutionContainerManager
-    solutions:
-      step: { maxVol: 5 }
+  - type: Solution
+    id: step
+    solution: { maxVol: 5 }

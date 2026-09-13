@@ -1,4 +1,4 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 using Content.Shared._Sunrise.GhostTheme;
 using Content.Shared._Sunrise.Pets;
 using Robust.Shared.Prototypes;
@@ -7,9 +7,9 @@ using Robust.Shared.Network;
 
 namespace Content.Server._Sunrise.SponsorValidation;
 
-public sealed class SponsorValidationSystem : EntitySystem
+public sealed partial class SponsorValidationSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
     private ISharedSponsorsManager? _sponsorsManager;
 
     public override void Initialize()

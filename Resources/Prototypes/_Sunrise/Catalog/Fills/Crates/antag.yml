@@ -188,14 +188,10 @@
           prob: 0.30
         - id: WeaponShotgunTrenchgun4034Sawn
           prob: 0.30
-        - id: WeaponSubMachineGunMP38
-          prob: 0.25
         - id: ToolboxElectricalTurret
           prob: 0.25
         - id: WeaponRevolverPython
           prob: 0.25
-        - id: WeaponSubMachineGunSkorpion
-          prob: 0.15
         - id: WeaponRifleSKM24Scrap
           prob: 0.15
         - id: WeaponSubMachineGunPPSH
@@ -203,8 +199,6 @@
         - id: WeaponIonRifle
           prob: 0.05
         - id: WeaponSyndieLaserGun
-          prob: 0.05
-        - id: WeaponRifleAKMU
           prob: 0.05
         - id: WeaponSyndieLaserPistolBiocode
           prob: 0.01

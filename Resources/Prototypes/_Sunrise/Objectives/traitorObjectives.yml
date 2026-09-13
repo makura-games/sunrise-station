@@ -1,3 +1,12 @@
+# Departmental abstracts
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealObjective
+  id: BaseTraitorSecurityStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ SecurityOfficer, HeadOfSecurity, Detective, Warden, Brigmedic, SecurityCadet ] # DutyOfficer
+
 - type: entity
   parent: BaseTraitorStealObjective
   id: MultiphaseEnergygunStealObjective
@@ -20,6 +29,15 @@
     - ChiefMedicalOfficer
   - type: StealCondition
     stealGroup: AdvancedDefibrillator
+
+- type: entity
+  parent: BaseTraitorSecurityStealObjective
+  id: HOSWeaponStealObjective
+  components:
+  - type: StealCondition
+    stealGroup: HOSWeapon
+  - type: Objective
+    difficulty: 1.7 # Good luck
 
 - type: entity
   categories: [ HideSpawnMenu ]

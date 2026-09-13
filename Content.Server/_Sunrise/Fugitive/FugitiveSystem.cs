@@ -19,16 +19,16 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._Sunrise.Fugitive
 {
-    public sealed class FugitiveSystem : EntitySystem
+    public sealed partial class FugitiveSystem : EntitySystem
     {
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-        [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly ChatSystem _chat = default!;
-        [Dependency] private readonly MindSystem _mindSystem = default!;
-        [Dependency] private readonly FaxSystem _faxSystem = default!;
-        [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
-        [Dependency] private readonly GameTicker _gameTicker = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+        [Dependency] private IGameTiming _timing = default!;
+        [Dependency] private ChatSystem _chat = default!;
+        [Dependency] private MindSystem _mindSystem = default!;
+        [Dependency] private FaxSystem _faxSystem = default!;
+        [Dependency] private SharedRoleSystem _roleSystem = default!;
+        [Dependency] private GameTicker _gameTicker = default!;
 
         [ValidatePrototypeId<EntityPrototype>]
         private const string MindRole = "MindRoleFugitive";
@@ -79,7 +79,7 @@ namespace Content.Server._Sunrise.Fugitive
         public bool SendFugiReport(EntityUid fugitive)
         {
             var report = GenerateFugiReport(fugitive);
-            var faxes = EntityManager.EntityQuery<FaxMachineComponent>();
+            var faxes = EntityQuery<FaxMachineComponent>();
             var wasSent = false;
             foreach (var fax in faxes)
             {
@@ -158,7 +158,7 @@ namespace Content.Server._Sunrise.Fugitive
             report.PushNewline();
 
 
-            if (!TryComp<HumanoidAppearanceComponent>(uid, out var humanoidComponent) ||
+            if (!TryComp<HumanoidProfileComponent>(uid, out var humanoidComponent) ||
                 !_prototypeManager.TryIndex(humanoidComponent.Species, out var species))
             {
                 report.AddMarkup(Loc.GetString("fugitive-report-inhuman", ("name", uid)));

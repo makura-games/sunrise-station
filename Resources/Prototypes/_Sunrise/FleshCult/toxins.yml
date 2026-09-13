@@ -49,7 +49,7 @@
   flavor: bitter
   color: "#c9000e"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:CauseFleshCultInfection
         conditions:

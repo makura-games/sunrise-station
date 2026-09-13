@@ -1,6 +1,6 @@
 ---
 name: ss14-standard-optimizations
-description: Practical skill in standard optimizations of Space Station 14: caching, reduction of allocations, abandonment of LINQ in hot-path, ActiveComponent approach, EntityQuery, order of components in EntityQueryEnumerator, ByRef events, DirtyField, early exits and cleaning of unnecessary components. Use it when designing, reviewing and optimizing ECS ​​code in server/shared/client.
+description: "Practical skill in standard optimizations of Space Station 14: caching, reduction of allocations, abandonment of LINQ in hot-path, ActiveComponent approach, EntityQuery, order of components in EntityQueryEnumerator, ByRef events, DirtyField, early exits and cleaning of unnecessary components. Use it when designing, reviewing and optimizing ECS code in server/shared/client."
 ---
 
 # SS14 Standard Optimizations
@@ -47,7 +47,8 @@ The main reference: the current behavior of the code. Documentation is an auxili
 **Pattern**
 1. Compute expensive invariants before nested loops (shapes, set of angles, fast-path flags).
 2. Maintain aggregates incrementally (for example, `TargetCount`, `BurstShotsCount`), rather than recalculating collections every tick.
-3. For frequent component checks, additionally cache `EntityQuery<T>`.
+3. Для частых проверок компонентов в `EntitySystem` дополнительно использовать dependency
+   `EntityQuery<T>`.
 
 **Anti-pattern**
 1. Call an expensive computation inside the inner loop.
@@ -206,24 +207,22 @@ var query = EntityQueryEnumerator<ActiveTimerTriggerComponent, TimerTriggerCompo
 1. We need discipline for state transitions (adding/removing a marker).
 2. The logic must remain consistent during shutdown/remove.
 
-### 5) EntityQuery for `TryComp/HasComp/Resolve` 🔎
+### 5) EntityQuery для `TryComp/HasComp/Resolve` 🔎
 
 **Pattern**
-1. For repeated checks of the component, cache `EntityQuery<T>`.
-2. Use `_query.TryComp/_query.HasComp/_query.Comp` instead of frequent general calls.
+1. В `EntitySystem` получать часто используемый `EntityQuery<T>` через `[Dependency]`.
+2. Использовать `_query.TryComp/_query.HasComp/_query.Comp` вместо частых общих вызовов.
+3. Перед добавлением поля проверять partial-файлы системы на query того же типа.
 
 **Anti-pattern**
-1. Call uncached checks in many places in a row.
-2. Ignore typed query in systems with a large number of hits.
+1. Присваивать query через `GetEntityQuery<T>()` в `Initialize()` новой системы.
+2. Добавлять `[Dependency] EntityQuery<T>` в команду, HTN-оператор, UI-контрол или оверлей.
+3. Путать сохранённый `EntityQuery<T>` с перечисляющими API `EntityQueryEnumerator<T...>()`,
+   `EntityQuery<T...>()` и `AllEntityQuery<T...>()`.
 
 **Code example**
 ```csharp
-private EntityQuery<TagComponent> _tagQuery;
-
-public override void Initialize()
-{
-    _tagQuery = GetEntityQuery<TagComponent>();
-}
+[Dependency] private EntityQuery<TagComponent> _tagQuery = default!;
 
 public bool HasTag(EntityUid uid, ProtoId<TagPrototype> tag)
 {
@@ -237,7 +236,10 @@ public bool HasTag(EntityUid uid, ProtoId<TagPrototype> tag)
 2. Fewer redundant operations during mass checks.
 
 **Limits of applicability**
-1. The gain is noticeable with frequent calls, and not in isolated places.
+1. Выигрыш заметен при частых вызовах, а не в единичных местах.
+2. Ленивая регистрация query существует только в системной dependency-коллекции. Вне
+   `EntitySystem` использовать прямой доступ через `IEntityManager`, либо передавать query через
+   конструктор вручную создаваемого объекта.
 
 ### 6) Component order in `EntityQueryEnumerator()` 📉
 

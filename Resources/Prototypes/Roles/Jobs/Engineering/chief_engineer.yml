@@ -19,7 +19,6 @@
   supervisors: job-supervisors-captain
   radioBold: true # Sunrise-Edit
   displayWeight: 70 # Sunrise-Edit
-  canBeAntag: true # RaMbUt878-edit
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-chief-mechanic

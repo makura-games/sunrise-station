@@ -11,12 +11,12 @@ using Content.Shared.DeviceNetwork.Components;
 
 namespace Content.Server.SurveillanceCamera;
 
-public sealed class SurveillanceCameraRouterSystem : EntitySystem
+public sealed partial class SurveillanceCameraRouterSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<SurveillanceCameraRouterComponent, ComponentInit>(OnInitialize);
@@ -243,8 +243,7 @@ public sealed class SurveillanceCameraRouterSystem : EntitySystem
         var payload = new NetworkPayload()
         {
             { DeviceNetworkConstants.Command, SurveillanceCameraSystem.CameraPingMessage },
-            { SurveillanceCameraSystem.CameraSubnetData, router.SubnetName },
-            { SurveillanceCameraSystem.CameraSubnetColor, router.SubnetColor} // Sunrise-edit
+            { SurveillanceCameraSystem.CameraSubnetData, router.SubnetName }
         };
 
         _deviceNetworkSystem.QueuePacket(uid, null, payload, router.SubnetFrequency);
@@ -257,8 +256,6 @@ public sealed class SurveillanceCameraRouterSystem : EntitySystem
         {
             return;
         }
-        payload[SurveillanceCameraSystem.CameraSubnetData] = router.SubnetFrequencyId; // Sunrise-edit
-        payload[SurveillanceCameraSystem.CameraSubnetColor] = router.SubnetColor; // Sunrise-edit
 
         foreach (var address in router.MonitorRoutes)
         {

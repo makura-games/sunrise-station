@@ -118,12 +118,13 @@
   abstract: true
   components:
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: Destructible
     thresholds:
     - trigger:
-        !type:DamageGroupTrigger # Sunrise-Edit
-        damageGroup: Brute # Sunrise-Edit
+        !type:DamageTypeTrigger
+        damageType: Blunt
         damage: 400
       behaviors:
       - !type:GibBehavior { }
@@ -172,6 +173,7 @@
       - ActionCritSuccumb
       - ActionCritFakeDeath
       - ActionCritLastWords
+  - type: StoreDamageTakenOnMind
   - type: Deathgasp
   - type: HealthExaminable
     examinableTypes:
@@ -195,6 +197,8 @@
   - type: LightningTarget
     priority: 2
     lightningExplode: false
+  - type: GhostOnMove
+    mustBeDead: true
 
 # Used for mobs that can enter combat mode and can attack.
 - type: entity
@@ -208,8 +212,8 @@
     soundHit:
       collection: MetalThud
     damage:
-      groups:
-        Brute: 5
+      types:
+        Blunt: 5
 
 # Used for mobs that are affected by atmospherics, pressure, and heat
 - type: entity
@@ -308,13 +312,7 @@
   id: MobBloodstream
   abstract: true
   components:
-  - type: SolutionContainerManager
-    # Sunrise-Edit
-    solutions:
-      foots:
-        maxVol: 5
-      body_surface:
-        maxVol: 15
+  - type: SolutionManager
   - type: InjectableSolution
     solution: bloodstream
   - type: Bloodstream

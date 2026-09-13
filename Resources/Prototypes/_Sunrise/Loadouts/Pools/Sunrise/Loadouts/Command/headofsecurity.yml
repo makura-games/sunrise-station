@@ -31,49 +31,22 @@
       time: 7142400 #1984 hrs
 
 - type: loadout
-  id: HeadofSecurityWeapon20h
+  id: HeadofSecurityWeapon
   equipment:
-    pocket1: WeaponSniperRepeater
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: MasterHoS
+    pocket1: WeaponSubMachineGunWt550r
 
 - type: loadout
   id: HeadofSecurityWeapon50h
   equipment:
-    pocket1: WeaponSubMachineGunSkorpion
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: MasterHoS50h
-
-- type: loadout
-  id: HeadofSecurityWeapon50h2
-  equipment:
-    pocket1: WeaponSubMachineGunWt550
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: MasterHoS50h
-
-- type: loadout
-  id: HeadofSecurityWeapon100h
-  equipment:
     pocket1: WeaponRevolverMatebaNew
   effects:
   - !type:GroupLoadoutEffect
-    proto: MasterHoS100h
-
-- type: loadout
-  id: HeadofSecurityWeapon100h2
-  equipment:
-    pocket1: WeaponPistolDeagle
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: MasterHoS100h
+    proto: MasterHoS50h
 
 - type: loadout
   id: HeadofSecurityWeapon1984h
   equipment:
-    pocket1: WeaponPistolDeagleGolden
+    pocket1: DeagleGoldBox
   effects:
   - !type:GroupLoadoutEffect
     proto: MasterHoS1984h

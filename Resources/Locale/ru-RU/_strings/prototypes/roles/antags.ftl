@@ -27,7 +27,7 @@ roles-antag-space-ninja-objective = Используйте свою скрытн
 roles-antag-paradox-clone-name = Парадоксальный клон
 roles-antag-paradox-clone-objective = Пространственно-временная аномалия телепортировала вас в другую реальность! Теперь вы должны найти своего двойника, убить и заменить его.
 roles-antag-thief-name = Вор
-roles-antag-thief-objective = Пополните свою личную коллекцию имуществом NanoTrasen, не прибегая к насилию.
+roles-antag-thief-objective = Пополните свою личную коллекцию имуществом НаноТрейзен, не прибегая к насилию.
 roles-antag-dragon-name = Космический дракон
 roles-antag-dragon-objective = Создайте армию карпов для захвата квадранта.
 roles-antag-mothership-core-name = Ядро ксеноборгов
@@ -35,8 +35,6 @@ roles-antag-mothership-core-objective = Используйте своих ксе
 roles-antag-xenoborg-name = Ксеноборг
 roles-antag-xenoborg-objective = Помогайте материнскому кораблю создавать больше ксеноборгов.
 roles-antag-changeling-description = Используйте свои способности к превращению, чтобы выполнить свои задачи.
-roles-antag-terminator-name = Терминатор
-roles-antag-terminator-objective = Убейте цель любой ценой, от этого зависит будущее.
 AntagNuclearMedic = Ядерный оперативник медик
 AntagNuclearOperative = Ядерный оперативник
 AntagNuclearCommander = Командир ядерных оперативников
@@ -50,5 +48,8 @@ AntagInitialInfected = Нулевой заражённый
 JobNinja = Космический ниндзя
 AntagDragon = Космический дракон
 AntagSubvertedSilicon = Враждебный силикон
-
 roles-antag-pirate-assault-cyborg-name = Пиратский абордажный киборг
+roles-antag-nuclear-operative-agent-name = Медик ядерных оперативников
+roles-antag-nuclear-operative-agent-objective = Медик ядерных оперативников. Лечите свою команду до победы!
+
+roles-antag-pirate-name = Пират

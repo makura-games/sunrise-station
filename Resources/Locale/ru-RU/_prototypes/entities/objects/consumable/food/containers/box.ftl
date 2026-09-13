@@ -54,5 +54,5 @@ ent-FoodMealHappyHonkClown = { ent-HappyHonk }
     .desc = { ent-HappyHonk.desc }
 ent-FoodMealHappyHonkBigBite = Набор "Большой кусь" от "Счастливого Хонка"
     .desc = Кто-то заплатил немалые деньги, чтобы этот фастфуд доставили сюда. Почему-то он пахнет свежестью.
-ent-FoodBoxCloth = box of FlutterSoft-brand cloth
-    .desc = Fiber is the most important moth meal of the day! Don't skip it or use bottom-of-the-locker junk, buy high-quality FlutterSoft-brand cloth instead.
+ent-FoodBoxCloth = коробка ткани марки «флаттерсофт»
+    .desc = Пища моли — главное за сегодня! Не пропускай её и не тяни со дна шкафчика, лучше купи качественную ткань марки «ФлаттерСофт».

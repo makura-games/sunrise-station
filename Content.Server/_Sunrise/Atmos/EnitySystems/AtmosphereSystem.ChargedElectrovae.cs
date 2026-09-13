@@ -8,7 +8,6 @@ using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Random;
-using static Content.Server.Power.Pow3r.PowerState;
 
 namespace Content.Server.Atmos.EntitySystems;
 
@@ -73,12 +72,12 @@ public sealed partial class AtmosphereSystem
 
         // Restore power requirements if this entity had them bypassed
         if (_powerReceiverQuery.TryComp(ent, out var receiver))
-            receiver.NeedsPower = true;
+            RestorePowerRequirement((ent.Owner, receiver, ent.Comp));
     }
 
     public void ChargedElectrovaeExpose(Entity<GridAtmosphereComponent?> ent, TileAtmosphere tile, float intensity)
     {
-        if (!_atmosQuery.Resolve(ent, ref ent.Comp))
+        if (!_gridAtmosQuery.Resolve(ent, ref ent.Comp))
             return;
 
         if (!tile.ChargedEffect.Active)
@@ -151,7 +150,9 @@ public sealed partial class AtmosphereSystem
             // Power machines directly (bypass normal power requirement)
             if (_powerReceiverQuery.TryGetComponent(entity, out var receiver))
             {
-                ApplyChargedElectrovaePower(receiver, tile.ChargedEffect.Intensity);
+                ApplyChargedElectrovaePower(
+                    (entity, receiver, electrovaeAffectedComp),
+                    tile.ChargedEffect.Intensity);
             }
 
             // Lightning strikes on mobs
@@ -281,20 +282,31 @@ public sealed partial class AtmosphereSystem
     /// Applies power to a machine from charged electrovae gas.
     /// This bypasses normal APC power requirements.
     /// </summary>
-    private static void ApplyChargedElectrovaePower(
-        ApcPowerReceiverComponent receiver,
+    private void ApplyChargedElectrovaePower(
+        Entity<ApcPowerReceiverComponent, ChargedElectrovaeAffectedComponent> ent,
         float intensity)
     {
         const float minimumIntensityToPower = 0.1f;
 
+        ent.Comp2.OriginalNeedsPower ??= ent.Comp1.NeedsPower;
+
         if (intensity < minimumIntensityToPower)
         {
-            if (!receiver.NeedsPower)
-                receiver.NeedsPower = true;
+            RestorePowerRequirement(ent);
             return;
         }
 
-        receiver.NeedsPower = false;
+        _powerReceiver.SetNeedsPower(ent.Owner, false, ent.Comp1);
+    }
+
+    private void RestorePowerRequirement(
+        Entity<ApcPowerReceiverComponent, ChargedElectrovaeAffectedComponent> ent)
+    {
+        if (ent.Comp2.OriginalNeedsPower is not { } originalNeedsPower)
+            return;
+
+        _powerReceiver.SetNeedsPower(ent.Owner, originalNeedsPower, ent.Comp1);
+        ent.Comp2.OriginalNeedsPower = null;
     }
 
     /// <summary>

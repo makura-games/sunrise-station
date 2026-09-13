@@ -29,11 +29,11 @@ public sealed partial class TutorialSoftLockSystem : EntitySystem
 {
     private static readonly TimeSpan PopupCooldown = TimeSpan.FromSeconds(1);
 
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly Dictionary<EntityUid, TimeSpan> _lastPopupTimes = new();
 
@@ -119,7 +119,7 @@ public sealed partial class TutorialSoftLockSystem : EntitySystem
 
     private bool HasEntitySoftLocks(EntityUid player)
     {
-        foreach (var component in EntityManager.GetComponents(player))
+        foreach (var component in AllComps(player))
         {
             if (component is ITutorialEntitySoftLockComponent)
                 return true;
@@ -187,7 +187,7 @@ public sealed partial class TutorialSoftLockSystem : EntitySystem
         return false;
     }
 
-    private void ShowPopup(EntityUid user, string popup)
+    private void ShowPopup(EntityUid user, LocId popup)
     {
         if (_lastPopupTimes.TryGetValue(user, out var lastPopup) &&
             _timing.CurTime - lastPopup < PopupCooldown)

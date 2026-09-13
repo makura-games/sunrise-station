@@ -207,6 +207,7 @@
     rightBareFootState: [ footprint-suit-heavy ]
   # Sunrise-End
   - type: Damageable
+  - type: Injurable
     damageContainer: Mech
   - type: FootstepModifier
     footstepSoundCollection:
@@ -280,7 +281,7 @@
     mechToPilotDamageMultiplier: 0.75
     pilotWhitelist:
       components:
-        - HumanoidAppearance
+        - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -328,11 +329,18 @@
     sprite: Objects/Specific/Mech/ripley.rsi
     scale: 1.08, 1.08
     layers:
-    - map: [ "enum.MechVisualLayers.Base" ]
+    - map: [ "enum.MechVisualLayers.Base", "movement" ]
       state: ripleymkii
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: ripleymk2
+    noMovementLayers:
+      movement:
+        state: ripleymkii
   - type: Mech
     baseState: ripleymkii
     openState: ripleymkii-open
@@ -341,7 +349,7 @@
     airtight: true
     pilotWhitelist:
       components:
-        - HumanoidAppearance
+        - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -404,7 +412,7 @@
     airtight: true
     pilotWhitelist:
       components:
-        - HumanoidAppearance
+        - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -481,14 +489,14 @@
     airtight: true # Space Honks is real.
     pilotWhitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
+  # sunrise start
   - type: Reflect
     reflectProb: 0.05
     spread: 180
     soundOnReflect: /Audio/_Starlight/Armor/Ricochet/ricochet1_1.ogg
     reflects:
     - NonEnergy
-  # sunrise start
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -700,10 +708,7 @@
     airtight: true
     pilotWhitelist:
       components:
-        - HumanoidAppearance
-  - type: MeleeThrowOnHit
-    distance: 2.5
-    speed: 15
+        - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -754,16 +759,30 @@
   - type: Sprite
     drawdepth: Mobs
     noRot: true
-    sprite: Objects/Specific/Mech/durand.rsi
+    sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
     scale: 1.08, 1.08
     layers:
-    - map: [ "enum.MechVisualLayers.Base" ]
+    - map: [ "enum.MechVisualLayers.Base", "movement" ] # Sunrise-Edit
       state: base
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
       params:
         pitch: 0.6
+  # Sunrise-start
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: durand-moving
+    noMovementLayers:
+      movement:
+        state: base
+  - type: DamageVisuals
+    thresholds: [ 50, 100, 150, 250, 350 ]
+    trackAllDamage: true
+    damageOverlay:
+      sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
+  # Sunrise-end
   - type: Mech
     baseState: base
     openState: base-open
@@ -772,10 +791,7 @@
     airtight: true
     pilotWhitelist:
       components:
-        - HumanoidAppearance
-  - type: MeleeThrowOnHit
-    distance: 4
-    speed: 18
+        - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -793,12 +809,6 @@
   # Sunrise-End
   - type: CanMoveInAir
   - type: MovementAlwaysTouching
-  - type: Reflect
-    reflectProb: 0.10
-    spread: 180
-    soundOnReflect: /Audio/_Starlight/Armor/Ricochet/ricochet1_1.ogg
-    reflects:
-    - NonEnergy
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -851,10 +861,7 @@
     maxEquipmentAmount: 4
     pilotWhitelist:
       components:
-        - HumanoidAppearance
-  - type: MeleeThrowOnHit
-    distance: 5
-    speed: 20
+        - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -940,10 +947,7 @@
     maxEquipmentAmount: 5
     pilotWhitelist:
       components:
-        - HumanoidAppearance
-  - type: MeleeThrowOnHit
-    distance: 5
-    speed: 20
+        - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -1031,10 +1035,7 @@
     maxEquipmentAmount: 4
     pilotWhitelist:
       components:
-        - HumanoidAppearance
-  - type: MeleeThrowOnHit
-    distance: 3
-    speed: 15
+        - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -1124,10 +1125,7 @@
     maxEquipmentAmount: 5
     pilotWhitelist:
       components:
-        - HumanoidAppearance
-  - type: MeleeThrowOnHit
-    distance: 5
-    speed: 20
+        - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1

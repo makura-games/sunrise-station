@@ -124,8 +124,6 @@
   - type: PressureImmunity
   - type: NoSlip
   - type: MovementAlwaysTouching
-  - type: Body
-    prototype: SVBodyDoubleClown
   - type: InventorySlots
   - type: Inventory
     templateId: clowngoblin
@@ -232,8 +230,6 @@
 #  - type: MovementAlwaysTouching
 #  - type: Stripping
 #  - type: Strippable
-#  - type: Body
-#    prototype: SVBodyDoubleClown
 #  - type: InventorySlots
 #  - type: Inventory
 #    templateId: clownhulk

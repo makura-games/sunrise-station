@@ -27,7 +27,7 @@
 
 # Boxes
 - type: entity
-  parent: BaseMagazineBoxHeavyRifle
+  parent: [ BaseNonCycleableAmmoProvider, BaseMagazineBoxHeavyRifle ]
   id: MagazineBoxHeavyRifleBig
   name: ammunition box (.308 SP)
   components:
@@ -60,20 +60,6 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: sp
-
-- type: entity
-  parent: BaseMagazineBoxHeavyRifle
-  id: MagazineBoxHeavyRifleHP
-  name: ammunition box (.308 HP)
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeRifleHeavyHP
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
   parent: BaseMagazineBoxHeavyRifle
@@ -182,7 +168,7 @@
 
 # Boxes
 - type: entity
-  parent: BaseMagazineBoxRifleMachine
+  parent: [ BaseNonCycleableAmmoProvider, BaseMagazineBoxRifleMachine ]
   id: MagazineBoxRifleMachineBig
   name: ammunition box (7.62mmR SP)
   components:
@@ -215,20 +201,6 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: sp
-
-- type: entity
-  parent: BaseMagazineBoxRifleMachine
-  id: MagazineBoxRifleMachineHP
-  name: ammunition box (7.62mmR HP)
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeHeavyRifleRHP
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
   parent: BaseMagazineBoxRifleMachine

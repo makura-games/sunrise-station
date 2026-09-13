@@ -631,6 +631,8 @@
   packetPrototype: KillerTomatoSeeds
   productPrototypes:
     - MobTomatoKiller
+  mutationPrototypes:
+    - SunriseJuicyTomatoKiller # Sunrise-Edit - редкая подмутация томата-убийцы
   harvestRepeat: Repeat
   lifespan: 25
   maturation: 15

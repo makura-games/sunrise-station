@@ -3,13 +3,8 @@
   parent: OrganAnimalStomach
   categories: [ HideSpawnMenu ]
   components:
-    - type: SolutionContainerManager
+    - type: SolutionManager
       solutions:
-        stomach:
-          maxVol: 200
-        food:
-          maxVol: 5
-          reagents:
-          - ReagentId: UncookedAnimalProteins
-            Quantity: 5
+      - SolutionSunriseStomachLarge
+      - SolutionSunriseRawProteinFood
     - type: Stomach

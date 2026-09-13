@@ -20,9 +20,9 @@ ghost-role-information-ert-cyborg-description = Слава NT!
 ghost-role-information-ert-cyborg-rules = Подчиняйтесь ОБР и Центральному Командованию.
 ghost-role-information-ntr-lead-name = командир ИСН
 ghost-role-information-ntr-guard-name = оперативник ИСН
-ghost-role-information-ntr-guard-description = Вы являетесь опорой и защитой Юридического Департамента, выполняя решения и постановления самого Магистрата и Представителя NanoTrasen!
+ghost-role-information-ntr-guard-description = Вы являетесь опорой и защитой Юридического Департамента, выполняя решения и постановления самого Магистрата и Представителя нанотрейзен!
 ghost-role-information-blueshield-operative-name = Оперативник «Синий щит»
-ghost-role-information-blueshield-operative-description = Сопровождайте и/или защищайте особо высокопоставленных лиц корпорации NanoTrasen.
+ghost-role-information-blueshield-operative-description = Сопровождайте и/или защищайте особо высокопоставленных лиц корпорации нанотрейзен.
 ghost-role-information-ussp-crew-name = Сотрудник СССП
 ghost-role-information-ussp-crew-description = "Вы — универсальный специалист станции СССП, обученный справляться с любыми задачами, от технических до медицинских."
 ghost-role-information-ussp-crew-rules = Вы [color=green][bold]Командный Не Антагонист[/bold][/color]. Вы должны [bold]кооперироваться и работать сообща[/bold] со своими Комрадами! Вместе с командой вы погружаетесь в криосон, готовясь к долгому полёту. Но внезапно что-то идёт не так. Вас пробуждает резкая головная боль и тревожный писк консоли. Внезапные удары сотрясают станцию, и паника охватывает вас. Вы понимаете, что что-то серьёзно нарушило планы. Без приказов и времени на раздумья вы мгновенно начинаете действовать, осознавая, что от вашей реакции зависит жизнь всего экипажа и судьба станции.
@@ -42,7 +42,7 @@ ghost-role-information-tsf-leader-name = Командир отряда морп�
 ghost-role-information-tsf-MARSOC-name = Морпех MARSOC Транс-Солнечной Федерации
 ghost-role-information-tsf-marine-desc = Вы — морпех Транс-Солнечной Федерации. Выполняйте назначенную задачу.
 job-rules-corporate-aligned = Вы на стороне {role-type-corporate-aligned-name}.
-                              Вы должны служить интересам NanoTrasen и Центрального Командования, даже если они расходятся с интересами станции.
+                              Вы должны служить интересам нанотрейзен и Центрального Командования, даже если они расходятся с интересами станции.
                               Помните: вы НЕ служите экипажу.
 job-rules-tsf-aligned = Вы на стороне {role-type-tsf-aligned-name}.
                         Вы должны служить интересам Транс-Солнечной Федерации.
@@ -52,5 +52,4 @@ ghost-role-information-sentient-carprainbow-name = Разумный радужн
 ghost-role-information-sentient-carpshark-name = Разумная карпоакула
 ghost-role-information-one-star-unit-dungeon-name = Юнит «Одинокая звезда»
 ghost-role-information-guardian-unit-dungeon-name = Юнит-страж
-ghost-role-information-terminator-unit-dungeon-name = Юнит-экстерминатор
 ghost-role-information-one-star-unit-dungeon-description = [11201010111002] Работайте с другими автоматонами, защищайте комплекс и уничтожайте всех нарушителей. [1110220001010002220]

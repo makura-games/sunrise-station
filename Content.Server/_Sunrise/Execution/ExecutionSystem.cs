@@ -31,20 +31,20 @@ namespace Content.Server._Sunrise.Execution;
 
 public sealed partial class ExecutionSystem : SharedExecutionSystem
 {
-    [Dependency] private readonly ContainerSystem _containerSystem = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly TransformSystem _transformSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly AudioSystem _audioSystem = default!;
-    [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstreamSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
-    [Dependency] private readonly SharedGunSystem _gunSystem = default!;
+    [Dependency] private ContainerSystem _containerSystem = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private TransformSystem _transformSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
+    [Dependency] private AppearanceSystem _appearanceSystem = default!;
+    [Dependency] private AudioSystem _audioSystem = default!;
+    [Dependency] private ExplosionSystem _explosionSystem = default!;
+    [Dependency] private BloodstreamSystem _bloodstreamSystem = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MobStateSystem _mobStateSystem = default!;
+    [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
+    [Dependency] private SharedGunSystem _gunSystem = default!;
 
     private const float OverkillFractionMin = 0.05f;
     private const float OverkillFractionMax = 0.20f;
@@ -78,7 +78,7 @@ public sealed partial class ExecutionSystem : SharedExecutionSystem
         var victim = args.Target!.Value;
         var weapon = args.Used!.Value;
 
-        if (!CanExecuteWithMelee(weapon, victim, attacker))
+        if (!CanExecuteWithMeleeServer(weapon, victim, attacker))
             return;
 
         if (!TryComp<MeleeWeaponComponent>(weapon, out var melee))
@@ -109,7 +109,7 @@ public sealed partial class ExecutionSystem : SharedExecutionSystem
         var weapon = args.Used.Value;
         var victim = args.Target.Value;
 
-        if (!CanExecuteWithGun(weapon, victim, attacker))
+        if (!CanExecuteWithGunServer(weapon, victim, attacker))
             return;
 
         var prevention = new ShotAttemptedEvent
@@ -280,7 +280,7 @@ public sealed partial class ExecutionSystem : SharedExecutionSystem
                 throw new ArgumentOutOfRangeException();
         }
 
-        var forceLethal = !IsNonLethalAmmo(firedPrototypeId);
+        var forceLethal = !IsNonLethalAmmoServer(firedPrototypeId);
         var isExplosive = explosiveToTrigger != null;
 
         if (isExplosive && forceLethal)

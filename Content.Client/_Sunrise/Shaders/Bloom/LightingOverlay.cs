@@ -102,11 +102,11 @@ public sealed class PointLightingOverlay : Overlay
         ref BloomLightQueryState queryState,
         in ComponentTreeEntry<BloomOverlayVisualsComponent> bloomEntry)
     {
+        var bloomVisuals = bloomEntry.Component;
         if (!queryState.PointLightQuery.TryComp(bloomEntry.Uid, out var pointLight) ||
             !pointLight.Enabled)
             return true;
 
-        var bloomVisuals = bloomEntry.Component;
         var transform = bloomEntry.Transform;
         var (_, _, worldMatrix) = queryState.Transform.GetWorldPositionRotationMatrix(transform);
 

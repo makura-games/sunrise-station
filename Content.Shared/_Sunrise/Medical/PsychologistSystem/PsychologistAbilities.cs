@@ -3,70 +3,64 @@ using Content.Shared.DoAfter;
 using Content.Shared.Nutrition;
 using Robust.Shared.Prototypes;
 using Content.Shared.Chemistry.Reagent;
-using Content.Shared.EntityEffects.Effects;
 using Content.Shared.Popups;
 using Content.Shared.Actions;
 using Content.Shared.EntityEffects.Effects.Solution;
-using Robust.Shared.Localization;
 
 namespace Content.Shared._Sunrise.Medical.PsychologistSystem;
 
 public sealed partial class PsychologistSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
 
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-
-    [Dependency] private readonly SharedActionsSystem _actionsSystem  = default!;
+    private readonly string _actionProto = "PsychologistAlcoholBlock";
 
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<PsychologistBlockAlcoholComponent, ComponentStartup>(onPsychologistBlockAlcohol);
+        SubscribeLocalEvent<PsychologistBlockAlcoholComponent, ComponentStartup>(OnPsychologistBlockAlcohol);
 
-        SubscribeLocalEvent<HumanoidAppearanceComponent, AlcoholBlockEvent>(OnAlcoholBlockTry);
-        SubscribeLocalEvent<HumanoidAppearanceComponent, DoAfterAlcoholBlockEvent>(DoAfterAlcoholBlock);
+        SubscribeLocalEvent<HumanoidProfileComponent, AlcoholBlockEvent>(OnAlcoholBlockTry);
+        SubscribeLocalEvent<HumanoidProfileComponent, DoAfterAlcoholBlockEvent>(DoAfterAlcoholBlock);
 
         SubscribeLocalEvent<SolutionIngestBlockerComponent, BeforeIngestedEvent>(OnDrink);
     }
 
-    private void DoAfterAlcoholBlock(Entity<HumanoidAppearanceComponent> ent, ref DoAfterAlcoholBlockEvent args)
+    private void DoAfterAlcoholBlock(Entity<HumanoidProfileComponent> ent, ref DoAfterAlcoholBlockEvent args)
     {
         if (args.Handled || args.Cancelled)
             return;
-        if (args.Target != null)
+
+        if (args.Target == null)
+            return;
+
+        if (HasComp<SolutionIngestBlockerComponent>(args.Target))
         {
-            if (CompOrNull<SolutionIngestBlockerComponent>(args.Target) != null)
-            {
-                _popupSystem.PopupEntity(Loc.GetString("psychologist-alcoholblock-removed", ("target", args.Target)), ent.Owner);
-                RemComp<SolutionIngestBlockerComponent>(args.Target.Value);
-            }
-            else
-            {
-                _popupSystem.PopupEntity(Loc.GetString("psychologist-alcoholblock-applied", ("target", args.Target)), ent.Owner);
-                AddComp<SolutionIngestBlockerComponent>(args.Target.Value);
-            }
+            _popupSystem.PopupEntity(Loc.GetString("psychologist-alcoholblock-removed", ("target", args.Target)), ent);
+            RemComp<SolutionIngestBlockerComponent>(args.Target.Value);
+            return;
         }
+
+        _popupSystem.PopupEntity(Loc.GetString("psychologist-alcoholblock-applied", ("target", args.Target)), ent);
+        AddComp<SolutionIngestBlockerComponent>(args.Target.Value);
     }
 
-    private void OnAlcoholBlockTry(Entity<HumanoidAppearanceComponent> ent, ref AlcoholBlockEvent args)
+    private void OnAlcoholBlockTry(Entity<HumanoidProfileComponent> ent, ref AlcoholBlockEvent args)
     {
-        if (EntityManager.TryGetComponent<HumanoidAppearanceComponent>(args.Target, out var humanoidAppearanceComponent))
+        if (!TryComp<HumanoidProfileComponent>(args.Target, out var profile))
+            return;
+
+        if (profile.Species.Id == "Dwarf")
         {
-            if (humanoidAppearanceComponent != null)
-            {
-                if (humanoidAppearanceComponent.Species.Id == "Dwarf")
-                {
-                    _popupSystem.PopupEntity(Loc.GetString("psychologist-alcoholblock-dwarf-forbidden"), ent.Owner);
-                    return;
-                }
-            }
+            _popupSystem.PopupEntity(Loc.GetString("psychologist-alcoholblock-dwarf-forbidden"), ent);
+            return;
         }
 
-        if (_doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, ent.Owner, args.Action.Comp.UseDelay ?? TimeSpan.FromSeconds(30),
-            new DoAfterAlcoholBlockEvent(), eventTarget: args.Target, target: args.Target, used: ent.Owner)
+        if (_doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, ent, args.Action.Comp.UseDelay ?? TimeSpan.FromSeconds(30),
+            new DoAfterAlcoholBlockEvent(), eventTarget: args.Target, target: args.Target, used: ent)
         {
             BreakOnMove = true,
             BreakOnDamage = true
@@ -95,9 +89,9 @@ public sealed partial class PsychologistSystem : EntitySystem
 
                 if (reagent.Metabolisms != null)
                 {
-                    foreach (var metabolism in reagent.Metabolisms)
+                    foreach (var metabolism in reagent.Metabolisms.Metabolisms.Values)
                     {
-                        foreach (var effect in metabolism.Value.Effects)
+                        foreach (var effect in metabolism.Effects)
                         {
                             if (effect is AdjustReagent adjust && adjust.Reagent == ent.Comp.ReagentForBlock)
                             {
@@ -118,9 +112,9 @@ public sealed partial class PsychologistSystem : EntitySystem
             return;
         }
     }
-    private void onPsychologistBlockAlcohol(Entity<PsychologistBlockAlcoholComponent> ent, ref ComponentStartup args)
+    private void OnPsychologistBlockAlcohol(Entity<PsychologistBlockAlcoholComponent> ent, ref ComponentStartup args)
     {
-        _actionsSystem.AddAction(ent.Owner, "PsychologistAlcoholBlock");
+        _actionsSystem.AddAction(ent.Owner, _actionProto);
     }
 
 }

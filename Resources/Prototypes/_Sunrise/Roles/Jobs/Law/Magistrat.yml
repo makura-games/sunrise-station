@@ -10,7 +10,6 @@
   startingGear: MagistratGear
   icon: "JobIconMagistrat"
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   setPreference: false
   radioBold: true
   displayWeight: 75

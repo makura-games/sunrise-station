@@ -1,4 +1,4 @@
-# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 - type: species
   id: HumanoidXeno
   name: species-name-xeno
@@ -7,7 +7,6 @@
   prototype: MobHumanoidXeno
   bodyTypes:
   - HumanoidXenoNormal
-  markingLimits: MobHumanoidXenoMarkingLimits
   dollPrototype: MobXenoDummy
   skinColoration: Hues
   maleFirstNames: names_xeno_first
@@ -33,130 +32,98 @@
 - type: bodyType
   id: HumanoidXenoNormal
   name: body-normal
-  sprites:
-    Head: MobHumanoidXenoHead
-    Chest: MobHumanoidXenoTorso
-    Tail: MobHumanoidAnyMarking
-    LArm: MobHumanoidXenoLArm
-    RArm: MobHumanoidXenoRArm
-    LHand: MobHumanoidXenoLHand
-    RHand: MobHumanoidXenoRHand
-    LLeg: MobHumanoidXenoLLeg
-    RLeg: MobHumanoidXenoRLeg
-    LFoot: MobHumanoidXenoLFoot
-    RFoot: MobHumanoidXenoRFoot
-
-- type: markingPoints
-  id: MobHumanoidXenoMarkingLimits
-  onlyWhitelisted: true
-  points:
-    Hair:
-      points: 0
-      required: false
-    FacialHair:
-      points: 0
-      required: false
-    Tail:
-      points: 1
-      required: true
-      defaultMarkings: [ HumanoidXenoTailsDefault ]
+  visualKey: body-normal
+  layers:
     Head:
-      points: 1
-      required: true
-      defaultMarkings: [ HumanoidXenoHeadDefault ]
-    HeadTop:
-      points: 0
-      required: false
+      sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
+      state: head_m
     Chest:
-      points: 1
+      sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
+      state: torso_m
+    LArm:
+      sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
+      state: l_arm
+    RArm:
+      sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
+      state: r_arm
+    LHand:
+      sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
+      state: l_hand
+    RHand:
+      sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
+      state: r_hand
+    LLeg:
+      sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
+      state: l_leg
+    RLeg:
+      sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
+      state: r_leg
+    LFoot:
+      sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
+      state: l_foot
+    RFoot:
+      sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
+      state: r_foot
+  sexLayers:
+    Male:
+      Head:
+        sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
+        state: head_m
+      Chest:
+        sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
+        state: torso_m
+    Female:
+      Head:
+        sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
+        state: head_f
+      Chest:
+        sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
+        state: torso_f
+- type: markingsGroup
+  id: HumanoidXeno
+  onlyGroupWhitelisted: true
+  limits:
+    enum.HumanoidVisualLayers.Hair:
+      limit: 0
       required: false
-    Legs:
-      points: 1
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 0
       required: false
-    Arms:
-      points: 1
+    enum.HumanoidVisualLayers.Tail:
+      limit: 1
+      required: true
+      default: [ HumanoidXenoTailsDefault ]
+    enum.HumanoidVisualLayers.Head:
+      limit: 1
+      required: true
+      default: [ HumanoidXenoHeadDefault ]
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 0
       required: false
-
-- type: humanoidBaseSprite
-  id: MobHumanoidXenoHead
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
-    state: head_m
-
-- type: humanoidBaseSprite
-  id: MobHumanoidXenoHeadMale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
-    state: head_m
-
-- type: humanoidBaseSprite
-  id: MobHumanoidXenoHeadFemale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
-    state: head_f
-
-- type: humanoidBaseSprite
-  id: MobHumanoidXenoTorso
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
-    state: torso_m
-
-- type: humanoidBaseSprite
-  id: MobHumanoidXenoTorsoMale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
-    state: torso_m
-
-- type: humanoidBaseSprite
-  id: MobHumanoidXenoTorsoFemale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
-    state: torso_f
-
-- type: humanoidBaseSprite
-  id: MobHumanoidXenoLLeg
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
-    state: l_leg
-
-- type: humanoidBaseSprite
-  id: MobHumanoidXenoLArm
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
-    state: l_arm
-
-- type: humanoidBaseSprite
-  id: MobHumanoidXenoLHand
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
-    state: l_hand
-
-- type: humanoidBaseSprite
-  id: MobHumanoidXenoLFoot
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
-    state: l_foot
-
-- type: humanoidBaseSprite
-  id: MobHumanoidXenoRLeg
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
-    state: r_leg
-
-- type: humanoidBaseSprite
-  id: MobHumanoidXenoRArm
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
-    state: r_arm
-
-- type: humanoidBaseSprite
-  id: MobHumanoidXenoRHand
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
-    state: r_hand
-
-- type: humanoidBaseSprite
-  id: MobHumanoidXenoRFoot
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
-    state: r_foot
+    enum.HumanoidVisualLayers.Chest:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RFoot:
+      limit: 1
+      required: false

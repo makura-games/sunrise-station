@@ -14,8 +14,8 @@ namespace Content.Server.Silicons.Laws;
 
 public sealed partial class SiliconLawSystem
 {
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private void InitializeSunrise()
     {

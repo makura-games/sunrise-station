@@ -14,3 +14,4 @@ robotics-console-locked-message = Управление заблокирован�
 robotics-console-disable = Отключить
 robotics-console-destroy = Уничтожить
 robotics-console-cyborg-destroying = Запущен процесс дистанционного уничтожения { $name }!
+robotics-console-hp = [color=gray]Целостность:[/color] [color={$color}]{$hp}[/color]%

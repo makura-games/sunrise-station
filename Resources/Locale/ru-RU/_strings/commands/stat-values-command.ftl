@@ -19,3 +19,13 @@ stat-item-price = Размер
 stat-drawrate-values = Уровень потребления ЛКП
 stat-drawrate-id = ID
 stat-drawrate-rate = Уровень потребления (Вт)
+stat-melee-values = Урон оружия ближнего боя
+stat-melee-id = ID
+stat-melee-base-damage = Базовый урон
+stat-melee-wield-damage = Урон при взятии в две руки
+stat-melee-attack-rate = Скорость атаки
+stat-melee-dps = DPS
+stat-melee-structural-damage = Урон по структурам
+stat-melee-structural-wield-damage = Урон по структурам при взятии в две руки
+
+# Lathe

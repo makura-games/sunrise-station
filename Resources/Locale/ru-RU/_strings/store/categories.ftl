@@ -29,3 +29,4 @@ store-caregory-spellbook-events = Заклинания событий
 store-ling-category-combat = Боевые
 store-ling-category-sting = Укусы
 store-ling-category-utility = Инструменты
+store-category-nukie-delivery = Предложения

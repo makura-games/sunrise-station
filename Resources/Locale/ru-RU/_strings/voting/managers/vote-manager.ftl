@@ -1,7 +1,6 @@
 ui-vote-initiator-server = Сервер
 
 ## Default.Votes
-
 ui-vote-restart-title = Перезапуск раунда
 ui-vote-restart-succeeded = Голосование о перезапуске раунда успешно.
 ui-vote-restart-failed = Голосование о перезапуске раунда отклонено (требуется { TOSTRING($ratio, "P0") }).
@@ -31,3 +30,6 @@ ui-vote-votekick-not-enough-eligible = Недостаточно игроков �
 ui-vote-votekick-server-cancelled = Голосование за кик { $target } было отменено сервером.
 ui-vote-secret-map = Секрет
 ui-vote-secret-win = Следующая карта будет выбрана случайным образом.
+ui-vote-map-invalid = { $winner } стал недействительным после голосования за карту! Он не будет выбран!
+
+# Votekick votes

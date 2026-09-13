@@ -1,7 +1,5 @@
-ent-BaseHumanoidXenoOrganUnGibbable = { ent-BaseItem }
+ent-BaseHumanoidXenoOrgan = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
-ent-BaseHumanoidXenoOrgan = { ent-BaseHumanoidXenoOrganUnGibbable }
-    .desc = { ent-BaseHumanoidXenoOrganUnGibbable.desc }
 ent-OrganHumanoidXenoBrain = brain
     .desc = The nexus of the alien mind. Thoughts you don't want to know.
 ent-OrganHumanoidXenoTongue = tongue

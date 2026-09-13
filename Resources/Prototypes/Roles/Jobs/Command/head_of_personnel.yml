@@ -23,7 +23,6 @@
   startingGear: HoPGear
   icon: "JobIconHeadOfPersonnel"
   supervisors: job-supervisors-captain
-  canBeAntag: false
   radioBold: true # Sunrise-Edit
   displayWeight: 90 # Sunrise-Edit
   # Sunrise-Start
@@ -60,6 +59,8 @@
   - ResearchConsoleAccess # Sunrise-Edit
   - Atmospherics
   - Medical
+  - GenpopEnter
+  - GenpopLeave
   - Barber  # Sunrise-edit
   - Mining  # Sunrise-edit
   special:

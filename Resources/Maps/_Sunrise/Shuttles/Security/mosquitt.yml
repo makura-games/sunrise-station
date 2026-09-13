@@ -1079,7 +1079,7 @@ entities:
     - type: Transform
       pos: 0.5,-1.5
       parent: 1
-- proto: MagazineGrenadeBlastExtended
+- proto: MagazineGrenadeEMPExtended
   entities:
   - uid: 129
     components:
@@ -1097,7 +1097,7 @@ entities:
       canCollide: False
     - type: InsideEntityStorage
       storage: 128
-- proto: MagazineGrenadeFragExtended
+- proto: MagazineGrenadeFrag
   entities:
   - uid: 131
     components:

@@ -1,0 +1,15 @@
+name-identifier-format-monkey = МК-{$number}
+name-identifier-format-kobold = КВ-{$number}
+name-identifier-format-holoparasite = ГОЛО-{$number}
+name-identifier-format-mmi = ММИ-{$number}
+name-identifier-format-positronic-brain = ПБ-{$number}
+name-identifier-format-silicon = Си-{$number}
+name-identifier-format-station-ai = ИИ-{$number}
+name-identifier-format-telepad = ТЕЛЕ-{$number}
+name-identifier-format-boris = БОРИС-{$number}
+name-identifier-format-sofia = СОФИЯ-{$number}
+name-identifier-format-syndie-sec-robot = ГРХ-АТК-{$number}
+name-identifier-format-syndie-med-robot = ГРХ-МЕД-{$number}
+name-identifier-format-syndie-reaper-robot = Жнец-{$number}
+name-identifier-format-inferior-vulpkanin = ВП-{$number}
+name-identifier-format-felinid = ФЕ-{$number}

@@ -299,7 +299,7 @@ public sealed partial class MessengerServerSystem
             return;
         }
 
-        var pdaUid = EntityManager.GetEntity(netPdaUid);
+        var pdaUid = GetEntity(netPdaUid);
 
         if (!TryComp<PdaComponent>(pdaUid, out var pda))
         {

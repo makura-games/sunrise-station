@@ -1,13 +1,5 @@
 ent-WeaponRifleAKM = AKMS
     .desc = { ent-BaseWeaponRifle.desc }
-ent-WeaponRifleAKMU = AKM-U
-    .desc = { ent-BaseWeaponRifle.desc }
-ent-WeaponRifleAK514 = AK-514
-    .desc = { ent-BaseWeaponRifle.desc }
-ent-WeaponRifleFamas = Famas
-    .desc = { ent-BaseWeaponRifle.desc }
-ent-WeaponRifleG36 = G-36
-    .desc = { ent-BaseWeaponRifle.desc }
 ent-WeaponRifleM16A4 = M16A4
     .desc = { ent-BaseWeaponRifle.desc }
 ent-WeaponRifleLecterMk2 = Lecter Mk2

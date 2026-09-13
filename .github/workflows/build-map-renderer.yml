@@ -16,7 +16,6 @@ concurrency:
 
 jobs:
   build:
-    if: github.actor != 'Sunrise-Bot'
     strategy:
       matrix:
         os: [ubuntu-latest]

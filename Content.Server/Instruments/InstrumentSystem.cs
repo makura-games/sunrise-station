@@ -1,7 +1,6 @@
 using System.Linq;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
-using Content.Server.Interaction;
 using Content.Server.Popups;
 using Content.Server.Stunnable;
 using Content.Shared.Administration;
@@ -10,7 +9,6 @@ using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Instruments;
 using Content.Shared.Instruments.UI;
-using Content.Shared.Physics;
 using Content.Shared.Popups;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
@@ -19,9 +17,7 @@ using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 using Robust.Shared.GameStates;
-using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Server.Instruments;
 
@@ -29,15 +25,18 @@ namespace Content.Server.Instruments;
 [UsedImplicitly]
 public sealed partial class InstrumentSystem : SharedInstrumentSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IConsoleHost _conHost = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly StunSystem _stuns = default!;
-    [Dependency] private readonly UserInterfaceSystem _bui = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
-    [Dependency] private readonly IAdminLogManager _admingLogSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IConsoleHost _conHost = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private StunSystem _stuns = default!;
+    [Dependency] private UserInterfaceSystem _bui = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private ExamineSystemShared _examineSystem = default!;
+    [Dependency] private IAdminLogManager _adminLogSystem = default!;
+
+    [Dependency] private EntityQuery<InstrumentComponent> _instrumentQuery = default!;
+    [Dependency] private EntityQuery<ActiveInstrumentComponent> _activeInstrumentQuery = default!;
 
     private const float MaxInstrumentBandRange = 10f;
 
@@ -167,7 +166,7 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
             .Where(t => t != null)
             .Select(t => t!.ToString()));
 
-        _admingLogSystem.Add(
+        _adminLogSystem.Add(
             LogType.Instrument,
             LogImpact.Low,
             $"{ToPrettyString(args.SenderSession.AttachedEntity)} set the midi channels for {ToPrettyString(uid)} to {tracksString}");
@@ -267,13 +266,10 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
 
     public (NetEntity, string)[] GetBands(EntityUid uid)
     {
-        var metadataQuery = GetEntityQuery<MetaDataComponent>();
-
         if (Deleted(uid))
             return Array.Empty<(NetEntity, string)>();
 
         var list = new ValueList<(NetEntity, string)>();
-        var instrumentQuery = GetEntityQuery<InstrumentComponent>();
 
         if (!TryComp(uid, out InstrumentComponent? originInstrument)
             || originInstrument.InstrumentPlayer is not {} originPlayer)
@@ -287,7 +283,7 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
                 continue;
 
             // Don't grab puppet instruments.
-            if (!instrumentQuery.TryGetComponent(entity, out var instrument) || instrument.Master != null)
+            if (!_instrumentQuery.TryGetComponent(entity, out var instrument) || instrument.Master != null)
                 continue;
 
             // We want to use the instrument player's name.
@@ -299,8 +295,8 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
             if (!_examineSystem.InRangeUnOccluded(uid, entity, MaxInstrumentBandRange, e => e == playerUid || e == originPlayer))
                 continue;
 
-            if (!metadataQuery.TryGetComponent(playerUid, out var playerMetadata)
-                || !metadataQuery.TryGetComponent(entity, out var metadata))
+            if (!TryComp(playerUid, out MetaDataComponent? playerMetadata)
+                || !TryComp(entity, out MetaDataComponent? metadata))
                 continue;
 
             list.Add((GetNetEntity(entity), $"{playerMetadata.EntityName} - {metadata.EntityName}"));
@@ -328,14 +324,18 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
         instrument.Playing = false;
         instrument.Master = null;
         instrument.FilteredChannels.SetAll(false);
-        instrument.LastSequencerTick = 0;
         instrument.BatchesDropped = 0;
-        instrument.LaggedBatches = 0;
         Dirty(uid, instrument);
     }
 
     private void OnMidiEventRx(InstrumentMidiEventEvent msg, EntitySessionEventArgs args)
     {
+        // Sunrise edit start - ограничение MIDI до валидации и обработки
+        var eventCount = msg.MidiEvent.Length;
+        if (!TryConsumeSessionMidiBudget(args.SenderSession.UserId, eventCount))
+            return;
+        // Sunrise edit end
+
         // Sunrise edit start - валидируем использование инструмента на сервере
         if (!TryValidateInstrumentRequest(msg.Uid,
                 args,
@@ -348,64 +348,23 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
             return;
         }
 
-        var eventCount = msg.MidiEvent.Length;
-        if (eventCount == 0
-            || eventCount > MaxMidiEventsPerBatch
-            || !InstrumentMidiValidation.IsValidBatch(msg.MidiEvent))
+        if (eventCount == 0 || eventCount > MaxMidiEventsPerBatch)
         {
             instrument.BatchesDropped++; // Sunrise added
             return;
         }
+
+        if (!InstrumentMidiValidation.TryFilterBatch(msg.MidiEvent, out var validEvents))
+            return;
+
+        if (validEvents != msg.MidiEvent)
+            msg = new InstrumentMidiEventEvent(msg.Uid, validEvents);
         // Sunrise edit end
 
         var send = true;
         var droppedBatch = false; // Sunrise added
 
-        var minTick = uint.MaxValue;
-        var maxTick = uint.MinValue;
-
-        for (var i = 0; i < eventCount; i++)  // Sunrise edit
-        {
-            var tick = msg.MidiEvent[i].Tick;
-
-            if (tick < minTick)
-                minTick = tick;
-
-            if (tick > maxTick)
-                maxTick = tick;
-        }
-
-        if (instrument.LastSequencerTick > minTick)
-        {
-            instrument.LaggedBatches++;
-
-            if (instrument.RespectMidiLimits)
-            {
-                if (instrument.LaggedBatches == (int) (MaxMidiLaggedBatches * (1 / 3d) + 1))
-                {
-                    _popup.PopupEntity(Loc.GetString("instrument-component-finger-cramps-light-message"),
-                        uid, attached, PopupType.SmallCaution);
-                }
-                else if (instrument.LaggedBatches == (int) (MaxMidiLaggedBatches * (2 / 3d) + 1))
-                {
-                    _popup.PopupEntity(Loc.GetString("instrument-component-finger-cramps-serious-message"),
-                        uid, attached, PopupType.MediumCaution);
-                }
-            }
-
-            if (instrument.LaggedBatches > MaxMidiLaggedBatches)
-            {
-                send = false;
-            }
-        }
-
         // Sunrise added start
-        if (!TryConsumeSessionMidiBudget(args.SenderSession.UserId, eventCount))
-        {
-            droppedBatch = true;
-            send = false;
-        }
-
         instrument.MidiEventCount += eventCount;
         if (instrument.MidiEventCount > MaxMidiEventsPerSecond)
         {
@@ -416,8 +375,6 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
         if (droppedBatch)
             instrument.BatchesDropped++;
         // Sunrise added end
-
-        instrument.LastSequencerTick = Math.Max(maxTick, minTick);
 
         // Sunrise edit start - ограничиваем forwarded MIDI traffic ближайшими слушателями
         if (!send)
@@ -446,9 +403,6 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
             _bandRequestQueue.Clear();
         }
 
-        var activeQuery = GetEntityQuery<ActiveInstrumentComponent>();
-        var transformQuery = GetEntityQuery<TransformComponent>();
-
         var query = AllEntityQuery<ActiveInstrumentComponent, InstrumentComponent>();
         while (query.MoveNext(out var uid, out _, out var instrument))
         {
@@ -457,26 +411,26 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
                 if (Deleted(master))
                 {
                     Clean(uid, instrument);
+                    continue;
                 }
 
-                var masterActive = activeQuery.CompOrNull(master);
+                _activeInstrumentQuery.TryComp(master, out var masterActive);
                 if (masterActive == null)
                 {
                     Clean(uid, instrument);
+                    continue;
                 }
 
-                var trans = transformQuery.GetComponent(uid);
-                var masterTrans = transformQuery.GetComponent(master);
-                if (!_transform.InRange(masterTrans.Coordinates, trans.Coordinates, 10f)
-)
+                var trans = Transform(uid);
+                var masterTrans = Transform(master);
+                if (!_transform.InRange(masterTrans.Coordinates, trans.Coordinates, 10f))
                 {
                     Clean(uid, instrument);
+                    continue;
                 }
             }
 
-            if (instrument.RespectMidiLimits &&
-                (instrument.BatchesDropped >= MaxMidiBatchesDropped
-                 || instrument.LaggedBatches >= MaxMidiLaggedBatches))
+            if (instrument.RespectMidiLimits && instrument.BatchesDropped >= MaxMidiBatchesDropped)
             {
                 if (instrument.InstrumentPlayer is {Valid: true} mob)
                 {
@@ -497,7 +451,6 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
 
             instrument.Timer = 0f;
             instrument.MidiEventCount = 0;
-            instrument.LaggedBatches = 0;
             instrument.BatchesDropped = 0;
         }
     }

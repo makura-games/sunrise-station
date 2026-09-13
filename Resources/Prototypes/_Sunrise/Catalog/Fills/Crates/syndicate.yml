@@ -108,8 +108,6 @@
         - id: MechMaulerSyndieFilled
         - id: ToolboxSyndicateFilledRepair
         - id: ToyMauler
-        - id: MechPaintMaulerMeowler
-          prob: 0.25
 
 - type: entity
   id: CratePirateMechYarrkeBundle
@@ -138,8 +136,6 @@
         children:
         - id: MechDollHouseFilled
         - id: ToolboxSyndicateFilledRepair
-        - id: MechPaintDollHouseWarboss
-          prob: 0.25
 
 - type: entity
   id: CrateCybersunRipleyBundle

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseItem
   id: FlippoLighterSunriseBase
@@ -33,7 +33,7 @@
   - type: ItemToggleHot
   - type: Item
     size: Tiny
-    sprite: Objects/Tools/lighters.rsi
+    sprite: Objects/Tools/Lighters/lighters.rsi
     heldPrefix: zippo
   - type: Appearance
   - type: GenericVisualizer
@@ -45,19 +45,19 @@
         base:
           True: { visible: false }
           False: { visible: true }
-  - type: SolutionContainerManager
-    solutions:
-      Welder:
-        reagents:
-        - ReagentId: WeldingFuel
-          Quantity: 12
-        maxVol: 12
+  - type: Solution
+    id: Welder
+    solution:
+      reagents:
+      - ReagentId: WeldingFuel
+        Quantity: 12
+      maxVol: 12
   - type: Welder
     fuelConsumption: 0.01
     fuelLitCost: 0.1
     tankSafe: true
-  - type: ToggleableLightVisuals
-    spriteLayer: lighter_flame
+  - type: ToggleableVisuals
+    spriteLayer: open
     inhandVisuals:
       left:
       - state: zippo-inhand-left-flame
@@ -75,6 +75,7 @@
     netsync: false
     radius: 1.2
     color: orange
+  - type: ItemTogglePointLight
   - type: UseDelay
   - type: IgnitionSource
     ignited: false

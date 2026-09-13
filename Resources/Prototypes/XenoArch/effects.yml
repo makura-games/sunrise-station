@@ -238,8 +238,10 @@
         types:
           Blunt: 3
           Piercing: 7
-        groups:
-          Burn: 3
+          Heat: 0.75
+          Shock: 0.75
+          Cold: 0.75
+          Caustic: 0.75
     - type: ArtifactFunnyTarget
   # Sunrise-End
 
@@ -263,10 +265,10 @@
   components:
   - type: XAEApplyComponents
     components:
-    - type: SolutionContainerManager
-      solutions:
-        beaker:
-          maxVol: 150
+    - type: Solution
+      id: beaker
+      solution:
+        maxVol: 120
     - type: FitsInDispenser
       solution: beaker
     - type: RefillableSolution
@@ -1270,9 +1272,13 @@
       components:
       - MobState
     damage:
-      groups:
-        Brute: -300
-        Burn: -300
+      types:
+        Blunt: -100
+        Piercing: -100
+        Slash: -100
+        Heat: -100
+        Cold: -100
+        Shock: -100
 
 - type: entity
   id: XenoArtifactTesla

@@ -95,23 +95,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitSecuritySunrise
 
 - type: entity
-  parent: ClothingOuterHardsuitBrigmedicSunrise
-  id: ClothingOuterHardsuitPilot
-  name: security pilot's hardsuit
-  description: A lightweight version of the Security Service spacesuit, it provides good mobility but less protection.
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/pilothardsuit.rsi
-  - type: Clothing
-    sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/pilothardsuit.rsi
-  - type: PressureProtection
-    highPressureMultiplier: 0.5
-    lowPressureMultiplier: 1000
-  - type: HeldSpeedModifier
-  - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitPilot
-
-- type: entity
   parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitBrigmedicSunrise
   name: brigmedic hardsuit
@@ -124,72 +107,36 @@
     sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/brigmedic.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.3
-    lowPressureMultiplier: 1000
-  - type: ExplosionResistance
-    damageCoefficient: 0.6
+    lowPressureMultiplier: 5500
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.8
         Slash: 0.8
         Piercing: 0.75
-        Heat: 0.8
+        Heat: 0.9
+        Radiation: 0.30
+        Caustic: 0.2
   - type: ClothingSpeedModifier
     walkModifier: 0.85
     sprintModifier: 0.85
-  - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitBrigmedic
 
-# USSP
 - type: entity
-  parent: [ ClothingOuterHardsuitSyndieCommander ]
-  id: ClothingOuterEliteHardsuitUSSP
-  name: Spartak-K
-  description: A heavily armored USSP spacesuit designed for combat operations in extreme conditions. Reinforced armor protects against firearms and energy weapons, radiation and explosions. It is used by elite units to protect strategic facilities.
+  parent: ClothingOuterHardsuitBrigmedicSunrise
+  id: ClothingOuterHardsuitPilot
+  name: security pilot's hardsuit
+  description: A lightweight version of the Security Service spacesuit, it provides good mobility but less protection.
   components:
   - type: Sprite
-    sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/ussp_elite.rsi
+    sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/pilothardsuit.rsi
   - type: Clothing
-    sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/ussp_elite.rsi
-  - type: FireProtection
-    reduction: 0.8
-  - type: Item
-    size: Huge
-  - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
-  - type: HeldSpeedModifier
+    sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/pilothardsuit.rsi
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetEliteHardsuitUSSP
-  - type: ContainerContainer
-    containers:
-      cell_slot: !type:ContainerSlot
-      toggleable-clothing: !type:ContainerSlot
-      beakerSlot: !type:ContainerSlot
-  - type: PowerCellSlot
-    cellSlotId: cell_slot
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellHigh
-        whitelist:
-          tags:
-            - PowerCell
-      beakerSlot:
-        whitelist:
-          tags:
-          - FitsHardsuit
-  - type: EnergyDomeGenerator
-    damageEnergyDraw: 4
-    domePrototype: EnergyDomeSmallRed
-  - type: PowerCellDraw
-    drawRate: 0
-    useCharge: 0
-  - type: UseDelay
-    delay: 10.0
+    clothingPrototype: ClothingHeadHelmetHardsuitPilot
 
+# USSP
 - type: entity
   parent: [ ClothingOuterHardsuitBase ]
   id: ClothingOuterHeavyHardsuitUSSP
@@ -414,7 +361,7 @@
     price: 0
 
 - type: entity
-  parent: [ HardsuitSlotAmpulaPirate, ClothingOuterStorageBase, ClothingOuterHardsuitBase ]
+  parent: [ HardsuitSlotAmpulaPirate, ClothingOuterHardsuitBase, ClothingOuterStorageBase, BaseMajorContraband ]
   id: ClothingOuterHardsuitPrivateer
   name: freelance hardsuit
   suffix: Pirate
@@ -424,25 +371,22 @@
     sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer.rsi
   - type: Clothing
     sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer.rsi
-  - type: PressureProtection
-    highPressureMultiplier: 0.02
-    lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.4
+    damageCoefficient: 0.5
   - type: FireProtection
     reduction: 0.5
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.55
+        Blunt: 0.6
         Slash: 0.6
         Piercing: 0.6
-        Heat: 0.5
-        Radiation: 0.5
-        Caustic: 0.5
+        Heat: 0.65
+        Radiation: 0.6
+        Caustic: 0.6
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 0.75
+    sprintModifier: 0.75
   - type: Storage
     grid:
     - 0,0,1,2
@@ -478,6 +422,22 @@
   - type: Construction
     graph: PrivateSecHardsuit
     node: privateSec
+
+- type: entity
+  parent: ClothingOuterHardsuitPrivateerDamaged
+  id: ClothingOuterHardsuitPrivateSecDamaged
+  name: private sec hardsuit damaged
+  description: A hardsuit worn by those who roam the stars without a flag, ready to dive into any raid or misadventure for a handful of doubloons. Scratched and dented but still holds air without duct tape.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/private_sec.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/private_sec.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitPrivateSec
+  - type: Construction
+    graph: PrivateSecHardsuitDamaged
+    node: privateSecDamaged
 
 - type: entity
   parent: [ HardsuitSlotAmpulaPirate, ClothingOuterHardsuitBase, BaseMajorContraband]
@@ -520,25 +480,24 @@
     sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer_armored.rsi
   - type: Clothing
     sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer_armored.rsi
-  - type: PressureProtection
-    highPressureMultiplier: 0.02
-    lowPressureMultiplier: 1000
-  - type: ExplosionResistance
-    damageCoefficient: 0.4
   - type: FireProtection
     reduction: 0.5
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
+  - type: Pierceable
+    level: HardenedMetal
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.55
         Slash: 0.5
         Piercing: 0.4
-        Heat: 0.55
+        Heat: 0.6
         Radiation: 0.5
         Caustic: 0.5
   - type: ClothingSpeedModifier
-    walkModifier: 0.85
-    sprintModifier: 0.85
+    walkModifier: 0.7
+    sprintModifier: 0.7
   - type: Storage
     grid:
     - 0,0,1,2
@@ -642,6 +601,7 @@
   id: ClothingOuterHardsuitMurmillo
   name: murmillo hardsuit
   suffix: Pirate
+  categories: [ HideSpawnMenu ]
   description: A brutal heavy hardsuit. You will be clad in a heavily armored ancient spacesuit featuring an integrated berserker chemical delivery system that keeps you fighting through the worst. Slow but incredibly resilient.
   components:
   - type: Sprite
@@ -652,8 +612,8 @@
     unequipDelay: 9
     stripDelay: 18
   - type: ClothingSpeedModifier
-    walkModifier: 0.3
-    sprintModifier: 0.3
+    walkModifier: 0.6
+    sprintModifier: 0.6
   - type: EmitSoundOnWearerMove
     sound:
       path: /Audio/_Sunrise/Cyborg/robot_legs1.ogg
@@ -668,13 +628,13 @@
         Blunt: 0.4
         Slash: 0.3
         Piercing: 0.2
-        Heat: 0.2
-        Radiation: 0.3
-        Caustic: 0.3
+        Heat: 0.4
+        Radiation: 0.4
+        Caustic: 0.4
       flatReductions:
-        Piercing: 8
+        Piercing: 9
   - type: StaminaResistance
-    damageCoefficient: 0.15
+    damageCoefficient: 0.2
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitMurmillo
   - type: ActivatableUI
@@ -688,7 +648,7 @@
       gasTank:
         length: 1.0
   - type: GasTank
-    outputPressure: 42.6
+    releasePressure: 42.6
     air:
       volume: 10
       temperature: 293.15
@@ -716,6 +676,7 @@
   name: damaged freelance hardsuit
   suffix: Pirate
   description: A freelance hardsuit with cracked plating and punctured pressure seals. It no longer protects its wearer from space.
+  categories: [ HideSpawnMenu ]
   components:
   - type: PressureProtection
     highPressureMultiplier: 1
@@ -727,6 +688,9 @@
     tags:
     - FullBodyOuter
     - WhitelistChameleon
+  - type: Construction
+    graph: PrivateSecHardsuitDamaged
+    node: start
 
 - type: entity
   parent: ClothingOuterHardsuitPrivateerArmored
@@ -734,6 +698,7 @@
   name: damaged armored freelance hardsuit
   suffix: Pirate
   description: An armored freelance hardsuit with cracked plates and punctured pressure seals. It no longer protects its wearer from space.
+  categories: [ HideSpawnMenu ]
   components:
   - type: PressureProtection
     highPressureMultiplier: 1
@@ -750,6 +715,7 @@
   parent: ClothingOuterHardsuitMurmillo
   id: ClothingOuterHardsuitMurmilloDamaged
   name: damaged murmillo hardsuit
+  categories: [ HideSpawnMenu ]
   description: A damaged Murmillo hardsuit. Its pressure seals are no longer functional.
   components:
   - type: Armor
@@ -943,9 +909,11 @@
         mirage: false
         hadOutline: true
         examineThreshold: 0.9
+        minVisibility: 0.01
+        lastVisibility: 0.01
       - type: StealthOnMove
-        passiveVisibilityRate: -1.25
-        movementVisibilityRate: 0.3
+        passiveVisibilityRate: -1.5
+        movementVisibilityRate: 0.05
   - type: PowerCellDraw
     drawRate: 7 # 500 seconds on PowerCellSyndicate
   - type: ToggleCellDraw
@@ -969,8 +937,8 @@
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitInfiltration
   - type: ClothingSpeedModifier
-    walkModifier: 1
-    sprintModifier: 1
+    walkModifier: 0.9
+    sprintModifier: 0.9
     requireActivated: false
   - type: HeldSpeedModifier
   - type: Tag
@@ -1000,7 +968,7 @@
       coefficients:
         Blunt: 0.5
         Slash: 0.4
-        Piercing: 0.35
+        Piercing: 0.5
         Heat: 0.5
         Radiation: 0.3
         Caustic: 0.7
@@ -1251,12 +1219,6 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
-  - type: EmitSoundOnWearerMove
-    sound:
-      collection: FootstepHeavy
-      params:
-        volume: -6
-        variation: 0.09
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitTSF
@@ -1351,7 +1313,7 @@
       gasTank:
         length: 1.0
   - type: GasTank
-    outputPressure: 42.6
+    releasePressure: 42.6
     air:
       volume: 10
       temperature: 293.15

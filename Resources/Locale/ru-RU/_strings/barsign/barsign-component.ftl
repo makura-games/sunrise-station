@@ -128,3 +128,4 @@ barsign-prototype-description-maltroach = Пищ!
 barsign-prototype-name-whiskeyechoes = Эхо Виски
 barsign-prototype-description-whiskeyechoes = Элитный бар для элитных опер... стоп, это же станция NanoTrasen. Почему этот знак в базе данных?
 barsign-prototype-description-sign-off = Этот знак, похоже, не включён.
+barsign-prototype-name-empbarsign = глитч знак бара

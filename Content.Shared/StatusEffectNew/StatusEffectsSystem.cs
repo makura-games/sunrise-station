@@ -14,17 +14,16 @@ namespace Content.Shared.StatusEffectNew;
 /// </summary>
 public sealed partial class StatusEffectsSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _factory = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IComponentFactory _factory = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
-    private EntityQuery<StatusEffectContainerComponent> _containerQuery;
-    private EntityQuery<StatusEffectComponent> _effectQuery;
+    [Dependency] private EntityQuery<StatusEffectContainerComponent> _containerQuery = default!;
+    [Dependency] private EntityQuery<StatusEffectComponent> _effectQuery = default!;
 
-    public static HashSet<string> StatusEffectPrototypes = [];
-    private static readonly object StatusEffectPrototypesLock = new();
+    public readonly HashSet<string> StatusEffectPrototypes = [];
 
     public override void Initialize()
     {
@@ -40,9 +39,6 @@ public sealed partial class StatusEffectsSystem : EntitySystem
         SubscribeLocalEvent<RejuvenateRemovedStatusEffectComponent, StatusEffectRelayedEvent<RejuvenateEvent>>(OnRejuvenate);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-
-        _containerQuery = GetEntityQuery<StatusEffectContainerComponent>();
-        _effectQuery = GetEntityQuery<StatusEffectComponent>();
 
         ReloadStatusEffectsCache();
     }
@@ -79,17 +75,12 @@ public sealed partial class StatusEffectsSystem : EntitySystem
 
     private void ReloadStatusEffectsCache()
     {
-        var prototypes = new HashSet<string>();
+        StatusEffectPrototypes.Clear();
 
         foreach (var ent in _proto.EnumeratePrototypes<EntityPrototype>())
         {
             if (ent.TryGetComponent<StatusEffectComponent>(out _, _factory))
-                prototypes.Add(ent.ID);
-        }
-
-        lock (StatusEffectPrototypesLock)
-        {
-            StatusEffectPrototypes = prototypes;
+                StatusEffectPrototypes.Add(ent.ID);
         }
     }
 
@@ -233,7 +224,7 @@ public sealed partial class StatusEffectsSystem : EntitySystem
 
         var endTime = delay == null ? _timing.CurTime + duration : _timing.CurTime + delay + duration;
         SetStatusEffectEndTime((effect.Value, effectComp), endTime);
-        var startTime = delay == null ? TimeSpan.Zero : _timing.CurTime + delay.Value;
+        var startTime = delay == null ? _timing.CurTime : _timing.CurTime + delay.Value;
         SetStatusEffectStartTime(effect.Value, startTime);
 
         TryApplyStatusEffect((statusEffect.Value, effectComp));

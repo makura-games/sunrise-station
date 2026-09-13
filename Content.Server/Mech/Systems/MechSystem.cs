@@ -10,8 +10,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Mech;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.EntitySystems;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Power.Components;
@@ -22,7 +20,6 @@ using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Content.Shared.Wires;
-using Content.Server.Chat.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.NPC.Components;
@@ -34,35 +31,32 @@ using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using System.Linq;
+using Content.Shared.Atmos;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
-using Content.Shared.Chat;
-using Content.Shared.Damage.Components;
 
 namespace Content.Server.Mech.Systems;
 
 /// <inheritdoc/>
 public sealed partial class MechSystem : SharedMechSystem
 {
-    [Dependency] private readonly NpcFactionSystem _factionSystem = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly SharedToolSystem _toolSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-
+    [Dependency] private NpcFactionSystem _factionSystem = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private SharedToolSystem _toolSystem = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
 
     private static readonly ProtoId<ToolQualityPrototype> PryingQuality = "Prying";
+    private static readonly ProtoId<TagPrototype> PowerCageTag = "PowerCage";
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -77,7 +71,6 @@ public sealed partial class MechSystem : SharedMechSystem
         SubscribeLocalEvent<MechComponent, RemoveBatteryEvent>(OnRemoveBattery);
         SubscribeLocalEvent<MechComponent, MechEntryEvent>(OnMechEntry);
         SubscribeLocalEvent<MechComponent, MechExitEvent>(OnMechExit);
-        SubscribeLocalEvent<MechComponent, MechSayEvent>(OnMechSay);
         SubscribeLocalEvent<MechComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<MechComponent, MechEquipmentRemoveMessage>(OnRemoveEquipmentMessage);
 
@@ -91,18 +84,13 @@ public sealed partial class MechSystem : SharedMechSystem
 
         SubscribeLocalEvent<MechAirComponent, GetFilterAirEvent>(OnGetFilterAir);
 
+        InitializeSunrise(); // Sunrise-Edit — регистрация расширений мехов
+
         #region Equipment UI message relays
         SubscribeLocalEvent<MechComponent, MechGrabberEjectMessage>(ReceiveEquipmentUiMesssages);
         SubscribeLocalEvent<MechComponent, MechSoundboardPlayMessage>(ReceiveEquipmentUiMesssages);
         #endregion
     }
-
-    // Sunrise-Start
-    private void OnMechSay(EntityUid uid, MechComponent component, MechSayEvent args)
-    {
-        _chatSystem.TrySendInGameICMessage(uid, Loc.GetString(args.Message), InGameICChatType.Whisper, ChatTransmitRange.Normal);
-    }
-    // Sunrise-End
 
     private void OnMechCanMoveEvent(EntityUid uid, MechComponent component, UpdateCanMoveEvent args)
     {
@@ -115,7 +103,7 @@ public sealed partial class MechSystem : SharedMechSystem
         if (TryComp<WiresPanelComponent>(uid, out var panel) && !panel.Open)
             return;
 
-        if (component.BatterySlot.ContainedEntity == null && TryComp<BatteryComponent>(args.Used, out var battery) && _tag.HasTag(args.Used, "PowerCage"))
+        if (component.BatterySlot.ContainedEntity == null && TryComp<BatteryComponent>(args.Used, out var battery) && _tag.HasTag(args.Used, PowerCageTag))
         {
             InsertBattery(uid, args.Used, component, battery);
             _actionBlocker.UpdateCanMove(uid);
@@ -168,6 +156,7 @@ public sealed partial class MechSystem : SharedMechSystem
         }
 
         // TODO: this should just be damage and battery
+        SetSunriseMaxIntegrity(uid, component); // Sunrise-Edit — сохраняем пороги прочности существующих прототипов
         component.Integrity = component.MaxIntegrity;
         component.Energy = component.MaxEnergy;
 
@@ -304,67 +293,21 @@ public sealed partial class MechSystem : SharedMechSystem
 
     private void OnDamageChanged(EntityUid uid, MechComponent component, DamageChangedEvent args)
     {
-        if (!TryComp<DamageableComponent>(uid, out var damage))
-            return;
+        var totalDamage = _damageable.GetTotalDamage((uid, args.Damageable));
+        var integrity = component.MaxIntegrity - totalDamage;
+        SetIntegrity(uid, integrity, component);
 
-        component.Integrity = damage.TotalDamage;
-        if (_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var critThreshold) && critThreshold != null)
-            component.MaxIntegrity = critThreshold.Value;
+        SaySunriseCritMessage(uid, component, totalDamage, args.DamageIncreased); // Sunrise-Edit
 
-        SayCritMessage(uid, component, damage, args.DamageIncreased);
-
-        if (args.DamageDelta != null && component.PilotSlot.ContainedEntity != null && args.DamageIncreased)
+        if (args.DamageIncreased &&
+            args.DamageDelta != null &&
+            component.PilotSlot.ContainedEntity != null)
         {
-            var damageToPlayer = args.DamageDelta * component.MechToPilotDamageMultiplier;
-            damageToPlayer.DamageDict.Remove("Mangleness");//Sunrise-Edit
-            _damageable.ChangeDamage(component.PilotSlot.ContainedEntity.Value, damageToPlayer);
+            var damage = args.DamageDelta * component.MechToPilotDamageMultiplier;
+            RemoveSunrisePilotDamage(damage); // Sunrise-Edit — Mangleness не передаётся пилоту
+            _damageable.ChangeDamage(component.PilotSlot.ContainedEntity.Value, damage);
         }
     }
-
-    // Sunrise-Start
-    private void SayCritMessage(EntityUid uid, MechComponent component, DamageableComponent damage, bool damageIncreased)
-    {
-        if (!damageIncreased)
-            return;
-
-        var total = damage.TotalDamage;
-        if (_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var critThreshold))
-        {
-            var damagePercentage = (total / critThreshold) * 100;
-            MechHealthState newState;
-
-            if (damagePercentage >= 95)
-                newState = MechHealthState.Critical;
-            else if (damagePercentage >= 50)
-                newState = MechHealthState.Damaged;
-            else
-                newState = MechHealthState.Healthy;
-
-            if (newState != component.HealthState)
-            {
-                component.HealthState = newState;
-                var message = newState switch
-                {
-                    MechHealthState.Critical => component.MessageAlert5,
-                    MechHealthState.Damaged => component.MessageAlert50,
-                    _ => string.Empty
-                };
-
-                if (string.IsNullOrEmpty(message))
-                    return;
-
-                var chatType = newState switch
-                {
-                    MechHealthState.Critical => InGameICChatType.Speak,
-                    MechHealthState.Damaged => InGameICChatType.Whisper,
-                    _ => InGameICChatType.Whisper
-                };
-
-                _chatSystem.TrySendInGameICMessage(uid, Loc.GetString(message), chatType, ChatTransmitRange.Normal);
-            }
-        }
-    }
-    // Sunrise-End
 
     private void ToggleMechUi(EntityUid uid, MechComponent? component = null, EntityUid? user = null)
     {

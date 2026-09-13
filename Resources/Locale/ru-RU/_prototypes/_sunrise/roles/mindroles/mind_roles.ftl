@@ -1,5 +1,3 @@
-ent-MindRoleTerminator = Роль Терминатора
-    .desc = { ent-BaseMindRoleAntag.desc }
 ent-MindRoleFugitive = Роль Беглеца
     .desc = { ent-BaseMindRoleAntag.desc }
 ent-MindRolePlanetPrisoner = Роль Заключенного

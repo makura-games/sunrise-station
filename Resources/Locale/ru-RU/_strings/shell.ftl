@@ -55,3 +55,13 @@ shell-argument-number-invalid = Аргумент { $index } должен быт�
 # Hints
 shell-argument-username-hint = <username>
 shell-argument-username-optional-hint = [username]
+shell-can-only-run-from-pre-round-lobby = Вы можете выполнить эту команду только когда игра находится в предраундовом лобби.
+shell-can-only-run-while-round-is-active = Вы можете выполнить эту команду только во время активного раунда.
+shell-must-have-body = У вас должно быть тело, чтобы выполнить эту команду.
+
+## Arguments
+
+shell-need-exactly-zero-arguments = Эта команда не принимает аргументов.
+
+shell-missing-required-permission = Вам требуется {$perm} для этой команды!
+shell-entity-target-lacks-component = Целевая сущность не имеет компонента {INDEFINITE($componentName)} {$componentName}

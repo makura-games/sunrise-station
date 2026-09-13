@@ -17,3 +17,4 @@ store-currency-display-wizcoin = Маг₭øин™
 store-currency-display-evolutionpoints = Очки эволюции
 store-currency-display-doubloon = ДБ
 store-currency-display-credit = кредиты
+store-currency-display-dna = ДНК

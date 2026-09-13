@@ -50,6 +50,7 @@
       - Theatre
       - GenpopEnter
       - GenpopLeave
+      - Brigmedic # Sunrise
       - BlueShield # Sunrise
       - BlueShieldEnsign # Sunrise
       - Ntrep # Sunrise
@@ -141,6 +142,7 @@
     - Ntrep # Sunrise
     - Magistrat # Sunrise
     - Barber  # Sunrise
+    - Brigmedic # Sunrise
     - Mining # Sunrise
     - Pirate # Sunrise
     privilegedIdSlot:

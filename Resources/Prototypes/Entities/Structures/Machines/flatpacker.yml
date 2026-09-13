@@ -69,6 +69,11 @@
           components:
           - MachineBoard
           - ComputerBoard
+        # Sunrise added start - предотвращение упаковки отмеченных плат
+        blacklist:
+          tags:
+          - CannotBeFlatpacked
+        # Sunrise added end
   - type: ContainerContainer
     containers:
       machine_board: !type:Container

@@ -47,17 +47,44 @@
     sprite: Objects/Misc/module.rsi
     layers:
     - state: datadisk_base
-      map: ["enum.DamageStateVisualLayers.Base"]
+      map: [ "base" ]
     - state: datadisk_label
+    - state: datadisk_t2_marks
+      shader: unshaded
+      map: [ "t2_marks" ]
+      visible: false
+    - state: datadisk_t2_border
+      map: [ "t2_border" ]
+      visible: false
+    - state: datadisk_t3_marks
+      map: [ "t3_marks" ]
+      shader: unshaded
+      visible: false
+    - state: datadisk_t3_border
+      map: [ "t3_border" ]
+      visible: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TechDiskVisuals.Discipline:
+        base:
+          Industrial: { color: "#eeac34" }
+          Arsenal: { color: "#dc373b" }
+          Experimental: { color: "#9a6ef0" }
+          CivilianServices: { color: "#7ecd48" }
+
+      enum.TechDiskVisuals.Tier:
+        t2_marks:
+          2: { visible: true }
+        t2_border:
+          2: { visible: true }
+        t3_marks:
+          3: { visible: true }
+        t3_border:
+          3: { visible: true }
   - type: Item
     size: Tiny
-  - type: RandomSprite
-    available:
-    - enum.DamageStateVisualLayers.Base:
-        datadisk_base: Sixteen
   - type: TechnologyDisk
-  - type: StaticPrice
-    price: 100
   - type: Tag # defaults to autolathe-insertable
     tags:
     - BlueprintAutolathe
@@ -99,33 +126,41 @@
 # region security
 - type: entity
   parent: BaseBlueprintSecurity
-  id: BlueprintMagAsh12Slug
-  name: ash-12 magazine slug blueprint
-  description: A blueprint with a schematic of a ash-12 magazine with slugs. It can be inserted into an autolathe and security fabricator.
+  id: BlueprintMagAsh12Basic
+  name: ash-12 magazine basic blueprint
+  description: A blueprint with a schematic of a ash-12 magazine with all basic variants. It can be inserted into an autolathe and security fabricator.
   components:
   - type: Blueprint
     providedRecipes:
     - MagazineAsh12Slug
-
-- type: entity
-  parent: BaseBlueprintSecurity
-  id: BlueprintMagAsh12Beanbag
-  name: ash-12 magazine beanbag blueprint
-  description: A blueprint with a schematic of a ash-12 magazine with beanbag. It can be inserted into an autolathe and security fabricator.
-  components:
-  - type: Blueprint
-    providedRecipes:
     - MagazineAsh12Beanbag
+    - MagazineAsh12Flare
 
 - type: entity
   parent: BaseBlueprintSecurity
-  id: BlueprintMagAsh12Flare
-  name: ash-12 magazine flare blueprint
-  description: A blueprint with a schematic of a ash-12 magazine with flare. It can be inserted into an autolathe and security fabricator.
+  id: BlueprintMagMagnumBasic
+  name: magnum basic magazine blueprint
+  description: A blueprint with a schematic of a basic magnum magazine. It can be inserted into an autolathe and security fabricator.
   components:
   - type: Blueprint
     providedRecipes:
-    - MagazineAsh12Flare
+    - MagazineMagnumEmpty
+    - MagazineMagnumPractice
+    - MagazineMagnumRubber
+    - MagazineMagnum
+    - MagazineMagnumHP
+    - MagazineMagnumFMJ
+
+# region salvage
+- type: entity
+  parent: BaseBlueprintSecurity
+  id: BlueprintMagazineGarand
+  name: Garand clip blueprint
+  description: A blueprint for producing loaded .308 Garand clips in an autolathe.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - MagazineGarand
 
 # region medical
 - type: entity

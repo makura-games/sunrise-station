@@ -1,2 +1,40 @@
 wires-panel-component-on-examine-open = [color=lightgray]Техническая панель[/color] [color=red]открыта[/color].
 wires-panel-component-on-examine-closed = [color=lightgray]Техническая панель[/color] [color=darkgreen]закрыта[/color].
+wire-name-color-red = Красный
+wire-name-color-blue = Синий
+wire-name-color-green = Зелёный
+wire-name-color-orange = Оранжевый
+wire-name-color-brown = Коричневый
+wire-name-color-gold = Золотой
+wire-name-color-gray = Серый
+wire-name-color-cyan = Циан
+wire-name-color-navy = Тёмно-синий
+wire-name-color-purple = Пурпурный
+wire-name-color-pink = Розовый
+wire-name-color-fuchsia = Фуксия
+
+# letter names
+wire-letter-name-alpha = Альфа
+wire-letter-name-beta = Бета
+wire-letter-name-gamma = Гамма
+wire-letter-name-delta = Дельта
+wire-letter-name-epsilon = Эпсилон
+wire-letter-name-zeta = Зета
+wire-letter-name-eta = Эта
+wire-letter-name-theta = Тета
+wire-letter-name-iota = Йота
+wire-letter-name-kappa = Каппа
+wire-letter-name-lambda = Лямбда
+wire-letter-name-mu = Мю
+wire-letter-name-nu = Ню
+wire-letter-name-xi = Хи
+wire-letter-name-omicron = Омикрон
+wire-letter-name-pi = Пи
+wire-letter-name-rho = Ро
+wire-letter-name-sigma = Сигма
+wire-letter-name-tau = Тау
+wire-letter-name-upsilon = Упсилон
+wire-letter-name-phi = Фи
+wire-letter-name-chi = Хи
+wire-letter-name-psi = Пси
+wire-letter-name-omega = Омега

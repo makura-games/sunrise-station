@@ -4,17 +4,17 @@ using Content.Shared.Database;
 using Content.Shared.Interaction;
 using Content.Shared.DoAfter;
 using Content.Shared.Body.Systems;
-using Content.Shared.Body.Organ;
 using Content.Shared.Starlight.Medical.Surgery;
 using Content.Shared.Starlight.Medical.Surgery.Steps.Parts;
+using Content.Shared.Body;
 
 namespace Content.Server._Sunrise.Antags.Abductor;
 
 public sealed partial class AbductorSystem : SharedAbductorSystem
 {
 
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly ISharedAdminLogManager _admin = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
 
     public void InitializeExtractor()
     {
@@ -27,8 +27,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
     {
         if (!_actionBlockerSystem.CanInstrumentInteract(args.User, args.Used, args.Target)
             || !args.Target.HasValue
-            || !_body.TryGetBodyOrganEntityComps<OrganHeartComponent>(args.Target.Value, out var hearts)
-            || hearts.Count < 1)
+            || !_body.TryGetOrganWithComponent<OrganHeartComponent>(args.Target.Value, out _))
             return;
 
         if (HasComp<SurgeryTargetComponent>(args.Target))
@@ -51,13 +50,12 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
     private void OnExtractDoAfter(Entity<AbductorExtractorComponent> ent, ref AbductorExtractDoAfterEvent args)
     {
-        if (args.Target == null || args.User == null) return;
-
-        if (!_body.TryGetBodyOrganEntityComps<OrganHeartComponent>(args.Target.Value, out var hearts))
+        if (args.Target is not { } target ||
+            !_body.TryGetOrganWithComponent<OrganHeartComponent>(target, out var heart))
             return;
 
-        _admin.Add(LogType.InteractUsing, LogImpact.Low, $"Heart successfully extracted from {ToPrettyString(args.Target.Value)} using {ToPrettyString(ent.Owner)} by {ToPrettyString(args.User)}");
-        foreach (var heart in hearts)
-            _body.RemoveOrgan(heart, _entityManager.GetComponent<OrganComponent>(heart));
+        _admin.Add(LogType.InteractUsing, LogImpact.Low, $"Heart successfully extracted from {ToPrettyString(target)} using {ToPrettyString(ent.Owner)} by {ToPrettyString(args.User)}");
+
+        _body.TryRemoveOrgan((heart, Comp<OrganComponent>(heart)));
     }
 }

@@ -77,6 +77,11 @@
   - type: StaticPrice
     price: 70
   - type: PowerSwitch
+  # Sunrise-Edit-Start
+  - type: StationAiWhitelist
+    enabled: false
+  # Sunrise-Edit-End
+
 
 - type: entity
   id: DisposalUnit

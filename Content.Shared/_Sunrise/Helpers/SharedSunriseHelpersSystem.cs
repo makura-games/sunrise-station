@@ -5,6 +5,8 @@ namespace Content.Shared._Sunrise.Helpers;
 
 public abstract partial class SharedSunriseHelpersSystem : EntitySystem
 {
+    [Dependency] private EntityManager _entMan = default!;
+
     #region Get All/First entity
 
     /// <summary>
@@ -17,7 +19,7 @@ public abstract partial class SharedSunriseHelpersSystem : EntitySystem
     /// <returns>Полный список всех ентити в игре с данными компонентами</returns>
     public IEnumerable<Entity<T1, T2>> GetAll<T1, T2>() where T1 : IComponent where T2 : IComponent
     {
-        var query = EntityManager.AllEntityQueryEnumerator<T1, T2>();
+        var query = _entMan.AllEntityQueryEnumerator<T1, T2>();
         while (query.MoveNext(out var uid, out var component1, out var component2))
         {
             yield return (uid, component1, component2);
@@ -66,7 +68,7 @@ public abstract partial class SharedSunriseHelpersSystem : EntitySystem
     {
         entity = null;
 
-        var query = EntityManager.AllEntityQueryEnumerator<T>();
+        var query = _entMan.AllEntityQueryEnumerator<T>();
         while (query.MoveNext(out var uid, out var component))
         {
             entity = (uid, component);

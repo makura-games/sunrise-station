@@ -15,6 +15,42 @@
     state: initial_infected
   storytellerStress: 1
 
+- type: antagSpecifier
+  parent: BaseAntagSpecifier # Sunrise-Edit — сохраняем разрешение для допустимых глав.
+  id: InitialInfected
+  pickCommandStaff: true # Sunrise-Edit
+  prefRoles: [ InitialInfected ]
+  blacklist:
+    components:
+    - ZombieImmune
+    - AntagImmune
+  briefing:
+    text: zombie-patientzero-role-greeting
+    color: Plum
+    sound: "/Audio/Ambience/Antag/zombie_start.ogg"
+  components:
+  - type: PendingZombie #less time to prepare than normal
+    minInitialInfectedGrace: 300
+    maxInitialInfectedGrace: 450
+  - type: ZombifyOnDeath
+  - type: IncurableZombie
+  - type: InitialInfected
+  mindRoles:
+  - MindRoleInitialInfected
+
+# Sunrise edit start - отдельные настройки начальных заражённых для вспышки
+- type: antagSpecifier
+  parent: InitialInfected
+  id: InitialInfectedOutbreak
+  ignoreJobRestrictions: true
+  components:
+  - type: PendingZombie
+    minInitialInfectedGrace: 300
+    maxInitialInfectedGrace: 450
+# Sunrise edit end
+
+# TODO: Make it so creating new zombies uses antag prototypes! This saves a *lot* of boilerplate for conversion antags.
+
 - type: antag
   id: Zombie
   name: roles-antag-zombie-name

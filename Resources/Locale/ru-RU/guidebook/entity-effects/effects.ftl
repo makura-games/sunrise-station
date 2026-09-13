@@ -480,3 +480,23 @@ entity-effect-guidebook-plant-mutate-chemicals =
         [1] Мутирует
         *[other] мутируют
     } растение, чтобы производить {$name}
+
+entity-effect-guidebook-status-effect-old =
+    { $type ->
+        [update]{ $chance ->
+                    [1] Вызывает
+                    *[other] вызвать
+                } {LOC($key)} как минимум на {NATURALFIXED($time, 3)} {MANY("second", $time)} без накопления
+        [add]   { $chance ->
+                    [1] Вызывает
+                    *[other] вызвать
+                } {LOC($key)} как минимум на {NATURALFIXED($time, 3)} {MANY("second", $time)} с накоплением
+        [set]   { $chance ->
+                    [1] Вызывает
+                    *[other] вызвать
+                } {LOC($key)} на {NATURALFIXED($time, 3)} {MANY("second", $time)} без накопления
+        *[remove]{ $chance ->
+                    [1] Снимает
+                    *[other] снять
+                } {NATURALFIXED($time, 3)} {MANY("second", $time)} {LOC($key)}
+    }

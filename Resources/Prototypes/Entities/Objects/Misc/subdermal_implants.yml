@@ -197,7 +197,7 @@
     - Syndicate
 
 - type: entity
-  parent: [ BaseSubdermalImplant, StorePresetUplink ]
+  parent: BaseSubdermalImplant
   id: UplinkImplant
   name: uplink implant
   description: This implant lets the user access a hidden Syndicate uplink at will.
@@ -208,9 +208,7 @@
     whitelist:
       components:
       - Hands # prevent mouse buying grenade penguin since its not telepathic
-  - type: Store
-    balance:
-      Telecrystal: 0
+  - type: RemoteStore
   - type: UserInterface
     interfaces:
       enum.StoreUiKey.Key:
@@ -261,7 +259,7 @@
     implantAction: ActionActivateDnaScramblerImplant
     whitelist:
       components:
-      - HumanoidAppearance # syndies cant turn hamlet into a human
+      - HumanoidProfile # syndies cant turn hamlet into a human
   - type: TriggerOnActivateImplant
   - type: DnaScrambleOnTrigger
     targetUser: true
@@ -295,6 +293,7 @@
     implantAction: ActionChangeVoiceMaskImplant
   - type: VoiceMask
     overrideIdentity: true
+    changeIDName: true
   - type: UserInterface
     interfaces:
       enum.VoiceMaskUIKey.Key:

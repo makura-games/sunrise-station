@@ -2,6 +2,7 @@ using Content.Shared.Access.Systems;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
@@ -9,13 +10,14 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
-public sealed class BatteryWeaponFireModesSystem : EntitySystem
+public sealed partial class BatteryWeaponFireModesSystem : EntitySystem
 {
-    [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private AccessReaderSystem _accessReaderSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedItemSystem _item = default!; // Sunrise-Edit
 
     public override void Initialize()
     {
@@ -115,6 +117,8 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
         var fireMode = ent.Comp.FireModes[index];
         ent.Comp.CurrentFireMode = index;
         Dirty(ent);
+
+        _item.SetHeldPrefix(ent, fireMode.HeldPrefix); // Sunrise-Edit - синхронизируем спрайт в руках с режимом стрельбы
 
         if (_prototypeManager.TryIndex<EntityPrototype>(fireMode.Prototype, out var prototype))
         {

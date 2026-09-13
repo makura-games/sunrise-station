@@ -1,4 +1,4 @@
-# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 - type: reagent
   id: FluorosulfuricAcidHumanoidXeno
   name: reagent-name-fluorosulfuric-acid
@@ -31,7 +31,7 @@
         emote: Scream
         probability: 0.2
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 3.00 # High damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
       effects:
       - !type:HealthChange
@@ -90,7 +90,7 @@
           emote: Scream
           probability: 0.8
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
         - !type:HealthChange
           conditions:
@@ -124,7 +124,7 @@
   - !type:PlantAdjustMutationLevel
     amount: 0.3
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 0.25
       effects:
       - !type:HealthChange
@@ -153,7 +153,7 @@
   boilingPoint: 255.0
   meltingPoint: 36.0
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:GenericStatusEffect
         key: Muted
@@ -171,7 +171,7 @@
   boilingPoint: 444.0
   meltingPoint: 128.0
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects: # It would be nice to have speech slurred or mumbly, but accents are a bit iffy atm. Same for distortion effects.
       - !type:MovementSpeedModifier
         walkSpeedModifier: 0.65

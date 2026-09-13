@@ -1,6 +1,6 @@
 - type: entity
   id: PartResomi
-  parent: [BaseItem, BasePart]
+  parent: OrganBase
   name: "resomi body part"
   abstract: true
   components:
@@ -11,11 +11,14 @@
         Quantity: 3
       - ReagentId: Blood
         Quantity: 10
+  - type: VisualOrganMarkings
+    markingData:
+      group: Resomi
 
 - type: entity
   id: TorsoResomi
   name: "resomi torso"
-  parent: [PartResomi, BaseTorso]
+  parent: [PartResomi, OrganBaseTorso]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
@@ -31,7 +34,7 @@
 - type: entity
   id: HeadResomi
   name: "resomi head"
-  parent: [PartResomi, BaseHead]
+  parent: [PartResomi, OrganBaseHead]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
@@ -47,7 +50,7 @@
 - type: entity
   id: LeftArmResomi
   name: "left resomi arm"
-  parent: [PartResomi, BaseLeftArm]
+  parent: [PartResomi, OrganBaseArmLeft]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
@@ -56,7 +59,7 @@
 - type: entity
   id: RightArmResomi
   name: "right resomi arm"
-  parent: [PartResomi, BaseRightArm]
+  parent: [PartResomi, OrganBaseArmRight]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
@@ -65,7 +68,7 @@
 - type: entity
   id: LeftHandResomi
   name: "left resomi hand"
-  parent: [PartResomi, BaseLeftHand]
+  parent: [PartResomi, OrganBaseHandLeft]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
@@ -74,7 +77,7 @@
 - type: entity
   id: RightHandResomi
   name: "right resomi hand"
-  parent: [PartResomi, BaseRightHand]
+  parent: [PartResomi, OrganBaseHandRight]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
@@ -83,7 +86,7 @@
 - type: entity
   id: LeftLegResomi
   name: "left resomi leg"
-  parent: [PartResomi, BaseLeftLeg]
+  parent: [PartResomi, OrganBaseLegLeft]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
@@ -92,7 +95,7 @@
 - type: entity
   id: RightLegResomi
   name: "right resomi leg"
-  parent: [PartResomi, BaseRightLeg]
+  parent: [PartResomi, OrganBaseLegRight]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
@@ -101,7 +104,7 @@
 - type: entity
   id: LeftFootResomi
   name: "left resomi foot"
-  parent: [PartResomi, BaseLeftFoot]
+  parent: [PartResomi, OrganBaseFootLeft]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
@@ -110,7 +113,7 @@
 - type: entity
   id: RightFootResomi
   name: "right resomi foot"
-  parent: [PartResomi, BaseRightFoot]
+  parent: [PartResomi, OrganBaseFootRight]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi

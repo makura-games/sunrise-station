@@ -8,5 +8,5 @@ ent-ClothingShoesBootsBlueShieldFilled = { ent-ClothingShoesBootsBlueShield }
     .suffix = Заполнен
     .desc = { ent-ClothingShoesBootsBlueShield.desc }
 ent-ClothingBeltSecurityFilledERT = { ent-ClothingBeltMilitaryWebbingERT }
-    .suffix = Filled, ERT
+    .suffix = Заполненный, ERT
     .desc = { ent-ClothingBeltMilitaryWebbingERT.desc }

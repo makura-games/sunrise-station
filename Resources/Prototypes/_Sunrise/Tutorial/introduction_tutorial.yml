@@ -1,6 +1,9 @@
 - type: tutorialSequence
   id: IntroductionTutorial
   duration: 540
+  estimatedDuration:
+    minimum: 180
+    maximum: 420
   priority: 0
   name: introduction-tutorial-name
   tooltip: introduction-tutorial-tooltip
@@ -8,6 +11,8 @@
   grid: /Maps/_Sunrise/Tutorials/introduction_tutorial.yml
   playerEntity: IntroductionTutorialPlayer
   steps:
+  # Приветствие и обзор туториала
+  - IntroTutWelcome
   #  1. Movement basics
   - IntroTutWalk
   #  2. Learn to swap hands
@@ -85,6 +90,18 @@
     - type: TutorialPickupSoftLock
       blockAll: true
 
+# Приветствие и обзор туториала
+- type: tutorialStep
+  id: IntroTutWelcome
+  parent: IntroductionTutorialStepBase
+  bubble:
+    text: intro-tut-welcome-bubble
+  chatMessage: intro-tut-welcome-chat
+  ttsMessage: intro-tut-welcome-tts
+  conditions:
+  - !type:StepDelayCondition
+    delay: 13
+
 #  1. Walk around to learn movement
 - type: tutorialStep
   id: IntroTutWalk
@@ -125,7 +142,7 @@
     name: StatusPanelLeft
   conditions:
   - !type:StepDelayCondition
-    delay: 5
+    delay: 8
 
 #  4. Head to the locker room
 - type: tutorialStep
@@ -391,7 +408,7 @@
     name: ActionsContainer
   conditions:
   - !type:StepDelayCondition
-    delay: 5
+    delay: 10
 
 - type: entity
   parent: BaseTutorialPlayer

@@ -12,9 +12,9 @@ namespace Content.Client.UserInterface.Systems.Info;
 
 public sealed partial class InfoUIController : UIController, IOnStateExited<GameplayState>
 {
-    [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IClientConsoleHost _consoleHost = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private RulesPopup? _rulesPopup;
     private RulesAndInfoWindow? _infoWindow;
@@ -38,7 +38,7 @@ public sealed partial class InfoUIController : UIController, IOnStateExited<Game
             "",
             (_, _, _) =>
         {
-            OnAcceptPressed();
+            OnAcceptPressed(true);
         });
     }
 
@@ -83,9 +83,10 @@ public sealed partial class InfoUIController : UIController, IOnStateExited<Game
         _consoleHost.ExecuteCommand("quit");
     }
 
-    private void OnAcceptPressed()
+    private void OnAcceptPressed(bool fuckRules)
     {
-        _netManager.ClientSendMessage(new RulesAcceptedMessage());
+        var message = new RulesAcceptedMessage() { FuckRules = fuckRules };
+        _netManager.ClientSendMessage(message);
 
         var hadPopup = _rulesPopup != null; // Sunrise-edit
         _rulesPopup?.Orphan();

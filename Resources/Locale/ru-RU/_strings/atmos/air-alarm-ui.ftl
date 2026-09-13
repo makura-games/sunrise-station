@@ -66,3 +66,32 @@ air-alarm-ui-thresholds-upper-warning-bound = Верхняя тревожная 
 air-alarm-ui-thresholds-lower-warning-bound = Нижняя тревожная граница
 air-alarm-ui-thresholds-copy = Копирование пороговых значений на все устройства
 air-alarm-ui-thresholds-copy-tooltip = Копирует пороговые значения датчиков этого устройства на все устройства в этой вкладке воздушной тревоги.
+
+air-alarm-ui-title = Воздушная сигнализация
+
+air-alarm-ui-window-mode-select-locked-label = [bold][color=red] Сбой переключателя режимов! [/color][/bold]
+
+-air-alarm-state-name = { $state ->
+    [normal] Норма
+    [warning] Внимание
+    [danger] Опасность
+    [emagged] Взломано
+   *[invalid] Недействительно
+}
+
+air-alarm-ui-window-listing-title = {$address} : {-air-alarm-state-name(state:$state)}
+
+
+air-alarm-ui-pump-direction-siphoning = Откачка
+air-alarm-ui-pump-direction-scrubbing = Фильтрация
+air-alarm-ui-pump-direction-releasing = Выпуск
+
+air-alarm-ui-pressure-bound-nobound = Без ограничений
+air-alarm-ui-pressure-bound-internalbound = Внутреннее ограничение
+air-alarm-ui-pressure-bound-externalbound = Внешнее ограничение
+air-alarm-ui-pressure-bound-both = Оба
+
+air-alarm-ui-widget-gas-filters = Газовые фильтры
+
+air-alarm-ui-scrubber-select-all-gases-label = Выбрать всё
+air-alarm-ui-scrubber-deselect-all-gases-label = Снять всё

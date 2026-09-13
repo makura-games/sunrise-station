@@ -6,10 +6,8 @@
 - type: marking
   id: SwineEars
   bodyPart: HeadTop
-  markingCategory: HeadTop
   forcedColoring: true
-  followSkinColor: true
-  speciesRestriction: [Swine]
+  groupWhitelist: [ Swine ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/swine_ears.rsi
     state: bald_s

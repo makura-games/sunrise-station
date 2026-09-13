@@ -1,24 +1,33 @@
-// Transfer of closed PR of Wizards 31841
-using Content.Shared.Inventory;
-using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Popups;
+using Content.Shared.Clothing.Components;
+using Content.Shared.Examine;
+using Content.Shared.Verbs;
 
 namespace Content.Shared.Electrocution;
 
 public sealed partial class InsulatedSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedPopupSystem PopupSystem = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+
+    /// <inheritdoc />
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<InsulatedComponent, InventoryRelayedEvent<ShotAttemptedEvent>>(OnShoot);
+
+        SubscribeLocalEvent<InsulatedComponent, GetVerbsEvent<ExamineVerb>>(OnDetailedExamine);
     }
-    private void OnShoot(EntityUid uid, InsulatedComponent comp, ref InventoryRelayedEvent<ShotAttemptedEvent> args)
+
+    private void OnDetailedExamine(EntityUid ent, InsulatedComponent component, ref GetVerbsEvent<ExamineVerb> args)
     {
-        if (comp.PreventOpperatinGuns && !args.Args.Used.Comp.BigTrigger)
-        {
-            PopupSystem.PopupClient(Loc.GetString("gun-Insulated-gloves"), args.Args.User);
-            args.Args.Cancel();
-        }
+        if (!HasComp<ClothingComponent>(ent))
+            return;
+
+        var iconTexture = "/Textures/Interface/VerbIcons/zap.svg.192dpi.png";
+
+        _examine.AddHoverExamineVerb(args,
+            component,
+            Loc.GetString("insulated-examinable-verb-text"),
+            Loc.GetString("insulated-examinable-verb-text-message"),
+            iconTexture
+        );
     }
 }

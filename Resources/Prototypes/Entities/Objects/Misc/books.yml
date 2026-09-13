@@ -73,7 +73,7 @@
         Blunt: 1
   - type: DamageOtherOnHit
     damage:
-      types:
+      types: {}
   # Sunrise-start
   - type: PhysicalComposition
     materialComposition:

@@ -11,11 +11,8 @@ namespace Content.Server.Atmos.Reactions
     {
         public ReactionResult React(GasMixture mixture, IGasMixtureHolder? holder, AtmosphereSystem atmosphereSystem, float heatScale)
         {
-            //SunRise start
-            var initialHyperNoblium = mixture.GetMoles(Gas.HyperNoblium);
-            if (initialHyperNoblium >= 5.0f && mixture.Temperature > 20f)
+            if (atmosphereSystem.IsSunriseReactionSuppressed(mixture)) // Sunrise-Edit — общая проверка HyperNoblium вынесена в partial.
                 return ReactionResult.NoReaction;
-            //SunRise end
             var energyReleased = 0f;
             var oldHeatCapacity = atmosphereSystem.GetHeatCapacity(mixture, true);
             var temperature = mixture.Temperature;

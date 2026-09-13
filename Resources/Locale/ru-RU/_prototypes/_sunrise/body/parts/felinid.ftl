@@ -1,0 +1,23 @@
+ent-OrganFelinidEyes = { ent-OrganHumanEyes }
+    .desc = { ent-OrganHumanEyes.desc }
+
+ent-OrganFelinidTorso = туловище фелинида
+    .desc = { ent-PartHuman.desc }
+ent-OrganFelinidHead = голова фелинида
+    .desc = { ent-PartHuman.desc }
+ent-OrganFelinidArmLeft = левая рука фелинида
+    .desc = { ent-PartHuman.desc }
+ent-OrganFelinidArmRight = правая рука фелинида
+    .desc = { ent-PartHuman.desc }
+ent-OrganFelinidHandLeft = левая кисть фелинида
+    .desc = { ent-PartHuman.desc }
+ent-OrganFelinidHandRight = правая кисть фелинида
+    .desc = { ent-PartHuman.desc }
+ent-OrganFelinidLegLeft = левая нога фелинида
+    .desc = { ent-PartHuman.desc }
+ent-OrganFelinidLegRight = правая нога фелинида
+    .desc = { ent-PartHuman.desc }
+ent-OrganFelinidFootLeft = левая стопа фелинида
+    .desc = { ent-PartHuman.desc }
+ent-OrganFelinidFootRight = правая стопа фелинида
+    .desc = { ent-PartHuman.desc }

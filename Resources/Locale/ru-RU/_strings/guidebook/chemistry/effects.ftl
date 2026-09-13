@@ -4,7 +4,6 @@ second = { $count ->
     [many] секунд
    *[other] секунд
 }
-
 dead = { $count ->
     [one] мёртвый
     [few] мёртвых
@@ -371,14 +370,14 @@ reagent-effect-guidebook-plant-robust-harvest =
     } потенцию растения путём { $increase } до максимума в { $limit }. Приводит к тому, что растение теряет свои семена, когда потенция достигает { $seedlesstreshold }. Попытка повысить потенцию свыше { $limit } может вызвать снижение урожайности с вероятностью 10%.
 reagent-effect-guidebook-plant-seeds-add =
     { $chance ->
-        [1] Restores the
-       *[other] restore the
-    } seeds of the plant
+        [1] Восстанавливает
+       *[other] восстанавливает
+    } семена растения
 reagent-effect-guidebook-plant-seeds-remove =
     { $chance ->
-        [1] Removes the
-       *[other] remove the
-    } seeds of the plant
+        [1] Удаляет
+       *[other] удаляет
+    } семена растения
 reagent-effect-guidebook-cause-flesh-cultist-infection =
     { $chance ->
         [1] Вызывает

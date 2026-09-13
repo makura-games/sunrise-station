@@ -59,7 +59,7 @@ clean components/blackboard/state.
 ```csharp
 public sealed partial class MyOperator : HTNOperator, IHtnConditionalShutdown
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     [DataField("shutdownState")]
     public HTNPlanState ShutdownState { get; private set; } = HTNPlanState.TaskFinished;
@@ -101,7 +101,7 @@ public sealed partial class MyOperator : HTNOperator, IHtnConditionalShutdown
 ```csharp
 public sealed partial class MyPrecondition : HTNPrecondition
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     [DataField("key", required: true)]
     public string Key = default!;

@@ -36,7 +36,7 @@
           sprite: Objects/Tools/welder_mini.rsi
           state: icon
         name: crafting-menu-name-EW
-      - tag: PowerCellSmall
+      - tag: PowerCell
         icon:
           sprite: Objects/Power/power_cells.rsi
           state: small

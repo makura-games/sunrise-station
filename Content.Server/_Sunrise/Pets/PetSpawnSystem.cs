@@ -1,4 +1,4 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 
 using Content.Server._Sunrise.PlayerCache;
 using Content.Server._Sunrise.SponsorValidation;
@@ -8,12 +8,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Pets;
 
-public sealed class PetSpawnSystem : EntitySystem
+public sealed partial class PetSpawnSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SponsorValidationSystem _validationSystem = default!;
-    [Dependency] private readonly PlayerCacheManager _playerCache = default!;
-    [Dependency] private readonly SharedPettingSystem _pettingSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SponsorValidationSystem _validationSystem = default!;
+    [Dependency] private PlayerCacheManager _playerCache = default!;
+    [Dependency] private SharedPettingSystem _pettingSystem = default!;
 
     public override void Initialize()
     {
@@ -38,7 +38,7 @@ public sealed class PetSpawnSystem : EntitySystem
             return;
 
         var coordinates = Transform(ev.Mob).Coordinates;
-        var spawnedPet = EntityManager.SpawnEntity(petSelectionPrototype.PetEntity, coordinates);
+        var spawnedPet = Spawn(petSelectionPrototype.PetEntity, coordinates);
 
         if (!TryComp<PettableOnInteractComponent>(spawnedPet, out var pet))
             return;

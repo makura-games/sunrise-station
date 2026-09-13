@@ -8,10 +8,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._Sunrise.Laws.Systems;
 
-public sealed class StationCorporateLawSystem : SharedStationCorporateLawSystem
+public sealed partial class StationCorporateLawSystem : SharedStationCorporateLawSystem
 {
-    [Dependency] private readonly Robust.Shared.Configuration.IConfigurationManager _config = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private Robust.Shared.Configuration.IConfigurationManager _config = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {

@@ -1,4 +1,4 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 using Content.Shared._Sunrise.GhostTheme;
 using Content.Shared.Ghost;
 using Robust.Shared.Player;
@@ -11,12 +11,12 @@ using Content.Shared._Sunrise.PlayerCache;
 
 namespace Content.Server._Sunrise.GhostTheme;
 
-public sealed class GhostThemeSystem : EntitySystem
+public sealed partial class GhostThemeSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly SponsorValidationSystem _validationSystem = default!;
-    [Dependency] private readonly PlayerCacheManager _playerCache = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private SponsorValidationSystem _validationSystem = default!;
+    [Dependency] private PlayerCacheManager _playerCache = default!;
 
     public override void Initialize()
     {
@@ -55,16 +55,12 @@ public sealed class GhostThemeSystem : EntitySystem
         if (!_prototypeManager.TryIndex<GhostThemePrototype>(msg.SelectedGhostTheme, out var ghostThemePrototype))
             return;
 
-        if (_playerCache.TryGetCache(actorComp.PlayerSession.UserId, out var cache))
-        {
-            cache.GhostTheme = ghostThemePrototype.ID;
-            _playerCache.SetCache(actorComp.PlayerSession.UserId, cache);
-        }
-        else
-        {
+        if (!_playerCache.TryGetCache(actorComp.PlayerSession.UserId, out var cache))
             cache = new PlayerCacheData();
-            _playerCache.SetCache(actorComp.PlayerSession.UserId, cache);
-        }
+
+        cache.GhostTheme = ghostThemePrototype.ID;
+        _playerCache.SetCache(actorComp.PlayerSession.UserId, cache);
+
         var ghostTheme = EnsureComp<GhostThemeComponent>(ent);
         ghostTheme.GhostTheme = msg.SelectedGhostTheme;
         Dirty(ent, ghostTheme);
@@ -92,6 +88,8 @@ public sealed class GhostThemeSystem : EntitySystem
         if (!_prototypeManager.TryIndex<GhostThemePrototype>(ghostTheme, out var ghostThemePrototype))
             return;
 
-        EnsureComp<GhostThemeComponent>(uid).GhostTheme = ghostTheme;
+        var themeComponent = EnsureComp<GhostThemeComponent>(uid);
+        themeComponent.GhostTheme = ghostTheme;
+        Dirty(uid, themeComponent);
     }
 }

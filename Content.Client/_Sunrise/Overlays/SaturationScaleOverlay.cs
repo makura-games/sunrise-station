@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._Sunrise.Mood;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -7,23 +7,24 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._Sunrise.Overlays;
 
-public sealed class SaturationScaleOverlay : Overlay
+public sealed partial class SaturationScaleOverlay : Overlay
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] IEntityManager _entityManager = default!;
 
     public override bool RequestScreenTexture => true;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
     private readonly ShaderInstance _shader;
     private const float Saturation = 0.5f;
+    private static readonly ProtoId<ShaderPrototype> SaturationScaleShader = "SaturationScale";
 
 
     public SaturationScaleOverlay()
     {
         IoCManager.InjectDependencies(this);
 
-        _shader = _prototypeManager.Index<ShaderPrototype>("SaturationScale").Instance().Duplicate();
+        _shader = _prototypeManager.Index(SaturationScaleShader).Instance().Duplicate();
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)

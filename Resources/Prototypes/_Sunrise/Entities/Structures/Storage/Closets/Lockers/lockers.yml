@@ -18,6 +18,11 @@
     - state: welded
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
+    - state: paper
+      visible: false
+      sprite: Structures/Storage/closet_labels.rsi
+      offset: "-0.065,0"
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: EntityStorageVisuals
     stateBaseClosed: base
     stateDoorOpen: open
@@ -55,6 +60,11 @@
     - state: welded
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
+    - state: paper
+      visible: false
+      sprite: Structures/Storage/closet_labels.rsi
+      offset: "-0.065,0"
+      map: ["enum.PaperLabelVisuals.Layer"]
 
 - type: entity
   id: GunSafeHandgunBaseSecureSunrise
@@ -336,7 +346,7 @@
         - id: HandheldHealthAnalyzer
         - id: BoxForensicPad
         - id: ClothingHeadsetMedical
-        - id: HeadSkeleton
+        - id: OrganSkeletonPersonHead
         - id: ClothingHeadHatPatologonatHat
         - id: Scalpel
         - id: ClothingHandsGlovesNitrile

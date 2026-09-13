@@ -5,7 +5,7 @@
 #Basic armor vest for inheritance
 - type: entity
   abstract: true
-  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseSecurityContraband]
+  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing ]
   id: ClothingOuterArmorBase
   name: armor vest
   description: A standard Type I armored vest that provides decent protection against most types of damage.
@@ -38,14 +38,13 @@
     damageCoefficient: 0.9
   # Sunrise-End
 
-#Standard armor vest, allowed for security and bartenders
+#Standard armor vest, allowed for security only
 - type: entity
-  parent: ClothingOuterArmorBase #[ BaseSecurityBartenderContraband, ClothingOuterArmorBase] # Sunrise-Edit
+  parent: [ BaseSecurityContraband, ClothingOuterArmorBase ]
   id: ClothingOuterArmorBasic
   components:
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
     # Sunrise-start
     - NudeBottom
@@ -58,9 +57,9 @@
     node: start
   # Sunrise-end
 
-#Alternate / slim basic armor vest
+#Alternate / slim basic armor vest, allowed for security and bartenders
 - type: entity
-  parent: ClothingOuterArmorBasic
+  parent: [ BaseSecurityBartenderContraband, ClothingOuterArmorBasic ]
   id: ClothingOuterArmorBasicSlim
   name: armor vest
   suffix: slim
@@ -128,7 +127,7 @@
 
 #Detective's vest
 - type: entity
-  parent: [ClothingOuterArmorBase, BaseSecurityContraband]
+  parent: [ClothingOuterArmorBasic, BaseSecurityContraband]
   id: ClothingOuterVestDetective
   name: detective's vest
   description: A hard-boiled private investigator's armored vest.
@@ -171,7 +170,6 @@
     sprite: Clothing/OuterClothing/Armor/captain_carapace.rsi
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
   - type: Pierceable
     level: Metal
@@ -216,7 +214,7 @@
 
 #Elite web vest
 - type: entity
-  parent: [ClothingOuterArmorBase, ClothingOuterStorageBase, BaseSyndicateContraband] # Sunrise-Edit
+  parent: [ClothingOuterArmorBase, ClothingOuterStorageBase, BaseSyndicateContraband]
   id: ClothingOuterVestWebElite
   name: elite web vest
   description: A synthetic armor vest. This one has added webbing and heat resistant fibers.
@@ -291,18 +289,16 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.4
-        Slash: 0.4
+        Blunt: 0.35
+        Slash: 0.35
         Piercing: 0.35
         Heat: 0.35
         Caustic: 0.5
-  - type: ExplosionResistance
-    damageCoefficient: 0.35
   - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
     damageCoefficient: 0.45
   - type: ClothingSpeedModifier
-    walkModifier: 1 # Sunrise-Edit
-    sprintModifier: 1 # Sunrise-Edit
+    walkModifier: 0.9
+    sprintModifier: 0.9
   #Shoulder mounted flashlight
   - type: ToggleableVisuals
     spriteLayer: light

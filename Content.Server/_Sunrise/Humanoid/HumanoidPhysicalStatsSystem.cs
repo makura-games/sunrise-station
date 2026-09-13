@@ -1,40 +1,40 @@
 using Content.Shared._Sunrise.Humanoid.Events;
+using Content.Shared._Sunrise.Humanoid;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
-using Content.Shared.Preferences;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Humanoid;
 
-public sealed class HumanoidPhysicalStatsSystem : EntitySystem
+public sealed partial class HumanoidPhysicalStatsSystem : EntitySystem
 {
-    [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<HumanoidAppearanceComponent, HumanoidProfileLoadedEvent>(OnProfileLoaded);
+        SubscribeLocalEvent<SunriseHumanoidProfileComponent, SunriseHumanoidProfileChangedEvent>(OnProfileChanged);
     }
 
-    private void OnProfileLoaded(Entity<HumanoidAppearanceComponent> ent, ref HumanoidProfileLoadedEvent args)
+    private void OnProfileChanged(Entity<SunriseHumanoidProfileComponent> ent, ref SunriseHumanoidProfileChangedEvent args)
     {
-        ApplyPhysicalStats(ent, args.Profile);
+        ApplyPhysicalStats(ent, args.Species, args.Width, args.Height);
     }
 
-    private void ApplyPhysicalStats(Entity<HumanoidAppearanceComponent> ent, HumanoidCharacterProfile profile)
+    private void ApplyPhysicalStats(Entity<SunriseHumanoidProfileComponent> ent, ProtoId<SpeciesPrototype> speciesId, float width, float height)
     {
-        if (!_proto.TryIndex(profile.Species, out var species))
+        if (!_proto.TryIndex(speciesId, out var species))
             return;
 
-        if (!TryComp<FixturesComponent>(ent, out var fixtures))
+        if (!TryComp<FixturesComponent>(ent.Owner, out var fixtures))
             return;
 
-        var weightMultiplier = GetWeightMultiplier(species, profile.Appearance.Width, profile.Appearance.Height);
-        var physicalStats = EnsureComp<HumanoidPhysicalStatsComponent>(ent);
+        var weightMultiplier = GetWeightMultiplier(species, width, height);
+        var physicalStats = EnsureComp<HumanoidPhysicalStatsComponent>(ent.Owner);
 
         foreach (var (fixtureId, fixture) in fixtures.Fixtures)
         {
@@ -44,7 +44,7 @@ public sealed class HumanoidPhysicalStatsSystem : EntitySystem
                 physicalStats.BaseDensities[fixtureId] = baseDensity;
             }
 
-            _physics.SetDensity(ent, fixtureId, fixture, baseDensity * weightMultiplier, manager: fixtures);
+            _physics.SetDensity(ent.Owner, fixtureId, fixture, baseDensity * weightMultiplier, manager: fixtures);
         }
     }
 

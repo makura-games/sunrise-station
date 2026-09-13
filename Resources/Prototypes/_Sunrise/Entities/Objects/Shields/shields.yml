@@ -60,7 +60,7 @@
       color: white
     - type: ItemTogglePointLight
     - type: Reflect
-      reflectProb: 0.95
+      reflectProb: 0.75
       reflects:
         - Energy
     - type: Blocking
@@ -81,6 +81,7 @@
           Piercing: 1
     - type: Appearance
     - type: Damageable
+    - type: Injurable
       damageContainer: Shield
     - type: StaticPrice
       price: 7000

@@ -119,16 +119,6 @@
   description: crafting-menu-text-MB
 
 - type: construction
-  name: crafting-menu-name-MSH
-  id: WeaponShotgunMakeshift
-  graph: MakeshiftShotgunGraph
-  startNode: start
-  targetNode: shotgun
-  category: construction-category-weapons
-  objectType: Item
-  description: crafting-menu-text-MSH
-
-- type: construction
   name: crafting-menu-name-MS
   id: WeaponSMGMakeshift
   graph: MakeshiftSMGGraph

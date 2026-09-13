@@ -5,9 +5,9 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Sunrise.Speech.EntitySystems;
 
-public sealed class SwineAccentSystem : EntitySystem
+public sealed partial class SwineAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

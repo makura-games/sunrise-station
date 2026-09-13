@@ -1,6 +1,7 @@
-﻿using Content.Client._Sunrise.Roadmap;
+using Content.Client._Sunrise.Roadmap;
 using Content.Client._Sunrise.Tutorial;
 using Content.Client._Sunrise.Tutorial.TutorialWindow;
+using Content.Client.FeedbackPopup;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Guidebook;
@@ -23,17 +24,18 @@ using static Robust.Client.UserInterface.Controls.BaseButton;
 namespace Content.Client.UserInterface.Systems.EscapeMenu;
 
 [UsedImplicitly]
-public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
+public sealed partial class EscapeUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
-    [Dependency] private readonly IClientConsoleHost _console = default!;
-    [Dependency] private readonly IUriOpener _uri = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ChangelogUIController _changelog = default!;
-    [Dependency] private readonly InfoUIController _info = default!;
-    [Dependency] private readonly OptionsUIController _options = default!;
-    [Dependency] private readonly GuidebookUIController _guidebook = default!;
-    [Dependency] private readonly IEntityManager _entity = default!; // Sunrise
-    [Dependency] private readonly IEntitySystemManager _entSys = default!; // Sunrise
+    [Dependency] private IClientConsoleHost _console = default!;
+    [Dependency] private IUriOpener _uri = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ChangelogUIController _changelog = default!;
+    [Dependency] private InfoUIController _info = default!;
+    [Dependency] private OptionsUIController _options = default!;
+    [Dependency] private GuidebookUIController _guidebook = default!;
+    [Dependency] private FeedbackPopupUIController _feedback = null!;
+    [Dependency] private IEntityManager _entity = default!; // Sunrise
+    [Dependency] private IEntitySystemManager _entSys = default!; // Sunrise
 
     private Options.UI.EscapeMenu? _escapeWindow;
 
@@ -71,6 +73,12 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
 
         _escapeWindow.OnClose += DeactivateButton;
         _escapeWindow.OnOpen += ActivateButton;
+
+        _escapeWindow.FeedbackButton.OnPressed += _ =>
+        {
+            CloseEscapeWindow();
+            _feedback.ToggleWindow();
+        };
 
         _escapeWindow.ChangelogButton.OnPressed += _ =>
         {

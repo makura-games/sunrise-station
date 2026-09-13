@@ -1,8 +1,9 @@
 using System;
 using System.Linq;
 using Content.Server.Actions;
-using Content.Server.Humanoid;
 using Content.Server.Popups;
+using Content.Shared._Sunrise.Humanoid;
+using Content.Shared.Body;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Humanoid;
@@ -30,13 +31,13 @@ namespace Content.Server._Sunrise.Abilities.Milira;
 /// </summary>
 public sealed partial class WingFlightSystem : SharedWingFlightSystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private SunriseHumanoidMarkingSystem _sunriseMarking = default!;
 
     public override void Initialize()
     {
@@ -145,22 +146,22 @@ public sealed partial class WingFlightSystem : SharedWingFlightSystem
 
     private void UpdateMarkings(Entity<WingFlightComponent> ent, bool enable)
     {
-        if (!TryComp<HumanoidAppearanceComponent>(ent, out var humanoid))
+        if (!HasComp<VisualBodyComponent>(ent))
             return;
 
-        if (!humanoid.MarkingSet.Markings.TryGetValue(MarkingCategories.Tail, out var markings) ||
+        if (!_sunriseMarking.TryGetLayerMarkings(ent, HumanoidVisualLayers.Tail, out var markings) ||
             markings.Count == 0)
         {
             return;
         }
 
         if (enable)
-            EnableMarkings(ent, markings, humanoid);
+            EnableMarkings(ent, markings);
         else
-            DisableMarkings(ent, markings, humanoid);
+            DisableMarkings(ent, markings);
     }
 
-    private void EnableMarkings(Entity<WingFlightComponent> ent, List<Marking> markings, HumanoidAppearanceComponent humanoid)
+    private void EnableMarkings(Entity<WingFlightComponent> ent, List<Marking> markings)
     {
         ent.Comp.OriginalMarkings.Clear();
 
@@ -169,7 +170,7 @@ public sealed partial class WingFlightSystem : SharedWingFlightSystem
 
         for (var i = 0; i < markings.Count; i++)
         {
-            var current = markings[i].MarkingId;
+            var current = markings[i].MarkingId.Id;
 
             if (string.IsNullOrEmpty(current))
                 continue;
@@ -182,13 +183,13 @@ public sealed partial class WingFlightSystem : SharedWingFlightSystem
                 continue;
 
             ent.Comp.OriginalMarkings[i] = current;
-            _appearance.SetMarkingId(ent, MarkingCategories.Tail, i, desired, humanoid: humanoid);
+            _sunriseMarking.SetMarkingId(ent, HumanoidVisualLayers.Tail, i, desired);
         }
 
         ent.Comp.AppliedMarkingOnEnable = ent.Comp.OriginalMarkings.Count > 0;
     }
 
-    private void DisableMarkings(Entity<WingFlightComponent> ent, List<Marking> markings, HumanoidAppearanceComponent humanoid)
+    private void DisableMarkings(Entity<WingFlightComponent> ent, List<Marking> markings)
     {
         if (!ent.Comp.AppliedMarkingOnEnable || ent.Comp.OriginalMarkings.Count == 0)
             return;
@@ -201,10 +202,10 @@ public sealed partial class WingFlightSystem : SharedWingFlightSystem
             if (!_prototype.HasIndex<MarkingPrototype>(original))
                 continue;
 
-            if (markings[index].MarkingId == original)
+            if (markings[index].MarkingId.Id == original)
                 continue;
 
-            _appearance.SetMarkingId(ent, MarkingCategories.Tail, index, original, humanoid: humanoid);
+            _sunriseMarking.SetMarkingId(ent, HumanoidVisualLayers.Tail, index, original);
         }
 
         ent.Comp.OriginalMarkings.Clear();

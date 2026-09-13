@@ -8,10 +8,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Charges.Systems;
 
-public abstract class SharedChargesSystem : EntitySystem
+public abstract partial class SharedChargesSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
+    [Dependency] protected IGameTiming _timing = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
 
     /*
      * Despite what a bunch of systems do you don't need to continuously tick linear number updates and can just derive it easily.

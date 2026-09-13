@@ -151,7 +151,6 @@ tiles-white-marble = белая мраморная плитка
 tiles-dark-marble = тёмная мраморная плитка
 tiles-plasma-marble = плазмраморная плитка
 tiles-uranium-marble = урановая мраморная плитка
-
 tiles-carpet-deco-floor = декоративный ковёр
 tiles-dark-bitile-floor = тёмная двойная плитка
 tiles-steel-bitile-floor = стальная двойная плитка
@@ -219,16 +218,13 @@ tiles-floor-dev-salvage = [dev] пол утилизаторов
 tiles-floor-dev-science = [dev] пол науки
 tiles-floor-dev-security = [dev] пол службы безопасности
 tiles-floor-dev-service = [dev] пол сервиса
-
 tiles-astro-ironsand = астро-железопесок
 tiles-astro-ironsand-borderless = бесшовный астро-железопесок
-
 tiles-glass-floor-bronze = бронзовый стеклянный пол
 tiles-glass-floor-plasma = плазменный стеклянный пол
 tiles-glass-floor-plasma-reinforced = армированный плазменный стеклянный пол
 tiles-glass-floor-uranium = урановый стеклянный пол
 tiles-glass-floor-uranium-reinforced = армированный урановый стеклянный пол
-
 tiles-cosmiccult-floor-glyph = зловещая глифовая поверхность
 tiles-cosmiccult-floor-smooth = зловещая гладкая поверхность
 tiles-cosmiccult-floor-half = зловещая поверхность с половинным узором
@@ -236,4 +232,20 @@ tiles-cosmiccult-floor-notched = зловещая поверхность с вы
 tiles-cosmiccult-floor-split = зловещая поверхность с разделённым узором
 tiles-cosmiccult-floor-void = поверхность пустотного пола
 tiles-cosmiccult-floor-malign = зловещая поверхность
-
+tiles-rcd-plating = покрытие RCD
+tiles-steel-floor-slats-continuous = стальная сплошная решетчатая плитка
+tiles-steel-floor-vertical-slats-bordered = стальная вертикальная решетчатая плитка с бортиком
+tiles-steel-floor-horizontal-slats-bordered = стальная горизонтальная решетчатая плитка с бортиком
+tiles-white-floor-slats-continuous = белая стальная сплошная решетчатая плитка
+tiles-white-floor-vertical-slats-bordered = белая стальная вертикальная решетчатая плитка с бортиком
+tiles-white-floor-horizontal-slats-bordered = белая стальная горизонтальная решетчатая плитка с бортиком
+tiles-dark-floor-slats-continuous = тёмная стальная сплошная решетчатая плитка
+tiles-dark-floor-vertical-slats-bordered = тёмная стальная вертикальная решетчатая плитка с бортиком
+tiles-dark-floor-horizontal-slats-bordered = тёмная стальная горизонтальная решетчатая плитка с бортиком
+tiles-ironsand-plating = иронсандовое покрытие
+tiles-ironsand-tile = иронсандовая плитка
+tiles-ironsand-concrete-tile = иронсандовая бетонная плитка
+tiles-ironsand-concrete-slab = иронсандовая бетонная плита
+tiles-ironsand-concrete-smooth = гладкий иронсандовый бетонный пол
+tiles-ironsand-packed = уплотнённый иронсанд
+tiles-ironsand-paved = мощеный иронсанд

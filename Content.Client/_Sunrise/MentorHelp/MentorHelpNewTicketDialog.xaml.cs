@@ -11,7 +11,7 @@ namespace Content.Client._Sunrise.MentorHelp
     [GenerateTypedNameReferences]
     public sealed partial class MentorHelpNewTicketDialog : DefaultWindow
     {
-        [Dependency] private readonly ILocalizationManager _loc = default!;
+        [Dependency] private ILocalizationManager _loc = default!;
 
         public event Action<string, string>? OnTicketCreated;
 

@@ -12,6 +12,10 @@ public sealed partial class ChargedElectrovaeAffectedComponent : Component
     /// Original battery max charge before capacity expansion.
     /// Null if this entity doesn't have a battery or hasn't had its capacity expanded yet.
     /// </summary>
-    [DataField]
     public float? OriginalBatteryMaxCharge;
+
+    /// <summary>
+    /// Исходное требование питания до воздействия заряженного Electrovae.
+    /// </summary>
+    public bool? OriginalNeedsPower;
 }

@@ -4254,7 +4254,7 @@ entities:
     - type: Transform
       pos: -1.7624683,-5.4912252
       parent: 1
-- proto: LockerSyndicatePersonalFilled
+- proto: LockerAssaultOpsPersonalFilled
   entities:
   - uid: 29
     components:

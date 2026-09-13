@@ -102,7 +102,7 @@ Keep your focus on fresh code and check its relevance through `git log`/`git bla
 ```csharp
 public sealed partial class MyOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     public override HTNOperatorStatus Update(NPCBlackboard blackboard, float frameTime)
     {

@@ -14,16 +14,16 @@ using Content.Shared.Clothing.EntitySystems;
 
 namespace Content.Server._Sunrise.PersonalBiocode;
 
-public sealed class PersonalBiocodeSystem : SharedPersonalBiocodeSystem // Пока только для модсьюитов
+public sealed partial class PersonalBiocodeSystem : SharedPersonalBiocodeSystem // Пока только для модсьюитов
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     private static readonly EntProtoId Action = "ActionSaveDNA";
 
     public override void Initialize()
     {
+        base.Initialize();
         SubscribeLocalEvent<PersonalBiocodeComponent, GetItemActionsEvent>(OnGetActions);
         SubscribeLocalEvent<PersonalBiocodeComponent, StoreDNAActionEvent>(OnDNAStored);
         SubscribeLocalEvent<PersonalBiocodeComponent, GotEquippedEvent>(OnEquip);
@@ -49,7 +49,7 @@ public sealed class PersonalBiocodeSystem : SharedPersonalBiocodeSystem // По�
             {
                 comp.DNA = PersonDNA.DNA;
                 comp.IsAuthorized = true;
-                EntityManager.Dirty(uid, comp);
+                Dirty(uid, comp);
 
                 _popupSystem.PopupEntity(Loc.GetString("person-dna-was-stored"), args.Performer, args.Performer);
             }
@@ -66,13 +66,13 @@ public sealed class PersonalBiocodeSystem : SharedPersonalBiocodeSystem // По�
     {
         if (comp.IsAuthorized == true)
         {
-            if (TryComp(args.Equipee, out DnaComponent? PersonNDA) && comp.DNA == PersonNDA.DNA)
+            if (TryComp(args.EquipTarget, out DnaComponent? PersonNDA) && comp.DNA == PersonNDA.DNA)
             {
-                _popupSystem.PopupClient("biocode-equip-failure", args.Equipee, args.Equipee, PopupType.MediumCaution);     
-                return;    
+                _popupSystem.PopupClient("biocode-equip-failure", args.EquipTarget, args.EquipTarget, PopupType.MediumCaution);
+                return;
             }
 
-            _inventory.TryUnequip(args.Equipee, "outerClothing", true, true);
+            _inventory.TryUnequip(args.EquipTarget, "outerClothing", true, true);
         }
 
     }
@@ -81,11 +81,11 @@ public sealed class PersonalBiocodeSystem : SharedPersonalBiocodeSystem // По�
     {
         if (args.Handled)
             return;
-        
+
         if (!comp.BreakAble)
             return;
 
-        EntityManager.RemoveComponent<PersonalBiocodeComponent>(uid);
+        RemComp<PersonalBiocodeComponent>(uid);
 
         //_popupSystem.PopupEntity(Loc.GetString("hardsuit-identification-on-emagged"), uid);
 

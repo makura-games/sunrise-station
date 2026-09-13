@@ -1,0 +1,71 @@
+- type: entity
+  abstract: true
+  id: BasePoweredJapaneseLantern
+  components:
+  - type: AmbientOnPowered
+  - type: PoweredLightVisuals
+    blinkingSound:
+      path: "/Audio/Machines/light_tube_on.ogg"
+    spriteStateMap:
+      off: base
+      on: base
+  - type: Electrified
+    enabled: false
+    usesApcPower: true
+  - type: LitOnPowered
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: ExtensionCableReceiver
+  - type: Appearance
+
+- type: entity
+  id: JapaneseLantern
+  name: japanese lantern
+  description: An elegant stone lantern.
+  suffix: Always Powered
+  parent: LightPostSmall
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Lighting/japanese_lantern.rsi
+    snapCardinals: true
+    drawdepth: Objects
+    noRot: true
+    layers:
+    - map: ["enum.PoweredLightLayers.Base"]
+      state: base
+  - type: PointLight
+    radius: 4
+    energy: 2.5
+    softness: 0.9
+    color: "#FFAF38"
+
+- type: entity
+  id: JapaneseLanternSmall
+  name: small Japanese lantern
+  description: An elegant stone lantern.
+  suffix: Always Powered
+  parent: JapaneseLantern
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Lighting/japanese_lantern_small.rsi
+    snapCardinals: true
+    drawdepth: Objects
+    noRot: true
+    layers:
+    - map: ["enum.PoweredLightLayers.Base"]
+      state: base
+
+- type: entity
+  id: PoweredJapaneseLantern
+  name: japanese lantern
+  description: An elegant stone lantern.
+  suffix: ""
+  parent: [JapaneseLantern, BasePoweredJapaneseLantern]
+
+- type: entity
+  id: PoweredJapaneseLanternSmall
+  name: small japanese lantern
+  description: An elegant stone lantern.
+  suffix: ""
+  parent: [JapaneseLanternSmall, BasePoweredJapaneseLantern]
+

@@ -11509,27 +11509,6 @@ entities:
     - type: Transform
       pos: -3.4985683,16.513187
       parent: 2
-- proto: HeadGingerbread
-  entities:
-  - uid: 1504
-    components:
-    - type: Transform
-      pos: 33.53681,16.38725
-      parent: 2
-- proto: HeadVulpkanin
-  entities:
-  - uid: 1505
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 33.28304,16.162498
-      parent: 2
-  - uid: 1506
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 33.755573,16.171757
-      parent: 2
 - proto: HighSecArmoryLocked
   entities:
   - uid: 1507

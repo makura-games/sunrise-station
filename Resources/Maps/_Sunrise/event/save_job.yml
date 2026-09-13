@@ -11906,7 +11906,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -11.5,75.5
       parent: 1
-- proto: HeadSkeleton
+- proto: OrganSkeletonPersonHead
   entities:
   - uid: 1310
     components:

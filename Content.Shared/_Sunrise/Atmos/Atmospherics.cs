@@ -62,7 +62,8 @@ public static partial class Atmospherics
     public const float NitriumDecompositionEnergy = 30000f;
     public const float NitriumDecompositionMaxTemp = T0C + 70f;
     public const float NobliumFormationEnergy = 20000000f;
-    public const float ReactionOpperssionThreshold = 5f;
+    public const float ReactionSuppressionThreshold = 5f;
+    public const float ReactionSuppressionMinimumTemperature = 20f; // Sunrise
     public const float HalonFormationEnergy = 300f;
     public const float HalonCombustionEnergy = 2500f;
     public const float HealiumFormationEnergy = 9000f;

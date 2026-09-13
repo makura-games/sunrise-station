@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Numerics;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Construction;
 using Content.Shared.Destructible;
@@ -28,13 +27,6 @@ public abstract partial class SharedBuckleSystem
 
     private void OnStrapStartup(EntityUid uid, StrapComponent component, ComponentStartup args)
     {
-        // Sunrise edit start
-        if (component.BuckleOffsets.Count == 0 && component.BuckleOffset != Vector2.Zero)
-        {
-            component.BuckleOffsets.Add(component.BuckleOffset);
-        }
-        // Sunrise edit end
-
         Appearance.SetData(uid, StrapVisuals.State, component.BuckledEntities.Count != 0);
     }
 

@@ -22,11 +22,11 @@
       params:
         volume: 15
   - type: HideLayerClothing
-    slots:
-      - RFoot
-      - LFoot
-      - RLeg
-      - LLeg
+    layers:
+      RFoot: FEET
+      LFoot: FEET
+      RLeg: FEET
+      LLeg: FEET
   - type: FleshBodyMod
 
 - type: entity

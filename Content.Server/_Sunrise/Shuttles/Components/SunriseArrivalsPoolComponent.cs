@@ -19,6 +19,11 @@ public sealed partial class SunriseArrivalsPoolComponent : Component
     public List<EntityUid> Queue = new();
 
     /// <summary>
+    /// Время следующей проверки очереди на свободные доки
+    /// </summary>
+    public TimeSpan NextDispatchTime;
+
+    /// <summary>
     /// Последнее время, когда станции сообщали о заблокированных доках прибытия.
     /// </summary>
     public TimeSpan LastAlertTime;

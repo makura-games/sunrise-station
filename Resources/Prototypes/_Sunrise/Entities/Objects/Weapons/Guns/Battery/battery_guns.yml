@@ -88,122 +88,77 @@
     magState: mag
     steps: 5
     zeroVisible: true
+  - type: CanDualWield
+    dualWieldInaccuracyPenalty: 0.9
+    dualWieldFireRatePenalty: 0.35
+    dualWieldRecoilPenalty: 0.9
 
 - type: entity
-  name: energy gun
-  parent: BaseWeaponBattery
-  id: WeaponEnergyGun
-  description: "A basic hybrid energy gun with two settings: disable and kill."
+  parent: WeaponLaserLNT620
+  id: SunriseWeaponLaserLNT620Empty
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: Magazine
+        startingItem: null
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+          - PowerCell
+          - PowerCellHigh
+          - PowerCellSmall
+
+- type: entity
+  name: battery-powered laser carbine
+  parent: [ BaseWeaponPowerCell, BaseGunWieldable, BaseSecurityContraband ]
+  id: SunriseWeaponLaserCarbineBattery
+  description: A battery-powered version of the standard NanoTrasen Security laser carbine.
   components:
   - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Battery/energygun.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Battery/batterylaser_carbine.rsi
     layers:
     - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: disable
-      map: ["enum.FireModesLayers.FireMode"]
+      map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-unshaded-4
-      map: ["enum.GunVisualLayers.MagUnshaded"]
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
       shader: unshaded
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Battery/energygun.rsi
   - type: Item
-    size: Huge
+    size: Large
     shape:
     - 0,0,2,1
-  - type: Gun
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/laser.ogg
-    soundEmpty:
-      path: /Audio/Weapons/Guns/Empty/empty.ogg
-  - type: Battery
-    maxCharge: 1500
-    startingCharge: 1500
-  - type: BatteryAmmoProvider
-    proto: BulletDisabler
-    fireCost: 50
-  - type: BatteryWeaponFireModes
-    fireModes:
-    - proto: BulletDisabler
-      fireCost: 50
-      name: energy-gun-disable
-      visualState: disable
-      heldPrefix: disabler
-      pacifismAllowedMode: true
-    - proto: BulletLaserWindowPiercingMagnum
-      fireCost: 75
-      name: energy-gun-lethal
-      visualState: lethal
-      heldPrefix: lethal
-  - type: MagazineVisuals
-    magState: mag
-    steps: 5
-    zeroVisible: true
-  - type: Appearance
-
-- type: entity
-  name: pulse revolver
-  parent: BaseWeaponBatterySmall
-  id: WeaponEnergyGunPulseRevolver
-  description: This is an expensive modern Pulse gun. This gun has several unique firemodes.
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Battery/pulse_revolver.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: disable
-      map: ["enum.FireModesLayers.FireMode"]
-    - state: mag-unshaded-4
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
+    sprite: _Sunrise/Objects/Weapons/Guns/Battery/batterylaser_carbine.rsi
   - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Battery/pulse_revolver.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Battery/batterylaser_carbine.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
   - type: Gun
-    fireRate: 2
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-    soundEmpty:
-      path: /Audio/Weapons/Guns/Empty/empty.ogg
-  - type: Battery
-    maxCharge: 720
-    startingCharge: 720
-  - type: BatterySelfRecharger
-    autoRechargeRate: 60
-    autoRechargePauseTime: 6
+    fireRate: 3
   - type: BatteryAmmoProvider
-    proto: BulletDisabler
-    fireCost: 90
-  - type: BatteryWeaponFireModes
-    fireModes:
-    - proto: BulletDisabler
-      fireCost: 90
-      name: energy-gun-disable
-      visualState: disable
-      heldPrefix: disabler
-      pacifismAllowedMode: true
-    - proto: BulletLaserWindowPiercingMagnum
-      fireCost: 110
-      name: energy-gun-lethal
-      visualState: lethal
-      heldPrefix: lethal
+    proto: RedLaser
+    fireCost: 50
   - type: MagazineVisuals
     magState: mag
     steps: 5
-    zeroVisible: true
-  - type: Appearance
+    zeroVisible: false
+  - type: StaticPrice
+    price: 420
   - type: Tag
     tags:
-    - Sidearm
-  - type: StaticPrice
-    price: 12500
+    - LaserWeapon
 
 - type: entity
   name: miniature energy gun
   parent: [ BaseWeaponBatterySmall, BaseSecurityContraband ]
   id: WeaponMiniEnergyGun
-  description: An energy gun capable of switching between lethal and debilitating lasers.
+  description: An energy gun capable of switching between lethal and debilitating lasers. Its built-in two-charge contact flash can blind an opponent.
   components:
+  - type: Item
+    storedOffset: 0,-5
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Battery/mini.rsi
     layers:
@@ -242,203 +197,92 @@
     zeroVisible: true
   - type: StealTarget
     stealGroup: OfficerHandgun
-  # - type: PointLight
-  #   enabled: false
-  #   mask: /Textures/Effects/LightMasks/cone.png
-  #   autoRot: true
-  #   radius: 6
-  #   netsync: false
+  - type: Flash
+    flashOnUse: false
+  - type: LimitedCharges
+    maxCharges: 2
+  - type: AutoRecharge
+    rechargeDuration: 60
+  - type: MeleeWeapon
+    wideAnimationRotation: 0
+    angle: 10
+    damage:
+      types:
+        Blunt: 0
+  - type: AltFireMelee
+    attackType: Light
+  - type: UseDelay
+    delay: 1
+  - type: UseDelayOnMeleeHit
   - type: Appearance
-  # - type: HandheldLight # Sunrise-TODO: Fix this
-  #   needsCharge: false
-  #   addPrefix: false
-  #   wattage: 0.2
-  #   blinkingBehaviourId: blinking
-  #   radiatingBehaviourId: radiating
-  # - type: LightBehaviour
-  #   behaviours:
-  #   - !type:FadeBehaviour
-  #     id: radiating
-  #     maxDuration: 2.0
-  #     startValue: 3.0
-  #     endValue: 2.0
-  #     isLooped: true
-  #     reverseWhenFinished: true
-  #   - !type:PulseBehaviour
-  #     id: blinking
-  #     interpolate: Nearest
-  #     maxDuration: 1.0
-  #     minValue: 0.1
-  #     maxValue: 2.0
-  #     isLooped: true
-  # - type: ToggleableLightVisuals
-  #   spriteLayer: light
 
 - type: entity
-  name: PDW-9 Energy Pistol
+  name: Judge energy pistol
   parent: BaseWeaponBatterySmall
   id: WeaponEnergyGunPistol
   description: A military grade sidearm, used by many militia forces throughout the local sector.
   components:
   - type: Item
     size: Small
+    heldPrefix: disabler
     shape:
     - 0,0,1,1
+    storedOffset: 0,-5
   - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Battery/energygun_pistol.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Battery/pdw9_pistol.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: disable
       map: ["enum.FireModesLayers.FireMode"]
-    - state: mag-unshaded-4
+      shader: unshaded
+    - state: mag-unshaded-6
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Battery/energygun_pistol.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Battery/pdw9_pistol.rsi
   - type: Gun
+    bigTrigger: true
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
-  - type: Battery
-    maxCharge: 1000
-    startingCharge: 1000
   - type: BatteryAmmoProvider
     proto: BulletDisabler
-    fireCost: 50
+    fireCost: 75
   - type: BatteryWeaponFireModes
     fireModes:
     - proto: BulletDisabler
-      fireCost: 50
+      fireCost: 75
       name: energy-gun-disable
       visualState: disable
       heldPrefix: disabler
       pacifismAllowedMode: true
-    - proto: BulletLaserWindowPiercingMagnum
-      fireCost: 62.5
-      name: energy-gun-lethal
-      visualState: lethal
-      heldPrefix: lethal
-  - type: MagazineVisuals
-    magState: mag
-    steps: 5
-    zeroVisible: true
-  - type: Appearance
-  - type: Tag
-    tags:
-    - Sidearm
-  - type: StaticPrice
-    price: 750
-
-- type: entity
-  name: Energy Pistol «Judge»
-  parent: BaseWeaponBatterySmall
-  id: WeaponEnergyGunPistolSecurity
-  description: A Security grade sidearm, used by many security forces throughout the local sector. Prepare to Judgement.
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Battery/energygun_security.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: disable
-      map: ["enum.FireModesLayers.FireMode"]
-    - state: mag-unshaded-4
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Battery/energygun_security.rsi
-  - type: Gun
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/laser.ogg
-    soundEmpty:
-      path: /Audio/Weapons/Guns/Empty/empty.ogg
-  - type: Battery
-    maxCharge: 1000
-    startingCharge: 1000
-  - type: BatteryAmmoProvider
-    proto: BulletDisabler
-    fireCost: 50
-  - type: BatteryWeaponFireModes
-    fireModes:
-    - proto: BulletDisabler
-      fireCost: 50
-      name: energy-gun-disable
-      visualState: disable
-      heldPrefix: disabler
+    - proto: BulletTaser
+      fireCost: 150
+      #magState: taser
+      visualState: taser
+      heldPrefix: taser
       pacifismAllowedMode: true
     - proto: BulletLaserWindowPiercingMagnum
       fireCost: 100
-      name: energy-gun-lethal
+      #magState: lethal
       visualState: lethal
       heldPrefix: lethal
+  - type: Appearance
+  - type: Battery
+    maxCharge: 1500
+    startingCharge: 1500
   - type: MagazineVisuals
     magState: mag
-    steps: 5
+    steps: 7
     zeroVisible: true
-  - type: Appearance
   - type: Tag
     tags:
     - Sidearm
   - type: StaticPrice
     price: 750
 
-- type: entity
-  name: Tactical Energy Gun
-  parent: BaseWeaponBattery
-  id: WeaponEnergyGunTactical
-  description: "A SMG version of basic hybrid energy gun with two settings: disable and kill."
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Battery/energygun_tactical.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: disable
-      map: ["enum.FireModesLayers.FireMode"]
-    - state: mag-unshaded-4
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Battery/energygun_tactical.rsi
-  - type: Item
-    size: Huge
-    shape:
-    - 0,0,2,1
-  - type: Gun
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
-    soundEmpty:
-      path: /Audio/Weapons/Guns/Empty/empty.ogg
-    selectedMode: FullAuto
-    fireRate: 3
-    availableModes:
-        - FullAuto
-  - type: Battery
-    maxCharge: 1000
-    startingCharge: 1000
-  - type: BatteryAmmoProvider
-    proto: BulletDisablerSmg
-    fireCost: 20
-  - type: BatteryWeaponFireModes
-    fireModes:
-    - proto: BulletDisablerSmg
-      fireCost: 20
-      name: energy-gun-disable
-      visualState: disable
-      heldPrefix: disabler
-      pacifismAllowedMode: true
-    - proto: BulletLaserWindowPiercingMagnum
-      fireCost: 40
-      name: energy-gun-lethal
-      visualState: lethal
-      heldPrefix: lethal
-  - type: MagazineVisuals
-    magState: mag
-    steps: 5
-    zeroVisible: true
-  - type: Appearance
 # Sunrise Colonial Marines
 
 - type: entity

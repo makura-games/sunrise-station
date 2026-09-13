@@ -13,8 +13,6 @@ namespace Content.Client._Sunrise.UserInterface.Controls;
 // condensed version of the original ColorSlider set
 public sealed class CustomColorSelectorSliders : Control
 {
-    [Dependency] private readonly ILocalizationManager _localization = default!;
-
     public Color Color
     {
         get => _currentColor;

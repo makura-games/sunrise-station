@@ -5,7 +5,7 @@ book-text-plasma-trap =
      - Джей.
 book-text-holoparasite-info =
     Спасибо, что выбрали наш набор голопаразита!
-    Мы в компании Cybersun гордимся нашими передовыми военными и промышленными технологиями и очень ценим ваш вклад в наше развитие!
+    Мы в компании Киберсан гордимся нашими передовыми военными и промышленными технологиями и очень ценим ваш вклад в наше развитие!
     Стражи - это разумные и услужливые существа, которые вселяются в ваше тело, и абсолютно невосприимчивы к таким распространённым опасностям, как давление, температура и даже пули!
     Вы приобрели набор голопаразита, который содержит активатор голопаразита в виде инъектора, брошюру с инструкцией, и нашу фирменную бейсболку!
     Инструкция по применению:
@@ -15,7 +15,7 @@ book-text-holoparasite-info =
     4. Используйте свою способность призыва/отзыва, чтобы призвать или отозвать голопаразита обратно в ваше тело.
     5. Не позволяйте голопаразиту удаляться от вас на большое расстояние, иначе он будет принудительно отозван!
     ВНИМАНИЕ: Стражи - существа метафизические, но для своего существования они черпают вашу ЖИЗНЕННУЮ ЭНЕРГИЮ. Прямой урон, наносимый хранителям, будет частично переноситься на вас!
-    Cybersun Ind. не несёт ответственности за тотальную аннигиляцию вызванную неправильным использованием технологии Голопаразита.
+    Киберсан Инк. не несёт ответственности за тотальную аннигиляцию, вызванную неправильным использованием технологии Голопаразита.
 book-text-ame-scribbles =
     Я не знаю, прошли ли вы уже обучение, поэтому надеюсь, что это поможет.
     Контроллеру ДАМ требуется высоковольтный кабель для передачи сгенерированной энергии. Если вы не уверены в наличии кабеля - сковырните пол ломом.
@@ -28,46 +28,46 @@ book-text-ame-scribbles =
     Поставите больше - и это приведёт к перегреву ДАМ, что в конечном итоге вызовет взрыв. Давайте без этого.
     Не забывайте заправлять ДАМ, так как топливо имеет тенденцию заканчиваться в самый неподходящий момент.
 book-text-agrichemkit-manual =
-    Thank you for choosing the safe-for-all-ages NanoTrasen Agri-Chem is Fun! chemistry kit, the best learning-adjacent toy of 2468! Be prepared to discover all about the biggest innovations in agriculture since people buried fish with their corn seeds.
-    
-    Contents:
-    5 handily labeled 30u bottles, 1 each of nitrogen, phosphorus, hydrogen, potassium, and ethanol
-    2 Safe-T-Fun(TM) sized 5u vials, 1 each of chlorine and radium
-    1 30u empty bottle, ready for your experiments.
-    
-    First Experiment: EZ Nutrient
-    To create EZ Nutrient, a fertilizer densely packed with nutrients required for healthy plants, mix equal parts nitrogen, phosphorus, and potassium. To make a full bottle, thats 10u of each.
-    A little bottle of EZ Nutrient replaces a big stack of produce you'd otherwise compost to keep your plants growing strong. And crops you compost are crops you didn't make a profit on, so keep that EZ Nutrient flowing.
-    
-    Second Experiment: Ammonia and Diethylamine
-    Mix 3 parts hydrogen to 1 part nitrogen to make ammonia. It's a healthy, nutritious treat for your crops that aren't at their best. 
-    But if you want to impress the judges at your local NanoTrasen-sponsored County Fair, you'll need to add an equal amount of ethanol to your ammonia.
-    This will mix into Diethylamine, a miracle fertilizer that can make plants grow faster AND live longer! Keep the crops you love with you longer thanks to Diethylamine.
-    
-    Third Experiment: Unstable Mutagen
-    When you're ready to show everyone you're the greatest botanist on the station, you'll need to mix up some unstable mutagen and hope for the best. Despite the scary name, unstable mutagen is entirely safe when applied to plants, but do not drink the appealingly green chemical yourself.
-    
-    Mix equal parts radium, phosphorus, and chlorine together to get a bright green batch of unstable mutagen, the safe and fun way to get the most of your farm. The 15u this kit lets you make could be your introduction to agrichemical stardom!
-    Unstable mutagen can have a wide variety of effects on plant life, including drastic changes to all sorts of growth parameters, produce full of helpful pharmaceuticals, plants that glow in the dark, or creating entirely new species.
-    
-    Each individual plant responds to unstable mutagen differently, so you may want to use small doses on multiple crops and try to crossbreed the best traits from each of those. Applying multiple doses to one plant can stack multiple changes and make it harder to single out desirable traits.
-    Unstable mutagen is entirely safe when used as a fertilizer, and NanoTrasen takes no responsibility for dead crops, excessive water bills, newly sentient plants asking existential questions, or flora-strangled farmhands that may coincidentally occur while using it.
-    Do not drink unstable mutagen. Wash your hands thoroughly after handing. Wash your eyes if you have looked at unstable mutagen for over 30 minutes in a 24 hour period. Store in a dark room between 293–295K. Do not use on corporate holidays. If you begin hearing voices telling you to drink unstable mutagen, please contact your doctor, head of personnel, or exorcist.
+    Благодарим за выбор безопасного для всех возрастов химического набора Нанотрейзена «Агри-хим это весело!», лучшей учебно-прикладной игрушки 2468 года! Будьте готовы узнать всё о крупнейших инновациях в сельском хозяйстве с тех пор, как люди стали закапывать рыбу вместе с кукурузными семенами.
+
+    Содержимое:
+    5 бутылок по 30u с понятными этикетками: по одной бутылке азота, фосфора, водорода, калия и этанола.
+    2 пробирки «Сэйф-Ти-Фан»(TM) ёмкостью 5u: по одной хлора и радия.
+    1 пустая бутылка на 30u, готовая для ваших экспериментов.
+
+    Первый эксперимент: ЭЗ-нутриент
+    Чтобы создать ЭЗ-нутриент — удобрение, густо упакованное необходимыми для здоровых растений питательными веществами, смешайте равные части азота, фосфора и калия. Для полной бутылки нужно по 10u каждого.
+    Небольшая бутылка ЭЗ-нутриента заменяет большую кучу продукции, которую вы бы иначе отправили в компост, чтобы растения продолжали расти крепко. А урожай, отправленный в компост, — это урожай, с которого вы не получили прибыли, поэтому держите поток ЭЗ-нутриента постоянным.
+
+    Второй эксперимент: Аммиак и диэтиламин
+    Смешайте 3 части водорода и 1 часть азота, чтобы получить аммиак. Это здоровая и полезная подкормка для ваших растений, которые пока не выглядят идеально.
+    Но если хотите поразить судей на местной ярмарке под эгидой Нанотрейзена, вам нужно добавить в аммиак такое же количество этанола.
+    Так получится диэтиламин, чудесное удобрение, которое способно ускорить рост растений и продлить их жизнь! Благодаря диэтиламину ваши любимые культуры будут с вами дольше.
+
+    Третий эксперимент: Неустойчивый мутаген
+    Когда вы будете готовы показать всем, что вы лучший ботаник на станции, вам нужно смешать немного неустойчивого мутагена и надеяться на лучшее. Несмотря на устрашающее название, неустойчивый мутаген полностью безопасен при применении на растениях, но не пейте его аппетитную зелёную субстанцию.
+
+    Смешайте равные части радия, фосфора и хлора, чтобы получить ярко-зелёную порцию неустойчивого мутагена — безопасный и увлекательный способ выжать максимум из вашей фермы. 15u, которые можно приготовить из этого набора, могут стать вашим путём к славе агрохимика!
+    Неустойчивый мутаген может сильно влиять на растительный мир: вызывать резкие изменения любых параметров роста, давать урожай, богатый полезными фармацевтическими веществами, растения, светящиеся в темноте, или создавать совершенно новые виды.
+
+    Каждое растение реагирует на неустойчивый мутаген по-своему, поэтому имеет смысл использовать небольшие дозы на нескольких культурах и пытаться скрещивать лучшие качества каждой из них. Множественные дозы на одном растении могут накладывать изменения и затруднять отбор желаемых признаков.
+    Неустойчивый мутаген полностью безопасен как удобрение, и Нанотрейзен не несёт ответственности за погибшие культуры, чрезмерные счета за воду, недавно обретших разум растений, задающих экзистенциальные вопросы, или фермеров, подавленных растениями, которые могут случайно появиться во время его использования.
+    Не пейте неустойчивый мутаген. Тщательно вымойте руки после контакта. Промойте глаза, если вы смотрели на неустойчивый мутаген более 30 минут за 24-часовой период. Храните в тёмной комнате при температуре 293–295 К. Не используйте на корпоративных праздниках. Если вы начнёте слышать голоса, заставляющие вас пить неустойчивый мутаген, обратитесь к врачу, начальнику отдела персонала или экзорцисту.
 book-text-combat-bakery-kit =
-    Thank you for choosing our combat bakery kit!
-    Enclosed are two (2) CyberSun patented Throwing Croissants, and one (1) patent-pending Baguette Sword.
-    The included Donk Co. microwave board can construct a microwave capable of baking more weapons.
-    Just like the baked weapons, be sure to eat this note after use. Good luck, agent.
-    
-    Baguette Sword Recipe:
-    Dough x 1
-    Salt 5u
-    Pepper 5u
-    Metal Rod x 1
-    Cook Time: 15 seconds
-    
-    Throwing Croissant Recipe:
-    Raw Croissant x 1
-    Butter Slice x 1
-    Glass Shard x 1
-    Cook Time: 5 seconds
+    Благодарим за выбор нашего комплекта боевой пекарни!
+    Внутри два (2) патентованных метательных круассана «Кибер-Сон» и один (1) багетный меч, патент на который ещё не утверждён.
+    Вложенная плата микроволновой печи «Донк Ко.» позволяет собрать микроволновку, способную выпекать больше оружия.
+    Как и с выпеченным оружием, обязательно съешьте эту записку после использования. Удачи, агент.
+
+    Рецепт багетного меча:
+    Тесто × 1
+    Соль 5u
+    Перец 5u
+    Металлический стержень × 1
+    Время выпекания: 15 секунд
+
+    Рецепт метательного круассана:
+    Сырой круассан × 1
+    Срез масла × 1
+    Осколок стекла × 1
+    Время выпекания: 5 секунд

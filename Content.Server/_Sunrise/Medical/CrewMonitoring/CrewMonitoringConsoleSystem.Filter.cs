@@ -8,7 +8,7 @@ namespace Content.Server.Medical.CrewMonitoring;
 
 public sealed partial class CrewMonitoringConsoleSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private void ApplyFilter(EntityUid uid, ref List<SuitSensorStatus> sensors)
     {

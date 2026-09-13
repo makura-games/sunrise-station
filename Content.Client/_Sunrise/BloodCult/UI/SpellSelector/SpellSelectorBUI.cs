@@ -13,9 +13,6 @@ namespace Content.Client._Sunrise.BloodCult.UI.SpellSelector;
 
 public sealed class SpellSelectorBUI : BoundUserInterface
 {
-    [Dependency] private readonly IClyde _displayManager = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
-
     private RadialContainer? _menu;
 
     private bool _selected;

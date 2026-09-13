@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Access.Systems;
-using Content.Server.Forensics;
 using Content.Shared.Access.Components;
 using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking;
@@ -14,7 +13,6 @@ using Content.Shared.StationRecords;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using System.Linq;
 
 
 namespace Content.Server.StationRecords.Systems;
@@ -38,13 +36,13 @@ namespace Content.Server.StationRecords.Systems;
 ///     depend on this general record being created. This is subject
 ///     to change.
 /// </summary>
-public sealed class StationRecordsSystem : SharedStationRecordsSystem
+public sealed partial class StationRecordsSystem : SharedStationRecordsSystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly StationRecordKeyStorageSystem _keyStorage = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IdCardSystem _idCard = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private StationRecordKeyStorageSystem _keyStorage = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IdCardSystem _idCard = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -238,24 +236,18 @@ public sealed class StationRecordsSystem : SharedStationRecordsSystem
     /// <param name="entry">The resulting entry.</param>
     /// <typeparam name="T">Type to get from the record set.</typeparam>
     /// <returns>True if a record was obtained. False otherwise.</returns>
-    public bool TryGetRandomRecord<T>(Entity<StationRecordsComponent?> ent, [NotNullWhen(true)] out T? entry, HashSet<uint> ignoredIds) // Sunrise-Edit
+    public bool TryGetRandomRecord<T>(Entity<StationRecordsComponent?> ent, [NotNullWhen(true)] out T? entry)
     {
         entry = default;
 
         if (!Resolve(ent.Owner, ref ent.Comp))
             return false;
 
-        // Sunrise-Start
-        var keys = ent.Comp.Records.Keys;
-        if (keys.Count == 0)
+        if (ent.Comp.Records.Keys.Count == 0)
             return false;
 
-        var filtered = keys.Where(id => !ignoredIds.Contains(id)).ToList();
-        if (!filtered.Any())
-            return false;
-        // Sunrise-End
+        var key = _random.Pick(ent.Comp.Records.Keys);
 
-        var key = _random.Pick(filtered); // Sunrise-Edit
         return ent.Comp.Records.TryGetRecordEntry(key, out entry);
     }
 

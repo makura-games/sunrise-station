@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Server._Sunrise.FleshCult.FleshGrowth;
 using Content.Server._Sunrise.FleshCult.GameRule;
@@ -6,8 +6,8 @@ using Content.Server.Body.Components;
 using Content.Server.Traits.Assorted;
 using Content.Shared._Sunrise;
 using Content.Shared._Sunrise.FleshCult;
+using Content.Shared.Body;
 using Content.Shared.Body.Components;
-using Content.Shared.Body.Organ;
 using Content.Shared.Body.Part;
 using Content.Shared.Damage;
 using Content.Shared.Destructible;
@@ -30,13 +30,17 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.FleshCult;
 
 public sealed partial class FleshCultSystem
 {
-    [Dependency] private readonly FleshCultRuleSystem _fleshCultRule = default!;
-    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
+    [Dependency] private FleshCultRuleSystem _fleshCultRule = default!;
+    [Dependency] private SharedPointLightSystem _pointLight = default!;
+
+    private static readonly ProtoId<TagPrototype>[] FleshWallTags = ["Wall", "Flesh"];
+    private static readonly ProtoId<TagPrototype>[] FleshSpawnBlockingTags = ["Wall", "Window", "Flesh"];
 
     public void InitializeHeart()
     {
@@ -84,7 +88,7 @@ public sealed partial class FleshCultSystem
                     continue;
                 if (!TryComp<TagComponent>(ent, out var tagComponent))
                     continue;
-                if (_tagSystem.HasAllTags(tagComponent, "Wall", "Flesh"))
+                if (_tagSystem.HasAllTags(tagComponent, FleshWallTags))
                     _damageableSystem.TryChangeDamage(ent, component.DamageMobsIfHeartDestruct);
                 else
                     QueueDel(ent);
@@ -96,7 +100,7 @@ public sealed partial class FleshCultSystem
             {
                 if (!TryComp<TagComponent>(ent, out var tagComponent))
                     continue;
-                var isFleshWall = _tagSystem.HasAllTags(tagComponent, "Wall", "Flesh");
+                var isFleshWall = _tagSystem.HasAllTags(tagComponent, FleshWallTags);
                 if (isFleshWall)
                 {
                     fleshWalls.Add(ent);
@@ -259,12 +263,12 @@ public sealed partial class FleshCultSystem
 
         if (TryComp(args.Args.Target.Value, out ContainerManagerComponent? container))
         {
-            foreach (var cont in container.GetAllContainers().ToArray())
+            foreach (var cont in _containerSystem.GetAllContainers(args.Args.Target.Value, container).ToArray())
             {
                 foreach (var ent in cont.ContainedEntities.ToArray())
                 {
                     {
-                        if (HasComp<BodyPartComponent>(ent))
+                        if (HasComp<OrganComponent>(ent))
                         {
                             continue;
                         }
@@ -276,41 +280,34 @@ public sealed partial class FleshCultSystem
         }
 
         // SUNRISE-TODO: Убрать конечности хирургией а тело заменить на скелета
-        if (TryComp<HumanoidAppearanceComponent>(args.Args.Target.Value, out var HuAppComponent))
+        if (TryComp<HumanoidProfileComponent>(args.Args.Target.Value, out var HuAppComponent))
         {
             if (TryComp<BloodstreamComponent>(args.Args.Target.Value, out var bloodstreamComponent))
                 _bloodstreamSystem.TryModifyBloodLevel((args.Args.Target.Value, bloodstreamComponent), -300);
 
-            if (TryComp<BodyComponent>(args.Args.Target.Value, out var bodyComponent))
+            if (TryComp<BodyComponent>(args.Args.Target, out var body))
             {
-                var parts = _body.GetBodyChildren(args.Args.Target.Value, bodyComponent).ToArray();
+                if (body.Organs == null)
+                    return;
 
-                foreach (var part in parts)
+                foreach (var organ in body.Organs.ContainedEntities)
                 {
-                    if (part.Component.PartType == BodyPartType.Head)
+                    if (!TryComp<OrganComponent>(organ, out var organComp))
                         continue;
 
-                    if (part.Component.PartType == BodyPartType.Torso)
-                    {
-                        foreach (var organ in _body.GetPartOrgans(part.Id, part.Component))
-                        {
-                            //_body.RemoveOrgan(organ.Id);
-                            QueueDel(organ.Id);
-                        }
-                    }
-                    else
-                    {
-                        QueueDel(part.Id);
-                    }
+                    if (organComp.Category == "Head")
+                        continue;
+
+                    QueueDel(organ);
                 }
             }
 
-            var bodyType = _prototypeManager.Index<BodyTypePrototype>("SkeletonNormal");
-            foreach (var (key, id) in bodyType.Sprites)
+            var bodyType = _prototypeManager.Index(SkeletonBodyType);
+            foreach (var (key, data) in bodyType.Layers)
             {
                 if (key != HumanoidVisualLayers.Head)
                 {
-                    _sharedHuApp.SetBaseLayerId(args.Args.Target.Value, key, id, humanoid: HuAppComponent);
+                    _sunriseBody.SetBaseLayerData(args.Args.Target.Value, key, data);
                 }
             }
 
@@ -345,7 +342,7 @@ public sealed partial class FleshCultSystem
         if (!Transform(uid).Anchored)
             return false;
 
-        if (!TryComp<HumanoidAppearanceComponent>(dragged, out var humanoidAppearance))
+        if (!TryComp<HumanoidProfileComponent>(dragged, out var humanoidAppearance))
             return false;
 
         if (!_speciesWhitelist.Contains(humanoidAppearance.Species))
@@ -360,20 +357,20 @@ public sealed partial class FleshCultSystem
             return;
 
         var localpos = xform.Coordinates.Position;
-        var tilerefs = grid.GetLocalTilesIntersecting(
+        var tilerefs = _mapSystem.GetLocalTilesIntersecting(xform.GridUid.Value, grid,
             new Box2(localpos + new Vector2(-radius, -radius), localpos + new Vector2(radius, radius))).ToArray();
         foreach (var tileref in tilerefs)
         {
             var canSpawnFloor = true;
-            foreach (var ent in grid.GetAnchoredEntities(tileref.GridIndices).ToList())
+            foreach (var ent in _mapSystem.GetAnchoredEntities(xform.GridUid.Value, grid, tileref.GridIndices).ToList())
             {
-                if (_tagSystem.HasAnyTag(ent, "Wall", "Window", "Flesh"))
+                if (_tagSystem.HasAnyTag(ent, FleshSpawnBlockingTags))
                     canSpawnFloor = false;
             }
             if (canSpawnFloor)
             {
                 var location = _mapSystem.ToCenterCoordinates(tileref, grid);
-                var fleshTile = EntityManager.SpawnEntity(component.FleshTileId, location);
+                var fleshTile = Spawn(component.FleshTileId, location);
                 var spreaderFleshComponent = EnsureComp<SpreaderFleshComponent>(fleshTile);
                 spreaderFleshComponent.Source = fleshHeart;
             }
@@ -386,17 +383,16 @@ public sealed partial class FleshCultSystem
             return;
 
         var localpos = xform.Coordinates.Position;
-        var tilerefs = grid.GetLocalTilesIntersecting(
+        var tilerefs = _mapSystem.GetLocalTilesIntersecting(xform.GridUid.Value, grid,
             new Box2(localpos + new Vector2(-radius, -radius), localpos + new Vector2(radius, radius))).ToArray();
         _random.Shuffle(tilerefs);
-        var physQuery = GetEntityQuery<PhysicsComponent>();
         var amountCounter = 0;
         foreach (var tileref in tilerefs)
         {
             var valid = true;
-            foreach (var ent in grid.GetAnchoredEntities(tileref.GridIndices))
+            foreach (var ent in _mapSystem.GetAnchoredEntities((xform.GridUid.Value, grid), tileref.GridIndices))
             {
-                if (!physQuery.TryGetComponent(ent, out var body))
+                if (!_physicsQuery.TryGetComponent(ent, out var body))
                     continue;
                 if (body.BodyType != BodyType.Static ||
                     !body.Hard ||

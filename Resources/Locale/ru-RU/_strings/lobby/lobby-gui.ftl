@@ -1,6 +1,6 @@
 ui-lobby-welcome = Добро пожаловать на { $name }
 ui-lobby-title = Лобби: { $serverName }
-ui-lobby-ahelp-button = AHelp
+ui-lobby-ahelp-button = Помощь администратора
 ui-lobby-options-button = Настройки
 ui-lobby-leave-button = Выйти
 ui-lobby-replays-button = Реплеи

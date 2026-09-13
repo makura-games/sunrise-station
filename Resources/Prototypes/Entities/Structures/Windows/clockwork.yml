@@ -12,8 +12,9 @@
   - type: Repairable
     doAfterDelay: 5 # Sunrise-Edit
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: RGlass
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:

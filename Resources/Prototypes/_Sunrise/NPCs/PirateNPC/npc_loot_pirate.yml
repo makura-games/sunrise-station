@@ -1468,11 +1468,23 @@
       amount: 3
       prob: 0.5
     # Items
-    - id: ClothingOuterHardsuitMurmilloDamaged
-      prob: 0.15
+    - id: ClothingHeadHatGladiator
+      prob: 0.1
       orGroup: MurmilloHardsuitPool
-    - id: ClothingOuterHardsuitMurmillo
-      prob: 0.05
+    - id: ClothingOuterArmorScrap
+      prob: 0.1
+      orGroup: MurmilloHardsuitPool
+    - id: DrinkDarkRedRumBottleFull
+      prob: 0.33
+      orGroup: MurmilloHardsuitPool
+    - id: SunriseClothingBackpackMessengerPirateMurmilloDamaged
+      prob: 0.25
+      orGroup: MurmilloHardsuitPool
+    - id: SunriseClothingBackpackMessengerPirateMurmillo
+      prob: 0.5
+      orGroup: MurmilloHardsuitPool
+    - id: SunriseClothingBackpackMessengerPirateMurmilloActive
+      prob: 0.1
       orGroup: MurmilloHardsuitPool
     - id: PirateMedSpawner03
     # Bonus Loot T2
@@ -2448,9 +2460,6 @@
     - id: BriefcaseWeaponM79Filled
       prob: 0.25
       orGroup: Grenadier
-    - id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherM79
-      prob: 0.1
-      orGroup: Grenadier
     # Items
     - id: GrenadeBlastTimer
       amount: 2
@@ -3162,7 +3171,7 @@
     # Weapons
     - id: CombatKnife
       prob: 0.15
-    - id: WeaponSubMachineGunMP38
+    - id: WeaponSubMachineGunForged
       prob: 0.5
     - id: MagazinePistolSubMachineGunEmpty
       prob: 0.9
@@ -3362,8 +3371,12 @@
     # Cash
     - id: PirateCashSpawner06
     # Weapons
-    - id: WeaponSubMachineGunSkorpion
-      prob: 0.75
+    - id: WeaponPistolViper
+      prob: 0.5
+      orGroup: PistolT3Pool
+    - id: SunriseWeaponSubMachineGunUzi
+      prob: 0.33
+      orGroup: PistolT3Pool
     - id: RiotBulletShield
       prob: 0.65
     - id: MagazinePistolSubMachineGunEmpty
@@ -3616,7 +3629,7 @@
     - id: WeaponLightMachineGunRPD
       prob: 0.15
     # Items
-    - id: MagazineRPD
+    - id: MagazineLightRifleBeltBox
       orGroup: AmmoMGPool
     - id: MagazineBoxLightRifleBig
       orGroup: AmmoMGPool
@@ -3624,11 +3637,11 @@
       orGroup: AmmoMGPool
     - id: MagazineBoxLightRifleFMJ
       orGroup: AmmoMGPool
-    - id: MagazineBoxLightRifleHP
-      orGroup: AmmoMGPool
     - id: MagazineBoxLightRifleUranium
       orGroup: AmmoMGPool
     - id: MagazineBoxLightRifleIncendiary
+      orGroup: AmmoMGPool
+    - id: MagazineBoxLightRifleSP
       orGroup: AmmoMGPool
     - id: MagazineBoxLightRifleSP
       orGroup: AmmoMGPool
@@ -3734,12 +3747,12 @@
     - id: PirateCashSpawner01
     - id: PirateCashSpawner03
     # Weapons
-    - id: WeaponSubMachineGunC40r
+    - id: WeaponSubMachineGunVector
       prob: 0.4
-      orGroup: SMG40Pool
-    - id: WeaponSubMachineGunC40rBiocode
+      orGroup: VectorSuperPool
+    - id: WeaponSubMachineGunVectorBiocode
       prob: 0.5
-      orGroup: SMG40Pool
+      orGroup: VectorSuperPool
     # Items
     - id: PirateMedSpawner03
     - id: ClothingOuterHardsuitPrivateer
@@ -4142,18 +4155,25 @@
       prob: 0.8
     - id: ScrapSteel
       prob: 0.75
-    - id: ClothingOuterArmorPodWars
-      prob: 0.6
+    - id: ClothingHeadHatGladiator
+      prob: 0.1
+      orGroup: MurmilloHardsuitPool
     - id: ClothingOuterArmorScrap
-      prob: 0.5
-    - id: ClothingUniformJumpsuitGladiator
-      prob: 0.5
-    - id: ClothingOuterHardsuitMurmilloDamaged
-      prob: 0.15
+      prob: 0.1
       orGroup: MurmilloHardsuitPool
-    - id: ClothingOuterHardsuitMurmillo
-      prob: 0.05
+    - id: DrinkDarkRedRumBottleFull
+      prob: 0.33
       orGroup: MurmilloHardsuitPool
+    - id: SunriseClothingBackpackMessengerPirateMurmilloDamaged
+      prob: 0.25
+      orGroup: MurmilloHardsuitPool
+    - id: SunriseClothingBackpackMessengerPirateMurmillo
+      prob: 0.5
+      orGroup: MurmilloHardsuitPool
+    - id: SunriseClothingBackpackMessengerPirateMurmilloActive
+      prob: 0.1
+      orGroup: MurmilloHardsuitPool
+    - id: PirateMedSpawner03
     - id: WeaponCrusherBroadAxe
       prob: 0.7
     # Bonus Loot T3

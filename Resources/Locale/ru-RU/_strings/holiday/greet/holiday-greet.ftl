@@ -3,13 +3,12 @@
 holiday-greet = Счастливого { $holidayName }!
 
 ## Holiday Names
-
 holiday-name-new-year = Нового года
 holiday-name-mister-lizard = дня рождения Мистера Ящерки
 holiday-name-chinese-new-year = Китайского Нового года
 holiday-name-groundhog-day = Дня сурка
 holiday-name-valentines-day = Дня святого Валентина
-holiday-name-birthday13 = Дня рождения Space Station 13
+holiday-name-birthday13 = Дня рождения Космической станции 13
 holiday-name-random-kindness = Дня спонтанного проявления доброты
 holiday-name-leap-day = високосного дня
 holiday-name-miku-day = Дня Мику Хацунэ
@@ -29,7 +28,7 @@ holiday-name-firefighter-day = Международного дня пожарн�
 holiday-name-mothers-day = Международного дня матери
 holiday-name-owl-and-pussycat-day = Дня Совёнка и Кошечки
 holiday-name-towel-day = Дня полотенца
-holiday-name-mommi-day = Дня MoMMI
+holiday-name-mommi-day = Дня МОММИ
 holiday-name-garbage-day = Дня мусора
 holiday-name-international-picnic-day = Международного дня пикника
 holiday-name-fathers-day = Дня отца
@@ -72,7 +71,6 @@ holiday-name-national-coming-out-day = Национального дня кам�
 holiday-name-pride-month = Месяца гордости
 
 ## Custom congrats
-
 holiday-custom-cosmonautics-day = В этот день более 600 лет назад товарищ Юрий Гагарин первым полетел в космос!
 holiday-custom-mothers-day = С Днём матери в большинстве стран Северной и Южной Америки, Азии и Океании!
 holiday-custom-bastille-day = Вы слышите, как поёт народ?

@@ -25,7 +25,7 @@
     - type: Item
       storedRotation: 0
     - type: Sprite
-      sprite: Objects/Specific/Mech/durand_construction.rsi
+      sprite: _Sunrise/Objects/Specific/Mech/durand_construction.rsi
       state: durand_armor
     - type: Tag
       tags:
@@ -51,7 +51,7 @@
     - type: GuideHelp
       guides:
       - Robotics
-      
+
 - type: entity
   id: PhazonArmorPlate
   parent: BaseExosuitParts
@@ -120,7 +120,7 @@
     - type: GuideHelp
       guides:
       - Robotics
-      
+
 - type: entity
   id: MechPhasicScanningModule
   parent: BaseExosuitParts

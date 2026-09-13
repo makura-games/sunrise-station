@@ -18,6 +18,7 @@
   - type: DamagedByFlashing
     flashDamage:
       types:
-        Heat: 10
+        Heat: 20 # Sunrise-Edit
   - type: Damageable
+  - type: Injurable
     damageContainer: ShadowHaze

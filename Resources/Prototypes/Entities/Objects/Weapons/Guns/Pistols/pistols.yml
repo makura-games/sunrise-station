@@ -174,9 +174,11 @@
   - type: ChamberMagazineAmmoProvider
     boltClosed: null
   - type: Gun
-    fireRate: 4
+    fireRate: 4.5 # Sunrise-edit
     soundGunshot:
-      collection: usp # Sunrise-Edit
+      path: /Audio/Weapons/Guns/Gunshots/silenced.ogg
+      params:
+        volume: -14
     availableModes:
     - SemiAuto
   - type: ItemSlots

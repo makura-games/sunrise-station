@@ -15,16 +15,18 @@
     state: icon
   - type: TimedDespawn
     lifetime: 90
+  - type: Clickable
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 30
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   # Sunrise-start
   - type: Tag
     tags:
@@ -79,15 +81,14 @@
         - SlipLayer
   - type: TimedDespawn
     lifetime: 30
-  - type: Clickable
   - type: Destructible
     thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 10
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   id: HolosignSecurity
@@ -118,7 +119,6 @@
       radius: 3
       color: red
     - type: Climbable
-    - type: Clickable
 
 - type: entity
   id: HolosignForcefield
@@ -163,9 +163,9 @@
     throwForce: 0
   - type: Destructible
     thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 60
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 60
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

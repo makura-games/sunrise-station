@@ -24,9 +24,9 @@ namespace Content.Shared._Sunrise.Movement.Carrying;
 
 public abstract partial class SharedCarryingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

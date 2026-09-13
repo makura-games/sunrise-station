@@ -159,8 +159,8 @@ public sealed partial class TransformData
     public string DNA;
 
     /// <summary>
-    ///     Entity's humanoid appearance component.
+    ///     Entity's humanoid profile component.
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly), NonSerialized]
-    public HumanoidAppearanceComponent Appearance;
+    public HumanoidProfileComponent Appearance;
 }

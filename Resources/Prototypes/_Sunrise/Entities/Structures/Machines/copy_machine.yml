@@ -46,10 +46,10 @@
     storage:
       officePaper: 0
     dropOnDeconstruct: false
-  - type: SolutionContainerManager
-    solutions:
-      inc:
-        maxVol: 500
+  - type: Solution
+    id: inc
+    solution:
+      maxVol: 500
   - type: Spillable
     solution: inc
   - type: RefillableSolution
@@ -112,12 +112,12 @@
   - type: MaterialStorage
     storage:
       officePaper: 2000
-  - type: SolutionContainerManager
-    solutions:
-      inc:
-        reagents:
-        - ReagentId: Inc
-          Quantity: 15
+  - type: Solution
+    id: inc
+    solution:
+      reagents:
+      - ReagentId: Inc
+        Quantity: 15
 
 - type: entity
   parent: CopyMachine
@@ -138,9 +138,9 @@
   - type: MaterialStorage
     storage:
       officePaper: 3000
-  - type: SolutionContainerManager
-    solutions:
-      inc:
-        reagents:
-        - ReagentId: Inc
-          Quantity: 30
+  - type: Solution
+    id: inc
+    solution:
+      reagents:
+      - ReagentId: Inc
+        Quantity: 30

@@ -1,0 +1,56 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Sprites based on leikha, Created by TacoLlama (github) resprited by the_fungiviv and KaiserMaus",
+    "size": {
+        "x": 48,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "base"
+        },
+        {
+            "name": "bolt-open"
+        },
+        {
+            "name": "mag-0",
+			"delays": [
+			[
+			0.5,
+			0.5
+			]
+		]
+        },
+        {
+            "name": "mag-1",
+			"delays": [
+			[
+			0.5,
+			0.5
+			]
+		]
+        },
+        {
+            "name": "mag-2",
+			"delays": [
+			[
+			0.5,
+			0.5
+			]
+		]
+        },
+        {
+            "name": "mag-3",
+			"delays": [
+			[
+			0.5,
+			0.5
+			]
+		]
+        }
+    ]
+}

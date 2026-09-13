@@ -9,7 +9,6 @@
   startingGear: PlanetPrisonerGear
   weight: 9
   alwaysUseSpawner: true
-  canBeAntag: false
   icon: "JobIconPrisoner"
   overrideConsoleVisibility: false
   supervisors: job-supervisors-security

@@ -16,3 +16,5 @@ ent-LockerBlueshieldFilledUplink = { ent-LockerBlueshield }
 ent-LockerBlueshieldFilledUplinkMultiphase = { ent-LockerBlueshield }
     .suffix = Заполнен, Мультифаз
     .desc = { ent-LockerBlueshield.desc }
+ent-GunSafeBlueShield = сейф синего щита
+  .desc = { ent-GunSafe.desc }

@@ -1,84 +1,61 @@
 ent-MobGorillaRampaging = буйная горилла
     .desc = Горилла, вышедшая из-под контроля. Беги!
-
 ent-MachineArtifactCrusherXenoborg = дробилка тел
     .desc = Лучше не засовывать туда голову...
-
 ent-WeaponSubMachineGunBriefcase = коричневый портфель
     .desc = Полезен для переноски вещей в руках.
     .suffix = Оружие
-
 ent-FoodBreadCottonNutriBatard = хлопковый нутри-батард
     .desc = Бон аппетит!
-
 ent-CrazyLube = сумасшедшая смазка
-    .desc = Бутылка суперскользкой сумасшедшей смазки от Honk! Co.
+    .desc = Бутылка суперскользкой сумасшедшей смазки от Хонк! Ко.
 
 ent-ClothingBackpackMessengerPirateDecoyKitFilled = набор обманок
     .desc = Содержит визуальные отвлекашки и набор ПТСР утилизатора.
-
 ent-CurtainsSkyBlue = { ent-BaseCurtains }
     .suffix = Красивые небесно-голубые
     .desc = { ent-BaseCurtains.desc }
-
 ent-CurtainsSkyBlueOpen = { ent-CurtainsSkyBlue }
     .suffix = Открытые, Красивые небесно-голубые
     .desc = { ent-CurtainsSkyBlue.desc }
-
 ent-FloorTileItemDarkAstroGrass = тёмная астро-трава
     .desc = { ent-FloorTileItemAstroGrass.desc }
-
 ent-FloorTileItemLightAstroGrass = светлая астро-трава
     .desc = { ent-FloorTileItemAstroGrass.desc }
-
 ent-EngineeringBorgChassisDerelict = заброшенный киборг-инженер
     .desc = Гибрид человека и машины, помогающий инженерному отделу. Этот, похоже, весь в странных кристаллах.
-
 ent-JanitorBorgChassisDerelict = заброшенный киборг-уборщик
     .desc = Гибрид человека и машины, помогающий сервисному отделу. Он сам грязнее любого мусора, который может убрать.
-
 ent-MedicalBorgChassisDerelict = заброшенный медицинский киборг
     .desc = Гибрид человека и машины, помогающий медицинскому отделу. Его иглы выглядят не очень стерильно.
-
 ent-MiningBorgChassisDerelict = заброшенный киборг-утилизатор
     .desc = Гибрид человека и машины, помогающий карго. Похоже, его потрепал кусок гибтонита.
-
 ent-SyndicateAssaultBorgChassisDerelictSunrise = заброшенный штурмовой киборг Синдиката
     .desc = Смертоносная машина с доступом к разнообразным модулям. Этот скорее ржаво-оранжевый, чем кроваво-красный.
 ent-SyndicateAssaultBorgChassisDerelict = { ent-SyndicateAssaultBorgChassisDerelictSunrise }
     .desc = { ent-SyndicateAssaultBorgChassisDerelictSunrise.desc }
-
 ent-SyndicateMedicalBorgChassisDerelictSunrise = заброшенный медицинский киборг Синдиката
     .desc = Медицинская поддержка для полевых операций. Его медицинские протоколы, похоже, деградировали.
-
 ent-SyndicateReaperBorgChassisDerelictSunrise = заброшенный киборг-жнец Синдиката
     .desc = Скрытная инфильтрационная единица для саботажа и убийств. Этот повидал лучшие дни.
-
 ent-SyndicateSaboteurBorgChassisDerelictSunrise = заброшенный киборг-саботёр Синдиката
     .desc = Специализированная инфильтрационная единица для саботажа и шпионажа. Этот прошёл через войны.
 ent-SyndicateSaboteurBorgChassisDerelict = { ent-SyndicateSaboteurBorgChassisDerelictSunrise }
     .desc = { ent-SyndicateSaboteurBorgChassisDerelictSunrise.desc }
-
 ent-XenoborgModuleDoorControl = модуль ксеноборга: управление дверями
     .desc = Модуль, позволяющий ксеноборгам управлять шлюзами.
-
 ent-BorgModuleDoubleEsword = модуль киборга: двойной энергетический меч
     .desc = Оружейный модуль с двойным энергетическим мечом.
-
 ent-DoorElectronicsXenoborg = { ent-DoorElectronics }
     .desc = { ent-DoorElectronics.desc }
     .suffix = Ксеноборг, Заблокировано
-
 ent-EnergyKatanaBiocode = { ent-EnergyKatana }
     .desc = { ent-EnergyKatana.desc }
     .suffix = БИОКОД
-
 ent-WeaponEnergyMagnum = энергетический магнум
     .desc = Мощный самозаряжающийся энергетический пистолет для элитного персонала службы безопасности. Имеет три режима огня: высокий урон, пробитие окон и нелетальный оглушающий.
-
 ent-CableDet = взрывной шнур
     .desc = Спагетти для тех, кто ненавидит стены.
-
 ent-CableDetStack = взрывной шнур
     .desc = Взрывной шнур, чтобы убрать всё, что стоит на пути.
     .suffix = Полный
@@ -88,18 +65,14 @@ ent-CableDetStack10 = { ent-CableDetStack }
 ent-CableDetStack1 = { ent-CableDetStack }
     .desc = { ent-CableDetStack.desc }
     .suffix = 1
-
 ent-ParcelWrapAdmeme = блюспейс-обёртка
     .desc = Бумага для упаковки предметов при транспортировке. Эта, кажется, способна прятать внутри подозрительно много пространства.
     .suffix = Адмем
-
 ent-CartridgeHeavyRifleRFMJMech = { ent-CartridgeHeavyRifleRFMJ }
     .desc = { ent-CartridgeHeavyRifleRFMJ.desc }
     .suffix = Мех
-
 ent-CartridgeXrayBeam = патрон (рентген-луч)
     .desc = { ent-BaseCartridge.desc }
-
 
 ent-EmptyDetonator = детонатор
     .desc = Детонирующий капсюль. Требуются триггер и провод.

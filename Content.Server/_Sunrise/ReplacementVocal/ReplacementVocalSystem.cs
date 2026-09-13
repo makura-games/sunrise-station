@@ -5,9 +5,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.ReplacementVocal;
 
-public sealed class ReplacementVocalSystem : EntitySystem
+public sealed partial class ReplacementVocalSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -68,7 +68,7 @@ public sealed class ReplacementVocalSystem : EntitySystem
 
     private void LoadEmotes(EntityUid uid, VocalComponent vocalComponent)
     {
-        var sex = CompOrNull<HumanoidAppearanceComponent>(uid)?.Sex ?? Sex.Unsexed;
+        var sex = CompOrNull<HumanoidProfileComponent>(uid)?.Sex ?? Sex.Unsexed;
 
         if (vocalComponent.Sounds == null)
             return;

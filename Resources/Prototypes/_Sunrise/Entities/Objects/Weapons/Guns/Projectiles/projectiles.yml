@@ -1009,25 +1009,6 @@
     - timer
 
 - type: entity
-  id: BulletHeavyRifleArtillery
-  name: bullet (.308)
-  parent: BaseBullet
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 25
-        Structural: 15
-  - type: StaminaDamageOnCollide
-    damage: 5
-  - type: RadarBlip
-    color: "#FF6A6A"
-    scale: 0.3
-    shape: Triangle
-    requireInSpace: true
-
-- type: entity
   id: BulletArtilleryShapnel
   name: bullet
   parent: BaseBullet
@@ -1179,7 +1160,8 @@
     damage:
       types:
         Piercing: 75
-        Slash: 20
+        Blunt: 10
+        Slash: 10
   - type: StaminaDamageOnCollide
     damage: 40
 
@@ -1473,15 +1455,15 @@
     drop: false
   - type: StaminaDamageOnCollide #additional stam damage to make repeated pushups less of a viable counter
     damage: 45
-  - type: SolutionContainerManager
-    solutions:
-      bolt:
-        maxVol: 3
-        reagents:
-        - ReagentId: Toxin
-          Quantity: 1.5
-        - ReagentId: Lead
-          Quantity: 1.5
+  - type: Solution
+    id: bolt
+    solution:
+      maxVol: 3
+      reagents:
+      - ReagentId: Toxin
+        Quantity: 1.5
+      - ReagentId: Lead
+        Quantity: 1.5
   - type: SolutionInjectOnProjectileHit
     transferAmount: 3
     solution: bolt

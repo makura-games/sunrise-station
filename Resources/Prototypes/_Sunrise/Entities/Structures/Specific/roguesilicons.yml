@@ -43,9 +43,14 @@
     range: 60
     threshold: 0.9
     damage:
-      groups:
-        Brute: -5
-        Burn: -3
+      types:
+        Blunt: -1.67
+        Slash: -1.67
+        Piercing: -1.66
+        Heat: -0.75
+        Shock: -0.75
+        Cold: -0.75
+        Caustic: -0.75
     whitelist:
       tags:
       - RogueSiliconHealTarget
@@ -78,8 +83,9 @@
         collection:
           MetalLaserImpact
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:

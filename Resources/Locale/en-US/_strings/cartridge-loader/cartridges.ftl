@@ -9,6 +9,7 @@ crew-manifest-program-name = Crew manifest
 messenger-program-name = RobustChat
 photo-program-name = FlashSnap
 crew-manifest-cartridge-loading = Loading ...
+crew-manifest-cartridge-loading-failed = Failed to load crew manifest!
 
 net-probe-program-name = NetProbe
 net-probe-scan = Scanned {$device}!

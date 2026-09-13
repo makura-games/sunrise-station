@@ -1,4 +1,4 @@
-﻿# Shells that used for friendship and duster
+# Shells that used for friendship and duster
 
 - type: entity
   id: BaseArtilleryShell
@@ -306,10 +306,10 @@
     - state: casing
   - type: Item
     size: Small
-  - type: SolutionContainerManager
-    solutions:
-      shell:
-        maxVol: 5
+  - type: Solution
+    id: shell
+    solution:
+      maxVol: 5
   - type: MixableSolution
     solution: shell
   - type: FitsInDispenser

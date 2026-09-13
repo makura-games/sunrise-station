@@ -1,4 +1,4 @@
-microwave-component-medical-assembler-interact-item-too-big = { CAPITALIZE(THE($item)) } не помещается в Мед-О-Мат.
+microwave-component-medical-assembler-interact-item-too-big = { CAPITALIZE($item) } не помещается в Мед-О-Мат.
 microwave-component-assembler-no-valid-recipe = Нет подходящего рецепта
 ## Bound UI
 assembler-bound-user-interface-insert-ingredients = ВСТАВЬТЕ МАТЕРИАЛЫ

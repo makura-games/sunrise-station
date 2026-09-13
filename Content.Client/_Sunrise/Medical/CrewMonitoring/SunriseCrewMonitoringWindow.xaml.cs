@@ -24,10 +24,10 @@ namespace Content.Client._Sunrise.Medical.CrewMonitoring;
 [GenerateTypedNameReferences]
 public sealed partial class SunriseCrewMonitoringWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
     private readonly SharedTransformSystem _transformSystem;
     private readonly SpriteSystem _spriteSystem;
 

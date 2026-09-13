@@ -12,7 +12,7 @@ public sealed partial class EmoteAnimationComponent : Component
     public string AnimationId = "none";
 
     [Serializable, NetSerializable]
-    public partial class EmoteAnimationComponentState : ComponentState
+    public sealed partial class EmoteAnimationComponentState : ComponentState
     {
         public string AnimationId { get; init; }
 

@@ -5,3 +5,5 @@ add-uplink-command-completion-2 = Uplink uid (по-умолчанию это К�
 add-uplink-command-completion-3 = Включены ли скидки аплинка? (true/false)
 add-uplink-command-error-1 = Выбранный игрок не имеет подконтрольную сущность
 add-uplink-command-error-2 = Не удалось добавить аплинк игроку
+cmd-adduplink-desc = Создает аплинк на созданном предмете и связывает его к аккаунту пользователя
+cmd-adduplink-help = Использование: adduplink [username] [item-id] [discountEnabled]

@@ -14,7 +14,7 @@ rule:
         context: |
           class Dummy
           {
-              [Dependency] private readonly $TYPE $NAME = $VALUE;
+              [Dependency] private $TYPE $NAME = $VALUE;
           }
         selector: field_declaration
     - pattern:

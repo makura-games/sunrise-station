@@ -1,5 +1,4 @@
 using Content.Shared.Chemistry;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
@@ -92,11 +91,7 @@ public sealed partial class InjectSystem
         var actualBeaker = beaker.Value;
 
         if (!_solutions.TryGetSolution(actualBeaker, "beaker", out var solution)) return;
-        if (!_solutions.TryGetInjectableSolution(
-            (user, Comp<InjectableSolutionComponent>(user), Comp<SolutionContainerManagerComponent>(user)),
-            out var targetSolutionEntity,
-            out var targetSolution
-        )) return;
+        if (!_solutions.TryGetInjectableSolution(user, out var targetSolutionEntity, out var targetSolution)) return;
 
         if (solution.Value.Comp.Solution.Volume <= 0)
         {

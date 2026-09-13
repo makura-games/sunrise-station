@@ -1,20 +1,43 @@
 - type: entity
-  parent: BaseMobSpeciesOrganic
+  parent: BaseSpeciesAppearance
+  id: AppearanceTajaran
+  name: tajaran appearance
+  components:
+  - type: InitialBody
+    organs:
+      Torso: TorsoTajaran
+      Head: HeadTajaran
+      ArmLeft: LeftArmTajaran
+      ArmRight: RightArmTajaran
+      HandRight: RightHandTajaran
+      HandLeft: LeftHandTajaran
+      LegLeft: LeftLegTajaran
+      LegRight: RightLegTajaran
+      FootLeft: LeftFootTajaran
+      FootRight: RightFootTajaran
+      Brain: OrganHumanBrain
+      Eyes: OrganTajaranEyes
+      Tongue: OrganHumanTongue
+      Heart: OrganAnimalHeart
+      Lungs: OrganHumanLungs
+      Stomach: OrganTajaranStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganHumanKidneys
+
+- type: entity
+  parent:
+  - AppearanceTajaran
+  - BaseSpeciesMobOrganic
   id: BaseMobTajaran
   abstract: true
   components:
   - type: MessyDrinker
     spillChance: 0.2
   - type: Interactions
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Tajaran
-    hideLayersOnEquip:
-    - Snout
-    - HeadTop
-    - HeadSide
-  - type: Body
-    prototype: Tajaran
-    requiredLegs: 2
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers
   - type: Butcherable
     butcheringType: Spike
     spawned:
@@ -161,13 +184,15 @@
 - type: entity
   save: false
   name: Tajaran McHands
-  parent: MobHumanDummy
+  parent: AppearanceTajaran
   id: MobTajaranDummy
   categories: [ HideSpawnMenu ]
   description: A dummy tajaran meant to be used in character setup.
   components:
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Tajaran
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers
   - type: Inventory
     speciesId: human
     femaleDisplacements:

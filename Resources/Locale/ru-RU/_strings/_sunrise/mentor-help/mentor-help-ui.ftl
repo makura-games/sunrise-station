@@ -1,4 +1,4 @@
-ui-lobby-mhelp-button = MHelp
+ui-lobby-mhelp-button = Помощь наставникам
 ui-options-function-open-mentor-help = Открыть Ментор помощь
 ui-options-function-open-help-choice = Открыть выбор помощи
 
@@ -40,7 +40,6 @@ mentor-help-status-awaiting = Ожидает ответа
 mentor-help-status-closed = Закрыт
 mentor-help-status-unknown = Неизвестно
 mentor-help-unassigned = Не назначен
-
 mentor-help-unknown-user = Неизвестный
 
 # Ticket info
@@ -64,13 +63,11 @@ mentor-help-statistics-title = Статистика ментор помощи
 mentor-help-statistics-header = Статистика работы менторов
 mentor-help-statistics-content = Здесь будет отображаться статистика по количеству обработанных тикетов и сообщений каждого ментора.
 
-
 mentor-help-status-label = Статус: {$status}
 mentor-help-assigned-label = Назначен: {$assigned}
 mentor-help-created-label = Создан: {$created}
 mentor-help-label-id = ID:
 mentor-help-label-subject = Тема:
-
 
 help-choice-title = Выберите тип помощи
 help-choice-title-label = [color=white][font size=16]Какой тип помощи вам нужен?[/font][/color]
@@ -78,9 +75,7 @@ help-choice-ahelp-button = Админ-помощь
 help-choice-mhelp-button = Ментор-помощь
 help-choice-ahelp-desc-label = [color=#CCCCCC][font size=12]• Админ-помощь - для жалоб на игроков, сообщений о багах и нарушениях правил[/font][/color]
 help-choice-mhelp-desc-label = [color=#CCCCCC][font size=12]• Ментор-помощь - для вопросов о механиках игры и помощи новичкам[/font][/color]
-
 help-kwoink-play-sound = Звук сообщений
-
 mentor-help-statistics-column-mentor = Ментор
 mentor-help-statistics-column-tickets = Обработанных тикетов
 mentor-help-statistics-column-messages = Сообщений

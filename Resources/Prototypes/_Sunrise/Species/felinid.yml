@@ -13,7 +13,6 @@
   - HumanFatMale
   - HumanDistrofikFemale
   - HumanDistrofikMale
-  markingLimits: MobFelinidMarkingLimits
   dollPrototype: MobFelinidDummy
   skinColoration: HumanToned
   youngAge: 18
@@ -31,32 +30,51 @@
     sprite: /Textures/_Sunrise/CopyMachine/butts_scans.rsi
     state: human
 
-- type: markingPoints
-  id: MobFelinidMarkingLimits
-  points:
-    Special: # the cat ear joke
-      points: 1
+- type: markingsGroup
+  parent: Human
+  id: Felinid
+  limits:
+    enum.HumanoidVisualLayers.Special: # the cat ear joke
+      limit: 1
       required: false
-    Hair:
-      points: 1
+    enum.HumanoidVisualLayers.Hair:
+      limit: 1
       required: false
-    FacialHair:
-      points: 1
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 1
       required: false
-    Tail:
-      points: 1
+    enum.HumanoidVisualLayers.Tail:
+      limit: 1
       required: true
-      defaultMarkings: [ FelinidTailBasic ]
-    HeadTop:
-      points: 1
+      default: [ FelinidTailBasic ]
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 1
       required: true
-      defaultMarkings: [ FelinidEarsBasic ]
-    Chest:
-      points: 1
+      default: [ FelinidEarsBasic ]
+    enum.HumanoidVisualLayers.Chest:
+      limit: 1
       required: false
-    Legs:
-      points: 2
+    enum.HumanoidVisualLayers.LArm:
+      limit: 1
       required: false
-    Arms:
-      points: 2
+    enum.HumanoidVisualLayers.RArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RFoot:
+      limit: 1
       required: false

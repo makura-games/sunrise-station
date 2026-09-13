@@ -8,9 +8,9 @@ namespace Content.Shared._Sunrise.Messenger;
 /// <summary>
 /// Система для работы с эмодзи в мессенджере
 /// </summary>
-public abstract class SharedEmojiSystem : EntitySystem
+public abstract partial class SharedEmojiSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private const ChatChannel EmojiSupportedChannels =
         ChatChannel.OOC

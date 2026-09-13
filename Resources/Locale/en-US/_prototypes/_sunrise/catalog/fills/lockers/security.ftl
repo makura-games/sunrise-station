@@ -2,24 +2,12 @@ ent-GunSafeEnergyGunMini = mini energy cannons safe
     .suffix = SUNRISE
     .desc = { ent-GunSafe.desc }
 
-ent-GunSafeEnergyGunPistolSecurity = safe
-    .suffix = Energy Pistol «Judge»
-    .desc = { ent-GunSafe.desc }
-
 ent-GunSafeEnergyPistolDominator = safe
-    .suffix = Energy Pistol «Dominator»
+    .suffix = Mini energy guns
     .desc = { ent-GunSafeBaseSecure.desc }
-
-ent-GunSafeEnergyGun = safe
-    .suffix = Tactical Energy guns
-    .desc = { ent-GunSafe.desc }
 
 ent-GunSafeLaserGunSMG = safe
     .suffix = Laser SMG
-    .desc = { ent-GunSafeBaseSecure.desc }
-
-ent-GunSafeEnergyGunSMG = safe
-    .suffix = Tactical Energy SMG
     .desc = { ent-GunSafeBaseSecure.desc }
 
 ent-GunSafePistolG22 = safe
@@ -38,25 +26,9 @@ ent-GunSafePistolVP78 = safe
     .suffix = VP-78
     .desc = { ent-GunSafeBaseSecure.desc }
 
-ent-GunSafePistolACP14 = safe
-    .suffix = ACP-14
-    .desc = { ent-GunSafeBaseSecure.desc }
-
 ent-GunSafeSubMachineGunVector = safe
     .suffix = Vector
     .desc = { ent-GunSafe.desc }
-
-ent-GunSafeSubMachineGunMP7 = safe
-    .suffix = MP7, SUNRISE
-    .desc = { ent-GunSafe.desc }
-
-ent-GunSafeSubMachineGunSkorpion = safe
-    .suffix = Skorpion, SUNRISE
-    .desc = { ent-GunSafe.desc }
-
-ent-GunSafeSubMachineGunMP5 = safe
-    .suffix = MP5, SUNRISE
-    .desc = { ent-GunSafeBaseSecure.desc }
 
 ent-GunSafeSubMachineGunDrozdMk2 = safe
     .suffix = Drozd Mk2, SUNRISE
@@ -74,20 +46,12 @@ ent-GunSafeRifleM52 = safe
     .suffix = M-52, LMG/HAR
     .desc = { ent-GunSafeBaseSecure.desc }
 
-ent-GunSafeRifleAKMU = safe
-    .suffix = AKMU
+ent-GunSafeRifleSKM24 = safe
+    .suffix = SKM-24
     .desc = { ent-GunSafeBaseSecure.desc }
 
 ent-GunSafeRifleLecterMk2 = safe lecter Mk2
     .suffix = Lecter Mk2
-    .desc = { ent-GunSafeBaseSecure.desc }
-
-ent-GunSafeRifleFamas = safe
-    .suffix = Famas
-    .desc = { ent-GunSafeBaseSecure.desc }
-
-ent-GunSafeWeaponRifleG36 = safe
-    .suffix = G-36
     .desc = { ent-GunSafeBaseSecure.desc }
 
 ent-GunSafeShotgunTrenchgun4034 = safe
@@ -96,14 +60,6 @@ ent-GunSafeShotgunTrenchgun4034 = safe
 
 ent-GunSafeShotgunRiot = safe
     .suffix = Shotgun Riot
-    .desc = { ent-GunSafeBaseSecure.desc }
-
-ent-GunSafeShotgunSPAS12 = safe
-    .suffix = LAW-12
-    .desc = { ent-GunSafe.desc }
-
-ent-GunSafeShotgunCombat = safe
-    .suffix = Shotgun Combat
     .desc = { ent-GunSafeBaseSecure.desc }
 
 ent-GunSafeDoubleBarreled = safe

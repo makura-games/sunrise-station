@@ -15,12 +15,12 @@ using Robust.Shared.Input;
 
 namespace Content.Client._Sunrise.UserInterface.CustomControls;
 
-public sealed class EmojiPickerWindow : DefaultWindow
+public sealed partial class EmojiPickerWindow : DefaultWindow
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IResourceCache _resource = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IResourceCache _resource = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     private readonly BoxContainer? _emojiPickerContentContainer;
     private readonly List<string> _recentEmojis = [];

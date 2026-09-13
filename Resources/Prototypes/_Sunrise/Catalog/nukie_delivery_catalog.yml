@@ -48,7 +48,7 @@
   id: NukieDeliveryDarkDurandBundle
   name: nukie-delivery-rover-bundle-name
   description: nukie-delivery-rover-bundle-desc
-  icon: { sprite: Objects/Specific/Mech/durand.rsi, state: darkdurand }
+  icon: { sprite: _Sunrise/Objects/Specific/Mech/durand.rsi, state: darkdurand }
   productEntity: CrateCybersunRoverBundle
   categories:
   - NukieDelivery

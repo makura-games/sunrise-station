@@ -1,9 +1,8 @@
+using Content.Shared.Body;
 using Content.Shared.Dataset;
 using Content.Shared.Humanoid.Markings;
-using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Utility;
 
 namespace Content.Shared.Humanoid.Prototypes;
 
@@ -36,29 +35,6 @@ public sealed partial class SpeciesPrototype : IPrototype
     [DataField(required: true)]
     public bool RoundStart { get; private set; } = false;
 
-    // Sunrise-Sponsors-Start
-    /// <summary>
-    /// Whether the species is available only for sponsors
-    /// </summary>
-    [DataField]
-    public bool SponsorOnly { get; private set; } = false;
-    // Sunrise-Sponsors-End
-
-    // The below two are to avoid fetching information about the species from the entity
-    // prototype.
-
-    // This one here is a utility field, and is meant to *avoid* having to duplicate
-    // the massive SpriteComponent found in every species.
-    // Species implementors can just override SpriteComponent if they want a custom
-    // sprite layout, and leave this null. Keep in mind that this will disable
-    // sprite accessories.
-
-    [DataField("sprites")]
-    public string? SpriteSet { get; private set; }
-
-    [DataField(required: true)]
-    public List<string> BodyTypes { get; private set; } = default!;
-
     /// <summary>
     ///     Default skin tone for this species. This applies for non-human skin tones.
     /// </summary>
@@ -71,12 +47,6 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// </summary>
     [DataField]
     public int DefaultHumanSkinTone { get; private set; } = 20;
-
-    /// <summary>
-    ///     The limit of body markings that you can place on this species.
-    /// </summary>
-    [DataField("markingLimits")]
-    public ProtoId<MarkingPointsPrototype> MarkingPoints { get; private set; } = default!;
 
     /// <summary>
     ///     Humanoid species variant used by this entity.
@@ -102,13 +72,10 @@ public sealed partial class SpeciesPrototype : IPrototype
     [DataField]
     public ProtoId<LocalizedDatasetPrototype> FemaleFirstNames { get; private set; } = "NamesFirstFemale";
 
-    // SUNRISE-TODO: Локализированые гендерные фамилии
-    // Russian-LastnameGender-Start: Split lastname field by gender
-    [DataField]
-    public ProtoId<LocalizedDatasetPrototype> MaleLastNames { get; private set; } = "NamesLast"; // = "NamesLastMale";
-
-    [DataField]
-    public ProtoId<LocalizedDatasetPrototype> FemaleLastNames { get; private set; } = "NamesLast"; // = "NamesLastFemale";
+    // Sunrise edit start - фамилии разделены по полу в partial-части
+    // [DataField]
+    // public ProtoId<LocalizedDatasetPrototype> LastNames { get; private set; } = "NamesLast";
+    // Sunrise edit end
 
     [DataField]
     public SpeciesNaming Naming { get; private set; } = SpeciesNaming.FirstLast;
@@ -140,77 +107,6 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// </summary>
     [DataField]
     public int MaxAge = 120;
-
-    //Sunrise start
-
-    /// <summary>
-    ///     Characters must not crumple under earth-like gravity.
-    /// </summary>
-    [DataField]
-    public float MinWidth = 0.95f;
-
-    /// <summary>
-    ///     Characters must not exhibit a measurable gravitational pull on nearby objects.
-    /// </summary>
-    [DataField]
-    public float MaxWidth = 1.1f;
-
-    /// <summary>
-    ///     The normal width for this species.
-    /// </summary>
-    [DataField]
-    public float DefaultWidth = 1f;
-
-    /// <summary>
-    ///     Sentient microbial lifeforms are not currently hireable under contract.
-    /// </summary>
-    [DataField]
-    public float MinHeight = 0.9f;
-
-    /// <summary>
-    ///     You cannot fit in our cloning pods.
-    /// </summary>
-    [DataField]
-    public float MaxHeight = 1.1f;
-
-    /// <summary>
-    ///     The normal height for this species.
-    /// </summary>
-    [DataField]
-    public float DefaultHeight = 1f;
-
-    /// <summary>
-    ///     The min and max height of this species in SS14 in cm
-    /// </summary>
-    [DataField]
-    public float MinHeightCm = 150f;
-
-    [DataField]
-    public float MaxHeightCm = 200f;
-
-    /// <summary>
-    ///     The weight of this species in KG if it were 1x tall and 1x wide
-    /// </summary>
-    [DataField]
-    public int StandardWeight = 75;
-
-    /// <summary>
-    ///     How much this species' weight increases or decreases depending on unit size, measured in KG/units^2
-    /// </summary>
-    [DataField]
-    public int StandardDensity = 120;
-
-    [DataField]
-    public bool StationRecordsHidden;
-    //Sunrise end
-
-
-    [DataField]
-    public SpriteSpecifier Preview { get; private set; } =
-        new SpriteSpecifier.Rsi(new ResPath("/Textures/Mobs/Species/Human/parts.rsi"), "full");
-
-    [DataField]
-    public SpriteSpecifier ButtScan = new SpriteSpecifier.Rsi(new ResPath("/Textures/_Sunrise/CopyMachine/butts_scans.rsi"), "human");
 }
 
 public enum SpeciesNaming : byte
@@ -219,5 +115,5 @@ public enum SpeciesNaming : byte
     FirstLast,
     FirstDashFirst,
     TheFirstofLast,
-    OnlyFirst // Sunrise-Edit
+    OnlyFirst // Sunrise-Edit - поддержка имён без фамилии
 }

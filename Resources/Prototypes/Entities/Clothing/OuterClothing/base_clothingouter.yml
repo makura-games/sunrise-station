@@ -76,6 +76,19 @@
 
 - type: entity
   abstract: true
+  parent: [SolutionFood, SolutionNormal, ClothingOuterStorageBase]
+  id: ClothingOuterStorageEdible
+  components:
+  - type: Edible
+    requiresSpecialDigestion: true
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Fiber
+        Quantity: 60
+
+- type: entity
+  abstract: true
   parent: [ClothingOuterStorageBase, BaseFoldable]
   id: ClothingOuterStorageFoldableBase
   components:
@@ -158,8 +171,6 @@
   - type: HeldSpeedModifier
   - type: Item
     size: Ginormous
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -193,6 +204,8 @@
     - WhitelistChameleonSuit #Sunrise-edit
     - NoPaint #Sunrise-edit
   # Sunrise-start
+  - type: Pierceable
+    level: Metal
   - type: StaminaResistance
     damageCoefficient: 0.8
   - type: BedHealModifierClothing
@@ -242,6 +255,8 @@
     slots:
     - Tail
   # Sunrise-start
+  - type: Pierceable
+    level: Wood
   - type: BedHealModifierClothing
     multiplier: 0.25
   - type: Tag

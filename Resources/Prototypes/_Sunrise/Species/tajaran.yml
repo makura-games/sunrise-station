@@ -7,7 +7,6 @@
   - TajaranNormal
   - TajaranCurved
   #- TajaranSlim
-  markingLimits: MobTajaranMarkingLimits
   dollPrototype: MobTajaranDummy
   skinColoration: Hues
   maleFirstNames: names_tajaran_male
@@ -25,291 +24,204 @@
 - type: bodyType
   id: TajaranNormal
   name: body-normal
-  sprites:
-    Head: MobTajaranHead
-    Hair: MobHumanoidAnyMarking
-    FacialHair: MobHumanoidAnyMarking
-    Chest: MobTajaranTorso
-    Eyes: MobTajaranEyes
-    LArm: MobTajaranLArm
-    RArm: MobTajaranRArm
-    LHand: MobTajaranLHand
-    RHand: MobTajaranRHand
-    LLeg: MobTajaranLLeg
-    RLeg: MobTajaranRLeg
-    LFoot: MobTajaranLFoot
-    RFoot: MobTajaranRFoot
-    Tail: MobHumanoidAnyMarking
-    HeadTop: MobHumanoidAnyMarking
-    Snout: MobHumanoidAnyMarking
-    Back: MobHumanoidAnyMarking
-
+  visualKey: body-normal
+  layers:
+    Head:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: head_m
+    Chest:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: torso_m
+    Eyes:
+      sprite: _Sunrise/Mobs/Customization/eyes.rsi
+      state: tajaran_eyes_s
+    LArm:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: l_arm
+    RArm:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: r_arm
+    LHand:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: l_hand
+    RHand:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: r_hand
+    LLeg:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: l_leg
+    RLeg:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: r_leg
+    LFoot:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: l_foot
+    RFoot:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: r_foot
+  sexLayers:
+    Male:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+        state: head_m
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+        state: torso_m
+    Female:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+        state: head_f
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+        state: torso_f
 - type: bodyType
   id: TajaranCurved
   name: body-curved-tajaran
-  sprites:
-    Head: MobTajaranHead
-    Hair: MobHumanoidAnyMarking
-    FacialHair: MobHumanoidAnyMarking
-    Chest: MobTajaranTorso
-    Eyes: MobTajaranEyes
-    LArm: MobTajaranLArm
-    RArm: MobTajaranRArm
-    LHand: MobTajaranLHand
-    RHand: MobTajaranRHand
-    LLeg: MobTajaranLLegCurved
-    RLeg: MobTajaranRLegCurved
-    LFoot: MobTajaranLFootCurved
-    RFoot: MobTajaranRFootCurved
-    Tail: MobHumanoidAnyMarking
-    HeadTop: MobHumanoidAnyMarking
-    Snout: MobHumanoidAnyMarking
-    Back: MobHumanoidAnyMarking
-
+  visualKey: body-curved-tajaran
+  layers:
+    Head:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: head_m
+    Chest:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: torso_m
+    Eyes:
+      sprite: _Sunrise/Mobs/Customization/eyes.rsi
+      state: tajaran_eyes_s
+    LArm:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: l_arm
+    RArm:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: r_arm
+    LHand:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: l_hand
+    RHand:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: r_hand
+    LLeg:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: l_leg_curved
+    RLeg:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: r_leg_curved
+    LFoot:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: l_foot_curved
+    RFoot:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: r_foot_curved
+  sexLayers:
+    Male:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+        state: head_m
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+        state: torso_m
+    Female:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+        state: head_f
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+        state: torso_f
 - type: bodyType
   id: TajaranSlim
   name: body-slim-tajaran
+  visualKey: body-slim-tajaran
   sexRestrictions:
   - Male
-  sprites:
-    Head: MobTajaranSlimHead
-    Hair: MobHumanoidAnyMarking
-    Chest: MobTajaranSlimTorso
-    Eyes: MobTajaranEyes
-    LArm: MobTajaranSlimLArm
-    RArm: MobTajaranSlimRArm
-    LHand: MobTajaranSlimLHand
-    RHand: MobTajaranSlimRHand
-    LLeg: MobTajaranSlimLLeg
-    RLeg: MobTajaranSlimRLeg
-    LFoot: MobTajaranSlimLFoot
-    RFoot: MobTajaranSlimRFoot
-    Tail: MobHumanoidAnyMarking
-    HeadTop: MobHumanoidAnyMarking
-    Snout: MobHumanoidAnyMarking
-    Back: MobHumanoidAnyMarking
-
-- type: markingPoints
-  id: MobTajaranMarkingLimits
-  onlyWhitelisted: true
-  points:
-    Hair:
-      points: 1
-      required: false
-    FacialHair:
-      points: 0
-      required: false
-    Chest:
-      points: 1
-      required: false
-    Arms:
-      points: 2
-      required: false
-    Legs:
-      points: 2
-      required: false
-    Tail:
-      points: 1
-      required: true
-      defaultMarkings: [ TajaranTailDefault ]
+  layers:
     Head:
-      points: 3
+      sprite: Mobs/Species/Slim/tajaran.rsi
+      state: head_slim
+    Chest:
+      sprite: Mobs/Species/Slim/tajaran.rsi
+      state: torso_slim
+    Eyes:
+      sprite: _Sunrise/Mobs/Customization/eyes.rsi
+      state: tajaran_eyes_s
+    LArm:
+      sprite: Mobs/Species/Slim/tajaran.rsi
+      state: l_arm_slim
+    RArm:
+      sprite: Mobs/Species/Slim/tajaran.rsi
+      state: r_arm_slim
+    LHand:
+      sprite: Mobs/Species/Slim/tajaran.rsi
+      state: l_hand_slim
+    RHand:
+      sprite: Mobs/Species/Slim/tajaran.rsi
+      state: r_hand_slim
+    LLeg:
+      sprite: Mobs/Species/Slim/tajaran.rsi
+      state: l_leg_slim
+    RLeg:
+      sprite: Mobs/Species/Slim/tajaran.rsi
+      state: r_leg_slim
+    LFoot:
+      sprite: Mobs/Species/Slim/tajaran.rsi
+      state: l_foot_slim
+    RFoot:
+      sprite: Mobs/Species/Slim/tajaran.rsi
+      state: r_foot_slim
+  sexLayers:
+    Female:
+      Head:
+        sprite: Mobs/Species/Slim/tajaran.rsi
+        state: head_slim_f
+      Chest:
+        sprite: Mobs/Species/Slim/tajaran.rsi
+        state: torso_slim_f
+- type: markingsGroup
+  id: Tajaran
+  onlyGroupWhitelisted: true
+  limits:
+    enum.HumanoidVisualLayers.Hair:
+      limit: 1
       required: false
-    HeadTop:
-      points: 1
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 0
       required: false
-    Snout:
-      points: 1
+    enum.HumanoidVisualLayers.Chest:
+      limit: 1
       required: false
-
-- type: humanoidBaseSprite
-  id: MobTajaranEyes
-  baseSprite:
-    sprite: _Sunrise/Mobs/Customization/eyes.rsi
-    state: tajaran_eyes_s
-
-- type: humanoidBaseSprite
-  id: MobTajaranTail
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: tail_m
-
-- type: humanoidBaseSprite
-  id: MobTajaranHead
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: head_m
-
-- type: humanoidBaseSprite
-  id: MobTajaranHeadMale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: head_m
-
-- type: humanoidBaseSprite
-  id: MobTajaranHeadFemale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: head_f
-
-- type: humanoidBaseSprite
-  id: MobTajaranTorso
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: torso_m
-
-- type: humanoidBaseSprite
-  id: MobTajaranTorsoMale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: torso_m
-
-- type: humanoidBaseSprite
-  id: MobTajaranTorsoFemale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: torso_f
-
-- type: humanoidBaseSprite
-  id: MobTajaranLLeg
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: l_leg
-
-- type: humanoidBaseSprite
-  id: MobTajaranLArm
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: l_arm
-
-- type: humanoidBaseSprite
-  id: MobTajaranLHand
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: l_hand
-
-- type: humanoidBaseSprite
-  id: MobTajaranLFoot
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: l_foot
-
-- type: humanoidBaseSprite
-  id: MobTajaranRLeg
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: r_leg
-
-- type: humanoidBaseSprite
-  id: MobTajaranRArm
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: r_arm
-
-- type: humanoidBaseSprite
-  id: MobTajaranRHand
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: r_hand
-
-- type: humanoidBaseSprite
-  id: MobTajaranRFoot
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: r_foot
-
-- type: humanoidBaseSprite
-  id: MobTajaranSlimHead
-  baseSprite:
-    sprite: Mobs/Species/Slim/tajaran.rsi
-    state: head_slim
-
-- type: humanoidBaseSprite
-  id: MobTajaranSlimHeadFemale
-  baseSprite:
-    sprite: Mobs/Species/Slim/tajaran.rsi
-    state: head_slim_f
-
-- type: humanoidBaseSprite
-  id: MobTajaranSlimTorso
-  baseSprite:
-    sprite: Mobs/Species/Slim/tajaran.rsi
-    state: torso_slim
-
-- type: humanoidBaseSprite
-  id: MobTajaranSlimTorsoFemale
-  baseSprite:
-    sprite: Mobs/Species/Slim/tajaran.rsi
-    state: torso_slim_f
-
-- type: humanoidBaseSprite
-  id: MobTajaranSlimLLeg
-  baseSprite:
-    sprite: Mobs/Species/Slim/tajaran.rsi
-    state: l_leg_slim
-
-- type: humanoidBaseSprite
-  id: MobTajaranSlimLArm
-  baseSprite:
-    sprite: Mobs/Species/Slim/tajaran.rsi
-    state: l_arm_slim
-
-- type: humanoidBaseSprite
-  id: MobTajaranSlimLHand
-  baseSprite:
-    sprite: Mobs/Species/Slim/tajaran.rsi
-    state: l_hand_slim
-
-- type: humanoidBaseSprite
-  id: MobTajaranSlimLFoot
-  baseSprite:
-    sprite: Mobs/Species/Slim/tajaran.rsi
-    state: l_foot_slim
-
-- type: humanoidBaseSprite
-  id: MobTajaranSlimRLeg
-  baseSprite:
-    sprite: Mobs/Species/Slim/tajaran.rsi
-    state: r_leg_slim
-
-- type: humanoidBaseSprite
-  id: MobTajaranSlimRArm
-  baseSprite:
-    sprite: Mobs/Species/Slim/tajaran.rsi
-    state: r_arm_slim
-
-- type: humanoidBaseSprite
-  id: MobTajaranSlimRHand
-  baseSprite:
-    sprite: Mobs/Species/Slim/tajaran.rsi
-    state: r_hand_slim
-
-- type: humanoidBaseSprite
-  id: MobTajaranSlimRFoot
-  baseSprite:
-    sprite: Mobs/Species/Slim/tajaran.rsi
-    state: r_foot_slim
-
-- type: humanoidBaseSprite
-  id: MobTajaranLLegCurved
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: l_leg_curved
-
-- type: humanoidBaseSprite
-  id: MobTajaranLFootCurved
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: l_foot_curved
-
-- type: humanoidBaseSprite
-  id: MobTajaranRLegCurved
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: r_leg_curved
-
-- type: humanoidBaseSprite
-  id: MobTajaranRFootCurved
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
-    state: r_foot_curved
+    enum.HumanoidVisualLayers.LArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Tail:
+      limit: 1
+      required: true
+      default: [ TajaranTailDefault ]
+    enum.HumanoidVisualLayers.Head:
+      limit: 3
+      required: false
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Snout:
+      limit: 1
+      required: false

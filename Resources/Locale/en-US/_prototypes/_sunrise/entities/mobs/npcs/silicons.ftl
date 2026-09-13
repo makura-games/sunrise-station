@@ -47,7 +47,6 @@ ent-MobRogueSiliconT3Tesla = tesla unit
 ent-MobRogueSiliconBossGuardian = guardian unit
 ent-MobRogueSiliconBossGuardianLCG = guardian unit
 ent-MobRogueSiliconBoss = one star unit
-ent-MobRogueSiliconT3Terminator = nt-800 "exterminator"
 ent-MobRogueSiliconBossSkullHouse = skull house
     .desc = A corrupted Durand-pattern mech with heavy armor and a crude machine gun. Something green and malicious still hums inside.
 ent-MobRogueSiliconT1DerelictBorg = derelict rogue brawler
@@ -89,7 +88,6 @@ ent-SpawnMobRogueSiliconT1VisceratorSquad = viscerator squad spawner
 ent-SpawnMobRogueSiliconBoss = one star unit spawner
 ent-SpawnMobRogueSiliconBossGuardian = guardian unit spawner
 ent-SpawnMobRogueSiliconBossGuardianLCG = guardian LCG unit spawner
-ent-SpawnMobRogueSiliconT3Terminator = exterminator unit spawner
 
 ent-ClothingBackpackRogueSiliconDerelictBorg = derelict borg bundle
     .suffix = Rogue Silicon, Brawler

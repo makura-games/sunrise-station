@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -8,8 +9,8 @@ namespace Content.Shared.Blocking;
 
 public sealed partial class BlockingSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     private void InitializeUser()
     {
@@ -49,24 +50,25 @@ public sealed partial class BlockingSystem
             return;
 
         if (!_toggle.IsActivated(component.BlockingItem.Value)) // Sunrise-Edit
-                return;
+            return;
 
-            // A shield should only block damage it can itself absorb. To determine that we need the Damageable component on it.
-            if (!TryComp<DamageableComponent>(item, out var dmgComp))
+        // A shield should only block damage it can itself absorb. To determine that we need the Damageable component on it.
+        if (!TryComp<DamageableComponent>(item, out var dmgComp))
             return;
 
         var blockFraction = blocking.IsBlocking ? blocking.ActiveBlockFraction : blocking.PassiveBlockFraction;
+        var modifier = blocking.IsBlocking ? blocking.ActiveBlockDamageModifier : blocking.PassiveBlockDamageModifer;
         blockFraction = Math.Clamp(blockFraction, 0, 1);
         _damageable.TryChangeDamage((item, dmgComp), blockFraction * args.OriginalDamage);
 
         var ev = new BlockingEvent(uid, args.Damage);
-            RaiseLocalEvent(component.BlockingItem.Value, ev);
+        RaiseLocalEvent(item, ev); // Sunrise-Edit — уведомляем особые щиты об успешной попытке блока
 
-            var modify = new DamageModifierSet();
-            foreach (var key in dmgComp.Damage.DamageDict.Keys)
-            {
-                modify.Coefficients.TryAdd(key, 1 - blockFraction);
-            }
+        var modify = new DamageModifierSet();
+        foreach (var key in modifier.Coefficients.Keys.Concat(modifier.FlatReduction.Keys))
+        {
+            modify.Coefficients.TryAdd(key, 1 - blockFraction);
+        }
 
         args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modify);
 

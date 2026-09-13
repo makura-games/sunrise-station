@@ -4,6 +4,7 @@ using Content.Shared._Sunrise.NightVision.Components;
 using Content.Shared._Sunrise.CollectiveMind;
 using Content.Shared._Sunrise.FleshCult;
 using Content.Shared.Actions.Components;
+using Content.Shared.Body;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Electrocution;
 using Content.Shared.FixedPoint;
@@ -34,6 +35,8 @@ public sealed partial class FleshCultSystem
     [ValidatePrototypeId<TagPrototype>]
     private const string FleshTagProto = "Flesh";
 
+    private static readonly ProtoId<TagPrototype> FullBodyOuterTag = "FullBodyOuter";
+
     [ValidatePrototypeId<EntityPrototype>]
     private const string DefaultFleshCultRule = "FleshCult";
 
@@ -45,6 +48,14 @@ public sealed partial class FleshCultSystem
 
     [ValidatePrototypeId<CurrencyPrototype>]
     private const string StolenMutationPointPrototype = "StolenMutationPoint";
+
+    private static readonly HumanoidVisualLayers[] FleshSpiderLegLayers =
+    [
+        HumanoidVisualLayers.RLeg,
+        HumanoidVisualLayers.LLeg,
+        HumanoidVisualLayers.RFoot,
+        HumanoidVisualLayers.LFoot,
+    ];
 
     private void InitializeCultist()
     {
@@ -59,12 +70,18 @@ public sealed partial class FleshCultSystem
         SubscribeLocalEvent<FleshCultistComponent, IsEquippingAttemptEvent>(OnBeingEquippedAttempt);
         SubscribeLocalEvent<FleshCultistComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<FleshCultistComponent, FleshCultistShopActionEvent>(OnShop);
+        SubscribeLocalEvent<FleshCultistComponent, OrganInsertedIntoEvent>(OnOrganInserted);
     }
 
     private void OnShop(EntityUid uid, FleshCultistComponent component, FleshCultistShopActionEvent args)
     {
         if (TryComp<StoreComponent>(uid, out var store))
             _store.ToggleUi(uid, uid, store);
+    }
+
+    private void OnOrganInserted(Entity<FleshCultistComponent> _, ref OrganInsertedIntoEvent args)
+    {
+        MakeFleshSpiderLegMarkingsHideable(args.Organ);
     }
 
     private void OnMobStateChanged(EntityUid uid, FleshCultistComponent component, MobStateChangedEvent args)
@@ -108,7 +125,7 @@ public sealed partial class FleshCultSystem
     {
         if (_inventory.TryGetSlotEntity(uid, slot, out var entity) && HasComp<FleshBodyModComponent>(entity))
         {
-            EntityManager.DeleteEntity(entity.Value);
+            Del(entity.Value);
             _movement.RefreshMovementSpeedModifiers(uid);
             _audioSystem.PlayPvs(component.SoundMutation, uid, component.SoundMutation.Params);
         }
@@ -123,7 +140,7 @@ public sealed partial class FleshCultSystem
             return;
         if (!HasComp<FleshBodyModComponent>(shoes))
             return;
-        if (!_tagSystem.HasTag(args.Equipment, "FullBodyOuter"))
+        if (!_tagSystem.HasTag(args.Equipment, FullBodyOuterTag))
             return;
         _popup.PopupEntity(Loc.GetString("flesh-cultist-equiped-outer-clothing-blocked",
             ("Entity", uid)), uid, PopupType.Large);
@@ -172,14 +189,32 @@ public sealed partial class FleshCultSystem
 
     private void InitializeAppearance(EntityUid uid)
     {
-        if (TryComp<HumanoidAppearanceComponent>(uid, out var appearance))
+        EnsureComp<HideableHumanoidLayersComponent>(uid);
+
+        if (!TryComp<BodyComponent>(uid, out var body))
+            return;
+
+        foreach (var organ in body.Organs?.ContainedEntities ?? [])
         {
-            appearance.HideLayersOnEquip.Add(HumanoidVisualLayers.RLeg);
-            appearance.HideLayersOnEquip.Add(HumanoidVisualLayers.LLeg);
-            appearance.HideLayersOnEquip.Add(HumanoidVisualLayers.RFoot);
-            appearance.HideLayersOnEquip.Add(HumanoidVisualLayers.LFoot);
-            Dirty(uid, appearance);
+            MakeFleshSpiderLegMarkingsHideable(organ);
         }
+    }
+
+    private void MakeFleshSpiderLegMarkingsHideable(EntityUid organ)
+    {
+        if (!TryComp<VisualOrganMarkingsComponent>(organ, out var markings))
+            return;
+
+        var dirty = false;
+        foreach (var layer in FleshSpiderLegLayers)
+        {
+            // Разрешаем одежде скрывать только те слои, которые принадлежат этому органу.
+            if (markings.MarkingData.Layers.Contains(layer))
+                dirty |= markings.HideableLayers.Add(layer);
+        }
+
+        if (dirty)
+            DirtyField(organ, markings, nameof(VisualOrganMarkingsComponent.HideableLayers));
     }
 
     private void OnShutdown(EntityUid uid, FleshCultistComponent component, ComponentShutdown args)
@@ -308,7 +343,7 @@ public sealed partial class FleshCultSystem
         _popup.PopupEntity(Loc.GetString("flesh-pudge-transform-others", ("Entity", uid), ("EntityTransform", abommob)), abommob, Filter.PvsExcept(abommob), true, PopupType.LargeCaution);
         _audioSystem.PlayPvs(component.SoundMutation, coordinates, AudioParams.Default.WithVariation(0.025f));
 
-        _gibbingSystem.Gib(uid, true);
+        _gibbing.Gib(uid, true);
 
         return true;
     }

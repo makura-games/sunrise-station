@@ -2,7 +2,7 @@
 
 public sealed partial class OptionsMenu
 {
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     private void SetTabsName()
     {

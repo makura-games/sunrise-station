@@ -1,6 +1,34 @@
-# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 - type: entity
-  parent: BaseMobSpeciesOrganic
+  parent: BaseSpeciesAppearance
+  id: AppearanceHumanoidXeno
+  name: humanoid xeno appearance
+  components:
+  - type: InitialBody
+    organs:
+      Torso: TorsoHumanoidXeno
+      Head: HeadHumanoidXeno
+      ArmLeft: LeftArmHumanoidXeno
+      ArmRight: RightArmHumanoidXeno
+      HandRight: RightHandHumanoidXeno
+      HandLeft: LeftHandHumanoidXeno
+      LegLeft: LeftLegHumanoidXeno
+      LegRight: RightLegHumanoidXeno
+      FootLeft: LeftFootHumanoidXeno
+      FootRight: RightFootHumanoidXeno
+      Brain: OrganHumanoidXenoBrain
+      Eyes: OrganHumanoidXenoEyes
+      Tongue: OrganHumanTongue
+      Heart: OrganHumanoidXenoHeart
+      Lungs: OrganHumanoidXenoLungs
+      Stomach: OrganHumanoidXenoStomach
+      Liver: OrganHumanoidXenoLiver
+      Kidneys: OrganHumanoidXenoKidneys
+
+- type: entity
+  parent:
+  - AppearanceHumanoidXeno
+  - BaseSpeciesMobOrganic
   id: BaseMobHumanoidXeno
   name: Urist McXeno
   abstract: true
@@ -57,8 +85,9 @@
         Quantity: 300
   - type: ProtectedFromStepTriggers
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Xenomorph
+  - type: Injurable
+    damageContainer: Biological
   - type: MovementSpeedModifier
     baseWalkSpeed: 3
     baseSprintSpeed: 4
@@ -72,6 +101,7 @@
   - type: Sprite
     layers:
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
+    - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ]
     - map: [ "enum.HumanoidVisualLayers.Eyes" ]
     - map: [ "enum.HumanoidVisualLayers.RArm" ]
@@ -127,9 +157,6 @@
     spawned:
     - id: FoodMeatXeno
       amount: 5
-  - type: Body
-    prototype: HumanoidXeno
-    requiredLegs: 2
   - type: Inventory
     speciesId: reptilian
     templateId: humanoidxeno
@@ -231,8 +258,11 @@
           32:
             sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
             state: hardsuit
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: HumanoidXeno
+  - type: SunriseHumanoidProfile
+    bodyType: HumanoidXenoNormal
+  - type: SunriseHumanoidBaseLayers
   - type: Tag
     tags:
       - HumanoidXeno
@@ -247,12 +277,14 @@
     rightBareFootState: [ footprint-right-bare-lizard ]
 
 - type: entity
-  parent: BaseSpeciesDummy
+  parent: AppearanceHumanoidXeno
   id: MobXenoDummy
   categories: [ HideSpawnMenu ]
   components:
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: HumanoidXeno
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers
   - type: Inventory
     speciesId: reptilian
     templateId: humanoidxeno
@@ -354,6 +386,4 @@
           32:
             sprite: _Sunrise/Mobs/Species/Reptilian/displacement.rsi
             state: hardsuit
-  - type: Body
-    prototype: HumanoidXeno
 

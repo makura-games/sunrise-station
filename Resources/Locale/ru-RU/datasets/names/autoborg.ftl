@@ -46,5 +46,5 @@ names-autoborg-dataset-45 = МОЩНЫЕ ОКОРКА
 names-autoborg-dataset-46 = В.А.Л.И.Д.С.
 names-autoborg-dataset-47 = Удалите кремний
 names-autoborg-dataset-48 = ИИ — ЭТО КОНДОМ
-names-autoborg-dataset-49 = скажите ";help in core"
+names-autoborg-dataset-49 = скажите ";помощь в ядре!!!"
 names-autoborg-dataset-50 = Эта Машина

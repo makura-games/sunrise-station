@@ -5,11 +5,11 @@
   components:
   - type: Label
     currentLabel: reagent-name-polytrinic-acid
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: PolytrinicAcid
-          Quantity: 30
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 30
+      reagents:
+      - ReagentId: PolytrinicAcid
+        Quantity: 30
 

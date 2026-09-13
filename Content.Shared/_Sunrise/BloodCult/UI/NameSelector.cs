@@ -38,7 +38,7 @@ public enum RuneTeleporterUiKey
 }
 
 [Serializable, NetSerializable]
-public class TeleportRunesListWindowItemSelectedMessage : BoundUserInterfaceMessage
+public sealed class TeleportRunesListWindowItemSelectedMessage : BoundUserInterfaceMessage
 {
     public TeleportRunesListWindowItemSelectedMessage(int selectedItem, int index)
     {
@@ -51,7 +51,7 @@ public class TeleportRunesListWindowItemSelectedMessage : BoundUserInterfaceMess
 }
 
 [Serializable, NetSerializable]
-public class TeleportRuneChangeNameMessage : BoundUserInterfaceMessage
+public sealed class TeleportRuneChangeNameMessage : BoundUserInterfaceMessage
 {
     public TeleportRuneChangeNameMessage()
     {
@@ -73,7 +73,7 @@ public enum SummonCultistUiKey
 }
 
 [Serializable, NetSerializable]
-public class SummonCultistListWindowItemSelectedMessage : BoundUserInterfaceMessage
+public sealed class SummonCultistListWindowItemSelectedMessage : BoundUserInterfaceMessage
 {
     public SummonCultistListWindowItemSelectedMessage(int selectedItem, int index)
     {

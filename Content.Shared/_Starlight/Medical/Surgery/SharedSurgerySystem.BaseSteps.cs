@@ -1,5 +1,4 @@
-﻿using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -19,7 +18,7 @@ namespace Content.Shared.Starlight.Medical.Surgery;
 // https://github.com/RMC-14/RMC-14
 public abstract partial class SharedSurgerySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
     private void InitializeSteps()
     {
         SubscribeLocalEvent<SurgeryStepComponent, SurgeryStepCompleteEvent>(OnStepComplete);
@@ -39,12 +38,10 @@ public abstract partial class SharedSurgerySystem
             args.Target is not { } target ||
             !IsSurgeryValid(ent, target, args.Surgery, args.Step, out var surgery, out var part, out var step) ||
             !PreviousStepsComplete(ent, part, surgery, args.Step) ||
-            !CanPerformStep(args.User, ent, part.Comp.PartType, step, false))
+            !CanPerformStep(args.User, ent, part, step, false))
         {
             Log.Warning($"{ToPrettyString(args.User)} tried to start invalid surgery.");
             Dirty(ent);
-            if (args.Target.HasValue && TryComp<BodyPartComponent>(args.Target.Value, out var dirtyPart))
-                Dirty(args.Target.Value, dirtyPart, Comp<MetaDataComponent>(args.Target.Value));
             return;
         }
 
@@ -82,7 +79,7 @@ public abstract partial class SharedSurgerySystem
             return;
 
         var xform = Transform(ent);
-        var root = _containers.GetContainingContainers((ent, xform)).FirstOrDefault(x => x.ID == SharedBodySystem.BodyRootContainerId); //get the root container
+        var root = _containers.GetContainingContainers((ent, xform)).FirstOrDefault(x => x.ID == BodyComponent.ContainerID); //get the root container
         if (root == null)
             return;
         if (!_interaction.CanAccess(args.User, root.Owner))
@@ -97,6 +94,8 @@ public abstract partial class SharedSurgerySystem
         var progress = Comp<SurgeryProgressComponent>(args.Part);
         progress.CompletedSteps.Clear();
         progress.CompletedSurgeries.Clear();
+        progress.StartedSurgeries.Clear();
+        Dirty(args.Part, progress);
     }
     private void OnStepComplete(Entity<SurgeryStepComponent> ent, ref SurgeryStepCompleteEvent args)
     {
@@ -118,12 +117,14 @@ public abstract partial class SharedSurgerySystem
         }
         if (args.IsFinal)
             progress.CompletedSurgeries.Add(args.SurgeryProto);
+
+        Dirty(args.Part, progress); // Sunrise-Edit - синхронизируем завершенный шаг с BUI
     }
     private void OnStep(Entity<SurgeryStepComponent> ent, ref SurgeryStepEvent args)
     {
         foreach (var reg in (ent.Comp.Tools ?? []).Values)
         {
-            var tool = args.Tools.FirstOrDefault(x => HasComp(x, reg.Component.GetType()));
+            var tool = args.Tools.FirstOrDefault(x => MatchesSurgeryRequirement(x, reg.Component.GetType())); // Sunrise-Edit
             if (tool == default) return;
 
             if (_net.IsServer && TryComp(tool, out SurgeryToolComponent? toolComp) && toolComp.EndSound != null)
@@ -194,7 +195,7 @@ public abstract partial class SharedSurgerySystem
 
         foreach (var reg in ent.Comp.Tools.Values)
         {
-            var tool = args.Tools.FirstOrDefault(x => HasComp(x, reg.Component.GetType()));
+            var tool = args.Tools.FirstOrDefault(x => MatchesSurgeryRequirement(x, reg.Component.GetType()));
             if (tool == default)
             {
                 args.Invalid = StepInvalidReason.MissingTool;
@@ -231,7 +232,7 @@ public abstract partial class SharedSurgerySystem
             || !IsSurgeryValid(body, targetPart, args.Surgery, args.Step, out var surgery, out var part, out var step)
             || !_entitySystem.TryGetSingleton(args.Step, out var stepEnt)
             || !TryComp(stepEnt, out SurgeryStepComponent? stepComp)
-            || !CanPerformStep(user, body, part.Comp.PartType, step, true, out _, out _, out var validTools))
+            || !CanPerformStep(user, body, part, step, true, out _, out _, out var validTools))
         {
             return;
         }
@@ -336,21 +337,11 @@ public abstract partial class SharedSurgerySystem
         return true;
     }
 
-    public bool CanPerformStep(EntityUid user, EntityUid body, BodyPartType part, EntityUid step, bool doPopup) => CanPerformStep(user, body, part, step, doPopup, out _, out _, out _);
-    public bool CanPerformStep(EntityUid user, EntityUid body, BodyPartType part, EntityUid step, bool doPopup, out string? popup, out StepInvalidReason reason, out HashSet<EntityUid> validTools)
+    public bool CanPerformStep(EntityUid user, EntityUid body, EntityUid part, EntityUid step, bool doPopup) => CanPerformStep(user, body, part, step, doPopup, out _, out _, out _);
+    public bool CanPerformStep(EntityUid user, EntityUid body, EntityUid part, EntityUid step, bool doPopup, out string? popup, out StepInvalidReason reason, out HashSet<EntityUid> validTools)
     {
-        var slot = part switch
-        {
-            BodyPartType.Head => SlotFlags.HEAD | SlotFlags.MASK | SlotFlags.EYES,
-            BodyPartType.Torso => SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING,
-            BodyPartType.Arm => SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING,
-            BodyPartType.Hand => SlotFlags.GLOVES,
-            BodyPartType.Leg => SlotFlags.OUTERCLOTHING | SlotFlags.LEGS,
-            BodyPartType.Foot => SlotFlags.FEET,
-            BodyPartType.Tail => SlotFlags.NONE,
-            BodyPartType.Other => SlotFlags.NONE,
-            _ => SlotFlags.NONE
-        };
+        var surgeryPart = GetSurgeryPart(CompOrNull<OrganComponent>(part));
+        var slot = GetSurgeryTargetSlots(surgeryPart);
 
         var check = new SurgeryCanPerformStepEvent(user, body, GetTools(user), slot);
         RaiseLocalEvent(step, ref check);

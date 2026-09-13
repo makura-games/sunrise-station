@@ -5,16 +5,26 @@ using Content.Shared.Speech;
 
 namespace Content.Server.Speech.EntitySystems;
 
-public sealed class FrontalLispSystem : EntitySystem
+public sealed partial class FrontalLispSystem : EntitySystem
 {
     // @formatter:off
     private static readonly Regex RegexUpperTh = new(@"[T]+[Ss]+|[S]+[Cc]+(?=[IiEeYy]+)|[C]+(?=[IiEeYy]+)|[P][Ss]+|([S]+[Tt]+|[T]+)(?=[Ii]+[Oo]+[Uu]*[Nn]*)|[C]+[Hh]+(?=[Ii]*[Ee]*)|[Z]+|[S]+|[X]+(?=[Ee]+)");
     private static readonly Regex RegexLowerTh = new(@"[t]+[s]+|[s]+[c]+(?=[iey]+)|[c]+(?=[iey]+)|[p][s]+|([s]+[t]+|[t]+)(?=[i]+[o]+[u]*[n]*)|[c]+[h]+(?=[i]*[e]*)|[z]+|[s]+|[x]+(?=[e]+)");
     private static readonly Regex RegexUpperEcks = new(@"[E]+[Xx]+[Cc]*|[X]+");
     private static readonly Regex RegexLowerEcks = new(@"[e]+[x]+[c]*|[x]+");
+    private static readonly Regex LowerEsRegex = new("с");
+    private static readonly Regex UpperEsRegex = new("С");
+    private static readonly Regex LowerCheRegex = new("ч");
+    private static readonly Regex UpperCheRegex = new("Ч");
+    private static readonly Regex LowerTseRegex = new("ц");
+    private static readonly Regex UpperTseRegex = new("Ц");
+    private static readonly Regex LowerTeRegex = new(@"\B[т](?![АЕЁИОУЫЭЮЯаеёиоуыэюя])");
+    private static readonly Regex UpperTeRegex = new(@"\B[Т](?![АЕЁИОУЫЭЮЯаеёиоуыэюя])");
+    private static readonly Regex LowerZeRegex = new("з");
+    private static readonly Regex UpperZeRegex = new("З");
     // @formatter:on
 
-    [Dependency] private readonly IRobustRandom _random = default!; // Russian-Localization
+    [Dependency] private IRobustRandom _random = default!; // Russian-Localization
 
     public override void Initialize()
     {
@@ -35,20 +45,20 @@ public sealed class FrontalLispSystem : EntitySystem
 
         // Russian-Localization Start
         // с - ш
-        message = Regex.Replace(message, @"с", _random.Prob(0.90f) ? "ш" : "с");
-        message = Regex.Replace(message, @"С", _random.Prob(0.90f) ? "Ш" : "С");
+        message = LowerEsRegex.Replace(message, _random.Prob(0.90f) ? "ш" : "с");
+        message = UpperEsRegex.Replace(message, _random.Prob(0.90f) ? "Ш" : "С");
         // ч - ш
-        message = Regex.Replace(message, @"ч", _random.Prob(0.90f) ? "ш" : "ч");
-        message = Regex.Replace(message, @"Ч", _random.Prob(0.90f) ? "Ш" : "Ч");
+        message = LowerCheRegex.Replace(message, _random.Prob(0.90f) ? "ш" : "ч");
+        message = UpperCheRegex.Replace(message, _random.Prob(0.90f) ? "Ш" : "Ч");
         // ц - ч
-        message = Regex.Replace(message, @"ц", _random.Prob(0.90f) ? "ч" : "ц");
-        message = Regex.Replace(message, @"Ц", _random.Prob(0.90f) ? "Ч" : "Ц");
+        message = LowerTseRegex.Replace(message, _random.Prob(0.90f) ? "ч" : "ц");
+        message = UpperTseRegex.Replace(message, _random.Prob(0.90f) ? "Ч" : "Ц");
         // т - ч
-        message = Regex.Replace(message, @"\B[т](?![АЕЁИОУЫЭЮЯаеёиоуыэюя])", _random.Prob(0.90f) ? "ч" : "т");
-        message = Regex.Replace(message, @"\B[Т](?![АЕЁИОУЫЭЮЯаеёиоуыэюя])", _random.Prob(0.90f) ? "Ч" : "Т");
+        message = LowerTeRegex.Replace(message, _random.Prob(0.90f) ? "ч" : "т");
+        message = UpperTeRegex.Replace(message, _random.Prob(0.90f) ? "Ч" : "Т");
         // з - ж
-        message = Regex.Replace(message, @"з", _random.Prob(0.90f) ? "ж" : "з");
-        message = Regex.Replace(message, @"З", _random.Prob(0.90f) ? "Ж" : "З");
+        message = LowerZeRegex.Replace(message, _random.Prob(0.90f) ? "ж" : "з");
+        message = UpperZeRegex.Replace(message, _random.Prob(0.90f) ? "Ж" : "З");
         // Russian-Localization End
 
         args.Message = message;

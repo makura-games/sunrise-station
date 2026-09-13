@@ -14,9 +14,9 @@ namespace Content.Server._Sunrise.Speech.Muting;
 /// Bridges the new status-effect mute used by Sunrise anti-spam into the existing speech pipeline
 /// without modifying the vanilla muting system.
 /// </summary>
-public sealed class SunriseMutedStatusEffectSystem : EntitySystem
+public sealed partial class SunriseMutedStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
 
     public override void Initialize()
     {

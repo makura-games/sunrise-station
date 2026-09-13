@@ -13,7 +13,6 @@
   startingGear: ComMaidGear
   icon: "JobIconComMaid"
   supervisors: job-supervisors-captain
-  canBeAntag: true
   displayWeight: 0
   weight: 5
   alternativeTitles:

@@ -5,14 +5,10 @@
   slipData:
     requiredSlipSpeed: 3.5
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 3
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
   reactiveEffects:
     Extinguish:
       methods: [ Touch ]
@@ -30,14 +26,10 @@
   parent: BaseDrink
   abstract: true
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
   plantMetabolism:
   - !type:PlantAdjustNutrition
     amount: 0.1
@@ -57,20 +49,17 @@
     requiredSlipSpeed: 3.5
   friction: 0.4
   metabolisms:
-    Drink:
+    Digestion:
+      metabolites:
+        Ethanol: 0.12
       effects:
-      - !type:SatiateThirst
-        factor: 2
-      - !type:AdjustReagent
-        reagent: Ethanol
-        amount: 0.06
-  #Sunrise start
+      #Sunrise start
       - !type:SatiateThirst
         factor: 2
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Dwarf ]
-  #Sunrise end
+      #Sunrise end
   reactiveEffects:
     Flammable:
       methods: [ Touch ]

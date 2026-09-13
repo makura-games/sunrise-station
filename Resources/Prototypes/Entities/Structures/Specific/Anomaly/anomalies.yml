@@ -37,7 +37,6 @@
     sprite: Structures/Specific/anomaly.rsi
   - type: InteractionOutline
   - type: Clickable
-  - type: Damageable
   - type: Appearance
   - type: AnimationPlayer
   - type: GuideHelp
@@ -59,19 +58,9 @@
       types:
         Radiation: 10
 
-# Sunrise-Start
-- type: entity
-  abstract: true
-  id: BaseAnomalyNew
-  parent: BaseAnomaly
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Structures/Specific/anomalies.rsi
-# Sunrise-End
-
 - type: entity
   id: AnomalyPyroclastic
-  parent: BaseAnomalyNew
+  parent: BaseAnomaly
   suffix: Pyroclastic
   components:
   - type: AmbientSound
@@ -85,18 +74,13 @@
     supercriticalSoundAtAnimationStart:
       collection: AnomalyPyroSupercritical
   - type: Sprite
-    # Sunrise-Start
+    sprite: Structures/Specific/Anomalies/pyro_anom.rsi
     layers:
-    - state: shadow-anomaly
-      shader: unshaded
-    - state: anomaly-pyroclastic-vfx
-      shader: unshaded
+    - state: anom
       map: ["enum.AnomalyVisualLayers.Base"]
-    - state: anomaly-pyroclastic-pulse
-      shader: unshaded
+    - state: pulse
       map: ["enum.AnomalyVisualLayers.Animated"]
       visible: false
-    # Sunrise-End
   - type: PointLight
     radius: 6.0
     energy: 7.5
@@ -135,7 +119,7 @@
 
 - type: entity
   id: AnomalyGravity
-  parent: BaseAnomalyNew
+  parent: BaseAnomaly
   suffix: Gravity
   components:
   - type: Anomaly
@@ -145,18 +129,12 @@
       collection: AnomalyGravitySupercritical
     supercriticalDuration: 15s
   - type: Sprite
-    # Sunrise-Start
     layers:
-    - state: shadow-anomaly
-      shader: unshaded
-    - state: anomaly-gravity-vfx
-      shader: unshaded
+    - state: anom2
       map: ["enum.AnomalyVisualLayers.Base"]
-    - state: anomaly-gravity-pulse
-      shader: unshaded
+    - state: anom2-pulse
       map: ["enum.AnomalyVisualLayers.Animated"]
       visible: false
-    # Sunrise-End
   - type: PointLight
     radius: 5.0
     energy: 20
@@ -176,7 +154,7 @@
 
 - type: entity
   id: AnomalyElectricity
-  parent: BaseAnomalyNew
+  parent: BaseAnomaly
   suffix: Electricity
   components:
   - type: Anomaly
@@ -185,18 +163,12 @@
     supercriticalSoundAtAnimationStart:
       collection: AnomalyElectricitySupercritical
   - type: Sprite
-    # Sunrise-Start
     layers:
-    - state: shadow-anomaly
-      shader: unshaded
-    - state: anomaly-electricity-vfx
-      shader: unshaded
+    - state: anom3
       map: ["enum.AnomalyVisualLayers.Base"]
-    - state: anomaly-electricity-pulse
-      shader: unshaded
+    - state: anom3-pulse
       map: ["enum.AnomalyVisualLayers.Animated"]
       visible: false
-    # Sunrise-End
   - type: PointLight
     radius: 2.0
     energy: 5.0
@@ -302,22 +274,16 @@
 
 - type: entity
   id: AnomalyBluespace
-  parent: BaseAnomalyNew
+  parent: BaseAnomaly
   suffix: Bluespace
   components:
   - type: Sprite
-    # Sunrise-Start
     layers:
-    - state: shadow-anomaly
-      shader: unshaded
-    - state: anomaly-bluespace-vfx
-      shader: unshaded
+    - state: anom4
       map: ["enum.AnomalyVisualLayers.Base"]
-    - state: anomaly-bluespace-pulse
-      shader: unshaded
+    - state: anom4-pulse
       map: ["enum.AnomalyVisualLayers.Animated"]
       visible: false
-    # Sunrise-End
   - type: PointLight
     radius: 2.0
     energy: 7.5
@@ -357,23 +323,17 @@
 
 - type: entity
   id: AnomalyIce
-  parent: BaseAnomalyNew
+  parent: BaseAnomaly
   suffix: Ice
   components:
   - type: Sprite
-    # Sunrise-Start
-    scale: 0.9, 0.9
+    sprite: Structures/Specific/Anomalies/ice_anom.rsi
     layers:
-    - state: shadow-anomaly
-      shader: unshaded
-    - state: anomaly-ice-vfx
-      shader: unshaded
+    - state: anom
       map: ["enum.AnomalyVisualLayers.Base"]
-    - state: anomaly-ice-pulse
-      shader: unshaded
+    - state: pulse
       map: ["enum.AnomalyVisualLayers.Animated"]
       visible: false
-    # Sunrise-End
   - type: PointLight
     radius: 2.0
     energy: 2.5
@@ -884,8 +844,9 @@
           radius: 0.2
   - type: InteractionOutline
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Diona
+  - type: Injurable
+    damageContainer: Biological
   - type: Destructible
     thresholds:
       - trigger:
@@ -910,28 +871,23 @@
 
 - type: entity
   id: AnomalyLiquid
-  parent: BaseAnomalyNew
+  parent: BaseAnomaly
   suffix: Liquid
   components:
   - type: Sprite
-    # Sunrise-Start
+    sprite: Structures/Specific/Anomalies/liquid_anom.rsi
     layers:
-    - state: shadow-anomaly
-      shader: unshaded
-    - state: anomaly-liquid-vfx
-      shader: unshaded
+    - state: anom
       map: ["enum.AnomalyVisualLayers.Base"]
-    - state: anomaly-liquid-pulse
-      shader: unshaded
+    - state: pulse
       map: ["enum.AnomalyVisualLayers.Animated"]
       visible: false
-    # Sunrise-End
   - type: RandomSprite
     selected: # Initialized layer values. Edited through the ReagentProducerAnomalySystem
       enum.AnomalyVisualLayers.Base:
-        anomaly-liquid-vfx: "#ffffff"
+        anom: "#ffffff"
       enum.AnomalyVisualLayers.Animated:
-        anomaly-liquid-pulse: "#ffffff"
+        pulse: "#ffffff"
   - type: PointLight
     radius: 4.0
     energy: 3.5
@@ -953,10 +909,10 @@
         maxRange: 2
       spawns:
       - ReagentSlimeSpawner
-  - type: SolutionContainerManager
-    solutions:
-      anomaly:
-        maxVol: 1500
+  - type: Solution
+    id: anomaly
+    solution:
+      maxVol: 1550 # Doesn't really matter since it's an anom anyways
   - type: PuddleCreateAnomaly
     solution: anomaly
   - type: InjectionAnomaly
@@ -1035,22 +991,17 @@
 
 - type: entity
   id: AnomalyShadow
-  parent: BaseAnomalyNew
+  parent: BaseAnomaly
   suffix: Shadow
   components:
   - type: Sprite
-    # Sunrise-Start
+    sprite: Structures/Specific/Anomalies/shadow_anom.rsi
     layers:
-    - state: shadow-anomaly
-      shader: unshaded
-    - state: anomaly-shadow-vfx
-      shader: unshaded
+    - state: anom
       map: ["enum.AnomalyVisualLayers.Base"]
-    - state: anomaly-shadow-pulse
-      shader: unshaded
+    - state: pulse
       map: ["enum.AnomalyVisualLayers.Animated"]
       visible: false
-    # Sunrise-End
   - type: PointLight
     radius: 1.5
     energy: 12.5

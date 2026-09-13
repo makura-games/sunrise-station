@@ -13,26 +13,28 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.Fluids;
 
 /// <summary>
 /// Mopping logic for interacting with puddle components.
 /// </summary>
-public abstract class SharedAbsorbentSystem : EntitySystem
+public abstract partial class SharedAbsorbentSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
-    [Dependency] protected readonly SharedPuddleSystem Puddle = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainer = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!; // Sunrise-edit
-    [Dependency] private readonly ILocalizationManager _loc = default!; // Sunrise-edit
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popups = default!;
+    [Dependency] protected SharedPuddleSystem Puddle = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] protected SharedSolutionContainerSystem SolutionContainer = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!; // Sunrise-edit
+    [Dependency] private ILocalizationManager _loc = default!; // Sunrise-edit
 
     public override void Initialize()
     {
@@ -40,7 +42,7 @@ public abstract class SharedAbsorbentSystem : EntitySystem
 
         SubscribeLocalEvent<AbsorbentComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<AbsorbentComponent, UserActivateInWorldEvent>(OnActivateInWorld);
-        SubscribeLocalEvent<AbsorbentComponent, SolutionContainerChangedEvent>(OnAbsorbentSolutionChange);
+        SubscribeLocalEvent<AbsorbentComponent, SolutionChangedEvent>(OnAbsorbentSolutionChange);
     }
 
     private void OnActivateInWorld(Entity<AbsorbentComponent> ent, ref UserActivateInWorldEvent args)
@@ -149,10 +151,6 @@ public abstract class SharedAbsorbentSystem : EntitySystem
                 _audio.PlayPvs(absorber.PickupSound, footstepUid);
             }
 
-            // Без этой хуйни некоторые лужи будут пустыми и не будут удаляться
-            var ev = new SolutionContainerChangedEvent(targetStepSolution, comp.ContainerName);
-            RaiseLocalEvent(footstepUid, ref ev);
-
             // Sunrise-Start
             var absorberEv = new AbsorberFootPrintEvent(user);
             RaiseLocalEvent(user, ref absorberEv);
@@ -183,8 +181,12 @@ public abstract class SharedAbsorbentSystem : EntitySystem
             _useDelay.TryResetDelay((used, useDelay));
     }
     // Sunrise-End
-    private void OnAbsorbentSolutionChange(Entity<AbsorbentComponent> ent, ref SolutionContainerChangedEvent args)
+    private void OnAbsorbentSolutionChange(Entity<AbsorbentComponent> ent, ref SolutionChangedEvent args)
     {
+        // The changes are already networked as part of the same game state.
+        if (_timing.ApplyingState)
+            return;
+
         if (!SolutionContainer.TryGetSolution(ent.Owner, ent.Comp.SolutionName, out _, out var solution))
             return;
 

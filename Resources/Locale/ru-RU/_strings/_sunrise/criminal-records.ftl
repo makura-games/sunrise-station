@@ -29,7 +29,6 @@ sunrise-records-sentence-life = ПЕРМА
 sunrise-records-sentence-header = СРОК
 sunrise-records-person-name = Имя:
 sunrise-records-person-job = Должность:
-
 sunrise-records-breakdown-base-sum = Базовая сумма (Кат. 1-5): {$sum} мин.
 sunrise-records-breakdown-cap = Лимит (1.5x Кат. {$cat}): {$cap} мин.
 sunrise-records-breakdown-perma-sum = База (Кат. 6): {$sum} мин.
@@ -49,7 +48,6 @@ sunrise-records-status-closed = Закрыто
 sunrise-records-person-status = Статус:
 sunrise-records-person-status-reason = Причина:
 sunrise-records-person-status-reason-placeholder = Введите причину изменения статуса...
-
 prisoner-management-title = Учет заключенных
 prisoner-management-waiting = Ожидают заключения
 prisoner-management-in-progress = В исполнении
@@ -72,34 +70,25 @@ prisoner-management-sentence = Срок: {$sentence} мин.
 prisoner-management-warning = [color=yellow]Предупреждение[/color]
 prisoner-management-countdown-finished = [color=green]Срок отбыт[/color]
 prisoner-management-paroled-info = [color=green]Освобождён по УДО[/color]
-
 prisoner-management-escape = ПОБЕГ
 prisoner-management-parole = УДО
-
 job-prisoner-title = Заключенный
 
 # DeviceLink Ports
-
 signal-port-name-prison-locker-lock = Заблокировать шкаф
 signal-port-description-prison-locker-lock = Заблокировать шкафчик для текущего доступа.
-
 signal-port-name-prison-locker-unlock = Разблокировать шкаф
 signal-port-description-prison-locker-unlock = Снять блокировку доступа со шкафчика.
-
 signal-port-name-prison-door-lock = Заблокировать дверь
 signal-port-description-prison-door-lock = Заблокировать дверь камеры.
-
 signal-port-name-prison-door-unlock = Разблокировать дверь
 signal-port-description-prison-door-unlock = Разблокировать дверь камеры.
-
 signal-port-name-prison-timer-set = Установить таймер
 signal-port-description-prison-timer-set = Запустить отсчет времени заключения.
-
 signal-port-name-prison-timer-reset = Сбросить таймер
 signal-port-description-prison-timer-reset = Остановить и сбросить таймер.
-
 prison-timer-cell-label = КАМ-{$number}
-prison-timer-free = {$label}\nOPEN
+prison-timer-free = {$label}\nОТКРЫТО
 
 # Circumstances
 corplaw-circ-cooperation-title = Сотрудничество
@@ -126,65 +115,52 @@ corplaw-circ-officialmisconduct-title = Должностное преступл�
 corplaw-circ-officialmisconduct-desc = Нарушение совершено должностным лицом.
 corplaw-circ-intoxication-title = Состояние опьянения
 corplaw-circ-intoxication-desc = Употребление алкоголя или наркотических средств.
-
 sunrise-records-no-laws = (Нет нарушений)
-
 sunrise-records-unknown-name = Неизвестно
 sunrise-records-unknown-job = Неизвестная должность
 sunrise-records-unknown-age = ??
 sunrise-records-unknown-gender = ??
 sunrise-records-none = Нет
-
 signal-port-name-cell-1-lock = Заблокировать камеру 1
 signal-port-description-cell-1-lock = Заблокировать дверь первой камеры.
 signal-port-name-cell-1-unlock = Разблокировать камеру 1
 signal-port-description-cell-1-unlock = Разблокировать дверь первой камеры.
-
 signal-port-name-cell-2-lock = Заблокировать камеру 2
 signal-port-description-cell-2-lock = Заблокировать дверь второй камеры.
 signal-port-name-cell-2-unlock = Разблокировать камеру 2
 signal-port-description-cell-2-unlock = Разблокировать дверь второй камеры.
-
 signal-port-name-cell-3-lock = Заблокировать камеру 3
 signal-port-description-cell-3-lock = Заблокировать дверь третьей камеры.
 signal-port-name-cell-3-unlock = Разблокировать камеру 3
 signal-port-description-cell-3-unlock = Разблокировать дверь третьей камеры.
-
 signal-port-name-cell-4-lock = Заблокировать камеру 4
 signal-port-description-cell-4-lock = Заблокировать дверь четвертой камеры.
 signal-port-name-cell-4-unlock = Разблокировать камеру 4
 signal-port-description-cell-4-unlock = Разблокировать дверь четвертой камеры.
-
 signal-port-name-cell-5-lock = Заблокировать камеру 5
 signal-port-description-cell-5-lock = Заблокировать дверь пятой камеры.
 signal-port-name-cell-5-unlock = Разблокировать камеру 5
 signal-port-description-cell-5-unlock = Разблокировать дверь пятой камеры.
-
 signal-port-name-cell-6-lock = Заблокировать камеру 6
 signal-port-description-cell-6-lock = Заблокировать дверь шестой камеры.
 signal-port-name-cell-6-unlock = Разблокировать камеру 6
 signal-port-description-cell-6-unlock = Разблокировать дверь шестой камеры.
-
 signal-port-name-cell-7-lock = Заблокировать камеру 7
 signal-port-description-cell-7-lock = Заблокировать дверь седьмой камеры.
 signal-port-name-cell-7-unlock = Разблокировать камеру 7
 signal-port-description-cell-7-unlock = Разблокировать дверь седьмой камеры.
-
 signal-port-name-cell-8-lock = Заблокировать камеру 8
 signal-port-description-cell-8-lock = Заблокировать дверь восьмой камеры.
 signal-port-name-cell-8-unlock = Разблокировать камеру 8
 signal-port-description-cell-8-unlock = Разблокировать дверь восьмой камеры.
-
 signal-port-name-cell-9-lock = Заблокировать камеру 9
 signal-port-description-cell-9-lock = Заблокировать дверь девятой камеры.
 signal-port-name-cell-9-unlock = Разблокировать камеру 9
 signal-port-description-cell-9-unlock = Разблокировать дверь девятой камеры.
-
 signal-port-name-cell-10-lock = Заблокировать камеру 10
 signal-port-description-cell-10-lock = Заблокировать дверь десятой камеры.
 signal-port-name-cell-10-unlock = Разблокировать камеру 10
 signal-port-description-cell-10-unlock = Разблокировать дверь десятой камеры.
-
 criminal-records-status-reason-incarcerated = Заключен под стражу через консоль учета заключенных.
 criminal-records-status-reason-finished = Срок отбыт, заключенный освобожден.
 criminal-records-status-reason-escape = Совершен побег из-под стражи.

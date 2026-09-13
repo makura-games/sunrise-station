@@ -32,3 +32,36 @@ injector-component-injecting-target = { CAPITALIZE($user) } начинает в�
 ## failure
 
 injector-component-failure-hardsuit = Вы не сможете провести иглу через толстое покрытие!
+
+injector-component-inject-mode-name = инъекция
+injector-component-draw-mode-name = отсос
+injector-component-dynamic-mode-name = динамический
+injector-component-mode-changed-text = Теперь {$mode}
+injector-component-transfer-success-message-self = Вы переливаете {$amount} ед. в себя.
+injector-component-inject-success-message-self = Вы вводите {$amount} ед. в себя!
+injector-component-draw-success-message-self = Вы набираете {$amount} ед. из себя.
+
+## Fail Messages
+
+injector-component-target-already-full-message-self = Вы уже полны!
+injector-component-target-is-empty-message-self = В вас ничего нет!
+injector-component-cannot-toggle-dynamic-message = Нельзя переключить динамический режим!
+injector-component-empty-message = {CAPITALIZE($injector)} пуст!
+injector-component-blocked-user = Защитное снаряжение заблокировало вашу инъекцию!
+injector-component-blocked-other = Защитное снаряжение {$target} заблокировало инъекцию {$user}!
+injector-component-cannot-transfer-message-self = Вы не можете перелить вещество в себя!
+injector-component-cannot-inject-message-self = Вы не можете ввести вещество в себя!
+injector-component-cannot-draw-message-self = Вы не можете набрать вещество из себя!
+injector-component-ignore-mobs = Этот инжектор может взаимодействовать только с ёмкостями!
+
+## mob-inject doafter messages
+
+injector-component-needle-injecting-user = Вы начинаете вводить иглу.
+injector-component-needle-injecting-target = {CAPITALIZE($user)} пытается ввести в вас иглу!
+injector-component-needle-drawing-user = Вы начинаете забор с помощью иглы.
+injector-component-needle-drawing-target = {CAPITALIZE($user)} пытается набрать из вас жидкость с помощью иглы!
+injector-component-spray-injecting-user = Вы начинаете подготавливать распылитель.
+injector-component-spray-injecting-target = {CAPITALIZE($user)} пытается приставить к вам распылитель!
+
+## Target Popup Success messages
+injector-component-feel-prick-message = Вы чувствуете лёгкий укол!

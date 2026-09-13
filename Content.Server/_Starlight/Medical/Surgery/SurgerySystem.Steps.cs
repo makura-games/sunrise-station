@@ -1,19 +1,16 @@
-﻿using System.Linq;
-using Content.Shared.Starlight.Medical.Surgery;
-using Content.Shared.Starlight.Medical.Surgery.Effects.Step;
-using Content.Shared.Starlight.Medical.Surgery.Events;
-using Content.Shared.Starlight.Medical.Surgery.Steps.Parts;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Organ;
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
-using Content.Shared.Humanoid;
-using Content.Shared.Traits.Assorted;
+using System.Linq;
 using Content.Server._Starlight.Medical.Limbs;
 using Content.Server.Administration.Systems;
 using Content.Shared.Bed.Sleep;
+using Content.Shared.Body;
 using Content.Shared.Damage.Components;
-
+using Content.Shared.Humanoid;
+using Content.Shared.Starlight.Medical.Surgery;
+using Content.Shared.Starlight.Medical.Surgery.Effects.Step;
+using Content.Shared.Starlight.Medical.Surgery.Events;
+using Content.Shared.Starlight.Medical.Surgery.Steps;
+using Content.Shared.Starlight.Medical.Surgery.Steps.Parts;
+using Content.Shared.Traits.Assorted;
 
 namespace Content.Server.Starlight.Medical.Surgery;
 // Based on the RMC14.
@@ -24,10 +21,9 @@ namespace Content.Server.Starlight.Medical.Surgery;
 //However, I don’t want to touch the official systems, so I need to come up with extensions for them.
 public sealed partial class SurgerySystem : SharedSurgerySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly LimbSystem _limbSystem = default!;
-    [Dependency] private readonly StarlightEntitySystem _entity = default!;
-    [Dependency] private readonly SleepingSystem _sleeping = default!;
+    [Dependency] private LimbSystem _limbSystem = default!;
+    [Dependency] private StarlightEntitySystem _entity = default!;
+    [Dependency] private SleepingSystem _sleeping = default!;
 
     public void InitializeSteps()
     {
@@ -70,68 +66,74 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
     {
         //todo remove wound
     }
+
     private void OnStepOrganInsertComplete(Entity<SurgeryStepOrganInsertComponent> ent, ref SurgeryStepEvent args)
     {
-        if (args.Tools.Count == 0
-            || !(args.Tools.FirstOrDefault() is var organId)
-            || !TryComp<BodyPartComponent>(args.Part, out var bodyPart))
-            return;
-
-        var containerId = SharedBodySystem.GetOrganContainerId(ent.Comp.Slot);
-
-        if (ent.Comp.Slot == "cavity" && _containers.TryGetContainer(args.Part, containerId, out var container))
-        {
-            _containers.Insert(organId, container);
-            return;
-        }
-
-        if (!TryComp<OrganComponent>(organId, out var organComp))
-            return;
-
-        var part = args.Part;
-        var body = args.Body;
-
-        if (!_body.InsertOrgan(part, organId, ent.Comp.Slot, bodyPart, organComp))
+        if (!TryGetSurgeryTool(ent.Owner, args.Tools, out var organId))
         {
             args.IsCancelled = true;
             return;
         }
 
-        var ev = new SurgeryOrganImplantationCompleted(body, part, organId);
+        if (IsCavitySlot(ent.Comp.Slot))
+        {
+            args.IsCancelled = !TryInsertIntoBody(args.Body, organId);
+            return;
+        }
+
+        if (!TryComp<OrganComponent>(organId, out var organComp))
+        {
+            args.IsCancelled = true;
+            return;
+        }
+
+        var category = GetSlotCategory(ent.Comp.Slot);
+        if (category != null && (!IsOrganCategory(organComp, category) || HasBodyOrganCategory(args.Body, category)))
+        {
+            args.IsCancelled = true;
+            return;
+        }
+
+        if (!TryInsertIntoBody(args.Body, organId))
+        {
+            args.IsCancelled = true;
+            return;
+        }
+
+        var ev = new SurgeryOrganImplantationCompleted(args.Body, args.Part, organId);
         RaiseLocalEvent(organId, ref ev);
     }
+
     private void OnStepOrganExtractComplete(Entity<SurgeryStepOrganExtractComponent> ent, ref SurgeryStepEvent args)
     {
-        if (ent.Comp.Organ?.Count != 1) return;
+        if (ent.Comp.Organ?.Count != 1)
+            return;
 
         var type = ent.Comp.Organ.Values.First().Component.GetType();
-
-        if (ent.Comp.Slot != null && _containers.TryGetContainer(args.Part, SharedBodySystem.GetOrganContainerId(ent.Comp.Slot), out var container))
+        if (!TryFindBodyEntityWithComponent(args.Body, type, ent.Comp.Slot, out var organ))
         {
-            foreach (var containedEnt in container.ContainedEntities)
-                if (HasComp(containedEnt, type))
-                    _containers.Remove(containedEnt, container);
-
+            args.IsCancelled = true;
             return;
         }
 
-        var organs = _body.GetPartOrgans(args.Part, Comp<BodyPartComponent>(args.Part));
-        foreach (var organ in organs)
+        var destination = Transform(args.Body).Coordinates;
+        if (!TryRemoveFromBody(args.Body, organ, destination))
         {
-            if (!HasComp(organ.Id, type) || !_body.RemoveOrgan(organ.Id, organ.Component)) continue;
-
-            var ev = new SurgeryOrganExtracted(args.Body, args.Part, organ.Id);
-            RaiseLocalEvent(organ.Id, ref ev);
-
+            args.IsCancelled = true;
             return;
         }
+
+        var ev = new SurgeryOrganExtracted(args.Body, args.Part, organ);
+        RaiseLocalEvent(organ, ref ev);
     }
 
     private void OnRemoveAccent(Entity<SurgeryRemoveAccentComponent> ent, ref SurgeryStepEvent args)
     {
         foreach (var accent in _accents)
+        {
             if (HasComp(args.Body, accent))
                 RemCompDeferred(args.Body, accent);
+        }
     }
 
     private void OnStepEmoteEffectComplete(Entity<SurgeryStepEmoteEffectComponent> ent, ref SurgeryStepEvent args)
@@ -150,31 +152,71 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
     }
 
     private void OnStepAttachLimbComplete(Entity<SurgeryStepAttachLimbEffectComponent> _, string slot, ref SurgeryStepEvent args)
-        => args.IsCancelled = args.Tools.Count == 0
-            || !(args.Tools.FirstOrDefault() is var limdId)
-            || !TryComp<BodyPartComponent>(limdId, out var limb)
-            || !TryComp(args.Part, out BodyPartComponent? part)
-            || !TryComp(args.Body, out HumanoidAppearanceComponent? humanoid)
-            || !_limbSystem.AttachLimb((args.Body, humanoid), slot, (args.Part, part), (limdId, limb));
+    {
+        args.IsCancelled = true;
+
+        var category = GetSlotCategory(slot);
+        if (category == null || !CanAttachToSlot(args.Body, args.Part, slot))
+            return;
+
+        var limbId = args.Tools.FirstOrDefault(tool =>
+            TryComp<OrganComponent>(tool, out var organ) &&
+            IsOrganCategory(organ, category));
+
+        if (limbId == default ||
+            !TryComp<BodyComponent>(args.Body, out var body) ||
+            !TryComp<OrganComponent>(limbId, out var limb) ||
+            !_limbSystem.AttachLimb((args.Body, body), slot, (limbId, limb)))
+        {
+            return;
+        }
+
+        args.IsCancelled = false;
+    }
 
     private void OnStepAttachItemComplete(Entity<SurgeryStepAttachLimbEffectComponent> ent, string slot, ref SurgeryStepEvent args)
-        => args.IsCancelled = args.Tools.Count == 0
-            || !(args.Tools.FirstOrDefault() is var itemId)
-            || !TryComp(itemId, out MetaDataComponent? metadata)
-            || HasComp<BodyPartComponent>(itemId)
-            || !TryComp(args.Part, out BodyPartComponent? limb)
-            || !_limbSystem.AttachItem(args.Body, slot, (args.Part, limb), (itemId, metadata));
+    {
+        args.IsCancelled = true;
+    }
 
     private void OnStepAmputationComplete(Entity<SurgeryStepAmputationEffectComponent> ent, ref SurgeryStepEvent args)
     {
-        if (_entity.TryEntity<TransformComponent, HumanoidAppearanceComponent, BodyComponent>(args.Body, out var body)
-            && _entity.TryEntity<TransformComponent, MetaDataComponent>(args.Part, out var limb))
-            _limbSystem.Amputate(body, limb);
+        if (!TryComp<BodyComponent>(args.Body, out var body))
+        {
+            args.IsCancelled = true;
+            return;
+        }
+
+        args.IsCancelled = !_limbSystem.Amputate((args.Body, body), args.Part);
     }
 
     private void CustomLimbRemoved(Entity<CustomLimbMarkerComponent> ent, ref ComponentRemove args)
     {
-        if (ent.Comp.VirtualPart is null) return;
+        if (ent.Comp.VirtualPart is null)
+            return;
+
         QueueDel(ent.Comp.VirtualPart.Value);
+    }
+
+    private bool TryGetSurgeryTool(EntityUid step, List<EntityUid> tools, out EntityUid tool)
+    {
+        tool = EntityUid.Invalid;
+
+        if (!TryComp<SurgeryStepComponent>(step, out var stepComp) || stepComp.Tools == null)
+        {
+            tool = tools.FirstOrDefault();
+            return tool != default;
+        }
+
+        foreach (var reg in stepComp.Tools.Values)
+        {
+            var type = reg.Component.GetType();
+            tool = tools.FirstOrDefault(held => MatchesSurgeryRequirement(held, type));
+            if (tool != default)
+                return true;
+        }
+
+        tool = EntityUid.Invalid;
+        return false;
     }
 }

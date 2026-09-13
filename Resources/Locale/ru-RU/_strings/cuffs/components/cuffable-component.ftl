@@ -28,3 +28,4 @@ cuffable-component-remove-cuffs-partial-success-message =
 cuffable-component-remove-cuffs-fail-message = Вам не удалось снять наручники.
 # UncuffVerb
 uncuff-verb-get-data-text = Освободить
+cuffable-component-remove-cuffs-push-success-message = Вы успешно сняли средства сдерживания и сбили {$otherName} на землю.

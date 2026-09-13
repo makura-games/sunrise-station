@@ -14,37 +14,56 @@
         Quantity: 30
   - type: Item
     size: Normal
+  - type: VisualOrganMarkings
+    markingData:
+      group: None
 
 - type: entity
   id: CyberEyeNightVision
   name: NightVision cyber eyes
   description: Enables you to see in the dark.
-  parent: [OrganCyber, BaseOrganEyes]
+  parent: [OrganCyber, SunriseOrganBaseEyes]
   components:
   - type: Sprite
     scale: 0.75,0.75
     sprite: _Starlight/Objects/Specific/Medical/implants.rsi
-    state: eyes_night
+    layers:
+    - state: eyes_night
   - type: FunctionalOrgan
     comps:
     - type: ToggleableNightVision
   - type: OrganVisualization
     layer: Eyes
-    prototype: CyberEyesNightVision
+    data:
+      sprite: _Starlight/Mobs/Species/Cyberlimbs/parts.rsi
+      state: eyes_night
+  - type: VisualOrganMarkings
+    markingData:
+      layers:
+      - Eyes
+      group: None
 
 - type: entity
   id: CyberEyeThermal
   name: ThermalVision cyber eyes
   description: Enables you to see in the dark and detect warm objects through walls.
-  parent: [OrganCyber, BaseOrganEyes]
+  parent: [OrganCyber, SunriseOrganBaseEyes]
   components:
   - type: Sprite
     scale: 0.75,0.75
     sprite: _Starlight/Objects/Specific/Medical/implants.rsi
-    state: eyes_thermal
+    layers:
+    - state: eyes_thermal
   - type: FunctionalOrgan
     comps:
     - type: ToggleableThermalVision
   - type: OrganVisualization
     layer: Eyes
-    prototype: CyberEyesThermalVision
+    data:
+      sprite: _Starlight/Mobs/Species/Cyberlimbs/parts.rsi
+      state: eyes_thermal
+  - type: VisualOrganMarkings
+    markingData:
+      layers:
+      - Eyes
+      group: None

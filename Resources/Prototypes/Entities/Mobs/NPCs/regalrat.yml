@@ -1,7 +1,7 @@
 - type: entity
   name: rat king
   id: MobRatKing
-  parent: [ SimpleMobBase, MobCombat ]
+  parent: [ BaseMobRat, SimpleMobBase, MobCombat ]
   description: He's da rat. He make da roolz.
   components:
   # Sunrise edit start
@@ -39,6 +39,8 @@
     proto: regal
   - type: Physics
     bodyType: KinematicController
+  - type: Puller
+    needsHands: false
   - type: Fixtures
     fixtures:
       fix1:
@@ -65,9 +67,6 @@
       types:
         Slash: 12
         Piercing: 8
-  - type: Body
-    prototype: Rat
-    requiredLegs: 0 # TODO: Make more than 1 leg, set to 0 to avoid sprint speed being reset by the body system
   - type: Hunger # probably should be prototyped
     thresholds:
       Overfed: 300 # Sunrise-Edit
@@ -108,6 +107,8 @@
       - CannotSuicide
       - FootstepSound
   - type: NoSlip
+  - type: Insulated
+    coefficient: 0.5 # rat king touches more wires, see?
   - type: Rummager
   - type: RatKing
     hungerPerArmyUse: 5  # Sunrise-edit
@@ -183,7 +184,7 @@
 - type: entity
   name: rat servant
   id: MobRatServant
-  parent: [ SimpleMobBase, MobCombat ]
+  parent: [ BaseMobRat, SimpleMobBase, MobCombat ]
   description: He's da mini rat. He don't make da roolz.
   categories: [ HideSpawnMenu ] #Must be configured to a King or the AI breaks.
   components:
@@ -278,9 +279,6 @@
       types:
         Slash: 5
         Piercing: 3
-  - type: Body
-    prototype: Rat
-    requiredLegs: 0 # TODO: Make more than 1 leg, set to 0 to avoid sprint speed being reset by the body system
   - type: Hunger # probably should be prototyped
     thresholds:
       Overfed: 200
@@ -321,6 +319,8 @@
       - CannotSuicide
       - FootstepSound
   - type: NoSlip
+  - type: Insulated
+    coefficient: 0.2 # they don't make da roolz, but they sneaky
   - type: MobPrice
     price: 500 # rat wealth
   - type: MobsterAccent
@@ -438,8 +438,6 @@
     distance: 0.5
     speed: 5
   - type: Body
-    prototype: Rat
-    requiredLegs: 1 # TODO: More than 1 leg
   - type: Hunger # probably should be prototyped
     thresholds:
       Overfed: 300

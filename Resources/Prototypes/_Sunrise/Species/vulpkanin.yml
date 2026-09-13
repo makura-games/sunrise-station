@@ -1,0 +1,215 @@
+- type: bodyType
+  id: VulpkaninNormal # VulpkaninCurvedSmallMuzzle
+  name: body-curved-small-muzzle
+  visualKey: body-curved-small-muzzle
+  layers:
+    Head:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: head_m_small_muzzle
+    Chest:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: torso_m
+    Eyes:
+      sprite: Mobs/Customization/eyes.rsi
+      state: eyes
+    LArm:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: l_arm
+    RArm:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: r_arm
+    LHand:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: l_hand
+    RHand:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: r_hand
+    LLeg:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: l_leg_curved
+    RLeg:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: r_leg_curved
+    LFoot:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: l_foot_curved
+    RFoot:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: r_foot_curved
+  sexLayers:
+    Male:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+        state: head_m_small_muzzle
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+        state: torso_m
+    Female:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+        state: head_f_small_muzzle
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+        state: torso_f
+
+- type: bodyType
+  id: VulpkaninStraightSmallMuzzle
+  name: body-straight-small-muzzle
+  visualKey: body-straight-small-muzzle
+  layers:
+    Head:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: head_m_small_muzzle
+    Chest:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: torso_m
+    Eyes:
+      sprite: Mobs/Customization/eyes.rsi
+      state: eyes
+    LArm:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: l_arm
+    RArm:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: r_arm
+    LHand:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: l_hand
+    RHand:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: r_hand
+    LLeg:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: l_leg_straight
+    RLeg:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: r_leg_straight
+    LFoot:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: l_foot_straight
+    RFoot:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: r_foot_straight
+  sexLayers:
+    Male:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+        state: head_m_small_muzzle
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+        state: torso_m
+    Female:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+        state: head_f_small_muzzle
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+        state: torso_f
+
+- type: bodyType
+  id: VulpkaninCurvedBigMuzzle
+  name: body-curved-big-muzzle
+  visualKey: body-curved-big-muzzle
+  layers:
+    Head:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: head_m_big_muzzle
+    Chest:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: torso_m
+    Eyes:
+      sprite: Mobs/Customization/eyes.rsi
+      state: eyes
+    LArm:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: l_arm
+    RArm:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: r_arm
+    LHand:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: l_hand
+    RHand:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: r_hand
+    LLeg:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: l_leg_curved
+    RLeg:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: r_leg_curved
+    LFoot:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: l_foot_curved
+    RFoot:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: r_foot_curved
+  sexLayers:
+    Male:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+        state: head_m_big_muzzle
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+        state: torso_m
+    Female:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+        state: head_f_big_muzzle
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+        state: torso_f
+
+- type: bodyType
+  id: VulpkaninStraightBigMuzzle
+  name: body-straight-big-muzzle
+  visualKey: body-straight-big-muzzle
+  layers:
+    Head:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: head_m_big_muzzle
+    Chest:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: torso_m
+    Eyes:
+      sprite: Mobs/Customization/eyes.rsi
+      state: eyes
+    LArm:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: l_arm
+    RArm:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: r_arm
+    LHand:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: l_hand
+    RHand:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: r_hand
+    LLeg:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: l_leg_straight
+    RLeg:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: r_leg_straight
+    LFoot:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: l_foot_straight
+    RFoot:
+      sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+      state: r_foot_straight
+  sexLayers:
+    Male:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+        state: head_m_big_muzzle
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+        state: torso_m
+    Female:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+        state: head_f_big_muzzle
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Vulpkanin/parts.rsi
+        state: torso_f

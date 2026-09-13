@@ -10,7 +10,7 @@ namespace Content.Client.Silicons.Borgs;
 [GenerateTypedNameReferences]
 public sealed partial class BorgVoiceWindow : DefaultWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public event Action<string>? OnVoiceSelected;
     public event Action<string>? OnVoicePreview;
@@ -48,11 +48,8 @@ public sealed partial class BorgVoiceWindow : DefaultWindow
 
         VoicePlayButton.OnPressed += _ =>
         {
-            if (VoiceOptionButton.SelectedId != null)
-            {
-                var voice = _voiceList[VoiceOptionButton.SelectedId];
-                OnVoicePreview?.Invoke(voice.ID);
-            }
+            var voice = _voiceList[VoiceOptionButton.SelectedId];
+            OnVoicePreview?.Invoke(voice.ID);
         };
     }
 

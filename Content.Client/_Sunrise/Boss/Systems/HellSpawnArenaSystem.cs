@@ -7,8 +7,6 @@ namespace Content.Client._Sunrise.Boss.Systems;
 /// <inheritdoc />
 public sealed class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-
     /// <inheritdoc />
     public override void Initialize()
     {

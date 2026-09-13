@@ -1,12 +1,42 @@
 - type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceSwine
+  name: swine appearance
+  components:
+  - type: InitialBody
+    organs:
+      Torso: TorsoSwine
+      Head: HeadSwine
+      ArmLeft: LeftArmSwine
+      ArmRight: RightArmSwine
+      HandRight: RightHandSwine
+      HandLeft: LeftHandSwine
+      LegLeft: LeftLegSwine
+      LegRight: RightLegSwine
+      FootLeft: LeftFootSwine
+      FootRight: RightFootSwine
+      Brain: OrganHumanBrain
+      Eyes: OrganHumanEyes
+      Tongue: OrganHumanTongue
+      Heart: OrganAnimalHeart
+      Lungs: OrganHumanLungs
+      Stomach: OrganSwineStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganHumanKidneys
+
+- type: entity
   name: Urist McPig
-  parent: BaseMobSpeciesOrganic
+  parent:
+  - AppearanceSwine
+  - BaseSpeciesMobOrganic
   id: BaseMobSwine
   abstract: true
   components:
   - type: Interactions
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Swine
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers
   - type: Hunger
     baseDecayRate: 0.08
   - type: Thirst
@@ -23,7 +53,6 @@
     speechVerb: Swine
     allowedEmotes: ['Oink']
   - type: MovementSpeedModifier
-    baseSprintSpeed: 0.9
   - type: SlowOnDamage
     speedModifierThresholds:
       80: 0.9
@@ -47,9 +76,6 @@
         - MobMask
         layer:
         - MobLayer
-  - type: Body
-    prototype: Swine
-    requiredLegs: 2
   - type: Vocal
     sounds:
       Male: UnisexSwine
@@ -57,8 +83,9 @@
       Unsexed: UnisexSwine
   - type: SwineAccent
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Swine
+  - type: Injurable
+    damageContainer: Biological
   - type: Butcherable
     butcheringType: Spike # TODO human.
     spawned:
@@ -71,10 +98,12 @@
 - type: entity
   save: false
   name: Urist McHands
-  parent: MobHumanDummy
+  parent: AppearanceSwine
   id: MobSwineDummy
   categories: [ HideSpawnMenu ]
   description: A dummy swine meant to be used in character setup.
   components:
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Swine
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers

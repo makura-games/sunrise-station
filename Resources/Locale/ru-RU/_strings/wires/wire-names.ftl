@@ -45,7 +45,6 @@ wires-board-name-holopad = Голопад
 wires-board-name-barsign = Вывеска бара
 
 # names that get displayed in the wire hacking hud & admin logs.
-
 wire-name-access = ДСТП
 wire-name-arcade-overflow = ЛИМТ
 wire-name-air-alarm-panic = ПНИК
@@ -71,3 +70,7 @@ wire-name-bomb-bolt = БОЛТ
 wire-name-speech = ДНМК
 wire-name-listen = МИКР
 wire-name-log = ЛОГ
+wires-board-name-weapon-energy-turret = Сторожевая турель
+wires-board-name-turret-controls = Панель управления сторожевой турелью
+
+# names that get displayed in the wire hacking hud & admin logs.

@@ -7,7 +7,6 @@
   bodyTypes:
   - ResomiNormal
   defaultSkinTone: "#faf7f7"
-  markingLimits: MobResomiMarkingLimits
   maleFirstNames: names_resomi_first
   femaleFirstNames: names_resomi_first
   maleLastNames: names_resomi_packs
@@ -33,137 +32,97 @@
 - type: bodyType
   id: ResomiNormal
   name: body-normal
-  sprites:
-    Head: MobResomiHead
-    Hair: MobResomiHair
-    Chest: MobResomiTorso
-    Eyes: MobResomiEyes
-    LArm: MobResomiLArm
-    RArm: MobResomiRArm
-    LHand: MobResomiLHand
-    RHand: MobResomiRHand
-    LLeg: MobResomiLLeg
-    RLeg: MobResomiRLeg
-    LFoot: MobResomiLFoot
-    RFoot: MobResomiRFoot
-    Tail: MobHumanoidAnyMarking
-
-- type: markingPoints
-  id: MobResomiMarkingLimits
-  onlyWhitelisted: true
-  points:
-    FacialHair:
-      points: 0
-      required: false
-    Hair:
-      points: 1
-      required: false
-    Tail:
-      points: 2
-      required: true
-      defaultMarkings: [ ResomiTail, ResomiTailFeathers ]
-    Legs:
-      points: 2
-      required: false
-    Arms:
-      points: 2
-      required: false
+  visualKey: body-normal
+  layers:
     Head:
-      points: 2
-      required: false
+      sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
+      state: head_m
     Chest:
-      points: 1
+      sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
+      state: torso_m
+    Eyes:
+      sprite: _Sunrise/Mobs/Customization/eyes.rsi
+      state: resomi
+    LArm:
+      sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
+      state: l_arm
+    RArm:
+      sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
+      state: r_arm
+    LHand:
+      sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
+      state: l_hand
+    RHand:
+      sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
+      state: r_hand
+    LLeg:
+      sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
+      state: l_leg
+    RLeg:
+      sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
+      state: r_leg
+    LFoot:
+      sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
+      state: l_foot
+    RFoot:
+      sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
+      state: r_foot
+  sexLayers:
+    Male:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
+        state: head_m
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
+        state: torso_m
+    Female:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
+        state: head_f
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
+        state: torso_f
+- type: markingsGroup
+  id: Resomi
+  onlyGroupWhitelisted: true
+  limits:
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 0
       required: false
-
-- type: humanoidBaseSprite
-  id: MobResomiEyes
-  baseSprite:
-    sprite: _Sunrise/Mobs/Customization/eyes.rsi
-    state: resomi
-
-- type: humanoidBaseSprite
-  id: MobResomiHair
-
-- type: humanoidBaseSprite
-  id: MobResomiHead
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
-    state: head_m
-
-- type: humanoidBaseSprite
-  id: MobResomiHeadMale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
-    state: head_m
-
-- type: humanoidBaseSprite
-  id: MobResomiHeadFemale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
-    state: head_f
-
-- type: humanoidBaseSprite
-  id: MobResomiTorso
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
-    state: torso_m
-
-- type: humanoidBaseSprite
-  id: MobResomiTorsoMale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
-    state: torso_m
-
-- type: humanoidBaseSprite
-  id: MobResomiTorsoFemale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
-    state: torso_f
-
-- type: humanoidBaseSprite
-  id: MobResomiLLeg
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
-    state: l_leg
-
-- type: humanoidBaseSprite
-  id: MobResomiLArm
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
-    state: l_arm
-
-- type: humanoidBaseSprite
-  id: MobResomiLHand
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
-    state: l_hand
-
-- type: humanoidBaseSprite
-  id: MobResomiLFoot
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
-    state: l_foot
-
-- type: humanoidBaseSprite
-  id: MobResomiRLeg
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
-    state: r_leg
-
-- type: humanoidBaseSprite
-  id: MobResomiRArm
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
-    state: r_arm
-
-- type: humanoidBaseSprite
-  id: MobResomiRHand
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
-    state: r_hand
-
-- type: humanoidBaseSprite
-  id: MobResomiRFoot
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
-    state: r_foot
+    enum.HumanoidVisualLayers.Hair:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Tail:
+      limit: 2
+      required: true
+      default: [ ResomiTail, ResomiTailFeathers ]
+    enum.HumanoidVisualLayers.LArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Head:
+      limit: 2
+      required: false
+    enum.HumanoidVisualLayers.Chest:
+      limit: 1
+      required: false

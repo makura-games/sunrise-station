@@ -1,0 +1,13 @@
+gas-bz-abbreviation = BZ
+gas-healium-abbreviation = F₃BZ
+gas-nitrium-abbreviation = N
+gas-pluoxium-abbreviation = Pl₂
+gas-hydrogen-abbreviation = H₂
+gas-hyper-noblium-abbreviation = HN₂
+gas-proto-nitrate-abbreviation = PN₂
+gas-zauker-abbreviation = Z₂
+gas-halon-abbreviation = Ha₂
+gas-helium-abbreviation = He₂
+gas-anti-noblium-abbreviation = AN₂
+gas-electrovae-abbreviation = E
+gas-charged-electrovae-abbreviation = E₂

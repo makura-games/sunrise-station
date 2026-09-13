@@ -858,7 +858,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -1.5,-2.5
       parent: 1
-- proto: RightArmSkeleton
+- proto: OrganSkeletonPersonArmRight
   entities:
   - uid: 177
     components:
@@ -880,7 +880,7 @@ entities:
     - type: Transform
       pos: 0.5,-2.5
       parent: 1
-- proto: TorsoSkeleton
+- proto: OrganSkeletonPersonTorso
   entities:
   - uid: 184
     components:

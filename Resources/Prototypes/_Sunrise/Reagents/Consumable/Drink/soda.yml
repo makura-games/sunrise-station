@@ -14,14 +14,10 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 1
@@ -43,7 +39,7 @@
   flavor: soda
   color: "#2E6671"
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:Polymorph
         prototype: ChangelingStingHuman
@@ -241,7 +237,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:PopupMessage
         conditions:
@@ -278,14 +274,10 @@
   flavor: energydrink
   color: "#ffffbf"
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 2
@@ -326,14 +318,10 @@
   color: "#9385bf"
   fizziness: 0.9 # gamers crave the fizz
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 1
@@ -345,7 +333,7 @@
         - !type:TemperatureCondition
           min: 310
         amount: -6000
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:ModifyStatusEffect
         effectProto: StatusEffectStimulantsStamina
@@ -381,14 +369,10 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 1
@@ -400,7 +384,7 @@
         - !type:TemperatureCondition
           min: 310
         amount: -6000
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -451,14 +435,10 @@
   metamorphicChangeColor: false
   fizziness: 0.4
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 1
@@ -470,7 +450,7 @@
         - !type:TemperatureCondition
           min: 310
         amount: -6000
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -520,7 +500,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:AdjustTemperature
         amount: -2000
@@ -529,7 +509,7 @@
         - !type:TemperatureCondition
           min: 310
         amount: -6000
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -554,14 +534,10 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 1
@@ -596,14 +572,10 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:GenericStatusEffect
         key: PressureImmunity
         component: PressureImmunity
@@ -640,14 +612,10 @@
   flavor: starkistsoda
   color: "#9F3400"
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 1
@@ -679,18 +647,14 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:AdjustReagent
         reagent: Theobromine
         amount: 0.1
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         conditions:
@@ -700,8 +664,6 @@
         damage:
           types:
             Poison: 1
-    Narcotic:
-      effects:
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.16
         sprintSpeedModifier: 1.16
@@ -715,7 +677,7 @@
   flavor: metallic
   color: "#66538F"
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:ModifyStatusEffect
         effectProto: StatusEffectZombieAccent

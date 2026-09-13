@@ -1,8 +1,7 @@
 - type: marking
   id: FoxEars
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Human]
+  groupWhitelist: [Human]
   sponsorOnly: false
   sprites:
   - sprite: _Sunrise/Mobs/Customization/fox_parts.rsi
@@ -13,8 +12,7 @@
 - type: marking
   id: RabbitEars
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Human]
+  groupWhitelist: [Human]
   sponsorOnly: false
   coloring:
     default:
@@ -37,8 +35,7 @@
 - type: marking
   id: RabbitEarsMirror
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Human]
+  groupWhitelist: [Human]
   sponsorOnly: false
   coloring:
     default:
@@ -61,9 +58,8 @@
 - type: marking
   id: RabbitEarsUp
   bodyPart: HeadTop
-  markingCategory: HeadTop
   sponsorOnly: false
-  speciesRestriction: [Human]
+  groupWhitelist: [Human]
   coloring:
     default:
       type:
@@ -85,9 +81,8 @@
 - type: marking
   id: RabbitEarsUpMirror
   bodyPart: HeadTop
-  markingCategory: HeadTop
   sponsorOnly: false
-  speciesRestriction: [Human]
+  groupWhitelist: [Human]
   coloring:
     default:
       type:

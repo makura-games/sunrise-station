@@ -138,7 +138,7 @@
     ears: ClothingHeadsetAltERT
     belt: ClothingBeltSecurityFilled
     pocket1: SecurityWhistle
-    pocket2: WeaponDominator
+    pocket2: WeaponMiniEnergyGun
   inhand:
   - ClothingHandsPowerGlovesUplinkNTERTAmber
   - BoxZiptie
@@ -375,10 +375,11 @@
     - JugDexPlusSaline
     - JugTrico
     - BeakerSmallArith
-    - DefibrillatorCompact
     - MedkitCombatFilled
     - ChemistryBottleOmnizine
     - CrowbarRed
+    - PowerCellHigh
+    - MedipenCaseERTMedic
 
 - type: startingGear
   id: ERTMedicalGearGamma
@@ -409,6 +410,7 @@
     - MedkitCombatFilled
     - ChemistryBottleOmnizine
     - CrowbarRed
+    - MedipenCaseERTMedic
 
 # Janitor
 

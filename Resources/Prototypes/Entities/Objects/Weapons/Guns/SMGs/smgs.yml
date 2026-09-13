@@ -132,7 +132,7 @@
     - FullAuto
     - SemiAuto
     soundGunshot:
-      collection: aug # Sunrise-Edit
+      path: /Audio/Weapons/Guns/Gunshots/c-20r.ogg
   - type: ChamberMagazineAmmoProvider
     autoEject: true
   - type: MagazineVisuals
@@ -275,14 +275,14 @@
   - type: Wieldable # Sunrise-start
     unwieldOnUse: false
   - type: GunWieldBonus
-    minAngle: -3
-    maxAngle: -14 # Sunrise-end
+    minAngle: -1
+    maxAngle: -15 # Sunrise-end
   - type: Gun
     fireRate: 5.5
-    minAngle: 4 # Sunrise-edit
+    minAngle: 3 # Sunrise-edit
     maxAngle: 20  # Sunrise-edit
-    angleIncrease: 1.5
-    angleDecay: 12  # Sunrise-edit
+    angleIncrease: 1
+    angleDecay: 15  # Sunrise-edit
     selectedMode: FullAuto
     shotsPerBurst: 5
     burstCooldown: 0.2

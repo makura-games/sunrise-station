@@ -11,13 +11,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Trigger.Systems;
 
-public sealed class RattleOnTriggerSystem : EntitySystem
+public sealed partial class RattleOnTriggerSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly MessengerServerSystem _messenger = default!;
-    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private RadioSystem _radio = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private MessengerServerSystem _messenger = default!;
+    [Dependency] private StationSystem _station = default!;
 
     public override void Initialize()
     {

@@ -1,4 +1,6 @@
 using System.Numerics;
+using Content.IntegrationTests.Fixtures;
+using Content.IntegrationTests.Fixtures.Attributes;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.CCVar;
 using Robust.Server.GameObjects;
@@ -13,14 +15,15 @@ using Robust.Shared.Utility;
 namespace Content.IntegrationTests.Tests
 {
     [TestFixture]
-    public sealed class SaveLoadMapTest
+    public sealed class SaveLoadMapTest : GameTest
     {
         [Test]
+        [EnsureCVar(Side.Server, typeof(CCVars), nameof(CCVars.GridFill), false)]
         public async Task SaveLoadMultiGridMap()
         {
             var mapPath = new ResPath("/Maps/Test/TestMap.yml");
 
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
             var mapManager = server.ResolveDependency<IMapManager>();
             var sEntities = server.ResolveDependency<IEntityManager>();
@@ -28,9 +31,10 @@ namespace Content.IntegrationTests.Tests
             var mapSystem = sEntities.System<SharedMapSystem>();
             var xformSystem = sEntities.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
             var resManager = server.ResolveDependency<IResourceManager>();
+            // Sunrise start
             var cfg = server.ResolveDependency<IConfigurationManager>();
-            cfg.SetCVar(SunriseCCVars.MappingAutoVariantize, false); // Sunrise-Edit
-            Assert.That(cfg.GetCVar(CCVars.GridFill), Is.False);
+            cfg.SetCVar(SunriseCCVars.MappingAutoVariantize, false);
+            // Sunrise end
 
             await server.WaitAssertion(() =>
             {
@@ -96,8 +100,6 @@ namespace Content.IntegrationTests.Tests
                     });
                 }
             });
-
-            await pair.CleanReturnAsync();
         }
     }
 }

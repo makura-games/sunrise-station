@@ -36,6 +36,7 @@
           layer:
             - FlyingMobLayer
     - type: Damageable
+    - type: Injurable
       damageContainer: Biological
     - type: BecomeDustOnDeath
     - type: MobThresholds
@@ -94,11 +95,9 @@
       actions: [JuggernautCreateWall]
     - type: Hands
       showInHands: true
-    - type: Body
-      prototype: ConstructJuggernaut
     - type: ContainerContainer
       containers:
-        body_root_part: !type:ContainerSlot
+        body_organs: !type:Container
     - type: Juggernaut
     - type: TTS
       voice: enigma_dota_2

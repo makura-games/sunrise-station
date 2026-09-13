@@ -1,11 +1,12 @@
-﻿using System.Linq;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Interaction;
-using Robust.Shared.Containers;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._Sunrise.Reagents.Convert;
@@ -13,70 +14,77 @@ namespace Content.Shared._Sunrise.Reagents.Convert;
 /// <summary>
 /// Конвертирует реагенты внутри сущности по клику на нее
 /// </summary>
-public sealed class ByClickReagentConvertSystem : EntitySystem
+public sealed partial class ByClickReagentConvertSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ByClickReagentConvertComponent, AfterInteractEvent>(OnBibleInteract);
+        SubscribeLocalEvent<ByClickReagentConvertComponent, AfterInteractEvent>(OnInteract);
     }
 
-    private void OnBibleInteract(Entity<ByClickReagentConvertComponent> ent, ref AfterInteractEvent args)
+    private void OnInteract(Entity<ByClickReagentConvertComponent> ent, ref AfterInteractEvent args)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        if (!IsPossible(ent, args.Target, args.User))
+        if (args.Target is not { } target || !IsPossible(ent, target, args.User))
             return;
 
-        if (!TryComp<ContainerManagerComponent>(args.Target, out var container))
-            return;
-
-        var solutions = container.Containers
-            .Where(kvp => kvp.Key.StartsWith("solution@"))
-            .Select(kvp => kvp.Key)
-            .ToList();
-
-        foreach (var solutionKey in solutions)
+        foreach (var (_, solution) in _solutionContainer.EnumerateSolutions((target, null)))
         {
-            if (!container.Containers.TryGetValue(solutionKey, out var liquidContainer))
+            if (!TryConvertReagent(solution, ent.Comp.Target, ent.Comp.Result))
                 continue;
 
-            if (!TryComp<SolutionComponent>(liquidContainer.ContainedEntities[0], out var solution))
-                continue;
-
-            foreach (var (reagentTypeObj, amount) in solution.Solution.Contents)
-            {
-                if (reagentTypeObj.Prototype != ent.Comp.Target)
-                    continue;
-
-                solution.Solution.RemoveReagent(reagentTypeObj.Prototype, amount);
-                solution.Solution.AddReagent(ent.Comp.Result, amount);
-
-                _popup.PopupClient(ent.Comp.PopupMessage, args.Target.Value, args.User);
-                _audio.PlayPvs(ent.Comp.Sound, args.Target.Value);
-
-                return;
-            }
+            _useDelay.TryResetDelay(ent.Owner);
+            _popup.PopupClient(ent.Comp.PopupMessage, target, args.User);
+            _audio.PlayPvs(ent.Comp.Sound, target);
+            args.Handled = true;
+            return;
         }
+    }
+
+    private bool TryConvertReagent(
+        Entity<SolutionComponent> solution,
+        ProtoId<ReagentPrototype> sourceReagent,
+        ProtoId<ReagentPrototype> resultReagent)
+    {
+        var contents = solution.Comp.Solution.Contents;
+
+        // RemoveReagent использует RemoveSwap, поэтому берём найденный реагент с конца списка.
+        for (var i = contents.Count - 1; i >= 0; i--)
+        {
+            var reagent = contents[i];
+            if (reagent.Reagent.Prototype != sourceReagent)
+                continue;
+
+            var removed = _solutionContainer.RemoveReagent(solution, reagent.Reagent, reagent.Quantity);
+            if (removed <= 0)
+                continue;
+
+            _solutionContainer.TryAddReagent(solution, resultReagent, removed, out var added);
+            if (added < removed)
+                _solutionContainer.TryAddReagent(solution, reagent.Reagent, removed - added, out _);
+
+            return added > 0;
+        }
+
+        return false;
     }
 
     /// <summary>
     /// Проверяет, возможна ли конвертация?
     /// </summary>
     /// <returns>Да/Нет</returns>
-    private bool IsPossible(Entity<ByClickReagentConvertComponent> ent, EntityUid? target, EntityUid user)
+    private bool IsPossible(Entity<ByClickReagentConvertComponent> ent, EntityUid target, EntityUid user)
     {
-        if (!target.HasValue)
-            return false;
-
         if (!_whitelist.CheckBoth(user, ent.Comp.BlacklistUser, ent.Comp.WhitelistUser))
             return false;
 

@@ -18,8 +18,8 @@ namespace Content.Client._Sunrise.CriminalRecords.UI;
 [GenerateTypedNameReferences]
 public sealed partial class SunriseCriminalRecordsCaseEditor : Control
 {
-    [Dependency] private readonly IEntityManager _ent = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     private readonly SharedSunriseCriminalRecordsSystem _recordsSystem;
     private readonly SharedStationCorporateLawSystem _stationLaw;
 

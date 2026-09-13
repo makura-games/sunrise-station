@@ -1,4 +1,4 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 
 using Content.Server._Sunrise.PlayerCache;
 using Content.Server._Sunrise.SponsorValidation;
@@ -7,10 +7,10 @@ using Content.Shared._Sunrise.PlayerCache;
 
 namespace Content.Server._Sunrise.Pets;
 
-public sealed class PetSelectionSystem : EntitySystem
+public sealed partial class PetSelectionSystem : EntitySystem
 {
-    [Dependency] private readonly SponsorValidationSystem _validationSystem = default!;
-    [Dependency] private readonly PlayerCacheManager _playerCache = default!;
+    [Dependency] private SponsorValidationSystem _validationSystem = default!;
+    [Dependency] private PlayerCacheManager _playerCache = default!;
 
     public override void Initialize()
     {

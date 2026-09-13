@@ -1,10 +1,12 @@
 ent-ClothingHeadHelmetSecurityMedic = шлем бригмедика
     .desc = Стандартный боевой шлем медиков службы безопасности. Имеет достойный предел прочности и броню. Не задирайте голову.
+ent-ClothingHeadHelmetBlueShield = шлем «синий щит»
+    .desc = Чрезвычайно прочный шлем, обычно используемый силами «Синего щита». На верхней части красуется логотип нанотрейзен.
 ent-ClothingHeadHelmetPilot = шлем пилота Службы Безопасности
     .desc = Толстый шлем пилота, обеспечивающий хорошую защиту головы.
 ent-ClothingHeadHelmetPubg = Алтын
     .desc = Укрепленный шлем, использующийся для подавления и разжигания бунтов
-ent-ClothingHeadEVAHelmetERTBase = base ERT helmet
+ent-ClothingHeadEVAHelmetERTBase = базовый шлем ОБР
     .desc = { ent-ClothingHeadBase.desc }
 ent-ClothingHeadEVAHelmetERTLeader = Шлем EVA ОБР лидера
     .desc = Шлем EVA ОБР лидера. Может использоваться для короткий прогулок в космосе.

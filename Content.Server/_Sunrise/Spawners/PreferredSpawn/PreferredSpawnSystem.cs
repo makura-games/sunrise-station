@@ -13,11 +13,11 @@ namespace Content.Server._Sunrise.Spawners.PreferredSpawn;
 /// Эта система запускается перед стандартной SpawnPointSystem, чтобы переопределить
 /// логику спавна по умолчанию для этих ролей.
 /// </summary>
-public sealed class PreferredSpawnSystem : EntitySystem
+public sealed partial class PreferredSpawnSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private StationSpawningSystem _stationSpawning = default!;
 
     public override void Initialize()
     {

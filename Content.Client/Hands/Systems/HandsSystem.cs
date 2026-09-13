@@ -25,16 +25,15 @@ using Robust.Shared.Utility;
 namespace Content.Client.Hands.Systems
 {
     [UsedImplicitly]
-    public sealed class HandsSystem : SharedHandsSystem
+    public sealed partial class HandsSystem : SharedHandsSystem
     {
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly IUserInterfaceManager _ui = default!;
-        [Dependency] private readonly IPrototypeManager _prototype = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
+        [Dependency] private IUserInterfaceManager _ui = default!;
 
-        [Dependency] private readonly StrippableSystem _stripSys = default!;
-        [Dependency] private readonly SpriteSystem _sprite = default!;
-        [Dependency] private readonly ExamineSystem _examine = default!;
-        [Dependency] private readonly DisplacementMapSystem _displacement = default!;
+        [Dependency] private StrippableSystem _stripSys = default!;
+        [Dependency] private SpriteSystem _sprite = default!;
+        [Dependency] private ExamineSystem _examine = default!;
+        [Dependency] private DisplacementMapSystem _displacement = default!;
 
         public event Action<string?>? OnPlayerSetActiveHand;
         public event Action<Entity<HandsComponent>>? OnPlayerHandsAdded;
@@ -335,46 +334,6 @@ namespace Content.Client.Hands.Systems
             }
 
             RaiseLocalEvent(held, new HeldVisualsUpdatedEvent(ent, revealedLayers), true);
-        }
-
-        /// <summary>
-        ///     Get the appropriate displacement map for a hand, considering body type and hand location.
-        /// </summary>
-        private DisplacementData? GetHandDisplacement(EntityUid uid, HandLocation handLocation, HandsComponent handComp)
-        {
-            string? bodyTypeName = null;
-            if (TryComp(uid, out HumanoidAppearanceComponent? humanoid))
-            {
-                bodyTypeName = _prototype.Index(humanoid.BodyType).Name;
-            }
-
-            // First try to get body type specific displacement maps
-            if (bodyTypeName != null)
-            {
-                switch (handLocation)
-                {
-                    case HandLocation.Left:
-                        if (handComp.LeftHandBodyTypeDisplacements.TryGetValue(bodyTypeName, out var leftBodyTypeDisplacement))
-                            return leftBodyTypeDisplacement;
-                        break;
-                    case HandLocation.Right:
-                        if (handComp.RightHandBodyTypeDisplacements.TryGetValue(bodyTypeName, out var rightBodyTypeDisplacement))
-                            return rightBodyTypeDisplacement;
-                        break;
-                }
-
-                // Try generic body type displacement
-                if (handComp.BodyTypeDisplacements.TryGetValue(bodyTypeName, out var bodyTypeDisplacement))
-                    return bodyTypeDisplacement;
-            }
-
-            // Fall back to the original logic
-            return handLocation switch
-            {
-                HandLocation.Left => handComp.LeftHandDisplacement,
-                HandLocation.Right => handComp.RightHandDisplacement,
-                _ => handComp.HandDisplacement
-            };
         }
 
         private void OnVisualsChanged(EntityUid uid, HandsComponent component, VisualsChangedEvent args)

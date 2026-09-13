@@ -1,4 +1,4 @@
-﻿ent-BaseHealingItem = { ent-BaseItem }
+ent-BaseHealingItem = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
 ent-Ointment = мазь
     .desc = Используется для лечения этих неприятных ожогов. Менее эффективна при кислотных ожогах.
@@ -25,7 +25,7 @@ ent-BrutepackAdvanced1 = { ent-MedicatedSuture }
     .desc = { ent-MedicatedSuture.desc }
     .suffix = Один
 ent-Bloodpack = пакет крови
-    .desc = Содержит новый инновационный универсальный кровезаменитель, разработанный передовыми учёными компании NanoTrasen.
+    .desc = Содержит новый инновационный универсальный кровезаменитель, разработанный передовыми учёными компании НаноТрейзен.
     .suffix = Полный
 ent-Bloodpack1 = { ent-Bloodpack }
     .suffix = Один

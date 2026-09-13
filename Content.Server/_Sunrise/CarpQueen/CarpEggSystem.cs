@@ -26,23 +26,25 @@ using Robust.Shared.Maths;
 
 namespace Content.Server._Sunrise.CarpQueen;
 
-public sealed class CarpEggSystem : CarpQueenAccessSystem
+public sealed partial class CarpEggSystem : CarpQueenAccessSystem
 {
-    [Dependency] private readonly PuddleSystem _puddles = default!;
-    [Dependency] private readonly IPrototypeManager _protos = default!;
-    [Dependency] private readonly IRobustRandom _rand = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedTransformSystem _xformSys = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly HTNSystem _htn = default!;
-    [Dependency] private readonly CarpQueenSystem _carpQueenSystem = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+    [Dependency] private PuddleSystem _puddles = default!;
+    [Dependency] private IPrototypeManager _protos = default!;
+    [Dependency] private IRobustRandom _rand = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _xformSys = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private HTNSystem _htn = default!;
+    [Dependency] private CarpQueenSystem _carpQueenSystem = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedDestructibleSystem _destructible = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+
+    private static readonly ProtoId<ReagentPrototype> WaterReagent = "Water";
 
     public override void Initialize()
     {
@@ -217,7 +219,7 @@ public sealed class CarpEggSystem : CarpQueenAccessSystem
 
     private void TryHatchCheck(EntityUid uid, CarpEggComponent egg)
     {
-        if (!TryComp<TransformComponent>(uid, out var xform))
+        if (!TryComp(uid, out TransformComponent? xform))
             return;
 
         // Вылупляем только яйца вне контейнеров.
@@ -268,12 +270,12 @@ public sealed class CarpEggSystem : CarpQueenAccessSystem
 
         // Сущность FloorWaterEntity тоже считается достаточным источником жидкости.
         var gridId = tile.GridUid;
-        if (gridId != null)
+        if (gridId.IsValid())
         {
             // Сначала проверяем закрепленные сущности.
-            if (gridId is { } gid && TryComp<MapGridComponent>(gid, out var grid))
+            if (TryComp<MapGridComponent>(gridId, out var grid))
             {
-                var enumerator = _map.GetAnchoredEntitiesEnumerator(gid, grid, tile.GridIndices);
+                var enumerator = _map.GetAnchoredEntitiesEnumerator(gridId, grid, tile.GridIndices);
                 while (enumerator.MoveNext(out EntityUid? ent))
                 {
                     if (!ent.HasValue)
@@ -311,7 +313,7 @@ public sealed class CarpEggSystem : CarpQueenAccessSystem
         else
         {
             // Запасной вариант для FloorWaterEntity: используем цвет реагента Water.
-            color = _protos.Index<ReagentPrototype>("Water").SubstanceColor;
+            color = _protos.Index(WaterReagent).SubstanceColor;
         }
 
         // На сервере красим только свет; оттенок спрайта обрабатывается клиентским visualizer.
@@ -351,7 +353,7 @@ public sealed class CarpEggSystem : CarpQueenAccessSystem
             else
             {
                 // Запасной вариант для FloorWaterEntity: используем цвет реагента Water.
-                liquidColor = _protos.Index<ReagentPrototype>("Water").SubstanceColor;
+                liquidColor = _protos.Index(WaterReagent).SubstanceColor;
                 rememberedReagents["Water"] = FixedPoint2.New(30); // Считаем это водой.
             }
         }
@@ -414,9 +416,9 @@ public sealed class CarpEggSystem : CarpQueenAccessSystem
 
         foreach (var entity in nearbyEntities)
         {
-            // Проверяем, что это гуманоид, как MobTomatoKiller через whitelist с HumanoidAppearanceComponent.
-            // Это подойдет и для игроков, и для AI с гуманоидным видом.
-            if (HasComp<HumanoidAppearanceComponent>(entity))
+            // Check if it's a humanoid (same as MobTomatoKiller uses whitelist with HumanoidAppearanceComponent)
+            // This will match both players and AI with humanoid appearance
+            if (HasComp<HumanoidProfileComponent>(entity))
             {
                 memory.RememberedFriends.Add(entity);
 

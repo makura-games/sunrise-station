@@ -25,8 +25,6 @@ namespace Content.Client._Starlight.Medical.Surgery;
 
 public sealed class CustomLimbVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly DisplacementMapSystem _displacement = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
     public override void Initialize()
     {
         base.Initialize();

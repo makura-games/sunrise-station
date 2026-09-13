@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Server.Hands.Systems;
 using Content.Server.Popups;
 using Content.Shared._Sunrise.BloodCult.Actions;
@@ -16,17 +16,18 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Server._Sunrise.BloodCult.Items.Systems;
 
-public sealed class CultBloodSpearSystem : EntitySystem
+public sealed partial class CultBloodSpearSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly EntityManager _entityManager = default!;
-    [Dependency] private readonly HandsSystem _handsSystem = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedStunSystem _stunSystem = default!;
-    [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private EntityManager _entityManager = default!;
+    [Dependency] private HandsSystem _handsSystem = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private SharedStunSystem _stunSystem = default!;
+    [Dependency] private ThrowingSystem _throwingSystem = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
 
 
     public override void Initialize()
@@ -74,12 +75,10 @@ public sealed class CultBloodSpearSystem : EntitySystem
 
     private Vector2? CalculateDirection(EntityUid pinUid, EntityUid trgUid)
     {
-        var xformQuery = GetEntityQuery<TransformComponent>();
-
         // check if entities have transform component
-        if (!xformQuery.TryGetComponent(pinUid, out var pin))
+        if (!_xformQuery.TryGetComponent(pinUid, out var pin))
             return null;
-        if (!xformQuery.TryGetComponent(trgUid, out var trg))
+        if (!_xformQuery.TryGetComponent(trgUid, out var trg))
             return null;
 
         // check if they are on same map
@@ -87,7 +86,7 @@ public sealed class CultBloodSpearSystem : EntitySystem
             return null;
 
         // get world direction vector
-        var dir = _transform.GetWorldPosition(trg, xformQuery) - _transform.GetWorldPosition(pin, xformQuery);
+        var dir = _transform.GetWorldPosition(trg, _xformQuery) - _transform.GetWorldPosition(pin, _xformQuery);
         return dir;
     }
 

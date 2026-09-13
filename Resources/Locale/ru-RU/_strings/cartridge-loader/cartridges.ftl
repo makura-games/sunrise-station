@@ -1,10 +1,10 @@
 device-pda-slot-component-slot-name-cartridge = Картридж
 default-program-name = Программа
 notekeeper-program-name = Заметки
-nano-task-program-name = NanoTask
+nano-task-program-name = НаноТаск
 news-read-program-name = Новости станции
 crew-manifest-program-name = Манифест экипажа
-messenger-program-name = RobustChat
+messenger-program-name = РобастЧат
 crew-manifest-cartridge-loading = Загрузка...
 net-probe-program-name = Зонд сетей
 net-probe-scan = Просканирован { $device }!
@@ -22,11 +22,9 @@ log-probe-printout-device = Просканированное устройств�
 log-probe-printout-header = Последние логи:
 log-probe-printout-entry = #{ $number } / { $time } / { $accessor }
 astro-nav-program-name = АстроНав
-
 navigator-program-name = Навигатор
 navigator-cartridge-loading = Загрузка карты...
-
-photo-program-name = FlashSnap
+photo-program-name = ФлешСнэп
 
 med-tek-program-name = МедТек
 # Wanted list cartridge
@@ -62,7 +60,7 @@ nano-task-ui-new-task = Новая задача
 nano-task-ui-description-label = Описание:
 nano-task-ui-description-placeholder = Взять что-то важное
 nano-task-ui-requester-label = Запрашивающий:
-nano-task-ui-requester-placeholder = Иван NanoTrasen
+nano-task-ui-requester-placeholder = Иван Нанотрейзен
 nano-task-ui-item-title = Редактировать задачу
 nano-task-printed-description = Описание: { $description }
 nano-task-printed-requester = Запрашивающий: { $requester }

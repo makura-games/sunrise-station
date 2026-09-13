@@ -11,6 +11,14 @@
     storedSprite:
       state: storage
       sprite: Objects/Tools/scissors.rsi
+  # Sunrise-start
+  #- type: MagicMirror
+  #  organs:
+  #  - Head
+  #  layers:
+  #  - Hair
+  #  - FacialHair
+  # Sunrise-end
   - type: Razor  # Sunrise-edit
   - type: ActivatableUI
     key: enum.RazorUiKey.Key  # Sunrise-edit
@@ -28,6 +36,9 @@
         Piercing: 6
     soundHit:
       path: "/Audio/Weapons/bladeslice.ogg"
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 200
   # Sunrise-start
   - type: Scalpel
   - type: SurgeryTool
@@ -37,6 +48,3 @@
     endSound:
       path: /Audio/_Sunrise/Medical/Surgery/scalpel2.ogg
   # Sunrise-end
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 200

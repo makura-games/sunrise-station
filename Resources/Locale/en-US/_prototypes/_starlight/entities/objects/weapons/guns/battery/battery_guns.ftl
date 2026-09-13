@@ -1,7 +1,5 @@
 ent-WeaponAdvancedTaser = hybrid taser
     .desc = A low-capacity, energy-based stun gun used by security teams to subdue targets at range.
-ent-WeaponDominator = dominator
-    .desc = A high-tech weapon created by the law enforcement organization Sibyl System, designed specifically to fight crime.
 ent-WeaponMultiphaseGun = X-01 multiphase energy gun
     .desc = This is an expensive, modern version of the antique laser pistol, with several unique fire modes.
 ent-WeaponIonRifle = ion rifle
@@ -13,8 +11,6 @@ ent-WeaponLaserImmolator = immolator laser gun
 ent-WeaponDecloner = decloner
     .desc = { ent-BaseWeaponBatterySmall.desc }
 ent-WeaponM1911 = m1911
-    .desc = A compact pulse core in a classic Nanotrasen officer pistol design. It's not the size of the gun, it's the size of the hole it puts in people.
-ent-WeaponPDW9 = PDW-9 taser pistol
     .desc = A compact pulse core in a classic Nanotrasen officer pistol design. It's not the size of the gun, it's the size of the hole it puts in people.
 ent-WeaponEnergySniper = LWAP
     .desc = { ent-BaseWeaponBattery.desc }

@@ -7,7 +7,7 @@ namespace Content.Shared._Sunrise.Messenger;
 /// <summary>
 /// Прототип автоматической группы мессенджера (департаменты, общий чат и т.д.)
 /// </summary>
-[Prototype("messengerAutoGroup")]
+[Prototype]
 public sealed partial class MessengerAutoGroupPrototype : IPrototype
 {
     [IdDataField]

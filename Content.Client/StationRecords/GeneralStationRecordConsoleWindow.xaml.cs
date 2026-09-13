@@ -13,7 +13,7 @@ namespace Content.Client.StationRecords;
 [GenerateTypedNameReferences]
 public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public Action<uint?>? OnKeySelected;
 
@@ -29,7 +29,6 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
     public Action<uint>? OnPrinted;
 
     private readonly IEntityManager _entity;
-    private readonly IPrototypeManager _prototype;
     private readonly ILocalizationManager _loc;
     private readonly JobSystem _job;
     private readonly LobbyUIController _controller;
@@ -42,7 +41,6 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
 
         // Sunrise added start
         _entity = IoCManager.Resolve<IEntityManager>();
-        _prototype = IoCManager.Resolve<IPrototypeManager>();
         _loc = IoCManager.Resolve<ILocalizationManager>();
         var interfaceManager = IoCManager.Resolve<IUserInterfaceManager>();
         _job = _entity.System<JobSystem>();
@@ -171,7 +169,7 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
         RecordContainer.RemoveAllChildren();
         // Sunrise edit start
         var newRecord =
-            new SunriseGeneralRecord(record, enableDelete, canRedactSensitiveData, hasAccess, id, in _entity, in _prototype, in _loc, in _job, in _controller);
+            new SunriseGeneralRecord(record, enableDelete, canRedactSensitiveData, hasAccess, id, in _entity, in _prototypeManager, in _loc, in _job, in _controller);
         // Sunrise edit end
         newRecord.OnDeletePressed = OnDeleted;
         newRecord.OnPrintPressed = OnPrinted;

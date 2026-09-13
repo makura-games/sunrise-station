@@ -37,22 +37,24 @@ namespace Content.Server.Zombies
 {
     public sealed partial class ZombieSystem : SharedZombieSystem
     {
-        [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly IPrototypeManager _protoManager = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-        [Dependency] private readonly DamageableSystem _damageable = default!;
-        [Dependency] private readonly ChatSystem _chat = default!;
-        [Dependency] private readonly AutoEmoteSystem _autoEmote = default!;
-        [Dependency] private readonly EmoteOnDamageSystem _emoteOnDamage = default!;
-        [Dependency] private readonly MobStateSystem _mobState = default!;
-        [Dependency] private readonly SharedPopupSystem _popup = default!;
-        [Dependency] private readonly SharedRoleSystem _role = default!;
-        [Dependency] private readonly ThrowingSystem _throwing = default!;
-        [Dependency] private readonly ActionsSystem _action = default!;
-        [Dependency] private readonly SharedStunSystem _stun = default!;
-        [Dependency] private readonly NavMapSystem _navMap = default!; // Sunrise-Zombies
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
+        private static readonly Regex ColorTagRegex = new(@"\[\s*\/?\s*color(?:=[^\]]*)?\]", RegexOptions.IgnoreCase);
+
+        [Dependency] private IGameTiming _timing = default!;
+        [Dependency] private IPrototypeManager _protoManager = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private BloodstreamSystem _bloodstream = default!;
+        [Dependency] private DamageableSystem _damageable = default!;
+        [Dependency] private ChatSystem _chat = default!;
+        [Dependency] private AutoEmoteSystem _autoEmote = default!;
+        [Dependency] private EmoteOnDamageSystem _emoteOnDamage = default!;
+        [Dependency] private MobStateSystem _mobState = default!;
+        [Dependency] private SharedPopupSystem _popup = default!;
+        [Dependency] private SharedRoleSystem _role = default!;
+        [Dependency] private ThrowingSystem _throwing = default!;
+        [Dependency] private ActionsSystem _action = default!;
+        [Dependency] private SharedStunSystem _stun = default!;
+        [Dependency] private NavMapSystem _navMap = default!; // Sunrise-Zombies
+        [Dependency] private SharedTransformSystem _transform = default!;
 
         public readonly ProtoId<NpcFactionPrototype> Faction = "Zombie";
 
@@ -126,9 +128,8 @@ namespace Content.Server.Zombies
 
             var zombieXform = Transform(uid);
             EntityUid? nearestUid = default!;
-            TransformComponent? nearestXform = default!;
             float? minDistance = null;
-            var query = AllEntityQuery<HumanoidAppearanceComponent>();
+            var query = AllEntityQuery<HumanoidProfileComponent>();
             while (query.MoveNext(out var targetUid, out var humanoidAppearanceComponent))
             {
                 // Зомби не должны чувствовать тех, у кого иммунитет к ним.
@@ -165,9 +166,8 @@ namespace Content.Server.Zombies
         private string RemoveColorTags(string input)
         {
             // Регулярное выражение для поиска тэгов [color=...] и [/color]
-            var pattern = @"\[\s*\/?\s*color(?:=[^\]]*)?\]";
             // Заменяем найденные тэги на пустую строку
-            var result = Regex.Replace(input, pattern, string.Empty, RegexOptions.IgnoreCase);
+            var result = ColorTagRegex.Replace(input, string.Empty);
             return result;
         }
 
@@ -389,7 +389,7 @@ namespace Content.Server.Zombies
                     _damageable.TryChangeDamage(args.User, entity.Comp.HealingOnBite, true, false);
 
                     // If we cannot infect the living target, the zed will just heal itself.
-                    if (HasComp<ZombieImmuneComponent>(uid) || cannotSpread || _random.Prob(GetZombieInfectionChance(uid, entity.Comp)))
+                    if (HasComp<ZombieImmuneComponent>(uid) || cannotSpread || !_random.Prob(GetZombieInfectionChance(uid, entity.Comp)))
                         continue;
 
                     EnsureComp<PendingZombieComponent>(uid);
@@ -422,16 +422,9 @@ namespace Content.Server.Zombies
             if (!Resolve(source, ref zombiecomp))
                 return false;
 
-            foreach (var (layer, info) in zombiecomp.BeforeZombifiedCustomBaseLayers)
-            {
-                _humanoidAppearance.SetBaseLayerColor(target, layer, info.Color);
-                _humanoidAppearance.SetBaseLayerId(target, layer, info.Id);
-            }
-            if (TryComp<HumanoidAppearanceComponent>(target, out var appcomp))
-            {
-                appcomp.EyeColor = zombiecomp.BeforeZombifiedEyeColor;
-            }
-            _humanoidAppearance.SetSkinColor(target, zombiecomp.BeforeZombifiedSkinColor, false);
+            _visualBody.ApplyProfiles(target, zombiecomp.BeforeZombifiedProfiles);
+            _visualBody.ApplyMarkings(target, zombiecomp.BeforeZombifiedMarkings);
+
             _bloodstream.ChangeBloodReagents(target, zombiecomp.BeforeZombifiedBloodReagents);
 
             return true;

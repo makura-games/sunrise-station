@@ -78,7 +78,7 @@ accent-formal-words-replace-135 = офицер центрального кома
 accent-formal-words-136 = исны
 accent-formal-words-replace-136 = офицеры исполнительной судебно-надзорной службы
 accent-formal-words-137 = пнт
-accent-formal-words-replace-137 = представитель NanoTrasen
+accent-formal-words-replace-137 = представитель Нанотрейзен
 accent-formal-words-139 = нио
 accent-formal-words-replace-139 = научный отдел
 accent-formal-words-140 = варденом
@@ -100,4 +100,9 @@ accent-formal-words-replace-147 = научного руководителя
 accent-formal-words-148 = нру
 accent-formal-words-replace-148 = научному руководителю
 # Fish-edit-end
-
+accent-formal-words-103 = вв
+accent-formal-words-replace-103 = ведущий врач
+accent-formal-words-104 = ви
+accent-formal-words-replace-104 = ведущий инженер
+accent-formal-words-105 = ву
+accent-formal-words-replace-105 = ведущий учёный

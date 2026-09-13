@@ -15,10 +15,10 @@ namespace Content.Client.Instruments;
 
 public sealed partial class InstrumentSystem : SharedInstrumentSystem
 {
-    [Dependency] private readonly IClientNetManager _netManager = default!;
-    [Dependency] private readonly IMidiManager _midiManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
+    [Dependency] private IMidiManager _midiManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public readonly TimeSpan OneSecAgo = TimeSpan.FromSeconds(-1);
     public int MaxMidiEventsPerBatch { get; private set; }
@@ -34,6 +34,9 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
 
         Subs.CVar(_cfg, CCVars.MaxMidiEventsPerBatch, OnMaxMidiEventsPerBatchChanged, true);
         Subs.CVar(_cfg, CCVars.MaxMidiEventsPerSecond, OnMaxMidiEventsPerSecondChanged, true);
+        // Sunrise added start - синхронизация лимита пакетов MIDI
+        InitializeMidiAbuseCVars();
+        // Sunrise added end
 
         SubscribeNetworkEvent<InstrumentMidiEventEvent>(OnMidiEventRx);
         SubscribeNetworkEvent<InstrumentStartMidiEvent>(OnMidiStart);
@@ -480,6 +483,11 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
 
             if (eventCount == 0)
                 continue;
+
+            // Sunrise added start - отправляем MIDI-пакеты с частотой серверного лимита
+            if (!TryConsumeMidiBatch(instrument, now))
+                continue;
+            // Sunrise added end
 
             RaiseNetworkEvent(new InstrumentMidiEventEvent(GetNetEntity(uid), events));
 

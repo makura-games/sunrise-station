@@ -60,6 +60,9 @@ ignore_list:
   - 'EVA'
   - 'MK58'
   - 'WT550'
+  - 'WT550r'
+  - 'WT550g'
+  - 'WT550b'
   - 'SKM-24'
   - 'SKM-28'
   - 'N1984'
@@ -81,7 +84,6 @@ ignore_list:
   - "Monkin' Donuts"
   - 'P-90'
   - 'MP-38'
-  - 'MP5'
   - 'MP7'
   - 'PPSH-41'
   - 'AKMS'
@@ -198,6 +200,8 @@ ignore_list:
   - '5u'
   - '10u'
   - '20u'
+  - VV
+  - HUD
 
 ignore_files:
   - 'italian.ftl'
@@ -231,3 +235,13 @@ ignore_files:
   - xeno_last.ftl
   - xeno_first.ftl
   - narsie.ftl
+  - parcel-wrap.ftl
+  - scottish.ftl # TODO: Адаптировать под русский
+  - ingestion-system.ftl
+  - map-commands.ftl
+  - eye-commands.ftl
+  - remove-extra-components-command.ftl
+  - weather.ftl
+  - feedbackpopup.ftl
+  - rmaction.ftl
+  - addaction.ftl

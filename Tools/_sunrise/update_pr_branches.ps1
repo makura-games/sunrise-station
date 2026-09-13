@@ -9,7 +9,7 @@ Default double-click flow:
 Command-line examples:
   powershell -File Tools/update_pr_branches.ps1 -DryRun
   powershell -File Tools/update_pr_branches.ps1 -Apply
-  powershell -File Tools/update_pr_branches.ps1 -Repo space-sunrise/sunrise-station -BaseBranch master -DryRun
+  powershell -File Tools/update_pr_branches.ps1 -Repo makura-games/sunrise-station -BaseBranch master -DryRun
 #>
 
 param(

@@ -12,13 +12,15 @@ using Content.Server.Chat.Systems;
 using Content.Server.Popups;
 using Content.Shared.Popups;
 using Content.Shared.Clothing.EntitySystems;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Modsuit;
 
-public sealed class ModsuitSystem : SharedModsuitSystem
+public sealed partial class ModsuitSystem : SharedModsuitSystem
 {
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private TagSystem _tag = default!;
+
+    private static readonly ProtoId<TagPrototype> ModsuitCoreTag = "ModsuitCore";
 
     public override void Initialize()
     {
@@ -33,15 +35,15 @@ public sealed class ModsuitSystem : SharedModsuitSystem
 
         if (comp.IsActivated == true)
             return;
-        
-        if (args.Container.ID != "modsuit_core") 
+
+        if (args.Container.ID != "modsuit_core")
             return;
 
-        if (!TryComp<TagComponent>(args.EntityUid, out var itemSlots) || !_tag.HasTag(itemSlots, "ModsuitCore"))
+        if (!TryComp<TagComponent>(args.EntityUid, out var itemSlots) || !_tag.HasTag(itemSlots, ModsuitCoreTag))
             return;
-        
+
         comp.IsActivated = true;
-        EntityManager.Dirty(uid, comp);
+        Dirty(uid, comp);
 
     }
 
@@ -49,7 +51,7 @@ public sealed class ModsuitSystem : SharedModsuitSystem
     {
         if (comp.RoundStartBiocode == true)
         {
-            if (!TryComp<DnaComponent>(args.Equipee, out var PersonDNA))
+            if (!TryComp<DnaComponent>(args.EquipTarget, out var PersonDNA))
                 return;
 
             if (!TryComp(uid, out ToggleableClothingComponent? Toggleable))
@@ -57,15 +59,15 @@ public sealed class ModsuitSystem : SharedModsuitSystem
 
             if (!TryComp<PersonalBiocodeComponent>(Toggleable.ClothingUid, out var SuitBiocode))
                 return;
-            
+
             if (PersonDNA.DNA != null)
                 SuitBiocode.DNA = PersonDNA.DNA;
 
             SuitBiocode.IsAuthorized = true;
-            EntityManager.Dirty(SuitBiocode.Owner, SuitBiocode);
+            Dirty(SuitBiocode.Owner, SuitBiocode);
 
             comp.RoundStartBiocode = false;
-            EntityManager.Dirty(uid, comp);
+            Dirty(uid, comp);
         }
 
     }

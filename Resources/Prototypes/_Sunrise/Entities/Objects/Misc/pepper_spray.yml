@@ -7,13 +7,13 @@
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Misc/pepperspray.rsi
-  - type: SolutionContainerManager
-    solutions:
-      spray:
-        maxVol: 40
-        reagents:
-        - ReagentId: TearGas
-          Quantity: 40
+  - type: Solution
+    id: spray
+    solution:
+      maxVol: 40
+      reagents:
+      - ReagentId: TearGas
+        Quantity: 40
   - type: DrainableSolution
     solution: spray
   - type: RefillableSolution

@@ -6,4 +6,4 @@ timer-trigger-examine = Таймер установлен на {$time} секу�
 
 timer-trigger-popup-set = Таймер установлен на {$time} секунд.
 
-timer-trigger-activated = Вы активируете {THE($device)}.
+timer-trigger-activated = Вы активируете {$device}.

@@ -33,13 +33,19 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 125
     damage:
-      groups:
-        Brute: -0.5
-        Burn: -0.5
-        Airloss: -0.25
-        Genetic: -0.25
+      types:
+        Blunt: -0.17
+        Slash: -0.17
+        Piercing: -0.16
+        Heat: -0.13
+        Shock: -0.13
+        Cold: -0.12
+        Caustic: -0.12
+        Asphyxiation: -0.13
+        Bloodloss: -0.12
+        Cellular: -0.13
+        Mangleness: -0.12
 
 - type: entity
   id: MobPassiveRegen
@@ -49,13 +55,19 @@
     allowedStates:
     - Alive
     - Critical
-    damageCap: 125
     damage:
-      groups:
-        Brute: -0.5
-        Burn: -0.5
-        Airloss: -1
-        Genetic: -1
+      types:
+        Blunt: -0.17
+        Slash: -0.17
+        Piercing: -0.16
+        Heat: -0.13
+        Shock: -0.13
+        Cold: -0.12
+        Caustic: -0.12
+        Asphyxiation: -0.5
+        Bloodloss: -0.5
+        Cellular: -0.5
+        Mangleness: -0.5
 
 - type: entity
   id: MobPassiveRegenMedium
@@ -65,13 +77,19 @@
     allowedStates:
     - Alive
     - Critical
-    damageCap: 125
     damage:
-      groups:
-        Brute: -1
-        Burn: -1
-        Airloss: -1.5
-        Genetic: -1.5
+      types:
+        Blunt: -0.33
+        Slash: -0.33
+        Piercing: -0.34
+        Heat: -0.25
+        Shock: -0.25
+        Cold: -0.25
+        Caustic: -0.25
+        Asphyxiation: -0.75
+        Bloodloss: -0.75
+        Cellular: -0.75
+        Mangleness: -0.75
 
 - type: entity
   id: MobPassiveRegenStrong
@@ -82,13 +100,19 @@
     - Alive
     - Critical
     - Dead
-    damageCap: 9999
     damage:
-      groups:
-        Brute: -1
-        Burn: -1
-        Airloss: -1
-        Genetic: -1
+      types:
+        Blunt: -0.33
+        Slash: -0.33
+        Piercing: -0.34
+        Heat: -0.25
+        Shock: -0.25
+        Cold: -0.25
+        Caustic: -0.25
+        Asphyxiation: -0.5
+        Bloodloss: -0.5
+        Cellular: -0.5
+        Mangleness: -0.5
 
 #endregion
 
@@ -305,7 +329,7 @@
   - MobBloodstream
   - MobFlammable
   - MobEnhancedMovement
-  - BaseMobSpecies
+  - MobHuman
   - MobHumanoidHostileAIComplex
   id: MobHumanoidHostileBase
   components:

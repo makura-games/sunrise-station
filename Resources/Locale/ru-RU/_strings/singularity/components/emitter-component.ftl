@@ -10,3 +10,8 @@ comp-emitter-not-anchored = { $target } не закреплён!
 # Upgrades
 emitter-component-current-type = Установленный тип: { $type }.
 emitter-component-type-set = Установить тип: { $type }
+
+emitter-destroyed-broadcast = Запитанный эмиттер { $location } уничтожен.
+emitter-deconstructed-broadcast = Запитанный эмиттер { $location } разобран.
+emitter-unlocked-broadcast = Запитанный эмиттер { $location } разблокирован.
+emitter-unpowered-broadcast = Запитанный эмиттер { $location } потерял питание.

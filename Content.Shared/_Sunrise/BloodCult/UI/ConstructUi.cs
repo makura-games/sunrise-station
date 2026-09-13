@@ -9,7 +9,7 @@ public enum SelectConstructUi
 }
 
 [Serializable, NetSerializable]
-public class ConstructFormSelectedEvent : BoundUserInterfaceMessage
+public sealed class ConstructFormSelectedEvent : BoundUserInterfaceMessage
 {
     public string SelectedForm;
 

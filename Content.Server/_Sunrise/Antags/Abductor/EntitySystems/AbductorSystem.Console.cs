@@ -22,10 +22,10 @@ namespace Content.Server._Sunrise.Antags.Abductor;
 
 public sealed partial class AbductorSystem : SharedAbductorSystem
 {
-    [Dependency] private readonly NumberObjectiveSystem _number = default!;
-    [Dependency] private readonly SharedItemSwitchSystem _itemSwitch = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly VendingMachineSystem _vending = default!;
+    [Dependency] private NumberObjectiveSystem _number = default!;
+    [Dependency] private SharedItemSwitchSystem _itemSwitch = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private VendingMachineSystem _vending = default!;
     private readonly SoundSpecifier _sendSound = new SoundPathSpecifier("/Audio/Voice/Human/wilhelm_scream.ogg");
     private readonly SoundSpecifier _alienTeleport = new SoundPathSpecifier("/Audio/_Sunrise/Abductor/alien_teleport.ogg");
 

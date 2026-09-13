@@ -21,17 +21,17 @@ using Robust.Shared.Maths;
 
 namespace Content.Server.Projectiles;
 
-public sealed class ProjectileSystem : SharedProjectileSystem
+public sealed partial class ProjectileSystem : SharedProjectileSystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly ColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly DestructibleSystem _destructibleSystem = default!;
-    [Dependency] private readonly GunSystem _guns = default!;
-    [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly IRobustRandom _rand = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private ColorFlashEffectSystem _color = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private DestructibleSystem _destructibleSystem = default!;
+    [Dependency] private GunSystem _guns = default!;
+    [Dependency] private SharedCameraRecoilSystem _sharedCameraRecoil = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private IRobustRandom _rand = default!;
 
     public override void Initialize()
     {
@@ -96,7 +96,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
         var damageRequired = _destructibleSystem.DestroyedAt(target);
         if (TryComp<DamageableComponent>(target, out var damageableComponent))
         {
-            damageRequired -= damageableComponent.TotalDamage;
+            damageRequired -= _damageableSystem.GetTotalDamage((target, damageableComponent));
             damageRequired = FixedPoint2.Max(damageRequired, FixedPoint2.Zero);
         }
         var deleted = Deleted(target);
@@ -119,7 +119,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
             // during this physics tick.
             if (!deleted)
             {
-                if (TryComp<TransformComponent>(target, out var targetXform))
+                if (TryComp(target, out TransformComponent? targetXform))
                     _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(targetXform.Coordinates, entityMan: EntityManager));
             }
 

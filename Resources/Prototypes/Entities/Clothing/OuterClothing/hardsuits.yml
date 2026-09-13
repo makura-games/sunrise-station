@@ -22,15 +22,13 @@
     reduction: 0.8
   - type: ExplosionResistance
     damageCoefficient: 0.5
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.9
         Slash: 0.9
         Piercing: 0.9
-        Shock: 0.6 #Sunrise-edit
+        Shock: 0.9 #Sunrise-edit
         Heat: 0.8
         Radiation: 0.5
   - type: ClothingSpeedModifier
@@ -41,7 +39,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitAtmos
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -61,8 +58,6 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.5
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -80,7 +75,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitEngineering
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -98,8 +92,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.7
     lowPressureMultiplier: 1000
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -120,7 +112,6 @@
     - FullBodyOuter # SUNRISE EDIT
     - WhitelistChameleon
     - HardsuitSpatio
-    - CorgiWearable
 
 #Salvage Hardsuit
 - type: entity
@@ -138,8 +129,6 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.7
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -157,7 +146,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitSalvage
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
     - HardsuitMining # Sunrise-add
@@ -178,8 +166,6 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.3
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -200,7 +186,6 @@
     node: hardsuitGoliath
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -209,7 +194,7 @@
   parent: [ClothingOuterHardsuitBase, BaseCargoContraband]
   id: ClothingOuterHardsuitMaxim
   name: salvager maxim hardsuit
-  description: Fire. Heat. These things forge great weapons, they also forge great salvagers.  Has built-in battery-powered energy barrier technology.
+  description: Fire. Heat. These things forge great weapons, they also forge great salvagers.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/maxim.rsi
@@ -221,51 +206,18 @@
   - type: ClothingSpeedModifier
     walkModifier: 1.0
     sprintModifier: 1.0
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.6
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.5
         Heat: 0.3
         Radiation: 0.1
   - type: ExplosionResistance
     damageCoefficient: 0.2
-  - type: TemperatureProtection
-    heatingCoefficient: 0.001
-    coolingCoefficient: 0.001
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitMaxim
-  - type: ContainerContainer
-    containers:
-      cell_slot: !type:ContainerSlot
-      toggleable-clothing: !type:ContainerSlot
-      beakerSlot: !type:ContainerSlot #Sunrise-Edit
-  - type: PowerCellSlot
-    cellSlotId: cell_slot
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellSmall
-        whitelist:
-          tags:
-            - PowerCell
-            - PowerCellSmall
-      beakerSlot: #Sunrise-Start
-        whitelist:
-          tags:
-          - FitsHardsuit #Sunrise-End
-  - type: EnergyDomeGenerator
-    damageEnergyDraw: 6
-    domePrototype: EnergyDomeSmallPink
-  - type: PowerCellDraw
-    drawRate: 0
-    useCharge: 0
-  - type: UseDelay
-    delay: 10.0
 
 #Security Hardsuit
 - type: entity
@@ -282,9 +234,7 @@
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.4
-  - type: Pierceable
-    level: Metal
+    damageCoefficient: 0.5
   - type: Armor
     modifiers:
       coefficients:
@@ -301,7 +251,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitSecurity
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -347,9 +296,7 @@
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.4
-  - type: Pierceable
-    level: Metal
+    damageCoefficient: 0.5
   - type: Armor
     modifiers:
       coefficients:
@@ -380,9 +327,7 @@
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.5
-  - type: Pierceable
-    level: Metal
+    damageCoefficient: 0.7
   - type: Armor
     modifiers:
       coefficients:
@@ -400,7 +345,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitCap
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -422,8 +366,6 @@
     reduction: 0.8
   - type: ExplosionResistance
     damageCoefficient: 0.4 # Sunrise-edit
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -442,7 +384,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitEngineeringWhite
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -460,8 +401,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -476,7 +415,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitMedical
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -519,7 +457,6 @@
     tags:
     - WhitelistChameleon
     - HighRiskItem
-    - CorgiWearable
     - Hardsuit
     - FullBodyOuter # Sunrise-Add
   - type: ToggleableClothing
@@ -545,8 +482,6 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.5
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -580,8 +515,6 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.9
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -619,8 +552,6 @@
     damageCoefficient: 0.5
   - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
     damageCoefficient: 0.3 # Sunrise Edit
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -643,7 +574,6 @@
     - FullBodyOuter # SUNRISE EDIT
     - NoPaint # Sunrise-Add
     - WhitelistChameleon
-    - CorgiWearable
     - ScurretWearable
   - type: StaticPrice
     price: 5000
@@ -668,8 +598,6 @@
     - WhitelistChameleon
   - type: ExplosionResistance #Sunrise-start
     damageCoefficient: 0.35
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -730,7 +658,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitSyndieElite
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
     - NoPaint # Sunrise-Add
@@ -753,8 +680,10 @@
     damageCoefficient: 0.5
   - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
     damageCoefficient: 0.1 # Sunrise Edit
+  # Sunrise-Start
   - type: Pierceable
-    level: Metal
+    level: Rock
+  # Sunrise-Start
   - type: Armor
     modifiers:
       coefficients:
@@ -772,7 +701,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitSyndieCommander
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
     - NoPaint # Sunrise-Add
@@ -828,7 +756,6 @@
   - type: Tag
     tags:
     - MonkeyWearable
-    - CorgiWearable
     - Hardsuit
     - FullBodyOuter # SUNRISE EDIT
     - NoPaint # Sunrise-Add
@@ -869,7 +796,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitWizard
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -889,8 +815,6 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.2
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -959,8 +883,6 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.6
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:
@@ -1089,8 +1011,6 @@
     damageCoefficient: 0.2
   - type: FireProtection
     reduction: 0.8
-  - type: Pierceable
-    level: Metal
   - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
     damageCoefficient: 0.15 # Needs 21 hits with a disabler to stun :godo:
   - type: Armor
@@ -1129,8 +1049,6 @@
   - type: ExplosionResistance
     damageCoefficient: 0.7
     # Sunrise-Start
-  - type: Pierceable
-    level: Metal
   - type: FireProtection
     reduction: 0.5
     # Sunrise-end
@@ -1223,8 +1141,6 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.85
-  - type: Pierceable
-    level: Metal
   - type: Armor
     modifiers:
       coefficients:

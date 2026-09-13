@@ -1,8 +1,8 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server.Nutrition.Components;
 using Content.Shared._Sunrise.FleshCult;
 using Content.Shared.CombatMode.Pacification;
-using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Hands;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement.Components;
@@ -11,6 +11,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Player;
@@ -19,6 +20,8 @@ namespace Content.Server._Sunrise.FleshCult;
 
 public sealed partial class FleshCultSystem
 {
+    [Dependency] private StatusEffectsSystem _huggerStatusEffects = default!;
+
     public void InitializeHugger()
     {
         SubscribeLocalEvent<FleshHuggerComponent, MapInitEvent>(OnMapInit);
@@ -44,7 +47,7 @@ public sealed partial class FleshCultSystem
             return;
         if (HasComp<FleshCultistComponent>(args.Target))
             return;
-        if (!HasComp<HumanoidAppearanceComponent>(args.Target))
+        if (!HasComp<HumanoidProfileComponent>(args.Target))
             return;
         if (TryComp(args.Target, out MobStateComponent? mobState))
         {
@@ -81,7 +84,7 @@ public sealed partial class FleshCultSystem
         _popup.PopupEntity(Loc.GetString("flesh-pudge-throw-hugger-eat-face-others",
             ("entity", args.Target)), args.Target, Filter.PvsExcept(uid), true, PopupType.Large);
 
-        EntityManager.EnsureComponent<PacifiedComponent>(uid);
+        EnsureComp<PacifiedComponent>(uid);
         _stunSystem.TryAddParalyzeDuration(args.Target, TimeSpan.FromSeconds(component.ParalyzeTime));
         _damageableSystem.TryChangeDamage(args.Target, component.Damage, origin: args.Thrown);
     }
@@ -90,9 +93,9 @@ public sealed partial class FleshCultSystem
     {
         if (args.Slot != "mask")
             return;
-        component.EquipedOn = args.Equipee;
-        EntityManager.EnsureComponent<TemporaryBlindnessComponent>(args.Equipee);
-        EntityManager.EnsureComponent<PacifiedComponent>(uid);
+        component.EquipedOn = args.EquipTarget;
+        _huggerStatusEffects.TrySetStatusEffectDuration(args.EquipTarget, BlindnessSystem.BlindingStatusEffect);
+        EnsureComp<PacifiedComponent>(uid);
     }
 
     private void OnGotEquippedHand(EntityUid uid, FleshHuggerComponent component, GotEquippedHandEvent args)
@@ -111,9 +114,8 @@ public sealed partial class FleshCultSystem
         if (args.Slot != "mask")
             return;
         if (HasComp<PacifiedComponent>(uid))
-            EntityManager.RemoveComponent<PacifiedComponent>(uid);
-        if (HasComp<TemporaryBlindnessComponent>(component.EquipedOn))
-            EntityManager.RemoveComponent<TemporaryBlindnessComponent>(args.Equipee);
+            RemComp<PacifiedComponent>(uid);
+        _huggerStatusEffects.TryRemoveStatusEffect(args.EquipTarget, BlindnessSystem.BlindingStatusEffect);
         _stunSystem.TryAddParalyzeDuration(uid, TimeSpan.FromSeconds(3));
         component.EquipedOn = new EntityUid();
     }
@@ -125,7 +127,7 @@ public sealed partial class FleshCultSystem
 
         foreach (var entity in args.HitEntities)
         {
-            if (!HasComp<HumanoidAppearanceComponent>(entity))
+            if (!HasComp<HumanoidProfileComponent>(entity))
                 return;
 
             if (TryComp(entity, out MobStateComponent? mobState))
@@ -167,7 +169,7 @@ public sealed partial class FleshCultSystem
 
             _popup.PopupEntity(Loc.GetString("flesh-pudge-throw-hugger-eat-face-others",
                 ("entity", entity)), entity, Filter.PvsExcept(entity), true, PopupType.Large);
-            EntityManager.EnsureComponent<PacifiedComponent>(uid);
+            EnsureComp<PacifiedComponent>(uid);
             _stunSystem.TryAddParalyzeDuration(entity, TimeSpan.FromSeconds(component.ParalyzeTime));
             _damageableSystem.TryChangeDamage(entity, component.Damage, origin: entity);
             break;

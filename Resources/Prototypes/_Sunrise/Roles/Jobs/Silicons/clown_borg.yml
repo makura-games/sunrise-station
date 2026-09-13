@@ -8,7 +8,6 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 72000 #20 hrs # Sunrise-Edit
-  canBeAntag: false
   displayWeight: -10  # Sunrise
   jobEntity: PlayerBorgClownBattery
   overrideConsoleVisibility: false

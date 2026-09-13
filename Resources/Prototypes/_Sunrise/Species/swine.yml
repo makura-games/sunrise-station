@@ -5,7 +5,6 @@
   prototype: MobSwine
   bodyTypes:
   - SwineNormal
-  markingLimits: MobSwineMarkingLimits
   dollPrototype: MobSwineDummy
   skinColoration: Hues
   buttScan:
@@ -15,128 +14,93 @@
 - type: bodyType
   id: SwineNormal
   name: body-normal
-  sprites:
-    Head: MobSwineHead
-    Hair: MobHumanoidAnyMarking
-    FacialHair: MobHumanoidAnyMarking
-    Snout: MobHumanoidAnyMarking
-    Chest: MobSwineTorso
-    HeadTop: MobHumanoidAnyMarking
-    HeadSide: MobHumanoidAnyMarking
-    Tail: MobHumanoidAnyMarking
-    Eyes: MobHumanoidEyes
-    LArm: MobSwineLArm
-    RArm: MobSwineRArm
-    LHand: MobSwineLHand
-    RHand: MobSwineRHand
-    LLeg: MobSwineLLeg
-    RLeg: MobSwineRLeg
-    LFoot: MobSwineLFoot
-    RFoot: MobSwineRFoot
-
-- type: markingPoints
-  id: MobSwineMarkingLimits
-  points:
-    Hair:
-      points: 1
-      required: false
-    FacialHair:
-      points: 1
-      required: false
-    HeadTop:
-      points: 1
-      required: true
-      defaultMarkings: [ SwineEars ]
+  visualKey: body-normal
+  layers:
+    Head:
+      sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
+      state: head_m
     Chest:
-      points: 1
+      sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
+      state: torso_m
+    Eyes:
+      sprite: Mobs/Customization/eyes.rsi
+      state: eyes
+    LArm:
+      sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
+      state: l_arm
+    RArm:
+      sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
+      state: r_arm
+    LHand:
+      sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
+      state: l_hand
+    RHand:
+      sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
+      state: r_hand
+    LLeg:
+      sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
+      state: l_leg
+    RLeg:
+      sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
+      state: r_leg
+    LFoot:
+      sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
+      state: l_foot
+    RFoot:
+      sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
+      state: r_foot
+  sexLayers:
+    Male:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
+        state: head_m
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
+        state: torso_m
+    Female:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
+        state: head_f
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
+        state: torso_f
+- type: markingsGroup
+  id: Swine
+  limits:
+    enum.HumanoidVisualLayers.Hair:
+      limit: 1
       required: false
-    Legs:
-      points: 2
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 1
       required: false
-    Arms:
-      points: 2
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 1
+      required: true
+      default: [ SwineEars ]
+    enum.HumanoidVisualLayers.Chest:
+      limit: 1
       required: false
-
-- type: humanoidBaseSprite
-  id: MobSwineHead
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
-    state: head_m
-
-- type: humanoidBaseSprite
-  id: MobSwineHeadMale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
-    state: head_m
-
-- type: humanoidBaseSprite
-  id: MobSwineHeadFemale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
-    state: head_f
-
-- type: humanoidBaseSprite
-  id: MobSwineTorso
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
-    state: torso_m
-
-- type: humanoidBaseSprite
-  id: MobSwineTorsoMale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
-    state: torso_m
-
-- type: humanoidBaseSprite
-  id: MobSwineTorsoFemale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
-    state: torso_f
-
-- type: humanoidBaseSprite
-  id: MobSwineLLeg
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
-    state: l_leg
-
-- type: humanoidBaseSprite
-  id: MobSwineLHand
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
-    state: l_hand
-
-- type: humanoidBaseSprite
-  id: MobSwineLArm
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
-    state: l_arm
-
-- type: humanoidBaseSprite
-  id: MobSwineLFoot
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
-    state: l_foot
-
-- type: humanoidBaseSprite
-  id: MobSwineRLeg
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
-    state: r_leg
-
-- type: humanoidBaseSprite
-  id: MobSwineRHand
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
-    state: r_hand
-
-- type: humanoidBaseSprite
-  id: MobSwineRArm
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
-    state: r_arm
-
-- type: humanoidBaseSprite
-  id: MobSwineRFoot
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
-    state: r_foot
+    enum.HumanoidVisualLayers.LArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RFoot:
+      limit: 1
+      required: false

@@ -1,114 +1,75 @@
 reagent-name-alien-brain-hemorrhage = инопланетное кровоизлияние в мозг
 reagent-desc-alien-brain-hemorrhage = Пожалуй, стоит провериться в медблоке.
-
 reagent-name-bronx = бронкс
 reagent-desc-bronx = Апельсиновый родственник Манхэттена и Мартини.
-
 reagent-name-crush-depth = критическая глубина
 reagent-desc-crush-depth = Стигийский напиток, зовущий в бездну. Тёмный и холодный, он напоминает: самый древний страх — страх неизвестного.
-
 reagent-name-dark-and-stormy = тёмный и бурный
 reagent-desc-dark-and-stormy = Кажется, вы почти слышите гром.
-
 reagent-name-eggnog = эгг-ног
 reagent-desc-eggnog = Маловато яйца.
-
 reagent-name-electric-shark = электроакула
 reagent-desc-electric-shark = Забавный факт об акулах: селахиане составляют 20% инженерного отдела Космической Станции 16!
-
 reagent-name-jack-rose = Джек Роуз
 reagent-desc-jack-rose = Неприлично красный.
-
 reagent-name-jungle-bird = Джангл бёрд
 reagent-desc-jungle-bird = Несмотря на название, среди воксов он не особенно популярен.
-
 reagent-name-kalimotxo = калимочо
 reagent-desc-kalimotxo = Куба Либре для истинного ценителя алкоголя.
-
 reagent-name-tortuga = тортуга
 reagent-desc-tortuga = Идеально для пиратов, назначенных трезвым водителем. Йо-хо-хо!
-
 reagent-name-monkey-business = обезьяньи дела
 reagent-desc-monkey-business = Даже интересно, что об этом напитке думают сами обезьяны.
-
 reagent-name-radler = радлер
 reagent-desc-radler = Простой, но классический напиток прямиком из космо-Германии.
-
 reagent-name-vampiro = вампиро
 reagent-desc-vampiro = Популярен в Мексике и Трансильвании.
-
 reagent-name-caipirinha = кайпиринья
 reagent-desc-caipirinha = Спешл из Сан-Паулу, прямо из старой Бразилии.
-
 reagent-name-daiquiri = дайкири
 reagent-desc-daiquiri = Классический ромовый коктейль, популярный даже в холодных просторах космоса.
-
 reagent-name-death-in-the-afternoon = смерть после полудня
 reagent-desc-death-in-the-afternoon = "Налейте одну порцию абсента в бокал для шампанского. Добавляйте охлаждённое шампанское, пока оно не станет молочно-опаловым. Выпейте три-пять таких медленно." — Эрнест Хемингуэй
-
 reagent-name-empress-75 = императрица 75
 reagent-desc-empress-75 = Более изысканная версия мимозы. То, что Мария-Антуанетта могла бы пригубить перед революцией.
-
 reagent-name-espresso-martini = эспрессо-мартини
 reagent-desc-espresso-martini = Чтобы взбодриться и расслабиться. Украшен кофейными зёрнами и подаётся ледяным.
-
 reagent-name-mayojito = майохито
 reagent-desc-mayojito = Оскорбление бога и человека. Не пейте это.
-
 reagent-name-mimeosa = мимеоза
 reagent-desc-mimeosa = Апельсиновая кислинка настолько ядреная, что словами не описать.
-
 reagent-name-mimosa = мимоза
 reagent-desc-mimosa = Идеально для бодрого бранча с подругами.
-
 reagent-name-moscow-mule = московский мул
 reagent-desc-moscow-mule = Неожиданно крепкий и освежающий коктейль, подающийся в культовой медной кружке.
-
 reagent-name-the-sun-also-rises = и восходит солнце
 reagent-desc-the-sun-also-rises = Крепкий коктейль мутного оттенка. Тайный фаворит измученных авторов.
-
 reagent-name-whiskey-sour = виски сауэр
 reagent-desc-whiskey-sour = В чём секретный ингредиент? Яйца. Это яйца.
-
 reagent-name-yorsh = ёрш
 reagent-desc-yorsh = Вкус беззаботного детства.
-
 reagent-name-alexander = александр
 reagent-desc-alexander = В ходе производства ни один Александр не пострадал. Наверное...
-
 reagent-name-campari = кампари
 reagent-desc-campari = Настойка на основе ароматических трав и цитрусовых. Без ГМО!
-
 reagent-name-negroni = негрони
 reagent-desc-negroni = Американо для алкоголиков.
-
 reagent-name-oldFashioned = олд фэшен
 reagent-desc-oldFashioned = Как сказал величайший классик: "Это классика".
-
 reagent-name-badTouch = проникновение
 reagent-desc-badTouch = Входит... И выходит... И входит... Замечательно выходит!
-
-reagent-name-darkAndStormy = тьма и буря
-reagent-desc-darkAndStormy = Прямиком с Бермудских Островов! Пират слева говорит, что именно поэтому напиток и пропадает с барной стойки.
-
 reagent-name-bramble = брамбл
 reagent-desc-bramble = Ягодки, джин, и довольно стрёмный вид.
-
 reagent-name-maiTai = май тай
-reagent-desc-maiTai = Первый человек, попробовавший этот коктейль, воскликнул: ”Mai tai — roa ae!”. Что в переводе с тайского означает... Да откуда мне знать? Звучит круто!
+reagent-desc-maiTai = Первый человек, попробовавший этот коктейль, воскликнул: «Май Тай — роа ай». Что в переводе с тайского означает... Да откуда мне знать? Звучит круто!
 
 reagent-name-paloma = палома
 reagent-desc-paloma = Сверху ковбои. Снизу маракасы. Что же выбрать?
-
 reagent-name-boyarsky = боярский
 reagent-desc-boyarsky = Что делать, если ты устал от жизни? СМЕШИВАТЬ ВОДКУ!
-
 reagent-name-vodkizine = водкизин
 reagent-desc-vodkizine = Лечебное средство на основе водки, рецепт которого строго засекречен.
 reagent-name-redrum = янзер
 reagent-desc-redrum = Лечебное средство на основе рома, приготовленное по пиратскому секретному рецепту.
 reagent-name-dark-red-rum = ятсащ янзер
 reagent-desc-dark-red-rum = Неразбавленный янзер двойной дистиляции, вкусивший сего рома или заработает на последующе лечение или умрет в бою.
-
-
-

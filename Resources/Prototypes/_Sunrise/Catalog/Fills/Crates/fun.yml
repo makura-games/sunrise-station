@@ -79,7 +79,7 @@
           children:
           - id: WeaponPistolMakeshiftCrafted
           - id: WeaponRevolverMakeshift
-          - id: WeaponShotgunMakeshift
+          - id: WeaponShotgunImprovisedLoaded
           - id: WeaponSubMachineGunMakeshift
           - id: WeaponSniperMakeshift
 

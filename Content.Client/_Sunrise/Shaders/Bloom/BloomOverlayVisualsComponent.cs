@@ -12,6 +12,12 @@ namespace Content.Client._Sunrise.Shaders.Bloom;
 [RegisterComponent]
 public sealed partial class BloomOverlayVisualsComponent : Component, IComponentTreeEntry<BloomOverlayVisualsComponent>
 {
+    /// <summary>
+    /// Определяет, участвует ли источник света в дереве bloom-эффекта.
+    /// </summary>
+    [DataField]
+    public bool Enabled = true;
+
     [DataField]
     public SpriteSpecifier MaskSprite = new SpriteSpecifier.Rsi(
         new ResPath("_Sunrise/Effects/LightMasks/64.rsi"),
@@ -27,7 +33,7 @@ public sealed partial class BloomOverlayVisualsComponent : Component, IComponent
 
     public DynamicTree<ComponentTreeEntry<BloomOverlayVisualsComponent>>? Tree { get; set; }
 
-    public bool AddToTree => true;
+    public bool AddToTree => Enabled;
 
     public bool TreeUpdateQueued { get; set; }
 }

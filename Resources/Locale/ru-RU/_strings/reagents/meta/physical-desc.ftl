@@ -97,3 +97,6 @@ reagent-physical-desc-slimy = склизкое
 reagent-physical-desc-neural = нейронное
 reagent-physical-desc-unidentifiable = неопознаваемое
 reagent-physical-desc-vile = мерзкое
+reagent-physical-desc-non-newtonian = неньютоновская
+reagent-physical-desc-thin = тонкая
+reagent-physical-desc-arcryox = ледяно-голубая

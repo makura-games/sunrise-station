@@ -87,6 +87,7 @@
         Slash: 10
         Piercing: 6
   - type: Damageable
+  - type: Injurable
     damageContainer: Shield
   - type: Destructible
     thresholds:

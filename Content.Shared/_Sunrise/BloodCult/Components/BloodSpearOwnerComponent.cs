@@ -10,5 +10,5 @@ public sealed partial class BloodSpearOwnerComponent : Component
     public string ReturnSpearActionId = "ActionCultReturnBloodSpear";
 
     [ViewVariables(VVAccess.ReadOnly)]
-    public new EntityUid? Spear;
+    public EntityUid? Spear;
 }

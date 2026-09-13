@@ -31,7 +31,7 @@ To clearly separate vanilla code from our modifications, a special project folde
 2. **Partial classes:** Extensions of vanilla classes (see below).
 3. **Assets:** New sprites, sounds, textures.
 
-The selected project folder is a consequence of the active fork, not of the subsystem being touched. If the active fork is Fire, write new project code under `_Scp`. Do not move new files to `_Sunrise` just because the repository owner is `space-sunrise`, the original code came from Sunrise, or the change is a vanilla hook.
+The selected project folder is a consequence of the active fork, not of the subsystem being touched. If the active fork is Fire, write new project code under `_Scp`. Do not move new files to `_Sunrise` just because the repository owner is `makura-games`, the original code came from Sunrise, or the change is a vanilla hook.
 
 > [!TIP]
 > **Isolation principle:**

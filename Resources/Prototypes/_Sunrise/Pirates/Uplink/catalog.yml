@@ -197,15 +197,6 @@
     stock: 8
 
 - type: listing
-  id: UplinkPirateShotgunMakeshift
-  productEntity: WeaponShotgunMakeshift
-  categories:
-  - UplinkPirateRangedWeaponry
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 8
-
-- type: listing
   id: UplinkPirateSMGMakeshift
   productEntity: WeaponSubMachineGunMakeshift
   categories:
@@ -356,8 +347,8 @@
   - UplinkPirateRangedWeaponry
 
 - type: listing
-  id: UplinkPirateRevolverSpearheadBlack
-  productEntity: WeaponRevolverSpearheadBlack
+  id: UplinkPirateRevolverSpearhead
+  productEntity: WeaponRevolverSpearhead
   cost:
     Doubloon: 18
   categories:
@@ -402,14 +393,6 @@
   productEntity: WeaponRifleM16A4
   cost:
     Doubloon: 18
-  categories:
-  - UplinkPirateRangedWeaponry
-
-- type: listing
-  id: UplinkPirateSkorpion
-  productEntity: WeaponSubMachineGunSkorpion
-  cost:
-    Doubloon: 14
   categories:
   - UplinkPirateRangedWeaponry
 
@@ -519,14 +502,6 @@
   - UplinkPirateRangedWeaponry
 
 - type: listing
-  id: UplinkPirateMP38
-  productEntity: WeaponSubMachineGunMP38
-  cost:
-    Doubloon: 17
-  categories:
-  - UplinkPirateRangedWeaponry
-
-- type: listing
   id: UplinkPirate4034Sawn
   productEntity: WeaponShotgunTrenchgun4034Sawn
   cost:
@@ -572,17 +547,6 @@
   icon: { sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Base/big.rsi, state: icon }
   cost:
     Doubloon: 20
-  categories:
-  - UplinkPirateRangedWeaponry
-
-- type: listing
-  id: UplinkPirateARG
-  name: uplink-weapon-arg-name
-  description: uplink-weapon-arg-desc
-  productEntity: ClothingBackpackMessengerMercenaryBundleARG
-  icon: { sprite: _Starlight/Objects/Weapons/Guns/Rifles/arg.rsi, state: icon }
-  cost:
-    Doubloon: 25
   categories:
   - UplinkPirateRangedWeaponry
 
@@ -743,9 +707,9 @@
   name: uplink-grenade-launcher-m79-name
   description: uplink-grenade-launcher-m79-desc
   icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Launchers/m79/big.rsi, state: base }
-  productEntity: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherM79
+  productEntity: BriefcaseWeaponM79Filled
   cost:
-    Doubloon: 17
+    Doubloon: 15
   categories:
   - UplinkPirateRangedWeaponry
   conditions:
@@ -785,11 +749,11 @@
   - UplinkPirateRangedWeaponry
 
 - type: listing
-  id: UplinkPirateC40RBundle
-  name: uplink-c40r-bundle-name
-  description: uplink-c40r-bundle-desc
-  icon: { sprite: /Textures/_Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi, state: icon }
-  productEntity: ClothingBackpackDuffelSyndicateFilledSMG40
+  id: UplinkPirateVectorSuperBundle
+  name: uplink-vector-super-bundle-name
+  description: uplink-vector-super-bundle-desc
+  icon: { sprite: /Textures/_Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateFilledVectorSuper
   cost:
     Doubloon: 29
   categories:
@@ -2258,19 +2222,6 @@
       - SurplusBundle
 
 - type: listing
-  id: UplinkPirateBorgModuleUtility
-  productEntity: BorgModulePirateUtility
-  cost:
-    Doubloon: 5
-  categories:
-  - UplinkPirateAllies
-  conditions:
-  - !type:BuyerWhitelistCondition
-    blacklist:
-      components:
-      - SurplusBundle
-
-- type: listing
   id: UplinkPirateBorgSyndicateDerelict
   productEntity: PlayerBorgSyndicateDerelictGhostRole
   icon: { sprite: Mobs/Silicon/chassis.rsi, state: synd_sec_derelict }
@@ -2690,14 +2641,6 @@
   - UplinkPiratePointless
 
 - type: listing
-  id: UplinkPiratePaintWarboss
-  productEntity: MechPaintDollHouseWarboss
-  cost:
-    Doubloon: 5
-  categories:
-  - UplinkPiratePointless
-
-- type: listing
   id: UplinkPirateOperativeSkirt
   name: uplink-operative-skirt-name
   description: uplink-operative-skirt-desc
@@ -2909,7 +2852,7 @@
   id: UplinkPirateDollHouseBundle
   name: uplink-mech-teleporter-ussp-name
   description: uplink-mech-teleporter-ussp-desc
-  icon: { sprite: /Textures/Objects/Specific/Mech/durand.rsi, state: dollhouse }
+  icon: { sprite: /Textures/_Sunrise/Objects/Specific/Mech/durand.rsi, state: dollhouse }
   productEntity: CratePirateMechDollHouseBundle
   cost:
     Doubloon: 300

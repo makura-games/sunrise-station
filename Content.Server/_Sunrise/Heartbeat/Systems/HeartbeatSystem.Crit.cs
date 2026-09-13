@@ -8,6 +8,8 @@ namespace Content.Server._Sunrise.Heartbeat.Systems;
 
 public sealed partial class HeartbeatSystem
 {
+    [Dependency] private DamageableSystem _damageable = default!;
+
     // Минимальное и максимальное время между ударами сердца
     private const float MinimumCooldown = 0.5f;
     private const float MaximumCooldown = 3f;
@@ -46,7 +48,7 @@ public sealed partial class HeartbeatSystem
         if (!Resolve(ent.Owner, ref damageable))
             return false;
 
-        var totalDamage = damageable.TotalDamage.Float();
+        var totalDamage = _damageable.GetTotalDamage((ent.Owner, damageable)).Float();
 
         var pitch = Math.Min(1f, 100f / totalDamage);
 

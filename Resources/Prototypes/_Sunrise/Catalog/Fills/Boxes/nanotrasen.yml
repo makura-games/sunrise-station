@@ -252,9 +252,8 @@
       storagebase: !type:AllSelector
         children:
         - id: MagazineRifleHeavySP
-          amount: 2
+          amount: 3
         - id: MagazineRifleHeavyFMJ
-        - id: MagazineRifleHeavyHP
 
 - type: entity
   name: .308 incendiary magazines kit
@@ -280,9 +279,8 @@
       storagebase: !type:AllSelector
         children:
         - id: MagazineRifleM52SP
-          amount: 2
+          amount: 3
         - id: MagazineRifleM52FMJ
-        - id: MagazineRifleM52HP
 
 - type: entity
   name: 5,56 magazines kit
@@ -295,9 +293,8 @@
       storagebase: !type:AllSelector
         children:
         - id: MagazineRifleSP
-          amount: 2
+          amount: 3
         - id: MagazineRifleFMJ
-        - id: MagazineRifleHP
 
 - type: entity
   name: 5,56 incendiary magazines kit

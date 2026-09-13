@@ -39,14 +39,6 @@
   description: construction-graph-tag-sunflower-crown-desc
 
 - type: construction
-  id: PrivateSecHardsuit
-  graph: PrivateSecHardsuit
-  startNode: start
-  targetNode: privateSec
-  category: construction-category-clothing
-  objectType: Item
-
-- type: construction
   name: construction-graph-tag-atmoscross
   id: AtmosCrossCraft
   graph: AtmosCrossCraft
@@ -207,3 +199,13 @@
   category: construction-category-misc
   objectType: Item
   description: crafting-menu-text-improvised-modular-receiver
+
+- type: construction
+  name: crafting-menu-name-improvised-light-rifle-magazine
+  id: MagazineLightRifleImprovisedEmpty
+  graph: ImprovisedMagazineLightRifleGraph
+  startNode: start
+  targetNode: shell
+  category: construction-category-weapons
+  objectType: Item
+  description: crafting-menu-text-improvised-light-rifle-magazine

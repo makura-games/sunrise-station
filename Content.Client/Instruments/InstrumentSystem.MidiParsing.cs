@@ -17,7 +17,7 @@ public sealed partial class InstrumentSystem
     /// </remarks>
     private bool TrySetChannels(EntityUid uid, byte[] data)
     {
-        if (!MidiParser.MidiParser.TryGetMidiTracks(data, out var tracks, out var error))
+        if (!TryGetMidiTracks(data, out var tracks, out var error)) // Sunrise-Edit
         {
             Log.Error(error);
             return false;

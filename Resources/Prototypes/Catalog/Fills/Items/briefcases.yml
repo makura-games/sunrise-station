@@ -25,7 +25,9 @@
         children:
         - id: WeaponSniperHristov
         - id: MagazineBoxAntiMateriel
+        - id: MagazineBoxAntiMateriel # Sunrise-add
         - id: MagazineBauer127Penetrator # Sunrise-add
+        - id: MagazineBauer127HP # Sunrise-add
         - id: ClothingNeckTieRed
         - id: ClothingHandsGlovesLatex
         - id: ClothingUniformJumpsuitArmouredBlack # Sunrise-edit
@@ -99,21 +101,6 @@
     containers:
       storagebase:
         id: WeaponShotgunBulldog
-
-- type: entity
-  id: BriefcaseWeaponDMRFilled
-  parent: BriefcaseWeapon
-  name: secure estoc case
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      # Sunrise-start
-      storagebase: !type:AllSelector
-        children:
-        - id: WeaponRifleEstoc
-        - id: MagazineRifle
-        - id: MagazineRifleAP
-      # Sunrise-end
 
 - type: entity
   id: BriefcaseWeaponChinaLakeFilled

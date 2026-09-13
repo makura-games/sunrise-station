@@ -47,9 +47,7 @@
       storagebase: !type:AllSelector
         children:
         - id: MagazineLightRifleSP
-          amount: 1
-        - id: MagazineLightRifleHP
-          amount: 1
+          amount: 2 # Sunrise-Edit - заменяем удалённый HP-магазин на базовый
         - id: MagazineLightRifleFMJ
           amount: 1
         - id: MagazineLightRifleAP

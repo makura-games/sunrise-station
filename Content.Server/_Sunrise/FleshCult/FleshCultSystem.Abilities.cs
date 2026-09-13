@@ -1,10 +1,11 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Server.Body.Components;
 using Content.Server.Construction.Components;
 using Content.Server.Traits.Assorted;
 using Content.Shared._Sunrise;
 using Content.Shared._Sunrise.FleshCult;
+using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
 using Content.Shared.Chemistry.Components;
@@ -32,11 +33,14 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.FleshCult;
 
 public sealed partial class FleshCultSystem
 {
+    private static readonly ProtoId<BodyTypePrototype> SkeletonBodyType = "SkeletonNormal";
+
     private void InitializeAbilities()
     {
         SubscribeLocalEvent<FleshAbilitiesComponent, FleshCultistHandTransformEvent>(OnHandTransformEvent);
@@ -132,7 +136,7 @@ public sealed partial class FleshCultSystem
             switch (targetState.CurrentState)
             {
                 case MobState.Dead:
-                    if (EntityManager.TryGetComponent(target, out HumanoidAppearanceComponent? humanoidAppearance))
+                    if (TryComp(target, out HumanoidProfileComponent? humanoidAppearance))
                     {
                         if (!_speciesWhitelist.Contains(humanoidAppearance.Species))
                         {
@@ -228,15 +232,15 @@ public sealed partial class FleshCultSystem
             _bloodstreamSystem.SpillAllSolutions((args.Args.Target.Value, bloodstream));
         }
 
-        if (TryComp<HumanoidAppearanceComponent>(args.Args.Target, out var HuAppComponent))
+        if (TryComp<HumanoidProfileComponent>(args.Args.Target, out var HuAppComponent))
         {
             if (TryComp(args.Args.Target.Value, out ContainerManagerComponent? container))
             {
-                foreach (var cont in container.GetAllContainers().ToArray())
+                foreach (var cont in _containerSystem.GetAllContainers(args.Args.Target.Value, container).ToArray())
                 {
                     foreach (var ent in cont.ContainedEntities.ToArray())
                     {
-                        if (HasComp<BodyPartComponent>(ent))
+                        if (HasComp<OrganComponent>(ent))
                         {
                             continue;
                         }
@@ -247,36 +251,29 @@ public sealed partial class FleshCultSystem
             }
 
             // SUNRISE-TODO: Убрать конечности хирургией а тело заменить на скелета
-            if (TryComp<BodyComponent>(args.Args.Target, out var bodyComponent))
+            if (TryComp<BodyComponent>(args.Args.Target, out var body))
             {
-                var parts = _body.GetBodyChildren(args.Args.Target, bodyComponent).ToArray();
+                if (body.Organs == null)
+                    return;
 
-                foreach (var part in parts)
+                foreach (var organ in body.Organs.ContainedEntities)
                 {
-                    if (part.Component.PartType == BodyPartType.Head)
+                    if (!TryComp<OrganComponent>(organ, out var organComp))
                         continue;
 
-                    if (part.Component.PartType == BodyPartType.Torso)
-                    {
-                        foreach (var organ in _body.GetPartOrgans(part.Id, part.Component))
-                        {
-                            //_body.RemoveOrgan(organ.Id);
-                            QueueDel(organ.Id);
-                        }
-                    }
-                    else
-                    {
-                        QueueDel(part.Id);
-                    }
+                    if (organComp.Category == "Head")
+                        continue;
+
+                    QueueDel(organ);
                 }
             }
 
-            var bodyType = _prototypeManager.Index<BodyTypePrototype>("SkeletonNormal");
-            foreach (var (key, id) in bodyType.Sprites)
+            var bodyType = _prototypeManager.Index(SkeletonBodyType);
+            foreach (var (key, data) in bodyType.Layers)
             {
                 if (key != HumanoidVisualLayers.Head)
                 {
-                    _sharedHuApp.SetBaseLayerId(args.Args.Target.Value, key, id, humanoid: HuAppComponent);
+                    _sunriseBody.SetBaseLayerData(args.Args.Target.Value, key, data);
                 }
             }
 
@@ -357,19 +354,23 @@ public sealed partial class FleshCultSystem
             {
                 continue;
             }
-            foreach (var puddleSolutionContent in puddleSolution.Value.Comp.Solution.ToList())
+            foreach (var puddleSolutionContent in puddleSolution.Value.Comp.Solution.Contents.ToList())
             {
                 if (!component.BloodWhitelist.Contains(puddleSolutionContent.Reagent.Prototype))
                     continue;
 
-                var blood = puddleSolution.Value.Comp.Solution.SplitSolutionWithOnly(
-                    puddleSolutionContent.Quantity, puddleSolutionContent.Reagent.Prototype);
+                var amount = _solutionContainerSystem.RemoveReagent(
+                    puddleSolution.Value,
+                    puddleSolutionContent.Reagent,
+                    puddleSolutionContent.Quantity);
+                if (amount <= FixedPoint2.Zero)
+                    continue;
+
+                var blood = new Solution();
+                blood.AddReagent(puddleSolutionContent.Reagent, amount);
 
                 absorbBlood.AddSolution(blood, _prototypeManager);
             }
-
-            var ev = new SolutionContainerChangedEvent(puddleSolution.Value.Comp.Solution, solution);
-            RaiseLocalEvent(puddle, ref ev);
         }
 
         if (absorbBlood.Volume == 0)
@@ -469,7 +470,7 @@ public sealed partial class FleshCultSystem
             // Удаляем компонент наручников, если есть
             if (HasComp<CuffableComponent>(uid))
             {
-                EntityManager.RemoveComponent<CuffableComponent>(uid);
+                RemComp<CuffableComponent>(uid);
             }
         }
         else
@@ -516,13 +517,18 @@ public sealed partial class FleshCultSystem
                 _audioSystem.PlayPvs(component.SoundMutation, uid, component.SoundMutation.Params);
                 _popup.PopupEntity(Loc.GetString("flesh-cultist-transform-body-remove",
                     ("User", uid), ("Mod", equippedItem)), uid, PopupType.LargeCaution);
-                EntityManager.DeleteEntity(equippedItem.Value);
+                Del(equippedItem.Value);
                 _movement.RefreshMovementSpeedModifiers(uid);
                 args.Handled = true;
                 return;
             }
 
             _inventory.TryUnequip(uid, args.TargetSlot, true, true);
+        }
+
+        foreach (var slot in args.UnequipSlots)
+        {
+            _inventory.TryUnequip(uid, slot, true, true);
         }
 
         var newBodyMod = Spawn(args.Prototype, Transform(uid).Coordinates);
@@ -566,11 +572,11 @@ public sealed partial class FleshCultSystem
 
         var offsetValue = Vector2Helpers.Normalized(xform.LocalRotation.ToWorldVec());
         var targetCord = xform.Coordinates.Offset(offsetValue).SnapToGrid(EntityManager);
-        var tilerefs = Enumerable.ToArray(grid.GetLocalTilesIntersecting(
+        var tilerefs = Enumerable.ToArray(_mapSystem.GetLocalTilesIntersecting(xform.GridUid.Value, grid,
             new Box2(targetCord.Position + new Vector2(-radius, -radius), targetCord.Position + new Vector2(radius, radius))));
         foreach (var tileref in tilerefs)
         {
-            var tileCoordinates = grid.GridTileToLocal(tileref.GridIndices);
+            var tileCoordinates = _mapSystem.GridTileToLocal(xform.GridUid.Value, grid, tileref.GridIndices);
             foreach (var entity in _turf.GetEntitiesInTile(tileCoordinates))
             {
                 PhysicsComponent? physics = null; // We use this to check if it's impassable
@@ -585,7 +591,7 @@ public sealed partial class FleshCultSystem
             }
         }
         _audioSystem.PlayPvs(component.SoundMutation, uid, component.SoundMutation.Params);
-        EntityManager.SpawnEntity(component.FleshHeartId, targetCord);
+        Spawn(component.FleshHeartId, targetCord);
         args.Handled = true;
     }
 

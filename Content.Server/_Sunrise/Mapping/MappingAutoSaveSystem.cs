@@ -1,9 +1,9 @@
 using Content.Server._Sunrise.Decals;
-using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Construction.Commands;
 using Content.Server.DeviceLinking.Systems;
 using Content.Shared._Sunrise.SunriseCCVars;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Maps;
 using Content.Shared.Parallax.Biomes;
 using Robust.Shared.Console;
@@ -20,20 +20,20 @@ namespace Content.Server._Sunrise.Mapping;
 /// <summary>
 /// Runs mapper cleanup commands automatically right before maps are serialized.
 /// </summary>
-public sealed class MappingAutoSaveSystem : EntitySystem
+public sealed partial class MappingAutoSaveSystem : EntitySystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly TileSystem _tile = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly WalledDecalRemovalSystem _walledDecal = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefinition = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IConsoleHost _console = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private DeviceLinkSystem _deviceLink = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private TileSystem _tile = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private WalledDecalRemovalSystem _walledDecal = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinition = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IConsoleHost _console = default!;
 
     private PendingAutoSaveConsoleContext? _pendingAutoSaveConsoleContext;
 

@@ -17,3 +17,9 @@
   name: role-type-tsf-aligned-name
   color: '#22a7ff'
   symbol: "*"
+
+- type: roleType
+  id: SunriseHeadRevolutionary
+  name: role-type-team-antagonist-name
+  color: '#5e9cff'
+  symbol: "⚔"

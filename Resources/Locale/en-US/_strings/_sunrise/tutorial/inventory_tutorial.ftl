@@ -1,6 +1,10 @@
 inventory-tutorial-name = Inventory, hands, and storage
 inventory-tutorial-tooltip = Learn how to wear items, use pockets, open your backpack and toolbelt, and keep track of the active hand.
 
+inv-tut-welcome-bubble = Welcome! This tutorial covers hands, equipment, and item storage.
+inv-tut-welcome-chat = Welcome! You will learn how to switch hands, pick up, drop, and throw items, equip clothing, and organize items in pockets, a backpack, and a belt.
+inv-tut-welcome-tts = Welcome! You will learn how to switch hands, pick up, drop, and throw items, equip clothing, and organize items in pockets, a backpack, and a belt.
+
 inv-tut-open-inventory-bubble = Press the highlighted inventory icon [tutkeybind="OpenInventoryMenu"].
 inv-tut-open-inventory-chat = Press the highlighted inventory icon on the HUD. The window shows your worn slots, pockets, backpack, belt, and both hands.
 inv-tut-open-inventory-tts = Press the highlighted inventory icon. The window shows your worn slots, pockets, backpack, belt, and both hands.
@@ -138,6 +142,9 @@ inv-tut-pick-up-second-hand-item-tts = Each hand now holds a different item. Wat
 inv-tut-drop-second-hand-item-bubble = Drop the screwdriver from the active hand [tutkeybind="Drop"].
 inv-tut-drop-second-hand-item-chat = The drop key affects only the active hand. The pen in your other hand stays with you.
 inv-tut-drop-second-hand-item-tts = The drop key affects only the active hand. The pen in your other hand stays with you.
+inv-tut-repair-hand-items-bubble = Pick up the pen and screwdriver with [tutkeybind="UIClick"]. Both items must be in your hands.
+inv-tut-repair-hand-items-chat = Return the pen and screwdriver to your hands to resume the tutorial from the required state.
+inv-tut-repair-hand-items-tts = Pick up the pen and screwdriver. Both items must be in your hands.
 inv-tut-switch-to-first-hand-bubble = Switch the active hand to the pen [tutkeybind="SwapHands"].
 inv-tut-switch-to-first-hand-chat = The highlight should move to the hand holding the pen. Only then will the throw key affect the pen.
 inv-tut-switch-to-first-hand-tts = The highlight should move to the hand holding the pen. Only then will the throw key affect the pen.

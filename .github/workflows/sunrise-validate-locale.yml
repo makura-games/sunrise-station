@@ -1,0 +1,31 @@
+name: Locale Validator
+
+on:
+  push:
+    branches: [ staging, trying ]
+  pull_request:
+    types: [opened, reopened, synchronize]
+    paths:
+      - '**.yml'
+      - '**.ftl'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  validate_ymls:
+    name: Validate Locales
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.6.0
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          pip install --no-cache-dir PyYAML
+      - name: Validate Locales
+        run: |
+          python3 Tools/_sunrise/Schemas/validate_yml.py Resources/Locale/ Resources/Prototypes/ --ignore Tools/_sunrise/Schemas/ignore_list.yml

@@ -5,27 +5,31 @@ using Robust.Client.GameObjects;
 using Content.Client.UserInterface.Systems.Sandbox;
 using Content.Shared._Sunrise.Misc.Events;
 using Content.Shared.Access.Components;
+using Content.Shared.Containers;
 using Content.Shared.Administration;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Physics.Components;
 
 namespace Content.Client._Sunrise.Sandbox.Access.Systems;
 /// <summary>
 /// Manages the mapping access overlay and exposes its current UI-facing state.
 /// </summary>
-public sealed class MappingAccessOverlaySystem : EntitySystem
+public sealed partial class MappingAccessOverlaySystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly IClientAdminManager _admin = default!;
-    [Dependency] private readonly IClickMapManager _clickMap = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IResourceCache _resource = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private IClientAdminManager _admin = default!;
+    [Dependency] private IClickMapManager _clickMap = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IOverlayManager _overlayManager = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IResourceCache _resource = default!;
+    [Dependency] private EntityQuery<ContainerFillComponent> _containerFillQuery = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
     private MappingAccessOverlay? _overlay;
     private MappingAccessOutlineOverlay? _outlineOverlay;
@@ -182,11 +186,11 @@ public sealed class MappingAccessOverlaySystem : EntitySystem
 
         if (enabled)
         {
-            _readerResolver = new(EntityManager, _prototype);
+            _readerResolver = new(EntityManager, _prototype, _containerFillQuery);
             _readerResolver.MarkAccessReaderLookupDirty();
             _tightBounds = new(_clickMap);
-            _overlay = new(EntityManager, _lookup, _sprite, _prototype, Loc, _resource, _ui, _readerResolver, _tightBounds);
-            _outlineOverlay = new(EntityManager, _sprite, _prototype, _clyde, _readerResolver, _tightBounds);
+            _overlay = new(EntityManager, _lookup, _sprite, _prototype, Loc, _resource, _ui, _readerResolver, _tightBounds, _physicsQuery);
+            _outlineOverlay = new(EntityManager, _sprite, _prototype, _clyde, _readerResolver, _tightBounds, _physicsQuery);
             _overlay.BodyFilter = BodyFilter;
             _overlay.ElectronicsOnly = ElectronicsOnly;
             _outlineOverlay.BodyFilter = BodyFilter;

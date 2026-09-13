@@ -3,10 +3,10 @@ using Content.Shared._Sunrise.Tutorial.Components;
 
 namespace Content.Server._Sunrise.Tutorial;
 
-public sealed class TutorialRadioIsolationSystem : EntitySystem
+public sealed partial class TutorialRadioIsolationSystem : EntitySystem
 {
-    private EntityQuery<TutorialPlayerComponent> _tutorialPlayerQuery;
-    private EntityQuery<TransformComponent> _transformQuery;
+    [Dependency] private EntityQuery<TutorialPlayerComponent> _tutorialPlayerQuery = default!;
+    [Dependency] private EntityQuery<TransformComponent> _transformQuery = default!;
 
     public override void Initialize()
     {
@@ -14,8 +14,6 @@ public sealed class TutorialRadioIsolationSystem : EntitySystem
 
         SubscribeLocalEvent<RadioReceiveAttemptEvent>(OnRadioReceiveAttempt);
 
-        _tutorialPlayerQuery = GetEntityQuery<TutorialPlayerComponent>();
-        _transformQuery = GetEntityQuery<TransformComponent>();
     }
 
     private void OnRadioReceiveAttempt(ref RadioReceiveAttemptEvent args)

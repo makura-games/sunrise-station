@@ -42,3 +42,14 @@ lathe-category-command = Командный состав
 lathe-category-hats = Головные уборы
 lathe-category-jumpsuits = Комбинезоны
 lathe-category-neck = На шею
+lathe-category-circuit-tile = Схема
+lathe-category-concrete-tile = Бетон
+lathe-category-dark-tile = Тёмный
+lathe-category-faux-tile = Имитированные
+lathe-category-maints-tile = Технические
+lathe-category-marble = Мрамор
+lathe-category-steel-tile = Сталь
+lathe-category-white-tile = Белый
+lathe-category-wood-tile = Дерево
+
+# Science

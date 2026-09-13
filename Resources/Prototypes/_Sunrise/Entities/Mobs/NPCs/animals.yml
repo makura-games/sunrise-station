@@ -1,4 +1,15 @@
 - type: entity
+  parent: [SolutionWeapon, SolutionTiny]
+  id: SolutionVenomClownSpider
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Laughter
+        Quantity: 50
+
+- type: entity
   name: inferior vulpkanin
   id: MobBaseInferiorVulpkanin
   parent: MobBaseAncestor
@@ -27,8 +38,6 @@
     interactSuccessString: petting-success-monkey
     interactFailureString: petting-failure-monkey
     interactSuccessSpawn: EffectHearts
-    interactSuccessSound:
-      path: /Audio/Animals/lizard_happy.ogg
     interactFailureSound:
       path: /Audio/Items/wirecutter.ogg
   - type: MobThresholds
@@ -76,7 +85,15 @@
       amount: 2
   - type: AlwaysRevolutionaryConvertible
   - type: Body
-    prototype: InferiorVulpkanin
+  - type: EntityTableContainerFill
+    containers:
+      body_organs: !type:AllSelector
+        children:
+        - id: OrganAnimalLungs
+        - id: OrganAnimalStomach
+        - id: OrganAnimalLiver
+        - id: OrganInferiorVulpkaninHeart
+        - id: OrganAnimalKidneys
 
 - type: entity
   name: inferior vulpkanin
@@ -88,8 +105,10 @@
       types:
         Blunt: 2
         Piercing: 7
-      groups:
-        Burn: 3
+        Heat: 0.75
+        Shock: 0.75
+        Cold: 0.75
+        Caustic: 0.75
     clumsySound:
       path: /Audio/Voice/Reptilian/reptilian_scream.ogg
 

@@ -1,8 +1,7 @@
 - type: marking
   id: ResomiTail
   bodyPart: Chest
-  markingCategory: Tail
-  speciesRestriction: [Resomi]
+  groupWhitelist: [ Resomi ]
   forcedColoring: true
   sprites:
   - sprite: _Sunrise/Mobs/Customization/resomi_parts.rsi
@@ -11,8 +10,7 @@
 - type: marking
   id: ResomiTailFeathers
   bodyPart: Chest
-  markingCategory: Tail
-  speciesRestriction: [Resomi]
+  groupWhitelist: [ Resomi ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/resomi_parts.rsi
     state: tail_feathers
@@ -20,8 +18,7 @@
 - type: marking
   id: ResomiLArmFeathers
   bodyPart: LHand
-  markingCategory: Arms
-  speciesRestriction: [Resomi]
+  groupWhitelist: [ Resomi ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/resomi_parts.rsi
     state: l_hand_feathers
@@ -29,8 +26,7 @@
 - type: marking
   id: ResomiLLegFeathers
   bodyPart: LFoot
-  markingCategory: Legs
-  speciesRestriction: [Resomi]
+  groupWhitelist: [ Resomi ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/resomi_parts.rsi
     state: l_foot_feathers
@@ -38,8 +34,7 @@
 - type: marking
   id: ResomiRArmFeathers
   bodyPart: RHand
-  markingCategory: Arms
-  speciesRestriction: [Resomi]
+  groupWhitelist: [ Resomi ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/resomi_parts.rsi
     state: r_hand_feathers
@@ -47,8 +42,7 @@
 - type: marking
   id: ResomiRLegFeathers
   bodyPart: RFoot
-  markingCategory: Legs
-  speciesRestriction: [Resomi]
+  groupWhitelist: [ Resomi ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/resomi_parts.rsi
     state: r_foot_feathers
@@ -56,8 +50,7 @@
 - type: marking
   id: ResomiFluff
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Resomi]
+  groupWhitelist: [ Resomi ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/resomi_parts.rsi
     state: fluff
@@ -65,8 +58,7 @@
 - type: marking
   id: ResomiFluffHead
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Resomi]
+  groupWhitelist: [ Resomi ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/resomi_parts.rsi
     state: fluff_head
@@ -74,8 +66,7 @@
 - type: marking
   id: ResomiFluffHeadUp
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Resomi]
+  groupWhitelist: [ Resomi ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/resomi_parts.rsi
     state: fluff_head_up

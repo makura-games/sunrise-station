@@ -1,4 +1,4 @@
-﻿- type: species
+- type: species
   id: Demon
   name: species-name-demon
   roundStart: true
@@ -7,7 +7,6 @@
   - DemonNormal
 #  - DemonSlim
   defaultSkinTone: "#34a223"
-  markingLimits: MobDemonMarkingLimits
   dollPrototype: MobDemonDummy
   skinColoration: Hues
   naming: firstlast
@@ -18,238 +17,157 @@
 - type: bodyType
   id: DemonNormal
   name: body-normal
-  sprites:
-    Head: MobDemonHead
-    Hair: MobHumanoidAnyMarking
-    FacialHair: MobHumanoidAnyMarking
-    Snout: MobHumanoidAnyMarking
-    Chest: MobDemonTorso
-    HeadTop: MobHumanoidAnyMarking
-    HeadSide: MobHumanoidAnyMarking
-    Tail: MobHumanoidAnyMarking
-    Eyes: MobHumanoidEyes
-    LArm: MobDemonLArm
-    RArm: MobDemonRArm
-    LHand: MobDemonLHand
-    RHand: MobDemonRHand
-    LLeg: MobDemonLLeg
-    RLeg: MobDemonRLeg
-    LFoot: MobDemonLFoot
-    RFoot: MobDemonRFoot
-    Back: MobHumanoidAnyMarking
-
+  visualKey: body-normal
+  layers:
+    Head:
+      sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
+      state: head_m
+    Chest:
+      sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
+      state: torso_m
+    Eyes:
+      sprite: Mobs/Customization/eyes.rsi
+      state: eyes
+    LArm:
+      sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
+      state: l_arm
+    RArm:
+      sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
+      state: r_arm
+    LHand:
+      sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
+      state: l_hand
+    RHand:
+      sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
+      state: r_hand
+    LLeg:
+      sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
+      state: l_leg
+    RLeg:
+      sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
+      state: r_leg
+    LFoot:
+      sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
+      state: l_foot
+    RFoot:
+      sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
+      state: r_foot
+  sexLayers:
+    Male:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
+        state: head_m
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
+        state: torso_m
+    Female:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
+        state: head_f
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
+        state: torso_f
 - type: bodyType
   id: DemonSlim
   name: body-slim
+  visualKey: body-slim
   sexRestrictions:
   - Male
-  sprites:
-    Head: MobDemonSlimHead
-    Hair: MobHumanoidAnyMarking
-    FacialHair: MobHumanoidAnyMarking
-    Snout: MobHumanoidAnyMarking
-    Chest: MobDemonSlimTorso
-    HeadTop: MobHumanoidAnyMarking
-    HeadSide: MobHumanoidAnyMarking
-    Tail: MobHumanoidAnyMarking
-    Eyes: MobHumanoidEyes
-    LArm: MobDemonSlimLArm
-    RArm: MobDemonSlimRArm
-    LHand: MobDemonSlimLHand
-    RHand: MobDemonSlimRHand
-    LLeg: MobDemonSlimLLeg
-    RLeg: MobDemonSlimRLeg
-    LFoot: MobDemonSlimLFoot
-    RFoot: MobDemonSlimRFoot
-    Back: MobHumanoidAnyMarking
-
-- type: markingPoints
-  id: MobDemonMarkingLimits
-  points:
-    Hair:
-      points: 1
-      required: false
-    FacialHair:
-      points: 1
-      required: false
-    HeadTop:
-      points: 1
-      required: false
-    HeadSide:
-      points: 1
-      required: false
+  layers:
+    Head:
+      sprite: Mobs/Species/Slim/demon.rsi
+      state: head_slim
     Chest:
-      points: 1
+      sprite: Mobs/Species/Slim/demon.rsi
+      state: torso_slim
+    Eyes:
+      sprite: Mobs/Customization/eyes.rsi
+      state: eyes
+    LArm:
+      sprite: Mobs/Species/Slim/demon.rsi
+      state: l_arm_slim
+    RArm:
+      sprite: Mobs/Species/Slim/demon.rsi
+      state: r_arm_slim
+    LHand:
+      sprite: Mobs/Species/Slim/demon.rsi
+      state: l_hand_slim
+    RHand:
+      sprite: Mobs/Species/Slim/demon.rsi
+      state: r_hand_slim
+    LLeg:
+      sprite: Mobs/Species/Slim/demon.rsi
+      state: l_leg_slim
+    RLeg:
+      sprite: Mobs/Species/Slim/demon.rsi
+      state: r_leg_slim
+    LFoot:
+      sprite: Mobs/Species/Slim/demon.rsi
+      state: l_foot_slim
+    RFoot:
+      sprite: Mobs/Species/Slim/demon.rsi
+      state: r_foot_slim
+  sexLayers:
+    Female:
+      Head:
+        sprite: Mobs/Species/Slim/demon.rsi
+        state: head_slim_f
+      Chest:
+        sprite: Mobs/Species/Slim/demon.rsi
+        state: torso_slim_f
+
+- type: markingsGroup
+  id: Demon
+  limits:
+    enum.HumanoidVisualLayers.Hair:
+      limit: 1
       required: false
-    Tail:
-      points: 1
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.HeadSide:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Chest:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Tail:
+      limit: 1
       required: true
-      defaultMarkings: [ DemonTailDefault ]
-    Snout:
-      points: 1
+      default: [ DemonTailDefault ]
+    enum.HumanoidVisualLayers.Snout:
+      limit: 1
       required: false
-    Legs:
-      points: 2
+    enum.HumanoidVisualLayers.LArm:
+      limit: 1
       required: false
-    Arms:
-      points: 2
+    enum.HumanoidVisualLayers.RArm:
+      limit: 1
       required: false
-    Back:
-      points: 1
+    enum.HumanoidVisualLayers.LHand:
+      limit: 1
       required: false
-
-- type: humanoidBaseSprite
-  id: MobDemonHead
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
-    state: head_m
-
-- type: humanoidBaseSprite
-  id: MobDemonHeadMale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
-    state: head_m
-
-- type: humanoidBaseSprite
-  id: MobDemonHeadFemale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
-    state: head_f
-
-- type: humanoidBaseSprite
-  id: MobDemonTorso
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
-    state: torso_m
-
-- type: humanoidBaseSprite
-  id: MobDemonTorsoMale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
-    state: torso_m
-
-- type: humanoidBaseSprite
-  id: MobDemonTorsoFemale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
-    state: torso_f
-
-- type: humanoidBaseSprite
-  id: MobDemonLLeg
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
-    state: l_leg
-
-- type: humanoidBaseSprite
-  id: MobDemonLHand
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
-    state: l_hand
-
-- type: humanoidBaseSprite
-  id: MobDemonLArm
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
-    state: l_arm
-
-- type: humanoidBaseSprite
-  id: MobDemonLFoot
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
-    state: l_foot
-
-- type: humanoidBaseSprite
-  id: MobDemonRLeg
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
-    state: r_leg
-
-- type: humanoidBaseSprite
-  id: MobDemonRHand
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
-    state: r_hand
-
-- type: humanoidBaseSprite
-  id: MobDemonRArm
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
-    state: r_arm
-
-- type: humanoidBaseSprite
-  id: MobDemonRFoot
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
-    state: r_foot
-
-- type: humanoidBaseSprite
-  id: MobDemonSlimHead
-  baseSprite:
-    sprite: Mobs/Species/Slim/demon.rsi
-    state: head_slim
-
-- type: humanoidBaseSprite
-  id: MobDemonSlimHeadFemale
-  baseSprite:
-    sprite: Mobs/Species/Slim/demon.rsi
-    state: head_slim_f
-
-- type: humanoidBaseSprite
-  id: MobDemonSlimTorso
-  baseSprite:
-    sprite: Mobs/Species/Slim/demon.rsi
-    state: torso_slim
-
-- type: humanoidBaseSprite
-  id: MobDemonSlimTorsoFemale
-  baseSprite:
-    sprite: Mobs/Species/Slim/demon.rsi
-    state: torso_slim_f
-
-- type: humanoidBaseSprite
-  id: MobDemonSlimLLeg
-  baseSprite:
-    sprite: Mobs/Species/Slim/demon.rsi
-    state: l_leg_slim
-
-- type: humanoidBaseSprite
-  id: MobDemonSlimLArm
-  baseSprite:
-    sprite: Mobs/Species/Slim/demon.rsi
-    state: l_arm_slim
-
-- type: humanoidBaseSprite
-  id: MobDemonSlimLHand
-  baseSprite:
-    sprite: Mobs/Species/Slim/demon.rsi
-    state: l_hand_slim
-
-- type: humanoidBaseSprite
-  id: MobDemonSlimLFoot
-  baseSprite:
-    sprite: Mobs/Species/Slim/demon.rsi
-    state: l_foot_slim
-
-- type: humanoidBaseSprite
-  id: MobDemonSlimRLeg
-  baseSprite:
-    sprite: Mobs/Species/Slim/demon.rsi
-    state: r_leg_slim
-
-- type: humanoidBaseSprite
-  id: MobDemonSlimRArm
-  baseSprite:
-    sprite: Mobs/Species/Slim/demon.rsi
-    state: r_arm_slim
-
-- type: humanoidBaseSprite
-  id: MobDemonSlimRHand
-  baseSprite:
-    sprite: Mobs/Species/Slim/demon.rsi
-    state: r_hand_slim
-
-- type: humanoidBaseSprite
-  id: MobDemonSlimRFoot
-  baseSprite:
-    sprite: Mobs/Species/Slim/demon.rsi
-    state: r_foot_slim
+    enum.HumanoidVisualLayers.RHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Back:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Overlay:
+      limit: 1
+      required: false

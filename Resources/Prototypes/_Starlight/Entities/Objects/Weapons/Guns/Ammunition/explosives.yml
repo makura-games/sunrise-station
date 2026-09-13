@@ -40,6 +40,7 @@
       types:
         Blunt: 100
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
@@ -176,6 +177,7 @@
     sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
     state: rocket60mm
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
@@ -360,6 +362,7 @@
   - type: Explosive
     maxTileBreak: 0
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:

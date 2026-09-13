@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
@@ -26,21 +26,22 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.BloodCult.Pylon;
 
-public sealed class PylonSystem : EntitySystem
+public sealed partial class PylonSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly BloodstreamSystem _blood = default!;
-    [Dependency] private readonly DamageableSystem _damageSystem = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly TileSystem _tile = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefinition = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private BloodstreamSystem _blood = default!;
+    [Dependency] private DamageableSystem _damageSystem = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private MobStateSystem _mobStateSystem = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private TileSystem _tile = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinition = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private MapSystem _map = default!;
 
     public override void Initialize()
     {
@@ -108,7 +109,7 @@ public sealed class PylonSystem : EntitySystem
             return;
 
         var radius = comp.TileConvertRange;
-        var tilesRefs = grid.GetLocalTilesIntersecting(new Box2(pylonPos.Position + new Vector2(-radius, -radius),
+        var tilesRefs = _map.GetLocalTilesIntersecting(gridUid.Value, grid, new Box2(pylonPos.Position + new Vector2(-radius, -radius),
             pylonPos.Position + new Vector2(radius, radius)));
         var tiles = ShuffleTiles(tilesRefs);
 
@@ -188,11 +189,12 @@ public sealed class PylonSystem : EntitySystem
             if (_mobStateSystem.IsDead(playerEntity))
                 continue;
 
-            var playerDamageComp = EntityManager.TryGetComponent<DamageableComponent>(playerEntity, out var damageComp)
+            var playerDamageComp = TryComp<DamageableComponent>(playerEntity, out var damageComp)
                 ? damageComp
                 : null;
 
-            if (playerDamageComp == null || playerDamageComp.Damage.GetTotal() == 0)
+            if (playerDamageComp == null ||
+                _damageSystem.GetTotalDamage((playerEntity, playerDamageComp)) == 0)
                 continue;
 
             var uid = comp.Owner;
@@ -225,7 +227,7 @@ public sealed class PylonSystem : EntitySystem
         var user = args.User;
         var pylon = args.Target;
 
-        if (!TryComp<TransformComponent>(uid, out var transformComponent) || !transformComponent.Anchored)
+        if (!TryComp(uid, out TransformComponent? transformComponent) || !transformComponent.Anchored)
         {
             return;
         }

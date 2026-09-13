@@ -132,11 +132,25 @@ public sealed partial class EmergencyShuttleSystem
 
         while (query.MoveNext(out var comp))
         {
-            if (comp.MapEntity != null)
+            if (Exists(comp.MapEntity))
                 maps.Add(comp.MapEntity.Value);
         }
 
         return maps;
     }
     // Sunrise-end
+
+    private void EnableTransitHubFtlDestination()
+    {
+        var query = AllEntityQuery<StationTransitHubComponent>();
+
+        while (query.MoveNext(out var component))
+        {
+            if (!TryComp(component.MapEntity, out MapComponent? map))
+                continue;
+
+            if (_shuttle.TryAddFTLDestination(map.MapId, true, out var destination))
+                _shuttle.SetFTLWhitelist((component.MapEntity.Value, destination), null);
+        }
+    }
 }

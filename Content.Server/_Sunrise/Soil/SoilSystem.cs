@@ -1,4 +1,4 @@
-﻿using Content.Server.Damage.Systems;
+using Content.Server.Damage.Systems;
 using Content.Server.Movement.Systems;
 using Content.Server.Popups;
 using Content.Shared.Damage.Systems;
@@ -13,12 +13,12 @@ namespace Content.Server._Sunrise.Soil;
 /// <summary>
 /// Система для мешка с землей
 /// </summary>
-public sealed class SoilSystem : EntitySystem
+public sealed partial class SoilSystem : EntitySystem
 {
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly StaminaSystem _stamina = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private StaminaSystem _stamina = default!;
 
     public override void Initialize()
     {

@@ -1,4 +1,4 @@
-# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 - type: species
   id: Predator
   name: species-name-predator
@@ -7,7 +7,6 @@
   prototype: MobPredator
   bodyTypes:
   - PredatorNormal
-  markingLimits: MobPredatorMarkingLimits
   dollPrototype: MobPredatorDummy
   skinColoration: Hues
   defaultHeight: 1.05
@@ -25,147 +24,104 @@
 - type: bodyType
   id: PredatorNormal
   name: body-normal
-  sprites:
-    Head: MobPredatorHead
-    Chest: MobPredatorTorso
-    LArm: MobPredatorLArm
-    RArm: MobPredatorRArm
-    LHand: MobPredatorLHand
-    RHand: MobPredatorRHand
-    LLeg: MobPredatorLLeg
-    RLeg: MobPredatorRLeg
-    LFoot: MobPredatorLFoot
-    RFoot: MobPredatorRFoot
-    Dreadlocks: MobPredatorDreadlocks
-    Rings: MobPredatorRings
-
-- type: markingPoints
-  id: MobPredatorMarkingLimits
-  points:
-    Hair:
-      points: 0
-      required: false
-    FacialHair:
-      points: 0
-      required: false
-    Tail:
-      points: 0
-      required: false
-    Dreadlocks:
-      points: 1
-      required: false
+  visualKey: body-normal
+  layers:
+    Head:
+      sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
+      state: head_m
     Chest:
-      points: 1
-      required: false
-    Legs:
-      points: 1
-      required: false
-    Arms:
-      points: 1
-      required: false
+      sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
+      state: torso_m
+    LArm:
+      sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
+      state: l_arm
+    RArm:
+      sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
+      state: r_arm
+    LHand:
+      sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
+      state: l_hand
+    RHand:
+      sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
+      state: r_hand
+    LLeg:
+      sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
+      state: l_leg
+    RLeg:
+      sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
+      state: r_leg
+    LFoot:
+      sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
+      state: l_foot
+    RFoot:
+      sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
+      state: r_foot
+    Dreadlocks:
+      sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
+      state: dreadlocks
     Rings:
-      points: 1
+      sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
+      state: rings
+  sexLayers:
+    Male:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
+        state: head_m
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
+        state: torso_m
+    Female:
+      Head:
+        sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
+        state: head_f
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
+        state: torso_f
+- type: markingsGroup
+  id: Predator
+  limits:
+    enum.HumanoidVisualLayers.Hair:
+      limit: 0
       required: false
-
-- type: humanoidBaseSprite
-  id: MobPredatorAnyMarking
-
-- type: humanoidBaseSprite
-  id: MobPredatorMarkingMatchSkin
-  markingsMatchSkin: true
-
-- type: humanoidBaseSprite
-  id: MobPredatorHead
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
-    state: head_m
-
-- type: humanoidBaseSprite
-  id: MobPredatorHeadMale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
-    state: head_m
-
-- type: humanoidBaseSprite
-  id: MobPredatorHeadFemale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
-    state: head_f
-
-- type: humanoidBaseSprite
-  id: MobPredatorTorso
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
-    state: torso_m
-
-- type: humanoidBaseSprite
-  id: MobPredatorTorsoMale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
-    state: torso_m
-
-- type: humanoidBaseSprite
-  id: MobPredatorTorsoFemale
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
-    state: torso_f
-
-- type: humanoidBaseSprite
-  id: MobPredatorLLeg
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
-    state: l_leg
-
-- type: humanoidBaseSprite
-  id: MobPredatorLArm
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
-    state: l_arm
-
-- type: humanoidBaseSprite
-  id: MobPredatorLHand
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
-    state: l_hand
-
-- type: humanoidBaseSprite
-  id: MobPredatorLFoot
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
-    state: l_foot
-
-- type: humanoidBaseSprite
-  id: MobPredatorRLeg
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
-    state: r_leg
-
-- type: humanoidBaseSprite
-  id: MobPredatorRArm
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
-    state: r_arm
-
-- type: humanoidBaseSprite
-  id: MobPredatorRHand
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
-    state: r_hand
-
-- type: humanoidBaseSprite
-  id: MobPredatorRFoot
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
-    state: r_foot
-
-- type: humanoidBaseSprite
-  id: MobPredatorDreadlocks
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
-    state: dreadlocks
-
-- type: humanoidBaseSprite
-  id: MobPredatorRings
-  baseSprite:
-    sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
-    state: rings
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 0
+      required: false
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Tail:
+      limit: 0
+      required: false
+    enum.HumanoidVisualLayers.Dreadlocks:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Chest:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Rings:
+      limit: 1
+      required: false
