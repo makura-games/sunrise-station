@@ -474,8 +474,12 @@ class ReadinessTests(unittest.TestCase):
         self.assertTrue(timed_out["code_rabbit_timed_out"])
         self.assertFalse(timed_out["code_rabbit_absent"])
 
-        expected = {**pending, "state": "EXPECTED", "description": "Review skipped"}
-        self.assertFalse(inspect(checks=[CHECK, expected], now=after_wait)["code_rabbit_ready"])
+        for state in ("EXPECTED", "PENDING"):
+            with self.subTest(state=state):
+                skipped = {**pending, "state": state, "description": "Review skipped"}
+                result = inspect(checks=[CHECK, skipped], now=after_wait)
+                self.assertTrue(result["code_rabbit_ready"])
+                self.assertTrue(result["code_rabbit_unavailable"])
 
     def test_coderabbit_terminal_failures_and_skip_messages_do_not_block(self):
         skipped = limited_comment("Review skipped\n\nAutomatic reviews are disabled on this target branch.")

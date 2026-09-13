@@ -85,7 +85,7 @@ def is_unavailable_rabbit_check(check):
     if not REVIEW_UNAVAILABLE.search(check.get("description") or check.get("title") or ""):
         return False
     if check["__typename"] == "StatusContext":
-        return check.get("state") not in {"EXPECTED", "PENDING"}
+        return True
     return check.get("status") == "COMPLETED"
 
 
