@@ -38,8 +38,6 @@ jobs:
       cancel-in-progress: false
       queue: max
     runs-on: ubuntu-latest
-    env:
-      AUTO_DRAFT_ALLOW_CODERABBIT_RATE_LIMIT: ${{ vars.AUTO_DRAFT_ALLOW_CODERABBIT_RATE_LIMIT != 'false' }}
     steps:
       - name: Generate GitHub App token
         id: app-token

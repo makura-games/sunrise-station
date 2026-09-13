@@ -84,7 +84,9 @@ def load_config(path=CONFIG_PATH):
 # AUTO_DRAFT_POLICY_START
 def decide_draft_state(*, is_draft, has_marker, latest_blocking_at, latest_ready_at,
                        all_blocking_threads_resolved, checks_ready, code_rabbit_ready,
-                       keep_ready_during_rerun=False, has_merge_conflicts=False,
+                       keep_ready_during_rerun=False, keep_ready_during_rabbit_rerun=False,
+                       coderabbit_conversations_resolved=True,
+                       has_merge_conflicts=False,
                        merge_state_unknown=False):
     if merge_state_unknown:
         return "keep"
@@ -93,7 +95,7 @@ def decide_draft_state(*, is_draft, has_marker, latest_blocking_at, latest_ready
 
     has_blocking_review = latest_blocking_at is not None
     should_be_ready = ((not has_blocking_review or all_blocking_threads_resolved)
-                       and checks_ready and code_rabbit_ready)
+                       and checks_ready and code_rabbit_ready and coderabbit_conversations_resolved)
 
     if is_draft:
         return "ready" if has_marker and should_be_ready else "keep"
@@ -102,7 +104,9 @@ def decide_draft_state(*, is_draft, has_marker, latest_blocking_at, latest_ready
         not has_blocking_review or latest_ready_at >= latest_blocking_at
     )
     waiting_for_rerun = ((not has_blocking_review or all_blocking_threads_resolved)
-                         and code_rabbit_ready and keep_ready_during_rerun)
+                         and (checks_ready or keep_ready_during_rerun)
+                         and (code_rabbit_ready or keep_ready_during_rabbit_rerun)
+                         and coderabbit_conversations_resolved)
     if not should_be_ready and not waiting_for_rerun and not manual_override:
         return "draft"
 
@@ -119,32 +123,20 @@ def is_coderabbit_review(review):
     return login.removesuffix("[bot]") == "coderabbitai"
 
 
-def coderabbit_conversation_state(threads, blocking_reviews):
+def coderabbit_conversation_state(threads):
     rabbit_threads = []
-    threads_by_review = {}
     for thread in threads:
         comments = thread.get("comments", {}).get("nodes", [])
         review = comments[0].get("pullRequestReview") if comments else None
         if not is_coderabbit_review(review):
             continue
         rabbit_threads.append(thread)
-        threads_by_review.setdefault(review["id"], []).append(thread)
 
-    rabbit_blocking_reviews = [review for review in blocking_reviews if is_coderabbit_review(review)]
     unresolved = sum(not thread["isResolved"] for thread in rabbit_threads)
-    blocking_without_threads = sum(not threads_by_review.get(review["id"])
-                                   for review in rabbit_blocking_reviews)
-    blocking_resolved = all(
-        threads_by_review.get(review["id"])
-        and all(thread["isResolved"] for thread in threads_by_review[review["id"]])
-        for review in rabbit_blocking_reviews
-    )
     return {
         "total": len(rabbit_threads),
         "unresolved": unresolved,
-        "blocking_without_threads": blocking_without_threads,
-        "approval_required": bool(rabbit_blocking_reviews),
-        "resolved": unresolved == 0 and blocking_resolved,
+        "resolved": unresolved == 0,
     }
 
 
@@ -275,11 +267,10 @@ class AutoDraft:
 
         reviews = [review for review in pull_request["latestOpinionatedReviews"]["nodes"]
                    if review["authorCanPushToRepository"]]
-        blocking_reviews = [review for review in reviews if review["state"] == "CHANGES_REQUESTED"]
+        blocking_reviews = [review for review in reviews
+                            if review["state"] == "CHANGES_REQUESTED" and not is_coderabbit_review(review)]
         approvals = [review for review in reviews if review["state"] == "APPROVED"]
-        rabbit_conversations = coderabbit_conversation_state(
-            pull_request["reviewThreads"]["nodes"], blocking_reviews
-        )
+        rabbit_conversations = coderabbit_conversation_state(pull_request["reviewThreads"]["nodes"])
         blocking_review_ids = {review["id"] for review in blocking_reviews}
         blocking_authors = {(review.get("author") or {}).get("login") for review in blocking_reviews
                             if (review.get("author") or {}).get("login")}
@@ -344,11 +335,8 @@ class AutoDraft:
         readiness["code_rabbit_review_ready"] = readiness["code_rabbit_ready"]
         readiness["code_rabbit_conversations_total"] = rabbit_conversations["total"]
         readiness["code_rabbit_conversations_unresolved"] = rabbit_conversations["unresolved"]
-        readiness["code_rabbit_blocking_without_threads"] = rabbit_conversations["blocking_without_threads"]
-        readiness["code_rabbit_approval_required"] = rabbit_conversations["approval_required"]
         readiness["code_rabbit_conversations_resolved"] = rabbit_conversations["resolved"]
-        readiness["code_rabbit_ready"] &= (rabbit_conversations["resolved"]
-                                             and not rabbit_conversations["approval_required"])
+        readiness["code_rabbit_ready"] &= rabbit_conversations["resolved"]
         readiness["has_merge_conflicts"] = has_merge_conflicts
         readiness["merge_state_unknown"] = merge_state_unknown
 
@@ -361,6 +349,8 @@ class AutoDraft:
             checks_ready=readiness["checks_ready"],
             code_rabbit_ready=readiness["code_rabbit_ready"],
             keep_ready_during_rerun=readiness.get("keep_ready_during_rerun", False),
+            keep_ready_during_rabbit_rerun=readiness.get("keep_ready_during_rabbit_rerun", False),
+            coderabbit_conversations_resolved=rabbit_conversations["resolved"],
             has_merge_conflicts=has_merge_conflicts,
             merge_state_unknown=merge_state_unknown,
         )
@@ -370,6 +360,7 @@ class AutoDraft:
             f"threadsResolved={all_blocking_threads_resolved}, checksReady={readiness['checks_ready']}, "
             f"codeRabbitReady={readiness['code_rabbit_ready']}, "
             f"codeRabbitThreads={rabbit_conversations['total']}/{rabbit_conversations['unresolved']}, "
+            f"codeRabbitRerun={readiness.get('keep_ready_during_rabbit_rerun', False)}, "
             f"mergeConflicts={has_merge_conflicts}, "
             f"mergeStateUnknown={merge_state_unknown}, "
             f"rateLimited={readiness.get('rate_limited', False)}, "
@@ -378,8 +369,6 @@ class AutoDraft:
 
         feedback = []
         for review in blocking_reviews:
-            if is_coderabbit_review(review):
-                continue
             threads = threads_by_review.get(review["id"], [])
             author = (review.get("author") or {}).get("login") or "ревьювера"
             suffix = "" if threads else ": требуется новое решение ревьювера, обсуждений у этого требования нет"

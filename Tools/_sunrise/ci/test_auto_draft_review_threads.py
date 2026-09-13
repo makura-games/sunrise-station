@@ -24,11 +24,12 @@ from review_threads import AutoDraft, coderabbit_conversation_state, decide_draf
 
 
 HEAD = "1234567890abcdef1234567890abcdef12345678"
+HEAD_COMMITTED_AT = "2026-09-01T00:00:00Z"
 PULL_REQUEST = {
     "number": 1,
     "headRefOid": HEAD,
     "baseRefName": "master",
-    "createdAt": "2026-09-01T00:00:00Z",
+    "createdAt": HEAD_COMMITTED_AT,
 }
 RABBIT = {
     "__typename": "StatusContext",
@@ -89,7 +90,9 @@ class ReadinessGitHub:
             **PULL_REQUEST,
             "headRefOid": self.response_head,
             "reviews": {"nodes": self.reviews},
-            "commits": {"nodes": [{"commit": {"statusCheckRollup": {"contexts": {
+            "commits": {"nodes": [{"commit": {"pushedDate": HEAD_COMMITTED_AT,
+                                                  "committedDate": HEAD_COMMITTED_AT,
+                                                  "statusCheckRollup": {"contexts": {
                 "nodes": nodes,
                 "pageInfo": {"hasNextPage": has_next, "endCursor": str(index + 1)},
             }}}}]},
@@ -134,7 +137,7 @@ def inspect(*, now=None, comments_github=None, report_app_slug="github-actions",
         pull_request=PULL_REQUEST,
         report_app_slug=report_app_slug,
         rules_cache={},
-        now=timestamp(PULL_REQUEST["createdAt"]) + 60 if now is None else now,
+        now=timestamp(HEAD_COMMITTED_AT) + 60 if now is None else now,
     )
 
 
@@ -172,9 +175,11 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("pull_request_review:", self.signal_workflow)
         self.assertNotIn("secrets.", self.signal_workflow)
         self.assertIn('workflows: ["PR: Automatic Draft Management - Review Events", "Build & Test Debug", "YAML Linter"]', self.workflow)
-        self.assertIn("request_changes_workflow: true", self.coderabbit)
+        self.assertIn("request_changes_workflow: false", self.coderabbit)
+        self.assertIn("fail_commit_status: true", self.coderabbit)
         self.assertIn("drafts: true", self.coderabbit)
         self.assertIn("auto_pause_after_reviewed_commits: 0", self.coderabbit)
+        self.assertNotIn("AUTO_DRAFT_ALLOW_CODERABBIT_RATE_LIMIT", self.workflow)
 
     def test_packaging_uses_fast_gate_and_runs_for_drafts(self):
         pull_request = self.packaging_workflow.split("  pull_request:\n", 1)[1].split("\n\n", 1)[0]
@@ -366,6 +371,11 @@ class PolicyTests(unittest.TestCase):
             ({"has_marker": True, "latest_blocking_at": 10, "latest_ready_at": 20}, "cleanup"),
             ({"latest_blocking_at": 30, "latest_ready_at": 20}, "draft"),
             ({"code_rabbit_ready": False}, "draft"),
+            ({"code_rabbit_ready": False, "keep_ready_during_rabbit_rerun": True}, "keep"),
+            ({"code_rabbit_ready": False, "keep_ready_during_rabbit_rerun": True,
+              "coderabbit_conversations_resolved": False}, "draft"),
+            ({"checks_ready": False, "code_rabbit_ready": False,
+              "keep_ready_during_rerun": True, "keep_ready_during_rabbit_rerun": True}, "keep"),
             ({"has_merge_conflicts": True, "latest_ready_at": 20}, "draft"),
             ({"is_draft": True, "has_marker": True, "has_merge_conflicts": True}, "keep"),
             ({"is_draft": True}, "keep"),
@@ -402,48 +412,32 @@ class CodeRabbitConversationTests(unittest.TestCase):
             }}]},
         }
 
-    @staticmethod
-    def blocking(review_id="rabbit-blocking"):
-        return {"id": review_id, "author": {"login": "coderabbitai[bot]"}}
-
     def test_comment_mode_requires_every_coderabbit_conversation(self):
         rabbit = self.thread("rabbit-comment")
         human = self.thread("human-comment", login="human-reviewer")
-        state = coderabbit_conversation_state([rabbit, human], [])
-        self.assertEqual(state, {"total": 1, "unresolved": 1,
-                                 "blocking_without_threads": 0, "approval_required": False,
-                                 "resolved": False})
+        state = coderabbit_conversation_state([rabbit, human])
+        self.assertEqual(state, {"total": 1, "unresolved": 1, "resolved": False})
         rabbit["isResolved"] = True
         self.assertEqual(
-            coderabbit_conversation_state([rabbit, human], []),
-            {"total": 1, "unresolved": 0, "blocking_without_threads": 0,
-             "approval_required": False, "resolved": True},
+            coderabbit_conversation_state([rabbit, human]),
+            {"total": 1, "unresolved": 0, "resolved": True},
         )
 
-    def test_request_changes_mode_stays_compatible(self):
-        blocking = self.blocking()
-        state = coderabbit_conversation_state([], [blocking])
-        self.assertFalse(state["resolved"])
-        self.assertTrue(state["approval_required"])
-        self.assertEqual(state["blocking_without_threads"], 1)
+    def test_request_changes_review_is_reduced_to_its_conversations(self):
         thread = self.thread("rabbit-blocking", state="CHANGES_REQUESTED", resolved=True)
-        state = coderabbit_conversation_state([thread], [blocking])
+        state = coderabbit_conversation_state([thread])
         self.assertTrue(state["resolved"])
-        self.assertTrue(state["approval_required"])
 
     def test_mixed_modes_count_all_coderabbit_threads(self):
-        blocking = self.blocking()
         threads = [
             self.thread("rabbit-blocking", state="CHANGES_REQUESTED", resolved=True),
             self.thread("rabbit-comment", resolved=False),
             self.thread("human", resolved=False, login="reviewer"),
         ]
-        state = coderabbit_conversation_state(threads, [blocking])
-        self.assertEqual(state, {"total": 2, "unresolved": 1,
-                                 "blocking_without_threads": 0, "approval_required": True,
-                                 "resolved": False})
+        state = coderabbit_conversation_state(threads)
+        self.assertEqual(state, {"total": 2, "unresolved": 1, "resolved": False})
         threads[1]["isResolved"] = True
-        self.assertTrue(coderabbit_conversation_state(threads, [blocking])["resolved"])
+        self.assertTrue(coderabbit_conversation_state(threads)["resolved"])
 
 
 class ReadinessTests(unittest.TestCase):
@@ -467,24 +461,54 @@ class ReadinessTests(unittest.TestCase):
         self.assertTrue(inspect(checks=[packaging, RABBIT], requirements=[requirement])["checks_ready"])
         self.assertFalse(inspect(checks=[RABBIT], requirements=[requirement])["checks_ready"])
 
-    def test_coderabbit_skip_timeout_and_real_activity(self):
-        after_wait = timestamp(PULL_REQUEST["createdAt"]) + 10 * 60
+    def test_coderabbit_wait_is_bounded_from_head_commit_or_check_start(self):
+        after_wait = timestamp(HEAD_COMMITTED_AT) + 30 * 60
         self.assertFalse(inspect(checks=[CHECK], now=after_wait - 1)["code_rabbit_ready"])
-        self.assertTrue(inspect(checks=[CHECK], now=after_wait)["code_rabbit_absent"])
+        absent = inspect(checks=[CHECK], now=after_wait)
+        self.assertTrue(absent["code_rabbit_absent"])
+        self.assertTrue(absent["code_rabbit_ready"])
+
+        pending = {**RABBIT, "state": "PENDING", "createdAt": "2026-09-01T00:20:00Z"}
+        self.assertFalse(inspect(checks=[CHECK, pending], now=after_wait)["code_rabbit_ready"])
+        timed_out = inspect(checks=[CHECK, pending], now=timestamp(HEAD_COMMITTED_AT) + 50 * 60)
+        self.assertTrue(timed_out["code_rabbit_timed_out"])
+        self.assertFalse(timed_out["code_rabbit_absent"])
+
+        expected = {**pending, "state": "EXPECTED", "description": "Review skipped"}
+        self.assertFalse(inspect(checks=[CHECK, expected], now=after_wait)["code_rabbit_ready"])
+
+    def test_coderabbit_terminal_failures_and_skip_messages_do_not_block(self):
         skipped = limited_comment("Review skipped\n\nAutomatic reviews are disabled on this target branch.")
-        self.assertTrue(inspect(checks=[CHECK], comments=[skipped], now=after_wait)["code_rabbit_absent"])
+        unavailable = inspect(checks=[CHECK], comments=[skipped])
+        self.assertTrue(unavailable["code_rabbit_ready"])
+        self.assertTrue(unavailable["code_rabbit_unavailable"])
         skipped_status = {**RABBIT, "description": "Review skipped: reviews are disabled for this base branch."}
-        self.assertTrue(inspect(checks=[CHECK, skipped_status], now=after_wait)["code_rabbit_absent"])
+        unavailable = inspect(checks=[CHECK, skipped_status])
+        self.assertTrue(unavailable["code_rabbit_ready"])
+        self.assertTrue(unavailable["code_rabbit_unavailable"])
+        self.assertFalse(unavailable["code_rabbit_reviewed"])
+
+        failed = {**RABBIT, "state": "FAILURE", "description": "Review failed"}
+        unavailable = inspect(checks=[CHECK, failed])
+        self.assertTrue(unavailable["code_rabbit_ready"])
+        self.assertTrue(unavailable["code_rabbit_unavailable"])
+
+        rabbit_run = {
+            **CHECK,
+            "name": "CodeRabbit",
+            "databaseId": 9,
+            "isRequired": False,
+            "startedAt": HEAD_COMMITTED_AT,
+            "checkSuite": {"app": {"databaseId": 1, "slug": "coderabbitai"}, "workflowRun": None},
+        }
+        for conclusion in ("FAILURE", "CANCELLED", "TIMED_OUT", "SKIPPED", "NEUTRAL", "ACTION_REQUIRED"):
+            with self.subTest(conclusion=conclusion):
+                result = inspect(checks=[CHECK, {**rabbit_run, "conclusion": conclusion}])
+                self.assertTrue(result["code_rabbit_ready"])
+                self.assertTrue(result["code_rabbit_unavailable"])
+
         copied = {**skipped, "user": {"type": "User", "login": "contributor"}}
-        self.assertTrue(inspect(checks=[CHECK], comments=[copied], now=after_wait)["code_rabbit_absent"])
-        active = limited_comment("Review in progress")
-        self.assertFalse(inspect(checks=[CHECK], comments=[active], now=after_wait)["code_rabbit_absent"])
-        self.assertTrue(inspect(checks=[CHECK], comments=[{"user": None, "body": ""}], now=after_wait)["code_rabbit_absent"])
-        pending = {**RABBIT, "state": "PENDING"}
-        self.assertFalse(inspect(checks=[CHECK, pending], comments=[skipped], now=after_wait)["code_rabbit_absent"])
-        reviews = [{"author": {"__typename": "Bot", "login": "coderabbitai"}}]
-        self.assertFalse(inspect(checks=[CHECK], reviews=reviews, now=after_wait)["code_rabbit_absent"])
-        self.assertTrue(inspect(checks=[CHECK], reviews=[{"author": None}], now=after_wait)["code_rabbit_absent"])
+        self.assertFalse(inspect(checks=[CHECK], comments=[copied])["code_rabbit_ready"])
 
     def test_separate_comment_client_and_report_app_slug(self):
         comments_github = ReadinessGitHub(comments=[limited_comment("Review in progress")])
@@ -503,28 +527,44 @@ class ReadinessTests(unittest.TestCase):
         self.assertEqual(result["report_check"]["id"], 99)
         self.assertEqual(result["comments"], comments_github.comments)
 
-    def test_coderabbit_rate_limit_can_be_disabled(self):
+    def test_coderabbit_rate_limit_is_always_non_blocking(self):
         comment = limited_comment("Rate limit exceeded")
-        with patch.dict(os.environ, {}, clear=False):
-            os.environ.pop("AUTO_DRAFT_ALLOW_CODERABBIT_RATE_LIMIT", None)
-            self.assertTrue(inspect(checks=[CHECK], comments=[comment])["code_rabbit_ready"])
-        with patch.dict(os.environ, {"AUTO_DRAFT_ALLOW_CODERABBIT_RATE_LIMIT": "false"}):
-            self.assertFalse(inspect(checks=[CHECK], comments=[comment])["code_rabbit_ready"])
+        self.assertTrue(inspect(checks=[CHECK], comments=[comment])["code_rabbit_ready"])
         user_comment = {**comment, "user": {"type": "User", "login": "contributor"}}
         self.assertFalse(inspect(checks=[CHECK], comments=[user_comment])["code_rabbit_ready"])
 
-    def test_coderabbit_success_on_same_commit_survives_pending_rerun(self):
-        pending = {**RABBIT, "state": "PENDING", "description": "Review in progress"}
+    def test_previous_success_only_preserves_an_already_ready_pull_request(self):
+        pending = {**RABBIT, "state": "PENDING", "description": "Review in progress",
+                   "createdAt": "2026-09-01T00:01:00Z"}
         completed = {
             "context": "CodeRabbit",
             "state": "success",
             "description": "Review completed",
             "creator": {"type": "Bot", "login": "coderabbitai[bot]"},
         }
-        self.assertTrue(inspect(checks=[CHECK, pending], statuses=[completed])["code_rabbit_ready"])
-        self.assertFalse(inspect(checks=[CHECK, pending])["code_rabbit_ready"])
-        failed = {**RABBIT, "state": "FAILURE", "description": "Review failed"}
-        self.assertFalse(inspect(checks=[CHECK, failed], statuses=[completed])["code_rabbit_ready"])
+        result = inspect(checks=[CHECK, pending], statuses=[completed])
+        self.assertFalse(result["code_rabbit_ready"])
+        self.assertTrue(result["keep_ready_during_rabbit_rerun"])
+        self.assertEqual(decide_draft_state(
+            is_draft=True,
+            has_marker=True,
+            latest_blocking_at=None,
+            latest_ready_at=None,
+            all_blocking_threads_resolved=False,
+            checks_ready=True,
+            code_rabbit_ready=result["code_rabbit_ready"],
+            keep_ready_during_rabbit_rerun=result["keep_ready_during_rabbit_rerun"],
+        ), "keep")
+        self.assertEqual(decide_draft_state(
+            is_draft=False,
+            has_marker=False,
+            latest_blocking_at=None,
+            latest_ready_at=None,
+            all_blocking_threads_resolved=False,
+            checks_ready=True,
+            code_rabbit_ready=result["code_rabbit_ready"],
+            keep_ready_during_rabbit_rerun=result["keep_ready_during_rabbit_rerun"],
+        ), "keep")
 
     def test_pagination_failures_and_required_workflows(self):
         self.assertTrue(inspect(pages=[[], [CHECK, RABBIT]])["checks_ready"])
@@ -605,31 +645,36 @@ class ChecklistAndReportTests(unittest.TestCase):
         })
         self.assertNotIn("> [!TIP]", build_checklist(**state))
 
-        state["readiness"].update({
-            "code_rabbit_ready": False,
-            "code_rabbit_approval_required": True,
-        })
-        self.assertIn("Дождаться одобрения CodeRabbit", build_checklist(**state))
-
-        state["readiness"].update({
-            "code_rabbit_ready": False,
-            "code_rabbit_blocking_without_threads": 1,
-        })
-        body = build_checklist(**state)
-        self.assertIn("он запросил исправления, но не оставил обсуждений", body)
-        self.assertEqual(sum(line.startswith("- [") and "CodeRabbit" in line
-                             for line in body.splitlines()), 1)
-
     def test_completed_coderabbit_checklist_text_is_not_stale(self):
         state = self.state()
         state["feedback"] = []
         state["readiness"].update({
             "code_rabbit_review_ready": True,
             "code_rabbit_ready": True,
+            "code_rabbit_reviewed": True,
         })
         body = build_checklist(**state)
         self.assertIn("- [x] CodeRabbit проверил последнюю версию кода.", body)
         self.assertNotIn("Дождаться CodeRabbit", body)
+
+    def test_checklist_survives_readiness_error(self):
+        state = self.state()
+        state["readiness"] = {"checks_ready": False, "code_rabbit_ready": False, "error": True}
+        self.assertIn("Через 30 минут", build_checklist(**state))
+
+    def test_coderabbit_fallbacks_are_visible_but_non_blocking(self):
+        state = self.state()
+        state["feedback"] = []
+        state["readiness"].update({
+            "code_rabbit_review_ready": True,
+            "code_rabbit_ready": True,
+            "code_rabbit_reviewed": False,
+            "code_rabbit_timed_out": True,
+        })
+        body = build_checklist(**state)
+        self.assertIn("- [x] CodeRabbit не завершил проверку за 30 минут", body)
+        state["readiness"].update({"code_rabbit_timed_out": False, "code_rabbit_unavailable": True})
+        self.assertIn("- [x] CodeRabbit завершился без результата", build_checklist(**state))
 
     def test_merge_conflict_item_appears_only_while_conflicting(self):
         state = self.state()
@@ -733,12 +778,13 @@ class ChecklistAndReportTests(unittest.TestCase):
         )
         rabbit_readiness.update({
             "code_rabbit_conversations_unresolved": 0,
-            "code_rabbit_approval_required": True,
+            "code_rabbit_ready": True,
+            "code_rabbit_reviewed": False,
+            "code_rabbit_unavailable": True,
         })
-        self.assertEqual(
-            build_report(number=1, readiness=rabbit_readiness, action="draft")["title"],
-            "Автодрафт: ждём одобрение CodeRabbit",
-        )
+        report = build_report(number=1, readiness=rabbit_readiness, action="ready")
+        self.assertEqual(report["title"], "Автодрафт: всё готово")
+        self.assertIn("CodeRabbit завершился без результата", report["summary"])
 
     def test_report_handles_startup_failure_and_null_check_fields(self):
         readiness = inspect()
@@ -845,7 +891,10 @@ class RuntimeTests(unittest.TestCase):
                     return {"repository": {"pullRequest": {
                         **PULL_REQUEST,
                         "reviews": {"nodes": []},
-                        "commits": {"nodes": [{"commit": {"statusCheckRollup": {"contexts": {
+                        "commits": {"nodes": [{"commit": {
+                            "pushedDate": HEAD_COMMITTED_AT,
+                            "committedDate": HEAD_COMMITTED_AT,
+                            "statusCheckRollup": {"contexts": {
                             "nodes": [RABBIT],
                             "pageInfo": {"hasNextPage": False, "endCursor": None},
                         }}}}]},
@@ -912,6 +961,18 @@ class RuntimeTests(unittest.TestCase):
         with patch.dict(os.environ, {"AUTO_DRAFT_APP_SLUG": "autodraft"}):
             AutoDraft(github=github, context=context, core=Core()).run()
         self.assertEqual(github.actions, ["comment", "check"])
+
+        github = RuntimeGitHub()
+        github.pull["latestOpinionatedReviews"]["nodes"][0].update({
+            "state": "CHANGES_REQUESTED",
+            "authorCanPushToRepository": True,
+        })
+        github.pull["reviewThreads"]["nodes"][0]["isResolved"] = True
+        thread_review = github.pull["reviewThreads"]["nodes"][0]["comments"]["nodes"][0]["pullRequestReview"]
+        thread_review["state"] = "CHANGES_REQUESTED"
+        with patch.dict(os.environ, {"AUTO_DRAFT_APP_SLUG": "autodraft"}):
+            AutoDraft(github=github, context=context, core=Core()).run()
+        self.assertNotIn("draft", github.actions)
 
 
 if __name__ == "__main__":

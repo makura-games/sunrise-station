@@ -1,4 +1,3 @@
-import os
 import re
 import time
 from datetime import datetime
@@ -11,16 +10,14 @@ query Readiness($owner: String!, $repo: String!, $number: Int!, $cursor: String)
     pullRequest(number: $number) {
       headRefOid
       baseRefName
-      createdAt
-      reviews(first: 1, author: "coderabbitai[bot]") { nodes { author { login __typename } } }
       commits(last: 1) {
-        nodes { commit { statusCheckRollup {
+        nodes { commit { pushedDate committedDate statusCheckRollup {
           contexts(first: 100, after: $cursor) {
             pageInfo { hasNextPage endCursor }
             nodes {
               __typename
               ... on CheckRun {
-                databaseId name status conclusion title externalId
+                databaseId name status conclusion title externalId startedAt completedAt
                 isRequired(pullRequestNumber: $number)
                 checkSuite { app { databaseId slug } workflowRun { databaseId workflow { databaseId } } }
               }
@@ -40,7 +37,8 @@ query Readiness($owner: String!, $repo: String!, $number: Int!, $cursor: String)
 
 REVIEW_UNAVAILABLE = re.compile(
     r"\breview\s+(?:was\s+)?skipped\b|auto(?:matic)?\s+reviews?\s+(?:are|is)\s+"
-    r"(?:disabled|not enabled)|(?:cannot|can't|unable to)\s+(?:perform\s+)?(?:an?\s+)?review\b",
+    r"(?:disabled|not enabled)|reviews?\s+(?:are\s+)?paused\b|review\s+(?:timed\s+out|failed)\b|"
+    r"(?:cannot|can't|unable to)\s+(?:perform\s+)?(?:an?\s+)?review\b",
     re.IGNORECASE,
 )
 MENTIONS_LIMIT = re.compile(
@@ -51,6 +49,7 @@ MENTIONS_LIMIT = re.compile(
     r"(?:исчерпан|превышен|достигнут)[а-я]*\s+(?:лимит|квота)",
     re.IGNORECASE,
 )
+CODE_RABBIT_WAIT_MINUTES = 30
 
 
 def timestamp(value):
@@ -86,7 +85,7 @@ def is_unavailable_rabbit_check(check):
     if not REVIEW_UNAVAILABLE.search(check.get("description") or check.get("title") or ""):
         return False
     if check["__typename"] == "StatusContext":
-        return check.get("state") != "PENDING"
+        return check.get("state") not in {"EXPECTED", "PENDING"}
     return check.get("status") == "COMPLETED"
 
 
@@ -96,8 +95,7 @@ def load_readiness(*, github, owner, repo, pull_request, rules_cache, comments_g
     now = time.time() if now is None else now
     checks = []
     cursor = None
-    created_at = None
-    has_rabbit_review = False
+    head_updated_at = None
     while True:
         data = github.graphql(READINESS_QUERY, {
             "owner": owner,
@@ -109,12 +107,10 @@ def load_readiness(*, github, owner, repo, pull_request, rules_cache, comments_g
         if (not current or current["headRefOid"] != pull_request["headRefOid"]
                 or current["baseRefName"] != pull_request["baseRefName"]):
             raise RuntimeError("ПР изменился во время чтения проверок; требуется повторная синхронизация.")
-        created_at = current["createdAt"]
-        has_rabbit_review = any((review.get("author") or {}).get("__typename") == "Bot"
-                                for review in current.get("reviews", {}).get("nodes", []))
         commits = current.get("commits", {}).get("nodes", [])
-        connection = (((commits[0].get("commit") or {}).get("statusCheckRollup") or {}).get("contexts")
-                      if commits else None)
+        commit = (commits[0].get("commit") or {}) if commits else {}
+        head_updated_at = commit.get("pushedDate") or commit.get("committedDate")
+        connection = ((commit.get("statusCheckRollup") or {}).get("contexts") if commits else None)
         checks.extend((connection or {}).get("nodes", []))
         page_info = (connection or {}).get("pageInfo", {})
         if not page_info.get("hasNextPage"):
@@ -132,56 +128,69 @@ def load_readiness(*, github, owner, repo, pull_request, rules_cache, comments_g
             latest[key] = check
     current_checks = list(latest.values())
     rabbit_checks = [check for check in current_checks if is_rabbit(check)]
-    active_rabbit_checks = [check for check in rabbit_checks if not is_unavailable_rabbit_check(check)]
-    def review_completed(check):
-        return succeeded(check) and re.match(
-            r"^Review completed\b", check.get("description") or check.get("title") or "", re.I
-        )
-    reviewed = any(review_completed(check) for check in rabbit_checks)
-    rabbit_pending = any(check.get("state") == "PENDING"
-                         or check.get("status") in {"QUEUED", "IN_PROGRESS", "PENDING"}
-                         for check in rabbit_checks)
-    if not reviewed and rabbit_pending:
-        reviewed = any(review_completed(check) for check in checks if is_rabbit(check))
-    if not reviewed and any(check["__typename"] == "StatusContext"
-                            and check.get("state") == "PENDING" for check in rabbit_checks):
-        statuses = github.paginate(
-            f"/repos/{owner}/{repo}/commits/{pull_request['headRefOid']}/statuses"
-        )
-        reviewed = any(status.get("context") == "CodeRabbit"
-                       and status.get("state") == "success"
-                       and re.match(r"^Review completed\b", status.get("description") or "", re.I)
-                       and (status.get("creator") or {}).get("type") == "Bot"
-                       and (status.get("creator") or {}).get("login") == "coderabbitai[bot]"
-                       for status in statuses)
+    def check_timestamp(check):
+        return timestamp(check.get("startedAt") or check.get("createdAt") or check.get("completedAt"))
+
+    rabbit_check = max(rabbit_checks, key=check_timestamp, default=None)
+    rabbit_pending = bool(rabbit_check and (
+        rabbit_check.get("state") in {"EXPECTED", "PENDING"}
+        or rabbit_check["__typename"] == "CheckRun" and rabbit_check.get("status") != "COMPLETED"
+    ))
+    rabbit_succeeded = bool(rabbit_check and (
+        rabbit_check.get("state") == "SUCCESS"
+        or rabbit_check.get("status") == "COMPLETED" and rabbit_check.get("conclusion") == "SUCCESS"
+    ))
+    rabbit_terminal_failure = bool(rabbit_check and not rabbit_pending and not rabbit_succeeded)
+    rabbit_started_at = timestamp((rabbit_check or {}).get("startedAt")
+                                  or (rabbit_check or {}).get("createdAt"))
+    wait_started_at = max(timestamp(head_updated_at), rabbit_started_at)
 
     comments = comments_github.paginate(f"/repos/{owner}/{repo}/issues/{pull_request['number']}/comments")
     rabbit_comments = [comment for comment in comments
                        if (comment.get("user") or {}).get("type") == "Bot"
                        and (comment.get("user") or {}).get("login") == "coderabbitai[bot]"]
-    code_rabbit_wait_minutes = 10
-    has_rabbit_activity = any(not REVIEW_UNAVAILABLE.search(comment.get("body") or "")
-                              for comment in rabbit_comments)
-    code_rabbit_absent = (not active_rabbit_checks and not has_rabbit_review and not has_rabbit_activity
-                          and now - timestamp(created_at) >= code_rabbit_wait_minutes * 60)
+    current_rabbit_comments = [comment for comment in rabbit_comments
+                               if timestamp(comment.get("updated_at")) >= timestamp(head_updated_at)]
+    def superseded(comment):
+        return rabbit_pending and rabbit_started_at > timestamp(comment.get("updated_at"))
 
-    rate_limited = False
-    if not reviewed and os.getenv("AUTO_DRAFT_ALLOW_CODERABBIT_RATE_LIMIT") != "false":
-        rate_limited = any(MENTIONS_LIMIT.search(check.get("description") or check.get("title") or "")
-                           for check in rabbit_checks)
-        if not rate_limited:
-            for comment in rabbit_comments:
-                if not MENTIONS_LIMIT.search(comment.get("body") or ""):
-                    continue
-                newer_pending = any(
-                    (check.get("state") == "PENDING" or check.get("status") in {"QUEUED", "IN_PROGRESS", "PENDING"})
-                    and timestamp(check.get("createdAt")) > timestamp(comment.get("updated_at"))
-                    for check in rabbit_checks
-                )
-                if not newer_pending:
-                    rate_limited = True
-                    break
-    code_rabbit_ready = code_rabbit_absent or reviewed or rate_limited
+    explicitly_unavailable = is_unavailable_rabbit_check(rabbit_check) if rabbit_check else False
+    explicitly_unavailable = explicitly_unavailable or any(
+        REVIEW_UNAVAILABLE.search(comment.get("body") or "") and not superseded(comment)
+        for comment in current_rabbit_comments
+    )
+
+    rate_limited = bool(rabbit_check and MENTIONS_LIMIT.search(
+        rabbit_check.get("description") or rabbit_check.get("title") or ""
+    )) or any(MENTIONS_LIMIT.search(comment.get("body") or "") and not superseded(comment)
+              for comment in current_rabbit_comments)
+    waiting = rabbit_check is None or rabbit_pending
+    timed_out = bool(wait_started_at) and waiting and now - wait_started_at >= CODE_RABBIT_WAIT_MINUTES * 60
+    code_rabbit_absent = rabbit_check is None and timed_out
+    code_rabbit_unavailable = explicitly_unavailable or rabbit_terminal_failure
+    code_rabbit_ready = rabbit_succeeded or code_rabbit_unavailable or rate_limited or timed_out
+    code_rabbit_reviewed = rabbit_succeeded and not explicitly_unavailable and not rate_limited
+
+    previous_success = False
+    if rabbit_pending:
+        if rabbit_check["__typename"] == "CheckRun":
+            previous_success = any(
+                check["__typename"] == "CheckRun" and is_rabbit(check)
+                and check_key(check) == check_key(rabbit_check)
+                and check.get("databaseId", 0) < rabbit_check.get("databaseId", 0)
+                and check.get("status") == "COMPLETED" and check.get("conclusion") == "SUCCESS"
+                for check in checks
+            )
+        else:
+            statuses = github.paginate(
+                f"/repos/{owner}/{repo}/commits/{pull_request['headRefOid']}/statuses"
+            )
+            previous_success = any(
+                status.get("context") == "CodeRabbit" and status.get("state") == "success"
+                and (status.get("creator") or {}).get("type") == "Bot"
+                and (status.get("creator") or {}).get("login") == "coderabbitai[bot]"
+                for status in statuses
+            )
 
     branch_name = pull_request["baseRefName"]
     if branch_name not in rules_cache:
@@ -321,8 +330,12 @@ def load_readiness(*, github, owner, repo, pull_request, rules_cache, comments_g
         "report_check": report_check,
         "checks_ready": all(item["done"] for item in check_items),
         "code_rabbit_ready": code_rabbit_ready,
+        "code_rabbit_reviewed": code_rabbit_reviewed,
         "code_rabbit_absent": code_rabbit_absent,
-        "code_rabbit_wait_minutes": code_rabbit_wait_minutes,
+        "code_rabbit_timed_out": timed_out,
+        "code_rabbit_unavailable": code_rabbit_unavailable,
+        "code_rabbit_wait_minutes": CODE_RABBIT_WAIT_MINUTES,
+        "keep_ready_during_rabbit_rerun": previous_success,
         "keep_ready_during_rerun": keep_ready_during_rerun,
         "rate_limited": rate_limited,
         "pending_checks": [item["name"] for item in check_items if not item["done"]],

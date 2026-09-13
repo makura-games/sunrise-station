@@ -50,12 +50,8 @@ def build_report(*, number, feedback=None, readiness=None, manual_draft=False,
         reason = "ошибки проверок"
     elif not readiness.get("checks_ready"):
         reason = "повторный запуск тестов" if readiness.get("keep_ready_during_rerun") else "ждём проверки"
-    elif readiness.get("code_rabbit_blocking_without_threads", 0):
-        reason = "нужно новое решение CodeRabbit"
     elif readiness.get("code_rabbit_conversations_unresolved", 0):
         reason = "нужно закрыть обсуждения CodeRabbit"
-    elif readiness.get("code_rabbit_approval_required"):
-        reason = "ждём одобрение CodeRabbit"
     elif not readiness.get("code_rabbit_ready"):
         reason = "ждём CodeRabbit"
 
@@ -82,18 +78,18 @@ def build_report(*, number, feedback=None, readiness=None, manual_draft=False,
             lines.append(f"  - {icon} {plain(item['name'])}: {plain(result)}.")
         rabbit_unresolved = readiness.get("code_rabbit_conversations_unresolved", 0)
         rabbit = (
-            "⏳ CodeRabbit запросил исправления: нужно новое решение"
-            if readiness.get("code_rabbit_blocking_without_threads", 0) else
             f"⏳ Остались незакрытые обсуждения CodeRabbit: {rabbit_unresolved}"
             if rabbit_unresolved else
-            "⏳ CodeRabbit должен заменить требование исправлений на одобрение"
-            if readiness.get("code_rabbit_approval_required") else
-            "ℹ️ CodeRabbit не появился за 10 минут: ожидание пропущено"
+            f"⚠️ CodeRabbit не появился за {readiness['code_rabbit_wait_minutes']} минут: ожидание пропущено"
             if readiness.get("code_rabbit_absent") else
-            "✅ CodeRabbit сообщил о лимите: исключение разрешено"
+            "⚠️ CodeRabbit сообщил о лимите: ожидание пропущено"
             if readiness.get("rate_limited") else
+            f"⚠️ CodeRabbit не завершил проверку за {readiness['code_rabbit_wait_minutes']} минут: ожидание пропущено"
+            if readiness.get("code_rabbit_timed_out") else
+            "⚠️ CodeRabbit завершился без результата: ожидание пропущено"
+            if readiness.get("code_rabbit_unavailable") else
             "✅ CodeRabbit закончил ревью"
-            if readiness.get("code_rabbit_ready") else
+            if readiness.get("code_rabbit_reviewed") else
             "⏳ Ожидается CodeRabbit"
         )
         lines.extend([f"- {rabbit}.", ""])
@@ -105,7 +101,10 @@ def build_report(*, number, feedback=None, readiness=None, manual_draft=False,
             lines.append("Ручной черновик сохранён: автор сам подтверждает готовность.")
         elif manual_override:
             lines.append("Сохранён ручной аварийный переход. Новое требование исправлений снова включит автоматику.")
-        elif not readiness.get("checks_ready") and readiness.get("keep_ready_during_rerun") and action == "keep":
+        elif action == "keep" and (
+            not readiness.get("checks_ready") and readiness.get("keep_ready_during_rerun")
+            or not readiness.get("code_rabbit_ready") and readiness.get("keep_ready_during_rabbit_rerun")
+        ):
             lines.append("ПР оставлен готовым: повторяется ранее успешная проверка того же коммита. Новый провал снова заблокирует его.")
         else:
             lines.append({
