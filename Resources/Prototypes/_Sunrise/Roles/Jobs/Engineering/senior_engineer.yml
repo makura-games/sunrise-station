@@ -34,9 +34,6 @@
     eyes: ClothingEyesGlassesMeson
     belt: ClothingBeltUtilityEngineering
     ears: ClothingHeadsetEngineering
-  storage:
-    back:
-    - ClothingOuterHardsuitEngineeringCompact
 
 - type: chameleonOutfit
   id: SeniorEngineerChameleonOutfit
