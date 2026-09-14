@@ -33,5 +33,5 @@ lobby-state-playtime-comment-normal =
     *[other]часов
     }. Вы наиграли больше, чем директора MakuraGames.
 lobby-state-playtime-comment-concerning = Сегодня вы играли {$hours} часов. Это больше, чем куратор сервера!
-lobby-state-playtime-comment-grasstouchless = {$hours}, отлично, вы превзошли админ-состав вместевзятый!
-lobby-state-playtime-comment-selfdestructive = {$hours}. Вы обычный задрот, вы ничем не лучше остальных игроков.
+lobby-state-playtime-comment-grasstouchless = {$hours} часов, отлично, вы превзошли админ-состав вместе взятый!
+lobby-state-playtime-comment-selfdestructive = {$hours} часов. Вы обычный задрот, вы ничем не лучше остальных игроков.
