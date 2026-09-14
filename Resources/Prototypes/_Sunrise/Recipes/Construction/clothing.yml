@@ -1,0 +1,7 @@
+- type: construction
+  id: ClothingHeadHelmetFlashlight
+  graph: HelmetFlashlight
+  startNode: start
+  targetNode: helmet
+  category: construction-category-clothing
+  objectType: Item

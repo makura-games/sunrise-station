@@ -89,6 +89,7 @@
   - type: Tag
     tags:
       - SecBeltEquip
+      - SecLite # Sunrise-Edit
   - type: ItemSlots
     slots:
       cell_slot:

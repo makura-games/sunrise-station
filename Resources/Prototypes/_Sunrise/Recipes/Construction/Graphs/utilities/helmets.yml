@@ -1,0 +1,28 @@
+- type: constructionGraph
+  id: HelmetFlashlight
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: helmet
+      steps:
+      - tag: SecurityHelmet
+        name: construction-graph-tag-security-helmet
+        icon:
+          sprite: Clothing/Head/Helmets/security.rsi
+          state: icon
+      - material: Cable
+        amount: 5
+      - component: PowerCell
+        name: construction-graph-component-power-cell
+        icon:
+          sprite: Objects/Power/power_cells.rsi
+          state: medium
+      - tag: SecLite
+        name: construction-graph-tag-flashlight-sec
+        icon:
+          sprite: Objects/Tools/seclite.rsi
+          state: seclite
+        doAfter: 10
+  - node: helmet
+    entity: ClothingHeadHelmetFlashlight
