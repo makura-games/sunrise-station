@@ -92,7 +92,7 @@
     ears: ClothingHeadsetAltERT
     belt: ClothingBeltMilitaryWebbingERT
     pocket1: DoubleEmergencyOxygenTankFilled
-    pocket2: PouchAmmo
+    pocket2: PouchAmmoLarge
   inhand:
   - WeaponPistolM1911
   - WeaponRifleLecterXL8

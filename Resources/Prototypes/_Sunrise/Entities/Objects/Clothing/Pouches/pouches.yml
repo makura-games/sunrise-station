@@ -103,6 +103,34 @@
 
 - type: entity
   parent: PouchAmmo
+  id: PouchAmmoMedium
+  components:
+  - type: Item
+    size: Huge
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1
+    whitelist:
+      components:
+      - BallisticAmmoProvider
+
+- type: entity
+  parent: PouchAmmo
+  id: PouchAmmoLarge
+  components:
+  - type: Item
+    size: Huge
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,3,3
+    whitelist:
+      components:
+      - BallisticAmmoProvider
+
+- type: entity
+  parent: PouchAmmo
   id: PouchAmmoFilledSMG
   suffix: Filled SMG
   components:
@@ -142,3 +170,33 @@
           amount: 2
         - id: MagazineLightRifleSP
           amount: 2
+
+- type: entity
+  parent: PouchAmmo
+  id: PouchBackpackPockets
+  name: backpack pockets
+  description: Universal pockets for any explosives, ammo boxes and magazines.
+  components:
+  - type: Unremoveable
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Pouches/backpack_pockets.rsi
+  - type: Item
+    sprite: _Sunrise/Clothing/Pouches/backpack_pockets.rsi
+    shape:
+    - 0,0,1,3
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,4,3
+    whitelist:
+      tags:
+      - HandGrenade
+      - Grenade
+      - HandGrenadeAmmo
+      components:
+      - ProjectileGrenade
+      - FlashOnTrigger
+      - ExplodeOnTrigger
+      - Explosive
+      - BallisticAmmoProvider
+

@@ -448,6 +448,17 @@
     Glass: 250
 
 - type: latheRecipe
+  id: PouchAmmo
+  result: PouchAmmo
+  categories:
+  - Clothing
+  completetime: 10
+  materials:
+    Cloth: 400
+    Durathread: 200
+    Plastic: 250
+
+- type: latheRecipe
   id: BolaSecurity
   result: BolaSecurity
   completetime: 2
