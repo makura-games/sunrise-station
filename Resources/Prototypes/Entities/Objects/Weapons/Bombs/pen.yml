@@ -35,6 +35,12 @@
       damage:
         types:
           Piercing: 3
+  # Sunrise edit start
+  - type: ScentEmitter
+    spot: AnySlot
+    scent: SunriseGunpowder
+    duration: 400
+  # Sunrise edit end
 
 - type: entity
   parent: [BaseItem, BaseSyndicateContraband]

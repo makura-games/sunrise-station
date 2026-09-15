@@ -160,6 +160,9 @@
       - "footprint-right-bare-spider"
   - type: ToggleableNightVision
     effect: EffectNightVisioSpecies
+  - type: Scent
+    personalScentProfile: SunriseArachnid
+  - type: Smell
   # Sunrise-end
 
 - type: entity

@@ -1,0 +1,15 @@
+# Единый конфиг появления временных запахов.
+# Баланс: пороги урона и длительности запахов ран, яда, чужой крови,
+# возбуждения и оргазма. Правки подхватываются reloadprototypes.
+
+- type: smellSystemConfig
+  id: SunriseDefault
+  woundScentThreshold: 10
+  poisonScentThreshold: 25
+  woundScentDuration: 300
+  poisonScentDuration: 200
+  otherBloodScentDuration: 600
+  arousalScentDuration: 300
+  orgasmScentDuration: 500
+  scentCleaningRange: 1.5
+  maskedScentColor: '#a6d8ff'

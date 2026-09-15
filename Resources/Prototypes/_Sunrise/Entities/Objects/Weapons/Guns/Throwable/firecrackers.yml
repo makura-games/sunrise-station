@@ -23,6 +23,10 @@
     min: 1
     max: 10
   - type: ExplodeOnTrigger
+  - type: ScentEmitter
+    spot: AnySlot
+    scent: SunriseGunpowder
+    duration: 400
 
 - type: entity
   parent: BaseItem
@@ -61,6 +65,10 @@
     maxIntensity: 0.01
     intensitySlope: 1
     totalIntensity: 0.01
+  - type: ScentEmitter
+    spot: AnySlot
+    scent: SunriseGunpowder
+    duration: 400
 
 - type: entity
   parent: BaseStorageItem
@@ -85,4 +93,8 @@
         - id: Firecracker
           amount: 10
   - type: Dumpable
+  - type: ScentEmitter
+    spot: AnySlot
+    scent: SunriseGunpowder
+    duration: 400
 

@@ -65,6 +65,10 @@
     tags:
     - HandGrenadeAmmo
     - FireBomb
+  - type: ScentEmitter
+    spot: AnySlot
+    scent: SunriseGunpowder
+    duration: 400
   # Sunrise-End
 
 # has igniter but no fuel or wires

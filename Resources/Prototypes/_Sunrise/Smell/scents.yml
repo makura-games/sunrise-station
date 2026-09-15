@@ -1,0 +1,55 @@
+﻿- type: scent
+  id: SunriseAlcohol
+  description: scent-temp-alcohol
+  color: "#819b4b"
+  intensity: 0.85
+
+- type: scent
+  id: SunriseSmoke
+  description: scent-temp-smoke
+  color: "#e5c706"
+  intensity: 0.55
+
+- type: scent
+  id: SunriseGunpowder
+  description: scent-temp-gunpowder
+  color: "#b83700"
+  intensity: 0.95
+
+- type: scent
+  id: SunriseBlood
+  description: scent-temp-blood
+  color: "#8B0000"
+  intensity: 0.95
+  fat: true
+
+- type: scent
+  id: SunriseOtherBlood
+  description: scent-temp-other-blood
+  color: "#fe0101"
+  intensity: 1.0
+  fat: true
+
+- type: scent
+  id: SunriseBruise
+  description: scent-temp-bruise
+  color: "#6A5ACD"
+  intensity: 0.75
+
+- type: scent
+  id: SunrisePoison
+  description: scent-temp-poison
+  color: "#556B2F"
+  intensity: 0.85
+
+- type: scent
+  id: SunriseDrug
+  description: scent-temp-drug
+  color: "#7B68EE"
+  intensity: 0.65
+
+- type: scent
+  id: SunriseStimulant
+  description: scent-temp-stimulant
+  color: "#00CED1"
+  intensity: 0.6

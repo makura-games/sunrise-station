@@ -366,6 +366,9 @@
   - type: FootprintEmitter
     leftBareFootState: [ footprint-left-bare-cat ]
     rightBareFootState: [ footprint-right-bare-cat ]
+  - type: Scent
+    personalScentProfile: SunriseVulpkanin
+  - type: Smell
   # Sunrise edit end
   - type: Bloodstream
     bloodReferenceSolution:
