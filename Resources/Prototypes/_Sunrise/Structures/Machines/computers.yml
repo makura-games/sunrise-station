@@ -54,27 +54,48 @@
           False: { visible: true }
 
 - type: entity
-  id: ComputerShipyard
+  id: BaseComputerShipyard
+  abstract: true
   parent: BaseComputerSunrise
   name: shipyard console
   description: Used to purchase and sell shuttles
   components:
-  #- type: ShipyardConsole
-  #- type: AccessReader
-  #  access:
-  #  - [ Captain ]
-  #- type: ActivatableUI
-  #  key: enum.ShipyardConsoleUiKey.Shipyard
-  #- type: UserInterface
-  #  interfaces:
-  #  - key: enum.ShipyardConsoleUiKey.Shipyard
-  #    type: ShipyardConsoleBoundUserInterface
+  - type: ActivatableUI
+    key: enum.ShipyardConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.ShipyardConsoleUiKey.Key:
+        type: ShipyardConsoleBoundUserInterface
   - type: Computer
-    board: ShipyardComputerCircuitboard
+    board: null
+  - type: Construction
+    graph: SunriseShipyardComputer
+    node: computer
+    deconstructionTarget: null
+    containers:
+    - board
+  - type: Repairable
+    doAfterDelay: 10
+    allowSelfRepair: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Breakage" ]
   - type: PointLight
     radius: 1.5
     energy: 1.6
     color: "#b89f25"
+  - type: ShipyardConsole
+    account: Cargo
+    vesselGroup: station
+    announcementChannel: Supply
   - type: ContainerContainer
     containers:
       board: !type:Container
@@ -90,6 +111,62 @@
     - map: ["computerLayerKeys"]
       sprite: _Sunrise/Structures/Machines/computers.rsi
       state: tech_key
+    - map: ["enum.ShipyardConsoleVisualLayers.Broken"]
+      state: broken
+      visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.ShipyardConsoleVisuals.Broken:
+        enum.ShipyardConsoleVisualLayers.Broken:
+          True: { visible: true }
+          False: { visible: false }
+
+- type: entity
+  parent: BaseComputerShipyard
+  id: ComputerShipyard
+  name: salvage shipyard console
+  description: Used to purchase and sell salvage shuttles.
+  components:
+  - type: ShipyardConsole
+    account: Cargo
+    vesselGroup: salvage
+    priorityTag: DockMining
+    announcementChannel: Supply
+  - type: AccessReader
+    access: [[ Salvage ], [ Quartermaster ]]
+  - type: Computer
+    board: ShipyardComputerCircuitboard
+
+- type: entity
+  parent: BaseComputerShipyard
+  id: ComputerShipyardSecurity
+  name: security shipyard console
+  description: Used to purchase and sell security shuttles.
+  components:
+  - type: ShipyardConsole
+    account: Security
+    vesselGroup: security
+    priorityTag: DockSecurity
+    announcementChannel: Security
+  - type: AccessReader
+    access: [[ HeadOfSecurity ]]
+  - type: Computer
+    board: ShipyardSecurityComputerCircuitboard
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: request-sec
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+    - map: ["enum.ShipyardConsoleVisualLayers.Broken"]
+      state: broken
+      visible: false
 
 - type: entity
   id: ComputerSaleConsole

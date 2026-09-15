@@ -34,11 +34,9 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      desc: SEC "Москит"
       name: SEC "Москит"
     - type: Transform
       pos: -0.015106916,0.014866471
-      parent: invalid
     - type: MapGrid
       chunks:
         -1,-1:

@@ -17,13 +17,6 @@
             prefixCreator: '14'
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/_Sunrise/Shuttles/Evac/emergency-marathon.yml
-        - type: SpawnGridAndDockToStation
-          grids:
-          - gridPath: /Maps/_Sunrise/Shuttles/Salvage/siera.yml
-            priorityTag: DockMining
-          - gridPath: /Maps/_Sunrise/Shuttles/Security/stargaze.yml
-            priorityTag: DockSecurity
-           
         - type: StationJobs
           availableJobs:
             #command

@@ -248,7 +248,7 @@
 - type: entity
   parent: BaseComputerCircuitboard
   id: ShipyardComputerCircuitboard
-  name: shipyard computer board
+  name: salvage shipyard computer board
   description: A computer printed circuit board for a shipyard computer.
   components:
   - type: Sprite
@@ -257,6 +257,16 @@
     prototype: ComputerShipyard
   - type: StaticPrice
     price: 750
+
+- type: entity
+  parent: ShipyardComputerCircuitboard
+  id: ShipyardSecurityComputerCircuitboard
+  name: security shipyard computer board
+  components:
+  - type: ComputerBoard
+    prototype: ComputerShipyardSecurity
+  - type: Sprite
+    state: cpu_security
 
 - type: entity
   parent: BaseComputerCircuitboard
