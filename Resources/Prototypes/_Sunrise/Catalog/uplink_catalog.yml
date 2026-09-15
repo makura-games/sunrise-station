@@ -1698,6 +1698,21 @@
       - LoneOpsUplink
 
 - type: listing
+  id: UplinkSunriseSkewerRapier
+  name: uplink-skewer-rapier-name
+  description: uplink-skewer-rapier-desc
+  icon: { sprite: Objects/Consumable/Food/skewer.rsi, state: skewer }
+  productEntity: SunriseSkewerRapier
+  cost:
+    Telecrystal: 6
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Chef
+
+- type: listing
   id: UplinkFireAxeFlaming
   name: uplink-fire-axe-flaming-name
   description: uplink-fire-axe-flaming-desc
