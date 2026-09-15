@@ -18,3 +18,16 @@
       Male: MaleFelinid
       Female: FemaleFelinid
       Unsexed: MaleFelinid
+
+- type: trait
+  id: VulpkaninVocal
+  name: trait-Vulpkanin-vocal-name
+  description: trait-Vulpkanin-vocal-desc
+  category: VocalTraits
+  cost: 1
+  components:
+  - type: ReplacementVocal
+    vocal:
+      Male: MaleVulpkanin
+      Female: FemaleVulpkanin
+      Unsexed: MaleVulpkanin
