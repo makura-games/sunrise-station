@@ -1,0 +1,5 @@
+- type: entity
+  parent: Acidifier
+  id: GearAcidifier
+  name: acid
+  description: Melts your gear into a puddle of yuck!

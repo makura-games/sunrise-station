@@ -1,3 +1,6 @@
+ent-GearAcidifierImplanter = { ent-BaseImplantOnlyImplanterSyndi }
+    .suffix = gear acidifier
+    .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
 ent-SmokeScreenImplanter = { ent-BaseImplantOnlyImplanterSyndi }
     .suffix = smoke screen
     .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }

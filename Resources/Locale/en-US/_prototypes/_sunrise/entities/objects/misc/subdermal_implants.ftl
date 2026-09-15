@@ -1,3 +1,5 @@
+ent-GearAcidifierImplant = gear-acidifier implant
+    .desc = This implant melts the user's equipment upon death, leaving the body intact.
 ent-SmokeScreenImplant = smoke screen implant
     .desc = This implant creates a cloud of smoke when activated.
 ent-CreepyLaughImplant = creepy laugh implant
