@@ -1,0 +1,954 @@
+# Spawn-варианты производственного оборудования R&D с настраиваемыми доступами.
+
+- type: entity
+  id: SunriseAutolatheHyperConvection
+  parent: [AutolatheHyperConvection, BaseSunriseFabricatorAccessNone]
+  name: hyper convection autolathe
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAutolatheHyperConvectionCommand
+  parent: [AutolatheHyperConvection, BaseSunriseFabricatorAccessCommand]
+  name: hyper convection autolathe
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAutolatheHyperConvectionCargo
+  parent: [AutolatheHyperConvection, BaseSunriseFabricatorAccessCargo]
+  name: hyper convection autolathe
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAutolatheHyperConvectionEngineering
+  parent: [AutolatheHyperConvection, BaseSunriseFabricatorAccessEngineering]
+  name: hyper convection autolathe
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAutolatheHyperConvectionMedical
+  parent: [AutolatheHyperConvection, BaseSunriseFabricatorAccessMedical]
+  name: hyper convection autolathe
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAutolatheHyperConvectionResearch
+  parent: [AutolatheHyperConvection, BaseSunriseFabricatorAccessResearch]
+  name: hyper convection autolathe
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAutolatheHyperConvectionSecurity
+  parent: [AutolatheHyperConvection, BaseSunriseFabricatorAccessSecurity]
+  name: hyper convection autolathe
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAutolatheHyperConvectionService
+  parent: [AutolatheHyperConvection, BaseSunriseFabricatorAccessService]
+  name: hyper convection autolathe
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseProtolatheHyperConvection
+  parent: [ProtolatheHyperConvection, BaseSunriseFabricatorAccessNone]
+  name: hyper convection protolathe
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseProtolatheHyperConvectionCommand
+  parent: [ProtolatheHyperConvection, BaseSunriseFabricatorAccessCommand]
+  name: hyper convection protolathe
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseProtolatheHyperConvectionCargo
+  parent: [ProtolatheHyperConvection, BaseSunriseFabricatorAccessCargo]
+  name: hyper convection protolathe
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseProtolatheHyperConvectionEngineering
+  parent: [ProtolatheHyperConvection, BaseSunriseFabricatorAccessEngineering]
+  name: hyper convection protolathe
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseProtolatheHyperConvectionMedical
+  parent: [ProtolatheHyperConvection, BaseSunriseFabricatorAccessMedical]
+  name: hyper convection protolathe
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseProtolatheHyperConvectionResearch
+  parent: [ProtolatheHyperConvection, BaseSunriseFabricatorAccessResearch]
+  name: hyper convection protolathe
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseProtolatheHyperConvectionSecurity
+  parent: [ProtolatheHyperConvection, BaseSunriseFabricatorAccessSecurity]
+  name: hyper convection protolathe
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseProtolatheHyperConvectionService
+  parent: [ProtolatheHyperConvection, BaseSunriseFabricatorAccessService]
+  name: hyper convection protolathe
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCircuitImprinter
+  parent: [CircuitImprinter, BaseSunriseFabricatorAccessNone]
+  name: circuit imprinter
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCircuitImprinterCommand
+  parent: [CircuitImprinter, BaseSunriseFabricatorAccessCommand]
+  name: circuit imprinter
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCircuitImprinterCargo
+  parent: [CircuitImprinter, BaseSunriseFabricatorAccessCargo]
+  name: circuit imprinter
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCircuitImprinterEngineering
+  parent: [CircuitImprinter, BaseSunriseFabricatorAccessEngineering]
+  name: circuit imprinter
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCircuitImprinterMedical
+  parent: [CircuitImprinter, BaseSunriseFabricatorAccessMedical]
+  name: circuit imprinter
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCircuitImprinterResearch
+  parent: [CircuitImprinter, BaseSunriseFabricatorAccessResearch]
+  name: circuit imprinter
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCircuitImprinterSecurity
+  parent: [CircuitImprinter, BaseSunriseFabricatorAccessSecurity]
+  name: circuit imprinter
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCircuitImprinterService
+  parent: [CircuitImprinter, BaseSunriseFabricatorAccessService]
+  name: circuit imprinter
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCircuitImprinterHyperConvection
+  parent: [CircuitImprinterHyperConvection, BaseSunriseFabricatorAccessNone]
+  name: hyper convection circuit imprinter
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCircuitImprinterHyperConvectionCommand
+  parent: [CircuitImprinterHyperConvection, BaseSunriseFabricatorAccessCommand]
+  name: hyper convection circuit imprinter
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCircuitImprinterHyperConvectionCargo
+  parent: [CircuitImprinterHyperConvection, BaseSunriseFabricatorAccessCargo]
+  name: hyper convection circuit imprinter
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCircuitImprinterHyperConvectionEngineering
+  parent: [CircuitImprinterHyperConvection, BaseSunriseFabricatorAccessEngineering]
+  name: hyper convection circuit imprinter
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCircuitImprinterHyperConvectionMedical
+  parent: [CircuitImprinterHyperConvection, BaseSunriseFabricatorAccessMedical]
+  name: hyper convection circuit imprinter
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCircuitImprinterHyperConvectionResearch
+  parent: [CircuitImprinterHyperConvection, BaseSunriseFabricatorAccessResearch]
+  name: hyper convection circuit imprinter
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCircuitImprinterHyperConvectionSecurity
+  parent: [CircuitImprinterHyperConvection, BaseSunriseFabricatorAccessSecurity]
+  name: hyper convection circuit imprinter
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCircuitImprinterHyperConvectionService
+  parent: [CircuitImprinterHyperConvection, BaseSunriseFabricatorAccessService]
+  name: hyper convection circuit imprinter
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseExosuitFabricator
+  parent: [ExosuitFabricator, BaseSunriseFabricatorAccessNone]
+  name: exosuit fabricator
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseExosuitFabricatorCommand
+  parent: [ExosuitFabricator, BaseSunriseFabricatorAccessCommand]
+  name: exosuit fabricator
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseExosuitFabricatorCargo
+  parent: [ExosuitFabricator, BaseSunriseFabricatorAccessCargo]
+  name: exosuit fabricator
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseExosuitFabricatorEngineering
+  parent: [ExosuitFabricator, BaseSunriseFabricatorAccessEngineering]
+  name: exosuit fabricator
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseExosuitFabricatorMedical
+  parent: [ExosuitFabricator, BaseSunriseFabricatorAccessMedical]
+  name: exosuit fabricator
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseExosuitFabricatorResearch
+  parent: [ExosuitFabricator, BaseSunriseFabricatorAccessResearch]
+  name: exosuit fabricator
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseExosuitFabricatorSecurity
+  parent: [ExosuitFabricator, BaseSunriseFabricatorAccessSecurity]
+  name: exosuit fabricator
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseExosuitFabricatorService
+  parent: [ExosuitFabricator, BaseSunriseFabricatorAccessService]
+  name: exosuit fabricator
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseExosuitFabricatorHyperConvection
+  parent: [ExosuitFabricatorHyperConvection, BaseSunriseFabricatorAccessNone]
+  name: hyperconvection exosuit fabricator
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseExosuitFabricatorHyperConvectionCommand
+  parent: [ExosuitFabricatorHyperConvection, BaseSunriseFabricatorAccessCommand]
+  name: hyperconvection exosuit fabricator
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseExosuitFabricatorHyperConvectionCargo
+  parent: [ExosuitFabricatorHyperConvection, BaseSunriseFabricatorAccessCargo]
+  name: hyperconvection exosuit fabricator
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseExosuitFabricatorHyperConvectionEngineering
+  parent: [ExosuitFabricatorHyperConvection, BaseSunriseFabricatorAccessEngineering]
+  name: hyperconvection exosuit fabricator
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseExosuitFabricatorHyperConvectionMedical
+  parent: [ExosuitFabricatorHyperConvection, BaseSunriseFabricatorAccessMedical]
+  name: hyperconvection exosuit fabricator
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseExosuitFabricatorHyperConvectionResearch
+  parent: [ExosuitFabricatorHyperConvection, BaseSunriseFabricatorAccessResearch]
+  name: hyperconvection exosuit fabricator
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseExosuitFabricatorHyperConvectionSecurity
+  parent: [ExosuitFabricatorHyperConvection, BaseSunriseFabricatorAccessSecurity]
+  name: hyperconvection exosuit fabricator
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseExosuitFabricatorHyperConvectionService
+  parent: [ExosuitFabricatorHyperConvection, BaseSunriseFabricatorAccessService]
+  name: hyperconvection exosuit fabricator
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseBiofabricator
+  parent: [Biofabricator, BaseSunriseFabricatorAccessNone]
+  name: biocube fabricator
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseBiofabricatorCommand
+  parent: [Biofabricator, BaseSunriseFabricatorAccessCommand]
+  name: biocube fabricator
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseBiofabricatorCargo
+  parent: [Biofabricator, BaseSunriseFabricatorAccessCargo]
+  name: biocube fabricator
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseBiofabricatorEngineering
+  parent: [Biofabricator, BaseSunriseFabricatorAccessEngineering]
+  name: biocube fabricator
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseBiofabricatorMedical
+  parent: [Biofabricator, BaseSunriseFabricatorAccessMedical]
+  name: biocube fabricator
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseBiofabricatorResearch
+  parent: [Biofabricator, BaseSunriseFabricatorAccessResearch]
+  name: biocube fabricator
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseBiofabricatorSecurity
+  parent: [Biofabricator, BaseSunriseFabricatorAccessSecurity]
+  name: biocube fabricator
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseBiofabricatorService
+  parent: [Biofabricator, BaseSunriseFabricatorAccessService]
+  name: biocube fabricator
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseSecurityTechFab
+  parent: [SecurityTechFab, BaseSunriseFabricatorAccessNone]
+  name: security techfab
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseSecurityTechFabCommand
+  parent: [SecurityTechFab, BaseSunriseFabricatorAccessCommand]
+  name: security techfab
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseSecurityTechFabCargo
+  parent: [SecurityTechFab, BaseSunriseFabricatorAccessCargo]
+  name: security techfab
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseSecurityTechFabEngineering
+  parent: [SecurityTechFab, BaseSunriseFabricatorAccessEngineering]
+  name: security techfab
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseSecurityTechFabMedical
+  parent: [SecurityTechFab, BaseSunriseFabricatorAccessMedical]
+  name: security techfab
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseSecurityTechFabResearch
+  parent: [SecurityTechFab, BaseSunriseFabricatorAccessResearch]
+  name: security techfab
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseSecurityTechFabSecurity
+  parent: [SecurityTechFab, BaseSunriseFabricatorAccessSecurity]
+  name: security techfab
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseSecurityTechFabService
+  parent: [SecurityTechFab, BaseSunriseFabricatorAccessService]
+  name: security techfab
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAmmoTechFab
+  parent: [AmmoTechFab, BaseSunriseFabricatorAccessNone]
+  name: ammo techfab
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAmmoTechFabCommand
+  parent: [AmmoTechFab, BaseSunriseFabricatorAccessCommand]
+  name: ammo techfab
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAmmoTechFabCargo
+  parent: [AmmoTechFab, BaseSunriseFabricatorAccessCargo]
+  name: ammo techfab
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAmmoTechFabEngineering
+  parent: [AmmoTechFab, BaseSunriseFabricatorAccessEngineering]
+  name: ammo techfab
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAmmoTechFabMedical
+  parent: [AmmoTechFab, BaseSunriseFabricatorAccessMedical]
+  name: ammo techfab
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAmmoTechFabResearch
+  parent: [AmmoTechFab, BaseSunriseFabricatorAccessResearch]
+  name: ammo techfab
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAmmoTechFabSecurity
+  parent: [AmmoTechFab, BaseSunriseFabricatorAccessSecurity]
+  name: ammo techfab
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseAmmoTechFabService
+  parent: [AmmoTechFab, BaseSunriseFabricatorAccessService]
+  name: ammo techfab
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseMedicalTechFab
+  parent: [MedicalTechFab, BaseSunriseFabricatorAccessNone]
+  name: medical techfab
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseMedicalTechFabCommand
+  parent: [MedicalTechFab, BaseSunriseFabricatorAccessCommand]
+  name: medical techfab
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseMedicalTechFabCargo
+  parent: [MedicalTechFab, BaseSunriseFabricatorAccessCargo]
+  name: medical techfab
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseMedicalTechFabEngineering
+  parent: [MedicalTechFab, BaseSunriseFabricatorAccessEngineering]
+  name: medical techfab
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseMedicalTechFabMedical
+  parent: [MedicalTechFab, BaseSunriseFabricatorAccessMedical]
+  name: medical techfab
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseMedicalTechFabResearch
+  parent: [MedicalTechFab, BaseSunriseFabricatorAccessResearch]
+  name: medical techfab
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseMedicalTechFabSecurity
+  parent: [MedicalTechFab, BaseSunriseFabricatorAccessSecurity]
+  name: medical techfab
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseMedicalTechFabService
+  parent: [MedicalTechFab, BaseSunriseFabricatorAccessService]
+  name: medical techfab
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseUniformPrinter
+  parent: [UniformPrinter, BaseSunriseFabricatorAccessNone]
+  name: uniform printer
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseUniformPrinterCommand
+  parent: [UniformPrinter, BaseSunriseFabricatorAccessCommand]
+  name: uniform printer
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseUniformPrinterCargo
+  parent: [UniformPrinter, BaseSunriseFabricatorAccessCargo]
+  name: uniform printer
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseUniformPrinterEngineering
+  parent: [UniformPrinter, BaseSunriseFabricatorAccessEngineering]
+  name: uniform printer
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseUniformPrinterMedical
+  parent: [UniformPrinter, BaseSunriseFabricatorAccessMedical]
+  name: uniform printer
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseUniformPrinterResearch
+  parent: [UniformPrinter, BaseSunriseFabricatorAccessResearch]
+  name: uniform printer
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseUniformPrinterSecurity
+  parent: [UniformPrinter, BaseSunriseFabricatorAccessSecurity]
+  name: uniform printer
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseUniformPrinterService
+  parent: [UniformPrinter, BaseSunriseFabricatorAccessService]
+  name: uniform printer
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseBiogenerator
+  parent: [Biogenerator, BaseSunriseFabricatorAccessNone]
+  name: biogenerator
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseBiogeneratorCommand
+  parent: [Biogenerator, BaseSunriseFabricatorAccessCommand]
+  name: biogenerator
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseBiogeneratorCargo
+  parent: [Biogenerator, BaseSunriseFabricatorAccessCargo]
+  name: biogenerator
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseBiogeneratorEngineering
+  parent: [Biogenerator, BaseSunriseFabricatorAccessEngineering]
+  name: biogenerator
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseBiogeneratorMedical
+  parent: [Biogenerator, BaseSunriseFabricatorAccessMedical]
+  name: biogenerator
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseBiogeneratorResearch
+  parent: [Biogenerator, BaseSunriseFabricatorAccessResearch]
+  name: biogenerator
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseBiogeneratorSecurity
+  parent: [Biogenerator, BaseSunriseFabricatorAccessSecurity]
+  name: biogenerator
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseBiogeneratorService
+  parent: [Biogenerator, BaseSunriseFabricatorAccessService]
+  name: biogenerator
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseOreProcessor
+  parent: [OreProcessor, BaseSunriseFabricatorAccessNone]
+  name: ore processor
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseOreProcessorCommand
+  parent: [OreProcessor, BaseSunriseFabricatorAccessCommand]
+  name: ore processor
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseOreProcessorCargo
+  parent: [OreProcessor, BaseSunriseFabricatorAccessCargo]
+  name: ore processor
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseOreProcessorEngineering
+  parent: [OreProcessor, BaseSunriseFabricatorAccessEngineering]
+  name: ore processor
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseOreProcessorMedical
+  parent: [OreProcessor, BaseSunriseFabricatorAccessMedical]
+  name: ore processor
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseOreProcessorResearch
+  parent: [OreProcessor, BaseSunriseFabricatorAccessResearch]
+  name: ore processor
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseOreProcessorSecurity
+  parent: [OreProcessor, BaseSunriseFabricatorAccessSecurity]
+  name: ore processor
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseOreProcessorService
+  parent: [OreProcessor, BaseSunriseFabricatorAccessService]
+  name: ore processor
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseOreProcessorIndustrial
+  parent: [OreProcessorIndustrial, BaseSunriseFabricatorAccessNone]
+  name: industrial ore processor
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseOreProcessorIndustrialCommand
+  parent: [OreProcessorIndustrial, BaseSunriseFabricatorAccessCommand]
+  name: industrial ore processor
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseOreProcessorIndustrialCargo
+  parent: [OreProcessorIndustrial, BaseSunriseFabricatorAccessCargo]
+  name: industrial ore processor
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseOreProcessorIndustrialEngineering
+  parent: [OreProcessorIndustrial, BaseSunriseFabricatorAccessEngineering]
+  name: industrial ore processor
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseOreProcessorIndustrialMedical
+  parent: [OreProcessorIndustrial, BaseSunriseFabricatorAccessMedical]
+  name: industrial ore processor
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseOreProcessorIndustrialResearch
+  parent: [OreProcessorIndustrial, BaseSunriseFabricatorAccessResearch]
+  name: industrial ore processor
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseOreProcessorIndustrialSecurity
+  parent: [OreProcessorIndustrial, BaseSunriseFabricatorAccessSecurity]
+  name: industrial ore processor
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseOreProcessorIndustrialService
+  parent: [OreProcessorIndustrial, BaseSunriseFabricatorAccessService]
+  name: industrial ore processor
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseSheetifier
+  parent: [Sheetifier, BaseSunriseFabricatorAccessNone]
+  name: sheet-meister 2000
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseSheetifierCommand
+  parent: [Sheetifier, BaseSunriseFabricatorAccessCommand]
+  name: sheet-meister 2000
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseSheetifierCargo
+  parent: [Sheetifier, BaseSunriseFabricatorAccessCargo]
+  name: sheet-meister 2000
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseSheetifierEngineering
+  parent: [Sheetifier, BaseSunriseFabricatorAccessEngineering]
+  name: sheet-meister 2000
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseSheetifierMedical
+  parent: [Sheetifier, BaseSunriseFabricatorAccessMedical]
+  name: sheet-meister 2000
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseSheetifierResearch
+  parent: [Sheetifier, BaseSunriseFabricatorAccessResearch]
+  name: sheet-meister 2000
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseSheetifierSecurity
+  parent: [Sheetifier, BaseSunriseFabricatorAccessSecurity]
+  name: sheet-meister 2000
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseSheetifierService
+  parent: [Sheetifier, BaseSunriseFabricatorAccessService]
+  name: sheet-meister 2000
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCutterMachine
+  parent: [CutterMachine, BaseSunriseFabricatorAccessNone]
+  name: cutter machine
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCutterMachineCommand
+  parent: [CutterMachine, BaseSunriseFabricatorAccessCommand]
+  name: cutter machine
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCutterMachineCargo
+  parent: [CutterMachine, BaseSunriseFabricatorAccessCargo]
+  name: cutter machine
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCutterMachineEngineering
+  parent: [CutterMachine, BaseSunriseFabricatorAccessEngineering]
+  name: cutter machine
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCutterMachineMedical
+  parent: [CutterMachine, BaseSunriseFabricatorAccessMedical]
+  name: cutter machine
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCutterMachineResearch
+  parent: [CutterMachine, BaseSunriseFabricatorAccessResearch]
+  name: cutter machine
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCutterMachineSecurity
+  parent: [CutterMachine, BaseSunriseFabricatorAccessSecurity]
+  name: cutter machine
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseCutterMachineService
+  parent: [CutterMachine, BaseSunriseFabricatorAccessService]
+  name: cutter machine
+  suffix: Service Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseMachineFlatpacker
+  parent: [MachineFlatpacker, BaseSunriseFabricatorAccessNone]
+  name: flatpacker 1001
+  suffix: No Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseMachineFlatpackerCommand
+  parent: [MachineFlatpacker, BaseSunriseFabricatorAccessCommand]
+  name: flatpacker 1001
+  suffix: Command Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseMachineFlatpackerCargo
+  parent: [MachineFlatpacker, BaseSunriseFabricatorAccessCargo]
+  name: flatpacker 1001
+  suffix: Cargo Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseMachineFlatpackerEngineering
+  parent: [MachineFlatpacker, BaseSunriseFabricatorAccessEngineering]
+  name: flatpacker 1001
+  suffix: Engineering Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseMachineFlatpackerMedical
+  parent: [MachineFlatpacker, BaseSunriseFabricatorAccessMedical]
+  name: flatpacker 1001
+  suffix: Medical Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseMachineFlatpackerResearch
+  parent: [MachineFlatpacker, BaseSunriseFabricatorAccessResearch]
+  name: flatpacker 1001
+  suffix: Research Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseMachineFlatpackerSecurity
+  parent: [MachineFlatpacker, BaseSunriseFabricatorAccessSecurity]
+  name: flatpacker 1001
+  suffix: Security Access
+  categories: [ForkFiltered]
+
+- type: entity
+  id: SunriseMachineFlatpackerService
+  parent: [MachineFlatpacker, BaseSunriseFabricatorAccessService]
+  name: flatpacker 1001
+  suffix: Service Access
+  categories: [ForkFiltered]
+
