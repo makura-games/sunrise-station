@@ -62,6 +62,7 @@
     - id: PlushieLizardJobCaptain
       prob: 0.02
     - id: WeaponMiniEnergyGun #  Sunrise-edit
+    - id: BoxEncryptionKeyCommand # Sunrise-Edit
 
 # No laser table + Laser table
 - type: entityTable

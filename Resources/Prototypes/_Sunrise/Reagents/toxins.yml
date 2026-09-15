@@ -158,8 +158,8 @@
       - !type:GenericStatusEffect
         key: Muted
         component: Muted
+        time: 60
         type: Add
-        time: 30
 
 - type: reagent
   id: NocturineAbductor

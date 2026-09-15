@@ -13,3 +13,5 @@ ent-CableDetStack1 = { ent-CableDetStack }
 
 ent-EmptyDetonator = detonator cap
     .desc = A detonator cap. Requires a trigger and wire.
+ent-WiredDetonator = loaded detonator
+    .desc = Assembled detonator. Ready to use.

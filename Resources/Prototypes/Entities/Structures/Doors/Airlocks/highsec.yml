@@ -1,6 +1,6 @@
 - type: entity
   id: HighSecDoor
-  parent: BaseStructure
+  parent: [BaseStructure, BasePaperLabelableVisualized] # Sunrise-Edit
   name: high security door
   description: Keeps the bad out and keeps the good in.
   placement:
@@ -46,6 +46,12 @@
       map: ["enum.DoorVisualLayers.BaseEmagging"]
       shader: unshaded
       visible: false
+    # Sunrise-Start
+    - state: paper
+      visible: false
+      sprite: _Sunrise/Structures/Doors/Airlocks/Standard/airlocks_labels.rsi
+      map: ["enum.PaperLabelVisuals.Layer"]
+    # Sunrise-End
   - type: AnimationPlayer
   - type: Physics
   - type: Fixtures
@@ -65,6 +71,7 @@
   - type: ContainerContainer
     containers:
       board: !type:Container
+      paper_label: !type:ContainerSlot # Sunrise-Edit
   - type: Door
     crushDamage:
       types:
@@ -91,6 +98,21 @@
         enum.ElectrifiedLayers.Sparks:
           True: { visible: True }
           False: { visible: False }
+      # Sunrise-Start
+      enum.PaperLabelVisuals.HasLabel:
+        enum.PaperLabelVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+      enum.PaperLabelVisuals.LabelType:
+        enum.PaperLabelVisuals.Layer:
+          Paper: { state: paper }
+          Bounty: { state: bounty }
+          CaptainsPaper: { state: captains_paper }
+          Invoice: { state: invoice }
+  - type: PlaceableSurface
+    placeCentered: true
+    isPlaceable: false
+  # Sunrise-End
   - type: WiresVisuals
   - type: ElectrocutionHUDVisuals
   - type: ApcPowerReceiver

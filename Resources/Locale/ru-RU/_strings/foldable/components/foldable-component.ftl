@@ -11,3 +11,6 @@ foldable-unfold-fail = Нельзя развернуть {$object} здесь.
 
 fold-verb-clothing-jacket = Снять куртку
 unfold-verb-clothing-jacket = Надеть куртку
+
+fold-verb-clothing-skirt = Подвернуть юбку
+unfold-verb-clothing-skirt = Развернуть юбку
