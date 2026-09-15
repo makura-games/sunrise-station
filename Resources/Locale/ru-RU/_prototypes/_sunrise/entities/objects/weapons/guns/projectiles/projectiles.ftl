@@ -70,3 +70,4 @@ ent-SunriseBulletDisposableSmokeRocket = дымовая ракета
 
 ent-SunriseBulletDisposableIncendiaryRocket = термобарическая ракета
     .desc = Компактная ракета с нестабильным химическим зарядом.
+
