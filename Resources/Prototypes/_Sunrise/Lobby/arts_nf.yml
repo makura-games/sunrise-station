@@ -1,0 +1,31 @@
+- type: lobbyArt
+  id: SunriseNfBingGuss
+  background: /NetTextures/Lobby/Arts/_NF/bingguss.webp
+
+- type: lobbyArt
+  id: SunriseNfJaniGang
+  background: /NetTextures/Lobby/Arts/_NF/janigang.webp
+
+- type: lobbyArt
+  id: SunriseNfXeeenoooossss
+  background: /NetTextures/Lobby/Arts/_NF/xeeenoooossss.webp
+
+- type: lobbyArt
+  id: SunriseNfSecRun
+  background: /NetTextures/Lobby/Arts/_NF/secrun.webp
+
+- type: lobbyArt
+  id: SunriseNfTheSecStealers
+  background: /NetTextures/Lobby/Arts/_NF/thesecstealers.webp
+
+- type: lobbyArt
+  id: SunriseNfHandsomeKiller
+  background: /NetTextures/Lobby/Arts/_NF/handsomekiller.webp
+
+- type: lobbyArt
+  id: SunriseNfRebirth
+  background: /NetTextures/Lobby/Arts/_NF/rebirth.webp
+
+- type: lobbyArt
+  id: SunriseNfParamedicRash
+  background: /NetTextures/Lobby/Arts/_NF/paramedicrash.webp
