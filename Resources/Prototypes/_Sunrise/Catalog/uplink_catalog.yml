@@ -2411,6 +2411,17 @@
     Telecrystal: 1
   categories:
   - UplinkImplants
+
+- type: listing
+  id: UplinkMindcontrolImplant
+  name: uplink-mind-control-implant-name
+  description: uplink-mind-control-implant-desc
+  icon: { sprite: Objects/Specific/Medical/syndi_implanter.rsi, state: implanter0 }
+  productEntity: MindControlImplanter
+  cost:
+    Telecrystal: 8
+  categories:
+  - UplinkImplants
 # Jobs
 
 - type: listing

@@ -172,6 +172,8 @@ uplink-radio-implanter-name = Радиоимплант
 uplink-radio-implanter-desc = Вживляемое радио Синдиката для скрытой связи. Не требует гарнитуры.
 uplink-voice-mask-implanter-name = Имплантер Голосовая маска
 uplink-voice-mask-implanter-desc = Модифицирует голосовые связки, позволяя звучать как кто угодно.
+uplink-mind-control-implant-name = Имплантер Контроль разума
+uplink-mind-control-implant-desc = Превратите врага в союзника. Он будет выполнять любые ваши приказы.
 # Cybernetics
 uplink-nightvision-eyes = Кибер-глаза ночного видения
 uplink-nightvision-eyes-desc = Позволяют видеть в темноте, но делают вас более уязвимым к светошумовым гранатам. (Внимание: Требуется помощь хирурга.)

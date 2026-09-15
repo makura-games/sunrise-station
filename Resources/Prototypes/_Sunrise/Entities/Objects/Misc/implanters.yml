@@ -128,6 +128,14 @@
     implant: DeathRattleImplantTSF
 
 - type: entity
+  id: MindControlImplanter
+  name: mind control implanter
+  parent: BaseImplantOnlyImplanterSyndi
+  components:
+  - type: Implanter
+    implant: MindControlImplant
+
+- type: entity
   id: SELFStorageImplanter
   name: S.E.L.F storage implanter
   parent: BaseImplantOnlyImplanterSyndi

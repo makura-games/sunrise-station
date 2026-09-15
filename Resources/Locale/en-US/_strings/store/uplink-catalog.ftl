@@ -238,6 +238,8 @@ uplink-radio-implanter-desc = Implants a Syndicate radio, allowing covert commun
 
 uplink-voice-mask-implanter-name = Identity Mask Implanter
 uplink-voice-mask-implanter-desc = Modifies your vocal cords and facial structure to be able to mimic anyone you could imagine.
+uplink-mind-control-implant-name = Mind Control Implanter
+uplink-mind-control-implant-desc = Turn your frenemy into a friend. They will follow any order you give them.
 
 # Bundles
 uplink-observation-kit-name = Observation Kit

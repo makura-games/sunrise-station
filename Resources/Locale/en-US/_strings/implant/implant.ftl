@@ -25,3 +25,12 @@ implanter-label-draw = [color=red]{$implantName}[/color]
     Mode: [color=white]{$modeString}[/color]
 
 implanter-contained-implant-text = [color=green]{$desc}[/color]
+
+mind-control-user-freed = You are no longer under the effects of the implant. You do not remember what happened while under its effects, or the person who implanted you.
+mind-control-user-briefing =
+    You have been implanted with a mind control implant by [color=darkred]{$master-name}[/color].
+    Listen to the instructions they provide. Try not to get yourself killed, injured, or compromise your implant...
+    Unless [color=darkred]{$master-name}[/color] commands it.
+mind-control-prevented = A mindshield prevented the implant!
+mind-control-prevents-mindshield = Another implant was in the way.
+mind-control-invalid = The subject must be alive.
