@@ -151,7 +151,7 @@
   name: glasscap
   description: Glass doesn't grow on trees! It grows on mushrooms, of course.
   id: GlassLog
-  parent: [GlassSounds, ProduceBase] # Sunrise edit
+  parent: [GlassSounds, ProduceBase, BaseSlicingRefinable] # Sunrise edit
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/glasscap.rsi
@@ -162,15 +162,16 @@
         Blunt: 10
   - type: Produce
     seedId: glasscap
-  - type: Log
-    spawnedPrototype: SheetGlass1
-    spawnCount: 1
+  - type: ToolRefinable
+    qualityNeeded: Sawing
+    refineResult:
+    - id: SheetGlass1
 
 - type: entity
   name: plaststeelcap
   description: Plaststeel doesn't grow on trees! It grows on mushrooms, of course.
   id: PlastSteelLog
-  parent: ProduceBase
+  parent: [ProduceBase, BaseSlicingRefinable]
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/plaststeelcap.rsi
@@ -181,13 +182,14 @@
         Blunt: 12
   - type: Produce
     seedId: plaststeelcap
-  - type: Log
-    spawnedPrototype: SheetPlasteel1
-    spawnCount: 1
+  - type: ToolRefinable
+    qualityNeeded: Sawing
+    refineResult:
+    - id: SheetPlasteel1
 
 - type: entity
   name: barrelmelon
-  parent: FoodProduceBase
+  parent: [FoodProduceBase, BaseSlicingRefinableFood]
   id: FoodBarrelmelon
   description: Round brown object that you can slice and eat.
   components:
@@ -235,9 +237,10 @@
         solution: food
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: SliceableFood
-    count: 5
-    slice: FoodBarrelmelonSlice
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodBarrelmelonSlice
+      amount: 5
   - type: Tag
     tags:
     - Fruit

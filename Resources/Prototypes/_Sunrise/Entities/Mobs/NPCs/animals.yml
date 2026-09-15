@@ -79,7 +79,6 @@
       state: "creampie_human"
       visible: false
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeat
       amount: 2

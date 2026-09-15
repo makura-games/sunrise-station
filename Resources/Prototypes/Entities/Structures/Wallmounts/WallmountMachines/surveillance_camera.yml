@@ -58,7 +58,7 @@
     damageContainer: StructuralInorganic
   - type: Sprite
     drawdepth: WallMountedItems
-    sprite: Structures/Wallmounts/camera.rsi
+    sprite: _Sunrise/Structures/Wallmounts/camera.rsi # Sunrise-Edit
     layers:
       - map: [ "enum.SurveillanceCameraVisualsKey.Layer" ]
         state: camera
@@ -79,32 +79,26 @@
     price: 200
   - type: Destructible
     thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 200
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
-      - trigger:
-          !type:DamageTrigger
-          damage: 100
-        behaviors:
-          # - !type:DoActsBehavior # Sunrise-Edit
-          #   acts: [ "Destruction" ]
-          - !type:PlaySoundBehavior
-            sound:
-              collection: MetalBreak
-              params:
-                volume: -8
-          # Sunrise-Start
-          - !type:SpawnEntitiesBehavior
-            spawn:
-              ScrapCameraTiny:
-                min: 0
-                max: 1
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
-          # Sunrise-End
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      # - !type:DoActsBehavior # Sunrise-Edit
+      #   acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -8
+      # Sunrise-Start
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ScrapCameraTiny:
+            min: 0
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      # Sunrise-End
   placement:
     mode: SnapgridCenter
     snap:
@@ -253,7 +247,7 @@
       damageContainer: StructuralInorganic
     - type: Sprite
       drawdepth: WallMountedItems
-      sprite: Structures/Wallmounts/camera.rsi
+      sprite: _Sunrise/Structures/Wallmounts/camera.rsi # Sunrise-Edit
       layers:
         - state: camera_off
   placement:

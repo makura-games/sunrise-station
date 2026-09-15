@@ -51375,7 +51375,7 @@ entities:
           Telecrystal: 9
         conditions: null
         icon:
-          sprite: Objects/Weapons/Melee/fireaxeflaming.rsi
+          sprite: _Sunrise/Objects/Weapons/Melee/fireaxeflaming.rsi
           state: icon
         priority: 0
         productAction: null
@@ -53759,7 +53759,7 @@ entities:
           Doubloon: 27
         conditions: null
         icon:
-          sprite: Objects/Weapons/Melee/fireaxeflaming.rsi
+          sprite: _Sunrise/Objects/Weapons/Melee/fireaxeflaming.rsi
           state: icon
         priority: 0
         productAction: null

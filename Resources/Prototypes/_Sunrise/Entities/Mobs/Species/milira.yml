@@ -61,7 +61,6 @@
         Bloodloss: 0.5
         Asphyxiation: 0.5
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatMilira
       amount: 5

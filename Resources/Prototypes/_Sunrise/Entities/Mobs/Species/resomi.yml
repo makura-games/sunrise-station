@@ -91,7 +91,6 @@
   - type: Injurable
     damageContainer: Biological
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatResomi
       amount: 5

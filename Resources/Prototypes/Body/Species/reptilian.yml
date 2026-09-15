@@ -177,7 +177,6 @@
   - type: Puller
     needsHands: false
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatUnath
       amount: 5
@@ -243,7 +242,7 @@
   # Sunrise end
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganReptilian
   abstract: true
   suffix: Reptilian

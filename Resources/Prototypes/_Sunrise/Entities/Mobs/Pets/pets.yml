@@ -72,7 +72,7 @@
 
 - type: entity
   id: PetRabbit
-  parent: [SimpleMobBase, BasePet]
+  parent: [SimpleMobBase, BasePet, BaseSlicingRefinable]
   name: rabbit
   components:
   - type: Sprite
@@ -87,8 +87,8 @@
     noMovementLayers:
       movement:
         state: icon
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeat
       amount: 1
   - type: UserInterface
@@ -111,7 +111,7 @@
 
 - type: entity
   id: PetAnteater
-  parent: [SimpleMobBase, BasePet]
+  parent: [SimpleMobBase, BasePet, BaseSlicingRefinable]
   name: anteater
   components:
   - type: Sprite
@@ -119,8 +119,8 @@
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: icon
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeat
       amount: 1
   - type: UserInterface
@@ -143,7 +143,7 @@
 
 - type: entity
   id: PetOctopus
-  parent: [SimpleMobBase, BasePet]
+  parent: [SimpleMobBase, BasePet, BaseSlicingRefinable]
   name: octopus
   components:
   - type: Sprite
@@ -151,8 +151,8 @@
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeat
       amount: 1
   - type: UserInterface
@@ -175,7 +175,7 @@
 
 - type: entity
   id: PetOtter
-  parent: [SimpleMobBase, BasePet]
+  parent: [SimpleMobBase, BasePet, BaseSlicingRefinable]
   name: otter
   components:
   - type: Sprite
@@ -191,8 +191,8 @@
         Base: dead
       Dead:
         Base: dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeat
       amount: 1
   - type: UserInterface
@@ -215,7 +215,7 @@
 
 - type: entity
   id: PetNavySeal
-  parent: [SimpleMobBase, BasePet]
+  parent: [SimpleMobBase, BasePet, BaseSlicingRefinable]
   name: navy seal
   components:
   - type: Sprite
@@ -223,8 +223,8 @@
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeat
       amount: 1
   - type: UserInterface

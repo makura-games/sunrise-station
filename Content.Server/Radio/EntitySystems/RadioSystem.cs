@@ -1,7 +1,9 @@
 using System.Globalization;
 using Content.Server._Sunrise.Chat.Sanitization;
 using Content.Server.Administration.Logs;
+using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
+using Content.Server.Ghost;
 using Content.Server.Power.Components;
 using Content.Shared._Sunrise.TTS;
 using Content.Shared.Access.Components;
@@ -37,6 +39,8 @@ public sealed partial class RadioSystem : EntitySystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private GhostSystem _ghost = default!;
     [Dependency] private EntityQuery<TelecomExemptComponent> _exemptQuery = default!;
 
     // set used to prevent radio feedback loops.
@@ -66,16 +70,30 @@ public sealed partial class RadioSystem : EntitySystem
 
     private void OnIntrinsicReceive(EntityUid uid, IntrinsicRadioReceiverComponent component, ref RadioReceiveEvent args)
     {
-        // Sunrise-TTS-Start
-        if (TryComp(uid, out ActorComponent? actor))
+        if (!TryComp(uid, out ActorComponent? actor))
+            return;
+
+        var msg = args.ChatMsg;
+        if (_ghost.CanGhostWarp(actor.PlayerSession, out _))
         {
-            _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
-            if (uid != args.MessageSource && HasComp<TTSComponent>(args.MessageSource))
+            msg = new MsgChatMessage
             {
-                args.Receivers.Add(uid);
-            }
+                Message = new ChatMessage(args.ChatMsg.Message)
+                {
+                    WrappedMessage = _chatManager.PrependFollowButtonIfAppropriate(
+                        args.ChatMsg.Message.WrappedMessage,
+                        args.MessageSource,
+                        actor.PlayerSession.Channel),
+                },
+            };
         }
-        // Sunrise-TTS-End
+
+        _netMan.ServerSendMessage(msg, actor.PlayerSession.Channel);
+
+        // Sunrise added start - сбор получателей для TTS радиосообщения
+        if (uid != args.MessageSource && HasComp<TTSComponent>(args.MessageSource))
+            args.Receivers.Add(uid);
+        // Sunrise added end
     }
 
     /// <summary>

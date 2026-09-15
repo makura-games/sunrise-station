@@ -4,7 +4,6 @@
   id: TrueRitualDagger
   description: A strange dagger used by sinister groups for rituals and sacrifices.
   components:
-  - type: Sharp
   - type: Sprite
     sprite: Objects/Weapons/Melee/cult_dagger.rsi
     state: icon
@@ -43,6 +42,7 @@
         type: ListViewSelectorBUI
   - type: Tool
     qualities:
+    - Slicing
     - CultAnchoring
     useSound:
       path: /Audio/_Sunrise/BloodCult/curse.ogg
@@ -53,7 +53,6 @@
   id: TrueEldritchBlade
   description: A sword humming with unholy energy.
   components:
-  - type: Sharp
   - type: Sprite
     sprite: Objects/Weapons/Melee/cult_blade.rsi
     state: icon
@@ -77,6 +76,7 @@
         Slash: 10
   - type: Tool
     qualities:
+    - Slicing
     - CultAnchoring
     useSound:
       path: /Audio/_Sunrise/BloodCult/curse.ogg
@@ -124,6 +124,8 @@
         Slash: 10
   - type: Tool
     qualities:
+    - Slicing
+    - Sawing
     - CultAnchoring
     useSound:
       path: /Audio/_Sunrise/BloodCult/curse.ogg
@@ -141,7 +143,9 @@
     state: icon
   - type: ThrowingAngle
     angle: 225
-  - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:

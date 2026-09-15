@@ -190,7 +190,6 @@
       Female: UnisexVox
       Unsexed: UnisexVox
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatChicken
       amount: 5
@@ -272,7 +271,7 @@
   # Sunrise end
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganVox
   abstract: true
   suffix: Vox

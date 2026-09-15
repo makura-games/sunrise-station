@@ -20,7 +20,11 @@ jobs:
     name: Validate RSIs
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7
+      - name: Setup Submodule
+        run: git submodule update --init
+      - name: Pull engine updates
+        uses: space-wizards/submodule-dependency@v0.1.5
       - name: Set up Python
         uses: actions/setup-python@v4
         with:

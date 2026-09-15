@@ -165,7 +165,7 @@
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.3
+    damageCoefficient: 0.5
   - type: Armor
     modifiers:
       coefficients:
@@ -632,7 +632,7 @@
     heatingCoefficient: 0.001
     coolingCoefficient: 0.001
   - type: ExplosionResistance
-    damageCoefficient: 0.2
+    damageCoefficient: 0.3
   - type: FireProtection
     reduction: 0.8
   - type: Pierceable

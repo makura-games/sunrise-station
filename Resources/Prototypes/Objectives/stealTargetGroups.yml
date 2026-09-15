@@ -232,7 +232,7 @@
   id: FireAxe
   name: steal-target-groups-fire-axe
   sprite:
-    sprite: Objects/Weapons/Melee/fireaxe.rsi
+    sprite: _Sunrise/Objects/Weapons/Melee/fireaxe.rsi # Sunrise-Edit - используем респрайт форка.
     state: icon
 
 - type: stealTargetGroup

@@ -5,6 +5,7 @@
   - MobAtmosExposed
   - MobCombat
   - MobBloodstream
+  - BaseSlicingRefinable
   id: BaseMobFleshCult
   name: flesh mob
   description: A shambling mass of flesh, animated through anomalous energy.
@@ -57,8 +58,8 @@
         0: Alive
         75: Dead
     - type: Appearance
-    - type: Butcherable
-      spawned:
+    - type: ToolRefinable
+      refineResult:
         - id: FoodMeat
           amount: 1
     - type: CombatMode
@@ -93,8 +94,8 @@
           false
         NavSmash: !type:Bool
           true
-    - type: Butcherable
-      spawned:
+    - type: ToolRefinable
+      refineResult:
         - id: FoodMeat
           amount: 2
     - type: FleshMob
@@ -186,8 +187,8 @@
       speedModifier: 7
       useSound:
         path: /Audio/Items/crowbar.ogg
-    - type: Butcherable
-      spawned:
+    - type: ToolRefinable
+      refineResult:
         - id: FoodMeat
           amount: 5
     - type: FleshAbilities

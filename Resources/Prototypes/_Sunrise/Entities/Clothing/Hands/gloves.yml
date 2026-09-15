@@ -155,7 +155,7 @@
     sprite: _Sunrise/Clothing/Hands/Gloves/christmas_gloves_long.rsi
 
 - type: entity
-  parent: [ ClothingHandsBase, BaseEngineeringContraband ]
+  parent: [ ClothingHandsBase, BaseEngineeringContraband, BaseSlicingRefinable ]
   id: InsulatedGlovesAtmos
   name: insulated gloves atmos
   description: Insulated gloves made especially for atmospheric technicians.
@@ -169,9 +169,8 @@
   - type: TemperatureProtection
     heatingCoefficient: 1.050
     coolingCoefficient: 0.2
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: ClothingHandsGlovesFingerlessInsulated
   - type: Fiber
     fiberMaterial: fibers-insulative

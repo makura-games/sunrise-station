@@ -94,7 +94,6 @@
   name: Urist McHands
   components:
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatHuman
       amount: 5
@@ -104,7 +103,7 @@
   # Sunrise end
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganHuman
   abstract: true
   suffix: human

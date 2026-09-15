@@ -94,7 +94,6 @@
     - SpiderCraft
     - AnomalyHost
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatSpider
       amount: 5
@@ -163,7 +162,7 @@
   # Sunrise-end
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganArachnid
   abstract: true
   suffix: Arachnid

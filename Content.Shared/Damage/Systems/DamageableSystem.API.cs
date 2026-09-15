@@ -18,6 +18,17 @@ public sealed partial class DamageableSystem
         return _supportedTypesByContainer[container.Value].Contains(type);
     }
 
+    public DamageModifierSet? GetDamageModifierSet(Entity<DamageableComponent?> entity)
+    {
+        if (!_damageableQuery.Resolve(entity, ref entity.Comp, false)
+            || entity.Comp.DamageModifierSetId is not { } proto
+            || !_prototypeManager.Resolve(proto, out var modifierSet)
+           )
+            return null;
+
+        return modifierSet;
+    }
+
     /// <summary>
     ///     Directly sets the damage in a damageable component.
     /// </summary>
@@ -152,13 +163,12 @@ public sealed partial class DamageableSystem
         // Apply resistances
         if (!ignoreResistances)
         {
-            if (
-                ent.Comp.DamageModifierSetId != null &&
-                _prototypeManager.Resolve(ent.Comp.DamageModifierSetId, out var modifierSet)
-            )
-                // Sunrise edit start - respect armor penetration and healing prevention in base damage modifier set
+            if (GetDamageModifierSet(ent) is { } modifierSet)
+            {
+                // Sunrise edit start - учёт бронепробития и запрета лечения в базовом наборе модификаторов
                 damage = DamageSpecifier.ApplyModifierSet(damage, modifierSet, armorPenetration, canHeal);
                 // Sunrise edit end
+            }
 
             // TODO DAMAGE
             // byref struct event.

@@ -1,13 +1,16 @@
 using Content.Shared.DoAfter;
 using Content.Shared.Database;
-using Content.Shared.Kitchen.Components;
 using Content.Shared.Popups;
+using Content.Shared.Tools;
+using Content.Shared.Tools.Components;
+using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared._Sunrise.Random;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Sunrise.Execution;
 
@@ -16,6 +19,7 @@ public abstract partial class SharedExecutionSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private RandomPredictedSystem _predictedRandom = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
 
     protected const float MeleeExecutionTimeModifier = 5.0f;
     protected const float SuicideFastChance = 0.25f;
@@ -28,6 +32,8 @@ public abstract partial class SharedExecutionSystem : EntitySystem
     protected const string GunMagazineContainerId = "gun_magazine";
     protected const string StructuralDamageType = "Structural";
 
+    protected static readonly ProtoId<ToolQualityPrototype> SlicingToolQuality = "Slicing";
+
     protected static readonly string[] NonLethalAmmoIdTokens =
     {
         "Practice",
@@ -38,12 +44,15 @@ public abstract partial class SharedExecutionSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SharpComponent, GetVerbsEvent<UtilityVerb>>(OnGetInteractionVerbsMelee);
+        SubscribeLocalEvent<ToolComponent, GetVerbsEvent<UtilityVerb>>(OnGetInteractionVerbsMelee);
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<UtilityVerb>>(OnGetInteractionVerbsGun);
     }
 
-    private void OnGetInteractionVerbsMelee(Entity<SharpComponent> ent, ref GetVerbsEvent<UtilityVerb> args)
+    private void OnGetInteractionVerbsMelee(Entity<ToolComponent> ent, ref GetVerbsEvent<UtilityVerb> args)
     {
+        if (!IsSlicingTool(ent))
+            return;
+
         if (!TryGetVerbContext(ref args, out var attacker, out var weapon, out var victim, out var suicide))
             return;
 
@@ -186,6 +195,11 @@ public abstract partial class SharedExecutionSystem : EntitySystem
     private bool ShouldUseFastSuicide(EntityUid weapon)
     {
         return _predictedRandom.ProbForEntity(weapon, SuicideFastChance);
+    }
+
+    protected bool IsSlicingTool(Entity<ToolComponent> tool)
+    {
+        return _tool.HasQuality(tool, SlicingToolQuality, tool.Comp);
     }
 
     private void ShowExecutionPopupPredicted(

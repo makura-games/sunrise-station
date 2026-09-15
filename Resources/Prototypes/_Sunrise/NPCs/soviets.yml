@@ -128,7 +128,6 @@
     defaultRotation: 90
     horizontalRotation: 90
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatHuman
       amount: 5
@@ -1786,8 +1785,8 @@
       types:
         Blunt: 10
         Slash: 20
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatBear
       amount: 6
     - id: ChemistryBottleOmnizine

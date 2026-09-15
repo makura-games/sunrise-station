@@ -7,6 +7,7 @@ using Content.Shared.Puppet;
 using Content.Shared.Speech;
 using Content.Shared.Speech.Muting;
 using Content.Shared.StatusEffectNew.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Speech.Muting;
 
@@ -17,6 +18,7 @@ namespace Content.Server._Sunrise.Speech.Muting;
 public sealed partial class SunriseMutedStatusEffectSystem : EntitySystem
 {
     [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {
@@ -24,7 +26,7 @@ public sealed partial class SunriseMutedStatusEffectSystem : EntitySystem
 
         SubscribeLocalEvent<StatusEffectContainerComponent, SpeakAttemptEvent>(OnSpeakAttempt);
         SubscribeLocalEvent<StatusEffectContainerComponent, EmoteEvent>(OnEmote, before: [typeof(VocalSystem), typeof(MumbleAccentSystem)]);
-        SubscribeLocalEvent<StatusEffectContainerComponent, ScreamActionEvent>(OnScreamAction, before: [typeof(VocalSystem)]);
+        SubscribeLocalEvent<StatusEffectContainerComponent, EmoteActionEvent>(OnEmoteAction, before: [typeof(VocalSystem)]);
     }
 
     private void OnSpeakAttempt(EntityUid uid, StatusEffectContainerComponent component, SpeakAttemptEvent args)
@@ -45,10 +47,16 @@ public sealed partial class SunriseMutedStatusEffectSystem : EntitySystem
             args.Handled = true;
     }
 
-    private void OnScreamAction(EntityUid uid, StatusEffectContainerComponent component, ScreamActionEvent args)
+    private void OnEmoteAction(EntityUid uid, StatusEffectContainerComponent component, EmoteActionEvent args)
     {
         if (args.Handled || HasComp<MutedComponent>(uid) || !HasMutedStatusEffect(component))
             return;
+
+        if (!_prototypeManager.Resolve(args.Emote, out var emote) ||
+            !emote.Category.HasFlag(EmoteCategory.Vocal))
+        {
+            return;
+        }
 
         PopupMuted(uid);
         args.Handled = true;

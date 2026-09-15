@@ -39,7 +39,6 @@
   - type: SunriseHumanoidProfile
   - type: SunriseHumanoidBaseLayers
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatTajaran
       amount: 5

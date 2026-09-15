@@ -100,7 +100,9 @@
     - type: FleshHandMod
     - type: Unremoveable
       deleteOnDrop: true
-    - type: Sharp
+    - type: Tool
+      qualities:
+      - Slicing
     - type: Sprite
       sprite: _Sunrise/FleshCult/FleshHandMods/flesh_blade.rsi
       state: icon

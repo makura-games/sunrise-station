@@ -87,7 +87,6 @@
   - type: Injurable
     damageContainer: Biological
   - type: Butcherable
-    butcheringType: Spike # TODO human.
     spawned:
     - id: FoodMeatSwine
       amount: 5

@@ -303,7 +303,7 @@
       - type: CriminalRecordsHacker
 
 - type: entity
-  parent: [ ClothingHandsGlovesColorBlack, BaseSecurityEngineeringContraband ]
+  parent: [ ClothingHandsGlovesColorBlack, BaseSecurityEngineeringContraband, BaseSlicingRefinable ] # Sunrise-Edit - сохраняем разрезание перчаток через актуальный ToolRefinable API.
   id: ClothingHandsGlovesCombat
   name: combat gloves
   description: These tactical gloves are fireproof and shock resistant.
@@ -326,9 +326,8 @@
       collection: Punch
     animation: WeaponArcFist
     mustBeEquippedToUse: true
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: ClothingHandsGlovesCombatFingerless
   # Sunrise-end
 
@@ -348,7 +347,7 @@
     fiberColor: fibers-black
 
 - type: entity
-  parent: [ BaseSecurityCargoContraband, ClothingHandsGlovesCombat ]
+  parent: [ BaseSecurityCargoContraband, ClothingHandsGlovesCombat, BaseSlicingRefinable ]
   id: ClothingHandsMercGlovesCombat
   name: mercenary combat gloves
   description: High-quality combat gloves to protect hands from mechanical damage during combat.
@@ -357,9 +356,8 @@
     sprite: Clothing/Hands/Gloves/mercbattle.rsi
   - type: Clothing
     sprite: Clothing/Hands/Gloves/mercbattle.rsi
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: ClothingHandsGlovesMercFingerless
   - type: Fiber
     fiberMaterial: fibers-insulative

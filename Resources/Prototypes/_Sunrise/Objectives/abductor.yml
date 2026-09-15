@@ -5,7 +5,7 @@
   components:
   - type: Objective
     difficulty: 1.5
-    issuer: objective-issuer-abductors
+    issuer: SunriseAbductors
   - type: RoleRequirement
     roles:
     - Abductor
@@ -32,7 +32,7 @@
   components:
   - type: Objective
     difficulty: 1
-    issuer: objective-issuer-abductor-victim
+    issuer: SunriseAbductorVictim
   - type: RoleRequirement
     roles:
     - AbductorVictimRole

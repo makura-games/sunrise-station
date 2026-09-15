@@ -69,4 +69,5 @@
     guides:
     - MedicalDoctor
   - type: PowerSwitch
+  - type: AmbientMusicMarkerMedical
   - type: CanSleepOnBuckle # Sunrise-Edit

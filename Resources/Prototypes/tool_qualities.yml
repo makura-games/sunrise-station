@@ -75,6 +75,13 @@
   spawn: WireBrush
   icon: { sprite: Objects/Specific/Janitorial/wirebrush.rsi, state: icon }
 
+- type: tool
+  id: Shearing
+  name: tool-quality-shearing-name
+  toolName: tool-quality-shearing-tool-name
+  spawn: Wirecutter
+  icon: { sprite: Objects/Tools/wirecutters.rsi, state: cutters-map }
+
 # do not give this to normal tools, its for nuke deconstruction
 - type: tool
   id: FineScrewing

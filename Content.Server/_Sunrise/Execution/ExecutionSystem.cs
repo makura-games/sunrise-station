@@ -4,9 +4,9 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared._Sunrise.Execution;
 using Content.Shared.Body.Components;
-using Content.Shared.Kitchen.Components;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Tools.Components;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
@@ -65,13 +65,16 @@ public sealed partial class ExecutionSystem : SharedExecutionSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SharpComponent, ExecutionDoAfterEvent>(OnDoafterMelee);
+        SubscribeLocalEvent<ToolComponent, ExecutionDoAfterEvent>(OnDoafterMelee);
         SubscribeLocalEvent<GunComponent, ExecutionDoAfterEvent>(OnDoafterGun);
     }
 
-    private void OnDoafterMelee(Entity<SharpComponent> ent, ref ExecutionDoAfterEvent args)
+    private void OnDoafterMelee(Entity<ToolComponent> ent, ref ExecutionDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled || args.Used == null || args.Target == null)
+            return;
+
+        if (!IsSlicingTool(ent))
             return;
 
         var attacker = args.User;

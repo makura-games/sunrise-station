@@ -392,7 +392,9 @@
   id: CyberScythe
   description: A sharp and curved blade on a long fibremetal handle, this tool makes it easy to reap what you sow.
   components:
-  - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Sprite
     sprite: _Sunrise/Objects/Tools/cyberling.rsi
     state: scythe
@@ -411,7 +413,9 @@
   - type: Tag
     tags:
     - BotanyHatchet
-  - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Sprite
     sprite: _Sunrise/Objects/Tools/cyberling.rsi
     state: hatchet

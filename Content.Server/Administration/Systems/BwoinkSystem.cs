@@ -112,6 +112,7 @@ namespace Content.Server.Administration.Systems
             Subs.CVar(_config, CCVars.DiscordAHelpAvatar, OnAvatarChanged, true);
             Subs.CVar(_config, CVars.GameHostName, OnServerNameChanged, true);
             Subs.CVar(_config, CCVars.AdminAhelpOverrideClientName, OnOverrideChanged, true);
+            Subs.CVar(_config, CCVars.AhelpQuickInfoStartWordSize, v => _startWordMinSize = v, true);
             _sawmill = IoCManager.Resolve<ILogManager>().GetSawmill("AHELP");
 
             var defaultParams = new AHelpMessageParams(
@@ -745,7 +746,85 @@ namespace Content.Server.Administration.Systems
             }
         }
 
-        protected override void OnBwoinkTextMessage(BwoinkTextMessage message, EntitySessionEventArgs eventArgs)
+        private string FormatName(AdminData? senderAdmin, ICommonSession senderSession, string prefix, string name)
+        {
+            if (senderAdmin is not null &&
+                senderAdmin.Flags ==
+                AdminFlags.Adminhelp) // Mentor. Not full admin. That's why it's colored differently.
+            {
+                return $"[color=purple]{prefix}{name}[/color]";
+            }
+            else if (senderAdmin is not null && senderAdmin.HasFlag(AdminFlags.Adminhelp))
+            {
+                return $"[color=red]{prefix}{name}[/color]";
+            }
+            else
+            {
+                // Sunrise-Sponsors-Start
+                if (_sponsorsManager == null)
+                    return senderSession.Name; // Not an admin, name is not overridden.
+
+                _sponsorsManager.TryGetOocColor(senderSession.UserId, out var oocColor);
+                _sponsorsManager.TryGetOocTitle(senderSession.UserId, out var oocTitle);
+                var sponsorTitle = oocTitle is null
+                    ? string.Empty
+                    : $"\\[{FormattedMessage.EscapeText(oocTitle)}\\] ";
+                var sponsorName = $"{sponsorTitle}{senderSession.Name}";
+
+                return oocColor != null
+                    ? $"[color={oocColor.Value.ToHex()}]{sponsorName}[/color]"
+                    : sponsorName;
+                // Sunrise-Sponsors-End
+            }
+        }
+
+        private async Task<BwoinkTextMessage> FormatFullMessageForRecipient(
+            bool forAdmin,
+            AdminData? senderAdmin,
+            ICommonSession senderSession,
+            BwoinkTextMessage input)
+        {
+            var senderAHelpAdmin = senderAdmin?.HasFlag(AdminFlags.Adminhelp) ?? false;
+            string messageText;
+
+            if (forAdmin)
+            {
+                messageText = await GenerateNameLinks(input.Text);
+            }
+            else
+            {
+                messageText = FormattedMessage.EscapeText(input.Text);
+            }
+
+            var adminPrefix = "";
+            if (_config.GetCVar(CCVars.AhelpAdminPrefix) && senderAdmin?.Title != null)
+                adminPrefix = $"[bold]\\[{FormattedMessage.EscapeText(senderAdmin.Title)}\\][/bold] ";
+
+            var bwoinkText = FormatName(
+                senderAdmin,
+                senderSession,
+                adminPrefix,
+                forAdmin || _overrideClientName == string.Empty ? senderSession.Name : _overrideClientName);
+
+            var statusPrefix = "";
+            if (input.AdminOnly)
+                statusPrefix = Loc.GetString("bwoink-message-admin-only");
+            else if (!input.PlaySound)
+                statusPrefix = Loc.GetString("bwoink-message-silent");
+
+            bwoinkText = $"{statusPrefix} {bwoinkText}: {messageText}";
+
+            // If it's not an admin / admin chooses to keep the sound and message is not an admin only message, then play it.
+            var playSound = (!senderAHelpAdmin || input.PlaySound) && !input.AdminOnly;
+            return new BwoinkTextMessage(
+                input.UserId,
+                senderSession.UserId,
+                bwoinkText,
+                playSound: playSound,
+                adminOnly: input.AdminOnly);
+        }
+
+        protected override async void OnBwoinkTextMessage(BwoinkTextMessage message, EntitySessionEventArgs eventArgs)
         {
             base.OnBwoinkTextMessage(message, eventArgs);
             _activeConversations[message.UserId] = DateTime.Now;
@@ -782,75 +861,23 @@ namespace Content.Server.Administration.Systems
 
             if (_rateLimit.CountAction(eventArgs.SenderSession, RateLimitKey) != RateLimitStatus.Allowed)
                 return;
-
-            var escapedText = FormattedMessage.EscapeText(message.Text);
-
-            // Sunrise-Sponsors-Start
-            string bwoinkText;
-            string adminPrefix = "";
-
-            //Getting an administrator position
-            if (_config.GetCVar(CCVars.AhelpAdminPrefix) && senderAdmin is not null && senderAdmin.Title is not null)
-            {
-                adminPrefix = $"[bold]\\[{senderAdmin.Title}\\][/bold] ";
-            }
-
-            if (senderAdmin is not null &&
-                senderAdmin.Flags ==
-                AdminFlags.Adminhelp) // Mentor. Not full admin. That's why it's colored differently.
-            {
-                bwoinkText = $"[color=purple]{adminPrefix}{senderSession.Name}[/color]";
-            }
-            else if (senderAdmin is not null && senderAdmin.HasFlag(AdminFlags.Adminhelp))
-            {
-                bwoinkText = $"[color=red]{adminPrefix}{senderSession.Name}[/color]";
-            }
-            else if (_sponsorsManager != null)
-            {
-                _sponsorsManager.TryGetOocColor(message.UserId, out var oocColor);
-                _sponsorsManager.TryGetOocTitle(message.UserId, out var oocTitle);
-                var sponsorTitle = oocTitle is null ? "" : $"\\[{oocTitle}\\]";
-                if (oocColor != null)
-                {
-                    bwoinkText = $"[color={oocColor.Value.ToHex()}]{sponsorTitle} {senderSession.Name}[/color]";
-                }
-                else
-                {
-                    bwoinkText = $"{sponsorTitle} {senderSession.Name}";
-                }
-            }
-            else
-            {
-                bwoinkText = $"{senderSession.Name}";
-            }
-
-            bwoinkText = $"{(message.AdminOnly ? Loc.GetString("bwoink-message-admin-only") : !message.PlaySound ? Loc.GetString("bwoink-message-silent") : "")} {bwoinkText}: {escapedText}";
+            _afkManager.PlayerDidAction(senderSession);
 
             // If it's not an admin / admin chooses to keep the sound and message is not an admin only message, then play it.
             var playSound = (!senderAHelpAdmin || message.PlaySound) && !message.AdminOnly;
-            var msg = new BwoinkTextMessage(message.UserId, senderSession.UserId, bwoinkText, playSound: playSound, adminOnly: message.AdminOnly);
-            // Sunrise-Sponsors-End
-
-            LogBwoink(msg);
 
             // Sunrise-Start
             var sentAt = DateTimeOffset.UtcNow;
-            _dbManager.AddAHelpMessage(senderSession.UserId, message.UserId, message.Text, sentAt, message.PlaySound, message.AdminOnly);
+            await _dbManager.AddAHelpMessage(senderSession.UserId, message.UserId, message.Text, sentAt, message.PlaySound, message.AdminOnly);
             // Sunrise-End
 
             var admins = GetTargetAdmins();
+            var adminMsg = await FormatFullMessageForRecipient(forAdmin: true, senderAdmin, senderSession, message);
 
             // Notify all admins
             foreach (var channel in admins)
             {
-                RaiseNetworkEvent(msg, channel);
-            }
-
-            string adminPrefixWebhook = "";
-
-            if (_config.GetCVar(CCVars.AhelpAdminPrefixWebhook) && senderAdmin is not null && senderAdmin.Title is not null)
-            {
-                adminPrefixWebhook = $"[bold]\\[{senderAdmin.Title}\\][/bold] ";
+                RaiseNetworkEvent(adminMsg, channel);
             }
 
             // Notify player
@@ -858,44 +885,16 @@ namespace Content.Server.Administration.Systems
             {
                 if (!admins.Contains(session.Channel))
                 {
-                    // If _overrideClientName is set, we generate a new message with the override name. The admins name will still be the original name for the webhooks.
-                    if (_overrideClientName != string.Empty)
-                    {
-                        string overrideMsgText;
-                        // Doing the same thing as above, but with the override name. Theres probably a better way to do this.
-                        if (senderAdmin is not null &&
-                            senderAdmin.Flags ==
-                            AdminFlags.Adminhelp) // Mentor. Not full admin. That's why it's colored differently.
-                        {
-                            overrideMsgText = $"[color=purple]{adminPrefixWebhook}{_overrideClientName}[/color]";
-                        }
-                        else if (senderAdmin is not null && senderAdmin.HasFlag(AdminFlags.Adminhelp))
-                        {
-                            overrideMsgText = $"[color=red]{adminPrefixWebhook}{_overrideClientName}[/color]";
-                        }
-                        else
-                        {
-                            overrideMsgText = $"{senderSession.Name}"; // Not an admin, name is not overridden.
-                        }
-
-                        overrideMsgText = $"{(message.PlaySound ? "" : "(S) ")}{overrideMsgText}: {escapedText}";
-
-                        RaiseNetworkEvent(new BwoinkTextMessage(message.UserId,
-                                senderSession.UserId,
-                                overrideMsgText,
-                                playSound: playSound),
-                            session.Channel);
-                    }
-                    else
-                        RaiseNetworkEvent(msg, session.Channel);
+                    var playerMsg = await FormatFullMessageForRecipient(forAdmin: false, senderAdmin, senderSession, message);
+                    RaiseNetworkEvent(playerMsg, session.Channel);
                 }
             }
 
             var sendsWebhook = _webhookUrl != string.Empty;
             if (sendsWebhook)
             {
-                if (!_messageQueues.ContainsKey(msg.UserId))
-                    _messageQueues[msg.UserId] = new Queue<DiscordRelayedData>();
+                if (!_messageQueues.ContainsKey(message.UserId))
+                    _messageQueues[message.UserId] = new Queue<DiscordRelayedData>();
 
                 var str = message.Text;
                 var unameLength = senderSession.Name.Length;
@@ -916,7 +915,7 @@ namespace Content.Server.Administration.Systems
                     adminOnly: message.AdminOnly,
                     noReceivers: nonAfkAdmins.Count == 0
                 );
-                _messageQueues[msg.UserId].Enqueue(GenerateAHelpMessage(messageParams));
+                _messageQueues[message.UserId].Enqueue(GenerateAHelpMessage(messageParams));
             }
 
             if (admins.Count != 0 || sendsWebhook)

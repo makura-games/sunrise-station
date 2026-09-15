@@ -242,7 +242,6 @@
     defaultRotation: 90
     horizontalRotation: 90
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatHuman
       amount: 5
@@ -311,7 +310,6 @@
   - type: Stamina
     baseCritThreshold: 100
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeat
       amount: 5

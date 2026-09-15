@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Content.Shared.Salvage.Expeditions;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Shared.Salvage;
 
@@ -10,7 +11,7 @@ public abstract partial class SharedSalvageSystem
     public SalvageFactionPrototype GetFactionPrototype(
         List<ProtoId<SalvageFactionPrototype>>? dungeonFactions,
         string difficultyId,
-        System.Random rand)
+        RobustRandom rand)
     {
         var factionProtos = _proto.EnumeratePrototypes<SalvageFactionPrototype>().ToList();
 

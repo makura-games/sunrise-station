@@ -14,7 +14,7 @@ namespace Content.IntegrationTests.Tests.Administration.Logs;
 
 public sealed class LogWindowTest : InteractionTest
 {
-    protected override PoolSettings Settings => new() { Connected = true, Dirty = true, AdminLogsEnabled = true, DummyTicker = false };
+    public override PoolSettings PoolSettings => new() { Connected = true, Dirty = true, AdminLogsEnabled = true, DummyTicker = false };
 
     [Test]
     [Ignore("Someone should to find out why this test failing")] // Sunrise-edit
@@ -42,13 +42,13 @@ public sealed class LogWindowTest : InteractionTest
         // Search for the log we added earlier.
         await Client.WaitPost(() => search.Text = guid.ToString());
         await ClickControl(refresh);
-        await RunTicks(5);
+        await RunTicks(10);
 
         // Sunrise edit start - крутые красивые логи
         var searchResult = cont.Children.Where(x => x.Visible && x is SunriseAdminLogLabel).Cast<SunriseAdminLogLabel>().ToArray();
         // Sunrise edit end
 
-        Assert.That(searchResult.Length, Is.EqualTo(1));
+        Assert.That(searchResult, Has.Length.EqualTo(1));
         Assert.That(searchResult[0].Log.Message, Contains.Substring($" test log 1: {guid}"));
 
         // Add a new log
@@ -58,13 +58,13 @@ public sealed class LogWindowTest : InteractionTest
         // Update the search and refresh
         await Client.WaitPost(() => search.Text = guid.ToString());
         await ClickControl(refresh);
-        await RunTicks(5);
+        await RunTicks(10);
 
         // Sunrise edit start - крутые красивые логи
         searchResult = cont.Children.Where(x => x.Visible && x is SunriseAdminLogLabel).Cast<SunriseAdminLogLabel>().ToArray();
         // Sunrise edit end
 
-        Assert.That(searchResult.Length, Is.EqualTo(1));
+        Assert.That(searchResult, Has.Length.EqualTo(1));
         Assert.That(searchResult[0].Log.Message, Contains.Substring($" test log 2: {guid}"));
     }
 }

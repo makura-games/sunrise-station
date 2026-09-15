@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: FoodMeatRawBase
+  parent: [FoodMeatRawBase, BaseSlicingRefinableFood]
   id: FoodMeatSpeciesBase
   components:
   - type: Sprite
@@ -12,9 +12,10 @@
           Quantity: 9
         - ReagentId: Fat
           Quantity: 9
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatCutlet
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatCutlet
+      amount: 3
   - type: InternalTemperature
     conductivity: 0.43
   - type: Construction
@@ -38,7 +39,7 @@
     defaultTarget: demon steak
 
 - type: entity
-  parent: FoodMeatPlant
+  parent: [FoodMeatPlant, BaseSlicingRefinableFood]
   id: FoodMeatDionaRoots
   name: diona roots
   description: A bundle of roots. Technically edible. Technically.
@@ -53,9 +54,10 @@
     tags:
     - Raw
     - Meat
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatCutlet
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatCutlet
+      amount: 3
 
 - type: entity
   parent: FoodMeatSpeciesBase
@@ -195,7 +197,7 @@
 
 - type: entity
   abstract: true
-  parent: FoodMeatBase
+  parent: [FoodMeatBase, BaseSlicingRefinableFood]
   id: FoodMeatSpeciesCookedBase
   components:
   - type: Tag
@@ -210,9 +212,10 @@
           Quantity: 10
         - ReagentId: Protein
           Quantity: 5
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatCutletCooked
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatCutletCooked
+      amount: 3
   - type: FoodSequenceElement
     entries:
       Burger: MeatSteak

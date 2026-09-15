@@ -355,7 +355,6 @@
         variation: 0.05
   # Sunrise edit start
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatVulpkanin
       amount: 5
@@ -378,7 +377,7 @@
       state: creampie_vulpkanin
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganVulpkanin
   abstract: true
   suffix: vulpkanin

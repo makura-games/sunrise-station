@@ -52,7 +52,6 @@
     noRot: true
     drawdepth: Mobs
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatDemon
       amount: 5

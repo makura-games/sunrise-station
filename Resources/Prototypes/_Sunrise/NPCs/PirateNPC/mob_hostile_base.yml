@@ -351,7 +351,6 @@
       60: 0.5
   - type: Blindable
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatRotten
       amount: 2

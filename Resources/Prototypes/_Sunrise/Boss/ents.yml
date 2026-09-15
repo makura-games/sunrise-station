@@ -141,8 +141,8 @@
     distance: 2
     speed: 12
   # Abilities end
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: ClothingUniformJumpsuitGalaxyBlue
       prob: 0.75
     - id: ClothingUniformJumpsuitGalaxyRed

@@ -18,14 +18,6 @@
     CaptainGunChangelingStealObjective: 1
 
 - type: weightedRandom
-  id: ChangelingObjectiveGroupKill
-  weights:
-    ChangelingKillRandomPersonObjective: 1
-    # SUNRISE-TODO: Цель не работает, так как в момент выдачи антагов еще нету
-    # Нужно как-то выдавать эту цель позже выбора агентов.
-    # ChangelingKillRandomAntagObjective
-
-- type: weightedRandom
   id: ChangelingObjectiveGroupState
   weights:
     ChangelingAbsorbObjective: 1
