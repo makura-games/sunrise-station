@@ -43,6 +43,43 @@
         locked: true
 
 - type: entity
+  parent: BaseItem
+  id: SunriseEnergyDomeDirectionalTurtleBorg
+  name: cyborg barrier generator
+  description: Projects a blue directional energy barrier that blocks incoming fire and movement.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Tools/EnergyDome/reinhardt.rsi
+    state: icon
+  - type: InteractionOutline
+  - type: Item
+    size: Large
+  - type: HeldSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellRobotTool
+        locked: true
+  - type: EnergyDomeGenerator
+    damageEnergyDraw: 1
+    domePrototype: SunriseEnergyDomeSecurityBorg
+  - type: PowerCellDraw
+    enabled: false
+    drawRate: 5
+    useCharge: 0
+  - type: UseDelay
+    delay: 10
+
+- type: entity
   name: robot laser gun
   parent: BaseWeaponBatterySmall
   id: WeaponLaserBorg
@@ -1078,5 +1115,78 @@
       name: radio-jammer-component-setting-high
     frequenciesExcluded:
     - 1213 # syndicate frequency
+
+- type: entity
+  id: SunriseSyndiBorgHypo
+  parent: SyndiHypo
+  name: gorlex borg hypospray
+  description: A refillable Gorlex hypospray adapted for use by cyborgs.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RefillableSolution
+    solution: hypospray
+  - type: UseDelay
+    delay: 0.5
+
+- type: entity
+  id: SunriseAutoMenderBruteSyndicateBorg
+  parent: BaseAutoMender
+  name: syndicate brute automender
+  description: A refillable automender calibrated to treat brute injuries.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      injector:
+        maxVol: 35
+  - type: Healing
+    worksOnTheDead: false
+    solutionDrain: true
+    reagentsToDrain:
+    - ReagentId: Bicaridine
+      Quantity: 0.5
+    delay: 0.5
+    damageContainers:
+    - Biological
+    damage:
+      types:
+        Blunt: -0.66
+        Slash: -0.67
+        Piercing: -0.67
+    healingBeginSound:
+      path: /Audio/_Starlight/Items/Medical/mender.ogg
+    healingEndSound:
+      path: /Audio/_Starlight/Items/Medical/mender2.ogg
+
+- type: entity
+  id: SunriseAutoMenderBurnSyndicateBorg
+  parent: BaseAutoMender
+  name: syndicate burn automender
+  description: A refillable automender calibrated to treat burns.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      injector:
+        maxVol: 35
+  - type: Healing
+    worksOnTheDead: false
+    solutionDrain: true
+    reagentsToDrain:
+    - ReagentId: Dermaline
+      Quantity: 0.5
+    delay: 0.5
+    damageContainers:
+    - Biological
+    damage:
+      types:
+        Heat: -1.5
+        Cold: -1.5
+        Shock: -1.5
+        Caustic: -1
+    healingBeginSound:
+      path: /Audio/_Starlight/Items/Medical/mender.ogg
+    healingEndSound:
+      path: /Audio/_Starlight/Items/Medical/mender2.ogg
 
 # region end

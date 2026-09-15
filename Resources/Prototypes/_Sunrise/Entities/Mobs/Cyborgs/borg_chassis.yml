@@ -362,6 +362,7 @@
       - BorgModuleMedical
       - BorgModuleEngineering
       - BorgModuleSyndicate
+      - SunriseBorgModuleSyndicateStealth
     hasMindState: spider_e
     noMindState: spider_e_r
   - type: IntrinsicRadioTransmitter
