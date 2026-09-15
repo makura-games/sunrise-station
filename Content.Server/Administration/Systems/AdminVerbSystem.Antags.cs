@@ -121,11 +121,7 @@ public sealed partial class AdminVerbSystem
             Text = pirateName,
             Category = VerbCategory.Antag,
             Icon = new SpriteSpecifier.Rsi(new("/Textures/Clothing/Head/Hats/pirate.rsi"), "icon"),
-            Act = () =>
-            {
-                // pirates just get an outfit because they don't really have logic associated with them
-                _outfit.SetOutfit(args.Target, PirateGearId);
-            },
+            Act = () => MakePirate(args.Target), // Sunrise-Edit
             Impact = LogImpact.High,
             Message = string.Join(": ", pirateName, Loc.GetString("admin-verb-make-pirate")),
         };

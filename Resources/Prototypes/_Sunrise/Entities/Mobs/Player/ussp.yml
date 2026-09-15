@@ -305,7 +305,7 @@
       description: ghost-role-information-pirate-description
       rules: ghost-role-information-rules-team-antagonist
       mindRoles:
-      - MindRoleGhostRoleTeamAntagonist
+      - MindRolePirate
       raffle:
         settings: default
     - type: Loadout
@@ -361,7 +361,7 @@
       description: ghost-role-information-pirate-description
       rules: ghost-role-information-rules-team-antagonist
       mindRoles:
-      - MindRoleGhostRoleTeamAntagonist
+      - MindRolePirate
       raffle:
         settings: default
     - type: Loadout
