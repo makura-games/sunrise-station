@@ -1,0 +1,8 @@
+- type: soundCollection
+  id: Knuckles
+  files:
+    - /Audio/_Sunrise/Weapons/knuckle1.ogg
+    - /Audio/_Sunrise/Weapons/knuckle2.ogg
+    - /Audio/_Sunrise/Weapons/knuckle3.ogg
+    - /Audio/_Sunrise/Weapons/knuckle4.ogg
+    - /Audio/_Sunrise/Weapons/knuckle5.ogg

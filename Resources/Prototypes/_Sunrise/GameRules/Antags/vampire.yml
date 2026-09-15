@@ -1,0 +1,57 @@
+# Vampire
+- type: entity
+  abstract: true
+  parent: BaseGameRule
+  id: BaseVampireRule
+  components:
+  - type: GameRule # It doesn't really make lore sense that you can "remember" you're a vampire, but it should give everyone some calm at the start.
+    minPlayers: 25
+    delay:
+      min: 240
+      max: 420
+  - type: VampireRule
+  - type: AntagObjectives
+    objectives:
+    - VampireKillRandomPersonObjective
+    - VampireDrainObjective
+  - type: AntagRandomObjectives
+    sets:
+    - groups: VampireObjectiveGroupsStateOnly
+      maxPicks: 1
+    - groups: VampireObjectiveGroupsStealOnly
+      maxPicks: 1
+    maxDifficulty: 10
+  - type: DynamicRuleCost
+    cost: 125
+
+#Full gamemode variant of vamps. Only shows up in Vampire and Dynamic.
+- type: entity
+  parent: [BaseVampireRule]
+  id: Vampire
+  components:
+  - type: AntagSelection
+    agentName: vampire-roundend-name
+    definitions:
+    - prefRoles: [ Vampire ]
+      playerRatio: 24
+      min: 1
+      max: 12
+      mindRoles:
+      - MindRoleVampire
+
+#Subgamemode variant of vamps. There's less of them.
+- type: entity
+  parent: [BaseVampireRule]
+  id: VampireLess
+  components:
+  - type: AntagSelection
+    agentName: vampire-roundend-name
+    definitions:
+    - prefRoles: [ Vampire ]
+      playerRatio: 32 # This is the absolute maximum ratio that still lets Beta get 2.
+      min: 1
+      max: 6
+      mindRoles:
+      - MindRoleVampire
+  - type: DynamicRuleCost
+    cost: 100

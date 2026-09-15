@@ -1,0 +1,16 @@
+- type: gamePreset
+  id: Vampire
+  alias:
+  - vampire
+  - vamp
+  name: vampire-preset-title
+  description: vampire-preset-description
+  showInVote: true
+  hide: true
+  minPlayers: 1
+  rules:
+  - Vampire
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - BasicRoundstartVariation

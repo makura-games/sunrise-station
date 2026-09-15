@@ -20,6 +20,13 @@
           conditions:
           - !type:HasBudgetCondition
           - !type:MaxRuleOccurenceCondition
+        - id: Vampire
+          weight: 15 # Sunrise-Edit: вампиры
+          conditions:
+          - !type:HasBudgetCondition
+          - !type:MaxRuleOccurenceCondition
+          - !type:PlayerCountCondition
+            min: 1
         - id: Nukeops
           weight: 25
           conditions:

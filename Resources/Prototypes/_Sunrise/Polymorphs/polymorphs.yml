@@ -1,0 +1,15 @@
+- type: polymorph
+  id: VampireSanguinePoolPolymorph
+  configuration:
+    entity: MobVampireSanguinePool
+    forced: true
+    transferDamage: true
+    transferName: true
+    inventory: Transfer
+    revertOnCrit: true
+    revertOnDeath: true
+    effectProto: null
+    polymorphSound: !type:SoundPathSpecifier
+      path: /Audio/_Sunrise/Effects/vampire/enter_blood.ogg
+    exitPolymorphSound: !type:SoundPathSpecifier
+      path: /Audio/_Sunrise/Effects/vampire/exit_blood.ogg
