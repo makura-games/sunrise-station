@@ -33,4 +33,17 @@ public sealed partial class SunriseCCVars
     /// </summary>
     public static readonly CVarDef<bool> MappingAutoVariantize =
         CVarDef.Create("mapping.auto_variantize", true, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Разрешает игре загружать игровые карты из UserData с приоритетом над ресурсами билда.
+    /// Если выключено, игровые карты читаются только из упакованного контента.
+    /// </summary>
+    /// <remarks>
+    /// По умолчанию карты сохраненные в UserData перезаписывают карты загруженные с билдом.
+    /// Это задумывалось как фича для удобной проверки локального маппинга, чтобы без перезагрузки сервера проверить новую карту.
+    /// Но на проде может произойти такое, что кто-то запишет карту в UserData, чем вызовет застрявшую до рестарта сервера карту.
+    /// <para>В debug конфиге по умолчанию стоит true для локального маппинга. На проде будет false, кроме мапперских серверов</para>
+    /// </remarks>
+    public static readonly CVarDef<bool> GameMapUseUserData =
+        CVarDef.Create("mapping.game_map_use_user_data", false, CVar.SERVERONLY | CVar.ARCHIVE);
 }
