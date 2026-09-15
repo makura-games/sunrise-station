@@ -181,3 +181,65 @@
         - id: WeaponSniperGarand
         - id: MagazineGarand
         - id: BlueprintMagazineGarand
+
+# Синдикатский тайник
+- type: entity
+  parent: MarkerBase
+  id: SunriseSyndicateDeadDropSpawner
+  name: Syndicate High Command # Имя отправителя радио-анонса.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityTableSpawner
+    table: !type:AllSelector
+      children:
+      - id: SunriseSyndicateDeadDropBriefcase
+      - id: SunriseRedspaceFlash
+
+- type: entity
+  parent: [ BaseSubfloorAnchorStorageAnchored, SunriseSyndicateRedspaceBriefcase, BaseMinorContraband ]
+  id: SunriseSyndicateDeadDropBriefcase
+  name: syndicate briefcase
+  suffix: Dead Drop, Do Not Map
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:GroupSelector
+        rolls: !type:RangeNumberSelector
+          range: 3, 4
+        children:
+        # Оружие
+        - id: HomerunBat
+        - id: EnergyDaggerBox
+        - id: WeaponPistolViper
+        - id: WeaponRevolverPython
+        - id: CyberEyeThermal
+        # Гранаты и взрывчатка
+        - id: SmokeGrenade
+        - id: EmpGrenade
+        - id: C4
+        - id: X4
+        # Одежда
+        - id: ClothingShoesBootsMagSyndie
+        - id: ClothingMaskGasSyndicate
+        # Инструменты
+        - id: ChameleonProjector
+        - id: CameraBug
+        - id: SyndicateJawsOfLife
+        - id: RadioJammer
+        - id: AccessBreaker
+        - id: CyberPen
+        - id: SyndimovCircuitBoard
+        - id: SyndicateIDCard
+        - id: AgentIDCard
+        # Химикаты
+        - id: Stimpack
+        - id: CombatMedipen
+        - id: CigPackSyndicate
+        - id: ChemistryBottleNocturine
+        # Разное
+        - id: SyndicatePersonalAI
+        - id: RubberStampSyndicate
+        - id: UplinkLighterBox
+        - id: BalloonOperative
+        - id: LubeGrenade
+        - id: GatfruitSeeds
