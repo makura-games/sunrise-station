@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "discord: .askal02",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {"name": "DamageOverlay_5"},
+    {"name": "DamageOverlay_10"},
+    {"name": "DamageOverlay_15"},
+    {"name": "DamageOverlay_20"},
+    {"name": "DamageOverlay_25"}
+  ]
+}
