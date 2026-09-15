@@ -28,6 +28,7 @@ marking-VulpSnoutVulpine = Морда Вульпканина (Лисья)
 marking-VulpBellyCrest = Живот Вульпканина (Гребень)
 marking-VulpBellyFox = Живот Вульпканина (Лиса)
 marking-VulpBellyFull = Живот Вульпканина (Полный)
+marking-VulpPawSocks = Носки на лапах
 marking-VulpPointsCrestArms = Лапы Вульпканина (Локоть)
 marking-VulpPointsFadeArms = Лапы Вульпканина (Плавный Переход)
 marking-VulpPointsSharpArms = Лапы Вульпканина (Затемнение)
@@ -49,6 +50,7 @@ marking-VulpTailFluffyAlt = Хвост Вульпканина (Пушистый,
 marking-VulpTailFox = Хвост Вульпканина (Лиса)
 marking-VulpTailFox2 = Хвост Вульпканина (Лиса, второй вариант)
 marking-VulpTailFox3 = Хвост Вульпканина (Лиса, третий вариант)
+marking-VulpTailFox4 = Хвост Вульпканина (Лиса, четвёртый вариант)
 marking-VulpTailFoxTip = Хвост Вульпканина (Лиса, Кончик)
 marking-VulpTailFoxWag = Хвост Вульпканина (Лиса, Виляющий)
 marking-VulpTailFoxWagTip = Хвост Вульпканина (Лиса, Виляющий, Кончик)
@@ -59,6 +61,7 @@ marking-VulpTailOtie = Хвост Вульпканина (Оти)
 marking-VulpTailTip = Хвост Вульпканина (Кончик)
 marking-VulpTailWag = Хвост Вульпканина (Виляющий)
 marking-VulpTailWagTip = Хвост Вульпканина (Виляющий, Кончик)
+marking-VulpWolfTail = Волчий хвост
 marking-VulpPointsFeet = Лапы Вульпканина
 marking-VulpPointsHands = Руки Вульпканина
 
@@ -133,11 +136,16 @@ marking-VulpTailVulpFade-vulp = Хвост вульпканина (основа)
 marking-VulpTailVulpFade-vulp-fade = Хвост вульпканина (плавный переход)
 marking-VulpTailVulp = Хвост вульпканина
 marking-VulpTailVulpFade = Хвост вульпканина (плавный переход)
+marking-VulpTailFox4-vulp_tail = Хвост Вульпканина (Лиса, четвёртый вариант, кончик)
+marking-VulpTailFox4-vulp_tail_inner = Хвост Вульпканина (Лиса, четвёртый вариант, основа)
+marking-VulpWolfTail-wolf_tail = Волчий хвост (основа)
+marking-VulpWolfTail-wolf_tail_inner = Волчий хвост (кончик)
 
 # Chest (слои)
 marking-VulpBellyCrest-belly_crest = Живот
 marking-VulpBellyFull-belly_full = Живот
 marking-VulpBellyFox-belly_fox = Живот
+marking-PawSocks-pawsocks = Носки на лапах
 
 # Arms
 marking-VulpClawsHandLeft = Когти (левая кисть)
