@@ -31,7 +31,7 @@ lobby-state-playtime-comment-normal =
     Сегодня вы провели в игре {$hours} {$hours ->
     [1]час
     *[other]часов
-    }. Не забывайте делать перерывы!
-lobby-state-playtime-comment-concerning = Сегодня вы играли {$hours} часов. Пожалуйста, сделайте перерыв.
-lobby-state-playtime-comment-grasstouchless = {$hours} часов. Лучше выйти из игры и заняться сексом.
-lobby-state-playtime-comment-selfdestructive = {$hours} часов. Серьезно?
+    }. Вы наиграли больше, чем директора MakuraGames.
+lobby-state-playtime-comment-concerning = Сегодня вы играли {$hours} часов. Это больше, чем куратор сервера!
+lobby-state-playtime-comment-grasstouchless = {$hours} часов, отлично, вы превзошли админ-состав вместе взятый!
+lobby-state-playtime-comment-selfdestructive = {$hours} часов. Вы обычный задрот, вы ничем не лучше остальных игроков.
