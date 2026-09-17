@@ -6,6 +6,5 @@ ent-MagazinePistolSubMachineGunPPSHExtended = PPSH drum magazine
     .desc = { ent-BaseItem.desc }
 ent-MagazineMP7Extended = { ent-MagazineMP7 }
     .desc = { ent-MagazineMP7.desc }
-    .desc = { ent-BaseItem.desc }
 ent-MagazineP90Extended = { ent-MagazineP90 }
     .desc = { ent-MagazineP90.desc }
