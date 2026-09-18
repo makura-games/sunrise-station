@@ -52,7 +52,6 @@ entities:
     - type: MetaData
       name: QL14 Feizao class Transport Shuttle NX-135
     - type: Transform
-      rot: -0.05031051818514243 rad
       parent: invalid
     - type: MapGrid
       chunks:
