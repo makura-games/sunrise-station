@@ -1,16 +1,16 @@
 meta:
   format: 7
-  category: Map
+  category: Grid
   engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 09/17/2026 23:50:05
-  entityCount: 3839
-maps:
-- 68
+  time: 09/18/2026 13:56:20
+  entityCount: 3844
+maps: []
 grids:
 - 1
-orphans: []
+orphans:
+- 1
 nullspace: []
 tilemap:
   0: Space
@@ -65,7 +65,7 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -0.84497166,1.0166779
-      parent: 68
+      parent: invalid
     - type: MapGrid
       chunks:
         0,1:
@@ -3608,16 +3608,6 @@ entities:
     - type: TileHistory
       chunkHistory: {}
     - type: ExplosionAirtightGrid
-  - uid: 68
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: GridTree
-    - type: Broadphase
-    - type: OccluderTree
 - proto: AccordionInstrument
   entities:
   - uid: 2
@@ -19615,6 +19605,14 @@ entities:
       parent: 1
 - proto: SunriseMultiTileAirtightBlocker
   entities:
+  - uid: 68
+    components:
+    - type: Transform
+      anchored: True
+      pos: 28.5,-5.5
+      parent: 1
+    - type: Airtight
+      airBlocked: True
   - uid: 2757
     components:
     - type: Transform
@@ -19656,6 +19654,46 @@ entities:
     - type: Airtight
       airBlocked: True
   - uid: 2777
+    components:
+    - type: Transform
+      anchored: True
+      pos: 23.5,-0.5
+      parent: 1
+    - type: Airtight
+      airBlocked: True
+  - uid: 2778
+    components:
+    - type: Transform
+      anchored: True
+      pos: 28.5,5.5
+      parent: 1
+    - type: Airtight
+      airBlocked: True
+  - uid: 2779
+    components:
+    - type: Transform
+      anchored: True
+      pos: 18.5,1.5
+      parent: 1
+    - type: Airtight
+      airBlocked: True
+  - uid: 2780
+    components:
+    - type: Transform
+      anchored: True
+      pos: 18.5,-0.5
+      parent: 1
+    - type: Airtight
+      airBlocked: True
+  - uid: 2781
+    components:
+    - type: Transform
+      anchored: True
+      pos: 23.5,1.5
+      parent: 1
+    - type: Airtight
+      airBlocked: True
+  - uid: 2782
     components:
     - type: Transform
       anchored: True
@@ -20509,7 +20547,7 @@ entities:
       pos: 18.5,0.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -67229.76
+      secondsUntilStateChange: -67263.234
       state: Opening
     - type: DeviceLinkSource
       lastSignals:

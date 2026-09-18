@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 09/17/2026 18:42:36
-  entityCount: 886
+  time: 09/18/2026 13:50:53
+  entityCount: 879
 maps: []
 grids:
 - 1
@@ -1004,6 +1004,11 @@ entities:
       rot: 3.141592653589793 rad
       pos: 2.5,-0.5
       parent: 1
+    - type: DeviceLinkSource
+      linkedPorts:
+        17:
+        - - DoorStatus
+          - DoorBolt
     - type: AccessReader
       accessListsOriginal: []
       access:
@@ -1016,6 +1021,13 @@ entities:
       rot: 3.141592653589793 rad
       pos: 2.5,2.5
       parent: 1
+    - type: DeviceLinkSink
+      invokeCounter: 1
+    - type: DeviceLinkSource
+      linkedPorts:
+        16:
+        - - DoorStatus
+          - DoorBolt
     - type: AccessReader
       accessListsOriginal: []
       access:
@@ -1223,12 +1235,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 3.5,-8.5
       parent: 1
-  - uid: 44
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 0.5,-1.5
-      parent: 1
   - uid: 45
     components:
     - type: Transform
@@ -1252,18 +1258,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 6.5,-3.5
-      parent: 1
-- proto: ButtonFrameCautionSecurity
-  entities:
-  - uid: 49
-    components:
-    - type: Transform
-      pos: -0.5,0.5
-      parent: 1
-  - uid: 50
-    components:
-    - type: Transform
-      pos: 5.5,0.5
       parent: 1
 - proto: CableApcExtension
   entities:
