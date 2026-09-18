@@ -43778,8 +43778,6 @@ entities:
       pos: 63.5,4.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 4258
   - uid: 4257
@@ -43788,8 +43786,6 @@ entities:
       pos: 63.5,-1.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 4258
 - proto: WeaponEnergyTurretSecurityControlPanel
