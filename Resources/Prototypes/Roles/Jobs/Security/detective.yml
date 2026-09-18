@@ -7,6 +7,11 @@
   - !type:RoleTimeRequirement
     role: JobSecurityOfficer
     time: 5h
+  # Sunrise edit start - ограничение расы для должности
+  - !type:SpeciesRequirement
+    species: [Vox]
+    inverted: true
+  # Sunrise edit end
   startingGear: DetectiveGear
   icon: "JobIconDetective"
   supervisors: job-supervisors-hos
@@ -28,8 +33,6 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
-  speciesBlacklist:
-  - Vox
 
 - type: startingGear
   id: DetectiveGear
