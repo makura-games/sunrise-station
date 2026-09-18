@@ -214480,17 +214480,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 29989
-  - uid: 29986
-    components:
-    - type: Transform
-      pos: -111.5,37.5
-      parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 29994
-      - 29991
   - uid: 29987
     components:
     - type: Transform

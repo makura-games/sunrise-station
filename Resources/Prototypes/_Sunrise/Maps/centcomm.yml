@@ -4,7 +4,7 @@
   mapPath: /Maps/_Sunrise/Station/centcomm.yml
   maxRandomOffset: 0
   randomRotation: false
-  minPlayers: 10
+  minPlayers: 1
   stations:
     centcomm:
       stationProto: NanotrasenCentralCommand
@@ -19,5 +19,3 @@
             #centcom
             CentCommOperator: [ 1, 2 ]
             BlueShieldOperative: [1, 2]
-            #law
-            Magistrat: [1, 1]
