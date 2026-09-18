@@ -16,4 +16,11 @@
             prefixCreator: 'TG'
         - type: StationJobs
           availableJobs:
-            CentCommOperator: [ 1, 1 ]
+            #centcom
+            CentCommOperator: [ 1, 2 ]
+            BlueShieldEnsign: [1, 1]
+            BlueShieldOperative: [1, 2]
+            #law
+            Magistrat: [1, 1]
+            NTRLeader: [1, 1]
+            NTRGuard: [1, 1]
