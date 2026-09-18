@@ -35663,17 +35663,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 214
-  - uid: 890
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -60.5,21.5
-      parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 215
   - uid: 41976
     components:
     - type: Transform
@@ -173107,19 +173096,6 @@ entities:
       parent: 2
     - type: AtmosPipeColor
       color: '#0000FFFF'
-  - uid: 22395
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -60.5,22.5
-      parent: 2
-    - type: AtmosPipeColor
-      color: '#0000FFFF'
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 215
   - uid: 22396
     components:
     - type: Transform
@@ -175628,17 +175604,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 214
-  - uid: 22645
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -60.5,20.5
-      parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 215
   - uid: 41349
     components:
     - type: Transform

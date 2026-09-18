@@ -213207,20 +213207,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 29994
-  - uid: 29963
-    components:
-    - type: Transform
-      pos: -127.5,16.5
-      parent: 2
-    - type: AccessReader
-      accessListsOriginal:
-      - - StationAi
-      - - ResearchDirector
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 29994
   - uid: 29964
     components:
     - type: Transform
@@ -213239,17 +213225,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 29988
-  - uid: 29966
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -111.5,2.5
-      parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 29994
   - uid: 29967
     components:
     - type: Transform
@@ -213395,16 +213370,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 29991
-  - uid: 29984
-    components:
-    - type: Transform
-      pos: -127.5,18.5
-      parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 29994
   - uid: 29985
     components:
     - type: Transform

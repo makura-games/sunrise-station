@@ -8239,26 +8239,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 742
-  - uid: 828
-    components:
-    - type: Transform
-      pos: 59.5,1.5
-      parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 739
-  - uid: 829
-    components:
-    - type: Transform
-      pos: 64.5,1.5
-      parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 739
   - uid: 830
     components:
     - type: Transform
@@ -43546,30 +43526,6 @@ entities:
     - type: DeviceList
       devices:
       - 73
-- proto: WeaponEnergyTurretSecurity
-  entities:
-  - uid: 172
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 63.5,4.5
-      parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 173
-  - uid: 174
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 63.5,-1.5
-      parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 173
 - proto: WeaponEnergyTurretSecurityControlPanel
   entities:
   - uid: 173
