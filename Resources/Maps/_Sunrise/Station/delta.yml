@@ -220118,15 +220118,7 @@ entities:
       parent: 2
     - type: ApcPowerReceiver
       powerLoad: 0
-  - uid: 30285
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -64.5,20.5
-      parent: 2
-    - type: ApcPowerReceiver
-      powerLoad: 0
-    - type: Timer
+
   - uid: 30286
     components:
     - type: Transform
@@ -224182,15 +224174,6 @@ entities:
       parent: 2
     - type: ApcPowerReceiver
       powerLoad: 0
-  - uid: 30904
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 51.5,-42.5
-      parent: 2
-    - type: ApcPowerReceiver
-      powerLoad: 0
-    - type: Timer
   - uid: 30905
     components:
     - type: Transform
@@ -224981,15 +224964,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 38.5,67.5
       parent: 2
-  - uid: 31035
-    components:
-    - type: Transform
-      pos: 58.5,-32.5
-      parent: 2
-    - type: PoweredLight
-      isBlinking: True
-      lastGhostBlink: 87894.3
-    - type: Timer
   - uid: 31036
     components:
     - type: Transform

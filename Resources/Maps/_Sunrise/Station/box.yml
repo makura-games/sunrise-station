@@ -30934,19 +30934,6 @@ entities:
       - 888
     - type: Fixtures
       fixtures: {}
-  - uid: 215
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -62.5,20.5
-      parent: 2
-    - type: DeviceList
-      devices:
-      - 22645
-      - 890
-      - 22395
-    - type: Fixtures
-      fixtures: {}
   - uid: 41375
     components:
     - type: Transform
@@ -33612,17 +33599,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -20.5,-46.5
       parent: 2
-  - uid: 591
-    components:
-    - type: Transform
-      pos: -42.5,-9.5
-      parent: 2
-  - uid: 592
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 30.5,-40.5
-      parent: 2
   - uid: 593
     components:
     - type: Transform
@@ -34532,12 +34508,6 @@ entities:
       parent: 2
 - proto: AirlockVirologyLocked
   entities:
-  - uid: 739
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 40.5,-54.5
-      parent: 2
   - uid: 740
     components:
     - type: Transform
