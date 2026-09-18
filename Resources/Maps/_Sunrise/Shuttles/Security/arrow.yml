@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 09/18/2026 14:35:42
+  time: 09/18/2026 18:00:54
   entityCount: 870
 maps: []
 grids:
@@ -4293,9 +4293,6 @@ entities:
     - type: Transform
       pos: 2.5,2.5
       parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
     - type: DeviceLinkSource
       linkedPorts:
         66:
@@ -6590,8 +6587,6 @@ entities:
       pos: 11.5,-4.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 851
   - uid: 854
@@ -6601,8 +6596,6 @@ entities:
       pos: -0.5,1.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 851
   - uid: 857
@@ -6611,8 +6604,6 @@ entities:
       pos: -6.5,-4.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 851
   - uid: 858
@@ -6631,8 +6622,6 @@ entities:
       pos: 5.5,1.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 851
   - uid: 866
