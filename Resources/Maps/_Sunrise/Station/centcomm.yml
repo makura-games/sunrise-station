@@ -2105,6 +2105,8 @@ entities:
     - type: ImplicitRoof
     - type: GridPathfinding
     - type: Gravity
+    - type: BecomesStation
+      id: SunriseCentComm
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
     - type: DecalGrid
