@@ -80,6 +80,12 @@
 - type: Tag
   id: CartridgeMinigun
 
+- type: Tag
+  id: SecLite # Вайтлист для крафта ClothingHeadHelmetFlashlight
+
+- type: Tag
+  id: GlassesSecurity # Вайтлист для крафта ClothingHeadHelmetFlashlightVisor
+
 # region Species / roles / targets
 - type: Tag
   id: Abductor

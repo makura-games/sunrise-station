@@ -186,6 +186,7 @@
     - HamsterWearable
     - PetWearable
     - WhitelistChameleon
+    - GlassesSecurity # Sunrise-Edit
   - type: GuideHelp
     guides:
     - Security

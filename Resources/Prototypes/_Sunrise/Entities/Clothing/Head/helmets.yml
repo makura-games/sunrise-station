@@ -38,6 +38,49 @@
     - WhitelistChameleon
     - Helmet
 
+- type: entity
+  parent: [HelmetSounds, ClothingHeadHelmetArmoredBase, BaseSecurityContraband, ClothingHeadHatHardhatBase]
+  id: ClothingHeadHelmetFlashlight
+  name: helmet with flashlight
+  description: A tactical helmet with built-in flashlight.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Head/Helmets/flashlight.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Head/Helmets/flashlight.rsi
+  - type: Construction
+    graph: HelmetFlashlight
+    node: helmet
+  - type: PointLight
+    enabled: false
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
+    radius: 8
+    netsync: false
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMedium
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - TopCovered
+    - Helmet
+
+- type: entity
+  parent: ClothingHeadHelmetFlashlight
+  id: ClothingHeadHelmetFlashlightVisor
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Head/Helmets/visor_flashlight.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Head/Helmets/visor_flashlight.rsi
+  - type: FlashImmunity
+  - type: Construction
+    graph: HelmetFlashlightVisor
+    node: helmet
+
 # region BlueShit Helmet
 - type: entity
   parent: ClothingHeadHelmetSwat
