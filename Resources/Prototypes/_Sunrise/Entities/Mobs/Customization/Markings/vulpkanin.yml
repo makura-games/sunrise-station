@@ -1034,3 +1034,51 @@
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Vulpkanin/head_markings.rsi
     state: face_spots
+
+- type: marking
+  id: VulpPawSocks
+  bodyPart: Special
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/vulpkanin.rsi
+      state: pawsocks
+
+- type: marking
+  id: VulpTailFox4
+  bodyPart: Tail
+  groupWhitelist: [ Human, Dwarf, Felinid, Vulpkanin ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/vulpkanin.rsi
+      state: vulp_tail
+    - sprite: _Sunrise/Mobs/Customization/vulpkanin.rsi
+      state: vulp_tail_inner
+
+- type: marking
+  id: VulpWolfTail
+  bodyPart: Tail
+  groupWhitelist: [ Human, Dwarf, Felinid, Vulpkanin ]
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/vulpkanin.rsi
+      state: wolf_tail
+    - sprite: _Sunrise/Mobs/Customization/vulpkanin.rsi
+      state: wolf_tail_inner
+
+- type: marking
+  id: VulpTailFox4Animated
+  bodyPart: Tail
+  groupWhitelist: []
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/vulpkanin.rsi
+      state: tail_fox_waggin
+    - sprite: _Sunrise/Mobs/Customization/vulpkanin.rsi
+      state: tail_fox_inner_waggin
+
+- type: marking
+  id: VulpWolfTailAnimated
+  bodyPart: Tail
+  groupWhitelist: []
+  sprites:
+    - sprite: _Sunrise/Mobs/Customization/vulpkanin.rsi
+      state: tail_wolf_waggin
+    - sprite: _Sunrise/Mobs/Customization/vulpkanin.rsi
+      state: tail_wolf_inner_waggin
