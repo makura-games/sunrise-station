@@ -4024,7 +4024,6 @@ entities:
     - type: ExplosionAirtightGrid
     - type: RadiationGridResistance
     - type: EmergencyShuttle
-    - type: StationEmergencyShuttle
       failureAudio: !type:SoundPathSpecifier
         path: /Audio/Misc/notice1.ogg
       nearbyAudio: !type:SoundPathSpecifier
