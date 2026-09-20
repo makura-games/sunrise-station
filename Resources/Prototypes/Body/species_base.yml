@@ -200,6 +200,10 @@
   components:
   - type: Hunger
   - type: Thirst
+  # Sunrise-Edit: источник крови для вампиров (эффективность определяется целью)
+  - type: BloodSource
+    baseEfficiency: 0.5
+    deadEfficiency: 0.75
   - type: Barotrauma
     damage:
       types:

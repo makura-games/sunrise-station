@@ -44,6 +44,10 @@
   abstract: true
   components:
   - type: Body
+  # Sunrise-Edit: источник крови для вампиров (животные)
+  - type: BloodSource
+    baseEfficiency: 0.125
+    deadEfficiency: 0.75
   - type: EntityTableContainerFill
     containers:
       body_organs: !type:AllSelector

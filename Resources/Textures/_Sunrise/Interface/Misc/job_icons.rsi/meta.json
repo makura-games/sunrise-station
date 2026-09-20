@@ -1,134 +1,529 @@
 {
-    "version": 1,
-    "license": "CLA",
-    "copyright": "© SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt, some icons were redesigned by Gardsnake, commaid created by pacable",
-    "size": {
-        "x": 8,
-        "y": 8
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Starlight, TG Station, Paradise. Soviet and TSF from: https://github.com/ParadiseSS13/Paradise",
+  "size": {
+    "x": 8,
+    "y": 8
+  },
+  "states": [
+    {
+      "name": "Magistrate",
+      "copyright": "Chim",
+      "directions": 1
     },
-    "states": [
-        {
-            "name": "EngineerBorg"
-        },
-        {
-            "name": "JanitorBorg"
-        },
-        {
-            "name": "MedicalBorg"
-        },
-        {
-            "name": "MiningBorg"
-        },
-        {
-            "name": "ServiceBorg"
-        },
-        {
-            "name": "SecurityBorg"
-        },
-        {
-            "name": "PeaceBorg"
-        },
-        {
-            "name": "ClownBorg"
-        },
-        {
-            "name": "SecurityPilot"
-        },
-        {
-            "name": "BlueShield"
-        },
-        {
-            "name": "SecurityCombatBorg"
-        },
-        {
-            "name": "PrisonPilot"
-        },
-        {
-            "name": "PrisonGuard"
-        },
-        {
-            "name": "HeadOfPrison"
-        },
-        {
-            "name": "PrisonDoctor"
-        },
-        {
-            "name": "PrisonWorker"
-        },
-        {
-            "name": "PrisonChef"
-        },
-        {
-            "name": "PrisonEngineer"
-        },
-        {
-            "name": "PrisonScientist"
-        },
-        {
-            "name": "PrisonInspector"
-        },
-        {
-            "name": "Barber"
-        },
-        {
-            "name": "NanotrasenGuard"
-        },
-        {
-            "name": "NanotrasenLeader"
-        },
-        {
-            "name": "Nanotrasen"
-        },
-        {
-            "name": "Pathologist"
-        },
-        {
-            "name": "CaptainUSSP"
-        },
-        {
-            "name": "CrewUSSP"
-        },
-        {
-            "name": "OfficerUSSP"
-        },
-        {
-            "name": "OfficerAltUSSP"
-        },
-        {
-            "name": "SoldierUSSP"
-        },
-        {
-            "name": "MailCarrier"
-        },
-        {
-            "name": "Musician"
-        },
-        {
-            "name": "Borg"
-        },
-        {
-            "name": "CommandMaid"
-        },
-        {
-            "name": "Brigmedic"
-        },
-        {
-            "name": "Adjutant"
-        },
-        {
-            "name": "Pirate"
-        },
-        {
-            "name": "Miner"
-        },
-        {
-            "name": "TSF"
-        },
-        {
-            "name": "IAA"
-        },
-        {
-            "name": "Magistrat"
-        }
-    ]
+    {
+      "name": "IAA",
+      "copyright": "Chim",
+      "directions": 1
+    },
+    {
+      "name": "BlueShield",
+      "copyright": "Modified by wonderfulnewworld",
+      "directions": 1
+    },
+    {
+      "name": "NanoTrasenRepresentative",
+      "copyright": "TG Station, wonderfulnewworld",
+      "directions": 1
+    },
+    {
+      "name": "StationAi",
+      "copyright": "TG Station, lunarcomets, wonderfulnewworld",
+      "directions": 1
+    },
+    {
+      "name": "NanoTrasenCareerTrainer",
+      "copyright": "TG Station, K-Dynamic, wonderfulnewworld",
+      "directions": 1
+    },
+    {
+      "name": "Vampire",
+      "directions": 1
+    },
+    {
+      "name": "Surgeon",
+      "directions": 1
+    },
+    {
+      "name": "MailTech",
+      "delays": [
+        [
+          10,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ],
+      "copyright": "Happyrobot33, fqqf",
+      "directions": 1
+    },
+    {
+      "name": "DutyOfficer",
+      "copyright": "BORT",
+      "directions": 1
+    },
+    {
+      "name": "Performer",
+      "copyright": "wonderfulnewworld",
+      "directions": 1
+    },
+    {
+      "name": "LawyerSL",
+      "delays": [
+        [
+          10,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ],
+      "directions": 1
+    },
+    {
+      "name": "AssistantManager",
+      "copyright": "wonderfulnewworld",
+      "directions": 1
+    },
+    {
+      "name": "CentComm",
+      "copyright": "Happyrobot33, fqqf",
+      "directions": 1
+    },
+    {
+      "name": "NTSF",
+      "copyright": "by teapoterror",
+      "directions": 1
+    },
+    {
+      "name": "Decimus",
+      "copyright": "by teapoterror",
+      "directions": 1
+    },
+    {
+      "name": "NanoTrasenRed",
+      "copyright": "by ShadesMars",
+      "directions": 1
+    },
+    {
+      "name": "CentCommOperator",
+      "copyright": "Happyrobot33, fqqf",
+      "directions": 1
+    },
+    {
+      "name": "Commander",
+      "directions": 1
+    },
+    {
+      "name": "Operative",
+      "directions": 1
+    },
+    {
+      "name": "SyndicateAgent",
+      "directions": 1
+    },
+    {
+      "name": "HeadRevolutionary",
+      "copyright": "JustAdler",
+      "directions": 1
+    },
+    {
+      "name": "Revolutionary",
+      "copyright": "JustAdler",
+      "directions": 1
+    },
+    {
+      "name": "NTNCBlueShield",
+      "copyright": "Conflee Modified by Tjmaxmillion",
+      "directions": 1
+    },
+    {
+      "name": "CCGreenShield",
+      "copyright": "Conflee Modified by Tjmaxmillion",
+      "directions": 1
+    },
+    {
+      "name": "CCServiceWorker",
+      "copyright": "Wizards Den, modified by bynddark8",
+      "directions": 1
+    },
+    {
+      "name": "CCChef",
+      "copyright": "Wizards Den, modified by bynddark8",
+      "directions": 1
+    },
+    {
+      "name": "CCBartender",
+      "copyright": "Wizards Den, modified by bynddark8",
+      "directions": 1
+    },
+    {
+      "name": "CCJanitor",
+      "copyright": "Wizards Den, modified by bynddark8",
+      "directions": 1
+    },
+    {
+      "name": "SalvageLead",
+      "copyright": "mikeysaurus",
+      "directions": 1
+    },
+    {
+      "name": "SalvageSpecialist",
+      "copyright": "mikeysaurus",
+      "directions": 1
+    },
+    {
+      "name": "Soviet",
+      "copyright": "Paradise SS13",
+      "directions": 1
+    },
+    {
+      "name": "TSF",
+      "copyright": "Paradise SS13",
+      "directions": 1
+    },
+    {
+      "name": "TSFOfficer",
+      "copyright": "Sprited by Wassuy",
+      "directions": 1
+    },
+    {
+      "name": "Xenoborg",
+      "copyright": "neomoth",
+      "directions": 1
+    },
+    {
+      "name": "Mothership",
+      "copyright": "neomoth",
+      "directions": 1
+    },
+    {
+      "name": "Skub",
+      "copyright": "neomoth",
+      "directions": 1
+    },
+    {
+      "name": "CultistChaplain",
+      "copyright": "neomoth, Rhetorica",
+      "directions": 1
+    },
+    {
+      "name": "ERTChaplain",
+      "copyright": "Taken and modified from /tg/station13 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi, Conflee",
+      "directions": 1
+    },
+    {
+      "name": "ERTEngineer",
+      "copyright": "Taken and modified from /tg/station13 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi, Conflee",
+      "directions": 1
+    },
+    {
+      "name": "ERTJanitor",
+      "copyright": "Taken and modified from /tg/station13 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi, Conflee",
+      "directions": 1
+    },
+    {
+      "name": "ERTLeader",
+      "copyright": "Taken and modified from /tg/station13 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi, Conflee",
+      "directions": 1
+    },
+    {
+      "name": "ERTMedical",
+      "copyright": "Taken and modified from /tg/station13 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi, Conflee",
+      "directions": 1
+    },
+    {
+      "name": "ERTSecurity",
+      "copyright": "Taken and modified from /tg/station13 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi, Conflee",
+      "directions": 1
+    },
+    {
+      "name": "CBURN",
+      "copyright": "Taken and modified from /tg/station13 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi, Conflee",
+      "directions": 1
+    },
+    {
+      "name": "Chaplain",
+      "copyright": "Rhetorica",
+      "directions": 1
+    },
+    {
+      "name": "TSF_Mindshield",
+      "copyright": "Taken from commit: https://github.com/Monolith-Station/Monolith/commit/87c200ff42a1987117105d49d885df82c5912bd9",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ],
+      "directions": 1
+    },
+    {
+      "name": "Blackstar",
+      "copyright": "Captain icon from /tg/station13 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi, recolored to Blackstar colors by @redmushie (github)",
+      "directions": 1
+    },
+    {
+      "name": "MedTakLeader",
+      "copyright": "SevenShades",
+      "directions": 1
+    },
+    {
+      "name": "MedTakDispatcher",
+      "copyright": "SevenShades",
+      "directions": 1
+    },
+    {
+      "name": "MedTakMedic",
+      "copyright": "SevenShades",
+      "directions": 1
+    },
+    {
+      "name": "MedTakPilot",
+      "copyright": "SevenShades",
+      "directions": 1
+    },
+    {
+      "name": "MedTakSecurity",
+      "copyright": "SevenShades",
+      "directions": 1
+    },
+    {
+      "name": "MedTakBorg",
+      "copyright": "SevenShades",
+      "directions": 1
+    },
+    {
+      "name": "MedTak_Mindshield",
+      "copyright": "SevenShades",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ],
+      "directions": 1
+    },
+    {
+      "name": "ClericalAssistant",
+      "copyright": "Wizards Den, modified by bynddark8",
+      "directions": 1
+    },
+    {
+      "name": "CookAssistant",
+      "copyright": "Wizards Den, modified by bynddark8",
+      "directions": 1
+    },
+    {
+      "name": "DeliveryAssistant",
+      "copyright": "Wizards Den, modified by bynddark8",
+      "directions": 1
+    },
+    {
+      "name": "GardenerAssistant",
+      "copyright": "Wizards Den, modified by bynddark8",
+      "directions": 1
+    },
+    {
+      "name": "HandymanAssistant",
+      "copyright": "Wizards Den, modified by bynddark8",
+      "directions": 1
+    },
+    {
+      "name": "MedicalAssistant",
+      "copyright": "Wizards Den, modified by bynddark8",
+      "directions": 1
+    },
+    {
+      "name": "ReligiousAssistant",
+      "copyright": "Rhetorica, modified by bynddark8",
+      "directions": 1
+    },
+    {
+      "name": "ShopkeeperAssistant",
+      "copyright": "bynddark8",
+      "directions": 1
+    },
+    {
+      "name": "Adjutant",
+      "directions": 1
+    },
+    {
+      "name": "Barber",
+      "directions": 1
+    },
+    {
+      "name": "Borg",
+      "directions": 1
+    },
+    {
+      "name": "Brigmedic",
+      "directions": 1
+    },
+    {
+      "name": "CaptainUSSP",
+      "directions": 1
+    },
+    {
+      "name": "ClownBorg",
+      "directions": 1
+    },
+    {
+      "name": "CommandMaid",
+      "directions": 1
+    },
+    {
+      "name": "CrewUSSP",
+      "directions": 1
+    },
+    {
+      "name": "EngineerBorg",
+      "directions": 1
+    },
+    {
+      "name": "HeadOfPrison",
+      "directions": 1
+    },
+    {
+      "name": "JanitorBorg",
+      "directions": 1
+    },
+    {
+      "name": "Magistrat",
+      "directions": 1
+    },
+    {
+      "name": "MailCarrier",
+      "directions": 1
+    },
+    {
+      "name": "MedicalBorg",
+      "directions": 1
+    },
+    {
+      "name": "Miner",
+      "directions": 1
+    },
+    {
+      "name": "MiningBorg",
+      "directions": 1
+    },
+    {
+      "name": "Musician",
+      "directions": 1
+    },
+    {
+      "name": "Nanotrasen",
+      "directions": 1
+    },
+    {
+      "name": "NanotrasenGuard",
+      "directions": 1
+    },
+    {
+      "name": "NanotrasenLeader",
+      "directions": 1
+    },
+    {
+      "name": "OfficerAltUSSP",
+      "directions": 1
+    },
+    {
+      "name": "OfficerUSSP",
+      "directions": 1
+    },
+    {
+      "name": "Pathologist",
+      "directions": 1
+    },
+    {
+      "name": "PeaceBorg",
+      "directions": 1
+    },
+    {
+      "name": "Pirate",
+      "directions": 1
+    },
+    {
+      "name": "PrisonChef",
+      "directions": 1
+    },
+    {
+      "name": "PrisonDoctor",
+      "directions": 1
+    },
+    {
+      "name": "PrisonEngineer",
+      "directions": 1
+    },
+    {
+      "name": "PrisonGuard",
+      "directions": 1
+    },
+    {
+      "name": "PrisonInspector",
+      "directions": 1
+    },
+    {
+      "name": "PrisonPilot",
+      "directions": 1
+    },
+    {
+      "name": "PrisonScientist",
+      "directions": 1
+    },
+    {
+      "name": "PrisonWorker",
+      "directions": 1
+    },
+    {
+      "name": "SecurityBorg",
+      "directions": 1
+    },
+    {
+      "name": "SecurityCombatBorg",
+      "directions": 1
+    },
+    {
+      "name": "SecurityPilot",
+      "directions": 1
+    },
+    {
+      "name": "ServiceBorg",
+      "directions": 1
+    },
+    {
+      "name": "SoldierUSSP",
+      "directions": 1
+    }
+  ]
 }

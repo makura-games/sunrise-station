@@ -36,6 +36,8 @@
       prob: 0.05
     - id: SiliconLiberation # Sunrise-Edit
       prob: 0.25
+    - id: VampireLess # Sunrise-Edit
+      prob: 0.15
 
 - type: entity
   parent: BaseGameRule

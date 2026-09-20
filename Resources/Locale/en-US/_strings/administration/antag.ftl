@@ -23,5 +23,7 @@ admin-verb-text-make-paradox-clone = Create Paradox Clone
 admin-verb-text-make-wizard = Make Wizard
 admin-verb-text-make-space-ninja = Make Ninja
 admin-verb-text-make-changeling = Make Changeling (WIP)
+admin-verb-text-make-vampire = Make Vampire
+admin-verb-make-vampire = Make the target into a Vampire.
 
 admin-overlay-antag-classic = ANTAG
