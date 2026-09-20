@@ -132,173 +132,19 @@
           True: {state: "death2"}
           False: {state: "death2_cap"}
 
-#Sprays
 
-#Blue
 - type: entity
   parent: PaintBase
-  id: SprayPaintBlue
-  suffix: Blue
+  id: SprayPaint
+  name: configurable spray paint
+  description: A spray paint can with an adjustable color.
   components:
-  - type: Icon
-    sprite: _Sunrise/Interface/Misc/spray_paint_icons.rsi
-    state: spray_blue
-  - type: Sprite
-    sprite: Objects/Fun/spraycans.rsi
-    layers:
-      - state: spray
-        map: ["Base"]
-      - state: spray_cap_colors
-        map: ["enum.OpenableVisuals.Layer"]
-        color: "#5890f7"
   - type: Paint
-    color: "#5890f7"
-  - type: GenericVisualizer
-    visuals:
-      enum.OpenableVisuals.Opened:
-        enum.OpenableVisuals.Layer:
-          True: {state: "spray_colors" , color: "#5890f7"}
-          False: {state: "spray_cap_colors" , color: "#5890f7"}
-
-#Red
-- type: entity
-  parent: PaintBase
-  id: SprayPaintRed
-  suffix: Red
-  components:
-  - type: Icon
-    sprite: _Sunrise/Interface/Misc/spray_paint_icons.rsi
-    state: spray_red
-  - type: Sprite
-    sprite: Objects/Fun/spraycans.rsi
-    layers:
-      - state: spray
-        map: ["Base"]
-      - state: spray_cap_colors
-        map: ["enum.OpenableVisuals.Layer"]
-        color: "#ff3b3b"
-  - type: Paint
-    color: "#ff3b3b"
-  - type: GenericVisualizer
-    visuals:
-      enum.OpenableVisuals.Opened:
-        enum.OpenableVisuals.Layer:
-          True: {state: "spray_colors" , color: "#ff3b3b"}
-          False: {state: "spray_cap_colors" , color: "#ff3b3b"}
-
-#Green
-- type: entity
-  parent: PaintBase
-  id: SprayPaintGreen
-  suffix: Green
-  components:
-  - type: Icon
-    sprite: _Sunrise/Interface/Misc/spray_paint_icons.rsi
-    state: spray_green
-  - type: Sprite
-    sprite: Objects/Fun/spraycans.rsi
-    layers:
-      - state: spray
-        map: ["Base"]
-      - state: spray_cap_colors
-        map: ["enum.OpenableVisuals.Layer"]
-        color: "#73f170"
-  - type: Paint
-    color: "#73f170"
-  - type: GenericVisualizer
-    visuals:
-      enum.OpenableVisuals.Opened:
-        enum.OpenableVisuals.Layer:
-          True: {state: "spray_colors" , color: "#73f170"}
-          False: {state: "spray_cap_colors" , color: "#73f170"}
-
-#Black
-- type: entity
-  parent: PaintBase
-  id: SprayPaintBlack
-  suffix: Black
-  components:
-  - type: Icon
-    sprite: _Sunrise/Interface/Misc/spray_paint_icons.rsi
-    state: spray_black
-  - type: Sprite
-    sprite: Objects/Fun/spraycans.rsi
-    layers:
-      - state: spray
-        map: ["Base"]
-      - state: spray_cap_colors
-        map: ["enum.OpenableVisuals.Layer"]
-        color: "#3a3a3a"
-  - type: Paint
-    color: "#3a3a3a"
-  - type: GenericVisualizer
-    visuals:
-      enum.OpenableVisuals.Opened:
-        enum.OpenableVisuals.Layer:
-          True: {state: "spray_colors" , color: "#3a3a3a"}
-          False: {state: "spray_cap_colors" , color: "#3a3a3a"}
-
-#Orange
-- type: entity
-  parent: PaintBase
-  id: SprayPaintOrange
-  suffix: Orange
-  components:
-  - type: Icon
-    sprite: _Sunrise/Interface/Misc/spray_paint_icons.rsi
-    state: spray_orange
-  - type: Sprite
-    sprite: Objects/Fun/spraycans.rsi
-    layers:
-      - state: spray
-        map: ["Base"]
-      - state: spray_cap_colors
-        map: ["enum.OpenableVisuals.Layer"]
-        color: "#f6a44b"
-  - type: Paint
-    color: "#f6a44b"
-  - type: GenericVisualizer
-    visuals:
-      enum.OpenableVisuals.Opened:
-        enum.OpenableVisuals.Layer:
-          True: {state: "spray_colors" , color: "#f6a44b"}
-          False: {state: "spray_cap_colors" , color: "#f6a44b"}
-
-#Purple
-- type: entity
-  parent: PaintBase
-  id: SprayPaintPurple
-  suffix: Purple
-  components:
-  - type: Icon
-    sprite: _Sunrise/Interface/Misc/spray_paint_icons.rsi
-    state: spray_purple
-  - type: Sprite
-    sprite: Objects/Fun/spraycans.rsi
-    layers:
-      - state: spray
-        map: ["Base"]
-      - state: spray_cap_colors
-        map: ["enum.OpenableVisuals.Layer"]
-        color: "#c063f5"
-  - type: Paint
-    color: "#c063f5"
-  - type: GenericVisualizer
-    visuals:
-      enum.OpenableVisuals.Opened:
-        enum.OpenableVisuals.Layer:
-          True: {state: "spray_colors" , color: "#c063f5"}
-          False: {state: "spray_cap_colors" , color: "#c063f5"}
-
-#White
-- type: entity
-  parent: PaintBase
-  id: SprayPaintWhite
-  suffix: White
-  components:
-  - type: Icon
-    sprite: _Sunrise/Interface/Misc/spray_paint_icons.rsi
-    state: spray_white
+    color: "#f2f2f2"
+  - type: UserInterface
+    interfaces:
+      enum.PaintUiKey.Key:
+        type: PaintBoundUserInterface
   - type: Sprite
     sprite: Objects/Fun/spraycans.rsi
     layers:
@@ -307,11 +153,16 @@
       - state: spray_cap_colors
         map: ["enum.OpenableVisuals.Layer"]
         color: "#f2f2f2"
-  - type: Paint
-    color: "#f2f2f2"
   - type: GenericVisualizer
     visuals:
       enum.OpenableVisuals.Opened:
         enum.OpenableVisuals.Layer:
-          True: {state: "spray_colors" , color: "#f2f2f2"}
-          False: {state: "spray_cap_colors" , color: "#f2f2f2"}
+          True: {state: "spray_colors", color: "#f2f2f2"}
+          False: {state: "spray_cap_colors", color: "#f2f2f2"}
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: SpaceGlue
+          Quantity: 100
