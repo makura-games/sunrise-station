@@ -2,6 +2,8 @@ trait-noemotions-name = Без эмоций
 trait-noemotions-desc = Твой голос остаётся ровным и безжизненным при любых обстоятельствах.
 trait-felinid-vocal-name = Кошачьи связки
 trait-felinid-vocal-desc = В речи проскальзывают игривые «мяу».
+trait-Vulpkanin-vocal-name = Собачьи связки
+trait-Vulpkanin-vocal-desc = В речи проскальзывают игривый лай.
 
 trait-ss13-accent-name = Акцент СС13
 trait-ss13-accent-desc = Речь с узнаваемым станционным оттенком.
