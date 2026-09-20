@@ -159,6 +159,7 @@
     - item: WeaponRifleLecterB
     - item: WeaponHeavyLaserBorg
     - item: HoloprojectorSecurityBorg
+    - item: SunriseEnergyDomeDirectionalTurtleBorg
 
 - type: entity
   id: BorgModuleCombat
@@ -812,3 +813,196 @@
           - ChemDispensable
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: adv-chem-module }
+
+# Модули Синдиката, открываемые через EMAG
+
+- type: entity
+  id: SunriseBorgModuleL6M
+  parent: [ BaseBorgModule, BaseProviderBorgModule, BaseSyndicateContraband ]
+  name: L6M COW module
+  description: COW stands for "Cyborg-Operated Weapon". A universally compatible module containing an L6M COW and one spare magazine box.
+  components:
+  - type: Sprite
+    layers:
+    - state: syndicate
+    - state: icon-syndicate
+  - type: ItemBorgModule
+    hands:
+    - item: SunriseWeaponLightMachineGunL6M
+    - item: MagazineRifleBoxSP
+      hand:
+        emptyRepresentative: MagazineRifleBoxSP
+        emptyLabel: borg-slot-light-box-empty
+        whitelist:
+          tags:
+          - MagazineLightRifleBox
+    - item: PinpointerSyndicateNuclear
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: syndicate-l6c-module }
+
+- type: entity
+  id: BaseSunriseBorgModuleSyndicateStealth
+  parent: BaseBorgModule
+  abstract: true
+  components:
+  - type: BorgModule
+    borgFitTypes:
+    - borg-type-syndicate
+  - type: Tag
+    tags:
+    - SunriseBorgModuleSyndicateStealth
+
+- type: entity
+  id: SunriseBorgModuleSyndicateAdvancedTool
+  parent: [ BaseBorgModuleEngineering, BaseProviderBorgModule, BaseSyndicateContraband ]
+  name: syndicate tool module
+  description: A Syndicate version of the advanced tools module containing disguised jaws of life.
+  components:
+  - type: Sprite
+    layers:
+    - state: syndicate
+    - state: icon-tools-adv
+  - type: ItemBorgModule
+    hands:
+    - item: SunriseSyndicateJawsOfLifeStealth
+    - item: PowerDrill
+    - item: WelderExperimental
+    - item: Multitool
+    - item: RemoteSignallerAdvanced
+    - item: SprayPainterBorg
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: adv-tools-module }
+
+- type: entity
+  id: SunriseBorgModuleSyndicateAdvancedChemical
+  parent: [ BaseBorgModuleMedical, BaseProviderBorgModule, BaseSyndicateContraband ]
+  name: syndicate chemical module
+  description: A Syndicate chemical module containing a Gorlex hypospray and specialized automenders.
+  components:
+  - type: Sprite
+    layers:
+    - state: syndicate
+    - state: icon-chemist
+  - type: ItemBorgModule
+    hands:
+    - item: SunriseSyndiBorgHypo
+    - item: SunriseAutoMenderBruteSyndicateBorg
+    - item: SunriseAutoMenderBurnSyndicateBorg
+    - item: Syringe
+      hand:
+        emptyLabel: borg-slot-injector-dropper-empty
+        emptyRepresentative: Syringe
+        whitelist:
+          tags:
+          - Syringe
+    - item: BorgDropper
+    - item: Beaker
+      hand:
+        emptyLabel: borg-slot-chemical-containers-empty
+        emptyRepresentative: Beaker
+        whitelist:
+          components:
+          - FitsInDispenser
+          tags:
+          - ChemDispensable
+    - item: Beaker
+      hand:
+        emptyLabel: borg-slot-chemical-containers-empty
+        emptyRepresentative: Beaker
+        whitelist:
+          components:
+          - FitsInDispenser
+          tags:
+          - ChemDispensable
+    - item: Beaker
+      hand:
+        emptyLabel: borg-slot-chemical-containers-empty
+        emptyRepresentative: Beaker
+        whitelist:
+          components:
+          - FitsInDispenser
+          tags:
+          - ChemDispensable
+    - item: PinpointerSyndicateNuclear
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: adv-chem-module }
+
+- type: entity
+  id: SunriseBorgModuleSyndicateRescue
+  parent: [ BaseBorgModuleMedical, BaseProviderBorgModule, BaseSyndicateContraband ]
+  name: syndicate rescue module
+  description: A Syndicate rescue module featuring a one-handed, always-powered defibrillator.
+  components:
+  - type: Sprite
+    layers:
+    - state: syndicate
+    - state: icon-defib
+  - type: ItemBorgModule
+    hands:
+    - item: SunriseDefibrillatorSyndicateOneHandedUnpowered
+    - item: BorgFireExtinguisher
+    - item: BorgHandheldGPSBasic
+    - item: HandLabeler
+    - item: PinpointerSyndicateNuclear
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: defib-module }
+
+- type: entity
+  id: SunriseBorgModuleSyndicateChameleonProjector
+  parent: [ BaseSunriseBorgModuleSyndicateStealth, BaseProviderBorgModule, BaseSyndicateContraband ]
+  name: syndicate projector module
+  description: Contains an adaptation of the chameleon projector for a Syndicate saboteur cyborg.
+  components:
+  - type: Sprite
+    layers:
+    - state: syndicate
+    - state: icon-syndicate
+  - type: ItemBorgModule
+    hands:
+    - item: ChameleonProjector
+    - item: PinpointerSyndicateNuclear
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-projector-module }
+
+- type: entity
+  id: SunriseBorgModuleSyndicatePaperwork
+  parent: [ BaseBorgModule, BaseProviderBorgModule, BaseSyndicateContraband ]
+  name: syndicate paperwork module
+  description: Allows a cyborg to forge and organize documents.
+  components:
+  - type: Sprite
+    layers:
+    - state: syndicate
+    - state: icon-syndicate
+  - type: ItemBorgModule
+    hands:
+    - item: CyberPen
+    - item: SunriseBoxFolderCyborgClipboard
+    - item: RubberStampSyndicate
+    - item: HandLabeler
+    - hand:
+        emptyLabel: borg-slot-documents-empty
+        emptyRepresentative: Paper
+        whitelist:
+          tags:
+          - Document
+          components:
+          - Stamp
+    - hand:
+        emptyLabel: borg-slot-documents-empty
+        emptyRepresentative: Paper
+        whitelist:
+          tags:
+          - Document
+          components:
+          - Stamp
+    - hand:
+        emptyLabel: borg-slot-documents-empty
+        emptyRepresentative: Paper
+        whitelist:
+          tags:
+          - Document
+          components:
+          - Stamp
+  - type: BorgModuleIcon
+    icon: { sprite: Objects/Misc/pens.rsi, state: overpriced_pen }

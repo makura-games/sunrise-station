@@ -136,10 +136,6 @@
     - Toggle
     - On
     - Off
-  - type: Biocode
-    factions:
-    - Syndicate
-    - Pirate
 
 - type: entity
   name: BR-50c "Bastion"
