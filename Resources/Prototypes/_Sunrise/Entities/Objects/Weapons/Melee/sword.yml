@@ -17,10 +17,10 @@
     wideAnimationRotation: -135
     angle: 0
     animation: WeaponArcThrust
-    attackRate: 1.2
+    attackRate: 1.25
     damage:
       types:
-        Piercing: 17
+        Piercing: 15
     resistanceBypass: true
     soundHit:
         path: /Audio/Weapons/bladeslice.ogg
@@ -46,7 +46,7 @@
   - type: Reflect
     reflects:
     - NonEnergy
-    reflectProb: 0.4
+    reflectProb: 0.35
     spread: 90
   - type: Item
     size: Ginormous
@@ -61,6 +61,44 @@
       path: /Audio/_Sunrise/Items/Handling/sabre_drop.ogg
   - type: StaticPrice
     price: 3000
+
+- type: entity
+  name: skewer
+  parent: SyndicateRapier
+  id: SunriseSkewerRapier
+  description: A thin rod of metal used to skewer just about anything and cook it.
+  suffix: Syndicate
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Food/skewer.rsi
+    layers:
+    - state: skewer
+  - type: MeleeWeapon
+    damage:
+      types:
+        Piercing: 11
+    attackRate: 1.5
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,0,6
+    storedSprite:
+      state: skewer
+      sprite: Objects/Consumable/Food/skewer.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        sprite: _Sunrise/Objects/Weapons/Melee/syndicate_rapier.rsi
+      right:
+      - state: inhand-right
+        sprite: _Sunrise/Objects/Weapons/Melee/syndicate_rapier.rsi
+  - type: SolutionContainerVisuals
+    fillBaseName: null
+    inHandsFillBaseName: null
+  - type: SolutionContainerManager
+    solutions:
+      melee:
+        maxVol: 5
 
 - type: entity
   name: dragon slayer
