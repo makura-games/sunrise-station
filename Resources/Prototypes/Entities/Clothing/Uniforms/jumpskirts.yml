@@ -206,9 +206,17 @@
   description: It's a turtleneck worn by those strong and disciplined enough to achieve the position of Head of Security.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/hos_alt.rsi
+    sprite: _Sunrise/Clothing/Uniforms/Jumpskirt/hos_alt.rsi # Sunrise-Edit
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/hos_alt.rsi
+    sprite: _Sunrise/Clothing/Uniforms/Jumpskirt/hos_alt.rsi # Sunrise-Edit
+  # Sunrise-start Позволяет переключаться между длинным и коротким вариантом юбки
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: unfold-verb-clothing-skirt
+    foldVerbText: fold-verb-clothing-skirt
+  - type: FoldableClothing
+    foldedEquippedPrefix: folded
+  # Sunrise-end
 
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseCommandContraband]

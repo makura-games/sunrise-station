@@ -44,6 +44,10 @@
   abstract: true
   components:
   - type: Body
+  # Sunrise-start Мелкие животные теперь могут таскать предметы
+  - type: Puller
+    needsHands: false
+  # Sunrise-end
   - type: EntityTableContainerFill
     containers:
       body_organs: !type:AllSelector

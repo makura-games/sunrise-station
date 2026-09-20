@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: BaseStructure
+  parent: [BaseStructure, BasePaperLabelableVisualized] # Sunrise-Edit
   id: BaseMaterialDoor
   name: door
   description: A door, where will it lead?
@@ -17,6 +17,12 @@
     layers:
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
+    # Sunrise-Start
+    - state: paper
+      visible: false
+      sprite: _Sunrise/Structures/Doors/Airlocks/Standard/airlocks_labels.rsi
+      map: ["enum.PaperLabelVisuals.Layer"]
+    # Sunrise-End
   - type: AnimationPlayer
   - type: Physics
   - type: Fixtures
@@ -64,6 +70,20 @@
         acts: ["Destruction"]
   - type: Occluder
   - type: BlockWeather
+  # Sunrise-Start
+  - type: GenericVisualizer
+    visuals:
+      enum.PaperLabelVisuals.HasLabel:
+        enum.PaperLabelVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+      enum.PaperLabelVisuals.LabelType:
+        enum.PaperLabelVisuals.Layer:
+          Paper: { state: paper }
+          Bounty: { state: bounty }
+          CaptainsPaper: { state: captains_paper }
+          Invoice: { state: invoice }
+  # Sunrise-End
 
 - type: entity
   abstract: true

@@ -58,6 +58,12 @@
       shader: unshaded
       visible: false
       map: ["enum.ElectrifiedLayers.Sparks"]
+    # Sunrise-Start
+    - state: paper
+      visible: false
+      sprite: _Sunrise/Structures/Doors/Airlocks/Standard/airlocks_labels.rsi
+      map: ["enum.PaperLabelVisuals.Layer"]
+    # Sunrise-End
   - type: Wires
     layoutId: Docking
   - type: Door
