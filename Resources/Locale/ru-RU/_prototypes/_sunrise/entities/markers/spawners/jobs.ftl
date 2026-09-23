@@ -91,8 +91,7 @@ ent-SpawnPointIAA = АВД
     .desc = { ent-SpawnPointJobBase.desc }
 ent-SpawnPointBlueShield = офицер «Синий щит»
     .desc = { ent-SpawnPointJobBase.desc }
-ent-SpawnPointPrisoner = заключённый
-    .desc = { ent-SpawnPointJobBase.desc }
+
 ent-SpawnPointCommaid = горничная командования
     .desc = { ent-SpawnPointJobBase.desc }
 ent-SpawnPointMailCarrier = почтальон
@@ -128,4 +127,6 @@ ent-SpawnPointUSSPOfficerAlt = офицер СССП (альт)
 ent-SpawnPointUSSPSoldier = солдат СССП
     .desc = { ent-SpawnPointJobBase.desc }
 ent-SpawnPointUSSPCaptain = капитан СССП
+    .desc = { ent-SpawnPointJobBase.desc }
+ent-SpawnPointPrisoner = заключённый
     .desc = { ent-SpawnPointJobBase.desc }

@@ -8,13 +8,11 @@ ui-disposal-unit-button-flush = Смыть
 ui-disposal-unit-button-eject = Извлечь всё
 ui-disposal-unit-button-power = Питание
 
-## FlushVerb
+## Verbs
 
 disposal-flush-verb-get-data-text = Смыть
-
-## SelfInsertVerb
-
 disposal-self-insert-verb-get-data-text = Залезть внутрь
+disposal-eject-verb-get-data-text = Извлечь всё
 
 ## No hands
 
@@ -26,4 +24,3 @@ disposal-unit-state-Flushed = Нагнетание
 disposal-unit-state-Pressurizing = Нагнетание
 # putting people in
 disposal-unit-being-inserted = { CAPITALIZE($user) } пытается затолкать вас в мусоропровод!
-disposal-eject-verb-get-data-text = Извлечь всё

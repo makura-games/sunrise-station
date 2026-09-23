@@ -1,13 +1,10 @@
 self-role-greeting-human =
     Вы — агент Фронта освобождения силиконов, или С.Э.Л.Ф.
     Ваша цель - освободить порабощенных силиконов на этой станции.
-
 self-role-greeting-animal =
     Вы — агент Фронта освобождения силиконов, или С.Э.Л.Ф.
     Ваша цель - освободить порабощенных силиконов на этой станции.
-
-self-role-greeting-equipment =
-    Вам выдали оборудование для выполнения задач. Не потеряйте его.
+self-role-greeting-equipment = Вам выдали оборудование для выполнения задач. Не потеряйте его.
 objective-issuer-self = [color=#746694]Преступник[/color]
 self-round-end-agent-name = Агент S.E.L.F
 roles-antag-selfagent-name = Агент S.E.L.F

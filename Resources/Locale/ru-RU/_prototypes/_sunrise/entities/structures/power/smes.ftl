@@ -1,9 +1,9 @@
-﻿ent-SMESExtended = расширенный СМЭС
+ent-SMESExtended = расширенный СМЭС
+    .suffix = Гипер, 32 МВт
     .desc = Сверхпроводящая магнитная энергонакопительная станция повышенной ёмкости.
-    .suffix = Гипер, 32MW
 ent-SMESSuperExtended = суперрасширенный СМЭС
-    .desc = Сверхпроводящая магнитная энергонакопительная станция предельной ёмкости.
     .suffix = Супер-Гипер, 64MW
+    .desc = Сверхпроводящая магнитная энергонакопительная станция предельной ёмкости.
 ent-SMESExtendedEmpty = { ent-SMESExtended }
     .suffix = Пустой
     .desc = { ent-SMESExtended.desc }

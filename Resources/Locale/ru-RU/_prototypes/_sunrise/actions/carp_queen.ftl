@@ -8,5 +8,4 @@ ent-ActionCarpQueenOrderKill = Убейте его
     .desc = Приказывает карпам-слугам атаковать того, на кого вы укажете.
 ent-ActionCarpQueenOrderLoose = Вольно
     .desc = Приказывает карпам-слугам следовать по велению матушки-природы.
-
 carp-queen-summon-popup = Вы отложили икру!

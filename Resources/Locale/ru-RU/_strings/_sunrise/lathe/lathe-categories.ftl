@@ -1,5 +1,6 @@
 lathe-category-surgery = Хирургия
 lathe-category-cyberlimbs = Конечности
+lathe-category-implants = Импланты
 lathe-category-reports = Отчёты
 lathe-category-statements = Заключения
 lathe-category-inquiries-and-appeals = Запросы и обращения
@@ -10,4 +11,3 @@ lathe-category-orders = Заказы
 lathe-category-evidence = Свидетельства
 lathe-category-conclusions-and-decisions = Заключения и решения
 lathe-category-error = Ошибка
-lathe-category-implants = Импланты

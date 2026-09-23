@@ -1,4 +1,3 @@
-# Sunrise Artifact Effects
 ent-SunriseEffectHeal = { ent-BaseXenoArtifactEffect }
     .desc = Лечит ближайших живых существ
 ent-SunriseArtifactGenerateEnergy = { ent-BaseOneTimeXenoArtifactEffect }

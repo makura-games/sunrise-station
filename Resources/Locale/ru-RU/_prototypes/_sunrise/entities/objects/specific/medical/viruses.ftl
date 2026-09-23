@@ -1,6 +1,6 @@
 ent-SyringeRomerolNT = { ent-BaseSyringe }
+    .desc = { ent-BaseSyringe.desc }
     .suffix = Ромерол
-    .desc = { ent-BaseSyringe.desc }
 ent-SyringeCarolNT = { ent-BaseSyringe }
-    .suffix = Культ Плоти
     .desc = { ent-BaseSyringe.desc }
+    .suffix = Культ Плоти

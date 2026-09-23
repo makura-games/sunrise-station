@@ -68,8 +68,6 @@ uplink-sunrise-jaws-of-life-name = Челюсти жизни
 uplink-sunrise-power-drill-name = Электродрель
 uplink-sunrise-ammo-name = Картридж РСУ
 uplink-sunrise-name = РСУ
-uplink-sunrise-rcd-ammo-name = Картридж РСУ
-uplink-sunrise-rcd-name = РСУ
 uplink-sunrise-omnitool-name = Омнитул
 uplink-sunrise-clothing-outer-atmosian-bomber-jacket-name = Куртка-бомбер атмосианина
 uplink-sunrise-clothing-mask-gas-atmosian-name = Противогаз атмосианина
@@ -180,7 +178,6 @@ uplink-sunrise-clothing-elite-mask-gas-name = Противогаз главы п
 uplink-sunrise-clothing-head-hat-hop-name = Фуражка главы персонала
 uplink-sunrise-clothing-outer-elite-coat-name = Шинель главы персонала
 uplink-sunrise-clothing-neck-cloak-hop-cloak-name = Плащ главы персонала
-uplink-sunrise-holographic-paper-name = Голо-планшет
 
 ## Security
 
@@ -272,6 +269,8 @@ uplink-sunrise-spray-paint-green-name = Баллончик краски (зел�
 uplink-sunrise-spray-paint-orange-name = Баллончик краски (оранжевый)
 uplink-sunrise-spray-paint-purple-name = Баллончик краски (фиолетовый)
 uplink-sunrise-spray-paint-white-name = Баллончик краски (белый)
-
 uplink-sunrise-box-arbiter-bundle-name = Набор Арбитра
 uplink-sunrise-box-redmist-bundle-name = Набор Красного Тумана
+uplink-sunrise-rcd-ammo-name = Картридж РСУ
+uplink-sunrise-rcd-name = РСУ
+uplink-sunrise-holographic-paper-name = Голо-планшет

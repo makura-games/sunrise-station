@@ -17,17 +17,14 @@ implanter-draw-text = Извлечение
 implanter-inject-text = Установка
 implanter-empty-text = Пусто
 implanter-label-inject = [color=green]{ $implantName }[/color]
-    Mode: [color=white]{ $modeString }[/color]
+    Режим: [color=white]{ $modeString }[/color]
 implanter-label-draw = [color=red]{ $implantName }[/color]
-    Mode: [color=white]{ $modeString }[/color]
-implanter-label = [color=green]{ $implantName }[/color]
     Режим: [color=white]{ $modeString }[/color]
 implanter-contained-implant-text = [color=green]{ $desc }[/color]
+implanter-label = [color=green]{ $implantName }[/color]
+    Режим: [color=white]{ $modeString }[/color]
 action-name-toggle-fake-mindshield = [color=green]Контроль защиты разума[/color]
 action-description-toggle-fake-mindshield = Активирует/деактивирует передачу сигнала имитатора защиты разума
-
-## Implanter Actions
-
 scramble-implant-activated-popup = Вы превратились в { $identity }
 deathrattle-implant-dead-message = Зафиксирована смерть { $user } { $position }.
 deathrattle-implant-critical-message = Жизненные показатели { $user } критические, требуется немедленная помощь { $position }.

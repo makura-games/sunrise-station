@@ -18,7 +18,6 @@ names-tajaran-last-dataset-17 = Тирхан
 names-tajaran-last-dataset-18 = Мерсай
 names-tajaran-last-dataset-19 = Зайрек
 names-tajaran-last-dataset-20 = Хантар
-
 names-tajaran-last-dataset-21 = Энай-Кайтам
 names-tajaran-last-dataset-22 = Хирэй-Кайтам
 names-tajaran-last-dataset-23 = Са’тэн-Кайтам
@@ -39,7 +38,6 @@ names-tajaran-last-dataset-37 = Энай-Тайрек
 names-tajaran-last-dataset-38 = Хирэй-Тайрек
 names-tajaran-last-dataset-39 = Са’тэн-Тайрек
 names-tajaran-last-dataset-40 = Рэйши-Тайрек
-
 names-tajaran-last-dataset-41 = Энай-Кхаран
 names-tajaran-last-dataset-42 = Хирэй-Кхаран
 names-tajaran-last-dataset-43 = Са’тэн-Кхаран
@@ -60,7 +58,6 @@ names-tajaran-last-dataset-57 = Энай-Орхай
 names-tajaran-last-dataset-58 = Хирэй-Орхай
 names-tajaran-last-dataset-59 = Са’тэн-Орхай
 names-tajaran-last-dataset-60 = Рэйши-Орхай
-
 names-tajaran-last-dataset-61 = Энай-Сакир
 names-tajaran-last-dataset-62 = Хирэй-Сакир
 names-tajaran-last-dataset-63 = Са’тэн-Сакир
@@ -94,7 +91,6 @@ names-tajaran-last-dataset-87 = Тар’кэр
 names-tajaran-last-dataset-88 = Ор’кэр
 names-tajaran-last-dataset-89 = Мэр’кэр
 names-tajaran-last-dataset-90 = Зай’кэр
-
 names-tajaran-last-dataset-91 = Ва’хир
 names-tajaran-last-dataset-92 = Са’хир
 names-tajaran-last-dataset-93 = Нэр’хир
@@ -105,7 +101,6 @@ names-tajaran-last-dataset-97 = Мэр’хир
 names-tajaran-last-dataset-98 = Зай’хир
 names-tajaran-last-dataset-99 = Ир’хир
 names-tajaran-last-dataset-100 = Вай’хир
-
 names-tajaran-last-dataset-101 = Са’нек
 names-tajaran-last-dataset-102 = Ва’нек
 names-tajaran-last-dataset-103 = Ор’нек
@@ -116,7 +111,6 @@ names-tajaran-last-dataset-107 = Зай’нек
 names-tajaran-last-dataset-108 = Мэр’нек
 names-tajaran-last-dataset-109 = Ир’нек
 names-tajaran-last-dataset-110 = Вай’нек
-
 names-tajaran-last-dataset-111 = Са’рек
 names-tajaran-last-dataset-112 = Ва’рек
 names-tajaran-last-dataset-113 = Ор’рек
@@ -127,7 +121,6 @@ names-tajaran-last-dataset-117 = Зай’рек
 names-tajaran-last-dataset-118 = Мэр’рек
 names-tajaran-last-dataset-119 = Ир’рек
 names-tajaran-last-dataset-120 = Вай’рек
-
 names-tajaran-last-dataset-121 = Са’тах
 names-tajaran-last-dataset-122 = Ва’тах
 names-tajaran-last-dataset-123 = Ор’тах
@@ -138,7 +131,6 @@ names-tajaran-last-dataset-127 = Зай’тах
 names-tajaran-last-dataset-128 = Мэр’тах
 names-tajaran-last-dataset-129 = Ир’тах
 names-tajaran-last-dataset-130 = Вай’тах
-
 names-tajaran-last-dataset-131 = Са’сар
 names-tajaran-last-dataset-132 = Ва’сар
 names-tajaran-last-dataset-133 = Ор’сар
@@ -149,7 +141,6 @@ names-tajaran-last-dataset-137 = Зай’сар
 names-tajaran-last-dataset-138 = Мэр’сар
 names-tajaran-last-dataset-139 = Ир’сар
 names-tajaran-last-dataset-140 = Вай’сар
-
 names-tajaran-last-dataset-141 = Са’мир
 names-tajaran-last-dataset-142 = Ва’мир
 names-tajaran-last-dataset-143 = Ор’мир
@@ -160,7 +151,6 @@ names-tajaran-last-dataset-147 = Зай’мир
 names-tajaran-last-dataset-148 = Мэр’мир
 names-tajaran-last-dataset-149 = Ир’мир
 names-tajaran-last-dataset-150 = Вай’мир
-
 names-tajaran-last-dataset-151 = Са’кир
 names-tajaran-last-dataset-152 = Ва’кир
 names-tajaran-last-dataset-153 = Ор’кир
@@ -171,7 +161,6 @@ names-tajaran-last-dataset-157 = Зай’кир
 names-tajaran-last-dataset-158 = Мэр’кир
 names-tajaran-last-dataset-159 = Ир’кир
 names-tajaran-last-dataset-160 = Вай’кир
-
 names-tajaran-last-dataset-161 = Са’дэр
 names-tajaran-last-dataset-162 = Ва’дэр
 names-tajaran-last-dataset-163 = Ор’дэр
@@ -182,7 +171,6 @@ names-tajaran-last-dataset-167 = Зайэ’дэр
 names-tajaran-last-dataset-168 = Мар’дэр
 names-tajaran-last-dataset-169 = Ир’дэр
 names-tajaran-last-dataset-170 = Вай’дэр
-
 names-tajaran-last-dataset-171 = Са’кэн
 names-tajaran-last-dataset-172 = Ва’кэн
 names-tajaran-last-dataset-173 = Ор’кэн
@@ -193,7 +181,6 @@ names-tajaran-last-dataset-177 = Зай’кэн
 names-tajaran-last-dataset-178 = Мэр’кэн
 names-tajaran-last-dataset-179 = Ир’кэн
 names-tajaran-last-dataset-180 = Вай’кэн
-
 names-tajaran-last-dataset-181 = Са’рей
 names-tajaran-last-dataset-182 = Ва’рей
 names-tajaran-last-dataset-183 = Ор’рей
@@ -204,7 +191,6 @@ names-tajaran-last-dataset-187 = Зай’рей
 names-tajaran-last-dataset-188 = Мэр’рей
 names-tajaran-last-dataset-189 = Ир’рей
 names-tajaran-last-dataset-190 = Вай’рей
-
 names-tajaran-last-dataset-191 = Са’хэн
 names-tajaran-last-dataset-192 = Ва’хэн
 names-tajaran-last-dataset-193 = Ор’хэн

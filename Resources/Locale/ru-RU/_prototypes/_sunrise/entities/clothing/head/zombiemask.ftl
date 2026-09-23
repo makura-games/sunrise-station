@@ -1,1 +1,1 @@
-equipped-name-prefix = замбированный {$baseName}
+equipped-name-prefix = замбированный { $baseName }

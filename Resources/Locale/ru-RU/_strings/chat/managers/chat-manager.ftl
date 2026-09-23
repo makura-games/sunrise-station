@@ -24,31 +24,33 @@ chat-manager-entity-say-wrap-message = [BubbleHeader][bold][Name]{ $entityName }
 chat-manager-entity-say-bold-wrap-message = [BubbleHeader][bold][Name]{ $entityName }[/Name][/bold][/BubbleHeader] { $verb }, [font={ $fontType } size={ $fontSize }]"[BubbleContent][bold]{ $message }[/bold][/BubbleContent]"[/font]
 chat-manager-entity-whisper-wrap-message = [font size=11][italic][BubbleHeader][Name]{ $entityName }[/Name][/BubbleHeader] шепчет,"[BubbleContent]{ $message }[/BubbleContent]"[/italic][/font]
 chat-manager-entity-whisper-unknown-wrap-message = [font size=11][italic][BubbleHeader]Кто-то[/BubbleHeader] шепчет, "[BubbleContent]{ $message }[/BubbleContent]"[/italic][/font]
+# THE() is not used here because the entity and its name can technically be disconnected if a nameOverride is passed...
 chat-manager-entity-me-wrap-message = [italic]{ $entityName } { $message }[/italic]
 chat-manager-entity-looc-wrap-message = LOOC: [bold]{ $entityName }:[/bold] { $message }
 chat-manager-send-ooc-wrap-message = OOC: [bold]{ $playerName }:[/bold] { $message }
 chat-manager-send-ooc-sponsor-wrap-message = OOC: [bold][color={ $sponsorColor }]{ $playerName }[/color]:[/bold] { $message }
-chat-manager-send-dead-chat-wrap-message = { $deadChannelName }: [bold][BubbleHeader]{ $playerName }[/BubbleHeader]:[/bold] [BubbleContent]{ $message }[/BubbleContent]
-# Sunrise-Sponsor-Start
 chat-manager-send-ooc-patron-wrap-message = OOC: [bold][color={ $patronColor }]{ $patronTitle }{ $playerName }[/color]:[/bold] { $message }
-# Sunrise-Sponsor-End
-chat-manager-send-ooc-admin-wrap-message = OOC: [bold]{ $patronTitle }{ $playerName }:[/bold] { $message }
+chat-manager-send-dead-chat-wrap-message = { $deadChannelName }: [bold][BubbleHeader]{ $playerName }[/BubbleHeader]:[/bold] [BubbleContent]{ $message }[/BubbleContent]
 chat-manager-send-admin-dead-chat-wrap-message = { $adminChannelName }: [bold]([BubbleHeader]{ $userName }[/BubbleHeader]):[/bold] [BubbleContent]{ $message }[/BubbleContent]
 chat-manager-send-admin-chat-wrap-message = { $adminChannelName }: [bold]{ $playerName }:[/bold] { $message }
 chat-manager-send-admin-announcement-wrap-message = [bold]{ $adminChannelName }: { $message }[/bold]
 chat-manager-send-hook-ooc-wrap-message = OOC: [bold](D){ $senderName }:[/bold] { $message }
+chat-manager-send-hook-admin-wrap-message = АДМИН: [bold](D){ $senderName }:[/bold] { $message }
 chat-manager-dead-channel-name = МЁРТВЫЕ
 chat-manager-admin-channel-name = АДМИН
 chat-manager-rate-limited = Вы отправляете сообщения слишком быстро!
 chat-manager-rate-limit-admin-announcement = Игрок { $player } превысил ограничение на частоту сообщений в чате. Присмотрите за ним если это происходит регулярно.
+
+## Speech verbs for chat
+
 chat-speech-verb-suffix-exclamation = !
 chat-speech-verb-suffix-exclamation-strong = !!
 chat-speech-verb-suffix-question = ?
-chat-speech-verb-default = говорит
 chat-speech-verb-suffix-stutter = -
 chat-speech-verb-suffix-mumble = ..
 chat-speech-verb-name-none = Нет
 chat-speech-verb-name-default = По умолчанию
+chat-speech-verb-default = говорит
 chat-speech-verb-name-exclamation = Восклицание
 chat-speech-verb-exclamation = восклицает
 chat-speech-verb-name-exclamation-strong = Крик
@@ -87,6 +89,10 @@ chat-speech-verb-name-skeleton = Скелет
 chat-speech-verb-skeleton-1 = гремит
 chat-speech-verb-skeleton-2 = клацает
 chat-speech-verb-skeleton-3 = скрежещет
+chat-speech-verb-name-vox = Вокс
+chat-speech-verb-vox-1 = скрипит
+chat-speech-verb-vox-2 = визжит
+chat-speech-verb-vox-3 = каркает
 chat-speech-verb-name-canine = Собака
 chat-speech-verb-canine-1 = гавкает
 chat-speech-verb-canine-2 = лает
@@ -95,10 +101,6 @@ chat-speech-verb-name-goat = Коза
 chat-speech-verb-goat-1 = бе-е-е-е
 chat-speech-verb-goat-2 = хрюкает
 chat-speech-verb-goat-3 = кричит
-chat-speech-verb-name-vox = Вокс
-chat-speech-verb-vox-1 = скрипит
-chat-speech-verb-vox-2 = визжит
-chat-speech-verb-vox-3 = каркает
 chat-speech-verb-name-small-mob = Мышь
 chat-speech-verb-small-mob-1 = скрипит
 chat-speech-verb-small-mob-2 = пищит
@@ -108,28 +110,32 @@ chat-speech-verb-large-mob-2 = рычит
 chat-speech-verb-name-monkey = Обезьяна
 chat-speech-verb-monkey-1 = обезьяничает
 chat-speech-verb-monkey-2 = визжит
+chat-speech-verb-name-cluwne = Клувень
 chat-speech-verb-name-parrot = Попугай
 chat-speech-verb-parrot-1 = кричит
 chat-speech-verb-parrot-2 = чирикает
 chat-speech-verb-parrot-3 = щебечет
+chat-speech-verb-cluwne-1 = хихикает
+chat-speech-verb-cluwne-2 = хехекает
+chat-speech-verb-cluwne-3 = смеётся
 chat-speech-verb-name-ghost = Призрак
 chat-speech-verb-ghost-1 = жалуется
 chat-speech-verb-ghost-2 = дышит
 chat-speech-verb-ghost-3 = воет
 chat-speech-verb-ghost-4 = бормочет
-chat-speech-verb-name-cluwne = Клувень
-chat-speech-verb-cluwne-1 = хихикает
-chat-speech-verb-cluwne-2 = хехекает
-chat-speech-verb-cluwne-3 = смеётся
 chat-speech-verb-name-electricity = Электричество
 chat-speech-verb-electricity-1 = трещит
 chat-speech-verb-electricity-2 = гудит
 chat-speech-verb-electricity-3 = скрипит
-chat-manager-send-hook-admin-wrap-message = ADMIN: [bold](D){$senderName}:[/bold] {$message}
+chat-speech-verb-vulpkanin-1 = рычит
+chat-speech-verb-vulpkanin-2 = лает
+chat-speech-verb-vulpkanin-3 = рычит
+chat-speech-verb-vulpkanin-4 = лает
 chat-speech-verb-vulpkanin = Вульпканин
-
 chat-speech-verb-name-wawa = Вава
 chat-speech-verb-wawa-1 = произносит
 chat-speech-verb-wawa-2 = сообщает
 chat-speech-verb-wawa-3 = объявляет
 chat-speech-verb-wawa-4 = размышляет
+# Sunrise-Sponsor-End
+chat-manager-send-ooc-admin-wrap-message = OOC: [bold]{ $patronTitle }{ $playerName }:[/bold] { $message }

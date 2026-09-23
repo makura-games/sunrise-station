@@ -30,6 +30,7 @@ ent-RedOintment1 = { ent-RedOintment }
     .suffix = Одна
 ent-RedOintment10 = { ent-RedOintment }
     .desc = { ent-RedOintment.desc }
+    .suffix = 10
 ent-RedBrutePack = красный набор для ушибов
     .desc = Противоушибные пакеты СБ класса для всех ваших нужд.
     .suffix = Полный

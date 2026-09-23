@@ -20,7 +20,6 @@ ent-LeftFootReptilian = левая стопа унатха
     .desc = { ent-PartReptilian.desc }
 ent-RightFootReptilian = правая стопа унатха
     .desc = { ent-PartReptilian.desc }
-
 ent-OrganReptilianTorso = { ent-TorsoReptilian }
     .desc = { ent-TorsoReptilian.desc }
 ent-OrganReptilianHead = { ent-HeadReptilian }

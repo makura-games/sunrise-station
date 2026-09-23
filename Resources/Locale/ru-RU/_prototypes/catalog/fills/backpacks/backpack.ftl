@@ -4,4 +4,3 @@ ent-ClothingBackpackSyndicateRaidBundle = комплект штурмового 
     .desc = Содержит прочный штурмовой костюм синдиката.
 ent-ClothingBackpackSyndicateElegantRaidBundle = комплект штурмового костюма горничной синдиката
     .desc = Содержит элегантный и прочный штурмовой костюм синдиката.
-

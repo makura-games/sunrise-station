@@ -332,5 +332,5 @@ ent-PokerCardClassicBox = Коробка для карт
     .desc = Коробка для покерных карт. Какие секреты лежат на дне её бесконечной стопки?
     .suffix = CardBox ,Empty
 ent-PokerCardClassicBoxFilled = { ent-PokerCardClassicBox }
-    .suffix = CardBox ,Filled ,54
+    .suffix = Коробка карт, Заполнено, 54
     .desc = { ent-PokerCardClassicBox.desc }

@@ -16,6 +16,6 @@ make-ghost-roles-window-raffle-not-button = Не проводить розыгр
 make-ghost-roles-window-raffle-custom-settings-button = Пользовательские настройки
 
 make-ghost-roles-window-raffle-role-label = Разыгрывать роль?
-make-ghost-roles-window-raffle-settings-label = {$id} (начальная {$initialDuration}с, макс {$maxDuration}с, присоединение добавляет {$joinExtendsDurationBy}с)
+make-ghost-roles-window-raffle-settings-label = { $id } (начальная { $initialDuration }с, макс { $maxDuration }с, присоединение добавляет { $joinExtendsDurationBy }с)
 
 make-ghost-roles-window-raffle-warning-tooltip = Начальная длительность не должна превышать максимальную длительность.

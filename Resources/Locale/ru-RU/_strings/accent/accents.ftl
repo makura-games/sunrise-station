@@ -1,11 +1,11 @@
 # Cat accent
 accent-words-cat-1 = Мяу!
-accent-words-cat-2 = Mиау.
+accent-words-cat-2 = Мяу.
 accent-words-cat-3 = Мурррр!
 accent-words-cat-4 = Ххссс!
 accent-words-cat-5 = Мррау.
 accent-words-cat-6 = Мяу?
-accent-words-cat-7 = Mяф.
+accent-words-cat-7 = Мяф.
 # Dog accent
 accent-words-dog-1 = Гав!
 accent-words-dog-2 = Тяв!
@@ -113,7 +113,27 @@ accent-words-tomato-2 = Тротект
 accent-words-tomato-3 = Мастет?
 accent-words-tomato-4 = Реати!
 accent-words-tomato-5 = Вода...
-
+# Scurret
+accent-words-scurret-1 = ВА!
+accent-words-scurret-2 = ВА?
+accent-words-scurret-3 = ВА.
+accent-words-scurret-4 = ВА...
+accent-words-scurret-5 = Вава!
+accent-words-scurret-6 = Вава?
+accent-words-scurret-7 = Вава.
+accent-words-scurret-8 = Вава...
+accent-words-scurret-9 = Ва вава!
+accent-words-scurret-10 = Ва вава?
+accent-words-scurret-11 = Ва вава.
+accent-words-scurret-12 = Ва вава...
+accent-words-scurret-13 = Вава ва!
+accent-words-scurret-14 = Вава ва?
+accent-words-scurret-15 = Вава ва.
+accent-words-scurret-16 = Вава ва...
+accent-words-scurret-17 = Ваааааа.
+accent-words-scurret-18 = Ваааааа!
+accent-words-scurret-19 = Ваааааа?
+accent-words-scurret-20 = Ваааааа...
 # Formal accent - expands abbreviations to full meanings
 accent-words-formal-1 = ГП
 accent-words-formal-2 = ГМО
@@ -215,23 +235,3 @@ accent-words-formal-97 = ВОКС ПРЕТОРИАНЕЦ
 accent-words-formal-98 = ВОКС ПРЕТОРИАНЕЦ
 accent-words-formal-99 = ВОКС ПРЕТОРИАНЕЦ
 accent-words-formal-100 = ВОКС ПРЕТОРИАНЕЦ
-accent-words-scurret-1 = ВА!
-accent-words-scurret-2 = ВА?
-accent-words-scurret-3 = ВА.
-accent-words-scurret-4 = ВА...
-accent-words-scurret-5 = Вава!
-accent-words-scurret-6 = Вава?
-accent-words-scurret-7 = Вава.
-accent-words-scurret-8 = Вава...
-accent-words-scurret-9 = Ва вава!
-accent-words-scurret-10 = Ва вава?
-accent-words-scurret-11 = Ва вава.
-accent-words-scurret-12 = Ва вава...
-accent-words-scurret-13 = Вава ва!
-accent-words-scurret-14 = Вава ва?
-accent-words-scurret-15 = Вава ва.
-accent-words-scurret-16 = Вава ва...
-accent-words-scurret-17 = Ваааааа.
-accent-words-scurret-18 = Ваааааа!
-accent-words-scurret-19 = Ваааааа?
-accent-words-scurret-20 = Ваааааа...

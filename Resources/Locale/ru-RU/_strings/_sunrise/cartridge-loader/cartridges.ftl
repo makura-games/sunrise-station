@@ -1,9 +1,4 @@
-plant-analyzer-program-name = БотаТек
-
-ent-PlantAnalyzerCartridge = картридж БотаТек
-    .desc = Программа, предоставляющая инструменты для анализа растений ботаникам.
-
-photo-cartridge-photos-count = Фотографий: {$count}/{$max}
+photo-cartridge-photos-count = Фотографий: { $count }/{ $max }
 photo-cartridge-limit-reached = Достигнут лимит фотографий
 photo-cartridge-photo-not-found = Фотография не найдена
 photo-cartridge-messenger-unavailable = Сервер мессенджера недоступен
@@ -17,5 +12,8 @@ photo-cartridge-overlay-button = 👁 Оверлей
 photo-cartridge-back-button = Назад
 photo-cartridge-delete-button = Удалить
 photo-cartridge-flash-label = Вспышка
+plant-analyzer-program-name = БотаТек
+ent-PlantAnalyzerCartridge = картридж БотаТек
+    .desc = Программа, предоставляющая инструменты для анализа растений ботаникам.
 photo-cartridge-upload-disabled = Отправка фотографий отключена сервером.
 photo-cartridge-capture-disabled = Создание фотографий отключено сервером.

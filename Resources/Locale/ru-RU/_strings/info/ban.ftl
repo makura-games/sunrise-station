@@ -7,24 +7,24 @@ cmd-ban-invalid-severity = { $severity } не является допустим�
 cmd-ban-invalid-arguments = Недопустимое число аргументов
 cmd-ban-hint = <name/user ID>
 cmd-ban-hint-reason = <reason>
-cmd-ban-hint-severity = [severity]
 cmd-ban-hint-duration = [продолжительность]
+cmd-ban-hint-severity = [severity]
 cmd-ban-hint-duration-1 = Навсегда
 cmd-ban-hint-duration-2 = 1 день
 cmd-ban-hint-duration-3 = 3 дня
 cmd-ban-hint-duration-4 = 1 неделя
 cmd-ban-hint-duration-5 = 2 недели
+cmd-ban-hint-duration-6 = 1 месяц
 # ban panel
 cmd-banpanel-desc = Открыть панель банов
 cmd-banpanel-help = Использование: banpanel [имя или guid игрока]
 cmd-banpanel-server = Это не может быть использовано через консоль сервера
 cmd-banpanel-player-err = Указанный игрок не может быть найден
-cmd-ban-hint-duration-6 = 1 месяц
 # listbans
 cmd-banlist-desc = Список активных банов пользователя.
 cmd-banlist-help = Использование: banlist <name or user ID>
 cmd-banlist-empty = Нет активных банов у пользователя { $user }
-cmd-banlistF-hint = <name/user ID>
+cmd-banlist-hint = <имя/user ID>
 cmd-ban_exemption_update-desc = Установить исключение на типы банов игрока.
 cmd-ban_exemption_update-help =
     Использование: ban_exemption_update <player> <flag> [<flag> [...]]
@@ -41,6 +41,7 @@ cmd-ban_exemption_get-help = Использование: ban_exemption_get <play
 cmd-ban_exemption_get-nargs = Ожидался ровно 1 аргумент
 cmd-ban_exemption_get-none = Пользователь не имеет исключений от банов.
 cmd-ban_exemption_get-show = Пользователь исключён из банов со следующими флагами: { $flags }.
+cmd-ban_exemption_get-arg-player = <player>
 # Ban panel
 ban-panel-title = Панель банов
 ban-panel-player = Игрок
@@ -68,18 +69,16 @@ ban-panel-years = Лет
 ban-panel-permanent = Постоянный
 ban-panel-ip-hwid-tooltip = Оставьте пустым и установите флажок ниже, чтобы использовать данные последнего подключения
 ban-panel-severity = Тяжесть:
+ban-panel-erase = Стереть сообщения в чате и игрока из раунда
+ban-panel-expiry-error = ошибка
 # Ban string
 server-ban-string = { $admin } создал бан на сервере с уровнем строгости { $severity }, который истекает { $expires } для [{ $name }, { $ip }, { $hwid }], с причиной: { $reason }, раунд: { $round }
-ban-panel-erase = Стереть сообщения в чате и игрока из раунда
-server-ban-string-never = никогда
 server-ban-string-no-pii = { $admin } установил серверный бан { $severity } тяжести, который истечёт { $expires } у { $name } с причиной: { $reason }, раунд: { $round }
-server-ban-unknown-round = Неизвестный
-cmd-ban_exemption_get-arg-player = <player>
+server-ban-string-never = никогда
+# Kick on ban
+ban-kick-reason = Вы были заблокированы
 # Antag Bans
 ban-panel-role-selection-antag = Антагонист
 ban-panel-role-selection-antag-all-option = Все
-# Kick on ban
-ban-kick-reason = You have been banned
-cmd-banlist-hint = <имя/user ID>
-
-ban-panel-expiry-error = ошибка
+cmd-banlistF-hint = <name/user ID>
+server-ban-unknown-round = Неизвестный

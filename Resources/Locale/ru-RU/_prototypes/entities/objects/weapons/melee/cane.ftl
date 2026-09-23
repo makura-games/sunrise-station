@@ -11,4 +11,3 @@ ent-CaneSheathFilled = { ent-CaneSheath }
 ent-CaneShotgun = { ent-Cane }
     .suffix = Дробовик
     .desc = { ent-Cane.desc }
-

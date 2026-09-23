@@ -32,8 +32,6 @@ ent-ActionActivateSmokeGrenadeImplant = Активировать дымовую 
     .desc = Создаёт небольшое облако дыма вокруг вас.
 ent-ActionActivateScramImplant = УДРАТЬ!
     .desc = Случайным образом телепортирует вас на большое расстояние.
-ent-ActionActivateScramImplantProto = { ent-ActionActivateScramImplant }
-    .desc = { ent-ActionActivateScramImplant.desc }
 ent-ActionActivateDnaScramblerImplant = Перемешать ДНК
     .desc = Меняет ваше имя и внешность случайным образом.
 ent-ActionToggleSuitPiece = Переключить элементы костюма
@@ -68,6 +66,8 @@ ent-ActionActivateStimpackImplant = Активировать [color=red]стим
     .desc = Вводит большую дозу стимуляторов.
 ent-ActionActivateNutrimentImplant = Активировать [color=orange]насыщатель[/color]
     .desc = Вводит комплекс питательных веществ.
+ent-ActionActivateReviverImplant = Активировать [color=cyan]реаниматор[/color]
+    .desc = Имплант стимулирует выброс адреналина точечным разрядом в сердце и коктейлем реагентов.
 ent-ActionFireStarter = Поджечь
     .desc = Поджигает противников в радиусе вокруг вас.
 ent-ActionToggleEyes = Открыть/закрыть глаза
@@ -84,7 +84,7 @@ ent-ActionToggleRootable = Укорениться
     .desc = Начать или перестать быть прикреплённым к полу.
 ent-ActionChameleonController = Измените свою одежду
     .desc = Быстро измените свою одежду
-ent-ActionActivateReviverImplant = Активировать [color=cyan]реаниматор[/color]
-    .desc = Имплант стимулирует выброс адреналина точечным разрядом в сердце и коктейлем реагентов.
 ent-ActionWhistle = Свистнуть
     .desc = СТОЙ ГДЕ СТОИШЬ!
+ent-ActionActivateScramImplantProto = { ent-ActionActivateScramImplant }
+    .desc = { ent-ActionActivateScramImplant.desc }
