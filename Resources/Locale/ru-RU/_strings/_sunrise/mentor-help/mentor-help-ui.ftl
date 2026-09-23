@@ -1,5 +1,4 @@
 mentor-help-unknown-user = Неизвестный
-mentor-help-teleport = Телепорт
 ui-lobby-mhelp-button = Помощь наставникам
 ui-options-function-open-mentor-help = Открыть Ментор помощь
 ui-options-function-open-help-choice = Открыть выбор помощи
