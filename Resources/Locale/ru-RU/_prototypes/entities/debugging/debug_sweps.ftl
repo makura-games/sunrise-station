@@ -1,5 +1,5 @@
 ent-WeaponPistolDebug = выстрел, умер
-    .desc = умер
+    .desc = Умер.
     .suffix = ДЕБАГ
 ent-MagazinePistolDebug = выстрел, умер магазин
     .suffix = ДЕБАГ
@@ -11,7 +11,7 @@ ent-CartridgeDebug = выстрел, умер пуля
     .suffix = ДЕБАГ
     .desc = { ent-BaseCartridgePistol.desc }
 ent-MeleeDebugGib = ударная палка
-    .desc = бьет сильно
+    .desc = Бьет сильно.
     .suffix = ДЕБАГ
 ent-MeleeDebug100 = ударная палка 100 урона
     .desc = { ent-MeleeDebugGib.desc }

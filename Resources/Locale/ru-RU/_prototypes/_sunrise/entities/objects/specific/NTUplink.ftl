@@ -1,4 +1,4 @@
-ent-BaseUplinkNTERT = Блюспейс Визионер ОБР
+ent-BaseUplinkNTERT = блюспейс Визионер ОБР
     .desc = Сверхинновационный портативный блюспейс-телепортатор.
     .suffix = Пустой, ERT
 ent-BaseComputerNTERTUplink = консоль аплинка ОБР

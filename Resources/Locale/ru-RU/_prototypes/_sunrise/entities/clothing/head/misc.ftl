@@ -14,5 +14,5 @@ ent-ClothingHeadBowBlack = чёрный бантик
     .desc = { ent-ClothingHeadBowWhite.desc }
 ent-WhiteLilyCrown = венок из белых лилий
     .desc = Очаровательный белый венок, добавляющий грации тому, кто его носит.
-ent-ClothingHeadMantleGoliathAliveHelmet = Зубастый капюшон
-    .desc = Ничем не отличается от любого другого верха скафандра, разве что кучей зубов и глаз
+ent-ClothingHeadMantleGoliathAliveHelmet = зубастый капюшон
+    .desc = Ничем не отличается от любого другого верха скафандра, разве что кучей зубов и глаз.

@@ -1,4 +1,4 @@
-ent-SyndicateBaseRoomMarker = Маркер базы Синдиката
+ent-SyndicateBaseRoomMarker = маркер базы Синдиката
     .desc = { ent-BaseRoomMarker.desc }
 ent-SyndicateBaseRoomMarker11x5 = { ent-SyndicateBaseRoomMarker }
     .desc = { ent-SyndicateBaseRoomMarker.desc }

@@ -1,4 +1,4 @@
-ent-BaseMobReptilian = Урисст' МссХэндс
+ent-BaseMobReptilian = урисст' МссХэндс
     .desc = { ent-BaseMobSpeciesOrganic.desc }
     .suffix = Унатх
 ent-MobReptilianDummy = { ent-BaseSpeciesDummy }

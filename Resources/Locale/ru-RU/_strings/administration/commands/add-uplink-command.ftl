@@ -1,5 +1,5 @@
 cmd-adduplink-desc = Создает аплинк на созданном предмете и связывает его к аккаунту пользователя
-cmd-adduplink-help = Использование: adduplink [username] [item-id] [discountEnabled]
+cmd-adduplink-help = Использование: adduplink [username] [item-id] [включены ли скидки(true/false)]
 add-uplink-command-completion-1 = Username (по-умолчанию это вы сами)
 add-uplink-command-completion-2 = Uplink uid (по-умолчанию это КПК)
 add-uplink-command-completion-3 = Включены ли скидки аплинка? (true/false)

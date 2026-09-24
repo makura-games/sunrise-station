@@ -1,4 +1,5 @@
 mentor-help-unknown-user = Неизвестный
+mentor-help-teleport = Телепорт
 ui-lobby-mhelp-button = Помощь наставникам
 ui-options-function-open-mentor-help = Открыть Ментор помощь
 ui-options-function-open-help-choice = Открыть выбор помощи
@@ -19,7 +20,6 @@ mentor-help-claim = Взять
 mentor-help-unassign = Освободить
 mentor-help-close-ticket = Закрыть
 mentor-help-close-confirm = Вы уверены?
-mentor-help-teleport = Телепорт
 mentor-help-cancel = Отмена
 mentor-help-close = Закрыть
 mentor-help-auto-open-tickets = Авто-открытие

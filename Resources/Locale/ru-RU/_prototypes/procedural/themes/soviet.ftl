@@ -1,4 +1,4 @@
-ent-SovietDungeonRoomMarker = Маркер советского подземелья
+ent-SovietDungeonRoomMarker = маркер советского подземелья
     .desc = { ent-BaseRoomMarker.desc }
 ent-SovietDungeonRoomMarker11x5 = { ent-SovietDungeonRoomMarker }
     .desc = { ent-SovietDungeonRoomMarker.desc }
@@ -10,7 +10,7 @@ ent-SovietDungeonRoomMarker3x5 = { ent-SovietDungeonRoomMarker }
     .desc = { ent-SovietDungeonRoomMarker.desc }
 ent-SovietDungeonRoomMarker7x3 = { ent-SovietDungeonRoomMarker }
     .desc = { ent-SovietDungeonRoomMarker.desc }
-ent-SovietDungeonWEHRoomMarker = Маркер советского WEH подземелья
+ent-SovietDungeonWEHRoomMarker = маркер советского WEH подземелья
     .desc = { ent-BaseRoomMarker.desc }
 ent-SovietDungeonWEHRoomMarker11x5 = { ent-SovietDungeonWEHRoomMarker }
     .desc = { ent-SovietDungeonWEHRoomMarker.desc }

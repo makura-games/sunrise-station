@@ -1,4 +1,4 @@
-ent-MobFelinid = Урист МакФелинид
+ent-MobFelinid = урист МакФелинид
     .desc = { ent-MobFelinidBase.desc }
 ent-MobBaseSyndicateFelinidWhite = { ent-MobFelinidBase }
     .suffix = Базовый Синдикат (белый)

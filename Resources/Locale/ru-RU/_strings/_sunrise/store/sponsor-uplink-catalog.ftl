@@ -129,7 +129,7 @@ uplink-sunrise-plushie-thirty-three-name = Аллан Хаскович
 uplink-sunrise-plushie-thirty-four-name = Спиффо
 uplink-sunrise-plushie-thirty-five-name = Кирпичный Джим
 uplink-sunrise-plushie-thirty-six-big-name = Кирпичный Джим
-uplink-sunrise-plushie-thirty-seven-name = V.O.R.T.E.X.
+uplink-sunrise-plushie-thirty-seven-name = В.О.Р.Т.Е.К.С
 uplink-sunrise-plushie-thirty-eight-name = Дань Хэн Пожиратель Луны
 
 ## HOS

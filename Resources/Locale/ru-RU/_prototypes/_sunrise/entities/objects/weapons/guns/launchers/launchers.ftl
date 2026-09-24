@@ -23,5 +23,5 @@ ent-SunriseWeaponDisposableRocketLauncherSmoke = одноразовый дымо
 ent-SunriseWeaponDisposableRocketLauncherIncendiary = одноразовый термобарический гранатомёт
     .desc = Одноразовый гранатомёт с красной полосой и нестабильной термобарической ракетой внутри.
     .suffix = Термобарический
-ent-WeaponGrenadeLauncherImprovised = Бомбага
+ent-WeaponGrenadeLauncherImprovised = бомбага
     .desc = Новая эра грейтайда.

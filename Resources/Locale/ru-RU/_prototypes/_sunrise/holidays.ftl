@@ -1,2 +1,2 @@
-ent-PaperVigersRayBirthdayInvitation = Приглашение на день рождения
+ent-PaperVigersRayBirthdayInvitation = приглашение на день рождения
     .desc = Кто-то пригласил вас на праздник...

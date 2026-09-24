@@ -1,7 +1,7 @@
 ent-BaseMagazineRifle = магазин (5,56)
     .desc = { ent-BaseItem.desc }
 ent-MagazineRifleEmpty = магазин (5,56 любые)
-    .suffix = пустой
+    .suffix = Пустой
     .desc = { ent-MagazineRifle.desc }
 ent-MagazineRifle = магазин (5,56)
     .desc = { ent-BaseMagazineRifle.desc }

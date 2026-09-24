@@ -1,10 +1,10 @@
 ent-MagazineMachineGunMG42 = малый короб .308
     .desc = { ent-BaseItem.desc }
-ent-MagazineLightMachineGunMG60 = Короб ПКМ
+ent-MagazineLightMachineGunMG60 = короб ПКМ
     .desc = Короб для ПКМ с длинной  лентой 7,62х54ммR.
 ent-MagazineVP70 = магазин вп70
     .desc = { ent-BaseItem.desc }
-ent-MagazinePistolSubMachineGunCaselessExtended = Расширенный магазин (.25 безгильзовые)
+ent-MagazinePistolSubMachineGunCaselessExtended = расширенный магазин (.25 безгильзовые)
     .desc = { ent-BaseMagazineLightRifle.desc }
 ent-MagazineLightRifleImprovised = магазин (7,62 самодельный)
     .desc = Изогнутый 20-зарядный двухрядный магазин для боевых винтовок. Предназначен для самодельных патронов.

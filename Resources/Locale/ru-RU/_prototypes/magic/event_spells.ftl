@@ -1,6 +1,6 @@
-ent-ActionSummonGhosts = Призвать призраков
+ent-ActionSummonGhosts = призвать призраков
     .desc = Делает всех существующих призраков видимыми навсегда.
-ent-ActionSummonGuns = Призвать оружие
+ent-ActionSummonGuns = призвать оружие
     .desc = АК-47 для всех! Воплощает случайное оружие перед каждым.
-ent-ActionSummonMagic = Призвать магию
+ent-ActionSummonMagic = призвать магию
     .desc = Воплощает случайный магический предмет перед каждым. Ничего не может пойти не так!
