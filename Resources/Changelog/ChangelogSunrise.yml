@@ -4884,3 +4884,29 @@
     message: Молот Синдиката опять можно брать в две руки
   id: 2032
   url: https://github.com/makura-games/sunrise-station/pull/4814
+- author: privett, Fungiviv
+  time: '2026-09-20T11:51:25.0000000+00:00'
+  changes:
+  - type: Add
+    message: Карта Треин добавлена в пул карт.
+  - type: Add
+    message: Карта Оазис добавлена для тестов.
+  - type: Add
+    message: Карта Гельта добавлена для тестов.
+  - type: Add
+    message: Добавлены шаттлы Службы безопасности "Стрела" и "Вангуард".
+  - type: Add
+    message: Добавлен шаттл утилизаторов "Черепашка".
+  - type: Add
+    message: Добавлен шаттл одиночного ядерного оперативника "Seeker", заменяющий стандартный.
+  - type: Add
+    message: Добавлен шаттл эвакуации повышенного комфорта для станций Бокс и Багель.
+  - type: Add
+    message: Добавлена станция Центрального командования, заменяющая старую.
+  - type: Fix
+    message: Все доступные игровые карты были изменены с учетом исправления ошибок.
+  id: 2033
+  url: https://github.com/makura-games/sunrise-station/pull/4829
+  media:
+  - url: https://github.com/user-attachments/assets/d0e7ea3e-f0f1-4038-8e66-793198e70e3b
+    description: Станция Оазис с новыми шаттлами.

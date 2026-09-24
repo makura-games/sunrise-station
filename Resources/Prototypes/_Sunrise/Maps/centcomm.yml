@@ -4,7 +4,7 @@
   mapPath: /Maps/_Sunrise/Station/centcomm.yml
   maxRandomOffset: 0
   randomRotation: false
-  minPlayers: 10
+  minPlayers: 1
   stations:
     centcomm:
       stationProto: NanotrasenCentralCommand
@@ -16,4 +16,6 @@
             prefixCreator: 'TG'
         - type: StationJobs
           availableJobs:
-            CentCommOperator: [ 1, 1 ]
+            #centcom
+            CentCommOperator: [ 1, 2 ]
+            BlueShieldOperative: [1, 2]
