@@ -1,0 +1,10 @@
+ent-ChemistryEmptyVial = vial
+    .desc = A small vial.
+ent-ChemistryEmptyVialSmall = mini vial
+    .desc = A smaller vial.
+ent-FloorTileItemDesertAstroSand = desert astro-sand
+    .desc = Artificial sand. Fortunately, it's not as coarse as the real thing.
+ent-UtilityKnife = utility knife
+    .desc = A knife with a small retractable blade. Suitable for opening boxes and envelopes.
+ent-voicesensor = voice sensor
+    .desc = This microphone, invented by Michael Foun while working at Michaelsoft, sends a signal when a prerecorded code phrase is spoken.

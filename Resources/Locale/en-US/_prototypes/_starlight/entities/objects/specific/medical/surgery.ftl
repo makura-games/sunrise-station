@@ -26,3 +26,7 @@ ent-HemostatRipper = { ent-HemostatCyber }
     .desc = { ent-HemostatCyber.desc }
 ent-BoneSetterRipper = { ent-BoneSetterCyber }
     .desc = { ent-BoneSetterCyber.desc }
+ent-SawRipper = circular saw
+    .desc = It seems like this could cut through anything.
+ent-BoneGelRipper = bottle of bone gel
+    .desc = A container for bone gel, which often needs to be refilled in a special machine.

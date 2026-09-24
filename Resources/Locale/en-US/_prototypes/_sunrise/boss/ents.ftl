@@ -8,3 +8,7 @@ ent-HellSpawnCultist = { ent-MobHuman }
 ent-BulletSkyFlare = sky flare
     .suffix = Boss
     .desc = { ent-BaseBulletIncendiary.desc }
+ent-MobHellspawnBossSpawn = { ent-MobHellspawn }
+    .desc = { ent-MobHellspawn.desc }
+ent-HellSpawnCultistDummy = { ent-MobHuman }
+    .desc = { ent-MobHuman.desc }

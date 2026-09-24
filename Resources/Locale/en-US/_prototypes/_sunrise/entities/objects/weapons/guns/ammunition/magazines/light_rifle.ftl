@@ -1,8 +1,8 @@
-ent-MagazineMachineGunMG42 = MG42 magazine
+ent-MagazineMachineGunMG42 = mG42 magazine
     .desc = { ent-BaseItem.desc }
-ent-MagazineLightMachineGunMG60 = MG60 magazine
+ent-MagazineLightMachineGunMG60 = mG60 magazine
     .desc = { ent-BaseItem.desc }
-ent-MagazineVP70 = VP70 magazine
+ent-MagazineVP70 = vP70 magazine
     .desc = { ent-BaseItem.desc }
 ent-MagazinePistolSubMachineGunCaselessExtended = extended magazine (caseless)
     .desc = { ent-BaseMagazineLightRifle.desc }
