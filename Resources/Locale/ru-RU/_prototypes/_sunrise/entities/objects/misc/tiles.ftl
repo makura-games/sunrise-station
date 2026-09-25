@@ -1,5 +1,7 @@
 ent-FloorTileItemDarkSquigglyVertical = тёмная стальная вертикальная плитка с волнистым узором
     .desc = { ent-FloorTileItemDark.desc }
+ent-FloorTileItemLightFancyWood = красивый деревянный пол
+    .desc = { ent-FloorTileItemBase.desc }
 ent-FloorTileItemWoodParquet = паркет
     .desc = { ent-FloorTileItemBase.desc }
 ent-FloorTileItemWoodBlack = чёрный деревянный пол
@@ -35,6 +37,4 @@ ent-FloorTileItemWoodChessDark = шахматный тёмный деревян�
 ent-FloorTileItemWoodChessLight = шахматный светлый деревянный пол
     .desc = { ent-FloorTileItemBase.desc }
 ent-FloorTileItemWoodChessRed = шахматный красный деревянный пол
-    .desc = { ent-FloorTileItemBase.desc }
-ent-FloorTileItemLightFancyWood = красивый деревянный пол
     .desc = { ent-FloorTileItemBase.desc }

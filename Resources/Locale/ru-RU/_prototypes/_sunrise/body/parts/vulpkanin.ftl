@@ -1,4 +1,4 @@
-﻿ent-PartVulpkanin = часть тела вульпканина
+ent-PartVulpkanin = часть тела вульпканина
     .desc = { ent-BasePart.desc }
 ent-TorsoVulpkanin = туловище вульпканина
     .desc = { ent-PartVulpkanin.desc }
@@ -20,7 +20,6 @@ ent-LeftFootVulpkanin = левая стопа вульпканина
     .desc = { ent-PartVulpkanin.desc }
 ent-RightFootVulpkanin = правая стопа вульпканина
     .desc = { ent-PartVulpkanin.desc }
-
 ent-OrganVulpkaninTorso = { ent-TorsoVulpkanin }
     .desc = { ent-TorsoVulpkanin.desc }
 ent-OrganVulpkaninHead = { ent-HeadVulpkanin }

@@ -4,4 +4,4 @@ mapping-decals = Декали
 mapping-replace = Заменить
 mapping-erase-entity = Стереть сущность
 mapping-erase-decal = Стереть декаль
-mapping-save-auto-commands = Использованы следующие автоматические команды: {$commands}
+mapping-save-auto-commands = Использованы следующие автоматические команды: { $commands }

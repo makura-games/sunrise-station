@@ -1,2 +1,2 @@
-ent-ActionChargeSpell = Зарядка
+ent-ActionChargeSpell = зарядка
     .desc = Добавляет заряд вашей палочке.

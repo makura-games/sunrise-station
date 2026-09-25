@@ -8,15 +8,15 @@ ent-WallCultIndestructible = { ent-WallCult }
     .desc = { ent-WallCult.desc }
 
 ent-WallReinforcedPlastitanium = reinforced plastitanium wall
-    .suffix = reinforced
+    .suffix = Reinforced
     .desc = { ent-WallPlastitanium.desc }
 ent-WallReinforcedPlastitaniumDiagonal = reinforced plastitanium wall
-    .suffix = reinforced, diagonal
+    .suffix = Reinforced, diagonal
     .desc = { ent-WallPlastitaniumDiagonal.desc }
 
 ent-WallReinforcedShuttle = reinforced shuttle wall
-    .suffix = reinforced
+    .suffix = Reinforced
     .desc = { ent-WallShuttle.desc }
 ent-WallReinforcedShuttleDiagonal = reinforced shuttle wall
-    .suffix = reinforced, diagonal
+    .suffix = Reinforced, diagonal
     .desc = { ent-WallShuttleDiagonal.desc }

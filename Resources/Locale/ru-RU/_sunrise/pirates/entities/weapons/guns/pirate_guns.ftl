@@ -1,17 +1,14 @@
 ent-WeaponLightMachineGunPirateCannon = пиратский ядромёт
     .desc = Ручная пиратская пушка с ленточной подачей ядер. Со страниц самых безумных приключений Острова Сокровищ. Сочетание пиратской магии и смекалки. Настоятельно не пытайтесь понять, как это работает…
-
 ent-WeaponMachineGunLCG = лёгкая цепная пушка
     .desc = Лёгкий пулемёт с высокой скорострельностью и слабой отдачей. Удобен для стрельбы на ходу и подавления наступающих отрядов. Высокий темп и нагрев ухудшают кучность, а при длительной стрельбе возрастает шанс заклинивания.
 ent-WeaponMachineGunLCGEmpty = лёгкая цепная пушка
     .desc = { ent-WeaponMachineGunLCG.desc }
-
 ent-MagazineCannonBallMini = чемодан ядер
     .desc = Чемодан для аккуратного хранения ядер от пиратского ядромёта с ленточной подачей.
 ent-MagazineCannonBallGrapeshotMini = чемодан картечи
     .suffix = Адмемы
     .desc = Чемодан для аккуратного хранения картечи от пиратского ядромёта с ленточной подачей.
-
 ent-MagazineChainGun = барабан цепного пулемёта
     .desc = Тяжёлый барабан боеприпасов для ленточного цепного пулемёта.
 ent-MagazineChainGun250 = { ent-MagazineChainGun }
@@ -29,6 +26,5 @@ ent-MagazineChainGunRandomSpawner = случайный барабан цепно
     .desc = { ent-MagazineChainGun.desc }
 ent-MagazineChainGunLooseAmmoSpawner = случайные патроны цепного пулемёта
     .desc = { ent-BaseItem.desc }
-
 ent-WeaponPistolFlintlockPirateMarker = сигнальный кремнёвый пистолет
     .desc = Самозарядный кремнёвый пистолет, отмечающий цели для пиратских рейдеров.

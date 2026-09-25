@@ -32,6 +32,7 @@ petting-success-slimes = Вы гладите { $target } по { POSS-ADJ($target
 petting-success-snake = Вы гладите { $target } по { POSS-ADJ($target) } большой чешуйчатой голове.
 petting-success-monkey = Вы гладите { $target } по { POSS-ADJ($target) } озорной маленькой голове.
 petting-success-nymph = Вы гладите { $target } по { POSS-ADJ($target) } маленькой деревянной голове.
+petting-success-scurret = Вы поглаживаете { $target } по { POSS-ADJ($target) } чётко различимой голове.
 petting-failure-generic = Вы тянетесь погладить { $target }, но { $target } настороженно уклоняется от вас.
 petting-failure-bat = Вы тянетесь погладить { $target }, но { $target } очень трудно поймать!
 petting-failure-carp = Вы тянетесь погладить { $target }, но { POSS-ADJ($target) } острые зубки заставляют вас передумать.
@@ -41,19 +42,20 @@ petting-failure-dehydrated-carp = Вы гладите { $target } по { POSS-AD
 petting-failure-goat = Вы тянетесь погладить { $target }, но { $target } упорно отказывается!
 petting-failure-goose = Вы тянетесь погладить { $target }, но { $target } слишком ужасен!
 petting-failure-possum = Вы тянетесь погладить { $target }, но на вас шипят и рычат.
-petting-failure-sloth = Вы тянетесь погладить { $target }, но { $target } с невероятной скоростью уклоняется!
 petting-failure-pig = Вы тянетесь погладить { $target }, но сталкиваетесь с раздражённым хрюканьем и визгом!
-petting-failure-holo = Вы тянетесь погладить { $target }, но { $target } едва не пронзает шипами вашу руку!
 petting-failure-raccoon = Вы тянетесь погладить { $target }, но { $target } енотится от вас.
+petting-failure-sloth = Вы тянетесь погладить { $target }, но { $target } с невероятной скоростью уклоняется!
+petting-failure-holo = Вы тянетесь погладить { $target }, но { $target } едва не пронзает шипами вашу руку!
 petting-failure-dragon = Вы поднимаете руку, но { $target } издаёт рёв, и вы решаете, что не хотите стать кормом для карпов.
 petting-failure-hamster = Вы тянетесь погладить { $target }, но { $target } пытается укусить вас за палец, и только ваши молниеносные рефлексы спасают вас от почти смертельной травмы.
 petting-failure-bear = Вы думаете погладить { $target }, но { $target } рычит, заставляя вас подумать ещё раз.
-petting-failure-dog = Вы тянетесь погладить { $target }, но { SUBJECT($target) } рычит на вас!
-
-## Knocking on windows
 petting-failure-monkey = Вы тянетесь погладить { $target }, но { $target } едва не кусает вас за пальцы!
 petting-failure-nymph = Вы тянетесь погладить { $target }, но { POSS-ADJ($target) } отодвигает свои ветви в сторону.
 petting-failure-shadow = Вы тянетесь погладить { $target }, но ваша рука проходит сквозь холодную тьму { POSS-ADJ($target) } тела.
+petting-failure-scurret = Вы тянетесь погладить { $target }, но { SUBJECT($target) } делает сальто назад!
+
+## Petting silicons
+
 petting-success-honkbot = Вы гладите { $target } по его скользкой металлической голове.
 petting-success-mimebot = Вы гладите { $target } по { POSS-ADJ($target) } холодной металлической голове..
 petting-success-cleanbot = Вы гладите { $target } по его влажной металлической голове.
@@ -67,9 +69,9 @@ petting-success-medical-cyborg = Вы гладите { $target } по { POSS-ADJ
 petting-success-service-cyborg = Вы гладите { $target } по { POSS-ADJ($target) } нарядной металлической голове.
 petting-success-syndicate-cyborg = Вы гладите { $target } по { POSS-ADJ($target) } угрожающего вида металлической голове.
 petting-success-derelict-cyborg = Вы гладите { $target } по { POSS-ADJ($target) } ржавой металлической голове.
-petting-failure-honkbot = Вы тянетесь погладить { $target }, но { $target } хонкает и уворачивается!
-petting-success-station-ai = Вы гладите { $target } по { POSS-ADJ($target) } холодному квадратному экрану.
 petting-success-recycler = Вы гладите { $target } по { POSS-ADJ($target) } слегка пугающему стальному покрытию.
+petting-success-station-ai = Вы гладите { $target } по { POSS-ADJ($target) } холодному квадратному экрану.
+petting-failure-honkbot = Вы тянетесь погладить { $target }, но { $target } хонкает и уворачивается!
 petting-failure-cleanbot = Вы тянетесь погладить { $target }, но { $target } занимается уборкой!
 petting-failure-mimebot = Вы тянетесь погладить { $target }, но { $target } занимается мимированием!
 petting-failure-medibot = Вы тянетесь погладить { $target }, но { $target } едва не пронзает вашу руку шприцом!
@@ -84,16 +86,21 @@ petting-failure-syndicate-cyborg = Вы тянетесь погладить { $t
 petting-failure-derelict-cyborg = Вы тянетесь, чтобы погладить { target }, но { POSS-ADJ(target) } ржавый и зазубренный внешний вид заставляет вас передумать.
 petting-failure-station-ai = Вы тянетесь погладить { $target }, но { SUBJECT($target) } { CONJUGATE-BASIC($target, "отпугивает", "отпугивают") } вашу руку разрядом!
 petting-success-station-ai-others = { CAPITALIZE($user) } гладит { $target } по { POSS-ADJ($target) } холодному квадратному экрану.
+
+## Rattling fences
+
+fence-rattle-success = *бдзынь*
+
+## Hugging players
+
 hugging-success-generic = Вы обнимаете { $target }.
 hugging-success-generic-others = { CAPITALIZE($user) } обнимает { $target }.
-fence-rattle-success = *бдзынь*
 hugging-success-generic-target = { CAPITALIZE($user) } обнимает вас.
+
+## Other
+
 petting-success-tesla = Вы гладите { $target }, попутно нарушая законы природы и физики.
 petting-failure-tesla = Вы тянетесь погладить { $target }, но разряд заставляет вас отдёрнуть руку.
 petting-success-mail-teleporter = Вы гладите { $target } по { POSS-ADJ($target) } исполнительной, холодной поверхности.
 petting-failure-mail-teleporter = Вы тянетесь погладить { $target }, но { SUBJECT($target) } { CONJUGATE-BE($target) } занят сортировкой почты!
-petting-success-scurret = Вы поглаживаете {$target} по {POSS-ADJ($target)} чётко различимой голове.
-
-petting-failure-scurret = Вы тянетесь погладить {$target}, но {SUBJECT($target)} делает сальто назад!
-
-## Petting silicons
+petting-failure-dog = Вы тянетесь погладить { $target }, но { SUBJECT($target) } рычит на вас!

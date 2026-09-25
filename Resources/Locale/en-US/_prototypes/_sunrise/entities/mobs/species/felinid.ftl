@@ -1,4 +1,4 @@
-ent-MobFelinidBase = Urist McFelinid
+ent-MobFelinidBase = urist McFelinid
     .desc = { ent-BaseMobSpeciesOrganic.desc }
-ent-MobFelinidDummy = Urist McHands
+ent-MobFelinidDummy = urist McHands
     .desc = A dummy felinid meant to be used in character setup.

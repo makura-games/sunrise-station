@@ -109,7 +109,7 @@ inv-tut-repair-tool-to-hand-bubble = Достаньте отвертку обр�
 inv-tut-repair-tool-to-hand-chat = Отвертку нужно положить именно в пояс. Достаньте ее обратно в руку, затем переместите в пояс для инструментов.
 inv-tut-repair-tool-to-hand-tts = Отвертку нужно положить именно в пояс. Достаньте ее обратно в руку, затем переместите в пояс для инструментов.
 
-ent-InventoryTutorialWardrobe = Шкаф для обучения инвентарю
+ent-InventoryTutorialWardrobe = шкаф для обучения инвентарю
 
 tutorial-softlock-pickup-highlighted = Поднимите только подсвеченный предмет.
 tutorial-softlock-storage-close = Сначала завершите работу с подсвеченным шкафом.

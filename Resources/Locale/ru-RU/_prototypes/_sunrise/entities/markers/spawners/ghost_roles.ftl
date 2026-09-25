@@ -2,5 +2,5 @@ ent-SpawnPointGhostFoliant = точка спавна призрачной рол
     .suffix = Фолиант
     .desc = { ent-MarkerBase.desc }
 ent-SpawnPointGhostCarpQueen = { ent-SpawnPointGhostFoliant }
-    .suffix = королева карпов
+    .suffix = Королева карпов
     .desc = { ent-MarkerBase.desc }

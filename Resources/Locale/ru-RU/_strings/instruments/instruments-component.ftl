@@ -20,15 +20,11 @@ instruments-component-channels-menu = Выбор MIDI-канала
 instrument-component-channel-name = MIDI-канал { $number }
 instruments-component-channels-all-button = Все
 instruments-component-channels-clear-button = Очистить
+instruments-component-channels-track-names-toggle = Показывать названия дорожек
+instruments-component-channels-single = { $channel } { $name }
+instruments-component-channels-multi = { $channel } { $name } ({ $other })
 # SwappableInstrumentComponent
 swappable-instrument-component-style-set = Установить стиль "{ $style }"
-instruments-component-channels-track-names-toggle = Показывать названия дорожек
-instruments-component-channels-single = {$channel} {$name}
-instruments-component-channels-multi = {$channel} {$name} ({$other})
-
-
-# SwappableInstrumentComponent
-
 instruments-component-menu-midi-channel-acoustic-grand-piano = Акустический рояль
 instruments-component-menu-midi-channel-bright-acoustic-piano = Яркое акустическое пианино
 instruments-component-menu-midi-channel-electric-grand-piano = Электророяль

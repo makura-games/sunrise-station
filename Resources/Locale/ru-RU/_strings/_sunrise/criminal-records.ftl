@@ -16,26 +16,26 @@ sunrise-records-select-laws = Нарушенные статьи:
 sunrise-records-circumstances-header = Обстоятельства:
 sunrise-records-select-circumstances = Отягчающие и смягчающие обстоятельства:
 sunrise-records-mitigating-circumstances = Смягчающие обстоятельства:
-sunrise-records-mitigating-summary = Смягчающие: -{$percent}%
-sunrise-records-aggravating-summary = Отягчающие: +{$percent}%
+sunrise-records-mitigating-summary = Смягчающие: -{ $percent }%
+sunrise-records-aggravating-summary = Отягчающие: +{ $percent }%
 sunrise-records-aggravating-circumstances = Отягчающие обстоятельства:
 sunrise-records-provisions-header = Общие положения
 sunrise-records-notes = Комментарии к делу:
 sunrise-records-notes-placeholder = Введите детали нарушения, улики или обстоятельства...
-sunrise-records-editor-header = Дело: #{$id}
-sunrise-records-sentence-total = ИТОГО: {$total} МИНУТ
-sunrise-records-sentence-total-short = {$total} МИН.
+sunrise-records-editor-header = Дело: #{ $id }
+sunrise-records-sentence-total = ИТОГО: { $total } МИНУТ
+sunrise-records-sentence-total-short = { $total } МИН.
 sunrise-records-sentence-life = ПЕРМА
 sunrise-records-sentence-header = СРОК
 sunrise-records-person-name = Имя:
 sunrise-records-person-job = Должность:
-sunrise-records-breakdown-base-sum = Базовая сумма (Кат. 1-5): {$sum} мин.
-sunrise-records-breakdown-cap = Лимит (1.5x Кат. {$cat}): {$cap} мин.
-sunrise-records-breakdown-perma-sum = База (Кат. 6): {$sum} мин.
-sunrise-records-breakdown-warning = [color=yellow]{$id}: Предупреждение (первое нарушение)[/color]
-sunrise-records-breakdown-recidivism = [color=orange]{$id}: Рецидив {$percent}%[/color]
-sunrise-records-breakdown-escape-penalty = [color=red]Штраф за побег: +{$penalty} мин.[/color]
-sunrise-records-breakdown-modifier = [color=cyan]{$id}: {$percent}%[/color]
+sunrise-records-breakdown-base-sum = Базовая сумма (Кат. 1-5): { $sum } мин.
+sunrise-records-breakdown-cap = Лимит (1.5x Кат. { $cat }): { $cap } мин.
+sunrise-records-breakdown-perma-sum = База (Кат. 6): { $sum } мин.
+sunrise-records-breakdown-warning = [color=yellow]{ $id }: Предупреждение (первое нарушение)[/color]
+sunrise-records-breakdown-recidivism = [color=orange]{ $id }: Рецидив { $percent }%[/color]
+sunrise-records-breakdown-escape-penalty = [color=red]Штраф за побег: +{ $penalty } мин.[/color]
+sunrise-records-breakdown-modifier = [color=cyan]{ $id }: { $percent }%[/color]
 sunrise-records-person-age = Возраст:
 sunrise-records-person-dna = ДНК:
 sunrise-records-person-gender = Гендер:
@@ -53,20 +53,20 @@ prisoner-management-waiting = Ожидают заключения
 prisoner-management-in-progress = В исполнении
 prisoner-management-finished = Завершено
 prisoner-management-start = Начать заключение
-prisoner-management-waiting-info = {$time} мин.
-prisoner-management-in-progress-info = Камера #{$cell}
+prisoner-management-waiting-info = { $time } мин.
+prisoner-management-in-progress-info = Камера #{ $cell }
 prisoner-management-finished-info = Срок отбыт
 prisoner-management-permanent-info = [color=red]ПЕРМА[/color]
-prisoner-management-countdown = [color=orange]{$time}[/color]
-prisoner-management-case-id = Дело #{$case}
-prisoner-management-cell-name = Камера #{$cell}
+prisoner-management-countdown = [color=orange]{ $time }[/color]
+prisoner-management-case-id = Дело #{ $case }
+prisoner-management-cell-name = Камера #{ $cell }
 prisoner-management-permabrig = Пермабриг
 prisoner-management-select-cell = Выбор камеры
-prisoner-management-cell-index = Камера #{$index}
+prisoner-management-cell-index = Камера #{ $index }
 prisoner-management-occupied = Занята
 prisoner-management-unequipped = Не оборудована
 prisoner-management-no-cells = Камеры не настроены
-prisoner-management-sentence = Срок: {$sentence} мин.
+prisoner-management-sentence = Срок: { $sentence } мин.
 prisoner-management-warning = [color=yellow]Предупреждение[/color]
 prisoner-management-countdown-finished = [color=green]Срок отбыт[/color]
 prisoner-management-paroled-info = [color=green]Освобождён по УДО[/color]
@@ -75,6 +75,7 @@ prisoner-management-parole = УДО
 job-prisoner-title = Заключенный
 
 # DeviceLink Ports
+
 signal-port-name-prison-locker-lock = Заблокировать шкаф
 signal-port-description-prison-locker-lock = Заблокировать шкафчик для текущего доступа.
 signal-port-name-prison-locker-unlock = Разблокировать шкаф
@@ -87,9 +88,8 @@ signal-port-name-prison-timer-set = Установить таймер
 signal-port-description-prison-timer-set = Запустить отсчет времени заключения.
 signal-port-name-prison-timer-reset = Сбросить таймер
 signal-port-description-prison-timer-reset = Остановить и сбросить таймер.
-prison-timer-cell-label = КАМ-{$number}
-prison-timer-free = {$label}\nОТКРЫТО
-
+prison-timer-cell-label = КАМ-{ $number }
+prison-timer-free = { $label }\nОТКРЫТО
 # Circumstances
 corplaw-circ-cooperation-title = Сотрудничество
 corplaw-circ-cooperation-desc = Активное содействие расследованию и предоставление полезной информации.

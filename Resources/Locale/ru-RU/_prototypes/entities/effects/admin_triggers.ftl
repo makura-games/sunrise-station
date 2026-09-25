@@ -1,7 +1,7 @@
 ent-AdminInstantEffectBase = мгновенный эффект
     .desc = { "" }
 ent-AdminInstantEffectEMP = { ent-AdminInstantEffectBase }
-    .suffix = EMP
+    .suffix = ЭМИ
     .desc = { ent-AdminInstantEffectBase.desc }
 ent-AdminInstantEffectBluespace = { ent-AdminInstantEffectBase }
     .suffix = Вспышка синего пространства

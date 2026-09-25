@@ -1,3 +1,5 @@
+ghost-panel-antagonist-silicon-name = Мятежный Силикон
+ghost-panel-antagonist-silicon-description = Враждебный автономный юнит под контролем мятежного ИИ.
 ghost-teleport-menu-antagonists-label = Антагонисты
 ghost-teleport-menu-alive-label = Живые
 ghost-teleport-menu-dead-label = Мертвые
@@ -40,7 +42,5 @@ ghost-panel-antagonist-pirate-name = Пират
 ghost-panel-antagonist-pirate-description = Враждебный пират или налётчик.
 ghost-panel-antagonist-soviet-name = Солдат СССП
 ghost-panel-antagonist-soviet-description = Солдат вооруженых сил СССП.
-ghost-panel-antagonist-silicon-name = Мятежный Силикон
-ghost-panel-antagonist-silicon-description = Враждебный автономный юнит под контролем мятежного ИИ.
 ghost-panel-antagonist-infiltrator-name = Инфильтратор Синдиката
 ghost-panel-antagonist-infiltrator-description = Оперативник Синдиката, готов устроить перестрелку.

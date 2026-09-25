@@ -1,2 +1,2 @@
-ent-MobHumanAssaultOp = Штурмовой оперативник
+ent-MobHumanAssaultOp = штурмовой оперативник
     .desc = { ent-MobHuman.desc }

@@ -2,3 +2,7 @@
 	path = RobustToolbox
 	url = https://github.com/space-wizards/RobustToolbox.git
 	branch = master
+[submodule "Tools/_sunrise/ss14-ai-auto-translate-tool"]
+	path = Tools/_sunrise/ss14-ai-auto-translate-tool
+	url = https://github.com/ThereDrD0/ss14-ai-auto-translate-tool.git
+	branch = master

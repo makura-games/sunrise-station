@@ -1,1 +1,1 @@
-equipped-name-prefix = zumbified {$baseName}
+equipped-name-prefix = zumbified { $baseName }

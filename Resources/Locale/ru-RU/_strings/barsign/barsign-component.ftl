@@ -115,17 +115,26 @@ barsign-prototype-description-enginechange = Всё ещё ожидаем.
 barsign-prototype-name-emprah = За Империю
 barsign-prototype-description-emprah = Нравится и фанатикам, и еретикам, и завсегдатаям с дефектами мозга.
 
-## EmpBarSign
+## Spacebucks
 
 barsign-prototype-name-spacebucks = Кредиты
 barsign-prototype-description-spacebucks = От них нельзя скрыться, даже в космосе.
-barsign-prototype-description-empbarsign = Что-то пошло совсем не так.
+
+## Maltroach
+
 barsign-prototype-name-maltroach = Мальтракан
 barsign-prototype-description-maltroach = Пищ!
 
-## SignOff
+## Whiskey Echoes
 
 barsign-prototype-name-whiskeyechoes = Эхо Виски
 barsign-prototype-description-whiskeyechoes = Элитный бар для элитных опер... стоп, это же станция NanoTrasen. Почему этот знак в базе данных?
-barsign-prototype-description-sign-off = Этот знак, похоже, не включён.
+
+## EmpBarSign
+
 barsign-prototype-name-empbarsign = глитч знак бара
+barsign-prototype-description-empbarsign = Что-то пошло совсем не так.
+
+## SignOff
+
+barsign-prototype-description-sign-off = Этот знак, похоже, не включён.

@@ -84,4 +84,4 @@ medical-tut-softlock-keep-self-ointment = Не убирайте мазь: сей
 medical-tut-softlock-open-analyzer = Сначала возьмите анализатор здоровья. Его интерфейс понадобится на следующем шаге.
 
 ent-SunriseMedicalTutorialSelfOintment = { ent-Ointment }
-ent-MedicalTutorialPatient= Пациент
+ent-MedicalTutorialPatient = пациент

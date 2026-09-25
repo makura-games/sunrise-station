@@ -451,6 +451,7 @@
   name: blue shield operative
   components:
   - type: SpawnPoint
+    spawn_type: LateJoin
     job_id: BlueShieldOperative
   - type: Sprite
     sprite: _Sunrise/Markers/jobs.rsi

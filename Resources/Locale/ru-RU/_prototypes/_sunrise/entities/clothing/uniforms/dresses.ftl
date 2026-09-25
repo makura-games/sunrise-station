@@ -11,6 +11,6 @@ ent-UniformDressSuccubusBlack = чёрное платье суккуба
 ent-UniformDressSuccubusWhite = белое платье суккуба
     .desc = От этого платья исходит инфернальная магия... Крылышки - в подарок!
 ent-UniformDressTango = платье для танго
-    .desc = Чувствуй ритм, кружась под "La cumparsita"!
+    .desc = Почувствуй ритм, кружась в танце под «Кумпарситу»!
 ent-UniformDressXeno = платье ксено
     .desc = Элегантность и ужас в одном флаконе.

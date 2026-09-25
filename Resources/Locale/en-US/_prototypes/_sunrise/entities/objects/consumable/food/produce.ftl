@@ -1,5 +1,5 @@
 ent-ExplosiveBanana = explosive banana
-    .desc = explosive banana
+    .desc = Explosive banana.
 ent-FoodCoffeeArabica = coffe arabica
     .desc = A coffe arabica grains, main food of scientist.
 ent-FoodCoffeeRobust = coffe robast
@@ -22,7 +22,7 @@ ent-FoodSnapcorn = ear of snapcorn
     .desc = Needs some butter! And some cooking...
 ent-FoodWhiterose = white rose
     .desc = The classic fleur d'amour - flower of love. Watch for its thorns!
-ent-FoodSunflower = Sunflower
+ent-FoodSunflower = sunflower
     .desc = It's beautiful! A certain person might beat you to death if you trample these.
 ent-FoodWhiteLily = white lily
     .desc = Graceful delicate flower. How could it even grow up in deep space?

@@ -1,5 +1,5 @@
 ent-CratePirateChestSun = { ent-CratePirate }
-    .suffix = Заполнен, Оружие, SUNRISE
+    .suffix = Заполнен, Оружие, Санрайз
     .desc = { ent-CratePirate.desc }
 ent-CratePiraterEVASuitArmoredBundle = набор бронированных ева-костюмов пиратов
     .suffix = Заполнен, Санрайз

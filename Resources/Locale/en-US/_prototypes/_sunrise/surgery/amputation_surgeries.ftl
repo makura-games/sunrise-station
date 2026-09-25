@@ -1,6 +1,6 @@
-ent-SurgeryAmputation = Amputation
+ent-SurgeryAmputation = amputation
     .desc = Surgical removal of a limb.
-ent-SurgeryAmputationHead = Amputation
+ent-SurgeryAmputationHead = amputation
     .desc = Surgical removal of a head.
 ent-SurgeryAmputationSlime = { ent-SurgeryAmputation }
     .desc = { ent-SurgeryAmputation.desc }

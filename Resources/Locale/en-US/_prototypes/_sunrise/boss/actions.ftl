@@ -1,10 +1,10 @@
-ent-ActionHellSpawnRush = RUSH
+ent-ActionHellSpawnRush = rUSH
     .desc = { "" }
-ent-ActionHellSpawnInvincibility = Invincibility
+ent-ActionHellSpawnInvincibility = invincibility
     .desc = { "" }
-ent-ActionHellSpawnTentacleRight = Tentacle
+ent-ActionHellSpawnTentacleRight = tentacle
     .desc = { "" }
-ent-ActionHellSpawnTentacleLeft = Tentacle
+ent-ActionHellSpawnTentacleLeft = tentacle
     .desc = { "" }
-ent-ActionHellSpawnSpiral = Spiral
+ent-ActionHellSpawnSpiral = spiral
     .desc = { "" }

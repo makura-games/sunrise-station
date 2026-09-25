@@ -1,6 +1,6 @@
 ent-BaseDonationPlink = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
-ent-SunriseUplink = Портативный магазин "Восход"
+ent-SunriseUplink = портативный магазин "Восход"
     .desc = Имеет широкий ассортимент товаров на любой вкус и предпочтение - от удивительных изделий ручной работы и уникальных сувениров до современной техники и модных аксессуаров.
 ent-FishStationUplink = портативный магазин "/Рыбаплинк/"
     .desc = Имеет широкий ассортимент товаров на любой вкус и предпочтение - от удивительных изделий ручной работы и уникальных сувениров до современной техники и модных аксессуаров.
@@ -24,7 +24,7 @@ ent-FishStationUplink80 = { ent-FishStationUplink40 }
 ent-FishStationUplink100 = { ent-FishStationUplink40 }
     .suffix = 100
     .desc = { ent-FishStationUplink40.desc }
-ent-NeweraStationUplink40 = Портативный магазин "/Котоплинк/"
+ent-NeweraStationUplink40 = портативный магазин "/Котоплинк/"
     .desc = Имеет широкий ассортимент товаров для всех вкусов и предпочтений - от удивительных ручных изделий и уникальных сувениров до современной техники и модных аксессуаров.
     .suffix = 40
 ent-NeweraStationUplink80 = { ent-NeweraStationUplink40 }

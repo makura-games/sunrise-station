@@ -1,1 +1,1 @@
-ent-BaseTutorialPlayer = Вы!
+ent-BaseTutorialPlayer = вы

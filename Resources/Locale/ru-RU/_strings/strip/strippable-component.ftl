@@ -14,10 +14,14 @@ strippable-component-alert-owner-insert-hand = { $user } вкладывает { 
 strippable-component-alert-owner-interact = { $user } возится с вашим { $item }!
 # StripVerb
 strip-verb-get-data-text = Обыскать
-
-## UI
-strippable-bound-user-interface-stripping-menu-title = Инвентарь { $ownerName }
-strippable-bound-user-interface-stripping-menu-ensnare-button = Ограничители ног
 strip-all-verb-get-data-text = Снять всё
 
 ## UI
+
+strippable-bound-user-interface-stripping-menu-title = Инвентарь { $ownerName }
+strippable-bound-user-interface-stripping-menu-ensnare-button = Ограничители ног
+strippable-bound-user-interface-stripping-menu-admin-button = Переключить режим администратора
+strippable-bound-user-interface-stripping-menu-admin-button-tooltip =
+    Переключает оверлей администратора.
+    Замок -> Контрабанда
+    «C» -> Хамелеон

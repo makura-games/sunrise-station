@@ -31,21 +31,21 @@ highlights-bartender = Бармен, Барменша, "Бар"
 highlights-botanist = Ботаник, Ботаника, Гидропоника
 highlights-chaplain = Священник, Святоша, Церковь
 highlights-chef = Шеф-повар, "Повар", Кухня
-# ))))))
 highlights-clown = Клоун, Шут, "Пидор"
 highlights-janitor = Уборщик, "Убор"
 highlights-lawyer = Адвокат, Юрист
 highlights-librarian = Библиотекарь, Библиотека
 highlights-mime = Мим
+highlights-musician = Музыкант, "Музыка", Театр, Театр, Сервис, "Серв"
 highlights-passenger = Пассажир, Ассистент, "Ассист"
 highlights-service-worker = Сервисный работник, Сервисник, Сервис
 # Station-specific
-highlights-boxer = Боксер, Ринг
 highlights-reporter = Репортер, Журналист
-highlights-zookeeper = Смотритель зоопарка, Зоопарк
 highlights-psychologist = Психолог, Психология
 # Silicon
 highlights-personal-ai = Персональный ИИ, "ПИИ"
 highlights-cyborg = Киборг, Борг, Робот
 highlights-station-ai = Станционный ИИ, "ИИ", "СИИ"
-highlights-musician = Музыкант, "Музыка", Театр, Театр, Сервис, "Серв"
+# Station-specific
+highlights-boxer = Боксер, Ринг
+highlights-zookeeper = Смотритель зоопарка, Зоопарк

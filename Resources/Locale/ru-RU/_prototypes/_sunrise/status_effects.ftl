@@ -1,2 +1,2 @@
-ent-StatusEffectFall = Падение
+ent-StatusEffectFall = падение
     .desc = { ent-MobStatusEffectBase.desc }

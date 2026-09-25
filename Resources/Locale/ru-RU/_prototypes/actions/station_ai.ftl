@@ -1,8 +1,8 @@
-ent-ActionJumpToCore = Прыжок к ядру
+ent-ActionJumpToCore = прыжок к ядру
     .desc = Перемещает ваш обзор обратно к ядру.
-ent-ActionSurvCameraLights = Переключить освещение камер
+ent-ActionSurvCameraLights = переключить освещение камер
     .desc = Включает освещение камер наблюдения в области, которую вы просматриваете.
-ent-ActionAIViewLaws = Показать Законы
+ent-ActionAIViewLaws = показать Законы
     .desc = Посмотреть законы, которым вы должны следовать.
-ent-ActionShowJobIcons = Показать иконки профессий
+ent-ActionShowJobIcons = показать иконки профессий
     .desc = Отображает иконки профессий для членов экипажа.
