@@ -1,5 +1,5 @@
 - type: loadout
-  id: ReporterTapeRecorderBox
+  id: SunriseOtherTapeRecorderBox
   storage:
     back:
     - BoxTapeRecorder
