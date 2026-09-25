@@ -14,11 +14,13 @@ using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.Animations;
 
 public sealed partial class EmoteAnimationSystem : EntitySystem
 {
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private StandingStateSystem _standing = default!;
     [Dependency] private SharedGravitySystem _gravity = default!;
@@ -37,7 +39,7 @@ public sealed partial class EmoteAnimationSystem : EntitySystem
 
     private void OnGetState(Entity<EmoteAnimationComponent> ent, ref ComponentGetState args)
     {
-        args.State = new EmoteAnimationComponent.EmoteAnimationComponentState(ent.Comp.AnimationId);
+        args.State = new EmoteAnimationComponent.EmoteAnimationComponentState(ent.Comp.AnimationId, ent.Comp.StartedAt);
     }
 
     private void OnEmote(EntityUid uid, EmoteAnimationComponent component, ref EmoteEvent args)
@@ -80,6 +82,7 @@ public sealed partial class EmoteAnimationSystem : EntitySystem
         }
 
         component.AnimationId = emoteId;
+        component.StartedAt = _timing.CurTime;
         Dirty(uid, component);
     }
 }
