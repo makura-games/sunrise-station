@@ -25,7 +25,10 @@
     - id: SpiderSpawnHorde
     - id: VentClog
     - id: VentFleshWorms # Sunrise-Edit
-    - id: VentbullMigration # Sunrise-Edit
+    - id: HoloCarpSpawn # Sunrise-Edit
+    - id: RadiationOutburst # Sunrise-Edit
+    - id: RadiationStorm # Sunrise-Edit
+    # - id: VentbullMigration # Sunrise-Edit
 
 - type: entityTable
   id: BasicAntagEventsTable
