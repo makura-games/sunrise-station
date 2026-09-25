@@ -124640,17 +124640,6 @@ entities:
       parent: 16735
     - type: Physics
       canCollide: False
-- proto: ClothingOuterArmorBlueShield
-  entities:
-  - uid: 16441
-    components:
-    - type: Transform
-      parent: 16436
-    - type: Clothing
-      inSlot: outerClothing
-      inSlotFlag: OUTERCLOTHING
-    - type: Physics
-      canCollide: False
 - proto: ClothingOuterArmorPaladin
   entities:
   - uid: 16657
@@ -210752,7 +210741,7 @@ entities:
         outerClothing: !type:ContainerSlot
           showEnts: False
           occludes: False
-          ent: 16441
+          ent: null
         neck: !type:ContainerSlot
           showEnts: False
           occludes: False

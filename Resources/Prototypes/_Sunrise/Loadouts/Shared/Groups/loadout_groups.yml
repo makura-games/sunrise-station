@@ -195,6 +195,15 @@
   - BlueShieldTSFMarineHelmet
 
 - type: loadoutGroup
+  id: SunriseLoadoutGroupBlueShieldMask
+  name: loadout-group-blueshield-mask
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - SunriseLoadoutClothingMaskGasBlueShieldHalf
+  - SunriseLoadoutClothingMaskGasBlueShield
+
+- type: loadoutGroup
   id: BlueShieldBackpack
   name: loadout-group-blueshield-backpack
   loadouts:

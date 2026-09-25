@@ -102399,17 +102399,6 @@ entities:
     - type: Transform
       pos: -30.625256,24.156317
       parent: 2
-- proto: ClothingMaskGasBlueShield
-  entities:
-  - uid: 40963
-    components:
-    - type: Transform
-      parent: 40962
-    - type: Clothing
-      inSlot: mask
-      inSlotFlag: MASK
-    - type: Physics
-      canCollide: False
 - proto: ClothingMaskGasPilot
   entities:
   - uid: 12567
@@ -102858,17 +102847,6 @@ entities:
     components:
     - type: Transform
       parent: 12342
-    - type: Clothing
-      inSlot: outerClothing
-      inSlotFlag: OUTERCLOTHING
-    - type: Physics
-      canCollide: False
-- proto: ClothingOuterArmorBlueShield
-  entities:
-  - uid: 40964
-    components:
-    - type: Transform
-      parent: 40962
     - type: Clothing
       inSlot: outerClothing
       inSlotFlag: OUTERCLOTHING
@@ -197011,7 +196989,7 @@ entities:
         outerClothing: !type:ContainerSlot
           showEnts: False
           occludes: False
-          ent: 40964
+          ent: null
         neck: !type:ContainerSlot
           showEnts: False
           occludes: False
@@ -197019,7 +196997,7 @@ entities:
         mask: !type:ContainerSlot
           showEnts: False
           occludes: False
-          ent: 40963
+          ent: null
         eyes: !type:ContainerSlot
           showEnts: False
           occludes: False

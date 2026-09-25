@@ -80926,17 +80926,6 @@ entities:
     - type: Transform
       pos: 29.516983,-1.2031906
       parent: 2
-- proto: ClothingHeadHelmetSwat
-  entities:
-  - uid: 10794
-    components:
-    - type: Transform
-      parent: 10791
-    - type: Clothing
-      inSlot: head
-      inSlotFlag: HEAD
-    - type: Physics
-      canCollide: False
 - proto: ClothingHeadHelmetSyndicate
   entities:
   - uid: 30636
@@ -81103,17 +81092,6 @@ entities:
     - type: Transform
       pos: -15.243141,32.524296
       parent: 2
-- proto: ClothingMaskGasBlueShield
-  entities:
-  - uid: 10795
-    components:
-    - type: Transform
-      parent: 10791
-    - type: Clothing
-      inSlot: mask
-      inSlotFlag: MASK
-    - type: Physics
-      canCollide: False
 - proto: ClothingMaskGasExplorer
   entities:
   - uid: 10945
@@ -81358,17 +81336,6 @@ entities:
     - type: Transform
       pos: -13.2739105,-50.45024
       parent: 2
-- proto: ClothingOuterArmorBlueShield
-  entities:
-  - uid: 10796
-    components:
-    - type: Transform
-      parent: 10791
-    - type: Clothing
-      inSlot: outerClothing
-      inSlotFlag: OUTERCLOTHING
-    - type: Physics
-      canCollide: False
 - proto: ClothingOuterCoatBlueshield
   entities:
   - uid: 10797
@@ -142929,7 +142896,7 @@ entities:
         outerClothing: !type:ContainerSlot
           showEnts: False
           occludes: False
-          ent: 10796
+          ent: null
         neck: !type:ContainerSlot
           showEnts: False
           occludes: False
@@ -142937,7 +142904,7 @@ entities:
         mask: !type:ContainerSlot
           showEnts: False
           occludes: False
-          ent: 10795
+          ent: null
         eyes: !type:ContainerSlot
           showEnts: False
           occludes: False
@@ -142945,7 +142912,7 @@ entities:
         head: !type:ContainerSlot
           showEnts: False
           occludes: False
-          ent: 10794
+          ent: null
         suitstorage: !type:ContainerSlot
           showEnts: False
           occludes: False
