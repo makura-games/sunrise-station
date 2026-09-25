@@ -26,6 +26,14 @@
   name: death squadron backpack
   description: Holds the kit of CentComm's most feared agents.
   components:
+    - type: Storage
+      grid:
+      - 0,0,1,3
+      - 3,0,10,6
+    - type: EntityTableContainerFill # Добавляет карманы к рюкзаку ЧВК при спавне гост-ролей
+      containers:
+        storagebase:
+          id: PouchBackpackPockets
     - type: Sprite
       sprite: _Sunrise/Clothing/Back/Backpacks/deathsquad_backpack.rsi
     - type: ExplosionResistance

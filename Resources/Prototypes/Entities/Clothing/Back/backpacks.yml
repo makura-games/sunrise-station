@@ -223,7 +223,14 @@
     sprite: _Sunrise/Clothing/Back/Backpacks/ERT/ertleader.rsi # Sunrise-Edit
   - type: Storage
     grid:
-    - 0,0,8,3
+  # Sunrise-Start Добавление карманов для снаряжения
+    - 0,0,1,3
+    - 3,0,11,3
+  - type: EntityTableContainerFill # Добавляет карманы для спавна любых гост-ролей ОБР
+    containers:
+      storagebase:
+        id: PouchBackpackPockets
+  # Sunrise-End
   - type: ExplosionResistance
     damageCoefficient: 0.1
 
@@ -304,8 +311,15 @@
     damageCoefficient: 0.1
   - type: Storage
     grid:
-    - 0,0,7,3
-    - 8,1,8,3
+  # Sunrise-Start Добавление карманов для снаряжения
+    - 0,0,1,3
+    - 3,0,10,3
+    - 11,1,11,3
+  - type: EntityTableContainerFill # Добавляет карманы к рюкзакам при покупке их в аплинке
+    containers:
+      storagebase:
+        id: PouchBackpackPockets
+  # Sunrise-End
   - type: StaticPrice
     price: 1000
 

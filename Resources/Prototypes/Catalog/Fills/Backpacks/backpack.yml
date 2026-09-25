@@ -16,6 +16,7 @@
     containers:
       storagebase: !type:AllSelector
         children:
+        - id: PouchBackpackPockets # Sunrise-Edit
         - id: ClothingOuterArmorRaidBiocode # Sunrise-Edit
         - id: ClothingHeadHelmetRaid
         - id: ClothingMaskGasSyndicate
@@ -34,6 +35,7 @@
       containers:
         storagebase: !type:AllSelector
           children:
+            - id: PouchBackpackPockets
             - id: ClothingOuterMaidArmorRaidBiocode
             - id: ClothingHeadHelmetRaid
             - id: ClothingHandsTacticalMaidGloves

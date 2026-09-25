@@ -323,6 +323,7 @@
     - ClothingOuterHardsuitMilira
     - ClothingHeadHelmetEVAMilira
     - ClothingEyesHudMilira
+    - PouchAmmo
 
 - type: latheRecipePack
   id: SecurityDynamicSunriseMech

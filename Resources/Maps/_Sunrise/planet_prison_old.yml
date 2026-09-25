@@ -38540,8 +38540,8 @@ entities:
         discountDownTo: {}
         disableRefund: False
         costModifiersBySourceId: {}
-      - id: UplinkAmmoPouch
-        productEntity: PouchAmmo
+      - id: UplinkAmmoPouchMedium
+        productEntity: PouchAmmoMedium
         name: null
         discountCategory: veryRareDiscounts
         description: null
@@ -38578,6 +38578,44 @@ entities:
           Telecrystal: 1
         disableRefund: False
         costModifiersBySourceId: {}
+      - id: UplinkAmmoPouchLarge
+        productEntity: PouchAmmoLarge
+        name: null
+        discountCategory: veryRareDiscounts
+        description: null
+        categories:
+        - UplinkWearables
+        originalCost:
+          Telecrystal: 3
+        conditions:
+        - !type:StoreWhitelistCondition
+          blacklist: null
+          whitelist:
+            requireAll: False
+            statusEffects: null
+            species: null
+            requireAllTags: False
+            tags:
+            - NukeOpsUplink
+            - LoneOpsUplink
+            sizes: null
+            components: null
+        icon:
+          sprite: _RMC14/Objects/Clothing/Pouches/large_ammo_mag.rsi
+          state: icon
+        priority: 0
+        productAction: null
+        applyToMob: False
+        productUpgradeId: null
+        productActionEntity: null
+        productEvent: null
+        raiseProductEventOnUser: False
+        purchaseAmount: 0
+        restockTime: 0
+        discountDownTo:
+          Telecrystal: 2
+        disableRefund: False
+        costModifiersBySourceId: {}  
       - id: PAIMIDIPlayer
         productEntity: null
         name: pai-midi-player-name
@@ -43930,15 +43968,15 @@ entities:
         discountDownTo: {}
         disableRefund: False
         costModifiersBySourceId: {}
-      - id: ERTUplinkPouchAmmo
-        productEntity: PouchAmmo
+      - id: ERTUplinkPouchAmmoMedium
+        productEntity: PouchAmmoMedium
         name: null
         discountCategory: null
         description: null
         categories:
         - NTEquipment
         originalCost:
-          Crystallite: 3
+          Crystallite: 4
         conditions:
         - !type:ListingLimitedStockCondition
           stock: 10
@@ -43957,6 +43995,33 @@ entities:
         discountDownTo: {}
         disableRefund: False
         costModifiersBySourceId: {}
+      - id: ERTUplinkPouchAmmoLarge
+        productEntity: PouchAmmoLarge
+        name: null
+        discountCategory: null
+        description: null
+        categories:
+        - NTEquipment
+        originalCost:
+          Crystallite: 6
+        conditions:
+        - !type:ListingLimitedStockCondition
+          stock: 10
+        icon:
+          sprite: _Sunrise/Interface/Misc/nt_icons.rsi
+          state: pouchammo
+        priority: 0
+        productAction: null
+        applyToMob: False
+        productUpgradeId: null
+        productActionEntity: null
+        productEvent: null
+        raiseProductEventOnUser: False
+        purchaseAmount: 0
+        restockTime: 0
+        discountDownTo: {}
+        disableRefund: False
+        costModifiersBySourceId: {}  
       - id: UplinkPirateHristovAmmoFrag
         productEntity: MagazineBoxAntiMaterielFrag
         name: null
