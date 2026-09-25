@@ -168,6 +168,10 @@
   - type: ContainerFill
     containers:
       board: [ FirelockElectronics ]
+  # Sunrise-Start    
+  - type: AccessReader
+    containerAccessProvider: board
+  # Sunrise-End  
 
 - type: entity
   id: FirelockGlass

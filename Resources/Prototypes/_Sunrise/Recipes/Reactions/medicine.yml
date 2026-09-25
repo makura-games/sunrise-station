@@ -101,9 +101,22 @@
       amount: 1
     Iodine:
       amount: 1
-    Nutriment: 
+    Nutriment:
       amount: 1
     Saline:
       amount: 1
   products:
     Nutricryokomp: 5
+
+- type: reaction
+  id: Opporozidone
+  minTemp: 400 #Maybe if a method of reducing reagent temp exists one day, this could be -50
+  reactants:
+    Omnizine:
+      amount: 1
+    Plasma:
+      amount: 2
+    Darvinium:
+      amount: 1
+  products:
+    Opporozidone: 3
