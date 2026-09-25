@@ -361,7 +361,9 @@ public sealed partial class StationJobsSystem
         {
             var roleBans = _banManager.GetJobBans(player);
             var profileJobs = profile.JobPriorities.Keys.Select(k => new ProtoId<JobPrototype>(k)).ToList();
-            var ev = new StationJobsGetCandidatesEvent(player, profileJobs);
+            // Sunrise edit start - проверяем профиль, используемый для назначения работы
+            var ev = new StationJobsGetCandidatesEvent(player, profileJobs) { Profile = profile };
+            // Sunrise edit end
             RaiseLocalEvent(ref ev);
 
             // Shouldn't happen but you know :P
@@ -393,11 +395,6 @@ public sealed partial class StationJobsSystem
 
                 if (!(roleBans == null || !roleBans.Contains(jobId))) //TODO: Replace with IsRoleBanned
                     continue;
-
-                // Sunrise-Start
-                if (job.SpeciesBlacklist.Contains(profile.Species))
-                    continue;
-                // Sunrise-End
 
                 availableJobs ??= new List<string>(profile.JobPriorities.Count);
                 availableJobs.Add(jobId);

@@ -13,6 +13,11 @@
     - !type:DepartmentTimeRequirement
       department: Cargo
       time: 10h
+    # Sunrise edit start - ограничение расы для должности
+    - !type:SpeciesRequirement
+      species: [Vox]
+      inverted: true
+    # Sunrise edit end
   weight: 10
   startingGear: QuartermasterGear
   icon: "JobIconQuarterMaster"
@@ -43,8 +48,6 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-  speciesBlacklist:
-  - Vox # Sunrise-Edit
 
 - type: startingGear
   id: QuartermasterGear

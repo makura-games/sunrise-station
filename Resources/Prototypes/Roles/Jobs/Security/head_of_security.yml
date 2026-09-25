@@ -16,6 +16,11 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 10h
+    # Sunrise edit start - ограничение расы для должности
+    - !type:SpeciesRequirement
+      species: [Vox]
+      inverted: true
+    # Sunrise edit end
   weight: 10
   startingGear: HoSGear
   icon: "JobIconHeadOfSecurity"
@@ -46,8 +51,6 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-  speciesBlacklist:
-  - Vox # Sunrise-Edit
 
 - type: startingGear
   id: HoSGear
