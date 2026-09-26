@@ -14,27 +14,12 @@
   id: Civilian
   name: department-Civilian
   description: department-Civilian-description
-  color: "#4e7c22" # Sunrise edit
+  color: "#7F7F7F"
   weight: -10
   ignoreForDepartmentFallback: true
   roles:
-  - Bartender
-  - Botanist
-  - Chaplain
-  - Chef
-  - Clown
-  - HeadOfPersonnel
-  - Janitor
-  - Librarian
-  - Mime
-  - Musician
   - Passenger
-  - Reporter
   - Visitor
-  - ServiceWorker
-  - TramDriver
-  - Barber # Sunrise-Roles
-  - ComMaid  # Sunrise-Lust edit
 
 # Вынесено в _Sunrise
 #- type: department
@@ -113,6 +98,18 @@
   - MedicalPathologist  # Sunrise-pathologist
 
 - type: department
+  id: Science
+  name: department-Science
+  description: department-Science-description
+  color: "#984EB4" # Sunrise edit
+  roles:
+  - ResearchDirector
+  - SeniorResearcher  # Sunrise-Senior
+  - Scientist
+  - ResearchAssistant
+  - Roboticist  # Sunrise-Edit
+
+- type: department
   id: Security
   name: department-Security
   description: department-Security-description
@@ -129,16 +126,27 @@
   - SecurityPilot # Sunrise-SecurityPilot
 
 - type: department
-  id: Science
-  name: department-Science
-  description: department-Science-description
-  color: "#984EB4" # Sunrise edit
+  id: Service
+  name: department-Service
+  description: department-Service-description
+  color: "#9FED58"
   roles:
-  - ResearchDirector
-  - SeniorResearcher  # Sunrise-Senior
-  - Scientist
-  - ResearchAssistant
-  - Roboticist  # Sunrise-Edit
+  - Bartender
+  - Botanist
+  - Chaplain
+  - Chef
+  - Clown
+  - HeadOfPersonnel
+  - Janitor
+  - Lawyer
+  - Librarian
+  - Mime
+  - Musician
+  - Reporter
+  - ServiceWorker
+  - TramDriver
+  - Barber # Sunrise-Roles
+  - ComMaid  # Sunrise-Lust edit
 
 - type: department
   id: Silicon

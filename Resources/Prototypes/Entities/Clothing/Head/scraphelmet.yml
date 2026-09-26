@@ -52,7 +52,7 @@
 # The helmet itself
 - type: entity
   parent: [ClothingHeadHelmetBase, BaseMajorContraband]
-  id: ClothingHeadHelmetScrap #When we get the tech for it this bad boy needs to be given a vision reduction when equipped. 1-2 tiles less than normal should be good.
+  id: ClothingHeadHelmetScrap
   name: scrap helmet
   description: A cobbled-together helmet made from cabling, steel, and a bucket.
   components:
@@ -86,3 +86,5 @@
     node: scraphelmet
   - type: VisionDarkener
     strength: 0.05 #Sunrise-Edit -1.5 обзора
+  - type: ImageOverlay
+    pathToOverlayImage: "/Textures/Clothing/Head/Helmets/scrapHelmetOverlayTexture.png"

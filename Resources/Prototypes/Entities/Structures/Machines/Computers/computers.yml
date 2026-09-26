@@ -539,6 +539,10 @@
     access: [["Command"]]
   - type: Lock
     unlockOnClick: false
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - storagebase
+
 
 - type: entity
   parent: ComputerStationTeleportersControl

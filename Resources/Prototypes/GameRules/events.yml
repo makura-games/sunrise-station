@@ -531,7 +531,7 @@
   parent: BaseGameRule
   components:
   - type: StationEvent
-    earliestStart: 90
+    earliestStart: 45
     minimumPlayers: 40
     weight: 0.005 # Sunrise-edit: Нахуя оно блядь вообще надо
     duration: 1

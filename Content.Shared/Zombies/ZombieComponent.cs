@@ -148,6 +148,12 @@ public sealed partial class ZombieComponent : Component
     public SoundSpecifier BiteSound = new SoundPathSpecifier("/Audio/Effects/bite.ogg");
 
     /// <summary>
+    /// The blood refresh of the humanoid to restore in case of cloning.
+    /// </summary>
+    [DataField]
+    public FixedPoint2 BeforeZombifiedBloodRefresh = new();
+
+    /// <summary>
     /// The blood reagents of the humanoid to restore in case of cloning
     /// </summary>
     [DataField]
