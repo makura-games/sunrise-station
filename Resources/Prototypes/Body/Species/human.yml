@@ -101,6 +101,8 @@
   # Sunrise start
   - type: Interactions
   - type: FootprintEmitter
+  - type: Scent
+    personalScentProfile: SunriseHuman
   # Sunrise end
 
 - type: entity

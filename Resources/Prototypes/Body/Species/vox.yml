@@ -269,6 +269,8 @@
   - type: Wagging
   # Sunrise start
   - type: Interactions
+  - type: Scent
+    personalScentProfile: SunriseVox
   # Sunrise end
 
 - type: entity

@@ -87,6 +87,8 @@
         sprite: Mobs/Effects/brute_damage.rsi
         color: "#008000"
   - type: FootprintEmitter
+  - type: Scent
+    personalScentProfile: SunrisePredator
 
 - type: entity
   parent: AppearancePredator

@@ -115,13 +115,19 @@
     positional: true
   - type: StaticPrice
     price: 1500
-  - type: CartridgeAmmo #Sunrise-Start
+  # Sunrise edit start
+  - type: CartridgeAmmo
     proto: BulletGrenadeIncendiary
     deleteOnSpawn: true
   - type: SpentAmmoVisuals
   - type: Tag
     tags:
-    - HandGrenadeAmmo #Sunrise-End
+    - HandGrenadeAmmo
+  - type: ScentEmitter
+    spot: AnySlot
+    scent: SunriseGunpowder
+    duration: 400
+  # Sunrise edit end
 
 - type: entity
   parent: [FragileGrenadeBase, ProjectileGrenadeBase, BaseSyndicateContraband]
@@ -154,10 +160,16 @@
     positional: true
   - type: StaticPrice
     price: 1500
-  - type: CartridgeAmmo #Sunrise-Start
+  # Sunrise edit start
+  - type: CartridgeAmmo
     proto: BulletGrenadeShrapnel
     deleteOnSpawn: true
   - type: SpentAmmoVisuals
   - type: Tag
     tags:
-    - HandGrenadeAmmo #Sunrise-End
+    - HandGrenadeAmmo
+  - type: ScentEmitter
+    spot: AnySlot
+    scent: SunriseGunpowder
+    duration: 400
+  # Sunrise edit end
