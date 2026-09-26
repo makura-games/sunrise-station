@@ -8,10 +8,12 @@
   - type: ComplexInteraction
   - type: TTS
     voice: Soldier
-  - type: Hunger
-    baseDecayRate: 0
-  - type: Thirst
-    baseDecayRate: 0
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: SunriseNoDecayHunger
+      Thirst:
+        prototype: SunriseNoDecayThirst
   - type: GhostTakeoverAvailable
   - type: GhostRole
     makeSentient: true
@@ -107,10 +109,7 @@
   - type: StaminaDamageOnHit
     damage: 1
   - type: Vocal
-    sounds:
-      Male: ClownGoblin
-      Female: ClownGoblin
-      Unsexed: ClownGoblin
+    emoteSounds: ClownGoblin
   - type: IntrinsicRadioReceiver
   - type: ActiveRadio
     channels:
@@ -121,7 +120,9 @@
   - type: Hands
   - type: Puller
     needsHands: false
-  - type: PressureImmunity
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunity
   - type: NoSlip
   - type: MovementAlwaysTouching
   - type: InventorySlots

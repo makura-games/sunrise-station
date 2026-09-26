@@ -37,14 +37,20 @@
     species: Swine
   - type: SunriseHumanoidProfile
   - type: SunriseHumanoidBaseLayers
-  - type: Hunger
-    baseDecayRate: 0.08
-  - type: Thirst
-    baseDecayRate: 0.15
-    dehydrationDamage:
-      types:
-        Bloodloss: 0.5
-        Asphyxiation: 0.5
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: SunriseFastHunger
+      Thirst:
+        prototype: SunriseFastThirst
+  - type: SatiationDamage
+    satiations:
+      Thirst:
+        thresholds:
+          Dead:
+            types:
+              Bloodloss: 0.5
+              Asphyxiation: 0.5
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
     state: full
@@ -77,17 +83,13 @@
         layer:
         - MobLayer
   - type: Vocal
-    sounds:
-      Male: UnisexSwine
-      Female: UnisexSwine
-      Unsexed: UnisexSwine
+    emoteSounds: UnisexSwine
   - type: SwineAccent
   - type: Damageable
     damageModifierSet: Swine
   - type: Injurable
     damageContainer: Biological
   - type: Butcherable
-    butcheringType: Spike # TODO human.
     spawned:
     - id: FoodMeatSwine
       amount: 5

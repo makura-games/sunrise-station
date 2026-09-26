@@ -123,12 +123,6 @@
   maxStress: 100
 
 - type: storytellerMetadata
-  id: MimicVendorRule
-  threatType: Neutral
-  threatCost: 5
-  maxStress: 100
-
-- type: storytellerMetadata
   id: ClosetSkeleton
   threatType: Neutral
   threatCost: 5

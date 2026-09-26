@@ -24,6 +24,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Store;
 using Content.Shared.Traits.Assorted;
 using Robust.Shared.Audio;
 using Robust.Shared.Collections;
@@ -268,7 +269,7 @@ public sealed partial class FleshCultSystem
                 }
             }
 
-            var bodyType = _prototypeManager.Index(SkeletonBodyType);
+            var bodyType = ProtoMan.Index(SkeletonBodyType);
             foreach (var (key, data) in bodyType.Layers)
             {
                 if (key != HumanoidVisualLayers.Head)
@@ -316,8 +317,12 @@ public sealed partial class FleshCultSystem
         if (TryComp<FleshCultistComponent>(uid, out var fleshCultistComponent))
         {
             fleshCultistComponent.Hunger += saturation;
-            _store.TryAddCurrency(new Dictionary<string, FixedPoint2>
-                { {StolenMutationPointPrototype, evolutionPoint} }, uid);
+            _store.TryAddCurrency(
+                new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>
+                {
+                    { StolenMutationPointPrototype, evolutionPoint },
+                },
+                uid);
         }
 
     }
@@ -369,7 +374,7 @@ public sealed partial class FleshCultSystem
                 var blood = new Solution();
                 blood.AddReagent(puddleSolutionContent.Reagent, amount);
 
-                absorbBlood.AddSolution(blood, _prototypeManager);
+                absorbBlood.AddSolution(blood, ProtoMan);
             }
         }
 

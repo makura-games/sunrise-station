@@ -51,17 +51,18 @@
       Exceptional: mood_great
       Perfect: mood_great
       Dead: mood_dead
-  - type: Hunger
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Milira/parts.rsi
     state: full
-  - type: Thirst
-    dehydrationDamage:
-      types:
-        Bloodloss: 0.5
-        Asphyxiation: 0.5
+  - type: SatiationDamage
+    satiations:
+      Thirst:
+        thresholds:
+          Dead:
+            types:
+              Bloodloss: 0.5
+              Asphyxiation: 0.5
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatMilira
       amount: 5
@@ -70,8 +71,7 @@
   - type: SunriseHumanoidProfile
   - type: SunriseHumanoidBaseLayers
   - type: Temperature
-    currentTemperature: 310.15
-    specificHeat: 42
+    temperature: 310.15
   - type: TemperatureDamage
     heatDamageThreshold: 313
     coldDamageThreshold: 230
@@ -84,10 +84,7 @@
   - type: Stamina
     baseCritThreshold: 100 # не убавляйте милирам стамину в угоду баланса
   - type: Vocal
-    sounds:
-      Male: MaleHuman
-      Female: FemaleHuman
-      Unsexed: MaleHuman
+    emoteSounds: MaleHuman
   - type: Damageable
     damageModifierSet: Milira
   - type: FootprintEmitter

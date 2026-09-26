@@ -2,7 +2,6 @@
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Flesh
 {
@@ -34,9 +33,8 @@ namespace Content.Shared.Flesh
         [DataField("spawnObjectsRadius"), ViewVariables(VVAccess.ReadWrite)]
         public float SpawnObjectsRadius = 5;
 
-        [DataField("fleshTileId", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>)),
-         ViewVariables(VVAccess.ReadWrite)]
-        public string FleshTileId = "Flesh";
+        [DataField, ViewVariables(VVAccess.ReadWrite)]
+        public EntProtoId FleshTileId = "Flesh";
 
         [DataField("spawns"), ViewVariables(VVAccess.ReadWrite)]
         public Dictionary<string, float> Spawns = new();

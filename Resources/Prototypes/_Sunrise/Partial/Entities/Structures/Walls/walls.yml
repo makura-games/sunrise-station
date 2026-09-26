@@ -1,0 +1,379 @@
+# Частичные прототипы сохраняют визуалы стен Sunrise поверх обновлений Wizden.
+
+- type: !PartialOnly entity
+  id: WallMeat
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/meat.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/meat.rsi
+
+- type: !PartialOnly entity
+  id: WallPlasma
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/plasma.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/plasma.rsi
+
+- type: !PartialOnly entity
+  id: WallUranium
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/uranium.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/uranium.rsi
+
+- type: !PartialOnly entity
+  id: WallWeb
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/web.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/web.rsi
+
+- type: !PartialOnly entity
+  id: Cardwall
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/card.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/card.rsi
+
+- type: !PartialOnly entity
+  id: WallReinforcedChitin
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/xeno.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/xeno.rsi
+    state: rgeneric
+
+- type: !PartialOnly entity
+  id: WallSolidChitin
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/xeno.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/xeno.rsi
+
+- type: !PartialOnly entity
+  id: WallXenoborg
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/xenoborg.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/xenoborg.rsi
+
+- type: !PartialOnly entity
+  id: WallXenoborgDiagonal
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/xenoborg_diagonal.rsi
+    state: state0
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/xenoborg_diagonal.rsi
+    state: state0
+
+- type: !PartialOnly entity
+  id: WallPlastitaniumIndestructible
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/plastitanium.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/plastitanium.rsi
+
+- type: !PartialOnly entity
+  id: WallPlastitaniumDiagonalIndestructible
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/plastitanium_diagonal.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/plastitanium_diagonal.rsi
+
+- type: !PartialOnly entity
+  id: WallPlastitaniumDiagonal
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/plastitanium_diagonal.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/plastitanium_diagonal.rsi
+
+- type: !PartialOnly entity
+  id: WallShuttleDiagonal
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/shuttle_diagonal.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/shuttle_diagonal.rsi
+
+- type: !PartialOnly entity
+  id: WallShuttle
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/shuttle.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/shuttle.rsi
+
+- type: !PartialOnly entity
+  id: WallMining
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/mining.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/mining.rsi
+
+- type: !PartialOnly entity
+  id: WallMiningDiagonal
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/mining_diagonal.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/mining_diagonal.rsi
+
+- type: !PartialOnly entity
+  id: WallBrick
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Walls/brick.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/brick.rsi
+
+- type: !PartialOnly entity
+  id: WallDiamond
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Walls/diamond.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/diamond.rsi
+
+- type: !PartialOnly entity
+  id: WallGold
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Walls/gold.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/gold.rsi
+
+- type: !PartialOnly entity
+  id: WallReinforced
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Walls/solid.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/solid.rsi
+    state: rgeneric
+
+- type: !PartialOnly entity
+  id: WallReinforcedRust
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Walls/solid_rust.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/solid_rust.rsi
+    state: rgeneric
+
+- type: !PartialOnly entity
+  id: WallReinforcedDiagonal
+  components:
+  - type: Sprite
+    layers: !Remove
+    drawdepth: Walls
+    sprite: _Sunrise/Structures/Walls/reinforced_diagonal.rsi
+    state: state0
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/reinforced_diagonal.rsi
+    state: state0
+
+- type: !PartialOnly entity
+  id: WallSilver
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Walls/silver.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/silver.rsi
+
+- type: !PartialOnly entity
+  id: WallSolid
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Walls/solid.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/solid.rsi
+
+- type: !PartialOnly entity
+  id: WallSolidDiagonal
+  components:
+  - type: Sprite
+    layers: !Remove
+    drawdepth: Walls
+    sprite: _Sunrise/Structures/Walls/solid_diagonal.rsi
+    state: state0
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/solid_diagonal.rsi
+    state: state0
+
+- type: !PartialOnly entity
+  id: WallSolidRust
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Walls/solid_rust.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/solid_rust.rsi
+    state: full
+
+- type: !PartialOnly entity
+  id: WallWood
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Walls/wood.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/wood.rsi
+
+# Совместимость механики стен Sunrise с обновлёнными прототипами Wizden.
+
+- type: !PartialOnly entity
+  id: BaseStructureWall
+  components:
+  - type: Ricochetable
+    chance: 0.4
+
+- type: !PartialOnly entity
+  id: WallDiagonalBase
+  components:
+  - type: Tag
+    tags:
+    - ForceNoTileWalls
+
+- type: !PartialOnly entity
+  id: WallBrick
+  components:
+  - type: Pierceable
+    level: Metal
+  - type: Ricochetable
+    chance: 0.2
+
+- type: !PartialOnly entity
+  id: WallDebug
+  categories: [Debug]
+
+- type: !PartialOnly entity
+  id: WallPlastitaniumIndestructible
+  components:
+  - type: Ricochetable
+    chance: 1
+
+- type: !PartialOnly entity
+  id: WallPlastitaniumDiagonalIndestructible
+  parent: WallDiagonalBaseSunrise
+
+- type: !PartialOnly entity
+  id: WallReinforced
+  components:
+  - type: Pierceable
+    level: HardenedMetal
+  - type: Ricochetable
+    chance: 0.75
+
+- type: !PartialOnly entity
+  id: WallReinforcedDiagonal
+  parent: WallDiagonalBaseSunrise
+
+- type: !PartialOnly entity
+  id: WallShuttleDiagonal
+  components:
+  - !Remove type: Reflect
+  - type: Physics
+    bodyType: Static
+  - type: Ricochetable
+    chance: 1
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PolygonShape
+          vertices: !Clear
+          - "0.5,-0.5"
+          - "-0.5,-0.5"
+          - "-0.5,0.1"
+          - "0.5,0.5"
+
+- type: !PartialOnly entity
+  id: WallShuttle
+  components:
+  - type: Reflect
+    reflects: Energy
+    reflectProb: 1
+  - type: Ricochetable
+    chance: 1
+
+- type: !PartialOnly entity
+  id: WallSolid
+  parent: [BaseWall, BaseDeltaPressurePlasma, StructureHealthWall]
+
+- type: !PartialOnly entity
+  id: WallSolidDiagonal
+  parent: [WallDiagonalBaseSunrise, StructureHealthWall]
+  components:
+  - type: Ricochetable
+    chance: 0.4
+
+- type: !PartialOnly entity
+  id: WallSolidChitin
+  components:
+  - type: Ricochetable
+    chance: 0.1
+
+- type: !PartialOnly entity
+  id: WallXenoborgDiagonal
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Girder:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [Destruction]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+
+- type: !PartialOnly entity
+  id: WallUranium
+  components:
+  - type: Ricochetable
+    chance: 1
+
+- type: !PartialOnly entity
+  id: WallWood
+  description: The traditional assistant defense.
+  components:
+  - type: Ricochetable
+    chance: 0
+
+- type: !PartialOnly entity
+  id: WallWeb
+  description: Keeps the spiders in and the assistants out.
+  components:
+  - type: Ricochetable
+    chance: 0
+  - type: Clickable
+
+- type: !PartialOnly entity
+  id: WallMiningDiagonal
+  parent: WallDiagonalBaseSunrise

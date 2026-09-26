@@ -69,7 +69,7 @@ public sealed partial class StorytellerSystem
         if (!_cfg.GetCVar(SunriseCCVars.StorytellerEnabled))
             return;
 
-        if (!_protoManager.TryIndex(StorytellerPoolPrototypeId, out var poolPrototype))
+        if (!ProtoMan.TryIndex(StorytellerPoolPrototypeId, out var poolPrototype))
         {
             Log.Error($"Storyteller preset pool '{StorytellerPoolPrototypeId}' not found!");
             return;

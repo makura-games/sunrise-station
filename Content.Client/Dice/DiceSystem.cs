@@ -7,27 +7,12 @@ public sealed partial class DiceSystem : SharedDiceSystem
 {
     [Dependency] private SpriteSystem _sprite = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<DiceComponent, AfterAutoHandleStateEvent>(OnDiceAfterHandleState);
-    }
-
+    [SubscribeLocalEvent]
     private void OnDiceAfterHandleState(Entity<DiceComponent> entity, ref AfterAutoHandleStateEvent args)
     {
         if (!TryComp<SpriteComponent>(entity, out var sprite))
             return;
 
-        // TODO maybe just move each die to its own RSI?
-        var state = _sprite.LayerGetRsiState((entity.Owner, sprite), 0).Name;
-        if (state == null)
-            return;
-        // Sunrise-Edit
-        if (entity.Comp.IsNotStandardDice)
-            return;
-        // Sunrise-Edit-End
-        var prefix = state.Substring(0, state.IndexOf('_'));
-        _sprite.LayerSetRsiState((entity.Owner, sprite), 0, $"{prefix}_{entity.Comp.CurrentValue}");
+        UpdateSunriseDiceSprite(entity, sprite); // Sunrise-Edit - настраиваемый кубик не имеет состояний для каждой грани.
     }
 }

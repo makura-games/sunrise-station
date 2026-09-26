@@ -26,7 +26,6 @@ public sealed partial class MappingAccessOverlaySystem : EntitySystem
     [Dependency] private IClyde _clyde = default!;
     [Dependency] private IOverlayManager _overlayManager = default!;
     [Dependency] private IUserInterfaceManager _ui = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IResourceCache _resource = default!;
     [Dependency] private EntityQuery<ContainerFillComponent> _containerFillQuery = default!;
     [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
@@ -186,11 +185,11 @@ public sealed partial class MappingAccessOverlaySystem : EntitySystem
 
         if (enabled)
         {
-            _readerResolver = new(EntityManager, _prototype, _containerFillQuery);
+            _readerResolver = new(EntityManager, ProtoMan, _containerFillQuery);
             _readerResolver.MarkAccessReaderLookupDirty();
             _tightBounds = new(_clickMap);
-            _overlay = new(EntityManager, _lookup, _sprite, _prototype, Loc, _resource, _ui, _readerResolver, _tightBounds, _physicsQuery);
-            _outlineOverlay = new(EntityManager, _sprite, _prototype, _clyde, _readerResolver, _tightBounds, _physicsQuery);
+            _overlay = new(EntityManager, _lookup, _sprite, ProtoMan, Loc, _resource, _ui, _readerResolver, _tightBounds, _physicsQuery);
+            _outlineOverlay = new(EntityManager, _sprite, ProtoMan, _clyde, _readerResolver, _tightBounds, _physicsQuery);
             _overlay.BodyFilter = BodyFilter;
             _overlay.ElectronicsOnly = ElectronicsOnly;
             _outlineOverlay.BodyFilter = BodyFilter;

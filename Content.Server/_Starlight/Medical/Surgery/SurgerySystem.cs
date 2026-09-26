@@ -23,7 +23,6 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
 {
     [Dependency] private DamageableSystem _damageableSystem = default!;
     [Dependency] private ChatSystem _chat = default!;
-    [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private PopupSystem _popup = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
 
@@ -142,7 +141,7 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
     {
         _surgeries.Clear();
 
-        foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
+        foreach (var entity in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             if (entity.HasComponent<SurgeryComponent>())
                 _surgeries.Add(new EntProtoId(entity.ID));

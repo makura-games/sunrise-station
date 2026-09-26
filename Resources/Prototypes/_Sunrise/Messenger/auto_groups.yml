@@ -58,12 +58,12 @@
   allowManualMemberManagement: false
 
 - type: messengerAutoGroup
-  id: DepartmentCivilian
-  name: department-civilian
-  groupId: dept_civilian
+  id: DepartmentService
+  name: department-service
+  groupId: dept_service
   addAllUsers: false
   departments:
-    - Civilian
+    - Service
   radioChannel: Service
   allowManualMemberManagement: false
 

@@ -13,12 +13,16 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 # Sunrise added end
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'merge_group' }}
+
 jobs:
   build:
     name: YAML Linter
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7
       - name: Setup submodule
         run: |
           git submodule update --init --recursive
@@ -29,7 +33,7 @@ jobs:
           cd RobustToolbox/
           git submodule update --init --recursive
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v4.1.0
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 10.0.x
       # Sunrise edit start - собираем только YAML Linter и запускаем готовую Release-сборку

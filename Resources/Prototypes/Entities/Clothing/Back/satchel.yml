@@ -5,7 +5,7 @@
   description: A trendy looking satchel.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/satchel.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Satchels/satchel.rsi # Sunrise-Edit
   - type: Storage
     grid:
     - 0,0,1,3
@@ -28,7 +28,7 @@
   description: A tough satchel with extra pockets.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/engineering.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Satchels/engineering.rsi # Sunrise-Edit
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -37,7 +37,7 @@
   description: A tough satchel made of fire resistant fibers. Smells like plasma.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/atmospherics.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Satchels/atmospherics.rsi # Sunrise-Edit
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -76,7 +76,7 @@
   description: A sterile satchel used in medical departments.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/medical.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Satchels/medical.rsi # Sunrise-Edit
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -85,7 +85,7 @@
   description: A sterile satchel with chemist colours.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/chemistry.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Satchels/chemistry.rsi # Sunrise-Edit
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -94,7 +94,7 @@
   description: A satchel made of hypo-allergenic fibers. It's designed to help prevent the spread of disease. Smells like monkey.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/virology.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Satchels/virology.rsi # Sunrise-Edit
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -103,7 +103,7 @@
   description: A sterile satchel with geneticist colours.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/genetics.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Satchels/genetics.rsi # Sunrise-Edit
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -112,7 +112,7 @@
   description: Useful for holding research materials.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/science.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Satchels/science.rsi # Sunrise-Edit
 
 - type: entity
   parent: [ClothingBackpackSatchel, BaseSecurityContraband]
@@ -130,7 +130,7 @@
   description: A sterile satchel for medical related needs.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/brigmedic.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Satchels/brigmedic.rsi # Sunrise-Edit
 
 - type: entity
   parent: [ClothingBackpackSatchel, BaseCommandContraband]
@@ -139,7 +139,7 @@
   description: An exclusive satchel for Nanotrasen officers.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/captain.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Satchels/captain.rsi # Sunrise-Edit
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -148,7 +148,7 @@
   description: A satchel made of all natural fibers.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Satchels/hydroponics.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Satchels/hydroponics.rsi # Sunrise-Edit
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -157,7 +157,7 @@
   description: A robust satchel for stealing cargo's loot.
   components:
     - type: Sprite
-      sprite: Clothing/Back/Satchels/cargo.rsi
+      sprite: _Sunrise/Clothing/Back/Resprites/Satchels/cargo.rsi # Sunrise-Edit
 
 - type: entity
   parent: ClothingBackpackSatchel
@@ -181,13 +181,14 @@
     storageInsertSound: null
 
 - type: entity
-  parent: ClothingBackpackSatchel
+  parent: ClothingBackpackHoldingBase #Standardized Bluespace Bags
   id: ClothingBackpackSatchelHolding
   name: satchel of holding
   description: A satchel that opens into a localized pocket of bluespace.
   components:
+  # Sunrise edit start - сохраняем визуалы и характеристики сумки хранения
   - type: Sprite
-    sprite: _Sunrise/Clothing/Back/Satchels/holding.rsi # Sunrise-Edit
+    sprite: _Sunrise/Clothing/Back/Satchels/holding.rsi
     state: icon
     layers:
     - state: icon
@@ -195,7 +196,6 @@
       shader: unshaded
   - type: Item
     size: Ginormous
-    # Sunrise-Start
     inhandVisuals:
       left:
       - state: inhand-left
@@ -205,12 +205,10 @@
       - state: inhand-right
       - state: inhand-right-unlit
         shader: unshaded
-    # Sunrise-End
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,17,7 # Sunrise-Edit
-  # Sunrise-start
+    - 0,0,17,7
   - type: Clothing
     sprite: _Sunrise/Clothing/Back/Satchels/holding.rsi
     clothingVisuals:
@@ -227,7 +225,7 @@
       Cloth: 500
       Plasma: 600
       Uranium: 40
-  # Sunrise-end
+  # Sunrise edit end
 
 - type: entity
   parent: ClothingBackpackSatchelHolding
@@ -238,3 +236,7 @@
   components:
   - type: ExplosionResistance
     damageCoefficient: 0
+  - type: Storage
+    maxItemSize: Colossal # Can hold ANYTHING
+    grid:
+    - 0,0,19,9

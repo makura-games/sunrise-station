@@ -1,0 +1,10 @@
+# Частичные прототипы для визуалов, не относящихся к отдельной крупной категории.
+
+- type: !PartialOnly entity
+  id: LogProbeCartridge
+  components:
+  - type: Cartridge
+    programName: log-probe-program-name
+    icon:
+      sprite: _Sunrise/Structures/Doors/Airlocks/Standard/security.rsi
+      state: closed

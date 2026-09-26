@@ -1,13 +1,19 @@
-﻿- type: entity
+- type: entity
   parent: BaseAction
   id: ActionToggleBorgMagboots
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: { sprite: Clothing/Shoes/Boots/magboots-advanced.rsi, state: icon }
-    iconOn: { sprite: Clothing/Shoes/Boots/magboots-advanced.rsi, state: icon-on }
     itemIconStyle: NoItem
     priority: 12
+  - type: Sprite
+    sprite: Clothing/Shoes/Boots/magboots-advanced.rsi
+    layers:
+    - state: icon
+      map: ["enum.ActionVisuals.Icon"]
+    - state: icon-on
+      map: ["enum.ActionVisuals.IconToggled"]
+      visible: false
   - type: InstantAction
     event: !type:ToggleBorgMagbootsActionEvent
 
@@ -17,10 +23,13 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: { sprite: Objects/Misc/cablecuffs.rsi, state: cuff }
     itemIconStyle: NoItem
     useDelay: 9
     priority: 9
+  - type: Sprite
+    sprite: Objects/Misc/cablecuffs.rsi
+    layers:
+    - state: cuff
   - type: TargetAction
     range: 2
     checkCanAccess: true
@@ -37,9 +46,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: { sprite: _Sunrise/Objects/Consumable/Food/candy.rsi, state: lollipop }
     useDelay: 120
     priority: 40
+  - type: Sprite
+    sprite: _Sunrise/Objects/Consumable/Food/candy.rsi
+    layers:
+    - state: lollipop
   - type: InstantAction
     event: !type:FabricateLollipopActionEvent
 
@@ -49,9 +61,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: { sprite: _Sunrise/Objects/Consumable/Food/candy.rsi, state: gumball }
     useDelay: 40
     priority: 40
+  - type: Sprite
+    sprite: _Sunrise/Objects/Consumable/Food/candy.rsi
+    layers:
+    - state: gumball
   - type: InstantAction
     event: !type:FabricateGumballActionEvent
 
@@ -61,9 +76,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: { sprite: Objects/Consumable/Food/Baked/misc.rsi, state: COOKIE!!! }
     useDelay: 30
     priority: 20
+  - type: Sprite
+    sprite: Objects/Consumable/Food/Baked/misc.rsi
+    layers:
+    - state: COOKIE!!!
   - type: InstantAction
     event: !type:FabricateCookieActionEvent
 
@@ -73,9 +91,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: { sprite: Objects/Specific/Janitorial/soap.rsi, state: soap-4 }
     useDelay: 30
     priority: 20
+  - type: Sprite
+    sprite: Objects/Specific/Janitorial/soap.rsi
+    layers:
+    - state: soap-4
   - type: InstantAction
     event: !type:FabricateSoapActionEvent
 
@@ -85,10 +106,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: _Sunrise/Interface/Actions/pie.png
     itemIconStyle: NoItem
     useDelay: 30
     checkCanInteract: false
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/Interface/Actions/pie.png
   - type: TargetAction
     range: 200
   - type: WorldTargetAction
@@ -103,11 +126,12 @@
   components:
   - type: Action
     itemIconStyle: NoItem
-    icon:
-      sprite: Interface/Actions/actions_borg.rsi
-      state: state-manifest
     useDelay: 0.5
     priority: 11
+  - type: Sprite
+    sprite: Interface/Actions/actions_borg.rsi
+    layers:
+    - state: state-manifest
   - type: InstantAction
     event: !type:CrewManifestOpenActionEvent
 
@@ -119,9 +143,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: { sprite: Interface/Actions/actions_borg.rsi, state: select-type }
     itemIconStyle: NoItem
     useDelay: 0.5
     priority: 10
+  - type: Sprite
+    sprite: Interface/Actions/actions_borg.rsi
+    layers:
+    - state: select-type
   - type: InstantAction
     event: !type:SiliconVoiceChangeActionEvent

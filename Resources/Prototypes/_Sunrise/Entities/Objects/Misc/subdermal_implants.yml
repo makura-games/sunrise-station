@@ -269,3 +269,12 @@
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
+- type: entity
+  parent: DeathRattleImplant
+  id: DeathRattleImplantBlueShield
+  name: blue shield death rattle implant
+  description: This implant will inform the Blue Shield radio channel should the user fall into critical condition or die.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RattleOnTrigger
+    radioChannel: BlueShield

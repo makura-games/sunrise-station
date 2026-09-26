@@ -158,9 +158,7 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
                 ("kpa", msg.TolerancesData.IdealPressure.ToString("0.00")),
                 ("kpaTolerance", msg.TolerancesData.PressureTolerance.ToString("0.00")),
                 ("temp", msg.TolerancesData.IdealHeat.ToString("0.00")),
-                ("tempTolerance", msg.TolerancesData.HeatTolerance.ToString("0.00")),
-                ("lightLevel", msg.TolerancesData.IdealLight.ToString("0.00")),
-                ("lightTolerance", msg.TolerancesData.LightTolerance.ToString("0.00"))
+                ("tempTolerance", msg.TolerancesData.HeatTolerance.ToString("0.00"))
             ];
             EnvironmentLabel.Text = msg.TolerancesData.ConsumeGasses.Count == 0
                 ? msg.TolerancesData.IdealHeat - msg.TolerancesData.HeatTolerance <= 0f && msg.TolerancesData.IdealPressure - msg.TolerancesData.PressureTolerance <= 0f

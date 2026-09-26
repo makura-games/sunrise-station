@@ -9,6 +9,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Shared._Sunrise.Flip;
@@ -26,10 +27,8 @@ public abstract partial class SharedFlipSystem : EntitySystem
 
     [Dependency] private EntityQuery<FixturesComponent> _fixturesQuery = default!;
 
-    [ValidatePrototypeId<StatusEffectPrototype>]
-    private const string FlipStatusEffectKey = "Flip";
-    [ValidatePrototypeId<EmotePrototype>]
-    private const string EmoteFallOnNeckProto = "FallOnNeck";
+    private static readonly ProtoId<StatusEffectPrototype> FlipStatusEffectKey = "Flip";
+    private static readonly ProtoId<EmotePrototype> EmoteFallOnNeckProto = "FallOnNeck";
     private const string FlipSound = "";
     private static float _deadChance = 0.001f;
 

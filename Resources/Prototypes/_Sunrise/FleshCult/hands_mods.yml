@@ -31,25 +31,25 @@
     - type: MultipleTool
       statusShowBehavior: true
       entries:
-        - behavior: Prying
+        - behavior: [ Prying ]
           sprite:
             sprite: _Sunrise/FleshCult/FleshHandMods/flesh_claw.rsi
             state: icon
           useSound: /Audio/Effects/gib2.ogg
           changeSound: /Audio/Effects/gib3.ogg
-        - behavior: Cutting
+        - behavior: [ Cutting ]
           sprite:
             sprite: _Sunrise/FleshCult/FleshHandMods/flesh_claw.rsi
             state: icon
           useSound: /Audio/Effects/gib2.ogg
           changeSound: /Audio/Effects/gib3.ogg
-        - behavior: Anchoring
+        - behavior: [ Anchoring ]
           sprite:
             sprite: _Sunrise/FleshCult/FleshHandMods/flesh_claw.rsi
             state: icon
           useSound: /Audio/Effects/gib2.ogg
           changeSound: /Audio/Effects/gib3.ogg
-        - behavior: Screwing
+        - behavior: [ Screwing ]
           sprite:
             sprite: _Sunrise/FleshCult/FleshHandMods/flesh_claw.rsi
             state: icon
@@ -100,7 +100,9 @@
     - type: FleshHandMod
     - type: Unremoveable
       deleteOnDrop: true
-    - type: Sharp
+    - type: Tool
+      qualities:
+      - Slicing
     - type: Sprite
       sprite: _Sunrise/FleshCult/FleshHandMods/flesh_blade.rsi
       state: icon

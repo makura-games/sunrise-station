@@ -1,6 +1,6 @@
 - type: entity
   id: TableAbductor
-  parent: TableBase
+  parent: [ TableBase, StructureHealthFurnitureStrong ]
   name: alien table
   description: Literally the sturdiest thing you have ever seen.
   components:
@@ -11,6 +11,8 @@
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepFloor
+  - type: Damageable
+    damageModifierSet: PlastitaniumMod
 
 - type: entity
   id: TableArtifact

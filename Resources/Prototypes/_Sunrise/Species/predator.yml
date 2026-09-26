@@ -9,6 +9,12 @@
   - PredatorNormal
   dollPrototype: MobPredatorDummy
   skinColoration: Hues
+  defaultSoundsBySex:
+  - Predator
+  - Predator
+  - Predator
+  voices:
+  - Predator
   defaultHeight: 1.05
   defaultWidth: 1.1
   maxHeight: 1.15

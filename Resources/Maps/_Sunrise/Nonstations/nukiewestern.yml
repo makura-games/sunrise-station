@@ -11023,49 +11023,41 @@ entities:
   - uid: 1650
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 1.5,48.5
       parent: 2
   - uid: 1651
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 1.5,47.5
       parent: 2
   - uid: 1652
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 1.5,46.5
       parent: 2
   - uid: 1653
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 18.5,-29.5
       parent: 2
   - uid: 1654
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 19.5,-29.5
       parent: 2
   - uid: 1655
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 20.5,-29.5
       parent: 2
   - uid: 1656
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 22.5,-29.5
       parent: 2
   - uid: 1657
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 16.5,-29.5
       parent: 2
 - proto: GrilleDiagonal

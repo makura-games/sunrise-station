@@ -120,7 +120,7 @@ public sealed partial class EmergencyShuttleSystem
         AddComp(mapUid, restricted);
         // Sunrise-End
 
-        _mapManager.DoMapInitialize(mapId);
+        _mapSystem.InitializeMap(mapId);
         // Sunrise-end
     }
 

@@ -5,7 +5,6 @@ using Content.Server._Sunrise.BloodCult.Runes.Systems;
 using Content.Server._Sunrise.TraitorTarget;
 using Content.Server.Antag;
 using Content.Server.Bed.Cryostorage;
-using Content.Server.Bible.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
@@ -17,8 +16,9 @@ using Content.Shared._Sunrise.CollectiveMind;
 using Content.Shared._Sunrise.Humanoid;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
+using Content.Shared.Bible.Components;
 using Content.Shared.Body.Systems;
-using Content.Shared.Clumsy;
+using Content.Shared.Clumsy.Components;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
@@ -32,6 +32,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Roles;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusIcon.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Audio;
@@ -61,6 +62,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     [Dependency] private KillCultistTargetsConditionSystem _cultistTargetsConditionSystem = default!;
     [Dependency] private SharedRoleSystem _roles = default!;
     [Dependency] private SunriseHumanoidBodySystem _sunriseBody = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     private static readonly ProtoId<TagPrototype> CultistTag = "Cultist";
     private static readonly ProtoId<TagPrototype> DeconvertedCultistTag = "DeconvertedCultist";
@@ -502,8 +504,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
 
         var cultistComponent = EnsureComp<BloodCultistComponent>(cultist);
 
-        if (HasComp<ClumsyComponent>(cultist))
-            RemComp<ClumsyComponent>(cultist);
+        RemoveClumsyStatusEffects(cultist);
 
         EnsureComp<CultMemberComponent>(cultist);
 
@@ -520,7 +521,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
             EnsureComp<StatusIconComponent>(cultist);
 
         if (rule.CultType == null ||
-            !Proto.TryIndex<BloodCultPrototype>($"{rule.CultType.Value.ToString()}Cult", out var cultPrototype))
+            !ProtoMan.TryIndex<BloodCultPrototype>($"{rule.CultType.Value.ToString()}Cult", out var cultPrototype))
             return false;
 
         cultistComponent.CultType = rule.CultType;
@@ -555,6 +556,21 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         Dirty(cultist, cultistComponent);
 
         return true;
+    }
+
+    private void RemoveClumsyStatusEffects(EntityUid cultist)
+    {
+        var prototypes = new List<EntProtoId>();
+        foreach (var status in _statusEffects.EnumerateStatusEffects<ClumsyGunStatusEffectComponent>(cultist))
+        {
+            if (MetaData(status.Owner).EntityPrototype is { } prototype)
+                prototypes.Add(prototype.ID);
+        }
+
+        foreach (var prototype in prototypes)
+        {
+            _statusEffects.TryRemoveStatusEffect(cultist, prototype);
+        }
     }
 
     private void OnNarsieSummon(CultNarsieSummoned ev)

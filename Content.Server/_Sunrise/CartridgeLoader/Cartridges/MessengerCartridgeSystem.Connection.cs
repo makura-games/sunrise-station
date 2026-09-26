@@ -85,8 +85,16 @@ public sealed partial class MessengerCartridgeSystem
         }
     }
 
-    private void OnCartridgeActivated(EntityUid uid, MessengerCartridgeComponent component, CartridgeActivatedEvent args)
+    private void OnCartridgeRemoved(Entity<MessengerCartridgeComponent> ent, ref CartridgeRemovedEvent args)
     {
+        ent.Comp.LoaderUid = null;
+        ent.Comp.UiReady = false;
+        ent.Comp.LastStatusCheck = null;
+    }
+
+    private void OnCartridgeActivated(Entity<MessengerCartridgeComponent> ent, ref CartridgeActivatedEvent args)
+    {
+        var (uid, component) = ent;
         component.UiReady = false;
 
         if (component.LoaderUid == null)
@@ -105,13 +113,14 @@ public sealed partial class MessengerCartridgeSystem
         }
     }
 
-    private void OnCartridgeDeactivated(EntityUid uid, MessengerCartridgeComponent component, CartridgeDeactivatedEvent args)
+    private void OnCartridgeDeactivated(Entity<MessengerCartridgeComponent> ent, ref CartridgeDeactivatedEvent args)
     {
-        component.UiReady = false;
+        ent.Comp.UiReady = false;
     }
 
-    private void OnCartridgeAdded(EntityUid uid, MessengerCartridgeComponent component, CartridgeAddedEvent args)
+    private void OnCartridgeAdded(Entity<MessengerCartridgeComponent> ent, ref CartridgeAddedEvent args)
     {
+        var (uid, component) = ent;
         component.LoaderUid = args.Loader;
         component.LastStatusCheck = null;
         component.UiReady = false;
@@ -129,13 +138,12 @@ public sealed partial class MessengerCartridgeSystem
 
         TryConnectToServer(uid, component, args.Loader);
 
-        _cartridgeLoader.RegisterBackgroundProgram(args.Loader, uid);
-
         CheckServerStatus(uid, component, args.Loader);
     }
 
-    private void OnUiReady(EntityUid uid, MessengerCartridgeComponent component, CartridgeUiReadyEvent args)
+    private void OnUiReady(Entity<MessengerCartridgeComponent> ent, ref CartridgeUiReadyEvent args)
     {
+        var (uid, component) = ent;
         if (component.LoaderUid == null)
         {
             component.LoaderUid = args.Loader;
@@ -161,7 +169,7 @@ public sealed partial class MessengerCartridgeSystem
 
     private void OnLoaderUiClosed(Entity<CartridgeLoaderComponent> ent, ref BoundUIClosedEvent args)
     {
-        if (!ent.Comp.UiKey.Equals(args.UiKey) ||
+        if (!Equals(ent.Comp.UiKey, args.UiKey) ||
             ent.Comp.ActiveProgram is not { } activeProgram ||
             !TryComp<MessengerCartridgeComponent>(activeProgram, out var messenger))
         {
@@ -285,9 +293,9 @@ public sealed partial class MessengerCartridgeSystem
             }
 
             if (string.IsNullOrEmpty(device.Address) &&
-                !_deviceNetwork.IsDeviceConnected(uid, device))
+                !_deviceNetwork.IsDeviceConnected((uid, device)))
             {
-                _deviceNetwork.ConnectDevice(uid, device);
+                _deviceNetwork.ConnectDevice((uid, device));
             }
 
             if (string.IsNullOrEmpty(device.Address))
@@ -375,7 +383,7 @@ public sealed partial class MessengerCartridgeSystem
         var pdaPos = _transformSystem.GetWorldPosition(pdaTransform);
         Sawmill.Debug($"PDA position: {pdaPos}, MapId: {pdaTransform.MapID}");
 
-        _deviceNetwork.QueuePacket(loaderUid, component.ServerAddress, payload, frequency: messengerFrequency, network: pdaDevice.DeviceNetId);
+        _deviceNetwork.SendPacket(loaderUid, component.ServerAddress, ref payload, frequency: messengerFrequency, network: pdaDevice.DeviceNetId);
 
         RestoreFrequency(loaderUid, pdaDevice, originalFreq);
     }

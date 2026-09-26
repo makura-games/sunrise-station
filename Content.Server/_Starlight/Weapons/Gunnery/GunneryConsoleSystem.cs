@@ -183,7 +183,7 @@ public sealed partial class GunneryConsoleSystem : EntitySystem
 
         try
         {
-            _gun.AttemptShoot(cannon, cannon, gunComp, targetCoords);
+            _gun.AttemptShoot(cannon, (cannon, gunComp), targetCoords);
         }
         finally
         {

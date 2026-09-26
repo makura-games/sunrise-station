@@ -325,7 +325,7 @@ public abstract partial class SharedCarryingSystem
             ("carrier", Identity.Name(carrier, EntityManager)),
             ("target", Identity.Name(target, EntityManager)));
 
-        _popup.PopupPredicted(message, carrier, target, filter, true, type);
+        _popup.PopupEntity(message, carrier, filter, true, type);
     }
 
     #endregion

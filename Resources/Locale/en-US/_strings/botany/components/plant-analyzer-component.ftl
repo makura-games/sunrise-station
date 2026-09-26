@@ -16,9 +16,11 @@ plant-analyzer-soil = There is some [color=white]{$chemicals}[/color] in this {$
     *[other]have
 } not been absorbed.
 plant-analyzer-soil-empty = There are no unabsorbed chemicals in this {$holder}.
-plant-analyzer-component-environemt = This [color=green]{$seedName}[/color] requires an atmosphere at a pressure level of [color=lightblue]{$kpa} kPa ± {$kpaTolerance} kPa[/color], temperature of [color=lightsalmon]{$temp} K ± {$tempTolerance} K[/color] and a light level of [color=white]{$lightLevel} ± {$lightTolerance}[/color].
-plant-analyzer-component-environemt-void = This [color=green]{$seedName}[/color] has to be grown [bolditalic]in the vacuum of space[/bolditalic] at a light level of [color=white]{$lightLevel} ± {$lightTolerance}[/color].
-plant-analyzer-component-environemt-gas = This [color=green]{$seedName}[/color] requires an atmosphere containing [bold]{$gases}[/bold] at a pressure level of [color=lightblue]{$kpa} kPa ± {$kpaTolerance} kPa[/color], temperature of [color=lightsalmon]{$temp} K ± {$tempTolerance} K[/color] and a light level of [color=white]{$lightLevel} ± {$lightTolerance}[/color].
+# Sunrise edit start - у растений больше нет требований к освещению.
+plant-analyzer-component-environemt = This [color=green]{$seedName}[/color] requires an atmosphere at a pressure level of [color=lightblue]{$kpa} kPa ± {$kpaTolerance} kPa[/color] and a temperature of [color=lightsalmon]{$temp} K ± {$tempTolerance} K[/color].
+plant-analyzer-component-environemt-void = This [color=green]{$seedName}[/color] has to be grown [bolditalic]in the vacuum of space[/bolditalic].
+plant-analyzer-component-environemt-gas = This [color=green]{$seedName}[/color] requires an atmosphere containing [bold]{$gases}[/bold] at a pressure level of [color=lightblue]{$kpa} kPa ± {$kpaTolerance} kPa[/color] and a temperature of [color=lightsalmon]{$temp} K ± {$tempTolerance} K[/color].
+# Sunrise edit end
 plant-analyzer-produce-plural = {MAKEPLURAL($thing)}
 plant-analyzer-output = {$yield ->
     [0]{$gasCount ->
@@ -84,7 +86,6 @@ plant-analyzer-printout =
     {"    "}[bullet/] Composition: [bold]{$gasesIn}[/bold]
     {"    "}[bullet/] Pressure: [color=lightblue]{$kpa} kPa ± {$kpaTolerance} kPa[/color]
     {"    "}[bullet/] Temperature: [color=lightsalmon]{$temp} K ± {$tempTolerance} K[/color]
-    {"    "}[bullet/] Light: [color=gray][bold]{$lightLevel} ± {$lightTolerance}[/bold][/color]
     {"[bullet/]"} Flowers: {$yield ->
         [-1]{LOC("plant-analyzer-printout-missing")}
         [0][color=red]0[/color]

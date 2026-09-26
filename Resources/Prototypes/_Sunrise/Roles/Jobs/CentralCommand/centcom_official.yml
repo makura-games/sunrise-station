@@ -5,7 +5,6 @@
   playTimeTracker: JobCentCommOfficial
   requirements:
   - !type:DiscordRoleRequirement
-  weight: 30
   setPreference: false
   startingGear: CentCommOfficialGear
   icon: "JobIconNanotrasen"

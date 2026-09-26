@@ -206,7 +206,7 @@
     requireInSpace: true
   - type: WarpPoint
     follow: true
-    location: 60mm Rocket Payload
+    location: location-artillery-60mm-rocket-payload
   - type: GuidedProjectile
     turnRate: 180
   - type: TimedDespawn

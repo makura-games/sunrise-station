@@ -175,7 +175,7 @@ public partial class InteractionsPanel
             return;
         }
 
-        if (!_prototypeManager.TryIndex<InteractionPrototype>(args.InteractionId, out var interactionPrototype))
+        if (!ProtoMan.TryIndex<InteractionPrototype>(args.InteractionId, out var interactionPrototype))
             return;
 
         if (!CheckAllAppearConditions(interactionPrototype, ent.Owner, target.Value))
@@ -206,7 +206,7 @@ public partial class InteractionsPanel
         {
             var rngSound = _random.Pick(interactionPrototype.InteractionSounds);
 
-            if (_prototypeManager.TryIndex(rngSound, out var soundProto))
+            if (ProtoMan.TryIndex(rngSound, out var soundProto))
             {
                 _audio.PlayPvs(soundProto.Sound, ent.Owner, AudioParams.Default);
             }
@@ -215,7 +215,7 @@ public partial class InteractionsPanel
         if (interactionPrototype.SpawnsEffect)
         {
             if (interactionPrototype.EntityEffect != null
-                && _prototypeManager.TryIndex(interactionPrototype.EntityEffect.Value, out var effectPrototype))
+                && ProtoMan.TryIndex(interactionPrototype.EntityEffect.Value, out var effectPrototype))
             {
                 if (_random.Prob(interactionPrototype.EffectChance))
                 {
@@ -267,13 +267,13 @@ public partial class InteractionsPanel
             _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Emotes, msg, msg, user, false, true, Color.Pink);
         }
 
-        if (!string.IsNullOrEmpty(data.SoundId) && _prototypeManager.TryIndex<InteractionSoundPrototype>(data.SoundId, out var soundProto))
+        if (!string.IsNullOrEmpty(data.SoundId) && ProtoMan.TryIndex<InteractionSoundPrototype>(data.SoundId, out var soundProto))
         {
             _audio.PlayPvs(soundProto.Sound, user, AudioParams.Default);
         }
 
         if (data.SpawnsEffect && !string.IsNullOrEmpty(data.EntityEffectId) &&
-            _prototypeManager.TryIndex<InteractionEntityEffectPrototype>(data.EntityEffectId, out var effectProto))
+            ProtoMan.TryIndex<InteractionEntityEffectPrototype>(data.EntityEffectId, out var effectProto))
         {
             if (_random.Prob(data.EffectChance))
             {

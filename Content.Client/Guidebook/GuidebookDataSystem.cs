@@ -19,14 +19,6 @@ public sealed partial class GuidebookDataSystem : EntitySystem
         base.Initialize();
 
         SubscribeNetworkEvent<UpdateGuidebookDataEvent>(OnServerUpdated);
-
-        // Request data from the server
-        _netManager.Connected += OnConnected;
-    }
-
-    private async void OnConnected(object? sender, NetChannelArgs e)
-    {
-        RaiseNetworkEvent(new RequestGuidebookDataEvent());
     }
 
     private void OnServerUpdated(UpdateGuidebookDataEvent args)

@@ -9,10 +9,10 @@ namespace Content.Server._Sunrise.Research.Artifact.Effects.ModifyThirst;
 public sealed partial class ArtifactModifyThirstSystem : BaseXAESystem<ArtifactModifyThirstComponent>
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private ThirstSystem _thirst = default!;
+    [Dependency] private SatiationSystem _satiation = default!;
     [Dependency] private IRobustRandom _random = default!;
 
-    private readonly HashSet<Entity<ThirstComponent>> _entities = [];
+    private readonly HashSet<Entity<SatiationComponent>> _entities = [];
 
     protected override void OnActivated(Entity<ArtifactModifyThirstComponent> ent, ref XenoArtifactNodeActivatedEvent args)
     {
@@ -22,7 +22,7 @@ public sealed partial class ArtifactModifyThirstSystem : BaseXAESystem<ArtifactM
         foreach (var uid in _entities)
         {
             var modifier = _random.NextFloat(ent.Comp.MinModifier, ent.Comp.MaxModifier);
-            _thirst.ModifyThirst(uid, uid, modifier * ent.Comp.Amount);
+            _satiation.ModifyValue(uid, SatiationSystem.Thirst, modifier * ent.Comp.Amount);
         }
     }
 }

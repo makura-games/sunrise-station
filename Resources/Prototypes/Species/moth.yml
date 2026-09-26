@@ -13,6 +13,12 @@
   # lastNames: NamesMothLast # Sunrise-edit
   maleLastNames: NamesMothLast
   femaleLastNames: NamesMothLast
+  defaultSoundsBySex:
+  - UnisexMoth
+  - UnisexMoth
+  - UnisexMoth
+  voices:
+  - UnisexMoth
   buttScan: # Sunrise edit
     sprite: /Textures/_Sunrise/CopyMachine/butts_scans.rsi
     state: human

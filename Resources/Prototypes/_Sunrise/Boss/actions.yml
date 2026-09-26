@@ -1,16 +1,17 @@
-﻿- type: entity
+- type: entity
   parent: BaseAction
   id: ActionHellSpawnRush
   name: RUSH
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon:
-      sprite: Objects/Magic/magicactions.rsi
-      state: blink
     itemIconStyle: NoItem
     priority: -1
     useDelay: 3
+  - type: Sprite
+    sprite: Objects/Magic/magicactions.rsi
+    layers:
+    - state: blink
   - type: TargetAction
     range: 16
   - type: WorldTargetAction
@@ -25,7 +26,9 @@
   - type: Action
     priority: -1
     useDelay: 30
-    icon: _Sunrise/Interface/Actions/inferno_shield.png
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/Interface/Actions/inferno_shield.png
   - type: InstantAction
     event: !type:HellSpawnInvincibilityActionEvent
 
@@ -36,10 +39,13 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: { sprite: _Sunrise/Effects/bubblegum.rsi, state: smack_ya_one }
     itemIconStyle: NoItem
     priority: -1
     useDelay: 8
+  - type: Sprite
+    sprite: _Sunrise/Effects/bubblegum.rsi
+    layers:
+    - state: smack_ya_one
   - type: TargetAction
     range: 5
   - type: WorldTargetAction
@@ -53,10 +59,13 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: { sprite: _Sunrise/Effects/bubblegum.rsi, state: smack_ya_one }
     itemIconStyle: NoItem
     priority: -1
     useDelay: 10
+  - type: Sprite
+    sprite: _Sunrise/Effects/bubblegum.rsi
+    layers:
+    - state: smack_ya_one
   - type: TargetAction
     range: 7
   - type: WorldTargetAction
@@ -72,6 +81,8 @@
   - type: Action
     priority: -1
     useDelay: 15
-    icon: _Sunrise/Interface/Actions/inferno_shield.png
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/Interface/Actions/inferno_shield.png
   - type: InstantAction
     event: !type:HellSpawnSpiralActionEvent

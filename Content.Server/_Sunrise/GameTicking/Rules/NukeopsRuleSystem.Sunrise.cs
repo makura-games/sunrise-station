@@ -1,6 +1,6 @@
-using Content.Server.AlertLevel;
 using Content.Server._Sunrise.GameTicking.Rules.Components;
 using Content.Server.GameTicking.Rules.Components;
+using Content.Shared.AlertLevel;
 using Robust.Shared.Timing;
 
 namespace Content.Server.GameTicking.Rules;
@@ -20,10 +20,10 @@ public sealed partial class NukeopsRuleSystem
             if (_gameTiming.CurTime < nukeops.AlertLevelChangeTime)
                 continue;
 
-            if (nukeops.SetAlertlevel == null || nukeops.TargetStation == null)
+            if (nukeops.SetAlertlevel is not { } alertLevel || nukeops.TargetStation is not { } targetStation)
                 continue;
 
-            _alertLevelSystem.SetLevel(nukeops.TargetStation.Value, nukeops.SetAlertlevel, true, true, true, true);
+            _alertLevelSystem.SetLevel(targetStation, alertLevel, true, true, true, true);
             nukeops.AlertLevelChangeTime = default;
             RemCompDeferred<PendingNukeopsAlertLevelChangeComponent>(uid);
         }

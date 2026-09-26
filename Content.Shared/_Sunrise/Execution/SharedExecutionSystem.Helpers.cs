@@ -22,7 +22,6 @@ public abstract partial class SharedExecutionSystem
     [Dependency] private SharedContainerSystem _containerSystem = default!;
     [Dependency] private MobStateSystem _mobStateSystem = default!;
     [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IComponentFactory _componentFactory = default!;
     [Dependency] private SharedGunSystem _gunSystem = default!;
 
@@ -138,7 +137,7 @@ public abstract partial class SharedExecutionSystem
 
     private bool PrototypeHasLethalEffect(EntProtoId ammoPrototype)
     {
-        var proto = _prototypeManager.Index(ammoPrototype);
+        var proto = ProtoMan.Index(ammoPrototype);
 
         if (proto.TryGetComponent<ExplosiveComponent>(out _, _componentFactory))
             return true;

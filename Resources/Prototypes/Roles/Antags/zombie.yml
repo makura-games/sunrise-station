@@ -6,6 +6,10 @@
   playTimeTracker: AntagInitialInfected # Sunrise-Edit
   objective: roles-antag-initial-infected-objective
   guides: [ Zombies ]
+  tags:
+  - OnStation
+  - Roundstart
+  - Midround # Breakout event
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 1h
@@ -60,3 +64,6 @@
   objective: roles-antag-zombie-objective
   guides: [ Zombies ]
   storytellerStress: 0.2 # Sunrise-Edit
+  tags:
+  - OnStation
+  - Converted

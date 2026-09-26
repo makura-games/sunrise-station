@@ -6,13 +6,16 @@
   components:
   - type: VendingMachine
     pack: DonkPocketsMachineInventory
-    dispenseOnHitChance: 0.25
-    dispenseOnHitThreshold: 2
+  - type: VendingMachineDispenseOnHit
+    chance: 0.25
+    threshold: 2
+  - type: VendingMachineVisuals
     offState: off
     brokenState: broken
     normalState: normal-unshaded
     ejectState: eject-unshaded
     denyState: deny-unshaded
+  - type: VendingMachineEject
     ejectDelay: 2
   # Starlight board VendingMachineDonkCircuitboard is not ported.
   # Starlight ad datasets DonkPocketMachineAds and DonkPocketMachineGoodbyes are not ported.
@@ -42,11 +45,13 @@
   components:
   - type: VendingMachine
     pack: InterdyneEnterpriseInventory
+  - type: VendingMachineVisuals
     offState: off
     brokenState: broken
     normalState: normal-unshaded
     ejectState: eject-unshaded
     denyState: deny-unshaded
+  - type: VendingMachineEject
     ejectDelay: 0.6
   # Starlight Interdyne ad dataset is not ported.
   - type: Sprite
@@ -74,6 +79,7 @@
   components:
   - type: VendingMachine
     pack: InterdyneCommercialWallInventory
+  - type: VendingMachineVisuals
     offState: off-civilian
     brokenState: broken
     normalState: normal-unshaded
@@ -101,11 +107,13 @@
   components:
   - type: VendingMachine
     pack: NanoMedSecurityInventory
+  - type: VendingMachineVisuals
     offState: off
     brokenState: broken
     normalState: normal-unshaded
     ejectState: eject-unshaded
     denyState: deny-unshaded
+  - type: VendingMachineEject
     ejectDelay: 0.6
   - type: Sprite
     sprite: _Starlight/Structures/Machines/VendingMachines/medical_sec.rsi
@@ -128,11 +136,13 @@
   components:
   - type: VendingMachine
     pack: NanoMedSecurityInventorySalvaged
+  - type: VendingMachineVisuals
     offState: off
     brokenState: broken
     normalState: normal-unshaded
     ejectState: eject-unshaded
     denyState: deny-unshaded
+  - type: VendingMachineEject
     ejectDelay: 1.8
   - type: Anchorable
     flags: Anchorable
@@ -150,6 +160,7 @@
   components:
   - type: VendingMachine
     pack: NanoMedSecurityWallInventory
+  - type: VendingMachineVisuals
     offState: off
     brokenState: broken
     normalState: normal-unshaded

@@ -1,0 +1,15 @@
+- type: !PartialOnly entity
+  id: Girder
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Walls/solid.rsi
+    state: wall_girder
+
+- type: !PartialOnly entity
+  id: ReinforcedGirder
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Walls/solid.rsi
+    state: reinforced_wall_girder

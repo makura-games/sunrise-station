@@ -10,7 +10,6 @@
   startingGear: DoctorGear
   icon: "JobIconMedicalDoctor"
   supervisors: job-supervisors-cmo
-  displayWeight: 20  # Sunrise
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-surgeon

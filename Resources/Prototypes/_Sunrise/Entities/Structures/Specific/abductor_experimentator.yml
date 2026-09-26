@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseStructure
+  parent: [ BaseStructure, StructureHealthMachineStrong ]
   id: AbductorExperimentator
   name: experimentator
   description: A device that analyzes the result of the experiment and resets the subject to the place from where they were taken.
@@ -14,6 +14,8 @@
   - type: InteractionOutline
   - type: Physics
     canCollide: false
+  - type: Damageable
+    damageModifierSet: PlastitaniumMod
   - type: DragInsertContainer
     containerId: storage
   - type: ExitContainerOnMove

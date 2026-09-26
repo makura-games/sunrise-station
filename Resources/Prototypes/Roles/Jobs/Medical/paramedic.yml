@@ -10,7 +10,6 @@
   startingGear: ParamedicGear
   icon: "JobIconParamedic"
   supervisors: job-supervisors-cmo
-  displayWeight: 25  # Sunrise
   # Sunrise-Start
   # alternativeTitles:
   # Sunrise-End

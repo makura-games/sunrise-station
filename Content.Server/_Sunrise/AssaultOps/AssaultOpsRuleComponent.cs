@@ -1,53 +1,47 @@
-using Content.Shared.Dataset;
 using Content.Shared.NPC.Prototypes;
-using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Robust.Shared.Audio;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
-using Robust.Shared.Utility;
 
 namespace Content.Server._Sunrise.AssaultOps;
 
 [RegisterComponent, Access(typeof(AssaultOpsRuleSystem))]
 public sealed partial class AssaultOpsRuleComponent : Component
 {
-    [DataField("icarusKeyImplant", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string IcarusKeyImplant = "IcarusKey";
+    [DataField]
+    public EntProtoId IcarusKeyImplant = "IcarusKey";
 
-    [DataField("requiredKeys")] public int RequiredKeys = 3;
+    [DataField]
+    public int RequiredKeys = 3;
 
-    [DataField("keysCarrierJobs", customTypeSerializer: typeof(PrototypeIdArraySerializer<JobPrototype>))]
-    public string[] KeysCarrierJobs =
-    {
+    [DataField]
+    public ProtoId<JobPrototype>[] KeysCarrierJobs =
+    [
         "Captain",
         "HeadOfSecurity",
         "ChiefEngineer",
         "ChiefMedicalOfficer",
         "ResearchDirector",
-        "Quartermaster"
-    };
+        "Quartermaster",
+    ];
 
-    [DataField("faction", customTypeSerializer: typeof(PrototypeIdSerializer<NpcFactionPrototype>), required: true)]
-    public string Faction = default!;
+    [DataField(required: true)]
+    public ProtoId<NpcFactionPrototype> Faction = default!;
 
     [DataField]
-    public int TCAmountPerOperative = 50;
+    public int TcAmountPerOperative = 50;
 
     public int RoundstartOperatives;
 
     public EntityUid? UplinkEnt;
 
-    [DataField("greetingSound", customTypeSerializer: typeof(SoundSpecifierTypeSerializer))]
-    public SoundSpecifier? GreetSoundNotification = new SoundPathSpecifier("/Audio/_Sunrise/AssaultOperatives/assault_operatives_greet.ogg",
+    [DataField]
+    public SoundSpecifier? GreetingSound = new SoundPathSpecifier("/Audio/_Sunrise/AssaultOperatives/assault_operatives_greet.ogg",
         AudioParams.Default.WithVolume(-6f));
 
-    [DataField("winType")] public WinType WinType = WinType.Stalemate;
+    public WinType WinType = WinType.Stalemate;
 
-    [DataField("winConditions")] public List<WinCondition> WinConditions = new ();
+    public List<WinCondition> WinConditions = [];
 
     public EntityUid? ShuttleGrid;
 

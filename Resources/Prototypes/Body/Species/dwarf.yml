@@ -29,10 +29,18 @@
       Stomach: OrganDwarfStomach
       Liver: OrganDwarfLiver
       Kidneys: OrganHumanKidneys
+  - type: ScaleVisuals # Sunrise-Edit - совместимо с картами наших телосложений
+    scale: 1, 0.8
   - type: HumanoidProfile
     species: Dwarf
-  - type: ScaleVisuals
-    scale: 1, 0.8
+
+- type: displacementData
+  id: Dwarfism
+  displacement:
+    sizeMaps:
+      32:
+        sprite: Mobs/Species/Human/displacement.rsi
+        state: dwarfism
 
 - type: entity
   parent:
@@ -55,10 +63,7 @@
         layer:
         - MobLayer
   - type: Vocal
-    sounds:
-      Male: UnisexDwarf
-      Female: FemaleDwarf
-      Unsexed: UnisexDwarf
+    emoteSounds: UnisexDwarf
   - type: ReplacementAccent
     accent: dwarf
   - type: Speech
@@ -70,17 +75,225 @@
   # Sunrise edit end
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganDwarf
   abstract: true
   suffix: Dwarf
 
 - type: entity
+  parent: OrganDwarf
+  id: OrganDwarfAppearance
+  abstract: true
+  suffix: Dwarf
+  components:
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Species/Human/parts.rsi
+    displacement: Dwarfism
+
+- type: entity
+  parent: OrganDwarf
   id: OrganDwarfMetabolizer
   abstract: true
   components:
   - type: Metabolizer
     metabolizerTypes: [ Dwarf ]
+
+- type: entity
+  parent: [ OrganHumanTorso, OrganDwarfAppearance ]
+  id: OrganDwarfTorso
+  components:
+  - type: VisualOrganMarkings
+    markingsDisplacement:
+      Chest:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+      Tail:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+      Overlay:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+      TailOverlay:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+      UndergarmentTop:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+      UndergarmentBottom:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+      Special:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+
+- type: entity
+  parent: [ OrganHumanHead, OrganDwarfAppearance ]
+  id: OrganDwarfHead
+  components:
+  - type: VisualOrganMarkings
+    markingsDisplacement:
+      Head:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+      Hair:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+      FacialHair:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+      Snout:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+      SnoutCover:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+      HeadSide:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+      HeadTop:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+
+- type: entity
+  parent: [ OrganHumanArmLeft, OrganDwarfAppearance ]
+  id: OrganDwarfArmLeft
+  components:
+  - type: VisualOrganMarkings
+    markingsDisplacement:
+      LArm:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+
+- type: entity
+  parent: [ OrganHumanArmRight, OrganDwarfAppearance ]
+  id: OrganDwarfArmRight
+  components:
+  - type: VisualOrganMarkings
+    markingsDisplacement:
+      RArm:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+
+- type: entity
+  parent: [ OrganHumanHandRight, OrganDwarfAppearance ]
+  id: OrganDwarfHandRight
+  components:
+  - type: VisualOrganMarkings
+    markingsDisplacement:
+      RHand:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+
+- type: entity
+  parent: [ OrganHumanHandLeft, OrganDwarfAppearance ]
+  id: OrganDwarfHandLeft
+  components:
+  - type: VisualOrganMarkings
+    markingsDisplacement:
+      LHand:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+
+- type: entity
+  parent: [ OrganHumanLegLeft, OrganDwarfAppearance ]
+  id: OrganDwarfLegLeft
+  components:
+  - type: VisualOrganMarkings
+    markingsDisplacement:
+      LLeg:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+
+- type: entity
+  parent: [ OrganHumanLegRight, OrganDwarfAppearance ]
+  id: OrganDwarfLegRight
+  components:
+  - type: VisualOrganMarkings
+    markingsDisplacement:
+      RLeg:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+
+- type: entity
+  parent: [ OrganHumanFootLeft, OrganDwarfAppearance ]
+  id: OrganDwarfFootLeft
+  components:
+  - type: VisualOrganMarkings
+    markingsDisplacement:
+      LFoot:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+
+- type: entity
+  parent: [ OrganHumanFootRight, OrganDwarfAppearance ]
+  id: OrganDwarfFootRight
+  components:
+  - type: VisualOrganMarkings
+    markingsDisplacement:
+      RFoot:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
+
+- type: entity
+  parent: [ OrganHumanEyes, OrganDwarfAppearance ]
+  id: OrganDwarfEyes
+  components:
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Customization/eyes.rsi
+    displacement: Dwarfism
+  - type: VisualOrganMarkings
+    markingsDisplacement:
+      Eyes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Human/displacement.rsi
+            state: dwarfism
 
 - type: entity
   parent: [ OrganDwarfMetabolizer, OrganHumanStomach ]

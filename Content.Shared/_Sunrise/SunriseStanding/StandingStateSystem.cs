@@ -58,7 +58,7 @@ public sealed partial class SunriseStandingStateSystem : EntitySystem
 
         if (stamina.StaminaDamage >= threshold)
         {
-            _popup.PopupPredicted(Loc.GetString("cant-fall-no-stamina"), null, ent, ent);
+            _popup.PopupEntity(Loc.GetString("cant-fall-no-stamina"), null, ent, ent);
             return;
         }
 

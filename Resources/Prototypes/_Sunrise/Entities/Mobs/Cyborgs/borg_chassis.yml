@@ -101,8 +101,7 @@
       params:
         volume: -15
   - type: Vocal
-    sounds:
-      Unsexed: Reaper
+    emoteSounds: Reaper
   - type: RandomMetadata
     nameSegments: [NamesBorg]
   - type: InnateItem
@@ -213,7 +212,9 @@
       300: Dead
   - type: PowerCellDraw # Use it to increase battery life further
     drawRate: 0.5
-  - type: ToggleableNightVision
+  - type: NightVision
+    enabled: false
+    action: ActionToggleNightVision
 
 - type: entity
   id: BorgChassisSyndicateHeavy

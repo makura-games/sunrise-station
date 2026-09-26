@@ -57,7 +57,7 @@ public sealed partial class PaintRemoverSystem : SharedPaintSystem
 
         paint.Enabled = false;
         _audio.PlayPredicted(component.Sound, target, args.User);
-        _popup.PopupClient(Loc.GetString("paint-removed", ("target", target)), args.User, args.User, PopupType.Medium);
+        _popup.PopupEntity(Loc.GetString("paint-removed", ("target", target)), args.User, args.User, PopupType.Medium);
         _appearanceSystem.SetData(target, PaintVisuals.Painted, false);
         RemComp<SprayPaintedComponent>(target);
         Dirty(target, paint);

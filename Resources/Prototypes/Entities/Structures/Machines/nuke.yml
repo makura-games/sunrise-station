@@ -66,15 +66,9 @@
   - type: ArrivalsBlacklist
   - type: StealTarget
     stealGroup: NuclearBomb
-  - type: Tag
-    tags:
-    - GhostOnlyWarp
   - type: WarpPoint
     follow: true
-    location: nuclear bomb
-    blacklist:
-      tags:
-      - GhostOnlyWarp
+    location: location-nuclear-bomb
   - type: Construction
     graph: NuclearBomb
     deconstructionTarget: disarmed
@@ -89,7 +83,7 @@
     radius: 4
     energy: 2.0
     color: "#FF4020"
-    mask: /Textures/Effects/LightMasks/double_cone.png
+    lightMask: ConeDouble
   - type: RotatingLight
     speed: 120
   - type: NavMapBeacon
@@ -111,8 +105,9 @@
       whitelist:
         components:
         - NukeDisk
-    alertLevelOnActivate: delta
-    alertLevelOnDeactivate: green
+    alertLevelOnActivate: DeltaNuke
+    alertLevelOnDeactivate: Green
+  - type: InteractionOutline
   - type: ActivatableUI
     key: enum.NukeUiKey.Key
   - type: UserInterface
@@ -127,6 +122,11 @@
       Nuke: !type:ContainerSlot
   - type: Construction
     node: nuke
+  - type: StealTarget
+    stealGroup: NuclearBomb
+  - type: WarpPoint
+    follow: true
+    location: location-nuclear-bomb
   - type: FTLSmashImmune
 
 - type: entity

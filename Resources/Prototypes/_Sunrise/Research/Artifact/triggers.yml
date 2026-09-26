@@ -1,12 +1,14 @@
-- type: xenoArchTrigger
+- type: entity
+  parent: BaseXenoArtifactTrigger
   id: TriggerHealthAnalyzer
-  tip: artifact-trigger-hint-health-analyzer
+  name: health analyzer scan
   components:
   - type: ArtifactHealthAnalyzerInteractionTrigger
 
-- type: xenoArchTrigger
+- type: entity
+  parent: BaseXenoArtifactTrigger
   id: TriggerElectrovae
-  tip: xenoarch-trigger-tip-electrovae
+  name: electrovae
   components:
   - type: XATGas
     targetGas: Electrovae
@@ -14,9 +16,10 @@
     reagents:
     - Electrovae
 
-- type: xenoArchTrigger
+- type: entity
+  parent: BaseXenoArtifactTrigger
   id: TriggerChargedElectrovae
-  tip: xenoarch-trigger-tip-charged-electrovae
+  name: charged electrovae
   components:
   - type: XATGas
     targetGas: ChargedElectrovae
@@ -24,9 +27,10 @@
     reagents:
     - ChargedElectrovae
 
-- type: xenoArchTrigger
+- type: entity
+  parent: BaseXenoArtifactTrigger
   id: TriggerHalon
-  tip: xenoarch-trigger-tip-halon
+  name: halon
   components:
   - type: XATGas
     targetGas: Halon
@@ -34,9 +38,10 @@
     reagents:
     - Halon
 
-- type: xenoArchTrigger
+- type: entity
+  parent: BaseXenoArtifactTrigger
   id: TriggerPluoxium
-  tip: xenoarch-trigger-tip-pluoxium
+  name: pluoxium
   components:
   - type: XATGas
     targetGas: Pluoxium
@@ -44,9 +49,10 @@
     reagents:
     - Pluoxium
 
-- type: xenoArchTrigger
+- type: entity
+  parent: BaseXenoArtifactTrigger
   id: TriggerBZ
-  tip: xenoarch-trigger-tip-bz
+  name: BZ
   components:
   - type: XATGas
     targetGas: BZ
@@ -54,9 +60,10 @@
     reagents:
     - BZ
 
-- type: xenoArchTrigger
+- type: entity
+  parent: BaseXenoArtifactTrigger
   id: TriggerHealium
-  tip: xenoarch-trigger-tip-healium
+  name: healium
   components:
   - type: XATGas
     targetGas: Healium
@@ -64,9 +71,10 @@
     reagents:
     - Healium
 
-- type: xenoArchTrigger
+- type: entity
+  parent: BaseXenoArtifactTrigger
   id: TriggerNitrium
-  tip: xenoarch-trigger-tip-nitrium
+  name: nitrium
   components:
   - type: XATGas
     targetGas: Nitrium
@@ -74,9 +82,10 @@
     reagents:
     - Nitrium
 
-- type: xenoArchTrigger
+- type: entity
+  parent: BaseXenoArtifactTrigger
   id: TriggerZauker
-  tip: xenoarch-trigger-tip-zauker
+  name: zauker
   components:
   - type: XATGas
     targetGas: Zauker
@@ -84,9 +93,10 @@
     reagents:
     - Zauker
 
-- type: xenoArchTrigger
+- type: entity
+  parent: BaseXenoArtifactTrigger
   id: TriggerHydrogen
-  tip: xenoarch-trigger-tip-hydrogen
+  name: hydrogen
   components:
   - type: XATGas
     targetGas: Hydrogen
@@ -94,9 +104,10 @@
     reagents:
     - Hydrogen
 
-- type: xenoArchTrigger
+- type: entity
+  parent: BaseXenoArtifactTrigger
   id: TriggerProtoNitrate
-  tip: xenoarch-trigger-tip-proto-nitrate
+  name: proto-nitrate
   components:
   - type: XATGas
     targetGas: ProtoNitrate
@@ -104,9 +115,10 @@
     reagents:
     - Proto-Nitrate
 
-- type: xenoArchTrigger
+- type: entity
+  parent: BaseXenoArtifactTrigger
   id: TriggerHelium
-  tip: xenoarch-trigger-tip-helium
+  name: helium
   components:
   - type: XATGas
     targetGas: Helium

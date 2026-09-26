@@ -6,7 +6,6 @@ namespace Content.Client._Sunrise.Pirate;
 
 public sealed partial class PirateSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {
@@ -17,7 +16,7 @@ public sealed partial class PirateSystem : EntitySystem
 
     private void GetPirateIcon(EntityUid uid, PirateIconComponent component, ref GetStatusIconsEvent args)
     {
-        var iconPrototype = _prototype.Index(component.StatusIcon);
+        var iconPrototype = ProtoMan.Index(component.StatusIcon);
         args.StatusIcons.Add(iconPrototype);
     }
 }

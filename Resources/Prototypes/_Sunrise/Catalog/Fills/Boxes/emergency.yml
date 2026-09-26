@@ -106,6 +106,9 @@
         - id: Flare
         - id: FoodSnackNutribrick
         - id: DrinkWaterBottleFull
+  - type: Storage
+    grid:
+    - 0,0,2,2
   - type: Label
     currentLabel: без балона
 
@@ -147,6 +150,9 @@
         - id: Flare
         - id: FoodBreadNutriBatard
         - id: DrinkWaterBottleFull
+  - type: Storage
+    grid:
+    - 0,0,2,2
 
 - type: entity
   parent: BoxSurvivalBase
@@ -186,6 +192,9 @@
         - id: DrinkMREFlask
         - id: FoodTinMRE
         - id: Flare
+  - type: Storage
+    grid:
+    - 0,0,2,2
   - type: Sprite
     layers:
     - state: internals
@@ -233,3 +242,53 @@
     layers:
     - state: internals
     - state: extendedtank
+
+# Mime survival boxes remain separate because Sunrise loadouts use nutribatards.
+
+- type: entity
+  parent: BoxSurvivalDeluxeExtended
+  id: BoxMime
+  suffix: Mime, Emergency
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreath
+        - id: EmergencyOxygenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodBreadNutriBatard
+        - id: DrinkWaterBottleFull
+
+- type: entity
+  parent: BoxSurvivalDeluxeExtendedNitrogen
+  id: BoxMimeNitrogen
+  suffix: Mime, Emergency N2
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreath
+        - id: EmergencyNitrogenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodBreadNutriBatard
+        - id: DrinkWaterBottleFull
+
+- type: entity
+  parent: BoxSurvivalDeluxeExtended
+  id: BoxMimeMoth
+  suffix: Mime, Emergency Moth
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreath
+        - id: EmergencyOxygenTankFilled
+        - id: EmergencyMedipen
+        - id: Flare
+        - id: FoodBreadCottonNutriBatard
+        - id: DrinkWaterBottleFull

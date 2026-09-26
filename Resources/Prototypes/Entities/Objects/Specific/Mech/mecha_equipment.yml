@@ -77,6 +77,9 @@
       - state: inhand-left-big
       right:
       - state: inhand-right-big
+    size: Ginormous
+    shape:
+    - 0,0,4,3
   - type: MultiHandedItem
   - type: MechGrabber
   - type: UIFragment
@@ -99,6 +102,9 @@
       - state: inhand-left-small
       right:
       - state: inhand-right-small
+    size: Large
+    shape:
+    - 0,0,3,2
   - type: MultiHandedItem
   - type: MechGrabber
     maxContents: 4
@@ -129,6 +135,9 @@
       - state: inhand-left-honk
       right:
       - state: inhand-right-honk
+    size: Ginormous
+    shape:
+    - 0,0,4,3
   - type: MultiHandedItem
   - type: MechSoundboard
     sounds:

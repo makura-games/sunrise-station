@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Server._Sunrise.Mapping;
 using Content.Server.Decals;
 using Content.Shared.Decals;
@@ -32,11 +33,8 @@ public sealed partial class WalledDecalRemovalSystem : EntitySystem
     /// </summary>
     public int RemoveWalledDecals(Entity<MapGridComponent> grid)
     {
-        if (!TryComp<DecalGridComponent>(grid.Owner, out var decalGrid))
-            return 0;
-
         var wallTiles = new HashSet<Vector2i>();
-        var decalsToRemove = new HashSet<uint>();
+        var decalsToRemove = new HashSet<DecalIndex>();
         var childEnumerator = Transform(grid.Owner).ChildEnumerator;
 
         while (childEnumerator.MoveNext(out var child))
@@ -50,13 +48,13 @@ public sealed partial class WalledDecalRemovalSystem : EntitySystem
         if (wallTiles.Count == 0)
             return 0;
 
-        foreach (var chunk in decalGrid.ChunkCollection.ChunkCollection.Values)
+        foreach (var wallTile in wallTiles)
         {
-            foreach (var (decalId, decal) in chunk.Decals)
-            {
-                if (wallTiles.Contains(GetDecalTileIndices(decal, grid.Comp)))
-                    decalsToRemove.Add(decalId);
-            }
+            var tilePosition = (Vector2) wallTile;
+            var bounds = new Box2(tilePosition, tilePosition + Vector2.One);
+
+            foreach (var (decalId, _) in _decal.GetDecalsIntersecting(grid.Owner, bounds))
+                decalsToRemove.Add(decalId);
         }
 
         var removed = 0;
@@ -67,13 +65,5 @@ public sealed partial class WalledDecalRemovalSystem : EntitySystem
         }
 
         return removed;
-    }
-
-    private static Vector2i GetDecalTileIndices(Decal decal, MapGridComponent grid)
-    {
-        var decalCenter = decal.Coordinates + grid.TileSizeHalfVector;
-        return new Vector2i(
-            (int)Math.Floor(decalCenter.X / grid.TileSize),
-            (int)Math.Floor(decalCenter.Y / grid.TileSize));
     }
 }

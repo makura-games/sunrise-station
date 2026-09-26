@@ -34,7 +34,7 @@ public sealed partial class InjectSystem
 
         if (!TryComp<ItemSlotsComponent>(uid, out var comp)) return;
 
-        _itemSlotsSystem.SetLock(uid, component.ContainerId, component.Locked, comp);
+        _itemSlotsSystem.SetLock((uid, comp), component.ContainerId, component.Locked);
     }
 
     private void OnExamine(EntityUid uid, InjectComponent component, ExaminedEvent args)
@@ -52,8 +52,8 @@ public sealed partial class InjectSystem
         if (args.Handled) return;
         if (_netManager.IsClient) return;
 
-        if (!TryComp<ItemSlotsComponent>(args.Performer, out var itemslots)) return;
-        if (!_itemSlotsSystem.TryGetSlot(args.Performer, component.ContainerId, out var slot, itemslots)) return;
+        if (!TryComp<ItemSlotsComponent>(uid, out var itemSlots)) return;
+        if (!_itemSlotsSystem.TryGetSlot((uid, itemSlots), component.ContainerId, out var slot)) return;
 
         if (slot.Locked)
         {

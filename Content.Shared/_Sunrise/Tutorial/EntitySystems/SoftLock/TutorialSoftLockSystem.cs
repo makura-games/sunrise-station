@@ -196,7 +196,7 @@ public sealed partial class TutorialSoftLockSystem : EntitySystem
         }
 
         _lastPopupTimes[user] = _timing.CurTime;
-        _popup.PopupClient(Loc.GetString(popup), user, user);
+        _popup.PopupEntity(Loc.GetString(popup), user, user);
     }
 
     [ByRefEvent]

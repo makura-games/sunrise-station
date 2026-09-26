@@ -81,8 +81,7 @@ public sealed partial class AbductorDispencerComponent : Component
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem))]
 public sealed partial class AbductorComponent : Component
 {
-    [ValidatePrototypeId<CollectiveMindPrototype>]
-    public string AbductorCollectiveMindProto = "Abductor";
+    public ProtoId<CollectiveMindPrototype> AbductorCollectiveMindProto = "Abductor";
 }
 
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedAbductorSystem)), AutoGenerateComponentState]

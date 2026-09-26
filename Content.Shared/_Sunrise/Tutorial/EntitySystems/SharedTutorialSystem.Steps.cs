@@ -15,7 +15,7 @@ public abstract partial class SharedTutorialSystem
         step = null;
 
         if (ent.Comp.ActiveStepOverride is { } overrideStep)
-            return _proto.TryIndex(overrideStep, out step);
+            return ProtoMan.TryIndex(overrideStep, out step);
 
         return TryGetSequenceStep(ent, out step);
     }
@@ -24,13 +24,13 @@ public abstract partial class SharedTutorialSystem
     {
         step = null;
 
-        if (!_proto.TryIndex(ent.Comp.SequenceId, out var sequence))
+        if (!ProtoMan.TryIndex(ent.Comp.SequenceId, out var sequence))
             return false;
 
         if (ent.Comp.StepIndex < 0 || ent.Comp.StepIndex >= sequence.Steps.Count)
             return false;
 
-        return _proto.TryIndex(sequence.Steps[ent.Comp.StepIndex], out step);
+        return ProtoMan.TryIndex(sequence.Steps[ent.Comp.StepIndex], out step);
     }
 
     private bool TryEnterRepairStep(Entity<TutorialPlayerComponent> ent, TutorialStepPrototype step)
@@ -60,7 +60,7 @@ public abstract partial class SharedTutorialSystem
 
     private bool EnterRepairStep(Entity<TutorialPlayerComponent> ent, ProtoId<TutorialStepPrototype> repairStepId)
     {
-        if (!_proto.TryIndex(repairStepId, out var repairStep))
+        if (!ProtoMan.TryIndex(repairStepId, out var repairStep))
             return false;
 
         ClearActiveStepState(ent);

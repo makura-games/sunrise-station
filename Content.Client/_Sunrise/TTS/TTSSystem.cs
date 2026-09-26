@@ -1,7 +1,7 @@
 using Content.Shared._Sunrise.AnnouncementSpeaker.Events;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared._Sunrise.TTS;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Robust.Client.Audio;
 using Robust.Client.Player;
 using Robust.Client.ResourceManagement;

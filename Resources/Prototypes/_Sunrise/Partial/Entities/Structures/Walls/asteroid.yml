@@ -1,0 +1,223 @@
+# Частичные прототипы возвращают прежние визуалы всех AsteroidRock и наследующихся от них MeteorRock.
+
+- type: !PartialOnly entity
+  id: AsteroidRock
+  components:
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+  - type: SmoothEdge
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/rock.rsi
+    state: rock_asteroid
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
+    layers: !Clear
+    - state: rock_asteroid
+    - map: ["enum.EdgeLayer.South"]
+      state: rock_asteroid_south
+    - map: ["enum.EdgeLayer.East"]
+      state: rock_asteroid_east
+    - map: ["enum.EdgeLayer.North"]
+      state: rock_asteroid_north
+    - map: ["enum.EdgeLayer.West"]
+      state: rock_asteroid_west
+
+- type: !PartialOnly entity
+  id: AsteroidRockCoal
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
+    layers: !Clear
+    - state: rock_asteroid
+    - map: ["enum.EdgeLayer.South"]
+      state: rock_asteroid_south
+    - map: ["enum.EdgeLayer.East"]
+      state: rock_asteroid_east
+    - map: ["enum.EdgeLayer.North"]
+      state: rock_asteroid_north
+    - map: ["enum.EdgeLayer.West"]
+      state: rock_asteroid_west
+    - state: rock_coal
+      map: ["enum.MiningScannerVisualLayers.Overlay"]
+
+- type: !PartialOnly entity
+  id: AsteroidRockGold
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
+    layers: !Clear
+    - state: rock_asteroid
+    - map: ["enum.EdgeLayer.South"]
+      state: rock_asteroid_south
+    - map: ["enum.EdgeLayer.East"]
+      state: rock_asteroid_east
+    - map: ["enum.EdgeLayer.North"]
+      state: rock_asteroid_north
+    - map: ["enum.EdgeLayer.West"]
+      state: rock_asteroid_west
+    - state: rock_gold
+      map: ["enum.MiningScannerVisualLayers.Overlay"]
+
+- type: !PartialOnly entity
+  id: AsteroidRockDiamond
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
+    layers: !Clear
+    - state: rock_asteroid
+    - map: ["enum.EdgeLayer.South"]
+      state: rock_asteroid_south
+    - map: ["enum.EdgeLayer.East"]
+      state: rock_asteroid_east
+    - map: ["enum.EdgeLayer.North"]
+      state: rock_asteroid_north
+    - map: ["enum.EdgeLayer.West"]
+      state: rock_asteroid_west
+    - state: rock_diamond
+      map: ["enum.MiningScannerVisualLayers.Overlay"]
+
+- type: !PartialOnly entity
+  id: AsteroidRockPlasma
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
+    layers: !Clear
+    - state: rock_asteroid
+    - map: ["enum.EdgeLayer.South"]
+      state: rock_asteroid_south
+    - map: ["enum.EdgeLayer.East"]
+      state: rock_asteroid_east
+    - map: ["enum.EdgeLayer.North"]
+      state: rock_asteroid_north
+    - map: ["enum.EdgeLayer.West"]
+      state: rock_asteroid_west
+    - state: rock_phoron
+      map: ["enum.MiningScannerVisualLayers.Overlay"]
+
+- type: !PartialOnly entity
+  id: AsteroidRockQuartz
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
+    layers: !Clear
+    - state: rock_asteroid
+    - map: ["enum.EdgeLayer.South"]
+      state: rock_asteroid_south
+    - map: ["enum.EdgeLayer.East"]
+      state: rock_asteroid_east
+    - map: ["enum.EdgeLayer.North"]
+      state: rock_asteroid_north
+    - map: ["enum.EdgeLayer.West"]
+      state: rock_asteroid_west
+    - state: rock_quartz
+      map: ["enum.MiningScannerVisualLayers.Overlay"]
+
+- type: !PartialOnly entity
+  id: AsteroidRockSilver
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
+    layers: !Clear
+    - state: rock_asteroid
+    - map: ["enum.EdgeLayer.South"]
+      state: rock_asteroid_south
+    - map: ["enum.EdgeLayer.East"]
+      state: rock_asteroid_east
+    - map: ["enum.EdgeLayer.North"]
+      state: rock_asteroid_north
+    - map: ["enum.EdgeLayer.West"]
+      state: rock_asteroid_west
+    - state: rock_silver
+      map: ["enum.MiningScannerVisualLayers.Overlay"]
+
+- type: !PartialOnly entity
+  id: AsteroidRockTin
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
+    layers: !Clear
+    - state: rock_asteroid
+    - map: ["enum.EdgeLayer.South"]
+      state: rock_asteroid_south
+    - map: ["enum.EdgeLayer.East"]
+      state: rock_asteroid_east
+    - map: ["enum.EdgeLayer.North"]
+      state: rock_asteroid_north
+    - map: ["enum.EdgeLayer.West"]
+      state: rock_asteroid_west
+    - state: rock_tin
+      map: ["enum.MiningScannerVisualLayers.Overlay"]
+
+- type: !PartialOnly entity
+  id: AsteroidRockUranium
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
+    layers: !Clear
+    - state: rock_asteroid
+    - map: ["enum.EdgeLayer.South"]
+      state: rock_asteroid_south
+    - map: ["enum.EdgeLayer.East"]
+      state: rock_asteroid_east
+    - map: ["enum.EdgeLayer.North"]
+      state: rock_asteroid_north
+    - map: ["enum.EdgeLayer.West"]
+      state: rock_asteroid_west
+    - state: rock_uranium
+      map: ["enum.MiningScannerVisualLayers.Overlay"]
+
+- type: !PartialOnly entity
+  id: AsteroidRockSalt
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
+    layers: !Clear
+    - state: rock_asteroid
+    - map: ["enum.EdgeLayer.South"]
+      state: rock_asteroid_south
+    - map: ["enum.EdgeLayer.East"]
+      state: rock_asteroid_east
+    - map: ["enum.EdgeLayer.North"]
+      state: rock_asteroid_north
+    - map: ["enum.EdgeLayer.West"]
+      state: rock_asteroid_west
+    - state: rock_salt
+      map: ["enum.MiningScannerVisualLayers.Overlay"]
+
+- type: !PartialOnly entity
+  id: AsteroidRockArtifactFragment
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
+    layers: !Clear
+    - state: rock_asteroid
+    - map: ["enum.EdgeLayer.South"]
+      state: rock_asteroid_south
+    - map: ["enum.EdgeLayer.East"]
+      state: rock_asteroid_east
+    - map: ["enum.EdgeLayer.North"]
+      state: rock_asteroid_north
+    - map: ["enum.EdgeLayer.West"]
+      state: rock_asteroid_west
+    - state: rock_artifact_fragment
+      map: ["enum.MiningScannerVisualLayers.Overlay"]
+
+- type: !PartialOnly entity
+  id: AsteroidRockGibtonite
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
+    layers: !Clear
+    - state: rock_asteroid
+    - map: ["enum.EdgeLayer.South"]
+      state: rock_asteroid_south
+    - map: ["enum.EdgeLayer.East"]
+      state: rock_asteroid_east
+    - map: ["enum.EdgeLayer.North"]
+      state: rock_asteroid_north
+    - map: ["enum.EdgeLayer.West"]
+      state: rock_asteroid_west
+    - state: gibtonite_inactive
+      visible: false
+      map: ["enum.MiningScannerVisualLayers.Overlay", "gib"]

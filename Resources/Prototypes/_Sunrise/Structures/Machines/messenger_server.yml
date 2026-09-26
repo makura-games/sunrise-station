@@ -1,6 +1,6 @@
 - type: entity
   id: MessengerServer
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   name: messenger server
   description: Server that handles messaging between PDAs on the station.
   components:

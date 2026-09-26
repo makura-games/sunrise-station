@@ -101,12 +101,14 @@
           conditions:
           - !type:TemperatureCondition
             max: 213.0
-        - !type:SatiateThirst
+        - !type:Satiate
+          satiationType: Thirst
           factor: 4
           conditions:
           - !type:TemperatureCondition
             max: 213.0
-        - !type:SatiateHunger
+        - !type:Satiate
+          satiationType: Hunger
           factor: 1
           conditions:
           - !type:TemperatureCondition
@@ -130,7 +132,8 @@
   metabolisms:
     Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
@@ -162,7 +165,8 @@
   metabolisms:
     Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
@@ -219,7 +223,8 @@
   metabolisms:
     Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
@@ -353,9 +358,11 @@
           types:
             Asphyxiation: -2
       - !type:ResetNarcolepsy
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         factor: 1
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 1
       - !type:AdjustReagent
         conditions:

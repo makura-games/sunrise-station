@@ -7,7 +7,8 @@
   metabolisms:
     Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 3
   reactiveEffects:
     Extinguish:
@@ -28,7 +29,8 @@
   metabolisms:
     Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 2
   plantMetabolism:
   - !type:PlantAdjustNutrition
@@ -53,9 +55,10 @@
       metabolites:
         Ethanol: 0.12
       effects:
-      #Sunrise start
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 2
+      # Sunrise end
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Dwarf ]

@@ -128,7 +128,6 @@
     defaultRotation: 90
     horizontalRotation: 90
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatHuman
       amount: 5
@@ -150,16 +149,16 @@
     interfaces:
       enum.StrippingUiKey.Key:
        type: StrippableBoundUserInterface
-  - type: ToggleableNightVision
-    effect: EffectNightVisionPirate
+  - type: NightVision
+    enabled: false
+    action: ActionToggleNightVision
+    prioritized: false
+    lightingColor: '#FF983326'
   - type: ComplexInteraction
   - type: TTS
     voice: Sidorovich
   - type: Vocal
-    sounds:
-      Male: MaleHuman
-      Female: FemaleHuman
-      Unsexed: MaleHuman
+    emoteSounds: MaleHuman
   - type: GhostRole
     prob: 0.05
     makeSentient: true
@@ -257,7 +256,7 @@
     - NamesMilitaryFirstGamma
     - NamesLast
     nameFormat: name-format-ert
-  - type: ActionGun
+  - type: SunriseActionGun
     action: ActionGunGrenadeExplosiveShrapnel
     gunProto: GunGrenadeExplosiveShrapnel
   - type: NPCUseActionWhenTargetInRange
@@ -1745,7 +1744,7 @@
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
   - type: GhostTakeoverAvailable
-  - type: ActionGun
+  - type: SunriseActionGun
     action: ActionSideArmFan
     gunProto: GunSideArmFan
   - type: NPCUseActionWhenTargetInRange
@@ -1786,8 +1785,8 @@
       types:
         Blunt: 10
         Slash: 20
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatBear
       amount: 6
     - id: ChemistryBottleOmnizine

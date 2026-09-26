@@ -1,30 +1,16 @@
 - type: construction
-  id: SunriseWallhornBlack
-  name: construction-sunrise-wallhorn-black
+  id: !type:CreateVariants
+    values: [ SunriseWallhornBlack, SunriseWallhornWhite ]
+  name: !type:CreateVariants
+    values: [ construction-sunrise-wallhorn-black, construction-sunrise-wallhorn-white ]
+  hide: !type:CreateVariants
+    values: [ false, true ]
   graph: SunriseWallhorn
   startNode: start
-  targetNode: wallhornBlack
+  targetNode: !type:CreateVariants
+    values: [ wallhornBlack, wallhornWhite ]
   category: construction-category-structures
   placementMode: SnapgridCenter
   objectType: Structure
   canRotate: true
   canBuildInImpassable: true
-  alternativePrototypes:
-  - SunriseWallhornBlack
-  - SunriseWallhornWhite
-
-- type: construction
-  hide: true
-  id: SunriseWallhornWhite
-  name: construction-sunrise-wallhorn-white
-  graph: SunriseWallhorn
-  startNode: start
-  targetNode: wallhornWhite
-  category: construction-category-structures
-  placementMode: SnapgridCenter
-  objectType: Structure
-  canRotate: true
-  canBuildInImpassable: true
-  alternativePrototypes:
-  - SunriseWallhornBlack
-  - SunriseWallhornWhite

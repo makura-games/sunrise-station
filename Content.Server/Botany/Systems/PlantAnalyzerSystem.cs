@@ -1,10 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Server.Botany.Components;
 using Content.Server.Popups;
 using Content.Shared.AbstractAnalyzer;
 using Content.Shared.Botany.Components;
 using Content.Shared.Botany.PlantAnalyzer;
+using Content.Shared.Botany.Systems;
+using Content.Shared.Botany.Traits.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Labels.EntitySystems;
@@ -27,6 +28,7 @@ public sealed partial class PlantAnalyzerSystem : AbstractAnalyzerSystem<PlantAn
     [Dependency] private PaperSystem _paperSystem = default!;
     [Dependency] private LabelSystem _labelSystem = default!;
     [Dependency] private PlantAnalyzerLocalizationHelper _localizationHelper = default!;
+    [Dependency] private PlantTraySystem _plantTray = default!;
 
     public override void Initialize()
     {
@@ -57,52 +59,77 @@ public sealed partial class PlantAnalyzerSystem : AbstractAnalyzerSystem<PlantAn
         PlantAnalyzerTrayData? trayData = null;
         PlantAnalyzerTolerancesData? tolerancesData = null;
         PlantAnalyzerProduceData? produceData = null;
-        if (_entityManager.TryGetComponent<PlantHolderComponent>(target, out var plantHolder))
+        if (target is { } targetUid && _entityManager.TryGetComponent<PlantTrayComponent>(targetUid, out var tray))
         {
-            if (plantHolder.Seed is not null)
+            trayData = new PlantAnalyzerTrayData(
+                waterLevel: tray.WaterLevel,
+                nutritionLevel: tray.NutritionLevel,
+                toxins: tray.ToxinLevel,
+                pestLevel: tray.PestLevel,
+                weedLevel: tray.WeedLevel,
+                chemicals: tray.SoilSolution?.Comp.Solution.Contents
+                    .Select(reagent => reagent.Reagent.Prototype.ToString())
+                    .ToList()
+            );
+
+            if (_plantTray.TryGetPlant((targetUid, tray), out var plantUid)
+                && _entityManager.TryGetComponent<PlantHolderComponent>(plantUid.Value, out var plantHolder)
+                && _entityManager.TryGetComponent<PlantComponent>(plantUid.Value, out var plant)
+                && _entityManager.TryGetComponent<PlantDataComponent>(plantUid.Value, out var plantDataComponent))
             {
                 plantData = new PlantAnalyzerPlantData(
-                    seedDisplayName: plantHolder.Seed.DisplayName,
+                    seedDisplayName: plantDataComponent.Name,
                     health: plantHolder.Health,
-                    endurance: plantHolder.Seed.Endurance,
+                    endurance: plant.Endurance,
                     age: plantHolder.Age,
-                    lifespan: plantHolder.Seed.Lifespan,
+                    lifespan: plant.Lifespan,
                     dead: plantHolder.Dead,
-                    viable: plantHolder.Seed.Viable,
-                    mutating: plantHolder.MutationLevel > 0f,
-                    kudzu: plantHolder.Seed.TurnIntoKudzu
+                    viable: !_entityManager.HasComponent<PlantTraitUnviableComponent>(plantUid.Value),
+                    mutating: plantHolder.MutationLevels.Values.Any(level => level > 0f),
+                    kudzu: _entityManager.HasComponent<PlantTraitKudzuComponent>(plantUid.Value)
                 );
-                tolerancesData = new PlantAnalyzerTolerancesData(
-                    waterConsumption: plantHolder.Seed.WaterConsumption,
-                    nutrientConsumption: plantHolder.Seed.NutrientConsumption,
-                    toxinsTolerance: plantHolder.Seed.ToxinsTolerance,
-                    pestTolerance: plantHolder.Seed.PestTolerance,
-                    weedTolerance: plantHolder.Seed.WeedTolerance,
-                    lowPressureTolerance: plantHolder.Seed.LowPressureTolerance,
-                    highPressureTolerance: plantHolder.Seed.HighPressureTolerance,
-                    idealHeat: plantHolder.Seed.IdealHeat,
-                    heatTolerance: plantHolder.Seed.HeatTolerance,
-                    idealLight: plantHolder.Seed.IdealLight,
-                    lightTolerance: plantHolder.Seed.LightTolerance,
-                    consumeGasses: [.. plantHolder.Seed.ConsumeGasses.Keys]
-                );
+
+                if (_entityManager.TryGetComponent<PlantGrowthComponent>(plantUid.Value, out var growth)
+                    && _entityManager.TryGetComponent<PlantToxinsComponent>(plantUid.Value, out var toxins)
+                    && _entityManager.TryGetComponent<PlantWeedPestComponent>(plantUid.Value, out var weedPest)
+                    && _entityManager.TryGetComponent<PlantAtmosphericComponent>(plantUid.Value, out var atmospheric)
+                    && _entityManager.TryGetComponent<PlantConsumeExudeGasComponent>(plantUid.Value, out var gases))
+                {
+                    tolerancesData = new PlantAnalyzerTolerancesData(
+                        waterConsumption: growth.WaterConsumption,
+                        nutrientConsumption: growth.NutrientConsumption,
+                        toxinsTolerance: toxins.ToxinsTolerance,
+                        pestTolerance: weedPest.PestTolerance,
+                        weedTolerance: weedPest.WeedTolerance,
+                        lowPressureTolerance: atmospheric.LowPressureTolerance,
+                        highPressureTolerance: atmospheric.HighPressureTolerance,
+                        lowHeatTolerance: atmospheric.LowHeatTolerance,
+                        highHeatTolerance: atmospheric.HighHeatTolerance,
+                        consumeGasses: [.. gases.ConsumeGasses.Keys]
+                    );
+                }
+
+                _entityManager.TryGetComponent<PlantChemicalsComponent>(plantUid.Value, out var plantChemicals);
+                _entityManager.TryGetComponent<PlantConsumeExudeGasComponent>(plantUid.Value, out var plantGases);
+
+                var totalYield = 0;
+                if (plant.Yield > 0 && plantDataComponent.ProductPrototypes.Count > 0)
+                {
+                    totalYield = plantHolder.YieldMod < 0
+                        ? plant.Yield
+                        : plant.Yield * plantHolder.YieldMod;
+                    totalYield = Math.Max(1, totalYield);
+                }
+
                 produceData = new PlantAnalyzerProduceData(
-                    yield: plantHolder.Seed.ProductPrototypes.Count == 0 ? 0 : BotanySystem.CalculateTotalYield(plantHolder.Seed.Yield, plantHolder.YieldMod),
-                    potency: plantHolder.Seed.Potency,
-                    chemicals: [.. plantHolder.Seed.Chemicals.Keys],
-                    produce: plantHolder.Seed.ProductPrototypes,
-                    exudeGasses: [.. plantHolder.Seed.ExudeGasses.Keys],
-                    seedless: plantHolder.Seed.Seedless
+                    yield: totalYield,
+                    potency: plant.Potency,
+                    chemicals: plantChemicals?.Chemicals.Keys.Select(id => id.Id).ToList() ?? [],
+                    produce: plantDataComponent.ProductPrototypes,
+                    exudeGasses: plantGases?.ExudeGasses.Keys.ToList() ?? [],
+                    seedless: _entityManager.HasComponent<PlantTraitSeedlessComponent>(plantUid.Value)
                 );
             }
-            trayData = new PlantAnalyzerTrayData(
-                waterLevel: plantHolder.WaterLevel,
-                nutritionLevel: plantHolder.NutritionLevel,
-                toxins: plantHolder.Toxins,
-                pestLevel: plantHolder.PestLevel,
-                weedLevel: plantHolder.WeedLevel,
-                chemicals: plantHolder.SoilSolution?.Comp.Solution.Contents.Select(r => r.Reagent.Prototype).ToList()
-            );
         }
 
         return new PlantAnalyzerScannedUserMessage(
@@ -155,8 +182,6 @@ public sealed partial class PlantAnalyzerSystem : AbstractAnalyzerSystem<PlantAn
             ("kpaTolerance", data.TolerancesData?.PressureTolerance.ToString("0.00") ?? missingData),
             ("temp", data.TolerancesData?.IdealHeat.ToString("0.00") ?? missingData),
             ("tempTolerance", data.TolerancesData?.HeatTolerance.ToString("0.00") ?? missingData),
-            ("lightLevel", data.TolerancesData?.IdealLight.ToString("0.00") ?? missingData),
-            ("lightTolerance", data.TolerancesData?.LightTolerance.ToString("0.00") ?? missingData),
             ("yield", data.ProduceData?.Yield ?? -1),
             ("potency", data.ProduceData is not null ? Loc.GetString(data.ProduceData.Potency) : missingData),
             ("chemicals", data.ProduceData is not null ? _localizationHelper.ChemicalsToLocalizedStrings(data.ProduceData.Chemicals) : missingData),
@@ -196,6 +221,6 @@ public sealed partial class PlantAnalyzerSystem : AbstractAnalyzerSystem<PlantAn
     /// <inheritdoc/>
     protected override bool ValidScanTarget(EntityUid? target)
     {
-        return HasComp<PlantHolderComponent>(target);
+        return HasComp<PlantTrayComponent>(target);
     }
 }

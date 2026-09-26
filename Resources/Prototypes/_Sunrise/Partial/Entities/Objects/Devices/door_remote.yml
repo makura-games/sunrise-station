@@ -1,0 +1,20 @@
+- type: !PartialOnly entity
+  id: DoorRemoteDefault
+  components:
+  - type: DoorRemote
+    options:
+    - mode: OpenClose
+      tooltip: &TextOpenClose door-remote-open-close-text
+      icon: &IconOpenClose
+        sprite: /Textures/_Sunrise/Structures/Doors/Airlocks/Standard/basic.rsi
+        state: assembly
+    - mode: ToggleBolts
+      tooltip: &TextToggleBolt door-remote-toggle-bolt-text
+      icon: &IconToggleBolt
+        sprite: /Textures/Interface/Actions/actions_ai.rsi
+        state: bolt_door
+    - mode: ToggleEmergencyAccess
+      tooltip: &TextEmergencyAccess door-remote-emergency-access-text
+      icon: &IconEmergencyAccess
+        sprite: /Textures/Interface/Actions/actions_ai.rsi
+        state: emergency_on

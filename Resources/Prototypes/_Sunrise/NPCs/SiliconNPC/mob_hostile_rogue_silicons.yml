@@ -152,8 +152,7 @@
   - type: Speech
     speechSounds: SyndieBorg
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSiliconSyndicate
+    emoteSounds: UnisexSiliconSyndicate
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepBorg
@@ -165,8 +164,11 @@
       params:
         variation: 0.125
   - type: SoundWhileAlive
-  - type: ToggleableNightVision
-    effect: EffectNightVisionSyndie
+  - type: NightVision
+    enabled: false
+    action: ActionToggleNightVision
+    prioritized: false
+    lightingColor: '#D61B1B26'
   - type: TTS
     voice: Sentrybot
   - type: NpcVeteranFollower
@@ -939,14 +941,16 @@
   - type: Speech
     speechSounds: SyndieBorg
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSiliconSyndicate
+    emoteSounds: UnisexSiliconSyndicate
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/_Sunrise/Effects/silence.ogg
   - type: SoundWhileAlive
-  - type: ToggleableNightVision
-    effect: EffectNightVisionSyndie
+  - type: NightVision
+    enabled: false
+    action: ActionToggleNightVision
+    prioritized: false
+    lightingColor: '#D61B1B26'
   - type: TTS
     voice: Sentrybot
 

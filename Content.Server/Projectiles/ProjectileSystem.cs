@@ -56,14 +56,14 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
             return;
         }
 
-        // Sunrise edit start - Projectile ricochet integration
+        // Sunrise edit start - сохраняем рикошеты снарядов
         if (TryComp<ProjectileRicochetComponent>(uid, out var ricochet) && ricochet.Chance > 0)
         {
             if (TryComp<PhysicsComponent>(uid, out var physics) && !physics.LinearVelocity.IsLengthZero())
             {
                 var projXform = Transform(uid);
                 var worldPos = _transformSystem.GetWorldPosition(projXform);
-                // Sunrise edit start - Use original flight direction derived from rotation to bypass any temporary physics speed/direction anomalies
+                // Sunrise edit start - берём исходное направление, чтобы не зависеть от временного состояния физики
                 var direction = (projXform.WorldRotation - component.Angle).ToWorldVec();
                 // Sunrise edit end
 
@@ -83,13 +83,15 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
                     // Move projectile slightly outside the wall to prevent stuck physics
                     var newPosition = contactPoint + ricochetEv.Dir * 0.15f;
                     _transformSystem.SetWorldPosition(projXform, newPosition);
-                    return; // bounce off, cancel damage application!
+                    return;
                 }
             }
         }
         // Sunrise edit end
 
-        var ev = new ProjectileHitEvent(component.Damage * _damageableSystem.UniversalProjectileDamageModifier, target, component.Shooter);
+        var damageEv = new BeforeProjectileHitEvent(component.Damage, target, component.Shooter);
+        RaiseLocalEvent(uid, ref damageEv);
+        var ev = new ProjectileHitEvent(damageEv.Damage * _damageableSystem.UniversalProjectileDamageModifier, target, component.Shooter);
         RaiseLocalEvent(uid, ref ev);
 
         var otherName = ToPrettyString(target);
@@ -99,38 +101,36 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
             damageRequired -= _damageableSystem.GetTotalDamage((target, damageableComponent));
             damageRequired = FixedPoint2.Max(damageRequired, FixedPoint2.Zero);
         }
-        var deleted = Deleted(target);
 
-        DamageSpecifier damage;
-        // Sunrise edit start - Starlight armor penetration integration
-        var damageChange = _damageableSystem.ChangeDamage(
+        // Sunrise edit start - учитываем бронепробитие Starlight
+        var damage = _damageableSystem.ChangeDamage(
             (target, damageableComponent),
             ev.Damage,
             component.IgnoreResistances,
             origin: component.Shooter,
             armorPenetration: component.ArmorPenetration,
             canHeal: false);
+        // Sunrise edit end
 
-        damage = damageChange;
-
-        if (!damageChange.Empty && Exists(component.Shooter))
+        if (!damage.Empty)
         {
-            // Guard against race conditions where collided entities are already losing transform
-            // during this physics tick.
-            if (!deleted)
+            if (!Deleted(target))
             {
-                if (TryComp(target, out TransformComponent? targetXform))
-                    _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(targetXform.Coordinates, entityMan: EntityManager));
+                _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(target, entityManager: EntityManager));
             }
+
+            var shotByString = Exists(component.Shooter)
+                ? $"{ToPrettyString(component.Shooter!.Value):user}"
+                : "a now deleted entity (grenade?)";
 
             _adminLogger.Add(LogType.BulletHit,
                 LogImpact.Medium,
-                $"Projectile {ToPrettyString(uid):projectile} shot by {ToPrettyString(component.Shooter!.Value):user} hit {otherName:target} and dealt {damage:damage} damage");
+                $"Projectile {ToPrettyString(uid):projectile} shot by {shotByString} hit {otherName:target} and dealt {damage:damage} damage");
         }
 
         var projectileSpent = !TryPenetrate((uid, component), damage, damageRequired);
 
-        // Sunrise edit start - Projectile pierce integration
+        // Sunrise edit start - сохраняем сквозное пробитие снарядов
         if (projectileSpent && TryComp<ProjectilePierceComponent>(uid, out var pierce) && pierce.Chance > 0)
         {
             if (HasComp<MobStateComponent>(target) || HasComp<PierceableComponent>(target))
@@ -151,13 +151,12 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
                         {
                             var random = pierce.Deviation > 0 ? _rand.NextFloat(-pierce.Deviation, pierce.Deviation) : 0f;
                             var projXform = Transform(uid);
-                            // Sunrise edit start - Use original flight angle derived from rotation to bypass any post-collision physics state changes
+                            // Sunrise edit start - берём исходный угол полёта до изменения физики при столкновении
                             var velocityAngle = projXform.WorldRotation - component.Angle;
                             // Sunrise edit end
                             var newDir = (velocityAngle + random).ToWorldVec();
                             _physics.SetLinearVelocity(uid, newDir * physics.LinearVelocity.Length(), body: physics);
                             _transformSystem.SetWorldRotation(uid, newDir.ToWorldAngle() + component.Angle);
-
                         }
                     }
                 }
@@ -166,15 +165,13 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
         component.ProjectileSpent = projectileSpent;
         // Sunrise edit end
 
-        // Sunrise-Start
-        if (!deleted && HasComp<TransformComponent>(target))
+        if (!Deleted(target))
         {
             _guns.PlayImpactSound(target, damage, component.SoundHit, component.ForceSound);
 
             if (!args.OurBody.LinearVelocity.IsLengthZero())
                 _sharedCameraRecoil.KickCamera(target, args.OurBody.LinearVelocity.Normalized());
         }
-        // Sunrise-End
 
         if (component.DeleteOnCollide && component.ProjectileSpent)
             QueueDel(uid);

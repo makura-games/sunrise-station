@@ -15,7 +15,6 @@ using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration;
 using Content.Shared.Administration.Components;
-using Content.Shared.Administration.Systems;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Construction.Components;
@@ -877,7 +876,7 @@ public sealed partial class AdminVerbSystem
 
     private void GiveAllAccess(EntityUid entity)
     {
-        var allAccess = _prototypeManager
+        var allAccess = ProtoMan
             .EnumeratePrototypes<AccessLevelPrototype>()
             .Select(p => new ProtoId<AccessLevelPrototype>(p.ID)).ToArray();
 

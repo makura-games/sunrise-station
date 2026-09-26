@@ -65,7 +65,7 @@
     - SpeedLoaderShotgunSlug
     - SpeedLoaderShotgunBeanbag
     # PODAVLENIE
-    - BolaSecurity
+    - SecurityBola
 ####################################################
 
 - type: latheRecipePack

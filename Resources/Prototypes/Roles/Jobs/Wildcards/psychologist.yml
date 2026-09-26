@@ -6,7 +6,6 @@
   startingGear: PsychologistGear
   icon: "JobIconPsychologist"
   supervisors: job-supervisors-cmo
-  displayWeight: 10  # Sunrise
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-psychoanalyst

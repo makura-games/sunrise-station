@@ -533,7 +533,7 @@ public sealed class AdminAHelpUIHandler : IAHelpUIHandler
         if (_activePanelMap.TryGetValue(channelId, out var existingPanel))
             return existingPanel;
 
-        _activePanelMap[channelId] = existingPanel = new BwoinkPanel(text => SendMessageAction?.Invoke(channelId, text, Window?.Bwoink.PlaySound.Pressed ?? true, Window?.Bwoink.AdminOnly.Pressed ?? false));
+        _activePanelMap[channelId] = existingPanel = new BwoinkPanel(text => SendMessageAction?.Invoke(channelId, text, Control?.PlaySound.Pressed ?? true, Control?.AdminOnly.Pressed ?? false));
         existingPanel.InputTextChanged += text => InputTextChanged?.Invoke(channelId, text);
         existingPanel.Visible = false;
         if (!Control!.BwoinkArea.Children.Contains(existingPanel))
@@ -613,14 +613,14 @@ public sealed class UserAHelpUIHandler : IAHelpUIHandler
 
     public void ToggleWindow()
     {
-        EnsureInit(_discordRelayActive);
-        if (_window!.IsOpen)
+        var createdWindow = EnsureInit(_discordRelayActive);
+        if (!createdWindow && _window!.IsOpen)
         {
             _window.Close();
         }
         else
         {
-            _window.OpenCentered();
+            _window!.OpenCentered();
         }
     }
 
@@ -661,10 +661,14 @@ public sealed class UserAHelpUIHandler : IAHelpUIHandler
         _window!.OpenCentered();
     }
 
-    private void EnsureInit(bool relayActive)
+    /// <summary>
+    /// Create new ahelp window or return existing window
+    /// </summary>
+    /// <returns>True if new window was created</returns>
+    private bool EnsureInit(bool relayActive)
     {
         if (_window is { Disposed: false })
-            return;
+            return false;
         _chatPanel = new BwoinkPanel(text => SendMessageAction?.Invoke(_ownerId, text, true, false));
         // Sunrise-Start
         _chatPanel.AHelpDescLabel.Visible = true;
@@ -693,6 +697,7 @@ public sealed class UserAHelpUIHandler : IAHelpUIHandler
         //var introMessage = new SharedBwoinkSystem.BwoinkTextMessage( _ownerId, SharedBwoinkSystem.SystemUserId, introText);
         //Receive(introMessage);
         // Sunrise-End
+        return true;
     }
 
     public void Dispose()

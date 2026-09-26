@@ -1,0 +1,44 @@
+{
+    "version": 2,
+    "license": "CLA",
+    "copyright": "Sprited by discord: odlieerr",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        { "name": "full" },
+        {
+            "name": "silver0",
+            "directions": 4
+        },
+        {
+            "name": "silver1",
+            "directions": 4
+        },
+        {
+            "name": "silver2",
+            "directions": 4
+        },
+        {
+            "name": "silver3",
+            "directions": 4
+        },
+        {
+            "name": "silver4",
+            "directions": 4
+        },
+        {
+            "name": "silver5",
+            "directions": 4
+        },
+        {
+            "name": "silver6",
+            "directions": 4
+        },
+        {
+            "name": "silver7",
+            "directions": 4
+        }
+    ]
+}

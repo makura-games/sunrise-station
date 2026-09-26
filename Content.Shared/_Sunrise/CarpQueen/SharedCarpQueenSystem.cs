@@ -8,7 +8,6 @@ namespace Content.Shared._Sunrise.CarpQueen;
 
 public abstract partial class SharedCarpQueenSystem : EntitySystem
 {
-    [Dependency] protected IPrototypeManager PrototypeManager = default!;
     [Dependency] protected IRobustRandom Random = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
 

@@ -26,7 +26,7 @@ public abstract partial class SharedRestrictSystem : EntitySystem
         {
             args.Cancelled = true;
             if (ent.Comp.Messages.Count != 0)
-                _popup.PopupClient(Loc.GetString(_random.Pick(ent.Comp.Messages)), args.Uid);
+                _popup.PopupEntity(Loc.GetString(_random.Pick(ent.Comp.Messages)), args.Uid, args.Uid);
         }
     }
 

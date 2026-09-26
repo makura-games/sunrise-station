@@ -4,7 +4,6 @@ using Content.Shared.StatusIcon;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared._Sunrise.FleshCult;
 
@@ -19,8 +18,8 @@ public sealed partial class FleshCultistComponent : Component
     [ViewVariables(VVAccess.ReadWrite), DataField("maxHunger")]
     public FixedPoint2 MaxHunger = 300;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string ActionFleshCultistShop = "FleshCultistShop";
+    [DataField]
+    public EntProtoId ActionFleshCultistShop = "FleshCultistShop";
 
     [DataField]
     public FixedPoint2 StartingMutationPoints = 5;
@@ -28,9 +27,8 @@ public sealed partial class FleshCultistComponent : Component
     [DataField]
     public EntityUid? ActionFleshCultistShopEntity;
 
-    [ViewVariables(VVAccess.ReadWrite),
-     DataField("fleshMutationMobId", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string FleshMutationMobId = "MobFleshPudge";
+    [ViewVariables(VVAccess.ReadWrite), DataField]
+    public EntProtoId FleshMutationMobId = "MobFleshPudge";
 
     public SoundSpecifier BuySuccesSound = new SoundPathSpecifier(
         "/Audio/_Sunrise/FleshCult/flesh_cultist_buy_succes.ogg");

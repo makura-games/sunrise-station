@@ -1,10 +1,9 @@
 using Content.Shared.Examine;
-using Content.Shared.Ghost;
-using Content.Shared.Warps;
+using Content.Shared.Ghost.Components;
 
 namespace Content.Shared.Warps;
 
-public sealed class WarpPointSystem : EntitySystem
+public sealed partial class WarpPointSystem : EntitySystem
 {
     public override void Initialize()
     {
@@ -17,12 +16,7 @@ public sealed class WarpPointSystem : EntitySystem
         if (!HasComp<GhostComponent>(args.Examiner))
             return;
 
-        var location = component.Location ?? Name(uid);
-        var locationKey = $"location-{location.Replace(" ", "-")}";
-
-        if (Loc.TryGetString(locationKey, out var localizedLocation)) // Sunrise-Edit
-            location = localizedLocation;
-
-        args.PushText(Loc.GetString("warp-point-component-on-examine-success", ("location", location)));
+        var loc = component.Location == null ? Name(uid) : Loc.GetString(component.Location);
+        args.PushText(Loc.GetString("warp-point-component-on-examine-success", ("location", loc)));
     }
 }

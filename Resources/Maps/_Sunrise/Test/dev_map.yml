@@ -3162,20 +3162,6 @@ entities:
     - type: Transform
       pos: 46.5,63.5
       parent: 1
-- proto: BaseUplinkRadioDebug
-  entities:
-  - uid: 2687
-    components:
-    - type: Transform
-      pos: 70.5,37.5
-      parent: 1
-- proto: BaseUplinkRadioDebug999
-  entities:
-  - uid: 2063
-    components:
-    - type: Transform
-      pos: 70.49419,37.872505
-      parent: 1
 - proto: Bed
   entities:
   - uid: 2659
@@ -12118,37 +12104,31 @@ entities:
   - uid: 3202
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 71.5,61.5
       parent: 1
   - uid: 3203
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 68.5,61.5
       parent: 1
   - uid: 3206
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 63.5,61.5
       parent: 1
   - uid: 3229
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 66.5,61.5
       parent: 1
   - uid: 3310
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 61.5,61.5
       parent: 1
   - uid: 3311
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 58.5,61.5
       parent: 1
 - proto: GrilleDiagonal
@@ -17603,13 +17583,6 @@ entities:
       - Experimental
       - CivilianServices
       - Biochemical
-- proto: UplinkNTERTDebug
-  entities:
-  - uid: 2064
-    components:
-    - type: Transform
-      pos: 70.50981,38.145943
-      parent: 1
 - proto: UraniumReinforcedWindowDirectional
   entities:
   - uid: 748

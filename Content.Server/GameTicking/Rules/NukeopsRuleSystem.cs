@@ -11,7 +11,6 @@ using Content.Server.Explosion.EntitySystems;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Components;
-using Content.Server.StationRecords.Systems;
 using Content.Server.Store.Systems;
 using Content.Shared.Access.Systems;
 using Content.Shared.GameTicking.Components;
@@ -43,6 +42,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Text;
+using Content.Shared.StationRecords.Systems;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -334,14 +334,14 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
 
         if (_antag.AllAntagsAlive(ent.Owner))
         {
-            SetWinType(ent, WinType.OpsMinor);
             ent.Comp.WinConditions.Add(WinCondition.AllNukiesAlive);
-            return;
         }
-
-        ent.Comp.WinConditions.Add(_antag.AnyAliveAntags(ent.Owner)
-            ? WinCondition.SomeNukiesAlive
-            : WinCondition.AllNukiesDead);
+        else
+        {
+            ent.Comp.WinConditions.Add(_antag.AnyAliveAntags(ent.Owner)
+                ? WinCondition.SomeNukiesAlive
+                : WinCondition.AllNukiesDead);
+        }
 
         var diskAtCentCom = false;
         var diskQuery = AllEntityQuery<NukeDiskComponent, TransformComponent>();
@@ -356,7 +356,6 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
         }
 
         // If the disk is currently at Central Command, the crew wins - just slightly.
-        // This also implies that some nuclear operatives have died.
         SetWinType(ent,
             diskAtCentCom
             ? WinType.CrewMinor

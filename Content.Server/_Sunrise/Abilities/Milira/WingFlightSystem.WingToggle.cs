@@ -22,7 +22,6 @@ public sealed partial class WingToggleSystem : SharedWingFlightSystem
 {
     [Dependency] private ActionsSystem _actions = default!;
     [Dependency] private PopupSystem _popup = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SunriseHumanoidMarkingSystem _sunriseMarking = default!;
     [Dependency] private TagSystem _tagSystem = default!;
@@ -88,7 +87,7 @@ public sealed partial class WingToggleSystem : SharedWingFlightSystem
                 ? (current.EndsWith(suffix) ? current : $"{current}{suffix}")
                 : (current.EndsWith(suffix) ? current[..^suffix.Length] : current);
 
-            if (!_prototype.HasIndex<MarkingPrototype>(desired))
+            if (!ProtoMan.HasIndex<MarkingPrototype>(desired))
                 continue;
 
             if (desired == current)

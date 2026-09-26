@@ -1,7 +1,7 @@
 using System.Linq;
-using Content.Server.Botany.Components;
 using Content.Server.Materials.Components;
 using Content.Server.Power.EntitySystems;
+using Content.Shared.Botany.Items.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -56,7 +56,7 @@ public sealed partial class ProduceMaterialExtractorSystem : EntitySystem
         if (!TryComp<ProduceComponent>(used, out var produce))
             return false;
 
-        if (!_solutionContainer.TryGetSolution(used, produce.SolutionName, out var solution))
+        if (!_solutionContainer.TryGetSolution(used, produce.TargetSolution, out var solution))
             return false;
 
         // Can produce even have fractional amounts? Does it matter if they do?

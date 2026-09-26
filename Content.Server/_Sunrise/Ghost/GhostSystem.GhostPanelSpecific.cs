@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Content.Shared._Sunrise.Ghost;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Roles;
@@ -82,7 +82,7 @@ public sealed partial class GhostSystem
     private bool TryGetPlayerJobInfo(EntityUid? mind,
         [NotNullWhen(true)] out string? job, out string department)
     {
-        department = _prototypeManager.Index(UnknownDepartmentPrototype).ID;
+        department = ProtoMan.Index(UnknownDepartmentPrototype).ID;
         job = null;
 
         if (!_jobs.MindTryGetJob(mind, out var jobPrototype))

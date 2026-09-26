@@ -62,7 +62,7 @@
         - CannotSuicide
         - DoorBumpOpener
     - type: CultMember
-    - type: DamageOverlay
+    - type: SunriseDamagePopup
     - type: TTS
       voice: dragon_knight_dragon_dota_2
 

@@ -1,0 +1,29 @@
+- type: !PartialOnly entity
+  id: ClothingUniformJumpsuitWarden
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Uniforms/Jumpsuit/warden.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Uniforms/Jumpsuit/warden.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#C12D30"
+        sprite: Clothing/Uniforms/Jumpsuits/Color/color.rsi
+      - state: overlay-inhand-left
+        sprite: _Sunrise/Clothing/Uniforms/Jumpsuit/warden.rsi
+      right:
+      - state: inhand-right
+        color: "#C12D30"
+        sprite: Clothing/Uniforms/Jumpsuits/Color/color.rsi
+      - state: overlay-inhand-right
+        sprite: _Sunrise/Clothing/Uniforms/Jumpsuit/warden.rsi
+
+- type: !PartialOnly entity
+  id: ClothingUniformJumpsuitSeniorOfficer
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Uniforms/Jumpsuit/senior_officer.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Uniforms/Jumpsuit/senior_officer.rsi

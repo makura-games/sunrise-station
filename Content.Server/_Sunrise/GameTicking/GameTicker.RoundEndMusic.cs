@@ -62,7 +62,7 @@ public sealed partial class GameTicker
         if (string.IsNullOrWhiteSpace(collectionId))
             return false;
 
-        if (!_prototypeManager.TryIndex<SoundCollectionPrototype>(collectionId, out _))
+        if (!ProtoMan.TryIndex<SoundCollectionPrototype>(collectionId, out _))
         {
             Log.Warning($"Invalid round-end music sound collection specified: {collectionId}");
             return false;
@@ -79,7 +79,7 @@ public sealed partial class GameTicker
         if (string.IsNullOrWhiteSpace(prototypeId))
             return false;
 
-        if (!_prototypeManager.TryIndex<RoundEndMusicPoolPrototype>(prototypeId, out var pool))
+        if (!ProtoMan.TryIndex<RoundEndMusicPoolPrototype>(prototypeId, out var pool))
         {
             Log.Warning($"Invalid round-end music prototype specified: {prototypeId}");
             return false;

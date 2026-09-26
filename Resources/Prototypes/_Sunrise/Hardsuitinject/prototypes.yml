@@ -68,9 +68,10 @@
   - type: Action
     itemIconStyle: NoItem
     useDelay: 1 # equip noise spam.
-    icon:
-      sprite: _Sunrise/HardsuitInjection/main.rsi
-      state: closeopen
+  - type: Sprite
+    sprite: _Sunrise/HardsuitInjection/main.rsi
+    layers:
+    - state: closeopen
   - type: InstantAction
     event: !type:ToggleECEvent
 
@@ -82,9 +83,10 @@
   - type: Action
     itemIconStyle: NoItem
     useDelay: 1 # equip noise spam.
-    icon:
-      sprite: _Sunrise/HardsuitInjection/main.rsi
-      state: inject
+  - type: Sprite
+    sprite: _Sunrise/HardsuitInjection/main.rsi
+    layers:
+    - state: inject
   - type: InstantAction
     event: !type:InjectionEvent
 

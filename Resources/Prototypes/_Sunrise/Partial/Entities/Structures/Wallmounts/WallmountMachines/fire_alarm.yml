@@ -1,0 +1,34 @@
+- type: !PartialOnly entity
+  id: FireAlarm
+  components:
+  - type: AtmosAlarmableVisuals
+    alarmStates:
+      Normal: fire_off
+      Warning: fire_off
+      Danger: fire_on
+      Emagged: fire_emagged
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/air_monitors.rsi
+    offset: 0, 0
+    layers: !Clear
+    - state: fire0
+      map: ["fireAlarmBase"]
+    - state: fire_off
+      map: ["fireAlarmState"]
+    - state: fire_b2
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+
+- type: !PartialOnly entity
+  id: FireAlarmAssembly
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/air_monitors.rsi
+    layers: !Clear
+    - state: fire_b1
+      map: ["enum.ConstructionVisuals.Layer"]
+  - type: GenericVisualizer
+    visuals:
+      enum.ConstructionVisuals.Key:
+        enum.ConstructionVisuals.Layer:
+          assembly: { state: fire_b1 }
+          electronics: { state: fire_b2 }

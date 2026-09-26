@@ -80,7 +80,17 @@
   abstract: true
   components:
   - type: AlertLevel
-    alertLevelPrototype: stationPrisonAlerts
+    availableAlertLevels:
+    - SunrisePrisonRollCall
+    - SunrisePrisonBreakfast
+    - SunrisePrisonWork
+    - SunrisePrisonExercise
+    - SunrisePrisonRest
+    - SunrisePrisonShower
+    - SunrisePrisonLightsOut
+    - SunrisePrisonLockdown
+    defaultAlertLevel: SunrisePrisonLightsOut
+    currentAlertLevel: SunrisePrisonLightsOut
 
 - type: entity
   id: BaseStationAntagsTargets

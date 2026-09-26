@@ -5,9 +5,10 @@
   components:
   - type: Action
     useDelay: 1
-    icon:
-      sprite: Clothing/Eyes/Hud/sec.rsi
-      state: icon
+  - type: Sprite
+    sprite: Clothing/Eyes/Hud/sec.rsi
+    layers:
+    - state: icon
   - type: TargetAction
     range: -1
   - type: EntityTargetAction

@@ -19,7 +19,6 @@
   startingGear: SeniorOfficerGear
   icon: "JobIconSeniorOfficer"
   supervisors: job-supervisors-hos
-  displayWeight: 60
   alternativeTitles:
   - job-alt-title-training-officer
   - job-alt-title-senior-officer

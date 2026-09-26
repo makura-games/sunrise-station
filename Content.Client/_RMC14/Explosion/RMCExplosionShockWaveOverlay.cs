@@ -67,7 +67,7 @@ public sealed partial class RMCExplosionShockWaveOverlay : Overlay, IEntityEvent
             currentTime = Math.Clamp(currentTime, 0.1f, float.MaxValue);
 
             _positions[_count] = tempCoords;
-            _falloffPower[_count] = distortion.FalloffPower ?? 20f; // Sunrise edit - фолбек
+            _falloffPower[_count] = distortion.FalloffPower ?? 20f; // фолбек
             _sharpness[_count] = distortion.Sharpness;
             _width[_count] = distortion.Width ?? 0.8f;
             _times[_count] = currentTime;

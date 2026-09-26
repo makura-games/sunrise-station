@@ -64,7 +64,7 @@ public static class MarkingEffectCompatibility
                 return true;
             }
 
-            if (Color.TryFromHex(serialized) is { } gradientColor)
+            if (Color.TryFromHex(serialized, out var gradientColor))
             {
                 var gradient = new GradientMarkingEffect();
                 gradient.Colors["base"] = baseColor;

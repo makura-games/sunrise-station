@@ -1,96 +1,131 @@
-- type: alertLevels
-  id: stationAlerts
-  defaultLevel: green
-  levels:
-    green:
-      announcement: alert-level-green-announcement
-      color: Green
-      emergencyLightColor: LawnGreen
-      shuttleTime: 600
-      # Sunrise edit start
-      extendedAccessOptions:
-        announcement: access-system-accesses-delay-green
-      # Sunrise edit end
-    blue:
-      announcement: alert-level-blue-announcement
-      sound: /Audio/Misc/bluealert.ogg
-      color: DodgerBlue
-      forceEnableEmergencyLights: true
-      emergencyLightColor: DodgerBlue
-      shuttleTime: 600
-      # Sunrise edit start
-      extendedAccessOptions:
-        announcement: access-system-accesses-delay-blue
-      # Sunrise edit end
-    violet:
-      announcement: alert-level-violet-announcement
-      sound: /Audio/Misc/notice1.ogg
-      color: Violet
-      emergencyLightColor: Violet
-      forceEnableEmergencyLights: true
-      shuttleTime: 600
-    yellow:
-      announcement: alert-level-yellow-announcement
-      sound: /Audio/Misc/notice1.ogg
-      color: Yellow
-      emergencyLightColor: Goldenrod
-      forceEnableEmergencyLights: true
-      shuttleTime: 600
-      # Sunrise edit start
-      extendedAccessOptions:
-        announcement: access-system-accesses-delay-yellow
-      # Sunrise edit end
-    red:
-      announcement: alert-level-red-announcement
-      sound: /Audio/Misc/redalert.ogg
-      color: Red
-      emergencyLightColor: Red
-      forceEnableEmergencyLights: true
-      shuttleTime: 600 #No reduction in time as we don't have swiping for red alert like in /tg/. Shuttle times are intended to create friction, so having a way to brainlessly bypass that would be dumb.
-      # Sunrise edit start
-      extendedAccessOptions:
-        announcement: access-system-accesses-delay-red
-      # Sunrise edit end
-    gamma:
-      announcement: alert-level-gamma-announcement
-      selectable: false
-      sound:
-        path: /Audio/_Sunrise/Misc/siren.ogg # Sunrise-Edit
-        params:
-          volume: -2
-      disableSelection: true
-      color: PaleVioletRed
-      emergencyLightColor: PaleVioletRed
-      forceEnableEmergencyLights: true
-      # Sunrise edit start
-      extendedAccessOptions:
-        announcement: access-system-accesses-delay-gamma
-      # Sunrise edit end
-    delta:
-      announcement: alert-level-delta-announcement
-      selectable: false
-      sound:
-        path: /Audio/Misc/delta.ogg
-        params:
-          volume: -3
-      disableSelection: true
-      color: DarkRed
-      emergencyLightColor: Orange
-      forceEnableEmergencyLights: true
-      shuttleTime: 1200
-      # Sunrise edit start
-      extendedAccessOptions:
-        delay: 0
-      # Sunrise edit end
-    epsilon:
-      announcement: alert-level-epsilon-announcement
-      selectable: false
-      sound:
-        path: /Audio/Misc/epsilon.ogg
-        params:
-          volume: -2
-      disableSelection: true
-      color: DarkViolet
-      emergencyLightColor: DarkViolet
-      forceEnableEmergencyLights: true
-      shuttleTime: 1200
+- type: alertLevel
+  id: Green
+  name: alert-level-green
+  announcement: alert-level-green-announcement
+  instructions: alert-level-green-instructions
+  color: Green
+  emergencyLightColor: LawnGreen
+  shuttleTime: 600
+  # Sunrise edit start - настройки автоматического обновления доступов
+  extendedAccessOptions:
+    announcement: access-system-accesses-delay-green
+  # Sunrise edit end
+
+- type: alertLevel
+  id: Blue
+  name: alert-level-blue
+  announcement: alert-level-blue-announcement
+  instructions: alert-level-blue-instructions
+  sound: /Audio/Misc/bluealert.ogg
+  color: DodgerBlue
+  emergencyLightColor: DodgerBlue
+  forceEnableEmergencyLights: true
+  shuttleTime: 600
+  # Sunrise edit start - настройки автоматического обновления доступов
+  extendedAccessOptions:
+    announcement: access-system-accesses-delay-blue
+  # Sunrise edit end
+
+- type: alertLevel
+  id: Yellow
+  name: alert-level-yellow
+  announcement: alert-level-yellow-announcement
+  instructions: alert-level-yellow-instructions
+  sound: /Audio/Misc/notice1.ogg
+  color: Yellow
+  emergencyLightColor: Goldenrod
+  forceEnableEmergencyLights: true
+  shuttleTime: 600
+  # Sunrise edit start - настройки автоматического обновления доступов
+  extendedAccessOptions:
+    announcement: access-system-accesses-delay-yellow
+  # Sunrise edit end
+
+- type: alertLevel
+  id: Red
+  name: alert-level-red
+  announcement: alert-level-red-announcement
+  instructions: alert-level-red-instructions
+  sound: /Audio/Misc/redalert.ogg
+  color: Red
+  emergencyLightColor: Red
+  forceEnableEmergencyLights: true
+  shuttleTime: 600
+  # No reduction in time as we don't have swiping for red alert like in /tg/.
+  # Shuttle times are intended to create friction,
+  # so having a way to brainlessly bypass that would be dumb.
+  # Sunrise edit start - настройки автоматического обновления доступов
+  extendedAccessOptions:
+    announcement: access-system-accesses-delay-red
+  # Sunrise edit end
+
+- type: alertLevel
+  id: Violet
+  name: alert-level-violet
+  announcement: alert-level-violet-announcement
+  instructions: alert-level-violet-instructions
+  sound: /Audio/Misc/notice1.ogg
+  color: Violet
+  emergencyLightColor: Violet
+  forceEnableEmergencyLights: true
+  shuttleTime: 600
+
+- type: alertLevel
+  abstract: true
+  id: BaseDelta
+  name: alert-level-delta
+  instructions: alert-level-delta-instructions
+  selectable: false
+  disableSelection: true
+  forceEnableEmergencyLights: true
+  shuttleTime: 1200
+
+- type: alertLevel
+  parent: BaseDelta
+  id: DeltaNuke
+  announcement: alert-level-delta-nuke-announcement
+  sound:
+    path: /Audio/Misc/delta.ogg
+    params:
+      volume: -3
+  color: DarkRed
+  emergencyLightColor: Orange
+  # Sunrise edit start - немедленно обновляем доступы при дельта-коде
+  extendedAccessOptions:
+    delay: 0
+  # Sunrise edit end
+
+- type: alertLevel
+  id: Epsilon
+  name: alert-level-epsilon
+  announcement: alert-level-epsilon-announcement
+  instructions: alert-level-epsilon-instructions
+  selectable: false
+  sound:
+    path: /Audio/Misc/epsilon.ogg
+    params:
+      volume: -2
+  disableSelection: true
+  color: DarkViolet
+  emergencyLightColor: DarkViolet
+  forceEnableEmergencyLights: true
+  shuttleTime: 1200
+
+- type: alertLevel
+  id: Gamma
+  name: alert-level-gamma
+  announcement: alert-level-gamma-announcement
+  instructions: alert-level-gamma-instructions
+  selectable: false
+  # Sunrise edit start - сохраняем сирену и автоматическое обновление доступов Sunrise
+  sound:
+    path: /Audio/_Sunrise/Misc/siren.ogg
+    params:
+      volume: -2
+  extendedAccessOptions:
+    announcement: access-system-accesses-delay-gamma
+  # Sunrise edit end
+  disableSelection: true
+  color: PaleVioletRed
+  emergencyLightColor: PaleVioletRed
+  forceEnableEmergencyLights: true

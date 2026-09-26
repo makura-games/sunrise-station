@@ -327,7 +327,7 @@
   - type: ContainerFill
     containers:
       borg_brain:
-      - Sofia # Sunrise-Edit
+      - Sofia
       borg_module:
       - BorgModuleSyndicateGeneric
   - type: ItemSlots
@@ -336,7 +336,7 @@
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHyper
   - type: RandomMetadata
-    nameSegments: [NamesDeathCommando]
+    nameSegments: [NamesDeathCommandoFirst, NamesDeathCommandoLast]
 
 - type: entity
   parent: PlayerSyndicateReaperBorgDerelict
@@ -359,7 +359,7 @@
   - type: ContainerFill
     containers:
       borg_brain:
-      - Sofia # Sunrise-Edit
+      - Sofia
       borg_module:
       - BorgModuleSyndicateGeneric
       - BorgScoutModuleSyndicateTool
@@ -369,7 +369,7 @@
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHyper
   - type: RandomMetadata
-    nameSegments: [NamesDeathCommando]
+    nameSegments: [NamesDeathCommandoFirst, NamesDeathCommandoLast]
 
 - type: entity
   parent: PlayerSyndicateSaboteurBorgDerelict
@@ -392,7 +392,7 @@
   - type: ContainerFill
     containers:
       borg_brain:
-      - Sofia # Sunrise-Edit
+      - Sofia
       borg_module:
       - BorgModuleSyndicateGeneric
       - BorgModuleSyndicateMedical
@@ -402,7 +402,7 @@
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHyper
   - type: RandomMetadata
-    nameSegments: [NamesDeathCommando]
+    nameSegments: [NamesDeathCommandoFirst, NamesDeathCommandoLast]
 
 - type: entity
   parent: PlayerSyndicateMedicalBorgDerelict

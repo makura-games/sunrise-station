@@ -11,11 +11,9 @@ public sealed partial class ProjectileSpellEvent : WorldTargetActionEvent
     [DataField(required: true)]
     public EntProtoId Prototype;
 
-    // Sunrise start
     /// <summary>
-    /// Projectile launch speed.
+    /// How fast the projectile should travel
     /// </summary>
     [DataField]
-    public float Speed = 25f;
-    // Sunrise end
+    public float ProjectileSpeed = 25f;
 }

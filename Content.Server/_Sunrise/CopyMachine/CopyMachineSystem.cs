@@ -27,7 +27,6 @@ public sealed partial class CopyMachineSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private PaperSystem _paper = default!;
     [Dependency] private UserInterfaceSystem _userInterface = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;
@@ -115,7 +114,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
     private bool TryGetConfiguredTemplatePool([NotNullWhen(true)] out DocTemplatePoolPrototype? templatePoolPrototype)
     {
         var templatePoolId = _configManager.GetCVar(SunriseCCVars.DocumentTemplatePool);
-        return _prototypeManager.TryIndex(templatePoolId, out templatePoolPrototype);
+        return ProtoMan.TryIndex(templatePoolId, out templatePoolPrototype);
     }
 
     private void RebuildDocumentTemplateContentCache()
@@ -127,7 +126,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
 
         foreach (var templateId in templatePoolPrototype.Templates)
         {
-            if (!_prototypeManager.TryIndex(templateId, out var templatePrototype))
+            if (!ProtoMan.TryIndex(templateId, out var templatePrototype))
                 continue;
 
             using var file = _resourceManager.ContentFileReadText(templatePrototype.Content);
@@ -160,7 +159,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
 
         foreach (var templateId in templatePoolPrototype.Templates)
         {
-            if (!_prototypeManager.TryIndex(templateId, out var templatePrototype))
+            if (!ProtoMan.TryIndex(templateId, out var templatePrototype))
                 continue;
 
             if (!IsTemplateCategoryAllowed(ent, templatePrototype.Category))
@@ -178,7 +177,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
         if (ent.Comp.TemplateCategoryGroupId is not { } groupId)
             return true;
 
-        return _prototypeManager.TryIndex(groupId, out DocTemplateCategoryGroupPrototype? group) &&
+        return ProtoMan.TryIndex(groupId, out DocTemplateCategoryGroupPrototype? group) &&
             group.Categories.Contains(categoryId);
     }
 
@@ -246,7 +245,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
 
     private void OnMapInit(Entity<CopyMachineComponent> ent, ref MapInitEvent args)
     {
-        _itemSlots.AddItemSlot(ent, CopyMachineComponent.CopySlotId, ent.Comp.CopySlot);
+        _itemSlots.AddItemSlot((ent.Owner, null), CopyMachineComponent.CopySlotId, ent.Comp.CopySlot);
         UpdateRunningAppearance(ent, false);
 
         UpdateAvailableTemplates(ent);
@@ -268,7 +267,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
 
         foreach (var templateId in templatePoolPrototype.Templates)
         {
-            if (!_prototypeManager.TryIndex(templateId, out var templatePrototype))
+            if (!ProtoMan.TryIndex(templateId, out var templatePrototype))
                 continue;
 
             if (!IsTemplateCategoryAllowed(ent, templatePrototype.Category))
@@ -304,7 +303,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
     {
         if (jobType == CopyMachineJobType.Print &&
             templateId != null &&
-            _prototypeManager.TryIndex<DocTemplatePrototype>(templateId, out var templatePrototype))
+            ProtoMan.TryIndex<DocTemplatePrototype>(templateId, out var templatePrototype))
         {
             return Loc.GetString(templatePrototype.Name);
         }
@@ -393,7 +392,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
         if (!HasAvailableTemplate(ent, templateId))
             return false;
 
-        if (!_prototypeManager.TryIndex(templateId, out DocTemplatePrototype? templatePrototype))
+        if (!ProtoMan.TryIndex(templateId, out DocTemplatePrototype? templatePrototype))
             return false;
 
         if (!IsTemplateCategoryAllowed(ent, templatePrototype.Category))
@@ -422,7 +421,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
             return false;
 
         if (!_documentContentByTemplateId.TryGetValue(templateId, out var templateContent) ||
-            !_prototypeManager.TryIndex<DocTemplatePrototype>(templateId, out var templatePrototype))
+            !ProtoMan.TryIndex<DocTemplatePrototype>(templateId, out var templatePrototype))
             return false;
 
         var paperEntity = Spawn(ent.Comp.PaperProtoId, Transform(ent).Coordinates);
