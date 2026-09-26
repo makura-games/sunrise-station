@@ -1,7 +1,6 @@
 using System.Numerics;
 using Content.Server.Chat.Systems;
 using Content.Shared.Tag;
-using Content.Shared.Timing;
 using Content.Server.GameTicking;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
@@ -30,6 +29,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared.Timing;
 
 namespace Content.Server._Sunrise.Shuttles.Systems;
 

@@ -85,7 +85,7 @@ public sealed partial class PlantAnalyzerSystem : AbstractAnalyzerSystem<PlantAn
                     lifespan: plant.Lifespan,
                     dead: plantHolder.Dead,
                     viable: !_entityManager.HasComponent<PlantTraitUnviableComponent>(plantUid.Value),
-                    mutating: plantHolder.MutationLevel > 0f,
+                    mutating: plantHolder.MutationLevels.Values.Any(level => level > 0f),
                     kudzu: _entityManager.HasComponent<PlantTraitKudzuComponent>(plantUid.Value)
                 );
 

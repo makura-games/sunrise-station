@@ -1,5 +1,5 @@
 department-Cargo-description = Выполняйте запросы, зарабатывайте космокредиты и доставляйте экипажу полезные припасы.
-department-Civilian-description = Выполняйте небольшие полезные задания для поддержания нормальной и сытой работы станции.
+department-Civilian-description = Члены экипажа без официальной должности.
 department-Command-description = Управляйте экипажем и обеспечивайте его эффективную работу.
 department-CentralCommand-description = Управляйте командой и следите за их эффективной работой.
 department-Engineering-description = Поддерживайте наличие электроэнергии и целостность станции.
@@ -8,3 +8,4 @@ department-Security-description = Поддерживайте порядок на
 department-Science-description = Изучайте артефакты и аномалии, обеспечивайте членов экипажа новыми продвинутыми устройствами.
 department-Silicon-description = Соблюдайте свои законы и служите экипажу.
 department-Specific-description = Должности, которые есть не на всех станциях.
+department-Service-description = Обеспечивайте основные физические и психологические потребности экипажа.

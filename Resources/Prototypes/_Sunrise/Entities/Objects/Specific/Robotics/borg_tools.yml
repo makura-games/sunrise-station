@@ -452,7 +452,7 @@
     selectedMode: FullAuto
     fireRate: 3.5
   - type: BatteryAmmoProvider
-    proto: BulletDisablerSmg
+    proto: BulletDisablerSmgSlowing
     fireCost: 50
 
 - type: entity

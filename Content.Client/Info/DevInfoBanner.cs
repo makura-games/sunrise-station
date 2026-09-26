@@ -1,3 +1,4 @@
+using Content.Client.Changelog;
 using Content.Client.Credits;
 using Content.Client.UserInterface.Systems.EscapeMenu;
 using Content.Shared.CCVar;

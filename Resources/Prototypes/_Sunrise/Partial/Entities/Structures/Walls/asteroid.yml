@@ -27,6 +27,7 @@
   id: AsteroidRockCoal
   components:
   - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
     layers: !Clear
     - state: rock_asteroid
     - map: ["enum.EdgeLayer.South"]
@@ -44,6 +45,7 @@
   id: AsteroidRockGold
   components:
   - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
     layers: !Clear
     - state: rock_asteroid
     - map: ["enum.EdgeLayer.South"]
@@ -61,6 +63,7 @@
   id: AsteroidRockDiamond
   components:
   - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
     layers: !Clear
     - state: rock_asteroid
     - map: ["enum.EdgeLayer.South"]
@@ -78,6 +81,7 @@
   id: AsteroidRockPlasma
   components:
   - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
     layers: !Clear
     - state: rock_asteroid
     - map: ["enum.EdgeLayer.South"]
@@ -95,6 +99,7 @@
   id: AsteroidRockQuartz
   components:
   - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
     layers: !Clear
     - state: rock_asteroid
     - map: ["enum.EdgeLayer.South"]
@@ -112,6 +117,7 @@
   id: AsteroidRockSilver
   components:
   - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
     layers: !Clear
     - state: rock_asteroid
     - map: ["enum.EdgeLayer.South"]
@@ -129,6 +135,7 @@
   id: AsteroidRockTin
   components:
   - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
     layers: !Clear
     - state: rock_asteroid
     - map: ["enum.EdgeLayer.South"]
@@ -146,6 +153,7 @@
   id: AsteroidRockUranium
   components:
   - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
     layers: !Clear
     - state: rock_asteroid
     - map: ["enum.EdgeLayer.South"]
@@ -163,6 +171,7 @@
   id: AsteroidRockSalt
   components:
   - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
     layers: !Clear
     - state: rock_asteroid
     - map: ["enum.EdgeLayer.South"]
@@ -180,6 +189,7 @@
   id: AsteroidRockArtifactFragment
   components:
   - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
     layers: !Clear
     - state: rock_asteroid
     - map: ["enum.EdgeLayer.South"]
@@ -197,6 +207,7 @@
   id: AsteroidRockGibtonite
   components:
   - type: Sprite
+    sprite: _Sunrise/Structures/Walls/rock.rsi
     layers: !Clear
     - state: rock_asteroid
     - map: ["enum.EdgeLayer.South"]
