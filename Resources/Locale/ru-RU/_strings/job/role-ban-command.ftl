@@ -9,7 +9,7 @@ cmd-roleban-hint-1 = <name or user ID>
 cmd-roleban-hint-2 = <job>
 cmd-roleban-hint-3 = <reason>
 cmd-roleban-hint-4 = [продолжительность в минутах, не указывать или 0 для навсегда]
-cmd-roleban-hint-5 = [severity]
+cmd-roleban-hint-5 = [серьёзность]
 cmd-roleban-hint-duration-1 = Навсегда
 cmd-roleban-hint-duration-2 = 1 день
 cmd-roleban-hint-duration-3 = 3 дня
@@ -21,6 +21,9 @@ cmd-roleban-hint-duration-6 = 1 месяц
 
 cmd-roleunban-desc = Возвращает пользователю возможность играть на роли
 cmd-roleunban-help = Использование: roleunban <role ban id>
+cmd-roleunban-unable-to-parse-id =
+    Не удалось распознать { $id } как целочисленный ID бана.
+    { $help }
 
 ## Completion result hints
 
@@ -29,25 +32,21 @@ cmd-roleunban-hint-1 = <role ban id>
 ### Localization for roleban list command
 
 cmd-rolebanlist-desc = Список запретов ролей игрока
-cmd-rolebanlist-help = Использование: <name or user ID> [include unbanned]
+cmd-rolebanlist-help = Использование: <name or user ID> [включая незаблокированных]
 
 ## Completion result hints
 
 cmd-rolebanlist-hint-1 = <name or user ID>
-cmd-rolebanlist-hint-2 = [include unbanned]
+cmd-rolebanlist-hint-2 = [включая незаблокированных]
 cmd-roleban-minutes-parse = { $time } - недопустимое количество минут.\n{ $help }
 cmd-roleban-severity-parse = ${ severity } не является допустимым уровнем строгости\n{ $help }.
 cmd-roleban-arg-count = Недопустимое количество аргументов.
 cmd-roleban-job-parse = Работа { $job } не существует.
 cmd-roleban-name-parse = Невозможно найти игрока с таким именем.
-cmd-roleban-existing = { $target } уже имеет запрет на роль { $role }.
 cmd-roleban-success = { $target } запрещено играть на роли { $role } по причине { $reason } { $length }.
 cmd-roleban-inf = навсегда
 cmd-roleban-until = до { $expires }
 # Department bans
 cmd-departmentban-desc = Запрещает пользователю играть на ролях, входящих в отдел
 cmd-departmentban-help = Использование: departmentban <name or user ID> <department> <reason> [продолжительность в минутах, не указывать или 0 для навсегда]
-cmd-roleunban-unable-to-parse-id = Не удалось распознать {$id} как целочисленный ID бана.
-                                   {$help}
-
-## Completion result hints
+cmd-roleban-existing = { $target } уже имеет запрет на роль { $role }.

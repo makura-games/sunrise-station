@@ -19,8 +19,9 @@ loadout-group-blueshield-jumpsuit = { loadout-group-jumpsuit }
 loadout-group-blueshield-bra = { loadout-group-bra }
 loadout-group-blueshield-pants = { loadout-group-pants }
 loadout-group-brigmedic-backpack = { loadout-group-back }
-loadout-group-brigmedic-jumpsuit = { loadout-group-jumpsuit }
 loadout-group-brigmedic-outer-clothing = { loadout-group-outer-clothing }
+loadout-group-brigmedic-jumpsuit = { loadout-group-jumpsuit }
+loadout-group-sunrise-injectors = { loadout-group-trinkets }
 loadout-group-cargo-technician-gloves = { loadout-group-gloves }
 loadout-group-cargo-technician-mask = { loadout-group-mask }
 loadout-group-cargo-technician-neck = { loadout-group-neck }
@@ -31,7 +32,6 @@ loadout-group-chemist-head = { loadout-group-head }
 loadout-group-chemist-mask = { loadout-group-mask }
 loadout-group-chemist-neck = { loadout-group-neck }
 loadout-group-chemist-shoes = { loadout-group-shoes }
-loadout-group-chemist-misc = { loadout-group-common-misc-items }
 loadout-group-chief-engineer-backpack = { loadout-group-back }
 loadout-group-chief-engineer-gloves = { loadout-group-gloves }
 loadout-group-chief-engineer-mask = { loadout-group-mask }
@@ -112,19 +112,15 @@ loadout-group-station-engineer-gloves = { loadout-group-gloves }
 loadout-group-station-engineer-mask = { loadout-group-mask }
 loadout-group-station-engineer-neck = { loadout-group-neck }
 loadout-group-uniformntr = { loadout-group-jumpsuit }
+loadout-group-hats = { loadout-group-head }
+loadout-group-prisoner-loot = { loadout-group-storage }
+loadout-group-prison-security-loot = { loadout-group-storage }
+loadout-group-prison-jumpsuit = { loadout-group-jumpsuit }
+loadout-group-chemist-misc = { loadout-group-common-misc-items }
 loadout-group-commaid-head = { loadout-group-head }
 loadout-group-commaid-jumpsuit = { loadout-group-jumpsuit }
 loadout-group-commaid-backpack = { loadout-group-back }
 loadout-group-commaid-neck = { loadout-group-neck }
 loadout-group-commaid-shoes = { loadout-group-shoes }
 loadout-group-commaid-gloves = { loadout-group-gloves }
-
-loadout-group-hats = { loadout-group-head }
-
-loadout-group-prisoner-loot = { loadout-group-storage }
-loadout-group-prison-security-loot = { loadout-group-storage }
-
-loadout-group-prison-jumpsuit = { loadout-group-jumpsuit }
-
 loadout-group-medical-glasses = { loadout-group-glasses }
-loadout-group-sunrise-injectors = { loadout-group-trinkets }

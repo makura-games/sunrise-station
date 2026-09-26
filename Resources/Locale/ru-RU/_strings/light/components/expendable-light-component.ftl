@@ -1,4 +1,5 @@
 expendable-light-start-verb = Зажечь
+expendable-light-spent-prefix = израсходованный { $baseName }
 expendable-light-spent-flare-name = сгоревший фальшфейер
 expendable-light-spent-flare-desc = Похоже, этот фальшфейер догорел. Какой облом.
 expendable-light-burnt-torch-name = сгоревший факел
@@ -9,4 +10,3 @@ expendable-light-spent-purple-glowstick-name = погасший фиолетов
 expendable-light-spent-yellow-glowstick-name = погасший жёлтый химсвет
 expendable-light-spent-blue-glowstick-name = погасший синий химсвет
 expendable-light-spent-glowstick-desc = Похоже, этот химсвет погас. Как трагично.
-expendable-light-spent-prefix = израсходованный {$baseName}

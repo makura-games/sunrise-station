@@ -1,5 +1,5 @@
-ent-MobHumanFugitive = Беглец
+ent-MobHumanFugitive = беглец
     .desc = { ent-MobHuman.desc }
-ent-SpawnPointGhostFugitive = Беглец
+ent-SpawnPointGhostFugitive = беглец
     .suffix = НЕ МАППИТЬ, беглец
     .desc = { ent-MarkerBase.desc }

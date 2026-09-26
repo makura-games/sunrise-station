@@ -1,9 +1,9 @@
-ent-CrateSyndicateBullfrogBundle = ящик «Жабык»
-    .desc = Набор с комплектующими для сборки шаттл-пушки EXP-3600g «Жабык».
 ent-CrateSyndicateShuttleBundle = ящик набора шаттла синдиката
     .desc = Набор с комплектующими для сборки шаттла синдиката, кроме платы консоли шаттла.
 ent-CrateSyndicateFriendshipBundle = ящик набора «Дружба»
     .desc = Набор с комплектующими для сборки шаттл-пушки BAL-20 «Дружба».
+ent-CrateSyndicateBullfrogBundle = ящик «Жабык»
+    .desc = Набор с комплектующими для сборки шаттл-пушки EXP-3600g «Жабык».
 ent-CrateSyndicateLongbowBundle = ящик набора «Лонгбоу»
     .desc = Набор с комплектующими для сборки шаттл-пушки BAL-15 «Лонгбоу».
 ent-CrateSyndicateQuadlingBundle = ящик набора «Квадлинг»

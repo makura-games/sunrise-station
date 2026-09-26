@@ -1,8 +1,8 @@
 ent-BaseCritAction = { ent-BaseMentalAction }
     .desc = { ent-BaseMentalAction.desc }
-ent-ActionCritSuccumb = Сдаться
+ent-ActionCritSuccumb = сдаться
     .desc = Смириться с судьбой.
-ent-ActionCritFakeDeath = Притвориться мёртвым
+ent-ActionCritFakeDeath = притвориться мёртвым
     .desc = Притвориться, что вы делаете свой последний вдох, оставаясь при этом живым.
-ent-ActionCritLastWords = Произнести последние слова
+ent-ActionCritLastWords = произнести последние слова
     .desc = Прошептать свои последние слова всем, кто находится поблизости, а затем сдаться на милость судьбы. Вам доступно только 30 символов.

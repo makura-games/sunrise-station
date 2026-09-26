@@ -1,4 +1,3 @@
-# Sunrise-Edit - Completely updated kitchen spike localization strings to match en-US and resolve Unknown Variable errors
 comp-kitchen-spike-begin-hook-self = Вы начинаете насаживать себя на { $hook }!
 comp-kitchen-spike-begin-hook-self-other = { CAPITALIZE($victim) } начинает насаживать себя на { $hook }!
 comp-kitchen-spike-begin-hook-other-self = Вы начинаете насаживать { CAPITALIZE($victim) } на { $hook }!

@@ -10,7 +10,7 @@
   startingGear: MagistratGear
   icon: "JobIconMagistrat"
   supervisors: job-supervisors-centcom
-  setPreference: false
+  setPreference: true
   radioBold: true
   access:
   - Magistrat

@@ -1,3 +1,5 @@
+## Default
+
 teleportation-menu-default-window-title = Меню телепортации
 
 ## Wizard

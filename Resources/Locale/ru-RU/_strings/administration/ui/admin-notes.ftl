@@ -35,8 +35,6 @@ admin-notes-message-seen = Просмотрено
 admin-notes-banned-from = В бане
 admin-notes-the-server = на сервере
 admin-notes-permanently = перманентно
-# Verb
-admin-notes-verb-text = Заметки
 admin-notes-days = { $days } дней
 admin-notes-hours = { $hours } часов
 admin-notes-minutes = { $minutes } минут
@@ -63,6 +61,7 @@ admin-note-editor-expiry-label-params = Истекает: { $date } (через 
 admin-note-editor-expiry-label-expired = Истёк
 admin-note-editor-expiry-placeholder = Укажите срок действия (yyyy-MM-dd HH:mm:ss)
 admin-note-editor-submit = Подтвердить
+admin-note-editor-submit-confirm = Вы уверены?
 # Time
 admin-note-button-minutes = Минуты
 admin-note-button-hours = Часы
@@ -71,7 +70,8 @@ admin-note-button-weeks = Недели
 admin-note-button-months = Месяцы
 admin-note-button-years = Годы
 admin-note-button-centuries = Века
-admin-note-editor-submit-confirm = Вы уверены?
+# Verb
+admin-notes-verb-text = Заметки
 # Watchlist and message login
 admin-notes-watchlist = Наблюдение над { $player }: { $message }
 admin-notes-new-message = Вы получили админ сообщение от { $admin }: { $message }

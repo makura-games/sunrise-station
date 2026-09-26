@@ -1,13 +1,9 @@
 code-console-verb-seal-name = запечатать порты
 code-console-verb-seal-desc = Закрывает доступ к портам, делая невозможным перепривязку устройства.
-
 code-console-user-interface-title = Кодовая консоль
-
 code-console-interface-code-waiting = ВВЕДИТЕ КОД
 code-console-interface-opened = УСТРОЙСТВО АКТИВНО
-
 code-console-user-interface-activate-button = Активировать
 code-console-user-interface-lock-button = Заблокировать
-
 signal-port-name-wrong-code = Неверный ввод
 signal-port-description-wrong-code = Активируется каждый раз, когда код введён неверно.

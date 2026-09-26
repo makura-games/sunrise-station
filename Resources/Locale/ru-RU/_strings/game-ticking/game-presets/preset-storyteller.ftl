@@ -1,17 +1,17 @@
+ui-vote-storyteller-entry = Рассказчик
+ui-vote-storyteller-title = Выбор типа Рассказчика
+ui-vote-storyteller-auto-set = Доступен только один тип Рассказчика: { $type }. Голосование пропущено.
 storyteller-preset-title = Рассказчик: Классический
 storyteller-preset-description = Судьба станции — в руках незримого режиссера. Он чутко реагирует на происходящее, создавая уникальную историю взлетов и падений вашего экипажа.
 storyteller-preset-calm-title = Рассказчик: Спокойный
 storyteller-preset-calm-description = Затишье в космосе. Рассказчик предпочитает размеренное развитие сюжета, давая экипажу больше времени на передышку и стараясь не разводить лишний хаос.
 storyteller-preset-insane-title = Рассказчик: Безумный
 storyteller-preset-insane-description = Абсолютный хаос. Рассказчик будет безжалостно бросать на станцию одну угрозу за другой, пуская в ход самые коварные и разрушительные события.
-ui-vote-storyteller-entry = Рассказчик
 ui-vote-preset-category-title = Выбор типа игрового режима
 ui-vote-preset-category-regular = Обычные режимы
 ui-vote-preset-category-auto-set = Доступна только одна категория: { $category }. В остальных категориях нет режимов, доступных для запуска. Голосование пропущено.
 ui-vote-preset-category-tie = Ничья! Случайно выбрана категория: { $category }
 ui-vote-preset-category-win = Голосование завершено! Выбрана категория: { $category }
-ui-vote-storyteller-title = Выбор типа Рассказчика
-ui-vote-storyteller-auto-set = Доступен только один тип Рассказчика: { $type }. Голосование пропущено.
 ui-vote-storyteller-type-calm = Спокойный
 ui-vote-storyteller-type-classic = Классический
 ui-vote-storyteller-type-insane = Безумный
@@ -20,47 +20,47 @@ ui-vote-storyteller-type-win = Голосование завершено! Выб
 ui-vote-storyteller-type-calm-name = Спокойный
 ui-vote-storyteller-type-classic-name = Классический
 ui-vote-storyteller-type-insane-name = Безумный
-round-end-summary-window-storyteller-name-label = Активный рассказчик: [color=#7DF9FF]{$storyteller}[/color]
+round-end-summary-window-storyteller-name-label = Активный рассказчик: [color=#7DF9FF]{ $storyteller }[/color]
 round-end-summary-window-storyteller-history-tab-title = История Рассказчика
 round-end-summary-window-storyteller-history-empty = История пуста. В этом раунде не произошло ничего примечательного.
-storyteller-history-event-started = В логах станции зафиксировано начало события: [color=#FF8C00]{$name}[/color].
-storyteller-history-event-ended = Событие [color=#FF8C00]{$name}[/color] завершилось, продлившись {$duration} мин.
-storyteller-history-threat-started = Сенсоры зафиксировали возникновение угрозы: [color=#FF4500]{$name}[/color].
+storyteller-history-event-started = В логах станции зафиксировано начало события: [color=#FF8C00]{ $name }[/color].
+storyteller-history-event-ended = Событие [color=#FF8C00]{ $name }[/color] завершилось, продлившись { $duration } мин.
+storyteller-history-threat-started = Сенсоры зафиксировали возникновение угрозы: [color=#FF4500]{ $name }[/color].
 
 # Randomized crew death templates (using genitive prepositions)
-storyteller-history-crew-death-1 = Член экипажа [color=#FFD700]{$name}[/color] ({$job}) трагически погиб в районе [color=#ADFF2F]{$location}[/color] вследствие [color=#FF69B4]{$cause}[/color].
-storyteller-history-crew-death-2 = В окрестностях [color=#ADFF2F]{$location}[/color] из-за [color=#FF69B4]{$cause}[/color] оборвалась жизнь члена экипажа [color=#FFD700]{$name}[/color] ({$job}).
-storyteller-history-crew-death-3 = Роковой случай настиг [color=#FFD700]{$name}[/color] ({$job}) неподалеку от [color=#ADFF2F]{$location}[/color], причиной смерти послужило [color=#FF69B4]{$cause}[/color].
-storyteller-history-crew-death-4 = Возле [color=#ADFF2F]{$location}[/color] было обнаружено безжизненное тело [color=#FFD700]{$name}[/color] ({$job}), скончавшегося от [color=#FF69B4]{$cause}[/color].
+storyteller-history-crew-death-1 = Член экипажа [color=#FFD700]{ $name }[/color] ({ $job }) трагически погиб в районе [color=#ADFF2F]{ $location }[/color] вследствие [color=#FF69B4]{ $cause }[/color].
+storyteller-history-crew-death-2 = В окрестностях [color=#ADFF2F]{ $location }[/color] из-за [color=#FF69B4]{ $cause }[/color] оборвалась жизнь члена экипажа [color=#FFD700]{ $name }[/color] ({ $job }).
+storyteller-history-crew-death-3 = Роковой случай настиг [color=#FFD700]{ $name }[/color] ({ $job }) неподалеку от [color=#ADFF2F]{ $location }[/color], причиной смерти послужило [color=#FF69B4]{ $cause }[/color].
+storyteller-history-crew-death-4 = Возле [color=#ADFF2F]{ $location }[/color] было обнаружено безжизненное тело [color=#FFD700]{ $name }[/color] ({ $job }), скончавшегося от [color=#FF69B4]{ $cause }[/color].
 
 # Object/Anomaly/Engine spawns
-storyteller-history-singularity-spawned = В [color=#ADFF2F]{$location}[/color] материализовалась гравитационная [color=#FF00FF]сингулярность[/color], искажая пространство вокруг себя.
-storyteller-history-tesla-spawned = В [color=#ADFF2F]{$location}[/color] сокрушительно заискрился новорождённый энергетический шар Теслы.
-storyteller-history-supermatter-spawned = На территории [color=#ADFF2F]{$location}[/color] был запущен и успешно стабилизирован [color=#FF00FF]кристалл Суперматерии[/color].
+storyteller-history-singularity-spawned = В [color=#ADFF2F]{ $location }[/color] материализовалась гравитационная [color=#FF00FF]сингулярность[/color], искажая пространство вокруг себя.
+storyteller-history-tesla-spawned = В [color=#ADFF2F]{ $location }[/color] сокрушительно заискрился новорождённый энергетический шар Теслы.
+storyteller-history-supermatter-spawned = На территории [color=#ADFF2F]{ $location }[/color] был запущен и успешно стабилизирован [color=#FF00FF]кристалл Суперматерии[/color].
 
 # Containment breaches & collapses (literary, non-all-caps)
-storyteller-history-singularity-escaped = Гравитационная [color=#FF00FF]сингулярность[/color] вырвалась из сдерживающих полей в [color=#ADFF2F]{$location}[/color] и начала поглощать станцию.
-storyteller-history-tesla-escaped = Энергетический шар Тесла преодолел сдерживающий барьер в [color=#ADFF2F]{$location}[/color], неся электрическую смерть.
-storyteller-history-supermatter-collapse = [color=#FF00FF]Кристалл Суперматерии[/color] в [color=#ADFF2F]{$location}[/color] достиг предела нестабильности и сколлапсировал.
+storyteller-history-singularity-escaped = Гравитационная [color=#FF00FF]сингулярность[/color] вырвалась из сдерживающих полей в [color=#ADFF2F]{ $location }[/color] и начала поглощать станцию.
+storyteller-history-tesla-escaped = Энергетический шар Тесла преодолел сдерживающий барьер в [color=#ADFF2F]{ $location }[/color], неся электрическую смерть.
+storyteller-history-supermatter-collapse = [color=#FF00FF]Кристалл Суперматерии[/color] в [color=#ADFF2F]{ $location }[/color] достиг предела нестабильности и сколлапсировал.
 
 # Other timeline events
 storyteller-history-explosion-weak = слабый
 storyteller-history-explosion-strong = сильный
 storyteller-history-explosion-destructive = разрушительный
-storyteller-history-large-explosion = Станцию сотряс {$severity} взрыв в [color=#ADFF2F]{$location}[/color].
-storyteller-history-research-complete = Научный сектор торжествует: завершено полное исследование научной дисциплины [color=#1E90FF]{$discipline}[/color]!
-storyteller-history-arrival = Бортовой компьютер зарегистрировал прибытие: [color=#FFD700]{$name}[/color] заступил на пост [color=#00FF7F]{$job}[/color].
-storyteller-history-cryo-departure = [color=#FFD700]{$name}[/color] ({$job}) погрузился в криогенный сон, оставив свои обязанности.
+storyteller-history-large-explosion = Станцию сотряс { $severity } взрыв в [color=#ADFF2F]{ $location }[/color].
+storyteller-history-research-complete = Научный сектор торжествует: завершено полное исследование научной дисциплины [color=#1E90FF]{ $discipline }[/color]!
+storyteller-history-arrival = Бортовой компьютер зарегистрировал прибытие: [color=#FFD700]{ $name }[/color] заступил на пост [color=#00FF7F]{ $job }[/color].
+storyteller-history-cryo-departure = [color=#FFD700]{ $name }[/color] ({ $job }) погрузился в криогенный сон, оставив свои обязанности.
 
 # Alert level codes
-storyteller-history-alert-level-changed = На станции установлен [color={$color}]{$level} код[/color] безопасности.
-storyteller-history-alert-level-ended = Действие [color={$color}]{$level} кода[/color] подошло к концу. Он продлился {$duration} мин.
-storyteller-history-alert-level-changed-with-prev = Действие [color={$prevColor}]{$prev} кода[/color] подошло к концу (он продлился {$duration} мин). На станции установлен [color={$color}]{$level} код[/color] безопасности.
+storyteller-history-alert-level-changed = На станции установлен [color={ $color }]{ $level } код[/color] безопасности.
+storyteller-history-alert-level-ended = Действие [color={ $color }]{ $level } кода[/color] подошло к концу. Он продлился { $duration } мин.
+storyteller-history-alert-level-changed-with-prev = Действие [color={ $prevColor }]{ $prev } кода[/color] подошло к концу (он продлился { $duration } мин). На станции установлен [color={ $color }]{ $level } код[/color] безопасности.
 
 # Genitive prepositions helper
 storyteller-history-location-space-genitive = открытого космоса
 storyteller-history-location-unknown-genitive = неизвестного отсека
-storyteller-history-location-room-genitive = отсека {$room}
+storyteller-history-location-room-genitive = отсека { $room }
 
 # Filters
 storyteller-history-filter-events = События
@@ -93,9 +93,9 @@ storyteller-cause-death-cellular = необратимого разрушения
 
 # Custom rule metadata literary descriptions
 storyteller-metadata-solarflare-start = Светило разразилось мощнейшим выбросом плазмы: на станцию обрушилась [color=#FF8C00]Солнечная вспышка[/color].
-storyteller-metadata-solarflare-end = Солнечная активность стабилизировалась, [color=#FF8C00]Солнечная вспышка[/color] завершилась после {$duration} мин. буйства.
+storyteller-metadata-solarflare-end = Солнечная активность стабилизировалась, [color=#FF8C00]Солнечная вспышка[/color] завершилась после { $duration } мин. буйства.
 storyteller-metadata-ionstorm-start = Космическая аномалия настигла энергосистемы: станция вошла в зону действия [color=#1E90FF]Ионного шторма[/color].
-storyteller-metadata-ionstorm-end = Напряжение в электросетях спало, [color=#1E90FF]Ионный шторм[/color] утих, продлившись {$duration} мин.
+storyteller-metadata-ionstorm-end = Напряжение в электросетях спало, [color=#1E90FF]Ионный шторм[/color] утих, продлившись { $duration } мин.
 storyteller-metadata-randomsentience-start = Нанотрейзен провела секретный эксперимент: некоторые обитатели фауны станции внезапно обрели полноценный разум.
 storyteller-metadata-anomalyspawn-start = Физическая реальность дала трещину: в одном из отсеков материализовалась загадочная космическая [color=#FF00FF]Аномалия[/color].
 storyteller-metadata-kudzugrowth-start = Биологическая тревога: быстрорастущие агрессивные споры [color=#228B22]Кудзу[/color] проросли сквозь обшивку станции.
@@ -212,11 +212,11 @@ storyteller-metadata-piratesmall-start = Навигационные систем
 storyteller-metadata-giftsfireprotection-start = Пожарные расчёты получили посылку с современными средствами тушения пламени.
 
 # Nuke history events
-storyteller-history-nuke-armed = Критическая угроза: активирован механизм самоуничтожения станции в районе [color=#ADFF2F]{$location}[/color]!
+storyteller-history-nuke-armed = Критическая угроза: активирован механизм самоуничтожения станции в районе [color=#ADFF2F]{ $location }[/color]!
 storyteller-history-nuke-disarmed = С облегчением: механизм самоуничтожения станции был успешно обезврежен отважными действиями экипажа.
 storyteller-history-nuke-exploded = Конец истории: ослепительная ядерная вспышка поглотила станцию, превратив её в облако звёздной пыли.
 
 # Antagonist assignments
-storyteller-metadata-traitor-assigned = Опасными агентами Синдиката оказались: {$players}.
-storyteller-metadata-thief-assigned = В роли скрытных воришек выступили: {$players}.
-storyteller-metadata-nukeops-assigned = Членами ударного отряда оперативников Синдиката оказались: {$players}.
+storyteller-metadata-traitor-assigned = Опасными агентами Синдиката оказались: { $players }.
+storyteller-metadata-thief-assigned = В роли скрытных воришек выступили: { $players }.
+storyteller-metadata-nukeops-assigned = Членами ударного отряда оперативников Синдиката оказались: { $players }.

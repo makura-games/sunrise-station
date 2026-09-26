@@ -1,19 +1,17 @@
 ent-WallAbductorDiagonal = стена шаттла абдукторов
     .desc = { ent-BaseWall.desc }
-    .suffix = диагональная
+    .suffix = Диагональная
 ent-WallAbductor = стена шаттла абдукторов
     .suffix = Укрепленная, Внешняя
     .desc = { ent-BaseWall.desc }
 ent-WallCultIndestructible = { ent-WallCult }
     .desc = Удерживает воздух внутри, а культистов снаружи. Похоже особым образом зачарована магией крови.
-
 ent-WallReinforcedPlastitanium = укреплённая пластитановая стена
     .suffix = Укреплённая
     .desc = { ent-WallPlastitanium.desc }
 ent-WallReinforcedPlastitaniumDiagonal = укреплённая пластитановая стена
     .suffix = Укреплённая, Диагональ
     .desc = { ent-WallPlastitaniumDiagonal.desc }
-
 ent-WallReinforcedShuttle = укреплённая стена шаттла
     .suffix = Укреплённая
     .desc = { ent-WallShuttle.desc }

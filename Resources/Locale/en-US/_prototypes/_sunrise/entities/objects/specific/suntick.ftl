@@ -1,4 +1,4 @@
-ent-Suntick = Suntick
+ent-Suntick = suntick
     .desc = Incredibly attractive and beautiful coins that open the door to the world of a cute little shop.
     .suffix = 20 ST
 ent-Suntick1 = { ent-Suntick }

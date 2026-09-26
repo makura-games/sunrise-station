@@ -1,7 +1,5 @@
 reagent-name-fourteenloko = фоуртин локо
 reagent-desc-fourteenloko = Сильно переработанная жидкая субстанция, едва ли соответствующая межгалактическим стандартам безопасности для безалкогольного напитка.
-reagent-name-fourteen-loko-plus = фоуртин локо плюс
-reagent-desc-fourteen-loko-plus = Сильно переработанная жидкая субстанция с элиментами стимулирующих веществ, едва ли соответствующая межгалактическим стандартам безопасности для безалкогольного напитка.
 reagent-name-cola-sunrise = Свежая космо кола
 reagent-name-changeling-sting-sunrise = Свежее жало генокрада
 reagent-name-dr-gibb-sunrise = Свежий доктор Гибб
@@ -15,3 +13,5 @@ reagent-name-space-up-sunrise = Свежий спейс-ап
 reagent-name-starkist-sunrise = Свежий Стар-кист
 reagent-name-fourteen-loko-sunrise = Свежий фоуртин локо
 reagent-name-shamblers-juice-sunrise = Свежий сок Шамблер
+reagent-name-fourteen-loko-plus = фоуртин локо плюс
+reagent-desc-fourteen-loko-plus = Сильно переработанная жидкая субстанция с элиментами стимулирующих веществ, едва ли соответствующая межгалактическим стандартам безопасности для безалкогольного напитка.

@@ -1,7 +1,7 @@
 ent-PartHuman = часть тела человека
     .desc = { ent-BaseItem.desc }
-ent-TorsoHuman = туловище человека
-    .desc = { ent-PartHuman.desc }
+ent-OrganHumanTorso = { ent-TorsoHuman }
+    .desc = { ent-TorsoHuman.desc }
 ent-HeadHuman = голова человека
     .desc = { ent-PartHuman.desc }
 ent-LeftArmHuman = левая рука человека
@@ -20,9 +20,8 @@ ent-LeftFootHuman = левая стопа человека
     .desc = { ent-PartHuman.desc }
 ent-RightFootHuman = правая стопа человека
     .desc = { ent-PartHuman.desc }
-
-ent-OrganHumanTorso = { ent-TorsoHuman }
-    .desc = { ent-TorsoHuman.desc }
+ent-TorsoHuman = туловище человека
+    .desc = { ent-PartHuman.desc }
 ent-OrganHumanHead = { ent-HeadHuman }
     .desc = { ent-HeadHuman.desc }
 ent-OrganHumanArmLeft = { ent-LeftArmHuman }

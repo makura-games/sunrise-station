@@ -1,38 +1,26 @@
-ent-PosterLegitCalendar = Календарь бренда NT
+ent-PosterLegitCalendar = календарь бренда NT
     .desc = Устаревший календарь с фирменной символикой NanoTrasen.
-
-ent-PosterLegitCleanHands = Чистые руки
+ent-PosterLegitCleanHands = чистые руки
     .desc = Мойте руки. Иначе будут последствия.
-
-ent-PosterLegitEyeChart = Таблица для проверки зрения
+ent-PosterLegitEyeChart = таблица для проверки зрения
     .desc = Это третья буква — «Р» или «Ф»?
-
 ent-PosterLegitSkillIssue = «SKILL ISSUE»
     .desc = Кто-то явно ужасно оформил здесь документы.
-
-ent-PosterLegitDoNotCauseCancer = Координаты не вызывают рак
+ent-PosterLegitDoNotCauseCancer = координаты не вызывают рак
     .desc = Плакат, доказывающий экипажу, что координаты на самом деле не вызывают рак.
-
-ent-PosterContrabandDoCauseCancer = Координаты вызывают рак
+ent-PosterContrabandDoCauseCancer = координаты вызывают рак
     .desc = Плакат, доказывающий экипажу, что координаты на самом деле вызывают рак.
-
-ent-PosterContrabandForumPost = «Знай, что у тебя отняли»
+ent-PosterContrabandForumPost = «знай, что у тебя отняли»
     .desc = В рамке размещён пост с форума NT, полный злости. Подписано Джоном Тоу?
-
-ent-PosterContrabandFlukiesCall = Проблемы с Флуки?
+ent-PosterContrabandFlukiesCall = проблемы с Флуки
     .desc = Если у вас проблемы с флуки, звоните 1-800-LAKE-NOW!
-
-ent-PosterContrabandDaysSinceFluke = Дней с последнего флука
+ent-PosterContrabandDaysSinceFluke = дней с последнего флука
     .desc = Табло, призванное предотвратить несчастные случаи на работе.
-
-ent-PosterLegitRipleyCertified = Сертифицирован по «Рипли»
+ent-PosterLegitRipleyCertified = сертифицирован по «Рипли»
     .desc = Чёрт возьми, он вилоч- то есть, сертифицирован по «Рипли»...
-
-ent-PosterLegitKillersClinic = «Клиника Киллера»
+ent-PosterLegitKillersClinic = «клиника Киллера»
     .desc = Клиника для убийц? Похоже, во время лечения тут включают музыку.
-
-ent-PosterContrabandWantedTraitor = Разыскивается, неизвестен
+ent-PosterContrabandWantedTraitor = разыскивается, неизвестен
     .desc = Плакат о розыске кого-то в очень внушительном снаряжении. Хотелось бы такую маску и изолированные боевые перчатки.
-
-ent-PosterLegitSaline = НЕТ ФИЗРАСТВОРА!
+ent-PosterLegitSaline = НЕТ ФИЗРАСТВОРА
     .desc = Памятка от медотдела NanoTrasen: проверяйте вид пациента перед лекарствами от удушья. Физраствор может убить!

@@ -1,3 +1,3 @@
-# Sunrise-Edit - Ghost GUI Russian
+# Sunrise-Edit - Ghost GUI
 
 ghost-gui-respawn-button = Возродиться

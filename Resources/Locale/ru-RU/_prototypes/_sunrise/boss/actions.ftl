@@ -1,10 +1,10 @@
-ent-ActionHellSpawnRush = Рывок
+ent-ActionHellSpawnRush = рывок
     .desc = { "" }
-ent-ActionHellSpawnInvincibility = Неуязвимость
+ent-ActionHellSpawnInvincibility = неуязвимость
     .desc = { "" }
-ent-ActionHellSpawnTentacleRight = Щупальце
+ent-ActionHellSpawnTentacleRight = щупальце
     .desc = { "" }
-ent-ActionHellSpawnTentacleLeft = Щупальце
+ent-ActionHellSpawnTentacleLeft = щупальце
     .desc = { "" }
-ent-ActionHellSpawnSpiral = Спираль
+ent-ActionHellSpawnSpiral = спираль
     .desc = { "" }

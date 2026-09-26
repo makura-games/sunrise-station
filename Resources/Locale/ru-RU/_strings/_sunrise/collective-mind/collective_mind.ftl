@@ -9,5 +9,5 @@ collective-mind-arachnids = Арахниды
 collective-mind-carp = Карпы
 collective-mind-zombie = Зомби
 collective-mind-blood-cult = Культ Крови
-collective-mind-abductor = Абдукторы
 collective-mind-pirate = Пираты
+collective-mind-abductor = Абдукторы

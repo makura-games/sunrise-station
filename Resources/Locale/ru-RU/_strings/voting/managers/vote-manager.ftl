@@ -1,6 +1,8 @@
+# Displayed as initiator of vote when no user creates the vote
 ui-vote-initiator-server = Сервер
 
 ## Default.Votes
+
 ui-vote-restart-title = Перезапуск раунда
 ui-vote-restart-succeeded = Голосование о перезапуске раунда успешно.
 ui-vote-restart-failed = Голосование о перезапуске раунда отклонено (требуется { TOSTRING($ratio, "P0") }).
@@ -16,7 +18,7 @@ ui-vote-map-tie = Ничья при голосовании за карту! Вы
 ui-vote-map-win = Голосование за игровую карту закончено!
 ui-vote-map-notlobby = Голосование о выборе карты действует только в предраундовом лобби!
 ui-vote-map-notlobby-time = Голосование о выборе карты действует только в предраундовом лобби, когда осталось { $time }!
-ui-vote-gamemode-auto-set = Доступен только один режим: { $preset }. Голосование пропущено.
+ui-vote-map-invalid = { $winner } стал недействительным после голосования за карту! Он не будет выбран!
 # Votekick votes
 ui-vote-votekick-unknown-initiator = Игрок
 ui-vote-votekick-unknown-target = Неизвестный игрок
@@ -28,8 +30,6 @@ ui-vote-votekick-success = Голосование за кик { $target } усп
 ui-vote-votekick-failure = Голосование за кик { $target } провалилось. Причина: { $reason }
 ui-vote-votekick-not-enough-eligible = Недостаточно игроков для начала голосования за кик: { $voters }/{ $requirement }
 ui-vote-votekick-server-cancelled = Голосование за кик { $target } было отменено сервером.
+ui-vote-gamemode-auto-set = Доступен только один режим: { $preset }. Голосование пропущено.
 ui-vote-secret-map = Секрет
 ui-vote-secret-win = Следующая карта будет выбрана случайным образом.
-ui-vote-map-invalid = { $winner } стал недействительным после голосования за карту! Он не будет выбран!
-
-# Votekick votes

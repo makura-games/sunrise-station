@@ -1,5 +1,5 @@
 ent-GasPipeSansLayers = труба
-    .desc = содержит газ
+    .desc = Содержит газ.
 ent-VentCrawHolder = держатель вентиляционного когтя
     .desc = { "" }
 ent-GasPipeBase = труба

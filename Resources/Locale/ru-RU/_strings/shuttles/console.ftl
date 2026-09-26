@@ -3,7 +3,6 @@ shuttle-pilot-end = Пилотирование прекращено
 shuttle-console-in-ftl = Уже в БСС
 shuttle-console-mass = Слишком большой для БСС
 shuttle-console-prevent = Вы не можете пилотировать этот корабль
-shuttle-console-static = Грид являеться статическим
 
 # NAV
 
@@ -48,3 +47,4 @@ shuttle-console-dock = Пристыковать
 shuttle-console-docks-label = Стыковочные порты
 shuttle-console-undock-fail = Не удалось отстыковаться
 shuttle-console-dock-fail = Не удалось пристыковаться
+shuttle-console-static = Грид являеться статическим

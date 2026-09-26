@@ -559,7 +559,7 @@
     occursDuringRoundEnd: false
   - type: RuleGrids
   - type: LoadMapRule
-    gridPath: /Maps/Shuttles/ShuttleEvent/striker.yml
+    gridPath: /Maps/_Sunrise/Shuttles/Antag/seeker.yml #Sunrise edit
   - type: NukeopsRule
     roundEndBehavior: Nothing
   - type: AntagSelection
