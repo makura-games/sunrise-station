@@ -8,10 +8,12 @@
   flavor: nutriment
   color: "#24591F"
   metabolisms:
-    Metabolites:
+    Digestion:
+      metabolismRate: 1
       effects:
       - !type:Satiate
         satiationType: Hunger
+        factor: 3
 #sunrise-start
     Bloodstream:
       metabolites:
@@ -38,7 +40,7 @@
   flavor: vitamin
   color: "#D3D3D3"
   metabolisms:
-    Metabolites: #This makes it not compete with medicines, a large bonus for something that can heal
+    Digestion: #This makes it not compete with medicines, a large bonus for something that can heal
       effects:
       - !type:EvenHealthChange
         probability: 0.5
@@ -77,7 +79,7 @@
   flavor: protein
   color: "#FFFFE5"
   metabolisms:
-    Metabolites:
+    Digestion:
       effects:
       - !type:EvenHealthChange
         probability: 0.5
@@ -109,7 +111,7 @@
   color: white
   meltingPoint: 146.0
   metabolisms:
-    Metabolites:
+    Digestion:
       effects:
       - !type:Satiate
         satiationType: Hunger
