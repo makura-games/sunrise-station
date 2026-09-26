@@ -1,6 +1,6 @@
 - type: entity
   name: paladin shield
-  parent: [ BaseRepairableShield, BaseMajorContraband ] # Sunrise-Edit
+  parent: [ BaseRepairableShield, BaseGinormousShield, BaseMajorContraband ]
   id: PaladinShield
   description: A shield for a true paladin! Good at deflecting hits with swords and absorbing the impact from bats, but not much else.
   components:
@@ -9,7 +9,6 @@
       state: base
     - type: Item
       sprite: _Starlight/Objects/Weapons/Melee/paladin_shield.rsi
-      size: Ginormous
     - type: Clothing
       sprite: _Starlight/Objects/Weapons/Melee/paladin_shield.rsi
       quickEquip: false

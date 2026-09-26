@@ -131,7 +131,7 @@
 
 - type: entity
   name: riot strobe shield
-  parent: [ BaseRepairableShield, BaseSecurityContraband, MachineComponentSounds, BaseShield ] # Sunrise-Edit
+  parent: [ BaseRepairableShield, BaseSecurityContraband, MachineComponentSounds, BaseGinormousShield ] # Sunrise-Edit - сохраняем размер большого щита после разделения базовых прототипов
   id: RiotShieldStrobe
   description: A large tower shield with atached Flash. Good for controlling crowds.
   components:
@@ -157,7 +157,6 @@
           Blunt: 7
       bluntStaminaDamageFactor: 3.0
     - type: Item
-      size: Ginormous
       sprite: _Sunrise/Objects/Weapons/Melee/shields.rsi
       heldPrefix: riot
     - type: UseDelay
@@ -234,7 +233,6 @@
       state: riot_laser-icon
     - type: Item
       heldPrefix: riot_laser
-      size: Ginormous # Sunrise-Edit Я не ебу почему он стал маленьким
     - type: Blocking
       passiveBlockModifier:
         flatReductions:
@@ -258,7 +256,6 @@
     - type: Sprite
       state: riot_bullet-icon
     - type: Item
-      size: Ginormous # Sunrise-Edit Я не ебу почему он стал маленьким
       heldPrefix: riot_bullet
     - type: Blocking
       passiveBlockModifier:
