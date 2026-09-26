@@ -4,7 +4,7 @@
   id: AlwaysPoweredStrobeLight
   components:
   - type: Sprite
-    sprite: _Sunrise/Structures/Wallmounts/Lighting/strobe_light.rsi
+    sprite: _Sunrise/Structures/Wallmounts/lighting/strobe_light.rsi
     offset: 0, 0
   - type: PointLight
     offset: 0, 0.35
@@ -13,4 +13,4 @@
   id: PoweredStrobeLightEmpty
   components:
   - type: Sprite
-    sprite: _Sunrise/Structures/Wallmounts/Lighting/strobe_light.rsi
+    sprite: _Sunrise/Structures/Wallmounts/lighting/strobe_light.rsi
