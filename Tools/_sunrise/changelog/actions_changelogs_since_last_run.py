@@ -24,7 +24,7 @@ from typing import Any, Iterable
 from changelog_path import validate_changelog_path
 from changelog_schema import changelog_entry_identity
 from changelog_targets import validate_target_id
-from dispatch_changelogs import published_run_sha, resolve_released_sha
+from dispatch_changelogs import published_run_sha
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -374,22 +374,17 @@ def validate_runtime_environment() -> tuple[Path, str, str]:
     DISCORD_WEBHOOK_URL = require_environment("DISCORD_WEBHOOK_URL")
     CHANGELOG_FILE = require_environment("CHANGELOG_FILE")
     target_id = validate_target_id(require_environment("CHANGELOG_TARGET_ID"))
+    released_sha = require_environment("RELEASED_SHA")
+    if not SHA_RE.fullmatch(released_sha):
+        raise RuntimeError("Переменная RELEASED_SHA должна содержать SHA коммита")
     for name in (
         "GITHUB_REPOSITORY",
         "GITHUB_RUN_ID",
         "GITHUB_TOKEN",
     ):
         require_environment(name)
-    if manual_id_range() is None:
-        released_sha = resolve_released_sha(
-            require_environment("GITHUB_REPOSITORY"),
-            require_environment("GITHUB_TOKEN"),
-            require_environment("SOURCE_WORKFLOW_RUN_ID"),
-        )
-    else:
-        released_sha = require_environment("GITHUB_SHA")
-        if not SHA_RE.fullmatch(released_sha):
-            raise RuntimeError("Переменная GITHUB_SHA должна содержать SHA коммита")
+    if manual_id_range() is None and os.environ.get("CHANGELOG_MANUAL_RANGE") != "true":
+        require_environment("SOURCE_WORKFLOW_RUN_ID")
 
     return validate_changelog_path(CHANGELOG_FILE), target_id, released_sha
 
@@ -397,6 +392,8 @@ def validate_runtime_environment() -> tuple[Path, str, str]:
 def main():
     changelog_file, _target_id, released_sha = validate_runtime_environment()
     bounds = manual_id_range()
+    if bounds is None and os.environ.get("CHANGELOG_MANUAL_RANGE") == "true":
+        bounds = (None, None)
     if bounds is not None:
         current = yaml.safe_load(get_released_changelog(changelog_file, released_sha))
         entries = select_id_range(current, *bounds)
@@ -466,11 +463,13 @@ def get_most_recent_workflow(
     workflow_run = get_current_run(sess, github_repository, github_run)
     page = 1
     while True:
-        past_runs = get_past_runs(sess, workflow_run, page)
+        past_runs = get_past_runs(sess, workflow_run, page, repository=github_repository)
         runs = past_runs["workflow_runs"]
         for run in runs:
             # Первый предыдущий успешный запуск, отличный от текущего.
             if run["id"] == workflow_run["id"]:
+                continue
+            if not is_discord_publish_run(run):
                 continue
 
             if target_id is not None:
@@ -512,6 +511,8 @@ def get_past_runs(
     current_run: Any,
     page: int = 1,
     status: str | None = "success",
+    *,
+    repository: str | None = None,
 ) -> Any:
     """
     Возвращает запуски рабочего процесса с выбранным статусом до текущего.
@@ -524,12 +525,21 @@ def get_past_runs(
     if status is not None:
         params["status"] = status
     resp = sess.get(
-        f"{current_run['workflow_url']}/runs",
+        f"{GITHUB_API_URL}/repos/{repository}/actions/runs" if repository else f"{current_run['workflow_url']}/runs",
         params=params,
         timeout=HTTP_REQUEST_TIMEOUT,
     )
     resp.raise_for_status()
     return resp.json()
+
+
+def is_discord_publish_run(run: Mapping[str, Any]) -> bool:
+    # Общая история позволяет автоматике продолжить после ручной досылки.
+    return run.get("path") in (
+        None,
+        ".github/workflows/sunrise-publish-discord-changelog.yml",
+        ".github/workflows/sunrise-send-discord-changelog-range.yml",
+    )
 
 
 def get_earliest_target_attempt(
@@ -542,9 +552,9 @@ def get_earliest_target_attempt(
     attempts = [current]
     page = 1
     while True:
-        response = get_past_runs(sess, current, page, "completed")
+        response = get_past_runs(sess, current, page, "completed", repository=github_repository)
         runs = response["workflow_runs"]
-        attempts.extend(run for run in runs if run.get("id") != current.get("id"))
+        attempts.extend(run for run in runs if run.get("id") != current.get("id") and is_discord_publish_run(run))
         if len(runs) < 100:
             break
         page += 1

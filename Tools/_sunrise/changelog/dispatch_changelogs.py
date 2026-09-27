@@ -63,11 +63,13 @@ def resolve_released_sha(repository: str, token: str, source_run_id: str) -> str
     if not RUN_ID_RE.fullmatch(source_run_id):
         raise RuntimeError("SOURCE_WORKFLOW_RUN_ID должен содержать числовой ID запуска")
 
-    run = github_request(
-        f"{GITHUB_API_URL}/repos/{repository}/actions/runs/{quote(source_run_id, safe='')}",
-        token,
-    )
-    released_sha = published_run_sha(run) or ""
+    released_sha = os.environ.get("RELEASED_SHA", "").strip()
+    if not released_sha:
+        run = github_request(
+            f"{GITHUB_API_URL}/repos/{repository}/actions/runs/{quote(source_run_id, safe='')}",
+            token,
+        )
+        released_sha = published_run_sha(run) or ""
 
     if not SHA_RE.fullmatch(released_sha):
         raise RuntimeError("Не удалось определить SHA опубликованного коммита")
@@ -90,6 +92,7 @@ def dispatch_target(
             "ref": workflow_ref,
             "inputs": {
                 "target_id": target_id,
+                "released_sha": released_sha,
                 "source_workflow_run_id": source_run_id,
             },
         },

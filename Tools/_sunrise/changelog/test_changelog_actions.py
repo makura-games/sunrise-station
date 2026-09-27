@@ -37,17 +37,57 @@ RUNNER_PATH = REPO_ROOT / "Tools/_sunrise/changelog/run.sh"
 
 
 class ChangelogActionsTests(unittest.TestCase):
-    def test_automatic_version_comes_from_publish_run(self):
+    def test_manual_form_only_exposes_target_and_entry_ids(self):
+        path = REPO_ROOT / ".github/workflows/sunrise-send-discord-changelog-range.yml"
+        workflow = yaml.safe_load(path.read_text())
+        self.assertEqual({"target_id", "from_id", "to_id"}, set(workflow[True]["workflow_dispatch"]["inputs"]))
+        job = workflow["jobs"]["publish"]
+        self.assertEqual("${{ github.sha }}", job["with"]["released_sha"])
+        self.assertTrue(job["with"]["manual_range"])
+
+    def test_dispatcher_passes_exact_released_sha(self):
+        with patch.object(dispatch_changelogs, "github_request") as request:
+            dispatch_changelogs.dispatch_target("org/repo", "token", "master", "123", "a" * 40, "sunrise")
+        self.assertEqual({
+            "target_id": "sunrise", "released_sha": "a" * 40, "source_workflow_run_id": "123",
+        }, request.call_args.args[2]["inputs"])
+
+    def test_manual_empty_bounds_send_whole_file_without_history(self):
         with patch.dict(os.environ, {
-            "CHANGELOG_FROM_ID": "", "CHANGELOG_TO_ID": "",
+            "CHANGELOG_FROM_ID": "", "CHANGELOG_TO_ID": "", "CHANGELOG_MANUAL_RANGE": "true",
+            "SOURCE_WORKFLOW_RUN_ID": "", "CHANGELOG_TARGET_ID": "sunrise", "RELEASED_SHA": "a" * 40,
+            "GITHUB_REPOSITORY": "org/repo", "GITHUB_TOKEN": "token", "GITHUB_RUN_ID": "123",
+            "DISCORD_WEBHOOK_URL": "https://discord.com/api/webhooks/123/test-token",
+        }), patch.object(discord_changelog, "get_released_changelog", return_value="Entries:\n- id: 10\n- id: 12\n"), patch.object(
+            discord_changelog, "get_last_changelog"
+        ) as history, patch.object(discord_changelog, "send_to_discord") as send:
+            discord_changelog.main()
+        history.assert_not_called()
+        self.assertEqual([10, 12], [entry["id"] for entry in send.call_args.args[0]])
+
+    def test_automatic_checkpoint_can_use_manual_delivery_history(self):
+        session = Mock()
+        current = {"id": 300, "created_at": "2026-09-27T00:00:00Z"}
+        session.get.return_value.json.return_value = {"workflow_runs": [
+            {"id": 250, "path": ".github/workflows/unrelated.yml", "display_title": f"Discord changelog sunrise for {'b' * 40}"},
+            {"id": 200, "path": ".github/workflows/sunrise-send-discord-changelog-range.yml", "display_title": f"Discord changelog sunrise for {'a' * 40}"},
+        ]}
+        with patch.object(discord_changelog, "get_current_run", return_value=current):
+            previous = discord_changelog.get_most_recent_workflow(session, "org/repo", "300", "sunrise")
+        self.assertEqual(200, previous["id"])
+        self.assertEqual("https://api.github.com/repos/org/repo/actions/runs", session.get.call_args.args[0])
+
+    def test_automatic_version_keeps_passed_sha_without_loading_source_run(self):
+        with patch.dict(os.environ, {
+            "CHANGELOG_FROM_ID": "", "CHANGELOG_TO_ID": "", "CHANGELOG_MANUAL_RANGE": "false",
             "SOURCE_WORKFLOW_RUN_ID": "123", "CHANGELOG_TARGET_ID": "sunrise",
-            "GITHUB_SHA": "b" * 40, "GITHUB_REPOSITORY": "org/repo",
+            "RELEASED_SHA": "a" * 40, "GITHUB_SHA": "b" * 40, "GITHUB_REPOSITORY": "org/repo",
             "GITHUB_TOKEN": "token", "GITHUB_RUN_ID": "456",
             "DISCORD_WEBHOOK_URL": "https://discord.com/api/webhooks/123/test-token",
-        }), patch.object(discord_changelog, "resolve_released_sha", return_value="a" * 40) as resolve:
+        }), patch.object(dispatch_changelogs, "github_request") as request:
             _, _, sha = discord_changelog.validate_runtime_environment()
         self.assertEqual("a" * 40, sha)
-        resolve.assert_called_once_with("org/repo", "token", "123")
+        request.assert_not_called()
 
     def test_checkpoint_resolves_publish_run_and_keeps_legacy_sha(self):
         session = Mock()
@@ -67,7 +107,7 @@ class ChangelogActionsTests(unittest.TestCase):
         with patch.dict(os.environ, {
             "CHANGELOG_FROM_ID": "12", "CHANGELOG_TO_ID": "",
             "SOURCE_WORKFLOW_RUN_ID": "",
-            "CHANGELOG_TARGET_ID": "sunrise", "GITHUB_SHA": "a" * 40,
+            "CHANGELOG_TARGET_ID": "sunrise", "RELEASED_SHA": "a" * 40,
             "GITHUB_REPOSITORY": "org/repo", "GITHUB_TOKEN": "token", "GITHUB_RUN_ID": "123",
             "DISCORD_WEBHOOK_URL": "https://discord.com/api/webhooks/123/test-token",
         }), patch.object(discord_changelog, "get_released_changelog", return_value=document), patch.object(
@@ -1237,7 +1277,7 @@ class ChangelogActionsTests(unittest.TestCase):
 
         self.assertEqual(200, result["id"])
         self.assertEqual(
-            [call(session, current, 1), call(session, current, 2)],
+            [call(session, current, 1, repository="makura-games/fish-station"), call(session, current, 2, repository="makura-games/fish-station")],
             past_runs.call_args_list,
         )
 
@@ -1268,7 +1308,7 @@ class ChangelogActionsTests(unittest.TestCase):
             {
                 "CHANGELOG_FILE": "Resources/Changelog/ChangelogSunrise.yml",
                 "CHANGELOG_TARGET_ID": "sunrise",
-                "GITHUB_SHA": "a" * 40,
+                "RELEASED_SHA": "a" * 40,
                 "GITHUB_REPOSITORY": "makura-games/sunrise-station",
                 "GITHUB_RUN_ID": "300",
                 "GITHUB_TOKEN": "token",
@@ -2150,7 +2190,7 @@ class ChangelogActionsTests(unittest.TestCase):
         self.assertIn("dispatch_changelogs.py", dispatch_workflow)
         self.assertIn("workflow_dispatch:", discord_workflow)
         self.assertIn(
-            "${{ inputs.to_id != '' && 'Manual' || 'Discord' }} changelog ${{ inputs.target_id }} for ${{ (inputs.from_id == '' && inputs.to_id == '' && inputs.source_workflow_run_id != '') && format('run {0}', inputs.source_workflow_run_id) || github.sha }}",
+            "Discord changelog ${{ inputs.target_id }} for ${{ inputs.released_sha }}",
             discord_workflow,
         )
         self.assertIn("CHANGELOG_FILE: ${{ steps.target.outputs.changelog_file }}", discord_workflow)

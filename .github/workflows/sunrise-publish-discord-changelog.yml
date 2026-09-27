@@ -1,5 +1,5 @@
-name: Publish Discord Changelog
-run-name: ${{ inputs.to_id != '' && 'Manual' || 'Discord' }} changelog ${{ inputs.target_id }} for ${{ (inputs.from_id == '' && inputs.to_id == '' && inputs.source_workflow_run_id != '') && format('run {0}', inputs.source_workflow_run_id) || github.sha }}
+name: Publish Discord Changelog (Automatic)
+run-name: Discord changelog ${{ inputs.target_id }} for ${{ inputs.released_sha }}
 
 on:
   workflow_dispatch:
@@ -8,18 +8,34 @@ on:
         description: Идентификатор цели из Tools/_sunrise/changelog/targets
         required: true
         type: string
+      released_sha:
+        description: SHA опубликованного коммита (служебный параметр автоматики)
+        required: true
+        type: string
       source_workflow_run_id:
         description: ID соответствующего запуска Publish Stable
-        required: false
+        required: true
+        type: string
+  workflow_call:
+    inputs:
+      target_id:
+        required: true
+        type: string
+      released_sha:
+        required: true
+        type: string
+      source_workflow_run_id:
+        default: ''
         type: string
       from_id:
-        description: Первая запись включительно (без границ — автоматическая отправка)
-        required: false
+        default: ''
         type: string
       to_id:
-        description: Последняя запись включительно (пусто — до конца и новая контрольная точка)
-        required: false
+        default: ''
         type: string
+      manual_range:
+        default: false
+        type: boolean
 
 permissions:
   actions: read # Чтение истории этой цели и истории стабильных публикаций.
@@ -59,7 +75,9 @@ jobs:
           DISCORD_WEBHOOK_URL: ${{ secrets[steps.target.outputs.webhook_secret] }}
           CHANGELOG_FILE: ${{ steps.target.outputs.changelog_file }}
           CHANGELOG_TARGET_ID: ${{ steps.target.outputs.target_id }}
+          RELEASED_SHA: ${{ inputs.released_sha }}
           SOURCE_WORKFLOW_RUN_ID: ${{ inputs.source_workflow_run_id }}
           CHANGELOG_FROM_ID: ${{ inputs.from_id }}
           CHANGELOG_TO_ID: ${{ inputs.to_id }}
+          CHANGELOG_MANUAL_RANGE: ${{ inputs.manual_range }}
         run: python Tools/_sunrise/changelog/actions_changelogs_since_last_run.py
