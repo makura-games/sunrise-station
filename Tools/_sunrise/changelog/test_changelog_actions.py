@@ -37,6 +37,48 @@ RUNNER_PATH = REPO_ROOT / "Tools/_sunrise/changelog/run.sh"
 
 
 class ChangelogActionsTests(unittest.TestCase):
+    def test_manual_range_bypasses_history_and_source_run(self):
+        document = "Entries:\n- id: 10\n- id: 12\n- id: 15\n"
+        with patch.dict(os.environ, {
+            "CHANGELOG_FROM_ID": "12", "CHANGELOG_TO_ID": "",
+            "CHANGELOG_DRY_RUN": "false", "SOURCE_WORKFLOW_RUN_ID": "",
+            "CHANGELOG_TARGET_ID": "sunrise", "RELEASED_SHA": "a" * 40,
+            "GITHUB_REPOSITORY": "org/repo", "GITHUB_TOKEN": "token", "GITHUB_RUN_ID": "123",
+            "DISCORD_WEBHOOK_URL": "https://discord.com/api/webhooks/123/test-token",
+        }), patch.object(discord_changelog, "get_released_changelog", return_value=document), patch.object(
+            discord_changelog, "get_last_changelog"
+        ) as history, patch.object(discord_changelog, "send_to_discord") as send:
+            discord_changelog.main()
+        history.assert_not_called()
+        self.assertEqual([12, 15], [entry["id"] for entry in send.call_args.args[0]])
+
+    def test_manual_range_dry_run_does_not_send(self):
+        with patch.dict(os.environ, {
+            "CHANGELOG_FROM_ID": "10", "CHANGELOG_TO_ID": "10", "CHANGELOG_DRY_RUN": "true",
+        }), patch.object(discord_changelog, "validate_runtime_environment", return_value=(Path("x"), "sunrise", "a" * 40)), patch.object(
+            discord_changelog, "get_released_changelog", return_value="Entries:\n- id: 10\n"
+        ), patch.object(discord_changelog, "get_last_changelog") as history, patch.object(
+            discord_changelog, "send_to_discord"
+        ) as send:
+            discord_changelog.main()
+        history.assert_not_called()
+        send.assert_not_called()
+
+    def test_manual_range_boundaries_and_invalid_ids(self):
+        document = {"Entries": [{"id": 15}, {"id": 10}, {"id": 12}]}
+        self.assertEqual([10, 12], [entry["id"] for entry in discord_changelog.select_id_range(document, None, 12)])
+        self.assertEqual([12], [entry["id"] for entry in discord_changelog.select_id_range(document, 12, 12)])
+        for entries in ([{"id": 10}, {"id": 10}], [{"id": True}], [{"id": "10"}], []):
+            with self.subTest(entries=entries), self.assertRaises(RuntimeError):
+                discord_changelog.select_id_range({"Entries": entries}, 10, None)
+        with self.assertRaises(RuntimeError):
+            discord_changelog.select_id_range(document, 20, None)
+        for start, end in (("15", "10"), ("0", ""), ("abc", "")):
+            with self.subTest(start=start, end=end), patch.dict(os.environ, {
+                "CHANGELOG_FROM_ID": start, "CHANGELOG_TO_ID": end,
+            }), self.assertRaises(RuntimeError):
+                discord_changelog.manual_id_range()
+
     def test_rollback_changelog_uses_selected_sha(self):
         selected_sha = "a" * 40
         workflow_sha = "b" * 40
@@ -2095,7 +2137,7 @@ class ChangelogActionsTests(unittest.TestCase):
         self.assertIn("dispatch_changelogs.py", dispatch_workflow)
         self.assertIn("workflow_dispatch:", discord_workflow)
         self.assertIn(
-            "run-name: Discord changelog ${{ inputs.target_id }} for ${{ inputs.released_sha }}",
+            "${{ (inputs.to_id != '' || inputs.dry_run) && 'Manual' || 'Discord' }} changelog ${{ inputs.target_id }} for ${{ inputs.released_sha }}",
             discord_workflow,
         )
         self.assertIn("CHANGELOG_FILE: ${{ steps.target.outputs.changelog_file }}", discord_workflow)

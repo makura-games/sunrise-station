@@ -382,15 +382,26 @@ def validate_runtime_environment() -> tuple[Path, str, str]:
         "GITHUB_REPOSITORY",
         "GITHUB_RUN_ID",
         "GITHUB_TOKEN",
-        "SOURCE_WORKFLOW_RUN_ID",
     ):
         require_environment(name)
+    if manual_id_range() is None:
+        require_environment("SOURCE_WORKFLOW_RUN_ID")
 
     return validate_changelog_path(CHANGELOG_FILE), target_id, released_sha
 
 
 def main():
     changelog_file, _target_id, released_sha = validate_runtime_environment()
+    bounds = manual_id_range()
+    if bounds is not None:
+        current = yaml.safe_load(get_released_changelog(changelog_file, released_sha))
+        entries = select_id_range(current, *bounds)
+        if os.environ.get("CHANGELOG_DRY_RUN", "false").lower() == "true":
+            for entry in entries:
+                print(f"ID {entry['id']}: {entry.get('url', '')} — {entry.get('author', '')}")
+            return
+        send_to_discord(entries)
+        return
 
     if DEBUG:
         # Для локальной отладки можно использовать отдельный файл
@@ -408,6 +419,44 @@ def main():
 
     diff = diff_changelog(last_changelog, cur_changelog)
     send_to_discord(diff)
+
+
+def manual_id_range() -> tuple[int | None, int | None] | None:
+    bounds = []
+    for name in ("CHANGELOG_FROM_ID", "CHANGELOG_TO_ID"):
+        value = os.environ.get(name, "").strip()
+        if value and not re.fullmatch(r"[1-9][0-9]*", value):
+            raise RuntimeError(f"{name} должен содержать положительный целочисленный ID")
+        bounds.append(int(value) if value else None)
+    start, end = bounds
+    if start is None and end is None:
+        if os.environ.get("CHANGELOG_DRY_RUN", "false").lower() == "true":
+            raise RuntimeError("Для dry_run укажите from_id или to_id")
+        return None
+    if start is not None and end is not None and start > end:
+        raise RuntimeError("from_id не должен превышать to_id")
+    return start, end
+
+
+def select_id_range(document: Any, start: int | None, end: int | None) -> list[ChangelogEntry]:
+    entries = document.get("Entries") if isinstance(document, Mapping) else None
+    if not isinstance(entries, list) or not entries:
+        raise RuntimeError("Чейнджлог должен содержать непустой список Entries")
+    ids = []
+    for entry in entries:
+        entry_id = entry.get("id") if isinstance(entry, Mapping) else None
+        if type(entry_id) is not int or entry_id <= 0:
+            raise RuntimeError("Для ручного диапазона все записи должны иметь положительный ID")
+        ids.append(entry_id)
+    if len(set(ids)) != len(ids):
+        raise RuntimeError("Чейнджлог содержит повторяющиеся ID")
+    start = min(ids) if start is None else start
+    end = max(ids) if end is None else end
+    selected = sorted((entry for entry in entries if start <= entry["id"] <= end), key=lambda entry: entry["id"])
+    if not selected:
+        raise RuntimeError(f"В диапазоне {start}–{end} нет записей")
+    print(f"Ручной диапазон {start}–{end}: {len(selected)} записей")
+    return selected
 
 
 def get_most_recent_workflow(
