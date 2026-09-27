@@ -1,15 +1,11 @@
 name: Publish Discord Changelog
-run-name: ${{ (inputs.to_id != '' || inputs.dry_run) && 'Manual' || 'Discord' }} changelog ${{ inputs.target_id }} for ${{ inputs.released_sha }}
+run-name: ${{ inputs.to_id != '' && 'Manual' || 'Discord' }} changelog ${{ inputs.target_id }} for ${{ (inputs.from_id == '' && inputs.to_id == '' && inputs.source_workflow_run_id != '') && format('run {0}', inputs.source_workflow_run_id) || github.sha }}
 
 on:
   workflow_dispatch:
     inputs:
       target_id:
         description: Идентификатор цели из Tools/_sunrise/changelog/targets
-        required: true
-        type: string
-      released_sha:
-        description: SHA опубликованного коммита
         required: true
         type: string
       source_workflow_run_id:
@@ -24,10 +20,6 @@ on:
         description: Последняя запись включительно (пусто — до конца и новая контрольная точка)
         required: false
         type: string
-      dry_run:
-        description: Показать выбранные записи без отправки (нужна хотя бы одна граница)
-        default: false
-        type: boolean
 
 permissions:
   actions: read # Чтение истории этой цели и истории стабильных публикаций.
@@ -67,9 +59,7 @@ jobs:
           DISCORD_WEBHOOK_URL: ${{ secrets[steps.target.outputs.webhook_secret] }}
           CHANGELOG_FILE: ${{ steps.target.outputs.changelog_file }}
           CHANGELOG_TARGET_ID: ${{ steps.target.outputs.target_id }}
-          RELEASED_SHA: ${{ inputs.released_sha }}
           SOURCE_WORKFLOW_RUN_ID: ${{ inputs.source_workflow_run_id }}
           CHANGELOG_FROM_ID: ${{ inputs.from_id }}
           CHANGELOG_TO_ID: ${{ inputs.to_id }}
-          CHANGELOG_DRY_RUN: ${{ inputs.dry_run }}
         run: python Tools/_sunrise/changelog/actions_changelogs_since_last_run.py

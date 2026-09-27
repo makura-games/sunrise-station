@@ -24,7 +24,7 @@ from typing import Any, Iterable
 from changelog_path import validate_changelog_path
 from changelog_schema import changelog_entry_identity
 from changelog_targets import validate_target_id
-from dispatch_changelogs import published_run_sha
+from dispatch_changelogs import published_run_sha, resolve_released_sha
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -49,7 +49,7 @@ MEDIA_MAX_REDIRECTS = 3
 MEDIA_READ_CHUNK_SIZE = 64 * 1024
 MEDIA_REDIRECT_STATUSES = {300, 301, 302, 303, 307, 308}
 DISCORD_RUN_TITLE_RE = re.compile(
-    r"^Discord changelog (?P<target>.+) for (?P<sha>[0-9a-f]{40,64})$",
+    r"^Discord changelog (?P<target>.+) for (?:(?P<sha>[0-9a-f]{40,64})|run (?P<source_run>[1-9][0-9]*))$",
 )
 SHA_RE = re.compile(r"^[0-9a-f]{40,64}$")
 
@@ -374,10 +374,6 @@ def validate_runtime_environment() -> tuple[Path, str, str]:
     DISCORD_WEBHOOK_URL = require_environment("DISCORD_WEBHOOK_URL")
     CHANGELOG_FILE = require_environment("CHANGELOG_FILE")
     target_id = validate_target_id(require_environment("CHANGELOG_TARGET_ID"))
-    released_sha = require_environment("RELEASED_SHA")
-    if not SHA_RE.fullmatch(released_sha):
-        raise RuntimeError("Переменная RELEASED_SHA должна содержать SHA коммита")
-
     for name in (
         "GITHUB_REPOSITORY",
         "GITHUB_RUN_ID",
@@ -385,7 +381,15 @@ def validate_runtime_environment() -> tuple[Path, str, str]:
     ):
         require_environment(name)
     if manual_id_range() is None:
-        require_environment("SOURCE_WORKFLOW_RUN_ID")
+        released_sha = resolve_released_sha(
+            require_environment("GITHUB_REPOSITORY"),
+            require_environment("GITHUB_TOKEN"),
+            require_environment("SOURCE_WORKFLOW_RUN_ID"),
+        )
+    else:
+        released_sha = require_environment("GITHUB_SHA")
+        if not SHA_RE.fullmatch(released_sha):
+            raise RuntimeError("Переменная GITHUB_SHA должна содержать SHA коммита")
 
     return validate_changelog_path(CHANGELOG_FILE), target_id, released_sha
 
@@ -396,10 +400,6 @@ def main():
     if bounds is not None:
         current = yaml.safe_load(get_released_changelog(changelog_file, released_sha))
         entries = select_id_range(current, *bounds)
-        if os.environ.get("CHANGELOG_DRY_RUN", "false").lower() == "true":
-            for entry in entries:
-                print(f"ID {entry['id']}: {entry.get('url', '')} — {entry.get('author', '')}")
-            return
         send_to_discord(entries)
         return
 
@@ -430,8 +430,6 @@ def manual_id_range() -> tuple[int | None, int | None] | None:
         bounds.append(int(value) if value else None)
     start, end = bounds
     if start is None and end is None:
-        if os.environ.get("CHANGELOG_DRY_RUN", "false").lower() == "true":
-            raise RuntimeError("Для dry_run укажите from_id или to_id")
         return None
     if start is not None and end is not None and start > end:
         raise RuntimeError("from_id не должен превышать to_id")
@@ -497,6 +495,16 @@ def get_current_run(
     )
     resp.raise_for_status()
     return resp.json()
+
+
+def checkpoint_sha(match: re.Match, sess: requests.Session, repository: str) -> str:
+    sha = match.group("sha")
+    if sha is None:
+        run = get_current_run(sess, repository, match.group("source_run"))
+        sha = published_run_sha(run)
+    if not isinstance(sha, str) or not SHA_RE.fullmatch(sha):
+        raise RuntimeError("Не удалось определить SHA контрольной точки")
+    return sha
 
 
 def get_past_runs(
@@ -566,7 +574,7 @@ def get_source_release_before_attempt(
     match = DISCORD_RUN_TITLE_RE.fullmatch(title)
     if match is None:
         raise RuntimeError("Первый запуск цели не содержит SHA релиза в заголовке")
-    first_sha = match.group("sha")
+    first_sha = checkpoint_sha(match, sess, github_repository)
 
     runs: list[Any] = []
     page = 1
@@ -629,7 +637,7 @@ def get_last_changelog(changelog_file: Path | None = None) -> str:
         title = str(most_recent.get("display_title", ""))
         match = DISCORD_RUN_TITLE_RE.fullmatch(title)
         if match is not None:
-            last_sha = match.group("sha")
+            last_sha = checkpoint_sha(match, session, github_repository)
 
     if last_sha is None:
         first_attempt = get_earliest_target_attempt(
