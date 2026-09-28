@@ -142,14 +142,18 @@ jobs:
       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       with:
         repository: ${{ secrets.MAKURA_PRIVATE_REPO }}
-        path: source/PrivateContent
+        path: source/SunrisePrivate
         ssh-key: ${{ secrets.MAKURA_PRIVATE_REPO_SSH_KEY }}
         ref: ${{ inputs.private_commit_hash }}
         persist-credentials: false
 
     - name: Move private content files
       if: ${{ inputs.use_private_content }}
-      run: python3 ../automation/Tools/_sunrise/move_private.py --clone-dir "PrivateContent" --target-dirs "Resources"
+      run: python3 ../automation/Tools/_sunrise/move_private.py --clone-dir "SunrisePrivate" --target-dirs "Resources"
+
+    - name: Validate private code
+      if: ${{ inputs.use_private_content }}
+      run: python3 ../automation/Tools/_sunrise/publishing/validate_private_code.py
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@3e891b0cb619bf60e2c25674b222b8940e2c1c25 # v4.1.0

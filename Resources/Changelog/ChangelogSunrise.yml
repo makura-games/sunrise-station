@@ -4917,3 +4917,27 @@
     message: ГСБ теперь имеет доступ к алкоматам, которые находятся у него в кабинете.
   id: 2034
   url: https://github.com/makura-games/sunrise-station/pull/4823
+- author: ThereDrD
+  time: '2026-09-27T00:17:38.0000000+00:00'
+  changes:
+  - type: Fix
+    message: Исправлено отсутствие спавнеров почтальона на картах, теперь они спавнятся где надо
+  id: 2035
+  url: https://github.com/makura-games/sunrise-station/pull/4827
+- author: KaiserMaus, Confee
+  time: '2026-09-27T00:21:25.0000000+00:00'
+  changes:
+  - type: Tweak
+    message: Были переработаны спрайты самодельного меча, импровизированного меча, кованого меча (с частями), Рассветного клинка и Приливного клинка (с частями). Новые спрайты теперь соответствуют существующим спрайтам из оригинальной игры (Клеймора, Сабли, Абордажной сабли).
+  id: 2036
+  url: https://github.com/makura-games/sunrise-station/pull/4752
+  media:
+  - url: https://github.com/user-attachments/assets/be3bd6fc-b7f3-4c7d-8d25-e0a26ce7e456
+    description: image
+- author: ThereDrD
+  time: '2026-09-27T00:21:45.0000000+00:00'
+  changes:
+  - type: Fix
+    message: Исправлен пропавший после обновления донат, плашки дискорда и время
+  id: 2037
+  url: https://github.com/makura-games/sunrise-station/pull/4835
