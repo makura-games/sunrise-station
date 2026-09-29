@@ -19,4 +19,4 @@ ent-OrganHumanoidXenoLiver = liver
 ent-OrganHumanoidXenoKidneys = kidneys
     .desc = Paired filters, ruthlessly taking out anything superfluous.
 ent-OrganHumanoidXenoEyes = eyes
-    .desc = Eyes. They see
+    .desc = Eyes. They see.

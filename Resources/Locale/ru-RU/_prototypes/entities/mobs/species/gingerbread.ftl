@@ -1,4 +1,4 @@
-ent-BaseMobGingerbread = Урист МакПеченька
+ent-BaseMobGingerbread = урист МакПеченька
     .desc = { ent-BaseMobSpeciesOrganic.desc }
     .suffix = Печенье
 ent-MobGingerbreadDummy = { ent-BaseSpeciesDummy }

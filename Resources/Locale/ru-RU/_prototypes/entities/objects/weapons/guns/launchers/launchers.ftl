@@ -1,9 +1,9 @@
-ent-BaseWeaponLauncher = Стандартный гранатомёт
+ent-BaseWeaponLauncher = стандартный гранатомёт
     .desc = Дерзай — налетай, целься и стреляй.
 ent-WeaponLauncherChinaLake = чайна-лейк
-    .desc = БЛУП
-ent-WeaponLauncherHydra = Гидра
-    .desc = ПЛУП... ФШШШШШ
+    .desc = БЛУП.
+ent-WeaponLauncherHydra = гидра
+    .desc = ПЛУП... ФШШШШШ.
 ent-WeaponLauncherRocket = РПГ-7
     .desc = Древний ручной реактивный гранатомёт.
 ent-WeaponLauncherMultipleRocket = система залпового пуска

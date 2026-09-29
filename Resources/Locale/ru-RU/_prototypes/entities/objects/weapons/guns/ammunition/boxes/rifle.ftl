@@ -1,6 +1,7 @@
 ent-BaseMagazineBoxRifle = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
 ent-MagazineBoxRifleBig = ящик патронов (5,56)
+    .suffix = Большой
     .desc = { ent-BaseMagazineBoxRifle.desc }
 ent-MagazineBoxRifleSP = коробка патронов (5,56)
     .desc = { ent-BaseMagazineBoxRifle.desc }

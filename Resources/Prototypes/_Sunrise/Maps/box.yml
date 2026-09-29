@@ -18,10 +18,10 @@
           grids:
           - gridPath: /Maps/_Sunrise/Shuttles/Salvage/pickaxe.yml
             priorityTag: DockMining
-          - gridPath: /Maps/_Sunrise/Shuttles/Security/mosquitt.yml
+          - gridPath: /Maps/_Sunrise/Shuttles/Security/vanguard.yml
             priorityTag: DockSecurity
         - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/_Sunrise/Shuttles/Evac/emergency-centipede.yml
+          emergencyShuttlePath: /Maps/_Sunrise/Shuttles/Evac/emergency-box-bagel.yml
         - type: StationJobs
           availableJobs: # 92-114 jobs total w/o latejoins & interns, 106-130 jobs total w/ latejoins & interns
             #command (5)
@@ -67,13 +67,13 @@
             SeniorOfficer: [ 1, 1 ]
             Detective: [ 1, 1 ]
             Brigmedic: [ 1, 2 ]
-            SecurityPilot: [ 1, 1 ]
+            SecurityPilot: [ 2, 2 ]
             SecurityOfficer: [ 5, 7 ]
             SecurityCadet: [ 2, 4 ] # intern, exclude from dept count
             #supply (9-10)
             Quartermaster: [ 1, 1 ]
             SalvageSpecialist: [ 3, 3 ]
-            MiningSpecialist: [ 1, 1 ]
+            MiningSpecialist: [ 2, 2 ]
             CargoTechnician: [ 3, 3 ]
             MailCarrier: [ 1, 2 ]
             #civilian (3)

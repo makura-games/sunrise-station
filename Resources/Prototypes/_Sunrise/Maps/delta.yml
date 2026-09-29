@@ -16,7 +16,7 @@
             prefixCreator: 'TG'
         - type: SpawnGridAndDockToStation
           grids:
-          - gridPath: /Maps/_Sunrise/Shuttles/Salvage/asteroidcracker.yml
+          - gridPath: /Maps/_Sunrise/Shuttles/Salvage/siera.yml
             priorityTag: DockMining
           - gridPath: /Maps/_Sunrise/Shuttles/Security/security.yml
             priorityTag: DockSecurity

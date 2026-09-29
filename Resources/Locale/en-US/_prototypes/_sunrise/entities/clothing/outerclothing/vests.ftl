@@ -14,3 +14,5 @@ ent-ClothingOuterVestWebEliteChameleon = elite chameleon vest
     .suffix = Chameleon
 ent-ClothingOuterVestWebSalvageMerc = scrapper web vest
     .desc = A versatile armored vest, popular among salvagers for its protective yet lightweight design.
+ent-ClothingOuterVestWebBlue = oSSh tactical vest
+    .desc = { ent-ClothingOuterVestWebSec.desc }

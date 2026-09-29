@@ -6,6 +6,7 @@ cuffable-component-start-uncuffing-self-observer = { $user } начинает о
 cuffable-component-start-uncuffing-target-message = Вы начинаете расковывать { $targetName }.
 cuffable-component-start-uncuffing-by-other-message = { $otherName } начинает расковывать вас!
 cuffable-component-remove-cuffs-success-message = Вы успешно снимаете наручники.
+cuffable-component-remove-cuffs-push-success-message = Вы успешно сняли средства сдерживания и сбили { $otherName } на землю.
 cuffable-component-remove-cuffs-by-other-success-message = { $otherName } снимает с вас наручники.
 cuffable-component-remove-cuffs-to-other-partial-success-message =
     Вы успешно снимаете наручники. { $cuffedHandCount } { $cuffedHandCount ->
@@ -26,6 +27,5 @@ cuffable-component-remove-cuffs-partial-success-message =
        *[other] ваши руки остаются
     } в наручниках.
 cuffable-component-remove-cuffs-fail-message = Вам не удалось снять наручники.
-# UncuffVerb
+# UnrestrainVerb
 uncuff-verb-get-data-text = Освободить
-cuffable-component-remove-cuffs-push-success-message = Вы успешно сняли средства сдерживания и сбили {$otherName} на землю.

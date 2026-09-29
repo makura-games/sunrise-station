@@ -11,10 +11,10 @@
       stationProto: StandardNanotrasenStation
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Train "Sentipode" {0}-{1}'
+          mapNameTemplate: 'Поезд класса "Sentipode" {0}-{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
-            prefixCreator: 'ED'
+            prefixCreator: 'T'
         - type: SpawnGridAndDockToStation
           grids:
           - gridPath: /Maps/_Sunrise/Shuttles/Salvage/asteroidcracker.yml
@@ -88,6 +88,7 @@
             IAA: [ 1, 1 ]
             Lawyer: [ 1, 2 ]
             #silicon (2)
+            StationAi: [ 1, 1 ]
             Borg: [ 2, 2 ]
             JanitorBorg: [ 1, 1 ]
             ServiceBorg: [ 1, 1 ]

@@ -1,2 +1,2 @@
-ent-FTLPointShuttle = Посадочная площадка
+ent-FTLPointShuttle = посадочная площадка
     .desc = { ent-MarkerBase.desc }

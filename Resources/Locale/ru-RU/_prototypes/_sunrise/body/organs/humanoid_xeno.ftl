@@ -19,4 +19,4 @@ ent-OrganHumanoidXenoLiver = печень
 ent-OrganHumanoidXenoKidneys = почки
     .desc = Парные фильтры, безжалостно выводящие всё лишнее.
 ent-OrganHumanoidXenoEyes = глаза
-    .desc = Глаза. Они видят
+    .desc = Глаза. Они видят.

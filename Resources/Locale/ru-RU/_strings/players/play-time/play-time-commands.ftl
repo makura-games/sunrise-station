@@ -49,4 +49,4 @@ cmd-playtime_flush-help =
     Это вызывает запись только во внутреннее хранилище, при это не записывая немедленно в БД.
     Если пользователь передан, то только этот пользователь будет обработан.
 cmd-playtime_flush-error-args = Ожидается ноль или один аргумент
-cmd-playtime_flush-arg-user = [user name]
+cmd-playtime_flush-arg-user = [логин]

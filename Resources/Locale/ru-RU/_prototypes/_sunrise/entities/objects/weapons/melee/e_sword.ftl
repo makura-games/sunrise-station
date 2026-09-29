@@ -1,3 +1,3 @@
 ent-EnergySwordDoubleSunrise = { ent-EnergySwordDouble }
-    .suffix = SUNRISE
+    .suffix = САНРАЙЗ
     .desc = { ent-EnergySwordDouble.desc }

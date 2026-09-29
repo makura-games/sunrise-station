@@ -15,7 +15,6 @@ names-regal-rat-title-dataset-14 = Мэр
 names-regal-rat-title-dataset-15 = Босс
 names-regal-rat-title-dataset-16 = Пророк
 names-regal-rat-title-dataset-17 = Сыр
-
 names-guard-rat-title-dataset-1 = Клык
 names-guard-rat-title-dataset-2 = Ус
 names-guard-rat-title-dataset-3 = Пятачок

@@ -19,7 +19,7 @@
           emergencyShuttlePath: /Maps/_Sunrise/Shuttles/Evac/emergency-marathon.yml
         - type: SpawnGridAndDockToStation
           grids:
-          - gridPath: /Maps/_Sunrise/Shuttles/Salvage/siera.yml
+          - gridPath: /Maps/_Sunrise/Shuttles/Salvage/asteroidcracker.yml
             priorityTag: DockMining
           - gridPath: /Maps/_Sunrise/Shuttles/Security/stargaze.yml
             priorityTag: DockSecurity

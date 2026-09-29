@@ -1,5 +1,5 @@
 cmd-colornetwork-desc = Окрашивает атмос-устройства в заданный цвет
-cmd-colornetwork-help = Использование: colornetwork <uid> Pipe <HexColor>
+cmd-colornetwork-help = Использование: colornetwork <uid> Pipe <HexColor> — изменить цвет сети.
 cmd-colornetwork-no-access = В настоящее время вы не можете использовать команды маппинга.
 shell-entity-is-not-node-container = Целевая сущность не является контейнером узлов.
 shell-node-group-is-invalid = Указана недействительная группа узлов. Допустимые группы: { $groups }.

@@ -1,12 +1,12 @@
 ent-BaseEntityEyeImplant = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
-ent-EyeImplantWelding = Welding Implant
+ent-EyeImplantWelding = welding Implant
     .desc = Protects eyes from welding flashes.
-ent-EyeImplantMedical = Medical Implant
+ent-EyeImplantMedical = medical Implant
     .desc = Enables you to see information about humanoids without medical glasses.
-ent-EyeImplantSecurity = Security Implant
+ent-EyeImplantSecurity = security Implant
     .desc = Enables you to see information about station crew without security glasses.
-ent-EyeImplantSyndie = Syndie Implant
+ent-EyeImplantSyndie = syndie Implant
     .desc = Enables you to see information about station crew, humanoids and syndie without any glasses.
-ent-EyeImplantChemical = Chemical HUD Implant
+ent-EyeImplantChemical = chemical HUD Implant
     .desc = Enables you to see information about chemical without chem glasses.

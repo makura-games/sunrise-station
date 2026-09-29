@@ -1,2 +1,2 @@
-ent-ActionRepulse = Отталкивание
+ent-ActionRepulse = отталкивание
     .desc = Отталкивает сущности от пользователя.

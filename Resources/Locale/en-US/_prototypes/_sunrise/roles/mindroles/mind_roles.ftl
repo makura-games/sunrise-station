@@ -1,8 +1,8 @@
-ent-MindRoleFugitive = Fugitive Role
+ent-MindRoleFugitive = fugitive Role
     .desc = { ent-BaseMindRoleAntag.desc }
-ent-MindRolePlanetPrisoner = Planet Prisoner Role
+ent-MindRolePlanetPrisoner = planet Prisoner Role
     .desc = { ent-BaseMindRoleAntag.desc }
-ent-MindRoleLoneAbductor = Lone Abductor Role
+ent-MindRoleLoneAbductor = lone Abductor Role
     .desc = { ent-BaseMindRoleAntag.desc }
-ent-AbductorVictimRole = Abductor Victim
+ent-AbductorVictimRole = abductor Victim
     .desc = { ent-BaseMindRoleAntag.desc }

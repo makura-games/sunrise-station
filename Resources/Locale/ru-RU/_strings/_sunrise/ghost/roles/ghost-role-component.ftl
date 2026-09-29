@@ -8,8 +8,6 @@ ghost-role-information-syndicate-heavy-cyborg-name = Тяжелый боевой
 ghost-role-information-syndicate-heavy-cyborg-description = Смерть NT.
 ghost-role-information-syndicate-spider-cyborg-name = Диверсионный борг синдиката "Инфильтратор"
 ghost-role-information-syndicate-spider-cyborg-description = Смерть NT.
-ghost-role-information-syndicate-saboteur-cyborg-name = Диверсионный борг синдиката
-ghost-role-information-syndicate-saboteur-cyborg-description = Смерть NT.
 ghost-role-information-clown-goblin-name = клоун гоблин
 ghost-role-information-clown-goblin-description = Ужасное создание, которое поклоняется творцу...
 ghost-role-information-foliant-name = Фолиант
@@ -33,7 +31,6 @@ ghost-role-information-ussp-com-name = Капитан СССП
 ghost-role-information-ussp-com-description = "Вы — Капитан станции СССП. Ваша задача понять что стряслось со станцией, и сплотить всех сотрудников в борьбе за выживание."
 ghost-role-information-ussp-com-rules = Вы [color=green][bold]Командный Не Антагонист[/bold][/color]. Вы должны [bold]кооперироваться и работать сообща[/bold] со своими Комрадами! Вместе с командой вы погружаетесь в криосон, готовясь к долгому полёту. Но внезапно что-то идёт не так. Вас пробуждает резкая головная боль и тревожный писк консоли. Внезапные удары сотрясают станцию, и паника охватывает вас. Вы понимаете, что что-то серьёзно нарушило планы. Без приказов и времени на раздумья вы мгновенно начинаете действовать, осознавая, что от вашей реакции зависит жизнь всего экипажа и судьба станции.
 ghost-role-information-ussp-waralt-name = Старший Офицер СССП
-ghost-role-information-ussp-waralt-description = "Вы — Офицер великой армии СССП! Выполняйте любые приказы своего Капитана без вопросов! ВО СЛАВУ РОДИНЫ!"
 ghost-role-information-ussp-war-name = Солдат СССП
 ghost-role-information-ussp-war-description = "Вы — Солдат великой армии СССП! Выполняйте любые приказы своего Командира без вопросов! ВО СЛАВУ РОДИНЫ!"
 ghost-role-information-ussp-war-rules = Вы [color=red][bold]Командный Антагонист[/bold][/color]. Вы должны [bold]кооперироваться и работать сообща[/bold] со своими Товарищами! Выслушайте брифинг от своего Капитана и действуйте строго по его указаниям.
@@ -41,15 +38,20 @@ ghost-role-information-tsf-marine-name = Морпех Транс-Солнечн�
 ghost-role-information-tsf-leader-name = Командир отряда морпехов Транс-Солнечной Федерации
 ghost-role-information-tsf-MARSOC-name = Морпех MARSOC Транс-Солнечной Федерации
 ghost-role-information-tsf-marine-desc = Вы — морпех Транс-Солнечной Федерации. Выполняйте назначенную задачу.
-job-rules-corporate-aligned = Вы на стороне {role-type-corporate-aligned-name}.
-                              Вы должны служить интересам нанотрейзен и Центрального Командования, даже если они расходятся с интересами станции.
-                              Помните: вы НЕ служите экипажу.
-job-rules-tsf-aligned = Вы на стороне {role-type-tsf-aligned-name}.
-                        Вы должны служить интересам Транс-Солнечной Федерации.
-                        Помните: вы НЕ служите экипажу.
+job-rules-corporate-aligned =
+    Вы на стороне { role-type-corporate-aligned-name }.
+    Вы должны служить интересам нанотрейзен и Центрального Командования, даже если они расходятся с интересами станции.
+    Помните: вы НЕ служите экипажу.
+job-rules-tsf-aligned =
+    Вы на стороне { role-type-tsf-aligned-name }.
+    Вы должны служить интересам Транс-Солнечной Федерации.
+    Помните: вы НЕ служите экипажу.
 ghost-role-information-sentient-carpholo-name = Разумный голокарп
 ghost-role-information-sentient-carprainbow-name = Разумный радужный карп
 ghost-role-information-sentient-carpshark-name = Разумная карпоакула
 ghost-role-information-one-star-unit-dungeon-name = Юнит «Одинокая звезда»
 ghost-role-information-guardian-unit-dungeon-name = Юнит-страж
 ghost-role-information-one-star-unit-dungeon-description = [11201010111002] Работайте с другими автоматонами, защищайте комплекс и уничтожайте всех нарушителей. [1110220001010002220]
+ghost-role-information-syndicate-saboteur-cyborg-name = Диверсионный борг синдиката
+ghost-role-information-syndicate-saboteur-cyborg-description = Смерть NT.
+ghost-role-information-ussp-waralt-description = "Вы — Офицер великой армии СССП! Выполняйте любые приказы своего Капитана без вопросов! ВО СЛАВУ РОДИНЫ!"

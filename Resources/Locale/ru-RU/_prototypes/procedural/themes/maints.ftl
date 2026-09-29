@@ -1,4 +1,4 @@
-ent-MaintsRoomMarker = Маркер технических тоннелей
+ent-MaintsRoomMarker = маркер технических тоннелей
     .desc = { ent-BaseRoomMarker.desc }
 ent-MaintsRoomMarkerClearing = { ent-MaintsRoomMarker }
     .suffix = Зачистка

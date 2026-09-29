@@ -1,7 +1,7 @@
 cmd-jobwhitelist-job-does-not-exist = Должность { $job } не существует.
 cmd-jobwhitelist-player-not-found = Игрок { $player } не найден.
-cmd-jobwhitelist-hint-player = [player]
-cmd-jobwhitelist-hint-job = [job]
+cmd-jobwhitelist-hint-player = [игрок]
+cmd-jobwhitelist-hint-job = [должность]
 cmd-jobwhitelistadd-desc = Позволяет игроку играть на должности из вайтлиста.
 cmd-jobwhitelistadd-help = Использование: jobwhitelistadd <username> <job>
 cmd-jobwhitelistadd-already-whitelisted = { $player } уже в вайтлисте на должность { $jobId } .({ $jobName }).

@@ -29,6 +29,7 @@ tutorial-base-walk-chat = Пройдите немного, чтобы освои
 tutorial-base-walk-tts = Пройдите немного, чтобы освоить движение.
 
 # --- Introduction Tutorial strings ---
+
 intro-tut-walk-bubble = Пройдитесь немного. Используйте [tutkeybind="MoveUp"] [tutkeybind="MoveLeft"] [tutkeybind="MoveDown"] [tutkeybind="MoveRight"].
 intro-tut-go-locker-room-bubble = Отправляйтесь в раздевалку - следуйте к отметке на полу.
 intro-tut-go-locker-room-chat = Добро пожаловать на борт нашей небольшой космической станции! Давай сначала зайдём в раздевалку и подберём одежду.

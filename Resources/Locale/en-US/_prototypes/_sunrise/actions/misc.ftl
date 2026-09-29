@@ -1,2 +1,2 @@
-ent-GoliathHoodToggleAction = Put on the meat cap
-    .desc = Pull up the hood
+ent-GoliathHoodToggleAction = put on the meat cap
+    .desc = Pull up the hood.

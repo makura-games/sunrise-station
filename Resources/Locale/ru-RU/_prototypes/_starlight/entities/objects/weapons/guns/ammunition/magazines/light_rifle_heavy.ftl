@@ -1,7 +1,7 @@
 ent-RifleHeavyBase = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
 ent-RifleHeavyMagazineEmpty = короб .308 (любой)
-    .suffix = пустой
+    .suffix = Пустой
     .desc = { ent-RifleHeavyBase.desc }
 ent-RifleHeavyMagazineSP = короб .308
     .desc = { ent-RifleHeavyBase.desc }

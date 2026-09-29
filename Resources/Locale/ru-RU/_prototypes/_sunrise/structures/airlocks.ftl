@@ -37,6 +37,5 @@ ent-SunriseAirlockExternalShuttlePirateLocked = { ent-AirlockExternalShuttleSynd
 ent-SunriseAirlockExternalGlassShuttlePirateAccessLocked = { ent-AirlockExternalGlassShuttleSyndicateLocked }
     .desc = { ent-AirlockExternalGlassShuttleSyndicateLocked.desc }
     .suffix = Внешний, Стыковочный, Стеклянный, Пиратский доступ, Закрыт
-
 ent-SunriseAirlockPirateRandomSpawner = спавнер пиратского шлюза
     .desc = Случайно создает пиратский шлюз.

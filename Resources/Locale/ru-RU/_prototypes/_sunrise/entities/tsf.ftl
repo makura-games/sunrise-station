@@ -4,41 +4,34 @@ ent-ClothingUniformJumpsuitTSFRep = униформа представителя 
     .desc = Форменная одежда дипломатических представителей Транс-Солнечной Федерации.
 ent-ClothingUniformJumpsuitTSFElite = униформа MARSOC
     .desc = Удобная и прочная боевая униформа морпехов Командования спецопераций морской пехоты ТСФ.
-
 ent-ClothingHeadHatBeretTSF = берет ТСФ
     .desc = Темный берет, который носят морпехи Транс-Солнечной Федерации.
 ent-ClothingHeadHatBeretTSFElite = берет MARSOC
     .desc = Берет морпехов Командования спецопераций морской пехоты ТСФ.
-
 ent-ClothingHeadHelmetTSF = боевой шлем морпеха
     .desc = Питание-зависимый боевой шлем морской пехоты Транс-Солнечной Федерации. Отлично защищает и усиливает зрение носителя системой OCULUS.
 ent-ClothingHeadHelmetTSFLeader = боевой шлем офицера морпехов
     .desc = Питание-зависимый боевой шлем офицеров морской пехоты Транс-Солнечной Федерации с продвинутой системой OCULUS.
 ent-ClothingHeadHelmetHardsuitTSF = шлем MARSOC
     .desc = Шлем морпехов Командования спецопераций морской пехоты ТСФ. Бронированный, герметичный и огнестойкий.
-
 ent-ClothingOuterArmorTSF = боевая броня морпеха Федерации
     .desc = Полнотелый комплект полуусиленной штурмовой брони морской пехоты ТСФ. Обеспечивает отличную защиту без сильной потери подвижности.
 ent-ClothingOuterArmorTSFLeader = боевая броня офицера морпехов Федерации
     .desc = Полнотелый комплект полуусиленной штурмовой брони морской пехоты ТСФ с офицерскими золотыми полосами.
 ent-ClothingOuterHardsuitTSF = скафандр MARSOC
     .desc = Скафандр морпехов Командования спецопераций морской пехоты ТСФ. Бронированный, герметичный и огнестойкий.
-
 ent-ClothingBeltTSFMarineWebbing = боевая разгрузка Федерации
     .desc = Тактическая разгрузка, используемая солдатами и морпехами Транс-Солнечной Федерации.
-
 ent-ClothingBackpackRadioTSF = ранцевый радиотелефон ТСФ
     .desc = Усиленный ранец для связи с центральным командованием.
 ent-ClothingBackpackTSF = рюкзак Федерации
     .desc = { ent-ClothingBackpackBlueShield.desc }
-
 ent-ClothingHeadsetTSFTrader = гарнитура торговца ТСФ
     .desc = { ent-ClothingHeadset.desc }
 ent-ClothingHeadsetAltTSF = тактическая гарнитура морпехов ТСФ
     .desc = Эргономичная боевая гарнитура морской пехоты ТСФ. Защищает от громких звуков.
 ent-EncryptionKeyTSF = ключ шифрования ТСФ
     .desc = { ent-EncryptionKey.desc }
-
 ent-TSFIdCard = ID-карта ТСФ
     .desc = { ent-IDCardStandard.desc }
 ent-TSFIdCardTrader = ID-карта торговца ТСФ
@@ -49,12 +42,10 @@ ent-TSFIdCardLeader = жетоны командира группы ТСФ
     .desc = { ent-TSFIdCardMarine.desc }
 ent-TSFIdCardElite = жетоны MARSOC
     .desc = { ent-TSFIdCardMarine.desc }
-
 ent-DeathRattleImplanterTSF = имплантер предсмертного хрипа ТСФ
     .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
 ent-DeathRattleImplantTSF = имплант предсмертного хрипа ТСФ
     .desc = Этот имплант оповещает радиоканал ТСФ, если носитель умирает или впадает в критическое состояние.
-
 ent-RandomHumanoidSpawnerTSFMarine = спавнер морпеха ТСФ
     .desc = { ent-MarkerBase.desc }
 ent-RandomHumanoidSpawnerTSFMarineLeader = спавнер командира морпехов ТСФ

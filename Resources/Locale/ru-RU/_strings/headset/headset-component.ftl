@@ -18,6 +18,6 @@ chat-radio-handheld = Портативный
 chat-radio-binary = Двоичный
 chat-radio-xenoborg = Ксеноборг
 chat-radio-mothership = Материнский корабль
+chat-radio-tsf = ТСФ
 # Sunrise-Edit
 chat-radio-no-id = Без ID
-chat-radio-tsf = ТСФ

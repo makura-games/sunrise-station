@@ -1,4 +1,4 @@
-ent-MindRoleFleshCultist = Flesh Cultist Role
+ent-MindRoleFleshCultist = flesh Cultist Role
     .desc = { ent-BaseMindRoleAntag.desc }
-ent-MindRoleFleshCultistLeader = Flesh Leader Cultist Role
+ent-MindRoleFleshCultistLeader = flesh Leader Cultist Role
     .desc = { ent-BaseMindRoleAntag.desc }

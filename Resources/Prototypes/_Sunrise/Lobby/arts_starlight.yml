@@ -1,0 +1,71 @@
+- type: lobbyArt
+  id: SunriseStarlightPositivity
+  background: /NetTextures/Lobby/Arts/_Starlight/positivity.webp
+
+- type: lobbyArt
+  id: SunriseStarlightIpcSaster
+  background: /NetTextures/Lobby/Arts/_Starlight/IPCsaster.webp
+
+- type: lobbyArt
+  id: SunriseStarlightLingKiller
+  background: /NetTextures/Lobby/Arts/_Starlight/thelingkiller.webp
+
+- type: lobbyArt
+  id: SunriseStarlightAgainstTheXeno
+  background: /NetTextures/Lobby/Arts/_Starlight/againstthexeno.webp
+
+- type: lobbyArt
+  id: SunriseStarlightBombDefusalBorg
+  background: /NetTextures/Lobby/Arts/_Starlight/bombdefusalborg.webp
+
+- type: lobbyArt
+  id: SunriseStarlightTurncoats
+  background: /NetTextures/Lobby/Arts/_Starlight/turncoats.webp
+
+- type: lobbyArt
+  id: SunriseStarlightYouAreNotFunny
+  background: /NetTextures/Lobby/Arts/_Starlight/you-are-not-funny.webp
+
+- type: lobbyArt
+  id: SunriseStarlightTritfireDragon
+  background: /NetTextures/Lobby/Arts/_Starlight/tritfire_dragon.webp
+
+- type: lobbyArt
+  id: SunriseStarlightSecurityShowdown
+  background: /NetTextures/Lobby/Arts/_Starlight/securityshowdown.webp
+
+- type: lobbyArt
+  id: SunriseStarlightRevClown
+  background: /NetTextures/Lobby/Arts/_Starlight/rev-clown.webp
+
+- type: lobbyArt
+  id: SunriseStarlightTheMidRoundAntagsBane
+  background: /NetTextures/Lobby/Arts/_Starlight/The_mid-round_antag's_bane.webp
+
+- type: lobbyArt
+  id: SunriseStarlightBlackFeathers
+  background: /NetTextures/Lobby/Arts/_Starlight/blackfeathers.webp
+
+- type: lobbyArt
+  id: SunriseStarlightDispace
+  background: /NetTextures/Lobby/Arts/_Starlight/Dispace.webp
+
+- type: lobbyArt
+  id: SunriseStarlightClownChoices
+  background: /NetTextures/Lobby/Arts/_Starlight/clown.webp
+
+- type: lobbyArt
+  id: SunriseStarlightHopDeskSimulator
+  background: /NetTextures/Lobby/Arts/_Starlight/HoPdeskSimulator.webp
+
+- type: lobbyArt
+  id: SunriseStarlightKatieVsSyndie
+  background: /NetTextures/Lobby/Arts/_Starlight/KATIEVSSYNDIE.webp
+
+- type: lobbyArt
+  id: SunriseStarlightNoGalCom
+  background: /NetTextures/Lobby/Arts/_Starlight/NoGalCom.webp
+
+- type: lobbyArt
+  id: SunriseStarlightAiderThief
+  background: /NetTextures/Lobby/Arts/_Starlight/AiderThief.webp

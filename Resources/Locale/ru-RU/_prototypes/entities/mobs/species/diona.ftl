@@ -1,4 +1,4 @@
-ent-BaseMobDiona = Урист МакПлэнтс
+ent-BaseMobDiona = урист МакПлэнтс
     .desc = { ent-BaseMobSpeciesOrganic.desc }
     .suffix = Диона
 ent-MobDionaDummy = { ent-BaseSpeciesDummy }

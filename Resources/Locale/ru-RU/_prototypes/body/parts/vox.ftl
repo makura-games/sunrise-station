@@ -20,7 +20,6 @@ ent-LeftFootVox = левая стопа вокса
     .desc = { ent-PartVox.desc }
 ent-RightFootVox = правая стопа вокса
     .desc = { ent-PartVox.desc }
-
 ent-OrganVoxTorso = { ent-TorsoVox }
     .desc = { ent-TorsoVox.desc }
 ent-OrganVoxHead = { ent-HeadVox }

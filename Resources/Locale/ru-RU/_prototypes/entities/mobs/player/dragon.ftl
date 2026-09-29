@@ -8,9 +8,9 @@ ent-DragonsBreathGun = драконье лёгкое
 ent-MobDragonDungeon = { ent-BaseMobDragon }
     .suffix = Подземелье
     .desc = { ent-BaseMobDragon.desc }
-ent-ActionSpawnRift = Создать карповый разлом
+ent-ActionSpawnRift = создать карповый разлом
     .desc = Создать карповый разлом, который будет периодически призывать карпов.
-ent-ActionDevour = [color=red]Поглотить[/color]
+ent-ActionDevour = [color=red]поглотить[/color]
     .desc = Попытаться разрушить конструкцию своими челюстями или проглотить существо.
-ent-ActionDragonsBreath = [color=orange]Дыхание дракона[/color]
+ent-ActionDragonsBreath = [color=orange]дыхание дракона[/color]
     .desc = Извергайте пламя на всех, кто поимеет глупость напасть на вас!

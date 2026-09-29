@@ -1,3 +1,4 @@
+# Headings
 turret-controls-window-title = Автономная система управления обороной
 turret-controls-window-turret-status-label = Подключенные устройства [{ $count }]
 turret-controls-window-armament-controls-label = Настройки вооружения

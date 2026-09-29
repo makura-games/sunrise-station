@@ -1,5 +1,7 @@
 food-sequence-no-space = Вы не можете положить больше!
-food-sequence-standart-gen = { $prefix }{ $content }{ $suffix }
+
+# GENERAL
+
 food-sequence-content-chicken = курица
 food-sequence-content-duck = утка
 food-sequence-content-crab = крабы
@@ -75,83 +77,52 @@ food-sequence-content-spacemans-trumpet = космический духовой 
 food-sequence-content-cherry = вишня
 food-sequence-content-snail = улитка
 food-sequence-content-anomaly-berry = аномальная ягода
-#Burger
+
+# BURGERS
+
 food-sequence-burger-gen = { $content }бургер
-food-sequence-burger-suffix = бургер
-food-sequence-burger-content-meat = мясно
 food-sequence-burger-content-raw-meat = сырой
+food-sequence-burger-content-meat = мясно
 food-sequence-burger-content-carp = карпо
 food-sequence-burger-content-bear = медведь
-food-sequence-burger-content-penguin = пенгвино
-food-sequence-burger-content-chiken = курица
-food-sequence-burger-content-duck = утка
-food-sequence-burger-content-corgi = корги
 food-sequence-burger-content-crab = крабо
+food-sequence-burger-content-penguin = пенгвино
+food-sequence-burger-content-corgi = корги
 food-sequence-burger-content-goliath = голи
-food-sequence-burger-content-dragon = дракон
 food-sequence-burger-content-rat = крыса
 food-sequence-burger-content-lizard = ящер
 food-sequence-burger-content-plant = растение
 food-sequence-burger-content-rotten = мусор
 food-sequence-burger-content-spider = пауко
-food-sequence-burger-content-clump = комок
-food-sequence-burger-content-snake = змея
-food-sequence-burger-content-xeno = ксено
-food-sequence-burger-content-tomato = томат
-food-sequence-burger-content-capfruit = кап
-food-sequence-burger-content-salami = салями
-food-sequence-burger-content-clown = клоун
-food-sequence-burger-content-slime = слайм
-food-sequence-burger-content-pea = пеа
-food-sequence-burger-content-banana = банан
-food-sequence-burger-content-holymelon = свято
-food-sequence-burger-content-mimana = мимана
 food-sequence-burger-content-carrot = морковно
-food-sequence-burger-content-suppermatter = суппер
-food-sequence-burger-content-hamster = хомя
-food-sequence-burger-content-berries = ягодно
-food-sequence-burger-content-spacemans-trumpet = космострубко
 food-sequence-burger-content-cabbage = капустно
-food-sequence-burger-content-anomaly-berry = аномально
-food-sequence-burger-content-extradimensional-orange = 3д
-food-sequence-burger-content-world-pea = мирно
-food-sequence-taco-gen = тако с { $content }
 food-sequence-burger-content-garlic = чесночно
-food-sequence-skewer-gen = { $content } кебаб
-food-sequence-burger-content-lemon = лемон
-food-sequence-burger-content-orange = апельсино
 food-sequence-burger-content-pineapple = ананасо
-food-sequence-burger-content-potato = картошко
-food-sequence-burger-content-apple = яблоко
-food-sequence-burger-content-cocoa = какао
-food-sequence-burger-content-corn = кукурузо
 food-sequence-burger-content-onion = луко
-food-sequence-burger-content-mushroom = грибо
-food-sequence-burger-content-chili = чили
-food-sequence-burger-content-chilly = чилли
-food-sequence-burger-content-aloe = алоэ
-food-sequence-burger-content-poppy = мако
-food-sequence-burger-content-lily = лили
 food-sequence-burger-content-ambrosia = амброзио
 food-sequence-burger-content-galaxy = галактически
 food-sequence-burger-content-glasstle = стекло
 food-sequence-burger-content-gatfruit = гат
+food-sequence-burger-content-capfruit = кап
 food-sequence-burger-content-rice = рис
 food-sequence-burger-content-soy = соя
 food-sequence-burger-content-koibean = кой
 food-sequence-burger-content-watermelon = арбузо
+food-sequence-burger-content-holymelon = свято
 food-sequence-burger-content-cannabis = весёлый
 food-sequence-burger-content-rainbow-cannabis = ВЕСЁЛЫЙ
 food-sequence-burger-content-tobacco = тобако
-food-sequence-burger-content-cheese = сыро
-food-sequence-burger-content-brain = мозги
-food-sequence-burger-content-tongue = языко
-food-sequence-burger-content-appendix = аппендиксо
-food-sequence-burger-content-ears = ухо
-food-sequence-burger-content-stomach = желудо
-food-sequence-burger-content-liver = печень
-food-sequence-cotton-burger-gen = {$content}бургер
+food-sequence-burger-content-suppermatter = суппер
+food-sequence-burger-content-hamster = хомя
+food-sequence-burger-content-berries = ягодно
+food-sequence-burger-content-spacemans-trumpet = космострубко
+food-sequence-burger-content-anomaly-berry = аномально
+food-sequence-burger-content-extradimensional-orange = 3д
+food-sequence-burger-content-world-pea = мирно
 
+# COTTON BURGERS
+
+food-sequence-cotton-burger-gen = { $content }бургер
 food-sequence-cotton-burger-content-cotton-bol = хлопок
 food-sequence-cotton-burger-content-pyrotton-bol = пиро
 food-sequence-cotton-burger-content-plushie-throngler = тронгл
@@ -188,3 +159,43 @@ food-sequence-cotton-burger-content-plushie-ian = корги
 food-sequence-cotton-burger-content-among-pequeno = сус
 
 # TACO
+
+food-sequence-taco-gen = тако с { $content }
+
+# SKEWER
+
+food-sequence-skewer-gen = { $content } кебаб
+food-sequence-standart-gen = { $prefix }{ $content }{ $suffix }
+food-sequence-burger-suffix = бургер
+food-sequence-burger-content-chiken = курица
+food-sequence-burger-content-duck = утка
+food-sequence-burger-content-dragon = дракон
+food-sequence-burger-content-clump = комок
+food-sequence-burger-content-snake = змея
+food-sequence-burger-content-xeno = ксено
+food-sequence-burger-content-tomato = томат
+food-sequence-burger-content-salami = салями
+food-sequence-burger-content-clown = клоун
+food-sequence-burger-content-slime = слайм
+food-sequence-burger-content-pea = пеа
+food-sequence-burger-content-banana = банан
+food-sequence-burger-content-mimana = мимана
+food-sequence-burger-content-lemon = лемон
+food-sequence-burger-content-orange = апельсино
+food-sequence-burger-content-potato = картошко
+food-sequence-burger-content-apple = яблоко
+food-sequence-burger-content-cocoa = какао
+food-sequence-burger-content-corn = кукурузо
+food-sequence-burger-content-mushroom = грибо
+food-sequence-burger-content-chili = чили
+food-sequence-burger-content-chilly = чилли
+food-sequence-burger-content-aloe = алоэ
+food-sequence-burger-content-poppy = мако
+food-sequence-burger-content-lily = лили
+food-sequence-burger-content-cheese = сыро
+food-sequence-burger-content-brain = мозги
+food-sequence-burger-content-tongue = языко
+food-sequence-burger-content-appendix = аппендиксо
+food-sequence-burger-content-ears = ухо
+food-sequence-burger-content-stomach = желудо
+food-sequence-burger-content-liver = печень

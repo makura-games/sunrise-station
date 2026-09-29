@@ -47,7 +47,9 @@ ui-options-scp-echo-strong-preset-preferred = Использовать усил�
 ui-options-scp-echo-strong-preset-preferred-tooltip =
     Определяет, будет ли использован сильный эффект эха.
     В усиленном эффекте звуки будут иметь более долгий хвост.
+
 # Sunrise-End
+
 
 ## Graphics menu
 
@@ -88,7 +90,7 @@ ui-options-hud-theme-clockwork = Механизм
 ui-options-hud-theme-retro = Ретро
 ui-options-hud-theme-minimalist = Минимализм
 ui-options-hud-theme-ashen = Пепел
-ui-options-hud-layout-default = Обычный (for Virgin)
+ui-options-hud-layout-default = Обычный (для Virgin)
 ui-options-hud-layout-separated = Раздельный (for Chad)
 ui-options-vp-stretch = Растянуть изображение для соответствия окну игры
 ui-options-vp-scale = Фиксированный масштаб окна игры:
@@ -99,6 +101,9 @@ ui-options-vp-integer-scaling-tooltip =
         используя целочисленное значение при определённых разрешениях. Хотя это и
         приводит к чётким текстурам, это часто означает, что сверху/снизу экрана будут
         чёрные полосы или что часть окна не будет видна.
+ui-options-filter-label = Фильтр масштабирования:
+ui-options-filter-nearest = Ближайший (без сглаживания)
+ui-options-filter-bilinear = Билинейный (со сглаживанием)
 ui-options-vp-vertical-fit = Подгон окна просмотра по вертикали
 ui-options-vp-vertical-fit-tooltip =
     Когда функция включена, основное окно просмотра не будет учитывать горизонтальную ось
@@ -106,12 +111,15 @@ ui-options-vp-vertical-fit-tooltip =
         то это приведёт к его обрезанию по горизонтальной оси.
 ui-options-vp-low-res = Изображение низкого разрешения
 ui-options-parallax-low-quality = Низкокачественный параллакс (фон)
+ui-options-ambient-occlusion = Показывать затенение окружающей среды
 ui-options-fps-counter = Показать счётчик FPS
 ui-options-vp-width = Ширина окна игры:
 ui-options-hud-layout = Тип HUD:
 
 ## Controls menu
 
+ui-options-hold-to-attack-melee = Зажатие для атаки (ближний бой)
+ui-options-hold-to-attack-ranged = Зажатие для атаки (дальний бой)
 ui-options-binds-reset-all = Сбросить ВСЕ привязки
 ui-options-binds-explanation = ЛКМ — изменить кнопку, ПКМ — убрать кнопку
 ui-options-unbound = Пусто
@@ -133,7 +141,6 @@ ui-options-header-text-cursor-select = Выделение текста
 ui-options-header-text-edit = Редактирование текста
 ui-options-header-text-chat = Чат
 ui-options-header-text-other = Другой текстовый ввод
-ui-options-header-extra = Экстра
 ui-options-hotkey-keymap = Использовать клавиши QWERTY (США)
 ui-options-hotkey-toggle-walk = Переключать шаг\бег
 ui-options-function-move-up = Двигаться вверх
@@ -141,6 +148,7 @@ ui-options-function-move-left = Двигаться налево
 ui-options-function-move-down = Двигаться вниз
 ui-options-function-move-right = Двигаться направо
 ui-options-function-walk = Идти
+ui-options-function-toggle-knockdown = Переключить ползание
 ui-options-function-camera-rotate-left = Повернуть налево
 ui-options-function-camera-rotate-right = Повернуть направо
 ui-options-function-camera-reset = Сбросить камеру
@@ -165,6 +173,9 @@ ui-options-function-save-item-location = Сохранить расположен
 ui-options-static-storage-ui = Закрепить интерфейс хранилища на хотбаре
 ui-options-function-smart-equip-backpack = Умная экипировка в рюкзак
 ui-options-function-smart-equip-belt = Умная экипировка на пояс
+ui-options-function-smart-equip-suit-storage = Умное снаряжение в крепление костюма
+ui-options-function-smart-equip-pocket1 = Умное снаряжение в карман 1
+ui-options-function-smart-equip-pocket2 = Умное снаряжение в карман 2
 ui-options-function-open-backpack = Открыть рюкзак
 ui-options-function-open-belt = Открыть пояс
 ui-options-function-throw-item-in-hand = Бросить предмет
@@ -218,6 +229,11 @@ ui-options-function-editor-copy-object = Копировать
 ui-options-function-show-debug-console = Открыть консоль
 ui-options-function-show-debug-monitors = Показать дебаг информацию
 ui-options-function-inspect-entity = Изучить сущность
+ui-options-function-inspect-entity-tooltip = Открыть окно ViewVariables для сущности, на которую наведён курсор мыши.
+ui-options-function-inspect-server-component = Осмотреть серверный компонент
+ui-options-function-inspect-server-component-tooltip = Открыть окно ViewVariables с серверным компонентом, заданным командой «quickinspect», для сущности, на которую наведён курсор мыши.
+ui-options-function-inspect-client-component = Осмотреть клиентский компонент
+ui-options-function-inspect-client-component-tooltip = Открыть окно ViewVariables с клиентским компонентом, заданным командой «quickinspect», для сущности, на которую наведён курсор мыши.
 ui-options-function-hide-ui = Спрятать интерфейс
 ui-options-function-hotbar1 = 1 слот хотбара
 ui-options-function-hotbar2 = 2 слот хотбара
@@ -341,8 +357,6 @@ cmd-options-help = Использование: options [tab]
 
 ## Accessibility menu
 
-ui-options-accessability-header-visuals = Визуальные эффекты
-ui-options-accessability-header-content = Содержимое
 ui-options-enable-color-name = Цветные имена персонажей
 ui-options-colorblind-friendly = Режим для дальтоников
 ui-options-reduced-motion = Снижение интенсивности визуальных эффектов
@@ -351,7 +365,6 @@ ui-options-chat-window-opacity = Прозрачность окна чата
 ui-options-speech-bubble-text-opacity = Прозрачность текста в облачках
 ui-options-speech-bubble-speaker-opacity = Прозрачность имени говорящего
 ui-options-speech-bubble-background-opacity = Прозрачность фона облачков
-ui-options-censor-nudity = Цензурировать наготу персонажей
 
 ## Admin menu
 
@@ -384,21 +397,9 @@ ui-options-admin-enable-overlay-starting-job = Показывать началь
 ui-options-admin-overlay-merge-distance = Дистанция группировки стека
 ui-options-admin-overlay-ghost-fade-distance = Расстояние затухания оверлея призраков от мыши
 ui-options-admin-overlay-ghost-hide-distance = Расстояние скрытия оверлея призраков от мыши
-ui-options-filter-label = Фильтр масштабирования:
-ui-options-filter-nearest = Ближайший (без сглаживания)
-ui-options-filter-bilinear = Билинейный (со сглаживанием)
-ui-options-ambient-occlusion = Показывать Ambient Occlusion
-
-ui-options-hold-to-attack-melee = Зажатие для атаки (ближний бой)
-ui-options-hold-to-attack-ranged = Зажатие для атаки (дальний бой)
-
-ui-options-function-toggle-knockdown = Переключить ползание
-
-ui-options-function-smart-equip-suit-storage = Умное снаряжение в крепление костюма
-ui-options-function-smart-equip-pocket1 = Умное снаряжение в карман 1
-ui-options-function-smart-equip-pocket2 = Умное снаряжение в карман 2
-ui-options-function-inspect-entity-tooltip = Открыть окно ViewVariables для сущности, на которую наведён курсор мыши.
-ui-options-function-inspect-server-component = Осмотреть серверный компонент
-ui-options-function-inspect-server-component-tooltip = Открыть окно ViewVariables с серверным компонентом, заданным командой «quickinspect», для сущности, на которую наведён курсор мыши.
-ui-options-function-inspect-client-component = Осмотреть клиентский компонент
-ui-options-function-inspect-client-component-tooltip = Открыть окно ViewVariables с клиентским компонентом, заданным командой «quickinspect», для сущности, на которую наведён курсор мыши.
+ui-options-admin-strip-overlay-title = Оверлей раздевания
+ui-options-admin-strip-overlay-setting = Показывать оверлей раздевания по умолчанию
+ui-options-header-extra = Экстра
+ui-options-accessability-header-visuals = Визуальные эффекты
+ui-options-accessability-header-content = Содержимое
+ui-options-censor-nudity = Цензурировать наготу персонажей

@@ -36,7 +36,7 @@ names-xenoborg-dataset-35 = ГИБ-О-ТРОН
 names-xenoborg-dataset-36 = Металлический Приносящий Ад
 names-xenoborg-dataset-37 = Злой суперкалькулятор
 names-xenoborg-dataset-38 = Безумная микроволновка
-names-xenoborg-dataset-39 = LET.HAL-8000
+names-xenoborg-dataset-39 = ЛЕТ.ХАЛ-8000
 names-xenoborg-dataset-40 = Разумная пушка
 names-xenoborg-dataset-41 = Злой холодильник
 names-xenoborg-dataset-42 = Б0рги-Экипажу
@@ -58,7 +58,6 @@ names-xenoborg-dataset-57 = Фрагмент разрушения
 names-xenoborg-dataset-58 = Талос
 names-xenoborg-dataset-59 = Аггробот
 names-xenoborg-dataset-60 = Спинорез
-#
 names-xenoborg-dataset-61 = Холодильник
 names-xenoborg-dataset-62 = ЗлобоШкаф
 names-xenoborg-dataset-63 = ЗлобоШар
@@ -80,4 +79,3 @@ names-xenoborg-dataset-78 = Штурм-О-Трон
 names-xenoborg-dataset-79 = ДЕБАГ
 names-xenoborg-dataset-80 = В.У.Л.Ь.П.А
 names-xenoborg-dataset-81 = Робаст-О-Трон
-#

@@ -1,4 +1,4 @@
-ent-BoxMaintRoomMarker5x5 = Box maintenance room marker
+ent-BoxMaintRoomMarker5x5 = box maintenance room marker
     .desc = { ent-BaseRoomMarker.desc }
 
 ent-BoxMaintRoomMarker3x3 = { ent-BoxMaintRoomMarker5x5 }

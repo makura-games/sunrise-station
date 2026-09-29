@@ -1,2 +1,2 @@
-ent-ActionTakeAim = Activate aiming
+ent-ActionTakeAim = activate aiming
     .desc = { "" }

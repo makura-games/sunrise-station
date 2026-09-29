@@ -1,5 +1,5 @@
 ent-BaseMindRole = роль сознания
-    .desc = Энтити роли сознания
+    .desc = Энтити роли сознания.
 ent-BaseMindRoleAntag = { ent-BaseMindRole }
     .desc = { ent-BaseMindRole.desc }
 ent-MindRoleObserver = роль наблюдатель
@@ -60,7 +60,7 @@ ent-MindRoleInitialInfected = роль нулевой пациент
     .desc = { ent-BaseMindRoleAntag.desc }
 ent-MindRoleZombie = роль Зомби
     .desc = { ent-BaseMindRoleAntag.desc }
-ent-MindRoleChangeling = Роль Генокрада
+ent-MindRoleChangeling = роль Генокрада
     .desc = { ent-BaseMindRoleAntag.desc }
-ent-MindRoleGhostMarker = Гост роль
+ent-MindRoleGhostMarker = гост роль
     .desc = { ent-BaseMindRole.desc }

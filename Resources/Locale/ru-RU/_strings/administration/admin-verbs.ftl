@@ -1,3 +1,4 @@
+# Generic verbs
 delete-verb-get-data-text = Удалить
 edit-solutions-verb-get-data-text = Редактировать растворы
 explode-verb-get-data-text = Взорвать
@@ -8,6 +9,8 @@ admin-verbs-teleport-here = Телепортировать сюда
 admin-verbs-freeze = Заморозить
 admin-verbs-freeze-and-mute = Заморозить и заглушить
 admin-verbs-unfreeze = Разморозить
+admin-verbs-camera = Открыть камеру
+admin-verbs-camera-description = Открыть окно камеры, которое следует за выбранной сущностью.
 admin-verbs-erase = Стереть
 admin-verbs-erase-description =
     Удаляет игрока из раунда и манифеста членов экипажа, а также удаляет все его сообщения в чате.
@@ -16,8 +19,7 @@ admin-verbs-erase-description =
 toolshed-verb-mark = Отметить
 toolshed-verb-mark-description = Помещает данную сущность в переменную $marked, заменяя её предыдущее значение.
 export-entity-verb-get-data-text = Экспорт спрайта
-admin-verbs-camera = Открыть камеру
-admin-verbs-camera-description = Открыть окно камеры, которое следует за выбранной сущностью.
+# Tools verbs
 admin-verbs-rejuvenate = Восстановить
 admin-verbs-make-indestructible = Сделать неразрушимым
 admin-verbs-make-vulnerable = Сделать уязвимым
@@ -44,17 +46,17 @@ admin-verbs-pause-map = Поставить карту на паузу
 admin-verbs-snap-joints = Сломать суставы
 admin-verbs-make-minigun = Сделать миниганом
 admin-verbs-set-bullet-amount = Установить количество пуль
-
+# Toggles verbs
 admin-verbs-bolt = Заболтировать
 admin-verbs-unbolt = Разболтировать
 admin-verbs-emergency-access-on = Включить аварийный доступ
 admin-verbs-emergency-access-off = Выключить аварийный доступ
-
-admin-verbs-dialog-adjust-stack-amount = Количество (макс. {$max})
+# Dialogs verbs
+admin-verbs-dialog-adjust-stack-amount = Количество (макс. { $max })
 admin-verbs-dialog-rename-title = Переименовать
 admin-verbs-dialog-rename-name = Название
 admin-verbs-dialog-redescribe-title = Изменить описание
 admin-verbs-dialog-redescribe-description = Описание
 admin-verbs-dialog-rename-and-redescribe-title = Переименовать и изменить описание
 admin-verbs-dialog-set-bullet-amount-title = Установить количество пуль
-admin-verbs-dialog-set-bullet-amount-amount = Количество (стандартно {$cap})
+admin-verbs-dialog-set-bullet-amount-amount = Количество (стандартно { $cap })

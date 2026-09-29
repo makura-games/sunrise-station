@@ -6,6 +6,6 @@ lathe-category-mechs-ripleymkii = Рипли MK-II
 lathe-category-mechs-clarke = Кларк
 lathe-category-mechs-gygax = Гигакс
 lathe-category-mechs-durand = Дюранд
-lathe-category-mechs-phazon = Фазон
 lathe-category-mechs-equipment = Оборудование механоидов
 lathe-category-mechs-weapons = Вооружение механоидов
+lathe-category-mechs-phazon = Фазон

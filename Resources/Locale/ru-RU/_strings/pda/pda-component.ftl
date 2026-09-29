@@ -21,11 +21,11 @@ comp-pda-ui-station-time = Время и дата: [color=white]{ $time }, { $da
 comp-pda-ui-start-time = Длительность смены: [color=white]{ $time }[/color]
 comp-pda-ui-eject-id-button = Извлечь ID
 comp-pda-ui-eject-pen-button = Извлечь ручку
-comp-pda-ui-ringtone-button-description = Измените рингтон вашего КПК
 comp-pda-ui-ringtone-button = Рингтон
+comp-pda-ui-ringtone-button-description = Измените рингтон вашего КПК
 comp-pda-ui-toggle-flashlight-button = Переключить фонарик
-pda-bound-user-interface-music-button-description = Слушайте музыку на своём КПК
 pda-bound-user-interface-music-button = Музыкальный инструмент
+pda-bound-user-interface-music-button-description = Слушайте музыку на своём КПК
 comp-pda-ui-unknown = Неизвестно
 comp-pda-ui-unassigned = Не назначено
 pda-notification-message = [font size=12][bold]КПК[/bold] { $header }: [/font]
@@ -34,6 +34,3 @@ pda-notification-message = [font size=12][bold]КПК[/bold] { $header }: [/font
 comp-pda-ui-shuttle-call-time = До смены экипажа: [color=white]{ $time }[/color]
 comp-pda-ui-shuttle-arrival-time = До прибытия шаттла: [color=white]{ $time }[/color]
 comp-pda-ui-shuttle-launch-time = До запуска шаттла: [color=white]{ $time }[/color]
-
-# Sunrise-end
-

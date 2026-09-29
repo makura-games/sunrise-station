@@ -26,9 +26,6 @@ shop-disease-category-evolution = Улучшение
 shop-disease-category-infection = Заражение
 # Uplink
 store-category-objectives = Цели
-store-category-mechs = Мехи
-store-category-shuttle = Шаттл
-store-category-cybernetics = Кибернетика
 # ntUplink
 store-category-ntautogun = Автоматы
 store-category-ntlasers = Лазерное оружие
@@ -41,5 +38,8 @@ store-category-ntmechs = Мехи
 store-category-ntexplosive = Взрывчатка
 store-category-ntammo = Боеприпасы
 store-category-ntequipment = Экипировка
+store-category-mechs = Мехи
+store-category-shuttle = Шаттл
+store-category-cybernetics = Кибернетика
 # PirateUplink
 store-category-exchanger = Обмен

@@ -29,7 +29,7 @@ reagent-name-anti-nob = анти-ноблиум
 reagent-desc-anti-nob = Мы до сих пор не знаем, что он делает, но он стоит дорого.
 
 reagent-name-electrovae = электровей
-reagent-desc-electrovae = Зловеще гудящий газ. 
+reagent-desc-electrovae = Зловеще гудящий газ.
 
 reagent-name-charged-electrovae = заряженный электровей
 reagent-desc-charged-electrovae = Электрически заряженный газ. Он покалывает кожу.

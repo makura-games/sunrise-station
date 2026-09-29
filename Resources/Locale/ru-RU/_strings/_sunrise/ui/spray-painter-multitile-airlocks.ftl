@@ -1,8 +1,7 @@
-# Группы
+# Groups
 spray-painter-tab-group-airlockdoubleglass = Двойной
 spray-painter-tab-group-airlocktripleglass = Тройной
-
-# Двойные стеклянные шлюзы
+# Double glass airlocks
 spray-painter-style-airlockdoubleglass-atmospherics = Атмосферика
 spray-painter-style-airlockdoubleglass-basic = Обычный
 spray-painter-style-airlockdoubleglass-cargo = Снабжение
@@ -16,8 +15,7 @@ spray-painter-style-airlockdoubleglass-science = Научный
 spray-painter-style-airlockdoubleglass-security = Служба безопасности
 spray-painter-style-airlockdoubleglass-virology = Вирусология
 spray-painter-style-airlockdoubleglass-centralcommand = Центральное командование
-
-# Тройные стеклянные шлюзы
+# Triple glass airlocks
 spray-painter-style-airlocktripleglass-atmospherics = Атмосферика
 spray-painter-style-airlocktripleglass-basic = Обычный
 spray-painter-style-airlocktripleglass-cargo = Снабжение

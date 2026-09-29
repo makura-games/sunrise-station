@@ -1,4 +1,4 @@
-ent-BaseBulletStarlight = Базовая пуля
+ent-BaseBulletStarlight = базовая пуля
     .desc = Если вы это видите, вы, вероятно, мертвы!
 ent-BulletAdvTaser = разряд тазера
     .desc = { ent-BaseBulletStarlight.desc }

@@ -41,6 +41,11 @@ stack-hv-cable =
         [1] высоковольтный кабель
        *[other] высоковольтные кабели
     }
+stack-explosive-cord =
+    { $amount ->
+        [1] взрывной шнур
+       *[other] взрывные шнуры
+    }
 stack-wood-plank =
     { $amount ->
         [1] деревянная доска
@@ -90,6 +95,11 @@ stack-artifact-fragment =
     фрагмент { $amount ->
         [1] артефакта
        *[other] артефактов
+    }
+stack-conveyor-belt =
+    { $amount ->
+        [1] конвейерная лента
+       *[other] конвейерные ленты
     }
 # best materials
 stack-ground-tobacco = молотый табак
@@ -153,28 +163,37 @@ stack-dark-tile = темная плитка
 stack-dark-steel-diagonal-mini-tile = темная стальная диагональная мини-плитка
 stack-dark-steel-diagonal-tile = темная стальная диагональная плитка
 stack-dark-steel-herringbone = темная стальная ёлочка
+stack-dark-steel-horizontal-slats-tile-bordered = тёмная стальная плитка с окантованными горизонтальными планками
 stack-dark-steel-mini-tile = темная стальная мини-плитка
 stack-dark-steel-mono-tile = темная стальная моноплитка
 stack-dark-steel-pavement = темный стальной тротуар
 stack-dark-steel-vertical-pavement = темный стальной вертикальный тротуар
+stack-dark-steel-vertical-slats-tile-bordered = тёмная стальная плитка с окантованными вертикальными планками
+stack-dark-steel-slats-tile-continuous = тёмная стальная плитка со сплошными планками
 stack-offset-dark-steel-tile = смещенная темная стальная плитка
 stack-offset-steel-tile = смещенная стальная плитка
 stack-steel-diagonal-mini-tile = стальная диагональная мини-плитка
 stack-steel-diagonal-tile = стальная диагональная плитка
 stack-steel-herringbone = стальная ёлочка
+stack-steel-horizontal-slats-tile-bordered = стальная плитка с окантованными горизонтальными планками
 stack-steel-mini-tile = стальная мини-плитка
 stack-steel-mono-tile = стальная моноплитка
 stack-steel-pavement = стальной тротуар
 stack-steel-vertical-pavement = стальной вертикальный тротуар
+stack-steel-vertical-slats-tile-bordered = стальная плитка с окантованными вертикальными планками
+stack-steel-slats-tile-continuous = стальная плитка со сплошными планками
 stack-white-tile = белая плитка
 stack-offset-white-steel-tile = смещенная белая стальная плитка
 stack-white-steel-diagonal-mini-tile = белая стальная диагональная мини-плитка
 stack-white-steel-diagonal-tile = белая стальная диагональная плитка
 stack-white-steel-herringbone = белая стальная ёлочка
+stack-white-steel-horizontal-slats-tile-bordered = белая стальная плитка с окантованными горизонтальными планками
 stack-white-steel-mini-tile = белая стальная мини-плитка
 stack-white-steel-mono-tile = белая стальная моноплитка
 stack-white-steel-pavement = белый стальной тротуар
 stack-white-steel-vertical-pavement = белый стальной вертикальный тротуар
+stack-white-steel-vertical-slats-tile-bordered = белая стальная плитка с окантованными вертикальными планками
+stack-white-steel-slats-tile-continuous = белая стальная плитка со сплошными планками
 stack-steel-dark-checker-tile = стальная темная клетчатая плитка
 stack-steel-light-checker-tile = стальная светлая клетчатая плитка
 stack-steel-tile = стальная плитка
@@ -203,7 +222,7 @@ stack-eighties-floor-tile = плитка пола восьмидесятых
 stack-blue-arcade-tile = синяя аркадная плитка
 stack-red-arcade-tile = красная аркадная плитка
 stack-red-carpet-tile = красная ковровая плитка
-stack-block-carpet-tile = блочная ковровая плитка
+stack-black-carpet-tile = чёрная ковровая плитка
 stack-blue-carpet-tile = синяя ковровая плитка
 stack-green-carpet-tile = зеленая ковровая плитка
 stack-orange-carpet-tile = оранжевая ковровая плитка
@@ -236,6 +255,9 @@ stack-gray-concrete-smooth = гладкий серый бетон
 stack-old-concrete-tile = старая бетонная плитка
 stack-old-concrete-mono-tile = старая бетонная моноплитка
 stack-old-concrete-smooth = старый гладкий бетон
+stack-ironsand-concrete-tile = железопесчаная бетонная плитка
+stack-ironsand-concrete-mono-tile = железопесчаная бетонная моноплитка
+stack-ironsand-concrete-smooth = гладкий железопесчаный бетон
 stack-silver-floor-tile = серебряная напольная плитка
 stack-bcircuit-floor-tile = плитка пола с синим контуром
 stack-grass-floor-tile = плитка травяного пола
@@ -247,6 +269,8 @@ stack-steel-maint-floor = стальной пол техзоны
 stack-grating-maint-floor = решетчатый пол техзоны
 stack-web-tile = паутинная плитка
 stack-astro-grass-floor = астро-травяной пол
+stack-dark-astro-grass-floor = тёмный пол из астро-травы
+stack-light-astro-grass-floor = светлый пол из астро-травы
 stack-mowed-astro-grass-floor = скошенный астро-травяной пол
 stack-jungle-astro-grass-floor = пол из астро-травы джунглей
 stack-astro-ice-floor = астро-ледяной пол
@@ -255,9 +279,17 @@ stack-large-wood-floor = большой деревянный пол
 stack-light-fancy-wood = большой светлый деревянный пол
 stack-red-circuit-floor = плитка пола с красным контуром
 stack-asteroid-astro-sand-floor = пол из астероидного астро-песка
+stack-desert-astro-sand-floor = пол из пустынного астро-песка
 stack-xeno-floor = ксено-пол
 stack-xeno-steel = плитка из ксено-стали
 stack-xeno-steel-corner = угловая плитка из ксено-стали
 stack-xenoborg = ксеноборговая плитка
 stack-xeno-maint = ксено-техзона
 stack-dark-squiggly = темная стальная волнистая плитка
+stack-white-marble-floor = белый мраморный пол
+stack-dark-marble-floor = тёмный мраморный пол
+stack-plasma-marble-floor = плазменный мраморный пол
+stack-uranium-marble-floor = урановый мраморный пол
+stack-astro-ironsand-floor = пол из астро-железопеска
+stack-astro-ironsand-floor-borderless = бесшовный пол из астро-железопеска
+stack-block-carpet-tile = блочная ковровая плитка

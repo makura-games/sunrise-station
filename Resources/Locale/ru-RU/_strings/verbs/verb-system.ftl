@@ -4,6 +4,7 @@ verb-system-null-server-response = Сущность не в поле зрени�
 verb-self-target-pronoun = Вы
 
 # verb categories & common verbs. These appear across multiple systems, so they may as well go here.
+
 verb-categories-admin = Админ
 verb-categories-debug = Дебаг
 verb-categories-examine = Осмотреть
@@ -24,9 +25,9 @@ verb-categories-lever = Рычаг
 verb-categories-select-type = Выбрать тип
 verb-categories-fax = Задать место назначения
 verb-categories-power-level = Уровень мощности
+verb-categories-adjust = Настроить
 verb-common-toggle-light = Переключить свет
 verb-common-close = Закрыть
 verb-common-open = Открыть
 verb-common-close-ui = Закрыть UI
 verb-common-open-ui = Открыть UI
-verb-categories-adjust = Настроить

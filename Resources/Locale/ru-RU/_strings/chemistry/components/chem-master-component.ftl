@@ -26,6 +26,8 @@ chem-master-current-text-label = Метка:
 chem-master-window-pills-label = Таблетка:
 chem-master-window-pill-type-label = Тип таблеток:
 chem-master-window-pills-number-label = Кол-во:
+chem-master-window-patches-label = Пластыри:
+chem-master-window-patches-number-label = Кол-во:
 chem-master-window-dose-label = Дозировка (ед.):
 chem-master-window-create-button = Создать
 chem-master-window-bottles-label = Бутылочки:
@@ -34,7 +36,6 @@ chem-master-window-sort-type-none = Сортировка: Сначала ста�
 chem-master-window-sort-type-alphabetical = Сортировка: По алфавиту
 chem-master-window-sort-type-quantity = Сортировка: По количеству
 chem-master-window-sort-type-latest = Сортировка: Сначала новые
-
 chem-master-output-buffer-draw = Буфер
 chem-master-output-beaker-draw = Мензурка
 chem-master-window-no-beaker-text = Мензурка не загружена

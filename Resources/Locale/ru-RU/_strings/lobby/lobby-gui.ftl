@@ -1,4 +1,3 @@
-ui-lobby-welcome = Добро пожаловать на { $name }
 ui-lobby-title = Лобби: { $serverName }
 ui-lobby-ahelp-button = Помощь администратора
 ui-lobby-options-button = Настройки
@@ -8,3 +7,4 @@ ui-lobby-observe-button = Наблюдать
 ui-lobby-ready-up-button = Готовность
 ui-lobby-online-players-block = Текущие игроки
 ui-lobby-server-info-block = Серверная информация
+ui-lobby-welcome = Добро пожаловать на { $name }

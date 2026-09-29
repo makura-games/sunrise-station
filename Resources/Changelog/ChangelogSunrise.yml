@@ -4884,3 +4884,60 @@
     message: Молот Синдиката опять можно брать в две руки
   id: 2032
   url: https://github.com/makura-games/sunrise-station/pull/4814
+- author: privett, Fungiviv
+  time: '2026-09-20T11:51:25.0000000+00:00'
+  changes:
+  - type: Add
+    message: Карта Треин добавлена в пул карт.
+  - type: Add
+    message: Карта Оазис добавлена для тестов.
+  - type: Add
+    message: Карта Гельта добавлена для тестов.
+  - type: Add
+    message: Добавлены шаттлы Службы безопасности "Стрела" и "Вангуард".
+  - type: Add
+    message: Добавлен шаттл утилизаторов "Черепашка".
+  - type: Add
+    message: Добавлен шаттл одиночного ядерного оперативника "Seeker", заменяющий стандартный.
+  - type: Add
+    message: Добавлен шаттл эвакуации повышенного комфорта для станций Бокс и Багель.
+  - type: Add
+    message: Добавлена станция Центрального командования, заменяющая старую.
+  - type: Fix
+    message: Все доступные игровые карты были изменены с учетом исправления ошибок.
+  id: 2033
+  url: https://github.com/makura-games/sunrise-station/pull/4829
+  media:
+  - url: https://github.com/user-attachments/assets/d0e7ea3e-f0f1-4038-8e66-793198e70e3b
+    description: Станция Оазис с новыми шаттлами.
+- author: Foxtrot_Uniform
+  time: '2026-09-25T11:21:18.0000000+00:00'
+  changes:
+  - type: Tweak
+    message: ГСБ теперь имеет доступ к алкоматам, которые находятся у него в кабинете.
+  id: 2034
+  url: https://github.com/makura-games/sunrise-station/pull/4823
+- author: ThereDrD
+  time: '2026-09-27T00:17:38.0000000+00:00'
+  changes:
+  - type: Fix
+    message: Исправлено отсутствие спавнеров почтальона на картах, теперь они спавнятся где надо
+  id: 2035
+  url: https://github.com/makura-games/sunrise-station/pull/4827
+- author: KaiserMaus, Confee
+  time: '2026-09-27T00:21:25.0000000+00:00'
+  changes:
+  - type: Tweak
+    message: Были переработаны спрайты самодельного меча, импровизированного меча, кованого меча (с частями), Рассветного клинка и Приливного клинка (с частями). Новые спрайты теперь соответствуют существующим спрайтам из оригинальной игры (Клеймора, Сабли, Абордажной сабли).
+  id: 2036
+  url: https://github.com/makura-games/sunrise-station/pull/4752
+  media:
+  - url: https://github.com/user-attachments/assets/be3bd6fc-b7f3-4c7d-8d25-e0a26ce7e456
+    description: image
+- author: ThereDrD
+  time: '2026-09-27T00:21:45.0000000+00:00'
+  changes:
+  - type: Fix
+    message: Исправлен пропавший после обновления донат, плашки дискорда и время
+  id: 2037
+  url: https://github.com/makura-games/sunrise-station/pull/4835

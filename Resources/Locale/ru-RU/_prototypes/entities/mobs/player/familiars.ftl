@@ -1,4 +1,4 @@
-ent-MobBatRemilia = Ремилия
+ent-MobBatRemilia = ремилия
     .desc = Фамильяр священника. Любит фрукты.
-ent-MobCorgiCerberus = Цербер
+ent-MobCorgiCerberus = цербер
     .desc = Этот щеночек совсем не милый.

@@ -1,2 +1,2 @@
-ent-GoliathHoodToggleAction = Накинуть мясной капюшон
-    .desc = Накинуть капюшон
+ent-GoliathHoodToggleAction = накинуть мясной капюшон
+    .desc = Накинуть капюшон.

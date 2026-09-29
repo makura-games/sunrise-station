@@ -6,8 +6,6 @@ ghost-gui-toggle-ghost-visibility-popup-off = Видимость привиде�
 ghost-gui-toggle-lighting-manager-popup-normal = Обычное освещение.
 ghost-gui-toggle-lighting-manager-popup-personal-light = Включен персональный свет.
 ghost-gui-toggle-lighting-manager-popup-fullbright = Режим полной яркости.
-ghost-gui-toggle-ghost-visibility-popup = Видимость других призраков изменена.
-ghost-gui-toggle-lighting-manager-popup = Рендеринг света переключён.
 ghost-gui-toggle-fov-popup = Поле зрения переключено.
 ghost-gui-toggle-hearing-popup-on = Теперь вы слышите все фразы.
 ghost-gui-toggle-hearing-popup-off = Теперь вы слышите только радиосвязь и фразы поблизости.
@@ -31,11 +29,13 @@ ghost-roles-window-leave-raffle-button =
     })
 ghost-roles-window-request-role-button = Запросить
 ghost-roles-window-request-role-button-timer = Запросить ({ $time }сек.)
-ghost-roles-window-rules-role-button = Правила
 ghost-roles-window-follow-role-button = Следовать
 ghost-roles-window-no-roles-available-label = В настоящее время нет доступных ролей призраков.
 ghost-roles-window-rules-footer = Кнопка станет доступна через { $time } секунд (эта задержка нужна, чтобы убедиться, что вы прочитали правила).
 ghost-return-to-body-title = Вернуться в тело
 ghost-return-to-body-text = Вас воскрешают! Вернуться в своё тело?
+ghost-gui-toggle-ghost-visibility-popup = Видимость других призраков изменена.
+ghost-gui-toggle-lighting-manager-popup = Рендеринг света переключён.
+ghost-roles-window-rules-role-button = Правила
 # Sunrise-edit
 ghost-gui-change-server = Другие сервера

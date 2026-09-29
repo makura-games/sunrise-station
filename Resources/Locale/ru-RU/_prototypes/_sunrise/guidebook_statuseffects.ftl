@@ -1,21 +1,5 @@
-# Sunrise-Edit - Guidebook status effects keys Russian
+# Sunrise-Edit - Guidebook status effects keys
 
-entity-effect-status-effect-Stun = оглушение
-entity-effect-status-effect-KnockedDown = опрокидывание
-entity-effect-status-effect-Jitter = дрожь
-entity-effect-status-effect-TemporaryBlindness = слепота
-entity-effect-status-effect-SeeingRainbows = галлюцинации
-entity-effect-status-effect-Muted = немота
-entity-effect-status-effect-Stutter = заикание
-entity-effect-status-effect-ForcedSleep = бессознательность
-entity-effect-status-effect-Drunk = опьянение
-entity-effect-status-effect-PressureImmunity = иммунитет к давлению
-entity-effect-status-effect-Pacified = пацифизм
-entity-effect-status-effect-RatvarianLanguage = ратварианский язык
-entity-effect-status-effect-StaminaModifier = изменение выносливости
-entity-effect-status-effect-RadiationProtection = радиационная защита
-entity-effect-status-effect-Drowsiness = сонливость
-entity-effect-status-effect-Adrenaline = адреналин
 entity-effect-status-effect-ShockProtection = защита от ударов током
 ent-StatusEffectDrunk = опьянение
     .desc = { ent-MobStatusEffectDebuff.desc }
@@ -41,3 +25,4 @@ ent-StatusEffectOwO = ово-акцент
     .desc = { ent-MobStatusEffectDebuff.desc }
 ent-StatusEffectBark = гавкающий акцент
     .desc = { ent-MobStatusEffectDebuff.desc }
+entity-effect-status-effect-TemporaryBlindness = слепота

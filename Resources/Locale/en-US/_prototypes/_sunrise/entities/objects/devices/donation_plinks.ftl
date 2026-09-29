@@ -1,12 +1,12 @@
 ent-BaseDonationPlink = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
-ent-SunriseUplink = Sunrise portable shop
+ent-SunriseUplink = sunrise portable shop
     .desc = Has a wide range of products for all tastes and preferences - from amazing handicrafts and unique souvenirs to modern appliances and fashion accessories.
 ent-FishStationUplink = /"Fishplink/" portable shop
     .desc = Has a wide range of products for all tastes and preferences - from amazing handicrafts and unique souvenirs to modern appliances and fashion accessories.
 ent-NeweraStationUplink = /"Catoplink/" portable Shop
     .desc = Has a wide range of products for all tastes and preferences - from amazing handicrafts and unique souvenirs to modern appliances and fashion accessories.
-ent-SunriseUplink40 = Sunrise portable shop
+ent-SunriseUplink40 = sunrise portable shop
     .desc = Has a wide range of products for all tastes and preferences - from amazing handicrafts and unique souvenirs to modern appliances and fashion accessories.
     .suffix = 40
 ent-SunriseUplink80 = { ent-SunriseUplink40 }

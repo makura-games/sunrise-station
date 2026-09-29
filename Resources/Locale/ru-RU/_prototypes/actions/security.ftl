@@ -1,2 +1,2 @@
-ent-ActionToggleKnuckleDustersStun = Включить/выключить оглушающие кастеты
+ent-ActionToggleKnuckleDustersStun = включить/выключить оглушающие кастеты
     .desc = Включает встроенную в кастеты дубинку.

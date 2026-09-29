@@ -3,8 +3,8 @@
 damage-command-description = Добавить или убрать урон сущности.
 damage-command-help = Использование: { $command } <type/group> <amount> [ignoreResistances] [uid]
 damage-command-arg-type = <damage type or group>
-damage-command-arg-quantity = [quantity]
-damage-command-arg-target = [target euid]
+damage-command-arg-quantity = [количество]
+damage-command-arg-target = [целевая euid]
 damage-command-error-type = { $arg } неправильная группа или тип урона.
 damage-command-error-euid = { $arg } неправильный UID сущности.
 damage-command-error-quantity = { $arg } неправильное количество.

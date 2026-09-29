@@ -8,12 +8,18 @@
       stationProto: StandardNanotrasenStation
       components:
         - type: StationNameSetup
-          mapNameTemplate: '{0} Oasis {1}'
+          mapNameTemplate: '{0} Оазис {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
-            prefixCreator: 'B'
+            prefixCreator: 'TG'
+        - type: SpawnGridAndDockToStation
+          grids:
+          - gridPath: /Maps/_Sunrise/Shuttles/Salvage/cherepashka.yml
+            priorityTag: DockMining
+          - gridPath: /Maps/_Sunrise/Shuttles/Security/arrow.yml
+            priorityTag: DockSecurity
         - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/Shuttles/emergency.yml
+          emergencyShuttlePath: /Maps/_Sunrise/Shuttles/Evac/emergency-box-bagel.yml
         - type: StationJobs
           availableJobs:
             #command
@@ -55,17 +61,19 @@
             Roboticist: [ 4, 4 ]
             #security
             HeadOfSecurity: [ 1, 1 ]
-            Warden: [ 1, 1 ]
+            Warden: [ 1, 2 ]
             SeniorOfficer: [ 1, 1 ]
             Detective: [ 1, 1 ]
             Brigmedic: [ 2, 2 ]
             SecurityPilot: [ 1, 1 ]
-            SecurityOfficer: [ 5, 5 ]
+            SecurityOfficer: [ 5, 7 ]
             SecurityCadet: [ 5, 5 ]
             #supply
             Quartermaster: [ 1, 1 ]
             SalvageSpecialist: [ 3, 3 ]
+            MiningSpecialist: [ 1, 2 ]
             CargoTechnician: [ 3, 3 ]
+            MailCarrier: [ 1, 2 ]
             #civilian
             Passenger: [ -1, -1 ]
             Clown: [ 1, 1 ]

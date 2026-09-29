@@ -20,7 +20,6 @@ ent-LeftFootSkeleton = левая стопа скелета
     .desc = { ent-PartSkeleton.desc }
 ent-RightFootSkeleton = правая стопа скелета
     .desc = { ent-PartSkeleton.desc }
-
 ent-OrganSkeletonPersonTorso = { ent-TorsoSkeleton }
     .desc = { ent-TorsoSkeleton.desc }
 ent-OrganSkeletonPersonHead = { ent-HeadSkeleton }

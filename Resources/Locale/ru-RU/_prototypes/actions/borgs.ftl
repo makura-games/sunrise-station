@@ -1,4 +1,4 @@
-ent-ActionViewLaws = Просмотреть законы
+ent-ActionViewLaws = просмотреть законы
     .desc = Просмотреть законы, которым вы должны следовать.
 ent-ActionSelectBorgType = выбрать тип киборга
     .desc = { "" }
