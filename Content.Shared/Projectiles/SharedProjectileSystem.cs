@@ -270,3 +270,15 @@ public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, Projectile
 /// </summary>
 [ByRefEvent]
 public record struct ProjectileHitEvent(DamageSpecifier Damage, EntityUid Target, EntityUid? Shooter = null);
+
+// Sunrise added start - уведомляет fork-системы о подтверждённом уроне снаряда
+/// <summary>
+/// Raised on a projectile after it has dealt non-zero damage to an entity.
+/// </summary>
+[ByRefEvent]
+public record struct ProjectileDamageDealtEvent(
+    EntityUid Target,
+    DamageSpecifier DamageDealt,
+    Vector2 HitPosition,
+    Vector2 Direction);
+// Sunrise added end
