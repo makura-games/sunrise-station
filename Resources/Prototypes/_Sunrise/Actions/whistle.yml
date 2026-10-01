@@ -6,4 +6,7 @@
   components:
   - type: Action
     useDelay: 3
-    icon: { sprite: Objects/Fun/whistles.rsi , state: whistle }
+  - type: Sprite
+    sprite: Objects/Fun/whistles.rsi
+    layers:
+    - state: whistle

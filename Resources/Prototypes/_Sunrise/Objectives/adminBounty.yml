@@ -7,7 +7,7 @@
   - type: Objective
     difficulty: 0
     unique: false
-    issuer: objective-issuer-syndicate
+    issuer: TheSyndicate
   - type: TargetObjective
     title: objective-condition-admin-bounty-kill-title
   - type: KillPersonCondition

@@ -1,0 +1,6 @@
+# Частичное переопределение иконки исследования Sunrise.
+- type: !PartialOnly technology
+  id: AudioVisualCommunication
+  icon:
+    sprite: _Sunrise/Structures/Wallmounts/camera.rsi
+    state: cameracase

@@ -1,0 +1,36 @@
+- type: !PartialOnly entity
+  id: BaseFirelock
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Doors/Airlocks/Standard/firelock.rsi
+    snapCardinals: true
+    layers: !Clear
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+    - state: closed_unlit
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+      visible: false
+    - state: welded
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: bolted_unlit
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+      visible: false
+    - state: panel_open
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: pressure_unlit
+      visible: false
+      shader: unshaded
+      map: ["enum.FirelockVisualLayersPressure.Base"]
+    - state: temperature_unlit
+      visible: false
+      shader: unshaded
+      map: ["enum.FirelockVisualLayersTemperature.Base"]
+
+- type: !PartialOnly entity
+  id: FirelockGlass
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Doors/Airlocks/Glass/firelock.rsi

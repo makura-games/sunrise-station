@@ -16,7 +16,6 @@ public sealed partial class BorgHypospraySystem : EntitySystem
 {
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {
@@ -66,7 +65,7 @@ public sealed partial class BorgHypospraySystem : EntitySystem
         var mainReagent = solution.Contents.OrderByDescending(r => r.Quantity).First();
         reagentId = mainReagent.Reagent;
 
-        return _prototypeManager.TryIndex(reagentId.Prototype, out reagentProto);
+        return ProtoMan.TryIndex(reagentId.Prototype, out reagentProto);
     }
 
     /// <summary>

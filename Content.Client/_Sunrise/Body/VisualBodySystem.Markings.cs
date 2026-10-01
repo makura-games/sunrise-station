@@ -170,7 +170,7 @@ public sealed partial class VisualBodySystem
         };
 
         if (shaderPrototype is null ||
-            !_prototype.TryIndex<ShaderPrototype>(shaderPrototype, out var shader))
+            !ProtoMan.TryIndex<ShaderPrototype>(shaderPrototype, out var shader))
         {
             return null;
         }

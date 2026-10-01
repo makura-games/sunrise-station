@@ -16,6 +16,6 @@ public sealed class SunriseHumanoidProfileTtsSystem : EntitySystem
     private void OnProfileChanged(Entity<SunriseHumanoidProfileComponent> ent, ref SunriseHumanoidTtsProfileChangedEvent args)
     {
         var tts = EnsureComp<TTSComponent>(ent.Owner);
-        tts.VoicePrototypeId = args.Voice;
+        tts.VoicePrototypeId = args.TtsVoice;
     }
 }

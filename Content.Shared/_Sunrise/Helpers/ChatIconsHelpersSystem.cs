@@ -7,7 +7,6 @@ namespace Content.Shared._Sunrise.Helpers;
 
 public sealed partial class ChatIconsHelpersSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
 
     public const string NoIdIconPath = "/Textures/Interface/Misc/job_icons.rsi/NoId.png";
 
@@ -17,7 +16,7 @@ public sealed partial class ChatIconsHelpersSystem : EntitySystem
     [PublicAPI]
     public string GetJobIcon(ProtoId<JobPrototype>? job, int scale = 1)
     {
-        var iconPath = _prototype.TryIndex(job, out var jobPrototype)
+        var iconPath = ProtoMan.TryIndex(job, out var jobPrototype)
             ? GetJobIconPath(jobPrototype)
             : NoIdIconPath;
 
@@ -35,7 +34,7 @@ public sealed partial class ChatIconsHelpersSystem : EntitySystem
     [PublicAPI]
     public string GetJobIconPath(JobPrototype job)
     {
-        var icon = _prototype.Index(job.Icon);
+        var icon = ProtoMan.Index(job.Icon);
 
         var sprite = icon.Icon switch
         {

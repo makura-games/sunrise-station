@@ -1,0 +1,4 @@
+- type: !PartialOnly tile
+  id: FloorGreenCircuit
+  sprite: /Textures/_Sunrise/Tiles/green_circuit.png
+  variants: 1

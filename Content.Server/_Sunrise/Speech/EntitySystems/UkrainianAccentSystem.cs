@@ -2,8 +2,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Content.Server._Sunrise.Speech.Components;
 using Content.Server._Sunrise.TTS;
-using Content.Server.Speech.EntitySystems;
 using Content.Shared.Speech;
+using Content.Shared.Speech.EntitySystems;
 
 namespace Content.Server._Sunrise.Speech.EntitySystems;
 
@@ -48,7 +48,7 @@ public sealed partial class UkrainianAccentSystem : EntitySystem
         return accentedMessage.ToString();
     }
 
-    private void OnAccent(EntityUid uid, UkrainianAccentComponent component, AccentGetEvent args)
+    private void OnAccent(Entity<UkrainianAccentComponent> ent, ref AccentGetEvent args)
     {
         args.Message = Accentuate(args.Message);
     }

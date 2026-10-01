@@ -57,7 +57,7 @@ public sealed partial class VisualBodySystem
         var mergedData = data;
 
         if (TryComp<SunriseHumanoidProfileComponent>(target, out var profile) &&
-            _prototype.TryIndex(profile.BodyType, out var bodyType) &&
+            ProtoMan.TryIndex(profile.BodyType, out var bodyType) &&
             bodyType.TryGetLayer(layer, sex, out var bodyTypeLayerData))
         {
             mergedData = SunrisePrototypeLayerData.Merge(mergedData, bodyTypeLayerData);
@@ -122,7 +122,7 @@ public sealed partial class VisualBodySystem
     private string? GetBodyTypeVisualKey(EntityUid uid)
     {
         if (!TryComp<SunriseHumanoidProfileComponent>(uid, out var profile) ||
-            !_prototype.TryIndex<BodyTypePrototype>(profile.BodyType, out var bodyType))
+            !ProtoMan.TryIndex<BodyTypePrototype>(profile.BodyType, out var bodyType))
         {
             return null;
         }

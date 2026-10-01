@@ -14,7 +14,6 @@ namespace Content.Server._Sunrise.Roadmap;
 public sealed partial class RoadmapLikesSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IServerDbManager _db = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
 
@@ -170,7 +169,7 @@ public sealed partial class RoadmapLikesSystem : EntitySystem
         if (string.IsNullOrWhiteSpace(roadmapId))
             return false;
 
-        return _prototype.TryIndex(roadmapId, out roadmap);
+        return ProtoMan.TryIndex(roadmapId, out roadmap);
     }
 
     private static List<string> CollectRoadmapItemIds(RoadmapVersionsPrototype roadmap)

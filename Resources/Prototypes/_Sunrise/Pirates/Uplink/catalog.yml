@@ -805,7 +805,7 @@
   id: UplinkPirateFireAxeFlaming
   name: uplink-fire-axe-flaming-name
   description: uplink-fire-axe-flaming-desc
-  icon: { sprite: Objects/Weapons/Melee/fireaxeflaming.rsi, state: icon }
+  icon: { sprite: _Sunrise/Objects/Weapons/Melee/fireaxeflaming.rsi, state: icon }
   productEntity: FireAxeFlaming
   cost:
     Doubloon: 27
@@ -2329,7 +2329,7 @@
   name: uplink-chameleon-name
   description: uplink-chameleon-desc
   productEntity: ClothingBackpackChameleonFill
-  icon: { sprite: /Textures/Clothing/Uniforms/Jumpsuit/rainbow.rsi, state: icon }
+  icon: { sprite: /Textures/_Sunrise/Clothing/Uniforms/Jumpsuit/rainbow.rsi, state: icon }
   cost:
     Doubloon: 12
   categories:

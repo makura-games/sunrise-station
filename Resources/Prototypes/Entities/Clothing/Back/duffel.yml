@@ -31,7 +31,7 @@
   description: A large duffel bag made of fire resistant fibers. Smells like plasma.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Duffels/atmospherics.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Duffels/atmospherics.rsi # Sunrise-Edit
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -49,7 +49,7 @@
   description: A large duffel bag for holding extra captainly goods.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Duffels/captain.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Duffels/captain.rsi # Sunrise-Edit
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -85,7 +85,7 @@
   description: A large duffel bag for holding extra medical related goods.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Duffels/brigmedic.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Duffels/brigmedic.rsi # Sunrise-Edit
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -103,7 +103,7 @@
   description: A large duffel bag made of hypo-allergenic fibers. It's designed to help prevent the spread of disease. Smells like monkey.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Duffels/virology.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Duffels/virology.rsi # Sunrise-Edit
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -112,7 +112,7 @@
   description: A large duffel bag for holding extra genetic mutations.
   components:
   - type: Sprite
-    sprite: Clothing/Back/Duffels/genetics.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Duffels/genetics.rsi # Sunrise-Edit
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -151,7 +151,7 @@
   description: A large duffel bag for stealing cargo's precious loot.
   components:
     - type: Sprite
-      sprite: Clothing/Back/Duffels/cargo.rsi
+      sprite: _Sunrise/Clothing/Back/Resprites/Duffels/cargo.rsi # Sunrise-Edit
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -182,7 +182,8 @@
   abstract: true
   components:
   - type: Tag
-    tags: [] # ignore "WhitelistChameleon" tag
+    tags:
+    - Backpack # ignore "WhitelistChameleon" tag
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -190,7 +191,8 @@
   abstract: true
   components:
   - type: Tag
-    tags: [] # ignore "WhitelistChameleon" tag
+    tags:
+    - Backpack # ignore "WhitelistChameleon" tag
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicate
@@ -209,8 +211,9 @@
   id: ClothingBackpackDuffelSyndicateAmmoBundle
   abstract: true
   components:
-    - type: Tag
-      tags: [] # ignore "WhitelistChameleon" tag
+  - type: Tag
+    tags:
+    - Backpack # ignore "WhitelistChameleon" tag
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicate
@@ -229,17 +232,19 @@
   id: ClothingBackpackDuffelSyndicateMedicalBundle
   abstract: true
   components:
-    - type: Tag
-      tags: [] # ignore "WhitelistChameleon" tag
+  - type: Tag
+    tags:
+    - Backpack # ignore "WhitelistChameleon" tag
 
 - type: entity
-  parent: ClothingBackpackDuffel
+  parent: ClothingBackpackHoldingBase #Standardized Bluespace Bags
   id: ClothingBackpackDuffelHolding
-  name: duffelbag of holding
-  description: A duffelbag that opens into a localized pocket of bluespace.
+  name: duffel bag of holding
+  description: A duffel bag that opens into a localized pocket of bluespace.
   components:
+  # Sunrise edit start - сохраняем визуалы и характеристики сумки хранения
   - type: Sprite
-    sprite: _Sunrise/Clothing/Back/Duffels/holding.rsi # Sunrise-Edit
+    sprite: _Sunrise/Clothing/Back/Duffels/holding.rsi
     state: icon
     layers:
     - state: icon
@@ -247,7 +252,6 @@
       shader: unshaded
   - type: Item
     size: Ginormous
-    # Sunrise-Start
     inhandVisuals:
       left:
       - state: inhand-left
@@ -257,15 +261,13 @@
       - state: inhand-right
       - state: inhand-right-unlit
         shader: unshaded
-    # Sunrise-End
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,17,7 # Sunrise-Edit
+    - 0,0,17,7
   - type: ClothingSpeedModifier
     sprintModifier: 1 # makes its stats identical to other variants of bag of holding
   - type: HeldSpeedModifier
-  # Sunrise-start
   - type: Clothing
     sprite: _Sunrise/Clothing/Back/Duffels/holding.rsi
     clothingVisuals:
@@ -282,7 +284,7 @@
       Cloth: 500
       Plasma: 600
       Uranium: 40
-  # Sunrise-end
+  # Sunrise edit end
 
 - type: entity
   parent: [ ClothingBackpackDuffel, BaseCentcommContraband ]
@@ -302,3 +304,6 @@
     sprite: Clothing/Back/Duffels/cburn.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.5
+  - type: Tag
+    tags:
+    - Backpack # ignore "WhitelistChameleon" tag. Maybe make a unique CBURN duffel sprite?

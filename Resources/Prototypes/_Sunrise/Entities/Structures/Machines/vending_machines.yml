@@ -6,6 +6,7 @@
   components:
   - type: VendingMachine
     pack: BarberInventory
+  - type: VendingMachineVisuals
     offState: off
     brokenState: broken
     normalState: normal-unshaded
@@ -36,6 +37,7 @@
   components:
   - type: VendingMachine
     pack: HohohonkersInventory
+  - type: VendingMachineVisuals
     offState: off
     brokenState: broken
     normalState: normal-unshaded
@@ -77,6 +79,7 @@
   components:
   - type: VendingMachine
     pack: EVASuitDispenserInventory
+  - type: VendingMachineVisuals
     offState: off
     brokenState: broken
     normalState: normal-unshaded
@@ -97,7 +100,7 @@
 
 - type: entity
   id: BaseTicketVendingMachine
-  parent: BaseMachinePowered
+  parent: [ BaseMachinePowered, BaseMachineDestructible ]
   name: vending machine
   description: Just add capitalism!
   abstract: true

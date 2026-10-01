@@ -1,0 +1,164 @@
+- type: !PartialOnly tile
+  id: FloorSteelCheckerLight
+  sprite: /Textures/_Sunrise/Tiles/cafeteria.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorSteelCheckerDark
+  sprite: /Textures/_Sunrise/Tiles/checker_dark.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorSteelDiagonal
+  sprite: /Textures/_Sunrise/Tiles/steel_diagonal.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorSteelOffset
+  sprite: /Textures/_Sunrise/Tiles/steel_offset.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorSteelMono
+  sprite: /Textures/_Sunrise/Tiles/steel_mono.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorSteelDiagonalMini
+  sprite: /Textures/_Sunrise/Tiles/steel_diagonal_mini.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorWood
+  sprite: /Textures/_Sunrise/Tiles/wood.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorWhiteDiagonal
+  sprite: /Textures/_Sunrise/Tiles/white_diagonal.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorWhiteOffset
+  sprite: /Textures/_Sunrise/Tiles/white_offset.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorWhiteDiagonalMini
+  sprite: /Textures/_Sunrise/Tiles/white_diagonal_mini.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorDarkDiagonal
+  sprite: /Textures/_Sunrise/Tiles/dark_diagonal.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorDarkOffset
+  sprite: /Textures/_Sunrise/Tiles/dark_offset.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorDarkDiagonalMini
+  sprite: /Textures/_Sunrise/Tiles/dark_diagonal_mini.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorTechMaint
+  sprite: /Textures/_Sunrise/Tiles/tech_maint.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorReinforced
+  sprite: /Textures/_Sunrise/Tiles/reinforced.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorRockVault
+  sprite: /Textures/_Sunrise/Tiles/rock_vault.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorBlue
+  sprite: /Textures/_Sunrise/Tiles/blue.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorSteelLime
+  sprite: /Textures/_Sunrise/Tiles/lime.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorMining
+  sprite: /Textures/_Sunrise/Tiles/mining_floor.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorMiningDark
+  sprite: /Textures/_Sunrise/Tiles/mining_floor_dark.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorMiningLight
+  sprite: /Textures/_Sunrise/Tiles/mining_floor_light.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorFreezer
+  sprite: /Textures/_Sunrise/Tiles/freezer.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorShowroom
+  sprite: /Textures/_Sunrise/Tiles/showroom.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorHydro
+  sprite: /Textures/_Sunrise/Tiles/hydro.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorBar
+  sprite: /Textures/_Sunrise/Tiles/bar.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorClown
+  sprite: /Textures/_Sunrise/Tiles/clown.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorMime
+  sprite: /Textures/_Sunrise/Tiles/mime.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorKitchen
+  sprite: /Textures/_Sunrise/Tiles/kitchen.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorLaundry
+  sprite: /Textures/_Sunrise/Tiles/laundry.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: FloorGrassLight
+  sprite: /Textures/_Sunrise/Tiles/grasslight.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorWoodTile
+  sprite: /Textures/_Sunrise/Tiles/wood_tile.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorBrokenWood
+  sprite: /Textures/_Sunrise/Tiles/wood_broken.png
+  variants: 7
+
+- type: !PartialOnly tile
+  id: FloorWoodLarge
+  sprite: /Textures/_Sunrise/Tiles/wood_large.png
+  variants: 4

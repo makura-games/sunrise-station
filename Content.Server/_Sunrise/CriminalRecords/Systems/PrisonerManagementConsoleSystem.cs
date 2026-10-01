@@ -2,7 +2,7 @@ using System.Linq;
 using Content.Server._Sunrise.Laws.Systems;
 using Content.Server.Access.Systems;
 using Content.Server.Station.Systems;
-using Content.Server.StationRecords.Systems;
+using Content.Shared.StationRecords.Systems;
 using Content.Server.CriminalRecords.Systems;
 using Content.Shared._Sunrise.CriminalRecords;
 using Content.Shared._Sunrise.CriminalRecords.Components;

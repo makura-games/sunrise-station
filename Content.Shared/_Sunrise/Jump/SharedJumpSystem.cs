@@ -26,7 +26,6 @@ using Robust.Shared.Timing;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Damage.Components;
-using Content.Shared.Ghost;
 using Content.Shared.Buckle;
 
 namespace Content.Shared._Sunrise.Jump;
@@ -266,7 +265,7 @@ public abstract partial class SharedJumpSystem : EntitySystem
             var speedMultiplier = bunnyHopComp.SpeedMultiplier += _bunnyHopSpeedUpPerJump;
             bunnyHopComp.SpeedMultiplier = Math.Min(speedMultiplier, _bunnyHopSpeedLimit);
 
-            _movementSpeedModifier.RefreshMovementSpeedModifiers(ent);
+            _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
         }
 
         return true;

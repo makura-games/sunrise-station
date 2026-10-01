@@ -45,6 +45,7 @@
 #    - Revolutionary
 #    - Zombie
 #    - Wizard
+#    - Changeling
 #    - FleshCult
 #    - BloodCult
 #    - AssaultOps
@@ -74,6 +75,7 @@
     - Zombie
     - Wizard
     - Xenoborgs
+    - Changeling
     - FleshCult
     - BloodCult
     - AssaultOps

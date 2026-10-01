@@ -1,6 +1,3 @@
-using System.Numerics;
-using Content.Server.Atmos.Components;
-using Content.Server.Atmos.EntitySystems;
 using Content.Server.Doors.Systems;
 using Content.Server.NPC.Pathfinding;
 using Content.Server.Shuttles.Components;
@@ -17,537 +14,431 @@ using Robust.Shared.Physics.Dynamics.Joints;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Utility;
 
-namespace Content.Server.Shuttles.Systems
+namespace Content.Server.Shuttles.Systems;
+
+public sealed partial class DockingSystem : SharedDockingSystem
 {
-    public sealed partial class DockingSystem : SharedDockingSystem
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private DoorSystem _doorSystem = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private PathfindingSystem _pathfinding = default!;
+    [Dependency] private ShuttleConsoleSystem _console = default!;
+    [Dependency] private SharedJointSystem _jointSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+
+    [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private EntityQuery<DockingComponent> _dockingQuery = default!;
+
+    private const string DockingJoint = "docking";
+
+    private readonly HashSet<Entity<DockingComponent>> _dockingSet = new();
+    private readonly HashSet<Entity<DockingComponent, DoorBoltComponent>> _dockingBoltSet = new();
+
+    [SubscribeLocalEvent]
+    private void OnAutoClose(EntityUid uid, DockingComponent component, BeforeDoorAutoCloseEvent args)
     {
-        [Dependency] private IMapManager _mapManager = default!;
-        [Dependency] private SharedMapSystem _mapSystem = default!;
-        [Dependency] private DoorSystem _doorSystem = default!;
-        [Dependency] private EntityLookupSystem _lookup = default!;
-        [Dependency] private PathfindingSystem _pathfinding = default!;
-        [Dependency] private ShuttleConsoleSystem _console = default!;
-        [Dependency] private SharedJointSystem _jointSystem = default!;
-        [Dependency] private SharedPopupSystem _popup = default!;
-        [Dependency] private SharedTransformSystem _transform = default!;
-        [Dependency] private ILogManager _logMan = default!;
-        [Dependency] private AirtightSystem _airtightSystem = default!;
-        [Dependency] private AirlockSystem _airlockSystem = default!;
+        // We'll just pin the door open when docked.
+        if (component.Docked)
+            args.Cancel();
+    }
 
-        [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
-        [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
-        [Dependency] private EntityQuery<DockingComponent> _dockingQuery = default!;
-
-        private const string DockingJoint = "docking";
-
-        private ISawmill? _logger;
-
-        private readonly HashSet<Entity<DockingComponent>> _dockingSet = new();
-        private readonly HashSet<Entity<DockingComponent, DoorBoltComponent>> _dockingBoltSet = new();
-
-        public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnShutdown(EntityUid uid, DockingComponent component, ComponentShutdown args)
+    {
+        if (component.DockedWith == null ||
+            MetaData(uid).EntityLifeStage > EntityLifeStage.MapInitialized)
         {
-            base.Initialize();
-
-            SubscribeLocalEvent<DockingComponent, ComponentStartup>(OnStartup);
-            SubscribeLocalEvent<DockingComponent, ComponentShutdown>(OnShutdown);
-            SubscribeLocalEvent<DockingComponent, AnchorStateChangedEvent>(OnAnchorChange);
-            SubscribeLocalEvent<DockingComponent, ReAnchorEvent>(OnDockingReAnchor);
-
-            SubscribeLocalEvent<DockingComponent, BeforeDoorAutoCloseEvent>(OnAutoClose);
-            // Sunrise-Start
-            SubscribeLocalEvent<DockingComponent, ComponentInit>(OnDockingInit);
-            SubscribeLocalEvent<DockingComponent, DoorStateChangedEvent>(OnDockingDoorStateChanged);
-            // Sunrise-End
-
-            // Yes this isn't in shuttle console; it may be used by other systems technically.
-            // in which case I would also add their subs here.
-            SubscribeLocalEvent<ShuttleConsoleComponent, DockRequestMessage>(OnRequestDock);
-            SubscribeLocalEvent<ShuttleConsoleComponent, UndockRequestMessage>(OnRequestUndock);
-
-            _logger = _logMan.GetSawmill("DockingSystem");
+            return;
         }
 
-        public void UndockDocks(EntityUid gridUid)
-        {
-            _dockingSet.Clear();
-            _lookup.GetChildEntities(gridUid, _dockingSet);
+        var gridUid = Transform(uid).GridUid;
 
-            foreach (var dock in _dockingSet)
-            {
-                Undock(dock);
-            }
+        if (gridUid != null && !Terminating(gridUid.Value))
+        {
+            _console.RefreshShuttleConsoles();
         }
 
-        public void SetDockBolts(EntityUid gridUid, bool enabled)
-        {
-            _dockingBoltSet.Clear();
-            _lookup.GetChildEntities(gridUid, _dockingBoltSet);
+        Cleanup(uid, component);
+    }
 
-            foreach (var entity in _dockingBoltSet)
-            {
-                _doorSystem.TryClose(entity);
-                _doorSystem.SetBoltsDown((entity.Owner, entity.Comp2), enabled);
-            }
-        }
+    [SubscribeLocalEvent]
+    private void OnStartup(Entity<DockingComponent> entity, ref ComponentStartup args)
+    {
+        var uid = entity.Owner;
+        var component = entity.Comp;
 
-        // Sunrise-Start
-        private void OnDockingInit(Entity<DockingComponent> entity, ref ComponentInit args)
-        {
-            if (TryComp<DoorComponent>(entity, out var door) && TryComp<AirtightComponent>(entity, out var airtight))
-            {
-                var isOpen = door.State == DoorState.Open || door.State == DoorState.Opening;
-                _airtightSystem.SetAirblocked((entity.Owner, airtight), !isOpen);
-            }
-        }
+        // Use startup so transform already initialized
+        if (!Transform(uid).Anchored)
+            return;
 
-        private void OnDockingDoorStateChanged(Entity<DockingComponent> entity, ref DoorStateChangedEvent args)
+        // This little gem is for docking deserialization
+        if (component.DockedWith != null)
         {
-            if (TryComp<AirtightComponent>(entity, out var airtight))
-            {
-                if (!entity.Comp.Docked)
-                {
-                    var isOpen = args.State == DoorState.Open || args.State == DoorState.Opening;
-                    _airtightSystem.SetAirblocked((entity.Owner, airtight), !isOpen);
-                }
-            }
-        }
-        // Sunrise-End
-
-        private void OnAutoClose(EntityUid uid, DockingComponent component, BeforeDoorAutoCloseEvent args)
-        {
-            // We'll just pin the door open when docked.
-            if (component.Docked)
-                args.Cancel();
-        }
-
-        private void OnShutdown(EntityUid uid, DockingComponent component, ComponentShutdown args)
-        {
-            if (component.DockedWith == null ||
-                MetaData(uid).EntityLifeStage > EntityLifeStage.MapInitialized)
-            {
+            // They're still initialising so we'll just wait for both to be ready.
+            if (MetaData(component.DockedWith.Value).EntityLifeStage < EntityLifeStage.Initialized)
                 return;
-            }
 
-            var gridUid = Transform(uid).GridUid;
+            var otherDock = _dockingQuery.Comp(component.DockedWith.Value);
+            DebugTools.Assert(otherDock.DockedWith != null);
 
-            if (gridUid != null && !Terminating(gridUid.Value))
-            {
-                _console.RefreshShuttleConsoles();
-            }
+            Dock((uid, component), (component.DockedWith.Value, otherDock));
+            DebugTools.Assert(component.Docked && otherDock.Docked);
+        }
+    }
 
-            Cleanup(uid, component);
+    [SubscribeLocalEvent]
+    private void OnAnchorChange(Entity<DockingComponent> entity, ref AnchorStateChangedEvent args)
+    {
+        OnSunriseAnchorChanged(entity, ref args); // Sunrise-Edit - обновляем герметичность дока через общую подписку
+
+        if (!args.Anchored)
+        {
+            Undock(entity);
+        }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnDockingReAnchor(Entity<DockingComponent> entity, ref ReAnchorEvent args)
+    {
+        var uid = entity.Owner;
+        var component = entity.Comp;
+
+        if (!component.Docked)
+            return;
+
+        var otherDock = component.DockedWith;
+        var other = Comp<DockingComponent>(otherDock!.Value);
+
+        Undock(entity);
+        Dock((uid, component), (otherDock.Value, other));
+        _console.RefreshShuttleConsoles();
+    }
+
+    [SubscribeLocalEvent]
+    private void OnRequestUndock(EntityUid uid, ShuttleConsoleComponent component, UndockRequestMessage args)
+    {
+        // Sunrise added start - проверяем, что консоль управляет шаттлом, которому разрешена расстыковка
+        if (!CanSunriseUndock(uid))
+        {
+            _popup.PopupCursor(Loc.GetString("shuttle-console-undock-fail"), args.Actor);
+            return;
+        }
+        // Sunrise added end
+
+        if (!TryGetEntity(args.DockEntity, out var dockEnt) ||
+            !_dockingQuery.TryComp(dockEnt, out var dockComp))
+        {
+            _popup.PopupCursor(Loc.GetString("shuttle-console-undock-fail"), args.Actor);
+            return;
         }
 
-        private void Cleanup(EntityUid dockAUid, DockingComponent dockA)
+        var dock = (dockEnt.Value, dockComp);
+
+        if (!CanUndock(dock))
         {
-            _pathfinding.RemovePortal(dockA.PathfindHandle);
+            _popup.PopupCursor(Loc.GetString("shuttle-console-undock-fail"), args.Actor);
+            return;
+        }
 
-            if (dockA.DockJoint != null)
-                _jointSystem.RemoveJoint(dockA.DockJoint);
+        Undock(dock);
+    }
 
-            var dockBUid = dockA.DockedWith;
+    [SubscribeLocalEvent]
+    private void OnRequestDock(EntityUid uid, ShuttleConsoleComponent component, DockRequestMessage args)
+    {
+        var console = _console.GetDroneConsole(uid);
 
-            if (dockBUid == null ||
-                !_dockingQuery.TryComp(dockBUid, out var dockB))
-            {
-                DebugTools.Assert(false);
-                Log.Error($"Tried to cleanup {dockAUid} but not docked?");
+        if (console == null)
+        {
+            _popup.PopupCursor(Loc.GetString("shuttle-console-dock-fail"), args.Actor);
+            return;
+        }
 
-                dockA.DockedWith = null;
-                return;
-            }
+        var shuttleUid = Transform(console.Value).GridUid;
 
-            dockB.DockedWith = null;
-            dockB.DockJoint = null;
-            dockB.DockJointId = null;
+        if (!CanShuttleDock(shuttleUid))
+        {
+            _popup.PopupCursor(Loc.GetString("shuttle-console-dock-fail"), args.Actor);
+            return;
+        }
 
-            dockA.DockJoint = null;
+        if (!TryGetEntity(args.DockEntity, out var ourDock) ||
+            !TryGetEntity(args.TargetDockEntity, out var targetDock) ||
+            !_dockingQuery.TryComp(ourDock, out var ourDockComp) ||
+            !_dockingQuery.TryComp(targetDock, out var targetDockComp))
+        {
+            _popup.PopupCursor(Loc.GetString("shuttle-console-dock-fail"), args.Actor);
+            return;
+        }
+
+        // Cheating?
+        if (!TryComp(ourDock, out TransformComponent? xformA) ||
+            xformA.GridUid != shuttleUid)
+        {
+            _popup.PopupCursor(Loc.GetString("shuttle-console-dock-fail"), args.Actor);
+            return;
+        }
+
+        // TODO: Move the CanDock stuff to the port state and also validate that stuff
+        // Also need to check preventpilot + enabled / dockedwith
+        if (!CanDock((ourDock.Value, ourDockComp), (targetDock.Value, targetDockComp)))
+        {
+            _popup.PopupCursor(Loc.GetString("shuttle-console-dock-fail"), args.Actor);
+            return;
+        }
+
+        Dock((ourDock.Value, ourDockComp), (targetDock.Value, targetDockComp));
+    }
+
+    private void Cleanup(EntityUid dockAUid, DockingComponent dockA)
+    {
+        _pathfinding.RemovePortal(dockA.PathfindHandle);
+
+        if (dockA.DockJoint != null)
+            _jointSystem.RemoveJoint(dockA.DockJoint);
+
+        var dockBUid = dockA.DockedWith;
+
+        if (dockBUid == null ||
+            !_dockingQuery.TryComp(dockBUid, out var dockB))
+        {
+            DebugTools.Assert(false);
+            Log.Error($"Tried to cleanup {dockAUid} but not docked?");
+
             dockA.DockedWith = null;
-            dockA.DockJointId = null;
-
-            // If these grids are ever null then need to look at fixing ordering for unanchored events elsewhere.
-            var gridAUid = Transform(dockAUid).GridUid;
-            var gridBUid = Transform(dockBUid.Value).GridUid;
-
-            var msg = new UndockEvent
-            {
-                DockA = dockA,
-                DockB = dockB,
-                GridAUid = gridAUid!.Value,
-                GridBUid = gridBUid!.Value,
-            };
-
-            RaiseLocalEvent(dockAUid, msg);
-            RaiseLocalEvent(dockBUid.Value, msg);
-            RaiseLocalEvent(msg);
+            return;
         }
 
-        private void OnStartup(Entity<DockingComponent> entity, ref ComponentStartup args)
+        dockB.DockedWith = null;
+        dockB.DockJoint = null;
+        dockB.DockJointId = null;
+
+        dockA.DockJoint = null;
+        dockA.DockedWith = null;
+        dockA.DockJointId = null;
+
+        // If these grids are ever null then need to look at fixing ordering for unanchored events elsewhere.
+        var gridAUid = Transform(dockAUid).GridUid;
+        var gridBUid = Transform(dockBUid.Value).GridUid;
+
+        var msg = new UndockEvent
         {
-            var uid = entity.Owner;
-            var component = entity.Comp;
+            DockA = dockA,
+            DockB = dockB,
+            GridAUid = gridAUid!.Value,
+            GridBUid = gridBUid!.Value,
+        };
 
-            // Use startup so transform already initialized
-            if (!Transform(uid).Anchored)
-                return;
+        RaiseLocalEvent(dockAUid, msg);
+        RaiseLocalEvent(dockBUid.Value, msg);
+        RaiseLocalEvent(msg);
+    }
 
-            // This little gem is for docking deserialization
-            if (component.DockedWith != null)
-            {
-                // They're still initialising so we'll just wait for both to be ready.
-                if (MetaData(component.DockedWith.Value).EntityLifeStage < EntityLifeStage.Initialized)
-                    return;
+    /// <summary>
+    /// Docks 2 ports together and assumes it is valid.
+    /// </summary>
+    public void Dock(Entity<DockingComponent> dockA, Entity<DockingComponent> dockB)
+    {
+        var dockAUid = dockA.Owner;
+        var dockBUid = dockB.Owner;
 
-                var otherDock = _dockingQuery.Comp(component.DockedWith.Value);
-                DebugTools.Assert(otherDock.DockedWith != null);
-
-                Dock((uid, component), (component.DockedWith.Value, otherDock));
-                DebugTools.Assert(component.Docked && otherDock.Docked);
-            }
+        if (dockBUid.GetHashCode() < dockAUid.GetHashCode())
+        {
+            (dockA, dockB) = (dockB, dockA);
+            (dockAUid, dockBUid) = (dockBUid, dockAUid);
         }
 
-        private void OnAnchorChange(Entity<DockingComponent> entity, ref AnchorStateChangedEvent args)
+        Log.Debug($"Docking between {dockAUid} and {dockBUid}");
+
+        // https://gamedev.stackexchange.com/questions/98772/b2distancejoint-with-frequency-equal-to-0-vs-b2weldjoint
+
+        // We could also potentially use a prismatic joint? Depending if we want clamps that can extend or whatever
+        var dockAXform = Transform(dockAUid);
+        var dockBXform = Transform(dockBUid);
+
+        DebugTools.Assert(dockAXform.GridUid != null);
+        DebugTools.Assert(dockBXform.GridUid != null);
+        var gridA = dockAXform.GridUid!.Value;
+        var gridB = dockBXform.GridUid!.Value;
+
+        // May not be possible if map or the likes.
+        if (HasComp<PhysicsComponent>(gridA) &&
+            HasComp<PhysicsComponent>(gridB))
         {
-            if (!args.Anchored)
+            SharedJointSystem.LinearStiffness(
+                2f,
+                0.7f,
+                _physicsQuery.Comp(gridA).Mass,
+                _physicsQuery.Comp(gridB).Mass,
+                out var stiffness,
+                out var damping);
+
+            // These need playing around with
+            // Could also potentially have collideconnected false and stiffness 0 but it was a bit more suss???
+            WeldJoint joint;
+
+            // Pre-existing joint so use that.
+            if (dockA.Comp.DockJointId != null)
             {
-                Undock(entity);
+                joint = GetSunriseDockingJoint(dockA, dockB, gridA, gridB); // Sunrise-Edit - восстанавливаем повреждённые связи доков
             }
-            // Sunrise-Start
             else
             {
-                if (TryComp<DoorComponent>(entity, out var door) && TryComp<AirtightComponent>(entity, out var airtight))
-                {
-                    var isOpen = door.State == DoorState.Open || door.State == DoorState.Opening;
-                    _airtightSystem.SetAirblocked((entity.Owner, airtight), !isOpen);
-                }
+                joint = _jointSystem.GetOrCreateWeldJoint(gridA, gridB, DockingJoint + dockAUid);
             }
-            // Sunrise-End
+
+            var gridAXform = Transform(gridA);
+            var gridBXform = Transform(gridB);
+
+            var anchorA = dockAXform.LocalPosition + dockAXform.LocalRotation.ToWorldVec() / 2f;
+            var anchorB = dockBXform.LocalPosition + dockBXform.LocalRotation.ToWorldVec() / 2f;
+
+            joint.LocalAnchorA = anchorA;
+            joint.LocalAnchorB = anchorB;
+            joint.ReferenceAngle = (float)(_transform.GetWorldRotation(gridBXform) - _transform.GetWorldRotation(gridAXform));
+            joint.CollideConnected = true;
+            joint.Stiffness = stiffness;
+            joint.Damping = damping;
+
+            dockA.Comp.DockJoint = joint;
+            dockA.Comp.DockJointId = joint.ID;
+
+            dockB.Comp.DockJoint = joint;
+            dockB.Comp.DockJointId = joint.ID;
         }
 
-        private void OnDockingReAnchor(Entity<DockingComponent> entity, ref ReAnchorEvent args)
+        dockA.Comp.DockedWith = dockBUid;
+        dockB.Comp.DockedWith = dockAUid;
+
+        if (TryComp(dockAUid, out DoorComponent? doorA))
         {
-            var uid = entity.Owner;
-            var component = entity.Comp;
-
-            if (!component.Docked)
-                return;
-
-            var otherDock = component.DockedWith;
-            var other = Comp<DockingComponent>(otherDock!.Value);
-
-            Undock(entity);
-            Dock((uid, component), (otherDock.Value, other));
-            _console.RefreshShuttleConsoles();
+            if (_doorSystem.TryOpen(dockAUid, doorA))
+            {
+                if (TryComp<DoorBoltComponent>(dockAUid, out var airlockA))
+                {
+                    _doorSystem.SetBoltsDown((dockAUid, airlockA), true);
+                }
+            }
+            doorA.ChangeAirtight = false;
         }
 
-        /// <summary>
-        /// Docks 2 ports together and assumes it is valid.
-        /// </summary>
-        public void Dock(Entity<DockingComponent> dockA, Entity<DockingComponent> dockB)
+        if (TryComp(dockBUid, out DoorComponent? doorB))
         {
-            var dockAUid = dockA.Owner;
-            var dockBUid = dockB.Owner;
-
-            if (dockBUid.GetHashCode() < dockAUid.GetHashCode())
+            if (_doorSystem.TryOpen(dockBUid, doorB))
             {
-                (dockA, dockB) = (dockB, dockA);
-                (dockAUid, dockBUid) = (dockBUid, dockAUid);
-            }
-
-            Log.Debug($"Docking between {dockAUid} and {dockBUid}");
-
-            // https://gamedev.stackexchange.com/questions/98772/b2distancejoint-with-frequency-equal-to-0-vs-b2weldjoint
-
-            // We could also potentially use a prismatic joint? Depending if we want clamps that can extend or whatever
-            var dockAXform = Transform(dockAUid);
-            var dockBXform = Transform(dockBUid);
-
-            DebugTools.Assert(dockAXform.GridUid != null);
-            DebugTools.Assert(dockBXform.GridUid != null);
-            var gridA = dockAXform.GridUid!.Value;
-            var gridB = dockBXform.GridUid!.Value;
-
-            // May not be possible if map or the likes.
-            if (HasComp<PhysicsComponent>(gridA) &&
-                HasComp<PhysicsComponent>(gridB))
-            {
-                SharedJointSystem.LinearStiffness(
-                    2f,
-                    0.7f,
-                    _physicsQuery.Comp(gridA).Mass,
-                    _physicsQuery.Comp(gridB).Mass,
-                    out var stiffness,
-                    out var damping);
-
-                // These need playing around with
-                // Could also potentially have collideconnected false and stiffness 0 but it was a bit more suss???
-                WeldJoint joint;
-
-                // Pre-existing joint so use that.
-                if (dockA.Comp.DockJointId != null)
+                if (TryComp<DoorBoltComponent>(dockBUid, out var airlockB))
                 {
-                    // Sunrise-Start
-                    if (dockB.Comp.DockJointId != dockA.Comp.DockJointId)
-                    {
-                        dockA.Comp.DockJointId = null;
-                        dockB.Comp.DockJointId = null;
-                        joint = _jointSystem.GetOrCreateWeldJoint(gridA, gridB, DockingJoint + dockAUid);
-                    }
-                    else
-                    {
-                        joint = _jointSystem.GetOrCreateWeldJoint(gridA, gridB, dockA.Comp.DockJointId);
-                    }
-                    // Sunrise-End
+                    _doorSystem.SetBoltsDown((dockBUid, airlockB), true);
                 }
-                else
-                {
-                    joint = _jointSystem.GetOrCreateWeldJoint(gridA, gridB, DockingJoint + dockAUid);
-                }
-
-                var gridAXform = Transform(gridA);
-                var gridBXform = Transform(gridB);
-
-                var anchorA = dockAXform.LocalPosition + dockAXform.LocalRotation.ToWorldVec() / 2f;
-                var anchorB = dockBXform.LocalPosition + dockBXform.LocalRotation.ToWorldVec() / 2f;
-
-                joint.LocalAnchorA = anchorA;
-                joint.LocalAnchorB = anchorB;
-                joint.ReferenceAngle = (float)(_transform.GetWorldRotation(gridBXform) - _transform.GetWorldRotation(gridAXform));
-                joint.CollideConnected = true;
-                joint.Stiffness = stiffness;
-                joint.Damping = damping;
-
-                dockA.Comp.DockJoint = joint;
-                dockA.Comp.DockJointId = joint.ID;
-
-                dockB.Comp.DockJoint = joint;
-                dockB.Comp.DockJointId = joint.ID;
             }
-
-            dockA.Comp.DockedWith = dockBUid;
-            dockB.Comp.DockedWith = dockAUid;
-
-            if (TryComp(dockAUid, out DoorComponent? doorA))
-            {
-                if (_doorSystem.TryOpen(dockAUid, doorA))
-                {
-                    if (TryComp<DoorBoltComponent>(dockAUid, out var airlockA))
-                    {
-                        _doorSystem.SetBoltsDown((dockAUid, airlockA), true);
-                    }
-                }
-                doorA.ChangeAirtight = false;
-            }
-
-            if (TryComp(dockBUid, out DoorComponent? doorB))
-            {
-                if (_doorSystem.TryOpen(dockBUid, doorB))
-                {
-                    if (TryComp<DoorBoltComponent>(dockBUid, out var airlockB))
-                    {
-                        _doorSystem.SetBoltsDown((dockBUid, airlockB), true);
-                    }
-                }
-                doorB.ChangeAirtight = false;
-            }
-
-            // Sunrise-Start
-            if (TryComp<AirtightComponent>(dockAUid, out var airtightA))
-            {
-                _airtightSystem.SetAirblocked((dockAUid, airtightA), true);
-            }
-
-            if (TryComp<AirtightComponent>(dockBUid, out var airtightB))
-            {
-                _airtightSystem.SetAirblocked((dockBUid, airtightB), true);
-            }
-            // Sunrise-End
-
-            if (_pathfinding.TryCreatePortal(dockAXform.Coordinates, dockBXform.Coordinates, out var handle))
-            {
-                dockA.Comp.PathfindHandle = handle;
-                dockB.Comp.PathfindHandle = handle;
-            }
-
-            var msg = new DockEvent
-            {
-                DockA = dockA,
-                DockB = dockB,
-                GridAUid = gridA,
-                GridBUid = gridB,
-            };
-
-            _console.RefreshShuttleConsoles();
-            RaiseLocalEvent(dockAUid, msg);
-            RaiseLocalEvent(dockBUid, msg);
-            RaiseLocalEvent(msg);
+            doorB.ChangeAirtight = false;
         }
 
-        /// <summary>
-        /// Attempts to dock 2 ports together and will return early if it's not possible.
-        /// </summary>
-        private void TryDock(Entity<DockingComponent> dockA, Entity<DockingComponent> dockB)
+        if (_pathfinding.TryCreatePortal(dockAXform.Coordinates, dockBXform.Coordinates, out var handle))
         {
-            if (!CanDock(dockA, dockB))
-                return;
-
-            Dock(dockA, dockB);
+            dockA.Comp.PathfindHandle = handle;
+            dockB.Comp.PathfindHandle = handle;
         }
 
-        public void Undock(Entity<DockingComponent> dock)
+        var msg = new DockEvent
         {
-            var otherUid = dock.Comp.DockedWith;
-            if (otherUid == null)
-                return;
+            DockA = dockA,
+            DockB = dockB,
+            GridAUid = gridA,
+            GridBUid = gridB,
+        };
 
-            Cleanup(dock.Owner, dock);
-            OnUndock(dock.Owner);
-            OnUndock(otherUid.Value);
-            _console.RefreshShuttleConsoles();
+        _console.RefreshShuttleConsoles();
+        RaiseLocalEvent(dockAUid, msg);
+        RaiseLocalEvent(dockBUid, msg);
+        RaiseLocalEvent(msg);
+    }
+
+    public void Undock(Entity<DockingComponent> dock)
+    {
+        var otherUid = dock.Comp.DockedWith; // Sunrise-Edit - сохраняем второй док до очистки связи
+        if (otherUid == null)
+            return;
+
+        Cleanup(dock.Owner, dock); // Sunrise-Edit - сначала сбрасываем состояние стыковки
+        OnUndock(dock.Owner);
+        OnUndock(otherUid.Value); // Sunrise-Edit
+        _console.RefreshShuttleConsoles();
+    }
+
+    private void OnUndock(EntityUid dockUid)
+    {
+        if (TerminatingOrDeleted(dockUid))
+            return;
+
+        if (TryComp<DoorBoltComponent>(dockUid, out var airlock))
+            _doorSystem.SetBoltsDown((dockUid, airlock), false);
+
+        if (TryComp(dockUid, out DoorComponent? door))
+        {
+            door.ChangeAirtight = true;
+            _doorSystem.TryClose(dockUid, door);
+            UpdateSunriseUndockedDoor((dockUid, door)); // Sunrise-Edit
         }
+    }
 
-        private void OnUndock(EntityUid dockUid)
+    public void UndockDocks(EntityUid gridUid)
+    {
+        _dockingSet.Clear();
+        _lookup.GetChildEntities(gridUid, _dockingSet);
+
+        foreach (var dock in _dockingSet)
         {
-            if (TerminatingOrDeleted(dockUid))
-                return;
-
-            if (TryComp<DoorBoltComponent>(dockUid, out var airlock))
-                _doorSystem.SetBoltsDown((dockUid, airlock), false);
-
-            if (TryComp(dockUid, out DoorComponent? door))
-            {
-                door.ChangeAirtight = true;
-                _doorSystem.TryClose(dockUid, door);
-
-                // Sunrise-Start
-                if (TryComp(dockUid, out AirlockComponent? airlockComp))
-                    _airlockSystem.UpdateAutoClose((dockUid, airlockComp, door));
-
-                if (TryComp<AirtightComponent>(dockUid, out var airtight))
-                {
-                    var isOpen = door.State == DoorState.Open || door.State == DoorState.Opening;
-                    _airtightSystem.SetAirblocked((dockUid, airtight), !isOpen);
-                }
-                // Sunrise-End
-            }
-        }
-
-        private void OnRequestUndock(EntityUid uid, ShuttleConsoleComponent component, UndockRequestMessage args)
-        {
-            var console = _console.GetDroneConsole(uid);
-
-            if (console == null)
-            {
-                _popup.PopupCursor(Loc.GetString("shuttle-console-undock-fail"));
-                return;
-            }
-
-            var shuttleUid = Transform(console.Value).GridUid;
-
-            if (!TryGetEntity(args.DockEntity, out var dockEnt) ||
-                !_dockingQuery.TryComp(dockEnt, out var dockComp))
-            {
-                _popup.PopupCursor(Loc.GetString("shuttle-console-undock-fail"));
-                return;
-            }
-
-            if (!CanShuttleUndock(shuttleUid))
-            {
-                _popup.PopupCursor(Loc.GetString("shuttle-console-dock-fail"));
-                return;
-            }
-
-            var dock = (dockEnt.Value, dockComp);
-
-            if (!CanUndock(dock))
-            {
-                _popup.PopupCursor(Loc.GetString("shuttle-console-undock-fail"));
-                return;
-            }
-
             Undock(dock);
         }
+    }
 
-        private void OnRequestDock(EntityUid uid, ShuttleConsoleComponent component, DockRequestMessage args)
+    public void SetDockBolts(EntityUid gridUid, bool enabled)
+    {
+        _dockingBoltSet.Clear();
+        _lookup.GetChildEntities(gridUid, _dockingBoltSet);
+
+        foreach (var entity in _dockingBoltSet)
         {
-            var console = _console.GetDroneConsole(uid);
+            _doorSystem.TryClose(entity);
+            _doorSystem.SetBoltsDown((entity.Owner, entity.Comp2), enabled);
+        }
+    }
 
-            if (console == null)
-            {
-                _popup.PopupCursor(Loc.GetString("shuttle-console-dock-fail"));
-                return;
-            }
-
-            var shuttleUid = Transform(console.Value).GridUid;
-
-            if (!CanShuttleDock(shuttleUid))
-            {
-                _popup.PopupCursor(Loc.GetString("shuttle-console-dock-fail"));
-                return;
-            }
-
-            if (!TryGetEntity(args.DockEntity, out var ourDock) ||
-                !TryGetEntity(args.TargetDockEntity, out var targetDock) ||
-                !_dockingQuery.TryComp(ourDock, out var ourDockComp) ||
-                !_dockingQuery.TryComp(targetDock, out var targetDockComp))
-            {
-                _popup.PopupCursor(Loc.GetString("shuttle-console-dock-fail"));
-                return;
-            }
-
-            // Cheating?
-            if (!TryComp(ourDock, out TransformComponent? xformA) ||
-                xformA.GridUid != shuttleUid)
-            {
-                _popup.PopupCursor(Loc.GetString("shuttle-console-dock-fail"));
-                return;
-            }
-
-            // TODO: Move the CanDock stuff to the port state and also validate that stuff
-            // Also need to check preventpilot + enabled / dockedwith
-            if (!CanDock((ourDock.Value, ourDockComp), (targetDock.Value, targetDockComp)))
-            {
-                _popup.PopupCursor(Loc.GetString("shuttle-console-dock-fail"));
-                return;
-            }
-
-            Dock((ourDock.Value, ourDockComp), (targetDock.Value, targetDockComp));
+    public bool CanUndock(Entity<DockingComponent?> dock)
+    {
+        if (!Resolve(dock, ref dock.Comp) ||
+            !dock.Comp.Docked)
+        {
+            return false;
         }
 
-        public bool CanUndock(Entity<DockingComponent?> dock)
-        {
-            if (!Resolve(dock, ref dock.Comp) ||
-                !dock.Comp.Docked)
-            {
-                return false;
-            }
+        return true;
+    }
 
-            return true;
+    /// <summary>
+    /// Returns true if both docks can connect. Does not consider whether the shuttle allows it.
+    /// </summary>
+    public bool CanDock(Entity<DockingComponent> dockA, Entity<DockingComponent> dockB)
+    {
+        if (dockA.Comp.DockedWith != null ||
+            dockB.Comp.DockedWith != null)
+        {
+            return false;
         }
 
-        /// <summary>
-        /// Returns true if both docks can connect. Does not consider whether the shuttle allows it.
-        /// </summary>
-        public bool CanDock(Entity<DockingComponent> dockA, Entity<DockingComponent> dockB)
-        {
-            if (dockA.Comp.DockedWith != null ||
-                dockB.Comp.DockedWith != null)
-            {
-                return false;
-            }
+        var xformA = Transform(dockA);
+        var xformB = Transform(dockB);
 
-            var xformA = Transform(dockA);
-            var xformB = Transform(dockB);
+        if (!xformA.Anchored || !xformB.Anchored)
+            return false;
 
-            if (!xformA.Anchored || !xformB.Anchored)
-                return false;
+        var (worldPosA, worldRotA) = XformSystem.GetWorldPositionRotation(xformA);
+        var (worldPosB, worldRotB) = XformSystem.GetWorldPositionRotation(xformB);
 
-            var (worldPosA, worldRotA) = XformSystem.GetWorldPositionRotation(xformA);
-            var (worldPosB, worldRotB) = XformSystem.GetWorldPositionRotation(xformB);
-
-            return CanDock(new MapCoordinates(worldPosA, xformA.MapID), worldRotA,
-                new MapCoordinates(worldPosB, xformB.MapID), worldRotB);
-        }
+        return CanDock(new MapCoordinates(worldPosA, xformA.MapID), worldRotA,
+            new MapCoordinates(worldPosB, xformB.MapID), worldRotB);
     }
 }

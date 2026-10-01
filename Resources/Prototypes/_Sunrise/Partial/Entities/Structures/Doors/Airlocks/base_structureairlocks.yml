@@ -1,0 +1,81 @@
+- type: !PartialOnly entity
+  id: Airlock
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Doors/Airlocks/Standard/basic.rsi
+    snapCardinals: false
+    layers: !Clear
+    - !Index:0
+      state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+    - !Index:0
+      state: closed_unlit
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+      visible: true
+    - !Index:0
+      state: welded
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - !Index:0
+      state: bolted_unlit
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+    - !Index:0
+      state: emergency_unlit
+      map: ["enum.DoorVisualLayers.BaseEmergencyAccess"]
+      shader: unshaded
+    - !Index:0
+      state: panel_open
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - !Index:0
+      state: electrified_ai
+      sprite: Interface/Misc/ai_hud.rsi
+      shader: unshaded
+      visible: false
+      map: ["enum.ElectrifiedLayers.HUD"]
+    - !Index:0
+      state: electrified
+      sprite: Effects/electricity.rsi
+      shader: unshaded
+      visible: false
+      map: ["enum.ElectrifiedLayers.Sparks"]
+    - !Index:0
+      state: sparks
+      map: ["enum.DoorVisualLayers.BaseEmagging"]
+      shader: unshaded
+      visible: false
+
+- type: !PartialOnly entity
+  id: AirlockGlass
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Doors/Airlocks/Glass/glass.rsi
+
+# Совместимость механики шлюзов Sunrise с обновлёнными прототипами Wizden.
+
+- type: !PartialOnly entity
+  id: Airlock
+  parent: [BaseAirlockIndestructible, BaseDeltaPressurePlasma, StructureHealthDoor]
+  components:
+  - type: Ricochetable
+    chance: 1
+  - type: Pierceable
+    level: HardenedMetal
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.46,-0.46,0.46,0.46"
+
+- type: !PartialOnly entity
+  id: AirlockGlass
+  parent: [Airlock, BaseDeltaPressureReinforcedPlasmaQuarter]
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.46,-0.46,0.46,0.46"

@@ -721,6 +721,93 @@
       - AssaultOpsUplink
 
 - type: listing
+  id: UplinkEcronizer
+  name: uplink-ecronizer-name
+  description: uplink-ecronizer-desc
+  productEntity: Ecronizer
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkLubeGrenade
+  name: uplink-lube-grenade-name
+  description: uplink-lube-grenade-desc
+  productEntity: LubeGrenade
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkGlueGrenade
+  name: uplink-glue-grenade-name
+  description: uplink-glue-grenade-desc
+  productEntity: GlueGrenade
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkGrenadeLauncherChinaLake
+  name: uplink-grenade-launcher-china-lake-name
+  description: uplink-grenade-launcher-china-lake-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Launchers/china_lake.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateFilledGrenadeLauncher
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 14
+  cost:
+    Telecrystal: 20
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+
+- type: listing
+  id: UplinkDuffelSurgery
+  name: uplink-duffel-surgery-name
+  description: uplink-duffel-surgery-desc
+  productEntity: ClothingBackpackDuffelSyndicateFilledMedical
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkCybernetics
+
+- type: listing
   id: UplinkMagazineDragunovIncendiary
   description: uplink-magazine-dragunov-incendiary-desc
   icon: { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/dragunov_mag.rsi, state: base }
@@ -1701,7 +1788,7 @@
   id: UplinkFireAxeFlaming
   name: uplink-fire-axe-flaming-name
   description: uplink-fire-axe-flaming-desc
-  icon: { sprite: Objects/Weapons/Melee/fireaxeflaming.rsi, state: icon }
+  icon: { sprite: _Sunrise/Objects/Weapons/Melee/fireaxeflaming.rsi, state: icon }
   productEntity: FireAxeFlaming
   discountCategory: rareDiscounts
   discountDownTo:

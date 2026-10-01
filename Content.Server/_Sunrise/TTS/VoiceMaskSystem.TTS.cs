@@ -59,7 +59,7 @@ public partial class VoiceMaskSystem
 
     private void OnChangeVoice(EntityUid uid, VoiceMaskComponent component, VoiceMaskChangeVoiceMessage message)
     {
-        if (!_proto.TryIndex<TTSVoicePrototype>(message.Voice, out var voiceProto))
+        if (!ProtoMan.TryIndex<TTSVoicePrototype>(message.Voice, out var voiceProto))
             return;
 
         if (HasComp<StationAiHeldComponent>(message.Actor))

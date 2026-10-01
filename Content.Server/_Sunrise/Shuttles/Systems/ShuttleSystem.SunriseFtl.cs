@@ -319,7 +319,7 @@ public sealed partial class ShuttleSystem
             var aabb = fixture.Shape.ComputeAABB(transform, 0)
                 .Translated(-shuttleGrid.TileSizeHalfVector);
             grids.Clear();
-            _mapManager.FindGridsIntersecting(shuttle.Comp.MapID, aabb, ref grids, includeMap: false);
+            _mapSystem.FindGridsIntersecting(shuttle.Comp.MapID, aabb, ref grids, includeMap: false);
 
             foreach (var grid in grids)
             {

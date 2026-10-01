@@ -15,7 +15,7 @@ namespace Content.Server.Database.Migrations.Sqlite
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.0");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.6");
 
             modelBuilder.Entity("Content.Server.Database.AHelpMessage", b =>
                 {
@@ -840,6 +840,70 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("connection_log", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.CustomVoteLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("custom_vote_log_id");
+
+                    b.Property<Guid?>("InitiatorId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("initiator_id");
+
+                    b.Property<int>("RoundId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("round_id");
+
+                    b.Property<byte>("State")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("state");
+
+                    b.Property<DateTime>("TimeCreated")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("time_created");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("title");
+
+                    b.HasKey("Id")
+                        .HasName("PK_custom_vote_log");
+
+                    b.HasIndex("InitiatorId");
+
+                    b.HasIndex("RoundId")
+                        .HasDatabaseName("IX_custom_vote_log_round_id");
+
+                    b.ToTable("custom_vote_log", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CustomVoteLogOption", b =>
+                {
+                    b.Property<int>("VoteId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("vote_id");
+
+                    b.Property<short>("OptionIdx")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("option_idx");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("text");
+
+                    b.Property<int>("VoteCount")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("vote_count");
+
+                    b.HasKey("VoteId", "OptionIdx")
+                        .HasName("PK_custom_vote_log_option");
+
+                    b.ToTable("custom_vote_log_option", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.IPIntelCache", b =>
                 {
                     b.Property<int>("Id")
@@ -1274,8 +1338,12 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("species");
 
-                    b.Property<string>("Voice")
+                    b.Property<string>("TtsVoice")
                         .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("tts_voice");
+
+                    b.Property<string>("Voice")
                         .HasColumnType("TEXT")
                         .HasColumnName("voice");
 
@@ -1504,31 +1572,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("trait", (string)null);
                 });
 
-            modelBuilder.Entity("Content.Server.Database.UiLike", b =>
-                {
-                    b.Property<string>("ScopeId")
-                        .HasMaxLength(128)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("scope_id");
-
-                    b.Property<string>("ItemId")
-                        .HasMaxLength(128)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("item_id");
-
-                    b.Property<Guid>("PlayerUserId")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("player_user_id");
-
-                    b.HasKey("ScopeId", "ItemId", "PlayerUserId")
-                        .HasName("PK_ui_likes");
-
-                    b.HasIndex("PlayerUserId", "ScopeId")
-                        .HasDatabaseName("IX_ui_likes_player_user_id_scope_id");
-
-                    b.ToTable("ui_likes", (string)null);
-                });
-
             modelBuilder.Entity("Content.Server.Database.TutorialCompletion", b =>
                 {
                     b.Property<Guid>("PlayerUserId")
@@ -1561,6 +1604,31 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasDatabaseName("IX_tutorial_completion_tutorial_id");
 
                     b.ToTable("tutorial_completion", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.UiLike", b =>
+                {
+                    b.Property<string>("ScopeId")
+                        .HasMaxLength(128)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("scope_id");
+
+                    b.Property<string>("ItemId")
+                        .HasMaxLength(128)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("item_id");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_user_id");
+
+                    b.HasKey("ScopeId", "ItemId", "PlayerUserId")
+                        .HasName("PK_ui_likes");
+
+                    b.HasIndex("PlayerUserId", "ScopeId")
+                        .HasDatabaseName("IX_ui_likes_player_user_id_scope_id");
+
+                    b.ToTable("ui_likes", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.Unban", b =>
@@ -2030,6 +2098,39 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Server");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.CustomVoteLog", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Initiator")
+                        .WithMany()
+                        .HasForeignKey("InitiatorId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .HasConstraintName("FK_custom_vote_log_player_initiator_id1");
+
+                    b.HasOne("Content.Server.Database.Round", "Round")
+                        .WithMany("CustomVoteLogs")
+                        .HasForeignKey("RoundId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_custom_vote_log_round_round_id");
+
+                    b.Navigation("Initiator");
+
+                    b.Navigation("Round");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CustomVoteLogOption", b =>
+                {
+                    b.HasOne("Content.Server.Database.CustomVoteLog", "Vote")
+                        .WithMany("Options")
+                        .HasForeignKey("VoteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_custom_vote_log_option_custom_vote_log_vote_id");
+
+                    b.Navigation("Vote");
+                });
+
             modelBuilder.Entity("Content.Server.Database.Job", b =>
                 {
                     b.HasOne("Content.Server.Database.Profile", "Profile")
@@ -2271,6 +2372,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("BanHits");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.CustomVoteLog", b =>
+                {
+                    b.Navigation("Options");
+                });
+
             modelBuilder.Entity("Content.Server.Database.Player", b =>
                 {
                     b.Navigation("AdminLogs");
@@ -2337,6 +2443,8 @@ namespace Content.Server.Database.Migrations.Sqlite
             modelBuilder.Entity("Content.Server.Database.Round", b =>
                 {
                     b.Navigation("AdminLogs");
+
+                    b.Navigation("CustomVoteLogs");
                 });
 
             modelBuilder.Entity("Content.Server.Database.Server", b =>

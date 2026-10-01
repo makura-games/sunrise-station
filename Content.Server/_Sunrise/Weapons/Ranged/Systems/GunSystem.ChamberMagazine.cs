@@ -6,7 +6,7 @@ namespace Content.Server.Weapons.Ranged.Systems;
 
 public sealed partial class GunSystem
 {
-    partial void InitializeSunrise()
+    private void InitializeSunrise()
     {
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, MapInitEvent>(OnChamberMagazineMapInit);
     }

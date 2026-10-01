@@ -74,7 +74,7 @@ public abstract partial class GameRuleSystem<T> where T : IComponent
             {
                 if (priority == JobPriority.Never ||
                     commandJobs.Contains(jobId) ||
-                    !Proto.TryIndex<JobPrototype>(jobId, out var job))
+                    !ProtoMan.TryIndex<JobPrototype>(jobId, out var job))
                     continue;
 
                 foreach (var special in job.Special)

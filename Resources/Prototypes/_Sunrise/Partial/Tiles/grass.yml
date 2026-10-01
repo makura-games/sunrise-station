@@ -1,0 +1,46 @@
+- type: !PartialOnly tile
+  id: FloorGrass
+  sprite: /Textures/_Sunrise/Tiles/grass.png
+  variants: 4
+  placementVariants: [1.0, 1.0, 1.0, 1.0]
+
+- type: !PartialOnly tile
+  id: FloorGrassJungle
+  sprite: /Textures/_Sunrise/Tiles/grassjungle.png
+  variants: 4
+  placementVariants: [1.0, 1.0, 1.0, 1.0]
+
+- type: !PartialOnly tile
+  id: FloorGrassDark
+  sprite: /Textures/_Sunrise/Tiles/grassdark.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorAstroGrass
+  sprite: /Textures/_Sunrise/Tiles/Planet/Grass/grass.png
+  variants: 4
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_Sunrise/Tiles/Planet/Grass/single_edge.png
+    NorthEast: /Textures/_Sunrise/Tiles/Planet/Grass/single_edge.png
+    NorthWest: /Textures/_Sunrise/Tiles/Planet/Grass/single_edge.png
+    SouthWest: /Textures/_Sunrise/Tiles/Planet/Grass/single_edge.png
+    South: /Textures/_Sunrise/Tiles/Planet/Grass/double_edge.png
+    East: /Textures/_Sunrise/Tiles/Planet/Grass/double_edge.png
+    North: /Textures/_Sunrise/Tiles/Planet/Grass/double_edge.png
+    West: /Textures/_Sunrise/Tiles/Planet/Grass/double_edge.png
+
+- type: !PartialOnly tile
+  id: FloorPlanetGrass
+  sprite: /Textures/_Sunrise/Tiles/Planet/Grass/grass.png
+  variants: 4
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_Sunrise/Tiles/Planet/Grass/single_edge.png
+    NorthEast: /Textures/_Sunrise/Tiles/Planet/Grass/single_edge.png
+    NorthWest: /Textures/_Sunrise/Tiles/Planet/Grass/single_edge.png
+    SouthWest: /Textures/_Sunrise/Tiles/Planet/Grass/single_edge.png
+    South: /Textures/_Sunrise/Tiles/Planet/Grass/double_edge.png
+    East: /Textures/_Sunrise/Tiles/Planet/Grass/double_edge.png
+    North: /Textures/_Sunrise/Tiles/Planet/Grass/double_edge.png
+    West: /Textures/_Sunrise/Tiles/Planet/Grass/double_edge.png

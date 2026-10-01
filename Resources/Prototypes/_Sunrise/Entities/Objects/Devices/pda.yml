@@ -177,18 +177,20 @@
     accentHColor: "#3d3d40"
   - type: Icon
     state: pda-securitypilot
-  - type: CartridgeLoader
-    preinstalled:
-      - CrewManifestCartridge
-      - NotekeeperCartridge
-      - NanoTaskCartridge
-      - NewsReaderCartridge
-      - WantedListCartridge
-      - AstroNavCartridge
-      - NavigatorCartridge
-      - MessengerCartridge
-      - PhotoCartridge
-      - CorporateLawCartridge
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NewsReaderCartridge
+        - id: WantedListCartridge
+        - id: AstroNavCartridge
+        - id: NavigatorCartridge
+        - id: MessengerCartridge
+        - id: PhotoCartridge
+        - id: CorporateLawCartridge
 
 - type: entity
   parent: CaptainPDA
@@ -214,18 +216,29 @@
     accentHColor: "#e6bd45"
   - type: Icon
     state: pda-representative
-  - type: CartridgeLoader
-    preinstalled:
-      - CrewManifestCartridge
-      - NotekeeperCartridge
-      - NanoTaskCartridge
-      - NewsReaderCartridge
-      - WantedListCartridge
-      - AstroNavCartridge
-      - NavigatorCartridge
-      - MessengerCartridge
-      - PhotoCartridge
-      - CorporateLawCartridge
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NewsReaderCartridge
+        - id: WantedListCartridge
+        - id: AstroNavCartridge
+        - id: NavigatorCartridge
+        - id: MessengerCartridge
+        - id: PhotoCartridge
+        - id: CorporateLawCartridge
+
+- type: entity
+  parent: CentcomPDA
+  id: CentcomOperatorPDA
+  name: CentComm operator PDA
+  description: Light green sign of walking bureaucracy.
+  components:
+  - type: Pda
+    id: CentcomOperatorIDCard
 
 - type: entity
   parent: BasePDA
@@ -284,11 +297,12 @@
         pda-ussp
   - type: PdaBorderColor
     borderColor: "#891417"
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-      - NotekeeperCartridge
-      - CorporateLawCartridge
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: NotekeeperCartridge
+        - id: CorporateLawCartridge
 
 - type: entity
   parent: USSPPDA
@@ -299,12 +313,13 @@
   components:
   - type: Pda
     id: USSPOfficerIDCard
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-      - NotekeeperCartridge
-      - LogProbeCartridge
-      - CorporateLawCartridge
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: NotekeeperCartridge
+        - id: LogProbeCartridge
+        - id: CorporateLawCartridge
 
 - type: entity
   parent: USSPPDA
@@ -315,13 +330,14 @@
   components:
   - type: Pda
     id: USSPSoldierIDCard
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-      - NotekeeperCartridge
-      - AstroNavCartridge
-      - MedTekCartridge
-      - CorporateLawCartridge
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: NotekeeperCartridge
+        - id: AstroNavCartridge
+        - id: MedTekCartridge
+        - id: CorporateLawCartridge
 
 - type: entity
   parent: USSPPDA
@@ -332,13 +348,14 @@
   components:
   - type: Pda
     id: USSPSoldierOfficerIDCard
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-      - NotekeeperCartridge
-      - AstroNavCartridge
-      - MedTekCartridge
-      - CorporateLawCartridge
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: NotekeeperCartridge
+        - id: AstroNavCartridge
+        - id: MedTekCartridge
+        - id: CorporateLawCartridge
 
 - type: entity
   parent: USSPPDA
@@ -349,14 +366,15 @@
   components:
   - type: Pda
     id: USSPCaptainIDCard
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-      - NotekeeperCartridge
-      - LogProbeCartridge
-      - AstroNavCartridge
-      - MedTekCartridge
-      - CorporateLawCartridge
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: NotekeeperCartridge
+        - id: LogProbeCartridge
+        - id: AstroNavCartridge
+        - id: MedTekCartridge
+        - id: CorporateLawCartridge
 
 - type: entity
   parent: BasePDA
@@ -435,17 +453,18 @@
   - type: Icon
     sprite: _Sunrise/Objects/Devices/pda.rsi
     state: pda-mining
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-    - CrewManifestCartridge
-    - NotekeeperCartridge
-    - NewsReaderCartridge
-    - AstroNavCartridge
-    - NavigatorCartridge
-    - MessengerCartridge
-    - PhotoCartridge
-    - CorporateLawCartridge
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NewsReaderCartridge
+        - id: AstroNavCartridge
+        - id: NavigatorCartridge
+        - id: MessengerCartridge
+        - id: PhotoCartridge
+        - id: CorporateLawCartridge
 
 - type: entity
   parent: BasePDA

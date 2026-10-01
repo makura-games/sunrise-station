@@ -48,13 +48,6 @@
   voiceId: shadow_fiend_dota_2
 
 - type: collectiveMind
-  id: Changeling
-  name: collective-mind-changeling
-  keycode: 'г'
-  color: "#ff75a8"
-  voiceId: EvilThalya
-
-- type: collectiveMind
   id: BloodCult
   name: collective-mind-blood-cult
   keycode: 'к'

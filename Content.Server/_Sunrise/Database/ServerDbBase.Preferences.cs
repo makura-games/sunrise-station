@@ -10,7 +10,7 @@ public abstract partial class ServerDbBase
 {
     private static void StoreSunriseProfileData(Profile profile, HumanoidCharacterProfile humanoid)
     {
-        profile.Voice = humanoid.Voice;
+        profile.TtsVoice = humanoid.TtsVoice;
         profile.BodyType = humanoid.BodyType;
         profile.Width = humanoid.Width;
         profile.Height = humanoid.Height;

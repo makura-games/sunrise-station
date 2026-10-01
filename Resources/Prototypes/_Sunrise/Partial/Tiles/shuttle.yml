@@ -1,0 +1,34 @@
+- type: !PartialOnly tile
+  id: FloorShuttleWhite
+  sprite: /Textures/_Sunrise/Tiles/shuttlewhite.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorShuttleGrey
+  sprite: /Textures/_Sunrise/Tiles/shuttlegrey.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorShuttleBlack
+  sprite: /Textures/_Sunrise/Tiles/shuttleblack.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorShuttleBlue
+  sprite: /Textures/_Sunrise/Tiles/shuttleblue.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorShuttleOrange
+  sprite: /Textures/_Sunrise/Tiles/shuttleorange.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorShuttlePurple
+  sprite: /Textures/_Sunrise/Tiles/shuttlepurple.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorShuttleRed
+  sprite: /Textures/_Sunrise/Tiles/shuttlered.png
+  variants: 4

@@ -171,7 +171,7 @@
   suffix: Brute
   components:
   - type: Label
-    currentLabel: brute patch
+    localizedLabel: ent-PatchBrute
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
@@ -186,7 +186,7 @@
   suffix: Heat
   components:
   - type: Label
-    currentLabel: Heat patch
+    localizedLabel: ent-PatchBurn
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
@@ -201,7 +201,7 @@
   suffix: Brute-Heat
   components:
   - type: Label
-    currentLabel: brute/heat patch
+    localizedLabel: label-patch-brute-heat
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector

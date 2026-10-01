@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Content.Client._Sunrise.UserInterface.Controls;
 using Robust.Client.UserInterface.Controls;
-using GhostWarpPlayer = Content.Shared.Ghost.SharedGhostSystem.GhostWarpPlayer;
-using GhostWarpPlace = Content.Shared.Ghost.SharedGhostSystem.GhostWarpPlace;
-using GhostWarpGlobalAntagonist = Content.Shared.Ghost.SharedGhostSystem.GhostWarpGlobalAntagonist;
+using GhostWarpPlayer = Content.Shared.Ghost.Systems.SharedGhostSystem.GhostWarpPlayer;
+using GhostWarpPlace = Content.Shared.Ghost.Systems.SharedGhostSystem.GhostWarpPlace;
+using GhostWarpGlobalAntagonist = Content.Shared.Ghost.Systems.SharedGhostSystem.GhostWarpGlobalAntagonist;
 using Robust.Shared.Utility;
 
 

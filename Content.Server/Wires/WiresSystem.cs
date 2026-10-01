@@ -25,7 +25,6 @@ namespace Content.Server.Wires;
 
 public sealed partial class WiresSystem : SharedWiresSystem
 {
-    [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private HandsSystem _hands = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
@@ -77,7 +76,7 @@ public sealed partial class WiresSystem : SharedWiresSystem
         List<IWireAction> wireActions = new();
         var dummyWires = 0;
 
-        if (!_protoMan.Resolve(wires.LayoutId, out WireLayoutPrototype? layoutPrototype))
+        if (!ProtoMan.Resolve(wires.LayoutId, out WireLayoutPrototype? layoutPrototype))
         {
             return;
         }
@@ -91,7 +90,7 @@ public sealed partial class WiresSystem : SharedWiresSystem
 
         // does the prototype have a parent (and are the wires empty?) if so, we just create
         // a new layout based on that
-        foreach (var parentLayout in _protoMan.EnumerateParents<WireLayoutPrototype>(wires.LayoutId))
+        foreach (var parentLayout in ProtoMan.EnumerateParents<WireLayoutPrototype>(wires.LayoutId))
         {
             if (parentLayout.Wires != null)
             {
@@ -505,6 +504,8 @@ public sealed partial class WiresSystem : SharedWiresSystem
             {
                 wire.IsCut = false;
             }
+
+            wire.Action?.Update(wire);
         }
 
         // If we don't update the interface wires will be desynced on client.

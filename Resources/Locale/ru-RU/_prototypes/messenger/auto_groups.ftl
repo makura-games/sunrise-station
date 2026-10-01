@@ -6,3 +6,4 @@ department-science = РНД
 department-cargo = Карго
 department-civilian = Гражданские
 department-command = Командный
+department-service = Сервис

@@ -149316,20 +149316,6 @@ entities:
     - type: Transform
       pos: -18.452793,-49.289062
       parent: 2
-- proto: MagicalLamp
-  entities:
-  - uid: 19494
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -15.320007,-31.120346
-      parent: 2
-  - uid: 19495
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -25.747307,-25.418667
-      parent: 2
 - proto: MagicDiceBag
   entities:
   - uid: 19496

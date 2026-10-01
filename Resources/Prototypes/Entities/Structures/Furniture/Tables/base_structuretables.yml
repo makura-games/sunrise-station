@@ -1,15 +1,11 @@
 - type: entity
-  id: TableBase
+  abstract: true
   parent: BaseStructure
+  id: TableBase
   name: table
   description: A square piece of metal standing on four metal legs.
-  abstract: true
   components:
   - type: Animateable
-  - type: Damageable
-    damageModifierSet: Metallic
-  - type: Injurable
-    damageContainer: StructuralInorganic
   - type: PlaceableSurface
   - type: Fixtures
     fixtures:
@@ -44,10 +40,10 @@
     - Table
 
 - type: entity
-  id: CounterBase
-  parent: TableBase
-  name: counter
   abstract: true
+  parent: TableBase
+  id: CounterBase
+  name: counter
   components:
   - type: Fixtures
     fixtures:
@@ -60,3 +56,4 @@
         - TableMask
         layer:
         - TableLayer
+        - LowImpassable

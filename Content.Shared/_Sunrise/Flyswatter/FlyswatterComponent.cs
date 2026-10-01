@@ -1,5 +1,5 @@
 using Content.Shared.Chemistry.Reagent;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Sunrise.Flyswatter;
 
@@ -15,7 +15,7 @@ public sealed partial class FlyswatterComponent : Component
     /// <summary>
     /// Реагент крови, по которому считаем цель насекомым
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<ReagentPrototype>))]
-    public string InsectBloodReagent = "InsectBlood";
+    [DataField]
+    public ProtoId<ReagentPrototype> InsectBloodReagent = "InsectBlood";
 }
 

@@ -8,7 +8,7 @@ namespace Content.Client._Sunrise.DamageOverlay;
 public sealed partial class DamageOverlaySystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
 
     private bool _damageOverlayEnabled;
     private bool _damageOverlaySelf;
@@ -32,6 +32,7 @@ public sealed partial class DamageOverlaySystem : EntitySystem
         _cfg.UnsubValueChanged(SunriseCCVars.DamageOverlayEnable, OnDamageOverlayEnableChanged);
         _cfg.UnsubValueChanged(SunriseCCVars.DamageOverlaySelf, OnDamageOverlaySelfChanged);
         _cfg.UnsubValueChanged(SunriseCCVars.DamageOverlayStructures, OnDamageOverlayStructuresChanged);
+        _netManager.Connected -= OnConnected;
     }
 
     private void OnDamageOverlayEnableChanged(bool option)
@@ -56,7 +57,7 @@ public sealed partial class DamageOverlaySystem : EntitySystem
         RaiseNetworkEvent(new DamageOverlayOptionEvent(_damageOverlayEnabled, _damageOverlaySelf, _damageOverlayStructures));
     }
 
-    private async void OnConnected(object? sender, NetChannelArgs e)
+    private void OnConnected(object? sender, NetChannelArgs args)
     {
         SendDamageOverlayOptions();
     }

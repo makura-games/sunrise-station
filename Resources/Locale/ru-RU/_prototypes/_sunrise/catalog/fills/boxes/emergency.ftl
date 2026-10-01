@@ -27,3 +27,5 @@ ent-SunriseBoxSurvivalSyndicateNitrogen = { ent-BoxSurvivalSyndicate }
 ent-BoxSurvivalSyndicateWithoutGas = { ent-BoxSurvival }
     .desc = { ent-BoxSurvival.desc }
     .suffix = Без баллона
+
+label-box-survival-without-gas = без баллона

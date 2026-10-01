@@ -2,7 +2,6 @@ using Content.Shared.Chat.Prototypes;
 using Content.Shared.Humanoid;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 
 namespace Content.Server._Sunrise.ReplacementVocal;
 
@@ -20,5 +19,7 @@ public sealed partial class ReplacementVocalComponent : Component
     public HashSet<string> AddedEmotes = new();
 
     [DataField]
-    public Dictionary<Sex, ProtoId<EmoteSoundsPrototype>>? PreviousVocal;
+    public ProtoId<EmoteSoundsPrototype>? PreviousVocal;
+
+    public bool WasReplaced;
 }

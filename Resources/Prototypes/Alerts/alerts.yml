@@ -5,11 +5,9 @@
   id: BaseAlertOrder
   order:
     - category: CultBuffed # Sunrise-Edit
-    - alertType: ChangelingBiomass
     - category: Mood #Sunrise Edit
     - category: Health #Sunrise Edit
     - category: Stamina
-    - alertType: ChangelingChemicals
     - alertType: SuitPower
     - category: Internals
     - alertType: Fire
@@ -141,14 +139,6 @@
   name: alerts-walking-name
   description: alerts-walking-desc
   clientHandled: true
-
-- type: alert
-  id: Stun
-  icons:
-  - sprite: /Textures/Objects/Weapons/Melee/stunbaton.rsi #Should probably draw a proper icon
-    state: stunbaton_off
-  name: alerts-stunned-name
-  description: alerts-stunned-desc
 
 - type: alert
   id: Knockdown
@@ -392,19 +382,6 @@
   description: alerts-parched-desc
 
 - type: alert
-  id: Muted
-  icons: [ /Textures/Interface/Alerts/Abilities/silenced.png ]
-  name: alerts-muted-name
-  description: alerts-muted-desc
-
-- type: alert
-  id: VowOfSilence
-  icons: [ /Textures/Interface/Alerts/Abilities/silenced.png ]
-  name: alerts-vow-silence-name
-  clickEvent: !type:BreakVowAlertEvent
-  description: alerts-vow-silence-desc
-
-- type: alert
   id: VowBroken
   icons: [ /Textures/Interface/Actions/scream.png ]
   name: alerts-vow-broken-name
@@ -475,14 +452,6 @@
   description: alerts-stealthy-desc
   minSeverity: 0
   maxSeverity: 1
-
-- type: alert
-  id: Adrenaline
-  icons:
-  - sprite: Mobs/Species/Human/organs.rsi
-    state: heart-on
-  name: alerts-adrenaline-name
-  description: alerts-adrenaline-desc
 
 # Making alerts for innate abilities like this should generally be avoided by turning them into actions or giving better UX.
 # This was done this way because several entities currently can pry innately and have no indicator for this whatsoever.

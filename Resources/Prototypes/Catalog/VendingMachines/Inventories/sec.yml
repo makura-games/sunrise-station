@@ -8,7 +8,7 @@
     ClusterBangFull: 2
     GrenadeStinger: 4
     Flash: 5
-    Tourniquet: 12 # Sunrise-Edit
+    Tourniquet: 12 # Sunrise-Edit - расширенный запас турникетов.
     FlashlightSeclite: 5
     ClothingEyesGlassesSunglasses: 2
     ClothingEyesHudSecurity: 2
@@ -20,15 +20,15 @@
     RiotLaserShield: 2
     RiotBulletShield: 2
     RadioHandheldSecurity: 5
-    BolaSecurity: 5 # Sunrise-Edit
-    HandheldCamera: 3  # Sunrise-Edit
+    SecurityBola: 5 # Sunrise-Edit - канонический ID Wizden с балансом Sunrise.
+    HandheldCamera: 3 # Sunrise-Edit - камера службы безопасности.
   # security officers need to follow a diet regimen!
   contrabandInventory:
     WeaponMeleeNeedle: 2
     FoodDonutHomer: 12
     FoodBoxDonut: 2
-    ModularReceiverAuto: 1 #Sunrise-Edit
+    ModularReceiverAuto: 1 # Sunrise-Edit - контрабандная автоматическая ствольная коробка.
     #box evidence
   emaggedInventory:
-    ClothingEyesGlassesNVG: 1 # Sunrise Edit
-    SmokeGrenade: 1 # Sunrise Edit
+    ClothingEyesGlassesNVG: 1 # Sunrise-Edit - контрабандные ПНВ.
+    SmokeGrenade: 1 # Sunrise-Edit - дымовая граната.

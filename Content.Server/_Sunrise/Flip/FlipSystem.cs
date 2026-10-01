@@ -3,6 +3,7 @@ using Content.Shared._Sunrise.Flip;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server._Sunrise.Flip;
@@ -12,8 +13,7 @@ public sealed partial class FlipSystem : SharedFlipSystem
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private IRobustRandom _random = default!;
 
-    [ValidatePrototypeId<EmotePrototype>]
-    private const string EmoteFlipProto = "Flip";
+    private static readonly ProtoId<EmotePrototype> EmoteFlipProto = "Flip";
 
     public override void Initialize()
     {

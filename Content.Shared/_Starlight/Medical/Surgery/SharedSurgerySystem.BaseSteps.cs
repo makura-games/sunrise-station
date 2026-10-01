@@ -118,13 +118,13 @@ public abstract partial class SharedSurgerySystem
         if (args.IsFinal)
             progress.CompletedSurgeries.Add(args.SurgeryProto);
 
-        Dirty(args.Part, progress); // Sunrise-Edit - синхронизируем завершенный шаг с BUI
+        Dirty(args.Part, progress); // синхронизируем завершенный шаг с BUI
     }
     private void OnStep(Entity<SurgeryStepComponent> ent, ref SurgeryStepEvent args)
     {
         foreach (var reg in (ent.Comp.Tools ?? []).Values)
         {
-            var tool = args.Tools.FirstOrDefault(x => MatchesSurgeryRequirement(x, reg.Component.GetType())); // Sunrise-Edit
+            var tool = args.Tools.FirstOrDefault(x => MatchesSurgeryRequirement(x, reg.Component.GetType()));
             if (tool == default) return;
 
             if (_net.IsServer && TryComp(tool, out SurgeryToolComponent? toolComp) && toolComp.EndSound != null)

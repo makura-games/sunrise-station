@@ -16,7 +16,6 @@
     - BaseStationJobsSpawning
     - BaseStationRecords
     - BaseStationArrivals
-    - BaseStationGateway
     - BaseStationShuttles
     - BaseStationCentComm
     - BaseStationEvacuation

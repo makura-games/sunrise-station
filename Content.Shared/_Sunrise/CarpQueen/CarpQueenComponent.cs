@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Content.Shared.Actions;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared._Sunrise.CarpQueen;
 
@@ -10,32 +9,32 @@ namespace Content.Shared._Sunrise.CarpQueen;
 [AutoGenerateComponentState]
 public sealed partial class CarpQueenComponent : Component
 {
-    [DataField("actionSummon", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string ActionSummon = "ActionCarpQueenSummon";
+    [DataField]
+    public EntProtoId ActionSummon = "ActionCarpQueenSummon";
 
     [DataField("actionSummonEntity")]
     public EntityUid? ActionSummonEntity;
 
-    [DataField("actionOrderStay", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string ActionOrderStay = "ActionCarpQueenOrderStay";
+    [DataField]
+    public EntProtoId ActionOrderStay = "ActionCarpQueenOrderStay";
 
     [DataField("actionOrderStayEntity")]
     public EntityUid? ActionOrderStayEntity;
 
-    [DataField("actionOrderFollow", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string ActionOrderFollow = "ActionCarpQueenOrderFollow";
+    [DataField]
+    public EntProtoId ActionOrderFollow = "ActionCarpQueenOrderFollow";
 
     [DataField("actionOrderFollowEntity")]
     public EntityUid? ActionOrderFollowEntity;
 
-    [DataField("actionOrderKill", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string ActionOrderKill = "ActionCarpQueenOrderKill";
+    [DataField]
+    public EntProtoId ActionOrderKill = "ActionCarpQueenOrderKill";
 
     [DataField("actionOrderKillEntity")]
     public EntityUid? ActionOrderKillEntity;
 
-    [DataField("actionOrderLoose", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string ActionOrderLoose = "ActionCarpQueenOrderLoose";
+    [DataField]
+    public EntProtoId ActionOrderLoose = "ActionCarpQueenOrderLoose";
 
     [DataField("actionOrderLooseEntity")]
     public EntityUid? ActionOrderLooseEntity;

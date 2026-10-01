@@ -1438,7 +1438,7 @@
 
 - type: listing
   id: ERTUplinkTrashBagBlue
-  productEntity: TrashBagBlue
+  productEntity: TrashBagHolding
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: trash_bag_blue }
   cost:
     Crystallite: 1

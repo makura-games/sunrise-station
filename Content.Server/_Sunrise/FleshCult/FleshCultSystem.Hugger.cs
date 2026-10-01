@@ -20,7 +20,7 @@ namespace Content.Server._Sunrise.FleshCult;
 
 public sealed partial class FleshCultSystem
 {
-    [Dependency] private StatusEffectsSystem _huggerStatusEffects = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     public void InitializeHugger()
     {
@@ -94,7 +94,7 @@ public sealed partial class FleshCultSystem
         if (args.Slot != "mask")
             return;
         component.EquipedOn = args.EquipTarget;
-        _huggerStatusEffects.TrySetStatusEffectDuration(args.EquipTarget, BlindnessSystem.BlindingStatusEffect);
+        _statusEffects.TrySetStatusEffectDuration(args.EquipTarget, BlindnessSystem.BlindingStatusEffect);
         EnsureComp<PacifiedComponent>(uid);
     }
 
@@ -115,7 +115,7 @@ public sealed partial class FleshCultSystem
             return;
         if (HasComp<PacifiedComponent>(uid))
             RemComp<PacifiedComponent>(uid);
-        _huggerStatusEffects.TryRemoveStatusEffect(args.EquipTarget, BlindnessSystem.BlindingStatusEffect);
+        _statusEffects.TryRemoveStatusEffect(args.EquipTarget, BlindnessSystem.BlindingStatusEffect);
         _stunSystem.TryAddParalyzeDuration(uid, TimeSpan.FromSeconds(3));
         component.EquipedOn = new EntityUid();
     }

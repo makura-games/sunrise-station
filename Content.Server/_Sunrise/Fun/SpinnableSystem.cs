@@ -4,7 +4,7 @@ using Content.Shared._Sunrise.Fun;
 using Content.Shared.Popups;
 using Content.Shared.Hands;
 using Content.Shared.Verbs;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 
 namespace Content.Server._Sunrise.Fun
 {

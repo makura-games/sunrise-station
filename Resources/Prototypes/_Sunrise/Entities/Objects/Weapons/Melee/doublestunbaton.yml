@@ -15,8 +15,10 @@
   - type: Reflect
     reflectProb: 0.25
   - type: Wieldable
-  - type: Stunbaton
-    energyPerUse: 33
+  - type: ItemToggleRequiresCharge
+    requiredCharge: 33
+  - type: StaminaDamageOnHitRequiresCharge
+    requiredCharge: 33
   - type: StaminaDamageOnHit
     damage: 40
   - type: FlipOnAttack

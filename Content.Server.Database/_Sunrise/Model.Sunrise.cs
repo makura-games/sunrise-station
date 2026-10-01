@@ -29,7 +29,7 @@ public partial class Profile
     public float Width { get; set; } = 1f;
     public float Height { get; set; } = 1f;
     public string BodyType { get; set; } = null!;
-    public string Voice { get; set; } = null!;
+    public string TtsVoice { get; set; } = null!;
     public int HairColorType { get; set; }
     public string HairExtendedColor { get; set; } = null!;
     public int FacialHairColorType { get; set; }

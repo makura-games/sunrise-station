@@ -893,7 +893,6 @@ entities:
   - uid: 139
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 8.5,-4.5
       parent: 1
 - proto: KitchenMicrowave

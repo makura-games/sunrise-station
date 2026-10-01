@@ -6,10 +6,11 @@
   - type: Action
     temporary: true
     useDelay: 5
-    icon:
-      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-      state: transmute
     itemIconStyle: NoItem
+  - type: Sprite
+    sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+    layers:
+    - state: transmute
   - type: TargetAction
     range: 2
     checkCanAccess: true
@@ -25,10 +26,11 @@
   - type: Action
     temporary: false # Удаляется BloodCultRuleSystem, чтобы клиент не предсказывал удаление при полном сбросе состояния.
     useDelay: 3
-    icon:
-      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-      state: carve
     itemIconStyle: NoItem
+  - type: Sprite
+    sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+    layers:
+    - state: carve
   - type: InstantAction
     event: !type:CultBloodMagicInstantActionEvent
 
@@ -40,10 +42,11 @@
   - type: Action
     temporary: true
     useDelay: 3
-    icon:
-      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-      state: manip
     itemIconStyle: NoItem
+  - type: Sprite
+    sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+    layers:
+    - state: manip
   - type: InstantAction
     event: !type:CultBloodRitualInstantActionEvent
 
@@ -55,10 +58,11 @@
   - type: Action
     temporary: true
     useDelay: 5
-    icon:
-      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-      state: stun
     itemIconStyle: NoItem
+  - type: Sprite
+    sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+    layers:
+    - state: stun
   - type: TargetAction
     range: 2
     checkCanAccess: true
@@ -81,10 +85,11 @@
   - type: Action
     temporary: true
     useDelay: 1
-    icon:
-      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-      state: shackles
     itemIconStyle: NoItem
+  - type: Sprite
+    sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+    layers:
+    - state: shackles
   - type: TargetAction
     range: 2
     checkCanAccess: true
@@ -107,9 +112,10 @@
   - type: Action
     useDelay: 5
     temporary: true
-    icon:
-      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-      state: emp
+  - type: Sprite
+    sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+    layers:
+    - state: emp
   - type: InstantAction
     event: !type:CultEmpPulseTargetActionEvent
   - type: LimitedCharges
@@ -124,10 +130,11 @@
     - type: Action
       temporary: true
       useDelay: 5
-      icon:
-        sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-        state: teleport
       itemIconStyle: NoItem
+    - type: Sprite
+      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+      layers:
+      - state: teleport
     - type: TargetAction
       repeat: false
       range: 2
@@ -147,10 +154,11 @@
     - type: Action
       temporary: true
       useDelay: 5
-      icon:
-        sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-        state: equip
       itemIconStyle: NoItem
+    - type: Sprite
+      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+      layers:
+      - state: equip
     - type: TargetAction
       repeat: false
       range: 2
@@ -172,10 +180,11 @@
   components:
     - type: Action
       temporary: true
-      icon:
-        sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-        state: blood_dagger
       useDelay: 5
+    - type: Sprite
+      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+      layers:
+      - state: blood_dagger
     - type: InstantAction
       event: !type:CultSummonDaggerActionEvent
     - type: LimitedCharges
@@ -190,9 +199,10 @@
   - type: Action
     temporary: true
     useDelay: 2
-    icon:
-      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-      state: bloodspear
     itemIconStyle: NoItem
+  - type: Sprite
+    sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+    layers:
+    - state: bloodspear
   - type: InstantAction
     event: !type:CultReturnBloodSpearActionEvent

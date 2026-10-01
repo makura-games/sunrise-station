@@ -136,7 +136,7 @@ public sealed partial class ExecutionSystem
     // Вероятно можно было сделать это более элегантно, но лень переделывать сейча. Сорян
     private bool PrototypeHasLethalEffect(EntProtoId ammoPrototype)
     {
-        var proto = _prototypeManager.Index<EntityPrototype>(ammoPrototype);
+        var proto = ProtoMan.Index<EntityPrototype>(ammoPrototype);
 
         if (proto.TryGetComponent<ExplosiveComponent>(out _, _componentFactory))
             return true;

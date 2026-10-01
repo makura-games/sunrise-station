@@ -15,3 +15,18 @@
   license: "CLA"
   copyright: "Taked from ParadiseSS13"
   source: "https://github.com/makura-games/sunrise-station"
+
+- files: ["Glass/glass_plasma.png", "Glass/glass_uranium.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Afterlight contributors"
+  source: "https://github.com/ss14Starlight/space-station-14/commit/b3ac79c9f902c98456eaf5ebb4262e6a5f1f14e4"
+
+- files: ["Glass/glass.png"]
+  license: "CC0-1.0"
+  copyright: "Created by github user @notquitehadouken."
+  source: "https://github.com/space-wizards/space-station-14/pull/17948"
+
+- files: ["Glass/rglass.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "tgstation commit 8abb19545828230d92ba18827feeb42a67a55d49, rglass modified by github user @notquitehadouken."
+  source: "https://github.com/space-wizards/space-station-14/pull/17948"

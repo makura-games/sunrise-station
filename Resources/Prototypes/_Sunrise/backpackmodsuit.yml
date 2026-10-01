@@ -8,7 +8,7 @@
   components:
   - type: ContainerInteractionAnimationVisuals # Sunrise added
   - type: Sprite
-    sprite: Clothing/Back/Backpacks/backpack.rsi
+    sprite: _Sunrise/Clothing/Back/Resprites/Backpacks/backpack.rsi
     state: icon
   - type: Item
     size: Huge
