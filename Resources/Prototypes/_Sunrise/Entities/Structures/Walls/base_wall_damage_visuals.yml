@@ -1,0 +1,12 @@
+- type: entity
+  abstract: true
+  # Абстрактный миксин задаёт общую визуализацию трещин: пять стадий на каждые 10 единиц урона, чтобы повреждения были заметны до разрушения стен.
+  id: SunriseWallDamageVisualsBase
+  components:
+  - type: Appearance
+  - type: DamageVisuals
+    thresholds: [5, 10, 15, 20, 25]
+    damageDivisor: 10
+    trackAllDamage: true
+    damageOverlay:
+      sprite: _Sunrise/Structures/Walls/wall_cracks.rsi
