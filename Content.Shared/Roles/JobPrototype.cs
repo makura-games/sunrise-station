@@ -1,11 +1,9 @@
 using Content.Shared.Access;
 using Content.Shared.Guidebook;
-using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Roles
@@ -160,12 +158,6 @@ namespace Content.Shared.Roles
         public List<ProtoId<GuideEntryPrototype>>? Guides;
 
         // Sunrise-Start
-        /// <summary>
-        /// Вот так работает расизм по мнению буржуев
-        /// </summary>
-        [DataField("speciesBlacklist", customTypeSerializer: typeof(PrototypeIdListSerializer<SpeciesPrototype>))]
-        public List<string> SpeciesBlacklist = new();
-
         /// <summary>
         /// Для космической тюрьмы
         /// </summary>
