@@ -2184,30 +2184,12 @@
       - SurplusBundle
 
 - type: listing
-  id: UplinkMechMaxim
-  name: uplink-mech-equipment-maxim-name
-  description: uplink-mech-equipment-maxim-desc
-  productEntity: WeaponMechCombatMaxim
-  cost:
-    Telecrystal: 12
-  categories:
-  - UplinkMechs
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-    blacklist:
-      components:
-      - SurplusBundle
-
-- type: listing
   id: UplinkMechHeavyRifle
   name: uplink-mech-equipment-heavy-rifle-name
   description: uplink-mech-equipment-heavy-rifle-desc
   productEntity: WeaponMechCombatHeavyRifle
   cost:
-    Telecrystal: 13
+    Telecrystal: 15
   categories:
   - UplinkMechs
   conditions:
@@ -3400,7 +3382,7 @@
     - UplinkExplosives
 
 - type: listing
-  id: UplinkEshieldTraitor
+  id: UplinkEshield
   name: uplink-eshield-name
   description: uplink-eshield-desc
   icon:
@@ -3409,18 +3391,25 @@
   productEntity: EnergyShield
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 3
   cost:
-    Telecrystal: 4
+    Telecrystal: 6
   categories:
     - UplinkWeaponry
-  conditions:
-    - !type:StoreWhitelistCondition
-      blacklist:
-        tags:
-          - NukeOpsUplink
-          - LoneOpsUplink
-          - AssaultOpsUplink
+
+- type: listing
+  id: UplinkEshieldExperimental
+  name: uplink-experimental-eshield-name
+  description: uplink-experimental-eshield-desc
+  icon: { sprite: /Textures/Objects/Weapons/Melee/e_shield.rsi, state: eshield-on }
+  productEntity: SunriseEnergyShield
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 6
+  cost:
+    Telecrystal: 12
+  categories:
+  - UplinkWeaponry
 
 - type: listing
   id: UplinkCornivoreGloves

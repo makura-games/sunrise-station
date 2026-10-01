@@ -58438,7 +58438,7 @@ entities:
         disableRefund: False
         costModifiersBySourceId: {}
       - id: UplinkEshieldNukies
-        productEntity: EnergyShieldBiocode
+        productEntity: SunriseEnergyShield
         name: uplink-eshield-name
         discountCategory: veryRareDiscounts
         description: uplink-eshield-desc
@@ -61093,7 +61093,7 @@ entities:
         disableRefund: False
         costModifiersBySourceId: {}
       - id: UplinkEshield
-        productEntity: EnergyShieldBiocode
+        productEntity: SunriseEnergyShield
         name: uplink-eshield-name
         discountCategory: veryRareDiscounts
         description: uplink-eshield-desc
