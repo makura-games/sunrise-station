@@ -70,6 +70,7 @@ public abstract partial class SharedMechSystem : EntitySystem
         SubscribeLocalEvent<MechPilotComponent, GetMeleeWeaponEvent>(OnGetMeleeWeapon);
         SubscribeLocalEvent<MechPilotComponent, CanAttackFromContainerEvent>(OnCanAttackFromContainer);
         SubscribeLocalEvent<MechPilotComponent, AttackAttemptEvent>(OnAttackAttempt);
+        SubscribeLocalEvent<MechPilotComponent, ShotAttemptedEvent>(OnPilotShotAttempt); // Sunrise-Edit
 
         InitializeRelay();
     }
@@ -563,4 +564,3 @@ public sealed partial class MechExitEvent : SimpleDoAfterEvent
 public sealed partial class MechEntryEvent : SimpleDoAfterEvent
 {
 }
-
