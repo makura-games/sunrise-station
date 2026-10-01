@@ -69,3 +69,4 @@ ent-SunriseBulletDisposableSmokeRocket = smoke rocket
 
 ent-SunriseBulletDisposableIncendiaryRocket = thermobaric rocket
     .desc = A compact rocket with a volatile chemical payload.
+
