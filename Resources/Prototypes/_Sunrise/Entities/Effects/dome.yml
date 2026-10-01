@@ -212,3 +212,71 @@
         layer:
         - BulletImpassable
         - Opaque
+
+- type: entity
+  id: EnergyDomeDirectedBlue
+  categories: [ HideSpawnMenu ]
+  parent: EnergyDomeBase
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 1.8
+        density: 0
+        mask:
+        - None
+        layer:
+        - BulletImpassable
+        - Opaque
+  - type: Sprite
+    sprite: _Sunrise/Effects/EnergyDome/energydome_directed_front.rsi
+    layers:
+    - state: small
+      color: "#64b9de"
+  - type: PointLight
+    enabled: true
+    radius: 5
+    power: 10
+    color: "#64b9de"
+
+# region Mech shields
+- type: entity
+  id: SunriseEnergyDomeSecurityBorg
+  categories: [ HideSpawnMenu ]
+  parent: EnergyDomeBase
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PolygonShape
+          vertices:
+          - "0.9,-0.1"
+          - "0.779,-0.55"
+          - "0.45,-0.879"
+          - "0,-0.9"
+          - "-0.45,-0.879"
+          - "-0.779,-0.55"
+          - "-0.9,-0.1"
+        density: 0
+        mask:
+        - Impassable
+        layer:
+        - Impassable
+        - BulletImpassable
+        - Opaque
+  - type: Sprite
+    sprite: _Sunrise/Effects/EnergyDome/energydome_directed_durand.rsi
+    layers:
+    - state: fulldirect
+      color: "#64b9de"
+  - type: PointLight
+    enabled: true
+    radius: 5
+    power: 10
+    color: "#64b9de"
+  - type: Tag
+    tags:
+    - HideContextMenu

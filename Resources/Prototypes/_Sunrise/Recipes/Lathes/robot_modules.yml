@@ -17,12 +17,68 @@
   id: BorgModuleMiningCombat
   result: BorgModuleMiningCombat
 
-# Syndicate modules
+# Модули Синдиката, открываемые через EMAG
 
 - type: latheRecipe
-  parent: BaseGoldBorgModuleRecipe
-  id: BorgModuleSyndicateCombatAdvanced
-  result: BorgModuleSyndicateCombatAdvanced
+  id: BorgModuleMartyr
+  result: BorgModuleMartyr
+  categories:
+  - Modules
+  completetime: 10
+  materials:
+    Steel: 350
+    Plastic: 300
+    Glass: 150
+    Plasma: 150
+    Silver: 150
+    Gold: 50
+
+- type: latheRecipe
+  id: BorgModuleSyndicateWeapon
+  result: BorgModuleSyndicateWeapon
+  categories:
+  - Modules
+  materials:
+    Steel: 1050
+    Plastic: 200
+    Plasma: 50
+
+- type: latheRecipe
+  id: BorgModuleC20r
+  result: BorgModuleC20r
+  categories:
+  - Modules
+  materials:
+    Steel: 1575
+    Plastic: 300
+    Plasma: 75
+
+- type: latheRecipe
+  id: SunriseBorgModuleL6M
+  result: SunriseBorgModuleL6M
+  categories:
+  - Modules
+  materials:
+    Steel: 2050
+    Plastic: 500
+    Plasma: 500
+
+- type: latheRecipe
+  id: SunriseBorgModuleSyndicateAdvancedChemical
+  result: SunriseBorgModuleSyndicateAdvancedChemical
+  categories:
+  - Modules
+  materials:
+    Steel: 1500
+    Plastic: 200
+    Plasma: 100
+    Gold: 50
+
+- type: latheRecipe
+  id: SunriseBorgModuleSyndicateRescue
+  result: SunriseBorgModuleSyndicateRescue
+  categories:
+  - Modules
   materials:
     Steel: 2000
     Plastic: 200
@@ -30,9 +86,10 @@
     Gold: 100
 
 - type: latheRecipe
-  parent: BaseGoldBorgModuleRecipe
-  id: BorgModuleSyndicateHypoAdvanced
-  result: BorgModuleSyndicateHypoAdvanced
+  id: SunriseBorgModuleSyndicateChameleonProjector
+  result: SunriseBorgModuleSyndicateChameleonProjector
+  categories:
+  - Modules
   materials:
     Steel: 2000
     Plastic: 200
@@ -40,14 +97,27 @@
     Silver: 100
 
 - type: latheRecipe
-  parent: BaseGoldBorgModuleRecipe
-  id: BorgModuleSyndicatePenetration
-  result: BorgModuleSyndicatePenetration
+  id: SunriseBorgModuleSyndicateAdvancedTool
+  result: SunriseBorgModuleSyndicateAdvancedTool
+  categories:
+  - Modules
   materials:
     Steel: 2000
     Plastic: 200
     Plasma: 100
-    Gold: 100
+    Silver: 100
+
+- type: latheRecipe
+  id: SunriseBorgModuleSyndicatePaperwork
+  result: SunriseBorgModuleSyndicatePaperwork
+  categories:
+  - Modules
+  materials:
+    Steel: 500
+    Glass: 500
+    Plasma: 100
+    Plastic: 250
+    Gold: 50
 
 # Medical modules
 
