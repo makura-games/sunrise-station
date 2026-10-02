@@ -275,7 +275,8 @@
   - type: FootprintEmitter
     leftBareFootState: [ footprint-left-bare-lizard ]
     rightBareFootState: [ footprint-right-bare-lizard ]
-
+  - type: Scent
+    personalScentProfile: SunriseHumanoidXeno
 - type: entity
   parent: AppearanceHumanoidXeno
   id: MobXenoDummy

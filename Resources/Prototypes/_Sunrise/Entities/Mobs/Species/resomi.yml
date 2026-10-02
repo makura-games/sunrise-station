@@ -296,6 +296,8 @@
     - DoorBumpOpener
     - AnomalyHost
     - Resomi
+  - type: Scent
+    personalScentProfile: SunriseResomi
 
 - type: entity
   parent: AppearanceResomi

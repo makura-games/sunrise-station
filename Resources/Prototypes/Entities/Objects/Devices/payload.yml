@@ -43,6 +43,12 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  # Sunrise edit start
+  - type: ScentEmitter
+    spot: AnySlot
+    scent: SunriseGunpowder
+    duration: 400
+  # Sunrise edit end
 
 - type: entity
   name: chemical payload

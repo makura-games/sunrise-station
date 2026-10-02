@@ -333,6 +333,12 @@
     - SubdermalImplant
     - HideContextMenu
     - MicroBomb
+  # Sunrise edit start
+  - type: ScentEmitter
+    spot: AnySlot
+    scent: SunriseGunpowder
+    duration: 400
+  # Sunrise edit end
 
 
 - type: entity
@@ -376,6 +382,12 @@
       tags:
       - SubdermalImplant
       - HideContextMenu
+    # Sunrise edit start
+    - type: ScentEmitter
+      spot: AnySlot
+      scent: SunriseGunpowder
+      duration: 400
+    # Sunrise edit end
 
 - type: entity
   parent: BaseSubdermalImplant

@@ -240,6 +240,8 @@
     - "footprint-left-bare-lizard"
     rightBareFootState:
     - "footprint-right-bare-lizard"
+  - type: Scent
+    personalScentProfile: SunriseReptilian
   # Sunrise end
 
 - type: entity

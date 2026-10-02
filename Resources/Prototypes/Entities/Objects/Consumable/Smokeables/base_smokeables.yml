@@ -20,6 +20,12 @@
     price: 5
   - type: InjectableSolution
     solution: smokable
+  # Sunrise edit start
+  - type: ScentEmitter
+    slot: mask
+    scent: SunriseSmoke
+    duration: 900
+  # Sunrise edit end
 
 # Base for all cigars and cigarettes.
 - type: entity

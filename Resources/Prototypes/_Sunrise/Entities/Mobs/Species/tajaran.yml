@@ -180,6 +180,9 @@
   - type: FootprintEmitter
     leftBareFootState: [ footprint-left-bare-cat ]
     rightBareFootState: [ footprint-right-bare-cat ]
+  - type: Smell
+  - type: Scent
+    personalScentProfile: SunriseTajaran
 
 - type: entity
   save: false

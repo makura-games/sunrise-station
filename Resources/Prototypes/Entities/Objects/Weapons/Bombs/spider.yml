@@ -48,3 +48,9 @@
         base:
           Primed: { state: primed }
           Unprimed: { state: icon }
+  # Sunrise edit start
+  - type: ScentEmitter
+    spot: AnySlot
+    scent: SunriseGunpowder
+    duration: 400
+  # Sunrise edit end

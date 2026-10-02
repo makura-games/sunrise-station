@@ -98,6 +98,8 @@
     - DoorBumpOpener
     - AnomalyHost
     - Milira
+  - type: Scent
+    personalScentProfile: SunriseMilira
 
 - type: entity
   save: false

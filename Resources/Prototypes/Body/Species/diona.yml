@@ -180,6 +180,8 @@
       - "footprint-left-bare-diona"
     rightBareFootState:
       - "footprint-right-bare-diona"
+  - type: Scent
+    personalScentProfile: SunriseDiona
   # Sunrise end
 
 - type: entity
