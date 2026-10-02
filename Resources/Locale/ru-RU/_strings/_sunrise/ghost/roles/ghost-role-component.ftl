@@ -47,8 +47,6 @@ job-rules-tsf-aligned =
     Вы должны служить интересам Транс-Солнечной Федерации.
     Помните: вы НЕ служите экипажу.
 ghost-role-information-sentient-carpholo-name = Разумный голокарп
-ghost-role-information-sentient-carprainbow-name = Разумный радужный карп
-ghost-role-information-sentient-carpshark-name = Разумная карпоакула
 ghost-role-information-one-star-unit-dungeon-name = Юнит «Одинокая звезда»
 ghost-role-information-guardian-unit-dungeon-name = Юнит-страж
 ghost-role-information-one-star-unit-dungeon-description = [11201010111002] Работайте с другими автоматонами, защищайте комплекс и уничтожайте всех нарушителей. [1110220001010002220]
