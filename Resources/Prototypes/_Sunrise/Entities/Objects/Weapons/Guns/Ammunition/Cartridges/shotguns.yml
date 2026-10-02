@@ -63,7 +63,7 @@
   - type: CartridgeAmmo
     soundEject:
       collection: ShellEject
-    proto: PelletShotgunImprovisedSpreadTrace
+    proto: PelletShotgunTraceImprovisedSpread
   - type: SpentAmmoVisuals
     state: "improvised"
 
@@ -231,7 +231,7 @@
   - type: CartridgeAmmo
     soundEject:
       collection: ShellEject
-    proto: PelletShotgunFlechetteSpreadTrace
+    proto: PelletShotgunTraceFlechetteSpread
   - type: Tag
     tags:
     - Cartridge
@@ -256,7 +256,7 @@
   - type: CartridgeAmmo
     soundEject:
       collection: ShellEject
-    proto: PelletShotgunBirdshotSpreadTrace
+    proto: PelletShotgunTraceBirdshotSpread
   - type: Tag
     tags:
     - Cartridge
@@ -277,4 +277,4 @@
   - type: CartridgeAmmo
     soundEject:
       collection: ShellEject
-    proto: PelletShotgunBreachSpreadTrace
+    proto: PelletShotgunTraceBreachSpread

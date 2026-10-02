@@ -47,23 +47,34 @@
 - type: entity
   id: WeaponMechCombatHeavyRifle
   name: Mounted Heavy Rifle Gun
-  description: A gun for battlemechs, firing Antimaterial bullet.
-  suffix: Mech Weapon, Gun, Combat, Anti
+  description: A battlemech-mounted heavy rifle with selectable armor-piercing, anti-materiel, and hollow-point ammunition. Its ammunition feed must be configured on the weapon before installation.
+  suffix: Mech Weapon, Gun, Combat, Selectable Ammo
   parent: [ BaseMechWeaponRange, CombatMechEquipment ]
   components:
   - type: Sprite
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_antimatrifle
   - type: Gun
-    fireRate: 0.5
+    fireRate: 1
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Snipers/Bauer127/bauer127_shot.ogg
   - type: BatteryAmmoProvider
-    proto: CartridgeAntiMateriel
+    proto: CartridgeAntiMaterielPenetrator
     fireCost: 125
+  # Sunrise added start - выбор типа боеприпаса перед установкой на меха
+  - type: BatteryWeaponFireModes
+    currentFireMode: 1
+    fireModes:
+    - proto: CartridgeAntiMaterielPenetrator
+      fireCost: 125
+    - proto: CartridgeAntiMateriel
+      fireCost: 100
+    - proto: CartridgeAntiMaterielHP
+      fireCost: 100
+  # Sunrise added end
   - type: Appearance
   - type: AmmoCounter
 

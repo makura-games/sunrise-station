@@ -8,7 +8,6 @@
       sprite: _Sunrise/Clothing/Hands/Gloves/kim.rsi
     - type: Clothing
       sprite: _Sunrise/Clothing/Hands/Gloves/kim.rsi
-    - type: Insulated
 
 - type: entity
   parent: ClothingHandsBase

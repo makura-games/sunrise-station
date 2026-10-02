@@ -1266,6 +1266,12 @@ MagazineBoxHeavyRifleHP: MagazineBoxHeavyRifleSP
 RifleHeavyMagazineHP: RifleHeavyMagazineSP
 MagazineDragunovHP: MagazineDragunovSP
 MagazineBoxRifleMachineHP: MagazineBoxRifleMachineSP
+# 2026-08-27
+PottedPlantAlt9: PottedPlantRose5
+HandheldRoboAnalyzerEmpty: HandheldRoboAnalyzer
+HandheldRoboAnalyzerUnpowered: HandheldRoboAnalyzer
+HandheldMechAnalyzerEmpty: HandheldMechAnalyzer
+HandheldMechAnalyzerUnpowered: HandheldMechAnalyzer
 # 2026-09-08
 WeaponRifleLecterMk3: WeaponRifleLecterMk2
 WeaponRifleLecterMk3Empty: WeaponRifleLecterMk2Empty
@@ -1308,6 +1314,9 @@ ClothingHandsPowerGlovesUplinkNTERTGamma: null
 ClothingHandsPowerGlovesUplinkNTERTGammaLeader: null
 ClothingHandsPowerGlovesUplinkNTERTCBURN: null
 ClothingHandsPowerGlovesUplinkNTERTEpsilon: null
+# 2026-09-26
+SpeedLoaderShotgunEmpty: null
+SpeedLoaderShellShotgun: SpeedLoaderShotgunBuck
 # 2026-09-10
 ClothingOuterArmorBlueShield: null
 # region Sunrise-End

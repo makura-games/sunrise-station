@@ -34,18 +34,141 @@
   parent: ClothingBackpackDuffelSyndicateAmmo
   id: ClothingBackpackDuffelSyndicateSuperAmmoFilled
   name: ammo bundle
-  description: Reloading! Contains 4 magazines for the C-20r, 5 drums for the Bulldog, 3 magazines for the Estoc DMR, and 2 ammo boxes for the L6 SAW.
+  description: Choose five different ammunition kits for your squad.
   components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: SMGAmmoKit
-        - id: ShotGunKit
-        - id: LMGKit
-        - id: CaselessAmmoKit
-        - id: RifleAmmoKit
-        - id: DragunovAmmoKit
+  - type: ThiefUndeterminedBackpack
+    possibleSets:
+    - SunriseAmmoKitSMGSet
+    - SunriseAmmoKitRifleSet
+    - SunriseAmmoKitCaselessSet
+    - SunriseAmmoKitDragunovSet
+    - SunriseAmmoKitAntimaterialSet
+    - SunriseAmmoKitShotgunSet
+    - SunriseAmmoKitShotgunAssortedSet
+    - SunriseAmmoKitLMGSet
+    - SunriseAmmoKitLMGMaxSet
+    - SunriseAmmoKitGrenadeFragContactSet
+    - SunriseAmmoKitGrenadeFragTimerSet
+    maxSelectedSets: 5
+    toolName: uplink-ammo-bundlenew-name
+    toolDesc: uplink-ammo-bundlenew-desc
+    spawnedStoragePrototype: ClothingBackpackDuffelSyndicateAmmo
+  - type: ActivatableUI
+    key: enum.ThiefBackpackUIKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.ThiefBackpackUIKey.Key:
+        type: ThiefBackpackBoundUserInterface
+
+- type: thiefBackpackSet
+  id: SunriseAmmoKitSMGSet
+  name: ent-SMGAmmoKit
+  description: sunrise-ammo-kit-selection-smg-description
+  sprite:
+    sprite: Objects/Weapons/Guns/SMGs/c20r.rsi
+    state: icon
+  content:
+  - SMGAmmoKit
+
+- type: thiefBackpackSet
+  id: SunriseAmmoKitRifleSet
+  name: ent-RifleAmmoKit
+  description: sunrise-ammo-kit-selection-rifle-description
+  sprite:
+    sprite: Objects/Weapons/Guns/Rifles/estoc.rsi
+    state: icon
+  content:
+  - RifleAmmoKit
+
+- type: thiefBackpackSet
+  id: SunriseAmmoKitCaselessSet
+  name: ent-CaselessAmmoKit
+  description: sunrise-ammo-kit-selection-caseless-description
+  sprite:
+    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/iar_52.rsi
+    state: icon
+  content:
+  - CaselessAmmoKit
+
+- type: thiefBackpackSet
+  id: SunriseAmmoKitDragunovSet
+  name: ent-DragunovAmmoKit
+  description: sunrise-ammo-kit-selection-dragunov-description
+  sprite:
+    sprite: _Sunrise/Objects/Weapons/Guns/Snipers/dragunov/big.rsi
+    state: icon
+  content:
+  - DragunovAmmoKit
+
+- type: thiefBackpackSet
+  id: SunriseAmmoKitAntimaterialSet
+  name: ent-AntimaterialAmmoKit
+  description: sunrise-ammo-kit-selection-antimaterial-description
+  sprite:
+    sprite: _Sunrise/Objects/Weapons/Guns/Snipers/bauer127/big.rsi
+    state: icon
+  content:
+  - AntimaterialAmmoKit
+
+- type: thiefBackpackSet
+  id: SunriseAmmoKitShotgunSet
+  name: ent-ShotGunKit
+  description: sunrise-ammo-kit-selection-shotgun-description
+  sprite:
+    sprite: Objects/Weapons/Guns/Shotguns/bulldog.rsi
+    state: icon
+  content:
+  - ShotGunKit
+
+- type: thiefBackpackSet
+  id: SunriseAmmoKitShotgunAssortedSet
+  name: sunrise-ammo-kit-selection-shotgun-assorted-name
+  description: sunrise-ammo-kit-selection-shotgun-assorted-description
+  sprite:
+    sprite: _Sunrise/Objects/Storage/boxes_sunrise.rsi
+    state: shotgun_base
+  content:
+  - ShotGunKitSmall
+
+- type: thiefBackpackSet
+  id: SunriseAmmoKitLMGSet
+  name: ent-LMGKit
+  description: sunrise-ammo-kit-selection-lmg-description
+  sprite:
+    sprite: _Sunrise/Objects/Weapons/Guns/LMGs/l6.rsi
+    state: icon
+  content:
+  - LMGKit
+
+- type: thiefBackpackSet
+  id: SunriseAmmoKitLMGMaxSet
+  name: ent-LMGMaxKit
+  description: sunrise-ammo-kit-selection-lmg-max-description
+  sprite:
+    sprite: _Starlight/Objects/Weapons/Guns/LMGs/l6.rsi
+    state: icon
+  content:
+  - LMGMaxKit
+
+- type: thiefBackpackSet
+  id: SunriseAmmoKitGrenadeFragContactSet
+  name: sunrise-ammo-kit-selection-grenade-frag-contact-name
+  description: sunrise-ammo-kit-selection-grenade-frag-contact-description
+  sprite:
+    sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi
+    state: icon
+  content:
+  - PouchExplosiveGrenadeFragContactFilled
+
+- type: thiefBackpackSet
+  id: SunriseAmmoKitGrenadeFragTimerSet
+  name: sunrise-ammo-kit-selection-grenade-frag-timer-name
+  description: sunrise-ammo-kit-selection-grenade-frag-timer-description
+  sprite:
+    sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi
+    state: icon
+  content:
+  - PouchExplosiveGrenadeFragTimerFilled
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateAmmo
@@ -205,7 +328,7 @@
       storagebase: !type:AllSelector
         children:
         - id: WeaponShotgunCycler
-        - id: SpeedLoaderShellShotgun
+        - id: SpeedLoaderShotgunBuck
           amount: 2
         - id: SpeedLoaderShotgunSlug
           amount: 2

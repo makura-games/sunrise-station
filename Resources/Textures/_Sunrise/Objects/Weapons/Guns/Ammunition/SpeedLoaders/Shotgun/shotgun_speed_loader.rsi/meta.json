@@ -4,8 +4,8 @@
         "x": 32,
         "y": 32
     },
-    "license": "CC-BY-SA-3.0",
-    "copyright": "Taked from RU Paradise Station, tip by Rinary",
+    "license": "CC-BY-SA-4.0",
+    "copyright": "Sprited by KaiserMaus (github)",
     "states": [
         {
             "name": "base"
@@ -26,15 +26,6 @@
             "name": "base-4"
         },
         {
-            "name": "base-5"
-        },
-        {
-            "name": "base-6"
-        },
-        {
-            "name": "base-7"
-        },
-        {
             "name": "base-tip-1"
         },
         {
@@ -45,15 +36,6 @@
         },
         {
             "name": "base-tip-4"
-        },
-        {
-            "name": "base-tip-5"
-        },
-        {
-            "name": "base-tip-6"
-        },
-        {
-            "name": "base-tip-7"
         }
     ]
 }

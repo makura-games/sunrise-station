@@ -242,7 +242,7 @@
     WeaponWaterBlasterSuper: 3
 
     # Ammo Shotgun
-    SpeedLoaderShellShotgun: 8
+    SpeedLoaderShotgunBuck: 8
     SpeedLoaderShotgunIncendiary: 8
     SpeedLoaderShotgunSlug: 8
     SpeedLoaderShotgunBeanbag: 8

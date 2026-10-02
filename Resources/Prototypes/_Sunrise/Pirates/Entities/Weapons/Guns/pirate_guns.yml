@@ -57,7 +57,6 @@
             - MagazineCannonBallMini
         gun_chamber:
           name: Chamber
-          startingItem: CannonBallMini
           priority: 1
           whitelist:
             tags:
@@ -126,7 +125,6 @@
           - MagazineChainGun
       gun_chamber:
         name: Chamber
-        startingItem: null
         priority: 1
         whitelist:
           tags:
@@ -190,7 +188,6 @@
             - MagazineChainGun
         gun_chamber:
           name: Chamber
-          startingItem: null
           priority: 1
           whitelist:
             tags:
@@ -460,7 +457,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleSP
         priority: 1
         whitelist:
           tags:
