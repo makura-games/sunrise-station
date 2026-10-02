@@ -395,8 +395,6 @@
         children:
         - id: WeaponShotgunTrenchgun4034
           amount: 2
-        - id: SpeedLoaderShellShotgun
-          amount: 4
         - id: BoxBeanbag
           amount: 1
         - id: BoxShotgunSlug
@@ -418,8 +416,6 @@
         children:
         - id: WeaponShotgunRiot
           amount: 2
-        - id: SpeedLoaderShellShotgun
-          amount: 4
         - id: BoxBeanbag
           amount: 1
         - id: BoxShotgunSlug
@@ -442,12 +438,8 @@
         children:
         - id: WeaponShotgunDoubleBarreled
           amount: 4
-        - id: SpeedLoaderShellShotgun
-          amount: 4
         - id: BoxBeanbag
           amount: 2
-        - id: SpeedLoaderShotgunIncendiary
-          amount: 4
         - id: BoxShotgunFlare
           amount: 1
 
@@ -586,16 +578,16 @@
   table: !type:GroupSelector
     children:
     - !type:GroupSelector
-      weight: 65
+      weight: 60
       children:
       - id: GunSafePistolMk58
       - id: GunSafePistolG22
-      - id: GunSafePistolGoldenMk58Trash
     - !type:GroupSelector
-      weight: 25
+      weight: 30
       children:
       - id: GunSafeEnergyGunMini
       - id: GunSafeSnubRevolver
+      - id: GunSafePistolGoldenMk58Trash
     - !type:GroupSelector
       weight: 5
       children:
@@ -632,15 +624,11 @@
       - id: GunSafeShotgunTrenchgun4034
       - id: GunSafeShotgunKammerer
       - id: GunSafeShotgunRiot
-      - id: GunSafeShotgunKammererTrash
     - !type:GroupSelector
-      weight: 20
+      weight: 25
       children:
       - id: GunSafeDoubleBarreled
-    - !type:GroupSelector
-      weight: 5
-      children:
-      - id: GunSafeShotgunEnforcer
+      - id: GunSafeShotgunKammererTrash
     - id: SpawnerSafeLethal
       weight: 15
 
@@ -703,19 +691,19 @@
   table: !type:GroupSelector
     children:
     - !type:GroupSelector
-      weight: 55
+      weight: 50
       children:
       - id: GunSafeSubMachineGunDrozd
       - id: GunSafeSubMachineGunDrozdTrash
     - !type:GroupSelector
-      weight: 45
+      weight: 50
       children:
       - id: GunSafeSubMachineGunDrozdMk2
       - id: GunSafeSubMachineGunWt550
       - id: GunSafeSubMachineGunSP91RC
       - id: GunSafeSubMachineGunVector
     - id: SpawnerSafeLethal
-      weight: 15
+      weight: 10
 
 # Superweapon Spawner
 - type: entity
@@ -779,11 +767,11 @@
       weight: 65
       children:
       - id: GunSafeLaserCarbine
-      - id: GunSafeLaserCarbineTrash
     - !type:GroupSelector
       weight: 25
       children:
       - id: GunSafeLaserGunSMG
+      - id: GunSafeLaserCarbineTrash
     - !type:GroupSelector
       weight: 5
       children:

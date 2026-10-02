@@ -58,12 +58,6 @@
     # Rifle Heavy
     - MagazineRifleHeavySP
     - MagazineRifleHeavyEmpty
-    # Shotgun Speedloader
-    - SpeedLoaderShellShotgun
-    - SpeedLoaderShotgunBirdshot
-    - SpeedLoaderShotgunEmpty
-    - SpeedLoaderShotgunSlug
-    - SpeedLoaderShotgunBeanbag
     # PODAVLENIE
     - BolaSecurity
 ####################################################
@@ -147,9 +141,8 @@
     - MagazineRifleHeavySP
     - MagazineRifleHeavyEmpty
     # Shotgun Speedloader
-    - SpeedLoaderShellShotgun
+    - SpeedLoaderShotgunBuck
     - SpeedLoaderShotgunBirdshot
-    - SpeedLoaderShotgunEmpty
     - SpeedLoaderShotgunSlug
     - SpeedLoaderShotgunBeanbag
     # Pirate cannon
@@ -297,6 +290,7 @@
     - RifleHeavyMagazineIncendiary
     - RifleHeavyMagazineUranium
   # Shotgun
+    - SpeedLoaderShotgunBeanbag
     - SpeedLoaderShotgunIncendiary
     - SpeedLoaderShotgunUranium
     - SpeedLoaderShotgunFlechette
@@ -358,7 +352,7 @@
     - MagazineRifleSP
     - MagazineRifleFMJ
     # Shotgun Speedloader
-    - SpeedLoaderShellShotgun
+    - SpeedLoaderShotgunBuck
     - SpeedLoaderShotgunBirdshot
     - SpeedLoaderShotgunSlug
     # Shuttle stuff

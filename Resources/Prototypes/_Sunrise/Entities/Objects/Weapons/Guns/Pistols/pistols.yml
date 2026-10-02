@@ -82,7 +82,6 @@
           - MagazinePistolDP
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol40FMJ # .45 ACP
         priority: 1
         whitelist:
           tags:
@@ -129,7 +128,6 @@
           - MagazinePistolHighCapacityRubber
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolRubber
         priority: 1
         whitelist:
           tags:
@@ -195,7 +193,6 @@
           - MagazineMagnum
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeMagnumSP
         priority: 1
         whitelist:
           tags:
@@ -316,7 +313,6 @@
           - MagazinePistolDP
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol40FMJ # .45 ACP
         priority: 1
         whitelist:
           tags:
@@ -378,7 +374,6 @@
           whitelistFailPopup: gun-magazine-whitelist-fail
         gun_chamber:
           name: Chamber
-          startingItem: CartridgePistol40AP
           priority: 1
           whitelist:
             tags:

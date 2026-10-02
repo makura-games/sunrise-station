@@ -388,7 +388,7 @@
 - type: entity
   id: BulletShellBatonArtillery
   name: baton shell
-  parent: BaseBullet
+  parent: [ BulletStoppingPowerStrong, BaseBullet ]
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -402,8 +402,6 @@
         Blunt: 1
     soundHit:
       path: /Audio/Effects/gen_hit.ogg
-  - type: StaminaDamageOnCollide
-    damage: 80
 
 - type: entity
   id: BulletShellFlashArtillery
@@ -876,7 +874,7 @@
 
 - type: entity
   categories: [ HideSpawnMenu ]
-  parent: BaseBullet
+  parent: [ BulletStoppingPowerStrong, BaseBullet ]
   id: BulletAntiMaterielCannonBall
   name: plasteel cannonball
   components:
@@ -893,8 +891,6 @@
     penetrationThreshold: 1200
     penetrationDamageTypeRequirement:
     - Structural
-  - type: StaminaDamageOnCollide
-    damage: 80
 # endregion Timed Grenades And Artillery
 
 - type: entity
@@ -1011,7 +1007,7 @@
 - type: entity
   id: BulletArtilleryShapnel
   name: bullet
-  parent: BaseBullet
+  parent: [ BulletStoppingPowerStrong, BaseBullet ]
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -1019,8 +1015,6 @@
       types:
         Piercing: 40
         Structural: 40
-  - type: StaminaDamageOnCollide
-    damage: 50
   - type: RadarBlip
     color: "#FF6A6A"
     scale: 0.1
@@ -1032,7 +1026,7 @@
 - type: entity
   id: BulletArtilleryShapnelShort
   name: bullet
-  parent: BaseBullet
+  parent: [ BulletStoppingPowerStrong, BaseBullet ]
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -1040,8 +1034,6 @@
       types:
         Piercing: 40
         Structural: 40
-  - type: StaminaDamageOnCollide
-    damage: 50
   - type: RadarBlip
     color: "#FF6A6A"
     scale: 0.1
@@ -1153,7 +1145,7 @@
 - type: entity
   id: BulletAntiMaterielHP
   name: bullet (15mm hollow point)
-  parent: BaseBullet
+  parent: [ BulletStoppingPowerAntiMateriel, BaseBullet ]
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -1162,8 +1154,6 @@
         Piercing: 75
         Blunt: 10
         Slash: 10
-  - type: StaminaDamageOnCollide
-    damage: 40
 
 - type: entity
   id: BulletGrenadeFragArtillery
@@ -1473,7 +1463,7 @@
 # region Rubber Bullets
 
 - type: entity
-  parent: BaseBulletRubber
+  parent: [ BulletStoppingPowerMagnum, BaseBulletRubber ]
   id: BulletMagnumProjectileRubber
   categories: [ HideSpawnMenu ]
   name: bullet (.45 magnum rubber)
@@ -1482,11 +1472,9 @@
     damage:
       types:
         Blunt: 5
-  - type: StaminaDamageOnCollide
-    damage: 20
 
 - type: entity
-  parent: BaseBulletRubber
+  parent: [ BulletStoppingPowerMedium, BaseBulletRubber ]
   id: BulletPistolProjectileRubber
   categories: [ HideSpawnMenu ]
   name: bullet (.35 auto rubber)
@@ -1495,8 +1483,6 @@
     damage:
       types:
         Blunt: 3
-  - type: StaminaDamageOnCollide
-    damage: 9
 
 # endregion Rubber Bullets
 
@@ -1522,8 +1508,6 @@
     lifetime: 0.22 # roughly 5.5 tiles
   - type: GatheringProjectile
     chance: 0.5
-  - type: StaminaDamageOnCollide
-    damage: 5
 
 - type: entity
   id: PelletKineticWeak
@@ -1537,8 +1521,6 @@
         Structural: 10
   - type: GatheringProjectile
     chance: 0.2
-  - type: StaminaDamageOnCollide
-    damage: 3
 
 - type: entity
   id: BulletKineticWeakSpread
