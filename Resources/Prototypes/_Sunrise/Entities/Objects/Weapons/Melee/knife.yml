@@ -77,12 +77,15 @@
         Structural: 6
   - type: Tool
     qualities:
-    - Prying
-    - Slicing
+      - Prying
+      - Slicing
+      - Cutting
   - type: Item
     sprite: _Sunrise/Objects/Weapons/Melee/tactical_axe.rsi
     storedSprite:
       state: storage
       sprite: _Sunrise/Objects/Weapons/Melee/tactical_axe.rsi
   - type: ThrowingAngle
-    angle: 90
+    angle: 270
+  - type: Prying
+  - type: ToolTileCompatible

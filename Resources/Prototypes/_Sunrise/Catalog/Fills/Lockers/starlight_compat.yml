@@ -289,4 +289,6 @@
         # Sunrise start
         - id: ClothingHandsGlovesColorBlack
           amount: 2
+        - id: WeaponTaser
+          amount: 2
         # Sunrise end

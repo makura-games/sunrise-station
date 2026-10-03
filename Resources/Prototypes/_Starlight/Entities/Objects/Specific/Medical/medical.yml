@@ -681,6 +681,7 @@
         - Gauze
         - Ointment
         - PillCanister
+        - MedipenCase # Sunrise-Edit
       components:
         - Injector
         - Pill

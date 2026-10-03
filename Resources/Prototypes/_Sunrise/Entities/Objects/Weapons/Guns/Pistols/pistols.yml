@@ -231,10 +231,6 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/spearhead.rsi
   - type: Item
-    size: Normal
-    shape:
-    - 0,0,1,0
-    - 0,1,0,1
   - type: Wieldable
     unwieldOnUse: false
   - type: GunWieldBonus

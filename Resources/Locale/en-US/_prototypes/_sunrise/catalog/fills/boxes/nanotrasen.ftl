@@ -36,3 +36,5 @@ ent-BoxMagazineSMGTopMountedIncendiary = box of WT550 incendiary magazines
     .desc = A box full of WT550 magazines.
 ent-BoxMagazineLightRifleIncendiary = box of 7,62 incendiary magazines
     .desc = A box full of 7,62 magazines.
+ent-BoxEncryptionKeyCommand = command key box
+    .desc = { ent-BoxEncryptionKeyPassenger.desc }

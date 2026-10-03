@@ -349,3 +349,14 @@
         children:
         - id: MagazineLightRifleIncendiary
           amount: 4
+
+- type: entity
+  name: command encryption key box
+  parent: BoxEncryptionKeyPassenger
+  id: BoxEncryptionKeyCommand
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: EncryptionKeyCommand
+        amount: 4

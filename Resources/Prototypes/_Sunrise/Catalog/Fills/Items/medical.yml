@@ -38,3 +38,19 @@
         children:
         - id: CoalAutoInjector
           amount: 8
+
+- type: entity
+  id: MedipenCaseFilled
+  suffix: Filled
+  parent: MedipenCaseMedic
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BruteAutoInjector
+        - id: BurnAutoInjector
+        - id: CoalAutoInjector
+        - id: PunctAutoInjector
+        - id: PyraAutoInjector
+        - id: CoalAutoInjector

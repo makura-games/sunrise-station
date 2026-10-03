@@ -10,3 +10,6 @@ fold-zip-verb = Застегнуть
 fold-unzip-verb = Расстегнуть
 fold-verb-clothing-jacket = Снять куртку
 unfold-verb-clothing-jacket = Надеть куртку
+
+fold-verb-clothing-skirt = Подвернуть юбку
+unfold-verb-clothing-skirt = Развернуть юбку

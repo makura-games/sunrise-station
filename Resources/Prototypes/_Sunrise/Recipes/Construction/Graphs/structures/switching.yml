@@ -8,7 +8,7 @@
           steps:
             - material: Steel
               amount: 2
-              doAfter: 2.0
+              doAfter: 2
             - material: Cable
               amount: 5
     - node: SignalButtonNode
@@ -17,7 +17,13 @@
         - to: start
           steps:
             - tool: Screwing
-              doAfter: 2.0
+              doAfter: 1
+            - tool: Cutting
+              doAfter: 1
+            - tool: Welding
+              doAfter: 3
+            - tool: Screwing
+              doAfter: 2
           completed:
             - !type:GivePrototype
               prototype: SheetSteel1

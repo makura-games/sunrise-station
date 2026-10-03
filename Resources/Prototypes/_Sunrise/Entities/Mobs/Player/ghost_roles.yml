@@ -145,7 +145,7 @@
   storage:
     back:
     - BoxErtBaseKit
-    - CrowbarRed
+    - TacticalAxe
     - TelescopicShield
     - TelescopicShield
     - ExShrapnelGrenade
@@ -177,7 +177,6 @@
   storage:
     back:
     - BoxErtBaseKit
-    - CrowbarRed
     - TelescopicShield
     - TelescopicShield
     - ExShrapnelGrenade
@@ -210,7 +209,6 @@
   storage:
     back:
     - BoxErtBaseKit
-    - CrowbarRed
     - TelescopicShield
     - TelescopicShield
     - ExShrapnelGrenade
@@ -243,7 +241,7 @@
   storage:
     back:
     - BoxErtBaseKit
-    - CrowbarRed
+    - TacticalAxe
     - Bible
     - SpeedLoaderMagnumSP
     - FlippoLighterSunriseBlack
@@ -271,7 +269,7 @@
   storage:
     back:
     - BoxErtBaseKit
-    - CrowbarRed
+    - TacticalAxe
     - Bible
     - SpeedLoaderMagnumSP
     - FlippoLighterSunriseBlack
@@ -314,6 +312,7 @@
     - CableDetStack
     - MiningDrillDiamond
     - CyberGrenadeThrowerAtmos
+    - TacticalAxe
 
 - type: startingGear
   id: ERTEngineerGearGamma
@@ -377,7 +376,7 @@
     - BeakerSmallArith
     - MedkitCombatFilled
     - ChemistryBottleOmnizine
-    - CrowbarRed
+    - TacticalAxe
     - PowerCellHigh
     - MedipenCaseERTMedic
 
@@ -409,7 +408,6 @@
     - DefibrillatorCompact
     - MedkitCombatFilled
     - ChemistryBottleOmnizine
-    - CrowbarRed
     - MedipenCaseERTMedic
 
 # Janitor
@@ -438,7 +436,7 @@
     - BoxErtBaseKit
     - LightReplacer
     - BoxCleanerGrenades
-    - CrowbarRed
+    - TacticalAxe
 
 - type: startingGear
   id: ERTJanitorGearGamma
@@ -462,5 +460,4 @@
     - BoxErtBaseKit
     - LightReplacer
     - BoxCleanerGrenades
-    - CrowbarRed
     - ClothingHandsPowerGlovesUplinkNTERTRed

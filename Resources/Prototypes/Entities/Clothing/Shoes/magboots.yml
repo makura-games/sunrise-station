@@ -121,6 +121,25 @@
   - type: RadarBlip
     scale: 0
     requireInSpace: true
+  - type: ItemSlots
+    slots:
+      item:
+        name: clothing-boots-sidearm
+        priority: 4
+        whitelist:
+          tags:
+          - Knife
+          - Sidearm
+        blacklist:
+          tags:
+          - BigSmallArms
+  - type: ContainerContainer
+    containers:
+      item: !type:ContainerSlot
+  - type: ContainerFill
+    containers:
+      item:
+      - CombatKnife
   # Sunrise-end
 
 - type: entity
@@ -133,6 +152,12 @@
     sprite: Clothing/Shoes/Boots/magboots-ert.rsi
   - type: Clothing
     sprite: Clothing/Shoes/Boots/magboots-ert.rsi
+  # Sunrise-Start
+  - type: ContainerFill
+    containers:
+      item:
+      - TacticalAxe
+  # Sunrise-End
 
 - type: entity
   parent: BaseAction

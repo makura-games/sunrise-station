@@ -37,3 +37,5 @@ ent-BoxMagazineSMGTopMountedIncendiary = набор зажигательх ма�
     .desc = Коробка с зажигательми магазинами для ВТ550.
 ent-BoxMagazineLightRifleIncendiary = набор зажигательх 7,62 магазинов
     .desc = Коробка с зажигательми магазинами 7,62мм.
+ent-BoxEncryptionKeyCommand = коробка командных ключей
+    .desc = { ent-BoxEncryptionKeyPassenger.desc }

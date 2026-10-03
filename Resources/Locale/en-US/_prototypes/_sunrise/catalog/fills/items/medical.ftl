@@ -4,3 +4,6 @@ ent-MedkitUniversalFilled = universal medkit
 ent-CoalpenKitFilled = first aid kit
     .desc = It's an emergency medical kit for those serious boo-boos.
     .suffix = Filled
+ent-MedipenCaseFilled = filled medipen case
+    .desc = A small medipen case. Saves a lot of space!
+    .suffix = Filled
