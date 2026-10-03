@@ -1203,23 +1203,6 @@
       color: "#ffff33"
 
 - type: entity
-  id: DecloneBolt
-  name: declone bolt
-  parent: EnergyTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Radiation: 10
-        Cellular: 20
-  - type: HitscanBasicVisuals
-    bullet:
-      sprite:
-        sprite: _Starlight/Objects/Weapons/Guns/Projectiles/projectiles.rsi
-        state: declone
-
-- type: entity
   id: SniperBolt
   name: sniper bolt
   parent: EnergyTrace

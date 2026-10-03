@@ -58,13 +58,6 @@
             - tag: UpgradeKitHeat
               name: construction-graph-tag-absrbvest
               doAfter: 5
-        - to: webvest
-          steps:
-            - tag: UpgradeWebVest
-              name: construction-graph-tag-webvest
-              doAfter: 15
-    - node: webvest
-      entity: ClothingOuterVestWebSec
     - node: plate
       entity: ClothingOuterArmorPlate
       edges:

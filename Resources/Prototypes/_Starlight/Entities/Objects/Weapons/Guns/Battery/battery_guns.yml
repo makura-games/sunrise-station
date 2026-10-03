@@ -223,30 +223,6 @@
     price: 300
 
 - type: entity
-  parent: [BaseWeaponBatterySmall, BaseSecurityContraband ]
-  id: WeaponDecloner
-  name: decloner
-  components:
-  - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Battery/decloner.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: normal
-      shader: unshaded
-    - state: mag-unshaded-4
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
-  - type: BatteryAmmoProvider
-    proto: DecloneBolt
-    fireCost: 200
-  - type: MagazineVisuals
-    magState: mag
-    steps: 5
-    zeroVisible: true
-  - type: Appearance
-
-- type: entity
   name: m1911
   parent: [BaseWeaponBatterySmall, BaseSecurityContraband ]
   id: WeaponM1911
