@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server._Sunrise.ExternalServices;
 using Content.Server.Administration.Systems;
 using Content.Server.Database;
 using Content.Server.GameTicking;
@@ -38,6 +39,8 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
     [Dependency] private ISharedPlaytimeManager _playtime = default!;
     [Dependency] private ISharedChatManager _chat = default!;
     [Dependency] private IPrototypeManager _proto = default!;
+
+    [Dependency] private VictoriaLogs _victoria = default!; // Sunrise added - поддержка логов из VictoriaLogs
 
     public const string SawmillId = "admin.logs";
 
@@ -343,6 +346,12 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
 
         DoAdminAlerts(players, message, impact, handler);
 
+        // Sunrise added start - поддержка хранения логов в VictoriaLogs
+        _victoria.HandleDefaultAdminLog(log);
+        if (!_victoria.ShouldStoreLogInDatabase())
+            return;
+        // Sunrise addded end
+
         if (preRound)
         {
             _preRoundLogQueue.Enqueue(log);
@@ -366,7 +375,7 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
                     continue;
 
                 case EntityStringRepresentation rep:
-                    if (rep.Session is {} session)
+                    if (rep.Session is { } session)
                         AddPlayer(players, session.UserId.UserId, logId);
                     continue;
 
