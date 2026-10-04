@@ -1,12 +1,10 @@
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization.Metadata;
 using Content.Server.Database;
 using Content.Shared._Sunrise.SunriseCCVars;
+using Robust.Shared;
 using Robust.Shared.Configuration;
-using YamlDotNet.Serialization.NamingConventions;
 
 namespace Content.Server._Sunrise.ExternalServices;
 
@@ -25,8 +23,13 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
     private bool _enabled;
     private string _baseAddress = string.Empty;
     private bool _storeInDatabase;
+    private string _serverId = string.Empty;
 
-    private const string AdditionalUriPart = "/insert/jsonline?";
+    private const string InsertQuery = $"/insert/jsonline?_stream_fields={DefaultStreamValue}";
+
+    public const string ServerId = "server_id";
+    public const string LogSourceType = "log_source_type";
+    private const string DefaultStreamValue = $"{ServerId},{LogSourceType}";
 
     void IPostInjectInit.PostInject()
     {
@@ -35,6 +38,7 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
         _cfg.OnValueChanged(SunriseCCVars.VictoriaLogsEnabled, OnEnabledChanged, true);
         _cfg.OnValueChanged(SunriseCCVars.VictoriaLogsBaseAddress, OnBaseAddressChanged, true);
         _cfg.OnValueChanged(SunriseCCVars.VictoriaLogsStoreInDatabase, OnDatabaseStoreChanged, true);
+        _cfg.OnValueChanged(CVars.WatchdogKey, OnWatchdogKeyChanged, true);
     }
 
     public async void HandleDefaultAdminLog(AdminLog log)
@@ -42,14 +46,16 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
         if (!_enabled)
             return;
 
-
-        var json = JsonSerializer.Serialize(new VictoriaAdminLog(log), _jsonOptions);
+        var json = JsonSerializer.Serialize(new VictoriaAdminLog(log, _serverId), _jsonOptions);
         using var content = new StringContent(json, Encoding.UTF8, "application/json");
         _sawmill.Info(json);
 
-        var uriString = _baseAddress + AdditionalUriPart;
-        var uriKind = new UriCreationOptions()
-        if (!Uri.TryCreate(uriString, out var uri))
+        var uriString = _baseAddress + InsertQuery;
+        if (!Uri.TryCreate(uriString, UriKind.Absolute, out var uri))
+        {
+            _sawmill.Error($"Failed to create URI for {uriString}");
+            return;
+        }
 
         var response = await _client!.PostAsync(uri, content);
 
@@ -77,6 +83,8 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
 
         _cfg.UnsubValueChanged(SunriseCCVars.VictoriaLogsEnabled, OnEnabledChanged);
         _cfg.UnsubValueChanged(SunriseCCVars.VictoriaLogsBaseAddress, OnBaseAddressChanged);
+        _cfg.UnsubValueChanged(SunriseCCVars.VictoriaLogsStoreInDatabase, OnDatabaseStoreChanged);
+        _cfg.UnsubValueChanged(CVars.WatchdogKey, OnWatchdogKeyChanged);
     }
 
     private void OnEnabledChanged(bool enabled)
@@ -100,6 +108,11 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
     private void OnDatabaseStoreChanged(bool enabled)
     {
         _storeInDatabase = enabled;
+    }
+
+    private void OnWatchdogKeyChanged(string key)
+    {
+        _serverId = string.IsNullOrEmpty(key) ? "localhost" : key;
     }
 }
 

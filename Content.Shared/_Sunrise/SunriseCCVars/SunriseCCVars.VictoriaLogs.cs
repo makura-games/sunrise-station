@@ -15,7 +15,7 @@ public sealed partial class SunriseCCVars
     /// Включена ли поддержка Victoria Logs
     /// </summary>
     public static readonly CVarDef<string> VictoriaLogsBaseAddress =
-        CVarDef.Create("victoria_logs.base_address", "127.0.0.1:9428", CVar.SERVERONLY | CVar.ARCHIVE);
+        CVarDef.Create("victoria_logs.base_address", "http://127.0.0.1:9428", CVar.SERVERONLY | CVar.ARCHIVE);
 
     /// <summary>
     /// Будет ли работать сохранение логов в базу данных(стандартный способ хранения логов).
