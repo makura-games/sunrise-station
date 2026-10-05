@@ -250,6 +250,18 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
         _preRoundLogQueue.Clear();
         PreRoundQueue.Set(0);
 
+        // Sunrise added start - поддержка хранения логов в VictoriaLogs
+        foreach (var log in copy)
+        {
+            await _victoria.HandleDefaultAdminLog(log);
+        }
+
+        // Логи специально сохраняются в оба места, если ShouldUseDatabase = true
+        // Это нужно, чтобы иметь возможность писать логи в оба места для возможной сохранности, например на первое время интеграции
+        if (!_victoria.ShouldUseDatabase())
+            return;
+        // Sunrise addded end
+
         var task = _db.AddAdminLogs(copy);
 
         _sawmill.Debug($"Saving {copy.Count} admin logs.");
@@ -345,12 +357,6 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
         };
 
         DoAdminAlerts(players, message, impact, handler);
-
-        // Sunrise added start - поддержка хранения логов в VictoriaLogs
-        _victoria.HandleDefaultAdminLog(log);
-        if (!_victoria.ShouldStoreLogInDatabase())
-            return;
-        // Sunrise addded end
 
         if (preRound)
         {
@@ -556,10 +562,12 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
 
     public async Task<List<SharedAdminLog>> All(LogFilter? filter = null, Func<List<SharedAdminLog>>? listProvider = null)
     {
+        /*
         if (TrySearchCache(filter, out var results))
         {
             return results;
         }
+        */
 
         var initialSize = Math.Min(filter?.Limit ?? 0, 1000);
         List<SharedAdminLog> list;
@@ -572,6 +580,16 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
         {
             list = new List<SharedAdminLog>(initialSize);
         }
+
+        // Sunrise edit start - поддержка VictoriaLogs
+        if (!_victoria.ShouldUseDatabase())
+        {
+            // Идея метода ShouldUseDatabase заключается в том, чтобы можно было использовать оба метода - Викторию и базу данных.
+            // Но если тут мы будем использовать оба метода, то в списке логи будут дублироваться. Поэтому нужно использовать только один из них.
+            list = await _victoria.SelectLogs(filter);
+            return list;
+        }
+        // Sunrise edit end
 
         await foreach (var log in _db.GetAdminLogs(filter).WithCancellation(filter?.CancellationToken ?? default))
         {
