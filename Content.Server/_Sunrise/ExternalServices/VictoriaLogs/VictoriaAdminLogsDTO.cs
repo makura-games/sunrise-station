@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 using Content.Server.Database;
 using Content.Shared.Database;
 
-namespace Content.Server._Sunrise.ExternalServices;
+namespace Content.Server._Sunrise.ExternalServices.VictoriaLogs;
 
 
 /// <summary>
@@ -15,19 +15,19 @@ public interface IBaseVictoriaLog
     /// <summary>
     /// Сообщение лога, которое будет храниться
     /// </summary>
-    [JsonPropertyName("_msg")]
+    [JsonPropertyName(VictoriaLogs.MessageFieldName)]
     public string Message { get; init; }
 
     /// <summary>
     /// Время создания лога
     /// </summary>
-    [JsonPropertyName("_time")]
+    [JsonPropertyName(VictoriaLogs.TimeFieldName)]
     public DateTime Time { get; init; }
 
     /// <summary>
     /// Айди сервера(словесное) для создания stream внутри VictoriaLogs принадлежащего этому серверу
     /// </summary>
-    [JsonPropertyName(VictoriaLogs.ServerId)]
+    [JsonPropertyName(VictoriaLogs.ServerIdFieldName)]
     public string Server { get; init; }
 
     /// <summary>
@@ -38,7 +38,7 @@ public interface IBaseVictoriaLog
     /// смысла. Намного быстрее и лучше будет создать разные стримы для админлогов и логов сервера
     /// </para>
     /// </summary>
-    [JsonPropertyName(VictoriaLogs.LogSourceType)]
+    [JsonPropertyName(VictoriaLogs.LogSourceTypeFieldName)]
     public string LogSourceType { get; init; }
 }
 
@@ -60,16 +60,28 @@ public interface IBaseVictoriaLog
 
 public readonly record struct VictoriaAdminLogInsert : IBaseVictoriaLog
 {
-    [JsonPropertyName("_msg")]
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    [JsonPropertyName(VictoriaLogs.MessageFieldName)]
     public string Message { get; init; }
 
-    [JsonPropertyName("_time")]
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    [JsonPropertyName(VictoriaLogs.TimeFieldName)]
     public DateTime Time { get; init; }
 
-    [JsonPropertyName(VictoriaLogs.ServerId)]
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    [JsonPropertyName(VictoriaLogs.ServerIdFieldName)]
     public string Server { get; init; }
 
-    [JsonPropertyName(VictoriaLogs.LogSourceType)]
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    [JsonPropertyName(VictoriaLogs.LogSourceTypeFieldName)]
     public string LogSourceType { get; init; }
 
     public int RoundId { get; init; }
@@ -113,16 +125,28 @@ public readonly record struct VictoriaAdminLogInsert : IBaseVictoriaLog
 
 public readonly record struct VictoriaAdminLogResponse : IBaseVictoriaLog
 {
-    [JsonPropertyName("_msg")]
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    [JsonPropertyName(VictoriaLogs.MessageFieldName)]
     public string Message { get; init; } = string.Empty;
 
-    [JsonPropertyName("_time")]
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    [JsonPropertyName(VictoriaLogs.TimeFieldName)]
     public DateTime Time { get; init; } = default;
 
-    [JsonPropertyName(VictoriaLogs.ServerId)]
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    [JsonPropertyName(VictoriaLogs.ServerIdFieldName)]
     public string Server { get; init; } = string.Empty;
 
-    [JsonPropertyName(VictoriaLogs.LogSourceType)]
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    [JsonPropertyName(VictoriaLogs.LogSourceTypeFieldName)]
     public string LogSourceType { get; init; } = string.Empty;
 
     // Автоматически преобразует строку "33" в число 33

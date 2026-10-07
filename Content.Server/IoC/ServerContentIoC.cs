@@ -39,7 +39,7 @@ using Content.Shared.IoC;
 using Content.Shared.Kitchen;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
-using Content.Server._Sunrise.ExternalServices;
+using Content.Server._Sunrise.ExternalServices.VictoriaLogs;
 
 namespace Content.Server.IoC;
 

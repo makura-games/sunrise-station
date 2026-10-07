@@ -4,7 +4,6 @@ namespace Content.Shared._Sunrise.SunriseCCVars;
 
 public sealed partial class SunriseCCVars
 {
-
     /// <summary>
     /// Включена ли поддержка Victoria Logs
     /// </summary>

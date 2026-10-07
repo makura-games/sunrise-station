@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -6,85 +6,56 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Database;
-using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.Administration.Logs;
-using Robust.Shared;
-using Robust.Shared.Configuration;
 
-namespace Content.Server._Sunrise.ExternalServices;
+namespace Content.Server._Sunrise.ExternalServices.VictoriaLogs;
 
-// TODO: Разделение на партиалы
-// TODO: Выделение базовой работы с викторией от админ логов
-// TODO: Оптимизации?
-// TODO: Посмотреть что можно сделать с серверными логами и подумать можно ли их сразу сюда добавить
-// TODO: Причесать константы и зарезервированные имена
-// TODO: Раскинуть документацию, описать DTO, добавить пример стандартного лога после фильтрации
-// TODO: Не забыть вернуть кеширование
-// TODO: Посмотреть что там с пагинацией
-// TODO: Проверить как там фаталы при закрытии сервера из-за отписок
-// TODO: Уменьшить лимиты на странице и посмотреть что будет
-// TODO: Тесты попробовать сделать
-public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
+public sealed partial class VictoriaLogs
 {
-    [Dependency] private ILogManager _log = default!;
-    [Dependency] private IConfigurationManager _cfg = default!;
-
-    private ISawmill _sawmill = default!;
-    private HttpClient? _client;
-    private readonly JsonSerializerOptions _jsonOptions = new()
-    {
-        // Обязательно используется snake_case, потому что это стандарт для названий полей в VictoriaLogs
-        PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
-    };
-
-    private bool _enabled;
-    private string _baseAddress = string.Empty;
-    private bool _storeInDatabase;
-    private string _serverId = string.Empty;
-
-    private const string InsertQuery = $"/insert/jsonline?_stream_fields={DefaultStreamValue}";
-    private const string SelectQuery = $"/select/logsql/query";
-
-    private Uri? _insertUri;
-    private Uri? _selectUri;
-
-    public const string ServerId = "server_id";
-    public const string LogSourceType = "log_source_type";
-    private const string DefaultStreamValue = $"{ServerId},{LogSourceType}";
-
     public const string AdminLogSourceType = "admin_log";
 
-    void IPostInjectInit.PostInject()
-    {
-        _sawmill = _log.GetSawmill("VictoriaLogs");
+    private bool _storeInDatabase;
 
-        _cfg.OnValueChanged(SunriseCCVars.VictoriaLogsEnabled, OnEnabledChanged, true);
-        _cfg.OnValueChanged(SunriseCCVars.VictoriaLogsBaseAddress, OnBaseAddressChanged, true);
-        _cfg.OnValueChanged(SunriseCCVars.VictoriaLogsStoreInDatabase, OnDatabaseStoreChanged, true);
-        _cfg.OnValueChanged(CVars.WatchdogKey, OnWatchdogKeyChanged, true);
-    }
-
-    public async Task HandleDefaultAdminLog(AdminLog log)
+    /// <summary>
+    /// Пытается отправить админ-логи в VictoriaLogs, сериализуя их для начала в DTO VictoriaAdminLogInsert.
+    /// В случае провала одной из попыток пытается отправить снова, чтобы исключить короткие сетевые проблемы.
+    /// </summary>
+    /// <param name="log">Админ лог типа <see cref="AdminLog"/></param>
+    /// <param name="maxRetries">Количество попыток переотправить лог, если предыдущая попытка завершилась неудачей.</param>
+    /// <param name="delayMs">Время между попытками переотправить логи в милисекундах</param>
+    public async Task<bool> TrySendAdminLog(AdminLog log, int maxRetries = 3, int delayMs = 500)
     {
         if (!_enabled)
-            return;
-
-        var json = JsonSerializer.Serialize(new VictoriaAdminLogInsert(log, _serverId), _jsonOptions);
-        using var content = new StringContent(json, Encoding.UTF8, "application/json");
-        _sawmill.Info(json);
+            return false;
 
         if (_insertUri == null)
         {
             _sawmill.Warning($"URI for insert query is null, log {log.Message} won't be saved");
-            return;
+            return false;
         }
 
-        var response = await _client!.PostAsync(_insertUri, content);
+        var json = JsonSerializer.Serialize(new VictoriaAdminLogInsert(log, _serverId), _jsonOptions);
 
-        if (!response.IsSuccessStatusCode)
-            _sawmill.Error(response.ReasonPhrase ?? $"Found unsuccessful request with {response.StatusCode} code");
+        // Цикл повторных попыток
+        for (var attempt = 1; attempt <= maxRetries; attempt++)
+        {
+            if (await TrySend(json))
+                return true;
+
+            _sawmill.Warning($"Failed to send log (attempt {attempt}/{maxRetries}). Retrying...");
+
+            // Ждём перед следующей попыткой (если это не последняя)
+            if (attempt < maxRetries)
+                await Task.Delay(delayMs);
+        }
+
+        _sawmill.Error($"Failed to send admin log after {maxRetries} attempts.");
+        return false;
     }
 
+    // TODO: Как-нибудь сообразить, как отсюда выделить общую логику получения логов от конкретной логики админ-логов.
+    // Проблема в том, что я не хочу городить лишние абстракции и усложнять код ради ненужной сейчас расширяемости.
+    // А придумать как не убить простоту и сделать общую логику переиспользуемой... ну хз не знаю.
     public async Task<List<SharedAdminLog>> SelectLogs(LogFilter? filter = null)
     {
         var logsQl = BuildQuery(filter);
@@ -93,6 +64,9 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
         var formData = new Dictionary<string, string>
         {
             ["query"] = logsQl,
+            // Здесь можно указать дополнительные (ограниченно поддерживаемые) параметрые вроде limit и т.п.
+            // Это что-то вроде fallback, если в запросе они почему-то могут не передаться
+            // Но я учел это в построении запроса, а метод пока не общий, поэтому смысла тут прописывать нет.
         };
 
         using var request = new HttpRequestMessage(HttpMethod.Post, _selectUri);
@@ -103,10 +77,22 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
 
         using var response = await _client!.SendAsync(request);
 
+        // Это я спиздил из логики с базой данных, не уверен, что это правильно надеяться на возмоность default
         var token = filter?.CancellationToken ?? default;
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorText = await response.Content.ReadAsStringAsync(token);
+            _sawmill.Error($"Query failed ({(int)response.StatusCode}): {errorText}");
+            return result;
+        }
+
         await using var stream = await response.Content.ReadAsStreamAsync(token);
         using var reader = new StreamReader(stream);
 
+        // Читаем ответ от VictoriaLogs построчно.
+        // Это работает, потому что VictoriaLogs делает каждую строку в ответе валидным JSON,
+        // который валиден сам по себе в отрыве от остальной части
         while (await reader.ReadLineAsync(token) is { } line)
         {
             if (string.IsNullOrWhiteSpace(line))
@@ -114,6 +100,13 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
 
             try
             {
+                // Десериализуем каждую строку во временный DTO VictoriaAdminLogResponse.
+                // Это нужно, потому что десериализация требует, чтобы тип полей совпадали с тем, что придет в JSON.
+                // VictoriaLogs отдает все в формате string, т.е. обернутое в "", даже если это строка или bool.
+                // Если подставить туда сразу SharedAdminLog, то будет ошибка из-за типов полей, которые не совпадают.
+                // Например, сериализатор увидит "true", но не сможет преобразовать это в bool = true,
+                // потому что тип данных по JSON у "true" - string, а не bool.
+
                 rawResult += line + "\n";
                 var log = JsonSerializer.Deserialize<VictoriaAdminLogResponse>(line, _jsonOptions);
                 var sharedLog = new SharedAdminLog
@@ -142,7 +135,7 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
     /// Создает LogsQL запрос к VictoriaLogs с применением фильтра составленного админом в UI.
     /// </summary>
     /// <param name="filter">Фильтр по которому стоит отбирать данные</param>
-    /// <returns></returns>
+    /// <returns>Запрос на logsQL для получения админлогов по заданным фильтрам из <see cref="LogFilter"/></returns>
     private string BuildQuery(LogFilter? filter = null)
     {
         var query = new StringBuilder();
@@ -162,7 +155,7 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
         // Тут мы указываем из какой коробки брать логи - айди сервера(ласт, рыба, фаер) + тип логов(придуманная мной
         // переменная для разделения разных по логике логов в разные стримы, например админ логи и серверные логи)
         var streams = $$"""
-        _stream:{{{ServerId}}="{{_serverId}}", {{LogSourceType}}="{{AdminLogSourceType}}"}
+        _stream:{{{ServerIdFieldName}}="{{_serverId}}", {{LogSourceTypeFieldName}}="{{AdminLogSourceType}}"}
         """;
         query.Append(streams);
         query.AppendLine();
@@ -179,7 +172,7 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
             // ВАЖНО: Т.к. в формате ISO 8601 используется двоеточие, нам необходимо запихнуть время в кавычки "",
             // потому что в VictoriaLogs двоеточние считается спец.символом для указания переменных.
             // Если что как выглядит время -> 2026-10-05T00:00:00.0000000Z
-            var round = $"_time:>\"{filter.After.Value.Date:O}\"";
+            var round = $"{TimeFieldName}:>\"{filter.After.Value.Date:O}\"";
             query.Append(round);
             query.AppendLine();
         }
@@ -188,7 +181,7 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
         if (filter?.Before != null)
         {
             // Время обязательно в формате ISO 8601 через параметр O
-            var round = $"_time:<\"{filter.Before.Value.Date:O}\"";
+            var round = $"{TimeFieldName}:<\"{filter.Before.Value.Date:O}\"";
             query.Append(round);
             query.AppendLine();
         }
@@ -311,6 +304,11 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
         return query.ToString();
     }
 
+    /// <summary>
+    /// Определяет, нужно ли сохранять/брать логи из базы данных.
+    /// Проверяет, включена ли поддержка VictoriaLogs и как настроена опция по хранению логов в базе данных.
+    /// </summary>
+    /// <returns>Должны ли логи сохраняться/браться из базы данных</returns>
     public bool ShouldUseDatabase()
     {
         if (!_enabled)
@@ -318,61 +316,4 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
 
         return _storeInDatabase;
     }
-
-    private void DisposeAndNullifyClient()
-    {
-        _client?.Dispose();
-        _client = null;
-    }
-
-    public void Dispose()
-    {
-        DisposeAndNullifyClient();
-
-        _cfg.UnsubValueChanged(SunriseCCVars.VictoriaLogsEnabled, OnEnabledChanged);
-        _cfg.UnsubValueChanged(SunriseCCVars.VictoriaLogsBaseAddress, OnBaseAddressChanged);
-        _cfg.UnsubValueChanged(SunriseCCVars.VictoriaLogsStoreInDatabase, OnDatabaseStoreChanged);
-        _cfg.UnsubValueChanged(CVars.WatchdogKey, OnWatchdogKeyChanged);
-    }
-
-    private void OnEnabledChanged(bool enabled)
-    {
-        _enabled = enabled;
-
-        if (enabled && _client == null)
-            _client = new();
-        else if (!enabled && _client != null)
-            DisposeAndNullifyClient();
-    }
-
-    private void OnBaseAddressChanged(string baseAddress)
-    {
-        _baseAddress = baseAddress;
-
-        if (string.IsNullOrEmpty(_baseAddress))
-            _sawmill.Error("Enabled VictoriaLogs shouldn't have empty BaseUrl CVar. Every sent request would fail instantly");
-
-        var insertUriString = _baseAddress + InsertQuery;
-        if (!Uri.TryCreate(insertUriString, UriKind.Absolute, out _insertUri))
-        {
-            _sawmill.Error($"Failed to create URI for insert query with {insertUriString}");
-        }
-
-        var selectUriString = _baseAddress + SelectQuery;
-        if (!Uri.TryCreate(selectUriString, UriKind.Absolute, out _selectUri))
-        {
-            _sawmill.Error($"Failed to create URI for select query with {selectUriString}");
-        }
-    }
-
-    private void OnDatabaseStoreChanged(bool enabled)
-    {
-        _storeInDatabase = enabled;
-    }
-
-    private void OnWatchdogKeyChanged(string key)
-    {
-        _serverId = string.IsNullOrEmpty(key) ? "localhost" : key;
-    }
 }
-

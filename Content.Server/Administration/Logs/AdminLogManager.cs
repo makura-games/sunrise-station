@@ -1,8 +1,9 @@
 using System.Collections.Concurrent;
+using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Content.Server._Sunrise.ExternalServices;
+using Content.Server._Sunrise.ExternalServices.VictoriaLogs;
 using Content.Server.Administration.Systems;
 using Content.Server.Database;
 using Content.Server.GameTicking;
@@ -15,6 +16,7 @@ using Content.Shared.Players.PlayTimeTracking;
 using Prometheus;
 using Robust.Server.GameObjects;
 using Robust.Shared;
+using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -251,16 +253,35 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
         PreRoundQueue.Set(0);
 
         // Sunrise added start - поддержка хранения логов в VictoriaLogs
+        ValueList<AdminLog> failedLogs = [];
         foreach (var log in copy)
         {
-            await _victoria.HandleDefaultAdminLog(log);
+            var success = await _victoria.TrySendAdminLog(log);
+            if (!success)
+                failedLogs.Add(log);
         }
 
         // Логи специально сохраняются в оба места, если ShouldUseDatabase = true
         // Это нужно, чтобы иметь возможность писать логи в оба места для возможной сохранности, например на первое время интеграции
         if (!_victoria.ShouldUseDatabase())
-            return;
-        // Sunrise addded end
+        {
+            // Дальше смотрим - есть ли логи, которые не дошли до VictoriaLogs?
+            // Если нет(failedLogs.Count <= 0) - записываем метрику и выходим отсюда.
+            // Это стандартный случай, когда ShouldUseDatabase = false и все записалось успешно.
+
+            // Выходим из метода только в случае, когда все записалось успешно
+            if (failedLogs.Count <= 0)
+            {
+                LogsSent.Inc(copy.Count);
+                return;
+            }
+
+            // Если по какой-то причине какие-то логи не дошли до VictoriaLogs, то сохраняем их в базу данных(даже при ShouldUseDatabase = false!),
+            // чтобы они хотя бы не потерялись в принципе и их можно было мигрировать в будущем.
+            LogsSent.Inc(copy.Count - failedLogs.Count); // записываем в метрику только успешные логи, вычитая неуспешные.
+            copy = failedLogs.ToList();
+        }
+        // Sunrise added end
 
         var task = _db.AddAdminLogs(copy);
 

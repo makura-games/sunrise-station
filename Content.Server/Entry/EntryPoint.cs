@@ -49,7 +49,7 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Server._Sunrise.Auth;
-using Content.Server._Sunrise.ExternalServices;
+using Content.Server._Sunrise.ExternalServices.VictoriaLogs;
 
 namespace Content.Server.Entry
 {
