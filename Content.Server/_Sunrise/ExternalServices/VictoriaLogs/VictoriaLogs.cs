@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Robust.Shared;
 using Robust.Shared.Configuration;
+using Robust.Shared.Utility;
 
 namespace Content.Server._Sunrise.ExternalServices.VictoriaLogs;
 
@@ -18,29 +19,30 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
     [Dependency] private ILogManager _log = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
 
-    private ISawmill _sawmill = default!;
-    private HttpClient? _client;
-    private readonly JsonSerializerOptions _jsonOptions = new()
-    {
-        // Обязательно используется snake_case, потому что это стандарт для названий полей в VictoriaLogs
-        PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
-    };
-
-    private bool _enabled;
-    private string _baseAddress = string.Empty;
-    private string _serverId = string.Empty;
-
     private const string InsertQuery = $"/insert/jsonline?_stream_fields={DefaultStreamValue}";
     private const string SelectQuery = "/select/logsql/query";
-
-    private Uri? _insertUri;
-    private Uri? _selectUri;
 
     public const string ServerIdFieldName = "server_id";
     public const string LogSourceTypeFieldName = "log_source_type";
     public const string TimeFieldName = "_time";
     public const string MessageFieldName = "_msg";
     private const string DefaultStreamValue = $"{ServerIdFieldName},{LogSourceTypeFieldName}";
+
+    private readonly JsonSerializerOptions _jsonOptions = new()
+    {
+        // Обязательно используется snake_case, потому что это стандарт для названий полей в VictoriaLogs
+        PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+    };
+
+    private ISawmill _sawmill = default!;
+    private HttpClient? _client;
+
+    private bool _enabled;
+    private string _baseAddress = string.Empty;
+    private string _serverId = string.Empty;
+
+    private Uri? _insertUri;
+    private Uri? _selectUri;
 
     void IPostInjectInit.PostInject()
     {
@@ -52,17 +54,6 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
         _cfg.OnValueChanged(CVars.WatchdogKey, OnWatchdogKeyChanged, true);
     }
 
-    private void DisposeAndNullifyClient()
-    {
-        _client?.Dispose();
-        _client = null;
-    }
-
-    public void Dispose()
-    {
-        DisposeAndNullifyClient();
-    }
-
     #region Base input/output
 
     public async Task<bool> TrySend(string json)
@@ -71,17 +62,19 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
 #if DEBUG
         _sawmill.Verbose(json);
 #endif
-        if (_client == null)
+        try
         {
-            _sawmill.Error("Found null HttpClient while trying to send data");
-            return false;
+            var client = GetOrCreateClient();
+            var response = await client.PostAsync(_insertUri, content);
+            if (!response.IsSuccessStatusCode)
+            {
+                _sawmill.Error(response.ReasonPhrase ?? $"Found unsuccessful request with {response.StatusCode} code");
+                return false;
+            }
         }
-
-        var response = await _client!.PostAsync(_insertUri, content);
-
-        if (!response.IsSuccessStatusCode)
+        catch (Exception ex)
         {
-            _sawmill.Error(response.ReasonPhrase ?? $"Found unsuccessful request with {response.StatusCode} code");
+            _sawmill.Error($"Failed to send log - {ex.Message}. Log:\n{json}");
             return false;
         }
 
@@ -138,6 +131,39 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
 
     #endregion
 
+    #region Life cycle
+
+    /// <summary>
+    /// Получает или создает настроенный HttpClient для отправки запроса к VictoriaLogs
+    /// </summary>
+    private HttpClient GetOrCreateClient()
+    {
+        // Клиент не должен существовать/запрашиваться, если система выключена
+        DebugTools.Assert(_enabled || _client == null);
+        if (_client != null)
+            return _client;
+
+        _client = new HttpClient
+        {
+            Timeout = TimeSpan.FromSeconds(10),
+        };
+
+        return _client;
+    }
+
+    private void DisposeAndNullifyClient()
+    {
+        _client?.Dispose();
+        _client = null;
+    }
+
+    public void Dispose()
+    {
+        DisposeAndNullifyClient();
+    }
+
+    #endregion
+
     #region Cvars
 
     private void OnEnabledChanged(bool enabled)
@@ -145,7 +171,7 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
         _enabled = enabled;
 
         if (enabled && _client == null)
-            _client = new();
+            GetOrCreateClient();
         else if (!enabled && _client != null)
             DisposeAndNullifyClient();
     }

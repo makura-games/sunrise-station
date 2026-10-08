@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Database;
@@ -14,6 +15,10 @@ public sealed partial class VictoriaLogs
 {
     public const string AdminLogSourceType = "admin_log";
 
+    /// <summary>
+    /// Отвечает за то, должны ли логи при включенной интеграции VictoriaLogs отправляться в базу данных.
+    /// Позволяет экстренно запустить fallback режим в случае обнаружения проблем с интеграцией.
+    /// </summary>
     private bool _storeInDatabase;
 
     /// <summary>
@@ -70,10 +75,49 @@ public sealed partial class VictoriaLogs
         return false;
     }
 
+    /// <summary>
+    /// Получает нужные админ-логи из VictoriaLogs, формируя запрос logsQL и отправляя в VictoriaLogs.
+    /// </summary>
+    /// <param name="filter">Фильтр логов, созданный админов в меню типа <see cref="LogFilter"/></param>
+    /// <returns>Список из подходящих под фильтр админлогов</returns>
     // TODO: Как-нибудь сообразить, как отсюда выделить общую логику получения логов от конкретной логики админ-логов.
     // Проблема в том, что я не хочу городить лишние абстракции и усложнять код ради ненужной сейчас расширяемости.
     // А придумать как не убить простоту и сделать общую логику переиспользуемой... ну хз не знаю.
     public async Task<List<SharedAdminLog>> SelectLogs(LogFilter? filter = null)
+    {
+        try
+        {
+            using var request = CreateSelectRequest(filter);
+            var client = GetOrCreateClient();
+            using var response = await client.SendAsync(request);
+
+            // Это я спиздил из логики с базой данных, не уверен, что это правильно надеяться на возмоность default
+            var token = filter?.CancellationToken ?? default;
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorText = await response.Content.ReadAsStringAsync(token);
+                _sawmill.Error($"Query failed ({(int)response.StatusCode}): {errorText}");
+                return [];
+            }
+
+            await using var stream = await response.Content.ReadAsStreamAsync(token);
+            return await ParseLogsFromStreamAsync(stream, token);
+        }
+        catch (Exception ex)
+        {
+            _sawmill.Error($"Failed to get logs from VictoriaLogs - {ex.Message}");
+            return [];
+        }
+    }
+
+    /// <summary>
+    /// Создает запрос(но не отправляет!) для получения админ-логов с заданными фильтром.
+    /// Сам создает logsQL запрос основываясь на переданном фильтре с помощью метода <see cref="BuildQuery"/>
+    /// </summary>
+    /// <param name="filter">Фильтр логов, созданный админов в меню типа <see cref="LogFilter"/></param>
+    /// <returns>Готовый к отправке запрос в VictoriaLogs</returns>
+    private HttpRequestMessage CreateSelectRequest(LogFilter? filter = null)
     {
         var logsQl = BuildQuery(filter);
 #if DEBUG
@@ -89,27 +133,21 @@ public sealed partial class VictoriaLogs
             // Но я учел это в построении запроса, а метод пока не общий, поэтому смысла тут прописывать нет.
         };
 
-        using var request = new HttpRequestMessage(HttpMethod.Post, _selectUri);
+        var request = new HttpRequestMessage(HttpMethod.Post, _selectUri);
         request.Content = new FormUrlEncodedContent(formData);
+        return request;
+    }
 
-        var result = new List<SharedAdminLog>();
+    /// <summary>
+    /// Парсит пришедшие с VictoriaLogs логи в читаемый игрой вариант.
+    /// </summary>
+    /// <returns>Список логов формата <see cref="SharedAdminLog"/></returns>
+    private async Task<List<SharedAdminLog>> ParseLogsFromStreamAsync(Stream stream, CancellationToken token)
+    {
 #if DEBUG
         var rawResult = new StringBuilder();
 #endif
-
-        using var response = await _client!.SendAsync(request);
-
-        // Это я спиздил из логики с базой данных, не уверен, что это правильно надеяться на возмоность default
-        var token = filter?.CancellationToken ?? default;
-
-        if (!response.IsSuccessStatusCode)
-        {
-            var errorText = await response.Content.ReadAsStringAsync(token);
-            _sawmill.Error($"Query failed ({(int)response.StatusCode}): {errorText}");
-            return result;
-        }
-
-        await using var stream = await response.Content.ReadAsStreamAsync(token);
+        var result = new List<SharedAdminLog>();
         using var reader = new StreamReader(stream);
 
         // Читаем ответ от VictoriaLogs построчно.
@@ -192,14 +230,18 @@ public sealed partial class VictoriaLogs
 
         // Фильтр ПОСЛЕ по времени
         // Его стоит указать раньше, чем ДО, т.к. логов ПОСЛЕ какого-то времени чаще всего меньше, чем ДО(оптимизация)
+
+        // TODO: Если фильтр по времени начнут использовать(сейчас он не выставляется нигде), нужно убедиться, что DateTime.Kind = Utc
+        // иначе там будет локальное время сервера
         if (filter?.After != null)
         {
             // Время обязательно в формате ISO 8601 через параметр O
             // ВАЖНО: Т.к. в формате ISO 8601 используется двоеточие, нам необходимо запихнуть время в кавычки "",
             // потому что в VictoriaLogs двоеточние считается спец.символом для указания переменных.
             // Если что как выглядит время -> 2026-10-05T00:00:00.0000000Z
-            var round = $"{TimeFieldName}:>\"{filter.After.Value.Date:O}\"";
-            query.Append(round);
+            var time = filter.After.Value.ToUniversalTime();
+            var after = $"{TimeFieldName}:>\"{time:O}\"";
+            query.Append(after);
             query.AppendLine();
         }
 
@@ -207,8 +249,9 @@ public sealed partial class VictoriaLogs
         if (filter?.Before != null)
         {
             // Время обязательно в формате ISO 8601 через параметр O
-            var round = $"{TimeFieldName}:<\"{filter.Before.Value.Date:O}\"";
-            query.Append(round);
+            var time = filter.Before.Value.ToUniversalTime();
+            var before = $"{TimeFieldName}:<\"{time:O}\"";
+            query.Append(before);
             query.AppendLine();
         }
 
