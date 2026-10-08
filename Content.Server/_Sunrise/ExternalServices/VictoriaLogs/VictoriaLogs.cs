@@ -9,7 +9,6 @@ using Robust.Shared.Configuration;
 namespace Content.Server._Sunrise.ExternalServices.VictoriaLogs;
 
 // TODO: Выделение базовой работы с викторией от админ логов
-// TODO: Оптимизации?
 // TODO: Посмотреть что можно сделать с серверными логами и подумать можно ли их сразу сюда добавить
 // TODO: Раскинуть документацию, описать DTO, добавить пример стандартного лога после фильтрации
 // TODO: Не забыть вернуть кеширование
@@ -35,7 +34,7 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
     private string _serverId = string.Empty;
 
     private const string InsertQuery = $"/insert/jsonline?_stream_fields={DefaultStreamValue}";
-    private const string SelectQuery = $"/select/logsql/query";
+    private const string SelectQuery = "/select/logsql/query";
 
     private Uri? _insertUri;
     private Uri? _selectUri;
@@ -77,8 +76,9 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
     public async Task<bool> TrySend(string json)
     {
         using var content = new StringContent(json, Encoding.UTF8, "application/json");
-        _sawmill.Info(json);
-
+#if DEBUG
+        _sawmill.Verbose(json);
+#endif
         if (_client == null)
         {
             _sawmill.Error("Found null HttpClient while trying to send data");
@@ -113,7 +113,7 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
         // В итоге оно будет как-то так _msg:i("сообщение") _msg:i("сообщение два")
         // Все остальные опасные символы будут обезопашены за счет нахождения в кавычках
 
-        var result = new StringBuilder();
+        var result = new StringBuilder(32);
 
         // Обязательно сначала нужно заменить слеши, а потом кавычки.
         // Если сделать это наоборот, то добавленные нами спецсимволы
@@ -140,7 +140,8 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
             result.Append(MessageFieldName).Append(":i(\"").Append(word).Append("\") ");
         }
 
-        return result.ToString();
+        // + очищаем лишний пробел после последней строки, который всегда будет в конце строки.
+        return result.ToString().TrimEnd();
     }
 
     #endregion

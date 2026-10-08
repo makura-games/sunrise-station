@@ -20,36 +20,53 @@ public sealed partial class VictoriaLogs
     /// Пытается отправить админ-логи в VictoriaLogs, сериализуя их для начала в DTO VictoriaAdminLogInsert.
     /// В случае провала одной из попыток пытается отправить снова, чтобы исключить короткие сетевые проблемы.
     /// </summary>
-    /// <param name="log">Админ лог типа <see cref="AdminLog"/></param>
+    /// <param name="logs">Список из админ логов типа <see cref="AdminLog"/> для отправки</param>
     /// <param name="maxRetries">Количество попыток переотправить лог, если предыдущая попытка завершилась неудачей.</param>
     /// <param name="delayMs">Время между попытками переотправить логи в милисекундах</param>
-    public async Task<bool> TrySendAdminLog(AdminLog log, int maxRetries = 3, int delayMs = 500)
+    public async Task<bool> TrySendAdminLog(List<AdminLog> logs, int maxRetries = 3, int delayMs = 500)
     {
         if (!_enabled)
             return false;
 
+        if (logs.Count == 0)
+            return false;
+
         if (_insertUri == null)
         {
-            _sawmill.Warning($"URI for insert query is null, log {log.Message} won't be saved");
+            _sawmill.Warning($"URI for insert query is null, {logs.Count} logs won't be saved");
             return false;
         }
 
-        var json = JsonSerializer.Serialize(new VictoriaAdminLogInsert(log, _serverId), _jsonOptions);
+        // Отправляем сразу пачку логов в VictoriaLogs, потому что мы можем!
+        // Она специально приспособлена к формату NDJSON, где каждая строка - свой валидный JSON.
+        // А общий отправленный JSON - разделенный через новые строки "список" JSONов.
+        // Такой способ уменьшает время на передачу туда-сюда данных.
 
+        // Здесь logs.Count * 256 примерно показывает, сколько данных мы передадим, чтобы сразу выделить нужную память.
+        // Итоговое число - количество символов, на которое нужно выделить память.
+        // 256 - примерная средняя длина одной лог записи
+        var json = new StringBuilder(logs.Count * 256);
+        foreach (var log in logs)
+        {
+            var jsonLine = JsonSerializer.Serialize(new VictoriaAdminLogInsert(log, _serverId), _jsonOptions);
+            json.Append(jsonLine).AppendLine();
+        }
+
+        var jsonString = json.ToString().TrimEnd();
         // Цикл повторных попыток
         for (var attempt = 1; attempt <= maxRetries; attempt++)
         {
-            if (await TrySend(json))
+            if (await TrySend(jsonString))
                 return true;
 
-            _sawmill.Warning($"Failed to send log (attempt {attempt}/{maxRetries}). Retrying...");
+            _sawmill.Warning($"Failed to send {logs.Count} logs (attempt {attempt}/{maxRetries}). Retrying...");
 
             // Ждём перед следующей попыткой (если это не последняя)
             if (attempt < maxRetries)
                 await Task.Delay(delayMs);
         }
 
-        _sawmill.Error($"Failed to send admin log after {maxRetries} attempts.");
+        _sawmill.Error($"Failed to send {logs.Count} admin logs after {maxRetries} attempts.");
         return false;
     }
 
@@ -59,11 +76,14 @@ public sealed partial class VictoriaLogs
     public async Task<List<SharedAdminLog>> SelectLogs(LogFilter? filter = null)
     {
         var logsQl = BuildQuery(filter);
-        _sawmill.Info("ЗАПРОС:\n" + logsQl);
+#if DEBUG
+        _sawmill.Verbose("ЗАПРОС:\n" + logsQl);
+#endif
 
         var formData = new Dictionary<string, string>
         {
             ["query"] = logsQl,
+            ["limit"] = $"{50_000}", // Нужно всегда задавать хардлимит, чтобы сервер случайно не загрузил 9999 гигабайт данных в память.
             // Здесь можно указать дополнительные (ограниченно поддерживаемые) параметрые вроде limit и т.п.
             // Это что-то вроде fallback, если в запросе они почему-то могут не передаться
             // Но я учел это в построении запроса, а метод пока не общий, поэтому смысла тут прописывать нет.
@@ -73,7 +93,9 @@ public sealed partial class VictoriaLogs
         request.Content = new FormUrlEncodedContent(formData);
 
         var result = new List<SharedAdminLog>();
-        var rawResult = "";
+#if DEBUG
+        var rawResult = new StringBuilder();
+#endif
 
         using var response = await _client!.SendAsync(request);
 
@@ -106,8 +128,9 @@ public sealed partial class VictoriaLogs
                 // Если подставить туда сразу SharedAdminLog, то будет ошибка из-за типов полей, которые не совпадают.
                 // Например, сериализатор увидит "true", но не сможет преобразовать это в bool = true,
                 // потому что тип данных по JSON у "true" - string, а не bool.
-
-                rawResult += line + "\n";
+#if DEBUG
+                rawResult.Append(line).AppendLine();
+#endif
                 var log = JsonSerializer.Deserialize<VictoriaAdminLogResponse>(line, _jsonOptions);
                 var sharedLog = new SharedAdminLog
                 {
@@ -127,7 +150,9 @@ public sealed partial class VictoriaLogs
             }
         }
 
-        _sawmill.Info("ОТВЕТ:\n" + rawResult);
+#if DEBUG
+        _sawmill.Verbose("ОТВЕТ:\n" + rawResult);
+#endif
         return result;
     }
 
@@ -136,9 +161,10 @@ public sealed partial class VictoriaLogs
     /// </summary>
     /// <param name="filter">Фильтр по которому стоит отбирать данные</param>
     /// <returns>Запрос на logsQL для получения админлогов по заданным фильтрам из <see cref="LogFilter"/></returns>
+    // TODO: Придумать как убрать хардкод и сделать генерацию запроса динамической
     private string BuildQuery(LogFilter? filter = null)
     {
-        var query = new StringBuilder();
+        var query = new StringBuilder(512);
 
         // Этапы создания запроса будут
         // 1. Stream
@@ -285,6 +311,13 @@ public sealed partial class VictoriaLogs
             query.AppendLine();
         }
 
+        // Выставляем для чтения только нужные колонки,
+        // чтобы уменьшить количество данных, которые будет разархивировать и читать VictoriaLogs.
+        // Здесь все за исключением server_id, log_source_type и round_id.
+        // Список полностью повторяет поля, используемые в VictoriaAdminLogResponse для показа на экране
+        query.Append($"| fields {TimeFieldName}, {MessageFieldName}, id, impact, players, type");
+        query.AppendLine();
+
         // Сортировка по времени создания лога
         // ВАЖНО: Сортировка должна быть ДО лимитирования!
         // Так как чтение пайпов(|) идет слева направо,
@@ -295,9 +328,12 @@ public sealed partial class VictoriaLogs
         query.AppendLine();
 
         // Лимитирование.
-        // Нужно всегда задавать хардлимит, чтобы сервер случайно не загрузил 9999 гигабайт данных в память.
-        var limit = filter?.Limit ?? 50_000; // TODO: Перенести в заголовки
-        query.Append($"| limit {limit}");
+        // Хардлимит передается как заголовок
+        if (filter?.Limit != null)
+        {
+            query.Append($"| limit {filter.Limit}");
+        }
+
         // В последний раз можно не добавлять новую строку
 
         // Йобана в рот, отбились.
