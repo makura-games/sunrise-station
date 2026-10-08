@@ -204,7 +204,7 @@ public sealed partial class VictoriaLogs
         // Поиск фильтра ниже явно нагрузит сервер сильнее, чем сделает пользы убрав лишние логи.
         if (!string.IsNullOrEmpty(filter?.Search))
         {
-            query.Append(filter.Search);
+            query.Append(SanitizeUserInput(filter.Search));
             query.AppendLine();
         }
 
@@ -296,7 +296,7 @@ public sealed partial class VictoriaLogs
 
         // Лимитирование.
         // Нужно всегда задавать хардлимит, чтобы сервер случайно не загрузил 9999 гигабайт данных в память.
-        var limit = filter?.Limit ?? 50_000;
+        var limit = filter?.Limit ?? 50_000; // TODO: Перенести в заголовки
         query.Append($"| limit {limit}");
         // В последний раз можно не добавлять новую строку
 
