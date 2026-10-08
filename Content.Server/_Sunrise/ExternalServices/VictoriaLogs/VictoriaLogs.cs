@@ -12,8 +12,6 @@ namespace Content.Server._Sunrise.ExternalServices.VictoriaLogs;
 // TODO: Посмотреть что можно сделать с серверными логами и подумать можно ли их сразу сюда добавить
 // TODO: Раскинуть документацию, описать DTO, добавить пример стандартного лога после фильтрации
 // TODO: Не забыть вернуть кеширование
-// TODO: Проверить как там фаталы при закрытии сервера из-за отписок
-// TODO: Уменьшить лимиты на странице и посмотреть что будет
 // TODO: Написать тесты, как только будет адекватный готовый парсер logsQL
 public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
 {
@@ -63,11 +61,6 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
     public void Dispose()
     {
         DisposeAndNullifyClient();
-
-        _cfg.UnsubValueChanged(SunriseCCVars.VictoriaLogsEnabled, OnEnabledChanged);
-        _cfg.UnsubValueChanged(SunriseCCVars.VictoriaLogsBaseAddress, OnBaseAddressChanged);
-        _cfg.UnsubValueChanged(SunriseCCVars.VictoriaLogsStoreInDatabase, OnDatabaseStoreChanged);
-        _cfg.UnsubValueChanged(CVars.WatchdogKey, OnWatchdogKeyChanged);
     }
 
     #region Base input/output
