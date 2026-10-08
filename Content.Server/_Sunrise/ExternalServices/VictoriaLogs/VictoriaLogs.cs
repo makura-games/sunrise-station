@@ -10,7 +10,6 @@ using Robust.Shared.Utility;
 namespace Content.Server._Sunrise.ExternalServices.VictoriaLogs;
 
 // TODO: Выделение базовой работы с викторией от админ логов
-// TODO: Посмотреть что можно сделать с серверными логами и подумать можно ли их сразу сюда добавить
 // TODO: Раскинуть документацию, описать DTO, добавить пример стандартного лога после фильтрации
 // TODO: Не забыть вернуть кеширование
 // TODO: Написать тесты, как только будет адекватный готовый парсер logsQL
@@ -56,29 +55,57 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
 
     #region Base input/output
 
-    public async Task<bool> TrySend(string json)
+    /// <summary>
+    /// Базовый метод для отправки логов в VictoriaLogs.
+    /// Принимает заранее заготовленный JSON с логами и отправляет его в VictoriaLogs.
+    /// </summary>
+    /// <param name="json">Заранее заготовленный JSON с распарешнными в JSON логами</param>
+    /// <param name="maxRetries">Количество попыток переотправить лог, если предыдущая попытка завершилась неудачей.</param>
+    /// <param name="delayMs">Время между попытками переотправить логи в милисекундах</param>
+    /// <returns>Получилось или нет совершить отправку</returns>
+    public async Task<bool> TrySend(string json, int maxRetries = 3, int delayMs = 500)
     {
         using var content = new StringContent(json, Encoding.UTF8, "application/json");
+        var client = GetOrCreateClient();
+
 #if DEBUG
         _sawmill.Verbose(json);
 #endif
-        try
+
+        DebugTools.Assert(!string.IsNullOrEmpty(json));
+        DebugTools.Assert(maxRetries >= 1);
+        DebugTools.Assert(delayMs >= 0);
+
+        // Логика переотправки логов(ретраев).
+        // Если по какой-то причине с первого раза не дошло - пробуем пару раз и логгируем проблемные попытки.
+        for (var attempt = 1; attempt <= maxRetries; attempt++)
         {
-            var client = GetOrCreateClient();
-            var response = await client.PostAsync(_insertUri, content);
-            if (!response.IsSuccessStatusCode)
+            try
             {
-                _sawmill.Error(response.ReasonPhrase ?? $"Found unsuccessful request with {response.StatusCode} code");
+                var response = await client.PostAsync(_insertUri, content);
+
+                // Единственный успешный выход тут.
+                // Если успешно отправили - выходим из метода и цикла заявляя об успехе
+                if (response.IsSuccessStatusCode)
+                    return true;
+
+                // Эта штука выкинет ошибку, которую уже обработает catch ниже.
+                // Можно было бы сделать просто if, если бы PostAsync не выкидывал ошибку сам.
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception ex)
+            {
+                _sawmill.Warning($"{ex.Message}. Failed to send logs (attempt {attempt}/{maxRetries}). Retrying...");
                 return false;
             }
-        }
-        catch (Exception ex)
-        {
-            _sawmill.Error($"Failed to send log - {ex.Message}. Log:\n{json}");
-            return false;
+
+            // Ждём перед следующей попыткой (если это не последняя)
+            if (attempt < maxRetries)
+                await Task.Delay(delayMs);
         }
 
-        return true;
+        _sawmill.Error($"Failed to send logs after {maxRetries} attempts.");
+        return false;
     }
 
     /// <summary>

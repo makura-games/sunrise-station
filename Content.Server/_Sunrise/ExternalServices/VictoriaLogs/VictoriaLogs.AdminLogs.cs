@@ -26,9 +26,7 @@ public sealed partial class VictoriaLogs
     /// В случае провала одной из попыток пытается отправить снова, чтобы исключить короткие сетевые проблемы.
     /// </summary>
     /// <param name="logs">Список из админ логов типа <see cref="AdminLog"/> для отправки</param>
-    /// <param name="maxRetries">Количество попыток переотправить лог, если предыдущая попытка завершилась неудачей.</param>
-    /// <param name="delayMs">Время между попытками переотправить логи в милисекундах</param>
-    public async Task<bool> TrySendAdminLog(List<AdminLog> logs, int maxRetries = 3, int delayMs = 500)
+    public async Task<bool> TrySendAdminLog(List<AdminLog> logs)
     {
         if (!_enabled)
             return false;
@@ -58,21 +56,7 @@ public sealed partial class VictoriaLogs
         }
 
         var jsonString = json.ToString().TrimEnd();
-        // Цикл повторных попыток
-        for (var attempt = 1; attempt <= maxRetries; attempt++)
-        {
-            if (await TrySend(jsonString))
-                return true;
-
-            _sawmill.Warning($"Failed to send {logs.Count} logs (attempt {attempt}/{maxRetries}). Retrying...");
-
-            // Ждём перед следующей попыткой (если это не последняя)
-            if (attempt < maxRetries)
-                await Task.Delay(delayMs);
-        }
-
-        _sawmill.Error($"Failed to send {logs.Count} admin logs after {maxRetries} attempts.");
-        return false;
+        return await TrySend(jsonString);
     }
 
     /// <summary>
