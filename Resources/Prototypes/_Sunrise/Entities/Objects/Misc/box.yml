@@ -12,7 +12,7 @@
     sprite: _Sunrise/Objects/Storage/boxes.rsi
     size: Normal
     shape:
-    - 0,0,2,2
+    - 0,0,1,1
   - type: Storage
     maxItemSize: Normal
     grid:

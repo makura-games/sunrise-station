@@ -58,6 +58,7 @@
     containers:
       entity_storage:
         id: MaterialWoodPlank
+        amount: 2 # Sunrise-Edit
 
 - type: entity
   parent: CrateGenericSteel
