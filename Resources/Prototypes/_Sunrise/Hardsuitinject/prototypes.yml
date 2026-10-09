@@ -229,15 +229,16 @@
   - type: Solution
     id: beaker
     solution:
-      maxVol: 20
+      maxVol: 50
       reagents:
-      - ReagentId: DarkRedRum
-        Quantity: 20
+      - ReagentId: RedRum
+        Quantity: 50
   - type: SolutionRegeneration
     generated:
       reagents:
-      - ReagentId: DarkRedRum
-        Quantity: 20
+      - ReagentId: RedRum
+        Quantity: 50
+    duration: 30
   - type: Tag
     tags:
     - FitsHardsuit

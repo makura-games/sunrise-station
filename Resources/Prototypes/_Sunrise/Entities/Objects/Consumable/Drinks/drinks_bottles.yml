@@ -53,21 +53,3 @@
     currentLabel: reagent-name-redrum
   - type: Sprite
     sprite: Objects/Consumable/Drinks/rumbottle.rsi
-
-- type: entity
-  parent: [DrinkVisualsAllFilled, DrinkBottleGlassBaseFull]
-  id: DrinkDarkRedRumBottleFull
-  name: dark-red rum bottle
-  description: A bottle of dangerously strong dark red rum.
-  components:
-  - type: Solution
-    id: drink
-    solution:
-      reagents:
-      - ReagentId: DarkRedRum
-        Quantity: 50
-  - type: Label
-    currentLabel: reagent-name-dark-red-rum
-  - type: Sprite
-    scale: 1,0.8
-    sprite: Objects/Consumable/Drinks/rumbottle.rsi
