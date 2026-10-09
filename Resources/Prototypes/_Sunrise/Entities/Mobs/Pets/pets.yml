@@ -695,3 +695,109 @@
         1.0
       FollowRange: !type:Single
         1.5
+
+- type: entity
+  id: PetBreadDog
+  parent: [SimpleMobBase, BasePet]
+  name: bread dog
+  description: It's a bread. It's a dog. It's a... breaddog?
+  components:
+  - type: UserInterface
+    interfaces:
+      enum.PetControlUiKey.Key:
+        type: PetControlBoundUserInterface
+        interactionRange: -1
+  - type: HTN
+    rootTask:
+      task: PetCompound
+    blackboard:
+      IdleRange: !type:Single
+        2.0
+      FollowCloseRange: !type:Single
+        1.0
+      FollowRange: !type:Single
+        1.5
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    sprite: Mobs/Pets/breaddog.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: base
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: base
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 50
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: RotationVisuals
+    defaultRotation: 0
+    horizontalRotation: 0
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 5
+    baseSprintSpeed: 3
+  - type: BarkAccent
+  - type: Speech
+    speechSounds: Dog
+    speechVerb: SmallMob
+  - type: CombatMode
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Animals/dog_bark1.ogg
+    hidden: true
+    damage:
+      groups:
+        Brute: 1
+  - type: CanEscapeInventory
+    baseResistTime: 2
+  - type: Puller
+    needsHands: false
+  - type: Examiner
+  - type: DoAfter
+  - type: GhostRole
+    prob: 1
+    name: ghost-role-information-BreadDog-name
+    allowMovement: true
+    description: ghost-role-information-BreadDog-description
+    rules: ghost-role-information-nonantagonist-rules
+    raffle:
+      settings: short
+  - type: GhostTakeoverAvailable
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - bread
+  - type: SliceableFood
+    slice: FoodBreadSausageSlice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 45
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 5
+        - ReagentId: Protein
+          Quantity: 5
+  - type: Tag
+    tags:
+    - VimPilot
+    - DoorBumpOpener
+    - Bread
+    - Meat
