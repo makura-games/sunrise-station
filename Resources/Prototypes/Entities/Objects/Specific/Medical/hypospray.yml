@@ -347,6 +347,7 @@
     emptySpriteName: dermpen_empty
   - type: Solution
     solution:
+      maxVol: 15 # Sunrise-Edit
       reagents:
       - ReagentId: Dermaline
         Quantity: 10
@@ -417,13 +418,16 @@
     emptySpriteName: punctpen_empty
   - type: Solution
     solution:
+      maxVol: 17 # Sunrise-Edit
       reagents:
       - ReagentId: Puncturase
         Quantity: 12
       - ReagentId: TranexamicAcid
         Quantity: 5
-      - ReagentId: Nothing # Needed for visuals to work, idk what else to put here :P
-        Quantity: 3
+    # Sunrise-Start
+    #  - ReagentId: Nothing # Needed for visuals to work, idk what else to put here :P
+    #    Quantity: 3
+    # Sunrise-End
 
 - type: entity
   parent: ChemicalMedipen
@@ -454,6 +458,7 @@
     emptySpriteName: pyrapen_empty
   - type: Solution
     solution:
+      maxVol: 15 # Sunrise-Edit
       reagents:
       - ReagentId: Pyrazine
         Quantity: 5 # Sunrise edit
@@ -489,6 +494,7 @@
     emptySpriteName: dexpen_empty
   - type: Solution
     solution:
+      maxVol: 30 # Sunrise-Edit
       reagents:
       - ReagentId: Saline
         Quantity: 15 # Sunrise edit
