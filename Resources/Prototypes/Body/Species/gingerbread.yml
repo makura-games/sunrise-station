@@ -77,6 +77,10 @@
           - MobLayer
   - type: TypingIndicator
     proto: gingerbread
+  # Sunrise edit start
+  - type: Scent
+    personalScentProfile: SunriseGingerbread
+  # Sunrise edit end
 
 - type: entity
   parent: OrganBase
