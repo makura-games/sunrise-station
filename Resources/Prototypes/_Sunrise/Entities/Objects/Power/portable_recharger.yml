@@ -1,0 +1,18 @@
+- type: entity
+  id: SunrisePortableRechargerPowerCage
+  parent: PortableRecharger
+  name: portable cage recharger
+  description: A high-output portable recharger designed exclusively for power cages.
+  components:
+  - type: Charger
+    chargeRate: 50
+    whitelist:
+      tags:
+      - PowerCage
+  - type: ItemSlots
+    slots:
+      charger_slot:
+        whitelist:
+          components: []
+          tags:
+          - PowerCage

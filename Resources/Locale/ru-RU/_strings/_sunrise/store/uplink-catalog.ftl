@@ -190,6 +190,50 @@ uplink-xeno-artifact-throwing-auto-injector-name = Метательный авт
 uplink-xeno-artifact-throwing-auto-injector-desc = Метательно-складное устройство одноразового применения. При попадании в живое существо вонзается и вживляет частицы артефакта. Не действует на синтетиков.
 uplink-roboticist-nuclear-operative-id-card-name = Оперативная ID-карта робототехника
 uplink-roboticist-nuclear-operative-id-card-desc = ID-карта робототехника со штатными доступами профессии и дополнительным доступом Синдиката.
+
+## Mechs equipment
+uplink-mech-equipment-immolation-gun-name = пушка-испепелитель ZFI
+uplink-mech-equipment-immolation-gun-desc = Оружие для боевых мехов, стреляющее высокотемпературными лучами.
+uplink-mech-equipment-tesla-cannon-name = тесла-пушка P-X
+uplink-mech-equipment-tesla-cannon-desc = Навесная тесла-пушка, стреляющая медленными энергетическими шарами на основе экспериментальной технологии двигателя Теслы.
+uplink-mech-equipment-shotgun-name = LBX AC 10 "Залп"
+uplink-mech-equipment-shotgun-desc = Навесной боевой дробовик для меха. Просто, грубо и всё ещё крайне неприятно вблизи.
+uplink-mech-equipment-shotgun-auto-name = LBX AC 20 "Минотавр"
+uplink-mech-equipment-shotgun-auto-desc = Навесной автоматический дробовик, отправляющий в сторону цели три облака дроби за цикл стрельбы.
+uplink-mech-equipment-kord-name = пулемёт "Корд"
+uplink-mech-equipment-kord-desc = Тяжёлый пулемёт под патрон 12,7 x 108 мм с сильной отдачей и плотным продолжительным огнём.
+uplink-mech-equipment-shotgun-incendiary-name = карабин FNX-99 "Аид"
+uplink-mech-equipment-shotgun-incendiary-desc = Навесной карабин, заряженный зажигательными дробовыми снарядами.
+uplink-mech-equipment-ultra-rifle-name = AC-2 "Ультра"
+uplink-mech-equipment-ultra-rifle-desc = Навесная винтовка с очередями по три выстрела, использующая тяжёлые винтовочные патроны. Подходит для стабильного давления на средней дистанции.
+uplink-mech-equipment-ion-name = ионная тяжёлая пушка М-4
+uplink-mech-equipment-ion-desc = Навесная ионная пушка с высоким расходом энергии. Чрезвычайно эффективна против синтетиков, роботов и других мехов.
+uplink-mech-equipment-chain-sword-name = цепной меч экзокостюма
+uplink-mech-equipment-chain-sword-desc = Грубое навесное оружие ближнего боя для разрезания целей, которые подошли к меху слишком близко.
+uplink-mech-equipment-amlg90-name = AMLG-90
+uplink-mech-equipment-amlg90-desc = Навесной лазерный пулемёт, стреляющий короткими очередями.
+uplink-mech-equipment-vindictor-name = навесной миниган МГ-100 Виндикатор
+uplink-mech-equipment-vindictor-desc = Скорострельный миниган под стандартные винтовочные патроны. Создан для подавляющего огня.
+uplink-mech-equipment-chaingun-name = навесной чейнган
+uplink-mech-equipment-chaingun-desc = Очень скорострельное вращающееся орудие под миниганные патроны. Разброс растёт быстро, но плотность огня растёт ещё быстрее.
+uplink-mech-equipment-maxim-name = навесной Кардашёв-Максим
+uplink-mech-equipment-maxim-desc = Старый тяжёлый пулемёт, переделанный под установку на меха. Стреляет тяжёлыми винтовочными патронами в стабильном автоматическом режиме.
+uplink-mech-equipment-heavy-rifle-name = навесная тяжёлая винтовка
+uplink-mech-equipment-heavy-rifle-desc = Полуавтоматическая тяжёлая винтовка для мехов. Медленная, громкая и рассчитанная на пробивание крепких целей. Перед установкой на самой пушке можно выбрать бронебойные, антиматериальные или экспансивные патроны.
+uplink-mech-equipment-uvm31-name = UVM-31 "Дрейк"
+uplink-mech-equipment-uvm31-desc = Плазменный миниган Сайберсан, адаптированный для установки на меха. Высокая скорострельность и плотный конус огня.
+uplink-clothing-glasses-nvg-name = Модульные Очки
+uplink-clothing-glasses-nvg-desc = Качественно исполненные солнцезащитные очки, производства компании "Горлакс секьюрити". Использует модульные части для улучшения видимости в условиях низкой освещенности.
+
+## Jobs
+uplink-launcher-cream-pie-fake-name = Фальшивый пирогомёт
+uplink-launcher-cream-pie-fake-desc = Пирогомёт использующий микрореакторную батарею для генерации новых пирогов! Страхование от ЭМИ в цену не входит.
+uplink-heavy-cleanade-name = Граната глубокой очистки
+uplink-heavy-cleanade-desc = Внешне обычная чистящая граната, наполненная чрезвычайно едким чистящим химикатом, визуально идентичным обычной пене для чистки помещений. Лучше всего подходит для «уборки» переполненного мед-отдела.
+uplink-contortionist-jumpsuit-name = костюм конторсиониста
+uplink-contortionist-jumpsuit-desc = Выглядит как атмосферный комбинезон, но позволяет агенту пролезать через вентиляцию.
+uplink-cane-shotgun-name = трость-дробовик
+uplink-cane-shotgun-desc = Трость со спрятанным однозарядным дробовиком. Поставляется в коробке с четырьмя запасными опьяняющими патронами; выстрел вызывает сонливость, интоксикацию и галлюцинации, а также накладывает немоту.
 uplink-med-hypospray-name = Взломанный медицинский джетинъектор
 uplink-med-hypospray-desc = Стерильный инжектор для быстрого введения лекарств пациентам. До взлома содержал внутренний фильтр токсинов. Теперь не содержит.
 

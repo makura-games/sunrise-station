@@ -1,0 +1,364 @@
+# Снаряды из wiz-station-14 для сравнения баланса в игре.
+
+- type: entity
+  id: SunriseVanillaBulletAntiMateriel
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 75
+        Structural: 100
+    penetrationThreshold: 601
+    penetrationDamageTypeRequirement:
+    - Structural
+  - type: StaminaDamageOnCollide
+    damage: 60
+
+- type: entity
+  id: SunriseVanillaPelletShotgun
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 10
+        Structural: 8
+
+- type: entity
+  id: SunriseVanillaPelletShotgunSpread
+  parent: SunriseVanillaPelletShotgun
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: SunriseVanillaPelletShotgun
+    count: 6
+    spread: 15
+
+- type: entity
+  id: SunriseVanillaPelletShotgunSlug
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    state: slug
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 45
+        Structural: 30
+
+- type: entity
+  id: SunriseVanillaPelletShotgunBeanbag
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+    - state: bullet
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 10
+  - type: StaminaDamageOnCollide
+    damage: 40
+
+# Патроны с неизменёнными ванильными снарядами.
+
+- type: entity
+  id: SunriseVanillaCartridgePistol
+  parent: CartridgePistolSP
+  name: ancient cartridge (.35 auto)
+  description: An ancient cartridge from the era of the Wizards' Federation.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPistol
+
+- type: entity
+  id: SunriseVanillaCartridgeMagnum
+  parent: CartridgeMagnumSP
+  name: ancient cartridge (.45 magnum)
+  description: An ancient cartridge from the era of the Wizards' Federation.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: BulletMagnum
+
+- type: entity
+  id: SunriseVanillaCartridgeLightRifle
+  parent: CartridgeLightRifleSP
+  name: ancient cartridge (.30 rifle)
+  description: An ancient cartridge from the era of the Wizards' Federation.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: BulletLightRifle
+
+- type: entity
+  id: SunriseVanillaCartridgeRifle
+  parent: CartridgeRifleSP
+  name: ancient cartridge (5.56)
+  description: An ancient cartridge from the era of the Wizards' Federation.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRifle
+
+- type: entity
+  id: SunriseVanillaCartridgeCaselessRifle
+  parent: CartridgeCaselessRifle
+  name: ancient cartridge (.25 caseless)
+  description: An ancient cartridge from the era of the Wizards' Federation.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: BulletCaselessRifle
+
+- type: entity
+  id: SunriseVanillaCartridgeHeavyRifle
+  parent: CartridgeRifleHeavySP
+  name: ancient heavy rifle cartridge
+  description: An ancient cartridge from the era of the Wizards' Federation.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: BulletHeavyRifle
+
+- type: entity
+  id: SunriseVanillaCartridgeAntiMateriel
+  parent: CartridgeAntiMateriel
+  name: ancient cartridge (.60 anti-materiel)
+  description: An ancient cartridge from the era of the Wizards' Federation.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: SunriseVanillaBulletAntiMateriel
+
+- type: entity
+  id: SunriseVanillaShellShotgun
+  parent: ShellShotgun
+  name: ancient shell (buckshot)
+  description: An ancient shell from the era of the Wizards' Federation.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: SunriseVanillaPelletShotgunSpread
+
+- type: entity
+  id: SunriseVanillaShellShotgunSlug
+  parent: ShellShotgunSlug
+  name: ancient shell (slug)
+  description: An ancient shell from the era of the Wizards' Federation.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: SunriseVanillaPelletShotgunSlug
+
+- type: entity
+  id: SunriseVanillaShellShotgunBeanbag
+  parent: ShellShotgunBeanbag
+  name: ancient shell (beanbag)
+  description: An ancient shell from the era of the Wizards' Federation.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: SunriseVanillaPelletShotgunBeanbag
+
+# Магазины и спидлоудеры для отладочного сравнения.
+
+- type: entity
+  id: SunriseVanillaMagazinePistol
+  parent: MagazinePistolSP
+  name: ancient pistol magazine (.35 auto)
+  description: An ancient magazine from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: BallisticAmmoProvider
+    proto: SunriseVanillaCartridgePistol
+  - type: Sprite
+    color: "#713c1c"
+
+- type: entity
+  id: SunriseVanillaMagazinePistolSubMachineGun
+  parent: MagazinePistolSubMachineGunSP
+  name: ancient SMG magazine (.35 auto)
+  description: An ancient magazine from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: BallisticAmmoProvider
+    proto: SunriseVanillaCartridgePistol
+  - type: Sprite
+    color: "#713c1c"
+
+- type: entity
+  id: SunriseVanillaMagazineMagnum
+  parent: MagazineMagnum
+  name: ancient magazine (.45 magnum)
+  description: An ancient magazine from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: BallisticAmmoProvider
+    proto: SunriseVanillaCartridgeMagnum
+  - type: Sprite
+    color: "#713c1c"
+
+- type: entity
+  id: SunriseVanillaMagazineLightRifle
+  parent: MagazineLightRifleSP
+  name: ancient magazine (.30 rifle)
+  description: An ancient magazine from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: BallisticAmmoProvider
+    proto: SunriseVanillaCartridgeLightRifle
+  - type: Sprite
+    color: "#713c1c"
+
+- type: entity
+  id: SunriseVanillaMagazineRifle
+  parent: MagazineRifleSP
+  name: ancient magazine (5.56)
+  description: An ancient magazine from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: BallisticAmmoProvider
+    proto: SunriseVanillaCartridgeRifle
+  - type: Sprite
+    color: "#713c1c"
+
+- type: entity
+  id: SunriseVanillaMagazineCaselessRifle
+  parent: MagazinePistolCaselessRifle
+  name: ancient magazine (.25 caseless)
+  description: An ancient magazine from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: BallisticAmmoProvider
+    proto: SunriseVanillaCartridgeCaselessRifle
+  - type: Sprite
+    color: "#713c1c"
+
+- type: entity
+  id: SunriseVanillaMagazineHeavyRifle
+  parent: MagazineRifleHeavySP
+  name: ancient heavy rifle magazine
+  description: An ancient magazine from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: BallisticAmmoProvider
+    proto: SunriseVanillaCartridgeHeavyRifle
+  - type: Sprite
+    color: "#713c1c"
+
+- type: entity
+  id: SunriseVanillaMagazineAntiMateriel
+  parent: MagazineBauer127
+  name: ancient anti-materiel magazine
+  description: An ancient magazine from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: BallisticAmmoProvider
+    proto: SunriseVanillaCartridgeAntiMateriel
+  - type: Sprite
+    color: "#713c1c"
+
+- type: entity
+  id: SunriseVanillaMagazineShotgun
+  parent: MagazineShotgun
+  name: ancient shotgun magazine (buckshot)
+  description: An ancient magazine from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: BallisticAmmoProvider
+    proto: SunriseVanillaShellShotgun
+  - type: Sprite
+    color: "#713c1c"
+
+- type: entity
+  id: SunriseVanillaMagazineShotgunSlug
+  parent: MagazineShotgunSlug
+  name: ancient shotgun magazine (slug)
+  description: An ancient magazine from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: BallisticAmmoProvider
+    proto: SunriseVanillaShellShotgunSlug
+  - type: Sprite
+    color: "#713c1c"
+
+- type: entity
+  id: SunriseVanillaMagazineShotgunBeanbag
+  parent: MagazineShotgunBeanbag
+  name: ancient shotgun magazine (beanbag)
+  description: An ancient magazine from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: BallisticAmmoProvider
+    proto: SunriseVanillaShellShotgunBeanbag
+  - type: Sprite
+    color: "#713c1c"
+
+- type: entity
+  id: SunriseVanillaSpeedLoaderMagnum
+  parent: SpeedLoaderMagnumSP
+  name: ancient speedloader (.45 magnum)
+  description: An ancient speedloader from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: BallisticAmmoProvider
+    proto: SunriseVanillaCartridgeMagnum
+  - type: Sprite
+    color: "#713c1c"
+
+- type: entity
+  id: SunriseVanillaSpeedLoaderLightRifle
+  parent: SpeedLoaderLightRifle
+  name: ancient speedloader (.30 rifle)
+  description: An ancient speedloader from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: BallisticAmmoProvider
+    proto: SunriseVanillaCartridgeLightRifle
+  - type: Sprite
+    color: "#713c1c"
+
+- type: entity
+  id: SunriseVanillaSpeedLoaderShotgun
+  parent: SpeedLoaderShotgunBuck
+  name: ancient shotgun speedloader (buckshot)
+  description: An ancient speedloader from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: BallisticAmmoProvider
+    proto: SunriseVanillaShellShotgun
+  - type: Sprite
+    color: "#713c1c"
+
+- type: entity
+  id: SunriseVanillaSpeedLoaderShotgunSlug
+  parent: SpeedLoaderShotgunSlug
+  name: ancient shotgun speedloader (slug)
+  description: An ancient speedloader from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: BallisticAmmoProvider
+    proto: SunriseVanillaShellShotgunSlug
+  - type: Sprite
+    color: "#713c1c"
+
+- type: entity
+  id: SunriseVanillaSpeedLoaderShotgunBeanbag
+  parent: SpeedLoaderShotgunBeanbag
+  name: ancient shotgun speedloader (beanbag)
+  description: An ancient speedloader from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: BallisticAmmoProvider
+    proto: SunriseVanillaShellShotgunBeanbag
+  - type: Sprite
+    color: "#713c1c"

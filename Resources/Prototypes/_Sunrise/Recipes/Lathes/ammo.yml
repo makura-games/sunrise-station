@@ -1005,68 +1005,61 @@
 
 #Speedloaders .50 Shotgun
 - type: latheRecipe
-  parent: BaseEmptyAmmoRecipe
-  id: SpeedLoaderShotgunEmpty
-  result: SpeedLoaderShotgunEmpty
-  materials:
-    Steel: 30
-
-- type: latheRecipe
   parent: BaseAmmoRecipe
-  id: SpeedLoaderShellShotgun
-  result: SpeedLoaderShellShotgun
+  id: SpeedLoaderShotgunBuck
+  result: SpeedLoaderShotgunBuck
   materials:
-    Steel: 150
+    Steel: 85
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: SpeedLoaderShotgunBirdshot
   result: SpeedLoaderShotgunBirdshot
   materials:
-    Steel: 100
+    Steel: 60
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: SpeedLoaderShotgunBeanbag
   result: SpeedLoaderShotgunBeanbag
   materials:
-    Steel: 70
-    Plastic: 70
+    Steel: 40
+    Plastic: 40
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: SpeedLoaderShotgunSlug
   result: SpeedLoaderShotgunSlug
   materials:
-    Steel: 225
-    Plastic: 25
+    Steel: 130
+    Plastic: 15
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: SpeedLoaderShotgunFlechette
   result: SpeedLoaderShotgunFlechette
   materials:
-    Steel: 60
-    Plasteel: 200
-    Plastic: 25
+    Steel: 35
+    Plasteel: 115
+    Plastic: 15
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: SpeedLoaderShotgunIncendiary
   result: SpeedLoaderShotgunIncendiary
   materials:
-    Steel: 30
-    Plastic: 125
-    Plasma: 75
+    Steel: 20
+    Plastic: 70
+    Plasma: 45
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: SpeedLoaderShotgunUranium
   result: SpeedLoaderShotgunUranium
   materials:
-    Steel: 30
-    Plastic: 140
-    Uranium: 100
+    Steel: 20
+    Plastic: 80
+    Uranium: 60
 
 - type: latheRecipe
   id: MagazineMP7

@@ -376,7 +376,6 @@
     slots:
       gun_chamber:
         name: Chamber
-        startingItem: GrenadeFlash
         priority: 1
         whitelist:
           tags:

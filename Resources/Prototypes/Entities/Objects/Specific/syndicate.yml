@@ -151,7 +151,8 @@
       Telecrystal: 60
   - type: Tag
     tags:
-    - LoneOpsUplink #Sunrise added
+    - NukeOpsUplink # Sunrise-Edit - основной ассортимент ядерных оперативников
+    - LoneOpsUplink # Sunrise-Edit - особый ассортимент одиночного оперативника
 
 - type: entity
   parent: BaseUplinkRadio

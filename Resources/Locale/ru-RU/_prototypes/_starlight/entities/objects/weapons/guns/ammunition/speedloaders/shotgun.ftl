@@ -1,9 +1,6 @@
 ent-BaseSpeedLoaderShotgun = спидлоадер 12 калибра
     .desc = { ent-BaseItem.desc }
-ent-SpeedLoaderShotgunEmpty = спидлоадер 12 калибра
-    .desc = { ent-BaseSpeedLoaderShotgun.desc }
-    .suffix = Пустой
-ent-SpeedLoaderShellShotgun = спидлоадер дроби 12 калибра
+ent-SpeedLoaderShotgunBuck = спидлоадер дроби 12 калибра
     .desc = { ent-BaseSpeedLoaderShotgun.desc }
 ent-SpeedLoaderShotgunBirdshot = спидлоадер мелкой дроби 12 калибра
     .desc = { ent-BaseSpeedLoaderShotgun.desc }
