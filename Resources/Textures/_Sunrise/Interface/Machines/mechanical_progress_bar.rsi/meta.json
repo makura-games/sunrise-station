@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Created by .askal02",
+  "size": {
+    "x": 32,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "progress_0"
+    },
+    {
+      "name": "progress_10"
+    },
+    {
+      "name": "progress_20"
+    },
+    {
+      "name": "progress_30"
+    },
+    {
+      "name": "progress_40"
+    },
+    {
+      "name": "progress_50"
+    },
+    {
+      "name": "progress_60"
+    },
+    {
+      "name": "progress_70"
+    },
+    {
+      "name": "progress_80"
+    },
+    {
+      "name": "progress_90"
+    },
+    {
+      "name": "progress_100"
+    },
+    {
+      "name": "base"
+    },
+    {
+      "name": "production_interrupted",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    }
+  ]
+}
