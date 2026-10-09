@@ -1,22 +1,12 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-4.0",
-  "copyright": "discord: .askal02, Special for SUNRISE",
+  "license": "CC-BY-SA-3.0",
+  "copyright": "https://github.com/discordia-space/CEV-Eris/blob/2b969adc2dfd3e9621bf3597c5cbffeb3ac8c9f0/icons/obj/lighting.dmi, sparks by discord: .askal02",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
-    {
-      "name": "base",
-      "directions": 4,
-      "delays": [
-        [0.1, 0.1, 0.1, 0.1, 0.1],
-        [0.1, 0.1, 0.1, 0.1, 0.1],
-        [0.1, 0.1, 0.1, 0.1, 0.1],
-        [0.1, 0.1, 0.1, 0.1, 0.1]
-      ]
-    },
     {
       "name": "broken",
       "directions": 4
@@ -26,18 +16,16 @@
       "directions": 4
     },
     {
+      "name": "base",
+      "directions": 4
+    },
+    {
       "name": "empty",
       "directions": 4
     },
     {
       "name": "glow",
-      "directions": 4,
-      "delays": [
-        [0.1, 0.1, 0.1, 0.1, 0.1],
-        [0.1, 0.1, 0.1, 0.1, 0.1],
-        [0.1, 0.1, 0.1, 0.1, 0.1],
-        [0.1, 0.1, 0.1, 0.1, 0.1]
-      ]
+      "directions": 4
     },
     {
       "name": "spark-light1",
