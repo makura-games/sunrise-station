@@ -94,19 +94,6 @@
 
 - type: entity
   parent: CratePiratePrivateSecure
-  id: CratePirateMagazineBatteryLr60
-  name: LR-60 magazine crate
-  description: Contains six large laser magazines.
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: MagazineBatteryLr60
-          amount: 6
-
-- type: entity
-  parent: CratePiratePrivateSecure
   id: CratePirateMicroBombImplanter
   name: micro-bomb implanter crate
   description: Contains three micro-bomb implanters.

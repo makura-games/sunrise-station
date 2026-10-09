@@ -26,7 +26,6 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineBatteryLr30
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
@@ -39,7 +38,8 @@
     containers:
       gun_magazine: !type:ContainerSlot
   - type: Gun
-    fireRate: 4.5
+    projectileSpeed: 18
+    fireRate: 4
     selectedMode: FullAuto
     availableModes:
       - SemiAuto
@@ -74,7 +74,6 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineBatteryLr30 #MagazineBatteryLr60
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
@@ -93,6 +92,7 @@
     containers:
       gun_magazine: !type:ContainerSlot
   - type: Gun
+    projectileSpeed: 25
     fireRate: 6
     shotsPerBurst: 2
     burstFireRate: 10

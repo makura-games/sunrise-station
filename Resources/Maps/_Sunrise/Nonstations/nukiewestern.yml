@@ -7784,6 +7784,7 @@ entities:
       parent: 1172
     - type: Clothing
       inSlot: eyes
+      slots: EYES
       inSlotFlag: EYES
     - type: Physics
       canCollide: False
@@ -7924,6 +7925,7 @@ entities:
       parent: 1172
     - type: Clothing
       inSlot: head
+      slots: HEAD
       inSlotFlag: HEAD
     - type: Physics
       canCollide: False
@@ -8077,6 +8079,7 @@ entities:
       parent: 1172
     - type: Clothing
       inSlot: neck
+      slots: NECK
       inSlotFlag: NECK
     - type: Physics
       canCollide: False
@@ -8320,6 +8323,7 @@ entities:
       parent: 1172
     - type: Clothing
       inSlot: outerClothing
+      slots: OUTERCLOTHING
       inSlotFlag: OUTERCLOTHING
     - type: Physics
       canCollide: False

@@ -74,7 +74,6 @@
   recipeUnlocks:
   - WeaponLaserSvalinn
   - SunriseWeaponLaserCarbineBattery
-  - MagazineBatteryLr30
   technologyPrerequisites:
   - WeaponizedLaserManipulation
   radioChannels:
@@ -91,7 +90,6 @@
   cost: 12500
   recipeUnlocks:
   - WeaponLaserLNT620
-  - MagazineBatteryLr60
   technologyPrerequisites:
   - SunriseBatteryEnergyWeaponry
   radioChannels:
@@ -263,7 +261,7 @@
   id: AdvancedCombatEquipment
   name: research-technology-advanced-combat-equipment
   icon:
-    sprite: _Sunrise/Clothing/OuterClothing/Vests/web_armor_sec.rsi
+    sprite: _Sunrise/Clothing/OuterClothing/Vests/web_armor_blue.rsi
     state: icon
   discipline: Arsenal
   tier: 3
@@ -327,20 +325,6 @@
   - Security
 
 # Tier 4
-- type: technology
-  id: DecloneTechnology
-  name: research-technology-declone-technology
-  icon:
-    sprite: _Starlight/Objects/Weapons/Guns/Battery/decloner.rsi
-    state: icon
-  discipline: Arsenal
-  tier: 4
-  cost: 30000
-  recipeUnlocks:
-  - WeaponDecloner
-  radioChannels:
-  - Security
-
 - type: technology
   id: ScanGateTechnology
   name: research-technology-scan-gate

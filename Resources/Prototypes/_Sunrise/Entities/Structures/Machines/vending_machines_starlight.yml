@@ -119,6 +119,8 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
     access: [["Medical"], ["Brigmedic"]]
+  - type: PlayerCountDependentStock # No Scale SEC stock
+    coefficient: 0
 
 - type: entity
   parent: VendingMachineMedicalSecurity
@@ -166,3 +168,5 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
     access: [["Medical"], ["Security"], ["Brigmedic"]]
+  - type: PlayerCountDependentStock # No Scale SEC stock
+    coefficient: 0

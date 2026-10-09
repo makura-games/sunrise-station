@@ -398,8 +398,9 @@
   - Clothing
   completetime: 20
   materials:
-    Durathread: 400
-    Plastic: 400
+    Durathread: 600
+    Plastic: 600
+    Plasteel: 500
 
 - type: latheRecipe
   id: VestSecUpgradeStab
@@ -537,14 +538,3 @@
     Plastic: 500
     Gold: 500
     Uranium: 400
-
-- type: latheRecipe
-  parent: BaseWeaponRecipeLong
-  id: WeaponDecloner
-  result: WeaponDecloner
-  materials:
-    Steel: 2000
-    Glass: 1000
-    Plastic: 750
-    Gold: 600
-    Uranium: 600

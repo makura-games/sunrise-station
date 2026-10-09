@@ -65097,6 +65097,7 @@ entities:
     - type: Transform
       parent: 5
     - type: Clothing
+      slots: INNERCLOTHING
       sprite: Clothing/Uniforms/Jumpsuit/color.rsi
       clothingVisuals:
         jumpsuit:
