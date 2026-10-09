@@ -1836,7 +1836,7 @@
 - type: listing
   id: UplinkSyndicateBombEMP
   description: uplink-exploding-syndicate-empbomb-desc
-  productEntity: SyndicateBombEMP
+  productEntity: BoxSyndicateBombEMP # Sunrise-Edit
   cost:
     Telecrystal: 7
   categories:
@@ -1853,7 +1853,7 @@
 - type: listing
   id: UplinkSyndicateBombNukieEMP
   description: uplink-exploding-syndicate-empbomb-desc
-  productEntity: SyndicateBombEMP
+  productEntity: BoxSyndicateBombEMP # Sunrise-Edit
   cost:
     Telecrystal: 9
   categories:

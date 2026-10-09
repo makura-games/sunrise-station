@@ -156,7 +156,7 @@
   name: uplink-rigged-boxing-gloves-name
   description: uplink-rigged-boxing-gloves-desc
   icon: { sprite: Clothing/Hands/Gloves/Boxing/boxingblue.rsi, state: icon }
-  productEntity: ClothingHandsGlovesBoxingRiggedBlue # TODO Replace this with the random spawner when it's not bugged
+  productEntity: BoxBoxingGlovesRigged # Sunrise-Edit
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 8
@@ -518,7 +518,7 @@
   id: UplinkSyndicateBomb
   name: uplink-exploding-syndicate-bomb-name
   description: uplink-exploding-syndicate-bomb-desc
-  productEntity: SyndicateBomb
+  productEntity: BoxSyndicateBomb # Sunrise-Edit
   cost:
     Telecrystal: 11
   categories:
@@ -536,7 +536,7 @@
   id: UplinkSyndicateBombNukie
   name: uplink-exploding-syndicate-bomb-name
   description: uplink-exploding-syndicate-bomb-desc
-  productEntity: SyndicateBomb
+  productEntity: BoxSyndicateBomb # Sunrise-Edit
   cost:
     Telecrystal: 11
   categories:
@@ -893,7 +893,8 @@
   id: UplinkAgentIDCard
   name: uplink-agent-id-card-name
   description: uplink-agent-id-card-desc
-  productEntity: AgentIDCard
+  icon: { sprite: /Textures/Objects/Misc/id_cards.rsi, state: default } # Sunrise-Edit
+  productEntity: BoxAgentIDCard # Sunrise-Edit
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 1
@@ -967,7 +968,8 @@
   id: UplinkDecoyDisk
   name: uplink-decoy-disk-name
   description: uplink-decoy-disk-desc
-  productEntity: NukeDiskFake
+  icon: { sprite: Objects/Misc/nukedisk.rsi, state: icon } # Sunrise-Edit
+  productEntity: BoxNukeDiskFake # Sunrise-Edit
   cost:
     Telecrystal: 1
   categories:
@@ -1000,7 +1002,8 @@
   id: UplinkSyndicateBombFake
   name: uplink-exploding-syndicate-bomb-fake-name
   description: uplink-exploding-syndicate-bomb-fake-desc
-  productEntity: SyndicateBombFake
+  icon: { sprite: Structures/Machines/bomb.rsi, state: syndicate-bomb } # Sunrise-Edit
+  productEntity: BoxSyndicateBombFake # Sunrise-Edit
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 1
@@ -1019,7 +1022,7 @@
   id: UplinkSyndicateBombFakeNukie
   name: uplink-exploding-syndicate-bomb-fake-name
   description: uplink-exploding-syndicate-bomb-fake-desc
-  productEntity: SyndicateBombFake
+  productEntity: BoxSyndicateBombFake # Sunrise-Edit
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 1
@@ -1091,7 +1094,7 @@
   id: UplinkDisposableTurret
   name: uplink-disposable-turret-name
   description: uplink-disposable-turret-desc
-  productEntity: ToolboxElectricalTurretFilled
+  productEntity: BoxWeaponTurretSyndicateDisposable # Sunrise-Edit
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 2
@@ -1340,7 +1343,7 @@
   id: UplinkSingarityBeacon
   name: uplink-singularity-beacon-name
   description: uplink-singularity-beacon-desc
-  productEntity: SingularityBeacon
+  productEntity: BoxSingularityBeacon # Sunrise-Edit
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 4
@@ -1774,7 +1777,7 @@
   id: UplinkChameleon
   name: uplink-chameleon-name
   description: uplink-chameleon-desc
-  productEntity: ClothingBackpackChameleonFillAgent
+  productEntity: BoxBackpackChameleon # Sunrise-Edit
   icon: { sprite: /Textures/Clothing/Uniforms/Jumpsuit/rainbow.rsi, state: icon }
   discountCategory: usualDiscounts
   discountDownTo:
@@ -1788,7 +1791,8 @@
   id: UplinkClothingNoSlipsShoes
   name: uplink-clothing-no-slips-shoes-name
   description: uplink-clothing-no-slips-shoes-desc
-  productEntity: ClothingShoesChameleonNoSlips
+  icon: { sprite: /Textures/Clothing/Shoes/color.rsi, state: icon } # Sunrise-Edit
+  productEntity: BoxShoesChameleonNoSlips # Sunrise-Edit
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 1
@@ -1990,7 +1994,8 @@
   id: UplinkClothingConductingGloves
   name: uplink-clothing-conducting-gloves-name
   description: uplink-clothing-conducting-gloves-desc
-  productEntity: ClothingHandsGlovesConducting
+  icon: { sprite: Clothing/Hands/Gloves/Color/yellow.rsi, state: icon } # Sunrise-Edit
+  productEntity: BoxGlovesConducting # Sunrise-Edit
   cost:
     Telecrystal: 1
   categories:
@@ -2204,7 +2209,8 @@
   id: uplinkRevolverCapGunFake
   name: uplink-revolver-cap-gun-fake-name
   description: uplink-revolver-cap-gun-fake-desc
-  productEntity: RevolverCapGunFake
+  icon: { sprite: Objects/Fun/capgun.rsi, state: icon } # Sunrise-Edit
+  productEntity: BoxCapGunFake # Sunrise-Edit
   discountCategory: rareDiscounts
   discountDownTo:
     Telecrystal: 2
@@ -2222,7 +2228,8 @@
   id: UplinkClusterBananaPeel
   name: uplink-cluster-banana-peel-name
   description: uplink-cluster-banana-peel-desc
-  productEntity: ClusterBananaPeel
+  icon: { sprite: Objects/Specific/Hydroponics/banana.rsi, state: peel } # Sunrise-Edit
+  productEntity: BoxClusterBananaPeelExplosiveUnarmed # Sunrise-Edit
   discountCategory: rareDiscounts
   discountDownTo:
     Telecrystal: 3
@@ -2337,7 +2344,7 @@
   name: uplink-cane-blade-name
   description: uplink-cane-blade-desc
   icon: { sprite:  Objects/Weapons/Melee/cane.rsi, state: cane}
-  productEntity: CaneSheathFilled
+  productEntity: BoxCaneBlade # Sunrise-Edit
   discountCategory: rareDiscounts
   discountDownTo:
     Telecrystal: 2

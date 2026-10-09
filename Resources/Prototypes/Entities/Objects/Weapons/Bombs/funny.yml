@@ -117,8 +117,8 @@
   parent: BaseItem
   id: TrashBananaPeelExplosiveUnarmed
   name: banana
-  suffix: Unarmed
-  description: There's something unusual about this banana.
+  suffix: explosive, unarmed # Sunrise-Edit
+  description: Rich in potassium. # Sunrise-Edit
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/banana.rsi
