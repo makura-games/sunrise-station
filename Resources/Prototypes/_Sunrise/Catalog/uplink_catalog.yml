@@ -3470,6 +3470,20 @@
   - UplinkWeaponry
 
 - type: listing
+  id: UplinkWeaponSyndieLaserPistol
+  name: uplink-weapon-syndie-laser-pistol-name
+  description: uplink-weapon-syndie-laser-pistol-desc
+  productEntity: WeaponSyndieLaserPistolBiocode
+  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Battery/syndielaserpistol.rsi, state: icon }
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 5
+  cost:
+    Telecrystal: 8
+  categories:
+  - UplinkWeaponry
+
+- type: listing
   id: UplinkWeaponUzi
   name: uplink-uzi-name
   description: uplink-uzi-desc
