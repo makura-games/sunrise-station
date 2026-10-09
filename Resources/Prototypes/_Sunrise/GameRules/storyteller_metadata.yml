@@ -113,7 +113,7 @@
 - type: storytellerMetadata
   id: SnailMigration
   threatType: Neutral
-  threatCost: 5
+  threatCost: 10
   maxStress: 100
 
 - type: storytellerMetadata
@@ -309,6 +309,14 @@
   minStationStrength: 30
   maxStress: 75
 
+- type: storytellerMetadata
+  id: RadiationOutburst
+  threatType: MajorCalm
+  threatCost: 30
+  minStationStrength: 15
+  maxStress: 75
+
+
 # =============================================================================
 # 🟠 MAJOR CALM / SEVERE CRISES
 # =============================================================================
@@ -340,10 +348,24 @@
   minStationStrength: 15
   maxStress: 75
 
+- type: storytellerMetadata
+  id: RadiationStorm
+  threatType: MajorCalm
+  threatCost: 120
+  minStationStrength: 15
+  maxStress: 75
+
 
 # =============================================================================
 # 🟣 MINOR ANTAGONISTS / THREATS
 # =============================================================================
+
+- type: storytellerMetadata
+  id: HoloCarpSpawn
+  threatType: MajorCalm
+  threatCost: 45
+  minStationStrength: 15
+  maxStress: 100
 
 - type: storytellerMetadata
   id: KingRatMigration
