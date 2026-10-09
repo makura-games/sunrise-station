@@ -13,7 +13,7 @@
         path: /Audio/Weapons/ebladeon.ogg
       soundDeactivate:
         path: /Audio/Weapons/ebladeoff.ogg
-      deactivateUnequippedHand: true
+      deactivateUnequippedHand: false
       predictable: false
       soundFailToActivate:
         path: /Audio/Machines/button.ogg
@@ -60,7 +60,7 @@
       color: white
     - type: ItemTogglePointLight
     - type: Reflect
-      reflectProb: 0.75
+      reflectProb: 0.95
       reflects:
         - Energy
     - type: Blocking
@@ -94,3 +94,289 @@
     - type: Battery
       maxCharge: 1500
       startingCharge: 1500
+    - type: ExaminableDamage
+      messages: EnergyShieldMessages
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 999
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+        - trigger:
+            !type:DamageTrigger
+            damage: 800
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:PlaySoundBehavior
+              sound:
+                collection: GlassBreak
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                BrokenEnergyShield:
+                  min: 1
+                  max: 1
+
+- type: entity
+  parent: [BaseItem, BaseCentcommContraband ]
+  id: SunriseEnergyShieldERT
+  name: prototype energy shield
+  suffix: Self-Recharging, ERT
+  description: A high-cost prototype of a security energy shield issued to NanoTrasen emergency response teams. It recharges itself, but can still break after several active charging and discharging cycles.
+  components:
+    - type: ItemToggle
+      soundActivate:
+        path: /Audio/Weapons/ebladeon.ogg
+      soundDeactivate:
+        path: /Audio/Weapons/ebladeoff.ogg
+      deactivateUnequippedHand: false
+      predictable: false
+      soundFailToActivate:
+        path: /Audio/Machines/button.ogg
+        params:
+          variation: 0.250
+    - type: ItemToggleActiveSound
+      activeSound:
+        path: /Audio/Weapons/ebladehum.ogg
+    - type: ItemToggleSize
+      activatedSize: Ginormous
+    - type: ComponentToggler
+      components:
+      - type: DisarmMalus
+        malus: 0.6
+    - type: HeldSpeedModifier
+      walkModifier: 1
+      sprintModifier: 0.95
+    - type: Sprite
+      sprite: _Starlight/Objects/Weapons/Melee/cybershield.rsi
+      layers:
+        - state: ertshield-icon
+        - state: ertshield-on
+          color: "#FFFFFF"
+          visible: false
+          shader: unshaded
+          map: [ "shield" ]
+    - type: Item
+      size: Small
+      sprite: _Starlight/Objects/Weapons/Melee/cybershield.rsi
+      heldPrefix: cybershield
+      storedRotation: -90
+    - type: UseDelay
+      delay: 0.5
+    - type: ToggleableVisuals
+      spriteLayer: shield
+      inhandVisuals:
+        left:
+          - state: inhand-left-ertshield
+            shader: unshaded
+        right:
+          - state: inhand-right-ertshield
+            shader: unshaded
+    - type: PointLight
+      netsync: false
+      enabled: false
+      radius: 1.5
+      energy: 2
+      color: cyan
+    - type: ItemTogglePointLight
+    - type: Reflect
+      reflectProb: 0.15
+      reflects:
+        - Energy
+    - type: Blocking
+      passiveBlockModifier:
+        coefficients:
+          Blunt: 1.0
+          Slash: 0.9
+          Piercing: 0.85
+          Heat: 0.6
+      activeBlockModifier:
+        coefficients:
+          Blunt: 1.2
+          Slash: 0.85
+          Piercing: 0.5
+          Heat: 0.4
+        flatReductions:
+          Heat: 1
+          Piercing: 1
+    - type: Appearance
+    - type: Damageable
+    - type: Injurable
+      damageContainer: Shield
+    - type: StaticPrice
+      price: 1500
+    - type: BatterySelfRecharger
+      autoRechargeRate: 250
+      autoRechargePauseTime: 30
+    - type: EnergyShield
+      energyCostPerDamage: 15
+    - type: ExaminableBattery
+    - type: Battery
+      maxCharge: 1500
+      startingCharge: 1500
+    - type: ExaminableDamage
+      messages: EnergyShieldMessages
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 999
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+        - trigger:
+            !type:DamageTrigger
+            damage: 800
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:PlaySoundBehavior
+              sound:
+                collection: GlassBreak
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                SunriseBrokenEnergyShieldERT:
+                  min: 1
+                  max: 1
+
+- type: entity
+  parent: [BaseItem, BaseSecurityContraband ]
+  id: SunriseEnergyShieldSec
+  name: security energy shield
+  description: An experimental adaptation of security hard-light holoprojector technology. When folded, it can fit in a pocket.
+  components:
+    - type: ItemToggle
+      soundActivate:
+        path: /Audio/Weapons/ebladeon.ogg
+      soundDeactivate:
+        path: /Audio/Weapons/ebladeoff.ogg
+      deactivateUnequippedHand: false
+      predictable: false
+      soundFailToActivate:
+        path: /Audio/Machines/button.ogg
+        params:
+          variation: 0.250
+    - type: ItemToggleActiveSound
+      activeSound:
+        path: /Audio/Weapons/ebladehum.ogg
+    - type: ItemToggleSize
+      activatedSize: Ginormous
+    - type: ComponentToggler
+      components:
+      - type: DisarmMalus
+        malus: 0.6
+    - type: HeldSpeedModifier
+      walkModifier: 1
+      sprintModifier: 0.95
+    - type: Sprite
+      sprite: _Starlight/Objects/Weapons/Melee/cybershield.rsi
+      layers:
+        - state: shield-icon
+        - state: shield-on
+          color: "#FFFFFF"
+          visible: false
+          shader: unshaded
+          map: [ "shield" ]
+    - type: Item
+      size: Small
+      sprite: _Starlight/Objects/Weapons/Melee/cybershield.rsi
+      heldPrefix: cybershield
+      storedRotation: -90
+    - type: UseDelay
+      delay: 0.5
+    - type: ToggleableVisuals
+      spriteLayer: shield
+      inhandVisuals:
+        left:
+          - state: inhand-left-shield
+            shader: unshaded
+        right:
+          - state: inhand-right-shield
+            shader: unshaded
+    - type: PointLight
+      netsync: false
+      enabled: false
+      radius: 1.5
+      energy: 2
+      color: red
+    - type: ItemTogglePointLight
+    - type: Reflect
+      reflectProb: 0.15
+      reflects:
+        - Energy
+    - type: Blocking
+      passiveBlockModifier:
+        coefficients:
+          Blunt: 1.0
+          Slash: 0.9
+          Piercing: 0.85
+          Heat: 0.6
+      activeBlockModifier:
+        coefficients:
+          Blunt: 1.2
+          Slash: 0.85
+          Piercing: 0.5
+          Heat: 0.4
+        flatReductions:
+          Heat: 1
+          Piercing: 1
+    - type: Appearance
+    - type: Damageable
+    - type: Injurable
+      damageContainer: Shield
+    - type: ExaminableDamage
+      messages: EnergyShieldMessages
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 220
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+        - trigger:
+            !type:DamageTrigger
+            damage: 180
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:PlaySoundBehavior
+              sound:
+                collection: GlassBreak
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                SunriseBrokenEnergyShieldSec:
+                  min: 1
+                  max: 1
+    - type: StaticPrice
+      price: 250
+
+- type: entity
+  parent: BrokenEnergyShield
+  id: SunriseBrokenEnergyShieldERT
+  name: broken prototype eshield
+  description: The shield's hard-light projector has burned out and no longer functions.
+  components:
+    - type: Sprite
+      sprite: _Starlight/Objects/Weapons/Melee/cybershield.rsi
+      state: ertshield-icon
+    - type: Item
+      sprite: _Starlight/Objects/Weapons/Melee/cybershield.rsi
+      size: Small
+      heldPrefix: shield
+
+- type: entity
+  parent: BrokenEnergyShield
+  id: SunriseBrokenEnergyShieldSec
+  name: broken security eshield
+  description: The shield's hard-light projector has burned out and no longer functions.
+  components:
+    - type: Sprite
+      sprite: _Starlight/Objects/Weapons/Melee/cybershield.rsi
+      state: shield-icon
+    - type: Item
+      sprite: _Starlight/Objects/Weapons/Melee/cybershield.rsi
+      size: Small
+      heldPrefix: shield

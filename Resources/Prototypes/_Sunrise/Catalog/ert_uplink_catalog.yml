@@ -188,7 +188,7 @@
   productEntity: WeaponMachineGunMG42
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: mg42 }
   cost:
-    Bluecrystal: 38
+    Bluecrystal: 35
   categories:
     - NTAutoGun
   conditions:
@@ -197,7 +197,6 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - ERTGamma
       - ERTEpsilon
 
 - type: listing
@@ -855,14 +854,13 @@
   productEntity: MagazineMachineGunMG42
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: mag_mg342 }
   cost:
-    Crystallite: 4
+    Crystallite: 2
   categories:
   - NTAmmo
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - ERTGamma
       - ERTEpsilon
 
 - type: listing
@@ -870,14 +868,14 @@
   productEntity: RifleHeavyMagazineSP
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: 342sp }
   cost:
-    Crystallite: 8
+    Crystallite: 6
   categories:
   - NTAmmo
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - ERTGamma
+      - ERTEpsilon
 
 - type: listing
   id: ERTUplinkRifleHeavyMagazineFMJ
@@ -905,7 +903,6 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - ERTGamma
       - ERTEpsilon
 
 - type: listing
@@ -1644,12 +1641,12 @@
 
 # Экипировка:
 - type: listing
-  id: ERTUplinkTelescopicShield
-  name: ntuplink-equip-telescopicshield-name
-  productEntity: TelescopicShield
-  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: telescopic_shield }
+  id: ERTUplinkRiotShield
+  name: ntuplink-equip-riotshield-name
+  productEntity: RiotShield
+  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: riot_shield }
   cost:
-    Crystallite: 2
+    Crystallite: 1
   categories:
     - NTEquipment
   conditions:
@@ -1683,17 +1680,36 @@
     stock: 8
 
 - type: listing
-  id: ERTUplinkRiotShield
-  name: ntuplink-equip-riotshield-name
-  productEntity: RiotShield
-  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: riot_shield }
+  id: ERTUplinkTelescopicShield
+  name: ntuplink-equip-telescopicshield-name
+  productEntity: TelescopicShield
+  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: telescopic_shield }
   cost:
-    Crystallite: 1
+    Crystallite: 3
   categories:
     - NTEquipment
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 8
+
+- type: listing
+  id: ERTUplinkEnergyShieldERT
+  productEntity: SunriseEnergyShieldERT
+  icon:
+    sprite: _Starlight/Objects/Weapons/Melee/cybershield.rsi
+    state: ertshield-icon
+  cost:
+    Crystallite: 5
+  categories:
+    - NTEquipment
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 3
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - ERTEpsilon
+      - CBURN
 
 - type: listing
   id: ERTUplinkJetpackBlueFilled
@@ -1763,12 +1779,12 @@
   productEntity: JetpackVoidFilled
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: void_jet }
   cost:
-    Crystallite: 11
+    Crystallite: 6
   categories:
     - NTEquipment
   conditions:
   - !type:ListingLimitedStockCondition
-    stock: 4
+    stock: 1
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
@@ -1780,23 +1796,25 @@
   productEntity: ClothingEyesNVDSec
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: nvd }
   cost:
-    Crystallite: 8
+    Crystallite: 5
   categories:
     - NTEquipment
   conditions:
   - !type:ListingLimitedStockCondition
-    stock: 5
+    stock: 1
   - !type:StoreWhitelistCondition
     blacklist:
       tags:
+      - ERTRed
       - ERTGamma
+      - ERTEpsilon
 
 - type: listing
   id: ERTUplinkClothingEyesGlassesThermalSec
   productEntity: ClothingEyesGlassesThermalSec
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: thermals }
   cost:
-    Crystallite: 12
+    Crystallite: 10
   categories:
     - NTEquipment
   conditions:
@@ -1812,24 +1830,24 @@
   productEntity: EnergyDomeGeneratorBackpackNT
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: nanotrasen_back }
   cost:
-    Crystallite: 15
+    Crystallite: 10
   categories:
     - NTEquipment
   conditions:
   - !type:ListingLimitedStockCondition
-    stock: 2
+    stock: 1
 
 - type: listing
   id: ERTUplinkEnergyDomeGeneratorPersonalNT
   productEntity: EnergyDomeGeneratorPersonalNT
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: nanotrasen_belt }
   cost:
-    Crystallite: 20
+    Crystallite: 15
   categories:
     - NTEquipment
   conditions:
   - !type:ListingLimitedStockCondition
-    stock: 2
+    stock: 1
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
@@ -1916,7 +1934,7 @@
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: mech_ntgygax }
   productEntity: CrateCommandNTGygaxBundle
   cost:
-    Bluecrystal: 75
+    Bluecrystal: 100
   categories:
   - NTMechs
   conditions:
@@ -1934,7 +1952,7 @@
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: mech_marauder }
   productEntity: CrateCommandMarauderBundle
   cost:
-    Bluecrystal: 100
+    Bluecrystal: 120
   categories:
   - NTMechs
   conditions:
