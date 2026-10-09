@@ -1,5 +1,10 @@
 ﻿using Content.Shared.Throwing;
 using Robust.Client.Animations;
+// Sunrise added start
+using Content.Client._Sunrise.Animations;
+using System.Numerics;
+using Robust.Shared.Timing;
+// Sunrise added end
 using Robust.Client.GameObjects;
 using Robust.Shared.Animations;
 
@@ -10,8 +15,10 @@ namespace Content.Client.Throwing;
 /// </summary>
 public sealed partial class ThrownItemVisualizerSystem : EntitySystem
 {
-    [Dependency] private AnimationPlayerSystem _anim = default!;
-    [Dependency] private SpriteSystem _sprite = default!;
+    // Sunrise edit start - перевод на новую систему
+    [Dependency] private SpriteAnimationSystem _anim = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    // Sunrise edit end
 
     private const string AnimationKey = "thrown-item";
 
@@ -25,31 +32,32 @@ public sealed partial class ThrownItemVisualizerSystem : EntitySystem
 
     private void OnAutoHandleState(EntityUid uid, ThrownItemComponent component, ref AfterAutoHandleStateEvent args)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite) || !component.Animate)
+        // Sunrise edit start - время броска могло пройти, пока предмет был вне pvs
+        if (!component.Animate || component.LandTime == null || component.LandTime <= _timing.CurTime)
+        {
+            _anim.Stop(uid, AnimationKey);
             return;
+        }
 
-        var animationPlayer = EnsureComp<AnimationPlayerComponent>(uid);
-
-        if (_anim.HasRunningAnimation(uid, animationPlayer, AnimationKey))
+        if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;
+        // Sunrise edit end
 
         var anim = GetAnimation((uid, component, sprite));
         if (anim == null)
             return;
 
-        component.OriginalScale = sprite.Scale;
-        _anim.Play((uid, animationPlayer), anim, AnimationKey);
+        // Sunrise edit start - восстановление анимации по серверному времени
+        _anim.PlayScale(uid, anim, AnimationKey);
+        _anim.Seek(uid, AnimationKey, (float) (_timing.CurTime - component.ThrownTime!.Value).TotalSeconds);
+        // Sunrise edit end
     }
 
     private void OnShutdown(EntityUid uid, ThrownItemComponent component, ComponentShutdown args)
     {
-        if (!_anim.HasRunningAnimation(uid, AnimationKey))
-            return;
-
-        if (TryComp<SpriteComponent>(uid, out var sprite) && component.OriginalScale != null)
-            _sprite.SetScale((uid, sprite), component.OriginalScale.Value);
-
+        // Sunrise edit start - перевод на новую систему
         _anim.Stop(uid, AnimationKey);
+        // Sunrise edit end
     }
 
     private static Animation? GetAnimation(Entity<ThrownItemComponent, SpriteComponent> ent)
@@ -60,7 +68,7 @@ public sealed partial class ThrownItemVisualizerSystem : EntitySystem
         if (length <= TimeSpan.Zero)
             return null;
 
-        var scale = ent.Comp2.Scale;
+        var scale = Vector2.One; // Sunrise-Edit - множитель относительно базы
         var lenFloat = (float)length.TotalSeconds;
 
         // TODO use like actual easings here
