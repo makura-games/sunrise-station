@@ -1,0 +1,18 @@
+- type: entity
+  id: MindBearer
+  name: mind bearer
+  description: Mind-transfer device
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Entities/Objects/Devices/mind_bearer.rsi
+    layers:
+    - state: mind_digitizer
+  - type: Item
+    sprite: _Sunrise/Entities/Objects/Devices/mind_bearer.rsi
+    size: Tiny
+  - type: Appearance
+  - type: MindBearer
+    whitelistTargets:
+      components:
+      - BorgChassis
