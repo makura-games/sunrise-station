@@ -319,7 +319,7 @@
 
 - type: entity
   name: bluespace beaker
-  parent: [SolutionGinormous, BaseBeakerMetallic]
+  parent: [SolutionHuge, BaseBeakerMetallic] # Sunrise-Edit
   description: Powered by experimental bluespace technology.
   id: BluespaceBeaker
   components:

@@ -238,6 +238,7 @@
     - PinpointerSyndicateNuclear
     - HandheldHealthAnalyzer
     - CombatMedipen
+    - SyndicateBluespaceBeaker # Sunrise-Edit: стандартная мензурка для Corpsman
     - DeathAcidifierImplanter
 
 - type: chameleonOutfit

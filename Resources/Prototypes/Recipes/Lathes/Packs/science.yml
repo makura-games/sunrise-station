@@ -24,6 +24,7 @@
   - DeviceQuantumSpinInverter
   - DeviceDesynchronizer
   - ClothingBackpackHarmpack
+  - ArtificialBluecrystal # Sunrise-Add
 
 - type: latheRecipePack
   id: ScienceClothing

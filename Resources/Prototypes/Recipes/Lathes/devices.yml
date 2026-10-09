@@ -140,6 +140,7 @@
     Silver: 750
     Plasma: 1500
     Uranium: 150
+    Bluecrystal: 300 # Sunrise-Edit
 
 - type: latheRecipe
   parent: ClothingBackpackHolding
@@ -183,6 +184,7 @@
     Steel: 700
     Glass: 100
     Uranium: 100
+    Bluecrystal: 100 # Sunrise-Edit: для создания требуется один блюспейс-кристалл
 
 - type: latheRecipe
   id: DeviceDesynchronizer
@@ -192,6 +194,7 @@
     Steel: 700
     Glass: 100
     Uranium: 200
+    Bluecrystal: 100 # Sunrise-Edit: для создания требуется один блюспейс-кристалл
 
 - type: latheRecipe
   id: WeaponProtoKineticAccelerator

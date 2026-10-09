@@ -1,6 +1,7 @@
 using System.Numerics;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes; // Sunrise-Edit - прототипы эффектов телепортации
 
 namespace Content.Shared.Trigger.Components.Effects;
 
@@ -23,4 +24,12 @@ public sealed partial class ScramOnTriggerComponent : BaseXOnTriggerComponent
     /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier TeleportSound = new SoundPathSpecifier("/Audio/Effects/teleport_arrival.ogg");
+
+    // Sunrise-Start
+    /// <summary>
+    /// Необязательный эффект, создаваемый в точке назначения.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntProtoId? TeleportTargetEffect;
+    // Sunrise-End
 }

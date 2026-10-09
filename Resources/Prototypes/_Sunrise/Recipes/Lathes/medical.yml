@@ -7,6 +7,7 @@
     Plastic: 800
     Plasma: 300
     Silver: 100
+    Bluecrystal: 100
 
 - type: latheRecipe
   id: VialBluespace
@@ -18,6 +19,7 @@
     Plasma: 15
     Silver: 15
     Uranium: 30
+    Bluecrystal: 100
 
 - type: latheRecipe
   id: ImplanterExtractor
@@ -165,6 +167,7 @@
     Glass: 300
     Plasma: 100
     Silver: 50
+    Bluecrystal: 100
 
 - type: latheRecipe
   id: Ampula

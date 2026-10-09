@@ -43,6 +43,13 @@ public sealed partial class ScramOnTriggerSystem : XOnTriggerSystem<ScramOnTrigg
         if (targetCoords != null)
         {
             _transform.SetCoordinates(target, targetCoords.Value);
+
+            // Sunrise-Start
+            // Создаём эффект в конечной точке телепортации.
+            if (ent.Comp.TeleportTargetEffect is { } targetEffect)
+                Spawn(targetEffect, _transform.GetMapCoordinates(target));
+            // Sunrise-End
+
             args.Handled = true;
         }
     }

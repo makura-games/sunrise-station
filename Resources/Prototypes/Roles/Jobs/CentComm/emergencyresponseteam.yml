@@ -562,10 +562,10 @@
   storage:
     back:
     - Hypospray
-    - JugPunctTranex
-    - JugPyraDerma
-    - JugDexPlusSaline
-    - JugTrico # End of first line
+    - VialBluespacePunctTranex # Sunrise-Edit: замена кувшина на блюспейс-пробирку, пока оффы не починят свои приколы
+    - VialBluespacePyraDerma # Sunrise-Edit
+    - VialBluespaceDexPlusSaline # Sunrise-Edit
+    - VialBluespaceTrico # Sunrise-Edit
     - BeakerSmallArith
     - DefibrillatorCompact
     - MedkitCombatFilled
