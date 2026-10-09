@@ -217,12 +217,14 @@ namespace Content.Server.GameTicking
             if (ev.GameMap.IsGrid)
             {
                 var mapUid = _map.CreateMap(out mapId, runMapInit: options?.InitializeMaps ?? false);
-                if (!_loader.TryLoadGrid(mapId,
+                // Sunrise edit start - фикс перезаписи игровой карты на проде через UserData, подробнее в GameMapUseUserData сиваре
+                if (!TryLoadSunriseGameMapGrid(mapId,
                         ev.GameMap.MapPath,
                         out var grid,
                         ev.Options,
                         ev.Offset,
                         ev.Rotation))
+                // Sunrise edit end
                 {
                     throw new Exception($"Failed to load game-map grid {ev.GameMap.ID}");
                 }
@@ -233,7 +235,8 @@ namespace Content.Server.GameTicking
                 return g;
             }
 
-            if (!_loader.TryLoadMap(ev.GameMap.MapPath,
+            // Sunrise edit start - фикс перезаписи игровой карты на проде через UserData, подробнее в GameMapUseUserData сиваре
+            if (!TryLoadSunriseGameMap(ev.GameMap.MapPath,
                     out var map,
                     out var grids,
                     ev.Options,
@@ -242,6 +245,7 @@ namespace Content.Server.GameTicking
             {
                 throw new Exception($"Failed to load game map {ev.GameMap.ID}");
             }
+            // Sunrise edit end
 
             mapId = map.Value.Comp.MapId;
             _metaData.SetEntityName(map.Value.Owner, proto.MapName);
