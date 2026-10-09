@@ -18,15 +18,6 @@
 
 - type: latheRecipe
   parent: BaseXenoborgModulesRecipe
-  id: XenoborgModuleTurboLaserRecipe
-  result: XenoborgModuleTurboLaser
-  materials:
-    Glass: 1500
-    Steel: 1000
-    Plasma: 500
-
-- type: latheRecipe
-  parent: BaseXenoborgModulesRecipe
   id: XenoborgModuleTemperatureRecipe
   result: XenoborgModuleTemperature
   materials:
