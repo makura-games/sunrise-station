@@ -316,8 +316,6 @@
     containers:
       entity_storage: !type:AllSelector
         children:
-        - id: SpeedLoaderShellShotgun # Sunrise-Add
-          amount: 2
         - id: WeaponShotgunEnforcer
           amount: 2
         - id: BoxLethalshot
@@ -336,8 +334,6 @@
     containers:
       entity_storage: !type:AllSelector
         children:
-        - id: SpeedLoaderShellShotgun # Sunrise-Add
-          amount: 2
         - id: WeaponShotgunKammerer
           amount: 2
         - id: BoxLethalshot

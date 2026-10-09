@@ -79,10 +79,12 @@
   - BoxShellTranquilizer
   - BoxBeanbag
   - WeaponDisabler
+  - WeaponDisablerSMG
   # Sunrise-Start
   - WeaponMechCombatDisabler
   - MagazinePistolSubMachineGunTopMountedRubber
   - MagazinePistolSubMachineGunRubber
+  - SpeedLoaderShotgunBeanbag
   # Sunrise-End
   radioChannels: # Sunrise-Add
   - Security
@@ -114,27 +116,6 @@
   - MagazineRifleBoxUranium # Sunrise-Add
   - MagazineLightRifleBeltBoxUranium # Sunrise-Add
   - SpeedLoaderShotgunUranium # Sunrise-Add
-  radioChannels: # Sunrise-Add
-  - Security
-
-- type: technology
-  id: AdvancedRiotControl
-  name: research-technology-advanced-riot-control
-  icon:
-    sprite: Objects/Weapons/Melee/truncheon.rsi
-    state: icon
-  discipline: Arsenal
-  tier: 1
-  cost: 8000
-  recipeUnlocks:
-  - Truncheon
-  - TelescopicShield
-  - HoloprojectorSecurity
-  - WeaponDisablerSMG
-  - FlareGunSecurityUpgrade # Sunrise-Add
-  - VestSecUpgradePlate # Sunrise-Add
-  - VestSecUpgradeStab # Sunrise-Add
-  - VestSecUpgradeHeat # Sunrise-Add
   radioChannels: # Sunrise-Add
   - Security
 
@@ -171,6 +152,26 @@
   - ClothingBackpackElectropack
 
 # Tier 2
+
+- type: technology
+  id: AdvancedRiotControl
+  name: research-technology-advanced-riot-control
+  icon:
+    sprite: Objects/Weapons/Melee/truncheon.rsi
+    state: icon
+  discipline: Arsenal
+  tier: 2
+  cost: 8000
+  recipeUnlocks:
+  - Truncheon
+  - TelescopicShield
+  - HoloprojectorSecurity
+  - FlareGunSecurityUpgrade # Sunrise-Add
+  - VestSecUpgradePlate # Sunrise-Add
+  - VestSecUpgradeStab # Sunrise-Add
+  - VestSecUpgradeHeat # Sunrise-Add
+  radioChannels: # Sunrise-Add
+  - Security
 
 - type: technology
   id: ConcentratedLaserWeaponry

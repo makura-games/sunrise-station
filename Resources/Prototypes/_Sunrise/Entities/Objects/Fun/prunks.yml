@@ -384,7 +384,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeCap
         priority: 1
         whitelist:
           tags:
@@ -422,7 +421,6 @@
             - MagazineBoxL6Cap
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeCap
         priority: 1
         whitelist:
           tags:
