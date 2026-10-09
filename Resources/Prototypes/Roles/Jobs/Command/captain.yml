@@ -19,6 +19,11 @@
     - !type:DepartmentTimeRequirement
       department: Command
       time: 4h
+    # Sunrise edit start - ограничение расы для должности
+    - !type:SpeciesRequirement
+      species: [Vox]
+      inverted: true
+    # Sunrise edit end
   weight: 20
   startingGear: CaptainGear
   icon: "JobIconCaptain"
@@ -37,8 +42,6 @@
       - type: ArtifactFunnyTarget
       # Sunrise added end
       - type: CommandStaff
-  speciesBlacklist:
-  - Vox # Sunrise-Edit
 
 - type: startingGear
   id: CaptainGear
