@@ -251,26 +251,11 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
         PreRoundQueue.Set(0);
 
         // Sunrise added start - поддержка хранения логов в VictoriaLogs
-        var success = await _victoria.TrySendAdminLog(copy);
-
-        // Логи специально сохраняются в оба места, если ShouldUseDatabase = true
-        // Это нужно, чтобы иметь возможность писать логи в оба места для возможной сохранности, например на первое время интеграции
-        if (!_victoria.ShouldUseDatabase())
+        if (_victoria.Enabled)
         {
-            // Дальше смотрим - есть ли логи, которые не дошли до VictoriaLogs?
-            // Это стандартный случай, когда ShouldUseDatabase = false и все записалось успешно.
-
-            // Выходим из метода только в случае, когда все записалось успешно
-            if (success)
-            {
-                if (_metricsEnabled)
-                    LogsSent.Inc(copy.Count);
-
-                return;
-            }
-
-            // Если по какой-то причине какие-то логи не дошли до VictoriaLogs, то сохраняем их в базу данных(даже при ShouldUseDatabase = false!),
-            // чтобы они хотя бы не потерялись в принципе и их можно было мигрировать в будущем.
+            // Я специально не увеличиваю метрики вроде LogsSent, потому что это метрики чисто базы данных.
+            await _victoria.TrySendAdminLog(copy);
+            return;
         }
         // Sunrise added end
 
@@ -594,10 +579,8 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
         }
 
         // Sunrise edit start - поддержка VictoriaLogs
-        if (!_victoria.ShouldUseDatabase())
+        if (_victoria.Enabled)
         {
-            // Идея метода ShouldUseDatabase заключается в том, чтобы можно было использовать оба метода - Викторию и базу данных.
-            // Но если тут мы будем использовать оба метода, то в списке логи будут дублироваться. Поэтому нужно использовать только один из них.
             list = await _victoria.SelectLogs(filter);
             return list;
         }

@@ -16,19 +16,13 @@ public sealed partial class VictoriaLogs
     public const string AdminLogSourceType = "admin_log";
 
     /// <summary>
-    /// Отвечает за то, должны ли логи при включенной интеграции VictoriaLogs отправляться в базу данных.
-    /// Позволяет экстренно запустить fallback режим в случае обнаружения проблем с интеграцией.
-    /// </summary>
-    private bool _storeInDatabase;
-
-    /// <summary>
     /// Пытается отправить админ-логи в VictoriaLogs, сериализуя их для начала в DTO VictoriaAdminLogInsert.
     /// В случае провала одной из попыток пытается отправить снова, чтобы исключить короткие сетевые проблемы.
     /// </summary>
     /// <param name="logs">Список из админ логов типа <see cref="AdminLog"/> для отправки</param>
     public async Task<bool> TrySendAdminLog(List<AdminLog> logs)
     {
-        if (!_enabled || _disposed)
+        if (!Enabled || _disposed)
             return false;
 
         if (logs.Count == 0)
@@ -389,18 +383,5 @@ public sealed partial class VictoriaLogs
 
         // Йобана в рот, отбились.
         return query.ToString();
-    }
-
-    /// <summary>
-    /// Определяет, нужно ли сохранять/брать логи из базы данных.
-    /// Проверяет, включена ли поддержка VictoriaLogs и как настроена опция по хранению логов в базе данных.
-    /// </summary>
-    /// <returns>Должны ли логи сохраняться/браться из базы данных</returns>
-    public bool ShouldUseDatabase()
-    {
-        if (!_enabled)
-            return true;
-
-        return _storeInDatabase;
     }
 }

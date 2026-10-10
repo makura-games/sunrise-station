@@ -38,7 +38,7 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
     private HttpClient? _client;
 
     private bool _disposed;
-    private bool _enabled;
+    public bool Enabled { get; private set; }
     private string _baseAddress = string.Empty;
     private string _serverId = string.Empty;
 
@@ -51,7 +51,6 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
 
         _cfg.OnValueChanged(SunriseCCVars.VictoriaLogsEnabled, OnEnabledChanged, true);
         _cfg.OnValueChanged(SunriseCCVars.VictoriaLogsBaseAddress, OnBaseAddressChanged, true);
-        _cfg.OnValueChanged(SunriseCCVars.VictoriaLogsStoreInDatabase, OnDatabaseStoreChanged, true);
         _cfg.OnValueChanged(CVars.WatchdogKey, OnWatchdogKeyChanged, true);
     }
 
@@ -209,7 +208,7 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
             throw new ObjectDisposedException(nameof(VictoriaLogs));
 
         // Клиент не должен существовать/запрашиваться, если система выключена
-        DebugTools.Assert(_enabled || _client == null);
+        DebugTools.Assert(Enabled || _client == null);
         if (_client != null)
             return _client;
 
@@ -231,7 +230,7 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
     {
         DisposeAndNullifyClient();
         _disposed = true;
-        _enabled = false;
+        Enabled = false;
     }
 
     #endregion
@@ -243,7 +242,7 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
         if (_disposed)
             return;
 
-        _enabled = enabled;
+        Enabled = enabled;
 
         if (enabled && _client == null)
             GetOrCreateClient();
@@ -269,11 +268,6 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
         {
             _sawmill.Error($"Failed to create URI for select query with {selectUriString}");
         }
-    }
-
-    private void OnDatabaseStoreChanged(bool enabled)
-    {
-        _storeInDatabase = enabled;
     }
 
     private void OnWatchdogKeyChanged(string key)
