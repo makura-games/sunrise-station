@@ -189,26 +189,32 @@
 
 # Триггеры
 
-- type: weightedRandomXenoArchTrigger
+- type: entityTable
   id: SunriseDefaultTriggers
-  weights:
-    TriggerMusic: 1
-    TriggerHeat: 1
-    TriggerCold: 0.5
-    TriggerPlasma: 0.5
-    TriggerRadiation: 0.5
-    TriggerPressureHigh: 0.5
-    TriggerPressureLow: 1
-    TriggerExamine: 1
-    TriggerBruteDamage: 1
-    TriggerWrenching: 1
-    TriggerPrying: 1
-    TriggerScrewing: 1
-    TriggerPulsing: 1
-    #TriggerTimer: 1 # Sunrise edit  - Timer triggers disabled for artifacts. They are bugged
-    TriggerBlood: 1
-    TriggerThrow: 1
-    TriggerDeath: 1
-    TriggerMagnet: 1
-    # Дальше наши самописные
-    TriggerHealthAnalyzer: 1
+  table: !type:GroupSelector
+    conditionsForChildren:
+    - !type:ExcludeEntitiesFromContextCondition
+    children:
+    - id: TriggerMusic
+    - id: TriggerHeat
+    - id: TriggerCold
+      weight: 0.5
+    - id: TriggerPlasma
+      weight: 0.5
+    - id: TriggerRadiation
+      weight: 0.5
+    - id: TriggerPressureHigh
+      weight: 0.5
+    - id: TriggerPressureLow
+    - id: TriggerExamine
+    - id: TriggerBruteDamage
+    - id: TriggerWrenching
+    - id: TriggerPrying
+    - id: TriggerScrewing
+    - id: TriggerPulsing
+    # TriggerTimer отключён: триггер некорректно самопроизвольно активирует артефакты.
+    - id: TriggerBlood
+    - id: TriggerThrow
+    - id: TriggerDeath
+    - id: TriggerMagnet
+    - id: TriggerHealthAnalyzer

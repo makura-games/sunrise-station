@@ -54,7 +54,10 @@ namespace Content.MapRenderer.Painters
 
                 var x = (int) (tile.X + xOffset + customOffset.X);
                 var y = (int) (tile.Y + yOffset + customOffset.Y);
-                var image = images[path][tile.Tile.Variant].CloneAs<Rgba32>();
+                var tileImages = images[path];
+                // Sunrise-Edit - старые карты могут хранить вариант, удалённый из прототипа апстримом.
+                var variant = tile.Tile.Variant < tileImages.Count ? tile.Tile.Variant : 0;
+                var image = tileImages[variant].CloneAs<Rgba32>();
 
                 switch (tile.Tile.RotationMirroring % 4)
                 {

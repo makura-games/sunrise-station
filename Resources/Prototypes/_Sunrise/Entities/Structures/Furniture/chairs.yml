@@ -1,7 +1,7 @@
 - type: entity
   name: carp chair
   id: ChairCarp
-  parent: SeatBase
+  parent: [ SeatBase, StructureHealthFurniture ]
   description: A luxurious chair, the many purple scales reflect the light in a most pleasing manner.
   placement:
     mode: SnapgridCenter
@@ -15,11 +15,13 @@
     - type: Sprite
       sprite: _Sunrise/Structures/Furniture/chairs.rsi
       state: carp
+    - type: Damageable
+      damageModifierSet: SteelMod
 
 - type: entity
   name: comfy brown chair
   id: ComfyChairBrown
-  parent: ChairBase
+  parent: ComfyChair
   description: It looks comfy.
   components:
   - type: Sprite
@@ -43,12 +45,14 @@
 
 - type: entity
   name: barber's chair
-  parent: StoolBase
+  parent: [ StoolBase, StructureHealthFurniture ]
   id: ChairBarber
   components:
   - type: Sprite
     sprite: _Sunrise/Structures/Furniture/chairs.rsi
     state: barber
+  - type: Damageable
+    damageModifierSet: SteelMod
 
 - type: entity
   id: ChairFoldingArtifact
@@ -61,10 +65,12 @@
 
 - type: entity
   id: ChairAbductor
-  parent: ChairBase
+  parent: [ ChairBase, StructureHealthFurnitureStrong ]
   name: chair abductor
   description: cool chair for cool vulp
   components:
   - type: Sprite
     sprite: _Sunrise/Structures/Furniture/abductor_chair.rsi
     state: abductor_chair
+  - type: Damageable
+    damageModifierSet: PlastitaniumMod

@@ -8889,7 +8889,6 @@ entities:
             39114: -10,-15
             39124: -6,-19
             39150: 13,-26
-            39232: 2,-11
             41452: 12,-22
             41462: 12,-21
             41463: 12,-23
@@ -10717,7 +10716,6 @@ entities:
             39112: -10,-15
             39123: -6,-19
             39149: 13,-26
-            39231: -4,-11
             41449: 12,-22
             41459: 12,-21
             41460: 12,-23
@@ -19597,7 +19595,6 @@ entities:
             38588: -52,-1
             38757: -11,-38
             39229: -2,-11
-            39230: 2,-11
             39488: 18,-87
             39489: 18,-88
             39490: 18,-89
@@ -175742,11 +175739,6 @@ entities:
     - type: Transform
       pos: 5.5,2.5
       parent: 2
-    - type: ActivatableUI
-      requiresComplex: False
-      adminOnly: True
-    - type: Gateway
-      enabled: True
     - type: LinkedEntity
       linkedEntities:
       - 41245
@@ -175762,11 +175754,6 @@ entities:
     - type: Transform
       pos: 16.5,52.5
       parent: 39710
-    - type: ActivatableUI
-      requiresComplex: False
-      adminOnly: True
-    - type: Gateway
-      enabled: True
     - type: LinkedEntity
       linkedEntities:
       - 41217
@@ -290095,26 +290082,6 @@ entities:
     components:
     - type: Transform
       pos: 43.14814,-10.47203
-      parent: 2
-- proto: WehMedipen
-  entities:
-  - uid: 39230
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 19.001987,-20.377806
-      parent: 2
-  - uid: 39231
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 18.955112,-20.377806
-      parent: 2
-  - uid: 39232
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 19.080112,-20.377806
       parent: 2
 - proto: Welder
   entities:

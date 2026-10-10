@@ -149,7 +149,6 @@
     sound: /Audio/_Sunrise/Abductor/abductor.ogg
   components:
   - type: Abductor
-  - type: Muted
   - type: AbductorScientist
   - type: ActionGrant
     actions:
@@ -179,7 +178,6 @@
     sound: /Audio/_Sunrise/Abductor/abductor.ogg
   components:
   - type: Abductor
-  - type: Muted
   - type: AbductorAgent
   - type: Tag
     tags:
@@ -238,7 +236,6 @@
     - id: IonStorm # its calm like 90% of the time smh
     - id: KudzuGrowth
     - id: MassHallucinations
-    - id: MimicVendorRule
     - id: MouseMigration
     - id: PowerGridCheck
     - id: RandomSentience

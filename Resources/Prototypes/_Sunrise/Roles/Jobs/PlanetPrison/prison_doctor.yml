@@ -13,13 +13,11 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 7200 # 2 hrs
-  weight: 6
   alwaysUseSpawner: true
   startingGear: PrisonDoctorGear
   icon: "JobIconPrisonDoctor"
   overrideConsoleVisibility: false
   supervisors: job-supervisors-head-of-prison
-  displayWeight: 50
   alternativeTitles:
   - job-alt-title-prison-medic
   access:

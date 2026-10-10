@@ -10,7 +10,6 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 18000 # 5 hrs
-  weight: 9
   startingGear: HeadOfPrisonGear
   icon: "JobIconHeadOfPrison"
   overrideConsoleVisibility: false
@@ -20,7 +19,6 @@
   radioBold: true
   alternativeTitles:
   - job-alt-title-colony-warden
-  displayWeight: 100
   accessGroups:
     - AllAccess
   special:

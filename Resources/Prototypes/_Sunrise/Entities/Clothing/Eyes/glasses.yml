@@ -104,11 +104,10 @@
   - type: PowerCellDraw
     drawRate: 3.5
     useCharge: 20
-  - type: ComponentToggler
-    parent: true
-    components:
-      - type: NightVision
-        effect: EffectNightVisionSyndie
+  - type: NightVision
+    enabled: false
+    relayOverlay: true
+    lightingColor: '#D61B1B26'
 
 # region thermals
 - type: entity
@@ -273,5 +272,5 @@
     sprite: _Sunrise/Clothing/Eyes/Glasses/stuttering_glasses.rsi
   - type: Clothing
     sprite: _Sunrise/Clothing/Eyes/Glasses/stuttering_glasses.rsi
-  - type: AddAccentClothing
-    accent: StutteringAccent
+  - type: StutteringAccent
+    relayAccent: true

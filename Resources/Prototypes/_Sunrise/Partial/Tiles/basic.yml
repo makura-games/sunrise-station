@@ -1,0 +1,104 @@
+- type: !PartialOnly tile
+  id: FloorSteel
+  sprite: /Textures/_Sunrise/Tiles/steel.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorSteelMini
+  sprite: /Textures/_Sunrise/Tiles/steel_mini.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorSteelPavement
+  sprite: /Textures/_Sunrise/Tiles/steel_pavement.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorSteelPavementVertical
+  sprite: /Textures/_Sunrise/Tiles/steel_pavement_vertical.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorSteelHerringbone
+  sprite: /Textures/_Sunrise/Tiles/steel_herringbone.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorPlastic
+  sprite: /Textures/_Sunrise/Tiles/plastic.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorWhite
+  sprite: /Textures/_Sunrise/Tiles/white.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorWhiteMini
+  sprite: /Textures/_Sunrise/Tiles/white_mini.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorWhitePavement
+  sprite: /Textures/_Sunrise/Tiles/white_pavement.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorWhiteMono
+  sprite: /Textures/_Sunrise/Tiles/white_mono.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorWhitePavementVertical
+  sprite: /Textures/_Sunrise/Tiles/white_pavement_vertical.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorWhiteHerringbone
+  sprite: /Textures/_Sunrise/Tiles/white_herringbone.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorWhitePlastic
+  sprite: /Textures/_Sunrise/Tiles/white_plastic.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorDark
+  sprite: /Textures/_Sunrise/Tiles/dark.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorDarkMini
+  sprite: /Textures/_Sunrise/Tiles/dark_mini.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorDarkPavement
+  sprite: /Textures/_Sunrise/Tiles/dark_pavement.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorDarkMono
+  sprite: /Textures/_Sunrise/Tiles/dark_mono.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorDarkPavementVertical
+  sprite: /Textures/_Sunrise/Tiles/dark_pavement_vertical.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorDarkHerringbone
+  sprite: /Textures/_Sunrise/Tiles/dark_herringbone.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorDarkPlastic
+  sprite: /Textures/_Sunrise/Tiles/dark_plastic.png
+  variants: 4
+
+- type: !PartialOnly tile
+  id: FloorSteelDamaged
+  sprite: /Textures/_Sunrise/Tiles/steel_damaged.png
+  variants: 5

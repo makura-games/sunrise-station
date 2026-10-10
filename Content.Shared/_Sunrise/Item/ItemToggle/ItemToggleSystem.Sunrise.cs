@@ -11,11 +11,7 @@ public sealed partial class ItemToggleSystem
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private BiocodeSystem _biocode = default!;
 
-    private void InitializeSunriseItemToggle()
-    {
-        SubscribeLocalEvent<ItemToggleComponent, GotUnequippedHandEvent>(OnItemToggleHandUnequipped);
-    }
-
+    [SubscribeLocalEvent]
     private void OnItemToggleHandUnequipped(Entity<ItemToggleComponent> ent, ref GotUnequippedHandEvent args)
     {
         if (!ent.Comp.Activated || ent.Owner != args.Unequipped || !ent.Comp.DeactivateUnequippedHand)

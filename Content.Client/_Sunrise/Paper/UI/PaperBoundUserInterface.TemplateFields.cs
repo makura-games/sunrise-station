@@ -4,7 +4,7 @@ namespace Content.Client.Paper.UI;
 
 public sealed partial class PaperBoundUserInterface
 {
-    partial void InitializeTemplateFieldSupport()
+    private void InitializeTemplateFieldSupport()
     {
         if (_window == null)
             return;

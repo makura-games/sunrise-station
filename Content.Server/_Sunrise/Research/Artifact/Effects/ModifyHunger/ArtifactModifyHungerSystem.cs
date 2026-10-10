@@ -9,10 +9,10 @@ namespace Content.Server._Sunrise.Research.Artifact.Effects.ModifyHunger;
 public sealed partial class ArtifactModifyHungerSystem : BaseXAESystem<ArtifactModifyHungerComponent>
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private SatiationSystem _satiation = default!;
     [Dependency] private IRobustRandom _random = default!;
 
-    private readonly HashSet<Entity<HungerComponent>> _entities = [];
+    private readonly HashSet<Entity<SatiationComponent>> _entities = [];
 
     protected override void OnActivated(Entity<ArtifactModifyHungerComponent> ent, ref XenoArtifactNodeActivatedEvent args)
     {
@@ -22,7 +22,7 @@ public sealed partial class ArtifactModifyHungerSystem : BaseXAESystem<ArtifactM
         foreach (var uid in _entities)
         {
             var modifier = _random.NextFloat(ent.Comp.MinModifier, ent.Comp.MaxModifier);
-            _hunger.ModifyHunger(uid, modifier * ent.Comp.Amount);
+            _satiation.ModifyValue(uid, SatiationSystem.Hunger, modifier * ent.Comp.Amount);
         }
     }
 }

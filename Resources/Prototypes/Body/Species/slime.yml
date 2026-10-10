@@ -5,6 +5,7 @@
     enum.HumanoidVisualLayers.Hair:
       limit: 1
       required: false
+      weight: 1
     enum.HumanoidVisualLayers.FacialHair:
       limit: 1
       required: false
@@ -125,13 +126,11 @@
   - type: TypingIndicator
     proto: slime
   - type: Vocal
-    sounds:
-      Male: MaleSlime
-      Female: FemaleSlime
-      Unsexed: MaleSlime
+    emoteSounds: MaleSlime
   - type: Damageable
     damageModifierSet: Slime
   - type: PassiveDamage # Around 8 damage a minute healed
+    intervalHaltOnDamageTaken: 5s
     allowedStates:
     - Alive
     damage:
@@ -180,7 +179,6 @@
         messages: [ "slime-hurt-by-water-popup" ]
         probability: 0.25
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatSlimeJelly # Sunrise
       amount: 5
@@ -202,7 +200,7 @@
   # Sunrise end
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganSlimePerson
   abstract: true
   suffix: slime person
@@ -220,7 +218,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Mobs/Species/Slime/organs.rsi
+    sprite: _Sunrise/Mobs/Species/Slime/organs_base.rsi # Sunrise-Edit
 
 - type: entity
   parent: OrganSlimePerson

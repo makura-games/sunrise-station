@@ -105,6 +105,9 @@
     sprite: _Sunrise/FleshCult/FleshBodyMods/heavy_flesh_helmet.rsi
   - type: Clothing
     sprite: _Sunrise/FleshCult/FleshBodyMods/heavy_flesh_helmet.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000

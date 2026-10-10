@@ -11,30 +11,6 @@
     sprite: Objects/Materials/Sheets/glass.rsi
   - type: Damageable
     damageModifierSet: Glass
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-          params:
-            volume: -4
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          ShardGlass:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
 
 - type: entity
   parent: [SheetGlassBase, BaseQuickConstructionMaterial] # Sunrise-Edit
@@ -69,6 +45,22 @@
       reagents:
       - ReagentId: Silicon
         Quantity: 10
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlass:
+            min: 1
+            max: 1
   - type: QuickConstructable # Sunrise-Edit
     category: Glass
 
@@ -128,12 +120,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
         damage: 50
       behaviors:
       - !type:PlaySoundBehavior
@@ -146,8 +132,6 @@
           ShardGlassReinforced:
             min: 1
             max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: Solution
     solution:
       maxVol: 15
@@ -209,12 +193,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
         damage: 50
       behaviors:
       - !type:PlaySoundBehavior
@@ -227,8 +205,6 @@
           ShardGlassPlasma:
             min: 1
             max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: Solution
     solution:
       maxVol: 20
@@ -347,12 +323,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
         damage: 50
       behaviors:
       - !type:PlaySoundBehavior
@@ -365,8 +335,6 @@
           ShardGlassUranium:
             min: 1
             max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: Solution
     solution:
       maxVol: 20
@@ -484,12 +452,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
         damage: 50
       behaviors:
       - !type:PlaySoundBehavior
@@ -502,20 +464,14 @@
           ShardGlassClockwork:
             min: 1
             max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: Solution
     solution:
       maxVol: 20
       reagents:
       - ReagentId: Silicon
         Quantity: 10
-      - ReagentId: Zinc
-        Quantity: 3.3
-      - ReagentId: Copper
-        Quantity: 6.7
-  - type: QuickConstructable # Sunrise-Edit
-    category: ClockworkGlass
+      - ReagentId: Brass
+        Quantity: 10
 
 - type: entity
   parent: SheetClockworkGlass

@@ -120802,37 +120802,6 @@ entities:
       parent: 2
 - proto: DrinkOatMilkCarton
   entities:
-  - uid: 12
-    mapInit: true
-    paused: true
-    components:
-    - type: MetaData
-      desc: Бежевое и питательное удовольствие! Производимое на лучшей фембойской ферме в системе ОллИштер, целая планета посвященная добычи лучшего молочка от самых лучших генномодицицированных фембоев. Так же компания предагает аренду своих коровок любому желающему за круглую сумму.
-      name: О. Фембойское молочко
-    - type: Transform
-      parent: 11
-    - type: SolutionContainerManager
-      containers:
-      - drink
-    - type: MeleeWeapon
-      nextAttack: -198.7993359
-    - type: EmitSoundOnCollide
-      nextSound: -17262.5993359
-    - type: Physics
-      canCollide: False
-    - type: PressurizedSolution
-      sprayFizzinessThresholdRoll: 0.22002073
-    - type: ContainerContainer
-      containers:
-        solution@drink: !type:ContainerSlot
-          ent: 13
-    - type: Forensics
-      residues: []
-      dnas: []
-      fibers: []
-      fingerprints: []
-    - type: InsideEntityStorage
-      storage: 11
   - uid: 15664
     components:
     - type: Transform

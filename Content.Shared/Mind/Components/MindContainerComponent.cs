@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Mind.Components;
@@ -17,13 +16,13 @@ public sealed partial class MindContainerComponent : Component
     // Sunrise edit end
 
     /// <summary>
-    ///     The mind controlling this mob. Can be null.
+    /// The mind controlling this mob. Can be null.
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? Mind;
 
     /// <summary>
-    ///     True if we have a mind, false otherwise.
+    /// True if we have a mind, false otherwise.
     /// </summary>
     [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadOnly)]
     public bool HasMind;
@@ -36,10 +35,19 @@ public sealed partial class MindContainerComponent : Component
     public bool ShowExamineInfo { get; set; }
 
     /// <summary>
-    ///     Whether the mind will be put on a ghost after this component is shutdown.
+    /// Whether the mind will be put on a ghost after this component is shutdown.
     /// </summary>
     [DataField]
     public bool GhostOnShutdown = true;
+
+    /// <summary>
+    /// Last mind that had control of this mob. If null, it was never controlled by a player.
+    /// </summary>
+    /// <remarks>
+    /// Because minds only get networked to their owners, this field will be <see cref="EntityUid.Invalid"/> on client unless the last mind was the one belonging to the local client.
+    /// </remarks>
+    [DataField, AutoNetworkedField]
+    public EntityUid? LastMind;
 }
 
 /// <summary>

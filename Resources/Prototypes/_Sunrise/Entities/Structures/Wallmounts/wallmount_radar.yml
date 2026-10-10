@@ -113,7 +113,7 @@
   - type: WallMount
     arc: 180
   - type: Sprite
-    sprite: Structures/Machines/station_map.rsi
+    sprite: _Sunrise/Structures/Machines/station_map.rsi
     layers:
     - state: station_map_frame1
       map: [ "enum.ConstructionVisuals.Layer" ]

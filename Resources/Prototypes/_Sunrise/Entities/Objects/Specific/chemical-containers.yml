@@ -4,7 +4,7 @@
   parent: BaseChemistryBottleFilled
   components:
   - type: Label
-    currentLabel: reagent-name-polytrinic-acid
+    localizedLabel: reagent-name-polytrinic-acid
   - type: Solution
     id: drink
     solution:

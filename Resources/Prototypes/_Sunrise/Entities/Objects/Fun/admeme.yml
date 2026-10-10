@@ -1,7 +1,7 @@
 - type: entity
   name: magnetic spell of all-consuming cleanliness
   id: BagOfSummoningGarbageAdmeme
-  parent: TrashBagBlue
+  parent: TrashBagHolding
   suffix: Admeme
   components:
   - type: Storage

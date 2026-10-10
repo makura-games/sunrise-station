@@ -1,11 +1,12 @@
 using System.Linq;
 using Content.Server.DeviceNetwork.Systems;
-using Content.Server.CartridgeLoader;
 using Content.Server.PDA.Ringer;
 using Content.Server.Station.Systems;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.CartridgeLoader;
 using Content.Shared.DeviceNetwork;
+using Content.Shared.DeviceNetwork.Events;
+using DeviceNetworkPacketEvent = Content.Shared.DeviceNetwork.Events.DeviceNetworkPacketEvent<Content.Shared._Sunrise.DeviceNetwork.SunriseNetworkPayload>;
 using Content.Shared.DeviceNetwork.Components;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
@@ -25,7 +26,6 @@ public sealed partial class MessengerCartridgeSystem : EntitySystem
     [Dependency] private StationSystem _stationSystem = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private ILogManager _logManager = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SharedTransformSystem _transformSystem = default!;
     [Dependency] private RingerSystem _ringer = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
@@ -48,7 +48,8 @@ public sealed partial class MessengerCartridgeSystem : EntitySystem
         SubscribeLocalEvent<MessengerCartridgeComponent, CartridgeActivatedEvent>(OnCartridgeActivated);
         SubscribeLocalEvent<MessengerCartridgeComponent, CartridgeDeactivatedEvent>(OnCartridgeDeactivated);
         SubscribeLocalEvent<MessengerCartridgeComponent, CartridgeAddedEvent>(OnCartridgeAdded);
-        SubscribeLocalEvent<MessengerCartridgeComponent, CartridgeDeviceNetPacketEvent>(OnPacketReceived);
+        SubscribeLocalEvent<MessengerCartridgeComponent, CartridgeRemovedEvent>(OnCartridgeRemoved);
+        SubscribeLocalEvent<MessengerCartridgeComponent, CartridgeRelayedEvent<DeviceNetworkPacketEvent>>(OnPacketReceived);
         SubscribeLocalEvent<CartridgeLoaderComponent, BoundUIClosedEvent>(OnLoaderUiClosed);
     }
 
@@ -64,13 +65,10 @@ public sealed partial class MessengerCartridgeSystem : EntitySystem
             if (component.LoaderUid == null)
                 continue;
 
-            if (!TryComp<CartridgeLoaderComponent>(component.LoaderUid.Value, out var loader))
+            if (!HasComp<CartridgeLoaderComponent>(component.LoaderUid.Value))
                 continue;
 
-            var isActive = loader.ActiveProgram == uid;
-            var isBackground = loader.BackgroundPrograms.Contains(uid);
-
-            if (!isActive && !isBackground)
+            if (!TryComp<CartridgeComponent>(uid, out var cartridge) || cartridge.LoaderUid != component.LoaderUid)
                 continue;
 
             if (component.LastStatusCheck.HasValue)
@@ -104,7 +102,7 @@ public sealed partial class MessengerCartridgeSystem : EntitySystem
     /// </summary>
     private uint? GetMessengerFrequency()
     {
-        if (_prototypeManager.TryIndex<DeviceFrequencyPrototype>(MessengerFrequencyId, out var messengerFrequency))
+        if (ProtoMan.TryIndex<DeviceFrequencyPrototype>(MessengerFrequencyId, out var messengerFrequency))
         {
             return messengerFrequency.Frequency;
         }
@@ -121,7 +119,7 @@ public sealed partial class MessengerCartridgeSystem : EntitySystem
         var messengerFreq = GetMessengerFrequency();
         if (messengerFreq.HasValue)
         {
-            _deviceNetwork.SetTransmitFrequency(loaderUid, messengerFreq.Value, deviceNetwork);
+            _deviceNetwork.SetTransmitFrequency((loaderUid, deviceNetwork), messengerFreq.Value);
         }
     }
 
@@ -132,7 +130,7 @@ public sealed partial class MessengerCartridgeSystem : EntitySystem
     {
         if (originalFrequency.HasValue)
         {
-            _deviceNetwork.SetTransmitFrequency(loaderUid, originalFrequency.Value, deviceNetwork);
+            _deviceNetwork.SetTransmitFrequency((loaderUid, deviceNetwork), originalFrequency.Value);
         }
     }
 

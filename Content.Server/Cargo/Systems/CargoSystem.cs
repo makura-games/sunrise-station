@@ -16,7 +16,6 @@ using Content.Shared.Paper;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server.Cargo.Systems;
@@ -24,7 +23,6 @@ namespace Content.Server.Cargo.Systems;
 public sealed partial class CargoSystem : SharedCargoSystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private AccessReaderSystem _accessReaderSystem = default!;

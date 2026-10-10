@@ -1,6 +1,5 @@
-using Content.Server.Atmos.Components;
+using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
-using Content.Shared._Sunrise.NightVision.Components;
 using Content.Shared._Sunrise.CollectiveMind;
 using Content.Shared._Sunrise.FleshCult;
 using Content.Shared.Actions.Components;
@@ -13,9 +12,11 @@ using Content.Shared.Humanoid;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Overlays;
 using Content.Shared.Popups;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Tag;
 using Content.Shared.Temperature.Components;
 using Robust.Shared.Audio;
@@ -29,25 +30,21 @@ namespace Content.Server._Sunrise.FleshCult;
 /// </summary>
 public sealed partial class FleshCultSystem
 {
-    [ValidatePrototypeId<CollectiveMindPrototype>]
-    private const string FleshCollectiveMindProto = "FleshCult";
+    private static readonly ProtoId<CollectiveMindPrototype> FleshCollectiveMindProto = "FleshCult";
 
-    [ValidatePrototypeId<TagPrototype>]
-    private const string FleshTagProto = "Flesh";
+    private static readonly ProtoId<TagPrototype> FleshTagProto = "Flesh";
 
     private static readonly ProtoId<TagPrototype> FullBodyOuterTag = "FullBodyOuter";
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string DefaultFleshCultRule = "FleshCult";
+    private static readonly EntProtoId ToggleNightVisionAction = "ActionToggleNightVision";
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string CreateFleshHeartObjective = "CreateFleshHeartObjective";
+    private static readonly EntProtoId DefaultFleshCultRule = "FleshCult";
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string FleshCultSurviveObjective = "FleshCultSurviveObjective";
+    private static readonly EntProtoId CreateFleshHeartObjective = "CreateFleshHeartObjective";
 
-    [ValidatePrototypeId<CurrencyPrototype>]
-    private const string StolenMutationPointPrototype = "StolenMutationPoint";
+    private static readonly EntProtoId FleshCultSurviveObjective = "FleshCultSurviveObjective";
+
+    private static readonly ProtoId<CurrencyPrototype> StolenMutationPointPrototype = "StolenMutationPoint";
 
     private static readonly HumanoidVisualLayers[] FleshSpiderLegLayers =
     [
@@ -153,7 +150,12 @@ public sealed partial class FleshCultSystem
         InitializeActions(uid, component);
         InitializeStore(uid, component);
         InitializeAppearance(uid);
-        _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { StolenMutationPointPrototype, component.StartingMutationPoints } }, uid);
+        _store.TryAddCurrency(
+            new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>
+            {
+                { StolenMutationPointPrototype, component.StartingMutationPoints },
+            },
+            uid);
     }
 
     private void InitializeActions(EntityUid uid, FleshCultistComponent component)
@@ -246,7 +248,7 @@ public sealed partial class FleshCultSystem
         RemCompDeferred<InsulatedComponent>(uid);
         RemCompDeferred<FlashImmunityComponent>(uid);
         RemCompDeferred<RespiratorImmunityComponent>(uid);
-        RemCompDeferred<PressureImmunityComponent>(uid);
+        _statusEffects.TryRemoveStatusEffect(uid, PressureImmunityStatusEffectSystem.PressureImmunityEffect);
         RemCompDeferred<StoreComponent>(uid);
         RemCompDeferred<FleshAbilitiesComponent>(uid);
     }
@@ -277,7 +279,11 @@ public sealed partial class FleshCultSystem
 
     private void OnNightVisionMutation(EntityUid uid, FleshCultistComponent component, FleshCultistNightVisionMutationEvent args)
     {
-        EnsureComp<ToggleableNightVisionComponent>(uid);
+        var nightVision = EnsureComp<NightVisionComponent>(uid);
+        nightVision.Enabled = false;
+        nightVision.Action = ToggleNightVisionAction;
+        _action.AddAction(uid, ref nightVision.ActionEntity, nightVision.Action);
+        Dirty(uid, nightVision);
     }
 
     private void OnInsulatedImmunityMutation(EntityUid uid, FleshCultistComponent component, FleshCultistInsulatedImmunityMutationEvent args)
@@ -287,7 +293,7 @@ public sealed partial class FleshCultSystem
 
     private void OnPressureImmunityMutation(EntityUid uid, FleshCultistComponent component, FleshCultistPressureImmunityMutationEvent args)
     {
-        EnsureComp<PressureImmunityComponent>(uid);
+        _statusEffects.TrySetStatusEffectDuration(uid, PressureImmunityStatusEffectSystem.PressureImmunityEffect);
     }
 
     private void OnFlashImmunityMutation(EntityUid uid, FleshCultistComponent component, FleshCultistFlashImmunityMutationEvent args)

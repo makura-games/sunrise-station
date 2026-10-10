@@ -1,5 +1,5 @@
 - type: entity
-  parent: DefaultStationBeaconGhost
+  parent: BaseStationBeacon
   id: DefaultStationBeaconPirateCove
   suffix: Pirate Cove
   components:

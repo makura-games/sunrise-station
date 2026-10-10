@@ -7,14 +7,12 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 18000 #5 hrs
-  weight: 3
   startingGear: PrisonPilotGear
   icon: "JobIconPrisonPilot"
   setPreference: false
   overrideConsoleVisibility: false
   alwaysUseSpawner: true
   supervisors: job-supervisors-head-of-prison
-  displayWeight: 80
   access:
   - Security
   - Brig

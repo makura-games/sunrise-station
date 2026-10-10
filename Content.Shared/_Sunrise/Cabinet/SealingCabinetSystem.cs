@@ -26,7 +26,7 @@ public sealed partial class SealingCabinetSystem : EntitySystem
 
         args.Cancelled = true;
         if (args.User is {} user)
-            _popup.PopupClient(Loc.GetString(ent.Comp.SealedPopup, ("container", ent.Owner)), ent, user);
+            _popup.PopupEntity(Loc.GetString(ent.Comp.SealedPopup, ("container", ent.Owner)), ent, user);
     }
 
     private void OnEmagged(Entity<SealingCabinetComponent> ent, ref GotEmaggedEvent args)

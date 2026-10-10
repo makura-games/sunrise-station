@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared._Sunrise;
+using Content.Shared._Sunrise.Humanoid;
 using Content.Shared._Sunrise.Loadouts;
 using Content.Shared._Sunrise.Preferences;
 using Content.Shared._Sunrise.TTS;
@@ -17,7 +18,7 @@ namespace Content.Shared.Preferences;
 
 public sealed partial class HumanoidCharacterProfile
 {
-    public ProtoId<TTSVoicePrototype> Voice => SunriseProfile.Voice;
+    public ProtoId<TTSVoicePrototype> TtsVoice => SunriseProfile.TtsVoice;
 
     public ProtoId<BodyTypePrototype> BodyType => SunriseProfile.BodyType;
 
@@ -27,9 +28,9 @@ public sealed partial class HumanoidCharacterProfile
 
     public IReadOnlyDictionary<ProtoId<JobPrototype>, LocId> JobAlternativeTitles => SunriseProfile.JobAlternativeTitles;
 
-    public HumanoidCharacterProfile WithVoice(string voice)
+    public HumanoidCharacterProfile WithTtsVoice(string voice)
     {
-        return new(this) { SunriseProfile = SunriseProfile.WithVoice(voice) };
+        return new(this) { SunriseProfile = SunriseProfile.WithTtsVoice(voice) };
     }
 
     public HumanoidCharacterProfile WithBodyType(string bodyType)
@@ -65,6 +66,18 @@ public sealed partial class HumanoidCharacterProfile
     public static bool CanHaveVoice(TTSVoicePrototype voice, Sex sex)
     {
         return voice.RoundStart && (sex == Sex.Unsexed || voice.Sex == sex || voice.Sex == Sex.Unsexed);
+    }
+
+    private void AdaptSunriseRandomProfile(SpeciesPrototype species, IPrototypeManager prototype)
+    {
+        if (!SunriseHumanoidProfileDefaults.IsBodyTypeAllowed(species, SunriseProfile.BodyType, Sex, prototype))
+            SunriseProfile.BodyType = SunriseHumanoidProfileDefaults.GetDefaultBodyType(species, Sex, prototype);
+
+        SunriseProfile.Width = Math.Clamp(SunriseProfile.Width, species.MinWidth, species.MaxWidth);
+        SunriseProfile.Height = Math.Clamp(SunriseProfile.Height, species.MinHeight, species.MaxHeight);
+
+        if (!prototype.TryIndex(SunriseProfile.TtsVoice, out var voice) || !CanHaveVoice(voice, Sex))
+            SunriseProfile.TtsVoice = SunriseCharacterProfile.GetDefaultVoice(Sex);
     }
 
     private void EnsureSunriseProfileValid(

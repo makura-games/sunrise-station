@@ -1,5 +1,5 @@
 using System.Numerics;
-using Content.Shared.Projectiles; // Sunrise-Edit
+using Content.Shared.Projectiles;
 using Content.Shared._Starlight.Weapons.Gunnery;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;

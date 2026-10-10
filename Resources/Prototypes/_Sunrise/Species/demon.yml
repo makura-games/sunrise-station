@@ -9,6 +9,13 @@
   defaultSkinTone: "#34a223"
   dollPrototype: MobDemonDummy
   skinColoration: Hues
+  defaultSoundsBySex:
+  - MaleHuman
+  - FemaleHuman
+  - FemaleHuman
+  voices:
+  - MaleHuman
+  - FemaleHuman
   naming: firstlast
   buttScan:
     sprite: /Textures/_Sunrise/CopyMachine/butts_scans.rsi

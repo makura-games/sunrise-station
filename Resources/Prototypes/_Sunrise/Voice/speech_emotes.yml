@@ -293,7 +293,6 @@
   whitelist:
     components:
     - Vocal
-    - PressureImmunity
   blacklist:
     components:
     - BorgChassis
@@ -323,7 +322,6 @@
   whitelist:
     components:
     - Vocal
-    - PressureImmunity
   blacklist:
     components:
     - BorgChassis

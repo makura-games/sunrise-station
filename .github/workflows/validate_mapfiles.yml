@@ -6,18 +6,16 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
 
-# Sunrise added start - отменяем устаревший запуск этой проверки для того же PR
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
-# Sunrise added end
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'merge_group' }}
 
 jobs:
   yaml-schema-validation:
     name: YAML map schema validator
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4.2.2
+    - uses: actions/checkout@v7
     - name: Setup Submodule
       run: git submodule update --init
     - name: Pull engine updates

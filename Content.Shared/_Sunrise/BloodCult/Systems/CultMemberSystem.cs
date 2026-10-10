@@ -42,7 +42,7 @@ public sealed partial class CultMemberSystem : EntitySystem
             && !(_timing.CurTime > user.Comp.NextPopupTime))
             return;
 
-        _popup.PopupClient(Loc.GetString(reason, ("entity", target)), user, user);
+        _popup.PopupEntity(Loc.GetString(reason, ("entity", target)), user, user);
         user.Comp.NextPopupTime = _timing.CurTime + user.Comp.PopupCooldown;
         user.Comp.LastAttackedEntity = target;
     }

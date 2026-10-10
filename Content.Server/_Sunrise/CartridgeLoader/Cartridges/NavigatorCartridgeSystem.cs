@@ -33,8 +33,9 @@ public sealed partial class NavigatorCartridgeSystem : EntitySystem
     /// <summary>
     /// This gets called when the ui fragment needs to be updated for the first time after activating
     /// </summary>
-    private void OnUiReady(EntityUid uid, NavigatorCartridgeComponent component, CartridgeUiReadyEvent args)
+    private void OnUiReady(Entity<NavigatorCartridgeComponent> ent, ref CartridgeUiReadyEvent args)
     {
+        var (uid, component) = ent;
         UpdateUiState(uid, args.Loader, component);
     }
 

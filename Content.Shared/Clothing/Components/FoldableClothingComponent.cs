@@ -26,6 +26,12 @@ public sealed partial class FoldableClothingComponent : Component
     public string? FoldedEquippedPrefix;
 
     /// <summary>
+    /// Префикс экипировки, который нужно восстановить в разложенном состоянии.
+    /// </summary>
+    [DataField]
+    public string? UnfoldedEquippedPrefix;
+
+    /// <summary>
     /// What held prefix does this have while in folded form?
     /// </summary>
     [DataField]

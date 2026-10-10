@@ -123,9 +123,9 @@ public sealed partial class HumanoidProfileEditor
         _updatingSunriseControls = false;
     }
 
-    private void SetVoice(string voice)
+    private void SetTtsVoice(string voice)
     {
-        Profile = Profile?.WithVoice(voice);
+        Profile = Profile?.WithTtsVoice(voice);
         SetDirty();
     }
 

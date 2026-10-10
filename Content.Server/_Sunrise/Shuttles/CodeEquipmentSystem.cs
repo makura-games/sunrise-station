@@ -1,5 +1,4 @@
 using Content.Server._Sunrise.ImmortalGrid;
-using Content.Server.AlertLevel;
 using Content.Server.Chat.Systems;
 using Content.Server.Pinpointer;
 using Content.Server.Shuttles.Components;
@@ -9,6 +8,7 @@ using Content.Server.Station.Components;
 using Content.Server.Station.Events;
 using Content.Server.Station.Systems;
 using Content.Shared.Shuttles.Components;
+using Content.Shared.AlertLevel;
 using Content.Shared.Station.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.EntitySerialization;
@@ -20,7 +20,7 @@ namespace Content.Server._Sunrise.Shuttles;
 
 public sealed partial class CodeEquipmentSystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private MapLoaderSystem _loader = default!;
     [Dependency] private ShuttleSystem _shuttles = default!;
     [Dependency] private StationSystem _station = default!;
@@ -34,16 +34,16 @@ public sealed partial class CodeEquipmentSystem : EntitySystem
         SubscribeLocalEvent<CodeEquipmentShuttleComponent, FTLTagEvent>(OnFTLShuttleTag);
         SubscribeLocalEvent<CodeEquipmentShuttleComponent, FTLStartedEvent>(OnFTLStartedEvent);
         SubscribeLocalEvent<CodeEquipmentShuttleComponent, FTLCompletedEvent>(OnFTLCompletedEvent);
-        SubscribeLocalEvent<AlertLevelChangedEvent>(OnAlertLevelChanged);
+        SubscribeLocalEvent<SunriseAlertLevelChangedEvent>(OnAlertLevelChanged);
     }
 
     private void OnStationPostInit(EntityUid uid, CodeEquipmentComponent comp, StationPostInitEvent ev)
     {
-        var map = _mapManager.CreateMap();
+        _map.CreateMap(out var mapId);
         var loadOptions = new DeserializationOptions();
         loadOptions.InitializeMaps = true;
         loadOptions.StoreYamlUids = true;
-        _loader.TryLoadGrid(map, comp.ShuttlePath, out var shuttleUid, loadOptions);
+        _loader.TryLoadGrid(mapId, comp.ShuttlePath, out var shuttleUid, loadOptions);
         if (shuttleUid is null)
             return;
         comp.Shuttles.Add(shuttleUid.Value.Owner);
@@ -82,12 +82,12 @@ public sealed partial class CodeEquipmentSystem : EntitySystem
         }
     }
 
-    private void OnAlertLevelChanged(AlertLevelChangedEvent ev)
+    private void OnAlertLevelChanged(ref SunriseAlertLevelChangedEvent ev)
     {
         if (!TryComp<CodeEquipmentComponent>(ev.Station, out var comp))
             return;
 
-        if (ev.AlertLevel != comp.TargetCode)
+        if (!ev.AlertLevel.Id.Equals(comp.TargetCode, StringComparison.OrdinalIgnoreCase))
             return;
 
         if (!TryComp<StationDataComponent>(ev.Station, out var stationData))

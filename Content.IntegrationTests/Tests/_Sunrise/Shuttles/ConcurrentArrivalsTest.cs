@@ -193,7 +193,7 @@ public sealed class ConcurrentArrivalsTest
     {
         var server = pair.Server;
         var map = server.System<SharedMapSystem>();
-        var station = server.MapMan.CreateGridEntity(mapId);
+        var station = map.CreateGridEntity(mapId);
 
         // - is tile; + is dock
         // --+--+-- width 8 docks 2, 5
@@ -216,7 +216,7 @@ public sealed class ConcurrentArrivalsTest
         var server = pair.Server;
         var map = server.System<SharedMapSystem>();
         var transform = server.System<SharedTransformSystem>();
-        var shuttle = server.MapMan.CreateGridEntity(mapId);
+        var shuttle = map.CreateGridEntity(mapId);
 
         // shuttle preview
         // #####

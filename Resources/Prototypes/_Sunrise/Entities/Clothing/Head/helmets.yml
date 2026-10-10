@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingHeadHelmetBasic
+  parent: [HelmetSounds, ClothingHeadHelmetArmoredBase, BaseSecurityContraband]
   id: ClothingHeadHelmetSecurityMedic
   name: security medic helmet
   description: A standard issue combat helmet for security medics. Has decent tensile strength and armor. Keep your head down.
@@ -8,6 +8,9 @@
       sprite: _Sunrise/Clothing/Head/Helmets/security_medic.rsi
     - type: Clothing
       sprite: _Sunrise/Clothing/Head/Helmets/security_medic.rsi
+    - type: HideLayerClothing
+      layers:
+        Hair: HEAD
     - type: Tag
       tags:
       - Helmet
@@ -105,8 +108,7 @@
     highPressureMultiplier: 0.6
     lowPressureMultiplier: 1000
   - type: TemperatureProtection
-    heatingCoefficient: 0.05
-    coolingCoefficient: 0.2
+    coefficient: 0.05
   - type: IngestionBlocker
   - type: Clothing
     equipSound: /Audio/Mecha/mechmove03.ogg

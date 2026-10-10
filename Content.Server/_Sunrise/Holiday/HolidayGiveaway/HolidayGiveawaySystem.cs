@@ -13,7 +13,6 @@ namespace Content.Server._Sunrise.Holiday.HolidayGiveaway;
 /// </summary>
 public sealed partial class HolidayGiveawaySystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IConfigurationManager _configuration = default!;
     [Dependency] private HolidaySystem _holiday = default!;
     [Dependency] private HandsSystem _hands = default!;
@@ -73,7 +72,7 @@ public sealed partial class HolidayGiveawaySystem : EntitySystem
     {
         _activeGiveaways.Clear();
 
-        foreach (var giveaway in _prototype.EnumeratePrototypes<HolidayGiveawayItemPrototype>())
+        foreach (var giveaway in ProtoMan.EnumeratePrototypes<HolidayGiveawayItemPrototype>())
         {
             if (!_holiday.IsCurrentlyHoliday(giveaway.Holiday))
                 continue;
@@ -98,7 +97,7 @@ public sealed partial class HolidayGiveawaySystem : EntitySystem
 
         foreach (var giveawayProto in _activeGiveaways)
         {
-            var giveAway = _prototype.Index(giveawayProto);
+            var giveAway = ProtoMan.Index(giveawayProto);
             var present = SpawnNextToOrDrop(giveAway.Prototype, ev.Mob);
 
             _hands.PickupOrDrop(ev.Mob, present);

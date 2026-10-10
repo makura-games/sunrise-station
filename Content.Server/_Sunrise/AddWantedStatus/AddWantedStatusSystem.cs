@@ -2,7 +2,7 @@ using Content.Server.Actions;
 using Content.Server.CriminalRecords.Systems;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Station.Systems;
-using Content.Server.StationRecords.Systems;
+using Content.Shared.StationRecords.Systems;
 using Content.Server._Sunrise.Messenger;
 using Content.Shared._Sunrise.AddWantedStatus;
 using Content.Shared.Actions;

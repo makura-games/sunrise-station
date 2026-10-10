@@ -232,6 +232,28 @@ class TestShardFilterTests(unittest.TestCase):
         self.assertIn(("Content.Tests.Fixture", "Slow", tests[0]), groups)
         self.assertEqual(seconds["Content.Tests.Fixture", "Slow", tests[0]], 10.0)
 
+    def test_treats_bare_parameterized_method_timing_as_aggregate(self):
+        method = "Content.Tests.Fixture.MapLoad"
+        tests = [f"{method}(/Maps/map_{index}.yml)" for index in range(4)]
+        timings = {
+            **TIMINGS,
+            "methodCaseSeconds": {method: 12.0},
+            "caseSeconds": {method: 12.0},
+        }
+
+        groups, seconds = SHARD_FILTER.extract_groups(tests, timings, 2)
+
+        self.assertEqual(sum(seconds.values()), 12.0)
+        self.assertEqual(
+            seconds,
+            {
+                ("Content.Tests.Fixture", "MapLoad", tests[0]): 3.0,
+                ("Content.Tests.Fixture", "MapLoad", tests[1]): 3.0,
+                ("Content.Tests.Fixture", "MapLoad", tests[2]): 3.0,
+                ("Content.Tests.Fixture", "MapLoad", tests[3]): 3.0,
+            },
+        )
+
     def test_parses_trx_duration(self):
         self.assertEqual(
             SHARD_FILTER._parse_trx_duration("00:01:02.5000000"),

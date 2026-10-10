@@ -36,7 +36,7 @@ public sealed class PlantAnalyzerTrayData(float waterLevel, float nutritionLevel
 /// Which is most of the "Tolerances" reagion plus the gases it may need.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class PlantAnalyzerTolerancesData(float nutrientConsumption, float waterConsumption, float idealHeat, float heatTolerance, float idealLight, float lightTolerance, float toxinsTolerance, float lowPressureTolerance, float highPressureTolerance, float pestTolerance, float weedTolerance, List<Gas> consumeGasses)
+public sealed class PlantAnalyzerTolerancesData(float nutrientConsumption, float waterConsumption, float lowHeatTolerance, float highHeatTolerance, float toxinsTolerance, float lowPressureTolerance, float highPressureTolerance, float pestTolerance, float weedTolerance, List<Gas> consumeGasses)
 {
     public float WaterConsumption = waterConsumption;
     public float NutrientConsumption = nutrientConsumption;
@@ -45,10 +45,8 @@ public sealed class PlantAnalyzerTolerancesData(float nutrientConsumption, float
     public float WeedTolerance = weedTolerance;
     public float IdealPressure = (lowPressureTolerance + highPressureTolerance) / 2;
     public float PressureTolerance = (lowPressureTolerance + highPressureTolerance) / 2 - lowPressureTolerance;
-    public float IdealHeat = idealHeat;
-    public float HeatTolerance = heatTolerance;
-    public float IdealLight = idealLight;
-    public float LightTolerance = lightTolerance;
+    public float IdealHeat = (lowHeatTolerance + highHeatTolerance) / 2;
+    public float HeatTolerance = (highHeatTolerance - lowHeatTolerance) / 2;
     public List<Gas> ConsumeGasses = consumeGasses;
 }
 

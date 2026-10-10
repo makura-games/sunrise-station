@@ -11,13 +11,12 @@ namespace Content.Server.Chemistry.EntitySystems
 {
     public sealed partial class ChemMasterSystem
     {
-        [ValidatePrototypeId<EntityPrototype>]
-        private const string PatchPrototypeId = "Patch";
+        private static readonly EntProtoId PatchPrototypeId = "Patch";
 
         private void OnCreatePatchesMessage(Entity<ChemMasterComponent> chemMaster, ref ChemMasterCreatePatchesMessage message)
         {
             var user = message.Actor;
-            var maybeContainer = _itemSlotsSystem.GetItemOrNull(chemMaster, SharedChemMaster.OutputSlotName);
+            var maybeContainer = _itemSlotsSystem.GetItemOrNull((chemMaster.Owner, null), SharedChemMaster.OutputSlotName);
             if (maybeContainer is not { Valid: true } container || !TryComp(container, out StorageComponent? storage))
                 return; // output can't fit patches
 

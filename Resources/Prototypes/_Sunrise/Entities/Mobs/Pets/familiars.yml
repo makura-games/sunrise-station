@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ SimpleMobBase, MobCombat ]
+  parent: [ SimpleMobBase, MobCombat, BaseSlicingRefinable ]
   id: MobBook
   name: Foliant
   description: A living book-mimic guarding library knowledge.
@@ -31,8 +31,8 @@
         Base: dogbook
       Dead:
         Base: dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeat
       amount: 2
     - id: BookHowToCookForFortySpaceman  # Типо разделали, и получите гайд на шефа :D

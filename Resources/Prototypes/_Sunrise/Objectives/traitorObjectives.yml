@@ -1,3 +1,25 @@
+# Kill objectives
+- type: entity
+  parent: [BaseTraitorObjective, BaseKillObjective]
+  id: KillRandomAntagObjective
+  description: Eliminate another antagonist by any means necessary.
+  components:
+  - type: Objective
+    difficulty: 1.0
+    unique: true
+  - type: TargetObjective
+    title: objective-condition-kill-antag-title
+  - type: PickRandomPerson
+    conditions:
+    - !type:AntagonistCondition
+    - !type:ObjectiveTargetCondition
+      inverted: true
+      whitelist:
+        components:
+        - KillPersonCondition
+  - type: KillPersonCondition
+    requireDead: true
+
 # Departmental abstracts
 - type: entity
   abstract: true

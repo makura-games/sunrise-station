@@ -458,14 +458,6 @@
     Durathread: 200
     Plastic: 250
 
-- type: latheRecipe
-  id: BolaSecurity
-  result: BolaSecurity
-  completetime: 2
-  materials:
-    Plastic: 300
-    Steel: 300
-
 # Milira equipment
 
 - type: latheRecipe

@@ -2,18 +2,17 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared._Sunrise.FleshCult
 {
     [RegisterComponent, NetworkedComponent]
     public sealed partial class FleshHuggerComponent : Component
     {
-        [DataField("actionJump", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-        public string ActionFleshHuggerJumpId = "FleshHuggerJump";
+        [DataField("actionJump")]
+        public EntProtoId ActionFleshHuggerJumpId = "FleshHuggerJump";
 
-        [DataField("actionGetOff", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-        public string ActionFleshHuggerGetOffId = "FleshHuggerGetOff";
+        [DataField("actionGetOff")]
+        public EntProtoId ActionFleshHuggerGetOffId = "FleshHuggerGetOff";
 
         [DataField("paralyzeTime"), ViewVariables(VVAccess.ReadWrite)]
         public float ParalyzeTime = 3f;

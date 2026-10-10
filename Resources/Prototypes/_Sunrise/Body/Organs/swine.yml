@@ -3,8 +3,7 @@
   parent: OrganAnimalStomach
   categories: [ HideSpawnMenu ]
   components:
-    - type: SolutionManager
-      solutions:
-      - SolutionSunriseStomachLarge
-      - SolutionSunriseRawProteinFood
-    - type: Stomach
+  - type: SolutionManager
+    solutions:
+    - SolutionSunriseStomachLarge
+  - type: Stomach

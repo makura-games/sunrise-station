@@ -19,7 +19,7 @@ public sealed partial class MoodComponent : Component
     public MoodThreshold LastThreshold;
 
     [ViewVariables(VVAccess.ReadOnly)]
-    public readonly Dictionary<string, string> CategorisedEffects = new();
+    public readonly Dictionary<ProtoId<MoodCategoryPrototype>, string> CategorisedEffects = new();
 
     [ViewVariables(VVAccess.ReadOnly)]
     public readonly Dictionary<string, float> UncategorisedEffects = new();

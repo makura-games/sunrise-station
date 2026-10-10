@@ -16,7 +16,6 @@
   startingGear: SeniorPhysicianGear
   icon: "JobIconSeniorPhysician"
   supervisors: job-supervisors-cmo
-  displayWeight: 35
   alternativeTitles:
   - job-alt-title-attending-physician
   access:

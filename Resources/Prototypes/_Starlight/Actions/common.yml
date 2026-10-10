@@ -5,10 +5,11 @@
   components:
   - type: Action
     useDelay: 1
-    icon:
-      sprite: _Starlight/Interface/Actions/actions_cyber.rsi
-      state: cyber-hand-left
     itemIconStyle: BigItem
+  - type: Sprite
+    sprite: _Starlight/Interface/Actions/actions_cyber.rsi
+    layers:
+    - state: cyber-hand-left
   - type: InstantAction
     event: !type:ToggleLimbEvent
 
@@ -19,10 +20,11 @@
   components:
   - type: Action
     useDelay: 1
-    icon:
-      sprite: _Starlight/Interface/Actions/actions_cyber.rsi
-      state: cyber-hand-left
     itemIconStyle: BigItem
+  - type: Sprite
+    sprite: _Starlight/Interface/Actions/actions_cyber.rsi
+    layers:
+    - state: cyber-hand-left
   - type: InstantAction
     event: !type:ToggleLimbEvent
 
@@ -33,9 +35,10 @@
   components:
   - type: Action
     useDelay: 1
-    icon:
-      sprite: _Starlight/Interface/Actions/actions_cyber.rsi
-      state: cyber-hand-right
     itemIconStyle: BigItem
+  - type: Sprite
+    sprite: _Starlight/Interface/Actions/actions_cyber.rsi
+    layers:
+    - state: cyber-hand-right
   - type: InstantAction
     event: !type:ToggleLimbEvent

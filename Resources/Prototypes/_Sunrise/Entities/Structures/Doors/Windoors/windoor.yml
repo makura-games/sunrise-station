@@ -1,5 +1,5 @@
 - type: entity
-  parent: WindoorSecure
+  parent: Windoor
   id: WindoorSecurePirateLocked
   suffix: Pirate, Locked
   components:

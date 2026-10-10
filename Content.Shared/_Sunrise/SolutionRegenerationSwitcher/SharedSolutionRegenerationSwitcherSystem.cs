@@ -7,7 +7,6 @@ namespace Content.Shared._Sunrise.SolutionRegenerationSwitcher
 {
     public abstract partial class SharedSolutionRegenerationSwitcherSystem : EntitySystem
     {
-        [Dependency] protected IPrototypeManager PrototypeManager = null!;
 
         private ISawmill _sawmill = null!;
 
@@ -32,7 +31,7 @@ namespace Content.Shared._Sunrise.SolutionRegenerationSwitcher
             for (var i = 0; i < component.Options.Count; i++)
             {
                 var componentOption = component.Options[i];
-                if (!PrototypeManager.TryIndex(componentOption.Reagent.Prototype, out ReagentPrototype? proto))
+                if (!ProtoMan.TryIndex(componentOption.Reagent.Prototype, out ReagentPrototype? proto))
                 {
                     _sawmill.Error(
                         $"Can't get reagent prototype {componentOption.Reagent.Prototype} for {ToPrettyString(uid)}");

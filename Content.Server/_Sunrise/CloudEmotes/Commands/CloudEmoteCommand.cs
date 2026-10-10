@@ -5,7 +5,7 @@ using Content.Shared.Administration;
 using Robust.Shared.Map;
 using Robust.Server.GameObjects;
 using Content.Shared._Sunrise.CloudEmote;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 namespace Content.Server._Sunrise.CloudEmotes.Commands
 {
     [UsedImplicitly]

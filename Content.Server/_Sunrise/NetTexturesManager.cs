@@ -9,6 +9,7 @@ using Content.Shared._Sunrise.CartridgeLoader.Cartridges;
 using Content.Shared._Sunrise.NetTextures;
 using Robust.Server.Player;
 using Robust.Shared.ContentPack;
+using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Network.Transfer;
 using Robust.Shared.Player;
@@ -71,6 +72,7 @@ public sealed partial class NetTexturesManager
             accept: NetMessageAccept.Server);
 
         _transferManager.RegisterTransferMessage(TransferKeyNetTextures);
+        _playerManager.PlayerStatusChanged += OnPlayerStatusChanged;
     }
 
     /// <summary>
@@ -89,7 +91,49 @@ public sealed partial class NetTexturesManager
             _staticBundleTasks.Clear();
         }
 
+        lock (_transferQueueLock)
+        {
+            _pendingTransferRequests.Clear();
+        }
+
         _sawmill.Info("Cleared NetTextures round caches due to round restart.");
+    }
+
+    private void OnPlayerStatusChanged(object? sender, SessionStatusEventArgs args)
+    {
+        if (args.NewStatus != SessionStatus.Disconnected)
+            return;
+
+        var removed = 0;
+        lock (_transferQueueLock)
+        {
+            if (_pendingTransferRequests.Count == 0)
+                return;
+
+            var retained = new Queue<TransferRequest>(_pendingTransferRequests.Count);
+            while (_pendingTransferRequests.Count > 0)
+            {
+                var request = _pendingTransferRequests.Dequeue();
+                if (ReferenceEquals(request.Session, args.Session))
+                {
+                    removed++;
+                    continue;
+                }
+
+                retained.Enqueue(request);
+            }
+
+            foreach (var request in retained)
+            {
+                _pendingTransferRequests.Enqueue(request);
+            }
+        }
+
+        if (removed > 0)
+        {
+            _sawmill.Debug(
+                $"Dropped {removed} pending NetTextures transfer request(s) for disconnected session {args.Session.Name}.");
+        }
     }
 
     /// <summary>
@@ -121,7 +165,8 @@ public sealed partial class NetTexturesManager
             return;
         }
 
-        EnqueueResourceSend(session, resPath);
+        if (IsSessionConnected(session))
+            EnqueueResourceSend(session, resPath);
     }
 
     /// <summary>
@@ -246,6 +291,9 @@ public sealed partial class NetTexturesManager
     /// <param name="resourcePath">Проверенный rooted путь ресурса для отправки.</param>
     private async Task SendResourceAsync(ICommonSession session, ResPath resourcePath)
     {
+        if (!IsSessionConnected(session))
+            return;
+
         var startTime = DateTime.UtcNow;
         _sawmill.Debug($"[NetTextures] Starting transfer of {resourcePath} to {session.Name}");
 
@@ -265,6 +313,9 @@ public sealed partial class NetTexturesManager
             _sawmill.Warning($"Resource not found: {resourcePath}");
             return;
         }
+
+        if (!IsSessionConnected(session))
+            return;
 
         try
         {
@@ -289,6 +340,13 @@ public sealed partial class NetTexturesManager
         }
         catch (Exception ex)
         {
+            if (!IsSessionConnected(session))
+            {
+                _sawmill.Debug(
+                    $"Stopped NetTextures transfer of {resourcePath} because session {session.Name} disconnected.");
+                return;
+            }
+
             _sawmill.Warning($"Failed to send resource via High Bandwidth Transfer to {session.Name}: {ex.Message}");
             SendResourceFallback(session, filesToSend);
         }
@@ -447,14 +505,19 @@ public sealed partial class NetTexturesManager
             {
                 foreach (var message in CreateFallbackChunks(file.RelativePath, file.DynamicData))
                 {
-                    session.Channel.SendMessage(message);
+                    if (!TrySendMessage(session, message))
+                        return;
+
                     chunkCount++;
                 }
 
                 continue;
             }
 
-            chunkCount += SendContentFileFallback(session, file);
+            if (!TrySendContentFileFallback(session, file, out var sentChunks))
+                return;
+
+            chunkCount += sentChunks;
         }
 
         _sawmill.Debug($"Sent {files.Count} files via fallback ({chunkCount} chunk messages) to {session.Name}");
@@ -465,16 +528,22 @@ public sealed partial class NetTexturesManager
     /// </summary>
     /// <param name="session">Сессия получателя.</param>
     /// <param name="file">Дескриптор static file для отправки.</param>
-    /// <returns>Количество chunk messages, отправленных для этого файла.</returns>
-    private int SendContentFileFallback(ICommonSession session, TransferResourceEntry file)
+    /// <param name="chunkCount">Количество chunk messages, отправленных для этого файла.</param>
+    /// <returns><see langword="true"/>, если отправка завершена; иначе <see langword="false"/>, если сессия отключилась.</returns>
+    private bool TrySendContentFileFallback(
+        ICommonSession session,
+        TransferResourceEntry file,
+        out int chunkCount)
     {
+        chunkCount = 0;
+
         if (file.ContentPath == null)
-            return 0;
+            return true;
 
         if (!_resourceManager.TryContentFileRead(file.ContentPath.Value, out var stream))
         {
             _sawmill.Warning($"Failed to read fallback NetTexture file: {file.ContentPath.Value}");
-            return 0;
+            return true;
         }
 
         using (stream)
@@ -488,7 +557,7 @@ public sealed partial class NetTexturesManager
                 var chunkData = new byte[chunkLength];
                 ReadExactly(stream, chunkData, chunkLength);
 
-                session.Channel.SendMessage(new NetTextureResourceChunkMessage
+                if (!TrySendMessage(session, new NetTextureResourceChunkMessage
                 {
                     RelativePath = file.RelativePath.ToString(),
                     ChunkIndex = chunkIndex,
@@ -496,10 +565,36 @@ public sealed partial class NetTexturesManager
                     ChunkOffset = offset,
                     TotalLength = file.Length,
                     Data = chunkData
-                });
+                }))
+                {
+                    return false;
+                }
+
+                chunkCount++;
             }
 
-            return totalChunks;
+            return true;
+        }
+    }
+
+    private static bool IsSessionConnected(ICommonSession session)
+    {
+        return (session.Status is SessionStatus.Connected or SessionStatus.InGame) && session.Channel.IsConnected;
+    }
+
+    private static bool TrySendMessage(ICommonSession session, NetMessage message)
+    {
+        if (!IsSessionConnected(session))
+            return false;
+
+        try
+        {
+            session.Channel.SendMessage(message);
+            return true;
+        }
+        catch (InvalidOperationException) when (!IsSessionConnected(session))
+        {
+            return false;
         }
     }
 

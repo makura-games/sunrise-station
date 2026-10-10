@@ -55,19 +55,19 @@ public sealed partial class GameTicker
 
     private void RebuildLobbyBackgroundWhitelist()
     {
-        var preset = _prototypeManager.Index(LobbyBackgroundPreset);
+        var preset = ProtoMan.Index(LobbyBackgroundPreset);
 
-        _lobbyArts = _prototypeManager.EnumeratePrototypes<LobbyArtPrototype>()
+        _lobbyArts = ProtoMan.EnumeratePrototypes<LobbyArtPrototype>()
             .Select(x => x.ID)
             .Where(x => preset.AllArtsAllowed || preset.WhitelistArts.Contains(x))
             .ToList();
 
-        _lobbyAnimations = _prototypeManager.EnumeratePrototypes<LobbyAnimationPrototype>()
+        _lobbyAnimations = ProtoMan.EnumeratePrototypes<LobbyAnimationPrototype>()
             .Select(x => x.ID)
             .Where(x => preset.AllAnimationsAllowed || preset.WhitelistAnimations.Contains(x))
             .ToList();
 
-        _lobbyParallaxes = _prototypeManager.EnumeratePrototypes<LobbyParallaxPrototype>()
+        _lobbyParallaxes = ProtoMan.EnumeratePrototypes<LobbyParallaxPrototype>()
             .Select(x => x.ID)
             .Where(x => preset.AllParallaxesAllowed || preset.WhitelistParallaxes.Contains(x))
             .ToList();

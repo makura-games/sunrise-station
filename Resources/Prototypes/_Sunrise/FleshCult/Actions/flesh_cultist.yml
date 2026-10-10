@@ -6,8 +6,10 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: _Sunrise/FleshCult/Interface/Actions/fleshCultistShop.png
     checkCanInteract: false
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/FleshCult/Interface/Actions/fleshCultistShop.png
   - type: InstantAction
     event: !type:FleshCultistShopActionEvent
 
@@ -19,10 +21,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: _Sunrise/FleshCult/Interface/Actions/fleshCultistBlade.png
     itemIconStyle: NoItem
     useDelay: 3
     checkCanInteract: false
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/FleshCult/Interface/Actions/fleshCultistBlade.png
   - type: InstantAction
     event: !type:FleshCultistHandTransformEvent
       prototype: FleshBlade
@@ -35,10 +39,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: _Sunrise/FleshCult/Interface/Actions/fleshCultistAdrenalin.png
     itemIconStyle: NoItem
     useDelay: 90 
     checkCanInteract: false
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/FleshCult/Interface/Actions/fleshCultistAdrenalin.png
   - type: InstantAction
     event: !type:FleshCultistAdrenalinActionEvent
 
@@ -50,9 +56,11 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: _Sunrise/FleshCult/Interface/Actions/fleshCultistFleshHeart.png
     itemIconStyle: NoItem
     useDelay: 360
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/FleshCult/Interface/Actions/fleshCultistFleshHeart.png
   - type: InstantAction
     event: !type:FleshCultistCreateFleshHeartActionEvent
 
@@ -64,10 +72,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: _Sunrise/FleshCult/Interface/Actions/fleshCultistClaw.png
     itemIconStyle: NoItem
     useDelay: 3
     checkCanInteract: false
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/FleshCult/Interface/Actions/fleshCultistClaw.png
   - type: InstantAction
     event: !type:FleshCultistHandTransformEvent
       prototype: FleshClaw
@@ -80,10 +90,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: _Sunrise/FleshCult/Interface/Actions/fleshThrowHugger.png
     itemIconStyle: NoItem
     useDelay: 180 
     checkCanInteract: false
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/FleshCult/Interface/Actions/fleshThrowHugger.png
   - type: TargetAction
     range: 300 
   - type: WorldTargetAction
@@ -97,10 +109,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: _Sunrise/FleshCult/Interface/Actions/fleshAcidSpit.png
     itemIconStyle: NoItem
     useDelay: 30
     checkCanInteract: false
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/FleshCult/Interface/Actions/fleshAcidSpit.png
   - type: TargetAction
     range: 200
   - type: WorldTargetAction
@@ -114,10 +128,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: _Sunrise/FleshCult/Interface/Actions/fleshCultistFist.png
     itemIconStyle: NoItem
     useDelay: 3
     checkCanInteract: false
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/FleshCult/Interface/Actions/fleshCultistFist.png
   - type: InstantAction
     event: !type:FleshCultistHandTransformEvent
       prototype: FleshFist
@@ -130,10 +146,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: _Sunrise/FleshCult/Interface/Actions/fleshCultistSpikeGun.png
     itemIconStyle: NoItem
     useDelay: 3
     checkCanInteract: false
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/FleshCult/Interface/Actions/fleshCultistSpikeGun.png
   - type: InstantAction
     event: !type:FleshCultistHandTransformEvent
       prototype: FleshSpikeHandGun
@@ -146,10 +164,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: _Sunrise/FleshCult/Interface/Actions/fleshCultistArmor.png
     itemIconStyle: NoItem
     useDelay: 10
     checkCanInteract: false
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/FleshCult/Interface/Actions/fleshCultistArmor.png
   - type: InstantAction
     event: !type:FleshCultistBodyTransformEvent
       prototype: ClothingOuterArmorFlesh
@@ -165,10 +185,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: _Sunrise/FleshCult/Interface/Actions/fleshCultistHeavyArmor.png
     itemIconStyle: NoItem
     useDelay: 10
     checkCanInteract: false
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/FleshCult/Interface/Actions/fleshCultistHeavyArmor.png
   - type: InstantAction
     event: !type:FleshCultistBodyTransformEvent
       prototype: ClothingOuterHeavyArmorFlesh
@@ -184,10 +206,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: _Sunrise/FleshCult/Interface/Actions/fleshCultistSpiderLegs.png
     itemIconStyle: NoItem
     useDelay: 10
     checkCanInteract: false
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/FleshCult/Interface/Actions/fleshCultistSpiderLegs.png
   - type: InstantAction
     event: !type:FleshCultistBodyTransformEvent
       prototype: ClothingFleshSpiderLegs
@@ -207,9 +231,11 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: _Sunrise/FleshCult/Interface/Actions/fleshCultistAbsorbBloodPool.png
     useDelay: 5
     checkCanInteract: false
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/FleshCult/Interface/Actions/fleshCultistAbsorbBloodPool.png
   - type: InstantAction
     event: !type:FleshCultistAbsorbBloodPoolActionEvent
 
@@ -221,10 +247,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: _Sunrise/FleshCult/Interface/Actions/fleshCultistDevour.png
     itemIconStyle: NoItem
     checkCanInteract: false
     useDelay: 5
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/FleshCult/Interface/Actions/fleshCultistDevour.png
   - type: TargetAction
     range: 2
     checkCanAccess: true

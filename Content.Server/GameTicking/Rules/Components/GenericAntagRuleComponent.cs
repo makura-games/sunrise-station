@@ -1,6 +1,5 @@
 using Content.Server.GameTicking.Rules;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
 namespace Content.Server.GameTicking.Rules.Components;
 

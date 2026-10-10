@@ -1,6 +1,5 @@
 using Content.Shared.Actions;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared._Sunrise.Abilities;
 
@@ -14,9 +13,8 @@ public sealed partial class FabricateSoapComponent : Component
         "Soap"
     };
 
-    [ViewVariables(VVAccess.ReadWrite),
-     DataField("actionFabricateSoap", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string ActionFabricateSoap = "FabricateSoap";
+    [ViewVariables(VVAccess.ReadWrite), DataField]
+    public EntProtoId ActionFabricateSoap = "FabricateSoap";
 }
 
 

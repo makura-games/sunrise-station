@@ -6,8 +6,10 @@
   components:
   - type: Action
     useDelay: 3
-    icon: _Sunrise/FleshCult/Interface/Actions/fleshThrowHugger.png
     itemIconStyle: NoItem
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/FleshCult/Interface/Actions/fleshThrowHugger.png
   - type: TargetAction
     range: 200
     checkCanAccess: false
@@ -22,7 +24,9 @@
   components:
   - type: Action
     useDelay: 5
-    icon: _Sunrise/FleshCult/Interface/Actions/fleshHuggerGetOff.png
     itemIconStyle: NoItem
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/FleshCult/Interface/Actions/fleshHuggerGetOff.png
   - type: InstantAction
     event: !type:FleshHuggerGetOffFromFaceActionEvent

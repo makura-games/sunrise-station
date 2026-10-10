@@ -19,7 +19,6 @@ public sealed partial class TutorialProgressBarSystem : EntitySystem
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IUserInterfaceManager _ui = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private EntityQuery<ProgressBarUiComponent> _progressUiQuery = default!;
     private LayoutContainer? _progressBarRoot;
     private bool _pendingRefresh;
@@ -99,7 +98,7 @@ public sealed partial class TutorialProgressBarSystem : EntitySystem
 
         var viewportContainer = _ui.ActiveScreen.FindControl<LayoutContainer>("ViewportContainer");
 
-        if (!_proto.TryIndex(player.SequenceId, out var sequence))
+        if (!ProtoMan.TryIndex(player.SequenceId, out var sequence))
             return;
 
         var total = sequence.Steps.Count;
