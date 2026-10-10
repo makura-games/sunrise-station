@@ -43,19 +43,15 @@ public sealed partial class VictoriaLogs
         // Итоговое число - количество символов, на которое нужно выделить память.
         // 256 - примерная средняя длина одной лог записи
         using var stream = new MemoryStream(logs.Count * 256);
-        using (var writer = new Utf8JsonWriter(stream)) // НЕ ДЕЛАТЬ ASYNC, ОН ТУТ НАХУЙ НЕ НУЖЕН!!
+        foreach (var log in logs)
         {
-            foreach (var log in logs)
-            {
-                JsonSerializer.Serialize(writer, new VictoriaAdminLogInsert(log, _serverId), _jsonOptions);
-                writer.Flush(); // НЕ ДЕЛАТЬ ASYNC, ОН ТУТ НАХУЙ НЕ НУЖЕН!!
+            JsonSerializer.Serialize(stream, new VictoriaAdminLogInsert(log, _serverId), _jsonOptions); // НЕ ДЕЛАТЬ ASYNC, ОН ТУТ НАХУЙ НЕ НУЖЕН!!
 
-                // Разделяем JSONы через символ новой строки
-                stream.WriteByte((byte)'\n');
+            // Разделяем JSONы через символ новой строки
+            stream.WriteByte((byte)'\n');
 
-                // В случае нужды большой оптимизации смотреть в самый низ файла VictoriaAdminLogsDTO.cs
-                // Делать что-то тут без варианта оттуда особо не имеет смысла, оно и так довольно быстрое
-            }
+            // В случае нужды большой оптимизации смотреть в самый низ файла VictoriaAdminLogsDTO.cs
+            // Делать что-то тут без варианта оттуда особо не имеет смысла, оно и так довольно быстрое
         }
 
         if (!stream.TryGetBuffer(out var buffer))
