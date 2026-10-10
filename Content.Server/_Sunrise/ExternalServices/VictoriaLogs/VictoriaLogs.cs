@@ -37,6 +37,7 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
     private ISawmill _sawmill = default!;
     private HttpClient? _client;
 
+    private bool _disposed;
     private bool _enabled;
     private string _baseAddress = string.Empty;
     private string _serverId = string.Empty;
@@ -67,6 +68,9 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
     // TODO: Выделить общую базу и сделать вариант для простой string json вместо сложного ArraySegment
     public async Task<bool> TrySend(ArraySegment<byte> data, int maxRetries = 3, int delayMs = 500)
     {
+        if (_disposed)
+            return false;
+
         var client = GetOrCreateClient();
 
         DebugTools.Assert(data.Count != 0);
@@ -201,6 +205,9 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
     /// </summary>
     private HttpClient GetOrCreateClient()
     {
+        if (_disposed)
+            throw new ObjectDisposedException(nameof(VictoriaLogs));
+
         // Клиент не должен существовать/запрашиваться, если система выключена
         DebugTools.Assert(_enabled || _client == null);
         if (_client != null)
@@ -223,6 +230,8 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
     public void Dispose()
     {
         DisposeAndNullifyClient();
+        _disposed = true;
+        _enabled = false;
     }
 
     #endregion
@@ -231,6 +240,9 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
 
     private void OnEnabledChanged(bool enabled)
     {
+        if (_disposed)
+            return;
+
         _enabled = enabled;
 
         if (enabled && _client == null)

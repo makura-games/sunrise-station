@@ -263,7 +263,9 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
             // Выходим из метода только в случае, когда все записалось успешно
             if (success)
             {
-                LogsSent.Inc(copy.Count);
+                if (_metricsEnabled)
+                    LogsSent.Inc(copy.Count);
+
                 return;
             }
 

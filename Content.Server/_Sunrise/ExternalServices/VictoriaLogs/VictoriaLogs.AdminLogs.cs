@@ -28,7 +28,7 @@ public sealed partial class VictoriaLogs
     /// <param name="logs">Список из админ логов типа <see cref="AdminLog"/> для отправки</param>
     public async Task<bool> TrySendAdminLog(List<AdminLog> logs)
     {
-        if (!_enabled)
+        if (!_enabled || _disposed)
             return false;
 
         if (logs.Count == 0)
