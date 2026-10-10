@@ -48,15 +48,26 @@ public sealed partial class VictoriaLogs
         // Здесь logs.Count * 256 примерно показывает, сколько данных мы передадим, чтобы сразу выделить нужную память.
         // Итоговое число - количество символов, на которое нужно выделить память.
         // 256 - примерная средняя длина одной лог записи
-        var json = new StringBuilder(logs.Count * 256);
-        foreach (var log in logs)
+        using var stream = new MemoryStream(logs.Count * 256);
+        using (var writer = new Utf8JsonWriter(stream)) // НЕ ДЕЛАТЬ ASYNC, ОН ТУТ НАХУЙ НЕ НУЖЕН!!
         {
-            var jsonLine = JsonSerializer.Serialize(new VictoriaAdminLogInsert(log, _serverId), _jsonOptions);
-            json.Append(jsonLine).AppendLine();
+            foreach (var log in logs)
+            {
+                JsonSerializer.Serialize(writer, new VictoriaAdminLogInsert(log, _serverId), _jsonOptions);
+                writer.Flush(); // НЕ ДЕЛАТЬ ASYNC, ОН ТУТ НАХУЙ НЕ НУЖЕН!!
+
+                // Разделяем JSONы через символ новой строки
+                stream.WriteByte((byte)'\n');
+
+                // В случае нужды большой оптимизации смотреть в самый низ файла VictoriaAdminLogsDTO.cs
+                // Делать что-то тут без варианта оттуда особо не имеет смысла, оно и так довольно быстрое
+            }
         }
 
-        var jsonString = json.ToString().TrimEnd();
-        return await TrySend(jsonString);
+        if (!stream.TryGetBuffer(out var buffer))
+            buffer = new(stream.ToArray());
+
+        return await TrySend(buffer);
     }
 
     /// <summary>
@@ -73,10 +84,11 @@ public sealed partial class VictoriaLogs
         {
             using var request = CreateSelectRequest(filter);
             var client = GetOrCreateClient();
-            using var response = await client.SendAsync(request);
 
             // Это я спиздил из логики с базой данных, не уверен, что это правильно надеяться на возмоность default
             var token = filter?.CancellationToken ?? default;
+
+            using var response = await client.SendAsync(request, token);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -336,9 +348,9 @@ public sealed partial class VictoriaLogs
             {
                 // К сожалению функции на подобии in для "all" формата нет, поэтому используем базовый метод через AND
                 var allPlayersFormatted = string.Join(" AND ",
-                    filter.AllPlayers.Select(guid => $"players:=\"{guid}\""));
+                    filter.AllPlayers.Select(guid => $"players:json_array_contains_any(\"{guid}\")"));
                 var allPlayers = $"(({allPlayersFormatted}){includeNonPlayersValue})";
-                // Итоговая запись будет выглядеть как-то так: ((players:="guid1" AND players:="guid2") OR players:="[]")
+                // Итоговая запись будет выглядеть как-то так: ((players:json_array_contains_any("guid1") AND players:json_array_contains_any("guid2")) OR players:="[]")
 
                 query.Append(allPlayers);
                 query.AppendLine();

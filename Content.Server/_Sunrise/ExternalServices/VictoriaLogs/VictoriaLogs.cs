@@ -1,4 +1,5 @@
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -59,20 +60,16 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
     /// Базовый метод для отправки логов в VictoriaLogs.
     /// Принимает заранее заготовленный JSON с логами и отправляет его в VictoriaLogs.
     /// </summary>
-    /// <param name="json">Заранее заготовленный JSON с распарешнными в JSON логами</param>
+    /// <param name="data">Массив байтов типа <see cref="ArraySegment{T}"/> содержащий JSON строки логов для отправки</param>
     /// <param name="maxRetries">Количество попыток переотправить лог, если предыдущая попытка завершилась неудачей.</param>
     /// <param name="delayMs">Время между попытками переотправить логи в милисекундах</param>
     /// <returns>Получилось или нет совершить отправку</returns>
-    public async Task<bool> TrySend(string json, int maxRetries = 3, int delayMs = 500)
+    // TODO: Выделить общую базу и сделать вариант для простой string json вместо сложного ArraySegment
+    public async Task<bool> TrySend(ArraySegment<byte> data, int maxRetries = 3, int delayMs = 500)
     {
-        using var content = new StringContent(json, Encoding.UTF8, "application/json");
         var client = GetOrCreateClient();
 
-#if DEBUG
-        _sawmill.Verbose(json);
-#endif
-
-        DebugTools.Assert(!string.IsNullOrEmpty(json));
+        DebugTools.Assert(data.Count != 0);
         DebugTools.Assert(maxRetries >= 1);
         DebugTools.Assert(delayMs >= 0);
 
@@ -80,28 +77,67 @@ public sealed partial class VictoriaLogs : IPostInjectInit, IDisposable
         // Если по какой-то причине с первого раза не дошло - пробуем пару раз и логгируем проблемные попытки.
         for (var attempt = 1; attempt <= maxRetries; attempt++)
         {
+            string? errorReason;
             try
             {
-                var response = await client.PostAsync(_insertUri, content);
+                // ИИ настоятельно порекомендовал мне хранить контент рядом с запросом, не вынося из его из цикла.
+                // Там что-то связанное с возможными dispose между попытками + изменением самого контента внутри запроса.
+                using var content = new ByteArrayContent(data.Array!, data.Offset, data.Count);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                using var response = await client.PostAsync(_insertUri, content);
 
                 // Единственный успешный выход тут.
                 // Если успешно отправили - выходим из метода и цикла заявляя об успехе
+                // Все что ниже - обработка и логгирование ошибок, в нормальных случаях код ниже не исполняется.
                 if (response.IsSuccessStatusCode)
                     return true;
 
-                // Эта штука выкинет ошибку, которую уже обработает catch ниже.
-                // Можно было бы сделать просто if, если бы PostAsync не выкидывал ошибку сам.
-                response.EnsureSuccessStatusCode();
+                // Все ошибки за исключением серверных ошибок(начинающихся с 500) нет смысла повторять.
+                // Единственное исключение - 429(too many request), его имеет смысл повторить.
+                // Сразу выходим из цикла и возвращаем false
+                var code = (int)response.StatusCode;
+                if (code is >= 400 and < 500 && code != 429)
+                {
+                    _sawmill.Error($"Failed to send logs, HTTP {code} ({response.ReasonPhrase}). Skipped retrying because it's useless here");
+                    return false;
+                }
+
+                errorReason = $"HTTP {code} ({response.ReasonPhrase})";
             }
-            catch (Exception ex)
+            catch (HttpRequestException ex)
             {
-                _sawmill.Warning($"{ex.Message}. Failed to send logs (attempt {attempt}/{maxRetries}). Retrying...");
+                // Это выбрасывает сам HttpClient при внутренних редких ошибках.
+                // Обычно он отдает ошибку в статус код, но редко может и выбросить эту ошибку.
+                // Например, при проблемах с сертификатами или DNS.
+                errorReason = $"Network error: {ex.Message}";
+            }
+            catch (OperationCanceledException ex) when (ex.InnerException is TimeoutException)
+            {
+                // По умолчанию эта ошибка кидается в 2 случаях - отмена при реальной отмене и таймауте.
+                // Почему так? Потому что исторически сложилось.
+                // Поэтому тут есть проверка, что выпал именно нужный нам подтип.
+                errorReason = "Request timed out";
+            }
+            catch (Exception)
+            {
+                // Здесь буду все остальные ошибки, которые хуй знает что вообще означают.
+                // Я думаю, что при них нет смысла повторять. Я и так усложнил код и выбрал все известные мне случаи,
+                // когда есть смысл ретраить.
                 return false;
             }
 
             // Ждём перед следующей попыткой (если это не последняя)
             if (attempt < maxRetries)
+            {
+                _sawmill.Warning($"{errorReason}. Failed to send logs (attempt {attempt}/{maxRetries}). Retrying...");
                 await Task.Delay(delayMs);
+            }
+            else
+            {
+                // Если не делаем ретрай, то не стоит об этом сообщать.
+                _sawmill.Warning($"{errorReason}. Failed to send logs (attempt {attempt}/{maxRetries}).");
+            }
         }
 
         _sawmill.Error($"Failed to send logs after {maxRetries} attempts.");

@@ -175,3 +175,38 @@ public readonly record struct VictoriaAdminLogResponse : IBaseVictoriaLog
 
     public VictoriaAdminLogResponse() { }
 }
+
+// При большом желании оптимизировать работу сериализации JSON - лучше собирать его через Utf8JsonWriter прямо в процессе работы.
+// ИИ говорит это будет в 2-3 раза быстрее текущей модели через рефлексию(медленно) и DTO.
+// Пример кода:
+/*
+private static readonly byte[] MessageField = "_msg"u8.ToArray();
+private static readonly byte[] TimeField = "_time"u8.ToArray();
+// и т.д. через u8 строковые литералы C#
+
+public static void WriteLog(Utf8JsonWriter writer, AdminLog log, string serverId)
+{
+    writer.WriteStartObject();
+    writer.WriteString("_msg"u8, log.Message);
+    writer.WriteString("_time"u8, log.Date);
+    writer.WriteString("server_id"u8, serverId);
+    writer.WriteString("log_source_type"u8, VictoriaLogs.AdminLogSourceType);
+    writer.WriteNumber("round_id"u8, log.RoundId);
+    writer.WriteNumber("id"u8, log.Id);
+    writer.WriteString("type"u8, log.Type.ToString());
+    writer.WriteString("impact"u8, log.Impact.ToString());
+
+    writer.WriteStartArray("players"u8);
+    if (log.Players != null)
+    {
+        foreach (var player in log.Players)
+        {
+            writer.WriteStringValue(player.PlayerUserId);
+        }
+    }
+    writer.WriteEndArray();
+
+    writer.WriteEndObject();
+}
+*/
+// Я решил, что такая скорость тут не нужна и читаемость важнее
