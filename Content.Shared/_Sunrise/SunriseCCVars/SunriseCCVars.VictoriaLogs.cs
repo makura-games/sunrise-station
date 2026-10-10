@@ -1,0 +1,22 @@
+using Robust.Shared.Configuration;
+
+namespace Content.Shared._Sunrise.SunriseCCVars;
+
+public sealed partial class SunriseCCVars
+{
+    /// <summary>
+    /// Включена ли поддержка Victoria Logs
+    /// </summary>
+    public static readonly CVarDef<bool> VictoriaLogsEnabled =
+        CVarDef.Create("victoria_logs.enabled", true, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Базовый адрес + порт для подключения к VictoriaLogs.
+    /// К нему будут приклеиваться разные части, вроде /insert/jsonline и тд для разных действий.
+    /// </summary>
+    /// <remarks>
+    /// Стандартный порт у VictoriaLogs без настройки 9428
+    /// </remarks>
+    public static readonly CVarDef<string> VictoriaLogsBaseAddress =
+        CVarDef.Create("victoria_logs.base_address", "http://127.0.0.1:9428", CVar.SERVERONLY | CVar.ARCHIVE);
+}

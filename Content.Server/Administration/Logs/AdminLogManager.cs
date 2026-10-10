@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server._Sunrise.ExternalServices.VictoriaLogs;
 using Content.Server.Administration.Systems;
 using Content.Server.Database;
 using Content.Server.GameTicking;
@@ -38,6 +39,8 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
     [Dependency] private ISharedPlaytimeManager _playtime = default!;
     [Dependency] private ISharedChatManager _chat = default!;
     [Dependency] private IPrototypeManager _proto = default!;
+
+    [Dependency] private VictoriaLogs _victoria = default!; // Sunrise added - поддержка логов из VictoriaLogs
 
     public const string SawmillId = "admin.logs";
 
@@ -247,6 +250,15 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
         _preRoundLogQueue.Clear();
         PreRoundQueue.Set(0);
 
+        // Sunrise added start - поддержка хранения логов в VictoriaLogs
+        if (_victoria.Enabled)
+        {
+            // Я специально не увеличиваю метрики вроде LogsSent, потому что это метрики чисто базы данных.
+            await _victoria.TrySendAdminLog(copy);
+            return;
+        }
+        // Sunrise added end
+
         var task = _db.AddAdminLogs(copy);
 
         _sawmill.Debug($"Saving {copy.Count} admin logs.");
@@ -366,7 +378,7 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
                     continue;
 
                 case EntityStringRepresentation rep:
-                    if (rep.Session is {} session)
+                    if (rep.Session is { } session)
                         AddPlayer(players, session.UserId.UserId, logId);
                     continue;
 
@@ -547,10 +559,12 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
 
     public async Task<List<SharedAdminLog>> All(LogFilter? filter = null, Func<List<SharedAdminLog>>? listProvider = null)
     {
+        /*
         if (TrySearchCache(filter, out var results))
         {
             return results;
         }
+        */
 
         var initialSize = Math.Min(filter?.Limit ?? 0, 1000);
         List<SharedAdminLog> list;
@@ -563,6 +577,14 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
         {
             list = new List<SharedAdminLog>(initialSize);
         }
+
+        // Sunrise edit start - поддержка VictoriaLogs
+        if (_victoria.Enabled)
+        {
+            list = await _victoria.SelectLogs(filter);
+            return list;
+        }
+        // Sunrise edit end
 
         await foreach (var log in _db.GetAdminLogs(filter).WithCancellation(filter?.CancellationToken ?? default))
         {
@@ -615,6 +637,25 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
 
     public Task<int> CountLogs(int round)
     {
+        // Sunrise added start - поддержка VictoriaLogs для логов
+        if (_victoria.Enabled)
+        {
+            // Проблема в том, что текущая реализация имеет довольно простой и хардкодный код.
+            // Ломать его через колено ради показа циферки количества логов я не хочу.
+            // Я считаю, что простота кода в данном случае его преимущество, понять его куда проще, чем нагромождение абстракций.
+            // Если нагромождение абстракций будет нужно - пожалуйста, сломаю. Но ради КОЛИЧЕСТВА ЛОГОВ - нет смысла.
+            // Поэтому тут количество логов получается из сохраненной переменной для текущего раунда - 99% случаев показа.
+            // И для прошлых раундов просто рандомное число хуйнул, потому что оно особо никому не нужно.
+            if (round == _currentRoundId)
+                return Task.FromResult(_currentLogId + 1);
+            else
+                return Task.FromResult(666);
+
+            // Плюс когда включена VictoriaLogs - никакие логи не хранятся в базе данных.
+            // Поэтому считать оттуда нет смысла, там всегда будет 0.
+        }
+        // Sunrise added end
+
         return _db.CountAdminLogs(round);
     }
 }
