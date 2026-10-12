@@ -522,6 +522,8 @@
   name: master body Camera
   description: Camera
   components:
+  - type: BodyCameraPanic
+    cooldown: 3
   - type: StationAiVision
     range: 2
   - type: Item
