@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Content.Server.Pinpointer;
+using Content.Server.Power.Components;
 using Content.Server.Radio;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared.Access.Systems;
@@ -10,6 +11,7 @@ using Content.Shared.Radio.Components;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -25,12 +27,13 @@ public sealed partial class BodyCameraPanicSystem : EntitySystem
     [Dependency] private SharedIdCardSystem _idCard = default!;
     [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private RadioSystem _radio = default!;
     [Dependency] private IGameTiming _timing = default!;
 
     private static readonly ProtoId<RadioChannelPrototype> SecurityChannel = "Security";
     private static readonly SoundSpecifier PanicSound =
-        new SoundPathSpecifier("/Audio/_Sunrise/Items/Equip/BodyCamera/panic-button.ogg");
+        new SoundPathSpecifier("/Audio/_Sunrise/Items/Equip/BodyCamera/panic_button.ogg");
 
     public override void Initialize()
     {
@@ -85,43 +88,100 @@ public sealed partial class BodyCameraPanicSystem : EntitySystem
         // Messenger намеренно не используется: вызов направляется только в Security.
         var recipients = new HashSet<ICommonSession>();
 
-        // Нажавший кнопку слышит подтерждение даже при отсутствии гарнитуры.
+        // Нажавший кнопку слышит подтверждение даже при отсутствии гарнитуры
+        // или невозможности доставить радиосообщение.
         if (TryComp<ActorComponent>(user, out var actor))
             recipients.Add(actor.PlayerSession);
 
         // Сначала отправляем сообщение штатной радиосистемой.
         _radio.SendRadioMessage(uid, message, SecurityChannel, uid);
 
-        // Звук доставляется адресно всем игрокам, у которых есть активный
-        // радиоприёмник с каналом Security. Подписываться на RadioReceiveEvent
-        // здесь нельзя: HeadsetSystem, RadioSystem и RadioDeviceSystem уже
-        // зарегистрировали обработчики для этих компонентов.
-        AddSecurityRadioRecipients(recipients);
+        // Повторяем проверки радиодоставки для адресного звука.
+        // Подписок на RadioReceiveEvent здесь нет, чтобы не конфликтовать
+        // со штатными обработчиками радиоустройств.
+        AddSecurityRadioRecipients(uid, recipients);
         if (recipients.Count > 0)
             _audio.PlayGlobal(PanicSound, Filter.Empty().AddPlayers(recipients), false);
     }
 
-    /// Перечень игроков, у которых имеется канал связи СБ.
-    /// The enumeration is used instead of subscribing to RadioReceiveEvent: the standard
-    /// radio systems already own those subscriptions.
-    private void AddSecurityRadioRecipients(HashSet<ICommonSession> recipients)
+    /// Определяет получателей звука с проверками маршрутизации RadioSystem.
+    /// Это отдельная проверка, а не наблюдение за фактической доставкой сообщения.
+    private void AddSecurityRadioRecipients(EntityUid radioSource, HashSet<ICommonSession> recipients)
     {
-        var radioQuery = EntityQueryEnumerator<ActiveRadioComponent, TransformComponent>();
-        while (radioQuery.MoveNext(out var radioUid, out var radio, out _))
+        if (Deleted(radioSource))
+            return;
+
+        var channel = _prototype.Index(SecurityChannel);
+
+        // Глобальная и направленная проверки отправки, как в RadioSystem.
+        var sendAttempt = new RadioSendAttemptEvent(channel, radioSource);
+        RaiseLocalEvent(ref sendAttempt);
+        RaiseLocalEvent(radioSource, ref sendAttempt);
+        if (sendAttempt.Cancelled)
+            return;
+
+        var sourceMapId = Transform(radioSource).MapID;
+        var sourceServerExempt = HasComp<TelecomExemptComponent>(radioSource);
+
+        // Сервер проверяется один раз и именно на карте источника.
+        // GlobalReceive получателя не отменяет необходимость этого сервера.
+        if (!channel.LongRange && !sourceServerExempt &&
+            !HasActiveServer(sourceMapId, channel.ID))
         {
-            if (!radio.Channels.Contains(SecurityChannel.Id))
+            return;
+        }
+
+        var radioQuery = EntityQueryEnumerator<ActiveRadioComponent, TransformComponent>();
+        while (radioQuery.MoveNext(out var radioUid, out var radio, out var transform))
+        {
+            // ReceiveAllChannels обходит обе проверки каналов, как в RadioSystem.
+            if (!radio.ReceiveAllChannels)
+            {
+                if (!radio.Channels.Contains(channel.ID) ||
+                    (TryComp<IntercomComponent>(radioUid, out var intercom) &&
+                     !intercom.SupportedChannels.Contains(channel.ID)))
+                {
+                    continue;
+                }
+            }
+
+            // Для обычного канала другая карта доступна только с GlobalReceive.
+            if (!channel.LongRange && transform.MapID != sourceMapId && !radio.GlobalReceive)
                 continue;
 
-            // A headset can have a channel disabled in its settings even when its
-            // ActiveRadioComponent still contains the channel.
+            // Проверяем приём глобально и на конкретном радиоустройстве.
+            var receiveAttempt = new RadioReceiveAttemptEvent(channel, radioSource, radioUid);
+            RaiseLocalEvent(ref receiveAttempt);
+            RaiseLocalEvent(radioUid, ref receiveAttempt);
+            if (receiveAttempt.Cancelled)
+                continue;
+
+            // Штатный обработчик гарнитуры дополнительно учитывает
+            // отключённые игроком каналы. Сохраняем эту проверку для звука.
             if (TryComp(radioUid, out HeadsetComponent? headset) &&
-                !headset.EnabledChannels.GetValueOrDefault(SecurityChannel.Id, true))
+                !headset.EnabledChannels.GetValueOrDefault(channel.ID, true))
             {
                 continue;
             }
 
             AddPanicRecipient(radioUid, recipients);
         }
+    }
+
+    /// Проверяет наличие запитанного телекоммуникационного сервера
+    /// с нужным каналом на указанной карте, как в RadioSystem.HasActiveServer.
+    private bool HasActiveServer(MapId mapId, string channelId)
+    {
+        var servers = EntityQueryEnumerator<TelecomServerComponent,
+            EncryptionKeyHolderComponent, ApcPowerReceiverComponent, TransformComponent>();
+
+        while (servers.MoveNext(out _, out _, out var keys, out var power, out var transform))
+        {
+            if (transform.MapID == mapId && power.Powered && keys.Channels.Contains(channelId))
+                return true;
+        }
+
+        return false;
     }
 
     private void AddPanicRecipient(EntityUid uid, HashSet<ICommonSession> recipients)
