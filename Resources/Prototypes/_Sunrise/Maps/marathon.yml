@@ -4,7 +4,7 @@
   mapPath: /Maps/_Sunrise/Station/marathon.yml
   maxRandomOffset: 0
   randomRotation: false
-  minPlayers: 15
+  minPlayers: 16
   maxPlayers: 100
   stations:
     Marathon:
@@ -88,6 +88,7 @@
             #law
             IAA: [ 1, 1 ]
             Lawyer: [ 2, 3 ]
+            NtrOfficer: [1, 2]
             # silicon
             StationAi: [ 1, 1 ]
             Borg: [ 3, 3 ]

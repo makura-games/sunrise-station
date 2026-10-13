@@ -14,6 +14,10 @@
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: 'TG'
+        - type: SpawnGridAndDockToStation
+          grids:
+          - gridPath: /Maps/_Sunrise/Shuttles/DSO/Other/gunship.yml
+            priorityTag: DockSecurity          
         - type: StationJobs
           availableJobs:
             #centcom
