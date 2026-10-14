@@ -16,7 +16,7 @@
             prefixCreator: 'TG'
         - type: SpawnGridAndDockToStation
           grids:
-          - gridPath: /Maps/_Sunrise/Shuttles/Security/mosquitt.yml
+          - gridPath: /Maps/_Sunrise/Shuttles/Security/mosquittt.yml
             priorityTag: DockSecurity
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/_Sunrise/Shuttles/Evac/emergency-centipede.yml

@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 09/18/2026 18:00:54
-  entityCount: 870
+  time: 10/14/2026 14:37:39
+  entityCount: 877
 maps: []
 grids:
 - 1
@@ -93,11 +93,15 @@ entities:
             157: 3,2
             158: 2,2
             159: 1,2
-            160: 0,6
             191: -7,-1
             196: 1,8
             197: 1,1
             198: 3,1
+        - node:
+            color: '#DE3A3AFF'
+            id: BotGreyscale
+          decals:
+            295: 2,15
         - node:
             color: '#FFFFFFFF'
             id: BotGreyscale
@@ -105,6 +109,7 @@ entities:
             188: 1,13
             189: 3,13
             210: 2,-11
+            298: 0,6
         - node:
             color: '#FFFFFFFF'
             id: Box
@@ -114,15 +119,12 @@ entities:
             174: -2,1
             175: 6,1
             199: 1,14
-            200: 2,15
             201: 3,14
         - node:
             color: '#FFFFFFFF'
             id: BoxGreyscale
           decals:
             170: 3,8
-            176: -1,1
-            177: 5,1
             178: 4,-6
             179: 4,-5
             180: 0,-5
@@ -399,6 +401,12 @@ entities:
             207: 2,-3
             208: 4,11
             209: 0,11
+        - node:
+            color: '#FFFFFFFF'
+            id: DeliveryGreyscale
+          decals:
+            296: -1,1
+            297: 5,1
         - node:
             color: '#DE3A3AFF'
             id: WarnBoxGreyscale
@@ -1327,16 +1335,6 @@ entities:
       - - Security
     - type: Fixtures
       fixtures: {}
-- proto: BannerSecurity
-  entities:
-  - uid: 62
-    components:
-    - type: Transform
-      anchored: True
-      pos: 2.5,-8.5
-      parent: 1
-    - type: Physics
-      bodyType: Static
 - proto: Bed
   entities:
   - uid: 63
@@ -2621,12 +2619,9 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 499
-          - 500
-          - 505
-          - 503
-          - 506
-          - 495
+          - 492
+          - 494
+          - 493
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -2657,9 +2652,12 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 534
-          - 535
-          - 532
+          - 500
+          - 499
+          - 498
+          - 496
+          - 497
+          - 495
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -2690,42 +2688,12 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 536
-          - 537
-          - 533
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 593
-    components:
-    - type: Transform
-      anchored: True
-      pos: 2.5,15.5
-      parent: 1
-    - type: AccessReader
-      accessListsOriginal: []
-      access:
-      - - Security
-    - type: Physics
-      bodyType: Static
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.14673
-        moles:
-          Oxygen: 1.7459903
-          Nitrogen: 6.568249
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 494
-          - 493
-          - 492
+          - 501
+          - 503
+          - 502
+          - 504
+          - 505
+          - 506
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -2756,13 +2724,9 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 507
-          - 501
-          - 504
-          - 498
-          - 497
-          - 502
-          - 496
+          - 533
+          - 534
+          - 532
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -2791,21 +2755,88 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 73
-          - 74
-          - 13
           - 14
-          - 656
-          - 302
-          - 657
-          - 860
-          - 306
-          - 487
+          - 13
           - 303
+          - 487
+          - 306
+          - 860
+          - 657
+          - 302
+          - 656
+          - 74
+          - 73
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
+- proto: DisposalPipe
+  entities:
+  - uid: 536
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,18.5
+      parent: 1
+  - uid: 537
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,17.5
+      parent: 1
+  - uid: 859
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,22.5
+      parent: 1
+  - uid: 867
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,19.5
+      parent: 1
+  - uid: 871
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,20.5
+      parent: 1
+  - uid: 872
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,16.5
+      parent: 1
+  - uid: 873
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,21.5
+      parent: 1
+- proto: DisposalTrunk
+  entities:
+  - uid: 507
+    components:
+    - type: Transform
+      pos: 2.5,23.5
+      parent: 1
+  - uid: 866
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,15.5
+      parent: 1
+- proto: DisposalUnit
+  entities:
+  - uid: 874
+    components:
+    - type: MetaData
+      desc: Поместите картридж внутрь для его замены.
+      name: Механизм заряжания EXP-3600g "Жабык"
+    - type: Transform
+      pos: 2.5,15.5
+      parent: 1
 - proto: DoubleEmergencyOxygenTankFilled
   entities:
   - uid: 303
@@ -4340,164 +4371,94 @@ entities:
       parent: 1
     - type: Physics
       bodyType: Static
-- proto: Magazine60mmRocket
+- proto: MagazineGrenadeBlast
   entities:
-  - uid: 492
-    components:
-    - type: Transform
-      parent: 593
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 593
-  - uid: 493
-    components:
-    - type: Transform
-      parent: 593
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 593
-  - uid: 494
-    components:
-    - type: Transform
-      parent: 593
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 593
-- proto: MagazineBoxBelt127Artillery
-  entities:
-  - uid: 495
-    components:
-    - type: Transform
-      parent: 589
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 589
-  - uid: 496
-    components:
-    - type: Transform
-      parent: 594
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 594
-  - uid: 497
-    components:
-    - type: Transform
-      parent: 594
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 594
-  - uid: 498
-    components:
-    - type: Transform
-      parent: 594
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 594
-  - uid: 499
-    components:
-    - type: Transform
-      parent: 589
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 589
-- proto: MagazineBoxBelt127Blast
-  entities:
-  - uid: 500
-    components:
-    - type: Transform
-      parent: 589
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 589
-  - uid: 501
-    components:
-    - type: Transform
-      parent: 594
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 594
   - uid: 502
     components:
     - type: Transform
-      parent: 594
+      parent: 592
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-      storage: 594
+      storage: 592
   - uid: 503
     components:
     - type: Transform
-      parent: 589
+      parent: 592
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-      storage: 589
+      storage: 592
   - uid: 504
     components:
     - type: Transform
-      parent: 594
+      parent: 592
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-      storage: 594
+      storage: 592
   - uid: 505
     components:
     - type: Transform
-      parent: 589
+      parent: 592
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-      storage: 589
+      storage: 592
   - uid: 506
     components:
     - type: Transform
-      parent: 589
+      parent: 592
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-      storage: 589
-  - uid: 507
+      storage: 592
+- proto: MagazineGrenadeEMP
+  entities:
+  - uid: 501
     components:
     - type: Transform
-      parent: 594
+      parent: 592
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-      storage: 594
+      storage: 592
 - proto: NitrogenCanister
   entities:
   - uid: 508
     components:
     - type: Transform
+      anchored: True
       pos: 0.5,-5.5
       parent: 1
+    - type: Physics
+      bodyType: Static
   - uid: 509
     components:
     - type: Transform
+      anchored: True
       pos: 4.5,-5.5
       parent: 1
+    - type: Physics
+      bodyType: Static
 - proto: OxygenCanister
   entities:
   - uid: 510
     components:
     - type: Transform
+      anchored: True
       pos: 0.5,-4.5
       parent: 1
+    - type: Physics
+      bodyType: Static
   - uid: 511
     components:
     - type: Transform
+      anchored: True
       pos: 4.5,-4.5
       parent: 1
+    - type: Physics
+      bodyType: Static
 - proto: PlasmaReinforcedWindowDirectional
   entities:
   - uid: 512
@@ -4679,56 +4640,120 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
-- proto: PowerCageERT
+  - uid: 876
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,3.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 877
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,3.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: PowerCageHigh
   entities:
+  - uid: 492
+    components:
+    - type: Transform
+      parent: 589
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+      storage: 589
+  - uid: 493
+    components:
+    - type: Transform
+      parent: 589
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+      storage: 589
+  - uid: 494
+    components:
+    - type: Transform
+      parent: 589
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+      storage: 589
+  - uid: 495
+    components:
+    - type: Transform
+      parent: 590
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+      storage: 590
+  - uid: 496
+    components:
+    - type: Transform
+      parent: 590
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+      storage: 590
+  - uid: 497
+    components:
+    - type: Transform
+      parent: 590
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+      storage: 590
+  - uid: 498
+    components:
+    - type: Transform
+      parent: 590
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+      storage: 590
+  - uid: 499
+    components:
+    - type: Transform
+      parent: 590
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+      storage: 590
+  - uid: 500
+    components:
+    - type: Transform
+      parent: 590
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+      storage: 590
   - uid: 532
     components:
     - type: Transform
-      parent: 590
+      parent: 594
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-      storage: 590
+      storage: 594
   - uid: 533
     components:
     - type: Transform
-      parent: 592
+      parent: 594
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-      storage: 592
+      storage: 594
   - uid: 534
     components:
     - type: Transform
-      parent: 590
+      parent: 594
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-      storage: 590
-  - uid: 535
-    components:
-    - type: Transform
-      parent: 590
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 590
-  - uid: 536
-    components:
-    - type: Transform
-      parent: 592
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 592
-  - uid: 537
-    components:
-    - type: Transform
-      parent: 592
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 592
+      storage: 594
 - proto: PowerCageRecharger
   entities:
   - uid: 538
@@ -4742,6 +4767,18 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 3.5,13.5
+      parent: 1
+  - uid: 599
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,1.5
+      parent: 1
+  - uid: 852
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,1.5
       parent: 1
 - proto: PoweredFloorlight
   entities:
@@ -5052,6 +5089,14 @@ entities:
       canCollide: False
     - type: InsideEntityStorage
       storage: 301
+- proto: ShuttleGunBullfrog
+  entities:
+  - uid: 535
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,23.5
+      parent: 1
 - proto: ShuttleGunPerforator
   entities:
   - uid: 596
@@ -5066,27 +5111,17 @@ entities:
       rot: 3.141592653589793 rad
       pos: -1.5,12.5
       parent: 1
-- proto: ShuttleGunRocketVanyk60mm
-  entities:
-  - uid: 598
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.5,23.5
-      parent: 1
-- proto: ShuttleGunVympel
-  entities:
-  - uid: 599
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 9.5,3.5
-      parent: 1
-  - uid: 600
+  - uid: 858
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -4.5,3.5
+      parent: 1
+  - uid: 875
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 9.5,3.5
       parent: 1
 - proto: SignalButtonDirectional
   entities:
@@ -6511,7 +6546,7 @@ entities:
         charger_slot: !type:ContainerSlot
           showEnts: False
           occludes: True
-          ent: 848
+          ent: 593
         machine_board: !type:Container
           showEnts: False
           occludes: True
@@ -6548,17 +6583,62 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideCharger
-- proto: WeaponEarthGovLaserSniper
+- proto: WeaponEnergyTurretSecurity
   entities:
+  - uid: 62
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,-6.5
+      parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 851
+  - uid: 598
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 11.5,-4.5
+      parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 851
+  - uid: 600
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 12.5,7.5
+      parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 851
   - uid: 848
     components:
-    - type: MetaData
-      name: HSR - F11 "Игла"
     - type: Transform
-      parent: 847
-    - type: Physics
-      canCollide: False
-    - type: InsideCharger
+      rot: 3.141592653589793 rad
+      pos: 3.5,8.5
+      parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 851
+  - uid: 854
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -6.5,-4.5
+      parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 851
+  - uid: 857
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,7.5
+      parent: 1
+    - type: DeviceNetwork
+      deviceLists:
+      - 851
 - proto: WeaponEnergyTurretSecurityControlPanel
   entities:
   - uid: 851
@@ -6572,76 +6652,21 @@ entities:
       - - Security
     - type: DeviceList
       devices:
-      - 858
-      - 859
+      - 62
+      - 848
+      - 600
+      - 598
       - 854
-      - 867
       - 857
-      - 866
-      - 852
-- proto: WeaponTurretRogueSiliconLaser
+- proto: WeaponPilotLasgun
   entities:
-  - uid: 852
+  - uid: 593
     components:
     - type: Transform
-      pos: 11.5,-4.5
-      parent: 1
-    - type: DeviceNetwork
-      deviceLists:
-      - 851
-  - uid: 854
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -0.5,1.5
-      parent: 1
-    - type: DeviceNetwork
-      deviceLists:
-      - 851
-  - uid: 857
-    components:
-    - type: Transform
-      pos: -6.5,-4.5
-      parent: 1
-    - type: DeviceNetwork
-      deviceLists:
-      - 851
-  - uid: 858
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 3.5,8.5
-      parent: 1
-    - type: DeviceNetwork
-      deviceLists:
-      - 851
-  - uid: 859
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 5.5,1.5
-      parent: 1
-    - type: DeviceNetwork
-      deviceLists:
-      - 851
-  - uid: 866
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 12.5,7.5
-      parent: 1
-    - type: DeviceNetwork
-      deviceLists:
-      - 851
-  - uid: 867
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -7.5,7.5
-      parent: 1
-    - type: DeviceNetwork
-      deviceLists:
-      - 851
+      parent: 847
+    - type: Physics
+      canCollide: False
+    - type: InsideCharger
 - proto: WelderIndustrial
   entities:
   - uid: 860

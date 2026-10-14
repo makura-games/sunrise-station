@@ -21,7 +21,7 @@
         grids:
           - gridPath: /Maps/_Sunrise/Shuttles/Salvage/mining.yml
             priorityTag: DockMining                
-          - gridPath: /Maps/_Sunrise/Shuttles/Security/mosquitt.yml
+          - gridPath: /Maps/_Sunrise/Shuttles/Security/mosquittt.yml
             priorityTag: DockSecurity
       - type: StationJobs
         availableJobs:

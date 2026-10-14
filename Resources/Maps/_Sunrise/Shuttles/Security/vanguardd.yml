@@ -4,8 +4,8 @@ meta:
   engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 09/18/2026 13:50:53
-  entityCount: 879
+  time: 10/14/2026 14:43:05
+  entityCount: 876
 maps: []
 grids:
 - 1
@@ -1188,6 +1188,26 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 2.5,2.5
+      parent: 1
+  - uid: 35
+    components:
+    - type: Transform
+      pos: -3.5,-14.5
+      parent: 1
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 8.5,-14.5
+      parent: 1
+  - uid: 49
+    components:
+    - type: Transform
+      pos: -1.5,-6.5
+      parent: 1
+  - uid: 50
+    components:
+    - type: Transform
+      pos: 6.5,-6.5
       parent: 1
 - proto: BoxBodyBag
   entities:
@@ -4853,38 +4873,6 @@ entities:
       canCollide: False
     - type: InsideEntityStorage
       storage: 712
-- proto: ShuttersWindowOpen
-  entities:
-  - uid: 578
-    components:
-    - type: Transform
-      pos: 8.5,-14.5
-      parent: 1
-  - uid: 579
-    components:
-    - type: Transform
-      pos: -3.5,-15.5
-      parent: 1
-  - uid: 580
-    components:
-    - type: Transform
-      pos: -3.5,-14.5
-      parent: 1
-  - uid: 581
-    components:
-    - type: Transform
-      pos: 8.5,-15.5
-      parent: 1
-  - uid: 582
-    components:
-    - type: Transform
-      pos: 6.5,-6.5
-      parent: 1
-  - uid: 583
-    components:
-    - type: Transform
-      pos: -1.5,-6.5
-      parent: 1
 - proto: ShuttleGunBeamstormMachineGun
   entities:
   - uid: 584
@@ -5049,10 +5037,7 @@ entities:
       parent: 1
     - type: DeviceLinkSource
       linkedPorts:
-        578:
-        - - Pressed
-          - Toggle
-        581:
+        44:
         - - Pressed
           - Toggle
     - type: Fixtures
@@ -5066,10 +5051,7 @@ entities:
       parent: 1
     - type: DeviceLinkSource
       linkedPorts:
-        580:
-        - - Pressed
-          - Toggle
-        579:
+        35:
         - - Pressed
           - Toggle
     - type: Fixtures
@@ -5084,10 +5066,10 @@ entities:
       parent: 1
     - type: DeviceLinkSource
       linkedPorts:
-        582:
+        49:
         - - Pressed
           - Toggle
-        583:
+        50:
         - - Pressed
           - Toggle
     - type: Fixtures
@@ -6693,7 +6675,7 @@ entities:
         charger_slot: !type:ContainerSlot
           showEnts: False
           occludes: True
-          ent: 874
+          ent: 875
         machine_board: !type:Container
           showEnts: False
           occludes: True
@@ -6713,7 +6695,7 @@ entities:
         charger_slot: !type:ContainerSlot
           showEnts: False
           occludes: True
-          ent: 875
+          ent: 578
         machine_board: !type:Container
           showEnts: False
           occludes: True
@@ -6724,17 +6706,10 @@ entities:
           ents: []
 - proto: WeaponEarthGovLaserPistol
   entities:
-  - uid: 874
-    components:
-    - type: Transform
-      parent: 855
-    - type: Physics
-      canCollide: False
-    - type: InsideCharger
   - uid: 875
     components:
     - type: Transform
-      parent: 856
+      parent: 855
     - type: Physics
       canCollide: False
     - type: InsideCharger
@@ -6748,7 +6723,6 @@ entities:
       parent: 1
     - type: DeviceNetwork
       deviceLists:
-      - 868
       - 867
   - uid: 859
     components:
@@ -6758,7 +6732,6 @@ entities:
       parent: 1
     - type: DeviceNetwork
       deviceLists:
-      - 868
       - 867
   - uid: 860
     components:
@@ -6768,7 +6741,6 @@ entities:
       parent: 1
     - type: DeviceNetwork
       deviceLists:
-      - 868
       - 867
   - uid: 861
     components:
@@ -6778,7 +6750,6 @@ entities:
       parent: 1
     - type: DeviceNetwork
       deviceLists:
-      - 868
       - 867
   - uid: 862
     components:
@@ -6788,7 +6759,6 @@ entities:
       parent: 1
     - type: DeviceNetwork
       deviceLists:
-      - 868
       - 867
   - uid: 863
     components:
@@ -6798,7 +6768,6 @@ entities:
       parent: 1
     - type: DeviceNetwork
       deviceLists:
-      - 868
       - 867
   - uid: 864
     components:
@@ -6808,7 +6777,6 @@ entities:
       parent: 1
     - type: DeviceNetwork
       deviceLists:
-      - 868
       - 867
   - uid: 866
     components:
@@ -6818,7 +6786,6 @@ entities:
       parent: 1
     - type: DeviceNetwork
       deviceLists:
-      - 868
       - 867
 - proto: WeaponEnergyTurretSecurityControlPanel
   entities:
@@ -6835,27 +6802,17 @@ entities:
       - 864
       - 861
       - 862
-      - 859
       - 863
-  - uid: 868
+      - 859
+- proto: WeaponPilotLasgun
+  entities:
+  - uid: 578
     components:
     - type: Transform
-      pos: -1.5,0.5
-      parent: 1
-    - type: AccessReader
-      accessListsOriginal:
-      - - StationAi
-      - - Security
-    - type: DeviceList
-      devices:
-      - 866
-      - 860
-      - 857
-      - 864
-      - 861
-      - 862
-      - 859
-      - 863
+      parent: 856
+    - type: Physics
+      canCollide: False
+    - type: InsideCharger
 - proto: WelderIndustrial
   entities:
   - uid: 885

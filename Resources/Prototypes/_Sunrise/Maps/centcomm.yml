@@ -16,7 +16,7 @@
             prefixCreator: 'TG'
         - type: SpawnGridAndDockToStation
           grids:
-          - gridPath: /Maps/_Sunrise/Shuttles/DSO/Other/representative_shuttle.yml
+          - gridPath: /Maps/_Sunrise/Shuttles/DSO/Other/gunship.yml
             priorityTag: DockSecurity          
         - type: StationJobs
           availableJobs:
