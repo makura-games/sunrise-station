@@ -124,6 +124,7 @@ public sealed partial class PettingSystem : SharedPettingSystem
                 return;
 
             // Открываем окно для настройки гостроли питомца.
+            // TODO: Фикс, что это можно делать только с админкой лол
             _ghostRole.OpenMakeGhostRoleEui(masterSession, pet);
         }
         else
