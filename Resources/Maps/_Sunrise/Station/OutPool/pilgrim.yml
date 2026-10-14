@@ -119732,16 +119732,6 @@ entities:
     - type: Transform
       pos: 135.5,36.5
       parent: 2
-  - uid: 12453
-    components:
-    - type: Transform
-      pos: -46.5,-34.5
-      parent: 2
-    - type: UserInterface
-      actors:
-        enum.StorageUiKey.Key:
-        - invalid
-    - type: ActiveUserInterface
   - uid: 12454
     components:
     - type: Transform
@@ -120507,22 +120497,6 @@ entities:
     - type: Transform
       pos: 106.49491,8.708555
       parent: 2
-  - uid: 12592
-    components:
-    - type: Transform
-      parent: 12591
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 12591
-  - uid: 12593
-    components:
-    - type: Transform
-      parent: 12591
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 12591
   - uid: 12596
     components:
     - type: Transform
@@ -143814,14 +143788,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 15560
-    components:
-    - type: Transform
-      parent: 15559
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 15559
   - uid: 15561
     components:
     - type: Transform
@@ -144349,32 +144315,6 @@ entities:
     - type: Transform
       pos: -46.47039,-24.367971
       parent: 2
-- proto: FoodSnackEnergy
-  entities:
-  - uid: 12594
-    components:
-    - type: Transform
-      parent: 12591
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 12591
-  - uid: 15630
-    components:
-    - type: Transform
-      rot: 0.22689280275926285 rad
-      pos: -40.502,-24.391603
-      parent: 2
-- proto: FoodSnackMaysonEnergy
-  entities:
-  - uid: 12595
-    components:
-    - type: Transform
-      parent: 12591
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-      storage: 12591
 - proto: FoodSoupBeet
   entities:
   - uid: 15631
@@ -188535,35 +188475,6 @@ entities:
     - type: Transform
       pos: -7.5,13.5
       parent: 33105
-- proto: LockerFreezerBase
-  entities:
-  - uid: 12591
-    components:
-    - type: Transform
-      pos: -36.78375,-38.317802
-      parent: 2
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.14673
-        moles:
-          Oxygen: 1.7459903
-          Nitrogen: 6.568249
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 12595
-          - 12594
-          - 12592
-          - 12593
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
   - uid: 15559
     components:
     - type: Transform
@@ -193068,105 +192979,6 @@ entities:
 
         [color=#D3D3D3]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀🄼🄸🄰[/color]
       editingDisabled: True
-  - uid: 21454
-    components:
-    - type: Transform
-      rot: 0.7077056169509888 rad
-      pos: -50.426506,-24.375431
-      parent: 2
-    - type: DamageOnHighSpeedImpact
-      lastHit: 0
-    - type: Physics
-      bodyStatus: InAir
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.25
-            - 0.25,-0.25
-            - 0.25,0.25
-            - -0.25,0.25
-          mask:
-          - Impassable
-          - HighImpassable
-          layer: []
-          density: 20
-          hard: True
-          restitution: 0.3
-          friction: 0.2
-        throw-fixture:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.25
-            - 0.25,-0.25
-            - 0.25,0.25
-            - -0.25,0.25
-          mask:
-          - Impassable
-          - HighImpassable
-          - BulletImpassable
-          layer: []
-          density: 1
-          hard: False
-          restitution: 0
-          friction: 0.4
-    - type: SunriseThrownItemDamage
-      originalLinearDamping: 0.2
-    - type: Paper
-      content: >-
-        ╔═══════════════════════════════════════╗
-
-        ║⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[color=#AAAAAA][bold]MIA PRINTED DOCUMENT[/bold][/color]⠀⠀⠀⠀⠀⠀⠀⠀       ║
-
-        ╚═══════════════════════════════════════╝
-
-        ╔══════════════════════╦════════════════╗
-
-        ║⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣤⣄⣀⠀⠀⠀⠀⠀⠀ ⠀  ║
-
-        ║⠀⠀⠀⠀⢀⣠⣶⠿⢃⣠⣤⠀⣤⣾⣿⣶⣄ ⠀⠀⠀⠀  ║
-
-        ║⠀⠀⠀⣠⠞⠀⢀⠀⠈⠙⠋⠀⠀⠀⠀⢻⣿⣷⡄   ⠀⠀║ [bold]Объект:[/bold] Pilgrim                                                             
-
-        ║⠀⠀⢠⢏⣰⣮⡛⠀⠀⠀⠀⠀⣄⣤⠀⠀⣿⣿⣿⡄  ⠀ ║ [bold]Климат:[/bold] -20°С — 30°С, ║⠀⠀⣿⠘⣿⣭⠁⠀⠀⠀⠀⠀⠁⠘⠇⠀⢸⣿⣿⣿   ⠀║ высокая влажность
-
-        ║⠀⠀⣿⠀⠙⠿⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⣿⣿⣿⣿   ⠀║ [bold]Атмосфера:[/bold] азот 80%,
-
-        ║⠀⠀⠹⡄⠀⠀⠀⠀⠀⠸⠿⠆⢠⣤⣴⣿⣿⣿⣿⠏  ⠀ ║ кислород 19%,
-
-        ║⠀⠀⠀⠹⣤⣄⠠⠄⠀⠀⠐⢾⣗⣭⣿⣿⣿⣿⠏ ⠀ ⠀ ║ прочие газы
-
-        ║⠀⠀⠀⠀⠈⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁ ⠀⠀  ⠀║
-
-        ║⠀⠀⠀⠀⠀⠀⠀⠈⠙⠛⠛⠛⠛⠋⠁⠀⠀⠀⠀⠀   ⠀║
-
-        ╠══════════════════════╩════════════════╣
-
-        ⠀  [head=3]Краткое описание[/head]
-
-        ╠═══════════════════════════════════════╣
-
-        ⠀  Планета земного типа. Большую часть планеты
-
-        ⠀  занимает океан. Территории суши представляют
-
-        ⠀  собой разрозненные группы небольших островов.
-
-        ⠀  Зафиксирована аномальная магнитная активность.
-
-        ╚═══════════════════════════════════════╝
-
-
-        [color=#D3D3D3]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀🄼🄸🄰[/color]
-      editingDisabled: True
-    - type: ThrownItem
-      playLandSound: True
-      landTime: 77585.8353093
-      thrownTime: 77585.8
-      thrower: invalid
   - uid: 21455
     components:
     - type: Transform
