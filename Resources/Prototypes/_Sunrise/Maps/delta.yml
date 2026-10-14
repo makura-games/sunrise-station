@@ -18,7 +18,7 @@
           grids:
           - gridPath: /Maps/_Sunrise/Shuttles/Salvage/siera.yml
             priorityTag: DockMining
-          - gridPath: /Maps/_Sunrise/Shuttles/Security/securityy.yml
+          - gridPath: /Maps/_Sunrise/Shuttles/Security/security.yml
             priorityTag: DockSecurity
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/_Sunrise/Shuttles/Evac/emergency-centipede.yml

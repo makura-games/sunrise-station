@@ -21,9 +21,9 @@
           grids:
           - gridPath: /Maps/_Sunrise/Shuttles/Salvage/asteroidcracker.yml
             priorityTag: DockMining
-          - gridPath: /Maps/_Sunrise/Shuttles/Security/stargazee.yml
+          - gridPath: /Maps/_Sunrise/Shuttles/Security/stargaze.yml
             priorityTag: DockSecurity
-           
+
         - type: StationJobs
           availableJobs:
             #command

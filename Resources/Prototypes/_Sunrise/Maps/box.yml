@@ -18,7 +18,7 @@
           grids:
           - gridPath: /Maps/_Sunrise/Shuttles/Salvage/pickaxe.yml
             priorityTag: DockMining
-          - gridPath: /Maps/_Sunrise/Shuttles/Security/vanguardd.yml
+          - gridPath: /Maps/_Sunrise/Shuttles/Security/vanguard.yml
             priorityTag: DockSecurity
         - type: StationEmergencyShuttle
           emergencyShuttlePath: /Maps/_Sunrise/Shuttles/Evac/emergency-box-bagel.yml
