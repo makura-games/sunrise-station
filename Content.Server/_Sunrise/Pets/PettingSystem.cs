@@ -268,6 +268,11 @@ public sealed partial class PettingSystem : SharedPettingSystem
         if (!master.HasValue)
             return;
 
+        // Проверка, что питомец реально может выполнить приказ, который отправлен игроком.
+        // Это серверная валидация на случай модифицированного клиента.
+        if (!pet.Comp.AllowedOrders.Contains(order))
+            return;
+
         // Обновляем фракцию питомца, если указ изменился
         if (order != pet.Comp.CurrentOrder)
         {
