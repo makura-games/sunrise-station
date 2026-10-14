@@ -89,7 +89,7 @@
             NtrOfficer: [1, 2]
             # silicon (8)
             StationAi: [ 1, 1 ]
-            Borg: [ 3, 3 ]
+            Borg: [ 3, 4 ]
             JanitorBorg: [ 1, 1 ]
             ServiceBorg: [ 1, 1 ]
             ClownBorg: [ 1, 1 ]

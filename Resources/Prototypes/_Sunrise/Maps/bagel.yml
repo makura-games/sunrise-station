@@ -90,7 +90,7 @@
           NtrOfficer: [1, 2]
           # silicon
           StationAi: [ 1, 1 ]
-          Borg: [ 3, 3 ]
+          Borg: [ 3, 4 ]
           EngineerBorg: [ 1, 1 ]
           MiningBorg: [ 1, 1 ]
           JanitorBorg: [ 1, 1 ]

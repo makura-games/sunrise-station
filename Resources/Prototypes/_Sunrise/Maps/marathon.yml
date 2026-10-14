@@ -4,7 +4,7 @@
   mapPath: /Maps/_Sunrise/Station/marathon.yml
   maxRandomOffset: 0
   randomRotation: false
-  minPlayers: 16
+  minPlayers: 15
   maxPlayers: 100
   stations:
     Marathon:
