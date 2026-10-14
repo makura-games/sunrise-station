@@ -86699,7 +86699,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 193
-      - invalid
   - uid: 13686
     components:
     - type: Transform
@@ -115815,7 +115814,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       deviceLists:
-      - invalid
     - type: AtmosPipeColor
       color: '#0055CCFF'
   - uid: 17365
