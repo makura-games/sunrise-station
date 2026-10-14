@@ -50,7 +50,7 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: QL14 Feizao class Transport Shuttle NX-135
+      name: QL14 F class Transport Shuttle
     - type: Transform
       parent: invalid
     - type: MapGrid

@@ -36822,7 +36822,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 278
   - uid: 721
@@ -37348,7 +37347,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 130
   - uid: 780
@@ -37508,7 +37506,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 95
-      - invalid
   - uid: 798
     components:
     - type: Transform
@@ -38861,7 +38858,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 280
       - 281
@@ -38873,7 +38869,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 280
       - 281
@@ -38885,7 +38880,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 280
       - 281
@@ -38897,7 +38891,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 280
       - 281
@@ -44705,7 +44698,6 @@ entities:
     - type: UserInterface
       actors:
         enum.StorageUiKey.Key:
-        - invalid
     - type: ActiveUserInterface
   - uid: 1871
     components:
@@ -126788,7 +126780,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 205
       - 280
@@ -126966,7 +126957,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 223
       - 16115
@@ -127781,7 +127771,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 16073
       - 74
@@ -127793,7 +127782,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 16073
       - 74
@@ -127805,7 +127793,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 16073
       - 74
@@ -128286,7 +128273,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 16075
       - 76
@@ -128298,7 +128284,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 16075
       - 76
@@ -128332,7 +128317,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 16074
       - 75
@@ -128344,7 +128328,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 16074
       - 75
@@ -129034,7 +129017,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 16076
       - 77
@@ -129046,7 +129028,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 16076
       - 77
@@ -129058,7 +129039,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 16076
       - 77
@@ -129083,7 +129063,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 206
       - 147
@@ -130917,7 +130896,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 223
       - 16115
@@ -132169,7 +132147,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 178
       - 180
@@ -132493,7 +132470,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 205
       - 280
@@ -132505,7 +132481,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 205
       - 280
@@ -132517,7 +132492,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 279
       - 280
@@ -132529,7 +132503,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 205
       - 280
@@ -132541,7 +132514,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 280
       - 281
@@ -132552,7 +132524,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 280
       - 281
@@ -132563,7 +132534,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 280
       - 281
@@ -132574,7 +132544,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 279
       - 280
@@ -176495,7 +176464,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 278
     - type: AtmosPipeColor
@@ -177417,7 +177385,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 205
       - 280
@@ -179981,7 +179948,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 278
     - type: AtmosPipeColor
@@ -180823,7 +180789,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 205
       - 280
@@ -194358,7 +194323,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
     - type: DeviceLinkSource
       linkedPorts:
         26611:
@@ -207730,7 +207694,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
   - uid: 27178
     components:
     - type: Transform
@@ -266878,7 +266841,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
 - proto: SurveillanceCameraRouterScience
   entities:
   - uid: 34472
@@ -300184,7 +300146,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 40248
 - proto: WeaponEnergyTurretSecurityControlPanel

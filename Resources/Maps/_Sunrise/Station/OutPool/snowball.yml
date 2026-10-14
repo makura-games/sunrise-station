@@ -17646,7 +17646,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 14
   - uid: 339
@@ -156258,7 +156257,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 22536
   - uid: 22532
@@ -156268,7 +156266,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 22536
   - uid: 22533
@@ -156278,7 +156275,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 22536
   - uid: 22534
@@ -156289,7 +156285,6 @@ entities:
       parent: 2
     - type: DeviceNetwork
       configurators:
-      - invalid
       deviceLists:
       - 22536
 - proto: WeaponEnergyTurretCommandControlPanel

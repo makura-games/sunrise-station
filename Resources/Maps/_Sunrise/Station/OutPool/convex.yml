@@ -183817,14 +183817,6 @@ entities:
     - type: Transform
       pos: 63.2839,93.33271
       parent: 2
-- proto: LeftLegVulpkanin
-  entities:
-  - uid: 26590
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 118.57514,20.55999
-      parent: 2
 - proto: LightBulb
   entities:
   - uid: 26592
