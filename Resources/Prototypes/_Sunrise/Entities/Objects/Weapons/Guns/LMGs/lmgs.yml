@@ -1,5 +1,5 @@
 - type: entity
-  name: MG-60
+  name: PKM-220
   parent: BaseWeaponLightMachineGun
   id: WeaponLightMachineGunMG60
   components:
@@ -21,8 +21,8 @@
     maxAngle: 0
   - type: Gun
     minAngle: 5
-    maxAngle: 60
-    angleIncrease: 1
+    maxAngle: 45
+    angleIncrease: 2
     angleDecay: 20
     fireRate: 6.5
     soundGunshot:
@@ -64,12 +64,9 @@
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/_Sunrise/Weapons/Guns/LMGs/cocked.ogg
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.75
-    sprintModifier: 0.75
   - type: ClothingSpeedModifier
-    walkModifier: 0.85
-    sprintModifier: 0.85
+    walkModifier: 0.8
+    sprintModifier: 0.8
   - type: HeldSpeedModifier
 
 - type: entity
@@ -117,12 +114,12 @@
     sprite: _Sunrise/Objects/Weapons/Guns/LMGs/rpd/tiny.rsi
   - type: GunWieldBonus
     minAngle: -20
-    maxAngle: -60
+    maxAngle: -55
   - type: Gun
     minAngle: 24
-    maxAngle: 120
-    angleIncrease: 3
-    angleDecay: 25
+    maxAngle: 80
+    angleIncrease: 1.5
+    angleDecay: 15
     fireRate: 7.5
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/LMGs/shot.ogg
@@ -159,12 +156,9 @@
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/_Sunrise/Weapons/Guns/LMGs/cocked.ogg
-  - type: SpeedModifiedOnWield
+  - type: ClothingSpeedModifier
     walkModifier: 0.85
     sprintModifier: 0.85
-  - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
   - type: HeldSpeedModifier
 
 - type: entity
@@ -189,9 +183,9 @@
     maxAngle: 0
   - type: Gun
     minAngle: 6
-    maxAngle: 90
-    angleIncrease: 4
-    angleDecay: 60
+    maxAngle: 60
+    angleIncrease: 3
+    angleDecay: 30
     fireRate: 11
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/LMGs/shot.ogg
@@ -232,12 +226,9 @@
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/_Sunrise/Weapons/Guns/LMGs/cocked.ogg
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.75
-    sprintModifier: 0.75
   - type: ClothingSpeedModifier
-    walkModifier: 0.85
-    sprintModifier: 0.85
+    walkModifier: 0.65
+    sprintModifier: 0.65
   - type: HeldSpeedModifier
 
 - type: entity
@@ -291,22 +282,19 @@
         whitelist:
           tags:
             - CartridgeHeavyRifle
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.85
-    sprintModifier: 0.85
   - type: GunRequiresWield
   - type: ClothingSpeedModifier
-    walkModifier: 1
-    sprintModifier: 0.90
+    walkModifier: 0.75
+    sprintModifier: 0.75
   - type: HeldSpeedModifier
   - type: GunWieldBonus
     minAngle: -23
-    maxAngle: -22
+    maxAngle: -25
   - type: Gun
     minAngle: 24
-    maxAngle: 35
-    angleIncrease: 4
-    angleDecay: 18
+    maxAngle: 45
+    angleIncrease: 1.5
+    angleDecay: 14
     fireRate: 6
     soundGunshot:
       collection: m249 # Sunrise-Edit

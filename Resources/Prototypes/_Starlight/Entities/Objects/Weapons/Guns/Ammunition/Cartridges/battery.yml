@@ -29,3 +29,6 @@
   components:
   - type: CartridgeAmmo
     proto: BulletLaserWindowPiercingMagnum
+  - type: Construction
+    graph: CartridgeBattery
+    node: cartridge

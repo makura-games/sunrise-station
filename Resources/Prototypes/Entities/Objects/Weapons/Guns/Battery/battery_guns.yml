@@ -60,13 +60,13 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
   - type: Gun
-    fireRate: 3 # Sunrise-Edit
+    fireRate: 2.5 # Sunrise-Edit
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
   - type: BatteryAmmoProvider
     proto: RedLaser
-    fireCost: 32.25 # Sunrise-Edit
+    fireCost: 33.3 # Sunrise-Edit
   - type: StaticPrice
     price: 420
   - type: Tag
@@ -310,7 +310,7 @@
     price: 300
   - type: BatteryAmmoProvider
     proto: RedLaserPractice
-    fireCost: 32.25 # Sunrise-Edit
+    fireCost: 33.3 # Sunrise-Edit
   - type: PacifismAllowedGun
 
 # - type: entity #  Sunrise-Edit Moved to _Sunrise/Entities/Objects/Weapons/Guns/Battery/battery_guns.yml
@@ -454,12 +454,17 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/laser_cannon.rsi
   - type: Gun
-    fireRate: 1.5
+    fireRate: .7 # Sunrise-Edit
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: BatteryAmmoProvider
-    proto: RedHeavyLaser
-    fireCost: 40 # Sunrise-Edit
+  # Sunrise-Start
+    proto: RedSniperLaser
+    fireCost: 40
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.85
+    sprintModifier: 0.85
+  # Sunrise-End
   - type: Tag
     tags:
     - TurretCompatibleWeapon
@@ -1062,3 +1067,8 @@
     fireRate: 2
     minAngle: 1
     maxAngle: 2
+  # Sunrise-Start
+  - type: BatteryAmmoProvider
+    proto: RedHeavyLaser
+    fireCost: 100
+  # Sunrise-End

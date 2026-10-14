@@ -45475,6 +45475,7 @@ entities:
       parent: 1953
     - type: Clothing
       inSlot: neck
+      slots: NECK
       inSlotFlag: NECK
     - type: Physics
       canCollide: False
@@ -98958,6 +98959,7 @@ entities:
       parent: 12342
     - type: Clothing
       inSlot: mask
+      slots: MASK
       inSlotFlag: MASK
     - type: Physics
       canCollide: False
@@ -100685,6 +100687,7 @@ entities:
       parent: 1953
     - type: Clothing
       inSlot: back
+      slots: BACK
       inSlotFlag: BACK
     - type: Physics
       canCollide: False
@@ -100701,6 +100704,7 @@ entities:
       parent: 12551
     - type: Clothing
       inSlot: back
+      slots: BACK
       inSlotFlag: BACK
     - type: Physics
       canCollide: False
@@ -100712,6 +100716,7 @@ entities:
       parent: 40962
     - type: Clothing
       inSlot: back
+      slots: BACK
       inSlotFlag: BACK
     - type: Physics
       canCollide: False
@@ -100723,6 +100728,7 @@ entities:
       parent: 12557
     - type: Clothing
       inSlot: back
+      slots: BACK
       inSlotFlag: BACK
     - type: Physics
       canCollide: False
@@ -100759,6 +100765,7 @@ entities:
           _rotation: East
     - type: Clothing
       inSlot: back
+      slots: BACK
       inSlotFlag: BACK
     - type: ContainerContainer
       containers:
@@ -100799,6 +100806,7 @@ entities:
       parent: 12563
     - type: Clothing
       inSlot: back
+      slots: BACK
       inSlotFlag: BACK
     - type: Physics
       canCollide: False
@@ -100824,6 +100832,7 @@ entities:
       parent: 12571
     - type: Clothing
       inSlot: back
+      slots: BACK
       inSlotFlag: BACK
     - type: Physics
       canCollide: False
@@ -100875,6 +100884,7 @@ entities:
           _rotation: South
     - type: Clothing
       inSlot: back
+      slots: BACK
       inSlotFlag: BACK
     - type: ContainerContainer
       containers:
@@ -100920,6 +100930,7 @@ entities:
       parent: 12579
     - type: Clothing
       inSlot: back
+      slots: BACK
       inSlotFlag: BACK
     - type: Physics
       canCollide: False
@@ -101363,6 +101374,7 @@ entities:
       parent: 1427
     - type: Clothing
       inSlot: eyes
+      slots: EYES
       inSlotFlag: EYES
     - type: Physics
       canCollide: False
@@ -101374,6 +101386,7 @@ entities:
       parent: 40962
     - type: Clothing
       inSlot: eyes
+      slots: EYES
       inSlotFlag: EYES
     - type: Physics
       canCollide: False
@@ -101385,6 +101398,7 @@ entities:
       parent: 12557
     - type: Clothing
       inSlot: eyes
+      slots: EYES
       inSlotFlag: EYES
     - type: Physics
       canCollide: False
@@ -101454,6 +101468,7 @@ entities:
       parent: 12342
     - type: Clothing
       inSlot: eyes
+      slots: EYES
       inSlotFlag: EYES
     - type: Physics
       canCollide: False
@@ -101463,6 +101478,7 @@ entities:
       parent: 12620
     - type: Clothing
       inSlot: eyes
+      slots: EYES
       inSlotFlag: EYES
     - type: Physics
       canCollide: False
@@ -101486,6 +101502,7 @@ entities:
       parent: 12563
     - type: Clothing
       inSlot: eyes
+      slots: EYES
       inSlotFlag: EYES
     - type: Physics
       canCollide: False
@@ -101495,6 +101512,7 @@ entities:
       parent: 12571
     - type: Clothing
       inSlot: eyes
+      slots: EYES
       inSlotFlag: EYES
     - type: Physics
       canCollide: False
@@ -101506,6 +101524,7 @@ entities:
       parent: 12551
     - type: Clothing
       inSlot: eyes
+      slots: EYES
       inSlotFlag: EYES
     - type: Physics
       canCollide: False
@@ -101520,6 +101539,7 @@ entities:
       parent: 12627
     - type: Clothing
       inSlot: eyes
+      slots: EYES
       inSlotFlag: EYES
     - type: Physics
       canCollide: False
@@ -101531,6 +101551,7 @@ entities:
       parent: 1953
     - type: Clothing
       inSlot: eyes
+      slots: EYES
       inSlotFlag: EYES
     - type: Physics
       canCollide: False
@@ -101547,6 +101568,7 @@ entities:
       parent: 12633
     - type: Clothing
       inSlot: eyes
+      slots: EYES
       inSlotFlag: EYES
     - type: Physics
       canCollide: False
@@ -101627,6 +101649,7 @@ entities:
       parent: 12620
     - type: Clothing
       inSlot: head
+      slots: HEAD
       inSlotFlag: HEAD
     - type: Physics
       canCollide: False
@@ -101640,6 +101663,7 @@ entities:
       parent: 1427
     - type: Clothing
       inSlot: head
+      slots: HEAD
       inSlotFlag: HEAD
     - type: Physics
       canCollide: False
@@ -101651,6 +101675,7 @@ entities:
       parent: 1953
     - type: Clothing
       inSlot: head
+      slots: HEAD
       inSlotFlag: HEAD
     - type: Physics
       canCollide: False
@@ -101705,6 +101730,7 @@ entities:
       parent: 12551
     - type: Clothing
       inSlot: head
+      slots: HEAD
       inSlotFlag: HEAD
     - type: Physics
       canCollide: False
@@ -101714,6 +101740,7 @@ entities:
       parent: 12579
     - type: Clothing
       inSlot: head
+      slots: HEAD
       inSlotFlag: HEAD
     - type: Physics
       canCollide: False
@@ -101768,6 +101795,7 @@ entities:
       parent: 12633
     - type: Clothing
       inSlot: head
+      slots: HEAD
       inSlotFlag: HEAD
     - type: Physics
       canCollide: False
@@ -101802,6 +101830,7 @@ entities:
       parent: 12571
     - type: Clothing
       inSlot: head
+      slots: HEAD
       inSlotFlag: HEAD
     - type: Physics
       canCollide: False
@@ -102033,6 +102062,7 @@ entities:
       parent: 12342
     - type: Clothing
       inSlot: head
+      slots: HEAD
       inSlotFlag: HEAD
     - type: Physics
       canCollide: False
@@ -102051,6 +102081,7 @@ entities:
       parent: 12690
     - type: Clothing
       inSlot: head
+      slots: HEAD
       inSlotFlag: HEAD
     - type: Physics
       canCollide: False
@@ -102177,6 +102208,7 @@ entities:
       parent: 12627
     - type: Clothing
       inSlot: head
+      slots: HEAD
       inSlotFlag: HEAD
     - type: Physics
       canCollide: False
@@ -102224,6 +102256,7 @@ entities:
       parent: 40962
     - type: Clothing
       inSlot: head
+      slots: HEAD
       inSlotFlag: HEAD
     - type: Physics
       canCollide: False
@@ -102256,6 +102289,7 @@ entities:
       parent: 12563
     - type: Clothing
       inSlot: head
+      slots: HEAD
       inSlotFlag: HEAD
     - type: Physics
       canCollide: False
@@ -102319,6 +102353,7 @@ entities:
       parent: 12579
     - type: Clothing
       inSlot: mask
+      slots: MASK
       inSlotFlag: MASK
     - type: Physics
       canCollide: False
@@ -102364,6 +102399,7 @@ entities:
       parent: 12557
     - type: Clothing
       inSlot: mask
+      slots: MASK
       inSlotFlag: MASK
     - type: Physics
       canCollide: False
@@ -102407,6 +102443,7 @@ entities:
       parent: 12563
     - type: Clothing
       inSlot: mask
+      slots: MASK
       inSlotFlag: MASK
     - type: Physics
       canCollide: False
@@ -102592,6 +102629,7 @@ entities:
       parent: 12571
     - type: Clothing
       inSlot: neck
+      slots: NECK
       inSlotFlag: NECK
     - type: Physics
       canCollide: False
@@ -102628,6 +102666,7 @@ entities:
       parent: 12563
     - type: Clothing
       inSlot: neck
+      slots: NECK
       inSlotFlag: NECK
     - type: Physics
       canCollide: False
@@ -102684,6 +102723,7 @@ entities:
       parent: 12690
     - type: Clothing
       inSlot: neck
+      slots: NECK
       inSlotFlag: NECK
     - type: Physics
       canCollide: False
@@ -102702,6 +102742,7 @@ entities:
       parent: 12551
     - type: Clothing
       inSlot: neck
+      slots: NECK
       inSlotFlag: NECK
     - type: Physics
       canCollide: False
@@ -102739,6 +102780,7 @@ entities:
       parent: 12620
     - type: Clothing
       inSlot: neck
+      slots: NECK
       inSlotFlag: NECK
     - type: Physics
       canCollide: False
@@ -102782,6 +102824,7 @@ entities:
       parent: 12579
     - type: Clothing
       inSlot: neck
+      slots: NECK
       inSlotFlag: NECK
     - type: Physics
       canCollide: False
@@ -102793,6 +102836,7 @@ entities:
       parent: 12342
     - type: Clothing
       inSlot: neck
+      slots: NECK
       inSlotFlag: NECK
     - type: Physics
       canCollide: False
@@ -102802,6 +102846,7 @@ entities:
       parent: 12557
     - type: Clothing
       inSlot: neck
+      slots: NECK
       inSlotFlag: NECK
     - type: Physics
       canCollide: False
@@ -102849,6 +102894,7 @@ entities:
       parent: 12342
     - type: Clothing
       inSlot: outerClothing
+      slots: OUTERCLOTHING
       inSlotFlag: OUTERCLOTHING
     - type: Physics
       canCollide: False
@@ -102868,6 +102914,7 @@ entities:
       parent: 40962
     - type: Clothing
       inSlot: neck
+      slots: NECK
       inSlotFlag: NECK
     - type: Physics
       canCollide: False
@@ -102879,6 +102926,7 @@ entities:
       parent: 12633
     - type: Clothing
       inSlot: outerClothing
+      slots: OUTERCLOTHING
       inSlotFlag: OUTERCLOTHING
     - type: Physics
       canCollide: False
@@ -102909,6 +102957,7 @@ entities:
       parent: 12627
     - type: Clothing
       inSlot: outerClothing
+      slots: OUTERCLOTHING
       inSlotFlag: OUTERCLOTHING
     - type: Physics
       canCollide: False
@@ -102945,6 +102994,7 @@ entities:
       parent: 12563
     - type: Clothing
       inSlot: outerClothing
+      slots: OUTERCLOTHING
       inSlotFlag: OUTERCLOTHING
     - type: Physics
       canCollide: False
@@ -102959,6 +103009,7 @@ entities:
       parent: 12571
     - type: Clothing
       inSlot: outerClothing
+      slots: OUTERCLOTHING
       inSlotFlag: OUTERCLOTHING
     - type: Physics
       canCollide: False
@@ -103021,6 +103072,7 @@ entities:
       parent: 12620
     - type: Clothing
       inSlot: outerClothing
+      slots: OUTERCLOTHING
       inSlotFlag: OUTERCLOTHING
     - type: Physics
       canCollide: False
@@ -103140,6 +103192,7 @@ entities:
       parent: 12690
     - type: Clothing
       inSlot: outerClothing
+      slots: OUTERCLOTHING
       inSlotFlag: OUTERCLOTHING
     - type: Physics
       canCollide: False
@@ -103328,6 +103381,7 @@ entities:
       parent: 40962
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: SuitSensor
       user: 40962
@@ -103342,6 +103396,7 @@ entities:
       parent: 12557
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: SuitSensor
       user: 12557
@@ -103379,6 +103434,7 @@ entities:
       parent: 12342
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: SuitSensor
       user: 12342
@@ -103415,6 +103471,7 @@ entities:
       parent: 12633
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: SuitSensor
       user: 12633
@@ -103428,6 +103485,7 @@ entities:
       parent: 12579
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: SuitSensor
       user: 12579
@@ -103458,6 +103516,7 @@ entities:
       parent: 12571
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: SuitSensor
       user: 12571
@@ -103530,6 +103589,7 @@ entities:
       parent: 12563
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: SuitSensor
       user: 12563
@@ -103573,6 +103633,7 @@ entities:
       parent: 12690
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: SuitSensor
       user: 12690
@@ -103602,6 +103663,7 @@ entities:
       parent: 12627
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: SuitSensor
       user: 12627
@@ -103615,6 +103677,7 @@ entities:
       parent: 12551
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: SuitSensor
       user: 12551
@@ -103628,6 +103691,7 @@ entities:
       parent: 1953
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: SuitSensor
       user: 1953
@@ -272134,6 +272198,7 @@ entities:
       parent: 1427
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: SuitSensor
       user: 1427
@@ -297897,6 +297962,7 @@ entities:
       parent: 12571
     - type: Clothing
       inSlot: suitstorage
+      slots: SUITSTORAGE
       inSlotFlag: SUITSTORAGE
     - type: Physics
       canCollide: False
@@ -297906,6 +297972,7 @@ entities:
       parent: 40962
     - type: Clothing
       inSlot: suitstorage
+      slots: SUITSTORAGE
       inSlotFlag: SUITSTORAGE
     - type: Physics
       canCollide: False

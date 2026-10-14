@@ -496,21 +496,6 @@
   categories:
   - NTAmmo
 
-- type: listing
-  id: ERTUplinkMagazineBatteryLr60
-  productEntity: MagazineBatteryLr60
-  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: lr30 }
-  cost:
-    Crystallite: 3
-  categories:
-  - NTAmmo
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - ERTGamma
-      - CBURN
-
 # .40/.45 ACP #Коробки#
 - type: listing
   id: ERTUplinkBox40FMJ

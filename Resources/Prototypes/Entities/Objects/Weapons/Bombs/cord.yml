@@ -48,19 +48,12 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
       - !type:ExplodeBehavior
-    - trigger: # Sunrise-Edit: non-explosive destruction (slash-only, not from explosions)
-        !type:DamageTypeTrigger
-        damageType: Slash
+    - trigger:
+        !type:DamageTrigger # the idea here is to prevent you from just beating it until it explodes.
         damage: 50
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-    # - trigger: # Sunrise-Edit: disable non-explosive destruction
-    #     !type:DamageTrigger # the idea here is to prevent you from just beating it until it explodes.
-    #     damage: 50
-    #   behaviors:
-    #   - !type:DoActsBehavior
-    #     acts: ["Destruction"]
   - type: Explosive
     explosionType: DemolitionCharge
     totalIntensity: 60

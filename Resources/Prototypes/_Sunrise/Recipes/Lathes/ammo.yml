@@ -1,24 +1,4 @@
 ## Recipes
-- type: latheRecipe
-  id: MagazineBatteryLr30
-  parent: BaseAmmoRecipe
-  result: MagazineBatteryLr30
-  materials:
-    Steel: 250
-    Glass: 50
-    Plasma: 25
-    Gold: 25
-
-- type: latheRecipe
-  id: MagazineBatteryLr60
-  parent: BaseAmmoRecipe
-  result: MagazineBatteryLr60
-  materials:
-    Steel: 500
-    Glass: 100
-    Plasma: 50
-    Gold: 50
-
 # Blueprints
 - type: latheRecipe
   parent: BaseAmmoRecipe

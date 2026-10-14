@@ -161,7 +161,6 @@
     WeaponEnergyMagnum: 3
     WeaponANNIHILATOR: 3
     WeaponToecloner: 3
-    WeaponDecloner: 3
     WeaponEnergyCrossbowLarge: 3
     WeaponEnergyCrossbow: 3
     WeaponLaserLNT620: 3
@@ -376,7 +375,6 @@
     MagazineBoxRifleMachineUranium: 3
     #Lasers IK
     MagazineBatteryLr30: 8
-    MagazineBatteryLr60: 8
     # Test Tools
     AdminPDA: 3
     AccessConfiguratorUniversal: 3

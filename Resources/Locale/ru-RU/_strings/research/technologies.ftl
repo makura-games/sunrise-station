@@ -40,7 +40,6 @@ research-technology-kinetic-modifications = Протокинетические �
 research-technology-basic-shuttle-armament = Базовое корабельное вооружение
 research-technology-advanced-shuttle-weapon = Продвинутое корабельное оружие
 research-technology-hitech-shuttle-weapon = Высокотехнологичное корабельное оружие
-research-technology-declone-technology = Технология Деклонирования
 research-technology-scan-gate = Технология сканирующих ворот
 research-technology-thermal-weaponry = Тепловое оружие
 research-technology-dual-wielding-technology = Технология многорукого боя

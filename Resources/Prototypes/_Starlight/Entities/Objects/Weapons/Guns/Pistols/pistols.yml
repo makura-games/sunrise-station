@@ -71,7 +71,7 @@
     minAngle: 5
     maxAngle: 30
     angleIncrease: 2
-    angleDecay: 15
+    angleDecay: 18
     fireRate: 6
     selectedMode: FullAuto
     availableModes:
@@ -130,8 +130,8 @@
   - type: Gun
     minAngle: 1
     maxAngle: 20
-    angleIncrease: 8
-    angleDecay: 7
+    angleIncrease: 5
+    angleDecay: 12
     fireRate: 7
     soundGunshot:
       path: /Audio/_Starlight/Weapons/Guns/Gunshots/colt.ogg

@@ -3484,20 +3484,6 @@
   - UplinkWeaponry
 
 - type: listing
-  id: UplinkWeaponBreachingHammer
-  name: uplink-SyndieBreachingHammer-name
-  description: uplink-SyndieBreachingHammer-desc
-  productEntity: SyndieBreachingHammer
-  icon: { sprite: _Sunrise/Objects/Weapons/Melee/syndie_breaching_hammer.rsi, state: icon }
-  discountCategory: rareDiscounts
-  discountDownTo:
-    Telecrystal: 5
-  cost:
-    Telecrystal: 7
-  categories:
-  - UplinkWeaponry
-
-- type: listing
   id: UplinkClothingMurderShocks
   name: uplink-clothing-murder-socks-name
   description: uplink-clothing-murder-socks-desc

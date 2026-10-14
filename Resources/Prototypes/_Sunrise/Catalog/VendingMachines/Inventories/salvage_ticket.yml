@@ -253,16 +253,8 @@
   - SalvageWeapons
 
 - type: listing
-  id: VendorSalvageWeaponGunLaserCarbineSemi
-  productEntity: WeaponGunLaserCarbineSemi
-  cost:
-    SalvageTicket: 350
-  categories:
-  - SalvageWeapons
-
-- type: listing
-  id: VendorSalvageBriefcaseWeaponGarand
-  productEntity: BriefcaseWeaponGarandFilled
+  id: VendorSalvageWeaponGarand
+  productEntity: WeaponSniperGarand
   cost:
     SalvageTicket: 750
   categories:
@@ -362,10 +354,3 @@
   - !type:ListingLimitedStockCondition
     stock: 1
 
-- type: listing
-  id: VendorSalvageMagazineBatteryLr30
-  productEntity: MagazineBatteryLr30
-  cost:
-    SalvageTicket: 50
-  categories:
-  - SalvageAmmo

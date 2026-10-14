@@ -85,4 +85,4 @@
       state: storage
       sprite: _Sunrise/Objects/Weapons/Melee/tactical_axe.rsi
   - type: ThrowingAngle
-    angle: 90
+    angle: -47

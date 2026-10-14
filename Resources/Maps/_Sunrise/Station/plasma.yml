@@ -68575,6 +68575,7 @@ entities:
     - type: Transform
       parent: 10500
     - type: Clothing
+      slots: BACK
       inSlotFlag: BACK
       inSlot: back
     - type: Physics
@@ -68683,6 +68684,7 @@ entities:
     - type: Transform
       parent: 10516
     - type: Clothing
+      slots: EYES
       inSlotFlag: EYES
       inSlot: eyes
     - type: Physics
@@ -68746,6 +68748,7 @@ entities:
     - type: Transform
       parent: 10500
     - type: Clothing
+      slots: HEAD
       inSlotFlag: HEAD
       inSlot: head
     - type: Physics
@@ -68843,6 +68846,7 @@ entities:
     - type: Transform
       parent: 10516
     - type: Clothing
+      slots: HEAD
       inSlotFlag: HEAD
       inSlot: head
     - type: Physics
@@ -68942,6 +68946,7 @@ entities:
     - type: Transform
       parent: 10516
     - type: Clothing
+      slots: MASK
       inSlotFlag: MASK
       inSlot: mask
     - type: Physics
@@ -68953,6 +68958,7 @@ entities:
     - type: Transform
       parent: 10500
     - type: Clothing
+      slots: MASK
       inSlotFlag: MASK
       inSlot: mask
     - type: Physics
@@ -68987,6 +68993,7 @@ entities:
     - type: Transform
       parent: 10516
     - type: Clothing
+      slots: NECK
       inSlotFlag: NECK
       inSlot: neck
     - type: Physics
@@ -69059,6 +69066,7 @@ entities:
     - type: Transform
       parent: 10516
     - type: Clothing
+      slots: OUTERCLOTHING
       inSlotFlag: OUTERCLOTHING
       inSlot: outerClothing
     - type: Physics
@@ -69070,6 +69078,7 @@ entities:
     - type: Transform
       parent: 10500
     - type: Clothing
+      slots: OUTERCLOTHING
       inSlotFlag: OUTERCLOTHING
       inSlot: outerClothing
     - type: Physics
@@ -69180,6 +69189,7 @@ entities:
     - type: Transform
       parent: 10516
     - type: Clothing
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
       inSlot: jumpsuit
     - type: Physics
@@ -69191,6 +69201,7 @@ entities:
     - type: Transform
       parent: 10500
     - type: Clothing
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
       inSlot: jumpsuit
     - type: Physics
@@ -179268,6 +179279,7 @@ entities:
     - type: Transform
       parent: 10516
     - type: Clothing
+      slots: SUITSTORAGE
       inSlotFlag: SUITSTORAGE
       inSlot: suitstorage
     - type: Physics

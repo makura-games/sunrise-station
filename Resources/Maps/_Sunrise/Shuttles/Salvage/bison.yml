@@ -7770,6 +7770,7 @@ entities:
       parent: 2773
     - type: Clothing
       inSlot: suitstorage
+      slots: SUITSTORAGE
       inSlotFlag: SUITSTORAGE
     - type: Physics
       canCollide: False
@@ -8053,6 +8054,7 @@ entities:
       parent: 2773
     - type: Clothing
       inSlot: neck
+      slots: NECK
       inSlotFlag: NECK
     - type: SolutionContainerManager
       solutions:
@@ -8222,6 +8224,7 @@ entities:
       parent: 2773
     - type: Clothing
       inSlot: eyes
+      slots: EYES
       inSlotFlag: EYES
     - type: EmitSoundOnCollide
       nextSound: -508.9085394
@@ -8348,6 +8351,7 @@ entities:
       parent: 2773
     - type: Clothing
       inSlot: head
+      slots: HEAD
       inSlotFlag: HEAD
     - type: SolutionContainerManager
       solutions:
@@ -8445,6 +8449,7 @@ entities:
       parent: 2773
     - type: Clothing
       inSlot: outerClothing
+      slots: OUTERCLOTHING
       inSlotFlag: OUTERCLOTHING
     - type: ToggleableClothing
       clothingUid: 2826
@@ -8556,6 +8561,7 @@ entities:
       parent: 2773
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: SuitSensor
       user: 2773
