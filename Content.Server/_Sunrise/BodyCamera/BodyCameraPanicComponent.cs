@@ -6,7 +6,7 @@ public sealed partial class BodyCameraPanicComponent : Component
 {
     /// Минимальный интервал между вызовами с одной камеры.
     [DataField]
-    public TimeSpan Cooldown = TimeSpan.FromSeconds(3);
+    public TimeSpan Cooldown = TimeSpan.FromSeconds(60);
 
     /// Время следующего допустимого вызова. Хранится только на сервере.
     [ViewVariables]

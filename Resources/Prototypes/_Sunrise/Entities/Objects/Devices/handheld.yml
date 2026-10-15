@@ -523,7 +523,7 @@
   description: Camera
   components:
   - type: BodyCameraPanic
-    cooldown: 3
+    cooldown: 60
   - type: StationAiVision
     range: 2
   - type: Item
