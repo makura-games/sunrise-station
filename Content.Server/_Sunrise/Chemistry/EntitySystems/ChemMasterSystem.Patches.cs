@@ -14,6 +14,14 @@ namespace Content.Server.Chemistry.EntitySystems
         [ValidatePrototypeId<EntityPrototype>]
         private const string PatchPrototypeId = "Patch";
 
+        /// <summary>
+        /// Максимальное количество предметов(таблетки, патчи, которые можно заспавнить за 1 нажатие
+        /// </summary>
+        /// <remarks>
+        /// Должно совпадать с клиентским максимум, что в текущей моменте 10. Больше туда вписать не даст
+        /// </remarks>
+        private const int MaxPerRequest = 10;
+
         private void OnCreatePatchesMessage(Entity<ChemMasterComponent> chemMaster, ref ChemMasterCreatePatchesMessage message)
         {
             var user = message.Actor;
@@ -27,6 +35,12 @@ namespace Content.Server.Chemistry.EntitySystems
 
             // Ensure the amount is valid.
             if (message.Dosage == 0 || message.Dosage > chemMaster.Comp.PatchDosageLimit)
+                return;
+
+            // Серверная валидация для спасения от модифицированных клиентов.
+            // Проблема в том, что валидация выше срабатывает при любом значении, которое не 0 и таблетница не пустая.
+            // Даже если в ней остался 1 слот, а мы хотим впихнуть 9999999 таблеток
+            if (message.Number > MaxPerRequest)
                 return;
 
             // Ensure label length is within the character limit.
