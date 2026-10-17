@@ -28,6 +28,10 @@
   - type: LimitedCharges
     maxCharges: 1
   - type: Action
+    # Sunrise-Edit-Start - Разрешить активацию в критическом состоянии
+    checkCanInteract: false
+    checkConsciousness: false
+    # Sunrise-Edit-End
     itemIconStyle: BigAction
     priority: -20
     icon:

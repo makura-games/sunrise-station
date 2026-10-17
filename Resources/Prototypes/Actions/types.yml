@@ -132,6 +132,10 @@
   description: Activates your death-acidifier, completely melting you and your equipment
   components:
   - type: Action
+    # Sunrise-Edit-Start - Разрешить активацию в критическом состоянии
+    checkCanInteract: false
+    checkConsciousness: false
+    # Sunrise-Edit-End
     itemIconStyle: BigAction
     priority: -20
     icon:
