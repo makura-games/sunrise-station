@@ -310,14 +310,6 @@
 # consumables
 
 - type: listing
-  id: VendorSalvageSpeedLoaderShotgunEmpty
-  productEntity: SpeedLoaderShotgunEmpty
-  cost:
-    SalvageTicket: 50
-  categories:
-  - SalvageAmmo
-
-- type: listing
   id: VendorSalvageBoxLethalshot
   productEntity: BoxLethalshot
   cost:

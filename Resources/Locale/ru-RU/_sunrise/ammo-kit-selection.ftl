@@ -1,0 +1,14 @@
+sunrise-ammo-kit-selection-smg-description = Содержит три магазина SP, два FMJ и один HP для C-20r.
+sunrise-ammo-kit-selection-rifle-description = Содержит три магазина SP, два FMJ и один AP для «Эстока».
+sunrise-ammo-kit-selection-caseless-description = Содержит четыре расширенных безгильзовых магазина для «Сиар-52».
+sunrise-ammo-kit-selection-dragunov-description = Содержит два магазина SP и два расширенных магазина для «Драгунова».
+sunrise-ammo-kit-selection-antimaterial-description = Содержит по два магазина каждого доступного типа боеприпасов для Bauer-127.
+sunrise-ammo-kit-selection-shotgun-description = Содержит пять магазинов с картечью и три магазина с пулями для «Бульдога».
+sunrise-ammo-kit-selection-shotgun-assorted-name = ассортимент патронов 12 калибра
+sunrise-ammo-kit-selection-shotgun-assorted-description = Содержит два барабана с картечью, два с пулями, один с зажигательными патронами и один с флешеттами.
+sunrise-ammo-kit-selection-lmg-description = Содержит два короба SP и один короб FMJ для L6 SAW.
+sunrise-ammo-kit-selection-lmg-max-description = Содержит один короб SP на 100 патронов и один короб FMJ на 100 патронов для L6 MAX.
+sunrise-ammo-kit-selection-grenade-frag-contact-name = подсумок с контактными осколочными гранатами
+sunrise-ammo-kit-selection-grenade-frag-contact-description = Содержит шесть контактных осколочных гранат для гранатомёта China Lake.
+sunrise-ammo-kit-selection-grenade-frag-timer-name = подсумок с таймерными осколочными гранатами
+sunrise-ammo-kit-selection-grenade-frag-timer-description = Содержит шесть таймерных осколочных гранат для гранатомёта China Lake.
