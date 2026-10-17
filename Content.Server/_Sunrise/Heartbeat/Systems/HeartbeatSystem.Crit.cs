@@ -3,12 +3,15 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 
 namespace Content.Server._Sunrise.Heartbeat.Systems;
 
 public sealed partial class HeartbeatSystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
 
     // Минимальное и максимальное время между ударами сердца
     private const float MinimumCooldown = 0.5f;
@@ -16,7 +19,7 @@ public sealed partial class HeartbeatSystem
 
     private void OnMobStateChanged(Entity<CritHeartbeatComponent> ent, ref MobStateChangedEvent args)
     {
-        if (args.NewMobState != MobState.Critical)
+        if (args.NewMobState != MobState.Critical || !IsTrueCrit(ent))
         {
             RemComp<ActiveHeartbeatComponent>(ent);
             return;
@@ -61,4 +64,18 @@ public sealed partial class HeartbeatSystem
         return true;
     }
 
+    /// <summary>
+    /// Проверяем персонажа действительно ли он должен сейчас быть в крите или нет
+    /// возвращает true если не находит компоненты / он в крите, false если он не должен быть в крите по хп.
+    /// </summary>
+    private bool IsTrueCrit(Entity<CritHeartbeatComponent> ent, DamageableComponent? damageable = null)
+    {
+        if (!Resolve(ent.Owner, ref damageable))
+            return true;
+
+        var totalDamage = _damageable.GetTotalDamage((ent.Owner, damageable));
+
+        return !_mobThreshold.TryGetThresholdForState(ent.Owner, MobState.Critical, out var critThreshold)
+               || totalDamage >= critThreshold;
+    }
 }
