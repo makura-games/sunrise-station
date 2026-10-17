@@ -34,7 +34,10 @@ namespace Content.Server.Chemistry.EntitySystems
             // Проблема в том, что валидация выше срабатывает при любом значении, которое не 0 и таблетница не пустая.
             // Даже если в ней остался 1 слот, а мы хотим впихнуть 9999999 таблеток
             if (message.Number > MaxPerRequest)
+            {
+                _popupSystem.PopupCursor(Loc.GetString("chem-master-window-too-many-pills-text"), user);
                 return;
+            }
 
             // Ensure the amount is valid.
             if (message.Dosage == 0 || message.Dosage > chemMaster.Comp.PatchDosageLimit)
