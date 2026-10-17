@@ -1,0 +1,6 @@
+- type: soundCollection
+  id: SunriseFluorescentFlicker
+  files:
+  - /Audio/_Sunrise/Effects/Lighting/fluorescent_flicker_2.ogg
+  - /Audio/_Sunrise/Effects/Lighting/fluorescent_flicker_3.ogg
+  - /Audio/_Sunrise/Effects/Lighting/fluorescent_flicker_4.ogg

@@ -578,7 +578,7 @@
   components:
   - type: Storage
     grid:
-    - 0,0,5,2
+    - 0,0,7,3 # Sunrise-Edit - увеличено для полного набора содержимого
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
