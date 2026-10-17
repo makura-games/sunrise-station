@@ -124,6 +124,20 @@
   radius: 4
 
 - type: biomeMarkerLayer
+  id: OreBluecrystal
+  entityMask:
+    AsteroidRock: AsteroidRockBluecrystal
+    WallRock: WallRockBluecrystal
+    WallRockBasalt: WallRockBasaltBluecrystal
+    WallRockChromite: WallRockChromiteBluecrystal
+    WallRockSand: WallRockSandBluecrystal
+    WallRockSnow: WallRockSnowBluecrystal
+  maxCount: 6
+  minGroupSize: 3
+  maxGroupSize: 6
+  radius: 4
+
+- type: biomeMarkerLayer
   id: OreBananiumCrab
   entityMask:
     AsteroidRock: AsteroidRockBananiumCrab

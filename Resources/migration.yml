@@ -1282,7 +1282,6 @@ CrateArmoryMP5: null
 ClothingBackpackDuffelWeaponSubMachineGunMP5Filled: null
 MagazineMP5: MagazinePistolHighCapacitySP
 MagazineMP5Extended: MagazinePistolHighCapacitySP
-# удаление и блок возможности замапить аплинки, чтобы Store не сериализовал каталоги в карты.
 BaseUplinkRadio: null
 BaseUplinkRadio20TC: null
 BaseUplinkRadio25TC: null
@@ -1310,4 +1309,10 @@ ClothingHandsPowerGlovesUplinkNTERTCBURN: null
 ClothingHandsPowerGlovesUplinkNTERTEpsilon: null
 # 2026-09-10
 ClothingOuterArmorBlueShield: null
+# 2026-10-06
+Bluecrystal10: null
+Bluecrystal15: null
+Bluecrystal25: null
+Crystallite1: null
+Crystallite50: null
 # region Sunrise-End

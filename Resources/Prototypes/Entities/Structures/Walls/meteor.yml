@@ -217,3 +217,29 @@
         - map: [ "enum.EdgeLayer.West" ]
           state: rock_asteroid_west
         - state: rock_bananium
+
+#Sunrise-Start
+- type: entity
+  id: MeteorRockBluecrystal
+  parent: MeteorRock
+  description: An ore vein rich with bluespace crystal.
+  suffix: Bluespace Crystal
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreBluecrystal
+  - type: Sprite
+    sprite: Structures/Walls/rock.rsi # Sunrise-Edit
+    layers:
+    - state: rock_asteroid
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_asteroid_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_asteroid_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_asteroid_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_asteroid_west
+    - sprite: _Sunrise/Structures/Walls/rock.rsi # Sunrise-Edit
+      state: rock_bluespace
+#Sunrise-End

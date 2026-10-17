@@ -1,0 +1,11 @@
+# Основной ванильный файл рецептов листов:
+# Resources/Prototypes/Recipes/Lathes/sheet.yml
+
+- type: latheRecipe
+  id: Bluecrystal1
+  result: Bluecrystal1
+  completetime: 3
+  materials:
+    RawBluecrystal: 100
+    Plasma: 200
+    Coal: 100

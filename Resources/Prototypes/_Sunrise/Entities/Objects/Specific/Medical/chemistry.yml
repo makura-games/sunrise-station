@@ -1,6 +1,6 @@
 - type: entity
   name: golden beaker
-  parent: BaseBeaker
+  parent: [Solution180, BaseBeaker]
   description: Used to contain a moderate amount of chemicals and solutions.
   id: GoldenBeaker
   components:
@@ -14,6 +14,8 @@
         visible: false
   - type: Item
     size: Normal
+    shape:
+    - 0,0,1,2 # размер 2x3
     storedOffset: 0,3
     sprite: _Starlight/Objects/Specific/Chemistry/beaker.rsi
   - type: Spillable
@@ -28,10 +30,6 @@
     fillBaseName: beaker
     inHandsMaxFillLevels: 3
     inHandsFillBaseName: -fill-
-  - type: Solution
-    id: beaker
-    solution:
-      maxVol: 150
   - type: Destructible
     thresholds:
     - trigger:
@@ -55,14 +53,10 @@
 
 - type: entity
   name: bluespace jug
-  parent: Jug
+  parent: [SolutionGinormous, Jug]
   id: JugBluespace
   description: Uses bluespace technology to contain an impossible amount of liquid.
   components:
-    - type: Solution
-      id: beaker
-      solution:
-        maxVol: 2000
     - type: Sprite
       sprite: _Sunrise/Objects/Specific/Chemistry/jug_bluespace.rsi
       layers:
@@ -73,6 +67,9 @@
           map: [ "enum.SolutionContainerLayers.Fill" ]
           visible: false
     - type: Item
+      size: Normal
+      shape:
+      - 0,0,1,2 # размер 2x3
       sprite: _Sunrise/Objects/Specific/Chemistry/jug_bluespace.rsi
       inhandVisuals:
         left:
@@ -101,7 +98,7 @@
 
 - type: entity
   name: bluespace vial
-  parent: BaseBeakerMetallic
+  parent: [SolutionLarge, BaseBeakerMetallic]
   id: VialBluespace
   description: A vial device created with bluespace technology.
   components:
@@ -120,17 +117,85 @@
     fillBaseName: vial-1-
     inHandsMaxFillLevels: 4
     inHandsFillBaseName: -fill-
-  - type: Solution
-    id: beaker
-    solution:
-      maxVol: 300
-  - type: SolutionTransfer
-    maxTransferAmount: 300
   - type: Item
     size: Tiny
     sprite: _Sunrise/Objects/Specific/Chemistry/vial_bluespace.rsi
   - type: StaticPrice
     price: 100
+
+# Sunrise-Edit: наполненные блюспейс-колбы для комплектов медика ОБР.
+- type: entity
+  parent: VialBluespace
+  id: VialBluespacePunctTranex
+  suffix: punct & tranex
+  components:
+  - type: Label
+    currentLabel: reagent-name-puncturase-tranexamic
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Puncturase
+        Quantity: 192
+      - ReagentId: TranexamicAcid
+        Quantity: 48
+
+- type: entity
+  parent: VialBluespace
+  id: VialBluespacePyraDerma
+  suffix: pyra & derma
+  components:
+  - type: Label
+    currentLabel: reagent-name-pyrazine-dermaline
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Pyrazine
+        Quantity: 60
+      - ReagentId: Dermaline
+        Quantity: 180
+
+- type: entity
+  parent: VialBluespace
+  id: VialBluespaceDexPlusSaline
+  suffix: dex+ & saline
+  components:
+  - type: Label
+    currentLabel: reagent-name-dexalin-plus-saline
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: DexalinPlus
+        Quantity: 120
+      - ReagentId: Saline
+        Quantity: 120
+
+- type: entity
+  parent: VialBluespace
+  id: VialBluespaceTrico
+  suffix: tricordrazine
+  components:
+  - type: Label
+    currentLabel: reagent-name-tricordrazine
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Tricordrazine
+        Quantity: 240
+
+- type: entity
+  name: Syndicate bluespace beaker
+  parent: [SolutionLarge, BaseBeakerMetallic, BaseSyndicateContraband]
+  description: An illegal reagent container that violates the laws of physics.
+  id: SyndicateBluespaceBeaker
+  components:
+  - type: Spillable
+    solution: beaker
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Chemistry/beaker_syndicate_bluespace.rsi
+    layers:
+    - state: beakersyndicatebluespace
+  - type: SolutionContainerVisuals
+    maxFillLevels: 0
 
 - type: entity
   id: MiniSyringeRSMedical

@@ -1,0 +1,74 @@
+- type: entity
+  id: AsteroidRockBluecrystal
+  parent: AsteroidRockBananium
+  description: An ore vein rich with bluespace crystal.
+  suffix: Bluespace Crystal
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreBluecrystal
+  - type: Sprite
+    sprite: Structures/Walls/rock.rsi
+    layers:
+    - state: rock_asteroid
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_asteroid_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_asteroid_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_asteroid_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_asteroid_west
+    - sprite: _Sunrise/Structures/Walls/rock.rsi
+      state: rock_bluespace
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockBluecrystal
+  parent: WallRock
+  description: An ore vein rich with bluespace crystals.
+  suffix: Bluespace Crystal
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreBluecrystal
+
+- type: entity
+  id: WallRockBasaltBluecrystal
+  parent: WallRockBasalt
+  description: An ore vein rich with bluespace crystals.
+  suffix: Bluespace Crystal
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreBluecrystal
+
+- type: entity
+  id: WallRockChromiteBluecrystal
+  parent: WallRockChromite
+  description: An ore vein rich with bluespace crystals.
+  suffix: Bluespace Crystal
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreBluecrystal
+
+- type: entity
+  id: WallRockSandBluecrystal
+  parent: WallRockSand
+  description: An ore vein rich with bluespace crystals.
+  suffix: Bluespace Crystal
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreBluecrystal
+
+- type: entity
+  id: WallRockSnowBluecrystal
+  parent: WallRockSnow
+  description: An ore vein rich with bluespace crystals.
+  suffix: Bluespace Crystal
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreBluecrystal
