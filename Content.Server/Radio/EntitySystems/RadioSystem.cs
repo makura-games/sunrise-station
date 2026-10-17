@@ -81,9 +81,9 @@ public sealed partial class RadioSystem : EntitySystem
     /// <summary>
     /// Send radio message to all active radio listeners
     /// </summary>
-    public void SendRadioMessage(EntityUid messageSource, string message, ProtoId<RadioChannelPrototype> channel, EntityUid radioSource, bool escapeMarkup = true)
+    public void SendRadioMessage(EntityUid messageSource, string message, ProtoId<RadioChannelPrototype> channel, EntityUid radioSource, bool escapeMarkup = true, Action<EntityUid>? onReceiver = null) // Sunrise edit: колбэк получателя радиопередачи.
     {
-        SendRadioMessage(messageSource, message, _prototype.Index(channel), radioSource, escapeMarkup: escapeMarkup);
+        SendRadioMessage(messageSource, message, _prototype.Index(channel), radioSource, escapeMarkup: escapeMarkup, onReceiver: onReceiver); // Sunrise edit
     }
 
     /// <summary>
@@ -91,7 +91,7 @@ public sealed partial class RadioSystem : EntitySystem
     /// </summary>
     /// <param name="messageSource">Entity that spoke the message</param>
     /// <param name="radioSource">Entity that picked up the message and will send it, e.g. headset</param>
-    public void SendRadioMessage(EntityUid messageSource, string message, RadioChannelPrototype channel, EntityUid radioSource, bool escapeMarkup = true)
+    public void SendRadioMessage(EntityUid messageSource, string message, RadioChannelPrototype channel, EntityUid radioSource, bool escapeMarkup = true, Action<EntityUid>? onReceiver = null) // Sunrise edit: колбэк получателя радиопередачи.
     {
         // Sunrise added start - для санитизации чата
         var trySendEvent = new TrySendChatMessageEvent(message, InGameICChatType.Speak, ProcessUserInput: false);
@@ -196,6 +196,10 @@ public sealed partial class RadioSystem : EntitySystem
 
             // send the message
             RaiseLocalEvent(receiver, ref ev);
+
+            // Sunrise edit start: уведомляем вызывающий код после штатной доставки устройству.
+            onReceiver?.Invoke(receiver);
+            // Sunrise edit end
         }
 
         RaiseLocalEvent(new RadioSpokeEvent(messageSource, FormattedMessage.RemoveMarkupPermissive(message), ev.Receivers.ToArray(), channel.ID)); // Sunrise-Edit
