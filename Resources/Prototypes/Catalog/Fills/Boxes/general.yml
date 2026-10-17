@@ -313,11 +313,11 @@
     containers:
       storagebase:
         id: TrashBag
-        amount: 6
+        amount: 2 # Sunrise-edit
   - type: Storage
     grid:
-    - 0,0,5,3
-    maxItemSize: Large
+    - 0,0,7,3 # Sunrise-edit
+    maxItemSize: Huge # Sunrise-edit
     whitelist:
       tags:
         - TrashBag
