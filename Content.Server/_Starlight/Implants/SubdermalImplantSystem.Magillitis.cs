@@ -12,11 +12,8 @@ public sealed partial class SubdermalImplantSystem
     [Dependency] private PolymorphSystem _polymorph = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
-    private void InitializeStarlight()
-    {
-        SubscribeLocalEvent<SubdermalImplantComponent, UseMagillitisSerumImplantEvent>(OnMagillitisSerumImplant);
-    }
 
+    [SubscribeLocalEvent]
     private void OnMagillitisSerumImplant(
         Entity<SubdermalImplantComponent> ent,
         ref UseMagillitisSerumImplantEvent args)

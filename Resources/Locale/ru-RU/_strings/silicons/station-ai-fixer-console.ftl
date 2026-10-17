@@ -28,3 +28,4 @@ station-ai-fixer-console-window-purge-warning-title = Запуск удален�
 station-ai-fixer-console-window-purge-warning-1 = Вы собираетесь навсегда удалить искусственный интеллект.
 station-ai-fixer-console-window-purge-warning-2 = После завершения операции интеллект исчезнет и его нельзя будет восстановить.
 station-ai-fixer-console-window-purge-warning-3 = Продолжить?
+station-ai-fixer-console-window-controls = Управление

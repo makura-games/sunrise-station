@@ -1,6 +1,6 @@
 - type: entity
   id: StatueDelta
-  parent: BaseStructure
+  parent: BaseStatue
   name: delta statue
   description: A delta statue. Big and strong.
   components:

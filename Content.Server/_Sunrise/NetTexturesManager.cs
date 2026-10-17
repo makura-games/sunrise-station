@@ -9,6 +9,7 @@ using Content.Shared._Sunrise.CartridgeLoader.Cartridges;
 using Content.Shared._Sunrise.NetTextures;
 using Robust.Server.Player;
 using Robust.Shared.ContentPack;
+using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Network.Transfer;
 using Robust.Shared.Player;
@@ -71,6 +72,7 @@ public sealed partial class NetTexturesManager
             accept: NetMessageAccept.Server);
 
         _transferManager.RegisterTransferMessage(TransferKeyNetTextures);
+        _playerManager.PlayerStatusChanged += OnPlayerStatusChanged;
     }
 
     /// <summary>
@@ -89,7 +91,49 @@ public sealed partial class NetTexturesManager
             _staticBundleTasks.Clear();
         }
 
+        lock (_transferQueueLock)
+        {
+            _pendingTransferRequests.Clear();
+        }
+
         _sawmill.Info("Cleared NetTextures round caches due to round restart.");
+    }
+
+    private void OnPlayerStatusChanged(object? sender, SessionStatusEventArgs args)
+    {
+        if (args.NewStatus != SessionStatus.Disconnected)
+            return;
+
+        var removed = 0;
+        lock (_transferQueueLock)
+        {
+            if (_pendingTransferRequests.Count == 0)
+                return;
+
+            var retained = new Queue<TransferRequest>(_pendingTransferRequests.Count);
+            while (_pendingTransferRequests.Count > 0)
+            {
+                var request = _pendingTransferRequests.Dequeue();
+                if (ReferenceEquals(request.Session, args.Session))
+                {
+                    removed++;
+                    continue;
+                }
+
+                retained.Enqueue(request);
+            }
+
+            foreach (var request in retained)
+            {
+                _pendingTransferRequests.Enqueue(request);
+            }
+        }
+
+        if (removed > 0)
+        {
+            _sawmill.Debug(
+                $"Dropped {removed} pending NetTextures transfer request(s) for disconnected session {args.Session.Name}.");
+        }
     }
 
     /// <summary>
@@ -121,7 +165,8 @@ public sealed partial class NetTexturesManager
             return;
         }
 
-        EnqueueResourceSend(session, resPath);
+        if (IsCurrentConnection(session, msg.MsgChannel))
+            EnqueueResourceSend(session, msg.MsgChannel, resPath);
     }
 
     /// <summary>
@@ -164,17 +209,18 @@ public sealed partial class NetTexturesManager
     }
 
     /// <summary>
-    /// Ставит один проверенный запрос отправки ресурса в ограниченный пул фоновых worker'ов.
+    /// Ставит один проверенный запрос отправки ресурса в ограниченный пул worker'ов серверного контекста.
     /// </summary>
     /// <param name="session">Сессия получателя.</param>
+    /// <param name="channel">Канал, с которого поступил запрос.</param>
     /// <param name="resourcePath">Проверенный rooted путь ресурса.</param>
-    private void EnqueueResourceSend(ICommonSession session, ResPath resourcePath)
+    private void EnqueueResourceSend(ICommonSession session, INetChannel channel, ResPath resourcePath)
     {
         var shouldStartWorker = false;
 
         lock (_transferQueueLock)
         {
-            _pendingTransferRequests.Enqueue(new TransferRequest(session, resourcePath));
+            _pendingTransferRequests.Enqueue(new TransferRequest(session, channel, resourcePath));
 
             if (_activeTransferWorkers < MaxConcurrentTransferWorkers)
             {
@@ -184,7 +230,7 @@ public sealed partial class NetTexturesManager
         }
 
         if (shouldStartWorker)
-            _ = Task.Run(ProcessTransferQueueWorker);
+            _ = ProcessTransferQueueWorker();
     }
 
     /// <summary>
@@ -209,10 +255,13 @@ public sealed partial class NetTexturesManager
 
                 try
                 {
-                    await SendResourceAsync(request.Session, request.ResourcePath).ConfigureAwait(false);
+                    await SendResourceAsync(request);
                 }
                 catch (Exception ex)
                 {
+                    if (!IsCurrentConnection(request.Session, request.Channel))
+                        continue;
+
                     _sawmill.Error(
                         $"Unhandled exception while sending NetTextures resource {request.ResourcePath} to {request.Session.Name}: {ex}");
                 }
@@ -233,7 +282,7 @@ public sealed partial class NetTexturesManager
             }
 
             if (shouldStartWorker)
-                _ = Task.Run(ProcessTransferQueueWorker);
+                _ = ProcessTransferQueueWorker();
         }
     }
 
@@ -242,23 +291,35 @@ public sealed partial class NetTexturesManager
     /// Если путь указывает на директорию (например, .rsi), отправляются все файлы в этой директории.
     /// Если путь указывает на файл, отправляется только этот файл.
     /// </summary>
-    /// <param name="session">Сессия получателя.</param>
-    /// <param name="resourcePath">Проверенный rooted путь ресурса для отправки.</param>
-    private async Task SendResourceAsync(ICommonSession session, ResPath resourcePath)
+    /// <param name="request">Запрос, привязанный к исходному подключению получателя.</param>
+    private async Task SendResourceAsync(TransferRequest request)
     {
+        var session = request.Session;
+        var channel = request.Channel;
+        var resourcePath = request.ResourcePath;
+
+        if (!IsCurrentConnection(session, channel))
+            return;
+
         var startTime = DateTime.UtcNow;
         _sawmill.Debug($"[NetTextures] Starting transfer of {resourcePath} to {session.Name}");
 
         IReadOnlyList<TransferResourceEntry> filesToSend;
         try
         {
-            filesToSend = await CollectFilesToSendAsync(resourcePath).ConfigureAwait(false);
+            filesToSend = await CollectFilesToSendAsync(resourcePath);
         }
         catch (Exception ex)
         {
+            if (!IsCurrentConnection(session, channel))
+                return;
+
             _sawmill.Warning($"Failed to collect NetTextures resource {resourcePath} for {session.Name}: {ex.Message}");
             return;
         }
+
+        if (!IsCurrentConnection(session, channel))
+            return;
 
         if (filesToSend.Count == 0)
         {
@@ -269,13 +330,17 @@ public sealed partial class NetTexturesManager
         try
         {
             var transferStartTime = DateTime.UtcNow;
-            await using var transferStream = _transferManager.StartTransfer(session.Channel,
+            await using var transferStream = _transferManager.StartTransfer(channel,
                 new TransferStartInfo
                 {
                     MessageKey = TransferKeyNetTextures
                 });
 
-            await WriteFileStream(transferStream, filesToSend).ConfigureAwait(false);
+            // Открытие упакованного ресурса может синхронно распаковать весь файл.
+            await Task.Run(() => WriteFileStream(transferStream, filesToSend));
+
+            if (!IsCurrentConnection(session, channel))
+                return;
 
             var totalTime = (DateTime.UtcNow - startTime).TotalMilliseconds;
             var transferTime = (DateTime.UtcNow - transferStartTime).TotalMilliseconds;
@@ -289,8 +354,20 @@ public sealed partial class NetTexturesManager
         }
         catch (Exception ex)
         {
+            if (!IsCurrentConnection(session, channel))
+                return;
+
             _sawmill.Warning($"Failed to send resource via High Bandwidth Transfer to {session.Name}: {ex.Message}");
-            SendResourceFallback(session, filesToSend);
+            var diagnostics = new List<(LogLevel Level, string Message)>();
+            await Task.Run(() => SendResourceFallback(session, channel, filesToSend, diagnostics));
+
+            if (!IsCurrentConnection(session, channel))
+                return;
+
+            foreach (var (level, message) in diagnostics)
+            {
+                _sawmill.Log(level, message);
+            }
         }
     }
 
@@ -310,7 +387,7 @@ public sealed partial class NetTexturesManager
                 return new[] { TransferResourceEntry.FromMemory(relativeUploadPath, dynamicData) };
         }
 
-        var bundle = await GetOrCreateStaticBundleAsync(resourcePath).ConfigureAwait(false);
+        var bundle = await GetOrCreateStaticBundleAsync(resourcePath);
         return bundle?.Files ?? [];
     }
 
@@ -322,6 +399,7 @@ public sealed partial class NetTexturesManager
     private async Task<StaticTransferBundle?> GetOrCreateStaticBundleAsync(ResPath resourcePath)
     {
         Task<StaticTransferBundle?> bundleTask;
+        List<(LogLevel Level, string Message)>? diagnostics = null;
 
         lock (_staticBundleLock)
         {
@@ -330,14 +408,16 @@ public sealed partial class NetTexturesManager
 
             if (!_staticBundleTasks.TryGetValue(resourcePath, out bundleTask!))
             {
-                bundleTask = Task.Run(() => BuildStaticTransferBundle(resourcePath));
+                var buildDiagnostics = new List<(LogLevel Level, string Message)>();
+                diagnostics = buildDiagnostics;
+                bundleTask = Task.Run(() => BuildStaticTransferBundle(resourcePath, buildDiagnostics));
                 _staticBundleTasks[resourcePath] = bundleTask;
             }
         }
 
         try
         {
-            var bundle = await bundleTask.ConfigureAwait(false);
+            var bundle = await bundleTask;
             if (bundle != null)
             {
                 lock (_staticBundleLock)
@@ -355,6 +435,15 @@ public sealed partial class NetTexturesManager
                 if (_staticBundleTasks.TryGetValue(resourcePath, out var existingTask) && existingTask == bundleTask)
                     _staticBundleTasks.Remove(resourcePath);
             }
+
+            // Только создатель задачи выводит накопленные сообщения после возврата в серверный контекст.
+            if (diagnostics != null)
+            {
+                foreach (var (level, message) in diagnostics)
+                {
+                    _sawmill.Log(level, message);
+                }
+            }
         }
     }
 
@@ -362,8 +451,11 @@ public sealed partial class NetTexturesManager
     /// Собирает immutable transfer manifest для статического content-файла или директории.
     /// </summary>
     /// <param name="resourcePath">Rooted static content path, запрошенный клиентом.</param>
+    /// <param name="diagnostics">Сообщения для последующего вывода в серверном контексте.</param>
     /// <returns>Static transfer bundle или <see langword="null"/>, если ресурс не существует.</returns>
-    private StaticTransferBundle? BuildStaticTransferBundle(ResPath resourcePath)
+    private StaticTransferBundle? BuildStaticTransferBundle(
+        ResPath resourcePath,
+        List<(LogLevel Level, string Message)> diagnostics)
     {
         var filesToSend = new List<TransferResourceEntry>();
         var relativeUploadPath = resourcePath.ToRelativePath();
@@ -374,7 +466,7 @@ public sealed partial class NetTexturesManager
             if (!_resourceManager.ContentFileExists(resourcePath))
                 return null;
 
-            return TryAddContentFile(resourcePath, relativeUploadPath, filesToSend)
+            return TryAddContentFile(resourcePath, relativeUploadPath, filesToSend, diagnostics)
                 ? new StaticTransferBundle(filesToSend.ToArray())
                 : null;
         }
@@ -384,13 +476,13 @@ public sealed partial class NetTexturesManager
             if (!filePath.TryRelativeTo(resourcePath, out var relativePath))
                 continue;
 
-            TryAddContentFile(filePath, relativeUploadPath / relativePath.Value, filesToSend);
+            TryAddContentFile(filePath, relativeUploadPath / relativePath.Value, filesToSend, diagnostics);
         }
 
         if (filesToSend.Count == 0)
             return null;
 
-        _sawmill.Debug($"Collected resource directory {resourcePath} ({filesToSend.Count} files)");
+        diagnostics.Add((LogLevel.Debug, $"Collected resource directory {resourcePath} ({filesToSend.Count} files)"));
         return new StaticTransferBundle(filesToSend.ToArray());
     }
 
@@ -400,20 +492,25 @@ public sealed partial class NetTexturesManager
     /// <param name="filePath">Rooted путь файла для добавления.</param>
     /// <param name="relativePath">Относительный путь загрузки, который клиент должен сохранить.</param>
     /// <param name="filesToSend">Целевая коллекция для payload передачи.</param>
+    /// <param name="diagnostics">Сообщения для последующего вывода в серверном контексте.</param>
     /// <returns><see langword="true"/>, если файл успешно прочитан.</returns>
-    private bool TryAddContentFile(ResPath filePath, ResPath relativePath, List<TransferResourceEntry> filesToSend)
+    private bool TryAddContentFile(
+        ResPath filePath,
+        ResPath relativePath,
+        List<TransferResourceEntry> filesToSend,
+        List<(LogLevel Level, string Message)> diagnostics)
     {
         var relativePathLength = Encoding.UTF8.GetByteCount(relativePath.CanonPath);
         if ((uint) relativePathLength > NetTextureConstants.MaxTransferPathLength)
         {
-            _sawmill.Warning(
-                $"Skipping NetTexture file with a relative path longer than the supported transfer limit: {relativePath} ({relativePathLength} > {NetTextureConstants.MaxTransferPathLength})");
+            diagnostics.Add((LogLevel.Warning,
+                $"Skipping NetTexture file with a relative path longer than the supported transfer limit: {relativePath} ({relativePathLength} > {NetTextureConstants.MaxTransferPathLength})"));
             return false;
         }
 
         if (!_resourceManager.TryContentFileRead(filePath, out var stream))
         {
-            _sawmill.Warning($"Failed to read file: {filePath}");
+            diagnostics.Add((LogLevel.Warning, $"Failed to read file: {filePath}"));
             return false;
         }
 
@@ -421,8 +518,8 @@ public sealed partial class NetTexturesManager
         {
             if (stream.Length < 0 || stream.Length > NetTextureConstants.MaxTransferFileSize)
             {
-                _sawmill.Warning(
-                    $"Skipping NetTexture file larger than the supported transfer size: {filePath} ({stream.Length} > {NetTextureConstants.MaxTransferFileSize})");
+                diagnostics.Add((LogLevel.Warning,
+                    $"Skipping NetTexture file larger than the supported transfer size: {filePath} ({stream.Length} > {NetTextureConstants.MaxTransferFileSize})"));
                 return false;
             }
 
@@ -433,11 +530,17 @@ public sealed partial class NetTexturesManager
     }
 
     /// <summary>
-    /// Fallback-метод: отправляет ресурсы обычными сетевыми сообщениями, если WebSocket-передача падает.
+    /// Фоновый fallback-метод: отправляет ресурсы обычными сетевыми сообщениями, если WebSocket-передача падает.
     /// </summary>
     /// <param name="session">Сессия получателя.</param>
+    /// <param name="channel">Исходный канал подключения получателя.</param>
     /// <param name="files">Файлы, которые еще нужно доставить.</param>
-    private void SendResourceFallback(ICommonSession session, IReadOnlyList<TransferResourceEntry> files)
+    /// <param name="diagnostics">Сообщения для последующего вывода в серверном контексте.</param>
+    private void SendResourceFallback(
+        ICommonSession session,
+        INetChannel channel,
+        IReadOnlyList<TransferResourceEntry> files,
+        List<(LogLevel Level, string Message)> diagnostics)
     {
         var chunkCount = 0;
 
@@ -447,34 +550,49 @@ public sealed partial class NetTexturesManager
             {
                 foreach (var message in CreateFallbackChunks(file.RelativePath, file.DynamicData))
                 {
-                    session.Channel.SendMessage(message);
+                    if (!TrySendMessage(session, channel, message))
+                        return;
+
                     chunkCount++;
                 }
 
                 continue;
             }
 
-            chunkCount += SendContentFileFallback(session, file);
+            if (!TrySendContentFileFallback(session, channel, file, diagnostics, out var sentChunks))
+                return;
+
+            chunkCount += sentChunks;
         }
 
-        _sawmill.Debug($"Sent {files.Count} files via fallback ({chunkCount} chunk messages) to {session.Name}");
+        diagnostics.Add((LogLevel.Debug, $"Sent {files.Count} files via fallback ({chunkCount} chunk messages) to {session.Name}"));
     }
 
     /// <summary>
     /// Отправляет один static content file через fallback chunked transport без полной материализации файла.
     /// </summary>
     /// <param name="session">Сессия получателя.</param>
+    /// <param name="channel">Исходный канал подключения получателя.</param>
     /// <param name="file">Дескриптор static file для отправки.</param>
-    /// <returns>Количество chunk messages, отправленных для этого файла.</returns>
-    private int SendContentFileFallback(ICommonSession session, TransferResourceEntry file)
+    /// <param name="diagnostics">Сообщения для последующего вывода в серверном контексте.</param>
+    /// <param name="chunkCount">Количество chunk messages, отправленных для этого файла.</param>
+    /// <returns><see langword="true"/>, если отправка завершена; иначе <see langword="false"/>, если сессия отключилась.</returns>
+    private bool TrySendContentFileFallback(
+        ICommonSession session,
+        INetChannel channel,
+        TransferResourceEntry file,
+        List<(LogLevel Level, string Message)> diagnostics,
+        out int chunkCount)
     {
+        chunkCount = 0;
+
         if (file.ContentPath == null)
-            return 0;
+            return true;
 
         if (!_resourceManager.TryContentFileRead(file.ContentPath.Value, out var stream))
         {
-            _sawmill.Warning($"Failed to read fallback NetTexture file: {file.ContentPath.Value}");
-            return 0;
+            diagnostics.Add((LogLevel.Warning, $"Failed to read fallback NetTexture file: {file.ContentPath.Value}"));
+            return true;
         }
 
         using (stream)
@@ -488,7 +606,7 @@ public sealed partial class NetTexturesManager
                 var chunkData = new byte[chunkLength];
                 ReadExactly(stream, chunkData, chunkLength);
 
-                session.Channel.SendMessage(new NetTextureResourceChunkMessage
+                if (!TrySendMessage(session, channel, new NetTextureResourceChunkMessage
                 {
                     RelativePath = file.RelativePath.ToString(),
                     ChunkIndex = chunkIndex,
@@ -496,10 +614,38 @@ public sealed partial class NetTexturesManager
                     ChunkOffset = offset,
                     TotalLength = file.Length,
                     Data = chunkData
-                });
+                }))
+                {
+                    return false;
+                }
+
+                chunkCount++;
             }
 
-            return totalChunks;
+            return true;
+        }
+    }
+
+    internal static bool IsCurrentConnection(ICommonSession session, INetChannel channel)
+    {
+        return ReferenceEquals(session.Channel, channel) &&
+               (session.Status is SessionStatus.Connected or SessionStatus.InGame) &&
+               channel.IsConnected;
+    }
+
+    private static bool TrySendMessage(ICommonSession session, INetChannel channel, NetMessage message)
+    {
+        if (!IsCurrentConnection(session, channel))
+            return false;
+
+        try
+        {
+            channel.SendMessage(message);
+            return true;
+        }
+        catch (InvalidOperationException) when (!IsCurrentConnection(session, channel))
+        {
+            return false;
         }
     }
 
@@ -695,9 +841,10 @@ public sealed partial class NetTexturesManager
     /// <summary>
     /// Один файл, запланированный к передаче клиенту.
     /// </summary>
-    private sealed class TransferRequest(ICommonSession session, ResPath resourcePath)
+    private sealed class TransferRequest(ICommonSession session, INetChannel channel, ResPath resourcePath)
     {
         public ICommonSession Session { get; } = session;
+        public INetChannel Channel { get; } = channel;
         public ResPath ResourcePath { get; } = resourcePath;
     }
 

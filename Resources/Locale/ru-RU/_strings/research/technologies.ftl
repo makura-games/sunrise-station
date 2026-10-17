@@ -96,3 +96,4 @@ research-technology-combat-powercells = Боевые Супербатареи
 research-technology-explosive-mech-ammunition = Взрывоопасные боеприпасы для меха
 research-technology-industrial-robotics = Промышленная робототехника
 research-technology-honk-weapons = Бананиумное вооружение
+research-technology-telesci = Теленаука

@@ -1,4 +1,4 @@
-using Content.Server.StationRecords.Systems;
+using Content.Shared.StationRecords.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Cloning.Events;
@@ -7,6 +7,7 @@ using Content.Shared.PDA;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.StationRecords;
+using Content.Shared.StationRecords.Events;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Jobs;
@@ -18,14 +19,13 @@ namespace Content.Server._Sunrise.Jobs;
 /// </summary>
 public sealed partial class AlternativeJobTitleSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private SharedIdCardSystem _card = default!;
     [Dependency] private StationRecordsSystem _records = default!;
 
     public override void Initialize()
     {
         // Обновляем запись в манифесте экипажа после создания
-        SubscribeLocalEvent<AfterGeneralRecordCreatedEvent>(OnAfterGeneralRecordCreated);
+        SubscribeLocalEvent<GeneralRecordCreatedEvent>(OnGeneralRecordCreated);
         // Обновляем ID-карту после спавна
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
         // Копируем название должности при клонировании
@@ -41,7 +41,7 @@ public sealed partial class AlternativeJobTitleSystem : EntitySystem
         if (!profile.JobAlternativeTitles.TryGetValue(jobId, out var altTitleLocId))
             return null;
 
-        if (!_prototype.TryIndex<JobPrototype>(jobId, out var jobProto))
+        if (!ProtoMan.TryIndex<JobPrototype>(jobId, out var jobProto))
             return null;
 
         if (!jobProto.AlternativeTitles.Contains(altTitleLocId))
@@ -50,7 +50,7 @@ public sealed partial class AlternativeJobTitleSystem : EntitySystem
         return Loc.GetString(altTitleLocId);
     }
 
-    private void OnAfterGeneralRecordCreated(AfterGeneralRecordCreatedEvent ev)
+    private void OnGeneralRecordCreated(ref GeneralRecordCreatedEvent ev)
     {
         if (string.IsNullOrEmpty(ev.Record.JobPrototype))
             return;

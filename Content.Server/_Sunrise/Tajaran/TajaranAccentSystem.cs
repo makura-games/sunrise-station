@@ -20,7 +20,7 @@ namespace Content.Server.Speech.EntitySystems
             SubscribeLocalEvent<TajaranAccentComponent, AccentGetEvent>(OnAccent);
         }
 
-        private void OnAccent(EntityUid uid, TajaranAccentComponent component, AccentGetEvent args)
+        private void OnAccent(Entity<TajaranAccentComponent> ent, ref AccentGetEvent args)
         {
             var message = args.Message;
 

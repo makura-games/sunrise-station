@@ -10,8 +10,6 @@
   - !type:DepartmentTimeRequirement
     department: Silicon
     time: 5h
-  # Sunrise-end
-  weight: 10
   icon: JobIconStationAi
   overrideConsoleVisibility: false # Sunrise added
   supervisors: job-supervisors-rd
@@ -28,7 +26,6 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 10h
-  displayWeight: -10  # Sunrise
   icon: JobIconBorg
   overrideConsoleVisibility: false # Sunrise added
   supervisors: job-supervisors-rd

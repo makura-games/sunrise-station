@@ -41,7 +41,7 @@ public abstract partial class SharedDeviceLinkSystem
 
             foreach (var (sinkUid, links) in sourceComponent.LinkedPorts)
             {
-                if (!_deviceLinkSinkQuery.TryComp(sinkUid, out var sinkComponent))
+                if (!DeviceLinkSinkQuery.TryComp(sinkUid, out var sinkComponent))
                 {
                     sinksToRemove.Add((sinkUid, null, "missing sink component or entity"));
                     result = result with { RemovedSinkEntries = result.RemovedSinkEntries + 1 };

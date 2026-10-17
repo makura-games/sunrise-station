@@ -10,7 +10,6 @@
   startingGear: ScientistGear
   icon: "JobIconScientist"
   supervisors: job-supervisors-rd
-  displayWeight: 10  # Sunrise
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-researcher

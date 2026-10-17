@@ -17,12 +17,11 @@
 
 - type: entity
   abstract: true
-  parent: ClothingBraBase
+  parent: [ClothingBraBase, BaseSlicingRefinable]
   id: ClothingBraBaseButcherable
   components:
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: MaterialCloth1
       amount: 1
   - type: PhysicalComposition

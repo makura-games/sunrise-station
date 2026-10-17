@@ -5,12 +5,18 @@
   description: Spread or fold your wings.
   components:
   - type: Action
-    icon: { sprite: _Sunrise/Actions/milira.rsi, state: toggle_wings}
-    iconOn: { sprite: _Sunrise/Actions/milira.rsi, state: toggle_wings_active}
     itemIconStyle: NoItem
     useDelay: 5
     checkCanInteract: false
 
+  - type: Sprite
+    sprite: _Sunrise/Actions/milira.rsi
+    layers:
+    - state: toggle_wings
+      map: ["enum.ActionVisuals.Icon"]
+    - state: toggle_wings_active
+      map: ["enum.ActionVisuals.IconToggled"]
+      visible: false
 - type: entity
   parent: BaseToggleAction
   id: ActionToggleFlight
@@ -18,8 +24,14 @@
   description: Launch into flight, trading stamina for speed.
   components:
   - type: Action
-    icon: { sprite: _Sunrise/Actions/milira.rsi, state: toggle_flight}
-    iconOn: { sprite: _Sunrise/Actions/milira.rsi, state: toggle_flight_active}
     itemIconStyle: NoItem
     checkCanInteract: false
     useDelay: 1.5
+  - type: Sprite
+    sprite: _Sunrise/Actions/milira.rsi
+    layers:
+    - state: toggle_flight
+      map: ["enum.ActionVisuals.Icon"]
+    - state: toggle_flight_active
+      map: ["enum.ActionVisuals.IconToggled"]
+      visible: false

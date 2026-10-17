@@ -1,6 +1,5 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Movement.Components;
 
@@ -16,8 +15,8 @@ public sealed partial class BorgJetpackComponent : Component
     [ViewVariables(VVAccess.ReadWrite), DataField("moleUsage")]
     public float MoleUsage = 0.012f;
 
-    [DataField("toggleAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string ToggleAction = "ActionToggleJetpack";
+    [DataField]
+    public EntProtoId ToggleAction = "ActionToggleJetpack";
 
     [DataField, AutoNetworkedField]
     public EntityUid? ToggleActionEntity;

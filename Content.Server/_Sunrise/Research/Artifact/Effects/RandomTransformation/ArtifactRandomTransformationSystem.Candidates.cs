@@ -26,7 +26,7 @@ public sealed partial class ArtifactRandomTransformationSystem
         _candidateCache.Clear();
         _baseCandidatePool.Clear();
 
-        foreach (var prototype in _prototype.EnumeratePrototypes<EntityPrototype>())
+        foreach (var prototype in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             if (!CanEverTransformInto(prototype))
                 continue;
@@ -151,7 +151,7 @@ public sealed partial class ArtifactRandomTransformationSystem
 
     private bool HasBlacklistedParent(EntProtoId prototypeId, HashSet<EntProtoId> prototypeBlacklist)
     {
-        foreach (var parent in _prototype.EnumerateAllParents<EntityPrototype>(prototypeId))
+        foreach (var parent in ProtoMan.EnumerateAllParents<EntityPrototype>(prototypeId))
         {
             if (prototypeBlacklist.Contains(parent.id))
                 return true;

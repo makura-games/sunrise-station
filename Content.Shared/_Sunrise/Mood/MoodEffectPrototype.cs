@@ -10,8 +10,8 @@ public sealed partial class MoodEffectPrototype : IPrototype
 
     public string Description => Loc.GetString($"mood-effect-{ID}");
 
-    [DataField, ValidatePrototypeId<MoodCategoryPrototype>]
-    public string? Category;
+    [DataField]
+    public ProtoId<MoodCategoryPrototype>? Category;
 
     [DataField(required: true)]
     public float MoodChange;

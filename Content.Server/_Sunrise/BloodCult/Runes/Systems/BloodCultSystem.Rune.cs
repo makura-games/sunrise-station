@@ -4,7 +4,6 @@ using Content.Server._Sunrise.BloodCult.GameRule;
 using Content.Server._Sunrise.BloodCult.Objectives.Components;
 using Content.Server._Sunrise.BloodCult.Runes.Comps;
 using Content.Server.Atmos.Components;
-using Content.Server.Bible.Components;
 using Content.Server.Body.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Chemistry.Components;
@@ -17,6 +16,7 @@ using Content.Shared._Sunrise.BloodCult.Items;
 using Content.Shared._Sunrise.BloodCult.Runes;
 using Content.Shared._Sunrise.BloodCult.UI;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Bible.Components;
 using Content.Shared.Body.Components;
 using Content.Shared.Chat;
 using Content.Shared.Chemistry.Components;
@@ -827,7 +827,7 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
                 return;
 
             if (component.CultType == null ||
-                !_prototypeManager.TryIndex<BloodCultPrototype>($"{component.CultType.Value.ToString()}Cult", out var cultPrototype))
+                !ProtoMan.TryIndex<BloodCultPrototype>($"{component.CultType.Value.ToString()}Cult", out var cultPrototype))
                 return;
 
             _entityManager.SpawnEntity(cultPrototype.GodProto, transform.Value);
@@ -1174,9 +1174,9 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
         {
             var mapPos = coords.ToMap(EntityManager, _xform);
 
-            var spawnCoords = _mapMan.TryFindGridAt(mapPos, out var gridUid, out _)
+            var spawnCoords = _map.TryFindGridAt(mapPos, out var gridUid, out _)
                 ? coords.WithEntityId(gridUid, EntityManager)
-                : new(_mapMan.GetMapEntityId(mapPos.MapId), mapPos.Position);
+                : new(_map.GetMapOrInvalid(mapPos.MapId), mapPos.Position);
 
             var ent = Spawn(component.ProjectilePrototype, spawnCoords);
             var direction = targetCoords.ToMapPos(EntityManager, _xform) - mapPos.Position;
@@ -1256,7 +1256,7 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
                 // ыыыы
             }
 
-            var damageSpecifier = new DamageSpecifier(_prototypeManager.Index(SlashDamageType), 10);
+            var damageSpecifier = new DamageSpecifier(ProtoMan.Index(SlashDamageType), 10);
             _damageableSystem.TryChangeDamage(uid, damageSpecifier, true, false);
 
             _entityManager.SpawnEntity(rune, coords);
@@ -1305,8 +1305,8 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
 
         private void HealCultist(EntityUid player)
         {
-            var damageSpecifier = _prototypeManager.Index(BruteDamageGroup);
-            var damageSpecifier2 = _prototypeManager.Index(BurnDamageGroup);
+            var damageSpecifier = ProtoMan.Index(BruteDamageGroup);
+            var damageSpecifier2 = ProtoMan.Index(BurnDamageGroup);
 
             _damageableSystem.TryChangeDamage(player, new DamageSpecifier(damageSpecifier, -40));
             _damageableSystem.TryChangeDamage(player, new DamageSpecifier(damageSpecifier2, -40));

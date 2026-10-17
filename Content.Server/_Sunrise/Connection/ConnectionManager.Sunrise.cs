@@ -35,9 +35,9 @@ public sealed partial class ConnectionManager
     {
         _sunriseConnectionIpWhitelist.Clear();
 
-        foreach (var value in addresses.Split(','))
+        foreach (var value in addresses.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries))
         {
-            if (IPAddress.TryParse(value.Trim(), out var address))
+            if (IPAddress.TryParse(value, out var address))
             {
                 _sunriseConnectionIpWhitelist.Add(address);
                 continue;

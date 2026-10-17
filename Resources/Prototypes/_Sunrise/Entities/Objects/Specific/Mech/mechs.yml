@@ -28,6 +28,11 @@
     factions:
     - NanoTrasen
   - type: Mech
+  - type: Vehicle
+    canAttack: true
+  - type: ContainerVehicle
+    containerId: mech-pilot-slot
+  - type: ContainerVehicleEntry
     entryDelay: 1
   - type: MechVulnerableToEMP
   - type: MechAir
@@ -95,7 +100,6 @@
     - Alive
     - Critical
   - type: MobThresholds
-    currentThresholdState : Alive
     thresholds:
       0: Alive
       300: Critical
@@ -191,18 +195,19 @@
     baseState: sec_pod
     openState: sec_pod_open
     brokenState: sec_pod_broken
-    mechToPilotDamageMultiplier: 0.0
     maxEquipmentAmount: 2
     airtight: true
-    pilotWhitelist:
-      components:
-        - HumanoidProfile
     equipmentWhitelist:
       tags:
       - CombatMech
       - PaddyMech
     startingEquipment:
       - WeaponMechCombatSolarisLaser
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
+      components:
+      - HumanoidProfile
   - type: Reflect
     reflectProb: 0.05
     spread: 180
@@ -210,7 +215,6 @@
     reflects:
     - NonEnergy
   - type: MobThresholds
-    currentThresholdState: Alive
     thresholds:
       0: Alive
       225: Critical
@@ -266,18 +270,19 @@
     baseState: mining_pod
     openState: mining_pod_open
     brokenState: mining_pod_broken
-    mechToPilotDamageMultiplier: 0.0
     maxEquipmentAmount: 4
     airtight: true
-    pilotWhitelist:
-      components:
-        - HumanoidProfile
     equipmentWhitelist:
       tags:
       - IndustrialMech
     startingEquipment:
       - WeaponMechIndustrialPlasmaCutterLight #Нужно сделать улучшения WeaponMechIndustrialKineticAccelerator по аналогии с ручным для прогресса в раунде
       - MechEquipmentGrabberSmallMining
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
+      components:
+      - HumanoidProfile
   - type: Reflect
     reflectProb: 0.05
     spread: 180
@@ -285,7 +290,6 @@
     reflects:
     - NonEnergy
   - type: MobThresholds
-    currentThresholdState: Alive
     thresholds:
       0: Alive
       200: Critical
@@ -373,15 +377,16 @@
     baseState: death
     openState: death-open
     brokenState: death-broken
-    mechToPilotDamageMultiplier: 0.0
     airtight: true
-    pilotWhitelist:
-      components:
-        - HumanoidProfile
     equipmentWhitelist:
       tags:
       - IndustrialMech
       - CombatMech
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
+      components:
+      - HumanoidProfile
   - type: MeleeThrowOnHit
     distance: 1.5
     speed: 10
@@ -410,7 +415,6 @@
     - FootstepSound
     - Ripley
   - type: MobThresholds
-    currentThresholdState : Alive
     thresholds:
       0: Alive
       400: Critical
@@ -432,7 +436,7 @@
 # region Paddy
 - type: entity
   id: MechPaddy
-  parent: [ MechBreakageRipley, BaseMech, CombatMech, IndustrialMech, BaseSecurityContraband ] # Sunrise-edit
+  parent: [ MechBreakageRipley, BaseMech, CombatMech, IndustrialMech, BaseSecurityContraband ]
   name: Paddy
   description: Autonomous Power Loader Unit Subtype Paddy. A Modified MK-II Ripley design intended for light security use.
   components:
@@ -458,13 +462,14 @@
     baseState: paddy
     openState: paddy-open
     brokenState: paddy-broken
-    mechToPilotDamageMultiplier: 0.0
     airtight: true
     maxEquipmentAmount: 4
     #siren: true # Todo: port siren system from starlight
-    pilotWhitelist:
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
       components:
-        - HumanoidProfile
+      - HumanoidProfile
   - type: Reflect
     reflectProb: 0.05
     spread: 180
@@ -535,15 +540,25 @@
     baseState: bigbrother
     openState: bigbrother-open
     brokenState: bigbrother-broken
-    mechToPilotDamageMultiplier: 0.05
     airtight: true
-    pilotWhitelist:
-      components:
-        - HumanoidProfile
     equipmentWhitelist:
       tags:
       - IndustrialMech
       - CombatMech
+  - type: Vehicle
+    transferDamageModifier:
+      coefficients:
+        Blunt: 0.05
+        Slash: 0.05
+        Piercing: 0.05
+        Heat: 0.05
+        Shock: 0.05
+        Caustic: 0.05
+        Structural: 0.05
+        Mangleness: 0
+    operatorWhitelist:
+      components:
+      - HumanoidProfile
   - type: Loadout
     prototypes: [ MechArmorMediumSyndiLoadout ]
   - type: MeleeWeapon
@@ -603,7 +618,7 @@
 # NT Gygax
 - type: entity
   id: MechNTGygax
-  parent: [ MechBreakageGygax, BaseMech, CombatMech, BaseSecurityScienceContraband ] # Sunrise-edit
+  parent: [ MechBreakageGygax, BaseMech, CombatMech, BaseSecurityScienceContraband ]
   name: Nanotrasen Special Gygax
   description: "Nanotrasen's trump card when solving problems. High durability, increased protection against shock, explosions, temperature, shots: conventional, laser and energy, as well as expanded equipment slots allow to turn the situation on the station upside down. Gas pedals consume a colossal amount of energy."
   components:
@@ -623,12 +638,13 @@
     baseState: ntgygax
     openState: ntgygax-open
     brokenState: ntgygax-broken
-    mechToPilotDamageMultiplier: 0.0
     airtight: true
     maxEquipmentAmount: 4
-    pilotWhitelist:
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
       components:
-        - HumanoidProfile
+      - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -695,7 +711,7 @@
   - type: Sprite
     drawdepth: Mobs
     noRot: true
-    sprite: _Sunrise/Objects/Specific/Mech/mecha.rsi # Sunrise-edit
+    sprite: _Sunrise/Objects/Specific/Mech/mecha.rsi
     scale: 1.08, 1.08
     layers:
     - map: [ "enum.MechVisualLayers.Base" ]
@@ -707,12 +723,13 @@
     baseState: phazon
     openState: phazon-open
     brokenState: phazon-broken
-    mechToPilotDamageMultiplier: 0.0
     maxEquipmentAmount: 5
     airtight: true
-    pilotWhitelist:
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
       components:
-        - HumanoidProfile
+      - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -731,7 +748,6 @@
     - NonEnergy
     - Energy
   - type: MobThresholds
-    currentThresholdState : Alive
     thresholds:
       0: Alive
       220: Critical
@@ -758,7 +774,7 @@
 # Rover
 - type: entity
   id: MechRoverSyndie
-  parent: [ MechBreakageRover, BaseMech, CombatMech, BaseSyndicateContraband ] # Sunrise-edit
+  parent: [ MechBreakageRover, BaseMech, CombatMech, BaseSyndicateContraband ]
   name: Rover
   description: A modified Durand used for nefarious purposes. On the back of the armor plate there is an inscription "Cybersun Inc."
   components:
@@ -792,12 +808,13 @@
     baseState: darkdurand
     openState: darkdurand-open
     brokenState: darkdurand-broken
-    mechToPilotDamageMultiplier: 0.0
     airtight: true
     maxEquipmentAmount: 5
-    pilotWhitelist:
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
       components:
-        - HumanoidProfile
+      - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -814,7 +831,6 @@
   - type: CanMoveInAir
   - type: MovementAlwaysTouching
   - type: MobThresholds
-    currentThresholdState : Alive
     thresholds:
       0: Alive
       500: Critical
@@ -845,7 +861,7 @@
 # Doll House
 - type: entity
   id: MechDollHouse
-  parent: [ MechBreakageDurand, BaseMech, CombatMech, BaseMajorContraband ] # Sunrise-edit
+  parent: [ MechBreakageDurand, BaseMech, CombatMech, BaseMajorContraband ]
   name: Doll House
   description: The Heavy Mech USSP, a communist variant of the Durand, features stronger armor and a powerful machine gun.
   components:
@@ -867,12 +883,13 @@
     baseState: dollhouse
     openState: dollhouse-open
     brokenState: dollhouse-broken
-    mechToPilotDamageMultiplier: 0.0
     airtight: true
     maxEquipmentAmount: 2
-    pilotWhitelist:
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
       components:
-        - HumanoidProfile
+      - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -902,7 +919,6 @@
   - type: AccessReader
     access: [["NuclearOperative"]]
   - type: MobThresholds
-    currentThresholdState : Alive
     thresholds:
       0: Alive
       500: Critical

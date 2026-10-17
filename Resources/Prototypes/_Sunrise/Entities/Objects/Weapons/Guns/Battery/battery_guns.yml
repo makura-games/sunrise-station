@@ -184,13 +184,13 @@
       conditions:
       - !type:AlertLevelCondition
         alertLevels:
-        - blue
-        - violet
-        - yellow
-        - red
-        - gamma
-        - delta
-        - epsilon
+        - Blue
+        - Violet
+        - Yellow
+        - Red
+        - Gamma
+        - DeltaNuke
+        - Epsilon
   - type: MagazineVisuals
     magState: mag
     steps: 4
@@ -967,63 +967,6 @@
   - type: Battery
     maxCharge: 400000
     startingCharge: 400000
-
-# XenoBorgs
-- type: entity
-  name: xenoborg turbo-laser
-  parent: [WeaponAdvancedLaser, BaseXenoborgContraband]
-  id: XenoborgLaserMinigun
-  description: A big gun for big "Refrigerators". Fires so fast it overheats after a short burst, but at least you’ll definitely hit your target.
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Battery/laserminigun.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-unshaded-4
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
-  - type: Gun
-    minAngle: 6
-    maxAngle: 15
-    angleIncrease: 1
-    angleDecay: 5
-    fireRate: 12
-    selectedMode: FullAuto
-    soundGunshot:
-      collection: syndi_plasma
-      params:
-        volume: -2
-    availableModes:
-    - FullAuto
-  - type: BatteryAmmoProvider
-    proto: RedLightLaser
-    fireCost: 33
-  - type: BatterySelfRecharger
-    autoRechargePauseTime: 1
-    autoRechargeRate: 250
-  - type: MagazineVisuals
-    magState: mag
-    steps: 5
-    zeroVisible: false
-
-- type: entity
-  name: xenoborg X-ray cannon
-  parent: [WeaponXrayCannon, BaseXenoborgContraband]
-  id: XenoborgXrayGun
-  description: Weapon that uses concentrated x-ray energy against its target.
-  components:
-  - type: BatterySelfRecharger
-    autoRechargeRate: 30
-
-- type: entity
-  name: xenoborg temperature gun
-  parent: [WeaponTemperatureGun, BaseXenoborgContraband]
-  id: XenoborgTemperatureGun
-  description: An advanced gun that shoots body-temperature-changing beams. This one has a self-recharging battery for xenoborg use.
-  components:
-  - type: BatterySelfRecharger
-    autoRechargeRate: 30
 
 - type: entity
   name: laser pistol

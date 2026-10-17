@@ -20,15 +20,25 @@
     baseState: lockermech
     openState: lockermech-open
     brokenState: lockermech-broken
-    mechToPilotDamageMultiplier: 0.50
     airtight: true
     maxEquipmentAmount: 2
-    pilotWhitelist:
-      components:
-        - HumanoidProfile
     pilotBlacklist:
       species:
       - Felinid
+  - type: Vehicle
+    transferDamageModifier:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Heat: 0.5
+        Shock: 0.5
+        Caustic: 0.5
+        Structural: 0.5
+        Mangleness: 0
+    operatorWhitelist:
+      components:
+      - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -50,7 +60,6 @@
     - FootstepSound
     - Ripley
   - type: MobThresholds
-    currentThresholdState : Alive
     thresholds:
       0: Alive
       300: Critical

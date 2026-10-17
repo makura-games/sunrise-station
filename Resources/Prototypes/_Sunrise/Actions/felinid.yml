@@ -7,10 +7,11 @@
   components:
     - type: Action
       useDelay: 6
-      icon:
-        sprite: /Textures/_Sunrise/Actions/felionoid.rsi
-        state: licking
       itemIconStyle: NoItem
+    - type: Sprite
+      sprite: /Textures/_Sunrise/Actions/felionoid.rsi
+      layers:
+      - state: licking
     - type: TargetAction
       repeat: false
       range: 2

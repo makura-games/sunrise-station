@@ -3,7 +3,6 @@ using Content.Shared.Inventory;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using System.Threading;
 
 namespace Content.Shared._Sunrise.HardsuitInjection.Components;
@@ -13,11 +12,11 @@ namespace Content.Shared._Sunrise.HardsuitInjection.Components;
 [RegisterComponent]
 public sealed partial class InjectComponent : Component
 {
-    [DataField("toggleInjectionAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string ToggleInjectionAction = "ActionToggleInjection";
+    [DataField]
+    public EntProtoId ToggleInjectionAction = "ActionToggleInjection";
 
-    [DataField("injectionAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string InjectionAction = "ActionInjection";
+    [DataField]
+    public EntProtoId InjectionAction = "ActionInjection";
 
 
     [DataField("requiredSlot")]

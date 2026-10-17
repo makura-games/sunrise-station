@@ -1,0 +1,42 @@
+- type: !PartialOnly entity
+  id: StationMapBroken
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Machines/station_map.rsi
+    offset: 0, 0
+    layers: !Clear
+    - state: station_map_broken
+
+- type: !PartialOnly entity
+  id: StationMap
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Machines/station_map.rsi
+    offset: 0, 0
+    layers: !Clear
+    - !Index:0
+      state: station_map0
+    - !Index:0
+      state: unshaded
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Icon
+    sprite: _Sunrise/Structures/Machines/station_map.rsi
+    state: station_map0
+
+- type: !PartialOnly entity
+  id: StationMapAssembly
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Machines/station_map.rsi
+    offset: 0, 0
+    layers: !Clear
+    - state: station_map_frame1
+      map: ["enum.ConstructionVisuals.Layer"]
+  - type: GenericVisualizer
+    visuals:
+      enum.ConstructionVisuals.Key:
+        enum.ConstructionVisuals.Layer:
+          assembly: { state: station_map_frame0 }
+          wired: { state: station_map_frame1 }
+          electronics: { state: station_map_frame2 }

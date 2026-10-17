@@ -13,7 +13,7 @@ public sealed partial class SunriseHumanoidProfileComponent : Component
     /// TTS voice prototype used by this humanoid.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public ProtoId<TTSVoicePrototype> Voice = SunriseHumanoidProfileDefaults.DefaultVoice;
+    public ProtoId<TTSVoicePrototype> TtsVoice = SunriseHumanoidProfileDefaults.DefaultVoice;
 
     /// <summary>
     /// Body type prototype used for Sunrise body-type sprites and displacements.

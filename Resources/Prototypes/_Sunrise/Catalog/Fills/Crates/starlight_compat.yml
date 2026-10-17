@@ -9,7 +9,7 @@
       entity_storage: !type:AllSelector
         children:
         - id: NTDefaultCircuitBoard
-        - id: AsimovCircuitBoard
+        - id: CrewsimovCircuitBoard
         - id: CorporateCircuitBoard
         - id: CommandmentCircuitBoard
         - id: PaladinCircuitBoard

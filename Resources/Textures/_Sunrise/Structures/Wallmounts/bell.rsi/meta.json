@@ -1,0 +1,15 @@
+{
+    "version": 1,
+    "size": {
+        "x": 48,
+        "y": 48
+    },
+    "license": "CLA",
+    "copyright": "Sprited by discord: odlieerr",
+    "states": [
+        {
+            "name": "bell",
+            "directions": 4
+        }
+    ]
+}

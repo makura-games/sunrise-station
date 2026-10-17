@@ -9,7 +9,6 @@ namespace Content.Server._Sunrise.SponsorValidation;
 
 public sealed partial class SponsorValidationSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     private ISharedSponsorsManager? _sponsorsManager;
 
     public override void Initialize()
@@ -22,7 +21,7 @@ public sealed partial class SponsorValidationSystem : EntitySystem
 
     public bool ValidateGhostThemeSelection(string ghostThemeId, NetUserId userId)
     {
-        if (!_prototypeManager.TryIndex<GhostThemePrototype>(ghostThemeId, out var ghostThemePrototype))
+        if (!ProtoMan.TryIndex<GhostThemePrototype>(ghostThemeId, out var ghostThemePrototype))
             return false;
 
         if (!ghostThemePrototype.SponsorOnly)
@@ -41,7 +40,7 @@ public sealed partial class SponsorValidationSystem : EntitySystem
         List<string>? allowedThemes = null;
         _sponsorsManager?.TryGetGhostThemes(userId, out allowedThemes);
 
-        foreach (var ghostThemeProto in _prototypeManager.EnumeratePrototypes<GhostThemePrototype>())
+        foreach (var ghostThemeProto in ProtoMan.EnumeratePrototypes<GhostThemePrototype>())
         {
             var isAvailable = !ghostThemeProto.SponsorOnly || (allowedThemes != null && allowedThemes.Contains(ghostThemeProto.ID));
             ghostThemes.Add(new GhostThemeInfo(ghostThemeProto.ID, isAvailable));
@@ -56,7 +55,7 @@ public sealed partial class SponsorValidationSystem : EntitySystem
 
     public bool ValidatePetSelection(string petId, NetUserId userId)
     {
-        if (!_prototypeManager.TryIndex<PetSelectionPrototype>(petId, out var petPrototype))
+        if (!ProtoMan.TryIndex<PetSelectionPrototype>(petId, out var petPrototype))
             return false;
 
         if (!petPrototype.SponsorOnly)
@@ -75,7 +74,7 @@ public sealed partial class SponsorValidationSystem : EntitySystem
         List<string>? allowedPets = null;
         _sponsorsManager?.TryGetPets(userId, out allowedPets);
 
-        foreach (var petProto in _prototypeManager.EnumeratePrototypes<PetSelectionPrototype>())
+        foreach (var petProto in ProtoMan.EnumeratePrototypes<PetSelectionPrototype>())
         {
             var isAvailable = !petProto.SponsorOnly || (allowedPets != null && allowedPets.Contains(petProto.ID));
             pets.Add(new PetSelectionInfo(petProto.ID, isAvailable));

@@ -26,7 +26,6 @@
   - BaseStationJobsSpawning
   - BaseStationRecords
   - BaseStationArrivals
-  - BaseStationGateway
   - BaseStationEvacuation
   - BaseStationAlertLevels
   - BaseStationMagnet

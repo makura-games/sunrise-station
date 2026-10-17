@@ -19,7 +19,6 @@ public sealed partial class StayFreeConditionSystem : EntitySystem
     [Dependency] private RoundEndSystem _roundEnd = default!;
     [Dependency] private GameTicker _gameTicker = default!;
     [Dependency] private SharedObjectivesSystem _objectives = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IComponentFactory _componentFactory = default!;
 
     private readonly EntProtoId _stayFreeObjective = "PlanetPrisonerStayFreeObjective";
@@ -151,7 +150,7 @@ public sealed partial class StayFreeConditionSystem : EntitySystem
     /// </summary>
     private SpriteSpecifier? GetIconFromPrototype()
     {
-        var objectiveProto = _proto.Index(_stayFreeObjective);
+        var objectiveProto = ProtoMan.Index(_stayFreeObjective);
         if (objectiveProto.TryGetComponent<ObjectiveComponent>(out var protoObjComp, _componentFactory))
             return protoObjComp.Icon;
 

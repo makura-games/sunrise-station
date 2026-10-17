@@ -83,7 +83,9 @@
     soundSwing:
       path: /Audio/Weapons/punchmiss.ogg
   - type: Item
-  - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Prying
     speedModifier: 1.25
     pryPowered: true
@@ -120,7 +122,9 @@
     soundSwing:
       path: /Audio/Weapons/punchmiss.ogg
   - type: Item
-  - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Prying
     speedModifier: 1
     pryPowered: false

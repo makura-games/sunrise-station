@@ -1,5 +1,5 @@
 using Content.Client.Interactable.Components;
-using Content.Client.StatusIcon;
+using Content.Client.Graphics;
 using Content.Shared.Stealth;
 using Content.Shared.Stealth.Components;
 using Robust.Client.GameObjects;
@@ -13,7 +13,6 @@ public sealed partial class StealthSystem : SharedStealthSystem
     private static readonly ProtoId<ShaderPrototype> Shader = "Stealth";
     private static readonly ProtoId<ShaderPrototype> NoMirageShader = "NoMirageStealth";
 
-    [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private SharedTransformSystem _transformSystem = default!;
     [Dependency] private SpriteSystem _sprite = default!;
 
@@ -24,8 +23,8 @@ public sealed partial class StealthSystem : SharedStealthSystem
     {
         base.Initialize();
 
-        _shader = _protoMan.Index(Shader).InstanceUnique();
-        _noMirageShader = _protoMan.Index(NoMirageShader).InstanceUnique(); // Sunrise-Edit
+        _shader = ProtoMan.Index(Shader).InstanceUnique();
+        _noMirageShader = ProtoMan.Index(NoMirageShader).InstanceUnique(); // Sunrise-Edit
 
         SubscribeLocalEvent<StealthComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<StealthComponent, ComponentStartup>(OnStartup);
@@ -47,14 +46,20 @@ public sealed partial class StealthSystem : SharedStealthSystem
             return;
 
         _sprite.SetColor((uid, sprite), Color.White);
-        // Sunrise-Start
-        if (component.Mirage)
-            sprite.PostShader = enabled ? _shader : null;
+        if (enabled)
+        {
+            var shader = component.Mirage ? _shader : _noMirageShader; // Sunrise-Edit - сохраняем вариант невидимости без миража
+            _sprite.SetPostShader((uid, sprite), new SpriteComponent.PostShaderArgs(ContentPostShaderIds.Stealth, shader)
+            {
+                GetScreenTexture = true,
+                RaiseShaderEvent = true,
+                Before = ContentPostShaderIds.BeforeOutlines,
+            });
+        }
         else
-            sprite.PostShader = enabled ? _noMirageShader : null;
-        // Sunrise-End
-        sprite.GetScreenTexture = enabled;
-        sprite.RaiseShaderEvent = enabled;
+        {
+            _sprite.RemovePostShader((uid, sprite), ContentPostShaderIds.Stealth);
+        }
 
         if (!enabled)
         {
@@ -63,11 +68,8 @@ public sealed partial class StealthSystem : SharedStealthSystem
             return;
         }
 
-        if (TryComp(uid, out InteractionOutlineComponent? outline))
-        {
-            RemCompDeferred(uid, outline);
+        if (HasComp<InteractionOutlineComponent>(uid))
             component.HadOutline = true;
-        }
     }
 
     private void OnStartup(EntityUid uid, StealthComponent component, ComponentStartup args)
@@ -99,12 +101,12 @@ public sealed partial class StealthSystem : SharedStealthSystem
 
         // actual visual visibility effect is limited to +/- 1.
         visibility = Math.Clamp(visibility, -1f, 1f);
-
-        // Sunrise-Start
-        ShaderInstance shaderToUse = component.Mirage ? _shader : _noMirageShader;
+        // Sunrise start
+        var shaderToUse = component.Mirage ? _shader : _noMirageShader;
         shaderToUse.SetParameter("reference", reference);
         shaderToUse.SetParameter("visibility", visibility);
-        // Sunrise-End
+        shaderToUse.SetParameter("shimmer_frequency", component.ShimmerFrequency);
+        // Sunrise end
 
         visibility = MathF.Max(0, visibility);
         _sprite.SetColor((uid, args.Sprite), new Color(visibility, visibility, 1, 1));

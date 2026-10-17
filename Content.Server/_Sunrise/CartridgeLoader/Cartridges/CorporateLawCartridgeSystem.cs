@@ -1,4 +1,3 @@
-using Content.Server.CartridgeLoader;
 using Content.Server._Sunrise.Laws.Systems;
 using Content.Shared._Sunrise.CartridgeLoader.Cartridges;
 using Content.Shared._Sunrise.Laws;
@@ -9,7 +8,6 @@ namespace Content.Server._Sunrise.CartridgeLoader.Cartridges;
 
 public sealed partial class CorporateLawCartridgeSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
     [Dependency] private StationCorporateLawSystem _stationLaw = default!;
 
@@ -40,7 +38,7 @@ public sealed partial class CorporateLawCartridgeSystem : EntitySystem
             var provisionEntries = new List<LawEntry>();
             foreach (var entryId in lawset.Provisions)
             {
-                if (!_prototype.TryIndex(entryId, out var entry))
+                if (!ProtoMan.TryIndex(entryId, out var entry))
                     continue;
 
                 provisionEntries.Add(new LawEntry(entry.LawIdentifier, Loc.GetString(entry.Title), Loc.GetString(entry.Description)));
@@ -52,13 +50,13 @@ public sealed partial class CorporateLawCartridgeSystem : EntitySystem
         // 2. Legal Articles (Categorized)
         foreach (var sectionId in lawset.Articles)
         {
-            if (!_prototype.TryIndex(sectionId, out var section))
+            if (!ProtoMan.TryIndex(sectionId, out var section))
                 continue;
 
             var entries = new List<LawEntry>();
             foreach (var entryId in section.Entries)
             {
-                if (!_prototype.TryIndex(entryId, out var entry) || entry.Category == LawCategory.Provision)
+                if (!ProtoMan.TryIndex(entryId, out var entry) || entry.Category == LawCategory.Provision)
                     continue;
 
                 entries.Add(new LawEntry(entry.LawIdentifier, Loc.GetString(entry.Title), Loc.GetString(entry.Description)));
@@ -75,7 +73,7 @@ public sealed partial class CorporateLawCartridgeSystem : EntitySystem
 
             foreach (var entryId in lawset.Circumstances)
             {
-                if (!_prototype.TryIndex(entryId, out var entry) || entry.Category == LawCategory.Provision)
+                if (!ProtoMan.TryIndex(entryId, out var entry) || entry.Category == LawCategory.Provision)
                     continue;
 
                 var lawEntry = new LawEntry(entry.LawIdentifier, Loc.GetString(entry.Title), Loc.GetString(entry.Description));

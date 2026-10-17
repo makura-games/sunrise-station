@@ -20,7 +20,6 @@ public sealed partial class RandomXenoArtifactsSystem : EntitySystem
 {
     [Dependency] private StationSystem _station = default!;
     [Dependency] private SunriseHelpersSystem _helpers = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IConfigurationManager _configuration = default!;
 
@@ -70,7 +69,7 @@ public sealed partial class RandomXenoArtifactsSystem : EntitySystem
     /// </summary>
     public void CreateRandomArtifacts()
     {
-        if (!_prototype.TryIndex(BaseParent, out _baseParentPrototype))
+        if (!ProtoMan.TryIndex(BaseParent, out _baseParentPrototype))
         {
             Log.Error("Error while creating BaseParent for RandomXenoArtifactsSystem");
 

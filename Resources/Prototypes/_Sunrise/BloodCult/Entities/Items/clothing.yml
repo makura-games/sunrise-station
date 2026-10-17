@@ -36,7 +36,7 @@
 
 - type: entity
   id: CultMirrorShield
-  parent: BaseShield
+  parent: BaseGinormousShield
   name: mirror shield
   description: Shield with a mirror on a front side, which has some religious sign.
   suffix: BloodCult

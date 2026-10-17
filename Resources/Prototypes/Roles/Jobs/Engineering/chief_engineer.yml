@@ -13,12 +13,10 @@
     - !type:DepartmentTimeRequirement
       department: Engineering
       time: 10h
-  weight: 10
   startingGear: ChiefEngineerGear
   icon: "JobIconChiefEngineer"
   supervisors: job-supervisors-captain
   radioBold: true # Sunrise-Edit
-  displayWeight: 70 # Sunrise-Edit
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-chief-mechanic

@@ -60,7 +60,7 @@ namespace Content.Server._Sunrise.SolutionRegenerationSwitcherSystem
 
             solutionRegeneration.ChangeGenerated(reagent);
 
-            if (!PrototypeManager.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? proto))
+            if (!ProtoMan.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? proto))
             {
                 _sawmill.Error(
                     $"Can't get get reagent prototype {reagent.Reagent.Prototype} for {ToPrettyString(uid)}");

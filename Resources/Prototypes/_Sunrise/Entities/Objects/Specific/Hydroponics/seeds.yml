@@ -4,7 +4,7 @@
   id: ExplosiveBananaSeeds
   components:
   - type: Seed
-    seedId: ExplosiveBanana
+    plantId: ExplosiveBananaPlants
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/explosive_banana.rsi
 
@@ -14,7 +14,7 @@
   id: CoffeeArabicaSeeds
   components:
   - type: Seed
-    seedId: CoffeeArabica
+    plantId: CoffeeArabicaPlants
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/coffee_arabica.rsi
 
@@ -24,7 +24,7 @@
   id: CoffeeRobustSeeds
   components:
   - type: Seed
-    seedId: CoffeeRobust
+    plantId: CoffeeRobustPlants
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/coffee_robust.rsi
 
@@ -34,7 +34,7 @@
   id: GeraniumSeeds
   components:
   - type: Seed
-    seedId: Geranium
+    plantId: GeraniumPlants
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/geranium.rsi
 
@@ -44,7 +44,7 @@
   id: GlasscapSeeds
   components:
   - type: Seed
-    seedId: glasscap
+    plantId: GlasscapPlants
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/glasscap.rsi
 
@@ -54,7 +54,7 @@
   id: PlastSteelcapSeeds
   components:
   - type: Seed
-    seedId: plaststeelcap
+    plantId: PlaststeelcapPlants
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/plaststeelcap.rsi
 
@@ -64,7 +64,7 @@
   id: CannabisVitaSeeds
   components:
   - type: Seed
-    seedId: CannabisVita
+    plantId: CannabisVitaPlants
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/cannabis_vita.rsi
 
@@ -74,7 +74,7 @@
   id: BarrelmelonSeeds
   components:
   - type: Seed
-    seedId: Barrelmelon
+    plantId: BarrelmelonPlants
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/barrelmelon.rsi
 
@@ -84,7 +84,7 @@
   id: LanternfruitSeeds
   components:
   - type: Seed
-    seedId: Lanternfruit
+    plantId: LanternfruitPlants
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/lanternfruit.rsi
 
@@ -94,7 +94,7 @@
   id: RedroseSeeds
   components:
   - type: Seed
-    seedId: Redrose
+    plantId: RedrosePlants
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/redrose.rsi
 
@@ -104,7 +104,7 @@
   id: SnapcornSeeds
   components:
   - type: Seed
-    seedId: Snapcorn
+    plantId: SnapcornPlants
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/snapcorn.rsi
 
@@ -114,7 +114,7 @@
   id: WhiteroseSeeds
   components:
   - type: Seed
-    seedId: Whiterose
+    plantId: WhiterosePlants
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/whiterose.rsi
 
@@ -124,7 +124,7 @@
   id: SunflowerSeeds
   components:
   - type: Seed
-    seedId: Sunflower
+    plantId: SunflowerPlants
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/sunflower.rsi
 
@@ -134,7 +134,7 @@
   id: WhiteLilySeeds
   components:
   - type: Seed
-    seedId: WhiteLily
+    plantId: WhiteLilyPlants
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/white_lily.rsi
 
@@ -144,4 +144,4 @@
   name: packet of juicy tomato killer seeds
   components:
   - type: Seed
-    seedId: SunriseJuicyTomatoKiller
+    plantId: SunriseJuicyTomatoKillerPlants

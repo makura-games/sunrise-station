@@ -33,7 +33,7 @@
           types:
             Asphyxiation: 1
             Poison: 2.5
-      - !type:GenericStatusEffect
+      - !type:ModifyStatusEffect
         conditions:
         - !type:ReagentCondition
           reagent: BZ
@@ -41,8 +41,7 @@
         - !type:MetabolizerTypeCondition
           type: [ Slime ]
           inverted: true
-        key: SeeingRainbows
-        component: SeeingRainbows
+        effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 10
       - !type:Emote
@@ -85,15 +84,14 @@
           type: [ Slime ]
         walkSpeedModifier: 0.65
         sprintSpeedModifier: 0.65
-      - !type:GenericStatusEffect
+      - !type:ModifyStatusEffect
         conditions:
         - !type:ReagentCondition
           reagent: BZ
           min: 1
         - !type:MetabolizerTypeCondition
           type: [ Slime ]
-        key: ForcedSleep
-        component: ForcedSleeping
+        effectProto: StatusEffectForcedSleeping
         time: 10
         type: Add
 
@@ -144,13 +142,12 @@
           min: 1
         walkSpeedModifier: 0.65
         sprintSpeedModifier: 0.65
-      - !type:GenericStatusEffect
+      - !type:ModifyStatusEffect
         conditions:
         - !type:ReagentCondition
           reagent: Healium
           min: 1.8
-        key: ForcedSleep
-        component: ForcedSleeping
+        effectProto: StatusEffectForcedSleeping
         time: 3
         type: Add
 
@@ -202,21 +199,20 @@
           min: 1
         reagent: ChloralHydrate
         amount: -10
-      - !type:GenericStatusEffect
-        key: Stun
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectStunned
         time: 10
         type: Remove
-      - !type:GenericStatusEffect
-        key: KnockedDown
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectKnockdown
         time: 10
         type: Remove
-      - !type:GenericStatusEffect
-        key: StaminaModifier
-        component: StaminaModifier
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectDesoxyStamina
         time: 10
         type: Add
-      - !type:GenericStatusEffect
-        key: ForcedSleep
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectForcedSleeping
         time: 10
         type: Remove
       - !type:Jitter

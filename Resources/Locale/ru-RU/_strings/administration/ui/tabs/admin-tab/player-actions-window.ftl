@@ -9,3 +9,4 @@ admin-player-actions-window-admin-chat = Админ-чат
 admin-player-actions-window-title = Действия с игроками
 admin-player-actions-window-teleport = Телепорт
 admin-player-actions-window-admin-notes = Админ заметки
+admin-player-actions-window-event-log = Журнал событий

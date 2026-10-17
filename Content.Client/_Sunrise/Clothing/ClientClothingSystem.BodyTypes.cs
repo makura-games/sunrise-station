@@ -15,7 +15,6 @@ namespace Content.Client.Clothing;
 
 public sealed partial class ClientClothingSystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private TagSystem _tag = default!;
 
     private readonly string _hardsuitTag = "Hardsuit";
@@ -25,7 +24,7 @@ public sealed partial class ClientClothingSystem
         if (!Resolve(ent, ref ent.Comp, false))
             return;
 
-        UpdateAllSlots(ent.Owner, ent.Comp);
+        UpdateAllSlots(ent);
     }
 
     private void GetSunriseBodyTypeVisuals(
@@ -61,7 +60,7 @@ public sealed partial class ClientClothingSystem
     {
         bodyTypeVisualKey = null;
         if (!TryComp(equipee, out SunriseHumanoidProfileComponent? profile) ||
-            !_prototype.TryIndex(profile.BodyType, out var bodyType))
+            !ProtoMan.TryIndex(profile.BodyType, out var bodyType))
         {
             return false;
         }
@@ -84,10 +83,6 @@ public sealed partial class ClientClothingSystem
             return fallback;
         }
 
-        var bodyTypeDisplacement = inventory.Displacements.GetValueOrDefault($"{slot}-{bodyTypeVisualKey}")
-                                   ?? inventory.Displacements.GetValueOrDefault(slot)
-                                   ?? fallback;
-
         var sexDisplacements = humanoid.Sex switch
         {
             Sex.Male => inventory.MaleDisplacements,
@@ -95,17 +90,14 @@ public sealed partial class ClientClothingSystem
             _ => null,
         };
 
-        if (sexDisplacements is null || sexDisplacements.Count == 0)
-            return bodyTypeDisplacement;
-
-        var displacement = sexDisplacements.GetValueOrDefault($"{slot}-{bodyTypeVisualKey}")
-                           ?? sexDisplacements.GetValueOrDefault(slot)
-                           ?? bodyTypeDisplacement;
+        var displacement = sexDisplacements?.GetValueOrDefault($"{slot}-{bodyTypeVisualKey}")
+                           ?? inventory.Displacements.GetValueOrDefault($"{slot}-{bodyTypeVisualKey}")
+                           ?? fallback;
 
         if (!_tag.HasTag(equipment, _hardsuitTag))
             return displacement;
 
-        return sexDisplacements.GetValueOrDefault($"hardsuit-{bodyTypeVisualKey}")
+        return sexDisplacements?.GetValueOrDefault($"hardsuit-{bodyTypeVisualKey}")
                ?? inventory.Displacements.GetValueOrDefault($"hardsuit-{bodyTypeVisualKey}")
                ?? displacement;
     }

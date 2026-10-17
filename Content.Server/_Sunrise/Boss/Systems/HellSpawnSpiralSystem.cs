@@ -13,10 +13,8 @@ public sealed partial class HellSpawnSpiralSystem : EntitySystem
     [Dependency] private StunSystem _stun = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
 
-    [DataField]
     public string BulletProto = "BulletSkyFlare";
 
-    [DataField]
     public TimeSpan TimeOffset = TimeSpan.FromSeconds(0.5);
 
     /// <inheritdoc/>

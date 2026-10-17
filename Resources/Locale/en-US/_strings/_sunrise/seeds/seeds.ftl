@@ -14,3 +14,6 @@ seeds-whiterose-name = white rose
 seeds-whiterose-display-name = white rose
 seeds-sunflower-name = sunflower
 seeds-sunflower-display-name = sunflower
+seeds-geranium-name = geranium
+seeds-snapcorn-name = snapcorn
+seeds-white-lily-name = white lily

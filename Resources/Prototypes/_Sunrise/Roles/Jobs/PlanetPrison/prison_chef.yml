@@ -14,9 +14,7 @@
   startingGear: PrisonChefGear
   overrideConsoleVisibility: false
   supervisors: job-supervisors-head-of-prison
-  weight: 5
   alwaysUseSpawner: true
-  displayWeight: 40
   alternativeTitles:
   - job-alt-title-prison-cook
   access:

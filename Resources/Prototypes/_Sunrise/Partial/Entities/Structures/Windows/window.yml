@@ -1,0 +1,88 @@
+# Частичные прототипы сохраняют визуалы направленных окон Sunrise поверх обновлений Wizden.
+
+- type: !PartialOnly entity
+  id: WindowDirectional
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Windows/directional.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Windows/directional.rsi
+
+- type: !PartialOnly entity
+  id: WindowFrostedDirectional
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Windows/directional.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Windows/directional.rsi
+
+- type: !PartialOnly entity
+  id: Window
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Windows/window.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Windows/window.rsi
+    state: full
+
+- type: !PartialOnly entity
+  id: TintedWindow
+  components:
+  - type: Sprite
+    layers: !Remove
+    drawdepth: WallTops
+    sprite: _Sunrise/Structures/Windows/tinted_window.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Windows/tinted_window.rsi
+
+- type: !PartialOnly entity
+  id: WindowDiagonal
+  components:
+  - type: Sprite
+    layers: !Remove
+    drawdepth: WallTops
+    sprite: _Sunrise/Structures/Windows/window_diagonal.rsi
+    state: state0
+  - type: Icon
+    sprite: _Sunrise/Structures/Windows/window_diagonal.rsi
+    state: state0
+
+# Совместимость механики окон Sunrise с обновлёнными прототипами Wizden.
+
+- type: !PartialOnly entity
+  id: BaseWindowStructure
+  components:
+  - type: Ricochetable
+    chance: 0.7
+
+- type: !PartialOnly entity
+  id: BaseWindowStructureDirectional
+  components:
+  - type: Tag
+    tags:
+    - Directional
+
+- type: !PartialOnly entity
+  id: WindowFrostedDirectional
+  components:
+  - type: Occluder
+    polygon:
+    - "-0.5,-0.28125"
+    - "0.5,-0.28125"
+    - "0.5,-0.5"
+    - "-0.5,-0.5"
+
+- type: !PartialOnly entity
+  id: WindowDiagonal
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PolygonShape
+          vertices: !Clear
+          - "0.5,-0.5"
+          - "-0.4,-0.5"
+          - "-0.4,0.1"
+          - "0.5,0.5"

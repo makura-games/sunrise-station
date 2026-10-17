@@ -199,3 +199,5 @@ food-sequence-burger-content-appendix = аппендиксо
 food-sequence-burger-content-ears = ухо
 food-sequence-burger-content-stomach = желудо
 food-sequence-burger-content-liver = печень
+food-sequence-cotton-burger-content-plushie-sheep = шерстяной
+food-sequence-cotton-burger-content-plushie-sheepspace = космошерстяной

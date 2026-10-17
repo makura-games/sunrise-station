@@ -126,6 +126,15 @@ show_test_results() {
     dotnet tool install -g dotnet-trx 2>/dev/null || true
     mkdir -p "$RESULTS_DIR"
     trx --path "$RESULTS_DIR" -o -v quiet || true
+
+    # При MapWarningTo=Failed TRX может сохранить для неуспешного интеграционного
+    # теста только стек teardown. Извлекаем полный блок из сохранённого console
+    # output, где остаётся первичная MultipleAssertException.
+    shopt -s nullglob
+    local console_logs=("$RESULTS_DIR"/console.log)
+    for console_log in "${console_logs[@]}"; do
+        python3 "$ROOT_DIR/Tools/_sunrise/ci/sharding/failure_report.py" "$console_log" || true
+    done
 }
 
 run_integration_shard() {
@@ -133,6 +142,9 @@ run_integration_shard() {
     [[ "$SHARD" =~ ^[0-9]+$ ]]
     local settings=".integration-filters/shard_${SHARD}.runsettings"
     mkdir -p "$RESULTS_DIR"
+    local console_log="$RESULTS_DIR/console.log"
+
+    set +e
     timeout --signal=TERM --kill-after=2m 15m \
         dotnet test bin/Content.IntegrationTests/Content.IntegrationTests.dll \
         --settings "$settings" \
@@ -140,7 +152,11 @@ run_integration_shard() {
         --logger "console;verbosity=normal" \
         --results-directory "$RESULTS_DIR" \
         --blame-hang --blame-hang-timeout 6min --blame-hang-dump-type mini \
-        -- NUnit.ConsoleOut=0 NUnit.WorkDirectory="$RESULTS_DIR"
+        -- NUnit.ConsoleOut=0 NUnit.WorkDirectory="$RESULTS_DIR" \
+        2>&1 | tee "$console_log"
+    local status=${PIPESTATUS[0]}
+    set -e
+    return "$status"
 }
 
 report_timeout() {

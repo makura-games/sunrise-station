@@ -10,6 +10,13 @@
   femaleFirstNames: NamesSkeletonFirst
   dollPrototype: AppearanceSkeletonPerson
   skinColoration: TintedHues
+  defaultSoundsBySex:
+  - Skeleton
+  - Skeleton
+  - Skeleton
+  voices:
+  - Skeleton
+  - Skeleton
   buttScan: # Sunrise edit
     sprite: /Textures/_Sunrise/CopyMachine/butts_scans.rsi
     state: human

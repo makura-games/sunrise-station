@@ -43,7 +43,7 @@
   - 0,0,3,3
   throwDamage: 6 # Sunrise-Edit
 
-# Picture furry gf
+# Items that are so big they only fit in bluespace storages
 - type: itemSize
   id: Ginormous
   weight: 32
@@ -51,3 +51,12 @@
   defaultShape:
   - 0,0,5,5
   throwDamage: 7.5 # Sunrise-Edit
+
+# Picture furry gf
+- type: itemSize
+  id: Colossal
+  weight: 64
+  name: item-component-size-Colossal
+  defaultShape:
+  - 0,0,6,5
+  throwDamage: 8 # Sunrise-Edit

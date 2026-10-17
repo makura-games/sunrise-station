@@ -1,4 +1,5 @@
 artifact-trigger-hint-health-analyzer = Сканирование
+ent-TriggerHealthAnalyzer = { artifact-trigger-hint-health-analyzer }
 artifact-effect-hint-data-deleted = Активируйте узел, чтобы получить информацию
 # Artifact Effect Descriptions
 artifact-effect-description-wandering = Заставляет артефакт случайно перемещаться по области

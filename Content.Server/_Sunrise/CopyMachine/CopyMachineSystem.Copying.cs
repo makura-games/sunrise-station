@@ -31,7 +31,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
         if (!TryGetBuckledHumanoidAppearance(ent, out var humanoidAppearance))
             return false;
 
-        if (!_prototypeManager.TryIndex(humanoidAppearance.Species, out var speciesPrototype) || speciesPrototype.ButtScan == null)
+        if (!ProtoMan.TryIndex(humanoidAppearance.Species, out var speciesPrototype) || speciesPrototype.ButtScan == null)
             return false;
 
         _paper.SetImageContent(paper, speciesPrototype.ButtScan, new Vector2(15, 15));

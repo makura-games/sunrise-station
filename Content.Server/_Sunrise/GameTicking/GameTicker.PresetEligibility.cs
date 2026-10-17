@@ -43,7 +43,7 @@ public sealed partial class GameTicker
 
         foreach (var ruleId in preset.Rules)
         {
-            if (!_prototypeManager.TryIndex(ruleId, out var rule) ||
+            if (!ProtoMan.TryIndex(ruleId, out var rule) ||
                 !rule.TryGetComponent<GameRuleComponent>(ruleComponentName, out var ruleComponent))
             {
                 _sawmill.Error($"Encountered invalid rule {ruleId} in preset {preset.ID}");
@@ -107,7 +107,7 @@ public sealed partial class GameTicker
             if (!ignorePlayerLimits && !IsPlayerCountWithinLimits(limits, playerCount))
                 continue;
 
-            if (!_prototypeManager.TryIndex<GamePresetPrototype>(presetId, out var preset))
+            if (!ProtoMan.TryIndex<GamePresetPrototype>(presetId, out var preset))
                 continue;
 
             if (!preset.ShowInVote)

@@ -93,3 +93,4 @@ anomaly-behavior-fast = [color=crimson]Частота импульсов зна�
 anomaly-behavior-strenght = [color=crimson]Мощность импульсов значительно повышена.[/color]
 anomaly-behavior-moving = [color=crimson]Обнаружена координатная нестабильность.[/color]
 anomaly-secret-admin = [color=red](ОШИБКА)[/color]
+anomaly-scanner-doafter-examine = { CAPITALIZE(SUBJECT($user)) } { CONJUGATE-BASIC($user, "сканируют", "сканирует") } [color=plum]аномалию[/color].

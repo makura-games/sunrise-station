@@ -1,12 +1,12 @@
 using System.Linq;
 using System.Numerics;
-using Content.Server.AlertLevel;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
 using Content.Server.RoundEnd;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared._Sunrise.AssaultOps.Icarus;
+using Content.Shared.AlertLevel;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Station.Components;
 using Robust.Server.Audio;
@@ -232,7 +232,7 @@ public sealed partial class IcarusTerminalSystem : EntitySystem
             var targetStation = _stationSystem.GetStations().FirstOrNull();
             if (targetStation != null)
             {
-                _alertLevel.SetLevel(targetStation.Value, "delta", true, true, true);
+                _alertLevel.SetLevel(targetStation.Value, "DeltaNuke", true, true, true);
             }
 
             _roundEndSystem.ForceSetCountdown(TimeSpan.FromMinutes(1), cantRecall: true);

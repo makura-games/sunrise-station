@@ -5,13 +5,14 @@
   setPreference: true
   playTimeTracker: MothershipCore # Sunrise
   objective: roles-antag-mothership-core-objective
-  requirements:
-  # Sunrise-start
-  - !type:DepartmentTimeRequirement
-    department: Silicon
-    time: 18000 # 5 hrs
-  # Sunrise-end
   guides: [ Xenoborgs ]
+  tags:
+  - OffStation
+  - Roundstart
+  requirements:
+  - !type:RoleTimeRequirement
+    role: JobBorg
+    time: 18000  # 5 hrs
   storytellerStress: 5.0 # Sunrise-Edit
 
 - type: antagSpecifier
@@ -20,8 +21,6 @@
   prefRoles: [ MothershipCore ]
   fallbackRoles: [ Xenoborg ] # Sunrise-Edit
   spawnerPrototype: SpawnPointGhostRoleMothershipCore
-  mindRoles:
-  - MindRoleMothershipCore
 
 - type: antag
   id: Xenoborg
@@ -30,13 +29,15 @@
   setPreference: true
   playTimeTracker: Xenoborg # Sunrise
   objective: roles-antag-xenoborg-objective
-  requirements:
-  # Sunrise-start
-  - !type:DepartmentTimeRequirement
-    department: Silicon
-    time: 18000 # 5 hrs
-  # Sunrise-end
   guides: [ Xenoborgs ]
+  tags:
+  - OffStation
+  - Roundstart
+  - Converted
+  requirements:
+  - !type:RoleTimeRequirement
+    role: JobBorg
+    time: 18000  # 5 hrs
   storytellerStress: 0.5 # Sunrise-Edit
 
 - type: antagSpecifier
@@ -46,8 +47,6 @@
   prefRoles: [ Xenoborg ]
   fallbackRoles: [ MothershipCore ] # Sunrise-Edit
   spawnerPrototype: SpawnPointGhostRoleXenoborg
-  mindRoles:
-  - MindRoleXenoborg
 
 - type: antagSpecifier
   parent: BaseXenoborg

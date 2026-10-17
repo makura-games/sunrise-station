@@ -1,37 +1,64 @@
-﻿- type: alertLevels
-  id: stationPrisonAlerts
-  defaultLevel: lightsout
-  levels:
-    rollcall:
-      announcement: alert-level-rollcall-announcement
-      sound: /Audio/_Sunrise/Announcements/announce_dig.ogg
-      color: Green
-    breakfast:
-      announcement: alert-level-breakfast-announcement
-      sound: /Audio/_Sunrise/Announcements/announce_dig.ogg
-      color: Green
-    work:
-      announcement: alert-level-work-announcement
-      sound: /Audio/_Sunrise/Announcements/announce_dig.ogg
-      color: Green
-    exercise:
-      announcement: alert-level-exercise-announcement
-      sound: /Audio/_Sunrise/Announcements/announce_dig.ogg
-      color: Green
-    rest:
-      announcement: alert-level-rest-announcement
-      sound: /Audio/_Sunrise/Announcements/announce_dig.ogg
-      color: Green
-    shower:
-      announcement: alert-level-shower-announcement
-      sound: /Audio/_Sunrise/Announcements/announce_dig.ogg
-      color: Green
-    lightsout:
-      announcement: alert-level-lightsout-announcement
-      sound: /Audio/_Sunrise/Announcements/announce_dig.ogg
-      color: Green
-    lockdown:
-      announcement: alert-level-lockdown-announcement
-      sound: /Audio/Announcements/war.ogg
-      color: Red
-      emergencyLightColor: Red
+- type: alertLevel
+  id: SunrisePrisonRollCall
+  name: alert-level-rollcall
+  announcement: alert-level-rollcall-announcement
+  instructions: alert-level-rollcall-instructions
+  sound: /Audio/_Sunrise/Announcements/announce_dig.ogg
+  color: Green
+
+- type: alertLevel
+  id: SunrisePrisonBreakfast
+  name: alert-level-breakfast
+  announcement: alert-level-breakfast-announcement
+  instructions: alert-level-breakfast-instructions
+  sound: /Audio/_Sunrise/Announcements/announce_dig.ogg
+  color: Green
+
+- type: alertLevel
+  id: SunrisePrisonWork
+  name: alert-level-work
+  announcement: alert-level-work-announcement
+  instructions: alert-level-work-instructions
+  sound: /Audio/_Sunrise/Announcements/announce_dig.ogg
+  color: Green
+
+- type: alertLevel
+  id: SunrisePrisonExercise
+  name: alert-level-exercise
+  announcement: alert-level-exercise-announcement
+  instructions: alert-level-exercise-instructions
+  sound: /Audio/_Sunrise/Announcements/announce_dig.ogg
+  color: Green
+
+- type: alertLevel
+  id: SunrisePrisonRest
+  name: alert-level-rest
+  announcement: alert-level-rest-announcement
+  instructions: alert-level-rest-instructions
+  sound: /Audio/_Sunrise/Announcements/announce_dig.ogg
+  color: Green
+
+- type: alertLevel
+  id: SunrisePrisonShower
+  name: alert-level-shower
+  announcement: alert-level-shower-announcement
+  instructions: alert-level-shower-instructions
+  sound: /Audio/_Sunrise/Announcements/announce_dig.ogg
+  color: Green
+
+- type: alertLevel
+  id: SunrisePrisonLightsOut
+  name: alert-level-lightsout
+  announcement: alert-level-lightsout-announcement
+  instructions: alert-level-lightsout-instructions
+  sound: /Audio/_Sunrise/Announcements/announce_dig.ogg
+  color: Green
+
+- type: alertLevel
+  id: SunrisePrisonLockdown
+  name: alert-level-lockdown
+  announcement: alert-level-lockdown-announcement
+  instructions: alert-level-lockdown-instructions
+  sound: /Audio/Announcements/war.ogg
+  color: Red
+  emergencyLightColor: Red

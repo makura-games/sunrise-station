@@ -39,3 +39,10 @@ ghost-gui-toggle-lighting-manager-popup = Рендеринг света пере
 ghost-roles-window-rules-role-button = Правила
 # Sunrise-edit
 ghost-gui-change-server = Другие сервера
+ghost-gui-toggle-lighting-manager-popup-half-bright = Наполовину ярко.
+ghost-target-window-warp-to-title = [bold]Быстрое перемещение[/bold]
+ghost-target-window-warp-to-random-followed = Случайный сопровождаемый
+ghost-target-window-warp-to-random = Случайный
+ghost-target-window-warp-to-most-followed-tooltip = Переместиться к самому сопровождаемому игроку
+ghost-target-window-warp-to-random-followed-tooltip = Переместиться к случайному сопровождаемому игроку
+ghost-target-window-warp-to-random-tooltip = Переместиться к случайному игроку

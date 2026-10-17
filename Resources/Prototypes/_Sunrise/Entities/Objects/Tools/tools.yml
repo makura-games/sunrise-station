@@ -25,8 +25,8 @@
       path: /Audio/Items/wirecutter_drop.ogg
   - type: Tag
     tags:
-    - PlantSampleTaker
     - Wirecutter
+  - type: BotanySampleTaker
   - type: Sprite
     sprite: Objects/Tools/wirecutters.rsi
     layers:
@@ -161,13 +161,13 @@
   - type: MultipleTool
     statusShowBehavior: true
     entries:
-      - behavior: Anchoring
+      - behavior: [ Anchoring ]
         sprite:
           sprite: _Sunrise/Objects/Tools/golden_wrench.rsi
           state: wrench
         useSound:
           path: /Audio/Items/ratchet.ogg
-      - behavior: Prying
+      - behavior: [ Prying ]
         sprite:
           sprite: _Sunrise/Objects/Tools/golden_wrench.rsi
           state: crowbar

@@ -89,15 +89,6 @@
       board: [ DoorElectronicsPirate ]
 
 - type: entity
-  parent: AirlockExternalShuttleNukeopLocked
-  id: AirlockExternalShuttlePirateLocked
-  suffix: External, Docking, Pirate, Locked
-  components:
-  - type: ContainerFill
-    containers:
-      board: [ DoorElectronicsPirate ]
-
-- type: entity
   parent: AirlockExternalGlassShuttleNukeopLocked
   id: AirlockExternalGlassShuttlePirateLocked
   suffix: External, Docking, Pirate, Locked, Glass
@@ -123,34 +114,6 @@
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsPirate ]
-
-#Hatches
-- type: entity
-  parent: AirlockHatch
-  id: AirlockHatchCentcommLocked
-  name: CentCom Hatch
-  suffix: CentCom, Locked
-  components:
-  - type: AccessReader
-    access: [["CentralCommand"]]
-
-- type: entity
-  parent: AirlockHatch
-  id: AirlockHatchSyndicateLocked
-  name: Syndicate Hatch
-  suffix: Syndicate, Locked
-  components:
-  - type: AccessReader
-    access: [["SyndicateAgent"]]
-
-- type: entity
-  parent: AirlockHatchSyndicateLocked
-  id: AirlockHatchPirateLocked
-  name: Pirate Hatch
-  suffix: Pirate, Locked
-  components:
-  - type: AccessReader
-    access: [["Pirate"]]
 
 - type: entity
   parent: AirlockMaint

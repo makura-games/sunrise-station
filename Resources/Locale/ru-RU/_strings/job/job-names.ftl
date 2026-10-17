@@ -135,3 +135,5 @@ job-name-ertjanitor-veteran = ОБР уборщик (Ветеран)
 job-name-cburn-veteran = карантинный Офицер Центком (Ветеран)
 JobBoxer = боксёр
 JobZookeeper = зоотехник
+job-name-tram-driver = Водитель трамвая
+job-name-sus = Подозрительный

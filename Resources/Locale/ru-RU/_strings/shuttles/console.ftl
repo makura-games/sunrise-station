@@ -48,3 +48,7 @@ shuttle-console-docks-label = Стыковочные порты
 shuttle-console-undock-fail = Не удалось отстыковаться
 shuttle-console-dock-fail = Не удалось пристыковаться
 shuttle-console-static = Грид являеться статическим
+shuttle-console-nav-legend = Легенда
+shuttle-console-nav-other-dock = Внешние доки
+shuttle-console-nav-cargo-dock = Доки снабжения
+shuttle-console-nav-arrivals-dock = Доки прибытия

@@ -101,6 +101,7 @@
     Estimated combat effectiveness: 75%.
   suffix: Slug, Damaged 75%
   components:
+  - !Remove type: Destructible
   - type: CartridgeAmmo
     proto: BulletCharon280mmSlugDamaged75
     deleteOnSpawn: true
@@ -115,7 +116,25 @@
 # M381 CHARYBDIS 280mm 40KG Subnuclear Slug
 # A subnuclear warhead. Detonates on impact with a catastrophic area-of-effect blast.
 - type: entity
+  abstract: true
   parent: BaseCharon280mmCartridge
+  id: BaseCartridgeCharon280mmSubnuclear
+  components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Weapons/Guns/ArtilleryAmmo/charon_ammo.rsi # Sunrise-Edit
+    layers:
+    - state: subnuclear
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: subnuclear
+    suffix: false
+  - type: HeldSpeedModifier
+    walkModifier: 0.6
+    sprintModifier: 0.6
+
+- type: entity
+  parent: BaseCartridgeCharon280mmSubnuclear
   id: CartridgeCharon280mmSubnuclear
   name: M381 CHARYBDIS 280mm 40kg subnuclear slug
   description: >-
@@ -140,24 +159,12 @@
   - type: CartridgeAmmo
     proto: BulletCharon280mmSubnuclear
     deleteOnSpawn: true
-  - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/ArtilleryAmmo/charon_ammo.rsi # Sunrise-Edit
-    layers:
-    - state: subnuclear
-      map: ["enum.AmmoVisualLayers.Base"]
-  - type: Appearance
-  - type: SpentAmmoVisuals
-    state: subnuclear
-    suffix: false
   - type: StaticPrice
     price: 8000
-  - type: HeldSpeedModifier
-    walkModifier: 0.6
-    sprintModifier: 0.6
 
 # M381 CHARYBDIS 280mm Subnuclear Slug (Damaged, 75%)
 - type: entity
-  parent: CartridgeCharon280mmSubnuclear
+  parent: BaseCartridgeCharon280mmSubnuclear
   id: CartridgeCharon280mmSubnuclearDamaged75
   name: M381 CHARYBDIS 280mm 40kg subnuclear slug
   description: >-
@@ -191,7 +198,7 @@
 
 # M381 CHARYBDIS 280mm Subnuclear Slug (Damaged, 50%)
 - type: entity
-  parent: CartridgeCharon280mmSubnuclear
+  parent: BaseCartridgeCharon280mmSubnuclear
   id: CartridgeCharon280mmSubnuclearDamaged50
   name: M381 CHARYBDIS 280mm 40kg subnuclear slug
   description: >-
@@ -417,7 +424,35 @@
 
 # Leviathan 240mm HE Shell
 - type: entity
+  abstract: true
   parent: BaseLeviathanShell # Sunrise-Edit
+  id: BaseCartridgeLeviathan240mmHE
+  components:
+  - type: CartridgeAmmo
+    proto: BulletLeviathan240mmHE
+    deleteOnSpawn: true
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: blast240-inhand-left
+      right:
+      - state: blast240-inhand-right
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: blast
+    suffix: false
+  - type: MultiHandedItem
+  - type: HeldSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+  - type: DamageOnLand
+    ignoreResistances: true
+    damage:
+      types:
+        Blunt: 100
+
+- type: entity
+  parent: BaseCartridgeLeviathan240mmHE
   id: CartridgeLeviathan240mmHE
   name: 240mm HE artillery shell
   description: >-
@@ -439,39 +474,17 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: CartridgeAmmo
-    proto: BulletLeviathan240mmHE
-    deleteOnSpawn: true
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
     layers:
     - state: blast240mm
       map: ["enum.AmmoVisualLayers.Base"]
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: blast240-inhand-left
-      right:
-      - state: blast240-inhand-right
-  - type: Appearance
-  - type: SpentAmmoVisuals
-    state: blast
-    suffix: false
-  - type: MultiHandedItem
-  - type: HeldSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
   - type: StaticPrice
     price: 11984
-  - type: DamageOnLand
-    ignoreResistances: true
-    damage:
-      types:
-        Blunt: 100
 
 # Leviathan 240mm HE Shell (Damaged, 75%)
 - type: entity
-  parent: CartridgeLeviathan240mmHE
+  parent: BaseCartridgeLeviathan240mmHE
   id: CartridgeLeviathan240mmHEDamaged75
   name: 240mm HE artillery shell
   description: >-
@@ -491,25 +504,17 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: CartridgeAmmo
-    proto: BulletLeviathan240mmHE
-    deleteOnSpawn: true
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
     layers:
     - state: blast240mmdamaged
       map: ["enum.AmmoVisualLayers.Base"]
-  - type: DamageOnLand
-    ignoreResistances: true
-    damage:
-      types:
-        Blunt: 100
   - type: StaticPrice
     price: 5000
 
 # Leviathan 240mm HE Shell (Damaged, 50%)
 - type: entity
-  parent: CartridgeLeviathan240mmHE
+  parent: BaseCartridgeLeviathan240mmHE
   id: CartridgeLeviathan240mmHEDamaged50
   name: 240mm HE artillery shell
   description: >-
@@ -530,25 +535,37 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: CartridgeAmmo
-    proto: BulletLeviathan240mmHE
-    deleteOnSpawn: true
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
     layers:
     - state: blast240mmcrit
       map: ["enum.AmmoVisualLayers.Base"]
-  - type: DamageOnLand
-    ignoreResistances: true
-    damage:
-      types:
-        Blunt: 100
   - type: StaticPrice
     price: 0
 
 # Leviathan 240mm Nuke Shell
 - type: entity
+  abstract: true
   parent: BaseLeviathanShell
+  id: BaseCartridgeLeviathan240mmNuke
+  components:
+  - type: CartridgeAmmo
+    proto: BulletLeviathan240mmNuke
+    deleteOnSpawn: true
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: nuke240-inhand-left
+      right:
+      - state: nuke240-inhand-right
+  - type: Appearance
+  - type: MultiHandedItem
+  - type: HeldSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+
+- type: entity
+  parent: BaseCartridgeLeviathan240mmNuke
   id: CartridgeLeviathan240mmNuke
   name: 240mm nuclear artillery shell
   description: >-
@@ -575,31 +592,17 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: CartridgeAmmo
-    proto: BulletLeviathan240mmNuke
-    deleteOnSpawn: true
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
     layers:
     - state: nuke240mm
       map: ["enum.AmmoVisualLayers.Base"]
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: nuke240-inhand-left
-      right:
-      - state: nuke240-inhand-right
-  - type: Appearance
-  - type: MultiHandedItem
-  - type: HeldSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
   - type: StaticPrice
     price: 19984
 
 # Leviathan 240mm Nuke Shell (Damaged, 75%)
 - type: entity
-  parent: CartridgeLeviathan240mmNuke
+  parent: BaseCartridgeLeviathan240mmNuke
   id: CartridgeLeviathan240mmNukeDamaged75
   name: 240mm nuclear artillery shell
   description: >-
@@ -629,9 +632,6 @@
     range: 3
     sound:
       path: "/Audio/Misc/gamma.ogg"
-  - type: CartridgeAmmo
-    proto: BulletLeviathan240mmNuke
-    deleteOnSpawn: true
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
     layers:
@@ -652,7 +652,7 @@
 
 # Leviathan 240mm Nuke Shell (Damaged, 50%)
 - type: entity
-  parent: CartridgeLeviathan240mmNuke
+  parent: BaseCartridgeLeviathan240mmNuke
   id: CartridgeLeviathan240mmNukeDamaged50
   name: 240mm nuclear artillery shell
   description: >-
@@ -683,9 +683,6 @@
     range: 10
     sound:
       path: "/Audio/Misc/gamma.ogg"
-  - type: CartridgeAmmo
-    proto: BulletLeviathan240mmNuke
-    deleteOnSpawn: true
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
     layers:
@@ -777,7 +774,30 @@
 
 # Leviathan 240mm Cluster Shell
 - type: entity
+  abstract: true
   parent: BaseLeviathanShell
+  id: BaseCartridgeLeviathan240mmCluster
+  components:
+  - type: CartridgeAmmo
+    proto: BulletLeviathan240mmCluster
+    deleteOnSpawn: true
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: cluster240-inhand-left
+      right:
+      - state: cluster240-inhand-right
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: blast
+    suffix: false
+  - type: MultiHandedItem
+  - type: HeldSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+
+- type: entity
+  parent: BaseCartridgeLeviathan240mmCluster
   id: CartridgeLeviathan240mmCluster
   name: 240mm cluster artillery shell
   description: >-
@@ -799,34 +819,17 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: CartridgeAmmo
-    proto: BulletLeviathan240mmCluster
-    deleteOnSpawn: true
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
     layers:
     - state: cluster240mm
       map: ["enum.AmmoVisualLayers.Base"]
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: cluster240-inhand-left
-      right:
-      - state: cluster240-inhand-right
-  - type: Appearance
-  - type: SpentAmmoVisuals
-    state: blast
-    suffix: false
-  - type: MultiHandedItem
-  - type: HeldSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
   - type: StaticPrice
     price: 15000
 
 # Leviathan 240mm Cluster Shell (Damaged, 75%)
 - type: entity
-  parent: CartridgeLeviathan240mmCluster
+  parent: BaseCartridgeLeviathan240mmCluster
   id: CartridgeLeviathan240mmClusterDamaged75
   name: 240mm cluster artillery shell
   description: >-
@@ -846,9 +849,6 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: CartridgeAmmo
-    proto: BulletLeviathan240mmCluster
-    deleteOnSpawn: true
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
     layers:
@@ -864,7 +864,7 @@
 
 # Leviathan 240mm Cluster Shell (Damaged, 50%)
 - type: entity
-  parent: CartridgeLeviathan240mmCluster
+  parent: BaseCartridgeLeviathan240mmCluster
   id: CartridgeLeviathan240mmClusterDamaged50
   name: 240mm cluster artillery shell
   description: >-
@@ -885,9 +885,6 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: CartridgeAmmo
-    proto: BulletLeviathan240mmCluster
-    deleteOnSpawn: true
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
     layers:

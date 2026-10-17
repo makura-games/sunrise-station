@@ -7,9 +7,10 @@
   components:
   - type: Action
     checkCanInteract: false
-    icon:
-      sprite: _Sunrise/Mobs/Ghosts/gold_ghost_human.rsi
-      state: animated
     itemIconStyle: NoItem
+  - type: Sprite
+    sprite: _Sunrise/Mobs/Ghosts/gold_ghost_human.rsi
+    layers:
+    - state: animated
   - type: InstantAction
     event: !type:GhostThemeActionEvent

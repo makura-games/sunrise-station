@@ -17,6 +17,7 @@ using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
+using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -60,6 +61,13 @@ namespace Content.Client.Hands.Systems
         #region StateHandling
         private void HandleComponentState(Entity<HandsComponent> ent, ref ComponentHandleState args)
         {
+            // No need to update everything if we are only switching hands.
+            if (args.Current is HandsComponentActiveHandDeltaState activeHandState)
+            {
+                SetActiveHand(ent.AsNullable(), activeHandState.ActiveHandId);
+                return;
+            }
+
             if (args.Current is not HandsComponentState state)
                 return;
 
@@ -75,10 +83,18 @@ namespace Content.Client.Hands.Systems
             {
                 AddHand(ent.AsNullable(), handId, state.Hands[handId]);
             }
-            ent.Comp.SortedHands = new (state.SortedHands);
+            ent.Comp.SortedHands = new(state.SortedHands);
 
             SetActiveHand(ent.AsNullable(), state.ActiveHandId);
 
+            ent.Comp.ShowInHands = state.ShowInHands;
+            ent.Comp.HandDisplacement = state.HandDisplacement;
+            ent.Comp.LeftHandDisplacement = state.LeftHandDisplacement;
+            ent.Comp.RightHandDisplacement = state.RightHandDisplacement;
+            ent.Comp.CanBeStripped = state.CanBeStripped;
+
+            // TODO: Ideally this would only update if the displacement data actually changed, but there is no way to compare it since the type is not equatable.
+            UpdateAllHandVisuals((ent.Owner, ent.Comp));
             _stripSys.UpdateUi(ent);
         }
         #endregion
@@ -96,9 +112,11 @@ namespace Content.Client.Hands.Systems
         public override void DoDrop(Entity<HandsComponent?> ent,
             string handId,
             bool doDropInteraction = true,
-            bool log = true)
+            bool log = true,
+            EntityCoordinates? targetDropLocation = null
+        )
         {
-            base.DoDrop(ent, handId, doDropInteraction, log);
+            base.DoDrop(ent, handId, doDropInteraction, log, targetDropLocation);
 
             if (TryGetHeldItem(ent, handId, out var held) && TryComp(held, out SpriteComponent? sprite))
                 sprite.RenderOrder = EntityManager.CurrentTick.Value;
@@ -245,6 +263,20 @@ namespace Content.Client.Hands.Systems
         }
 
         /// <summary>
+        /// Update the players sprite with new in-hand visuals for all held items.
+        /// </summary>
+        private void UpdateAllHandVisuals(Entity<HandsComponent?> ent)
+        {
+            foreach (var handId in EnumerateHands(ent))
+            {
+                if (!TryGetHeldItem(ent, handId, out var held))
+                    continue;
+
+                UpdateHandVisuals(ent, held.Value, handId);
+            }
+        }
+
+        /// <summary>
         ///     Update the players sprite with new in-hand visuals.
         /// </summary>
         private void UpdateHandVisuals(Entity<HandsComponent?, SpriteComponent?> ent, EntityUid held, string handId)
@@ -322,12 +354,8 @@ namespace Content.Client.Hands.Systems
                 _sprite.LayerSetData((ent, sprite), index, layerData);
 
                 // Add displacement maps
-                var displacement = hand.Value.Location switch
-                {
-                    HandLocation.Left => handComp.LeftHandDisplacement,
-                    HandLocation.Right => handComp.RightHandDisplacement,
-                    _ => handComp.HandDisplacement
-                };
+                // Sunrise-Edit - учитываем displacement-карты выбранного типа тела.
+                var displacement = GetSunriseHandDisplacement(ent.Owner, hand.Value.Location, handComp);
 
                 if (displacement is not null && _displacement.TryAddDisplacement(displacement, (ent, sprite), index, key, out var displacementKey))
                     revealedLayers.Add(displacementKey);

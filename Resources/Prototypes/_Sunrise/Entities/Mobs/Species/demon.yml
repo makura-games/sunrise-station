@@ -38,12 +38,14 @@
     species: Demon
   - type: SunriseHumanoidProfile
   - type: SunriseHumanoidBaseLayers
-  - type: Hunger
-  - type: Thirst
-    dehydrationDamage:
-      types:
-        Bloodloss: 0.5
-        Asphyxiation: 0.5
+  - type: SatiationDamage
+    satiations:
+      Thirst:
+        thresholds:
+          Dead:
+            types:
+              Bloodloss: 0.5
+              Asphyxiation: 0.5
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: full_m
@@ -52,17 +54,13 @@
     noRot: true
     drawdepth: Mobs
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatDemon
       amount: 5
   - type: Speech
     speechSounds: Lizard
   - type: Vocal
-    sounds:
-      Male: MaleHuman
-      Female: FemaleHuman
-      Unsexed: FemaleHuman
+    emoteSounds: MaleHuman
   - type: Damageable
   - type: Injurable
     damageContainer: Biological
@@ -76,8 +74,7 @@
       types:
         Piercing: 5
   - type: Temperature
-    currentTemperature: 310.15
-    specificHeat: 46
+    temperature: 310.15
   - type: TemperatureDamage
     heatDamageThreshold: 400
     coldDamageThreshold: 193  #starting temperature damage treshold

@@ -1,6 +1,6 @@
 ﻿- type: entity
   id: BaseBarSign
-  parent: [ BaseWallmountGlass, BaseWallmountMachine ]
+  parent: [ BaseWallmountGlass, BaseWallmountMachine, StructureHealthMachineWeak ]
   name: bar sign
   abstract: true
   components:
@@ -28,10 +28,8 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 50
+        damage: 100
       behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
       - !type:PlaySoundBehavior
         sound:
           collection: MetalGlassBreak

@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Linq;
 using Prometheus;
-using Content.Server.AlertLevel;
+using Content.Shared.AlertLevel;
 using Content.Server._Sunrise.Storyteller.Components;
 using Content.Shared._Sunrise.Storyteller.Prototypes;
 using Content.Shared._Sunrise.SunriseCCVars;
@@ -220,7 +220,7 @@ public sealed partial class StorytellerSystem
             "yellow" => 3,
             "red" => 4,
             "gamma" => 5,
-            "delta" => 6,
+            "delta" or "deltanuke" => 6,
             "epsilon" => 7,
             _ => -1
         };
@@ -295,16 +295,18 @@ public sealed partial class StorytellerSystem
         TotalPlayersGauge.Set(metrics.TotalPlayers);
 
         var alertQuery = EntityQueryEnumerator<AlertLevelComponent, MainStationComponent>();
-        AlertLevelComponent? mainAlertComp = null;
-        while (alertQuery.MoveNext(out _, out var alertComp, out _))
+        Entity<AlertLevelComponent>? mainAlert = null;
+        while (alertQuery.MoveNext(out var station, out var alertComp, out _))
         {
-            mainAlertComp = alertComp;
+            mainAlert = (station, alertComp);
             break;
         }
 
-        if (mainAlertComp != null)
+        if (mainAlert is { } alert &&
+            _alertLevel.TryGetLevel(alert.AsNullable(), out var currentAlertLevel) &&
+            currentAlertLevel is { } level)
         {
-            AlertLevelGauge.Set(GetAlertLevelNumeric(mainAlertComp.CurrentLevel));
+            AlertLevelGauge.Set(GetAlertLevelNumeric(level.Id));
         }
         else
         {
@@ -332,7 +334,7 @@ public sealed partial class StorytellerSystem
         static string F4(float v, IFormatProvider p) => v.ToString("F4", p);
 
         var maxBudgetModifier = 1f;
-        if (_protoManager.TryIndex<StorytellerTypePrototype>(comp.StorytellerType.ToString(), out var typeProto))
+        if (ProtoMan.TryIndex<StorytellerTypePrototype>(comp.StorytellerType.ToString(), out var typeProto))
         {
             maxBudgetModifier = typeProto.MaxBudgetModifier;
         }
@@ -340,15 +342,18 @@ public sealed partial class StorytellerSystem
 
         var alertLevel = "green";
         var alertQuery = EntityQueryEnumerator<AlertLevelComponent, MainStationComponent>();
-        AlertLevelComponent? mainAlertComp = null;
-        while (alertQuery.MoveNext(out _, out var alertComp, out _))
+        Entity<AlertLevelComponent>? mainAlert = null;
+        while (alertQuery.MoveNext(out var station, out var alertComp, out _))
         {
-            mainAlertComp = alertComp;
+            mainAlert = (station, alertComp);
             break;
         }
-        if (mainAlertComp != null)
+
+        if (mainAlert is { } alert &&
+            _alertLevel.TryGetLevel(alert.AsNullable(), out var currentAlertLevel) &&
+            currentAlertLevel is { } level)
         {
-            alertLevel = mainAlertComp.CurrentLevel;
+            alertLevel = level.Id;
         }
 
         var message =

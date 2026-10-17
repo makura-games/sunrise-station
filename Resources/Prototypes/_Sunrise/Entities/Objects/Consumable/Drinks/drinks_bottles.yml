@@ -30,7 +30,7 @@
       - ReagentId: Vodkizine
         Quantity: 100
   - type: Label
-    currentLabel: reagent-name-vodkizine
+    localizedLabel: reagent-name-vodkizine
   - type: Sprite
     sprite: Objects/Consumable/Drinks/vodkabottle.rsi
   - type: Sealable
@@ -50,7 +50,7 @@
       - ReagentId: RedRum
         Quantity: 100
   - type: Label
-    currentLabel: reagent-name-redrum
+    localizedLabel: reagent-name-redrum
   - type: Sprite
     sprite: Objects/Consumable/Drinks/rumbottle.rsi
 
@@ -67,7 +67,7 @@
       - ReagentId: DarkRedRum
         Quantity: 50
   - type: Label
-    currentLabel: reagent-name-dark-red-rum
+    localizedLabel: reagent-name-dark-red-rum
   - type: Sprite
     scale: 1,0.8
     sprite: Objects/Consumable/Drinks/rumbottle.rsi

@@ -158,13 +158,18 @@ if (_timing.IsFirstTimePredicted)
 ### Popups
 
 ```csharp
-// ✅ Shows once
-_popup.PopupPredicted(message, uid, user, PopupType.Medium);
+// ✅ Popup API самостоятельно обрабатывает предикт и подавление дублей.
+_popup.PopupEntity(message, uid, PopupType.Medium);
 
-// ✅ Option for local player only
-if (_timing.IsFirstTimePredicted)
-    _popup.PopupEntity(message, uid, user);
+// ✅ Вариант только для локального игрока.
+_popup.PopupEntity(message, uid, user);
 ```
+
+Use `PopupEntity`, `PopupCoordinates`, or `PopupCursor` directly. The old
+`PopupPredicted*` and `PopupClient` wrappers are obsolete. When replacing them,
+preserve their filtering semantics: a `PopupClient` recipient is a real audience
+filter, while the recipient argument of the old `PopupPredicted` overloads was
+only a prediction key and should not become a recipient filter.
 
 ## Predicted randomness
 
@@ -309,15 +314,16 @@ if (_randomPredicted.ProbForEntity(uid, 0.5f))
     DoAction();
 ```
 
-### 3. Side effects without IsFirstTimePredicted
+### 3. Obsolete popup prediction wrappers
 
 ```csharp
-// ❌ The popup will appear many times
-_popup.PopupEntity("Hit!", uid);
+// ❌ Устаревшие обёртки
+_popup.PopupPredicted("Hit!", uid, user);
+_popup.PopupClient("Hit!", uid, user);
 
-// ✅ Only once
-if (_timing.IsFirstTimePredicted)
-    _popup.PopupEntity("Hit!", uid);
+// ✅ Текущий popup API самостоятельно предсказывает и удаляет дубли
+_popup.PopupEntity("Hit!", uid);
+_popup.PopupEntity("Hit!", uid, user);
 ```
 
 ### 4. [NetworkedComponent] on a non-Shared component

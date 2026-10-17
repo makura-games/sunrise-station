@@ -3,6 +3,7 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Stealth.Components;
+
 /// <summary>
 /// Add this component to an entity that you want to be cloaked.
 /// It overlays a shader on the entity to give them an invisibility cloaked effect.
@@ -16,7 +17,7 @@ public sealed partial class StealthComponent : Component
     /// <summary>
     /// Whether or not the stealth effect should currently be applied.
     /// </summary>
-    [DataField("enabled")]
+    [DataField]
     public bool Enabled = true;
 
     // Sunrise-Start
@@ -27,19 +28,19 @@ public sealed partial class StealthComponent : Component
     /// <summary>
     /// The creature will continue invisible at death.
     /// </summary>
-    [DataField("enabledOnDeath")]
+    [DataField]
     public bool EnabledOnDeath = true;
 
     /// <summary>
     /// Whether or not the entity previously had an interaction outline prior to cloaking.
     /// </summary>
-    [DataField("hadOutline")]
+    [DataField]
     public bool HadOutline;
 
     /// <summary>
     /// Minimum visibility before the entity becomes unexaminable (and thus no longer appears on context menus).
     /// </summary>
-    [DataField("examineThreshold")]
+    [DataField]
     public float ExamineThreshold = 0.5f;
 
     /// <summary>
@@ -48,50 +49,48 @@ public sealed partial class StealthComponent : Component
     /// get the actual current visibility, use <see cref="SharedStealthSystem.GetVisibility(EntityUid, StealthComponent?)"/>
     /// If you don't have anything else updating the stealth, this will just stay at a constant value, which can be useful.
     /// </summary>
-    [DataField("lastVisibility")]
+    [DataField]
     [Access(typeof(SharedStealthSystem), Other = AccessPermissions.None)]
     public float LastVisibility = 1;
-
 
     /// <summary>
     /// Time at which <see cref="LastVisibility"/> was set. Null implies the entity is currently paused and not
     /// accumulating any visibility change.
     /// </summary>
-    [DataField("lastUpdate", customTypeSerializer:typeof(TimeOffsetSerializer))]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan? LastUpdated;
 
     /// <summary>
     /// Minimum visibility. Note that the visual effect caps out at -1, but this value is allowed to be larger or smaller.
     /// </summary>
-    [DataField("minVisibility")]
+    [DataField]
     public float MinVisibility = -1f;
 
     /// <summary>
     /// Maximum visibility. Note that the visual effect caps out at +1, but this value is allowed to be larger or smaller.
     /// </summary>
-    [DataField("maxVisibility")]
+    [DataField]
     public float MaxVisibility = 1.5f;
 
     /// <summary>
-    ///     Localization string for how you'd like to describe this effect.
+    /// The frequency of the shimmer effect. 0 disables the shimmering, leaving only a static distortion.
     /// </summary>
-    [DataField("examinedDesc")]
+    [DataField]
+    public float ShimmerFrequency = 1f;
+
+    /// <summary>
+    /// Localization string for how you'd like to describe this effect.
+    /// </summary>
+    [DataField]
     public string ExaminedDesc = "stealth-visual-effect";
 }
 
 [Serializable, NetSerializable]
-public sealed class StealthComponentState : ComponentState
+public sealed class StealthComponentState(float stealthLevel, TimeSpan? lastUpdated, bool enabled, float shimmerFrequency, bool mirage) : ComponentState
 {
-    public readonly float Visibility;
-    public readonly TimeSpan? LastUpdated;
-    public readonly bool Enabled;
-    public readonly bool Mirage;
-
-    public StealthComponentState(float stealthLevel, TimeSpan? lastUpdated, bool enabled, bool mirage)
-    {
-        Visibility = stealthLevel;
-        LastUpdated = lastUpdated;
-        Enabled = enabled;
-        Mirage = mirage;
-    }
+    public readonly float Visibility = stealthLevel;
+    public readonly TimeSpan? LastUpdated = lastUpdated;
+    public readonly bool Enabled = enabled;
+    public readonly float ShimmerFrequency = shimmerFrequency;
+    public readonly bool Mirage = mirage;
 }

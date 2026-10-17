@@ -82,25 +82,6 @@
 
 - type: entity
   parent: BaseAntagGhostRoleRule
-  id: DerelictSyndicateReaperCyborgSpawn
-  components:
-  - type: StationEvent
-    weight: 1
-    earliestStart: 25
-    reoccurrenceDelay: 20
-    minimumPlayers: 15
-    duration: null
-  - type: SpaceSpawnRule
-    spawnDistance: 0
-  - type: AntagSpawner
-    prototype: PlayerBorgSyndicateReaperDerelictGhostRoleSunrise
-  - type: AntagSelection
-    antags:
-    - !type:FixedAntagCount
-      proto: SunriseDerelictSyndicateReaperCyborg
-
-- type: entity
-  parent: BaseAntagGhostRoleRule
   id: DerelictSyndicateSaboteurCyborgSpawn
   components:
   - type: StationEvent
@@ -149,7 +130,6 @@
     sound: /Audio/_Sunrise/Abductor/abductor.ogg
   components:
   - type: Abductor
-  - type: Muted
   - type: AbductorScientist
   - type: ActionGrant
     actions:
@@ -179,7 +159,6 @@
     sound: /Audio/_Sunrise/Abductor/abductor.ogg
   components:
   - type: Abductor
-  - type: Muted
   - type: AbductorAgent
   - type: Tag
     tags:
@@ -203,12 +182,6 @@
     sound: /Audio/_Sunrise/Abductor/abductor.ogg
   mindRoles:
   - AbductorVictimRole
-
-- type: antagSpecifier
-  parent: BaseAntagSpecifier
-  id: SunriseDerelictSyndicateReaperCyborg
-  pickPlayer: false
-  spawnerPrototype: SpawnPointGhostDerelictSyndicateReaperCyborg
 
 - type: antagSpecifier
   parent: BaseAntagSpecifier
@@ -238,7 +211,6 @@
     - id: IonStorm # its calm like 90% of the time smh
     - id: KudzuGrowth
     - id: MassHallucinations
-    - id: MimicVendorRule
     - id: MouseMigration
     - id: PowerGridCheck
     - id: RandomSentience

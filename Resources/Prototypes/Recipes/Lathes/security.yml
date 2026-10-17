@@ -6,6 +6,7 @@
   categories:
   - Tools
   completetime: 4
+  applyMaterialDiscount: false # Sunrise-Edit - щиты возвращают материалы при разрушении.
 
 - type: latheRecipe
   abstract: true
@@ -136,6 +137,13 @@
   result: Handcuffs
   materials:
     Steel: 300
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: SecurityBola
+  result: SecurityBola
+  materials:
+    Steel: 500
 
 - type: latheRecipe
   parent: BaseToolRecipe

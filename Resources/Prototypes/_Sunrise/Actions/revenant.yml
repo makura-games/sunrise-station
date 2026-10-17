@@ -5,8 +5,10 @@
   description: Costs 60 Essence.
   components:
   - type: Action
-    icon: _Sunrise/Interface/Actions/lock.png
     useDelay: 25
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/Interface/Actions/lock.png
   - type: InstantAction
     event: !type:RevenantLockActionEvent
 
@@ -18,7 +20,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: _Sunrise/Interface/Actions/icon.png
     useDelay: 27
+  - type: Sprite
+    layers:
+    - texture: _Sunrise/Interface/Actions/icon.png
   - type: InstantAction
     event: !type:RevenantDrainActionEvent

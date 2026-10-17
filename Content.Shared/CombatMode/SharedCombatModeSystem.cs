@@ -1,11 +1,11 @@
 using Content.Shared.Actions;
 using Content.Shared.Mind;
 using Content.Shared.MouseRotator;
-using Content.Shared.Mech.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Vehicle.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
@@ -62,7 +62,7 @@ public abstract partial class SharedCombatModeSystem : EntitySystem
         SetInCombatMode(uid, !component.IsInCombatMode, component);
 
         var msg = component.IsInCombatMode ? "action-popup-combat-enabled" : "action-popup-combat-disabled";
-        _popup.PopupClient(Loc.GetString(msg), args.Performer, args.Performer);
+        _popup.PopupEntity(Loc.GetString(msg), args.Performer, args.Performer);
     }
 
     public void SetCanDisarm(EntityUid entity, bool canDisarm, CombatModeComponent? component = null)
@@ -108,9 +108,11 @@ public abstract partial class SharedCombatModeSystem : EntitySystem
     {
         if (value)
         {
-            if (TryComp<MechPilotComponent>(uid, out var mechPilot) && !HasComp<NoRotateOnMoveComponent>(mechPilot.Mech))
+            if (TryComp<VehicleOperatorComponent>(uid, out var vehicleOperator) &&
+                vehicleOperator.Vehicle is { } vehicle &&
+                !HasComp<NoRotateOnMoveComponent>(vehicle))
             {
-                EnsureComp<NoRotateOnMoveComponent>(mechPilot.Mech);
+                EnsureComp<NoRotateOnMoveComponent>(vehicle);
             }
 
             EnsureComp<MouseRotatorComponent>(uid);
@@ -118,9 +120,11 @@ public abstract partial class SharedCombatModeSystem : EntitySystem
         }
         else
         {
-            if (TryComp<MechPilotComponent>(uid, out var mechPilot) && HasComp<NoRotateOnMoveComponent>(mechPilot.Mech))
+            if (TryComp<VehicleOperatorComponent>(uid, out var vehicleOperator) &&
+                vehicleOperator.Vehicle is { } vehicle &&
+                HasComp<NoRotateOnMoveComponent>(vehicle))
             {
-                RemComp<NoRotateOnMoveComponent>(mechPilot.Mech);
+                RemComp<NoRotateOnMoveComponent>(vehicle);
             }
 
             RemComp<MouseRotatorComponent>(uid);

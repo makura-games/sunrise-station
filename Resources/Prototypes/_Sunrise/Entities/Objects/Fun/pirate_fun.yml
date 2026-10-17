@@ -101,8 +101,7 @@
       - SecretStash
       - WrappedParcel
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSilicon
+    emoteSounds: UnisexSilicon
   - type: Tag
     tags:
     - SiliconEmotes

@@ -12,7 +12,6 @@ namespace Content.Server._Sunrise.Laws.Systems;
 public sealed partial class StationCorporateLawSystem : SharedStationCorporateLawSystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -29,7 +28,7 @@ public sealed partial class StationCorporateLawSystem : SharedStationCorporateLa
     private void InitializeLawset(EntityUid station)
     {
         var lawsetId = _cfg.GetCVar(SunriseCCVars.CorporateLawSet);
-        if (!_proto.TryIndex<CorporateLawsetPrototype>(lawsetId, out var prototype))
+        if (!ProtoMan.TryIndex<CorporateLawsetPrototype>(lawsetId, out var prototype))
             return;
 
         if (!TryComp<StationCorporateLawComponent>(station, out var component))

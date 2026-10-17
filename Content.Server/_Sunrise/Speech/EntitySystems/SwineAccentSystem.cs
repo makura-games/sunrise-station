@@ -1,5 +1,4 @@
 using Content.Server._Sunrise.Speech.Components;
-using Content.Server.Speech;
 using Content.Shared.Speech;
 using Robust.Shared.Random;
 
@@ -15,7 +14,7 @@ public sealed partial class SwineAccentSystem : EntitySystem
         SubscribeLocalEvent<SwineAccentComponent, AccentGetEvent>(OnAccent);
     }
 
-    private void OnAccent(EntityUid uid, SwineAccentComponent component, AccentGetEvent args)
+    private void OnAccent(Entity<SwineAccentComponent> ent, ref AccentGetEvent args)
     {
         var message = args.Message;
 

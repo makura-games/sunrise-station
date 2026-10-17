@@ -199,7 +199,7 @@
   suffix: Admeme
   components:
   - type: Item
-    size: Ginormous
+    size: Colossal
   - type: Storage
     maxItemSize: Ginormous
     grid:

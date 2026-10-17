@@ -6,4 +6,5 @@
   components:
     - type: Pda
       id: AgentIDCard
-      pen: Hypopen
+      penSlot:
+        startingItem: Hypopen

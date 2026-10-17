@@ -191,7 +191,7 @@ public sealed class MarkingEffectListSerializer :
 
         if (colors != null
             && colors.TryGet<ValueDataNode>("base", out var baseColorNode)
-            && Color.TryFromHex(baseColorNode.Value) is { } color)
+            && Color.TryFromHex(baseColorNode.Value, out var color))
         {
             return new ColorMarkingEffect(color);
         }

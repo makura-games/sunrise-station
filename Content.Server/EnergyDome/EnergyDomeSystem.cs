@@ -10,7 +10,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
-using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Content.Shared.Verbs;
 using Content.Shared.EnergyDome;
@@ -20,6 +19,8 @@ using Robust.Server.Containers;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Timing.Systems;
+using Content.Shared.Timing.Components;
 
 namespace Content.Server.EnergyDome;
 
@@ -376,7 +377,7 @@ public sealed partial class EnergyDomeSystem : EntitySystem
             _audio.PlayPvs(generator.Comp.EnergyOutSound, generator);
             if (TryComp<UseDelayComponent>(generator, out var useDelay))
             {
-                _useDelay.TryResetDelay(new Entity<UseDelayComponent>(generator, useDelay));
+                _useDelay.TryResetDelay((generator, useDelay));
             }
         }
     }

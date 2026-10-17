@@ -1,0 +1,51 @@
+- type: !PartialOnly entity
+  id: ClothingHeadHelmetHardsuitBrigmedic
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Head/Hardsuits/brigmedic.rsi
+
+- type: !PartialOnly entity
+  id: ClothingHeadHelmetHardsuitCybersun
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Head/Hardsuits/cybersun.rsi
+    layers: !Clear
+    - !Index:0
+      state: icon
+    - !Index:0
+      state: icon-flash
+      visible: false
+      shader: unshaded
+      map: [light]
+  - type: Clothing
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+
+- type: !PartialOnly entity
+  id: ClothingHeadHelmetHardsuitMime
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Head/Hardsuits/mime.rsi
+    layers: !Clear
+    - !Index:0
+      state: icon
+    - !Index:0
+      state: icon-flash
+      visible: false
+      shader: unshaded
+      map: [light]
+  - type: Clothing
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET

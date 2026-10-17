@@ -2,7 +2,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Cluwne;
-using Content.Shared.Clumsy;
+using Content.Shared.Clumsy.Components; // Sunrise-Edit - новые статус-эффекты неуклюжести
 using Content.Shared.Interaction.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs.Systems;
@@ -12,6 +12,7 @@ using Content.Shared.Zombies;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
+using Content.Shared.StatusEffectNew; // Sunrise-Edit - новые статус-эффекты неуклюжести
 
 namespace Content.Server.Weapons.Melee.InfectOnMelee;
 
@@ -21,6 +22,8 @@ public sealed partial class InfectOnMeleeSystem : EntitySystem
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private DamageableSystem _damageable = default!;
+    // Sunrise-Edit - зависимость для новых статус-эффектов неуклюжести
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     public override void Initialize()
     {
@@ -38,7 +41,9 @@ public sealed partial class InfectOnMeleeSystem : EntitySystem
                 if (HasComp<HumanoidProfileComponent>(entity)
                     && !_mob.IsDead(entity)
                     && _random.Prob(GenerateHitChance(entity, component))
-                    && !HasComp<ClumsyComponent>(entity)
+                    // Sunrise edit start - адаптация под новые статус-эффекты неуклюжести
+                    && !_statusEffects.HasEffectComp<ClumsyGunStatusEffectComponent>(entity)
+                    // Sunrise edit end
                     && !HasComp<ZombieComponent>(entity)
                     && !HasComp<MindShieldComponent>(entity))
                 {

@@ -123,12 +123,6 @@
   maxStress: 100
 
 - type: storytellerMetadata
-  id: MimicVendorRule
-  threatType: Neutral
-  threatCost: 5
-  maxStress: 100
-
-- type: storytellerMetadata
   id: ClosetSkeleton
   threatType: Neutral
   threatCost: 5
@@ -280,13 +274,6 @@
   threatCost: 15
   minStationStrength: 20
   maxStress: 80
-
-- type: storytellerMetadata
-  id: DerelictSyndicateReaperCyborgSpawn
-  threatType: MinorCalm
-  threatCost: 25
-  minStationStrength: 30
-  maxStress: 75
 
 - type: storytellerMetadata
   id: DerelictSyndicateSaboteurCyborgSpawn

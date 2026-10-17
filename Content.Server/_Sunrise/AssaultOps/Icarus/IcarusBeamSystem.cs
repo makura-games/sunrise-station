@@ -1,7 +1,7 @@
 using System.Numerics;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Atmos.Components;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -13,7 +13,6 @@ namespace Content.Server._Sunrise.AssaultOps.Icarus;
 
 public sealed partial class IcarusBeamSystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapMan = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private FlammableSystem _flammable = default!;
@@ -87,7 +86,7 @@ public sealed partial class IcarusBeamSystem : EntitySystem
         var box = new Box2(worldPos - r, worldPos + r);
 
         var grids = new List<Entity<MapGridComponent>>();
-        _mapMan.FindGridsIntersecting(Transform(ent).MapID, box, ref grids);
+        _map.FindGridsIntersecting(Transform(ent).MapID, box, ref grids);
 
         foreach (var grid in grids)
         {

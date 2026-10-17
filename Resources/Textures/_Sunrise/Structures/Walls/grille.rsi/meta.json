@@ -1,0 +1,33 @@
+{
+    "version": 1,
+    "license": "CLA",
+    "copyright": "Sprited by discord: odlieerr",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "grille"
+        },
+        {
+            "name": "grille_diagonal",
+            "directions": 4
+        },
+        {
+            "name": "grille_broken"
+        },
+        {
+            "name": "grille_damaged_0"
+        },
+        {
+            "name": "grille_damaged_1"
+        },
+        {
+            "name": "grille_damaged_2"
+        },
+        {
+            "name": "grille_damaged_3"
+        }
+    ]
+}

@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
-using Content.Server._Sunrise.ScaleSprite;
 using Content.Server.Administration.Components;
 using Content.Server.Cargo.Components;
 using Content.Server.Doors.Systems;
@@ -9,13 +8,11 @@ using Content.Server.Hands.Systems;
 using Content.Server.Stack;
 using Content.Server.Station.Systems;
 using Content.Server.Weapons.Ranged.Systems;
-using Content.Shared._Sunrise.ScaleSprite;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration;
 using Content.Shared.Administration.Components;
-using Content.Shared.Administration.Systems;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Construction.Components;
@@ -29,6 +26,7 @@ using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Stacks;
 using Content.Shared.Station.Components;
+using Content.Shared.Sprite;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Server.Physics;
@@ -56,7 +54,7 @@ public sealed partial class AdminVerbSystem
     [Dependency] private SharedBatterySystem _batterySystem = default!;
     [Dependency] private MetaDataSystem _metaSystem = default!;
     [Dependency] private GunSystem _gun = default!;
-    [Dependency] private ScaleSpriteSystem _scaleSpriteSystem = default!; // Sunris-Edit
+    [Dependency] private SharedScaleVisualsSystem _scaleVisuals = default!; // Sunrise-Edit
 
     private void AddTricksVerbs(GetVerbsEvent<Verb> args)
     {
@@ -767,7 +765,7 @@ public sealed partial class AdminVerbSystem
             {
                 _quickDialog.OpenDialog<float, float>(player, "Set Scale", "Scale X", "Scale Y", (float scaleX, float scaleY) =>
                 {
-                    _scaleSpriteSystem.Scale(args.Target, new Vector2(scaleX, scaleY));
+                    _scaleVisuals.SetSpriteScale(args.Target, new Vector2(scaleX, scaleY));
                 });
             },
             Impact = LogImpact.Medium,
@@ -877,7 +875,7 @@ public sealed partial class AdminVerbSystem
 
     private void GiveAllAccess(EntityUid entity)
     {
-        var allAccess = _prototypeManager
+        var allAccess = ProtoMan
             .EnumeratePrototypes<AccessLevelPrototype>()
             .Select(p => new ProtoId<AccessLevelPrototype>(p.ID)).ToArray();
 

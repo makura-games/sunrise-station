@@ -7,7 +7,6 @@ namespace Content.Shared._Sunrise.Explosion;
 
 public sealed partial class SharedSunriseExplosionSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {
@@ -23,7 +22,7 @@ public sealed partial class SharedSunriseExplosionSystem : EntitySystem
 
     public bool TryAddExplosionEffect(EntityUid uid, string explosionType)
     {
-        if (!_prototype.TryIndex<ExplosionPrototype>(explosionType, out var explosionPrototype))
+        if (!ProtoMan.TryIndex<ExplosionPrototype>(explosionType, out var explosionPrototype))
             return false;
 
         if (explosionPrototype.EffectType != ExplosionEffectType.Fancy)

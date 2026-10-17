@@ -152,20 +152,8 @@ namespace Content.Shared.Damage
 
                 float newValue = value.Float();
 
-                if (modifierSet.FlatReduction.TryGetValue(key, out var reduction))
-                    newValue = Math.Max(0f, newValue - (reduction - (reduction * armorPenetration))); // flat reductions can't heal you
-
                 // 🌟Starlight🌟 start
-                if (canHeal)
-                {
-                    if (modifierSet.Coefficients.TryGetValue(key, out var coefficient))
-                        newValue *= (coefficient + ((1f - coefficient) * armorPenetration)); // coefficients can heal you, e.g. cauterizing bleeding, Starlight change: removed maximum coefficent allowing for weaknesses
-                }
-                else
-                {
-                    if (modifierSet.Coefficients.TryGetValue(key, out var coefficient))
-                        newValue *= Math.Max(0f, coefficient + ((1f - coefficient) * armorPenetration));
-                }
+                newValue = ApplyDamageModifier(modifierSet, key, newValue, armorPenetration, canHeal);
                 // 🌟Starlight🌟 end
 
                 if (newValue != 0)
@@ -174,36 +162,6 @@ namespace Content.Shared.Damage
 
             return newDamage;
         }
-
-        // Sunrise-Start
-        public static DamageSpecifier ApplyModifier(DamageSpecifier damageSpec, float damageModifier, float healModifier)
-        {
-            DamageSpecifier newDamage = new();
-            newDamage.DamageDict.EnsureCapacity(damageSpec.DamageDict.Count);
-
-            foreach (var (key, value) in damageSpec.DamageDict)
-            {
-                if (value == 0)
-                    continue;
-
-                var newValue = value.Float();
-
-                if (value > 0)
-                {
-                    newValue *= damageModifier;
-                }
-                else
-                {
-                    newValue *= healModifier;
-                }
-
-                if(newValue != 0)
-                    newDamage.DamageDict[key] = FixedPoint2.New(newValue);
-            }
-
-            return newDamage;
-        }
-        // Sunrise-End
 
         /// <summary>
         ///     Reduce (or increase) damages by applying multiple modifier sets.

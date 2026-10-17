@@ -49,7 +49,7 @@ public sealed partial class InstrumentSystem
         if (args.SenderSession.AttachedEntity is not { Valid: true } attached)
             return false;
 
-        if (instrument.InstrumentPlayer != attached)
+        if (GetInstrumentPlayer(resolvedUid) != attached)
             return false;
 
         if (requireActiveInstrument && !HasComp<ActiveInstrumentComponent>(resolvedUid))
@@ -93,7 +93,7 @@ public sealed partial class InstrumentSystem
             return false;
         }
 
-        if (masterInstrument.InstrumentPlayer is not { } masterPlayer)
+        if (GetInstrumentPlayer(master) is not { } masterPlayer)
             return false;
 
         return _examineSystem.InRangeUnOccluded(uid,

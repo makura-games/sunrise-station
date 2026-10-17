@@ -9,9 +9,10 @@
     useDelay: 30
     priority: 2
     itemIconStyle: NoItem
-    icon:
-      sprite: Interface/Actions/actions_ai.rsi
-      state: bolt_door
+  - type: Sprite
+    sprite: Interface/Actions/actions_ai.rsi
+    layers:
+    - state: bolt_door
   - type: TargetAction
     range: 2
     checkCanAccess: true

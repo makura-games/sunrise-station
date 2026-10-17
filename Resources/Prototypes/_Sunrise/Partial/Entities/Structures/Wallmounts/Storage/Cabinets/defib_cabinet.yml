@@ -1,0 +1,17 @@
+- type: !PartialOnly entity
+  id: DefibrillatorCabinet
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/defib_cabinet.rsi
+    noRot: false
+    offset: 0, 0
+    layers: !Clear
+    - !Index:0
+      state: frame
+    - !Index:0
+      state: fill
+      map: ["enum.ItemCabinetVisuals.Layer"]
+      visible: true
+    - !Index:0
+      state: closed
+      map: ["enum.OpenableVisuals.Layer"]

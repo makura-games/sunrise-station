@@ -52,5 +52,4 @@ public sealed partial class PaperBoundUserInterface : BoundUserInterface // Sunr
         }
     }
 
-    partial void InitializeTemplateFieldSupport(); // Sunrise - add
 }

@@ -19,6 +19,7 @@
     - Mech
     - Synth
     - Silicon
+    - Xenoborg
     damage:
       types:
         Heat: -10

@@ -490,3 +490,48 @@ entity-effect-guidebook-plant-mutate-chemicals =
         [1] Мутирует
        *[other] мутируют
     } растение, чтобы производить { $name }
+entity-effect-guidebook-satiate =
+    { $chance ->
+        [1] Насыщает
+       *[other] насыщает
+    } { $relative ->
+        [1] { $type } со средней скоростью
+       *[other] { $type } со скоростью, составляющей { NATURALFIXED($relative, 3) }x от средней
+    }
+entity-effect-guidebook-plant-change-trait =
+    { $chance ->
+        [1]
+            { $change ->
+                [Add] добавляет растению свойство «{ $trait }»
+                [Remove] удаляет у растения свойство «{ $trait }»
+                [Toggle] переключает у растения свойство «{ $trait }»
+               *[other] изменяет у растения свойство «{ $trait }»
+            }
+       *[other]
+            { $change ->
+                [Add] добавляют растению свойство «{ $trait }»
+                [Remove] удаляют у растения свойство «{ $trait }»
+                [Toggle] переключают у растения свойство «{ $trait }»
+               *[other] изменяют у растения свойство «{ $trait }»
+            }
+    }
+entity-effect-guidebook-plant-mutate-exude-gasses =
+    { $chance ->
+        [1] Изменяет
+       *[other] изменяет
+    } растение так, чтобы оно выделяло от { $minValue } до { $maxValue } моль газов
+entity-effect-guidebook-plant-mutate-consume-gasses =
+    { $chance ->
+        [1] Изменяет
+       *[other] изменяет
+    } растение так, чтобы оно поглощало от { $minValue } до { $maxValue } моль газов
+entity-effect-guidebook-add-reagent-to-bloodstream =
+    { $chance ->
+        [1] Вводит
+       *[other] вводит
+    } { $quantity } { $reagent } непосредственно в кровоток
+entity-effect-disarm =
+    { $chance ->
+        [1] Обезоруживает
+       *[other] обезоруживает
+    } сущность

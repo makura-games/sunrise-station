@@ -16,17 +16,18 @@
     accentVColor: "#390f4e"
   - type: Icon
     state: pda-space-prison-scientist
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-      - CrewManifestCartridge
-      - NotekeeperCartridge
-      - NanoTaskCartridge
-      - NewsReaderCartridge
-      - AstroNavCartridge
-      - NavigatorCartridge
-      - MessengerCartridge
-      - PhotoCartridge
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NewsReaderCartridge
+        - id: AstroNavCartridge
+        - id: NavigatorCartridge
+        - id: MessengerCartridge
+        - id: PhotoCartridge
   - type: PdaAnimationVisuals
     animatedState: pda-space-prison-scientist
     idInsertedLayerState: id_inserted-space-prison

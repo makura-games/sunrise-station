@@ -6,7 +6,9 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: Action
-      icon: _Sunrise/FleshCult/Interface/Actions/flesh_web.png
       useDelay: 10
+    - type: Sprite
+      layers:
+      - texture: _Sunrise/FleshCult/Interface/Actions/flesh_web.png
     - type: InstantAction
       event: !type:SpiderWebActionEvent

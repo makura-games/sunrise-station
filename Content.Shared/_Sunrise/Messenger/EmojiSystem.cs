@@ -10,7 +10,6 @@ namespace Content.Shared._Sunrise.Messenger;
 /// </summary>
 public abstract partial class SharedEmojiSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
 
     private const ChatChannel EmojiSupportedChannels =
         ChatChannel.OOC
@@ -57,7 +56,7 @@ public abstract partial class SharedEmojiSystem : EntitySystem
 
     private void CollectEmojis()
     {
-        Emojis = _prototype.EnumeratePrototypes<EmojiPrototype>()
+        Emojis = ProtoMan.EnumeratePrototypes<EmojiPrototype>()
             .ToFrozenDictionary(e => e.Code, e => e);
     }
 

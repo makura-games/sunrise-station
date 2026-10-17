@@ -9,3 +9,15 @@ xenoarch-trigger-tip-hydrogen = Водород
 xenoarch-trigger-tip-zauker = Заукер
 xenoarch-trigger-tip-proto-nitrate = Прото-Нитрат
 xenoarch-trigger-tip-helium = Гелий
+
+ent-TriggerElectrovae = { xenoarch-trigger-tip-electrovae }
+ent-TriggerBZ = { xenoarch-trigger-tip-bz }
+ent-TriggerChargedElectrovae = { xenoarch-trigger-tip-charged-electrovae }
+ent-TriggerHalon = { xenoarch-trigger-tip-halon }
+ent-TriggerHealium = { xenoarch-trigger-tip-healium }
+ent-TriggerNitrium = { xenoarch-trigger-tip-nitrium }
+ent-TriggerPluoxium = { xenoarch-trigger-tip-pluoxium }
+ent-TriggerHydrogen = { xenoarch-trigger-tip-hydrogen }
+ent-TriggerZauker = { xenoarch-trigger-tip-zauker }
+ent-TriggerProtoNitrate = { xenoarch-trigger-tip-proto-nitrate }
+ent-TriggerHelium = { xenoarch-trigger-tip-helium }

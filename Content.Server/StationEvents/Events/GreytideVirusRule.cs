@@ -57,7 +57,7 @@ public sealed partial class GreytideVirusRule : StationEventSystem<GreytideVirus
         var accessIds = new HashSet<ProtoId<AccessLevelPrototype>>();
         foreach (var group in chosen)
         {
-            if (PrototypeManager.Resolve(group, out var proto))
+            if (ProtoMan.Resolve(group, out var proto))
                 accessIds.UnionWith(proto.Tags);
         }
 

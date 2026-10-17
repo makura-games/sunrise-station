@@ -55,6 +55,9 @@
   id: BaseWeaponShotgun
   abstract: true
   components:
+  - type: CustomSpriteAmmoCounter
+    loadedAmmoSprite: Interface/ItemStatus/Shotgun_Shells/not_spent.png
+    spentAmmoSprite: Interface/ItemStatus/Shotgun_Shells/spent.png
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -107,6 +110,9 @@
     - Back
     - suitStorage
   - type: AmmoCounter
+  - type: CustomSpriteAmmoCounter
+    loadedAmmoSprite: Interface/ItemStatus/Shotgun_Shells/not_spent.png
+    spentAmmoSprite: Interface/ItemStatus/Shotgun_Shells/spent.png
   #- type: GunRequiresWield #remove when inaccuracy on spreads is fixed # Sunrise-Edit
   - type: Gun
     fireRate: 2
@@ -462,4 +468,4 @@
     fireRate: 2
     projectileSpeed: 25 # Sunrise-Edit
   - type: GunSpreadModifier
-    spread: 1.2
+    spread: 0.8

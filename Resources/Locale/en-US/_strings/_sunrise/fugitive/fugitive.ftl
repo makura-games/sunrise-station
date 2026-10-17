@@ -1,3 +1,6 @@
+roles-antag-fugitive-name = Fugitive
+roles-antag-fugitive-objective = Evade justice and escape alive and unrestrained on the evacuation shuttle.
+
 station-event-fugitive-hunt-announcement = Пожалуйста, проверьте факс капитана для получения секретного сообщения.
 fugitive-spawn = { CAPITALIZE(THE($name)) } вылазит из под пола!
 fugitive-announcement-GALPOL = ГАЛПОЛ

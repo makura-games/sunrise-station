@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using Content.Shared._Sunrise.Weapons.DualWield;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -35,7 +34,7 @@ public abstract partial class SharedGunSystem
     ///     After a shot attempt, rotates the dual-wield queue and delays the next gun so that
     ///     shots strictly alternate and never fire on the same tick.
     /// </summary>
-    private void RotateDualWieldQueue(EntityUid user, GunComponent gun, bool isDualWield, DualWieldComponent? dualWield)
+    private void RotateDualWieldQueue(EntityUid user, Entity<GunComponent> gun, bool isDualWield, DualWieldComponent? dualWield)
     {
         if (!isDualWield || dualWield == null || dualWield.GunQueue.Count <= 1)
             return;
@@ -45,9 +44,9 @@ public abstract partial class SharedGunSystem
         dualWield.GunQueue.Add(front);
 
         var nextGunUid = dualWield.GunQueue[0];
-        if (gun.FireRateModified > 0f && TryComp<GunComponent>(nextGunUid, out var nextGun))
+        if (gun.Comp.FireRateModified > 0f && TryComp<GunComponent>(nextGunUid, out var nextGun))
         {
-            var halfInterval = TimeSpan.FromSeconds(0.5 / gun.FireRateModified);
+            var halfInterval = TimeSpan.FromSeconds(0.5 / gun.Comp.FireRateModified);
             var earliest = Timing.CurTime + halfInterval;
             if (nextGun.NextFire < earliest)
             {
@@ -71,10 +70,10 @@ public abstract partial class SharedGunSystem
             return;
 
         if (dualWield.LeftGun is { } leftUid && TryComp<GunComponent>(leftUid, out var leftGun))
-            StopShooting(leftUid, leftGun);
+            StopShooting((leftUid, leftGun));
 
         if (dualWield.RightGun is { } rightUid && TryComp<GunComponent>(rightUid, out var rightGun))
-            StopShooting(rightUid, rightGun);
+            StopShooting((rightUid, rightGun));
     }
 
     /// <summary>
@@ -82,10 +81,9 @@ public abstract partial class SharedGunSystem
     ///     Returns true when a valid gun was found.
     /// </summary>
     private bool TryGetDualWieldGun(EntityUid entity, DualWieldComponent dualWield,
-        out EntityUid gunEntity, [NotNullWhen(true)] out GunComponent? gunComp)
+        out Entity<GunComponent> gun)
     {
-        gunEntity = default;
-        gunComp = null;
+        gun = default;
 
         var staleRemoved = false;
 
@@ -96,8 +94,7 @@ public abstract partial class SharedGunSystem
                 if (staleRemoved)
                     Dirty(entity, dualWield);
 
-                gunEntity = dualWield.GunQueue[i];
-                gunComp = dwGunComp;
+                gun = (dualWield.GunQueue[i], dwGunComp);
                 return true;
             }
 
