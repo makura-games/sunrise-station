@@ -1,0 +1,9 @@
+- type: cargoProduct
+  id: MaterialWood
+  icon:
+    sprite: Objects/Materials/materials.rsi
+    state: wood_3
+  product: CrateMaterialWood
+  cost: 2500
+  category: cargoproduct-category-name-materials
+  group: market

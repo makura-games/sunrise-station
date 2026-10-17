@@ -35,7 +35,7 @@
     Brutepack: 3
     AloeCream: 3 # Currently just a reskin of Ointment but it's something
     Bloodpack: 3
-    ChemistryBottleInaprovaline: 3
+    ChemistryBottleEpinephrine: 3 # Sunrise-Edit
     Ampula: 3 # Sunrise-add
     Syringe: 3
     PillTricordrazine: 10
@@ -76,6 +76,7 @@
     Brutepack: 4
     Ointment: 4
     Bloodpack: 4
+    ChemistryBottleEpinephrine: 6 # Sunrise-Edit
     # Optional / Situational Gear
     BoxBottle: 3
     Defibrillator: 2 # Easily shared between several people
@@ -115,7 +116,7 @@
     Brutepack: 5
     AloeCream: 5
     Bloodpack: 5
-    ChemistryBottleInaprovaline: 5
+    ChemistryBottleEpinephrine: 5 # Sunrise-Edit
     Syringe: 5
     BoxBottle: 3
     PillCanisterTricordrazine: 2

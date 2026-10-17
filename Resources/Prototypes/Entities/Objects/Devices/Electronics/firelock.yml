@@ -19,3 +19,11 @@
         Glass: 0
       chemicalComposition:
         Silicon: 20
+    # Sunrise-Start    
+    - type: AccessReader
+      access: [ [ "Engineering" ] ]
+      alertAccesses:
+        red: RedAlertAccesses
+        gamma: GammaAlertAccesses
+        delta: AllAccess
+    # Sunrise-End    
