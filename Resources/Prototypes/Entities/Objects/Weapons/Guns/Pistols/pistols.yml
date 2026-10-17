@@ -149,7 +149,7 @@
       tags:
       - CartridgePistol
     capacity: 10
-    proto: BulletPistolTraceSP # Sunrise-Edit
+    proto: CartridgePistolSP # Sunrise-Edit
     cycleable: false # No synthesizing ammo for your syndicate masters.
   - type: BallisticAmmoSelfRefiller
     autoRefillRate: 2s

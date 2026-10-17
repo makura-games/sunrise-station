@@ -6,3 +6,6 @@ ent-AdvancedDefibrillatorCompact = advanced compact defibrillator
 
 ent-AbductorDefibrillator = abductor defibrillator
     .desc = An alien defibrillator belt so advanced that it does not consider death a final state. The heart is restarted before the body can even realize it.
+ent-SunriseDefibrillatorSyndicateOneHandedUnpowered = syndicate defibrillator
+    .desc = A one-handed Syndicate defibrillator with an integrated power supply.
+    .suffix = Syndicate, One-Handed, Always Powered
