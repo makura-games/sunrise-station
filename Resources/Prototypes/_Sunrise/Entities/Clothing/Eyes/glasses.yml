@@ -187,6 +187,11 @@
       - state: equipped-EYES-unshaded
         shader: unshaded
   - type: ShowMindShieldIcons
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellNanoTrasen
 
 - type: entity
   parent: ClothingEyesGlassesThermalSyndie

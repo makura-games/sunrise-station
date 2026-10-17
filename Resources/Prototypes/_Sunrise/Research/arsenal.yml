@@ -13,6 +13,23 @@
   - Security
 
 - type: technology
+  id: SunriseHolographicLightCrystallization
+  name: research-technology-holographic-light-crystallization
+  icon:
+    sprite: _Starlight/Objects/Weapons/Melee/cybershield.rsi
+    state: shield-icon
+  discipline: Arsenal
+  tier: 2
+  cost: 10000
+  recipeUnlocks:
+  - SunriseEnergyShieldSec
+  technologyPrerequisites:
+  - AdvancedRiotControl
+  - EnergyBarriers
+  radioChannels:
+  - Security
+
+- type: technology
   id: SunriseHybridEnergyWeaponry
   name: research-technology-hybrid-energy-weaponry
   icon:
@@ -124,6 +141,9 @@
   - MagazinePistolHighCapacityAP
   - MagazineBoxHeavyRifleAP
   - MagazineRifleHeavyAP
+  technologyPrerequisites:
+  - SunriseFullMetalJacketAmmunition
+  - UraniumMunitions
   radioChannels:
   - Security
 

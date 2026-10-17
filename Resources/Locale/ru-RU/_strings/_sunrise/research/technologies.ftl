@@ -41,3 +41,6 @@ research-technology-compact-defibrilation = Компактная дефибри�
 research-technology-advanced-compact-defibrilation = Продвинутая дефибрилляция
 research-technology-advance-secborgs-combat = Продвинутые боевые модули СБ боргов
 research-technology-milira-equipment = Снаряжение Милир
+research-technology-declone-technology = Технология Деклонирования
+research-technology-scan-gate = Технология сканирующих ворот
+research-technology-holographic-light-crystallization = Голографическая кристаллизация света

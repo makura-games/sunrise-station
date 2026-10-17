@@ -102,6 +102,18 @@
     Gold: 250
     Uranium: 50
 
+- type: latheRecipe
+  parent: BaseShieldRecipe
+  id: SunriseEnergyShieldSec
+  result: SunriseEnergyShieldSec
+  completetime: 12
+  materials:
+    Steel: 1100
+    Glass: 600
+    Plastic: 600
+    Plasma: 200
+    Gold: 200
+
 # Mech Weapons
 - type: latheRecipe
   id: WeaponMechCombatIon

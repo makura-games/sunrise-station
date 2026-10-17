@@ -28,3 +28,4 @@ research-technology-budget-cyber-organs = Budget CyberOrgans
 research-technology-advanced-cyberlimbs = Advanced cyberorgans
 research-technology-ion-weaponry = Ion Weaponry
 research-technology-full-metal-jacket-ammunition = Full Metal Jacket Ammunition
+research-technology-holographic-light-crystallization = Holographic Light Crystallization
