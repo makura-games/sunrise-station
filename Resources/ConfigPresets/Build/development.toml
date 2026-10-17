@@ -70,4 +70,7 @@ disable_without_players = false
 
 [vote]
 ignore_preset_player_limits = true
+
+[mapping]
+game_map_use_user_data = true
 # Sunrise-Edit
