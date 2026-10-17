@@ -173,161 +173,30 @@
         damage:
           Burn: -6
           Brute: -10
+          Toxin: -4
       - !type:HealthChange
         damage:
           types:
             Mangleness: -1
             Poison: -1
-
-- type: entityEffect
-  id: SunriseDarkRedRumOverdose
-  effects:
-  - !type:HealthChange
-    damage:
-      types:
-        Mangleness: 1
-        Poison: 2
-  - !type:ModifyKnockdown
-    time: 1
-    type: Add
-    probability: 0.025
-
-- type: entityEffect
-  id: SunriseDarkRedRumSideEffect
-  effects:
-  - !type:HealthChange
-    damage:
-      types:
-        Poison: 0.25
-        Mangleness: 0.25
-
-- type: reagent
-  id: DarkRedRum
-  parent: RedRum
-  name: reagent-name-dark-red-rum
-  desc: reagent-desc-dark-red-rum
-  physicalDesc: reagent-physical-desc-strong-smelling
-  contrabandSeverity: Syndicate
-  flavor: rum
-  color: "#700a0a"
-  metamorphicSprite:
-    sprite: Objects/Consumable/Drinks/rumglass.rsi
-    state: icon_empty
-  metamorphicMaxFillLevels: 4
-  metamorphicFillBaseName: fill-
-  metamorphicChangeColor: false
-  metabolisms:
-    Digestion:
-      effects:
-      - !type:SatiateThirst
-        factor: 2
-      - !type:AdjustReagent
-        reagent: Ethanol
-        amount: 0.2
-      - !type:ModifyBloodLevel
-        amount: 3
-      - !type:EvenHealthChange
-        damage:
-          Burn: -2
-          Brute: -3
-          Toxin: -4
-      - !type:HealthChange
-        damage:
-          types:
             Bloodloss: -1
             Asphyxiation: -1
       - !type:ModifyBleed
         amount: -2
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
-        time: 9
-    Bloodstream:
-      effects:
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentCondition
-          reagent: DarkRedRum
-          max: 5
-        damage:
-          types:
-            Mangleness: 1
-      - !type:Emote
-        emote: Laugh
-        showInChat: true
-        probability: 0.05
-        conditions:
-        - !type:ReagentCondition
-          reagent: DarkRedRum
-          max: 5
-      - !type:Emote
-        emote: Whistle
-        showInChat: true
-        probability: 0.05
-        conditions:
-        - !type:ReagentCondition
-          reagent: DarkRedRum
-          max: 5
-      - !type:MovementSpeedModifier
-        walkSpeedModifier: 1.5
-        sprintSpeedModifier: 1.5
-      - !type:ModifyStatusEffect
-        effectProto: StatusEffectStimulantsStamina
-        time: 3
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
-        time: 9
-      - !type:ModifyStatusEffect
-        effectProto: StatusEffectStunned
-        time: 4
-        type: Remove
-      - !type:ModifyKnockdown
-        time: 4
-        type: Remove
-      - !type:ModifyStatusEffect
-        effectProto: StatusEffectForcedSleeping
-        time: 4
-        type: Remove
-      - !type:Jitter
-      - !type:Emote
-        emote: Scream
-        showInChat: true
-        force: true
-        probability: 0.05
-      - !type:Emote
-        emote: Growl
-        showInChat: true
-        force: true
-        probability: 0.05
-      - !type:PopupMessage
-        type: Local
-        visualType: Medium
-        messages:
-        - "psicodine-effect-fearless"
-        - "psicodine-effect-anxieties-wash-away"
-        - "psicodine-effect-at-peace"
-        probability: 0.1
-        conditions:
-        - !type:ReagentCondition
-          reagent: DarkRedRum
-          max: 10
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentCondition
-          reagent: DarkRedRum
-          min: 21
-        damage:
-          types:
-            Mangleness: 2
-      - !type:ModifyStatusEffect
+      - !type:AdjustReagent
         conditions:
         - !type:ReagentCondition
           reagent: Haloperidol
-          max: 0.01
-        effectProto: StatusEffectDrowsiness
-        time: 10
-        type: Remove
+          min: 1
+        reagent: Haloperidol
+        amount: -10
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentCondition
+          reagent: Nocturine
+          min: 1
+        reagent: Nocturine
+        amount: -10
       - !type:AdjustReagent
         conditions:
         - !type:ReagentCondition
@@ -335,117 +204,29 @@
           min: 1
         reagent: ChloralHydrate
         amount: -10
-      - !type:EvenHealthChange
-        damage:
-          Burn: -3
-          Brute: -6
-      - !type:HealthChange
-        damage:
-          types:
-            Mangleness: -1
-            Poison: -1
-      - !type:EvenHealthChange
-        damage:
-          Burn: -1
-          Brute: -1
-      - !type:HealthChange
-        damage:
-          types:
-            Asphyxiation: -2
-      - !type:ResetNarcolepsy
-      - !type:SatiateHunger
-        factor: 1
-      - !type:SatiateThirst
-        factor: 1
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentCondition
-          reagent: Histamine
-          min: 45
-        reagent: Histamine
-        amount: -5
-      - !type:HealthChange
-        conditions:
-        - !type:MobStateCondition
-          mobstate: Critical
-        - !type:ReagentCondition
-          reagent: DarkRedRum
-          max: 10
-        damage:
-          types:
-            Asphyxiation: -2
-            Poison: -2
-            Mangleness: -2
-      - !type:HealthChange
-        conditions:
-        - !type:MobStateCondition
-          mobstate: Critical
-        - !type:ReagentCondition
-          reagent: DarkRedRum
-          min: 15
-        damage:
-          types:
-            Asphyxiation: -25
-            Poison: -25
-            Mangleness: -25
-      - !type:EvenHealthChange
-        conditions:
-        - !type:MobStateCondition
-          mobstate: Critical
-        - !type:ReagentCondition
-          reagent: DarkRedRum
-          max: 10
-        damage:
-          Brute: -1
-          Burn: -1
-      - !type:AdjustReagent
-        reagent: HeartbreakerToxin
-        amount: -2
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentCondition
-          reagent: HeartbreakerToxin
-          min: 1
-        reagent: DarkRedRum
-        amount: -1
-      - !type:ModifyStatusEffect
-        effectProto: StatusEffectStunned
-        time: 1
-        type: Remove
-      - !type:ModifyKnockdown
-        time: 1
-        type: Remove
-      - !type:CleanBloodstream
-        excluded: DarkRedRum
-        cleanseRate: 3
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentCondition
-          reagent: DarkRedRum
-          min: 50
-        reagent: DarkRedRum
-        amount: -1
-      - !type:NestedEffect
-        proto: SunriseDarkRedRumSideEffect
-        conditions:
-        - !type:ReagentCondition
-          reagent: DarkRedRum
-          min: 1
-      - !type:NestedEffect
-        proto: SunriseDarkRedRumOverdose
-        conditions:
-        - !type:ReagentCondition
-          reagent: DarkRedRum
-          min: 20
-      - !type:Vomit
+      - !type:Emote
+        emote: Laugh
+        showInChat: true
         probability: 0.025
         conditions:
         - !type:ReagentCondition
-          reagent: DarkRedRum
-          min: 15
-      - !type:Vomit
-        probability: 0.1
+          reagent: RedRum
+          max: 5
+      - !type:Emote
+        emote: Whistle
+        showInChat: true
+        probability: 0.025
         conditions:
         - !type:ReagentCondition
-          reagent: DarkRedRum
-          min: 25
+          reagent: RedRum
+          max: 5
+      - !type:Emote
+        emote: Scream
+        showInChat: true
+        force: true
+        probability: 0.025
+      - !type:Emote
+        emote: Growl
+        showInChat: true
+        force: true
+        probability: 0.025

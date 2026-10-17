@@ -1474,7 +1474,7 @@
     - id: ClothingOuterArmorScrap
       prob: 0.1
       orGroup: MurmilloHardsuitPool
-    - id: DrinkDarkRedRumBottleFull
+    - id: DrinkRedRumBottleFull
       prob: 0.33
       orGroup: MurmilloHardsuitPool
     - id: SunriseClothingBackpackMessengerPirateMurmilloDamaged
@@ -4161,7 +4161,7 @@
     - id: ClothingOuterArmorScrap
       prob: 0.1
       orGroup: MurmilloHardsuitPool
-    - id: DrinkDarkRedRumBottleFull
+    - id: DrinkRedRumBottleFull
       prob: 0.33
       orGroup: MurmilloHardsuitPool
     - id: SunriseClothingBackpackMessengerPirateMurmilloDamaged
