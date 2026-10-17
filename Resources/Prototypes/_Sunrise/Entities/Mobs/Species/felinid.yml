@@ -192,6 +192,8 @@
       params:
         volume: 1.0
         variation: 0.125
+  - type: Scent
+    personalScentProfile: SunriseFelinid
 
 - type: entity
   save: false

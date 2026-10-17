@@ -67,6 +67,8 @@
   - type: FootprintEmitter
     leftBareFootState: [ footprint-left-bare-dwarf ]
     rightBareFootState: [ footprint-right-bare-dwarf ]
+  - type: Scent
+    personalScentProfile: SunriseDwarf
   # Sunrise edit end
 
 - type: entity

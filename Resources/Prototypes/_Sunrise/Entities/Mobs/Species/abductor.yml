@@ -78,6 +78,8 @@
   - type: CollectiveMind
     minds:
     - Abductor
+  - type: Scent
+    personalScentProfile: SunriseAbductor
 
 - type: entity
   parent: AppearanceAbductor
