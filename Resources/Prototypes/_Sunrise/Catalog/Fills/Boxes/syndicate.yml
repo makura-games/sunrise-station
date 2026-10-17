@@ -272,6 +272,26 @@
     - state: l6_base
 
 - type: entity
+  parent: BaseSyndicateAmmoKitSmall
+  id: LMGMaxKit
+  name: L6 MAX ammo kit
+  components:
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,3,1
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: RifleHeavyMagazineSP
+        - id: RifleHeavyMagazineFMJ
+  - type: Sprite
+    layers:
+    - state: box_of_doom_big
+    - state: l6_base
+
+- type: entity
   parent: LMGKit
   id: LMGIncendiaryKit
   name: L6 Saw Incendiary ammo kit

@@ -8,7 +8,7 @@
 
 - type: latheRecipe
   id: HandheldRoboAnalyzer
-  result: HandheldRoboAnalyzerEmpty
+  result: HandheldRoboAnalyzer
   categories:
   - Tools
   completetime: 4

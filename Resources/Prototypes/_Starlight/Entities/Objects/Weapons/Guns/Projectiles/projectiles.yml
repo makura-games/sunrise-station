@@ -94,7 +94,7 @@
 
 - type: entity
   id: BaseBulletRubber
-  parent: BaseBulletStarlight
+  parent: [ BulletStoppingPowerSmall, BaseBulletStarlight ]
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -107,8 +107,6 @@
         Blunt: 1
     soundHit:
       path: /Audio/Weapons/Guns/Hits/snap.ogg
-  - type: StaminaDamageOnCollide
-    damage: 12 # 9 hits to stun sounds reasonable
 
 - type: entity
   name : laser bolt

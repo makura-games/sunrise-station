@@ -209,7 +209,7 @@
     spread: 6
 
 - type: entity
-  parent: BaseBullet
+  parent: [ BulletStoppingPowerStrong, BaseBullet ] # Sunrise-Edit
   id: PelletGrapeshot #tally fucking ho
   categories: [ HideSpawnMenu ]
   name: grapeshot pellet
@@ -225,8 +225,6 @@
       types:
         Piercing: 20 # Sunrise-edit
         Blunt: 5 # Sunrise-edit
-  - type: StaminaDamageOnCollide # Sunrise-add
-    damage: 15 # Sunrise-add
 
 - type: entity
   parent: PelletGrapeshot

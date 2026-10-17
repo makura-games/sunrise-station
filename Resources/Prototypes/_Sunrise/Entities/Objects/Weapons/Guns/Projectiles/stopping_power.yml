@@ -1,0 +1,67 @@
+- type: entity
+  # .10, .25 caseless, 5.56 и картечь 12 калибра.
+  id: BulletStoppingPowerWeak
+  abstract: true
+  components:
+  - type: StunOnCollide
+    slowdownAmount: 1
+    walkSpeedModifier: 0.9
+    sprintSpeedModifier: 0.9
+
+- type: entity
+  # .30, .35 Auto и базовые резиновые.
+  id: BulletStoppingPowerSmall
+  abstract: true
+  components:
+  - type: StunOnCollide
+    slowdownAmount: 2
+    walkSpeedModifier: 0.8
+    sprintSpeedModifier: 0.8
+
+- type: entity
+  # Резиновые .35 Auto.
+  id: BulletStoppingPowerMedium
+  abstract: true
+  components:
+  - type: StunOnCollide
+    slowdownAmount: 3
+    walkSpeedModifier: 0.75
+    sprintSpeedModifier: 0.75
+  - type: StaminaDamageOnCollide
+    damage: 3
+
+- type: entity
+  # .45 Magnum, .40 SP и HP., .308/7.62mmR, пули, Beanbag и картечь 12 калибра, артиллерийские снаряды.
+  id: BulletStoppingPowerStrong
+  abstract: true
+  components:
+  - type: StunOnCollide
+    slowdownAmount: 3.5
+    walkSpeedModifier: 0.7
+    sprintSpeedModifier: 0.7
+  - type: StaminaDamageOnCollide
+    damage: 5
+
+- type: entity
+  # Резиновые .45 Magnum и 12.7 мм.
+  id: BulletStoppingPowerMagnum
+  abstract: true
+  components:
+  - type: StunOnCollide
+    slowdownAmount: 4
+    walkSpeedModifier: 0.6
+    sprintSpeedModifier: 0.6
+  - type: StaminaDamageOnCollide
+    damage: 15
+
+- type: entity
+  # .60 (15 мм) AP и HP.
+  id: BulletStoppingPowerAntiMateriel
+  abstract: true
+  components:
+  - type: StunOnCollide
+    slowdownAmount: 5
+    walkSpeedModifier: 0.5
+    sprintSpeedModifier: 0.5
+  - type: StaminaDamageOnCollide
+    damage: 50
