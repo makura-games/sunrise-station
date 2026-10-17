@@ -1,5 +1,6 @@
 ﻿using Content.Client.Stunnable;
 using Content.Shared.Damage.Components;
+using Content.Client._Sunrise.Animations; // Sunrise-Edit
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -10,9 +11,8 @@ namespace Content.Client.Damage.Systems;
 
 public sealed partial class StaminaSystem : SharedStaminaSystem
 {
-    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private SpriteAnimationSystem _animation = default!; // Sunrise-Edit
     [Dependency] private MobStateSystem _mobState = default!;
-    [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private StunSystem _stun = default!; // Clientside Stun System
 
     private const string StaminaAnimationKey = "stamina";
@@ -21,7 +21,6 @@ public sealed partial class StaminaSystem : SharedStaminaSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<StaminaComponent, AnimationCompletedEvent>(OnAnimationCompleted);
         SubscribeLocalEvent<ActiveStaminaComponent, ComponentShutdown>(OnActiveStaminaShutdown);
         SubscribeLocalEvent<StaminaComponent, MobStateChangedEvent>(OnMobStateChanged);
     }
@@ -63,16 +62,20 @@ public sealed partial class StaminaSystem : SharedStaminaSystem
         // If the animation is running, the system should update it accordingly
         // If we're below the threshold to animate, don't try to animate
         // If we're in stamcrit don't override it
-        if (entity.Comp.AnimationThreshold > entity.Comp.StaminaDamage || _animation.HasRunningAnimation(entity, StaminaAnimationKey))
+        if (entity.Comp.AnimationThreshold > entity.Comp.StaminaDamage || _animation.IsLooping(entity, StaminaAnimationKey)) // Sunrise-Edit
             return;
 
         // Don't animate if we're dead
         if (_mobState.IsDead(entity))
             return;
 
-        entity.Comp.StartOffset = sprite.Offset;
+        // Sunrise edit start - перевод на новую систему анимаций
+        entity.Comp.StartOffset = _animation.GetBaseOffset((entity.Owner, sprite));
 
-        PlayAnimation((entity, entity.Comp, sprite));
+        _animation.PlayLoop(entity, StaminaAnimationKey, PlayAnimation,
+            uid => TryComp<StaminaComponent>(uid, out var stamina) &&
+                stamina.StaminaDamage >= stamina.AnimationThreshold && !_mobState.IsDead(uid));
+        // Sunrise edit end
     }
 
     private void StopAnimation(Entity<StaminaComponent, SpriteComponent?> entity)
@@ -81,27 +84,16 @@ public sealed partial class StaminaSystem : SharedStaminaSystem
             return;
 
         _animation.Stop(entity.Owner, StaminaAnimationKey);
-        entity.Comp1.StartOffset = entity.Comp2.Offset;
+        entity.Comp1.StartOffset = _animation.GetBaseOffset((entity.Owner, entity.Comp2)); // Sunrise-Edit
     }
 
-    private void OnAnimationCompleted(Entity<StaminaComponent> entity, ref AnimationCompletedEvent args)
+    // Sunrise edit start - перевод на новую систему анимаций
+    private void PlayAnimation(EntityUid uid)
     {
-        if (args.Key != StaminaAnimationKey || !args.Finished || !TryComp<SpriteComponent>(entity, out var sprite))
-            return;
-
-        // stop looping if we're below the threshold
-        if (entity.Comp.AnimationThreshold > entity.Comp.StaminaDamage)
-        {
-            _animation.Stop(entity.Owner, StaminaAnimationKey);
-            _sprite.SetOffset((entity, sprite), entity.Comp.StartOffset);
-            return;
-        }
-
-        if (!HasComp<AnimationPlayerComponent>(entity))
-            return;
-
-        PlayAnimation((entity, entity.Comp, sprite));
+        if (TryComp<StaminaComponent>(uid, out var stamina) && TryComp<SpriteComponent>(uid, out var sprite))
+            PlayAnimation((uid, stamina, sprite));
     }
+    // Sunrise edit end
 
     private void PlayAnimation(Entity<StaminaComponent, SpriteComponent> entity)
     {
@@ -115,7 +107,8 @@ public sealed partial class StaminaSystem : SharedStaminaSystem
         var jitter = entity.Comp1.JitterAmplitudeMin + step * entity.Comp1.JitterAmplitudeMod;
         var breathing = entity.Comp1.BreathingAmplitudeMin + step * entity.Comp1.BreathingAmplitudeMod;
 
-        _animation.Play(entity.Owner,
+        // Sunrise edit start - перевод на новую систему анимаций
+        _animation.PlayOffset(entity.Owner,
             _stun.GetFatigueAnimation(entity.Comp2,
                 frequency,
                 entity.Comp1.Jitters,
@@ -124,6 +117,8 @@ public sealed partial class StaminaSystem : SharedStaminaSystem
                 breathing,
                 entity.Comp1.StartOffset,
                 ref entity.Comp1.LastJitter),
-            StaminaAnimationKey);
+            StaminaAnimationKey, entity.Comp1.StartOffset, SpriteAnimationEndMode.Hold);
+        // Sunrise edit end
     }
+
 }
