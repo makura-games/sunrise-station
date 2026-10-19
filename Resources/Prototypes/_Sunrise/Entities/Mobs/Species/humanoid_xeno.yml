@@ -122,6 +122,7 @@
     - map: [ "gloves" ]
     - map: [ "shoes" ]
     - map: [ "ears" ]
+    - map: [ "eyes" ] # Sunrise-Edit - возвращаем ксено слой очков (слот eyes)
     - map: [ "outerClothing" ]
     - map: [ "belt" ]
     - map: [ "id" ]
