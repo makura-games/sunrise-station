@@ -52,6 +52,8 @@ namespace Content.Server.Atmos.Reactions
                 mixture.ReactionResults[(byte)GasReaction.Fire] += burnedFuel;
             }
 
+            // Sunrise-Edit: мягкий потолок: обычный огонь греет как в ваниле, а разгон в замкнутом объёме давится.
+            energyReleased *= Atmospherics.GetFireEnergyReleasedMultiplier(temperature);
             energyReleased /= heatScale; // adjust energy to make sure speedup doesn't cause mega temperature rise
             if (energyReleased > 0)
             {

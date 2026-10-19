@@ -79,3 +79,21 @@
   - type: StatusEffectAlert
     alert: Stun
   - type: StunnedStatusEffect
+
+# Sunrise edit start - эффект сбивания с ног, на него ссылается реагент Nitrium
+- type: entity
+  parent: MobStatusEffectDebuff
+  id: StatusEffectKnockDown
+  name: knocked down
+  components:
+  - type: StatusEffect
+    whitelist:
+      components:
+      - MobState
+    blacklist:
+      tags:
+      - StunImmune
+  - type: StatusEffectAlert
+    alert: Knockdown
+  - type: KnockdownStatusEffect
+# Sunrise edit end

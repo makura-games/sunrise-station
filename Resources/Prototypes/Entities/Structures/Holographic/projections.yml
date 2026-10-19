@@ -15,10 +15,11 @@
     state: icon
   - type: TimedDespawn
     lifetime: 90
-  - type: Clickable
+  # Sunrise edit start - голограмма не должна быть кликабельной целью (иначе по ней бьют предметами,
+  # а РСУ не может снести плитку под ней) и не должна получать урон от ударов.
+  # Поэтому Clickable/Injurable убраны из базы — их возвращают только те голограммы, которым это нужно.
+  # Sunrise edit end
   - type: Damageable
-  - type: Injurable
-    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -81,6 +82,8 @@
         - SlipLayer
   - type: TimedDespawn
     lifetime: 30
+  # Sunrise-Edit: возвращаем кликабельность, как было до апстрим-переноса (нужна для взаимодействия с голограммой).
+  - type: Clickable
   - type: Destructible
     thresholds:
     - trigger:
@@ -119,6 +122,12 @@
       radius: 3
       color: red
     - type: Climbable
+    # Sunrise-Edit: возвращаем кликабельность, как было до апстрим-переноса.
+    - type: Clickable
+    # Sunrise edit start - барьер по задумке «слабый», поэтому, в отличие от прочих голограмм, остаётся разрушаемым.
+    - type: Injurable
+      damageContainer: Inorganic
+    # Sunrise edit end
 
 - type: entity
   id: HolosignForcefield
@@ -158,6 +167,11 @@
     factions:
       - NanoTrasen
   # Sunrise-End
+  # Sunrise edit start - силовой барьер, в отличие от остальных голограмм, обязан оставаться разрушаемым
+  # (сдерживание теслы/сингулярности), поэтому Injurable возвращаем точечно.
+  - type: Injurable
+    damageContainer: Inorganic
+  # Sunrise edit end
   - type: Clickable
   - type: ContainmentField
     throwForce: 0
