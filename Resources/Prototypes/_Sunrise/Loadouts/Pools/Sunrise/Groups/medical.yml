@@ -153,6 +153,7 @@
   - SunriseHatRedsoft
   - SunriseHatOrangesoft
   - SunriseHatCyansoft
+  - BeretSeniorPhysician # Sunrise-Edit
 
 - type: loadoutGroup
   id: SunriseMedicalDoctorOuterClothing
@@ -165,6 +166,7 @@
   - SunriseWinterColorGreen
   - SunriseWinterColorCyan
   - MedicalDoctorWintercoat
+  - CoatLabSeniorPhysician # Sunrise-Edit
 
 - type: loadoutGroup
   id: SunriseMedicalShoes
@@ -217,6 +219,7 @@
   - SunriseWinterColorOrange
   - SunriseWinterColorGreen
   - SunriseWinterColorCyan
+  - CoatLabSeniorPhysician # Sunrise-Edit
 
 - type: loadoutGroup
   id: SunriseParamedicHead
@@ -235,6 +238,7 @@
   - SunriseHatCyansoft
   - SunriseHatBluesoft
   - MedicalHeadMirror
+  - BeretSeniorPhysician # Sunrise-Edit
 
 - type: loadoutGroup
   id: SunriseParamedicOuterClothing
@@ -250,6 +254,7 @@
   - SunriseWinterColorGreen
   - SunriseWinterColorCyan
   - SunriseWinterColorBlue
+  - CoatLabSeniorPhysician # Sunrise-Edit
 
 - type: loadoutGroup
   id: SunriseParamedicShoes

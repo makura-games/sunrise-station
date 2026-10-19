@@ -305,6 +305,7 @@
   id: JobAtmosphericTechnician
   groups:
   - GroupTankHarness
+  - StationEngineerHead # Sunrise-Edit
   - AtmosphericTechnicianJumpsuit
   - AtmosphericTechnicianBackpack
   - AtmosphericTechnicianOuterClothing

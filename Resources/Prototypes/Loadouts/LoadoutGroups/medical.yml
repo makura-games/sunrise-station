@@ -184,6 +184,7 @@
   minLimit: 0
   loadouts:
   - ParamedicHead
+  - SeniorPhysicianBeret # Sunrise-Edit
 
 - type: loadoutGroup
   id: ParamedicJumpsuit
@@ -199,6 +200,7 @@
   loadouts:
   - ParamedicWindbreaker
   - ParamedicWintercoat
+  - SeniorPhysicianLabCoat # Sunrise-Edit
 
 - type: loadoutGroup
   id: ParamedicShoes

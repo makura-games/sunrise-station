@@ -9,12 +9,18 @@
     jumpsuit: ClothingUniformJumpskirtSeniorPhysician
 
 - type: loadout
-  id: ChemBagSeniorPhysician
+  id: ChemBagSeniorPhysician # Sunrise-Edit - Требование таймера
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorPhysicianClothingTimer
   equipment:
     belt: ChemBag
 
 - type: loadout
-  id: BeltMedicalSeniorPhysician
+  id: BeltMedicalSeniorPhysician # Sunrise-Edit - Требование таймера
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorPhysicianClothingTimer
   equipment:
     belt: ClothingBeltMedicalFilled
 

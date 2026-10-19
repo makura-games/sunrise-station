@@ -22,6 +22,7 @@
   groups:
   - GroupTankHarness
   - ScientistNeck
+  - ScientistHead # Sunrise-Edit
   - ScientistJumpsuit
   - ScientistBackpack
   - ScientistOuterClothing
@@ -42,6 +43,7 @@
   groups:
   - GroupTankHarness
   - ResearchAssistantJumpsuit
+  - ScientistHead # Sunrise-Edit
   - ScientistBackpack
   - SunriseGlasses
   - SunriseSurvival

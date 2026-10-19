@@ -866,6 +866,7 @@
   - StationEngineerHardhatYellow
   - StationEngineerHardhatOrange
   - StationEngineerHardhatRed
+  - SeniorEngineerBeret # Sunrise-Edit
 
 - type: loadoutGroup
   id: StationEngineerJumpsuit

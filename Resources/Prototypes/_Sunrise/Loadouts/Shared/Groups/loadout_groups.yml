@@ -706,6 +706,7 @@
   - SunriseHatOrangesoft
   - SunriseHatCyansoft
   - MedicalHeadMirror
+  - BeretSeniorPhysician # Sunrise-Edit
 
 - type: loadoutGroup
   id: SunriseChemistNeck
@@ -1289,6 +1290,7 @@
   - SunriseHatRedsoft
   - SunriseHatOrangesoft
   - SunriseHatYellowsoft
+  - SeniorEngineerBeret # Sunrise-Edit
 
 - type: loadoutGroup
   id: SunriseAtmosMask
