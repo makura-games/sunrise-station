@@ -274,6 +274,7 @@
   - type: InputMover
   - type: Examiner
   - type: BlockMovement
+    blockInteraction: false # Sunrise-Edit - иначе мозг нельзя использовать ни на микроволновке, ни в MMI
   - type: BadFood
   - type: FoodSequenceElement
     entries:

@@ -17,3 +17,12 @@
   solids:
     FoodBowlBig: 1
     FoodTofuSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeBrainCakeNoPlain
+  name: brain cake recipe
+  result: FoodCakeBrain
+  time: 15
+  group: Cake
+  solids:
+    OrganHumanBrain: 1
