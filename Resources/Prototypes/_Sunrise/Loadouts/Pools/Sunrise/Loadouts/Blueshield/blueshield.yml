@@ -1,11 +1,12 @@
 
+# Sunrise edit start - время за все роли Синего Щита суммируется через департамент BlueShield, а не только за офицера
 - type: loadoutEffectGroup
   id: MisterBlueShit20
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
-      !type:RoleTimeRequirement
-      role: JobBlueShield
+      !type:DepartmentTimeRequirement
+      department: BlueShield
       time: 20h
 
 - type: loadoutEffectGroup
@@ -13,8 +14,8 @@
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
-      !type:RoleTimeRequirement
-      role: JobBlueShield
+      !type:DepartmentTimeRequirement
+      department: BlueShield
       time: 100h
 
 - type: loadoutEffectGroup
@@ -22,8 +23,8 @@
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
-      !type:RoleTimeRequirement
-      role: JobBlueShield
+      !type:DepartmentTimeRequirement
+      department: BlueShield
       time: 20h
 
 - type: loadoutEffectGroup
@@ -31,8 +32,8 @@
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
-      !type:RoleTimeRequirement
-      role: JobBlueShield
+      !type:DepartmentTimeRequirement
+      department: BlueShield
       time: 5h
 
 - type: loadoutEffectGroup
@@ -40,9 +41,10 @@
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
-      !type:RoleTimeRequirement
-      role: JobBlueShield
+      !type:DepartmentTimeRequirement
+      department: BlueShield
       time: 50h
+# Sunrise edit end
 
 - type: loadout
   id: SunriseLoadoutClothingMaskGasBlueShieldHalf
