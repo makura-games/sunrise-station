@@ -115,6 +115,17 @@
       - state: CAP-equipped-OUTERCLOTHING
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodWinterCaptain
+  # Sunrise edit start - бронированная зимняя куртка капитана
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.6
+        Heat: 0.35
+  - type: StaminaResistance
+    damageCoefficient: 0.75
+  # Sunrise edit end
 
 - type: entity
   parent: ClothingOuterWinterCoatToggleable

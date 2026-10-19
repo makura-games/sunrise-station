@@ -173,6 +173,10 @@
     - WhitelistChameleon
   - type: Pierceable
     level: Metal
+  # Sunrise edit start - стамина-защита комплекта капитана (наследуется белым/чёрным нагрудником, торжественной курткой и шинелью)
+  - type: StaminaResistance
+    damageCoefficient: 0.75
+  # Sunrise edit end
 
 - type: entity
   parent: [ClothingOuterArmorBaseCarapace, BaseCentcommContraband]
