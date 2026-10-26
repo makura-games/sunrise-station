@@ -5004,3 +5004,10 @@
     message: Исправлена очередная уязвимость, которая позволяла ронять сервер
   id: 2044
   url: https://github.com/makura-games/sunrise-station/pull/4857
+- author: KaiserMaus
+  time: '2026-10-26T14:02:48.0000000+00:00'
+  changes:
+  - type: Tweak
+    message: Шахтёры скопали весь Планетоид, похоже он всё.
+  id: 2045
+  url: https://github.com/makura-games/sunrise-station/pull/4847
