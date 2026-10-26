@@ -12,7 +12,8 @@ namespace Content.Client._Sunrise.Roadmap;
 public sealed partial class RoadmapItem : Control
 {
     private RoadmapItemState _itemState;
-    private float _lastSetWidth;
+    private float _lastHeaderWidth;
+    private float _lastContentsWidth;
 
     public event Action<string>? OnLikePressed;
 
@@ -70,7 +71,7 @@ public sealed partial class RoadmapItem : Control
         HeaderButton.OnPressed += _ => ContentsContainer.Visible = !ContentsContainer.Visible;
         LikesControl.OnLikePressed += HandleLikePressed;
 
-        OnResized += UpdateContentsWidth;
+        OnResized += UpdateTextWidths;
         LikeCount = 0;
         LikedByPlayer = false;
     }
@@ -83,17 +84,29 @@ public sealed partial class RoadmapItem : Control
         OnLikePressed?.Invoke(GoalId);
     }
 
-    private void UpdateContentsWidth()
+    private void UpdateTextWidths()
     {
-        // GridContainer measures children with the full available size, not the per-column size.
-        // So RichTextLabel gets infinite width during measure and never wraps.
-        // We fix this by explicitly setting its width to the actual arranged width of this control.
-        var targetWidth = ContentsContainer.Width - Contents.Margin.Left - Contents.Margin.Right;
-        if (targetWidth <= 0 || MathF.Abs(_lastSetWidth - targetWidth) < 0.5f)
-            return;
+        // GridContainer измеряет дочерние элементы по ширине всей сетки, а не отдельной колонки.
+        // Поэтому задаём RichTextLabel фактическую ширину после размещения карточки.
+        var invalidateMeasure = false;
 
-        _lastSetWidth = targetWidth;
-        Contents.SetWidth = targetWidth;
-        InvalidateMeasure();
+        var headerWidth = HeaderLabel.Width;
+        if (headerWidth > 0 && MathF.Abs(_lastHeaderWidth - headerWidth) >= 0.5f)
+        {
+            _lastHeaderWidth = headerWidth;
+            HeaderLabel.SetWidth = headerWidth;
+            invalidateMeasure = true;
+        }
+
+        var contentsWidth = ContentsContainer.Width - Contents.Margin.Left - Contents.Margin.Right;
+        if (contentsWidth > 0 && MathF.Abs(_lastContentsWidth - contentsWidth) >= 0.5f)
+        {
+            _lastContentsWidth = contentsWidth;
+            Contents.SetWidth = contentsWidth;
+            invalidateMeasure = true;
+        }
+
+        if (invalidateMeasure)
+            InvalidateMeasure();
     }
 }
