@@ -149,7 +149,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Edit
 
 - type: listing
   id: uplinkRiggedBoxingGloves
@@ -184,7 +183,6 @@
     blacklist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink
   # Sunrise-end
 
 - type: listing
@@ -219,7 +217,6 @@
     blacklist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Add
       - AssaultOpsUplink # Sunrise-Add
 
 - type: listing
@@ -240,7 +237,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Add
 
 - type: listing
   id: UplinkBulldog
@@ -260,7 +256,6 @@
     blacklist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Add
 
 - type: listing
   id: UplinkBulldogBundle
@@ -280,7 +275,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Add
 
 - type: listing
   id: UplinkEstocBundle
@@ -300,7 +294,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Add
 
 - type: listing
   id: UplinkGrenadeLauncher
@@ -317,7 +310,6 @@
     blacklist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Edit
       - AssaultOpsUplink # Sunrise-Edit
 
 - type: listing
@@ -338,7 +330,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Edit
 
 - type: listing
   id: UplinkL6SawBundle
@@ -472,7 +463,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink #Sunrise added
 
 - type: listing
   id: UplinkC4Bundle
@@ -529,7 +519,6 @@
     blacklist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink
       - AssaultOpsUplink
 
 - type: listing
@@ -546,7 +535,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink
       - AssaultOpsUplink
 
 - type: listing
@@ -717,7 +705,6 @@
       whitelist:
         tags:
           - NukeOpsUplink
-          - LoneOpsUplink # Sunrise-Edit
     - !type:BuyerWhitelistCondition
       blacklist:
         components:
@@ -782,7 +769,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink
 
 - type: listing
   id: UplinkNocturineChemistryBottle
@@ -876,7 +862,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Add
 
 # Deception
 - type: listing
@@ -1330,7 +1315,6 @@
       whitelist:
         tags:
         - NukeOpsUplink
-        - LoneOpsUplink # Sunrise-Edit
     - !type:BuyerWhitelistCondition
       blacklist:
         components:
@@ -1462,7 +1446,6 @@
       blacklist:
         tags:
           - NukeOpsUplink
-          - LoneOpsUplink # Sunrise-Edit
           - AssaultOpsUplink # Sunrise-Edit
 
 - type: listing
@@ -1483,7 +1466,6 @@
       whitelist:
         tags:
           - NukeOpsUplink
-          - LoneOpsUplink # Sunrise-Edit
 
 - type: listing
   id: UplinkCarpDehydrated
@@ -1520,7 +1502,6 @@
     blacklist:
       tags:
       - AssaultOpsUplink
-      - LoneOpsUplink
   # Sunrise-End
 
 - type: listing
@@ -1557,7 +1538,6 @@
       blacklist:
         tags:
           - NukeOpsUplink
-          - LoneOpsUplink # Sunrise-Add
 
 - type: listing
   id: UplinkFreedomImplanter
@@ -1651,7 +1631,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Edit
 
 - type: listing
   id: UplinkMacroBombImplanter
@@ -1668,7 +1647,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Edit
 
 - type: listing
   id: UplinkDeathAcidifierImplanter
@@ -1685,7 +1663,6 @@
       whitelist:
         tags:
           - NukeOpsUplink
-          - LoneOpsUplink # Sunrise-Edit
 
 - type: listing
   id: UplinkUplinkImplanter # uplink uplink real
@@ -1702,7 +1679,6 @@
       blacklist:
         tags:
           - NukeOpsUplink
-          - LoneOpsUplink
           - AssaultOpsUplink
           - FugitiveUplink
 
@@ -1894,7 +1870,6 @@
     blacklist:
       tags:
       - AssaultOpsUplink
-      - LoneOpsUplink
   #Sunrise-end
 
 - type: listing
@@ -1912,7 +1887,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Edit
 
 - type: listing
   id: UplinkHardsuitSyndieElite
@@ -1929,7 +1903,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Edit
 
 - type: listing
   id: UplinkClothingOuterHardsuitJuggernaut
@@ -1946,7 +1919,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Edit
 
 - type: listing
   id: UplinkClothingEyesHudSyndicate
@@ -1962,7 +1934,6 @@
       whitelist:
         tags:
           - NukeOpsUplink
-          - LoneOpsUplink # Sunrise-Edit
 
 - type: listing
   id: UplinkBackpackSyndicate

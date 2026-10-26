@@ -802,17 +802,6 @@
     stock: 2
 
 - type: listing
-  id: UplinkPirateFireAxeFlaming
-  name: uplink-fire-axe-flaming-name
-  description: uplink-fire-axe-flaming-desc
-  icon: { sprite: Objects/Weapons/Melee/fireaxeflaming.rsi, state: icon }
-  productEntity: FireAxeFlaming
-  cost:
-    Doubloon: 27
-  categories:
-  - UplinkPirateMeleeWeaponry
-
-- type: listing
   id: UplinkPirateEswordNuke
   name: uplink-esword-name
   description: uplink-esword-desc

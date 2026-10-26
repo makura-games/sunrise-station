@@ -395,7 +395,7 @@
         children:
         - id: WeaponShotgunTrenchgun4034
           amount: 2
-        - id: SpeedLoaderShellShotgun
+        - id: SpeedLoaderShotgunBuck
           amount: 4
         - id: BoxBeanbag
           amount: 1
@@ -418,7 +418,7 @@
         children:
         - id: WeaponShotgunRiot
           amount: 2
-        - id: SpeedLoaderShellShotgun
+        - id: SpeedLoaderShotgunBuck
           amount: 4
         - id: BoxBeanbag
           amount: 1
@@ -442,7 +442,7 @@
         children:
         - id: WeaponShotgunDoubleBarreled
           amount: 4
-        - id: SpeedLoaderShellShotgun
+        - id: SpeedLoaderShotgunBuck
           amount: 4
         - id: BoxBeanbag
           amount: 2
