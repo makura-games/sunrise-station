@@ -1,0 +1,27 @@
+- type: entity
+  id: SunriseCrateVanillaAmmunitionDebug
+  parent: CrateSecgear
+  name: ancient ammunition crate
+  description: Contains ancient magazines and speedloaders from the era of the Wizards' Federation, still stocked with old munitions.
+  suffix: Ancient
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: SunriseVanillaMagazinePistol
+        - id: SunriseVanillaMagazinePistolSubMachineGun
+        - id: SunriseVanillaMagazineMagnum
+        - id: SunriseVanillaMagazineLightRifle
+        - id: SunriseVanillaMagazineRifle
+        - id: SunriseVanillaMagazineCaselessRifle
+        - id: SunriseVanillaMagazineHeavyRifle
+        - id: SunriseVanillaMagazineAntiMateriel
+        - id: SunriseVanillaMagazineShotgun
+        - id: SunriseVanillaMagazineShotgunSlug
+        - id: SunriseVanillaMagazineShotgunBeanbag
+        - id: SunriseVanillaSpeedLoaderMagnum
+        - id: SunriseVanillaSpeedLoaderLightRifle
+        - id: SunriseVanillaSpeedLoaderShotgun
+        - id: SunriseVanillaSpeedLoaderShotgunSlug
+        - id: SunriseVanillaSpeedLoaderShotgunBeanbag

@@ -50,7 +50,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
@@ -135,7 +134,6 @@
           - MagazineRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleSP
         priority: 1
         whitelist:
           tags:
@@ -210,7 +208,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: null
         priority: 1
         whitelist:
           tags:
@@ -265,7 +262,6 @@
             - MagazineAsh12
       gun_chamber:
         name: Chamber
-        startingItem: ShellShotgunSlug
         priority: 1
         whitelist:
           tags:
@@ -336,7 +332,6 @@
           - MagazineLightRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
@@ -386,7 +381,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleImprovised
         priority: 1
         whitelist:
           tags:
@@ -457,7 +451,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: null
         priority: 1
         whitelist:
           tags:
@@ -547,7 +540,6 @@
             - MagazineHeavyRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleHeavySP
         priority: 1
         whitelist:
           tags:
