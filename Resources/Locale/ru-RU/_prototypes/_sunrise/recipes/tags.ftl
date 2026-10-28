@@ -18,3 +18,5 @@ construction-graph-tag-naval-boots = { ent-ClothingNavalBoots }
 construction-graph-tag-naval-jacket-desc = { ent-ClothingNavalJacket.desc }
 construction-graph-tag-naval-boots-desc = { ent-ClothingNavalBoots.desc }
 construction-graph-tag-firebomb-desc = { ent-FireBomb.desc }
+construction-graph-tag-upgrade-lecter-mk3 = комплект улучшения Лектера Мк3
+construction-graph-component-mech-reactor = реактор меха

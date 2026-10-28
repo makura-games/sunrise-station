@@ -2900,11 +2900,8 @@
     - id: WeaponRifleSKM24Syndi
       prob: 0.5
       orGroup: Skm25Pool
-    - id: WeaponRifleSKM24Green
-      prob: 0.15
-      orGroup: Skm25Pool
-    - id: WeaponRifleSKM24White
-      prob: 0.15
+    - id: WeaponRifleSKM24
+      prob: 0.30
       orGroup: Skm25Pool
     - id: WeaponRifleSKM24Nano
       prob: 0.15
@@ -3098,13 +3095,7 @@
     - id: CombatKnife
       prob: 0.15
     - id: WeaponRifleSKM24
-      prob: 0.4
-      orGroup: Skm25Pool
-    - id: WeaponRifleSKM24Green
-      prob: 0.25
-      orGroup: Skm25Pool
-    - id: WeaponRifleSKM24White
-      prob: 0.25
+      prob: 0.9
       orGroup: Skm25Pool
     - id: WeaponRifleSKM24Nano
       prob: 0.15

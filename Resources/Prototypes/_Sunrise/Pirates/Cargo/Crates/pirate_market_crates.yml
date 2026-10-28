@@ -951,17 +951,6 @@
 
 - type: entity
   parent: CratePiratePrivateSecure
-  id: CratePirateMagazineChainGunImprovised
-  name: chaingun improvised magazine crate
-  description: Contains six chaingun magazines.
-  components:
-  - type: StorageFill
-    contents:
-      - id: MagazineChainGunImprovised
-        amount: 6
-
-- type: entity
-  parent: CratePiratePrivateSecure
   id: CratePirateMagazineDragunovSP
   name: magazine dragunov sp crate
   description: Contains six magazine dragunov sp items.

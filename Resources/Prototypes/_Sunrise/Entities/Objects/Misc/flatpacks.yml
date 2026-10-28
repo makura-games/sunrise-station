@@ -54,15 +54,6 @@
     entity: ShuttleGunLightRifleAP
 
 - type: entity
-  parent: BaseFlatpack
-  id: MechMiningPodFlatpack
-  name: Mining Pod flatpack
-  description: A flatpack used for constructing a Mining Pod.
-  components:
-  - type: Flatpack
-    entity: MechMiningPod
-
-- type: entity
   parent: [ BaseFlatpack, BaseSyndicateContraband ]
   id: ComputerPirateUplinkFlatpack
   name: black market console flatpack

@@ -353,14 +353,6 @@
 
 - type: entity
   parent: WeaponRifleSKM24
-  id: WeaponRifleSKM24White
-
-- type: entity
-  parent: WeaponRifleSKM24
-  id: WeaponRifleSKM24Green
-
-- type: entity
-  parent: WeaponRifleSKM24
   id: WeaponRifleSKM24Scrap
   suffix: Scrap
   description: Cheap and reliable. Enough firepower, little accuracy. Easy to repair, hard to control during sustained. This specimen has seen some rough stuff...and not just once.

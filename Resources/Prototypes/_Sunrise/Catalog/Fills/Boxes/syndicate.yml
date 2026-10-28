@@ -303,6 +303,39 @@
     - state: box_of_doom_big
     - state: l6_uranium
 
+###### Mech reactors ######
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: SunriseMechReactorBurnoutBox
+  name: burnout reactor box
+  description: A reinforced delivery box containing a burnout-class mech reactor. The packaging disintegrates when opened.
+  components:
+  - type: Sprite
+    sprite: Objects/Storage/boxes.rsi
+    layers:
+    - state: box_of_doom
+    - state: writing_of_doom
+  - type: Item
+    size: Normal
+  - type: SpawnItemsOnUse
+    items:
+    - id: SunriseMechReactorBurnout
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Sunrise/Items/Handling/cardboardbox_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Sunrise/Items/Handling/cardboardbox_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Sunrise/Items/Handling/cardboardbox_drop.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/_Sunrise/Items/Handling/cardboardbox_drop.ogg
+
 
 ###### Implants ######
 

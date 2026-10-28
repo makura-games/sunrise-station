@@ -117,7 +117,7 @@
     autoRechargeRate: 10
 
 - type: entity
-  id: PowerCageOmega # Sunrise-Add
+  id: PowerCageOmega
   parent: BasePowerCage
   name: omega power cage
   description: A high-tier power cage for heavy systems. Designed for extreme output and sustained draw.
@@ -133,4 +133,5 @@
   - type: Battery
     maxCharge: 12400
     startingCharge: 12400
-  - type: EmpImmune
+  - type: BatterySelfRecharger
+    autoRechargeRate: 10

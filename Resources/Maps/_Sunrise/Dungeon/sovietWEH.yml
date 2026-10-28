@@ -21380,7 +21380,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 17.549795,26.475885
       parent: 1
-- proto: WeaponRifleSKM24Green
+- proto: WeaponRifleSKM24
   entities:
   - uid: 96
     components:

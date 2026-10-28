@@ -21,7 +21,7 @@
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: AmmoCounter
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: MousetrapArmed
     fireCost: 100
   - type: Appearance
@@ -54,7 +54,7 @@
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: AmmoCounter
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: TrashBananaPeel
     fireCost: 100
   - type: Appearance

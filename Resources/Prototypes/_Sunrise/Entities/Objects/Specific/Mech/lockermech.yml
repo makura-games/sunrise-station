@@ -37,9 +37,9 @@
         Blunt: 5
   - type: MovementSpeedModifier
     baseWalkSpeed: 1
-    baseSprintSpeed: 3.1
+    baseSprintSpeed: 3
   - type: Reflect
-    reflectProb: 0.15
+    reflectProb: 0.03
     spread: 180
     soundOnReflect: /Audio/Weapons/block_metal1.ogg
     reflects:
@@ -68,4 +68,4 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageMedium
+      - SunriseMechReactorWorkhorse

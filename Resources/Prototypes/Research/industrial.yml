@@ -44,10 +44,10 @@
   cost: 7500
   recipeUnlocks:
   - PowerCellHigh
+  - SunriseMechReactorWorkhorse # Sunrise-Edit — реакторы мехов
   - TurboItemRechargerCircuitboard
   - SMESAdvancedMachineCircuitboard
   - SMESExtendedMachineCircuitboard # Sunrise-Edit
-  - PowerCageMedium
 
 - type: technology
   id: MechanicalCompression
@@ -124,8 +124,6 @@
   - RipleyCentralElectronics
   - RipleyPeripheralsElectronics
   - MechEquipmentGrabber
-  - PowerCageSmall  # Sunrise-Add
-  - PowerCageRechargerCircuitboard  # Sunrise-Add
 
 # Tier 2
 
@@ -225,6 +223,8 @@
   recipeUnlocks:
   - PowerCellMicroreactor
   - PowerCellHyper
+  - SunriseMechReactorLonghaul # Sunrise-Edit — реакторы мехов
+  - SunriseMechReactorThor # Sunrise-Edit — реакторы мехов
   - SMESSuperExtendedMachineCircuitboard # Sunrise-Edit
   technologyPrerequisites:
   - AdvancedPowercells

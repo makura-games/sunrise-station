@@ -310,7 +310,6 @@
     walkModifier: 0.8
     sprintModifier: 0.8
   - type: HeldSpeedModifier
-  #- type: EmpImmune # Мехи теперь имеют прямой урон от ЭМИ. Sunrise-Edit: Комент до Фикса Вайтлистов батарей
 
 - type: entity
   parent: SolutionRiggable
@@ -375,7 +374,6 @@
   - type: Battery
     maxCharge: 6200
     startingCharge: 6200
-  - type: EmpImmune # Sunrise-Edit: "Эдит" до Фикса Вайтлистов батарей, потом удалим
 
 - type: entity
   id: PowerCageSmallEmpty
@@ -428,41 +426,3 @@
       visible: false
   - type: Battery
     startingCharge: 0
-
-- type: entity
-  id: PowerCageSyndicate
-  parent: BasePowerCage
-  name: syndicate power cage
-  description: A rechargeable power cage for big devices. Increased capacity for increased power levels.
-  components:
-  - type: Sprite
-    sprite: Objects/Power/power_cages.rsi
-    layers:
-    - map: [ "enum.PowerCellVisualLayers.Base" ]
-      state: syndicate
-    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
-      state: o2
-      shader: unshaded
-  - type: Battery
-    maxCharge: 12400
-    startingCharge: 12400
-  - type: EmpImmune
-
-- type: entity
-  id: PowerCageERT
-  parent: BasePowerCage
-  name: NanoTrasen combat power cage
-  description: A rechargeable power cage for big devices. Increased capacity for increased power levels. Immune to EMP.
-  components:
-  - type: Sprite
-    sprite: Objects/Power/power_cages.rsi
-    layers:
-    - map: [ "enum.PowerCellVisualLayers.Base" ]
-      state: nanotrasen
-    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
-      state: o2
-      shader: unshaded
-  - type: Battery
-    maxCharge: 12400
-    startingCharge: 12400
-  - type: EmpImmune

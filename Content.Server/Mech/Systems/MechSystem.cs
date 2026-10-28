@@ -64,6 +64,7 @@ public sealed partial class MechSystem : SharedMechSystem
         base.Initialize();
 
         SubscribeLocalEvent<MechComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<MechComponent, ContainerIsInsertingAttemptEvent>(OnBatteryInsertAttempt); // Sunrise-Edit — проверка whitelist при прямой вставке в контейнер
         SubscribeLocalEvent<MechComponent, EntInsertedIntoContainerMessage>(OnInsertBattery);
         SubscribeLocalEvent<MechComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<MechComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
@@ -103,12 +104,13 @@ public sealed partial class MechSystem : SharedMechSystem
         if (TryComp<WiresPanelComponent>(uid, out var panel) && !panel.Open)
             return;
 
-        if (component.BatterySlot.ContainedEntity == null && TryComp<BatteryComponent>(args.Used, out var battery) && _tag.HasTag(args.Used, PowerCageTag))
+        // Sunrise edit start — единый путь проверки и вставки реактора
+        if (TryComp<BatteryComponent>(args.Used, out var battery)
+            && TryInsertBattery((uid, component), (args.Used, battery)))
         {
-            InsertBattery(uid, args.Used, component, battery);
-            _actionBlocker.UpdateCanMove(uid);
             return;
         }
+        // Sunrise edit end
 
         if (_toolSystem.HasQuality(args.Used, PryingQuality) && component.BatterySlot.ContainedEntity != null)
         {
@@ -132,6 +134,7 @@ public sealed partial class MechSystem : SharedMechSystem
 
         Dirty(uid, component);
         _actionBlocker.UpdateCanMove(uid);
+        AttachSunriseInstalledBattery(uid, component); // Sunrise-Edit — регистрируем реактор для синхронизации заряда
     }
 
     private void OnRemoveBattery(EntityUid uid, MechComponent component, RemoveBatteryEvent args)
@@ -162,6 +165,7 @@ public sealed partial class MechSystem : SharedMechSystem
 
         _actionBlocker.UpdateCanMove(uid);
         Dirty(uid, component);
+        AttachSunriseInstalledBattery(uid, component); // Sunrise-Edit — восстанавливаем связь с предустановленным реактором
     }
 
     private void OnRemoveEquipmentMessage(EntityUid uid, MechComponent component, MechEquipmentRemoveMessage args)
@@ -380,7 +384,7 @@ public sealed partial class MechSystem : SharedMechSystem
         if (!TryComp<BatteryComponent>(battery, out var batteryComp))
             return false;
 
-        _battery.SetCharge((battery.Value, batteryComp), _battery.GetCharge((battery.Value, batteryComp)) + delta.Float());
+        _battery.ChangeCharge((battery.Value, batteryComp), delta.Float()); // Sunrise-Edit — трата энергии запускает задержку автозарядки реактора
         // TODO: Power cells are predicted now, so no need to duplicate the charge level
         var charge = _battery.GetCharge((battery.Value, batteryComp));
         if (charge != component.Energy) //if there's a discrepency, we have to resync them
@@ -401,14 +405,9 @@ public sealed partial class MechSystem : SharedMechSystem
         if (!Resolve(toInsert, ref battery, false))
             return;
 
-        _container.Insert(toInsert, component.BatterySlot);
-        component.Energy = _battery.GetCharge((toInsert, battery));
-        component.MaxEnergy = battery.MaxCharge;
-
-        _actionBlocker.UpdateCanMove(uid);
-
-        Dirty(uid, component);
-        UpdateUserInterface(uid, component);
+        // Sunrise edit start — сохраняем совместимость API и направляем вставку через общую проверку whitelist
+        TryInsertBattery((uid, component), (toInsert, battery));
+        // Sunrise edit end
     }
 
     public void RemoveBattery(EntityUid uid, MechComponent? component = null)

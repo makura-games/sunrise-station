@@ -1266,6 +1266,9 @@ MagazineBoxHeavyRifleHP: MagazineBoxHeavyRifleSP
 RifleHeavyMagazineHP: RifleHeavyMagazineSP
 MagazineDragunovHP: MagazineDragunovSP
 MagazineBoxRifleMachineHP: MagazineBoxRifleMachineSP
+# 2026-09-03
+PowerCageSyndicate: PowerCageOmega
+PowerCageERT: PowerCageOmega
 # 2026-09-08
 WeaponRifleLecterMk3: WeaponRifleLecterMk2
 WeaponRifleLecterMk3Empty: WeaponRifleLecterMk2Empty

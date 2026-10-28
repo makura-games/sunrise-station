@@ -20,18 +20,6 @@
     stock: 1
 
 - type: listing
-  id: VendorMiningMechMiningPod
-  productEntity: MechMiningPodFlatpack
-  icon: { sprite: _Sunrise/Objects/Specific/Mech/mining_pod.rsi, state: mining_pod }
-  cost:
-    SalvageTicket: 800
-  categories:
-  - MiningMech
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
-
-- type: listing
   id: VendorMiningClothingOuterHardsuitAdvancedMining
   productEntity: ClothingOuterHardsuitAdvancedMining
   cost:
@@ -97,29 +85,40 @@
   id: VendorMiningWeaponMechMeleeDrill
   productEntity: WeaponMechMelleDrill
   cost:
-    SalvageTicket: 400
+    SalvageTicket: 225
   categories:
   - MiningMech
   conditions:
   - !type:ListingLimitedStockCondition
-    stock: 1
+    stock: 2
+
+- type: listing
+  id: VendorMiningWeaponMechIndustrialKineticAccelerator
+  productEntity: WeaponMechIndustrialKineticAccelerator
+  cost:
+    SalvageTicket: 250
+  categories:
+  - MiningMech
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 2
 
 - type: listing
   id: VendorMiningWeaponMechIndustrialPlasmaCutterLight
   productEntity: WeaponMechIndustrialPlasmaCutterLight
   cost:
-    SalvageTicket: 400
+    SalvageTicket: 300
   categories:
   - MiningMech
   conditions:
   - !type:ListingLimitedStockCondition
-    stock: 1
+    stock: 2
 
 - type: listing
   id: VendorMiningWeaponMechIndustrialPlasmaCutter
   productEntity: WeaponMechIndustrialPlasmaCutter
   cost:
-    SalvageTicket: 699
+    SalvageTicket: 500
   categories:
   - MiningMech
   conditions:
@@ -130,7 +129,7 @@
   id: VendorMiningWeaponMechMeleeDrillDiamond
   productEntity: WeaponMechMelleDrillDiamond
   cost:
-    SalvageTicket: 650
+    SalvageTicket: 500
   categories:
   - MiningMech
   conditions:

@@ -241,7 +241,7 @@
     gloves: ClothingHandsGlovesMercFingerless
     belt: TrashBagAmmo
   inhand:
-  - WeaponRifleSKM24Green
+  - WeaponRifleSKM24
 
 - type: startingGear
   id: SovietCorpseGearMarineF

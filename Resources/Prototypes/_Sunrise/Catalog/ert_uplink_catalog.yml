@@ -1874,25 +1874,6 @@
 
 # Mechs
 - type: listing
-  id: ERTUplinkPowerCageERT
-  name: ntuplink-mech-powercage-nanotrasen-name
-  description: ntuplink-mech-powercage-nanotrasen-desc
-  productEntity: PowerCageERT
-  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: powercage_nt }
-  cost:
-    Crystallite: 10
-  categories:
-    - NTMechs
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 2
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - ERTGamma
-      - ERTEpsilon
-
-- type: listing
   id: ERTUplinkBorgERT
   productEntity: PlayerBorgChassisERTBattery
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: cyborg_ert }

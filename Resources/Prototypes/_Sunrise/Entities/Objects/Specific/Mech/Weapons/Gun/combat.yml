@@ -16,9 +16,9 @@
       - FullAuto
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/HMGs/minigun_shot.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider
     proto: CartridgeRifleFMJ
-    fireCost: 5
+    fireCost: 8
   - type: Appearance
   - type: AmmoCounter
   - type: StaticPrice
@@ -43,9 +43,9 @@
       - FullAuto
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/SMGs/mp38/mp38_shot.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider
     proto: CartridgeHeavyRifleRSP
-    fireCost: 5
+    fireCost: 10
   - type: Appearance
   - type: AmmoCounter
   - type: StaticPrice
@@ -64,7 +64,7 @@
   - type: Item
     sprite: _Sunrise/Objects/Weapons/Guns/LMGs/mg42/tiny.rsi
   - type: Gun
-    minAngle: -15
+    minAngle: -10
     maxAngle: 40
     burstFireRate: 10
     shotsPerBurst: 8
@@ -76,9 +76,9 @@
       path: /Audio/_Sunrise/Weapons/Guns/LMGs/shot.ogg
       params:
         volume: -3
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider
     proto: CartridgeRifleHeavyFMJ
-    fireCost: 8
+    fireCost: 10
   - type: Appearance
   - type: AmmoCounter
   - type: StaticPrice
@@ -107,9 +107,9 @@
       collection: syndi_plasma
       params:
         volume: -1
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider
     proto: SunriseMechHitscanIgnitionRedLaser
-    fireCost: 15
+    fireCost: 20
   - type: Appearance
   - type: AmmoCounter
   - type: StaticPrice
@@ -132,7 +132,7 @@
       - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ship_duster.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider
     proto: GrenadeFragTimer
     fireCost: 250
   - type: Appearance
@@ -148,7 +148,7 @@
   - type: Sprite
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_missilerack
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider
     proto: Cartridge50mmRocket
     fireCost: 100
 
@@ -179,7 +179,7 @@
       params:
         volume: 15
         pitch: 1.9
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider
     proto: CartridgeRifleHeavy127mm
     fireCost: 25
   - type: Appearance
@@ -211,8 +211,8 @@
     - FullAuto
     soundGunshot:
       path: /Audio/_Starlight/Weapons/Guns/Gunshots/minotaur.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider
     proto: ShellShotgunMech
-    fireCost: 50
+    fireCost: 80
   - type: Appearance
   - type: AmmoCounter

@@ -197,17 +197,6 @@
     Plasma: 300
 
 - type: latheRecipe
-  id: WeaponMechCombatMG
-  result: WeaponMechCombatMG
-  categories:
-  - MechWeapons
-  completetime: 20
-  materials:
-    Steel: 3000
-    Plastic: 500
-    Plasma: 100
-
-- type: latheRecipe
   id: WeaponMechCombatDisabler
   result: WeaponMechCombatDisabler
   categories:

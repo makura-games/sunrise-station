@@ -53,7 +53,3 @@ ent-PowerCageMediumEmpty = { ent-PowerCageMedium }
 ent-PowerCageHighEmpty = { ent-PowerCageHigh }
     .suffix = Empty
     .desc = { ent-PowerCageHigh.desc }
-ent-PowerCageSyndicate = syndicate power cage
-    .desc = A rechargeable power cage for big devices. Increased capacity for increased power levels.
-ent-PowerCageERT = NanoTrasen combat power cage
-    .desc = A rechargeable power cage for big devices. Increased capacity for increased power levels. Immune to EMP.

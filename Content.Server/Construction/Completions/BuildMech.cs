@@ -59,11 +59,10 @@ public sealed partial class BuildMech : IGraphAction
         var transform = entityManager.GetComponent<TransformComponent>(uid);
         var mech = entityManager.SpawnEntity(MechPrototype, transform.Coordinates);
 
-        if (entityManager.TryGetComponent<MechComponent>(mech, out var mechComp) && mechComp.BatterySlot.ContainedEntity == null)
-        {
-            mechSys.InsertBattery(mech, cell, mechComp, batteryComponent);
-            containerSystem.Insert(cell, mechComp.BatterySlot);
-        }
+        // Sunrise edit start — применяем whitelist меха при завершении строительства
+        if (entityManager.TryGetComponent<MechComponent>(mech, out var mechComp))
+            mechSys.TryInsertBattery((mech, mechComp), (cell, batteryComponent));
+        // Sunrise edit end
 
         var entChangeEv = new ConstructionChangeEntityEvent(mech, uid);
         entityManager.EventBus.RaiseLocalEvent(uid, entChangeEv);

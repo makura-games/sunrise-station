@@ -307,7 +307,7 @@
   components:
   - type: SpawnItemsOnUse
     items:
-    - id: WeaponRifleSKM24Green
+    - id: WeaponRifleSKM24
       prob: 0.25
     - id: MagazineLightRifleEmpty
       prob: 0.8
@@ -405,7 +405,7 @@
   components:
   - type: SpawnItemsOnUse
     items:
-    - id: WeaponRifleSKM24Green
+    - id: WeaponRifleSKM24
       prob: 0.25
     - id: MagazineLightRifleEmpty
       prob: 0.8
@@ -1137,7 +1137,7 @@
     # Cash
     - id: PirateCashSpawner07
     # Weapons
-    - id: WeaponRifleSKM24Green
+    - id: WeaponRifleSKM24
       prob: 0.9
     - id: MagazineLightRifleEmpty
       prob: 0.9

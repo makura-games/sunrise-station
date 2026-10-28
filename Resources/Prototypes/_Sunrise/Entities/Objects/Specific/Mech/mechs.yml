@@ -11,6 +11,20 @@
 
 # region Base Mechs
 - type: entity
+  id: SyndieMechLight
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: PointLight
+    enabled: false
+    mask: /Textures/_Sunrise/Effects/LightMasks/mech_headlight_cone.png
+    autoRot: true
+    radius: 6
+    energy: 5
+    color: "#ff0000"
+    netsync: false
+
+- type: entity
   id: BaseMechPod
   save: false
   abstract: true
@@ -29,6 +43,9 @@
     - NanoTrasen
   - type: Mech
     entryDelay: 1
+    batteryWhitelist:
+      tags:
+      - MechReactor
   - type: MechVulnerableToEMP
   - type: MechAir
   - type: GravityAffected
@@ -145,7 +162,7 @@
     bounds: "-0.6,-0.6, 0.6, 0.6"
   - type: PointLight
     enabled: false
-    mask: /Textures/Effects/LightMasks/cone.png
+    mask: /Textures/_Sunrise/Effects/LightMasks/mech_headlight_cone.png
     autoRot: true
     radius: 35
     energy: 4
@@ -219,101 +236,12 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageMedium
+      - SunriseMechReactorWorkhorse
   - type: AccessReader
     access: [["Security"]]
   - type: RadarBlip
     color: "#ff1500"
     scale: 1.25
-    shape: Triangle
-    requireInSpace: false
-
-- type: entity
-  id: MechMiningPod
-  parent: [ BaseMechPod, BaseSalvageContraband ]
-  name: Mining Pod
-  description: Despite its size, the Mining Pod has incredible survability in space.
-  suffix: Filled
-  components:
-  - type: Sprite
-    drawdepth: Mobs
-    sprite: _Sunrise/Objects/Specific/Mech/mining_pod.rsi
-    scale: 1.08, 1.08
-    layers:
-    - state: mining_pod
-      map: ["enum.MechVisualLayers.Base"]
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 5
-    baseWeightlessModifier: 2
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.80
-        density: 100
-        mask:
-          - FlyingMobMask
-        layer:
-          - FlyingMobLayer
-  - type: AmbientSound
-    range: 4
-    volume: -4
-    sound:
-      path: /Audio/Effects/shuttle_thruster.ogg
-  - type: Mech
-    baseState: mining_pod
-    openState: mining_pod_open
-    brokenState: mining_pod_broken
-    mechToPilotDamageMultiplier: 0.0
-    maxEquipmentAmount: 4
-    airtight: true
-    pilotWhitelist:
-      components:
-        - HumanoidProfile
-    equipmentWhitelist:
-      tags:
-      - IndustrialMech
-    startingEquipment:
-      - WeaponMechIndustrialPlasmaCutterLight #Нужно сделать улучшения WeaponMechIndustrialKineticAccelerator по аналогии с ручным для прогресса в раунде
-      - MechEquipmentGrabberSmallMining
-  - type: Reflect
-    reflectProb: 0.05
-    spread: 180
-    soundOnReflect: /Audio/Weapons/block_metal1.ogg
-    reflects:
-    - NonEnergy
-  - type: MobThresholds
-    currentThresholdState: Alive
-    thresholds:
-      0: Alive
-      200: Critical
-    showOverlays: false
-    allowRevives: true
-  - type: ContainerFill
-    containers:
-      mech-battery-slot:
-      - PowerCageMedium
-  - type: AccessReader
-    access: [["Mining"]]
-  - type: Storage
-    grid:
-    - 0,0,11,7
-    clickInsert: false
-    maxItemSize: Normal
-    storageOpenSound: /Audio/Effects/closetopen.ogg
-    storageCloseSound: /Audio/Effects/closetclose.ogg
-    whitelist:
-      tags:
-      - Ore
-  - type: Speech
-    speechSounds: Borg
-  - type: TTS
-    voice: Glados
-  - type: RadarBlip
-    color: "#4800ff"
-    scale: 1.1
     shape: Triangle
     requireInSpace: false
 
@@ -340,7 +268,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageMedium
+      - SunriseMechReactorWorkhorse
   - type: Tag
     tags:
     - DoorBumpOpener # No paint unique ripley
@@ -427,7 +355,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageSyndicate
+      - SunriseMechReactorThor
 
 # region Paddy
 - type: entity
@@ -483,7 +411,7 @@
     baseWalkSpeed: 2.5
     baseSprintSpeed: 4
   - type: PointLight
-    mask: /Textures/Effects/LightMasks/cone.png
+    mask: /Textures/_Sunrise/Effects/LightMasks/mech_headlight_cone.png
     autoRot: true
     radius: 5
     energy: 5
@@ -499,7 +427,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageMedium
+      - SunriseMechReactorWorkhorse
 
 - type: entity
   id: MechPaddyFilled
@@ -572,7 +500,7 @@
     - NonEnergy
   - type: PointLight
     enabled: false
-    mask: /Textures/Effects/LightMasks/soft_cone.png
+    mask: /Textures/_Sunrise/Effects/LightMasks/mech_headlight_cone.png
     autoRot: true
     color: "#FFFF00"
     radius: 6
@@ -597,7 +525,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageHigh
+      - SunriseMechReactorWorkhorse
 
 # region NT ERT Gygax
 # NT Gygax
@@ -670,7 +598,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageERT
+      - SunriseMechReactorLonghaul
 
 - type: entity
   id: MechNTGygaxFilled
@@ -751,14 +679,14 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageHigh
+      - SunriseMechReactorWorkhorse
 
 # region Durand base
 
 # Rover
 - type: entity
   id: MechRoverSyndie
-  parent: [ MechBreakageRover, BaseMech, CombatMech, BaseSyndicateContraband ] # Sunrise-edit
+  parent: [ SyndieMechLight, MechBreakageRover, BaseMech, CombatMech, BaseSyndicateContraband ]
   name: Rover
   description: A modified Durand used for nefarious purposes. On the back of the armor plate there is an inscription "Cybersun Inc."
   components:
@@ -795,6 +723,10 @@
     mechToPilotDamageMultiplier: 0.0
     airtight: true
     maxEquipmentAmount: 5
+    batteryWhitelist:
+      tags:
+      - MechReactor
+      - SunriseDurandMechReactor
     pilotWhitelist:
       components:
         - HumanoidProfile
@@ -829,7 +761,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageSyndicate
+      - SunriseMechReactorRoland
 
 - type: entity
   id: MechRoverSyndieFilled
@@ -915,7 +847,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageSyndicate
+      - SunriseMechReactorThor
 
 - type: entity
   id: MechDollHouseFilled

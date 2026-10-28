@@ -43856,7 +43856,7 @@ entities:
         disableRefund: False
         costModifiersBySourceId: {}
       - id: UplinkPowerCageSyndicate
-        productEntity: PowerCageSyndicate
+        productEntity: PowerCageOmega
         name: null
         discountCategory: usualDiscounts
         description: null
@@ -51850,7 +51850,7 @@ entities:
         disableRefund: False
         costModifiersBySourceId: {}
       - id: ERTUplinkPowerCageERT
-        productEntity: PowerCageERT
+        productEntity: PowerCageOmega
         name: ntuplink-mech-powercage-nanotrasen-name
         discountCategory: null
         description: ntuplink-mech-powercage-nanotrasen-desc

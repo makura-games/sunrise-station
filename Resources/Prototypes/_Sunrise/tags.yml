@@ -531,6 +531,12 @@
   id: MechAirTank
 
 - type: Tag
+  id: MechReactor
+
+- type: Tag
+  id: SunriseDurandMechReactor
+
+- type: Tag
   id: MechPhasicScanningModule
 
 - type: Tag

@@ -25,6 +25,11 @@
                                  SetHeight="25"
                                  MaxValue="1"
                                  Value="0">
+                        <!-- Sunrise edit start — красный индикатор перегрева реактора -->
+                        <ProgressBar.ForegroundStyleBoxOverride>
+                            <gfx:StyleBoxFlat BackgroundColor="#FF4000" />
+                        </ProgressBar.ForegroundStyleBoxOverride>
+                        <!-- Sunrise edit end -->
                         <Label Name="EnergyDisplay"
                                Margin="5 0 0 0"
                                HorizontalAlignment="Left"

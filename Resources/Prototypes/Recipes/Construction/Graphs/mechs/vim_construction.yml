@@ -18,12 +18,12 @@
         - !type:VisualizerDataInt
           key: "enum.MechAssemblyVisuals.State"
           data: 1
-      - tag: PowerCage
-        name: construction-graph-component-power-cage
+      - tag: MechReactor # Sunrise-Edit — для сборки меха требуется реактор
+        name: construction-graph-component-mech-reactor # Sunrise-Edit
         store: battery-container
         icon:
-          sprite: Objects/Power/power_cages.rsi
-          state: small
+          sprite: _Sunrise/Objects/Power/mech_reactors.rsi # Sunrise-Edit
+          state: medium # Sunrise-Edit
       - tool: Screwing
         doAfter: 1
   - node: vim

@@ -82,21 +82,21 @@
         map: ["base"]
     - type: Input
       context: human
-#    - type: ToggleableGhostRole
-#      examineTextMindPresent: positronic-brain-installed
-#      examineTextMindSearching: positronic-brain-still-searching
-#      examineTextNoMind: positronic-brain-off
-#      beginSearchingText: positronic-brain-searching
-#      roleName: positronic-brain-role-name
-#      roleDescription: positronic-brain-role-description
-#      roleRules: ghost-role-information-silicon-rules
-#      mindRoles:
-#      - MindRoleGhostRoleSilicon
-#      wipeVerbText: positronic-brain-wipe-device-verb-text
-#      wipeVerbPopup: positronic-brain-wiped-device
-#      stopSearchVerbText: positronic-brain-stop-searching-verb-text
-#      stopSearchVerbPopup: positronic-brain-stopped-searching
-#      job: Borg
+    - type: ToggleableGhostRole
+      examineTextMindPresent: positronic-brain-installed
+      examineTextMindSearching: positronic-brain-still-searching
+      examineTextNoMind: positronic-brain-off
+      beginSearchingText: positronic-brain-searching
+      roleName: positronic-brain-role-name
+      roleDescription: positronic-brain-role-description
+      roleRules: ghost-role-information-silicon-rules
+      mindRoles:
+      - MindRoleGhostRoleSilicon
+      wipeVerbText: positronic-brain-wipe-device-verb-text
+      wipeVerbPopup: positronic-brain-wiped-device
+      stopSearchVerbText: positronic-brain-stop-searching-verb-text
+      stopSearchVerbPopup: positronic-brain-stopped-searching
+      job: Borg
     - type: BlockMovement
     - type: Examiner
     - type: BorgBrain

@@ -62,5 +62,7 @@ ent-BoxHardsuitChameleon = chameleon hardsuit box
     .desc = Contains a folded chameleon hardsuit. Packaging disintegrates when opened, leaving no evidence behind.
 ent-ChameleonSilentShoesBox = chameleon silent shoes kit
     .desc = Contains a pair of stealth chameleon shoes. Packaging disintegrates when opened, leaving no evidence behind.
+ent-SunriseMechReactorBurnoutBox = burnout reactor box
+    .desc = A reinforced delivery box containing a burnout-class mech reactor. The packaging disintegrates when opened.
 ent-LMGUraniumAmmoKit = uranium ammunition kit for the L6 SAW
     .desc = { ent-BoxCardboard.desc }

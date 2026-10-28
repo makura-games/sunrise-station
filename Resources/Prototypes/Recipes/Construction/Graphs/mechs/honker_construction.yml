@@ -70,12 +70,12 @@
 #i omitted the steps involving inserting machine parts because
 #currently mechs don't support upgrading. add them back in once that's squared away.
 
-      - tag: PowerCage
-        name: construction-graph-component-power-cage
+      - tag: MechReactor # Sunrise-Edit — для сборки меха требуется реактор
+        name: construction-graph-component-mech-reactor # Sunrise-Edit
         store: battery-container
         icon:
-          sprite: Objects/Power/power_cages.rsi
-          state: small
+          sprite: _Sunrise/Objects/Power/mech_reactors.rsi # Sunrise-Edit
+          state: medium # Sunrise-Edit
         completed:
         - !type:VisualizerDataInt
           key: "enum.MechAssemblyVisuals.State"
