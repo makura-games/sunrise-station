@@ -1,8 +1,8 @@
 #shuttle walls
 - type: entity
   abstract: true
-  parent: BaseStructureWall
-  id: WallDiagonalBaseSunrise
+  parent: [BaseStructureWall, SunriseWallDamageVisualsBase]
+  id: SunriseWallDiagonalBase
   suffix: Diagonal
   components:
   - type: Tag
