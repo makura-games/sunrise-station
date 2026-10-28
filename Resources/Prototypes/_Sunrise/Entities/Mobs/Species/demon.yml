@@ -99,6 +99,8 @@
             state: jumpsuit-female
   - type: Perishable
   - type: FootprintEmitter
+  - type: Scent
+    personalScentProfile: SunriseDemon
 
 - type: entity
   save: false

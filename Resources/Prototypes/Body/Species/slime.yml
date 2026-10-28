@@ -199,6 +199,8 @@
     rightBareFootState:
       - "footprint-right-bare-slime"
   - type: Interactions
+  - type: Scent
+    personalScentProfile: SunriseSlime
   # Sunrise end
 
 - type: entity

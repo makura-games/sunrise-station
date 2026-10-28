@@ -94,7 +94,8 @@
   - type: FootprintEmitter
     leftBareFootState: [ footprint-left-bare-spider ]
     rightBareFootState: [ footprint-right-bare-spider ]
-
+  - type: Scent
+    personalScentProfile: SunriseSwine
 - type: entity
   save: false
   name: Urist McHands
