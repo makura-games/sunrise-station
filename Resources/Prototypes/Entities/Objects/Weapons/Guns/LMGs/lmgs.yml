@@ -100,12 +100,21 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-3
+    - state: mag-5 # Sunrise-Edit
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 4
+    steps: 6 # Sunrise-Edit
     zeroVisible: true
+  # Sunrise edit start - механика ленточного питания
+  - type: ChamberMagazineAmmoProvider
+    boltOpenOnEmpty: false
+  - type: BeltFeed
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        swap: false
+  # Sunrise edit end
   - type: Appearance
   - type: StaticPrice
     price: 10000

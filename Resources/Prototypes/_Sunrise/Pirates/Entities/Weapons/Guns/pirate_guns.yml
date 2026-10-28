@@ -1,6 +1,6 @@
 # region LMGs
 - type: entity
-  parent: BaseWeaponLightMachineGun
+  parent: BaseWeaponBeltFedMachineGun
   id: WeaponLightMachineGunPirateCannon
   description: Kaboom!
   components:
@@ -41,9 +41,6 @@
         params:
           volume: -10
           pitch: 0.8
-      soundAutoEject:
-        path: /Audio/Weapons/Guns/MagOut/lmg_magout.ogg
-      autoEject: true
     - type: ItemSlots
       slots:
         gun_magazine:
@@ -84,7 +81,7 @@
 - type: entity
   id: WeaponMachineGunLCG
   name: light chain gun
-  parent: BaseWeaponLightMachineGun
+  parent: BaseWeaponBeltFedMachineGun
   description: Light machine gun with a high rate of fire and low recoil. Effective for firing on the move and suppressing advancing squads. The high rate of fire and heat reduce accuracy, and prolonged firing increases the chance of jamming.
   components:
   - type: Sprite
@@ -145,17 +142,12 @@
     delay: 0.75
   - type: GunRequiresWield
   - type: ChamberMagazineAmmoProvider
-    boltClosed: null
     soundRack:
       path: /Audio/_Sunrise/Weapons/Guns/LMGs/cocked.ogg
   - type: SpeedModifiedOnWield
     walkModifier: 1
     sprintModifier: 0.95
   - type: HeldSpeedModifier
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 3
-    pvsIncrease: 0.3
   - type: WeaponDismantleOnShoot
     dismantleChance: 0.002 # 50% chance per 300 shots
     dismantleDistance: 1

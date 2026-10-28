@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._Sunrise.Weapons.Ranged; // Sunrise-Edit - события механики ленточного питания.
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
@@ -96,6 +97,19 @@ public abstract partial class SharedGunSystem
     /// </summary>
     public void UseChambered(EntityUid uid, ChamberMagazineAmmoProviderComponent component, EntityUid? user = null)
     {
+        // Sunrise-Edit start - ленточное оружие использует собственный цикл передёргивания.
+        if (TryComp<BeltFeedComponent>(uid, out var beltFeed))
+        {
+            _beltFeed.TryCycle((uid, beltFeed), user);
+            return;
+        }
+        // Sunrise-Edit end
+
+        UseChamberedInternal(uid, component, user);
+    }
+
+    internal void UseChamberedInternal(EntityUid uid, ChamberMagazineAmmoProviderComponent component, EntityUid? user = null)
+    {
         if (component.BoltClosed == false)
         {
             ToggleBolt(uid, component, user);
@@ -158,7 +172,8 @@ public abstract partial class SharedGunSystem
 
         if (value)
         {
-            CycleCartridge(uid, component, user, appearance);
+            if (!HasComp<BeltFeedComponent>(uid)) // Sunrise-Edit - ленточное оружие требует отдельного передёргивания после закрытия крышки.
+                CycleCartridge(uid, component, user, appearance);
 
             if (user != null)
                 PopupSystem.PopupClient(Loc.GetString("gun-chamber-bolt-closed"), uid, user.Value);
@@ -172,7 +187,8 @@ public abstract partial class SharedGunSystem
         }
         else
         {
-            if (TryTakeChamberEntity(uid, out var chambered))
+            // Sunrise-Edit - открытие крышки ленточного питания не передёргивает затвор и не извлекает патрон.
+            if (!HasComp<BeltFeedComponent>(uid) && TryTakeChamberEntity(uid, out var chambered))
             {
                 if (_netManager.IsServer)
                 {
@@ -195,7 +211,8 @@ public abstract partial class SharedGunSystem
 
             if (slots != null)
             {
-                _slots.SetLock(uid, ChamberSlot, false, slots);
+                // Sunrise-Edit - у ленточного оружия патрон извлекается передёргиванием без установленного короба.
+                _slots.SetLock(uid, ChamberSlot, HasComp<BeltFeedComponent>(uid), slots);
             }
 
             Audio.PlayPredicted(component.BoltOpenedSound, uid, user);
@@ -203,6 +220,11 @@ public abstract partial class SharedGunSystem
 
         component.BoltClosed = value;
         Dirty(uid, component);
+
+        // Sunrise-Edit start - синхронизация механизмов, зависящих от положения затвора.
+        var boltChanged = new BoltClosedChangedEvent(value);
+        RaiseLocalEvent(uid, ref boltChanged);
+        // Sunrise-Edit end
     }
 
     /// <summary>
@@ -402,7 +424,7 @@ public abstract partial class SharedGunSystem
                 }
 
                 // If no more ammo then open bolt.
-                if (relayedArgs.Ammo.Count == 0)
+                if (relayedArgs.Ammo.Count == 0 && component.BoltOpenOnEmpty) // Sunrise-Edit - ленточное оружие не открывает затвор автоматически.
                 {
                     SetBoltClosed(uid, component, false, user: args.User, appearance: appearance);
                 }

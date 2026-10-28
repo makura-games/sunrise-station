@@ -1,6 +1,19 @@
 - type: entity
-  name: MG-60
   parent: BaseWeaponLightMachineGun
+  id: BaseWeaponBeltFedMachineGun
+  abstract: true
+  components:
+  - type: ChamberMagazineAmmoProvider
+    boltOpenOnEmpty: false
+  - type: BeltFeed
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        swap: false
+
+- type: entity
+  name: MG-60
+  parent: BaseWeaponBeltFedMachineGun
   id: WeaponLightMachineGunMG60
   components:
   - type: Sprite
@@ -98,7 +111,7 @@
 
 - type: entity
   name: RPD
-  parent: BaseWeaponLightMachineGun
+  parent: BaseWeaponBeltFedMachineGun
   id: WeaponLightMachineGunRPD
   components:
   - type: Sprite
@@ -131,6 +144,7 @@
       gun_magazine:
         name: Magazine
         startingItem: MagazineLightRifleBeltBox
+        locked: true
         insertSound: /Audio/_Sunrise/Weapons/Guns/LMGs/reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/LMGs/unload.ogg
         priority: 2
@@ -139,7 +153,7 @@
           - LightRifleHeavy
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
+        startingItem: null
         priority: 1
         whitelist:
           tags:
@@ -169,7 +183,7 @@
 
 - type: entity
   name: MG-342
-  parent: BaseWeaponLightMachineGun
+  parent: BaseWeaponBeltFedMachineGun
   id: WeaponMachineGunMG42
   components:
   - type: Sprite
@@ -251,11 +265,11 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-3
+    - state: mag-5
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 4
+    steps: 6
     zeroVisible: true
   - type: Appearance
   - type: StaticPrice
