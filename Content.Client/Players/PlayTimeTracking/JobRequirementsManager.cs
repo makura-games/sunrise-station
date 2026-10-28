@@ -155,19 +155,10 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
 
         // Check other role requirements
         var reqs = _entManager.System<SharedRoleSystem>().GetRoleRequirements(job);
-        if (!CheckRoleRequirements(reqs, job.ID, profile, out reason))
+        // Sunrise edit start - проверяем расу для работ независимо от таймеров
+        if (!CheckRoleRequirements(reqs, job.ID, profile, out reason, checkSpecies: true))
             return false;
-
-        // Sunrise-Start
-        if (profile != null)
-        {
-            if (job.SpeciesBlacklist.Contains(profile.Species))
-            {
-                reason = FormattedMessage.FromUnformatted(Loc.GetString("species-job-fail", ("name", Loc.GetString($"species-name-{profile.Species.Id.ToLower()}"))));
-                return false;
-            }
-        }
-        // Sunrise-End
+        // Sunrise edit end
 
         return true;
     }
@@ -200,18 +191,28 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
     }
 
     // This must be private so code paths can't accidentally skip requirement overrides. Call this through IsAllowed()
-    private bool CheckRoleRequirements(HashSet<JobRequirement>? requirements, string protoId, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason) // Sunrise-Edit
+    // Sunrise edit start - отдельная проверка расы нужна только для работ
+    private bool CheckRoleRequirements(HashSet<JobRequirement>? requirements, string protoId, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason, bool checkSpecies = false)
+    // Sunrise edit end
     {
         reason = null;
 
-        if (requirements == null || !_cfg.GetCVar(CCVars.GameRoleTimers))
+        // Sunrise edit start - расовые требования действуют при выключенных таймерах
+        var checkTimers = _cfg.GetCVar(CCVars.GameRoleTimers);
+        if (requirements == null || (!checkTimers && !checkSpecies))
             return true;
 
         var sponsorPrototypes = _sponsorsMgr?.GetClientPrototypes().ToArray() ?? []; // Sunrise-Sponsors
+        // Sunrise edit end
 
         var reasons = new List<string>();
         foreach (var requirement in requirements)
         {
+            // Sunrise added start - без таймеров проверяем только расу
+            if (!checkTimers && requirement is not SpeciesRequirement)
+                continue;
+            // Sunrise added end
+
             if (requirement.Check(_entManager, _prototypes, profile, _roles, protoId, sponsorPrototypes, out var jobReason)) // Sunrise-Sponsors
                 continue;
 

@@ -10,6 +10,11 @@
   - !type:DepartmentTimeRequirement
     department: Science
     time: 10h
+  # Sunrise edit start - ограничение расы для должности
+  - !type:SpeciesRequirement
+    species: [Vox]
+    inverted: true
+  # Sunrise edit end
   weight: 10
   startingGear: ResearchDirectorGear
   icon: "JobIconResearchDirector"
@@ -34,8 +39,6 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-  speciesBlacklist:
-  - Vox # Sunrise-Edit
 
 - type: startingGear
   id: ResearchDirectorGear
