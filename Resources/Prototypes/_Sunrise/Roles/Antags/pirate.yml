@@ -1,0 +1,8 @@
+- type: antag
+  id: Pirate
+  name: roles-antag-pirate-name
+  antagonist: true
+  setPreference: false
+  playTimeTracker: AntagPirateCrew
+  objective: ghost-role-information-pirate-description
+  storytellerStress: 1

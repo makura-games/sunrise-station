@@ -1,6 +1,8 @@
 using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.Administration;
 using Content.Shared.Database;
+using Content.Shared.NPC.Prototypes;
+using Content.Shared.NPC.Systems;
 using Content.Shared.Verbs;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
@@ -18,9 +20,13 @@ namespace Content.Server.Administration.Systems;
 /// </summary>
 public sealed partial class AdminVerbSystem
 {
+    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+
     private static readonly EntProtoId DefaultAssaultOpsRule = "AssaultOps";
     private static readonly EntProtoId DefaultFleshCultRule = "FleshCult";
     private static readonly EntProtoId DefaultSELFRule = "SiliconLiberation";
+    private static readonly EntProtoId PirateMindRoleId = "MindRolePirate";
+    private static readonly ProtoId<NpcFactionPrototype> PirateFactionId = "Pirate";
     private static readonly SpriteSpecifier SelfAgentVerbIcon =
         new SpriteSpecifier.Rsi(new ResPath("/Textures/_Sunrise/Interface/Misc/self_icon.rsi"), "icon");
 
@@ -99,5 +105,24 @@ public sealed partial class AdminVerbSystem
             Message = Loc.GetString("admin-verb-make-selfagent"),
         };
         args.Verbs.Add(selfAgent);
+    }
+
+    private void MakePirate(EntityUid target)
+    {
+        _outfit.SetOutfit(target, PirateGearId);
+
+        _npcFaction.ClearFactions(target, dirty: false);
+        _npcFaction.AddFaction(target, PirateFactionId);
+
+        if (!_mindSystem.TryGetMind(target, out var mindId, out var mind))
+            return;
+
+        foreach (var role in mind.MindRoleContainer.ContainedEntities)
+        {
+            if (MetaData(role).EntityPrototype?.ID == PirateMindRoleId.Id)
+                return;
+        }
+
+        _role.MindAddRole(mindId, PirateMindRoleId, mind);
     }
 }
