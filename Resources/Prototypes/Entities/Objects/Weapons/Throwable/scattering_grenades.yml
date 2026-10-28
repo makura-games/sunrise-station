@@ -95,8 +95,9 @@
 - type: entity
   parent: [FragileGrenadeBase, ScatteringGrenadeBase, ImpactGrenadeBase, BaseSyndicateContraband]
   id: ClusterBananaPeel
-  name: cluster banana peel
-  description: Splits into 6 explosive banana peels after throwing, guaranteed fun!
+  suffix: cluster explosive, unarmed # Sunrise-Edit
+  name: banana # Sunrise-Edit
+  description: Rich in potassium. # Sunrise-Edit
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/banana.rsi
