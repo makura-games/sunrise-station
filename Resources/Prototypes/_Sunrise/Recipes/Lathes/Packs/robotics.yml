@@ -66,6 +66,24 @@
 - type: latheRecipePack
   id: SyndicateBorgModulesEmagSunrise
   recipes:
-  - BorgModuleSyndicateCombatAdvanced
-  - BorgModuleSyndicateHypoAdvanced
-  - BorgModuleSyndicatePenetration
+  - BorgModuleMartyr
+  - BorgModuleSyndicateWeapon
+  - BorgModuleC20r
+  - SunriseBorgModuleSyndicateAdvancedChemical
+  - SunriseBorgModuleSyndicateRescue
+  - SunriseBorgModuleSyndicateChameleonProjector
+  - SunriseBorgModuleSyndicateAdvancedTool
+  - SunriseBorgModuleSyndicatePaperwork
+
+- type: latheRecipePack
+  id: SyndicateBorgModulesEmagSecuritySunrise
+  recipes:
+  - BorgModuleMartyr
+  - BorgModuleSyndicateWeapon
+  - BorgModuleC20r
+  - SunriseBorgModuleL6M
+  - SunriseBorgModuleSyndicateAdvancedChemical
+  - SunriseBorgModuleSyndicateRescue
+  - SunriseBorgModuleSyndicateChameleonProjector
+  - SunriseBorgModuleSyndicateAdvancedTool
+  - SunriseBorgModuleSyndicatePaperwork

@@ -241,6 +241,66 @@
   - type: HeldSpeedModifier
 
 - type: entity
+  id: SunriseWeaponLightMachineGunL6M
+  parent: BaseItem
+  name: L6M COW
+  description: The name stands for "L6 Mounted Cyborg-Operated Weapon". An L6 SAW adapted for cyborg use while retaining its standard magazine-fed mechanism.
+  components:
+    - type: Sprite
+      sprite: Objects/Weapons/Guns/LMGs/l6.rsi
+      layers:
+        - state: base
+          map: [ "enum.GunVisualLayers.Base" ]
+        - state: mag-3
+          map: [ "enum.GunVisualLayers.Mag" ]
+    - type: Gun
+      minAngle: 4
+      maxAngle: 25
+      angleIncrease: 4
+      angleDecay: 16
+      fireRate: 8
+      selectedMode: FullAuto
+      availableModes:
+        - FullAuto
+      soundGunshot:
+        collection: m249 # Sunrise-Edit
+      soundEmpty:
+        path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    - type: Item
+      size: Huge
+    - type: ChamberMagazineAmmoProvider
+      soundRack:
+        path: /Audio/Weapons/Guns/Cock/lmg_cock.ogg
+    - type: ItemSlots
+      slots:
+        gun_magazine:
+          name: Magazine
+          startingItem: MagazineRifleBoxSP
+          insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+          ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+          priority: 2
+          whitelist:
+            tags:
+            - MagazineLightRifleBox
+        gun_chamber:
+          name: Chamber
+          startingItem: CartridgeRifleSP
+          priority: 1
+          whitelist:
+            tags:
+            - CartridgeRifle
+    - type: ContainerContainer
+      containers:
+        gun_magazine: !type:ContainerSlot
+        gun_chamber: !type:ContainerSlot
+    - type: MagazineVisuals
+      magState: mag
+      steps: 4
+      zeroVisible: true
+    - type: Appearance
+    - type: AmmoCounter
+
+- type: entity
   name: L6 MAX
   id: WeaponLightMachineGunL6Max
   parent: WeaponLightMachineGunL6
