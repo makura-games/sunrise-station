@@ -44,6 +44,9 @@
   id: CBURN
 
 - type: Tag
+  id: SunriseCBURNSpawnPoint
+
+- type: Tag
   id: Commission
 
 - type: Tag

@@ -22,8 +22,9 @@ using System.Linq;
 
 namespace Content.Server.GameTicking.Rules;
 
-public sealed partial class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
+public sealed partial class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent> // Sunrise-Edit
 {
+    // Базовая часть системы содержит основную логику зомби-раунда.
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private IGameTiming _timing = default!;
@@ -120,13 +121,18 @@ public sealed partial class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponen
         if (healthy.Count == 1) // Only one human left. spooky
             _popup.PopupEntity(Loc.GetString("zombie-alone"), healthy[0], healthy[0]);
 
-        if (GetInfectedFraction(false) > zombieRuleComponent.ZombieShuttleCallPercentage && !_roundEnd.IsRoundEndRequested())
+        // Sunrise start - additional checks
+        var infectedFraction = GetInfectedFraction(false);
+        CheckSunriseInfectedThresholds(zombieRuleComponent, infectedFraction);
+
+        if (infectedFraction >= zombieRuleComponent.ZombieShuttleCallPercentage && !_roundEnd.IsRoundEndRequested()) // Sunrise-Edit
+        // Sunrise end
         {
             foreach (var station in _station.GetStations())
             {
                 _chat.DispatchStationAnnouncement(station, Loc.GetString("zombie-shuttle-call"), colorOverride: Color.Crimson);
             }
-            _roundEnd.RequestRoundEnd(checkCooldown: false);
+            _roundEnd.RequestRoundEnd(checkCooldown: false, cantRecall: true); // Sunrise-Edit No Fun for Pedalka
         }
 
         // we include dead for this count because we don't want to end the round

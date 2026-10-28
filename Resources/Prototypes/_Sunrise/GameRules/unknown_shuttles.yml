@@ -45,6 +45,36 @@
     endAudio: /Audio/_Sunrise/Announcements/sunrise_outbreak5.ogg
   - type: LoadMapRule
     gridPath: "/Maps/_Sunrise/Shuttles/DSO/CBURN/ERT-Small-CBURN.yml"
+  - type: RuleGrids
+    spawnerWhitelist:
+      tags:
+      - SunriseCBURNSpawnPoint
+  - type: AntagLoadProfileRule
+  - type: AntagSelection
+    antags:
+    - !type:LinearAntagCount
+      proto: SunriseCBURN
+      playerRatio: 12
+      range:
+        min: 1
+        max: 8
+
+- type: antagSpecifier
+  parent: BaseAntagSpecifier
+  id: SunriseCBURN
+  spawnerPrototype: SpawnPointGhostSunriseCBURN
+  pickPlayer: false
+  startingGear: CBURNGearEVA
+  roleLoadout:
+  - RoleSurvivalEVA
+  components:
+  - type: RandomMetadata
+    nameSegments:
+    - NamesMilitaryFirst
+    - NamesMilitaryLast
+    nameFormat: name-format-ert
+  mindRoles:
+  - MindRoleGhostCorporateAligned
 
 - type: entity
   id: ERTShuttleAssaultAmber

@@ -9,6 +9,7 @@ using Content.Server.Station.Systems;
 using Content.Shared._Sunrise.AssaultOps.Icarus;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Station.Components;
+using Robust.Shared.Audio;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
@@ -27,6 +28,10 @@ namespace Content.Server._Sunrise.AssaultOps.Icarus;
 public sealed partial class IcarusTerminalSystem : EntitySystem
 {
     private const string IcarusBeamPrototypeId = "IcarusBeam";
+    private const string FallbackStationName = "NT SS14";
+
+    private static readonly SoundSpecifier IcarusAlertSound = new SoundPathSpecifier("/Audio/_Sunrise/AssaultOperatives/icarus_alarm.ogg");
+    private static readonly SoundSpecifier IcarusFireSound = new SoundPathSpecifier("/Audio/_Sunrise/AssaultOperatives/sunbeam_fire.ogg");
 
     [Dependency] private ChatSystem _chatSystem = default!;
     [Dependency] private IRobustRandom _robustRandom = default!;
@@ -246,6 +251,50 @@ public sealed partial class IcarusTerminalSystem : EntitySystem
         var entUid = Spawn(IcarusBeamPrototypeId, coords);
         _icarusSystem.LaunchInDirection(entUid, -offset.Normalized());
         return coords;
+    }
+
+    public MapCoordinates FireBeamOnStation(bool announce = false)
+    {
+        if (announce)
+        {
+            AnnounceIcarusFire(TimeSpan.Zero, true);
+            _audio.PlayGlobal(IcarusFireSound, Filter.Broadcast(), false);
+        }
+
+        return FireBeam(GetStationArea());
+    }
+
+    public void FireBeamOnStationDelayed(TimeSpan delay)
+    {
+        AnnounceIcarusFire(delay, true);
+
+        Timer.Spawn(delay, () =>
+        {
+            _audio.PlayGlobal(IcarusFireSound, Filter.Broadcast(), false);
+            FireBeam(GetStationArea());
+        });
+    }
+
+    private void AnnounceIcarusFire(TimeSpan delay, bool zombieOutbreak = false)
+    {
+        var stationName = GetStationName();
+
+        _chatSystem.DispatchGlobalAnnouncement(
+            Loc.GetString(zombieOutbreak ? "icarus-zombie-outbreak-announcement" : "icarus-fire-announcement", ("seconds", (int) delay.TotalSeconds),
+                ("station", stationName)),
+            Loc.GetString("icarus-announce-sender"),
+            false,
+            colorOverride: Color.Red);
+        _audio.PlayGlobal(IcarusAlertSound, Filter.Broadcast(), false);
+    }
+
+    private string GetStationName()
+    {
+        var targetStation = _stationSystem.GetStations().FirstOrNull();
+        if (targetStation != null)
+            return Name(targetStation.Value);
+
+        return FallbackStationName;
     }
 
     private void TryGetBeamSpawnLocation(Box2 area, out MapCoordinates coords,

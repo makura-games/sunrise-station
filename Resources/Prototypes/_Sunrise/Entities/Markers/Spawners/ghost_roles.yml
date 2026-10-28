@@ -70,3 +70,40 @@
       - state: green
       - sprite: Mobs/Animals/regalrat.rsi
         state: icon
+
+- type: entity
+  id: SpawnPointGhostSunriseCBURN
+  name: ghost role spawn point
+  suffix: CBURN
+  parent: BaseAntagSpawner
+  categories: [ HideSpawnMenu, Spawner ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-cburn-agent-name
+    description: ghost-role-information-cburn-agent-description
+    rules: ghost-role-information-nonantagonist-rules
+    raffle:
+      settings: short
+    mindRoles:
+    - MindRoleGhostCorporateAligned
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+    - state: cburn
+
+- type: entity
+  id: SpawnPointSunriseCBURN
+  name: CBURN spawn point
+  parent: MarkerBase
+  categories: [ HideSpawnMenu, Spawner ]
+  components:
+  - type: SpawnPoint
+  - type: Tag
+    tags:
+    - SunriseCBURNSpawnPoint
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+    - state: cburn
