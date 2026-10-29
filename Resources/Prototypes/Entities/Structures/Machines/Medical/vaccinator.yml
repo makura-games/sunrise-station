@@ -15,14 +15,10 @@
       shader: unshaded
       map: ["enum.DiseaseMachineVisualLayers.IsOn"]
   - type: Appearance
-  - type: DiseaseMachineVisuals
-    idleState: icon
-    runningState: running
   - type: Machine
     board: VaccinatorMachineCircuitboard
   - type: ContainerContainer
     containers:
       machine_board: !type:Container
       machine_parts: !type:Container
-      mixer: !type:ContainerSlot
   - type: RequireProjectileTarget
