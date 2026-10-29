@@ -12,7 +12,8 @@
 | `PUBLISH_TEST_FORK_ID` | Переменная GitHub; тестовая публикация | Идентификатор тестовой сборки, например `test_sunrise`. |
 | `PUBLISH_TOKEN` | Секрет GitHub; всегда | Ключ загрузки сборок на сервер раздачи. Вставьте только ключ, без слова `Bearer`. |
 | `MAKURA_PRIVATE_REPO` | Секрет GitHub; при включённом приватном содержимом | Имя закрытого репозитория в формате `владелец/репозиторий`, без адреса сайта и `.git`. |
-| `MAKURA_PRIVATE_REPO_SSH_KEY` | Секрет GitHub; вместе с предыдущим | Полный закрытый SSH-ключ с доступом на чтение этого репозитория, включая начальную и конечную строки ключа. |
+| `MAKURA_PRIVATE_APP_CLIENT_ID` | Секрет или переменная GitHub; вместе с предыдущим | Client ID приложения GitHub App с правами на чтение закрытого репозитория. |
+| `MAKURA_PRIVATE_APP_PRIVATE_KEY` | Секрет GitHub; вместе с предыдущим | Закрытый ключ (Private Key) приложения GitHub App в формате PEM, включая начальную и конечную строки ключа. |
 | `ANNOUNCE_UPDATE_DISCORD_WEBHOOK` | Секрет GitHub; для уведомления об обновлении Stable | Полный закрытый адрес отправки сообщений в нужный канал Discord. |
 | `ANNOUNCE_UPDATE_DISCORD_ROLE_ID` | Секрет GitHub; для того же уведомления | Числовой ID роли, которую нужно упомянуть. Без одного из двух значений уведомление пропускается. |
 
@@ -28,7 +29,7 @@
 | `COMMIT_HASH` | Поле запуска `commit_hash`: идентификатор версии кода из 40 символов, то есть полный хеш коммита. Пустое значение означает версию на момент запуска. |
 | `PRIVATE_COMMIT_HASH` | Поле `private_commit_hash`, а у Test — `private_ref`. Допускается полный хеш либо `master`/`stable`; пустое значение выбирает основную ветку закрытого репозитория. |
 | `USE_PRIVATE_CONTENT` | Поле `use_private_content`: `true` включает приватное содержимое, `false` выключает. |
-| `PRIVATE_REPOSITORY`, `PRIVATE_REPOSITORY_SSH_KEY` | Значения двух секретов `MAKURA_PRIVATE_REPO*` для проверки настроек перед сборкой. |
+| `PRIVATE_REPOSITORY`, `PRIVATE_APP_CLIENT_ID`, `PRIVATE_APP_PRIVATE_KEY` | Значения секретов и переменных `MAKURA_PRIVATE_*` для проверки настроек перед сборкой. |
 | `CURRENT_REF_NAME`, `CURRENT_REF_TYPE` | Имя выбранной ветки и тип ссылки. Для обычного запуска без хеша разрешены ветки `master` и `stable`. |
 | `SERVER_PLATFORMS` | Список систем, для которых собирается сервер, например `--platform linux-x64`. Выбирается сценарием публикации. |
 | `DISCORD_WEBHOOK_URL`, `DISCORD_ROLE_ID`, `BUILD_PATH` | Адрес Discord, роль и путь к архиву. [Подробности уведомления](../how-to-env.md). |
