@@ -122,10 +122,12 @@
     unwieldOnUse: false
   - type: GunWieldBonus
     minAngle: -19
-    maxAngle: -16
+    maxAngle: -12
   - type: Gun
     minAngle: 21
     maxAngle: 32
+    angleIncrease: 1.25
+    angleDecay: 20
     shotsPerBurst: 5
     availableModes:
     - Burst
@@ -204,10 +206,12 @@
       unwieldOnUse: false
     - type: GunWieldBonus
       minAngle: -19
-      maxAngle: -16
+      maxAngle: -14
     - type: Gun
       minAngle: 21
       maxAngle: 32
+      angleIncrease: 1.5
+      angleDecay: 16
       fireRate: 6
       burstFireRate: 18
       soundGunshot:
@@ -272,17 +276,19 @@
     sprite: Objects/Weapons/Guns/SMGs/wt550.rsi
   - type: ChamberMagazineAmmoProvider
     boltClosed: null
-  - type: Wieldable # Sunrise-start
+  # Sunrise-start
+  - type: Wieldable
     unwieldOnUse: false
   - type: GunWieldBonus
-    minAngle: -1
-    maxAngle: -15 # Sunrise-end
+    minAngle: 0
+    maxAngle: -6
+  # Sunrise-end
   - type: Gun
     fireRate: 5.5
-    minAngle: 3 # Sunrise-edit
-    maxAngle: 20  # Sunrise-edit
-    angleIncrease: 1
-    angleDecay: 15  # Sunrise-edit
+    minAngle: 1
+    maxAngle: 16
+    angleIncrease: 1.5
+    angleDecay: 12
     selectedMode: FullAuto
     shotsPerBurst: 5
     burstCooldown: 0.2

@@ -3884,10 +3884,6 @@
     - id: WeaponEarthGovLaserCarbine
       prob: 0.3
       orGroup: SMGLaserPool
-    - id: MagazineBatteryLr60
-      prob: 0.6
-    - id: MagazineBatteryLr60
-      prob: 0.4
     # Items
     - id: PirateMedSpawner03
     - id: ClothingOuterHardsuitPrivateer

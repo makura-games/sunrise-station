@@ -18,6 +18,8 @@
   - type: Gun
     minAngle: 21
     maxAngle: 32
+    angleIncrease: 1.25
+    angleDecay: 14
     fireRate: 9
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/SMGs/p90_shot.ogg
@@ -131,7 +133,9 @@
   - type: Gun
     minAngle: 21
     maxAngle: 32
-    fireRate: 15
+    angleIncrease: 2.5
+    angleDecay: 16
+    fireRate: 12
     selectedMode: FullAuto
     availableModes:
     - SemiAuto
@@ -264,9 +268,9 @@
     maxAngle: -22
   - type: Gun
     minAngle: 7
-    maxAngle: 66
-    angleIncrease: 2
-    angleDecay: 22
+    maxAngle: 46
+    angleIncrease: 1.75
+    angleDecay: 18
     fireRate: 7
     selectedMode: FullAuto
     soundGunshot:
@@ -400,6 +404,8 @@
     fireRate: 10
     minAngle: 21
     maxAngle: 32
+    angleIncrease: 2
+    angleDecay: 18
     shotsPerBurst: 3
     burstFireRate: 22
     selectedMode: Burst

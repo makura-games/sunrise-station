@@ -919,6 +919,23 @@
       - LoneOpsUplink
 
 - type: listing
+  id: UplinkGrenadeBuckshot
+  name: uplink-grenade-buckshot-name
+  description: uplink-grenade-buckshot-desc
+  icon: { sprite: /Textures/_Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi, state: buck }
+  productEntity: GrenadeBuckshot
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+
+- type: listing
   id: UplinkMagazineGrenadeFrag
   name: uplink-grenade-launcher-frag-extended-ammo-name
   description: uplink-grenade-launcher-frag-extended-ammo-desc
@@ -2943,7 +2960,7 @@
   id: UplinkGrenadeLauncherM79
   name: uplink-grenade-launcher-m79-name
   description: uplink-grenade-launcher-m79-desc
-  icon: { sprite: _RMC14/Objects/Weapons/Guns/Launchers/m79/big.rsi, state: base }
+  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Launchers/m79_x48.rsi, state: icon }
   productEntity: BriefcaseWeaponM79Filled
   discountCategory: veryRareDiscounts
   discountDownTo:
@@ -2964,7 +2981,7 @@
   id: UplinkGrenadeLauncherGL70
   name: uplink-sunrise-grenade-launcher-gl70-name
   description: uplink-sunrise-grenade-launcher-gl70-desc
-  icon: { sprite: _Sunrise/Objects/Weapons/Guns/HMGs/gl-64/big.rsi, state: icon }
+  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Launchers/gl70/big.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherGL70
   discountCategory: veryRareDiscounts
   discountDownTo:
@@ -3480,20 +3497,6 @@
     Telecrystal: 10
   cost:
     Telecrystal: 12
-  categories:
-  - UplinkWeaponry
-
-- type: listing
-  id: UplinkWeaponBreachingHammer
-  name: uplink-SyndieBreachingHammer-name
-  description: uplink-SyndieBreachingHammer-desc
-  productEntity: SyndieBreachingHammer
-  icon: { sprite: _Sunrise/Objects/Weapons/Melee/syndie_breaching_hammer.rsi, state: icon }
-  discountCategory: rareDiscounts
-  discountDownTo:
-    Telecrystal: 5
-  cost:
-    Telecrystal: 7
   categories:
   - UplinkWeaponry
 

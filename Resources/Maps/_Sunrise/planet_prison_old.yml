@@ -43167,8 +43167,8 @@ entities:
         - !type:ListingLimitedStockCondition
           stock: 1
         icon:
-          sprite: /Textures/_RMC14/Objects/Weapons/Guns/Launchers/m79/big.rsi
-          state: base
+          sprite: /Textures/_Sunrise/Objects/Weapons/Guns/Launchers/m79_x48.rsi
+          state: icon
         priority: 0
         productAction: null
         applyToMob: False
@@ -45981,8 +45981,8 @@ entities:
         discountDownTo: {}
         disableRefund: False
         costModifiersBySourceId: {}
-      - id: ERTUplinkWeaponGrenadeLauncherGL70Flash
-        productEntity: WeaponGrenadeLauncherGL70Flash
+      - id: ERTUplinkWeaponGrenadeLauncherSecurityRevolver
+        productEntity: WeaponGrenadeLauncherSecurityRevolver
         name: null
         discountCategory: null
         description: null
@@ -55134,8 +55134,8 @@ entities:
             sizes: null
             components: null
         icon:
-          sprite: _RMC14/Objects/Weapons/Guns/Launchers/m79/big.rsi
-          state: base
+          sprite: _Sunrise/Objects/Weapons/Guns/Launchers/m79_x48.rsi
+          state: icon
         priority: 0
         productAction: null
         applyToMob: False
@@ -65097,6 +65097,7 @@ entities:
     - type: Transform
       parent: 5
     - type: Clothing
+      slots: INNERCLOTHING
       sprite: Clothing/Uniforms/Jumpsuit/color.rsi
       clothingVisuals:
         jumpsuit:

@@ -26,7 +26,6 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineBatteryLr30
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
@@ -39,7 +38,8 @@
     containers:
       gun_magazine: !type:ContainerSlot
   - type: Gun
-    fireRate: 4.5
+    projectileSpeed: 18
+    fireRate: 4
     selectedMode: FullAuto
     availableModes:
       - SemiAuto
@@ -74,7 +74,6 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineBatteryLr30 #MagazineBatteryLr60
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
@@ -93,6 +92,7 @@
     containers:
       gun_magazine: !type:ContainerSlot
   - type: Gun
+    projectileSpeed: 25
     fireRate: 6
     shotsPerBurst: 2
     burstFireRate: 10
@@ -166,7 +166,14 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/m16a4.rsi
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -18
   - type: Gun
+    minAngle: 21
+    maxAngle: 32
+    angleIncrease: 1.25
+    angleDecay: 12
     burstFireRate: 12
     shotsPerBurst: 3
     burstCooldown: 0.55
@@ -226,7 +233,14 @@
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/L10.rsi
   - type: Item
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/L10.rsi
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -18
   - type: Gun
+    minAngle: 21
+    maxAngle: 32
+    angleIncrease: 2.5
+    angleDecay: 8
     fireRate: 3.5
     selectedMode: SemiAuto
     availableModes:

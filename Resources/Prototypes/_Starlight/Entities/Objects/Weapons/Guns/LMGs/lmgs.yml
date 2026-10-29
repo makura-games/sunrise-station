@@ -26,12 +26,16 @@
     steps: 4
     zeroVisible: true
   - type: Gun
-    minAngle: 10
-    maxAngle: 35
-    angleIncrease: 0.75
-    angleDecay: 15
+    minAngle: 4
+    maxAngle: 30
+    angleIncrease: 1.25
+    angleDecay: 18
     fireRate: 6
   - type: Appearance
+  - type: ClothingSpeedModifier
+    walkModifier: 0.85
+    sprintModifier: 0.85
+  - type: HeldSpeedModifier
   # - type: RestrictByEquippedTag # Need Port from starlight #https://github.com/ss14Starlight/space-station-14/pull/1104
   #   requiredTag: "RequiredForLmgTag"
   #   denialMessage: "lmg-restricted-to-hardsuit-message"
@@ -129,13 +133,16 @@
           tags:
             - CartridgeHeavyRifleR
   - type: ClothingSpeedModifier
-    walkModifier: 1
-    sprintModifier: 0.85
+    walkModifier: 0.75
+    sprintModifier: 0.75
   - type: HeldSpeedModifier
+  - type: GunWieldBonus
+    minAngle: -16
+    maxAngle: -20
   - type: Gun
     minAngle: 20
-    maxAngle: 27
-    angleIncrease: 2
+    maxAngle: 35
+    angleIncrease: 1
     angleDecay: 10
     fireRate: 5
     soundGunshot:

@@ -1308,7 +1308,14 @@ ClothingHandsPowerGlovesUplinkNTERTGamma: null
 ClothingHandsPowerGlovesUplinkNTERTGammaLeader: null
 ClothingHandsPowerGlovesUplinkNTERTCBURN: null
 ClothingHandsPowerGlovesUplinkNTERTEpsilon: null
+# 2026-10-01
+WeaponDecloner: null
+ClothingOuterVestWebSec: null
 DrinkDarkRedRumBottleFull: DrinkRedRumBottleFull
 # 2026-09-10
 ClothingOuterArmorBlueShield: null
+MagazineBatteryLr60: null
+# 2026-10-11
+SecBreachingHammer: SunriseDetonatorBundleSpawner
+SyndieBreachingHammer: SunriseDetonatorBundleSpawner
 # region Sunrise-End

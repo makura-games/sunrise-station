@@ -48522,6 +48522,7 @@ entities:
       parent: 6627
     - type: Clothing
       inSlot: back
+      slots: BACK
       inSlotFlag: BACK
     - type: Physics
       canCollide: False
@@ -48587,6 +48588,7 @@ entities:
       parent: 6627
     - type: Clothing
       inSlot: eyes
+      slots: EYES
       inSlotFlag: EYES
     - type: Physics
       canCollide: False
@@ -49065,6 +49067,7 @@ entities:
       parent: 6627
     - type: Clothing
       inSlot: neck
+      slots: NECK
       inSlotFlag: NECK
     - type: Physics
       canCollide: False
@@ -49404,6 +49407,7 @@ entities:
       parent: 6627
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: SuitSensor
       user: 6627
@@ -132455,6 +132459,7 @@ entities:
       parent: 6627
     - type: Clothing
       inSlot: suitstorage
+      slots: SUITSTORAGE
       inSlotFlag: SUITSTORAGE
     - type: Physics
       canCollide: False

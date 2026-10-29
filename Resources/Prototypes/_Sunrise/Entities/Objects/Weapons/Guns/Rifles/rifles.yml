@@ -106,12 +106,12 @@
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/m16a4/tiny.rsi
   - type: GunWieldBonus
     minAngle: -20
-    maxAngle: -45
+    maxAngle: -35
   - type: Gun
     minAngle: 23
-    maxAngle: 90
+    maxAngle: 55
     angleIncrease: 1.25
-    angleDecay: 20
+    angleDecay: 14
     fireRate: 6
     burstFireRate: 9
     selectedMode: Burst
@@ -308,7 +308,14 @@
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Base/tiny.rsi
   - type: Item
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Base/tiny.rsi
+  - type: GunWieldBonus
+    minAngle: -18
+    maxAngle: -18
   - type: Gun
+    minAngle: 21
+    maxAngle: 40
+    angleIncrease: 2
+    angleDecay: 10
     fireRate: 4.45
     selectedMode: FullAuto
     availableModes:
@@ -514,12 +521,12 @@
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Base/tiny.rsi
   - type: GunWieldBonus
     minAngle: -28
-    maxAngle: -50
+    maxAngle: -35
   - type: Gun
     minAngle: 30
-    maxAngle: 65
+    maxAngle: 50
     angleIncrease: 1.5
-    angleDecay: 15
+    angleDecay: 12
     fireRate: 4
     shotsPerBurst: 3
     selectedMode: Burst

@@ -68,3 +68,5 @@ ent-ClothingBeltMilitaryWebbingMedRaidFilled = raider military webbing
     .desc = A tactical belt harness worn by Raider operatives, with an additional durathread covering to keep chemicals secure in combat conditions.
 ent-ClothingSovietBandolier = soviet bandolier
     .desc = Smells like oil, sweat, and questionable decisions.
+ent-SunriseClothingBeltGrenadeLauncherBandolier = grenade launcher bandolier
+    .desc = A bandolier with grenade pouches and a separate attachment for a grenade launcher.

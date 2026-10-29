@@ -159,9 +159,9 @@
     mask: ClothingMaskGasSyndicate
     eyes: ClothingEyesHudSyndicate
     ears: ClothingHeadsetAltSyndicate
-    gloves: ClothingHandsGlovesCombatCQC
+    gloves: ClothingHandsGlovesCombatCQC # Sunrise-Edit
     outerClothing: ClothingOuterHardsuitSyndieBiocode # Sunrise-Edit
-    shoes: ClothingShoesBootsCombatFilled
+    shoes: ClothingShoesBootsMagSyndie
     id: SyndiOperativePDA
     pocket2: PlushieCarp
     belt: ClothingBeltMilitaryWebbing
@@ -174,18 +174,9 @@
 #Nuclear Operative Gear
 - type: startingGear
   id: SyndicateOperativeGearFull
-  #parent: SyndicateOperativeGearFullNoUplink
+  parent: SyndicateOperativeGearFullNoUplink
   equipment:
-    jumpsuit: ClothingUniformJumpsuitOperative
-    back: ClothingBackpackDuffelSyndicate
-    shoes: ClothingShoesBootsCombatFilled
-    id: SyndiOperativePDA
-    pocket1: BaseUplinkRadio0TC # Sunrise-Edit
-  storage:
-    back:
-    - WeaponPistolViper
-    - PinpointerSyndicateNuclear
-    - DeathAcidifierImplanter
+    pocket2: BaseUplinkRadio0TC # Sunrise-Edit
 
 - type: chameleonOutfit
   id: NukeopsOutfit
@@ -204,10 +195,10 @@
     id: SyndiCommanderPDA
     neck: SyndicateWhistle
     #outerClothing: ClothingOuterHardsuitSyndieCommanderBiocode # Sunrise-Edit
-    pocket1: BaseUplinkRadio0TC # Sunrise-Edit
+    pocket1: RemoteNukeOpShuttleController # Sunrise-Add
+    pocket2: BaseUplinkRadio0TC # Sunrise-Edit
   inhand:
   - NukeOpsDeclarationOfWar
-  - RemoteNukeOpShuttleController # Sunrise-Edit
 
 - type: chameleonOutfit
   id: NukeopsCommanderOutfit

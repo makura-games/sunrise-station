@@ -157,6 +157,9 @@
   id: GasTank
 
 - type: Tag
+  id: SunriseGrenadeLauncherBandolierCompatible
+
+- type: Tag
   id: Nanopaste
 
 - type: Tag

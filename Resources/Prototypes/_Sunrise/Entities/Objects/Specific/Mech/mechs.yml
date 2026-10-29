@@ -458,7 +458,7 @@
     baseState: paddy
     openState: paddy-open
     brokenState: paddy-broken
-    mechToPilotDamageMultiplier: 0.0
+    mechToPilotDamageMultiplier: 0.05
     airtight: true
     maxEquipmentAmount: 4
     #siren: true # Todo: port siren system from starlight
@@ -466,7 +466,7 @@
       components:
         - HumanoidProfile
   - type: Reflect
-    reflectProb: 0.05
+    reflectProb: 0.01
     spread: 180
     soundOnReflect: /Audio/_Starlight/Armor/Ricochet/ricochet1_1.ogg
     reflects:
@@ -474,13 +474,12 @@
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
+    bluntStaminaDamageFactor: 2 # Raised from 1.5 to give it more nonlethal capacity.
     damage:
       types:
-        Blunt: 22
-        Structural: 10
-    bluntStaminaDamageFactor: 1.5
+        Blunt: 20 # Lowered from 30 to 20 to emphasize it to be nonlethal and put it onpar with a truncheon.
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2.5
+    baseWalkSpeed: 2
     baseSprintSpeed: 4
   - type: PointLight
     mask: /Textures/Effects/LightMasks/cone.png

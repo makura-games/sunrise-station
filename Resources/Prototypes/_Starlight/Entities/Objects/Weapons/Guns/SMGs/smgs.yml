@@ -53,8 +53,8 @@
     fireRate: 12
     minAngle: 1
     maxAngle: 25
-    angleIncrease: 8
-    angleDecay: 5
+    angleIncrease: 4
+    angleDecay: 14
     selectedMode: FullAuto
     shotsPerBurst: 4
     availableModes:
@@ -110,8 +110,9 @@
   - type: Gun
     fireRate: 9
     minAngle: 32
-    angleIncrease: 3
     maxAngle: 64
+    angleIncrease: 4
+    angleDecay: 8
     selectedMode: FullAuto
     availableModes:
       - FullAuto
@@ -191,6 +192,7 @@
     minAngle: 16
     angleIncrease: 3
     maxAngle: 32
+    angleDecay: 12
   - type: Appearance
   - type: Construction
     graph: ImprovisedSMGGraph
@@ -240,8 +242,9 @@
   - type: Gun
     fireRate: 5
     minAngle: 16
-    angleIncrease: 3
     maxAngle: 32
+    angleIncrease: 2
+    angleDecay: 14
   - type: Appearance
   - type: WeaponDismantleOnShoot
     dismantleChance: 0

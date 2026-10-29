@@ -85,7 +85,7 @@
         - id: WeaponTemperatureGun
 
 - type: entity
-  parent: GunSafeSuperweaponSecureGamma
+  parent: GunSafeSuperweaponBaseSecure
   id: GunSafeSuperDMR
   name: Larker safe
   components:

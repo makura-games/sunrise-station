@@ -26,6 +26,8 @@
   - type: Sprite
     sprite: _Sunrise/Clothing/Pouches/large_explosive.rsi
     layers:
+    - map: [ base ]
+      state: icon
     - map: [ closed ]
       state: closed
     - map: [ open ]
@@ -34,9 +36,12 @@
   - type: GenericVisualizer
     visuals:
       enum.StorageVisuals.Open:
-        open:
+        closed:
           True: { visible: false }
           False: { visible: true }
+        open:
+          True: { visible: true }
+          False: { visible: false }
   - type: Storage
     maxItemSize: Normal
     grid:
@@ -107,6 +112,8 @@
   - type: Sprite
     sprite: _Sunrise/Clothing/Pouches/medium_ammo_mag.rsi
     layers:
+    - map: [ base ]
+      state: icon
     - map: [ closed ]
       state: closed
     - map: [ open ]
@@ -115,9 +122,12 @@
   - type: GenericVisualizer
     visuals:
       enum.StorageVisuals.Open:
-        open:
+        closed:
           True: { visible: false }
           False: { visible: true }
+        open:
+          True: { visible: true }
+          False: { visible: false }
   - type: Storage
     maxItemSize: Small
     grid:

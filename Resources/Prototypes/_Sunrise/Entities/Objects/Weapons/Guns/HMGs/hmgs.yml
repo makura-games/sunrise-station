@@ -12,9 +12,9 @@
     sprite: _Sunrise/Objects/Weapons/Guns/HMGs/minigun/tiny.rsi
     size: Ginormous
   - type: Gun
-    minAngle: 10
-    maxAngle: 120
-    angleIncrease: 1 #3 секунды стрельбы до точности имперского штурмовика =3
+    minAngle: 8
+    maxAngle: 75
+    angleIncrease: 1.5 # Примерно 3 секунды стрельбы до максимального разброса.
     angleDecay: 40
     fireRate: 12
     selectedMode: FullAuto
@@ -130,8 +130,8 @@
   - type: Gun
     minAngle: 5
     maxAngle: 80
-    angleIncrease: 1.5
-    angleDecay: 40
+    angleIncrease: 3
+    angleDecay: 30
     fireRate: 8
     selectedMode: FullAuto
     availableModes:
@@ -151,9 +151,6 @@
   - type: UseDelay
     delay: 0.5
   - type: GunRequiresWield
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.9
-    sprintModifier: 0.9
   - type: StaticPrice
     price: 7500
   - type: DisarmMalus
@@ -189,8 +186,8 @@
     proto: CartridgeLightRifleFMJ
     capacity: 900
   - type: ClothingSpeedModifier
-    walkModifier: 0.85
-    sprintModifier: 0.85
+    walkModifier: 0.75
+    sprintModifier: 0.75
   - type: Storage
     maxItemSize: Huge
     grid:
