@@ -1,5 +1,19 @@
 # Tier 2
 
+- type: technology
+  id: ArtificialBluecrystal
+  name: research-technology-artificial-bluecrystal
+  icon:
+    sprite: _Sunrise/Objects/Specific/bluecrystal.rsi
+    state: bluecrystal
+  discipline: Experimental
+  tier: 3 # not enought t3 for beint t4, just not shown in the tech tree
+  cost: 20000
+  recipeUnlocks:
+  - ArtificialBluecrystal
+  technologyPrerequisites:
+  - BluespaceTimeManipulation
+
 
 # Tier 3
 - type: technology

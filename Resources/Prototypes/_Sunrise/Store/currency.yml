@@ -16,7 +16,7 @@
   id: Crystallite
   displayName: store-currency-display-crystallite
   cash:
-    1: Crystallite1
+    1: ArtificialBluecrystal1
   canWithdraw: true
 
 - type: currency

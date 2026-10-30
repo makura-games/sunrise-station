@@ -1,12 +1,6 @@
-ent-Bluecrystal = блюспейс кристалл
-    .desc = Похоже, он переливается манящей энергией.
-    .suffix = 100 БК
-ent-Bluecrystal1 = { ent-Bluecrystal }
-    .desc = { ent-Bluecrystal.desc }
+ent-Bluecrystal = блюспейс-кристалл
+    .desc = Кристалл переливается блюспейс-энергией. При расколе он высвобождает пространственный импульс.
+    .suffix = 3 БК
+ent-Bluecrystal1 = блюспейс-кристалл
+    .desc = Кристалл переливается блюспейс-энергией. При расколе он высвобождает пространственный импульс.
     .suffix = 1 БК
-ent-Bluecrystal10 = { ent-Bluecrystal }
-    .desc = { ent-Bluecrystal.desc }
-    .suffix = 10 БК
-ent-Bluecrystal25 = { ent-Bluecrystal }
-    .desc = { ent-Bluecrystal.desc }
-    .suffix = 25 БК

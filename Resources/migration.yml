@@ -863,9 +863,6 @@ CratePartsT3: null
 CratePartsT3T4: null
 CratePartsT4: null
 
-#2027-07-17
-# WeaponRifleM90GrenadeLauncher: null # Sunrise-Edit - прототип сохранён для Sunrise-контента
-
 # region Sunrise-Start
 AirlockExternalGlassShuttleArrivals: AirlockExternalGlassShuttleArrivalsLocked
 AirlockHatchCentcommLocked: AirlockCentralCommandLocked
@@ -1223,7 +1220,7 @@ BlueprintMagAsh12Slug: BlueprintMagAsh12Basic
 BlueprintMagAsh12Beanbag: null
 BlueprintMagAsh12Flare: null
 ClothingBackpackDuffelWeaponRifleAsh12: Ash12Box
-WeaponRifleM90GrenadeLauncherBiocode: WeaponRifleM90GrenadeLauncher
+WeaponRifleM90GrenadeLauncherBiocode: null
 ClothingOuterEliteHardsuitUSSP: null
 GasMinerPlasma: null
 # 2026-08-14
@@ -1295,7 +1292,6 @@ CrateArmoryMP5: null
 ClothingBackpackDuffelWeaponSubMachineGunMP5Filled: null
 MagazineMP5: MagazinePistolHighCapacitySP
 MagazineMP5Extended: MagazinePistolHighCapacitySP
-# удаление и блок возможности замапить аплинки, чтобы Store не сериализовал каталоги в карты.
 BaseUplinkRadio: null
 BaseUplinkRadio20TC: null
 BaseUplinkRadio25TC: null
@@ -1324,7 +1320,14 @@ ClothingHandsPowerGlovesUplinkNTERTEpsilon: null
 DrinkDarkRedRumBottleFull: DrinkRedRumBottleFull
 # 2026-09-10
 ClothingOuterArmorBlueShield: null
-
+# 2026-10-06
+Bluecrystal10: null
+Bluecrystal15: null
+Bluecrystal25: null
+Crystallite: null
+Crystallite1: null
+Crystallite25: null
+Crystallite50: null
 WallRiveted: WallReinforced
 # region Sunrise-End
 
@@ -1364,7 +1367,7 @@ WallBasaltCobblebrick: WallConcrete
 WallIce: WallRockSnow
 
 #2026-07-17
-# WeaponRifleM90GrenadeLauncher: null # Sunrise-Edit - прототип сохранён для Sunrise-контента
+WeaponRifleM90GrenadeLauncher: null
 
 # 2026-07-18
 SheetGlassLingering0: null

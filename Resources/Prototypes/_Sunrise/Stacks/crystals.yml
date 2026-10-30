@@ -1,14 +1,22 @@
 - type: stack
+  id: BluecrystalOre
+  name: stack-rough-bluecrystal
+  icon: { sprite: _Sunrise/Objects/Materials/ore.rsi, state: bluespace }
+  spawn: BluecrystalOre1
+
+- type: stack
   id: Bluecrystal
   name: construction-graph-tag-blue-crystal
   icon: Objects/Specific/Syndicate/telecrystal.rsi
   spawn: Bluecrystal1
+  maxCount: 3
 
 - type: stack
-  id: Crystallite
-  name: construction-graph-tag-crystallite
-  icon: Objects/Specific/Syndicate/telecrystal.rsi
-  spawn: Crystallite1
+  id: ArtificialBluecrystal
+  name: construction-graph-tag-artificial-blue-crystal
+  icon: _Sunrise/Objects/Specific/artificialbluecrystal.rsi
+  spawn: ArtificialBluecrystal1
+  maxCount: 3
 
 - type: stack
   id: Doubloon

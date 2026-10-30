@@ -64,6 +64,14 @@
   minOreYield: 1
   maxOreYield: 2
 
+# Sunrise-Start Add
+- type: ore
+  id: OreBluecrystal
+  oreEntity: BluecrystalOre1
+  minOreYield: 1
+  maxOreYield: 1
+# Sunrise-End Add
+
 - type: ore
   id: OreQuartzCrab
   oreEntity: MobSpawnCrabQuartz
@@ -119,6 +127,11 @@
     OreSilver: 1
     OreUranium: 1
     OreArtifactFragment: 0.5
+    # Sunrise-start
+    OreBananium: 0.33
+    OreDiamond: 0.33
+    OreBluecrystal: 0.33
+    # Sunrise-end
 
 - type: weightedRandomOre
   id: OreCrab
@@ -130,7 +143,7 @@
     OreCoalCrab: 5
     OreGoldCrab: 2
     #Sunrise-Start
-    OreSaltCrab: 5
+    OreSaltCrab: 3
     OrePlasmaCrab: 2
     OreDiamondCrab: 1
     #Sunrise-End

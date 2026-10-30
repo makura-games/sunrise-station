@@ -11,7 +11,10 @@
     OreUranium: 0.20
     OreArtifactFragment: 0.10
     OreBananium: 0.10
-    OreDiamond: 0.03 # Sunrise-Edit - сохраняем алмазную руду Sunrise
+    # Sunrise-start
+    OreDiamond: 0.03
+    OreBluecrystal: 0.10
+    # Sunrise-end
 
 - type: oreDunGen
   id: OreIron
@@ -92,6 +95,14 @@
   count: 2
   minGroupSize: 1
   maxGroupSize: 3
+
+- type: oreDunGen
+  id: OreBluecrystal # Sunrise-Edit
+  replacement: AsteroidRock
+  entity: AsteroidRockBluecrystal
+  count: 6
+  minGroupSize: 3
+  maxGroupSize: 6
 
 - type: oreDunGen
   id: OreArtifactFragment
