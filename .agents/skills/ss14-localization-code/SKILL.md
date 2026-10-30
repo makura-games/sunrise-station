@@ -87,7 +87,7 @@ var text = _loc.GetString("my-key");
 
 ### 🚫 Anti-pattern: String concatenation
 Never concatenate localized strings with variables via `+` or `$` (interpolation).
-Word order differs in different languages ​​(SVO vs SOV). Fluent supports safe argument substitution.
+Word order differs in different languages (SVO vs SOV). Fluent supports safe argument substitution.
 
 ```csharp
 // ❌ BAD: Breaks the grammar of other languages

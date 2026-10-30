@@ -13,7 +13,7 @@ Events are the primary way of communication between systems and entities in Spac
 For local events (within a single client or server), use a simple `struct` or `class` structure.
 * **Structs**: Preferred for high frequency events (e.g. `MoveEvent`, `DamageEvent`) to avoid GC load. 🏎️
 * **Classes**: Use for complex data or events that require inheritance (e.g. `ExamineEvent`). 📚
-* **Naming**: The `Event` suffix is ​​required (for example, `DoorOpenedEvent`).
+* **Naming**: The `Event` suffix is required (for example, `DoorOpenedEvent`).
 
 ```csharp
 // Simple event structure

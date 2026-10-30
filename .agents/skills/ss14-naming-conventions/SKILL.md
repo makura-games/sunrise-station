@@ -95,7 +95,10 @@ Use it as a guideline: if new code/content doesn't follow the rules below, it's 
 1. MUST: `yml/ftl/swsl` — `snake_case`.
 2. SHOULD: maximum 2 words if the context is already expressed by folders.
 3. MUST: C# file in `CamelCase`, the name matches the key class.
-4. SHOULD: if there are several classes/partial parts in the file, the file name describes the subsection in a maximum of 2 words.
+4. MUST: a partial extending an upstream type mirrors the upstream file:
+   - with an upstream section → `<UpstreamFile>.<Section>.<Fork>.cs`;
+   - without an upstream section → `<UpstreamFile>.<Fork>.cs`;
+   - a fork extension large enough to need its own partial → `<UpstreamFile>.<Fork>.<Specific>.cs`.
 
 ## Decision Tree
 
@@ -116,11 +119,11 @@ Use it as a guideline: if new code/content doesn't follow the rules below, it's 
 
 1. `ClickableComponent` + `ClickableSystem` with a common base part.
 2. `- type: Clickable` in YAML instead of `ClickableComponent`.
-3. Alias ​​`IGameTiming` as `_timing`.
-4. Alias ​​`IRobustRandom` as `_random`.
-5. Alias ​​`TransformSystem` as `_transform`.
-6. Alias ​​`IPlayerManager` as `_player`.
-7. Alias ​​`EntityWhitelistSystem` as `_whitelist`.
+3. Alias `IGameTiming` as `_timing`.
+4. Alias `IRobustRandom` as `_random`.
+5. Alias `TransformSystem` as `_transform`.
+6. Alias `IPlayerManager` as `_player`.
+7. Alias `EntityWhitelistSystem` as `_whitelist`.
 8. ID in the style `Scp096CryOut` with a clear domain prefix.
 9. Fork ID with the prefix `Sunrise*` for unique fork content.
 10. `ent-BasePart = body part` as a short external name of the entity.

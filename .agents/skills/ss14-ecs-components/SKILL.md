@@ -59,7 +59,7 @@ Marks a field for deserialization from YAML prototypes. The field name in YAML i
 
 ```csharp
 [DataField]
-public float BaseSpeed = 5f;  // → baseSpeed ​​in YAML
+public float BaseSpeed = 5f;  // → baseSpeed in YAML
 
 [DataField(required: true)]
 public EntProtoId EntityId;   // Required, error if not specified
@@ -82,7 +82,7 @@ public EntProtoId EntityId;   // Required, error if not specified
 > public int Counter;        // → counter in YAML
 >
 > [DataField]
-> public float BaseSpeed;    // → baseSpeed ​​in YAML
+> public float BaseSpeed;    // → baseSpeed in YAML
 > ```
 
 > **⚠️ Anti-pattern: DataField on runtime fields**
@@ -112,7 +112,7 @@ public EntProtoId EntityId;   // Required, error if not specified
 >
 > // ✅ Correct - DataField is only for the configuration from the prototype
 > [DataField]
-> public float MaxSpeed ​​= 8f;  // Configured in YAML
+> public float MaxSpeed = 8f;  // Configured in YAML
 >
 > [DataField]
 > public TimeSpan RageDuration = TimeSpan.FromMinutes(4);  // Configured in YAML
@@ -345,7 +345,7 @@ public sealed partial class TargetMarkerComponent : Component
 2. **Inherit from `Component`** - not from other components
 3. **No logic** - only data fields. No methods, properties just for easy access
 4. **XML documentation** - each public field must have a `/// <summary>` comment
-5. **Reasonable defaults** - fields should have default values ​​so that the prototype can omit optional fields
+5. **Reasonable defaults** - fields should have default values so that the prototype can omit optional fields
 6. **`[NonSerialized]` for runtime data** - audio streams, cached links to entities, temporary data
 7. **Organizing Fields** - Use `#region` blocks to group related fields in large components
 8. **`[DataField]` only for YAML configuration** - do not put on runtime fields (`EntityUid`, timestamps, caches)

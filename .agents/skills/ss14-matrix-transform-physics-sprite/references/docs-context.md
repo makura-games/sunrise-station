@@ -17,7 +17,7 @@
 
 ### Transform (Entity Coordinates)
 
-- The idea of ​​relative entity coordinates to the parent is emphasized.
+- The idea of relative entity coordinates to the parent is emphasized.
 - The importance of the correct parent-link when moving is explained.
 - Practical correction to the code: in matrix problems, system world/inv-world matrices and ready-made combined methods are taken so as not to rebuild the chain manually.
 
@@ -29,7 +29,7 @@
 
 ### Transform (Physics)
 
-- Docs describe the idea of ​​local reference systems in physics and the need for consistent rotation/position.
+- Docs describe the idea of local reference systems in physics and the need for consistent rotation/position.
 - Practical code correction: with broadphase/lookup, `GetRelativePhysicsTransform(...)` is critical, which returns transform already in the desired reference frame.
 
 ### Rendering (Sprites and Icons)

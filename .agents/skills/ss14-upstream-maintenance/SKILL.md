@@ -18,7 +18,7 @@ After the active fork is determined, keep all new fork-owned code in that fork's
 > **Minimizing changes to vanilla files is MORE IMPORTANT than "pretty" architecture.**
 > It's better to leave the "dirty" hack in one line of the vanilla file than to rewrite half the system, creating hell when merging.
 
-## � Folder structure and Project Folder
+## 📁 Folder structure and Project Folder
 
 To clearly separate vanilla code from our modifications, a special project folder is used, starting with the symbol `_` (for example, `_Sunrise`, `_Scp`).
 
@@ -101,8 +101,10 @@ If you need to add a **new field, property or method** to an existing class or s
 Instead, create a `partial` class in your project folder (`_Scp`, `_Sunrise`, `_Starlight`).
 
 **Pattern:**
-1. Find the vanilla class (eg `SharedScp106System`).
-2. Create a file in your folder: `Content.Shared/_Scp/Scp106/Systems/SharedScp106System.Abilities.cs`.
+1. Find the upstream file that owns the behavior being extended.
+2. Mirror its name:
+   - `<UpstreamFile>.cs` → `<UpstreamFile>.<Fork>.cs`;
+   - `<UpstreamFile>.<Section>.cs` → `<UpstreamFile>.<Section>.<Fork>.cs`.
 3. Declare the class as `partial` with the same namespace.
 4. **Important:** Suppress the namespace mismatch warning if necessary.
 
@@ -117,12 +119,12 @@ public abstract partial class SharedScp106System : EntitySystem
 }
 ```
 
-*Your file (`Content.Shared/_Scp/Scp106/Systems/SharedScp106System.Store.cs`):*
+*Your file (`Content.Shared/_Scp/Scp106/Systems/SharedScp106System.Fire.cs`):*
 ```csharp
 using Content.Shared.Scp106.Systems; // We use vanilla namespace
 
 // We suppress warning, since the file is physically located in another folder
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Scp106.Systems;
 
 public abstract partial class SharedScp106System
@@ -168,7 +170,7 @@ Add an entry to the end of the file or to the appropriate section.
 ```yaml
 # ... existing migrations ...
 
-# Sunrise-Edit
+# Sunrise edit
 AirlockHatchSyndicate: AirlockHatchSyndicateLocked
 ```
 

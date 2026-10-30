@@ -167,7 +167,7 @@ public override IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, stri
 ### ❌ 1. Using Postgres-specific types in general logic
 **Bad**: Trying to store `NpgsqlInet` or an array of strings directly into `ServerDbBase` without checking the engine.
 **Why**: This will break SQLite since it doesn't know these types.
-**How ​​to**: Use abstract methods or ValueConverters.
+**How to**: Use abstract methods or ValueConverters.
 
 ### ❌ 2. Synchronous database calls (`.Result`, `.Wait()`)
 **Bad**: `db.DbContext.SaveChangeAsync().Result;`
@@ -177,7 +177,7 @@ public override IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, stri
 ### ❌ 3. Loading the entire table into memory
 **Bad**: `var allUsers = db.Player.ToList();` then filtering `allUsers.Where(...)`.
 **Why**: A table can contain tens of thousands of records. This will kill memory and CPU.
-**How ​​to**: Filter **before** request materialization: `db.Player.Where(...).ToListAsync();`.
+**How to**: Filter **before** request materialization: `db.Player.Where(...).ToListAsync();`.
 
 ### ❌ 4. Lack of indexes for frequent queries
 **Bad**: Search for player by `LastSeenUserName` without index on this field.

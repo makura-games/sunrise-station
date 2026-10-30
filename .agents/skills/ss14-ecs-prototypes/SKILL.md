@@ -13,7 +13,7 @@ If the naming example differs from `ss14-naming-conventions`, use `ss14-naming-c
 
 ## What is Prototype
 
-A prototype is a YAML data definition that the engine loads upon initialization. Prototypes describe entities, recipes, reagents, and other game objects. Entity prototypes determine what components and with what values ​​the entity will have when created.
+A prototype is a YAML data definition that the engine loads upon initialization. Prototypes describe entities, recipes, reagents, and other game objects. Entity prototypes determine what components and with what values the entity will have when created.
 
 ## ID format - quick reminder (see ss14-naming-conventions)
 
@@ -303,7 +303,7 @@ public sealed partial class MyInheritingPrototype : IPrototype, IInheritingProto
 [Prototype(loadPriority: -1)]      // Download priority
 ```
 
-The type `type` in YAML is calculated from the class name: `MyTriggerPrototype` → `MyTrigger` (the `Prototype` suffix is ​​discarded).
+The type `type` in YAML is calculated from the class name: `MyTriggerPrototype` → `MyTrigger` (the `Prototype` suffix is discarded).
 
 ## Links to prototypes in code
 

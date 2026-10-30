@@ -347,9 +347,9 @@ For each pair (entity, client), the server stores:
 
 | Field | Description |
 |------|----------|
-| `LastSeen` | Tick ​​when the entity was last sent to the client |
-| `LastLeftView` | Tick ​​when the entity left the client's PVS |
-| `EntityLastAcked` | Tick ​​of the last state confirmed by the client that included this entity |
+| `LastSeen` | Tick when the entity was last sent to the client |
+| `LastLeftView` | Tick when the entity left the client's PVS |
+| `EntityLastAcked` | Tick of the last state confirmed by the client that included this entity |
 
 ### PvsSession (per-session)
 

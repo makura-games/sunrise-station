@@ -18,7 +18,7 @@ Keep your focus on fresh code and check its relevance through `git log`/`git bla
 ## General scheme of NPC work
 
 1. `NPCSystem` updates only active NPCs (`ActiveNPCComponent`) and limits the update budget (`npc.max_updates`).
-2. `HTNSystem` schedules the behavior through the time-sliced ​​job queue (`HTNPlanJob`) and executes the current plan.
+2. `HTNSystem` schedules the behavior through the time-sliced job queue (`HTNPlanJob`) and executes the current plan.
 3. `HTNPlanJob` expands the tree `HTNCompoundTask` -> `HTNPrimitiveTask`, selecting branch by preconditions.
 4. `HTNOperator.Plan()` evaluates the validity of the step and can return `effects` for blackboard.
 5. `HTNOperator.Startup()/Update()/TaskShutdown()` performs runtime logic.

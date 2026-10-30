@@ -27,7 +27,7 @@ If the task is about the lifecycle of overlays, `OverlaySpace`, render target an
 1. The shader prototype defines `kind` and default parameters.
 2. SWSL is parsed into `uniform`/`varying`/`const`/functions + include dependencies.
 3. The engine wraps the code in a `default` or `raw` template and adds a common library of functions.
-4. During rendering, `ShaderInstance` receives parameter values ​​from C# and is applied to the draw-call.
+4. During rendering, `ShaderInstance` receives parameter values from C# and is applied to the draw-call.
 
 ## SWSL language: what is supported
 

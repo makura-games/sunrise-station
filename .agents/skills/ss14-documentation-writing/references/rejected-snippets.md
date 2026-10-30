@@ -3,7 +3,7 @@
 | Zone | What's found | Why rejected | Signal |
 |---|---|---|---|
 | XML docs | Invalid closing tag `</summarY>` | Breaks XML documentation and auto-generation of tooltips | Tag error |
-| Language | Doc comments in Russian/mixed language in code | English is accepted for project documentation | Violation of locale standard |
+| Language | Multiple languages in a newly authored fork-owned documentation block; a translated or rewritten upstream comment | An upstream block keeps its language, a fork-owned block is read in one language | Merge noise / mixed language |
 | Callsite docs | Non-standard API call without explanation (`ignore*` flags) | Behavior is not obvious during review and refactoring | Hidden special-case |
 | Code comments | TODO comment as a replacement for behavior documentation | This is technical debt, not a reliable contract | `TODO/HACK/FIXME` |
 | YAML comments | Long multi-line "prologues" at the beginning of the prototype file | Prototypes require brevity, maximum 1 sentence of explanation | Wall of text |
