@@ -24,7 +24,7 @@
     <File Path="README.md" />
   </Folder>
   <Project Path="Content.Benchmarks/Content.Benchmarks.csproj" />
-  <Project Path="Content.Client/Content.Client.csproj" />
+  <!-- <Project Path="Content.Client/Content.Client.csproj" /> --> <!-- Sunrise edit -->
   <Project Path="Content.IntegrationTests/Content.IntegrationTests.csproj" />
   <Project Path="Content.MapRenderer/Content.MapRenderer.csproj" />
   <Project Path="Content.Packaging/Content.Packaging.csproj" />
@@ -34,18 +34,13 @@
   </Project>
   <Project Path="Content.Replay/Content.Replay.csproj" />
   <Project Path="Content.Server.Database/Content.Server.Database.csproj" />
-  <Project Path="Content.Server/Content.Server.csproj" />
+  <!-- <Project Path="Content.Server/Content.Server.csproj" /> --> <!-- Sunrise edit -->
   <Project Path="Content.Shared.Database/Content.Shared.Database.csproj" />
-  <Project Path="Content.Shared/Content.Shared.csproj" />
+  <!-- <Project Path="Content.Shared/Content.Shared.csproj" /> --> <!-- Sunrise edit -->
   <Project Path="Content.Tests/Content.Tests.csproj" />
   <Project Path="Content.Tools/Content.Tools.csproj" />
   <Project Path="Content.YAMLLinter/Content.YAMLLinter.csproj" />
   <Project Path="Pow3r/Pow3r.csproj" />
-  <Folder Name="/Sunrise/">
-    <Project Path="Sunrise/Content.Sunrise.Interfaces.Shared/Content.Sunrise.Interfaces.Shared.csproj" />
-    <Project Path="Sunrise/Content.Sunrise.Interfaces.Client/Content.Sunrise.Interfaces.Client.csproj" />
-    <Project Path="Sunrise/Content.Sunrise.Interfaces.Server/Content.Sunrise.Interfaces.Server.csproj" />
-  </Folder>
   <Folder Name="/RobustToolbox/.github/workflows/">
     <File Path="RobustToolbox/.github/workflows/benchmarks.yml" />
     <File Path="RobustToolbox/.github/workflows/build-all-configurations.yml" />
@@ -171,4 +166,16 @@
     </Project>
     <File Path="RobustToolbox/RobustToolbox.slnx" />
   </Folder>
+  <!-- Sunrise added start -->
+  <Folder Name="/Sunrise/">
+    <Project Path="Sunrise/Content.Sunrise.Interfaces.Client/Content.Sunrise.Interfaces.Client.csproj" />
+    <Project Path="Sunrise/Content.Sunrise.Interfaces.Server/Content.Sunrise.Interfaces.Server.csproj" />
+    <Project Path="Sunrise/Content.Sunrise.Interfaces.Shared/Content.Sunrise.Interfaces.Shared.csproj" />
+  </Folder>
+  <Folder Name="/Game Content/">
+    <Project Path="Content.Client/Content.Client.csproj" />
+    <Project Path="Content.Server/Content.Server.csproj" />
+    <Project Path="Content.Shared/Content.Shared.csproj" />
+  </Folder>
+  <!-- Sunrise added end -->
 </Solution>
