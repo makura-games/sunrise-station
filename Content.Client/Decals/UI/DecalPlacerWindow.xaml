@@ -13,6 +13,12 @@
         <BoxContainer Orientation="Vertical">
             <ColorSelectorSliders Name="ColorPicker" IsAlphaVisible="True" />
             <Button Name="PickerOpen" Text="{Loc 'decal-placer-window-palette'}" />
+            <!-- Sunrise added start -->
+            <BoxContainer Orientation="Horizontal" Margin="0 5 0 0">
+                <Label Text="HEX:" />
+                <LineEdit Name="HexInput" HorizontalExpand="True" />
+            </BoxContainer>
+            <!-- Sunrise added end -->
         </BoxContainer>
         <CheckBox Name="EnableAuto" Text="{Loc 'decal-placer-window-enable-auto'}" Margin="0 0 0 10"/>
         <CheckBox Name="EnableColor" Text="{Loc 'decal-placer-window-use-color'}" />
