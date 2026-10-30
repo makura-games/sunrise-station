@@ -2,12 +2,13 @@
   parent: CrateSyndicate
   id: CrateSyndicateShuttleBundle
   name: shuttle bundle crate
-  description: Everything but the shuttle board. It's a shuttle in a crate* (Some assembly required)
+  description: A bundle with everything needed to assemble a syndicate shuttle. (Some assembly required)
   components:
   - type: EntityTableContainerFill
     containers:
       entity_storage: !type:AllSelector
         children:
+        - id: SyndicateShuttleConsoleCircuitboard
         - id: GyroscopeFlatpack
         - id: ThrusterFlatpack
           amount: 4
