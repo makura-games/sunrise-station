@@ -442,10 +442,12 @@ public sealed partial class ShuttleSystem
         comp.StateTime = StartEndTime.FromCurTime(_gameTiming, DefaultArrivalTime);
         comp.State = FTLState.Arriving;
 
+        // Sunrise edit start
         var xform = _xformQuery.GetComponent(entity.Owner);
-        DoSunriseFtlThrow(xform, Direction.North.ToVec()); // Sunrise-Edit - бросаем до смены поворота шаттла при выходе из FTL.
+        DoSunriseFtlThrow(xform, Direction.North.ToVec()); // Бросаем до смены поворота шаттла при выходе из FTL.
+        // Sunrise edit end
 
-        if (entity.Comp1.VisualizerProto != null)
+        if (entity.Comp1.VisualizerProto != null && FtlTargetIsValid(comp)) // Sunrise edit - скип если координаты не валидны
         {
             comp.VisualizerEntity = SpawnAttachedTo(entity.Comp1.VisualizerProto, entity.Comp1.TargetCoordinates);
             DebugTools.Assert(Transform(comp.VisualizerEntity.Value).ParentUid == entity.Comp1.TargetCoordinates.EntityId);
@@ -492,9 +494,11 @@ public sealed partial class ShuttleSystem
                 .OrderBy(o => o.Item1.MapId.GetHashCode());
 
             // Get the first map that passes the FTL whitelist
-            mapId = maps.First(o =>
+            // Sunrise edit start - если подходящей карты нет, шаттл остаётся в гиперпространстве
+            mapId = maps.FirstOrDefault(o =>
                 _whitelistSystem.IsWhitelistPassOrNull(o.Item2.Whitelist, entity))
-                .Item1.MapId;
+                .Item1?.MapId ?? xform.MapID;
+            // Sunrise edit end
 
             TryFTLProximity(uid, _mapSystem.GetMap(mapId));
         }

@@ -241,6 +241,15 @@ public sealed partial class ShuttleSystem
     }
 
     /// <summary>
+    /// Проверяет, что цель FTL ещё существует.
+    /// </summary>
+    /// <returns><see langword="true"/>, если исходная цель была валидной.</returns>
+    private bool FtlTargetIsValid(FTLComponent ftl)
+    {
+        return ftl.TargetCoordinates.IsValid(EntityManager);
+    }
+
+    /// <summary>
     /// Бросает незакреплённые динамические сущности вдоль движения FTL.
     /// </summary>
     private void DoSunriseFtlThrow(TransformComponent xform, Vector2 throwDirection)
