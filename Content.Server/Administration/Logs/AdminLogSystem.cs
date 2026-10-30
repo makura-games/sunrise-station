@@ -1,5 +1,6 @@
 ﻿using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;
+using Robust.Shared.Asynchronous;
 
 namespace Content.Server.Administration.Logs;
 
@@ -10,6 +11,7 @@ namespace Content.Server.Administration.Logs;
 public sealed partial class AdminLogSystem : EntitySystem
 {
     [Dependency] private IAdminLogManager _adminLogs = default!;
+    [Dependency] private ITaskManager _task = default!; // Sunrise added - для адекватного завершения отправки админлогов в связке с VictoriaLogs
 
     public override void Initialize()
     {
@@ -27,6 +29,7 @@ public sealed partial class AdminLogSystem : EntitySystem
     public override void Shutdown()
     {
         base.Shutdown();
-        _adminLogs.Shutdown();
+
+        _task.BlockWaitOnTask(_adminLogs.Shutdown()); // Sunrise edit - для адекватного завершения отправки админлогов в связке с VictoriaLogs
     }
 }
