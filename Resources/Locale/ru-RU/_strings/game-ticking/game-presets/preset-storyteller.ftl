@@ -113,11 +113,15 @@ storyteller-metadata-snailmigrationlowpop-start = Тихие коридоры н
 storyteller-metadata-slimesspawnhorde-start = Утечка биоопасных отходов привела к появлению агрессивных разноцветных слаймов.
 storyteller-metadata-snakespawnhorde-start = Из заброшенных уголков станции выползли полчища ядовитых змей.
 storyteller-metadata-spiderspawnhorde-start = Глубокие технические шахты заполнились паутиной: началось нашествие гигантских пауков.
+storyteller-metadata-holocarpspawn-start = Редспейс неисправность в голопадах привели к масовому появлению голокарпов на станции.
 
 # Disasters
 storyteller-metadata-gamerulemeteorswarmsmall-start = Навигационные системы предупреждают о приближении небольшого метеоритного роя.
 storyteller-metadata-gamerulemeteorswarmmedium-start = Внимание: станция входит в зону плотного метеоритного потока. Возможно повреждение обшивки.
 storyteller-metadata-gamerulemeteorswarmlarge-start = Критическая метеоритная угроза! Крупный астероидный рой обрушился на станцию!
+storyteller-metadata-radiationoutburst-start = Показания счетчика Гейгера зашкаливают! некоторые вещи на станции получили небольшой радиционый фон!
+storyteller-metadata-radiationstorm-start = Показания счетчика Гейгера зашкаливают! в коридорах станции появляется радиационный осадок!
+
 
 # Antagonists & Threats (Literary starting events)
 storyteller-metadata-bloodcult-start = Древнее зло зашептало во тьме: среди экипажа зародились фанатичные последователи [color=#8B0000]Кровавого культа[/color].
