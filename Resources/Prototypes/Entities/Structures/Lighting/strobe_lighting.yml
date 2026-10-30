@@ -76,9 +76,39 @@
   suffix: Empty
   parent: AlwaysPoweredStrobeLight
   components:
+  # Sunrise edit start - добавление спрайтов и эффекта искр
   - type: Sprite
     sprite: Structures/Wallmounts/Lighting/strobe_light.rsi
-    state: empty
+    layers:
+    - map: ["enum.PoweredLightLayers.Base"]
+      state: empty
+    - map: ["sunrisePoweredLightOn"]
+      state: base
+      visible: false
+    - map: ["enum.PoweredLightLayers.Glow"]
+      state: glow
+      shader: unshaded
+    - map: ["sunrisePoweredLightFlicker"]
+      sprite: _Sunrise/Structures/Wallmounts/lighting/strobe_light_sparks.rsi
+      state: spark-light1
+      shader: unshaded
+      visible: false
+    - map: ["sunrisePoweredLightSparks"]
+      sprite: _Sunrise/Structures/Wallmounts/lighting/strobe_light_sparks.rsi
+      state: spark-sparks1
+      shader: unshaded
+      visible: false
+  - type: SunrisePoweredLightSparks
+    sparkSprite: _Sunrise/Structures/Wallmounts/lighting/strobe_light_sparks.rsi
+    flickerSound:
+      collection: SunriseFluorescentFlicker
+      params:
+        maxDistance: 6
+    states:
+    - spark-light1
+    sparkStates:
+    - spark-sparks1
+  # Sunrise edit end
   - type: AmbientSound
     enabled: false
   - type: PointLight
