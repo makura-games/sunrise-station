@@ -1,0 +1,111 @@
+- type: species
+  id: IPC
+  name: species-name-IPC
+  roundStart: true
+  prototype: MobIPC
+  bodyTypes:
+  - IPCNormal
+  dollPrototype: MobIPCDummy
+  skinColoration: Hues
+  maleFirstNames: names_ipc
+  naming: First
+  youngAge: 1
+  oldAge: 1000
+  maxAge: 3000
+  buttScan:
+    sprite: /Textures/_Sunrise/CopyMachine/butts_scans.rsi
+    state: human
+
+- type: bodyType
+  id: IPCNormal
+  name: body-normal
+  visualKey: body-normal
+  layers:
+    Head:
+      sprite: _Sunrise/Mobs/Species/IPC/parts.rsi
+      state: head_m
+    Chest:
+      sprite: _Sunrise/Mobs/Species/IPC/parts.rsi
+      state: torso_m
+    LArm:
+      sprite: _Sunrise/Mobs/Species/IPC/parts.rsi
+      state: l_arm
+    RArm:
+      sprite: _Sunrise/Mobs/Species/IPC/parts.rsi
+      state: r_arm
+    LHand:
+      sprite: _Sunrise/Mobs/Species/IPC/parts.rsi
+      state: l_hand
+    RHand:
+      sprite: _Sunrise/Mobs/Species/IPC/parts.rsi
+      state: r_hand
+    LLeg:
+      sprite: _Sunrise/Mobs/Species/IPC/parts.rsi
+      state: l_leg
+    RLeg:
+      sprite: _Sunrise/Mobs/Species/IPC/parts.rsi
+      state: r_leg
+    LFoot:
+      sprite: _Sunrise/Mobs/Species/IPC/parts.rsi
+      state: l_foot
+    RFoot:
+      sprite: _Sunrise/Mobs/Species/IPC/parts.rsi
+      state: r_foot
+  sexLayers:
+    Male:
+      Head:
+        sprite: _Sunrise/Mobs/Species/IPC/parts.rsi
+        state: head_m
+      Chest:
+        sprite: _Sunrise/Mobs/Species/IPC/parts.rsi
+        state: torso_m
+    Female:
+      Head:
+        sprite: _Sunrise/Mobs/Species/IPC/parts.rsi
+        state: head_f
+      Chest:
+        sprite: _Sunrise/Mobs/Species/IPC/parts.rsi
+        state: torso_f
+- type: markingsGroup
+  id: IPC
+  onlyGroupWhitelisted: true
+  limits:
+    enum.HumanoidVisualLayers.Hair:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Chest:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Head:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 1
+      required: false

@@ -41,6 +41,9 @@
     sprite: Objects/Tools/crowbar.rsi
     size: Small
   # Sunrise start
+  - type: Retractor
+  - type: SurgeryTool
+    speed: 1.5
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Sunrise/Items/Handling/crowbar_pickup.ogg

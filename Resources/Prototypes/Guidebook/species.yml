@@ -4,22 +4,25 @@
   text: "/ServerInfo/Guidebook/_Sunrise/Mobs/Species.xml"  # Sunrise-Edit
   children:
   - Arachnid
-  - Demon # Sunrise-Add
   - Diona
   - Dwarf
-  - Felinid # Sunrise-Add
   - Human
-  - HumanoidXeno # Sunrise-Add
-  - Milira # Sunrise-Add
   - Moth
-  - Predator # Sunrise-Add
   - Reptilian
-  - Resomi # Sunrise-Add
   - SlimePerson
-  - Swine # Sunrise-Add
-  - Tajaran # Sunrise-Add
   - Vox
   - Vulpkanin
+  # Sunrise-Edit-Start
+  - Demon
+  - Felinid
+  - HumanoidXeno
+  - Milira
+  - Predator
+  - Resomi
+  - Swine
+  - Tajaran
+  - IPC
+  # Sunrise-Edit-End
 
 - type: guideEntry
   id: Arachnid
@@ -106,5 +109,10 @@
   id: Felinid
   name: species-name-felinid
   text: "/ServerInfo/Guidebook/_Sunrise/Mobs/Felinid.xml"
+
+- type: guideEntry
+  id: IPC
+  name: species-name-IPC
+  text: "/ServerInfo/Guidebook/_Sunrise/Mobs/IPC.xml"
 
 # Sunrise-End

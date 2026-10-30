@@ -30,6 +30,7 @@
   - Demon
   - SlimePerson
   - Dwarf
+  - IPC
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
@@ -80,6 +81,7 @@
   - Tajaran
   - Demon
   - SlimePerson
+  - IPC
   - Dwarf
   parent: NtrLeader
   components:

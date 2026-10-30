@@ -6,3 +6,4 @@ chat-radio-ussp-com = СССП Командование
 chat-radio-deathsquad = Эскадрон
 chat-radio-ert = Отряд
 chat-radio-pirate = Пираты
+chat-radio-ipc = Частная частота

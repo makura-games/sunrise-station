@@ -1,0 +1,17 @@
+﻿{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made by Ascal 0.2",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        { "name": "torso", "directions": 4 },
+        { "name": "torso_f", "directions": 4 },
+        { "name": "torso_m", "directions": 4 },
+        { "name": "torso_f_1", "directions": 4 },
+        { "name": "torso_m_1", "directions": 4 },
+        { "name": "torso_w", "directions": 4 }
+    ]
+}

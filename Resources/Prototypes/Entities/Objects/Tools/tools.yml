@@ -59,7 +59,7 @@
   # Sunrise-start
   - type: Scalpel
   - type: SurgeryTool
-    successRate: 0.35
+    successRate: 1.5
     startSound:
       path: /Audio/_Sunrise/Medical/Surgery/scalpel1.ogg
     endSound:
@@ -76,6 +76,11 @@
     sound:
       path: /Audio/Items/screwdriver_drop.ogg
   # Sunrise start
+  - type: SurgicalDrill
+  - type: SurgeryTool
+    speed: 1.5
+    startSound:
+      path: /Audio/_Sunrise/Medical/Surgery/saw.ogg
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Sunrise/Items/Handling/screwdriver_pickup.ogg
@@ -132,6 +137,11 @@
     sound:
       path: /Audio/Items/wrench_drop.ogg
   # Sunrise start
+  - type: BoneSetter
+  - type: SurgeryTool
+    speed: 1.5
+    startSound:
+      path: /Audio/_Sunrise/Medical/Surgery/bone_setter.ogg
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Sunrise/Items/Handling/wrench_pickup.ogg
