@@ -1808,11 +1808,11 @@
       - ERTRed
 
 - type: listing
-  id: ERTUplinkEnergyDomeGeneratorBackpackNT
-  productEntity: EnergyDomeGeneratorBackpackNT
+  id: ERTUplinkEnergyDomeGrenade
+  productEntity: SunriseEnergyDomeGrenadeERT
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: nanotrasen_back }
   cost:
-    Crystallite: 15
+    Crystallite: 10
   categories:
     - NTEquipment
   conditions:
@@ -1824,12 +1824,12 @@
   productEntity: EnergyDomeGeneratorPersonalNT
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: nanotrasen_belt }
   cost:
-    Crystallite: 20
+    Crystallite: 18
   categories:
     - NTEquipment
   conditions:
   - !type:ListingLimitedStockCondition
-    stock: 2
+    stock: 1
   - !type:StoreWhitelistCondition
     whitelist:
       tags:

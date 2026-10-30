@@ -178,7 +178,7 @@
           amount: 3
         - id: WeaponLaserGun
           prob: 0.40
-        - id: EnergyDomeGeneratorPersonalSyndieBiocode
+        - id: EnergyDomeGeneratorPersonalSyndie
           prob: 0.40
         - id: EnergyShieldBiocode
           prob: 0.40

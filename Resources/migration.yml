@@ -924,6 +924,7 @@ ClothingOuterCoatHyenhSweater: null
 ClothingOuterVestValet: null
 SpawnPointGladiator: null
 SchoolgirlUniformSpawner: null
+SpawnPointMailCarrier: null
 SpawnMobPibble: null
 ClothingOuterRobeBrown: null
 ClothingUniformMNKTracksuitBlack: null
@@ -1144,6 +1145,7 @@ MobRogueSiliconCatcher: MobRogueSiliconT2Catcher
 MobRogueSiliconDerelictBorgAssaultT1: MobRogueSiliconT2DerelictBorgAssault
 MobRogueSiliconDerelictBorgAssaultT2: MobRogueSiliconT2DerelictBorgAssaultHeavy
 MobRogueSiliconDerelictBorgSyndicateMedical: MobRogueSiliconT2DerelictBorgSyndicateMedical
+MobRogueSiliconTerminatorT3: null
 MobRogueSiliconTesla: MobRogueSiliconT3Tesla
 MobRogueSiliconDerelictBorgAssaultT3: MobRogueSiliconT3DerelictBorgAssault
 MobRogueSiliconDerelictBorgSyndicateSaboteur: MobRogueSiliconT3DerelictBorgSyndicateSaboteur
@@ -1152,6 +1154,7 @@ MobRogueSiliconGuardianLCG: MobRogueSiliconBossGuardianLCG
 SpawnMobRogueSiliconVisceratorSquad: SpawnMobRogueSiliconT1VisceratorSquad
 SpawnMobRogueSiliconGuardian: SpawnMobRogueSiliconBossGuardian
 SpawnMobRogueSiliconGuardianLCG: SpawnMobRogueSiliconBossGuardianLCG
+SpawnMobRogueSiliconTerminator: null
 HyposprayERT: Hypospray
 BoxErtLeaderKit: BoxErtBaseKit
 # 2026-06-24
@@ -1261,8 +1264,6 @@ SpawnPointGhostTerminator: null
 MobRogueSiliconT3Terminator: null
 SpawnMobRogueSiliconT3Terminator: null
 MindRoleTerminator: null
-MobRogueSiliconTerminatorT3: null
-SpawnMobRogueSiliconTerminator: null
 # 2026-08-18
 CartridgeRifleHP: CartridgeRifleSP
 CartridgeLightRifleHP: CartridgeLightRifleSP
@@ -1279,6 +1280,11 @@ MagazineBoxHeavyRifleHP: MagazineBoxHeavyRifleSP
 RifleHeavyMagazineHP: RifleHeavyMagazineSP
 MagazineDragunovHP: MagazineDragunovSP
 MagazineBoxRifleMachineHP: MagazineBoxRifleMachineSP
+# 2026-08-22
+EnergyDomeGeneratorBackpackSyndie: SunriseEnergyDomeGrenadeSyndie
+EnergyDomeGeneratorBackpackSyndieBiocode: SunriseEnergyDomeGrenadeSyndie
+EnergyDomeGeneratorBackpackNT: SunriseEnergyDomeGrenadeERT
+EnergyDomeGeneratorPersonalSyndieBiocode: EnergyDomeGeneratorPersonalSyndie
 # 2026-09-08
 WeaponRifleLecterMk3: WeaponRifleLecterMk2
 WeaponRifleLecterMk3Empty: WeaponRifleLecterMk2Empty

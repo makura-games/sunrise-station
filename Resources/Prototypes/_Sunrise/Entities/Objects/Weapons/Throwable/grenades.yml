@@ -1,0 +1,65 @@
+- type: entity
+  id: SunriseEnergyDomeGrenadeSyndie
+  parent: [ ImpactGrenadeBase, BaseSyndicateContraband ]
+  name: shield deployment grenade
+  description: An impact grenade that deploys a temporary Syndicate energy shield generator.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Tools/EnergyDome/syndie_back.rsi
+    layers:
+      - state: icon
+  - type: Item
+    size: Huge
+    shape:
+    - 1,1,2,2
+    - 0,0,0,0
+    - 3,0,3,0
+    - 0,3,0,3
+    - 3,3,3,3
+  - type: Clothing
+    sprite: _Sunrise/Objects/Tools/EnergyDome/syndie_back.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: SpawnOnTrigger
+    keysIn:
+    - trigger
+    proto: SunriseEnergyDomeGeneratorSyndieTimed
+    useMapCoords: true
+  - type: DeleteOnTrigger
+    keysIn:
+    - trigger
+
+- type: entity
+  id: SunriseEnergyDomeGrenadeERT
+  parent: [ ImpactGrenadeBase, BaseCentcommContraband ]
+  name: ERT shield grenade
+  description: An impact grenade that deploys a temporary Nanotrasen energy shield generator.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Tools/EnergyDome/nanotrasen_back.rsi
+    layers:
+      - state: icon
+  - type: Item
+    size: Huge
+    shape:
+    - 1,1,2,2
+    - 0,0,0,0
+    - 3,0,3,0
+    - 0,3,0,3
+    - 3,3,3,3
+  - type: Clothing
+    sprite: _Sunrise/Objects/Tools/EnergyDome/nanotrasen_back.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: SpawnOnTrigger
+    keysIn:
+    - trigger
+    proto: SunriseEnergyDomeGeneratorNTTimed
+    useMapCoords: true
+  - type: DeleteOnTrigger
+    keysIn:
+    - trigger

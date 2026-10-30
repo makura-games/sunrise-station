@@ -851,9 +851,9 @@
       prob: 0.8
     - id: WeaponMechCombatKord
       prob: 0.25
-    - id: EnergyDomeGeneratorBackpackNT
+    - id: SunriseEnergyDomeGrenadeERT
       prob: 0.15
-    - id: EnergyDomeGeneratorBackpackSyndie
+    - id: SunriseEnergyDomeGrenadeSyndie
       prob: 0.15
     - id: RogueAiNode
       prob: 0.1
