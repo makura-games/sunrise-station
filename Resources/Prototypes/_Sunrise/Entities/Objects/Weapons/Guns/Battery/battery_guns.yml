@@ -697,6 +697,9 @@
     maxCharge: 10000
     startingCharge: 10000
   - type: EmpImmune
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 0.85
   - type: StaticPrice
     price: 9000
 

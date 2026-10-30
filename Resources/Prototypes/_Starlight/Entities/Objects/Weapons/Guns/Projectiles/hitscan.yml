@@ -1122,7 +1122,7 @@
   - type: Projectile
     damage:
       types:
-        Heat: 20
+        Heat: 17
 
 - type: entity
   parent: BasicHitscan
