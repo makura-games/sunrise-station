@@ -1,6 +1,6 @@
 using Robust.Shared.Network;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Client.UserInterface.Systems.Info;
 
 public sealed partial class InfoUIController

@@ -2,6 +2,7 @@ using Content.Shared.DisplacementMap;
 using Content.Shared.Humanoid;
 using Robust.Shared.Enums;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Body;
 
 public sealed partial class VisualOrganMarkingsComponent

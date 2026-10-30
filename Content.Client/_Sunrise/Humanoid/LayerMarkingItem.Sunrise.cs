@@ -3,7 +3,7 @@ using Content.Shared.Humanoid.Markings;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Client.Humanoid;
 
 public sealed partial class LayerMarkingItem

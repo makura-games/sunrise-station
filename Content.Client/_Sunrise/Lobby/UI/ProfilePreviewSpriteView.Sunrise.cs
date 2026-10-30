@@ -10,7 +10,7 @@ using Content.Shared.Roles;
 using Content.Sunrise.Interfaces.Shared;
 using Robust.Shared.IoC;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Client.Lobby.UI.ProfileEditorControls;
 
 public sealed partial class ProfilePreviewSpriteView

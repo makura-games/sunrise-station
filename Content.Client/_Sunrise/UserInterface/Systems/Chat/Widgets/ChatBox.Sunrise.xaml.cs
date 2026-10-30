@@ -6,6 +6,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Robust.Client.UserInterface.RichText;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Client.UserInterface.Systems.Chat.Widgets;
 
 public partial class ChatBox

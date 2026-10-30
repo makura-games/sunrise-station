@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared.Buckle.Components;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Buckle;
 
 public abstract partial class SharedBuckleSystem

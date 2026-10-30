@@ -1,7 +1,7 @@
 using System;
 using Robust.Shared.Audio.Midi;
 
-#pragma warning disable IDE0130
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Instruments;
 
 internal static class InstrumentMidiValidation

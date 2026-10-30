@@ -1,7 +1,7 @@
 using Content.Server.GameTicking.Presets;
 using Prometheus;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.GameTicking.Rules;
 
 public sealed partial class SecretRuleSystem

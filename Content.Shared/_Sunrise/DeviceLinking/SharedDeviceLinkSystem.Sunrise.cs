@@ -1,8 +1,8 @@
-#pragma warning disable IDE0130
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.DeviceLinking;
 
 public abstract partial class SharedDeviceLinkSystem

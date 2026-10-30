@@ -16,7 +16,7 @@ using Content.Server.Shuttles.Components;
 using Content.Shared.Salvage;
 using Robust.Shared.Random;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Shuttles.Systems;
 
 public sealed partial class EmergencyShuttleSystem

@@ -8,9 +8,8 @@ using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
 using Robust.Shared.Player;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Silicons.Laws;
-#pragma warning restore IDE0130 // Namespace does not match folder structure
 
 public sealed partial class SiliconLawSystem
 {

@@ -1,4 +1,4 @@
-#pragma warning disable IDE0130 // Пространство имён vanilla-класса сохраняется для partial-расширения.
+// ReSharper disable once CheckNamespace
 namespace Content.Server.SurveillanceCamera;
 
 public sealed partial class SurveillanceCameraRouterComponent

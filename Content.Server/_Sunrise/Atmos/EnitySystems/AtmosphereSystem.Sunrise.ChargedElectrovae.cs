@@ -9,6 +9,7 @@ using Content.Shared.Power.Components;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Random;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Atmos.EntitySystems;
 
 public sealed partial class AtmosphereSystem

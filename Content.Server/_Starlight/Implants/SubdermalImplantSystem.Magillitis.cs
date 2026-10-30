@@ -4,7 +4,7 @@ using Content.Shared.Popups;
 using Content.Shared.Zombies;
 using Robust.Shared.Player;
 
-#pragma warning disable IDE0130 // Пространство имён соответствует расширяемой системе.
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Implants;
 
 public sealed partial class SubdermalImplantSystem

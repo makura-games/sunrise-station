@@ -6,7 +6,7 @@ using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared._Sunrise.GameTicking.Prototypes;
 using Robust.Shared.Audio;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.GameTicking;
 
 public sealed partial class GameTicker

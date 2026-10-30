@@ -1,3 +1,4 @@
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Doors.Components;
 
 public sealed partial class DoorComponent

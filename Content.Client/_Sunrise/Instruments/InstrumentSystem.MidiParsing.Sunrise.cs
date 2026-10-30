@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Client.Instruments.MidiParser;
 using Content.Shared.Instruments;
 
-#pragma warning disable IDE0130
+// ReSharper disable once CheckNamespace
 namespace Content.Client.Instruments;
 
 public sealed partial class InstrumentSystem

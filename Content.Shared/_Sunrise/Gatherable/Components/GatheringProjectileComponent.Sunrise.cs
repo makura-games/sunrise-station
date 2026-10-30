@@ -1,3 +1,4 @@
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Gatherable.Components;
 
 public sealed partial class GatheringProjectileComponent

@@ -1,7 +1,7 @@
 using Content.Shared.Body;
 using Content.Shared.Starlight.Medical.Surgery.Steps.Parts;
 
-#pragma warning disable IDE0130 // Пространство имён не соответствует структуре папок
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Eye.Blinding.Systems;
 
 public sealed partial class BlindableSystem

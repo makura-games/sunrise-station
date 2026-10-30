@@ -6,7 +6,7 @@ using Content.Shared._Sunrise.MentorHelp;
 using Content.Shared._Sunrise.Tutorial.Prototypes;
 using Robust.Shared.Prototypes;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Database;
 
 public partial interface IServerDbManager

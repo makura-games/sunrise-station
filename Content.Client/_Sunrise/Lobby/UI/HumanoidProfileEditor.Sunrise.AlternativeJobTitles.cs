@@ -3,6 +3,7 @@ using Content.Shared.Roles;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Client.Lobby.UI;
 
 public sealed partial class HumanoidProfileEditor

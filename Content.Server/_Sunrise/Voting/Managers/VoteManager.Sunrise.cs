@@ -9,6 +9,7 @@ using Content.Shared.Database;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Voting.Managers;
 
 public sealed partial class VoteManager

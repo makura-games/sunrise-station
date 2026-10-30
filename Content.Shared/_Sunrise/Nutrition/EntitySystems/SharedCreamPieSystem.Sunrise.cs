@@ -1,5 +1,6 @@
 using Content.Shared._Sunrise.Mood;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Nutrition.EntitySystems;
 
 public abstract partial class SharedCreamPieSystem

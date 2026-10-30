@@ -1,6 +1,7 @@
 using Content.Shared.Atmos.Components;
 using Content.Shared.Verbs;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Atmos.Consoles;
 
 public abstract partial class SharedAtmosAlertsComputerSystem

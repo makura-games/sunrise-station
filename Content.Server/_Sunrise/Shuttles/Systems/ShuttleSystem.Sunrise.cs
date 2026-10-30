@@ -12,7 +12,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 
-#pragma warning disable IDE0130 // Пространство имён vanilla-системы сохраняется для partial-расширения.
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Shuttles.Systems;
 
 public sealed partial class ShuttleSystem

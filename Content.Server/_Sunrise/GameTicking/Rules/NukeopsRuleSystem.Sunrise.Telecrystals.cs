@@ -1,6 +1,6 @@
 using Content.Shared.FixedPoint;
 
-#pragma warning disable IDE0130
+// ReSharper disable once CheckNamespace
 namespace Content.Server.GameTicking.Rules;
 
 public sealed partial class NukeopsRuleSystem

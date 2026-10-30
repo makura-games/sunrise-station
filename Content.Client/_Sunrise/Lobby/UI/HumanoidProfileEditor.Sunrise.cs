@@ -3,6 +3,7 @@ using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Sunrise.Interfaces.Shared;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Client.Lobby.UI;
 
 public sealed partial class HumanoidProfileEditor

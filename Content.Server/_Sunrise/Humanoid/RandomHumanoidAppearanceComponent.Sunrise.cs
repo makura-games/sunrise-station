@@ -3,7 +3,7 @@ using Content.Shared._Sunrise.Humanoid;
 using Content.Shared.Humanoid;
 using Content.Shared.Preferences;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Humanoid.Components;
 
 public sealed partial class RandomHumanoidAppearanceComponent

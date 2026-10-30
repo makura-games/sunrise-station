@@ -19,6 +19,7 @@ using Content.Shared.Verbs;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Administration.Systems;
 
 /// <summary>

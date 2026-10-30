@@ -1,6 +1,7 @@
 using Content.Shared._Sunrise.SunriseCCVars;
 using Robust.Shared.Configuration;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Atmos.EntitySystems;
 
 public enum GasIds

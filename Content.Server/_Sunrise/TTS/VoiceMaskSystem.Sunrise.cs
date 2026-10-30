@@ -5,6 +5,7 @@ using Content.Shared.Clothing;
 using Content.Shared.VoiceMask;
 using Content.Shared.Silicons.StationAi;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.VoiceMask;
 
 public partial class VoiceMaskSystem

@@ -4,7 +4,7 @@ using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Timer = Robust.Shared.Timing.Timer;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.RoundEnd;
 
 public sealed partial class RoundEndSystem

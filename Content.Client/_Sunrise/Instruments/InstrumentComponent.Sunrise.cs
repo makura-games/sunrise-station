@@ -1,4 +1,4 @@
-#pragma warning disable IDE0130
+// ReSharper disable once CheckNamespace
 namespace Content.Client.Instruments;
 
 public sealed partial class InstrumentComponent

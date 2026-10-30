@@ -2,6 +2,7 @@ using System.Numerics;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Paper;
 
 public sealed partial class PaperComponent

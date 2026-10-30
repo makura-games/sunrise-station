@@ -10,7 +10,7 @@ using Content.Shared.SSDIndicator;
 using Content.Shared.Warps;
 using Robust.Shared.Prototypes;
 
-// Не менять
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Ghost;
 
 public sealed partial class GhostSystem

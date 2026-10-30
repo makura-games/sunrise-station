@@ -5,6 +5,7 @@ using Content.Shared.Shuttles.Components;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Timing;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Shuttles.Systems;
 
 public sealed partial class RadarConsoleSystem

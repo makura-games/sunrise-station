@@ -10,6 +10,7 @@ using Content.Server._Sunrise.FleshCult.GameRule;
 using Content.Server._Sunrise.BloodCult.GameRule;
 using Content.Server._Sunrise.GameTicking.Rules.Components;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Administration.Systems;
 
 /// <summary>

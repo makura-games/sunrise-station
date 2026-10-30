@@ -1,5 +1,4 @@
-#pragma warning disable IDE0130
-
+// ReSharper disable once CheckNamespace
 namespace Content.Client.GameTicking.Managers;
 
 public sealed partial class ClientGameTicker
