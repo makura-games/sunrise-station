@@ -101,7 +101,7 @@ public sealed partial class ChameleonControllerSystem : SharedChameleonControlle
             return;
 
         defaultRoleLoadout = new RoleLoadout(jobProtoId);
-        defaultRoleLoadout.SetDefault(profile, null, ProtoMan, []); // only sets the default if the player has no loadout
+        defaultRoleLoadout.SetDefault(profile, null, ProtoMan); // only sets the default if the player has no loadout
     }
 
     private void ChameleonControllerOutfitItemSelected(Entity<ChameleonClothingComponent> ent, ref InventoryRelayedEvent<ChameleonControllerOutfitSelectedEvent> args)

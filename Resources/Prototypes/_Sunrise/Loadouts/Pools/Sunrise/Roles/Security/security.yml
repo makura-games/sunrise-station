@@ -17,7 +17,6 @@
   - SunriseHeadofSecurityBra
   - SunriseHeadofSecurityPants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobWarden
@@ -37,7 +36,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobSecurityOfficer
@@ -59,7 +57,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobDetective
@@ -80,7 +77,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobSecurityCadet
@@ -95,4 +91,3 @@
   - Bra
   - Pants
   - Socks
-  - Contributors

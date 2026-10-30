@@ -51,12 +51,6 @@
     roundStartBiocode: true
 
 #Синего Щита
-- type: loadout
-  id: BlueShieldModsuit
-  sponsorOnly: true
-  equipment:
-    back: ClothingBlueShieldModsuit
-
 - type: entity
   parent: ClothingModsuitBackpack
   id: ClothingBlueShieldModsuit
@@ -107,12 +101,6 @@
       slot: outerClothing
 
 #Горничной Командования
-- type: loadout
-  id: ComMaidModsuit
-  sponsorOnly: true
-  equipment:
-    back: ClothingModsuitComMaid
-
 - type: entity
   parent: ClothingModsuitBackpack
   id: ClothingModsuitComMaid
@@ -129,12 +117,6 @@
       slot: outerClothing
 
 #Пассажира
-- type: loadout
-  id: CommonModsuit
-  sponsorOnly: true
-  equipment:
-    back: ClothingCommonModsuit
-
 - type: entity
   parent: ClothingModsuitBackpack
   id: ClothingCommonModsuit

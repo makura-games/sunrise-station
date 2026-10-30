@@ -18,7 +18,6 @@
   - GroupSpeciesBreathToolMedical
   - MedicalTrinkets
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobMedicalDoctor
@@ -41,7 +40,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobMedicalIntern
@@ -63,7 +61,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobChemist
@@ -85,7 +82,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobParamedic
@@ -107,4 +103,3 @@
   - Bra
   - Pants
   - Socks
-  - Contributors

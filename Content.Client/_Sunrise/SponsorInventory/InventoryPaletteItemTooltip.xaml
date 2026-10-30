@@ -1,0 +1,12 @@
+<PanelContainer xmlns="https://spacestation14.io"
+                MaxWidth="300"
+                MinHeight="28"
+                StyleClasses="TooltipPanel">
+    <!-- InventoryWindow creates this tooltip per palette card; the message is already composed in code-behind. -->
+    <BoxContainer
+        Orientation="Vertical">
+        <!-- RichTextLabel is required for item descriptions and requirement markers with the allowed tag set. -->
+        <RichTextLabel Name="TooltipText"
+                       Margin="0 0 0 4" />
+    </BoxContainer>
+</PanelContainer>

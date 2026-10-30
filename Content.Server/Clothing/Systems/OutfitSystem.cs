@@ -1,4 +1,4 @@
-﻿using Content.Server.Hands.Systems;
+using Content.Server.Hands.Systems;
 using Content.Server.Preferences.Managers;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared.Access.Components;
@@ -12,8 +12,6 @@ using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
 using Content.Shared.Station;
-using Content.Sunrise.Interfaces.Shared;
-using Robust.Shared.Configuration;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Storage;
 using Robust.Shared.Player;
@@ -28,14 +26,6 @@ public sealed partial class OutfitSystem : EntitySystem
     [Dependency] private SharedStationSpawningSystem _spawningSystem = default!;
     [Dependency] private ItemSlotsSystem _itemSlotsSystem = default!;
     [Dependency] private StorageSystem _storageSystem = default!;
-
-    private ISharedSponsorsManager? _sponsorsManager; // Sunrise-Sponsors
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        IoCManager.Instance!.TryResolveType(out _sponsorsManager); // Sunrise-Sponsors
-    }
 
     public bool SetOutfit(EntityUid target, string gear, Action<EntityUid, EntityUid>? onEquipped = null, bool unremovable = false)
     {
@@ -143,17 +133,7 @@ public sealed partial class OutfitSystem : EntitySystem
             {
                 // If they don't have a loadout for the role, make a default one
                 roleLoadout = new RoleLoadout(jobProtoId);
-                // Sunrise-Start
-                string [] sponsorsPrototypes = [];
-                if (_sponsorsManager != null && session != null)
-                {
-                    if (_sponsorsManager.TryGetPrototypes(session.UserId, out var prototypes))
-                    {
-                        sponsorsPrototypes = prototypes.ToArray();
-                    }
-                }
-                // Sunrise-End
-                roleLoadout.SetDefault(profile, session, ProtoMan, sponsorsPrototypes);
+                roleLoadout.SetDefault(profile, session, ProtoMan);
             }
 
             // Equip the target with the job loadout

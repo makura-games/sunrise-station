@@ -15,7 +15,6 @@ loadout-group-storage = Storage
 loadout-group-weapon = Weapon
 loadout-group-weapon-secondary = Secondary Weapon
 loadout-group-mask = Mask
-loadout-group-contributors = Contributors
 loadout-group-pants = Pants
 loadout-group-bra = Bra
 loadout-group-socks = Socks

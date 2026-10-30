@@ -1,0 +1,68 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:sf="clr-namespace:Content.Client._Sunrise.Sheetlets.SciFiStyle"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              HorizontalExpand="True"
+              Margin="12 8 12 8"
+              MaxWidth="360"
+              MinHeight="360"
+              MinWidth="300"
+              Orientation="Vertical"
+              SeparationOverride="8"
+              VerticalExpand="True">
+    <BoxContainer
+        HorizontalExpand="True"
+        Orientation="Horizontal"
+        SeparationOverride="10">
+        <Label
+            Name="TierBadgeLabel"
+            Align="Center"
+            FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+            MaxHeight="64"
+            MinHeight="52"
+            MinWidth="52"
+            StyleClasses="LabelHeading"
+            Text="-"
+            VAlign="Center" />
+
+        <Label
+            Name="TitleLabel"
+            FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+            HorizontalExpand="True"
+            MaxWidth="222"
+            StyleClasses="LabelHeading"
+            Text="" />
+    </BoxContainer>
+
+    <PanelContainer
+        HorizontalExpand="True"
+        StyleClasses="SciFiDivider" />
+
+    <Label
+        FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+        StyleClasses="LabelSubText"
+        Text="{Loc 'donation-terminal-benefits'}" />
+
+    <ScrollContainer
+        HScrollEnabled="False"
+        HorizontalExpand="True"
+        MaxHeight="230"
+        MinHeight="160"
+        VerticalExpand="True"
+        VScrollEnabled="True">
+        <BoxContainer
+            Name="BenefitsList"
+            HorizontalExpand="True"
+            Orientation="Vertical"
+            SeparationOverride="5" />
+    </ScrollContainer>
+
+    <PanelContainer
+        HorizontalExpand="True"
+        StyleClasses="SciFiDivider" />
+
+    <Button
+        Name="DetailsButton"
+        HorizontalExpand="True"
+        StyleClasses="SciFiButton"
+        Text="{Loc 'donation-terminal-subscription-card-details'}" />
+</BoxContainer>

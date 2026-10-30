@@ -1,0 +1,222 @@
+<ui:InventoryWindow xmlns="https://spacestation14.io"
+                    xmlns:ui="clr-namespace:Content.Client._Sunrise.SponsorInventory"
+                    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+                    Title="{Loc 'sunrise-inventory-window-title'}"
+                    MinSize="1120 720"
+                    SetSize="1150 790"
+                    Resizable="True">
+    <!-- Keep this as the single XAML root for InventoryWindow partials; typed Name references are used across InventoryWindow.*.cs files. -->
+    <PanelContainer>
+        <BoxContainer Orientation="Vertical"
+                      SeparationOverride="8"
+                      HorizontalExpand="True"
+                      VerticalExpand="True">
+            <!-- Header state is profile-driven: BuildJobOptions repopulates JobOption, and RefreshState controls SaveButton availability. -->
+            <BoxContainer Orientation="Horizontal"
+                          HorizontalExpand="True"
+                          SeparationOverride="8">
+                <Label Name="ProfileName"
+                       StyleClasses="LabelHeading"
+                       VerticalAlignment="Center"/>
+                <Control HorizontalExpand="True"/>
+                <Label Text="{Loc 'sunrise-inventory-job'}"
+                       VerticalAlignment="Center"/>
+                <OptionButton Name="JobOption"
+                              Filterable="True"
+                              MinWidth="260"/>
+                <Button Name="SaveButton"
+                        Text="{Loc 'sunrise-inventory-save'}"
+                        MinWidth="120"/>
+            </BoxContainer>
+
+            <!-- These are toggle-like tab buttons; SelectTab updates their Pressed state and swaps the visible content container below. -->
+            <BoxContainer Orientation="Horizontal"
+                          SeparationOverride="6">
+                <Button Name="LoadoutTabButton"
+                        Text="{Loc 'sunrise-inventory-tab-equipment'}"
+                        MinWidth="180"/>
+                <Button Name="PetsTabButton"
+                        Text="{Loc 'sunrise-inventory-tab-pets'}"
+                        MinWidth="160"/>
+            </BoxContainer>
+
+            <PanelContainer Name="ContentPanel"
+                            HorizontalExpand="True"
+                            VerticalExpand="True">
+                <!-- EquipmentContent is the default tab. Dynamic equipment, bag, and palette children are rebuilt when profile/job/selection changes. -->
+                <BoxContainer Name="EquipmentContent"
+                              Orientation="Horizontal"
+                              HorizontalExpand="True"
+                              VerticalExpand="True"
+                              SeparationOverride="0">
+                    <BoxContainer Orientation="Vertical"
+                                  HorizontalExpand="True"
+                                  VerticalExpand="True"
+                                  SeparationOverride="8">
+                        <Label Text="{Loc 'sunrise-inventory-slot-menu-hint'}"
+                               StyleClasses="LabelSubText"
+                               Margin="0 0 0 2"/>
+                        <!-- The top workspace combines the live character preview with the job-dependent inventory slot layout. -->
+                        <BoxContainer Orientation="Horizontal"
+                                      HorizontalExpand="True"
+                                      VerticalExpand="True"
+                                      SeparationOverride="8"
+                                      MinHeight="220">
+                            <!-- CharacterPreview renders a temporary profile entity; sponsor selections are applied to this preview before display. -->
+                            <BoxContainer Orientation="Vertical"
+                                            MinWidth="200"
+                                            SetWidth="200"
+                                            VerticalAlignment="Center">
+                                <SpriteView Name="CharacterPreview"
+                                            MinSize="200 250"
+                                            SetSize="200 250"
+                                            Scale="8 8"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
+                                <!-- Rotation buttons only change SpriteView.OverrideDirection; they do not mutate the saved profile or loadout. -->
+                                <BoxContainer Orientation="Horizontal"
+                                                HorizontalAlignment="Center"
+                                                Margin="0 4 0 0">
+                                    <Button Name="RotateLeftButton"
+                                            Text="&lt;"
+                                            MinWidth="32"
+                                            StyleClasses="OpenRight"/>
+                                    <Button Name="RotateRightButton"
+                                            Text="&gt;"
+                                            MinWidth="32"
+                                            StyleClasses="OpenLeft"/>
+                                </BoxContainer>
+                                <Button Name="HideClothesButton"
+                                        ToggleMode="True"
+                                        Text="{Loc 'sunrise-inventory-hide-clothes'}"
+                                        HorizontalAlignment="Center"
+                                        Margin="0 4 0 0"/>
+                            </BoxContainer>
+
+                            <ScrollContainer HorizontalExpand="True"
+                                             VerticalExpand="True"
+                                             HScrollEnabled="True"
+                                             VScrollEnabled="True">
+                                <!-- Intentional empty host: BuildInventoryLayout adds InventoryDisplay and SlotButton controls for the selected job. -->
+                                <Control Name="InventoryHost"
+                                         HorizontalExpand="True"
+                                         VerticalExpand="True"/>
+                            </ScrollContainer>
+                        </BoxContainer>
+
+                        <!-- BagPanel is both the selected backpack preview and the drop target area when the bag editor is open. -->
+                        <PanelContainer Name="BagPanel"
+                                        HorizontalExpand="True"
+                                        MinHeight="210">
+                            <BoxContainer Orientation="Vertical"
+                                          HorizontalExpand="True"
+                                          VerticalExpand="True"
+                                          SeparationOverride="6">
+                                <!-- Bag title, capacity, and editor button text are rewritten from storage state in InventoryWindow.Storage/Palette. -->
+                                <BoxContainer Orientation="Horizontal"
+                                              HorizontalExpand="True"
+                                              SeparationOverride="6">
+                                    <Label Name="BagTitle"
+                                           ClipText="True"
+                                           MaxWidth="320"
+                                           Text="{Loc 'sunrise-inventory-bag-title'}"
+                                           StyleClasses="LabelHeading"
+                                           HorizontalExpand="True"/>
+                                    <Label Name="BagCapacityLabel"
+                                           StyleClasses="LabelSubText"
+                                           VerticalAlignment="Center"/>
+                                    <Button Name="BagEditorButton"
+                                            Text="{Loc 'sunrise-inventory-bag-edit'}"
+                                            MinWidth="150"/>
+                                </BoxContainer>
+                                <!-- BagHint becomes an editor hint only while bag editing is active and a preview storage exists. -->
+                                <Label Name="BagHint"
+                                       StyleClasses="LabelSubText"/>
+                                <ScrollContainer HScrollEnabled="True"
+                                                 VScrollEnabled="True"
+                                                 HorizontalExpand="True"
+                                                 VerticalExpand="True">
+                                    <!-- LayoutContainer is required for absolute tile/item placement; RenderBagGrid sets its size and children. -->
+                                    <LayoutContainer Name="BagGridHost"
+                                                     HorizontalExpand="True"
+                                                     VerticalExpand="True"/>
+                                </ScrollContainer>
+                            </BoxContainer>
+                        </PanelContainer>
+                    </BoxContainer>
+
+                    <cc:VSeparator Margin="8 -8 0 -8"/>
+
+                    <!-- Right rail stays fixed-width so the equipment layout does not shift while filters rebuild the item palette. -->
+                    <PanelContainer Name="PalettePanel"
+                                     MinWidth="390"
+                                     Margin="0 -8 -8 -8"
+                                     VerticalExpand="True">
+                        <BoxContainer Orientation="Vertical"
+                                      HorizontalExpand="True"
+                                      VerticalExpand="True"
+                                      SeparationOverride="6">
+                            <!-- PaletteTitle switches between regular item selection and bag-editor wording. -->
+                            <Label Name="PaletteTitle"
+                                   Text="{Loc 'sunrise-inventory-palette-title'}"
+                                   StyleClasses="LabelHeading"
+                                   Margin="8 8 8 0"/>
+                            <BoxContainer Orientation="Horizontal"
+                                           HorizontalExpand="True"
+                                           SeparationOverride="6"
+                                           Margin="8 0 8 0">
+                                <!-- Search and filters drive RefreshPalette; placement options are rebuilt from the current job slots. -->
+                                <LineEdit Name="ItemSearch"
+                                           PlaceHolder="{Loc 'sunrise-inventory-search'}"
+                                           HorizontalExpand="True"
+                                           MinWidth="100"/>
+                                <!-- SourceFilter stays available in both modes; this label appears when bag editor hides PlacementFilter. -->
+                                <Label Name="SourceFilterLabel"
+                                       Text="{Loc 'sunrise-inventory-filter-source'}"
+                                       StyleClasses="LabelSubText"
+                                       VerticalAlignment="Center"
+                                       Visible="False"/>
+                                <OptionButton Name="SourceFilter"
+                                              MinWidth="100"/>
+                                <OptionButton Name="PlacementFilter"
+                                              MinWidth="100"/>
+                            </BoxContainer>
+                            <!-- StatusLabel is the shared feedback line for slot selection, invalid loadouts, full bags, and drag/drop errors. -->
+                            <Label Name="StatusLabel"
+                                   StyleClasses="LabelSubText"
+                                   Margin="8 0 8 0"/>
+                            <!-- PaletteListPanel receives a runtime style class; the scroll content below is rebuilt rather than incrementally patched. -->
+                            <PanelContainer Name="PaletteListPanel"
+                                            HorizontalExpand="True"
+                                            VerticalExpand="True">
+                                <ScrollContainer VerticalExpand="True"
+                                                 HorizontalExpand="True"
+                                                 HScrollEnabled="False">
+                                    <!-- RefreshPalette fills ItemPalette: regular mode uses one grid, bag editor mode inserts grouped headings and grids. -->
+                                    <BoxContainer Name="ItemPalette"
+                                                  Orientation="Vertical"
+                                                  HorizontalExpand="True"/>
+                                </ScrollContainer>
+                            </PanelContainer>
+                        </BoxContainer>
+                    </PanelContainer>
+                </BoxContainer>
+
+                <!-- PetsContent shares ContentPanel with equipment and is populated from RefreshPets only when pet data is available. -->
+                <BoxContainer Name="PetsContent"
+                              Orientation="Vertical"
+                              HorizontalExpand="True"
+                              VerticalExpand="True"
+                              Visible="False">
+                    <ScrollContainer VerticalExpand="True"
+                                     HScrollEnabled="False">
+                        <!-- PetsList is rebuilt as simple selection buttons; choosing a pet invokes the window callback instead of saving immediately. -->
+                        <BoxContainer Name="PetsList"
+                                      Orientation="Vertical"
+                                      HorizontalExpand="True"/>
+                    </ScrollContainer>
+                </BoxContainer>
+            </PanelContainer>
+        </BoxContainer>
+    </PanelContainer>
+</ui:InventoryWindow>

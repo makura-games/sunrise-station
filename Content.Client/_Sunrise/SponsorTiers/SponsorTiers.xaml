@@ -1,7 +1,0 @@
-<Control xmlns="https://spacestation14.io"
-         VerticalExpand="True"
-         HorizontalExpand="True">
-    <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
-        <TabContainer Name="SponsorTiersContainer" HorizontalExpand="True" VerticalExpand="True" />
-    </BoxContainer>
-</Control>
