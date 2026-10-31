@@ -292,8 +292,6 @@ public sealed partial class SponsorPersonalizationUi : FancyWindow
         var isAllowedTitle = currentTitle == NoneToken || string.IsNullOrEmpty(currentTitle) || allowedTitles.Contains(currentTitle);
         if (!isAllowedTitle)
         {
-            _cfg.SetCVar(SunriseCCVars.SponsorOocTitle, string.Empty);
-            _cfg.SaveToFile();
             currentTitle = string.Empty;
         }
 
@@ -324,8 +322,6 @@ public sealed partial class SponsorPersonalizationUi : FancyWindow
                              allowedColors.Contains(currentColor) || allowedGradients.Contains(currentColor);
         if (!isAllowedColor)
         {
-            _cfg.SetCVar(SunriseCCVars.SponsorOocColor, string.Empty);
-            _cfg.SaveToFile();
             currentColor = string.Empty;
         }
 
@@ -358,8 +354,6 @@ public sealed partial class SponsorPersonalizationUi : FancyWindow
         }
         if (!isAllowedEmoji)
         {
-            _cfg.SetCVar(SunriseCCVars.SponsorOocEmoji, string.Empty);
-            _cfg.SaveToFile();
             currentEmoji = string.Empty;
         }
 

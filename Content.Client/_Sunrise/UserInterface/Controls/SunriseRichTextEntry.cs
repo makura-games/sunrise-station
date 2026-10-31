@@ -126,6 +126,9 @@ internal struct SunriseRichTextEntry
             if (_tagControls == null || !_tagControls.TryGetValue(nodeIndex, out var control))
                 continue;
 
+            if (ProcessRune(ref this, new Rune('\uFFFC'), out breakLine))
+                continue;
+
             control.Measure(new Vector2(maxSizeX, float.PositiveInfinity));
 
             var desiredSize = control.DesiredPixelSize;
@@ -236,7 +239,7 @@ internal struct SunriseRichTextEntry
                 if (lineBreakIndex < LineBreaks.Count &&
                     LineBreaks[lineBreakIndex] == globalBreakCounter)
                 {
-                    baseLine = new Vector2(drawBox.Left, baseLine.Y + GetLineHeight(font, uiScale, lineHeightScale) + controlYAdvance);
+                    baseLine = new Vector2(drawBox.Left, baseLine.Y + GetLineHeight(font, uiScale, lineHeightScale) + (int)(controlYAdvance * uiScale));
                     controlYAdvance = 0;
                     lineBreakIndex += 1;
                 }
@@ -249,6 +252,16 @@ internal struct SunriseRichTextEntry
 
             if (_tagControls == null || !_tagControls.TryGetValue(nodeIndex, out var control))
                 continue;
+
+            if (lineBreakIndex < LineBreaks.Count &&
+                LineBreaks[lineBreakIndex] == globalBreakCounter)
+            {
+                baseLine = new Vector2(drawBox.Left, baseLine.Y + GetLineHeight(font, uiScale, lineHeightScale) + (int)(controlYAdvance * uiScale));
+                controlYAdvance = 0;
+                lineBreakIndex += 1;
+            }
+
+            globalBreakCounter += 1;
 
             control.Visible = true;
 

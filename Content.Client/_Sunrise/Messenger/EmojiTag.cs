@@ -43,9 +43,9 @@ public sealed partial class EmojiTag : IMarkupTagHandler
             if (node.Attributes.TryGetValue("size", out var sizeParameter))
             {
                 var val = sizeParameter.LongValue;
-                if (val.HasValue && val.Value > 0 && val.Value <= int.MaxValue)
+                if (val.HasValue && val.Value > 0)
                 {
-                    size = (int) val.Value;
+                    size = (int) Math.Clamp(val.Value, 16, 128);
                 }
             }
 
