@@ -1,6 +1,9 @@
-﻿using Content.Shared.Chat;
+using Content.Client._Sunrise.UserInterface.CustomControls;
+using Content.Client.Resources;
+using Content.Shared.Chat;
 using Content.Shared.Input;
 using Robust.Client.UserInterface.Controls;
+using Robust.Client.ResourceManagement;
 
 namespace Content.Client.UserInterface.Systems.Chat.Controls;
 
@@ -15,6 +18,7 @@ public class ChatInputBox : PanelContainer
     public readonly HistoryLineEdit Input;
     public readonly ChannelFilterButton FilterButton;
     public Button? EmojiButton; // Sunrise-Add
+    private Action? _emojiPickerCleanup; // Sunrise-Edit
     protected readonly BoxContainer Container;
     protected ChatChannel ActiveChannel { get; private set; } = ChatChannel.Local;
 
@@ -61,17 +65,28 @@ public class ChatInputBox : PanelContainer
             EmojiButton = new Button
             {
                 Name = "EmojiButton",
-                Text = "☻",
                 SetWidth = 30,
                 ToolTip = Loc.GetString("messenger-emoji-button-tooltip")
             };
-            // Insert before FilterButton
+
+            var resourceCache = IoCManager.Resolve<IResourceCache>();
+            _emojiPickerCleanup = EmojiButtonHelper.SetupEmojiButton(EmojiButton, Input, resourceCache);
+
             Container.AddChild(EmojiButton);
-            FilterButton.SetPositionInParent(Container.ChildCount - 1);
+            EmojiButton.SetPositionInParent(1);
         }
+
+        if (!visible)
+            _emojiPickerCleanup?.Invoke();
 
         if (EmojiButton != null)
             EmojiButton.Visible = visible;
+    }
+
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+        _emojiPickerCleanup?.Invoke();
     }
     // Sunrise-End
 
@@ -95,4 +110,13 @@ public class ChatInputBox : PanelContainer
                 (false, false) => Loc.GetString("hud-chatbox-info-unbound")
             };
     }
+
+    // Sunrise added start - cleanup emoji picker
+    [Obsolete]
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        _emojiPickerCleanup?.Invoke();
+    }
+    // Sunrise added end
 }

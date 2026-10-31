@@ -1,12 +1,14 @@
 using System.Collections.Frozen;
 using System.Text.RegularExpressions;
 using Content.Shared.Chat;
+using Content.Sunrise.Interfaces.Shared;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Sunrise.Messenger;
 
 /// <summary>
-/// Система для работы с эмодзи в мессенджере
+/// System for handling messenger emojis.
 /// </summary>
 public abstract partial class SharedEmojiSystem : EntitySystem
 {
@@ -41,7 +43,7 @@ public abstract partial class SharedEmojiSystem : EntitySystem
     }
 
     /// <summary>
-    /// Парсит текст сообщения и заменяет коды эмодзи на их представление в формате для RichTextLabel
+    /// Parses message text and replaces emoji codes with RichTextLabel format.
     /// </summary>
     public string ParseEmojis(string text)
     {
@@ -54,6 +56,40 @@ public abstract partial class SharedEmojiSystem : EntitySystem
         });
     }
 
+    /// <summary>
+    /// Filters emoji codes the user doesn't have access to.
+    /// </summary>
+    public string FilterBlockedEmojis(string text, NetUserId userId, ISharedSponsorsManager? sponsorsManager)
+    {
+        if (!IsContainsAnyEmoji(text))
+            return text;
+
+        return EmojiRegex.Replace(text, match =>
+        {
+            if (Emojis.TryGetValue(match.Value, out var emoji))
+            {
+                if (emoji.SponsorOnly)
+                {
+                    var hasAccess = false;
+                    if (sponsorsManager != null)
+                    {
+                        if (sponsorsManager.TryGetPrototypes(userId, out var prototypes))
+                        {
+                            hasAccess = prototypes.Contains(emoji.ID);
+                        }
+                    }
+
+                    if (!hasAccess)
+                    {
+                        return $":\u200b{match.Value.Trim(':')}\u200b:";
+                    }
+                }
+            }
+
+            return match.Value;
+        });
+    }
+
     private void CollectEmojis()
     {
         Emojis = ProtoMan.EnumeratePrototypes<EmojiPrototype>()
@@ -61,14 +97,14 @@ public abstract partial class SharedEmojiSystem : EntitySystem
     }
 
     /// <summary>
-    /// Проверяет, есть ли в строке ВОЗМОЖНЫЙ эмодзи.
-    /// Это быстрая проверка для early return,
-    /// чтобы не делать более сложную и точную проверку, если в строке нет ни одного эмодзи
+    /// Checks if string has a potential emoji.
+    /// Fast check for early return.
+    /// Prevents heavier regex validation if no emojis are present.
     /// </summary>
-    /// <param name="text">Текст для проверки</param>
-    /// <returns>Есть в строке возможный эмодзи или нет</returns>
+    /// <param name="text">Text to check</param>
+    /// <returns>Whether a potential emoji is present.</returns>
     /// <remarks>
-    /// Это чуть быстрее, чем регекс, я думаю тут это важно
+    /// Slightly faster than regex.
     /// </remarks>
     public static bool IsContainsAnyEmoji(string text)
     {
@@ -88,5 +124,24 @@ public abstract partial class SharedEmojiSystem : EntitySystem
     public static bool IsEmojiAllowedInChannel(ChatChannel channel)
     {
         return channel == ChatChannel.None || (channel & EmojiSupportedChannels) != 0;
+    }
+
+    public bool IsEmojiAllowedForPlayer(string emojiId, NetUserId userId, ISharedSponsorsManager? sponsorsManager)
+    {
+        if (!ProtoMan.TryIndex<EmojiPrototype>(emojiId, out var emoji))
+            return false;
+
+        if (!emoji.SponsorOnly)
+            return true;
+
+        if (sponsorsManager == null)
+            return false;
+
+        if (sponsorsManager.TryGetPrototypes(userId, out var prototypes))
+        {
+            return prototypes.Contains(emojiId);
+        }
+
+        return false;
     }
 }

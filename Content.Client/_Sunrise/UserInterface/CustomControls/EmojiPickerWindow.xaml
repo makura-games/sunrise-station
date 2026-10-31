@@ -1,0 +1,22 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               x:Class="Content.Client._Sunrise.UserInterface.CustomControls.EmojiPickerWindow"
+               Title="{Loc messenger-emoji-picker-title}"
+               MinSize="445 400"
+               Resizable="False">
+    <BoxContainer Orientation="Vertical"
+                  HorizontalExpand="True"
+                  VerticalExpand="True"
+                  Margin="8">
+        <ScrollContainer HorizontalExpand="True"
+                         VerticalExpand="True"
+                         HScrollEnabled="False"
+                         ReserveScrollbarSpace="True">
+            <BoxContainer Name="EmojiPickerContentContainer"
+                          Access="Public"
+                          Orientation="Vertical"
+                          HorizontalExpand="True"
+                          Margin="0 0 0 5" />
+        </ScrollContainer>
+    </BoxContainer>
+</DefaultWindow>

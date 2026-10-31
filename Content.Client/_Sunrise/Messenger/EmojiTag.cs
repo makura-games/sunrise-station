@@ -10,8 +10,8 @@ using Robust.Shared.Utility;
 namespace Content.Client._Sunrise.Messenger;
 
 /// <summary>
-/// Тег для отображения эмодзи мессенджера в RichText.
-/// Разрешает только эмодзи из прототипов, чтобы игроки не могли использовать произвольные текстуры.
+/// RichText tag for displaying messenger emojis.
+/// Only allows emojis from prototypes to prevent arbitrary texture usage.
 /// </summary>
 public sealed partial class EmojiTag : IMarkupTagHandler
 {
@@ -39,12 +39,22 @@ public sealed partial class EmojiTag : IMarkupTagHandler
             _spriteSystem ??= _entitySystemManager.GetEntitySystem<SpriteSystem>();
             var state = _spriteSystem.RsiStateLike(spriteSpec);
 
+            var size = 50;
+            if (node.Attributes.TryGetValue("size", out var sizeParameter))
+            {
+                var val = sizeParameter.LongValue;
+                if (val.HasValue && val.Value > 0)
+                {
+                    size = (int) Math.Clamp(val.Value, 16, 128);
+                }
+            }
+
             if (state.IsAnimated)
             {
                 var animatedRect = new AnimatedTextureRect
                 {
-                    MinWidth = 50,
-                    MinHeight = 50,
+                    MinWidth = size,
+                    MinHeight = size,
                     HorizontalAlignment = Control.HAlignment.Stretch,
                     VerticalAlignment = Control.VAlignment.Stretch,
                     HorizontalExpand = true,
@@ -62,8 +72,8 @@ public sealed partial class EmojiTag : IMarkupTagHandler
                 var textureRect = new TextureRect
                 {
                     Texture = texture,
-                    MinWidth = 50,
-                    MinHeight = 50,
+                    MinWidth = size,
+                    MinHeight = size,
                     HorizontalAlignment = Control.HAlignment.Stretch,
                     VerticalAlignment = Control.VAlignment.Stretch,
                     Stretch = TextureRect.StretchMode.KeepAspectCentered,

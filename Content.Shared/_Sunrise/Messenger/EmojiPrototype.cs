@@ -36,4 +36,10 @@ public sealed partial class EmojiPrototype : IPrototype, IInheritingPrototype
     /// </summary>
     [DataField(required: true)]
     public string SpriteState { get; private set; } = default!;
+
+    /// <summary>
+    /// Whether this emoji is only available to sponsors.
+    /// </summary>
+    [DataField]
+    public bool SponsorOnly { get; private set; }
 }
