@@ -19,10 +19,10 @@ namespace Content.Client._Sunrise.UserInterface.Radial;
 [GenerateTypedNameReferences, Virtual]
 public partial class RadialContainer : Control
 {
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     private EntityUid? _attachedEntity;
     private bool _isAttached;

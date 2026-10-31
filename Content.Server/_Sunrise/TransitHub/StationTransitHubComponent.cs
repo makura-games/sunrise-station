@@ -1,6 +1,6 @@
 using Content.Server.Shuttles.Systems;
 using Content.Shared.Parallax.Biomes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Server._Sunrise.TransitHub;
@@ -17,7 +17,6 @@ public sealed partial class StationTransitHubComponent : Component
     [DataField]
     public EntityUid? MapEntity;
 
-    [ViewVariables(VVAccess.ReadOnly),
-     DataField(customTypeSerializer: typeof(PrototypeIdListSerializer<BiomeTemplatePrototype>))]
-    public List<string> Biomes = new();
+    [ViewVariables(VVAccess.ReadOnly), DataField]
+    public List<ProtoId<BiomeTemplatePrototype>> Biomes = [];
 }

@@ -1,0 +1,22 @@
+- type: entity
+  parent: [ RingBase, BaseSyndicateContraband ]
+  id: SunriseSyndicateRing
+  name: syndicate ring
+  description: A black-and-red ring bearing the Syndicate emblem.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Hands/Rings.rsi
+    state: ring
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-syndicate
+    stampedColor: "#850000"
+    stampState: paper_stamp-syndicate
+    sound:
+      path: /Audio/Items/Stamp/thick_stamp_sub.ogg
+      params:
+        volume: -2
+        maxDistance: 5
+  - type: Tag
+    tags:
+    - Ring
+    - SunriseSyndicateRing

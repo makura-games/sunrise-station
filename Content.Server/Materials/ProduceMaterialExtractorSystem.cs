@@ -1,7 +1,7 @@
 using System.Linq;
-using Content.Server.Botany.Components;
 using Content.Server.Materials.Components;
 using Content.Server.Power.EntitySystems;
+using Content.Shared.Botany.Items.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -11,12 +11,12 @@ using Robust.Server.Audio;
 
 namespace Content.Server.Materials;
 
-public sealed class ProduceMaterialExtractorSystem : EntitySystem
+public sealed partial class ProduceMaterialExtractorSystem : EntitySystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly MaterialStorageSystem _materialStorage = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private MaterialStorageSystem _materialStorage = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -56,7 +56,7 @@ public sealed class ProduceMaterialExtractorSystem : EntitySystem
         if (!TryComp<ProduceComponent>(used, out var produce))
             return false;
 
-        if (!_solutionContainer.TryGetSolution(used, produce.SolutionName, out var solution))
+        if (!_solutionContainer.TryGetSolution(used, produce.TargetSolution, out var solution))
             return false;
 
         // Can produce even have fractional amounts? Does it matter if they do?

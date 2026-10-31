@@ -1,0 +1,56 @@
+- type: entity
+  parent: OrganHumanExternal
+  id: OrganFelinidExternal
+  abstract: true
+  components:
+  - type: VisualOrganMarkings
+    markingData:
+      group: Felinid
+
+- type: entity
+  parent: [ OrganBaseTorso, OrganFelinidExternal ]
+  id: OrganFelinidTorso
+
+- type: entity
+  parent: [ OrganBaseHead, OrganFelinidExternal ]
+  id: OrganFelinidHead
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganFelinidExternal ]
+  id: OrganFelinidArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganFelinidExternal ]
+  id: OrganFelinidArmRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganFelinidExternal ]
+  id: OrganFelinidHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganFelinidExternal ]
+  id: OrganFelinidHandRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganFelinidExternal ]
+  id: OrganFelinidLegLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganFelinidExternal ]
+  id: OrganFelinidLegRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganFelinidExternal ]
+  id: OrganFelinidFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganFelinidExternal ]
+  id: OrganFelinidFootRight
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganHumanInternal, OrganFelinidExternal ]
+  id: OrganFelinidEyes
+  components:
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Customization/eyes.rsi

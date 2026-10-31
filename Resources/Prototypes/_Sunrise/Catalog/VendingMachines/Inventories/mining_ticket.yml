@@ -59,6 +59,17 @@
   - MiningEquipment
 
 - type: listing
+  id: VendorMiningMedipenCaseMiner
+  productEntity: MedipenCaseMiner
+  cost:
+    SalvageTicket: 100
+  categories:
+  - MiningEquipment
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 4
+
+- type: listing
   id: VendorMiningClothingEyesGlassesWelding
   productEntity: ClothingEyesGlassesWelding
   cost:

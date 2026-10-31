@@ -3,7 +3,7 @@ ent-CopyMachine = copy machine
 ent-CopyMachineFilled = { ent-CopyMachine }
     .desc = { ent-CopyMachine.desc }
 
-ent-CopyMachineCentcom = CentCom copy machine
+ent-CopyMachineCentcom = centCom copy machine
     .suffix = CentCom
     .desc = { ent-CopyMachine.desc }
 

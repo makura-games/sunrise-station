@@ -21,18 +21,19 @@
     borderColor: "#cc7014"
     accentVColor: "#cc3d3d"
     accentHColor: "#3d3d40"
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-      - CrewManifestCartridge
-      - NotekeeperCartridge
-      - NanoTaskCartridge
-      - NewsReaderCartridge
-      - AstroNavCartridge
-      - NavigatorCartridge
-      - MessengerCartridge
-      - PhotoCartridge
-      - CorporateLawCartridge
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NotekeeperCartridge
+        - id: NanoTaskCartridge
+        - id: NewsReaderCartridge
+        - id: AstroNavCartridge
+        - id: NavigatorCartridge
+        - id: MessengerCartridge
+        - id: PhotoCartridge
+        - id: CorporateLawCartridge
   - type: PdaAnimationVisuals
     animatedState: pda-space-prison-pilot
     idInsertedLayerState: id_inserted-space-prison

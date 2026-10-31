@@ -1,4 +1,4 @@
-ent-BloodBoil = Кипение крови
+ent-BloodBoil = кипение крови
     .desc = { ent-BaseBullet.desc }
-ent-BloodBolt = Кровь
+ent-BloodBolt = кровь
     .desc = { ent-BaseBullet.desc }

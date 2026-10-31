@@ -22,7 +22,7 @@ public sealed partial class SalvageSystem
      * Handles actively running a salvage expedition.
      */
 
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     private void InitializeRunner()
     {
@@ -41,7 +41,7 @@ public sealed partial class SalvageSystem
         }
 
         // TODO: This is terrible but need bluespace harnesses or something.
-        var query = EntityQueryEnumerator<HumanoidAppearanceComponent, MobStateComponent, MindContainerComponent, TransformComponent>(); // Sunrise-Edit
+        var query = EntityQueryEnumerator<HumanoidProfileComponent, MobStateComponent, MindContainerComponent, TransformComponent>(); // Sunrise-Edit
 
         while (query.MoveNext(out var uid, out _, out var mobState, out var mind, out var mobXform)) // Sunrise-Edit
         {

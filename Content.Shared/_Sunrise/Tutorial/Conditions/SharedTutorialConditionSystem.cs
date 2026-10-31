@@ -86,6 +86,20 @@ public abstract partial class TutorialConditionSystem<T, TCon> : EntitySystem wh
         SubscribeLocalEvent<T, TutorialConditionEvent<TCon>>(Condition);
     }
     protected abstract void Condition(Entity<T> entity, ref TutorialConditionEvent<TCon> args);
+    public bool TryGetPrototypeId(EntityUid? uid, out EntProtoId protoId)
+    {
+        protoId = default;
+
+        if (uid is not { } target)
+            return false;
+
+        var proto = Prototype(target);
+        if (proto == null)
+            return false;
+
+        protoId = proto.ID;
+        return true;
+    }
 }
 
 /// <summary>

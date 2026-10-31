@@ -1,0 +1,30 @@
+- type: !PartialOnly entity
+  id: ClothingUniformJumpskirtSec
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Uniforms/Jumpskirt/security.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Uniforms/Jumpskirt/security.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#C12D30"
+        sprite: Clothing/Uniforms/Jumpskirts/Color/color.rsi
+      - state: overlay-inhand-left
+        sprite: _Sunrise/Clothing/Uniforms/Jumpsuit/security.rsi
+      right:
+      - state: inhand-right
+        color: "#C12D30"
+        sprite: Clothing/Uniforms/Jumpskirts/Color/color.rsi
+      - state: overlay-inhand-right
+        sprite: _Sunrise/Clothing/Uniforms/Jumpsuit/security.rsi
+
+- type: !PartialOnly entity
+  id: ClothingUniformJumpskirtSeniorOfficer
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Uniforms/Jumpskirt/senior_officer.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Uniforms/Jumpskirt/senior_officer.rsi
+

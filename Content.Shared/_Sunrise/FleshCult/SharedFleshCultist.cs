@@ -93,6 +93,8 @@ public sealed partial class FleshCultistBodyTransformEvent : InstantActionEvent
     public List<string> CheckSlots = [];
     [DataField]
     public List<ProtoId<TagPrototype>> CheckTags = [];
+    [DataField]
+    public List<string> UnequipSlots = [];
 }
 
 public sealed partial class FleshCultistUnlockAbilityEvent : InstantActionEvent

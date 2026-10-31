@@ -1,6 +1,6 @@
 ent-SupermatterCrystal = кристалл суперматерии
     .desc = Странно прозрачный и переливающийся кристалл.
-ent-Cascad1 = Каскад
+ent-Cascad1 = каскад
     .desc = Последствия каскадного отказа кристалла суперматерии.
 ent-Cascad2 = { ent-Cascad1 }
     .desc = { ent-Cascad1.desc }

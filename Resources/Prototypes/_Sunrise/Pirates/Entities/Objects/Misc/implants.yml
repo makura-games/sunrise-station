@@ -1,0 +1,11 @@
+- type: entity
+  parent: BaseSubdermalImplant
+  id: RadioImplantPirate
+  name: pirate radio implant
+  description: This implant grants access to the Pirate channel without a headset.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+  - type: RadioImplant
+    radioChannels:
+    - Pirate

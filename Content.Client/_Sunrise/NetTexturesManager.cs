@@ -24,16 +24,17 @@ public sealed partial class NetTexturesManager
     private const int MinTransferPublishBudgetBytes = 512 * 1024;
     private const int MaxTransferPublishBudgetBytes = 8 * 1024 * 1024;
     private const int TransferPublishBytesPerSecond = 64 * 1024 * 1024;
+    private const int MaxDeferredDisposalsPerFrame = 8;
     #endregion
 
     #region Dependencies
-    [Dependency] private readonly IClientNetManager _netManager = default!;
-    [Dependency] private readonly IResourceManager _resourceManager = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly IBaseClient _baseClient = default!;
-    [Dependency] private readonly ITransferManager _transferManager = default!;
-    [Dependency] private readonly ITaskManager _taskManager = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
+    [Dependency] private IResourceManager _resourceManager = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private IBaseClient _baseClient = default!;
+    [Dependency] private ITransferManager _transferManager = default!;
+    [Dependency] private ITaskManager _taskManager = default!;
+    [Dependency] private IClyde _clyde = default!;
     #endregion
 
     #region State
@@ -50,6 +51,7 @@ public sealed partial class NetTexturesManager
     private readonly Queue<PreparationRequest> _prepareRequests = new();
     private readonly List<(string ResourceKey, ResPath ResPath)> _resourcesReadyToPrepare = new();
     private readonly Dictionary<ResPath, RsiCompletenessEntry> _rsiCompleteness = new();
+    private readonly Queue<IDisposable> _deferredDisposals = new();
 
     private CancellationTokenSource _sessionCts = new();
     private int _sessionGeneration;
@@ -135,6 +137,8 @@ public sealed partial class NetTexturesManager
     /// <param name="frameTime">Прошедшее время кадра в секундах.</param>
     public void Update(float frameTime)
     {
+        ProcessDeferredDisposals();
+
         lock (_pendingTransferBatches)
         {
             if (_pendingTransferBatches.Count != 0)
@@ -146,6 +150,18 @@ public sealed partial class NetTexturesManager
 
         if (_preparedUploads.Count != 0)
             ProcessPreparedUploads(frameTime);
+    }
+
+    /// <summary>
+    /// Постепенно освобождает ресурсы прошлой сессии, не блокируя переход в меню одним большим пакетом GPU-вызовов.
+    /// </summary>
+    private void ProcessDeferredDisposals()
+    {
+        var remaining = MaxDeferredDisposalsPerFrame;
+        while (remaining-- > 0 && _deferredDisposals.TryDequeue(out var disposable))
+        {
+            disposable.Dispose();
+        }
     }
     #endregion
 }

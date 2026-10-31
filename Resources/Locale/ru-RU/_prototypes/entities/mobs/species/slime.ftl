@@ -1,4 +1,4 @@
-ent-BaseMobSlimePerson = Урист МакСлайм
+ent-BaseMobSlimePerson = урист МакСлайм
     .desc = { ent-BaseMobSpeciesOrganic.desc }
     .suffix = Слаймолюд
 ent-MobSlimePersonDummy = { ent-MobHumanDummy }

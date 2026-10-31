@@ -1,7 +1,7 @@
 - type: gameMap
   id: SunriseBarratry
   mapName: 'Barratry'
-  mapPath: /Maps/_Sunrise/Station/barratry.yml
+  mapPath: /Maps/_Sunrise/Station/OutPool/barratry.yml
   maxRandomOffset: 0
   minPlayers: 0
   randomRotation: false

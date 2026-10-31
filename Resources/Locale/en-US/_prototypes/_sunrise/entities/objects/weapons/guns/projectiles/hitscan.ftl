@@ -10,7 +10,5 @@ ent-BulletPistolTraceRubber = .35 rubber
     .desc = { ent-BaseBullet.desc }
 ent-BulletRifleTraceSP = 5,56SP
     .desc = { ent-BaseBullet.desc }
-ent-BulletRifleTraceHP = 5,56HP
-    .desc = { ent-BaseBullet.desc }
 ent-BulletRifleTraceFMJ = 5,56FMJ
     .desc = { ent-BaseBullet.desc }

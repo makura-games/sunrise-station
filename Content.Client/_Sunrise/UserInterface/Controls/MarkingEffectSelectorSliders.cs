@@ -1,14 +1,14 @@
-﻿using Content.Client._Sunrise.MarkingEffectsClient;
+using Content.Client._Sunrise.MarkingEffectsClient;
 using Content.Shared._Sunrise.MarkingEffects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client._Sunrise.UserInterface.Controls;
 
-public sealed class MarkingEffectSelectorSliders : Control
+public sealed partial class MarkingEffectSelectorSliders : Control
 {
-    [Dependency] private readonly ILocalizationManager _loc = default!;
-    [Dependency] private readonly ILogManager _log = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
+    [Dependency] private ILogManager _log = default!;
 
     private readonly ISawmill _sawmill;
 
@@ -52,7 +52,7 @@ public sealed class MarkingEffectSelectorSliders : Control
         IoCManager.InjectDependencies(this);
         _sawmill = _log.GetSawmill(nameof(MarkingEffectSelectorSliders));
 
-        defaultEffect ??= ColorMarkingEffect.White;
+        defaultEffect = (defaultEffect ?? ColorMarkingEffect.White).Clone();
 
         _typeSelector = new OptionButton();
         _typeSelector.HorizontalExpand = true;
@@ -95,6 +95,17 @@ public sealed class MarkingEffectSelectorSliders : Control
         _typeSelector.TrySelect(_types.IndexOf(_currentType));
         Effect = defaultEffect;
         Populate(_currentType, defaultEffect);
+    }
+
+    public void SetEffect(MarkingEffect effect)
+    {
+        if (_currentType == effect.Type && Effect.Equals(effect))
+            return;
+
+        var newEffect = effect.Clone();
+        _currentType = newEffect.Type;
+        _typeSelector.TrySelect(_types.IndexOf(_currentType));
+        Populate(_currentType, newEffect);
     }
 
     public void CreateSelector(string key = "base", MarkingEffectType type = MarkingEffectType.Color)

@@ -10,9 +10,8 @@ namespace Content.Shared._Sunrise.Messenger;
 /// <summary>
 /// System for handling messenger emojis.
 /// </summary>
-public abstract class SharedEmojiSystem : EntitySystem
+public abstract partial class SharedEmojiSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private const ChatChannel EmojiSupportedChannels =
         ChatChannel.OOC
@@ -93,7 +92,7 @@ public abstract class SharedEmojiSystem : EntitySystem
 
     private void CollectEmojis()
     {
-        Emojis = _prototype.EnumeratePrototypes<EmojiPrototype>()
+        Emojis = ProtoMan.EnumeratePrototypes<EmojiPrototype>()
             .ToFrozenDictionary(e => e.Code, e => e);
     }
 

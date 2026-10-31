@@ -1,5 +1,5 @@
 department-Cargo = Отдел снабжения
-department-Civilian = Сервисный отдел
+department-Civilian = Гражданский отдел
 department-Command = Командование
 department-CentralCommand = Центральное командование
 department-Engineering = Инженерный отдел
@@ -8,3 +8,5 @@ department-Security = Служба безопасности
 department-Science = Научный отдел
 department-Silicon = Силиконы
 department-Specific = Другие
+department-Unknown = Неизвестно
+department-Service = Сервисный отдел

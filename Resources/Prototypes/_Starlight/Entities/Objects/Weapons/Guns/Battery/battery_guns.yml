@@ -54,65 +54,6 @@
     stealGroup: OfficerHandgun
 
 - type: entity
-  name: dominator
-  parent: [ BaseWeaponBatterySmall, BaseSecurityContraband ]
-  id: WeaponDominator
-  description: A high-tech weapon created by the law enforcement organization Sibyl System, designed specifically to fight crime.
-  components:
-  - type: Appearance
-  - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Battery/dominator.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: disable-unshaded-0
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
-  - type: MagazineVisuals
-    magState: disable
-    steps: 4
-    zeroVisible: true
-  - type: Lock
-    mindShieldLock: true
-  - type: AccessReader
-    access: [["Security"]]
-  - type: Item
-    storedOffset: 1,-5
-  - type: Gun
-    fireRate: 2
-    projectileSpeed: 35 # any higher and this causes issues in lag
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
-  - type: BatterySelfRecharger
-    autoRechargeRate: 8
-    autoRechargePauseTime: 10
-  - type: BatteryAmmoProvider
-    proto: BulletDisabler
-    fireCost: 62.5
-  - type: BatteryWeaponFireModes
-    fireModes:
-    - proto: BulletDisabler
-      fireCost: 62.5
-      magState: disable
-    - proto: BulletTaser
-      fireCost: 200
-      magState: stun
-      conditions:
-      - !type:AlertLevelCondition
-        alertLevels:
-        - violet
-        - yellow
-        - red
-        - gamma
-        - epsilon
-        - delta
-    - proto: RedMediumLaser
-      fireCost: 125
-      magState: lethal
-  - type: StealTarget
-    stealGroup: OfficerHandgun
-
-- type: entity
   name: X-01 multiphase energy gun
   parent: [ BaseWeaponBatterySmall, BaseSecurityContraband ]
   id: WeaponMultiphaseGun
@@ -348,50 +289,6 @@
       fireCost: 100
       magState: destroy
       heldPrefix: destroy
-
-- type: entity
-  name: PDW-9 taser pistol
-  parent: [ BaseWeaponBatterySmall, BaseSecurityContraband ]
-  id: WeaponPDW9
-  description: A compact pulse core in a classic Nanotrasen officer pistol design. It's not the size of the gun, it's the size of the hole it puts in people.
-  components:
-  - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Battery/pdw9.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: disable
-      map: ["enum.FireModesLayers.FireMode"]
-    - state: disable-unshaded-0
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
-  - type: Item
-    size: Small
-    shape:
-    - 0, 0, 1, 1
-  - type: Gun
-    bigTrigger: true # Sunrise-Edit
-  - type: MagazineVisuals
-    magState: disable
-    steps: 5
-    zeroVisible: true
-  - type: BatteryAmmoProvider
-    proto: BulletTaser
-    fireCost: 150
-  - type: BatteryWeaponFireModes
-    fireModes:
-    - proto: BulletTaser
-      fireCost: 150
-      magState: disable
-      visualState: disable
-    - proto: RedMediumLaser
-      fireCost: 100
-      magState: kill
-      visualState: kill
-  - type: Appearance
-  - type: Battery
-    maxCharge: 1500
-    startingCharge: 1500
 
 - type: entity
   parent: [ BaseWeaponBattery, BaseGunWieldable, BaseCentcommContraband ]

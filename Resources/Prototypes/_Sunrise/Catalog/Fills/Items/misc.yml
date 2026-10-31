@@ -11,6 +11,7 @@
 - type: entity
   id: ClothingBeltBlueShieldWebbingFilled
   parent: ClothingBeltBlueShieldWebbing
+  categories: [HideSpawnMenu]
   suffix: Filled
   components:
   - type: EntityTableContainerFill
