@@ -128,7 +128,7 @@ public abstract partial class SharedEmojiSystem : EntitySystem
 
     public bool IsEmojiAllowedForPlayer(string emojiId, NetUserId userId, ISharedSponsorsManager? sponsorsManager)
     {
-        if (!_prototype.TryIndex<EmojiPrototype>(emojiId, out var emoji))
+        if (!ProtoMan.TryIndex<EmojiPrototype>(emojiId, out var emoji))
             return false;
 
         if (!emoji.SponsorOnly)
