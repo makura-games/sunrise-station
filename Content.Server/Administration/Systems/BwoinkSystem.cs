@@ -684,7 +684,7 @@ namespace Content.Server.Administration.Systems
                 senderAdmin,
                 senderSession,
                 adminPrefix,
-                forAdmin || _overrideClientName == string.Empty ? senderSession.Name : _overrideClientName);
+                forAdmin || !senderAHelpAdmin || _overrideClientName == string.Empty ? senderSession.Name : _overrideClientName);
 
             var statusPrefix = "";
             if (input.AdminOnly)
