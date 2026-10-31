@@ -104,6 +104,7 @@ namespace Content.Client._Sunrise.Lobby
             }
 
             Lobby = (SunriseLobbyGui) _userInterfaceManager.ActiveScreen;
+            Lobby.Chat.Main = true;
 
 
             _gameTicker = _entityManager.System<ClientGameTicker>();
@@ -239,6 +240,7 @@ namespace Content.Client._Sunrise.Lobby
             if (_lobbyChangelogLoaded || _combinedLobbyChangelog == null || Lobby == null)
                 return;
 
+            Lobby.LocalChangelogBody.ChangelogBody.RemoveAllChildren();
             Lobby.LocalChangelogBody.PopulateChangelog(_combinedLobbyChangelog);
             _lobbyChangelogLoaded = true;
         }
