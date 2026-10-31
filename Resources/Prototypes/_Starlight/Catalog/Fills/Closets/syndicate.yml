@@ -9,7 +9,7 @@
     containers:
       entity_storage: !type:AllSelector
         children:
-        - id: WeaponPistolStechkin
+        - id: SunriseWeaponPistolAPS
         - id: PouchAmmoFilledPistol40
         - id: CombatKnife
         - id: CamoUniformSuit
@@ -17,7 +17,7 @@
         - id: CigPackSyndicate
         - id: CybersunFlippo
         - id: ClothingEyesEyepatch
-        - id: ClothingOuterArmorBasicSlim
+        - id: ClothingOuterVestWebMerc
         - id: ClothingBeltLightSovietMarineWebbing
         - id: ClothingHandsGlovesCombatFingerless
         - id: ClothingShoesBootsCombat

@@ -10,9 +10,10 @@
       checkCanInteract: false
       itemIconStyle: BigAction
       priority: -20
-      icon:
-        sprite: _Starlight/Actions/implants.rsi
-        state: gorilla_rampage
+    - type: Sprite
+      sprite: _Starlight/Actions/implants.rsi
+      layers:
+      - state: gorilla_rampage
     - type: InstantAction
       event: !type:UseMagillitisSerumImplantEvent
 
@@ -30,10 +31,11 @@
   - type: Action
     itemIconStyle: BigAction
     priority: -20
-    icon:
-      sprite: _Starlight/Effects/portal_implant.rsi
-      state: bluespace_implant
 
+  - type: Sprite
+    sprite: _Starlight/Effects/portal_implant.rsi
+    layers:
+    - state: bluespace_implant
 - type: entity
   parent: BaseImplantAction
   id: ActionActivateRedspaceImplant
@@ -48,6 +50,7 @@
   - type: Action
     itemIconStyle: BigAction
     priority: -20
-    icon:
-      sprite: _Starlight/Effects/portal_implant.rsi
-      state: redspace_implant
+  - type: Sprite
+    sprite: _Starlight/Effects/portal_implant.rsi
+    layers:
+    - state: redspace_implant

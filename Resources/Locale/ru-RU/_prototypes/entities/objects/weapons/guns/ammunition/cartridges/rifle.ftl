@@ -1,12 +1,10 @@
 ent-BaseCartridgeRifle = патрон (5,56мм)
     .desc = { ent-BaseCartridge.desc }
-ent-CartridgeRifleSP = патрон (5,56мм SP)
+ent-CartridgeRifleSP = патрон (5,56мм)
     .desc = { ent-BaseCartridgeRifle.desc }
-ent-CartridgeRifleHP = патрон (5,56мм HP)
+ent-CartridgeRifleFMJ = патрон (5,56мм ПП)
     .desc = { ent-BaseCartridgeRifle.desc }
-ent-CartridgeRifleFMJ = патрон (5,56мм FMJ)
-    .desc = { ent-BaseCartridgeRifle.desc }
-ent-CartridgeRifleAP = патрон (5,56мм AP)
+ent-CartridgeRifleAP = патрон (5,56мм ББ)
     .desc = { ent-BaseCartridgeRifle.desc }
 ent-CartridgeRiflePractice = патрон (5,56мм учебный)
     .desc = { ent-BaseCartridgeRifle.desc }

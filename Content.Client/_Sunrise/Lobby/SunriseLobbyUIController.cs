@@ -3,7 +3,10 @@ using Content.Client._Sunrise.Lobby.UI;
 using Content.Client._Sunrise.Pets;
 using Content.Client.Guidebook;
 using Content.Shared._Sunrise.Pets;
+using Content.Client._Sunrise.Humanoid;
+using Content.Client.Body;
 using Content.Client.Humanoid;
+using Content.Shared._Sunrise.Humanoid;
 using Content.Client.Inventory;
 using Content.Client.Lobby.UI;
 using Content.Client.Players.PlayTimeTracking;
@@ -34,19 +37,22 @@ using Content.Client._Sunrise.PlayerCache;
 
 namespace Content.Client._Sunrise.Lobby;
 
-public sealed class SunriseLobbyUIController : UIController, IOnStateEntered<SunriseLobbyState>, IOnStateExited<SunriseLobbyState>
+public sealed partial class SunriseLobbyUIController : UIController, IOnStateEntered<SunriseLobbyState>, IOnStateExited<SunriseLobbyState>
 {
-    [Dependency] private readonly IClientPreferencesManager _preferencesManager = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly IFileDialogManager _dialogManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IStateManager _stateManager = default!;
-    [Dependency] private readonly JobRequirementsManager _requirements = default!;
-    [Dependency] private readonly MarkingManager _markings = default!;
-    [Dependency] private readonly PlayerCacheManager _playerCache = default!;
-    [UISystemDependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private IClientPreferencesManager _preferencesManager = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
+    [Dependency] private IFileDialogManager _dialogManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IStateManager _stateManager = default!;
+    [Dependency] private JobRequirementsManager _requirements = default!;
+    [Dependency] private MarkingManager _markings = default!;
+    [Dependency] private PlayerCacheManager _playerCache = default!;
+        [UISystemDependency] private readonly VisualBodySystem _visualBody = default!;
+    [UISystemDependency] private readonly HumanoidProfileSystem _humanoidProfile = default!;
+    [UISystemDependency] private readonly SunriseHumanoidProfileSystem _sunriseProfile = default!;
+    [UISystemDependency] private readonly SunriseHumanoidProfileVisualSystem _sunriseProfileVisual = default!;
     [UISystemDependency] private readonly ClientInventorySystem _inventory = default!;
     [UISystemDependency] private readonly StationSpawningSystem _spawn = default!;
     [UISystemDependency] private readonly GuidebookSystem _guide = default!;
@@ -591,13 +597,15 @@ public sealed class SunriseLobbyUIController : UIController, IOnStateEntered<Sun
         {
             var dummy = _prototypeManager.Index<SpeciesPrototype>(humanoid.Species).DollPrototype;
             dummyEnt = EntityManager.SpawnEntity(dummy, MapCoordinates.Nullspace);
+            _visualBody.ApplyProfileTo(dummyEnt, humanoid);
+            _humanoidProfile.ApplyProfileTo(dummyEnt, humanoid);
+            _sunriseProfile.ApplyProfileTo(dummyEnt, humanoid);
+            _sunriseProfileVisual.Refresh(dummyEnt);
         }
         else
         {
-            dummyEnt = EntityManager.SpawnEntity(_prototypeManager.Index<SpeciesPrototype>(SharedHumanoidAppearanceSystem.DefaultSpecies).DollPrototype, MapCoordinates.Nullspace);
+            dummyEnt = EntityManager.SpawnEntity(_prototypeManager.Index<SpeciesPrototype>(HumanoidCharacterProfile.DefaultSpecies).DollPrototype, MapCoordinates.Nullspace);
         }
-
-        _humanoid.LoadProfile(dummyEnt, humanoid);
 
         if (humanoid != null && job != null && jobClothes)
         {

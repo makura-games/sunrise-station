@@ -4,3 +4,6 @@ ent-Nanopaste = нанопаста
 ent-Nanopaste1 = { ent-Nanopaste }
     .suffix = Одиночная
     .desc = { ent-Nanopaste.desc }
+ent-Nanopaste10 = { ent-Nanopaste }
+    .suffix = Полный
+    .desc = { ent-Nanopaste.desc }

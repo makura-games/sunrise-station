@@ -568,7 +568,7 @@
     - id: WeaponLightMachineGunDP28
       prob: 0.05
       orGroup: DP28Pool
-    - id: WeaponPistolHIB88M4
+    - id: WeaponPistolViper
       prob: 0.5
       orGroup: DP28Pool
     - id: CrateAmmunitionSmallLightRifle
@@ -610,7 +610,7 @@
     - id: WeaponLightMachineGunMG60Empty
       prob: 0.25
       orGroup: DP28Pool
-    - id: WeaponPistolHIB88M4
+    - id: WeaponPistolViper
       prob: 0.3
       orGroup: DP28Pool
     - id: CrateAmmunitionSmallLightRifle
@@ -671,7 +671,7 @@
     - id: WeaponLightMachineGunRPD
       prob: 0.05
       orGroup: MgPool
-    - id: WeaponPistolHIB88M4
+    - id: WeaponPistolViper
       prob: 0.5
       orGroup: MgPool
     - id: MagazineLightRifleBeltBoxFMJ
@@ -944,7 +944,7 @@
     - id: WeaponShotgunGA12
       prob: 0.25
       orGroup: Weapons
-    - id: WeaponShotgunCombat
+    - id: WeaponShotgunEnforcer
       prob: 0.25
       orGroup: Weapons
     - id: WeaponShotgunBulldogBiocode

@@ -2,7 +2,6 @@ trait-noemotions-name = Без эмоций
 trait-noemotions-desc = Твой голос остаётся ровным и безжизненным при любых обстоятельствах.
 trait-felinid-vocal-name = Кошачьи связки
 trait-felinid-vocal-desc = В речи проскальзывают игривые «мяу».
-
 trait-ss13-accent-name = Акцент СС13
 trait-ss13-accent-desc = Речь с узнаваемым станционным оттенком.
 trait-ukrainian-accent-name = Украинский акцент
@@ -11,5 +10,4 @@ trait-russian-accent-name = Русский акцент
 trait-russian-accent-desc = Ты говоришь с отчётливым русским акцентом.
 trait-transliteration-accent-name = Транслитерация
 trait-transliteration-accent-desc = Постоянно миксуешь звуки, транслитерируя слова на лету.
-
 trait-category-vocal = Голосовые

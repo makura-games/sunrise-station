@@ -3838,85 +3838,71 @@ entities:
   - uid: 301
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 10.5,-2.5
       parent: 1
   - uid: 302
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 10.5,-2.5
       parent: 1
   - uid: 303
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 10.5,-2.5
       parent: 1
   - uid: 304
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 10.5,-2.5
       parent: 1
   - uid: 305
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 10.5,-2.5
       parent: 1
   - uid: 306
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 10.5,-2.5
       parent: 1
   - uid: 307
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 10.5,-2.5
       parent: 1
   - uid: 308
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 10.5,-1.5
       parent: 1
   - uid: 309
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 10.5,-1.5
       parent: 1
   - uid: 310
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 10.5,-1.5
       parent: 1
   - uid: 311
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 10.5,-1.5
       parent: 1
   - uid: 312
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 10.5,-1.5
       parent: 1
   - uid: 313
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 10.5,-1.5
       parent: 1
   - uid: 314
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 10.5,-1.5
       parent: 1
 - proto: Handcuffs

@@ -10,11 +10,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.UserInterface.Systems.Info;
 
-public sealed class InfoUIController : UIController, IOnStateExited<GameplayState>
+public sealed partial class InfoUIController : UIController, IOnStateExited<GameplayState>
 {
-    [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IClientConsoleHost _consoleHost = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private RulesPopup? _rulesPopup;
     private RulesAndInfoWindow? _infoWindow;
@@ -31,22 +31,26 @@ public sealed class InfoUIController : UIController, IOnStateExited<GameplayStat
 
         _netManager.RegisterNetMessage<RulesAcceptedMessage>();
         _netManager.RegisterNetMessage<SendRulesInformationMessage>(OnRulesInformationMessage);
+        SunriseInitializeRulesQueue();
 
         _consoleHost.RegisterCommand("fuckrules",
             "",
             "",
             (_, _, _) =>
         {
-            OnAcceptPressed();
+            OnAcceptPressed(true);
         });
     }
 
     private void OnRulesInformationMessage(SendRulesInformationMessage message)
     {
         RulesEntryId = message.CoreRules;
+        SunriseOnRulesInformationReceived(); // Sunrise-edit
 
         if (message.ShouldShowRules)
             ShowRules(message.PopupTime);
+
+        SunriseOnRulesInformationHandled(); // Sunrise-edit
     }
 
     public void OnStateExited(GameplayState state)
@@ -79,12 +83,15 @@ public sealed class InfoUIController : UIController, IOnStateExited<GameplayStat
         _consoleHost.ExecuteCommand("quit");
     }
 
-    private void OnAcceptPressed()
+    private void OnAcceptPressed(bool fuckRules)
     {
-        _netManager.ClientSendMessage(new RulesAcceptedMessage());
+        var message = new RulesAcceptedMessage() { FuckRules = fuckRules };
+        _netManager.ClientSendMessage(message);
 
+        var hadPopup = _rulesPopup != null; // Sunrise-edit
         _rulesPopup?.Orphan();
         _rulesPopup = null;
+        SunriseOnRulesAccepted(hadPopup); // Sunrise-edit
     }
 
     public GuideEntryPrototype GetCoreRuleEntry()

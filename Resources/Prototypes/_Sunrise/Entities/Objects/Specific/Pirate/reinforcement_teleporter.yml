@@ -39,6 +39,8 @@
   description: Call in a freelancer of questionable quality, instantly! Basic pirate equipment provided.
   suffix: Pirate
   components:
+  - type: SpawnOnDespawn
+    prototype: Doubloon29
   - type: GhostRole
     name: ghost-role-information-pirate-name
     description: ghost-role-information-pirate-description
@@ -61,6 +63,8 @@
   description: Call in a freelancer of questionable quality, instantly! Basic rookie-pirate equipment provided.
   suffix: Pirate, EVA
   components:
+  - type: SpawnOnDespawn
+    prototype: Doubloon20
   - type: GhostRoleMobSpawner
     prototype: MobHumanPirateScoonerOldReinforcement
     selectablePrototypes: ["PirateScoonerHumanOld", "PirateScoonerReptilianOld", "PirateScoonerDwarfOld", "PirateScoonerVoxOld", "PirateScoonerVulpkaninOld"]

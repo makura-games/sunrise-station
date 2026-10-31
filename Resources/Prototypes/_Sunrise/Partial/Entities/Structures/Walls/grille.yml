@@ -1,0 +1,89 @@
+- type: !PartialOnly entity
+  id: Grille
+  components:
+  - type: Sprite
+    drawdepth: Walls
+    sprite: _Sunrise/Structures/Walls/grille.rsi
+    layers: !Clear
+    - state: grille
+    - state: electrified
+      sprite: Effects/electricity.rsi
+      map: ["enum.ElectrifiedLayers.Sparks"]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/grille.rsi
+    state: grille
+  - !Remove type: IconSmooth
+
+- type: !PartialOnly entity
+  id: ClockworkGrille
+  components:
+  - type: Sprite
+    drawdepth: Walls
+    sprite: _Sunrise/Structures/Walls/clockwork_grille.rsi
+    state: ratvargrille
+    layers: !Clear
+      - state: ratvargrille
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/clockwork_grille.rsi
+    state: ratvargrille
+
+- type: !PartialOnly entity
+  id: GrilleBroken
+  components:
+  - type: Sprite
+    layers: !Remove
+    drawdepth: Walls
+    sprite: _Sunrise/Structures/Walls/grille.rsi
+    state: grille_broken
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/grille.rsi
+    state: grille_broken
+
+- type: !PartialOnly entity
+  id: ClockworkGrilleBroken
+  components:
+  - type: Sprite
+    layers: !Remove
+    drawdepth: Walls
+    sprite: _Sunrise/Structures/Walls/clockwork_grille.rsi
+    state: brokenratvargrille
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/clockwork_grille.rsi
+    state: brokenratvargrille
+
+- type: !PartialOnly entity
+  id: GrilleDiagonal
+  components:
+  - type: Sprite
+    drawdepth: Walls
+    sprite: _Sunrise/Structures/Walls/grille.rsi
+    layers: !Clear
+    - state: grille_diagonal
+    - state: electrified_diagonal
+      sprite: Effects/electricity.rsi
+      map: ["enum.ElectrifiedLayers.Sparks"]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/grille.rsi
+    state: grille_diagonal
+  - !Remove type: IconSmooth
+
+- type: !PartialOnly entity
+  id: ClockworkGrilleDiagonal
+  components:
+  - type: Sprite
+    drawdepth: Walls
+    sprite: _Sunrise/Structures/Walls/clockwork_grille.rsi
+    layers: !Clear
+    - state: ratvargrille_diagonal
+    - state: electrified_diagonal
+      sprite: Effects/electricity.rsi
+      map: ["enum.ElectrifiedLayers.Sparks"]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/clockwork_grille.rsi
+    state: ratvargrille_diagonal

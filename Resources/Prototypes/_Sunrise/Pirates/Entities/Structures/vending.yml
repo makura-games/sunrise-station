@@ -1,0 +1,40 @@
+- type: entity
+  parent: VendingMachineCigs
+  id: VendingMachineCigsPirate
+  name: stolen ShadyCigs Deluxe
+  suffix: Pirate
+  components:
+  - type: Tag
+    tags:
+    - Pirate
+- type: entity
+  parent: VendingMachineTankDispenserEVA
+  id: VendingMachineTankDispenserEVAPirate
+  name: stolen gas tank dispenser
+  suffix: Pirate, EVA [O2, N2]
+  components:
+  - type: Tag
+    tags:
+    - Pirate
+
+- type: entity
+  parent: VendingMachineYouTool
+  id: VendingMachineYouToolPirate
+  name: hacked YouTool
+  suffix: Pirate
+  components:
+  - type: Tag
+    tags:
+    - Pirate
+
+- type: entity
+  parent: VendingMachineBooze
+  id: VendingMachineBoozeSyndicatePirate
+  name: hacked Bruise-O-Mat
+  suffix: Pirate
+  components:
+  - type: AccessReader
+    access: [["Pirate"]]
+  - type: Tag
+    tags:
+    - Pirate

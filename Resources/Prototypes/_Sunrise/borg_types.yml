@@ -159,8 +159,6 @@
     tags:
     - BorgModuleGeneric
     - BorgModuleSecurity
-    - BorgModuleSyndicate
-    - BorgModuleSyndicateAssault
 
   defaultModules:
   - BorgModuleStandart

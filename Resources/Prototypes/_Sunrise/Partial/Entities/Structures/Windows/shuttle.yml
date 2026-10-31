@@ -1,0 +1,21 @@
+- type: !PartialOnly entity
+  id: ShuttleWindow
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Windows/shuttle_window.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Windows/shuttle_window.rsi
+    state: full
+
+- type: !PartialOnly entity
+  id: ShuttleWindowDiagonal
+  components:
+  - type: Sprite
+    layers: !Remove
+    drawdepth: WallTops
+    sprite: _Sunrise/Structures/Windows/shuttle_window_diagonal.rsi
+    state: state0
+  - type: Icon
+    sprite: _Sunrise/Structures/Windows/shuttle_window_diagonal.rsi
+    state: state0

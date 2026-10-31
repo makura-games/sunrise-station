@@ -1,0 +1,17 @@
+- type: !PartialOnly entity
+  id: BlastDoor
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Doors/Shutters/blastdoor.rsi
+    layers: !Clear
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+    - state: welded
+      map: ["enum.WeldableLayers.BaseWelded"]
+
+- type: !PartialOnly entity
+  id: BlastDoorFrame
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Doors/Shutters/blastdoor.rsi
+    state: assembly

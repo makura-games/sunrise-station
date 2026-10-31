@@ -1,5 +1,6 @@
-﻿- type: entity
+- type: entity
   id: OptionsVisualizerTest
+  name: OptionsVisualizerTest
   suffix: DEBUG
   categories: [ Debug ] # Sunrise added
   components:
@@ -19,4 +20,3 @@
         data: { state: motion }
       - options: [Test, ReducedMotion]
         data: { state: both }
-

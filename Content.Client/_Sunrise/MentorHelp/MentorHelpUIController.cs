@@ -30,13 +30,13 @@ namespace Content.Client._Sunrise.MentorHelp;
 /// Контроллер интерфейса системы менторской помощи.
 /// </summary>
 [UsedImplicitly]
-public sealed class MentorHelpUIController : UIController, IOnSystemChanged<MentorHelpSystem>, IOnStateChanged<GameplayState>, IOnStateChanged<SunriseLobbyState>
+public sealed partial class MentorHelpUIController : UIController, IOnSystemChanged<MentorHelpSystem>, IOnStateChanged<GameplayState>, IOnStateChanged<SunriseLobbyState>
 {
-    [Dependency] private readonly IClientAdminManager _adminManager = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
+    [Dependency] private IClientAdminManager _adminManager = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IClyde _clyde = default!;
     [UISystemDependency] private readonly AudioSystem _audio = default!;
 
     private MentorHelpSystem? _mentorHelpSystem;
@@ -74,7 +74,7 @@ public sealed class MentorHelpUIController : UIController, IOnSystemChanged<Ment
 
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.OpenMentorHelp,
-                InputCmdHandler.FromDelegate(_ => Open()))
+                InputCmdHandler.FromDelegate(_ => ToggleWindow()))
             .Register<MentorHelpUIController>();
     }
 
@@ -161,7 +161,7 @@ public sealed class MentorHelpUIController : UIController, IOnSystemChanged<Ment
 
     private void MHelpButtonPressed(BaseButton.ButtonEventArgs obj)
     {
-        Open();
+        ToggleWindow();
     }
 
     private void OnAdminStatusUpdated()
@@ -309,6 +309,14 @@ public sealed class MentorHelpUIController : UIController, IOnSystemChanged<Ment
         UIHelper = CreateUiHandler(ownerUserId, hasMentorPerms);
 
         UIHelper.OnClose += () => { SetMentorHelpPressed(false); };
+    }
+
+    private void ToggleWindow()
+    {
+        if (UIHelper is { IsOpen: true })
+            UIHelper.CloseWindow();
+        else
+            Open();
     }
 
     /// <summary>

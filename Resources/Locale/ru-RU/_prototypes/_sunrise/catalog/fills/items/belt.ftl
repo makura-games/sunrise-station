@@ -1,11 +1,11 @@
 ent-ClothingBeltSheathSyndicateFilled = { ent-ClothingBeltSheathSyndicate }
     .suffix = Заполненый
     .desc = { ent-ClothingBeltSheathSyndicate.desc }
-ent-BeltSheathSyndieFilledBox = Завернутая рапира Синдиката
+ent-BeltSheathSyndieFilledBox = завернутая рапира Синдиката
     .desc = Обёртка.
 ent-ClothingBeltMilitaryWebbingMedSunriseFilled = { ent-ClothingBeltMilitaryWebbingMedSunrise }
     .suffix = Заполненый
     .desc = { ent-ClothingBeltMilitaryWebbingMedSunrise.desc }
 ent-ClothingAbductorBeltFilled = { ent-ClothingAbductorBelt }
-    .suffix = Filled
+    .suffix = Заполненный
     .desc = { ent-ClothingAbductorBelt.desc }

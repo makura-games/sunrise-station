@@ -295,6 +295,10 @@ ehthumbs.db
 # Merge driver stuff
 Content.Tools/test/out.yml
 
+# Local changelog Discord debug files.
+Resources/Changelog/Old.yml
+Resources/Changelog/DiscordDebug.md
+
 # Windows
 desktop.ini
 
@@ -307,10 +311,13 @@ Resources/MapImages
 
 *.bak
 
+# Shader error output
+error.glsl
+
 # Direnv stuff
 .direnv/
 
-# C-sharp cache files
+# C# Dev Kit cache file
 *.lscache
 
 # Sunrise added start - не отслеживаем локально сгенерированные настройки шардов тестов

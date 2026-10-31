@@ -1,0 +1,12 @@
+ent-CratePirateChestSun = { ent-CratePirate }
+    .suffix = Заполнен, Оружие, Санрайз
+    .desc = { ent-CratePirate.desc }
+ent-CratePiraterEVASuitArmoredBundle = набор бронированных ева-костюмов пиратов
+    .suffix = Заполнен, Санрайз
+    .desc = { ent-CrateGenericSteel.desc }
+ent-CratePiraterEVASuitBundle = набор ева-костюмов пиратов
+    .suffix = Заполнен, Санрайз
+    .desc = { ent-CrateGenericSteel.desc }
+ent-CrateSyndicateSuperSurplusBundleAgent = супер-набор припасов синдиката
+    .suffix = Агент
+    .desc = Содержит 125 телекристаллов случайных предметов синдиката.

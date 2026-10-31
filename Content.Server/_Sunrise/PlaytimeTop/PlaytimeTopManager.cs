@@ -16,14 +16,14 @@ namespace Content.Server._Sunrise.PlaytimeTop;
 /// Server manager for top players by playtime.
 /// Periodically updates data from the database and broadcasts it to clients.
 /// </summary>
-public sealed class PlaytimeTopManager
+public sealed partial class PlaytimeTopManager
 {
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly IServerNetManager _netMgr = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly ITaskManager _taskManager = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private IServerNetManager _netMgr = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private ITaskManager _taskManager = default!;
 
     private ISawmill _sawmill = default!;
 

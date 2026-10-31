@@ -21,10 +21,10 @@ public sealed partial class UserProfile : Control
 {
     private const float CompactBreakpoint = 400f;
 
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
-    [Dependency] private readonly IUriOpener _uri = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IResourceCache _resource = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
+    [Dependency] private IUriOpener _uri = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IResourceCache _resource = default!;
 
     private readonly UserProfileAccountInfoUIController _accountInfoUIController;
     private readonly SponsorTiersUIController _sponsorTiersUIController;

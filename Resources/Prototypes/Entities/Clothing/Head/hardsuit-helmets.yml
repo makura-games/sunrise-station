@@ -7,79 +7,29 @@
 #CREW HARDSUITS
 #Atmospherics Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  parent: [ ClothingHeadHardsuitInsulatedBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitAtmos
   name: atmos hardsuit helmet
   description: A special hardsuit helmet designed for working in low-pressure, high thermal environments.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/atmospherics.rsi
-    layers:
-    - state: icon
-    - state: icon-unshaded
-      shader: unshaded
-    - state: light-overlay
-      visible: false
-      shader: unshaded
-      map: [ "light" ]
   - type: HandheldLight
     addPrefix: false
-  - type: ToggleableVisuals
-    spriteLayer: light
-    clothingVisuals:
-      head:
-      - state: equipped-head-light
-        shader: unshaded
-      head-vox:
-      - state: equipped-head-light-vox
-        shader: unshaded
-      head-vulpkanin:
-      - state: equipped-head-light-vulpkanin
-        shader: unshaded
-      head-reptilian:
-      - state: equipped-head-light-reptilian
-        shader: unshaded
-      head-dog:
-      - state: equipped-head-light-dog
-        shader: unshaded
-  - type: Clothing
-    clothingVisuals:
-      head:
-      - state: equipped-head
-      - state: equipped-head-unshaded
-        shader: unshaded
-      head-vox:
-      - state: equipped-head-vox
-      - state: equipped-head-unshaded-vox
-        shader: unshaded
-      head-vulpkanin:
-      - state: equipped-head-vulpkanin
-      - state: equipped-head-unshaded-vulpkanin
-        shader: unshaded
-      head-reptilian:
-      - state: equipped-head-reptilian
-      - state: equipped-head-unshaded-reptilian
-        shader: unshaded
-      head-dog:
-      - state: equipped-head-dog
-      - state: equipped-head-unshaded-dog
-        shader: unshaded
   - type: PointLight
     color: "#adffe6"
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    heatingCoefficient: 0.005
-    coolingCoefficient: 0.005
   - type: FireProtection
     reduction: 0.2
+  # Sunrise added start - сохраняем защиту глаз атмосферного шлема.
+  - type: EyeProtection
+  - type: FlashImmunity
+  # Sunrise added end
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
-  - type: EyeProtection # Sunrise-Edit
-  - type: FlashImmunity # Sunrise-Edit
 
 #Engineering Hardsuit
 - type: entity
@@ -90,67 +40,20 @@
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/engineering.rsi
-    layers:
-    - state: icon
-    - state: icon-unshaded
-      shader: unshaded
-    - state: light-overlay
-      visible: false
-      shader: unshaded
-      map: [ "light" ]
   - type: HandheldLight
     addPrefix: false
-  - type: ToggleableVisuals
-    spriteLayer: light
-    clothingVisuals:
-      head:
-      - state: equipped-head-light
-        shader: unshaded
-      head-vox:
-      - state: equipped-head-light-vox
-        shader: unshaded
-      head-vulpkanin:
-      - state: equipped-head-light-vulpkanin
-        shader: unshaded
-      head-reptilian:
-      - state: equipped-head-light-reptilian
-        shader: unshaded
-      head-dog:
-      - state: equipped-head-light-dog
-        shader: unshaded
-  - type: Clothing
-    clothingVisuals:
-      head:
-      - state: equipped-head
-      - state: equipped-head-unshaded
-        shader: unshaded
-      head-vox:
-      - state: equipped-head-vox
-      - state: equipped-head-unshaded-vox
-        shader: unshaded
-      head-vulpkanin:
-      - state: equipped-head-vulpkanin
-      - state: equipped-head-unshaded-vulpkanin
-        shader: unshaded
-      head-reptilian:
-      - state: equipped-head-reptilian
-      - state: equipped-head-unshaded-reptilian
-        shader: unshaded
-      head-dog:
-      - state: equipped-head-dog
-      - state: equipped-head-unshaded-dog
-        shader: unshaded
   - type: PointLight
     color: "#ffdbad"
   - type: PressureProtection
     highPressureMultiplier: 0.1
     lowPressureMultiplier: 1000
-  - type: Tag
-    tags:
-    - CorgiWearable
-    - WhitelistChameleon
+  # Sunrise added start - сохраняем защиту глаз инженерного шлема.
   - type: EyeProtection
   - type: FlashImmunity
+  # Sunrise added end
+  - type: Tag
+    tags:
+    - WhitelistChameleon
 
 #Spationaut Hardsuit
 - type: entity
@@ -161,55 +64,8 @@
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/spatiohelm.rsi
-    layers:
-    - state: icon
-    - state: icon-unshaded
-      shader: unshaded
-    - state: light-overlay
-      visible: false
-      shader: unshaded
-      map: [ "light" ]
   - type: HandheldLight
     addPrefix: false
-  - type: ToggleableVisuals
-    clothingVisuals:
-      head:
-      - state: equipped-head-light
-        shader: unshaded
-      head-vox:
-      - state: equipped-head-light-vox
-        shader: unshaded
-      head-vulpkanin:
-      - state: equipped-head-light-vulpkanin
-        shader: unshaded
-      head-reptilian:
-      - state: equipped-head-light-reptilian
-        shader: unshaded
-      head-dog:
-      - state: equipped-head-light-dog
-        shader: unshaded
-  - type: Clothing
-    clothingVisuals:
-      head:
-      - state: equipped-head
-      - state: equipped-head-unshaded
-        shader: unshaded
-      head-vox:
-      - state: equipped-head-vox
-      - state: equipped-head-unshaded-vox
-        shader: unshaded
-      head-vulpkanin:
-      - state: equipped-head-vulpkanin
-      - state: equipped-head-unshaded-vulpkanin
-        shader: unshaded
-      head-reptilian:
-      - state: equipped-head-reptilian
-      - state: equipped-head-unshaded-reptilian
-        shader: unshaded
-      head-dog:
-      - state: equipped-head-dog
-      - state: equipped-head-unshaded-dog
-        shader: unshaded
   - type: PointLight
     radius: 6
   - type: PressureProtection
@@ -217,19 +73,16 @@
     lowPressureMultiplier: 1000
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
 
 #Salvage Hardsuit
 - type: entity
   parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitSalvage
-  name: salvage hardsuit helmet
+  name: mining hardsuit helmet
   description: A special helmet designed for work in a hazardous, low pressure environment. Has reinforced plating for wildlife encounters and dual floodlights.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/salvage.rsi
-  - type: Clothing
     sprite: Clothing/Head/Hardsuits/salvage.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.525
@@ -239,7 +92,6 @@
     energy: 3
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
 
 #Goliath Hardsuit
@@ -251,48 +103,8 @@
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/goliathhelm.rsi
-    layers:
-    - state: icon
-    - state: icon-unshaded
-      shader: unshaded
-    - state: light-overlay
-      visible: false
-      shader: unshaded
-      map: [ "light" ]
   - type: HandheldLight
     addPrefix: false
-  - type: ToggleableVisuals
-    clothingVisuals:
-      head:
-      - state: equipped-head-light
-        shader: unshaded
-      head-vox:
-      - state: equipped-head-light-vox
-        shader: unshaded
-      head-reptilian:
-      - state: equipped-head-light-reptilian
-        shader: unshaded
-      head-dog:
-      - state: equipped-head-light-dog
-        shader: unshaded
-  - type: Clothing
-    clothingVisuals:
-      head:
-      - state: equipped-head
-      - state: equipped-head-unshaded
-        shader: unshaded
-      head-vox:
-      - state: equipped-head-vox
-      - state: equipped-head-unshaded-vox
-        shader: unshaded
-      head-reptilian:
-      - state: equipped-head-reptilian
-      - state: equipped-head-unshaded-reptilian
-        shader: unshaded
-      head-dog:
-      - state: equipped-head-dog
-      - state: equipped-head-unshaded-dog
-        shader: unshaded
   - type: PointLight
     radius: 6
   - type: PressureProtection
@@ -300,7 +112,6 @@
     lowPressureMultiplier: 1000
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
 
 #Maxim Hardsuit
@@ -312,8 +123,6 @@
   description: A predication of decay washes over your mind.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/maxim.rsi
-  - type: Clothing
     sprite: Clothing/Head/Hardsuits/maxim.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.08
@@ -335,8 +144,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/security.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/security.rsi
   - type: PointLight
     color: "#ffeead"
   - type: PressureProtection
@@ -349,11 +156,10 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+  - type: FlashImmunity # Sunrise-Edit - сохраняем защиту от вспышек.
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
-  - type: FlashImmunity # Sunrise-Edit
 
 #Brigmedic Hardsuit
 - type: entity
@@ -363,8 +169,6 @@
   description: The lightweight helmet of the brigmedic hardsuit. Protects against viruses, and clowns.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/brigmedic.rsi
-  - type: Clothing
     sprite: Clothing/Head/Hardsuits/brigmedic.rsi
   - type: PointLight
     color: "#00FFFF"
@@ -380,7 +184,7 @@
   - type: PressureProtection
     highPressureMultiplier: 0.6
     lowPressureMultiplier: 1000
-  - type: FlashImmunity # Sunrise-Edit
+  - type: FlashImmunity # Sunrise-Edit - сохраняем защиту от вспышек.
 
 #Warden's Hardsuit
 - type: entity
@@ -391,10 +195,8 @@
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/security-warden.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/security-warden.rsi
   - type: PointLight
-    color: cyan # Sunrise-Edit
+    color: cyan # Sunrise-Edit - сохраняем цвет фонаря шлема.
   - type: PressureProtection
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000
@@ -405,7 +207,7 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-  - type: FlashImmunity # Sunrise-Edit
+  - type: FlashImmunity # Sunrise-Edit - сохраняем защиту от вспышек.
 
 #Captain's Hardsuit
 - type: entity
@@ -416,14 +218,11 @@
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/capspace.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/capspace.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
 
 #Chief Engineer's Hardsuit
@@ -435,69 +234,22 @@
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/engineering-white.rsi
-    layers:
-    - state: icon
-    - state: icon-unshaded
-      shader: unshaded
-    - state: light-overlay
-      visible: false
-      shader: unshaded
-      map: [ "light" ]
   - type: HandheldLight
     addPrefix: false
-  - type: ToggleableVisuals
-    spriteLayer: light
-    clothingVisuals:
-      head:
-      - state: equipped-head-light
-        shader: unshaded
-      head-vox:
-      - state: equipped-head-light-vox
-        shader: unshaded
-      head-vulpkanin:
-      - state: equipped-head-light-vulpkanin
-        shader: unshaded
-      head-reptilian:
-      - state: equipped-head-light-reptilian
-        shader: unshaded
-      head-dog:
-      - state: equipped-head-light-dog
-        shader: unshaded
-  - type: Clothing
-    clothingVisuals:
-      head:
-      - state: equipped-head
-      - state: equipped-head-unshaded
-        shader: unshaded
-      head-vox:
-      - state: equipped-head-vox
-      - state: equipped-head-unshaded-vox
-        shader: unshaded
-      head-vulpkanin:
-      - state: equipped-head-vulpkanin
-      - state: equipped-head-unshaded-vulpkanin
-        shader: unshaded
-      head-reptilian:
-      - state: equipped-head-reptilian
-      - state: equipped-head-unshaded-reptilian
-        shader: unshaded
-      head-dog:
-      - state: equipped-head-dog
-      - state: equipped-head-unshaded-dog
-        shader: unshaded
   - type: PointLight
-    color: "#e6aa5c" # Sunrise-Edit
+    color: "#e6aa5c" # Sunrise-Edit - сохраняем цвет фонаря шлема.
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: FireProtection
     reduction: 0.2
+  # Sunrise added start - сохраняем защиту глаз шлема главного инженера.
+  - type: EyeProtection
+  - type: FlashImmunity
+  # Sunrise added end
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
-  - type: EyeProtection # Sunrise-Edit
-  - type: FlashImmunity # Sunrise-Edit
 
 #Chief Medical Officer's Hardsuit
 - type: entity
@@ -508,8 +260,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/medical.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/medical.rsi
   - type: PointLight
     color: "#adf1ff"
   - type: PressureProtection
@@ -517,7 +267,6 @@
     lowPressureMultiplier: 1000
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
 
 #Research Director's Hardsuit
@@ -529,16 +278,13 @@
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/rd.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/rd.rsi
   - type: PointLight
-    color: "#a4fef4" # Sunrise-Edit
+    color: "#a4fef4" # Sunrise-Edit - сохраняем цвет фонаря шлема.
   - type: PressureProtection
     highPressureMultiplier: 0.60
     lowPressureMultiplier: 1000
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
 
 #Head of Security's hardsuit
@@ -549,8 +295,6 @@
   description: Security hardsuit helmet with the latest top secret NT-HUD software. Belongs to the HoS.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/security-red.rsi
-  - type: Clothing
     sprite: Clothing/Head/Hardsuits/security-red.rsi
   - type: PointLight
     color: "#ffeead"
@@ -564,7 +308,7 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-  - type: FlashImmunity # Sunrise-Edit
+  - type: FlashImmunity # Sunrise-Edit - сохраняем защиту от вспышек.
 
 #Luxury Mining Hardsuit
 - type: entity
@@ -576,8 +320,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/luxury.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/luxury.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000
@@ -588,17 +330,17 @@
 #ANTAG HARDSUITS
 #Blood-red Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseSunriseHardsuitHelmetNVD, SunriseHardsuitHelmetNightVisionGreen ] # Sunrise-Edit
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseSunriseHardsuitHelmetNVD, SunriseHardsuitHelmetNightVisionGreen ] # Sunrise-Edit - сохраняем ночное зрение.
   id: ClothingHeadHelmetHardsuitSyndie
   name: blood-red hardsuit helmet
   description: A heavily armored helmet designed for work in special operations. Property of Gorlex Marauders.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/syndicate.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/syndicate.rsi
   - type: PointLight
     color: green
+    radius: 5
+    energy: 2.5
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -611,8 +353,8 @@
         Heat: 0.9
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
+  # Sunrise added start - сохраняем праздничный вариант спрайта.
   - type: HolidayVisuals
     holidays:
       festive:
@@ -623,20 +365,21 @@
   - type: HolidayClothingSwap
     sprite:
       festive: _Sunrise/Clothing/Head/Hardsuits/syndicate_santa.rsi
+  # Sunrise added end
 
 #Blood-red Medic Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseSunriseHardsuitHelmetNVD, SunriseHardsuitHelmetNightVisionGreen ] # Sunrise-Edit
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseSunriseHardsuitHelmetNVD, SunriseHardsuitHelmetNightVisionGreen ] # Sunrise-Edit - сохраняем ночное зрение.
   id: ClothingHeadHelmetHardsuitSyndieMedic
   name: blood-red medic hardsuit helmet
   description: An advanced red hardsuit helmet specifically designed for field medic operations.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/syndiemedic.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/syndiemedic.rsi
   - type: PointLight
     color: green
+    radius: 5
+    energy: 2.5
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -647,6 +390,7 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+  # Sunrise added start - сохраняем праздничный вариант спрайта.
   - type: HolidayVisuals
     holidays:
       festive:
@@ -657,26 +401,24 @@
   - type: HolidayClothingSwap
     sprite:
       festive: _Sunrise/Clothing/Head/Hardsuits/syndiemedic_santa.rsi
+  # Sunrise added end
 
 #Syndicate Elite Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseSunriseHardsuitHelmetNVD, SunriseHardsuitHelmetNightVisionSyndie ] # Sunrise-Edit
+  parent: [ ClothingHeadHardsuitInsulatedBase, ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseSunriseHardsuitHelmetNVD, SunriseHardsuitHelmetNightVisionSyndie ] # Sunrise-Edit - сохраняем ночное зрение.
   id: ClothingHeadHelmetHardsuitSyndieElite
   name: syndicate elite helmet
   description: An elite version of the blood-red hardsuit's helmet, with improved radiation resistance and fireproofing. Property of Gorlex Marauders.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/syndieelite.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/syndieelite.rsi
   - type: PointLight
     color: red
+    radius: 5
+    energy: 2.5
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    heatingCoefficient: 0.005
-    coolingCoefficient: 0.005
   - type: FireProtection
     reduction: 0.2
   - type: Armor
@@ -688,8 +430,8 @@
         Heat: 0.9
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
+  # Sunrise added start - сохраняем праздничный вариант спрайта.
   - type: HolidayVisuals
     holidays:
       festive:
@@ -700,20 +442,21 @@
   - type: HolidayClothingSwap
     sprite:
       festive: _Sunrise/Clothing/Head/Hardsuits/syndieelite_santa.rsi
+  # Sunrise added end
 
 #Syndicate Commander Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseSunriseHardsuitHelmetNVD, SunriseHardsuitHelmetNightVisionGreen ] # Sunrise-Edit
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseSunriseHardsuitHelmetNVD, SunriseHardsuitHelmetNightVisionGreen ] # Sunrise-Edit - сохраняем ночное зрение.
   id: ClothingHeadHelmetHardsuitSyndieCommander
   name: syndicate commander helmet
   description: A bulked up version of the blood-red hardsuit's helmet, purpose-built for the commander of a syndicate operative squad. Has significantly improved armor for those deadly front-lines firefights.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/syndiecommander.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/syndiecommander.rsi
   - type: PointLight
     color: green
+    radius: 5
+    energy: 2.5
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -726,8 +469,8 @@
         Heat: 0.9
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
+  # Sunrise added start - сохраняем праздничный вариант спрайта.
   - type: HolidayVisuals
     holidays:
       festive:
@@ -738,20 +481,21 @@
   - type: HolidayClothingSwap
     sprite:
       festive: _Sunrise/Clothing/Head/Hardsuits/syndiecommander_santa.rsi
+  # Sunrise added end
 
 #Cybersun Juggernaut Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseSunriseHardsuitHelmetNVD, SunriseHardsuitHelmetNightVisionSyndie ] # Sunrise-Edit
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseSunriseHardsuitHelmetNVD, SunriseHardsuitHelmetNightVisionSyndie ] # Sunrise-Edit - сохраняем ночное зрение.
   id: ClothingHeadHelmetHardsuitCybersun
   name: cybersun juggernaut helmet
   description: Made of compressed red matter, this helmet was designed in the Tau chromosphere facility.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/cybersun.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/cybersun.rsi
   - type: PointLight
     color: red
+    radius: 5
+    energy: 4
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
@@ -764,7 +508,6 @@
         Heat: 0.9
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
 
 #Wizard Hardsuit
@@ -776,10 +519,8 @@
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/wizard.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/wizard.rsi
   - type: PointLight
-    color: "#a4fef4"
+    color: "#a4fef4" # Sunrise-Edit - сохраняем цвет фонаря шлема.
   - type: PressureProtection
     highPressureMultiplier: 0.27
     lowPressureMultiplier: 1000
@@ -792,7 +533,6 @@
         Heat: 0.9
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
 
 #Organic Space Suit
@@ -803,8 +543,6 @@
   description: A spaceworthy biomass of pressure and temperature resistant tissue.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/lingspacehelmet.rsi
-  - type: Clothing
     sprite: Clothing/Head/Hardsuits/lingspacehelmet.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.225
@@ -820,8 +558,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/pirateeva.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
@@ -836,32 +572,6 @@
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-  - type: ToggleableVisuals
-    clothingVisuals:
-      head:
-      - state: equipped-HELMET-light
-        shader: unshaded
-      head-vox:
-      - state: equipped-HELMET-light-vox
-        shader: unshaded
-      head-reptilian:
-      - state: equipped-HELMET-light-reptilian
-        shader: unshaded
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-    clothingVisuals:
-      head:
-      - state: equipped-HELMET
-      - state: equipped-HELMET-unshaded
-        shader: unshaded
-      head-vox:
-      - state: equipped-HELMET-vox
-      - state: equipped-HELMET-unshaded-vox
-        shader: unshaded
-      head-reptilian:
-      - state: equipped-HELMET-reptilian
-      - state: equipped-HELMET-unshaded-reptilian
-        shader: unshaded
   - type: PointLight # Color matches visor colors, radius/energy same as mining hardsuit for the big captain.
     color: "#f3ea9c"
     radius: 7
@@ -880,17 +590,15 @@
 #CENTCOMM / ERT HARDSUITS
 #ERT Leader Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndieCommander, SunriseHardsuitHelmetNightVisionCyan ] # Sunrise-Edit
+  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndieCommander, SunriseHardsuitHelmetNightVisionCyan ] # Sunrise-Edit - сохраняем ночное зрение.
   id: ClothingHeadHelmetHardsuitERTLeader
   name: ERT leader hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertleader.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/ERThelmets/ertleader.rsi
   - type: PointLight
-    color: cyan # Sunrise-Edit
+    color: cyan # Sunrise-Edit - сохраняем цвет фонаря шлема.
   - type: Armor
     modifiers:
       coefficients:
@@ -898,36 +606,32 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-  - type: FlashImmunity # Sunrise-Edit
+  - type: FlashImmunity # Sunrise-Edit - сохраняем защиту от вспышек.
 
 #ERT Chaplain Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndie, SunriseHardsuitHelmetNightVisionWhite ] # Sunrise-Edit
+  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndie, SunriseHardsuitHelmetNightVisionWhite ] # Sunrise-Edit - сохраняем ночное зрение.
   id: ClothingHeadHelmetHardsuitERTChaplain
   name: ERT chaplain hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertchaplain.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/ERThelmets/ertchaplain.rsi
   - type: PointLight
     color: "#ffffff"
-  - type: FlashImmunity # Sunrise-Edit
+  - type: FlashImmunity # Sunrise-Edit - сохраняем защиту от вспышек.
 
 #ERT Engineer Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndie, SunriseHardsuitHelmetNightVisionCyan ] # Sunrise-Edit
+  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndie, SunriseHardsuitHelmetNightVisionCyan ] # Sunrise-Edit - сохраняем ночное зрение.
   id: ClothingHeadHelmetHardsuitERTEngineer
   name: ERT engineer hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertengineer.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/ERThelmets/ertengineer.rsi
   - type: PointLight
-    color: cyan # Sunrise-Edit
+    color: cyan # Sunrise-Edit - сохраняем цвет фонаря шлема.
   - type: FireProtection
     reduction: 0.2
   - type: Armor
@@ -937,39 +641,35 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-  - type: FlashImmunity # Sunrise-Edit
-  - type: EyeProtection # Sunrise-Edit
+  # Sunrise added start - сохраняем защиту глаз инженерного шлема ERT.
+  - type: FlashImmunity
+  - type: EyeProtection
+  # Sunrise added end
 
 #ERT Medical Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndieElite, SunriseHardsuitHelmetNightVisionMint ] # Sunrise-Edit
+  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndieElite, SunriseHardsuitHelmetNightVisionMint ] # Sunrise-Edit - сохраняем ночное зрение.
   id: ClothingHeadHelmetHardsuitERTMedical
   name: ERT medic hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertmedical.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/ERThelmets/ertmedical.rsi
   - type: PointLight
     color: "#adffec"
-  - type: FlashImmunity
+  - type: FlashImmunity # Sunrise-Edit - сохраняем защиту от вспышек.
 
 #ERT Security Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndie, SunriseHardsuitHelmetNightVisionCyan ] # Sunrise-Edit
+  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndie, SunriseHardsuitHelmetNightVisionCyan ] # Sunrise-Edit - сохраняем ночное зрение.
   id: ClothingHeadHelmetHardsuitERTSecurity
   name: ERT security hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertsecurity.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/ERThelmets/ertsecurity.rsi
   - type: PointLight
-    color: cyan
-  - type: Pierceable
-    level: HardenedMetal
+    color: cyan # Sunrise-Edit - сохраняем цвет фонаря шлема.
   - type: Armor
     modifiers:
       coefficients:
@@ -977,22 +677,22 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+  - type: Pierceable # Sunrise-Edit - сохраняем усиленную защиту от прокалывания.
+    level: HardenedMetal
   - type: FlashImmunity
 
 #ERT Janitor Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndie, SunriseHardsuitHelmetNightVisionPurple ] # Sunrise-Edit
+  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndie, SunriseHardsuitHelmetNightVisionPurple ] # Sunrise-Edit - сохраняем ночное зрение.
   id: ClothingHeadHelmetHardsuitERTJanitor
   name: ERT janitor hardsuit helmet
   description: A special hardsuit helmet worn by members of an emergency response team.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertjanitor.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/ERThelmets/ertjanitor.rsi
   - type: PointLight
     color: "#cbadff"
-  - type: FlashImmunity
+  - type: FlashImmunity # Sunrise-Edit - сохраняем защиту от вспышек.
 
 #CBURN Hardsuit
 - type: entity
@@ -1003,36 +703,11 @@
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/cburn.rsi
-    layers:
-    - state: icon
-    - state: icon-unshaded
-      shader: unshaded
-    - state: light-overlay
-      visible: false
-      shader: unshaded
-      map: [ "light" ]
-  - type: Clothing
-    clothingVisuals:
-      head:
-      - state: equipped-head
-      - state: equipped-head-unshaded
-        shader: unshaded
-      head-vox:
-      - state: equipped-head-vox
-      - state: equipped-head-unshaded-vox
-        shader: unshaded
-      head-reptilian:
-      - state: equipped-head-reptilian
-      - state: equipped-head-unshaded-reptilian
-        shader: unshaded
   - type: PointLight
-    color: "#a4fef4"
+    color: "#a4fef4" # Sunrise-Edit - сохраняем цвет фонаря шлема.
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    heatingCoefficient: 0.005
-    coolingCoefficient: 0.005
   - type: Armor
     modifiers:
       coefficients:
@@ -1045,7 +720,7 @@
 
 #Deathsquad Hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseCentcommContraband]
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseCentcommContraband ] # Sunrise-Edit - сохраняем фонарь шлема.
   id: ClothingHeadHelmetHardsuitDeathsquad
   name: deathsquad hardsuit helmet
   description: A robust helmet for special operations.
@@ -1053,8 +728,22 @@
   - type: BreathMask
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/deathsquad.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/deathsquad.rsi
+    # Sunrise edit start - сохраняем фонарь старого спрайта.
+    layers:
+    - state: icon
+    - state: icon-unshaded
+      shader: unshaded
+    - state: icon-flash
+      visible: false
+      shader: unshaded
+      map: [ light ]
+    # Sunrise edit end
+  # Sunrise added start - фонарь не должен подменять новый спрайт надетого шлема старым состоянием.
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head: []
+  # Sunrise added end
   - type: PointLight
     color: cyan
   - type: PressureProtection
@@ -1062,8 +751,6 @@
     lowPressureMultiplier: 1000
   - type: FireProtection
     reduction: 0.2
-  - type: Pierceable
-    level: Rock
   - type: Armor
     modifiers:
       coefficients:
@@ -1073,6 +760,8 @@
         Heat: 0.80
         Radiation: 0.80
         Caustic: 0.95
+  - type: Pierceable # Sunrise-Edit - сохраняем усиленную защиту от прокалывания.
+    level: Rock
   - type: FlashImmunity
   - type: EyeProtection
 
@@ -1088,11 +777,10 @@
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/clown.rsi
   - type: Clothing
-    sprite: Clothing/Head/Hardsuits/clown.rsi
     equipSound: /Audio/Mecha/mechmove03.ogg
     unequipSound: /Audio/Effects/Emotes/parp1.ogg
   - type: PointLight
-    color: "#ff3399"
+    color: "#ff3399" # Sunrise-Edit - сохраняем цвет фонаря шлема.
 
 #Mime Hardsuit
 - type: entity
@@ -1104,8 +792,6 @@
   - type: BreathMask
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/mime.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/mime.rsi
 
 #Santas Hardsuit
 - type: entity
@@ -1116,8 +802,6 @@
   components:
   - type: BreathMask
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/santahelm.rsi
-  - type: Clothing
     sprite: Clothing/Head/Hardsuits/santahelm.rsi
   - type: PointLight
     color: "#f4ffad"

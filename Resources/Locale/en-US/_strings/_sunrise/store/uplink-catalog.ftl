@@ -39,6 +39,7 @@ uplink-grenade-launcher-emp-extended-ammo-desc = An extended 15-shell EMP cartri
 uplink-magazine-siar52-name = SMG Magazine (.25 caseless)
 uplink-pistol-stechkin-magazine-name = Pistol Magazine .40
 uplink-pistol-stechkin-magazine-desc = A 10-round pistol magazine, compatible with Stechkin series pistols.
+uplink-pistol-magazine-vector-super-desc = A 24-round SMG magazine. Compatible with the Vector Super.
 uplink-magazine-siar52-desc = A 30-round SMG magazine. Compatible with SIAR-52.
 uplink-magazine-bulldog-uraniumslug-desc = Shotgun magazine with 8 shells filled with uranium slugs. Compatible with the Bulldog.
 uplink-magazine-bulldog-uranium-desc = Shotgun magazine with 8 shells filled with uranium pellet. Compatible with the Bulldog.
@@ -88,13 +89,17 @@ uplink-pirate-ammo-308-mixed-name = Bulk basic magazines (.308)
 uplink-magazine-127hp-desc = A Bauer SR-127 magazine with 7 hollow point rounds. Trades almost all breaching power for massive personnel damage.
 uplink-sniper-ammo-hp-desc = A box of 14 hollow point cartridges for the Hristov sniper rifle or SR-127. Trades almost all breaching power for massive personnel damage.
 
+## Weapons (Sunrise)
+
+uplink-vector-super-bundle-name = Vector Super Bundle
+uplink-vector-super-bundle-desc = The iconic Vector Super submachine gun bundled with 12 assorted magazines.
+uplink-vector-super-name = Vector Super
+uplink-vector-super-desc = The iconic Vector Super submachine gun bundled with a box of standard .40-caliber ammunition.
+
 ## Misc
 
 uplink-music-boombox-name = Syndicate Music Kit
 uplink-music-boombox-desc = Contains a Syndicate boombox and several cassette tapes for it.
-uplink-mechpaint-mauler-name = "MEOWLER" Spray Can
-uplink-mechpaint-mauler-desc = Contains paint for the Mauler. Turn that hulking mech into a cute kitty!
-
 ## Clothing
 
 uplink-syndie-nvd-name = Syndicate NVGs
@@ -115,6 +120,8 @@ uplink-clothing-belt-syndicate-utility-name = Syndicate Utility Belt
 uplink-clothing-belt-syndicate-utility-desc = A toolbelt that passes a glance, but feels too deliberate in the hand.
 uplink-clothing-belt-syndicate-utility-chameleon-name = Chameleon Syndicate Utility Belt
 uplink-clothing-belt-syndicate-utility-chameleon-desc = A toolbelt for agents who prefer their equipment to look ordinary until it matters.
+uplink-grenade-belt-name = Grenade belt
+uplink-grenade-belt-desc = An empty tactical belt for hand grenades and grenade magazines. Can be worn on the belt or suit storage slot.
 uplink-syndie-maid-raid-name = Maid Raider
 uplink-syndie-maid-raid-desc = Syndicate developed this specifically for female agents, yet for some reason only men ever wear it.
 
@@ -125,16 +132,12 @@ uplink-clothing-backpack-syndie-aj100-desc = Includes an AJ-100 submachine gun a
 uplink-type88-amr-name = Type 88 AMR Case
 uplink-type88-amr-desc = A secure case containing a Type 88 anti-materiel rifle and two 15mm magazines.
 uplink-weapon-syndie-laser-pistol-name = SAM-300
-uplink-clothing-backpack-syndie-dl6902-name = DL6902 Kit
-uplink-clothing-backpack-syndie-dl6902-desc = Includes a DL6902 machine gun and one magazine.
 uplink-clothing-backpack-syndie-siar52-name = SIAR-52 Kit
 uplink-clothing-backpack-syndie-siar52-desc = Includes a SIAR-52 machine gun and two magazines.
 uplink-weapon-syndie-laser-minigun-name = UVL-21 "Wyvern"
 uplink-weapon-syndie-laser-gun-name = S-13 "Black Mamba"
 uplink-deagle-name = Desert Eagle Pistol
 uplink-deagle-desc = A serious argument in any dispute. Engraved: "Peace through superior firepower."
-uplink-pistoltec9-name = Tac-Tec
-uplink-pistoltec9-desc = Very cheap to manufacture and extremely easy to use, reliable as an SKM-24.
 uplink-uzi-name = Uzi Submachine Gun
 uplink-uzi-desc = A lightweight and iconic submachine gun with a large magazine and high rate of fire.
 uplink-stechkin-aps-name = Stechkin APS
@@ -145,6 +148,10 @@ uplink-goldendeagle-name = Golden Desert Eagle
 uplink-goldendeagle-desc = Uses .45 magnum rounds. Engraved: "All I have left of him in my memory are two gold-plated Desert Eagle .45s."
 uplink-cornivoregloves-name = Cornivore Crimson Harvest Gloves
 uplink-cornivoregloves-desc = We can't say if you thirst for blood... but these gloves certainly do. Each claw is a surgical tool for bloodletting, filling its target with our signature chemical cocktail. Your victim will bleed and bleed and bleed... while you contemplate the next incision. Remember: red is the new black. And it's always in fashion.
+uplink-l6-sawmax-bundle-name = L6 MAX bundle
+uplink-l6-sawmax-bundle-desc = More dakka: The reinforced L6 MAX machine gun, bundled with four 100-round .308 ammunition boxes: three SP and one FMJ. Its reinforced barrel and powerful cartridge can suppress enemies and tear their cover to splinters, at the cost of bulk and mobility.
+uplink-sunrise-grenade-launcher-gl70-name = GL-70 bundle
+uplink-sunrise-grenade-launcher-gl70-desc = An automatic GL-70 grenade launcher, two pouches with 12 fragmentation grenades, five additional assorted grenades, and a packaged grenade belt.
 uplink-pizza-bomb-name = Nefarious Pizza bomb
 uplink-pizza-bomb-desc = Originally developed covertly by DONK Co to dissuade the heretics who prefer their pizza not in pocket form. This pizza box is wired, and explodes within moments of being opened.
 
@@ -214,6 +221,8 @@ uplink-mech-teleporter-death-desc = Contains a Death Ripley MK-II and a syndicat
 
 uplink-mech-teleporter-assault-name = Assault Mech teleporter
 uplink-mech-teleporter-assault-desc = Contains a Cybersun Dark Gygax light combat mech, a syndicate repair toolbox, and a toy Gygax. The mech arrives with its current integrated equipment.
+uplink-rover-assembly-crate-name = Rover assembly crate
+uplink-rover-assembly-crate-desc = Contains a Durand chassis, Rover armor plates, control electronics, an advanced signaler, and a Syndicate repair toolbox. Other common mech parts must be obtained separately.
 
 ## Mechs equipment
 
@@ -278,14 +287,14 @@ uplink-ammo-shotgunincendiarykit-desc = Reloading! Contains 8 incendiary magazin
 uplink-ammo-shotgunuraniumkit-name = Shotgun uranium Ammo Kit
 uplink-ammo-shotgunuraniumkit-desc = Reloading! Contains 8 uranium magazines for the Bulldog.
 
-uplink-ammo-lmgkit-name = LMG Ammo Kit
-uplink-ammo-lmgkit-desc = Reloading! Contains 8 magazines for the L6 Saw or DL6902.
+uplink-ammo-lmgkit-name = LMG ammo kit
+uplink-ammo-lmgkit-desc = Reloading! Contains 8 magazines for the L6 Saw.
 
-uplink-ammo-lmgincendiarykit-name = LMG incendiary Ammo Kit
-uplink-ammo-lmgincendiarykit-desc = Reloading! Contains 8 incendiary magazines for the L6 Saw or DL6902.
+uplink-ammo-lmgincendiarykit-name = LMG incendiary ammo kit
+uplink-ammo-lmgincendiarykit-desc = Reloading! Contains 8 incendiary magazines for the L6 Saw.
 
-uplink-ammo-lmguraniumkit-name = LMG uranium Ammo Kit
-uplink-ammo-lmguraniumkit-desc = Reloading! Contains 8 uranium magazines for the L6 Saw or DL6902.
+uplink-ammo-lmguraniumkit-name = LMG uranium ammo kit
+uplink-ammo-lmguraniumkit-desc = Reloading! Contains 8 uranium magazines for the L6 Saw.
 
 uplink-energy-dome-name = Personal energy dome
 uplink-energy-dome-desc = A personal shield generator that protects the wearer from lasers and bullets but prevents from using ranged weapons himself. Comes with a small power cell.
@@ -337,8 +346,6 @@ uplink-mini-energy-crossbow-name = mini energy crossbow
 uplink-mini-energy-crossbow-desc = Fires low-damage kinetic bolts at a short range.
 uplink-minotaur-name = Minotaur bundle
 uplink-minotaur-desc = Lean and mean: Contains smooth, powerful, highly illegal Shotgun, a 5 12g buckshot drums.
-uplink-stechkin-name = Stechkin pistol
-uplink-stechkin-desc = A small, easily concealable 10mm handgun. Has a threaded barrel for suppressors.
 uplink-magillitis-serum-implanter-name = Magillitis Serum Implanter
 uplink-magillitis-serum-implanter-desc = An experimental biochip which causes irreversable rapid muscular growth in Hominidae. Side-affects may include hypertrichosis, violent outbursts, and an unending affinity for bananas.
 uplink-pitbull-bundle-name = Pitbull Bundle
@@ -364,3 +371,7 @@ uplink-syndicate-borgi-speed-name = Speed Syndicate Borgi
 uplink-syndicate-borgi-speed-desc = A syndicate borgi, with dagger modules and additional speed
 uplink-ecronizer-name = Ecronizer
 uplink-ecronizer-desc = A small device that can be used to bypass most scanning devices, making you and your items invisible to them.
+uplink-estoc-name = Estoc DMR
+uplink-estoc-desc = A designated marksman rifle, fitted with a mid-range optic for longer-range combat.
+uplink-syndicate-ring-name = Syndicate Ring
+uplink-syndicate-ring-desc = A black-and-red ring that serves as the coupling core for assembling a double-bladed energy sword.

@@ -42,7 +42,6 @@ ent-DrinkTonicWaterBottleFullBorg = { ent-DrinkTonicWaterBottleFull }
     .desc = { ent-DrinkTonicWaterBottleFull.desc }
 ent-DrinkWaterMelonJuiceJugBorg = { ent-DrinkWaterMelonJuiceJug }
     .desc = { ent-DrinkWaterMelonJuiceJug.desc }
-
 ent-DrinkAbsintheBottleFullBorg = { ent-DrinkAbsintheBottleFull }
     .desc = { ent-DrinkAbsintheBottleFull.desc }
 ent-DrinkAleBottleFullGrowlerBorg = { ent-DrinkAleBottleFullGrowler }

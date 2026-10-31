@@ -1,6 +1,5 @@
 <DefaultWindow
     xmlns="https://spacestation14.io"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Title="{Loc 'copy-machine-menu-title'}"
     MinSize="700 450"
@@ -71,18 +70,10 @@
                 </BoxContainer>
 
                 <BoxContainer Orientation="Horizontal" HorizontalAlignment="Right" SeparationOverride="5">
-                    <Button Name="PrintButton" MinSize="56 56" ToolTip="{Loc 'copy-machine-menu-print'}">
-                        <Button.StyleClasses>
-                            <system:String>ButtonSmall</system:String>
-                            <system:String>ButtonSquare</system:String>
-                        </Button.StyleClasses>
+                    <Button Name="PrintButton" MinSize="56 56" ToolTip="{Loc 'copy-machine-menu-print'}" StyleClasses="ButtonSmall ButtonSquare">
                         <TextureRect Name="PrintIcon" MinSize="40 40" Stretch="KeepCentered" CanShrink="True"/>
                     </Button>
-                    <Button Name="CopyButton" MinSize="56 56" ToolTip="{Loc 'copy-machine-menu-copy'}">
-                        <Button.StyleClasses>
-                            <system:String>ButtonSmall</system:String>
-                            <system:String>ButtonSquare</system:String>
-                        </Button.StyleClasses>
+                    <Button Name="CopyButton" MinSize="56 56" ToolTip="{Loc 'copy-machine-menu-copy'}" StyleClasses="ButtonSmall ButtonSquare">
                         <TextureRect Name="CopyIcon" MinSize="40 40" Stretch="KeepCentered" CanShrink="True"/>
                     </Button>
                 </BoxContainer>
