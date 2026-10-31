@@ -75,8 +75,11 @@ public sealed partial class GameTicker
                         else
                         {
                             SaveFailedReplay(item.Directory, item.Path);
-                            _sawmillReplays.Error(
-                                $"Не удалось загрузить реплей {item.Path} в S3 после {MaxUploadRetries} попыток. Сохранено в долговечное хранилище для повторной попытки.");
+                            if (!cancellationToken.IsCancellationRequested)
+                            {
+                                _sawmillReplays.Error(
+                                    $"Не удалось загрузить реплей {item.Path} в S3 после {MaxUploadRetries} попыток. Сохранено в долговечное хранилище для повторной попытки.");
+                            }
                         }
                     }
                     catch (Exception itemEx)
@@ -263,22 +266,13 @@ public sealed partial class GameTicker
                 _resourceManager.UserData.CreateDir(FailedReplaysDir);
 
             var destPath = new ResPath($"{FailedReplaysDir}/{path.Filename}");
-            if (ReferenceEquals(directory, _resourceManager.UserData) && path == destPath)
-            {
-                _sawmillReplays.Info($"Неудачный реплей {path.Filename} уже находится в {destPath}.");
+            if (destPath == path)
                 return;
-            }
 
             if (_resourceManager.UserData.Exists(destPath))
                 _resourceManager.UserData.Delete(destPath);
 
-            using (var srcStream = directory.OpenRead(path))
-            using (var dstStream = _resourceManager.UserData.OpenWrite(destPath))
-            {
-                srcStream.CopyTo(dstStream);
-            }
-
-            directory.Delete(path);
+            directory.Rename(path, destPath);
             _sawmillReplays.Info($"Неудачный реплей {path.Filename} перемещен в {destPath} для повторной попытки.");
         }
         catch (Exception e)
