@@ -11,31 +11,20 @@ namespace Content.Server.Database;
 
 public abstract partial class ServerDbBase
 {
-    public async Task<List<(string Username, TimeSpan Time)>> GetTopPlayersOverall(int count, CancellationToken cancel)
+    public virtual async Task<List<(string Username, TimeSpan Time)>> GetTopPlayersOverall(int count, CancellationToken cancel)
     {
         await using var db = await GetDb(cancel);
 
         var trackerOverall = PlayTimeTrackingShared.TrackerOverall.Id;
-        var query = from pt in db.DbContext.PlayTime.AsNoTracking()
+        var results = await (
+            from pt in db.DbContext.PlayTime.AsNoTracking()
             where pt.Tracker == trackerOverall
             join p in db.DbContext.Player.AsNoTracking() on pt.PlayerId equals p.UserId
-            select new { p.LastSeenUserName, pt.TimeSpent };
-
-        if (db.DbContext is PostgresServerDbContext)
-        {
-            var pgResults = await query
-                .OrderByDescending(x => x.TimeSpent)
-                .Take(count)
-                .ToListAsync(cancel);
-
-            return pgResults
-                .Select(x => ValueTuple.Create(x.LastSeenUserName, x.TimeSpent))
-                .ToList();
-        }
+            select new { p.LastSeenUserName, pt.TimeSpent }
+        ).ToListAsync(cancel);
 
         // SQLite does not support TimeSpan in ORDER BY clauses; sort in memory for dev/test portability.
-        var sqliteResults = await query.ToListAsync(cancel);
-        return sqliteResults
+        return results
             .OrderByDescending(x => x.TimeSpent)
             .Take(count)
             .Select(x => ValueTuple.Create(x.LastSeenUserName, x.TimeSpent))
@@ -71,42 +60,41 @@ public abstract partial class ServerDbBase
         }
     }
 
-    public async Task<List<(string Username, TimeSpan Time)>> GetTopPlayersActiveSinceWithSession(
+    public virtual async Task<List<(string Username, TimeSpan Time)>> GetTopPlayersActiveSinceWithSession(
         DateTime since,
         int count,
         CancellationToken cancel)
     {
         await using var db = await GetDb(cancel);
 
-        var sessions = await db.DbContext.PlayTimeSession
+        var stream = db.DbContext.PlayTimeSession
             .AsNoTracking()
             .Where(pts => pts.EndTime >= since)
             .Select(pts => new { pts.PlayerId, pts.StartTime, pts.EndTime })
-            .ToListAsync(cancel);
+            .AsAsyncEnumerable()
+            .WithCancellation(cancel);
 
-        var topById = sessions
-            .GroupBy(x => x.PlayerId)
-            .Select(g =>
+        var totalsByPlayer = new Dictionary<Guid, long>();
+        await foreach (var s in stream)
+        {
+            var clampedStart = s.StartTime < since ? since : s.StartTime;
+            if (s.EndTime > clampedStart)
             {
-                long totalTicks = 0;
-                foreach (var s in g)
-                {
-                    var clampedStart = s.StartTime < since ? since : s.StartTime;
-                    if (s.EndTime > clampedStart)
-                        totalTicks += (s.EndTime - clampedStart).Ticks;
-                }
+                totalsByPlayer.TryGetValue(s.PlayerId, out var current);
+                totalsByPlayer[s.PlayerId] = current + (s.EndTime - clampedStart).Ticks;
+            }
+        }
 
-                return (PlayerId: g.Key, Ticks: totalTicks);
-            })
-            .Where(x => x.Ticks > 0)
-            .OrderByDescending(x => x.Ticks)
+        var topById = totalsByPlayer
+            .Where(x => x.Value > 0)
+            .OrderByDescending(x => x.Value)
             .Take(count)
             .ToList();
 
         if (topById.Count == 0)
             return [];
 
-        var topPlayerIds = topById.Select(x => x.PlayerId).ToList();
+        var topPlayerIds = topById.Select(x => x.Key).ToList();
         var names = await db.DbContext.Player
             .AsNoTracking()
             .Where(p => topPlayerIds.Contains(p.UserId))
