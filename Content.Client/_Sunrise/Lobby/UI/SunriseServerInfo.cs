@@ -9,12 +9,9 @@ namespace Content.Client._Sunrise.Lobby.UI;
 [GenerateTypedNameReferences]
 public sealed partial class SunriseServerInfo : Control
 {
-    [Dependency] private ILocalizationManager _loc = default!;
-
     public SunriseServerInfo()
     {
         RobustXamlLoader.Load(this);
-        IoCManager.InjectDependencies(this);
     }
 
     public void AddStationTime(Control control)
@@ -24,17 +21,7 @@ public sealed partial class SunriseServerInfo : Control
 
     public void SetInfoBlob(string markup)
     {
-        var roundKey = _loc.GetString("ui-server-info-round");
-        var playersKey = _loc.GetString("ui-server-info-players");
-        var mapKey = _loc.GetString("ui-server-info-map");
-        var modeKey = _loc.GetString("ui-server-info-mode");
-
-        var roundShort = _loc.GetString("ui-server-info-round-short");
-        var playersShort = _loc.GetString("ui-server-info-players-short");
-        var mapShort = _loc.GetString("ui-server-info-map-short");
-        var modeShort = _loc.GetString("ui-server-info-mode-short");
-
-        var lines = markup.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        var lines = markup.Split(['\n', '\r'], StringSplitOptions.RemoveEmptyEntries);
         var leftText = new StringBuilder();
         var rightText = new StringBuilder();
 
@@ -44,38 +31,10 @@ public sealed partial class SunriseServerInfo : Control
             if (string.IsNullOrWhiteSpace(trimmed))
                 continue;
 
-            if (trimmed.Contains(">"))
-            {
+            if (trimmed.Contains('>'))
                 rightText.AppendLine(trimmed);
-            }
             else
-            {
-                var updatedLine = trimmed;
-                var parts = updatedLine.Split(':');
-                if (parts.Length > 1)
-                {
-                    var key = parts[0].Trim();
-                    var val = string.Join(":", parts, 1, parts.Length - 1).Trim();
-
-                    if (key.Equals(roundKey, StringComparison.OrdinalIgnoreCase))
-                    {
-                        updatedLine = $"{roundShort}: {val}";
-                    }
-                    else if (key.Equals(playersKey, StringComparison.OrdinalIgnoreCase))
-                    {
-                        updatedLine = $"{playersShort}: {val}";
-                    }
-                    else if (key.Equals(mapKey, StringComparison.OrdinalIgnoreCase))
-                    {
-                        updatedLine = $"{mapShort}: {val}";
-                    }
-                    else if (key.Equals(modeKey, StringComparison.OrdinalIgnoreCase))
-                    {
-                        updatedLine = $"{modeShort}: {val}";
-                    }
-                }
-                leftText.AppendLine(updatedLine);
-            }
+                leftText.AppendLine(trimmed);
         }
 
         LeftLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(leftText.ToString().Trim()), tagsAllowed: null);

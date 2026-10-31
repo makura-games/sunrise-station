@@ -1,4 +1,4 @@
-﻿<tabs1:ExtraTab xmlns="https://spacestation14.io"
+<tabs1:ExtraTab xmlns="https://spacestation14.io"
                  xmlns:ui="clr-namespace:Content.Client.Options.UI"
                  xmlns:tabs1="clr-namespace:Content.Client._Sunrise.Options.UI.Tabs">
     <BoxContainer Orientation="Vertical">
