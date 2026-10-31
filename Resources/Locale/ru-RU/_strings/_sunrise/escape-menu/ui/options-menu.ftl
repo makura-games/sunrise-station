@@ -37,3 +37,5 @@ ui-options-trace-tooltip =
 ui-options-tts-enabled = ТТС интеграция
 ui-options-tts-queue = Использовать очередь для TTS рации?
 ui-options-tts-radio-ghost-enabled = ТТС рации в призраке
+ui-options-tts-lobby-others-enabled = Озвучивать сообщения других игроков в лобби
+ui-options-tts-admin-chat-enabled = Озвучивать сообщения в админ-чате
