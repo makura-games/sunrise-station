@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by olya0523(Discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "blue"
+    },
+    {
+      "name": "bright_blue"
+    },
+    {
+      "name": "ginger_red"
+    },
+    {
+      "name": "pink"
+    },
+    {
+      "name": "purple"
+    },
+    {
+      "name": "red"
+    },
+    {
+      "name": "white"
+    }
+  ]
+}

@@ -46,7 +46,6 @@
   - SunriseGlasses
   - SunriseSurvival
   - SunriseTrinkets
-  - ServiceWorkerJobTrinkets
   - GroupSpeciesBreathTool
   - Bra
   - Pants
@@ -65,7 +64,6 @@
   - SunriseGlasses
   - SunriseSurvival
   - SunriseTrinkets
-  - ChefJobTrinkets
   - GroupSpeciesBreathTool
   - Bra
   - Pants
@@ -81,7 +79,6 @@
   - SunriseGlasses
   - SunriseSurvival
   - SunriseTrinkets
-  - LibrarianJobTrinkets
   - GroupSpeciesBreathTool
   - Bra
   - Pants
@@ -98,7 +95,6 @@
   - SunriseGlasses
   - SunriseSurvival
   - SunriseTrinkets
-  - LawyerJobTrinkets
   - GroupSpeciesBreathTool
   - Bra
   - Pants
@@ -119,7 +115,6 @@
   - SunriseGlasses
   - SunriseSurvival
   - SunriseTrinkets
-  - ChaplainJobTrinkets
   - GroupSpeciesBreathTool
   - Bra
   - Pants
@@ -156,7 +151,6 @@
   - SunriseGlasses
   - SunriseSurvival
   - SunriseTrinkets
-  - BotanistJobTrinkets
   - GroupSpeciesBreathTool
   - Bra
   - Pants
@@ -196,7 +190,6 @@
   - SunriseGlasses
   - SunriseSurvivalMime
   - SunriseTrinkets
-  - MimeJobTrinkets
   - Bra
   - Pants
   - Socks
@@ -213,7 +206,6 @@
   - SunriseGlasses
   - SunriseSurvival
   - SunriseTrinkets
-  - MusicianJobTrinkets
   - SunriseInstruments
   - GroupSpeciesBreathTool
   - Bra

@@ -10,7 +10,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
-using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Content.Shared.Verbs;
 using Content.Shared.EnergyDome;
@@ -20,21 +19,23 @@ using Robust.Server.Containers;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Timing.Systems;
+using Content.Shared.Timing.Components;
 
 namespace Content.Server.EnergyDome;
 
 public sealed partial class EnergyDomeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly BatterySystem _battery = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly DeviceLinkSystem _signalSystem = default!;
-    [Dependency] private readonly ContainerSystem _containerSystem = default!;
-    [Dependency] private readonly BiocodeSystem _biocodeSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private BatterySystem _battery = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private DeviceLinkSystem _signalSystem = default!;
+    [Dependency] private ContainerSystem _containerSystem = default!;
+    [Dependency] private BiocodeSystem _biocodeSystem = default!;
 
     public override void Initialize()
     {
@@ -376,7 +377,7 @@ public sealed partial class EnergyDomeSystem : EntitySystem
             _audio.PlayPvs(generator.Comp.EnergyOutSound, generator);
             if (TryComp<UseDelayComponent>(generator, out var useDelay))
             {
-                _useDelay.TryResetDelay(new Entity<UseDelayComponent>(generator, useDelay));
+                _useDelay.TryResetDelay((generator, useDelay));
             }
         }
     }

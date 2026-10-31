@@ -9,9 +9,9 @@ namespace Content.Server.Shuttles.Systems;
 
 public sealed partial class RadarConsoleSystem
 {
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly RadarLaserSystem _laserSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private RadarLaserSystem _laserSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     // How often (in seconds) to push fresh blip state to all open radar consoles.
     private const float BlipUpdateInterval = 0.1f;

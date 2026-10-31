@@ -21,7 +21,6 @@
     - Hand
     - Leg
     - Foot
-    - Tail
   - type: Sprite
     sprite: Objects/Specific/Medical/Surgery/saw.rsi
     state: saw

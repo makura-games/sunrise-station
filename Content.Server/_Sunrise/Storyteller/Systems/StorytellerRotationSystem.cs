@@ -9,12 +9,10 @@ namespace Content.Server._Sunrise.Storyteller.Systems;
 /// Puts the Insane storyteller on cooldown if it was just played,
 /// and removes the cooldown if a different preset was played.
 /// </summary>
-public sealed class StorytellerRotationSystem : EntitySystem
+public sealed partial class StorytellerRotationSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
-
-    public static readonly string StorytellerInsaneId = "StorytellerInsane";
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private GameTicker _ticker = default!;
 
     public override void Initialize()
     {
@@ -41,11 +39,11 @@ public sealed class StorytellerRotationSystem : EntitySystem
             int nextState;
             // If Calm was played previously (state == 2) and now Insane is selected, we want to
             // reset back to 0 (return all modes). Otherwise, selecting Insane puts it on cooldown.
-            if (currentPreset.ID == StorytellerInsaneId)
+            if (currentPreset.ID == StorytellerSystem.StorytellerInsaneId)
             {
                 nextState = prevState == 2 ? 0 : 1;
             }
-            else if (currentPreset.ID == StorytellerPresetHelper.StorytellerCalmId)
+            else if (currentPreset.ID == StorytellerSystem.StorytellerCalmId)
             {
                 nextState = 2;
             }

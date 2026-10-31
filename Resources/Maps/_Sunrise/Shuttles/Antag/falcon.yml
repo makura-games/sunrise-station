@@ -688,7 +688,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 9.5,-16.5
       parent: 1
-- proto: AirlockHatchPirateLocked
+- proto: AirlockHatchSyndicateLocked
   entities:
   - uid: 9
     components:
@@ -5003,7 +5003,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 3.5,-4.5
       parent: 1
-- proto: WindoorSecurePirateLocked
+- proto: WindoorPirateLocked
   entities:
   - uid: 570
     components:

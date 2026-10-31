@@ -21,11 +21,11 @@ namespace Content.Client._Sunrise.SponsorTiers;
 [GenerateTypedNameReferences]
 public sealed partial class SponsorPersonalizationUi : FancyWindow
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IClientAdminManager _adminManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IClientAdminManager _adminManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
     private readonly ISharedSponsorsManager? _sponsorsManager;
 
     private readonly Dictionary<Button, string> _colorButtons = new();

@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using Content.Server.CartridgeLoader;
+using Content.Shared.CartridgeLoader;
 using Content.Server._Sunrise.CartridgeLoader.Cartridges;
 using Content.Shared._Sunrise.Messenger;
 using Content.Shared.Inventory;
@@ -9,12 +9,12 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server._Sunrise.Messenger;
 
-public sealed class MessengerSystem : EntitySystem
+public sealed partial class MessengerSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoader = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
@@ -31,10 +31,11 @@ public sealed class MessengerSystem : EntitySystem
         if (!TryFindPda(user.Value, out var pda))
             return;
 
-        if (!_cartridgeLoader.TryGetProgram<MessengerCartridgeComponent>(pda.Value, out var programUid) || programUid is not { } program)
+        if (!TryComp<CartridgeLoaderComponent>(pda.Value, out var loader) ||
+            _cartridgeLoader.TryGetProgram<MessengerCartridgeComponent>((pda.Value, loader)) is not { } program)
             return;
 
-        _cartridgeLoader.ActivateProgram(pda.Value, program);
+        _cartridgeLoader.ActivateProgram((pda.Value, loader), program);
 
         _ui.OpenUi(pda.Value, PdaUiKey.Key, args.SenderSession);
     }

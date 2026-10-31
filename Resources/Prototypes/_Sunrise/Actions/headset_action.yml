@@ -3,8 +3,11 @@
   id: ActionToggleHeadset
   components:
   - type: Action
-    icon: { sprite: Objects/Devices/encryption_keys.rsi, state: crypt_gray }
     useDelay: 1
+  - type: Sprite
+    sprite: Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_gray
   - type: InstantAction
     event: !type:OpenUiActionEvent
       key: enum.HeadsetUiKey.Key

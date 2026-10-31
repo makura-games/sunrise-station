@@ -20,8 +20,6 @@ public sealed partial class GunSystem
         InitializeSunriseChamberMagazine(); // Sunrise-Edit
     }
 
-    partial void InitializeSunriseChamberMagazine(); // Sunrise-Edit
-
     private void OnChamberMagazineAppearance(Entity<ChamberMagazineAmmoProviderComponent> ent, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null ||

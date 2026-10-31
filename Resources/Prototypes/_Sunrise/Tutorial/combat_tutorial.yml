@@ -1,0 +1,848 @@
+- type: tutorialSequence
+  id: CombatTutorial
+  duration: 720
+  estimatedDuration:
+    minimum: 300
+    maximum: 600
+  priority: 7
+  name: combat-tutorial-name
+  tooltip: combat-tutorial-tooltip
+  grid: /Maps/_Sunrise/Tutorials/combat_tutorial.yml
+  texture: /Textures/_Sunrise/Tutorial/combat_tutorial.png
+  playerEntity: CombatTutorialPlayer
+  steps:
+  - CombatTutWelcome
+  - CombatTutActionBar
+  - CombatTutEnableCombatMode
+  - CombatTutUnarmedAttack
+  - CombatTutExplainStamina
+  - CombatTutExplainAttackTypes
+  - CombatTutDisarm
+  - CombatTutTakeMelee
+  - CombatTutMeleeAttack
+  - CombatTutWideAttack
+  - CombatTutReturnMelee
+  - CombatTutTakePistol
+  - CombatTutShootTarget
+  - CombatTutReturnPistol
+  - CombatTutTakeCarbine
+  - CombatTutShootCarbineUnwielded
+  - CombatTutWieldCarbine
+  - CombatTutShootCarbineWielded
+  - CombatTutDisableCombatMode
+  - CombatTutChargeCarbine
+  - CombatTutForceEscalation
+  - CombatTutFinish
+  - TutorialMHelp
+
+- type: tutorialStep
+  id: CombatTutWelcome
+  parent: BaseTutorialStepBase
+  bubble:
+    text: combat-tut-welcome-bubble
+  chatMessage: combat-tut-welcome-chat
+  ttsMessage: combat-tut-welcome-tts
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialAttackSoftLock
+      popup: combat-tut-softlock-follow-step
+  conditions:
+  - !type:StepDelayCondition
+    delay: 11
+
+- type: tutorialStep
+  id: CombatTutActionBar
+  parent: BaseTutorialStepBase
+  bubble:
+    text: combat-tut-action-bar-bubble
+  chatMessage: combat-tut-action-bar-chat
+  ttsMessage: combat-tut-action-bar-tts
+  blockUiInteraction: true
+  uiHighlight:
+  - !type:UiByName
+    name: Actions
+  - !type:UiByName
+    name: ActionsContainer
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialAttackSoftLock
+      popup: combat-tut-softlock-follow-step
+  conditions:
+  - !type:StepDelayCondition
+    delay: 11
+
+- type: tutorialStep
+  id: CombatTutEnableCombatMode
+  parent: BaseTutorialStepBase
+  bubble:
+    text: combat-tut-enable-combat-mode-bubble
+  chatMessage: combat-tut-enable-combat-mode-chat
+  ttsMessage: combat-tut-enable-combat-mode-tts
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: ActionCombatModeToggle
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialDropSoftLock
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - SurvivalKnife
+      - CombatTutorialWeaponDisablerPractice
+      - WeaponLaserCarbinePractice
+      popup: combat-tut-softlock-keep-weapon
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - SurvivalKnife
+      - CombatTutorialWeaponDisablerPractice
+      - WeaponLaserCarbinePractice
+      blockAllSlots: true
+      popup: combat-tut-softlock-keep-weapon
+    - type: TutorialAttackSoftLock
+      popup: combat-tut-softlock-follow-step
+  conditions:
+  - !type:CombatModeCondition
+
+- type: tutorialStep
+  id: CombatTutUnarmedAttack
+  parent: BaseTutorialStepBase
+  target: CombatTutorialTargetHuman
+  bubble:
+    text: combat-tut-unarmed-attack-bubble
+    attachToTarget: true
+  chatMessage: combat-tut-unarmed-attack-chat
+  ttsMessage: combat-tut-unarmed-attack-tts
+  observeRange: 14
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialAttackSoftLock
+      allowedTargets:
+      - CombatTutorialTargetHuman
+      allowUnarmed: true
+      popup: combat-tut-softlock-attack-target
+  failures:
+  - conditions:
+    - !type:CombatModeCondition
+      enabled: false
+    repairStep: CombatTutEnableCombatMode
+  conditions:
+  - !type:MeleeHitListenedCondition
+    target: CombatTutorialPlayer
+    hitTarget: CombatTutorialTargetHuman
+
+- type: tutorialStep
+  id: CombatTutExplainStamina
+  parent: BaseTutorialStepBase
+  bubble:
+    text: combat-tut-explain-stamina-bubble
+  chatMessage: combat-tut-explain-stamina-chat
+  ttsMessage: combat-tut-explain-stamina-tts
+  uiHighlight:
+  - !type:UiByName
+    name: AlertContainer
+  - !type:UiByAlertPrototype
+    prototype: Stamina
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialAttackSoftLock
+      silent: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialSimulatedAlert
+      alert: Stamina
+      severity: 4
+  conditions:
+  - !type:StepDelayCondition
+    delay: 12
+
+- type: tutorialStep
+  id: CombatTutExplainAttackTypes
+  parent: BaseTutorialStepBase
+  bubble:
+    text: combat-tut-explain-attack-types-bubble
+  chatMessage: combat-tut-explain-attack-types-chat
+  ttsMessage: combat-tut-explain-attack-types-tts
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialAttackSoftLock
+      silent: true
+      popup: combat-tut-softlock-follow-step
+  conditions:
+  - !type:StepDelayCondition
+    delay: 13
+
+- type: tutorialStep
+  id: CombatTutDisarm
+  parent: BaseTutorialStepBase
+  target: CombatTutorialTargetHuman
+  bubble:
+    text: combat-tut-disarm-bubble
+    attachToTarget: true
+  chatMessage: combat-tut-disarm-chat
+  ttsMessage: combat-tut-disarm-tts
+  observeRange: 14
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialAttackSoftLock
+      allowedTargets:
+      - CombatTutorialTargetHuman
+      allowDisarm: true
+      popup: combat-tut-softlock-disarm-target
+  failures:
+  - conditions:
+    - !type:CombatModeCondition
+      enabled: false
+    repairStep: CombatTutEnableCombatMode
+  conditions:
+  - !type:DisarmListenedCondition
+    target: CombatTutorialTargetHuman
+
+- type: tutorialStep
+  id: CombatTutTakeMelee
+  parent: BaseTutorialStepBase
+  target: SurvivalKnife
+  bubble:
+    text: combat-tut-take-melee-bubble
+    attachToTarget: true
+  chatMessage: combat-tut-take-melee-chat
+  ttsMessage: combat-tut-take-melee-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: SurvivalKnife
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SurvivalKnife
+      popup: combat-tut-softlock-pickup-highlighted
+    - type: TutorialDropSoftLock
+      popup: combat-tut-softlock-keep-melee
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - SurvivalKnife
+      popup: combat-tut-softlock-keep-melee
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - SurvivalKnife
+      blockAllSlots: true
+      popup: combat-tut-softlock-keep-melee
+    - type: TutorialAttackSoftLock
+      silent: true
+      popup: combat-tut-softlock-follow-step
+  conditions:
+  - !type:PickupListenedCondition
+    target: SurvivalKnife
+
+- type: tutorialStep
+  id: CombatTutMeleeAttack
+  parent: BaseTutorialStepBase
+  target: CombatTutorialTargetHuman
+  bubble:
+    text: combat-tut-melee-attack-bubble
+    attachToTarget: true
+  chatMessage: combat-tut-melee-attack-chat
+  ttsMessage: combat-tut-melee-attack-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: SurvivalKnife
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialDropSoftLock
+      popup: combat-tut-softlock-keep-melee
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - SurvivalKnife
+      popup: combat-tut-softlock-keep-melee
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - SurvivalKnife
+      blockAllSlots: true
+      popup: combat-tut-softlock-keep-melee
+    - type: TutorialAttackSoftLock
+      allowedTargets:
+      - CombatTutorialTargetHuman
+      allowedMeleeWeapons:
+      - SurvivalKnife
+      popup: combat-tut-softlock-attack-target
+  failures:
+  - conditions:
+    - !type:HoldInHandsCondition
+      item: SurvivalKnife
+      inverted: true
+    repairStep: CombatTutTakeMelee
+  - conditions:
+    - !type:CombatModeCondition
+      enabled: false
+    repairStep: CombatTutEnableCombatMode
+  conditions:
+  - !type:MeleeHitListenedCondition
+    target: SurvivalKnife
+    hitTarget: CombatTutorialTargetHuman
+
+- type: tutorialStep
+  id: CombatTutWideAttack
+  parent: BaseTutorialStepBase
+  target: CombatTutorialTargetHuman
+  bubble:
+    text: combat-tut-wide-attack-bubble
+    attachToTarget: true
+  chatMessage: combat-tut-wide-attack-chat
+  ttsMessage: combat-tut-wide-attack-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: SurvivalKnife
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialDropSoftLock
+      popup: combat-tut-softlock-keep-melee
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - SurvivalKnife
+      popup: combat-tut-softlock-keep-melee
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - SurvivalKnife
+      blockAllSlots: true
+      popup: combat-tut-softlock-keep-melee
+    - type: TutorialAttackSoftLock
+      allowedTargets:
+      - CombatTutorialTargetHuman
+      allowedMeleeWeapons:
+      - SurvivalKnife
+      popup: combat-tut-softlock-wide-target
+  failures:
+  - conditions:
+    - !type:HoldInHandsCondition
+      item: SurvivalKnife
+      inverted: true
+    repairStep: CombatTutTakeMelee
+  - conditions:
+    - !type:CombatModeCondition
+      enabled: false
+    repairStep: CombatTutEnableCombatMode
+  conditions:
+  - !type:MeleeHitListenedCondition
+    target: SurvivalKnife
+    hitTarget: CombatTutorialTargetHuman
+    wide: true
+
+- type: tutorialStep
+  id: CombatTutReturnMelee
+  parent: BaseTutorialStepBase
+  bubble:
+    text: combat-tut-return-melee-bubble
+  chatMessage: combat-tut-return-melee-chat
+  ttsMessage: combat-tut-return-melee-tts
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: SurvivalKnife
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SurvivalKnife
+      popup: combat-tut-softlock-return-weapon
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - SurvivalKnife
+      popup: combat-tut-softlock-return-weapon
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - SurvivalKnife
+      blockAllSlots: true
+      popup: combat-tut-softlock-return-weapon
+    - type: TutorialAttackSoftLock
+      silent: true
+      popup: combat-tut-softlock-follow-step
+  conditions:
+  - !type:DropListenedCondition
+    target: SurvivalKnife
+
+- type: tutorialStep
+  id: CombatTutTakePistol
+  parent: BaseTutorialStepBase
+  target: CombatTutorialWeaponDisablerPractice
+  bubble:
+    text: combat-tut-take-pistol-bubble
+    attachToTarget: true
+  chatMessage: combat-tut-take-pistol-chat
+  ttsMessage: combat-tut-take-pistol-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: CombatTutorialWeaponDisablerPractice
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - CombatTutorialWeaponDisablerPractice
+      popup: combat-tut-softlock-pickup-highlighted
+    - type: TutorialDropSoftLock
+      popup: combat-tut-softlock-keep-pistol
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - CombatTutorialWeaponDisablerPractice
+      popup: combat-tut-softlock-keep-pistol
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - CombatTutorialWeaponDisablerPractice
+      blockAllSlots: true
+      popup: combat-tut-softlock-keep-pistol
+    - type: TutorialAttackSoftLock
+      silent: true
+      popup: combat-tut-softlock-follow-step
+  conditions:
+  - !type:PickupListenedCondition
+    target: CombatTutorialWeaponDisablerPractice
+
+- type: tutorialStep
+  id: CombatTutShootTarget
+  parent: BaseTutorialStepBase
+  target: TargetSyndicate
+  bubble:
+    text: combat-tut-shoot-target-bubble
+    attachToTarget: true
+  chatMessage: combat-tut-shoot-target-chat
+  ttsMessage: combat-tut-shoot-target-tts
+  observeRange: 20
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: CombatTutorialWeaponDisablerPractice
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialDropSoftLock
+      popup: combat-tut-softlock-keep-pistol
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - CombatTutorialWeaponDisablerPractice
+      popup: combat-tut-softlock-keep-pistol
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - CombatTutorialWeaponDisablerPractice
+      blockAllSlots: true
+      popup: combat-tut-softlock-keep-pistol
+    - type: TutorialAttackSoftLock
+      allowedRangedWeapons:
+      - CombatTutorialWeaponDisablerPractice
+      popup: combat-tut-softlock-shoot-target
+  failures:
+  - conditions:
+    - !type:HoldInHandsCondition
+      item: CombatTutorialWeaponDisablerPractice
+      inverted: true
+    repairStep: CombatTutTakePistol
+  - conditions:
+    - !type:CombatModeCondition
+      enabled: false
+    repairStep: CombatTutEnableCombatMode
+  conditions:
+  - !type:ProjectileHitListenedCondition
+    target: CombatTutorialWeaponDisablerPractice
+    hitTarget: TargetSyndicate
+    count: 3
+
+- type: tutorialStep
+  id: CombatTutDisableCombatMode
+  parent: BaseTutorialStepBase
+  bubble:
+    text: combat-tut-disable-combat-mode-bubble
+  chatMessage: combat-tut-disable-combat-mode-chat
+  ttsMessage: combat-tut-disable-combat-mode-tts
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: ActionCombatModeToggle
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialDropSoftLock
+      popup: combat-tut-softlock-keep-carbine
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - WeaponLaserCarbinePractice
+      popup: combat-tut-softlock-keep-carbine
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - WeaponLaserCarbinePractice
+      blockAllSlots: true
+      popup: combat-tut-softlock-keep-carbine
+    - type: TutorialAttackSoftLock
+      silent: true
+      popup: combat-tut-softlock-follow-step
+  conditions:
+  - !type:CombatModeCondition
+    enabled: false
+
+- type: tutorialStep
+  id: CombatTutReturnPistol
+  parent: BaseTutorialStepBase
+  bubble:
+    text: combat-tut-return-pistol-bubble
+  chatMessage: combat-tut-return-pistol-chat
+  ttsMessage: combat-tut-return-pistol-tts
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: CombatTutorialWeaponDisablerPractice
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - CombatTutorialWeaponDisablerPractice
+      popup: combat-tut-softlock-return-weapon
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - CombatTutorialWeaponDisablerPractice
+      popup: combat-tut-softlock-return-weapon
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - CombatTutorialWeaponDisablerPractice
+      blockAllSlots: true
+      popup: combat-tut-softlock-return-weapon
+    - type: TutorialAttackSoftLock
+      popup: combat-tut-softlock-follow-step
+  conditions:
+  - !type:DropListenedCondition
+    target: CombatTutorialWeaponDisablerPractice
+
+- type: tutorialStep
+  id: CombatTutTakeCarbine
+  parent: BaseTutorialStepBase
+  target: WeaponLaserCarbinePractice
+  bubble:
+    text: combat-tut-take-carbine-bubble
+    attachToTarget: true
+  chatMessage: combat-tut-take-carbine-chat
+  ttsMessage: combat-tut-take-carbine-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: WeaponLaserCarbinePractice
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - WeaponLaserCarbinePractice
+      popup: combat-tut-softlock-pickup-highlighted
+    - type: TutorialDropSoftLock
+      popup: combat-tut-softlock-keep-carbine
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - WeaponLaserCarbinePractice
+      popup: combat-tut-softlock-keep-carbine
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - WeaponLaserCarbinePractice
+      blockAllSlots: true
+      popup: combat-tut-softlock-keep-carbine
+    - type: TutorialAttackSoftLock
+      silent: true
+      popup: combat-tut-softlock-follow-step
+  conditions:
+  - !type:PickupListenedCondition
+    target: WeaponLaserCarbinePractice
+
+- type: tutorialStep
+  id: CombatTutShootCarbineUnwielded
+  parent: BaseTutorialStepBase
+  target: TargetClown
+  bubble:
+    text: combat-tut-shoot-carbine-unwielded-bubble
+    attachToTarget: true
+  chatMessage: combat-tut-shoot-carbine-unwielded-chat
+  ttsMessage: combat-tut-shoot-carbine-unwielded-tts
+  observeRange: 20
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: WeaponLaserCarbinePractice
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialDropSoftLock
+      popup: combat-tut-softlock-keep-carbine
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - WeaponLaserCarbinePractice
+      popup: combat-tut-softlock-keep-carbine
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - WeaponLaserCarbinePractice
+      blockAllSlots: true
+      popup: combat-tut-softlock-keep-carbine
+    - type: TutorialWieldSoftLock
+      popup: combat-tut-softlock-shoot-one-handed
+    - type: TutorialAttackSoftLock
+      allowedRangedWeapons:
+      - WeaponLaserCarbinePractice
+      popup: combat-tut-softlock-shoot-carbine
+  failures:
+  - conditions:
+    - !type:HoldInHandsCondition
+      item: WeaponLaserCarbinePractice
+      inverted: true
+    repairStep: CombatTutTakeCarbine
+  - conditions:
+    - !type:CombatModeCondition
+      enabled: false
+    repairStep: CombatTutEnableCombatMode
+  conditions:
+  - !type:GunShotListenedCondition
+    target: WeaponLaserCarbinePractice
+    count: 3
+
+- type: tutorialStep
+  id: CombatTutWieldCarbine
+  parent: BaseTutorialStepBase
+  bubble:
+    text: combat-tut-wield-carbine-bubble
+  chatMessage: combat-tut-wield-carbine-chat
+  ttsMessage: combat-tut-wield-carbine-tts
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: WeaponLaserCarbinePractice
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialDropSoftLock
+      popup: combat-tut-softlock-keep-carbine
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - WeaponLaserCarbinePractice
+      popup: combat-tut-softlock-keep-carbine
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - WeaponLaserCarbinePractice
+      blockAllSlots: true
+      popup: combat-tut-softlock-keep-carbine
+    - type: TutorialAttackSoftLock
+      silent: true
+      popup: combat-tut-softlock-follow-step
+  failures:
+  - conditions:
+    - !type:HoldInHandsCondition
+      item: WeaponLaserCarbinePractice
+      inverted: true
+    repairStep: CombatTutTakeCarbine
+  conditions:
+  - !type:WieldedCondition
+    item: WeaponLaserCarbinePractice
+
+- type: tutorialStep
+  id: CombatTutShootCarbineWielded
+  parent: BaseTutorialStepBase
+  target: TargetClown
+  bubble:
+    text: combat-tut-shoot-carbine-wielded-bubble
+    attachToTarget: true
+  chatMessage: combat-tut-shoot-carbine-wielded-chat
+  ttsMessage: combat-tut-shoot-carbine-wielded-tts
+  observeRange: 20
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: WeaponLaserCarbinePractice
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialDropSoftLock
+      popup: combat-tut-softlock-keep-carbine
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - WeaponLaserCarbinePractice
+      popup: combat-tut-softlock-keep-carbine
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - WeaponLaserCarbinePractice
+      blockAllSlots: true
+      popup: combat-tut-softlock-keep-carbine
+    - type: TutorialAttackSoftLock
+      allowedRangedWeapons:
+      - WeaponLaserCarbinePractice
+      popup: combat-tut-softlock-shoot-carbine
+  failures:
+  - conditions:
+    - !type:HoldInHandsCondition
+      item: WeaponLaserCarbinePractice
+      inverted: true
+    repairStep: CombatTutTakeCarbine
+  - conditions:
+    - !type:WieldedCondition
+      item: WeaponLaserCarbinePractice
+      wielded: false
+    repairStep: CombatTutWieldCarbine
+  - conditions:
+    - !type:CombatModeCondition
+      enabled: false
+    repairStep: CombatTutEnableCombatMode
+  conditions:
+  - !type:GunShotListenedCondition
+    target: WeaponLaserCarbinePractice
+    count: 3
+
+- type: tutorialStep
+  id: CombatTutChargeCarbine
+  parent: BaseTutorialStepBase
+  target: WeaponCapacitorRecharger
+  bubble:
+    text: combat-tut-charge-carbine-bubble
+    attachToTarget: true
+  chatMessage: combat-tut-charge-carbine-chat
+  ttsMessage: combat-tut-charge-carbine-tts
+  observeRange: 20
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - WeaponLaserCarbinePractice
+      popup: combat-tut-softlock-pickup-highlighted
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - WeaponLaserCarbinePractice
+      blockAllSlots: true
+      popup: combat-tut-softlock-charge-carbine
+    - type: TutorialAttackSoftLock
+      silent: true
+      popup: combat-tut-softlock-follow-step
+  failures:
+  - conditions:
+    - !type:CombatModeCondition
+    repairStep: CombatTutDisableCombatMode
+  conditions:
+  - !type:ItemInsertedListenedCondition
+    target: WeaponCapacitorRecharger
+    item: WeaponLaserCarbinePractice
+
+- type: tutorialStep
+  id: CombatTutForceEscalation
+  parent: BaseTutorialStepBase
+  bubble:
+    text: combat-tut-force-escalation-bubble
+  chatMessage: combat-tut-force-escalation-chat
+  ttsMessage: combat-tut-force-escalation-tts
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialAttackSoftLock
+      popup: combat-tut-softlock-follow-step
+  conditions:
+  - !type:StepDelayCondition
+    delay: 17
+
+- type: tutorialStep
+  id: CombatTutFinish
+  parent: BaseTutorialStepBase
+  bubble:
+    text: combat-tut-finish-bubble
+  chatMessage: combat-tut-finish-chat
+  ttsMessage: combat-tut-finish-tts
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+      popup: combat-tut-softlock-follow-step
+    - type: TutorialAttackSoftLock
+      popup: combat-tut-softlock-follow-step
+  conditions:
+  - !type:StepDelayCondition
+    delay: 10
+
+- type: entity
+  parent: MobHuman
+  id: CombatTutorialTargetHuman
+  name: training partner
+  suffix: Tutorial
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: DisarmProne
+  - type: PassiveDamage
+    damage: {}
+
+- type: entity
+  parent: MarkerBase
+  id: CombatTutorialTargetSpawner
+  name: training partner spawner
+  suffix: Tutorial
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - CombatTutorialTargetHuman
+
+- type: entity
+  parent: WeaponDisablerPractice
+  id: CombatTutorialWeaponDisablerPractice
+  name: self-charging practice disabler
+  suffix: Tutorial
+  components:
+  - type: BatterySelfRecharger
+    autoRechargeRate: 125
+  - type: TutorialProjectileSource
+
+- type: entity
+  parent: BaseTutorialPlayer
+  id: CombatTutorialPlayer
+  name: trainee
+  suffix: Tutorial
+  components:
+  - type: Godmode

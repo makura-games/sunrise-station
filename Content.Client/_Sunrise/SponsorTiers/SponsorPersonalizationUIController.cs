@@ -5,7 +5,7 @@ namespace Content.Client._Sunrise.SponsorTiers;
 
 public partial class SponsorPersonalizationUIController : UIController
 {
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private IUserInterfaceManager _uiManager = default!;
 
     private SponsorPersonalizationUi? _window;
 

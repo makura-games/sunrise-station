@@ -1,7 +1,7 @@
-# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 - type: entity
   id: PartHumanoidXeno
-  parent: [ BaseItem, BasePart ]
+  parent: OrganBase
   name: "xenomorph body part"
   abstract: true
   components:
@@ -12,11 +12,14 @@
         Quantity: 3
       - ReagentId: Blood
         Quantity: 10
+  - type: VisualOrganMarkings
+    markingData:
+      group: HumanoidXeno
 
 - type: entity
   id: TorsoHumanoidXeno
   name: "xenomorph torso"
-  parent: [ PartHumanoidXeno, BaseTorso ]
+  parent: [ PartHumanoidXeno, OrganBaseTorso ]
   components:
   - type: Sprite
     netsync: false
@@ -29,7 +32,7 @@
 - type: entity
   id: HeadHumanoidXeno
   name: "xenomorph head"
-  parent: [ PartHumanoidXeno, BaseHead ]
+  parent: [ PartHumanoidXeno, OrganBaseHead ]
   components:
   - type: Sprite
     netsync: false
@@ -42,7 +45,7 @@
 - type: entity
   id: LeftArmHumanoidXeno
   name: "left xenomorph arm"
-  parent: [ PartHumanoidXeno, BaseLeftArm ]
+  parent: [ PartHumanoidXeno, OrganBaseArmLeft ]
   components:
   - type: Sprite
     netsync: false
@@ -55,7 +58,7 @@
 - type: entity
   id: RightArmHumanoidXeno
   name: "right xenomorph arm"
-  parent: [ PartHumanoidXeno, BaseRightArm ]
+  parent: [ PartHumanoidXeno, OrganBaseArmRight ]
   components:
   - type: Sprite
     netsync: false
@@ -68,7 +71,7 @@
 - type: entity
   id: LeftHandHumanoidXeno
   name: "left xenomorph hand"
-  parent: [ PartHumanoidXeno, BaseLeftHand ]
+  parent: [ PartHumanoidXeno, OrganBaseHandLeft ]
   components:
   - type: Sprite
     netsync: false
@@ -81,7 +84,7 @@
 - type: entity
   id: RightHandHumanoidXeno
   name: "right xenomorph hand"
-  parent: [ PartHumanoidXeno, BaseRightHand ]
+  parent: [ PartHumanoidXeno, OrganBaseHandRight ]
   components:
   - type: Sprite
     netsync: false
@@ -94,11 +97,8 @@
 - type: entity
   id: LeftLegHumanoidXeno
   name: "left xenomorph leg"
-  parent: [ PartHumanoidXeno, BaseLeftLeg ]
+  parent: [ PartHumanoidXeno, OrganBaseLegLeft ]
   components:
-  - type: MovementBodyPart
-    walkSpeed: 3
-    sprintSpeed: 4
   - type: Sprite
     netsync: false
     sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
@@ -110,11 +110,8 @@
 - type: entity
   id: RightLegHumanoidXeno
   name: "right xenomorph leg"
-  parent: [ PartHumanoidXeno, BaseRightLeg ]
+  parent: [ PartHumanoidXeno, OrganBaseLegRight ]
   components:
-  - type: MovementBodyPart
-    walkSpeed: 3
-    sprintSpeed: 4
   - type: Sprite
     netsync: false
     sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi
@@ -126,7 +123,7 @@
 - type: entity
   id: LeftFootHumanoidXeno
   name: "left xenomorph foot"
-  parent: [ PartHumanoidXeno, BaseLeftFoot ]
+  parent: [ PartHumanoidXeno, OrganBaseFootLeft ]
   components:
   - type: Sprite
     netsync: false
@@ -139,7 +136,7 @@
 - type: entity
   id: RightFootHumanoidXeno
   name: "right xenomorph foot"
-  parent: [ PartHumanoidXeno, BaseRightFoot ]
+  parent: [ PartHumanoidXeno, OrganBaseFootRight ]
   components:
   - type: Sprite
     netsync: false

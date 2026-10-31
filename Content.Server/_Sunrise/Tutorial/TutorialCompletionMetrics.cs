@@ -7,7 +7,8 @@ namespace Content.Server.Database;
 /// </summary>
 public sealed record TutorialCompletionMetrics(
     string TutorialId,
-    int CompletedPlayers,
+    int FirstTimeCompletedPlayers,
+    int NewAccountCompletedPlayers,
     int CompletionCount,
     int AccountAgeSamples,
     double? AverageAccountAgeDays,

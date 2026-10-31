@@ -5,4 +5,4 @@ ent-Whistle = { ent-BaseWhistle }
 ent-SecurityWhistle = { ent-BaseWhistle }
     .desc = Его звук внушает вам ужас.
 ent-SyndicateWhistle = траншейный свисток
-    .desc = Свисток, используемый командирами Синдиката для привлечения внимания. Avanti!
+    .desc = Свисток, используемый командирами Синдиката для привлечения внимания. Аванти!

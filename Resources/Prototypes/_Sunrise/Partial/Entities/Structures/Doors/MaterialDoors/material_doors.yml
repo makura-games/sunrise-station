@@ -1,0 +1,51 @@
+- type: !PartialOnly entity
+  id: BaseMaterialDoor
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Doors/MineralDoors/metal_door.rsi
+    layers: !Clear
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+
+- type: !PartialOnly entity
+  id: PlasmaDoor
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Doors/MineralDoors/plasma_door.rsi
+
+- type: !PartialOnly entity
+  id: GoldDoor
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Doors/MineralDoors/gold_door.rsi
+
+- type: !PartialOnly entity
+  id: SilverDoor
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Doors/MineralDoors/silver_door.rsi
+
+- type: !PartialOnly entity
+  id: PaperDoor
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Doors/MineralDoors/paper_door.rsi
+
+- type: !PartialOnly entity
+  id: WebDoor
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Doors/web_door.rsi
+
+- type: !PartialOnly entity
+  id: CardDoor
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Doors/MineralDoors/card_door.rsi
+
+- type: !PartialOnly entity
+  id: WoodDoor
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Doors/MineralDoors/wood_door.rsi

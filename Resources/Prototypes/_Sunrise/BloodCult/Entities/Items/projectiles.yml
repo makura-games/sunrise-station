@@ -10,9 +10,14 @@
     - state: bullet
   - type: Projectile
     damage:
-      groups:
-        Burn: 10
-        Brute: 10
+      types:
+        Heat: 2.5
+        Shock: 2.5
+        Cold: 2.5
+        Caustic: 2.5
+        Blunt: 3.33
+        Slash: 3.33
+        Piercing: 3.34
   - type: PointLight
     enabled: true
     color: "#ff4300"
@@ -34,17 +39,28 @@
     - state: blood_bolt
   - type: Projectile
     damage:
-      groups:
-        Burn: 0
+      types:
+        Heat: 0
+        Shock: 0
+        Cold: 0
+        Caustic: 0
   - type: BloodBolt
     damage:
-      groups:
-        Brute: 25
+      types:
+        Blunt: 8.33
+        Slash: 8.33
+        Piercing: 8.34
     healConstruct:
-      groups:
-        Brute: -30
-        Burn: -30
-        Toxin: -30
+      types:
+        Blunt: -10
+        Slash: -10
+        Piercing: -10
+        Heat: -7.5
+        Shock: -7.5
+        Cold: -7.5
+        Caustic: -7.5
+        Poison: -15
+        Radiation: -15
     unholyVolume: 8
   - type: PointLight
     enabled: true
