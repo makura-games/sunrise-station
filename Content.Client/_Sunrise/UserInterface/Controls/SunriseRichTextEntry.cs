@@ -222,6 +222,7 @@ internal struct SunriseRichTextEntry
         var lineBreakIndex = 0;
         var baseLine = drawBox.TopLeft + new Vector2(0, defaultFont.GetAscent(uiScale) + verticalOffset);
         var controlYAdvance = 0f;
+        var spaceRune = new Rune(' ');
 
         var nodeIndex = -1;
         foreach (var node in Message)
@@ -236,16 +237,22 @@ internal struct SunriseRichTextEntry
 
             foreach (var rune in text.EnumerateRunes())
             {
+                var skipSpaceBaseline = false;
+
                 if (lineBreakIndex < LineBreaks.Count &&
                     LineBreaks[lineBreakIndex] == globalBreakCounter)
                 {
                     baseLine = new Vector2(drawBox.Left, baseLine.Y + GetLineHeight(font, uiScale, lineHeightScale) + (int)(controlYAdvance * uiScale));
                     controlYAdvance = 0;
                     lineBreakIndex += 1;
+
+                    if (rune == spaceRune)
+                        skipSpaceBaseline = true;
                 }
 
                 var advance = font.DrawChar(handle, rune, baseLine, uiScale, color);
-                baseLine += new Vector2(advance, 0);
+                if (!skipSpaceBaseline)
+                    baseLine += new Vector2(advance, 0);
 
                 globalBreakCounter += 1;
             }

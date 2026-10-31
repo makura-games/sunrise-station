@@ -2297,7 +2297,7 @@ namespace Content.Server.Database.Migrations.Postgres
             modelBuilder.Entity("Content.Server.Database.PlayTimeSession", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
-                        .WithMany("PlayTimeSessions")
+                        .WithMany()
                         .HasForeignKey("PlayerId")
                         .HasPrincipalKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2551,7 +2551,7 @@ namespace Content.Server.Database.Migrations.Postgres
 
                     b.Navigation("JobWhitelists");
 
-                    b.Navigation("PlayTimeSessions");
+
                 });
 
             modelBuilder.Entity("Content.Server.Database.Preference", b =>
