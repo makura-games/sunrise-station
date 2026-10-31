@@ -240,20 +240,24 @@ def collect(state: State, config: dict, log: Journal, deadline: float) -> int:
                 if pending_key == key or pending_key.startswith(key + ":part"):
                     pending["created_at"] = run["created_at"]
         except (GitHubError, ValueError, KeyError, TypeError) as error:
-            failures.append(run["created_at"])
             errors += 1
             log(
                 f"Не получено событие запуска {run['id']}: {error}. "
                 "Оно не отмечено доставленным."
             )
-            if (
+            can_rerun = (
                 run["conclusion"] in {"failure", "cancelled", "timed_out"}
                 and run["run_attempt"] < 3
-            ):
+            )
+            if can_rerun:
+                failures.append(run["created_at"])
                 github.json(
                     "POST", f"{github.root}/actions/runs/{run['id']}/rerun"
                 )
                 log(f"Повторно запущен сбор события {run['id']}.")
+            else:
+                state.data["seen"][key] = run["created_at"]
+                log(f"Запуск {run['id']} пропущен во избежание блокировки курсора.")
             continue
         state.data["seen"][key] = run["created_at"]
     next_cursor = min([cutoff, *failures])
