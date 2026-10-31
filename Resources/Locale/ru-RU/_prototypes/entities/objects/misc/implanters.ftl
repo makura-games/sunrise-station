@@ -12,85 +12,65 @@ ent-BaseImplantOnlyImplanter = { ent-Implanter }
 ent-BaseImplantOnlyImplanterSyndi = { ent-BaseImplanter }
     .desc = Компактный одноразовый шприц, предназначенный исключительно для введения подкожных имплантов. После использования обязательно ототрите его мылом или тряпкой, чтобы удалить остатки ДНК!
 ent-SadTromboneImplanter = { ent-BaseImplanter }
-    .suffix = грустный тромбон
     .desc = { ent-BaseImplantOnlyImplanter.desc }
-
+    .suffix = Грустный тромбон
 ent-LightImplanter = { ent-BaseImplanter }
-    .suffix = свет
     .desc = { ent-BaseImplantOnlyImplanter.desc }
-
+    .suffix = Свет
 ent-BikeHornImplanter = { ent-BaseImplanter }
-    .suffix = гудок
     .desc = { ent-BaseImplantOnlyImplanter.desc }
-
+    .suffix = Гудок
 ent-TrackingImplanter = { ent-BaseImplanter }
-    .suffix = трекер
     .desc = { ent-BaseImplantOnlyImplanter.desc }
-
+    .suffix = Трекер
 ent-StorageImplanter = { ent-BaseImplanter }
-    .suffix = хранилище, синдикат
     .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
-
+    .suffix = Хранилище, синдикат
 ent-FreedomImplanter = { ent-BaseImplanter }
-    .suffix = свобода, синдикат
     .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
-
+    .suffix = Свобода, синдикат
 ent-RadioImplanter = { ent-BaseImplanter }
-    .suffix = радио, синдикат
     .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
-
+    .suffix = Радио, синдикат
 ent-VoiceMaskImplanter = { ent-BaseImplanter }
-    .suffix = маска голоса, синдикат
     .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
-
+    .suffix = Маска голоса, синдикат
 ent-UplinkImplanter = { ent-BaseImplanter }
-    .suffix = аплинк, синдикат
     .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
-
+    .suffix = Аплинк, синдикат
 ent-EmpImplanter = { ent-BaseImplanter }
+    .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
     .suffix = ЭМИ, синдикат
-    .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
-
 ent-ScramImplanter = { ent-BaseImplanter }
-    .suffix = скрамблер, синдикат
     .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
-
+    .suffix = Скрамблер, синдикат
 ent-DnaScramblerImplanter = { ent-BaseImplanter }
+    .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
     .suffix = ДНК-скрамблер, синдикат
-    .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
-
 ent-ChameleonControllerImplanter = { ent-BaseImplantOnlyImplanterSyndi }
-    .suffix = контроллер хамелеона
+    .suffix = Контроллер хамелеона
     .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
-
 ent-MicroBombImplanter = { ent-BaseImplanter }
-    .suffix = микро-бомба, синдикат
     .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
-
+    .suffix = Микро-бомба, синдикат
 ent-MacroBombImplanter = { ent-BaseImplanter }
-    .suffix = макро-бомба, синдикат
     .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
-
+    .suffix = Макро-бомба, синдикат
 ent-DeathRattleImplanter = { ent-BaseImplanter }
-    .suffix = предсмертный сигнал, синдикат
     .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
-
+    .suffix = Предсмертный сигнал, синдикат
 ent-DeathAcidifierImplanter = { ent-BaseImplanter }
-    .suffix = кислотная смерть, синдикат
     .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
-
+    .suffix = Кислотная смерть, синдикат
 ent-FakeMindShieldImplanter = { ent-BaseImplanter }
-    .suffix = фальшивый щит разума, синдикат
     .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
-
+    .suffix = Фальшивый щит разума, синдикат
 ent-MindShieldImplanter = { ent-BaseImplanter }
-    .suffix = щит разума
     .desc = { ent-BaseImplantOnlyImplanter.desc }
-
+    .suffix = Щит разума
 ent-RadioImplanterCentcomm = { ent-BaseImplanter }
-    .suffix = радио, ЦентКом
     .desc = { ent-BaseImplantOnlyImplanter.desc }
-
+    .suffix = Радио, ЦентКом
 ent-DeathRattleImplanterCentcomm = { ent-BaseImplanter }
-    .suffix = предсмертный сигнал, ЦентКом
     .desc = { ent-BaseImplantOnlyImplanter.desc }
+    .suffix = Предсмертный сигнал, ЦентКом

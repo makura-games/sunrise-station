@@ -88,7 +88,7 @@ public partial class InteractionsPanel
 
     private List<InteractionPrototype> FetchInteractions(EntityUid user, EntityUid target)
     {
-        var allInteractions = _prototypeManager.EnumeratePrototypes<InteractionPrototype>();
+        var allInteractions = ProtoMan.EnumeratePrototypes<InteractionPrototype>();
         var availableInteractions = new List<InteractionPrototype>();
 
         foreach (var interaction in allInteractions)

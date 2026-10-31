@@ -1,2 +1,2 @@
-ent-BagelTheaterRoomMarker = Маркер интерьера театра Bagel
+ent-BagelTheaterRoomMarker = маркер интерьера театра багел
     .desc = { ent-BaseRoomMarker.desc }

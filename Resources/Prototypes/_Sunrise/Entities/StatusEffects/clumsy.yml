@@ -1,0 +1,39 @@
+- type: entity
+  parent: StatusEffectClumsyAll
+  id: StatusEffectClumsyArtifact
+  name: artifact clumsy
+  components:
+  - type: ClumsyGunStatusEffect
+    failDamage:
+      types:
+        Blunt: 3
+        Piercing: 7
+        Heat: 0.75
+        Shock: 0.75
+        Cold: 0.75
+        Caustic: 0.75
+
+- type: entity
+  parent: [ StatusEffectClumsyAll, MobStatusEffectBase ]
+  id: StatusEffectClumsyInferiorVulpkanin
+  name: inferior vulpkanin clumsy
+  components:
+  - type: ClumsyCatchStatusEffect
+    clumsySound: &ReptilianScream
+      path: /Audio/Voice/Reptilian/reptilian_scream.ogg
+  - type: ClumsyDefibStatusEffect
+    clumsySound: *ReptilianScream
+  - type: ClumsyGunStatusEffect
+    clumsySound: *ReptilianScream
+    failDamage:
+      types:
+        Blunt: 2
+        Piercing: 7
+        Heat: 0.75
+        Shock: 0.75
+        Cold: 0.75
+        Caustic: 0.75
+  - type: ClumsyInjectorStatusEffect
+    clumsySound: *ReptilianScream
+  - type: ClumsyVaultStatusEffect
+    clumsySound: *ReptilianScream

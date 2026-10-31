@@ -11,17 +11,25 @@
     - CultistKillObjective
 #    Сюда нужно цель на призыв нарси.
   - type: AntagSelection
-    definitions:
-    - prefRoles: [ BloodCultist ]
-      max: 4
+    selectionTime: JobsAssigned
+    lateJoinAdditional: true
+    antags:
+    - !type:LinearAntagCount
+      proto: SunriseBloodCultist
       playerRatio: 15
-      blacklist:
-        components:
-        - AntagImmune
-        #- Synth  # SUNRISE-TODO: КПБ
-        - BibleUser
-      lateJoinAdditional: true
-      mindRoles:
-      - MindRoleCultist
+      range:
+        min: 1
+        max: 4
   - type: DynamicRuleCost
     cost: 150
+
+- type: antagSpecifier
+  parent: BaseAntagSpecifier
+  id: SunriseBloodCultist
+  prefRoles: [ BloodCultist ]
+  blacklist:
+    components:
+    # - Synth # Sunrise-TODO: КПБ
+    - BibleUser
+  mindRoles:
+  - MindRoleCultist

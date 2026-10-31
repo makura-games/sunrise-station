@@ -18,7 +18,6 @@
   startingGear: NtrLeaderGear
   icon: JobIconNtrLeader
   supervisors: job-supervisors-ntrg
-  canBeAntag: false
   access:
     - Command
     - Bar
@@ -61,10 +60,7 @@
     id: NtrLeadGuardPDA
     ears: ClothingHeadsetMagistrate
     belt: ClothingBeltSecurityFilled
-    pocket1: WeaponEnergyGunPulseRevolver
     pocket2: HandheldCriminalRecordsMonitorUnpowered
-  inhand:
-  - WeaponEnergyGunTactical
   storage:
     back:
     - ClothingOuterHardsuitNTRG
@@ -93,7 +89,6 @@
   startingGear: NtrLeaderGear
   icon: JobIconNtrGuard
   supervisors: job-supervisors-ntrg
-  canBeAntag: false
   access:
     - Command
     - Bar

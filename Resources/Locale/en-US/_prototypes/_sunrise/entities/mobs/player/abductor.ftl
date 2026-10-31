@@ -1,6 +1,6 @@
 ent-MobAbductor = abductor
     .desc = { ent-BaseMobAbductor.desc }
-ent-MobAbductorNonAntag = Urist McAbductor
+ent-MobAbductorNonAntag = urist McAbductor
     .desc = { ent-MobAbductor.desc }
 ent-MobAbductorScientist = abductor scientist
     .desc = { ent-MobAbductor.desc }

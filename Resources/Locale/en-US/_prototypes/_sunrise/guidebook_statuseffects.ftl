@@ -26,3 +26,4 @@ ent-StatusEffectOwO = owoaccent
     .desc = { ent-MobStatusEffectDebuff.desc }
 ent-StatusEffectBark = barkaccent
     .desc = { ent-MobStatusEffectDebuff.desc }
+entity-effect-status-effect-TemporaryBlindness = blindness

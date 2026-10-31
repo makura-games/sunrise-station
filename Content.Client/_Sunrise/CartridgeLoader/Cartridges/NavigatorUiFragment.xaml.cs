@@ -12,7 +12,7 @@ namespace Content.Client._Sunrise.CartridgeLoader.Cartridges;
 [GenerateTypedNameReferences]
 public sealed partial class NavigatorUiFragment : BoxContainer
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     public NavMapControl? NavMap;
     private EntityUid? _owner;

@@ -47,7 +47,7 @@ using Robust.Shared.Localization;
 public sealed class MyNotSystem : SomeBaseClass
 {
     // We implement the manager through the [Dependency] attribute
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     public void DoSomething()
     {
@@ -145,7 +145,7 @@ public sealed partial class VendingMachineComponent : Component
 public sealed class VendingMachineSystem : EntitySystem
 {
     // We do not import ILocalizationManager, since it is built into EntitySystem as Loc
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public void OnDeny(Entity<VendingMachineComponent> ent)
     {

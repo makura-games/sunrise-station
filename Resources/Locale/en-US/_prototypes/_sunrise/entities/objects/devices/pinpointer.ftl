@@ -1,3 +1,9 @@
 ent-PinpointerPirate = freelance pinpointer
     .desc = A handheld tracking device that leads to the direction of your shuttle.
     .suffix = Pirate
+ent-PinpointerSmugglerRevolutionaryStash = pinpointer
+    .desc = A handheld tracker that leads to where something fun is hidden.
+    .suffix = Revolution
+ent-PinpointerSmugglerStash = pinpointer
+    .desc = A handheld tracker that leads to where contraband is hidden.
+    .suffix = Admeme

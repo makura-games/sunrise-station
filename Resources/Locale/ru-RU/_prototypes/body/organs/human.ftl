@@ -1,7 +1,5 @@
-ent-BaseHumanOrganUnGibbable = { ent-BaseItem }
+ent-BaseHumanOrgan = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
-ent-BaseHumanOrgan = { ent-BaseHumanOrganUnGibbable }
-    .desc = { ent-BaseHumanOrganUnGibbable.desc }
 ent-OrganHumanBrain = мозг
     .desc = Источник невероятного, бесконечного интеллекта. Хонк.
 ent-OrganHumanEyes = глаза

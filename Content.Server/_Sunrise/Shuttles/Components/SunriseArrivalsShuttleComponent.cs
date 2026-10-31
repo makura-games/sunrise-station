@@ -84,7 +84,7 @@ public sealed partial class SunriseArrivalsShuttleComponent : Component
     /// <summary>
     /// Docks, зарезервированные этим шаттлом на целевой станции.
     /// </summary>
-    public List<EntityUid> ReservedDocks = new();
+    public HashSet<EntityUid> ReservedDocks = new();
 }
 
 public enum SunriseArrivalsShuttleState : byte
