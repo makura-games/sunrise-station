@@ -23,8 +23,5 @@ public sealed partial class LobbyAnimationPrototype : IPrototype, IInheritingPro
     public string Animation = default!;
 
     [DataField]
-    public Vector2 Scale = new(1f, 1f);
-
-    [DataField]
     public string State = "animation";
 }

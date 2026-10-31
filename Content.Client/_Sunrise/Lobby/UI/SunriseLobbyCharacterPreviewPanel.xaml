@@ -1,0 +1,25 @@
+<ui:SunriseLobbyCharacterPreviewPanel
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="clr-namespace:Content.Client._Sunrise.Lobby.UI"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls">
+    <BoxContainer Name="VBox" Orientation="Vertical" VerticalExpand="True">
+        <BoxContainer Name="Loaded" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5 0" SeparationOverride="15" Visible="False" VerticalExpand="True" VerticalAlignment="Center">
+            <!-- Left Side: Sprites -->
+            <BoxContainer Name="ViewBox" Orientation="Horizontal" VerticalAlignment="Center">
+
+            </BoxContainer>
+
+            <!-- Right Side: Info and Actions -->
+            <BoxContainer Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" SeparationOverride="8">
+                <Label Name="Summary" HorizontalAlignment="Center" MaxWidth="285" Align="Center"/>
+                <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 4 0 0" SeparationOverride="4">
+                    <Button Name="CharacterSetup" Text="{Loc 'lobby-character-preview-panel-character-setup-button'}"/>
+                    <Button Name="ChangePetButton" Text="{Loc 'pet-selection-select-lobby'}" MinWidth="80"/>
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+
+        <Label Name="Unloaded" Text="{Loc 'lobby-character-preview-panel-unloaded-preferences-label'}"/>
+    </BoxContainer>
+</ui:SunriseLobbyCharacterPreviewPanel>

@@ -26,10 +26,9 @@ lobby-state-background-no-background-text = No menu art loaded.
 lobby-state-background-unknown-title = [color=dimgray]Unknown title[/color]
 lobby-state-background-unknown-artist = [color=dimgray]Unknown artist[/color]
 lobby-state-playtime-comment-normal =
-    You've spent {$hours} {$hours ->
-    [1]hour
-    *[other]hours
-    } ingame today. Remember to take breaks!
-lobby-state-playtime-comment-concerning = You've played for {$hours} hours today. Please take a break.
-lobby-state-playtime-comment-grasstouchless = {$hours} hours. Consider logging off to attend to your needs.
-lobby-state-playtime-comment-selfdestructive = {$hours} hours. Really?
+    You've spent {$playtime} in game today Remember to take breaks!
+lobby-state-playtime-comment-concerning = You've played for {$playtime} today Please take a break.
+lobby-state-playtime-comment-grasstouchless = {$playtime} Consider logging off to attend to your needs.
+lobby-state-playtime-comment-selfdestructive = {$playtime} Really?
+
+lobby-state-playtime-comment-lazy = You’ve played a measly {$playtime} You are forbidden from touching grass.

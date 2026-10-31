@@ -1,7 +1,6 @@
-﻿using Content.Shared._Sunrise.SunriseCCVars;
+using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.CCVar;
-using Robust.Client.UserInterface;
-using Robust.Shared.Input;
+
 
 using TutorialUIController = Content.Client._Sunrise.Tutorial.TutorialWindow.TutorialUIController;
 
@@ -18,94 +17,43 @@ public sealed partial class SunriseLobbyGui
         TutorialButton.OnPressed += _ =>
             UserInterfaceManager.GetUIController<TutorialUIController>().ToggleTutorial();
 
-        ChatHider.OnKeyBindUp += args =>
-        {
-            if (args.Function != EngineKeyFunctions.Use)
-                return;
-
-            ChatContent.Visible = !ChatContent.Visible;
-            ChatHider.Texture = ChatContent.Visible ? IconExpanded : IconCollapsed;
-        };
-
-        ServerInfoHider.OnKeyBindUp += args =>
-        {
-            if (args.Function != EngineKeyFunctions.Use)
-                return;
-
-            ServerInfoContent.Visible = !ServerInfoContent.Visible;
-            ServerInfoHider.Texture = ServerInfoContent.Visible ? IconExpanded : IconCollapsed;
-        };
-
-        CharacterInfoHider.OnKeyBindUp += args =>
-        {
-            if (args.Function != EngineKeyFunctions.Use)
-                return;
-
-            CharacterInfoContent.Visible = !CharacterInfoContent.Visible;
-            CharacterInfoHider.Texture = CharacterInfoContent.Visible ? IconExpanded : IconCollapsed;
-        };
-
-        UserProfileHeader.OnKeyBindUp += args =>
-        {
-            if (args.Function != EngineKeyFunctions.Use)
-                return;
-
-            SetUserProfileExpanded(!UserProfileContent.Visible);
-        };
-
-        ServersHubHider.OnKeyBindUp += args =>
-        {
-            if (args.Function != EngineKeyFunctions.Use)
-                return;
-
-            ServersHubContent.Visible = !ServersHubContent.Visible;
-            ServersHubHider.Texture = ServersHubContent.Visible ? IconExpanded : IconCollapsed;
-        };
-
-        ContributorsHider.OnKeyBindUp += args =>
-        {
-            if (args.Function != EngineKeyFunctions.Use)
-                return;
-
-            ContributorsContent.Visible = !ContributorsContent.Visible;
-            ContributorsHider.Texture = ContributorsContent.Visible ? IconExpanded : IconCollapsed;
-        };
-
-        ChangelogHider.OnKeyBindUp += args =>
-        {
-            if (args.Function != EngineKeyFunctions.Use)
-                return;
-
-            ChangelogContent.Visible = !ChangelogContent.Visible;
-            ChangelogHider.Texture = ChangelogContent.Visible ? IconExpanded : IconCollapsed;
-        };
+        SetupHeaderHoverAndClick(ServersHubHeader, ServersHubHider, () => SetServersHubExpanded(!ServersHubContent.Visible));
+        SetupHeaderHoverAndClick(ContributorsHeader, ContributorsHider, () => SetContributorsExpanded(!ContributorsContent.Visible));
+        SetupHeaderHoverAndClick(PlaytimeTopHeader, PlaytimeTopHider, () => SetPlaytimeTopExpanded(!PlaytimeTopContent.Visible));
+        SetupHeaderHoverAndClick(ChangelogHeader, ChangelogHider, () => SetChangelogExpanded(!ChangelogContent.Visible));
+        SetupHeaderHoverAndClick(ServerInfoHeader, ServerInfoHider, () => SetServerInfoExpanded(!ServerInfoContent.Visible));
+        SetupHeaderHoverAndClick(CharacterInfoHeader, CharacterInfoHider, () => SetCharacterInfoExpanded(!CharacterInfoContent.Visible));
+        SetupHeaderHoverAndClick(ChatHeader, ChatHider, () => SetChatExpanded(!ChatContent.Visible));
+        SetupHeaderHoverAndClick(MakuraIDHeader, MakuraIDHider, () => SetMakuraIDExpanded(!MakuraIDContent.Visible));
 
         DiscordButton.OnPressed += _ =>
         {
-            var url = _cfg.GetCVar(CCVars.InfoLinksDiscord);
-            if (!string.IsNullOrEmpty(url))
-                _uri.OpenUri(url);
+            if (!string.IsNullOrEmpty(_cfg.GetCVar(CCVars.InfoLinksDiscord)))
+                _uri.OpenUri(_cfg.GetCVar(CCVars.InfoLinksDiscord)!);
         };
 
         WikiButton.OnPressed += _ =>
         {
-            var url = _cfg.GetCVar(CCVars.InfoLinksWiki);
-            if (!string.IsNullOrEmpty(url))
-                _uri.OpenUri(url);
+            if (!string.IsNullOrEmpty(_cfg.GetCVar(CCVars.InfoLinksWiki)))
+                _uri.OpenUri(_cfg.GetCVar(CCVars.InfoLinksWiki)!);
         };
 
         TelegramButton.OnPressed += _ =>
         {
-            var url = _cfg.GetCVar(CCVars.InfoLinksTelegram);
-            if (!string.IsNullOrEmpty(url))
-                _uri.OpenUri(url);
+            if (!string.IsNullOrEmpty(_cfg.GetCVar(CCVars.InfoLinksTelegram)))
+                _uri.OpenUri(_cfg.GetCVar(CCVars.InfoLinksTelegram)!);
+        };
+
+        GithubButton.OnPressed += _ =>
+        {
+            if (!string.IsNullOrEmpty(_cfg.GetCVar(CCVars.InfoLinksGithub)))
+                _uri.OpenUri(_cfg.GetCVar(CCVars.InfoLinksGithub)!);
         };
 
         ReplaysButton.OnPressed += _ =>
         {
-            var url = _cfg.GetCVar(SunriseCCVars.InfoLinksReplays);
-            if (!string.IsNullOrEmpty(url))
-                _uri.OpenUri(url);
+            if (!string.IsNullOrEmpty(_cfg.GetCVar(SunriseCCVars.InfoLinksReplays)))
+                _uri.OpenUri(_cfg.GetCVar(SunriseCCVars.InfoLinksReplays)!);
         };
     }
 
@@ -117,10 +65,11 @@ public sealed partial class SunriseLobbyGui
         SetupButtonIcon(OptionsButton, "/Textures/Interface/VerbIcons/settings.svg.192dpi.png", _loc.GetString("ui-lobby-options-button"));
         SetupButtonIcon(LeaveButton, "/Textures/Interface/VerbIcons/close.svg.192dpi.png", _loc.GetString("ui-lobby-leave-button"));
 
-        SetupButtonIcon(DiscordButton, "/Textures/Interface/discord.svg.192dpi.png", _loc.GetString("server-info-discord-button"));
-        SetupButtonIcon(WikiButton, "/Textures/Interface/wiki.svg.192dpi.png", _loc.GetString("server-info-wiki-button"));
-        SetupButtonIcon(TelegramButton, "/Textures/Interface/telegram.svg.192dpi.png", _loc.GetString("server-info-telegram-button"));
-        SetupButtonIcon(ReplaysButton, "/Textures/Interface/replay.svg.192dpi.png", _loc.GetString("ui-lobby-replays-button"));
+        SetupButtonIcon(DiscordButton, "/Textures/_Sunrise/Interface/discord.svg.192dpi.png", _loc.GetString("server-info-discord-button"));
+        SetupButtonIcon(WikiButton, "/Textures/_Sunrise/Interface/wiki.svg.192dpi.png", _loc.GetString("server-info-wiki-button"));
+        SetupButtonIcon(TelegramButton, "/Textures/_Sunrise/Interface/telegram.svg.192dpi.png", _loc.GetString("server-info-telegram-button"));
+        SetupButtonIcon(GithubButton, "/Textures/_Sunrise/Interface/github.svg.192dpi.png", _loc.GetString("info-link-github"));
+        SetupButtonIcon(ReplaysButton, "/Textures/_Sunrise/Interface/replay.svg.192dpi.png", _loc.GetString("ui-lobby-replays-button"));
     }
 
     #endregion
@@ -164,6 +113,7 @@ public sealed partial class SunriseLobbyGui
         _cfg.OnValueChanged(CCVars.InfoLinksDiscord, OnDiscordLinkChanged, true);
         _cfg.OnValueChanged(CCVars.InfoLinksWiki, OnWikiLinkChanged, true);
         _cfg.OnValueChanged(CCVars.InfoLinksTelegram, OnTelegramLinkChanged, true);
+        _cfg.OnValueChanged(CCVars.InfoLinksGithub, OnGithubLinkChanged, true);
         _cfg.OnValueChanged(SunriseCCVars.InfoLinksReplays, OnReplaysLinkChanged, true);
     }
 
@@ -182,8 +132,11 @@ public sealed partial class SunriseLobbyGui
         _cfg.UnsubValueChanged(CCVars.InfoLinksDiscord, OnDiscordLinkChanged);
         _cfg.UnsubValueChanged(CCVars.InfoLinksWiki, OnWikiLinkChanged);
         _cfg.UnsubValueChanged(CCVars.InfoLinksTelegram, OnTelegramLinkChanged);
+        _cfg.UnsubValueChanged(CCVars.InfoLinksGithub, OnGithubLinkChanged);
         _cfg.UnsubValueChanged(SunriseCCVars.InfoLinksReplays, OnReplaysLinkChanged);
     }
 
     #endregion
 }
+
+

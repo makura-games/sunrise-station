@@ -173,10 +173,10 @@ public sealed partial class SunriseCCVars : CVars
      */
 
     /// <summary>
-    /// Ссылка на Boosty для показа в лаунчере.
+    /// Ссылка на страницу поддержки Stellar Stories для показа в лаунчере.
     /// </summary>
     public static readonly CVarDef<string> InfoLinksDonate =
-        CVarDef.Create("infolinks.donate", "", CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("infolinks.donate", "https://stellarstories.ru/projects", CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     /// Ссылка на повторы для показа в меню.

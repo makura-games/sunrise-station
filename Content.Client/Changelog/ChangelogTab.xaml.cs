@@ -34,6 +34,9 @@ public sealed partial class ChangelogTab : Control
 
     public void PopulateChangelog(ChangelogManager.Changelog changelog)
     {
+        // Sunrise added start - очистка при повторном заполнении чейнджлога в лобби
+        ChangelogBody.RemoveAllChildren();
+        // Sunrise added end
         var byDay = changelog.Entries
             .GroupBy(e => e.Time.ToLocalTime().Date)
             .OrderByDescending(c => c.Key);

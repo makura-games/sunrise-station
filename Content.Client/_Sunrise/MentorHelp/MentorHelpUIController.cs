@@ -1,4 +1,5 @@
 using Content.Client._Sunrise.Lobby.UI;
+using Content.Client._Sunrise.Lobby;
 using Content.Client.Administration.Managers;
 using Content.Client.Gameplay;
 using Content.Client.Lobby;
@@ -29,7 +30,7 @@ namespace Content.Client._Sunrise.MentorHelp;
 /// Контроллер интерфейса системы менторской помощи.
 /// </summary>
 [UsedImplicitly]
-public sealed partial class MentorHelpUIController : UIController, IOnSystemChanged<MentorHelpSystem>, IOnStateChanged<GameplayState>, IOnStateChanged<LobbyState>
+public sealed partial class MentorHelpUIController : UIController, IOnSystemChanged<MentorHelpSystem>, IOnStateChanged<GameplayState>, IOnStateChanged<SunriseLobbyState>
 {
     [Dependency] private IClientAdminManager _adminManager = default!;
     [Dependency] private IConfigurationManager _config = default!;
@@ -140,7 +141,7 @@ public sealed partial class MentorHelpUIController : UIController, IOnSystemChan
             GameMHelpButton.OnPressed -= MHelpButtonPressed;
     }
 
-    public void OnStateEntered(LobbyState state)
+    public void OnStateEntered(SunriseLobbyState state)
     {
         if (LobbyMHelpButton != null)
         {
@@ -152,7 +153,7 @@ public sealed partial class MentorHelpUIController : UIController, IOnSystemChan
         }
     }
 
-    public void OnStateExited(LobbyState state)
+    public void OnStateExited(SunriseLobbyState state)
     {
         if (LobbyMHelpButton != null)
             LobbyMHelpButton.OnPressed -= MHelpButtonPressed;

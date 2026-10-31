@@ -1,4 +1,4 @@
-﻿<ui:SunriseLobbyGui
+<ui:SunriseLobbyGui
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     xmlns:changelog="clr-namespace:Content.Client.Changelog"
@@ -8,6 +8,7 @@
     xmlns:lobbyUi="clr-namespace:Content.Client.Lobby.UI"
     xmlns:maths="clr-namespace:Robust.Shared.Maths;assembly=Robust.Shared.Maths"
     xmlns:serversHub="clr-namespace:Content.Client._Sunrise.ServersHub"
+    xmlns:playtimeTop="clr-namespace:Content.Client._Sunrise.PlaytimeTop"
     xmlns:style="clr-namespace:Content.Client.Stylesheets"
     xmlns:userProfile="clr-namespace:Content.Client._Sunrise.UserProfile"
     xmlns:vote="clr-namespace:Content.Client.Voting.UI"
@@ -58,9 +59,9 @@
                 SeparationOverride="5"
                 VerticalExpand="True">
                     <BoxContainer
-                        HorizontalAlignment="Left"
+                        HorizontalAlignment="Stretch"
                         HorizontalExpand="True"
-                        MinWidth="750"
+                        SizeFlagsStretchRatio="1.2"
                         Orientation="Vertical"
                         SeparationOverride="8"
                         VerticalExpand="True">
@@ -128,6 +129,49 @@
                                         HorizontalAlignment="Center"
                                         Name="PlaytimeComment"
                                         Visible="False" />
+                                    <BoxContainer
+                                        Access="Public"
+                                        Name="PlaytimeTopBox"
+                                        Orientation="Vertical"
+                                        SizeFlagsStretchRatio="2"
+                                        VerticalAlignment="Bottom"
+                                        VerticalExpand="True"
+                                        Margin="0 4 0 0">
+                                        <controls:StripeBack>
+                                            <BoxContainer Name="PlaytimeTopHeader" Orientation="Horizontal">
+                                                <Label
+                                                    Access="Public"
+                                                    Align="Center"
+                                                    HorizontalExpand="True"
+                                                    Name="PlaytimeTopHeaderLabel"
+                                                    StyleClasses="LabelHeading"
+                                                    Text="{Loc 'lobby-playtime-top-header'}"
+                                                    VAlign="Center" />
+                                                <TextureRect
+                                                    Access="Public"
+                                                    HorizontalAlignment="Right"
+                                                    Margin="5,1"
+                                                    MouseFilter="Ignore"
+                                                    Name="PlaytimeTopHider"
+                                                    SetSize="25 25"
+                                                    Stretch="KeepAspectCentered"
+                                                    VerticalAlignment="Center" />
+                                            </BoxContainer>
+                                        </controls:StripeBack>
+                                        <BoxContainer
+                                            HorizontalAlignment="Stretch"
+                                            HorizontalExpand="True"
+                                            Name="PlaytimeTopContent"
+                                            Orientation="Vertical"
+                                            VerticalAlignment="Top"
+                                            VerticalExpand="True">
+                                            <playtimeTop:PlaytimeTopWidget
+                                                Access="Public"
+                                                HorizontalExpand="True"
+                                                Name="PlaytimeTopBody"
+                                                VerticalExpand="True" />
+                                        </BoxContainer>
+                                    </BoxContainer>
                                 </BoxContainer>
                             </PanelContainer>
                             <BoxContainer
@@ -142,6 +186,8 @@
                         <BoxContainer
                             HorizontalAlignment="Left"
                             HorizontalExpand="True"
+                            MinWidth="520"
+                            SetWidth="520"
                             Orientation="Vertical"
                             SeparationOverride="2"
                             VerticalExpand="True">
@@ -181,7 +227,7 @@
                                                     Access="Public"
                                                     HorizontalAlignment="Right"
                                                     Margin="5,1"
-                                                    MouseFilter="Pass"
+                                                    MouseFilter="Ignore"
                                                     Name="ServersHubHider"
                                                     SetSize="25 25"
                                                     Stretch="KeepAspectCentered"
@@ -223,7 +269,7 @@
                                                     Access="Public"
                                                     HorizontalAlignment="Right"
                                                     Margin="5,1"
-                                                    MouseFilter="Stop"
+                                                    MouseFilter="Ignore"
                                                     Name="ContributorsHider"
                                                     SetSize="25 25"
                                                     Stretch="KeepAspectCentered"
@@ -246,7 +292,6 @@
                                     </BoxContainer>
                                     <BoxContainer
                                         HorizontalAlignment="Stretch"
-                                        MaxWidth="725"
                                         Name="ChangelogBox"
                                         Orientation="Vertical"
                                         SizeFlagsStretchRatio="5"
@@ -268,7 +313,7 @@
                                                         Access="Public"
                                                         HorizontalAlignment="Right"
                                                         Margin="5,1"
-                                                        MouseFilter="Pass"
+                                                        MouseFilter="Ignore"
                                                         Name="ChangelogHider"
                                                         SetSize="25 25"
                                                         Stretch="KeepAspectCentered"
@@ -277,8 +322,9 @@
                                             </controls:StripeBack>
                                             <BoxContainer
                                                 HorizontalAlignment="Stretch"
-                                                MaxHeight="250"
-                                                MinHeight="250"
+                                                MaxHeight="175"
+                                                MinHeight="175"
+                                                Access="Public"
                                                 Name="ChangelogContent"
                                                 Orientation="Vertical"
                                                 VerticalAlignment="Top"
@@ -342,6 +388,12 @@
                                         MinHeight="48"
                                         Name="WikiButton"
                                         StyleClasses="ButtonBig" />
+                                    <Button
+                                        Access="Public"
+                                        MinWidth="48"
+                                        MinHeight="48"
+                                        Name="TelegramButton"
+                                        StyleClasses="ButtonBig" />
                                 </BoxContainer>
                                 <BoxContainer
                                     Orientation="Horizontal"
@@ -350,7 +402,7 @@
                                         Access="Public"
                                         MinWidth="48"
                                         MinHeight="48"
-                                        Name="TelegramButton"
+                                        Name="GithubButton"
                                         StyleClasses="ButtonBig" />
                                     <Button
                                         Access="Public"
@@ -363,7 +415,9 @@
                         </PanelContainer>
                         <PanelContainer
                             Access="Public"
-                            HorizontalExpand="True"
+                            HorizontalExpand="False"
+                            MinWidth="610"
+                            MaxWidth="610"
                             Name="RightPanel"
                             StyleClasses="AngleRect"
                             VerticalAlignment="Stretch"
@@ -431,7 +485,7 @@
                                                 Access="Public"
                                                 HorizontalAlignment="Right"
                                                 Margin="5,1"
-                                                MouseFilter="Pass"
+                                                MouseFilter="Ignore"
                                                 Name="ServerInfoHider"
                                                 SetSize="25 25"
                                                 Stretch="KeepAspectCentered"
@@ -439,11 +493,11 @@
                                         </BoxContainer>
                                     </controls:StripeBack>
                                     <BoxContainer Name="ServerInfoContent" Orientation="Vertical">
-                                        <info:ServerInfo
+                                        <ui:SunriseServerInfo
                                             Access="Public"
-                                            HorizontalAlignment="Left"
+                                            HorizontalAlignment="Stretch"
+                                            HorizontalExpand="True"
                                             Margin="3,3,3,3"
-                                            MaxWidth="400"
                                             MinSize="0 30"
                                             Name="ServerInfo"
                                             VerticalExpand="false" />
@@ -451,7 +505,7 @@
                                             Access="Public"
                                             FontColorOverride="{x:Static maths:Color.LightGray}"
                                             HorizontalAlignment="Left"
-                                            Margin="3,3,3,3"
+                                            Margin="0,3,0,3"
                                             Name="StationTime" />
                                     </BoxContainer>
                                 </BoxContainer>
@@ -473,7 +527,7 @@
                                                 Access="Public"
                                                 HorizontalAlignment="Right"
                                                 Margin="5,1"
-                                                MouseFilter="Pass"
+                                                MouseFilter="Ignore"
                                                 Name="CharacterInfoHider"
                                                 SetSize="25 25"
                                                 Stretch="KeepAspectCentered"
@@ -481,15 +535,49 @@
                                         </BoxContainer>
                                     </controls:StripeBack>
                                     <BoxContainer
-                                        MinHeight="180"
+                                        MinHeight="100"
                                         Name="CharacterInfoContent"
                                         Orientation="Vertical"
                                         VerticalExpand="True">
-                                        <lobbyUi:LobbyCharacterPreviewPanel
+                                        <ui:SunriseLobbyCharacterPreviewPanel
                                             Access="Public"
                                             HorizontalExpand="True"
                                             Name="CharacterPreview" />
                                     </BoxContainer>
+                                </BoxContainer>
+                                <BoxContainer
+                                    HorizontalAlignment="Stretch"
+                                    HorizontalExpand="True"
+                                    Orientation="Vertical"
+                                    SizeFlagsStretchRatio="2"
+                                    VerticalAlignment="Top">
+                                    <controls:StripeBack MouseFilter="Stop" Name="MakuraIDHeader">
+                                        <BoxContainer Orientation="Horizontal">
+                                            <Label
+                                                Align="Center"
+                                                HorizontalExpand="True"
+                                                StyleClasses="LabelHeading"
+                                                Text="{Loc 'lobby-gui-profile'}"
+                                                VAlign="Center" />
+                                            <TextureRect
+                                                Access="Public"
+                                                HorizontalAlignment="Right"
+                                                Margin="5,1"
+                                                MouseFilter="Ignore"
+                                                Name="MakuraIDHider"
+                                                SetSize="25 25"
+                                                Stretch="KeepAspectCentered"
+                                                VerticalAlignment="Center" />
+                                        </BoxContainer>
+                                    </controls:StripeBack>
+                                     <BoxContainer
+                                         Name="MakuraIDContent"
+                                         Orientation="Vertical"
+                                         Margin="6,4,6,4"
+                                         SeparationOverride="4"
+                                         VerticalExpand="False">
+                                         <userProfile:UserProfile Name="UserProfile" HorizontalExpand="True" VerticalExpand="True" />
+                                     </BoxContainer>
                                 </BoxContainer>
                                 <BoxContainer
                                     HorizontalExpand="True"
@@ -509,7 +597,7 @@
                                                 Access="Public"
                                                 HorizontalAlignment="Right"
                                                 Margin="5,1"
-                                                MouseFilter="Pass"
+                                                MouseFilter="Ignore"
                                                 Name="ChatHider"
                                                 SetSize="25 25"
                                                 Stretch="KeepAspectCentered"
@@ -534,55 +622,6 @@
                         </PanelContainer>
                     </BoxContainer>
             </BoxContainer>
-            <PanelContainer
-                    HorizontalAlignment="Center"
-                    HorizontalExpand="True"
-                    MaxWidth="720"
-                    Name="BottomCenterProfilePanel"
-                    StyleClasses="AngleRect"
-                    VerticalAlignment="Bottom">
-                    <BoxContainer
-                        Access="Public"
-                        Name="UserProfileBox"
-                        Orientation="Vertical">
-                        <controls:StripeBack
-                            MouseFilter="Stop"
-                            Name="UserProfileHeader">
-                            <BoxContainer
-                                HorizontalExpand="True"
-                                MouseFilter="Ignore"
-                                Orientation="Horizontal">
-                                <Label
-                                    Access="Public"
-                                    Align="Center"
-                                    HorizontalExpand="True"
-                                    Name="UserProfileHeaderLabel"
-                                    StyleClasses="LabelHeading"
-                                    Text="{Loc 'lobby-gui-profile'}"
-                                    VAlign="Center" />
-                                <TextureRect
-                                    Access="Public"
-                                    HorizontalAlignment="Right"
-                                    Margin="5,1"
-                                    MouseFilter="Ignore"
-                                    Name="UserProfileHider"
-                                    SetSize="25 25"
-                                    Stretch="KeepAspectCentered"
-                                    VerticalAlignment="Center" />
-                            </BoxContainer>
-                        </controls:StripeBack>
-                        <BoxContainer
-                            HorizontalAlignment="Stretch"
-                            HorizontalExpand="True"
-                            Name="UserProfileContent"
-                            Orientation="Vertical">
-                            <userProfile:UserProfile
-                                Access="Public"
-                                HorizontalExpand="True"
-                                Name="UserProfileBody" />
-                        </BoxContainer>
-                    </BoxContainer>
-                </PanelContainer>
         </Control>
         <!--  Character setup state  -->
         <!--  This is injected on startup. Funky!  -->

@@ -1,199 +1,159 @@
 - type: lobbyAnimation
   id: Bar
   animation: NetTextures/Lobby/Animations/bar.rsi
-  scale: 5, 5
 
 - type: lobbyAnimation
   id: Billy
   animation: NetTextures/Lobby/Animations/billy.rsi
-  scale: 13, 13
 
 - type: lobbyAnimation
   id: BlackHole
   animation: NetTextures/Lobby/Animations/black_hole.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: BlackHole2
   animation: NetTextures/Lobby/Animations/black_hole2.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: BlackHoleIsland
   animation: NetTextures/Lobby/Animations/black_hole_island.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: BladeRunner
   animation: NetTextures/Lobby/Animations/blade_runner.rsi
-  scale: 12, 12
 
 - type: lobbyAnimation
   id: Boats
   animation: NetTextures/Lobby/Animations/boats.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: Earth
   animation: NetTextures/Lobby/Animations/earth.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: Eclipse
   animation: NetTextures/Lobby/Animations/eclipse.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: EvangelionElevator
   animation: NetTextures/Lobby/Animations/evangelion_elevator.rsi
-  scale: 4, 4
 
 - type: lobbyAnimation
   id: EveningBridge
   animation: NetTextures/Lobby/Animations/evening_bridge.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: EveningSun
   animation: NetTextures/Lobby/Animations/evening_sun.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: EveningSun2
   animation: NetTextures/Lobby/Animations/evening_sun2.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: EveningSun3
   animation: NetTextures/Lobby/Animations/evening_sun3.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: EveningSun4
   animation: NetTextures/Lobby/Animations/evening_sun4.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: EveningSun5
   animation: NetTextures/Lobby/Animations/evening_sun5.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: EveningSun6
   animation: NetTextures/Lobby/Animations/evening_sun6.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: EveningSun7
   animation: NetTextures/Lobby/Animations/evening_sun7.rsi
-  scale: 6, 6
 
 - type: lobbyAnimation
   id: EveningSun8
   animation: NetTextures/Lobby/Animations/evening_sun8.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: EveningWindow
   animation: NetTextures/Lobby/Animations/evening_window.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: Frieren
   animation: NetTextures/Lobby/Animations/frieren.rsi
-  scale: 6, 6
 
 - type: lobbyAnimation
   id: Graveyard
   animation: NetTextures/Lobby/Animations/graveyard.rsi
-  scale: 3, 3
 
 - type: lobbyAnimation
   id: GutsVsGriffit
   animation: NetTextures/Lobby/Animations/guts_vs_griffit.rsi
-  scale: 5, 5
 
 - type: lobbyAnimation
   id: HomerStarfall
   animation: NetTextures/Lobby/Animations/homer_starfall.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: IslandEvening
   animation: NetTextures/Lobby/Animations/island_evening.rsi
-  scale: 4, 4
 
 - type: lobbyAnimation
   id: Jungle
   animation: NetTextures/Lobby/Animations/jungle.rsi
-  scale: 4, 4
 
 - type: lobbyAnimation
   id: Kvazar
   animation: NetTextures/Lobby/Animations/kvazar.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: Lain
   animation: NetTextures/Lobby/Animations/lain.rsi
-  scale: 5, 5
 
 - type: lobbyAnimation
   id: Monolith
   animation: NetTextures/Lobby/Animations/monolith.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: Nebula
   animation: NetTextures/Lobby/Animations/nebula.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: NeonSity
   animation: NetTextures/Lobby/Animations/neon_sity.rsi
-  scale: 9, 9
 
 - type: lobbyAnimation
   id: NightMoon
   animation: NetTextures/Lobby/Animations/night_moon.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: RedSkull
   animation: NetTextures/Lobby/Animations/red_skull.rsi
-  scale: 14, 14
 
 - type: lobbyAnimation
   id: Sky
   animation: NetTextures/Lobby/Animations/sky.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: SpaceDesert
   animation: NetTextures/Lobby/Animations/space_desert.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: SpaceGirl
   animation: NetTextures/Lobby/Animations/space_girl.rsi
-  scale: 6, 6
 
 - type: lobbyAnimation
   id: SpaceStarts
   animation: NetTextures/Lobby/Animations/space_starts.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: SunnyCity
   animation: NetTextures/Lobby/Animations/sunny_city.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: SunnyPtl
   animation: NetTextures/Lobby/Animations/sunny_PTL.rsi
-  scale: 8, 8
 
 - type: lobbyAnimation
   id: SunnyPtl2
   animation: NetTextures/Lobby/Animations/sunny_PTL2.rsi
-  scale: 8, 8

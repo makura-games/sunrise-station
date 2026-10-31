@@ -1,4 +1,5 @@
 using Content.Client.Lobby;
+using Content.Client._Sunrise.Lobby;
 using Content.Shared._Sunrise.Audio.Events;
 using Content.Shared.CCVar;
 using Content.Shared._Sunrise.SunriseCCVars;
@@ -48,7 +49,7 @@ public sealed partial class ContentAudioSystem
         if (_roundEndMusicTracks.Count == 0)
             return;
 
-        if (_state.CurrentState is LobbyState)
+        if (_state.CurrentState is SunriseLobbyState)
             return;
 
         if (!_configManager.GetCVar(SunriseCCVars.RoundEndMusicEnabled))

@@ -1,4 +1,5 @@
 using Content.Client.Administration.Managers;
+using Content.Client._Sunrise.Lobby;
 using Content.Client.Gameplay;
 using Content.Client.Lobby;
 using Content.Client.RoundEnd;
@@ -11,6 +12,7 @@ using Robust.Client.State;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Audio;
+using Content.Shared.GameTicking.Prototypes; // Sunrise-Edit
 
 namespace Content.Client.GameTicking.Managers
 {
@@ -29,6 +31,8 @@ namespace Content.Client.GameTicking.Managers
         [ViewVariables] public bool AreWeReady { get; private set; }
         [ViewVariables] public bool IsGameStarted { get; private set; }
         [ViewVariables] public ResolvedSoundSpecifier? RestartSound { get; private set; }
+        [ViewVariables] public ProtoId<LobbyBackgroundPrototype>? LobbyBackground => null; // Sunrise-Edit
+
         // Sunrise-Start
         [ViewVariables] public string? LobbyType { get; private set; }
         [ViewVariables] public string? LobbyParallax { get; private set; }
@@ -131,7 +135,7 @@ namespace Content.Client.GameTicking.Managers
             LobbyParallax = null;
             LobbyAnimation = null;
             // Sunrise added end
-            _stateManager.RequestStateChange<LobbyState>();
+            _stateManager.RequestStateChange<SunriseLobbyState>(); // Sunrise-Edit
         }
 
         private void ConnectionStatus(TickerConnectionStatusEvent message)

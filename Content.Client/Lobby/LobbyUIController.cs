@@ -1,14 +1,6 @@
 using Content.Client.Guidebook;
-using System.Linq;
-using Content.Client._Sunrise.Lobby.UI;
-using Content.Client._Sunrise.Pets;
-using Content.Client.Body;
-using Content.Shared._Sunrise.Pets;
-using Content.Client.Inventory;
 using Content.Client.Lobby.UI;
 using Content.Client.Players.PlayTimeTracking;
-using Content.Client.Station;
-using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.CCVar;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
@@ -24,7 +16,6 @@ using Robust.Client.UserInterface.Controllers;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Robust.Shared.Map;
 
 namespace Content.Client.Lobby;
 
@@ -40,19 +31,15 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
     [Dependency] private JobRequirementsManager _requirements = default!;
     [Dependency] private MarkingManager _markings = default!;
     [UISystemDependency] private readonly GuidebookSystem _guide = default!;
-    [UISystemDependency] private readonly PetSelectionSystem _petSelectionSystem = default!;
 
     private CharacterSetupGui? _characterSetup;
     private HumanoidProfileEditor? _profileEditor;
     private CharacterSetupGuiSavePanel? _savePanel;
-    private PetSelectionMenu? _petSelectionMenu;
 
     /// <summary>
     /// This is the characher preview panel in the chat. This should only update if their character updates.
     /// </summary>
     private LobbyCharacterPreviewPanel? PreviewPanel => GetLobbyPreview();
-
-    private LobbyPetPreviewPanel? PetPreviewPanel => GetLobbyPetPreview();
 
     /// <summary>
     /// This is the modified profile currently being edited.
@@ -64,23 +51,14 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
     public override void Initialize()
     {
         base.Initialize();
-        InitializeSunrisePreviewHelpers(); // Sunrise-Edit - инициализируем зависимости предпросмотра из partial-класса
         _prototypeManager.PrototypesReloaded += OnProtoReload;
         _preferencesManager.OnServerDataLoaded += PreferencesDataLoaded;
         _requirements.Updated += OnRequirementsUpdated;
-
-        _configurationManager.OnValueChanged(SunriseCCVars.SponsorPet, _ => RefreshPetPreview());
 
         _configurationManager.OnValueChanged(CCVars.FlavorText, args =>
         {
             _profileEditor?.RefreshFlavorText();
         });
-        // Sunrise-Start
-        _configurationManager.OnValueChanged(SunriseCCVars.FlavorTextSponsorOnly, args =>
-        {
-            _profileEditor?.RefreshFlavorText();
-        });
-        // Sunrise-End
 
         _configurationManager.OnValueChanged(CCVars.GameRoleTimers, _ => RefreshProfileEditor());
         _configurationManager.OnValueChanged(CCVars.GameRoleLoadoutTimers, _ => RefreshProfileEditor());
@@ -95,16 +73,6 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
             return lobby.Lobby?.CharacterPreview;
         }
 
-        return null;
-    }
-
-    private LobbyPetPreviewPanel? GetLobbyPetPreview()
-    {
-        // Sunrise-Edit
-        // if (_stateManager.CurrentState is LobbyState lobby)
-        // {
-        //     return lobby.Lobby?.PetPreview;
-        // }
         return null;
     }
 
@@ -158,21 +126,13 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
         if (_stateManager.CurrentState is not LobbyState)
             return;
 
-        RefreshLobbyPreview();
-
         ReloadCharacterSetup();
-
-        RefreshPetPreview();
     }
 
     public void OnStateEntered(LobbyState state)
     {
         PreviewPanel?.SetLoaded(_preferencesManager.ServerDataLoaded);
-        RefreshLobbyPreview();
-
         ReloadCharacterSetup();
-
-        RefreshPetPreview();
     }
 
     public void OnStateExited(LobbyState state)
@@ -220,50 +180,6 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
         PreviewPanel.SetSummaryText(humanoid.Summary);
     }
 
-    private void RefreshPetPreview()
-    {
-        if (PreviewPanel == null)
-            return;
-
-        var currentPetSelection = GetCurrentPetSelection();
-
-        PreviewPanel.OnChangePetRequested -= OpenPetPanel;
-        PreviewPanel.OnChangePetRequested += OpenPetPanel;
-
-        EntityUid? petDummy = null;
-        if (!string.IsNullOrEmpty(currentPetSelection) &&
-            _prototypeManager.TryIndex<PetSelectionPrototype>(currentPetSelection, out var petSelectionPrototype))
-        {
-            petDummy = EntityManager.SpawnEntity(petSelectionPrototype.PetEntity, MapCoordinates.Nullspace);
-        }
-
-        PreviewPanel.SetPetSprite(petDummy);
-    }
-
-    private void OpenPetPanel()
-    {
-        if (_petSelectionMenu is { IsOpen: true })
-            return;
-
-        _petSelectionMenu = new PetSelectionMenu();
-
-        _petSelectionMenu.UpdateState();
-        _petSelectionMenu.OnIdSelected += OnPetSelectionChanged;
-
-        _petSelectionMenu.OpenCentered();
-    }
-
-    private void OnPetSelectionChanged(string selectedPet)
-    {
-        RefreshPetPreview();
-        _petSelectionSystem.PetSelectionSelected(selectedPet);
-    }
-
-    private string? GetCurrentPetSelection()
-    {
-        return _playerCache.TryGetCachedPet(out var pet) ? pet : null;
-    }
-
     private void RefreshProfileEditor()
     {
         _profileEditor?.RefreshAntags();
@@ -297,7 +213,7 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
 
         if (_stateManager.CurrentState is LobbyState lobbyGui)
         {
-            lobbyGui.SwitchState(SunriseLobbyGui.LobbyGuiState.Default);
+            lobbyGui.SwitchState(LobbyGui.LobbyGuiState.Default);
         }
     }
 

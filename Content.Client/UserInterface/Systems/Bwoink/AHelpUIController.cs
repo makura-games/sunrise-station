@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Client._Sunrise.Lobby;
 using System.Linq;
 using System.Numerics;
 using Content.Client._Sunrise.Lobby.UI;
@@ -32,7 +33,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.UserInterface.Systems.Bwoink;
 
 [UsedImplicitly]
-public sealed partial class AHelpUIController: UIController, IOnSystemChanged<BwoinkSystem>, IOnStateChanged<GameplayState>, IOnStateChanged<LobbyState>
+public sealed partial class AHelpUIController: UIController, IOnSystemChanged<BwoinkSystem>, IOnStateChanged<GameplayState>, IOnStateChanged<SunriseLobbyState> // Sunrise-Edit
 {
     [Dependency] private IClientAdminManager _adminManager = default!;
     [Dependency] private IConfigurationManager _config = default!;
@@ -316,7 +317,7 @@ public sealed partial class AHelpUIController: UIController, IOnSystemChanged<Bw
             GameAHelpButton.OnPressed -= AHelpButtonPressed;
     }
 
-    public void OnStateEntered(LobbyState state)
+    public void OnStateEntered(SunriseLobbyState state) // Sunrise-Edit
     {
         if (LobbyAHelpButton != null)
         {
@@ -335,7 +336,7 @@ public sealed partial class AHelpUIController: UIController, IOnSystemChanged<Bw
         }
     }
 
-    public void OnStateExited(LobbyState state)
+    public void OnStateExited(SunriseLobbyState state) // Sunrise-Edit
     {
         if (LobbyAHelpButton != null)
             LobbyAHelpButton.OnPressed -= AHelpButtonPressed;

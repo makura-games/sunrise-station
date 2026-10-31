@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Client._Sunrise.Lobby;
 using Content.Client.Lobby;
 using Content.Client.Roles;
 using Content.Shared._Sunrise.Helpers;
@@ -23,7 +24,7 @@ public sealed partial class SunriseGeneralRecord : BoxContainer
     private readonly IPrototypeManager _prototype;
     private readonly ILocalizationManager _loc;
     private readonly JobSystem _job;
-    private readonly LobbyUIController _controller;
+    private readonly SunriseLobbyUIController _controller;
 
     public Action<GeneralStationRecord, uint>? OnSaveButtonPressed;
     public Action<uint>? OnPrintPressed;
@@ -50,7 +51,7 @@ public sealed partial class SunriseGeneralRecord : BoxContainer
         in IPrototypeManager prototype,
         in ILocalizationManager loc,
         in JobSystem job,
-        in LobbyUIController controller)
+        in SunriseLobbyUIController controller)
     {
         RobustXamlLoader.Load(this);
 

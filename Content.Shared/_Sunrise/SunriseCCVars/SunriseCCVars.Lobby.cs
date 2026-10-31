@@ -57,4 +57,58 @@ public sealed partial class SunriseCCVars
     /// </summary>
     public static readonly CVarDef<float> LobbyOpacity =
         CVarDef.Create("lobby.lobby_opacity", 0.90f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Whether the servers hub section in the lobby is collapsed.
+    /// </summary>
+    public static readonly CVarDef<bool> LobbyCollapsedServersHub =
+        CVarDef.Create("lobby.collapsed_servers_hub", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Whether the contributors section in the lobby is collapsed.
+    /// </summary>
+    public static readonly CVarDef<bool> LobbyCollapsedContributors =
+        CVarDef.Create("lobby.collapsed_contributors", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Whether the changelog section in the lobby is collapsed.
+    /// </summary>
+    public static readonly CVarDef<bool> LobbyCollapsedChangelog =
+        CVarDef.Create("lobby.collapsed_changelog", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Whether the server info section in the lobby is collapsed.
+    /// </summary>
+    public static readonly CVarDef<bool> LobbyCollapsedServerInfo =
+        CVarDef.Create("lobby.collapsed_server_info", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Whether the character setup section in the lobby is collapsed.
+    /// </summary>
+    public static readonly CVarDef<bool> LobbyCollapsedCharacterInfo =
+        CVarDef.Create("lobby.collapsed_character_info", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Whether the lobby chat section is collapsed.
+    /// </summary>
+    public static readonly CVarDef<bool> LobbyCollapsedChat =
+        CVarDef.Create("lobby.collapsed_chat", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Whether the Makura ID binding section is collapsed.
+    /// </summary>
+    public static readonly CVarDef<bool> LobbyCollapsedMakuraId =
+        CVarDef.Create("lobby.collapsed_makura_id", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Whether the sponsor section in the lobby is collapsed.
+    /// </summary>
+    public static readonly CVarDef<bool> LobbyCollapsedSponsor =
+        CVarDef.Create("lobby.collapsed_sponsor", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Whether the playtime top section in the lobby is collapsed.
+    /// </summary>
+    public static readonly CVarDef<bool> LobbyCollapsedPlaytimeTop =
+        CVarDef.Create("lobby.collapsed_playtime_top", false, CVar.CLIENTONLY | CVar.ARCHIVE);
 }

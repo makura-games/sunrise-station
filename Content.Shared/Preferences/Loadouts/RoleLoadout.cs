@@ -209,6 +209,13 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
         }
     }
 
+    // Sunrise-Start
+    public void SetDefault(HumanoidCharacterProfile? profile, ICommonSession? session, IPrototypeManager protoManager, bool force = false)
+    {
+        SetDefault(profile, session, protoManager, System.Array.Empty<string>(), force);
+    }
+    // Sunrise-End
+
     /// <summary>
     /// Resets the selected loadouts to default if no data is present.
     /// </summary>

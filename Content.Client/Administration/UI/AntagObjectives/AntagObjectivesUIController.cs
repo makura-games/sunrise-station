@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Client._Sunrise.Lobby;
 using Content.Client._Sunrise.AntagObjectives;
 using Content.Client.Administration.Systems;
 using Content.Client.Gameplay;
@@ -20,7 +21,7 @@ namespace Content.Client.Administration.UI.AntagObjectives;
 [UsedImplicitly]
 public sealed class AntagObjectivesUIController : UIController,
     IOnStateEntered<GameplayState>,
-    IOnStateEntered<LobbyState>,
+    IOnStateEntered<SunriseLobbyState>, // Sunrise-Edit
     IOnSystemChanged<AdminSystem>,
     IOnSystemChanged<AntagObjectivesSystem>
 {
@@ -33,7 +34,7 @@ public sealed class AntagObjectivesUIController : UIController,
         EnsureWindow();
     }
 
-    public void OnStateEntered(LobbyState state)
+    public void OnStateEntered(SunriseLobbyState state) // Sunrise-Edit
     {
         EnsureWindow();
     }

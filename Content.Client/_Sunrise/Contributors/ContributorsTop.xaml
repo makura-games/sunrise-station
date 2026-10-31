@@ -1,6 +1,6 @@
 <Control xmlns="https://spacestation14.io"
          xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
-         MinSize="300 100">
+         MinSize="300 110">
     <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
         <BoxContainer Orientation="Horizontal"
                      HorizontalExpand="True"
@@ -23,7 +23,7 @@
             <customControls:VSeparator/>
         </BoxContainer>
         <customControls:HSeparator/>
-        <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True" MinHeight="120">
+        <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True" MinHeight="105">
             <BoxContainer Name="ContributorsList" Access="Public" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True"/>
         </ScrollContainer>
     </BoxContainer>

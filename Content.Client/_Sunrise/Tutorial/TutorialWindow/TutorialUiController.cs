@@ -1,4 +1,5 @@
 using Content.Client.Lobby;
+using Content.Client._Sunrise.Lobby;
 using Content.Client.UserInterface.Systems.Info;
 using Content.Client._Sunrise.Tutorial;
 using Content.Shared._Sunrise.Tutorial.Prototypes;
@@ -10,8 +11,8 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._Sunrise.Tutorial.TutorialWindow;
 
 public sealed partial class TutorialUIController : UIController,
-    IOnStateEntered<LobbyState>,
-    IOnStateExited<LobbyState>,
+    IOnStateEntered<SunriseLobbyState>,
+    IOnStateExited<SunriseLobbyState>,
     IOnSystemChanged<TutorialSystem>
 {
     [Dependency] private InfoUIController _info = default!;
@@ -78,13 +79,13 @@ public sealed partial class TutorialUIController : UIController,
         _window.OpenCentered();
     }
 
-    public void OnStateEntered(LobbyState state)
+    public void OnStateEntered(SunriseLobbyState state)
     {
         _inLobby = true;
         TryShowTutorialPrompt();
     }
 
-    public void OnStateExited(LobbyState state)
+    public void OnStateExited(SunriseLobbyState state)
     {
         _inLobby = false;
         _window?.Close();

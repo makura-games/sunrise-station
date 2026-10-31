@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Client._Sunrise.Lobby;
 using Content.Client.GameTicking.Managers;
 using Content.Client.Lobby;
 using Content.Shared.Audio.Events;
@@ -91,7 +92,7 @@ public sealed partial class ContentAudioSystem
     {
         switch (args.NewState)
         {
-            case LobbyState:
+            case SunriseLobbyState: // Sunrise-Edit
                 StopRoundEndMusic(); // Sunrise added
                 StartLobbyMusic();
                 break;
@@ -121,7 +122,7 @@ public sealed partial class ContentAudioSystem
 
     private void LobbyMusicCVarChanged(bool musicEnabled)
     {
-        if (musicEnabled && _state.CurrentState is LobbyState)
+        if (musicEnabled && _state.CurrentState is SunriseLobbyState) // Sunrise-Edit
         {
             StartLobbyMusic();
         }
@@ -295,7 +296,7 @@ public sealed partial class ContentAudioSystem
 
 /// <summary>
 /// Event of changing lobby soundtrack (or stopping lobby music - will pass null for <paramref name="SoundtrackFilename"/> in that case).
-/// Is used by <see cref="ContentAudioSystem.LobbySoundtrackChanged"/> and <see cref="LobbyState.UpdateLobbySoundtrackInfo"/>.
+/// Is used by <see cref="ContentAudioSystem.LobbySoundtrackChanged"/> and <see cref="SunriseLobbyState.UpdateLobbySoundtrackInfo"/>.
 /// </summary>
 /// <param name="SoundtrackFilename">Filename of newly set soundtrack, or null if soundtrack playback is stopped.</param>
 public sealed record LobbySoundtrackChangedEvent(string? SoundtrackFilename = null);

@@ -2,7 +2,7 @@ lobby-state-paused = Пауза
 lobby-state-soon = Раунд скоро начнётся
 lobby-state-right-now-question = Прямо сейчас?
 lobby-state-right-now-confirmation = Прямо сейчас
-lobby-state-round-start-countdown-text = Раунд начнётся через: { $timeLeft }
+lobby-state-round-start-countdown-text = До начала: { $timeLeft }
 lobby-state-ready-button-join-state = Присоединиться
 lobby-state-ready-button-ready-up-state = Готов
 lobby-state-player-status-not-ready = Не готов
@@ -10,7 +10,7 @@ lobby-state-player-status-ready = Готов
 lobby-state-player-status-observer = Наблюдатель
 lobby-state-player-status-round-not-started = Раунд ещё не начался
 lobby-state-player-status-round-time =
-    Время раунда: { $hours } { $hours ->
+    Длительность: { $hours } { $hours ->
         [one] час
         [few] часа
        *[other] часов
@@ -28,10 +28,8 @@ lobby-state-background-no-background-text = Изображение меню не
 lobby-state-background-unknown-title = [color=dimgray]Неизвестный заголовок[/color]
 lobby-state-background-unknown-artist = [color=dimgray]Неизвестный автор[/color]
 lobby-state-playtime-comment-normal =
-    Сегодня вы провели в игре { $hours } { $hours ->
-        [1] час
-       *[other] часов
-    }. Вы наиграли больше, чем директора MakuraGames.
-lobby-state-playtime-comment-concerning = Сегодня вы играли { $hours } часов. Это больше, чем куратор сервера!
-lobby-state-playtime-comment-grasstouchless = { $hours } часов, отлично, вы превзошли админ-состав вместе взятый!
-lobby-state-playtime-comment-selfdestructive = { $hours } часов. Вы обычный задрот, вы ничем не лучше остальных игроков.
+    Сегодня вы наиграли {$playtime} Не забывайте делать перерывы!
+lobby-state-playtime-comment-concerning = Сегодня вы наиграли {$playtime} Сделайте перерыв.
+lobby-state-playtime-comment-grasstouchless = {$playtime} Может, уже хватит сидеть за компьютером.
+lobby-state-playtime-comment-selfdestructive = {$playtime} Серьёзно? Вам стоит потрогать траву.
+lobby-state-playtime-comment-lazy = Сегодня вы наиграли жалкие {$playtime} Вам запрещено трогать траву.

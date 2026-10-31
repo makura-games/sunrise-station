@@ -1,4 +1,5 @@
 using Content.Client.Lobby;
+using Content.Client._Sunrise.Lobby;
 using Content.Shared._Sunrise.Audio.Events;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -18,6 +19,6 @@ public sealed partial class ContentAudioSystem
 
     private bool ShouldBlockSunriseLobbyMusicStart()
     {
-        return _state.CurrentState is not LobbyState;
+        return _state.CurrentState is not SunriseLobbyState;
     }
 }

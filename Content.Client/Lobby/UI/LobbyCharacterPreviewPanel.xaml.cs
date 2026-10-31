@@ -18,7 +18,6 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-        InitializeSunrisePetPreview(); // Sunrise-Edit - подключаем управление питомцем
     }
 
     public void SetLoaded(bool value)
@@ -29,6 +28,6 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
 
     public void SetSummaryText(string value)
     {
-        Summary.Text = WrapSunriseSummaryText(value, 350); // Sunrise-Edit - сохраняем ограничение ширины текста
+        Summary.Text = value;
     }
 }

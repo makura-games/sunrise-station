@@ -1,0 +1,10 @@
+<Control xmlns="https://spacestation14.io"
+         xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls">
+    <BoxContainer HorizontalExpand="True" VerticalExpand="True" Orientation="Horizontal" SeparationOverride="12">
+        <BoxContainer Name="LeftColumn" HorizontalExpand="True" VerticalExpand="True" SizeFlagsStretchRatio="1" Orientation="Vertical" MinWidth="10">
+            <RichTextLabel Name="LeftLabel" HorizontalExpand="True" VerticalAlignment="Top" MinWidth="10" />
+        </BoxContainer>
+        <cc:VSeparator Name="Separator" VerticalExpand="True" VerticalAlignment="Stretch" Modulate="White" />
+        <RichTextLabel Name="RightLabel" HorizontalExpand="True" VerticalAlignment="Top" MinWidth="10" SizeFlagsStretchRatio="1" />
+    </BoxContainer>
+</Control>

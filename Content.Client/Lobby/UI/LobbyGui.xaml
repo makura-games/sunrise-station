@@ -1,585 +1,130 @@
 <lobbyUi:LobbyGui
     xmlns="https://spacestation14.io"
-    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
-    xmlns:changelog="clr-namespace:Content.Client.Changelog"
-    xmlns:contributors="clr-namespace:Content.Client._Sunrise.Contributors"
-    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-    xmlns:info="clr-namespace:Content.Client.Info"
-    xmlns:lobbyUi="clr-namespace:Content.Client.Lobby.UI"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:maths="clr-namespace:Robust.Shared.Maths;assembly=Robust.Shared.Maths"
-    xmlns:pets="clr-namespace:Content.Client._Sunrise.Pets"
-    xmlns:serversHub="clr-namespace:Content.Client._Sunrise.ServersHub"
-    xmlns:style="clr-namespace:Content.Client.Stylesheets"
-    xmlns:userProfile="clr-namespace:Content.Client._Sunrise.UserProfile"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:vote="clr-namespace:Content.Client.Voting.UI"
-    xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Chat.Widgets"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!--  Background  -->
-    <TextureRect
-        Access="Public"
-        HorizontalExpand="True"
-        Name="LobbyArt"
-        Stretch="KeepAspectCovered"
-        VerticalExpand="True" />
-    <AnimatedTextureRect
-        Access="Public"
-        HorizontalExpand="True"
-        Name="LobbyAnimation"
-        VerticalExpand="True" />
-    <BoxContainer
-        HorizontalExpand="True"
-        Margin="10,10,10,10"
-        Name="MainContainer"
-        Orientation="Horizontal"
-        SeparationOverride="2"
-        VerticalExpand="True">
-        <!--  LHS Controls  -->
-        <Control
-            HorizontalExpand="True"
-            Name="DefaultState"
-            VerticalExpand="True">
-            <BoxContainer
-                Access="Public"
-                HorizontalAlignment="Center"
-                Name="LoadingAnimationContainer"
-                Orientation="Vertical"
-                VerticalAlignment="Center"
-                Visible="False">
-                <AnimatedTextureRect
-                    Access="Public"
-                    HorizontalAlignment="Center"
-                    Name="LoadingAnimation"
-                    VerticalAlignment="Center" />
-            </BoxContainer>
-            <BoxContainer
-                HorizontalAlignment="Left"
-                HorizontalExpand="True"
-                Orientation="Vertical">
-                <PanelContainer Name="LeftTopPanel" StyleClasses="AngleRect">
-                    <BoxContainer
-                        HorizontalAlignment="Center"
-                        HorizontalExpand="True"
-                        Orientation="Vertical"
-                        VerticalAlignment="Top">
-                        <Label
-                            Access="Public"
-                            HorizontalAlignment="Center"
-                            HorizontalExpand="True"
-                            Name="ServerName"
-                            StyleClasses="LabelHeadingBigger"
-                            Text="{Loc 'ui-lobby-welcome'}"
-                            VAlign="Center" />
-                        <controls:HLine Color="{x:Static style:StyleNano.NanoGold}" Thickness="2" />
-                        <info:LinkBanner
-                            HorizontalAlignment="Center"
-                            Margin="3,3,3,3"
-                            Name="LinkBanner" />
-                        <controls:StripeBack>
-                            <BoxContainer
-                                HorizontalAlignment="Stretch"
-                                HorizontalExpand="True"
-                                Margin="3,3,3,3"
-                                Orientation="Horizontal"
-                                VerticalAlignment="Stretch">
-                                <cc:UICommandButton
-                                    Access="Public"
-                                    Command="observe"
-                                    HorizontalAlignment="Stretch"
-                                    HorizontalExpand="True"
-                                    MinWidth="200"
-                                    Name="ObserveButton"
-                                    StyleClasses="ButtonBig"
-                                    Text="{Loc 'ui-lobby-observe-button'}"
-                                    WindowType="{x:Type lobbyUi:ObserveWarningWindow}" />
-                                <Button
-                                    Access="Public"
-                                    HorizontalAlignment="Stretch"
-                                    HorizontalExpand="True"
-                                    MinWidth="200"
-                                    Name="ReadyButton"
-                                    StyleClasses="ButtonBig"
-                                    Text="{Loc 'ui-lobby-ready-up-button'}"
-                                    ToggleMode="True" />
-                                <cc:CommandButton
-                                    Access="Public"
-                                    Command="ghostroles"
-                                    HorizontalAlignment="Stretch"
-                                    HorizontalExpand="True"
-                                    MinWidth="200"
-                                    Name="GhostRolesButton"
-                                    StyleClasses="ButtonBig"
-                                    Text="{Loc 'ghost-roles-window-title'}" />
+    xmlns:style="clr-namespace:Content.Client.Stylesheets"
+    xmlns:lobbyUi="clr-namespace:Content.Client.Lobby.UI"
+    xmlns:info="clr-namespace:Content.Client.Info"
+    xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Chat.Widgets">
+    <!-- Background -->
+    <TextureRect Access="Public" VerticalExpand="True" HorizontalExpand="True" Name="Background"
+                 Stretch="KeepAspectCovered" />
+    <BoxContainer Name="MainContainer" VerticalExpand="True" HorizontalExpand="True" Orientation="Horizontal"
+                  Margin="10 10 10 10" SeparationOverride="2">
+        <SplitContainer State="Auto" ResizeMode="NotResizable" HorizontalExpand="True">
+            <!-- LHS Controls -->
+            <BoxContainer Name="LeftSide" Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+                <Control Name="DefaultState" VerticalExpand="True">
+                    <BoxContainer Name="TopLeft" Orientation="Vertical">
+                        <!-- Left Top Panel -->
+                        <PanelContainer StyleClasses="BackgroundPanel" HorizontalAlignment="Left" Name="LeftSideTop"
+                                        VerticalAlignment="Top">
+                            <BoxContainer Orientation="Vertical" HorizontalAlignment="Center" MaxWidth="800">
+                                <info:LinkBanner Name="LinkBanner" VerticalExpand="false" HorizontalAlignment="Center"
+                                                 Margin="3 3 3 3" />
+                                <controls:StripeBack>
+                                    <BoxContainer Orientation="Horizontal" SeparationOverride="6" Margin="3 3 3 3">
+                                        <cc:UICommandButton Command="observe" Name="ObserveButton" Access="Public"
+                                                            Text="{Loc 'ui-lobby-observe-button'}"
+                                                            StyleClasses="ButtonBig"
+                                                            WindowType="{x:Type lobbyUi:ObserveWarningWindow}" />
+                                        <Label Name="StartTime"
+                                               Access="Public"
+                                               Align="Left"
+                                               FontColorOverride="{x:Static maths:Color.DarkGray}"
+                                               StyleClasses="LabelBig" HorizontalExpand="True" />
+                                        <Button Name="ReadyButton" Access="Public" ToggleMode="True"
+                                                Text="{Loc 'ui-lobby-ready-up-button'}"
+                                                StyleClasses="ButtonBig" MinWidth="137" />
+                                    </BoxContainer>
+                                </controls:StripeBack>
+                                <RichTextLabel Name="PlaytimeComment" Visible="False" Access="Public" HorizontalAlignment="Center" />
                             </BoxContainer>
-                        </controls:StripeBack>
-                        <RichTextLabel
-                            Access="Public"
-                            HorizontalAlignment="Center"
-                            Name="PlaytimeComment"
-                            Visible="False" />
+                        </PanelContainer>
+                        <!-- Voting Popups -->
+                        <BoxContainer Orientation="Vertical" SeparationOverride="4" Name="VoteContainer"
+                                      Access="Public" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 8" />
                     </BoxContainer>
-                </PanelContainer>
-                <BoxContainer
-                    Access="Public"
-                    HorizontalAlignment="Left"
-                    Margin="0,8"
-                    Name="VoteContainer"
-                    Orientation="Vertical"
-                    SeparationOverride="4"
-                    VerticalAlignment="Top" />
-            </BoxContainer>
-            <BoxContainer
-                HorizontalAlignment="Left"
-                HorizontalExpand="True"
-                Orientation="Vertical"
-                SeparationOverride="2"
-                VerticalAlignment="Stretch"
-                VerticalExpand="True">
-                <BoxContainer
-                    HorizontalAlignment="Left"
-                    MinWidth="600"
-                    Orientation="Vertical"
-                    VerticalAlignment="Bottom"
-                    VerticalExpand="True">
-                    <PanelContainer
-                        HorizontalAlignment="Stretch"
-                        HorizontalExpand="True"
-                        Name="LeftBottomPanel"
-                        SizeFlagsStretchRatio="3"
-                        StyleClasses="AngleRect"
-                        VerticalAlignment="Bottom"
-                        VerticalExpand="True">
-                        <BoxContainer
-                            HorizontalAlignment="Stretch"
-                            HorizontalExpand="True"
-                            Orientation="Vertical"
-                            SeparationOverride="3"
-                            VerticalAlignment="Stretch"
-                            VerticalExpand="True">
-                            <BoxContainer
-                                Access="Public"
-                                Name="UserProfileBox"
-                                Orientation="Vertical"
-                                SizeFlagsStretchRatio="4"
-                                VerticalAlignment="Stretch"
-                                VerticalExpand="True">
-                                <controls:StripeBack>
-                                    <BoxContainer Name="UserProfileHeader" Orientation="Horizontal">
-                                        <Label
-                                            Access="Public"
-                                            Align="Center"
-                                            HorizontalExpand="True"
-                                            Name="UserProfileHeaderLabel"
-                                            StyleClasses="LabelHeading"
-                                            Text="Профиль"
-                                            VAlign="Center" />
-                                        <TextureRect
-                                            Access="Public"
-                                            HorizontalAlignment="Right"
-                                            Margin="5,1"
-                                            MouseFilter="Pass"
-                                            Name="UserProfileHider"
-                                            SetSize="25 25"
-                                            Stretch="KeepAspectCentered"
-                                            VerticalAlignment="Center" />
-                                    </BoxContainer>
-                                </controls:StripeBack>
-                                <BoxContainer
-                                    HorizontalAlignment="Stretch"
-                                    HorizontalExpand="True"
-                                    Name="UserProfileContent"
-                                    Orientation="Vertical"
-                                    VerticalAlignment="Stretch"
-                                    VerticalExpand="True">
-                                    <userProfile:UserProfile
-                                        Access="Public"
-                                        HorizontalExpand="True"
-                                        Name="UserProfileBody"
-                                        VerticalExpand="True" />
-                                </BoxContainer>
+                    <!-- Vertical Padding-->
+                    <Control VerticalExpand="True" />
+                    <!-- Left Bot Panel -->
+                    <BoxContainer Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <info:DevInfoBanner Name="DevInfoBanner" VerticalExpand="false" Margin="3 3 3 3" />
+                        <PanelContainer StyleClasses="BackgroundPanel" Margin="3 3 3 3">
+                            <BoxContainer Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="3 3 3 3">
+                                <RichTextLabel Name="LobbySong" Access="Public" HorizontalAlignment="Left" />
+                                <RichTextLabel Name="LobbyBackground" Access="Public" HorizontalAlignment="Left" />
                             </BoxContainer>
-                            <BoxContainer
-                                Access="Public"
-                                Name="ServersHubBox"
-                                Orientation="Vertical"
-                                SizeFlagsStretchRatio="2"
-                                VerticalAlignment="Bottom"
-                                VerticalExpand="True">
-                                <controls:StripeBack>
-                                    <BoxContainer Name="ServersHubHeader" Orientation="Horizontal">
-                                        <Label
-                                            Access="Public"
-                                            Align="Center"
-                                            HorizontalExpand="True"
-                                            Name="ServersHubHeaderLabel"
-                                            StyleClasses="LabelHeading"
-                                            Text="Сейчас играет: 0/0"
-                                            VAlign="Center" />
-                                        <TextureRect
-                                            Access="Public"
-                                            HorizontalAlignment="Right"
-                                            Margin="5,1"
-                                            MouseFilter="Pass"
-                                            Name="ServersHubHider"
-                                            SetSize="25 25"
-                                            Stretch="KeepAspectCentered"
-                                            VerticalAlignment="Center" />
-                                    </BoxContainer>
-                                </controls:StripeBack>
-                                <BoxContainer
-                                    HorizontalAlignment="Stretch"
-                                    HorizontalExpand="True"
-                                    Name="ServersHubContent"
-                                    Orientation="Vertical"
-                                    VerticalAlignment="Top"
-                                    VerticalExpand="True">
-                                    <serversHub:ServersHub
-                                        Access="Public"
-                                        HorizontalExpand="True"
-                                        Name="ServersHubBody"
-                                        VerticalExpand="True" />
-                                </BoxContainer>
-                            </BoxContainer>
-                            <BoxContainer
-                                Access="Public"
-                                Name="ContributorsBox"
-                                Orientation="Vertical"
-                                SizeFlagsStretchRatio="2"
-                                VerticalAlignment="Bottom"
-                                VerticalExpand="True">
-                                <controls:StripeBack>
-                                    <BoxContainer Name="ContributorsHeader" Orientation="Horizontal">
-                                        <Label
-                                            Access="Public"
-                                            Align="Center"
-                                            HorizontalExpand="True"
-                                            Name="ContributorsHeaderLabel"
-                                            StyleClasses="LabelHeading"
-                                            Text="{Loc 'contributors-header'}"
-                                            VAlign="Center" />
-                                        <TextureRect
-                                            Access="Public"
-                                            HorizontalAlignment="Right"
-                                            Margin="5,1"
-                                            MouseFilter="Stop"
-                                            Name="ContributorsHider"
-                                            SetSize="25 25"
-                                            Stretch="KeepAspectCentered"
-                                            VerticalAlignment="Center" />
-                                    </BoxContainer>
-                                </controls:StripeBack>
-                                <BoxContainer
-                                    HorizontalAlignment="Stretch"
-                                    HorizontalExpand="True"
-                                    Name="ContributorsContent"
-                                    Orientation="Vertical"
-                                    VerticalAlignment="Top"
-                                    VerticalExpand="True">
-                                    <contributors:ContributorsTop
-                                        Access="Public"
-                                        HorizontalExpand="True"
-                                        Name="ContributorsBody"
-                                        VerticalExpand="True" />
-                                </BoxContainer>
-                            </BoxContainer>
-                            <BoxContainer
-                                HorizontalAlignment="Stretch"
-                                MaxWidth="580"
-                                Name="ChangelogBox"
-                                Orientation="Vertical"
-                                SizeFlagsStretchRatio="5"
-                                VerticalAlignment="Bottom"
-                                VerticalExpand="True">
-                                <BoxContainer
-                                    Orientation="Vertical"
-                                    VerticalAlignment="Stretch"
-                                    VerticalExpand="True">
-                                    <controls:StripeBack VerticalAlignment="Top">
-                                        <BoxContainer Name="ChangelogHeader" Orientation="Horizontal">
-                                            <Label
-                                                Align="Center"
-                                                HorizontalExpand="True"
-                                                StyleClasses="LabelHeading"
-                                                Text="{Loc 'changelog-lobby-window-title'}"
-                                                VAlign="Center" />
-                                            <TextureRect
-                                                Access="Public"
-                                                HorizontalAlignment="Right"
-                                                Margin="5,1"
-                                                MouseFilter="Pass"
-                                                Name="ChangelogHider"
-                                                SetSize="25 25"
-                                                Stretch="KeepAspectCentered"
-                                                VerticalAlignment="Center" />
-                                        </BoxContainer>
-                                    </controls:StripeBack>
-                                    <BoxContainer
-                                        HorizontalAlignment="Stretch"
-                                        MaxHeight="250"
-                                        MinHeight="250"
-                                        Name="ChangelogContent"
-                                        Orientation="Vertical"
-                                        VerticalAlignment="Top"
-                                        VerticalExpand="True">
-                                        <changelog:ChangelogTab
-                                            Access="Public"
-                                            Name="LocalChangelogBody"
-                                            RectClipContent="True"
-                                            VerticalAlignment="Stretch"
-                                            VerticalExpand="True" />
-                                    </BoxContainer>
-                                </BoxContainer>
-                            </BoxContainer>
-                        </BoxContainer>
-                    </PanelContainer>
-                    <PanelContainer
-                        HorizontalAlignment="Stretch"
-                        HorizontalExpand="True"
-                        Margin="0,10,0,0"
-                        Name="LobbySongPanel"
-                        StyleClasses="AngleRect"
-                        VerticalAlignment="Bottom"
-                        VerticalExpand="True">
-                        <RichTextLabel
-                            Access="Public"
-                            HorizontalAlignment="Center"
-                            HorizontalExpand="True"
-                            Name="LobbySong"
-                            VerticalAlignment="Bottom"
-                            VerticalExpand="True" />
-                    </PanelContainer>
-                </BoxContainer>
-            </BoxContainer>
-            <BoxContainer
-                HorizontalAlignment="Right"
-                HorizontalExpand="True"
-                Orientation="Horizontal"
-                SeparationOverride="5">
-                <PanelContainer
-                    Access="Public"
-                    HorizontalAlignment="Right"
-                    Name="SocialButtonsPanel"
-                    StyleClasses="AngleRect"
-                    VerticalAlignment="Top">
-                    <BoxContainer
-                        HorizontalAlignment="Center"
-                        Margin="3,3,3,3"
-                        Orientation="Vertical"
-                        SeparationOverride="2"
-                        VerticalAlignment="Top">
-                        <BoxContainer
-                            Orientation="Horizontal"
-                            SeparationOverride="2">
-                            <Button
-                                Access="Public"
-                                MinWidth="48"
-                                MinHeight="48"
-                                Name="DiscordButton"
-                                StyleClasses="ButtonBig" />
-                            <Button
-                                Access="Public"
-                                MinWidth="48"
-                                MinHeight="48"
-                                Name="WikiButton"
-                                StyleClasses="ButtonBig" />
-                        </BoxContainer>
-                        <BoxContainer
-                            Orientation="Horizontal"
-                            SeparationOverride="2">
-                            <Button
-                                Access="Public"
-                                MinWidth="48"
-                                MinHeight="48"
-                                Name="TelegramButton"
-                                StyleClasses="ButtonBig" />
-                            <Button
-                                Access="Public"
-                                MinWidth="48"
-                                MinHeight="48"
-                                Name="ReplaysButton"
-                                StyleClasses="ButtonBig" />
-                        </BoxContainer>
+                        </PanelContainer>
                     </BoxContainer>
-                </PanelContainer>
-                <PanelContainer
-                    Access="Public"
-                    HorizontalExpand="True"
-                    Name="RightPanel"
-                    StyleClasses="AngleRect"
-                    VerticalAlignment="Stretch"
-                    VerticalExpand="True">
-                    <BoxContainer
-                        HorizontalExpand="True"
-                        Orientation="Vertical"
-                        SeparationOverride="4"
-                        VerticalAlignment="Stretch"
-                        VerticalExpand="True">
-                        <BoxContainer
-                            HorizontalAlignment="Stretch"
-                            HorizontalExpand="True"
-                            Margin="3,3,3,3"
-                            Orientation="Horizontal"
-                            SizeFlagsStretchRatio="1">
-                            <Button
-                                Access="Public"
-                                HorizontalExpand="True"
-                                MinWidth="40"
-                                Name="AHelpButton"
-                                StyleClasses="ButtonBig"
-                                Text="{Loc 'ui-lobby-ahelp-button'}" />
-                            <Button
-                                Access="Public"
-                                HorizontalExpand="True"
-                                MinWidth="40"
-                                Name="MHelpButton"
-                                StyleClasses="ButtonBig"
-                                Text="{Loc 'ui-lobby-mhelp-button'}" />
-                            <vote:VoteCallMenuButton
-                                HorizontalExpand="True"
-                                MinWidth="40"
-                                Name="CallVoteButton"
+                </Control>
+                <!-- Character setup state -->
+                <!-- This is injected on startup. Funky! -->
+                <Control Access="Public" Visible="False" Name="CharacterSetupState" VerticalExpand="True" />
+            </BoxContainer>
+            <!-- Right Panel -->
+            <PanelContainer Name="RightSide" Access="Public" StyleClasses="BackgroundPanel" HorizontalAlignment="Right" VerticalExpand="True"
+                            VerticalAlignment="Stretch">
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                    <!-- Top row -->
+                    <BoxContainer Orientation="Horizontal" MinSize="0 40" Name="HeaderContainer" Access="Public"
+                                  SeparationOverride="4">
+                        <Label Name="ServerName" Access="Public" StyleClasses="LabelHeadingBigger" VAlign="Center"
+                               HorizontalExpand="True" HorizontalAlignment="Center" />
+                    </BoxContainer>
+                    <!-- Gold line -->
+                    <controls:HLine StyleClasses="highlight" Thickness="2" />
+                    <controls:HSpacer Spacing="10" />
+                    <!-- Voting & misc button bar -->
+                    <BoxContainer Orientation="Horizontal" MinSize="0 40" HorizontalAlignment="Right">
+                        <Button Name="AHelpButton" Access="Public" Text="{Loc 'ui-lobby-ahelp-button'}"
                                 StyleClasses="ButtonBig" />
-                            <Button
-                                Access="Public"
-                                HorizontalExpand="True"
-                                MinWidth="40"
-                                Name="OptionsButton"
-                                StyleClasses="ButtonBig"
+                        <vote:VoteCallMenuButton Name="CallVoteButton" StyleClasses="ButtonBig" />
+                        <Button Name="OptionsButton" Access="Public" StyleClasses="ButtonBig"
                                 Text="{Loc 'ui-lobby-options-button'}" />
-                            <Button
-                                Access="Public"
-                                HorizontalExpand="True"
-                                MinWidth="40"
-                                Name="LeaveButton"
-                                StyleClasses="ButtonBig"
+                        <Button Name="LeaveButton" Access="Public" StyleClasses="ButtonBig"
                                 Text="{Loc 'ui-lobby-leave-button'}" />
-                        </BoxContainer>
-                        <BoxContainer
-                            HorizontalExpand="True"
-                            Orientation="Vertical"
-                            SizeFlagsStretchRatio="2"
-                            VerticalAlignment="Top">
-                            <controls:StripeBack>
-                                <BoxContainer Name="ServerInfoHeader" Orientation="Horizontal">
-                                    <Label
-                                        Align="Center"
-                                        HorizontalExpand="True"
-                                        StyleClasses="LabelHeading"
-                                        Text="{Loc 'ui-lobby-server-info-block'}"
-                                        VAlign="Center" />
-                                    <TextureRect
-                                        Access="Public"
-                                        HorizontalAlignment="Right"
-                                        Margin="5,1"
-                                        MouseFilter="Pass"
-                                        Name="ServerInfoHider"
-                                        SetSize="25 25"
-                                        Stretch="KeepAspectCentered"
-                                        VerticalAlignment="Center" />
-                                </BoxContainer>
-                            </controls:StripeBack>
-                            <BoxContainer Name="ServerInfoContent" Orientation="Vertical">
-                                <info:ServerInfo
-                                    Access="Public"
-                                    HorizontalAlignment="Left"
-                                    Margin="3,3,3,3"
-                                    MaxWidth="400"
-                                    MinSize="0 30"
-                                    Name="ServerInfo"
-                                    VerticalExpand="false" />
-                                <Label
-                                    Access="Public"
-                                    FontColorOverride="{x:Static maths:Color.LightGray}"
-                                    HorizontalAlignment="Left"
-                                    Margin="3,3,3,3"
-                                    Name="StationTime" />
-                            </BoxContainer>
-                        </BoxContainer>
-                        <BoxContainer
-                            HorizontalAlignment="Stretch"
-                            HorizontalExpand="True"
-                            Orientation="Vertical"
-                            SizeFlagsStretchRatio="2"
-                            VerticalAlignment="Top">
-                            <controls:StripeBack Name="CharacterInfoHeader">
-                                <BoxContainer Orientation="Horizontal">
-                                    <Label
-                                        Align="Center"
-                                        HorizontalExpand="True"
-                                        StyleClasses="LabelHeading"
-                                        Text="{Loc 'lobby-character-preview-panel-header'}"
-                                        VAlign="Center" />
-                                    <TextureRect
-                                        Access="Public"
-                                        HorizontalAlignment="Right"
-                                        Margin="5,1"
-                                        MouseFilter="Pass"
-                                        Name="CharacterInfoHider"
-                                        SetSize="25 25"
-                                        Stretch="KeepAspectCentered"
-                                        VerticalAlignment="Center" />
-                                </BoxContainer>
-                            </controls:StripeBack>
-                            <BoxContainer
-                                MinHeight="180"
-                                Name="CharacterInfoContent"
-                                Orientation="Vertical"
-                                VerticalExpand="True">
-                                <lobbyUi:LobbyCharacterPreviewPanel
-                                    Access="Public"
-                                    HorizontalExpand="True"
-                                    Name="CharacterPreview" />
-                            </BoxContainer>
-                        </BoxContainer>
-                        <BoxContainer
-                            HorizontalExpand="True"
-                            Orientation="Vertical"
-                            SizeFlagsStretchRatio="5"
-                            VerticalAlignment="Stretch"
-                            VerticalExpand="True">
-                            <controls:StripeBack Name="ChatHeader">
-                                <BoxContainer Orientation="Horizontal">
-                                    <Label
-                                        Align="Center"
-                                        HorizontalExpand="True"
-                                        StyleClasses="LabelHeading"
-                                        Text="{Loc 'hud-chatbox-channel-Chat'}"
-                                        VAlign="Center" />
-                                    <TextureRect
-                                        Access="Public"
-                                        HorizontalAlignment="Right"
-                                        Margin="5,1"
-                                        MouseFilter="Pass"
-                                        Name="ChatHider"
-                                        SetSize="25 25"
-                                        Stretch="KeepAspectCentered"
-                                        VerticalAlignment="Center" />
-                                </BoxContainer>
-                            </controls:StripeBack>
-                            <BoxContainer
-                                HorizontalExpand="True"
-                                Name="ChatContent"
-                                VerticalAlignment="Stretch"
-                                VerticalExpand="True">
-                                <widgets:ChatBox
-                                    Access="Public"
-                                    HorizontalExpand="True"
-                                    Margin="3,3,3,3"
-                                    Name="Chat"
-                                    VerticalAlignment="Stretch"
-                                    VerticalExpand="True" />
-                            </BoxContainer>
-                        </BoxContainer>
                     </BoxContainer>
-                </PanelContainer>
-            </BoxContainer>
-        </Control>
-        <!--  Character setup state  -->
-        <!--  This is injected on startup. Funky!  -->
-        <Control
-            Access="Public"
-            HorizontalExpand="True"
-            Name="CharacterSetupState"
-            VerticalExpand="True"
-            Visible="False" />
+                    <controls:HSpacer Spacing="10" />
+                    <!-- Server info -->
+                    <controls:NanoHeading Text="{Loc 'ui-lobby-server-info-block'}" />
+                    <info:ServerInfo Name="ServerInfo" Access="Public" MinSize="0 30" VerticalExpand="false"
+                                     Margin="3 3 3 3" MaxWidth="400" HorizontalAlignment="Left" />
+                    <Label Name="StationTime" Access="Public" FontColorOverride="{x:Static maths:Color.LightGray}"
+                           Margin="3 3 3 3" HorizontalAlignment="Left" />
+                    <controls:HSpacer Spacing="5" />
+                    <lobbyUi:LobbyCharacterPreviewPanel Name="CharacterPreview" Access="Public" />
+                    <controls:HSpacer Spacing="5" />
+                    <BoxContainer MinHeight="10" />
+                    <!-- Gold line -->
+                    <controls:HLine StyleClasses="highlight" Thickness="2" Access="Public" />
+                    <controls:HSpacer Spacing="10" />
+                    <widgets:ChatBox Name="Chat" Access="Public" VerticalExpand="True" Margin="3 3 3 3" MinHeight="50" />
+                </BoxContainer>
+                <TextureButton Name="CollapseButton"
+                                TexturePath="filled_right_arrow.svg.192dpi"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Margin="0 2 2 0"
+                                StyleClasses="LobbyIconButton"
+                                Scale="0.5 0.5"/>
+            </PanelContainer>
+        </SplitContainer>
+        <PanelContainer Name="ExpandPanel"
+                        StyleClasses="BackgroundPanel"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Margin="0 2 2 0"
+                        Visible="False">
+            <TextureButton Name="ExpandButton"
+                        TexturePath="filled_left_arrow.svg.192dpi"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        StyleClasses="LobbyIconButton"
+                        Scale="0.5 0.5"/>
+        </PanelContainer>
     </BoxContainer>
 </lobbyUi:LobbyGui>

@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Client._Sunrise.Lobby;
 using Content.Client.Gameplay;
 using Content.Client.Guidebook;
 using Content.Client.Guidebook.Controls;
@@ -19,7 +20,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.UserInterface.Systems.Guidebook;
 
-public sealed partial class GuidebookUIController : UIController, IOnStateEntered<LobbyState>, IOnStateEntered<GameplayState>, IOnStateExited<LobbyState>, IOnStateExited<GameplayState>, IOnSystemChanged<GuidebookSystem>
+public sealed partial class GuidebookUIController : UIController, IOnStateEntered<SunriseLobbyState>, IOnStateEntered<GameplayState>, IOnStateExited<SunriseLobbyState>, IOnStateExited<GameplayState>, IOnSystemChanged<GuidebookSystem> // Sunrise-Edit
 {
     [UISystemDependency] private readonly GuidebookSystem _guidebookSystem = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
@@ -31,7 +32,7 @@ public sealed partial class GuidebookUIController : UIController, IOnStateEntere
     private GuidebookWindow? _guideWindow;
     private MenuButton? GuidebookButton => UIManager.GetActiveUIWidgetOrNull<MenuBar.Widgets.GameTopMenuBar>()?.GuidebookButton;
 
-    public void OnStateEntered(LobbyState state)
+    public void OnStateEntered(SunriseLobbyState state) // Sunrise-Edit
     {
         HandleStateEntered(state);
     }
@@ -50,7 +51,7 @@ public sealed partial class GuidebookUIController : UIController, IOnStateEntere
         _guideWindow.OnClose += OnWindowClosed;
         _guideWindow.OnOpen += OnWindowOpen;
 
-        if (state is LobbyState &&
+        if (state is SunriseLobbyState && // Sunrise-Edit
             _jobRequirements.FetchOverallPlaytime() < TimeSpan.FromMinutes(PlaytimeOpenGuidebook))
         {
             OpenGuidebook();
@@ -65,7 +66,7 @@ public sealed partial class GuidebookUIController : UIController, IOnStateEntere
             .Register<GuidebookUIController>();
     }
 
-    public void OnStateExited(LobbyState state)
+    public void OnStateExited(SunriseLobbyState state) // Sunrise-Edit
     {
         HandleStateExited();
     }

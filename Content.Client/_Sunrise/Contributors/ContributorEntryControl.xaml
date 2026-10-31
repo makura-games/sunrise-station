@@ -1,6 +1,7 @@
 <PanelContainer xmlns="https://spacestation14.io"
                 xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
                 Name="BackgroundColorPanel"
+                StyleClasses="PanelDark"
                 MouseFilter="Stop">
     <BoxContainer Orientation="Vertical">
         <customControls:HSeparator/>
