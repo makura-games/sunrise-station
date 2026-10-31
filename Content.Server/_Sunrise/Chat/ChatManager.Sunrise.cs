@@ -99,11 +99,11 @@ internal sealed partial class ChatManager
         {
             if (!string.IsNullOrEmpty(selectedColorCVar) && !explicitNoneColor && !isGradient)
             {
-                Color? parsedColor = null;
-                if (OocGradientHelper.TryResolveColor(selectedColorCVar, out var resolvedCol))
-                    parsedColor = resolvedCol;
-                else if (Color.TryFromHex(selectedColorCVar, out var hexCol))
-                    parsedColor = hexCol;
+                var parsedColor = OocGradientHelper.TryResolveColor(selectedColorCVar, out var resolvedCol) ? resolvedCol : null;
+
+
+
+
 
                 if (parsedColor != null)
                 {

@@ -115,19 +115,6 @@ namespace Content.Client._Sunrise.Lobby
             LayoutContainer.SetAnchorPreset(Lobby, LayoutContainer.LayoutPreset.Wide);
             UpdateLobbyUi();
 
-            var lobbyChangelogs = _cfg.GetCVar(SunriseCCVars.LobbyChangelogsList).Split(',');
-
-            var changelogs = new List<ChangelogManager.Changelog>();
-            foreach (var lobbyChangelog in lobbyChangelogs)
-            {
-                var yamlData = _resource.ContentFileReadYaml(new ResPath($"/Changelog/{lobbyChangelog}"));
-
-                var node = yamlData.Documents[0].RootNode.ToDataNodeCast<MappingDataNode>();
-                var changelog = _serialization.Read<ChangelogManager.Changelog>(node, notNullableOverride: true);
-                changelogs.Add(changelog);
-            }
-            _combinedLobbyChangelog = _changelogManager.MergeChangelogs(changelogs);
-            _lobbyChangelogLoaded = false;
             Lobby.LobbyAnimation.DisplayRect.Stretch = TextureRect.StretchMode.KeepAspectCovered;
             Lobby.LobbyAnimation.DisplayRect.HorizontalExpand = true;
             Lobby.LobbyAnimation.DisplayRect.VerticalExpand = true;
@@ -148,7 +135,7 @@ namespace Content.Client._Sunrise.Lobby
             _netTexturesManager.ResourceLoaded += OnNetworkResourceLoaded;
 
             Lobby.CharacterPreview.CharacterSetupButton.OnPressed += OnSetupPressed;
-            Lobby.ChangelogHider.OnKeyBindUp += OnChangelogHiderKeyBindUp;
+            Lobby.ChangelogExpanded += EnsureLobbyChangelogPopulated;
             Lobby.ReadyButton.OnPressed += OnReadyPressed;
             Lobby.ReadyButton.OnToggled += OnReadyToggled;
 
@@ -164,7 +151,8 @@ namespace Content.Client._Sunrise.Lobby
             // Explicitly restore lobby background after reconnection
             // This ensures the background is loaded even if CVar events were called before Lobby initialization
             ApplyConfiguredLobbyBackground();
-            EnsureLobbyChangelogPopulated();
+            if (Lobby.ChangelogContent.Visible)
+                EnsureLobbyChangelogPopulated();
         }
 
         protected override void Shutdown()
@@ -180,7 +168,7 @@ namespace Content.Client._Sunrise.Lobby
             _voteManager.ClearPopupContainer();
 
             Lobby!.CharacterPreview.CharacterSetupButton.OnPressed -= OnSetupPressed;
-            Lobby!.ChangelogHider.OnKeyBindUp -= OnChangelogHiderKeyBindUp;
+            Lobby!.ChangelogExpanded -= EnsureLobbyChangelogPopulated;
             Lobby!.ReadyButton.OnPressed -= OnReadyPressed;
             Lobby!.ReadyButton.OnToggled -= OnReadyToggled;
 
@@ -227,20 +215,24 @@ namespace Content.Client._Sunrise.Lobby
             Lobby?.SwitchState(SunriseLobbyGui.LobbyGuiState.CharacterSetup);
         }
 
-        private void OnChangelogHiderKeyBindUp(GUIBoundKeyEventArgs args)
-        {
-            if (args.Function != EngineKeyFunctions.Use)
-                return;
-
-            EnsureLobbyChangelogPopulated();
-        }
-
         private void EnsureLobbyChangelogPopulated()
         {
-            if (_lobbyChangelogLoaded || _combinedLobbyChangelog == null || Lobby == null)
+            if (Lobby == null || Lobby.IsChangelogPopulated)
                 return;
 
+            var lobbyChangelogs = _cfg.GetCVar(SunriseCCVars.LobbyChangelogsList).Split(',');
+            var changelogs = new List<ChangelogManager.Changelog>();
+            foreach (var lobbyChangelog in lobbyChangelogs)
+            {
+                var yamlData = _resource.ContentFileReadYaml(new ResPath($"/Changelog/{lobbyChangelog}"));
+                var node = yamlData.Documents[0].RootNode.ToDataNodeCast<MappingDataNode>();
+                var changelog = _serialization.Read<ChangelogManager.Changelog>(node, notNullableOverride: true);
+                changelogs.Add(changelog);
+            }
+
+            _combinedLobbyChangelog = _changelogManager.MergeChangelogs(changelogs);
             Lobby.LocalChangelogBody.PopulateChangelog(_combinedLobbyChangelog);
+            Lobby.IsChangelogPopulated = true;
             _lobbyChangelogLoaded = true;
         }
 

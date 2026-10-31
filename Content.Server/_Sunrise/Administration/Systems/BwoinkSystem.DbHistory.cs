@@ -64,7 +64,8 @@ public partial class BwoinkSystem
             string formattedName;
             if (senderSession != null)
             {
-                var nameToFormat = isAdmin || _overrideClientName == string.Empty ? name : _overrideClientName;
+                var senderAHelpAdmin = senderAdminData?.HasFlag(AdminFlags.Adminhelp) ?? false;
+                var nameToFormat = isAdmin || !senderAHelpAdmin || _overrideClientName == string.Empty ? name : _overrideClientName;
                 formattedName = FormatName(senderAdminData, senderSession, adminPrefix, nameToFormat);
             }
             else

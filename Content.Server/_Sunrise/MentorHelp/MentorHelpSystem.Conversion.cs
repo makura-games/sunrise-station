@@ -151,7 +151,7 @@ public sealed partial class MentorHelpSystem
                 sponsorColorHex = "#" + color.Value.ToHexNoAlpha().TrimStart('#');
         }
 
-        if (_playerManager.TryGetSessionById(senderUserId, out var session))
+        if (_sponsorsManager != null && _playerManager.TryGetSessionById(senderUserId, out var session))
         {
             var selectedTitleCVar = _netConfig.GetClientCVar(session.Channel, SunriseCCVars.SponsorOocTitle);
             if (selectedTitleCVar == "@none")
@@ -189,11 +189,11 @@ public sealed partial class MentorHelpSystem
                 }
                 else
                 {
-                    Color? parsedColor = null;
-                    if (OocGradientHelper.TryResolveColor(selectedColorCVar, out var resolvedCol))
-                        parsedColor = resolvedCol;
-                    else if (Color.TryFromHex(selectedColorCVar, out var hexCol))
-                        parsedColor = hexCol;
+                    var parsedColor = OocGradientHelper.TryResolveColor(selectedColorCVar, out var resolvedCol) ? resolvedCol : null;
+
+
+
+
 
                     if (parsedColor != null)
                     {

@@ -13,6 +13,6 @@
     </BoxContainer>
     <RichTextLabel Name="RelayedToDiscordLabel" Text="{Loc 'bwoink-system-messages-being-relayed-to-discord'}" Access="Public" Visible="False" />
     <BoxContainer Orientation="Horizontal" Margin="0 4 0 0">
-        <Button Name="AdminWhoButton" Text="{Loc 'bwoink-panel-adminwho-button'}" Visible="False" Access="Public"/>
+        <Button Name="AdminWhoButton" Text="{Loc 'admin-who-button'}" Visible="False" Access="Public"/>
     </BoxContainer>
 </BoxContainer>
