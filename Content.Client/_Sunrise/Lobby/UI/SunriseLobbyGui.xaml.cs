@@ -55,6 +55,8 @@ public sealed partial class SunriseLobbyGui : UIScreen
 
     public Texture? IconExpanded;
     public Texture? IconCollapsed;
+    public bool IsChangelogPopulated;
+    public event Action? ChangelogExpanded;
 
     private readonly StyleBoxTexture _back;
 
@@ -243,6 +245,8 @@ public sealed partial class SunriseLobbyGui : UIScreen
     {
         ChangelogContent.Visible = expanded;
         ChangelogHider.Texture = expanded ? IconExpanded : IconCollapsed;
+        if (expanded)
+            ChangelogExpanded?.Invoke();
         if (persist)
         {
             _cfg.SetCVar(SunriseCCVars.LobbyCollapsedChangelog, !expanded);

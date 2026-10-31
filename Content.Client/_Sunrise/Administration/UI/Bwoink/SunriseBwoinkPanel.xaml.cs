@@ -167,7 +167,8 @@ namespace Content.Client._Sunrise.Administration.UI.Bwoink
                 if (token.IsCancellationRequested || Disposed)
                     return;
 
-                SenderLineEdit.PlaceHolder = Loc.GetString("bwoink-cooldown-message", ("seconds", (int)Math.Max(0, (_cooldownEnd - DateTime.UtcNow).TotalSeconds)));
+                var seconds = (int) Math.Ceiling(Math.Max(0, (_cooldownEnd - DateTime.UtcNow).TotalSeconds));
+                SenderLineEdit.PlaceHolder = Loc.GetString("bwoink-cooldown-message", ("seconds", seconds));
                 try
                 {
                     await Task.Delay(500, token);
