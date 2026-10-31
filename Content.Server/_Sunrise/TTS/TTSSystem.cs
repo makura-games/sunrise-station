@@ -414,7 +414,7 @@ public sealed partial class TTSSystem : EntitySystem
         if (pref.SelectedCharacter is not HumanoidCharacterProfile humanoidProfile)
             return;
 
-        var voiceId = humanoidProfile.Voice;
+        var voiceId = humanoidProfile.TtsVoice;
         if (!GetVoicePrototype(voiceId, out var protoVoice))
             return;
 
@@ -449,7 +449,7 @@ public sealed partial class TTSSystem : EntitySystem
         if (pref.SelectedCharacter is not HumanoidCharacterProfile humanoidProfile)
             return;
 
-        var voiceId = humanoidProfile.Voice;
+        var voiceId = humanoidProfile.TtsVoice;
         if (!GetVoicePrototype(voiceId, out var protoVoice))
             return;
 
