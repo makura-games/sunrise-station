@@ -5,12 +5,11 @@ using Content.Server._Sunrise.PlayerCache;
 using Content.Server.Administration.Managers;
 using Content.Shared._Sunrise.SponsorSystem;
 using Content.Shared._Sunrise.SunriseCCVars;
+using Content.Shared.Administration;
 using Content.Sunrise.Interfaces.Shared;
-using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Content.Shared.Administration;
 
 namespace Content.Server._Sunrise.SponsorSystem;
 
@@ -52,7 +51,7 @@ public static class ServerOocGradientHelper
             selectedColor = cachedColor;
         }
 
-        if (string.IsNullOrEmpty(selectedColor) || !OocGradientHelper.IsGradientId(selectedColor))
+        if (string.IsNullOrEmpty(selectedColor) || selectedColor == "@none" || !OocGradientHelper.IsGradientId(selectedColor))
             return false;
 
         var isAllowedGradient = false;
@@ -60,7 +59,7 @@ public static class ServerOocGradientHelper
         var adminManager = IoCManager.Resolve<IAdminManager>();
         var isAllowedAdminBypass = false;
         AdminData? adminData = null;
-        
+
         if (session != null)
         {
             isAllowedAdminBypass = isSponsor && adminManager.IsAdmin(session, includeDeAdmin: false);
@@ -82,47 +81,51 @@ public static class ServerOocGradientHelper
         if (!isAllowedGradient)
             return false;
 
-        string? oocTitle = null;
+        string? selectedTitle = null;
         if (session != null && netConfig != null)
         {
-            var selectedTitle = netConfig.GetClientCVar(session.Channel, SunriseCCVars.SponsorOocTitle);
-            if (!string.IsNullOrEmpty(selectedTitle) && selectedTitle != "@none")
+            selectedTitle = netConfig.GetClientCVar(session.Channel, SunriseCCVars.SponsorOocTitle);
+        }
+
+        if (string.IsNullOrEmpty(selectedTitle) && playerCacheManager != null && playerCacheManager.TryGetOocTitle(userId, out var cachedTitle))
+        {
+            selectedTitle = cachedTitle;
+        }
+
+        var explicitNoneTitle = selectedTitle == "@none";
+        string? oocTitle = null;
+
+        if (!string.IsNullOrEmpty(selectedTitle) && !explicitNoneTitle)
+        {
+            var isAllowedTitle = false;
+            if (sponsorsManager.TryGetPrototypes(userId, out var prototypes) && prototypes.Contains(selectedTitle))
             {
-                var isAllowedTitle = false;
-                if (sponsorsManager.TryGetPrototypes(userId, out var prototypes) && prototypes.Contains(selectedTitle))
+                isAllowedTitle = true;
+            }
+            else if (isAllowedAdminBypass)
+            {
+                if (adminData != null && (selectedTitle == adminData.Title || OocGradientHelper.TryResolveTitle(selectedTitle, out _)))
                 {
                     isAllowedTitle = true;
                 }
-                else if (isAllowedAdminBypass)
-                {
-                    if (adminData != null && (selectedTitle == adminData.Title || OocGradientHelper.TryResolveTitle(selectedTitle, out _)))
-                    {
-                        isAllowedTitle = true;
-                    }
-                }
+            }
 
-                if (isAllowedTitle)
-                {
-                    if (OocGradientHelper.TryResolveTitle(selectedTitle, out var resolvedTitle))
-                        oocTitle = resolvedTitle;
-                    else
-                        oocTitle = selectedTitle;
-                }
+            if (isAllowedTitle)
+            {
+                oocTitle = OocGradientHelper.TryResolveTitle(selectedTitle, out var resolvedTitle)
+                    ? resolvedTitle
+                    : selectedTitle;
             }
         }
 
-        if (oocTitle == null)
+        if (oocTitle == null && !explicitNoneTitle)
         {
             sponsorsManager.TryGetOocTitle(userId, out oocTitle);
-            if (string.IsNullOrEmpty(oocTitle) && playerCacheManager != null)
-            {
-                playerCacheManager.TryGetOocTitle(userId, out oocTitle);
-            }
-        }
 
-        if ((string.IsNullOrEmpty(oocTitle) || oocTitle == "@none") && isAllowedAdminBypass && adminData != null)
-        {
-            oocTitle = adminData.Title;
+            if (string.IsNullOrEmpty(oocTitle) && isAllowedAdminBypass && adminData != null)
+            {
+                oocTitle = adminData.Title;
+            }
         }
 
         var gradTitle = string.IsNullOrEmpty(oocTitle) ? "" : $"[bold]\\[{OocGradientHelper.ApplyGradientById(oocTitle, selectedColor)}\\][/bold] ";
