@@ -203,7 +203,7 @@ public sealed partial class UserProfile : Control
                 {
                     if (_sponsorsManager.ClientGetTierColor() is { } tierColor)
                         SponsorTierName.SetMessage(FormattedMessage.FromMarkupOrThrow($"[color={tierColor.ToHex()}]{escapedTierTitle}[/color]"));
-                    else if (Color.TryFromHex(colorHex) is { } hexColor)
+                    else if (Color.TryFromHex(colorHex, out var hexColor))
                         SponsorTierName.SetMessage(FormattedMessage.FromMarkupOrThrow($"[color={hexColor.ToHex()}]{escapedTierTitle}[/color]"));
                     else if (OocGradientHelper.TryResolveColor(colorHex, out var resolvedColor))
                         SponsorTierName.SetMessage(FormattedMessage.FromMarkupOrThrow($"[color={resolvedColor.Value.ToHex()}]{escapedTierTitle}[/color]"));
