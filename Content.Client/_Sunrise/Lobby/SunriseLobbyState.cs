@@ -322,7 +322,7 @@ namespace Content.Client._Sunrise.Lobby
                 Lobby!.ReadyButton.ToggleMode = false;
                 Lobby!.ReadyButton.Pressed = false;
                 Lobby!.ObserveButton.Disabled = false;
-                Lobby!.GhostRolesButton.Disabled = false;
+                // Lobby!.GhostRolesButton.Disabled = false; // Sunrise-Edit - кнопка гост-ролей заменена кнопкой обучения
             }
             else
             {
@@ -331,7 +331,7 @@ namespace Content.Client._Sunrise.Lobby
                 Lobby!.ReadyButton.ToggleMode = true;
                 Lobby!.ReadyButton.Disabled = false;
                 Lobby!.ObserveButton.Disabled = true;
-                Lobby!.GhostRolesButton.Disabled = true;
+                // Lobby!.GhostRolesButton.Disabled = true; // Sunrise-Edit - кнопка гост-ролей заменена кнопкой обучения
             }
 
             if (_gameTicker.ServerInfoBlob != null)

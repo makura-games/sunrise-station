@@ -11,7 +11,7 @@ namespace Content.Client._Sunrise.Contributors;
 [GenerateTypedNameReferences]
 public sealed partial class ContributorEntryControl : PanelContainer
 {
-    [Dependency] private readonly IUriOpener _uriOpener = default!;
+    [Dependency] private IUriOpener _uriOpener = default!;
 
     public ContributorEntryControl()
     {
