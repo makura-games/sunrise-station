@@ -45,16 +45,21 @@
   - type: Icon
     sprite: Mobs/Species/Human/parts.rsi
     state: full
-  - type: Hunger
-    baseDecayRate: 0.015
-  - type: Thirst
-    baseDecayRate: 0.05
-    dehydrationDamage:
-      types:
-        Bloodloss: 0.5
-        Asphyxiation: 0.5
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: SunriseFelinidHunger
+      Thirst:
+        prototype: SunriseFelinidThirst
+  - type: SatiationDamage
+    satiations:
+      Thirst:
+        thresholds:
+          Dead:
+            types:
+              Bloodloss: 0.5
+              Asphyxiation: 0.5
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatFelinid
       amount: 2
@@ -133,10 +138,7 @@
     leftBareFootState: [ footprint-left-bare-cat ]
     rightBareFootState: [ footprint-right-bare-cat ]
   - type: Vocal
-    sounds:
-      Male: MaleFelinid
-      Female: FemaleFelinid
-      Unsexed: MaleFelinid
+    emoteSounds: MaleFelinid
   - type: Respirator
     damage:
       types:
@@ -169,8 +171,11 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.5
     baseSprintSpeed: 4.5
-  - type: ToggleableNightVision
-    effect: EffectNightVisioSpecies
+  - type: NightVision
+    enabled: false
+    action: ActionToggleNightVision
+    prioritized: false
+    lightingColor: '#FFFFFF15'
   - type: FlashModifier
     modifier: 2
   - type: FelinidLicking

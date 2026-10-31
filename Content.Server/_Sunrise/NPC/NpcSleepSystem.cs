@@ -3,7 +3,7 @@ using Content.Server.NPC.Systems;
 using Content.Server.Salvage.Expeditions;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.CCVar;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC;
 using Robust.Server.GameObjects;

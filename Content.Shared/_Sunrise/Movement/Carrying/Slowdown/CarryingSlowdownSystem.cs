@@ -23,7 +23,7 @@ public sealed partial class CarryingSlowdownSystem : EntitySystem
 
     private void OnAfterAutoHandleState(Entity<CarryingSlowdownComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        _movementSpeed.RefreshMovementSpeedModifiers(ent);
+        _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     /// <summary>

@@ -293,3 +293,23 @@ stack-uranium-marble-floor = урановый мраморный пол
 stack-astro-ironsand-floor = пол из астро-железопеска
 stack-astro-ironsand-floor-borderless = бесшовный пол из астро-железопеска
 stack-block-carpet-tile = блочная ковровая плитка
+stack-xenoborg-crystal =
+    { $amount ->
+        [1] кристалл ксеноборга
+       *[other] кристаллы ксеноборга
+    }
+stack-plastic-tile = пластиковая плитка
+stack-plastic-dark-tile = тёмная пластиковая плитка
+stack-plastic-white-tile = белая пластиковая плитка
+stack-white-marble-mono-floor = однотонный пол из белого мрамора
+stack-dark-marble-mono-floor = однотонный пол из тёмного мрамора
+stack-exo-hull-floor = напольное покрытие из экзодермиса, корпус
+stack-exo-viscera-floor = напольное покрытие из экзодермиса, внутренности
+stack-exo-techmaint-floor = напольное покрытие из экзодермиса, техобслуживание
+stack-exo-horizontal-floor = горизонтальное напольное покрытие из экзодермиса
+stack-exo-vertical-floor = вертикальное напольное покрытие из экзодермиса
+stack-exo-corner-ne-floor = напольное покрытие из экзодермиса, северо-восточный угол
+stack-exo-corner-nw-floor = напольное покрытие из экзодермиса, северо-западный угол
+stack-exo-corner-se-floor = напольное покрытие из экзодермиса, юго-восточный угол
+stack-exo-corner-sw-floor = напольное покрытие из экзодермиса, юго-западный угол
+stack-exo-borg-floor = напольное покрытие из мехадермиса

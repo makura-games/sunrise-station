@@ -1,0 +1,19 @@
+- type: !PartialOnly entity
+  id: SurveillanceCameraBase
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/camera.rsi
+    offset: 0, 0
+    layers: !Clear
+    - map: ["enum.SurveillanceCameraVisualsKey.Layer"]
+      state: camera
+      cycle: true
+
+- type: !PartialOnly entity
+  id: SurveillanceCameraAssembly
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/camera.rsi
+    offset: 0, 0
+    layers: !Clear
+    - state: camera_off

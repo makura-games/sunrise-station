@@ -28,3 +28,7 @@ ent-WeaponLauncherAdmemeMeteorLarge = пускатель метеоритов
 ent-WeaponLauncherAdmemeImmovableRodSlow = пускатель неподвижного жезла
     .desc = Стреляет неподвижными жезлами.
     .suffix = Адмемы
+ent-WeaponGuidedMissileLauncherXenoborg = XB GML-78
+    .desc = Пусковая установка управляемых ракет ксеноборга.
+ent-WeaponRocketLauncherXenoborg = XB MRL-97-D
+    .desc = Инопланетная ракетная установка со специальными ракетами для разрушения конструкций.

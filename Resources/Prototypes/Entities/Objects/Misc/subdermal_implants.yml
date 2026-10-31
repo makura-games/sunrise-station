@@ -1,6 +1,6 @@
 - type: entity
   id: BaseSubdermalImplant
-  parent: BaseItem
+  parent: BaseItem # Sunrise-Edit - импланты доступны как физические предметы для администрации и контента Sunrise.
   name: implant
   description: A microscopic chip that's injected under the skin.
   abstract: true
@@ -9,13 +9,14 @@
   - type: Tag
     tags:
     - SubdermalImplant
-  # Sunrsie-Start
+    - HideContextMenu
+  # Sunrise added start - общий внешний вид физического импланта.
   - type: Sprite
     sprite: _Sunrise/Entities/Objects/Implants/implants.rsi
     state: reviver_implant
   - type: Item
     size: Tiny
-  # Sunrsie-End
+  # Sunrise added end
 
 #Fun implants
 
@@ -24,7 +25,7 @@
   id: SadTromboneImplant
   name: sad trombone implant
   description: This implant plays a sad tune when the user dies.
-  #categories: [ HideSpawnMenu ] Sunrsie-Edit
+  # categories: [ HideSpawnMenu ] # Sunrise-Edit - имплант доступен в меню спавна.
   components:
   - type: SubdermalImplant
     whitelist:
@@ -44,7 +45,7 @@
   id: LightImplant
   name: light implant
   description: This implant emits light from the user's skin on activation.
-  #categories: [ HideSpawnMenu ]  Sunrsie-Edit
+  # categories: [ HideSpawnMenu ] # Sunrise-Edit - имплант доступен в меню спавна.
   components:
   - type: SubdermalImplant
     implantAction: ActionToggleLight
@@ -52,12 +53,15 @@
     enabled: false
     radius: 2.5
     softness: 5
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
+  # Sunrise added start - сохраняем совместимость с системами фонариков.
   - type: Tag
     tags:
     - SubdermalImplant
+    - HideContextMenu
     - Flashlight
+  # Sunrise added end
   - type: UnpoweredFlashlight
 
 - type: entity
@@ -65,7 +69,7 @@
   id: BikeHornImplant
   name: bike horn implant
   description: This implant lets the user honk anywhere at any time.
-  #categories: [ HideSpawnMenu ]  Sunrsie-Edit
+  # categories: [ HideSpawnMenu ] # Sunrise-Edit - имплант доступен в меню спавна.
   components:
   - type: SubdermalImplant
     implantAction: ActionActivateHonkImplant
@@ -76,10 +80,13 @@
       collection: BikeHorn
       params:
         variation: 0.125
+  # Sunrise added start - имплант учитывается механиками велосипедного гудка.
   - type: Tag
     tags:
+    - SubdermalImplant
+    - HideContextMenu
     - BikeHorn
-    - SubdermalImplant # Sunrise Edit
+  # Sunrise added end
 
 #Security implants
 
@@ -87,8 +94,8 @@
   parent: BaseSubdermalImplant
   id: TrackingImplant
   name: tracking implant
-  description: This implant has a tracking device attached to the suit sensor network, as well as a condition monitor for the Security radio channel.
-  #categories: [ HideSpawnMenu ]  Sunrsie-Edit
+  description: This implant has a tracking device attached to the suit sensor network.
+  # categories: [ HideSpawnMenu ] # Sunrise-Edit - имплант доступен в меню спавна.
   components:
     - type: SubdermalImplant
       whitelist:
@@ -106,33 +113,6 @@
     - type: WirelessNetworkConnection
       range: 500
 
-#ERT implants Sunrise-start
-#- type: entity
-#  parent: [ BaseSubdermalImplant, StorePresetUplink ]
-#  id: UplinkImplantErt
-#  name: uplink implant
-#  description: This implant lets the user access a hidden Syndicate uplink at will.
-#  categories: [ HideSpawnMenu ]  Sunrsie-Edit
-#  components:
-#  - type: SubdermalImplant
-#    implantAction: ActionOpenUplinkImplantErt
-#    whitelist:
-#      components:
-#      - Hands
-#  - type: Store
-#    balance:
-#    Bluecrystal: 0
-#    Crystallite: 0
-#  - type: UserInterface
-#    interfaces:
-#      enum.StoreUiKey.Key:
-#        type: StoreBoundUserInterface
-#  - type: Tag
-#    tags:
-#    - NTUplink
-#    - SubdermalImplant
-#Sunrise-end
-
 #Traitor implants
 
 - type: entity
@@ -140,7 +120,7 @@
   id: StorageImplant
   name: storage implant
   description: This implant grants hidden storage within a person's body using bluespace technology.
-  #categories: [ HideSpawnMenu ]  Sunrsie-Edit
+  # categories: [ HideSpawnMenu ] # Sunrise-Edit - имплант доступен в меню спавна.
   components:
     - type: StorageImplant
     - type: SubdermalImplant
@@ -148,7 +128,7 @@
       whitelist:
         components:
         - Hands # no use giving a mouse a storage implant, but a monkey is another story...
-      dropContainerItemsIfGib: true
+      dropContainerItemsIfGib: true # Sunrise-Edit - содержимое не теряется при гибе владельца.
     - type: Storage
       grid:
       - 0,0,0,1
@@ -159,7 +139,7 @@
       containers:
         storagebase: !type:Container
           ents: [ ]
-    - type: Item
+    - type: Item # Sunrise-Edit - размер нужен физическому варианту импланта.
       size: Normal
     - type: UserInterface
       interfaces:
@@ -171,7 +151,7 @@
   id: FreedomImplant
   name: freedom implant
   description: This implant lets the user break out of hand restraints up to three times before ceasing to function anymore.
-  #categories: [ HideSpawnMenu ]  Sunrsie-Edit
+  # categories: [ HideSpawnMenu ] # Sunrise-Edit - имплант доступен в меню спавна.
   components:
   - type: SubdermalImplant
     implantAction: ActionActivateFreedomImplant
@@ -181,7 +161,7 @@
   - type: TriggerOnActivateImplant
   - type: UncuffOnTrigger
     targetUser: true
-  - type: UnsnareOnTrigger # Sunrise-Edit
+  - type: UnsnareOnTrigger # Sunrise-Edit - имплант также освобождает от бол и сетей.
     targetUser: true
 
 - type: entity
@@ -201,7 +181,7 @@
   id: UplinkImplant
   name: uplink implant
   description: This implant lets the user access a hidden Syndicate uplink at will.
-  #categories: [ HideSpawnMenu ]  Sunrsie-Edit
+  # categories: [ HideSpawnMenu ] # Sunrise-Edit - имплант доступен в меню спавна.
   components:
   - type: SubdermalImplant
     implantAction: ActionOpenUplinkImplant
@@ -213,19 +193,20 @@
     interfaces:
       enum.StoreUiKey.Key:
         type: StoreBoundUserInterface
-#Sunrise-start
+  # Sunrise added start - тег используется ограничениями и каталогами аплинков.
   - type: Tag
     tags:
-    - SyndieAgentUplink
     - SubdermalImplant
-#Sunrise-end
+    - HideContextMenu
+    - SyndieAgentUplink
+  # Sunrise added end
 
 - type: entity
   parent: BaseSubdermalImplant
   id: EmpImplant
   name: EMP implant
   description: This implant creates an electromagnetic pulse when activated.
-  #categories: [ HideSpawnMenu ]  Sunrsie-Edit
+  # categories: [ HideSpawnMenu ] # Sunrise-Edit - имплант доступен в меню спавна.
   components:
   - type: SubdermalImplant
     implantAction: ActionActivateEmpImplant
@@ -240,7 +221,7 @@
   id: ScramImplant
   name: scram implant
   description: This implant randomly teleports the user within a large radius when activated.
-  #categories: [ HideSpawnMenu ]  Sunrsie-Edit
+  # categories: [ HideSpawnMenu ] # Sunrise-Edit - имплант доступен в меню спавна.
   components:
   - type: SubdermalImplant
     implantAction: ActionActivateScramImplant
@@ -253,7 +234,7 @@
   id: DnaScramblerImplant
   name: DNA scrambler implant
   description: This implant lets the user randomly change their appearance and name once.
-  #categories: [ HideSpawnMenu ]  Sunrsie-Edit
+  # categories: [ HideSpawnMenu ] # Sunrise-Edit - имплант доступен в меню спавна.
   components:
   - type: SubdermalImplant
     implantAction: ActionActivateDnaScramblerImplant
@@ -298,9 +279,6 @@
     interfaces:
       enum.VoiceMaskUIKey.Key:
         type: VoiceMaskBoundUserInterface
-  - type: Tag
-    tags:
-    - SubdermalImplant
 
 #Nuclear Operative/Special Exclusive implants
 
@@ -309,10 +287,10 @@
   id: MicroBombImplant
   name: micro-bomb implant
   description: This implant detonates the user upon activation or upon death.
-  #categories: [ HideSpawnMenu ]  Sunrsie-Edit
+  # categories: [ HideSpawnMenu ] # Sunrise-Edit - имплант доступен в меню спавна.
   components:
   - type: SubdermalImplant
-    #permanent: true Sunrsie-Edit
+    permanent: false # Sunrise-Edit - взрывной имплант можно удалить хирургически.
     implantAction: ActionActivateMicroBomb
   - type: TriggerOnMobstateChange
     mobState:
@@ -340,10 +318,10 @@
   id: MacroBombImplant
   name: macro-bomb implant
   description: This implant creates a large explosion on death after a preprogrammed countdown.
-  #categories: [ HideSpawnMenu ] Sunrsie-Edit
+  # categories: [ HideSpawnMenu ] # Sunrise-Edit - имплант доступен в меню спавна.
   components:
     - type: SubdermalImplant
-      #permanent: true Sunrsie-Edit
+      permanent: false # Sunrise-Edit - взрывной имплант можно удалить хирургически.
     - type: ReplacementImplant
       whitelist:
         tags:
@@ -372,20 +350,16 @@
       intensitySlope: 15
       maxIntensity: 70
       canCreateVacuum: true
-    - type: Tag
-      tags:
-      - SubdermalImplant
-      - HideContextMenu
 
 - type: entity
   parent: BaseSubdermalImplant
   id: DeathAcidifierImplant
   name: death-acidifier implant
   description: This implant melts the user and their equipment upon death.
-  #categories: [ HideSpawnMenu ] Sunrsie-Edit
+  # categories: [ HideSpawnMenu ] # Sunrise-Edit - имплант доступен в меню спавна.
   components:
   - type: SubdermalImplant
-    #permanent: true Sunrsie-Edit
+    permanent: false # Sunrise-Edit - кислотный имплант можно удалить хирургически.
     implantAction: ActionActivateDeathAcidifier
   - type: TriggerOnMobstateChange
     mobState:
@@ -397,20 +371,16 @@
   - type: SpawnOnTrigger
     proto: Acidifier
     predicted: true
-  - type: Tag
-    tags:
-    - SubdermalImplant
-    - HideContextMenu
 
 - type: entity
   parent: BaseSubdermalImplant
   id: DeathRattleImplant
   name: death rattle implant
   description: This implant will inform the Syndicate radio channel should the user fall into critical condition or die.
-  #categories: [ HideSpawnMenu ] Sunrsie-Edit
+  # categories: [ HideSpawnMenu ] # Sunrise-Edit - имплант доступен в меню спавна.
   components:
     - type: SubdermalImplant
-      #permanent: true Sunrsie-Edit
+      permanent: false # Sunrise-Edit - сигнальный имплант можно удалить хирургически.
       whitelist:
         components:
         - MobState # admeme implanting a chair with rattle implant needs to give the chair mobstate so it can die first
@@ -430,9 +400,7 @@
   components:
   - type: SubdermalImplant
     implantAction: FakeMindShieldToggleAction
-    implantComponents:
-    - type: FakeMindShield # TODO: put the component on the implant and use implant relay events for the status icon
-  - type: FakeMindShieldImplant
+  - type: FakeMindShield
 
 # Sec and Command implants
 
@@ -441,13 +409,11 @@
   id: MindShieldImplant
   name: mindshield implant
   description: This implant will ensure loyalty to Nanotrasen and prevent mind control devices.
-  #categories: [ HideSpawnMenu ] Sunrsie-Edit
+  # categories: [ HideSpawnMenu ] # Sunrise-Edit - имплант доступен в меню спавна.
   components:
    - type: SubdermalImplant
    - type: MindShieldImplant
-   - type: Tag
-     tags:
-       - SubdermalImplant
+   - type: MindShield
 
 # Centcomm implants
 
@@ -462,16 +428,6 @@
   - type: RadioImplant
     radioChannels:
     - CentCom
-
-- type: entity
-  parent: DeathRattleImplant
-  id: DeathRattleImplantBlueShield
-  name: blue shield death rattle implant
-  description: This implant will inform the Centcomm radio channel should the user fall into critical condition or die.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: RattleOnTrigger
-    radioChannel: BlueShield
 
 - type: entity
   parent: DeathRattleImplant

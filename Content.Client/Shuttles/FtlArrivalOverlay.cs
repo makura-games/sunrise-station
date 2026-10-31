@@ -81,7 +81,7 @@ public sealed partial class FtlArrivalOverlay : Overlay
 
             var localAABB = rotatedInvMatrix.TransformBox(args.WorldBounds);
 
-            var tilesEnumerator = _maps.GetLocalTilesEnumerator(grid, mapGrid, localAABB);
+            var tilesEnumerator = _maps.GetLocalTilesIntersecting(grid, mapGrid, localAABB);
 
             while (tilesEnumerator.MoveNext(out var tile))
             {

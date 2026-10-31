@@ -28,3 +28,5 @@ forensics-cleaning-cannot-clean = Ничего нельзя счистить с 
 forensic-pad-gloves = { CAPITALIZE($target) } носит перчатки.
 forensic-pad-fingerprint-name = владелец отпечатков: { $entity }
 forensic-pad-gloves-name = источник волокон: { $entity }
+forensics-cleaning-user = Вы начинаете смывать улики с { THE($target) }...
+forensics-cleaning-others = { CAPITALIZE($user) } начинает смывать улики с { THE($target) }.

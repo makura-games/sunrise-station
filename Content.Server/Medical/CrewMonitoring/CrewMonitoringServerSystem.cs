@@ -1,16 +1,14 @@
 using Content.Server.DeviceNetwork.Systems;
-using Content.Server.Medical.SuitSensors;
-using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
-using Content.Shared.Medical.SuitSensor;
 using Robust.Shared.Timing;
 using Content.Shared.DeviceNetwork.Components;
+using Content.Shared.Medical.CrewMonitoring;
+using Content.Shared.Medical.SuitSensors;
 
 namespace Content.Server.Medical.CrewMonitoring;
 
 public sealed partial class CrewMonitoringServerSystem : EntitySystem
 {
-    [Dependency] private SuitSensorSystem _sensors = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
     [Dependency] private SingletonDeviceNetServerSystem _singletonServerSystem = default!;
@@ -22,7 +20,6 @@ public sealed partial class CrewMonitoringServerSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<CrewMonitoringServerComponent, ComponentRemove>(OnRemove);
-        SubscribeLocalEvent<CrewMonitoringServerComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
         SubscribeLocalEvent<CrewMonitoringServerComponent, DeviceNetServerDisconnectedEvent>(OnDisconnected);
     }
 
@@ -51,20 +48,15 @@ public sealed partial class CrewMonitoringServerSystem : EntitySystem
     /// <summary>
     /// Adds or updates a sensor status entry if the received package is a sensor status update
     /// </summary>
-    private void OnPacketReceived(EntityUid uid, CrewMonitoringServerComponent component, DeviceNetworkPacketEvent args)
+    [SubscribeLocalEvent]
+    private void OnSensorStatus(Entity<CrewMonitoringServerComponent> ent, ref DeviceNetworkPacketEvent<SuitSensorStatusPayload> args)
     {
-        var sensorStatus = _sensors.PacketToSuitSensor(args.Data);
-        if (sensorStatus == null)
+        var sensorData = args.Data.Data;
+        if (sensorData.MapId != Transform(ent.Owner).MapID)
             return;
 
-        var serverTransform = Transform(uid);
-        var serverMapId = serverTransform.MapID;
-
-        if (sensorStatus.MapId != serverMapId)
-            return;
-
-        sensorStatus.Timestamp = _gameTiming.CurTime;
-        component.SensorStatus[args.SenderAddress] = sensorStatus;
+        sensorData.Timestamp = _gameTiming.CurTime;
+        ent.Comp.SensorStatus[args.SenderAddress] = sensorData;
     }
 
     /// <summary>
@@ -99,17 +91,13 @@ public sealed partial class CrewMonitoringServerSystem : EntitySystem
         if (!Resolve(uid, ref serverComponent, ref device))
             return;
 
-        var serverTransform = Transform(uid);
-        var serverMapId = serverTransform.MapID;
-
-        var payload = new NetworkPayload()
+        var payload = new BroadcastSuitSensorStatePayload
         {
-            [DeviceNetworkConstants.Command] = DeviceNetworkConstants.CmdUpdatedState,
-            [SuitSensorConstants.NET_STATUS_COLLECTION] = serverComponent.SensorStatus,
-            [SuitSensorConstants.MAP_ID] = serverMapId,
+            SensorStatus = serverComponent.SensorStatus,
+            MapId = Transform(uid).MapID,
         };
 
-        _deviceNetworkSystem.QueuePacket(uid, null, payload, device: device);
+        _deviceNetworkSystem.SendPacket((uid, device), null, ref payload);
     }
 
     /// <summary>

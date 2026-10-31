@@ -25,96 +25,6 @@
     selectedBorgType: clown
 
 - type: entity
-  id: BorgChassisSyndicateReaper
-  parent: BaseBorgChassisSyndicate
-  name: syndicate reaper cyborg
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Mobs/Silicon/chassis.rsi # Sunrise Resprite
-    layers:
-    - state: syndi_reaper
-    - state: syndi_reaper_e_r
-      map: ["enum.BorgVisualLayers.Light"]
-      shader: unshaded
-      visible: false
-    - state: syndi_reaper_l
-      shader: unshaded
-      map: ["light"]
-      visible: false
-    - map: ["jumpsuit"]
-    - map: [ "belt" ]
-    - map: [ "id" ]
-    - map: [ "neck" ]
-    - map: [ "back" ]
-    - map: [ "head" ]
-    - map: [ "pocket1" ]
-    - map: [ "pocket2" ]
-  - type: BorgChassis
-    maxModules: 4
-    moduleWhitelist:
-      tags:
-      - BorgModuleGeneric
-      - BorgModuleSecurity
-      - BorgModuleSyndicate
-    hasMindState: syndi_reaper_e
-    noMindState: syndi_reaper_e_r
-  - type: IntrinsicRadioTransmitter
-    channels:
-    - Syndicate
-    - Binary
-  - type: ActiveRadio
-    channels:
-    - Syndicate
-    - Binary
-  - type: TTS
-    voice: Sentrybot
-  - type: MobState
-    allowedStates:
-    - Alive
-    - Critical
-    - Dead
-  - type: NameIdentifier
-    group: SyndieReaperRobot
-  - type: DamageStateVisuals
-    states:
-      Alive:
-        Base: syndi_reaper
-      Critical:
-        Base: syndi_reaper_critical
-      Dead:
-        Base: syndi_reaper_dead
-  - type: PointLight
-    color: "#dd200b"
-    radius: 6
-    energy: 3
-  - type: Inventory
-    templateId: reaper
-  - type: InventorySlots
-  - type: Body
-  - type: Hands
-    showInHands: true
-  - type: Loadout
-    prototypes: [SyndiReaperHardsuitGear]
-  - type: FootstepModifier
-    footstepSoundCollection:
-      collection: Footstep2CyborgLegs
-      params:
-        volume: -15
-  - type: Vocal
-    sounds:
-      Unsexed: Reaper
-  - type: RandomMetadata
-    nameSegments: [NamesBorg]
-  - type: InnateItem
-    entityTargetActions:
-    - AccessBreaker
-
-- type: startingGear
-  id: SyndiReaperHardsuitGear
-  equipment:
-    belt: ClothingBeltReaperWebbing
-
-- type: entity
   id: BorgChassisERT
   parent: BaseBorgChassisNT
   name: ERT combat cyborg
@@ -213,7 +123,9 @@
       300: Dead
   - type: PowerCellDraw # Use it to increase battery life further
     drawRate: 0.5
-  - type: ToggleableNightVision
+  - type: NightVision
+    enabled: false
+    action: ActionToggleNightVision
 
 - type: entity
   id: BorgChassisSyndicateHeavy
@@ -457,55 +369,6 @@
   - type: MovementSpeedModifier
     baseWalkSpeed : 2.5
     baseSprintSpeed : 4.5
-  - type: InnateItem
-    entityTargetActions:
-    - AccessBreaker
-  - type: Construction
-    node: derelictcyborg
-
-- type: entity
-  parent: BaseBorgChassisSyndicateDerelict
-  id: SyndicateReaperBorgChassisDerelictSunrise
-  name: derelict syndicate reaper cyborg
-  description: A stealthy infiltration unit designed for sabotage and assassination. This one has seen better days.
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Mobs/Silicon/chassis.rsi
-    layers:
-    - state: syndi_reaper
-    - state: syndi_reaper_e_r
-      map: ["enum.BorgVisualLayers.Light"]
-      shader: unshaded
-      visible: false
-    - state: syndi_reaper_l
-      shader: unshaded
-      map: ["light"]
-      visible: false
-  - type: BorgTransponder
-    sprite:
-      sprite: _Sunrise/Mobs/Silicon/chassis.rsi
-      state: syndi_reaper
-    name: derelict syndicate reaper cyborg
-  - type: BorgChassis
-    maxModules: 4
-    moduleWhitelist:
-      tags:
-      - BorgModuleGeneric
-      - BorgModuleSecurity
-      - BorgModuleSyndicate
-    hasMindState: syndi_reaper_e
-    noMindState: syndi_reaper_e_r
-  - type: IntrinsicRadioTransmitter
-    channels:
-    - Common
-    - Binary
-  - type: ActiveRadio
-    channels:
-    - Common
-    - Binary
-  - type: MovementSpeedModifier
-    baseWalkSpeed : 3
-    baseSprintSpeed : 5
   - type: InnateItem
     entityTargetActions:
     - AccessBreaker

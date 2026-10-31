@@ -4,7 +4,7 @@ meta:
   engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 09/17/2026 21:58:42
+  time: 10/14/2026 15:37:12
   entityCount: 266
 maps: []
 grids:
@@ -1687,6 +1687,11 @@ entities:
       parent: 1
 - proto: WallPlastitanium
   entities:
+  - uid: 187
+    components:
+    - type: Transform
+      pos: 3.5,-2.5
+      parent: 1
   - uid: 192
     components:
     - type: Transform
@@ -1769,6 +1774,16 @@ entities:
     - type: Transform
       pos: 1.5,8.5
       parent: 1
+  - uid: 208
+    components:
+    - type: Transform
+      pos: -2.5,-2.5
+      parent: 1
+  - uid: 209
+    components:
+    - type: Transform
+      pos: 3.5,1.5
+      parent: 1
   - uid: 211
     components:
     - type: Transform
@@ -1816,6 +1831,11 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -3.5,-2.5
+      parent: 1
+  - uid: 220
+    components:
+    - type: Transform
+      pos: -2.5,1.5
       parent: 1
   - uid: 221
     components:
@@ -1877,6 +1897,41 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -2.5,4.5
+      parent: 1
+  - uid: 232
+    components:
+    - type: Transform
+      pos: -1.5,-2.5
+      parent: 1
+  - uid: 233
+    components:
+    - type: Transform
+      pos: 2.5,-2.5
+      parent: 1
+  - uid: 234
+    components:
+    - type: Transform
+      pos: 0.5,-2.5
+      parent: 1
+  - uid: 235
+    components:
+    - type: Transform
+      pos: 3.5,0.5
+      parent: 1
+  - uid: 236
+    components:
+    - type: Transform
+      pos: 3.5,-1.5
+      parent: 1
+  - uid: 237
+    components:
+    - type: Transform
+      pos: -2.5,-1.5
+      parent: 1
+  - uid: 238
+    components:
+    - type: Transform
+      pos: -2.5,0.5
       parent: 1
   - uid: 240
     components:
@@ -1993,63 +2048,6 @@ entities:
     components:
     - type: Transform
       pos: -0.5,9.5
-      parent: 1
-- proto: WallReinforced
-  entities:
-  - uid: 187
-    components:
-    - type: Transform
-      pos: 3.5,-2.5
-      parent: 1
-  - uid: 208
-    components:
-    - type: Transform
-      pos: -2.5,-2.5
-      parent: 1
-  - uid: 209
-    components:
-    - type: Transform
-      pos: 3.5,1.5
-      parent: 1
-  - uid: 220
-    components:
-    - type: Transform
-      pos: -2.5,1.5
-      parent: 1
-  - uid: 232
-    components:
-    - type: Transform
-      pos: -1.5,-2.5
-      parent: 1
-  - uid: 233
-    components:
-    - type: Transform
-      pos: 2.5,-2.5
-      parent: 1
-  - uid: 234
-    components:
-    - type: Transform
-      pos: 0.5,-2.5
-      parent: 1
-  - uid: 235
-    components:
-    - type: Transform
-      pos: 3.5,0.5
-      parent: 1
-  - uid: 236
-    components:
-    - type: Transform
-      pos: 3.5,-1.5
-      parent: 1
-  - uid: 237
-    components:
-    - type: Transform
-      pos: -2.5,-1.5
-      parent: 1
-  - uid: 238
-    components:
-    - type: Transform
-      pos: -2.5,0.5
       parent: 1
 - proto: WeaponTurretSyndicate
   entities:

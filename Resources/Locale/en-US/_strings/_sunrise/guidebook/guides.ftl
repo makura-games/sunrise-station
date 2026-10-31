@@ -1,4 +1,3 @@
-guide-entry-disease = Разумная болезнь
 guide-entry-expeditions = Экспедиции
 guide-entry-expedition-pirates = Пираты
 guide-entry-expedition-soviets = Коммунисты

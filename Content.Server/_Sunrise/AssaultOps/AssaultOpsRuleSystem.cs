@@ -7,6 +7,7 @@ using Content.Server.Revolutionary.Components;
 using Content.Server.Explosion.EntitySystems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
 using Content.Server.Station.Components;
 using Content.Server.Store.Systems;
 using Content.Server.Traitor.Uplink;
@@ -42,15 +43,10 @@ public sealed partial class AssaultOpsRuleSystem : GameRuleSystem<AssaultOpsRule
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private ExplosionSystem _explosions = default!;
     [Dependency] private SharedTransformSystem _transformSystem = default!;
+    private static readonly ProtoId<TagPrototype> UplinkTagPrototype = "AssaultOpsUplink";
+    private static readonly ProtoId<AntagPrototype> CommanderAntagProto = "AssaultCommander";
 
-    [ValidatePrototypeId<TagPrototype>]
-    private const string UplinkTagPrototype = "AssaultOpsUplink";
-
-    [ValidatePrototypeId<AntagPrototype>]
-    private const string CommanderAntagProto = "AssaultCommander";
-
-    [ValidatePrototypeId<CurrencyPrototype>]
-    private const string TelecrystalCurrencyPrototype = "Telecrystal";
+    private static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
 
     public override void Initialize()
     {
@@ -122,7 +118,7 @@ public sealed partial class AssaultOpsRuleSystem : GameRuleSystem<AssaultOpsRule
                 ("station", target),
                 ("name", Name(ent))),
             Color.Red,
-            ent.Comp.GreetSoundNotification);
+            ent.Comp.GreetingSound);
 
         ent.Comp.RoundstartOperatives += 1;
 
@@ -134,20 +130,26 @@ public sealed partial class AssaultOpsRuleSystem : GameRuleSystem<AssaultOpsRule
             if (uplink == null)
                 return;
 
-            var totalTc = ent.Comp.TCAmountPerOperative * ent.Comp.RoundstartOperatives;
+            var totalTc = ent.Comp.TcAmountPerOperative * ent.Comp.RoundstartOperatives;
             var store = EnsureComp<StoreComponent>(uplink.Value);
             _store.TryAddCurrency(
-                new Dictionary<string, FixedPoint2> { { TelecrystalCurrencyPrototype, totalTc } },
+                new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>
+                {
+                    { TelecrystalCurrencyPrototype, totalTc },
+                },
                 uplink.Value,
                 store);
         }
 
         else if (ent.Comp.UplinkEnt != null)
         {
-            var giveTcCount = ent.Comp.TCAmountPerOperative;
+            var giveTcCount = ent.Comp.TcAmountPerOperative;
             var store = EnsureComp<StoreComponent>(ent.Comp.UplinkEnt.Value);
             _store.TryAddCurrency(
-                new Dictionary<string, FixedPoint2> { { TelecrystalCurrencyPrototype, giveTcCount } },
+                new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>
+                {
+                    { TelecrystalCurrencyPrototype, giveTcCount },
+                },
                 ent.Comp.UplinkEnt.Value,
                 store);
         }
@@ -185,7 +187,7 @@ public sealed partial class AssaultOpsRuleSystem : GameRuleSystem<AssaultOpsRule
         }
     }
 
-    private bool InsertKey(EntityUid uid, string icarusKeyImplant)
+    private bool InsertKey(EntityUid uid, EntProtoId icarusKeyImplant)
     {
         var ownedCoords = Transform(uid).Coordinates;
         var implant = Spawn(icarusKeyImplant, ownedCoords);

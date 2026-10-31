@@ -1,6 +1,4 @@
 using System.Linq;
-using Content.Server.Body.Components;
-using Content.Server.Body.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Robust.Shared.Timing;
@@ -12,6 +10,7 @@ using Content.Shared.Body.Components;
 using Robust.Shared.Player;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Damage.Components;
+using Content.Shared.Body.Systems;
 
 namespace Content.Server._Starlight.Actions.Stasis;
 
@@ -25,7 +24,7 @@ public sealed partial class StasisSystem : SharedStasisSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<StasisComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<StasisComponent, DamageDealtEvent>(OnDamageModify);
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
     }
 
@@ -138,41 +137,22 @@ public sealed partial class StasisSystem : SharedStasisSystem
         }
     }
 
-    private void OnDamageChanged(EntityUid uid, StasisComponent component, DamageChangedEvent args)
+    private void OnDamageModify(Entity<StasisComponent> ent, ref DamageDealtEvent args)
     {
-        // If the entity has a mob state component, and the damage changed event is not healing, apply the resistance.
-        if (TryComp<MobStateComponent>(uid, out var mobState))
+        if (!ent.Comp.IsInStasis || args.Damage.GetTotal() <= 0)
+            return;
+
+        if (!TryComp<MobStateComponent>(ent, out var mobState))
+            return;
+
+        var healingValues = GetHealingValues(mobState.CurrentState, ent.Comp);
+        var resistance = Math.Clamp(healingValues.AdditionalDamageResistance, 0f, 1f);
+
+        foreach (var (type, amount) in args.Damage.DamageDict.ToArray())
         {
-            var currentState = mobState.CurrentState;
-            var healingValues = GetHealingValues(currentState, component);
-            ApplyResistance(uid, args, component, healingValues);
+            if (amount > 0)
+                args.Damage.DamageDict[type] = amount * (1f - resistance);
         }
-    }
-
-    private void ApplyResistance(EntityUid uid, DamageChangedEvent args, StasisComponent comp,
-        StasisHealingValues healingValues)
-    {
-        // Skip if this is healing or if the damage change is from our own healing
-        if (!args.DamageIncreased || args.DamageDelta == null || args.Origin == uid)
-            return;
-
-        // Only apply resistance if in stasis
-        if (!comp.IsInStasis)
-            return;
-
-        // Skip if this damage was already modified by stasis
-        if (args.Origin == uid && args.DamageDelta.DamageDict.All(x => x.Value < 0))
-            return;
-
-        // Create new DamageSpecifier with reduced damage
-        var damageToApply = new DamageSpecifier();
-        foreach (var (type, amount) in args.DamageDelta.DamageDict)
-        {
-            damageToApply.DamageDict.Add(type, amount - amount * healingValues.AdditionalDamageResistance);
-        }
-
-        // Apply the reduced damage
-        _damageableSystem.TryChangeDamage(uid, damageToApply, true, origin: uid);
     }
 
     private void OnStasisUpdate(EntityUid uid, StasisComponent comp, FrameEventArgs args,

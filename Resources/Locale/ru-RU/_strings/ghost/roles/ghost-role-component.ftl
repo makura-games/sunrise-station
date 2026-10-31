@@ -197,8 +197,6 @@ ghost-role-information-derelict-mining-cyborg-name = Брошенный шахт
 ghost-role-information-derelict-mining-cyborg-description = Вы - шахтерский киборг, который заблудился в космосе. После долгих лет воздействия ионных бурь вы оказываетесь рядом с космической станцией.
 ghost-role-information-derelict-syndicate-assault-cyborg-name = Брошенный штурмовой киборг Синдиката
 ghost-role-information-derelict-syndicate-assault-cyborg-description = Вы - ранняя модель штурмового киборга Синдиката, которая заблудилась в космосе. После долгих лет воздействия ионных бурь вы оказываетесь рядом с космической станцией.
-ghost-role-information-derelict-syndicate-reaper-cyborg-name = Брошенный киборг-жнец Синдиката
-ghost-role-information-derelict-syndicate-reaper-cyborg-description = Вы - брошенный киборг-жнец Синдиката, который заблудился в космосе. После долгих лет воздействия ионных бурь вы оказываетесь рядом с космической станцией.
 ghost-role-information-derelict-syndicate-saboteur-cyborg-name = Брошенный саботажный киборг Синдиката
 ghost-role-information-derelict-syndicate-saboteur-cyborg-description = Вы - брошенный саботажный киборг Синдиката, который заблудился в космосе. После долгих лет воздействия ионных бурь вы оказываетесь рядом с космической станцией.
 ghost-role-information-derelict-syndicate-medical-cyborg-name = Брошенный медицинский киборг Синдиката
@@ -317,3 +315,5 @@ ghost-role-information-rules-expedition-soviet-antagonist =
     Вам [color=green][bold]можно[/bold][/color] покинуть экспедицию на шаттле, но [color=red][bold]только[/bold][/color] если [color=orange][bold]утилизаторы[/bold][/color] (живые или мёртвые) находятся на шаттле.
     Помните, что вы как [color=red][bold]NPC-пират[/bold][/color] [bold]ограничены[/bold] временем: через [color=red][bold]20 минут[/bold][/color] вас автоматически переместят в наблюдателя.
     Вы не помните ничего из своей предыдущей жизни и не помните ничего из того, что узнали, будучи призраком.
+ghost-role-information-space-changeling-name = Старший головной слизень
+ghost-role-information-space-changeling-description = Взрослый головной слизень-генокрад, жаждущий ассимилировать членов экипажа и готовый скрываться на станции. Этот головной слизень особенно хрупок и должен найти мёртвое тело, чтобы принять гуманоидный облик.

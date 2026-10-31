@@ -53,3 +53,9 @@ device-net-id-atmos-devices = Атмос-устройства
 device-net-id-reserved = Резерв
 # Unknown
 device-address-unknown = ????-????
+device-address-prefix-camera-monitor = SCM-
+device-address-prefix-crew-monitor = MCM-
+device-address-prefix-camera-router = CMR-
+device-address-prefix-camera-router-wireless = CMW-
+device-address-prefix-camera = CAM-
+device-address-prefix-crew-monitoring-server = CMS-

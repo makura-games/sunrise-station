@@ -8,3 +8,4 @@ comp-gas-filter-ui-needs-anchor = Сначала закрепите его!
 comp-gas-filter-ui-filter-status = Статус:
 comp-gas-filter-ui-status-enabled = Вкл
 comp-gas-filter-ui-status-disabled = Выкл
+comp-gas-filter-filtered-gas-examine = Он фильтрует [color={ $statusColor }]{ $filteredGas }[/color].

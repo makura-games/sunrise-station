@@ -84,9 +84,10 @@
             Musician: [ 1, 1 ]
             #blueshield (1)
             BlueShieldOfficer: [ 1, 1 ]
-            #law (3)
+            #law (5)
             IAA: [ 1, 1 ]
             Lawyer: [ 1, 2 ]
+            NtrOfficer: [1, 2]
             #silicon (2)
             StationAi: [ 1, 1 ]
             Borg: [ 2, 2 ]

@@ -46,4 +46,4 @@
     minPlayers: 30
     cancelPresetOnTooFewPlayers: false
   - type: LoadMapRule
-    gridPath: /Maps/_Sunrise/Shuttles/Antag/mothership.yml # Sunrise-Edit
+    gridPath: /Maps/Shuttles/mothership.yml

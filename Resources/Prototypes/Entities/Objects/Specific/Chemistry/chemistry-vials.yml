@@ -20,6 +20,28 @@
     - Trash
     - CentrifugeCompatible # unique feature of vials
     - Bottle # Sunrise-edit
+  - type: DamageOnLand
+    ignoreResistances: true
+    damage:
+      types:
+        Blunt: 3 # can be thrown once without breaking
+
+- type: entity
+  abstract: true
+  parent: [ BaseItem, DrinkBaseMaterialGlass, DrinkBaseEmptyTrash, DrinkVisualsAll ]
+  id: BaseChemistryAmpoule # like a vial, but you can't open, you have to break it.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Spillable
+    canSpillFromHand: false
+    solution: drink
+  - type: ExaminableSolution
+    exactVolume: true # It's a chemistry tool
+  - type: Tag
+    tags:
+    - Trash
+    - CentrifugeCompatible # unique feature of vials
 
 ## Entities
 
@@ -42,28 +64,16 @@
     price: 100
   - type: Destructible
     thresholds:
-    - trigger: &DamageTrigger100
-        !type:DamageTrigger
-        damage: 100
-      behaviors: &OverkillBehavior
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
-        damage: 15 # stronger than base
+        damage: 5
       behaviors:
-      - &SoundGlassBreak !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-      - !type:SpillBehavior { }
       - !type:SpawnEntitiesBehavior
         spawn:
-          ShardGlass: # less glass than base
+          ShardGlass:
             min: 0
             max: 1
         transferForensics: true
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
 
 - type: entity
   parent: [SolutionVeryTiny, BaseChemistryVial]
@@ -85,18 +95,37 @@
   - type: PhysicalComposition
     materialComposition:
       Glass: 10
+
+- type: entity
+  parent: [SolutionTiny, BaseChemistryAmpoule]
+  id: ChemistryEmptyAmpoule
+  name: ampoule
+  description: Break to open.
+  components:
+  - type: Item
+    sprite: Objects/Specific/Chemistry/ampoule.rsi
+  - type: Sprite
+    sprite: Objects/Specific/Chemistry/ampoule.rsi
+  - type: SolutionContainerVisuals
+    maxFillLevels: 6
+    inHandsMaxFillLevels: 4
+  - type: StaticPrice
+    price: 100
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 10
   - type: Destructible
     thresholds:
-    - trigger: *DamageTrigger100
-      behaviors: *OverkillBehavior
     - trigger:
         !type:DamageTrigger
-        damage: 5 # smaller so weaker
-      behaviors: # remove glass shard spawn
-      - *SoundGlassBreak
-      - !type:SpillBehavior { }
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
+        damage: 5
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlass:
+            min: 0
+            max: 1
+        transferForensics: true
 
 ## Reagent filled
 
@@ -106,7 +135,7 @@
   suffix: vestine
   components:
   - type: Label
-    currentLabel: reagent-name-vestine
+    localizedLabel: reagent-name-vestine
   - type: Solution
     solution:
       reagents:
@@ -122,7 +151,7 @@
   suffix: radium
   components:
   - type: Label
-    currentLabel: reagent-name-radium
+    localizedLabel: reagent-name-radium
   - type: Solution
     solution:
       reagents:
@@ -137,7 +166,7 @@
   suffix: chlorine
   components:
   - type: Label
-    currentLabel: reagent-name-chlorine
+    localizedLabel: reagent-name-chlorine
   - type: Solution
     solution:
       reagents:
@@ -152,11 +181,29 @@
   suffix: plasma
   components:
   - type: Label
-    currentLabel: reagent-name-plasma
+    localizedLabel: reagent-name-plasma
   - type: Solution
     solution:
       reagents:
       - ReagentId: Plasma
         Quantity: 15
+  - type: Tag
+    tags: *TagVial
+
+- type: entity
+  parent: ChemistryEmptyAmpoule
+  id: XenoborgOilChemistryAmpoule
+  suffix: xenoborg oil
+  components:
+  - type: Label
+    localizedLabel: reagent-name-xenoborg-oil
+  - type: ThrowingAngle
+    angle: 90
+    angularVelocity: true
+  - type: Solution
+    solution:
+      reagents:
+        - ReagentId: XenoborgOil
+          Quantity: 30
   - type: Tag
     tags: *TagVial

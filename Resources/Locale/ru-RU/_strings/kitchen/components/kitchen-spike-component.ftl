@@ -23,3 +23,5 @@ comp-kitchen-spike-hooked = [color=red]{ CAPITALIZE($victim) } насажен н
 comp-kitchen-spike-meat-name = { $name } ({ $victim })
 comp-kitchen-spike-victim-examine = [color=orange]{ CAPITALIZE($target) } выглядит довольно постным.[/color]
 comp-kitchen-spike-deconstruct-occupied = Далее, [color=red]отцепите тело[/color].
+comp-kitchen-spike-butcher-empty = { CAPITALIZE(THE($victim)) } больше нечего разделывать!
+comp-kitchen-spike-need-tool-quality = Для разделки { THE($target) } требуется инструмент качества «{ $quality }».

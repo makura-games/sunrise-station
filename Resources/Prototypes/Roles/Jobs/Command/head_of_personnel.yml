@@ -19,12 +19,10 @@
     - !type:DepartmentTimeRequirement
       department: Command
       time: 2.5h
-  weight: 20
   startingGear: HoPGear
   icon: "JobIconHeadOfPersonnel"
   supervisors: job-supervisors-captain
   radioBold: true # Sunrise-Edit
-  displayWeight: 90 # Sunrise-Edit
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-hr-manager

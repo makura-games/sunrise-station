@@ -24,7 +24,6 @@ public sealed partial class EmoteAnimationSystem : EntitySystem
     [Dependency] private SharedGravitySystem _gravity = default!;
     [Dependency] private SharedJumpSystem _jumpSystem = default!;
     [Dependency] private SharedFlipSystem _flipSystem = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private DamageableSystem _damageableSystem = default!;
 
     private static readonly ProtoId<DamageTypePrototype> BluntDamageType = "Blunt";
@@ -75,7 +74,7 @@ public sealed partial class EmoteAnimationSystem : EntitySystem
 
         if (emoteId == "FallOnNeck")
         {
-            var damage = new DamageSpecifier(_prototypeManager.Index(BluntDamageType), 100);
+            var damage = new DamageSpecifier(ProtoMan.Index(BluntDamageType), 100);
             _damageableSystem.ChangeDamage(uid, damage, true, ignoreVariance: true, ignoreGlobalModifiers: true);
         }
 

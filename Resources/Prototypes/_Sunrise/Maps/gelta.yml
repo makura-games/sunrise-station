@@ -70,7 +70,7 @@
             SecurityCadet: [ 2, 4 ] # intern, exclude from dept count
             #supply (9-10)
             Quartermaster: [ 1, 1 ]
-            SalvageSpecialist: [ 3, 2 ]
+            SalvageSpecialist: [ 3, 4 ]
             MiningSpecialist: [ 1, 1 ]
             CargoTechnician: [ 3, 3 ]
             MailCarrier: [ 1, 1 ]

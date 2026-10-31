@@ -8,5 +8,3 @@ ent-BlueprintImplanterExtractor = { ent-TechnologyDiskBlueprint }
     .desc = { ent-TechnologyDiskBlueprint.desc }
 ent-BlueprintProtoAdrenalImplant = proto-adrenal implant blueprint
     .desc = A blueprint with a schematic of a proto-adrenal implant. It can be inserted into a medical techfab.
-ent-BlueprintFishXenoReaper = reaper xenoborg blueprint
-    .desc = A blueprint with a schematic of an empty reaper xenoborg chassis. It can be inserted into the mothership core.

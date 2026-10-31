@@ -55,7 +55,7 @@
           - LowImpassable
   - type: WarpPoint
     follow: true
-    location: Icarus beam
+    location: location-icarus-beam
   - type: RadarBlip
     color: "#ffad2a"
     scale: 5

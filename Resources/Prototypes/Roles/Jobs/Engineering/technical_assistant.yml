@@ -13,7 +13,6 @@
   startingGear: TechnicalAssistantGear
   icon: "JobIconTechnicalAssistant"
   supervisors: job-supervisors-engineering
-  displayWeight: 0 # Sunrise-Edit
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-engineering-intern

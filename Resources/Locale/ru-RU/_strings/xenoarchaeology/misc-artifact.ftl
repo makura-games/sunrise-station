@@ -3,3 +3,4 @@ foam-artifact-popup = Странная пена вытекает из артеф
 shuffle-artifact-popup = Вы чувствуете, как мгновенно телепортируетесь!
 charge-artifact-popup = Вы чувствуете, как воздух наполняется электричеством.
 activate-artifact-popup-self = Вы активируете узел { $node }.
+interact-artifact-more = Ему нужно больше...

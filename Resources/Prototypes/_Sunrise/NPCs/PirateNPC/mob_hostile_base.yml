@@ -3,8 +3,7 @@
   abstract: true
   components:
   - type: Temperature
-    currentTemperature: 310.15
-    specificHeat: 42
+    temperature: 310.15
   - type: TemperatureDamage
     heatDamageThreshold: 2000 # Should prevent mobs from taking damage on planets with extreme heat
     coldDamageThreshold: -250 # Should make mobs immune to cold planets
@@ -351,7 +350,6 @@
       60: 0.5
   - type: Blindable
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatRotten
       amount: 2

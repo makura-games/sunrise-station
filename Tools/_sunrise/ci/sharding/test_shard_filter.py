@@ -121,6 +121,22 @@ def extract_groups(tests, timings, total_shards):
         full_method = key[2]
         method_default = timings["methodCaseSeconds"].get(full_method)
         exact = timings["caseSeconds"]
+
+        # NUnit может убрать аргументы параметризованного кейса из имени в TRX.
+        # Тогда имя метода без аргументов содержит суммарное время метода,
+        # а не длительность одного кейса. Не умножаем это время на все
+        # кейсы, найденные в текущем коммите.
+        aggregate_method_seconds = exact.get(full_method)
+        if (
+            len(cases) > 1
+            and aggregate_method_seconds is not None
+            and not any(test in exact for test in cases)
+        ):
+            case_estimates = [aggregate_method_seconds / len(cases)] * len(cases)
+            estimates[key] = case_estimates
+            total_seconds += aggregate_method_seconds
+            continue
+
         unmeasured_method = method_default is None and not any(test in exact for test in cases)
         if unmeasured_method:
             unmeasured_methods.add(key)

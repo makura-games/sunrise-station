@@ -20,3 +20,10 @@ ent-WallReinforcedShuttle = reinforced shuttle wall
 ent-WallReinforcedShuttleDiagonal = reinforced shuttle wall
     .suffix = Reinforced, diagonal
     .desc = { ent-WallShuttleDiagonal.desc }
+
+ent-WallMiningReinforced = reinforced mining wall
+    .suffix = Reinforced
+    .desc = { ent-WallMining.desc }
+ent-WallMiningDiagonalReinforced = reinforced mining wall
+    .suffix = Reinforced, diagonal
+    .desc = { ent-WallMiningDiagonal.desc }

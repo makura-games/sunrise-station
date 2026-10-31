@@ -10,6 +10,7 @@ using Content.Shared.Examine;
 using Content.Shared.Instruments;
 using Content.Shared.Instruments.UI;
 using Content.Shared.Popups;
+using Content.Shared.UserInterface;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Midi;
@@ -17,6 +18,7 @@ using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 using Robust.Shared.GameStates;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Server.Instruments;
@@ -57,6 +59,7 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
         SubscribeNetworkEvent<InstrumentSetMasterEvent>(OnMidiSetMaster);
         SubscribeNetworkEvent<InstrumentSetFilteredChannelEvent>(OnMidiSetFilteredChannel);
         SubscribeNetworkEvent<InstrumentSetChannelsEvent>(OnMidiSetChannels);
+        SubscribeNetworkEvent<InstrumentSetMidiMinVolumeEvent>(OnMidiSetMinVolume);
 
         Subs.BuiEvents<InstrumentComponent>(InstrumentUiKey.Key, subs =>
         {
@@ -85,7 +88,8 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
             AllowProgramChange = component.AllowProgramChange,
             RespectMidiLimits = component.RespectMidiLimits,
             Master = GetNetEntity(component.Master),
-            FilteredChannels = component.FilteredChannels
+            FilteredChannels = component.FilteredChannels,
+            MinVolume = component.MinVolume,
         };
     }
 
@@ -137,6 +141,17 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
         Clean(uid, instrument);
     }
 
+    private void OnMidiSetMinVolume(InstrumentSetMidiMinVolumeEvent msg, EntitySessionEventArgs args)
+    {
+        var uid = GetEntity(msg.Uid);
+
+        if (!TryComp(uid, out InstrumentComponent? instrument))
+            return;
+
+        instrument.MinVolume = msg.MinVolume;
+
+        Dirty(uid, instrument);
+    }
 
     private void OnMidiSetChannels(InstrumentSetChannelsEvent msg, EntitySessionEventArgs args)
     {
@@ -264,6 +279,23 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
         _bandRequestQueue.Add(args);
     }
 
+    /// <summary>
+    /// Returns the entity currently playing this instrument.
+    /// </summary>
+    public EntityUid? GetInstrumentPlayer(EntityUid uid)
+    {
+        if (TryComp<ActivatableUIComponent>(uid, out var activatable)
+            && activatable.CurrentSingleUser is { } user)
+        {
+            return user;
+        }
+
+        if (TryComp<ActorComponent>(uid, out var actor))
+            return actor.PlayerSession.AttachedEntity;
+
+        return null;
+    }
+
     public (NetEntity, string)[] GetBands(EntityUid uid)
     {
         if (Deleted(uid))
@@ -271,8 +303,8 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
 
         var list = new ValueList<(NetEntity, string)>();
 
-        if (!TryComp(uid, out InstrumentComponent? originInstrument)
-            || originInstrument.InstrumentPlayer is not {} originPlayer)
+        if (!TryComp(uid, out InstrumentComponent? _)
+            || GetInstrumentPlayer(uid) is not { } originPlayer)
             return Array.Empty<(NetEntity, string)>();
 
         // It's probably faster to get all possible active instruments than all entities in range
@@ -287,7 +319,7 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
                 continue;
 
             // We want to use the instrument player's name.
-            if (instrument.InstrumentPlayer is not {} playerUid)
+            if (GetInstrumentPlayer(entity) is not { } playerUid)
                 continue;
 
             // Maybe a bit expensive but oh well GetBands is queued and has a timer anyway.
@@ -432,7 +464,7 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
 
             if (instrument.RespectMidiLimits && instrument.BatchesDropped >= MaxMidiBatchesDropped)
             {
-                if (instrument.InstrumentPlayer is {Valid: true} mob)
+                if (GetInstrumentPlayer(uid) is { Valid: true } mob)
                 {
                     _stuns.TryUpdateParalyzeDuration(mob, TimeSpan.FromSeconds(1));
 

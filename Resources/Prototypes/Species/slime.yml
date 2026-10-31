@@ -8,6 +8,13 @@
   defaultSkinTone: "#b8b8b8"
   dollPrototype: AppearanceSlimePerson
   skinColoration: Hues
+  defaultSoundsBySex:
+  - MaleSlime
+  - FemaleSlime
+  - MaleSlime
+  voices:
+  - MaleSlime
+  - FemaleSlime
   buttScan: # Sunrise edit
     sprite: /Textures/_Sunrise/CopyMachine/butts_scans.rsi
     state: human

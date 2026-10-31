@@ -16,7 +16,7 @@ public sealed partial class JumpSystem : SharedJumpSystem
 {
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
 
     private TimeSpan _lastJumpTime;
     private static TimeSpan _jumpCooldown;
@@ -38,15 +38,11 @@ public sealed partial class JumpSystem : SharedJumpSystem
         _netManager.Connected += OnConnected;
     }
 
-    private async void OnConnected(object? sender, NetChannelArgs e)
-    {
-        RaiseNetworkEvent(new ClientOptionDisableJumpSoundEvent(_jumpSoundDisabled));
-    }
-
     public override void Shutdown()
     {
         base.Shutdown();
         _cfg.UnsubValueChanged(SunriseCCVars.JumpSoundDisable, OnJumpSoundEnabledOptionChanged);
+        _netManager.Connected -= OnConnected;
     }
 
     private static void OnJumpCooldownChanged(float value)
@@ -74,5 +70,10 @@ public sealed partial class JumpSystem : SharedJumpSystem
 
         _lastJumpTime = currentTime;
         RaisePredictiveEvent(new PlayEmoteMessage(EmoteJumpProto));
+    }
+
+    private void OnConnected(object? sender, NetChannelArgs args)
+    {
+        RaiseNetworkEvent(new ClientOptionDisableJumpSoundEvent(_jumpSoundDisabled));
     }
 }
