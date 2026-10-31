@@ -10,6 +10,7 @@ using Content.Shared.Administration;
 using Content.Shared.Database;
 using Content.Shared.Players.RateLimiting;
 using Content.Sunrise.Interfaces.Shared;
+using Content.Server._Sunrise.PlayerCache;
 using JetBrains.Annotations;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -21,7 +22,7 @@ using Robust.Shared.Utility;
 namespace Content.Server._Sunrise.MentorHelp
 {
     /// <summary>
-    /// Серверная система менторской помощи для управления тикетами.
+    /// Server system for managing mentor help tickets.
     /// </summary>
     [UsedImplicitly]
     public sealed partial class MentorHelpSystem : SharedMentorHelpSystem
@@ -31,9 +32,12 @@ namespace Content.Server._Sunrise.MentorHelp
         [Dependency] private IPlayerManager _playerManager = default!;
         [Dependency] private IAdminManager _adminManager = default!;
         [Dependency] private IConfigurationManager _config = default!;
+        [Dependency] private IGameTiming _timing = default!;
         [Dependency] private GameTicker _gameTicker = default!;
         [Dependency] private IServerDbManager _dbManager = default!;
         [Dependency] private PlayerRateLimitManager _rateLimit = default!;
+        [Dependency] private INetConfigurationManager _netConfig = default!;
+        [Dependency] private PlayerCacheManager _playerCacheManager = default!;
         private ISharedSponsorsManager? _sponsorsManager; // Менеджер спонсоров Sunrise.
 
         private sealed class MentorStatisticsCache
