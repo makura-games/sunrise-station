@@ -107,7 +107,7 @@ public sealed partial class SponsorTierEntry : Control
         if (!string.IsNullOrEmpty(oocColor))
         {
             OocColorLabel.Text = "цвет";
-            if (Color.TryFromHex(oocColor) is { } hexColor)
+            if (Color.TryFromHex(oocColor, out var hexColor))
                 OocColorLabel.FontColorOverride = hexColor;
             else if (OocGradientHelper.TryResolveColor(oocColor, out var parsedColor))
             {
