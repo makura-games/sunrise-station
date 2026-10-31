@@ -3,10 +3,10 @@ using Robust.Client.UserInterface;
 
 namespace Content.Client._Sunrise.Medical.CrewMonitoring;
 
-public class SunriseCrewMonitoringBoundUserInterface : BoundUserInterface
+public sealed class SunriseCrewMonitoringBoundUserInterface : BoundUserInterface
 {
     [ViewVariables]
-    protected SunriseCrewMonitoringWindow? _menu;
+    private SunriseCrewMonitoringWindow? _menu;
 
     public SunriseCrewMonitoringBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {

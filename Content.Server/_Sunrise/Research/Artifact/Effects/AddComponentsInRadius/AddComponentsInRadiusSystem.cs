@@ -1,13 +1,13 @@
-﻿using Content.Shared.Whitelist;
+using Content.Shared.Whitelist;
 using Content.Shared.Xenoarchaeology.Artifact;
 using Content.Shared.Xenoarchaeology.Artifact.XAE;
 
 namespace Content.Server._Sunrise.Research.Artifact.Effects.AddComponentsInRadius;
 
-public sealed class AddComponentsInRadiusSystem : BaseXAESystem<AddComponentsInRadiusComponent>
+public sealed partial class AddComponentsInRadiusSystem : BaseXAESystem<AddComponentsInRadiusComponent>
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
 
     private readonly HashSet<Entity<TransformComponent>> _entities = [];
 

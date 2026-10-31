@@ -1,5 +1,5 @@
+using Content.Shared.Body;
 using Content.Shared.Humanoid;
-using Content.Shared.Humanoid.Markings;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._Sunrise.InteractionsPanel.Data.Conditions;
@@ -29,12 +29,16 @@ public sealed partial class HasVisualLayerCondition : IAppearCondition
 
     private bool CheckLayer(EntityUid uid, EntityManager entMan)
     {
-        if (!entMan.TryGetComponent<HumanoidAppearanceComponent>(uid, out var appearance))
+        var visualBody = entMan.System<SharedVisualBodySystem>();
+        if (!visualBody.TryGatherMarkingsData(uid, [Layer], out _, out _, out var applied))
             return false;
 
-        var category = MarkingCategoriesConversion.FromHumanoidVisualLayers(Layer);
-        var markingSet = appearance.MarkingSet;
+        foreach (var layerMap in applied.Values)
+        {
+            if (layerMap.TryGetValue(Layer, out var markings) && markings.Count > 0)
+                return true;
+        }
 
-        return markingSet.TryGetCategory(category, out var markings) && markings.Count > 0;
+        return false;
     }
 }

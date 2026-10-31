@@ -2,6 +2,7 @@ ent-BaseSpeedLoaderShotgun = speed loader (.50)
     .desc = { ent-BaseItem.desc }
 ent-SpeedLoaderShotgunEmpty = speed loader (.50 any)
     .desc = { ent-BaseSpeedLoaderShotgun.desc }
+    .suffix = Пустой
 ent-SpeedLoaderShellShotgun = speed loader (.50 pellet)
     .desc = { ent-BaseSpeedLoaderShotgun.desc }
 ent-SpeedLoaderShotgunBirdshot = 12 gauge birdshot speedloader

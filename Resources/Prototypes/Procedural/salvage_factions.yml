@@ -4,27 +4,26 @@
   entries:
     - proto: MobXeno
     - proto: MobXenoDrone
-      cost: 4 # Sunrise-Edit
+      cost: 2 # Sunrise-Edit
     - proto: MobXenoPraetorian
-      cost: 10 # Sunrise-Edit
+      cost: 3 # Sunrise-Edit
       prob: 0.1
     - proto: MobXenoQueen
-      cost: 15 # Sunrise-Edit
+      cost: 5 # Sunrise-Edit
       prob: 0.02
     - proto: MobXenoRavager
-      cost: 10 # Sunrise-Edit
+      cost: 4 # Sunrise-Edit
     - proto: MobXenoRouny
-      cost: 6 # Sunrise-Edit
+      cost: 2 # Sunrise-Edit
       prob: 0.02
     - proto: MobXenoSpitter
-      cost: 2 # Sunrise-Edit
+      cost: 1 # Sunrise-Edit
     - proto: MobXenoRunner # Sunrise-Edit
-      cost: 2 # Sunrise-Edit
+      cost: 1 # Sunrise-Edit
     - proto: WeaponTurretXeno
       prob: 0.1
   # Sunrise-Start
   difficulties:
-    - Moderate
     - Easy
   # Sunrise-End
   configs:

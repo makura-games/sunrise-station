@@ -16,9 +16,9 @@ public sealed partial class UserProfile : Control
 {
     private const float CompactBreakpoint = 620f;
 
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
-    [Dependency] private readonly IUriOpener _uri = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
+    [Dependency] private IUriOpener _uri = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private readonly UserProfileAccountInfoUIController _accountInfoUIController;
     private readonly SponsorTiersUIController _sponsorTiersUIController;

@@ -5,7 +5,7 @@ body:
 - type: markdown
   attributes:
     value: |
-      Спасибо, что помогаете делать Sunrise Station лучше! Пожалуйста, заполните форму максимально подробно.
+      Спасибо, что помогаете делать Stellar Stories лучше! Пожалуйста, заполните форму максимально подробно.
 - type: textarea
   id: description
   attributes:

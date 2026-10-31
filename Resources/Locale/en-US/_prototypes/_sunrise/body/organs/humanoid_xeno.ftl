@@ -1,7 +1,5 @@
-ent-BaseHumanoidXenoOrganUnGibbable = { ent-BaseItem }
+ent-BaseHumanoidXenoOrgan = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
-ent-BaseHumanoidXenoOrgan = { ent-BaseHumanoidXenoOrganUnGibbable }
-    .desc = { ent-BaseHumanoidXenoOrganUnGibbable.desc }
 ent-OrganHumanoidXenoBrain = brain
     .desc = The nexus of the alien mind. Thoughts you don't want to know.
 ent-OrganHumanoidXenoTongue = tongue
@@ -21,4 +19,4 @@ ent-OrganHumanoidXenoLiver = liver
 ent-OrganHumanoidXenoKidneys = kidneys
     .desc = Paired filters, ruthlessly taking out anything superfluous.
 ent-OrganHumanoidXenoEyes = eyes
-    .desc = Eyes. They see
+    .desc = Eyes. They see.

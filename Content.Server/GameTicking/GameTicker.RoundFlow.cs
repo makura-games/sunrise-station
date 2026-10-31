@@ -34,10 +34,10 @@ namespace Content.Server.GameTicking
 {
     public sealed partial class GameTicker
     {
-        [Dependency] private readonly DiscordWebhook _discord = default!;
-        [Dependency] private readonly RoleSystem _role = default!;
-        [Dependency] private readonly ITaskManager _taskManager = default!;
-        [Dependency] private readonly StatsBoardSystem _statsBoardSystem = default!;
+        [Dependency] private DiscordWebhook _discord = default!;
+        [Dependency] private RoleSystem _role = default!;
+        [Dependency] private ITaskManager _taskManager = default!;
+        [Dependency] private StatsBoardSystem _statsBoardSystem = default!;
 
         private static readonly Counter RoundNumberMetric = Metrics.CreateCounter(
             "ss14_round_number",
@@ -135,7 +135,7 @@ namespace Content.Server.GameTicking
             }
 
             if (CurrentPreset?.MapPool != null &&
-                _prototypeManager.TryIndex<GameMapPoolPrototype>(CurrentPreset.MapPool, out var pool) &&
+                ProtoMan.TryIndex<GameMapPoolPrototype>(CurrentPreset.MapPool, out var pool) &&
                 !pool.Maps.Contains(mainStationMap.ID))
             {
                 var msg = Loc.GetString("game-ticker-start-round-invalid-map",
@@ -449,7 +449,7 @@ namespace Content.Server.GameTicking
             }
 
             // Sunrise-Start
-            if (_cfg.GetCVar(SunriseCCVars.ExcludePresets) && CurrentPreset != null && !_Sunrise.Storyteller.StorytellerPresetHelper.ShouldBypassExclusion(CurrentPreset.ID))
+            if (_cfg.GetCVar(SunriseCCVars.ExcludePresets) && CurrentPreset != null)
                 AddExcludedPreset(CurrentPreset.ID);
             // Sunrise-End
 
@@ -824,17 +824,6 @@ namespace Content.Server.GameTicking
                 _sawmill.Warning($"Error while flushing entities during round cleanup: {e}");
             }
 
-            _sawmill.Info("ResettingCleanup: Restarting map manager.");
-            try
-            {
-                _mapManager.Restart();
-                _sawmill.Info("ResettingCleanup: Map manager restarted successfully.");
-            }
-            catch (Exception e)
-            {
-                _sawmill.Warning($"Error while restarting map manager: {e}");
-            }
-
             _sawmill.Info("ResettingCleanup: Restarting ban manager.");
             _banManager.Restart();
 
@@ -898,7 +887,7 @@ namespace Content.Server.GameTicking
         {
             if (CurrentPreset == null) return;
 
-            var options = _prototypeManager.EnumeratePrototypes<RoundAnnouncementPrototype>().ToList();
+            var options = ProtoMan.EnumeratePrototypes<RoundAnnouncementPrototype>().ToList();
 
             if (options.Count == 0)
                 return;

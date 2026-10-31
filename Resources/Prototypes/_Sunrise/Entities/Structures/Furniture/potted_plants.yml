@@ -39,6 +39,7 @@
     sprite: Structures/Furniture/potted_plants.rsi
     size: Huge
   - type: Damageable
+  - type: Injurable
     damageContainer: StructuralInorganic # The pot. Not the plant. Or is it plastic?
   - type: Destructible
     thresholds:
@@ -150,3 +151,66 @@
   - type: Sprite
     sprite: _Sunrise/Structures/Furniture/potted_plants.rsi
     state: plant-10
+
+- type: entity
+  id: PottedPlantRose
+  parent: PottedPlantBase
+  suffix: Blue
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Furniture/roses_in_pots.rsi
+    state: blue
+
+- type: entity
+  id: PottedPlantRose1
+  parent: PottedPlantBase
+  suffix: Bright-blue
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Furniture/roses_in_pots.rsi
+    state: bright_blue
+
+- type: entity
+  id: PottedPlantRose2
+  parent: PottedPlantBase
+  suffix: Ginger-red
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Furniture/roses_in_pots.rsi
+    state: ginger_red
+
+- type: entity
+  id: PottedPlantRose3
+  parent: PottedPlantBase
+  suffix: Pink
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Furniture/roses_in_pots.rsi
+    state: pink
+
+- type: entity
+  id: PottedPlantRose4
+  parent: PottedPlantBase
+  suffix: Purple
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Furniture/roses_in_pots.rsi
+    state: purple
+
+- type: entity
+  id: PottedPlantRose5
+  parent: PottedPlantBase
+  suffix: Red
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Furniture/roses_in_pots.rsi
+    state: red
+
+- type: entity
+  id: PottedPlantRose6
+  parent: PottedPlantBase
+  suffix: White
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Furniture/roses_in_pots.rsi
+    state: white

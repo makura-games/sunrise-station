@@ -18,7 +18,7 @@
             - material: Cable
               amount: 10
               doAfter: 0
-            - tag: PowerCellSmall
+            - tag: PowerCell
               name: step-trashgun-smallbattery
               icon:
                 sprite: Objects/Power/power_cells.rsi

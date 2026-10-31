@@ -1,7 +1,7 @@
 - type: gameMap
   id: SunriseFland
   mapName: 'Fland'
-  mapPath: /Maps/_Sunrise/Station/fland.yml
+  mapPath: /Maps/_Sunrise/Station/OutPool/fland.yml
   maxRandomOffset: 0
   randomRotation: false
   minPlayers: 0

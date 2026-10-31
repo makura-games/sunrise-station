@@ -1,0 +1,73 @@
+name: "PR: Automatic Draft Management"
+
+on:
+  workflow_run:
+    workflows: ["PR: Automatic Draft Management - Review Events", "Build & Test Debug", "YAML Linter"]
+    types: [completed]
+  pull_request_target:
+    types: [opened, reopened, synchronize, converted_to_draft, ready_for_review]
+  status:
+  issue_comment:
+    types: [created, edited, deleted]
+  workflow_dispatch:
+    inputs:
+      pr-number:
+        description: "PR number to check. Leave empty to scan all open PRs."
+        required: false
+        type: number
+  schedule:
+    # Резервная синхронизация нужна для Resolve conversation: у GitHub Actions нет такого триггера.
+    - cron: "7/10 * * * *"
+
+permissions: {}
+
+jobs:
+  sync-draft-state:
+    if: >-
+      (github.event_name != 'issue_comment' ||
+      (github.event.issue.pull_request &&
+      ((github.event.sender.type == 'Bot' && github.event.sender.login == 'coderabbitai[bot]') ||
+      (github.event.action != 'created' && github.event.comment.user.type == 'Bot' &&
+      github.event.sender.login != github.event.comment.user.login)))) &&
+      (github.event_name != 'pull_request_target' ||
+      (github.event.action != 'converted_to_draft' && github.event.action != 'ready_for_review') ||
+      github.event.sender.type != 'Bot')
+    concurrency:
+      # ponytail: общая очередь исключает гонки; пропущенные задания в неё не попадают.
+      group: ${{ github.workflow }}
+      cancel-in-progress: false
+      queue: max
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.AUTO_DRAFT_APP_CLIENT_ID }}
+          private-key: ${{ secrets.AUTO_DRAFT_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-issues: write
+          permission-pull-requests: write
+          permission-actions: read
+          permission-checks: write
+          permission-statuses: read
+      - name: Checkout trusted automation script
+        uses: actions/checkout@v6
+        with:
+          # Код берётся из коммита самого workflow; ручной запуск позволяет проверить ветку до мержа.
+          ref: ${{ github.workflow_sha }}
+          token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: false
+          sparse-checkout: Tools/_sunrise/auto_draft
+          sparse-checkout-cone-mode: false
+      # Sunrise edit start - фиксируем Python с поддержкой tomllib
+      - name: Setup Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: "3.11"
+      # Sunrise edit end
+      - name: Sync draft state
+        env:
+          AUTO_DRAFT_APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: python3 Tools/_sunrise/auto_draft/review_threads.py

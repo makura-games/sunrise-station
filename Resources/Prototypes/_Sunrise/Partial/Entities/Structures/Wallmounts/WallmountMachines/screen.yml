@@ -1,0 +1,11 @@
+- type: !PartialOnly entity
+  id: Screen
+  components:
+  - type: TextScreenVisuals
+    textOffset: 0, 3
+    timerOffset: 0, -4
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/screen.rsi
+    offset: 0, 0
+    noRot: true
+

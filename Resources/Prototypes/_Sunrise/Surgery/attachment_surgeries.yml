@@ -97,15 +97,6 @@
 
 - type: entity
   parent: SurgeryLimbAttachmentHead
-  id: SurgeryLimbAttachmentTail 
-  name: Limb Attachment Tail
-  description: Surgical attachment of a limb.
-  components:
-  - type: SurgeryLimbSlotCondition
-    slot: tail
-    
-- type: entity
-  parent: SurgeryLimbAttachmentHead
   id: SurgeryLimbAttachmentOther 
   name: Limb Attachment Other
   description: Surgical attachment of a limb.
@@ -204,15 +195,6 @@
   - type: SurgeryLimbSlotCondition
     slot: right foot
 
-- type: entity
-  parent: SurgeryLimbAttachmentSlimeHead
-  id: SurgeryLimbAttachmentSlimeTail 
-  name: Limb Attachment Tail
-  description: Surgical attachment of a limb.
-  components:
-  - type: SurgeryLimbSlotCondition
-    slot: tail
-    
 - type: entity
   parent: SurgeryLimbAttachmentSlimeHead
   id: SurgeryLimbAttachmentSlimeOther 

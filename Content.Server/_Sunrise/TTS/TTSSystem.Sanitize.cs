@@ -8,6 +8,12 @@ namespace Content.Server._Sunrise.TTS;
 // ReSharper disable once InconsistentNaming
 public sealed partial class TTSSystem
 {
+    private static readonly Regex AllowedCharactersRegex = new(@"[^a-zA-Zа-яА-ЯёЁ0-9,\-+?!. ]");
+    private static readonly Regex LatinCharactersRegex = new(@"[a-zA-Z]", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+    private static readonly Regex WordRegex = new(@"(?<![a-zA-Zа-яёА-ЯЁ])[a-zA-Zа-яёА-ЯЁ]+?(?![a-zA-Zа-яёА-ЯЁ])", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+    private static readonly Regex DecimalSeparatorRegex = new(@"(?<=[1-90])(\.|,)(?=[1-90])");
+    private static readonly Regex NumberRegex = new(@"\d+");
+
     private void OnTransformSpeech(TransformSpeechEvent args)
     {
         if (!_isEnabled) return;
@@ -17,11 +23,11 @@ public sealed partial class TTSSystem
     private string Sanitize(string text)
     {
         text = text.Trim();
-        text = Regex.Replace(text, @"[^a-zA-Zа-яА-ЯёЁ0-9,\-+?!. ]", "");
-        text = Regex.Replace(text, @"[a-zA-Z]", ReplaceLat2Cyr, RegexOptions.Multiline | RegexOptions.IgnoreCase);
-        text = Regex.Replace(text, @"(?<![a-zA-Zа-яёА-ЯЁ])[a-zA-Zа-яёА-ЯЁ]+?(?![a-zA-Zа-яёА-ЯЁ])", ReplaceMatchedWord, RegexOptions.Multiline | RegexOptions.IgnoreCase);
-        text = Regex.Replace(text, @"(?<=[1-90])(\.|,)(?=[1-90])", " целых ");
-        text = Regex.Replace(text, @"\d+", ReplaceWord2Num);
+        text = AllowedCharactersRegex.Replace(text, "");
+        text = LatinCharactersRegex.Replace(text, ReplaceLat2Cyr);
+        text = WordRegex.Replace(text, ReplaceMatchedWord);
+        text = DecimalSeparatorRegex.Replace(text, " целых ");
+        text = NumberRegex.Replace(text, ReplaceWord2Num);
         text = text.Trim();
         return text;
     }

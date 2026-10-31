@@ -1,52 +1,52 @@
 - type: gamePresetPool
   id: DefaultLowPopPresetPool
   presets:
-    Greenshift: [0, 200]
-    Secret: [20, 200]
+    Greenshift: { min: 0, max: 200 }
+    Secret: { min: 20, max: 200 }
 
 - type: gamePresetPool
   id: DefaultHighPopPresetPool
   presets:
-    Greenshift: [0, 200]
-    Secret: [20, 200]
+    Greenshift: { min: 0, max: 200 }
+    Secret: { min: 20, max: 200 }
 
 - type: gamePresetPool
   id: DynamicPresetPool
   presets:
-    Greenshift: [0, 200]
-    Dynamic: [20, 200]
-    Secret: [40, 200]
+    Greenshift: { min: 0, max: 200 }
+    Dynamic: { min: 20, max: 200 }
+    Secret: { min: 40, max: 200 }
 
 - type: gamePresetPool
   id: MiddleLowPopPresetPool
   presets:
-   Greenshift: [0, 200]
-   Secret: [30, 200]
-   Extra: [30, 200]
+   Greenshift: { min: 0, max: 200 }
+   Secret: { min: 30, max: 200 }
+   Extra: { min: 30, max: 200 }
 
 - type: gamePresetPool
   id: MiddleHighPopPresetPool
   presets:
-    Greenshift: [0, 200]
-    Secret: [50, 200]
-    Extra: [50, 100]
+    Greenshift: { min: 0, max: 200 }
+    Secret: { min: 50, max: 200 }
+    Extra: { min: 50, max: 100 }
 
 - type: gamePresetPool
   id: AllPresetPool
   presets:
-    Nukeops: [30, 200]
-    Traitor: [5, 200]
-    Zombie: [10, 200]
-    Survival: [5, 200]
-    Revolutionary: [10, 200]
-    Wizard: [30, 200]
-    BloodCult: [30, 200]
-    AssaultOps: [10, 200]
-    FleshCult: [30, 200]
+    Nukeops: { min: 30, max: 200 }
+    Traitor: { min: 5, max: 200 }
+    Zombie: { min: 10, max: 200 }
+    Survival: { min: 5, max: 200 }
+    Revolutionary: { min: 10, max: 200 }
+    Wizard: { min: 30, max: 200 }
+    BloodCult: { min: 30, max: 200 }
+    AssaultOps: { min: 10, max: 200 }
+    FleshCult: { min: 30, max: 200 }
 
 - type: gamePresetPool
   id: StorytellerPresetPool
   presets:
-    StorytellerClassic: [30, 300]
-    StorytellerCalm: [0, 300]
-    StorytellerInsane: [60, 300]
+    StorytellerClassic: { min: 60, max: 300 }
+    StorytellerCalm: { min: 0, max: 300 }
+    StorytellerInsane: { min: 80, max: 300 }

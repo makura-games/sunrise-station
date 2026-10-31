@@ -1,5 +1,4 @@
 ﻿using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._Sunrise.BloodCult.Structures;
@@ -7,8 +6,8 @@ namespace Content.Shared._Sunrise.BloodCult.Structures;
 [Prototype]
 public sealed partial class CultStructurePrototype : IPrototype
 {
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>), required: true)]
-    public string StructureId = string.Empty;
+    [DataField(required: true)]
+    public EntProtoId StructureId;
 
     [DataField("name", required: true)]
     public string StructureName = string.Empty;

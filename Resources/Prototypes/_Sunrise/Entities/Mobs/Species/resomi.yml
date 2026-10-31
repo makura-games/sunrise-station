@@ -1,7 +1,33 @@
 - type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceResomi
+  name: resomi appearance
+  components:
+  - type: InitialBody
+    organs:
+      Torso: TorsoResomi
+      Head: HeadResomi
+      ArmLeft: LeftArmResomi
+      ArmRight: RightArmResomi
+      HandRight: RightHandResomi
+      HandLeft: LeftHandResomi
+      LegLeft: LeftLegResomi
+      LegRight: RightLegResomi
+      FootLeft: LeftFootResomi
+      FootRight: RightFootResomi
+      Brain: OrganHumanBrain
+      Eyes: OrganResomiEyes
+      Tongue: OrganHumanTongue
+      Heart: OrganHumanHeart
+      Lungs: OrganHumanLungs
+      Stomach: OrganHumanStomach
+      Liver: OrganHumanLiver
+      Kidneys: OrganHumanKidneys
+
+- type: entity
   save: false
   name: Urist McRaptor
-  parent: [ BaseMobSpeciesOrganic, BaseSpeciesPickupable ]
+  parent: [ AppearanceResomi, BaseSpeciesMobOrganic, BaseSpeciesPickupable ]
   id: BaseMobResomi
   abstract: true
   components:
@@ -37,8 +63,10 @@
     sprite: _Sunrise/Mobs/Effects/onfire.rsi
     normalState: Resomi_minor_burning
     alternateState: Resomi_burning
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Resomi
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers
   - type: Fixtures
     fixtures:
       fix1:
@@ -51,21 +79,16 @@
         - MobMask
         layer:
         - MobLayer
-  - type: Hunger
   - type: Puller
     needsHands: false
-  - type: Thirst
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
     state: full
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Resomi
-  - type: Body
-    prototype: Resomi
-    requiredLegs: 2
+  - type: Injurable
+    damageContainer: Biological
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatResomi
       amount: 5
@@ -87,8 +110,7 @@
       types:
         Slash: 5
   - type: Temperature
-    currentTemperature: 310.15
-    specificHeat: 42
+    temperature: 310.15
   - type: TemperatureDamage
     heatDamageThreshold: 313
     coldDamageThreshold: 230
@@ -248,15 +270,15 @@
           32:
             sprite: _Sunrise/Mobs/Species/Resomi/displacement.rsi
             state: belt
-  - type: ToggleableNightVision
-    effect: EffectNightVisioSpecies
+  - type: NightVision
+    enabled: false
+    action: ActionToggleNightVision
+    prioritized: false
+    lightingColor: '#FFFFFF15'
   - type: FlashModifier
     modifier: 2
   - type: Vocal
-    sounds:
-      Male: UnisexResomi
-      Female: UnisexResomi
-      Unsexed: UnisexResomi
+    emoteSounds: UnisexResomi
   - type: TypingIndicator
     proto: resomi
   - type: Speech
@@ -272,13 +294,15 @@
     - Resomi
 
 - type: entity
-  parent: BaseSpeciesDummy
+  parent: AppearanceResomi
   id: MobResomiDummy
   categories: [ HideSpawnMenu ]
   description: A dummy resomi meant to be used in character setup.
   components:
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Resomi
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers
   - type: Inventory
     templateId: nonUnderwear
     speciesId: resomi

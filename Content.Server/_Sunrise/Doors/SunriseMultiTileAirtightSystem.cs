@@ -14,26 +14,21 @@ namespace Content.Server._Sunrise.Doors.Systems;
 ///     Нужна чтобы мультитайловые двойные или тройные шлюзы нормально не пропускали газы
 ///     Спавнит блокеры на соседних тайлах и регулирует когда блокеры не пропускают газ, когда пропускают. В зависимости от состояния шлюза
 /// </summary>
-public sealed class SunriseMultiTileAirtightSystem : EntitySystem
+public sealed partial class SunriseMultiTileAirtightSystem : EntitySystem
 {
     private const string BlockerPrototype = "SunriseMultiTileAirtightBlocker";
 
-    [Dependency] private readonly AirtightSystem _airtight = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private AirtightSystem _airtight = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
-    private EntityQuery<AirtightComponent> _airtightQuery;
-    private EntityQuery<DoorComponent> _doorQuery;
-    private EntityQuery<MapGridComponent> _gridQuery;
-    private EntityQuery<TransformComponent> _xformQuery;
+    [Dependency] private EntityQuery<AirtightComponent> _airtightQuery = default!;
+    [Dependency] private EntityQuery<DoorComponent> _doorQuery = default!;
+    [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
+    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _airtightQuery = GetEntityQuery<AirtightComponent>();
-        _doorQuery = GetEntityQuery<DoorComponent>();
-        _gridQuery = GetEntityQuery<MapGridComponent>();
-        _xformQuery = GetEntityQuery<TransformComponent>();
 
         SubscribeLocalEvent<SunriseMultiTileAirtightComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<SunriseMultiTileAirtightComponent, ComponentShutdown>(OnShutdown);

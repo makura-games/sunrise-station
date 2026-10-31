@@ -13,7 +13,6 @@
         - id: ClothingOuterHardsuitPilot
         - id: OxygenTankFilled
         - id: ClothingMaskGasPilot
-        - id: WeaponPilotLasgun
         - id: ShuttleSecurityFlatpack
         - id: ClothingShoesBootsMagSec
           prob: 0.75

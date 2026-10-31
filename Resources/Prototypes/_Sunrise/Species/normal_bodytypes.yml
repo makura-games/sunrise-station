@@ -1,0 +1,86 @@
+- type: bodyType
+  id: HumanNormal
+  name: body-normal
+  visualKey: body-normal
+  layers:
+    Chest:
+      sprite: Mobs/Species/Human/parts.rsi
+      state: torso_m
+    Head:
+      sprite: Mobs/Species/Human/parts.rsi
+      state: head_m
+    Eyes:
+      sprite: Mobs/Customization/eyes.rsi
+      state: eyes
+    RArm:
+      sprite: _Sunrise/Mobs/Species/Human/Basic/parts.rsi
+      state: r_arm
+    LArm:
+      sprite: _Sunrise/Mobs/Species/Human/Basic/parts.rsi
+      state: l_arm
+    RHand:
+      sprite: _Sunrise/Mobs/Species/Human/Basic/parts.rsi
+      state: r_hand
+    LHand:
+      sprite: _Sunrise/Mobs/Species/Human/Basic/parts.rsi
+      state: l_hand
+    RLeg:
+      sprite: _Sunrise/Mobs/Species/Human/Basic/parts.rsi
+      state: r_leg
+    LLeg:
+      sprite: _Sunrise/Mobs/Species/Human/Basic/parts.rsi
+      state: l_leg
+    RFoot:
+      sprite: _Sunrise/Mobs/Species/Human/Basic/parts.rsi
+      state: r_foot
+    LFoot:
+      sprite: _Sunrise/Mobs/Species/Human/Basic/parts.rsi
+      state: l_foot
+  sexLayers:
+    Male:
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Human/Basic/parts.rsi
+        state: torso_m
+      Head:
+        sprite: _Sunrise/Mobs/Species/Human/Basic/parts.rsi
+        state: head_m
+    Female:
+      Chest:
+        sprite: _Sunrise/Mobs/Species/Human/Basic/parts.rsi
+        state: torso_f
+      Head:
+        sprite: _Sunrise/Mobs/Species/Human/Basic/parts.rsi
+        state: head_f
+- type: bodyType
+  id: MothNormal
+  name: body-normal
+  visualKey: body-normal
+- type: bodyType
+  id: VoxNormal
+  name: body-normal
+  visualKey: body-normal
+- type: bodyType
+  id: DionaNormal
+  name: body-normal
+  visualKey: body-normal
+- type: bodyType
+  id: ArachnidNormal
+  name: body-normal
+  visualKey: body-normal
+- type: bodyType
+  id: ReptilianNormal
+  name: body-normal
+  visualKey: body-normal
+
+- type: bodyType
+  id: GingerbreadNormal
+  name: body-normal
+  visualKey: body-normal
+- type: bodyType
+  id: SlimePersonNormal
+  name: body-normal
+  visualKey: body-normal
+- type: bodyType
+  id: SkeletonNormal
+  name: body-normal
+  visualKey: body-normal

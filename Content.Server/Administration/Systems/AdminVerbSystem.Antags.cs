@@ -23,10 +23,10 @@ namespace Content.Server.Administration.Systems;
 
 public sealed partial class AdminVerbSystem
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly ZombieSystem _zombie = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly OutfitSystem _outfit = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private ZombieSystem _zombie = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private OutfitSystem _outfit = default!;
 
     private static readonly EntProtoId DefaultTraitorRule = "Traitor";
     private static readonly EntProtoId DefaultInitialInfectedRule = "Zombie";
@@ -38,18 +38,6 @@ public sealed partial class AdminVerbSystem
     private static readonly EntProtoId DefaultWizardRule = "Wizard";
     private static readonly EntProtoId DefaultNinjaRule = "NinjaSpawn";
     private static readonly ProtoId<StartingGearPrototype> PirateGearId = "PirateGear";
-    private static readonly EntProtoId DefaultAssaultOpsRule = "AssaultOps";
-    private static readonly EntProtoId DefaultFleshCultRule = "FleshCult";
-    private static readonly EntProtoId DefaultSELFRule = "SiliconLiberation";
-
-    private static readonly SpriteSpecifier SelfAgentVerbIcon =
-        new SpriteSpecifier.Rsi(new ResPath("/Textures/_Sunrise/Interface/Misc/self_icon.rsi"), "icon");
-    private static readonly SpriteSpecifier AssaultOperativeVerbIcon =
-        new SpriteSpecifier.Rsi(new ResPath("/Textures/Structures/Wallmounts/posters.rsi"), "poster46_contraband");
-    private static readonly SpriteSpecifier FleshCultistVerbIcon =
-        new SpriteSpecifier.Texture(new ResPath("_Sunrise/FleshCult/Interface/Actions/fleshCultistFleshHeart.png"));
-    private static readonly SpriteSpecifier BloodCultistVerbIcon =
-        new SpriteSpecifier.Rsi(new ResPath("/Textures/Objects/Weapons/Melee/cult_dagger.rsi"), "icon");
 
     // All antag verbs have names so invokeverb works.
     private void AddAntagVerbs(GetVerbsEvent<Verb> args)
@@ -240,66 +228,9 @@ public sealed partial class AdminVerbSystem
         };
         args.Verbs.Add(ninja);
 
-        if (HasComp<HumanoidAppearanceComponent>(args.Target)) // only humanoids can be cloned
+        if (HasComp<HumanoidProfileComponent>(args.Target)) // only humanoids can be cloned
             args.Verbs.Add(paradox);
 
-        // Sunrise-Start
-
-        Verb selfAgent = new()
-        {
-            Text = Loc.GetString("admin-verb-text-make-selfagent"),
-            Category = VerbCategory.Antag,
-            Icon = SelfAgentVerbIcon,
-            Act = () =>
-            {
-                _antag.ForceMakeAntag<SELFRuleComponent>(targetPlayer, DefaultSELFRule);
-            },
-            Impact = LogImpact.High,
-            Message = Loc.GetString("admin-verb-make-selfagent"),
-        };
-        args.Verbs.Add(selfAgent);
-
-        Verb assaultOperative = new()
-        {
-            Text = Loc.GetString("admin-verb-text-make-assault-operative"),
-            Category = VerbCategory.Antag,
-            Icon = AssaultOperativeVerbIcon,
-            Act = () =>
-            {
-                _antag.ForceMakeAntag<AssaultOpsRuleComponent>(targetPlayer, DefaultAssaultOpsRule);
-            },
-            Impact = LogImpact.High,
-            Message = Loc.GetString("admin-verb-make-assault-operative"),
-        };
-        args.Verbs.Add(assaultOperative);
-
-        Verb fleshCultist = new()
-        {
-            Text = "Make Flesh Cultist",
-            Category = VerbCategory.Antag,
-            Icon = FleshCultistVerbIcon,
-            Act = () =>
-            {
-                _antag.ForceMakeAntag<FleshCultRuleComponent>(targetPlayer, DefaultFleshCultRule);
-            },
-            Impact = LogImpact.High,
-            Message = Loc.GetString("admin-verb-make-flesh-cultist"),
-        };
-        args.Verbs.Add(fleshCultist);
-
-        Verb bloodCultist = new()
-        {
-            Text = Loc.GetString("admin-verb-text-make-cultist"),
-            Category = VerbCategory.Antag,
-            Icon = BloodCultistVerbIcon,
-            Act = () =>
-            {
-                _antag.ForceMakeAntag<BloodCultRuleComponent>(targetPlayer, "BloodCult");
-            },
-            Impact = LogImpact.High,
-            Message = Loc.GetString("admin-verb-make-cultist"),
-        };
-        args.Verbs.Add(bloodCultist);
-        // Sunrise-End
+        AddSunriseAntagVerbs(args); // Sunrise-edit
     }
 }

@@ -1,0 +1,6 @@
+- type: latheRecipe
+  id: MagazineLightRifleImprovisedTA
+  result: MagazineLightRifleImprovisedEmpty
+  completetime: 30
+  materials:
+    Steel: 600

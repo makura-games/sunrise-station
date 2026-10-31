@@ -13,9 +13,9 @@
   id: KvassTankFull
   suffix: Full
   components:
-    - type: SolutionContainerManager
-      solutions:
-        tank:
-          reagents:
-            - ReagentId: Kvass
-              Quantity: 1500
+    - type: Solution
+      id: tank
+      solution:
+        reagents:
+          - ReagentId: Kvass
+            Quantity: 1500

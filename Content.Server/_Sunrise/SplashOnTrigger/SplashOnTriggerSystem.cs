@@ -10,8 +10,8 @@ namespace Content.Server._Sunrise.SplashOnTrigger;
 [UsedImplicitly]
 public sealed partial class SplashOnTriggerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionSystem = default!;
-    [Dependency] private readonly PuddleSystem _puddleSystem = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionSystem = default!;
+    [Dependency] private PuddleSystem _puddleSystem = default!;
 
     public override void Initialize()
     {

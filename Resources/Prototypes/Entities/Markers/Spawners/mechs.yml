@@ -91,7 +91,7 @@
   - type: Sprite
     layers:
       - state: green
-      - sprite: Objects/Specific/Mech/durand.rsi
+      - sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
         state: base
   - type: ConditionalSpawner
     prototypes:
