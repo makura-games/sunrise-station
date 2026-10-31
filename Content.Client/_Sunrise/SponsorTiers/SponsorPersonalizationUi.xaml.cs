@@ -394,10 +394,10 @@ public sealed partial class SponsorPersonalizationUi : FancyWindow
             var colorHex = string.Empty;
             if (currentColor != NoneToken && !string.IsNullOrEmpty(currentColor))
             {
-                if (OocGradientHelper.TryResolveColor(currentColor, out var resolvedColor))
+                if (OocGradientHelper.TryResolveColor(currentColor, out var resolvedColor) && resolvedColor != null)
                     colorHex = $"#{resolvedColor.Value.ToHexNoAlpha().TrimStart('#')}";
             }
-            else if (string.IsNullOrEmpty(currentColor) && localPlayer != null && _sponsorsManager != null && _sponsorsManager.TryGetOocColor(localPlayer.UserId, out var defaultColor))
+            else if (string.IsNullOrEmpty(currentColor) && localPlayer != null && _sponsorsManager != null && _sponsorsManager.TryGetOocColor(localPlayer.UserId, out var defaultColor) && defaultColor != null)
             {
                 colorHex = $"#{defaultColor.Value.ToHexNoAlpha().TrimStart('#')}";
             }
