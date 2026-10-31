@@ -639,7 +639,7 @@ namespace Content.Server.Administration.Systems
         {
             // Sunrise edit start - форматирование имени спонсора
             return FormatPlayerNameWithSponsors(senderAdmin, senderSession, prefix, name);
-            // Sunrise edit end
+            /*
             if (senderAdmin is not null &&
                 senderAdmin.Flags ==
                 AdminFlags.Adminhelp) // Mentor. Not full admin. That's why it's colored differently.
@@ -654,6 +654,8 @@ namespace Content.Server.Administration.Systems
             {
                 return $"{senderSession.Name}"; // Not an admin, name is not overridden.
             }
+            */
+            // Sunrise edit end
         }
 
         private async Task<BwoinkTextMessage> FormatFullMessageForRecipient(
