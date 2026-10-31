@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Configuration;
+using Robust.Shared.Configuration;
 
 namespace Content.Shared.CCVar;
 
@@ -38,4 +38,14 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<int> AhelpQuickInfoStartWordSize =
         CVarDef.Create("ahelp.quick_info_start_word_size", 4, CVar.SERVERONLY);
+
+    /// <summary>
+    /// The path to the sound played on some admin interactions to the client.
+    /// </summary>
+    /// <seealso cref="CCVars.BwoinkSoundEnabled"/>
+    public static readonly CVarDef<string> AHelpSound =
+        CVarDef.Create("audio.ahelp_sound", "/Audio/_Sunrise/ahelp_new.ogg", CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> AhelpAdminPrefixWebhook =
+        CVarDef.Create("ahelp.admin_prefix_webhook", true, CVar.SERVERONLY); // Sunrise-Edit
 }
