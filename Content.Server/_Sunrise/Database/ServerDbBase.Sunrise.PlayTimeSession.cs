@@ -15,8 +15,9 @@ public abstract partial class ServerDbBase
     {
         await using var db = await GetDb(cancel);
 
+        var trackerOverall = PlayTimeTrackingShared.TrackerOverall.Id;
         var query = from pt in db.DbContext.PlayTime.AsNoTracking()
-            where pt.Tracker == PlayTimeTrackingShared.TrackerOverall
+            where pt.Tracker == trackerOverall
             join p in db.DbContext.Player.AsNoTracking() on pt.PlayerId equals p.UserId
             select new { p.LastSeenUserName, pt.TimeSpent };
 
