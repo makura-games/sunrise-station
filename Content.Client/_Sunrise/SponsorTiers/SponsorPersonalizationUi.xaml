@@ -1,0 +1,50 @@
+<ui:FancyWindow xmlns="https://spacestation14.io"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+               xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+               x:Class="Content.Client._Sunrise.SponsorTiers.SponsorPersonalizationUi"
+               Title="{Loc sponsor-personalization-title}"
+               MinSize="480 540"
+               Resizable="False">
+    <BoxContainer Orientation="Vertical" SeparationOverride="12" Margin="10,10,10,10" VerticalExpand="True">
+        
+        <!-- Section: Title -->
+        <PanelContainer Name="TitlePanel" StyleClasses="SponsorTitlePanel">
+            <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="8,8,8,8" HorizontalExpand="True">
+                <Label Text="{Loc 'sponsor-personalization-ooc-title'}" StyleClasses="LabelSubheading" HorizontalAlignment="Center" />
+                <GridContainer Name="TitlesGrid" Columns="2" HorizontalExpand="True" />
+            </BoxContainer>
+        </PanelContainer>
+        
+        <!-- Section: Color -->
+        <PanelContainer Name="ColorPanel" StyleClasses="SponsorTitlePanel">
+            <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="8,8,8,8" HorizontalExpand="True">
+                <Label Text="{Loc 'sponsor-personalization-ooc-color'}" StyleClasses="LabelSubheading" HorizontalAlignment="Center" />
+                <ScrollContainer HScrollEnabled="False" VScrollEnabled="True" MinHeight="140" HorizontalExpand="True">
+                    <GridContainer Name="ColorsGrid" Columns="3" HorizontalExpand="True" />
+                </ScrollContainer>
+            </BoxContainer>
+        </PanelContainer>
+        
+        <!-- TTS Checkbox -->
+        <CheckBox Name="LobbyTtsCheckBox" Text="{Loc 'sponsor-lobby-tts-enable'}" Margin="4,0,0,0" />
+        <!-- Emoji Selection Section -->
+        <PanelContainer Name="EmojiSectionPanel" StyleClasses="SponsorEmojiPanel">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="10" Margin="6,6,6,6" VerticalAlignment="Center">
+                <Label Text="{Loc 'sponsor-personalization-selected-emoji'}" StyleClasses="LabelSubheading" />
+                <RichTextLabel Name="SelectedEmojiLabel" MinSize="28 28" Margin="0, 4, 0, 0" VerticalAlignment="Center" />
+                <Button Name="ChooseEmojiButton" Text="{Loc 'sponsor-personalization-choose-emoji'}" MinWidth="80" />
+                <Button Name="ResetEmojiButton" Text="{Loc 'sponsor-personalization-reset-emoji'}" MinWidth="80" />
+            </BoxContainer>
+        </PanelContainer>
+        
+        <!-- Section: Preview -->
+        <PanelContainer Name="PreviewPanel" VerticalExpand="True" StyleClasses="SponsorPreviewPanel">
+            <BoxContainer Orientation="Vertical" SeparationOverride="6" Margin="8,8,8,8" HorizontalExpand="True" VerticalExpand="True">
+                <Label Text="{Loc 'sponsor-personalization-preview-title'}" StyleClasses="LabelSubheading" HorizontalAlignment="Center" />
+                <RichTextLabel Name="ChatPreviewLabel" VerticalExpand="True" />
+            </BoxContainer>
+        </PanelContainer>
+
+    </BoxContainer>
+</ui:FancyWindow>

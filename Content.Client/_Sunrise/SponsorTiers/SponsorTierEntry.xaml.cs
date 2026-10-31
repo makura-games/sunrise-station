@@ -8,6 +8,7 @@ using Content.Client.Resources;
 using Content.Client.Stylesheets;
 using Content.Shared._Sunrise.Humanoid;
 using Content.Shared._Sunrise.GhostTheme;
+using Content.Shared._Sunrise.SponsorSystem;
 using Content.Shared._Sunrise.TTS;
 using Content.Shared.Body;
 using Content.Shared.Clothing;
@@ -106,7 +107,12 @@ public sealed partial class SponsorTierEntry : Control
         if (!string.IsNullOrEmpty(oocColor))
         {
             OocColorLabel.Text = "цвет";
-            OocColorLabel.FontColorOverride = Color.FromHex(oocColor);
+            if (Color.TryFromHex(oocColor, out var hexColor))
+                OocColorLabel.FontColorOverride = hexColor;
+            else if (OocGradientHelper.TryResolveColor(oocColor, out var parsedColor))
+            {
+                OocColorLabel.FontColorOverride = parsedColor.Value;
+            }
         }
         ExtraSlotsLabel.Text = $"{extraSlots}";
         PriorityJoinLabel.Text = priorityJoin ? Loc.GetString("sponsor-tiers-gui-yes") : Loc.GetString("sponsor-tiers-gui-no");

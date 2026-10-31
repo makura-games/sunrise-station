@@ -1,0 +1,217 @@
+# Sponsor OOC titles
+- type: sponsorOocTitle
+  id: ClassD
+  title: "Класс D"
+
+- type: sponsorOocTitle
+  id: ScpSpecialist
+  title: "Специалист SCP"
+
+- type: sponsorOocTitle
+  id: Director
+  title: "Директор Комплекса"
+
+- type: sponsorOocTitle
+  id: MemberOfO5
+  title: "Член Совета О5"
+
+- type: sponsorOocTitle
+  id: ProjectSponsor
+  title: "Спонсор Фонда"
+
+- type: sponsorOocTitle
+  id: Contributor
+  title: "Контрибьютор"
+
+- type: sponsorOocTitle
+  id: VigersRay
+  title: "VigersRay"
+
+- type: sponsorOocTitle
+  id: Akyla
+  title: "Плюшевая Акулка"
+
+- type: sponsorOocTitle
+  id: Poseidon
+  title: "Посейдон"
+
+- type: sponsorOocTitle
+  id: Legenda
+  title: "Легенда"
+
+- type: sponsorOocTitle
+  id: Kitenok
+  title: "Китёнок"
+
+- type: sponsorOocTitle
+  id: Host
+  title: "Хост"
+
+- type: sponsorOocTitle
+  id: Beta
+  title: "БЕТА"
+
+- type: sponsorOocTitle
+  id: Alpha
+  title: "АЛЬФА"
+
+- type: sponsorOocTitle
+  id: Delta
+  title: "ДЕЛЬТА"
+
+- type: sponsorOocTitle
+  id: Gamma
+  title: "ГАММА"
+
+- type: sponsorOocTitle
+  id: Epsilon
+  title: "ЭПСИЛОН"
+
+# Sponsor OOC solid colors
+- type: sponsorOocColor
+  id: OocColorOrange
+  color: "#ffa500"
+
+- type: sponsorOocColor
+  id: OocColorBlueScpSpecialist
+  color: "#2a72ff"
+
+- type: sponsorOocColor
+  id: OocColorRedDirector
+  color: "#c72a44"
+
+- type: sponsorOocColor
+  id: OocColorCyanO5
+  color: "#44fffe"
+
+- type: sponsorOocColor
+  id: OocColorBlueContributor
+  color: "#3492eb"
+
+- type: sponsorOocColor
+  id: OocColorWhite
+  color: "#ffffff"
+
+- type: sponsorOocColor
+  id: OocColorBlueAkyla
+  color: "#3c9eff"
+
+- type: sponsorOocColor
+  id: OocColorYellowPoseidon
+  color: "#ffcb00"
+
+- type: sponsorOocColor
+  id: OocColorCyanLegenda
+  color: "#00fff1"
+
+- type: sponsorOocColor
+  id: OocColorPurpleBeta
+  color: "#e599f9"
+
+- type: sponsorOocColor
+  id: OocColorPinkAlpha
+  color: "#f67c86"
+
+# Sponsor OOC solid colors
+- type: sponsorOocColor
+  id: OocColorOrangeDelta
+  color: "#f9aa26"
+
+- type: sponsorOocColor
+  id: OocColorPinkGamma
+  color: "#ef2968"
+
+- type: sponsorOocColor
+  id: OocColorGreen
+  color: "#00ff00"
+
+- type: sponsorOocColor
+  id: OocColorMagenta
+  color: "#ff00ff"
+
+# Sponsor OOC gradients
+- type: sponsorOocColor
+  id: GradientRainbow
+  colors:
+  - "#FF0000"
+  - "#FF7F00"
+  - "#FFFF00"
+  - "#00FF00"
+  - "#5a85ff"
+  - "#b068ff"
+
+- type: sponsorOocColor
+  id: GradientSunset
+  colors:
+  - "#d05ccb"
+  - "#E94057"
+  - "#F27121"
+
+- type: sponsorOocColor
+  id: GradientOcean
+  colors:
+  - "#0099ff"
+  - "#00d2fc"
+  - "#00ffff"
+
+- type: sponsorOocColor
+  id: GradientToxic
+  colors:
+  - "#00FF00"
+  - "#32CD32"
+  - "#ADFF2F"
+
+- type: sponsorOocColor
+  id: GradientFire
+  colors:
+  - "#ff3d00"
+  - "#FF4500"
+  - "#FFD700"
+
+- type: sponsorOocColor
+  id: GradientNeon
+  colors:
+  - "#FF1493"
+  - "#b95cf0"
+  - "#00FFFF"
+
+- type: sponsorOocColor
+  id: GradientForest
+  colors:
+  - "#228B22"
+  - "#00FF7F"
+  - "#98FB98"
+
+- type: sponsorOocColor
+  id: GradientSakura
+  colors:
+  - "#FFB7C5"
+  - "#FFC0CB"
+  - "#FFFFFF"
+
+- type: sponsorOocColor
+  id: GradientMint
+  colors:
+  - "#98FF98"
+  - "#AFEEEE"
+  - "#E0FFFF"
+
+- type: sponsorOocColor
+  id: GradientGold
+  colors:
+  - "#ffd700"
+  - "#ffeb3b"
+  - "#fff59d"
+
+- type: sponsorOocColor
+  id: GradientCyberpunk
+  colors:
+  - "#00FFFF"
+  - "#FF00FF"
+  - "#c85ee0"
+
+- type: sponsorOocColor
+  id: GradientCottonCandy
+  colors:
+  - "#89CFF0"
+  - "#F4C2C2"

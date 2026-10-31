@@ -3,7 +3,5 @@
                xmlns:sponsorTiers="clr-namespace:Content.Client._Sunrise.SponsorTiers"
                Title="{Loc sponsors-tiers-gui-title}"
                MinSize="1300 800">
-    <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
-        <sponsorTiers:SponsorTiers Name="SponsorsTiersBody" Access="Public" />
-    </BoxContainer>
+    <sponsorTiers:SponsorTiers Name="SponsorsTiersBody" Access="Public" VerticalExpand="True" />
 </DefaultWindow>

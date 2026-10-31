@@ -105,4 +105,26 @@ public sealed partial class PlayerCacheManager
         }
         return true;
     }
+
+    public bool TryGetOocTitle(NetUserId userId, [NotNullWhen(true)] out string? title)
+    {
+        if (_cache.TryGetValue(userId, out var data) && !string.IsNullOrEmpty(data.OocTitle))
+        {
+            title = data.OocTitle;
+            return true;
+        }
+        title = null;
+        return false;
+    }
+
+    public bool TryGetOocColor(NetUserId userId, [NotNullWhen(true)] out string? color)
+    {
+        if (_cache.TryGetValue(userId, out var data) && !string.IsNullOrEmpty(data.OocColor))
+        {
+            color = data.OocColor;
+            return true;
+        }
+        color = null;
+        return false;
+    }
 }
