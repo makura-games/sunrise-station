@@ -72,7 +72,7 @@ namespace Content.Client._Sunrise.MentorHelp
         public event Action<string>? InputTextChanged;
         private static readonly Type[] TagsAllowed =
         [
-            typeof(BoldItalicTag),
+
             typeof(BoldTag),
             typeof(ColorTag),
             typeof(EmojiTag)
