@@ -2,20 +2,17 @@ using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared._Sunrise.Abilities;
 
 [RegisterComponent]
 public sealed partial class BorgCuffedComponent : Component
 {
-    [ViewVariables(VVAccess.ReadWrite),
-     DataField("cableCuffs", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string CableCuffsId = "Cablecuffs";
+    [ViewVariables(VVAccess.ReadWrite), DataField("cableCuffs")]
+    public EntProtoId CableCuffsId = "Cablecuffs";
 
-    [ViewVariables(VVAccess.ReadWrite),
-     DataField("cuffActionId", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string CuffActionId = "BorgCuffed";
+    [ViewVariables(VVAccess.ReadWrite), DataField]
+    public EntProtoId CuffActionId = "BorgCuffed";
 
     [ViewVariables(VVAccess.ReadWrite),
      DataField("cuffTime")]

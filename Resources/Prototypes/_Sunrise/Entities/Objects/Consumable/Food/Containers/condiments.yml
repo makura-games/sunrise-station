@@ -4,13 +4,13 @@
   name: smetana
   description: Sour cream which is popular in the USSP.
   components:
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Smetana
-          Quantity: 10
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 10
+      reagents:
+      - ReagentId: Smetana
+        Quantity: 10
   - type: Icon
     sprite: _Sunrise/Objects/Consumable/Food/condiments.rsi
     state: packet-smetana
@@ -25,13 +25,13 @@
   name: honey
   description: Thick, sweet liquid produced by bees from flower nectar.
   components:
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Honey
-          Quantity: 10
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 10
+      reagents:
+      - ReagentId: Honey
+        Quantity: 10
   - type: Icon
     sprite: _Sunrise/Objects/Consumable/Food/condiments.rsi
     state: packet-honey

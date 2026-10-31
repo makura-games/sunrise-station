@@ -1,6 +1,6 @@
 - type: entity
   id: Pacificator
-  parent: BaseMachinePowered
+  parent: [ BaseMachinePowered, BaseMachineDestructible ]
   name: pacifism generator
   description: Makes all sentient beings within range pacifists.
   placement:

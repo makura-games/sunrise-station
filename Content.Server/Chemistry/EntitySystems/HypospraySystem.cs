@@ -8,10 +8,10 @@ namespace Content.Server.Chemistry.EntitySystems;
 /// <summary>
 /// Server-side system for hypospray that adds borg announcement functionality
 /// </summary>
-public sealed class ServerHypospraySystem : EntitySystem
+public sealed partial class ServerHypospraySystem : EntitySystem
 {
-    [Dependency] private readonly Content.Server._Sunrise.Medical.BorgHypospraySystem _borgHypospray = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainers = default!;
+    [Dependency] private Content.Server._Sunrise.Medical.BorgHypospraySystem _borgHypospray = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainers = default!;
 
     public override void Initialize()
     {

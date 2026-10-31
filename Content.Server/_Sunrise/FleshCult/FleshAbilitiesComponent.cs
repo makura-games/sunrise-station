@@ -2,16 +2,14 @@
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
 namespace Content.Server._Sunrise.FleshCult
 {
     [RegisterComponent]
     public sealed partial class FleshAbilitiesComponent : Component
     {
-        [DataField("startingActions", customTypeSerializer: typeof(PrototypeIdListSerializer<EntityPrototype>))]
-        public List<string> StartingActions = new();
+        [DataField]
+        public List<EntProtoId> StartingActions = [];
 
         public List<EntityUid> Actions = new();
 

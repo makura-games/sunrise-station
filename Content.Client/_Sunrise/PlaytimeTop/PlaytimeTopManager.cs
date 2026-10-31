@@ -9,9 +9,9 @@ namespace Content.Client._Sunrise.PlaytimeTop;
 /// Client manager for top players by playtime.
 /// Receives data from the server and notifies UI of updates.
 /// </summary>
-public sealed class PlaytimeTopManager
+public sealed partial class PlaytimeTopManager
 {
-    [Dependency] private readonly IClientNetManager _netManager = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
 
     public List<PlaytimeTopEntry> OnlineNow { get; private set; } = [];
     public List<PlaytimeTopEntry> ActiveWeek { get; private set; } = [];

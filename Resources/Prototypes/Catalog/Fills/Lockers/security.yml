@@ -28,7 +28,6 @@
     children:
     - id: FlashlightSeclite
     - id: WeaponDisabler
-    - id: WeaponTaser
     - id: ClothingBeltSecurityFilled
     - id: Flash
     - id: ClothingEyesGlassesSecurity
@@ -46,6 +45,8 @@
       amount: 2
     - id: NetworkConfigurator
     - id: Binoculars
+    - id: PlushieLizardJobWarden
+      prob: 0.02
     - id: HandheldCriminalRecordsMonitor  # Sunrise-CriminalRecords
     - id: ClothingHandsKnuckleDustersStun # Sunrise-edit
 
@@ -75,7 +76,6 @@
     - id: FlashlightSeclite
       prob: 0.8
     - id: WeaponDisabler
-    - id: WeaponTaser
     - id: ClothingUniformJumpsuitSecGrey
       prob: 0.3
     - id: ClothingHeadHelmetBasic
@@ -93,6 +93,10 @@
       prob: 0.6
     - id: BookSpaceLaw
       prob: 0.5
+    - id: PlushieLizardJobSecuritycadet
+      prob: 0.02
+    - id: PlushieLizardJobSecurityofficer
+      prob: 0.02
 
 - type: entity
   id: LockerBrigmedicFilled
@@ -109,13 +113,13 @@
   table: !type:AllSelector
     children:
     - id: ClothingEyesGlassesSecurity
-    - id: WeaponTaser
     - id: BoxBeaker # Sunrise-edit
     - id: BoxVial # Sunrise-edit
     - id: WeaponDisabler
     - id: TrackingImplanter
       amount: 2
     - id: ClothingOuterHardsuitBrigmedicSunrise # Sunrise-edit
+    - id: MedipenCaseBrigmedic # Sunrise-edit
     - id: BoxSterileMask
     - id: ClothingHeadHatBeretBrigmedic
     - id: ClothingOuterCoatAMG
@@ -176,6 +180,8 @@
     - id: HoloprojectorSecurity
     - id: BoxEvidenceMarkers
     - id: HandLabeler
+    - id: PlushieLizardJobDetective
+      prob: 0.02
     - id: PortableSurveillanceCameraMonitor # Sunrise-edit
 
 - type: entity
@@ -266,10 +272,8 @@
     # Sunrise-Start
     - id: WeaponRifleLeikha
     - id: MagazineRifleSP
-      amount: 4
+      amount: 6 # Sunrise-Edit - заменяем удалённые HP-магазины на базовые
     - id: MagazineRifleFMJ
-      amount: 2
-    - id: MagazineRifleHP
       amount: 2
     # Sunrise-End
 

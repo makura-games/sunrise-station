@@ -4,6 +4,23 @@
   abstract: true
   sender: base-tutorial-sender
 
+# Общий финальный шаг с напоминанием о помощи наставников.
+- type: tutorialStep
+  id: TutorialMHelp
+  parent: BaseTutorialStepBase
+  bubble:
+    text: tutorial-mhelp-bubble
+  chatMessage: tutorial-mhelp-chat
+  ttsMessage: tutorial-mhelp-tts
+  uiHighlight:
+  - !type:UiByName
+    name: TopBar
+  - !type:UiByName
+    name: MHelpButton
+  conditions:
+  - !type:StepDelayCondition
+    delay: 9
+
 # Steps where the player moves/walks.
 - type: tutorialStep
   id: BaseTutorialMovementStepBase

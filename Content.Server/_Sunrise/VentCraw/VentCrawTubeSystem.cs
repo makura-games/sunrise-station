@@ -12,13 +12,14 @@ using Robust.Shared.Containers;
 
 namespace Content.Server._Sunrise.VentCraw
 {
-    public sealed class VentCrawTubeSystem : SharedVentCrawableSystem
+    public sealed partial class VentCrawTubeSystem : SharedVentCrawableSystem
     {
-        [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-        [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-        [Dependency] private readonly PopupSystem _popup = default!;
-        [Dependency] private readonly SharedMoverController _mover = default!;
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private SharedContainerSystem _containerSystem = default!;
+        [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+        [Dependency] private PopupSystem _popup = default!;
+        [Dependency] private SharedMoverController _mover = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
+        [Dependency] private EntityQuery<VentCrawHolderComponent> _holderQuery = default!;
 
         public override void Initialize()
         {
@@ -63,9 +64,7 @@ namespace Content.Server._Sunrise.VentCraw
             if (args.Handled || args.Cancelled || args.Args.Target == null || args.Args.Used == null)
                 return;
 
-            TryInsert(args.Args.Target.Value, args.Args.Used.Value);
-
-            args.Handled = true;
+            args.Handled = TryInsert(args.Args.Target.Value, args.User);
         }
 
         private void TryEnter(EntityUid uid, EntityUid user, VentCrawlerComponent crawler)
@@ -185,10 +184,9 @@ namespace Content.Server._Sunrise.VentCraw
 
             tube.Connected = false;
 
-            var query = GetEntityQuery<VentCrawHolderComponent>();
             foreach (var entity in tube.Contents.ContainedEntities.ToArray())
             {
-                if (query.TryGetComponent(entity, out var holder))
+                if (_holderQuery.TryGetComponent(entity, out var holder))
                 {
                     var Exitev = new VentCrawExitEvent();
                     RaiseLocalEvent(entity, ref Exitev);
@@ -206,14 +204,22 @@ namespace Content.Server._Sunrise.VentCraw
 
             var holder = Spawn(VentCrawEntryComponent.HolderPrototypeId, _transform.GetMapCoordinates(uid));
             var holderComponent = Comp<VentCrawHolderComponent>(holder);
+            holderComponent.FirstEntry = true;
 
-            TryInsert(holder, entity, holderComponent);
+            if (!TryInsert(holder, entity, holderComponent))
+            {
+                QueueDel(holder);
+                return false;
+            }
+
+            if (!EnterTube(holder, uid, holderComponent))
+                return false;
 
             _mover.SetRelay(entity, holder);
             ventCrawlerComponent.InTube = true;
             Dirty(entity, ventCrawlerComponent);
 
-            return EnterTube(holder, uid, holderComponent);
+            return true;
         }
     }
 }

@@ -71,7 +71,11 @@ public sealed partial class GradientMarkingEffect : MarkingEffect
                 default:
                 {
                     if (type.StartsWith("color."))
-                        colors[type["color.".Length..]] = Color.TryFromHex(value) ?? Color.White;
+                    {
+                        colors[type["color.".Length..]] = Color.TryFromHex(value, out var parsedColor)
+                            ? parsedColor
+                            : Color.White;
+                    }
                     break;
                 }
             }

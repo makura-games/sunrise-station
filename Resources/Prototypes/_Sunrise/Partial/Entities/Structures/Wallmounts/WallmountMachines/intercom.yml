@@ -1,0 +1,44 @@
+- type: !PartialOnly entity
+  id: BaseIntercom
+  components:
+  - type: Sprite
+    noRot: false
+    drawdepth: SmallObjects
+    sprite: _Sunrise/Structures/Wallmounts/intercom.rsi
+    offset: 0, 0
+    layers: !Clear
+    - !Index:0
+      state: base
+    - !Index:0
+      state: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      shader: unshaded
+    - !Index:0
+      state: broadcasting
+      map: ["enum.RadioDeviceVisualLayers.Broadcasting"]
+      shader: unshaded
+      visible: false
+    - !Index:0
+      state: speaker
+      map: ["enum.RadioDeviceVisualLayers.Speaker"]
+      shader: unshaded
+      visible: false
+    - !Index:0
+      state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      visible: false
+
+- type: !PartialOnly entity
+  id: IntercomAssembly
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    sprite: _Sunrise/Structures/Wallmounts/intercom.rsi
+    offset: 0, 0
+    layers: !Clear
+    - !Index:0
+      state: build
+    - !Index:0
+      state: panel
+      visible: false
+      map: [ "wires" ]

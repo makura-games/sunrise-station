@@ -8,6 +8,7 @@ on:
 
 jobs:
   add_label:
+    if: false # Sunrise-Edit - устаревший сценарий Wizden отключён
     runs-on: ubuntu-latest
     steps:
     - uses: actions-ecosystem/action-add-labels@v1

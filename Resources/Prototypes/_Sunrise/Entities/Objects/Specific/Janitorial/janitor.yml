@@ -45,20 +45,18 @@
     - type: UseDelay
       delay: 0.5
     - type: SolutionRegeneration
-      solution: absorbed
       generated:
         reagents:
         - ReagentId: Water
           Quantity: 2.5
     - type: SolutionPurge
-      solution: absorbed
       preserve:
       - Water
       quantity: 10
-    - type: SolutionContainerManager
-      solutions:
-        absorbed:
-          maxVol: 30
+    - type: Solution
+      id: absorbed
+      solution:
+        maxVol: 30
     - type: Tag
       tags:
         - Mop

@@ -1,0 +1,215 @@
+{
+    "copyright" : "Sprited by .askal02 (discord) for Makura Games",
+    "license" : "CC-BY-SA-4.0",
+    "version": 1,
+    "size": {
+      "x": 32,
+      "y": 32
+    },
+    "states": [
+      {
+        "name": "durand_harness"
+      },
+      {
+        "name": "durand_armor"
+      },
+      {
+        "name": "darkdurand_armor"
+      },
+      {
+        "name": "durand_harness+o"
+      },
+      {
+        "name": "durand_head"
+      },
+      {
+        "name": "durand_head+o"
+      },
+      {
+        "name": "durand_r_arm"
+      },
+      {
+        "name": "durand_r_arm+o"
+      },
+      {
+        "name": "durand_l_arm"
+      },
+      {
+        "name": "durand_l_arm+o"
+      },
+      {
+        "name": "durand_r_leg"
+      },
+      {
+        "name": "durand_r_leg+o"
+      },
+      {
+        "name": "durand_l_leg"
+      },
+      {
+        "name": "durand_l_leg+o"
+      },
+      {
+        "name": "durand0"
+      },
+      {
+        "name": "durand1"
+      },
+      {
+        "name": "durand2"
+      },
+      {
+        "name": "durand3"
+      },
+      {
+        "name": "durand4"
+      },
+      {
+        "name": "durand5"
+      },
+      {
+        "name": "durand6"
+      },
+      {
+        "name": "durand7"
+      },
+      {
+        "name": "durand8"
+      },
+      {
+        "name": "durand9"
+      },
+      {
+        "name": "durand10"
+      },
+      {
+        "name": "durand11"
+      },
+      {
+        "name": "durand12"
+      },
+      {
+        "name": "durand13"
+      },
+      {
+        "name": "durand14"
+      },
+      {
+        "name": "durand15"
+      },
+      {
+        "name": "durand16"
+      },
+      {
+        "name": "durand17"
+      },
+      {
+        "name": "durand18"
+      },
+      {
+        "name": "durand19"
+      },
+      {
+        "name": "durand20"
+      },
+      {
+        "name": "durand21"
+      },
+      {
+        "name": "durand22"
+      },
+      {
+        "name": "durand23"
+      },
+      {
+        "name": "durand24"
+      },
+      {
+        "name": "durand25"
+      },
+      {
+        "name": "durand26"
+      },
+      {
+        "name": "durand27"
+      },
+      {
+        "name": "durand28"
+      },
+      {
+        "name": "durand29"
+      },
+      {
+        "name": "durand30"
+      },
+      {
+        "name": "durand31"
+      },
+      {
+        "name": "durand32"
+      },
+      {
+        "name": "durand33"
+      },
+      {
+        "name": "durand34"
+      },
+      {
+        "name": "durand35"
+      },
+      {
+        "name": "durand36"
+      },
+      {
+        "name": "durand37"
+      },
+      {
+        "name": "durand38"
+      },
+      {
+        "name": "durand39"
+      },
+      {
+        "name": "durand40"
+      },
+      {
+        "name": "durand41"
+      },
+      {
+        "name": "durand42"
+      },
+      {
+        "name": "durand43"
+      },
+      {
+        "name": "durand44"
+      },
+      {
+        "name": "durand45"
+      },
+      {
+        "name": "durand46"
+      },
+      {
+        "name": "durand47"
+      },
+      {
+        "name": "durand48"
+      },
+      {
+        "name": "durand49"
+      },
+      {
+        "name": "durand50"
+      },
+      {
+        "name": "durand51"
+      },
+      {
+        "name": "durand52"
+      },
+      {
+        "name": "durand53"
+      }
+    ]
+  }

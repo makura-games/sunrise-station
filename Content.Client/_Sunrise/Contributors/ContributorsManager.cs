@@ -5,7 +5,7 @@ namespace Content.Client._Sunrise.Contributors;
 
 public sealed partial class ContributorsManager
 {
-    [Dependency] private readonly IClientNetManager _netManager = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
 
     public event Action<List<ContributorEntry>>? ContributorsDataListChanged;
 

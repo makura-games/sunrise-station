@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Content.Shared._Sunrise.Tutorial.Prototypes;
 using Content.Shared.Eui;
 using Robust.Shared.Serialization;
 
@@ -8,6 +7,7 @@ namespace Content.Shared._Sunrise.Tutorial.Eui;
 
 public static class TutorialCompletionActions
 {
+    public const string Next = "next";
     public const string Leave = "leave";
     public const string Stay = "stay";
 }
@@ -19,12 +19,10 @@ public sealed partial record TutorialCompletionEuiAction(string Id, string Text,
 public sealed partial class TutorialCompletionEuiState(
     string title,
     string description,
-    List<TutorialCompletionEuiAction> actions,
-    string protoId) : EuiStateBase
+    List<TutorialCompletionEuiAction> actions) : EuiStateBase
 {
     public readonly string Title = title;
     public readonly string Description = description;
-    public readonly string ProtoId = protoId;
     public readonly List<TutorialCompletionEuiAction> Actions = actions;
 }
 

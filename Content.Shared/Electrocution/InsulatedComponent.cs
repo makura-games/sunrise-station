@@ -2,6 +2,9 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared.Electrocution
 {
+    /// <summary>
+    /// This component protects an entity from being electrocuted.
+    /// </summary>
     [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
     [Access(typeof(SharedElectrocutionSystem))]
     public sealed partial class InsulatedComponent : Component
@@ -14,13 +17,5 @@ namespace Content.Shared.Electrocution
         [DataField, AutoNetworkedField]
         public float Coefficient { get; set; } = 0f;
 
-        // Sunrise-Start
-        /// <summary>
-        /// Whether or not someone with
-        /// Insulated gloves can opperate guns
-        /// </summary>
-        [DataField]
-        public bool PreventOpperatinGuns = false;
-        // Sunrise-End
     }
 }

@@ -10,5 +10,5 @@ ent-DefibrillatorOneHandedUnpowered = { ent-BaseDefibrillator }
     .desc = { ent-BaseDefibrillator.desc }
 ent-DefibrillatorCompact = компактный дефибриллятор
     .desc = Теперь в забавном размере!
-ent-DefibrillatorSyndicate = дефибриллятор Interdyne
+ent-DefibrillatorSyndicate = дефибриллятор интердайн
     .desc = Вводит в сердце смесь из омнизина, эпинефрина и некросола даже в живых пациентов. Может использоваться для атаки, поражая врагов сильным электрическим зарядом.

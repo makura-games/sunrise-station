@@ -47,13 +47,3 @@
   cost: 1200
   category: cargoproduct-category-name-armory
   group: market
-
-- type: cargoProduct
-  id: ArmoryShotgunCombat
-  icon:
-    sprite: _Starlight/Objects/Weapons/Guns/Shotguns/cshotgun.rsi
-    state: icon
-  product: CrateArmoryCombatShotgun
-  cost: 9900
-  category: cargoproduct-category-name-armory
-  group: market

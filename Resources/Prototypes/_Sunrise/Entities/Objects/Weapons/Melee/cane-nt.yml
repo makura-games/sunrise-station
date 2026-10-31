@@ -9,8 +9,9 @@
     layers:
     - state: cane-nt
       map: [ "enum.ToggleableVisuals.Layer" ]
-  - type: Stunbaton
-    energyPerUse: 25
+  - type: ItemToggleExaminableStatus
+  - type: ItemToggleRequiresCharge
+    requiredCharge: 25
   - type: ItemToggle
     predictable: false
     soundActivate:
@@ -43,6 +44,10 @@
   - type: StaminaDamageOnHit
     damage: 40
     sound: /Audio/Weapons/egloves.ogg
+  - type: MeleeBatteryHitsLeft
+  - type: StaminaDamageOnHitRequiresToggle
+  - type: StaminaDamageOnHitRequiresCharge
+    requiredCharge: 25
   - type: StaminaDamageOnCollide
     damage: 40
     sound: /Audio/Weapons/egloves.ogg
@@ -64,10 +69,10 @@
           True: {state: cane-nt-active}
           False: {state: cane-nt}
   - type: Riggable
-  - type: SolutionContainerManager
-    solutions:
-      battery:
-        maxVol: 5
+  - type: Solution
+    id: battery
+    solution:
+      maxVol: 5
   - type: InjectableSolution
     solution: battery
   - type: DrawableSolution
