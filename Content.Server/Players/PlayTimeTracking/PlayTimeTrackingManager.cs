@@ -104,7 +104,7 @@ public sealed partial class PlayTimeTrackingManager : ISharedPlaytimeManager, IP
         // NOTE: This is run **out** of simulation. This is intentional.
 
         UpdateDirtyPlayers();
-        UpdatePlayTimeSessions();
+        UpdatePlayTimeSessions(); // Sunrise-Edit - обновление сессий игрового времени
 
         if (_timing.RealTime < _lastSave + _saveInterval)
             return;
@@ -164,6 +164,8 @@ public sealed partial class PlayTimeTrackingManager : ISharedPlaytimeManager, IP
             _runtimeLog.LogException(e, "PlayTime CalcTrackers");
             data.ActiveTrackers.Clear();
         }
+
+        UpdatePlayTimeSessionActivity(dirty, data); // Sunrise-Edit - учёт только активного игрового времени Overall
     }
 
     /// <summary>
@@ -269,13 +271,6 @@ public sealed partial class PlayTimeTrackingManager : ISharedPlaytimeManager, IP
 
         foreach (var (player, data) in _playTimeData)
         {
-            // Sunrise edit start - Update PlayTimeSession on auto-save
-            if (data.CurrentDbSessionId.HasValue)
-            {
-                await _db.UpdatePlayTimeSessionAsync(data.CurrentDbSessionId.Value, DateTime.UtcNow);
-            }
-            // Sunrise edit end
-
             foreach (var tracker in data.DbTrackersDirty)
             {
                 log.Add(new PlayTimeUpdate(player.UserId, tracker, data.TrackerTimes[tracker]));
@@ -300,13 +295,6 @@ public sealed partial class PlayTimeTrackingManager : ISharedPlaytimeManager, IP
         var log = new List<PlayTimeUpdate>();
 
         var data = _playTimeData[session];
-
-        // Sunrise edit start - Update PlayTimeSession on auto-save
-        if (data.CurrentDbSessionId.HasValue)
-        {
-            await _db.UpdatePlayTimeSessionAsync(data.CurrentDbSessionId.Value, DateTime.UtcNow);
-        }
-        // Sunrise edit end
 
         foreach (var tracker in data.DbTrackersDirty)
         {
@@ -336,16 +324,6 @@ public sealed partial class PlayTimeTrackingManager : ISharedPlaytimeManager, IP
             data.TrackerTimes.Add(timer.Tracker, timer.TimeSpent);
         }
 
-        // Sunrise edit start - Чтобы локальные тесты не ломались сохраняем время только игрокам с авторизацией,
-        // к сложелению работает в таков виде только на проде
-        if (session.Channel.AuthType == LoginType.LoggedIn)
-        {
-            var sessionId = await _db.AddPlayTimeSessionAsync(session.UserId.UserId, data.ConnectTime, DateTime.UtcNow);
-            data.CurrentDbSessionId = sessionId;
-            OnPlayTimeSessionStarted(session);
-        }
-        // Sunrise edit end
-
         data.Initialized = true;
 
         QueueRefreshTrackers(session);
@@ -354,10 +332,7 @@ public sealed partial class PlayTimeTrackingManager : ISharedPlaytimeManager, IP
 
     public void ClientDisconnected(ICommonSession session)
     {
-        // Sunrise edit start - Save PlayTimeSession on player disconnect
-        OnPlayTimeSessionDisconnected(session);
-        // Sunrise edit end
-
+        OnPlayTimeSessionDisconnected(session); // Sunrise-Edit - сохранение сессии игрового времени при выходе
         SaveSession(session);
 
         _playTimeData.Remove(session);
@@ -466,7 +441,7 @@ public sealed partial class PlayTimeTrackingManager : ISharedPlaytimeManager, IP
     /// <summary>
     /// Play time info for a particular player.
     /// </summary>
-    private sealed class PlayTimeData
+    private sealed partial class PlayTimeData // Sunrise-Edit
     {
         // Queued update flags
         public bool IsDirty;
@@ -490,21 +465,6 @@ public sealed partial class PlayTimeTrackingManager : ISharedPlaytimeManager, IP
         /// Set of trackers which are different from their DB values and need to be saved to DB.
         /// </summary>
         public readonly HashSet<string> DbTrackersDirty = new();
-
-        /// <summary>
-        /// Current playtime session database ID.
-        /// </summary>
-        public int? CurrentDbSessionId;
-
-        /// <summary>
-        /// Connect time of the player to the server.
-        /// </summary>
-        public readonly DateTime ConnectTime = DateTime.UtcNow;
-
-        /// <summary>
-        /// Next heartbeat timestamp for the playtime session.
-        /// </summary>
-        public TimeSpan NextHeartbeat;
     }
 
     void IPostInjectInit.PostInject()
@@ -513,4 +473,3 @@ public sealed partial class PlayTimeTrackingManager : ISharedPlaytimeManager, IP
         _userDb.AddOnPlayerDisconnect(ClientDisconnected);
     }
 }
-

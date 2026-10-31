@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,6 +32,8 @@ public sealed partial class PlaytimeTopManager
     private const int TopCount = 20;
     private readonly TimeSpan _updateRate = TimeSpan.FromMinutes(1);
     private TimeSpan _nextUpdate = TimeSpan.Zero;
+    private bool _isUpdating;
+    private bool _hasInitialLoad;
 
     private List<PlaytimeTopEntry> _cachedOnlineNow = [];
     private List<PlaytimeTopEntry> _cachedActiveWeek = [];
@@ -48,12 +52,21 @@ public sealed partial class PlaytimeTopManager
         if (e.NewStatus == SessionStatus.Connected)
         {
             SendTo(e.Session);
+
+            if (_nextUpdate <= _timing.CurTime && !_isUpdating)
+            {
+                _nextUpdate = _timing.CurTime + _updateRate;
+                UpdateTopAsync();
+            }
         }
     }
 
     public void Update()
     {
-        if (_nextUpdate > _timing.CurTime)
+        if (_nextUpdate > _timing.CurTime || _isUpdating)
+            return;
+
+        if (_hasInitialLoad && _playerManager.PlayerCount == 0)
             return;
 
         _nextUpdate = _timing.CurTime + _updateRate;
@@ -62,6 +75,10 @@ public sealed partial class PlaytimeTopManager
 
     private async void UpdateTopAsync()
     {
+        if (_isUpdating)
+            return;
+
+        _isUpdating = true;
         try
         {
             var (onlineNow, activeWeek, activeMonth, allTime) = await RefreshCaches();
@@ -72,11 +89,14 @@ public sealed partial class PlaytimeTopManager
                 _cachedActiveWeek = activeWeek;
                 _cachedActiveMonth = activeMonth;
                 _cachedAllTime = allTime;
+                _hasInitialLoad = true;
+                _isUpdating = false;
                 SendToAll();
             });
         }
         catch (Exception e)
         {
+            _isUpdating = false;
             _sawmill.Error($"Ошибка при обновлении топа игроков: {e}");
         }
     }
@@ -85,20 +105,21 @@ public sealed partial class PlaytimeTopManager
         List<PlaytimeTopEntry> activeMonth, List<PlaytimeTopEntry> allTime)> RefreshCaches()
     {
         var cancel = CancellationToken.None;
+        var now = DateTime.UtcNow;
 
-        var daySince = DateTime.UtcNow - TimeSpan.FromDays(1);
+        var daySince = now - TimeSpan.FromDays(1);
         var dayData = await _db.GetTopPlayersActiveSinceWithSession(daySince, TopCount, cancel);
         var onlineNow = dayData
             .Select(x => new PlaytimeTopEntry(x.Username, x.Time))
             .ToList();
 
-        var weekSince = DateTime.UtcNow - TimeSpan.FromDays(7);
+        var weekSince = now - TimeSpan.FromDays(7);
         var weekData = await _db.GetTopPlayersActiveSinceWithSession(weekSince, TopCount, cancel);
         var activeWeek = weekData
             .Select(x => new PlaytimeTopEntry(x.Username, x.Time))
             .ToList();
 
-        var monthSince = DateTime.UtcNow - TimeSpan.FromDays(30);
+        var monthSince = now - TimeSpan.FromDays(30);
         var monthData = await _db.GetTopPlayersActiveSinceWithSession(monthSince, TopCount, cancel);
         var activeMonth = monthData
             .Select(x => new PlaytimeTopEntry(x.Username, x.Time))
