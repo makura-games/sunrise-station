@@ -3,7 +3,7 @@ using Robust.Client.UserInterface.Controllers;
 
 namespace Content.Client._Sunrise.SponsorTiers;
 
-public partial class SponsorPersonalizationUIController : UIController
+public sealed partial class SponsorPersonalizationUIController : UIController
 {
     [Dependency] private IUserInterfaceManager _uiManager = default!;
 
