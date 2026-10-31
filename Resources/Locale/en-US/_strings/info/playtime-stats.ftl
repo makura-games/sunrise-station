@@ -14,6 +14,15 @@ ui-playtime-time-format-short =
     }
 ui-playtime-time-format-verbose =
     { $hours ->
-        [0] { $minutes } minutes
-       *[other] { $hours } hours { $minutes } minutes
+        [0] { $minutes } { $minutes ->
+            [one] minute
+           *[other] minutes
+        }
+       *[other] { $hours } { $hours ->
+            [one] hour
+           *[other] hours
+        } { $minutes } { $minutes ->
+            [one] minute
+           *[other] minutes
+        }
     }
