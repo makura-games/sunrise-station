@@ -137,6 +137,8 @@ public sealed partial class MentorHelpSystem
         string? sponsorTitle = null;
         string? sponsorColorHex = null;
         bool isGradient = false;
+        bool explicitNoneTitle = false;
+        bool explicitNoneColor = false;
 
         var isActiveAdmin = senderAdminData != null;
         var isSponsor = _sponsorsManager != null && _sponsorsManager.IsSponsor(senderUserId);
@@ -146,31 +148,89 @@ public sealed partial class MentorHelpSystem
         {
             _sponsorsManager.TryGetOocTitle(senderUserId, out sponsorTitle);
             if (_sponsorsManager.TryGetOocColor(senderUserId, out var color))
-                sponsorColorHex = "#" + color.Value.ToHexNoAlpha();
+                sponsorColorHex = "#" + color.Value.ToHexNoAlpha().TrimStart('#');
         }
 
         if (_playerManager.TryGetSessionById(senderUserId, out var session))
         {
             var selectedTitleCVar = _netConfig.GetClientCVar(session.Channel, SunriseCCVars.SponsorOocTitle);
-            if (!string.IsNullOrEmpty(selectedTitleCVar))
-                sponsorTitle = selectedTitleCVar == "@none" ? null : selectedTitleCVar;
+            if (selectedTitleCVar == "@none")
+            {
+                explicitNoneTitle = true;
+                sponsorTitle = null;
+            }
+            else if (!string.IsNullOrEmpty(selectedTitleCVar))
+            {
+                var isAllowedTitle = false;
+                if (_sponsorsManager != null && _sponsorsManager.TryGetPrototypes(senderUserId, out var prototypes))
+                    isAllowedTitle = prototypes.Contains(selectedTitleCVar);
+
+                if (isAllowedAdminBypass && senderAdminData != null &&
+                    (selectedTitleCVar == senderAdminData.Title || OocGradientHelper.TryResolveTitle(selectedTitleCVar, out _)))
+                {
+                    isAllowedTitle = true;
+                }
+
+                if (isAllowedTitle)
+                    sponsorTitle = selectedTitleCVar;
+            }
 
             var selectedColorCVar = _netConfig.GetClientCVar(session.Channel, SunriseCCVars.SponsorOocColor);
-            if (!string.IsNullOrEmpty(selectedColorCVar))
-                sponsorColorHex = selectedColorCVar == "@none" ? null : selectedColorCVar;
+            if (selectedColorCVar == "@none")
+            {
+                explicitNoneColor = true;
+                sponsorColorHex = null;
+            }
+            else if (!string.IsNullOrEmpty(selectedColorCVar))
+            {
+                if (OocGradientHelper.IsGradientId(selectedColorCVar))
+                {
+                    isGradient = true;
+                }
+                else
+                {
+                    Color? parsedColor = null;
+                    if (OocGradientHelper.TryResolveColor(selectedColorCVar, out var resolvedCol))
+                        parsedColor = resolvedCol;
+                    else if (Color.TryFromHex(selectedColorCVar, out var hexCol))
+                        parsedColor = hexCol;
+
+                    if (parsedColor != null)
+                    {
+                        var isAllowedColor = false;
+                        if (_sponsorsManager != null && _sponsorsManager.TryGetPrototypes(senderUserId, out var prototypes))
+                            isAllowedColor = prototypes.Contains(selectedColorCVar);
+
+                        if (isAllowedAdminBypass && senderAdminData != null)
+                        {
+                            var adminColorHex = senderAdminData.HasFlag(AdminFlags.Adminhelp) ? "#ff0000" : "#800080";
+                            if (selectedColorCVar.Equals(adminColorHex, StringComparison.OrdinalIgnoreCase) ||
+                                OocGradientHelper.TryResolveColor(selectedColorCVar, out _))
+                            {
+                                isAllowedColor = true;
+                            }
+                        }
+
+                        if (isAllowedColor)
+                            sponsorColorHex = "#" + parsedColor.Value.ToHexNoAlpha().TrimStart('#');
+                    }
+                }
+            }
         }
 
         if (sponsorTitle != null && OocGradientHelper.TryResolveTitle(sponsorTitle, out var resolvedTitle))
             sponsorTitle = resolvedTitle;
 
-        isGradient = OocGradientHelper.IsGradientId(sponsorColorHex);
-
         if (isActiveAdmin)
         {
-            if (string.IsNullOrWhiteSpace(sponsorTitle) && senderAdminData?.Title is { } adminTitle)
+            if (!explicitNoneTitle && string.IsNullOrWhiteSpace(sponsorTitle) &&
+                _config.GetCVar(SunriseCCVars.MentorHelpAdminPrefixEnabled) &&
+                senderAdminData?.Title is { } adminTitle)
+            {
                 sponsorTitle = adminTitle;
+            }
 
-            if (string.IsNullOrWhiteSpace(sponsorColorHex) && !isGradient)
+            if (!explicitNoneColor && string.IsNullOrWhiteSpace(sponsorColorHex) && !isGradient)
             {
                 if (senderAdminData != null && senderAdminData.HasFlag(AdminFlags.Mentor) && senderAdminData.Flags == AdminFlags.Mentor)
                     sponsorColorHex = "purple";
