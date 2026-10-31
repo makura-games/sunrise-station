@@ -15,7 +15,7 @@ public sealed partial class TTSSystem
         args.Message = args.Message.Replace("+", "");
     }
 
-    [GeneratedRegex(@"(?<![a-zA-Z0-9_]):[^\s:]+:(?![a-zA-Z0-9_])")]
+    [GeneratedRegex(@"(?<![\p{L}\p{N}_]):[^\s:]+:(?![\p{L}\p{N}_])")]
     private static partial Regex EmojiRegex();
 
     [GeneratedRegex(@"[^a-zA-Zа-яА-ЯёЁ0-9,\-+?!. ]")]
@@ -35,7 +35,7 @@ public sealed partial class TTSSystem
 
     private string Sanitize(string text)
     {
-        text = EmojiRegex().Replace(text, "");
+        text = EmojiRegex().Replace(text, match => _emojiSystem.Emojis.ContainsKey(match.Value) ? "" : match.Value);
         text = text.Trim();
         text = CharsToSanitizeRegex().Replace(text, "");
         text = Lat2CyrRegex().Replace(text, ReplaceLat2Cyr);
