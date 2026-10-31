@@ -22,6 +22,13 @@ public abstract partial class ServerDbContext
         modelBuilder.Entity<JobAlternativeTitle>()
             .HasIndex(job => new { job.ProfileId, job.JobName })
             .IsUnique();
+
+        modelBuilder.Entity<PlayTimeSession>()
+            .HasOne(s => s.Player)
+            .WithMany(p => p.PlayTimeSessions)
+            .HasForeignKey(s => s.PlayerId)
+            .HasPrincipalKey(p => p.UserId)
+            .IsRequired();
     }
 }
 
