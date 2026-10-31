@@ -1,1 +1,15 @@
-ui-lobby-cfgwelcome = Добро пожаловать на { $name }
+lobby-playtime-top-header = Top Players by Playtime
+lobby-playtime-top-tab-day = Day
+lobby-playtime-top-tab-week = Week
+lobby-playtime-top-tab-month = Month
+lobby-playtime-top-tab-alltime = All Time
+lobby-playtime-top-column-login = Username
+lobby-playtime-top-column-hours = Time
+ui-server-info-round = Current round
+ui-server-info-players = Current player count
+ui-server-info-map = Current map
+ui-server-info-mode = Current game mode
+ui-server-info-round-short = Round
+ui-server-info-players-short = Players
+ui-server-info-map-short = Map
+ui-server-info-mode-short = Mode

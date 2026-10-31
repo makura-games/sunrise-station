@@ -76,8 +76,17 @@ public class ChatInputBox : PanelContainer
             EmojiButton.SetPositionInParent(1);
         }
 
+        if (!visible)
+            _emojiPickerCleanup?.Invoke();
+
         if (EmojiButton != null)
             EmojiButton.Visible = visible;
+    }
+
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+        _emojiPickerCleanup?.Invoke();
     }
     // Sunrise-End
 

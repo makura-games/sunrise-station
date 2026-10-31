@@ -1,3 +1,4 @@
+using Content.Client._Sunrise.Lobby; // Sunrise-Edit
 using Content.Client.Lobby;
 using Content.IntegrationTests.Fixtures;
 using Content.Server.Preferences.Managers;
@@ -24,7 +25,7 @@ public sealed class CharacterCreationTest : GameTest
         var clientPrefManager = client.Resolve<IClientPreferencesManager>();
         var serverPrefManager = server.Resolve<IServerPreferencesManager>();
 
-        Assert.That(client.Resolve<IStateManager>().CurrentState, Is.TypeOf<LobbyState>());
+        Assert.That(client.Resolve<IStateManager>().CurrentState, Is.TypeOf<SunriseLobbyState>()); // Sunrise-Edit
         await client.WaitPost(() => clientPrefManager.SelectCharacter(0));
         await pair.RunTicksSync(5);
 

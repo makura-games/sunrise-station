@@ -196,7 +196,7 @@ public sealed partial class UserProfile : Control
             {
                 if (OocGradientHelper.IsGradientId(colorHex))
                 {
-                    var gradientMarkup = OocGradientHelper.ApplyGradientById(escapedTierTitle, colorHex);
+                    var gradientMarkup = OocGradientHelper.ApplyGradientById(tierTitle, colorHex);
                     SponsorTierName.SetMessage(FormattedMessage.FromMarkupOrThrow($"[bold]{gradientMarkup}[/bold]"));
                 }
                 else
