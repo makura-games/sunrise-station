@@ -33,6 +33,8 @@ spellbook-slip-name = Скользкий путь
 spellbook-slip-desc = Изучите древние пути уборщика и прокляните свою цель на скольжение. Требуется мантия и шляпа волшебника.
 spellbook-item-recall-name = Призыв предмета
 spellbook-item-recall-description = Отметьте удерживаемый предмет и призовите его обратно в любой момент простым щелчком пальцев!
+spellbook-guardian-deck-name = Колода Таро
+spellbook-guardian-deck-description = Странная колода карт, которая при использовании дарует вам призрачного стража.
 
 # Equipment
 
@@ -63,5 +65,3 @@ spellbook-upgrade-fireball-description = Позволяет улучшить О�
 spellbook-upgrade-jaunt-name = Улучшение Эфирной прогулки
 spellbook-upgrade-jaunt-description = Позволяет улучшить Эфирную прогулку до максимального 3-го уровня!
 spellbook-polymoprh-spider-name = Полиморф-паук
-spellbook-guardian-deck-name = Колода Таро
-spellbook-guardian-deck-description = Странная колода карт, которая при использовании дарует вам призрачного стража.

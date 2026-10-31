@@ -2,6 +2,9 @@ teleporter-console-slot-name = Диск
 teleporter-console-chip-record = Координаты сохранены!
 teleporter-console-chip-examine-recorded = [color=#f5b942]Записанные координаты: { $portal }[/color]
 teleporter-console-chip-examine-null = [color=#f5b942]Записанные координаты: нет[/color]
+
+# UI
+
 teleporter-console-user-interface-title = Консоль управления телепортатором
 teleporter-console-user-interface-locate = Определить местоположение
 teleporter-console-user-interface-start-connection = Установить соединение

@@ -3,4 +3,4 @@ cmd-clearjobpriorities-help = Использование: clearjobpriorities <pl
 cmd-clearjobpriorities-player-not-found = Игрок { $player } не подключён.
 cmd-clearjobpriorities-preferences-not-loaded = Настройки для { $player } ещё не загружены.
 cmd-clearjobpriorities-success = Все настройки должностей для { $player } очищены.
-cmd-clearjobpriorities-hint-player = [player]
+cmd-clearjobpriorities-hint-player = [игрок]

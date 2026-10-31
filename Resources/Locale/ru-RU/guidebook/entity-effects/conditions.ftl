@@ -25,13 +25,13 @@ entity-condition-guidebook-group-damage =
                *[other] имеет от { NATURALFIXED($min, 2) } до { NATURALFIXED($max, 2) } урона { $type }
             }
     }
-entity-condition-guidebook-total-hunger =
+entity-condition-guidebook-total-satiation =
     { $max ->
-        [2147483648] цель имеет по крайней мере { NATURALFIXED($min, 2) } общего голода
+        [2147483648] у цели всего не менее { NATURALFIXED($min, 2) } { $type }
        *[other]
             { $min ->
-                [0] цель имеет не более { NATURALFIXED($max, 2) } общего голода
-               *[other] цель имеет от { NATURALFIXED($min, 2) } до { NATURALFIXED($max, 2) } общего голода
+                [0] у цели всего не более { NATURALFIXED($max, 2) } { $type }
+               *[other] у цели всего от { NATURALFIXED($min, 2) } до { NATURALFIXED($max, 2) } { $type }
             }
     }
 entity-condition-guidebook-reagent-threshold =
@@ -84,12 +84,12 @@ entity-condition-guidebook-internals =
         [true] использует внутренние системы
        *[false] дышит атмосферным воздухом
     }
-entity-condition-guidebook-total-satiation =
+entity-condition-guidebook-total-hunger =
     { $max ->
-        [2147483648] у цели всего не менее { NATURALFIXED($min, 2) } { $type }
+        [2147483648] цель имеет по крайней мере { NATURALFIXED($min, 2) } общего голода
        *[other]
             { $min ->
-                [0] у цели всего не более { NATURALFIXED($max, 2) } { $type }
-               *[other] у цели всего от { NATURALFIXED($min, 2) } до { NATURALFIXED($max, 2) } { $type }
+                [0] цель имеет не более { NATURALFIXED($max, 2) } общего голода
+               *[other] цель имеет от { NATURALFIXED($min, 2) } до { NATURALFIXED($max, 2) } общего голода
             }
     }

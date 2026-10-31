@@ -96,6 +96,11 @@ stack-artifact-fragment =
         [1] артефакта
        *[other] артефактов
     }
+stack-xenoborg-crystal =
+    { $amount ->
+        [1] кристалл ксеноборга
+       *[other] кристаллы ксеноборга
+    }
 stack-conveyor-belt =
     { $amount ->
         [1] конвейерная лента
@@ -197,6 +202,9 @@ stack-white-steel-slats-tile-continuous = белая стальная плитк
 stack-steel-dark-checker-tile = стальная темная клетчатая плитка
 stack-steel-light-checker-tile = стальная светлая клетчатая плитка
 stack-steel-tile = стальная плитка
+stack-plastic-tile = пластиковая плитка
+stack-plastic-dark-tile = тёмная пластиковая плитка
+stack-plastic-white-tile = белая пластиковая плитка
 stack-wood-floor = деревянный пол
 stack-techmaint-floor = техтуннельный пол
 stack-techmaint-floor-dark = темный техтуннельный пол
@@ -280,29 +288,14 @@ stack-light-fancy-wood = большой светлый деревянный по
 stack-red-circuit-floor = плитка пола с красным контуром
 stack-asteroid-astro-sand-floor = пол из астероидного астро-песка
 stack-desert-astro-sand-floor = пол из пустынного астро-песка
-stack-xeno-floor = ксено-пол
-stack-xeno-steel = плитка из ксено-стали
-stack-xeno-steel-corner = угловая плитка из ксено-стали
-stack-xenoborg = ксеноборговая плитка
-stack-xeno-maint = ксено-техзона
-stack-dark-squiggly = темная стальная волнистая плитка
 stack-white-marble-floor = белый мраморный пол
+stack-white-marble-mono-floor = однотонный пол из белого мрамора
 stack-dark-marble-floor = тёмный мраморный пол
+stack-dark-marble-mono-floor = однотонный пол из тёмного мрамора
 stack-plasma-marble-floor = плазменный мраморный пол
 stack-uranium-marble-floor = урановый мраморный пол
 stack-astro-ironsand-floor = пол из астро-железопеска
 stack-astro-ironsand-floor-borderless = бесшовный пол из астро-железопеска
-stack-block-carpet-tile = блочная ковровая плитка
-stack-xenoborg-crystal =
-    { $amount ->
-        [1] кристалл ксеноборга
-       *[other] кристаллы ксеноборга
-    }
-stack-plastic-tile = пластиковая плитка
-stack-plastic-dark-tile = тёмная пластиковая плитка
-stack-plastic-white-tile = белая пластиковая плитка
-stack-white-marble-mono-floor = однотонный пол из белого мрамора
-stack-dark-marble-mono-floor = однотонный пол из тёмного мрамора
 stack-exo-hull-floor = напольное покрытие из экзодермиса, корпус
 stack-exo-viscera-floor = напольное покрытие из экзодермиса, внутренности
 stack-exo-techmaint-floor = напольное покрытие из экзодермиса, техобслуживание
@@ -313,3 +306,10 @@ stack-exo-corner-nw-floor = напольное покрытие из экзод�
 stack-exo-corner-se-floor = напольное покрытие из экзодермиса, юго-восточный угол
 stack-exo-corner-sw-floor = напольное покрытие из экзодермиса, юго-западный угол
 stack-exo-borg-floor = напольное покрытие из мехадермиса
+stack-xeno-floor = ксено-пол
+stack-xeno-steel = плитка из ксено-стали
+stack-xeno-steel-corner = угловая плитка из ксено-стали
+stack-xenoborg = ксеноборговая плитка
+stack-xeno-maint = ксено-техзона
+stack-dark-squiggly = темная стальная волнистая плитка
+stack-block-carpet-tile = блочная ковровая плитка

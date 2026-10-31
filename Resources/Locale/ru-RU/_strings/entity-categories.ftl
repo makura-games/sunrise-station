@@ -5,6 +5,6 @@ entity-category-name-roles = Роли
 entity-category-name-mapping = Маппинг
 entity-category-name-donotmap = Не маппить
 entity-category-name-status-effects = Эффекты статуса
-entity-category-suffix-donotmap = НЕ МАППИТЬ
 entity-category-name-xeno-artifact-effects = Эффекты ксеноартефакта
 entity-category-name-xeno-artifact-triggers = Триггеры ксеноартефакта
+entity-category-suffix-donotmap = НЕ МАППИТЬ

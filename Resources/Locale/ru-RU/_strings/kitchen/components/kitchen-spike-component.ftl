@@ -18,10 +18,10 @@ comp-kitchen-spike-begin-butcher-self = Вы начинаете разделыв
 comp-kitchen-spike-begin-butcher = { CAPITALIZE($user) } начинает разделывать { $victim }!
 comp-kitchen-spike-butcher-self = Вы разделали { $victim }!
 comp-kitchen-spike-butcher = { CAPITALIZE($user) } разделал { $victim }!
+comp-kitchen-spike-butcher-empty = { CAPITALIZE(THE($victim)) } больше нечего разделывать!
+comp-kitchen-spike-need-tool-quality = Для разделки { THE($target) } требуется инструмент качества «{ $quality }».
 comp-kitchen-spike-unhook-verb = Снять с крюка
 comp-kitchen-spike-hooked = [color=red]{ CAPITALIZE($victim) } насажен на этот крюк![/color]
 comp-kitchen-spike-meat-name = { $name } ({ $victim })
 comp-kitchen-spike-victim-examine = [color=orange]{ CAPITALIZE($target) } выглядит довольно постным.[/color]
 comp-kitchen-spike-deconstruct-occupied = Далее, [color=red]отцепите тело[/color].
-comp-kitchen-spike-butcher-empty = { CAPITALIZE(THE($victim)) } больше нечего разделывать!
-comp-kitchen-spike-need-tool-quality = Для разделки { THE($target) } требуется инструмент качества «{ $quality }».

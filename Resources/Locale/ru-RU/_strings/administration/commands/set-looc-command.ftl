@@ -1,7 +1,5 @@
 cmd-setlooc-description = Позволяет включить или отключить LOOC.
 cmd-setlooc-help = Использование: setlooc или setlooc [значение]
-cmd-setlooc-looc-enabled = Чат LOOC был включён.
-cmd-setlooc-looc-disabled = Чат LOOC был отключён.
 set-looc-command-description = Позволяет включить или выключить LOOC.
 set-looc-command-help = Использование: setlooc или setlooc [значение]
 set-looc-command-too-many-arguments-error = Слишком много аргументов.

@@ -1,8 +1,4 @@
 command-description-xenoartifact-list = Перечисляет идентификаторы сущностей всех созданных артефактов.
-command-description-xenoartifact-printMatrix = Выводит матрицу, которая показывает все связи между узлами.
-command-description-xenoartifact-totalResearch = Получает все очки исследований, которые можно извлечь из артефакта в текущий момент.
-command-description-xenoartifact-averageResearch = Рассчитывает среднее количество очков исследований, которое ксеноартефакт выдаст при полной активации.
-command-description-xenoartifact-unlockAllNodes = Разблокирует все узлы артефакта.
 command-description-xenoartifact-printmatrix = Выводит матрицу, отображающую все рёбра между узлами.
 command-description-xenoartifact-totalresearch = Получает все очки исследований, которые можно извлечь из ксеноартефакта в данный момент.
 command-description-xenoartifact-averageresearch = Рассчитывает среднее количество очков исследований, которое полностью активированный ксеноартефакт будет выдавать.
@@ -17,3 +13,7 @@ command-spawnartifactwithnode-spawn-artifact-item-hint = используйте 
 command-spawnartifactwithnode-spawn-artifact-structure-hint = использовать неподвижный артефакт в виде структуры
 command-spawnartifactwithnode-spawn-artifact-type-hint = <ID прототипа сущности артефакта>
 command-xenoartifact-common-node-hint = глубина { $depth }, узел { $nodeId }, триггер: «{ $trigger }», эффект: «{ $effect }»
+command-description-xenoartifact-printMatrix = Выводит матрицу, которая показывает все связи между узлами.
+command-description-xenoartifact-totalResearch = Получает все очки исследований, которые можно извлечь из артефакта в текущий момент.
+command-description-xenoartifact-averageResearch = Рассчитывает среднее количество очков исследований, которое ксеноартефакт выдаст при полной активации.
+command-description-xenoartifact-unlockAllNodes = Разблокирует все узлы артефакта.

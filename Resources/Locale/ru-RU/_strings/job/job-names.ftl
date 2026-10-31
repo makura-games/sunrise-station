@@ -46,6 +46,7 @@ job-name-security = офицер СБ
 job-name-serviceworker = сервисный работник
 job-name-station-ai = станционный ИИ
 job-name-technical-assistant = технический ассистент
+job-name-tram-driver = Водитель трамвая
 job-name-visitor = посетитель
 job-name-warden = смотритель
 # unused jobs
@@ -57,6 +58,7 @@ job-name-no-id = Без ID
 job-name-prisoner = заключенный
 job-name-roboticist = робототехник
 job-name-unknown = неизвестно
+job-name-sus = Подозрительный
 job-name-virologist = вирусолог
 job-name-zookeeper = зоотехник
 # antagonist jobs
@@ -135,5 +137,3 @@ job-name-ertjanitor-veteran = ОБР уборщик (Ветеран)
 job-name-cburn-veteran = карантинный Офицер Центком (Ветеран)
 JobBoxer = боксёр
 JobZookeeper = зоотехник
-job-name-tram-driver = Водитель трамвая
-job-name-sus = Подозрительный

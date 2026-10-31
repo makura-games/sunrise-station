@@ -1,4 +1,8 @@
+### Sheep mob
+
+# Appears in the description box when the sheep has wool to shear.
 sheep-shearable-examine-markup = У неё пушистая шерсть. С помощью подходящего инструмента для [color=yellow]{ $toolQuality }[/color] можно состричь немного шерсти.
+# Appears in the description box when the sheep has NO wool to shear.
 sheep-not-shearable-examine-markup = Её шерсть недавно состригли, и теперь она голая.
 space-sheep-shearable-examine-markup = У неё прекрасная [color=#3b86ec]космическая[/color] шерсть. Подходящим инструментом качества [color=yellow]{ $toolQuality }[/color] её можно состричь.
 space-sheep-not-shearable-examine-markup = Её шерсть недавно состригли, и теперь она [color=#3b86ec]космически[/color] голая.

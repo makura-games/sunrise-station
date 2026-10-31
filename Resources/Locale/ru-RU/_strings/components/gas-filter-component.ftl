@@ -4,8 +4,8 @@ comp-gas-filter-ui-filter-gas-current = Сейчас фильтруется:
 comp-gas-filter-ui-filter-gas-select = Выберите газ для фильтрации:
 comp-gas-filter-ui-filter-gas-confirm = Выбрать газ
 comp-gas-filter-ui-filter-gas-none = Нет
+comp-gas-filter-filtered-gas-examine = Он фильтрует [color={ $statusColor }]{ $filteredGas }[/color].
 comp-gas-filter-ui-needs-anchor = Сначала закрепите его!
 comp-gas-filter-ui-filter-status = Статус:
 comp-gas-filter-ui-status-enabled = Вкл
 comp-gas-filter-ui-status-disabled = Выкл
-comp-gas-filter-filtered-gas-examine = Он фильтрует [color={ $statusColor }]{ $filteredGas }[/color].

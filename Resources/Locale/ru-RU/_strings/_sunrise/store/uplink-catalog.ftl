@@ -188,8 +188,8 @@ uplink-anomaly-auto-injector-popup-pending = Кожа не поддаётся и
 uplink-anomaly-auto-injector-popup-infected = Кожа не поддаётся инъекции!
 uplink-xeno-artifact-throwing-auto-injector-name = Метательный автоинъектор артефакта
 uplink-xeno-artifact-throwing-auto-injector-desc = Метательно-складное устройство одноразового применения. При попадании в живое существо вонзается и вживляет частицы артефакта. Не действует на синтетиков.
-uplink-roboticist-nuclear-operative-id-card-name = Оперативная ID-карта робототехника
-uplink-roboticist-nuclear-operative-id-card-desc = ID-карта робототехника со штатными доступами профессии и дополнительным доступом Синдиката.
+uplink-roboticist-nuclear-operative-id-card-name = Оперативная ID карта робототехника
+uplink-roboticist-nuclear-operative-id-card-desc = ID карта робототехника со штатными доступами профессии и дополнительным доступом Синдиката.
 uplink-med-hypospray-name = Взломанный медицинский джетинъектор
 uplink-med-hypospray-desc = Стерильный инжектор для быстрого введения лекарств пациентам. До взлома содержал внутренний фильтр токсинов. Теперь не содержит.
 

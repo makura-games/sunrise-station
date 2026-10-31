@@ -1,3 +1,22 @@
+# Ammo
+uplink-pistol-magazine-name = Пистолетный магазин (.35 авто)
+uplink-pistol-magazine-desc = Пистолетный магазин на 10 патронов. Совместим с "Гадюкой".
+uplink-pistol-magazine-c20r-name = Магазин ПП (.35 авто)
+uplink-pistol-magazine-c20r-desc = Магазин ПП на 30 патронов. Совместим с C-20r.
+uplink-magazine-bulldog-pellet-name = Барабан (.50 дробь)
+uplink-magazine-bulldog-pellet-desc = Барабанный магазин на 8 патронов. Совместим с "Бульдогом".
+uplink-magazine-bulldog-slug-name = Барабан (.50 пули)
+uplink-magazine-bulldog-slug-desc = Барабанный магазин на 8 пулевых патронов. Совместим с "Бульдогом".
+uplink-pistol-magazine-caseless-name = Пистолетный магазин (.25 безгильзовые)
+uplink-pistol-magazine-caseless-desc = Пистолетный магазин на 10 патронов. Совместим с "Коброй".
+uplink-mosin-ammo-name = Коробка патронов (7,62к)
+uplink-mosin-ammo-desc = Коробка с 20 патронами 7,62х54ммR для винтовки или среднего пулемета.
+uplink-estoc-ammo-name = Магазин для винтовки (.20)
+uplink-estoc-ammo-desc = Магазин на 25 патронов. Совместим с Эсток.
+uplink-sniper-ammo-name = Коробка патронов (15мм антиматериальные)
+uplink-sniper-ammo-desc = Коробка с 14 патронами для снайперской винтовки Христов или SR-127.
+uplink-ammo-bundle-name = Набор боеприпасов
+uplink-ammo-bundle-desc = Перезаряжаю! Содержит 4 магазина для c20r, 4 магазина для Бульдога, 4 магазина для Эсток и 2 патронных короба для L6 SAW.
 uplink-ammo-frag-name = Осколочная граната
 uplink-ammo-frag-desc = Запасная осколочная граната для вашего гранатомёта China Lake.
 uplink-ammo-blast-name = Фугасная граната

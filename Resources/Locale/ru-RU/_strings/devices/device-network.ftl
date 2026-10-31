@@ -14,6 +14,12 @@ device-frequency-prototype-name-turret = Турель
 device-frequency-prototype-name-turret-control = Управление турелями
 device-frequency-prototype-name-xenoborg = Ксеноборг
 device-frequency-prototype-name-mothership = Материнский корабль
+device-frequency-prototype-name-arrivals-shuttle-timer = Таймер шаттла прибытия
+device-frequency-prototype-name-shuttle-timer = Таймер эвакуационного шаттла
+
+## Camera frequencies
+
+device-frequency-prototype-name-surveillance-camera = Камеры видеонаблюдения
 
 ## camera frequencies
 
@@ -42,7 +48,15 @@ device-address-prefix-turret = ТУР-
 device-address-prefix-console = Конс-
 device-address-prefix-fire-alarm = Пож-
 device-address-prefix-air-alarm = Возд-
+# Consoles
 device-address-prefix-sensor-monitor = МОН-
+device-address-prefix-camera-monitor = МК-
+device-address-prefix-crew-monitor = МЭ-
+# Servers and routers
+device-address-prefix-camera-router = МК-
+device-address-prefix-camera-router-wireless = БМК-
+device-address-prefix-camera = КАМ-
+device-address-prefix-crew-monitoring-server = СМП-
 device-address-examine-message = Адрес устройства: { $address }.
 # Device net ID names
 device-net-id-private = Частные
@@ -53,9 +67,3 @@ device-net-id-atmos-devices = Атмос-устройства
 device-net-id-reserved = Резерв
 # Unknown
 device-address-unknown = ????-????
-device-address-prefix-camera-monitor = SCM-
-device-address-prefix-crew-monitor = MCM-
-device-address-prefix-camera-router = CMR-
-device-address-prefix-camera-router-wireless = CMW-
-device-address-prefix-camera = CAM-
-device-address-prefix-crew-monitoring-server = CMS-

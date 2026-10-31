@@ -37,16 +37,11 @@ ui-options-restart-sounds = Звуки перезапуска раунда
 ui-options-event-music = Музыка событий
 ui-options-admin-sounds = Музыка админов
 ui-options-bwoink-sound = Воспроизводить звук уведомления АХелп
+ui-options-mute-unfocused = Отключать звук, когда окно не в фокусе
+ui-options-audio-device = Устройство вывода:
+ui-options-audio-device-default = Системное устройство по умолчанию
+ui-options-audio-hrtf = Включить обработку звука HRTF (требуется перезапуск)
 ui-options-volume-label = Громкость
-# Sunrise-Start
-ui-options-scp-echo-enabled = Эффект эха
-ui-options-scp-echo-enabled-tooltip =
-    При включении каждый неглобальный звук получит эффект эха.
-    При включении все звуки могут стать громче. Используйте слайдер громкости, чтобы отрегулировать громкость.
-ui-options-scp-echo-strong-preset-preferred = Использовать усиленный эффект эха
-ui-options-scp-echo-strong-preset-preferred-tooltip =
-    Определяет, будет ли использован сильный эффект эха.
-    В усиленном эффекте звуки будут иметь более долгий хвост.
 
 # Sunrise-End
 
@@ -67,7 +62,11 @@ ui-options-show-ooc-patron-color = Цветной ник в OOC для патр�
 ui-options-show-looc-on-head = Показывать LOOC-чат над головами персонажей
 ui-options-fancy-speech = Показывать имена в облачках с текстом
 ui-options-fancy-name-background = Добавить фон облачкам с текстом
+ui-options-chat-follow-button = Показывать призракам кнопку наблюдения рядом с сообщениями в чате
 ui-options-vsync = Вертикальная синхронизация
+ui-options-max-fps = Максимум FPS:
+ui-options-max-fps-display-rate = Частота отображения
+ui-options-max-fps-tooltip = Максимальная частота кадров, с которой должен работать клиент. Установите значение 0, чтобы снять ограничение. Не действует при включённом VSync.
 ui-options-fullscreen = Полный экран
 ui-options-lighting-label = Качество освещения:
 ui-options-lighting-very-low = Очень низкое
@@ -115,6 +114,7 @@ ui-options-ambient-occlusion = Показывать затенение окру�
 ui-options-fps-counter = Показать счётчик FPS
 ui-options-vp-width = Ширина окна игры:
 ui-options-hud-layout = Тип HUD:
+ui-options-sharpness = Резкость:
 
 ## Controls menu
 
@@ -357,14 +357,41 @@ cmd-options-help = Использование: options [tab]
 
 ## Accessibility menu
 
+ui-options-accessibility-header-reduced-motion = Уменьшение движения
+ui-options-accessibility-header-visuals = Визуальные эффекты
+ui-options-accessibility-header-content = Содержимое
+
+## Accessibility menu
+
 ui-options-enable-color-name = Цветные имена персонажей
 ui-options-colorblind-friendly = Режим для дальтоников
 ui-options-reduced-motion = Снижение интенсивности визуальных эффектов
+ui-options-reduced-motion-tooltip = Включите эту настройку, чтобы для некоторых предметов отображались альтернативные спрайты с уменьшенной анимацией.
+
+# accessibility option tooltips taken from CVar summary blocks.
+
+ui-options-disable-ai-static = Помехи камеры ИИ
+ui-options-disable-ai-static-tooltip = Заменяет эффект помех камеры ИИ на обычный градиент.
+ui-options-disable-blurry-vision = Размытое зрение
+ui-options-disable-blurry-vision-tooltip = Заменяет движение в шейдере размытого зрения статическим эффектом.
+ui-options-disable-drunk-overlay = Эффект опьянения
+ui-options-disable-drunk-overlay-tooltip = Заменяет движение в шейдере опьянения статичным смещением.
+ui-options-disable-flash-effect = Вспышка
+ui-options-disable-flash-effect-tooltip = Заменяет эффект «вспышки» на вариант с уменьшенной анимацией.
+ui-options-disable-heat-distortion = Искажение от жары
+ui-options-disable-heat-distortion-tooltip = Уменьшает движение в шейдере искажения от жары.
+ui-options-disable-nv-noise = Наложение ночного видения
+ui-options-disable-nv-noise-tooltip = Отключает эффект шума в наложении ночного видения.
+ui-options-disable-rainbow-overlay = Радужное наложение
+ui-options-disable-rainbow-overlay-tooltip = Заменяет движение в шейдере радужного наложения статичным смещением.
+ui-options-disable-singulo-warp = Сингулярность
+ui-options-disable-singulo-warp-tooltip = Отключает эффект искажения экрана сингулярностью.
 ui-options-screen-shake-intensity = Интенсивность дрожания экрана
 ui-options-chat-window-opacity = Прозрачность окна чата
 ui-options-speech-bubble-text-opacity = Прозрачность текста в облачках
 ui-options-speech-bubble-speaker-opacity = Прозрачность имени говорящего
 ui-options-speech-bubble-background-opacity = Прозрачность фона облачков
+ui-options-censor-nudity = Цензурировать наготу персонажей
 
 ## Admin menu
 
@@ -399,36 +426,15 @@ ui-options-admin-overlay-ghost-fade-distance = Расстояние затуха
 ui-options-admin-overlay-ghost-hide-distance = Расстояние скрытия оверлея призраков от мыши
 ui-options-admin-strip-overlay-title = Оверлей раздевания
 ui-options-admin-strip-overlay-setting = Показывать оверлей раздевания по умолчанию
+# Sunrise-Start
+ui-options-scp-echo-enabled = Эффект эха
+ui-options-scp-echo-enabled-tooltip =
+    При включении каждый неглобальный звук получит эффект эха.
+    При включении все звуки могут стать громче. Используйте слайдер громкости, чтобы отрегулировать громкость.
+ui-options-scp-echo-strong-preset-preferred = Использовать усиленный эффект эха
+ui-options-scp-echo-strong-preset-preferred-tooltip =
+    Определяет, будет ли использован сильный эффект эха.
+    В усиленном эффекте звуки будут иметь более долгий хвост.
 ui-options-header-extra = Экстра
 ui-options-accessability-header-visuals = Визуальные эффекты
 ui-options-accessability-header-content = Содержимое
-ui-options-censor-nudity = Цензурировать наготу персонажей
-ui-options-mute-unfocused = Отключать звук, когда окно не в фокусе
-ui-options-audio-device = Устройство вывода:
-ui-options-audio-device-default = Системное устройство по умолчанию
-ui-options-audio-hrtf = Включить обработку звука HRTF (требуется перезапуск)
-ui-options-chat-follow-button = Показывать призракам кнопку наблюдения рядом с сообщениями в чате
-ui-options-max-fps = Максимум FPS:
-ui-options-max-fps-display-rate = Частота отображения
-ui-options-max-fps-tooltip = Максимальная частота кадров, с которой должен работать клиент. Установите значение 0, чтобы снять ограничение. Не действует при включённом VSync.
-ui-options-sharpness = Резкость:
-ui-options-accessibility-header-reduced-motion = Уменьшение движения
-ui-options-accessibility-header-visuals = Визуальные эффекты
-ui-options-accessibility-header-content = Содержимое
-ui-options-reduced-motion-tooltip = Включите эту настройку, чтобы для некоторых предметов отображались альтернативные спрайты с уменьшенной анимацией.
-ui-options-disable-ai-static = Помехи камеры ИИ
-ui-options-disable-ai-static-tooltip = Заменяет эффект помех камеры ИИ на обычный градиент.
-ui-options-disable-blurry-vision = Размытое зрение
-ui-options-disable-blurry-vision-tooltip = Заменяет движение в шейдере размытого зрения статическим эффектом.
-ui-options-disable-drunk-overlay = Эффект опьянения
-ui-options-disable-drunk-overlay-tooltip = Заменяет движение в шейдере опьянения статичным смещением.
-ui-options-disable-flash-effect = Вспышка
-ui-options-disable-flash-effect-tooltip = Заменяет эффект «вспышки» на вариант с уменьшенной анимацией.
-ui-options-disable-heat-distortion = Искажение от жары
-ui-options-disable-heat-distortion-tooltip = Уменьшает движение в шейдере искажения от жары.
-ui-options-disable-nv-noise = Наложение ночного видения
-ui-options-disable-nv-noise-tooltip = Отключает эффект шума в наложении ночного видения.
-ui-options-disable-rainbow-overlay = Радужное наложение
-ui-options-disable-rainbow-overlay-tooltip = Заменяет движение в шейдере радужного наложения статичным смещением.
-ui-options-disable-singulo-warp = Сингулярность
-ui-options-disable-singulo-warp-tooltip = Отключает эффект искажения экрана сингулярностью.

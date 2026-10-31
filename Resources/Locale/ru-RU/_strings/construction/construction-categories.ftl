@@ -1,4 +1,5 @@
 construction-category-all = Всё
+construction-category-atmospherics = Атмосферика
 construction-category-furniture = Мебель
 construction-category-storage = Хранилища
 construction-category-tools = Инструменты
@@ -13,4 +14,3 @@ construction-category-clothing = Одежда
 construction-category-favorites = Избранное
 construction-add-favorite-button = Добавить в избранное
 construction-remove-from-favorite-button = Удалить из избранного
-construction-category-atmospherics = Атмосферика

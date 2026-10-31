@@ -1,8 +1,6 @@
 ent-ReinforcementRadioSyndicateCyborgMedical = радио подкрепления мед.киборга
     .desc = { ent-ReinforcementRadioSyndicateCyborgAssault.desc }
     .suffix = Ядерные оперативники
-    .desc = { ent-ReinforcementRadioSyndicateCyborgAssault.desc }
-    .suffix = Ядерные оперативники
 ent-ReinforcementRadioSyndicateCyborgAssault = радио подкрепления штурмового киборга Синдиката
     .desc = Призовите хорошо вооружённого штурмового киборга, немедленно!
     .suffix = Ядерные оперативники

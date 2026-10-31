@@ -3,12 +3,20 @@
 guardian-created = Вы чувствуете... Одержимость.
 guardian-already-present-invalid-creation = Вы НЕ переживёте заново ту одержимость!
 guardian-no-actions-invalid-creation = У вас нет возможности содержать в себе стража!
-guardian-activator-empty-invalid-creation = Инъектор израсходован.
-guardian-activator-empty-examine = [color=#ba1919]Инъектор израсходован.[/color].
 guardian-activator-invalid-target = Только гуманоиды подходят для инъекции!
 guardian-no-soul = У вашего стража нет души.
 guardian-available = У вашего стража теперь есть душа.
 guardian-inside-container = Здесь нет места, чтобы выпустить вашего стража!
+
+## Injector specific
+
+guardian-injector-empty-invalid-creation = Инъектор израсходован.
+guardian-injector-empty-examine = [color=#ba1919]Инъектор израсходован.[/color]
+
+## Guardian deck specific
+
+guardian-deck-invalid-creation = Колода может создать только одного стража за раз!
+guardian-deck-used-examine = [color=#ba1919]Магия колоды исчерпана.[/color]
 
 ## Guardian entity specific
 
@@ -21,7 +29,5 @@ guardian-host-critical-warn = ВАШ ХОЗЯИН РАНЕН!
 guardian-host-death-warn = ВЫ ПЕРЕСТАЁТЕ СУЩЕСТВОВАТЬ
 guardian-death-warn = ВАШЕ ТЕЛО ПРОНЗАЕТ СУБАТОМНАЯ БОЛЬ, КОГДА ОНО РАСПАДАЕТСЯ!
 guardian-attack-host = Вы не можете атаковать своего хозяина.
-guardian-injector-empty-invalid-creation = Инъектор израсходован.
-guardian-injector-empty-examine = [color=#ba1919]Инъектор израсходован.[/color]
-guardian-deck-invalid-creation = Колода может создать только одного стража за раз!
-guardian-deck-used-examine = [color=#ba1919]Магия колоды исчерпана.[/color]
+guardian-activator-empty-invalid-creation = Инъектор израсходован.
+guardian-activator-empty-examine = [color=#ba1919]Инъектор израсходован.[/color].

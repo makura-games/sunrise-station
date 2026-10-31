@@ -1,6 +1,7 @@
 ## Implanter Attempt Messages
 
 implanter-component-implanting-target = { $user } пытается что-то в вас имплантировать!
+implanter-component-draw-target = { CAPITALIZE(THE($user)) } пытается что-то из вас извлечь!
 implanter-component-implant-failed = { $implant } нельзя имплантировать в { $target }!
 implanter-draw-failed-permanent = { $implant } вросся в { $target } и не может быть удалён!
 implanter-draw-failed = Вы пытаетесь удалить имплант, но ничего не находите.
@@ -28,4 +29,3 @@ action-description-toggle-fake-mindshield = Активирует/деактив�
 scramble-implant-activated-popup = Вы превратились в { $identity }
 deathrattle-implant-dead-message = Зафиксирована смерть { $user } { $position }.
 deathrattle-implant-critical-message = Жизненные показатели { $user } критические, требуется немедленная помощь { $position }.
-implanter-component-draw-target = { CAPITALIZE(THE($user)) } пытается что-то из вас извлечь!

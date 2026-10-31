@@ -6,8 +6,6 @@ round-end-summary-window-gamemode-name-label = Игровой режим был 
 round-end-summary-window-duration-label = Он длился [color=yellow]{ $hours } ч., { $minutes } мин., и { $seconds } сек.
 round-end-summary-window-player-info-if-observer-text = [color=gray]{ $playerOOCName }[/color] был [color=lightblue]{ $playerICName }[/color], наблюдатель.
 round-end-summary-window-player-info-if-not-observer-text = [color=gray]{ $playerOOCName }[/color] был [color={ $icNameColor }]{ $playerICName }[/color], в роли [color=orange]{ $playerRole }[/color].
-round-end-summary-window-stats-tab-title = Статистика
-round-end-summary-window-my-stats-tab-title = Моя статистика
 round-end-summary-window-player-manifest-tab-search-placeholder = Поиск игроков, ролей, типов...
 round-end-summary-window-player-manifest-tab-sort-character = Персонаж
 round-end-summary-window-player-manifest-tab-sort-role = Роль
@@ -16,3 +14,5 @@ round-end-summary-window-player-manifest-tab-sort-player = Игрок
 round-end-summary-window-player-manifest-tab-sort-player-type-antag = Антагонист
 round-end-summary-window-player-manifest-tab-sort-player-type-crew = Член экипажа
 round-end-summary-window-player-manifest-tab-sort-player-type-observer = Наблюдатель
+round-end-summary-window-stats-tab-title = Статистика
+round-end-summary-window-my-stats-tab-title = Моя статистика

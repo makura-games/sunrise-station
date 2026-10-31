@@ -5,6 +5,6 @@ cmd-setjobpriority-job-not-found = Должность { $job } не сущест
 cmd-setjobpriority-invalid-priority = { $priority } — недопустимый приоритет должности. Используйте high, medium, low или never.
 cmd-setjobpriority-preferences-not-loaded = Настройки для { $player } ещё не загружены.
 cmd-setjobpriority-success = Для { $player } настройка должности { $job } установлена на значение { $priority }.
-cmd-setjobpriority-hint-player = [player]
+cmd-setjobpriority-hint-player = [игрок]
 cmd-setjobpriority-hint-job = [job]
 cmd-setjobpriority-hint-priority = [high|medium|low|never]

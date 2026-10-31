@@ -20,8 +20,6 @@ alerts-weightless-desc =
     Магнитные ботинки и джетпак помогут вам передвигаться с большей эффективностью.
 alerts-walking-name = Ходьба
 alerts-walking-desc = Вы идете, двигаясь в медленном темпе.
-alerts-stunned-name = [color=yellow]Оглушены[/color]
-alerts-stunned-desc = Вы [color=yellow]оглушены[/color]! Что-то мешает вам двигаться или взаимодействовать с объектами.
 alerts-knockdown-name = [color=yellow]Сбит с ног[/color]
 alerts-knockdown-desc = Ты [color=yellow]сбит с ног[/color]! Что-то подскользнулось или толкнуло тебя, затрудняя передвижение.
 alerts-handcuffed-name = [color=yellow]В наручниках[/color]
@@ -54,10 +52,6 @@ alerts-thirsty-name = [color=yellow]Жажда[/color]
 alerts-thirsty-desc = Было бы неплохо чего-нибудь попить.
 alerts-parched-name = [color=red]Сильная жажда[/color]
 alerts-parched-desc = Вы ужасно хотите пить. Жажда вас замедляет.
-alerts-muted-name = Заглушены
-alerts-muted-desc = Вы потеряли способность говорить.
-alerts-vow-silence-name = Обет молчания
-alerts-vow-silence-desc = Вы дали обет молчания в рамках инициации в Мистико Тагма Мимон. Щёлкните по иконке, чтобы нарушить свой обет.
 alerts-vow-broken-name = Нарушенный обет
 alerts-vow-broken-desc = Вы нарушили свою клятву, данную Мимам. Теперь вы можете говорить, но вы потеряли свои мимские способности как минимум на 5 минут!!! Щёлкните по иконке, чтобы попытаться дать обет молчания снова.
 alerts-pulled-name = Вас тянут
@@ -68,8 +62,6 @@ alerts-bleed-name = [color=red]Кровотечение[/color]
 alerts-bleed-desc = У вас [color=red]кровотечение[/color].
 alerts-pacified-name = [color=green]Пацифизм[/color]
 alerts-pacified-desc = Вы чувствуете себя умиротворённо и не можете вредить живым существам.
-alerts-adrenaline-name = [color=red]Адреналин[/color]
-alerts-adrenaline-desc = Вы полны адреналина: боль больше вас не замедляет.
 alerts-suit-power-name = Заряд костюма
 alerts-suit-power-desc = Запас энергии вашего костюма космического ниндзя.
 alerts-magboots-name = Магнитные ботинки

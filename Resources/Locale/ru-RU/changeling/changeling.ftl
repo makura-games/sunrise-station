@@ -1,5 +1,7 @@
+# antag selection
 roles-antag-changeling-name = Генокрад
 roles-antag-changeling-objective = Разумный хищник, принимающий личности своих жертв.
+# devour
 changeling-devour-attempt-failed-cannot-devour = Мы не можем поглотить это!
 changeling-devour-attempt-failed-already-devoured = Мы уже поглотили это тело!
 changeling-devour-attempt-failed-devoured-recently = Это тело слишком сильно изуродовано, чтобы его поглотить!
@@ -13,26 +15,36 @@ changeling-devour-begin-consume-self = Жуткий рот впивается г
 changeling-devour-begin-consume-others = { CAPITALIZE(POSS-ADJ($user)) } жуткий рот впивается глубоко в { POSS-ADJ($user) } жертву.
 changeling-devour-consume-complete-self = Наш жуткий рот отступает, поглотив биомассу.
 changeling-devour-consume-complete-others = { CAPITALIZE(POSS-ADJ($user)) } жуткий рот отступает.
+# transformation
 changeling-transform-attempt-self = Наши кости ломаются, мышцы рвутся, одна плоть становится другой.
 changeling-transform-attempt-others = { CAPITALIZE(POSS-ADJ($user)) } кости ломаются, мышцы рвутся, тело принимает другой облик.
+# transformation BUI
 changeling-transform-bui-select-entity = { $entity }
 changeling-transform-bui-drop-identity-menu = Удалить поглощённую личность из памяти.
 changeling-transform-bui-drop-identity-entity = Удалить { $entity }
 changeling-transform-bui-drop-identity-entity-popup = Мы удалили { $entity } из своей памяти.
 changeling-transform-bui-drop-identity-cannot-drop = Мы не можем удалить свою текущую личность.
+# voice mimicry
 changeling-voice-mimic-window-title = Имитация голоса
+# flesh clothing
 changeling-flesh-clothing-removed-popop = { CAPITALIZE(THE($item)) } распадается на останки плоти!
 changeling-flesh-clothing-examine-wearer = [color=crimson]Этот предмет — замаскированная часть вашего тела. Он исчезнет, если вы его снимете![/color]
 changeling-flesh-clothing-alert-name = Способность «Одежда из плоти»
 changeling-flesh-clothing-alert-desc = Включает или отключает превращение одежды. Нажмите, чтобы переключить.
+# biodegrade
 changeling-biodegrade-used-popup = { CAPITALIZE(THE($user)) } извергает кислоту на { POSS-ADJ($user) } { $restraint }!
 changeling-biodegrade-used-popup-self = Мы извергаем кислоту на свои { $restraint }!
+# last resort
 changeling-takeover-not-dead = Это тело всё ещё живо! Мы не можем заразить его живым.
 changeling-takeover-is-changeling = Это тело отвергает наши попытки захватить его!
 changeling-takeover-start-others = { CAPITALIZE(THE($user)) } начинает заползать внутрь трупа!
 changeling-takeover-success-self = Мы успешно заразили тело и приняли его форму.
+# stings
 changeling-sting-success = Мы бесшумно жалим { THE($target) }!
+# mindshield
 changeling-fake-mindshield-enabled = Мы испускаем поддельные волны защиты разума.
 changeling-fake-mindshield-disabled = Мы прекращаем испускать поддельные волны защиты разума.
+# chemicals
 changeling-not-enough-chemicals = У нас недостаточно химикатов.
+# other
 changeling-paused-map-name = Карта хранилища личностей генокрада

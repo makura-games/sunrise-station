@@ -23,6 +23,7 @@ admin-smite-set-alight-name = Воспламенить
 admin-smite-monkeyify-name = Превратить в обезьяну
 admin-smite-garbage-can-name = Мусор
 admin-smite-electrocute-name = Поразить током
+admin-smite-heartattack-name = Сердечный приступ
 admin-smite-remove-blood-name = Обескровить
 admin-smite-remove-hands-name = Удалить руки
 admin-smite-remove-hand-name = Удалить руку
@@ -63,6 +64,7 @@ admin-smite-crawler-name = Ползун
 admin-smite-homing-rod-name = Самонаводящийся стержень
 admin-smite-homing-rod-slow-name = Медленный самонаводящийся стержень
 admin-smite-silicon-laws-bound-name = Стать кремниевым
+admin-smite-make-stinky-name = Сделать вонючим
 
 ## Smite descriptions
 
@@ -71,6 +73,7 @@ admin-smite-chess-dimension-description = Изгоняет цель в шахм�
 admin-smite-set-alight-description = Поджигает цель.
 admin-smite-monkeyify-description = Превращает цель в обезьяну.
 admin-smite-electrocute-description = Поражает цель электрическим током, делая бесполезным всё, что было на неё надето.
+admin-smite-heartattack-description = Немедленно убивает цель, нанося урон от удушья.
 admin-smite-creampie-description = Кримпай всего одной кнопкой.
 admin-smite-remove-blood-description = Обескровливает цель, кроваво.
 admin-smite-vomit-organs-description = Вызывает у цели рвоту, в том числе и органами.
@@ -112,6 +115,7 @@ admin-smite-crawler-description = Заставляет цель упасть и 
 admin-smite-homing-rod-description = Запускает самонаводящийся недвижимый стержень прямо в цель.
 admin-smite-homing-rod-slow-description = Запускает медленно движущийся самонаводящийся недвижимый стержень прямо в цель.
 admin-smite-silicon-laws-bound-description = Привязывает цель к кремниевым законам. Закон 2: выпрыгни в окно.
+admin-smite-make-stinky-description = Делает цель вонючей, заставляя её выделять аммиак. Фу!
 
 ## Tricks descriptions
 
@@ -148,7 +152,3 @@ admin-trick-minigun-fire-description = Заставляет целевое ор�
 admin-trick-set-bullet-amount-description = Быстро устанавливает значение количества незаспавненных патронов в оружии.
 admin-smite-random-death-name = Случайная смерть
 admin-smite-random-death-description = Случайно выбирает очень трудно восстанавливаемую смерть.
-admin-smite-heartattack-name = Сердечный приступ
-admin-smite-make-stinky-name = Сделать вонючим
-admin-smite-heartattack-description = Немедленно убивает цель, нанося урон от удушья.
-admin-smite-make-stinky-description = Делает цель вонючей, заставляя её выделять аммиак. Фу!

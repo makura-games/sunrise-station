@@ -1,6 +1,6 @@
 bounty-item-soviet-pin = советский значок
 bounty-description-soviet-pin-collector = Частный коллекционер старых советских значков готовит крупный тематический ивент и отчаянно ищет ещё десяток экземпляров. Он подчёркивает, что это абсолютно никак не связано с возможным мятежом.
-bounty-item-soviet-damaged-id-card = поврежденная советская ID-карта
+bounty-item-soviet-damaged-id-card = поврежденная советская ID карта
 bounty-description-soviet-damaged-id-cards-collector = Архивист экспедиции собирает коллекцию поврежденных советских ID-карт для выставки по истории фронтира. Ему нужно шесть любых экземпляров.
-bounty-item-soviet-damaged-officer-id-card = поврежденная офицерская советская ID-карта
+bounty-item-soviet-damaged-officer-id-card = поврежденная офицерская советская ID карта
 bounty-description-soviet-damaged-officer-id-cards-collector = Коллекционер редких военных артефактов готов выкупить три поврежденные офицерские советские ID-карты младших офицеров для частной экспозиции.

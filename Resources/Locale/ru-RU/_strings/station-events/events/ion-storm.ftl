@@ -1,4 +1,5 @@
 station-event-ion-storm-start-announcement = Вблизи станции обнаружен ионный шторм. Пожалуйста, проверьте всё оборудование, управляемое ИИ, на наличие ошибок.
+# Characters are randomly selected from the total list, meaning duplicates increase the odds that specific character is seen.
 ion-storm-law-scrambled-number = [font="Monospace"][scramble rate=250 length={ $length } chars="@@###$$&%!01"/][/font]
 ion-storm-you = ВЫ
 ion-storm-the-station = СТАНЦИЯ

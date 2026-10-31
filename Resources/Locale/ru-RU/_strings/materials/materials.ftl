@@ -28,6 +28,7 @@ materials-coal = уголь
 materials-diamond = алмазы
 materials-gunpowder = чёрный порох
 materials-cotton = хлопок
+materials-xenoborg-crystal = кристалл ксеноборга
 # Ores
 materials-raw-iron = руда железа
 materials-raw-quartz = руда кварца
@@ -38,4 +39,3 @@ materials-raw-uranium = руда урана
 materials-raw-bananium = руда бананиума
 materials-raw-salt = каменная соль
 materials-raw-diamond = необработанные алмазы
-materials-xenoborg-crystal = кристалл ксеноборга

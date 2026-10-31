@@ -1,3 +1,5 @@
+mutation-plant-sentient = Кажется, оно изучает свое окружение.
+mutation-plant-slippery = Оно скользкое на ощупь.
 mutation-plant-description-kudzu = Оно растёт необычно быстро и тонко.
 mutation-plant-description-ligneous = Оно одревеснело, и для сбора урожая понадобится острый инструмент.
 mutation-plant-description-scream = Это растение почему-то кажется нервным.

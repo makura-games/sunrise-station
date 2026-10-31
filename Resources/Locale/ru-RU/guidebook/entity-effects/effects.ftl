@@ -56,21 +56,13 @@ entity-effect-guidebook-smoke-area =
         [1] Создаёт
        *[other] создают
     } большое количество дыма
-entity-effect-guidebook-satiate-thirst =
+entity-effect-guidebook-satiate =
     { $chance ->
-        [1] Утоляет
-       *[other] утоляют
+        [1] Насыщает
+       *[other] насыщает
     } { $relative ->
-        [1] жажду на средних значениях
-       *[other] жажду со скоростью { NATURALFIXED($relative, 3) }x от средней
-    }
-entity-effect-guidebook-satiate-hunger =
-    { $chance ->
-        [1] Утоляет
-       *[other] утоляют
-    } { $relative ->
-        [1] голод на средних значениях
-       *[other] голод со скоростью { NATURALFIXED($relative, 3) }x от средней
+        [1] { $type } со средней скоростью
+       *[other] { $type } со скоростью, составляющей { NATURALFIXED($relative, 3) }x от средней
     }
 entity-effect-guidebook-health-change =
     { $chance ->
@@ -460,11 +452,6 @@ entity-effect-guidebook-plant-phalanximine =
         [1] Восстанавливает
        *[other] восстанавливают
     } жизнеспособность растения, утерянную из-за мутации
-entity-effect-guidebook-plant-remove-kudzu =
-    { $chance ->
-        [1] Удаляет
-       *[other] удалить
-    } разрастание сорняка кудзу с растения
 entity-effect-guidebook-plant-diethylamine =
     { $chance ->
         [1] Повышает
@@ -485,19 +472,6 @@ entity-effect-guidebook-plant-seeds-remove =
         [1] Удаляет
        *[other] удаляют
     } семена растения
-entity-effect-guidebook-plant-mutate-chemicals =
-    { $chance ->
-        [1] Мутирует
-       *[other] мутируют
-    } растение, чтобы производить { $name }
-entity-effect-guidebook-satiate =
-    { $chance ->
-        [1] Насыщает
-       *[other] насыщает
-    } { $relative ->
-        [1] { $type } со средней скоростью
-       *[other] { $type } со скоростью, составляющей { NATURALFIXED($relative, 3) }x от средней
-    }
 entity-effect-guidebook-plant-change-trait =
     { $chance ->
         [1]
@@ -525,6 +499,11 @@ entity-effect-guidebook-plant-mutate-consume-gasses =
         [1] Изменяет
        *[other] изменяет
     } растение так, чтобы оно поглощало от { $minValue } до { $maxValue } моль газов
+entity-effect-guidebook-plant-mutate-chemicals =
+    { $chance ->
+        [1] Мутирует
+       *[other] мутируют
+    } растение, чтобы производить { $name }
 entity-effect-guidebook-add-reagent-to-bloodstream =
     { $chance ->
         [1] Вводит
@@ -535,3 +514,24 @@ entity-effect-disarm =
         [1] Обезоруживает
        *[other] обезоруживает
     } сущность
+entity-effect-guidebook-satiate-thirst =
+    { $chance ->
+        [1] Утоляет
+       *[other] утоляют
+    } { $relative ->
+        [1] жажду на средних значениях
+       *[other] жажду со скоростью { NATURALFIXED($relative, 3) }x от средней
+    }
+entity-effect-guidebook-satiate-hunger =
+    { $chance ->
+        [1] Утоляет
+       *[other] утоляют
+    } { $relative ->
+        [1] голод на средних значениях
+       *[other] голод со скоростью { NATURALFIXED($relative, 3) }x от средней
+    }
+entity-effect-guidebook-plant-remove-kudzu =
+    { $chance ->
+        [1] Удаляет
+       *[other] удалить
+    } разрастание сорняка кудзу с растения

@@ -28,6 +28,7 @@ anomaly-scanner-particle-unstable-unknown = - [color=plum]Нестабильны
 anomaly-scanner-particle-containment-unknown = - [color=goldenrod]Сдерживающий тип:[/color] [color=red]ОШИБКА[/color]
 anomaly-scanner-particle-transformation-unknown = - [color=#6b75fa]Трансформирующий тип:[/color] [color=red]ОШИБКА[/color]
 anomaly-scanner-pulse-timer = Время до следующего импульса: [color=gray]{ $time }[/color]
+anomaly-scanner-doafter-examine = { CAPITALIZE(SUBJECT($user)) } { CONJUGATE-BASIC($user, "сканируют", "сканирует") } [color=plum]аномалию[/color].
 anomaly-gorilla-core-slot-name = Ядро аномалии
 anomaly-gorilla-charge-none = Внутри нет [bold]ядра аномалии[/bold].
 anomaly-gorilla-charge-limit =
@@ -93,4 +94,3 @@ anomaly-behavior-fast = [color=crimson]Частота импульсов зна�
 anomaly-behavior-strenght = [color=crimson]Мощность импульсов значительно повышена.[/color]
 anomaly-behavior-moving = [color=crimson]Обнаружена координатная нестабильность.[/color]
 anomaly-secret-admin = [color=red](ОШИБКА)[/color]
-anomaly-scanner-doafter-examine = { CAPITALIZE(SUBJECT($user)) } { CONJUGATE-BASIC($user, "сканируют", "сканирует") } [color=plum]аномалию[/color].

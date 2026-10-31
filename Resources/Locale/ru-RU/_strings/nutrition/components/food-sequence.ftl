@@ -157,6 +157,8 @@ food-sequence-cotton-burger-content-plushie-moth = пух
 food-sequence-cotton-burger-content-plushie-vulp = вульп
 food-sequence-cotton-burger-content-plushie-ian = корги
 food-sequence-cotton-burger-content-among-pequeno = сус
+food-sequence-cotton-burger-content-plushie-sheep = шерстяной
+food-sequence-cotton-burger-content-plushie-sheepspace = космошерстяной
 
 # TACO
 
@@ -199,5 +201,3 @@ food-sequence-burger-content-appendix = аппендиксо
 food-sequence-burger-content-ears = ухо
 food-sequence-burger-content-stomach = желудо
 food-sequence-burger-content-liver = печень
-food-sequence-cotton-burger-content-plushie-sheep = шерстяной
-food-sequence-cotton-burger-content-plushie-sheepspace = космошерстяной
