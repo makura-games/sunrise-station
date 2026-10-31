@@ -409,7 +409,7 @@ public sealed partial class TTSSystem : EntitySystem
 
     public async Task PlayLobbyTTS(ICommonSession player, string message)
     {
-        if (!_isEnabled)
+        if (!_isEnabled || !_cfg.GetCVar(SunriseCCVars.TTSLobbyEnabled) || message.Length > MaxMessageChars)
             return;
 
         var pref = _preferencesManager.GetPreferences(player.UserId);
@@ -418,10 +418,6 @@ public sealed partial class TTSSystem : EntitySystem
 
         var voiceId = humanoidProfile.TtsVoice;
         if (!GetVoicePrototype(voiceId, out var protoVoice))
-            return;
-
-        var soundData = await GenerateTTS(message, protoVoice);
-        if (soundData is null)
             return;
 
         var recipients = new List<ICommonSession>();
@@ -439,12 +435,16 @@ public sealed partial class TTSSystem : EntitySystem
         if (recipients.Count == 0)
             return;
 
-        RaiseNetworkEvent(new PlayTTSEvent(soundData, null, false), Filter.Empty().AddPlayers(recipients));
+        var soundData = await GenerateTTS(message, protoVoice);
+        if (soundData is null)
+            return;
+
+        RaiseNetworkEvent(new PlayTTSEvent(soundData, null, false), Filter.Empty().AddPlayers(recipients), recordReplay: false);
     }
 
     public async Task PlayAdminChatTTS(ICommonSession player, string message)
     {
-        if (!_isEnabled)
+        if (!_isEnabled || message.Length > MaxMessageChars)
             return;
 
         var pref = _preferencesManager.GetPreferences(player.UserId);
@@ -453,10 +453,6 @@ public sealed partial class TTSSystem : EntitySystem
 
         var voiceId = humanoidProfile.TtsVoice;
         if (!GetVoicePrototype(voiceId, out var protoVoice))
-            return;
-
-        var soundData = await GenerateTTS(message, protoVoice);
-        if (soundData is null)
             return;
 
         var recipients = new List<ICommonSession>();
@@ -477,10 +473,13 @@ public sealed partial class TTSSystem : EntitySystem
         if (recipients.Count == 0)
             return;
 
-        RaiseNetworkEvent(new PlayTTSEvent(soundData, null, false), Filter.Empty().AddPlayers(recipients));
+        var soundData = await GenerateTTS(message, protoVoice);
+        if (soundData is null)
+            return;
+
+        RaiseNetworkEvent(new PlayTTSEvent(soundData, null, false), Filter.Empty().AddPlayers(recipients), recordReplay: false);
     }
 }
-
 public sealed class TransformSpeakerVoiceEvent : EntityEventArgs
 {
     public EntityUid Sender;
