@@ -46,11 +46,6 @@ public static class ServerOocGradientHelper
             selectedColor = netConfig.GetClientCVar(session.Channel, SunriseCCVars.SponsorOocColor);
         }
 
-        if (string.IsNullOrEmpty(selectedColor) && playerCacheManager != null && playerCacheManager.TryGetOocColor(userId, out var cachedColor))
-        {
-            selectedColor = cachedColor;
-        }
-
         if (string.IsNullOrEmpty(selectedColor) || selectedColor == "@none" || !OocGradientHelper.IsGradientId(selectedColor))
             return false;
 
@@ -85,11 +80,6 @@ public static class ServerOocGradientHelper
         if (session != null && netConfig != null)
         {
             selectedTitle = netConfig.GetClientCVar(session.Channel, SunriseCCVars.SponsorOocTitle);
-        }
-
-        if (string.IsNullOrEmpty(selectedTitle) && playerCacheManager != null && playerCacheManager.TryGetOocTitle(userId, out var cachedTitle))
-        {
-            selectedTitle = cachedTitle;
         }
 
         var explicitNoneTitle = selectedTitle == "@none";
