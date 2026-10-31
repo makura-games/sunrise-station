@@ -1,4 +1,5 @@
 using Content.Client._Sunrise.SponsorTiers;
+using Content.Client.Resources;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.CCVar;
 using Content.Sunrise.Interfaces.Shared;
@@ -8,20 +9,26 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
+using Robust.Client.ResourceManagement;
+using Robust.Shared.Utility;
+using Content.Shared._Sunrise.SponsorSystem;
+
 
 namespace Content.Client._Sunrise.UserProfile;
 
 [GenerateTypedNameReferences]
 public sealed partial class UserProfile : Control
 {
-    private const float CompactBreakpoint = 620f;
+    private const float CompactBreakpoint = 400f;
 
     [Dependency] private ISharedPlayerManager _playerManager = default!;
     [Dependency] private IUriOpener _uri = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IResourceCache _resource = default!;
 
     private readonly UserProfileAccountInfoUIController _accountInfoUIController;
     private readonly SponsorTiersUIController _sponsorTiersUIController;
+    private readonly SponsorPersonalizationUIController _personalizationUIController;
     private readonly ISharedAccountBindingsManager? _accountBindingsManager;
     private readonly ISharedSponsorsManager? _sponsorsManager;
 
@@ -40,11 +47,13 @@ public sealed partial class UserProfile : Control
 
         _accountInfoUIController = UserInterfaceManager.GetUIController<UserProfileAccountInfoUIController>();
         _sponsorTiersUIController = UserInterfaceManager.GetUIController<SponsorTiersUIController>();
+        _personalizationUIController = UserInterfaceManager.GetUIController<SponsorPersonalizationUIController>();
 
         ManageAccountButton.OnPressed += ManageAccountPressed;
         AccountInfoButton.OnPressed += AccountInfoPressed;
         BuySponsorButton.OnPressed += BuySponsorPressed;
         InfoSponsorButton.OnPressed += InfoSponsorPressed;
+        PersonalizeSponsorButton.OnPressed += PersonalizeSponsorPressed;
 
         if (_accountBindingsManager != null)
             _accountBindingsManager.BindingsChanged += OnBindingsChanged;
@@ -57,6 +66,11 @@ public sealed partial class UserProfile : Control
         RefreshBindings(_accountBindingsManager?.GetSnapshot() ?? AccountBindingsSnapshot.Unavailable());
         RefreshResponsiveLayout();
         RequestAccountBindingsRefresh();
+
+        DiscordBindingLogo.Texture = _resource.GetTexture("/Textures/_Sunrise/Interface/discord.svg.192dpi.png");
+        TelegramBindingLogo.Texture = _resource.GetTexture("/Textures/_Sunrise/Interface/telegram.svg.192dpi.png");
+        GithubBindingLogo.Texture = _resource.GetTexture("/Textures/_Sunrise/Interface/github.svg.192dpi.png");
+        GithubBindingLogo.Modulate = Color.White;
     }
 
     protected override void Resized()
@@ -135,32 +149,28 @@ public sealed partial class UserProfile : Control
 
     private void RefreshBindings(AccountBindingsSnapshot snapshot)
     {
-        SetBindingValue(DiscordBindingValue, snapshot.Discord);
-        SetBindingValue(TelegramBindingValue, snapshot.Telegram);
-        SetBindingValue(GithubBindingValue, snapshot.Github);
+        UpdateBindingStatus(DiscordBindingValue, snapshot.Discord);
+        UpdateBindingStatus(TelegramBindingValue, snapshot.Telegram);
+        UpdateBindingStatus(GithubBindingValue, snapshot.Github);
     }
 
-    private void SetBindingValue(Label label, AccountBindingEntry entry)
+    private void UpdateBindingStatus(Label statusLabel, AccountBindingEntry binding)
     {
-        if (entry.State == AccountBindingState.Unavailable)
+        if (binding.State == AccountBindingState.Linked)
         {
-            label.Text = Loc.GetString("user-profile-binding-unavailable");
-            return;
+            statusLabel.Text = !string.IsNullOrWhiteSpace(binding.DisplayValue) ? binding.DisplayValue : Loc.GetString("user-profile-binding-linked");
+            statusLabel.FontColorOverride = Color.White;
         }
-
-        if (entry.State == AccountBindingState.Unlinked)
+        else if (binding.State == AccountBindingState.Unlinked)
         {
-            label.Text = Loc.GetString("user-profile-binding-unlinked");
-            return;
+            statusLabel.Text = Loc.GetString("user-profile-binding-unlinked");
+            statusLabel.FontColorOverride = Color.Gray;
         }
-
-        if (!string.IsNullOrWhiteSpace(entry.DisplayValue))
+        else
         {
-            label.Text = entry.DisplayValue;
-            return;
+            statusLabel.Text = Loc.GetString("user-profile-binding-unavailable");
+            statusLabel.FontColorOverride = Color.Red;
         }
-
-        label.Text = Loc.GetString("user-profile-binding-linked");
     }
 
     private void RefreshSponsorInfo()
@@ -169,25 +179,56 @@ public sealed partial class UserProfile : Control
 
         if (!_sponsorEnabled || _sponsorsManager == null || _playerManager.LocalSession == null)
         {
-            SponsorTierName.Text = Loc.GetString("user-profile-no-sponsor");
+            SponsorTierName.SetMessage(Loc.GetString("user-profile-no-sponsor"));
             return;
         }
 
         if (_sponsorsManager.ClientIsSponsor())
         {
-            _sponsorsManager.TryGetOocTitle(_playerManager.LocalSession.UserId, out var sponsorTitle);
-            SponsorTierName.Text = sponsorTitle;
+            var tierTitle = _sponsorsManager.ClientGetTierTitle();
+            if (string.IsNullOrWhiteSpace(tierTitle))
+                tierTitle = Loc.GetString("user-profile-sponsor-active");
+
+            var escapedTierTitle = FormattedMessage.EscapeText(tierTitle);
+
+            var colorHex = _sponsorsManager.ClientGetTierColorHex();
+            if (!string.IsNullOrWhiteSpace(colorHex))
+            {
+                if (OocGradientHelper.IsGradientId(colorHex))
+                {
+                    var gradientMarkup = OocGradientHelper.ApplyGradientById(tierTitle, colorHex);
+                    SponsorTierName.SetMessage(FormattedMessage.FromMarkupOrThrow($"[bold]{gradientMarkup}[/bold]"));
+                }
+                else
+                {
+                    if (_sponsorsManager.ClientGetTierColor() is { } tierColor)
+                        SponsorTierName.SetMessage(FormattedMessage.FromMarkupOrThrow($"[color={tierColor.ToHex()}]{escapedTierTitle}[/color]"));
+                    else if (Color.TryFromHex(colorHex, out var hexColor))
+                        SponsorTierName.SetMessage(FormattedMessage.FromMarkupOrThrow($"[color={hexColor.ToHex()}]{escapedTierTitle}[/color]"));
+                    else if (OocGradientHelper.TryResolveColor(colorHex, out var resolvedColor))
+                        SponsorTierName.SetMessage(FormattedMessage.FromMarkupOrThrow($"[color={resolvedColor.Value.ToHex()}]{escapedTierTitle}[/color]"));
+                    else
+                        SponsorTierName.SetMessage(tierTitle);
+                }
+            }
+            else
+            {
+                SponsorTierName.SetMessage(tierTitle);
+            }
             return;
         }
 
-        SponsorTierName.Text = Loc.GetString("user-profile-no-sponsor");
+        SponsorTierName.SetMessage(Loc.GetString("user-profile-no-sponsor"));
     }
+
 
     private void RefreshSponsorControlsState()
     {
         var sponsorActionsAvailable = _sponsorEnabled && _sponsorsManager != null;
         InfoSponsorButton.Disabled = !sponsorActionsAvailable;
         BuySponsorButton.Disabled = !sponsorActionsAvailable || string.IsNullOrWhiteSpace(_donateUrl);
+        var isSponsor = _sponsorsManager?.ClientIsSponsor() ?? false;
+        PersonalizeSponsorButton.Disabled = !sponsorActionsAvailable || !isSponsor;
     }
 
     private void RefreshResponsiveLayout()
@@ -223,5 +264,10 @@ public sealed partial class UserProfile : Control
     private void InfoSponsorPressed(BaseButton.ButtonEventArgs args)
     {
         _sponsorTiersUIController.ToggleWindow();
+    }
+
+    private void PersonalizeSponsorPressed(BaseButton.ButtonEventArgs args)
+    {
+        _personalizationUIController.ToggleWindow();
     }
 }
