@@ -37,7 +37,9 @@ public sealed partial class PlayTimeTrackingManager
         {
             data.IsSessionActive = true;
             var generation = ++data.SessionGeneration;
-            TrackPending(StartPlayTimeSessionAsync(session, data, generation));
+            var sessionState = new PlayTimeSessionState();
+            data.CurrentSessionState = sessionState;
+            TrackPending(StartPlayTimeSessionAsync(session, data, generation, sessionState));
         }
         else if (!shouldBeActive && data.IsSessionActive)
         {
@@ -45,15 +47,20 @@ public sealed partial class PlayTimeTrackingManager
         }
     }
 
-    private async Task StartPlayTimeSessionAsync(ICommonSession session, PlayTimeData data, int generation)
+    private async Task StartPlayTimeSessionAsync(
+        ICommonSession session,
+        PlayTimeData data,
+        int generation,
+        PlayTimeSessionState sessionState)
     {
         var startTime = DateTime.UtcNow;
         try
         {
             var sessionId = await _db.AddPlayTimeSessionAsync(session.UserId.UserId, startTime, startTime);
-            if (data.SessionGeneration != generation || !data.IsSessionActive)
+            if (data.SessionGeneration != generation || !data.IsSessionActive || sessionState.EndTime.HasValue)
             {
-                var endTime = data.LastSessionEndTime > startTime ? data.LastSessionEndTime : startTime;
+                var recordedEnd = sessionState.EndTime ?? DateTime.UtcNow;
+                var endTime = recordedEnd > startTime ? recordedEnd : startTime;
                 await _db.UpdatePlayTimeSessionAsync(sessionId, endTime);
                 return;
             }
@@ -63,6 +70,13 @@ public sealed partial class PlayTimeTrackingManager
         }
         catch (Exception e)
         {
+            if (data.SessionGeneration == generation && data.IsSessionActive)
+            {
+                // Сбрасываем флаг активности, чтобы следующий тик пересчета повторил создание сеанса
+                data.IsSessionActive = false;
+                data.CurrentSessionState = null;
+            }
+
             _sawmill.Error($"Failed to create playtime session for {session.Name}: {e}");
         }
     }
@@ -72,15 +86,21 @@ public sealed partial class PlayTimeTrackingManager
         if (!data.IsSessionActive)
             return;
 
+        var endTime = DateTime.UtcNow;
         data.IsSessionActive = false;
-        data.LastSessionEndTime = DateTime.UtcNow;
+        data.LastSessionEndTime = endTime;
+        if (data.CurrentSessionState != null)
+        {
+            data.CurrentSessionState.EndTime = endTime;
+            data.CurrentSessionState = null;
+        }
         data.SessionGeneration++;
 
         if (data.CurrentDbSessionId.HasValue)
         {
             var sessionId = data.CurrentDbSessionId.Value;
             data.CurrentDbSessionId = null;
-            TrackPending(UpdatePlayTimeSessionSafeAsync(sessionId, data.LastSessionEndTime));
+            TrackPending(UpdatePlayTimeSessionSafeAsync(sessionId, endTime));
         }
     }
 
@@ -102,6 +122,11 @@ public sealed partial class PlayTimeTrackingManager
         {
             EndPlayTimeSession(data);
         }
+    }
+
+    private sealed class PlayTimeSessionState
+    {
+        public DateTime? EndTime;
     }
 
     private sealed partial class PlayTimeData
@@ -130,5 +155,10 @@ public sealed partial class PlayTimeTrackingManager
         /// Timestamp when the most recent active session ended.
         /// </summary>
         public DateTime LastSessionEndTime;
+
+        /// <summary>
+        /// Per-session state used to record the exact end time of a session whose DB insert is still in flight.
+        /// </summary>
+        public PlayTimeSessionState? CurrentSessionState;
     }
 }
