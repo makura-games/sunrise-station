@@ -590,14 +590,6 @@ public sealed partial class SunriseCCVars : CVars
     public static readonly CVarDef<bool> TTSLobbyEnabled =
         CVarDef.Create("tts.lobby_enabled", true, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
 
-    /// <summary>
-    /// Whether lobby TTS is enabled for sponsors.
-    /// </summary>
-    /// <summary>
-    /// Whether lobby TTS is enabled on the server.
-    /// </summary>
-    public static readonly CVarDef<bool> TTSLobbyEnabled =
-        CVarDef.Create("tts.lobby_enabled", true, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
 
     /// <summary>
     /// Whether lobby TTS is enabled for sponsors.
