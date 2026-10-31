@@ -43,6 +43,27 @@ public sealed partial class PlayerCacheManager
                 cache.EmoteVisibility = b;
                 SetCache(cache);
             });
+        _cfg.OnValueChanged(SunriseCCVars.SponsorLobbyTtsEnabled,
+            b =>
+            {
+                var cache = GetCache();
+                cache.LobbyTtsEnabled = b;
+                SetCache(cache);
+            });
+        _cfg.OnValueChanged(SunriseCCVars.TTSLobbyOthersEnabled,
+            b =>
+            {
+                var cache = GetCache();
+                cache.LobbyOthersTtsEnabled = b;
+                SetCache(cache);
+            });
+        _cfg.OnValueChanged(SunriseCCVars.TTSAdminChatEnabled,
+            b =>
+            {
+                var cache = GetCache();
+                cache.AdminChatTtsEnabled = b;
+                SetCache(cache);
+            });
 
         CacheChanged += () =>
         {
@@ -58,6 +79,9 @@ public sealed partial class PlayerCacheManager
             GhostTheme = _cfg.GetCVar(SunriseCCVars.SponsorGhostTheme),
             Pet = _cfg.GetCVar(SunriseCCVars.SponsorPet),
             EmoteVisibility = _cfg.GetCVar(InteractionsCVars.EmoteVisibility),
+            LobbyTtsEnabled = _cfg.GetCVar(SunriseCCVars.SponsorLobbyTtsEnabled),
+            LobbyOthersTtsEnabled = _cfg.GetCVar(SunriseCCVars.TTSLobbyOthersEnabled),
+            AdminChatTtsEnabled = _cfg.GetCVar(SunriseCCVars.TTSAdminChatEnabled),
         };
         SetCache(data);
     }

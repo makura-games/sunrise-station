@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using System.Text.RegularExpressions;
 using Content.Server.Chat.Systems;
 using Content.Shared.Chat;
@@ -8,11 +8,6 @@ namespace Content.Server._Sunrise.TTS;
 // ReSharper disable once InconsistentNaming
 public sealed partial class TTSSystem
 {
-    private static readonly Regex AllowedCharactersRegex = new(@"[^a-zA-Zа-яА-ЯёЁ0-9,\-+?!. ]");
-    private static readonly Regex LatinCharactersRegex = new(@"[a-zA-Z]", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-    private static readonly Regex WordRegex = new(@"(?<![a-zA-Zа-яёА-ЯЁ])[a-zA-Zа-яёА-ЯЁ]+?(?![a-zA-Zа-яёА-ЯЁ])", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-    private static readonly Regex DecimalSeparatorRegex = new(@"(?<=[1-90])(\.|,)(?=[1-90])");
-    private static readonly Regex NumberRegex = new(@"\d+");
 
     private void OnTransformSpeech(TransformSpeechEvent args)
     {
@@ -20,14 +15,33 @@ public sealed partial class TTSSystem
         args.Message = args.Message.Replace("+", "");
     }
 
+    [GeneratedRegex(@"(?<![\p{L}\p{N}_]):[^\s:]+:(?![\p{L}\p{N}_])")]
+    private static partial Regex EmojiRegex();
+
+    [GeneratedRegex(@"[^a-zA-Zа-яА-ЯёЁ0-9,\-+?!. ]")]
+    private static partial Regex CharsToSanitizeRegex();
+
+    [GeneratedRegex(@"[a-zA-Z]", RegexOptions.Multiline | RegexOptions.IgnoreCase)]
+    private static partial Regex Lat2CyrRegex();
+
+    [GeneratedRegex(@"(?<![a-zA-Zа-яёА-ЯЁ])[a-zA-Zа-яёА-ЯЁ]+?(?![a-zA-Zа-яёА-ЯЁ])", RegexOptions.Multiline | RegexOptions.IgnoreCase)]
+    private static partial Regex MatchedWordRegex();
+
+    [GeneratedRegex(@"(?<=[1-90])(\.|,)(?=[1-90])")]
+    private static partial Regex DecimalSeparatorRegex();
+
+    [GeneratedRegex(@"\d+")]
+    private static partial Regex DigitsRegex();
+
     private string Sanitize(string text)
     {
+        text = EmojiRegex().Replace(text, match => _emojiSystem.Emojis.ContainsKey(match.Value) ? "" : match.Value);
         text = text.Trim();
-        text = AllowedCharactersRegex.Replace(text, "");
-        text = LatinCharactersRegex.Replace(text, ReplaceLat2Cyr);
-        text = WordRegex.Replace(text, ReplaceMatchedWord);
-        text = DecimalSeparatorRegex.Replace(text, " целых ");
-        text = NumberRegex.Replace(text, ReplaceWord2Num);
+        text = CharsToSanitizeRegex().Replace(text, "");
+        text = Lat2CyrRegex().Replace(text, ReplaceLat2Cyr);
+        text = MatchedWordRegex().Replace(text, ReplaceMatchedWord);
+        text = DecimalSeparatorRegex().Replace(text, " целых ");
+        text = DigitsRegex().Replace(text, ReplaceWord2Num);
         text = text.Trim();
         return text;
     }

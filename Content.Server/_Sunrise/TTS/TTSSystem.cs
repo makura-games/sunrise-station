@@ -1,10 +1,11 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using Content.Server._Sunrise.AnnouncementSpeaker;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
 using Content.Shared._Sunrise.CollectiveMind;
+using Content.Shared._Sunrise.Messenger;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared._Sunrise.TTS;
 using Content.Shared.Radio.Components;
@@ -18,6 +19,10 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Shared.Chat;
+using Content.Server.Preferences.Managers;
+using Content.Server._Sunrise.PlayerCache;
+using Content.Shared.Preferences;
+using Content.Server.Administration.Managers;
 
 namespace Content.Server._Sunrise.TTS;
 
@@ -30,6 +35,11 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private IRobustRandom _rng = default!;
     [Dependency] private SharedAudioSystem _audioSystem = default!;
     [Dependency] private AnnouncementSpeakerSystem _announcementSpeakerSystem = default!;
+    [Dependency] private IServerPreferencesManager _preferencesManager = default!;
+    [Dependency] private PlayerCacheManager _playerCacheManager = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private SharedEmojiSystem _emojiSystem = default!;
     [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
 
     private readonly List<string> _sampleText =
@@ -396,8 +406,80 @@ public sealed partial class TTSSystem : EntitySystem
 
         return null;
     }
-}
 
+    public async Task PlayLobbyTTS(ICommonSession player, string message)
+    {
+        if (!_isEnabled || !_cfg.GetCVar(SunriseCCVars.TTSLobbyEnabled) || message.Length > MaxMessageChars)
+            return;
+
+        var pref = _preferencesManager.GetPreferences(player.UserId);
+        if (pref.SelectedCharacter is not HumanoidCharacterProfile humanoidProfile)
+            return;
+
+        var voiceId = humanoidProfile.TtsVoice;
+        if (!GetVoicePrototype(voiceId, out var protoVoice))
+            return;
+
+        var recipients = new List<ICommonSession>();
+        foreach (var session in _playerManager.Sessions)
+        {
+            if (_ignoredRecipients.Contains(session))
+                continue;
+
+            if (!_playerCacheManager.GetLobbyOthersTtsEnabled(session.UserId))
+                continue;
+
+            recipients.Add(session);
+        }
+
+        if (recipients.Count == 0)
+            return;
+
+        var soundData = await GenerateTTS(message, protoVoice);
+        if (soundData is null)
+            return;
+
+        RaiseNetworkEvent(new PlayTTSEvent(soundData, null, false), Filter.Empty().AddPlayers(recipients), recordReplay: false);
+    }
+
+    public async Task PlayAdminChatTTS(ICommonSession player, string message)
+    {
+        if (!_isEnabled || message.Length > MaxMessageChars)
+            return;
+
+        var pref = _preferencesManager.GetPreferences(player.UserId);
+        if (pref.SelectedCharacter is not HumanoidCharacterProfile humanoidProfile)
+            return;
+
+        var voiceId = humanoidProfile.TtsVoice;
+        if (!GetVoicePrototype(voiceId, out var protoVoice))
+            return;
+
+        var recipients = new List<ICommonSession>();
+        foreach (var session in _playerManager.Sessions)
+        {
+            if (_ignoredRecipients.Contains(session))
+                continue;
+
+            if (!_adminManager.IsAdmin(session))
+                continue;
+
+            if (!_playerCacheManager.GetAdminChatTtsEnabled(session.UserId))
+                continue;
+
+            recipients.Add(session);
+        }
+
+        if (recipients.Count == 0)
+            return;
+
+        var soundData = await GenerateTTS(message, protoVoice);
+        if (soundData is null)
+            return;
+
+        RaiseNetworkEvent(new PlayTTSEvent(soundData, null, false), Filter.Empty().AddPlayers(recipients), recordReplay: false);
+    }
+}
 public sealed class TransformSpeakerVoiceEvent : EntityEventArgs
 {
     public EntityUid Sender;
