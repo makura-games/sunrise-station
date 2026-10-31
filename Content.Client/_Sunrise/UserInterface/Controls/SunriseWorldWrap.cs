@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.Contracts;
+using System.Diagnostics.Contracts;
 using System.Text;
 using Robust.Client.Graphics;
 using Robust.Shared.Utility;
@@ -37,7 +37,7 @@ internal struct SunriseWordWrap
     public void NextRune(Rune rune, out int? breakLine, out int? breakNewLine, out bool skip)
     {
         BreakIndexCounter = NextBreakIndexCounter;
-        NextBreakIndexCounter += rune.Utf16SequenceLength;
+        NextBreakIndexCounter += 1;
 
         breakLine = null;
         breakNewLine = null;
