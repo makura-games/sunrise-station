@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "poster2_legit from tgstation commit f01de25493e2bd2706ef9b0303cb0d7b5e3e471b; banner_syndicate resprited by seraphimttt (Discord) | SUNRISE",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "poster2_legit"
+    },
+    {
+      "name": "banner_syndicate"
+    }
+  ]
+}

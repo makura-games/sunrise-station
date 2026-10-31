@@ -1722,12 +1722,11 @@
 - type: emoji
   id: poster2_legit
   code: ":poster2_legit:"
-  spritePath: Structures/Wallmounts/posters.rsi
+  spritePath: _Sunrise/Interface/Misc/emoji_objects.rsi
   spriteState: poster2_legit
 
 - type: emoji
   id: banner_syndicate
   code: ":banner_syndicate:"
-  spritePath: _Sunrise/Structures/Decoration/banner.rsi
+  spritePath: _Sunrise/Interface/Misc/emoji_objects.rsi
   spriteState: banner_syndicate
-
