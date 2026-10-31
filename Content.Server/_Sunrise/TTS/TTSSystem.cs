@@ -5,6 +5,7 @@ using Content.Server._Sunrise.AnnouncementSpeaker;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
 using Content.Shared._Sunrise.CollectiveMind;
+using Content.Shared._Sunrise.Messenger;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared._Sunrise.TTS;
 using Content.Shared.Radio.Components;
@@ -38,6 +39,7 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private PlayerCacheManager _playerCacheManager = default!;
     [Dependency] private ISharedPlayerManager _playerManager = default!;
     [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private SharedEmojiSystem _emojiSystem = default!;
     [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
 
     private readonly List<string> _sampleText =
