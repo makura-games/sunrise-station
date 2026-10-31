@@ -10,7 +10,7 @@ namespace Content.Client._Sunrise.PlaytimeTop;
 [GenerateTypedNameReferences]
 public sealed partial class PlaytimeTopWidget : Control
 {
-    [Dependency] private readonly PlaytimeTopManager _playtimeTopManager = default!;
+    [Dependency] private PlaytimeTopManager _playtimeTopManager = default!;
 
     private TabType _currentTab = TabType.Online;
 
