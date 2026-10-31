@@ -43,7 +43,10 @@ public sealed partial class GameTicker
                 while (reader.TryRead(out var item))
                 {
                     if (cancellationToken.IsCancellationRequested)
-                        break;
+                    {
+                        SaveFailedReplay(item.Directory, item.Path);
+                        continue;
+                    }
 
                     try
                     {
@@ -78,6 +81,7 @@ public sealed partial class GameTicker
                     }
                     catch (Exception itemEx)
                     {
+                        SaveFailedReplay(item.Directory, item.Path);
                         if (itemEx is OperationCanceledException)
                             throw;
                         _sawmillReplays.Error(
@@ -88,7 +92,10 @@ public sealed partial class GameTicker
         }
         catch (OperationCanceledException)
         {
-            //
+            while (reader.TryRead(out var remaining))
+            {
+                SaveFailedReplay(remaining.Directory, remaining.Path);
+            }
         }
         catch (Exception e)
         {
@@ -256,14 +263,23 @@ public sealed partial class GameTicker
                 _resourceManager.UserData.CreateDir(FailedReplaysDir);
 
             var destPath = new ResPath($"{FailedReplaysDir}/{path.Filename}");
+            if (ReferenceEquals(directory, _resourceManager.UserData) && path == destPath)
+            {
+                _sawmillReplays.Info($"Неудачный реплей {path.Filename} уже находится в {destPath}.");
+                return;
+            }
+
             if (_resourceManager.UserData.Exists(destPath))
                 _resourceManager.UserData.Delete(destPath);
 
-            using var srcStream = directory.OpenRead(path);
-            using var dstStream = _resourceManager.UserData.OpenWrite(destPath);
-            srcStream.CopyTo(dstStream);
+            using (var srcStream = directory.OpenRead(path))
+            using (var dstStream = _resourceManager.UserData.OpenWrite(destPath))
+            {
+                srcStream.CopyTo(dstStream);
+            }
 
-            _sawmillReplays.Info($"Неудачный реплей {path.Filename} сохранен в {destPath} для повторной попытки.");
+            directory.Delete(path);
+            _sawmillReplays.Info($"Неудачный реплей {path.Filename} перемещен в {destPath} для повторной попытки.");
         }
         catch (Exception e)
         {
@@ -280,6 +296,9 @@ public sealed partial class GameTicker
 
             foreach (var file in EnumerateEntries(FailedReplaysDir))
             {
+                if (_resourceManager.UserData.IsDir(file) || file.Extension != "zip")
+                    continue;
+
                 _sawmillReplays.Info($"Переочередивание неудачного реплея для загрузки: {file}");
                 _replayUploadChannel.Writer.TryWrite((_resourceManager.UserData, file));
             }
