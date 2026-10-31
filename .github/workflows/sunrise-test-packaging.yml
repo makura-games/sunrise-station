@@ -1,0 +1,148 @@
+name: Test Packaging
+
+on:
+  push:
+    branches: [ master, staging, stable ]
+    paths:
+      - '.gitmodules'
+      - 'Content.Client/**'
+      - 'Content.Packaging/**'
+      - 'Content.Server/**'
+      - 'Content.Server.Database/**'
+      - 'Content.Shared/**'
+      - 'Content.Shared.Database/**'
+      - 'Directory.Packages.props'
+      - 'global.json'
+      - 'MSBuild/**'
+      - 'nuget.config'
+      - 'RobustToolbox'
+      - 'RobustToolbox/**'
+      - 'SpaceStation14.slnx'
+      - 'Sunrise/**'
+      - 'Resources/**'
+  merge_group:
+  pull_request:
+    types: [ opened, reopened, synchronize ]
+    branches: [ master, staging, stable ]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  changes:
+    name: Check packaging paths
+    runs-on: ubuntu-latest
+    outputs:
+      packaging: ${{ steps.filter.outputs.packaging }}
+    steps:
+      - name: Checkout path filter
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            .github/workflows/sunrise-test-packaging.yml
+            Tools/_sunrise/ci/check_packaging_paths.py
+          sparse-checkout-cone-mode: false
+
+      - name: Check changed files
+        id: filter
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 Tools/_sunrise/ci/check_packaging_paths.py .github/workflows/sunrise-test-packaging.yml >> "$GITHUB_OUTPUT"
+
+  package:
+    name: Package ${{ matrix.name }}
+    needs: changes
+    if: needs.changes.outputs.packaging == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: client
+            arguments: client
+          - name: server (win-x64)
+            arguments: server --platform win-x64
+          - name: server (win-arm64)
+            arguments: server --platform win-arm64
+          - name: server (linux-x64)
+            arguments: server --platform linux-x64
+          - name: server (linux-arm64)
+            arguments: server --platform linux-arm64
+          - name: server (osx-x64)
+            arguments: server --platform osx-x64
+          - name: server (osx-arm64)
+            arguments: server --platform osx-arm64
+
+    steps:
+      - name: Checkout Master
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Setup Submodule
+        run: |
+          git submodule update --init --recursive
+
+      - name: Pull engine updates
+        uses: space-wizards/submodule-dependency@548a726da00ca348ce9e1ea9f026da8f528caa71 # v0.1.5
+
+      - name: Update Engine Submodules
+        run: |
+          cd RobustToolbox/
+          git submodule update --init --recursive
+
+      # ubuntu-latest has .NET 10
+      # - name: Setup .NET Core
+      #   uses: actions/setup-dotnet@v4.1.0
+      #   with:
+      #     dotnet-version: 10.0.x
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build Packaging
+        run: dotnet build Content.Packaging --configuration Release --no-restore /m
+
+      - name: Package ${{ matrix.name }}
+        run: dotnet run --project Content.Packaging --configuration Release --no-build -- ${{ matrix.arguments }} --log-build
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: binlogs-${{ matrix.name }}
+          path: release/*.binlog
+          retention-days: 7
+
+  build:
+    name: Test Packaging
+    needs: [changes, package]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify packaging jobs
+        env:
+          CHANGES_RESULT: ${{ needs.changes.result }}
+          PACKAGING_NEEDED: ${{ needs.changes.outputs.packaging }}
+          PACKAGE_RESULT: ${{ needs.package.result }}
+        run: |
+          if [[ "$CHANGES_RESULT" != "success" ]]; then
+            echo "::error title=Packaging path check failed::Could not determine whether packaging is required."
+            exit 1
+          fi
+
+          if [[ "$PACKAGING_NEEDED" == "false" ]]; then
+            echo "Packaging is not required for the changed files."
+            exit 0
+          fi
+
+          echo "package=$PACKAGE_RESULT"
+          if [[ "$PACKAGE_RESULT" != "success" ]]; then
+            echo "::error title=Packaging failed::At least one packaging job did not succeed."
+            exit 1
+          fi

@@ -1,8 +1,9 @@
 using System.Linq;
 using Content.Server._Sunrise.Messenger;
-using Content.Server.CartridgeLoader;
+using Content.Shared.CartridgeLoader;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
+using DeviceNetworkPacketEvent = Content.Shared.DeviceNetwork.Events.DeviceNetworkPacketEvent<Content.Shared._Sunrise.DeviceNetwork.SunriseNetworkPayload>;
 using Content.Shared._Sunrise.Messenger;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.PDA.Ringer;
@@ -16,16 +17,17 @@ namespace Content.Server._Sunrise.CartridgeLoader.Cartridges;
 /// </summary>
 public sealed partial class MessengerCartridgeSystem
 {
-    private void OnPacketReceived(EntityUid uid, MessengerCartridgeComponent component, CartridgeDeviceNetPacketEvent args)
+    private void OnPacketReceived(Entity<MessengerCartridgeComponent> ent, ref CartridgeRelayedEvent<DeviceNetworkPacketEvent> args)
     {
-        var packet = args.PacketEvent;
+        var (uid, component) = ent;
+        var packet = args.Args;
 
         if (!packet.Data.TryGetValue(DeviceNetworkConstants.Command, out string? command))
         {
             return;
         }
 
-        var loaderUid = args.Loader;
+        EntityUid loaderUid = args.Loader;
         if (loaderUid == EntityUid.Invalid)
         {
             Sawmill.Warning($"Packet received but LoaderUid is invalid");

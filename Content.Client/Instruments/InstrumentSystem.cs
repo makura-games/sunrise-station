@@ -15,10 +15,13 @@ namespace Content.Client.Instruments;
 
 public sealed partial class InstrumentSystem : SharedInstrumentSystem
 {
-    [Dependency] private readonly IClientNetManager _netManager = default!;
-    [Dependency] private readonly IMidiManager _midiManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    private const int MidiMinVolume = 0;
+    private const int MidiMaxVolume = 127;
+
+    [Dependency] private IClientNetManager _netManager = default!;
+    [Dependency] private IMidiManager _midiManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public readonly TimeSpan OneSecAgo = TimeSpan.FromSeconds(-1);
     public int MaxMidiEventsPerBatch { get; private set; }
@@ -34,10 +37,14 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
 
         Subs.CVar(_cfg, CCVars.MaxMidiEventsPerBatch, OnMaxMidiEventsPerBatchChanged, true);
         Subs.CVar(_cfg, CCVars.MaxMidiEventsPerSecond, OnMaxMidiEventsPerSecondChanged, true);
+        // Sunrise added start - синхронизация лимита пакетов MIDI
+        InitializeMidiAbuseCVars();
+        // Sunrise added end
 
         SubscribeNetworkEvent<InstrumentMidiEventEvent>(OnMidiEventRx);
         SubscribeNetworkEvent<InstrumentStartMidiEvent>(OnMidiStart);
         SubscribeNetworkEvent<InstrumentStopMidiEvent>(OnMidiStop);
+        SubscribeNetworkEvent<InstrumentSetMidiMinVolumeEvent>(OnSetMidiMinVolume);
 
         SubscribeLocalEvent<InstrumentComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<InstrumentComponent, ComponentHandleState>(OnHandleState);
@@ -75,6 +82,7 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
         component.AllowProgramChange = state.AllowProgramChange;
         component.RespectMidiLimits = state.RespectMidiLimits;
         component.Master = EnsureEntity<InstrumentComponent>(state.Master, uid);
+        component.MinVolume = state.MinVolume;
         component.FilteredChannels = state.FilteredChannels;
 
         if (component.Playing)
@@ -94,6 +102,18 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
             return;
 
         RaiseNetworkEvent(new InstrumentSetMasterEvent(GetNetEntity(uid), GetNetEntity(masterUid)));
+    }
+
+    public void SetMinVolume(EntityUid uid, int volume)
+    {
+        if (!TryComp(uid, out InstrumentComponent? instrument))
+            return;
+
+        var byteMinVolume = (byte)Math.Min(Math.Max(MidiMinVolume, volume), MidiMaxVolume);
+        instrument.MinVolume = byteMinVolume;
+
+        RaiseNetworkEvent(new InstrumentSetMidiMinVolumeEvent(GetNetEntity(uid), byteMinVolume));
+        UpdateRenderer(uid);
     }
 
     public void SetFilteredChannel(EntityUid uid, int channel, bool value)
@@ -168,7 +188,9 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
         instrument.Renderer.FilteredChannels.SetAll(false);
         instrument.Renderer.FilteredChannels.Or(instrument.FilteredChannels);
 
-        instrument.Renderer.DisablePercussionChannel = !instrument.AllowPercussion;
+        instrument.Renderer.DisablePercussionChannel = !instrument.AllowPercussion |
+                                                       instrument.FilteredChannels[RobustMidiEvent.PercussionChannel];
+
         instrument.Renderer.DisableProgramChangeEvent = !instrument.AllowProgramChange;
 
         for (int i = 0; i < RobustMidiEvent.MaxChannels; i++)
@@ -186,6 +208,7 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
         UpdateRendererMaster(instrument);
 
         instrument.Renderer.LoopMidi = instrument.LoopMidi;
+        instrument.Renderer.MinVolume = instrument.MinVolume;
     }
 
     private void UpdateRendererMaster(InstrumentComponent instrument)
@@ -418,6 +441,15 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
         EndRenderer(GetEntity(ev.Uid), true);
     }
 
+    private void OnSetMidiMinVolume(InstrumentSetMidiMinVolumeEvent ev)
+    {
+        if (!TryComp(GetEntity(ev.Uid), out InstrumentComponent? instrument))
+            return;
+
+        instrument.MinVolume = ev.MinVolume;
+        UpdateRenderer(GetEntity(ev.Uid), instrument);
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -480,6 +512,11 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
 
             if (eventCount == 0)
                 continue;
+
+            // Sunrise added start - отправляем MIDI-пакеты с частотой серверного лимита
+            if (!TryConsumeMidiBatch(instrument, now))
+                continue;
+            // Sunrise added end
 
             RaiseNetworkEvent(new InstrumentMidiEventEvent(GetNetEntity(uid), events));
 

@@ -41,6 +41,11 @@ public partial class SharedInteractionSystem
 
     private void OnMoveAttempt(EntityUid uid, BlockMovementComponent component, UpdateCanMoveEvent args)
     {
+        // Sunrise-start - оффы сломали компонент, это временный фикс, ишуй я оставил у них
+        if (component.LifeStage > ComponentLifeStage.Running)
+            return;
+        // Sunrise-end
+
         // If we're relaying then don't cancel.
         if (HasComp<RelayInputMoverComponent>(uid))
             return;

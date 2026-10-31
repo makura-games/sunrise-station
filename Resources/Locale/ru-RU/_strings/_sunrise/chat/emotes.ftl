@@ -1,10 +1,10 @@
+chat-emote-msg-oink = хрюкает
 chat-emote-name-hisses = Шипеть
 chat-emote-name-purrs = Мурчать
 chat-emote-name-growls = Рычать
 chat-emote-msg-growls = рычит
 chat-emote-name-mews = Мявкать
 chat-emote-name-oink = Хрюкать
-chat-emote-msg-oink = хрюкает
 chat-emote-name-meows = Мяукать
 chat-emote-name-vomit = Тошнота
 chat-emote-name-headache = Головная боль

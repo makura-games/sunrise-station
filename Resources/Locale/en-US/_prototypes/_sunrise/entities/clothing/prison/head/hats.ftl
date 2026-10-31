@@ -38,5 +38,3 @@ ent-ClothingHeadCapPrisonWorker = prison worker cap
     .desc = Rough and worn, always dirty, worn by those who are first in line for orders and last at the exit.
 ent-ClothingHeadCapPrisonTrainee = prison trainee cap
     .desc = Simple and clean, but new, a symbol for those who are just starting their path in the prison system.
-
-

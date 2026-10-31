@@ -111,6 +111,37 @@
     organ:
     - type: OrganAppendix
 
+- type: entity
+  parent: BaseSunriseSurgeryStepScalpel
+  id: SurgeryStepPrepareImplantSiteAppendix
+  name: Prepare Implant Site
+  components:
+  - type: SurgeryStep
+    duration: 3
+
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepInsertAppendix
+  name: Insert Appendix
+  components:
+  - type: SurgeryStep
+    duration: 3
+    tools:
+    - type: OrganAppendix
+  - type: Sprite
+    sprite: Mobs/Species/Human/organs.rsi
+    state: appendix
+  - type: SurgeryStepOrganInsert
+    slot: appendix
+
+- type: entity
+  parent: BaseSunriseSurgeryStepHemostat
+  id: SurgeryStepAttachAppendix
+  name: Attach Appendix
+  components:
+  - type: SurgeryStep
+    duration: 3
+
 # kidneys
 - type: entity
   parent: SurgeryStepBase
@@ -208,7 +239,7 @@
   - type: SurgeryStepEmoteEffect
   - type: SurgeryStepOrganExtract
     organ:
-    - type: OrganLungs
+    - type: Lung
 
 # heart
 
@@ -587,7 +618,7 @@
   - type: SurgeryStep
     duration: 3
     tools:
-    - type: OrganLungs
+    - type: Lung
   - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi
     state: lung-l

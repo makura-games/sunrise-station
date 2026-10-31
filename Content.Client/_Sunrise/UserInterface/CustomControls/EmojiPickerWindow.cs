@@ -24,10 +24,10 @@ public sealed partial class EmojiPickerWindow : DefaultWindow
     private const int EmojiColumns = 6;
     private const int RecentEmojiLimit = 6;
 
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IResourceCache _resource = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IResourceCache _resource = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     private readonly List<string> _recentEmojis = [];
     private readonly HashSet<EmojiPrototype> _favoriteEmojis = [];

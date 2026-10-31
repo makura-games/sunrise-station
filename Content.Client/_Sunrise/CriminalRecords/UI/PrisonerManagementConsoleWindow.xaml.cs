@@ -13,8 +13,6 @@ namespace Content.Client._Sunrise.CriminalRecords.UI;
 [GenerateTypedNameReferences]
 public sealed partial class PrisonerManagementConsoleWindow : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-
     public Action<uint, uint, int>? OnStartIncarceration;
     public Action<uint, uint>? OnEscape;
     public Action<uint, uint>? OnParole;
@@ -127,7 +125,7 @@ public sealed class CellSelectionDialog : DefaultWindow
     {
         Title = Loc.GetString("prisoner-management-select-cell");
         var grid = new GridContainer { Columns = 2, Margin = new Thickness(8), HSeparationOverride = 8, VSeparationOverride = 8 };
-        
+
         // Dynamic cell count based on the number of configured ports/sinks from the server
         var cellCount = equipped.Count;
         for (int i = 0; i < cellCount; i++)
@@ -154,12 +152,12 @@ public sealed class CellSelectionDialog : DefaultWindow
             }
             grid.AddChild(btn);
         }
-        
+
         if (cellCount == 0)
         {
             grid.AddChild(new Label { Text = Loc.GetString("prisoner-management-no-cells") });
         }
-        
+
         Contents.AddChild(grid);
     }
 }

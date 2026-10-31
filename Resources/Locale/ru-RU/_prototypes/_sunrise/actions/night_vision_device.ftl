@@ -1,6 +1,6 @@
-ent-NVDToggleAction = Переключение ПНВ
+ent-NVDToggleAction = переключение ПНВ
     .desc = Переключает ПНВ.
-ent-ToggleableNightVision = Switches Night Vision
-    .desc = Switches Night Vision
-ent-SwitchNightVision = Переключение ночного видения
+ent-ToggleableNightVision = переключатель ночного зрения
+    .desc = Переключатель ночного зрения.
+ent-SwitchNightVision = переключение ночного видения
     .desc = Переключяет ночное видение.

@@ -1,7 +1,7 @@
-# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 - type: entity
   id: PartPredator
-  parent: [BaseItem, BasePart]
+  parent: OrganBase
   name: "predator body part"
   abstract: true
   components:
@@ -12,11 +12,14 @@
         Quantity: 3
       - ReagentId: FluorosulfuricAcidHumanoidXeno
         Quantity: 10
+  - type: VisualOrganMarkings
+    markingData:
+      group: Predator
 
 - type: entity
   id: TorsoPredator
   name: "predator torso"
-  parent: [PartPredator, BaseTorso]
+  parent: [PartPredator, OrganBaseTorso]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Predator/parts.rsi/
@@ -32,7 +35,7 @@
 - type: entity
   id: HeadPredator
   name: "predator head"
-  parent: [PartPredator, BaseHead]
+  parent: [PartPredator, OrganBaseHead]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Predator/parts.rsi/
@@ -44,11 +47,20 @@
         Quantity: 5
       - ReagentId: FluorosulfuricAcidHumanoidXeno
         Quantity: 10
+  - type: VisualOrganMarkings
+    markingData:
+      layers:
+      - Dreadlocks
+      - Rings
+    dependentHidingLayers:
+      enum.HumanoidVisualLayers.Hair:
+      - enum.HumanoidVisualLayers.Dreadlocks
+      - enum.HumanoidVisualLayers.Rings
 
 - type: entity
   id: LeftArmPredator
   name: "left predator arm"
-  parent: [PartPredator, BaseLeftArm]
+  parent: [PartPredator, OrganBaseArmLeft]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Predator/parts.rsi/
@@ -57,7 +69,7 @@
 - type: entity
   id: RightArmPredator
   name: "right predator arm"
-  parent: [PartPredator, BaseRightArm]
+  parent: [PartPredator, OrganBaseArmRight]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Predator/parts.rsi/
@@ -66,7 +78,7 @@
 - type: entity
   id: LeftHandPredator
   name: "left predator hand"
-  parent: [PartPredator, BaseLeftHand]
+  parent: [PartPredator, OrganBaseHandLeft]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Predator/parts.rsi/
@@ -75,7 +87,7 @@
 - type: entity
   id: RightHandPredator
   name: "right predator hand"
-  parent: [PartPredator, BaseRightHand]
+  parent: [PartPredator, OrganBaseHandRight]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Predator/parts.rsi/
@@ -84,29 +96,25 @@
 - type: entity
   id: LeftLegPredator
   name: "left predator leg"
-  parent: [PartPredator, BaseLeftLeg]
+  parent: [PartPredator, OrganBaseLegLeft]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Predator/parts.rsi/
     state: "l_leg"
-  - type: MovementBodyPart
-    maxDensity: 155
 
 - type: entity
   id: RightLegPredator
   name: "right predator leg"
-  parent: [PartPredator, BaseRightLeg]
+  parent: [PartPredator, OrganBaseLegRight]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Predator/parts.rsi/
     state: "r_leg"
-  - type: MovementBodyPart
-    maxDensity: 155
 
 - type: entity
   id: LeftFootPredator
   name: "left predator foot"
-  parent: [PartPredator, BaseLeftFoot]
+  parent: [PartPredator, OrganBaseFootLeft]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Predator/parts.rsi/
@@ -115,7 +123,7 @@
 - type: entity
   id: RightFootPredator
   name: "right predator foot"
-  parent: [PartPredator, BaseRightFoot]
+  parent: [PartPredator, OrganBaseFootRight]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Predator/parts.rsi/

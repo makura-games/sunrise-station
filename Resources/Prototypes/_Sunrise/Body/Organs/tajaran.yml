@@ -3,15 +3,9 @@
   parent: OrganAnimalStomach
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      stomach:
-        maxVol: 50
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 5
+    - SolutionSunriseStomachSmall
 
 - type: entity
   id: OrganTajaranEyes
@@ -21,7 +15,10 @@
   components:
   - type: FunctionalOrgan
     comps:
-    - type: ToggleableNightVision
-      effect: EffectNightVisioSpecies
+    - type: NightVision
+      enabled: false
+      action: ActionToggleNightVision
+      prioritized: false
+      lightingColor: '#FFFFFF15'
     - type: FlashModifier
       modifier: 2

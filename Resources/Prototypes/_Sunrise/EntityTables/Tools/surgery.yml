@@ -1,0 +1,18 @@
+- type: entityTable
+  id: SurgeryTools
+  table: !type:AllSelector
+    children:
+    - id: Cautery
+    - id: Drill
+    - id: ScalpelLaser
+    - id: Retractor
+    - id: Hemostat
+    - id: SawAdvanced
+    - id: BoneGel
+    - id: HemostatAdvanced
+    - id: BoneSetter
+    - id: BoneSetterAdvanced
+    - id: RetractorAdvanced
+    - id: Scalpel
+    - id: ScalpelAdvanced
+    - id: Saw

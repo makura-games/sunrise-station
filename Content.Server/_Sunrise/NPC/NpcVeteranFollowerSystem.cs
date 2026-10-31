@@ -13,16 +13,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.NPC;
 
-public sealed class NpcVeteranFollowerSystem : EntitySystem
+public sealed partial class NpcVeteranFollowerSystem : EntitySystem
 {
     private const float FastAcquireDelay = 5f;
 
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private static readonly TimeSpan UpdateCooldown = TimeSpan.FromSeconds(1);
     private TimeSpan _nextUpdate = TimeSpan.Zero;

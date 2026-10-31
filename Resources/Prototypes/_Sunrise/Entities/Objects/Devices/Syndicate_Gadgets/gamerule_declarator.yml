@@ -57,7 +57,7 @@
   components:
   - type: TriggerOnSpawn
   - type: AddGameRuleOnTrigger
-    gameRule: GameRuleMeteorSwarmMedium
+    gameRule: MeteorSwarmMedium
   - type: DeleteOnTrigger
 
 - type: entity
@@ -68,7 +68,7 @@
   components:
   - type: TriggerOnSpawn
   - type: AddGameRuleOnTrigger
-    gameRule: GameRuleSpaceDustMinor
+    gameRule: SpaceDustMinor
   - type: DeleteOnTrigger
 
 - type: entity
@@ -79,7 +79,7 @@
   components:
   - type: TriggerOnSpawn
   - type: AddGameRuleOnTrigger
-    gameRule: GameRuleSpaceDustMinor
+    gameRule: SpaceDustMinor
   - type: DeleteOnTrigger
 
 - type: entity

@@ -1,8 +1,7 @@
 ﻿- type: entity
   id: PartVirtual
-  parent: BaseItem
+  parent: OrganBase
   components:
-  - type: BodyPart
   - type: Sprite
     sprite: error.rsi
     state: error

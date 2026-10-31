@@ -1,0 +1,64 @@
+- type: satiation
+  parent: NormalSatiationHunger
+  id: SunriseFelinidHunger
+  baseChangeRate: -0.015
+
+- type: satiation
+  parent: NormalSatiationThirst
+  id: SunriseFelinidThirst
+  baseChangeRate: -0.05
+
+- type: satiation
+  parent: NormalSatiationHunger
+  id: SunriseFastHunger
+  baseChangeRate: -0.08
+
+- type: satiation
+  parent: NormalSatiationThirst
+  id: SunriseFastThirst
+  baseChangeRate: -0.15
+
+- type: satiation
+  parent: NormalSatiationHunger
+  id: SunriseNoDecayHunger
+  baseChangeRate: 0
+
+- type: satiation
+  parent: NormalSatiationThirst
+  id: SunriseNoDecayThirst
+  baseChangeRate: 0
+
+- type: satiation
+  parent: SunriseNoDecayHunger
+  id: SunriseTutorialHunger
+  startingValueMinimum: 110
+  startingValueMaximum: 110
+  thresholds:
+    Overfed: 200
+    Okay: 111
+    Peckish: 100
+    Starving: 50
+    Dead: 0
+
+- type: satiation
+  parent: SunriseNoDecayThirst
+  id: SunriseTutorialThirst
+  startingValueMinimum: 295
+  startingValueMaximum: 295
+
+- type: satiation
+  parent: NormalSatiationHunger
+  id: SunriseRatGuardHunger
+  baseChangeRate: -0.01
+  maximumValue: 300
+  thresholds:
+    Overfed: 300
+    Okay: 200
+    Peckish: 150
+    Starving: 100
+    Dead: 0
+
+- type: satiation
+  parent: NormalSatiationThirst
+  id: SunriseRatGuardThirst
+  baseChangeRate: -0.01

@@ -27,3 +27,4 @@ research-technology-bluespace-gas-tanks = Bluespace Gas Tanks
 research-technology-budget-cyber-organs = Budget CyberOrgans
 research-technology-advanced-cyberlimbs = Advanced cyberorgans
 research-technology-ion-weaponry = Ion Weaponry
+research-technology-full-metal-jacket-ammunition = Full Metal Jacket Ammunition

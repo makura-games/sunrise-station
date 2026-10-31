@@ -2,8 +2,6 @@ ghost-role-information-fugitive-name = Беглец
 ghost-role-information-fugitive-description = Вы сбежавший заключённый. Ваша цель - выжить.
 ghost-role-information-syndicate-medical-cyborg-name = Медицинский борг синдиката
 ghost-role-information-syndicate-medical-cyborg-description = Смерть NT.
-ghost-role-information-syndicate-reaper-cyborg-name = Борг синдиката "Жнец"
-ghost-role-information-syndicate-reaper-cyborg-description = Смерть NT.
 ghost-role-information-syndicate-heavy-cyborg-name = Тяжелый боевой борг синдиката
 ghost-role-information-syndicate-heavy-cyborg-description = Смерть NT.
 ghost-role-information-syndicate-spider-cyborg-name = Диверсионный борг синдиката
@@ -53,5 +51,4 @@ ghost-role-information-sentient-carpshark-name = Sentient Carpshark
 
 ghost-role-information-one-star-unit-dungeon-name = One Star Unit
 ghost-role-information-guardian-unit-dungeon-name = Guardian Unit
-ghost-role-information-terminator-unit-dungeon-name = Exterminator Unit
 ghost-role-information-one-star-unit-dungeon-description = [11201010111002] Work with other automatons to defend the installation and destroy all intruders. [1110220001010002220]

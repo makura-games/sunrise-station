@@ -22,6 +22,11 @@ public sealed partial class NetTexturesManager
         {
             Texture.Dispose();
         }
+
+        public void EnqueueDisposals(Queue<IDisposable> disposals)
+        {
+            disposals.Enqueue(Texture);
+        }
     }
 
     private sealed class LoadedRsiEntry(List<OwnedTexture> textures, Dictionary<string, NetTextureAnimationState> states) : IDisposable
@@ -34,6 +39,16 @@ public sealed partial class NetTexturesManager
             {
                 texture.Dispose();
             }
+        }
+
+        public void EnqueueDisposals(Queue<IDisposable> disposals)
+        {
+            foreach (var texture in textures)
+            {
+                disposals.Enqueue(texture);
+            }
+
+            textures.Clear();
         }
     }
     #endregion
@@ -58,6 +73,7 @@ public sealed partial class NetTexturesManager
         public abstract int EstimateStepCostBytes(NetTexturesManager manager);
         public abstract bool ProcessStep(NetTexturesManager manager, CancellationToken cancellationToken);
         public abstract void Commit(NetTexturesManager manager);
+        public abstract void EnqueueDisposals(Queue<IDisposable> disposals);
         public abstract void Dispose();
     }
 
@@ -147,6 +163,26 @@ public sealed partial class NetTexturesManager
             _tileBuffer = null;
 
             _loadedTexture?.Dispose();
+            _loadedTexture = null;
+        }
+
+        public override void EnqueueDisposals(Queue<IDisposable> disposals)
+        {
+            if (_prepared != null)
+            {
+                disposals.Enqueue(_prepared);
+                _prepared = null;
+            }
+
+            if (_texture != null)
+            {
+                disposals.Enqueue(_texture);
+                _texture = null;
+            }
+
+            _tileBuffer = null;
+
+            _loadedTexture?.EnqueueDisposals(disposals);
             _loadedTexture = null;
         }
 
@@ -283,6 +319,26 @@ public sealed partial class NetTexturesManager
 
             _textures.Clear();
         }
+
+        public override void EnqueueDisposals(Queue<IDisposable> disposals)
+        {
+            _prepared?.EnqueueDisposals(disposals);
+            _prepared = null;
+
+            if (_loadedRsi != null)
+            {
+                _loadedRsi.EnqueueDisposals(disposals);
+                _loadedRsi = null;
+                return;
+            }
+
+            foreach (var texture in _textures)
+            {
+                disposals.Enqueue(texture);
+            }
+
+            _textures.Clear();
+        }
     }
 
     private sealed class PreparedRsi(TextureLoadParameters loadParameters, List<PreparedRsiState> states) : IDisposable
@@ -295,6 +351,14 @@ public sealed partial class NetTexturesManager
             foreach (var state in States)
             {
                 state.Dispose();
+            }
+        }
+
+        public void EnqueueDisposals(Queue<IDisposable> disposals)
+        {
+            foreach (var state in States)
+            {
+                state.EnqueueDisposals(disposals);
             }
         }
     }
@@ -320,6 +384,14 @@ public sealed partial class NetTexturesManager
                 frame.Dispose();
             }
         }
+
+        public void EnqueueDisposals(Queue<IDisposable> disposals)
+        {
+            foreach (var frame in Frames)
+            {
+                frame.EnqueueDisposals(disposals);
+            }
+        }
     }
 
     private sealed class PreparedRsiFrame(int sourceIndex, Image<Rgba32> image) : IDisposable
@@ -330,6 +402,15 @@ public sealed partial class NetTexturesManager
         public void Dispose()
         {
             Image?.Dispose();
+            Image = null;
+        }
+
+        public void EnqueueDisposals(Queue<IDisposable> disposals)
+        {
+            if (Image == null)
+                return;
+
+            disposals.Enqueue(Image);
             Image = null;
         }
     }

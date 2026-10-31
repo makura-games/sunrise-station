@@ -19,9 +19,9 @@ namespace Content.Server._Sunrise.Helpers;
 /// </summary>
 public sealed partial class SunriseHelpersSystem : SharedSunriseHelpersSystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     #region Open Gameticker API
 

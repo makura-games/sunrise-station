@@ -1,9 +1,15 @@
 ent-PowerCellSyndicate = syndicate power cell
     .desc = A rechargeable standardized power cell. This one looks like a rare and powerful Syndicate combat variant.
     .suffix = Full
-ent-PowerCellNanoTrasen = ERT power cell
+ent-PowerCellNanoTrasen = eRT power cell
     .desc = A rechargeable standardized power cell. This one looks like a rare and powerful NanoTrasen combat variant.
     .suffix = Full
 ent-MakeshiftPowerCage = makeshift power cage
     .desc = A makeshift power cage. It's not very good, but it's better than nothing.
+    .suffix = Full
+ent-PowerCellMakeshift = makeshift power cell
+    .desc = A makeshift power cell assembled from materials at hand.
+    .suffix = Full
+ent-PowerCageOmega = omega power cell
+    .desc = A high-end power cell for heavy-duty systems. Designed for extreme output and sustained loads.
     .suffix = Full

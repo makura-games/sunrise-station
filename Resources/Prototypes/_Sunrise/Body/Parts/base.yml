@@ -1,8 +1,0 @@
-- type: entity
-  id: BaseTail
-  name: "tail"
-  parent: BasePart
-  abstract: true
-  components:
-  - type: BodyPart
-    partType: Tail

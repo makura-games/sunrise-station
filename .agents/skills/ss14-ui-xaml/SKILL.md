@@ -73,8 +73,8 @@ Example for a UI element:
 [GenerateTypedNameReferences]
 public partial class FancyWindow : BaseWindow
 {
-    [Dependency] private readonly IEntitySystemManager _sysMan = default!;
-    [Dependency] private readonly IStylesheetManager _styleMan = default!;
+    [Dependency] private IEntitySystemManager _sysMan = default!;
+    [Dependency] private IStylesheetManager _styleMan = default!;
 
     public FancyWindow()
     {
@@ -90,7 +90,7 @@ Example for `UIController`:
 public sealed class GuidebookUIController : UIController
 {
     [UISystemDependency] private readonly GuidebookSystem _guidebookSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 }
 ```
 
@@ -195,13 +195,10 @@ public sealed partial class ActionsWindow : DefaultWindow
 ### Example 3: Multiple style classes in XAML
 
 ```xml
-<Button Name="DoneButton" Text="{Loc 'nano-task-ui-done'}">
-    <Button.StyleClasses>
-        <!-- Combine button size and shape -->
-        <system:String>ButtonSmall</system:String>
-        <system:String>OpenLeft</system:String>
-    </Button.StyleClasses>
-</Button>
+<!-- Combine button size and shape -->
+<Button Name="DoneButton"
+        StyleClasses="ButtonSmall OpenLeft"
+        Text="{Loc 'nano-task-ui-done'}" />
 ```
 
 ### Example 4: Data and event binding after markup is loaded

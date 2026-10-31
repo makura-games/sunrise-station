@@ -15,9 +15,9 @@ namespace Content.Client.MassMedia.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class PhotoSelectorWindow : DefaultWindow
 {
-    [Dependency] private readonly NetTexturesManager _netTexturesManager = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private NetTexturesManager _netTexturesManager = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     public event Action<string>? PhotoSelected;
 

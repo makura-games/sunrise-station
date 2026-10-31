@@ -30,6 +30,7 @@ public partial class ListingData : IEquatable<ListingData>
         other.Icon,
         other.Priority,
         other.ProductEntity,
+        other.ProductComponents,
         other.ProductAction,
         other.ProductUpgradeId,
         other.ProductActionEntity,
@@ -56,6 +57,7 @@ public partial class ListingData : IEquatable<ListingData>
         SpriteSpecifier? icon,
         int priority,
         EntProtoId? productEntity,
+        EntProtoId? productComponents,
         EntProtoId? productAction,
         ProtoId<ListingPrototype>? productUpgradeId,
         EntityUid? productActionEntity,
@@ -78,6 +80,7 @@ public partial class ListingData : IEquatable<ListingData>
         Icon = icon;
         Priority = priority;
         ProductEntity = productEntity;
+        ProductComponents = productComponents;
         ProductAction = productAction;
         ProductUpgradeId = productUpgradeId;
         ProductActionEntity = productActionEntity;
@@ -147,6 +150,15 @@ public partial class ListingData : IEquatable<ListingData>
     /// </summary>
     [DataField]
     public int Priority;
+
+    /// <summary>
+    /// A dummy entity containing the components to be added to the buyer if the listing is bought.
+    /// </summary>
+    /// <remarks>
+    /// We use an EntProtoId rather than a ComponentRegistry to keep ListingData equatable.
+    /// </remarks>
+    [DataField]
+    public EntProtoId? ProductComponents;
 
     /// <summary>
     /// The entity that is given when the listing is purchased.
@@ -224,6 +236,7 @@ public partial class ListingData : IEquatable<ListingData>
             Name != listing.Name ||
             Description != listing.Description ||
             ProductEntity != listing.ProductEntity ||
+            ProductComponents != listing.ProductComponents ||
             ProductAction != listing.ProductAction ||
             ProductEvent?.GetType() != listing.ProductEvent?.GetType() ||
             RestockTime != listing.RestockTime ||
@@ -288,6 +301,12 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
     [DataField]
     public Dictionary<string, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> CostModifiersBySourceId = new();
 
+    /// <summary>
+    /// If true, then this entry was locked.
+    /// </summary>
+    [DataField]
+    public bool Locked = false;
+
     /// <inheritdoc />
     public ListingDataWithCostModifiers(ListingData listingData)
         : base(
@@ -298,6 +317,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             listingData.Icon,
             listingData.Priority,
             listingData.ProductEntity,
+            listingData.ProductComponents,
             listingData.ProductAction,
             listingData.ProductUpgradeId,
             listingData.ProductActionEntity,
@@ -334,11 +354,10 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
     /// <param name="modifiers">Values for cost modification.</param>
     public void AddCostModifier(string modifierSourceId, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> modifiers)
     {
-        CostModifiersBySourceId.Add(modifierSourceId, modifiers);
+        CostModifiersBySourceId.TryAdd(modifierSourceId, modifiers);
+
         if (_costModified != null)
-        {
             _costModified = ApplyAllModifiers();
-        }
     }
 
     /// <summary> Remove cost modifier with passed sourceId. </summary>

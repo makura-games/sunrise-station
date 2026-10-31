@@ -9,11 +9,11 @@ using Robust.Shared.Utility;
 namespace Content.Client._Sunrise.UserInterface.Controls
 {
     [Virtual]
-    public class SunriseOutputPanel : Control
+    public partial class SunriseOutputPanel : Control
     {
         public const string StyleClassOutputPanelScrollDownButton = "outputPanelScrollDownButton";
 
-        [Dependency] private readonly MarkupTagManager _tagManager = default!;
+        [Dependency] private MarkupTagManager _tagManager = default!;
 
         public const string StylePropertyStyleBox = "stylebox";
 

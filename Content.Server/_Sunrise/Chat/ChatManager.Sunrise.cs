@@ -73,7 +73,8 @@ internal sealed partial class ChatManager
             if ((sponsorColor == null || selectedColorCVar == "@none") && !isGradient)
             {
                 var adminColorHex = adminData.HasFlag(AdminFlags.Adminhelp) ? "#ff0000" : "#800080";
-                sponsorColor = Color.TryFromHex(adminColorHex);
+                if (Color.TryFromHex(adminColorHex, out var parsedAdminColor))
+                    sponsorColor = parsedAdminColor;
             }
         }
 
@@ -88,9 +89,7 @@ internal sealed partial class ChatManager
             if (!string.IsNullOrEmpty(selectedColorCVar) && selectedColorCVar != "@none" && !isGradient)
             {
                 var isAllowedColor = false;
-                var parsedColor = Color.TryFromHex(selectedColorCVar);
-
-                if (parsedColor != null)
+                if (Color.TryFromHex(selectedColorCVar, out var parsedColor))
                 {
                     if (_sponsorsManager != null && _sponsorsManager.TryGetPrototypes(player.UserId, out var prototypes))
                     {

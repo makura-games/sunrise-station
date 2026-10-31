@@ -20,9 +20,9 @@ namespace Content.Client._Sunrise.Administration.UI.Bwoink
     [GenerateTypedNameReferences]
     public sealed partial class SunriseBwoinkPanel : BoxContainer
     {
-        [Dependency] private readonly IUserInterfaceManager _ui = default!;
-        [Dependency] private readonly IEntityManager _entManager = default!;
-        [Dependency] private readonly IResourceCache _resourceCache = default!;
+        [Dependency] private IUserInterfaceManager _ui = default!;
+        [Dependency] private IEntityManager _entManager = default!;
+        [Dependency] private IResourceCache _resourceCache = default!;
 
         private static readonly Type[] AllowedTags = new Type[]
         {
