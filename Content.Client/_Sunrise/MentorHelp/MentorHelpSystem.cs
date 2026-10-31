@@ -8,9 +8,9 @@ namespace Content.Client._Sunrise.MentorHelp
     /// Клиентская система менторской помощи.
     /// </summary>
     [UsedImplicitly]
-    public sealed class MentorHelpSystem : SharedMentorHelpSystem
+    public sealed partial class MentorHelpSystem : SharedMentorHelpSystem
     {
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
 
         public event EventHandler<MentorHelpTicketUpdateMessage>? OnTicketUpdated;
         public event EventHandler<MentorHelpTicketsListMessage>? OnTicketsListReceived;

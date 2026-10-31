@@ -20,12 +20,12 @@ Don't start editing vanilla files until these three values ​​are defined.
 
 Define a fork by collecting all concrete signals before choosing:
 
-1. Git remote repository slug: the last repository name in the remote URL, for example `project-fire` in `space-sunrise/project-fire`.
+1. Git remote repository slug: the last repository name in the remote URL, for example `project-fire` in `makura-games/project-fire`.
 2. The name of the repository root folder and the path of the working directory.
 3. Which forked project folder is actually present in the code base (`_Sunrise`, `_Scp`, `_Fish`, `_Lust`) near the files being changed.
 4. The nearest existing edit markers in the adjacent code.
 
-Do not infer the fork from the GitHub organization or owner name alone. `space-sunrise` is an organization name, not proof that the codebase is Sunrise. If the repository slug is `project-fire` or the active project folder is `_Scp`, select Fire even when the owner is `space-sunrise`.
+Do not infer the fork from the GitHub organization or owner name alone. `makura-games` is an organization name, not proof that the codebase is Sunrise. If the repository slug is `project-fire` or the active project folder is `_Scp`, select Fire even when the owner is `makura-games`.
 
 If the signals diverge:
 
@@ -39,7 +39,7 @@ Select the first line that matches the exact repository slug, the name of the ro
 
 | Match | Prefix | Project folder | Single-line marker | Block markers | Note |
 | --- | --- | --- | --- | --- | --- |
-| `sunrise-station/space-station-14`, `space-sunrise/sunrise-station`, `sunrise-station`, `_Sunrise` | `Sunrise` | `_Sunrise` | `Sunrise-Edit` | `Sunrise edit start/end`, `Sunrise added start/end` | For new single placemarks, default to `Sunrise-Edit`. |
+| `sunrise-station/space-station-14`, `makura-games/sunrise-station`, `sunrise-station`, `_Sunrise` | `Sunrise` | `_Sunrise` | `Sunrise-Edit` | `Sunrise edit start/end`, `Sunrise added start/end` | For new single placemarks, default to `Sunrise-Edit`. |
 | `fire-station/project-fire`, `project-fire`, `fire-station`, `_Scp` | `Fire` | `_Scp` | `Fire edit`, `Fire added` | `Fire edit start/end`, `Fire added start/end` | For Fire, single edit/add marks are different. |
 | `fish-station`, `_Fish` | `Fish` | `_Fish` | `FIsh edit` | Use local file style | Don't automatically normalize the legacy token case. |
 | `lust-lustation`, `_Lust` | `Lust` | `_Lust` | `Lust edit` | Use local file style | If there is already a block-style nearby inside Lust, follow it. |

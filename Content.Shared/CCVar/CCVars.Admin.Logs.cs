@@ -46,38 +46,4 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<int> AdminLogsHighLogPlaytime =
         CVarDef.Create("adminlogs.high_log_playtime", 5, CVar.SERVERONLY);
-
-    // Sunrise-Start
-    /// <summary>
-    ///     If true, admin logs will be sent to and read from a Loki instance instead of PostgreSQL.
-    ///     Useful for preventing database bloat.
-    /// </summary>
-    public static readonly CVarDef<bool> AdminLogsToLoki =
-        CVarDef.Create("adminlogs.to_loki", false, CVar.SERVERONLY);
-
-    /// <summary>
-    ///     The Loki API URL (e.g. http://localhost:3100)
-    /// </summary>
-    public static readonly CVarDef<string> AdminLogsLokiUrl =
-        CVarDef.Create("adminlogs.loki_url", "", CVar.SERVERONLY);
-
-    /// <summary>
-    ///     HTTP Basic Auth username for Loki API
-    /// </summary>
-    public static readonly CVarDef<string> AdminLogsLokiUsername =
-        CVarDef.Create("adminlogs.loki_username", "", CVar.SERVERONLY);
-
-    /// <summary>
-    ///     HTTP Basic Auth password for Loki API
-    /// </summary>
-    public static readonly CVarDef<string> AdminLogsLokiPassword =
-        CVarDef.Create("adminlogs.loki_password", "", CVar.SERVERONLY);
-
-    /// <summary>
-    ///     The label 'app' value attached to all admin logs pushed to Loki.
-    ///     Defaults to sunrise-station.
-    /// </summary>
-    public static readonly CVarDef<string> AdminLogsLokiName =
-        CVarDef.Create("adminlogs.loki_name", "sunrise-station", CVar.SERVERONLY);
-    // Sunrise-End
 }

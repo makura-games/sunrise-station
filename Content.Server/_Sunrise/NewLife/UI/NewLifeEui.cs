@@ -4,9 +4,9 @@ using Content.Shared.Eui;
 
 namespace Content.Server._Sunrise.NewLife.UI;
 
-public sealed class NewLifeEui : BaseEui
+public sealed partial class NewLifeEui : BaseEui
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     public NewLifeEui()
     {

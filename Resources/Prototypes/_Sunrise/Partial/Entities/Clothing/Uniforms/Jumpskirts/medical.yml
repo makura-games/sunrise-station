@@ -1,0 +1,7 @@
+- type: !PartialOnly entity
+  id: ClothingUniformJumpskirtCMOTurtle
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Uniforms/Jumpskirts/Medical/cmo_turtle.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Uniforms/Jumpskirts/Medical/cmo_turtle.rsi

@@ -1,6 +1,4 @@
-using System.Buffers;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Content.Shared.Administration;
@@ -143,7 +141,7 @@ public sealed partial class BwoinkSystem
                 output.AppendText(" ");
                 output.MakeCommandLinkTag(
                     Loc.GetString("bwoink-message-name-link"),
-                    SunriseCommandParsing.EscapeCommand(QuickInfoShared.CommandName, idsString)); // Sunrise-Edit
+                    CommandParsing.EscapeCommand(QuickInfoShared.CommandName, idsString));
 
                 i = takenWordIdx;
             }

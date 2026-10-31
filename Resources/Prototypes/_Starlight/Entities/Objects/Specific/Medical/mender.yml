@@ -14,10 +14,10 @@
       visible: false
   - type: Item
     heldPrefix: mender
-  - type: SolutionContainerManager
-    solutions:
-      injector:
-        maxVol: 50
+  - type: Solution
+    id: injector
+    solution:
+      maxVol: 50
   - type: RefillableSolution
     solution: injector
   - type: Appearance
@@ -35,10 +35,10 @@
   description: A device used to heal patients brute, burn or both damage types. Uses bicaridine to work.
   parent: BaseAutoMender
   components:
-  - type: SolutionContainerManager
-    solutions:
-      injector:
-        maxVol: 50
+  - type: Solution
+    id: injector
+    solution:
+      maxVol: 50
   - type: Healing
     worksOnTheDead: false #Sunrise-Edit
     solutionDrain: true
@@ -49,9 +49,10 @@
     damageContainers:
       - Biological
     damage:
-      groups:
-        Brute: -4
       types: #Sunrise-Edit
+        Blunt: -1.33
+        Slash: -1.33
+        Piercing: -1.34
         Mangleness: 0.02 #Sunrise-Edit
     healingBeginSound:
       path: "/Audio/_Starlight/Items/Medical/mender.ogg"
@@ -63,13 +64,13 @@
   parent: AutoMenderBrute
   id: AutoMenderBruteFilled
   components:
-  - type: SolutionContainerManager
-    solutions:
-      injector:
-        maxVol: 50
-        reagents:
-        - ReagentId: Bicaridine
-          Quantity: 50
+  - type: Solution
+    id: injector
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Bicaridine
+        Quantity: 50
 
 - type: entity
   id: AutoMenderBurn
@@ -103,10 +104,10 @@
   parent: AutoMenderBurn
   id: AutoMenderBurnFilled
   components:
-  - type: SolutionContainerManager
-    solutions:
-      injector:
-        maxVol: 50
-        reagents:
-        - ReagentId: Dermaline
-          Quantity: 50
+  - type: Solution
+    id: injector
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Dermaline
+        Quantity: 50

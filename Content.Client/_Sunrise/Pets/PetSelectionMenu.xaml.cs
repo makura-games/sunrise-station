@@ -1,4 +1,4 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 
 using System.Linq;
 using System.Numerics;
@@ -22,11 +22,11 @@ namespace Content.Client._Sunrise.Pets;
 [GenerateTypedNameReferences]
 public sealed partial class PetSelectionMenu : DefaultWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly PlayerCacheManager _playerCache = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private PlayerCacheManager _playerCache = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
     private ISharedSponsorsManager? _sponsorsManager; // Sunrise-Sponsors
 
     public event Action<string>? OnIdSelected;

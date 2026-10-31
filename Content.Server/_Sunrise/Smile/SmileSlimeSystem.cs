@@ -1,4 +1,4 @@
-﻿using Content.Shared._Sunrise.Smile;
+using Content.Shared._Sunrise.Smile;
 using Content.Shared.Damage;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
@@ -10,30 +10,27 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Content.Shared._Sunrise.Smile;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Zombies;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Body;
 
 namespace Content.Server._Sunrise.Smile;
 
-public sealed class SmileSlimeSystem : EntitySystem
+public sealed partial class SmileSlimeSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly INetManager _netMan = default!;
-    [Dependency] private readonly EntityManager _entMan = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private EntityManager _entMan = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
 
     private TimeSpan _nextTick = TimeSpan.Zero;
     private readonly TimeSpan _refreshCooldown = TimeSpan.FromSeconds(5);
@@ -77,7 +74,7 @@ public sealed class SmileSlimeSystem : EntitySystem
             CancelDuplicate = true,
         };
 
-        if (!TryComp<TransformComponent>(args.Target, out var targetXform))
+        if (!TryComp(args.Target, out TransformComponent? targetXform))
             return;
 
         _audio.PlayPvs(comp.SoundSpecifier, targetXform.Coordinates);
@@ -101,7 +98,7 @@ public sealed class SmileSlimeSystem : EntitySystem
         if (args.Target == null)
             return;
 
-        if (!TryComp<TransformComponent>(args.Target.Value, out var targetXform))
+        if (!TryComp(args.Target.Value, out TransformComponent? targetXform))
             return;
 
         _entMan.SpawnEntity("EffectHearts", targetXform.Coordinates);

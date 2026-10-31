@@ -1,0 +1,7 @@
+- type: !PartialOnly entity
+  id: AirlockAssembly
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Doors/Airlocks/Standard/basic.rsi
+    state: "assembly"

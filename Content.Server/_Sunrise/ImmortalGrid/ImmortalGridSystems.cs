@@ -5,9 +5,9 @@ using Content.Shared.Tiles;
 
 namespace Content.Server._Sunrise.ImmortalGrid;
 
-public sealed class ImmortalGridSystems : EntitySystem
+public sealed partial class ImmortalGridSystems : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
 
     public override void Initialize()
     {

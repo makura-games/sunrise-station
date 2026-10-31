@@ -6,7 +6,7 @@ namespace Content.Shared._Sunrise.Messenger;
 /// <summary>
 /// Prototype of an emoji for the messenger.
 /// </summary>
-[Prototype("emoji")]
+[Prototype]
 public sealed partial class EmojiPrototype : IPrototype, IInheritingPrototype
 {
     [IdDataField]

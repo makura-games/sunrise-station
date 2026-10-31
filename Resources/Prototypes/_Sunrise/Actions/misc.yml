@@ -7,6 +7,9 @@
   components:
   - type: Action
     useDelay: 1
-    icon: { sprite: _Sunrise/Clothing/Neck/Mantles/goliathalivemantle.rsi, state: icon }
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Neck/Mantles/goliathalivemantle.rsi
+    layers:
+    - state: icon
   - type: InstantAction
     event: !type:ToggleClothingEvent

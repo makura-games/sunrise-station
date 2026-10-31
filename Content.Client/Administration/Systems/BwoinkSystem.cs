@@ -9,7 +9,7 @@ namespace Content.Client.Administration.Systems
     [UsedImplicitly]
     public sealed partial class BwoinkSystem : SharedBwoinkSystem
     {
-        [Dependency] private readonly IGameTiming _timing = default!;
+        [Dependency] private IGameTiming _timing = default!;
 
         public event EventHandler<BwoinkTextMessage>? OnBwoinkTextMessageRecieved;
         private (TimeSpan Timestamp, bool Typing) _lastTypingUpdateSent;

@@ -1,4 +1,6 @@
 using Content.Server._Sunrise.Messenger;
+using Content.Server.DeviceNetwork.Components;
+using Content.Shared._Sunrise.Messenger;
 using Content.Shared.CartridgeLoader;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
@@ -20,8 +22,7 @@ public sealed partial class MessengerCartridgeSystem
             return;
         }
 
-        var station = GetBestStation(pdaUid);
-        if (station == null)
+        if (!TryGetMessengerServerAddress(pdaUid, out var serverAddress))
         {
             component.ServerAddress = null;
             component.IsRegistered = false;
@@ -33,24 +34,6 @@ public sealed partial class MessengerCartridgeSystem
             component.ServerUnreadCounts.Clear();
             if (updateUi)
                 UpdateUiState(uid, loaderUid, component);
-            return;
-        }
-
-        if (!_singletonServer.TryGetActiveServerAddress<MessengerServerComponent>(station.Value, out var serverAddress))
-        {
-            if (component.ServerAddress != null || component.IsRegistered)
-            {
-                component.ServerAddress = null;
-                component.IsRegistered = false;
-                component.UserId = null;
-                component.LastRegistrationAttempt = null;
-                component.Users.Clear();
-                component.Groups.Clear();
-                component.MessageHistory.Clear();
-                component.ServerUnreadCounts.Clear();
-                if (updateUi)
-                    UpdateUiState(uid, loaderUid, component);
-            }
             return;
         }
 
@@ -102,8 +85,18 @@ public sealed partial class MessengerCartridgeSystem
         }
     }
 
-    private void OnCartridgeActivated(EntityUid uid, MessengerCartridgeComponent component, CartridgeActivatedEvent args)
+    private void OnCartridgeRemoved(Entity<MessengerCartridgeComponent> ent, ref CartridgeRemovedEvent args)
     {
+        ent.Comp.LoaderUid = null;
+        ent.Comp.UiReady = false;
+        ent.Comp.LastStatusCheck = null;
+    }
+
+    private void OnCartridgeActivated(Entity<MessengerCartridgeComponent> ent, ref CartridgeActivatedEvent args)
+    {
+        var (uid, component) = ent;
+        component.UiReady = false;
+
         if (component.LoaderUid == null)
         {
             component.LoaderUid = args.Loader;
@@ -120,10 +113,17 @@ public sealed partial class MessengerCartridgeSystem
         }
     }
 
-    private void OnCartridgeAdded(EntityUid uid, MessengerCartridgeComponent component, CartridgeAddedEvent args)
+    private void OnCartridgeDeactivated(Entity<MessengerCartridgeComponent> ent, ref CartridgeDeactivatedEvent args)
     {
+        ent.Comp.UiReady = false;
+    }
+
+    private void OnCartridgeAdded(Entity<MessengerCartridgeComponent> ent, ref CartridgeAddedEvent args)
+    {
+        var (uid, component) = ent;
         component.LoaderUid = args.Loader;
         component.LastStatusCheck = null;
+        component.UiReady = false;
 
         if (!TryGetPdaAndDeviceNetwork(args.Loader, out var pdaUid, out _))
         {
@@ -138,17 +138,19 @@ public sealed partial class MessengerCartridgeSystem
 
         TryConnectToServer(uid, component, args.Loader);
 
-        _cartridgeLoader.RegisterBackgroundProgram(args.Loader, uid);
-
         CheckServerStatus(uid, component, args.Loader);
     }
 
-    private void OnUiReady(EntityUid uid, MessengerCartridgeComponent component, CartridgeUiReadyEvent args)
+    private void OnUiReady(Entity<MessengerCartridgeComponent> ent, ref CartridgeUiReadyEvent args)
     {
+        var (uid, component) = ent;
         if (component.LoaderUid == null)
         {
             component.LoaderUid = args.Loader;
         }
+
+        component.UiReady = true;
+        RaiseMessengerOpened(args.Loader, args.Actor);
 
         if (component.IsRegistered && component.ServerAddress != null)
         {
@@ -165,6 +167,35 @@ public sealed partial class MessengerCartridgeSystem
         UpdateUiState(uid, args.Loader, component);
     }
 
+    private void OnLoaderUiClosed(Entity<CartridgeLoaderComponent> ent, ref BoundUIClosedEvent args)
+    {
+        if (!Equals(ent.Comp.UiKey, args.UiKey) ||
+            ent.Comp.ActiveProgram is not { } activeProgram ||
+            !TryComp<MessengerCartridgeComponent>(activeProgram, out var messenger))
+        {
+            return;
+        }
+
+        messenger.UiReady = false;
+    }
+
+    private void RaiseMessengerOpened(EntityUid pdaUid, EntityUid actor = default)
+    {
+        if (actor.IsValid() && Exists(actor))
+        {
+            RaiseLocalEvent(actor, new MessengerOpenedEvent(actor, pdaUid));
+            return;
+        }
+
+        if (!TryComp<PdaComponent>(pdaUid, out var pda) ||
+            pda.PdaOwner is not { } owner)
+        {
+            return;
+        }
+
+        RaiseLocalEvent(owner, new MessengerOpenedEvent(owner, pdaUid));
+    }
+
     private void TryConnectToServer(EntityUid uid, MessengerCartridgeComponent component, EntityUid loaderUid)
     {
         if (!TryGetPdaAndDeviceNetwork(loaderUid, out var pdaUid, out var deviceNetwork))
@@ -175,19 +206,9 @@ public sealed partial class MessengerCartridgeSystem
 
         component.LoaderUid = loaderUid;
 
-        var station = GetBestStation(pdaUid);
-        if (station == null)
+        if (!TryGetMessengerServerAddress(pdaUid, out var serverAddress))
         {
-            Sawmill.Warning($"No station found for PDA: {ToPrettyString(pdaUid)}");
-            component.ServerAddress = null;
-            component.IsRegistered = false;
-            UpdateUiState(uid, loaderUid, component);
-            return;
-        }
-
-        if (!_singletonServer.TryGetActiveServerAddress<MessengerServerComponent>(station.Value, out var serverAddress))
-        {
-            Sawmill.Warning($"No active messenger server found on station: {ToPrettyString(station.Value)}");
+            Sawmill.Warning($"No active messenger server found for PDA: {ToPrettyString(pdaUid)}");
             component.ServerAddress = null;
             component.IsRegistered = false;
             UpdateUiState(uid, loaderUid, component);
@@ -203,8 +224,6 @@ public sealed partial class MessengerCartridgeSystem
             return;
         }
 
-        Sawmill.Debug($"Found active server address: {serverAddress}");
-
         if (component.ServerAddress != serverAddress)
         {
             component.ServerAddress = serverAddress;
@@ -215,7 +234,6 @@ public sealed partial class MessengerCartridgeSystem
 
         if (component.IsRegistered && component.ServerAddress == serverAddress)
         {
-            Sawmill.Debug($"Already registered, updating UI state");
             UpdateUiState(uid, loaderUid, component);
             return;
         }
@@ -228,10 +246,63 @@ public sealed partial class MessengerCartridgeSystem
             }
             else
             {
-                Sawmill.Debug($"PDA {ToPrettyString(pdaUid)} has no owner, skipping automatic registration");
+                // КПК без владельца проверяется периодически, поэтому здесь не логируем, чтобы не спамить
                 UpdateUiState(uid, loaderUid, component);
             }
         }
+    }
+
+    private bool TryGetMessengerServerAddress(EntityUid pdaUid, out string? serverAddress)
+    {
+        var station = _stationSystem.GetOwningStation(pdaUid);
+        if (station != null &&
+            _singletonServer.TryGetActiveServerAddress<MessengerServerComponent>(station.Value, out serverAddress))
+        {
+            return true;
+        }
+
+        if (TryGetSameMapMessengerServerAddress(pdaUid, out serverAddress))
+            return true;
+
+        station = GetBestStation(pdaUid);
+        return station != null &&
+               _singletonServer.TryGetActiveServerAddress<MessengerServerComponent>(station.Value, out serverAddress);
+    }
+
+    private bool TryGetSameMapMessengerServerAddress(EntityUid pdaUid, out string? serverAddress)
+    {
+        serverAddress = null;
+
+        if (!TryComp(pdaUid, out TransformComponent? pdaTransform))
+            return false;
+
+        var query = EntityQueryEnumerator<
+            MessengerServerComponent,
+            SingletonDeviceNetServerComponent,
+            DeviceNetworkComponent,
+            TransformComponent>();
+        while (query.MoveNext(out var uid, out _, out var singleton, out var device, out var transform))
+        {
+            if (transform.MapID != pdaTransform.MapID ||
+                !_singletonServer.IsActiveServer(uid, singleton))
+            {
+                continue;
+            }
+
+            if (string.IsNullOrEmpty(device.Address) &&
+                !_deviceNetwork.IsDeviceConnected((uid, device)))
+            {
+                _deviceNetwork.ConnectDevice((uid, device));
+            }
+
+            if (string.IsNullOrEmpty(device.Address))
+                continue;
+
+            serverAddress = device.Address;
+            return true;
+        }
+
+        return false;
     }
 
     private void RegisterUser(EntityUid uid, MessengerCartridgeComponent component, EntityUid loaderUid, DeviceNetworkComponent deviceNetwork, EntityUid pdaUid, bool allowWithoutOwner = false)
@@ -309,7 +380,7 @@ public sealed partial class MessengerCartridgeSystem
         var pdaPos = _transformSystem.GetWorldPosition(pdaTransform);
         Sawmill.Debug($"PDA position: {pdaPos}, MapId: {pdaTransform.MapID}");
 
-        _deviceNetwork.QueuePacket(loaderUid, component.ServerAddress, payload, frequency: messengerFrequency, network: pdaDevice.DeviceNetId);
+        _deviceNetwork.SendPacket(loaderUid, component.ServerAddress, ref payload, frequency: messengerFrequency, network: pdaDevice.DeviceNetId);
 
         RestoreFrequency(loaderUid, pdaDevice, originalFreq);
     }

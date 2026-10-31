@@ -151,19 +151,19 @@
               name: construction-graph-tag-coin
               icon:
                 sprite: Objects/Misc/coins.rsi
-                state: coin_iron
+                state: coinIron_1
               doAfter: 0.5
             - tag: Coin
               name: construction-graph-tag-coin
               icon:
                 sprite: Objects/Misc/coins.rsi
-                state: coin_iron
+                state: coinIron_1
               doAfter: 0.5
             - tag: Coin
               name: construction-graph-tag-coin
               icon:
                 sprite: Objects/Misc/coins.rsi
-                state: coin_iron
+                state: coinIron_1
               doAfter: 0.5
             - material: CrushedPhosphorus
               amount: 3

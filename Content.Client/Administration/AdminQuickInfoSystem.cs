@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Numerics;
 using Content.Client.Administration.Systems;
 using Content.Client.Stylesheets;
 using Content.Shared.Administration;
@@ -17,7 +16,6 @@ namespace Content.Client.Administration;
 internal sealed partial class AdminQuickInfoCommand : LocalizedEntityCommands
 {
     [Dependency] private AdminQuickInfoSystem _quickInfo = null!;
-    [Dependency] private readonly IUserInterfaceManager UIManager = default!;
 
     public override string Command => QuickInfoShared.CommandName;
 
@@ -41,7 +39,6 @@ internal sealed partial class AdminQuickInfoCommand : LocalizedEntityCommands
 internal sealed partial class AdminQuickInfoSystem : EntitySystem
 {
     [Dependency] private AdminSystem _adminSystem = null!;
-    [Dependency] private IPrototypeManager _prototypeManager = null!;
 
     public event Action<QuickInfoShared.SingleEntityInfo>? EntityResponseReceived;
 
@@ -96,22 +93,7 @@ internal sealed partial class AdminQuickInfoSystem : EntitySystem
             vBox.AddChild(control);
         }
 
-        // Sunrise-Start
-        var uiManager = popup.UserInterfaceManager;
-
-        // 1. Даем окну родителя. StateRoot доступен во всех версиях движка.
-        uiManager.ModalRoot.AddChild(popup);
-
-        // 2. Очищаем память после скрытия окна, иначе они будут бесконечно копиться в StateRoot
-        popup.OnPopupHide += () => popup.Orphan();
-
-        // 3. Выводим поверх остальных элементов (теперь ошибки не будет, так как есть родитель)
-        popup.SetPositionLast();
-
-        // 4. Открываем окно точно под курсором мыши
-        var box = UIBox2.FromDimensions(uiManager.MousePositionScaled.Position, Vector2.One);
-        popup.Open(box);
-        // Sunrise-End
+        popup.OpenAtMouse();
 
         RaiseNetworkEvent(new QuickInfoShared.Request { Entities = entities });
     }
@@ -186,7 +168,7 @@ internal sealed partial class AdminQuickInfoSystem : EntitySystem
 
                 sb.AppendMarkupLine(Loc.GetString("admin-quick-info-job", ("job", _playerInfo.StartingJob)));
 
-                if (_playerInfo.RoleProto is { } roleId && _system._prototypeManager.Resolve(roleId, out var role))
+                if (_playerInfo.RoleProto is { } roleId && _system.ProtoMan.Resolve(roleId, out var role))
                 {
                     var roleColor = role.Color.ToHex();
                     var symbol = _playerInfo.Antag ? role.Symbol : "";
@@ -237,7 +219,7 @@ internal sealed partial class AdminQuickInfoSystem : EntitySystem
                 // Player panel
                 sb.MakeCommandLinkTag(
                     Loc.GetString("admin-quick-link-playerpanel"),
-                    SunriseCommandParsing.EscapeCommand( // Sunrise-Edit
+                    CommandParsing.EscapeCommand(
                         AdminCommandSyntax.NamePlayerPanel,
                         _playerInfo.SessionId.ToString()),
                     Loc.GetString("admin-quick-link-playerpanel-tooltip"));
@@ -246,7 +228,7 @@ internal sealed partial class AdminQuickInfoSystem : EntitySystem
                 // Send Message
                 sb.MakeCommandLinkTag(
                     Loc.GetString("admin-quick-link-message"),
-                    SunriseCommandParsing.EscapeCommand( // Sunrise-Edit
+                    CommandParsing.EscapeCommand(
                         AdminCommandSyntax.NameOpenAdminHelp,
                         _playerInfo.SessionId.ToString()),
                     Loc.GetString("admin-quick-link-message-tooltip"));
@@ -258,7 +240,7 @@ internal sealed partial class AdminQuickInfoSystem : EntitySystem
                 // Jump/follow
                 sb.MakeCommandLinkTag(
                     Loc.GetString("admin-quick-link-follow"),
-                    SunriseCommandParsing.EscapeCommand( // Sunrise-Edit
+                    CommandParsing.EscapeCommand(
                         AdminCommandSyntax.NameFollow,
                         _entity.ToString()),
                     Loc.GetString("admin-quick-link-follow-tooltip"));

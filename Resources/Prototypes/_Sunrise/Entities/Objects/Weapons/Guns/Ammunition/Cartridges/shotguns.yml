@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: ShellShotgunImprovisedEmpty
   name: empty improvised shell
   description: A hollow homemade shotgun shell that can be filled with a somewhat deadly variety of makeshift pellets.
@@ -10,10 +10,10 @@
     - state: improvised-empty
   - type: Item
     size: Tiny
-  - type: SolutionContainerManager
-    solutions:
-      shell:
-        maxVol: 5
+  - type: Solution
+    id: shell
+    solution:
+      maxVol: 5
   - type: MixableSolution
     solution: shell
   - type: FitsInDispenser
@@ -169,18 +169,18 @@
   - type: CartridgeAmmo
     proto: PelletShotgunBooze
   - type: ChemicalAmmo
-  - type: SolutionContainerManager
-    solutions:
-      ammo:
-        reagents:
-        - ReagentId: Nocturine
-          Quantity: 15
-        - ReagentId: BacchusBlessing
-          Quantity: 8
-        - ReagentId: THC
-          Quantity: 10
-        - ReagentId: MuteToxin
-          Quantity: 2
+  - type: Solution
+    id: ammo
+    solution:
+      reagents:
+      - ReagentId: Nocturine
+        Quantity: 15
+      - ReagentId: BacchusBlessing
+        Quantity: 8
+      - ReagentId: THC
+        Quantity: 10
+      - ReagentId: MuteToxin
+        Quantity: 2
   - type: SolutionTransfer
     maxTransferAmount: 35
 
@@ -200,12 +200,12 @@
   - type: CartridgeAmmo
     proto: PelletShotgunHoly
   - type: ChemicalAmmo
-  - type: SolutionContainerManager
-    solutions:
-      ammo:
-        reagents:
-        - ReagentId: Holywater
-          Quantity: 4
+  - type: Solution
+    id: ammo
+    solution:
+      reagents:
+      - ReagentId: Holywater
+        Quantity: 4
   - type: SolutionTransfer
     maxTransferAmount: 4
   - type: Tag

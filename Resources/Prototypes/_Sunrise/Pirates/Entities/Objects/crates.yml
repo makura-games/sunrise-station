@@ -1,0 +1,183 @@
+- type: entity
+  parent: CratePirate
+  id: CratePirateChestSecure
+  name: secure pirate chest
+  description: A secure space pirate chest that keeps station lubbers away from your booty.
+  suffix: Pirate
+  components:
+  - type: Lock
+  - type: LockVisuals
+  - type: AccessReader
+    access: [["Pirate"]]
+  - type: Sprite
+    sprite: _Sunrise/Structures/Storage/Crates/piratechestsecure.rsi
+    state: crate_icon
+    layers:
+    - state: crate
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: crate_door
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: paper
+      sprite: Structures/Storage/Crates/labels.rsi
+      offset: "0.0,-0.09375"
+      map: ["enum.PaperLabelVisuals.Layer"]
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+  - type: Icon
+    sprite: _Sunrise/Structures/Storage/Crates/piratechestsecure.rsi
+    state: crate_icon
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+
+- type: entity
+  parent: CratePirateChestSecure
+  id: CratePirateDavyJones
+  name: Davy Jones' locker
+  description: A specialized chest for storing the trickiest loot.
+  suffix: Pirate
+  components:
+  - type: Icon
+    sprite: _Sunrise/Structures/Storage/Crates/davyjoneschest.rsi
+    state: crate_icon
+  - type: Sprite
+    sprite: _Sunrise/Structures/Storage/Crates/davyjoneschest.rsi
+    state: crate
+    layers:
+    - state: crate
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: crate_door
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: paper
+      sprite: Structures/Storage/Crates/labels.rsi
+      offset: "0.0,-0.09375"
+      map: ["enum.PaperLabelVisuals.Layer"]
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 50
+        mask:
+        - Impassable
+        layer:
+        - MidImpassable
+  - type: EntityStorage
+    capacity: 10
+    whitelist:
+      components:
+      - Item
+      - XenoArtifact
+      - Machine
+      - StealTarget
+      - Nuke
+      - Computer
+      - AnomalyVessel
+      - AnomalyGenerator
+      - VendingMachine
+      - Thruster
+      - FaxMachine
+      - SolarPanel
+      - MaterialReclaimer
+      - Pullable
+
+- type: entity
+  parent: [ LockerSyndicate, BaseHighlyIllegalContraband ]
+  id: LockerPirate
+  name: pirate locker
+  description: A sturdy metal locker for modern pirate needs.
+
+- type: entity
+  parent: LockerPirate
+  id: LockerPirateMeds
+  suffix: Meds, Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - !type:GroupSelector
+          rolls: !type:RangeNumberSelector
+            range: 4, 5
+          children:
+          - id: Brutepack
+            amount: !type:RangeNumberSelector
+              range: 1, 3
+          - id: Gauze
+            amount: !type:RangeNumberSelector
+              range: 1, 3
+          - id: MedicatedSuture
+        - !type:GroupSelector
+          rolls: !type:RangeNumberSelector
+            range: 2, 3
+          children:
+          - id: Ointment
+            amount: !type:RangeNumberSelector
+              range: 1, 3
+          - id: RegenerativeMesh
+        - id: Bloodpack
+          amount: !type:RangeNumberSelector
+            range: 1, 3
+        - id: ClothingEyesEyepatchHudMedical
+        - id: HandheldHealthAnalyzer
+          amount: !type:RangeNumberSelector
+            range: 1, 2
+
+- type: entity
+  parent: CratePirate
+  id: CratePirateSeeds
+  name: pirate seed crate
+  description: Contains a varied assortment of seeds for fighting off scurvy.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: AloeSeeds
+        - id: BananaSeeds
+        - id: CannabisSeeds
+        - id: GalaxythistleSeeds
+        - id: LemonSeeds
+        - id: LimeSeeds
+        - id: LingzhiSeeds
+        - id: OrangeSeeds
+        - id: PineappleSeeds
+        - id: PoppySeeds
+
+- type: entity
+  parent: MarkerBase
+  id: CrateEmptyPirateSpawner
+  name: empty pirate crate spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Structures/Storage/Crates/piratechest.rsi
+      state: crate_icon
+  - type: RandomSpawner
+    prototypes:
+    - CratePirate
+    - CratePirateChestSecure
+    - CratePirateDavyJones
+    - CratePiratePrivateSecure
+    chance: 0.7
+    offset: 0.0

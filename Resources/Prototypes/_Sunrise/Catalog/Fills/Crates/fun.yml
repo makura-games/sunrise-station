@@ -61,3 +61,67 @@
         - id: SheetPlasteel
         - id: MaterialWoodPlank
         - id: ModularReceiver
+
+- type: entity
+  id: CrateGreytideMakeshiftWeapons
+  parent: CrateGreytide
+  name: greytide makeshift weapons crate
+  description: A greytide crate with up to five random makeshift weapons.
+  suffix: Makeshift Weapons
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - !type:GroupSelector
+          rolls: !type:RangeNumberSelector
+            range: 3, 5
+          children:
+          - id: WeaponPistolMakeshiftCrafted
+          - id: WeaponRevolverMakeshift
+          - id: WeaponShotgunImprovisedLoaded
+          - id: WeaponSubMachineGunMakeshift
+          - id: WeaponSniperMakeshift
+
+- type: entity
+  id: CrateGreytideImprovisedWeapons
+  parent: CrateGreytide
+  name: greytide improvised weapons crate
+  description: A greytide crate with up to five random improvised weapons.
+  suffix: Improvised Weapons
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - !type:GroupSelector
+          rolls: !type:RangeNumberSelector
+            range: 3, 5
+          children:
+          - id: WeaponPistolImprovised
+          - id: WeaponRevolverImprovised
+          - id: WeaponShotgunImprovised
+          - id: WeaponSubMachineGunImprovised
+          - id: WeaponSniperImprovised
+          - id: WeaponGrenadeLauncherImprovised
+
+- type: entity
+  id: CrateGreytideForgedWeapons
+  parent: CrateGreytide
+  name: greytide forged weapons crate
+  description: A greytide crate with up to five random forged weapons.
+  suffix: Forged Weapons
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - !type:GroupSelector
+          rolls: !type:RangeNumberSelector
+            range: 3, 5
+          children:
+          - id: WeaponPistolForged
+          - id: WeaponRevolverForged
+          - id: WeaponShotgunForged
+          - id: WeaponSubMachineGunForged
+          - id: WeaponSniperForged

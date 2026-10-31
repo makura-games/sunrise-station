@@ -12,9 +12,9 @@ namespace Content.Server.Administration.Systems;
 
 public partial class BwoinkSystem
 {
-    [Dependency] private readonly INetConfigurationManager _netConfig = default!;
-    [Dependency] private readonly PlayerCacheManager _playerCacheManager = default!;
-    [Dependency] private readonly IBanManager _banManager = default!;
+    [Dependency] private INetConfigurationManager _netConfig = default!;
+    [Dependency] private PlayerCacheManager _playerCacheManager = default!;
+    [Dependency] private IBanManager _banManager = default!;
 
     private ISharedSponsorsManager? _sponsorsManager;
 

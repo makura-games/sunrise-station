@@ -1,4 +1,4 @@
-﻿using Content.Server.GameTicking;
+using Content.Server.GameTicking;
 using Content.Server.Hands.Systems;
 using Content.Server.Holiday;
 using Content.Shared.CCVar;
@@ -11,12 +11,11 @@ namespace Content.Server._Sunrise.Holiday.HolidayGiveaway;
 /// <summary>
 /// Система для выдачи различных подарков во время определенных праздников.
 /// </summary>
-public sealed class HolidayGiveawaySystem : EntitySystem
+public sealed partial class HolidayGiveawaySystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
-    [Dependency] private readonly HolidaySystem _holiday = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private HolidaySystem _holiday = default!;
+    [Dependency] private HandsSystem _hands = default!;
 
     /// <summary>
     /// Кешированные текущие раздачи, которые будут применены после спавна игрока в <see cref="OnPlayerSpawn"/> <br/>
@@ -73,7 +72,7 @@ public sealed class HolidayGiveawaySystem : EntitySystem
     {
         _activeGiveaways.Clear();
 
-        foreach (var giveaway in _prototype.EnumeratePrototypes<HolidayGiveawayItemPrototype>())
+        foreach (var giveaway in ProtoMan.EnumeratePrototypes<HolidayGiveawayItemPrototype>())
         {
             if (!_holiday.IsCurrentlyHoliday(giveaway.Holiday))
                 continue;
@@ -98,7 +97,7 @@ public sealed class HolidayGiveawaySystem : EntitySystem
 
         foreach (var giveawayProto in _activeGiveaways)
         {
-            var giveAway = _prototype.Index(giveawayProto);
+            var giveAway = ProtoMan.Index(giveawayProto);
             var present = SpawnNextToOrDrop(giveAway.Prototype, ev.Mob);
 
             _hands.PickupOrDrop(ev.Mob, present);

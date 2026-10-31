@@ -121,7 +121,7 @@ public sealed partial class SunriseGeneralRecord : BoxContainer
     /// </summary>
     private void UpdateEditableInfo(GeneralStationRecord record)
     {
-        Name.Text = record.Name;
+        NameEdit.Text = record.Name;
         Age.Text = record.Age.ToString();
 
         for (var i = 0; i < _allGender.Length; i++)
@@ -222,7 +222,7 @@ public sealed partial class SunriseGeneralRecord : BoxContainer
 
         var updated = original with
         {
-            Name = Name.Text,
+            Name = NameEdit.Text,
             Age = int.TryParse(textAge, out var ageVal) ? ageVal : original.Age,
             Gender = _allGender[Gender.SelectedId],
             Species = _allSpecies[Species.SelectedId].ID,
@@ -255,7 +255,7 @@ public sealed partial class SunriseGeneralRecord : BoxContainer
 
     private void CheckAccess()
     {
-        Name.Editable = _hasAccess;
+        NameEdit.Editable = _hasAccess;
         Age.Editable = _hasAccess;
         Personality.Editable = _hasAccess;
         Gender.Disabled = !_hasAccess;

@@ -11,19 +11,18 @@
       map: [ "enum.ToggleableVisuals.Layer" ]
   - type: Item
     sprite: _Sunrise/Objects/Misc/fire_extinguisher_bluespace.rsi
-  - type: SolutionContainerManager
-    solutions:
-      spray:
-        maxVol: 200
-        reagents:
-        - ReagentId: Water
-          Quantity: 200
+  - type: Solution
+    id: spray
+    solution:
+      maxVol: 200
+      reagents:
+      - ReagentId: Water
+        Quantity: 200
   - type: PhysicalComposition
     materialComposition:
       Steel: 80
       Uranium: 20
   - type: SolutionRegeneration
-    solution: spray
     generated:
       reagents:
       - ReagentId: Water

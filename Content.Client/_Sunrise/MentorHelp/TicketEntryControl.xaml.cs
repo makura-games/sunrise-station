@@ -13,7 +13,7 @@ namespace Content.Client._Sunrise.MentorHelp
     [GenerateTypedNameReferences]
     public sealed partial class TicketEntryControl : Control
     {
-        [Dependency] private readonly ILocalizationManager _loc = default!;
+        [Dependency] private ILocalizationManager _loc = default!;
 
         private static readonly Color NormalColor = Color.FromHex("#202023");
         private static readonly Color UnreadColor = Color.FromHex("#4A1F1F");

@@ -1,4 +1,6 @@
-﻿- type: entity
+﻿# region base cartridges
+
+- type: entity
   id: BaseCartridgeRifleHeavy
   name: cartridge (.308)
   parent: [ BaseCartridge, BaseSecurityContraband ]
@@ -46,32 +48,6 @@
 
 # .308 cartridges
 - type: entity
-  parent: [ BaseCartridge, BaseSecurityContraband ]
-  id: CartridgeRifleHeavyArtillery
-  name: cartridge (.308 space)
-  components:
-  - type: Tag
-    tags:
-      - Cartridge
-      - CartridgeHeavyRifle
-  - type: CartridgeAmmo
-    proto: BulletHeavyRifleArtillery
-    deleteOnSpawn: true
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Casings/7.62x51.rsi
-    scale: 0.60, 0.60
-    layers:
-    - state: base
-      map: [ "enum.AmmoVisualLayers.Base" ]
-    - state: tip
-      map: [ "enum.AmmoVisualLayers.Tip" ]
-      color: "#7f009b"
-  - type: Appearance
-  - type: SpentAmmoVisuals
-  - type: StaticPrice
-    price: 1
-
-- type: entity
   id: CartridgeRifleHeavySP
   name: cartridge (.308 SP)
   parent: BaseCartridgeRifleHeavy
@@ -85,21 +61,6 @@
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#3F47DB"
-
-- type: entity
-  id: CartridgeRifleHeavyHP
-  name: cartridge (.308 HP)
-  parent: BaseCartridgeRifleHeavy
-  components:
-  - type: CartridgeAmmo
-    proto: BulletRifleTraceHeavyHP
-  - type: Sprite
-    layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-      - state: tip
-        map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#000000"
 
 - type: entity
   id: CartridgeRifleHeavyFMJ
@@ -209,21 +170,6 @@
         color: "#3F47DB"
 
 - type: entity
-  id: CartridgeHeavyRifleRHP
-  name: cartridge (7.62mmR HP)
-  parent: BaseCartridgeHeavyRifleR
-  components:
-  - type: CartridgeAmmo
-    proto: BulletRifleTraceHeavyHP
-  - type: Sprite
-    layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-      - state: tip
-        map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#000000"
-
-- type: entity
   id: CartridgeHeavyRifleRFMJ
   name: cartridge (7.62mmR FMJ)
   parent: BaseCartridgeHeavyRifleR
@@ -298,14 +244,12 @@
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#65fe08"
 
+# region speedloaders
 - type: entity
-  id: SpeedLoaderHeavyRifleRFMJ
-  name: "speed loader (7.62mmR FMJ)"
+  id: BaseSpeedLoaderHeavyRifleR
   parent: [ BaseItem, BaseMinorContraband ]
+  abstract: true
   components:
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 30
   - type: Tag
     tags:
       - SpeedLoaderRifle
@@ -317,94 +261,97 @@
       tags:
         - CartridgeHeavyRifleR
     capacity: 5
-    proto: CartridgeHeavyRifleRFMJ
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/LightRifle/light_rifle_speed_loader.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/SpeedLoaders/heavy_rifle_speed_loader.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-5
       map: ["enum.GunVisualLayers.Mag"]
+    - state: mag-tip-5
+      map: [ "enum.GunVisualLayers.Tip" ]
+      color: "#C7B458"
   - type: MagazineVisuals
     magState: mag
     steps: 6
     zeroVisible: false
   - type: Appearance
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-        ents: []
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      - state: inhand-left-stripe
+        color: "#C7B458"
+      right:
+      - state: inhand-right
+      - state: inhand-right-stripe
+        color: "#C7B458"
+
+- type: entity
+  id: SpeedLoaderHeavyRifleRFMJ
+  name: "speed loader (7.62mmR FMJ)"
+  parent: BaseSpeedLoaderHeavyRifleR
+  components:
+  - type: SpeedLoader
+  - type: BallisticAmmoProvider
+    proto: CartridgeHeavyRifleRFMJ
 
 - type: entity
   id: SpeedLoaderHeavyRifleRAP
   name: "speed loader (7.62mmR AP)"
-  parent: [ BaseItem, BaseMinorContraband ]
+  parent: BaseSpeedLoaderHeavyRifleR
   components:
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 30
-  - type: Tag
-    tags:
-      - SpeedLoaderRifle
-  - type: SpeedLoader
-  - type: BallisticAmmoProvider
-    mayTransfer: true
-    fillDelay: 0.1
-    whitelist:
-      tags:
-        - CartridgeHeavyRifleR
-    capacity: 5
-    proto: CartridgeHeavyRifleRAP
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/LightRifle/light_rifle_speed_loader.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/SpeedLoaders/heavy_rifle_speed_loader.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-5
       map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag
-    steps: 6
-    zeroVisible: false
-  - type: Appearance
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-        ents: []
+    - state: mag-tip-5
+      map: [ "enum.GunVisualLayers.Tip" ]
+      color: "#540000"
+  - type: BallisticAmmoProvider
+    proto: CartridgeHeavyRifleRAP
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      - state: inhand-left-stripe
+        color: "#540000"
+      right:
+      - state: inhand-right
+      - state: inhand-right-stripe
+        color: "#540000"
 
 - type: entity
   id: SpeedLoaderHeavyRifleRIncendiary
   name: "speed loader (7.62mmR incendiary)"
-  parent: [ BaseItem, BaseMinorContraband ]
+  parent: BaseSpeedLoaderHeavyRifleR
   components:
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 30
-  - type: Tag
-    tags:
-      - SpeedLoaderRifle
-  - type: SpeedLoader
-  - type: BallisticAmmoProvider
-    mayTransfer: true
-    fillDelay: 0.1
-    whitelist:
-      tags:
-        - CartridgeHeavyRifleR
-    capacity: 5
-    proto: CartridgeHeavyRifleRIncendiary
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/LightRifle/light_rifle_speed_loader.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/SpeedLoaders/heavy_rifle_speed_loader.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-5
       map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag
-    steps: 6
-    zeroVisible: false
-  - type: Appearance
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-        ents: []
+    - state: mag-tip-5
+      map: [ "enum.GunVisualLayers.Tip" ]
+      color: "#ff6e52"
+  - type: BallisticAmmoProvider
+    proto: CartridgeHeavyRifleRIncendiary
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      - state: inhand-left-stripe
+        color: "#ff6e52"
+      right:
+      - state: inhand-right
+      - state: inhand-right-stripe
+        color: "#ff6e52"

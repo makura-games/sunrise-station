@@ -10,13 +10,13 @@ using Robust.Shared.Configuration;
 
 namespace Content.Server.Discord;
 
-public sealed class DiscordWebhook : IPostInjectInit, IDisposable
+public sealed partial class DiscordWebhook : IPostInjectInit, IDisposable
 {
     private static readonly JsonSerializerOptions JsonOptions = new JsonSerializerOptions
         { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
 
-    [Dependency] private readonly ILogManager _log = default!;
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
+    [Dependency] private ILogManager _log = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
 
     private const string BaseUrl = "https://discord.com/api/v10/webhooks";
     private HttpClient _http = default!;
@@ -178,7 +178,7 @@ public sealed class DiscordWebhook : IPostInjectInit, IDisposable
         {
             throw new InvalidOperationException("Failed to create proxy handler");
         }
-        
+
         var client = new HttpClient(handler);
         client.Timeout = Timeout;
 

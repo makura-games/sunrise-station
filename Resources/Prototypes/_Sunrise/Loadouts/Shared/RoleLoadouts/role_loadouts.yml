@@ -48,7 +48,7 @@
   - SunriseTrinkets
   - SecurityTrinkets
   - GroupSpeciesBreathTool
-  - SunriseSecurityGun
+  - SunriseBrigmedGun
   - Bra
   - Pants
   - Socks
@@ -101,6 +101,7 @@
   id: JobBlueShieldOfficer
   groups:
   - BlueShieldHead
+  - SunriseLoadoutGroupBlueShieldMask
   - BlueShieldNeck
   - BlueShieldJumpsuit
   - BlueShieldBackpack

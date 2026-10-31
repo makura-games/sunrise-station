@@ -18,6 +18,7 @@ namespace Content.Server.Administration.Systems;
 public sealed partial class AdminQuickInfoSystem : EntitySystem
 {
     [Dependency] private IAdminManager _adminManager = null!;
+    [Dependency] private MindSystem _mind = null!;
 
     public override void Initialize()
     {
@@ -42,9 +43,9 @@ public sealed partial class AdminQuickInfoSystem : EntitySystem
                 NetUserId? lastPlayer = null;
 
                 // Check the last mind that was attached to the entity and get its userid.
-                if (TryComp<MindContainerComponent>(ent, out var comp) && TryComp<MindComponent>(comp.LastMind, out var mindComp))
+                if (_mind.TryGetLastMind(ent.Value, out var lastMind))
                 {
-                    lastPlayer = mindComp.UserId;
+                    lastPlayer = lastMind.Value.Comp.UserId;
                 }
                 var metadata = MetaData(ent.Value);
                 return new QuickInfoShared.SingleEntityInfo(e, true, metadata.EntityName, metadata.EntityPrototype?.ID, lastPlayer);

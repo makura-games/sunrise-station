@@ -1,6 +1,6 @@
 ---
-name: SS14 ECS Entities
-description: Working with entities in Space Station 14 — EntityUid, Entity<T>, implicit Entity<T>-as-EntityUid usage, component operations, containers, network identity, and entity lifecycle
+name: ss14-ecs-entities
+description: Working with entities in Space Station 14 — EntityUid, typed Entity wrappers, implicit conversion to EntityUid, component operations, containers, network identity, and entity lifecycle
 ---
 
 # Entity - entities in ECS
@@ -243,7 +243,7 @@ public sealed partial class MyContainerComponent : Component
 ### Working in the system
 
 ```csharp
-[Dependency] private readonly SharedContainerSystem _container = default!;
+[Dependency] private SharedContainerSystem _container = default!;
 
 // Get container
 if (_container.TryGetContainer(uid, "my_slot", out var container))
@@ -364,17 +364,13 @@ if (TryComp<MyComponent>(uid, out var myComp) &&
 
 ## Optimizations for working with entities (addition)
 
-### 1) For frequent checks, use cached `EntityQuery<T>`
+### 1) Для частых проверок в системе использовать dependency `EntityQuery<T>`
 
-If the system API often triggers the same component, cache the query in `Initialize()`:
+Если API системы часто обращается к одному компоненту, получить query через системную
+dependency-коллекцию:
 
 ```csharp
-private EntityQuery<TagComponent> _tagQuery;
-
-public override void Initialize()
-{
-    _tagQuery = GetEntityQuery<TagComponent>();
-}
+[Dependency] private EntityQuery<TagComponent> _tagQuery = default!;
 
 public bool HasTagFast(EntityUid uid, ProtoId<TagPrototype> tag)
 {
@@ -383,7 +379,9 @@ public bool HasTagFast(EntityUid uid, ProtoId<TagPrototype> tag)
 }
 ```
 
-This reduces overhead compared to multiple common checks.
+Это правило относится к `EntitySystem` и его partial-файлам. В несистемных классах такая
+dependency не разрешается: для единичных проверок использовать `IEntityManager`, а query для
+вручную создаваемого объекта передавать через конструктор или получать от `IEntityManager`.
 
 ### 2) Remove unnecessary temporary components immediately after completing the role
 
