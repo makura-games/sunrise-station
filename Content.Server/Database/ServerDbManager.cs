@@ -150,33 +150,6 @@ namespace Content.Server.Database
         /// <param name="updates">The list of all updates to apply to the database.</param>
         Task UpdatePlayTimes(IReadOnlyCollection<PlayTimeUpdate> updates);
 
-        // Sunrise-Start
-        /// <summary>
-        /// Returns top players by overall playtime.
-        /// </summary>
-        Task<List<(string Username, TimeSpan Time)>> GetTopPlayersOverall(int count, CancellationToken cancel = default);
-
-        /// <summary>
-        /// Returns top players by playtime who logged in since <paramref name="since"/>.
-        /// </summary>
-        Task<List<(string Username, TimeSpan Time)>> GetTopPlayersActiveSince(DateTime since, int count, CancellationToken cancel = default);
-
-        /// <summary>
-        /// Adds a playtime session record to the database and returns its ID.
-        /// </summary>
-        Task<int> AddPlayTimeSessionAsync(Guid playerId, DateTime startTime, DateTime endTime);
-
-        /// <summary>
-        /// Updates the end time of a playtime session in the database.
-        /// </summary>
-        Task UpdatePlayTimeSessionAsync(int sessionId, DateTime endTime);
-
-        /// <summary>
-        /// Calculates top players by playtime for the specified period based on sessions.
-        /// </summary>
-        Task<List<(string Username, TimeSpan Time)>> GetTopPlayersActiveSinceWithSession(DateTime since, int count, CancellationToken cancel = default);
-        // Sunrise-End
-
         #endregion
 
         #region Player Records
@@ -630,38 +603,6 @@ namespace Content.Server.Database
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.UpdatePlayTimes(updates));
         }
-
-        // Sunrise-Start
-        public Task<List<(string Username, TimeSpan Time)>> GetTopPlayersOverall(int count, CancellationToken cancel)
-        {
-            DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetTopPlayersOverall(count, cancel));
-        }
-
-        public Task<List<(string Username, TimeSpan Time)>> GetTopPlayersActiveSince(DateTime since, int count, CancellationToken cancel)
-        {
-            DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetTopPlayersActiveSince(since, count, cancel));
-        }
-
-        public Task<int> AddPlayTimeSessionAsync(Guid playerId, DateTime startTime, DateTime endTime)
-        {
-            DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.AddPlayTimeSessionAsync(playerId, startTime, endTime));
-        }
-
-        public Task UpdatePlayTimeSessionAsync(int sessionId, DateTime endTime)
-        {
-            DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.UpdatePlayTimeSessionAsync(sessionId, endTime));
-        }
-
-        public Task<List<(string Username, TimeSpan Time)>> GetTopPlayersActiveSinceWithSession(DateTime since, int count, CancellationToken cancel)
-        {
-            DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetTopPlayersActiveSinceWithSession(since, count, cancel));
-        }
-        // Sunrise-End
 
         #endregion
 

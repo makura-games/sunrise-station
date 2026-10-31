@@ -74,10 +74,7 @@ namespace Content.Client._Sunrise.MentorHelp
         [
             typeof(BoldItalicTag),
             typeof(BoldTag),
-            typeof(BulletTag),
             typeof(ColorTag),
-            typeof(HeadingTag),
-            typeof(ItalicTag),
             typeof(EmojiTag)
         ];
 

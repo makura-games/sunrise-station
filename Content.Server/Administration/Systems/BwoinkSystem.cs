@@ -55,7 +55,7 @@ namespace Content.Server.Administration.Systems
         private WebhookData? _onCallData;
 
         private ISawmill _sawmill = default!;
-        private readonly HttpClient _httpClient = new();
+        private HttpClient _httpClient = default!; // Sunrise-Edit - использование DiscordWebhook.GetClient()
 
         private string _footerIconUrl = string.Empty;
         private string _avatarUrl = string.Empty;

@@ -54,6 +54,14 @@ namespace Content.Client._Sunrise.Administration.UI.Bwoink
             RobustXamlLoader.Load(this);
             IoCManager.InjectDependencies(this);
 
+            var msg = new FormattedMessage();
+            msg.PushColor(Color.LightGray);
+            msg.AddText(Loc.GetString("bwoink-system-messages-being-relayed-to-discord"));
+            msg.Pop();
+            RelayedToDiscordLabel.SetMessage(msg);
+
+            SenderLineEdit.PlaceHolder = Loc.GetString("bwoink-input-placeholder");
+
             _messageSender = messageSender;
 
             OnVisibilityChanged += c =>
@@ -77,6 +85,9 @@ namespace Content.Client._Sunrise.Administration.UI.Bwoink
         private void Input_OnTextEntered(LineEdit.LineEditEventArgs args)
         {
             if (string.IsNullOrWhiteSpace(args.Text))
+                return;
+
+            if (DateTime.UtcNow < _cooldownEnd)
                 return;
 
             _messageSender(args.Text);
@@ -149,19 +160,29 @@ namespace Content.Client._Sunrise.Administration.UI.Bwoink
         private async void UpdateCooldownUI(CancellationToken token)
         {
             SenderLineEdit.Editable = false;
-            SenderLineEdit.PlaceHolder = Loc.GetString("bwoink-cooldown-placeholder", ("time", (int)Math.Max(0, (_cooldownEnd - DateTime.UtcNow).TotalSeconds)));
+            SenderLineEdit.PlaceHolder = Loc.GetString("bwoink-cooldown-message", ("seconds", (int)Math.Max(0, (_cooldownEnd - DateTime.UtcNow).TotalSeconds)));
 
             while (DateTime.UtcNow < _cooldownEnd)
             {
-                if (token.IsCancellationRequested)
+                if (token.IsCancellationRequested || Disposed)
                     return;
 
-                SenderLineEdit.PlaceHolder = Loc.GetString("bwoink-cooldown-placeholder", ("time", (int)Math.Max(0, (_cooldownEnd - DateTime.UtcNow).TotalSeconds)));
-                await Task.Delay(500, token);
+                SenderLineEdit.PlaceHolder = Loc.GetString("bwoink-cooldown-message", ("seconds", (int)Math.Max(0, (_cooldownEnd - DateTime.UtcNow).TotalSeconds)));
+                try
+                {
+                    await Task.Delay(500, token);
+                }
+                catch (OperationCanceledException)
+                {
+                    return;
+                }
             }
 
+            if (token.IsCancellationRequested || Disposed)
+                return;
+
             SenderLineEdit.Editable = true;
-            SenderLineEdit.PlaceHolder = Loc.GetString("bwoink-panel-placeholder");
+            SenderLineEdit.PlaceHolder = Loc.GetString("bwoink-input-placeholder");
         }
         // Sunrise-End
 

@@ -10,8 +10,20 @@ ui-playtime-header-role-time = Время
 ui-playtime-time-format = { $hours }ч { $minutes }м
 ui-playtime-time-format-verbose =
     { $hours ->
-        [0] { $minutes } минут
-       *[other] { $hours } часов { $minutes } минут
+        [0] { $minutes } { $minutes ->
+            [one] минута
+            [few] минуты
+           *[other] минут
+        }
+       *[other] { $hours } { $hours ->
+            [one] час
+            [few] часа
+           *[other] часов
+        } { $minutes } { $minutes ->
+            [one] минута
+            [few] минуты
+           *[other] минут
+        }
     }
 ui-playtime-time-format-short =
     { $hours ->
