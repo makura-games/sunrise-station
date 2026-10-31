@@ -87,6 +87,26 @@
 
 - type: entity
   parent: Doubloon
+  id: Doubloon20
+  name: Doubloon
+  suffix: 20 DB
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Stack
+    count: 20
+
+- type: entity
+  parent: Doubloon
+  id: Doubloon29
+  name: Doubloon
+  suffix: 29 DB
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Stack
+    count: 29
+
+- type: entity
+  parent: Doubloon
   id: Doubloon50
   name: Doubloon
   suffix: 50 DB

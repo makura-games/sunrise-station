@@ -4,7 +4,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._Sunrise.BloodCult.UI;
 
 [Serializable, NetSerializable]
-public class CultistFactoryBUIState : BoundUserInterfaceState
+public sealed class CultistFactoryBUIState : BoundUserInterfaceState
 {
     public CultistFactoryBUIState(Dictionary<string, List<EntProtoId>> ids)
     {
@@ -15,7 +15,7 @@ public class CultistFactoryBUIState : BoundUserInterfaceState
 }
 
 [Serializable, NetSerializable]
-public class CultistFactoryItemSelectedMessage : BoundUserInterfaceMessage
+public sealed class CultistFactoryItemSelectedMessage : BoundUserInterfaceMessage
 {
     public CultistFactoryItemSelectedMessage(List<EntProtoId> equipment)
     {

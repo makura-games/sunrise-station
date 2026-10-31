@@ -10,18 +10,15 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 18000 # 5 hrs
-  weight: 9
   startingGear: HeadOfPrisonGear
   icon: "JobIconHeadOfPrison"
   overrideConsoleVisibility: false
   requireAdminNotify: true
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   alwaysUseSpawner: true
   radioBold: true
   alternativeTitles:
   - job-alt-title-colony-warden
-  displayWeight: 100
   accessGroups:
     - AllAccess
   special:
@@ -39,8 +36,8 @@
     back: ClothingBackpackSatchelHeadOfPrisonMetus
     neck: ClothingNeckCloakHOSCloak
     shoes: ClothingShoesBootsJack
-    pocket1: WeaponPistolDeagleMetus
-    pocket2: MagazineDeagle
+    pocket1: WeaponPistolDeagle
+    pocket2: MagazineMagnum
     outerClothing: ClothingOuterArmorRiot
 
 - type: chameleonOutfit

@@ -11,7 +11,7 @@ using Content.Shared._Sunrise.Weapons.Enums;
 
 namespace Content.Shared.Weapons.Ranged;
 
-[Prototype("hitscan")]
+[Prototype]
 public sealed partial class HitscanPrototype : IPrototype, IShootable, IInheritingPrototype
 {
     [ViewVariables]

@@ -15,9 +15,9 @@ namespace Content.Client._Sunrise.CopyMachine;
 [GenerateTypedNameReferences]
 public sealed partial class CopyMachineMenu : DefaultWindow
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystems = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystems = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public event Action<string?>? OnPrintPressed;
     public event Action? OnCopyPressed;

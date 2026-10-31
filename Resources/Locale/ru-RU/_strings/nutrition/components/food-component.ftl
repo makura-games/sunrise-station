@@ -13,7 +13,7 @@ food-system-you-cannot-eat-any-more-other = { CAPITALIZE(SUBJECT($target)) } б�
 food-system-try-use-food-is-empty = В { $entity } пусто!
 food-system-wrong-utensil = Вы не можете есть { $food } с помощью { $utensil }.
 food-system-cant-digest = Вы не можете переварить { $entity }!
-food-system-cant-digest-other = { CAPITALIZE(SUBJECT($target)) } не может переварить { THE($entity) }!
+food-system-cant-digest-other = { CAPITALIZE(SUBJECT($target)) } не может переварить { $entity }!
 food-system-verb-eat = Съесть
 
 ## Force feeding

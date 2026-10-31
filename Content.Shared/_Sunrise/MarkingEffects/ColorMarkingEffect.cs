@@ -38,7 +38,7 @@ public sealed partial class ColorMarkingEffect : MarkingEffect
         foreach (var (type, value) in dict)
         {
             if (type == "color.base")
-                color = Color.TryFromHex(value) ?? Color.White;
+                color = Color.TryFromHex(value, out var parsedColor) ? parsedColor : Color.White;
         }
 
         return new ColorMarkingEffect(color);

@@ -1,14 +1,14 @@
-﻿using Content.Shared._Sunrise.Mood;
+using Content.Shared._Sunrise.Mood;
 using Content.Shared.GameTicking;
 using Robust.Client.Graphics;
 using Robust.Shared.Player;
 
 namespace Content.Client._Sunrise.Overlays.Systems;
 
-public sealed class SaturationScaleSystem : EntitySystem
+public sealed partial class SaturationScaleSystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerMan = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
+    [Dependency] private ISharedPlayerManager _playerMan = default!;
 
     private SaturationScaleOverlay _overlay = default!;
 

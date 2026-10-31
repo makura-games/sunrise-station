@@ -1,0 +1,210 @@
+- type: entity
+  id: CratePirateChestCannonBall
+  suffix: Filled, CannonBall
+  parent: CratePirate
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: CannonBall
+          amount: 6
+
+- type: entity
+  id: CratePirateChestCannonBallPlasteel
+  suffix: Filled, Plasteel CannonBall
+  parent: CratePirate
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: CannonBallAntiMateriel
+          amount: 6
+
+- type: entity
+  id: CratePirateChestCannonBallFuze
+  suffix: Filled, Cannonball Fuze
+  parent: CratePirate
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: CannonBallFuze
+          amount: 6
+
+- type: entity
+  id: CratePirateChestGrapeshot
+  suffix: Filled, Cannonball Grapeshot
+  parent: CratePirate
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: CannonBallGrapeshot
+          amount: 6
+
+- type: entity
+  id: CratePirateChestCannonEMP
+  suffix: Filled, Cannonball EMP
+  parent: CratePirate
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: CannonBallEMPshot
+          amount: 6
+
+- type: entity
+  id: CratePirateChestGlassshot
+  suffix: Filled, Glassshot Cannonball
+  parent: CratePirate
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: CannonBallGlassshot
+          amount: 6
+
+- type: entity
+  id: CratePirateChestCannonBallMiniMix
+  suffix: Filled, Mini CannonBall Mix
+  parent: CratePirate
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: CannonBallGrapeshotMini
+          amount: 8
+        - id: CannonBallMini
+          amount: 8
+
+- type: entity
+  id: CratePiraterEVASuitArmoredBundle
+  suffix: Filled
+  parent: CrateGenericSteel
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - !type:GroupSelector
+          children:
+          - id: ClothingHeadHelmetPirate
+          - id: ClothingHeadHelmetPirateAlt
+          - id: ClothingHeadHelmetPirateAlt2
+        - !type:GroupSelector
+          children:
+          - id: ClothingOuterEVASuitPirateArmoredAlt
+          - id: ClothingOuterEVASuitPirateArmored
+        - id: DoubleEmergencyNitrogenTankFilled
+        - id: DoubleEmergencyOxygenTankFilled
+
+- type: entity
+  id: CratePiraterEVASuitBundle
+  suffix: Filled
+  parent: CrateGenericSteel
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - !type:GroupSelector
+          children:
+          - id: ClothingHeadHelmetPirate
+          - id: ClothingHeadHelmetPirateAlt
+          - id: ClothingHeadHelmetPirateAlt2
+        - id: ClothingOuterEVASuitPirate
+        - id: DoubleEmergencyNitrogenTankFilled
+        - id: DoubleEmergencyOxygenTankFilled
+
+- type: entity
+  id: CrateSyndicateSuperSurplusBundleAgent
+  parent: [ CrateSyndicate, StorePresetUplink, BaseSyndicateContraband ]
+  name: Syndicate super surplus crate
+  description: Contains 125 telecrystals worth of completely random Syndicate items.
+  suffix: Agent
+  components:
+  - type: SurplusBundle
+    totalPrice: 125
+  - type: Tag
+    tags:
+    - SyndieAgentUplink
+
+- type: entity
+  id: CratePirateChestSun
+  suffix: Filled, Weapons
+  parent: CratePirate
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponLauncherPirateCannon
+          amount: 2
+        - id: Cutlass
+        - id: CannonBall
+          amount: 2
+        - id: CannonBallFuze
+          amount: 2
+        - id: CannonBallGlassshot
+          amount: 3
+        - id: CannonBallEMPshot
+          amount: 3
+        - id: CannonBallGrapeshot
+          amount: 4
+        - id: WeaponPistolFlintlock
+          amount: 2
+        - id: MagazineBoxMagnumAP
+          amount: 2
+        - id: Musket
+        - id: MagazineBoxAntiMateriel
+          amount: 2
+        - id: WeaponGrapplingGun
+          amount: 2
+        - id: WeaponShotgunBlunderbuss
+        - id: WeaponRevolverPirate
+          prob: 0.9
+        - id: EnergyCutlass
+          prob: 0.9
+          amount: 3
+        - id: ToolboxElectricalTurret
+          prob: 0.75
+          amount: 3
+        - id: WeaponLaserGun
+          prob: 0.40
+        - id: EnergyDomeGeneratorPersonalSyndieBiocode
+          prob: 0.40
+        - id: EnergyShieldBiocode
+          prob: 0.40
+        - id: WeaponSniperRepeater
+          prob: 0.40
+        - id: WeaponRevolverSnubRevolver
+          prob: 0.30
+        - id: WeaponShotgunTrenchgun4034Sawn
+          prob: 0.30
+        - id: ToolboxElectricalTurret
+          prob: 0.25
+        - id: WeaponRevolverPython
+          prob: 0.25
+        - id: WeaponRifleSKM24Scrap
+          prob: 0.15
+        - id: WeaponSubMachineGunPPSH
+          prob: 0.10
+        - id: WeaponIonRifle
+          prob: 0.05
+        - id: WeaponSyndieLaserGun
+          prob: 0.05
+        - id: WeaponSyndieLaserPistolBiocode
+          prob: 0.01
+        - id: WeaponLaserLNT620
+          prob: 0.01
+        - id: WeaponSniperDragunov
+          prob: 0.001
+        - id: WeaponLightMachineGunRPD
+          prob: 0.001

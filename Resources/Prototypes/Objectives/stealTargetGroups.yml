@@ -163,6 +163,13 @@
     sprite: Objects/Tools/lantern.rsi
     state: lantern
 
+- type: stealTargetGroup
+  id: ClothingEyesHuds
+  name: steal-target-groups-huds
+  sprite:
+    sprite: Clothing/Eyes/Hud/sec.rsi
+    state: icon
+
 # Thief single item
 
 - type: stealTargetGroup
@@ -225,7 +232,7 @@
   id: FireAxe
   name: steal-target-groups-fire-axe
   sprite:
-    sprite: Objects/Weapons/Melee/fireaxe.rsi
+    sprite: _Sunrise/Objects/Weapons/Melee/fireaxe.rsi # Sunrise-Edit - используем респрайт форка.
     state: icon
 
 - type: stealTargetGroup
@@ -255,13 +262,6 @@
   sprite:
     sprite: Objects/Misc/module.rsi
     state: cpuboard
-
-- type: stealTargetGroup
-  id: ClothingEyesHudBeer
-  name: steal-target-groups-clothing-eyes-hud-beer
-  sprite:
-    sprite: Clothing/Eyes/Hud/beergoggles.rsi
-    state: icon
 
 - type: stealTargetGroup
   id: Bible
@@ -311,7 +311,7 @@
   id: FaxMachineCaptain
   name: steal-target-groups-fax-machine-captain
   sprite:
-    sprite: Structures/Machines/fax_machine.rsi
+    sprite: _Sunrise/Structures/Machines/fax_machine.rsi # Sunrise-Edit
     state: icon
 
 - type: stealTargetGroup

@@ -12,11 +12,10 @@ namespace Content.Server._Sunrise.StationEvents.Events;
 /// <summary>
 /// Game rule for changing borg laws to Epsilon during Epsilon alert level.
 /// </summary>
-public sealed class EpsilonDeathSquadLawsetRule : StationEventSystem<EpsilonDeathSquadLawsetComponent>
+public sealed partial class EpsilonDeathSquadLawsetRule : StationEventSystem<EpsilonDeathSquadLawsetComponent>
 {
     private EntityUid? _targetStation;
-    [Dependency] private readonly SiliconLawSystem _siliconLaw = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SiliconLawSystem _siliconLaw = default!;
 
     private const string DeathSquadLawsetId = "DeathSquadLawset";
 
@@ -35,7 +34,7 @@ public sealed class EpsilonDeathSquadLawsetRule : StationEventSystem<EpsilonDeat
         }
 
         var lawsetId = DeathSquadLawsetId;
-        if (!_prototypeManager.TryIndex<SiliconLawsetPrototype>(lawsetId, out var lawsetProto))
+        if (!ProtoMan.TryIndex<SiliconLawsetPrototype>(lawsetId, out var lawsetProto))
         {
             Sawmill.Error($"Could not find lawset prototype: {lawsetId}");
             return;
@@ -44,7 +43,7 @@ public sealed class EpsilonDeathSquadLawsetRule : StationEventSystem<EpsilonDeat
         var laws = new List<SiliconLaw>();
         foreach (var lawId in lawsetProto.Laws)
         {
-            if (!_prototypeManager.TryIndex<SiliconLawPrototype>(lawId, out var lawProto))
+            if (!ProtoMan.TryIndex<SiliconLawPrototype>(lawId, out var lawProto))
             {
                 Sawmill.Error($"Could not find law prototype: {lawId}");
                 return;

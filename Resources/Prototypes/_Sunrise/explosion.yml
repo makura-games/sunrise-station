@@ -26,3 +26,18 @@
   fireStates: 3
   fireStacks: 2
   temperature: 1500
+
+- type: explosion
+  id: IncineratorBomb
+  damagePerIntensity:
+    types:
+      Heat: 55
+      Structural: 20
+  tileBreakChance: [ 0, 0.5, 1 ]
+  tileBreakIntensity: [ 1, 10, 15 ]
+  tileBreakRerollReduction: 30
+  intensityPerState: 20
+  lightColor: Orange
+  texturePath: /Textures/Effects/fire.rsi
+  fireStates: 3
+  temperature: 800

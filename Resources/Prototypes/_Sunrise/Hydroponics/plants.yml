@@ -1,0 +1,427 @@
+- type: entity
+  parent: BasePlant
+  id: ExplosiveBananaPlants
+  name: explosive banana
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Hydroponics/explosive_banana.rsi
+  - type: PlantData
+    name: seeds-explosive-banana-name
+    packetPrototype: ExplosiveBananaSeeds
+    productPrototypes: [ ExplosiveBanana ]
+  - type: Plant
+    lifespan: 25
+    maturation: 12
+    production: 2
+    yield: 2
+    potency: 10
+  - type: PlantGrowth
+    waterConsumption: 0.6
+    nutrientConsumption: 0.5
+  - type: PlantChemicals
+    chemicals:
+      Potassium: { min: 1, max: 15, potencyDivisor: 4 }
+      Nutriment: { min: 1, max: 2, potencyDivisor: 30 }
+      Water: { min: 1, max: 15, potencyDivisor: 4 }
+
+- type: entity
+  parent: BasePlant
+  id: CoffeeArabicaPlants
+  name: coffee arabica
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Hydroponics/coffee_arabica.rsi
+  - type: PlantData
+    name: seeds-coffee-arabica-name
+    packetPrototype: CoffeeArabicaSeeds
+    productPrototypes: [ FoodCoffeeArabica ]
+    mutationPrototypes: [ CoffeeRobustPlants ]
+  - type: Plant
+    lifespan: 25
+    maturation: 6
+    production: 4
+    yield: 3
+    potency: 10
+    growthStages: 5
+  - type: PlantHarvest
+    harvestRepeat: Repeat
+  - type: PlantGrowth
+    waterConsumption: 0.4
+    nutrientConsumption: 0.3
+  - type: PlantAtmospheric
+    lowHeatTolerance: 278
+    highHeatTolerance: 298
+  - type: PlantChemicals
+    chemicals:
+      Grcoffee: { min: 1, max: 20, potencyDivisor: 4 }
+      Nutriment: { min: 1, max: 2, potencyDivisor: 4 }
+
+- type: entity
+  parent: BasePlant
+  id: CoffeeRobustPlants
+  name: coffee robusta
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Hydroponics/coffee_robust.rsi
+  - type: PlantData
+    name: seeds-coffee-robust-name
+    packetPrototype: CoffeeRobustSeeds
+    productPrototypes: [ FoodCoffeeRobust ]
+  - type: Plant
+    lifespan: 25
+    maturation: 6
+    production: 4
+    yield: 3
+    potency: 10
+    growthStages: 5
+  - type: PlantHarvest
+    harvestRepeat: Repeat
+  - type: PlantGrowth
+    waterConsumption: 0.4
+    nutrientConsumption: 0.3
+  - type: PlantAtmospheric
+    lowHeatTolerance: 278
+    highHeatTolerance: 298
+  - type: PlantChemicals
+    chemicals:
+      Grcoffee: { min: 1, max: 10, potencyDivisor: 2 }
+      Nutriment: { min: 1, max: 2, potencyDivisor: 2 }
+      Ephedrine: { min: 1, max: 10, potencyDivisor: 25 }
+
+- type: entity
+  parent: BasePlant
+  id: GeraniumPlants
+  name: geranium
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Hydroponics/geranium.rsi
+  - type: PlantData
+    name: seeds-geranium-name
+    packetPrototype: GeraniumSeeds
+    productPrototypes: [ FoodGeranium ]
+  - type: Plant
+    lifespan: 25
+    maturation: 10
+    production: 3
+    yield: 3
+    potency: 10
+    growthStages: 3
+  - type: PlantGrowth
+    waterConsumption: 0.6
+  - type: PlantChemicals
+    chemicals:
+      Nutriment: { min: 1, max: 2, potencyDivisor: 50 }
+      Lacerinol: { min: 1, max: 20, potencyDivisor: 5 }
+
+- type: entity
+  parent: BasePlant
+  id: PlaststeelcapPlants
+  name: plaststeel cap
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Hydroponics/plaststeelcap.rsi
+  - type: PlantData
+    noun: seeds-noun-spores
+    name: seeds-plaststeelcap-name
+    packetPrototype: PlastSteelcapSeeds
+    productPrototypes: [ PlastSteelLog ]
+  - type: Plant
+    lifespan: 80
+    maturation: 15
+    production: 3
+    yield: 3
+    potency: 1
+    growthStages: 3
+  - type: PlantGrowth
+    waterConsumption: 0.6
+    nutrientConsumption: 0.8
+  - type: PlantAtmospheric
+    lowHeatTolerance: 268
+    highHeatTolerance: 288
+  - type: PlantTraitLigneous
+
+- type: entity
+  parent: BasePlant
+  id: GlasscapPlants
+  name: glass cap
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Hydroponics/glasscap.rsi
+  - type: PlantData
+    noun: seeds-noun-spores
+    name: seeds-glasscap-name
+    packetPrototype: GlasscapSeeds
+    productPrototypes: [ GlassLog ]
+  - type: Plant
+    lifespan: 80
+    maturation: 15
+    production: 3
+    yield: 5
+    potency: 1
+    growthStages: 3
+  - type: PlantGrowth
+    waterConsumption: 0.6
+    nutrientConsumption: 0.5
+  - type: PlantAtmospheric
+    lowHeatTolerance: 268
+    highHeatTolerance: 288
+  - type: PlantTraitLigneous
+
+- type: entity
+  parent: BasePlant
+  id: CannabisVitaPlants
+  name: cannabis vita
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Hydroponics/cannabis_vita.rsi
+  - type: PlantData
+    name: seeds-cannabis-vita-name
+    packetPrototype: CannabisVitaSeeds
+    productPrototypes: [ CannabisVitaLeaves ]
+  - type: Plant
+    lifespan: 40
+    maturation: 8
+    production: 5
+    yield: 2
+    potency: 20
+    growthStages: 3
+  - type: PlantHarvest
+    harvestRepeat: Repeat
+  - type: PlantAtmospheric
+    lowHeatTolerance: 278
+    highHeatTolerance: 298
+  - type: PlantChemicals
+    chemicals:
+      Omnizine: { min: 1, max: 6, potencyDivisor: 35 }
+      THC: { min: 1, max: 10, potencyDivisor: 10 }
+
+- type: entity
+  parent: BasePlant
+  id: BarrelmelonPlants
+  name: barrelmelon
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Hydroponics/barrelmelon.rsi
+  - type: PlantData
+    name: seeds-barrelmelon-name
+    packetPrototype: BarrelmelonSeeds
+    productPrototypes: [ FoodBarrelmelon ]
+  - type: Plant
+    lifespan: 55
+    maturation: 12
+    production: 3
+    yield: 1
+    potency: 1
+  - type: PlantChemicals
+    chemicals:
+      Nutriment: { min: 1, max: 10, potencyDivisor: 10 }
+      Moonshine: { min: 1, max: 15, potencyDivisor: 20 }
+
+- type: entity
+  parent: BasePlant
+  id: LanternfruitPlants
+  name: lantern fruit
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Hydroponics/lanternfruit.rsi
+  - type: PlantData
+    name: seeds-lanternfruit-name
+    packetPrototype: LanternfruitSeeds
+    productPrototypes: [ FoodLanternfruit ]
+  - type: Plant
+    lifespan: 60
+    maturation: 8
+    production: 3
+    yield: 1
+    potency: 20
+    growthStages: 3
+  - type: PlantHarvest
+    harvestRepeat: Repeat
+  - type: PlantAtmospheric
+    lowHeatTolerance: 278
+    highHeatTolerance: 298
+  - type: PlantChemicals
+    chemicals:
+      PulverizedLantern: { min: 1, max: 5, potencyDivisor: 5 }
+      Sulfur: { min: 1, max: 10, potencyDivisor: 10 }
+      Licoxide: { min: 1, max: 5, potencyDivisor: 5 }
+
+- type: entity
+  parent: BasePlant
+  id: RedrosePlants
+  name: red rose
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Hydroponics/redrose.rsi
+  - type: PlantData
+    name: seeds-redrose-name
+    packetPrototype: RedroseSeeds
+    productPrototypes: [ FoodRedrose ]
+  - type: Plant
+    lifespan: 60
+    maturation: 8
+    production: 3
+    yield: 2
+    potency: 11
+    growthStages: 3
+  - type: PlantHarvest
+    harvestRepeat: Repeat
+  - type: PlantAtmospheric
+    lowHeatTolerance: 278
+    highHeatTolerance: 298
+  - type: PlantChemicals
+    chemicals:
+      Nutriment: { min: 1, max: 2, potencyDivisor: 10 }
+      Vitamin: { min: 1, max: 2, potencyDivisor: 10 }
+
+- type: entity
+  parent: BasePlant
+  id: SunriseJuicyTomatoKillerPlants
+  name: juicy tomato killer
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/tomatokiller.rsi
+  - type: PlantData
+    name: seeds-sunrise-juicy-tomato-killer-name
+    packetPrototype: SunriseJuicyTomatoKillerSeeds
+    productPrototypes: [ SunriseMobJuicyTomatoKiller ]
+    plantLogImpact: High
+    harvestLogImpact: High
+  - type: Plant
+    lifespan: 25
+    maturation: 15
+    production: 6
+    yield: 2
+    potency: 10
+    growthStages: 2
+  - type: PlantHarvest
+    harvestRepeat: Repeat
+  - type: PlantGrowth
+    waterConsumption: 0.6
+    nutrientConsumption: 0.7
+  - type: PlantAtmospheric
+    lowHeatTolerance: 278
+    highHeatTolerance: 298
+  - type: PlantChemicals
+    chemicals:
+      Blood: { min: 1, max: 10, potencyDivisor: 10 }
+      JuiceTomato: { min: 1, max: 4, potencyDivisor: 25 }
+
+- type: entity
+  parent: BasePlant
+  id: SnapcornPlants
+  name: snapcorn
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Hydroponics/snapcorn.rsi
+  - type: PlantData
+    name: seeds-snapcorn-name
+    packetPrototype: SnapcornSeeds
+    productPrototypes: [ FoodSnapcorn ]
+  - type: Plant
+    lifespan: 25
+    maturation: 8
+    production: 4
+    yield: 2
+    potency: 20
+    growthStages: 3
+  - type: PlantHarvest
+    harvestRepeat: Repeat
+  - type: PlantGrowth
+    waterConsumption: 0.6
+  - type: PlantAtmospheric
+    lowHeatTolerance: 278
+    highHeatTolerance: 298
+  - type: PlantChemicals
+    chemicals:
+      Nutriment: { min: 1, max: 35, potencyDivisor: 3 }
+      Water: { min: 5, max: 10, potencyDivisor: 5 }
+
+- type: entity
+  parent: BasePlant
+  id: WhiterosePlants
+  name: white rose
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Hydroponics/whiterose.rsi
+  - type: PlantData
+    name: seeds-whiterose-name
+    packetPrototype: WhiteroseSeeds
+    productPrototypes: [ FoodWhiterose ]
+    mutationPrototypes: [ GeraniumPlants ]
+  - type: Plant
+    lifespan: 60
+    maturation: 8
+    production: 3
+    yield: 2
+    potency: 20
+    growthStages: 3
+  - type: PlantHarvest
+    harvestRepeat: Repeat
+  - type: PlantAtmospheric
+    lowHeatTolerance: 278
+    highHeatTolerance: 298
+  - type: PlantChemicals
+    chemicals:
+      Nutriment: { min: 1, max: 2, potencyDivisor: 10 }
+      Vitamin: { min: 1, max: 2, potencyDivisor: 10 }
+
+- type: entity
+  parent: BasePlant
+  id: SunflowerPlants
+  name: sunflower
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Hydroponics/sunflower.rsi
+  - type: PlantData
+    name: seeds-sunflower-name
+    packetPrototype: SunflowerSeeds
+    productPrototypes: [ FoodSunflower ]
+  - type: Plant
+    lifespan: 40
+    maturation: 8
+    production: 4
+    yield: 1
+    potency: 10
+    growthStages: 3
+  - type: PlantHarvest
+    harvestRepeat: Repeat
+  - type: PlantAtmospheric
+    lowHeatTolerance: 278
+    highHeatTolerance: 298
+  - type: PlantChemicals
+    chemicals:
+      Nutriment: { min: 1, max: 2, potencyDivisor: 10 }
+      Vitamin: { min: 1, max: 2, potencyDivisor: 5 }
+      Oil: { min: 1, max: 10, potencyDivisor: 10 }
+
+- type: entity
+  parent: BasePlant
+  id: WhiteLilyPlants
+  name: white lily
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Hydroponics/white_lily.rsi
+  - type: PlantData
+    name: seeds-white-lily-name
+    packetPrototype: WhiteLilySeeds
+    productPrototypes: [ FoodWhiteLily ]
+  - type: Plant
+    lifespan: 25
+    maturation: 6
+    production: 4
+    yield: 3
+    potency: 10
+    growthStages: 3
+  - type: PlantHarvest
+    harvestRepeat: Repeat
+  - type: PlantGrowth
+    waterConsumption: 0.4
+    nutrientConsumption: 0.3
+  - type: PlantAtmospheric
+    lowHeatTolerance: 278
+    highHeatTolerance: 298
+  - type: PlantChemicals
+    chemicals:
+      Nutriment: { min: 1, max: 2, potencyDivisor: 10 }
+      Vitamin: { min: 1, max: 2, potencyDivisor: 10 }

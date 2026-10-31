@@ -22,7 +22,7 @@
   flavor: medicine
   color: "#FFCA86"
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:

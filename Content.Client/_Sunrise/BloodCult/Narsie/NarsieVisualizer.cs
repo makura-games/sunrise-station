@@ -5,7 +5,7 @@ using Robust.Client.Graphics;
 
 namespace Content.Client._Sunrise.BloodCult.Narsie;
 
-public sealed class NarsieVisualizer : VisualizerSystem<NarsieComponent>
+public sealed partial class NarsieVisualizer : VisualizerSystem<NarsieComponent>
 {
     private static readonly Animation NarsieSpawnAnimation = new()
     {
@@ -20,7 +20,7 @@ public sealed class NarsieVisualizer : VisualizerSystem<NarsieComponent>
         }
     };
 
-    [Dependency] private readonly AnimationPlayerSystem _animationSystem = default!;
+    [Dependency] private AnimationPlayerSystem _animationSystem = default!;
 
     public override void Initialize()
     {

@@ -4,9 +4,9 @@ using Robust.Shared.GameObjects;
 
 namespace Content.Client._Sunrise.Misc;
 
-public sealed class XenoArtifactThrowingAutoInjectorVisualizerSystem : EntitySystem
+public sealed partial class XenoArtifactThrowingAutoInjectorVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
+    [Dependency] private SpriteSystem _spriteSystem = default!;
 
     public override void Initialize()
     {

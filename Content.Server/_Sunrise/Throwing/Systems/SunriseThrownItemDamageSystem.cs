@@ -23,18 +23,17 @@ namespace Content.Server._Sunrise.Throwing.Systems;
 /// <summary>
 ///     Sunrise-Edit: handles throwing damage and effects based on item size.
 /// </summary>
-public sealed class SunriseThrownItemDamageSystem : EntitySystem
+public sealed partial class SunriseThrownItemDamageSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly ThrownItemSystem _thrown = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedCameraRecoilSystem _sharedCameraRecoil = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private ThrownItemSystem _thrown = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -52,7 +51,7 @@ public sealed class SunriseThrownItemDamageSystem : EntitySystem
         component.OriginalLinearDamping ??= physics.LinearDamping;
 
         float weight;
-        if (TryComp<ItemComponent>(uid, out var item) && _proto.TryIndex(item.Size, out var sizeProto))
+        if (TryComp<ItemComponent>(uid, out var item) && ProtoMan.TryIndex(item.Size, out var sizeProto))
         {
             weight = sizeProto.Weight;
         }
@@ -90,7 +89,7 @@ public sealed class SunriseThrownItemDamageSystem : EntitySystem
         // Try to get item/physics info
         TryComp<PhysicsComponent>(uid, out var physics);
         ItemSizePrototype? sizeProto = null;
-        var hasItem = TryComp<ItemComponent>(uid, out var item) && _proto.TryIndex(item.Size, out sizeProto);
+        var hasItem = TryComp<ItemComponent>(uid, out var item) && ProtoMan.TryIndex(item.Size, out sizeProto);
 
         float multiplier;
         float weight;
@@ -117,8 +116,8 @@ public sealed class SunriseThrownItemDamageSystem : EntitySystem
         // Get velocity early for bounce and recoil
         var velocity = physics?.LinearVelocity ?? Vector2.Zero;
 
-        var hasDamageable = TryComp<DamageableComponent>(args.Target, out var targetDamageable);
-        var isStructure = hasDamageable && targetDamageable!.DamageContainerID?.Id.Contains("Structural") == true;
+        var isStructure = TryComp<InjurableComponent>(args.Target, out var injurable) &&
+            injurable.DamageContainer?.Id.Contains("Structural") == true;
 
         if (HasComp<MobStateComponent>(args.Target) || isStructure)
         {

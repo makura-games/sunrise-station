@@ -7,19 +7,9 @@
   components:
   - type: Action
     useDelay: 1
-    icon: { sprite: _Sunrise/Clothing/Eyes/Glasses/nvd.rsi, state: icon }
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Eyes/Glasses/nvd.rsi
+    layers:
+    - state: icon
   - type: InstantAction
     event: !type:ToggleActionEvent
-
-- type: entity
-  parent: BaseAction
-  id: ToggleableNightVision
-  name: Switches Night Vision
-  description: Switches Night Vision
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Action
-    useDelay: 1
-    icon: { sprite: _Sunrise/Clothing/Eyes/Glasses/nvd.rsi, state: icon }
-  - type: InstantAction
-    event: !type:ToggleNightVisionEvent

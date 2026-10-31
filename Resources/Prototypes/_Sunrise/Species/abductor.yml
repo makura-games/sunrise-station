@@ -1,3 +1,40 @@
+- type: markingsGroup
+  id: Abductor
+  limits:
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.HeadSide:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Chest:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RFoot:
+      limit: 1
+      required: false
+
 - type: species
   id: Abductor
   name: species-name-abductor
@@ -5,7 +42,6 @@
   prototype: MobAbductor
   bodyTypes:
   - MobAbductorSprites
-  markingLimits: MobHumanMarkingLimits
   dollPrototype: MobAbductorDummy
   skinColoration: HumanToned
   defaultSkinTone: "#BFC2C7"
@@ -16,107 +52,53 @@
 - type: bodyType
   id: MobAbductorSprites
   name: body-normal
-  sprites:
-    Head: MobAbductorHead
-    HeadTop: MobHumanoidAnyMarking
-    HeadSide: MobHumanoidAnyMarking
-    Chest: MobAbductorTorso
-    Eyes: MobAbductorEyes
-    LArm: MobAbductorLArm
-    RArm: MobAbductorRArm
-    LHand: MobAbductorLHand
-    RHand: MobAbductorRHand
-    LLeg: MobAbductorLLeg
-    RLeg: MobAbductorRLeg
-    LFoot: MobAbductorLFoot
-    RFoot: MobAbductorRFoot
-
-- type: humanoidBaseSprite
-  id: MobAbductorEyes
-  baseSprite:
-    sprite: Mobs/Customization/eyes.rsi
-    state: no_eyes
-
-- type: humanoidBaseSprite
-  id: MobAbductorHeadFemale
-  baseSprite:
-    sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
-    state: head
-
-- type: humanoidBaseSprite
-  id: MobAbductorHeadMale
-  baseSprite:
-    sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
-    state: head
-
-- type: humanoidBaseSprite
-  id: MobAbductorHead
-  baseSprite:
-    sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
-    state: head
-
-- type: humanoidBaseSprite
-  id: MobAbductorTorsoMale
-  baseSprite:
-    sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
-    state: torso
-
-- type: humanoidBaseSprite
-  id: MobAbductorTorsoFemale
-  baseSprite:
-    sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
-    state: torso
-
-- type: humanoidBaseSprite
-  id: MobAbductorTorso
-  baseSprite:
-    sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
-    state: torso
-
-- type: humanoidBaseSprite
-  id: MobAbductorLLeg
-  baseSprite:
-    sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
-    state: l_leg
-
-- type: humanoidBaseSprite
-  id: MobAbductorLHand
-  baseSprite:
-    sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
-    state: l_hand
-
-- type: humanoidBaseSprite
-  id: MobAbductorLArm
-  baseSprite:
-    sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
-    state: l_arm
-
-- type: humanoidBaseSprite
-  id: MobAbductorLFoot
-  baseSprite:
-    sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
-    state: l_foot
-
-- type: humanoidBaseSprite
-  id: MobAbductorRLeg
-  baseSprite:
-    sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
-    state: r_leg
-
-- type: humanoidBaseSprite
-  id: MobAbductorRHand
-  baseSprite:
-    sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
-    state: r_hand
-
-- type: humanoidBaseSprite
-  id: MobAbductorRArm
-  baseSprite:
-    sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
-    state: r_arm
-
-- type: humanoidBaseSprite
-  id: MobAbductorRFoot
-  baseSprite:
-    sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
-    state: r_foot
+  visualKey: body-normal
+  layers:
+    Head:
+      sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
+      state: head
+    Chest:
+      sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
+      state: torso
+    Eyes:
+      sprite: Mobs/Customization/eyes.rsi
+      state: no_eyes
+    LArm:
+      sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
+      state: l_arm
+    RArm:
+      sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
+      state: r_arm
+    LHand:
+      sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
+      state: l_hand
+    RHand:
+      sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
+      state: r_hand
+    LLeg:
+      sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
+      state: l_leg
+    RLeg:
+      sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
+      state: r_leg
+    LFoot:
+      sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
+      state: l_foot
+    RFoot:
+      sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
+      state: r_foot
+  sexLayers:
+    Male:
+      Head:
+        sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
+        state: head
+      Chest:
+        sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
+        state: torso
+    Female:
+      Head:
+        sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
+        state: head
+      Chest:
+        sprite: _Sunrise/Abductor/Mobs/Species/Abductor/parts.rsi
+        state: torso

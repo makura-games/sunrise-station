@@ -97,19 +97,13 @@
     requirement:
       !type:DepartmentTimeRequirement
       department: PlanetPrison
-      time: 360000 # 100 hrs
+      time: 3600 # 1 hrs
   equipment:
     neck: ClothingNeckPlanetPrisonLockdownPin
 
 - type: loadout
   id: ClothingNeckPlanetPrisonCellblockPin
   groupBy: "prison"
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:DepartmentTimeRequirement
-      department: PlanetPrison
-      time: 180000 # 50 hrs
   equipment:
     neck: ClothingNeckPlanetPrisonCellblockPin
 

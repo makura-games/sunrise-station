@@ -5,11 +5,11 @@ using Content.Shared.Item;
 
 namespace Content.Shared.Clothing.EntitySystems;
 
-public sealed class FoldableClothingSystem : EntitySystem
+public sealed partial class FoldableClothingSystem : EntitySystem
 {
-    [Dependency] private readonly ClothingSystem _clothingSystem = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly SharedItemSystem _itemSystem = default!;
+    [Dependency] private ClothingSystem _clothingSystem = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private SharedItemSystem _itemSystem = default!;
 
     public override void Initialize()
     {
@@ -75,7 +75,7 @@ public sealed class FoldableClothingSystem : EntitySystem
                 _clothingSystem.SetSlots(ent.Owner, ent.Comp.UnfoldedSlots.Value, clothingComp);
 
             if (ent.Comp.FoldedEquippedPrefix != null)
-                _clothingSystem.SetEquippedPrefix(ent.Owner, null, clothingComp);
+                _clothingSystem.SetEquippedPrefix(ent.Owner, ent.Comp.UnfoldedEquippedPrefix, clothingComp);
 
             if (ent.Comp.FoldedHeldPrefix != null)
                 _itemSystem.SetHeldPrefix(ent.Owner, null, false, itemComp);

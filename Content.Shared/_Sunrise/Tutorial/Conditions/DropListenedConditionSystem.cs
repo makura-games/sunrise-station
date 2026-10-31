@@ -1,4 +1,4 @@
-﻿using Content.Shared._Sunrise.Tutorial.Components;
+using Content.Shared._Sunrise.Tutorial.Components;
 using Content.Shared.Interaction.Events;
 using Robust.Shared.Timing;
 
@@ -9,7 +9,8 @@ namespace Content.Shared._Sunrise.Tutorial.Conditions;
 /// </summary>
 public sealed partial class DropListenedConditionSystem : EventListenedConditionSystemBase<DropListenedCondition>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -18,10 +19,7 @@ public sealed partial class DropListenedConditionSystem : EventListenedCondition
 
     private void OnDropped(Entity<TutorialObservableComponent> ent, ref DroppedEvent args)
     {
-        if (_timing.ApplyingState)
-            return;
-
-        if (!ent.Comp.Observers.Contains(args.User))
+        if (_timing.ApplyingState || !ent.Comp.Observers.Contains(args.User))
             return;
 
         RecordEvent(args.User, DefaultKey, ent);
