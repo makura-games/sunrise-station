@@ -30,7 +30,7 @@ public sealed partial class PlaytimeTopManager
     private ISawmill _sawmill = default!;
 
     private const int TopCount = 20;
-    private readonly TimeSpan _updateRate = TimeSpan.FromMinutes(1);
+    private readonly TimeSpan _updateRate = TimeSpan.FromMinutes(10);
     private TimeSpan _nextUpdate = TimeSpan.Zero;
     private bool _isUpdating;
     private bool _hasInitialLoad;

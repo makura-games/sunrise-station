@@ -1,4 +1,4 @@
-﻿<tabs1:ExtraTab xmlns="https://spacestation14.io"
+<tabs1:ExtraTab xmlns="https://spacestation14.io"
                  xmlns:ui="clr-namespace:Content.Client.Options.UI"
                  xmlns:tabs1="clr-namespace:Content.Client._Sunrise.Options.UI.Tabs">
     <BoxContainer Orientation="Vertical">
@@ -30,6 +30,8 @@
                 <CheckBox Name="TtsClientCheckBox" Text="{Loc 'ui-options-tts-enabled'}" />
                 <CheckBox Name="TtsClientCheckBoxQueue" Text="{Loc 'ui-options-tts-queue'}" />
                 <CheckBox Name="TtsRadioGhostCheckBox" Text="{Loc 'ui-options-tts-radio-ghost-enabled'}" />
+                <CheckBox Name="TtsLobbyOthersCheckBox" Text="{Loc 'ui-options-tts-lobby-others-enabled'}" />
+                <CheckBox Name="TtsAdminChatCheckBox" Text="{Loc 'ui-options-tts-admin-chat-enabled'}" />
                 <ui:OptionSlider Name="SliderTts" Title="{Loc 'ui-options-tts-volume'}" />
                 <ui:OptionSlider Name="SliderTtsRadio" Title="{Loc 'ui-options-tts-radio-volume'}" />
                 <CheckBox Name="TapePlayerClientCheckBox" Text="{Loc 'ui-options-tape-player-enabled'}" />
