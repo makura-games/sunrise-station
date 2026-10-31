@@ -12,7 +12,7 @@ using Robust.Client.State;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Audio;
-using Content.Shared.GameTicking.Prototypes;
+using Content.Shared.GameTicking.Prototypes; // Sunrise-Edit
 
 namespace Content.Client.GameTicking.Managers
 {
@@ -31,7 +31,7 @@ namespace Content.Client.GameTicking.Managers
         [ViewVariables] public bool AreWeReady { get; private set; }
         [ViewVariables] public bool IsGameStarted { get; private set; }
         [ViewVariables] public ResolvedSoundSpecifier? RestartSound { get; private set; }
-        [ViewVariables] public ProtoId<LobbyBackgroundPrototype>? LobbyBackground => null;
+        [ViewVariables] public ProtoId<LobbyBackgroundPrototype>? LobbyBackground => null; // Sunrise-Edit
 
         // Sunrise-Start
         [ViewVariables] public string? LobbyType { get; private set; }

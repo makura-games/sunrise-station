@@ -137,13 +137,13 @@
   - "#FF7F00"
   - "#FFFF00"
   - "#00FF00"
-  - "#3B82F6"
-  - "#A855F7"
+  - "#5a85ff"
+  - "#b068ff"
 
 - type: sponsorOocColor
   id: GradientSunset
   colors:
-  - "#B845B4"
+  - "#d05ccb"
   - "#E94057"
   - "#F27121"
 
@@ -172,7 +172,7 @@
   id: GradientNeon
   colors:
   - "#FF1493"
-  - "#B44CFF"
+  - "#b95cf0"
   - "#00FFFF"
 
 - type: sponsorOocColor
@@ -208,7 +208,7 @@
   colors:
   - "#00FFFF"
   - "#FF00FF"
-  - "#BA68C8"
+  - "#c85ee0"
 
 - type: sponsorOocColor
   id: GradientCottonCandy

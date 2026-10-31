@@ -14,7 +14,7 @@ public sealed class MsgPlaytimeTop : NetMessage
 {
     public override MsgGroups MsgGroup => MsgGroups.EntityEvent;
 
-    /// <summary>Top of currently connected players by overall playtime.</summary>
+    /// <summary>Top players over the last 24 hours.</summary>
     public List<PlaytimeTopEntry> OnlineNow { get; set; } = [];
 
     /// <summary>Top players over the last 7 days.</summary>

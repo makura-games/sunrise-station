@@ -25,7 +25,7 @@ public abstract partial class ServerDbContext
 
         modelBuilder.Entity<PlayTimeSession>()
             .HasOne(s => s.Player)
-            .WithMany(p => p.PlayTimeSessions)
+            .WithMany()
             .HasForeignKey(s => s.PlayerId)
             .HasPrincipalKey(p => p.UserId)
             .IsRequired();
@@ -212,10 +212,6 @@ public class TutorialCompletion
     public DateTimeOffset CompletedAt { get; set; }
     public int CompletionCount { get; set; } = 1;
     public double? AccountAgeDays { get; set; }
-}
-public partial class Player
-{
-    public List<PlayTimeSession> PlayTimeSessions { get; set; } = default!;
 }
 
 [Table("play_time_session")]
