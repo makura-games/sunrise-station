@@ -293,10 +293,14 @@ internal sealed partial class ChatManager : IChatManager
 
     private void SendOOC(ICommonSession player, string message)
     {
+        // Sunrise edit start - перенесено в ChatManager.Sunrise.cs
+        /*
         static string FormatTitledDisplayName(string title, string playerName)
         {
             return $"\\[{FormattedMessage.EscapeText(title)}\\] {playerName}";
         }
+        */
+        // Sunrise edit end
 
         if (_adminManager.IsAdmin(player))
         {
@@ -340,7 +344,7 @@ internal sealed partial class ChatManager : IChatManager
             if (_sponsorsManager.IsAllowedLobbyTts(player.UserId) && _playerCacheManager.GetLobbyTtsEnabled(player.UserId))
             {
                 var ttsSystem = _entityManager.System<TTSSystem>();
-                ttsSystem.PlayLobbyTTS(player, message);
+                _ = ttsSystem.PlayLobbyTTS(player, message);
             }
         }
         // Sunrise added end
@@ -381,7 +385,7 @@ internal sealed partial class ChatManager : IChatManager
 
         // Sunrise added start - озвучка сообщений в админ-чате
         var adminTtsSystem = _entityManager.System<TTSSystem>();
-        adminTtsSystem.PlayAdminChatTTS(player, message);
+        _ = adminTtsSystem.PlayAdminChatTTS(player, message);
         // Sunrise added end
     }
 
