@@ -1,0 +1,29 @@
+<PanelContainer xmlns="https://spacestation14.io"
+                xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+                Name="BackgroundColorPanel"
+                StyleClasses="PanelDark"
+                MouseFilter="Stop">
+    <BoxContainer Orientation="Vertical">
+        <customControls:HSeparator/>
+        <BoxContainer Orientation="Horizontal"
+                     HorizontalExpand="True"
+                     Margin="5 2">
+            <customControls:VSeparator/>
+            <Label Name="UsernameLabel"
+                   SizeFlagsStretchRatio="3"
+                   HorizontalExpand="True"
+                   StyleClasses="LabelSubText"
+                   Align="Center"
+                   ClipText="True"/>
+            <customControls:VSeparator/>
+            <Label Name="HoursLabel"
+                   SizeFlagsStretchRatio="2"
+                   HorizontalExpand="True"
+                   StyleClasses="LabelSubText"
+                   Align="Center"
+                   ClipText="True"/>
+            <customControls:VSeparator/>
+        </BoxContainer>
+        <customControls:HSeparator/>
+    </BoxContainer>
+</PanelContainer>

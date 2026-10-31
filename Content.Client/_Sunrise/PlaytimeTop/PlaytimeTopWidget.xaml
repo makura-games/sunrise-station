@@ -1,0 +1,28 @@
+<Control xmlns="https://spacestation14.io"
+         xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+         MinSize="300 135">
+    <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" Margin="0 4 0 0">
+        <!-- Tabs Header -->
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="0 0 0 4">
+            <Button Name="OnlineTabBtn" Text="{Loc 'lobby-playtime-top-tab-day'}" HorizontalExpand="True" ToggleMode="True"/>
+            <Button Name="WeekTabBtn" Text="{Loc 'lobby-playtime-top-tab-week'}" HorizontalExpand="True" ToggleMode="True"/>
+            <Button Name="MonthTabBtn" Text="{Loc 'lobby-playtime-top-tab-month'}" HorizontalExpand="True" ToggleMode="True"/>
+            <Button Name="AllTimeTabBtn" Text="{Loc 'lobby-playtime-top-tab-alltime'}" HorizontalExpand="True" ToggleMode="True"/>
+        </BoxContainer>
+
+        <!-- Column Titles -->
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="5 0 15 0">
+            <customControls:VSeparator/>
+            <Label Text="{Loc 'lobby-playtime-top-column-login'}" SizeFlagsStretchRatio="3" HorizontalExpand="True" Align="Center"/>
+            <customControls:VSeparator/>
+            <Label Text="{Loc 'lobby-playtime-top-column-hours'}" SizeFlagsStretchRatio="2" HorizontalExpand="True" Align="Center"/>
+            <customControls:VSeparator/>
+        </BoxContainer>
+        <customControls:HSeparator/>
+
+        <!-- Scrollable List -->
+        <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True" MinHeight="135">
+            <BoxContainer Name="EntriesList" Access="Public" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True"/>
+        </ScrollContainer>
+    </BoxContainer>
+</Control>

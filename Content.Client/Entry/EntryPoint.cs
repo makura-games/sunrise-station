@@ -4,6 +4,7 @@ using Content.Client._Sunrise;
 using Content.Client._Sunrise.Contributors;
 using Content.Client._Sunrise.Entry;
 using Content.Client._Sunrise.PlayerCache;
+using Content.Client._Sunrise.PlaytimeTop;
 using Content.Client._Sunrise.ServersHub;
 using Content.Client.Administration.Managers;
 using Content.Client.Changelog;
@@ -91,7 +92,8 @@ namespace Content.Client.Entry
         [Dependency] private ClientsidePlaytimeTrackingManager _clientsidePlaytimeManager = default!;
         [Dependency] private ClientFeedbackManager _feedbackManager = null!;
         [Dependency] private ServersHubManager _serversHubManager = default!; // Sunrise-Hub
-        [Dependency] private  ContributorsManager _contributorsManager = default!; // Sunrise-Edit
+        [Dependency] private ContributorsManager _contributorsManager = default!; // Sunrise-Edit
+        [Dependency] private PlaytimeTopManager _playtimeTopManager = default!; // Sunrise-Edit
         [Dependency] private PlayerCacheManager _playerCacheManager = default!; // Sunrise-Edit
         [Dependency] private NetTexturesManager _netTexturesManager = default!; // Sunrise-Edit
 
@@ -165,6 +167,7 @@ namespace Content.Client.Entry
 
             _serversHubManager.Initialize(); // Sunrise-Hub
             _contributorsManager.Initialize(); // Sunrise-Edit
+            _playtimeTopManager.Initialize(); // Sunrise-Edit
             _playerCacheManager.Initialize(); // Sunrise-Edit
             _netTexturesManager.Initialize(); // Sunrise-Edit
 
