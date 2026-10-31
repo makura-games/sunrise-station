@@ -21,32 +21,6 @@ namespace Content.Shared.Administration
             // Specific side code in target.
         }
 
-        // Sunrise-Start
-        [Serializable, NetSerializable]
-        public sealed class BwoinkRequestDbMessages : EntityEventArgs
-        {
-            public NetUserId UserId { get; }
-
-            public BwoinkRequestDbMessages(NetUserId userId)
-            {
-                UserId = userId;
-            }
-        }
-
-        [Serializable, NetSerializable]
-        public sealed class BwoinkTextHistoryMessage : EntityEventArgs
-        {
-            public NetUserId UserId { get; }
-            public List<BwoinkTextMessage> Messages { get; }
-
-            public BwoinkTextHistoryMessage(NetUserId userId, List<BwoinkTextMessage> messages)
-            {
-                UserId = userId;
-                Messages = messages;
-            }
-        }
-        // Sunrise-End
-
         [Serializable, NetSerializable]
         public sealed class BwoinkTextMessage : EntityEventArgs
         {
@@ -63,7 +37,6 @@ namespace Content.Shared.Administration
             public bool PlaySound { get; }
 
             public readonly bool AdminOnly;
-
             public readonly bool DbLoad;
 
             public BwoinkTextMessage(NetUserId userId,
@@ -134,17 +107,4 @@ namespace Content.Shared.Administration
         }
     }
 
-    /// <summary>
-    ///     Sent by server to notify a client when their message was blocked due to cooldown.
-    /// </summary>
-    [Serializable, NetSerializable]
-    public sealed class BwoinkCooldownMessage : EntityEventArgs
-    {
-        public TimeSpan RemainingCooldown { get; }
-
-        public BwoinkCooldownMessage(TimeSpan remainingCooldown)
-        {
-            RemainingCooldown = remainingCooldown;
-        }
-    }
 }

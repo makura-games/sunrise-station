@@ -45,6 +45,11 @@ namespace Content.Shared.Localizations
             _loc.AddFunction(culture, "PLAYTIME", FormatPlaytime);
             _loc.AddFunction(culture, "MANY", FormatMany); // TODO: Temporary fix for MANY() fluent errors. Remove after resolve errors.
 
+            // Sunrise added start - порты функций ESCAPE из новых версий движка
+            _loc.AddFunction(culture, "ESCAPE", FormatEscape);
+            _loc.AddFunction(culture, "ESCAPE-PARAM", FormatEscapeParam);
+            // Sunrise added end
+
 
             /*
              * The following language functions are specific to the english localization. When working on your own
@@ -59,6 +64,26 @@ namespace Content.Shared.Localizations
             _loc.AddFunction(cultureEn, "NATURALPERCENT", FormatNaturalPercent); // Sunrise-Edit — функция используется в en-US guidebook.
             _loc.AddFunction(cultureEn, "LOC", FormatLoc);
         }
+
+        // Sunrise added start - реализация функций экранирования
+        private static ILocValue FormatEscape(LocArgs args)
+        {
+            if (args.Args.Count == 0)
+                return new LocValueString("");
+
+            var input = args.Args[0].Format(new LocContext());
+            return new LocValueString(FormattedMessage.EscapeText(input));
+        }
+
+        private static ILocValue FormatEscapeParam(LocArgs args)
+        {
+            if (args.Args.Count == 0)
+                return new LocValueString("");
+
+            var input = args.Args[0].Format(new LocContext());
+            return new LocValueString(FormattedMessage.EscapeText(input).Replace("\"", "\\\""));
+        }
+        // Sunrise added end
 
         private ILocValue FormatMany(LocArgs args)
         {

@@ -37,3 +37,4 @@ bwoink-message-admin-only = (Admin Only)
 bwoink-message-silent = (S)
 
 bwoink-message-name-link = (?)
+bwoink-panel-adminwho-button = Admins Online

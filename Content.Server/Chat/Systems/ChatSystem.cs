@@ -1,6 +1,10 @@
 using System.Globalization;
 using Content.Shared._Sunrise.Antags.Abductor;
 using Content.Shared._Sunrise.CollectiveMind;
+using Content.Shared._Sunrise.Messenger;
+using Content.Sunrise.Interfaces.Shared;
+using Content.Server._Sunrise.Chat;
+using Content.Server._Sunrise.Chat.Sanitization;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
@@ -49,6 +53,8 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private ExamineSystemShared _examineSystem = default!;
     [Dependency] private EntityQuery<GhostHearingComponent> _ghostHearingQuery = default!;
 
+    private ISharedSponsorsManager? _sponsorsManager; // Sunrise-Edit - логика эмодзи для спонсоров
+
     private bool _loocEnabled = true;
     private bool _deadLoocEnabled;
     private bool _critLoocEnabled;
@@ -59,6 +65,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     public override void Initialize()
     {
         base.Initialize();
+        IoCManager.Instance!.TryResolveType(out _sponsorsManager);
 
         Subs.CVar(_configurationManager, CCVars.LoocEnabled, OnLoocEnabledChanged, true);
         Subs.CVar(_configurationManager, CCVars.DeadLoocEnabled, OnDeadLoocEnabledChanged, true);
@@ -289,6 +296,9 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (!TryProcessSunriseChatMessage(source, ref message, oocChatType: type))
             return;
         // Sunrise added end
+
+        var emojiSystem = EntityManager.System<SharedEmojiSystem>();
+        message = emojiSystem.FilterBlockedEmojis(message, player!.UserId, _sponsorsManager);
 
         message = SanitizeInGameOOCMessage(message);
 

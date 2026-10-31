@@ -1,0 +1,18 @@
+<BoxContainer
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Content.Client._Sunrise.UserInterface.Controls"
+    Orientation="Vertical"
+    HorizontalExpand="True">
+    <RichTextLabel Name="AHelpDescLabel" Text="{Loc 'help-choice-ahelp-desc-label'}" Visible="False" Access="Public"/>
+    <controls:SunriseOutputPanel Name="TextOutput" VerticalExpand="true" Access="Public" />
+    <RichTextLabel Name="TypingIndicator" Access="Public" />
+    <BoxContainer Orientation="Horizontal" SeparationOverride="4" HorizontalExpand="True">
+        <Button Name="EmojiButton" Access="Public" SetWidth="30" ToolTip="{Loc 'messenger-emoji-button-tooltip'}" />
+        <HistoryLineEdit Name="SenderLineEdit" HorizontalExpand="True" />
+    </BoxContainer>
+    <RichTextLabel Name="RelayedToDiscordLabel" Text="{Loc 'bwoink-system-messages-being-relayed-to-discord'}" Access="Public" Visible="False" />
+    <BoxContainer Orientation="Horizontal" Margin="0 4 0 0">
+        <Button Name="AdminWhoButton" Text="{Loc 'admin-who-button'}" Visible="False" Access="Public"/>
+    </BoxContainer>
+</BoxContainer>

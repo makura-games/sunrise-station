@@ -6,6 +6,7 @@ using Content.Client._Sunrise.Lobby.UI;
 using Content.Client.Administration.Managers;
 using Content.Client.Administration.Systems;
 using Content.Client.Administration.UI.Bwoink;
+using Content.Client._Sunrise.Administration.UI.Bwoink;
 using Content.Client.Gameplay;
 using Content.Client.Lobby;
 using Content.Client.Lobby.UI;
@@ -62,7 +63,7 @@ public sealed partial class AHelpUIController: UIController, IOnSystemChanged<Bw
         SubscribeNetworkEvent<BwoinkPlayerTypingUpdated>(PeopleTypingUpdated);
 
         // Sunrise-Start
-        SubscribeNetworkEvent<SharedBwoinkSystem.BwoinkTextHistoryMessage>(OnBwoinkTextHistoryMessage);
+        SubscribeNetworkEvent<BwoinkTextHistoryMessage>(OnBwoinkTextHistoryMessage);
         // Sunrise-End
 
         _adminManager.AdminStatusUpdated += OnAdminStatusUpdated;
@@ -182,7 +183,7 @@ public sealed partial class AHelpUIController: UIController, IOnSystemChanged<Bw
     }
 
     // Sunrise-Start
-    private void OnBwoinkTextHistoryMessage(SharedBwoinkSystem.BwoinkTextHistoryMessage args, EntitySessionEventArgs session)
+    private void OnBwoinkTextHistoryMessage(BwoinkTextHistoryMessage args, EntitySessionEventArgs session)
     {
         EnsureUIHelper();
         UIHelper?.Clean(args.UserId);
@@ -373,7 +374,7 @@ public sealed class AdminAHelpUIHandler : IAHelpUIHandler
         _bwoinkSystem = bwoinkSystem; // Sunrise-Edit
         _ownerId = owner;
     }
-    private readonly Dictionary<NetUserId, BwoinkPanel> _activePanelMap = new();
+    private readonly Dictionary<NetUserId, SunriseBwoinkPanel> _activePanelMap = new();
     public bool IsAdmin => true;
     public bool IsOpen => Window is { Disposed: false, IsOpen: true } || ClydeWindow is { IsDisposed: false };
     public bool EverOpened;
@@ -527,14 +528,14 @@ public sealed class AdminAHelpUIHandler : IAHelpUIHandler
         }
     }
 
-    public BwoinkPanel EnsurePanel(NetUserId channelId)
+    public SunriseBwoinkPanel EnsurePanel(NetUserId channelId)
     {
         EnsureControl();
 
         if (_activePanelMap.TryGetValue(channelId, out var existingPanel))
             return existingPanel;
 
-        _activePanelMap[channelId] = existingPanel = new BwoinkPanel(text => SendMessageAction?.Invoke(channelId, text, Control?.PlaySound.Pressed ?? true, Control?.AdminOnly.Pressed ?? false));
+        _activePanelMap[channelId] = existingPanel = new SunriseBwoinkPanel(text => SendMessageAction?.Invoke(channelId, text, Control?.PlaySound.Pressed ?? true, Control?.AdminOnly.Pressed ?? false)); // Sunrise-Edit
         existingPanel.InputTextChanged += text => InputTextChanged?.Invoke(channelId, text);
         existingPanel.Visible = false;
         if (!Control!.BwoinkArea.Children.Contains(existingPanel))
@@ -542,7 +543,7 @@ public sealed class AdminAHelpUIHandler : IAHelpUIHandler
 
         return existingPanel;
     }
-    public bool TryGetChannel(NetUserId ch, [NotNullWhen(true)] out BwoinkPanel? bp) => _activePanelMap.TryGetValue(ch, out bp);
+    public bool TryGetChannel(NetUserId ch, [NotNullWhen(true)] out SunriseBwoinkPanel? bp) => _activePanelMap.TryGetValue(ch, out bp);
 
     private void SelectChannel(NetUserId uid)
     {
@@ -578,7 +579,7 @@ public sealed class UserAHelpUIHandler : IAHelpUIHandler
     public bool IsAdmin => false;
     public bool IsOpen => _window is { Disposed: false, IsOpen: true };
     private DefaultWindow? _window;
-    private BwoinkPanel? _chatPanel;
+    private SunriseBwoinkPanel? _chatPanel;
     private bool _discordRelayActive;
     public bool LoadDb;
 
@@ -670,7 +671,7 @@ public sealed class UserAHelpUIHandler : IAHelpUIHandler
     {
         if (_window is { Disposed: false })
             return false;
-        _chatPanel = new BwoinkPanel(text => SendMessageAction?.Invoke(_ownerId, text, true, false));
+        _chatPanel = new SunriseBwoinkPanel(text => SendMessageAction?.Invoke(_ownerId, text, true, false));
         // Sunrise-Start
         _chatPanel.AHelpDescLabel.Visible = true;
         _chatPanel.AdminWhoButton.Visible = true;
