@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Content.Server._Sunrise.Humanoid;
 
 [RegisterComponent, Access(typeof(HumanoidPhysicalStatsSystem))]

@@ -1,6 +1,9 @@
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.CCVar;
 
+
+using TutorialUIController = Content.Client._Sunrise.Tutorial.TutorialWindow.TutorialUIController;
+
 namespace Content.Client._Sunrise.Lobby.UI;
 
 public sealed partial class SunriseLobbyGui
@@ -11,6 +14,9 @@ public sealed partial class SunriseLobbyGui
 
     private void SetupButtonsBinding()
     {
+        TutorialButton.OnPressed += _ =>
+            UserInterfaceManager.GetUIController<TutorialUIController>().ToggleTutorial();
+
         SetupHeaderHoverAndClick(ServersHubHeader, ServersHubHider, () => SetServersHubExpanded(!ServersHubContent.Visible));
         SetupHeaderHoverAndClick(ContributorsHeader, ContributorsHider, () => SetContributorsExpanded(!ContributorsContent.Visible));
         SetupHeaderHoverAndClick(PlaytimeTopHeader, PlaytimeTopHider, () => SetPlaytimeTopExpanded(!PlaytimeTopContent.Visible));

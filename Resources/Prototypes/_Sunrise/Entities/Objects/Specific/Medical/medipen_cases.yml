@@ -1,0 +1,157 @@
+- type: entity
+  name: Medipen case
+  description: A small medipen case. Saves a lot of space!
+  parent: BaseStorageItem
+  id: MedipenCaseBase
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+      - map: [ base ]
+        state: icon
+  - type: Storage
+    whitelist:
+      components:
+        - Injector
+    grid:
+    - 0,0,2,1
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,0
+    storedOffset: 0,1
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 150
+  - type: Tag
+    tags:
+    - MedipenCase
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        base:
+          True: { state: icon-open }
+          False: { state: icon }
+  - type: Appearance
+
+- type: entity
+  parent: MedipenCaseBase
+  id: MedipenCaseBaseExtended
+  abstract: true
+  components:
+  - type: Storage
+    whitelist:
+      components:
+        - Injector
+    grid:
+    - 0,0,3,1
+
+- type: entity
+  parent: MedipenCaseBaseExtended
+  id: MedipenCaseBlueShield
+  suffix: Blue Shield Officer
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/blue_shield_officer.rsi
+    state: icon
+  - type: Item
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/blue_shield_officer.rsi
+
+- type: entity
+  parent: MedipenCaseBase
+  id: MedipenCaseBrigmedic
+  suffix: Brigmedic
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/brigmedic.rsi
+    state: icon
+  - type: Item
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/brigmedic.rsi
+
+- type: entity
+  parent: MedipenCaseBaseExtended
+  id: MedipenCaseChiefMedicalOfficer
+  suffix: Chief Medical Officer
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/chief_medical_officer.rsi
+    state: icon
+  - type: Item
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/chief_medical_officer.rsi
+
+- type: entity
+  parent: MedipenCaseBaseExtended
+  id: MedipenCaseERTMedic
+  suffix: ERT Medic
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/ert_medic.rsi
+    state: icon
+  - type: Item
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/ert_medic.rsi
+
+- type: entity
+  parent: MedipenCaseBase
+  id: MedipenCaseMedic
+  suffix: Medic
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/medic.rsi
+    state: icon
+  - type: Item
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/medic.rsi
+
+- type: entity
+  parent: MedipenCaseBase
+  id: MedipenCaseMiner
+  suffix: Miner
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/miner.rsi
+    state: icon
+  - type: Item
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/miner.rsi
+
+- type: entity
+  parent: MedipenCaseBase
+  id: MedipenCaseParamedic
+  suffix: Paramedic
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/paramedic.rsi
+    state: icon
+  - type: Item
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/paramedic.rsi
+
+- type: entity
+  parent: MedipenCaseBase
+  id: MedipenCasePirate
+  suffix: Pirate
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/pirate.rsi
+    state: icon
+  - type: Item
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/pirate.rsi
+
+- type: entity
+  parent: MedipenCaseBase
+  id: MedipenCaseSalvage
+  suffix: Salvage
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/salvage.rsi
+    state: icon
+  - type: Item
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/salvage.rsi
+
+- type: entity
+  parent: MedipenCaseBaseExtended
+  id: MedipenCaseSyndicate
+  suffix: Syndicate
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/syndicate.rsi
+    state: icon
+  - type: Item
+    sprite: _Sunrise/Entities/Objects/Specific/Medical/MedipenCases/syndicate.rsi

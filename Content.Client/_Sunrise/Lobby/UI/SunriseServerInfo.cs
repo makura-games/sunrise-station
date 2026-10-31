@@ -9,7 +9,7 @@ namespace Content.Client._Sunrise.Lobby.UI;
 [GenerateTypedNameReferences]
 public sealed partial class SunriseServerInfo : Control
 {
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     public SunriseServerInfo()
     {

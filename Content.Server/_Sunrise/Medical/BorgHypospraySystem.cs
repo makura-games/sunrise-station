@@ -12,11 +12,10 @@ namespace Content.Server._Sunrise.Medical;
 /// <summary>
 /// System for handling borg hypospray announcements
 /// </summary>
-public sealed class BorgHypospraySystem : EntitySystem
+public sealed partial class BorgHypospraySystem : EntitySystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -66,7 +65,7 @@ public sealed class BorgHypospraySystem : EntitySystem
         var mainReagent = solution.Contents.OrderByDescending(r => r.Quantity).First();
         reagentId = mainReagent.Reagent;
 
-        return _prototypeManager.TryIndex(reagentId.Prototype, out reagentProto);
+        return ProtoMan.TryIndex(reagentId.Prototype, out reagentProto);
     }
 
     /// <summary>

@@ -11,11 +11,11 @@ namespace Content.Client._Sunrise.Sandbox.Transparency.Systems;
 /// <summary>
 /// Controls the mapping transparency overlay and its UI-facing settings.
 /// </summary>
-public sealed class MappingTransparencySystem : EntitySystem
+public sealed partial class MappingTransparencySystem : EntitySystem
 {
-    [Dependency] private readonly IClientAdminManager _admin = default!;
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
+    [Dependency] private IClientAdminManager _admin = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
 
     /// <summary>
     /// Lowest transparency percentage accepted by the overlay controls.

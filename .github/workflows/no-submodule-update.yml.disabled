@@ -1,0 +1,20 @@
+#name: No submodule update checker
+
+#on:
+#  pull_request:
+#    paths:
+#      - 'RobustToolbox'
+
+# Sunrise added start - отменяем устаревший запуск этой проверки для того же PR
+#concurrency:
+#  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+#  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+# Sunrise added end
+
+#jobs:
+#  this_aint_right:
+#    name: Submodule update in pr found
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Fail
+#        run: exit 1

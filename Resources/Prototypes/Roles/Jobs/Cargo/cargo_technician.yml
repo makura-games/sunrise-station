@@ -6,7 +6,6 @@
   startingGear: CargoTechGear
   icon: "JobIconCargoTechnician"
   supervisors: job-supervisors-qm
-  displayWeight: 0  # Sunrise
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-handyman

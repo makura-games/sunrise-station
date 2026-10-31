@@ -11,7 +11,6 @@ using Content.Server.Explosion.EntitySystems;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Components;
-using Content.Server.StationRecords.Systems;
 using Content.Server.Store.Systems;
 using Content.Shared.Access.Systems;
 using Content.Shared.GameTicking.Components;
@@ -43,30 +42,31 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Text;
+using Content.Shared.StationRecords.Systems;
 
 namespace Content.Server.GameTicking.Rules;
 
 public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
-    [Dependency] private readonly SharedJobSystem _jobs = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
-    [Dependency] private readonly SharedStationSystem _station = default!;
-    [Dependency] private readonly StationRecordsSystem _records = default!;
-    [Dependency] private readonly StoreSystem _store = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly ExplosionSystem _explosions = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private EmergencyShuttleSystem _emergency = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
+    [Dependency] private SharedJobSystem _jobs = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private RoundEndSystem _roundEndSystem = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private SharedRoleSystem _roles = default!;
+    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private StationRecordsSystem _records = default!;
+    [Dependency] private StoreSystem _store = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private ExplosionSystem _explosions = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
     private static readonly ProtoId<TagPrototype> NukeOpsUplinkTagPrototype = "NukeOpsUplink";
@@ -254,7 +254,7 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
             }
 
             // Sunrise edit start - replace instant end of round with calling/accelerating evac shuttle
-            if (GameTicker.IsGameRuleActive(NukeopsGameRule))
+            if (GameTicker.IsGameRuleActive(NukeopsGameRule)) // If it's Nukeops then end the round on any detonation
             {
                 _roundEndSystem.ForceSetCountdown(TimeSpan.FromSeconds(10), cantRecall: true);
             }
@@ -334,14 +334,14 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
 
         if (_antag.AllAntagsAlive(ent.Owner))
         {
-            SetWinType(ent, WinType.OpsMinor);
             ent.Comp.WinConditions.Add(WinCondition.AllNukiesAlive);
-            return;
         }
-
-        ent.Comp.WinConditions.Add(_antag.AnyAliveAntags(ent.Owner)
-            ? WinCondition.SomeNukiesAlive
-            : WinCondition.AllNukiesDead);
+        else
+        {
+            ent.Comp.WinConditions.Add(_antag.AnyAliveAntags(ent.Owner)
+                ? WinCondition.SomeNukiesAlive
+                : WinCondition.AllNukiesDead);
+        }
 
         var diskAtCentCom = false;
         var diskQuery = AllEntityQuery<NukeDiskComponent, TransformComponent>();
@@ -356,7 +356,6 @@ public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleCompon
         }
 
         // If the disk is currently at Central Command, the crew wins - just slightly.
-        // This also implies that some nuclear operatives have died.
         SetWinType(ent,
             diskAtCentCom
             ? WinType.CrewMinor

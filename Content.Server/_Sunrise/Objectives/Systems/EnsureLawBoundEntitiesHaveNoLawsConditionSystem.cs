@@ -8,20 +8,17 @@ using Robust.Shared.Player;
 
 namespace Content.Server._Sunrise.Objectives.Systems;
 
-public sealed class EnsureLawBoundEntitiesHaveNoLawsConditionSystem : EntitySystem
+public sealed partial class EnsureLawBoundEntitiesHaveNoLawsConditionSystem : EntitySystem
 {
-    [Dependency] private readonly SiliconLawSystem _siliconLaw = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    private EntityQuery<ActorComponent> _actorQuery;
-    private EntityQuery<SiliconLawBoundComponent> _lawBoundQuery;
-    private EntityQuery<SiliconLawProviderComponent> _lawProviderQuery;
+    [Dependency] private SiliconLawSystem _siliconLaw = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
+    [Dependency] private EntityQuery<SiliconLawBoundComponent> _lawBoundQuery = default!;
+    [Dependency] private EntityQuery<SiliconLawProviderComponent> _lawProviderQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        _actorQuery = GetEntityQuery<ActorComponent>();
-        _lawBoundQuery = GetEntityQuery<SiliconLawBoundComponent>();
-        _lawProviderQuery = GetEntityQuery<SiliconLawProviderComponent>();
         SubscribeLocalEvent<EnsureLawBoundEntitiesHaveNoLawsConditionComponent, ObjectiveGetProgressEvent>(OnGetProgress);
     }
 

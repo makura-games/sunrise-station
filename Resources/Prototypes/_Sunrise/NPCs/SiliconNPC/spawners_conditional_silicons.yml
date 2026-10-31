@@ -115,19 +115,3 @@
     prototypes:
     - MobRogueSiliconBossGuardianLCG
 
-- type: entity
-  name: exterminator unit spawner
-  suffix: AI, Hostile
-  id: SpawnMobRogueSiliconT3Terminator
-  parent: MarkerBase
-  components:
-  - type: Sprite
-    layers:
-      - state: red
-      - state: ai
-      - sprite: Mobs/Species/Terminator/parts.rsi
-        state: full
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRogueSiliconT3Terminator
-

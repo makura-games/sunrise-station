@@ -86,264 +86,6 @@
         knockback: 0.1
 
 - type: entity
-  name: AKM-U
-  parent: BaseWeaponRifle
-  id: WeaponRifleAKMU
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/ak74u.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Item
-    size: Huge
-    shape:
-    - 0,0,2,1
-  - type: GunWieldBonus
-    minAngle: -1
-    maxAngle: -25
-  - type: Gun
-    minAngle: 4
-    maxAngle: 50
-    fireRate: 5.5
-    angleIncrease: 3.65
-    angleDecay: 14
-    soundGunshot:
-      collection: ak47
-  - type: ChamberMagazineAmmoProvider
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineLightRifleSP
-        insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_reload.ogg
-        ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineLightRifle
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgeLightRifleSP
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgeLightRifle
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: Appearance
-  - type: Wieldable
-  - type: UseDelay
-    delay: 0.5
-
-- type: entity
-  name: AK-514
-  parent: BaseWeaponRifle
-  id: WeaponRifleAK514
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/ak514/big.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/ak514/tiny.rsi
-  - type: Item
-    size: Huge
-    shape:
-    - 0,0,2,2
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/ak514/tiny.rsi
-  - type: Gun
-    minAngle: 2.8
-    maxAngle: 26
-    angleIncrease: 1.75
-    angleDecay: 13
-    fireRate: 6  # 10 в секунду - реалистично. 5, так как сс14
-    soundGunshot:
-      collection: ak47
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineLightRifleSP
-        insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_reload.ogg
-        ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazineLightRifle
-            - MagazineCaselessRifle
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgeCaselessRifle
-        priority: 1
-        whitelist:
-          tags:
-            - CartridgeLightRifle
-            - CartridgeCaselessRifle
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: Appearance
-  - type: Wieldable
-  - type: UseDelay
-    delay: 0.5
-  - type: ChamberMagazineAmmoProvider
-    autoEject: true
-    soundRack:
-      path: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_cocked.ogg
-
-- type: entity
-  name: Famas
-  parent: BaseWeaponRifle
-  id: WeaponRifleFamas
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/famas/big.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/famas/tiny.rsi
-  - type: Item
-    size: Huge
-    shape:
-    - 0,0,2,2
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/famas/tiny.rsi
-  - type: Gun
-    minAngle: 2.85
-    maxAngle: 28
-    angleIncrease: 1.65
-    angleDecay: 18
-    fireRate: 5.25
-    burstFireRate: 12
-    selectedMode: Burst
-    availableModes:
-    - Burst
-    - FullAuto
-    soundGunshot:
-      collection: famas # Sunrise-Edit
-      params:
-        volume: 10
-    shotsPerBurst: 3
-    burstCooldown: 0.15
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineRifleSP
-        insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/Famas/famas_reload.ogg
-        ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/Famas/famas_unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazineRifle
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgeRifleSP
-        priority: 1
-        whitelist:
-          tags:
-            - CartridgeRifle
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: Appearance
-  - type: Wieldable
-  - type: UseDelay
-    delay: 0.5
-  - type: ChamberMagazineAmmoProvider
-    soundRack:
-      path: /Audio/_Sunrise/Weapons/Guns/Rifles/Famas/famas_cocked.ogg
-
-- type: entity
-  name: G-36
-  parent: BaseWeaponRifle
-  id: WeaponRifleG36
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/g36/big.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/g36/tiny.rsi
-  - type: Item
-    size: Huge
-    shape:
-    - 0,0,3,2
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/g36/tiny.rsi
-  - type: Gun
-    minAngle: 2
-    maxAngle: 25
-    angleIncrease: 1
-    angleDecay: 15
-    fireRate: 5.5
-    soundGunshot:
-      path: /Audio/_Sunrise/Weapons/Guns/Rifles/g36/g36_shot.ogg
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineRifleSP
-        insertSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/reload.ogg
-        ejectSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazineRifle
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgeRifleSP
-        priority: 1
-        whitelist:
-          tags:
-            - CartridgeRifle
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: Appearance
-  - type: Wieldable
-  - type: UseDelay
-    delay: 0.75
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 7
-    pvsIncrease: 0.7
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.85
-    sprintModifier: 0.85
-
-- type: entity
   name: M16A4
   parent: BaseWeaponRifle
   id: WeaponRifleM16A4
@@ -444,6 +186,9 @@
     price: 975
   - type: Contraband
     allowedDepartments: [ CentralCommand, Security ]
+  - type: Construction
+    graph: LecterSecurity
+    node: upgradelecter
 
 - type: entity
   name: Lecter Mk2
@@ -572,6 +317,10 @@
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/skm24/skm_shot.ogg
   - type: ChamberMagazineAmmoProvider
+    availablePrefixes:
+    - ""
+    - white
+    - green
     soundRack:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/skm24/skm_cocked.ogg
   - type: ItemSlots
@@ -605,32 +354,15 @@
 - type: entity
   parent: WeaponRifleSKM24
   id: WeaponRifleSKM24White
-  description: Cheap and reliable. Enough firepower, little accuracy. Easy to repair, hard to control during sustained. Saved is earned. Wood replaced with cheap plastic.
-  components:
-  - type: Sprite
-    scale: 0.9,0.9
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/White/big.rsi
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/White/tiny.rsi
-  - type: Item
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/White/tiny.rsi
 
 - type: entity
   parent: WeaponRifleSKM24
   id: WeaponRifleSKM24Green
-  description: Cheap and reliable. Enough firepower, little accuracy. Easy to repair, hard to control during sustained. The favorite color of low-income mercenaries and ordinary USSP members.
-  components:
-  - type: Sprite
-    scale: 0.9,0.9
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Green/big.rsi
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Green/tiny.rsi
-  - type: Item
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Green/tiny.rsi
 
 - type: entity
   parent: WeaponRifleSKM24
   id: WeaponRifleSKM24Scrap
+  suffix: Scrap
   description: Cheap and reliable. Enough firepower, little accuracy. Easy to repair, hard to control during sustained. This specimen has seen some rough stuff...and not just once.
   components:
   - type: Sprite
@@ -640,9 +372,30 @@
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Scrap/tiny.rsi
   - type: Item
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Scrap/tiny.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineLightRifleImprovised
+        insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/skm24/skm_reload.ogg
+        ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineLightRifleImprovised
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeLightRifleImprovised
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeLightRifle
+  - type: ChamberMagazineAmmoProvider
+    availablePrefixes: []
   - type: WeaponDismantleOnShoot
     dismantleDistance: 4
-    dismantleChance: 0.004 # Примерно 150-200 патронов
+    dismantleChance: 0.009 # Примерно 120-150 патронов
     selfDamage:
       types:
         Blunt: 8
@@ -657,7 +410,7 @@
       - id: RifleStock
         launchAngle: 180
         prob: 0.80
-      - id: MagazineLightRifleEmpty
+      - id: MagazineLightRifleImprovisedEmpty
         launchAngle: -90
         prob: 1
       - id: CartridgeLightRifleSP
@@ -688,6 +441,7 @@
 - type: entity
   parent: WeaponRifleSKM24Scrap
   id: WeaponRifleSKM24ScrapEmpty
+  categories: [ HideSpawnMenu ]
   components:
   - type: ItemSlots
     slots:
@@ -699,7 +453,8 @@
         priority: 2
         whitelist:
           tags:
-          - MagazineLightRifle
+          - MagazineLightRifleImprovised
+        whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
         startingItem: null
@@ -711,6 +466,7 @@
 - type: entity
   parent: WeaponRifleSKM24
   id: WeaponRifleSKM24Syndi
+  suffix: Syndicate
   description: Cheap and reliable. Enough firepower, little accuracy. Easy to repair, hard to control during sustained. Spare option if you lost all your telecrystals at the casino.
   components:
   - type: Sprite
@@ -720,10 +476,13 @@
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Syndicate/tiny.rsi
   - type: Item
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Syndicate/tiny.rsi
+  - type: ChamberMagazineAmmoProvider
+    availablePrefixes: []
 
 - type: entity
   parent: [BaseSecurityContraband, WeaponRifleSKM24]
   id: WeaponRifleSKM24Nano
+  suffix: NanoTrasen
   description: Cheap and reliable. Enough firepower, little accuracy. Easy to repair, hard to control during sustained. Money doesn't smell.
   components:
   - type: Sprite
@@ -733,6 +492,8 @@
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Nano/tiny.rsi
   - type: Item
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Nano/tiny.rsi
+  - type: ChamberMagazineAmmoProvider
+    availablePrefixes: []
 
 - type: entity
   name: SKM-28

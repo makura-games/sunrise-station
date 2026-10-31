@@ -15,9 +15,9 @@ namespace Content.Shared._Sunrise.Biocode.Systems;
 /// <summary>
 /// System that handles automatic deactivation of biocoded items when they're not in authorized user's possession.
 /// </summary>
-public abstract class BiocodeDeactivationSystem : EntitySystem
+public abstract partial class BiocodeDeactivationSystem : EntitySystem
 {
-    [Dependency] private readonly BiocodeSystem _biocodeSystem = default!;
+    [Dependency] private BiocodeSystem _biocodeSystem = default!;
 
     public override void Initialize()
     {
@@ -51,7 +51,7 @@ public abstract class BiocodeDeactivationSystem : EntitySystem
             return;
 
         // Check if the picker is authorized
-        if (_biocodeSystem.CanUse(args.Equipee, biocodeComponent.Factions))
+        if (_biocodeSystem.CanUse(args.EquipTarget, biocodeComponent.Factions))
             return;
 
         // Picker is not authorized, deactivate the item

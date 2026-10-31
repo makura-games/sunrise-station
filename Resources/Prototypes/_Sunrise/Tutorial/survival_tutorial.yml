@@ -1,0 +1,468 @@
+- type: tutorialSequence
+  id: SurvivalTutorial
+  duration: 420
+  estimatedDuration:
+    minimum: 180
+    maximum: 360
+  priority: 4
+  name: survival-tutorial-name
+  tooltip: survival-tutorial-tooltip
+  grid: /Maps/_Sunrise/Tutorials/survival_tutorial.yml
+  texture: /Textures/_Sunrise/Tutorial/survival_tutorial.png
+  playerEntity: SurvivalTutorialPlayer
+  steps:
+  - SurvivalTutWelcome
+  - SurvivalTutOpenEmergencyEquipment
+  - SurvivalTutAlertsIntro
+  - SurvivalTutOxygenWarning
+  - SurvivalTutTakeMask
+  - SurvivalTutTakeOxygenTank
+  - SurvivalTutOpenInventory
+  - SurvivalTutEquipMask
+  - SurvivalTutEnableInternals
+  - SurvivalTutOxygenRestored
+  - SurvivalTutPressureWarning
+  - SurvivalTutTakeEVA
+  - SurvivalTutEquipEVA
+  - SurvivalTutEnableEVAHelmet
+  - SurvivalTutPressureRestored
+  - SurvivalTutFinish
+  - TutorialMHelp
+
+- type: tutorialStep
+  id: SurvivalTutWelcome
+  parent: BaseTutorialStepBase
+  bubble:
+    text: survival-tut-welcome-bubble
+  chatMessage: survival-tut-welcome-chat
+  ttsMessage: survival-tut-welcome-tts
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 12
+
+- type: tutorialStep
+  id: SurvivalTutOpenEmergencyEquipment
+  parent: BaseTutorialStepBase
+  target: TutorialClosetEmergencyFilledOxygen
+  bubble:
+    text: survival-tut-open-emergency-equipment-bubble
+    attachToTarget: true
+  chatMessage: survival-tut-open-emergency-equipment-chat
+  ttsMessage: survival-tut-open-emergency-equipment-tts
+  observeRange: 12
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StorageOpenListenedCondition
+    target: TutorialClosetEmergencyFilledOxygen
+
+- type: tutorialStep
+  id: SurvivalTutAlertsIntro
+  parent: BaseTutorialStepBase
+  bubble:
+    text: survival-tut-alerts-intro-bubble
+  chatMessage: survival-tut-alerts-intro-chat
+  ttsMessage: survival-tut-alerts-intro-tts
+  uiHighlight:
+  - !type:UiByName
+    name: AlertContainer
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 15
+
+- type: tutorialStep
+  id: SurvivalTutOxygenWarning
+  parent: BaseTutorialStepBase
+  bubble:
+    text: survival-tut-oxygen-warning-bubble
+  chatMessage: survival-tut-oxygen-warning-chat
+  ttsMessage: survival-tut-oxygen-warning-tts
+  uiHighlight:
+  - !type:UiByName
+    name: AlertContainer
+  - !type:UiByAlertPrototype
+    prototype: TutorialLowOxygen
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  - !type:TutorialComponentEffect
+    removeExisting: false
+    removeOnExit: false
+    components:
+    - type: TutorialSimulatedAlert
+      alert: TutorialLowOxygen
+      severity: 2
+  conditions:
+  - !type:StepDelayCondition
+    delay: 14
+
+- type: tutorialStep
+  id: SurvivalTutTakeMask
+  parent: BaseTutorialStepBase
+  target: ClothingMaskBreath
+  bubble:
+    text: survival-tut-take-mask-bubble
+    attachToTarget: true
+  chatMessage: survival-tut-take-mask-chat
+  ttsMessage: survival-tut-take-mask-tts
+  observeRange: 12
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: ClothingMaskBreath
+  effects:
+  - !type:TutorialComponentEffect
+    removeOnExit: false
+    components:
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - ClothingMaskBreath
+      blockAllSlots: true
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - ClothingMaskBreath
+  conditions:
+  - !type:PickupListenedCondition
+    target: ClothingMaskBreath
+
+- type: tutorialStep
+  id: SurvivalTutTakeOxygenTank
+  parent: BaseTutorialStepBase
+  target: SunriseSurvivalTutorialOxygenTankFilled
+  bubble:
+    text: survival-tut-take-oxygen-tank-bubble
+    attachToTarget: true
+  chatMessage: survival-tut-take-oxygen-tank-chat
+  ttsMessage: survival-tut-take-oxygen-tank-tts
+  observeRange: 12
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: SunriseSurvivalTutorialOxygenTankFilled
+  effects:
+  - !type:TutorialComponentEffect
+    removeOnExit: false
+    components:
+    - type: TutorialOpenUiSoftLock
+      targets:
+      - SunriseSurvivalTutorialOxygenTankFilled
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseSurvivalTutorialOxygenTankFilled
+  conditions:
+  - !type:PickupListenedCondition
+    target: SunriseSurvivalTutorialOxygenTankFilled
+
+- type: tutorialStep
+  id: SurvivalTutOpenInventory
+  parent: BaseTutorialStepBase
+  bubble:
+    text: survival-tut-open-inventory-bubble
+  chatMessage: survival-tut-open-inventory-chat
+  ttsMessage: survival-tut-open-inventory-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Inventory
+  - !type:UiByName
+    name: InventoryButton
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - ClothingMaskBreath
+      - SunriseSurvivalTutorialOxygenTankFilled
+  conditions:
+  - !type:UiControlVisibleCondition
+    control: InventoryHeadSlot
+    selectors:
+    - !type:UiByName
+      name: Inventory
+    - !type:UiByName
+      name: SlotButton_head
+
+- type: tutorialStep
+  id: SurvivalTutEquipMask
+  parent: BaseTutorialStepBase
+  bubble:
+    text: survival-tut-equip-mask-bubble
+  chatMessage: survival-tut-equip-mask-chat
+  ttsMessage: survival-tut-equip-mask-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Inventory
+  - !type:UiByName
+    name: SlotButton_mask
+  effects:
+  - !type:TutorialRemoveComponentEffect
+    components:
+    - type: TutorialEquipBlockedSoftLock
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - ClothingMaskBreath
+    - type: TutorialEquipSoftLock
+      item: ClothingMaskBreath
+      slot: MASK
+  conditions:
+  - !type:EquipListenedCondition
+    target: ClothingMaskBreath
+    slot: MASK
+
+- type: tutorialStep
+  id: SurvivalTutEnableInternals
+  parent: BaseTutorialStepBase
+  bubble:
+    text: survival-tut-enable-internals-bubble
+  chatMessage: survival-tut-enable-internals-chat
+  ttsMessage: survival-tut-enable-internals-tts
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: ActionToggleInternals
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseSurvivalTutorialOxygenTankFilled
+  conditions:
+  - !type:InternalsEnabledCondition
+
+- type: tutorialStep
+  id: SurvivalTutOxygenRestored
+  parent: BaseTutorialStepBase
+  bubble:
+    text: survival-tut-oxygen-restored-bubble
+  chatMessage: survival-tut-oxygen-restored-chat
+  ttsMessage: survival-tut-oxygen-restored-tts
+  effects:
+  - !type:TutorialRemoveComponentEffect
+    components:
+    - type: TutorialSimulatedAlert
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 9
+
+- type: tutorialStep
+  id: SurvivalTutPressureWarning
+  parent: BaseTutorialStepBase
+  bubble:
+    text: survival-tut-pressure-warning-bubble
+  chatMessage: survival-tut-pressure-warning-chat
+  ttsMessage: survival-tut-pressure-warning-tts
+  uiHighlight:
+  - !type:UiByName
+    name: AlertContainer
+  - !type:UiByAlertPrototype
+    prototype: TutorialLowPressure
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  - !type:TutorialComponentEffect
+    removeExisting: false
+    removeOnExit: false
+    components:
+    - type: TutorialSimulatedAlert
+      alert: TutorialLowPressure
+      severity: 2
+  conditions:
+  - !type:StepDelayCondition
+    delay: 11
+
+- type: tutorialStep
+  id: SurvivalTutTakeEVA
+  parent: BaseTutorialStepBase
+  target: ClothingOuterSuitEmergency
+  bubble:
+    text: survival-tut-take-eva-bubble
+    attachToTarget: true
+  chatMessage: survival-tut-take-eva-chat
+  ttsMessage: survival-tut-take-eva-tts
+  observeRange: 12
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: ClothingOuterSuitEmergency
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - ClothingOuterSuitEmergency
+  conditions:
+  - !type:PickupListenedCondition
+    target: ClothingOuterSuitEmergency
+
+- type: tutorialStep
+  id: SurvivalTutEquipEVA
+  parent: BaseTutorialStepBase
+  bubble:
+    text: survival-tut-equip-eva-bubble
+  chatMessage: survival-tut-equip-eva-chat
+  ttsMessage: survival-tut-equip-eva-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Inventory
+  - !type:UiByName
+    name: SlotButton_outerClothing
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - ClothingOuterSuitEmergency
+    - type: TutorialEquipSoftLock
+      item: ClothingOuterSuitEmergency
+      slot: OUTERCLOTHING
+  conditions:
+  - !type:EquipListenedCondition
+    target: ClothingOuterSuitEmergency
+    slot: OUTERCLOTHING
+
+- type: tutorialStep
+  id: SurvivalTutEnableEVAHelmet
+  parent: BaseTutorialStepBase
+  bubble:
+    text: survival-tut-enable-eva-helmet-bubble
+  chatMessage: survival-tut-enable-eva-helmet-chat
+  ttsMessage: survival-tut-enable-eva-helmet-tts
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: ActionToggleSuitPiece
+  preconditions:
+  - !type:InventorySlotContainsCondition
+    slot: OUTERCLOTHING
+    item: ClothingOuterSuitEmergency
+  preconditionFailStep: SurvivalTutEquipEVA
+  conditions:
+  - !type:InventorySlotContainsCondition
+    slot: OUTERCLOTHING
+    item: ClothingOuterSuitEmergency
+  - !type:InventorySlotContainsCondition
+    slot: HEAD
+    item: ClothingHeadHelmetEVALarge
+
+- type: tutorialStep
+  id: SurvivalTutPressureRestored
+  parent: BaseTutorialStepBase
+  bubble:
+    text: survival-tut-pressure-restored-bubble
+  chatMessage: survival-tut-pressure-restored-chat
+  ttsMessage: survival-tut-pressure-restored-tts
+  effects:
+  - !type:TutorialRemoveComponentEffect
+    components:
+    - type: TutorialSimulatedAlert
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 11
+
+- type: tutorialStep
+  id: SurvivalTutFinish
+  parent: BaseTutorialStepBase
+  bubble:
+    text: survival-tut-finish-bubble
+  chatMessage: survival-tut-finish-chat
+  ttsMessage: survival-tut-finish-tts
+  effects:
+  - !type:TutorialRemoveComponentEffect
+    components:
+    - type: TutorialOpenUiSoftLock
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 13
+
+- type: startingGear
+  id: SurvivalTutorialPlayerGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitEngineering
+    shoes: ClothingShoesBootsWork
+    back: ClothingBackpack
+
+- type: entity
+  parent: BaseTutorialPlayer
+  id: SurvivalTutorialPlayer
+  components:
+  - type: Loadout
+    prototypes: [SurvivalTutorialPlayerGear]
+  - type: Godmode
+
+- type: entity
+  parent: OxygenTankFilled
+  id: SunriseSurvivalTutorialOxygenTankFilled
+  suffix: Training
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ActivatableUI
+    verbOnly: true
+
+- type: entity
+  id: TutorialClosetEmergencyFilledOxygen
+  parent: ClosetEmergency
+  suffix: Filled, Guaranteed Oxygen
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingMaskBreath
+        - id: ClothingOuterSuitEmergency
+        - id: SunriseSurvivalTutorialOxygenTankFilled
+        - id: ToolboxEmergencyFilled
+          prob: 0.5
+        - id: MedkitOxygenFilled
+          prob: 0.2
+        - id: WeaponFlareGun
+          prob: 0.1
+        - id: BoxMRE
+          prob: 0.1
+
+- type: alert
+  id: TutorialLowOxygen
+  icons:
+  - sprite: /Textures/Interface/Alerts/breathing.rsi
+    state: not_enough_oxy
+  name: alerts-low-oxygen-name
+  description: alerts-low-oxygen-desc
+
+- type: alert
+  id: TutorialLowPressure
+  icons:
+  - sprite: /Textures/Interface/Alerts/pressure.rsi
+    state: lowpressure1
+  - sprite: /Textures/Interface/Alerts/pressure.rsi
+    state: lowpressure2
+  maxSeverity: 2
+  name: alerts-low-pressure-name
+  description: alerts-low-pressure-desc

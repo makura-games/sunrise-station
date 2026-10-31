@@ -18,24 +18,6 @@
 
 - type: entity
   parent: ReinforcementRadio
-  id: ReinforcementRadioSyndicateCyborgReaper
-  name: syndicate reaper cyborg reinforcement radio
-  description: Call in a well armed assault cyborg, instantly!
-  suffix: NukeOps
-  components:
-  - type: GhostRole
-    name: ghost-role-information-syndicate-reaper-cyborg-name
-    description: ghost-role-information-syndicate-reaper-cyborg-description
-    rules: ghost-role-information-silicon-rules
-    raffle:
-      settings: default
-    mindRoles:
-    - MindRoleGhostRoleSilicon
-  - type: GhostRoleMobSpawner
-    prototype: PlayerBorgSyndicateReaperBattery
-
-- type: entity
-  parent: ReinforcementRadio
   id: ReinforcementRadioSyndicateCyborgAssault
   name: syndicate assault cyborg reinforcement radio
   description: Call in a well armed assault cyborg, instantly!

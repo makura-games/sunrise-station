@@ -8,11 +8,11 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._Sunrise.Movement.Pulling;
 
-public sealed class SharedPullingAnimationSystem : EntitySystem
+public sealed partial class SharedPullingAnimationSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

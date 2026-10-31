@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._Sunrise.BloodCult.UI.ListViewSelector;
 
 [GenerateTypedNameReferences]
-public partial class ListViewSelectorWindow : DefaultWindow
+public sealed partial class ListViewSelectorWindow : DefaultWindow
 {
     private readonly IPrototypeManager _prototypeManager;
     private readonly SpriteSystem _sprite;

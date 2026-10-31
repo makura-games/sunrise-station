@@ -13,10 +13,10 @@ namespace Content.Client._Sunrise.Messenger;
 /// RichText tag for displaying messenger emojis.
 /// Only allows emojis from prototypes to prevent arbitrary texture usage.
 /// </summary>
-public sealed class EmojiTag : IMarkupTagHandler
+public sealed partial class EmojiTag : IMarkupTagHandler
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
     private static SpriteSystem? _spriteSystem;
 

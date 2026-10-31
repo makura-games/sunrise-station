@@ -10,11 +10,10 @@ using Robust.Shared.Player;
 namespace Content.Client.RoundEnd;
 
 [UsedImplicitly]
-public sealed class RoundEndSummaryUIController : UIController,
+public sealed partial class RoundEndSummaryUIController : UIController,
     IOnSystemLoaded<ClientGameTicker>
 {
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private IInputManager _input = default!;
 
     private RoundEndSummaryWindow? _window;
 
@@ -41,7 +40,13 @@ public sealed class RoundEndSummaryUIController : UIController,
             return;
 
         _window = new RoundEndSummaryWindow(message.GamemodeTitle, message.RoundEndText,
-            message.RoundDuration, message.RoundId, message.AllPlayersEndInfo, message.RoundEndStats, message.StatisticEntries, EntityManager, _playerManager, message.StorytellerName, message.StorytellerHistory); // Sunrise-Edit
+            message.RoundDuration,
+            message.RoundId,
+            message.AllPlayersEndInfo,
+            message.RoundEndStats,
+            message.StatisticEntries,
+            message.StorytellerName,
+            message.StorytellerHistory); // Sunrise-Edit
     }
 
     public void OnSystemLoaded(ClientGameTicker system)

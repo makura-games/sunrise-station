@@ -8,7 +8,7 @@
   color: "#cc1a79"
   worksOnTheDead: true
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 1.0
       effects:
       - !type:HealthChange
@@ -29,7 +29,7 @@
   color: "#8A2BE2"
   worksOnTheDead: true
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 1.0
       effects:
       - !type:HealthChange
@@ -50,7 +50,7 @@
   color: "#FFFF00"
   worksOnTheDead: true
   metabolisms:
-    Medicine:
+    Bloodstream:
       metabolismRate: 1.0
       effects:
       - !type:HealthChange
@@ -58,8 +58,10 @@
         - !type:TemperatureCondition
           max: 213.0
         damage:
-          groups:
-            Brute: -6
+          types:
+            Blunt: -2
+            Slash: -2
+            Piercing: -2
 
 - type: reagent
   id: Celliminol
@@ -71,7 +73,7 @@
   color: "#81eb81"
   worksOnTheDead: true
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
         - !type:HealthChange
           conditions:
@@ -92,19 +94,21 @@
   color: "#cfc434ff"
   worksOnTheDead: true
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
         - !type:ModifyBloodLevel
           amount: 1
           conditions:
           - !type:TemperatureCondition
             max: 213.0
-        - !type:SatiateThirst
+        - !type:Satiate
+          satiationType: Thirst
           factor: 4
           conditions:
           - !type:TemperatureCondition
             max: 213.0
-        - !type:SatiateHunger
+        - !type:Satiate
+          satiationType: Hunger
           factor: 1
           conditions:
           - !type:TemperatureCondition
@@ -126,17 +130,107 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.2
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
-          groups:
-            Burn: -4
-            Brute: -4
+          types:
+            Heat: -1
+            Shock: -1
+            Cold: -1
+            Caustic: -1
+            Blunt: -1.33
+            Slash: -1.33
+            Piercing: -1.34
+
+- type: reagent
+  id: RedRum
+  parent: Vodkizine
+  name: reagent-name-redrum
+  desc: reagent-desc-redrum
+  physicalDesc: reagent-physical-desc-strong-smelling
+  flavor: rum
+  color: "#f07c42"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/rumglass.rsi
+    state: icon_empty
+  metabolisms:
+    Digestion:
+      effects:
+      - !type:Satiate
+        satiationType: Thirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.2
+    Bloodstream:
+      effects:
+      - !type:EvenHealthChange
+        damage:
+          Burn: -6
+          Brute: -10
+          Toxin: -4
+      - !type:HealthChange
+        damage:
+          types:
+            Mangleness: -1
+            Poison: -1
+            Bloodloss: -1
+            Asphyxiation: -1
+      - !type:ModifyBleed
+        amount: -2
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentCondition
+          reagent: Haloperidol
+          min: 1
+        reagent: Haloperidol
+        amount: -10
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentCondition
+          reagent: Nocturine
+          min: 1
+        reagent: Nocturine
+        amount: -10
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentCondition
+          reagent: ChloralHydrate
+          min: 1
+        reagent: ChloralHydrate
+        amount: -10
+      - !type:Emote
+        emote: Laugh
+        showInChat: true
+        probability: 0.025
+        conditions:
+        - !type:ReagentCondition
+          reagent: RedRum
+          max: 5
+      - !type:Emote
+        emote: Whistle
+        showInChat: true
+        probability: 0.025
+        conditions:
+        - !type:ReagentCondition
+          reagent: RedRum
+          max: 5
+      - !type:Emote
+        emote: Scream
+        showInChat: true
+        force: true
+        probability: 0.025
+      - !type:Emote
+        emote: Growl
+        showInChat: true
+        force: true
+        probability: 0.025

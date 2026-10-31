@@ -1,13 +1,12 @@
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Server._Sunrise.Abilities.Jump
 {
     [RegisterComponent]
     public sealed partial class JumpSkillComponent : Component
     {
-        [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-        public string ActionJumpId = "Jump";
+        [DataField]
+        public EntProtoId ActionJumpId = "Jump";
 
         [DataField]
         public float ThrowSpeed = 7F;

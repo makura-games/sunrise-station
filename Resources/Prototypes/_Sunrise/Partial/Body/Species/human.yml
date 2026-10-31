@@ -1,0 +1,55 @@
+# Displacement-карты волос для типов тела Sunrise, потерянные при переходе на NuBody.
+
+- type: !PartialOnly entity
+  id: OrganHumanHead
+  components:
+  - type: VisualOrganMarkings
+    bodyTypeMarkingsDisplacement:
+      body-fat-m:
+        Hair:
+          sizeMaps:
+            32:
+              sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
+              state: hair
+      body-fat-f:
+        Hair:
+          sizeMaps:
+            32:
+              sprite: _Sunrise/Mobs/Species/Human/Fat/displacement.rsi
+              state: hair
+      body-slim-m:
+        Hair:
+          sizeMaps:
+            32:
+              sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
+              state: hair
+      body-slim-f:
+        Hair:
+          sizeMaps:
+            32:
+              sprite: _Sunrise/Mobs/Species/Human/Slim/displacement.rsi
+              state: hair
+      body-distrofik-m:
+        Hair:
+          sizeMaps:
+            32:
+              sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
+              state: hair
+      body-distrofik-f:
+        Hair:
+          sizeMaps:
+            32:
+              sprite: _Sunrise/Mobs/Species/Human/Distrofik/displacement.rsi
+              state: hair
+      body-giga-m:
+        Hair:
+          sizeMaps:
+            32:
+              sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
+              state: hair
+      body-giga-f:
+        Hair:
+          sizeMaps:
+            32:
+              sprite: _Sunrise/Mobs/Species/Human/Giga/displacement.rsi
+              state: hair

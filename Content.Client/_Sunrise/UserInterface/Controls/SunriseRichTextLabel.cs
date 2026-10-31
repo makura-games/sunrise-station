@@ -11,9 +11,9 @@ namespace Content.Client._Sunrise.UserInterface.Controls
     /// A rich text label control that supports custom markup tags (like sponsor gradients/emojis).
     /// </summary>
     [Virtual]
-    public class SunriseRichTextLabel : Control
+    public partial class SunriseRichTextLabel : Control
     {
-        [Dependency] private readonly MarkupTagManager _tagManager = default!;
+        [Dependency] private MarkupTagManager _tagManager = default!;
 
         private FormattedMessage? _message;
         private SunriseRichTextEntry _entry;
