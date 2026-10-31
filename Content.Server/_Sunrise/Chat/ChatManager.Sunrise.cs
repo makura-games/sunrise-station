@@ -39,7 +39,12 @@ internal sealed partial class ChatManager
         var hasEmojiRights = (_sponsorsManager != null && _sponsorsManager.IsAllowedOocTitleEmoji(player.UserId)) || isAllowedAdminBypass;
 
         var selectedTitleCVar = _netConfigManager.GetClientCVar(player.Channel, SunriseCCVars.SponsorOocTitle);
-        if (!string.IsNullOrEmpty(selectedTitleCVar) && selectedTitleCVar != "@none")
+        var explicitNoneTitle = selectedTitleCVar == "@none";
+        if (explicitNoneTitle)
+        {
+            sponsorTitle = null;
+        }
+        else if (!string.IsNullOrEmpty(selectedTitleCVar))
         {
             var isAllowedTitle = false;
             if (_sponsorsManager != null && _sponsorsManager.TryGetPrototypes(player.UserId, out var prototypes))
@@ -61,16 +66,22 @@ internal sealed partial class ChatManager
         }
 
         var selectedColorCVar = _netConfigManager.GetClientCVar(player.Channel, SunriseCCVars.SponsorOocColor);
-        var isGradient = OocGradientHelper.IsGradientId(selectedColorCVar);
+        var explicitNoneColor = selectedColorCVar == "@none";
+        if (explicitNoneColor)
+        {
+            sponsorColor = null;
+        }
+
+        var isGradient = !explicitNoneColor && OocGradientHelper.IsGradientId(selectedColorCVar);
 
         if (isAllowedAdminBypass && adminData != null)
         {
-            if (string.IsNullOrEmpty(sponsorTitle) || sponsorTitle == "@none")
+            if (!explicitNoneTitle && string.IsNullOrEmpty(sponsorTitle))
             {
                 sponsorTitle = adminData.Title;
             }
 
-            if ((sponsorColor == null || selectedColorCVar == "@none") && !isGradient)
+            if (!explicitNoneColor && sponsorColor == null && !isGradient)
             {
                 var adminColorHex = adminData.HasFlag(AdminFlags.Adminhelp) ? "#ff0000" : "#800080";
                 if (Color.TryFromHex(adminColorHex, out var parsedAdminColor))
@@ -86,11 +97,17 @@ internal sealed partial class ChatManager
         }
         else
         {
-            if (!string.IsNullOrEmpty(selectedColorCVar) && selectedColorCVar != "@none" && !isGradient)
+            if (!string.IsNullOrEmpty(selectedColorCVar) && !explicitNoneColor && !isGradient)
             {
-                var isAllowedColor = false;
-                if (Color.TryFromHex(selectedColorCVar, out var parsedColor))
+                Color? parsedColor = null;
+                if (OocGradientHelper.TryResolveColor(selectedColorCVar, out var resolvedCol))
+                    parsedColor = resolvedCol;
+                else if (Color.TryFromHex(selectedColorCVar, out var hexCol))
+                    parsedColor = hexCol;
+
+                if (parsedColor != null)
                 {
+                    var isAllowedColor = false;
                     if (_sponsorsManager != null && _sponsorsManager.TryGetPrototypes(player.UserId, out var prototypes))
                     {
                         isAllowedColor = prototypes.Contains(selectedColorCVar);
@@ -99,7 +116,8 @@ internal sealed partial class ChatManager
                     if (isAllowedAdminBypass && adminData != null)
                     {
                         var adminColorHex = adminData.HasFlag(AdminFlags.Adminhelp) ? "#ff0000" : "#800080";
-                        if (selectedColorCVar.Equals(adminColorHex, StringComparison.OrdinalIgnoreCase))
+                        if (selectedColorCVar.Equals(adminColorHex, StringComparison.OrdinalIgnoreCase) ||
+                            OocGradientHelper.TryResolveColor(selectedColorCVar, out _))
                         {
                             isAllowedColor = true;
                         }
@@ -153,7 +171,7 @@ internal sealed partial class ChatManager
         }
 
         var adminTitle = _adminManager.GetAdminData(player)?.Title;
-        if (!string.IsNullOrWhiteSpace(adminTitle) && sponsorDisplayName == player.Name && sponsorColor == null)
+        if (!explicitNoneTitle && !string.IsNullOrWhiteSpace(adminTitle) && sponsorDisplayName == player.Name && sponsorColor == null)
         {
             wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message",
                 ("playerName", FormatTitledDisplayName(adminTitle, player.Name)),

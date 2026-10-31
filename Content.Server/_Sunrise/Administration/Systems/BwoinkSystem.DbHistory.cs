@@ -114,6 +114,6 @@ public partial class BwoinkSystem
     partial void OnBwoinkMessagePersisted(BwoinkTextMessage message, ICommonSession sender)
     {
         _ = _dbManager.AddAHelpMessage(sender.UserId.UserId, message.UserId.UserId, message.Text,
-            message.SentAt, message.PlaySound, message.AdminOnly);
+            DateTimeOffset.UtcNow, message.PlaySound, message.AdminOnly);
     }
 }
