@@ -1020,15 +1020,10 @@
 
 - type: entity
   parent: BaseSunriseHandsNoGlovesPirateMechArmor
-  id: ClothingHandsMechMaxim
-  suffix: Mech Maxim
+  id: ClothingHandsMechRPD
+  suffix: Mech RPD
   categories: [ HideSpawnMenu ]
   components:
-  - type: Clothing
-    clothingVisuals:
-      gloves:
-      - sprite: _Sunrise/Objects/Specific/Mech/mecha_wield.rsi
-        state: mech-wield
   - type: MeleeThrowOnHit
     distance: 1
     speed: 14
@@ -1041,6 +1036,43 @@
       types:
         Blunt: 35
         Structural: 150
+    bluntStaminaDamageFactor: 1.5
+    soundHit:
+      collection: PunchHard
+  - type: FireProtection
+    reduction: 1
+
+- type: entity
+  parent: BaseSunriseHandsNoGlovesPirateMechArmorHeavy
+  id: ClothingHandsMechMaxim
+  suffix: Mech Maxim
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    clothingVisuals:
+      gloves:
+      - sprite: _Sunrise/Objects/Specific/Mech/mecha_wield.rsi
+        state: mech-wield
+  - type: MeleeThrowOnHit
+    distance: 1
+    speed: 14
+  - type: TriggerOnMeleeHit
+    targetIsUser: true
+    triggerEveryHit: true
+  - type: KnockdownOnTrigger
+    targetUser: true
+    knockdownAmount: 1
+    autoStand: true
+    drop: false
+  - type: MeleeWeapon
+    wideAnimation: WeaponArcInvisibleNPC
+    animation: WeaponArcInvisibleNPC
+    hidden: true
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 35
+        Structural: 250
     bluntStaminaDamageFactor: 1.5
     soundHit:
       collection: PunchHard
@@ -1347,6 +1379,25 @@
 
 - type: entity
   abstract: true
+  id: PirateArmorMechArmorHeavySyndi
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.55
+        Slash: 0.55
+        Piercing: 0.2
+        Shock: 5
+        Heat: 0.75
+        Structural: 0.2
+      flatReductions:
+        Blunt: 10
+        Heat: 5
+        Slash: 10
+        Piercing: 5
+
+- type: entity
+  abstract: true
   id: PirateArmorMurmilo
   components:
   - type: Armor
@@ -1553,6 +1604,11 @@
   abstract: true
   id: BaseSunriseHandsNoGlovesPirateMechArmor
   parent: [ClothingHandsNoGloves, PirateArmorMechArmorMediumSyndi]
+
+- type: entity
+  abstract: true
+  id: BaseSunriseHandsNoGlovesPirateMechArmorHeavy
+  parent: [ClothingHandsNoGloves, PirateArmorMechArmorHeavySyndi]
 
 - type: entity
   abstract: true

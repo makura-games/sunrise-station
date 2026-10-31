@@ -210,13 +210,11 @@
     - MagazineBauer127
 #    - MagazineBauer127Penetrator
     - MagazineBoxBelt127Artillery
-#    - MagazineBauer127Blast
     - MagazineBauer127Frag
     - MagazineBauer127Emp
     - MagazineBoxBelt127Empty
 #    - MagazineBoxBelt127
     - MagazineBoxBelt127Artillery
-#    - MagazineBoxBelt127Blast
     - MagazineBoxBelt127Frag
     - MagazineBoxBelt127Emp
     #
@@ -368,7 +366,6 @@
     # .60/15mm cannon
     - MagazineBauer127
     - MagazineBauer127Penetrator
-    - MagazineBauer127Blast
     - MagazineBauer127Frag
     - MagazineBauer127Emp
     # .60/15mm auto-cannon
@@ -398,7 +395,6 @@
     # Shuttle stuff
   - ShellBlastArtillery
   - MagazineBoxBelt127Frag
-  - MagazineBoxBelt127Blast
   - MagazineBoxBelt127Emp
   - ShuttleGunQuadlingCircuitboard
   - ShuttleGunTeslaHyperionCircuitboard

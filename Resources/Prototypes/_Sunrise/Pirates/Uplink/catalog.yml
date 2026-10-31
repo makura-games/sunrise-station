@@ -1030,20 +1030,7 @@
   description: uplink-sniper-ammo-frag-desc
   productEntity: CratePirateMagazineBoxAntiMaterielFrag
   cost:
-    Doubloon: 10
-  categories:
-  - UplinkPirateAmmo
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 2
-
-- type: listing
-  id: UplinkPirateHristovAmmoBlast
-  name: uplink-pirate-ammo-hristov-blast-name
-  description: uplink-sniper-ammo-blast-desc
-  productEntity: CratePirateMagazineBoxAntiMaterielBlast
-  cost:
-    Doubloon: 12
+    Doubloon: 30
   categories:
   - UplinkPirateAmmo
   conditions:
@@ -2577,10 +2564,13 @@
   id: UplinkPirateMurmilloHardsuitCrate
   productEntity: CratePirateMurmilloHardsuit
   cost:
-    Doubloon: 60
+    Doubloon: 150
   categories:
   - UplinkPirateArmor
   restockTime: 3600
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 2
 
 - type: listing
   id: UplinkPirateSwashbucklerHardsuitCrate
@@ -2849,11 +2839,11 @@
       - SurplusBundle
 
 - type: listing
-  id: UplinkPirateDollHouseBundle
+  id: UplinkPirateKolobokBundle
   name: uplink-mech-teleporter-ussp-name
   description: uplink-mech-teleporter-ussp-desc
-  icon: { sprite: /Textures/_Sunrise/Objects/Specific/Mech/durand.rsi, state: dollhouse }
-  productEntity: CratePirateMechDollHouseBundle
+  icon: { sprite: /Textures/_Sunrise/Objects/Specific/Mech/durand.rsi, state: kolobok }
+  productEntity: CratePirateMechKolobokBundle
   cost:
     Doubloon: 300
   categories:

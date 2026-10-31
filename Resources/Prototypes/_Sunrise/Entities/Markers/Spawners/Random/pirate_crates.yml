@@ -55,7 +55,6 @@
     - CratePirateMagazineBatteryLr60
     - CratePirateMagazineBoxAntiMateriel
     - CratePirateMagazineBoxAntiMaterielAP
-    - CratePirateMagazineBoxAntiMaterielBlast
     - CratePirateMagazineBoxAntiMaterielFrag
     - CratePirateMagazineBoxImprovisedMagnum
     - CratePirateMagazineBoxImprovisedPistol
@@ -92,7 +91,7 @@
     - CratePirateMagnumAmmo
     - CratePirateMakeshiftLaser
     - CratePirateMassScanner
-    - CratePirateMechDollHouseBundle
+    - CratePirateMechKolobokBundle
     - CratePirateMechGunBundle
     - CratePirateMechYarrkeBundle
     - CratePirateMercenaryWebvest

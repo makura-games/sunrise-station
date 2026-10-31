@@ -1,6 +1,10 @@
 ent-WeaponMechCombatVindictor = навесной миниган MG-100 "Виндикатор"
     .suffix = Оружие мехов, Стрелковое, Боевое, Миниган
     .desc = { ent-BaseMechWeaponRange.desc }
+ent-SunriseWeaponMechCombatRpd = навесной РПД-М
+    .desc = Меховая модификация РПД-Ш, питающаяся напрямую от энергосистемы шагохода.
+    .suffix = Оружие мехов, Боевое, СССП
+
 ent-WeaponMechCombatChaingun = навесная цепная пушка
     .suffix = Оружие мехов, Стрелковое, Боевое
     .desc = { ent-BaseMechWeaponRange.desc }

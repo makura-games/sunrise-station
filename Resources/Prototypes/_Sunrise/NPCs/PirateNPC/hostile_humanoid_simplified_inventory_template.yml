@@ -54,7 +54,7 @@
     - name: shoes
       slotTexture: shoes
       slotFlags: FEET
-      stripTime: 999999
+      stripTime: 5
       uiWindowPos: 3,0
-      strippingWindowPos: 0,1
+      strippingWindowPos: 1,2
       displayName: Shoes

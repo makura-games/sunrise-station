@@ -116,13 +116,17 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: stripe
-      color: "#7f009b"
+      color: "#8d6425"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#8d6425"
       right:
       - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#8d6425"
 
 - type: entity
   id: MagazineBoxBelt127Frag
@@ -149,32 +153,6 @@
       - state: inhand-right-mag
       - state: inhand-right-stripe
         color: "#7ea53b"
-
-- type: entity
-  id: MagazineBoxBelt127Blast
-  name: heavy ammo belt (15mm blast)
-  parent: BaseMagazineBoxBelt127
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeAntiMaterielBlast
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#8d6425"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#8d6425"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#8d6425"
 
 - type: entity
   id: MagazineBoxBelt127Emp
@@ -249,21 +227,6 @@
 
 - type: entity
   parent: BaseSunriseMagazineBoxAntiMateriel
-  id: MagazineBoxAntiMaterielBlast
-  name: ammunition box (15mm blast)
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeAntiMaterielBlast
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: blast
-
-- type: entity
-  parent: BaseSunriseMagazineBoxAntiMateriel
   id: MagazineBoxAntiMaterielHP
   name: ammunition box (15mm hollow point)
   components:
@@ -276,3 +239,96 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+
+# region 12/7mm
+- type: entity
+  id: BaseMagazineBoxBeltLight127
+  name: 12.7mm ammo belt
+  parent: [ BaseItem, BaseSovietContraband ]
+  abstract: true
+  components:
+  - type: MultiHandedItem
+  - type: HeldSpeedModifier
+    walkModifier: 0.95
+    sprintModifier: 0.95
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifleHeavy127mm
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgeRifleHeavy127mm
+    capacity: 50
+    fillDelay: 0.1
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Boxes/heavyammobelt.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-19
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 19
+    zeroVisible: false
+  - type: Appearance
+  - type: Item
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Boxes/heavyammobelt.rsi
+    layers:
+    - state: icon
+    size: Large
+    shape:
+    - 0,0,2,1
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+  - type: Tag
+    tags:
+    - LightAmmoBelt127
+
+- type: entity
+  id: MagazineBoxBeltLight127Empty
+  name: 12.7mm ammo belt
+  suffix: empty
+  parent: BaseMagazineBoxBeltLight127
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      right:
+      - state: inhand-right-mag
+
+- type: entity
+  id: MagazineBoxBeltLight127
+  name: 12.7mm ammo belt
+  parent: BaseMagazineBoxBeltLight127
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifleHeavy127mm
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#8d6425"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#8d6425"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#8d6425"

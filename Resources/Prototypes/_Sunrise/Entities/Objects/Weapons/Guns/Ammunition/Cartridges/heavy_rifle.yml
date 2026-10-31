@@ -142,16 +142,21 @@
   name: cartridge (12,7mm)
   parent: BaseCartridgeRifleHeavy
   components:
+  - type: Tag
+    tags:
+    - CartridgeHeavyRifle
+    - CartridgeRifleHeavy127mm
   - type: CartridgeAmmo
     proto: BulletRifleHeavy127mm
   - type: Sprite
     scale: 0.7, 0.7
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Casings/12.7x99.rsi
     layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-      - state: tip
-        map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#977917"
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#B68F0E"
 
 # 7.62mmR cartridges
 - type: entity

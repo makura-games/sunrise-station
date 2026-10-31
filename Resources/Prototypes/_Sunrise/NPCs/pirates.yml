@@ -4288,11 +4288,18 @@
     sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
     scale: 1.08, 1.08
     layers:
-    - map: ["enum.DamageStateVisualLayers.Base"]
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: warboss
     - map: [ "enum.DamageStateVisualLayers.BaseUnshaded"]
       state: warboss-unshaded
       shader: unshaded
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: warboss-moving
+    noMovementLayers:
+      movement:
+        state: warboss
   - type: RotationVisuals
     defaultRotation: 0
     horizontalRotation: 0
@@ -4313,8 +4320,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      449: Critical
-      450: Dead
+      800: Critical
+      801: Dead
   - type: TriggerOnMobstateChange
     mobState:
     - Dead
@@ -4361,8 +4368,8 @@
   - type: Stamina
     baseCritThreshold: 9999
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.5
-    baseSprintSpeed: 2.25
+    baseWalkSpeed: 1
+    baseSprintSpeed: 1
   - type: Repairable
     fuelCost: 25
     doAfterDelay: 10
@@ -4410,7 +4417,6 @@
     maxOffset: 5
     pvsIncrease: 0.6
   - type: HellSpawnInvincibility
-  - type: HellSpawnSpiral
   - type: AutoImplant
     implants:
     - CreepyLaughImplant

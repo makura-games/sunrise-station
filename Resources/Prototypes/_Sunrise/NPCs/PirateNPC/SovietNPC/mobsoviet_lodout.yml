@@ -197,7 +197,7 @@
 - type: startingGear
   id: MobSovietGearT2Mech
   equipment:
-    gloves: ClothingHandsMechMinotaur
+    gloves: ClothingHandsMechRPD
     pocket1: GygaxTargetingElectronics
     pocket2: GygaxPeripheralsElectronics
     shoes: ClothingBackOreCrateTier2Gygax

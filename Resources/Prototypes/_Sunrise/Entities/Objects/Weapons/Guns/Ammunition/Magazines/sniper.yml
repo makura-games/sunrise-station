@@ -119,32 +119,6 @@
         color: "#7ea53b"
 
 - type: entity
-  id: MagazineBauer127Blast
-  name: magazine (15mm blast)
-  parent: BaseMagazineBauer127
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeAntiMaterielBlast
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-6
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#8d6425"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#8d6425"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#8d6425"
-
-- type: entity
   id: MagazineBauer127Emp
   name: magazine (15mm emp)
   parent: BaseMagazineBauer127

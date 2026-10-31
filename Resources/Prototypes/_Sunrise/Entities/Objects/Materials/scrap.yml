@@ -7,3 +7,102 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 1
+
+- type: entity
+  parent: BaseScrap
+  id: SunriseScrapDurandCircuitBoard
+  name: broken Durand board
+  description: A shattered circuit board from a Durand mech. Its original purpose can no longer be determined.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Materials/Scrap/Mech/durand.rsi
+    layers:
+    - state: circuit-1
+      map: [ "base" ]
+  - type: Item
+    sprite: _Sunrise/Objects/Materials/Scrap/Mech/durand.rsi
+    heldPrefix: circuit
+    size: Normal
+  - type: RandomSprite
+    available:
+    - base:
+        circuit-1: ""
+        circuit-2: ""
+        circuit-3: ""
+        circuit-4: ""
+        circuit-5: ""
+        circuit-6: ""
+        circuit-7: ""
+        circuit-8: ""
+        circuit-9: ""
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+      Glass: 200
+      SalvageTicket: 3
+  - type: Construction
+    graph: SunriseDurandCircuitBoardRepair
+    node: broken
+    deconstructionTarget: broken
+
+- type: entity
+  parent: MarkerBase
+  id: SunriseScrapDurandCircuitBoardSpawner
+  name: durand scrap spawner
+  description: Spawns a broken Durand circuit board.
+  suffix: Expedition
+  components:
+  - type: Sprite
+    layers:
+    - state: pink
+    - sprite: _Sunrise/Objects/Materials/Scrap/Mech/durand.rsi
+      state: circuit-1
+  - type: RandomSpawner
+    prototypes:
+    - SunriseScrapDurandCircuitBoard
+    chance: 1
+    offset: 0.2
+    deleteSpawnerAfterSpawn: true
+
+- type: entity
+  parent: BaseScrap
+  id: SunriseScrapKolobokArmorPlate
+  name: damaged Kolobok armor plates
+  description: Damaged armor plates from a Kolobok mech. They are no longer fit for assembly, but retain valuable metals.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Materials/Scrap/Mech/durand.rsi
+    layers:
+    - state: armor-1
+      map: [ "base" ]
+  - type: Item
+    sprite: _Sunrise/Objects/Materials/Scrap/Mech/durand.rsi
+    size: Large
+  - type: RandomSprite
+    available:
+    - base:
+        armor-1: ""
+        armor-2: ""
+        armor-3: ""
+        armor-4: ""
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 3500
+      Plasteel: 2000
+      Silver: 900
+
+- type: entity
+  id: SunriseDurandCircuitBoardRepairResultSpawner
+  name: durand repair result
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: SunriseScrapDurandCircuitBoard
+      - id: ScrapGlass
+      - !type:GroupSelector
+        children:
+        - id: DurandCentralElectronics
+        - id: DurandPeripheralsElectronics
+        - id: DurandTargetingElectronics

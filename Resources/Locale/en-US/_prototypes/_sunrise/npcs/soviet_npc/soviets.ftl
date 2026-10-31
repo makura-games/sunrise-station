@@ -52,11 +52,10 @@ ent-MobSovietT3Medic = soviet ranger medic
 
 ent-MobSovietT2Raider = soviet raider
     .desc = A hardened marine veteran carrying a high-rate submachine gun.
-ent-MobSovietT2Mech = molot
-    .desc = A light USSP mech variant with a powerful auto-shotgun.
-ent-MobSovietT3Mech = doll House
+ent-MobSovietT2Mech = Blyashanka
+    .desc = A medium four-legged USSP mech armed with twin RPD machine guns.
+ent-MobSovietT3Mech = Kolobok
     .desc = A heavy USSP mech variant with strong armor and suppressive firepower.
-
 ent-MobSovietCaptain = soviet captain
     .desc = The commander of the Soviet raid party, dangerous and disciplined.
 ent-MobSovietBear = soviet war bear

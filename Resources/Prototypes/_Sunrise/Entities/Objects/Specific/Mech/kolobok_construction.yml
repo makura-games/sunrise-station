@@ -1,0 +1,149 @@
+- type: entity
+  id: BaseKolobokPart
+  parent: BaseMechPart
+  abstract: true
+  components:
+  - type: Sprite
+    drawdepth: Items
+    noRot: false
+    sprite: _Sunrise/Objects/Specific/Mech/durand_construction.rsi
+
+- type: entity
+  id: BaseKolobokPartItem
+  parent: BaseKolobokPart
+  abstract: true
+  components:
+  - type: Item
+    size: Ginormous
+
+- type: entity
+  id: KolobokHarness
+  parent: BaseKolobokPart
+  name: kolobok harness
+  description: The core of the Kolobok.
+  components:
+  - type: Appearance
+  - type: ItemMapper
+    mapLayers:
+      kolobok_l_arm+o:
+        whitelist:
+          tags:
+          - KolobokLArm
+      kolobok_r_arm+o:
+        whitelist:
+          tags:
+          - KolobokRArm
+      kolobok_l_leg+o:
+        whitelist:
+          tags:
+          - KolobokLLeg
+      kolobok_r_leg+o:
+        whitelist:
+          tags:
+          - KolobokRLeg
+    sprite: _Sunrise/Objects/Specific/Mech/durand_construction.rsi
+  - type: ContainerContainer
+    containers:
+      mech-assembly-container: !type:Container
+  - type: MechAssemblyVisuals
+    statePrefix: kolobok
+  - type: Sprite
+    state: kolobok_harness+o
+    noRot: true
+  - type: PartAssembly
+    parts:
+      Kolobok:
+      - KolobokLArm
+      - KolobokRArm
+      - KolobokLLeg
+      - KolobokRLeg
+    containerId: mech-assembly-container
+  - type: Construction
+    graph: Kolobok
+    node: start
+
+- type: entity
+  id: KolobokLArm
+  parent: BaseKolobokPartItem
+  name: kolobok left arm
+  description: The left arm of the Kolobok. It belongs on the chassis of the mech.
+  components:
+  - type: Sprite
+    state: kolobok_l_arm
+  - type: Tag
+    tags:
+    - KolobokLArm
+
+- type: entity
+  id: KolobokRArm
+  parent: BaseKolobokPartItem
+  name: kolobok right arm
+  description: The right arm of the Kolobok. It belongs on the chassis of the mech.
+  components:
+  - type: Sprite
+    state: kolobok_r_arm
+  - type: Tag
+    tags:
+    - KolobokRArm
+
+- type: entity
+  id: KolobokLLeg
+  parent: BaseKolobokPartItem
+  name: kolobok left leg
+  description: The left leg of the Kolobok. It belongs on the chassis of the mech.
+  components:
+  - type: Sprite
+    state: kolobok_l_leg
+  - type: Tag
+    tags:
+    - KolobokLLeg
+
+- type: entity
+  id: KolobokRLeg
+  parent: BaseKolobokPartItem
+  name: kolobok right leg
+  description: The right leg of the Kolobok. It belongs on the chassis of the mech.
+  components:
+  - type: Sprite
+    state: kolobok_r_leg
+  - type: Tag
+    tags:
+    - KolobokRLeg
+
+- type: entity
+  id: KolobokChassis
+  parent: BaseKolobokPart
+  name: kolobok chassis
+  description: An in-progress construction of the Kolobok mech.
+  components:
+  - type: Appearance
+  - type: ContainerContainer
+    containers:
+      battery-container: !type:Container
+  - type: MechAssemblyVisuals
+    statePrefix: kolobok
+  - type: Sprite
+    noRot: true
+    state: kolobok_chassis
+  - type: Construction
+    graph: Kolobok
+    node: chassis
+    defaultTarget: kolobok
+
+- type: entity
+  id: KolobokArmorPlate
+  parent: BaseExosuitParts
+  name: kolobok armor plates
+  description: Heavy armor plates for the Kolobok exosuit.
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Mech/durand_construction.rsi
+    state: kolobok_armor
+  - type: Tag
+    tags:
+    - KolobokArmor
+  - type: GuideHelp
+    guides:
+    - Robotics

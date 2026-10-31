@@ -1299,9 +1299,9 @@
       maxRange: 12
 
 - type: entity
-  name: Molot
-  description: The Light Mech USSP, a communist variant of the Gygax, features light armor and a powerful auto-shotgun gun.
-  parent: [MobHostileBossBase, MobSovietVeteranChatterBase, MobPirateSparkEffectBase]
+  name: Blyashanka
+  description: A medium four-legged USSP mech armed with twin RPD machine guns.
+  parent: [MechBreakageBlyashanka, MobHostileBossBase, MobSovietVeteranChatterBase, MobPirateSparkEffectBase]
   id: MobSovietT2Mech
   components:
   - type: RadarBlip
@@ -1328,26 +1328,29 @@
   - type: Sprite
     drawdepth: Mobs
     noRot: true
-    sprite: Objects/Specific/Mech/gygax.rsi
+    sprite: _Sunrise/Objects/Specific/Mech/blyashanka.rsi
     scale: 1.08, 1.08
     layers:
-    - map: ["enum.DamageStateVisualLayers.Base"]
-      state: molot
-    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded"]
-      state: molot-unshaded
-      shader: unshaded
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
+      state: base
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: base-moving
+    noMovementLayers:
+      movement:
+        state: base
   - type: RotationVisuals
     defaultRotation: 0
     horizontalRotation: 0
   - type: DamageStateVisuals
     states:
       Alive:
-        Base: molot
-        BaseUnshaded: molot-unshaded
+        Base: base
       Critical:
-        Base: molot-broken
+        Base: base-broken
       Dead:
-        Base: molot-broken
+        Base: base-broken
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -1372,23 +1375,6 @@
     - type: RadarBlip
   - type: SpawnOnTrigger
     proto: MobSovietT2Rifle
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Heat
-        damage: 1500
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawnInContainer: true
-        spawn:
-          Ash:
-            min: 1
-            max: 1
-      - !type:BurnBodyBehavior { }
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MeatLaserImpact
   - type: PassiveDamage
     allowedStates:
     - Alive
@@ -1409,23 +1395,26 @@
     fuelCost: 25
     doAfterDelay: 10
   - type: BatteryAmmoProvider
-    proto: ShellShotgun
+    proto: CartridgeLightRifleFMJ
     fireCost: 1
   - type: BatterySelfRecharger
-    autoRechargePauseTime: 2
+    autoRechargePauseTime: 1
     autoRechargeRate: 999
   - type: Battery
-    maxCharge: 3
-    startingCharge: 3
+    maxCharge: 16
+    startingCharge: 16
   - type: Gun
-    minAngle: -15
-    maxAngle: 25
-    fireRate: 3
+    showExamineText: false
+    minAngle: 5
+    maxAngle: 50
+    angleIncrease: 3
+    angleDecay: 25
+    fireRate: 10
     selectedMode: FullAuto
     availableModes:
-      - FullAuto
+    - FullAuto
     soundGunshot:
-      path: /Audio/_Starlight/Weapons/Guns/Gunshots/minotaur.ogg
+      path: /Audio/_Sunrise/Weapons/Guns/LMGs/shot.ogg
   - type: Reflect
     reflectProb: 0.05
     spread: 360
@@ -1469,7 +1458,7 @@
 
 #region Tier 4 - Boss
 - type: entity
-  name: Doll House
+  name: Kolobok
   description: The Heavy Mech USSP, a communist variant of the Durand, features stronger armor and a powerful machine gun.
   parent: [MobHostileBossBase, MobSovietVeteranChatterBase, MobPirateSparkEffectBase]
   id: MobSovietT3Mech
@@ -1509,23 +1498,26 @@
     sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
     scale: 1.08, 1.08
     layers:
-    - map: ["enum.DamageStateVisualLayers.Base"]
-      state: dollhouse
-    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded"]
-      state: dollhouse-unshaded
-      shader: unshaded
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
+      state: kolobok
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: kolobok-moving
+    noMovementLayers:
+      movement:
+        state: kolobok
   - type: RotationVisuals
     defaultRotation: 0
     horizontalRotation: 0
   - type: DamageStateVisuals
     states:
       Alive:
-        Base: dollhouse
-        BaseUnshaded: dollhouse-unshaded
+        Base: kolobok
       Critical:
-        Base: dollhouse-broken
+        Base: kolobok-broken
       Dead:
-        Base: dollhouse-broken
+        Base: kolobok-broken
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -1534,8 +1526,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      400: Critical
-      401: Dead
+      800: Critical
+      801: Dead
   - type: TriggerOnMobstateChange
     mobState:
     - Dead
@@ -1548,10 +1540,46 @@
           Heat: 1.5
     - type: Reflect
     - type: RadarBlip
-  - type: SpawnOnTrigger
-    proto: MobSovietT2Rifle
   - type: Destructible
     thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 800
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ScrapSteel:
+            min: 2
+            max: 4
+          MobSovietT2Rifle:
+            min: 1
+            max: 1
+          MechKolobokHarnessSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokLArmSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokRArmSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokLLegSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokRLegSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokArmorPlateSpawner:
+            min: 1
+            max: 1
+          MechDurandBoardSpawnerLow:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
     - trigger:
         !type:DamageTypeTrigger
         damageType: Heat
@@ -1595,8 +1623,8 @@
   - type: Stamina
     baseCritThreshold: 9999
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.5
-    baseSprintSpeed: 2.25
+    baseWalkSpeed: 1
+    baseSprintSpeed: 1
   - type: ExplosionResistance
     damageCoefficient: 0.7
   - type: Repairable
@@ -2179,8 +2207,8 @@
     - state: red
     - sprite: _Sunrise/Structures/Decoration/banner.rsi
       state: banner_ussp
-    - sprite: Objects/Specific/Mech/gygax.rsi
-      state: molot
+    - sprite: _Sunrise/Objects/Specific/Mech/blyashanka.rsi
+      state: base
   - type: EntityTableSpawner
     offset: 1
     table: !type:NestedSelector
@@ -2221,7 +2249,7 @@
     - sprite: _Sunrise/Structures/Decoration/banner.rsi
       state: banner_ussp
     - sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
-      state: dollhouse
+      state: kolobok
   - type: EntityTableSpawner
     offset: 1
     table: !type:NestedSelector
