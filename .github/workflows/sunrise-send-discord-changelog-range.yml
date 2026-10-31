@@ -1,0 +1,33 @@
+name: Publish Discord Changelog(Manual)
+run-name: ${{ inputs.to_id != '' && 'Manual' || 'Discord' }} changelog ${{ inputs.target_id }} for ${{ github.sha }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_id:
+        description: Идентификатор цели из Tools/_sunrise/changelog/targets
+        required: true
+        type: string
+      from_id:
+        description: Первая запись включительно (пусто — с начала файла)
+        required: false
+        type: string
+      to_id:
+        description: Последняя запись включительно (пусто — до конца и новая контрольная точка)
+        required: false
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  publish:
+    uses: ./.github/workflows/sunrise-publish-discord-changelog.yml
+    with:
+      target_id: ${{ inputs.target_id }}
+      released_sha: ${{ github.sha }}
+      from_id: ${{ inputs.from_id }}
+      to_id: ${{ inputs.to_id }}
+      manual_range: true
+    secrets: inherit

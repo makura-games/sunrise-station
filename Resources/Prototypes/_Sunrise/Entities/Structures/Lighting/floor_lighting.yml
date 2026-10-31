@@ -8,11 +8,24 @@
     sprite: _Sunrise/Structures/Lighting/floor_lighting.rsi
     drawdepth: FloorObjects
     state: base
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.15
+        density: 190
+        mask:
+        - None
+        layer:
+        - TabletopMachineLayer
   - type: Construction
     graph: FloorLightFixture
     node: floorLight
   - type: PlacementReplacement
     key: floor_lights
+  - type: BloomOverlayVisuals
+    enabled: false
 
 - type: entity
   name: floor light
@@ -24,6 +37,19 @@
   - type: Sprite
     sprite: _Sunrise/Structures/Lighting/floor_lighting.rsi
     drawdepth: FloorObjects
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.15
+        density: 190
+        mask:
+        - None
+        layer:
+        - TabletopMachineLayer
+  - type: BloomOverlayVisuals
+    enabled: false
 
 - type: entity
   id: PoweredFloorlight
@@ -32,6 +58,19 @@
   - type: Sprite
     sprite: _Sunrise/Structures/Lighting/floor_lighting.rsi
     drawdepth: FloorObjects
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.15
+        density: 190
+        mask:
+        - None
+        layer:
+        - TabletopMachineLayer
+  - type: BloomOverlayVisuals
+    enabled: false
 
 - type: entity
   id: PoweredFloorlightAlwaysPowered

@@ -1,8 +1,0 @@
-- type: antag
-  id: Terminator
-  name: roles-antag-terminator-name
-  antagonist: true
-  setPreference: false
-  playTimeTracker: AntagTerminator # Sunrise-Edit
-  objective: roles-antag-terminator-objective
-  storytellerStress: 1.0 # Sunrise-Edit

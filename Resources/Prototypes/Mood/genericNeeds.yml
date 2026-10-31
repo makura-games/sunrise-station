@@ -1,10 +1,5 @@
 ﻿# Hunger
 - type: moodEffect
-  id: HungerOverfed
-  moodChange: -10
-  category: "Hunger"
-
-- type: moodEffect
   id: HungerOkay
   moodChange: 7
   category: "Hunger"
@@ -20,11 +15,6 @@
   category: "Hunger"
 
 # Thirst
-- type: moodEffect
-  id: ThirstOverHydrated
-  moodChange: -3
-  category: "Thirst"
-
 - type: moodEffect
   id: ThirstOkay
   moodChange: 7

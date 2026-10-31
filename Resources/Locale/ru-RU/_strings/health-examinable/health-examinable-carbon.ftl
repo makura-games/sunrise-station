@@ -1,5 +1,4 @@
 health-examinable-carbon-none = Видимые повреждения тела отсутствуют.
-
 health-examinable-carbon-Slash-8 = [color=yellow]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } поверхностные порезы.[/color]
 health-examinable-carbon-Slash-15 = [color=yellow]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } несколько лёгких порезов.[/color]
 health-examinable-carbon-Slash-30 = [color=orange]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } серьёзные порезы на теле.[/color]
@@ -7,7 +6,6 @@ health-examinable-carbon-Slash-50 = [color=red]{ CAPITALIZE(SUBJECT($target)) } 
 health-examinable-carbon-Slash-75 = [color=red]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } глубокие рваные раны, проходящие по всему телу![/color]
 health-examinable-carbon-Slash-100 = [color=red]{ CAPITALIZE(POSS-ADJ($target)) } тело выглядит окровавленным и изрезанным![/color]
 health-examinable-carbon-Slash-200 = [color=crimson]{ CAPITALIZE(POSS-ADJ($target)) } тело полностью изрезано в клочья![/color]
-
 health-examinable-carbon-Blunt-8 = [color=yellow]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } небольшие ушибы на теле.[/color]
 health-examinable-carbon-Blunt-15 = [color=yellow]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } несколько синяков.[/color]
 health-examinable-carbon-Blunt-30 = [color=orange]{ CAPITALIZE(SUBJECT($target)) } выглядит избито.[/color]
@@ -15,7 +13,6 @@ health-examinable-carbon-Blunt-50 = [color=red]{ CAPITALIZE(SUBJECT($target)) } 
 health-examinable-carbon-Blunt-75 = [color=red]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } сильные ушибы по всему телу![/color]
 health-examinable-carbon-Blunt-100 = [color=red]{ CAPITALIZE(POSS-ADJ($target)) } тело обезображено и сильно избито![/color]
 health-examinable-carbon-Blunt-200 = [color=crimson]{ CAPITALIZE(POSS-ADJ($target)) } тело избито до неузнаваемости![/color]
-
 health-examinable-carbon-Piercing-8 = [color=yellow]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } небольшую колотую рану.[/color]
 health-examinable-carbon-Piercing-15 = [color=yellow]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } несколько колотых ран.[/color]
 health-examinable-carbon-Piercing-30 = [color=orange]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } множество глубоких колотых ран.[/color]
@@ -23,10 +20,8 @@ health-examinable-carbon-Piercing-50 = [color=red]{ CAPITALIZE(SUBJECT($target))
 health-examinable-carbon-Piercing-75 = [color=red]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } обширные, глубокие колотые раны, покрывающие всё тело![/color]
 health-examinable-carbon-Piercing-100 = [color=red]{ CAPITALIZE(POSS-ADJ($target)) } тело полностью покрыто дырами![/color]
 health-examinable-carbon-Piercing-200 = [color=crimson]{ CAPITALIZE(POSS-ADJ($target)) } тело изуродовано множеством огромных зияющих дыр![/color]
-
 health-examinable-carbon-Asphyxiation-30 = [color=lightblue]{ CAPITALIZE(POSS-ADJ($target)) } губы синеют.[/color]
 health-examinable-carbon-Asphyxiation-75 = [color=lightblue]{ CAPITALIZE(POSS-ADJ($target)) } лицо синеет![/color]
-
 health-examinable-carbon-Heat-8 = [color=orange]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } поверхностный ожог.[/color]
 health-examinable-carbon-Heat-15 = [color=orange]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } несколько ожогов первой степени.[/color]
 health-examinable-carbon-Heat-30 = [color=orange]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } несколько ожогов второй степени.[/color]
@@ -34,14 +29,12 @@ health-examinable-carbon-Heat-50 = [color=orange]{ CAPITALIZE(SUBJECT($target)) 
 health-examinable-carbon-Heat-75 = [color=red]{ CAPITALIZE(POSS-ADJ($target)) } тело покрыто тяжёлыми ожогами третьей степени![/color]
 health-examinable-carbon-Heat-100 = [color=red]{ CAPITALIZE(POSS-ADJ($target)) } тело полностью покрыто ожогами четвёртой степени![/color]
 health-examinable-carbon-Heat-200 = [color=crimson]{ CAPITALIZE(POSS-ADJ($target)) } тело подгорело до хрустящей корочки![/color]
-
 health-examinable-carbon-Shock-15 = [color=lightgoldenrodyellow]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } лёгкое покраснение и воспаление на коже.[/color]
 health-examinable-carbon-Shock-30 = [color=lightgoldenrodyellow]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } крупное воспаление на теле.[/color]
 health-examinable-carbon-Shock-50 = [color=lightgoldenrodyellow]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } крупное воспаление и обугливание на теле.[/color]
 health-examinable-carbon-Shock-75 = [color=lightgoldenrodyellow]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } огромные, обугленные ожоги по всему телу![/color]
 health-examinable-carbon-Shock-100 = [color=lightgoldenrodyellow]{ CAPITALIZE(POSS-ADJ($target)) } тело покрыто сильными электрическими ожогами![/color]
 health-examinable-carbon-Shock-200 = [color=lightgoldenrodyellow]{ CAPITALIZE(POSS-ADJ($target)) } тело полностью обуглено электрическими ожогами![/color]
-
 health-examinable-carbon-Cold-8 = [color=lightblue]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } лёгкое обморожение кончиков пальцев.[/color]
 health-examinable-carbon-Cold-15 = [color=lightblue]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } обморожение первой степени на конечностях.[/color]
 health-examinable-carbon-Cold-30 = [color=lightblue]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } обморожение второй степени на конечностях.[/color]
@@ -49,19 +42,16 @@ health-examinable-carbon-Cold-50 = [color=lightblue]{ CAPITALIZE(SUBJECT($target
 health-examinable-carbon-Cold-75 = [color=lightblue]{ CAPITALIZE(POSS-ADJ($target)) } конечности тёмные, холодные и омертвевшие![/color]
 health-examinable-carbon-Cold-100 = [color=lightblue]{ CAPITALIZE(POSS-ADJ($target)) } тело покрыто обширным обморожением четвёртой степени![/color]
 health-examinable-carbon-Cold-200 = [color=lightblue]{ CAPITALIZE(POSS-ADJ($target)) } тело полностью промёрзло![/color]
-
 health-examinable-carbon-Caustic-8 = [color=yellowgreen]{ CAPITALIZE(POSS-ADJ($target)) } кожа выглядит слегка обесцвеченной.[/color]
 health-examinable-carbon-Caustic-15 = [color=yellowgreen]{ CAPITALIZE(POSS-ADJ($target)) } кожа выглядит раздраженной и обесцвеченной.[/color]
 health-examinable-carbon-Caustic-30 = [color=yellowgreen]{ CAPITALIZE(POSS-ADJ($target)) } кожа воспаляена и начинает шелушиться.[/color]
 health-examinable-carbon-Caustic-50 = [color=yellowgreen]{ CAPITALIZE(POSS-ADJ($target)) } кожа обожжена и отслаивается большими кусками.[/color]
 health-examinable-carbon-Caustic-75 = [color=yellowgreen]{ CAPITALIZE(POSS-ADJ($target)) } кожа сильно обожжена и стекает с тела![/color]
 health-examinable-carbon-Caustic-100 = [color=yellowgreen]{ CAPITALIZE(SUBJECT($target)) } { CONJUGATE-HAVE($target) } сильные химические ожоги по всему телу![/color]
-health-examinable-carbon-Caustic-200 = [color=yellowgreen]Most of { POSS-ADJ($target) } тело полностью расплавилось![/color]
+health-examinable-carbon-Caustic-200 = [color=yellowgreen]Большая часть { POSS-ADJ($target) } тела полностью расплавилась![/color]
 
 health-examinable-carbon-Radiation-50 = [color=orange]{ CAPITALIZE(POSS-ADJ($target)) } кожа покрыта большими волдырями.[/color]
 health-examinable-carbon-Radiation-100 = [color=orange]{ CAPITALIZE(POSS-ADJ($target)) } кожа покрыта высыпаниями и отслаивается кусками![/color]
-
 health-examinable-carbon-Mangleness-15 = [color=gray]{ CAPITALIZE(SUBJECT($target)) } выглядит устало.[/color]
 health-examinable-carbon-Mangleness-50 = [color=#505050]{ CAPITALIZE(SUBJECT($target)) } с трудом передвигает ноги от истощения![/color]
 health-examinable-carbon-Mangleness-100 = [color=#505050]{ CAPITALIZE(SUBJECT($target)) } похож на иссушенную мумию![/color]
-

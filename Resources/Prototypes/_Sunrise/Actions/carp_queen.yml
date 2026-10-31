@@ -6,9 +6,10 @@
   components:
   - type: Action
     useDelay: 3
-    icon:
-      sprite: _Sunrise/Interface/Actions/actions_carp_queen.rsi
-      state: carpQueenEgg
+  - type: Sprite
+    sprite: _Sunrise/Interface/Actions/actions_carp_queen.rsi
+    layers:
+    - state: carpQueenEgg
   - type: InstantAction
     event: !type:CarpQueenSummonActionEvent
 
@@ -20,13 +21,15 @@
   components:
   - type: Action
     useDelay: 1
-    icon:
-      sprite: _Sunrise/Interface/Actions/actions_carp_queen.rsi
-      state: stayOff
-    iconOn:
-      sprite: _Sunrise/Interface/Actions/actions_carp_queen.rsi
-      state: stay
     priority: 5
+  - type: Sprite
+    sprite: _Sunrise/Interface/Actions/actions_carp_queen.rsi
+    layers:
+    - state: stayOff
+      map: ["enum.ActionVisuals.Icon"]
+    - state: stay
+      map: ["enum.ActionVisuals.IconToggled"]
+      visible: false
   - type: InstantAction
     event: !type:CarpQueenOrderActionEvent
       type: Stay
@@ -39,13 +42,15 @@
   components:
   - type: Action
     useDelay: 1
-    icon:
-      sprite: _Sunrise/Interface/Actions/actions_carp_queen.rsi
-      state: followOff
-    iconOn:
-      sprite: _Sunrise/Interface/Actions/actions_carp_queen.rsi
-      state: follow
     priority: 6
+  - type: Sprite
+    sprite: _Sunrise/Interface/Actions/actions_carp_queen.rsi
+    layers:
+    - state: followOff
+      map: ["enum.ActionVisuals.Icon"]
+    - state: follow
+      map: ["enum.ActionVisuals.IconToggled"]
+      visible: false
   - type: InstantAction
     event: !type:CarpQueenOrderActionEvent
       type: Follow
@@ -58,13 +63,15 @@
   components:
   - type: Action
     useDelay: 1
-    icon:
-      sprite: _Sunrise/Interface/Actions/actions_carp_queen.rsi
-      state: attackOff
-    iconOn:
-      sprite: _Sunrise/Interface/Actions/actions_carp_queen.rsi
-      state: attack
     priority: 7
+  - type: Sprite
+    sprite: _Sunrise/Interface/Actions/actions_carp_queen.rsi
+    layers:
+    - state: attackOff
+      map: ["enum.ActionVisuals.Icon"]
+    - state: attack
+      map: ["enum.ActionVisuals.IconToggled"]
+      visible: false
   - type: InstantAction
     event: !type:CarpQueenOrderActionEvent
       type: Kill
@@ -77,13 +84,15 @@
   components:
   - type: Action
     useDelay: 1
-    icon:
-      sprite: _Sunrise/Interface/Actions/actions_carp_queen.rsi
-      state: looseOff
-    iconOn:
-      sprite: _Sunrise/Interface/Actions/actions_carp_queen.rsi
-      state: loose
     priority: 8
+  - type: Sprite
+    sprite: _Sunrise/Interface/Actions/actions_carp_queen.rsi
+    layers:
+    - state: looseOff
+      map: ["enum.ActionVisuals.Icon"]
+    - state: loose
+      map: ["enum.ActionVisuals.IconToggled"]
+      visible: false
   - type: InstantAction
     event: !type:CarpQueenOrderActionEvent
       type: Loose

@@ -1,14 +1,14 @@
-﻿using Content.Server.Station.Events;
+using Content.Server.Station.Events;
 using Content.Server.Station.Systems;
 using Content.Shared.GameTicking;
 using Robust.Shared.Player;
 
 namespace Content.Server._Sunrise.Roles;
 
-public sealed class RelativeJobsCountSystem : EntitySystem
+public sealed partial class RelativeJobsCountSystem : EntitySystem
 {
-    [Dependency] private readonly StationJobsSystem _jobsSystem = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private StationJobsSystem _jobsSystem = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
 
     private ISawmill _sawmill = default!;
 

@@ -1,2 +1,2 @@
-ent-ActionAddWanted = Submit a wanted
+ent-ActionAddWanted = submit a wanted
     .desc = Puts the target on the wanted list.

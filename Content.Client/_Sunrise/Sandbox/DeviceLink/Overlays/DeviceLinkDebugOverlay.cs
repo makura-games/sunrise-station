@@ -11,7 +11,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._Sunrise.Sandbox.DeviceLink.Overlays;
 
-public sealed class DeviceLinkDebugOverlay : Overlay
+public sealed partial class DeviceLinkDebugOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> OutlineShaderPrototype = "SunriseMappingAccessOutline";
     private static readonly ProtoId<ShaderPrototype> UnshadedShaderPrototype = "unshaded";
@@ -20,9 +20,9 @@ public sealed class DeviceLinkDebugOverlay : Overlay
     private const float RayHalfWidth = 0.02f;
     private const float SourceMarkerRadius = 0.1f;
 
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IEntityManager _ent = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly DeviceLinkOverlaySystem _deviceLinking;
     private readonly EntityQuery<SpriteComponent> _spriteQuery;

@@ -1,0 +1,14 @@
+exception-censored-1 = вызван `Option::unwrap()` для значения `None`
+exception-censored-2 = SyntaxError: недопустимый синтаксис
+exception-censored-3 = java.lang.NullPointerException: невозможно вызвать "com.spacestation14.ss14.Cat.meow(java.lang.String)", поскольку возвращаемое значение "com.spacestation14.robusttoolbox.Utils.getCatSound()" равно null
+exception-censored-4 = Ошибка: не удаётся открыть дисплей: x3
+exception-censored-5 = Ошибка сегментации (содержимое дампа памяти)
+exception-censored-6 = cat-speech-dataset-120
+exception-censored-7 = Не удалось найти "Robust.Shared.GameObjects.MetaDataComponent" у сущности 5233063!
+exception-censored-8 = Неперехваченная ReferenceError: meow не определён
+exception-censored-9 = TabError: несогласованное использование табуляций и пробелов в отступе
+exception-censored-10 = code.dm:3:error: meow: неопределённая процедура
+exception-censored-11 = Не удалось очистить разум: исключение
+exception-censored-12 = Медитация гуру: #0000000F.0000ACA7
+exception-censored-13 = Непредвиденный токен «w»
+exception-censored-14 = Время ожидания операции истекло: AwaitNap()

@@ -5,14 +5,12 @@
   playTimeTracker: JobCentCommOfficial
   requirements:
   - !type:DiscordRoleRequirement
-  weight: 30
   setPreference: false
   startingGear: CentCommOfficialGear
   icon: "JobIconNanotrasen"
   overrideConsoleVisibility: false # Sunrise added
   supervisors: job-supervisors-centcom
   radioBold: true
-  canBeAntag: false
   alwaysUseSpawner: true
   accessGroups:
   - AllAccess

@@ -97,77 +97,6 @@
       ]
     },
     {
-      "name": "gygax_black",
-      "directions": 4
-    },
-    {
-      "name": "gygax_black-open",
-      "delays": [
-        [
-          0.1,
-          0.05,
-          0.05,
-          0.05,
-          0.1,
-          0.05,
-          0.05,
-          0.05,
-          0.1
-        ]
-      ]
-    },
-    {
-      "name": "gygax_black-broken",
-      "delays": [
-        [
-          0.3,
-          0.5,
-          0.3,
-          0.5,
-          0.3,
-          0.4,
-          0.5,
-          0.3
-        ]
-      ]
-    },
-    {
-      "name": "gygax_white",
-      "directions": 4
-    },
-    {
-      "name": "gygax_white-open",
-      "delays": [
-        [
-          0.1,
-          0.05,
-          0.05,
-          0.05,
-          0.1,
-          0.05,
-          0.05,
-          0.05,
-          0.1
-        ]
-      ]
-    },
-    {
-      "name": "gygax_white-broken",
-      "delays": [
-        [
-          0.3,
-          0.5,
-          0.4,
-          0.3,
-          0.5,
-          0.3,
-          0.4,
-          0.5,
-          0.3
-        ]
-      ]
-    },
-    {
       "name": "darkgygax",
       "directions": 4
     },
@@ -176,35 +105,6 @@
     },
     {
       "name": "darkgygax-broken"
-    },
-    {
-      "name": "gygax_alt",
-      "directions": 4
-    },
-    {
-      "name": "gygax_alt-open"
-    },
-    {
-      "name": "gygax_alt-broken"
-    },
-    {
-      "name": "piratgygax",
-      "directions": 4
-    },
-    {
-      "name": "piratgygax-open"
-    },
-    {
-      "name": "piratgygax-broken",
-      "delays": [
-        [
-          0.3,
-          0.5,
-          0.3,
-          0.5,
-          0.3
-        ]
-      ]
     },
     {
       "name": "molot",

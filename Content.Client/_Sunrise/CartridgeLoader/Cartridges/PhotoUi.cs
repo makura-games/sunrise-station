@@ -7,7 +7,7 @@ namespace Content.Client._Sunrise.CartridgeLoader.Cartridges;
 
 public sealed partial class PhotoUi : UIFragment
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
     private PhotoUiFragment? _fragment;
 
@@ -30,8 +30,6 @@ public sealed partial class PhotoUi : UIFragment
 
             SendPhotoMessage(PhotoUiAction.CapturePhoto, userInterface);
         };
-        _fragment.OnSendPhotoToMessenger += (photoId, recipientId, groupId) =>
-            SendPhotoMessage(PhotoUiAction.SendPhotoToMessenger, userInterface, photoId: photoId, recipientId: recipientId, groupId: groupId);
         _fragment.OnRequestGallery += () =>
             SendPhotoMessage(PhotoUiAction.RequestGallery, userInterface);
 

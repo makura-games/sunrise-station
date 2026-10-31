@@ -1,5 +1,6 @@
 using Content.Server.Construction.Commands;
 using Content.Shared.Tag;
+using Content.Shared.Wall;
 
 namespace Content.Server._Sunrise.Mapping;
 
@@ -14,7 +15,7 @@ public static class TileWallProcessingHelper
         transform = default!;
 
         if (!entityManager.EntityExists(uid) ||
-            !tagSystem.HasTag(uid, TileWallsCommand.WallTag) ||
+            !entityManager.HasComponent<WallComponent>(uid) ||
             tagSystem.HasTag(uid, TileWallsCommand.ForceNoTileWallsTag) ||
             tagSystem.HasTag(uid, TileWallsCommand.DiagonalTag) ||
             !entityManager.TryGetComponent(uid, out TransformComponent? wallTransform))

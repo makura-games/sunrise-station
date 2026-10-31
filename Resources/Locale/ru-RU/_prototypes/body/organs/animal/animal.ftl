@@ -1,7 +1,5 @@
-ent-BaseAnimalOrganUnGibbable = { ent-BaseItem }
+ent-BaseAnimalOrgan = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
-ent-BaseAnimalOrgan = { ent-BaseAnimalOrganUnGibbable }
-    .desc = { ent-BaseAnimalOrganUnGibbable.desc }
 ent-OrganAnimalLungs = лёгкие
     .desc = { ent-BaseAnimalOrgan.desc }
 ent-OrganAnimalStomach = желудок

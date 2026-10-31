@@ -7,8 +7,8 @@ namespace Content.Client._Sunrise.Sandbox.DeviceLink.Systems;
 
 public sealed partial class DeviceLinkOverlaySystem
 {
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public Dictionary<EntityUid, List<EntityUid>> Rays { get; } = new();
     public Dictionary<EntityUid, Color> SourceColors { get; } = new();

@@ -1,3 +1,3 @@
-ent-WindoorSecurePirateLocked = { ent-WindoorSecure }
+ent-WindoorPirateLocked = { ent-Windoor }
     .suffix = Pirate, Locked
-    .desc = { ent-WindoorSecure.desc }
+    .desc = { ent-Windoor.desc }

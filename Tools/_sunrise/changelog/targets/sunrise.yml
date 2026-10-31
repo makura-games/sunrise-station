@@ -1,0 +1,2 @@
+changelog_file: Resources/Changelog/ChangelogSunrise.yml
+webhook_secret: CHANGELOG_DISCORD_WEBHOOK_SUNRISE
