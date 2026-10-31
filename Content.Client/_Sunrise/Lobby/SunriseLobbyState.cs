@@ -92,7 +92,6 @@ namespace Content.Client._Sunrise.Lobby
         protected override Type? LinkedScreenType { get; } = typeof(SunriseLobbyGui);
         public SunriseLobbyGui? Lobby;
         private ChangelogManager.Changelog? _combinedLobbyChangelog;
-        private bool _lobbyChangelogLoaded;
 
         protected override void Startup()
         {
@@ -175,7 +174,6 @@ namespace Content.Client._Sunrise.Lobby
             ClearLobbyAnimationState();
             ClearTransientLobbySelections();
             _combinedLobbyChangelog = null;
-            _lobbyChangelogLoaded = false;
 
             Lobby = null;
 
@@ -233,7 +231,6 @@ namespace Content.Client._Sunrise.Lobby
             _combinedLobbyChangelog = _changelogManager.MergeChangelogs(changelogs);
             Lobby.LocalChangelogBody.PopulateChangelog(_combinedLobbyChangelog);
             Lobby.IsChangelogPopulated = true;
-            _lobbyChangelogLoaded = true;
         }
 
         private void OnReadyPressed(BaseButton.ButtonEventArgs args)
