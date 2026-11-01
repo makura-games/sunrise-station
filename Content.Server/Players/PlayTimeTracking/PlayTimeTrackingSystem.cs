@@ -181,7 +181,7 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
 
     private void OnStationJobsGetCandidates(ref StationJobsGetCandidatesEvent ev)
     {
-        RemoveDisallowedJobs(ev.Player, ev.Jobs);
+        RemoveDisallowedJobs(ev.Player, ev.Jobs, ev.Profile); // Sunrise-Edit
     }
 
     private void OnIsRoleAllowed(ref IsRoleAllowedEvent ev)
@@ -343,7 +343,7 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
         return roles;
     }
 
-    public void RemoveDisallowedJobs(NetUserId userId, List<ProtoId<JobPrototype>> jobs)
+    public void RemoveDisallowedJobs(NetUserId userId, List<ProtoId<JobPrototype>> jobs, HumanoidCharacterProfile? profile = null) // Sunrise-Edit
     {
         // Sunrise edit start - проверяем расу даже без таймеров ролей
         var checkTimers = _cfg.GetCVar(CCVars.GameRoleTimers);
@@ -363,11 +363,15 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
             : [];
         // Sunrise-Sponsors-End
 
+        // Sunrise added start - при распределении используем переданный профиль без обращения к preferences
+        profile ??= (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(userId).SelectedCharacter;
+        // Sunrise added end
+
         for (var i = 0; i < jobs.Count; i++)
         {
             // Sunrise edit start - передаём режим проверки требований
             if (ProtoMan.Resolve(jobs[i], out var job)
-                && JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, ProtoMan, (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(userId).SelectedCharacter, sponsorPrototypes, checkTimers)) // Sunrise-Sponsors
+                && JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, ProtoMan, profile, sponsorPrototypes, checkTimers)) // Sunrise-Sponsors
             {
                 continue;
             }
