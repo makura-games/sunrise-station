@@ -1,4 +1,3 @@
-# Sunrise-Edit - Completely updated kitchen spike localization strings to match en-US and resolve Unknown Variable errors
 comp-kitchen-spike-begin-hook-self = Вы начинаете насаживать себя на { $hook }!
 comp-kitchen-spike-begin-hook-self-other = { CAPITALIZE($victim) } начинает насаживать себя на { $hook }!
 comp-kitchen-spike-begin-hook-other-self = Вы начинаете насаживать { CAPITALIZE($victim) } на { $hook }!
@@ -24,3 +23,5 @@ comp-kitchen-spike-hooked = [color=red]{ CAPITALIZE($victim) } насажен н
 comp-kitchen-spike-meat-name = { $name } ({ $victim })
 comp-kitchen-spike-victim-examine = [color=orange]{ CAPITALIZE($target) } выглядит довольно постным.[/color]
 comp-kitchen-spike-deconstruct-occupied = Далее, [color=red]отцепите тело[/color].
+comp-kitchen-spike-butcher-empty = { CAPITALIZE(THE($victim)) } больше нечего разделывать!
+comp-kitchen-spike-need-tool-quality = Для разделки { THE($target) } требуется инструмент качества «{ $quality }».

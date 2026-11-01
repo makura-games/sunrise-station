@@ -21,12 +21,10 @@
       species: [Vox]
       inverted: true
     # Sunrise added end
-  weight: 10
   startingGear: HoSGear
   icon: "JobIconHeadOfSecurity"
   supervisors: job-supervisors-captain
   radioBold: true # Sunrise-Edit
-  displayWeight: 80 # Sunrise-Edit
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-security-chief
@@ -68,5 +66,6 @@
   job: HeadOfSecurity
   hasMindShield: true
   equipment:
+    head: ClothingHeadHatBeretHoS
     mask: ClothingMaskGasSecurity
     neck: ClothingNeckCloakHos

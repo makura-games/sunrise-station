@@ -10,13 +10,11 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 7200 # 2 hrs
-  weight: 8
   alwaysUseSpawner: true
   startingGear: PrisonInspectorGear
   icon: "JobIconPrisonInspector"
   overrideConsoleVisibility: false
   supervisors: job-supervisors-head-of-prison
-  displayWeight: 90
   alternativeTitles:
   - job-alt-title-colony-overseer
   access:

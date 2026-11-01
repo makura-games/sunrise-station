@@ -37,7 +37,8 @@
   effects:
   - !type:TutorialEntityEffect
     effects:
-    - !type:SatiateHunger
+    - !type:Satiate
+      satiationType: Hunger
       factor: -15
   - !type:TutorialComponentEffect
     components:
@@ -444,17 +445,12 @@
   components:
   - type: Loadout
     prototypes: [FoodTutorialPlayerGear]
-  - type: Hunger
-    baseDecayRate: 0
-    thresholds:
-      Overfed: 200
-      Okay: 111
-      Peckish: 100
-      Starving: 50
-      Dead: 0
-  - type: Thirst
-    baseDecayRate: 0
-    startingThirst: 295
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: SunriseTutorialHunger
+      Thirst:
+        prototype: SunriseTutorialThirst
   - type: Godmode
 
 - type: entity

@@ -7,7 +7,6 @@
   components:
   - type: Tag
     tags:
-    - Wall
     - Diagonal
     - ForceNoTileWalls
   - type: IconSmooth
@@ -35,6 +34,7 @@
         - WallLayer
 
 - type: entity
+  parent: StructureHealthWallStrong
   id: WallAbductorDiagonal
   name: shuttle wall
   suffix: Diagonal
@@ -47,9 +47,9 @@
   - type: Transform
     anchored: true
   - type: Clickable
+  - type: Wall
   - type: Tag
     tags:
-    - Wall
     - ForceNoTileWalls
   - type: Sprite
     drawdepth: Walls
@@ -63,7 +63,7 @@
     sprite: _Sunrise/Abductor/Structures/Walls/abductor_diagonal.rsi
     state: state0
   - type: Damageable
-    damageModifierSet: StructuralMetallic
+    damageModifierSet: PlastitaniumMod
   - type: Injurable
     damageContainer: StructuralInorganic
   - type: Physics
@@ -97,13 +97,13 @@
     node: diagonalshuttleWall
 
 - type: entity
-  parent: BaseWall
+  parent: [ BaseWall, StructureHealthWallStrong ]
   id: WallAbductor
   name: shuttle wall
   suffix: Reinforced, Exterior
   components:
   - type: Damageable
-    damageModifierSet: StructuralMetallicStrong
+    damageModifierSet: PlastitaniumMod
   - type: Injurable
     damageContainer: StructuralInorganic
   - type: StaticPrice
@@ -125,20 +125,49 @@
   - type: Ricochetable
     chance: 1
 
+# Стена культа используется Blood Cult и сохраняется после удаления аналога из Wizden.
+- type: entity
+  parent: [ BaseWall, StructureHealthWall ]
+  id: WallCult
+  name: cult wall
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/cult.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/cult.rsi
+    state: full
+  - type: Damageable
+    damageModifierSet: SteelMod
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Girder:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: IconSmooth
+    key: walls
+    base: cult
+
 - type: entity
   parent: WallPlastitaniumIndestructible
   id: WallCultIndestructible
   name: cult wall
   components:
   - type: Sprite
-    sprite: Structures/Walls/cult.rsi
+    sprite: _Sunrise/Structures/Walls/cult.rsi
   - type: Icon
-    sprite: Structures/Walls/cult.rsi
+    sprite: _Sunrise/Structures/Walls/cult.rsi
   - type: IconSmooth
     key: walls
     base: cult
 
-# Sunrise-Add start - reinforced shuttle/plastitanium variants from PR #3821
 - type: entity
   parent: WallPlastitanium
   id: WallReinforcedPlastitanium
@@ -146,6 +175,10 @@
   suffix: Reinforced
   description: A plastitanium wall reinforced with an additional structural lattice, doubling its resistance to damage.
   components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/plastitanium.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/plastitanium.rsi
   - type: Destructible
     thresholds:
     - trigger:
@@ -167,6 +200,13 @@
   suffix: Reinforced, Diagonal
   description: A diagonal plastitanium wall reinforced with an additional structural lattice, doubling its resistance to damage.
   components:
+  - type: Sprite
+    drawdepth: Walls
+    sprite: _Sunrise/Structures/Walls/plastitanium_diagonal.rsi
+    state: state0
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/plastitanium_diagonal.rsi
+    state: state0
   - type: Destructible
     thresholds:
     - trigger:
@@ -243,4 +283,65 @@
         node: girder
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-# Sunrise-Add end
+
+- type: entity
+  parent: [ BaseWall, StructureHealthWallStrong ]
+  id: WallMiningReinforced
+  name: reinforced mining wall
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/mining.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/mining.rsi
+  - type: Damageable
+    damageModifierSet: PlasteelStaticMod
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 350
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          Girder:
+            min: 1
+            max: 1
+  - type: IconSmooth
+    key: walls
+    base: mining
+  - type: Appearance
+
+- type: entity
+  parent: [ WallDiagonalBase, StructureHealthWallStrong ]
+  id: WallMiningDiagonalReinforced
+  name: reinforced mining wall
+  suffix: Diagonal
+  components:
+  - type: Sprite
+    drawdepth: Walls
+    sprite: _Sunrise/Structures/Walls/mining_diagonal.rsi
+    state: state0
+  - type: Icon
+    sprite: _Sunrise/Structures/Walls/mining_diagonal.rsi
+    state: state0
+  - type: Damageable
+    damageModifierSet: PlasteelStaticMod
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 350
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          Girder:
+            min: 1
+            max: 1
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam

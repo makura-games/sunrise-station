@@ -42,6 +42,7 @@ public sealed partial class PrisonTimerSystem : EntitySystem
     {
         if (string.IsNullOrEmpty(label))
         {
+            _appearance.SetData(uid, TextScreenVisuals.DefaultText, string.Empty);
             _appearance.SetData(uid, TextScreenVisuals.ScreenText, string.Empty);
         }
         else
@@ -59,8 +60,9 @@ public sealed partial class PrisonTimerSystem : EntitySystem
 
         var text = (line1.Length > rowLength ? line1[..rowLength] : line1).PadRight(rowLength);
         if (!string.IsNullOrEmpty(line2))
-            text += (line2.Length > rowLength ? line2[..rowLength] : line2).PadRight(rowLength);
+            text += "\n" + (line2.Length > rowLength ? line2[..rowLength] : line2).PadRight(rowLength);
 
+        _appearance.SetData(uid, TextScreenVisuals.DefaultText, text);
         _appearance.SetData(uid, TextScreenVisuals.ScreenText, text);
     }
 }

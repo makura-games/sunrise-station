@@ -1,6 +1,6 @@
 using System.Linq;
 using Content.Server.Beam;
-using Content.Server.Beam.Components;
+using Content.Shared.Beam.Components;
 using Content.Server.Lightning.Components;
 using Content.Shared.Lightning;
 using Robust.Server.GameObjects;
@@ -84,7 +84,7 @@ public sealed partial class LightningSystem : SharedLightningSystem
         bool shooted = false;  //starlight
         int shootedCount = 0;
         int count = -1;
-        while(shootedCount < boltCount)
+        while (shootedCount < boltCount)
         {
             count++;
 

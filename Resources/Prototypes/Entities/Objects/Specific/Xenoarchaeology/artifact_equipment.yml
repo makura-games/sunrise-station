@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseStructureDynamic, BasePaperLabelableVisualized ]
+  parent: [ BaseStructureDynamic, BasePaperLabelableVisualized, StructureHealthContainer ]
   id: CrateArtifactContainer
   name: artifact container
   description: Used to safely contain and move artifacts.
@@ -60,17 +60,16 @@
     - type: PlaceableSurface
       isPlaceable: false
     - type: Damageable
-      damageModifierSet: StructuralMetallicStrong
-    - type: Injurable
-      damageContainer: StructuralInorganic
+      damageModifierSet: PlasteelMod
     - type: Destructible
       thresholds:
-        - trigger:
-            !type:DamageTrigger
-            damage: 50
-          behaviors:
-            - !type:DoActsBehavior
-              acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+        - !type:PlaySoundBehavior
+          sound:
+            collection: MetalGlassBreak
     - type: Appearance
     - type: EntityStorageVisuals
       stateDoorOpen: artifact_container_open
@@ -100,7 +99,7 @@
       price: 250
 
 - type: entity
-  parent: BaseStorageItem
+  parent: [ BaseStorageItem, StructureHealthContainerWeak ]
   id: HandheldArtifactContainer
   name: handheld artifact container
   description: A handheld case used to safely contain and move small artifacts.
@@ -144,17 +143,16 @@
       path: /Audio/Items/toolbox_drop.ogg
   - type: LockVisuals
   - type: Damageable
-    damageModifierSet: StructuralMetallicStrong
-  - type: Injurable
-    damageContainer: StructuralInorganic
+    damageModifierSet: PlasteelMod
   - type: Destructible
     thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 50
-        behaviors:
-          - !type:DoActsBehavior
-            acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 60
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
   - type: PaperLabel
     labelSlot:
       insertVerbText: Attach Label

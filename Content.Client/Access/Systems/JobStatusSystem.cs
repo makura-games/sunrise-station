@@ -10,7 +10,6 @@ public sealed partial class JobStatusSystem : SharedJobStatusSystem
 {
     [Dependency] private ShowJobIconsSystem _showJobIcons = default!;
     [Dependency] private ShowCrewIconsSystem _showCrewIcons = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
 
     private static readonly ProtoId<SecurityIconPrototype> CrewBorderIcon = "CrewBorderIcon";
     private static readonly ProtoId<SecurityIconPrototype> CrewUncertainBorderIcon = "CrewUncertainBorderIcon";
@@ -29,14 +28,14 @@ public sealed partial class JobStatusSystem : SharedJobStatusSystem
             return;
 
         if (_showJobIcons.IsActive && ent.Comp.JobStatusIcon != null)
-            ev.StatusIcons.Add(_prototype.Index(ent.Comp.JobStatusIcon));
+            ev.StatusIcons.Add(ProtoMan.Index(ent.Comp.JobStatusIcon));
 
         if (_showCrewIcons.IsActive)
         {
             if (_showCrewIcons.UncertainCrewBorder)
-                ev.StatusIcons.Add(_prototype.Index(CrewUncertainBorderIcon));
+                ev.StatusIcons.Add(ProtoMan.Index(CrewUncertainBorderIcon));
             else if (ent.Comp.IsCrew)
-                ev.StatusIcons.Add(_prototype.Index(CrewBorderIcon));
+                ev.StatusIcons.Add(ProtoMan.Index(CrewBorderIcon));
         }
     }
 }

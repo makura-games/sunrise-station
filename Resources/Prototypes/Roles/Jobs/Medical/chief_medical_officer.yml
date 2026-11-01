@@ -20,12 +20,10 @@
       species: [Vox]
       inverted: true
     # Sunrise added end
-  weight: 10
   startingGear: CMOGear
   icon: "JobIconChiefMedicalOfficer"
   supervisors: job-supervisors-captain
   radioBold: true # Sunrise-Edit
-  displayWeight: 60 # Sunrise-Edit
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-head-physician

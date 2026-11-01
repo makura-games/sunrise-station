@@ -75,7 +75,7 @@ public sealed partial class FoldableClothingSystem : EntitySystem
                 _clothingSystem.SetSlots(ent.Owner, ent.Comp.UnfoldedSlots.Value, clothingComp);
 
             if (ent.Comp.FoldedEquippedPrefix != null)
-                _clothingSystem.SetEquippedPrefix(ent.Owner, null, clothingComp);
+                _clothingSystem.SetEquippedPrefix(ent.Owner, ent.Comp.UnfoldedEquippedPrefix, clothingComp);
 
             if (ent.Comp.FoldedHeldPrefix != null)
                 _itemSystem.SetHeldPrefix(ent.Owner, null, false, itemComp);

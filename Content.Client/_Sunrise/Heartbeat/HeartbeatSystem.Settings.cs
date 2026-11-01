@@ -8,7 +8,7 @@ namespace Content.Client._Sunrise.Heartbeat;
 public sealed partial class HeartbeatSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
 
     private bool _playHeartBeatSound;
 
@@ -26,6 +26,7 @@ public sealed partial class HeartbeatSystem : EntitySystem
         base.Shutdown();
 
         _cfg.UnsubValueChanged(SunriseCCVars.PlayHeartBeatSound, OnOptionsChanged);
+        _netManager.Connected -= OnConnected;
     }
 
     private void OnOptionsChanged(bool option)
@@ -35,7 +36,7 @@ public sealed partial class HeartbeatSystem : EntitySystem
             RaiseNetworkEvent(new HeartbeatOptionsChangedEvent(_playHeartBeatSound));
     }
 
-    private async void OnConnected(object? sender, NetChannelArgs e)
+    private void OnConnected(object? sender, NetChannelArgs args)
     {
         RaiseNetworkEvent(new HeartbeatOptionsChangedEvent(_playHeartBeatSound));
     }

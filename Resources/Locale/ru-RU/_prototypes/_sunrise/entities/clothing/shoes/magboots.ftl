@@ -1,7 +1,7 @@
 ent-ClothingShoesBootsMagCombat = боевые магнитные ботинки
     .desc = Боевые магнитные ботинки, часто используемые во время выхода в открытый космос, чтобы гарантировать, что пользователь остается безопасно прикрепленным к станции.
 ent-ClothingShoesBootsMagPirate = магнитные ботинки пирата
-    .desc = Боевые магнитки перекрашенные в пирацкие цвета
+    .desc = Боевые магнитки перекрашенные в пирацкие цвета.
 ent-SunriseClothingShoesBootsMagPirateMurmilloActive = MOD-ботинки мурмилло
     .desc = Тяжёлые пиратские магнитные ботинки со скафандром «Мурмилло», готовым к развёртыванию без MOD-ядра.
 ent-SunriseClothingShoesBootsMagPirateMurmillo = MOD-ботинки мурмилло
@@ -11,6 +11,6 @@ ent-SunriseClothingShoesBootsMagPirateMurmilloDamaged = MOD-ботинки му�
 ent-SunriseClothingShoesBootsMagPirateMurmilloDamagedActive = MOD-ботинки мурмилло
     .desc = Тяжёлые пиратские магнитные ботинки с повреждённым скафандром «Мурмилло», готовым к развёртыванию без MOD-ядра.
 ent-ClothingShoesBootsMagSec = магнитные ботинки СБ
-    .desc = Стандартные магнитки перекрашенные в цвет СБ
+    .desc = Стандартные магнитки перекрашенные в цвет СБ.
 ent-ClothingShoesBootsMagAtmos = магнитные ботинки атмоса
     .desc = Стильные магнитные ботинки для атмосферных техников. У них есть встроенная зарядка для батареек!

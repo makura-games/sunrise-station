@@ -1,10 +1,19 @@
-command-description-xenoartifact-list =
-    Перечисляет идентификаторы сущностей всех созданных артефактов.
-command-description-xenoartifact-printMatrix =
-    Выводит матрицу, которая показывает все связи между узлами.
-command-description-xenoartifact-totalResearch =
-    Получает все очки исследований, которые можно извлечь из артефакта в текущий момент.
-command-description-xenoartifact-averageResearch =
-    Рассчитывает среднее количество очков исследований, которое ксеноартефакт выдаст при полной активации.
-command-description-xenoartifact-unlockAllNodes =
-    Разблокирует все узлы артефакта.
+command-description-xenoartifact-list = Перечисляет идентификаторы сущностей всех созданных артефактов.
+command-description-xenoartifact-printMatrix = Выводит матрицу, которая показывает все связи между узлами.
+command-description-xenoartifact-totalResearch = Получает все очки исследований, которые можно извлечь из артефакта в текущий момент.
+command-description-xenoartifact-averageResearch = Рассчитывает среднее количество очков исследований, которое ксеноартефакт выдаст при полной активации.
+command-description-xenoartifact-unlockAllNodes = Разблокирует все узлы артефакта.
+command-description-xenoartifact-printmatrix = Выводит матрицу, отображающую все рёбра между узлами.
+command-description-xenoartifact-totalresearch = Получает все очки исследований, которые можно извлечь из ксеноартефакта в данный момент.
+command-description-xenoartifact-averageresearch = Рассчитывает среднее количество очков исследований, которое полностью активированный ксеноартефакт будет выдавать.
+command-description-xenoartifact-unlockallnodes = Разблокирует все узлы артефакта.
+command-description-xenoartifact-createnode = Создаёт узел в артефакте: новый на глубине 0 или прикреплённый к существующему.
+command-description-xenoartifact-createnodeatdepth = Добавляет новый узел к указанному артефакту.
+command-description-xenoartifact-spawnartwithnode = Создаёт новый ксеноартефакт с одним узлом, указанными триггером и эффектом.
+command-description-xenoartifact-unlocknode = Помечает узел как разблокированный.
+command-description-xenoartifact-removenode = Удаляет узел из ксеноартефакта.
+command-description-xenoartifact-addedge = Добавляет ребро между двумя узлами ксеноартефакта.
+command-spawnartifactwithnode-spawn-artifact-item-hint = используйте артефакт в руке
+command-spawnartifactwithnode-spawn-artifact-structure-hint = использовать неподвижный артефакт в виде структуры
+command-spawnartifactwithnode-spawn-artifact-type-hint = <ID прототипа сущности артефакта>
+command-xenoartifact-common-node-hint = глубина { $depth }, узел { $nodeId }, триггер: «{ $trigger }», эффект: «{ $effect }»

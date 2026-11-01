@@ -1,5 +1,6 @@
 using Content.Server.Radio;
 using Content.Shared._Sunrise.Tutorial.Components;
+using Content.Shared.Radio;
 
 namespace Content.Server._Sunrise.Tutorial;
 

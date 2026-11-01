@@ -17,7 +17,6 @@ namespace Content.Shared.Bed;
 
 public sealed partial class BedSystem : EntitySystem
 {
-    [Dependency] private ActionContainerSystem _actConts = default!;
     [Dependency] private DamageableSystem _damageableSystem = default!;
     [Dependency] private EmagSystem _emag = default!;
     [Dependency] private IGameTiming _timing = default!;
@@ -63,10 +62,10 @@ public sealed partial class BedSystem : EntitySystem
             return;
 
         RemComp<CanSleepComponent>(args.Buckle.Owner);
-        _actionsSystem.RemoveAction(args.Buckle.Owner, canSleep.SleepAction);
-        _sleepingSystem.TryWaking(args.Buckle.Owner);
-        if (canSleep.SleepAction != null)
-            _actConts.RemoveAction(canSleep.SleepAction.Value);
+        _actionsSystem.RemoveAction(canSleep.SleepAction);
+
+        if (!Terminating(args.Buckle.Owner))
+            _sleepingSystem.TryWaking(args.Buckle.Owner);
     }
     // Sunrise-End
 

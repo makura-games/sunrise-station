@@ -39,20 +39,21 @@
   - type: SunriseHumanoidProfile
   - type: SunriseHumanoidBaseLayers
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatTajaran
       amount: 5
   - type: TajaranAccent
-  - type: Hunger
   - type: Speech
     speechVerb: Felinid
     allowedEmotes: ['Mew', 'Meow', 'Hisses', 'Purr', 'Growl']
-  - type: Thirst
-    dehydrationDamage:
-      types:
-        Bloodloss: 0.5
-        Asphyxiation: 0.5
+  - type: SatiationDamage
+    satiations:
+      Thirst:
+        thresholds:
+          Dead:
+            types:
+              Bloodloss: 0.5
+              Asphyxiation: 0.5
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
     state: tajaran_m
@@ -78,13 +79,9 @@
         Blunt: 1
         Slash: 5
   - type: Vocal
-    sounds:
-      Male: MaleTajaran
-      Female: FemaleTajaran
-      Unsexed: MaleTajaran
+    emoteSounds: MaleTajaran
   - type: Temperature
-    currentTemperature: 310.15
-    specificHeat: 46
+    temperature: 310.15
   - type: TemperatureDamage
     heatDamageThreshold: 350
     coldDamageThreshold: 230

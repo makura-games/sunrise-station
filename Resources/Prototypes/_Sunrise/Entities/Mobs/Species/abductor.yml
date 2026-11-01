@@ -34,7 +34,9 @@
   id: BaseMobAbductor
   abstract: true
   components:
-  - type: Muted
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectMuted
   - type: HumanoidProfile
     species: Abductor
   - type: SunriseHumanoidProfile

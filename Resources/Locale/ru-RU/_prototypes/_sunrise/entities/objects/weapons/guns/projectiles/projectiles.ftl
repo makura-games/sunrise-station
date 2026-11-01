@@ -52,7 +52,6 @@ ent-BoltTempgunVeryHot = очень горячий снаряд
     .desc = { ent-WatcherBoltMagmawing.desc }
 ent-BoltTempgunVeryCold = очень холодный снаряд
     .desc = { ent-WatcherBolt.desc }
-
 ent-BulletImprovisedGrenadeFirebomb = зажигательная граната
     .desc = { ent-BaseBulletTrigger.desc }
 ent-BulletImprovisedGrenadePipeBomb = граната-трубчатая бомба
@@ -61,12 +60,9 @@ ent-BulletImprovisedGrenadeGlass = стеклянная граната
     .desc = { ent-BaseBulletTrigger.desc }
 ent-SunriseBulletDisposableTrainingRocket = учебная ракета
     .desc = Лёгкая практическая ракета с тупым, почти безобидным корпусом.
-
 ent-SunriseBulletDisposableEmpRocket = ЭМИ-ракета
     .desc = Небольшая ракета с электромагнитным зарядом в носовой части.
-
 ent-SunriseBulletDisposableSmokeRocket = дымовая ракета
     .desc = Компактная ракета, выпускающая плотный дымовой заряд при ударе.
-
 ent-SunriseBulletDisposableIncendiaryRocket = термобарическая ракета
     .desc = Компактная ракета с нестабильным химическим зарядом.

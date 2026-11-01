@@ -7,6 +7,12 @@
   - SwineNormal
   dollPrototype: MobSwineDummy
   skinColoration: Hues
+  defaultSoundsBySex:
+  - UnisexSwine
+  - UnisexSwine
+  - UnisexSwine
+  voices:
+  - UnisexSwine
   buttScan:
     sprite: /Textures/_Sunrise/CopyMachine/butts_scans.rsi
     state: human # SUNRISE-TODO: Спрайт жопы свинов

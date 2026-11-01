@@ -87,7 +87,7 @@ public sealed partial class MessengerCartridgeSystem
     {
         var photoGallery = new Dictionary<string, PhotoMetadata>();
 
-        foreach (var cartridgeUid in _cartridgeLoader.GetInstalled(loaderUid))
+        foreach (var cartridgeUid in _cartridgeLoader.GetDiskPrograms(loaderUid))
         {
             if (TryComp<PhotoCartridgeComponent>(cartridgeUid, out var photoComp))
             {
@@ -140,7 +140,7 @@ public sealed partial class MessengerCartridgeSystem
             [MessengerCommands.CmdSendMessage] = messagePayload
         };
 
-        _deviceNetwork.QueuePacket(loaderUid, component.ServerAddress, payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
+        _deviceNetwork.SendPacket(loaderUid, component.ServerAddress, ref payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
         RestoreFrequency(loaderUid, pdaDevice, originalFreq);
     }
 
@@ -198,7 +198,7 @@ public sealed partial class MessengerCartridgeSystem
             }
         };
 
-        _deviceNetwork.QueuePacket(loaderUid, component.ServerAddress, payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
+        _deviceNetwork.SendPacket(loaderUid, component.ServerAddress, ref payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
         RestoreFrequency(loaderUid, pdaDevice, originalFreq);
     }
 
@@ -235,7 +235,7 @@ public sealed partial class MessengerCartridgeSystem
             return;
         }
 
-        _deviceNetwork.QueuePacket(loaderUid, component.ServerAddress, payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
+        _deviceNetwork.SendPacket(loaderUid, component.ServerAddress, ref payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
         RestoreFrequency(loaderUid, pdaDevice, originalFreq);
     }
 
@@ -272,7 +272,7 @@ public sealed partial class MessengerCartridgeSystem
             return;
         }
 
-        _deviceNetwork.QueuePacket(loaderUid, component.ServerAddress, payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
+        _deviceNetwork.SendPacket(loaderUid, component.ServerAddress, ref payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
         RestoreFrequency(loaderUid, pdaDevice, originalFreq);
     }
 
@@ -304,7 +304,7 @@ public sealed partial class MessengerCartridgeSystem
             [DeviceNetworkConstants.Command] = MessengerCommands.CmdGetUsers
         };
 
-        _deviceNetwork.QueuePacket(loaderUid, component.ServerAddress, payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
+        _deviceNetwork.SendPacket(loaderUid, component.ServerAddress, ref payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
         RestoreFrequency(loaderUid, pdaDevice, originalFreq);
     }
 
@@ -336,7 +336,7 @@ public sealed partial class MessengerCartridgeSystem
             [DeviceNetworkConstants.Command] = MessengerCommands.CmdGetGroups
         };
 
-        _deviceNetwork.QueuePacket(loaderUid, component.ServerAddress, payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
+        _deviceNetwork.SendPacket(loaderUid, component.ServerAddress, ref payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
         RestoreFrequency(loaderUid, pdaDevice, originalFreq);
     }
 
@@ -376,7 +376,7 @@ public sealed partial class MessengerCartridgeSystem
             }
         };
 
-        _deviceNetwork.QueuePacket(loaderUid, component.ServerAddress, payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
+        _deviceNetwork.SendPacket(loaderUid, component.ServerAddress, ref payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
         RestoreFrequency(loaderUid, pdaDevice, originalFreq);
     }
 
@@ -412,7 +412,7 @@ public sealed partial class MessengerCartridgeSystem
             }
         };
 
-        _deviceNetwork.QueuePacket(loaderUid, component.ServerAddress, payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
+        _deviceNetwork.SendPacket(loaderUid, component.ServerAddress, ref payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
         RestoreFrequency(loaderUid, pdaDevice, originalFreq);
     }
 
@@ -448,7 +448,7 @@ public sealed partial class MessengerCartridgeSystem
             }
         };
 
-        _deviceNetwork.QueuePacket(loaderUid, component.ServerAddress, payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
+        _deviceNetwork.SendPacket(loaderUid, component.ServerAddress, ref payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
         RestoreFrequency(loaderUid, pdaDevice, originalFreq);
     }
 
@@ -484,7 +484,7 @@ public sealed partial class MessengerCartridgeSystem
             }
         };
 
-        _deviceNetwork.QueuePacket(loaderUid, component.ServerAddress, payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
+        _deviceNetwork.SendPacket(loaderUid, component.ServerAddress, ref payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
         RestoreFrequency(loaderUid, pdaDevice, originalFreq);
     }
 
@@ -521,7 +521,7 @@ public sealed partial class MessengerCartridgeSystem
             }
         };
 
-        _deviceNetwork.QueuePacket(loaderUid, component.ServerAddress, payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
+        _deviceNetwork.SendPacket(loaderUid, component.ServerAddress, ref payload, frequency: messengerFreq, network: pdaDevice.DeviceNetId);
         RestoreFrequency(loaderUid, pdaDevice, originalFreq);
     }
 }

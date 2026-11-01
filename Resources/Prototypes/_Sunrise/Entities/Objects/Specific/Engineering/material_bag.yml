@@ -38,4 +38,7 @@
         - PartRodMetal
         - Board
         - StationMapElectronics
+      components:
+        - DoorElectronics
+        - Circuitboard
   - type: Dumpable

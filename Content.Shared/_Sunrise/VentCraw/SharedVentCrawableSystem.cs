@@ -168,7 +168,8 @@ public abstract partial class SharedVentCrawableSystem : EntitySystem
         if (!_containerSystem.CanInsert(toInsert, holder.Container))
             return false;
 
-        return HasComp<ItemComponent>(toInsert) ||
+        return HasComp<VentCrawlerComponent>(toInsert) ||
+            HasComp<ItemComponent>(toInsert) ||
             HasComp<BodyComponent>(toInsert);
     }
 

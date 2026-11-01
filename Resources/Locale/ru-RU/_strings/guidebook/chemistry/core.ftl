@@ -13,9 +13,12 @@ guidebook-reagent-sources-header = Источники
 guidebook-reagent-sources-ent-wrapper = [bold]{ $name }[/bold] \[1\]
 guidebook-reagent-sources-gas-wrapper = [bold]{ $name } (газ)[/bold] \[1\]
 guidebook-reagent-effects-header = Эффекты
-guidebook-reagent-effects-metabolism-group-rate = [bold]{ $group }[/bold] [color=gray]({ $rate } единиц в секунду)[/color]
+guidebook-reagent-effects-metabolism-stage-rate = [bold]{ $stage }[/bold] [color=gray]({ $rate } единиц в секунду)[/color]
+guidebook-reagent-effects-metabolite-item = { $reagent } со скоростью { NATURALPERCENT($rate, 2) }
+guidebook-reagent-effects-metabolites = Метаболизируется в { $items }.
 guidebook-reagent-plant-metabolisms-header = Метаболизм растений
 guidebook-reagent-plant-metabolisms-rate = [bold]Метаболизм растений[/bold] [color=gray](1 юнит каждые 3 сек. обычно)[/color]
+guidebook-reagent-physical-description = [italic]На вид вещество { $description }.[/italic].
 guidebook-reagent-recipes-mix-info =
     { $minTemp ->
         [0]
@@ -29,7 +32,4 @@ guidebook-reagent-recipes-mix-info =
                *[false] выше { $minTemp }K
             }
     }
-guidebook-reagent-physical-description = [italic]На вид вещество { $description }.[/italic].
-guidebook-reagent-effects-metabolism-stage-rate = [bold]{$stage}[/bold] [color=gray]({$rate} единиц в секунду)[/color]
-guidebook-reagent-effects-metabolite-item = {$reagent} со скоростью { NATURALPERCENT($rate, 2) }
-guidebook-reagent-effects-metabolites = Метаболизируется в { $items }.
+guidebook-reagent-effects-metabolism-group-rate = [bold]{ $group }[/bold] [color=gray]({ $rate } единиц в секунду)[/color]

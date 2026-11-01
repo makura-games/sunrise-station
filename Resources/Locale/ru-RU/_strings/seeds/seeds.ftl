@@ -1,4 +1,5 @@
 # Nouns
+# Nouns
 seeds-noun-seeds = семян
 seeds-noun-spores = спор
 # Seeds
@@ -140,11 +141,11 @@ seeds-cherry-name = вишня
 seeds-cherry-display-name = вишневое дерево
 seeds-anomaly-berry-name = аномальная ягода
 seeds-anomaly-berry-display-name = аномальные ягоды
+seeds-bloonion-name = блунион
+seeds-bloonion-display-name = луковицы блуниона
 seeds-explosive-banana-name = буман
 seeds-explosive-banana-display-name = бумановый куст
 seeds-coffee-arabica-name = кофе арабика
 seeds-coffee-arabica-display-name = куст кофе арабики
 seeds-coffee-robust-name = кофе робаст
 seeds-coffee-robust-display-name = куст кофе робаста
-seeds-bloonion-name = блунион
-seeds-bloonion-display-name = луковицы блуниона

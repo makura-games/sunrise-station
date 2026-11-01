@@ -10,7 +10,6 @@ namespace Content.Shared._Sunrise.Humanoid;
 public sealed partial class SunriseHumanoidMarkingSystem : EntitySystem
 {
     [Dependency] private MarkingManager _marking = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private SharedVisualBodySystem _visualBody = default!;
 
     public bool TryGetLayerMarkings(EntityUid uid, HumanoidVisualLayers layer, out List<Marking> markings)
@@ -41,7 +40,7 @@ public sealed partial class SunriseHumanoidMarkingSystem : EntitySystem
         if (!TryGetLayerMarkingData(uid, layer, out var data))
             return false;
 
-        if (!_prototype.TryIndex(data.Group, out var group))
+        if (!ProtoMan.TryIndex(data.Group, out var group))
             return false;
 
         limit = group.Limits.TryGetValue(layer, out var layerLimit)
@@ -69,7 +68,7 @@ public sealed partial class SunriseHumanoidMarkingSystem : EntitySystem
 
     public bool SetMarkingId(EntityUid uid, HumanoidVisualLayers layer, int index, string markingId)
     {
-        if (!_prototype.TryIndex<MarkingPrototype>(markingId, out var prototype) ||
+        if (!ProtoMan.TryIndex<MarkingPrototype>(markingId, out var prototype) ||
             prototype.BodyPart != layer)
         {
             return false;
@@ -130,7 +129,7 @@ public sealed partial class SunriseHumanoidMarkingSystem : EntitySystem
 
     public bool AddMarking(EntityUid uid, string markingId, Color? color = null, bool forced = false)
     {
-        if (!_prototype.TryIndex<MarkingPrototype>(markingId, out var prototype))
+        if (!ProtoMan.TryIndex<MarkingPrototype>(markingId, out var prototype))
             return false;
 
         return AddMarking(uid, prototype.BodyPart, markingId, color, forced);
@@ -138,7 +137,7 @@ public sealed partial class SunriseHumanoidMarkingSystem : EntitySystem
 
     public bool AddMarking(EntityUid uid, HumanoidVisualLayers layer, string markingId, Color? color = null, bool forced = false)
     {
-        if (!_prototype.TryIndex<MarkingPrototype>(markingId, out var prototype) ||
+        if (!ProtoMan.TryIndex<MarkingPrototype>(markingId, out var prototype) ||
             prototype.BodyPart != layer)
         {
             return false;

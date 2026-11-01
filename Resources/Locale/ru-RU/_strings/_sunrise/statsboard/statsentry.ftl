@@ -20,8 +20,7 @@ statsentry-int-cc = Трогал карту капитана: { $name }
 statsentry-species-entry-name = На станции были представители таких рас:
 statsentry-species-entry = [bold][color=white]{ $name }[/color][/bold] в количестве [color=white]{ $count }[/color].
 statsentry-mst-pop-species = Самой распространённой расой стал [color=white]{ $name }[/color].
-statsentry-bank-balance-total = Общий баланс станции: [color=white]{ $balance }[/color] кредитов.
-statsentry-bank-balance-account = Баланс аккаунта [color=white]{ $account }[/color]: [color=white]{ $balance }[/color] кредитов.
+statsentry-bank-balance = Под конец смены баланс карго составил [color=white]{ $balance }[/color] кредитов.
 statsentry-firth-murder = Первая жертва станции - [color=white]{ $name }[/color]{ $username }.
 statsentry-firth-murder-time = Время смерти - [color=yellow]{ $time }[/color].
 statsentry-firth-murder-killer = Убийца - [color=white]{ $name }[/color]{ $username }.
@@ -55,4 +54,5 @@ statsentry-total-absorbed-puddle = Игроками было убрано [color
 statsentry-player-with-most-puddle-absorb = Больше всего луж было убрано благодаря [color=white]{ $name }[/color]{ $username } - [color=white]{ $count }[/color].
 statsentry-total-captain-card-interacted = Карта капитана побывала у [color=white]{ $count }[/color] игроков.
 statsentry-total-electrocuted-count = Игроки были шокированы [color=white]{ $count }[/color] раз.
-statsentry-bank-balance = Под конец смены баланс карго составил [color=white]{ $balance }[/color] кредитов.
+statsentry-bank-balance-total = Общий баланс станции: [color=white]{ $balance }[/color] кредитов.
+statsentry-bank-balance-account = Баланс аккаунта [color=white]{ $account }[/color]: [color=white]{ $balance }[/color] кредитов.

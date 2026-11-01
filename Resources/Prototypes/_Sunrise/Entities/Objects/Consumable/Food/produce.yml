@@ -43,7 +43,7 @@
     sprite: _Sunrise/Objects/Specific/Hydroponics/explosive_banana.rsi
     state: produce
   - type: Produce
-    seedId: ExplosiveBanana
+    plantId: ExplosiveBananaPlants
   - type: Solution
     id: food
     solution:
@@ -76,7 +76,7 @@
     sprite: _Sunrise/Objects/Specific/Hydroponics/coffee_arabica.rsi
     state: produce
   - type: Produce
-    seedId: CoffeeArabica
+    plantId: CoffeeArabicaPlants
   - type: Solution
     id: food
     solution:
@@ -101,7 +101,7 @@
     sprite: _Sunrise/Objects/Specific/Hydroponics/coffee_robust.rsi
     state: produce
   - type: Produce
-    seedId: CoffeeRobust
+    plantId: CoffeeRobustPlants
   - type: Solution
     id: food
     solution:
@@ -140,7 +140,7 @@
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/geranium.rsi
   - type: Produce
-    seedId: Geranium
+    plantId: GeraniumPlants
   - type: Extractable
     grindableSolutionName: food
   - type: Tag
@@ -151,7 +151,7 @@
   name: glasscap
   description: Glass doesn't grow on trees! It grows on mushrooms, of course.
   id: GlassLog
-  parent: [GlassSounds, ProduceBase] # Sunrise edit
+  parent: [GlassSounds, ProduceBase, BaseSlicingRefinable] # Sunrise edit
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/glasscap.rsi
@@ -161,16 +161,17 @@
       types:
         Blunt: 10
   - type: Produce
-    seedId: glasscap
-  - type: Log
-    spawnedPrototype: SheetGlass1
-    spawnCount: 1
+    plantId: GlasscapPlants
+  - type: ToolRefinable
+    qualityNeeded: Sawing
+    refineResult:
+    - id: SheetGlass1
 
 - type: entity
   name: plaststeelcap
   description: Plaststeel doesn't grow on trees! It grows on mushrooms, of course.
   id: PlastSteelLog
-  parent: ProduceBase
+  parent: [ProduceBase, BaseSlicingRefinable]
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/plaststeelcap.rsi
@@ -180,14 +181,15 @@
       types:
         Blunt: 12
   - type: Produce
-    seedId: plaststeelcap
-  - type: Log
-    spawnedPrototype: SheetPlasteel1
-    spawnCount: 1
+    plantId: PlaststeelcapPlants
+  - type: ToolRefinable
+    qualityNeeded: Sawing
+    refineResult:
+    - id: SheetPlasteel1
 
 - type: entity
   name: barrelmelon
-  parent: FoodProduceBase
+  parent: [FoodProduceBase, BaseSlicingRefinableFood]
   id: FoodBarrelmelon
   description: Round brown object that you can slice and eat.
   components:
@@ -208,7 +210,7 @@
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/barrelmelon.rsi
   - type: Produce
-    seedId: Barrelmelon
+    plantId: BarrelmelonPlants
   - type: Extractable
     juiceSolution:
       reagents:
@@ -235,9 +237,10 @@
         solution: food
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: SliceableFood
-    count: 5
-    slice: FoodBarrelmelonSlice
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodBarrelmelonSlice
+      amount: 5
   - type: Tag
     tags:
     - Fruit
@@ -292,7 +295,7 @@
     sprite: _Sunrise/Objects/Specific/Hydroponics/lanternfruit.rsi
     state: produce
   - type: Produce
-    seedId: Lanternfruit
+    plantId: LanternfruitPlants
   - type: Solution
     id: food
     solution:
@@ -321,7 +324,7 @@
     sprite: _Sunrise/Objects/Specific/Hydroponics/redrose.rsi
     state: produce
   - type: Produce # TODO добавить флавор цветка когда офы сделают цветомат
-    seedId: Redrose
+    plantId: RedrosePlants
   - type: Solution
     id: food
     solution:
@@ -359,7 +362,7 @@
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/snapcorn.rsi
   - type: Produce
-    seedId: Snapcorn
+    plantId: SnapcornPlants
 
 - type: entity
   name: white rose
@@ -374,7 +377,7 @@
     sprite: _Sunrise/Objects/Specific/Hydroponics/whiterose.rsi
     state: produce
   - type: Produce # TODO добавить флавор цветка когда офы сделают цветомат
-    seedId: Whiterose
+    plantId: WhiterosePlants
   - type: Solution
     id: food
     solution:
@@ -401,7 +404,7 @@
     sprite: _Sunrise/Objects/Specific/Hydroponics/sunflower.rsi
     state: produce
   - type: Produce
-    seedId: Sunflower
+    plantId: SunflowerPlants
   - type: Solution
     id: food
     solution:
@@ -436,7 +439,7 @@
     sprite: _Sunrise/Objects/Specific/Hydroponics/white_lily.rsi
     state: produce
   - type: Produce
-    seedId: WhiteLily
+    plantId: WhiteLilyPlants
   - type: Solution
     id: food
     solution:

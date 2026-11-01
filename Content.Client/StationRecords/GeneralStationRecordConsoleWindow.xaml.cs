@@ -20,11 +20,7 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
     public Action<StationRecordFilterType, string>? OnFiltersChanged;
     public Action<uint>? OnDeleted;
 
-    private bool _isPopulating;
-
-    private StationRecordFilterType _currentFilterType;
-
-    // Sunrise added start
+    // Sunrise added start - действия расширенной записи
     public Action<GeneralStationRecord, uint>? OnSaved;
     public Action<uint>? OnPrinted;
 
@@ -34,12 +30,16 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
     private readonly LobbyUIController _controller;
     // Sunrise added end
 
+    private bool _isPopulating;
+
+    private StationRecordFilterType _currentFilterType;
+
     public GeneralStationRecordConsoleWindow()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        // Sunrise added start
+        // Sunrise added start - зависимости расширенной записи
         _entity = IoCManager.Resolve<IEntityManager>();
         _loc = IoCManager.Resolve<ILocalizationManager>();
         var interfaceManager = IoCManager.Resolve<IUserInterfaceManager>();
@@ -96,24 +96,30 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
         };
     }
 
-    public void UpdateState(GeneralStationRecordConsoleState state)
+    public void UpdateState(uint? selectedKey,
+        GeneralStationRecord? record,
+        Dictionary<uint, string>? recordListing,
+        StationRecordsFilter? filter,
+        bool canDeleteEntries,
+        bool canRedactSensitiveData, // Sunrise-Edit
+        bool hasAccess) // Sunrise-Edit
     {
-        if (state.Filter != null)
+        if (filter != null)
         {
-            if (state.Filter.Type != _currentFilterType)
+            if (filter.Type != _currentFilterType)
             {
-                _currentFilterType = state.Filter.Type;
+                _currentFilterType = filter.Type;
             }
 
-            if (state.Filter.Value != StationRecordsFiltersValue.Text)
+            if (filter.Value != StationRecordsFiltersValue.Text)
             {
-                StationRecordsFiltersValue.Text = state.Filter.Value;
+                StationRecordsFiltersValue.Text = filter.Value;
             }
         }
 
         StationRecordsFilterType.SelectId((int)_currentFilterType);
 
-        if (state.RecordListing == null)
+        if (recordListing == null)
         {
             RecordListingStatus.Visible = true;
             RecordListing.Visible = false;
@@ -127,18 +133,22 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
         RecordListing.Visible = true;
         RecordContainer.Visible = true;
 
-        PopulateRecordListing(state.RecordListing!, state.SelectedKey);
+        PopulateRecordListing(recordListing, selectedKey);
 
-        RecordContainerStatus.Visible = state.Record == null;
+        RecordContainerStatus.Visible = record == null;
 
-        if (state.Record != null)
+        if (record != null)
         {
-            RecordContainerStatus.Visible = state.SelectedKey == null;
-            RecordContainerStatus.Text = state.SelectedKey == null
+            RecordContainerStatus.Visible = selectedKey == null;
+            RecordContainerStatus.Text = selectedKey == null
                 ? Loc.GetString("general-station-record-console-no-record-found")
                 : Loc.GetString("general-station-record-console-select-record-info");
-            // Sunrise edit
-            PopulateRecordContainer(state.Record, state.CanDeleteEntries, state.CanRedactSensitiveData, state.HasAccess, state.SelectedKey);
+            PopulateRecordContainer(
+                record,
+                canDeleteEntries,
+                canRedactSensitiveData,
+                hasAccess,
+                selectedKey); // Sunrise-Edit
         }
         else
         {
@@ -163,17 +173,30 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
         RecordListing.SortItemsByText();
     }
 
-    // Sunrise edit
-    private void PopulateRecordContainer(GeneralStationRecord record, bool enableDelete, bool canRedactSensitiveData, bool hasAccess, uint? id)
+    private void PopulateRecordContainer(
+        GeneralStationRecord record,
+        bool enableDelete,
+        bool canRedactSensitiveData, // Sunrise-Edit
+        bool hasAccess, // Sunrise-Edit
+        uint? id)
     {
         RecordContainer.RemoveAllChildren();
-        // Sunrise edit start
-        var newRecord =
-            new SunriseGeneralRecord(record, enableDelete, canRedactSensitiveData, hasAccess, id, in _entity, in _prototypeManager, in _loc, in _job, in _controller);
-        // Sunrise edit end
-        newRecord.OnDeletePressed = OnDeleted;
+        // Sunrise edit start - расширенная редактируемая запись
+        var newRecord = new SunriseGeneralRecord(
+            record,
+            enableDelete,
+            canRedactSensitiveData,
+            hasAccess,
+            id,
+            in _entity,
+            in _prototypeManager,
+            in _loc,
+            in _job,
+            in _controller);
         newRecord.OnPrintPressed = OnPrinted;
         newRecord.OnSaveButtonPressed = OnSaved;
+        // Sunrise edit end
+        newRecord.OnDeletePressed = OnDeleted;
 
         RecordContainer.AddChild(newRecord);
     }

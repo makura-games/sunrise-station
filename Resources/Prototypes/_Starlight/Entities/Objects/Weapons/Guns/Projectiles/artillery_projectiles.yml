@@ -171,7 +171,7 @@
     requireInSpace: true
   - type: WarpPoint
     follow: true
-    location: 240mm HE Payload
+    location: location-artillery-240mm-he-payload
   - type: TimedDespawn
     lifetime: 15
 
@@ -220,7 +220,7 @@
     requireInSpace: true
   - type: WarpPoint
     follow: true
-    location: 240mm TACTICAL NUKE
+    location: location-artillery-240mm-tactical-nuke
 
 - type: entity
   id: BulletLeviathan240mmCluster
@@ -261,7 +261,7 @@
     requireInSpace: true
   - type: WarpPoint
     follow: true
-    location: 240mm Cluster Payload
+    location: location-artillery-240mm-cluster-payload
 
 - type: entity
   id: BulletLeviathan240mmNukeSelfExplode
@@ -398,7 +398,7 @@
     color: "#88ff00"
   - type: WarpPoint
     follow: true
-    location: 240mm TACTICAL NUKE
+    location: location-artillery-240mm-tactical-nuke
 
 - type: entity
   id: LeviathanClusterRupture25
@@ -626,7 +626,7 @@
     requireInSpace: true
   - type: WarpPoint
     follow: true
-    location: 120mm Rocket Payload
+    location: location-artillery-120mm-rocket-payload
   - type: GuidedProjectile
     turnRate: 100
   - type: TimedDespawn
@@ -719,7 +719,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/ArtilleryAmmo/charon_ammo.rsi # Sunrise-Edit
+    sprite: _Starlight/Objects/Weapons/Guns/ArtilleryAmmo/charon_ammo.rsi
     layers:
       - state: railgun_slug
     scale:  1.3, 1.3
@@ -815,7 +815,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/ArtilleryAmmo/charon_ammo.rsi # Sunrise-Edit
+    sprite: _Starlight/Objects/Weapons/Guns/ArtilleryAmmo/charon_ammo.rsi
     layers:
       - state: subnuclear
     scale:  1.3, 1.3

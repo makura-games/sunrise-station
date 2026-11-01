@@ -20,15 +20,11 @@ instruments-component-channels-menu = Выбор MIDI-канала
 instrument-component-channel-name = MIDI-канал { $number }
 instruments-component-channels-all-button = Все
 instruments-component-channels-clear-button = Очистить
+instruments-component-channels-track-names-toggle = Показывать названия дорожек
+instruments-component-channels-single = { $channel } { $name }
+instruments-component-channels-multi = { $channel } { $name } ({ $other })
 # SwappableInstrumentComponent
 swappable-instrument-component-style-set = Установить стиль "{ $style }"
-instruments-component-channels-track-names-toggle = Показывать названия дорожек
-instruments-component-channels-single = {$channel} {$name}
-instruments-component-channels-multi = {$channel} {$name} ({$other})
-
-
-# SwappableInstrumentComponent
-
 instruments-component-menu-midi-channel-acoustic-grand-piano = Акустический рояль
 instruments-component-menu-midi-channel-bright-acoustic-piano = Яркое акустическое пианино
 instruments-component-menu-midi-channel-electric-grand-piano = Электророяль
@@ -157,3 +153,40 @@ instruments-component-menu-midi-channel-telephone-ring = Телефонный з
 instruments-component-menu-midi-channel-helicopter = Вертолёт
 instruments-component-menu-midi-channel-applause = Аплодисменты
 instruments-component-menu-midi-channel-gunshot = Выстрел
+instruments-component-menu-play-tab-title = Воспроизведение
+instruments-component-menu-config-tab-title = Настройки
+instruments-component-menu-midi-source-button = Источник MIDI
+instruments-component-menu-unknown-midi-source-button = Неизвестный
+instruments-component-menu-input-midi-source-button = Вход
+instruments-component-menu-band-midi-source-button = Группа
+instruments-component-menu-file-midi-source-button = Файлы
+instruments-component-menu-play-stop-button = Воспроизвести
+instruments-component-menu-shuffle-button = Перемешать
+instruments-component-menu-channels-label = Каналы [italic](обновляются при воспроизведении)[/italic]
+instruments-component-menu-files-track-playtime-seconds-minutes = { $currentMinutes }:{ $currentSeconds }/{ $totalMinutes }:{ $totalSeconds }
+instruments-component-menu-files-track-playtime-seconds-minutes-hours = { $currentHours }:{ $currentMinutes }:{ $currentSeconds }/{ $totalHours }:{ $totalMinutes }:{ $totalSeconds }
+instruments-component-menu-files-file-remove-disabled-info = Остановите воспроизведение и выберите элемент, чтобы удалить его.
+instruments-component-menu-files-add-button = Добавить
+instruments-component-menu-files-remove-button = Удалить
+instruments-component-menu-files-rename-button = Переименовать
+instruments-component-menu-files-rename-dialog-title = Переименовать файл
+instruments-component-menu-files-rename-dialog-prompt = Новое имя
+instruments-component-menu-files-filter = Фильтр...
+instruments-component-menu-files-error = Операция не выполнена из-за неожиданной ошибки.
+instruments-component-menu-input-notice-label =
+    Подключите MIDI-устройство к компьютеру
+    и включите какую-нибудь музыку.
+instruments-component-band-title-label = Группы
+instruments-component-band-refresh = Обновить
+instruments-component-channels-all-channels-label = Все каналы
+instruments-component-channels-percussion-channel-name = [Ударные]
+instruments-component-channels-name-display-selector-label = Отображаемое имя
+instruments-component-channels-name-display-selector-track-button = Дорожка
+instruments-component-channels-name-display-selector-program-button = Программа
+instruments-component-channels-name-display-selector-instrument-button = Инструмент
+instruments-component-midi-file-collection-label = Коллекция MIDI
+instruments-component-midi-file-collection-size-label = Загружено MIDI-файлов: { $count }
+instruments-component-midi-file-collection-open-dir-button = Открыть папку
+instruments-component-midi-file-collection-reload-button = Обновить коллекцию
+instruments-component-midi-file-collection-delete-all-button = Очистить коллекцию
+instruments-component-menu-midi-min-volume-slider-label = Минимальная громкость MIDI-входа

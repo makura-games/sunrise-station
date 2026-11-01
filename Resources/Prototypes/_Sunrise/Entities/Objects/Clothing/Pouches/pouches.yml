@@ -4,12 +4,14 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/large_explosive.rsi
+    sprite: _Sunrise/Clothing/Pouches/large_explosive.rsi
     layers:
-    - state: icon
+    - map: [ base ]
+      state: icon
   - type: Appearance
   - type: Item
     size: Large
+    shape: null
   - type: Clothing
     quickEquip: false
     slots:
@@ -23,7 +25,19 @@
   description: It can carry grenades, plastic explosives, mine boxes, and other explosives.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/large_explosive.rsi
+    sprite: _Sunrise/Clothing/Pouches/large_explosive.rsi
+    layers:
+    - map: [ closed ]
+      state: closed
+    - map: [ open ]
+      state: open
+      visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        open:
+          True: { visible: false }
+          False: { visible: true }
   - type: Storage
     maxItemSize: Normal
     grid:
@@ -92,11 +106,91 @@
   description: It can carry ammo boxes and magazines.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/large_ammo_mag.rsi
+    sprite: _Sunrise/Clothing/Pouches/medium_ammo_mag.rsi
+    layers:
+    - map: [ closed ]
+      state: closed
+    - map: [ open ]
+      state: open
+      visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        open:
+          True: { visible: false }
+          False: { visible: true }
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,1
+    whitelist:
+      components:
+      - BallisticAmmoProvider
+
+- type: entity
+  parent: PouchAmmo
+  id: PouchAmmoPistol
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Pouches/pistol_mag.rsi
   - type: Storage
     maxItemSize: Small
     grid:
     - 0,0,3,1
+    whitelist:
+      tags:
+      - MagazinePistol
+      - MagazinePistolHighCapacity
+      - MagazinePistolSubMachineGun
+      - MagazinePistolSubMachineGunTopMounted
+      - MagazinePistolCaselessRifle
+      - MagazineMagnum
+      - MagazinePistolDP
+      - MagazinePistolDPSubMachineGun
+      - MagazinePistolImprovised
+      - SpeedLoaderMagnum
+      - SpeedLoaderMagnumImprovised
+
+- type: entity
+  parent: PouchAmmo
+  id: PouchAmmoMedium
+  components:
+  - type: Item
+    size: Huge
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Pouches/large_ammo_mag.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,4,1
+    whitelist:
+      components:
+      - BallisticAmmoProvider
+
+- type: entity
+  parent: PouchAmmo
+  id: PouchAmmoSyndi
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Pouches/medium_ammo_mag_pmc.rsi
+
+- type: entity
+  parent: PouchAmmoMedium
+  id: PouchAmmoMediumSyndi
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Pouches/large_ammo_mag_pmc.rsi
+
+- type: entity
+  parent: PouchAmmoMedium
+  id: PouchAmmoLarge
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Pouches/mg_ammo.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,3,3
     whitelist:
       components:
       - BallisticAmmoProvider
@@ -111,13 +205,16 @@
       storagebase: !type:AllSelector
         children:
         - id: MagazinePistolSubMachineGun
-          amount: 4
+          amount: 2
+        - id: MagazinePistolSubMachineGunFMJ
 
 - type: entity
-  parent: PouchAmmo
+  parent: PouchAmmoPistol
   id: PouchAmmoFilledPistol40
   suffix: Filled pistol .40
   components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Pouches/pistol_mag.rsi
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
@@ -139,6 +236,71 @@
       storagebase: !type:AllSelector
         children:
         - id: MagazineLightRifleFMJ
-          amount: 2
         - id: MagazineLightRifleSP
           amount: 2
+
+- type: entity
+  parent: PouchAmmo
+  id: PouchBackpackPockets
+  name: backpack pockets
+  description: Universal pockets for any explosives, ammo boxes and magazines.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Unremoveable
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Pouches/backpack_pockets.rsi
+  - type: Item
+    sprite: _Sunrise/Clothing/Pouches/backpack_pockets.rsi
+    shape:
+    - 0,0,1,3
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,4,3
+    whitelist:
+      tags:
+      - HandGrenade
+      - Grenade
+      - HandGrenadeAmmo
+      components:
+      - ProjectileGrenade
+      - FlashOnTrigger
+      - ExplodeOnTrigger
+      - Explosive
+      - BallisticAmmoProvider
+
+# Material
+- type: entity
+  parent: [Pouch]
+  id: PouchMaterial
+  name: pouch for materials
+  description: It can carry different materials and circuitboards.
+  components:
+  - type: Sprite
+    scale: 0.9,0.9
+    sprite: _Sunrise/Clothing/Pouches/material_pouch.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,5,1
+    quickInsert: true
+    areaInsert: true
+    whitelist:
+      tags:
+        - PartRodMetal
+        - Sheet
+        - CableCoil
+        - RawMaterial
+        - Tile
+        - PowerCell
+        - PowerCellSmall
+        - Ingot
+        - DoorElectronics
+        - AirAlarmElectronics
+        - MicroManipulatorStockPart
+        - PartRodMetal
+        - Board
+        - StationMapElectronics
+      components:
+        - DoorElectronics
+        - Circuitboard

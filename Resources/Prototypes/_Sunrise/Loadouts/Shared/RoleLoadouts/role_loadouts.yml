@@ -101,6 +101,7 @@
   id: JobBlueShieldOfficer
   groups:
   - BlueShieldHead
+  - SunriseLoadoutGroupBlueShieldMask
   - BlueShieldNeck
   - BlueShieldJumpsuit
   - BlueShieldBackpack

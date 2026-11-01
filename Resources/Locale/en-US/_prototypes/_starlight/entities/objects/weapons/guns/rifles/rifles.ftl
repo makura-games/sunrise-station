@@ -1,8 +1,10 @@
-ent-WeaponGunLaserCarbineSemi = IK-30 laser carbine
+ent-WeaponGunLaserCarbineSemi = iK-30 laser carbine
     .desc = A semi-automatic battery laser carbine.
-ent-WeaponGunLaserCarbineAutomatic = IK-60 laser carbine
+ent-WeaponGunLaserCarbineAutomatic = iK-60 laser carbine
     .desc = A burst automatic battery laser carbine.
-ent-WeaponRifleLeikha = Leikha
+ent-WeaponRifleLeikha = leikha
     .desc = A high end military grade assault rifle. This one has been retrofitted with a scope and a burst receiver. Uses .20 rifle ammo.
-ent-WeaponRifleM52 = M52A1
+ent-WeaponRifleM52 = m52A1
     .desc = One of the least popular examples of heavy assault rifles from Aussec Armory. It has impressive firepower.
+ent-WeaponRifleLarker = larker
+    .desc = A scoped marksman rifle for medium-range combat, based on the Lecter platform. Chambered in .308.

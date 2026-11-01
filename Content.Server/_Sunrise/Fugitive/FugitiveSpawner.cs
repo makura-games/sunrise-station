@@ -1,21 +1,17 @@
 using Content.Server.Mind;
 using Content.Server.Popups;
-using Content.Server.Store.Systems;
 using Content.Server.Stunnable;
 using Content.Server.Traitor.Uplink;
 using Content.Shared.Examine;
-using Content.Shared.FixedPoint;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
 using Content.Shared.Maps;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Store.Components;
-using Content.Shared.StoreDiscount.Components;
 using Content.Shared.Tag;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
-using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
@@ -85,21 +81,16 @@ namespace Content.Server._Sunrise.Fugitive
                 if (!TryComp<SubdermalImplantComponent>(implantEnt, out var implantComp))
                     return;
 
-                _subdermalImplant.ForceImplant(fugitive, (implantEnt, implantComp));
-            }
-
-            if (TryComp<ContainerManagerComponent>(fugitive, out var containerManagerComponent))
-            {
-                if (containerManagerComponent.Containers.TryGetValue("implant", out var container))
+                if (TryComp<RemoteStoreComponent>(implantEnt, out var remoteStore))
                 {
-                    foreach (var containedEntity in container.ContainedEntities)
-                    {
-                        if (!TryComp<StoreComponent>(containedEntity, out var storeComponent))
-                            continue;
-                        _uplinkSystem.SetSunriseUplink(fugitive, containedEntity, _random.Next(5, 10), true);
-                        _tagSystem.AddTag(containedEntity, FugitiveUplinkTag);
-                    }
+                    // Магазин создаётся до имплантации, чтобы аплинк сразу привязался к счёту беглеца.
+                    var store = Spawn(UplinkSystem.TraitorUplinkStore, MapCoordinates.Nullspace);
+                    _tagSystem.AddTag(store, FugitiveUplinkTag);
+                    _uplinkSystem.SetSunriseUplink(fugitive, store, _random.Next(5, 10), true);
+                    remoteStore.Store = store;
                 }
+
+                _subdermalImplant.ForceImplant(fugitive, (implantEnt, implantComp));
             }
 
             Del(uid);

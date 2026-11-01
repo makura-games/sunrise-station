@@ -17,7 +17,6 @@ using Content.Shared.Construction;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.ForceSay;
 using Content.Shared.GameTicking;
-using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Mech.Components;
@@ -36,6 +35,7 @@ using Robust.Shared.Utility;
 using System.Numerics;
 using Content.Shared.Gibbing;
 using Robust.Shared.Maths;
+using Content.Shared.Ghost.Components;
 
 namespace Content.Server._Sunrise.Boss.Systems;
 
@@ -46,7 +46,7 @@ public sealed partial class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
     [Dependency] private MapLoaderSystem _loader = default!;
     [Dependency] private ILogManager _log = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private TransformSystem _transform = default!;
@@ -101,7 +101,7 @@ public sealed partial class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
             UpdateArenaUi();
             await Task.Delay(1000);
             if (ArenaMap != null)
-                _mapManager.DeleteMap(ArenaMap.Value);
+                _map.DeleteMap(ArenaMap.Value);
         }
     }
 
@@ -140,8 +140,8 @@ public sealed partial class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
             return;
         TeleportFightersBack();
         await Task.Delay(1000);
-        if (ArenaMap != null && _mapManager.MapExists(ArenaMap))
-            _mapManager.DeleteMap(ArenaMap.Value);
+        if (ArenaMap != null && _map.MapExists(ArenaMap))
+            _map.DeleteMap(ArenaMap.Value);
     }
 
     private async void OnCultistGib(EntityUid uid, HellSpawnCultistComponent component, BeingGibbedEvent args)
@@ -151,7 +151,7 @@ public sealed partial class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
         TeleportFightersBack();
         await Task.Delay(1000);
         if (ArenaMap != null)
-            _mapManager.DeleteMap(ArenaMap.Value);
+            _map.DeleteMap(ArenaMap.Value);
     }
 
     private async void OnSpawnMobStateChanged(EntityUid uid, HellSpawnComponent component, MobStateChangedEvent args)
@@ -166,7 +166,7 @@ public sealed partial class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
             _transform.SetCoordinates(uid, Transform(consoleUid).Coordinates);
         await Task.Delay(1000);
         if (ArenaMap != null)
-            _mapManager.DeleteMap(ArenaMap.Value);
+            _map.DeleteMap(ArenaMap.Value);
     }
 
     /// <summary>
@@ -388,7 +388,7 @@ public sealed partial class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
     public MapId? CreateMap()
     {
         var mapInt = 2000;
-        while (_mapManager.MapExists(new MapId(mapInt)))
+        while (_map.MapExists(new MapId(mapInt)))
         {
             mapInt += 1;
         }

@@ -4884,3 +4884,148 @@
     message: Молот Синдиката опять можно брать в две руки
   id: 2032
   url: https://github.com/makura-games/sunrise-station/pull/4814
+- author: privett, Fungiviv
+  time: '2026-09-20T11:51:25.0000000+00:00'
+  changes:
+  - type: Add
+    message: Карта Треин добавлена в пул карт.
+  - type: Add
+    message: Карта Оазис добавлена для тестов.
+  - type: Add
+    message: Карта Гельта добавлена для тестов.
+  - type: Add
+    message: Добавлены шаттлы Службы безопасности "Стрела" и "Вангуард".
+  - type: Add
+    message: Добавлен шаттл утилизаторов "Черепашка".
+  - type: Add
+    message: Добавлен шаттл одиночного ядерного оперативника "Seeker", заменяющий стандартный.
+  - type: Add
+    message: Добавлен шаттл эвакуации повышенного комфорта для станций Бокс и Багель.
+  - type: Add
+    message: Добавлена станция Центрального командования, заменяющая старую.
+  - type: Fix
+    message: Все доступные игровые карты были изменены с учетом исправления ошибок.
+  id: 2033
+  url: https://github.com/makura-games/sunrise-station/pull/4829
+  media:
+  - url: https://github.com/user-attachments/assets/d0e7ea3e-f0f1-4038-8e66-793198e70e3b
+    description: Станция Оазис с новыми шаттлами.
+- author: Foxtrot_Uniform
+  time: '2026-09-25T11:21:18.0000000+00:00'
+  changes:
+  - type: Tweak
+    message: ГСБ теперь имеет доступ к алкоматам, которые находятся у него в кабинете.
+  id: 2034
+  url: https://github.com/makura-games/sunrise-station/pull/4823
+- author: ThereDrD
+  time: '2026-09-27T00:17:38.0000000+00:00'
+  changes:
+  - type: Fix
+    message: Исправлено отсутствие спавнеров почтальона на картах, теперь они спавнятся где надо
+  id: 2035
+  url: https://github.com/makura-games/sunrise-station/pull/4827
+- author: KaiserMaus, Confee
+  time: '2026-09-27T00:21:25.0000000+00:00'
+  changes:
+  - type: Tweak
+    message: Были переработаны спрайты самодельного меча, импровизированного меча, кованого меча (с частями), Рассветного клинка и Приливного клинка (с частями). Новые спрайты теперь соответствуют существующим спрайтам из оригинальной игры (Клеймора, Сабли, Абордажной сабли).
+  id: 2036
+  url: https://github.com/makura-games/sunrise-station/pull/4752
+  media:
+  - url: https://github.com/user-attachments/assets/be3bd6fc-b7f3-4c7d-8d25-e0a26ce7e456
+    description: image
+- author: ThereDrD
+  time: '2026-09-27T00:21:45.0000000+00:00'
+  changes:
+  - type: Fix
+    message: Исправлен пропавший после обновления донат, плашки дискорда и время
+  id: 2037
+  url: https://github.com/makura-games/sunrise-station/pull/4835
+- author: KaiserMaus
+  time: '2026-10-01T21:42:14.0000000+00:00'
+  changes:
+  - type: Add
+    message: Офицер «Синего щита» получил блюспейс-имплант, имплант-реаниматор, имплант «Прото-адренал» и имплант предсмертного хрипа «Синего щита».
+  - type: Tweak
+    message: Усилена обычная и улучшенная броня «Синего щита», включая защиту улучшенного жилета от взрывов.
+  - type: Tweak
+    message: Офицеру теперь выдаётся профильная гарнитура «Синего щита» c доступом к каналу коммандования.
+  id: 2038
+  url: https://github.com/makura-games/sunrise-station/pull/4809
+- author: Nordstream17
+  time: '2026-10-07T12:10:13.0000000+00:00'
+  changes:
+  - type: Add
+    message: Т2 технологию "Боевого снаряжения" добавлена печать подсумка для магазинов.
+  - type: Add
+    message: Для ОБР и ЯО добавлены новые подсумки средней и большой вместимости, рассчитанные на 5 и 8 магазинов, соответственно.
+  - type: Add
+    message: В рюкзаки ЯО и ОБР добавлены карманы для снаряжения(небольшое вложенное хранилище в инвентаре), предназначенные для хранения различной взрывчатки, гранат и магазинов для оружия.
+  - type: Add
+    message: Для инженеров добавлен подсумок для материалов.
+  id: 2039
+  url: https://github.com/makura-games/sunrise-station/pull/4782
+- author: ПТ | KAVALDi
+  time: '2026-10-09T09:48:39.0000000+00:00'
+  changes:
+  - type: Tweak
+    message: Изменил требуемое время на открытие тюремных пинов (значок строгого режима -> было 100 часов, стало 1 час) и (значок тюремного блока -> было 50 часов, стало 0 часов)
+  id: 2040
+  url: https://github.com/makura-games/sunrise-station/pull/4849
+- author: privett
+  time: '2026-10-14T17:29:58.0000000+00:00'
+  changes:
+  - type: Remove
+    message: Лазган пилота СБ удален из шкафа пилота.
+  id: 2041
+  url: https://github.com/makura-games/sunrise-station/pull/4855
+- author: privett
+  time: '2026-10-14T21:45:57.0000000+00:00'
+  changes:
+  - type: Add
+    message: Добавлены роль офицера ИСН и кабинеты для должности на картах Бокс, Багель, Марафон, Поезд и Оазис.
+  - type: Fix
+    message: Доступные игровые карты были изменены с учетом исправления ошибок.
+  - type: Remove
+    message: Удалена цель на Ромерол.
+  id: 2042
+  url: https://github.com/makura-games/sunrise-station/pull/4854
+- author: ThereDrD
+  time: '2026-10-14T21:45:08.0000000+00:00'
+  changes:
+  - type: Fix
+    message: Исправлена уязвимость дающая возможность читерам гостать всех игроков
+  id: 2043
+  url: https://github.com/makura-games/sunrise-station/pull/4856
+- author: ThereDrD
+  time: '2026-10-17T01:42:08.0000000+00:00'
+  changes:
+  - type: Fix
+    message: Исправлена очередная уязвимость, которая позволяла ронять сервер
+  id: 2044
+  url: https://github.com/makura-games/sunrise-station/pull/4857
+- author: KaiserMaus
+  time: '2026-10-26T14:02:48.0000000+00:00'
+  changes:
+  - type: Tweak
+    message: Шахтёры скопали весь Планетоид, похоже он всё.
+  id: 2045
+  url: https://github.com/makura-games/sunrise-station/pull/4847
+- author: Den_Gor, Matizze
+  time: '2026-10-26T15:17:11.0000000+00:00'
+  changes:
+  - type: Fix
+    message: 'Исправлена ошибка, из-за которой бесконечно игрался звук сердцебиения
+
+      при попытке реанимировать игрока дефибриллятором.'
+  id: 2046
+  url: https://github.com/makura-games/sunrise-station/pull/4868
+- author: kanopus7
+  time: '2026-10-29T14:50:53.0000000+00:00'
+  changes:
+  - type: Add
+    message: Апстрим от визден до 13 сентрября
+  - type: Add
+    message: Генокрады, коляски, телепорты и многое другое!
+  id: 2047
+  url: https://github.com/makura-games/sunrise-station/pull/4819

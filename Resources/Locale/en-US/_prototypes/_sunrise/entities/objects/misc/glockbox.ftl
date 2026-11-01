@@ -1,10 +1,14 @@
 ent-GlockBox = glock box
     .desc = It contains a pistol and a magazine for it. Did you want something else?
-ent-MK58Box = MK58 box
+ent-MK58Box = mK58 box
     .desc = It contains a MK58 and a rubber magazine for it. Did you want something else?
-ent-MK58GoldBox = Gold MK58 box
+ent-MK58GoldBox = gold MK58 box
     .desc = It contains a Gold MK58 and a rubber magazine for it. Ave Security!
 ent-SnubRevolverBox = snub-nosed revolver box
     .desc = Inside rests a snub-nosed revolver and a rubber speedloader. Old school, ready for action.
-ent-VP78Box = VP78 box
+ent-VP78Box = vP78 box
     .desc = It contains a VP78 and a whole pouch of magazines for it. You will definitely have enough.
+ent-DeagleGoldBox = golden Eagle
+    .desc = Contains a pistol, a magazine, and a blueprint for .45 Magnum magazines for it. Did you want something else?
+ent-Ash12Box = aSH-12
+    .desc = An ASH-12 weapon and a blueprint for its magazines. Did you want something else?

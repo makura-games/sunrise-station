@@ -23,7 +23,7 @@ public sealed partial class FelinidLickingSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
     [Dependency] private StandingStateSystem _standing = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private MobStateSystem _mobState = default!;
@@ -58,7 +58,7 @@ public sealed partial class FelinidLickingSystem : EntitySystem
         if (!CanLick(ent, args.Target, out var errorMessage))
         {
             if (errorMessage != null)
-                _popup.PopupClient(errorMessage, ent, ent);
+                _popup.PopupEntity(errorMessage, ent, ent);
 
             return;
         }
@@ -99,7 +99,7 @@ public sealed partial class FelinidLickingSystem : EntitySystem
                 var popup = ent.Owner == target
                     ? Loc.GetString("medical-item-stop-bleeding-self")
                     : Loc.GetString("medical-item-stop-bleeding", ("target", Identity.Entity(target, EntityManager)));
-                _popup.PopupClient(popup, target, ent);
+                _popup.PopupEntity(popup, target, ent);
             }
         }
 

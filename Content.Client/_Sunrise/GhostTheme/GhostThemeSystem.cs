@@ -9,7 +9,6 @@ public sealed partial class GhostThemeSystem : EntitySystem
 {
     private const string UpstreamGhostLayer = "ghostVariant";
 
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
@@ -25,7 +24,7 @@ public sealed partial class GhostThemeSystem : EntitySystem
             return;
 
         if (ent.Comp.GhostTheme == null ||
-            !_proto.TryIndex<GhostThemePrototype>(ent.Comp.GhostTheme, out var ghostTheme) ||
+            !ProtoMan.TryIndex<GhostThemePrototype>(ent.Comp.GhostTheme, out var ghostTheme) ||
             ghostTheme.UseUpstreamSprite)
         {
             RestoreUpstreamSprite((ent, sprite));

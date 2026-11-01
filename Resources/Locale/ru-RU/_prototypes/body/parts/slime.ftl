@@ -20,7 +20,6 @@ ent-LeftFootSlime = левая стопа слаймолюда
     .desc = { ent-PartSlime.desc }
 ent-RightFootSlime = правая стопа слаймолюда
     .desc = { ent-PartSlime.desc }
-
 ent-OrganSlimePersonTorso = { ent-TorsoSlime }
     .desc = { ent-TorsoSlime.desc }
 ent-OrganSlimePersonHead = { ent-HeadSlime }

@@ -25,14 +25,10 @@ namespace Content.Server._Sunrise.PlanetPrison
         [Dependency] private IGameTiming _gameTiming = default!;
         [Dependency] private ISharedPlayerManager _player = default!;
 
-        [ValidatePrototypeId<EntityPrototype>]
-        private const string MindRole = "MindRolePlanetPrisoner";
-        [ValidatePrototypeId<EntityPrototype>]
-        private const string EscapeObjective = "PlanetPrisonerEscapeObjective";
-        [ValidatePrototypeId<EntityPrototype>]
-        private const string StayFreeObjective = "PlanetPrisonerStayFreeObjective";
-        [ValidatePrototypeId<EntityPrototype>]
-        private const string GameRule = "PlanetPrison";
+        private static readonly EntProtoId MindRole = "MindRolePlanetPrisoner";
+        private static readonly EntProtoId EscapeObjective = "PlanetPrisonerEscapeObjective";
+        private static readonly EntProtoId StayFreeObjective = "PlanetPrisonerStayFreeObjective";
+        private static readonly EntProtoId GameRule = "PlanetPrison";
 
         private const float EscapeDistance = 150f;
 

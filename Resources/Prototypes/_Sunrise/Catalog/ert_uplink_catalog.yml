@@ -1438,7 +1438,7 @@
 
 - type: listing
   id: ERTUplinkTrashBagBlue
-  productEntity: TrashBagBlue
+  productEntity: TrashBagHolding
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: trash_bag_blue }
   cost:
     Crystallite: 1
@@ -1709,11 +1709,23 @@
     stock: 4
 
 - type: listing
-  id: ERTUplinkPouchAmmo
-  productEntity: PouchAmmo
+  id: ERTUplinkPouchAmmoMedium
+  productEntity: PouchAmmoMedium
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: pouchammo }
   cost:
-    Crystallite: 3
+    Crystallite: 4
+  categories:
+    - NTEquipment
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 10
+
+- type: listing
+  id: ERTUplinkPouchAmmoLarge
+  productEntity: PouchAmmoLarge
+  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: pouchammo }
+  cost:
+    Crystallite: 6
   categories:
     - NTEquipment
   conditions:

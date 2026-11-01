@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Station.Components;
@@ -79,7 +80,6 @@ public abstract partial class GameRuleSystem<T> where T: IComponent
         return false;
     }
 
-    // Sunrise edit start - порт исправленного выбора только среди реально заполненных тайлов из Wizden.
     protected bool TryFindRandomTileOnStation(Entity<StationDataComponent> station,
         out Vector2i tile,
         out EntityUid targetGrid,
@@ -90,6 +90,7 @@ public abstract partial class GameRuleSystem<T> where T: IComponent
         targetCoords = EntityCoordinates.Invalid;
         targetGrid = EntityUid.Invalid;
 
+        // Weight grid choice by tilecount
         var totalTiles = 0;
         var grids = new List<(Entity<MapGridComponent> Entity, int Count, List<TileRef> Tiles)>();
         foreach (var possibleTarget in station.Comp.Grids)
@@ -97,12 +98,15 @@ public abstract partial class GameRuleSystem<T> where T: IComponent
             if (!TryComp<MapGridComponent>(possibleTarget, out var comp))
                 continue;
 
-            var tiles = _map.GetAllTiles(possibleTarget, comp).ToList();
-            if (tiles.Count == 0)
-                continue;
+            // Get the tile count for the given grid.
+            var tileCount = _map.GetFilledTileCount((possibleTarget, comp));
 
-            grids.Add(((possibleTarget, comp), tiles.Count, tiles));
-            totalTiles += tiles.Count;
+            // Just to be sure, no empty elements.
+            if (tileCount > 0)
+            {
+                grids.Add(((possibleTarget, comp), tileCount, new()));
+                totalTiles += tileCount;
+            }
         }
 
         if (grids.Count == 0)
@@ -111,15 +115,18 @@ public abstract partial class GameRuleSystem<T> where T: IComponent
             return false;
         }
 
+        // Sunrise-Edit: выборка может исчерпать все плитки раньше числа попыток.
         for (var i = 0; i < numAttempts && totalTiles > 0; i++)
         {
+            // Find random tile within list.
             var nextTileIndex = RobustRandom.Next(totalTiles);
             TileRef? randomTileRef = null;
             MapGridComponent gridComp = default!;
             var startIndex = 0;
-            for (var j = 0; j < grids.Count; j++)
+            for (int j = 0; j < grids.Count; j++)
             {
                 var grid = grids[j];
+                // If the index is in this particular grid, find it and remove the tile to prevent selecting it twice.
                 if (nextTileIndex >= startIndex + grid.Count)
                 {
                     startIndex += grid.Count;
@@ -127,35 +134,54 @@ public abstract partial class GameRuleSystem<T> where T: IComponent
                 }
 
                 (targetGrid, gridComp) = grid.Entity;
-                var gridTileIndex = nextTileIndex - startIndex;
-                randomTileRef = grid.Tiles[gridTileIndex];
-                grid.Tiles.RemoveSwap(gridTileIndex);
+
+                // Empty list: hasn't been queried yet - get our tiles.
+                if (grid.Tiles.Count <= 0)
+                {
+                    grid.Tiles = _map.GetAllTiles(targetGrid, gridComp).ToList();
+
+                    // Actual list count doesn't match expected count (a bug - return failure).
+                    Debug.Assert(grid.Tiles.Count == grid.Count);
+                    if (grid.Tiles.Count != grid.Count)
+                        return false;
+                }
+
+                var ourTileIndex = nextTileIndex - startIndex;
+                randomTileRef = grid.Tiles[ourTileIndex];
+                grid.Tiles.RemoveSwap(ourTileIndex);
                 grid.Count--;
                 totalTiles--;
 
-                if (grid.Count == 0)
+                // Sunrise edit start - сохраняем уменьшенный вес сетки после удаления плитки.
+                if (grid.Count <= 0)
                     grids.RemoveSwap(j);
                 else
                     grids[j] = grid;
+                // Sunrise edit end
 
                 break;
             }
 
+            // Out of valid tiles, return early.
             if (randomTileRef is not { } tileRef)
                 return false;
 
+            tile = tileRef.GridIndices; // Sunrise-Edit: возвращаем и проверяем выбранную, а не нулевую плитку.
+
+            // Invalid tile, try again.
             if (_atmosphere.IsTileSpace(targetGrid, Transform(targetGrid).MapUid, tileRef.GridIndices)
                 || _atmosphere.IsTileAirBlockedCached(targetGrid, tileRef.GridIndices))
+            {
                 continue;
+            }
 
+            targetCoords = _map.GridTileToLocal(targetGrid, gridComp, tileRef.GridIndices);
             tile = tileRef.GridIndices;
-            targetCoords = _map.GridTileToLocal(targetGrid, gridComp, tile);
             return true;
         }
 
         return false;
     }
-    // Sunrise edit end
 
     protected void ForceEndSelf(EntityUid uid, GameRuleComponent? component = null)
     {

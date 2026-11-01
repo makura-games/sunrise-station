@@ -8,18 +8,16 @@ on:
     types: [ opened, reopened, synchronize ]
     branches: [ master ]
 
-# Sunrise added start - отменяем устаревший запуск этой проверки для того же PR
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
-# Sunrise added end
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'merge_group' }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Master
-      uses: actions/checkout@v4.2.2
+      uses: actions/checkout@v7
 
     # Sunrise edit start - команды CI хранятся в скриптах форка
     - name: Setup Submodule
@@ -33,7 +31,7 @@ jobs:
     # Sunrise edit end
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v4.1.0
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: 10.0.x
 
@@ -176,6 +174,17 @@ jobs:
         SEQUENCE_URL: ${{ steps.upload-sequences.outputs.artifact-url }}
         DUMP_URL: ${{ steps.upload-dumps.outputs.artifact-url }}
       run: bash Tools/_sunrise/ci/test_workflow.sh report-timeout
+
+    # Sunrise added start - сохраняем консольный поток неуспешного шарда для диагностики
+    - name: Upload integration console log
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # actions/upload-artifact@v4
+      if: always() && steps.integration-tests.outcome == 'failure'
+      with:
+        name: integration-console-shard-${{ matrix.shard }}
+        path: /tmp/test-results/console.log
+        retention-days: 3
+        if-no-files-found: ignore
+    # Sunrise added end
   ci-success:
     name: Build & Test Debug
     needs:

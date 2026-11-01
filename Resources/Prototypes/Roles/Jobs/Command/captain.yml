@@ -24,12 +24,10 @@
       species: [Vox]
       inverted: true
     # Sunrise added end
-  weight: 20
   startingGear: CaptainGear
   icon: "JobIconCaptain"
   joinNotifyCrew: true
   supervisors: job-supervisors-centcom
-  displayWeight: 100 # Sunrise-Edit
   radioBold: true # Sunrise-Edit
   accessGroups:
   - AllAccess

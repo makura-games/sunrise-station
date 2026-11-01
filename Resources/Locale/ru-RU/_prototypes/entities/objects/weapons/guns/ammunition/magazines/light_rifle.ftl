@@ -1,8 +1,8 @@
 ent-BaseMagazineLightRifle = магазин (5,56мм)
     .desc = { ent-BaseItem.desc }
 ent-MagazineLightRifleEmpty = магазин (7,62 любые)
-    .suffix = Пустой
     .desc = { ent-MagazineLightRifle.desc }
+    .suffix = Пустой
 ent-MagazineLightRifleSP = магазин (7,62)
     .desc = { ent-BaseMagazineLightRifle.desc }
 ent-MagazineLightRifleFMJ = магазин (7,62 ПП)

@@ -6,7 +6,6 @@
   - type: SolutionManager
     solutions:
     - SolutionSunriseStomachSmall
-    - SolutionSunriseRawProteinFood
 
 - type: entity
   id: OrganTajaranEyes
@@ -16,7 +15,10 @@
   components:
   - type: FunctionalOrgan
     comps:
-    - type: ToggleableNightVision
-      effect: EffectNightVisioSpecies
+    - type: NightVision
+      enabled: false
+      action: ActionToggleNightVision
+      prioritized: false
+      lightingColor: '#FFFFFF15'
     - type: FlashModifier
       modifier: 2
