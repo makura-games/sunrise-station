@@ -361,9 +361,7 @@ public sealed partial class StationJobsSystem
         {
             var roleBans = _banManager.GetJobBans(player);
             var profileJobs = profile.JobPriorities.Keys.Select(k => new ProtoId<JobPrototype>(k)).ToList();
-            // Sunrise edit start - проверяем профиль, используемый для назначения работы
-            var ev = new StationJobsGetCandidatesEvent(player, profileJobs) { Profile = profile };
-            // Sunrise edit end
+            var ev = new StationJobsGetCandidatesEvent(player, profileJobs);
             RaiseLocalEvent(ref ev);
 
             // Shouldn't happen but you know :P

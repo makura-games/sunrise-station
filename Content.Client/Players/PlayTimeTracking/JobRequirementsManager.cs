@@ -155,10 +155,8 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
 
         // Check other role requirements
         var reqs = _entManager.System<SharedRoleSystem>().GetRoleRequirements(job);
-        // Sunrise edit start - проверяем расу для работ независимо от таймеров
-        if (!CheckRoleRequirements(reqs, job.ID, profile, out reason, checkSpecies: true))
+        if (!CheckRoleRequirements(reqs, job.ID, profile, out reason))
             return false;
-        // Sunrise edit end
 
         return true;
     }
@@ -191,15 +189,13 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
     }
 
     // This must be private so code paths can't accidentally skip requirement overrides. Call this through IsAllowed()
-    // Sunrise edit start - отдельная проверка расы нужна только для работ
-    private bool CheckRoleRequirements(HashSet<JobRequirement>? requirements, string protoId, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason, bool checkSpecies = false)
-    // Sunrise edit end
+    private bool CheckRoleRequirements(HashSet<JobRequirement>? requirements, string protoId, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason) // Sunrise-Edit
     {
         reason = null;
 
         // Sunrise edit start - расовые требования действуют при выключенных таймерах
         var checkTimers = _cfg.GetCVar(CCVars.GameRoleTimers);
-        if (requirements == null || (!checkTimers && !checkSpecies))
+        if (requirements == null)
             return true;
 
         var sponsorPrototypes = _sponsorsMgr?.GetClientPrototypes().ToArray() ?? []; // Sunrise-Sponsors

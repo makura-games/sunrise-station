@@ -182,9 +182,7 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
 
     private void OnStationJobsGetCandidates(ref StationJobsGetCandidatesEvent ev)
     {
-        // Sunrise edit start - используем профиль из назначения работы
-        RemoveDisallowedJobs(ev.Player, ev.Jobs, ev.Profile);
-        // Sunrise edit end
+        RemoveDisallowedJobs(ev.Player, ev.Jobs);
     }
 
     private void OnIsRoleAllowed(ref IsRoleAllowedEvent ev)
@@ -248,12 +246,12 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
     {
         // Sunrise edit start - проверяем расу даже без таймеров ролей
         var checkTimers = _cfg.GetCVar(CCVars.GameRoleTimers);
-        Dictionary<string, TimeSpan>? playTimes = new();
+        Dictionary<string, TimeSpan>? playTimes = null;
         if (checkTimers && !_tracking.TryGetTrackerTimes(player, out playTimes))
         {
             Log.Error($"Unable to check playtimes {Environment.StackTrace}");
-            playTimes = new Dictionary<string, TimeSpan>();
         }
+        playTimes ??= new Dictionary<string, TimeSpan>();
         // Sunrise edit end
 
         // Sunrise-Sponsors-Start
@@ -286,14 +284,15 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
     /// <returns>Returns true if all requirements were met or there were no requirements.</returns>
     public bool IsAllowed(ICommonSession player, ProtoId<AntagPrototype> antag)
     {
-        if (!_cfg.GetCVar(CCVars.GameRoleTimers))
-            return true;
-
-        if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
+        // Sunrise edit start - проверяем расу даже без таймеров ролей
+        var checkTimers = _cfg.GetCVar(CCVars.GameRoleTimers);
+        Dictionary<string, TimeSpan>? playTimes = null;
+        if (checkTimers && !_tracking.TryGetTrackerTimes(player, out playTimes))
         {
             Log.Error($"Unable to check playtimes {Environment.StackTrace}");
-            playTimes = new Dictionary<string, TimeSpan>();
         }
+        playTimes ??= new Dictionary<string, TimeSpan>();
+        // Sunrise edit end
 
         // Sunrise-Sponsors-Start
         var sponsorPrototypes = _sponsorsManager != null && _sponsorsManager.TryGetPrototypes(player.UserId, out var prototypes)
@@ -311,7 +310,8 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
             (HumanoidCharacterProfile?)
             _preferencesManager.GetPreferences(player.UserId).SelectedCharacter,
             antag.Id,
-            sponsorPrototypes);
+            sponsorPrototypes,
+            checkTimers); // Sunrise-Edit
     }
 
     public HashSet<ProtoId<JobPrototype>> GetDisallowedJobs(ICommonSession player)
@@ -319,12 +319,12 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
         var roles = new HashSet<ProtoId<JobPrototype>>();
         // Sunrise edit start - проверяем расу даже без таймеров ролей
         var checkTimers = _cfg.GetCVar(CCVars.GameRoleTimers);
-        Dictionary<string, TimeSpan>? playTimes = new();
+        Dictionary<string, TimeSpan>? playTimes = null;
         if (checkTimers && !_tracking.TryGetTrackerTimes(player, out playTimes))
         {
             Log.Error($"Unable to check playtimes {Environment.StackTrace}");
-            playTimes = new Dictionary<string, TimeSpan>();
         }
+        playTimes ??= new Dictionary<string, TimeSpan>();
         // Sunrise edit end
 
         // Sunrise-Sponsors-Start
@@ -344,20 +344,18 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
         return roles;
     }
 
-    // Sunrise edit start - принимаем фактический профиль персонажа
-    public void RemoveDisallowedJobs(NetUserId userId, List<ProtoId<JobPrototype>> jobs, HumanoidCharacterProfile? profile = null)
-    // Sunrise edit end
+    public void RemoveDisallowedJobs(NetUserId userId, List<ProtoId<JobPrototype>> jobs)
     {
         // Sunrise edit start - проверяем расу даже без таймеров ролей
         var checkTimers = _cfg.GetCVar(CCVars.GameRoleTimers);
         var player = _playerManager.GetSessionById(userId);
-        Dictionary<string, TimeSpan>? playTimes = new();
+        Dictionary<string, TimeSpan>? playTimes = null;
         if (checkTimers && !_tracking.TryGetTrackerTimes(player, out playTimes))
         {
             // Sorry mate but your playtimes haven't loaded.
             Log.Error($"Playtimes weren't ready yet for {player} on roundstart!");
-            playTimes ??= new Dictionary<string, TimeSpan>();
         }
+        playTimes ??= new Dictionary<string, TimeSpan>();
         // Sunrise edit end
 
         // Sunrise-Sponsors-Start
@@ -366,15 +364,11 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
             : [];
         // Sunrise-Sponsors-End
 
-        // Sunrise added start - выбранный профиль нужен только при отсутствии переданного
-        profile ??= (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(userId).SelectedCharacter;
-        // Sunrise added end
-
         for (var i = 0; i < jobs.Count; i++)
         {
             // Sunrise edit start - передаём режим проверки требований
             if (_prototypes.Resolve(jobs[i], out var job)
-                && JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, profile, sponsorPrototypes, checkTimers)) // Sunrise-Sponsors
+                && JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(userId).SelectedCharacter, sponsorPrototypes, checkTimers)) // Sunrise-Sponsors
             {
                 continue;
             }

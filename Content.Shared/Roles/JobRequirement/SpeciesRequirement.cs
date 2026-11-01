@@ -32,8 +32,8 @@ public sealed partial class SpeciesRequirement : JobRequirement
         if (profile is null) //the profile could be null if the player is a ghost. In this case we don't need to block the role selection for ghostrole
             return true;
 
-        // Sunrise added start - разрешаем обход ограничения при доступе спонсора к роли
-        if (sponsorPrototypes.Contains(protoId))
+        // Sunrise added start - доступ спонсора к роли обходит только чёрный список рас
+        if (Inverted && sponsorPrototypes.Contains(protoId))
             return true;
         // Sunrise added end
 

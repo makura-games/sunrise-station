@@ -13,11 +13,11 @@
     - !type:DepartmentTimeRequirement
       department: Engineering
       time: 10h
-    # Sunrise edit start - ограничение расы для должности
+    # Sunrise added start - сохраняем чёрный список при переносе в требования роли
     - !type:SpeciesRequirement
       species: [Vox]
       inverted: true
-    # Sunrise edit end
+    # Sunrise added end
   weight: 10
   startingGear: ChiefEngineerGear
   icon: "JobIconChiefEngineer"
