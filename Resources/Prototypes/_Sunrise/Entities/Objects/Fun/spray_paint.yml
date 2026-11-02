@@ -18,6 +18,7 @@
     blacklist:
       tags:
         - NoPaint
+        - PressureProtection
   - type: Item
     sprite: Objects/Fun/spraycans.rsi
     heldPrefix: spray
