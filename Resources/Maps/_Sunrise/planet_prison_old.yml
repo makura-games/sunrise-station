@@ -30371,9 +30371,6 @@ entities:
       nextSound: -42195.6958471
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: InsideEntityStorage
-      storage: 5
 - proto: CheckerBoard
   entities:
   - uid: 5149

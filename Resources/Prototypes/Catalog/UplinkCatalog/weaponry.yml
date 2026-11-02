@@ -126,25 +126,27 @@
   categories:
   - UplinkWeaponry
 
-- type: listing
-  id: UplinkEshield
-  name: uplink-experimental-eshield-name # Sunrise-Edit
-  description: uplink-experimental-eshield-desc # Sunrise-Edit
-  icon: { sprite: /Textures/Objects/Weapons/Melee/e_shield.rsi, state: eshield-on }
-  productEntity: EnergyShieldBiocode
-  discountCategory: veryRareDiscounts
-  discountDownTo:
-    Telecrystal: 4
-  cost:
-    Telecrystal: 8
-  categories:
-  - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Edit
+# Sunrise edit start - Перемещено в каталог _Sunrise
+# - type: listing
+#   id: UplinkEshield
+#   name: uplink-experimental-eshield-name
+#   description: uplink-experimental-eshield-desc
+#   icon: { sprite: /Textures/Objects/Weapons/Melee/e_shield.rsi, state: eshield-on }
+#   productEntity: EnergyShieldBiocode
+#   discountCategory: veryRareDiscounts
+#   discountDownTo:
+#     Telecrystal: 4
+#   cost:
+#     Telecrystal: 8
+#   categories:
+#   - UplinkWeaponry
+#   conditions:
+#   - !type:StoreWhitelistCondition
+#     whitelist:
+#       tags:
+#       - NukeOpsUplink
+#       - LoneOpsUplink
+# Sunrise edit end
 
 - type: listing
   id: uplinkRiggedBoxingGloves
