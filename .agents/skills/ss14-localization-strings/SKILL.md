@@ -148,9 +148,15 @@ Follow these rules strictly. They set a unified visual style for the game.
     * ✅ `.desc = A useful tool.`
     * ❌ `.desc = a useful tool`
 
+3. **Uplink card names (`uplink-*-name`) are an explicit exception - with a capital letter.**
+    * Uplink values are UI titles, so the general lowercase rule for item names does not apply to them.
+    * ✅ `uplink-esword-name = Energy Sword`
+    * ✅ `uplink-esword-name = Энергетический меч`
+    * ❌ `uplink-esword-name = energy sword`
+
 ### 🎨 Description Style (Visual Style)
 
-1. **Visuals only.**
+1. **Entity `.desc`: visuals and IC-observable properties only.**
     * The description should talk about what the character *sees* or *feels*.
     * Avoid dry technical data if it is not visible on the item (for example, “Deals 10 damage”).
 
@@ -160,6 +166,11 @@ Follow these rules strictly. They set a unified visual style for the game.
     * ❌ "Press the G button to activate."
     * ✅ "OOC: Press G button to activate."
     * ✅ "Looks heavy and durable."
+
+3. **Uplink descriptions may explain mechanics.**
+    * `uplink-*-desc` is the product card in a game store. It may describe purpose, contents, ammunition, duration, recharge, uses, and other gameplay-relevant properties without an `OOC:` prefix.
+    * Do not apply the entity `.desc` “visuals only” restriction to `uplink-*-desc`.
+    * Use `OOC:` only when the text steps outside the product description into external instructions such as a keybind or UI operation.
 
 ### 🚫 Anti-patterns in FTL
 
@@ -174,6 +185,9 @@ Follow these rules strictly. They set a unified visual style for the game.
 ```ftl
 ent-StandardRadio = handheld radio
     .desc = A portable communication device.
+
+uplink-energy-dome-grenade-name = Shield deployment grenade
+uplink-energy-dome-grenade-desc = Deploys a temporary Syndicate energy shield generator on impact.
 
 interaction-popup-blocked = { THE($user) } tries to open the door, but it is locked!
 ```
