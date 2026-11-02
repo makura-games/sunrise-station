@@ -9,7 +9,7 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Components;
 /// <summary>
 /// Состояние питания вампира.
 /// </summary>
-// Снимок целиком обходит ограничение генератора field deltas для Dictionary с ключами EntityUid.
+// Полный снимок обходит ограничение генератора дельт состояния для Dictionary с ключами EntityUid.
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class VampireFeedingComponent : Component
 {
@@ -24,22 +24,19 @@ public sealed partial class VampireFeedingComponent : Component
     /// <summary>
     /// Предел сытости.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float MaxBloodFullness = 200f;
 
     /// <summary>
     /// Убывание сытости в секунду.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float FullnessDecayPerSecond = 0.15f;
 
     /// <summary>
     /// Расход крови при голоде.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int StarvationDrunkBloodDrainPerSecond = 2;
 
     /// <summary>
@@ -51,65 +48,55 @@ public sealed partial class VampireFeedingComponent : Component
     /// <summary>
     /// Следующее обновление.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-    [AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextUpdate;
 
     /// <summary>
     /// Предыдущее обновление.
     /// </summary>
-    [AutoNetworkedField]
-    [AutoPausedField]
+    [AutoNetworkedField, AutoPausedField]
     public TimeSpan LastUpdate;
 
     /// <summary>
     /// Интервал обновления.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan UpdateDelay = TimeSpan.FromSeconds(1);
 
     /// <summary>
     /// Звук укуса.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public SoundSpecifier BiteSound = new SoundPathSpecifier("/Audio/Effects/bite.ogg");
 
     /// <summary>
     /// Эффект укуса.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntProtoId BiteEffect = "WeaponArcBite";
 
     /// <summary>
     /// Слоты, способные закрыть рот.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public string[] MouthCoveringSlots = ["mask", "head"];
 
     /// <summary>
     /// Громкость укуса.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float BiteVolume = -7f;
 
     /// <summary>
     /// Укусов до травмы глаз.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int BitesPerEyeDamage = 3;
 
     /// <summary>
     /// Травма глаз от укусов.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int EyeDamage = 1;
 
     /// <summary>

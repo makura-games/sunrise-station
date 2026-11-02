@@ -15,7 +15,7 @@ using Robust.Shared.Timing;
 namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 /// <summary>
-/// Predicts vampire abilities, feeding, blood reserves and power progression.
+/// Предсказывает способности вампира, питание, запас крови и развитие силы.
 /// </summary>
 public sealed partial class VampireSystem : EntitySystem
 {
@@ -43,7 +43,7 @@ public sealed partial class VampireSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        // Состояние пересчитывается и при повторном предикте; таймеры откатываются из component state.
+        // Состояние пересчитывается и при повторном предикте; таймеры восстанавливаются из сетевого состояния компонента.
         var now = _timing.CurTime;
         var query = EntityQueryEnumerator<VampireFeedingComponent, VampireComponent, MetaDataComponent>();
         while (query.MoveNext(out var uid, out var feeding, out var vampire, out var metadata))

@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._Sunrise.Antags.Vampires.Components;
 
 /// <summary>
-/// Серверная конфигурация вампира.
+/// Настройки общей игровой логики и серверной роли вампира.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class VampireConfigurationComponent : Component
@@ -19,22 +19,19 @@ public sealed partial class VampireConfigurationComponent : Component
     /// <summary>
     /// Тип метаболизма.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public ProtoId<MetabolizerTypePrototype> MetabolizerType = "Vampire";
 
     /// <summary>
     /// Роль вампира.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntProtoId MindRole = "MindRoleVampire";
 
     /// <summary>
     /// Обязательные цели.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<EntProtoId> Objectives =
     [
         "VampireKillRandomPersonObjective",
@@ -44,8 +41,7 @@ public sealed partial class VampireConfigurationComponent : Component
     /// <summary>
     /// Группы случайных целей.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<ProtoId<WeightedRandomPrototype>> ObjectiveGroups =
     [
         "VampireObjectiveGroupsStateOnly",
@@ -55,23 +51,20 @@ public sealed partial class VampireConfigurationComponent : Component
     /// <summary>
     /// Предел сложности случайной цели.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float ObjectiveMaxDifficulty = 10f;
 
     /// <summary>
     /// Звук вступления.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public SoundSpecifier BriefingSound =
         new SoundPathSpecifier("/Audio/_Sunrise/Ambience/Antag/vampire_start.ogg");
 
     /// <summary>
     /// Базовые действия.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<EntProtoId> BaseActions =
     [
         "ActionVampireToggleFangs",
@@ -83,92 +76,79 @@ public sealed partial class VampireConfigurationComponent : Component
     /// <summary>
     /// Действие клыков.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntProtoId FangsAction = "ActionVampireToggleFangs";
 
     /// <summary>
     /// Действие взгляда.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntProtoId GlareAction = "ActionVampireGlare";
 
     /// <summary>
     /// Действие сна.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntProtoId SleepAction = "ActionVampireSleep";
 
     /// <summary>
     /// Первое омоложение.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntProtoId RejuvenateAction = "ActionVampireRejuvenateI";
 
     /// <summary>
     /// Улучшенное омоложение.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntProtoId RejuvenateUpgradedAction = "ActionVampireRejuvenateII";
 
     /// <summary>
     /// Задержка клыков.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan FangsUseDelay = TimeSpan.FromSeconds(2);
 
     /// <summary>
     /// Максимальный уровень обычной прогрессии.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public VampirePowerLevel MaxProgressionLevel = VampirePowerLevel.Ancient;
 
     /// <summary>
     /// Уровень обхода защиты веры.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public VampirePowerLevel FaithProtectionPowerLevel = VampirePowerLevel.Ancient;
 
     /// <summary>
     /// Порог направления взгляда.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float GlareDirectionThreshold = 0.8f;
 
     /// <summary>
     /// Допустимое движение во время сна.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float SleepMovementThreshold = 0.1f;
 
     /// <summary>
     /// Токсин немоты.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public ProtoId<ReagentPrototype> MuteToxinReagent = "MuteToxin";
 
     /// <summary>
     /// Группа реагентов для очищения.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public ProtoId<MetabolismStagePrototype> RejuvenatePurgeMetabolismStage = "Poison";
 
     /// <summary>
     /// Предупреждения цели сна.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<LocId> SleepTargetMessages =
     [
         "vampire-sleep-target-warning-1",
@@ -181,8 +161,7 @@ public sealed partial class VampireConfigurationComponent : Component
     /// <summary>
     /// Сообщения о новых уровнях силы.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public Dictionary<VampirePowerLevel, LocId> PowerLevelMessages = new()
     {
         [VampirePowerLevel.Awakened] = "vampire-power-awakened-message",
@@ -193,14 +172,12 @@ public sealed partial class VampireConfigurationComponent : Component
     /// <summary>
     /// Индикатор сытости.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public ProtoId<AlertPrototype> FedAlert = "VampireFed";
 
     /// <summary>
     /// Категория обычного голода.
     /// </summary>
-    [AutoNetworkedField]
-    [DataField]
+    [DataField, AutoNetworkedField]
     public ProtoId<AlertCategoryPrototype> HungerAlertCategory = "Hunger";
 }

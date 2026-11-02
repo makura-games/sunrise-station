@@ -14,7 +14,7 @@ using Robust.Shared.Timing;
 namespace Content.Server._Sunrise.Antags.Vampires.Systems;
 
 /// <summary>
-/// Handles vampire roles, objectives, briefings and holy vulnerabilities on the server.
+/// Управляет ролями, целями, сообщениями и уязвимостями вампиров к святыням на сервере.
 /// </summary>
 public sealed partial class ServerVampireSystem : EntitySystem
 {

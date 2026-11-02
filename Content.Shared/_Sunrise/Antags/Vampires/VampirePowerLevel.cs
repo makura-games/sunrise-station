@@ -76,7 +76,7 @@ public sealed partial class VampirePowerLevelPrototype : IPrototype
 }
 
 /// <summary>
-/// Настройки зарядов action.
+/// Настройки зарядов действия.
 /// </summary>
 [DataDefinition]
 public sealed partial class VampireActionChargeSettings
@@ -94,7 +94,7 @@ public sealed partial class VampireActionChargeSettings
     public TimeSpan RechargeDuration = TimeSpan.FromSeconds(90);
 
     /// <summary>
-    /// Задержка action.
+    /// Задержка действия.
     /// </summary>
     [DataField]
     public TimeSpan UseDelay = TimeSpan.FromSeconds(10);
@@ -162,7 +162,7 @@ public sealed partial class VampireFangsLevelSettings
 public sealed partial class VampireGlareLevelSettings
 {
     /// <summary>
-    /// Настройки action.
+    /// Настройки действия.
     /// </summary>
     [DataField]
     public VampireActionChargeSettings Action = new();
@@ -211,7 +211,7 @@ public sealed partial class VampireGlareLevelSettings
 public sealed partial class VampireSleepLevelSettings
 {
     /// <summary>
-    /// Настройки action.
+    /// Настройки действия.
     /// </summary>
     [DataField]
     public VampireActionChargeSettings Action = new();
@@ -260,7 +260,7 @@ public sealed partial class VampireSleepLevelSettings
 public sealed partial class VampireRejuvenationLevelSettings
 {
     /// <summary>
-    /// Настройки action.
+    /// Настройки действия.
     /// </summary>
     [DataField]
     public VampireActionChargeSettings Action = new();

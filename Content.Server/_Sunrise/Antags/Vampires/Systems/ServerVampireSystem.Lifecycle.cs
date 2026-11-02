@@ -62,7 +62,7 @@ public sealed partial class ServerVampireSystem
     }
 
     /// <summary>
-    /// Relays a vampire metabolism change to the body's organs.
+    /// Передаёт изменение вампирского метаболизма органам тела.
     /// </summary>
     public readonly record struct SetVampireMetabolismEvent(
         bool Enabled,

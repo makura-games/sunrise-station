@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._Sunrise.Antags.Vampires.Components;
 
 /// <summary>
-/// Настройки вампирского action.
+/// Настройки вампирского действия.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class VampireActionComponent : Component

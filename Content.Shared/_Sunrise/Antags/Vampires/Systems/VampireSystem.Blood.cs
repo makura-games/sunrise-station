@@ -49,7 +49,7 @@ public sealed partial class VampireSystem
     }
 
     /// <summary>
-    /// Validates an ability's power requirement and spends its blood cost.
+    /// Проверяет требуемый уровень силы и расходует кровь на применение способности.
     /// </summary>
     public bool CheckAndConsumeBloodCost(
         Entity<VampireComponent> ent,
@@ -63,7 +63,7 @@ public sealed partial class VampireSystem
     }
 
     /// <summary>
-    /// Checks whether the vampire has enough blood, optionally explaining failure.
+    /// Проверяет запас крови и при необходимости сообщает причину отказа.
     /// </summary>
     public bool CanSpendBlood(Entity<VampireComponent> ent, int bloodCost, bool showPopup = true)
     {
@@ -77,7 +77,7 @@ public sealed partial class VampireSystem
     }
 
     /// <summary>
-    /// Spends blood and updates the predicted blood counter.
+    /// Расходует кровь и обновляет предсказываемый счётчик крови.
     /// </summary>
     public bool TrySpendBlood(Entity<VampireComponent> ent, int bloodCost, bool showPopup = true)
     {
@@ -94,7 +94,7 @@ public sealed partial class VampireSystem
     }
 
     /// <summary>
-    /// Adds blood, fullness and optional progression and victim history.
+    /// Пополняет кровь и сытость, при необходимости учитывая развитие силы и историю жертв.
     /// </summary>
     public int AddBlood(
         Entity<VampireComponent> ent,

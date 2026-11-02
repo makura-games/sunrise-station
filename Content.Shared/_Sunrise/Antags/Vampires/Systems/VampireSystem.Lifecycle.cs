@@ -9,7 +9,7 @@ public sealed partial class VampireSystem
     [SubscribeLocalEvent]
     public void OnStartup(Entity<VampireComponent> ent, ref ComponentStartup args)
     {
-        // Клиент получает компоненты и action с сервера, а не создаёт их при применении snapshot.
+        // Клиент получает компоненты и действия с сервера, а не создаёт их при применении снимка состояния.
         if (_net.IsClient)
             return;
 

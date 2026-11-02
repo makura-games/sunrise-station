@@ -26,8 +26,7 @@ public sealed partial class ActiveVampireRejuvenateComponent : Component
     /// <summary>
     /// Следующее лечение.
     /// </summary>
-    [AutoNetworkedField]
-    [AutoPausedField]
+    [AutoNetworkedField, AutoPausedField]
     public TimeSpan NextApplication;
 
     /// <summary>

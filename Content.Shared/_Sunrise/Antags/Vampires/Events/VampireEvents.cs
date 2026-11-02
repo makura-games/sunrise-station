@@ -29,7 +29,7 @@ public sealed partial class VampireSleepDoAfterEvent : DoAfterEvent
     public NetEntity Victim;
 
     /// <summary>
-    /// Action для возврата заряда.
+    /// Действие для возврата заряда.
     /// </summary>
     [DataField(required: true)]
     public NetEntity Action;
@@ -81,7 +81,7 @@ public sealed partial class VampireRejuvenateIiActionEvent : InstantActionEvent;
 public sealed partial class VampireToggleFangsActionEvent : InstantActionEvent;
 
 /// <summary>
-/// Raised after a vampire gains a power level; the server sends the briefing.
+/// Вызывается после повышения уровня силы вампира; сервер отправляет соответствующее сообщение.
 /// </summary>
 [ByRefEvent]
 public readonly record struct VampirePowerLevelChangedEvent(VampirePowerLevel Level);
