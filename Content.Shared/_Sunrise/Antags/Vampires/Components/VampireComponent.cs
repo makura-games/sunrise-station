@@ -9,7 +9,7 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Components;
 /// Состояние вампира.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState(fieldDeltas: true)]
+[AutoGenerateComponentState(true, fieldDeltas: true)]
 public sealed partial class VampireComponent : Component
 {
     /// <summary>

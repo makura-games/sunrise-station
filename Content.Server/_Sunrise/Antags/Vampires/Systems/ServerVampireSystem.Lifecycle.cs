@@ -1,41 +1,30 @@
 using Content.Server.Body.Components;
 using Content.Server._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires.Components;
 using Content.Shared.Body;
 using Content.Shared.Metabolism;
 using Content.Shared.Nutrition.Components;
+using Content.Shared._Sunrise.Antags.Vampires.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Antags.Vampires.Systems;
 
-public sealed partial class VampireSystem
+public sealed partial class ServerVampireSystem
 {
     // Создание и удаление состояния вампира.
 
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly MetabolizerSystem _metabolizer = default!;
-
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private MetabolizerSystem _metabolizer = default!;
 
     private void OnStartup(Entity<VampireComponent> ent, ref ComponentStartup args)
     {
         var configuration = EnsureComp<VampireConfigurationComponent>(ent);
-        EnsureComp<VampireFeedingComponent>(ent);
         EnsureComp<VampireHolyComponent>(ent);
 
         SetVampireMetabolism(ent, configuration, enabled: true);
-        UpdatePowerLevel(ent, syncActions: false);
-        ApplyPowerLevelSettings(ent);
-        GrantBaseActions(ent, configuration);
-
         RemComp<SatiationComponent>(ent);
         RemComp<RespiratorComponent>(ent);
 
         _alerts.ClearAlertCategory(ent.Owner, configuration.HungerAlertCategory);
-        UpdateVampireAlert(ent);
-        UpdateVampireFedAlert(ent);
-
-        SyncVampireActions(ent);
-        _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     private void OnShutdown(Entity<VampireComponent> ent, ref ComponentShutdown args)
@@ -43,12 +32,7 @@ public sealed partial class VampireSystem
         if (TryComp<VampireConfigurationComponent>(ent, out var configuration))
             SetVampireMetabolism(ent, configuration, enabled: false);
 
-        RemoveVampireActions(ent);
-
-        RemCompDeferred<VampireFeedingComponent>(ent);
         RemCompDeferred<VampireHolyComponent>(ent);
-        RemCompDeferred<ActiveVampireRejuvenateComponent>(ent);
-        RemCompDeferred<VampireConfigurationComponent>(ent);
     }
 
     private void OnSetVampireMetabolism(

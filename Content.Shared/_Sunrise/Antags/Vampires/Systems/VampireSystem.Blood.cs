@@ -1,9 +1,8 @@
 using Content.Shared.Bible.Components;
-using Content.Server._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires.Components;
 using Content.Shared.Flash;
+using Content.Shared._Sunrise.Antags.Vampires.Components;
 
-namespace Content.Server._Sunrise.Antags.Vampires.Systems;
+namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
@@ -49,7 +48,10 @@ public sealed partial class VampireSystem
         TrySpendBlood(ent, drained, showPopup: false);
     }
 
-    internal bool CheckAndConsumeBloodCost(
+    /// <summary>
+    /// Validates an ability's power requirement and spends its blood cost.
+    /// </summary>
+    public bool CheckAndConsumeBloodCost(
         Entity<VampireComponent> ent,
         EntityUid? actionEntity = null,
         int bloodCost = 0)
@@ -60,7 +62,10 @@ public sealed partial class VampireSystem
         return CanSpendBlood(ent, resolvedCost) && TrySpendBlood(ent, resolvedCost);
     }
 
-    internal bool CanSpendBlood(Entity<VampireComponent> ent, int bloodCost, bool showPopup = true)
+    /// <summary>
+    /// Checks whether the vampire has enough blood, optionally explaining failure.
+    /// </summary>
+    public bool CanSpendBlood(Entity<VampireComponent> ent, int bloodCost, bool showPopup = true)
     {
         if (bloodCost <= 0 || ent.Comp.DrunkBlood >= bloodCost)
             return true;
@@ -71,7 +76,10 @@ public sealed partial class VampireSystem
         return false;
     }
 
-    internal bool TrySpendBlood(Entity<VampireComponent> ent, int bloodCost, bool showPopup = true)
+    /// <summary>
+    /// Spends blood and updates the predicted blood counter.
+    /// </summary>
+    public bool TrySpendBlood(Entity<VampireComponent> ent, int bloodCost, bool showPopup = true)
     {
         if (!CanSpendBlood(ent, bloodCost, showPopup))
             return false;
@@ -85,7 +93,10 @@ public sealed partial class VampireSystem
         return true;
     }
 
-    internal int AddBlood(
+    /// <summary>
+    /// Adds blood, fullness and optional progression and victim history.
+    /// </summary>
+    public int AddBlood(
         Entity<VampireComponent> ent,
         float amount,
         EntityUid? target = null,
@@ -94,6 +105,8 @@ public sealed partial class VampireSystem
     {
         if (amount <= 0f || !TryComp<VampireFeedingComponent>(ent, out var feeding))
             return 0;
+
+        Dirty(ent, feeding);
 
         var storedAmount = amount + feeding.DrunkBloodRemainder;
         var integerAmount = Math.Max(0, (int)storedAmount);
@@ -174,7 +187,7 @@ public sealed partial class VampireSystem
 
     // Возможно, можно добавить сюда расу милир
 
-    internal bool IsProtectedByFaith(EntityUid target)
+    private bool IsProtectedByFaith(EntityUid target)
         => HasComp<BibleUserComponent>(target);
 
     private bool HasFlashProtection(EntityUid target)

@@ -18,8 +18,10 @@ public sealed partial class VampireSleepActionEvent : EntityTargetActionEvent;
 /// Данные гипноза.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class VampireSleepDoAfterEvent : SimpleDoAfterEvent
+public sealed partial class VampireSleepDoAfterEvent : DoAfterEvent
 {
+    public override DoAfterEvent Clone() => (VampireSleepDoAfterEvent) MemberwiseClone();
+
     /// <summary>
     /// Цель.
     /// </summary>
@@ -77,3 +79,9 @@ public sealed partial class VampireRejuvenateIiActionEvent : InstantActionEvent;
 /// Событие переключения клыков.
 /// </summary>
 public sealed partial class VampireToggleFangsActionEvent : InstantActionEvent;
+
+/// <summary>
+/// Raised after a vampire gains a power level; the server sends the briefing.
+/// </summary>
+[ByRefEvent]
+public readonly record struct VampirePowerLevelChangedEvent(VampirePowerLevel Level);

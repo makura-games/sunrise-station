@@ -1,8 +1,3 @@
-using Content.Server.DoAfter;
-using Content.Server._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires.Events;
-using Content.Shared._Sunrise.Body.Components;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -15,21 +10,23 @@ using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
+using Content.Shared._Sunrise.Antags.Vampires.Components;
+using Content.Shared._Sunrise.Antags.Vampires.Events;
+using Content.Shared._Sunrise.Body.Components;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Audio;
-using Robust.Server.Audio;
 
-namespace Content.Server._Sunrise.Antags.Vampires.Systems;
+namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
     // Укусы и питание кровью.
 
-    [Dependency] private readonly BloodstreamSystem _blood = default!;
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly BlindableSystem _blindable = default!;
-
+    [Dependency] private BloodstreamSystem _blood = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private BlindableSystem _blindable = default!;
 
     private void OnToggleFangs(Entity<VampireComponent> ent, ref VampireToggleFangsActionEvent args)
     {
@@ -38,7 +35,10 @@ public sealed partial class VampireSystem
 
         ent.Comp.FangsExtended = !ent.Comp.FangsExtended;
         if (!ent.Comp.FangsExtended && TryComp<VampireFeedingComponent>(ent, out var feeding))
+        {
             feeding.IsDrinking = false;
+            Dirty(ent, feeding);
+        }
 
         _actions.SetToggled(args.Action.AsNullable(), ent.Comp.FangsExtended);
 
@@ -63,6 +63,9 @@ public sealed partial class VampireSystem
     {
         if (args.Handled || !TryComp<VampireFeedingComponent>(ent, out var feeding))
             return;
+
+        args.Handled = true;
+        Dirty(ent, feeding);
 
         if (args.Cancelled ||
             !ent.Comp.FangsExtended ||
@@ -91,7 +94,7 @@ public sealed partial class VampireSystem
         var bloodEfficiency = bloodSource.Value;
 
         if (TryComp<MobStateComponent>(targetUid, out var mobState) &&
-            mobState.CurrentState == Shared.Mobs.MobState.Dead)
+            mobState.CurrentState == Content.Shared.Mobs.MobState.Dead)
         {
             bloodEfficiency *= bloodSource.CorpseMultiplier;
         }
@@ -122,7 +125,7 @@ public sealed partial class VampireSystem
         }
 
         var targetBloodLevel =
-            _blood.GetBloodLevel(targetUid) * blood.BloodReferenceSolution.MaxVolume.Value / 100;
+            _blood.GetBloodLevel((targetUid, blood)) * (float) blood.BloodReferenceSolution.Volume;
         if (targetBloodLevel <= 0f)
         {
             feeding.IsDrinking = false;
@@ -167,15 +170,18 @@ public sealed partial class VampireSystem
         var healingScale = actualSipGain / feeding.BloodGainPerSip;
         _damageable.TryChangeDamage(ent.Owner, feeding.Healing * healingScale, true);
 
-        _audio.PlayPvs(feeding.BiteSound, targetUid, AudioParams.Default.WithVolume(feeding.BiteVolume));
-        Spawn(feeding.BiteEffect, Transform(targetUid).Coordinates);
+        _audio.PlayPredicted(feeding.BiteSound, targetUid, ent, AudioParams.Default.WithVolume(feeding.BiteVolume));
+        if (_net.IsServer)
+            Spawn(feeding.BiteEffect, Transform(targetUid).Coordinates);
 
         var currentDrunkFromTarget = feeding.BloodDrunkFromTargets.GetValueOrDefault(targetUid);
         feeding.IsDrinking = false;
 
         if (ent.Comp.FangsExtended && currentDrunkFromTarget < feeding.MaxBloodPerTarget)
         {
-            StartDrinkDoAfter(ent, targetUid, showPopup: false);
+            // Повторяем тот же DoAfter, чтобы его ID и состояние одинаково откатывались на клиенте и сервере.
+            args.Repeat = true;
+            feeding.IsDrinking = true;
             return;
         }
 
@@ -189,9 +195,9 @@ public sealed partial class VampireSystem
         }
     }
 
-    protected override bool TryStartDrinkBlood(Entity<VampireComponent> ent, EntityUid target)
+    private bool TryStartDrinkBlood(Entity<VampireComponent> ent, EntityUid target)
     {
-        if (!base.TryStartDrinkBlood(ent, target))
+        if (!CanDrinkBlood(ent, target))
             return false;
 
         if (!TryComp<VampireFeedingComponent>(ent, out var feeding) ||
@@ -275,6 +281,7 @@ public sealed partial class VampireSystem
             return false;
 
         feeding.IsDrinking = true;
+        Dirty(ent, feeding);
         if (showPopup)
         {
             _popup.PopupEntity(
@@ -302,6 +309,19 @@ public sealed partial class VampireSystem
         }
 
         return false;
+    }
+
+    private void OnBloodSourceTerminating(Entity<BloodSourceComponent> ent, ref EntityTerminatingEvent args)
+    {
+        // Удалённую сущность нельзя преобразовать в NetEntity при следующем снимке истории укусов.
+        var query = EntityQueryEnumerator<VampireFeedingComponent>();
+        while (query.MoveNext(out var uid, out var feeding))
+        {
+            var changed = feeding.BloodDrunkFromTargets.Remove(ent);
+            changed |= feeding.BiteCountsByTarget.Remove(ent);
+            if (changed && !TerminatingOrDeleted(uid))
+                Dirty(uid, feeding);
+        }
     }
 
     private void UpdateVampireAlert(Entity<VampireComponent> ent)

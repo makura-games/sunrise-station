@@ -1,22 +1,21 @@
-using System.Numerics;
-using Content.Server._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires.Events;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage.Components;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Stunnable;
+using Content.Shared._Sunrise.Antags.Vampires.Components;
+using Content.Shared._Sunrise.Antags.Vampires.Events;
 using Robust.Shared.Prototypes;
+using System.Numerics;
 
-namespace Content.Server._Sunrise.Antags.Vampires.Systems;
+namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
     // Вампирский взгляд.
 
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private void OnGlare(Entity<VampireComponent> ent, ref VampireGlareActionEvent args)
     {

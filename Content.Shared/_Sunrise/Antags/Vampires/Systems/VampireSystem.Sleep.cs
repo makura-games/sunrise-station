@@ -1,21 +1,19 @@
-using Content.Server._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires.Events;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Charges.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
-using Robust.Shared.Random;
+using Content.Shared._Sunrise.Antags.Vampires.Components;
+using Content.Shared._Sunrise.Antags.Vampires.Events;
+using Content.Shared._Sunrise.Random;
 
-namespace Content.Server._Sunrise.Antags.Vampires.Systems;
+namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
     // Усыпление цели.
 
-    [Dependency] private readonly IRobustRandom _random = default!;
-
+    [Dependency] private RandomPredictedSystem _random = default!;
 
     private void OnSleep(Entity<VampireComponent> ent, ref VampireSleepActionEvent args)
     {
@@ -95,7 +93,6 @@ public sealed partial class VampireSystem
         if (!HasComp<MindShieldComponent>(target))
             return CanSpendBlood(ent, settings.BloodCost, showPopup: !quiet);
 
-
         if (!quiet)
         {
             _popup.PopupEntity(
@@ -154,7 +151,7 @@ public sealed partial class VampireSystem
             return false;
 
         _popup.PopupEntity(
-            Loc.GetString(_random.Pick(configuration.SleepTargetMessages)),
+            Loc.GetString(_random.PickForEntity(ent, configuration.SleepTargetMessages)),
             target,
             target,
             PopupType.SmallCaution);

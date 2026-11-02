@@ -1,18 +1,17 @@
 using Content.Client.Alerts;
-using Content.Shared._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires.Systems;
 using Content.Shared.StatusIcon.Components;
+using Content.Shared._Sunrise.Antags.Vampires.Components;
 using Robust.Client.GameObjects;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._Sunrise.Antags.Vampires.Systems;
 
-public sealed class VampireSystem : SharedVampireSystem
+public sealed partial class ClientVampireSystem : EntitySystem
 {
     // Отображение крови и статуса вампира.
 
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {

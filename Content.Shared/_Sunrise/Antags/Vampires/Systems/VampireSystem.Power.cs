@@ -1,9 +1,9 @@
-using Content.Server._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires;
-using Content.Shared._Sunrise.Antags.Vampires.Components;
 using Content.Shared.Damage;
+using Content.Shared._Sunrise.Antags.Vampires.Components;
+using Content.Shared._Sunrise.Antags.Vampires.Events;
+using Content.Shared._Sunrise.Antags.Vampires;
 
-namespace Content.Server._Sunrise.Antags.Vampires.Systems;
+namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
@@ -43,10 +43,8 @@ public sealed partial class VampireSystem
         if (syncActions)
             SyncVampireActions(ent);
 
-        if (!configuration.PowerLevelMessages.TryGetValue(newLevel, out var levelUpMessage))
-            return;
-
-        _antag.SendBriefing(ent, Loc.GetString(levelUpMessage), Color.Crimson, null);
+        var ev = new VampirePowerLevelChangedEvent(newLevel);
+        RaiseLocalEvent(ent, ref ev);
     }
 
     private void ApplyPowerLevelSettings(Entity<VampireComponent> ent)
@@ -72,6 +70,8 @@ public sealed partial class VampireSystem
         feeding.MaxBloodPerTarget = fangs.MaxBloodPerTarget;
         feeding.Healing = new DamageSpecifier(fangs.Healing);
 
+        Dirty(ent, feeding);
+
         DirtyField(ent, ent.Comp, nameof(VampireComponent.BloodFullness));
         UpdateVampireFedAlert(ent);
     }
@@ -89,7 +89,7 @@ public sealed partial class VampireSystem
             return true;
         }
 
-        _sawmill.Error($"Missing vampire power level prototype for {powerLevel}");
+        Log.Error($"Missing vampire power level prototype for {powerLevel}");
         prototype = default!;
         return false;
     }

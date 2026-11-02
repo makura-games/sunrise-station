@@ -1,24 +1,22 @@
-using Content.Server._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires;
-using Content.Shared._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires.Events;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Metabolism;
-using Content.Shared.Stunnable;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.Stunnable;
+using Content.Shared._Sunrise.Antags.Vampires.Components;
+using Content.Shared._Sunrise.Antags.Vampires.Events;
+using Content.Shared._Sunrise.Antags.Vampires;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._Sunrise.Antags.Vampires.Systems;
+namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
     // Омоложение и его эффекты.
 
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     private void OnRejuvenate(
         Entity<VampireComponent> ent,
@@ -45,7 +43,6 @@ public sealed partial class VampireSystem
             args.Action.Owner,
             upgraded: true);
     }
-
 
     public bool TryRejuvenate(
         Entity<VampireComponent?> ent,
@@ -220,15 +217,16 @@ public sealed partial class VampireSystem
         active.ApplicationInterval = settings.HealInterval;
         active.NextApplication = _timing.CurTime;
         active.Healing = new DamageSpecifier(settings.Healing);
+        Dirty(uid, active);
     }
 
     private void ProcessActiveRejuvenation(TimeSpan now)
     {
-        var query = EntityQueryEnumerator<ActiveVampireRejuvenateComponent>();
+        var query = EntityQueryEnumerator<ActiveVampireRejuvenateComponent, MetaDataComponent>();
 
-        while (query.MoveNext(out var uid, out var rejuvenate))
+        while (query.MoveNext(out var uid, out var rejuvenate, out var metadata))
         {
-            if (now < rejuvenate.NextApplication)
+            if (metadata.EntityPaused || now < rejuvenate.NextApplication)
                 continue;
 
             _damageable.TryChangeDamage(
@@ -237,6 +235,7 @@ public sealed partial class VampireSystem
                 true);
 
             rejuvenate.ApplicationsRemaining--;
+            Dirty(uid, rejuvenate);
 
             if (rejuvenate.ApplicationsRemaining <= 0)
             {

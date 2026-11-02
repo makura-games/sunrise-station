@@ -19,7 +19,7 @@ namespace Content.Server.Administration.Systems;
 /// </summary>
 public sealed partial class AdminVerbSystem
 {
-    [Dependency] private readonly VampireSystem _vampire = default!;
+    [Dependency] private ServerVampireSystem _vampire = default!;
 
     private static readonly EntProtoId DefaultAssaultOpsRule = "AssaultOps";
     private static readonly EntProtoId DefaultFleshCultRule = "FleshCult";

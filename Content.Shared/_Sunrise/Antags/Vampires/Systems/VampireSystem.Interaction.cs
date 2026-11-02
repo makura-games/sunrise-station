@@ -1,25 +1,19 @@
-using Content.Shared._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Body.Components;
 using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
-using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
+using Content.Shared.Interaction;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared._Sunrise.Antags.Vampires.Components;
+using Content.Shared._Sunrise.Body.Components;
 
 namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
-public abstract partial class SharedVampireSystem : EntitySystem
+public sealed partial class VampireSystem
 {
     // Общие проверки и модификаторы вампира.
 
-    [Dependency] private BloodstreamSystem _bloodstream = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
-
-    public override void Initialize()
+    private void InitializeInteractions()
     {
-        base.Initialize();
-
         SubscribeLocalEvent<VampireComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeed);
         SubscribeLocalEvent<VampireComponent, BeforeInteractHandEvent>(OnBeforeInteractHand);
     }
@@ -55,7 +49,7 @@ public abstract partial class SharedVampireSystem : EntitySystem
         TryStartDrinkBlood(ent, target);
     }
 
-    protected virtual bool TryStartDrinkBlood(Entity<VampireComponent> ent, EntityUid target)
+    private bool CanDrinkBlood(Entity<VampireComponent> ent, EntityUid target)
     {
         if (!TryComp<BloodSourceComponent>(target, out var bloodSource))
         {
@@ -99,5 +93,5 @@ public abstract partial class SharedVampireSystem : EntitySystem
     }
 
     private bool HasBloodToDrink(Entity<BloodstreamComponent?> target)
-        => _bloodstream.GetBloodLevel(target) > 0f;
+        => _blood.GetBloodLevel(target) > 0f;
 }

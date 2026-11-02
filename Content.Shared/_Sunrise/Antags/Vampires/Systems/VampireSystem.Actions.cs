@@ -1,22 +1,20 @@
-using System.Linq;
-using Content.Server.Charges;
-using Content.Server._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires;
-using Content.Shared._Sunrise.Antags.Vampires.Components;
 using Content.Shared.Actions.Components;
 using Content.Shared.Charges.Components;
+using Content.Shared.Charges.Systems;
+using Content.Shared._Sunrise.Antags.Vampires.Components;
+using Content.Shared._Sunrise.Antags.Vampires;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using System.Linq;
 
-namespace Content.Server._Sunrise.Antags.Vampires.Systems;
+namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
     // Выдача и настройка действий.
 
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly ChargesSystem _charges = default!;
-
+    [Dependency] private IComponentFactory _componentFactory = default!;
+    [Dependency] private SharedChargesSystem _charges = default!;
 
     private void OnActionsComponentStartup(Entity<ActionsComponent> ent, ref ComponentStartup args)
     {
@@ -36,6 +34,9 @@ public sealed partial class VampireSystem
 
     private void SyncVampireActions(Entity<VampireComponent> ent)
     {
+        if (_net.IsClient)
+            return;
+
         if (!TryComp<VampireConfigurationComponent>(ent, out var configuration))
             return;
 
@@ -176,7 +177,10 @@ public sealed partial class VampireSystem
             chargeSettings = level.Sleep.Action;
 
             if (TryComp<VampireActionComponent>(actionEntity, out var vampireAction))
+            {
                 vampireAction.BloodCost = level.Sleep.BloodCost;
+                DirtyField(actionEntity, vampireAction, nameof(VampireActionComponent.BloodCost));
+            }
 
             _actions.SetRange(actionEntity, level.Sleep.TargetRange);
         }

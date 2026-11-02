@@ -11,6 +11,12 @@ namespace Content.Server._Sunrise.Antags.Vampires.Components;
 public sealed partial class VampireHolyComponent : Component
 {
     /// <summary>
+    /// Next check of holy water and nearby holy places, independent of predicted feeding updates.
+    /// </summary>
+    [AutoPausedField]
+    public TimeSpan NextUpdate;
+
+    /// <summary>
     /// Типы физического урона.
     /// </summary>
     [DataField]

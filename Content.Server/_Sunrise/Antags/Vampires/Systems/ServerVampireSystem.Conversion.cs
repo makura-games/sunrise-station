@@ -1,25 +1,24 @@
 using Content.Server.Mind;
-using Content.Server.Objectives;
 using Content.Server.Objectives.Systems;
+using Content.Server.Objectives;
 using Content.Server.Roles;
 using Content.Server._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires.Components;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Random;
+using Content.Shared._Sunrise.Antags.Vampires.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Antags.Vampires.Systems;
 
-public sealed partial class VampireSystem
+public sealed partial class ServerVampireSystem
 {
     // Обращение в вампира и выдача целей.
 
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly NumberObjectiveSystem _number = default!;
-    [Dependency] private readonly ObjectivesSystem _objectives = default!;
-    [Dependency] private readonly RoleSystem _role = default!;
-
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private NumberObjectiveSystem _number = default!;
+    [Dependency] private ObjectivesSystem _objectives = default!;
+    [Dependency] private RoleSystem _role = default!;
 
     private void OnBloodDrainGetProgress(Entity<BloodDrainConditionComponent> ent, ref ObjectiveGetProgressEvent args)
     {
@@ -85,7 +84,7 @@ public sealed partial class VampireSystem
         if (_mind.TryAddObjective(mind, mind.Comp, objective))
             return;
 
-        _sawmill.Error(
+        Log.Error(
             $"Failed to add vampire objective {objective} to {ToPrettyString(mind.Comp.OwnedEntity)}");
     }
 
@@ -104,7 +103,7 @@ public sealed partial class VampireSystem
             return;
         }
 
-        _sawmill.Error(
+        Log.Error(
             $"Failed to select vampire objective from group {objectiveGroup} " +
             $"for {ToPrettyString(mind.Comp.OwnedEntity)}");
     }

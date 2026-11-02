@@ -1,22 +1,22 @@
 using Content.Server._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires.Components;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Prayer;
 using Content.Shared.Popups;
+using Content.Shared.Prayer;
+using Content.Shared._Sunrise.Antags.Vampires.Components;
 using Robust.Server.Containers;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Antags.Vampires.Systems;
 
-public sealed partial class VampireSystem
+public sealed partial class ServerVampireSystem
 {
     // Урон от святынь.
 
-    [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private ContainerSystem _container = default!;
 
     private void HandleHolyWater(Entity<VampireComponent> ent)
     {
@@ -41,7 +41,7 @@ public sealed partial class VampireSystem
 
         if (ent.Comp.DrunkBlood > 0)
         {
-            TrySpendBlood(
+            _vampire.TrySpendBlood(
                 ent,
                 Math.Min(holy.HolyWaterBloodDrain, ent.Comp.DrunkBlood),
                 showPopup: false);
