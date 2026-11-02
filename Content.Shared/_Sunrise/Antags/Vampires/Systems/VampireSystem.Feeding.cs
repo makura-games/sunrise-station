@@ -28,7 +28,8 @@ public sealed partial class VampireSystem
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private BlindableSystem _blindable = default!;
 
-    private void OnToggleFangs(Entity<VampireComponent> ent, ref VampireToggleFangsActionEvent args)
+    [SubscribeLocalEvent]
+    public void OnToggleFangs(Entity<VampireComponent> ent, ref VampireToggleFangsActionEvent args)
     {
         if (args.Handled)
             return;
@@ -46,7 +47,8 @@ public sealed partial class VampireSystem
         args.Handled = true;
     }
 
-    private void OnAfterInteract(Entity<VampireComponent> ent, ref AfterInteractEvent args)
+    [SubscribeLocalEvent]
+    public void OnAfterInteract(Entity<VampireComponent> ent, ref AfterInteractEvent args)
     {
         if (args.Handled || !args.CanReach || !ent.Comp.FangsExtended || !Exists(args.Target))
             return;
@@ -59,7 +61,8 @@ public sealed partial class VampireSystem
             args.Handled = true;
     }
 
-    private void OnDrinkDoAfter(Entity<VampireComponent> ent, ref VampireDrinkBloodDoAfterEvent args)
+    [SubscribeLocalEvent]
+    public void OnDrinkDoAfter(Entity<VampireComponent> ent, ref VampireDrinkBloodDoAfterEvent args)
     {
         if (args.Handled || !TryComp<VampireFeedingComponent>(ent, out var feeding))
             return;
@@ -311,7 +314,8 @@ public sealed partial class VampireSystem
         return false;
     }
 
-    private void OnBloodSourceTerminating(Entity<BloodSourceComponent> ent, ref EntityTerminatingEvent args)
+    [SubscribeLocalEvent]
+    public void OnBloodSourceTerminating(Entity<BloodSourceComponent> ent, ref EntityTerminatingEvent args)
     {
         // Удалённую сущность нельзя преобразовать в NetEntity при следующем снимке истории укусов.
         var query = EntityQueryEnumerator<VampireFeedingComponent>();

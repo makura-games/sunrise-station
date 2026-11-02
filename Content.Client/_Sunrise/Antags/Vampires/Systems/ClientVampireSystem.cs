@@ -13,14 +13,8 @@ public sealed partial class ClientVampireSystem : EntitySystem
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<VampireComponent, UpdateAlertSpriteEvent>(OnUpdateAlert);
-        SubscribeLocalEvent<VampireComponent, GetStatusIconsEvent>(OnVampireIcons);
-    }
-
-    private void OnUpdateAlert(Entity<VampireComponent> ent, ref UpdateAlertSpriteEvent args)
+    [SubscribeLocalEvent]
+    public void OnUpdateAlert(Entity<VampireComponent> ent, ref UpdateAlertSpriteEvent args)
     {
         var component = ent.Comp;
         if (args.Alert.AlertKey.AlertType != component.BloodAlert)
@@ -51,7 +45,8 @@ public sealed partial class ClientVampireSystem : EntitySystem
             digit4.ToString());
     }
 
-    private void OnVampireIcons(Entity<VampireComponent> ent, ref GetStatusIconsEvent args)
+    [SubscribeLocalEvent]
+    public void OnVampireIcons(Entity<VampireComponent> ent, ref GetStatusIconsEvent args)
     {
         if (_prototype.TryIndex(ent.Comp.StatusIcon, out var icon))
             args.StatusIcons.Add(icon);

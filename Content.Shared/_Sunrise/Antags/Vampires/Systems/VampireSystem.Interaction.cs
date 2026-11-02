@@ -12,13 +12,8 @@ public sealed partial class VampireSystem
 {
     // Общие проверки и модификаторы вампира.
 
-    private void InitializeInteractions()
-    {
-        SubscribeLocalEvent<VampireComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeed);
-        SubscribeLocalEvent<VampireComponent, BeforeInteractHandEvent>(OnBeforeInteractHand);
-    }
-
-    private static void OnRefreshMovementSpeed(
+    [SubscribeLocalEvent]
+    public static void OnRefreshMovementSpeed(
         Entity<VampireComponent> ent,
         ref RefreshMovementSpeedModifiersEvent args)
     {
@@ -28,7 +23,8 @@ public sealed partial class VampireSystem
         args.ModifySpeed(ent.Comp.StarvationWalkSpeedModifier, ent.Comp.StarvationSprintSpeedModifier);
     }
 
-    private void OnBeforeInteractHand(Entity<VampireComponent> ent, ref BeforeInteractHandEvent args)
+    [SubscribeLocalEvent]
+    public void OnBeforeInteractHand(Entity<VampireComponent> ent, ref BeforeInteractHandEvent args)
     {
         if (args.Handled || !ent.Comp.FangsExtended)
             return;

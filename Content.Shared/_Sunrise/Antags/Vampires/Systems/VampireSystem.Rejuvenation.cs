@@ -17,7 +17,8 @@ public sealed partial class VampireSystem
 
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
-    private void OnRejuvenate(
+    [SubscribeLocalEvent]
+    public void OnRejuvenate(
         Entity<VampireComponent> ent,
         ref VampireRejuvenateIActionEvent args)
     {
@@ -30,7 +31,8 @@ public sealed partial class VampireSystem
             upgraded: false);
     }
 
-    private void OnRejuvenateUpgraded(
+    [SubscribeLocalEvent]
+    public void OnRejuvenateUpgraded(
         Entity<VampireComponent> ent,
         ref VampireRejuvenateIiActionEvent args)
     {
@@ -178,7 +180,7 @@ public sealed partial class VampireSystem
             if (removed >= purgeAmount)
                 break;
 
-            if (!_prototype.TryIndex<ReagentPrototype>(
+            if (!_prototype.TryIndex(
                     quantity.Reagent.Prototype,
                     out var prototype) ||
                 prototype.Metabolisms is null ||

@@ -16,7 +16,8 @@ public sealed partial class VampireSystem
     [Dependency] private IComponentFactory _componentFactory = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
 
-    private void OnActionsComponentStartup(Entity<ActionsComponent> ent, ref ComponentStartup args)
+    [SubscribeLocalEvent]
+    public void OnActionsComponentStartup(Entity<ActionsComponent> ent, ref ComponentStartup args)
     {
         if (!TryComp<VampireComponent>(ent, out var vampire))
             return;
@@ -24,7 +25,8 @@ public sealed partial class VampireSystem
         SyncVampireActions((ent.Owner, vampire));
     }
 
-    private void OnPlayerAttached(PlayerAttachedEvent ev)
+    [SubscribeLocalEvent]
+    public void OnPlayerAttached(PlayerAttachedEvent ev)
     {
         if (!TryComp<VampireComponent>(ev.Entity, out var vampire))
             return;

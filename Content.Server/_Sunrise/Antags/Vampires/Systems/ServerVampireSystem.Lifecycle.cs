@@ -4,6 +4,7 @@ using Content.Shared.Body;
 using Content.Shared.Metabolism;
 using Content.Shared.Nutrition.Components;
 using Content.Shared._Sunrise.Antags.Vampires.Components;
+using Content.Shared._Sunrise.Antags.Vampires.Systems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Antags.Vampires.Systems;
@@ -15,7 +16,8 @@ public sealed partial class ServerVampireSystem
     [Dependency] private BodySystem _body = default!;
     [Dependency] private MetabolizerSystem _metabolizer = default!;
 
-    private void OnStartup(Entity<VampireComponent> ent, ref ComponentStartup args)
+    [SubscribeLocalEvent(after: [typeof(VampireSystem)])]
+    public void OnStartup(Entity<VampireComponent> ent, ref ComponentStartup args)
     {
         var configuration = EnsureComp<VampireConfigurationComponent>(ent);
         EnsureComp<VampireHolyComponent>(ent);
@@ -27,7 +29,8 @@ public sealed partial class ServerVampireSystem
         _alerts.ClearAlertCategory(ent.Owner, configuration.HungerAlertCategory);
     }
 
-    private void OnShutdown(Entity<VampireComponent> ent, ref ComponentShutdown args)
+    [SubscribeLocalEvent]
+    public void OnShutdown(Entity<VampireComponent> ent, ref ComponentShutdown args)
     {
         if (TryComp<VampireConfigurationComponent>(ent, out var configuration))
             SetVampireMetabolism(ent, configuration, enabled: false);
@@ -35,7 +38,8 @@ public sealed partial class ServerVampireSystem
         RemCompDeferred<VampireHolyComponent>(ent);
     }
 
-    private void OnSetVampireMetabolism(
+    [SubscribeLocalEvent]
+    public void OnSetVampireMetabolism(
         Entity<MetabolizerComponent> ent,
         ref BodyRelayedEvent<SetVampireMetabolismEvent> args)
     {
@@ -57,7 +61,10 @@ public sealed partial class ServerVampireSystem
         _body.RelayEvent((ent.Owner, body), ref ev);
     }
 
-    private readonly record struct SetVampireMetabolismEvent(
+    /// <summary>
+    /// Relays a vampire metabolism change to the body's organs.
+    /// </summary>
+    public readonly record struct SetVampireMetabolismEvent(
         bool Enabled,
         ProtoId<MetabolizerTypePrototype> MetabolizerType);
 }

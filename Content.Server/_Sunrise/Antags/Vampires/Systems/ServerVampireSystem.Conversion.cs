@@ -20,7 +20,8 @@ public sealed partial class ServerVampireSystem
     [Dependency] private ObjectivesSystem _objectives = default!;
     [Dependency] private RoleSystem _role = default!;
 
-    private void OnBloodDrainGetProgress(Entity<BloodDrainConditionComponent> ent, ref ObjectiveGetProgressEvent args)
+    [SubscribeLocalEvent]
+    public void OnBloodDrainGetProgress(Entity<BloodDrainConditionComponent> ent, ref ObjectiveGetProgressEvent args)
     {
         var target = _number.GetTarget(ent);
         if (args.Mind.OwnedEntity is not { } body ||

@@ -1,4 +1,3 @@
-using Content.Shared.Actions.Components;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Chemistry.EntitySystems;
@@ -9,10 +8,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires.Events;
-using Content.Shared._Sunrise.Body.Components;
 using Robust.Shared.Network;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -41,24 +37,6 @@ public sealed partial class VampireSystem : EntitySystem
     {
         base.Initialize();
         UpdatesAfter.Add(typeof(SharedDoAfterSystem));
-        InitializeInteractions();
-
-        SubscribeLocalEvent<VampireComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<VampireComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<VampireComponent, AfterAutoHandleStateEvent>(OnAfterState);
-        SubscribeLocalEvent<BloodSourceComponent, EntityTerminatingEvent>(OnBloodSourceTerminating);
-
-        SubscribeLocalEvent<ActionsComponent, ComponentStartup>(OnActionsComponentStartup);
-        SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<VampireComponent, VampireToggleFangsActionEvent>(OnToggleFangs);
-        SubscribeLocalEvent<VampireComponent, AfterInteractEvent>(OnAfterInteract);
-        SubscribeLocalEvent<VampireComponent, VampireDrinkBloodDoAfterEvent>(OnDrinkDoAfter);
-        SubscribeLocalEvent<VampireComponent, VampireSleepActionEvent>(OnSleep);
-        SubscribeLocalEvent<VampireComponent, DoAfterAttemptEvent<VampireSleepDoAfterEvent>>(OnSleepDoAfterAttempt);
-        SubscribeLocalEvent<VampireComponent, VampireSleepDoAfterEvent>(OnSleepDoAfter);
-        SubscribeLocalEvent<VampireComponent, VampireGlareActionEvent>(OnGlare);
-        SubscribeLocalEvent<VampireComponent, VampireRejuvenateIActionEvent>(OnRejuvenate);
-        SubscribeLocalEvent<VampireComponent, VampireRejuvenateIiActionEvent>(OnRejuvenateUpgraded);
     }
 
     public override void Update(float frameTime)

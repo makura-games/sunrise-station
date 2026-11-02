@@ -1,12 +1,9 @@
 using Content.Server.Antag;
 using Content.Server._Sunrise.Antags.Vampires.Components;
 using Content.Shared.Alert;
-using Content.Shared.Body;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction;
-using Content.Shared.Metabolism;
-using Content.Shared.Objectives.Components;
 using Content.Shared.Popups;
 using Content.Shared._Sunrise.Antags.Vampires.Components;
 using Content.Shared._Sunrise.Antags.Vampires.Events;
@@ -37,11 +34,6 @@ public sealed partial class ServerVampireSystem : EntitySystem
     {
         base.Initialize();
         UpdatesAfter.Add(typeof(VampireSystem));
-        SubscribeLocalEvent<BloodDrainConditionComponent, ObjectiveGetProgressEvent>(OnBloodDrainGetProgress);
-        SubscribeLocalEvent<VampireComponent, ComponentStartup>(OnStartup, after: [typeof(VampireSystem)]);
-        SubscribeLocalEvent<VampireComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<VampireComponent, VampirePowerLevelChangedEvent>(OnPowerLevelChanged);
-        SubscribeLocalEvent<MetabolizerComponent, BodyRelayedEvent<SetVampireMetabolismEvent>>(OnSetVampireMetabolism);
     }
 
     public override void Update(float frameTime)
@@ -63,7 +55,8 @@ public sealed partial class ServerVampireSystem : EntitySystem
         }
     }
 
-    private void OnPowerLevelChanged(Entity<VampireComponent> ent, ref VampirePowerLevelChangedEvent args)
+    [SubscribeLocalEvent]
+    public void OnPowerLevelChanged(Entity<VampireComponent> ent, ref VampirePowerLevelChangedEvent args)
     {
         if (TryComp<VampireConfigurationComponent>(ent, out var configuration) &&
             configuration.PowerLevelMessages.TryGetValue(args.Level, out var message))

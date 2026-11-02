@@ -6,7 +6,8 @@ public sealed partial class VampireSystem
 {
     // Создание состояния на сервере и восстановление производных данных после отката.
 
-    private void OnStartup(Entity<VampireComponent> ent, ref ComponentStartup args)
+    [SubscribeLocalEvent]
+    public void OnStartup(Entity<VampireComponent> ent, ref ComponentStartup args)
     {
         // Клиент получает компоненты и action с сервера, а не создаёт их при применении snapshot.
         if (_net.IsClient)
@@ -23,7 +24,8 @@ public sealed partial class VampireSystem
         _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
-    private void OnShutdown(Entity<VampireComponent> ent, ref ComponentShutdown args)
+    [SubscribeLocalEvent]
+    public void OnShutdown(Entity<VampireComponent> ent, ref ComponentShutdown args)
     {
         if (_net.IsClient)
             return;
@@ -34,7 +36,8 @@ public sealed partial class VampireSystem
         RemCompDeferred<VampireConfigurationComponent>(ent);
     }
 
-    private void OnAfterState(Entity<VampireComponent> ent, ref AfterAutoHandleStateEvent args)
+    [SubscribeLocalEvent]
+    public void OnAfterState(Entity<VampireComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
     }

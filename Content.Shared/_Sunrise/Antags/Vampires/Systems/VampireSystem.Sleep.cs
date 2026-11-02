@@ -15,7 +15,8 @@ public sealed partial class VampireSystem
 
     [Dependency] private RandomPredictedSystem _random = default!;
 
-    private void OnSleep(Entity<VampireComponent> ent, ref VampireSleepActionEvent args)
+    [SubscribeLocalEvent]
+    public void OnSleep(Entity<VampireComponent> ent, ref VampireSleepActionEvent args)
     {
         if (args.Handled)
             return;
@@ -159,7 +160,8 @@ public sealed partial class VampireSystem
         return true;
     }
 
-    private void OnSleepDoAfterAttempt(
+    [SubscribeLocalEvent]
+    public void OnSleepDoAfterAttempt(
         Entity<VampireComponent> ent,
         ref DoAfterAttemptEvent<VampireSleepDoAfterEvent> args)
     {
@@ -172,7 +174,8 @@ public sealed partial class VampireSystem
         }
     }
 
-    private void OnSleepDoAfter(
+    [SubscribeLocalEvent]
+    public void OnSleepDoAfter(
         Entity<VampireComponent> ent,
         ref VampireSleepDoAfterEvent args)
     {

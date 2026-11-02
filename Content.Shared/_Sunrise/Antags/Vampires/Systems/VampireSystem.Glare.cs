@@ -17,7 +17,8 @@ public sealed partial class VampireSystem
 
     [Dependency] private SharedTransformSystem _transform = default!;
 
-    private void OnGlare(Entity<VampireComponent> ent, ref VampireGlareActionEvent args)
+    [SubscribeLocalEvent]
+    public void OnGlare(Entity<VampireComponent> ent, ref VampireGlareActionEvent args)
     {
         if (args.Handled)
             return;
