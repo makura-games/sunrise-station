@@ -22,8 +22,8 @@ public abstract partial class SharedChargesSystem
         action.Comp1.LastUpdate = _timing.CurTime -
                                   TimeSpan.FromTicks((long)(adjustedDuration.Ticks * adjustedProgress));
 
-        // Грязный метод, грязная реализация, но это работает
         Dirty(action.Owner, action.Comp1);
         Dirty(action.Owner, action.Comp2);
+        UpdateChargeVisuals(action);
     }
 }

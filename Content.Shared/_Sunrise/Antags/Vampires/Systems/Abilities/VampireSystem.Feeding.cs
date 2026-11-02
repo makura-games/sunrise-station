@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -5,11 +6,11 @@ using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
+using Content.Shared.Weapons.Melee;
 using Content.Shared._Sunrise.Antags.Vampires.Components;
 using Content.Shared._Sunrise.Antags.Vampires.Events;
 using Content.Shared._Sunrise.Body.Components;
@@ -27,6 +28,7 @@ public sealed partial class VampireSystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private BlindableSystem _blindable = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
 
     [SubscribeLocalEvent]
     public void OnToggleFangs(Entity<VampireComponent> ent, ref VampireToggleFangsActionEvent args)
@@ -35,10 +37,11 @@ public sealed partial class VampireSystem
             return;
 
         ent.Comp.FangsExtended = !ent.Comp.FangsExtended;
-        if (!ent.Comp.FangsExtended && TryComp<VampireFeedingComponent>(ent, out var feeding))
+        if (!ent.Comp.FangsExtended &&
+            TryComp<VampireFeedingComponent>(ent, out var feeding) &&
+            feeding.DrinkDoAfter is { } doAfter)
         {
-            feeding.IsDrinking = false;
-            Dirty(ent, feeding);
+            _doAfter.Cancel(ent, doAfter);
         }
 
         _actions.SetToggled(args.Action.AsNullable(), ent.Comp.FangsExtended);
@@ -48,37 +51,24 @@ public sealed partial class VampireSystem
     }
 
     [SubscribeLocalEvent]
-    public void OnAfterInteract(Entity<VampireComponent> ent, ref AfterInteractEvent args)
-    {
-        if (args.Handled || !args.CanReach || !ent.Comp.FangsExtended || !Exists(args.Target))
-            return;
-
-        var target = args.Target.Value;
-        if (target == ent.Owner || !HasComp<BloodstreamComponent>(target))
-            return;
-
-        if (TryStartDrinkBlood(ent, target))
-            args.Handled = true;
-    }
-
-    [SubscribeLocalEvent]
     public void OnDrinkDoAfter(Entity<VampireComponent> ent, ref VampireDrinkBloodDoAfterEvent args)
     {
         if (args.Handled || !TryComp<VampireFeedingComponent>(ent, out var feeding))
             return;
 
         args.Handled = true;
+        feeding.DrinkDoAfter = null;
         Dirty(ent, feeding);
 
         if (args.Cancelled ||
             !ent.Comp.FangsExtended ||
+            IsMouthBlocked(ent, feeding) ||
             args.Args.Target is not { } targetUid ||
             !HasComp<BloodstreamComponent>(targetUid) ||
             !TryComp<BloodSourceComponent>(targetUid, out var bloodSource) ||
             bloodSource.Value <= 0f ||
             IsInvalidDrinkTarget(ent.Owner, targetUid, showPopup: false))
         {
-            feeding.IsDrinking = false;
             return;
         }
 
@@ -90,7 +80,6 @@ public sealed partial class VampireSystem
                 ent.Owner,
                 ent.Owner,
                 PopupType.MediumCaution);
-            feeding.IsDrinking = false;
             return;
         }
 
@@ -111,7 +100,6 @@ public sealed partial class VampireSystem
         if (bloodEfficiency <= 0f)
         {
             _popup.PopupEntity(Loc.GetString("vampire-drink-target-rot"), ent.Owner, ent.Owner, PopupType.MediumCaution);
-            feeding.IsDrinking = false;
             return;
         }
 
@@ -122,7 +110,6 @@ public sealed partial class VampireSystem
             feeding.TargetBloodDrainPerSip <= 0f ||
             !TryComp<BloodstreamComponent>(targetUid, out var blood))
         {
-            feeding.IsDrinking = false;
             _popup.PopupEntity(Loc.GetString("vampire-drink-target-empty"), ent.Owner, ent.Owner, PopupType.MediumCaution);
             return;
         }
@@ -131,7 +118,6 @@ public sealed partial class VampireSystem
             _blood.GetBloodLevel((targetUid, blood)) * (float) blood.BloodReferenceSolution.Volume;
         if (targetBloodLevel <= 0f)
         {
-            feeding.IsDrinking = false;
             _popup.PopupEntity(Loc.GetString("vampire-drink-target-empty"),
                 ent.Owner,
                 ent.Owner,
@@ -145,7 +131,6 @@ public sealed partial class VampireSystem
 
         if (!_blood.TryModifyBloodLevel(targetUid, -actualDrain))
         {
-            feeding.IsDrinking = false;
             _popup.PopupEntity(Loc.GetString("vampire-drink-target-empty"),
                 ent.Owner,
                 ent.Owner,
@@ -153,6 +138,8 @@ public sealed partial class VampireSystem
             return;
         }
 
+        // BloodstreamSystem меняет состав напрямую; уведомляем систему растворов для синхронизации и отката.
+        _solution.UpdateChemicals(blood.BloodSolution!.Value, needsReactionsProcessing: false);
         AddBlood(ent, actualSipGain, targetUid);
 
         _damageable.TryChangeDamage(targetUid, feeding.BiteDamage, ignoreResistances: true);
@@ -174,17 +161,18 @@ public sealed partial class VampireSystem
         _damageable.TryChangeDamage(ent.Owner, feeding.Healing * healingScale, true);
 
         _audio.PlayPredicted(feeding.BiteSound, targetUid, ent, AudioParams.Default.WithVolume(feeding.BiteVolume));
-        if (_net.IsServer)
-            Spawn(feeding.BiteEffect, Transform(targetUid).Coordinates);
+        var xform = Transform(ent);
+        var localPosition = Vector2.Transform(_transform.GetWorldPosition(targetUid), _transform.GetInvWorldMatrix(xform));
+        localPosition = xform.LocalRotation.RotateVec(localPosition);
+        _melee.DoLunge(ent, ent, Angle.Zero, localPosition, feeding.BiteEffect);
 
         var currentDrunkFromTarget = feeding.BloodDrunkFromTargets.GetValueOrDefault(targetUid);
-        feeding.IsDrinking = false;
 
         if (ent.Comp.FangsExtended && currentDrunkFromTarget < feeding.MaxBloodPerTarget)
         {
             // Повторяем тот же DoAfter, чтобы его ID и состояние одинаково откатывались на клиенте и сервере.
             args.Repeat = true;
-            feeding.IsDrinking = true;
+            feeding.DrinkDoAfter = args.DoAfter.Index;
             return;
         }
 
@@ -200,11 +188,10 @@ public sealed partial class VampireSystem
 
     private bool TryStartDrinkBlood(Entity<VampireComponent> ent, EntityUid target)
     {
-        if (!CanDrinkBlood(ent, target))
-            return false;
-
         if (!TryComp<VampireFeedingComponent>(ent, out var feeding) ||
-            !TryComp<VampireConfigurationComponent>(ent, out var configuration))
+            !TryComp<VampireConfigurationComponent>(ent, out var configuration) ||
+            feeding.DrinkDoAfter != null ||
+            !CanDrinkBlood(ent, target))
         {
             return false;
         }
@@ -223,7 +210,7 @@ public sealed partial class VampireSystem
         }
 
         if (!IsMouthBlocked(ent.Owner, feeding))
-            return StartDrinkDoAfter(ent, target, showPopup: true);
+            return StartDrinkDoAfter((ent, feeding), target);
 
         _popup.PopupEntity(Loc.GetString("vampire-mouth-covered"), ent.Owner, ent.Owner);
         return false;
@@ -245,23 +232,9 @@ public sealed partial class VampireSystem
         return true;
     }
 
-    private bool StartDrinkDoAfter(Entity<VampireComponent> ent, EntityUid target, bool showPopup)
+    private bool StartDrinkDoAfter(Entity<VampireFeedingComponent> ent, EntityUid target)
     {
-        if (!TryComp<VampireFeedingComponent>(ent, out var feeding) || feeding.IsDrinking)
-            return false;
-
-        if (IsMouthBlocked(ent.Owner, feeding))
-        {
-            if (showPopup)
-            {
-                _popup.PopupEntity(Loc.GetString("vampire-mouth-covered"),
-                    ent.Owner,
-                    ent.Owner);
-            }
-
-            return false;
-        }
-
+        var feeding = ent.Comp;
         var doAfter = new DoAfterArgs(
             EntityManager,
             ent.Owner,
@@ -271,27 +244,26 @@ public sealed partial class VampireSystem
             target)
         {
             DistanceThreshold = feeding.BiteDistanceThreshold,
+            NeedHand = true,
+            NeedFreeHand = true,
             BreakOnDamage = true,
             BreakOnHandChange = true,
             BreakOnMove = true,
             BreakOnWeightlessMove = true,
             BlockDuplicate = true,
-            CancelDuplicate = true,
-            AttemptFrequency = AttemptFrequency.StartAndEnd,
+            CancelDuplicate = false,
+            DuplicateCondition = DuplicateConditions.SameEvent,
         };
 
-        if (!_doAfter.TryStartDoAfter(doAfter))
+        if (!_doAfter.TryStartDoAfter(doAfter, out var doAfterId))
             return false;
 
-        feeding.IsDrinking = true;
-        Dirty(ent, feeding);
-        if (showPopup)
-        {
-            _popup.PopupEntity(
-                Loc.GetString("vampire-drink-start", ("target", Identity.Entity(target, EntityManager))),
-                ent.Owner,
-                ent.Owner);
-        }
+        feeding.DrinkDoAfter = _doAfter.IsRunning(doAfterId) ? doAfterId.Value.Index : null;
+        Dirty(ent);
+        _popup.PopupEntity(
+            Loc.GetString("vampire-drink-start", ("target", Identity.Entity(target, EntityManager))),
+            ent.Owner,
+            ent.Owner);
 
         return true;
     }

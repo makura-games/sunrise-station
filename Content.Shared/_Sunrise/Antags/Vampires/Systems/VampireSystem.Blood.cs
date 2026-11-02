@@ -18,7 +18,12 @@ public sealed partial class VampireSystem
 
         if (before > 0f)
         {
-            feeding.StarvationDrunkBloodDrainAccumulator = 0f;
+            if (ent.Comp.StarvationDrunkBloodDrainAccumulator != 0f)
+            {
+                ent.Comp.StarvationDrunkBloodDrainAccumulator = 0f;
+                DirtyField(ent, ent.Comp, nameof(VampireComponent.StarvationDrunkBloodDrainAccumulator));
+            }
+
             ent.Comp.BloodFullness = MathF.Max(0f, before - feeding.FullnessDecayPerSecond * elapsed);
 
             if (!MathHelper.CloseTo(ent.Comp.BloodFullness, before))
@@ -39,12 +44,13 @@ public sealed partial class VampireSystem
             return;
         }
 
-        feeding.StarvationDrunkBloodDrainAccumulator += feeding.StarvationDrunkBloodDrainPerSecond * elapsed;
-        var drained = Math.Min(ent.Comp.DrunkBlood, (int)feeding.StarvationDrunkBloodDrainAccumulator);
+        ent.Comp.StarvationDrunkBloodDrainAccumulator += feeding.StarvationDrunkBloodDrainPerSecond * elapsed;
+        DirtyField(ent, ent.Comp, nameof(VampireComponent.StarvationDrunkBloodDrainAccumulator));
+        var drained = Math.Min(ent.Comp.DrunkBlood, (int)ent.Comp.StarvationDrunkBloodDrainAccumulator);
         if (drained <= 0)
             return;
 
-        feeding.StarvationDrunkBloodDrainAccumulator -= drained;
+        ent.Comp.StarvationDrunkBloodDrainAccumulator -= drained;
         TrySpendBlood(ent, drained, showPopup: false);
     }
 
@@ -59,7 +65,7 @@ public sealed partial class VampireSystem
         if (!TryResolveVampireActionCost(ent, actionEntity, bloodCost, out var resolvedCost))
             return false;
 
-        return CanSpendBlood(ent, resolvedCost) && TrySpendBlood(ent, resolvedCost);
+        return TrySpendBlood(ent, resolvedCost);
     }
 
     /// <summary>

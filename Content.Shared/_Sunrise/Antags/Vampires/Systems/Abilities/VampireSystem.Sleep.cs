@@ -63,7 +63,20 @@ public sealed partial class VampireSystem
             return false;
         }
 
-        if (IsProtectedByFaith(target) && !settings.IgnoresFaith)
+        return CanAffectSleepTarget(ent, target, settings.IgnoresFaith, quiet) &&
+            CanSpendBlood(ent, settings.BloodCost, showPopup: !quiet);
+    }
+
+    private bool CanAffectSleepTarget(
+        Entity<VampireComponent> ent,
+        EntityUid target,
+        bool ignoresFaith,
+        bool quiet = false)
+    {
+        if (!Exists(target))
+            return false;
+
+        if (IsProtectedByFaith(target) && !ignoresFaith)
         {
             if (!quiet)
             {
@@ -92,7 +105,7 @@ public sealed partial class VampireSystem
         }
 
         if (!HasComp<MindShieldComponent>(target))
-            return CanSpendBlood(ent, settings.BloodCost, showPopup: !quiet);
+            return true;
 
         if (!quiet)
         {
@@ -104,7 +117,6 @@ public sealed partial class VampireSystem
         }
 
         return false;
-
     }
 
     private bool DoSleep(
@@ -165,10 +177,9 @@ public sealed partial class VampireSystem
         Entity<VampireComponent> ent,
         ref DoAfterAttemptEvent<VampireSleepDoAfterEvent> args)
     {
-        var target = GetEntity(args.Event.Victim);
-
-        if (!Exists(target) ||
-            !_interaction.InRangeAndAccessible(ent.Owner, target, args.Event.MaxDistance))
+        if (!TryGetEntity(args.Event.Victim, out var target) ||
+            !Exists(target) ||
+            !_interaction.InRangeAndAccessible(ent.Owner, target.Value, args.Event.MaxDistance))
         {
             args.Cancel();
         }
@@ -182,88 +193,32 @@ public sealed partial class VampireSystem
         if (args.Handled)
             return;
 
-        if (args.Cancelled)
+        args.Handled = true;
+        if (args.Cancelled ||
+            !TryGetEntity(args.Victim, out var target) ||
+            !CanAffectSleepTarget(ent, target.Value, args.IgnoresFaith) ||
+            !TrySpendBlood(ent, args.BloodCost))
         {
             RefundSleepAction(args.Action);
-            args.Handled = true;
-            return;
-        }
-
-        var target = GetEntity(args.Victim);
-
-        if (!Exists(target))
-        {
-            RefundSleepAction(args.Action);
-            args.Handled = true;
-            return;
-        }
-
-        if (IsProtectedByFaith(target) && !args.IgnoresFaith)
-        {
-            _popup.PopupEntity(
-                Loc.GetString("vampire-target-protected-by-faith"),
-                ent.Owner,
-                ent.Owner,
-                PopupType.MediumCaution);
-
-            RefundSleepAction(args.Action);
-            args.Handled = true;
-            return;
-        }
-
-        if (HasFlashProtection(target))
-        {
-            _popup.PopupEntity(
-                Loc.GetString("vampire-sleep-protected"),
-                ent.Owner,
-                ent.Owner,
-                PopupType.MediumCaution);
-
-            RefundSleepAction(args.Action);
-            args.Handled = true;
-            return;
-        }
-
-        if (HasComp<MindShieldComponent>(target))
-        {
-            _popup.PopupEntity(
-                Loc.GetString("vampire-sleep-shielded"),
-                ent.Owner,
-                ent.Owner,
-                PopupType.SmallCaution);
-
-            RefundSleepAction(args.Action);
-            args.Handled = true;
-            return;
-        }
-
-        if (!CheckAndConsumeBloodCost(ent, bloodCost: args.BloodCost))
-        {
-            RefundSleepAction(args.Action);
-            args.Handled = true;
             return;
         }
 
         _statusEffects.TryAddStatusEffectDuration(
-            target,
+            target.Value,
             SleepingSystem.StatusEffectForcedSleeping,
             args.Duration);
-
-        args.Handled = true;
     }
 
     private void RefundSleepAction(NetEntity netAction)
     {
-        var action = GetEntity(netAction);
-
-        if (!Exists(action) ||
+        if (!TryGetEntity(netAction, out var action) ||
             !TryComp<LimitedChargesComponent>(action, out var charges))
         {
             return;
         }
 
         TryComp<AutoRechargeComponent>(action, out var recharge);
-        _charges.AddCharges((action, charges, recharge), 1);
-        _actions.ClearCooldown(action);
+        _charges.AddCharges((action.Value, charges, recharge), 1);
+        _actions.ClearCooldown(action.Value);
     }
 }

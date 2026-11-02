@@ -1,4 +1,3 @@
-using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage.Components;
 using Content.Shared.Eye.Blinding.Components;
@@ -113,7 +112,7 @@ public sealed partial class VampireSystem
 
         foreach (var target in targets)
         {
-            if (target == ent.Owner)
+            if (target == ent.Owner || !TryComp<StaminaComponent>(target, out var stamina))
                 continue;
 
             var effectScale = HasFlashProtection(target)
@@ -128,47 +127,34 @@ public sealed partial class VampireSystem
                 ? Vector2.Dot(ourDirection, Vector2.Normalize(offset))
                 : 0f;
 
-            if (!TryComp<StaminaComponent>(target, out var stamina))
-                continue;
-
             var knockedDown = HasComp<KnockedDownComponent>(target);
+            var inFront = dot > configuration.GlareDirectionThreshold && !knockedDown;
 
-            if (dot > configuration.GlareDirectionThreshold && !knockedDown)
+            if (inFront)
             {
                 _stun.TryAddParalyzeDuration(
                     target,
                     settings.FrontParalyzeDuration * effectScale);
-
-                _stamina.TakeStaminaDamage(
-                    target,
-                    settings.StaminaDamage * effectScale,
-                    stamina,
-                    source: ent.Owner);
-
-                TryInjectMuteToxin(
-                    target,
-                    settings.MuteToxinAmount * effectScale,
-                    configuration.MuteToxinReagent);
             }
-            else if (dot < -configuration.GlareDirectionThreshold && !knockedDown)
-            {
-                _stamina.TakeStaminaDamage(
-                    target,
-                    settings.StaminaDamage * effectScale,
-                    stamina,
-                    source: ent.Owner);
-            }
-            else
+            else if (dot >= -configuration.GlareDirectionThreshold || knockedDown)
             {
                 _stun.TryAddParalyzeDuration(
                     target,
                     settings.SideParalyzeDuration * effectScale);
+            }
 
-                _stamina.TakeStaminaDamage(
+            _stamina.TakeStaminaDamage(
+                target,
+                settings.StaminaDamage * effectScale,
+                stamina,
+                source: ent.Owner);
+
+            if (inFront)
+            {
+                TryInjectMuteToxin(
                     target,
-                    settings.StaminaDamage * effectScale,
-                    stamina,
-                    source: ent.Owner);
+                    settings.MuteToxinAmount * effectScale,
+                    configuration.MuteToxinReagent);
             }
         }
     }
@@ -181,9 +167,6 @@ public sealed partial class VampireSystem
         if (amount <= 0f)
             return false;
 
-        var solution = new Solution();
-        solution.AddReagent(reagent, FixedPoint2.New(amount));
-
         if (!_solution.TryGetInjectableSolution(
                 target,
                 out var targetSolution,
@@ -192,8 +175,9 @@ public sealed partial class VampireSystem
             return false;
         }
 
-        return _solution.TryAddSolution(
+        return _solution.TryAddReagent(
             targetSolution.Value,
-            solution);
+            reagent,
+            FixedPoint2.New(amount));
     }
 }

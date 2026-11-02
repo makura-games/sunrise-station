@@ -85,6 +85,7 @@ public sealed partial class VampireSystem
         _popup.PopupEntity(
             Loc.GetString(message),
             target,
+            ent.Owner,
             PopupType.MediumCaution);
     }
 

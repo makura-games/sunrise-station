@@ -2,7 +2,6 @@ using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Sunrise.Antags.Vampires.Components;
 
@@ -10,7 +9,7 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Components;
 /// Состояние питания вампира.
 /// </summary>
 // Полный снимок обходит ограничение генератора дельт состояния для Dictionary с ключами EntityUid.
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class VampireFeedingComponent : Component
 {
     public override bool SendOnlyToOwner => true;
@@ -38,24 +37,6 @@ public sealed partial class VampireFeedingComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int StarvationDrunkBloodDrainPerSecond = 2;
-
-    /// <summary>
-    /// Остаток расхода крови.
-    /// </summary>
-    [AutoNetworkedField]
-    public float StarvationDrunkBloodDrainAccumulator;
-
-    /// <summary>
-    /// Следующее обновление.
-    /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan NextUpdate;
-
-    /// <summary>
-    /// Предыдущее обновление.
-    /// </summary>
-    [AutoNetworkedField, AutoPausedField]
-    public TimeSpan LastUpdate;
 
     /// <summary>
     /// Интервал обновления.
@@ -148,10 +129,10 @@ public sealed partial class VampireFeedingComponent : Component
     public DamageSpecifier Healing = new();
 
     /// <summary>
-    /// Активно ли кормление.
+    /// Идентификатор текущего кормления в DoAfterComponent вампира.
     /// </summary>
     [AutoNetworkedField]
-    public bool IsDrinking;
+    public ushort? DrinkDoAfter;
 
     /// <summary>
     /// Кровь с каждой цели.

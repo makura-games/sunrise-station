@@ -236,7 +236,7 @@ public sealed partial class VampireSystem
                 true);
 
             rejuvenate.ApplicationsRemaining--;
-            Dirty(uid, rejuvenate);
+            DirtyField(uid, rejuvenate, nameof(ActiveVampireRejuvenateComponent.ApplicationsRemaining));
 
             if (rejuvenate.ApplicationsRemaining <= 0)
             {
@@ -246,6 +246,7 @@ public sealed partial class VampireSystem
 
             rejuvenate.NextApplication =
                 now + rejuvenate.ApplicationInterval;
+            DirtyField(uid, rejuvenate, nameof(ActiveVampireRejuvenateComponent.NextApplication));
         }
     }
 }

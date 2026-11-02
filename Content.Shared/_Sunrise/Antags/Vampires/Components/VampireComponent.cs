@@ -2,6 +2,7 @@ using Content.Shared.Alert;
 using Content.Shared.StatusIcon;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Sunrise.Antags.Vampires.Components;
 
@@ -9,7 +10,7 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Components;
 /// Состояние вампира.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState(true, fieldDeltas: true)]
+[AutoGenerateComponentState(true, fieldDeltas: true), AutoGenerateComponentPause]
 public sealed partial class VampireComponent : Component
 {
     /// <summary>
@@ -46,6 +47,24 @@ public sealed partial class VampireComponent : Component
     /// </summary>
     [AutoNetworkedField]
     public float BloodFullness = 90f;
+
+    /// <summary>
+    /// Следующий пересчёт голода.
+    /// </summary>
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan NextBloodUpdate;
+
+    /// <summary>
+    /// Время предыдущего пересчёта голода.
+    /// </summary>
+    [AutoNetworkedField, AutoPausedField]
+    public TimeSpan LastBloodUpdate;
+
+    /// <summary>
+    /// Дробный остаток расхода крови при голоде.
+    /// </summary>
+    [AutoNetworkedField]
+    public float StarvationDrunkBloodDrainAccumulator;
 
     /// <summary>
     /// Скорость ходьбы при голоде.

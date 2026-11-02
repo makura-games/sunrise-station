@@ -35,13 +35,16 @@ public sealed partial class VampireSystem
 
     private void SyncVampireActions(Entity<VampireComponent> ent)
     {
-        if (_net.IsClient || LifeStage(ent) < EntityLifeStage.MapInitialized)
+        if (LifeStage(ent) < EntityLifeStage.MapInitialized)
             return;
 
         if (!TryComp<VampireConfigurationComponent>(ent, out var configuration))
             return;
 
-        EnsureRejuvenateUpgrade(ent, configuration);
+        // Создание новых действий требует сервера; параметры уже выданных действий предсказываются.
+        if (_net.IsServer)
+            EnsureRejuvenateUpgrade(ent, configuration);
+
         RefreshAllActions(ent, configuration);
     }
 
