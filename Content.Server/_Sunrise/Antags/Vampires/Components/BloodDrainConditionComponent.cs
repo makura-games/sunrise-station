@@ -1,7 +1,7 @@
 namespace Content.Server._Sunrise.Antags.Vampires.Components;
 
 /// <summary>
-/// Условие цели по выпитой крови.
+/// Цель по TotalBlood с порогом NumberObjective.
 /// </summary>
 [RegisterComponent]
 public sealed partial class BloodDrainConditionComponent : Component;

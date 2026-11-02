@@ -17,6 +17,9 @@ public sealed partial class VampireSystem
     [Dependency] private IComponentFactory _componentFactory = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
     [Dependency] private ActionGrantSystem _actionGrant = default!;
+    [Dependency] private EntityQuery<VampireActionComponent> _vampireActionQuery = default!;
+    [Dependency] private EntityQuery<LimitedChargesComponent> _chargesQuery = default!;
+    [Dependency] private EntityQuery<AutoRechargeComponent> _rechargeQuery = default!;
 
     [SubscribeLocalEvent(after: [typeof(ActionGrantSystem)])]
     public void OnMapInit(Entity<VampireComponent> ent, ref MapInitEvent args)
@@ -38,7 +41,7 @@ public sealed partial class VampireSystem
         if (LifeStage(ent) < EntityLifeStage.MapInitialized)
             return;
 
-        if (!TryComp<VampireConfigurationComponent>(ent, out var configuration))
+        if (!_configurationQuery.TryComp(ent, out var configuration))
             return;
 
         // Создание новых действий требует сервера; параметры уже выданных действий предсказываются.
@@ -90,7 +93,7 @@ public sealed partial class VampireSystem
         foreach (var action in _actions.GetActions(ent.Owner))
         {
             if (action.Comp.Container != ent.Owner ||
-                !HasComp<VampireActionComponent>(action.Owner) ||
+                !_vampireActionQuery.HasComp(action.Owner) ||
                 Prototype(action) is not { } prototype)
             {
                 continue;
@@ -105,7 +108,7 @@ public sealed partial class VampireSystem
         foreach (var action in _actions.GetActions(ent.Owner).ToArray())
         {
             if (action.Comp.Container != ent.Owner ||
-                !HasComp<VampireActionComponent>(action.Owner))
+                !_vampireActionQuery.HasComp(action.Owner))
                 continue;
 
             _actions.RemoveAction(ent.Owner, action.AsNullable());
@@ -117,7 +120,7 @@ public sealed partial class VampireSystem
         foreach (var action in _actions.GetActions(holder))
         {
             if (action.Comp.Container == holder &&
-                HasComp<VampireActionComponent>(action.Owner) &&
+                _vampireActionQuery.HasComp(action.Owner) &&
                 Prototype(action)?.ID == actionId.Id)
             {
                 return action;
@@ -136,7 +139,7 @@ public sealed partial class VampireSystem
         if (actionEntity is null || _actions.GetAction(actionEntity) is not { } action)
             return;
 
-        if (!TryComp<VampireActionComponent>(actionEntity.Value, out var vampireAction))
+        if (!_vampireActionQuery.TryComp(actionEntity.Value, out var vampireAction))
         {
             _actions.SetEnabled(action.AsNullable(), true);
             return;
@@ -170,7 +173,7 @@ public sealed partial class VampireSystem
         {
             chargeSettings = level.Sleep.Action;
 
-            if (TryComp<VampireActionComponent>(actionEntity, out var vampireAction))
+            if (_vampireActionQuery.TryComp(actionEntity, out var vampireAction))
             {
                 vampireAction.BloodCost = level.Sleep.BloodCost;
                 DirtyField(actionEntity, vampireAction, nameof(VampireActionComponent.BloodCost));
@@ -196,8 +199,8 @@ public sealed partial class VampireSystem
         VampireActionChargeSettings settings,
         VampireActionChargeState? previousChargeState = null)
     {
-        if (!TryComp<LimitedChargesComponent>(actionEntity, out var charges) ||
-            !TryComp<AutoRechargeComponent>(actionEntity, out var recharge))
+        if (!_chargesQuery.TryComp(actionEntity, out var charges) ||
+            !_rechargeQuery.TryComp(actionEntity, out var recharge))
         {
             return;
         }
@@ -216,8 +219,8 @@ public sealed partial class VampireSystem
 
     private VampireActionChargeState CaptureActionChargeState(EntityUid actionEntity)
     {
-        if (!TryComp<LimitedChargesComponent>(actionEntity, out var charges) ||
-            !TryComp<AutoRechargeComponent>(actionEntity, out var recharge))
+        if (!_chargesQuery.TryComp(actionEntity, out var charges) ||
+            !_rechargeQuery.TryComp(actionEntity, out var recharge))
         {
             return new VampireActionChargeState(0, 0, 0f);
         }

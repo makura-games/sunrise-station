@@ -1,5 +1,4 @@
 using Content.Shared.Bed.Sleep;
-using Content.Shared.Charges.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
@@ -11,7 +10,7 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
-    // Усыпление цели.
+    // Заряд тратится при старте, кровь — после успешной концентрации.
 
     [Dependency] private RandomPredictedSystem _random = default!;
 
@@ -124,7 +123,7 @@ public sealed partial class VampireSystem
         EntityUid target,
         EntityUid action)
     {
-        if (!TryComp<VampireConfigurationComponent>(ent, out var configuration))
+        if (!_configurationQuery.TryComp(ent, out var configuration))
             return false;
 
         if (!TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var level))
@@ -212,12 +211,12 @@ public sealed partial class VampireSystem
     private void RefundSleepAction(NetEntity netAction)
     {
         if (!TryGetEntity(netAction, out var action) ||
-            !TryComp<LimitedChargesComponent>(action, out var charges))
+            !_chargesQuery.TryComp(action, out var charges))
         {
             return;
         }
 
-        TryComp<AutoRechargeComponent>(action, out var recharge);
+        _rechargeQuery.TryComp(action, out var recharge);
         _charges.AddCharges((action.Value, charges, recharge), 1);
         _actions.ClearCooldown(action.Value);
     }

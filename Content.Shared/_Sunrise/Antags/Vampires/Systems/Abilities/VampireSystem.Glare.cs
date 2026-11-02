@@ -1,6 +1,5 @@
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage.Components;
-using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Stunnable;
 using Content.Shared._Sunrise.Antags.Vampires.Components;
@@ -15,6 +14,8 @@ public sealed partial class VampireSystem
     // Вампирский взгляд.
 
     [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityQuery<StaminaComponent> _staminaQuery = default!;
+    [Dependency] private EntityQuery<KnockedDownComponent> _knockedDownQuery = default!;
 
     [SubscribeLocalEvent]
     public void OnGlare(Entity<VampireComponent> ent, ref VampireGlareActionEvent args)
@@ -61,7 +62,7 @@ public sealed partial class VampireSystem
         if (!Resolve(ent, ref ent.Comp, false))
             return false;
 
-        if (TryComp<BlindableComponent>(ent.Owner, out var blindable) &&
+        if (_blindableQuery.TryComp(ent.Owner, out var blindable) &&
             blindable.IsBlind)
         {
             return false;
@@ -70,7 +71,7 @@ public sealed partial class VampireSystem
         if (!TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out _))
             return false;
 
-        if (!HasComp<VampireConfigurationComponent>(ent.Owner))
+        if (!_configurationQuery.HasComp(ent.Owner))
             return false;
 
         var vampire = new Entity<VampireComponent>(ent.Owner, ent.Comp);
@@ -96,7 +97,7 @@ public sealed partial class VampireSystem
         if (!TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var level))
             return;
 
-        if (!TryComp<VampireConfigurationComponent>(ent, out var configuration))
+        if (!_configurationQuery.TryComp(ent, out var configuration))
             return;
 
         var settings = level.Glare;
@@ -112,7 +113,7 @@ public sealed partial class VampireSystem
 
         foreach (var target in targets)
         {
-            if (target == ent.Owner || !TryComp<StaminaComponent>(target, out var stamina))
+            if (target == ent.Owner || !_staminaQuery.TryComp(target, out var stamina))
                 continue;
 
             var effectScale = HasFlashProtection(target)
@@ -127,7 +128,7 @@ public sealed partial class VampireSystem
                 ? Vector2.Dot(ourDirection, Vector2.Normalize(offset))
                 : 0f;
 
-            var knockedDown = HasComp<KnockedDownComponent>(target);
+            var knockedDown = _knockedDownQuery.HasComp(target);
             var inFront = dot > configuration.GlareDirectionThreshold && !knockedDown;
 
             if (inFront)

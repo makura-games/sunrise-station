@@ -17,19 +17,19 @@ public sealed partial class VampireConfigurationComponent : Component
     public override bool SendOnlyToOwner => true;
 
     /// <summary>
-    /// Тип метаболизма.
+    /// Тип метаболизма органов на время вампиризма.
     /// </summary>
     [DataField, AutoNetworkedField]
     public ProtoId<MetabolizerTypePrototype> MetabolizerType = "Vampire";
 
     /// <summary>
-    /// Роль вампира.
+    /// Роль разума при обращении.
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId MindRole = "MindRoleVampire";
 
     /// <summary>
-    /// Обязательные цели.
+    /// Фиксированные цели для выдачи при обращении.
     /// </summary>
     [DataField, AutoNetworkedField]
     public List<EntProtoId> Objectives = new()
@@ -39,7 +39,7 @@ public sealed partial class VampireConfigurationComponent : Component
     };
 
     /// <summary>
-    /// Группы случайных целей.
+    /// Группы для выбора одной цели из каждой.
     /// </summary>
     [DataField, AutoNetworkedField]
     public List<ProtoId<WeightedRandomPrototype>> ObjectiveGroups = new()
@@ -55,14 +55,14 @@ public sealed partial class VampireConfigurationComponent : Component
     public float ObjectiveMaxDifficulty = 10f;
 
     /// <summary>
-    /// Звук вступления.
+    /// Звук приветствия при обращении.
     /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier BriefingSound =
         new SoundPathSpecifier("/Audio/_Sunrise/Ambience/Antag/vampire_start.ogg");
 
     /// <summary>
-    /// Базовые действия.
+    /// Действия для выдачи через ActionGrant при получении вампиризма.
     /// </summary>
     [DataField, AutoNetworkedField]
     public List<EntProtoId> BaseActions = new()
@@ -86,13 +86,13 @@ public sealed partial class VampireConfigurationComponent : Component
     public EntProtoId GlareAction = "ActionVampireGlare";
 
     /// <summary>
-    /// Действие сна.
+    /// Действие усыпления цели.
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId SleepAction = "ActionVampireSleep";
 
     /// <summary>
-    /// Первое омоложение.
+    /// Базовое омоложение, заменяемое улучшенным по уровню силы.
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId RejuvenateAction = "ActionVampireRejuvenateI";
@@ -104,7 +104,7 @@ public sealed partial class VampireConfigurationComponent : Component
     public EntProtoId RejuvenateUpgradedAction = "ActionVampireRejuvenateII";
 
     /// <summary>
-    /// Задержка клыков.
+    /// Задержка переключения клыков, не глотка.
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan FangsUseDelay = TimeSpan.FromSeconds(2);
@@ -116,19 +116,19 @@ public sealed partial class VampireConfigurationComponent : Component
     public VampirePowerLevel MaxProgressionLevel = VampirePowerLevel.Ancient;
 
     /// <summary>
-    /// Уровень обхода защиты веры.
+    /// Уровень обхода защиты веры при питании.
     /// </summary>
     [DataField, AutoNetworkedField]
     public VampirePowerLevel FaithProtectionPowerLevel = VampirePowerLevel.Ancient;
 
     /// <summary>
-    /// Порог направления взгляда.
+    /// Порог скалярного произведения для передней зоны взгляда.
     /// </summary>
     [DataField, AutoNetworkedField]
     public float GlareDirectionThreshold = 0.8f;
 
     /// <summary>
-    /// Допустимое движение во время сна.
+    /// Допустимое смещение при концентрации на усыплении.
     /// </summary>
     [DataField, AutoNetworkedField]
     public float SleepMovementThreshold = 0.1f;
@@ -140,13 +140,13 @@ public sealed partial class VampireConfigurationComponent : Component
     public ProtoId<ReagentPrototype> MuteToxinReagent = "MuteToxin";
 
     /// <summary>
-    /// Группа реагентов для очищения.
+    /// Стадия метаболизма реагентов, удаляемых омоложением.
     /// </summary>
     [DataField, AutoNetworkedField]
     public ProtoId<MetabolismStagePrototype> RejuvenatePurgeMetabolismStage = "Poison";
 
     /// <summary>
-    /// Предупреждения цели сна.
+    /// Сообщения цели при начале усыпления.
     /// </summary>
     [DataField, AutoNetworkedField]
     public List<LocId> SleepTargetMessages = new()
@@ -176,7 +176,7 @@ public sealed partial class VampireConfigurationComponent : Component
     public ProtoId<AlertPrototype> FedAlert = "VampireFed";
 
     /// <summary>
-    /// Категория обычного голода.
+    /// Категория обычного голода, скрываемая при получении вампиризма.
     /// </summary>
     [DataField, AutoNetworkedField]
     public ProtoId<AlertCategoryPrototype> HungerAlertCategory = "Hunger";

@@ -7,31 +7,31 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._Sunrise.Antags.Vampires.Components;
 
 /// <summary>
-/// Состояние вампира.
+/// Сетевое состояние вампира.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState(true, fieldDeltas: true), AutoGenerateComponentPause]
 public sealed partial class VampireComponent : Component
 {
     /// <summary>
-    /// Иконка вампира.
+    /// Статусная иконка вампира.
     /// </summary>
     [DataField, AutoNetworkedField]
     public ProtoId<FactionIconPrototype> StatusIcon = "VampireMasterIcon";
 
     /// <summary>
-    /// Счётчик крови.
+    /// Индикатор запаса крови.
     /// </summary>
     [DataField, AutoNetworkedField]
     public ProtoId<AlertPrototype> BloodAlert = "VampireBlood";
 
     /// <summary>
-    /// Предел отображаемой крови.
+    /// Предел отображения, не самого запаса крови.
     /// </summary>
     public const int MaxDisplayedBlood = 9999;
 
     /// <summary>
-    /// Запас крови.
+    /// Расходуемый запас крови.
     /// </summary>
     [AutoNetworkedField]
     public int DrunkBlood;
@@ -43,7 +43,7 @@ public sealed partial class VampireComponent : Component
     public bool FangsExtended;
 
     /// <summary>
-    /// Текущая сытость.
+    /// Сытость; при нуле вампир замедляется и теряет запас крови.
     /// </summary>
     [AutoNetworkedField]
     public float BloodFullness = 90f;
@@ -67,13 +67,13 @@ public sealed partial class VampireComponent : Component
     public float StarvationDrunkBloodDrainAccumulator;
 
     /// <summary>
-    /// Скорость ходьбы при голоде.
+    /// Множитель скорости ходьбы при нулевой сытости.
     /// </summary>
     [DataField]
     public float StarvationWalkSpeedModifier = 0.7f;
 
     /// <summary>
-    /// Скорость бега при голоде.
+    /// Множитель скорости бега при нулевой сытости.
     /// </summary>
     [DataField]
     public float StarvationSprintSpeedModifier = 0.7f;

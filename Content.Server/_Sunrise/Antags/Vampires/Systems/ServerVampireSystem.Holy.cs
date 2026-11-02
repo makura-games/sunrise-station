@@ -17,11 +17,14 @@ public sealed partial class ServerVampireSystem
     // Урон от святынь.
 
     [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private EntityQuery<VampireHolyComponent> _holyQuery = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobStateQuery = default!;
+    [Dependency] private EntityQuery<PrayableComponent> _prayableQuery = default!;
 
     private void HandleHolyWater(Entity<VampireComponent> ent)
     {
-        if (!TryComp<VampireFeedingComponent>(ent, out var feeding) ||
-            !TryComp<VampireHolyComponent>(ent, out var holy) ||
+        if (!_feedingQuery.TryComp(ent, out var feeding) ||
+            !_holyQuery.TryComp(ent, out var holy) ||
             feeding.UniqueVictims < holy.RequiredVictims)
         {
             return;
@@ -32,7 +35,7 @@ public sealed partial class ServerVampireSystem
 
         var holyWater = _solution.GetTotalPrototypeQuantity(ent.Owner, holy.HolyWaterReagent);
         if (holyWater <= FixedPoint2.Zero ||
-            TryComp<MobStateComponent>(ent, out var mobState) && mobState.CurrentState == Shared.Mobs.MobState.Dead)
+            _mobStateQuery.TryComp(ent, out var mobState) && mobState.CurrentState == Shared.Mobs.MobState.Dead)
         {
             return;
         }
@@ -64,8 +67,8 @@ public sealed partial class ServerVampireSystem
 
     private void HandleHolyPlace(Entity<VampireComponent> ent)
     {
-        if (!TryComp<VampireFeedingComponent>(ent, out var feeding) ||
-            !TryComp<VampireHolyComponent>(ent, out var holy) ||
+        if (!_feedingQuery.TryComp(ent, out var feeding) ||
+            !_holyQuery.TryComp(ent, out var holy) ||
             feeding.UniqueVictims < holy.RequiredVictims)
         {
             return;
@@ -73,7 +76,7 @@ public sealed partial class ServerVampireSystem
 
         if (_timing.CurTime < holy.NextHolyPlaceEffect ||
             !IsInHolyPlace(ent, holy.HolyPlaceRange) ||
-            TryComp<MobStateComponent>(ent, out var mobState) && mobState.CurrentState == Shared.Mobs.MobState.Dead)
+            _mobStateQuery.TryComp(ent, out var mobState) && mobState.CurrentState == Shared.Mobs.MobState.Dead)
         {
             return;
         }
@@ -114,7 +117,7 @@ public sealed partial class ServerVampireSystem
         foreach (var target in _lookup.GetEntitiesInRange(coordinates, range, LookupFlags.Static))
         {
             if (target != uid &&
-                HasComp<PrayableComponent>(target) &&
+                _prayableQuery.HasComp(target) &&
                 Transform(target).Anchored &&
                 _interaction.InRangeUnobstructed(uid, target, range))
             {

@@ -1,5 +1,3 @@
-using Content.Shared.Body.Components;
-using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Metabolism;
@@ -13,7 +11,7 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
-    // Омоложение и его эффекты.
+    // Омоложение; улучшенная версия также очищает кровь и лечит.
 
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
@@ -85,7 +83,7 @@ public sealed partial class VampireSystem
             return false;
 
         if (upgraded &&
-            !HasComp<VampireConfigurationComponent>(ent))
+            !_configurationQuery.HasComp(ent))
         {
             return false;
         }
@@ -123,7 +121,7 @@ public sealed partial class VampireSystem
         if (!upgraded)
             return;
 
-        if (!TryComp<VampireConfigurationComponent>(
+        if (!_configurationQuery.TryComp(
                 ent,
                 out var configuration))
         {
@@ -158,7 +156,7 @@ public sealed partial class VampireSystem
         var purgeAmount = FixedPoint2.New(configuredAmount);
 
         if (purgeAmount <= FixedPoint2.Zero ||
-            !TryComp<BloodstreamComponent>(uid, out var blood))
+            !_bloodstreamQuery.TryComp(uid, out var blood))
         {
             return;
         }

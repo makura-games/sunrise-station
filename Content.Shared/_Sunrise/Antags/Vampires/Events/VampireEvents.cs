@@ -10,12 +10,12 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Events;
 public sealed partial class VampireGlareActionEvent : InstantActionEvent;
 
 /// <summary>
-/// Событие гипноза.
+/// Запрос на усыпление цели.
 /// </summary>
 public sealed partial class VampireSleepActionEvent : EntityTargetActionEvent;
 
 /// <summary>
-/// Данные гипноза.
+/// Параметры усыпления на момент начала DoAfter.
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class VampireSleepDoAfterEvent : DoAfterEvent
@@ -35,13 +35,13 @@ public sealed partial class VampireSleepDoAfterEvent : DoAfterEvent
     public NetEntity Action;
 
     /// <summary>
-    /// Дистанция прерывания.
+    /// Предельная дистанция доступности цели во время концентрации.
     /// </summary>
     [DataField]
     public float MaxDistance = 2.5f;
 
     /// <summary>
-    /// Стоимость в крови.
+    /// Стоимость в DrunkBlood после успешной концентрации.
     /// </summary>
     [DataField]
     public int BloodCost = 20;
@@ -53,7 +53,7 @@ public sealed partial class VampireSleepDoAfterEvent : DoAfterEvent
     public TimeSpan Duration = TimeSpan.FromSeconds(20);
 
     /// <summary>
-    /// Игнорирование веры.
+    /// Обход только защиты веры.
     /// </summary>
     [DataField]
     public bool IgnoresFaith;

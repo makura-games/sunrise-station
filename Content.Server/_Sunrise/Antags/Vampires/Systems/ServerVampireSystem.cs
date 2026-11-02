@@ -29,6 +29,7 @@ public sealed partial class ServerVampireSystem : EntitySystem
     [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityQuery<VampireFeedingComponent> _feedingQuery = default!;
 
     public override void Initialize()
     {
@@ -46,7 +47,7 @@ public sealed partial class ServerVampireSystem : EntitySystem
             if (metadata.EntityPaused || now <= holy.NextUpdate)
                 continue;
 
-            holy.NextUpdate = now + (TryComp<VampireFeedingComponent>(uid, out var feeding)
+            holy.NextUpdate = now + (_feedingQuery.TryComp(uid, out var feeding)
                 ? feeding.UpdateDelay
                 : TimeSpan.FromSeconds(1));
 

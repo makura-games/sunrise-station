@@ -9,13 +9,13 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Components;
 public sealed partial class VampireActionComponent : Component
 {
     /// <summary>
-    /// Требуемый уровень.
+    /// Минимальный уровень силы для действия.
     /// </summary>
     [DataField, AutoNetworkedField]
     public VampirePowerLevel RequiredPowerLevel = VampirePowerLevel.Neonate;
 
     /// <summary>
-    /// Стоимость в крови.
+    /// Стоимость в DrunkBlood, если явно не задана другая.
     /// </summary>
     [DataField, AutoNetworkedField]
     public int BloodCost;

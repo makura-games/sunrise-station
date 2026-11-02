@@ -36,7 +36,7 @@ public sealed partial class VampireSystem
         var ev = new VampireShutdownEvent();
         RaiseLocalEvent(ent, ref ev);
 
-        if (TryComp<VampireConfigurationComponent>(ent, out var configuration))
+        if (_configurationQuery.TryComp(ent, out var configuration))
             _actionGrant.RemoveActions((ent.Owner, null), configuration.BaseActions);
 
         RemoveVampireActions(ent);

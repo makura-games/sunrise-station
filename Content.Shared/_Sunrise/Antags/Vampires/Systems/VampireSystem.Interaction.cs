@@ -33,7 +33,7 @@ public sealed partial class VampireSystem
         if (!Exists(target) || target == ent.Owner)
             return;
 
-        if (!HasComp<BloodstreamComponent>(target))
+        if (!_bloodstreamQuery.HasComp(target))
         {
             if (HasComp<InteractionPopupComponent>(target))
                 args.Handled = true;
@@ -47,7 +47,7 @@ public sealed partial class VampireSystem
 
     private bool CanDrinkBlood(Entity<VampireComponent> ent, EntityUid target)
     {
-        if (!TryComp<BloodSourceComponent>(target, out var bloodSource))
+        if (!_bloodSourceQuery.TryComp(target, out var bloodSource))
         {
             ShowDrinkPopup(ent, target, "vampire-drink-target-unsuitable");
             return false;
@@ -67,7 +67,7 @@ public sealed partial class VampireSystem
             return false;
         }
 
-        if (!TryComp<BloodstreamComponent>(target, out var bloodstream) ||
+        if (!_bloodstreamQuery.TryComp(target, out var bloodstream) ||
             !HasBloodToDrink((target, bloodstream)))
         {
             ShowDrinkPopup(ent, target, "vampire-drink-target-empty");

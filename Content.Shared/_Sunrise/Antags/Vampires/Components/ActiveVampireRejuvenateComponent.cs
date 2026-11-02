@@ -4,7 +4,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._Sunrise.Antags.Vampires.Components;
 
 /// <summary>
-/// Активное омоложение.
+/// Периодическое лечение улучшенного омоложения.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true), AutoGenerateComponentPause]
 public sealed partial class ActiveVampireRejuvenateComponent : Component
@@ -12,7 +12,7 @@ public sealed partial class ActiveVampireRejuvenateComponent : Component
     public override bool SendOnlyToOwner => true;
 
     /// <summary>
-    /// Осталось применений.
+    /// Оставшееся число шагов лечения.
     /// </summary>
     [AutoNetworkedField]
     public int ApplicationsRemaining;
@@ -24,13 +24,13 @@ public sealed partial class ActiveVampireRejuvenateComponent : Component
     public TimeSpan ApplicationInterval = TimeSpan.FromSeconds(3.5);
 
     /// <summary>
-    /// Следующее лечение.
+    /// Время следующего шага лечения.
     /// </summary>
     [AutoNetworkedField, AutoPausedField]
     public TimeSpan NextApplication;
 
     /// <summary>
-    /// Лечение за применение.
+    /// Изменение урона за шаг; отрицательные значения лечат.
     /// </summary>
     [AutoNetworkedField]
     public DamageSpecifier Healing = new();

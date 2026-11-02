@@ -25,7 +25,7 @@ public sealed partial class ServerVampireSystem
     {
         var target = _number.GetTarget(ent);
         if (args.Mind.OwnedEntity is not { } body ||
-            !TryComp<VampireFeedingComponent>(body, out var feeding))
+            !_feedingQuery.TryComp(body, out var feeding))
         {
             args.Progress = 0f;
             return;
@@ -37,7 +37,7 @@ public sealed partial class ServerVampireSystem
     }
 
     /// <summary>
-    /// Проверяет возможность обращения.
+    /// Проверяет наличие сущности и разума, отсутствие вампиризма.
     /// </summary>
     public bool CanMakeVampire(EntityUid target)
     {
@@ -48,7 +48,7 @@ public sealed partial class ServerVampireSystem
     }
 
     /// <summary>
-    /// Обращает сущность в вампира.
+    /// Обращает в вампира; отказ в выдаче цели не отменяет обращение.
     /// </summary>
     public bool TryMakeVampire(EntityUid target)
     {
@@ -86,7 +86,7 @@ public sealed partial class ServerVampireSystem
             return;
 
         Log.Error(
-            $"Failed to add vampire objective {objective} to {ToPrettyString(mind.Comp.OwnedEntity)}");
+            $"Не удалось выдать цель вампира {objective} сущности {ToPrettyString(mind.Comp.OwnedEntity)}");
     }
 
     private void TryAddRandomVampireObjective(
@@ -105,7 +105,7 @@ public sealed partial class ServerVampireSystem
         }
 
         Log.Error(
-            $"Failed to select vampire objective from group {objectiveGroup} " +
-            $"for {ToPrettyString(mind.Comp.OwnedEntity)}");
+            $"Не удалось выбрать цель вампира из группы {objectiveGroup} " +
+            $"для {ToPrettyString(mind.Comp.OwnedEntity)}");
     }
 }

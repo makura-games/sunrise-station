@@ -33,7 +33,7 @@ public sealed partial class VampirePowerLevelPrototype : IPrototype
     public VampirePowerLevel Level;
 
     /// <summary>
-    /// Кровь для перехода.
+    /// Порог TotalBlood; null отключает автоматическое повышение до этого уровня.
     /// </summary>
     [DataField]
     public int? RequiredTotalBlood;
@@ -88,13 +88,13 @@ public sealed partial class VampireActionChargeSettings
     public int MaxCharges = 1;
 
     /// <summary>
-    /// Восстановление заряда.
+    /// Время восстановления одного заряда.
     /// </summary>
     [DataField]
     public TimeSpan RechargeDuration = TimeSpan.FromSeconds(90);
 
     /// <summary>
-    /// Задержка действия.
+    /// Кулдаун применения, отдельный от восстановления зарядов.
     /// </summary>
     [DataField]
     public TimeSpan UseDelay = TimeSpan.FromSeconds(10);
@@ -113,13 +113,13 @@ public sealed partial class VampireFangsLevelSettings
     public TimeSpan SipInterval = TimeSpan.FromSeconds(1.25);
 
     /// <summary>
-    /// Кровь за глоток.
+    /// Базовая прибавка крови за полный глоток.
     /// </summary>
     [DataField]
     public float BloodGain = 10f;
 
     /// <summary>
-    /// Потеря крови цели.
+    /// Потеря крови цели за полный глоток.
     /// </summary>
     [DataField]
     public float TargetBloodDrain = 20f;
@@ -131,7 +131,7 @@ public sealed partial class VampireFangsLevelSettings
     public DamageSpecifier BiteDamage = new();
 
     /// <summary>
-    /// Кровотечение от укуса.
+    /// Усиление кровотечения за глоток.
     /// </summary>
     [DataField]
     public float BleedAmount = 1f;
@@ -143,13 +143,13 @@ public sealed partial class VampireFangsLevelSettings
     public float Range = 1.5f;
 
     /// <summary>
-    /// Предел крови с цели.
+    /// Лимит полученной крови с одной цели.
     /// </summary>
     [DataField]
     public float MaxBloodPerTarget = 200f;
 
     /// <summary>
-    /// Лечение за глоток.
+    /// Лечение за глоток, пропорциональное полученной крови.
     /// </summary>
     [DataField]
     public DamageSpecifier Healing = new();
@@ -174,38 +174,38 @@ public sealed partial class VampireGlareLevelSettings
     public float Range = 1f;
 
     /// <summary>
-    /// Паралич спереди.
+    /// Паралич стоящей цели спереди.
     /// </summary>
     [DataField]
     public TimeSpan FrontParalyzeDuration = TimeSpan.FromSeconds(5);
 
     /// <summary>
-    /// Паралич сбоку.
+    /// Паралич сбоку или для сбитой с ног цели.
     /// </summary>
     [DataField]
     public TimeSpan SideParalyzeDuration = TimeSpan.FromSeconds(1);
 
     /// <summary>
-    /// Урон выносливости.
+    /// Урон выносливости независимо от направления.
     /// </summary>
     [DataField]
     public float StaminaDamage = 20f;
 
     /// <summary>
-    /// Доза немого токсина.
+    /// Доза токсина немоты стоящей цели спереди.
     /// </summary>
     [DataField]
     public float MuteToxinAmount = 0.25f;
 
     /// <summary>
-    /// Множитель защиты от вспышек.
+    /// Множитель эффектов при защите от вспышек; ноль блокирует их.
     /// </summary>
     [DataField]
     public float FlashProtectionEffectScale;
 }
 
 /// <summary>
-/// Настройки гипноза.
+/// Настройки усыпления цели.
 /// </summary>
 [DataDefinition]
 public sealed partial class VampireSleepLevelSettings
@@ -217,7 +217,7 @@ public sealed partial class VampireSleepLevelSettings
     public VampireActionChargeSettings Action = new();
 
     /// <summary>
-    /// Время гипноза.
+    /// Длительность концентрации до наложения сна.
     /// </summary>
     [DataField]
     public TimeSpan ChannelTime = TimeSpan.FromSeconds(6);
@@ -247,7 +247,7 @@ public sealed partial class VampireSleepLevelSettings
     public int BloodCost = 20;
 
     /// <summary>
-    /// Игнорирование веры.
+    /// Обход только защиты веры.
     /// </summary>
     [DataField]
     public bool IgnoresFaith;
@@ -272,13 +272,13 @@ public sealed partial class VampireRejuvenationLevelSettings
     public float StaminaRestoreAmount;
 
     /// <summary>
-    /// Объём очищения реагентов.
+    /// Общий объём удаляемых реагентов при улучшенном омоложении.
     /// </summary>
     [DataField]
     public float ReagentPurgeAmount;
 
     /// <summary>
-    /// Число применений лечения.
+    /// Число шагов лечения улучшенного омоложения.
     /// </summary>
     [DataField]
     public int HealApplications;

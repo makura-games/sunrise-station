@@ -10,8 +10,8 @@ public sealed partial class VampireSystem
 
     private void UpdatePowerLevel(Entity<VampireComponent> ent, bool syncActions = true)
     {
-        if (!TryComp<VampireConfigurationComponent>(ent, out var configuration) ||
-            !TryComp<VampireFeedingComponent>(ent, out var feeding))
+        if (!_configurationQuery.TryComp(ent, out var configuration) ||
+            !_feedingQuery.TryComp(ent, out var feeding))
         {
             return;
         }
@@ -49,7 +49,7 @@ public sealed partial class VampireSystem
     private void ApplyPowerLevelSettings(Entity<VampireComponent> ent)
     {
         if (!TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var level) ||
-            !TryComp<VampireFeedingComponent>(ent, out var feeding))
+            !_feedingQuery.TryComp(ent, out var feeding))
         {
             return;
         }
@@ -88,7 +88,7 @@ public sealed partial class VampireSystem
             return true;
         }
 
-        Log.Error($"Missing vampire power level prototype for {powerLevel}");
+        Log.Error($"Не найден прототип уровня силы вампира {powerLevel}");
         prototype = default!;
         return false;
     }

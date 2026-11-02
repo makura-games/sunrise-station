@@ -100,8 +100,14 @@ public sealed partial class VampireSystem
     }
 
     /// <summary>
-    /// Пополняет кровь и сытость, при необходимости учитывая развитие силы и историю жертв.
+    /// Пополняет кровь и сытость, учитывает прогрессию и жертв.
     /// </summary>
+    /// <param name="ent">Вампир, получающий кровь.</param>
+    /// <param name="amount">Фактически полученная кровь.</param>
+    /// <param name="target">Источник крови; null отключает учёт жертвы.</param>
+    /// <param name="countTotalBlood">Учитывать прогрессию и новых жертв.</param>
+    /// <param name="recordTarget">Обновить историю цели.</param>
+    /// <returns>Целая прибавка к DrunkBlood с учётом остатка.</returns>
     public int AddBlood(
         Entity<VampireComponent> ent,
         float amount,
@@ -109,7 +115,7 @@ public sealed partial class VampireSystem
         bool countTotalBlood = true,
         bool recordTarget = true)
     {
-        if (amount <= 0f || !TryComp<VampireFeedingComponent>(ent, out var feeding))
+        if (amount <= 0f || !_feedingQuery.TryComp(ent, out var feeding))
             return 0;
 
         Dirty(ent, feeding);
@@ -174,7 +180,7 @@ public sealed partial class VampireSystem
         if (!Exists(action))
             return false;
 
-        if (!TryComp<VampireActionComponent>(action, out var vampireAction))
+        if (!_vampireActionQuery.TryComp(action, out var vampireAction))
             return true;
 
         if (ent.Comp.PowerLevel < vampireAction.RequiredPowerLevel)
@@ -191,8 +197,7 @@ public sealed partial class VampireSystem
         return true;
     }
 
-    // Возможно, можно добавить сюда расу милир
-
+    // Защиту даёт BibleUserComponent.
     private bool IsProtectedByFaith(EntityUid target)
         => HasComp<BibleUserComponent>(target);
 

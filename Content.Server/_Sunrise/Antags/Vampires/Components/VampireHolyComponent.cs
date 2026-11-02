@@ -11,85 +11,85 @@ namespace Content.Server._Sunrise.Antags.Vampires.Components;
 public sealed partial class VampireHolyComponent : Component
 {
     /// <summary>
-    /// Время следующей проверки святой воды и святынь поблизости, независимое от предсказания питания.
+    /// Время следующей проверки святых уязвимостей.
     /// </summary>
     [AutoPausedField]
     public TimeSpan NextUpdate;
 
     /// <summary>
-    /// Типы физического урона.
+    /// Типы распределения физического урона святой воды.
     /// </summary>
     [DataField]
     public List<ProtoId<DamageTypePrototype>> BruteDamageTypes = new() { "Blunt", "Slash", "Piercing" };
 
     /// <summary>
-    /// Типы ожогового урона.
+    /// Типы распределения ожогового урона святой воды.
     /// </summary>
     [DataField]
     public List<ProtoId<DamageTypePrototype>> BurnDamageTypes = new() { "Heat", "Shock", "Cold", "Caustic" };
 
     /// <summary>
-    /// Урон святого места.
+    /// Тип урона от святого места.
     /// </summary>
     [DataField]
     public ProtoId<DamageTypePrototype> HolyPlaceDamageType = "Heat";
 
     /// <summary>
-    /// Требуемое число жертв.
+    /// Порог UniqueVictims для святых уязвимостей.
     /// </summary>
     [DataField]
     public int RequiredVictims = 1;
 
     /// <summary>
-    /// Потеря крови от святой воды.
+    /// Максимальная потеря запаса крови за срабатывание.
     /// </summary>
     [DataField]
     public int HolyWaterBloodDrain = 3;
 
     /// <summary>
-    /// Физический урон святой воды.
+    /// Суммарный физический урон при наличии запаса крови.
     /// </summary>
     [DataField]
     public float HolyWaterBruteDamage = 3f;
 
     /// <summary>
-    /// Ожоговый урон святой воды.
+    /// Суммарный ожоговый урон при пустом запасе крови.
     /// </summary>
     [DataField]
     public float HolyWaterBurnDamage = 2f;
 
     /// <summary>
-    /// Урон выносливости святой воды.
+    /// Урон выносливости при наличии запаса крови.
     /// </summary>
     [DataField]
     public float HolyWaterStaminaDamage = 5f;
 
     /// <summary>
-    /// Урон святого места.
+    /// Урон святого места за срабатывание.
     /// </summary>
     [DataField]
     public float HolyPlaceDamage = 3f;
 
     /// <summary>
-    /// Интервал предупреждений.
+    /// Интервал предупреждений о святом месте.
     /// </summary>
     [DataField]
     public TimeSpan PopupInterval = TimeSpan.FromSeconds(5);
 
     /// <summary>
-    /// Интервал святого урона.
+    /// Интервал эффектов воды и святого места, учитываемый раздельно.
     /// </summary>
     [DataField]
     public TimeSpan EffectInterval = TimeSpan.FromSeconds(2);
 
     /// <summary>
-    /// Радиус святого места.
+    /// Радиус поиска доступных закреплённых святынь.
     /// </summary>
     [DataField]
     public float HolyPlaceRange = 8f;
 
     /// <summary>
-    /// Святая вода.
+    /// Реагент святой воды; эффект его не расходует.
     /// </summary>
     [DataField]
     public ProtoId<ReagentPrototype> HolyWaterReagent = "Holywater";
@@ -107,7 +107,7 @@ public sealed partial class VampireHolyComponent : Component
     public TimeSpan NextHolyPlaceEffect;
 
     /// <summary>
-    /// Следующее предупреждение.
+    /// Время следующего предупреждения о святом месте.
     /// </summary>
     [AutoPausedField]
     public TimeSpan NextHolyPlacePopup;

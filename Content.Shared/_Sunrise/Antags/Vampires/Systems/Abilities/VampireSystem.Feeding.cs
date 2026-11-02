@@ -29,6 +29,9 @@ public sealed partial class VampireSystem
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private BlindableSystem _blindable = default!;
     [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private EntityQuery<BloodstreamComponent> _bloodstreamQuery = default!;
+    [Dependency] private EntityQuery<BloodSourceComponent> _bloodSourceQuery = default!;
+    [Dependency] private EntityQuery<BlindableComponent> _blindableQuery = default!;
 
     [SubscribeLocalEvent]
     public void OnToggleFangs(Entity<VampireComponent> ent, ref VampireToggleFangsActionEvent args)
@@ -38,7 +41,7 @@ public sealed partial class VampireSystem
 
         ent.Comp.FangsExtended = !ent.Comp.FangsExtended;
         if (!ent.Comp.FangsExtended &&
-            TryComp<VampireFeedingComponent>(ent, out var feeding) &&
+            _feedingQuery.TryComp(ent, out var feeding) &&
             feeding.DrinkDoAfter is { } doAfter)
         {
             _doAfter.Cancel(ent, doAfter);
@@ -53,7 +56,7 @@ public sealed partial class VampireSystem
     [SubscribeLocalEvent]
     public void OnDrinkDoAfter(Entity<VampireComponent> ent, ref VampireDrinkBloodDoAfterEvent args)
     {
-        if (args.Handled || !TryComp<VampireFeedingComponent>(ent, out var feeding))
+        if (args.Handled || !_feedingQuery.TryComp(ent, out var feeding))
             return;
 
         args.Handled = true;
@@ -64,8 +67,8 @@ public sealed partial class VampireSystem
             !ent.Comp.FangsExtended ||
             IsMouthBlocked(ent, feeding) ||
             args.Args.Target is not { } targetUid ||
-            !HasComp<BloodstreamComponent>(targetUid) ||
-            !TryComp<BloodSourceComponent>(targetUid, out var bloodSource) ||
+            !_bloodstreamQuery.TryComp(targetUid, out var blood) ||
+            !_bloodSourceQuery.TryComp(targetUid, out var bloodSource) ||
             bloodSource.Value <= 0f ||
             IsInvalidDrinkTarget(ent.Owner, targetUid, showPopup: false))
         {
@@ -106,9 +109,7 @@ public sealed partial class VampireSystem
         var maxCanDrink = feeding.MaxBloodPerTarget - drunkFromTarget;
         var fullSipGain = feeding.BloodGainPerSip * bloodEfficiency;
         var cappedSipGain = MathF.Min(fullSipGain, maxCanDrink);
-        if (cappedSipGain <= 0f ||
-            feeding.TargetBloodDrainPerSip <= 0f ||
-            !TryComp<BloodstreamComponent>(targetUid, out var blood))
+        if (cappedSipGain <= 0f || feeding.TargetBloodDrainPerSip <= 0f)
         {
             _popup.PopupEntity(Loc.GetString("vampire-drink-target-empty"), ent.Owner, ent.Owner, PopupType.MediumCaution);
             return;
@@ -145,7 +146,7 @@ public sealed partial class VampireSystem
         _damageable.TryChangeDamage(targetUid, feeding.BiteDamage, ignoreResistances: true);
         _blood.TryModifyBleedAmount(targetUid, feeding.BiteBleedAmount);
 
-        if (TryComp<BlindableComponent>(targetUid, out var blindable))
+        if (_blindableQuery.TryComp(targetUid, out var blindable))
         {
             var biteCount = feeding.BiteCountsByTarget.GetValueOrDefault(targetUid) + 1;
             if (biteCount >= feeding.BitesPerEyeDamage)
@@ -188,8 +189,8 @@ public sealed partial class VampireSystem
 
     private bool TryStartDrinkBlood(Entity<VampireComponent> ent, EntityUid target)
     {
-        if (!TryComp<VampireFeedingComponent>(ent, out var feeding) ||
-            !TryComp<VampireConfigurationComponent>(ent, out var configuration) ||
+        if (!_feedingQuery.TryComp(ent, out var feeding) ||
+            !_configurationQuery.TryComp(ent, out var configuration) ||
             feeding.DrinkDoAfter != null ||
             !CanDrinkBlood(ent, target))
         {
@@ -305,8 +306,8 @@ public sealed partial class VampireSystem
 
     private void UpdateVampireFedAlert(Entity<VampireComponent> ent)
     {
-        if (!TryComp<VampireConfigurationComponent>(ent, out var configuration) ||
-            !TryComp<VampireFeedingComponent>(ent, out var feeding))
+        if (!_configurationQuery.TryComp(ent, out var configuration) ||
+            !_feedingQuery.TryComp(ent, out var feeding))
         {
             return;
         }

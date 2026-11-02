@@ -32,6 +32,8 @@ public sealed partial class VampireSystem : EntitySystem
     [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityQuery<VampireConfigurationComponent> _configurationQuery = default!;
+    [Dependency] private EntityQuery<VampireFeedingComponent> _feedingQuery = default!;
 
     public override void Initialize()
     {
