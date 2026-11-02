@@ -1,6 +1,6 @@
 # EVA главы персонала
 - type: entity
-  parent: [ ClothingOuterEVASuitBase, BaseCommandContraband, BaseGrandTheftContraband ]
+  parent: [ ClothingOuterHardsuitBase, BaseCommandContraband, BaseGrandTheftContraband ]
   id: ClothingOuterEVASuitHop
   name: head of personnel's EVA suit
   description: A special suit that protects against hazardous low-pressure environments and paper cuts. Designed for the Head of Personnel.
