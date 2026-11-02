@@ -30,7 +30,7 @@ public sealed partial class HolidayGiveawaySystem : EntitySystem
     {
         base.Initialize();
 
-        Subs.CVar(_configuration, CCVars.HolidaysEnabled, OnHolidaysEnableChange);
+        Subs.CVar(_configuration, CCVars.HolidaysEnabled, OnHolidaysEnableChange, true);
 
         SubscribeLocalEvent<GameRunLevelChangedEvent>(CacheGiveaways);
         SubscribeLocalEvent<RoundStartedEvent>(CacheGiveaways);

@@ -26,12 +26,128 @@
       ]
     },
     {
+      "name": "shield-icon",
+      "copyright": "done by KaiserMaus (ginhub)",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "shield-on",
+      "copyright": "done by KaiserMaus (ginhub)",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "ertshield-icon",
+      "copyright": "done by KaiserMaus (ginhub)",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "ertshield-on",
+      "copyright": "done by KaiserMaus (ginhub)",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "inhand-right-ertshield",
+      "copyright": "done by KaiserMaus (ginhub)",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left-ertshield",
+      "copyright": "done by KaiserMaus (ginhub)",
+      "directions": 4
+    },
+    {
       "name": "inhand-right-shield",
       "directions": 4
     },
     {
       "name": "inhand-left-shield",
       "directions": 4
+    },
+    {
+      "name": "cybershield-inhand-right",
+      "copyright": "Taken from HoloprojectorSecurity. Inhands by TiniestShark (github)",
+      "directions": 4,
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "cybershield-inhand-left",
+      "copyright": "Taken from HoloprojectorSecurity. Inhands by TiniestShark (github)",
+      "directions": 4,
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
     }
   ]
 }

@@ -1,9 +1,0 @@
-- type: entity
-  parent: SunriseEnergyShield
-  id: EnergyShieldBiocode
-  suffix: BIOCODE
-  components:
-  - type: Biocode
-    factions:
-    - Syndicate
-    - Pirate
