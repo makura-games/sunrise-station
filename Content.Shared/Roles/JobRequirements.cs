@@ -22,16 +22,11 @@ public static class JobRequirements
         IEntityManager entManager,
         IPrototypeManager protoManager,
         HumanoidCharacterProfile? profile,
-        // Sunrise edit start - сохраняем проверку расы при выключенных таймерах
-        string[] sponsorPrototypes,
-        bool checkTimers = true) // Sunrise-Sponsors
-        // Sunrise edit end
+        string[] sponsorPrototypes) // Sunrise-Sponsors
     {
         var sys = entManager.System<SharedRoleSystem>();
         var requirements = sys.GetRoleRequirements(job);
-        // Sunrise edit start - передаём режим проверки требований
-        return TryRequirementsMet(requirements, playTimes, out reason, entManager, protoManager, profile, job.ID, sponsorPrototypes, checkTimers);
-        // Sunrise edit end
+        return TryRequirementsMet(requirements, playTimes, out reason, entManager, protoManager, profile, job.ID, sponsorPrototypes);
     }
 
     /// <summary>
@@ -49,10 +44,7 @@ public static class JobRequirements
         IPrototypeManager protoManager,
         HumanoidCharacterProfile? profile,
         string protoId,
-        // Sunrise edit start - сохраняем проверку расы при выключенных таймерах
-        string[] sponsorPrototypes,
-        bool checkTimers = true)
-        // Sunrise edit end
+        string[] sponsorPrototypes)
     {
         reason = null;
         if (requirements == null)
@@ -60,11 +52,6 @@ public static class JobRequirements
 
         foreach (var requirement in requirements)
         {
-            // Sunrise added start - расовые ограничения не зависят от таймеров
-            if (!checkTimers && requirement is not SpeciesRequirement)
-                continue;
-            // Sunrise added end
-
             if (!requirement.Check(entManager, protoManager, profile, playTimes, protoId, sponsorPrototypes, out reason)) // Sunrise-Sponsors
                 return false;
         }

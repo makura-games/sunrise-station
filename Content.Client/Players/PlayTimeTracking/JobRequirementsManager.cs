@@ -193,22 +193,14 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
     {
         reason = null;
 
-        // Sunrise edit start - расовые требования действуют при выключенных таймерах
-        var checkTimers = _cfg.GetCVar(CCVars.GameRoleTimers);
-        if (requirements == null)
+        if (requirements == null || !_cfg.GetCVar(CCVars.GameRoleTimers))
             return true;
 
         var sponsorPrototypes = _sponsorsMgr?.GetClientPrototypes().ToArray() ?? []; // Sunrise-Sponsors
-        // Sunrise edit end
 
         var reasons = new List<string>();
         foreach (var requirement in requirements)
         {
-            // Sunrise added start - без таймеров проверяем только расу
-            if (!checkTimers && requirement is not SpeciesRequirement)
-                continue;
-            // Sunrise added end
-
             if (requirement.Check(_entManager, _prototypes, profile, _roles, protoId, sponsorPrototypes, out var jobReason)) // Sunrise-Sponsors
                 continue;
 
