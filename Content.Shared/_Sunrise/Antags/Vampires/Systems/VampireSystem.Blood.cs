@@ -8,52 +8,6 @@ public sealed partial class VampireSystem
 {
     // Учёт и расход крови.
 
-    private void ProcessBloodDecay(
-        Entity<VampireComponent> ent,
-        VampireFeedingComponent feeding,
-        float elapsed)
-    {
-        var before = ent.Comp.BloodFullness;
-        var wasStarving = before <= 0f;
-
-        if (before > 0f)
-        {
-            if (ent.Comp.StarvationDrunkBloodDrainAccumulator != 0f)
-            {
-                ent.Comp.StarvationDrunkBloodDrainAccumulator = 0f;
-                DirtyField(ent, ent.Comp, nameof(VampireComponent.StarvationDrunkBloodDrainAccumulator));
-            }
-
-            ent.Comp.BloodFullness = MathF.Max(0f, before - feeding.FullnessDecayPerSecond * elapsed);
-
-            if (!MathHelper.CloseTo(ent.Comp.BloodFullness, before))
-            {
-                DirtyField(ent, ent.Comp, nameof(VampireComponent.BloodFullness));
-                UpdateVampireFedAlert(ent);
-            }
-        }
-
-        var isStarving = ent.Comp.BloodFullness <= 0f;
-        if (wasStarving != isStarving)
-            _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
-
-        if (ent.Comp.BloodFullness > 0f ||
-            feeding.StarvationDrunkBloodDrainPerSecond <= 0 ||
-            ent.Comp.DrunkBlood <= 0)
-        {
-            return;
-        }
-
-        ent.Comp.StarvationDrunkBloodDrainAccumulator += feeding.StarvationDrunkBloodDrainPerSecond * elapsed;
-        DirtyField(ent, ent.Comp, nameof(VampireComponent.StarvationDrunkBloodDrainAccumulator));
-        var drained = Math.Min(ent.Comp.DrunkBlood, (int)ent.Comp.StarvationDrunkBloodDrainAccumulator);
-        if (drained <= 0)
-            return;
-
-        ent.Comp.StarvationDrunkBloodDrainAccumulator -= drained;
-        TrySpendBlood(ent, drained, showPopup: false);
-    }
-
     /// <summary>
     /// Проверяет требуемый уровень силы и расходует кровь на применение способности.
     /// </summary>
@@ -165,6 +119,52 @@ public sealed partial class VampireSystem
         return integerAmount;
     }
 
+    private void ProcessBloodDecay(
+        Entity<VampireComponent> ent,
+        VampireFeedingComponent feeding,
+        float elapsed)
+    {
+        var before = ent.Comp.BloodFullness;
+        var wasStarving = before <= 0f;
+
+        if (before > 0f)
+        {
+            if (ent.Comp.StarvationDrunkBloodDrainAccumulator != 0f)
+            {
+                ent.Comp.StarvationDrunkBloodDrainAccumulator = 0f;
+                DirtyField(ent, ent.Comp, nameof(VampireComponent.StarvationDrunkBloodDrainAccumulator));
+            }
+
+            ent.Comp.BloodFullness = MathF.Max(0f, before - feeding.FullnessDecayPerSecond * elapsed);
+
+            if (!MathHelper.CloseTo(ent.Comp.BloodFullness, before))
+            {
+                DirtyField(ent, ent.Comp, nameof(VampireComponent.BloodFullness));
+                UpdateVampireFedAlert(ent);
+            }
+        }
+
+        var isStarving = ent.Comp.BloodFullness <= 0f;
+        if (wasStarving != isStarving)
+            _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
+
+        if (ent.Comp.BloodFullness > 0f ||
+            feeding.StarvationDrunkBloodDrainPerSecond <= 0 ||
+            ent.Comp.DrunkBlood <= 0)
+        {
+            return;
+        }
+
+        ent.Comp.StarvationDrunkBloodDrainAccumulator += feeding.StarvationDrunkBloodDrainPerSecond * elapsed;
+        DirtyField(ent, ent.Comp, nameof(VampireComponent.StarvationDrunkBloodDrainAccumulator));
+        var drained = Math.Min(ent.Comp.DrunkBlood, (int)ent.Comp.StarvationDrunkBloodDrainAccumulator);
+        if (drained <= 0)
+            return;
+
+        ent.Comp.StarvationDrunkBloodDrainAccumulator -= drained;
+        TrySpendBlood(ent, drained, showPopup: false);
+    }
+
     private bool TryResolveVampireActionCost(
         Entity<VampireComponent> ent,
         EntityUid? actionEntity,
@@ -197,7 +197,7 @@ public sealed partial class VampireSystem
         return true;
     }
 
-    // Защиту даёт BibleUserComponent.
+    // Возможно сюда можно будеет добавить милир или иные проверки.
     private bool IsProtectedByFaith(EntityUid target)
         => HasComp<BibleUserComponent>(target);
 

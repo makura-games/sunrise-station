@@ -14,9 +14,6 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
-/// <summary>
-/// Предсказывает способности вампира, питание, запас крови и развитие силы.
-/// </summary>
 public sealed partial class VampireSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
@@ -54,8 +51,8 @@ public sealed partial class VampireSystem : EntitySystem
                 continue;
 
             var elapsed = vampire.LastBloodUpdate == TimeSpan.Zero
-                ? (float) feeding.UpdateDelay.TotalSeconds
-                : MathF.Max(0f, (float) (now - vampire.LastBloodUpdate).TotalSeconds);
+                ? (float)feeding.UpdateDelay.TotalSeconds
+                : MathF.Max(0f, (float)(now - vampire.LastBloodUpdate).TotalSeconds);
 
             vampire.LastBloodUpdate = now;
             vampire.NextBloodUpdate = now + feeding.UpdateDelay;

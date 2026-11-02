@@ -31,6 +31,16 @@ public sealed partial class ServerVampireSystem : EntitySystem
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private EntityQuery<VampireFeedingComponent> _feedingQuery = default!;
 
+    [SubscribeLocalEvent]
+    public void OnPowerLevelChanged(Entity<VampireComponent> ent, ref VampirePowerLevelChangedEvent args)
+    {
+        if (TryComp<VampireConfigurationComponent>(ent, out var configuration) &&
+            configuration.PowerLevelMessages.TryGetValue(args.Level, out var message))
+        {
+            _antag.SendBriefing(ent, Loc.GetString(message), Color.Crimson, null);
+        }
+    }
+
     public override void Initialize()
     {
         base.Initialize();
@@ -53,16 +63,6 @@ public sealed partial class ServerVampireSystem : EntitySystem
 
             HandleHolyWater((uid, vampire));
             HandleHolyPlace((uid, vampire));
-        }
-    }
-
-    [SubscribeLocalEvent]
-    public void OnPowerLevelChanged(Entity<VampireComponent> ent, ref VampirePowerLevelChangedEvent args)
-    {
-        if (TryComp<VampireConfigurationComponent>(ent, out var configuration) &&
-            configuration.PowerLevelMessages.TryGetValue(args.Level, out var message))
-        {
-            _antag.SendBriefing(ent, Loc.GetString(message), Color.Crimson, null);
         }
     }
 }

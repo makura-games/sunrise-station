@@ -26,6 +26,43 @@ public sealed partial class VampireSystem
             args.Action.Owner);
     }
 
+    [SubscribeLocalEvent]
+    public void OnSleepDoAfterAttempt(
+        Entity<VampireComponent> ent,
+        ref DoAfterAttemptEvent<VampireSleepDoAfterEvent> args)
+    {
+        if (!TryGetEntity(args.Event.Victim, out var target) ||
+            !Exists(target) ||
+            !_interaction.InRangeAndAccessible(ent.Owner, target.Value, args.Event.MaxDistance))
+        {
+            args.Cancel();
+        }
+    }
+
+    [SubscribeLocalEvent]
+    public void OnSleepDoAfter(
+        Entity<VampireComponent> ent,
+        ref VampireSleepDoAfterEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+        if (args.Cancelled ||
+            !TryGetEntity(args.Victim, out var target) ||
+            !CanAffectSleepTarget(ent, target.Value, args.IgnoresFaith) ||
+            !TrySpendBlood(ent, args.BloodCost))
+        {
+            RefundSleepAction(args.Action);
+            return;
+        }
+
+        _statusEffects.TryAddStatusEffectDuration(
+            target.Value,
+            SleepingSystem.StatusEffectForcedSleeping,
+            args.Duration);
+    }
+
     public bool TrySleep(
         Entity<VampireComponent?> ent,
         EntityUid target,
@@ -169,43 +206,6 @@ public sealed partial class VampireSystem
             PopupType.SmallCaution);
 
         return true;
-    }
-
-    [SubscribeLocalEvent]
-    public void OnSleepDoAfterAttempt(
-        Entity<VampireComponent> ent,
-        ref DoAfterAttemptEvent<VampireSleepDoAfterEvent> args)
-    {
-        if (!TryGetEntity(args.Event.Victim, out var target) ||
-            !Exists(target) ||
-            !_interaction.InRangeAndAccessible(ent.Owner, target.Value, args.Event.MaxDistance))
-        {
-            args.Cancel();
-        }
-    }
-
-    [SubscribeLocalEvent]
-    public void OnSleepDoAfter(
-        Entity<VampireComponent> ent,
-        ref VampireSleepDoAfterEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-        if (args.Cancelled ||
-            !TryGetEntity(args.Victim, out var target) ||
-            !CanAffectSleepTarget(ent, target.Value, args.IgnoresFaith) ||
-            !TrySpendBlood(ent, args.BloodCost))
-        {
-            RefundSleepAction(args.Action);
-            return;
-        }
-
-        _statusEffects.TryAddStatusEffectDuration(
-            target.Value,
-            SleepingSystem.StatusEffectForcedSleeping,
-            args.Duration);
     }
 
     private void RefundSleepAction(NetEntity netAction)

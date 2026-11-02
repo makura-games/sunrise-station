@@ -187,6 +187,20 @@ public sealed partial class VampireSystem
         }
     }
 
+    [SubscribeLocalEvent]
+    public void OnBloodSourceTerminating(Entity<BloodSourceComponent> ent, ref EntityTerminatingEvent args)
+    {
+        // Удалённую сущность нельзя преобразовать в NetEntity при следующем снимке истории укусов.
+        var query = EntityQueryEnumerator<VampireFeedingComponent>();
+        while (query.MoveNext(out var uid, out var feeding))
+        {
+            var changed = feeding.BloodDrunkFromTargets.Remove(ent);
+            changed |= feeding.BiteCountsByTarget.Remove(ent);
+            if (changed && !TerminatingOrDeleted(uid))
+                Dirty(uid, feeding);
+        }
+    }
+
     private bool TryStartDrinkBlood(Entity<VampireComponent> ent, EntityUid target)
     {
         if (!_feedingQuery.TryComp(ent, out var feeding) ||
@@ -285,20 +299,6 @@ public sealed partial class VampireSystem
         }
 
         return false;
-    }
-
-    [SubscribeLocalEvent]
-    public void OnBloodSourceTerminating(Entity<BloodSourceComponent> ent, ref EntityTerminatingEvent args)
-    {
-        // Удалённую сущность нельзя преобразовать в NetEntity при следующем снимке истории укусов.
-        var query = EntityQueryEnumerator<VampireFeedingComponent>();
-        while (query.MoveNext(out var uid, out var feeding))
-        {
-            var changed = feeding.BloodDrunkFromTargets.Remove(ent);
-            changed |= feeding.BiteCountsByTarget.Remove(ent);
-            if (changed && !TerminatingOrDeleted(uid))
-                Dirty(uid, feeding);
-        }
     }
 
     private void UpdateVampireAlert(Entity<VampireComponent> ent)
