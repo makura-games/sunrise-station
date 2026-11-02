@@ -5,7 +5,7 @@ on:
 jobs:
   add_label:
     # Change the repository name after you've made sure the team name is correct for your fork!
-    if: ${{ (github.repository == 'makura-games/sunrise-station') && (github.event.review.state == 'APPROVED') }}
+    if: false # Sunrise-Edit - устаревший сценарий Wizden отключён
     permissions:
       contents: read
       pull-requests: write

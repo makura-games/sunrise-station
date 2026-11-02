@@ -1,12 +1,11 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server._Sunrise.BloodCult.Items.Components;
-using Content.Server.Body.Components;
-using Content.Server.Body.Systems;
 using Content.Server.Hands.Systems;
 using Content.Server.Popups;
 using Content.Shared._Sunrise.BloodCult.Components;
 using Content.Shared._Sunrise.BloodCult.Items;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
@@ -21,7 +20,8 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -30,23 +30,21 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Collections;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.BloodCult.Items.Systems;
 
-public sealed class CultBloodSpellSystem : EntitySystem
+public sealed partial class CultBloodSpellSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstreamSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly HandsSystem _handsSystem = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionSystem = default!;
-    [Dependency] private readonly TransformSystem _transformSystem = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private BloodstreamSystem _bloodstreamSystem = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private HandsSystem _handsSystem = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionSystem = default!;
+    [Dependency] private TransformSystem _transformSystem = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
 
     public override void Initialize()
     {
@@ -291,7 +289,7 @@ public sealed class CultBloodSpellSystem : EntitySystem
 
                 var blood = new Solution();
                 blood.AddReagent(puddleSolutionContent.Reagent, amount);
-                absorbBlood.AddSolution(blood, _prototypeManager);
+                absorbBlood.AddSolution(blood, ProtoMan);
                 Spawn("CultTileSpawnEffect", Transform(puddle).Coordinates);
             }
         }
@@ -370,7 +368,7 @@ public sealed class CultBloodSpellSystem : EntitySystem
                 if (!bloodSpell.HealingGroups.Contains(damageGroup))
                     continue;
 
-                var damageGroupSpecifier = _prototypeManager.Index<DamageGroupPrototype>(damageGroup);
+                var damageGroupSpecifier = ProtoMan.Index<DamageGroupPrototype>(damageGroup);
 
                 var totalDamageInGroup = FixedPoint2.Zero;
 

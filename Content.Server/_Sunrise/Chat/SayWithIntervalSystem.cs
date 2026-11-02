@@ -6,11 +6,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.Chat;
 
-public sealed class SayWithIntervalSystem : EntitySystem
+public sealed partial class SayWithIntervalSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private ChatSystem _chat = default!;
 
     /// <summary>
     /// The maximum amount of time between checking if advertisements should be displayed

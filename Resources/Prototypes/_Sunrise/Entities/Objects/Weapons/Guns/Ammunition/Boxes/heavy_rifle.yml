@@ -27,7 +27,7 @@
 
 # Boxes
 - type: entity
-  parent: BaseMagazineBoxHeavyRifle
+  parent: [ BaseNonCycleableAmmoProvider, BaseMagazineBoxHeavyRifle ]
   id: MagazineBoxHeavyRifleBig
   name: ammunition box (.308 SP)
   components:
@@ -168,7 +168,7 @@
 
 # Boxes
 - type: entity
-  parent: BaseMagazineBoxRifleMachine
+  parent: [ BaseNonCycleableAmmoProvider, BaseMagazineBoxRifleMachine ]
   id: MagazineBoxRifleMachineBig
   name: ammunition box (7.62mmR SP)
   components:

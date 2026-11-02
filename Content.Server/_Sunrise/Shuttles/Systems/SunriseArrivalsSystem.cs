@@ -1,7 +1,6 @@
 using System.Numerics;
 using Content.Server.Chat.Systems;
 using Content.Shared.Tag;
-using Content.Shared.Timing;
 using Content.Server.GameTicking;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
@@ -30,24 +29,24 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared.Timing;
 
 namespace Content.Server._Sunrise.Shuttles.Systems;
 
-public sealed class SunriseArrivalsSystem : EntitySystem
+public sealed partial class SunriseArrivalsSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly MapLoaderSystem _loader = default!;
-    [Dependency] private readonly MapSystem _mapSystem = default!;
-    [Dependency] private readonly ShuttleSystem _shuttle = default!;
-    [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly DockingSystem _docking = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private MapLoaderSystem _loader = default!;
+    [Dependency] private MapSystem _mapSystem = default!;
+    [Dependency] private ShuttleSystem _shuttle = default!;
+    [Dependency] private StationSpawningSystem _stationSpawning = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private DockingSystem _docking = default!;
 
     private bool _enabled;
     private bool _arrivalsEnabled;
@@ -185,7 +184,7 @@ public sealed class SunriseArrivalsSystem : EntitySystem
                 ev.SpawnResult.Value,
                 ev.HumanoidCharacterProfile?.Name ?? "Unknown",
                 ev.Job != null
-                    ? _prototypeManager.Index(ev.Job.Value).LocalizedName
+                    ? ProtoMan.Index(ev.Job.Value).LocalizedName
                     : Loc.GetString("job-name-unknown"));
         }
         catch (Exception e)

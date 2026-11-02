@@ -68,6 +68,10 @@
     OreDiamondCrab: 1
 
 - type: ore
+  id: OreBananiumCrab
+  oreEntity: MobSpawnCrabBananium
+
+- type: ore
   id: OreCarpDungeon
   oreEntity: MobCarpDungeon
 

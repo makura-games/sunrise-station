@@ -27,8 +27,7 @@ public sealed partial class VampireSystem
         ApplyPowerLevelSettings(ent);
         GrantBaseActions(ent, configuration);
 
-        RemComp<HungerComponent>(ent);
-        RemComp<ThirstComponent>(ent);
+        RemComp<SatiationComponent>(ent);
         RemComp<RespiratorComponent>(ent);
 
         _alerts.ClearAlertCategory(ent.Owner, configuration.HungerAlertCategory);
@@ -57,7 +56,7 @@ public sealed partial class VampireSystem
         ref BodyRelayedEvent<SetVampireMetabolismEvent> args)
     {
         if (args.Args.Enabled)
-            _metabolizer.TryAddMetabolizerType(ent, args.Args.MetabolizerType);
+            _metabolizer.TryAddMetabolizerType(ent.AsNullable(), args.Args.MetabolizerType);
         else
             _metabolizer.TryRemoveMetabolizerType(ent, args.Args.MetabolizerType);
     }

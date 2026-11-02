@@ -15,9 +15,9 @@ namespace Content.Server._Sunrise.Chat.Sanitization;
 /// </summary>
 public sealed partial class ChatSanitizationSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
-    [Dependency] private readonly ISharedChatManager _chat = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private ISharedChatManager _chat = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     private ConfigurationMultiSubscriptionBuilder? _cVarSubscriptions;
     private bool _chatSanitizationEnabled;

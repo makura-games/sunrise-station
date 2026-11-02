@@ -1,0 +1,13 @@
+- type: !PartialOnly entity
+  id: AirlockExternal
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Doors/Airlocks/Standard/external.rsi
+
+- type: !PartialOnly entity
+  id: AirlockExternalGlass
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Doors/Airlocks/Glass/external.rsi

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: CultPylon
   parent: BaseStructure
   name: pylon
@@ -30,8 +30,9 @@
   - type: PylonVisuals
   - type: InteractionOutline
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Glass
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -113,8 +114,9 @@
       map: [ "enum.CultCraftStructureVisualsLayers.Activated" ]
   - type: InteractionOutline
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -178,8 +180,9 @@
       map: [ "enum.CultCraftStructureVisualsLayers.Activated" ]
   - type: InteractionOutline
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -242,8 +245,9 @@
       map: [ "enum.CultCraftStructureVisualsLayers.Activated" ]
   - type: InteractionOutline
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:

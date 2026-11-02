@@ -1,3 +1,55 @@
+- type: antagSpecifier
+  parent: BaseAntagSpecifier
+  id: SunriseAssaultCommander
+  prefRoles: [ AssaultCommander ]
+  fallbackRoles: [ AssaultOperative ]
+  spawnerPrototype: SpawnPointAssaultOpsCommander
+  startingGear: AssaultCommanderGear
+  roleLoadout:
+  - RoleSurvivalAssaultOps
+  components:
+  - type: GhostPanelAntagonistMarker
+    name: assaultops-title
+    description: assaultops-ghostpanel-commander
+    priority: 85
+  - type: AssaultOperative
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  mindRoles:
+  - MindRoleAssaultCommander
+
+- type: antagSpecifier
+  parent: BaseAntagSpecifier
+  id: SunriseAssaultOperative
+  prefRoles: [ AssaultOperative ]
+  fallbackRoles: [ AssaultCommander ]
+  spawnerPrototype: SpawnPointAssaultOpsOperative
+  startingGear: AssaultOperativeGear
+  roleLoadout:
+  - RoleSurvivalAssaultOps
+  components:
+  - type: GhostPanelAntagonistMarker
+    name: assaultops-title
+    description: assaultops-ghostpanel-operative
+    priority: 85
+  - type: AssaultOperative
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  mindRoles:
+  - MindRoleAssaultOperative
+
 - type: entity
   id: AssaultOps
   parent: BaseGameRule
@@ -20,50 +72,12 @@
     - Predator
   - type: AntagSelection
     selectionTime: PrePlayerSpawn
-    definitions:
-    - prefRoles: [ AssaultCommander ]
-      fallbackRoles: [ AssaultOperative ]
-      spawnerPrototype: SpawnPointAssaultOpsCommander
-      startingGear: AssaultCommanderGear
-      roleLoadout:
-      - RoleSurvivalAssaultOps
-      components:
-      - type: GhostPanelAntagonistMarker
-        name: assaultops-title
-        description: assaultops-ghostpanel-commander
-        priority: 85
-      - type: AssaultOperative
-      - type: NpcFactionMember
-        factions:
-        - Syndicate
-      - type: RandomMetadata
-        nameSegments:
-        - NamesFirst
-        - NamesLast
-        nameFormat: name-format-standard
-      mindRoles:
-      - MindRoleAssaultCommander
-    - prefRoles: [ AssaultOperative ]
-      fallbackRoles: [ AssaultCommander ]
-      spawnerPrototype: SpawnPointAssaultOpsOperative
-      max: 5
+    antags:
+    - !type:FixedAntagCount
+      proto: SunriseAssaultCommander
+    - !type:LinearAntagCount
+      proto: SunriseAssaultOperative
       playerRatio: 15
-      startingGear: AssaultOperativeGear
-      roleLoadout:
-      - RoleSurvivalAssaultOps
-      components:
-      - type: GhostPanelAntagonistMarker
-        name: assaultops-title
-        description: assaultops-ghostpanel-operative
-        priority: 85
-      - type: AssaultOperative
-      - type: NpcFactionMember
-        factions:
-        - Syndicate
-      - type: RandomMetadata
-        nameSegments:
-        - NamesFirst
-        - NamesLast
-        nameFormat: name-format-standard
-      mindRoles:
-      - MindRoleAssaultOperative
+      range:
+        min: 1
+        max: 5

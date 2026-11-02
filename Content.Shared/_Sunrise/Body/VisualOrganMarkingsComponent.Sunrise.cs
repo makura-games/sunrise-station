@@ -7,12 +7,6 @@ namespace Content.Shared.Body;
 public sealed partial class VisualOrganMarkingsComponent
 {
     /// <summary>
-    /// Default displacement map data for markings on this organ.
-    /// </summary>
-    [DataField]
-    public Dictionary<HumanoidVisualLayers, DisplacementData> MarkingsDisplacement = new();
-
-    /// <summary>
     /// Body-type VisualKey-specific displacement map data for markings on this organ.
     /// </summary>
     [DataField]

@@ -1,5 +1,6 @@
 cmd-quickinspect-desc = Устанавливает имя компонента, которое будет открываться для наведения на объект через привязку клавиш «Просмотр компонента сервера/клиента».
-cmd-quickinspect-help = Использование: {$command} <имя компонента>
-cmd-quickinspect-success = Компонент установлен: {$component}.
-    Нажмите {$serverKeybind}, чтобы открыть окно VV для сервера.
-    Нажмите {$clientKeybind}, чтобы открыть окно VV для клиента.
+cmd-quickinspect-help = Использование: { $command } <имя компонента>
+cmd-quickinspect-success =
+    Компонент установлен: { $component }.
+    Нажмите { $serverKeybind }, чтобы открыть окно VV для сервера.
+    Нажмите { $clientKeybind }, чтобы открыть окно VV для клиента.

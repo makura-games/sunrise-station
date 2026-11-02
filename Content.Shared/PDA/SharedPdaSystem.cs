@@ -5,11 +5,11 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.PDA
 {
-    public abstract class SharedPdaSystem : EntitySystem
+    public abstract partial class SharedPdaSystem : EntitySystem
     {
-        [Dependency] protected readonly ItemSlotsSystem ItemSlotsSystem = default!;
-        [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
-        [Dependency] private readonly SharedJobStatusSystem _jobStatus = default!;
+        [Dependency] protected ItemSlotsSystem ItemSlotsSystem = default!;
+        [Dependency] protected SharedAppearanceSystem Appearance = default!;
+        [Dependency] private SharedJobStatusSystem _jobStatus = default!;
 
         public override void Initialize()
         {
@@ -27,8 +27,6 @@ namespace Content.Shared.PDA
         {
             if (pda.IdCard != null)
                 pda.IdSlot.StartingItem = pda.IdCard;
-            if (pda.Pen != null)
-                pda.PenSlot.StartingItem = pda.Pen;
 
             ItemSlotsSystem.AddItemSlot(uid, PdaComponent.PdaIdSlotId, pda.IdSlot);
             ItemSlotsSystem.AddItemSlot(uid, PdaComponent.PdaPenSlotId, pda.PenSlot);

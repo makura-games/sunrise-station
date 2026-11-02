@@ -8,7 +8,7 @@ namespace Content.Client._Sunrise.SponsorTiers;
 
 public sealed partial class SponsorTiersUIController : UIController, IOnStateEntered<LobbyState>
 {
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private IUserInterfaceManager _uiManager = default!;
 
     private SponsorTiersUi _sponsorTiersUi = default!;
     private bool _shown;

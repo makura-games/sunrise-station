@@ -1,4 +1,4 @@
-advertisement-narsie-1 = TOK-LYR RQA-NAP G'OLT-ULOFT!
+advertisement-narsie-1 = ТОК-ЛИР РКА-НАП Г'ОЛТ-УЛОФТ!
 advertisement-narsie-2 = Хари'д! Эске'те таннин!
 advertisement-narsie-3 = Паснар вал'кериам усинар!
 advertisement-narsie-4 = Н'ат рет ш'йро эт д'реккатнор!

@@ -99,8 +99,8 @@
       path: /Audio/Items/wirecutter_drop.ogg
   - type: Tag
     tags:
-    - PlantSampleTaker
     - Wirecutter
+  - type: BotanySampleTaker
   - type: Sprite
     sprite: _Starlight/Objects/Tools/cyberling.rsi
     state: cutters
@@ -195,19 +195,19 @@
     soundHit:
       collection: MetalThud
   - type: RefillableSolution
-    solution: Welder
-  - type: SolutionContainerManager
-    solutions:
-      Welder:
-        reagents:
-        - ReagentId: WeldingFuel
-          Quantity: 250 # Sunrise-edit
-        maxVol: 250 # Sunrise-edit
+    solution: welder
+  - type: Solution
+    id: welder
+    solution:
+      reagents:
+      - ReagentId: WeldingFuel
+        Quantity: 250 # Sunrise-edit
+      maxVol: 250 # Sunrise-edit
   - type: Tool
     speedModifier: 1.75
     useSound:
       collection: Welder
-    qualities: Welding
+    qualities: [ Welding ]
   - type: Welder
   - type: PointLight
     enabled: false
@@ -243,7 +243,7 @@
   - type: MultipleTool
     statusShowBehavior: true
     entries:
-      - behavior: Screwing
+      - behavior: [ Screwing ]
         sprite:
           sprite: _Sunrise/Objects/Tools/cyberling.rsi
           state: drill_screw
@@ -251,7 +251,7 @@
           path: /Audio/Items/drill_use.ogg
         changeSound:
           path: /Audio/Items/change_drill.ogg
-      - behavior: Anchoring
+      - behavior: [ Anchoring ]
         sprite:
           sprite: _Sunrise/Objects/Tools/cyberling.rsi
           state: drill_bolt
@@ -290,13 +290,13 @@
   - type: MultipleTool
     statusShowBehavior: true
     entries:
-      - behavior: Prying
+      - behavior: [ Prying ]
         sprite:
           sprite: _Sunrise/Objects/Tools/cyberling.rsi
           state: jaw_pry
         useSound: /Audio/Items/jaws_pry.ogg
         changeSound: /Audio/Items/change_jaws.ogg
-      - behavior: Cutting
+      - behavior: [ Cutting ]
         sprite:
           sprite: _Sunrise/Objects/Tools/cyberling.rsi
           state: jaw_cut
@@ -330,19 +330,18 @@
         enum.ToggleableVisuals.Layer:
           True: { visible: true }
           False: { visible: false }
-  - type: SolutionContainerManager
-    solutions:
-      Welder:
-        reagents:
-        - ReagentId: WeldingFuel
-          Quantity: 500
-        maxVol: 500
+  - type: Solution
+    id: welder
+    solution:
+      reagents:
+      - ReagentId: WeldingFuel
+        Quantity: 500
+      maxVol: 500
   - type: PointLight
     enabled: false
     radius: 1.5
     color: lightblue
   - type: SolutionRegeneration
-    solution: Welder
     generated:
       reagents:
       - ReagentId: WeldingFuel
@@ -358,7 +357,7 @@
   - type: Tag
     tags:
     - Hoe
-    - BotanyHoe
+  - type: BotanyHoe
   - type: Sprite
     sprite: _Sunrise/Objects/Tools/cyberling.rsi
     state: hoe
@@ -375,9 +374,7 @@
   id: CyberClippers
   description: A tool used to take samples from plants.
   components:
-  - type: Tag
-    tags:
-    - PlantSampleTaker
+  - type: BotanySampleTaker
   - type: Sprite
     sprite: _Sunrise/Objects/Tools/cyberling.rsi
     state: clippers
@@ -393,7 +390,9 @@
   id: CyberScythe
   description: A sharp and curved blade on a long fibremetal handle, this tool makes it easy to reap what you sow.
   components:
-  - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Sprite
     sprite: _Sunrise/Objects/Tools/cyberling.rsi
     state: scythe
@@ -412,7 +411,9 @@
   - type: Tag
     tags:
     - BotanyHatchet
-  - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Sprite
     sprite: _Sunrise/Objects/Tools/cyberling.rsi
     state: hatchet
@@ -490,17 +491,15 @@
     - type: UseDelay
       delay: 0.5
     - type: SolutionRegeneration
-      solution: absorbed
       generated:
         reagents:
         - ReagentId: Water
           Quantity: 0.5
     - type: SolutionPurge
-      solution: absorbed
       preserve:
       - Water
       quantity: 10
-    - type: SolutionContainerManager
-      solutions:
-        absorbed:
-          maxVol: 100
+    - type: Solution
+      id: absorbed
+      solution:
+        maxVol: 100

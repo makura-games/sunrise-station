@@ -1,0 +1,10 @@
+examinable-satiation-component-examine-hunger-full = { CAPITALIZE(POSS-ADJ($entity)) } желудок набит до отказа!
+examinable-satiation-component-examine-hunger-okay = { CAPITALIZE(POSS-ADJ($entity)) } аппетит удовлетворён.
+examinable-satiation-component-examine-hunger-concerned = { CAPITALIZE(SUBJECT($entity)) } { CONJUGATE-BASIC($entity, "испытывают", "испытывает") } голод.
+examinable-satiation-component-examine-hunger-desperate = { CAPITALIZE(SUBJECT($entity)) } { CONJUGATE-BASIC($entity, "умирают", "умирает") } от голода!
+examinable-satiation-component-examine-hunger-none = { CAPITALIZE(SUBJECT($entity)) } { CONJUGATE-BASIC($entity, "не испытывают", "не испытывает") } голода.
+examinable-satiation-component-examine-thirst-full = { CAPITALIZE(POSS-ADJ($entity)) } организм полностью насыщен влагой!
+examinable-satiation-component-examine-thirst-okay = { CAPITALIZE(POSS-ADJ($entity)) } жажда утолена.
+examinable-satiation-component-examine-thirst-concerned = { CAPITALIZE(SUBJECT($entity)) } { CONJUGATE-BASIC($entity, "хотят", "хочет") } пить.
+examinable-satiation-component-examine-thirst-desperate = { CAPITALIZE(SUBJECT($entity)) } { CONJUGATE-BASIC($entity, "умирают", "умирает") } от жажды!
+examinable-satiation-component-examine-thirst-none = { CAPITALIZE(SUBJECT($entity)) } { CONJUGATE-BASIC($entity, "не испытывают", "не испытывает") } жажды.

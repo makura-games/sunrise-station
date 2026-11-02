@@ -11,7 +11,7 @@ namespace Content.Shared._Sunrise.Tutorial.Conditions;
 public sealed partial class WieldedConditionSystem
     : TutorialConditionSystem<HandsComponent, WieldedCondition>
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     protected override void Condition(Entity<HandsComponent> entity, ref TutorialConditionEvent<WieldedCondition> args)
     {

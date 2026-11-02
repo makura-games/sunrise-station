@@ -13,7 +13,7 @@ namespace Content.Server._Sunrise.Tutorial.Conditions;
 public sealed partial class UiButtonPressedConditionSystem
     : TutorialConditionSystem<TutorialPlayerComponent, UiButtonPressedCondition>
 {
-    [Dependency] private readonly SharedTutorialSystem _tutorial = default!;
+    [Dependency] private SharedTutorialSystem _tutorial = default!;
 
     public override void Initialize()
     {

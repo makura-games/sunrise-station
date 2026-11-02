@@ -39,6 +39,7 @@ uplink-grenade-launcher-emp-extended-ammo-desc = An extended 15-shell EMP cartri
 uplink-magazine-siar52-name = SMG Magazine (.25 caseless)
 uplink-pistol-stechkin-magazine-name = Pistol Magazine .40
 uplink-pistol-stechkin-magazine-desc = A 10-round pistol magazine, compatible with Stechkin series pistols.
+uplink-pistol-magazine-vector-super-desc = A 24-round SMG magazine. Compatible with the Vector Super.
 uplink-magazine-siar52-desc = A 30-round SMG magazine. Compatible with SIAR-52.
 uplink-magazine-bulldog-uraniumslug-desc = Shotgun magazine with 8 shells filled with uranium slugs. Compatible with the Bulldog.
 uplink-magazine-bulldog-uranium-desc = Shotgun magazine with 8 shells filled with uranium pellet. Compatible with the Bulldog.
@@ -87,6 +88,13 @@ uplink-pirate-ammo-308-mixed-name = Bulk basic magazines (.308)
 
 uplink-magazine-127hp-desc = A Bauer SR-127 magazine with 7 hollow point rounds. Trades almost all breaching power for massive personnel damage.
 uplink-sniper-ammo-hp-desc = A box of 14 hollow point cartridges for the Hristov sniper rifle or SR-127. Trades almost all breaching power for massive personnel damage.
+
+## Weapons (Sunrise)
+
+uplink-vector-super-bundle-name = Vector Super Bundle
+uplink-vector-super-bundle-desc = The iconic Vector Super submachine gun bundled with 12 assorted magazines.
+uplink-vector-super-name = Vector Super
+uplink-vector-super-desc = The iconic Vector Super submachine gun bundled with a box of standard .40-caliber ammunition.
 
 ## Misc
 
@@ -166,6 +174,8 @@ uplink-pirate-borg-random-desc = Calls in a random derelict cyborg with pirate l
 
 ## Equipment
 
+uplink-experimental-eshield-name = Experimental Energy Shield
+uplink-experimental-eshield-desc = An even more exotic energy shield that reflects nearly all laser beams and provides some protection against bullets and other physical attacks. It has a built-in self-recharging battery, but its frame can still fail after several cycles of active charging and discharging.
 uplink-hypo-name = Gorlax Hypospray
 uplink-hypo-desc = A chemical hypospray manufactured by the Syndicate, capable of instantly injecting up to 20u of reagents. Starts empty.
 uplink-polytrinic-acid-chemistry-bottle-name = Polytrinic Acid
@@ -213,6 +223,8 @@ uplink-mech-teleporter-death-desc = Contains a Death Ripley MK-II and a syndicat
 
 uplink-mech-teleporter-assault-name = Assault Mech teleporter
 uplink-mech-teleporter-assault-desc = Contains a Cybersun Dark Gygax light combat mech, a syndicate repair toolbox, and a toy Gygax. The mech arrives with its current integrated equipment.
+uplink-rover-assembly-crate-name = Rover assembly crate
+uplink-rover-assembly-crate-desc = Contains a Durand chassis, Rover armor plates, control electronics, an advanced signaler, and a Syndicate repair toolbox. Other common mech parts must be obtained separately.
 
 ## Mechs equipment
 

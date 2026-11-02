@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Maps;
@@ -21,18 +21,17 @@ using Robust.Shared.Random;
 namespace Content.Server._Sunrise.PlanetPrison;
 
 // TODO: Рефактор с целью устранения варнингов и перехода системы на более современное API
-public sealed class PlanetPrisonStationSystem : EntitySystem
+public sealed partial class PlanetPrisonStationSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly BiomeSystem _biomeSystem = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly ShuttleSystem _shuttle = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private BiomeSystem _biomeSystem = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private ShuttleSystem _shuttle = default!;
 
     public override void Initialize()
     {
@@ -47,8 +46,8 @@ public sealed class PlanetPrisonStationSystem : EntitySystem
         QueueDel(component.Entity);
         component.Entity = EntityUid.Invalid;
 
-        if (_mapManager.MapExists(component.MapId))
-            _mapManager.DeleteMap(component.MapId);
+        if (_map.MapExists(component.MapId))
+            _map.DeleteMap(component.MapId);
 
         component.MapId = MapId.Nullspace;
     }
@@ -87,13 +86,13 @@ public sealed class PlanetPrisonStationSystem : EntitySystem
 
         var station = ChooseType(component);
 
-        if (!_protoManager.TryIndex(_random.Pick(component.Biomes), out var biome))
+        if (!ProtoMan.TryIndex(_random.Pick(component.Biomes), out var biome))
         {
             Log.Warning("No Prison map found, skipping setup.");
             return;
         }
 
-        if (!_protoManager.TryIndex(station, out var gameMap))
+        if (!ProtoMan.TryIndex(station, out var gameMap))
         {
             Log.Warning("No Prison map found, skipping setup.");
             return;
@@ -113,8 +112,8 @@ public sealed class PlanetPrisonStationSystem : EntitySystem
             QueueDel(component.Entity);
             component.Entity = EntityUid.Invalid;
 
-            if (_mapManager.MapExists(component.MapId))
-                _mapManager.DeleteMap(component.MapId);
+            if (_map.MapExists(component.MapId))
+                _map.DeleteMap(component.MapId);
 
             component.MapId = MapId.Nullspace;
             return;
@@ -123,7 +122,7 @@ public sealed class PlanetPrisonStationSystem : EntitySystem
         EnsureComp<IgnoreFtlCheckComponent>(uids[0]);
         component.PrisonGrid = uids[0];
 
-        var mapUid = _mapManager.GetMapEntityId(mapId);
+        var mapUid = _map.GetMapOrInvalid(mapId);
         _biomeSystem.EnsurePlanet(mapUid, biome);
 
         var restricted = new RestrictedRangeComponent

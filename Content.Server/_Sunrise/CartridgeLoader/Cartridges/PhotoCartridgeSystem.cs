@@ -1,5 +1,4 @@
 using System.Linq;
-using Content.Server.CartridgeLoader;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server._Sunrise.Messenger;
 using Content.Server.Station.Systems;
@@ -15,18 +14,18 @@ using Robust.Shared.Configuration;
 
 namespace Content.Server._Sunrise.CartridgeLoader.Cartridges;
 
-public sealed class PhotoCartridgeSystem : EntitySystem
+public sealed partial class PhotoCartridgeSystem : EntitySystem
 {
-    [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoader = default!;
-    [Dependency] private readonly NetTexturesManager _netTexturesManager = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly MessengerServerSystem _messengerServer = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly SingletonDeviceNetServerSystem _singletonServer = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
+    [Dependency] private NetTexturesManager _netTexturesManager = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private MessengerServerSystem _messengerServer = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private SingletonDeviceNetServerSystem _singletonServer = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -99,8 +98,9 @@ public sealed class PhotoCartridgeSystem : EntitySystem
         UpdateUiState(uid, loaderUid, component);
     }
 
-    private void OnUiReady(EntityUid uid, PhotoCartridgeComponent component, CartridgeUiReadyEvent args)
+    private void OnUiReady(Entity<PhotoCartridgeComponent> ent, ref CartridgeUiReadyEvent args)
     {
+        var (uid, component) = ent;
         UpdateUiState(uid, args.Loader, component);
     }
 
@@ -162,12 +162,14 @@ public sealed class PhotoCartridgeSystem : EntitySystem
         }
 
         var entity = GetEntity(msg.LoaderUid);
-        PhotoCartridgeComponent? photoComponent;
-        EntityUid? cartridgeUid;
+        PhotoCartridgeComponent? photoComponent = null;
+        EntityUid? cartridgeUid = null;
         EntityUid pdaUid = EntityUid.Invalid;
 
-        if (_cartridgeLoader.TryGetProgram(entity, out cartridgeUid, out photoComponent))
+        if (_cartridgeLoader.TryGetProgram<PhotoCartridgeComponent>((entity, null)) is { } program)
         {
+            cartridgeUid = program.Owner;
+            photoComponent = program.Comp;
             pdaUid = entity;
         }
         else if (TryComp(entity, out photoComponent) && TryComp<CartridgeComponent>(entity, out var cartridge) && cartridge.LoaderUid.HasValue)

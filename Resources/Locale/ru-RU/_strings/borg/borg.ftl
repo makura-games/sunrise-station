@@ -7,10 +7,9 @@ borg-module-too-many = Для ещё одного модуля не хватае
 borg-module-duplicate = Этот модуль уже установлен в этого киборга.
 borg-module-whitelist-deny = Этот модуль не подходит для данного типа киборгов...
 borg-module-incompatible = Этот модуль несовместим с { $existing }.
-
+borg-module-prerequisite-unfulfilled = Для работы этому модулю требуется другой модуль...
 borg-module-action-name = Выбрать { $moduleName }
 borg-module-action-description = Выбрать { $moduleName }, чтобы получить доступ к его инструментам.
-
 borg-construction-guide-string = Конечности и туловище киборга должны быть прикреплены к эндоскелету.
 borg-ui-menu-title = Интерфейс киборга
 borg-ui-charge-label = Заряд: { $charge }%

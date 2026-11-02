@@ -1,6 +1,10 @@
-ent-SyndyFlashGrenade = SyndyFlash Grenade
+ent-SyndyFlashGrenade = syndyFlash Grenade
     .desc = It definitely smells fake.
 ent-ExShrapnelGrenade = shrapnel-explosive grenade
     .desc = Shrapnel grenade that creates a small but devastating explosion.
-ent-Pizzabomb = Nefarious Pizza bomb
+ent-Pizzabomb = nefarious Pizza bomb
     .desc = { ent-FoodBoxPizza.desc }
+ent-CleanerGrenadeAcid = { ent-CleanerGrenade }
+    .desc = { ent-CleanerGrenade.desc }
+ent-CleanerGrenadeAcidBox = deep-cleaning grenade box
+    .desc = A box containing a deep-cleaning grenade. Removes up to 99.99% of germs, dirt, and crew remains. The packaging disintegrates when opened, leaving no trace.

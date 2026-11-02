@@ -1,0 +1,13 @@
+- type: !PartialOnly entity
+  id: PinionAirlock
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Doors/Airlocks/Standard/clockwork_pinion.rsi
+
+- type: !PartialOnly entity
+  id: PinionAirlockGlass
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Doors/Airlocks/Glass/clockwork_pinion.rsi

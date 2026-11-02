@@ -9,11 +9,11 @@ using Content.Shared.PowerCell;
 
 namespace Content.Server._Sunrise.Weapons.Melee.Systems;
 
-public sealed class PowerDrainOnMeleeHitSystem : EntitySystem
+public sealed partial class PowerDrainOnMeleeHitSystem : EntitySystem
 {
-    [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly BatterySystem _battery = default!;
+    [Dependency] private ItemToggleSystem _itemToggle = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private BatterySystem _battery = default!;
 
     public override void Initialize()
     {

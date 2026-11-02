@@ -1,5 +1,18 @@
 # © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 - type: entity
+  id: SolutionPredatorFood
+  parent: Solution
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: FluorosulfuricAcidPredator
+        Quantity: 5
+
+- type: entity
   id: BasePredatorOrgan
   parent: BaseItem
   abstract: true
@@ -9,17 +22,10 @@
   - type: Organ
   - type: Extractable
     grindableSolutionName: organ
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      organ:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: FluorosulfuricAcidPredator
-          Quantity: 5
+    - SolutionSunriseOrganNutriment
+    - SolutionPredatorFood
   - type: FlavorProfile
     flavors:
       - people
@@ -46,17 +52,10 @@
   - type: Tag
     tags:
       - Meat
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      organ:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: GreyMatter
-          Quantity: 5
+    - SolutionSunriseOrganNutriment
+    - SolutionSunriseBrainFood
   - type: FlavorProfile
     flavors:
     - people
@@ -105,20 +104,11 @@
   - type: Metabolizer
     metabolizerTypes: [ Human ]
     stages: [ Respiration ]
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      organ:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-      Lung:
-        maxVol: 100.0
-        canReact: false
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: FluorosulfuricAcidPredator
-          Quantity: 5
+    - SolutionSunriseOrganNutriment
+    - SolutionLungGas
+    - SolutionPredatorFood
 
 - type: entity
   id: OrganPredatorHeart
@@ -141,15 +131,11 @@
   components:
   - type: Sprite
     state: stomach
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      stomach:
-        maxVol: 50
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: FluorosulfuricAcidPredator
-          Quantity: 5
+    - SolutionSunriseOrganNutriment
+    - SolutionSunriseStomachSmall
+    - SolutionPredatorFood
   - type: Stomach
   - type: Metabolizer
     maxReagents: 3

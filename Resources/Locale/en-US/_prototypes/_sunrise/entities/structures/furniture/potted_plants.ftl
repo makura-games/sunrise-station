@@ -20,6 +20,7 @@ ent-PottedPlantAlt9 = { ent-PottedPlantBase }
     .desc = { ent-PottedPlantBase.desc }
 ent-PottedPlantAlt10 = plastic christmas tree
     .desc = A great addition to the new year at the workplace!
+    .suffix = Новый Год
 ent-PottedPlantRose = { ent-PottedPlantBase }
     .desc = { ent-PottedPlantBase.desc }
     .suffix = Blue

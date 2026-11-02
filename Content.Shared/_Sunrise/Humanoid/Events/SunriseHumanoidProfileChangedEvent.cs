@@ -10,7 +10,7 @@ namespace Content.Shared._Sunrise.Humanoid.Events;
 [ByRefEvent]
 public readonly record struct SunriseHumanoidProfileChangedEvent(
     ProtoId<SpeciesPrototype> Species,
-    ProtoId<TTSVoicePrototype> Voice,
+    ProtoId<TTSVoicePrototype> TtsVoice,
     ProtoId<BodyTypePrototype> BodyType,
     float Width,
     float Height);
@@ -19,4 +19,4 @@ public readonly record struct SunriseHumanoidProfileChangedEvent(
 /// Raised after the Sunrise TTS voice changes on an entity.
 /// </summary>
 [ByRefEvent]
-public readonly record struct SunriseHumanoidTtsProfileChangedEvent(ProtoId<TTSVoicePrototype> Voice);
+public readonly record struct SunriseHumanoidTtsProfileChangedEvent(ProtoId<TTSVoicePrototype> TtsVoice);

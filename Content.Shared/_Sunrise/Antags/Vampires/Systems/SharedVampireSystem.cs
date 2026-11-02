@@ -9,12 +9,12 @@ using Content.Shared.Popups;
 
 namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
-public abstract class SharedVampireSystem : EntitySystem
+public abstract partial class SharedVampireSystem : EntitySystem
 {
     // Общие проверки и модификаторы вампира.
 
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -92,10 +92,9 @@ public abstract class SharedVampireSystem : EntitySystem
 
     private void ShowDrinkPopup(Entity<VampireComponent> ent, EntityUid target, LocId message)
     {
-        _popup.PopupPredicted(
+        _popup.PopupEntity(
             Loc.GetString(message),
             target,
-            ent.Owner,
             PopupType.MediumCaution);
     }
 

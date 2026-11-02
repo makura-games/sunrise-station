@@ -10,7 +10,7 @@ namespace Content.Client.Silicons.Borgs;
 [GenerateTypedNameReferences]
 public sealed partial class BorgVoiceWindow : DefaultWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public event Action<string>? OnVoiceSelected;
     public event Action<string>? OnVoicePreview;

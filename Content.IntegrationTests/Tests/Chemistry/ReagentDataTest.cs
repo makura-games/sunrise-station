@@ -1,3 +1,5 @@
+using Content.IntegrationTests.Fixtures;
+using Content.IntegrationTests.Tests.Interaction;
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Reflection;
 using Robust.Shared.Serialization;
@@ -7,12 +9,12 @@ namespace Content.IntegrationTests.Tests.Chemistry;
 
 [TestFixture]
 [TestOf(typeof(ReagentData))]
-public sealed class ReagentDataTest
+public sealed class ReagentDataTest : GameTest
 {
     [Test]
     public async Task ReagentDataIsSerializable()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var reflection = pair.Server.ResolveDependency<IReflectionManager>();
 
         Assert.Multiple(() =>
@@ -23,7 +25,5 @@ public sealed class ReagentDataTest
                 Assert.That(instance.HasCustomAttribute<SerializableAttribute>(), $"{instance} must have the serializable attribute.");
             }
         });
-
-        await pair.CleanReturnAsync();
     }
 }

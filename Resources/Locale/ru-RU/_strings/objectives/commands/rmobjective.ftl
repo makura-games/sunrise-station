@@ -1,5 +1,6 @@
+# addobjectives
 cmd-rmobjective-desc = Удаляет цель из разума игрока.
-cmd-rmobjective-help = rmobjective <username> <index>
+cmd-rmobjective-help = rmobjective <username> <index> — удалить цель
 cmd-rmobjective-invalid-args = Ожидается ровно 2 аргумента.
 cmd-rmobjective-player-not-found = Не удалось найти данные игрока.
 cmd-rmobjective-mind-not-found = Не удалось найти разум.

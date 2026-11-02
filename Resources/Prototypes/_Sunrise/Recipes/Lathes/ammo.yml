@@ -1069,15 +1069,6 @@
     Uranium: 100
 
 - type: latheRecipe
-  id: MagazineMP5
-  result: MagazineMP5
-  categories:
-  - Ammo
-  completetime: 5
-  materials:
-    Steel: 835
-
-- type: latheRecipe
   id: MagazineMP7
   result: MagazineMP7
   categories:
@@ -1134,15 +1125,6 @@
 #  completetime: 12
 #  materials:
 #    Steel: 1200
-#
-#- type: latheRecipe
-#  id: MagazineMP5Extended
-#  result: MagazineMP5Extended
-#  categories:
-#  - Weapons
-#  completetime: 12
-#  materials:
-#    Steel: 600
 #
 #- type: latheRecipe
 #  id: MagazineMP7Extended

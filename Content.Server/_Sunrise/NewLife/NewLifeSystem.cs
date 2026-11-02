@@ -10,7 +10,7 @@ using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared._Sunrise.NewLife;
 using Content.Shared._Sunrise.SunriseCCVars;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using JetBrains.Annotations;
@@ -24,18 +24,17 @@ using Content.Sunrise.Interfaces.Shared;
 namespace Content.Server._Sunrise.NewLife;
 
 [UsedImplicitly]
-public sealed class NewLifeSystem : SharedNewLifeSystem
+public sealed partial class NewLifeSystem : SharedNewLifeSystem
 {
-    [Dependency] private readonly EuiManager _euiManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly StationJobsSystem _stationJobs = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly IServerPreferencesManager _prefsManager = default!;
-    [Dependency] private readonly PlayTimeTrackingSystem _playTimeTrackings = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IServerNetManager _netMgr = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private EuiManager _euiManager = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private StationJobsSystem _stationJobs = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private IServerPreferencesManager _prefsManager = default!;
+    [Dependency] private PlayTimeTrackingSystem _playTimeTrackings = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IServerNetManager _netMgr = default!;
+    [Dependency] private IGameTiming _timing = default!;
     private ISharedSponsorsManager? _sponsorsManager; // Sunrise-Sponsors
 
     private readonly Dictionary<ICommonSession, NewLifeEui> _openUis = new();
@@ -232,7 +231,7 @@ public sealed class NewLifeSystem : SharedNewLifeSystem
                 if (!_playTimeTrackings.IsAllowed(session, job.Key))
                     continue;
 
-                availableStationJobs.Add((_prototypeManager.Index(job.Key), job.Value));
+                availableStationJobs.Add((ProtoMan.Index(job.Key), job.Value));
             }
 
             if (availableStationJobs.Count == 0)

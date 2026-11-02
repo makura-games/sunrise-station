@@ -24,13 +24,13 @@ namespace Content.Server._Sunrise.TTS;
 // ReSharper disable once InconsistentNaming
 public sealed partial class TTSSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly TTSManager _ttsManager = default!;
-    [Dependency] private readonly SharedTransformSystem _xforms = default!;
-    [Dependency] private readonly IRobustRandom _rng = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly AnnouncementSpeakerSystem _announcementSpeakerSystem = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private TTSManager _ttsManager = default!;
+    [Dependency] private SharedTransformSystem _xforms = default!;
+    [Dependency] private IRobustRandom _rng = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private AnnouncementSpeakerSystem _announcementSpeakerSystem = default!;
+    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
 
     private readonly List<string> _sampleText =
         new()
@@ -83,7 +83,7 @@ public sealed partial class TTSSystem : EntitySystem
     private async void OnRequestPreviewTTS(RequestPreviewTTSEvent ev, EntitySessionEventArgs args)
     {
         if (!_isEnabled ||
-            !_prototypeManager.TryIndex<TTSVoicePrototype>(ev.VoiceId, out var protoVoice))
+            !ProtoMan.TryIndex<TTSVoicePrototype>(ev.VoiceId, out var protoVoice))
             return;
 
         var previewText = _rng.Pick(_sampleText);
@@ -136,7 +136,7 @@ public sealed partial class TTSSystem : EntitySystem
             return;
 
         // Get the collective mind prototype to use its voice
-        if (!_prototypeManager.TryIndex<CollectiveMindPrototype>(args.CollectiveMindId, out var collectiveMindProto))
+        if (!ProtoMan.TryIndex<CollectiveMindPrototype>(args.CollectiveMindId, out var collectiveMindProto))
             return;
 
         var voiceId = collectiveMindProto.VoiceId;
@@ -162,9 +162,9 @@ public sealed partial class TTSSystem : EntitySystem
 
     private bool GetVoicePrototype(ProtoId<TTSVoicePrototype>? voiceId, [NotNullWhen(true)] out TTSVoicePrototype? voicePrototype)
     {
-        if (!_prototypeManager.TryIndex(voiceId, out voicePrototype))
+        if (!ProtoMan.TryIndex(voiceId, out voicePrototype))
         {
-            return _prototypeManager.TryIndex(_defaultAnnounceVoice, out voicePrototype);
+            return ProtoMan.TryIndex(_defaultAnnounceVoice, out voicePrototype);
         }
 
         return true;
@@ -324,8 +324,7 @@ public sealed partial class TTSSystem : EntitySystem
             return;
 
         // TODO: Check obstacles
-        var xformQuery = GetEntityQuery<TransformComponent>();
-        var sourcePos = _xforms.GetWorldPosition(xformQuery.GetComponent(uid), xformQuery);
+        var sourcePos = _xforms.GetWorldPosition(_xformQuery.GetComponent(uid), _xformQuery);
         var receptions = Filter.Pvs(uid).Recipients;
         foreach (var session in receptions)
         {
@@ -335,8 +334,8 @@ public sealed partial class TTSSystem : EntitySystem
             if (_ignoredRecipients.Contains(session))
                 return;
 
-            var xform = xformQuery.GetComponent(session.AttachedEntity.Value);
-            var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).LengthSquared();
+            var xform = _xformQuery.GetComponent(session.AttachedEntity.Value);
+            var distance = (sourcePos - _xforms.GetWorldPosition(xform, _xformQuery)).LengthSquared();
 
             if (distance > WhisperVoiceRange)
                 continue;

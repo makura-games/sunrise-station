@@ -51,8 +51,9 @@
     # only show after making the announcement at 50%
     enabled: false
   - type: Damageable
-    damageContainer: Rift #Sunrise-edit
     damageModifierSet: Rift #Sunrise-edit
+  - type: Injurable
+    damageContainer: Rift #Sunrise-edit
   - type: Destructible
     thresholds:
     - trigger:
@@ -65,7 +66,7 @@
     sound:
       path: /Audio/Weapons/Guns/Gunshots/rocket_launcher.ogg
 #Sunrise-start
-  - type: DamageOverlay
+  - type: SunriseDamagePopup
   - type: AoEHeal
     threshold: 0.9
     damage:

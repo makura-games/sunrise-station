@@ -12,12 +12,12 @@ using Content.Shared.PowerCell;
 
 namespace Content.Server._Sunrise.EnergyShield;
 
-public sealed class EnergyShieldSystem : EntitySystem
+public sealed partial class EnergyShieldSystem : EntitySystem
 {
-    [Dependency] private readonly BatterySystem _battery = default!;
-    [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private BatterySystem _battery = default!;
+    [Dependency] private ItemToggleSystem _itemToggle = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

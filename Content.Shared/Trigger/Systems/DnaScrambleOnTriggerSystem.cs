@@ -11,16 +11,16 @@ using Robust.Shared.Network;
 
 namespace Content.Shared.Trigger.Systems;
 
-public sealed class DnaScrambleOnTriggerSystem : XOnTriggerSystem<DnaScrambleOnTriggerComponent>
+public sealed partial class DnaScrambleOnTriggerSystem : XOnTriggerSystem<DnaScrambleOnTriggerComponent>
 {
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly HumanoidProfileSystem _humanoidProfile = default!;
-    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
-    [Dependency] private readonly IdentitySystem _identity = default!;
-    [Dependency] private readonly SharedForensicsSystem _forensics = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SunriseHumanoidProfileSystem _sunriseProfile = default!; // Sunrise-Edit
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private HumanoidProfileSystem _humanoidProfile = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private IdentitySystem _identity = default!;
+    [Dependency] private ForensicsSystem _forensics = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SunriseHumanoidProfileSystem _sunriseProfile = default!; // Sunrise-Edit
 
     protected override void OnTrigger(Entity<DnaScrambleOnTriggerComponent> ent, EntityUid target, ref TriggerEvent args)
     {
@@ -35,7 +35,6 @@ public sealed class DnaScrambleOnTriggerSystem : XOnTriggerSystem<DnaScrambleOnT
             return;
 
         var newProfile = HumanoidCharacterProfile.RandomWithSpecies(humanoid.Species);
-        newProfile.Appearance = HumanoidCharacterAppearance.EnsureValid(newProfile.Appearance, humanoid.Species, newProfile.Sex);
         _visualBody.ApplyProfileTo(target, newProfile);
         _humanoidProfile.ApplyProfileTo(target, newProfile);
         _sunriseProfile.ApplyProfileTo(target, newProfile); // Sunrise-Edit
@@ -48,7 +47,6 @@ public sealed class DnaScrambleOnTriggerSystem : XOnTriggerSystem<DnaScrambleOnT
         RemComp<DetailExaminableComponent>(target); // remove MRP+ custom description if one exists
         _identity.QueueIdentityUpdate(target); // manually queue identity update since we don't raise the event
 
-        // Can't use PopupClient or PopupPredicted because the trigger might be unpredicted.
         _popup.PopupEntity(Loc.GetString("scramble-on-trigger-popup"), target, target);
 
         var ev = new DnaScrambledEvent(target);

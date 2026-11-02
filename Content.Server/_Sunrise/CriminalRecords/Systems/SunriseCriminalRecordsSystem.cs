@@ -4,7 +4,8 @@ using Content.Shared._Sunrise.CriminalRecords.Systems;
 using Content.Shared.StationRecords;
 using Content.Shared._Sunrise.CriminalRecords.Components;
 using Content.Server._Sunrise.CriminalRecords.Components;
-using Content.Server.StationRecords.Systems;
+using Content.Shared.StationRecords.Events;
+using Content.Shared.StationRecords.Systems;
 using Content.Server.Station.Systems;
 using Content.Server._Sunrise.Laws.Systems;
 using Content.Shared.Access.Systems;
@@ -13,18 +14,19 @@ using Content.Shared.CriminalRecords;
 using Content.Shared.Security;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
+using Content.Shared.StationRecords.Components;
 
 namespace Content.Server._Sunrise.CriminalRecords.Systems;
 
-public sealed class SunriseCriminalRecordsSystem : SharedSunriseCriminalRecordsSystem
+public sealed partial class SunriseCriminalRecordsSystem : SharedSunriseCriminalRecordsSystem
 {
-    [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly Robust.Shared.Timing.IGameTiming _timing = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly StationCorporateLawSystem _stationLaw = default!;
-    [Dependency] private readonly CriminalRecordsSystem _criminalRecords = default!;
+    [Dependency] private StationRecordsSystem _stationRecords = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private Robust.Shared.Timing.IGameTiming _timing = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private StationCorporateLawSystem _stationLaw = default!;
+    [Dependency] private CriminalRecordsSystem _criminalRecords = default!;
 
     private const int MaxLaws = 20;
     private const int MaxCircumstances = 10;
@@ -50,7 +52,7 @@ public sealed class SunriseCriminalRecordsSystem : SharedSunriseCriminalRecordsS
         SubscribeLocalEvent<SunriseCriminalRecordsConsoleComponent, BoundUIOpenedEvent>(OnOpened);
 
         SubscribeLocalEvent<SunriseCriminalRecordsConsoleComponent, RecordModifiedEvent>(OnRecordEvent);
-        SubscribeLocalEvent<SunriseCriminalRecordsConsoleComponent, AfterGeneralRecordCreatedEvent>(OnRecordEvent);
+        SubscribeLocalEvent<SunriseCriminalRecordsConsoleComponent, GeneralRecordCreatedEvent>(OnRecordEvent);
         SubscribeLocalEvent<SunriseCriminalRecordsConsoleComponent, RecordRemovedEvent>(OnRecordEvent);
     }
 
@@ -136,7 +138,7 @@ public sealed class SunriseCriminalRecordsSystem : SharedSunriseCriminalRecordsS
         component.CurrentUIState = msg.State;
         UpdateUserInterface(uid, component);
     }
-    
+
     private void OnChangeStatus(EntityUid uid, SunriseCriminalRecordsConsoleComponent component, SunriseCriminalRecordsChangeStatusMessage msg)
     {
         if (!CheckAccess(uid, msg.Actor))
@@ -295,11 +297,11 @@ public sealed class SunriseCriminalRecordsSystem : SharedSunriseCriminalRecordsS
             if (_stationRecords.TryGetRecord<GeneralStationRecord>(key, out var general))
             {
                 listingRecords.Add(new SunriseCriminalRecordListing(
-                    id, 
-                    general.Name, 
-                    general.DNA, 
-                    general.Fingerprint, 
-                    general.Species, 
+                    id,
+                    general.Name,
+                    general.DNA,
+                    general.Fingerprint,
+                    general.Species,
                     general.Gender.ToString(),
                     general.JobTitle));
             }

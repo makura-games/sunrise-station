@@ -11,6 +11,7 @@ thief-backpack-button-select = Выбрано [ ]
 thief-backpack-button-deselect = Выбрано [X]
 
 # Sets
+
 thief-backpack-category-chameleon-name = Набор хамелеона
 thief-backpack-category-chameleon-description =
     Вы - никто и кто угодно, вы - мастер маскировки.

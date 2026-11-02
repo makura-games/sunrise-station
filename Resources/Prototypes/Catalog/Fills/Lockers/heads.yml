@@ -248,6 +248,7 @@
     - id: LeftArmCyberRipper
       prob: 0.35
     - id: FlippoLighterSunriseCmo
+    - id: MedipenCaseChiefMedicalOfficer
     #Sunrise-end
 
 # Hardsuit table, used for suit storage as well
@@ -358,7 +359,6 @@
     - id: RubberStampHos
     - id: BoxHoSCircuitboards
     - id: WeaponDisabler
-    - id: WeaponTaser
     - id: WantedListCartridge
     - id: DrinkHosFlask
     - id: PlushieLizardJobHeadofsecurity

@@ -28,13 +28,13 @@ public sealed partial class NetTexturesManager
     #endregion
 
     #region Dependencies
-    [Dependency] private readonly IClientNetManager _netManager = default!;
-    [Dependency] private readonly IResourceManager _resourceManager = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly IBaseClient _baseClient = default!;
-    [Dependency] private readonly ITransferManager _transferManager = default!;
-    [Dependency] private readonly ITaskManager _taskManager = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
+    [Dependency] private IResourceManager _resourceManager = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private IBaseClient _baseClient = default!;
+    [Dependency] private ITransferManager _transferManager = default!;
+    [Dependency] private ITaskManager _taskManager = default!;
+    [Dependency] private IClyde _clyde = default!;
     #endregion
 
     #region State

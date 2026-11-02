@@ -102,8 +102,9 @@
   - type: Computer
     board: FPIATMComputerCircuitboard
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: GenericVisualizer
     visuals:
       enum.EdgeConnectionVisuals.ConnectionMask:

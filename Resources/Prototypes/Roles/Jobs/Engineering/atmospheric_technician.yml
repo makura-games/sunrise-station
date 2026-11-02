@@ -10,7 +10,6 @@
   startingGear: AtmosphericTechnicianGear
   icon: "JobIconAtmosphericTechnician"
   supervisors: job-supervisors-ce
-  displayWeight: 20  # Sunrise
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-gas-technician

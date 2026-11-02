@@ -10,8 +10,8 @@ namespace Content.Client._Sunrise.MentorHelp
     [GenerateTypedNameReferences]
     public sealed partial class MentorHelpStatisticsDialog : DefaultWindow
     {
-        [Dependency] private readonly ILocalizationManager _loc = default!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
+        [Dependency] private ILocalizationManager _loc = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
 
         private MentorHelpSystem? _mentorHelpSystem;
         private TimeSpan? _refreshStatisticsAt;

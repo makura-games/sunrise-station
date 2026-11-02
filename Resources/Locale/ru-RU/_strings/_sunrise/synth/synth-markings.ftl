@@ -1,7 +1,7 @@
 marking-SynthMonitorBlue = Синий
 marking-SynthMonitorBreakout = Перерыв
 marking-SynthMonitorConsole = Консоль
-marking-SynthMonitorCrt = Экран CRT
+marking-SynthMonitorCrt = Экран ЭЛТ
 marking-SynthMonitorDatabase = База данных
 marking-SynthMonitorEight = Восьмёрка
 marking-SynthMonitorFrowny = Грустный

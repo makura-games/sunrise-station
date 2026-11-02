@@ -65,13 +65,19 @@ class TestShardFilterTests(unittest.TestCase):
         self.assertEqual(tests, ["Content.Tests.Fixture.Test"])
 
     def test_groups_identically_named_methods_by_fixture(self):
+        timings = {
+            **TIMINGS,
+            "methodCaseSeconds": {
+                "Content.Tests.SecondFixture.Test": 1.0,
+            },
+        }
         groups, seconds = SHARD_FILTER.extract_groups(
             [
                 "Content.Tests.FirstFixture.Test",
                 "Content.Tests.SecondFixture.Test",
                 "Content.Tests.SecondFixture.Test(1)",
             ],
-            TIMINGS,
+            timings,
             1,
         )
 
@@ -83,6 +89,22 @@ class TestShardFilterTests(unittest.TestCase):
             },
         )
         self.assertEqual(seconds["Content.Tests.FirstFixture", "Test", None], 2.0)
+
+    def test_splits_unmeasured_parameterized_methods_into_individual_cases(self):
+        tests = [
+            "Content.Tests.Fixture.Test(1)",
+            "Content.Tests.Fixture.Test(2)",
+        ]
+
+        groups, _ = SHARD_FILTER.extract_groups(tests, TIMINGS, 8)
+
+        self.assertEqual(
+            groups,
+            {
+                ("Content.Tests.Fixture", "Test", tests[0]): 1,
+                ("Content.Tests.Fixture", "Test", tests[1]): 1,
+            },
+        )
 
     def test_splits_large_parameterized_methods_into_individual_cases(self):
         case_count = SHARD_FILTER.PARAMETERIZED_CASE_SPLIT_THRESHOLD + 1
@@ -209,6 +231,28 @@ class TestShardFilterTests(unittest.TestCase):
 
         self.assertIn(("Content.Tests.Fixture", "Slow", tests[0]), groups)
         self.assertEqual(seconds["Content.Tests.Fixture", "Slow", tests[0]], 10.0)
+
+    def test_treats_bare_parameterized_method_timing_as_aggregate(self):
+        method = "Content.Tests.Fixture.MapLoad"
+        tests = [f"{method}(/Maps/map_{index}.yml)" for index in range(4)]
+        timings = {
+            **TIMINGS,
+            "methodCaseSeconds": {method: 12.0},
+            "caseSeconds": {method: 12.0},
+        }
+
+        groups, seconds = SHARD_FILTER.extract_groups(tests, timings, 2)
+
+        self.assertEqual(sum(seconds.values()), 12.0)
+        self.assertEqual(
+            seconds,
+            {
+                ("Content.Tests.Fixture", "MapLoad", tests[0]): 3.0,
+                ("Content.Tests.Fixture", "MapLoad", tests[1]): 3.0,
+                ("Content.Tests.Fixture", "MapLoad", tests[2]): 3.0,
+                ("Content.Tests.Fixture", "MapLoad", tests[3]): 3.0,
+            },
+        )
 
     def test_parses_trx_duration(self):
         self.assertEqual(

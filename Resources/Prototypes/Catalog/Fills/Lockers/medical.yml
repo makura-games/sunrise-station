@@ -46,6 +46,7 @@
     - id: ClothingEyesHudMedical
     - id: ClothingBeltMedicalFilled
     - id: JetInjector
+    - id: MedipenCaseMedic # Sunrise-edit
     - id: HandheldHealthAnalyzer
     - id: ChemistryBottleLaughter # Widely recognized as the best medicine :o)
       prob: 0.01
@@ -123,6 +124,7 @@
     - id: ClothingOuterHardsuitVoidParamed
     - id: ClothingBeltMedicalEMTFilled
     - id: JetInjector
+    - id: MedipenCaseParamedic # Sunrise-edit
     - id: HandheldHealthAnalyzer
     - id: BoxBodyBag
     - !type:GroupSelector

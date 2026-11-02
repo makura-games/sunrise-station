@@ -27,17 +27,16 @@ namespace Content.Client._Sunrise.Tutorial;
 /// <summary>
 /// Client-side tutorial controller for bubbles, target highlighting, path overlay, and tutorial menu requests.
 /// </summary>
-public sealed class TutorialSystem : SharedTutorialSystem
+public sealed partial class TutorialSystem : SharedTutorialSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly PlayerCacheManager _playerCache = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
+    [Dependency] private IOverlayManager _overlayManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private PlayerCacheManager _playerCache = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private static readonly ProtoId<ShaderPrototype> TutorialShader = "TutorialTargetOutline";
     private static readonly Color TargetOutlineColor = Color.FromHex("#FFF15C");
@@ -51,7 +50,7 @@ public sealed class TutorialSystem : SharedTutorialSystem
     private ShaderInstance? _shaderInstance;
     private EntityUid? _highlightedTarget;
     private uint? _highlightedTargetRenderOrder;
-    private EntityQuery<SpriteComponent> _spriteQuery;
+    [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     /// <summary>
     /// Raised after the server sends the list of completed tutorial sequences.
@@ -68,7 +67,7 @@ public sealed class TutorialSystem : SharedTutorialSystem
     /// </summary>
     public readonly HashSet<string> CompletedTutorials = [];
 
-    private EntityQuery<TutorialBubbleUiComponent> _bubbleUiQuery;
+    [Dependency] private EntityQuery<TutorialBubbleUiComponent> _bubbleUiQuery = default!;
     private LayoutContainer? _tutorialBubbleRoot;
     private TutorialUiHighlightOverlay? _uiHighlightOverlay;
 
@@ -91,12 +90,10 @@ public sealed class TutorialSystem : SharedTutorialSystem
         {
             MouseFilter = Control.MouseFilterMode.Ignore,
         };
-        _bubbleUiQuery = GetEntityQuery<TutorialBubbleUiComponent>();
-        _spriteQuery = GetEntityQuery<SpriteComponent>();
         _ui.OnScreenChanged += OnScreenChanged;
 
-        _shaderInstance = _proto.Index(TutorialShader).InstanceUnique();
-        _overlayManager.AddOverlay(new TutorialPathOverlay(EntityManager, _player, _timing, _transform, _proto));
+        _shaderInstance = ProtoMan.Index(TutorialShader).InstanceUnique();
+        _overlayManager.AddOverlay(new TutorialPathOverlay(EntityManager, _player, _timing, _transform, ProtoMan));
     }
 
     public override void Update(float frameTime)

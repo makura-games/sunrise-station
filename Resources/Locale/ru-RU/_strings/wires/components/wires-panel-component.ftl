@@ -1,5 +1,9 @@
 wires-panel-component-on-examine-open = [color=lightgray]Техническая панель[/color] [color=red]открыта[/color].
 wires-panel-component-on-examine-closed = [color=lightgray]Техническая панель[/color] [color=darkgreen]закрыта[/color].
+wires-panel-verb-view-panel = Осмотреть панель обслуживания
+
+# wire colors
+
 wire-name-color-red = Красный
 wire-name-color-blue = Синий
 wire-name-color-green = Зелёный
@@ -12,7 +16,6 @@ wire-name-color-navy = Тёмно-синий
 wire-name-color-purple = Пурпурный
 wire-name-color-pink = Розовый
 wire-name-color-fuchsia = Фуксия
-
 # letter names
 wire-letter-name-alpha = Альфа
 wire-letter-name-beta = Бета

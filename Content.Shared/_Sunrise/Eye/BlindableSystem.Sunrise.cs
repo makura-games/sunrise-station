@@ -6,7 +6,7 @@ namespace Content.Shared.Eye.Blinding.Systems;
 
 public sealed partial class BlindableSystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private BodySystem _body = default!;
 
     /// <summary>
     /// Проверяет отсутствие глаз только у рас, чьи органы задаются через <see cref="InitialBodyComponent"/>.

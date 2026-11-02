@@ -15,9 +15,9 @@ namespace Content.Server._Sunrise.Tutorial.Conditions;
 public sealed partial class MessengerOpenedListenedConditionSystem
     : TutorialConditionSystem<TutorialPlayerComponent, MessengerOpenedListenedCondition>
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

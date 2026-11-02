@@ -293,7 +293,6 @@
     - MobNarsieBase
     - MobObserverBase
     - MobRatvarBase
-    - MobTerminatorBase
     - MobXenoRounyGhostRole
     - NuclearGrenade
     - Singularity

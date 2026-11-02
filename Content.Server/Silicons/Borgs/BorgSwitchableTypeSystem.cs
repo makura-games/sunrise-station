@@ -1,7 +1,7 @@
 ﻿using Content.Server.Inventory;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Station.Systems;
-using Content.Server.StationRecords.Systems;
+using Content.Shared.StationRecords.Systems; // Sunrise-Edit - StationRecordsSystem перенесён в Shared
 using Content.Server._Sunrise.Messenger;
 using Content.Shared.Inventory;
 using Content.Shared.Radio;
@@ -12,23 +12,24 @@ using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.StationRecords;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared.StationRecords.Components;
 
 namespace Content.Server.Silicons.Borgs;
 
 /// <summary>
 /// Server-side logic for borg type switching. Handles more heavyweight and server-specific switching logic.
 /// </summary>
-public sealed class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeSystem
+public sealed partial class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeSystem
 {
-    [Dependency] private readonly BorgSystem _borgSystem = default!;
-    [Dependency] private readonly ServerInventorySystem _inventorySystem = default!;
-    [Dependency] private readonly StationRecordsSystem _record = default!;
-    [Dependency] private readonly MessengerServerSystem _messenger = default!;
-    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private BorgSystem _borgSystem = default!;
+    [Dependency] private ServerInventorySystem _inventorySystem = default!;
+    [Dependency] private StationRecordsSystem _record = default!;
+    [Dependency] private MessengerServerSystem _messenger = default!;
+    [Dependency] private StationSystem _station = default!;
 
     protected override void SelectBorgModule(Entity<BorgSwitchableTypeComponent> ent, ProtoId<BorgTypePrototype> borgType)
     {
-        var prototype = Prototypes.Index(borgType);
+        var prototype = ProtoMan.Index(borgType);
 
         // Assign radio channels
         string[] radioChannels = [.. ent.Comp.InherentRadioChannels, .. prototype.RadioChannels];
@@ -70,7 +71,7 @@ public sealed class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeSystem
         }
 
         // Configure special components
-        if (Prototypes.Resolve(ent.Comp.SelectedBorgType, out var previousPrototype))
+        if (ProtoMan.Resolve(ent.Comp.SelectedBorgType, out var previousPrototype))
         {
             if (previousPrototype.AddComponents is { } removeComponents)
                 EntityManager.RemoveComponents(ent, removeComponents);
@@ -89,7 +90,7 @@ public sealed class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeSystem
 
         // Sunrise-Start
         var borgName = MetaData(ent.Owner).EntityName;
-        if (Prototypes.TryIndex<JobPrototype>(prototype.Job, out var jobPrototype))
+        if (ProtoMan.TryIndex<JobPrototype>(prototype.Job, out var jobPrototype))
         {
             UpdateStationRecord(ent.Owner,
                 jobPrototype.LocalizedName,

@@ -145,3 +145,5 @@ holopad-centcomm-evac = ЦентКом - Эвакуационный шаттл
 # Sunrise
 holopad-salvage-shuttle = Шаттл утилизаторов
 holopad-security-shuttle = Шаттл безопасности
+holopad-security-internal-affairs = Отдел внутренних дел
+holopad-service-lawyer = Кабинет адвоката

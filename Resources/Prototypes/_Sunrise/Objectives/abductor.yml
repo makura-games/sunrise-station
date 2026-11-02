@@ -5,7 +5,7 @@
   components:
   - type: Objective
     difficulty: 1.5
-    issuer: objective-issuer-abductors
+    issuer: SunriseAbductors
   - type: RoleRequirement
     roles:
     - Abductor
@@ -32,13 +32,13 @@
   components:
   - type: Objective
     difficulty: 1
-    issuer: objective-issuer-abductor-victim
+    issuer: SunriseAbductorVictim
   - type: RoleRequirement
     roles:
     - AbductorVictimRole
 
 - type: entity
-  parent: [BaseAbductorVictimObjective, BaseKillObjective]
+  parent: [BaseAbductorVictimObjective, BaseKillRandomObjective]
   categories: [ HideSpawnMenu ]
   id: AbductorKillObjective
   description: I need to find and kill this person.
@@ -48,7 +48,6 @@
     unique: false
   - type: TargetObjective
     title: objective-condition-maroon-person-title
-  - type: PickRandomPerson
   - type: KillPersonCondition
     requireMaroon: true
 

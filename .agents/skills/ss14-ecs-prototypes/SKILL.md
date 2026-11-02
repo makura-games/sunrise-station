@@ -317,7 +317,7 @@ public EntProtoId SpawnEntity = "DefaultEntity";
 public ProtoId<DamageModifierSetPrototype> DamageModifier = "Default";
 
 // Getting a prototype in the system
-[Dependency] private readonly IPrototypeManager _proto = default!;
+[Dependency] private IPrototypeManager _proto = default!;
 
 var proto = _proto.Index<MyPrototype>("protoId");
 if (_proto.TryIndex<MyPrototype>("protoId", out var proto))

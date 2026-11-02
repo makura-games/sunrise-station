@@ -8,14 +8,13 @@ using static Robust.Client.GameObjects.SpriteComponent;
 
 namespace Content.Client._Sunrise.Paint
 {
-    public sealed class PaintedVisualizerSystem : VisualizerSystem<SprayPaintedComponent>
+    public sealed partial class PaintedVisualizerSystem : VisualizerSystem<SprayPaintedComponent>
     {
         /// <summary>
         /// Visualizer for Paint which applies a shader and colors the entity.
         /// </summary>
 
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-        [Dependency] private readonly IPrototypeManager _protoMan = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
 
         public ShaderInstance? Shader; // in Robust.Client.Graphics so cannot move to shared component.
 
@@ -31,7 +30,7 @@ namespace Content.Client._Sunrise.Paint
         protected override void OnAppearanceChange(EntityUid uid, SprayPaintedComponent component, ref AppearanceChangeEvent args)
         {
             // ShaderPrototype sadly in Robust.Client, cannot move to shared component.
-            Shader = _protoMan.Index<ShaderPrototype>(component.ShaderName).Instance();
+            Shader = ProtoMan.Index<ShaderPrototype>(component.ShaderName).Instance();
 
             if (args.Sprite == null)
                 return;
@@ -97,7 +96,7 @@ namespace Content.Client._Sunrise.Paint
                 return;
 
             component.BeforeColor = sprite.Color;
-            Shader = _protoMan.Index<ShaderPrototype>(component.ShaderName).Instance();
+            Shader = ProtoMan.Index<ShaderPrototype>(component.ShaderName).Instance();
 
             if (!Terminating(uid))
             {

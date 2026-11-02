@@ -3,7 +3,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
@@ -14,14 +14,14 @@ namespace Content.Shared._Sunrise.Reagents.Convert;
 /// <summary>
 /// Конвертирует реагенты внутри сущности по клику на нее
 /// </summary>
-public sealed class ByClickReagentConvertSystem : EntitySystem
+public sealed partial class ByClickReagentConvertSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -44,7 +44,7 @@ public sealed class ByClickReagentConvertSystem : EntitySystem
                 continue;
 
             _useDelay.TryResetDelay(ent.Owner);
-            _popup.PopupClient(ent.Comp.PopupMessage, target, args.User);
+            _popup.PopupEntity(ent.Comp.PopupMessage, target, args.User);
             _audio.PlayPvs(ent.Comp.Sound, target);
             args.Handled = true;
             return;

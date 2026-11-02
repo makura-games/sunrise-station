@@ -1,4 +1,4 @@
-﻿using Content.Client._Sunrise.UserInterface.Radial;
+using Content.Client._Sunrise.UserInterface.Radial;
 using Content.Client.Construction;
 using Content.Shared._Sunrise.BloodCult.Components;
 using Content.Shared._Sunrise.BloodCult.Structures;
@@ -12,13 +12,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._Sunrise.BloodCult.UI.StructureRadial;
 
-public sealed class StructureCraftBoundUserInterface : BoundUserInterface
+public sealed partial class StructureCraftBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPlacementManager _placement = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntitySystemManager _systemManager = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPlacementManager _placement = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private RadialContainer? _menu;
     private bool _selected;
@@ -101,12 +100,11 @@ public sealed class StructureCraftBoundUserInterface : BoundUserInterface
         // if (construct.ID == "CultPylon" && CheckForStructure(player, id))
         // {
         //     var popup = _entMan.System<SharedPopupSystem>();
-        //     popup.PopupClient(Loc.GetString("cult-structure-craft-another-structure-nearby"), player.Value, player.Value);
+        //     popup.PopupEntity(Loc.GetString("cult-structure-craft-another-structure-nearby"), player.Value, player.Value);
         //     return;
         // }
 
-        var constructSystem = _systemManager.GetEntitySystem<ConstructionSystem>();
-        var hijack = new ConstructionPlacementHijack(constructSystem, construct);
+        var hijack = new ConstructionPlacementHijack(construct);
 
         _placement.BeginPlacing(newObj, hijack);
     }

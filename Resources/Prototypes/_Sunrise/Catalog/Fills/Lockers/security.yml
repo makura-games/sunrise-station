@@ -241,21 +241,6 @@
           amount: 6
 
 - type: entity
-  parent: GunSafeBaseSecure
-  id: GunSafeSubMachineGunMP5
-  name: safe
-  suffix: MP5
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponSubMachineGunMP5
-          amount: 2
-        - id: MagazinePistolSubMachineGunSP
-          amount: 4
-
-- type: entity
   parent: GunSafeBaseSecureSunrise
   id: GunSafeSubMachineGunDrozdMk2
   name: safe
@@ -432,29 +417,6 @@
       entity_storage: !type:AllSelector
         children:
         - id: WeaponShotgunRiot
-          amount: 2
-        - id: SpeedLoaderShellShotgun
-          amount: 4
-        - id: BoxBeanbag
-          amount: 1
-        - id: BoxShotgunSlug
-          amount: 1
-        - id: BoxShotgunFlare
-          amount: 1
-
-- type: entity
-  parent: GunSafeBaseSecureSunrise
-  id: GunSafeShotgunCombat
-  name: safe
-  suffix: Shotgun Combat
-  components:
-  - type: EntityStorageVisuals
-    stateDoorClosed: enforcer
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponShotgunCombat
           amount: 2
         - id: SpeedLoaderShellShotgun
           amount: 4
@@ -679,7 +641,6 @@
       weight: 5
       children:
       - id: GunSafeShotgunEnforcer
-      - id: GunSafeShotgunCombat
     - id: SpawnerSafeLethal
       weight: 15
 
@@ -745,7 +706,6 @@
       weight: 55
       children:
       - id: GunSafeSubMachineGunDrozd
-      - id: GunSafeSubMachineGunMP5
       - id: GunSafeSubMachineGunDrozdTrash
     - !type:GroupSelector
       weight: 45

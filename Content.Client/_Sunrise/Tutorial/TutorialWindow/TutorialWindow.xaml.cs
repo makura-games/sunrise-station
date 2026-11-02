@@ -12,7 +12,7 @@ namespace Content.Client._Sunrise.Tutorial.TutorialWindow;
 [GenerateTypedNameReferences]
 public sealed partial class TutorialWindow : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
     public Action<TutorialSequencePrototype>? OnTutorialButtonPressed;
     public Action? OnRequestCompletedTutorials;
     private TutorialCategoryButton? _selectedCategory;

@@ -10,11 +10,11 @@ using Content.Shared.Body;
 
 namespace Content.Server._Sunrise.Antags.Abductor;
 
-public sealed partial class AbductorSystem : SharedAbductorSystem
+public sealed partial class AbductorSystem
 {
 
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly ISharedAdminLogManager _admin = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
 
     public void InitializeExtractor()
     {

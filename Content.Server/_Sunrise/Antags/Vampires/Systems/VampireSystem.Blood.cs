@@ -1,4 +1,4 @@
-using Content.Server.Bible.Components;
+using Content.Shared.Bible.Components;
 using Content.Server._Sunrise.Antags.Vampires.Components;
 using Content.Shared._Sunrise.Antags.Vampires.Components;
 using Content.Shared.Flash;

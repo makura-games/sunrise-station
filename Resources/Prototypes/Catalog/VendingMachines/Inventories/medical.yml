@@ -83,6 +83,7 @@
     PillCanisterTricordrazine: 4
     ClothingOuterHospitalGown: 2 # Not a popular item, so less stock
     # Sunrise-start
+    MedipenCaseMedic: 2
     Ampula: 5
     Dropper: 2
     ChemistryEmptyVial: 2
@@ -100,6 +101,7 @@
     FoodApple: 1
     PatchMedical: 6 # Sunrise-Edit
   emaggedInventory: # Sunrise Edit
+    MedipenCaseSyndicate: 1 # Sunrise-Edit
     Stimpack: 1 # Sunrise Edit
     PatchOmni: 5 # Sunrise Edit
     PatchPack: 1 # Sunrise-Edit
@@ -115,6 +117,12 @@
     Bloodpack: 5
     ChemistryBottleInaprovaline: 5
     Syringe: 5
+    BoxBottle: 3
+    PillCanisterTricordrazine: 2
+    PillCanisterIron: 1
+    PillCanisterCopper: 1
+    PillCanisterPotassiumIodide: 1
+    MedipenCaseMedic: 1 # Sunrise-Edit
     Ampula: 4 # Sunrise-Edit
     PillTricordrazine: 10
     PillIron: 5
@@ -131,6 +139,7 @@
     PatchPackBrute: 1 # Sunrise-Edit
     PatchPackHeat: 1 # Sunrise-Edit
   emaggedInventory: # Sunrise Edit
+    MedipenCaseSyndicate: 1 # Sunrise-edit
     Stimpack: 1 # Sunrise Edit
     PatchOmni: 5 # Sunrise Edit
     PatchPack: 1 # Sunrise-Edit

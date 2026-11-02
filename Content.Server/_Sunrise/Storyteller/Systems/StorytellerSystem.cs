@@ -16,7 +16,7 @@ using Content.Shared.Cargo;
 using Content.Shared.Cargo.Components;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -51,7 +51,7 @@ using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
-using Content.Server.AlertLevel;
+using Content.Shared.AlertLevel;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Atmos.Monitor;
 using Content.Shared.Station.Components;
@@ -96,26 +96,28 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
     private static readonly ProtoId<TagPrototype> StorytellerIgnoreMessTag = "StorytellerIgnoreMess";
     private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
 
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
-    [Dependency] private readonly SharedJobSystem _jobSystem = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly EventManagerSystem _eventManager = default!;
-    [Dependency] private readonly SharedCargoSystem _cargoSystem = default!;
-    [Dependency] private readonly GhostRoleSystem _ghostRoleSystem = default!;
-    [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
-    [Dependency] private readonly SharedBatterySystem _batterySystem = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly SharedMaterialStorageSystem _materialStorage = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private SharedMindSystem _mindSystem = default!;
+    [Dependency] private SharedJobSystem _jobSystem = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
+    [Dependency] private EventManagerSystem _eventManager = default!;
+    [Dependency] private SharedCargoSystem _cargoSystem = default!;
+    [Dependency] private GhostRoleSystem _ghostRoleSystem = default!;
+    [Dependency] private SharedRoleSystem _roleSystem = default!;
+    [Dependency] private SharedBatterySystem _batterySystem = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private SharedMaterialStorageSystem _materialStorage = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private AlertLevelSystem _alertLevel = default!;
+    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobStateQuery = default!;
 
     private readonly List<TimeSpan> _joinTimestamps = new();
     private readonly List<TimeSpan> _leaveTimestamps = new();
@@ -135,7 +137,7 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
         _playerManager.PlayerStatusChanged += OnPlayerStatusChanged;
         SubscribeLocalEvent<PlayerJoinedLobbyEvent>(OnPlayerJoinedLobby);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
-        SubscribeLocalEvent<AlertLevelChangedEvent>(OnAlertLevelChanged);
+        SubscribeLocalEvent<SunriseAlertLevelChangedEvent>(OnAlertLevelChanged);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -159,10 +161,10 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
         if (!query.MoveNext(out var uid, out var comp))
             return false;
 
-        if (!_protoManager.TryIndex<EntityPrototype>(eventId, out var proto))
+        if (!ProtoMan.TryIndex<EntityPrototype>(eventId, out var proto))
             return false;
 
-        if (!_protoManager.TryIndex<StorytellerMetadataPrototype>(eventId, out var metadata))
+        if (!ProtoMan.TryIndex<StorytellerMetadataPrototype>(eventId, out var metadata))
             return false;
 
         TriggerEvent((uid, comp), proto, metadata);
@@ -193,7 +195,7 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
             component.StorytellerType = _random.Pick(new[] { StorytellerType.Calm, StorytellerType.Classic, StorytellerType.Insane });
         }
 
-        if (_protoManager.TryIndex<StorytellerTypePrototype>(component.StorytellerType.ToString(), out var typeProto))
+        if (ProtoMan.TryIndex<StorytellerTypePrototype>(component.StorytellerType.ToString(), out var typeProto))
         {
             component.GlobalEventCooldownMinutes = typeProto.GlobalEventCooldownMinutes;
             component.HelpfulEventCooldownMinutes = typeProto.HelpfulEventCooldownMinutes;
@@ -216,7 +218,11 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
         var query = EntityQueryEnumerator<AlertLevelComponent, MainStationComponent>();
         while (query.MoveNext(out var stationUid, out var alertComp, out _))
         {
-            RecordAlertLevelChange(component, stationUid, alertComp.CurrentLevel);
+            if (_alertLevel.TryGetLevel((stationUid, alertComp), out var currentLevel) &&
+                currentLevel is { } level)
+            {
+                RecordAlertLevelChange(component, stationUid, level.Id);
+            }
         }
     }
 
@@ -226,7 +232,7 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
 
         var budgetModifier = 1f;
         var maxBudgetModifier = 1f;
-        if (_protoManager.TryIndex<StorytellerTypePrototype>(component.StorytellerType.ToString(), out var typeProto))
+        if (ProtoMan.TryIndex<StorytellerTypePrototype>(component.StorytellerType.ToString(), out var typeProto))
         {
             budgetModifier = typeProto.BudgetModifier;
             maxBudgetModifier = typeProto.MaxBudgetModifier;
@@ -269,7 +275,7 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
         var recMin = 10f;
         var recMax = 20f;
 
-        if (_protoManager.TryIndex<StorytellerTypePrototype>(comp.StorytellerType.ToString(), out var typeProto))
+        if (ProtoMan.TryIndex<StorytellerTypePrototype>(comp.StorytellerType.ToString(), out var typeProto))
         {
             durationMult = typeProto.DurationMultiplier;
             relMin = typeProto.RelaxationMinMinutes;
@@ -766,7 +772,7 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
             alertLevelStress = CalculateAlertLevelStress(comp);
         }
 
-        _protoManager.TryIndex<StorytellerTypePrototype>(comp?.StorytellerType.ToString() ?? string.Empty, out var storytellerType);
+        ProtoMan.TryIndex<StorytellerTypePrototype>(comp?.StorytellerType.ToString() ?? string.Empty, out var storytellerType);
         var armedCrewScore = CountArmedCrewNotAntags();
         var strength = CalculateNormalizedStationStrength(
             aliveCount,
@@ -983,10 +989,10 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
 
     private float GetMaterialStrengthWeight(ProtoId<MaterialPrototype> materialId)
     {
-        if (_protoManager.TryIndex<StorytellerMaterialWeightPrototype>(materialId, out var weightOverride))
+        if (ProtoMan.TryIndex<StorytellerMaterialWeightPrototype>(materialId, out var weightOverride))
             return weightOverride.Weight;
 
-        if (!_protoManager.TryIndex(materialId, out MaterialPrototype? proto))
+        if (!ProtoMan.TryIndex(materialId, out MaterialPrototype? proto))
             return MaterialStrengthUnknownFallback;
 
         if (proto.StorytellerStrengthWeight > 0f)
@@ -1084,12 +1090,12 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
         var currentDuration = GameTicker.RoundDuration();
 
         // Query all rule prototypes with storyteller metadata
-        foreach (var proto in _protoManager.EnumeratePrototypes<EntityPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             if (proto.Abstract)
                 continue;
 
-            if (!_protoManager.TryIndex<StorytellerMetadataPrototype>(proto.ID, out var metadata))
+            if (!ProtoMan.TryIndex<StorytellerMetadataPrototype>(proto.ID, out var metadata))
                 continue;
 
             var isEventMajorAntag = metadata.ThreatType == StorytellerThreatType.MajorAntag;
@@ -1435,17 +1441,14 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
     private int CountCrewWeapons()
     {
         var armedMobs = new HashSet<EntityUid>();
-        var xformQuery = GetEntityQuery<TransformComponent>();
-        var mobQuery = GetEntityQuery<MobStateComponent>();
-
         var gunQuery = EntityQueryEnumerator<GunComponent>();
         while (gunQuery.MoveNext(out var uid, out _))
         {
             if (IsToyWeapon(uid))
                 continue;
 
-            var mob = FindCarryingMob(uid, xformQuery, mobQuery);
-            if (mob != null && mobQuery.TryGetComponent(mob.Value, out var mobState))
+            var mob = FindCarryingMob(uid);
+            if (mob != null && _mobStateQuery.TryGetComponent(mob.Value, out var mobState))
             {
                 if (mobState.CurrentState == MobState.Alive || mobState.CurrentState == MobState.Critical)
                 {
@@ -1462,8 +1465,8 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
         {
             if (IsFirearm(uid))
             {
-                var mob = FindCarryingMob(uid, xformQuery, mobQuery);
-                if (mob != null && mobQuery.TryGetComponent(mob.Value, out var mobState))
+                var mob = FindCarryingMob(uid);
+                if (mob != null && _mobStateQuery.TryGetComponent(mob.Value, out var mobState))
                 {
                     if (mobState.CurrentState == MobState.Alive || mobState.CurrentState == MobState.Critical)
                     {
@@ -1479,8 +1482,8 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
             if (melee.Damage.GetTotal().Float() <= 15) // TODO: Магическое число должно быть обьявлено переменной
                 continue;
 
-            var mob2 = FindCarryingMob(uid, xformQuery, mobQuery);
-            if (mob2 != null && mobQuery.TryGetComponent(mob2.Value, out var mobState2))
+            var mob2 = FindCarryingMob(uid);
+            if (mob2 != null && _mobStateQuery.TryGetComponent(mob2.Value, out var mobState2))
             {
                 if (mobState2.CurrentState == MobState.Alive || mobState2.CurrentState == MobState.Critical)
                 {
@@ -1497,17 +1500,14 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
     private float CountArmedCrewNotAntags()
     {
         var mobWeights = new Dictionary<EntityUid, float>();
-        var xformQuery = GetEntityQuery<TransformComponent>();
-        var mobQuery = GetEntityQuery<MobStateComponent>();
-
         var gunQuery = EntityQueryEnumerator<GunComponent>();
         while (gunQuery.MoveNext(out var uid, out _))
         {
             if (IsToyWeapon(uid))
                 continue;
 
-            var mob = FindCarryingMob(uid, xformQuery, mobQuery);
-            if (mob != null && mobQuery.TryGetComponent(mob.Value, out var mobState))
+            var mob = FindCarryingMob(uid);
+            if (mob != null && _mobStateQuery.TryGetComponent(mob.Value, out var mobState))
             {
                 if (mobState.CurrentState == MobState.Alive || mobState.CurrentState == MobState.Critical)
                 {
@@ -1526,8 +1526,8 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
             if (IsFirearm(uid))
                 continue;
 
-            var mob = FindCarryingMob(uid, xformQuery, mobQuery);
-            if (mob != null && mobQuery.TryGetComponent(mob.Value, out var mobState))
+            var mob = FindCarryingMob(uid);
+            if (mob != null && _mobStateQuery.TryGetComponent(mob.Value, out var mobState))
             {
                 if (mobState.CurrentState == MobState.Alive || mobState.CurrentState == MobState.Critical)
                 {
@@ -1537,7 +1537,7 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
                         var damage = melee.Damage.GetTotal().Float();
 
                         if (HasComp<Content.Shared.Weapons.Melee.EnergySword.EnergySwordComponent>(uid) ||
-                            HasComp<Content.Shared.Stunnable.StunbatonComponent>(uid) ||
+                            HasComp<Content.Shared.Damage.Components.StaminaDamageOnHitRequiresToggleComponent>(uid) ||
                             (damage >= 20f && !HasComp<Content.Shared.Tools.Components.ToolComponent>(uid)))
                         {
                             weight = 0.5f;
@@ -1582,18 +1582,18 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
         return false;
     }
 
-    private EntityUid? FindCarryingMob(EntityUid uid, EntityQuery<TransformComponent> xformQuery, EntityQuery<MobStateComponent> mobQuery)
+    private EntityUid? FindCarryingMob(EntityUid uid)
     {
         var current = uid;
         while (true)
         {
-            if (!xformQuery.TryGetComponent(current, out var xform))
+            if (!_xformQuery.TryGetComponent(current, out var xform))
                 break;
 
             if (!xform.ParentUid.Valid)
                 break;
 
-            if (mobQuery.HasComponent(xform.ParentUid))
+            if (_mobStateQuery.HasComponent(xform.ParentUid))
                 return xform.ParentUid;
 
             current = xform.ParentUid;
@@ -1629,7 +1629,7 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
                     {
                         isAntag = true;
                         var stressVal = 4f; // Default fallback
-                        if (roleComp.AntagPrototype != null && _protoManager.TryIndex(roleComp.AntagPrototype, out var antagProto))
+                        if (roleComp.AntagPrototype != null && ProtoMan.TryIndex(roleComp.AntagPrototype, out var antagProto))
                         {
                             stressVal = antagProto.StorytellerStress;
                         }
@@ -1732,7 +1732,7 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
         _maxResearchStorytellerScore = 1f;
         _totalTechnologyCount = 0;
 
-        foreach (var tech in _protoManager.EnumeratePrototypes<Content.Shared.Research.Prototypes.TechnologyPrototype>())
+        foreach (var tech in ProtoMan.EnumeratePrototypes<Content.Shared.Research.Prototypes.TechnologyPrototype>())
         {
             if (tech.Hidden)
                 continue;
@@ -1753,7 +1753,7 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
         };
 
         var disciplineMult = 1f;
-        if (_protoManager.TryIndex(tech.Discipline, out Content.Shared.Research.Prototypes.TechDisciplinePrototype? discipline))
+        if (ProtoMan.TryIndex(tech.Discipline, out Content.Shared.Research.Prototypes.TechDisciplinePrototype? discipline))
             disciplineMult = discipline.StorytellerUsefulness;
 
         return tierWeight * disciplineMult;
@@ -1783,7 +1783,7 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
         var totalScore = 0f;
         foreach (var techId in uniqueTechs)
         {
-            if (!_protoManager.TryIndex<Content.Shared.Research.Prototypes.TechnologyPrototype>(techId, out var techProto))
+            if (!ProtoMan.TryIndex<Content.Shared.Research.Prototypes.TechnologyPrototype>(techId, out var techProto))
                 continue;
 
             totalScore += GetTechnologyStorytellerWeight(techProto);
@@ -1795,7 +1795,7 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
     private Dictionary<string, int> GetCrewDistribution()
     {
         var dist = new Dictionary<string, int>();
-        foreach (var dept in _protoManager.EnumeratePrototypes<DepartmentPrototype>())
+        foreach (var dept in ProtoMan.EnumeratePrototypes<DepartmentPrototype>())
         {
             dist[dept.ID] = 0;
         }
@@ -1853,12 +1853,12 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
 
         var reasons = new Dictionary<string, int>();
 
-        foreach (var proto in _protoManager.EnumeratePrototypes<EntityPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             if (proto.Abstract)
                 continue;
 
-            if (!_protoManager.TryIndex<StorytellerMetadataPrototype>(proto.ID, out var metadata))
+            if (!ProtoMan.TryIndex<StorytellerMetadataPrototype>(proto.ID, out var metadata))
                 continue;
 
             if (metadata.ThreatType == StorytellerThreatType.Helpful)
@@ -1983,7 +1983,7 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
         }
     }
 
-    private void OnAlertLevelChanged(AlertLevelChangedEvent ev)
+    private void OnAlertLevelChanged(ref SunriseAlertLevelChangedEvent ev)
     {
         if (!HasComp<MainStationComponent>(ev.Station))
             return;
@@ -1991,7 +1991,7 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
         var query = EntityQueryEnumerator<StorytellerRuleComponent>();
         while (query.MoveNext(out _, out var comp))
         {
-            RecordAlertLevelChange(comp, ev.Station, ev.AlertLevel);
+            RecordAlertLevelChange(comp, ev.Station, ev.AlertLevel.Id);
         }
     }
 
@@ -2061,16 +2061,25 @@ public sealed partial class StorytellerSystem : GameRuleSystem<StorytellerRuleCo
             double totalDuration = 0;
 
             var defaultLevel = "green";
-            if (TryComp<AlertLevelComponent>(station, out var alertComp) && alertComp.AlertLevels != null && !string.IsNullOrEmpty(alertComp.AlertLevels.DefaultLevel))
+            string? currentLevel = null;
+            if (TryComp<AlertLevelComponent>(station, out var alertComp))
             {
-                defaultLevel = alertComp.AlertLevels.DefaultLevel;
+                if (_alertLevel.TryGetDefaultLevel((station, alertComp), out var defaultAlertLevel) &&
+                    defaultAlertLevel is { } resolvedDefaultLevel)
+                {
+                    defaultLevel = resolvedDefaultLevel.Id;
+                }
+
+                if (_alertLevel.TryGetLevel((station, alertComp), out var currentAlertLevel) &&
+                    currentAlertLevel is { } resolvedCurrentLevel)
+                {
+                    currentLevel = resolvedCurrentLevel.Id;
+                }
             }
 
             if (history.Count == 0)
             {
-                var currentLevel = defaultLevel;
-                if (alertComp != null)
-                    currentLevel = alertComp.CurrentLevel;
+                currentLevel ??= defaultLevel;
 
                 if (currentLevel.Equals(defaultLevel, StringComparison.OrdinalIgnoreCase))
                 {

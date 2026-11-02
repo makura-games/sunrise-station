@@ -9,7 +9,6 @@ HeadOfSecurity-loadout = Снаряжение главы сб
 Quartermaster-loadout = Снаряжение квартирмейстра
 ResearchDirector-loadout = Снаряжение научного руководителя
 NanoTrasenRepresentative-loadout = Снаряжение представителя НаноТрейзен
-ComMaid-loadout = Снаряжение горничной командования
 # Law
 IAA-loadout = Снаряжение агента внутренних дел
 Lawyer-loadout = Снаряжение юриста
@@ -61,7 +60,8 @@ Mime-loadout = Снаряжение мима
 Musician-loadout = Снаряжение музыканта
 Passenger-loadout = Снаряжение пассажира
 ServiceWorker-loadout = Снаряжение сервисного работника
-#Silicons
+ComMaid-loadout = Снаряжение горничной командования
+# Silicons
 StationAi-loadout = Название Станционного ИИ
 Borg-loadout = Название киборга
 ClownBorg-loadout = Название киборга

@@ -1,4 +1,3 @@
-using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
 using Content.Server._Sunrise.Antags.Vampires.Components;
 using Content.Shared._Sunrise.Antags.Vampires.Components;
@@ -6,6 +5,7 @@ using Content.Shared._Sunrise.Antags.Vampires.Events;
 using Content.Shared._Sunrise.Body.Components;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;

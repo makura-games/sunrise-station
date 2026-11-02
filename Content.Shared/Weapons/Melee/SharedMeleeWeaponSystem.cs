@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
@@ -11,6 +12,7 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
+using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
@@ -22,10 +24,10 @@ using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Mech.Components;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
+using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
@@ -46,29 +48,31 @@ using ItemToggleMeleeWeaponComponent = Content.Shared.Item.ItemToggle.Components
 
 namespace Content.Shared.Weapons.Melee;
 
-public abstract class SharedMeleeWeaponSystem : EntitySystem
+public abstract partial class SharedMeleeWeaponSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] protected readonly IMapManager MapManager = default!;
-    [Dependency] private   readonly INetManager _netMan = default!;
-    [Dependency] private   readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private   readonly IRobustRandom _random = default!;
-    [Dependency] protected readonly ISharedAdminLogManager AdminLogger = default!;
-    [Dependency] protected readonly ActionBlockerSystem Blocker = default!;
-    [Dependency] protected readonly DamageableSystem Damageable = default!;
-    [Dependency] private   readonly SharedHandsSystem _hands = default!;
-    [Dependency] private   readonly InventorySystem _inventory = default!;
-    [Dependency] private   readonly MeleeSoundSystem _meleeSound = default!;
-    [Dependency] protected readonly MobStateSystem MobState = default!;
-    [Dependency] private   readonly SharedAudioSystem _audio = default!;
-    [Dependency] protected readonly SharedCombatModeSystem CombatMode = default!;
-    [Dependency] protected readonly SharedInteractionSystem Interaction = default!;
-    [Dependency] private   readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] protected readonly SharedPopupSystem PopupSystem = default!;
-    [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
-    [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private   readonly DamageExamineSystem _damageExamine = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!; // Sunrise-edit
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] private INetManager _netMan = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] protected ISharedAdminLogManager AdminLogger = default!;
+    [Dependency] protected ActionBlockerSystem Blocker = default!;
+    [Dependency] protected DamageableSystem Damageable = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private MeleeSoundSystem _meleeSound = default!;
+    [Dependency] protected MobStateSystem MobState = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] protected SharedCombatModeSystem CombatMode = default!;
+    [Dependency] protected SharedMapSystem Maps = default!;
+    [Dependency] protected SharedInteractionSystem Interaction = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] protected SharedPopupSystem PopupSystem = default!;
+    [Dependency] protected SharedTransformSystem TransformSystem = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private DamageExamineSystem _damageExamine = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private TagSystem _tagSystem = default!; // Sunrise-edit
+
+    [Dependency] private EntityQuery<DamageableComponent> _damageQuery = default!;
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
@@ -95,7 +99,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         SubscribeLocalEvent<BonusMeleeDamageComponent, GetMeleeDamageEvent>(OnGetBonusMeleeDamage);
         SubscribeLocalEvent<BonusMeleeDamageComponent, GetHeavyDamageModifierEvent>(OnGetBonusHeavyDamageModifier);
         SubscribeLocalEvent<BonusMeleeAttackRateComponent, GetMeleeAttackRateEvent>(OnGetBonusMeleeAttackRate);
-
         SubscribeLocalEvent<ItemToggleMeleeWeaponComponent, ItemToggledEvent>(OnItemToggle);
 
         SubscribeAllEvent<HeavyAttackEvent>(OnHeavyAttack);
@@ -112,6 +115,15 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (component.NextAttack > Timing.CurTime)
             Log.Warning($"Initializing a map that contains an entity that is on cooldown. Entity: {ToPrettyString(uid)}");
 #endif
+    }
+
+    [SubscribeLocalEvent]
+    private void EntityEffectMeleeHit(Entity<EntityEffectMeleeComponent> ent, ref MeleeHitEvent args)
+    {
+        foreach (var entity in args.HitEntities)
+        {
+            _effects.ApplyEffects(entity, ent.Comp.Effects, 1f, args.User);
+        }
     }
 
     private void OnMeleeShotAttempted(EntityUid uid, MeleeWeaponComponent comp, ref ShotAttemptedEvent args)
@@ -163,6 +175,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return;
 
         component.NextAttack = minimum;
+        ResetUndamagedSwingsCount((uid, component));
         DirtyField(uid, component, nameof(MeleeWeaponComponent.NextAttack));
     }
 
@@ -223,7 +236,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     private void OnHeavyAttack(HeavyAttackEvent msg, EntitySessionEventArgs args)
     {
         if (args.SenderSession.AttachedEntity == null
-            || HasComp<MechPilotComponent>(args.SenderSession.AttachedEntity)
+            || HasComp<VehicleOperatorComponent>(args.SenderSession.AttachedEntity)
             || !TryGetWeapon(args.SenderSession.AttachedEntity.Value, out var weaponUid, out var weapon)
             || weaponUid != GetEntity(msg.Weapon))
             return;
@@ -439,7 +452,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         {
             if (ev.Message != null)
             {
-                PopupSystem.PopupClient(ev.Message, weaponUid, user);
+                PopupSystem.PopupEntity(ev.Message, weaponUid, user);
             }
 
             return false;
@@ -573,11 +586,19 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         }
 
-        _meleeSound.PlayHitSound(target.Value, user, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);
+        _meleeSound.PlayHitSound(target.Value, user, GetHighestDamageSound(modifiedDamage, ProtoMan), hitEvent.HitSoundOverride, component);
 
-        if (damageResult.GetTotal() > FixedPoint2.Zero)
+        if (!TerminatingOrDeleted(target.Value))
         {
-            DoDamageEffect(targets, user, targetXform);
+            if (damageResult.GetTotal() > FixedPoint2.Zero)
+            {
+                DoDamageEffect(targets, user, targetXform);
+                ResetUndamagedSwingsCount((meleeUid, component));
+            }
+            else
+            {
+                UndamagedAttack((meleeUid, component), target.Value, user);
+            }
         }
     }
 
@@ -637,7 +658,15 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // Validate client
         for (var i = entities.Count - 1; i >= 0; i--)
         {
-            if (ArcRaySuccessful(entities[i],
+            var entity = entities[i];
+
+            if (TerminatingOrDeleted(entity))
+            {
+                entities.RemoveAt(i);
+                continue;
+            }
+
+            if (!ArcRaySuccessful(entity,
                     userPos,
                     direction.ToWorldAngle(),
                     component.Angle,
@@ -646,20 +675,16 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                     user,
                     session))
             {
-                continue;
+                // Bad input
+                entities.RemoveAt(i);
             }
-
-            // Bad input
-            entities.RemoveAt(i);
         }
 
         var targets = new List<EntityUid>();
-        var damageQuery = GetEntityQuery<DamageableComponent>();
-
         foreach (var entity in entities)
         {
             if (entity == user ||
-                !damageQuery.HasComponent(entity))
+                !_damageQuery.HasComponent(entity))
                 continue;
 
             //Sunrise-start
@@ -737,17 +762,28 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                         $"{ToPrettyString(user):actor} melee attacked (heavy) {ToPrettyString(entity):subject} using {ToPrettyString(meleeUid):tool} and dealt {damageResult.GetTotal():damage} damage");
                 }
             }
+
+            if (TerminatingOrDeleted(entity))
+                targets.RemoveAt(i);
         }
 
         if (entities.Count != 0)
         {
             var target = entities.First();
-            _meleeSound.PlayHitSound(target, user, GetHighestDamageSound(appliedDamage, _protoManager), hitEvent.HitSoundOverride, component);
+            _meleeSound.PlayHitSound(target, user, GetHighestDamageSound(appliedDamage, ProtoMan), hitEvent.HitSoundOverride, component);
         }
 
-        if (appliedDamage.GetTotal() > FixedPoint2.Zero)
+        if (targets.Count > 0)
         {
-            DoDamageEffect(targets, user, Transform(targets[0]));
+            if (appliedDamage.GetTotal() > FixedPoint2.Zero)
+            {
+                DoDamageEffect(targets, user, Transform(targets[0]));
+                ResetUndamagedSwingsCount((meleeUid, component));
+            }
+            else
+            {
+                UndamagedAttack((meleeUid, component), targets[0], user);
+            }
         }
 
         return true;
@@ -875,7 +911,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             {
                 // Notify disarmable
                 if (HasComp<MobStateComponent>(target.Value))
-                    PopupSystem.PopupClient(Loc.GetString("disarm-action-disarmable", ("targetName", target.Value)), target.Value);
+                    PopupSystem.PopupEntity(Loc.GetString("disarm-action-disarmable", ("targetName", target.Value)), target.Value, target.Value);
 
                 return false;
             }
@@ -1062,4 +1098,18 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             }
         }
     }
+
+    /// <summary>
+    /// Updates <see cref="MeleeWeaponComponent.UndamagedSwings"/> and triggers a message if it meets <see cref="MeleeWeaponComponent.UndamagedAlertThreshold"/>.
+    /// </summary>
+    /// <param name="ent">The weapon entity tracking swings.</param>
+    /// <param name="target">The target entity that was hit without damage.</param>
+    /// <param name="user">The user swinging the weapon.</param>
+    protected virtual void UndamagedAttack(Entity<MeleeWeaponComponent> ent, EntityUid target, EntityUid user) { }
+
+    /// <summary>
+    /// Resets the <see cref="MeleeWeaponComponent.UndamagedSwings"/>; necessary to not trigger undamaged attacks messages too often.
+    /// </summary>
+    /// <param name="ent">The weapon entity tracking swings.</param>
+    protected virtual void ResetUndamagedSwingsCount(Entity<MeleeWeaponComponent> ent) { }
 }

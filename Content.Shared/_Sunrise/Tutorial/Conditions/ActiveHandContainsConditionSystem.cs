@@ -11,7 +11,7 @@ namespace Content.Shared._Sunrise.Tutorial.Conditions;
 public sealed partial class ActiveHandContainsConditionSystem
     : TutorialConditionSystem<HandsComponent, ActiveHandContainsCondition>
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     protected override void Condition(Entity<HandsComponent> entity, ref TutorialConditionEvent<ActiveHandContainsCondition> args)
     {

@@ -208,10 +208,10 @@
   - type: FootprintAreaCleaner
   - type: Absorbent
     pickupAmount: 500
-  - type: SolutionContainerManager
-    solutions:
-      absorbed:
-        maxVol: 500
+  - type: Solution
+    id: absorbed
+    solution:
+      maxVol: 500
   - type: Spillable
     solution: absorbed
   - type: RefillableSolution

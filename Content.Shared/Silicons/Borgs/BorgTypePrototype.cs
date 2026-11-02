@@ -6,7 +6,6 @@ using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Silicons.Borgs;
 
@@ -155,7 +154,7 @@ public sealed partial class BorgTypePrototype : IPrototype
     public SoundSpecifier FootstepCollection { get; set; } = new SoundCollectionSpecifier(DefaultFootsteps);
 
     // Sunrise-Start
-    [DataField(required: true, customTypeSerializer: typeof(PrototypeIdSerializer<JobPrototype>))]
-    public string Job = string.Empty;
+    [DataField(required: true)]
+    public ProtoId<JobPrototype> Job;
     // Sunrise-End
 }

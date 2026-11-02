@@ -2,14 +2,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Content.Server._Sunrise.Speech.Components;
 using Content.Server._Sunrise.TTS;
-using Content.Server.Speech.EntitySystems;
 using Content.Shared.Speech;
+using Content.Shared.Speech.EntitySystems;
 
 namespace Content.Server._Sunrise.Speech.EntitySystems;
 
-public sealed class UkrainianAccentSystem : EntitySystem
+public sealed partial class UkrainianAccentSystem : EntitySystem
 {
-    [Dependency] private readonly ReplacementAccentSystem _replacement = default!;
+    [Dependency] private ReplacementAccentSystem _replacement = default!;
 
     private static readonly Regex UkrainianIRegex = new("[іІ]");
     private static readonly Regex UkrainianYiRegex = new("[їЇ]");
@@ -48,7 +48,7 @@ public sealed class UkrainianAccentSystem : EntitySystem
         return accentedMessage.ToString();
     }
 
-    private void OnAccent(EntityUid uid, UkrainianAccentComponent component, AccentGetEvent args)
+    private void OnAccent(Entity<UkrainianAccentComponent> ent, ref AccentGetEvent args)
     {
         args.Message = Accentuate(args.Message);
     }

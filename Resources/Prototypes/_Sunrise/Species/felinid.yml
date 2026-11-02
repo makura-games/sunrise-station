@@ -15,6 +15,13 @@
   - HumanDistrofikMale
   dollPrototype: MobFelinidDummy
   skinColoration: HumanToned
+  defaultSoundsBySex:
+  - MaleFelinid
+  - FemaleFelinid
+  - MaleFelinid
+  voices:
+  - MaleFelinid
+  - FemaleFelinid
   youngAge: 18
   oldAge: 30
   maxAge: 60
