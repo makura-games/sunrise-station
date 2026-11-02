@@ -174,6 +174,8 @@ uplink-pirate-borg-random-desc = Calls in a random derelict cyborg with pirate l
 
 ## Equipment
 
+uplink-experimental-eshield-name = Experimental Energy Shield
+uplink-experimental-eshield-desc = An even more exotic energy shield that reflects nearly all laser beams and provides some protection against bullets and other physical attacks. It has a built-in self-recharging battery, but its frame can still fail after several cycles of active charging and discharging.
 uplink-hypo-name = Gorlax Hypospray
 uplink-hypo-desc = A chemical hypospray manufactured by the Syndicate, capable of instantly injecting up to 20u of reagents. Starts empty.
 uplink-polytrinic-acid-chemistry-bottle-name = Polytrinic Acid
@@ -317,10 +319,8 @@ uplink-x4-name = Composition X-4
 uplink-x4-desc = Used to put even bigger holes in areas you really hate.
 uplink-x4-bundle-name = X-4 Bundle
 uplink-x4-bundle-desc = A bundle of eight X-4. You must really want to blow the hell out of something.
-uplink-shuttle-board-name = Syndicate shuttle console board
-uplink-shuttle-board-desc = A computer printed circuit board for a syndicate shuttle console.
 uplink-shuttle-bundle-name = Syndicate shuttle crate
-uplink-shuttle-bundle-desc = Everything but the shuttle board. It's a shuttle in a crate* (Some assembly required).
+uplink-shuttle-bundle-desc = A bundle with everything needed to assemble a Syndicate shuttle. (Some assembly required).
 uplink-friendship-bundle-name = Friendship bundle
 uplink-lube-grenade-name = Lube Grenade
 uplink-lube-grenade-desc = A grenade that spreads a slippery cloud of lube around the detonation area.
