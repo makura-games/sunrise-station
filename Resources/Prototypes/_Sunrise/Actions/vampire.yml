@@ -66,6 +66,10 @@
         enum.ActionVisuals.Icon:
           True: { visible: true }
           False: { visible: true }
+      enum.LimitedChargesState.HasCharges:
+        enum.ActionVisuals.Icon:
+          True: { color: White }
+          False: { color: DimGray }
   - type: TargetAction
     range: 2
     checkCanAccess: false
