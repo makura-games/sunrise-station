@@ -116,7 +116,8 @@ public sealed partial class VampireSystem
         }
 
         var targetBloodLevel =
-            _blood.GetBloodLevel((targetUid, blood)) * (float) blood.BloodReferenceSolution.Volume;
+            _blood.GetBloodLevel((targetUid, blood)) * (float)blood.BloodReferenceSolution.Volume;
+
         if (targetBloodLevel <= 0f)
         {
             _popup.PopupEntity(Loc.GetString("vampire-drink-target-empty"),

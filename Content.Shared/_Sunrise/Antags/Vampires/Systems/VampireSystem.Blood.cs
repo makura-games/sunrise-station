@@ -2,11 +2,25 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Bible.Components;
 using Content.Shared.Flash;
 using Content.Shared._Sunrise.Antags.Vampires.Components;
+using Content.Shared._Sunrise.Medical;
 
 namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
+    [SubscribeLocalEvent]
+    public void OnGetHealthAnalyzerSatiation(Entity<VampireComponent> ent, ref GetHealthAnalyzerSatiationEvent args)
+    {
+        if (!TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var level))
+            return;
+
+        var fullness = level.MaxBloodFullness > 0f
+            ? Math.Clamp(ent.Comp.BloodFullness / level.MaxBloodFullness, 0f, 1f) * 100f
+            : 0f;
+        args.HungerLevel = fullness;
+        args.ThirstLevel = fullness;
+    }
+
     /// <summary>
     /// Проверяет запас крови и при необходимости сообщает причину отказа.
     /// </summary>

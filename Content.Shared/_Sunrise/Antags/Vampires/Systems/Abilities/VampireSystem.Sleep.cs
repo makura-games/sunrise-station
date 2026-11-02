@@ -10,8 +10,6 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
-    // Заряд тратится при старте, кровь — после успешной концентрации.
-
     [Dependency] private RandomPredictedSystem _random = default!;
 
     [SubscribeLocalEvent]
