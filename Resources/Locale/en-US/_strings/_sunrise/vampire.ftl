@@ -38,17 +38,11 @@ vampire-sleep-target-warning-5 = Something at the edge of your awareness feels w
 vampire-holy-place-burn = The sacred ground sears your unholy flesh!
 action-vampire-not-enough-power = Your power is insufficient.
 
-vampire-power-awakened-message =
-    You have become an awakened vampire.
-    Hunger grows more slowly, and blood strengthens your flesh more effectively. Still, it leaves a strange aftertaste in your mouth. You wonder what they feed these people.
+vampire-power-awakened-message = You have become an awakened vampire.
 
-vampire-power-nightborn-message =
-    You have become a mature vampire.
-    Your body holds more blood, and your strength returns faster. Do not grow conceited; you remain weak and fragile before mere mortals.
+vampire-power-nightborn-message = You have become a mature vampire.
 
-vampire-power-ancient-message =
-    You have become an ancient vampire.
-    Hunger has weakened, and the faith of those poor little mortals can no longer hold you back (probably).
+vampire-power-ancient-message = You have become an ancient vampire.
 
 vampire-role-greeting =
     You have become a vampire. Hide your nature, feed on the crew and complete your objectives.

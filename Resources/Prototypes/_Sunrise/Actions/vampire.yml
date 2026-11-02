@@ -4,7 +4,7 @@
   parent: BaseAction
   id: ActionVampireToggleFangs
   name: Extend Fangs
-  description: Drink from a blood-bearing creature with an empty hand, restoring fullness and mending wounds. Movement, damage, changing hands, a covered mouth or losing range interrupts feeding. Vampires are immune, and faith protects prey until you become Ancient.
+  description: Drink blood with an empty hand to sate hunger and heal wounds.
   components:
   - type: Action
     useDelay: 2
@@ -26,7 +26,7 @@
   parent: BaseAction
   id: ActionVampireGlare
   name: Glare
-  description: Drains the stamina of nearby creatures and paralyzes those in front of you. Blindness prevents its use, while flash protection weakens the effect. Range, strength and charges improve with your power level.
+  description: Exhausts and paralyzes nearby creatures.
   components:
   - type: Action
     useDelay: 12
@@ -49,7 +49,7 @@
   parent: BaseAction
   id: ActionVampireSleep
   name: Sleep
-  description: Puts a humanoid to sleep after a short concentration. Movement, damage or losing proximity interrupts the attempt; protected eyes, a mindshield or faith may protect the target. Blood cost and concentration time decrease with your power level.
+  description: Puts the target to sleep after a brief concentration.
   components:
   - type: Action
     useDelay: 15
@@ -87,7 +87,7 @@
   parent: BaseAction
   id: ActionVampireRejuvenateI
   name: Rejuvenation
-  description: Removes stuns and knockdown and restores stamina even while incapacitated. Its strength scales with vampire power. Does not heal wounds or purge chemicals.
+  description: Removes stuns and knockdown and restores stamina.
   components:
   - type: Action
     useDelay: 8
@@ -112,7 +112,7 @@
   parent: BaseAction
   id: ActionVampireRejuvenateII
   name: Greater Rejuvenation
-  description: Removes stuns and knockdown, restores stamina, purges poisons and gradually heals wounds. Its strength scales with vampire power.
+  description: Removes stuns and knockdown, restores stamina, heals wounds and purges poisons.
   components:
   - type: Action
     useDelay: 7
