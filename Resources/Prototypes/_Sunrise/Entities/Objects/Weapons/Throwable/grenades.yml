@@ -1,8 +1,8 @@
 - type: entity
   id: SunriseEnergyDomeGrenadeSyndie
   parent: [ ImpactGrenadeBase, BaseSyndicateContraband ]
-  name: shield deployment grenade
-  description: An impact grenade that deploys a temporary Syndicate energy shield generator.
+  name: deployable portable shield generator
+  description: A portable generator that creates a temporary Syndicate energy shield when deployed.
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Tools/EnergyDome/syndie_back.rsi
@@ -34,8 +34,8 @@
 - type: entity
   id: SunriseEnergyDomeGrenadeERT
   parent: [ ImpactGrenadeBase, BaseCentcommContraband ]
-  name: ERT shield grenade
-  description: An impact grenade that deploys a temporary Nanotrasen energy shield generator.
+  name: deployable ERT shield generator
+  description: A portable generator that creates a temporary Nanotrasen energy shield when deployed.
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Tools/EnergyDome/nanotrasen_back.rsi

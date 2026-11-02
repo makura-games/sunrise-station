@@ -250,8 +250,8 @@ Comment: Non-entity keys go to `kebab-case`.
 ### Example 10: uplink card title and mechanical description
 
 ```ftl
-uplink-energy-dome-grenade-name = Shield deployment grenade
-uplink-energy-dome-grenade-desc = Deploys a temporary Syndicate energy shield generator on impact.
+uplink-energy-dome-grenade-name = Deployable portable shield generator
+uplink-energy-dome-grenade-desc = Creates a temporary Syndicate energy shield when deployed.
 ```
 
 Comment: `uplink-*-name` is a UI title and starts with a capital letter. Its description may explain the product's behavior; it is not an entity `.desc`.

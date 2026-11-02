@@ -186,8 +186,8 @@ Follow these rules strictly. They set a unified visual style for the game.
 ent-StandardRadio = handheld radio
     .desc = A portable communication device.
 
-uplink-energy-dome-grenade-name = Shield deployment grenade
-uplink-energy-dome-grenade-desc = Deploys a temporary Syndicate energy shield generator on impact.
+uplink-energy-dome-grenade-name = Deployable portable shield generator
+uplink-energy-dome-grenade-desc = Creates a temporary Syndicate energy shield when deployed.
 
 interaction-popup-blocked = { THE($user) } tries to open the door, but it is locked!
 ```
