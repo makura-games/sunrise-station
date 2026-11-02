@@ -48,15 +48,9 @@ public sealed partial class VampireConfigurationComponent : Component
         "VampireObjectiveGroupsStealOnly",
     };
 
-    /// <summary>
-    /// Предел сложности случайной цели.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public float ObjectiveMaxDifficulty = 10f;
 
-    /// <summary>
-    /// Звук приветствия при обращении.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier BriefingSound =
         new SoundPathSpecifier("/Audio/_Sunrise/Ambience/Antag/vampire_start.ogg");
@@ -73,21 +67,12 @@ public sealed partial class VampireConfigurationComponent : Component
         "ActionVampireSleep",
     };
 
-    /// <summary>
-    /// Действие клыков.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId FangsAction = "ActionVampireToggleFangs";
 
-    /// <summary>
-    /// Действие взгляда.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId GlareAction = "ActionVampireGlare";
 
-    /// <summary>
-    /// Действие усыпления цели.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId SleepAction = "ActionVampireSleep";
 
@@ -97,9 +82,6 @@ public sealed partial class VampireConfigurationComponent : Component
     [DataField, AutoNetworkedField]
     public EntProtoId RejuvenateAction = "ActionVampireRejuvenateI";
 
-    /// <summary>
-    /// Улучшенное омоложение.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId RejuvenateUpgradedAction = "ActionVampireRejuvenateII";
 
@@ -109,9 +91,6 @@ public sealed partial class VampireConfigurationComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan FangsUseDelay = TimeSpan.FromSeconds(2);
 
-    /// <summary>
-    /// Максимальный уровень обычной прогрессии.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public VampirePowerLevel MaxProgressionLevel = VampirePowerLevel.Ancient;
 
@@ -133,9 +112,6 @@ public sealed partial class VampireConfigurationComponent : Component
     [DataField, AutoNetworkedField]
     public float SleepMovementThreshold = 0.1f;
 
-    /// <summary>
-    /// Токсин немоты.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public ProtoId<ReagentPrototype> MuteToxinReagent = "MuteToxin";
 
@@ -158,9 +134,6 @@ public sealed partial class VampireConfigurationComponent : Component
         "vampire-sleep-target-warning-5",
     };
 
-    /// <summary>
-    /// Сообщения о новых уровнях силы.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public Dictionary<VampirePowerLevel, LocId> PowerLevelMessages = new()
     {
@@ -169,9 +142,6 @@ public sealed partial class VampireConfigurationComponent : Component
         [VampirePowerLevel.Ancient] = "vampire-power-ancient-message",
     };
 
-    /// <summary>
-    /// Индикатор сытости.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public ProtoId<AlertPrototype> FedAlert = "VampireFed";
 

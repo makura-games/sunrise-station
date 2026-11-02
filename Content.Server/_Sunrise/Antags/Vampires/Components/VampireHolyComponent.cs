@@ -4,15 +4,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Antags.Vampires.Components;
 
-/// <summary>
-/// Святые уязвимости вампира.
-/// </summary>
 [RegisterComponent, AutoGenerateComponentPause]
 public sealed partial class VampireHolyComponent : Component
 {
-    /// <summary>
-    /// Время следующей проверки святых уязвимостей.
-    /// </summary>
     [AutoPausedField]
     public TimeSpan NextUpdate;
 
@@ -28,9 +22,6 @@ public sealed partial class VampireHolyComponent : Component
     [DataField]
     public List<ProtoId<DamageTypePrototype>> BurnDamageTypes = new() { "Heat", "Shock", "Cold", "Caustic" };
 
-    /// <summary>
-    /// Тип урона от святого места.
-    /// </summary>
     [DataField]
     public ProtoId<DamageTypePrototype> HolyPlaceDamageType = "Heat";
 
@@ -70,9 +61,6 @@ public sealed partial class VampireHolyComponent : Component
     [DataField]
     public float HolyPlaceDamage = 3f;
 
-    /// <summary>
-    /// Интервал предупреждений о святом месте.
-    /// </summary>
     [DataField]
     public TimeSpan PopupInterval = TimeSpan.FromSeconds(5);
 
@@ -94,21 +82,12 @@ public sealed partial class VampireHolyComponent : Component
     [DataField]
     public ProtoId<ReagentPrototype> HolyWaterReagent = "Holywater";
 
-    /// <summary>
-    /// Следующий эффект святой воды.
-    /// </summary>
     [AutoPausedField]
     public TimeSpan NextHolyWaterEffect;
 
-    /// <summary>
-    /// Следующий эффект святого места.
-    /// </summary>
     [AutoPausedField]
     public TimeSpan NextHolyPlaceEffect;
 
-    /// <summary>
-    /// Время следующего предупреждения о святом месте.
-    /// </summary>
     [AutoPausedField]
     public TimeSpan NextHolyPlacePopup;
 }

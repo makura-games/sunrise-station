@@ -6,8 +6,6 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
-    // Учёт и расход крови.
-
     /// <summary>
     /// Проверяет требуемый уровень силы и расходует кровь на применение способности.
     /// </summary>
@@ -197,7 +195,6 @@ public sealed partial class VampireSystem
         return true;
     }
 
-    // Возможно сюда можно будеет добавить милир или иные проверки.
     private bool IsProtectedByFaith(EntityUid target)
         => HasComp<BibleUserComponent>(target);
 

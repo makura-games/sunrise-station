@@ -11,21 +11,12 @@ public sealed partial class ActiveVampireRejuvenateComponent : Component
 {
     public override bool SendOnlyToOwner => true;
 
-    /// <summary>
-    /// Оставшееся число шагов лечения.
-    /// </summary>
     [AutoNetworkedField]
     public int ApplicationsRemaining;
 
-    /// <summary>
-    /// Интервал лечения.
-    /// </summary>
     [AutoNetworkedField]
     public TimeSpan ApplicationInterval = TimeSpan.FromSeconds(3.5);
 
-    /// <summary>
-    /// Время следующего шага лечения.
-    /// </summary>
     [AutoNetworkedField, AutoPausedField]
     public TimeSpan NextApplication;
 

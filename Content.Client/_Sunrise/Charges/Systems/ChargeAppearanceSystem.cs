@@ -9,7 +9,6 @@ namespace Content.Client._Sunrise.Charges.Systems;
 /// <summary>
 /// Динамическое обновление цвета иконок в зависимости от количества зарядов.
 /// </summary>
-/// Стереть в пыль если добавят оффы
 public sealed partial class ChargeAppearanceSystem : EntitySystem
 {
     [Dependency] private SharedChargesSystem _charges = default!;

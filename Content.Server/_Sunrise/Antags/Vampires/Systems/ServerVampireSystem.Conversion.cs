@@ -13,8 +13,6 @@ namespace Content.Server._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class ServerVampireSystem
 {
-    // Обращение в вампира и выдача целей.
-
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private NumberObjectiveSystem _number = default!;
     [Dependency] private ObjectivesSystem _objectives = default!;

@@ -44,15 +44,9 @@ public sealed partial class VampireFeedingComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan UpdateDelay = TimeSpan.FromSeconds(1);
 
-    /// <summary>
-    /// Звук укуса.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier BiteSound = new SoundPathSpecifier("/Audio/Effects/bite.ogg");
 
-    /// <summary>
-    /// Эффект укуса.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId BiteEffect = "WeaponArcBite";
 

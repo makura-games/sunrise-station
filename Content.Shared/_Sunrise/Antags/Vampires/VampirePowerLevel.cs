@@ -3,9 +3,6 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Sunrise.Antags.Vampires;
 
-/// <summary>
-/// Уровни силы вампира.
-/// </summary>
 public enum VampirePowerLevel : byte
 {
     Neonate,
@@ -16,9 +13,6 @@ public enum VampirePowerLevel : byte
     Absolute,
 }
 
-/// <summary>
-/// Настройки уровня силы.
-/// </summary>
 [Prototype]
 public sealed partial class VampirePowerLevelPrototype : IPrototype
 {
@@ -26,9 +20,6 @@ public sealed partial class VampirePowerLevelPrototype : IPrototype
     [IdDataField]
     public string ID { get; private set; } = default!;
 
-    /// <summary>
-    /// Уровень силы.
-    /// </summary>
     [DataField(required: true)]
     public VampirePowerLevel Level;
 
@@ -38,52 +29,28 @@ public sealed partial class VampirePowerLevelPrototype : IPrototype
     [DataField]
     public int? RequiredTotalBlood;
 
-    /// <summary>
-    /// Предел сытости.
-    /// </summary>
     [DataField(required: true)]
     public float MaxBloodFullness;
 
-    /// <summary>
-    /// Убывание сытости в секунду.
-    /// </summary>
     [DataField(required: true)]
     public float FullnessDecayPerSecond;
 
-    /// <summary>
-    /// Настройки питания.
-    /// </summary>
     [DataField]
     public VampireFangsLevelSettings Fangs = new();
 
-    /// <summary>
-    /// Настройки взгляда.
-    /// </summary>
     [DataField]
     public VampireGlareLevelSettings Glare = new();
 
-    /// <summary>
-    /// Настройки сна.
-    /// </summary>
     [DataField]
     public VampireSleepLevelSettings Sleep = new();
 
-    /// <summary>
-    /// Настройки омоложения.
-    /// </summary>
     [DataField]
     public VampireRejuvenationLevelSettings Rejuvenation = new();
 }
 
-/// <summary>
-/// Настройки зарядов действия.
-/// </summary>
 [DataDefinition]
 public sealed partial class VampireActionChargeSettings
 {
-    /// <summary>
-    /// Предел зарядов.
-    /// </summary>
     [DataField]
     public int MaxCharges = 1;
 
@@ -100,15 +67,9 @@ public sealed partial class VampireActionChargeSettings
     public TimeSpan UseDelay = TimeSpan.FromSeconds(10);
 }
 
-/// <summary>
-/// Настройки питания.
-/// </summary>
 [DataDefinition]
 public sealed partial class VampireFangsLevelSettings
 {
-    /// <summary>
-    /// Интервал глотков.
-    /// </summary>
     [DataField]
     public TimeSpan SipInterval = TimeSpan.FromSeconds(1.25);
 
@@ -124,9 +85,6 @@ public sealed partial class VampireFangsLevelSettings
     [DataField]
     public float TargetBloodDrain = 20f;
 
-    /// <summary>
-    /// Урон укуса.
-    /// </summary>
     [DataField]
     public DamageSpecifier BiteDamage = new();
 
@@ -136,9 +94,6 @@ public sealed partial class VampireFangsLevelSettings
     [DataField]
     public float BleedAmount = 1f;
 
-    /// <summary>
-    /// Дистанция кормления.
-    /// </summary>
     [DataField]
     public float Range = 1.5f;
 
@@ -148,28 +103,16 @@ public sealed partial class VampireFangsLevelSettings
     [DataField]
     public float MaxBloodPerTarget = 200f;
 
-    /// <summary>
-    /// Лечение за глоток, пропорциональное полученной крови.
-    /// </summary>
     [DataField]
     public DamageSpecifier Healing = new();
 }
 
-/// <summary>
-/// Настройки взгляда.
-/// </summary>
 [DataDefinition]
 public sealed partial class VampireGlareLevelSettings
 {
-    /// <summary>
-    /// Настройки действия.
-    /// </summary>
     [DataField]
     public VampireActionChargeSettings Action = new();
 
-    /// <summary>
-    /// Дальность взгляда.
-    /// </summary>
     [DataField]
     public float Range = 1f;
 
@@ -204,45 +147,24 @@ public sealed partial class VampireGlareLevelSettings
     public float FlashProtectionEffectScale;
 }
 
-/// <summary>
-/// Настройки усыпления цели.
-/// </summary>
 [DataDefinition]
 public sealed partial class VampireSleepLevelSettings
 {
-    /// <summary>
-    /// Настройки действия.
-    /// </summary>
     [DataField]
     public VampireActionChargeSettings Action = new();
 
-    /// <summary>
-    /// Длительность концентрации до наложения сна.
-    /// </summary>
     [DataField]
     public TimeSpan ChannelTime = TimeSpan.FromSeconds(6);
 
-    /// <summary>
-    /// Дальность начала.
-    /// </summary>
     [DataField]
     public float TargetRange = 2f;
 
-    /// <summary>
-    /// Дистанция прерывания.
-    /// </summary>
     [DataField]
     public float BreakRange = 2.5f;
 
-    /// <summary>
-    /// Длительность сна.
-    /// </summary>
     [DataField]
     public TimeSpan Duration = TimeSpan.FromSeconds(20);
 
-    /// <summary>
-    /// Стоимость в крови.
-    /// </summary>
     [DataField]
     public int BloodCost = 20;
 
@@ -253,21 +175,12 @@ public sealed partial class VampireSleepLevelSettings
     public bool IgnoresFaith;
 }
 
-/// <summary>
-/// Настройки омоложения.
-/// </summary>
 [DataDefinition]
 public sealed partial class VampireRejuvenationLevelSettings
 {
-    /// <summary>
-    /// Настройки действия.
-    /// </summary>
     [DataField]
     public VampireActionChargeSettings Action = new();
 
-    /// <summary>
-    /// Восстановление выносливости.
-    /// </summary>
     [DataField]
     public float StaminaRestoreAmount;
 
@@ -283,15 +196,9 @@ public sealed partial class VampireRejuvenationLevelSettings
     [DataField]
     public int HealApplications;
 
-    /// <summary>
-    /// Интервал лечения.
-    /// </summary>
     [DataField]
     public TimeSpan HealInterval = TimeSpan.FromSeconds(3.5);
 
-    /// <summary>
-    /// Лечение за применение.
-    /// </summary>
     [DataField]
     public DamageSpecifier Healing = new();
 }

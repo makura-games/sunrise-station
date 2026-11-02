@@ -10,8 +10,6 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
-    // Общие проверки и модификаторы вампира.
-
     [SubscribeLocalEvent]
     public static void OnRefreshMovementSpeed(
         Entity<VampireComponent> ent,

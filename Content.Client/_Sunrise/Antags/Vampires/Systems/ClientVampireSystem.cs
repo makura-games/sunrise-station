@@ -8,8 +8,6 @@ namespace Content.Client._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class ClientVampireSystem : EntitySystem
 {
-    // Отображение крови и статуса вампира.
-
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
 

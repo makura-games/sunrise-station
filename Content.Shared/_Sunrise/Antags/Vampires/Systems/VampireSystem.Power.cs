@@ -6,8 +6,6 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
-    // Прогрессия силы вампира.
-
     private void UpdatePowerLevel(Entity<VampireComponent> ent, bool syncActions = true)
     {
         if (!_configurationQuery.TryComp(ent, out var configuration) ||

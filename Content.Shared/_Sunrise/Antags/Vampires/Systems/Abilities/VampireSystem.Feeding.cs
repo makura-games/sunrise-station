@@ -21,8 +21,6 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
-    // Укусы и питание кровью.
-
     [Dependency] private BloodstreamSystem _blood = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -89,7 +87,7 @@ public sealed partial class VampireSystem
         var bloodEfficiency = bloodSource.Value;
 
         if (TryComp<MobStateComponent>(targetUid, out var mobState) &&
-            mobState.CurrentState == Content.Shared.Mobs.MobState.Dead)
+            mobState.CurrentState == Mobs.MobState.Dead)
         {
             bloodEfficiency *= bloodSource.CorpseMultiplier;
         }
@@ -139,7 +137,6 @@ public sealed partial class VampireSystem
             return;
         }
 
-        // BloodstreamSystem меняет состав напрямую; уведомляем систему растворов для синхронизации и отката.
         _solution.UpdateChemicals(blood.BloodSolution!.Value, needsReactionsProcessing: false);
         AddBlood(ent, actualSipGain, targetUid);
 
@@ -171,7 +168,6 @@ public sealed partial class VampireSystem
 
         if (ent.Comp.FangsExtended && currentDrunkFromTarget < feeding.MaxBloodPerTarget)
         {
-            // Повторяем тот же DoAfter, чтобы его ID и состояние одинаково откатывались на клиенте и сервере.
             args.Repeat = true;
             feeding.DrinkDoAfter = args.DoAfter.Index;
             return;
@@ -190,7 +186,6 @@ public sealed partial class VampireSystem
     [SubscribeLocalEvent]
     public void OnBloodSourceTerminating(Entity<BloodSourceComponent> ent, ref EntityTerminatingEvent args)
     {
-        // Удалённую сущность нельзя преобразовать в NetEntity при следующем снимке истории укусов.
         var query = EntityQueryEnumerator<VampireFeedingComponent>();
         while (query.MoveNext(out var uid, out var feeding))
         {

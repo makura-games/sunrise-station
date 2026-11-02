@@ -12,8 +12,6 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
-    // Выдача и настройка действий.
-
     [Dependency] private IComponentFactory _componentFactory = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
     [Dependency] private ActionGrantSystem _actionGrant = default!;

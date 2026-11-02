@@ -14,8 +14,6 @@ namespace Content.Server._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class ServerVampireSystem
 {
-    // Урон от святынь.
-
     [Dependency] private ContainerSystem _container = default!;
     [Dependency] private EntityQuery<VampireHolyComponent> _holyQuery = default!;
     [Dependency] private EntityQuery<MobStateComponent> _mobStateQuery = default!;

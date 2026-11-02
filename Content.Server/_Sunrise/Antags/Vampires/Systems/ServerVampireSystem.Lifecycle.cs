@@ -11,8 +11,6 @@ namespace Content.Server._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class ServerVampireSystem
 {
-    // Создание и удаление состояния вампира.
-
     [Dependency] private BodySystem _body = default!;
     [Dependency] private MetabolizerSystem _metabolizer = default!;
 

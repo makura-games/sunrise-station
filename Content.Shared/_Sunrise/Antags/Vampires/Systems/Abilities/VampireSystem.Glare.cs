@@ -11,8 +11,6 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
-    // Вампирский взгляд.
-
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private EntityQuery<StaminaComponent> _staminaQuery = default!;
     [Dependency] private EntityQuery<KnockedDownComponent> _knockedDownQuery = default!;
@@ -28,9 +26,6 @@ public sealed partial class VampireSystem
             args.Action);
     }
 
-    /// <summary>
-    /// Пытается применить вампирский взгляд.
-    /// </summary>
     public bool TryGlare(
         Entity<VampireComponent?> ent,
         EntityUid action,
@@ -51,9 +46,6 @@ public sealed partial class VampireSystem
         return true;
     }
 
-    /// <summary>
-    /// Проверяет, может ли вампир применить вампирский взгляд.
-    /// </summary>
     public bool CanGlare(
         Entity<VampireComponent?> ent,
         EntityUid action,

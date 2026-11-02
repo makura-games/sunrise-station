@@ -6,22 +6,13 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Sunrise.Antags.Vampires.Components;
 
-/// <summary>
-/// Сетевое состояние вампира.
-/// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState(true, fieldDeltas: true), AutoGenerateComponentPause]
 public sealed partial class VampireComponent : Component
 {
-    /// <summary>
-    /// Статусная иконка вампира.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public ProtoId<FactionIconPrototype> StatusIcon = "VampireMasterIcon";
 
-    /// <summary>
-    /// Индикатор запаса крови.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public ProtoId<AlertPrototype> BloodAlert = "VampireBlood";
 
@@ -36,9 +27,6 @@ public sealed partial class VampireComponent : Component
     [AutoNetworkedField]
     public int DrunkBlood;
 
-    /// <summary>
-    /// Клыки выпущены.
-    /// </summary>
     [AutoNetworkedField]
     public bool FangsExtended;
 
@@ -48,15 +36,9 @@ public sealed partial class VampireComponent : Component
     [AutoNetworkedField]
     public float BloodFullness = 90f;
 
-    /// <summary>
-    /// Следующий пересчёт голода.
-    /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextBloodUpdate;
 
-    /// <summary>
-    /// Время предыдущего пересчёта голода.
-    /// </summary>
     [AutoNetworkedField, AutoPausedField]
     public TimeSpan LastBloodUpdate;
 
@@ -78,17 +60,11 @@ public sealed partial class VampireComponent : Component
     [DataField]
     public float StarvationSprintSpeedModifier = 0.7f;
 
-    /// <summary>
-    /// Текущий уровень силы.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public VampirePowerLevel PowerLevel = VampirePowerLevel.Neonate;
 
 }
 
-/// <summary>
-/// Слои счётчика крови.
-/// </summary>
 public enum VampireVisualLayers : byte
 {
     Digit1,
