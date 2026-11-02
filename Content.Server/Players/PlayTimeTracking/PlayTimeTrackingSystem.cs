@@ -181,7 +181,7 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
 
     private void OnStationJobsGetCandidates(ref StationJobsGetCandidatesEvent ev)
     {
-        RemoveDisallowedJobs(ev.Player, ev.Jobs, ev.Profile); // Sunrise-Edit
+        RemoveDisallowedJobs(ev.Player, ev.Jobs);
     }
 
     private void OnIsRoleAllowed(ref IsRoleAllowedEvent ev)
@@ -334,7 +334,7 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
         return roles;
     }
 
-    public void RemoveDisallowedJobs(NetUserId userId, List<ProtoId<JobPrototype>> jobs, HumanoidCharacterProfile? profile = null) // Sunrise-Edit
+    public void RemoveDisallowedJobs(NetUserId userId, List<ProtoId<JobPrototype>> jobs)
     {
         if (!_cfg.GetCVar(CCVars.GameRoleTimers))
             return;
@@ -353,14 +353,10 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
             : [];
         // Sunrise-Sponsors-End
 
-        // Sunrise added start - при распределении используем переданный профиль без обращения к preferences
-        profile ??= (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(userId).SelectedCharacter;
-        // Sunrise added end
-
         for (var i = 0; i < jobs.Count; i++)
         {
             if (ProtoMan.Resolve(jobs[i], out var job)
-                && JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, ProtoMan, profile, sponsorPrototypes)) // Sunrise-Sponsors
+                && JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, ProtoMan, (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(userId).SelectedCharacter, sponsorPrototypes)) // Sunrise-Sponsors
             {
                 continue;
             }

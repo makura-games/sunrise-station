@@ -336,7 +336,7 @@ public sealed partial class StationJobsSystem
         {
             var roleBans = _banManager.GetJobBans(player);
             var profileJobs = profile.JobPriorities.Keys.Select(k => new ProtoId<JobPrototype>(k)).ToList();
-            var ev = new StationJobsGetCandidatesEvent(player, profileJobs) { Profile = profile }; // Sunrise-Edit
+            var ev = new StationJobsGetCandidatesEvent(player, profileJobs);
             RaiseLocalEvent(ref ev);
 
             // Shouldn't happen but you know :P
@@ -449,13 +449,13 @@ public sealed partial class StationJobsSystem
         var candidates = new HashSet<NetUserId>();
         var antags = _antag.GetAntagJobs();
 
-        foreach (var (userId, profile) in profiles) // Sunrise-Edit
+        foreach (var (userId, _) in profiles)
         {
             if (!_player.TryGetSessionById(userId, out var session))
                 continue;
 
             var jobs = new List<ProtoId<JobPrototype>> { job };
-            var ev = new StationJobsGetCandidatesEvent(userId, jobs) { Profile = profile }; // Sunrise-Edit
+            var ev = new StationJobsGetCandidatesEvent(userId, jobs);
             RaiseLocalEvent(ref ev);
 
             if (!jobs.Contains(job))
