@@ -3492,14 +3492,11 @@
     - id: BrokenEnergyShield
       prob: 0.5
       orGroup: EnergyShieldPool
-    - id: EnergyShieldBiocode
-      prob: 0.5
-      orGroup: EnergyShieldPool
-    - id: EnergyShield
-      prob: 0.75
-      orGroup: EnergyShieldPool
     - id: SunriseEnergyShield
       prob: 0.2
+      orGroup: EnergyShieldPool
+    - id: EnergyShield
+      prob: 0.33
       orGroup: EnergyShieldPool
     - id: GrenadeStinger
       amount: 2
