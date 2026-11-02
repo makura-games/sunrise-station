@@ -85,3 +85,15 @@ public sealed partial class VampireToggleFangsActionEvent : InstantActionEvent;
 /// </summary>
 [ByRefEvent]
 public readonly record struct VampirePowerLevelChangedEvent(VampirePowerLevel Level);
+
+/// <summary>
+/// Общая инициализация вампира завершена; сервер может настроить метаболизм и уязвимости.
+/// </summary>
+[ByRefEvent]
+public readonly record struct VampireStartupEvent;
+
+/// <summary>
+/// Вампир отключается; сервер освобождает своё состояние до удаления общих компонентов.
+/// </summary>
+[ByRefEvent]
+public readonly record struct VampireShutdownEvent;

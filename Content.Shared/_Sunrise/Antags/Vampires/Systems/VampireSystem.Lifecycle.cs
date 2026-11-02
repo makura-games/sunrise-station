@@ -1,4 +1,5 @@
 using Content.Shared._Sunrise.Antags.Vampires.Components;
+using Content.Shared._Sunrise.Antags.Vampires.Events;
 
 namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
@@ -21,6 +22,9 @@ public sealed partial class VampireSystem
         UpdateVampireAlert(ent);
         UpdateVampireFedAlert(ent);
         _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
+
+        var ev = new VampireStartupEvent();
+        RaiseLocalEvent(ent, ref ev);
     }
 
     [SubscribeLocalEvent]
@@ -28,6 +32,9 @@ public sealed partial class VampireSystem
     {
         if (_net.IsClient)
             return;
+
+        var ev = new VampireShutdownEvent();
+        RaiseLocalEvent(ent, ref ev);
 
         if (TryComp<VampireConfigurationComponent>(ent, out var configuration))
             _actionGrant.RemoveActions((ent.Owner, null), configuration.BaseActions);

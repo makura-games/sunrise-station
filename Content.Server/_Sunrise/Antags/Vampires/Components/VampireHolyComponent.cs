@@ -20,13 +20,13 @@ public sealed partial class VampireHolyComponent : Component
     /// Типы физического урона.
     /// </summary>
     [DataField]
-    public List<ProtoId<DamageTypePrototype>> BruteDamageTypes = ["Blunt", "Slash", "Piercing"];
+    public List<ProtoId<DamageTypePrototype>> BruteDamageTypes = new() { "Blunt", "Slash", "Piercing" };
 
     /// <summary>
     /// Типы ожогового урона.
     /// </summary>
     [DataField]
-    public List<ProtoId<DamageTypePrototype>> BurnDamageTypes = ["Heat", "Shock", "Cold", "Caustic"];
+    public List<ProtoId<DamageTypePrototype>> BurnDamageTypes = new() { "Heat", "Shock", "Cold", "Caustic" };
 
     /// <summary>
     /// Урон святого места.

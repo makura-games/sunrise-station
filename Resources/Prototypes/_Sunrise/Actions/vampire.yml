@@ -1,4 +1,4 @@
-# Base abilities
+# Базовые способности
 
 - type: entity
   parent: BaseAction
@@ -10,12 +10,14 @@
     useDelay: 2
     itemIconStyle: NoItem
     priority: 1
-    icon:
-      sprite: _Sunrise/Vampire/actions_vampire.rsi
-      state: fangs_retracted
-    iconOn:
-      sprite: _Sunrise/Vampire/actions_vampire.rsi
-      state: fangs_extended
+  - type: Sprite
+    sprite: _Sunrise/Vampire/actions_vampire.rsi
+    layers:
+    - state: fangs_retracted
+      map: ["enum.ActionVisuals.Icon"]
+    - state: fangs_extended
+      map: ["enum.ActionVisuals.IconToggled"]
+      visible: false
   - type: InstantAction
     event: !type:VampireToggleFangsActionEvent {}
   - type: VampireAction
@@ -30,9 +32,11 @@
     useDelay: 12
     itemIconStyle: NoItem
     priority: 2
-    icon:
-      sprite: _Sunrise/Vampire/actions_vampire.rsi
-      state: glare
+  - type: Sprite
+    sprite: _Sunrise/Vampire/actions_vampire.rsi
+    layers:
+    - state: glare
+      map: ["enum.ActionVisuals.Icon"]
   - type: InstantAction
     event: !type:VampireGlareActionEvent {}
   - type: LimitedCharges
@@ -51,9 +55,17 @@
     useDelay: 15
     itemIconStyle: NoItem
     priority: 25
-    icon:
-      sprite: _Sunrise/Vampire/actions_vampire.rsi
-      state: sleep_icon
+  - type: Sprite
+    sprite: _Sunrise/Vampire/actions_vampire.rsi
+    layers:
+    - state: sleep_icon
+      map: ["enum.ActionVisuals.Icon"]
+  - type: GenericVisualizer
+    visuals:
+      enum.ActionState.Toggled:
+        enum.ActionVisuals.Icon:
+          True: { visible: true }
+          False: { visible: true }
   - type: TargetAction
     range: 2
     checkCanAccess: false
@@ -83,9 +95,11 @@
     priority: 3
     checkCanInteract: false
     checkConsciousness: false
-    icon:
-      sprite: _Sunrise/Vampire/actions_vampire.rsi
-      state: rejuvinate
+  - type: Sprite
+    sprite: _Sunrise/Vampire/actions_vampire.rsi
+    layers:
+    - state: rejuvinate
+      map: ["enum.ActionVisuals.Icon"]
   - type: InstantAction
     event: !type:VampireRejuvenateIActionEvent {}
   - type: LimitedCharges
@@ -106,9 +120,11 @@
     priority: 4
     checkCanInteract: false
     checkConsciousness: false
-    icon:
-      sprite: _Sunrise/Vampire/actions_vampire.rsi
-      state: rejuvinate
+  - type: Sprite
+    sprite: _Sunrise/Vampire/actions_vampire.rsi
+    layers:
+    - state: rejuvinate
+      map: ["enum.ActionVisuals.Icon"]
   - type: InstantAction
     event: !type:VampireRejuvenateIiActionEvent {}
   - type: LimitedCharges

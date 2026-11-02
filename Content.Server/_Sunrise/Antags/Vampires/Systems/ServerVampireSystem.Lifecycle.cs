@@ -4,7 +4,7 @@ using Content.Shared.Body;
 using Content.Shared.Metabolism;
 using Content.Shared.Nutrition.Components;
 using Content.Shared._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires.Systems;
+using Content.Shared._Sunrise.Antags.Vampires.Events;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Antags.Vampires.Systems;
@@ -16,8 +16,8 @@ public sealed partial class ServerVampireSystem
     [Dependency] private BodySystem _body = default!;
     [Dependency] private MetabolizerSystem _metabolizer = default!;
 
-    [SubscribeLocalEvent(after: [typeof(VampireSystem)])]
-    public void OnStartup(Entity<VampireComponent> ent, ref ComponentStartup args)
+    [SubscribeLocalEvent]
+    public void OnStartup(Entity<VampireComponent> ent, ref VampireStartupEvent args)
     {
         var configuration = EnsureComp<VampireConfigurationComponent>(ent);
         EnsureComp<VampireHolyComponent>(ent);
@@ -30,7 +30,7 @@ public sealed partial class ServerVampireSystem
     }
 
     [SubscribeLocalEvent]
-    public void OnShutdown(Entity<VampireComponent> ent, ref ComponentShutdown args)
+    public void OnShutdown(Entity<VampireComponent> ent, ref VampireShutdownEvent args)
     {
         if (TryComp<VampireConfigurationComponent>(ent, out var configuration))
             SetVampireMetabolism(ent, configuration, enabled: false);

@@ -17,3 +17,7 @@
 - type: objectiveIssuer
   id: SunriseBloodCult
   name: objective-issuer-cult
+
+- type: objectiveIssuer
+  id: SunriseVampire
+  name: objective-issuer-vampire

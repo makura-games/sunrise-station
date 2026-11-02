@@ -5,7 +5,7 @@
   components:
   - type: Objective
     difficulty: 1.5
-    issuer: objective-issuer-vampire
+    issuer: SunriseVampire
   - type: RoleRequirement
     roles:
     - VampireRole
@@ -132,7 +132,7 @@
       state: survive_icon
 
 - type: entity
-  parent: [BaseVampireObjective, BaseKillObjective]
+  parent: [BaseVampireObjective, BaseKillRandomObjective]
   id: VampireKillRandomPersonObjective
   description: Do it however you like, just make sure they do not reach Central Command.
   components:
@@ -141,7 +141,6 @@
     unique: false
   - type: TargetObjective
     title: objective-condition-kill-person-title
-  - type: PickRandomPerson
   - type: KillPersonCondition
     requireMaroon: true
 

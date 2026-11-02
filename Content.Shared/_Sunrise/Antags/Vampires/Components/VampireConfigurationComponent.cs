@@ -32,21 +32,21 @@ public sealed partial class VampireConfigurationComponent : Component
     /// Обязательные цели.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<EntProtoId> Objectives =
-    [
+    public List<EntProtoId> Objectives = new()
+    {
         "VampireKillRandomPersonObjective",
         "VampireDrainObjective",
-    ];
+    };
 
     /// <summary>
     /// Группы случайных целей.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<ProtoId<WeightedRandomPrototype>> ObjectiveGroups =
-    [
+    public List<ProtoId<WeightedRandomPrototype>> ObjectiveGroups = new()
+    {
         "VampireObjectiveGroupsStateOnly",
         "VampireObjectiveGroupsStealOnly",
-    ];
+    };
 
     /// <summary>
     /// Предел сложности случайной цели.
@@ -65,13 +65,13 @@ public sealed partial class VampireConfigurationComponent : Component
     /// Базовые действия.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<EntProtoId> BaseActions =
-    [
+    public List<EntProtoId> BaseActions = new()
+    {
         "ActionVampireToggleFangs",
         "ActionVampireGlare",
         "ActionVampireRejuvenateI",
         "ActionVampireSleep",
-    ];
+    };
 
     /// <summary>
     /// Действие клыков.
@@ -149,14 +149,14 @@ public sealed partial class VampireConfigurationComponent : Component
     /// Предупреждения цели сна.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<LocId> SleepTargetMessages =
-    [
+    public List<LocId> SleepTargetMessages = new()
+    {
         "vampire-sleep-target-warning-1",
         "vampire-sleep-target-warning-2",
         "vampire-sleep-target-warning-3",
         "vampire-sleep-target-warning-4",
         "vampire-sleep-target-warning-5",
-    ];
+    };
 
     /// <summary>
     /// Сообщения о новых уровнях силы.
