@@ -17,8 +17,7 @@ public sealed partial class VampireSystem
         EnsureComp<VampireFeedingComponent>(ent);
         UpdatePowerLevel(ent, syncActions: false);
         ApplyPowerLevelSettings(ent);
-        GrantBaseActions(ent, configuration);
-        SyncVampireActions(ent);
+        _actionGrant.AddActions((ent.Owner, null), configuration.BaseActions);
         UpdateVampireAlert(ent);
         UpdateVampireFedAlert(ent);
         _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
@@ -29,6 +28,9 @@ public sealed partial class VampireSystem
     {
         if (_net.IsClient)
             return;
+
+        if (TryComp<VampireConfigurationComponent>(ent, out var configuration))
+            _actionGrant.RemoveActions((ent.Owner, null), configuration.BaseActions);
 
         RemoveVampireActions(ent);
         RemCompDeferred<VampireFeedingComponent>(ent);

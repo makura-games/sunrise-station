@@ -1,3 +1,4 @@
+using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
@@ -15,14 +16,12 @@ public sealed partial class VampireSystem
 
     [Dependency] private IComponentFactory _componentFactory = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
+    [Dependency] private ActionGrantSystem _actionGrant = default!;
 
-    [SubscribeLocalEvent]
-    public void OnActionsComponentStartup(Entity<ActionsComponent> ent, ref ComponentStartup args)
+    [SubscribeLocalEvent(after: [typeof(ActionGrantSystem)])]
+    public void OnMapInit(Entity<VampireComponent> ent, ref MapInitEvent args)
     {
-        if (!TryComp<VampireComponent>(ent, out var vampire))
-            return;
-
-        SyncVampireActions((ent.Owner, vampire));
+        SyncVampireActions(ent);
     }
 
     [SubscribeLocalEvent]
@@ -36,7 +35,7 @@ public sealed partial class VampireSystem
 
     private void SyncVampireActions(Entity<VampireComponent> ent)
     {
-        if (_net.IsClient)
+        if (_net.IsClient || LifeStage(ent) < EntityLifeStage.MapInitialized)
             return;
 
         if (!TryComp<VampireConfigurationComponent>(ent, out var configuration))
@@ -95,16 +94,6 @@ public sealed partial class VampireSystem
             }
 
             TryRefreshVampireAction(ent, configuration, prototype.ID, action);
-        }
-    }
-
-    private void GrantBaseActions(
-        Entity<VampireComponent> ent,
-        VampireConfigurationComponent configuration)
-    {
-        foreach (var actionId in configuration.BaseActions)
-        {
-            _actions.AddAction(ent.Owner, actionId, ent.Owner);
         }
     }
 
