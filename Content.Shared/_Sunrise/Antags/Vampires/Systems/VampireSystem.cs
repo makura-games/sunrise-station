@@ -11,7 +11,6 @@ using Content.Shared.Stunnable;
 using Content.Shared._Sunrise.Antags.Vampires.Components;
 using Content.Shared._Sunrise.Antags.Vampires.Events;
 using Content.Shared._Sunrise.Body.Components;
-using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;

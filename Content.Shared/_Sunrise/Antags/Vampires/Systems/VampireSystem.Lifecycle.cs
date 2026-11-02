@@ -1,5 +1,4 @@
 using Content.Shared._Sunrise.Antags.Vampires.Components;
-using Robust.Shared.GameStates;
 
 namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 

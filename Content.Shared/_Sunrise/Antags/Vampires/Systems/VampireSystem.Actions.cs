@@ -244,7 +244,7 @@ public sealed partial class VampireSystem
     private VampirePowerLevel GetRequiredPowerLevel(EntProtoId actionId)
     {
         if (_prototype.TryIndex<EntityPrototype>(actionId, out var prototype) &&
-            prototype.TryGetComponent<VampireActionComponent>(out var vampireAction, _componentFactory))
+            prototype.TryComp<VampireActionComponent>(out var vampireAction, _componentFactory))
         {
             return vampireAction.RequiredPowerLevel;
         }

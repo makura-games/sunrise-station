@@ -1,7 +1,6 @@
 using Content.Shared.Damage;
 using Content.Shared._Sunrise.Antags.Vampires.Components;
 using Content.Shared._Sunrise.Antags.Vampires.Events;
-using Content.Shared._Sunrise.Antags.Vampires;
 
 namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 

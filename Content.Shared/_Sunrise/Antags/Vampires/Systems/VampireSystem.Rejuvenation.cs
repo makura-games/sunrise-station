@@ -7,7 +7,6 @@ using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared._Sunrise.Antags.Vampires.Components;
 using Content.Shared._Sunrise.Antags.Vampires.Events;
-using Content.Shared._Sunrise.Antags.Vampires;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
