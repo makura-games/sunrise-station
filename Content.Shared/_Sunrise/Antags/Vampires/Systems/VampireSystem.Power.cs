@@ -1,4 +1,3 @@
-using Content.Shared.Damage;
 using Content.Shared._Sunrise.Antags.Vampires.Components;
 using Content.Shared._Sunrise.Antags.Vampires.Events;
 
@@ -46,29 +45,10 @@ public sealed partial class VampireSystem
 
     private void ApplyPowerLevelSettings(Entity<VampireComponent> ent)
     {
-        if (!TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var level) ||
-            !_feedingQuery.TryComp(ent, out var feeding))
-        {
+        if (!TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var level))
             return;
-        }
 
-        var fangs = level.Fangs;
-
-        feeding.MaxBloodFullness = level.MaxBloodFullness;
-        feeding.FullnessDecayPerSecond = level.FullnessDecayPerSecond;
-        ent.Comp.BloodFullness = MathF.Min(ent.Comp.BloodFullness, feeding.MaxBloodFullness);
-
-        feeding.SipInterval = fangs.SipInterval;
-        feeding.BloodGainPerSip = fangs.BloodGain;
-        feeding.TargetBloodDrainPerSip = fangs.TargetBloodDrain;
-        feeding.BiteDamage = new DamageSpecifier(fangs.BiteDamage);
-        feeding.BiteBleedAmount = fangs.BleedAmount;
-        feeding.BiteDistanceThreshold = fangs.Range;
-        feeding.MaxBloodPerTarget = fangs.MaxBloodPerTarget;
-        feeding.Healing = new DamageSpecifier(fangs.Healing);
-
-        Dirty(ent, feeding);
-
+        ent.Comp.BloodFullness = MathF.Min(ent.Comp.BloodFullness, level.MaxBloodFullness);
         DirtyField(ent, ent.Comp, nameof(VampireComponent.BloodFullness));
         UpdateVampireFedAlert(ent);
     }

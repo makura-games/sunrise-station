@@ -11,131 +11,37 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
-    // Омоложение; улучшенная версия также очищает кровь и лечит.
-
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     [SubscribeLocalEvent]
-    public void OnRejuvenate(
-        Entity<VampireComponent> ent,
-        ref VampireRejuvenateIActionEvent args)
+    public void OnRejuvenate(Entity<VampireComponent> ent, ref VampireRejuvenateActionEvent args)
     {
-        if (args.Handled)
-            return;
-
-        args.Handled = TryRejuvenate(
-            ent.AsNullable(),
-            args.Action.Owner,
-            upgraded: false);
+        if (!args.Handled)
+            args.Handled = TryRejuvenate(ent.AsNullable(), args.Action);
     }
 
-    [SubscribeLocalEvent]
-    public void OnRejuvenateUpgraded(
-        Entity<VampireComponent> ent,
-        ref VampireRejuvenateIiActionEvent args)
+    public bool TryRejuvenate(Entity<VampireComponent?> ent, EntityUid action, bool quiet = false)
     {
-        if (args.Handled)
-            return;
-
-        args.Handled = TryRejuvenate(
-            ent.AsNullable(),
-            args.Action.Owner,
-            upgraded: true);
-    }
-
-    public bool TryRejuvenate(
-        Entity<VampireComponent?> ent,
-        EntityUid action,
-        bool upgraded)
-    {
-        if (!Resolve(ent, ref ent.Comp, false))
-            return false;
-
-        if (!CanRejuvenate(
-                (ent.Owner, ent.Comp),
-                action,
-                upgraded))
+        if (!Resolve(ent, ref ent.Comp, false) ||
+            !CanUseVampireAction((ent, ent.Comp), action, out var configuration, out var level, out var bloodCost, quiet) ||
+            !TrySpendBlood((ent, ent.Comp), bloodCost, showPopup: !quiet))
         {
             return false;
         }
 
-        if (!CheckAndConsumeBloodCost(
-                (ent.Owner, ent.Comp),
-                action))
-        {
-            return false;
-        }
-
-        DoRejuvenate(
-            (ent.Owner, ent.Comp),
-            upgraded);
-
+        DoRejuvenate((ent, ent.Comp), configuration, level.Rejuvenation);
         return true;
-    }
-
-    public bool CanRejuvenate(
-        Entity<VampireComponent> ent,
-        EntityUid action,
-        bool upgraded,
-        bool quiet = false)
-    {
-        if (!TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out _))
-            return false;
-
-        if (upgraded &&
-            !_configurationQuery.HasComp(ent))
-        {
-            return false;
-        }
-
-        if (!TryResolveVampireActionCost(
-                ent,
-                action,
-                0,
-                out var bloodCost,
-                showPopup: !quiet))
-        {
-            return false;
-        }
-
-        return CanSpendBlood(
-            ent,
-            bloodCost,
-            showPopup: !quiet);
     }
 
     private void DoRejuvenate(
         Entity<VampireComponent> ent,
-        bool upgraded)
+        VampireConfigurationComponent configuration,
+        VampireRejuvenationLevelSettings settings)
     {
-        if (!TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var level))
-            return;
-
-        var settings = level.Rejuvenation;
-
-        RemoveRejuvenateStuns(ent.Owner);
-        _stamina.RestoreStamina(
-            ent.Owner,
-            settings.StaminaRestoreAmount);
-
-        if (!upgraded)
-            return;
-
-        if (!_configurationQuery.TryComp(
-                ent,
-                out var configuration))
-        {
-            return;
-        }
-
-        PurgeRejuvenateReagents(
-            ent.Owner,
-            settings.ReagentPurgeAmount,
-            configuration.RejuvenatePurgeMetabolismStage);
-
-        StartRejuvenateHealing(
-            ent.Owner,
-            settings);
+        RemoveRejuvenateStuns(ent);
+        _stamina.RestoreStamina((ent.Owner, null), settings.StaminaRestoreAmount);
+        PurgeRejuvenateReagents(ent, settings.ReagentPurgeAmount, configuration.RejuvenatePurgeMetabolismStage);
+        StartRejuvenateHealing(ent, settings);
     }
 
     private void RemoveRejuvenateStuns(EntityUid uid)

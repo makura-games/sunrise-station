@@ -1,4 +1,3 @@
-using Content.Shared.Body.Components;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Systems;
@@ -66,7 +65,7 @@ public sealed partial class VampireSystem
         }
 
         if (!_bloodstreamQuery.TryComp(target, out var bloodstream) ||
-            !HasBloodToDrink((target, bloodstream)))
+            _blood.GetBloodLevel((target, bloodstream)) <= 0f)
         {
             ShowDrinkPopup(ent, target, "vampire-drink-target-empty");
             return false;
@@ -86,7 +85,4 @@ public sealed partial class VampireSystem
             ent.Owner,
             PopupType.MediumCaution);
     }
-
-    private bool HasBloodToDrink(Entity<BloodstreamComponent?> target)
-        => _blood.GetBloodLevel(target) > 0f;
 }

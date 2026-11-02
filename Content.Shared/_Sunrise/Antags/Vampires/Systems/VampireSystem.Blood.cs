@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Bible.Components;
 using Content.Shared.Flash;
 using Content.Shared._Sunrise.Antags.Vampires.Components;
@@ -6,20 +7,6 @@ namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
-    /// <summary>
-    /// Проверяет требуемый уровень силы и расходует кровь на применение способности.
-    /// </summary>
-    public bool CheckAndConsumeBloodCost(
-        Entity<VampireComponent> ent,
-        EntityUid? actionEntity = null,
-        int bloodCost = 0)
-    {
-        if (!TryResolveVampireActionCost(ent, actionEntity, bloodCost, out var resolvedCost))
-            return false;
-
-        return TrySpendBlood(ent, resolvedCost);
-    }
-
     /// <summary>
     /// Проверяет запас крови и при необходимости сообщает причину отказа.
     /// </summary>
@@ -67,7 +54,8 @@ public sealed partial class VampireSystem
         bool countTotalBlood = true,
         bool recordTarget = true)
     {
-        if (amount <= 0f || !_feedingQuery.TryComp(ent, out var feeding))
+        if (amount <= 0f || !_feedingQuery.TryComp(ent, out var feeding) ||
+            !TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var level))
             return 0;
 
         Dirty(ent, feeding);
@@ -101,7 +89,7 @@ public sealed partial class VampireSystem
                 feeding.UniqueVictims++;
         }
 
-        ent.Comp.BloodFullness = MathF.Min(feeding.MaxBloodFullness, ent.Comp.BloodFullness + amount);
+        ent.Comp.BloodFullness = MathF.Min(level.MaxBloodFullness, ent.Comp.BloodFullness + amount);
         DirtyField(ent, ent.Comp, nameof(VampireComponent.BloodFullness));
 
         var isStarving = ent.Comp.BloodFullness <= 0f;
@@ -120,6 +108,7 @@ public sealed partial class VampireSystem
     private void ProcessBloodDecay(
         Entity<VampireComponent> ent,
         VampireFeedingComponent feeding,
+        VampirePowerLevelPrototype level,
         float elapsed)
     {
         var before = ent.Comp.BloodFullness;
@@ -133,7 +122,7 @@ public sealed partial class VampireSystem
                 DirtyField(ent, ent.Comp, nameof(VampireComponent.StarvationDrunkBloodDrainAccumulator));
             }
 
-            ent.Comp.BloodFullness = MathF.Max(0f, before - feeding.FullnessDecayPerSecond * elapsed);
+            ent.Comp.BloodFullness = MathF.Max(0f, before - level.FullnessDecayPerSecond * elapsed);
 
             if (!MathHelper.CloseTo(ent.Comp.BloodFullness, before))
             {
@@ -163,36 +152,37 @@ public sealed partial class VampireSystem
         TrySpendBlood(ent, drained, showPopup: false);
     }
 
-    private bool TryResolveVampireActionCost(
+    private bool CanUseVampireAction(
         Entity<VampireComponent> ent,
-        EntityUid? actionEntity,
-        int bloodCost,
-        out int resolvedCost,
-        bool showPopup = true)
+        EntityUid action,
+        [NotNullWhen(true)] out VampireConfigurationComponent? configuration,
+        out VampirePowerLevelPrototype level,
+        out int bloodCost,
+        bool quiet = false)
     {
-        resolvedCost = Math.Max(0, bloodCost);
-
-        if (actionEntity is not { } action)
-            return true;
-
-        if (!Exists(action))
+        configuration = null;
+        level = default!;
+        bloodCost = 0;
+        if (!Exists(action) ||
+            !_configurationQuery.TryComp(ent, out configuration) ||
+            !TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out level))
+        {
             return false;
+        }
 
         if (!_vampireActionQuery.TryComp(action, out var vampireAction))
             return true;
 
         if (ent.Comp.PowerLevel < vampireAction.RequiredPowerLevel)
         {
-            if (showPopup)
+            if (!quiet)
                 _popup.PopupEntity(Loc.GetString("action-vampire-not-enough-power"), ent.Owner, ent.Owner);
 
             return false;
         }
 
-        if (resolvedCost <= 0 && vampireAction.BloodCost > 0)
-            resolvedCost = vampireAction.BloodCost;
-
-        return true;
+        bloodCost = Math.Max(0, vampireAction.BloodCost);
+        return CanSpendBlood(ent, bloodCost, showPopup: !quiet);
     }
 
     private bool IsProtectedByFaith(EntityUid target)

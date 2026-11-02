@@ -14,7 +14,7 @@ public sealed partial class VampireSleepActionEvent : EntityTargetActionEvent;
 [Serializable, NetSerializable]
 public sealed partial class VampireSleepDoAfterEvent : DoAfterEvent
 {
-    public override DoAfterEvent Clone() => (VampireSleepDoAfterEvent) MemberwiseClone();
+    public override DoAfterEvent Clone() => (VampireSleepDoAfterEvent)MemberwiseClone();
 
     [DataField(required: true)]
     public NetEntity Victim;
@@ -50,9 +50,7 @@ public sealed partial class VampireSleepDoAfterEvent : DoAfterEvent
 [Serializable, NetSerializable]
 public sealed partial class VampireDrinkBloodDoAfterEvent : SimpleDoAfterEvent;
 
-public sealed partial class VampireRejuvenateIActionEvent : InstantActionEvent;
-
-public sealed partial class VampireRejuvenateIiActionEvent : InstantActionEvent;
+public sealed partial class VampireRejuvenateActionEvent : InstantActionEvent;
 
 public sealed partial class VampireToggleFangsActionEvent : InstantActionEvent;
 

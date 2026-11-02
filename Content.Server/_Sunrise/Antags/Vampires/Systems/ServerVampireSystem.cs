@@ -57,12 +57,14 @@ public sealed partial class ServerVampireSystem : EntitySystem
             if (metadata.EntityPaused || now <= holy.NextUpdate)
                 continue;
 
-            holy.NextUpdate = now + (_feedingQuery.TryComp(uid, out var feeding)
-                ? feeding.UpdateDelay
-                : TimeSpan.FromSeconds(1));
+            _feedingQuery.TryComp(uid, out var feeding);
+            holy.NextUpdate = now + (feeding?.UpdateDelay ?? TimeSpan.FromSeconds(1));
 
-            HandleHolyWater((uid, vampire));
-            HandleHolyPlace((uid, vampire));
+            if (feeding is null || feeding.UniqueVictims < holy.RequiredVictims)
+                continue;
+
+            HandleHolyWater((uid, vampire), holy);
+            HandleHolyPlace((uid, vampire), holy);
         }
     }
 }

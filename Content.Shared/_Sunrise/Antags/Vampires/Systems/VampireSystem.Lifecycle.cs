@@ -19,8 +19,8 @@ public sealed partial class VampireSystem
         UpdatePowerLevel(ent, syncActions: false);
         ApplyPowerLevelSettings(ent);
         _actionGrant.AddActions((ent.Owner, null), configuration.BaseActions);
+        SyncVampireActions(ent);
         UpdateVampireAlert(ent);
-        UpdateVampireFedAlert(ent);
         _movementSpeed.RefreshMovementSpeedModifiers(ent.Owner);
 
         var ev = new VampireStartupEvent();

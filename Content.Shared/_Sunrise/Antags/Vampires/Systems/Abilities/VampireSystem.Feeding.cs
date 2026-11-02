@@ -68,16 +68,18 @@ public sealed partial class VampireSystem
             !_bloodstreamQuery.TryComp(targetUid, out var blood) ||
             !_bloodSourceQuery.TryComp(targetUid, out var bloodSource) ||
             bloodSource.Value <= 0f ||
-            IsInvalidDrinkTarget(ent.Owner, targetUid, showPopup: false))
+            IsInvalidDrinkTarget(ent.Owner, targetUid, showPopup: false) ||
+            !TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var level))
         {
             return;
         }
 
+        var fangs = level.Fangs;
         var drunkFromTarget = feeding.BloodDrunkFromTargets.GetValueOrDefault(targetUid);
-        if (drunkFromTarget >= feeding.MaxBloodPerTarget)
+        if (drunkFromTarget >= fangs.MaxBloodPerTarget)
         {
             _popup.PopupEntity(
-                Loc.GetString("vampire-drink-target-maxed", ("amount", feeding.MaxBloodPerTarget)),
+                Loc.GetString("vampire-drink-target-maxed", ("amount", fangs.MaxBloodPerTarget)),
                 ent.Owner,
                 ent.Owner,
                 PopupType.MediumCaution);
@@ -104,10 +106,10 @@ public sealed partial class VampireSystem
             return;
         }
 
-        var maxCanDrink = feeding.MaxBloodPerTarget - drunkFromTarget;
-        var fullSipGain = feeding.BloodGainPerSip * bloodEfficiency;
+        var maxCanDrink = fangs.MaxBloodPerTarget - drunkFromTarget;
+        var fullSipGain = fangs.BloodGain * bloodEfficiency;
         var cappedSipGain = MathF.Min(fullSipGain, maxCanDrink);
-        if (cappedSipGain <= 0f || feeding.TargetBloodDrainPerSip <= 0f)
+        if (cappedSipGain <= 0f || fangs.TargetBloodDrain <= 0f)
         {
             _popup.PopupEntity(Loc.GetString("vampire-drink-target-empty"), ent.Owner, ent.Owner, PopupType.MediumCaution);
             return;
@@ -124,7 +126,7 @@ public sealed partial class VampireSystem
             return;
         }
 
-        var intendedDrain = feeding.TargetBloodDrainPerSip * (cappedSipGain / fullSipGain);
+        var intendedDrain = fangs.TargetBloodDrain * (cappedSipGain / fullSipGain);
         var actualDrain = MathF.Min(intendedDrain, targetBloodLevel);
         var actualSipGain = cappedSipGain * (actualDrain / intendedDrain);
 
@@ -139,9 +141,11 @@ public sealed partial class VampireSystem
 
         _solution.UpdateChemicals(blood.BloodSolution!.Value, needsReactionsProcessing: false);
         AddBlood(ent, actualSipGain, targetUid);
+        if (ent.Comp.PowerLevel != level.Level && TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var updatedLevel))
+            fangs = updatedLevel.Fangs;
 
-        _damageable.TryChangeDamage(targetUid, feeding.BiteDamage, ignoreResistances: true);
-        _blood.TryModifyBleedAmount(targetUid, feeding.BiteBleedAmount);
+        _damageable.TryChangeDamage(targetUid, fangs.BiteDamage, ignoreResistances: true);
+        _blood.TryModifyBleedAmount(targetUid, fangs.BleedAmount);
 
         if (_blindableQuery.TryComp(targetUid, out var blindable))
         {
@@ -155,8 +159,8 @@ public sealed partial class VampireSystem
             feeding.BiteCountsByTarget[targetUid] = biteCount;
         }
 
-        var healingScale = actualSipGain / feeding.BloodGainPerSip;
-        _damageable.TryChangeDamage(ent.Owner, feeding.Healing * healingScale, true);
+        var healingScale = actualSipGain / fangs.BloodGain;
+        _damageable.TryChangeDamage(ent.Owner, fangs.Healing * healingScale, true);
 
         _audio.PlayPredicted(feeding.BiteSound, targetUid, ent, AudioParams.Default.WithVolume(feeding.BiteVolume));
         var xform = Transform(ent);
@@ -166,17 +170,17 @@ public sealed partial class VampireSystem
 
         var currentDrunkFromTarget = feeding.BloodDrunkFromTargets.GetValueOrDefault(targetUid);
 
-        if (ent.Comp.FangsExtended && currentDrunkFromTarget < feeding.MaxBloodPerTarget)
+        if (ent.Comp.FangsExtended && currentDrunkFromTarget < fangs.MaxBloodPerTarget)
         {
             args.Repeat = true;
             feeding.DrinkDoAfter = args.DoAfter.Index;
             return;
         }
 
-        if (currentDrunkFromTarget >= feeding.MaxBloodPerTarget)
+        if (currentDrunkFromTarget >= fangs.MaxBloodPerTarget)
         {
             _popup.PopupEntity(
-                Loc.GetString("vampire-drink-target-hard-max", ("amount", feeding.MaxBloodPerTarget)),
+                Loc.GetString("vampire-drink-target-hard-max", ("amount", fangs.MaxBloodPerTarget)),
                 ent.Owner,
                 ent.Owner,
                 PopupType.MediumCaution);
@@ -200,7 +204,8 @@ public sealed partial class VampireSystem
     {
         if (!_feedingQuery.TryComp(ent, out var feeding) ||
             !_configurationQuery.TryComp(ent, out var configuration) ||
-            feeding.DrinkDoAfter != null ||
+            !TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var level) ||
+            feeding.DrinkDoAfter is not null ||
             !CanDrinkBlood(ent, target))
         {
             return false;
@@ -220,7 +225,7 @@ public sealed partial class VampireSystem
         }
 
         if (!IsMouthBlocked(ent.Owner, feeding))
-            return StartDrinkDoAfter((ent, feeding), target);
+            return StartDrinkDoAfter((ent, feeding), target, level.Fangs);
 
         _popup.PopupEntity(Loc.GetString("vampire-mouth-covered"), ent.Owner, ent.Owner);
         return false;
@@ -242,18 +247,18 @@ public sealed partial class VampireSystem
         return true;
     }
 
-    private bool StartDrinkDoAfter(Entity<VampireFeedingComponent> ent, EntityUid target)
+    private bool StartDrinkDoAfter(Entity<VampireFeedingComponent> ent, EntityUid target, VampireFangsLevelSettings fangs)
     {
         var feeding = ent.Comp;
         var doAfter = new DoAfterArgs(
             EntityManager,
             ent.Owner,
-            feeding.SipInterval,
+            fangs.SipInterval,
             new VampireDrinkBloodDoAfterEvent(),
             ent.Owner,
             target)
         {
-            DistanceThreshold = feeding.BiteDistanceThreshold,
+            DistanceThreshold = fangs.Range,
             NeedHand = true,
             NeedFreeHand = true,
             BreakOnDamage = true,
@@ -302,14 +307,14 @@ public sealed partial class VampireSystem
     private void UpdateVampireFedAlert(Entity<VampireComponent> ent)
     {
         if (!_configurationQuery.TryComp(ent, out var configuration) ||
-            !_feedingQuery.TryComp(ent, out var feeding))
+            !TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var level))
         {
             return;
         }
 
-        var fraction = feeding.MaxBloodFullness <= 0f
+        var fraction = level.MaxBloodFullness <= 0f
             ? 0f
-            : ent.Comp.BloodFullness / feeding.MaxBloodFullness;
+            : ent.Comp.BloodFullness / level.MaxBloodFullness;
         var minSeverity = _alerts.GetMinSeverity(configuration.FedAlert);
         var maxSeverity = _alerts.GetMaxSeverity(configuration.FedAlert);
         var severity = (short)Math.Clamp(

@@ -15,19 +15,11 @@ namespace Content.Server._Sunrise.Antags.Vampires.Systems;
 public sealed partial class ServerVampireSystem
 {
     [Dependency] private ContainerSystem _container = default!;
-    [Dependency] private EntityQuery<VampireHolyComponent> _holyQuery = default!;
     [Dependency] private EntityQuery<MobStateComponent> _mobStateQuery = default!;
     [Dependency] private EntityQuery<PrayableComponent> _prayableQuery = default!;
 
-    private void HandleHolyWater(Entity<VampireComponent> ent)
+    private void HandleHolyWater(Entity<VampireComponent> ent, VampireHolyComponent holy)
     {
-        if (!_feedingQuery.TryComp(ent, out var feeding) ||
-            !_holyQuery.TryComp(ent, out var holy) ||
-            feeding.UniqueVictims < holy.RequiredVictims)
-        {
-            return;
-        }
-
         if (_timing.CurTime < holy.NextHolyWaterEffect)
             return;
 
@@ -63,15 +55,8 @@ public sealed partial class ServerVampireSystem
             FixedPoint2.New(holy.HolyWaterBurnDamage));
     }
 
-    private void HandleHolyPlace(Entity<VampireComponent> ent)
+    private void HandleHolyPlace(Entity<VampireComponent> ent, VampireHolyComponent holy)
     {
-        if (!_feedingQuery.TryComp(ent, out var feeding) ||
-            !_holyQuery.TryComp(ent, out var holy) ||
-            feeding.UniqueVictims < holy.RequiredVictims)
-        {
-            return;
-        }
-
         if (_timing.CurTime < holy.NextHolyPlaceEffect ||
             !IsInHolyPlace(ent, holy.HolyPlaceRange) ||
             _mobStateQuery.TryComp(ent, out var mobState) && mobState.CurrentState == Shared.Mobs.MobState.Dead)

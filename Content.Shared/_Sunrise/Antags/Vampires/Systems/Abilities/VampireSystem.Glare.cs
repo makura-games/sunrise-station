@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage.Components;
 using Content.Shared.FixedPoint;
@@ -26,73 +27,39 @@ public sealed partial class VampireSystem
             args.Action);
     }
 
-    public bool TryGlare(
-        Entity<VampireComponent?> ent,
-        EntityUid action,
-        bool quiet = false)
+    public bool TryGlare(Entity<VampireComponent?> ent, EntityUid action, bool quiet = false)
     {
-        if (!CanGlare(ent, action, quiet))
+        if (!Resolve(ent, ref ent.Comp, false) ||
+            !CanGlare((ent, ent.Comp), action, out var configuration, out var level, out var bloodCost, quiet) ||
+            !TrySpendBlood((ent, ent.Comp), bloodCost, showPopup: !quiet))
+        {
             return false;
+        }
 
-        if (!Resolve(ent, ref ent.Comp, false))
-            return false;
-
-        var vampire = new Entity<VampireComponent>(ent.Owner, ent.Comp);
-
-        if (!CheckAndConsumeBloodCost(vampire, action))
-            return false;
-
-        DoGlare(vampire);
+        DoGlare((ent, ent.Comp), configuration, level.Glare);
         return true;
     }
 
     public bool CanGlare(
-        Entity<VampireComponent?> ent,
+        Entity<VampireComponent> ent,
         EntityUid action,
+        [NotNullWhen(true)] out VampireConfigurationComponent? configuration,
+        out VampirePowerLevelPrototype level,
+        out int bloodCost,
         bool quiet = false)
     {
-        if (!Resolve(ent, ref ent.Comp, false))
-            return false;
-
-        if (_blindableQuery.TryComp(ent.Owner, out var blindable) &&
-            blindable.IsBlind)
-        {
-            return false;
-        }
-
-        if (!TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out _))
-            return false;
-
-        if (!_configurationQuery.HasComp(ent.Owner))
-            return false;
-
-        var vampire = new Entity<VampireComponent>(ent.Owner, ent.Comp);
-
-        if (!TryResolveVampireActionCost(
-                vampire,
-                action,
-                0,
-                out var bloodCost,
-                showPopup: !quiet))
-        {
-            return false;
-        }
-
-        return CanSpendBlood(
-            vampire,
-            bloodCost,
-            showPopup: !quiet);
+        configuration = null;
+        level = default!;
+        bloodCost = 0;
+        return !(_blindableQuery.TryComp(ent, out var blindable) && blindable.IsBlind) &&
+            CanUseVampireAction(ent, action, out configuration, out level, out bloodCost, quiet);
     }
 
-    private void DoGlare(Entity<VampireComponent> ent)
+    private void DoGlare(
+        Entity<VampireComponent> ent,
+        VampireConfigurationComponent configuration,
+        VampireGlareLevelSettings settings)
     {
-        if (!TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var level))
-            return;
-
-        if (!_configurationQuery.TryComp(ent, out var configuration))
-            return;
-
-        var settings = level.Glare;
         var targets = _lookup.GetEntitiesInRange(
             ent.Owner,
             settings.Range,

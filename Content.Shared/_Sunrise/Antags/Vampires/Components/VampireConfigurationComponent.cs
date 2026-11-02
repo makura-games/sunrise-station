@@ -19,19 +19,19 @@ public sealed partial class VampireConfigurationComponent : Component
     /// <summary>
     /// Тип метаболизма органов на время вампиризма.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public ProtoId<MetabolizerTypePrototype> MetabolizerType = "Vampire";
 
     /// <summary>
     /// Роль разума при обращении.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public EntProtoId MindRole = "MindRoleVampire";
 
     /// <summary>
     /// Фиксированные цели для выдачи при обращении.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public List<EntProtoId> Objectives = new()
     {
         "VampireKillRandomPersonObjective",
@@ -41,24 +41,24 @@ public sealed partial class VampireConfigurationComponent : Component
     /// <summary>
     /// Группы для выбора одной цели из каждой.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public List<ProtoId<WeightedRandomPrototype>> ObjectiveGroups = new()
     {
         "VampireObjectiveGroupsStateOnly",
         "VampireObjectiveGroupsStealOnly",
     };
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public float ObjectiveMaxDifficulty = 10f;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public SoundSpecifier BriefingSound =
         new SoundPathSpecifier("/Audio/_Sunrise/Ambience/Antag/vampire_start.ogg");
 
     /// <summary>
     /// Действия для выдачи через ActionGrant при получении вампиризма.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public List<EntProtoId> BaseActions = new()
     {
         "ActionVampireToggleFangs",
@@ -77,13 +77,10 @@ public sealed partial class VampireConfigurationComponent : Component
     public EntProtoId SleepAction = "ActionVampireSleep";
 
     /// <summary>
-    /// Базовое омоложение, заменяемое улучшенным по уровню силы.
+    /// Омоложение с эффектами текущего уровня силы.
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId RejuvenateAction = "ActionVampireRejuvenateI";
-
-    [DataField, AutoNetworkedField]
-    public EntProtoId RejuvenateUpgradedAction = "ActionVampireRejuvenateII";
 
     /// <summary>
     /// Задержка переключения клыков, не глотка.
@@ -134,7 +131,7 @@ public sealed partial class VampireConfigurationComponent : Component
         "vampire-sleep-target-warning-5",
     };
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Dictionary<VampirePowerLevel, LocId> PowerLevelMessages = new()
     {
         [VampirePowerLevel.Awakened] = "vampire-power-awakened-message",
@@ -148,6 +145,6 @@ public sealed partial class VampireConfigurationComponent : Component
     /// <summary>
     /// Категория обычного голода, скрываемая при получении вампиризма.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public ProtoId<AlertCategoryPrototype> HungerAlertCategory = "Hunger";
 }

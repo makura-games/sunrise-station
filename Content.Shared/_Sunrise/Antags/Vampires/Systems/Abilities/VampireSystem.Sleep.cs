@@ -74,24 +74,27 @@ public sealed partial class VampireSystem
 
         Entity<VampireComponent> vampire = (ent.Owner, ent.Comp);
 
-        if (!CanSleep(vampire, target, quiet))
+        if (!_configurationQuery.TryComp(ent, out var configuration) ||
+            !CanSleep(vampire, target, out var settings, quiet))
             return false;
 
-        return DoSleep(vampire, target, action);
+        return DoSleep(vampire, target, action, configuration, settings);
     }
 
     public bool CanSleep(
         Entity<VampireComponent> ent,
         EntityUid target,
+        out VampireSleepLevelSettings settings,
         bool quiet = false)
     {
+        settings = default!;
         if (!Exists(target))
             return false;
 
         if (!TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var level))
             return false;
 
-        var settings = level.Sleep;
+        settings = level.Sleep;
 
         if (target == ent.Owner ||
             !_interaction.InRangeAndAccessible(ent.Owner, target, settings.TargetRange))
@@ -158,16 +161,10 @@ public sealed partial class VampireSystem
     private bool DoSleep(
         Entity<VampireComponent> ent,
         EntityUid target,
-        EntityUid action)
+        EntityUid action,
+        VampireConfigurationComponent configuration,
+        VampireSleepLevelSettings settings)
     {
-        if (!_configurationQuery.TryComp(ent, out var configuration))
-            return false;
-
-        if (!TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var level))
-            return false;
-
-        var settings = level.Sleep;
-
         var doAfterEvent = new VampireSleepDoAfterEvent
         {
             Victim = GetNetEntity(target),

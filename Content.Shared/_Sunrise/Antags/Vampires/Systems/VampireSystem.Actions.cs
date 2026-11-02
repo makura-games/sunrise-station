@@ -1,18 +1,14 @@
+using System.Linq;
 using Content.Shared.Actions;
-using Content.Shared.Actions.Components;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared._Sunrise.Antags.Vampires.Components;
-using Content.Shared._Sunrise.Antags.Vampires;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
-using System.Linq;
 
 namespace Content.Shared._Sunrise.Antags.Vampires.Systems;
 
 public sealed partial class VampireSystem
 {
-    [Dependency] private IComponentFactory _componentFactory = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
     [Dependency] private ActionGrantSystem _actionGrant = default!;
     [Dependency] private EntityQuery<VampireActionComponent> _vampireActionQuery = default!;
@@ -28,227 +24,87 @@ public sealed partial class VampireSystem
     [SubscribeLocalEvent]
     public void OnPlayerAttached(PlayerAttachedEvent ev)
     {
-        if (!TryComp<VampireComponent>(ev.Entity, out var vampire))
-            return;
-
-        SyncVampireActions((ev.Entity, vampire));
+        if (TryComp<VampireComponent>(ev.Entity, out var vampire))
+            SyncVampireActions((ev.Entity, vampire));
     }
 
     private void SyncVampireActions(Entity<VampireComponent> ent)
     {
-        if (LifeStage(ent) < EntityLifeStage.MapInitialized)
-            return;
-
-        if (!_configurationQuery.TryComp(ent, out var configuration))
-            return;
-
-        // Создание новых действий требует сервера; параметры уже выданных действий предсказываются.
-        if (_net.IsServer)
-            EnsureRejuvenateUpgrade(ent, configuration);
-
-        RefreshAllActions(ent, configuration);
-    }
-
-    private void EnsureRejuvenateUpgrade(
-        Entity<VampireComponent> ent,
-        VampireConfigurationComponent configuration)
-    {
-        var upgradedActionId = configuration.RejuvenateUpgradedAction;
-        var baseActionId = configuration.RejuvenateAction;
-        var requiredPowerLevel = GetRequiredPowerLevel(upgradedActionId);
-        if (ent.Comp.PowerLevel < requiredPowerLevel)
-            return;
-
-        var baseAction = FindVampireAction(ent.Owner, baseActionId);
-        var upgradedAction = FindVampireAction(ent.Owner, upgradedActionId);
-        VampireActionChargeState? previousChargeState = null;
-        if (baseAction is { } firstAction)
-            previousChargeState = CaptureActionChargeState(firstAction);
-
-        if (upgradedAction is not { } secondAction)
+        if (LifeStage(ent) < EntityLifeStage.MapInitialized ||
+            !_configurationQuery.TryComp(ent, out var configuration) ||
+            !TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var level))
         {
-            var actionEntity = _actions.AddAction(ent.Owner, upgradedActionId, ent.Owner);
-            if (actionEntity is not { } addedAction)
-                return;
-
-            ConfigureVampireAction(ent, configuration, upgradedActionId, addedAction, previousChargeState);
-        }
-        else
-        {
-            TryRefreshVampireAction(ent, configuration, upgradedActionId, secondAction);
+            return;
         }
 
-        if (baseAction is not { } actionToRemove)
-            return;
-
-        _actions.RemoveAction(ent.Owner, actionToRemove.AsNullable());
-    }
-
-    private void RefreshAllActions(
-        Entity<VampireComponent> ent,
-        VampireConfigurationComponent configuration)
-    {
-        foreach (var action in _actions.GetActions(ent.Owner))
+        foreach (var action in _actions.GetActions(ent))
         {
             if (action.Comp.Container != ent.Owner ||
-                !_vampireActionQuery.HasComp(action.Owner) ||
+                !_vampireActionQuery.TryComp(action, out var vampireAction) ||
                 Prototype(action) is not { } prototype)
             {
                 continue;
             }
 
-            TryRefreshVampireAction(ent, configuration, prototype.ID, action);
+            _actions.SetEnabled(action.AsNullable(), ent.Comp.PowerLevel >= vampireAction.RequiredPowerLevel);
+            VampireActionChargeSettings? settings = null;
+            if (prototype.ID == configuration.FangsAction.Id)
+                _actions.SetUseDelay(action.AsNullable(), configuration.FangsUseDelay);
+            else if (prototype.ID == configuration.GlareAction.Id)
+                settings = level.Glare.Action;
+            else if (prototype.ID == configuration.RejuvenateAction.Id)
+                settings = level.Rejuvenation.Action;
+            else if (prototype.ID == configuration.SleepAction.Id)
+            {
+                settings = level.Sleep.Action;
+                if (vampireAction.BloodCost != level.Sleep.BloodCost)
+                {
+                    vampireAction.BloodCost = level.Sleep.BloodCost;
+                    DirtyField(action, vampireAction, nameof(VampireActionComponent.BloodCost));
+                }
+
+                _actions.SetRange((action.Owner, null), level.Sleep.TargetRange);
+            }
+
+            if (settings is null)
+                continue;
+
+            _actions.SetUseDelay(action.AsNullable(), settings.UseDelay);
+            ConfigureActionCharges(action, settings);
         }
     }
 
     private void RemoveVampireActions(Entity<VampireComponent> ent)
     {
-        foreach (var action in _actions.GetActions(ent.Owner).ToArray())
+        foreach (var action in _actions.GetActions(ent).ToArray())
         {
-            if (action.Comp.Container != ent.Owner ||
-                !_vampireActionQuery.HasComp(action.Owner))
-                continue;
-
-            _actions.RemoveAction(ent.Owner, action.AsNullable());
+            if (action.Comp.Container == ent.Owner && _vampireActionQuery.HasComp(action))
+                _actions.RemoveAction((ent.Owner, null), action.AsNullable());
         }
     }
 
-    private Entity<ActionComponent>? FindVampireAction(EntityUid holder, EntProtoId actionId)
+    private void ConfigureActionCharges(EntityUid action, VampireActionChargeSettings settings)
     {
-        foreach (var action in _actions.GetActions(holder))
-        {
-            if (action.Comp.Container == holder &&
-                _vampireActionQuery.HasComp(action.Owner) &&
-                Prototype(action)?.ID == actionId.Id)
-            {
-                return action;
-            }
-        }
-
-        return null;
-    }
-
-    private void TryRefreshVampireAction(
-        Entity<VampireComponent> ent,
-        VampireConfigurationComponent configuration,
-        EntProtoId actionId,
-        EntityUid? actionEntity)
-    {
-        if (actionEntity is null || _actions.GetAction(actionEntity) is not { } action)
-            return;
-
-        if (!_vampireActionQuery.TryComp(actionEntity.Value, out var vampireAction))
-        {
-            _actions.SetEnabled(action.AsNullable(), true);
-            return;
-        }
-
-        ConfigureVampireAction(ent, configuration, actionId, actionEntity.Value);
-        _actions.SetEnabled(action.AsNullable(), ent.Comp.PowerLevel >= vampireAction.RequiredPowerLevel);
-    }
-
-    private void ConfigureVampireAction(
-        Entity<VampireComponent> ent,
-        VampireConfigurationComponent configuration,
-        EntProtoId actionId,
-        EntityUid actionEntity,
-        VampireActionChargeState? previousChargeState = null)
-    {
-        if (!TryGetPowerLevelPrototype(ent.Comp.PowerLevel, out var level))
-            return;
-
-        VampireActionChargeSettings? chargeSettings = null;
-
-        if (actionId == configuration.FangsAction)
-        {
-            _actions.SetUseDelay(actionEntity, configuration.FangsUseDelay);
-        }
-        else if (actionId == configuration.GlareAction)
-        {
-            chargeSettings = level.Glare.Action;
-        }
-        else if (actionId == configuration.SleepAction)
-        {
-            chargeSettings = level.Sleep.Action;
-
-            if (_vampireActionQuery.TryComp(actionEntity, out var vampireAction))
-            {
-                vampireAction.BloodCost = level.Sleep.BloodCost;
-                DirtyField(actionEntity, vampireAction, nameof(VampireActionComponent.BloodCost));
-            }
-
-            _actions.SetRange(actionEntity, level.Sleep.TargetRange);
-        }
-        else if (actionId == configuration.RejuvenateAction ||
-                 actionId == configuration.RejuvenateUpgradedAction)
-        {
-            chargeSettings = level.Rejuvenation.Action;
-        }
-
-        if (chargeSettings is null)
-            return;
-
-        _actions.SetUseDelay(actionEntity, chargeSettings.UseDelay);
-        ConfigureActionCharges(actionEntity, chargeSettings, previousChargeState);
-    }
-
-    private void ConfigureActionCharges(
-        EntityUid actionEntity,
-        VampireActionChargeSettings settings,
-        VampireActionChargeState? previousChargeState = null)
-    {
-        if (!_chargesQuery.TryComp(actionEntity, out var charges) ||
-            !_rechargeQuery.TryComp(actionEntity, out var recharge))
+        if (!_chargesQuery.TryComp(action, out var charges) ||
+            !_rechargeQuery.TryComp(action, out var recharge) ||
+            charges.MaxCharges == settings.MaxCharges && recharge.RechargeDuration == settings.RechargeDuration)
         {
             return;
         }
 
-        var previous = previousChargeState ?? CaptureActionChargeState(actionEntity);
-        var addedCapacity = Math.Max(0, settings.MaxCharges - previous.MaxCharges);
-        var newCharges = Math.Clamp(previous.CurrentCharges + addedCapacity, 0, settings.MaxCharges);
-
-        _charges.SetMaxCharges((actionEntity, charges), settings.MaxCharges);
-        _charges.SetCharges((actionEntity, charges), newCharges);
-        _charges.SetRechargeDuration(
-            (actionEntity, charges, recharge),
-            settings.RechargeDuration,
-            newCharges < settings.MaxCharges ? previous.RechargeProgress : 0f);
-    }
-
-    private VampireActionChargeState CaptureActionChargeState(EntityUid actionEntity)
-    {
-        if (!_chargesQuery.TryComp(actionEntity, out var charges) ||
-            !_rechargeQuery.TryComp(actionEntity, out var recharge))
-        {
-            return new VampireActionChargeState(0, 0, 0f);
-        }
-
-        var currentCharges = _charges.GetCurrentCharges((actionEntity, charges, recharge));
+        var current = _charges.GetCurrentCharges((action, charges, recharge));
         var progress = 0f;
-
-        if (currentCharges >= charges.MaxCharges || recharge.RechargeDuration <= TimeSpan.Zero)
-            return new VampireActionChargeState(currentCharges, charges.MaxCharges, progress);
-
-        var elapsed = _timing.CurTime - charges.LastUpdate;
-        var elapsedTicks = Math.Max(0L, elapsed.Ticks % recharge.RechargeDuration.Ticks);
-        progress = Math.Clamp((float)elapsedTicks / recharge.RechargeDuration.Ticks, 0f, 1f);
-
-        return new VampireActionChargeState(currentCharges, charges.MaxCharges, progress);
-    }
-
-    private VampirePowerLevel GetRequiredPowerLevel(EntProtoId actionId)
-    {
-        if (_prototype.TryIndex<EntityPrototype>(actionId, out var prototype) &&
-            prototype.TryComp<VampireActionComponent>(out var vampireAction, _componentFactory))
+        if (current < charges.MaxCharges && recharge.RechargeDuration > TimeSpan.Zero)
         {
-            return vampireAction.RequiredPowerLevel;
+            var elapsedTicks = Math.Max(0L, (_timing.CurTime - charges.LastUpdate).Ticks % recharge.RechargeDuration.Ticks);
+            progress = Math.Clamp((float)elapsedTicks / recharge.RechargeDuration.Ticks, 0f, 1f);
         }
 
-        return VampirePowerLevel.Neonate;
+        var addedCapacity = Math.Max(0, settings.MaxCharges - charges.MaxCharges);
+        var newCharges = Math.Clamp(current + addedCapacity, 0, settings.MaxCharges);
+        _charges.SetMaxCharges((action, charges), settings.MaxCharges);
+        _charges.SetCharges((action, charges), newCharges);
+        _charges.SetRechargeDuration((action, charges, recharge), settings.RechargeDuration,
+            newCharges < settings.MaxCharges ? progress : 0f);
     }
-
-    private readonly record struct VampireActionChargeState(
-        int CurrentCharges,
-        int MaxCharges,
-        float RechargeProgress);
 }

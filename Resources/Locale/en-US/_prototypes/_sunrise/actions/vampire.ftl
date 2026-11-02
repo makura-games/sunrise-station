@@ -8,7 +8,4 @@ ent-ActionVampireSleep = Sleep
     .desc = Puts the target to sleep after a brief concentration.
 
 ent-ActionVampireRejuvenateI = Rejuvenation
-    .desc = Removes stuns and knockdown and restores stamina.
-
-ent-ActionVampireRejuvenateII = Greater Rejuvenation
-    .desc = Removes stuns and knockdown, restores stamina, heals wounds and purges poisons.
+    .desc = Removes stuns and knockdown and restores stamina. Greater power also heals wounds and purges poisons.

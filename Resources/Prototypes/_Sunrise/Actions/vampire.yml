@@ -91,7 +91,7 @@
   parent: BaseAction
   id: ActionVampireRejuvenateI
   name: Rejuvenation
-  description: Removes stuns and knockdown and restores stamina.
+  description: Removes stuns and knockdown and restores stamina. Greater power also heals wounds and purges poisons.
   components:
   - type: Action
     useDelay: 8
@@ -105,35 +105,9 @@
     - state: rejuvinate
       map: ["enum.ActionVisuals.Icon"]
   - type: InstantAction
-    event: !type:VampireRejuvenateIActionEvent {}
+    event: !type:VampireRejuvenateActionEvent {}
   - type: LimitedCharges
     maxCharges: 1
   - type: AutoRecharge
     rechargeDuration: 75
   - type: VampireAction
-
-- type: entity
-  parent: BaseAction
-  id: ActionVampireRejuvenateII
-  name: Greater Rejuvenation
-  description: Removes stuns and knockdown, restores stamina, heals wounds and purges poisons.
-  components:
-  - type: Action
-    useDelay: 7
-    itemIconStyle: NoItem
-    priority: 4
-    checkCanInteract: false
-    checkConsciousness: false
-  - type: Sprite
-    sprite: _Sunrise/Vampire/actions_vampire.rsi
-    layers:
-    - state: rejuvinate
-      map: ["enum.ActionVisuals.Icon"]
-  - type: InstantAction
-    event: !type:VampireRejuvenateIiActionEvent {}
-  - type: LimitedCharges
-    maxCharges: 1
-  - type: AutoRecharge
-    rechargeDuration: 65
-  - type: VampireAction
-    requiredPowerLevel: Nightborn

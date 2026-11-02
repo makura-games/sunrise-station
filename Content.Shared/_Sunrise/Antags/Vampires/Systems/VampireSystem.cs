@@ -47,7 +47,8 @@ public sealed partial class VampireSystem : EntitySystem
         var query = EntityQueryEnumerator<VampireFeedingComponent, VampireComponent, MetaDataComponent>();
         while (query.MoveNext(out var uid, out var feeding, out var vampire, out var metadata))
         {
-            if (metadata.EntityPaused || now <= vampire.NextBloodUpdate)
+            if (metadata.EntityPaused || now <= vampire.NextBloodUpdate ||
+                !TryGetPowerLevelPrototype(vampire.PowerLevel, out var level))
                 continue;
 
             var elapsed = vampire.LastBloodUpdate == TimeSpan.Zero
@@ -58,7 +59,7 @@ public sealed partial class VampireSystem : EntitySystem
             vampire.NextBloodUpdate = now + feeding.UpdateDelay;
             DirtyField(uid, vampire, nameof(VampireComponent.LastBloodUpdate));
             DirtyField(uid, vampire, nameof(VampireComponent.NextBloodUpdate));
-            ProcessBloodDecay((uid, vampire), feeding, elapsed);
+            ProcessBloodDecay((uid, vampire), feeding, level, elapsed);
         }
 
         ProcessActiveRejuvenation(now);
