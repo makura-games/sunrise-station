@@ -2,7 +2,7 @@
   parent: CrateSyndicate
   id: CrateSyndicateShuttleBundle
   name: shuttle bundle crate
-  description: A bundle with everything needed to assemble a syndicate shuttle. (Some assembly required)
+  description: A bundle with everything needed to assemble a syndicate shuttle, including its console board. (Some assembly required).
   components:
   - type: EntityTableContainerFill
     containers:
