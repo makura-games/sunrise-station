@@ -174,6 +174,8 @@ uplink-pirate-borg-random-desc = Calls in a random derelict cyborg with pirate l
 
 ## Equipment
 
+uplink-experimental-eshield-name = Experimental Energy Shield
+uplink-experimental-eshield-desc = An even more exotic energy shield that reflects nearly all laser beams and provides some protection against bullets and other physical attacks. It has a built-in self-recharging battery, but its frame can still fail after several cycles of active charging and discharging.
 uplink-hypo-name = Gorlax Hypospray
 uplink-hypo-desc = A chemical hypospray manufactured by the Syndicate, capable of instantly injecting up to 20u of reagents. Starts empty.
 uplink-polytrinic-acid-chemistry-bottle-name = Polytrinic Acid
