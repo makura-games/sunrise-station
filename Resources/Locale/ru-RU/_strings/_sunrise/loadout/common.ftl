@@ -15,7 +15,6 @@ loadout-group-storage = С собой
 loadout-group-weapon = Табельное оружие
 loadout-group-weapon-secondary = Дополнительное оружие
 loadout-group-mask = Маска
-loadout-group-contributors = Контрибьюторы
 loadout-group-pants = Трусы
 loadout-group-bra = Бюстгальтер
 loadout-group-socks = Носки
