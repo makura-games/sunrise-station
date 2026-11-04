@@ -1,6 +1,6 @@
 - type: entity
-  id: AsteroidRockBluecrystal
-  parent: AsteroidRockBananium
+  abstract: true
+  id: BaseSunriseVeinBluecrystal
   description: An ore vein rich with bluespace crystal.
   suffix: Bluespace Crystal
   components:
@@ -8,67 +8,27 @@
     oreChance: 1.0
     currentOre: OreBluecrystal
   - type: Sprite
-    sprite: _Sunrise/Structures/Walls/rock.rsi
     layers:
-    - state: rock_asteroid
-    - map: [ "enum.EdgeLayer.South" ]
-      state: rock_asteroid_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: rock_asteroid_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: rock_asteroid_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: rock_asteroid_west
-    - sprite: _Sunrise/Structures/Walls/rock.rsi
-      state: rock_bluespace
+    - state: rock_bluespace
+      sprite: _Sunrise/Structures/Walls/stone-ore.rsi
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
 - type: entity
-  id: WallRockBluecrystal
-  parent: WallRock
-  description: An ore vein rich with bluespace crystals.
-  suffix: Bluespace Crystal
-  components:
-  - type: OreVein
-    oreChance: 1.0
-    currentOre: OreBluecrystal
+  id: AsteroidRockBluecrystal
+  parent: [ BaseSunriseVeinBluecrystal, AsteroidRock ]
 
 - type: entity
-  id: WallRockBasaltBluecrystal
-  parent: WallRockBasalt
-  description: An ore vein rich with bluespace crystals.
-  suffix: Bluespace Crystal
-  components:
-  - type: OreVein
-    oreChance: 1.0
-    currentOre: OreBluecrystal
+  id: WallRockBluecrystal
+  parent: [ BaseSunriseVeinBluecrystal, WallRock ]
 
 - type: entity
   id: WallRockChromiteBluecrystal
-  parent: WallRockChromite
-  description: An ore vein rich with bluespace crystals.
-  suffix: Bluespace Crystal
-  components:
-  - type: OreVein
-    oreChance: 1.0
-    currentOre: OreBluecrystal
+  parent: [ BaseSunriseVeinBluecrystal, WallRockChromite ]
 
 - type: entity
   id: WallRockSandBluecrystal
-  parent: WallRockSand
-  description: An ore vein rich with bluespace crystals.
-  suffix: Bluespace Crystal
-  components:
-  - type: OreVein
-    oreChance: 1.0
-    currentOre: OreBluecrystal
+  parent: [ BaseSunriseVeinBluecrystal, WallRockSand ]
 
 - type: entity
   id: WallRockSnowBluecrystal
-  parent: WallRockSnow
-  description: An ore vein rich with bluespace crystals.
-  suffix: Bluespace Crystal
-  components:
-  - type: OreVein
-    oreChance: 1.0
-    currentOre: OreBluecrystal
+  parent: [ BaseSunriseVeinBluecrystal, WallRockSnow ]

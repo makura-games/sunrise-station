@@ -1494,34 +1494,52 @@ FloorTileItemIronsandConcreteMono: null
 FloorTileItemIronsandConcreteSmooth: null
 IronSandstone: IronRock
 IronSandstoneMining: IronRock
-AsteroidRockBananium: AsteroidRock
-AsteroidRockBananiumCrab: AsteroidRock
-IronRockBananium: IronRock
-WallRockBananium: WallRock
-WallRockChromiteBananium: WallRockChromite
-WallRockSandBananium: WallRockSand
-WallRockSnowBananium: WallRockSnow
-MeteorRockBananium: AsteroidRock
-# WallRockBasalt: WallRock # Sunrise-Edit
+# AsteroidRockBananium: AsteroidRock # Sunrise-Edit - SAVE SUNRISE BANANA ROCK
+# AsteroidRockBananiumCrab: AsteroidRock # Sunrise-Edit
+# IronRockBananium: IronRock # Sunrise-Edit
+# WallRockBananium: WallRock # Sunrise-Edit
+# WallRockChromiteBananium: WallRockChromite # Sunrise-Edit
+# WallRockSandBananium: WallRockSand # Sunrise-Edit
+# WallRockSnowBananium: WallRockSnow # Sunrise-Edit
+# IronRockBananiumCrab: IronRock # Sunrise-Edit
+# WallRockBananiumCrab: WallRock # Sunrise-Edit
+WallRockBasaltBananiumCrab: WallRockBananiumCrab # Sunrise-Edit
+# WallRockChromiteBananiumCrab: WallRockChromite # Sunrise-Edit
+# WallRockSandBananiumCrab: WallRockSand # Sunrise-Edit
+# WallRockSnowBananiumCrab: WallRockSnow # Sunrise-Edit
+WallRockBasaltCoalCrab: WallRockCoalCrab
+WallRockBasaltGoldCrab: WallRockGoldCrab
+WallRockBasaltQuartzCrab: WallRockQuartzCrab
+WallRockBasaltSilverCrab: WallRockSilverCrab
+WallRockBasaltTinCrab: WallRockTinCrab
+WallRockBasaltUraniumCrab: WallRockUraniumCrab
+WallRockBasaltSaltCrab: WallRockSaltCrab
+WallRockBasaltPlasmaCrab: WallRockPlasmaCrab
+WallRockBasaltDiamondCrab: WallRockDiamondCrab
+WallRockAndesiteSaltCrab: WallRockSaltCrab
+WallRockAndesitePlasmaCrab: WallRockPlasmaCrab
+WallRockAndesiteDiamondCrab: WallRockDiamondCrab
+MeteorRockBananium: AsteroidRockBananium
+WallRockBasalt: WallRock
 WallRockBasaltCoal: WallRockCoal
 WallRockBasaltGold: WallRockGold
 WallRockBasaltDiamond: WallRockDiamond
 WallRockBasaltPlasma: WallRockPlasma
 WallRockBasaltQuartz: WallRockQuartz
 WallRockBasaltSilver: WallRockSilver
-# WallRockBasaltBananium: WallRock # Sunrise-Edit - сохраняем бананиумную базальтовую породу Sunrise
+WallRockBasaltBananium: WallRockBananium
 WallRockBasaltTin: WallRockTin
 WallRockBasaltUranium: WallRockUranium
 WallRockBasaltArtifactFragment: WallRockArtifactFragment
 WallRockBasaltSalt: WallRockSalt
-# WallRockAndesite: WallRock # Sunrise-Edit - сохраняем андезитовую породу Sunrise
+WallRockAndesite: WallRock
 WallRockAndesiteCoal: WallRockCoal
 WallRockAndesiteGold: WallRockGold
 WallRockAndesiteDiamond: WallRockDiamond
 WallRockAndesitePlasma: WallRockPlasma
 WallRockAndesiteQuartz: WallRockQuartz
 WallRockAndesiteSilver: WallRockSilver
-WallRockAndesiteBananium: WallRock
+WallRockAndesiteBananium: WallRockBananium
 WallRockAndesiteTin: WallRockTin
 WallRockAndesiteUranium: WallRockUranium
 WallRockAndesiteArtifactFragment: WallRockArtifactFragment
