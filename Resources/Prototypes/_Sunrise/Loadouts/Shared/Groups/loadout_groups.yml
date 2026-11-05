@@ -440,7 +440,6 @@
   - SnubRevolverBox
   - SunriseLaserPistol
   - WeaponDisabler
-  - WeaponTaser
 
 - type: loadoutGroup
   id: SecurityGlasses
@@ -492,7 +491,6 @@
   - SunriseLaserPistol
   - CadetWeaponMiniEnergyGun
   - WeaponDisabler
-  - WeaponTaser
 
 - type: loadoutGroup
   id: SunriseBrigmedGun
@@ -501,8 +499,6 @@
   maxLimit: 1
   loadouts:
   - WeaponDisabler
-  - SunriseWeaponTaserBrigmed
-  - WeaponTaserBrigmed
   - WeaponMiniEnergyGunBrigmed
 
 # Security  HoS

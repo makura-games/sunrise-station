@@ -10,8 +10,8 @@
     Plastic: 50
 
 - type: latheRecipe
-  id: WeaponEnergyGunPistol
-  result: WeaponEnergyGunPistol
+  id: WeaponAdvancedTaser
+  result: WeaponAdvancedTaser
   categories:
   - Weapons
   completetime: 5

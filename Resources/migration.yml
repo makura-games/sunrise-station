@@ -1318,4 +1318,6 @@ MagazineBatteryLr60: null
 # 2026-10-11
 SecBreachingHammer: SunriseDetonatorBundleSpawner
 SyndieBreachingHammer: SunriseDetonatorBundleSpawner
+# 2026-11-05
+WeaponEnergyGunPistol: WeaponAdvancedTaser
 # region Sunrise-End
