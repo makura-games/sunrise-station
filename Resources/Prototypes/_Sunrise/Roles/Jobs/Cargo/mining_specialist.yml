@@ -22,10 +22,7 @@
   - External
   extendedAccess:
   - CargoPurchaseAccess
-  # Добавляем щит разума. Предложка с сервера ласт портирования на санрайз.
-  special:
-  - !type:AddImplantSpecial
-    implants: [ MindShieldImplant ]
+
   
 
 - type: startingGear
