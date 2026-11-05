@@ -23,7 +23,7 @@
   extendedAccess:
   - CargoPurchaseAccess
   - Mining
-  # Sunrise-End
+  # Sunrise-end
 
 - type: startingGear
   id: SalvageSpecialistGear

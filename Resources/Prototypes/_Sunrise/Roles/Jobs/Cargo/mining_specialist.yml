@@ -23,8 +23,6 @@
   extendedAccess:
   - CargoPurchaseAccess
 
-  
-
 - type: startingGear
   id: MiningSpecialistGear
   equipment:
