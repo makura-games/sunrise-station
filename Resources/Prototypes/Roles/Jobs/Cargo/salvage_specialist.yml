@@ -23,7 +23,11 @@
   extendedAccess:
   - CargoPurchaseAccess
   - Mining
-  # Sunrise-end
+  # - Добавляем щит разума. Предложка с сервера ласт портирования на санрайз.
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  # Sunrise-End
 
 - type: startingGear
   id: SalvageSpecialistGear
