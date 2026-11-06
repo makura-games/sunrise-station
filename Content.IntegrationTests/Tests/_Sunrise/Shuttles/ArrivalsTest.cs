@@ -5,6 +5,7 @@ using Content.Server._Sunrise.Shuttles.Components;
 using Content.Server.Shuttles;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
+using Content.Shared.CCVar;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Robust.Shared.GameObjects;
@@ -181,6 +182,7 @@ public sealed class ArrivalsTest
 
         await server.WaitPost(() =>
         {
+            server.CfgMan.SetCVar(CCVars.FTLArrivalTime, 5f);
             mapSys.CreateMap(out var sourceMapId);
             var targetMap = mapSys.CreateMap(out targetMapId);
             var shuttle = mapSys.CreateGridEntity(sourceMapId);
