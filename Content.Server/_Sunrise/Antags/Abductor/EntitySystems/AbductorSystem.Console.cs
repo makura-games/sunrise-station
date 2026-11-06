@@ -21,7 +21,7 @@ using Robust.Shared.Audio;
 
 namespace Content.Server._Sunrise.Antags.Abductor;
 
-public sealed partial class AbductorSystem : SharedAbductorSystem
+public sealed partial class AbductorSystem
 {
     [Dependency] private NumberObjectiveSystem _number = default!;
     [Dependency] private SharedItemSwitchSystem _itemSwitch = default!;

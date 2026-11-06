@@ -9,7 +9,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server._Sunrise.Antags.Abductor;
 
-public sealed partial class AbductorSystem : SharedAbductorSystem
+public sealed partial class AbductorSystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;

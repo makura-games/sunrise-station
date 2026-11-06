@@ -9,7 +9,7 @@ using Content.Shared.Stacks;
 
 namespace Content.Server.Kitchen.EntitySystems;
 
-public sealed partial class MicrowaveSystem : EntitySystem
+public sealed partial class MicrowaveSystem
 {
     /// <summary>
     /// Runs a set of minimal pre-reqs to check the timing, needed to enable dummy-proof, one-button interface to Wzhzhzh
