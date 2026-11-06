@@ -9,4 +9,5 @@ namespace Content.Shared._Sunrise.Light.Visualizers;
 public enum SunrisePoweredLightVisuals : byte
 {
     HasPower,
+    ShouldFlicker,
 }

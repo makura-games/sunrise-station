@@ -1,5 +1,4 @@
 using Robust.Shared.Audio;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._Sunrise.Light.Visualizers;
 
@@ -34,12 +33,6 @@ public sealed partial class SunrisePoweredLightSparksComponent : Component
     public List<string> SparkStates = [];
 
     /// <summary>
-    /// Путь к RSI с искрами для резервного слоя.
-    /// </summary>
-    [DataField]
-    public ResPath? SparkSprite;
-
-    /// <summary>
     /// Минимальная пауза между вспышками поврежденного светильника.
     /// </summary>
     [DataField]
@@ -62,6 +55,11 @@ public sealed partial class SunrisePoweredLightSparksComponent : Component
     /// </summary>
     [DataField]
     public float FlickerChance = 0.65f;
+
+    /// <summary>
+    /// Решение сервера о мерцании текущей поломки.
+    /// </summary>
+    public bool? ShouldFlicker;
 
     /// <summary>
     /// Вероятность появления искр во время отдельной вспышки.

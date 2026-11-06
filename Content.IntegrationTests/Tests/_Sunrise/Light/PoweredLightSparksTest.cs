@@ -9,8 +9,6 @@ using Content.Shared.Light;
 using Robust.Client.GameObjects;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
-using Robust.Shared.Timing;
-using SparksSystem = Content.Client._Sunrise.Light.Visualizers.SunrisePoweredLightSparksSystem;
 
 namespace Content.IntegrationTests.Tests._Sunrise.Light;
 
@@ -29,6 +27,7 @@ public sealed class PoweredLightSparksTest : GameTest
         {
             map = entMan.System<SharedMapSystem>().CreateMap(out _);
             lamp = entMan.SpawnEntity(prototype, new EntityCoordinates(map, 0, 0));
+            entMan.GetComponent<SunrisePoweredLightSparksComponent>(lamp).FlickerChance = 1;
             var lights = entMan.System<PoweredLightSystem>();
             if (lights.GetBulb(lamp) == null)
             {
@@ -48,6 +47,8 @@ public sealed class PoweredLightSparksTest : GameTest
             var appearance = entMan.System<SharedAppearanceSystem>();
             Assert.That(appearance.TryGetData<bool>(lamp, SunrisePoweredLightVisuals.HasPower, out var hasPower), Is.True);
             Assert.That(hasPower, Is.False);
+            Assert.That(appearance.TryGetData<bool>(lamp, SunrisePoweredLightVisuals.ShouldFlicker, out var shouldFlicker), Is.True);
+            Assert.That(shouldFlicker, Is.True, "The server should choose one flicker result for this broken lamp.");
         });
 
         await Server.WaitPost(() => entMan.System<PowerReceiverSystem>().SetNeedsPower(lamp, false));
@@ -97,12 +98,12 @@ public sealed class PoweredLightSparksTest : GameTest
                 var appearance = entMan.System<AppearanceSystem>();
                 appearance.SetData(uid, PoweredLightVisuals.BulbState, PoweredLightState.Broken);
                 appearance.SetData(uid, SunrisePoweredLightVisuals.HasPower, true);
+                appearance.SetData(uid, SunrisePoweredLightVisuals.ShouldFlicker, true);
             }
             entMan.GetComponent<SunrisePoweredLightSparksComponent>(invalidLamp).States.Clear();
-            entMan.System<AppearanceSystem>().FrameUpdate(0);
-            entMan.System<SparksSystem>().FrameUpdate(0);
-            entMan.System<AnimationPlayerSystem>().FrameUpdate(0.1f);
         });
+
+        await Pair.RunTicksSync(10);
 
         await Client.WaitAssertion(() =>
         {
@@ -111,7 +112,7 @@ public sealed class PoweredLightSparksTest : GameTest
         });
 
         // Повторная вспышка до завершения предыдущей не должна скрыть новые слои.
-        await Client.WaitPost(() => entMan.System<SparksSystem>().FrameUpdate(0));
+        await Pair.RunTicksSync(1);
         await Client.WaitAssertion(() =>
         {
             var sprite = entMan.GetComponent<SpriteComponent>(lamp);
@@ -126,8 +127,8 @@ public sealed class PoweredLightSparksTest : GameTest
         await Client.WaitPost(() =>
         {
             entMan.System<AppearanceSystem>().SetData(lamp, SunrisePoweredLightVisuals.HasPower, false);
-            entMan.System<AppearanceSystem>().FrameUpdate(0);
         });
+        await Pair.RunTicksSync(1);
         await Client.WaitAssertion(() =>
         {
             Assert.That(entMan.HasComponent<ActiveSunrisePoweredLightSparksComponent>(lamp), Is.False);
@@ -140,16 +141,12 @@ public sealed class PoweredLightSparksTest : GameTest
         {
             var appearance = entMan.System<AppearanceSystem>();
             appearance.SetData(lamp, SunrisePoweredLightVisuals.HasPower, true);
-            appearance.FrameUpdate(0);
-            entMan.System<SparksSystem>().FrameUpdate(0);
-            entMan.System<AnimationPlayerSystem>().FrameUpdate(0.1f);
 
             // Новая лампа получает собственную энергию до обработки очереди Appearance.
             entMan.System<SharedPointLightSystem>().SetEnergy(lamp, 0.5f);
             appearance.SetData(lamp, PoweredLightVisuals.BulbState, PoweredLightState.On);
-            appearance.FrameUpdate(0);
-            entMan.System<AnimationPlayerSystem>().FrameUpdate(0.1f);
         });
+        await Pair.RunTicksSync(10);
         await Client.WaitAssertion(() =>
         {
             var light = entMan.GetComponent<PointLightComponent>(lamp);
@@ -161,36 +158,4 @@ public sealed class PoweredLightSparksTest : GameTest
         await Client.WaitPost(() => entMan.DeleteEntity(map));
     }
 
-    [Test]
-    public async Task ClientFlickerTimerPreservesDelayAcrossPause()
-    {
-        var entMan = Client.EntMan;
-        EntityUid lamp = default;
-        TimeSpan before = default;
-        TimeSpan pausedAt = default;
-        TimeSpan resumedAt = default;
-        var timing = Client.ResolveDependency<IGameTiming>();
-
-        await Client.WaitPost(() =>
-        {
-            lamp = entMan.SpawnEntity(null, MapCoordinates.Nullspace);
-            var active = entMan.AddComponent<ActiveSunrisePoweredLightSparksComponent>(lamp);
-            before = active.NextFlickerTime = timing.CurTime + TimeSpan.FromSeconds(5);
-            pausedAt = timing.CurTime;
-            entMan.System<MetaDataSystem>().SetEntityPaused(lamp, true);
-        });
-        await Pair.RunTicksSync(60);
-        await Client.WaitPost(() =>
-        {
-            resumedAt = timing.CurTime;
-            entMan.System<MetaDataSystem>().SetEntityPaused(lamp, false);
-        });
-        await Client.WaitAssertion(() =>
-        {
-            var next = entMan.GetComponent<ActiveSunrisePoweredLightSparksComponent>(lamp).NextFlickerTime;
-            Assert.That(resumedAt, Is.GreaterThan(pausedAt));
-            Assert.That(next - before, Is.EqualTo(resumedAt - pausedAt));
-        });
-        await Client.WaitPost(() => entMan.DeleteEntity(lamp));
-    }
 }

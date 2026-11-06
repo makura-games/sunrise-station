@@ -99,7 +99,6 @@
       shader: unshaded
       visible: false
   - type: SunrisePoweredLightSparks
-    sparkSprite: _Sunrise/Structures/Wallmounts/lighting/strobe_light_sparks.rsi
     flickerSound:
       collection: SunriseFluorescentFlicker
       params:

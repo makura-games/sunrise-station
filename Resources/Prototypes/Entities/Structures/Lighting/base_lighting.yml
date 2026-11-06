@@ -120,6 +120,7 @@
     - map: ["enum.PoweredLightLayers.Glow"]
       state: glow
       shader: unshaded
+    # Sunrise edit start - добавлены слои мерцания и искр
     - map: ["sunrisePoweredLightFlicker"]
       sprite: _Sunrise/Structures/Wallmounts/lighting/light_tube_sparks.rsi
       state: spark-light1
@@ -130,8 +131,9 @@
       state: spark-sparks1
       shader: unshaded
       visible: false
+    # Sunrise edit end
+  # Sunrise edit start - добавлены эффекты искр для разбитой лампы
   - type: SunrisePoweredLightSparks
-    sparkSprite: _Sunrise/Structures/Wallmounts/lighting/light_tube_sparks.rsi
     flickerSound:
       collection: SunriseFluorescentFlicker
       params:
@@ -144,6 +146,7 @@
     sparkStates:
     - spark-sparks1
     - spark-sparks2
+  # Sunrise edit end
   - type: PointLight
     enabled: false
   - type: PoweredLight
@@ -347,6 +350,7 @@
     - map: ["enum.PoweredLightLayers.Glow"]
       state: glow
       shader: unshaded
+    # Sunrise edit start - добавлены слои мерцания и искр
     - map: ["sunrisePoweredLightFlicker"]
       sprite: _Sunrise/Structures/Wallmounts/lighting/light_small_sparks.rsi
       state: spark-light1
@@ -357,8 +361,9 @@
       state: spark-sparks1
       shader: unshaded
       visible: false
+    # Sunrise edit end
+  # Sunrise edit start - добавлены эффекты искр для разбитой лампы
   - type: SunrisePoweredLightSparks
-    sparkSprite: _Sunrise/Structures/Wallmounts/lighting/light_small_sparks.rsi
     flickerSound:
       collection: SunriseFluorescentFlicker
       params:
@@ -368,6 +373,7 @@
     sparkStates:
     - spark-sparks1
     - spark-sparks2
+  # Sunrise edit end
   - type: AmbientSound
     enabled: false
   - type: PointLight
