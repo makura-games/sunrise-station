@@ -492,18 +492,10 @@ public sealed partial class ShuttleSystem
             var maps = EntityQuery<MapComponent, FTLDestinationComponent>()
                 .OrderBy(o => o.Item1.MapId.GetHashCode());
 
-            // Sunrise-Edit - цель и запасные FTL-карты могли быть удалены после завершения раунда.
-            var fallback = maps.FirstOrDefault(o =>
-                _whitelistSystem.IsWhitelistPassOrNull(o.Item2.Whitelist, entity));
-            if (fallback.Item1 == null)
-            {
-                Log.Warning($"Deleting {ToPrettyString(uid)} because no valid FTL destination remains.");
-                _audio.Stop(comp.TravelStream);
-                QueueDel(uid);
-                return;
-            }
-
-            mapId = fallback.Item1.MapId;
+            // Get the first map that passes the FTL whitelist
+            mapId = maps.First(o =>
+                _whitelistSystem.IsWhitelistPassOrNull(o.Item2.Whitelist, entity))
+                .Item1.MapId;
 
             TryFTLProximity(uid, _mapSystem.GetMap(mapId));
         }
