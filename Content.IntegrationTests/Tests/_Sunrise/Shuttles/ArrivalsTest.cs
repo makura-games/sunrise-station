@@ -167,10 +167,10 @@ public sealed class ArrivalsTest
     }
 
     [Test]
-    [Description("does not spawn an FTL visualizer after the destination map is deleted")]
-    public async Task DeletedTargetDuringFtlSkipsVisualizer()
+    [Description("cleans up an FTL shuttle when its target and fallback destinations are deleted")]
+    public async Task DeletedTargetWithoutFallbackDestinationDeletesShuttle()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings { Destructive = true });
         var server = pair.Server;
         var entMan = server.EntMan;
         var mapSys = server.System<SharedMapSystem>();
@@ -207,17 +207,24 @@ public sealed class ArrivalsTest
         await PoolManager.WaitUntil(server, () =>
             entMan.TryGetComponent<FTLComponent>(shuttleUid, out var ftl) && ftl.State == FTLState.Travelling);
 
-        await server.WaitPost(() => mapSys.DeleteMap(targetMapId));
-
-        await PoolManager.WaitUntil(server, () =>
-            entMan.TryGetComponent<FTLComponent>(shuttleUid, out var ftl) && ftl.State == FTLState.Arriving);
-
-        await server.WaitAssertion(() =>
+        await server.WaitPost(() =>
         {
-            var ftl = entMan.GetComponent<FTLComponent>(shuttleUid);
-            Assert.That(ftl.VisualizerEntity, Is.Null);
-            entMan.RemoveComponent<FTLComponent>(shuttleUid);
+            mapSys.DeleteMap(targetMapId);
+
+            var destinations = new List<EntityUid>();
+            var query = entMan.EntityQueryEnumerator<FTLDestinationComponent>();
+            while (query.MoveNext(out var destinationUid, out _))
+            {
+                destinations.Add(destinationUid);
+            }
+
+            foreach (var destinationUid in destinations)
+            {
+                entMan.RemoveComponent<FTLDestinationComponent>(destinationUid);
+            }
         });
+
+        await PoolManager.WaitUntil(server, () => entMan.Deleted(shuttleUid));
 
         await pair.CleanReturnAsync();
     }
