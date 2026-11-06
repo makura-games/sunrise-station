@@ -15,8 +15,9 @@
   components:
   - type: Action
     useDelay: 180
-    icon:
-      sprite: Interface/Actions/actions_rat_king.rsi
-      state: ratKingGuard
+  - type: Sprite
+    sprite: Interface/Actions/actions_rat_king.rsi
+    layers:
+    - state: ratKingGuard
   - type: InstantAction
     event: !type:RatKingRaiseGuardActionEvent

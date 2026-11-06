@@ -2,7 +2,7 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._Sunrise.TapePlayer;
 
-public abstract class SharedTapePlayerSystem : EntitySystem
+public abstract partial class SharedTapePlayerSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedAudioSystem Audio = default!;
+    [Dependency] protected SharedAudioSystem Audio = default!;
 }

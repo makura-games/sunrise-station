@@ -11,5 +11,5 @@ ent-FaxMachineCaptain = факс дальнего действия капита�
     .desc = { ent-FaxMachineBase.desc }
 ent-HandheldFaxBase = портативный факс
     .desc = Портативный факс.
-ent-HandheldFax = Портативный факс
+ent-HandheldFax = портативный факс
     .desc = Портативный факс сделанный специально для представителей корпорации.

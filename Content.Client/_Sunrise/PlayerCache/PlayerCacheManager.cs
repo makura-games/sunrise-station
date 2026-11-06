@@ -1,4 +1,4 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 
 using Content.Shared._Sunrise.InteractionsPanel.Data.UI;
 using Content.Shared._Sunrise.PlayerCache;
@@ -8,10 +8,10 @@ using Robust.Shared.Network;
 
 namespace Content.Client._Sunrise.PlayerCache;
 
-public sealed class PlayerCacheManager
+public sealed partial class PlayerCacheManager
 {
-    [Dependency] private readonly IClientNetManager _netManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private PlayerCacheData _cache = new();
 
@@ -43,6 +43,12 @@ public sealed class PlayerCacheManager
                 cache.EmoteVisibility = b;
                 SetCache(cache);
             });
+
+        CacheChanged += () =>
+        {
+            var sync = new MsgPlayerCacheSync { Cache = _cache };
+            _netManager.ClientSendMessage(sync);
+        };
     }
 
     private void OnCacheRequest(MsgPlayerCacheRequest msg)
@@ -53,8 +59,6 @@ public sealed class PlayerCacheManager
             Pet = _cfg.GetCVar(SunriseCCVars.SponsorPet),
             EmoteVisibility = _cfg.GetCVar(InteractionsCVars.EmoteVisibility),
         };
-        var sync = new MsgPlayerCacheSync { Cache = data };
-        _netManager.ClientSendMessage(sync);
         SetCache(data);
     }
 
@@ -63,6 +67,20 @@ public sealed class PlayerCacheManager
     {
         _cache = data;
         CacheChanged?.Invoke();
+    }
+
+    public bool IsTutorialPromptSeen()
+    {
+        return _cfg.GetCVar(SunriseCCVars.TutorialPromptSeen);
+    }
+
+    public void SetTutorialPromptSeen()
+    {
+        if (IsTutorialPromptSeen())
+            return;
+
+        _cfg.SetCVar(SunriseCCVars.TutorialPromptSeen, true);
+        _cfg.SaveToFile();
     }
 
     public bool TryGetCachedGhostTheme(out string? theme)

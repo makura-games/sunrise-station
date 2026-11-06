@@ -24,9 +24,10 @@
       path: "/Audio/Items/drill_hit.ogg"
     attackRate: 3.5
     damage:
-      groups:
-        Brute: 9
       types:
+        Blunt: 3
+        Slash: 3
+        Piercing: 3
         Structural: 30 # ~10 seconds for solid wall / ~21 secods for reinforced wall #Sunrise-edit
 
 - type: entity
@@ -55,7 +56,8 @@
       path: "/Audio/Items/drill_hit.ogg"
     attackRate: 4
     damage:
-      groups:
-        Brute: 18
       types:
+        Blunt: 6
+        Slash: 6
+        Piercing: 6
         Structural: 50 # ~3 seconds for solid wall / 9 seconds for reinforced wall #Sunrise-edit

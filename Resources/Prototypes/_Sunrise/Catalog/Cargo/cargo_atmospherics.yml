@@ -1,16 +1,4 @@
 - type: cargoProduct
-  id: AtmosphericsLiquidPlasmaSunrise
-  icon:
-    sprite: Structures/Storage/canister.rsi
-    state: orange
-  product: LiquidPlasmaCanisterSunrise
-  # Pricing logic mirrors atmos products: liquid variants cost more than regular gas canisters,
-  # plasma has an additional hazard premium.
-  cost: 12600
-  category: cargoproduct-category-name-atmospherics
-  group: market
-
-- type: cargoProduct
   id: AtmosphericsHelium
   icon:
     sprite: _Sunrise/Structures/Storage/canister.rsi

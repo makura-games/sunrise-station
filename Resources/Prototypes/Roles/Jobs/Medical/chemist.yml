@@ -10,7 +10,6 @@
   startingGear: ChemistGear
   icon: "JobIconChemist"
   supervisors: job-supervisors-cmo
-  displayWeight: 30  # Sunrise
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-pharmacist
@@ -25,18 +24,13 @@
   equipment:
     id: ChemistryPDA
     ears: ClothingHeadsetMedical
-    belt: ChemBag
-    pocket1: HandLabeler
-    eyes: ClothingEyesGlassesChemical
-  #storage:
-    #back:
-    #- Stuff
 
 - type: chameleonOutfit
   id: ChemistChameleonOutfit
   job: Chemist
   equipment:
     head: ClothingHeadHatBeretMedic
+    eyes: ClothingEyesGlassesChemical
     mask: ClothingMaskSterile
     neck: ClothingNeckStethoscope
     outerClothing: ClothingOuterCoatLabChem

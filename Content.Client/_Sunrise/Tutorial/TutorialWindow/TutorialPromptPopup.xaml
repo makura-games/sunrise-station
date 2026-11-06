@@ -1,0 +1,44 @@
+<Control xmlns="https://spacestation14.io"
+         xmlns:parallax="clr-namespace:Content.Client.Parallax"
+         VerticalExpand="True"
+         HorizontalExpand="True"
+         MouseFilter="Stop">
+    <parallax:ParallaxControl SpeedX="20"/>
+
+    <Control VerticalExpand="True"
+             HorizontalExpand="True"
+             HorizontalAlignment="Center"
+             VerticalAlignment="Center"
+             MinWidth="420"
+             MaxWidth="560">
+        <PanelContainer StyleClasses="windowPanel"/>
+
+        <BoxContainer Orientation="Vertical"
+                      Margin="12"
+                      SeparationOverride="10">
+            <Label Text="{Loc 'tutorial-prompt-title'}"
+                   StyleClasses="LabelHeading"
+                   HorizontalAlignment="Center"/>
+
+            <RichTextLabel Text="{Loc 'tutorial-prompt-text'}"
+                           HorizontalExpand="True"/>
+
+            <Label Name="WaitLabel"
+                   StyleClasses="LabelSubText"
+                   HorizontalAlignment="Center"/>
+
+            <BoxContainer Orientation="Horizontal"
+                          HorizontalAlignment="Center"
+                          SeparationOverride="8">
+                <Button Name="StartButton"
+                        Text="{Loc 'tutorial-prompt-start'}"
+                        MinWidth="170"/>
+
+                <Button Name="SkipButton"
+                        Text="{Loc 'tutorial-prompt-skip'}"
+                        Disabled="True"
+                        MinWidth="140"/>
+            </BoxContainer>
+        </BoxContainer>
+    </Control>
+</Control>

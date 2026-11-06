@@ -13,7 +13,7 @@
             !type:NanotrasenNameGenerator
             prefixCreator: '14'
         - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/_Sunrise/Shuttles/NTES_Kaeri.yml
+          emergencyShuttlePath: /Maps/_Sunrise/Shuttles/Evac/emergency.yml
         - type: StationJobs
           availableJobs:
             Passenger: [ -1, -1 ]

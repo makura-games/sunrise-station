@@ -29,7 +29,7 @@
             </PanelContainer>
             <!-- Поля для изменения данных -->
             <GridContainer Name="ControlGrid" Columns="2" HorizontalAlignment="Stretch" HorizontalExpand="True">
-                <Label Name="NameLabel" Text="{Loc 'station-records-ui-name'}"/>               <LineEdit Name="Name" HorizontalExpand="True"/>
+                <Label Name="NameLabel" Text="{Loc 'station-records-ui-name'}"/>               <LineEdit Name="NameEdit" HorizontalExpand="True"/>
                 <Label Name="AgeLabel" Text="{Loc 'station-records-ui-age'}"/>                 <LineEdit Name="Age"/>
                 <Label Name="GenderLabel" Text="{Loc 'station-records-ui-gender'}"/>           <OptionButton Name="Gender"/>
                 <Label Name="SpeciesLabel" Text="{Loc 'station-records-ui-species'}"/>         <OptionButton Name="Species"/>

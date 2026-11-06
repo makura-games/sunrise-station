@@ -11780,19 +11780,12 @@ entities:
     - type: Transform
       pos: 12.5,16.5
       parent: 1
-- proto: TorsoHuman
+- proto: OrganHumanTorso
   entities:
   - uid: 104
     components:
     - type: Transform
       pos: 4.7552643,44.692493
-      parent: 1
-- proto: TorsoVulpkanin
-  entities:
-  - uid: 112
-    components:
-    - type: Transform
-      pos: 6.169155,47.343887
       parent: 1
 - proto: ToyRubberDuck
   entities:
@@ -12045,7 +12038,7 @@ entities:
     - type: Transform
       pos: 6.229467,27.54008
       parent: 1
-- proto: WeaponPistolHIB88M4
+- proto: WeaponPistolViper
   entities:
   - uid: 1466
     components:

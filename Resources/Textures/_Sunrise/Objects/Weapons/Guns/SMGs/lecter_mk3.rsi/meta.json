@@ -1,0 +1,89 @@
+{
+    "version": 1,
+    "license": "CLA",
+    "copyright": "© SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "base"
+        },
+        {
+            "name": "bolt-open"
+        },
+        {
+            "name": "inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "wielded-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "wielded-inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "equipped-BACKPACK",
+            "directions": 4
+        },
+        {
+            "name": "equipped-SUITSTORAGE",
+            "directions": 4
+        },
+        {
+            "name": "mag-0",
+			"delays": [
+			[
+			0.5,
+			0.5
+			]
+		]
+        },
+        {
+            "name": "mag-1",
+			"delays": [
+			[
+			0.5,
+			0.5
+			]
+		]
+        },
+        {
+            "name": "mag-2",
+			"delays": [
+			[
+			0.5,
+			0.5
+			]
+		]
+        },
+        {
+            "name": "mag-3",
+			"delays": [
+			[
+			0.5,
+			0.5
+			]
+		]
+        },
+        {
+            "name": "mag-4",
+			"delays": [
+			[
+			0.5,
+			0.5
+			]
+		]
+        }
+    ]
+}

@@ -75,11 +75,12 @@ public sealed partial class MappingAccessOverlay : Overlay
         IResourceCache resourceCache,
         IUserInterfaceManager uiManager,
         MappingAccessReaderResolver readerResolver,
-        MappingAccessTightBounds tightBounds)
+        MappingAccessTightBounds tightBounds,
+        EntityQuery<PhysicsComponent> physicsQuery)
     {
         _ent = entityManager;
         _entityLookup = entityLookup;
-        _physicsQuery = _ent.GetEntityQuery<PhysicsComponent>();
+        _physicsQuery = physicsQuery;
         _readerResolver = readerResolver;
         _spriteSystem = spriteSystem;
         _tightBounds = tightBounds;

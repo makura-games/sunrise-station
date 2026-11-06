@@ -4,12 +4,12 @@
   parent: BaseChemistryBottleFilled
   components:
   - type: Label
-    currentLabel: reagent-name-polytrinic-acid
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: PolytrinicAcid
-          Quantity: 30
+    localizedLabel: reagent-name-polytrinic-acid
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 30
+      reagents:
+      - ReagentId: PolytrinicAcid
+        Quantity: 30
 

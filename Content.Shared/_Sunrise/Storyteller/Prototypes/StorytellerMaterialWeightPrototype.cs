@@ -5,7 +5,7 @@ namespace Content.Shared._Sunrise.Storyteller.Prototypes;
 /// <summary>
 /// Storyteller per-material strength weight override. ID matches <see cref="Materials.MaterialPrototype"/>.
 /// </summary>
-[Prototype("storytellerMaterialWeight")]
+[Prototype]
 public sealed partial class StorytellerMaterialWeightPrototype : IPrototype
 {
     [IdDataField]

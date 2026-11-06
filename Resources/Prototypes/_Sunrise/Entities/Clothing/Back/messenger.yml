@@ -336,3 +336,75 @@
         color: "#3e2516"
       - state: clasp-inhand-right
         color: "#96907c"
+
+- type: entity
+  abstract: true
+  parent: ClothingBackpackMessengerPirate
+  id: BaseSunriseClothingBackpackMessengerPirateMurmillo
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Back/ModS/murmillo.rsi
+    layers:
+    - state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Back/ModS/murmillo.rsi
+    clothingVisuals:
+      back:
+      - state: equipped-BACKPACK
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+  - type: Modsuit
+  - type: ToggleableClothing
+    clothingPrototype: SunriseClothingShoesBootsMagPirateMurmilloActive
+    requiredSlot: back
+    slot: shoes
+
+- type: entity
+  parent: BaseSunriseClothingBackpackMessengerPirateMurmillo
+  id: SunriseClothingBackpackMessengerPirateMurmilloActive
+  name: murmillo MOD-messenger
+  description: A pirate messenger bag containing a Murmillo MOD-suit ready to deploy without a MOD core.
+  suffix: Pirate, MOD, Active
+  components:
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      toggleable-clothing: !type:ContainerSlot
+  - type: Modsuit
+    isActivated: true
+
+- type: entity
+  parent: BaseSunriseClothingBackpackMessengerPirateMurmillo
+  id: SunriseClothingBackpackMessengerPirateMurmillo
+  name: murmillo MOD-messenger
+  description: A pirate messenger bag containing a Murmillo MOD-suit awaiting a MOD core.
+  suffix: Pirate, MOD, Inactive
+  components:
+  - type: ItemSlots
+    slots:
+      modsuit_core:
+        name: power-cell-slot-component-slot-name-default
+        disableEject: true
+        swap: false
+        whitelist:
+          tags:
+          - ModsuitCore
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      toggleable-clothing: !type:ContainerSlot
+      modsuit_core: !type:ContainerSlot
+
+- type: entity
+  parent: SunriseClothingBackpackMessengerPirateMurmillo
+  id: SunriseClothingBackpackMessengerPirateMurmilloDamaged
+  name: murmillo MOD-messenger
+  description: A pirate messenger bag containing a damaged Murmillo MOD-suit awaiting a MOD core.
+  suffix: Pirate, MOD, Damaged, Inactive
+  components:
+  - type: ToggleableClothing
+    clothingPrototype: SunriseClothingShoesBootsMagPirateMurmilloDamagedActive

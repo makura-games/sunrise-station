@@ -12,7 +12,7 @@ namespace Content.Shared.Hands.EntitySystems;
 
 public abstract partial class SharedHandsSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!; // Sunrise-add
+    [Dependency] private IGameTiming _timing = default!; // Sunrise-add
 
     private void InitializePickup()
     {
@@ -82,6 +82,10 @@ public abstract partial class SharedHandsSystem
         handId ??= handsComp.ActiveHandId;
 
         if (handId == null)
+            return false;
+
+        // don't try to pick up the item if it's being deleted anyways
+        if (TerminatingOrDeleted(entity) || EntityManager.IsQueuedForDeletion(entity))
             return false;
 
         if (!Resolve(entity, ref item, false))

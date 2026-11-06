@@ -7,27 +7,39 @@
   flavor: spooky
   color: "#313538"
   metabolisms:
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         conditions:
         - !type:TagCondition
           tag: "Cultist"
         damage:
-          groups:
-            Burn: -2
-            Toxin: -2
-            Airloss: -2
-            Brute: -2
+          types:
+            Heat: -0.5
+            Shock: -0.5
+            Cold: -0.5
+            Caustic: -0.5
+            Poison: -1
+            Radiation: -1
+            Asphyxiation: -1
+            Bloodloss: -1
+            Blunt: -0.67
+            Slash: -0.67
+            Piercing: -0.66
       - !type:HealthChange
         conditions:
         - !type:TagCondition
           tag: "Cultist"
           inverted: true
         damage:
-          groups:
-            Burn: 2
-            Airloss: 2
-            Brute: 2
           types:
+            Heat: 0.5
+            Shock: 0.5
+            Cold: 0.5
+            Caustic: 0.5
+            Asphyxiation: 1
+            Bloodloss: 1
+            Blunt: 0.67
+            Slash: 0.67
+            Piercing: 0.66
             Poison: 1

@@ -1,4 +1,4 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 
 using System.Linq;
 using System.Numerics;
@@ -21,10 +21,10 @@ namespace Content.Client._Sunrise.GhostTheme;
 [GenerateTypedNameReferences]
 public sealed partial class GhostThemeMenu : DefaultWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly PlayerCacheManager _playerCache = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private PlayerCacheManager _playerCache = default!;
 
     public event Action<string>? OnIdSelected;
 
@@ -85,6 +85,7 @@ public sealed partial class GhostThemeMenu : DefaultWindow
     private void UpdateButtons()
     {
         var currentlyPreviewedTheme = _previewedTheme;
+        var buttonGroup = new ButtonGroup();
 
         ClearButtons();
 
@@ -100,14 +101,17 @@ public sealed partial class GhostThemeMenu : DefaultWindow
                 !ghostTheme.ToLowerInvariant().Contains(_searchText.ToLowerInvariant()))
                 continue;
 
-            var button = new Button
+            var button = new ContainerButton
             {
                 MinHeight = 50,
                 HorizontalExpand = true,
+                Group = buttonGroup,
                 ToggleMode = true,
+                Mode = BaseButton.ActionMode.Press,
                 Pressed = ghostTheme == currentlyPreviewedTheme,
                 Disabled = !ghostThemeInfo.IsAvailable
             };
+            button.AddStyleClass(ContainerButton.StyleClassButton);
 
             var panel = new PanelContainer
             {
@@ -159,13 +163,6 @@ public sealed partial class GhostThemeMenu : DefaultWindow
                 if (!ghostThemeInfo.IsAvailable)
                     return;
 
-                foreach (var child in ButtonContainer.Children)
-                {
-                    if (child is Button otherButton && otherButton != button)
-                        otherButton.Pressed = false;
-                }
-
-                button.Pressed = true;
                 _previewedTheme = ghostTheme;
 
                 UpdatePreview(ghostTheme);

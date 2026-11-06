@@ -1,6 +1,4 @@
-﻿using Content.Shared._Sunrise.Boss.Components;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
+using Content.Shared._Sunrise.Boss.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
@@ -10,13 +8,11 @@ namespace Content.Shared._Sunrise.Boss.Systems;
 /// <summary>
 /// This handles...
 /// </summary>
-public sealed class SpiralMovementSystem : EntitySystem
+public sealed partial class SpiralMovementSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
-    [Dependency] private readonly IEntityNetworkManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedBroadphaseSystem _broadphase = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

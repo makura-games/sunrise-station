@@ -16,7 +16,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: BatteryAmmoProvider
-    proto: Pulse # Sunrise-Edit
+    proto: SunriseMechHitscanPulse # Sunrise-Edit - удаляем предсказанную hitscan-сущность
     fireCost: 80
   - type: Appearance
   - type: AmmoCounter
@@ -39,7 +39,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: BatteryAmmoProvider
-    proto: IgnitionRedLaser # Sunrise-Edit
+    proto: SunriseMechHitscanIgnitionRedLaser # Sunrise-Edit - удаляем предсказанную hitscan-сущность
     fireCost: 35
   - type: Appearance
   - type: AmmoCounter
@@ -85,7 +85,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
   - type: BatteryAmmoProvider
-    proto: RedHeavyLaser # Sunrise-Edit
+    proto: SunriseMechHitscanRedHeavyLaser # Sunrise-Edit - удаляем предсказанную hitscan-сущность
     fireCost: 28
   - type: Appearance
   - type: AmmoCounter
@@ -114,7 +114,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
   - type: BatteryAmmoProvider
-    proto: RedLaser
+    proto: SunriseMechHitscanRedLaser # Sunrise-Edit - удаляем предсказанную hitscan-сущность
     fireCost: 14
   - type: Appearance
   - type: AmmoCounter
@@ -198,7 +198,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
   - type: BatteryAmmoProvider
-    proto: TaserBolt
+    proto: BulletTaser # Sunrise-Edit - используем ванильный физический снаряд
     fireCost: 40
   - type: Appearance
   - type: AmmoCounter
@@ -310,7 +310,7 @@
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: BatteryAmmoProvider
-    proto: EmpPulse
+    proto: BulletEMP # Sunrise-Edit - используем физический EMP-снаряд вместо hitscan
     fireCost: 400
   - type: Appearance
   - type: AmmoCounter
@@ -348,7 +348,7 @@
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: BatteryAmmoProvider
-    proto: RedLaserBeam
+    proto: SunriseMechHitscanRedLaserBeam # Sunrise-Edit - удаляем предсказанную hitscan-сущность
     fireCost: 20
   - type: Appearance
   - type: AmmoCounter

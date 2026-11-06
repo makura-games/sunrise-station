@@ -1,4 +1,15 @@
 - type: entity
+  parent: [SolutionWeapon, SolutionTiny]
+  id: SolutionVenomClownSpider
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Laughter
+        Quantity: 50
+
+- type: entity
   name: inferior vulpkanin
   id: MobBaseInferiorVulpkanin
   parent: MobBaseAncestor
@@ -14,10 +25,7 @@
     speechVerb: Vulpkanin
     allowedEmotes: ['Growl', 'Bark', 'Howl', 'Whines']
   - type: Vocal
-    sounds:
-      Male: MaleVulpkanin
-      Female: FemaleVulpkanin
-      Unsexed: MaleVulpkanin
+    emoteSounds: MaleVulpkanin
   - type: BodyEmotes
     soundsId: ReptilianBodyEmotes
   - type: TypingIndicator
@@ -27,8 +35,6 @@
     interactSuccessString: petting-success-monkey
     interactFailureString: petting-failure-monkey
     interactSuccessSpawn: EffectHearts
-    interactSuccessSound:
-      path: /Audio/Animals/lizard_happy.ogg
     interactFailureSound:
       path: /Audio/Items/wirecutter.ogg
   - type: MobThresholds
@@ -70,28 +76,29 @@
       state: "creampie_human"
       visible: false
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeat
       amount: 2
   - type: AlwaysRevolutionaryConvertible
   - type: Body
-    prototype: InferiorVulpkanin
+  - type: EntityTableContainerFill
+    containers:
+      body_organs: !type:AllSelector
+        children:
+        - id: OrganAnimalLungs
+        - id: OrganAnimalStomach
+        - id: OrganAnimalLiver
+        - id: OrganInferiorVulpkaninHeart
+        - id: OrganAnimalKidneys
 
 - type: entity
   name: inferior vulpkanin
   id: MobInferiorVulpkanin
   parent: MobBaseInferiorVulpkanin
   components:
-  - type: Clumsy
-    gunShootFailDamage:
-      types:
-        Blunt: 2
-        Piercing: 7
-      groups:
-        Burn: 3
-    clumsySound:
-      path: /Audio/Voice/Reptilian/reptilian_scream.ogg
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectClumsyInferiorVulpkanin
 
 - type: entity
   id: MobBaseSyndicateInferiorVulpkanin

@@ -68,3 +68,47 @@ marking-GauzeMothLowerLegRight-gauze_moth_lowerleg_r = Инсектоид, Би�
 marking-GauzeMothLowerLegRight = Инсектоид, Бинт, Перевязь голени (Правый)
 marking-GauzeMothLowerLegLeft-gauze_moth_lowerleg_l = Инсектоид, Бинт, Перевязь голени (Левый)
 marking-GauzeMothLowerLegLeft = Инсектоид, Бинт, Перевязь голени (Левый)
+marking-GauzeVulpStomach-gauze_vulp_abdomen = Вульпканинская марлевая повязка на живот
+marking-GauzeVulpStomach = Вульпканинская марлевая повязка на живот
+
+marking-GauzeVulpBlindfold-gauze_vulp_blindfold = Вульпканинская повязка на глаза
+marking-GauzeVulpBlindfold = Вульпканинская повязка на глаза
+
+marking-GauzeVulpBoxerwrapLeft-gauze_vulp_boxerwrap_l = Вульпканинская марлевая повязка на руку (Левая)
+marking-GauzeVulpBoxerwrapLeft = Вульпканинская марлевая повязка на руку (Левая)
+
+marking-GauzeVulpBoxerwrapRight-gauze_vulp_boxerwrap_r = Вульпканинская марлевая повязка на руку (Правая)
+marking-GauzeVulpBoxerwrapRight = Вульпканинская марлевая повязка на руку (Правая)
+
+marking-GauzeVulpHead-gauze_vulp_head = Вульпканинская марлевая повязка на голову
+marking-GauzeVulpHead = Вульпканинская марлевая повязка на голову
+
+marking-GauzeVulpLeftArm-gauze_vulp_leftarm = Вульпканинская марлевая повязка на руку (Левая)
+marking-GauzeVulpLeftArm = Вульпканинская марлевая повязка на руку (Левая)
+
+marking-GauzeVulpLefteyePatch-gauze_vulp_lefteye_2 = Вульпканинская повязка на глаз (Левая)
+marking-GauzeVulpLefteyePatch = Вульпканинская повязка на глаз (Левая)
+
+marking-GauzeVulpLowerArmRight-gauze_vulp_lowerarm_r = Вульпканинская марлевая повязка на запястье (Правая)
+marking-GauzeVulpLowerArmRight = Вульпканинская марлевая повязка на запястье (Правая)
+
+marking-GauzeVulpLowerLegLeft-gauze_vulp_lowerleg_l = Вульпканинская марлевая повязка на лодыжку (Левая)
+marking-GauzeVulpLowerLegLeft = Вульпканинская марлевая повязка на лодыжку (Левая)
+
+marking-GauzeVulpLowerLegRight-gauze_vulp_lowerleg_r = Вульпканинская марлевая повязка на лодыжку (Правая)
+marking-GauzeVulpLowerLegRight = Вульпканинская марлевая повязка на лодыжку (Правая)
+
+marking-GauzeVulpRighteyePatch-gauze_vulp_righteye_2 = Вульпканинская повязка на глаз (Правая)
+marking-GauzeVulpRighteyePatch = Вульпканинская повязка на глаз (Правая)
+
+marking-GauzeVulpShoulder-gauze_vulp_shoulder = Вульпканинская марлевая повязка на плечо
+marking-GauzeVulpShoulder = Вульпканинская марлевая повязка на плечо
+
+marking-GauzeVulpUpperArmRight-gauze_vulp_upperarm_r = Вульпканинская марлевая повязка на предплечье (Правая)
+marking-GauzeVulpUpperArmRight = Вульпканинская марлевая повязка на предплечье (Правая)
+
+marking-GauzeVulpUpperLegLeft-gauze_vulp_upperleg_l = Вульпканинская марлевая повязка на бедро (Левая)
+marking-GauzeVulpUpperLegLeft = Вульпканинская марлевая повязка на бедро (Левая)
+
+marking-GauzeVulpUpperLegRight-gauze_vulp_upperleg_r = Вульпканинская марлевая повязка на бедро (Правая)
+marking-GauzeVulpUpperLegRight = Вульпканинская марлевая повязка на бедро (Правая)

@@ -8,13 +8,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._Sunrise.InnateItem;
 
-public sealed class InnateItemSystem : EntitySystem
+public sealed partial class InnateItemSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly MetaDataSystem _metadata = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedInteractionSystem _interactionSystem = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private MetaDataSystem _metadata = default!;
 
     private static readonly EntProtoId InnateEntityTargetAction = "InnateEntityTargetAction";
     private static readonly EntProtoId InnateInstantActionAction = "InnateInstantActionAction";

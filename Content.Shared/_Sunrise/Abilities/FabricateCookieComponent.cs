@@ -1,6 +1,5 @@
 using Content.Shared.Actions;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared._Sunrise.Abilities;
 
@@ -14,9 +13,8 @@ public sealed partial class FabricateCookieComponent : Component
         "FoodBakedCookieOatmeal"
     };
 
-    [ViewVariables(VVAccess.ReadWrite),
-     DataField("actionFabricateCookie", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string ActionFabricateCookie = "FabricateCookie";
+    [ViewVariables(VVAccess.ReadWrite), DataField]
+    public EntProtoId ActionFabricateCookie = "FabricateCookie";
 }
 
 

@@ -26,33 +26,6 @@
         color: "#575EF5"
 
 - type: entity
-  id: MagazineLightRifleHP
-  name: "magazine (.30 rifle HP)"
-  parent: BaseMagazineLightRifle
-  description: Curved 30-round double stack magazine for combat rifles. Intended to hold general-purpose kinetic ammunition.
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleHP
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#F5514C"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#F5514C"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#F5514C"
-
-- type: entity
   id: MagazineLightRifleFMJ
   name: "magazine (.30 rifle FMJ)"
   parent: BaseMagazineLightRifle
@@ -90,11 +63,13 @@
   id: MagazineLightRifleImprovised
   name: "magazine (.30 rifle improvised)"
   parent: BaseMagazineLightRifle
-  description: Curved 30-round double stack magazine for combat rifles. Intended to hold improvised ammunition.
+  description: Curved 20-round double stack magazine for combat rifles. Intended to hold improvised ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeLightRifleImprovised
+    capacity: 20
   - type: Sprite
+    scale: 1, 0.8
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -112,48 +87,20 @@
       - state: inhand-right-mag
       - state: inhand-right-stripe
         color: "#000000a3"
-
-# region Light LMG
-- type: entity
-  id: MagazineDl6902
-  name: box-magazine DL6902
-  parent: BaseMagazineLightRifle
-  components:
   - type: Tag
     tags:
-      - MagazineDl6902
-  - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleSP
-    capacity: 200
-  - type: Item
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/dl6902_mag.rsi
-  - type: MagazineVisuals
-    magState: mag
-    steps: 8
-    zeroVisible: false
-  - type: Appearance
+    - MagazineLightRifleImprovised
 
 - type: entity
-  id: MagazineRPD
-  name: RPD magazine
-  parent: BaseMagazineLightRifle
+  id: MagazineLightRifleImprovisedEmpty
+  parent: MagazineLightRifleImprovised
+  suffix: Empty
   components:
-  - type: Item
-    size: Normal
-  - type: Tag
-    tags:
-    - MagazineRPD
   - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleSP
-    capacity: 100
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/pk_box.rsi
-  - type: MagazineVisuals
-    magState: mag
-    steps: 8
-    zeroVisible: false
-  - type: Appearance
+    proto: null
+  - type: Construction
+    graph: ImprovisedMagazineLightRifleGraph
+    node: shell
 
 # region Heavy LMG
 - type: entity
@@ -172,7 +119,7 @@
       - CartridgeHeavyRifle
     capacity: 50
   - type: Item
-    size: Normal
+    size: Small
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -188,11 +135,10 @@
     steps: 2
     zeroVisible: false
   - type: Appearance
-
 - type: entity
   id: MagazineLightMachineGunMG60
   name: MG60 magazine
-  parent: BaseItem
+  parent: BaseNonCycleableAmmoItem
   components:
   - type: Tag
     tags:
@@ -223,167 +169,3 @@
   - type: Appearance
 
 # region Other
-- type: entity
-  id: MagazineScorpion
-  name: Scorpion magazine
-  parent: BaseItem
-  components:
-  - type: Tag
-    tags:
-    - MagazineScorpion
-  - type: BallisticAmmoProvider
-    mayTransfer: true
-    proto: CartridgePistolSP
-    whitelist:
-      tags:
-      - CartridgePistol
-    capacity: 20
-  - type: Item
-    size: Small
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/scorpion.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag
-    steps: 2
-    zeroVisible: false
-  - type: Appearance
-
-- type: entity
-  id: MagazineNewVector
-  name: New Vector magazine
-  parent: BaseItem
-  components:
-  - type: Tag
-    tags:
-    - MagazineNewVector
-  - type: BallisticAmmoProvider
-    mayTransfer: true
-    proto: CartridgeLightRifleSP
-    whitelist:
-      tags:
-      - CartridgeLightRifle
-    capacity: 45
-  - type: Item
-    size: Small
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/new_vector.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag
-    steps: 2
-    zeroVisible: false
-  - type: Appearance
-
-- type: entity
-  id: MagazineVP78
-  name: VP70 magazine
-  parent: BaseItem
-  components:
-    - type: Tag
-      tags:
-        - MagazineVP78
-    - type: BallisticAmmoProvider
-      proto: CartridgePistol40SP  # 45 ACP
-      mayTransfer: true
-      whitelist:
-        tags:
-          - CartridgePistolDP # 45 ACP
-      capacity: 16
-    - type: Item
-      size: Small
-    - type: ContainerContainer
-      containers:
-        ballistic-ammo: !type:Container
-    - type: Sprite
-      sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/vp70.rsi
-      layers:
-        - state: base
-          map: ["enum.GunVisualLayers.Base"]
-        - state: mag-1
-          map: ["enum.GunVisualLayers.Mag"]
-    - type: MagazineVisuals
-      magState: mag
-      steps: 6
-      zeroVisible: false
-    - type: Appearance
-
-- type: entity
-  id: MagazineHIBrowning
-  name: HI Browning magazine
-  parent: BaseItem
-  components:
-  - type: Tag
-    tags:
-    - MagazineHIBrowning
-  - type: BallisticAmmoProvider
-    mayTransfer: true
-    proto: CartridgePistolFMJ  # 57x28
-    whitelist:
-      tags:
-      - CartridgePistol  # 57x28
-    capacity: 15
-  - type: Item
-    size: Small
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/hi_browning.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag
-    steps: 6
-    zeroVisible: false
-  - type: Appearance
-
-- type: entity
-  id: MagazineACP14
-  name: ACP14 magazine
-  parent: BaseItem
-  components:
-  - type: Tag
-    tags:
-    - MagazineACP14
-  - type: BallisticAmmoProvider
-    mayTransfer: true
-    proto: CartridgePistol40SP  # 45 ACP
-    whitelist:
-      tags:
-      - CartridgePistolDP # 45 ACP
-    capacity: 10
-  - type: Item
-    size: Small
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/acp14.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag
-    steps: 6
-    zeroVisible: false
-  - type: Appearance

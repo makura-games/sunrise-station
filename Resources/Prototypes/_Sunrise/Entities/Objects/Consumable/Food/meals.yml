@@ -14,19 +14,19 @@
       sprite: _Sunrise/Objects/Consumable/Food/thaslop.rsi
       layers:
         - state: thaslop
-    - type: SolutionContainerManager
-      solutions:
-        food:
-          maxVol: 30
-          reagents:
-            - ReagentId: Nutriment
-              Quantity: 10
-            - ReagentId: Vitamin
-              Quantity: 5
-            - ReagentId: Protein
-              Quantity: 5
-            - ReagentId: Ipecac
-              Quantity: 4
+    - type: Solution
+      id: food
+      solution:
+        maxVol: 30
+        reagents:
+          - ReagentId: Nutriment
+            Quantity: 10
+          - ReagentId: Vitamin
+            Quantity: 5
+          - ReagentId: Protein
+            Quantity: 5
+          - ReagentId: Ipecac
+            Quantity: 4
     - type: Tag
       tags:
         - Meat

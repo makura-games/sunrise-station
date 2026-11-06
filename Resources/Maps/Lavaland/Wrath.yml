@@ -438,7 +438,7 @@ entities:
     - type: Transform
       pos: 2.5337758,-1.914545
       parent: 1
-- proto: LeftLegSkeleton
+- proto: OrganSkeletonPersonLegLeft
   entities:
   - uid: 112
     components:
@@ -478,7 +478,7 @@ entities:
     - type: Transform
       pos: 4.3853383,3.47608
       parent: 1
-- proto: RightHandSkeleton
+- proto: OrganSkeletonPersonHandRight
   entities:
   - uid: 111
     components:
@@ -556,7 +556,7 @@ entities:
     - type: Transform
       pos: -5.5667624,3.0776424
       parent: 1
-- proto: TorsoSkeleton
+- proto: OrganSkeletonPersonTorso
   entities:
   - uid: 110
     components:

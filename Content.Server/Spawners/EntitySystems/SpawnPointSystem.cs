@@ -7,12 +7,12 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Spawners.EntitySystems;
 
-public sealed class SpawnPointSystem : EntitySystem
+public sealed partial class SpawnPointSystem : EntitySystem
 {
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private StationSpawningSystem _stationSpawning = default!;
 
     public override void Initialize()
     {
@@ -27,6 +27,8 @@ public sealed class SpawnPointSystem : EntitySystem
         // TODO: Cache all this if it ends up important.
         var points = EntityQueryEnumerator<SpawnPointComponent, TransformComponent>();
         var possiblePositions = new List<EntityCoordinates>();
+        // Sunrise-Edit: Резервные точки профессий для карт без отдельной точки позднего подключения.
+        var lateJoinFallbackPositions = new List<EntityCoordinates>();
 
         while (points.MoveNext(out var uid, out var spawnPoint, out var xform))
         {
@@ -45,6 +47,13 @@ public sealed class SpawnPointSystem : EntitySystem
                                 || string.IsNullOrEmpty(spawnPoint.Job)
                                 || spawnPoint.Job == args.Job;
 
+            if (args.DesiredSpawnPointType == SpawnPointType.LateJoin
+                && spawnPoint.SpawnType == SpawnPointType.Job
+                && isMatchingJob)
+            {
+                lateJoinFallbackPositions.Add(xform.Coordinates);
+            }
+
             switch (spawnPointType)
             {
                 case SpawnPointType.Job when isMatchingJob && spawnPoint.SpawnType == SpawnPointType.Job:
@@ -57,6 +66,10 @@ public sealed class SpawnPointSystem : EntitySystem
             }
             // Sunrise added end
         }
+
+        // Sunrise-Edit: Не используем случайную точку с другой станции, если карта не имеет LateJoin-спавнера.
+        if (possiblePositions.Count == 0 && args.DesiredSpawnPointType == SpawnPointType.LateJoin)
+            possiblePositions.AddRange(lateJoinFallbackPositions);
 
         if (possiblePositions.Count == 0)
         {

@@ -1,49 +1,17 @@
-# Senior Time
-- type: loadoutEffectGroup
-  id: SeniorPhysician
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobChemist
-      time: 6h
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobMedicalDoctor
-      time: 6h
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:DepartmentTimeRequirement
-      department: Medical
-      time: 60h
-
-# Other Timers
-
-- type: loadoutEffectGroup
-  id: MedicalHeadMirrorTimer
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobMedicalDoctor
-      time: 30h
-
 # Head
-
-#- type: loadout
-#  id: SeniorPhysicianBeret
-#  effects:
-#  - !type:GroupLoadoutEffect
-#    proto: SeniorPhysician
-#  equipment:
-#    head: ClothingHeadHatBeretSeniorPhysician
+- type: loadout
+  id: SeniorPhysicianBeret
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorPhysician
+  equipment:
+    head: ClothingHeadHatBeretSeniorPhysician
 
 - type: loadout
   id: MedicalHeadMirror
   effects:
   - !type:GroupLoadoutEffect
-    proto: MedicalHeadMirrorTimer
+    proto: MedicalJourneymanTimer
   equipment:
     head: ClothingHeadMirror
 
@@ -136,39 +104,23 @@
   equipment:
     outerClothing: ClothingOuterWinterMed
 
+- type: loadout
+  id: SeniorPhysicianLabCoat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorPhysician
+  equipment:
+    outerClothing: ClothingOuterCoatLabSeniorPhysician
+
 # Shoes
 - type: loadout
   id: MedicalWinterBoots
   equipment:
     shoes: ClothingShoesBootsWinterMed
 
-# Gloves
-- type: loadout
-  id: NitrileGloves
-  equipment:
-    gloves: ClothingHandsGlovesNitrile
-
-#Masks
-- type: loadout
-  id: SterileMask
-  equipment:
-    mask: ClothingMaskSterile
-
-#Eyewear
-- type: loadout
-  id: MedicalHud
-  equipment:
-    eyes: ClothingEyesHudMedical
-
-- type: loadout
-  id: MedicalEyePatchHud
-  equipment:
-    eyes: ClothingEyesEyepatchHudMedical
-
-#sunrise-start
 # ID
 - type: loadout
-  id: MedicalPDA
+  id: MedicalDoctorPDA
   equipment:
     id: MedicalPDA
 
@@ -179,4 +131,9 @@
     proto: SeniorPhysician
   equipment:
     id: SeniorPhysicianPDA
-#sunrise-end
+
+#Masks
+- type: loadout
+  id: SterileMask
+  equipment:
+    mask: ClothingMaskSterile

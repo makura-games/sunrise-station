@@ -1,7 +1,10 @@
+#nullable enable
+
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Content.IntegrationTests.Fixtures;
 using Robust.Shared.ContentPack;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Utility;
@@ -11,12 +14,12 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components
 {
     [TestFixture]
     [TestOf(typeof(Server.Entry.IgnoredComponents))]
-    public sealed class EntityPrototypeComponentsTest
+    public sealed class EntityPrototypeComponentsTest : GameTest
     {
         [Test]
         public async Task PrototypesHaveKnownComponents()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
             var client = pair.Client;
 
@@ -53,7 +56,17 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components
 
                     foreach (var node in root.Cast<YamlMappingNode>())
                     {
-                        var prototypeType = node.GetNode("type").AsString();
+                        if (!node.TryGetNode("type", out YamlScalarNode? prototypeTypeNode))
+                            continue;
+
+                        // Sunrise-Edit: операции компонентов partial-прототипов проверяются после их применения движком.
+                        if (!prototypeTypeNode.Tag.IsEmpty &&
+                            prototypeTypeNode.Tag.Value.Equals("!PartialOnly", StringComparison.OrdinalIgnoreCase))
+                        {
+                            continue;
+                        }
+
+                        var prototypeType = prototypeTypeNode.AsString();
 
                         if (prototypeType != "entity")
                         {
@@ -67,11 +80,19 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components
 
                         entitiesValidated++;
 
-                        foreach (var component in components.Cast<YamlMappingNode>())
+                        foreach (var component in components.OfType<YamlMappingNode>())
                         {
+                            // Sunrise-Edit: операции над списком компонентов сами компонентами не являются.
+                            if (!component.TryGetNode("type", out YamlScalarNode? componentTypeNode) ||
+                                (!component.Tag.IsEmpty &&
+                                 component.Tag.Value.Equals("!Remove", StringComparison.OrdinalIgnoreCase)))
+                            {
+                                continue;
+                            }
+
                             componentsValidated++;
 
-                            var componentType = component.GetNode("type").AsString();
+                            var componentType = componentTypeNode.AsString();
                             var clientAvailability = cComponentFactory.GetComponentAvailability(componentType);
                             var serverAvailability = sComponentFactory.GetComponentAvailability(componentType);
 
@@ -100,7 +121,6 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components
 
             if (unknownComponentsClient.Count + unknownComponentsServer.Count + doubleIgnoredComponents.Count == 0)
             {
-                await pair.CleanReturnAsync();
                 Assert.Pass($"Validated {entitiesValidated} entities with {componentsValidated} components in {paths.Length} files.");
                 return;
             }
@@ -131,11 +151,11 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components
         [Test]
         public async Task IgnoredComponentsExistInTheCorrectPlaces()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
             var client = pair.Client;
             var serverComponents = server.ResolveDependency<IComponentFactory>();
-            var ignoredServerNames = Server.Entry.IgnoredComponents.List;
+            var ignoredServerNames = Content.Server.Entry.IgnoredComponents.List;
             var clientComponents = client.ResolveDependency<IComponentFactory>();
 
             var failureMessages = "";
@@ -151,7 +171,6 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components
                 }
             }
             Assert.That(failureMessages, Is.Empty);
-            await pair.CleanReturnAsync();
         }
     }
 }

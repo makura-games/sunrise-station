@@ -13,7 +13,7 @@ namespace Content.Client._Sunrise.Tutorial.Overlays;
 
 /// <summary>
 /// Draws an animated dotted trail from the local player toward the current tutorial
-/// navigation target, and a reach-zone ring around goal markers.
+/// navigation target, and an interaction-zone ring around goal markers.
 /// </summary>
 public sealed class TutorialPathOverlay(
     IEntityManager entManager,
@@ -30,6 +30,7 @@ public sealed class TutorialPathOverlay(
     private const float MinTargetDist = 0.9f;
     private const float AnimSpeed = 2.5f;
     private const int ZoneSegments = 48;
+    private const float DefaultZoneRadius = 2f;
 
     private static readonly Color PathColor = Color.FromHex("#FFD84D");
     private static readonly Color ZoneColor = Color.FromHex("#FFD84D66");
@@ -61,14 +62,14 @@ public sealed class TutorialPathOverlay(
                 DrawDottedPath(args.WorldHandle, playerMap.Position, targetMap.Position);
         }
 
-        // Zone ring around reach-marker targets
+        // Zone ring around goal-marker targets
         if (tutComp.Target is { } markerUid
             && entManager.HasComponent<TutorialGoalMarkerComponent>(markerUid)
             && entManager.TryGetComponent<TransformComponent>(markerUid, out var markerXform))
         {
             var markerMap = transform.GetMapCoordinates(markerUid, xform: markerXform);
             if (markerMap.MapId == args.MapId)
-                DrawZoneRing(args.WorldHandle, markerMap.Position, GetReachDistance(tutComp));
+                DrawZoneRing(args.WorldHandle, markerMap.Position, GetMarkerDistance(tutComp));
         }
     }
 
@@ -106,21 +107,47 @@ public sealed class TutorialPathOverlay(
         }
     }
 
-    private float GetReachDistance(TutorialPlayerComponent comp)
+    private float GetMarkerDistance(TutorialPlayerComponent comp)
     {
-        if (!proto.TryIndex(comp.SequenceId, out var sequence))
-            return 2f;
-        if (comp.StepIndex < 0 || comp.StepIndex >= sequence.Steps.Count)
-            return 2f;
-        if (!proto.TryIndex(sequence.Steps[comp.StepIndex], out var step))
-            return 2f;
-
-        foreach (var condition in step.Conditions)
+        TutorialStepPrototype? step;
+        if (comp.ActiveStepOverride is { } overrideStep)
         {
-            if (condition is ReachMarkerCondition rc)
-                return rc.Distance;
+            if (!proto.TryIndex(overrideStep, out step))
+                return DefaultZoneRadius;
+        }
+        else
+        {
+            if (!proto.TryIndex(comp.SequenceId, out var sequence))
+                return DefaultZoneRadius;
+            if (comp.StepIndex < 0 || comp.StepIndex >= sequence.Steps.Count)
+                return DefaultZoneRadius;
+            if (!proto.TryIndex(sequence.Steps[comp.StepIndex], out step))
+                return DefaultZoneRadius;
         }
 
-        return 2f;
+        if (TryGetMarkerDistance(step.Conditions, out var distance) ||
+            TryGetMarkerDistance(step.AnyConditions, out distance))
+            return distance;
+
+        return DefaultZoneRadius;
+    }
+
+    private static bool TryGetMarkerDistance(List<TutorialCondition> conditions, out float distance)
+    {
+        foreach (var condition in conditions)
+        {
+            switch (condition)
+            {
+                case ReachMarkerCondition reach:
+                    distance = reach.Distance;
+                    return true;
+                case ItemPlacedNearMarkerCondition placed:
+                    distance = placed.Distance;
+                    return true;
+            }
+        }
+
+        distance = default;
+        return false;
     }
 }

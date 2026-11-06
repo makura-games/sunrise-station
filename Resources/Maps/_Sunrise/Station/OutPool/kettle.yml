@@ -116533,7 +116533,7 @@ entities:
     - pos: 51.475567,52.507065
       parent: 82
       type: Transform
-- proto: HeadSkeleton
+- proto: OrganSkeletonPersonHead
   entities:
   - uid: 8613
     components:

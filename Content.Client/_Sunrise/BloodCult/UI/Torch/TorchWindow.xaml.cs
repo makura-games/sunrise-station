@@ -6,7 +6,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._Sunrise.BloodCult.UI.Torch;
 
 [GenerateTypedNameReferences]
-public partial class TorchWindow : DefaultWindow
+public sealed partial class TorchWindow : DefaultWindow
 {
     public Action<string, string>? ItemSelected;
 

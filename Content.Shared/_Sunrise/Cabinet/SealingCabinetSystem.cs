@@ -5,11 +5,11 @@ using Content.Shared.Popups;
 
 namespace Content.Shared.Cabinet;
 
-public sealed class SealingCabinetSystem : EntitySystem
+public sealed partial class SealingCabinetSystem : EntitySystem
 {
-    [Dependency] private readonly ItemCabinetSystem _cabinet = default!;
-    [Dependency] private readonly OpenableSystem _openable = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private ItemCabinetSystem _cabinet = default!;
+    [Dependency] private OpenableSystem _openable = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -26,7 +26,7 @@ public sealed class SealingCabinetSystem : EntitySystem
 
         args.Cancelled = true;
         if (args.User is {} user)
-            _popup.PopupClient(Loc.GetString(ent.Comp.SealedPopup, ("container", ent.Owner)), ent, user);
+            _popup.PopupEntity(Loc.GetString(ent.Comp.SealedPopup, ("container", ent.Owner)), ent, user);
     }
 
     private void OnEmagged(Entity<SealingCabinetComponent> ent, ref GotEmaggedEvent args)

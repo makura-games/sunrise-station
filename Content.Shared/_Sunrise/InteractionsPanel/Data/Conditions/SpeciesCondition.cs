@@ -28,7 +28,7 @@ public sealed partial class SpeciesCondition : IAppearCondition
 
     private bool CheckSpecies(EntityUid uid, EntityManager entMan)
     {
-        if (!entMan.TryGetComponent<HumanoidAppearanceComponent>(uid, out var appearance))
+        if (!entMan.TryGetComponent<HumanoidProfileComponent>(uid, out var appearance))
             return false;
 
         return AllowedSpecies.Contains(appearance.Species);

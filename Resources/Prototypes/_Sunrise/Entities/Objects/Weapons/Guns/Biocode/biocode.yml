@@ -99,16 +99,6 @@
     - Pirate
 
 - type: entity
-  parent: WeaponRifleM90GrenadeLauncher
-  id: WeaponRifleM90GrenadeLauncherBiocode
-  suffix: BIOCODE
-  components:
-  - type: FactionWeaponBlocker
-    factions:
-    - Syndicate
-    - Pirate
-
-- type: entity
   parent: WeaponRifleBauer127
   id: WeaponRifleBauer127Biocode
   suffix: BIOCODE
@@ -141,16 +131,6 @@
 - type: entity
   parent: WeaponSIAR52
   id: WeaponSIAR52Biocode
-  suffix: BIOCODE
-  components:
-  - type: FactionWeaponBlocker
-    factions:
-    - Syndicate
-    - Pirate
-
-- type: entity
-  parent: WeaponDL6902
-  id: WeaponDL6902Biocode
   suffix: BIOCODE
   components:
   - type: FactionWeaponBlocker
@@ -229,8 +209,8 @@
     - Pirate
 
 - type: entity
-  parent: WeaponSubMachineGunC40r
-  id: WeaponSubMachineGunC40rBiocode
+  parent: WeaponSubMachineGunVector
+  id: WeaponSubMachineGunVectorBiocode
   suffix: BIOCODE
   components:
   - type: FactionWeaponBlocker

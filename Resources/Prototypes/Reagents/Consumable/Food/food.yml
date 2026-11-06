@@ -8,11 +8,16 @@
   flavor: nutriment
   color: "#24591F"
   metabolisms:
-    Food:
+    Digestion:
+      metabolismRate: 1
       effects:
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
+        factor: 3
 #sunrise-start
-    Medicine:
+    Bloodstream:
+      metabolites:
+        Nutriment: 1
       effects:
         - !type:HealthChange
           damage:
@@ -35,20 +40,22 @@
   flavor: vitamin
   color: "#D3D3D3"
   metabolisms:
-    Food: #This makes it not compete with medicines, a large bonus for something that can heal
+    Digestion: #This makes it not compete with medicines, a large bonus for something that can heal
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         probability: 0.5
         damage:
-          groups:
-            Brute: -0.5
-            Burn: -0.5
+          Brute: -0.5
+          Burn: -0.5
       # Helps you stop bleeding to an extent.
       - !type:ModifyBleed
         amount: -0.25
-      - !type:SatiateHunger #Numbers are balanced with this in mind + it helps limit how much healing you can get from fo
+      - !type:Satiate #Numbers are balanced with this in mind + it helps limit how much healing you can get from food
+        satiationType: Hunger
   #sunrise-start
-    Medicine:
+    Bloodstream:
+      metabolites:
+        Vitamin: 1
       effects:
       - !type:HealthChange
         damage:
@@ -72,18 +79,20 @@
   flavor: protein
   color: "#FFFFE5"
   metabolisms:
-    Food:
+    Digestion:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         probability: 0.5
         damage:
-          groups:
-            Brute: -0.4
+          Brute: -0.4
       - !type:ModifyBloodLevel
         amount: 1 # weaker than iron but pretty good all things considered
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
     #sunrise-start
-    Medicine:
+    Bloodstream:
+      metabolites:
+        Protein: 1
       effects:
       - !type:HealthChange
         damage:
@@ -102,16 +111,19 @@
   color: white
   meltingPoint: 146.0
   metabolisms:
-    Food:
+    Digestion:
       effects:
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         conditions:
         - !type:ReagentCondition #Only satiates when eaten with nutriment
           reagent: Nutriment
           min: 0.1
         factor: 1
   #sunrise-start
-    Medicine:
+    Bloodstream:
+      metabolites:
+        Sugar: 1
       effects:
       - !type:HealthChange
         damage:

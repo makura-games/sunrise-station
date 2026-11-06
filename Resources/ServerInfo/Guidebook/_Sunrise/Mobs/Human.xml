@@ -2,7 +2,7 @@
   # Люди
 
   <Box>
-    <GuideEntityEmbed Entity="MobHumanDummy" Caption=""/>
+    <GuideEntityEmbed Entity="MobHuman" Caption=""/>
   </Box>
 
   В зависимости от того, кого спросить, люди либо ничем не примечательны, либо являются универсальным эталоном, с которым сравнивают всех остальных.

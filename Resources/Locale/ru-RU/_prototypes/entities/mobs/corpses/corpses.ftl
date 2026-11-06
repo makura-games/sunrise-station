@@ -1,6 +1,6 @@
 ent-MobRandomServiceCorpse = { ent-SalvageHumanCorpse }
-    .desc = { ent-SalvageHumanCorpse.desc }
     .suffix = Мёртвый, Сервис
+    .desc = { ent-SalvageHumanCorpse.desc }
 ent-MobRandomEngineerCorpse = { ent-SalvageHumanCorpse }
     .suffix = Мёртвый, Инженер
     .desc = { ent-SalvageHumanCorpse.desc }

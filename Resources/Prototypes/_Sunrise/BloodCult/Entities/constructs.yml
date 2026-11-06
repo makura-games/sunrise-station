@@ -36,6 +36,7 @@
           layer:
             - FlyingMobLayer
     - type: Damageable
+    - type: Injurable
       damageContainer: Biological
     - type: BecomeDustOnDeath
     - type: MobThresholds
@@ -61,7 +62,7 @@
         - CannotSuicide
         - DoorBumpOpener
     - type: CultMember
-    - type: DamageOverlay
+    - type: SunriseDamagePopup
     - type: TTS
       voice: dragon_knight_dragon_dota_2
 
@@ -94,11 +95,14 @@
       actions: [JuggernautCreateWall]
     - type: Hands
       showInHands: true
-    - type: Body
-      prototype: ConstructJuggernaut
+      startingHands:
+        hand_right:
+          location: Right
+        hand_left:
+          location: Left
     - type: ContainerContainer
       containers:
-        body_root_part: !type:ContainerSlot
+        body_organs: !type:Container
     - type: Juggernaut
     - type: TTS
       voice: enigma_dota_2

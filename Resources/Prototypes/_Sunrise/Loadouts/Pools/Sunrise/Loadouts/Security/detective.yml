@@ -83,14 +83,6 @@
     proto: MasterDetective50h
 
 - type: loadout
-  id: DetectiveWeapon50h2
-  equipment:
-    pocket1: WeaponRevolverSpearheadBlack
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: MasterDetective50h
-
-- type: loadout
   id: DetectiveWeapon100h
   equipment:
     pocket1: WeaponPistolM1984

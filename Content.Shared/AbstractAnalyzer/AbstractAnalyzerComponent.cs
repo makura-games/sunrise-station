@@ -65,4 +65,5 @@ public abstract partial class AbstractAnalyzerComponent : Component
     /// </summary>
     [DataField]
     public bool Silent;
+
 }

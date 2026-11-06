@@ -4,6 +4,7 @@
   id: BaseMagazineGrenadeExtended
   name: grenade extended cartridge
   description: A large grenade cartridge with increased payload.
+  suffix: Not for Security
   components:
   - type: BallisticAmmoProvider
     capacity: 15

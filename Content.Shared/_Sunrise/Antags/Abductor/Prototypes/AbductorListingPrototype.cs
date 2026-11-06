@@ -4,8 +4,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._Sunrise.Antags.Abductor;
 
-[Prototype("abductorListing")]
-[Serializable, NetSerializable]
+[Prototype]
 [DataDefinition]
 public sealed partial class AbductorListingPrototype : IPrototype
 {

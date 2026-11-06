@@ -17,6 +17,9 @@
       "name": "icon"
     },
     {
+      "name": "icon_black"
+    },
+    {
       "name": "inhand-left",
       "directions": 4
     },

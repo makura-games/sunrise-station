@@ -1,6 +1,9 @@
 ﻿using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.CCVar;
+using Robust.Client.UserInterface;
 using Robust.Shared.Input;
+
+using TutorialUIController = Content.Client._Sunrise.Tutorial.TutorialWindow.TutorialUIController;
 
 namespace Content.Client._Sunrise.Lobby.UI;
 
@@ -12,6 +15,9 @@ public sealed partial class SunriseLobbyGui
 
     private void SetupButtonsBinding()
     {
+        TutorialButton.OnPressed += _ =>
+            UserInterfaceManager.GetUIController<TutorialUIController>().ToggleTutorial();
+
         ChatHider.OnKeyBindUp += args =>
         {
             if (args.Function != EngineKeyFunctions.Use)

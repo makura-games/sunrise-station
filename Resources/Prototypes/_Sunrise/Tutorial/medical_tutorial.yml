@@ -1,0 +1,593 @@
+- type: tutorialSequence
+  id: MedicalTutorial
+  duration: 720
+  estimatedDuration:
+    minimum: 300
+    maximum: 600
+  priority: 5
+  name: medical-tutorial-name
+  tooltip: medical-tutorial-tooltip
+  grid: /Maps/_Sunrise/Tutorials/medical_tutorial.yml
+  texture: /Textures/_Sunrise/Tutorial/medical_tutorial.png
+  playerEntity: MedicalTutorialPlayer
+  steps:
+  - MedicalTutWelcome
+  - MedicalTutFindPatient
+  - MedicalTutTakeAnalyzer
+  - MedicalTutScanPatient
+  - MedicalTutAnalyzerUpdate
+  - MedicalTutExplainAnalyzerPatient
+  - MedicalTutExplainAnalyzerVitals
+  - MedicalTutExplainAnalyzerAlerts
+  - MedicalTutExplainAnalyzerDamage
+  - MedicalTutExplainAnalyzerGroups
+  - MedicalTutTakeGauze
+  - MedicalTutApplyGauze
+  - MedicalTutTakeBrutepack
+  - MedicalTutApplyBrutepack
+  - MedicalTutTakeOintment
+  - MedicalTutApplyOintment
+  - MedicalTutSelfCareIntro
+  - MedicalTutTakeSelfOintment
+  - MedicalTutApplySelfOintment
+  - MedicalTutFinish
+  - TutorialMHelp
+
+- type: tutorialStep
+  id: MedicalTutWelcome
+  parent: BaseTutorialStepBase
+  bubble:
+    text: medical-tut-welcome-bubble
+  chatMessage: medical-tut-welcome-chat
+  ttsMessage: medical-tut-welcome-tts
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 8
+
+- type: tutorialStep
+  id: MedicalTutFindPatient
+  parent: BaseTutorialStepBase
+  target: MedicalTutorialPatient
+  bubble:
+    text: medical-tut-find-patient-bubble
+    attachToTarget: true
+  chatMessage: medical-tut-find-patient-chat
+  ttsMessage: medical-tut-find-patient-tts
+  observeRange: 14
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:ExamineListenedCondition
+    target: MedicalTutorialPatient
+
+- type: tutorialStep
+  id: MedicalTutTakeAnalyzer
+  parent: BaseTutorialStepBase
+  target: HandheldHealthAnalyzer
+  bubble:
+    text: medical-tut-take-analyzer-bubble
+    attachToTarget: true
+  chatMessage: medical-tut-take-analyzer-chat
+  ttsMessage: medical-tut-take-analyzer-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: HandheldHealthAnalyzer
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialOpenUiSoftLock
+      targets:
+      - HandheldHealthAnalyzer
+      popup: medical-tut-softlock-open-analyzer
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - HandheldHealthAnalyzer
+  conditions:
+  - !type:PickupListenedCondition
+    target: HandheldHealthAnalyzer
+
+- type: tutorialStep
+  id: MedicalTutScanPatient
+  parent: BaseTutorialStepBase
+  target: MedicalTutorialPatient
+  bubble:
+    text: medical-tut-scan-patient-bubble
+    attachToTarget: true
+  chatMessage: medical-tut-scan-patient-chat
+  ttsMessage: medical-tut-scan-patient-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: HandheldHealthAnalyzer
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - HandheldHealthAnalyzer
+  conditions:
+  - !type:HealthAnalyzerScanListenedCondition
+    target: MedicalTutorialPatient
+  - !type:UseListenedCondition
+    target: HandheldHealthAnalyzer
+
+- type: tutorialStep
+  id: MedicalTutAnalyzerUpdate
+  parent: BaseTutorialStepBase
+  conditions:
+  - !type:StepDelayCondition
+    delay: 1
+
+- type: tutorialStep
+  id: MedicalTutExplainAnalyzerPatient
+  parent: BaseTutorialStepBase
+  bubble:
+    text: medical-tut-explain-analyzer-patient-bubble
+  chatMessage: medical-tut-explain-analyzer-patient-chat
+  ttsMessage: medical-tut-explain-analyzer-patient-tts
+  blockUiInteraction: true
+  uiHighlight:
+  - !type:UiByName
+    name: HealthAnalyzer
+  - !type:UiByName
+    name: PatientDataContainer
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: BlockMovement
+      blockInteraction: false
+      blockUse: false
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 14
+
+- type: tutorialStep
+  id: MedicalTutExplainAnalyzerVitals
+  parent: BaseTutorialStepBase
+  bubble:
+    text: medical-tut-explain-analyzer-vitals-bubble
+  chatMessage: medical-tut-explain-analyzer-vitals-chat
+  ttsMessage: medical-tut-explain-analyzer-vitals-tts
+  blockUiInteraction: true
+  uiHighlight:
+  - !type:UiByName
+    name: HealthAnalyzer
+  - !type:UiByName
+    name: PatientDataContainer
+  - !type:UiByChildIndex
+    index: 2
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: BlockMovement
+      blockInteraction: false
+      blockUse: false
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 10
+
+- type: tutorialStep
+  id: MedicalTutExplainAnalyzerAlerts
+  parent: BaseTutorialStepBase
+  bubble:
+    text: medical-tut-explain-analyzer-alerts-bubble
+  chatMessage: medical-tut-explain-analyzer-alerts-chat
+  ttsMessage: medical-tut-explain-analyzer-alerts-tts
+  blockUiInteraction: true
+  uiHighlight:
+  - !type:UiByName
+    name: HealthAnalyzer
+  - !type:UiByName
+    name: AlertsContainer
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: BlockMovement
+      blockInteraction: false
+      blockUse: false
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 9
+
+- type: tutorialStep
+  id: MedicalTutExplainAnalyzerDamage
+  parent: BaseTutorialStepBase
+  bubble:
+    text: medical-tut-explain-analyzer-damage-bubble
+  chatMessage: medical-tut-explain-analyzer-damage-chat
+  ttsMessage: medical-tut-explain-analyzer-damage-tts
+  blockUiInteraction: true
+  uiHighlight:
+  - !type:UiByName
+    name: HealthAnalyzer
+  - !type:UiByName
+    name: DamageLabel
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: BlockMovement
+      blockInteraction: false
+      blockUse: false
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 9
+
+- type: tutorialStep
+  id: MedicalTutExplainAnalyzerGroups
+  parent: BaseTutorialStepBase
+  bubble:
+    text: medical-tut-explain-analyzer-groups-bubble
+  chatMessage: medical-tut-explain-analyzer-groups-chat
+  ttsMessage: medical-tut-explain-analyzer-groups-tts
+  blockUiInteraction: true
+  uiHighlight:
+  - !type:UiByName
+    name: HealthAnalyzer
+  - !type:UiByName
+    name: GroupsContainer
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: BlockMovement
+      blockInteraction: false
+      blockUse: false
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 9
+
+- type: tutorialStep
+  id: MedicalTutTakeGauze
+  parent: BaseTutorialStepBase
+  target: Gauze1
+  bubble:
+    text: medical-tut-take-gauze-bubble
+    attachToTarget: true
+  chatMessage: medical-tut-take-gauze-chat
+  ttsMessage: medical-tut-take-gauze-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: Gauze1
+  effects:
+  - !type:TutorialRemoveComponentEffect
+    components:
+    - type: BlockMovement
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - HandheldHealthAnalyzer
+      - Gauze1
+  conditions:
+  - !type:PickupListenedCondition
+    target: Gauze1
+
+- type: tutorialStep
+  id: MedicalTutApplyGauze
+  parent: BaseTutorialStepBase
+  target: MedicalTutorialPatient
+  bubble:
+    text: medical-tut-apply-gauze-bubble
+    attachToTarget: true
+  chatMessage: medical-tut-apply-gauze-chat
+  ttsMessage: medical-tut-apply-gauze-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: Gauze1
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - HandheldHealthAnalyzer
+      - Gauze1
+    - type: TutorialDropSoftLock
+      popup: medical-tut-softlock-keep-gauze
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - Gauze1
+      popup: medical-tut-softlock-keep-gauze
+  conditions:
+  - !type:HealingListenedCondition
+    target: MedicalTutorialPatient
+    item: Gauze1
+
+- type: tutorialStep
+  id: MedicalTutTakeBrutepack
+  parent: BaseTutorialStepBase
+  target: Brutepack1
+  bubble:
+    text: medical-tut-take-brutepack-bubble
+    attachToTarget: true
+  chatMessage: medical-tut-take-brutepack-chat
+  ttsMessage: medical-tut-take-brutepack-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: Brutepack1
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - HandheldHealthAnalyzer
+      - Brutepack1
+  conditions:
+  - !type:PickupListenedCondition
+    target: Brutepack1
+
+- type: tutorialStep
+  id: MedicalTutApplyBrutepack
+  parent: BaseTutorialStepBase
+  target: MedicalTutorialPatient
+  bubble:
+    text: medical-tut-apply-brutepack-bubble
+    attachToTarget: true
+  chatMessage: medical-tut-apply-brutepack-chat
+  ttsMessage: medical-tut-apply-brutepack-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: Brutepack1
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - HandheldHealthAnalyzer
+      - Brutepack1
+    - type: TutorialDropSoftLock
+      popup: medical-tut-softlock-keep-brutepack
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - Brutepack1
+      popup: medical-tut-softlock-keep-brutepack
+  conditions:
+  - !type:HealingListenedCondition
+    target: MedicalTutorialPatient
+    item: Brutepack1
+
+- type: tutorialStep
+  id: MedicalTutTakeOintment
+  parent: BaseTutorialStepBase
+  target: Ointment1
+  bubble:
+    text: medical-tut-take-ointment-bubble
+    attachToTarget: true
+  chatMessage: medical-tut-take-ointment-chat
+  ttsMessage: medical-tut-take-ointment-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: Ointment1
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - Ointment1
+  conditions:
+  - !type:PickupListenedCondition
+    target: Ointment1
+
+- type: tutorialStep
+  id: MedicalTutApplyOintment
+  parent: BaseTutorialStepBase
+  target: MedicalTutorialPatient
+  bubble:
+    text: medical-tut-apply-ointment-bubble
+    attachToTarget: true
+  chatMessage: medical-tut-apply-ointment-chat
+  ttsMessage: medical-tut-apply-ointment-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: Ointment1
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - Ointment1
+    - type: TutorialDropSoftLock
+      popup: medical-tut-softlock-keep-ointment
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - Ointment1
+      popup: medical-tut-softlock-keep-ointment
+  conditions:
+  - !type:HealingListenedCondition
+    target: MedicalTutorialPatient
+    item: Ointment1
+
+- type: tutorialStep
+  id: MedicalTutSelfCareIntro
+  parent: BaseTutorialStepBase
+  bubble:
+    text: medical-tut-self-care-intro-bubble
+  chatMessage: medical-tut-self-care-intro-chat
+  ttsMessage: medical-tut-self-care-intro-tts
+  uiHighlight:
+  - !type:UiByName
+    name: AlertContainer
+  - !type:UiByAlertPrototype
+    prototype: HumanHealth
+  effects:
+  - !type:TutorialRemoveComponentEffect
+    components:
+    - type: Godmode
+  - !type:TutorialEntityEffect
+    effects:
+    - !type:HealthChange
+      damage:
+        types:
+          Heat: 5
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 12
+
+- type: tutorialStep
+  id: MedicalTutTakeSelfOintment
+  parent: BaseTutorialStepBase
+  target: SunriseMedicalTutorialSelfOintment
+  bubble:
+    text: medical-tut-take-self-ointment-bubble
+    attachToTarget: true
+  chatMessage: medical-tut-take-self-ointment-chat
+  ttsMessage: medical-tut-take-self-ointment-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: SunriseMedicalTutorialSelfOintment
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseMedicalTutorialSelfOintment
+  conditions:
+  - !type:PickupListenedCondition
+    target: SunriseMedicalTutorialSelfOintment
+
+- type: tutorialStep
+  id: MedicalTutApplySelfOintment
+  parent: BaseTutorialStepBase
+  bubble:
+    text: medical-tut-apply-self-ointment-bubble
+  chatMessage: medical-tut-apply-self-ointment-chat
+  ttsMessage: medical-tut-apply-self-ointment-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: SunriseMedicalTutorialSelfOintment
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseMedicalTutorialSelfOintment
+    - type: TutorialDropSoftLock
+      popup: medical-tut-softlock-keep-self-ointment
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - SunriseMedicalTutorialSelfOintment
+      popup: medical-tut-softlock-keep-self-ointment
+  conditions:
+  - !type:HealingListenedCondition
+    target: MedicalTutorialPlayer
+    item: SunriseMedicalTutorialSelfOintment
+
+- type: tutorialStep
+  id: MedicalTutFinish
+  parent: BaseTutorialStepBase
+  bubble:
+    text: medical-tut-finish-bubble
+  chatMessage: medical-tut-finish-chat
+  ttsMessage: medical-tut-finish-tts
+  effects:
+  - !type:TutorialComponentEffect
+    removeExisting: false
+    removeOnExit: false
+    components:
+    - type: Godmode
+  conditions:
+  - !type:StepDelayCondition
+    delay: 11
+
+- type: startingGear
+  id: MedicalTutorialPlayerGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMedicalDoctor
+    shoes: ClothingShoesColorBlack
+    back: ClothingBackpack
+    ears: ClothingHeadsetMedical
+
+- type: entity
+  parent: BaseTutorialPlayer
+  id: MedicalTutorialPlayer
+  components:
+  - type: Loadout
+    prototypes: [MedicalTutorialPlayerGear]
+  - type: Godmode
+  - type: TutorialAttackSoftLock
+  - type: TutorialInteractSoftLock
+    targets:
+    - Poweredlight
+
+- type: stack
+  parent: Ointment
+  id: SunriseMedicalTutorialSelfOintmentStack
+  spawn: SunriseMedicalTutorialSelfOintment
+
+- type: entity
+  parent: Ointment1
+  id: SunriseMedicalTutorialSelfOintment
+  name: ointment
+  suffix: Training
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Stack
+    stackType: SunriseMedicalTutorialSelfOintmentStack
+
+- type: entity
+  parent: MobHuman
+  id: MedicalTutorialPatient
+  name: medical tutorial patient
+  suffix: Training
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: Damageable
+    damage:
+      types:
+        Blunt: 5
+        Slash: 5
+        Heat: 5
+  - type: Bloodstream
+    bleedAmount: 1
+    bleedReductionAmount: 0
+  - type: PassiveDamage
+    damage: {}
+
+- type: entity
+  parent: MarkerBase
+  id: MedicalTutorialPatientSpawner
+  name: medical tutorial patient spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MedicalTutorialPatient

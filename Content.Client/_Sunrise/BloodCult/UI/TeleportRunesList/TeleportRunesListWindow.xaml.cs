@@ -6,7 +6,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._Sunrise.BloodCult.UI.TeleportRunesList;
 
 [GenerateTypedNameReferences]
-public partial class TeleportRunesListWindow : DefaultWindow
+public sealed partial class TeleportRunesListWindow : DefaultWindow
 {
     public Action<int, int>? ItemSelected;
 

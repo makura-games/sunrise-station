@@ -1,4 +1,4 @@
-using Content.Server.Humanoid;
+using Content.Shared._Sunrise.Humanoid;
 using Content.Shared._Sunrise.Antags.Abductor;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -8,16 +8,20 @@ using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Speech.Muting;
 using Content.Shared.Starlight.Medical.Surgery.Events;
 using Content.Shared.Starlight.Medical.Surgery.Steps.Parts;
+using Content.Shared.StatusEffectNew;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._Starlight.Medical.Surgery;
 
 public sealed partial class OrganSystem : EntitySystem
 {
 
-    [Dependency] private readonly BlindableSystem _blindable = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoidAppearanceSystem = default!;
+    [Dependency] private BlindableSystem _blindable = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private SunriseHumanoidBodySystem _sunriseBody = default!;
+
+    private static readonly EntProtoId MutedStatusEffect = "StatusEffectMuted";
 
     public override void Initialize()
     {
@@ -42,48 +46,50 @@ public sealed partial class OrganSystem : EntitySystem
 
     private void OnFunctionalOrganImplanted(Entity<FunctionalOrganComponent> ent, ref SurgeryOrganImplantationCompleted args)
     {
-        foreach (var comp in (ent.Comp.Components ?? []).Values)
-            if (!EntityManager.HasComponent(args.Body, comp.Component.GetType()))
-                EntityManager.AddComponent(args.Body, _compFactory.GetComponent(comp.Component.GetType()));
+        if (ent.Comp.Components != null)
+            EntityManager.AddComponents(args.Body, ent.Comp.Components, removeExisting: false);
     }
 
     private void OnFunctionalOrganExtracted(Entity<FunctionalOrganComponent> ent, ref SurgeryOrganExtracted args)
     {
-        foreach (var comp in (ent.Comp.Components ?? []).Values)
-            if (EntityManager.HasComponent(args.Body, comp.Component.GetType()))
-                EntityManager.RemoveComponent(args.Body, _compFactory.GetComponent(comp.Component.GetType()));
+        if (ent.Comp.Components != null)
+            EntityManager.RemoveComponents(args.Body, ent.Comp.Components);
     }
 
     //
 
     private void OnOrganImplanted(Entity<DamageableComponent> ent, ref SurgeryOrganImplantationCompleted args)
     {
-        if (!TryComp<DamageableComponent>(args.Body, out var bodyDamageable)) return;
+        if (!HasComp<DamageableComponent>(args.Body))
+            return;
 
-        var change = _damageableSystem.ChangeDamage(args.Body, ent.Comp.Damage, true, false);
-        if (change is not null)
-            _damageableSystem.ChangeDamage(ent.Owner, change.Invert(), true, false);
+        var organDamage = _damageableSystem.GetAllDamage(ent.AsNullable());
+        var change = _damageableSystem.ChangeDamage(args.Body, organDamage, true, false);
+        _damageableSystem.ChangeDamage(ent.Owner, change.Invert(), true, false);
     }
     private void OnOrganExtracted(Entity<DamageableComponent> ent, ref SurgeryOrganExtracted args)
     {
         if (!TryComp<OrganDamageComponent>(ent.Owner, out var damageRule)
-         || damageRule.Damage is null
-         || !TryComp<DamageableComponent>(args.Body, out var bodyDamageable)) return;
+            || damageRule.Damage is null
+            || !HasComp<DamageableComponent>(args.Body))
+            return;
 
         var change = _damageableSystem.ChangeDamage(args.Body, damageRule.Damage.Invert(), true, false);
-        if (change is not null)
-            _damageableSystem.ChangeDamage(ent.Owner, change.Invert(), true, false);
+        _damageableSystem.ChangeDamage(ent.Owner, change.Invert(), true, false);
     }
     private void OnTongueImplanted(Entity<OrganTongueComponent> ent, ref SurgeryOrganImplantationCompleted args)
     {
-        if (HasComp<AbductorComponent>(args.Body) || !ent.Comp.IsMuted) return;
-        RemComp<MutedComponent>(args.Body);
+        if (HasComp<AbductorComponent>(args.Body) || ent.Comp.IsMuted)
+            return;
+
+        _statusEffects.TryRemoveStatusEffect(args.Body, MutedStatusEffect);
     }
 
     private void OnTongueExtracted(Entity<OrganTongueComponent> ent, ref SurgeryOrganExtracted args)
     {
-        ent.Comp.IsMuted = HasComp<MutedComponent>(args.Body);
-        AddComp<MutedComponent>(args.Body);
+        ent.Comp.IsMuted = _statusEffects.HasEffectComp<MutedStatusEffectComponent>(args.Body);
+        if (!ent.Comp.IsMuted)
+            _statusEffects.TrySetStatusEffectDuration(args.Body, MutedStatusEffect);
     }
 
     //
@@ -107,10 +113,10 @@ public sealed partial class OrganSystem : EntitySystem
     //
 
     private void OnVisualizationExtracted(Entity<OrganVisualizationComponent> ent, ref SurgeryOrganExtracted args)
-        => _humanoidAppearanceSystem.SetLayersVisibility(args.Body, [ent.Comp.Layer], false);
+        => _sunriseBody.SetLayersVisibility(args.Body, [ent.Comp.Layer], false);
     private void OnVisualizationImplanted(Entity<OrganVisualizationComponent> ent, ref SurgeryOrganImplantationCompleted args)
     {
-        _humanoidAppearanceSystem.SetLayersVisibility(args.Body, [ent.Comp.Layer], true);
-        _humanoidAppearanceSystem.SetBaseLayerId(args.Body, ent.Comp.Layer, ent.Comp.Prototype);
+        _sunriseBody.SetLayersVisibility(args.Body, [ent.Comp.Layer], true);
+        _sunriseBody.SetBaseLayerData(args.Body, ent.Comp.Layer, ent.Comp.Data);
     }
 }

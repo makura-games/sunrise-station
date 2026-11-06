@@ -8,6 +8,12 @@
   - type: Sprite
     sprite: Objects/Misc/module.rsi
     state: security
+  # Sunrise added start - запрет упаковки плат турелей
+  - type: Tag
+    tags:
+    - Board
+    - CannotBeFlatpacked
+  # Sunrise added end
   - type: MachineBoard
     prototype: WeaponEnergyTurretStation
     tagRequirements:

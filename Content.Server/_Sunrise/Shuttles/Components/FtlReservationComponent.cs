@@ -1,3 +1,5 @@
+using Robust.Shared.Maths;
+
 namespace Content.Server._Sunrise.Shuttles.Components;
 
 /// <summary>
@@ -12,4 +14,9 @@ public sealed partial class FtlReservationComponent : Component
     /// </summary>
     [DataField("reservedBy")]
     public EntityUid ReservedBy;
+
+    /// <summary>
+    /// Конечная площадь шаттла на нужном гриде
+    /// </summary>
+    public Box2 Area;
 }

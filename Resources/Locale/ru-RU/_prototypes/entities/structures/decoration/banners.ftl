@@ -1,7 +1,7 @@
 ent-BannerBase = базовый знамя
     .desc = Это концепт знамени, вы не должны это видеть.
-ent-BannerNanotrasen = знамя NanoTrasen
-    .desc = Знамя с логотипом NanoTrasen. Выглядит довольно дёшево.
+ent-BannerNanotrasen = знамя нанотрейзен
+    .desc = Знамя с логотипом НаноТрейзен. Выглядит довольно дёшево.
 ent-BannerCargo = знамя грузового отдела
     .desc = Знамя с цветами грузового отдела. Нет. Не Каргония.
 ent-BannerEngineering = знамя инженерного отдела

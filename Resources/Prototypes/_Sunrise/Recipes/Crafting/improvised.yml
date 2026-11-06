@@ -199,3 +199,13 @@
   category: construction-category-misc
   objectType: Item
   description: crafting-menu-text-improvised-modular-receiver
+
+- type: construction
+  name: crafting-menu-name-improvised-light-rifle-magazine
+  id: MagazineLightRifleImprovisedEmpty
+  graph: ImprovisedMagazineLightRifleGraph
+  startNode: start
+  targetNode: shell
+  category: construction-category-weapons
+  objectType: Item
+  description: crafting-menu-text-improvised-light-rifle-magazine

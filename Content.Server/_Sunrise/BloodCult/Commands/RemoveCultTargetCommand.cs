@@ -7,10 +7,10 @@ using Robust.Server.Player;
 namespace Content.Server._Sunrise.BloodCult.Commands;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class RemoveCultTargetCommand : IConsoleCommand
+public sealed partial class RemoveCultTargetCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     public string Command => "bloodcult_removetarget";
     public string Description => Loc.GetString("bloodcult-removetarget-description");

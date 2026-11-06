@@ -57,9 +57,9 @@
   id: WeaponPistolVP78
   components:
   - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/vp78/big.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/vp78.rsi
   - type: Item
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/vp78/tiny.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/vp78.rsi
   - type: Gun
     fireRate: 4.25
     selectedMode: FullAuto
@@ -80,7 +80,6 @@
         whitelist:
           tags:
           - MagazinePistolDP
-          - MagazineVP78
       gun_chamber:
         name: Chamber
         startingItem: CartridgePistol40FMJ # .45 ACP
@@ -121,7 +120,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineGlock22Metus
+        startingItem: MagazinePistolHighCapacityRubber
         insertSound: /Audio/_Sunrise/Weapons/Guns/Pistols/glock22/glock22_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Pistols/glock22/glock22_unload.ogg
         priority: 2
@@ -145,123 +144,15 @@
       gun_chamber: !type:ContainerSlot
 
 - type: entity
-  name: HI Browning-88 M4
-  parent: BaseWeaponPistolSunrise
-  id: WeaponPistolHIB88M4
-  components:
-  - type: Sprite
-    scale: 0.8, 0.8
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/hi_browning/big.rsi
-  - type: Item
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/hi_browning/tiny.rsi
-  - type: Gun
-    selectedMode: SemiAuto
-    availableModes:
-    - SemiAuto
-    - FullAuto
-    soundGunshot:
-      path: /Audio/_Sunrise/Weapons/Guns/Pistols/vp70_shot.ogg
-    soundEmpty:
-      path: /Audio/_Sunrise/Weapons/Guns/Pistols/vp70_empty.ogg
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineHIBrowning
-        insertSound: /Audio/_Sunrise/Weapons/Guns/Pistols/vp70_reload.ogg
-        ejectSound: /Audio/_Sunrise/Weapons/Guns/Pistols/vp70_unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazinePistol
-          - MagazinePistolHighCapacity
-          - MagazineHIBrowning
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgePistolFMJ
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgePistol
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-
-- type: entity
-  name: ACP-14
-  parent: BaseWeaponPistolSunrise
-  id: WeaponPistolACP14
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/acp14/big.rsi
-  - type: Item
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/acp14/tiny.rsi
-    storedOffset: 0,-1
-  - type: Gun
-    minAngle: 3.75
-    maxAngle: 16
-    angleIncrease: 2.75
-    angleDecay: 15
-    fireRate: 4
-    availableModes:
-    - SemiAuto
-    soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_DE50.ogg
-    soundEmpty:
-      path: /Audio/_Sunrise/Weapons/Guns/Pistols/vp70_empty.ogg
-  - type: ChamberMagazineAmmoProvider
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineACP14
-        insertSound: /Audio/_Sunrise/Weapons/Guns/Pistols/glock22/glock22_reload.ogg
-        ejectSound: /Audio/_Sunrise/Weapons/Guns/Pistols/glock22/glock22_unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineACP14
-          - MagazinePistolDP
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgePistol40SP
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgePistolDP
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-  - type: StealTarget
-    stealGroup: OfficerHandgun
-
-- type: entity
-  name: Mateba
-  parent: BaseWeaponRevolver
+  parent: WeaponRevolverMateba
   id: WeaponRevolverMatebaNew
   components:
   - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/mateba/big.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/mateba.rsi
   - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/mateba/tiny.rsi
-  - type: Item
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/mateba/tiny.rsi
-  - type: Gun
-    fireRate: 3
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
+    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/mateba.rsi
   - type: StealTarget
-    stealGroup: OfficerHandgun
+    stealGroup: HOSWeapon
 
 # Sidearm HOS and Nukies.
 - type: entity
@@ -287,18 +178,21 @@
         volume: 100
     soundEmpty:
       path: /Audio/_Sunrise/Weapons/Guns/Pistols/deagle/deagle_empty.ogg
+  - type: ChamberMagazineAmmoProvider
+    availablePrefixes:
+    - ""
+    - metus
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineDeagle
+        startingItem: MagazineMagnum
         insertSound: /Audio/_Sunrise/Weapons/Guns/Pistols/deagle/deagle_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Pistols/deagle/deagle_unload.ogg
         priority: 2
         whitelist:
           tags:
           - MagazineMagnum
-          - MagazineDeagle
       gun_chamber:
         name: Chamber
         startingItem: CartridgeMagnumSP
@@ -317,24 +211,6 @@
   - type: StealTarget
     stealGroup: OfficerHandgun
 
-- type: entity
-  name: Desert Eagle Metus
-  description: Scuffs from old hands mark the handle, heavy and steady, like a verdict passed more than once without trial.
-  parent: WeaponPistolDeagle
-  id: WeaponPistolDeagleMetus
-  suffix: Sunrise
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/deagle_metus/big.rsi
-  - type: Item
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/deagle_metus/tiny.rsi
-  - type: Gun
-    fireRate: 3
-    availableModes:
-    - SemiAuto
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
-
 # Sidearm for detectives.
 - type: entity
   parent: BaseWeaponRevolver
@@ -344,6 +220,14 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/spearhead.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+    - enum.GunVisualLayers.Base:
+        icon: ""
+        icon_black: ""
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/spearhead.rsi
   - type: Item
@@ -379,15 +263,6 @@
     pvsIncrease: 0.25
   - type: StealTarget
     stealGroup: OfficerHandgun
-
-- type: entity
-  parent: WeaponRevolverSpearhead
-  id: WeaponRevolverSpearheadBlack
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/spearheadblack.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/spearheadblack.rsi
 
 - type: entity
   parent: BaseWeaponPistolSunrise
@@ -439,7 +314,6 @@
         whitelist:
           tags:
           - MagazinePistolDP
-          - MagazineVP78
       gun_chamber:
         name: Chamber
         startingItem: CartridgePistol40FMJ # .45 ACP
@@ -465,52 +339,10 @@
     sprite: _Sunrise/Objects/Weapons/Guns/Pistols/goldDeagle/big.rsi
   - type: Item
     sprite: _Sunrise/Objects/Weapons/Guns/Pistols/goldDeagle/tiny.rsi
-
-- type: entity
-  name: Tac-Tec
-  parent: BaseWeaponPistolSunrise
-  id: WeaponPistolTec9
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/tec9tactical/big.rsi
-    scale: 0.65, 0.65
-  - type: Item
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/tec9tactical/tiny.rsi
   - type: ChamberMagazineAmmoProvider
-    boltClosed: null
-  - type: Gun
-    fireRate: 6
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/silenced.ogg
-    availableModes:
-    - SemiAuto
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: BaseMagazinePistolCaselessRifleExtended
-        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
-        priority: 1
-        whitelist:
-          tags:
-          - MagazinePistolCaselessRifle
-          - MagazineCaselessRifle
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgeCaselessRifle
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgeCaselessRifle
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
+    availablePrefixes: []
+  - type: StealTarget
+    stealGroup: HOSWeapon
 
 - type: entity
   name: stechkin APS

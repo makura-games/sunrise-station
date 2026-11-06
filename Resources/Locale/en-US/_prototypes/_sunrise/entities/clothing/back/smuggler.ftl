@@ -1,0 +1,12 @@
+ent-ClothingBackpackSmugglerRevolutionaryFilled = { ent-ClothingBackpackSatchelSmuggler }
+    .suffix = Smuggler, Revolutionary, Do Not Map
+    .desc = { ent-ClothingBackpackSatchelSmuggler.desc }
+ent-RevolutionarySmugglerStash = sealed smuggler's stash
+    .suffix = Smuggler, Revolutionary, Do Not Map
+    .desc = { ent-ClothingBackpackSatchelSmuggler.desc }
+ent-SmugglerSunriseMaterialsParcel = material kit
+    .suffix = Smuggler, Revolutionary
+    .desc = Neatly folded materials for all occasions.
+ent-SmugglerSunriseForgedPartsParcel = forged parts kit
+    .suffix = Smuggler, Revolutionary
+    .desc = Neatly folded and packaged parts, likely for armor or weapons.

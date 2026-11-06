@@ -1,26 +1,23 @@
 - type: entity
   abstract: true
   id: BaseOrganDubious
-  parent: [BaseItem, BaseOrganHeart]
+  parent: [OrganBase, SunriseOrganBaseHeart]
   components:
   - type: Organ
   - type: Extractable
     grindableSolutionName: organ
-  - type: SolutionContainerManager
-    solutions:
-      organ:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
+  - type: Solution
+    id: organ
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
   - type: Sprite
-    state: heart-on
+    layers: []
   - type: Metabolizer
     maxReagents: 2
     metabolizerTypes: [Human]
-    groups:
-    - id: Medicine
-    - id: Poison
-    - id: Narcotic
+    stages: [ Bloodstream ]
   - type: Item
     size: Small
     heldPrefix: heart

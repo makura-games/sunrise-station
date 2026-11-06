@@ -1,5 +1,3 @@
-﻿using Content.Shared.Actions;
-using Content.Shared.Chat.Prototypes;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -12,7 +10,7 @@ public sealed partial class EmoteAnimationComponent : Component
     public string AnimationId = "none";
 
     [Serializable, NetSerializable]
-    public partial class EmoteAnimationComponentState : ComponentState
+    public sealed partial class EmoteAnimationComponentState : ComponentState
     {
         public string AnimationId { get; init; }
 
@@ -22,9 +20,3 @@ public sealed partial class EmoteAnimationComponent : Component
         }
     }
 }
-
-public sealed partial class EmoteActionEvent : InstantActionEvent
-{
-    [ViewVariables, DataField("emote", readOnly: true, required: true)]
-    public string Emote = default!;
-};

@@ -1,3 +1,3 @@
-ent-RandomHumanoidSpawnerBlueShieldOperative = Оперативник «Синий щит»
+ent-RandomHumanoidSpawnerBlueShieldOperative = оперативник «Синий щит»
     .suffix = Роль «Синий щит», Базовый
     .desc = { ent-RandomHumanoidSpawnerERTLeader.desc }

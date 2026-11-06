@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken/modified from pireamaineach at https://github.com/tgstation/tgstation/pull/43407/commits/b92e11e94466be5bcb465b781decf83764401ac1",
+    "copyright": "Taken/modified from pireamaineach at https://github.com/tgstation/tgstation/pull/43407/commits/b92e11e94466be5bcb465b781decf83764401ac1; Metus variant by KAVALDi",
     "size": {
         "x": 64,
         "y": 32
@@ -18,6 +18,18 @@
         },
         {
             "name": "mag-0"
+        },
+        {
+            "name": "icon_metus"
+        },
+        {
+            "name": "base_metus"
+        },
+        {
+            "name": "bolt-open_metus"
+        },
+        {
+            "name": "mag-0_metus"
         }
     ]
 }

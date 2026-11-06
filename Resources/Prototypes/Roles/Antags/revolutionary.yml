@@ -6,6 +6,9 @@
   playTimeTracker: AntagHeadRevolutionary # Sunrise-Edit
   objective: roles-antag-rev-head-objective
   guides: [ Revolutionaries ]
+  tags:
+  - OnStation
+  - Roundstart
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 1h
@@ -14,6 +17,56 @@
     sprite: /Textures/_Sunrise/Interface/Misc/antag_preview.rsi
     state: head_rev
   storytellerStress: 2
+
+- type: antagSpecifier
+  abstract: true
+  parent: RestrictedAntag
+  id: BaseRev
+  name: revolutionary
+  prefRoles:
+  - GenericTeamAntagonist # For antag ban purposes
+  components:
+  - type: Revolutionary
+
+- type: antagSpecifier
+  parent: BaseRev
+  id: HeadRev
+  prefRoles:
+  - HeadRev
+  fallbackRoles: # Sunrise-Edit
+  - Rev
+  briefing:
+    text: head-rev-role-greeting
+    color: CornflowerBlue
+    sound: "/Audio/Ambience/Antag/headrev_start.ogg"
+  startingGear: HeadRevGear
+  components:
+  - type: Revolutionary
+  - type: HeadRevolutionary
+  mindRoles:
+  - MindRoleHeadRevolutionary
+
+# TODO: Make it so creating new revolutionaries uses antag prototypes! This saves a *lot* of boilerplate for conversion antags.
+
+# Sunrise edit start - отдельный спецификатор обычного революционера
+- type: antagSpecifier
+  parent: BaseRev
+  id: Rev
+  prefRoles:
+  - Rev
+  fallbackRoles: # Sunrise-Edit
+  - HeadRev
+  blacklist:
+    components:
+    - CommandStaff
+    - MindShield
+  briefing:
+    text: rev-role-greeting
+    color: CornflowerBlue
+    sound: "/Audio/Ambience/Antag/headrev_start.ogg"
+  mindRoles:
+  - MindRoleRevolutionary
+# Sunrise edit end
 
 - type: antag
   id: Rev
@@ -24,6 +77,9 @@
   objective: roles-antag-rev-objective
   guides: [ Revolutionaries ]
   storytellerStress: 0.2 # Sunrise-Edit
+  tags:
+  - OnStation
+  - Converted
 
 - type: startingGear
   id: HeadRevGear

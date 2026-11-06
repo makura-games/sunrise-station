@@ -1,7 +1,5 @@
-ent-BaseHumanOrganUnGibbable = { ent-BaseItem }
+ent-BaseHumanOrgan = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
-ent-BaseHumanOrgan = { ent-BaseHumanOrganUnGibbable }
-    .desc = { ent-BaseHumanOrganUnGibbable.desc }
 ent-OrganHumanBrain = brain
     .desc = The source of incredible, unending intelligence. Honk.
 ent-OrganHumanEyes = eyes

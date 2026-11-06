@@ -2,17 +2,20 @@
 # TODO BODY: Part damage
 - type: entity
   id: PartSwine
-  parent: [BaseItem, BasePart]
+  parent: OrganBase
   name: "swine body part"
   abstract: true
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: Swine
 
 - type: entity
   id: TorsoSwine
   name: "swine torso"
-  parent: [PartSwine, BaseTorso]
+  parent: [PartSwine, OrganBaseTorso]
   components:
     - type: Sprite
       state: "torso_m"
@@ -20,15 +23,20 @@
 - type: entity
   id: HeadSwine
   name: "swine head"
-  parent: [PartSwine, BaseHead]
+  parent: [PartSwine, OrganBaseHead]
   components:
     - type: Sprite
       state: "head_m"
+    - type: VisualOrganMarkings
+      hideableLayers:
+      - enum.HumanoidVisualLayers.Hair
+      - enum.HumanoidVisualLayers.FacialHair
+      - enum.HumanoidVisualLayers.HeadTop
 
 - type: entity
   id: LeftArmSwine
   name: "left swine arm"
-  parent: [PartSwine, BaseLeftArm]
+  parent: [PartSwine, OrganBaseArmLeft]
   components:
     - type: Sprite
       state: "l_arm"
@@ -36,7 +44,7 @@
 - type: entity
   id: RightArmSwine
   name: "right swine arm"
-  parent: [PartSwine, BaseRightArm]
+  parent: [PartSwine, OrganBaseArmRight]
   components:
     - type: Sprite
       state: "r_arm"
@@ -44,7 +52,7 @@
 - type: entity
   id: LeftHandSwine
   name: "left swine hand"
-  parent: [PartSwine, BaseLeftHand]
+  parent: [PartSwine, OrganBaseHandLeft]
   components:
     - type: Sprite
       state: "l_hand"
@@ -52,7 +60,7 @@
 - type: entity
   id: RightHandSwine
   name: "right swine hand"
-  parent: [PartSwine, BaseRightHand]
+  parent: [PartSwine, OrganBaseHandRight]
   components:
     - type: Sprite
       state: "r_hand"
@@ -60,27 +68,23 @@
 - type: entity
   id: LeftLegSwine
   name: "left swine leg"
-  parent: [PartSwine, BaseLeftLeg]
+  parent: [PartSwine, OrganBaseLegLeft]
   components:
     - type: Sprite
       state: "l_leg"
-    - type: MovementBodyPart
-      maxDensity: 155
 
 - type: entity
   id: RightLegSwine
   name: "right swine leg"
-  parent: [PartSwine, BaseRightLeg]
+  parent: [PartSwine, OrganBaseLegRight]
   components:
     - type: Sprite
       state: "r_leg"
-    - type: MovementBodyPart
-      maxDensity: 155
 
 - type: entity
   id: LeftFootSwine
   name: "left swine foot"
-  parent: [PartSwine, BaseLeftFoot]
+  parent: [PartSwine, OrganBaseFootLeft]
   components:
     - type: Sprite
       state: "l_foot"
@@ -88,7 +92,7 @@
 - type: entity
   id: RightFootSwine
   name: "right swine foot"
-  parent: [PartSwine, BaseRightFoot]
+  parent: [PartSwine, OrganBaseFootRight]
   components:
     - type: Sprite
       state: "r_foot"

@@ -2,6 +2,7 @@
   id: Default
   name: ghost-theme-default
   color: "#fff8"
+  useUpstreamSprite: true
   sprite:
     sprite: Mobs/Ghosts/ghost_human.rsi
     state: animated

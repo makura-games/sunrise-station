@@ -9,7 +9,7 @@ namespace Content.Client._Sunrise.ServersHub;
 [GenerateTypedNameReferences]
 public sealed partial class ServersHubUi : DefaultWindow
 {
-    [Dependency] private readonly ServersHubManager _serversHubManager = default!;
+    [Dependency] private ServersHubManager _serversHubManager = default!;
 
     public ServersHubUi()
     {

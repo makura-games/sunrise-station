@@ -291,3 +291,64 @@
   - type: Sprite
     sprite: _Sunrise/Structures/Wallmounts/hyenh.rsi
     state: shoukouposter
+
+# Japanese posters
+- type: entity
+  parent: PosterBase
+  id: PosterJapanese1
+  name: "Sunset over Torii"
+  description: Japanese-style poster.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/japanese_poster.rsi
+    state: poster1
+
+- type: entity
+  parent: PosterBase
+  id: PosterJapanese2
+  name: "Spring cherry blossom scroll"
+  description: Japanese-style poster.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/japanese_poster.rsi
+    state: poster2
+
+- type: entity
+  parent: PosterBase
+  id: PosterJapanese3
+  name: "PuckDitTea"
+  description: Japanese-style poster.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/japanese_poster.rsi
+    state: poster3
+
+- type: entity
+  parent: PosterBase
+  id: PosterJapanese4
+  name: "Pisces of mind and feelings"
+  description: You ask... Why reason? Why feelings? And you shouldn't give a damn.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/japanese_poster.rsi
+    state: poster4
+
+- type: entity
+  parent: PosterBase
+  id: PosterJapanese5
+  name: "Fvudtdcy Mountain"
+  description: Japanese-style poster.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/japanese_poster.rsi
+    state: poster5
+
+- type: entity
+  parent: PosterBase
+  id: PosterJapanese6
+  name: "Keto demon"
+  description: Japanese-style poster.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/japanese_poster.rsi
+    state: poster6

@@ -86299,7 +86299,7 @@ entities:
     - pos: 43.5,35.5
       parent: 100
       type: Transform
-- proto: HeadSkeleton
+- proto: OrganSkeletonPersonHead
   entities:
   - uid: 17083
     components:

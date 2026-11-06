@@ -1,10 +1,10 @@
-ent-RandomSyndicateCorpseSpawner = Random Syndicate Corpse Spawner
+ent-RandomSyndicateCorpseSpawner = random Syndicate Corpse Spawner
     .desc = { ent-SalvageHumanCorpseSpawner.desc }
-ent-RandomNukieCorpseSpawner = Random Nukie Corpse Spawner
+ent-RandomNukieCorpseSpawner = random Nukie Corpse Spawner
     .desc = { ent-SalvageHumanCorpseSpawner.desc }
-ent-RandomSovietCorpseSpawner = Random Soviet Corpse Spawner
+ent-RandomSovietCorpseSpawner = random Soviet Corpse Spawner
     .desc = { ent-SalvageHumanCorpseSpawner.desc }
-ent-RandomMercenaryCorpseSpawner = Random Mercenary Corpse Spawner
+ent-RandomMercenaryCorpseSpawner = random Mercenary Corpse Spawner
     .desc = { ent-SalvageHumanCorpseSpawner.desc }
-ent-RandomPirateCorpseSpawner = Random Pirate Corpse Spawner
+ent-RandomPirateCorpseSpawner = random Pirate Corpse Spawner
     .desc = { ent-SalvageHumanCorpseSpawner.desc }

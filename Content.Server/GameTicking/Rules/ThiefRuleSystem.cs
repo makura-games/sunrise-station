@@ -7,10 +7,10 @@ using Content.Shared.NPC.Systems;
 
 namespace Content.Server.GameTicking.Rules;
 
-public sealed class ThiefRuleSystem : GameRuleSystem<ThiefRuleComponent>
+public sealed partial class ThiefRuleSystem : GameRuleSystem<ThiefRuleComponent>
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
 
     public override void Initialize()
     {
@@ -44,7 +44,7 @@ public sealed class ThiefRuleSystem : GameRuleSystem<ThiefRuleComponent>
 
     private string MakeBriefing(EntityUid ent)
     {
-        var isHuman = HasComp<HumanoidAppearanceComponent>(ent);
+        var isHuman = HasComp<HumanoidProfileComponent>(ent);
         var briefing = isHuman
             ? Loc.GetString("thief-role-greeting-human")
             : Loc.GetString("thief-role-greeting-animal");

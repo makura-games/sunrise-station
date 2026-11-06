@@ -1,5 +1,6 @@
 ﻿using Content.Server.Hands.Systems;
 using Content.Server.Preferences.Managers;
+using Content.Server.Storage.EntitySystems;
 using Content.Shared.Access.Components;
 using Content.Shared.Clothing;
 using Content.Shared.Hands.Components;
@@ -12,20 +13,21 @@ using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
 using Content.Shared.Station;
 using Content.Sunrise.Interfaces.Shared;
-using Robust.Shared.Configuration; // Sunrise-edit
+using Robust.Shared.Configuration;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Storage;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Clothing.Systems;
 
-public sealed class OutfitSystem : EntitySystem
+public sealed partial class OutfitSystem : EntitySystem
 {
-    [Dependency] private readonly IServerPreferencesManager _preferenceManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly HandsSystem _handSystem = default!;
-    [Dependency] private readonly InventorySystem _invSystem = default!;
-    [Dependency] private readonly SharedStationSpawningSystem _spawningSystem = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;  // Sunrise-edit
+    [Dependency] private IServerPreferencesManager _preferenceManager = default!;
+    [Dependency] private HandsSystem _handSystem = default!;
+    [Dependency] private InventorySystem _invSystem = default!;
+    [Dependency] private SharedStationSpawningSystem _spawningSystem = default!;
+    [Dependency] private ItemSlotsSystem _itemSlotsSystem = default!;
+    [Dependency] private StorageSystem _storageSystem = default!;
 
     private ISharedSponsorsManager? _sponsorsManager; // Sunrise-Sponsors
 
@@ -37,16 +39,16 @@ public sealed class OutfitSystem : EntitySystem
 
     public bool SetOutfit(EntityUid target, string gear, Action<EntityUid, EntityUid>? onEquipped = null, bool unremovable = false)
     {
-        if (!EntityManager.TryGetComponent(target, out InventoryComponent? inventoryComponent))
+        if (!TryComp(target, out InventoryComponent? inventoryComponent))
             return false;
 
-        if (!_prototypeManager.TryIndex<StartingGearPrototype>(gear, out var startingGear))
+        if (!ProtoMan.TryIndex<StartingGearPrototype>(gear, out var startingGear))
             return false;
 
         HumanoidCharacterProfile? profile = null;
         ICommonSession? session = null;
         // Check if we are setting the outfit of a player to respect the preferences
-        if (EntityManager.TryGetComponent(target, out ActorComponent? actorComponent))
+        if (TryComp(target, out ActorComponent? actorComponent))
         {
             session = actorComponent.PlayerSession;
             var userId = actorComponent.PlayerSession.UserId;
@@ -63,12 +65,12 @@ public sealed class OutfitSystem : EntitySystem
                 if (gearStr == string.Empty)
                     continue;
 
-                var equipmentEntity = EntityManager.SpawnEntity(gearStr, EntityManager.GetComponent<TransformComponent>(target).Coordinates);
+                var equipmentEntity = Spawn(gearStr, Comp<TransformComponent>(target).Coordinates);
                 if (slot.Name == "id" &&
-                    EntityManager.TryGetComponent(equipmentEntity, out PdaComponent? pdaComponent) &&
-                    EntityManager.TryGetComponent<IdCardComponent>(pdaComponent.ContainedId, out var id))
+                    TryComp(equipmentEntity, out PdaComponent? pdaComponent) &&
+                    TryComp<IdCardComponent>(pdaComponent.ContainedId, out var id))
                 {
-                    id.FullName = EntityManager.GetComponent<MetaDataComponent>(target).EntityName;
+                    id.FullName = Comp<MetaDataComponent>(target).EntityName;
                 }
 
                 _invSystem.TryEquip(target, equipmentEntity, slot.Name, silent: true, force: true, inventory: inventoryComponent);
@@ -79,18 +81,44 @@ public sealed class OutfitSystem : EntitySystem
             }
         }
 
-        if (EntityManager.TryGetComponent(target, out HandsComponent? handsComponent))
+        var coords = Transform(target).Coordinates;
+        foreach (var (slotName, storageContainers) in startingGear.Storage)
         {
-            var coords = EntityManager.GetComponent<TransformComponent>(target).Coordinates;
+            if (storageContainers.Count == 0)
+                continue;
+
+            if (!_invSystem.TryGetSlotEntity(target, slotName, out var slotEnt))
+                continue;
+
+            if (TryComp<StorageComponent>(slotEnt, out var storage))
+            {
+                foreach (var entProto in storageContainers)
+                {
+                    var spawnedEntity = SpawnAtPosition(entProto, coords);
+                    _storageSystem.Insert(slotEnt.Value, spawnedEntity, out _, user: null, storageComp: storage, playSound: false);
+                }
+            }
+            else if (TryComp<ItemSlotsComponent>(slotEnt, out var itemSlots))
+            {
+                foreach (var entProto in storageContainers)
+                {
+                    var spawnedEntity = SpawnAtPosition(entProto, coords);
+                    _itemSlotsSystem.TryInsertEmpty((slotEnt.Value, itemSlots), spawnedEntity, null, excludeUserAudio: true);
+                }
+            }
+        }
+
+        if (TryComp(target, out HandsComponent? handsComponent))
+        {
             foreach (var prototype in startingGear.Inhand)
             {
-                var inhandEntity = EntityManager.SpawnEntity(prototype, coords);
+                var inhandEntity = Spawn(prototype, coords);
                 _handSystem.TryPickup(target, inhandEntity, checkActionBlocker: false, handsComp: handsComponent);
             }
         }
 
         // See if this starting gear is associated with a job
-        var jobs = _prototypeManager.EnumeratePrototypes<JobPrototype>();
+        var jobs = ProtoMan.EnumeratePrototypes<JobPrototype>();
         foreach (var job in jobs)
         {
             if (job.StartingGear != gear)
@@ -98,15 +126,15 @@ public sealed class OutfitSystem : EntitySystem
 
             // Sunrise-start
             var jobProtoId = LoadoutSystem.GetJobPrototype(job.ID);
-            var effectiveJobProtoId = LoadoutSystem.GetEffectiveRolePrototype(jobProtoId, _prototypeManager);
+            var effectiveJobProtoId = LoadoutSystem.GetEffectiveRolePrototype(jobProtoId, ProtoMan);
 
-            if (!_prototypeManager.TryIndex<RoleLoadoutPrototype>(effectiveJobProtoId, out var jobProto))
+            if (!ProtoMan.TryIndex<RoleLoadoutPrototype>(effectiveJobProtoId, out var jobProto))
             // Sunrise-end
                 break;
 
             // Don't require a player, so this works on Urists
-            profile ??= EntityManager.TryGetComponent<HumanoidAppearanceComponent>(target, out var comp)
-                ? HumanoidCharacterProfile.DefaultWithSpecies(comp.Species)
+            profile ??= TryComp<HumanoidProfileComponent>(target, out var comp)
+                ? HumanoidCharacterProfile.DefaultWithSpecies(comp.Species, comp.Sex)
                 : new HumanoidCharacterProfile();
             // Try to get the user's existing loadout for the role
             profile.Loadouts.TryGetValue(jobProtoId, out var roleLoadout);
@@ -125,7 +153,7 @@ public sealed class OutfitSystem : EntitySystem
                     }
                 }
                 // Sunrise-End
-                roleLoadout.SetDefault(profile, session, _prototypeManager, sponsorsPrototypes);
+                roleLoadout.SetDefault(profile, session, ProtoMan, sponsorsPrototypes);
             }
 
             // Equip the target with the job loadout

@@ -1,130 +1,250 @@
-using Content.Server.Administration.Systems;
-using Content.Server.Body.Systems;
-using Content.Server.Hands.Systems;
-using Content.Server.Humanoid;
-using Content.Shared._Starlight.Medical.Body;
+using System.Linq;
+using System.Reflection;
+using Content.Shared._Sunrise.Humanoid;
 using Content.Shared._Starlight.Medical.Limbs;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Part;
-using Content.Shared.Hands.Components;
+using Content.Shared.Body;
 using Content.Shared.Humanoid;
-using Content.Shared.Interaction.Components;
+using Content.Shared.Starlight;
 using Content.Shared.Starlight.Medical.Surgery;
 using Robust.Server.Containers;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Maths;
 
 namespace Content.Server._Starlight.Medical.Limbs;
 
 public sealed partial class LimbSystem : SharedLimbSystem
 {
-    [Dependency] private readonly ContainerSystem _containers = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoidAppearanceSystem = default!;
-    [Dependency] private readonly MetaDataSystem _metadata = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly StarlightEntitySystem _entity = default!;
+    [Dependency] private ContainerSystem _containers = default!;
+    [Dependency] private SunriseHumanoidBodySystem _sunriseBody = default!;
 
-    private readonly EntProtoId _virtual = "PartVirtual";
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
+    private static readonly MethodInfo? RaiseLocalEventRefMethod = typeof(LimbSystem)
+        .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+        .Where(m => m.Name == nameof(RaiseLocalEvent) && m.IsGenericMethodDefinition)
+        .FirstOrDefault(m =>
+        {
+            var parameters = m.GetParameters();
+            return parameters.Length == 3 &&
+                   parameters[0].ParameterType == typeof(EntityUid) &&
+                   parameters[1].ParameterType.IsByRef &&
+                   parameters[2].ParameterType == typeof(bool);
+        });
 
-    public bool AttachLimb(Entity<HumanoidAppearanceComponent> body, string slot, Entity<BodyPartComponent> part, Entity<BodyPartComponent> limb)
+    public bool AttachLimb(Entity<BodyComponent> body, string slot, Entity<OrganComponent> limb)
     {
-        if (!_body.AttachPart(part, slot, limb, part.Comp, limb.Comp))
+        if (body.Comp.Organs == null ||
+            SharedSurgerySystem.GetSlotCategory(slot) is not { } category ||
+            !IsOrganCategory(limb.Comp, category) ||
+            HasBodyOrganCategory(body, category) ||
+            !_containers.Insert(limb.Owner, body.Comp.Organs))
+        {
             return false;
-        AddLimbVisual(body, limb);
-        AddLimb(body, slot, limb);
+        }
+
+        if (TryComp<HumanoidProfileComponent>(body.Owner, out var humanoid))
+            AddLimbVisual((body.Owner, humanoid), limb);
+
+        RaiseLimbAttachedEvents(body.Owner, limb.Owner);
+        AddAttachedBodyParts(body, limb);
         return true;
     }
 
-    public bool AttachItem(EntityUid body, string slot, Entity<BodyPartComponent> part, Entity<MetaDataComponent> item)
+    public bool Amputate(Entity<BodyComponent> body, EntityUid limb)
     {
-        var marker = EnsureComp<CustomLimbMarkerComponent>(item);
-
-        var virtualItem = Spawn(_virtual);
-        var virtualBodyPart = EnsureComp<BodyPartComponent>(virtualItem);
-        var virtualCustomLimb = EnsureComp<CustomLimbComponent>(virtualItem);
-        _metadata.SetEntityName(virtualItem, item.Comp.EntityName);
-
-        marker.VirtualPart = virtualItem;
-        virtualCustomLimb.Item = item;
-
-        virtualBodyPart.PartType = BodyParts.GetBodyPart(slot);
-
-        if (!_body.AttachPart(part, slot, virtualItem, part.Comp, virtualBodyPart))
-        {
-            QueueDel(virtualItem);
+        if (body.Comp.Organs == null || !body.Comp.Organs.Contains(limb))
             return false;
+
+        if (TryComp<OrganComponent>(limb, out var organ))
+        {
+            foreach (var childCategory in GetChildCategories(organ))
+            {
+                if (TryFindBodyOrganByCategory(body, childCategory, out var child) &&
+                    !AmputateSingle(body, child))
+                {
+                    return false;
+                }
+            }
         }
-        AddItemLimb(body, slot, item);
-        AddItemHand(body, item, BodySystem.GetPartSlotContainerId(slot));
+
+        return AmputateSingle(body, limb);
+    }
+
+    public void ToggleLimbVisual(Entity<HumanoidProfileComponent> body, Entity<BaseLayerDataComponent, BaseLayerToggledDataComponent, OrganComponent> limb, bool toggled)
+    {
+        if (GetLayer(limb.Comp3) is not { } layer)
+            return;
+
+        _sunriseBody.SetBaseLayerData(body.Owner, layer, toggled ? limb.Comp2.Data : limb.Comp1.Data);
+    }
+
+    private bool AmputateSingle(Entity<BodyComponent> body, EntityUid limb)
+    {
+        if (body.Comp.Organs == null || !body.Comp.Organs.Contains(limb))
+            return false;
+
+        var destination = Transform(body).Coordinates;
+        if (!_containers.Remove(limb, body.Comp.Organs, destination: destination))
+            return false;
+
+        if (TryComp<HumanoidProfileComponent>(body, out var humanoid) &&
+            TryComp<OrganComponent>(limb, out var organ))
+        {
+            RemoveLimbVisual((body, humanoid), (limb, organ));
+        }
+
+        RaiseLimbRemovedEvents(body, limb);
         return true;
     }
 
-    public void Amputate(Entity<TransformComponent, HumanoidAppearanceComponent, BodyComponent> body, Entity<TransformComponent, MetaDataComponent> limb)
+    private void AddAttachedBodyParts(Entity<BodyComponent> body, Entity<OrganComponent> limb)
     {
-        if (!_containers.TryGetContainingContainer((limb.Owner, limb.Comp1, limb.Comp2), out var container)
-         || _body.GetParentPartAndSlotOrNull(limb.Owner) is not var (_, slotId)
-         || !_containers.Remove(limb.Owner, container, destination: body.Comp1.Coordinates)) return;
+        if (body.Comp.Organs == null || !TryComp<WithAttachedBodyPartsComponent>(limb, out var attached))
+            return;
 
-        if (TryComp<CustomLimbComponent>(limb, out var virtualLimb))
-            AmputateItemLimb((body, body.Comp1, body.Comp3), limb, slotId, virtualLimb);
-        else if (_entity.TryEntity<TransformComponent, MetaDataComponent, BodyPartComponent>(limb, out var bodyPart))
+        foreach (var (slot, prototype) in attached.Parts)
         {
-            RemoveLimbVisual(body, bodyPart);
-            RemoveLimb(body, bodyPart);
+            var category = SharedSurgerySystem.GetSlotCategory(slot);
+            if (category == null || HasBodyOrganCategory(body, category))
+                continue;
+
+            var child = Spawn(prototype, Transform(body).Coordinates);
+            if (!TryComp<OrganComponent>(child, out var childOrgan) ||
+                !IsOrganCategory(childOrgan, category) ||
+                !_containers.Insert(child, body.Comp.Organs))
+            {
+                QueueDel(child);
+                continue;
+            }
+
+            if (TryComp<HumanoidProfileComponent>(body, out var humanoid))
+                AddLimbVisual((body, humanoid), (child, childOrgan));
+
+            RaiseLimbAttachedEvents(body, child);
         }
     }
 
-    private void AddItemLimb(EntityUid body, string slot, Entity<MetaDataComponent> item)
+    private void AddLimbVisual(Entity<HumanoidProfileComponent?> body, Entity<OrganComponent> limb)
     {
-        var layer = VisualLayers.GetLayer(slot);
-        var vizualizer = EnsureComp<CustomLimbVisualizerComponent>(body);
-        vizualizer.Layers[layer] = GetNetEntity(item);
-        Dirty(body, vizualizer);
-    }
-
-    private void AmputateItemLimb(Entity<TransformComponent, BodyComponent> body, Entity<TransformComponent, MetaDataComponent> limb, string slotId, CustomLimbComponent virtualLimb)
-    {
-        RemoveItemLimb(body, virtualLimb.Item, BodySystem.GetPartSlotContainerId(slotId));
-
-        var vizualizer = EnsureComp<CustomLimbVisualizerComponent>(body);
-
-        var layer = VisualLayers.GetLayer(slotId);
-        vizualizer.Layers.Remove(layer);
-        Dirty(body, vizualizer);
-        QueueDel(limb.Owner);
-    }
-
-    private void AddItemHand(EntityUid bodyId, EntityUid itemId, string handId)
-    {
-        if (!TryComp<HandsComponent>(bodyId, out var hands))
+        if (GetLayer(limb.Comp) is not { } layer)
             return;
 
-        if (!itemId.IsValid())
+        if (TryComp<BaseLayerDataComponent>(limb.Owner, out var baseLayer) && baseLayer.Data != null)
         {
-            Log.Debug("no valid item");
-            return;
+            _sunriseBody.SetBaseLayerData(body.Owner, layer, baseLayer.Data);
         }
 
-        _hands.AddHand((bodyId, hands), handId, HandLocation.Middle);
-        _hands.DoPickup(bodyId, handId, itemId);
-        EnsureComp<UnremoveableComponent>(itemId);
+        _sunriseBody.SetLayersVisibility(body.Owner, [layer], true);
     }
 
-    private void RemoveItemLimb(EntityUid bodyId, EntityUid itemId, string handId)
+    private void RemoveLimbVisual(Entity<HumanoidProfileComponent?> body, Entity<OrganComponent> limb)
     {
-        if (!bodyId.IsValid() || !itemId.IsValid()) return;
-
-        if (!TryComp<HandsComponent>(bodyId, out var hands)
-            || !_hands.TryGetHand((bodyId, hands), handId, out var hand))
+        if (GetLayer(limb.Comp) is not { } layer)
             return;
 
-        RemComp<UnremoveableComponent>(itemId);
-        _hands.DoDrop(itemId, handId);
-        _hands.RemoveHand(bodyId, handId);
+        _sunriseBody.SetLayersVisibility(body.Owner, [layer], false);
+    }
+
+    private bool TryFindBodyOrganByCategory(Entity<BodyComponent> body, string category, out EntityUid organ)
+    {
+        organ = EntityUid.Invalid;
+
+        if (body.Comp.Organs == null)
+            return false;
+
+        foreach (var contained in body.Comp.Organs.ContainedEntities)
+        {
+            if (!TryComp<OrganComponent>(contained, out var organComp) || !IsOrganCategory(organComp, category))
+                continue;
+
+            organ = contained;
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool HasBodyOrganCategory(Entity<BodyComponent> body, string category)
+    {
+        return TryFindBodyOrganByCategory(body, category, out _);
+    }
+
+    private static bool IsOrganCategory(OrganComponent organ, string category)
+    {
+        return organ.Category?.Id == category;
+    }
+
+    private static IEnumerable<string> GetChildCategories(OrganComponent organ)
+    {
+        switch (organ.Category?.Id)
+        {
+            case "ArmLeft":
+                yield return "HandLeft";
+                break;
+            case "ArmRight":
+                yield return "HandRight";
+                break;
+            case "LegLeft":
+                yield return "FootLeft";
+                break;
+            case "LegRight":
+                yield return "FootRight";
+                break;
+        }
+    }
+
+    private static HumanoidVisualLayers? GetLayer(OrganComponent organ)
+    {
+        return organ.Category?.Id switch
+        {
+            "Head" => HumanoidVisualLayers.Head,
+            "Torso" => HumanoidVisualLayers.Chest,
+            "ArmLeft" => HumanoidVisualLayers.LArm,
+            "ArmRight" => HumanoidVisualLayers.RArm,
+            "HandLeft" => HumanoidVisualLayers.LHand,
+            "HandRight" => HumanoidVisualLayers.RHand,
+            "LegLeft" => HumanoidVisualLayers.LLeg,
+            "LegRight" => HumanoidVisualLayers.RLeg,
+            "FootLeft" => HumanoidVisualLayers.LFoot,
+            "FootRight" => HumanoidVisualLayers.RFoot,
+            _ => null,
+        };
+    }
+
+    private void RaiseLimbAttachedEvents(EntityUid body, EntityUid limb)
+    {
+        RaiseImplantableEvents(body, limb, typeof(LimbAttachedEvent<>));
+    }
+
+    private void RaiseLimbRemovedEvents(EntityUid body, EntityUid limb)
+    {
+        RaiseImplantableEvents(body, limb, typeof(LimbRemovedEvent<>));
+    }
+
+    private void RaiseImplantableEvents(EntityUid body, EntityUid limb, Type eventTypeDefinition)
+    {
+        if (RaiseLocalEventRefMethod == null)
+            return;
+
+        foreach (var comp in AllComps(limb))
+        {
+            if (comp is not IImplantable)
+                continue;
+
+            RaiseImplantableEvent(body, limb, comp, comp.GetType(), eventTypeDefinition);
+
+            foreach (var face in comp.GetType().GetInterfaces().Where(typeof(IImplantable).IsAssignableFrom))
+            {
+                RaiseImplantableEvent(body, limb, comp, face, eventTypeDefinition);
+            }
+        }
+    }
+
+    private void RaiseImplantableEvent(EntityUid body, EntityUid limb, IComponent comp, Type componentType, Type eventTypeDefinition)
+    {
+        var eventType = eventTypeDefinition.MakeGenericType(componentType);
+        var ev = Activator.CreateInstance(eventType, [limb, comp]);
+        if (ev == null)
+            return;
+
+        var closedMethod = RaiseLocalEventRefMethod!.MakeGenericMethod(eventType);
+        closedMethod.Invoke(this, [body, ev, false]);
     }
 }

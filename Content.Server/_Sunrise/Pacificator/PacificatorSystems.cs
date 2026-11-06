@@ -1,6 +1,7 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Audio;
 using Content.Server.Power.Components;
+using Content.Server.Power.EntitySystems;
 using Content.Shared._Sunrise.Pacificator;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Database;
@@ -11,15 +12,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.Pacificator;
 
-public sealed class PacificatorSystems : EntitySystem
+public sealed partial class PacificatorSystems : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly AmbientSoundSystem _ambientSoundSystem = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private AmbientSoundSystem _ambientSoundSystem = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PowerReceiverSystem _powerReceiver = default!;
 
     public override void Initialize()
     {
@@ -49,10 +51,9 @@ public sealed class PacificatorSystems : EntitySystem
     private void OnComponentShutdown(EntityUid uid, Pacificator.PacificatorComponent component, ComponentShutdown args)
     {
         foreach (var pacifiedEntity in component.PacifiedEntities)
-        {
             RemComp<PacifiedComponent>(pacifiedEntity);
-            component.PacifiedEntities.Remove(pacifiedEntity);
-        }
+
+        component.PacifiedEntities.Clear();
     }
 
     private void OnCompInit(Entity<Pacificator.PacificatorComponent> ent, ref ComponentInit args)
@@ -61,7 +62,7 @@ public sealed class PacificatorSystems : EntitySystem
         if (!Resolve(ent, ref powerReceiver, false))
             return;
 
-        UpdatePowerState(ent, powerReceiver);
+        UpdatePowerState(ent, ent.Comp, powerReceiver);
         UpdateState((ent, ent.Comp, powerReceiver));
     }
 
@@ -140,15 +141,16 @@ public sealed class PacificatorSystems : EntitySystem
         _adminLogger.Add(LogType.Action, on ? LogImpact.Medium : LogImpact.High, $"{actor:player} set ${ToPrettyString(uid):target} to {(on ? "on" : "off")}");
 
         component.SwitchedOn = on;
-        UpdatePowerState(component, powerReceiver);
+        UpdatePowerState(uid, component, powerReceiver);
         component.NeedUIUpdate = true;
     }
 
-    private static void UpdatePowerState(
+    private void UpdatePowerState(
+        EntityUid uid,
         Pacificator.PacificatorComponent component,
         ApcPowerReceiverComponent powerReceiver)
     {
-        powerReceiver.Load = component.SwitchedOn ? component.ActivePowerUse : component.IdlePowerUse;
+        _powerReceiver.SetLoad(uid, component.SwitchedOn ? component.ActivePowerUse : component.IdlePowerUse);
     }
 
     private void UpdateUI(Entity<Pacificator.PacificatorComponent, ApcPowerReceiverComponent> ent, float chargeRate)
@@ -266,10 +268,9 @@ public sealed class PacificatorSystems : EntitySystem
                 if (!pacificator.Active)
                 {
                     foreach (var pacifiedEntity in pacificator.PacifiedEntities)
-                    {
                         RemComp<PacifiedComponent>(pacifiedEntity);
-                        pacificator.PacifiedEntities.Remove(pacifiedEntity);
-                    }
+
+                    pacificator.PacifiedEntities.Clear();
                 }
             }
 
@@ -289,7 +290,7 @@ public sealed class PacificatorSystems : EntitySystem
 
         var coords = Transform(ent.Owner).Coordinates;
 
-        var entities = _lookup.GetEntitiesInRange<HumanoidAppearanceComponent>(coords, ent.Comp.Range);
+        var entities = _lookup.GetEntitiesInRange<HumanoidProfileComponent>(coords, ent.Comp.Range);
 
         foreach (var entityUid in entities)
         {
@@ -300,7 +301,7 @@ public sealed class PacificatorSystems : EntitySystem
             ent.Comp.PacifiedEntities.Add(entityUid);
         }
 
-        var entitiesToRemove = new HashSet<Entity<HumanoidAppearanceComponent>>();
+        var entitiesToRemove = new HashSet<Entity<HumanoidProfileComponent>>();
 
         foreach (var pacifiedEntity in ent.Comp.PacifiedEntities)
         {

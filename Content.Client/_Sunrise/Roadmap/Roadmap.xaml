@@ -4,7 +4,6 @@
                           xmlns:roadmap="clr-namespace:Content.Client._Sunrise.Roadmap"
                           SetSize="1280 720"
                           MinSize="1280 720"
-                          Name="Window"
                           Title="{Loc ui-roadmap}">
     <PanelContainer>
         <PanelContainer.PanelOverride>

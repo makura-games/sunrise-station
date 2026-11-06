@@ -19,12 +19,11 @@ namespace Content.Shared._Sunrise.Execution;
 
 public abstract partial class SharedExecutionSystem
 {
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly SharedGunSystem _gunSystem = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private MobStateSystem _mobStateSystem = default!;
+    [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
+    [Dependency] private SharedGunSystem _gunSystem = default!;
 
     protected static bool TryGetVerbContext(
         ref GetVerbsEvent<UtilityVerb> args,
@@ -90,10 +89,10 @@ public abstract partial class SharedExecutionSystem
         if (!TryComp<GunComponent>(weapon, out var gun) || !_gunSystem.CanShoot(gun))
             return false;
 
-        if (TryComp<DamageableComponent>(victim, out var damageable))
+        if (HasComp<DamageableComponent>(victim))
         {
             if (TryComp<BatteryAmmoProviderComponent>(weapon, out var battery) &&
-                !PrototypeHasLethalEffect(damageable, battery.Prototype))
+                !PrototypeHasLethalEffect(battery.Prototype))
                 return false;
 
             if (HasNonLethalAmmoPrototype(weapon))
@@ -136,9 +135,9 @@ public abstract partial class SharedExecutionSystem
         return false;
     }
 
-    private bool PrototypeHasLethalEffect(DamageableComponent damageable, EntProtoId ammoPrototype)
+    private bool PrototypeHasLethalEffect(EntProtoId ammoPrototype)
     {
-        var proto = _prototypeManager.Index(ammoPrototype);
+        var proto = ProtoMan.Index(ammoPrototype);
 
         if (proto.TryGetComponent<ExplosiveComponent>(out _, _componentFactory))
             return true;
@@ -155,7 +154,7 @@ public abstract partial class SharedExecutionSystem
 
         foreach (var (type, value) in damage.DamageDict)
         {
-            if (value > FixedPoint2.Zero && damageable.Damage.DamageDict.ContainsKey(type))
+            if (type != StructuralDamageType && value > FixedPoint2.Zero)
                 return true;
         }
 

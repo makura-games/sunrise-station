@@ -1,4 +1,4 @@
-﻿using Content.Server._Sunrise.BloodCult.Items.Components;
+using Content.Server._Sunrise.BloodCult.Items.Components;
 using Content.Server.Hands.Systems;
 using Content.Server.Stunnable;
 using Content.Shared._Sunrise.BloodCult.Components;
@@ -7,10 +7,10 @@ using Content.Shared.Throwing;
 
 namespace Content.Server._Sunrise.BloodCult.Items.Systems;
 
-public sealed class ReturnItemOnThrowSystem : EntitySystem
+public sealed partial class ReturnItemOnThrowSystem : EntitySystem
 {
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private StunSystem _stun = default!;
 
     public override void Initialize()
     {

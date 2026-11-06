@@ -50,6 +50,7 @@
       - Theatre
       - GenpopEnter
       - GenpopLeave
+      - Brigmedic # Sunrise
       - BlueShield # Sunrise
       - BlueShieldEnsign # Sunrise
       - Ntrep # Sunrise
@@ -60,7 +61,6 @@
         name: id-card-console-privileged-id
         ejectSound: /Audio/Machines/id_swipe.ogg
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-        ejectOnBreak: true
         swap: false
         whitelist:
           components:
@@ -141,6 +141,7 @@
     - Ntrep # Sunrise
     - Magistrat # Sunrise
     - Barber  # Sunrise
+    - Brigmedic # Sunrise
     - Mining # Sunrise
     - Pirate # Sunrise
     privilegedIdSlot:
@@ -148,7 +149,6 @@
       startingItem: UniversalIDCard
       ejectSound: /Audio/Machines/id_swipe.ogg
       insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-      ejectOnBreak: true
       swap: false
       whitelist:
         components:
@@ -176,7 +176,6 @@
       startingItem: XenoborgIDCard
       ejectSound: /Audio/Machines/id_swipe.ogg
       insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-      ejectOnBreak: true
       disableEject: true
       swap: false
       whitelist:

@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Content.Server.Administration.Systems;
-using Content.Shared.Body.Part;
-using Content.Shared.Body.Systems;
+using Content.Shared.Body;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Climbing.Systems;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
@@ -32,25 +29,22 @@ namespace Content.Shared.Starlight.Medical.Surgery;
 // https://github.com/RMC-14/RMC-14
 public abstract partial class SharedSurgerySystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly IReflectionManager _reflectionManager = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly StarlightEntitySystem _entitySystem = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IComponentFactory _compFactory = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RotateToFaceSystem _rotateToFace = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IReflectionManager _reflectionManager = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private StarlightEntitySystem _entitySystem = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
 
     public override void Initialize()
     {
@@ -68,7 +62,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             EntProtoId surgery,
             EntProtoId stepId,
             out Entity<SurgeryComponent> surgeryEnt,
-            out Entity<BodyPartComponent> partEnt,
+            out EntityUid partEnt,
             out EntityUid step
         )
     {
@@ -78,12 +72,16 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         if (!HasComp<SurgeryTargetComponent>(body)
              || !IsLyingDown(body)
-             || !_entitySystem.TryEntity(targetPart, out partEnt)
+             || !Exists(targetPart)
              || !_entitySystem.TryGetSingleton(surgery, out var surgeryEntId)
              || !_entitySystem.TryEntity(surgeryEntId, out surgeryEnt)
              || !_entitySystem.TryGetSingleton(stepId, out step)
-             || !surgeryEnt.Comp.Steps.Contains(stepId))
+             || !surgeryEnt.Comp.Steps.Contains(stepId)
+             || !TryComp<OrganComponent>(targetPart, out var organ)
+             || !IsSurgeryTarget(organ))
             return false;
+
+        partEnt = targetPart;
 
         var progress = EnsureComp<SurgeryProgressComponent>(targetPart);
 

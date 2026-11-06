@@ -1,12 +1,10 @@
-ent-BaseCartridgeLightRifleSP = патрон (7,62 SP)
+ent-BaseCartridgeLightRifleSP = патрон (7,62)
     .desc = { ent-BaseCartridge.desc }
-ent-CartridgeLightRifleSP = патрон (7,62 SP)
+ent-CartridgeLightRifleSP = патрон (7,62)
     .desc = { ent-BaseCartridgeLightRifleSP.desc }
-ent-CartridgeLightRifleHP = патрон (7,62 HP)
+ent-CartridgeLightRifleFMJ = патрон (7,62 ПП)
     .desc = { ent-BaseCartridgeLightRifleSP.desc }
-ent-CartridgeLightRifleFMJ = патрон (7,62 FMJ)
-    .desc = { ent-BaseCartridgeLightRifleSP.desc }
-ent-CartridgeLightRifleAP = патрон (7,62 AP)
+ent-CartridgeLightRifleAP = патрон (7,62 ББ)
     .desc = { ent-BaseCartridgeLightRifleSP.desc }
 ent-CartridgeLightRiflePractice = патрон (7,62 учебный)
     .desc = Классический промежуточный патрон, используемый многими боевыми винтовками и ручными пулемётами. Меловые боеприпасы, как правило, не наносят вреда и используются для тренировок.

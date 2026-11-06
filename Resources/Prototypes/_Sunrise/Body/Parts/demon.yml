@@ -2,15 +2,19 @@
 # TODO BODY: Part damage
 - type: entity
   id: PartDemon
-  parent: [BaseItem, BasePart]
+  parent: OrganBase
   name: "demon body part"
   abstract: true
+  components:
+  - type: VisualOrganMarkings
+    markingData:
+      group: Demon
 
 
 - type: entity
   id: TorsoDemon
   name: "demon torso"
-  parent: PartDemon
+  parent: [PartDemon, OrganBaseTorso]
   components:
   - type: Sprite
     netsync: false
@@ -19,13 +23,17 @@
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: "torso_m"
-  - type: BodyPart
-    partType: Torso
-
+  - type: VisualOrganMarkings
+    markingData:
+      layers:
+      - Back
+      - Tail
+      - Overlay
+      - Chest
 - type: entity
   id: HeadDemon
   name: "demon head"
-  parent: [PartDemon, BaseHead]
+  parent: [PartDemon, OrganBaseHead]
   components:
   - type: Sprite
     netsync: false
@@ -34,11 +42,18 @@
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: "head_m"
+  - type: VisualOrganMarkings
+    hideableLayers:
+    - enum.HumanoidVisualLayers.Hair
+    - enum.HumanoidVisualLayers.FacialHair
+    - enum.HumanoidVisualLayers.HeadTop
+    - enum.HumanoidVisualLayers.HeadSide
+    - enum.HumanoidVisualLayers.Snout
 
 - type: entity
   id: LeftArmDemon
   name: "left demon arm"
-  parent: PartDemon
+  parent: [PartDemon, OrganBaseArmLeft]
   components:
   - type: Sprite
     netsync: false
@@ -47,14 +62,10 @@
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: "l_arm"
-  - type: BodyPart
-    partType: Arm
-    symmetry: Left
-
 - type: entity
   id: RightArmDemon
   name: "right demon arm"
-  parent: PartDemon
+  parent: [PartDemon, OrganBaseArmRight]
   components:
   - type: Sprite
     netsync: false
@@ -63,14 +74,10 @@
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: "r_arm"
-  - type: BodyPart
-    partType: Arm
-    symmetry: Right
-
 - type: entity
   id: LeftHandDemon
   name: "left demon hand"
-  parent: PartDemon
+  parent: [PartDemon, OrganBaseHandLeft]
   components:
   - type: Sprite
     netsync: false
@@ -79,14 +86,10 @@
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: "l_hand"
-  - type: BodyPart
-    partType: Hand
-    symmetry: Left
-
 - type: entity
   id: RightHandDemon
   name: "right demon hand"
-  parent: PartDemon
+  parent: [PartDemon, OrganBaseHandRight]
   components:
   - type: Sprite
     netsync: false
@@ -95,14 +98,10 @@
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: "r_hand"
-  - type: BodyPart
-    partType: Hand
-    symmetry: Right
-
 - type: entity
   id: LeftLegDemon
   name: "left demon leg"
-  parent: PartDemon
+  parent: [PartDemon, OrganBaseLegLeft]
   components:
   - type: Sprite
     netsync: false
@@ -111,17 +110,11 @@
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: "l_leg"
-  - type: BodyPart
-    partType: Leg
-    symmetry: Left
-  - type: MovementBodyPart
-    walkSpeed : 2.5
-    sprintSpeed : 4.5
 
 - type: entity
   id: RightLegDemon
   name: "right demon leg"
-  parent: PartDemon
+  parent: [PartDemon, OrganBaseLegRight]
   components:
   - type: Sprite
     netsync: false
@@ -130,17 +123,11 @@
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: "r_leg"
-  - type: BodyPart
-    partType: Leg
-    symmetry: Right
-  - type: MovementBodyPart
-    walkSpeed : 2.5
-    sprintSpeed : 4.5
 
 - type: entity
   id: LeftFootDemon
   name: "left demon foot"
-  parent: PartDemon
+  parent: [PartDemon, OrganBaseFootLeft]
   components:
   - type: Sprite
     netsync: false
@@ -149,14 +136,10 @@
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: "l_foot"
-  - type: BodyPart
-    partType: Foot
-    symmetry: Left
-
 - type: entity
   id: RightFootDemon
   name: "right demon foot"
-  parent: PartDemon
+  parent: [PartDemon, OrganBaseFootRight]
   components:
   - type: Sprite
     netsync: false
@@ -165,6 +148,3 @@
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: "r_foot"
-  - type: BodyPart
-    partType: Foot
-    symmetry: Right

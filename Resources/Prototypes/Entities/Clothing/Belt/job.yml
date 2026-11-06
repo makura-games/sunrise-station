@@ -136,11 +136,11 @@
       - WetFloorSign
       - HolosignProjector
       - Plunger
+      - TrashBagHolding
       - GoldenPlunger
       - WireBrush
-      components:
       - LightReplacer
-      - SmokeOnTrigger
+      - CleanerGrenade
   - type: ItemMapper
     sprite: *BeltOverlay
     mapLayers:
@@ -152,10 +152,46 @@
         whitelist:
           tags:
           - Spray
-      wrench:
+      light_replacer:
         whitelist:
           tags:
-          - Wrench
+          - LightReplacer
+      trashbag:
+        whitelist:
+          tags:
+          - TrashBag
+      trashbag_holding:
+        whitelist:
+          tags:
+          - TrashBagHolding
+      wetfloorsign:
+        whitelist:
+          tags:
+          - WetFloorSign
+      soap:
+        whitelist:
+          tags:
+          - Soap
+      wire_brush:
+        whitelist:
+          tags:
+          - WireBrush
+      holosign:
+        whitelist:
+          tags:
+          - HolosignProjector
+      plunger:
+        whitelist:
+          tags:
+          - Plunger
+      golden_plunger:
+        whitelist:
+          tags:
+          - GoldenPlunger
+      cleaner_grenade:
+        whitelist:
+          tags:
+          - CleanerGrenade
   - type: Appearance
 
 - type: entity
@@ -188,6 +224,7 @@
       - Patch # Sunrise-Add
       - PatchPack # Sunrise-Add
       - AutoMender # Sunrise-Add
+      - MedipenCase # Sunrise-Edit
       components:
       - Injector
       - Pill
@@ -251,9 +288,7 @@
   - type: Storage
     whitelist:
       tags:
-      - PlantSampleTaker
       - BotanyShovel
-      - BotanyHoe
       - BotanyHatchet
       - PlantBGone
       - Bottle
@@ -261,6 +296,8 @@
       - CigPack
       - Dropper
       components:
+      - BotanySampleTaker
+      - BotanyHoe
       - Seed
       - Smokable
       - HandLabeler
@@ -273,7 +310,7 @@
           - BotanyHatchet
       hoe:
         whitelist:
-          tags:
+          components:
           - BotanyHoe
       secateurs: # We don't have secateurs and this looks similar enough.
         whitelist:
@@ -391,8 +428,8 @@
       - CombatKnife
       - Truncheon
       - HandGrenade
-      components:
       - Stunbaton
+      components:
       - FlashOnTrigger
       - SmokeOnTrigger
       - Flash
@@ -411,7 +448,7 @@
           - FlashOnTrigger
       stunbaton:
         whitelist:
-          components:
+          tags:
           - Stunbaton
       tear_gas_grenade:
         whitelist:

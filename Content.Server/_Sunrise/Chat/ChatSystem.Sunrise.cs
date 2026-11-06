@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server._Sunrise.AnnouncementSpeaker;
 using Content.Server.Chat.Systems;
 using Content.Shared.Chat;
 using Robust.Shared.Player;
@@ -13,6 +14,10 @@ namespace Content.Server.Chat.Systems;
 
 public sealed partial class ChatSystem
 {
+    [Dependency] private AnnouncementSpeakerSystem _announcementSpeaker = default!;
+
+    public const string DefaultSunriseAnnouncementSound = "/Audio/_Sunrise/Announcements/announce_dig.ogg";
+
     private void SendCollectiveMindChat(EntityUid source, string message, CollectiveMindPrototype? collectiveMind)
     {
         if (_mobStateSystem.IsDead(source))
@@ -132,4 +137,20 @@ public sealed partial class ChatSystem
 
         return filteredPlayers;
     }
+}
+
+public sealed class RadioSpokeEvent(EntityUid source, string message, EntityUid[] receivers, string channelId) : EntityEventArgs
+{
+    public readonly EntityUid Source = source;
+    public readonly string Message = message;
+    public readonly EntityUid[] Receivers = receivers;
+    public readonly string ChannelId = channelId;
+}
+
+public sealed class CollectiveMindSpokeEvent(EntityUid source, string message, IReadOnlyCollection<EntityUid> receivers, string collectiveMindId) : EntityEventArgs
+{
+    public readonly EntityUid Source = source;
+    public readonly string Message = message;
+    public readonly IReadOnlyCollection<EntityUid> Receivers = receivers;
+    public readonly string CollectiveMindId = collectiveMindId;
 }

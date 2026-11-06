@@ -1,0 +1,39 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               x:Class="Content.Client._Sunrise.Tutorial.TutorialCompletionWindow"
+               xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+               xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+               SetSize="520 260"
+               MinSize="420 220"
+               Resizable="False"
+               Title="{Loc ui-tutorial}">
+    <PanelContainer HorizontalExpand="True"
+                    VerticalExpand="True">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#1e1e22" />
+        </PanelContainer.PanelOverride>
+
+        <BoxContainer Orientation="Vertical"
+                      HorizontalExpand="True"
+                      VerticalExpand="True"
+                      SeparationOverride="8"
+                      Margin="8">
+            <controls:StripeBack>
+                <Label Name="CompletionTitleLabel"
+                       StyleClasses="LabelHeading"
+                       HorizontalAlignment="Center"
+                       HorizontalExpand="True"/>
+            </controls:StripeBack>
+
+            <RichTextLabel Name="CompletionDescriptionLabel"
+                           HorizontalExpand="True"
+                           VerticalExpand="True"
+                           MinHeight="80"/>
+
+            <BoxContainer Name="CompletionActionButtons"
+                          Orientation="Horizontal"
+                          HorizontalAlignment="Center"
+                          SeparationOverride="6"/>
+        </BoxContainer>
+    </PanelContainer>
+</DefaultWindow>

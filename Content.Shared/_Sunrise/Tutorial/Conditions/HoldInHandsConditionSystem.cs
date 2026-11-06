@@ -9,7 +9,7 @@ namespace Content.Shared._Sunrise.Tutorial.Conditions;
 /// </summary>
 public sealed partial class HoldInHandsConditionSystem : TutorialConditionSystem<HandsComponent, HoldInHandsCondition>
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     protected override void Condition(Entity<HandsComponent> entity, ref TutorialConditionEvent<HoldInHandsCondition> args)
     {

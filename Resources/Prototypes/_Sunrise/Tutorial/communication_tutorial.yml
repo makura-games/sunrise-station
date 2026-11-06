@@ -1,0 +1,399 @@
+- type: tutorialSequence
+  id: CommunicationTutorial
+  duration: 960
+  estimatedDuration:
+    minimum: 420
+    maximum: 840
+  priority: 2
+  name: communication-tutorial-name
+  tooltip: communication-tutorial-tooltip
+  texture: /Textures/_Sunrise/Tutorial/communication_tutorial.png
+  grid: /Maps/_Sunrise/Tutorials/communication_tutorial.yml
+  playerEntity: CommunicationTutorialPlayer
+  steps:
+  # Приветствие и обзор туториала
+  - CommTutWelcome
+  # 1. Local chat
+  - CommTutLocalChat
+  # 2. Whisper
+  - CommTutWhisper
+  # 3. Emotes
+  - CommTutEmote
+  # 4. LOOC
+  - CommTutLooc
+  # 5. Local chat and radio difference
+  - CommTutRadioExplain
+  # 6. Common radio
+  - CommTutCommonRadio
+  # 7. Open inventory
+  - CommTutOpenInventory
+  # 8. Examine headset
+  - CommTutRadioUi
+  # 9. Department radio
+  - CommTutDepartmentRadio
+  # 10. Help request example
+  - CommTutHelpRequestExample
+  # 11. Open PDA messenger
+  - CommTutOpenMessenger
+  # 12. Messenger chats list
+  - CommTutMessengerChats
+  # 13. Messenger message area
+  - CommTutMessengerMessages
+  # 14. Open group chats tab
+  - CommTutMessengerGroupTab
+  # 15. Select common messenger chat
+  - CommTutMessengerCommonChat
+  # 16. Send messenger message
+  - CommTutSendMessenger
+  # 17. IC, LOOC and AHelp
+  - CommTutAskHelp
+  # 18. Mentor help
+  - TutorialMHelp
+
+- type: tutorialStep
+  id: CommTutWelcome
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-welcome-bubble
+  chatMessage: comm-tut-welcome-chat
+  ttsMessage: comm-tut-welcome-tts
+  conditions:
+  - !type:StepDelayCondition
+    delay: 13
+
+- type: tutorialStep
+  id: CommTutLocalChat
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-local-chat-bubble
+  chatMessage: comm-tut-local-chat-chat
+  ttsMessage: comm-tut-local-chat-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Chat
+  - !type:UiByName
+    name: ChatInput
+  - !type:UiByName
+    name: Input
+  conditions:
+  - !type:ChatMessageListenedCondition
+    kind: Local
+
+- type: tutorialStep
+  id: CommTutWhisper
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-whisper-bubble
+  chatMessage: comm-tut-whisper-chat
+  ttsMessage: comm-tut-whisper-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Chat
+  - !type:UiByName
+    name: ChatInput
+  - !type:UiByName
+    name: Input
+  conditions:
+  - !type:ChatMessageListenedCondition
+    kind: Whisper
+
+- type: tutorialStep
+  id: CommTutEmote
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-emote-bubble
+  chatMessage: comm-tut-emote-chat
+  ttsMessage: comm-tut-emote-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Chat
+  - !type:UiByName
+    name: ChatInput
+  - !type:UiByName
+    name: Input
+  conditions:
+  - !type:ChatMessageListenedCondition
+    kind: Emote
+
+- type: tutorialStep
+  id: CommTutLooc
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-looc-bubble
+  chatMessage: comm-tut-looc-chat
+  ttsMessage: comm-tut-looc-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Chat
+  - !type:UiByName
+    name: ChatInput
+  - !type:UiByName
+    name: Input
+  conditions:
+  - !type:ChatMessageListenedCondition
+    kind: Looc
+
+- type: tutorialStep
+  id: CommTutRadioExplain
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-radio-explain-bubble
+  chatMessage: comm-tut-radio-explain-chat
+  ttsMessage: comm-tut-radio-explain-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Chat
+  - !type:UiByName
+    name: ChatInput
+  - !type:UiByName
+    name: ChannelSelector
+  conditions:
+  - !type:StepDelayCondition
+    delay: 15
+
+- type: tutorialStep
+  id: CommTutCommonRadio
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-common-radio-bubble
+  chatMessage: comm-tut-common-radio-chat
+  ttsMessage: comm-tut-common-radio-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Chat
+  - !type:UiByName
+    name: ChatInput
+  - !type:UiByName
+    name: Input
+  conditions:
+  - !type:ChatMessageListenedCondition
+    kind: Radio
+    channel: Common
+
+- type: tutorialStep
+  id: CommTutOpenInventory
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-open-inventory-bubble
+  chatMessage: comm-tut-open-inventory-chat
+  ttsMessage: comm-tut-open-inventory-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Inventory
+  - !type:UiByName
+    name: InventoryButton
+  conditions:
+  - !type:UiControlVisibleCondition
+    control: InventoryEarsSlot
+    selectors:
+    - !type:UiByName
+      name: Inventory
+    - !type:UiByName
+      name: SlotButton_ears
+
+- type: tutorialStep
+  id: CommTutRadioUi
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-radio-ui-bubble
+  chatMessage: comm-tut-radio-ui-chat
+  ttsMessage: comm-tut-radio-ui-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Inventory
+  - !type:UiByName
+    name: SlotButton_ears
+  conditions:
+  - !type:ExamineListenedCondition
+    target: CommunicationTutorialHeadset
+
+- type: tutorialStep
+  id: CommTutDepartmentRadio
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-department-radio-bubble
+  chatMessage: comm-tut-department-radio-chat
+  ttsMessage: comm-tut-department-radio-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Chat
+  - !type:UiByName
+    name: ChatInput
+  - !type:UiByName
+    name: Input
+  conditions:
+  - !type:ChatMessageListenedCondition
+    kind: DepartmentRadio
+    channel: Engineering
+
+- type: tutorialStep
+  id: CommTutHelpRequestExample
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-help-request-example-bubble
+  chatMessage: comm-tut-help-request-example-chat
+  ttsMessage: comm-tut-help-request-example-tts
+  conditions:
+  - !type:StepDelayCondition
+    delay: 9
+
+- type: tutorialStep
+  id: CommTutOpenMessenger
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-open-messenger-bubble
+  chatMessage: comm-tut-open-messenger-chat
+  ttsMessage: comm-tut-open-messenger-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Hotbar
+  - !type:UiByName
+    name: SecondHotbar
+  - !type:UiByName
+    name: SlotButton_id
+  conditions:
+  - !type:MessengerOpenedListenedCondition
+
+- type: tutorialStep
+  id: CommTutMessengerChats
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-messenger-chats-bubble
+  chatMessage: comm-tut-messenger-chats-chat
+  ttsMessage: comm-tut-messenger-chats-tts
+  blockUiInteraction: true
+  uiHighlight:
+  - !type:UiByType
+    controlType: MessengerUiFragment
+  - !type:UiByName
+    name: GroupChatsTab
+  conditions:
+  - !type:StepDelayCondition
+    delay: 10
+
+- type: tutorialStep
+  id: CommTutMessengerMessages
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-messenger-messages-bubble
+  chatMessage: comm-tut-messenger-messages-chat
+  ttsMessage: comm-tut-messenger-messages-tts
+  blockUiInteraction: true
+  uiHighlight:
+  - !type:UiByType
+    controlType: MessengerUiFragment
+  - !type:UiByName
+    name: MessagesContainer
+  conditions:
+  - !type:StepDelayCondition
+    delay: 10
+
+- type: tutorialStep
+  id: CommTutMessengerGroupTab
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-messenger-group-tab-bubble
+  chatMessage: comm-tut-messenger-group-tab-chat
+  ttsMessage: comm-tut-messenger-group-tab-tts
+  uiHighlight:
+  - !type:UiByType
+    controlType: MessengerUiFragment
+  - !type:UiByName
+    name: GroupChatsTab
+  conditions:
+  - !type:UiButtonPressedCondition
+    button: CommTutMessengerGroupTab
+    selectors:
+    - !type:UiByType
+      controlType: MessengerUiFragment
+    - !type:UiByName
+      name: GroupChatsTab
+
+- type: tutorialStep
+  id: CommTutMessengerCommonChat
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-messenger-common-chat-bubble
+  chatMessage: comm-tut-messenger-common-chat-chat
+  ttsMessage: comm-tut-messenger-common-chat-tts
+  uiHighlight:
+  - !type:UiByType
+    controlType: MessengerUiFragment
+  - !type:UiByName
+    name: MessengerGroupChat_common
+  conditions:
+  - !type:UiButtonPressedCondition
+    button: CommTutMessengerCommonChat
+    selectors:
+    - !type:UiByType
+      controlType: MessengerUiFragment
+    - !type:UiByName
+      name: MessengerGroupChat_common
+
+- type: tutorialStep
+  id: CommTutSendMessenger
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-send-messenger-bubble
+  chatMessage: comm-tut-send-messenger-chat
+  ttsMessage: comm-tut-send-messenger-tts
+  uiHighlight:
+  - !type:UiByType
+    controlType: MessengerUiFragment
+  - !type:UiByName
+    name: SendButton
+  conditions:
+  - !type:MessengerMessageListenedCondition
+
+- type: tutorialStep
+  id: CommTutAskHelp
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-ask-help-bubble
+  chatMessage: comm-tut-ask-help-chat
+  ttsMessage: comm-tut-ask-help-tts
+  uiHighlight:
+  - !type:UiByName
+    name: TopBar
+  - !type:UiByName
+    name: AHelpButton
+  conditions:
+  - !type:StepDelayCondition
+    delay: 14
+
+- type: startingGear
+  id: CommunicationTutorialPlayerGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitEngineering
+    shoes: ClothingShoesColorBlack
+    back: ClothingBackpack
+    id: EngineerPDA
+    ears: CommunicationTutorialHeadset
+
+- type: entity
+  parent: ClothingHeadsetEngineering
+  id: CommunicationTutorialHeadset
+  suffix: Tutorial
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TelecomExempt
+
+- type: entity
+  parent: MessengerServer
+  id: CommunicationTutorialMessengerServer
+  suffix: Tutorial
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    transmitFrequencyId: Messenger
+    receiveFrequencyId: Messenger
+    autoConnect: true
+
+- type: entity
+  parent: BaseTutorialPlayer
+  id: CommunicationTutorialPlayer
+  components:
+  - type: Loadout
+    prototypes: [CommunicationTutorialPlayerGear]
+  - type: Godmode

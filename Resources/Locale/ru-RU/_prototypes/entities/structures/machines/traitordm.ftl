@@ -1,2 +1,2 @@
-ent-TraitorDMRedemptionMachine = машина для обмена ПДА в режиме Traitor Deathmatch
+ent-TraitorDMRedemptionMachine = машина для обмена пда в режиме предательского поединка
     .desc = Вставьте чужой ПДА в эту машину, чтобы получить телекристаллы.

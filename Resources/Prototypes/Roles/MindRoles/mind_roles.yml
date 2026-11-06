@@ -214,7 +214,7 @@
   - type: MindRole
     antagPrototype: HeadRev
     exclusiveAntag: true
-    roleType: TeamAntagonist
+    roleType: SunriseHeadRevolutionary # Sunrise-Edit
     subtype: role-subtype-head-revolutionary
   - type: RevolutionaryRole
 
@@ -225,6 +225,7 @@
   components:
   - type: MindRole
     antagPrototype: Rev
+    roleType: TeamAntagonist # Sunrise-Edit
     subtype: role-subtype-revolutionary
 
 # Survivors (Wizard)

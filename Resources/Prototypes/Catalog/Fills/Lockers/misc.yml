@@ -39,6 +39,13 @@
         - id: ClothingEyesHudSyndicate
 
 - type: entityTable
+  id: FillEmergencyInflatables
+  table: !type:AllSelector
+    children:
+    - id: InflatableWallStack5
+    - id: InflatableDoorStack1
+
+- type: entityTable
   id: FillLockerEmergencyStandard
   table: !type:AllSelector
     children:
@@ -56,6 +63,8 @@
       prob: 0.1
     - id: BoxMRE
       prob: 0.1
+    - !type:NestedSelector
+      tableId: FillEmergencyInflatables
     # Sunrise-Start
     - id: CrowbarRed
     - id: CrowbarRed
@@ -97,11 +106,13 @@
       - id: EmergencyNitrogenTankFilled
         weight: 4
       - id: NitrogenTankFilled
-      # Sunrise-Start
-      - id: CrowbarRed
-      - id: CrowbarRed
-      - id: CrowbarRed
-      # Sunrise-End
+    - !type:NestedSelector
+      tableId: FillEmergencyInflatables
+    # Sunrise-Start
+    - id: CrowbarRed
+    - id: CrowbarRed
+    - id: CrowbarRed
+    # Sunrise-End
 
 - type: entity
   id: ClosetEmergencyN2FilledRandom
@@ -189,14 +200,7 @@
     - id: RightArmCyberRobust
     - id: LeftArmCyberRipper
     - id: LeftArmCyberGorilla
-    - id: MechPaintRipleyReaper
-    - id: MechPaintDurandUnathi
-    - id: MechPaintDurandDollhouse
-    - id: MechPaintGygaxMolot
-    - id: MechPaintGygaxPirate
-    - id: MechPaintGygaxBlack
       #Sunrise-end
-      weight: 2
     - id: ClothingHandsKnuckleDustersSyndicate
 
 - type: entityTable
@@ -229,6 +233,10 @@
       prob: 0.05 # Sunrise-edit
       rolls: !type:RangeNumberSelector
         range: 1, 2
+    - !type:NestedSelector
+      tableId: MaintenancePlushies
+      prob: 0.02
+
     # Weapons
     - !type:NestedSelector
       tableId: MaintWeaponTable
@@ -240,6 +248,19 @@
     # Recursive
     - id: ClosetMaintenanceFilledRandom
       prob: 0.01
+
+- type: entityTable
+  id: MaintenancePlushies
+  table: !type:GroupSelector
+    children:
+    - id: PlushieLizardJobBoxer
+    - id: PlushieLizardJobClown
+    - id: PlushieLizardJobLibrarian
+    - id: PlushieLizardJobMime
+    - id: PlushieLizardJobMusician
+    - id: PlushieLizardJobPassenger
+    - id: PlushieLizardJobReporter
+    - id: PlushieLizardJobZookeeper
 
 - type: entity
   id: ClosetMaintenanceFilledRandom

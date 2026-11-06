@@ -15,9 +15,9 @@ namespace Content.Server.Database;
 /// Actual loading code is handled by separate managers such as <see cref="IServerPreferencesManager"/>.
 /// This manager is simply a centralized "is loading done" controller for other code to rely on.
 /// </remarks>
-public sealed class UserDbDataManager : IPostInjectInit
+public sealed partial class UserDbDataManager : IPostInjectInit // Sunrise-Edit
 {
-    [Dependency] private readonly ILogManager _logManager = default!;
+    [Dependency] private ILogManager _logManager = default!;
 
     private readonly Dictionary<NetUserId, UserData> _users = new();
     private readonly List<OnLoadPlayer> _onLoadPlayer = [];
@@ -38,9 +38,7 @@ public sealed class UserDbDataManager : IPostInjectInit
         var task = Load(session, cts.Token);
         var data = new UserData(cts, task);
 
-        // ыыыыыыыыыыыыыы пачему так
-        if (!_users.TryAdd(session.UserId, data))
-            _sawmill.Info($"Ебучий _users уже содержит {session.UserId}");
+        AddSunriseUserData(session.UserId, data); // Sunrise-Edit - не падаем при повторном подключении
     }
 
     public void ClientDisconnected(ICommonSession session)

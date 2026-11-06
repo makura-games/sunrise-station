@@ -46,18 +46,27 @@
     sprite: _Sunrise/Structures/Doors/Airlocks/Standard/Pirate/pirate_rusty_marked.rsi
 
 - type: entity
-  id: SunriseAirlockSyndicateGlassPirateAccessLocked
-  parent: AirlockSyndicateGlassLocked
-  suffix: Syndicate, Glass, Pirate Access, Locked
+  id: SunriseAirlockPirateGlassLocked
+  parent: AirlockMiningGlass
+  suffix: Glass, Pirate, Locked
   components:
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsPirate ]
 
 - type: entity
-  id: SunriseAirlockExternalGlassPirateAccessLocked
+  parent: AirlockExternal
+  id: SunriseAirlockExternalPirateLocked
+  suffix: External, Pirate, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsPirate ]
+
+- type: entity
+  id: SunriseAirlockExternalGlassPirateLocked
   parent: AirlockExternalGlassSyndicateLocked
-  suffix: External, Glass, Pirate Access, Locked
+  suffix: Glass, Pirate, Locked
   components:
   - type: ContainerFill
     containers:
@@ -66,17 +75,23 @@
 - type: entity
   id: SunriseAirlockExternalShuttlePirateLocked
   parent: AirlockExternalShuttleSyndicateLocked
-  suffix: External, Docking, Pirate, Locked
+  suffix: Docking, Pirate, Locked
   components:
+  - type: Docking
+    radarColor: '#0F0F0F4B'
+    highlightedRadarColor: '#0F0F0F4B'
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsPirate ]
 
 - type: entity
-  id: SunriseAirlockExternalGlassShuttlePirateAccessLocked
-  parent: AirlockExternalGlassShuttleSyndicateLocked
-  suffix: External, Docking, Glass, Pirate Access, Locked
+  id: SunriseAirlockExternalGlassShuttlePirateLocked
+  parent: AirlockGlassShuttleSyndicate
+  suffix: Pirate, Locked, Glass
   components:
+  - type: Docking
+    radarColor: '#0F0F0F4B'
+    highlightedRadarColor: '#0F0F0F4B'
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsPirate ]

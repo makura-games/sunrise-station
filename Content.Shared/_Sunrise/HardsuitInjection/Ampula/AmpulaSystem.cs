@@ -10,8 +10,8 @@ namespace Content.Shared._Sunrise.HardsuitInjection.EntitySystems;
 
 public sealed partial class AmpulaSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private IEntityManager _entManager = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<AmpulaComponent, AfterInteractEvent>(OnAfterInteract);
@@ -36,14 +36,14 @@ public sealed partial class AmpulaSystem : EntitySystem
             return;
         if (!TryComp<InjectComponent>(slot, out var containerlock))
             return;
-        if (!sys.TryGetSlot(slot.Value, containerlock.ContainerId, out var itemslot, itemslots))
+        if (!sys.TryGetSlot((slot.Value, itemslots), containerlock.ContainerId, out var itemslot))
             return;
         if (!TryComp<HandsComponent>(user, out var handscomp))
             return;
         if (!itemslot.InsertOnInteract)
             return;
 
-        if (!sys.CanInsert(slot.Value, args.Used, args.User, itemslot, swap: itemslot.Swap))
+        if (!sys.CanInsert(slot.Value, itemslot, args.Used, args.User, swap: itemslot.Swap))
             return;
 
         // Drop the held item onto the floor. Return if the user cannot drop.

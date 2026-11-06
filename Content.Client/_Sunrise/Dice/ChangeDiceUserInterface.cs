@@ -8,7 +8,6 @@ namespace Content.Client._Sunrise.Dice.UI
     [UsedImplicitly]
     public sealed class ChangeDiceUserInterface : BoundUserInterface
     {
-        [Dependency] private readonly ILogManager _logManager = default!;
         private IEntityManager _entManager;
         private EntityUid _owner;
         [ViewVariables]

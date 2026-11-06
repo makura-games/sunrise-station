@@ -4,10 +4,10 @@ using Robust.Shared.Network;
 
 namespace Content.Client._Sunrise.ServersHub;
 
-public partial class ServersHubManager
+public sealed partial class ServersHubManager
 {
-    [Dependency] private readonly IClientNetManager _netManager = default!;
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
+    [Dependency] private IUserInterfaceManager _uiManager = default!;
 
     public event Action<List<ServerHubEntry>>? ServersDataListChanged;
 

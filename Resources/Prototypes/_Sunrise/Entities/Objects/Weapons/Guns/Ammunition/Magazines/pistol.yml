@@ -97,42 +97,9 @@
   - type: Appearance
 
 - type: entity
-  id: MagazineMP5
-  name: MP5 magazine
-  parent: BaseItem
-  components:
-  - type: Tag
-    tags:
-    - MagazineMP5
-  - type: BallisticAmmoProvider
-    mayTransfer: true
-    proto: CartridgePistolSP
-    whitelist:
-      tags:
-      - CartridgePistol
-    capacity: 30
-  - type: Item
-    size: Small
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/mp5.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag
-    steps: 2
-    zeroVisible: false
-  - type: Appearance
-
-- type: entity
   id: MagazinePistolSubMachineGunPPSHExtended
   name: PPSH magazine
-  parent: BaseItem
+  parent: BaseNonCycleableAmmoItem
   components:
   - type: Tag
     tags:
@@ -163,66 +130,11 @@
   - type: Appearance
 
 - type: entity
-  parent: MagazineMP5
-  id: MagazineMP5Extended
-  components:
-  - type: BallisticAmmoProvider
-    capacity: 42
-
-- type: entity
   parent: MagazineMP7
   id: MagazineMP7Extended
   components:
   - type: BallisticAmmoProvider
     capacity: 42
-
-- type: entity
-  id: MagazineGlock22
-  name: Glock22 magazine
-  parent: BaseItem
-  components:
-  - type: Tag
-    tags:
-    - MagazineGlock22
-  - type: BallisticAmmoProvider
-    mayTransfer: true
-    proto: CartridgePistolSP  # 57x28
-    whitelist:
-      tags:
-      - CartridgePistol  # 57x28
-    capacity: 15
-  - type: Item
-    size: Small
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/glock22.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag
-    steps: 6
-    zeroVisible: false
-  - type: Appearance
-
-- type: entity
-  id: MagazineGlock22Metus
-  parent: MagazineGlock22
-  components:
-  - type: Tag
-    tags:
-    - MagazinePistolHighCapacityRubber
-  - type: BallisticAmmoProvider
-    mayTransfer: true
-    proto: CartridgePistolRubber
-    whitelist:
-      tags:
-      - CartridgePistol
-    capacity: 18
 
 - type: entity
   id: MagazinePistolSubMachineGunFMJ

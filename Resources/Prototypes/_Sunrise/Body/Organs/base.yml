@@ -1,5 +1,67 @@
 - type: entity
-  id: BaseOrganBrain
+  id: SolutionSunriseOrganNutriment
+  parent: Solution
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: organ
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
+
+- type: entity
+  id: SolutionSunriseBrainFood
+  parent: Solution
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: GreyMatter
+        Quantity: 5
+
+- type: entity
+  id: SolutionSunriseRawProteinFood
+  parent: Solution
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 5
+
+- type: entity
+  id: SolutionSunriseStomachSmall
+  parent: SolutionStomach
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      maxVol: 50
+
+- type: entity
+  id: SolutionSunriseStomachLarge
+  parent: SolutionStomach
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      maxVol: 200
+
+- type: entity
+  id: SunriseOrganHuman
+  parent: OrganHuman
+  abstract: true
+
+- type: entity
+  id: SunriseOrganBaseBrain
+  parent: OrganBaseBrain
   abstract: true
   components:
   - type: OrganBrain
@@ -7,7 +69,8 @@
     blockInteraction: false
 
 - type: entity
-  id: BaseOrganEyes
+  id: SunriseOrganBaseEyes
+  parent: OrganBaseEyes
   abstract: true
   components:
   - type: OrganEyes
@@ -20,13 +83,17 @@
         Radiation: 5
         Caustic: 5
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: OrganVisualization
     layer: Eyes
-    prototype: MobHumanoidEyes
+    data:
+      sprite: Mobs/Customization/eyes.rsi
+      state: eyes
 
 - type: entity
-  id: BaseOrganTongue
+  id: SunriseOrganBaseTongue
+  parent: OrganBaseTongue
   abstract: true
   components:
   - type: OrganTongue
@@ -39,10 +106,12 @@
         Radiation: 5
         Caustic: 5
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
 
 - type: entity
-  id: BaseOrganAppendix
+  id: SunriseOrganBaseAppendix
+  parent: OrganBaseAppendix
   abstract: true
   components:
   - type: OrganAppendix
@@ -54,22 +123,26 @@
         Bloodloss: 5
         Radiation: 5
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
 
 - type: entity
-  id: BaseOrganEars
+  id: SunriseOrganBaseEars
+  parent: OrganBaseEars
   abstract: true
   components:
   - type: OrganEars
   - type: OrganDamage
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
 
 - type: entity
-  id: BaseOrganLungs
+  id: SunriseOrganBaseLungs
+  parent: OrganBaseLungs
   abstract: true
   components:
-  - type: OrganLungs
+  - type: Lung
   - type: OrganDamage
     damage:
       types:
@@ -78,10 +151,12 @@
         Bloodloss: 10
         Radiation: 15
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
 
 - type: entity
-  id: BaseOrganHeart
+  id: SunriseOrganBaseHeart
+  parent: OrganBaseHeart
   abstract: true
   components:
   - type: OrganHeart
@@ -94,10 +169,12 @@
         Caustic: 10
         Radiation: 5
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
 
 - type: entity
-  id: BaseOrganStomach
+  id: SunriseOrganBaseStomach
+  parent: OrganBaseStomach
   abstract: true
   components:
   - type: OrganStomach
@@ -110,10 +187,12 @@
         Caustic: 10
         Radiation: 5
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
 
 - type: entity
-  id: BaseOrganLiver
+  id: SunriseOrganBaseLiver
+  parent: OrganBaseLiver
   abstract: true
   components:
   - type: OrganLiver
@@ -126,10 +205,12 @@
         Caustic: 10
         Radiation: 15
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
 
 - type: entity
-  id: BaseOrganKidneys
+  id: SunriseOrganBaseKidneys
+  parent: OrganBaseKidneys
   abstract: true
   components:
   - type: OrganKidneys
@@ -143,4 +224,5 @@
         Radiation: 5
         Cold: 60
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological

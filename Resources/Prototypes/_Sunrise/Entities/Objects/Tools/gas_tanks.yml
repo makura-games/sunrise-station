@@ -4,12 +4,23 @@
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Tanks/bluespace_air_tank.rsi
+    layers:
+    - state: icon
+    - sprite: Objects/Tanks/generic.rsi
+      state: integrity-unshaded-0
+      map: [ "enum.MaxPressureVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+      visible: false
+    - sprite: Objects/Tanks/generic.rsi
+      state: mask
+      map: [ "enum.MaxPressureVisualLayers.Base" ]
+      visible: false
   - type: Item
     sprite: _Sunrise/Objects/Tanks/bluespace_air_tank.rsi
   - type: Clothing
     sprite: _Sunrise/Objects/Tanks/bluespace_air_tank.rsi
   - type: GasTank
-    outputPressure: 21.3
+    releasePressure: 21.3
     air:
       volume: 10
       temperature: 293.15
@@ -20,6 +31,17 @@
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Tanks/bluespace_pocket_tank.rsi
+    layers:
+    - state: icon
+    - sprite: Objects/Tanks/emergency_double.rsi
+      state: integrity-unshaded-0
+      map: [ "enum.MaxPressureVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+      visible: false
+    - sprite: Objects/Tanks/emergency_double.rsi
+      state: mask
+      map: [ "enum.MaxPressureVisualLayers.Base" ]
+      visible: false
   - type: Item
     sprite: _Sunrise/Objects/Tanks/bluespace_pocket_tank.rsi
     storedSprite:
@@ -28,7 +50,7 @@
   - type: Clothing
     sprite: _Sunrise/Objects/Tanks/bluespace_pocket_tank.rsi
   - type: GasTank
-    outputPressure: 21.3
+    releasePressure: 21.3
     air:
       volume: 5
       temperature: 293.15

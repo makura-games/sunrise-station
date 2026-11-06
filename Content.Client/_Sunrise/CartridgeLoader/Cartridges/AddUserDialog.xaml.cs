@@ -16,8 +16,8 @@ public sealed partial class AddUserDialog : DefaultWindow
 {
     public event Action<string>? OnUserSelected;
 
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
     private List<MessengerUser> _availableUsers = new();
 

@@ -13,10 +13,10 @@ public sealed partial class DamageOnCollideComponent : Component
     [DataField("damageOnCollide")]
     public DamageSpecifier Damage = new DamageSpecifier()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>
+        DamageDict = new()
         {
             { "Slash", 10 },
-            { "Pierce", 10 },
+            { "Piercing", 10 },
         }
     };
 

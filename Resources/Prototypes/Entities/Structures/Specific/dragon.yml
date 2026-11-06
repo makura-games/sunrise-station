@@ -6,31 +6,12 @@
     mode: SnapgridCenter
   components:
   - type: DragonRift
-    # Sunrise-start
-    spawnPrototypes:
-    - MobCarpDragon
-    - MobCarpHoloDragon
-    - MobCarpRainbowDragon
-    - MobSharkDragon
-    # Sunrise-end
   - type: Transform
     anchored: true
   - type: Physics
     bodyType: Static
-    canCollide: true #Sunrise-edit
+    canCollide: false
   - type: Fixtures
-#Sunrise-start
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.25,-0.48,0.25,0.48"
-        density: 75
-        mask:
-        - MachineMask
-        layer:
-        - MachineLayer
-#Sunrise-end
   - type: Sprite
     layers:
     - sprite: Structures/Specific/carp_rift.rsi
@@ -51,8 +32,9 @@
     # only show after making the announcement at 50%
     enabled: false
   - type: Damageable
-    damageContainer: Rift #Sunrise-edit
-    damageModifierSet: Rift #Sunrise-edit
+    damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -65,17 +47,23 @@
     sound:
       path: /Audio/Weapons/Guns/Gunshots/rocket_launcher.ogg
 #Sunrise-start
-  - type: DamageOverlay
+  - type: SunriseDamagePopup
   - type: AoEHeal
     threshold: 0.9
     damage:
-      groups:
-        # это не много. Так как мы лечим по группам урона, то это -2.6 урона по каждому типу в 2 секунды. Тобишь 160
-        # проникающих ранений (урон с которым можно еще надеяться спрятаться) вылечится за 2 минуты на половину, что вполне себе нормально
-        Brute: -8
-        Burn: -5
-        Airloss: -5
-        Toxin: -5 # Sunrise-Edit
+      # Это немного: 160 проникающих ранений вылечатся наполовину примерно за две минуты.
+      types:
+        Blunt: -1
+        Slash: -1
+        Piercing: -2
+        Heat: -1
+        Shock: -1
+        Cold: -1
+        Caustic: -1
+        Asphyxiation: -1
+        Bloodloss: -1
+        Poison: -1
+        Radiation: -1
     whitelist:
       tags:
       - CarpRiftHealTarget

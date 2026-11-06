@@ -1,6 +1,5 @@
 using Content.Shared.DeviceNetwork;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SurveillanceCamera;
@@ -8,82 +7,59 @@ namespace Content.Shared.SurveillanceCamera;
 // Camera monitor state. If the camera is null, there should be a blank
 // space where the camera is.
 [Serializable, NetSerializable]
-public sealed class SurveillanceCameraMonitorUiState : BoundUserInterfaceState
+public sealed class SurveillanceCameraMonitorUiState(NetEntity? activeCamera,
+    HashSet<ProtoId<DeviceFrequencyPrototype>> subnets,
+    string activeAddress,
+    ProtoId<DeviceFrequencyPrototype>? activeSubnet,
+    Dictionary<string, string> cameras
+) : BoundUserInterfaceState
 {
     // The active camera on the monitor. If this is null, the part of the UI
     // that contains the monitor should clear.
-    public NetEntity? ActiveCamera { get; }
+    public NetEntity? ActiveCamera { get; } = activeCamera;
 
     // Currently available subnets. Does not send the entirety of the possible
     // cameras to view because that could be really, really large
-    public HashSet<string> Subnets { get; }
+    public HashSet<ProtoId<DeviceFrequencyPrototype>> Subnets { get; } = subnets;
 
-    public string ActiveAddress;
+    public string ActiveAddress = activeAddress;
+
+    // Currently active subnet.
+    public ProtoId<DeviceFrequencyPrototype>? ActiveSubnet { get; } = activeSubnet;
 
     // Known cameras, by address and name.
-    public Dictionary<NetEntity, CameraData> Cameras { get; } // Sunrise-edit
-
-    public SurveillanceCameraMonitorUiState(NetEntity? activeCamera, HashSet<string> subnets, string activeAddress, Dictionary<NetEntity, CameraData> cameras) // Sunrise-edit
-    {
-        ActiveCamera = activeCamera;
-        Subnets = subnets;
-        ActiveAddress = activeAddress;
-        Cameras = cameras;
-    }
-}
-
-// Sunrise-start
-[Serializable, NetSerializable]
-[DataDefinition]
-public partial class CameraData
-{
-    public string CameraAddress { get; set; }
-    public string SubnetAddress { get; set; }
-    public string Name { get; set; }
-    public NetCoordinates Coordinates { get; set; }
-    public Color SubnetColor { get; set; }
-}
-// Sunrise-end
-
-[Serializable, NetSerializable]
-public sealed class SurveillanceCameraMonitorSwitchMessage : BoundUserInterfaceMessage
-{
-    public string CameraAddress { get; } // Sunrise-edit
-    public string SubnetAddress { get; } // Sunrise-edit
-
-    public SurveillanceCameraMonitorSwitchMessage(string cameraAddress, string subnetAddress) // Sunrise-edit
-    {
-        CameraAddress = cameraAddress; // Sunrise-edit
-        SubnetAddress = subnetAddress; // Sunrise-edit
-    }
+    public Dictionary<string, string> Cameras { get; } = cameras;
 }
 
 [Serializable, NetSerializable]
-public sealed class SurveillanceCameraMonitorSubnetRequestMessage : BoundUserInterfaceMessage
+public sealed class SurveillanceCameraMonitorSwitchMessage(
+    string address,
+    ProtoId<DeviceFrequencyPrototype>? cameraSubnet
+) : BoundUserInterfaceMessage
 {
-    public string Subnet { get; }
+    public string Address { get; } = address;
+    public ProtoId<DeviceFrequencyPrototype>? CameraSubnet { get; } = cameraSubnet;
+}
 
-    public SurveillanceCameraMonitorSubnetRequestMessage(string subnet)
-    {
-        Subnet = subnet;
-    }
+[Serializable, NetSerializable]
+public sealed class SurveillanceCameraMonitorSubnetRequestMessage(
+    ProtoId<DeviceFrequencyPrototype> subnet
+) : BoundUserInterfaceMessage
+{
+    public ProtoId<DeviceFrequencyPrototype> Subnet { get; } = subnet;
 }
 
 // Sent when the user requests that the cameras on the current subnet be refreshed.
 [Serializable, NetSerializable]
-public sealed class SurveillanceCameraRefreshCamerasMessage : BoundUserInterfaceMessage
-{}
+public sealed class SurveillanceCameraRefreshCamerasMessage : BoundUserInterfaceMessage;
 
 // Sent when the user requests that the subnets known by the monitor be refreshed.
 [Serializable, NetSerializable]
-public sealed class SurveillanceCameraRefreshSubnetsMessage : BoundUserInterfaceMessage
-{}
+public sealed class SurveillanceCameraRefreshSubnetsMessage : BoundUserInterfaceMessage;
 
 // Sent when the user wants to disconnect the monitor from the camera.
 [Serializable, NetSerializable]
-public sealed class SurveillanceCameraDisconnectMessage : BoundUserInterfaceMessage
-{}
-
+public sealed class SurveillanceCameraDisconnectMessage : BoundUserInterfaceMessage;
 [Serializable, NetSerializable]
 public enum SurveillanceCameraMonitorUiKey : byte
 {
@@ -93,44 +69,31 @@ public enum SurveillanceCameraMonitorUiKey : byte
 // SETUP
 
 [Serializable, NetSerializable]
-public sealed class SurveillanceCameraSetupBoundUiState : BoundUserInterfaceState
+public sealed class SurveillanceCameraSetupBoundUiState(
+    string name,
+    uint network,
+    List<ProtoId<DeviceFrequencyPrototype>> networks,
+    bool nameDisabled,
+    bool networkDisabled
+) : BoundUserInterfaceState
 {
-    public string Name { get; }
-    public uint Network { get; }
-    public List<ProtoId<DeviceFrequencyPrototype>> Networks { get; }
-    public bool NameDisabled { get; }
-    public bool NetworkDisabled { get; }
-
-    public SurveillanceCameraSetupBoundUiState(string name, uint network, List<ProtoId<DeviceFrequencyPrototype>> networks, bool nameDisabled, bool networkDisabled)
-    {
-        Name = name;
-        Network = network;
-        Networks = networks;
-        NameDisabled = nameDisabled;
-        NetworkDisabled = networkDisabled;
-    }
+    public string Name { get; } = name;
+    public uint Network { get; } = network;
+    public List<ProtoId<DeviceFrequencyPrototype>> Networks { get; } = networks;
+    public bool NameDisabled { get; } = nameDisabled;
+    public bool NetworkDisabled { get; } = networkDisabled;
 }
 
 [Serializable, NetSerializable]
-public sealed class SurveillanceCameraSetupSetName : BoundUserInterfaceMessage
+public sealed class SurveillanceCameraSetupSetName(string name) : BoundUserInterfaceMessage
 {
-    public string Name { get; }
-
-    public SurveillanceCameraSetupSetName(string name)
-    {
-        Name = name;
-    }
+    public string Name { get; } = name;
 }
 
 [Serializable, NetSerializable]
-public sealed class SurveillanceCameraSetupSetNetwork : BoundUserInterfaceMessage
+public sealed class SurveillanceCameraSetupSetNetwork(int network) : BoundUserInterfaceMessage
 {
-    public int Network { get; }
-
-    public SurveillanceCameraSetupSetNetwork(int network)
-    {
-        Network = network;
-    }
+    public int Network { get; } = network;
 }
 
 

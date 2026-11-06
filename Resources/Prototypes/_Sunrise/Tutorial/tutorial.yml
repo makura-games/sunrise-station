@@ -19,7 +19,7 @@
 - type: entity
   save: false
   name: You!
-  parent: BaseMobHuman
+  parent: MobHuman
   id: BaseTutorialPlayer
   components:
   - type: RandomHumanoidAppearance

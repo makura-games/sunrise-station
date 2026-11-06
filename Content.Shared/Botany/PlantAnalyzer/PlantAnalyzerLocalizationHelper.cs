@@ -6,23 +6,26 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Botany.PlantAnalyzer;
 
-public sealed class PlantAnalyzerLocalizationHelper : EntitySystem
+
+public sealed partial class PlantAnalyzerLocalizationHelper : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public string GasesToLocalizedStrings(List<Gas> gases)
     {
         if (gases.Count == 0)
             return "";
 
-        List<int> gasIds = [];
-        foreach (var gas in gases)
-            gasIds.Add((int)gas);
-
         List<string> gasesLoc = [];
-        foreach (var gas in _prototypeManager.EnumeratePrototypes<GasPrototype>())
-            if (gasIds.Contains(int.Parse(gas.ID)))
-                gasesLoc.Add(Loc.GetString(gas.Name));
+        // Sunrise edit start - идентификаторы газов теперь строковые, поэтому Parse здесь небезопасен.
+        foreach (var gas in gases)
+        {
+            var gasId = gas.ToString();
+            gasesLoc.Add(_prototypeManager.TryIndex<GasPrototype>(gasId, out var prototype)
+                ? Loc.GetString(prototype.Name)
+                : gasId);
+        }
+        // Sunrise edit end
 
         return ContentLocalizationManager.FormatList(gasesLoc);
     }

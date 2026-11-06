@@ -60,3 +60,11 @@
   frequency: 1360
   color: "#00ffd9"
   longRange: true
+
+- type: radioChannel
+  id: Pirate
+  name: chat-radio-pirate
+  keycode: 'p'
+  frequency: 1782
+  color: "#a15608"
+  longRange: true

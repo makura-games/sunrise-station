@@ -7,10 +7,10 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands
 {
     [AdminCommand(AdminFlags.Permissions)]
-    public sealed class OpenPermissionsCommand : LocalizedEntityCommands
+    public sealed partial class OpenPermissionsCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly EuiManager _euiManager = default!;
-        [Dependency] private readonly IAdminManager _adminManager = default!;
+        [Dependency] private EuiManager _euiManager = default!;
+        [Dependency] private IAdminManager _adminManager = default!;
 
         public override string Command => "permissions";
 

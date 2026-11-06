@@ -4,7 +4,8 @@
   abstract: true
   components:
   - type: Tag
-    tags: [] # ignore "WhitelistChameleon" tag
+    tags:
+    - Backpack # ignore "WhitelistChameleon" tag
 
 - type: entity
   parent: ClothingBackpackSyndicateBundle
@@ -16,6 +17,7 @@
     containers:
       storagebase: !type:AllSelector
         children:
+        - id: PouchBackpackPockets # Sunrise-Edit
         - id: ClothingOuterArmorRaidBiocode # Sunrise-Edit
         - id: ClothingHeadHelmetRaid
         - id: ClothingMaskGasSyndicate
@@ -34,6 +36,7 @@
       containers:
         storagebase: !type:AllSelector
           children:
+            - id: PouchBackpackPockets
             - id: ClothingOuterMaidArmorRaidBiocode
             - id: ClothingHeadHelmetRaid
             - id: ClothingHandsTacticalMaidGloves

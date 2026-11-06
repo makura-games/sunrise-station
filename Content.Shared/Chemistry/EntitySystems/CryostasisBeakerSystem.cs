@@ -1,6 +1,4 @@
 using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Chemistry.Components.SolutionManager;
 
 namespace Content.Shared.Chemistry.EntitySystems;
 
@@ -12,27 +10,13 @@ public sealed class CryostasisBeakerSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<SolutionComponent, SolutionChangedEvent>(OnSolutionChanged);
+        SubscribeLocalEvent<CryostasisBeakerComponent, SolutionChangedEvent>(OnSolutionChanged);
     }
 
-    private void OnSolutionChanged(EntityUid solutionEntity, SolutionComponent solutionComp, ref SolutionChangedEvent args)
+    private void OnSolutionChanged(Entity<CryostasisBeakerComponent> ent, ref SolutionChangedEvent args)
     {
-        // Get the container that holds this solution
-        if (!TryComp<ContainedSolutionComponent>(solutionEntity, out var containedSolution))
-            return;
-
-        var containerEntity = containedSolution.Container;
-        
-        // Check if the container is a CryostasisBeaker
-        if (!TryComp<CryostasisBeakerComponent>(containerEntity, out var cryostasisBeaker))
-            return;
-
-        var solution = solutionComp.Solution;
-        
-        // If the solution temperature is above the maximum allowed, cool it down
-        if (solution.Temperature > cryostasisBeaker.MaxTemperature)
-        {
-            solution.Temperature = cryostasisBeaker.MaxTemperature;
-        }
+        var solution = args.Solution.Comp.Solution;
+        if (solution.Temperature > ent.Comp.MaxTemperature)
+            solution.Temperature = ent.Comp.MaxTemperature;
     }
 }

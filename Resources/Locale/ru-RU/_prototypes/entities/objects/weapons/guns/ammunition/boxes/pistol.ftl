@@ -1,12 +1,12 @@
 ent-BaseMagazineBoxPistol = коробка патронов (.35 авто)
     .desc = { ent-BaseItem.desc }
-ent-MagazineBoxPistolSP = коробка патронов (.35 авто SP)
+ent-MagazineBoxPistolSP = коробка патронов (.35 авто)
     .desc = { ent-BaseMagazineBoxPistol.desc }
-ent-MagazineBoxPistolHP = коробка патронов (.35 авто HP)
+ent-MagazineBoxPistolHP = коробка патронов (.35 авто эксп)
     .desc = { ent-BaseMagazineBoxPistol.desc }
-ent-MagazineBoxPistolFMJ = коробка патронов (.35 авто FMJ)
+ent-MagazineBoxPistolFMJ = коробка патронов (.35 авто ПП)
     .desc = { ent-BaseMagazineBoxPistol.desc }
-ent-MagazineBoxPistolAP = коробка патронов (.35 авто AP)
+ent-MagazineBoxPistolAP = коробка патронов (.35 авто ББ)
     .desc = { ent-BaseMagazineBoxPistol.desc }
 ent-MagazineBoxPistolRubber = коробка патронов (.35 авто резиновые)
     .desc = { ent-BaseMagazineBoxPistol.desc }

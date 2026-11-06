@@ -1,6 +1,6 @@
-ent-SurgeryAmputation = Ампутация
+ent-SurgeryAmputation = ампутация
     .desc = Хирургическое удаление конечности.
-ent-SurgeryAmputationHead = Ампутация головы
+ent-SurgeryAmputationHead = ампутация головы
     .desc = Хирургическое удаление конечности.
 ent-SurgeryAmputationSlime = { ent-SurgeryAmputation }
     .desc = { ent-SurgeryAmputation.desc }

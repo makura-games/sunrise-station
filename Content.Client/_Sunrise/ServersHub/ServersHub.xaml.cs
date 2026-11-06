@@ -11,8 +11,8 @@ namespace Content.Client._Sunrise.ServersHub
     [GenerateTypedNameReferences]
     public sealed partial class ServersHub : Control
     {
-        [Dependency] private readonly IGameController _gameController = default!;
-        [Dependency] private readonly ServersHubManager _serversHubManager = default!;
+        [Dependency] private IGameController _gameController = default!;
+        [Dependency] private ServersHubManager _serversHubManager = default!;
 
         private Action<string>? ConnectServer { get; set; }
 

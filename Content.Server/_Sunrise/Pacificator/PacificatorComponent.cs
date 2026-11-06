@@ -52,5 +52,5 @@ public sealed partial class PacificatorComponent : Component
     [DataField]
     public float Range = 32f;
 
-    public HashSet<Entity<HumanoidAppearanceComponent>> PacifiedEntities = [];
+    public HashSet<Entity<HumanoidProfileComponent>> PacifiedEntities = [];
 }

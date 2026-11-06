@@ -1,13 +1,13 @@
-﻿using Content.Shared._Sunrise.FleshCult;
+using Content.Shared._Sunrise.FleshCult;
 using Content.Shared.Actions;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 
 namespace Content.Shared._Sunrise.FleshCult;
 
-public sealed class SharedFleshHuggerSystem : EntitySystem
+public sealed partial class SharedFleshHuggerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -18,13 +18,13 @@ public sealed class SharedFleshHuggerSystem : EntitySystem
     {
         if (args.Slot != "mask")
             return;
-        if (component.EquipedOn != args.Unequipee)
+        if (component.EquipedOn != args.UnEquipTarget)
             return;
-        if (HasComp<FleshCultistComponent>(args.Unequipee))
+        if (HasComp<FleshCultistComponent>(args.UnEquipTarget))
             return;
         _popup.PopupEntity(Loc.GetString("flesh-pudge-throw-hugger-try-unequip"),
-            args.Unequipee,
-            args.Unequipee,
+            args.UnEquipTarget,
+            args.UnEquipTarget,
             PopupType.Large);
         args.Cancel();
     }

@@ -1,0 +1,99 @@
+# region Base Projectiles
+- type: entity
+  id: PirateMarkerBeacon
+  name: pirate marker
+  description: A smoky signal that pirate raiders can rally around.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 60
+  - type: Sprite
+    drawdepth: Effects
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+    - state: spark
+      shader: unshaded
+  - type: PointLight
+    color: "#ff9a2b"
+    radius: 2
+    energy: 1.5
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      9999: Dead
+  - type: NpcFactionMember
+    factions:
+    - Pirate
+  - type: Tag
+    tags:
+    - NpcBoss
+    - HideContextMenu
+
+- type: entity
+  id: PirateMarkerShot
+  parent: BaseBullet
+  abstract: true
+  name: marker shot
+  description: A low-impact shot that leaves a rally marker for pirate raiders.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+    - state: spark
+      shader: unshaded
+  - type: Projectile
+    deleteOnCollide: false
+    damage:
+      types:
+        Blunt: 0
+  - type: EmbeddableProjectile
+    removalTime: null
+    embedOnThrow: false
+  - type: TimedDespawn
+    lifetime: 60
+  - type: PointLight
+    color: "#ff9a2b"
+    radius: 2
+    energy: 1.5
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      10: Dead
+  - type: NpcFactionMember
+    factions:
+    - Pirate
+  - type: Tag
+    tags:
+    - NpcBoss
+    - HideContextMenu
+
+- type: entity
+  id: SunrisePirateMarkerShot10
+  parent: PirateMarkerShot
+  name: 10-second marker shot
+  components:
+  - type: TimedDespawn
+    lifetime: 10
+
+- type: entity
+  id: SunrisePirateMarkerShot30
+  parent: PirateMarkerShot
+  name: 30-second marker shot
+  components:
+  - type: TimedDespawn
+    lifetime: 30
+
+- type: entity
+  id: SunrisePirateMarkerShot60
+  parent: PirateMarkerShot
+  name: 60-second marker shot

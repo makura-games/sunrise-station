@@ -10,7 +10,6 @@
   - EmergencyOxygen
   - LoadoutSpeciesVoxNitrogen
   - EmergencyWithoutGas
-  - EmergencyDwarf
 
 - type: loadoutGroup
   id: SunriseSurvivalClown
@@ -22,7 +21,6 @@
   - EmergencyOxygenClown
   - LoadoutSpeciesVoxNitrogen
   - EmergencyWithoutGasClown
-  - EmergencyDwarfClown
 
 - type: loadoutGroup
   id: SunriseSurvivalMime
@@ -35,7 +33,6 @@
   - EmergencySpeciesMothMime
   - LoadoutSpeciesVoxNitrogen
   - EmergencyWithoutGasMime
-  - EmergencyDwarfMime
 
 - type: loadoutGroup
   id: SunriseSurvivalExtended
@@ -47,7 +44,6 @@
   - EmergencyOxygenExtended
   - LoadoutSpeciesVoxNitrogen
   - EmergencyWithoutGasExtended
-  - EmergencyDwarfExtended
 
 - type: loadoutGroup
   id: SunriseSurvivalSecurity
@@ -59,7 +55,6 @@
   - EmergencyOxygenSecurity
   - LoadoutSpeciesVoxNitrogen
   - EmergencyWithoutGasSecurity
-  - EmergencyDwarfSecurity
 
 - type: loadoutGroup
   id: SunriseSurvivalMedical
@@ -71,7 +66,6 @@
   - EmergencyOxygenMedical
   - LoadoutSpeciesVoxNitrogen
   - EmergencyWithoutGasMedical
-  - EmergencyDwarfMedical
 
 - type: loadoutGroup
   id: SunriseSurvivalSyndicate
@@ -83,7 +77,6 @@
   - SunriseEmergencyOxygenSyndicate
   - LoadoutSpeciesVoxNitrogen
   - EmergencyWithoutGasSyndicate
-  - EmergencyDwarfSyndicate
 
 - type: loadoutGroup
   id: SunriseTrinkets
@@ -146,21 +139,6 @@
   - OffsetCaneNT
   - Cane
   - TowelColorWhite
-  - TowelColorGray
-  - TowelColorBlack
-  - TowelColorRed
-  - TowelColorOrange
-  - TowelColorLightBrown
-  - TowelColorYellow
-  - TowelColorDarkGreen
-  - TowelColorGreen
-  - TowelColorLightBlue
-  - TowelColorDarkBlue
-  - TowelColorPurple
-  - TowelColorMaroon
-  - TowelColorMime
-  - TowelColorSilver
-  - TowelColorGold
 
 - type: loadoutGroup
   id: SunriseGlasses

@@ -1,0 +1,43 @@
+- type: entity
+  parent: [ BaseComputerCircuitboard, BaseHighlyIllegalContraband ]
+  id: PirateRequestComputerCircuitboard
+  suffix: Pirate
+  components:
+  - type: Sprite
+    state: cpu_syndicate
+  - type: ComputerBoard
+    prototype: ComputerCargoOrdersPirate
+  - type: StaticPrice
+    price: 750
+
+- type: entity
+  parent: [ BaseComputerCircuitboard, BaseHighlyIllegalContraband ]
+  id: PirateSaleComputerCircuitboard
+  suffix: Pirate
+  components:
+  - type: Sprite
+    state: cpu_syndicate
+  - type: ComputerBoard
+    prototype: ComputerPalletConsolePirate
+  - type: StaticPrice
+    price: 750
+
+- type: entity
+  parent: [ BaseComputerCircuitboard, BaseHighlyIllegalContraband ]
+  id: PirateBountyComputerCircuitboard
+  suffix: Pirate
+  components:
+  - type: Sprite
+    state: cpu_syndicate
+  - type: ComputerBoard
+    prototype: ComputerPirateBounty
+  - type: StaticPrice
+    price: 750
+
+- type: entity
+  parent: WeaponCapacitorRechargerCircuitboard
+  id: WeaponCapacitorRechargerPirateCircuitboard
+  suffix: Machine Board, Pirate
+  components:
+  - type: MachineBoard
+    prototype: WeaponCapacitorRechargerPirate

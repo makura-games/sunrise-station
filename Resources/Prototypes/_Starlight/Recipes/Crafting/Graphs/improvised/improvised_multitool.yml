@@ -15,7 +15,7 @@
       - material: Glass
         amount: 4
         doAfter: 10
-      - tag: PowerCellSmall
+      - tag: PowerCell
         icon:
           sprite: Objects/Power/power_cells.rsi
           state: small

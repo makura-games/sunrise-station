@@ -1,0 +1,63 @@
+- type: entity
+  parent: BaseStationBeacon
+  id: DefaultStationBeaconPirateCove
+  suffix: Pirate Cove
+  components:
+  - type: NavMapBeacon
+    text: Pirate Cove
+
+- type: entity
+  parent: FaxMachineSyndie
+  id: FaxMachinePirate
+  suffix: Pirate
+  components:
+  - type: Tag
+    tags:
+    - Pirate
+
+- type: entity
+  parent: WeaponCapacitorRecharger
+  id: WeaponCapacitorRechargerPirate
+  suffix: Pirate
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Power/pirate_recharger.rsi
+  - type: Machine
+    board: WeaponCapacitorRechargerPirateCircuitboard
+  - type: Charger
+    chargeRate: 50
+  - type: Tag
+    tags:
+    - Pirate
+
+- type: entity
+  parent: PlushieSharkBlue
+  id: PlushieSharkPirate
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Fun/Plushies/shark.rsi
+    state: pirate
+  - type: Item
+    heldPrefix: pirate
+  - type: Tag
+    tags:
+    - PlushieSharkPirate
+    - Payload
+    - ClothMade
+
+- type: entity
+  parent: PowerSink
+  id: PiratePowerSink
+  suffix: Pirate
+  components:
+  - type: PowerSink
+    electricSound:
+      path: /Audio/_Sunrise/Pirates/pirate_bell.ogg
+      params:
+        volume: 15
+        rolloffFactor: 10
+  - type: Battery
+    maxCharge: 1950000
+    pricePerJoule: 0.01
+  - type: StaticPrice
+    price: 500

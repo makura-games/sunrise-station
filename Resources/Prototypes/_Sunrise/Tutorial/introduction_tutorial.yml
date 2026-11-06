@@ -1,100 +1,153 @@
 - type: tutorialSequence
   id: IntroductionTutorial
-  duration: 900
+  duration: 540
+  estimatedDuration:
+    minimum: 180
+    maximum: 420
+  priority: 0
   name: introduction-tutorial-name
   tooltip: introduction-tutorial-tooltip
   texture: /Textures/_Sunrise/Tutorial/introduction_tutorial.png
   grid: /Maps/_Sunrise/Tutorials/introduction_tutorial.yml
   playerEntity: IntroductionTutorialPlayer
   steps:
+  # Приветствие и обзор туториала
+  - IntroTutWelcome
   #  1. Movement basics
   - IntroTutWalk
   #  2. Learn to swap hands
   - IntroTutSwapHands
-  #  3. Go to locker room
+  #  3. Explain the left item status panel
+  - IntroTutLeftStatusPanel
+  #  4. Go to locker room
   - IntroTutGoLockerRoom
-  #  4. Take clothing from vending machine
+  #  5. Examine clothing vending machine
+  - IntroTutExamineClothingVendor
+  #  6. Open clothing vending machine
+  - IntroTutOpenClothingVendor
+  #  7. Take clothing from vending machine
   - IntroTutTakeClothing
-  #  5. Equip new clothing
+  #  8. Explain inventory
+  - IntroTutInventory
+  #  9. Take the beret in hand
+  - IntroTutHoldBeret
+  # 10. Equip new clothing
   - IntroTutEquipClothing
-  #  6. Drop old clothing (skipped if nothing in hand)
+  # 11. Point at an entity
+  - IntroTutPointClothingVendor
+  # 12. Drop old clothing (skipped if nothing in hand)
   - IntroTutDropOldClothing
-  #  7. Go to the center
+  # 13. Go to the center
   - IntroTutGoCenter
-  #  8. Go to the bar
-  - IntroTutGoBar
-  #  9. Sit on a bar stool
+  # 14. Sit on a chair
   - IntroTutSitChair
-  # 10. Pick up the orange juice
-  - IntroTutPickupDrink
-  # 11. Drink it
-  - IntroTutDrink
-  # 12. Put the glass back down
-  - IntroTutDropDrink
-  # 13. Go behind the counter
-  - IntroTutGoBarCounter
-  # 14. Examine the locked service airlock
-  - IntroTutExamineAirlock
-  # 15. Rummage in the bush to find the ID card
-  - IntroTutRummageBush
-  # 16. Pass through the airlock holding the ID card
-  - IntroTutPassAirlock
-  # 17. Open the dresser
-  - IntroTutOpenDresser
-  # 18. Return to center
-  - IntroTutGoBackCenter
-  # 19. Drop the ID card if still holding it
-  - IntroTutDropIdCard
-  # 20. Head toward the dark hallway
-  - IntroTutGoHallway
-  # 21. Pick up the flashlight
-  - IntroTutPickupFlashlight
-  # 22. Turn on the flashlight
-  - IntroTutTurnOnFlashlight
-  # 23. Go to the shooting range entrance
-  - IntroTutGoRange
-  # 24. Try the bolted airlock
-  - IntroTutTryOpenBolted
-  # 25. Press the signal button
-  - IntroTutPressButton
-  # 26. Store the flashlight before entering the range
-  - IntroTutStoreFlashlight
-  # 27. Pick up the practice pistol
-  - IntroTutPickupPistol
-  # 28. Pick up the practice pistol
-  - IntroTutActivateBattleMode
-  # 29. Shoot targets
-  - IntroTutShoot
-  # 30. Pick up the knife
-  - IntroTutPickupKnife
-  # 31. Attack the clown target
-  - IntroTutAttackClown
+  # 15. Stand up from the chair
+  - IntroTutStandFromChair
+  # 16. Pull a chair
+  - IntroTutPullChair
+  # 17. Release the chair
+  - IntroTutReleaseChair
+  # 18. Lie down and stand up
+  - IntroTutLieDownStandUp
+  # 19. Explain action bar
+  - IntroTutActionBar
+  # 20. Mentor help
+  - TutorialMHelp
 
 
 # ─── Step definitions ──────────────────────────────────────────────────────────
 
+- type: tutorialStep
+  id: IntroductionTutorialStepBase
+  parent: BaseTutorialStepBase
+  abstract: true
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+    - type: TutorialBuckleSoftLock
+
+- type: tutorialStep
+  id: IntroductionTutorialBeretStepBase
+  parent: BaseTutorialStepBase
+  abstract: true
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - ClothingHeadHatBeret
+    - type: TutorialBuckleSoftLock
+
+- type: tutorialStep
+  id: IntroductionTutorialSeatStepBase
+  parent: BaseTutorialStepBase
+  abstract: true
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+
+# Приветствие и обзор туториала
+- type: tutorialStep
+  id: IntroTutWelcome
+  parent: IntroductionTutorialStepBase
+  bubble:
+    text: intro-tut-welcome-bubble
+  chatMessage: intro-tut-welcome-chat
+  ttsMessage: intro-tut-welcome-tts
+  conditions:
+  - !type:StepDelayCondition
+    delay: 13
+
 #  1. Walk around to learn movement
 - type: tutorialStep
   id: IntroTutWalk
-  parent: BaseTutorialMovementStepBase
+  parent:
+  - BaseTutorialMovementStepBase
+  - IntroductionTutorialStepBase
   bubble:
     text: intro-tut-walk-bubble
 
 #  2. Learn to swap hands (placed after walk so player already has the item context)
 - type: tutorialStep
   id: IntroTutSwapHands
-  parent: BaseTutorialStepBase
+  parent: IntroductionTutorialStepBase
   bubble:
     text: intro-tut-swap-hands-bubble
   chatMessage: intro-tut-swap-hands-chat
   ttsMessage: intro-tut-swap-hands-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Hotbar
+  - !type:UiByName
+    name: HandContainer
   conditions:
   - !type:SwapHandsListenedCondition
 
-#  3. Head to the locker room
+#  3. Explain the left item status panel
+- type: tutorialStep
+  id: IntroTutLeftStatusPanel
+  parent: IntroductionTutorialStepBase
+  bubble:
+    text: intro-tut-left-status-panel-bubble
+  chatMessage: intro-tut-left-status-panel-chat
+  ttsMessage: intro-tut-left-status-panel-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Hotbar
+  - !type:UiByName
+    name: StatusPanelLeft
+  conditions:
+  - !type:StepDelayCondition
+    delay: 8
+
+#  4. Head to the locker room
 - type: tutorialStep
   id: IntroTutGoLockerRoom
-  parent: BaseTutorialReachStepBase
+  parent: IntroductionTutorialStepBase
   target: IntroTutMarkerLockerRoom
   bubble:
     text: intro-tut-go-locker-room-bubble
@@ -106,14 +159,58 @@
     marker: IntroTutMarkerLockerRoom
     distance: 2
 
-#  4. Take any clothing from the vending machine
+#  5. Examine the clothing vending machine
+- type: tutorialStep
+  id: IntroTutExamineClothingVendor
+  parent: IntroductionTutorialStepBase
+  target: VendingMachineClothing
+  bubble:
+    text: intro-tut-examine-clothing-vendor-bubble
+    attachToTarget: true
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialOpenUiSoftLock
+      targets:
+      - VendingMachineClothing
+      popup: int-tut-softlock-open-ui
+  chatMessage: intro-tut-examine-clothing-vendor-chat
+  ttsMessage: intro-tut-examine-clothing-vendor-tts
+  observeRange: 12
+  conditions:
+  - !type:ExamineListenedCondition
+    target: VendingMachineClothing
+
+#  6. Open the clothing vending machine
+- type: tutorialStep
+  id: IntroTutOpenClothingVendor
+  parent: IntroductionTutorialStepBase
+  target: VendingMachineClothing
+  bubble:
+    text: intro-tut-open-clothing-vendor-bubble
+    attachToTarget: true
+  chatMessage: intro-tut-open-clothing-vendor-chat
+  ttsMessage: intro-tut-open-clothing-vendor-tts
+  observeRange: 12
+  conditions:
+  - !type:BuiOpenListenedCondition
+    target: VendingMachineClothing
+
+#  7. Take any clothing from the vending machine
 - type: tutorialStep
   id: IntroTutTakeClothing
-  parent: BaseTutorialStepBase
+  parent: IntroductionTutorialBeretStepBase
   target: VendingMachineClothing
   bubble:
     text: intro-tut-take-clothing-bubble
     attachToTarget: true
+  uiHighlight:
+  - !type:UiByType
+    controlType: VendingMachineMenu
+  - !type:UiByName
+    name: VendingContents
+  - !type:UiByEntityPrototype
+    prototype: ClothingHeadHatBeret
   chatMessage: intro-tut-take-clothing-chat
   ttsMessage: intro-tut-take-clothing-tts
   observeRange: 12
@@ -122,37 +219,96 @@
     target: VendingMachineClothing
     itemTarget: ClothingHeadHatBeret
 
-#  5. Equip the new clothing
+#  8. Explain inventory
+- type: tutorialStep
+  id: IntroTutInventory
+  parent: IntroductionTutorialStepBase
+  bubble:
+    text: intro-tut-inventory-bubble
+  chatMessage: intro-tut-inventory-chat
+  ttsMessage: intro-tut-inventory-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Inventory
+  - !type:UiByName
+    name: InventoryButton
+  conditions:
+  - !type:UiControlVisibleCondition
+    control: InventoryHeadSlot
+    selectors:
+    - !type:UiByName
+      name: Inventory
+    - !type:UiByName
+      name: SlotButton_head
+
+#  9. Take the beret in hand
+- type: tutorialStep
+  id: IntroTutHoldBeret
+  parent: IntroductionTutorialBeretStepBase
+  target: ClothingHeadHatBeret
+  bubble:
+    text: intro-tut-hold-beret-bubble
+    attachToTarget: true
+  chatMessage: intro-tut-hold-beret-chat
+  ttsMessage: intro-tut-hold-beret-tts
+  observeRange: 12
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: ClothingHeadHatBeret
+  conditions:
+  - !type:ActiveHandContainsCondition
+    item: ClothingHeadHatBeret
+
+# 10. Equip the new clothing
 - type: tutorialStep
   id: IntroTutEquipClothing
-  parent: BaseTutorialEquipStepBase
+  parent: IntroductionTutorialStepBase
   bubble:
     text: intro-tut-equip-clothing-bubble
   chatMessage: intro-tut-equip-clothing-chat
   ttsMessage: intro-tut-equip-clothing-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Inventory
+  - !type:UiByName
+    name: SlotButton_head
   conditions:
   - !type:EquipListenedCondition
     target: ClothingHeadHatBeret
     slot: HEAD
 
-#  6. Drop the old clothing item (skipped if the player has nothing in hand)
+# 11. Point at a nearby entity
+- type: tutorialStep
+  id: IntroTutPointClothingVendor
+  parent: IntroductionTutorialStepBase
+  target: VendingMachineClothing
+  bubble:
+    text: intro-tut-point-clothing-vendor-bubble
+    attachToTarget: true
+  chatMessage: intro-tut-point-clothing-vendor-chat
+  ttsMessage: intro-tut-point-clothing-vendor-tts
+  observeRange: 12
+  conditions:
+  - !type:PointListenedCondition
+
+# 12. Drop the old clothing item (skipped if the player has nothing in hand)
 - type: tutorialStep
   id: IntroTutDropOldClothing
-  parent: BaseTutorialDropStepBase
+  parent: IntroductionTutorialStepBase
   bubble:
     text: intro-tut-drop-old-clothing-bubble
   chatMessage: intro-tut-drop-old-clothing-chat
   ttsMessage: intro-tut-drop-old-clothing-tts
-  preconditions:
-  - !type:HoldInHandsCondition
-  preconditionFailStep: IntroTutGoCenter
-  conditions:
+  conditions: []
+  anyConditions:
   - !type:DropListenedCondition
+  - !type:HoldInHandsCondition
+    inverted: true
 
-#  7. Go to the center of the location
+# 13. Go to the center of the location
 - type: tutorialStep
   id: IntroTutGoCenter
-  parent: BaseTutorialReachStepBase
+  parent: IntroductionTutorialStepBase
   target: IntroTutMarkerCenter
   bubble:
     text: intro-tut-go-center-bubble
@@ -164,364 +320,95 @@
     marker: IntroTutMarkerCenter
     distance: 2
 
-#  8. Go to the bar
-- type: tutorialStep
-  id: IntroTutGoBar
-  parent: BaseTutorialReachStepBase
-  target: IntroTutMarkerBar
-  bubble:
-    text: intro-tut-go-bar-bubble
-  chatMessage: intro-tut-go-bar-chat
-  ttsMessage: intro-tut-go-bar-tts
-  observeRange: 30
-  conditions:
-  - !type:ReachMarkerCondition
-    marker: IntroTutMarkerBar
-    distance: 2
-
-#  9. Sit on a bar stool
+# 14. Sit on a chair
 - type: tutorialStep
   id: IntroTutSitChair
-  parent: BaseTutorialStepBase
+  parent: IntroductionTutorialSeatStepBase
+  target: Chair
   bubble:
     text: intro-tut-sit-chair-bubble
+    attachToTarget: true
   chatMessage: intro-tut-sit-chair-chat
   ttsMessage: intro-tut-sit-chair-tts
-  observeRange: 8
+  observeRange: 12
   conditions:
   - !type:SitListenedCondition
+    target: Chair
 
-# 10. Pick up the orange juice from the bar counter
+# 15. Stand up from the chair
 - type: tutorialStep
-  id: IntroTutPickupDrink
-  parent: BaseTutorialPickupStepBase
-  target: DrinkOrangeJuice
+  id: IntroTutStandFromChair
+  parent: IntroductionTutorialSeatStepBase
+  target: Chair
   bubble:
-    text: intro-tut-pickup-drink-bubble
+    text: intro-tut-stand-from-chair-bubble
     attachToTarget: true
-  chatMessage: intro-tut-pickup-drink-chat
-  ttsMessage: intro-tut-pickup-drink-tts
-  observeRange: 10
-  conditions:
-  - !type:PickupListenedCondition
-    target: DrinkOrangeJuice
-
-# 11. Drink the orange juice
-- type: tutorialStep
-  id: IntroTutDrink
-  parent: BaseTutorialStepBase
-  bubble:
-    text: intro-tut-drink-bubble
-  chatMessage: intro-tut-drink-chat
-  ttsMessage: intro-tut-drink-tts
-  preconditions:
-  - !type:HoldInHandsCondition
-    item: DrinkOrangeJuice
-  conditions:
-  - !type:ConsumeListenedCondition
-    target: DrinkOrangeJuice
-
-# 12. Put the glass back down
-- type: tutorialStep
-  id: IntroTutDropDrink
-  parent: BaseTutorialDropStepBase
-  bubble:
-    text: intro-tut-drop-drink-bubble
-  chatMessage: intro-tut-drop-drink-chat
-  ttsMessage: intro-tut-drop-drink-tts
-  preconditions:
-  - !type:HoldInHandsCondition
-    item: DrinkOrangeJuice
-  preconditionFailStep: IntroTutGoBarCounter
-  conditions:
-  - !type:DropListenedCondition
-    target: DrinkOrangeJuice
-
-# 13. Go behind the bar counter
-- type: tutorialStep
-  id: IntroTutGoBarCounter
-  parent: BaseTutorialReachStepBase
-  target: IntroTutMarkerBarCounter
-  bubble:
-    text: intro-tut-go-bar-counter-bubble
-  chatMessage: intro-tut-go-bar-counter-chat
-  ttsMessage: intro-tut-go-bar-counter-tts
-  observeRange: 20
-  conditions:
-  - !type:ReachMarkerCondition
-    marker: IntroTutMarkerBarCounter
-    distance: 1
-
-# 14. Examine the locked service airlock - player learns it is locked
-- type: tutorialStep
-  id: IntroTutExamineAirlock
-  parent: BaseTutorialStepBase
-  target: AirlockServiceLocked
-  bubble:
-    text: intro-tut-examine-airlock-bubble
-    attachToTarget: true
-  chatMessage: intro-tut-examine-airlock-chat
-  ttsMessage: intro-tut-examine-airlock-tts
-  observeRange: 10
-  conditions:
-  - !type:ExamineListenedCondition
-    target: AirlockServiceLocked
-
-# 15. Rummage in the bush to find the ID card
-- type: tutorialStep
-  id: IntroTutRummageBush
-  parent: BaseTutorialStepBase
-  target: PottedPlant26NoFade
-  bubble:
-    text: intro-tut-rummage-bush-bubble
-    attachToTarget: true
-  chatMessage: intro-tut-rummage-bush-chat
-  ttsMessage: intro-tut-rummage-bush-tts
-  observeRange: 8
-  anyConditions:
-  - !type:InteractListenedCondition
-    target: PottedPlant26NoFade
-  - !type:ActivateInWorldListenedCondition
-    target: PottedPlant26NoFade
-
-# 16. Pass through the airlock while holding the ID card
-- type: tutorialStep
-  id: IntroTutPassAirlock
-  parent: BaseTutorialReachStepBase
-  target: IntroTutMarkerAfterAirlock
-  bubble:
-    text: intro-tut-pass-airlock-bubble
-  chatMessage: intro-tut-pass-airlock-chat
-  ttsMessage: intro-tut-pass-airlock-tts
-  observeRange: 20
-  conditions:
-  - !type:ReachMarkerCondition
-    marker: IntroTutMarkerAfterAirlock
-    distance: 2
-
-# 17. Open the dresser
-- type: tutorialStep
-  id: IntroTutOpenDresser
-  parent: BaseTutorialStepBase
-  target: Dresser
-  bubble:
-    text: intro-tut-open-dresser-bubble
-    attachToTarget: true
-  chatMessage: intro-tut-open-dresser-chat
-  ttsMessage: intro-tut-open-dresser-tts
-  observeRange: 10
-  conditions:
-  - !type:BuiOpenListenedCondition
-    target: Dresser
-
-# 18. Return to the center
-- type: tutorialStep
-  id: IntroTutGoBackCenter
-  parent: BaseTutorialReachStepBase
-  target: IntroTutMarkerCenter
-  bubble:
-    text: intro-tut-go-back-center-bubble
-  chatMessage: intro-tut-go-back-center-chat
-  ttsMessage: intro-tut-go-back-center-tts
-  observeRange: 30
-  conditions:
-  - !type:ReachMarkerCondition
-    marker: IntroTutMarkerCenter
-    distance: 2
-
-# 19. Drop the ID card if still holding it after returning to center
-- type: tutorialStep
-  id: IntroTutDropIdCard
-  parent: BaseTutorialDropStepBase
-  bubble:
-    text: intro-tut-drop-id-card-bubble
-  chatMessage: intro-tut-drop-id-card-chat
-  ttsMessage: intro-tut-drop-id-card-tts
-  preconditions:
-  - !type:HoldInHandsCondition
-    item: BartenderIDCard
-  preconditionFailStep: IntroTutGoHallway
-  conditions:
-  - !type:DropListenedCondition
-    target: BartenderIDCard
-
-# 20. Head toward the dark corridor — stop at the marker
-- type: tutorialStep
-  id: IntroTutGoHallway
-  parent: BaseTutorialReachStepBase
-  target: IntroTutMarkerHallway
-  bubble:
-    text: intro-tut-go-hallway-bubble
-  chatMessage: intro-tut-go-hallway-chat
-  ttsMessage: intro-tut-go-hallway-tts
-  observeRange: 30
-  conditions:
-  - !type:ReachMarkerCondition
-    marker: IntroTutMarkerHallway
-    distance: 2
-
-# 21. Pick up the flashlight
-- type: tutorialStep
-  id: IntroTutPickupFlashlight
-  parent: BaseTutorialPickupStepBase
-  target: FlashlightLantern
-  bubble:
-    text: intro-tut-pickup-flashlight-bubble
-    attachToTarget: true
-  chatMessage: intro-tut-pickup-flashlight-chat
-  ttsMessage: intro-tut-pickup-flashlight-tts
-  conditions:
-  - !type:PickupListenedCondition
-    target: FlashlightLantern
-
-# 22. Turn on the flashlight
-- type: tutorialStep
-  id: IntroTutTurnOnFlashlight
-  parent: BaseTutorialUseStepBase
-  bubble:
-    text: intro-tut-turn-on-flashlight-bubble
-  chatMessage: intro-tut-turn-on-flashlight-chat
-  ttsMessage: intro-tut-turn-on-flashlight-tts
-  preconditions:
-  - !type:HoldInHandsCondition
-    item: FlashlightLantern
-  conditions:
-  - !type:UseListenedCondition
-    target: FlashlightLantern
-
-# 23. Reach the shooting range entrance
-- type: tutorialStep
-  id: IntroTutGoRange
-  parent: BaseTutorialReachStepBase
-  target: IntroTutMarkerRange
-  bubble:
-    text: intro-tut-go-range-bubble
-  chatMessage: intro-tut-go-range-chat
-  ttsMessage: intro-tut-go-range-tts
-  observeRange: 30
-  conditions:
-  - !type:ReachMarkerCondition
-    marker: IntroTutMarkerRange
-    distance: 2
-
-# 24. Try to open the bolted airlock (it will not open, but the interaction fires)
-- type: tutorialStep
-  id: IntroTutTryOpenBolted
-  parent: BaseTutorialInteractStepBase
-  target: DoubleGlassAirlockBolted
-  bubble:
-    text: intro-tut-try-open-bolted-bubble
-    attachToTarget: true
-  chatMessage: intro-tut-try-open-bolted-chat
-  ttsMessage: intro-tut-try-open-bolted-tts
-  observeRange: 12
-  anyConditions:
-  - !type:InteractListenedCondition
-    target: DoubleGlassAirlockBolted
-  - !type:ActivateInWorldListenedCondition
-    target: DoubleGlassAirlockBolted
-
-# 25. Press the signal button to unbolt the airlock
-- type: tutorialStep
-  id: IntroTutPressButton
-  parent: BaseTutorialInteractStepBase
-  target: SignalButton
-  bubble:
-    text: intro-tut-press-button-bubble
-    attachToTarget: true
-  chatMessage: intro-tut-press-button-chat
-  ttsMessage: intro-tut-press-button-tts
-  anyConditions:
-  - !type:InteractListenedCondition
-    target: SignalButton
-
-# 26. Put the flashlight away before entering the shooting range
-- type: tutorialStep
-  id: IntroTutStoreFlashlight
-  parent: BaseTutorialDropStepBase
-  bubble:
-    text: intro-tut-store-flashlight-bubble
-  chatMessage: intro-tut-store-flashlight-chat
-  ttsMessage: intro-tut-store-flashlight-tts
-  preconditions:
-  - !type:HoldInHandsCondition
-    item: FlashlightLantern
-  preconditionFailStep: IntroTutPickupPistol
-  conditions:
-  - !type:DropListenedCondition
-    target: FlashlightLantern
-
-# 27. Pick up the practice laser pistol
-- type: tutorialStep
-  id: IntroTutPickupPistol
-  parent: BaseTutorialPickupStepBase
-  target: WeaponDisablerPractice
-  bubble:
-    text: intro-tut-pickup-pistol-bubble
-    attachToTarget: true
-  chatMessage: intro-tut-pickup-pistol-chat
-  ttsMessage: intro-tut-pickup-pistol-tts
+  chatMessage: intro-tut-stand-from-chair-chat
+  ttsMessage: intro-tut-stand-from-chair-tts
   observeRange: 12
   conditions:
-  - !type:PickupListenedCondition
-    target: WeaponDisablerPractice
+  - !type:BuckledCondition
+    buckled: false
 
-# 28. Active combat mode
+# 16. Pull a chair
 - type: tutorialStep
-  id: IntroTutActivateBattleMode
-  parent: BaseTutorialActivateAction
+  id: IntroTutPullChair
+  parent: IntroductionTutorialStepBase
+  target: Chair
   bubble:
-    text: intro-tut-combat-mode-bubble
-  chatMessage: intro-tut-combat-mode-chat
-  ttsMessage: intro-tut-combat-mode-tts
-  conditions:
-  - !type:ActivateActionListenedCondition
-    target: ActionCombatModeToggle
-
-# 29. Shoot at the targets (3 shots)
-- type: tutorialStep
-  id: IntroTutShoot
-  parent: BaseTutorialStepBase
-  bubble:
-    text: intro-tut-shoot-bubble
-  chatMessage: intro-tut-shoot-chat
-  ttsMessage: intro-tut-shoot-tts
-  preconditions:
-  - !type:HoldInHandsCondition
-    item: WeaponDisablerPractice
-  conditions:
-  - !type:GunShotListenedCondition
-    count: 3
-
-# 30. Pick up the survival knife
-- type: tutorialStep
-  id: IntroTutPickupKnife
-  parent: BaseTutorialPickupStepBase
-  target: SurvivalKnife
-  bubble:
-    text: intro-tut-pickup-knife-bubble
+    text: intro-tut-pull-chair-bubble
     attachToTarget: true
-  chatMessage: intro-tut-pickup-knife-chat
-  ttsMessage: intro-tut-pickup-knife-tts
-  observeRange: 10
-  conditions:
-  - !type:PickupListenedCondition
-    target: SurvivalKnife
-
-# 31. Attack the clown target with the knife
-- type: tutorialStep
-  id: IntroTutAttackClown
-  parent: BaseTutorialAttackStepBase
-  target: TargetClown
-  bubble:
-    text: intro-tut-attack-clown-bubble
-    attachToTarget: true
-  chatMessage: intro-tut-attack-clown-chat
-  ttsMessage: intro-tut-attack-clown-tts
+  chatMessage: intro-tut-pull-chair-chat
+  ttsMessage: intro-tut-pull-chair-tts
   observeRange: 12
   conditions:
-  - !type:AttackListenedCondition
-    target: TargetClown
+  - !type:PullingCondition
+    target: Chair
+
+# 17. Release the chair
+- type: tutorialStep
+  id: IntroTutReleaseChair
+  parent: IntroductionTutorialStepBase
+  target: Chair
+  bubble:
+    text: intro-tut-release-chair-bubble
+    attachToTarget: true
+  chatMessage: intro-tut-release-chair-chat
+  ttsMessage: intro-tut-release-chair-tts
+  observeRange: 12
+  conditions:
+  - !type:PullingCondition
+    target: Chair
+    inverted: true
+
+# 18. Lie down and stand up
+- type: tutorialStep
+  id: IntroTutLieDownStandUp
+  parent: IntroductionTutorialStepBase
+  bubble:
+    text: intro-tut-lie-down-stand-up-bubble
+  chatMessage: intro-tut-lie-down-stand-up-chat
+  ttsMessage: intro-tut-lie-down-stand-up-tts
+  conditions:
+  - !type:LieDownStandUpListenedCondition
+    count: 2
+
+# 19. Explain action bar
+- type: tutorialStep
+  id: IntroTutActionBar
+  parent: IntroductionTutorialStepBase
+  bubble:
+    text: intro-tut-action-bar-bubble
+  chatMessage: intro-tut-action-bar-chat
+  ttsMessage: intro-tut-action-bar-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Actions
+  - !type:UiByName
+    name: ActionsContainer
+  conditions:
+  - !type:StepDelayCondition
+    delay: 10
 
 - type: entity
   parent: BaseTutorialPlayer

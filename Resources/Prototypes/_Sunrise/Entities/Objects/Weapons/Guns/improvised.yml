@@ -1,0 +1,15 @@
+- type: entity
+  id: WeaponMakeshift
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: StaticPrice
+    price: 25
+
+- type: entity
+  id: WeaponImprovised
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: StaticPrice
+    price: 250

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/bd6873fd4dd6a61d7e46f1d75cd4d90f64c40894. comm_syndie made by Veritius, based on comm. generic_panel_open made by Errant, commit https://github.com/space-wizards/space-station-14/pull/32273.",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/bd6873fd4dd6a61d7e46f1d75cd4d90f64c40894. comm_syndie made by Veritius, based on comm. generic_panel_open made by Errant, commit https://github.com/space-wizards/space-station-14/pull/32273. made Gold by zangothedino (discord), Pirate Screens by Davyei (discord) and DuckManZach (github)",
   "size": {
     "x": 32,
     "y": 32
@@ -1746,6 +1746,70 @@
             "directions": 4
         },
         {
+            "name": "brasscomputer",
+            "directions": 4
+        },
+        {
+            "name": "brasscomputer_l",
+            "directions": 4
+        },
+        {
+            "name": "brasscomputer_r",
+            "directions": 4
+        },
+        {
+            "name": "brasscomputer_l_r",
+            "directions": 4
+        },
+        {
+            "name": "brassrustcomputer",
+            "directions": 4
+        },
+        {
+            "name": "brassrustcomputer_l",
+            "directions": 4
+        },
+        {
+            "name": "brassrustcomputer_r",
+            "directions": 4
+        },
+        {
+            "name": "brassrustcomputer_l_r",
+            "directions": 4
+        },
+        {
+            "name": "goldcomputer",
+            "directions": 4
+        },
+        {
+            "name": "goldcomputer_l",
+            "directions": 4
+        },
+        {
+            "name": "goldcomputer_r",
+            "directions": 4
+        },
+        {
+            "name": "goldcomputer_l_r",
+            "directions": 4
+        },
+        {
+            "name": "goldrustcomputer",
+            "directions": 4
+        },
+        {
+            "name": "goldrustcomputer_l",
+            "directions": 4
+        },
+        {
+            "name": "goldrustcomputer_r",
+            "directions": 4
+        },
+        {
+            "name": "goldrustcomputer_l_r",
+            "directions": 4
+        },
+        {
             "name": "computer_l",
             "directions": 4
         },
@@ -1870,6 +1934,86 @@
                     0.2
                 ]
             ]
+        },
+        {
+            "name": "gold",
+            "directions": 4
+        },
+        {
+            "name": "gold_keyboard",
+            "directions": 4
+        },
+        {
+            "name": "requestpirate",
+            "directions": 4,
+            "delays": [
+                [
+                    1.0,
+                    0.3,
+                    0.3,
+                    0.3,
+                    0.3,
+                    1.0
+                ],
+                [
+                    1.0,
+                    0.3,
+                    0.3,
+                    0.3,
+                    0.3,
+                    1.0
+                ],
+                [
+                    1.0,
+                    0.3,
+                    0.3,
+                    0.3,
+                    0.3,
+                    1.0
+                ],
+                [
+                    1.0,
+                    0.3,
+                    0.3,
+                    0.3,
+                    0.3,
+                    1.0
+                ]
+            ]
+        },
+        {
+            "name": "commpirate",
+            "directions": 4,
+            "delays": [
+                [
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "shuttlepirate",
+            "directions": 4
+        },
+        {
+            "name": "transferpirate",
+            "directions": 4
+        },
+        {
+            "name": "bountypirate",
+            "directions": 4
         }
     ]
 }

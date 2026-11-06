@@ -3,9 +3,9 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._Sunrise.NewLife
 {
-    public abstract class SharedNewLifeSystem : EntitySystem
+    public abstract partial class SharedNewLifeSystem : EntitySystem
     {
-        [Dependency] protected readonly SharedPopupSystem Popup = default!;
+        [Dependency] protected SharedPopupSystem Popup = default!;
 
         public override void Initialize()
         {
@@ -21,7 +21,7 @@ namespace Content.Shared._Sunrise.NewLife
 
     [Serializable, NetSerializable]
     [DataDefinition]
-    public partial class NewLifeUserData
+    public sealed partial class NewLifeUserData
     {
         public TimeSpan NextAllowRespawn { get; set; }
         public List<int> UsedCharactersForRespawn { get; set; } = new();

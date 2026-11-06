@@ -20,3 +20,7 @@ player-panel-delete = Удалить
 player-panel-rejuvenate = Воскресить
 player-panel-false = Нет
 player-panel-true = Да
+player-panel-follow = Следить
+player-panel-camera = Камера
+player-panel-trust-score = Уровень доверия: { TOSTRING($trustScore, "P0") }
+player-panel-account-creation = Учётная запись создана: { TOSTRING($date, "yyyy-MM-dd") }

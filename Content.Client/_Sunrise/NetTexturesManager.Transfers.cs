@@ -173,7 +173,8 @@ public sealed partial class NetTexturesManager
         }
         catch (Exception e)
         {
-            _sawmill.Error($"Error while receiving NetTextures transfer: {e}");
+            if (generation == ReadSessionGeneration())
+                _sawmill.Error($"Error while receiving NetTextures transfer: {e}");
         }
     }
     #endregion

@@ -189,7 +189,7 @@
   - SunriseTealGloves
   - SunriseGlovesNitrileRed
   - SunriseGlovesNitrileGreen
-  - NitrileGloves
+  - SunriseNitrileGloves
 
 - type: loadoutGroup
   id: SunriseMedicalMask
@@ -267,5 +267,5 @@
   id: SunriseMedicalDoctorPDA
   name: loadout-group-medical-doctor-id
   loadouts:
-  - MedicalPDA
+  - MedicalDoctorPDA
   - SeniorPhysicianPDA

@@ -151,6 +151,9 @@
   id: AntimaterialAmmoKit
   name: Antimaterial magazine kit
   components:
+  - type: Storage
+    grid:
+    - 0,0,3,2
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
@@ -158,9 +161,15 @@
         - id: MagazineBauer127
           amount: 2
         - id: MagazineBauer127Penetrator
+          amount: 2
         - id: MagazineBauer127Frag
+          amount: 2
         - id: MagazineBauer127Blast
+          amount: 2
         - id: MagazineBauer127Emp
+          amount: 2
+        - id: MagazineBauer127HP
+          amount: 2
   - type: Sprite
     layers:
     - state: box_of_doom
@@ -240,32 +249,13 @@
 
 - type: entity
   parent: BaseSyndicateAmmoKit
-  id: MMGKit
-  name: DL6902 ammo kit
+  id: LMGKit
+  name: L6 Saw ammo kit
   components:
   - type: Item
     size: Large
     shape:
     - 0,0,1,1
-  - type: Storage
-    grid:
-    - 0,0,2,1
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: MagazineDl6902
-          amount: 3
-  - type: Sprite
-    layers:
-    - state: box_of_doom_big
-    - state: dl6902
-
-- type: entity
-  parent: MMGKit
-  id: LMGKit
-  name: L6 Saw ammo kit
-  components:
   - type: Storage
     grid:
     - 0,0,2,1
@@ -374,6 +364,16 @@
   - type: SpawnItemsOnUse
     items:
     - id: LeftArmCyberHack
+
+- type: entity
+  parent: CyberArmMantisBox
+  id: ClothingBeltMilitaryBeltGrenadeBox
+  name: packaged grenade belt
+  description: A compact package containing a grenade belt. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingBeltMilitaryBeltGrenade
 
 - type: entity
   parent: CyberArmMantisBox

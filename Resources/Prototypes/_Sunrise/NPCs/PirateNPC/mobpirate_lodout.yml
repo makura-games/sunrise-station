@@ -166,7 +166,7 @@
 - type: startingGear
   id: MobPirateT1SMGGear
   equipment:
-    gloves: ClothingHandsMp38
+    gloves: ClothingHandsSMGForged
     back: ClothingBackPirateMessengerT1SMG
     pocket1: PouchAmmoFilledSMG
     pocket2: Gauze1
@@ -293,7 +293,7 @@
   id: MobPirateGearRangedT2
   equipment:
     gloves: ClothingHandsMercRevolvers
-    belt: ClothingBeltWebbingMercenaryTier2Revolver
+    belt: ClothingBeltWebbingMercenaryTier3Revolver
     pocket1: FlippoLighterSunriseContractor
     pocket2: CigPackSyndicate
     shoes: ClothingShoesBootsSalvage
@@ -447,7 +447,7 @@
 - type: startingGear
   id: MobPirateT3SMGGear
   equipment:
-    gloves: ClothingHandsSMGC40
+    gloves: ClothingHandsSMGVectorSuper
     belt: ClothingBeltSyndieWebbingTier3SMG
     pocket1: PouchAmmoFilledPistol40
     pocket2: MagazinePistol40SubMachineGunSP
@@ -465,7 +465,7 @@
 - type: startingGear
   id: MobPirateT3MedicGear
   equipment:
-    gloves: ClothingHandsSMGC40
+    gloves: ClothingHandsSMGVectorSuper
     back: ClothingBackDuffelMercenaryTier3Medic
     belt: ClothingBeltMedicalFilled
     shoes: ClothingShoesBootsMagCombat
@@ -489,7 +489,6 @@
     pocket2: RipleyPeripheralsElectronics
     shoes: ClothingBackOreCrateTier1Mech
     belt: BorgOreBag
-    back: MechPaintClarkeRipleyBigBrother
 
 - type: startingGear
   id: MobPirateT1BorgAssaultGear
@@ -538,7 +537,7 @@
 - type: startingGear
   id: MobPirateT2JuggernautGear
   equipment:
-    gloves: ClothingHandsPirateArmorT2Invisible
+    gloves: ClothingHandsPirateArmorMurmilo
     shoes: ClothingBackOreCrateBoss
     pocket1: ClothingHeadHatGladiator
     pocket2: StimkitFilled
@@ -566,6 +565,5 @@
     pocket2: DurandPeripheralsElectronics
     shoes: ClothingBackOreCrateTier3Mech
     back: DurandTargetingElectronics
-    belt: MechPaintDurandDollhouse
 
 

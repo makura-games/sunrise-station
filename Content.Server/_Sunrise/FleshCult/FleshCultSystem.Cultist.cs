@@ -1,9 +1,9 @@
-using Content.Server.Atmos.Components;
+using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
-using Content.Shared._Sunrise.NightVision.Components;
 using Content.Shared._Sunrise.CollectiveMind;
 using Content.Shared._Sunrise.FleshCult;
 using Content.Shared.Actions.Components;
+using Content.Shared.Body;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Electrocution;
 using Content.Shared.FixedPoint;
@@ -12,9 +12,11 @@ using Content.Shared.Humanoid;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Overlays;
 using Content.Shared.Popups;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Tag;
 using Content.Shared.Temperature.Components;
 using Robust.Shared.Audio;
@@ -28,23 +30,29 @@ namespace Content.Server._Sunrise.FleshCult;
 /// </summary>
 public sealed partial class FleshCultSystem
 {
-    [ValidatePrototypeId<CollectiveMindPrototype>]
-    private const string FleshCollectiveMindProto = "FleshCult";
+    private static readonly ProtoId<CollectiveMindPrototype> FleshCollectiveMindProto = "FleshCult";
 
-    [ValidatePrototypeId<TagPrototype>]
-    private const string FleshTagProto = "Flesh";
+    private static readonly ProtoId<TagPrototype> FleshTagProto = "Flesh";
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string DefaultFleshCultRule = "FleshCult";
+    private static readonly ProtoId<TagPrototype> FullBodyOuterTag = "FullBodyOuter";
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string CreateFleshHeartObjective = "CreateFleshHeartObjective";
+    private static readonly EntProtoId ToggleNightVisionAction = "ActionToggleNightVision";
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string FleshCultSurviveObjective = "FleshCultSurviveObjective";
+    private static readonly EntProtoId DefaultFleshCultRule = "FleshCult";
 
-    [ValidatePrototypeId<CurrencyPrototype>]
-    private const string StolenMutationPointPrototype = "StolenMutationPoint";
+    private static readonly EntProtoId CreateFleshHeartObjective = "CreateFleshHeartObjective";
+
+    private static readonly EntProtoId FleshCultSurviveObjective = "FleshCultSurviveObjective";
+
+    private static readonly ProtoId<CurrencyPrototype> StolenMutationPointPrototype = "StolenMutationPoint";
+
+    private static readonly HumanoidVisualLayers[] FleshSpiderLegLayers =
+    [
+        HumanoidVisualLayers.RLeg,
+        HumanoidVisualLayers.LLeg,
+        HumanoidVisualLayers.RFoot,
+        HumanoidVisualLayers.LFoot,
+    ];
 
     private void InitializeCultist()
     {
@@ -59,12 +67,18 @@ public sealed partial class FleshCultSystem
         SubscribeLocalEvent<FleshCultistComponent, IsEquippingAttemptEvent>(OnBeingEquippedAttempt);
         SubscribeLocalEvent<FleshCultistComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<FleshCultistComponent, FleshCultistShopActionEvent>(OnShop);
+        SubscribeLocalEvent<FleshCultistComponent, OrganInsertedIntoEvent>(OnOrganInserted);
     }
 
     private void OnShop(EntityUid uid, FleshCultistComponent component, FleshCultistShopActionEvent args)
     {
         if (TryComp<StoreComponent>(uid, out var store))
             _store.ToggleUi(uid, uid, store);
+    }
+
+    private void OnOrganInserted(Entity<FleshCultistComponent> _, ref OrganInsertedIntoEvent args)
+    {
+        MakeFleshSpiderLegMarkingsHideable(args.Organ);
     }
 
     private void OnMobStateChanged(EntityUid uid, FleshCultistComponent component, MobStateChangedEvent args)
@@ -108,7 +122,7 @@ public sealed partial class FleshCultSystem
     {
         if (_inventory.TryGetSlotEntity(uid, slot, out var entity) && HasComp<FleshBodyModComponent>(entity))
         {
-            EntityManager.DeleteEntity(entity.Value);
+            Del(entity.Value);
             _movement.RefreshMovementSpeedModifiers(uid);
             _audioSystem.PlayPvs(component.SoundMutation, uid, component.SoundMutation.Params);
         }
@@ -123,7 +137,7 @@ public sealed partial class FleshCultSystem
             return;
         if (!HasComp<FleshBodyModComponent>(shoes))
             return;
-        if (!_tagSystem.HasTag(args.Equipment, "FullBodyOuter"))
+        if (!_tagSystem.HasTag(args.Equipment, FullBodyOuterTag))
             return;
         _popup.PopupEntity(Loc.GetString("flesh-cultist-equiped-outer-clothing-blocked",
             ("Entity", uid)), uid, PopupType.Large);
@@ -136,7 +150,12 @@ public sealed partial class FleshCultSystem
         InitializeActions(uid, component);
         InitializeStore(uid, component);
         InitializeAppearance(uid);
-        _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { StolenMutationPointPrototype, component.StartingMutationPoints } }, uid);
+        _store.TryAddCurrency(
+            new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>
+            {
+                { StolenMutationPointPrototype, component.StartingMutationPoints },
+            },
+            uid);
     }
 
     private void InitializeActions(EntityUid uid, FleshCultistComponent component)
@@ -172,14 +191,32 @@ public sealed partial class FleshCultSystem
 
     private void InitializeAppearance(EntityUid uid)
     {
-        if (TryComp<HumanoidAppearanceComponent>(uid, out var appearance))
+        EnsureComp<HideableHumanoidLayersComponent>(uid);
+
+        if (!TryComp<BodyComponent>(uid, out var body))
+            return;
+
+        foreach (var organ in body.Organs?.ContainedEntities ?? [])
         {
-            appearance.HideLayersOnEquip.Add(HumanoidVisualLayers.RLeg);
-            appearance.HideLayersOnEquip.Add(HumanoidVisualLayers.LLeg);
-            appearance.HideLayersOnEquip.Add(HumanoidVisualLayers.RFoot);
-            appearance.HideLayersOnEquip.Add(HumanoidVisualLayers.LFoot);
-            Dirty(uid, appearance);
+            MakeFleshSpiderLegMarkingsHideable(organ);
         }
+    }
+
+    private void MakeFleshSpiderLegMarkingsHideable(EntityUid organ)
+    {
+        if (!TryComp<VisualOrganMarkingsComponent>(organ, out var markings))
+            return;
+
+        var dirty = false;
+        foreach (var layer in FleshSpiderLegLayers)
+        {
+            // Разрешаем одежде скрывать только те слои, которые принадлежат этому органу.
+            if (markings.MarkingData.Layers.Contains(layer))
+                dirty |= markings.HideableLayers.Add(layer);
+        }
+
+        if (dirty)
+            DirtyField(organ, markings, nameof(VisualOrganMarkingsComponent.HideableLayers));
     }
 
     private void OnShutdown(EntityUid uid, FleshCultistComponent component, ComponentShutdown args)
@@ -211,7 +248,7 @@ public sealed partial class FleshCultSystem
         RemCompDeferred<InsulatedComponent>(uid);
         RemCompDeferred<FlashImmunityComponent>(uid);
         RemCompDeferred<RespiratorImmunityComponent>(uid);
-        RemCompDeferred<PressureImmunityComponent>(uid);
+        _statusEffects.TryRemoveStatusEffect(uid, PressureImmunityStatusEffectSystem.PressureImmunityEffect);
         RemCompDeferred<StoreComponent>(uid);
         RemCompDeferred<FleshAbilitiesComponent>(uid);
     }
@@ -242,7 +279,11 @@ public sealed partial class FleshCultSystem
 
     private void OnNightVisionMutation(EntityUid uid, FleshCultistComponent component, FleshCultistNightVisionMutationEvent args)
     {
-        EnsureComp<ToggleableNightVisionComponent>(uid);
+        var nightVision = EnsureComp<NightVisionComponent>(uid);
+        nightVision.Enabled = false;
+        nightVision.Action = ToggleNightVisionAction;
+        _action.AddAction(uid, ref nightVision.ActionEntity, nightVision.Action);
+        Dirty(uid, nightVision);
     }
 
     private void OnInsulatedImmunityMutation(EntityUid uid, FleshCultistComponent component, FleshCultistInsulatedImmunityMutationEvent args)
@@ -252,7 +293,7 @@ public sealed partial class FleshCultSystem
 
     private void OnPressureImmunityMutation(EntityUid uid, FleshCultistComponent component, FleshCultistPressureImmunityMutationEvent args)
     {
-        EnsureComp<PressureImmunityComponent>(uid);
+        _statusEffects.TrySetStatusEffectDuration(uid, PressureImmunityStatusEffectSystem.PressureImmunityEffect);
     }
 
     private void OnFlashImmunityMutation(EntityUid uid, FleshCultistComponent component, FleshCultistFlashImmunityMutationEvent args)
@@ -308,7 +349,7 @@ public sealed partial class FleshCultSystem
         _popup.PopupEntity(Loc.GetString("flesh-pudge-transform-others", ("Entity", uid), ("EntityTransform", abommob)), abommob, Filter.PvsExcept(abommob), true, PopupType.LargeCaution);
         _audioSystem.PlayPvs(component.SoundMutation, coordinates, AudioParams.Default.WithVariation(0.025f));
 
-        _gibbingSystem.Gib(uid, true);
+        _gibbing.Gib(uid, true);
 
         return true;
     }

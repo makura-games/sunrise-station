@@ -6,11 +6,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.CriminalRecords.Systems;
 
-public sealed class PrisonTimerSystem : EntitySystem
+public sealed partial class PrisonTimerSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private DeviceLinkSystem _deviceLink = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {
@@ -42,6 +42,7 @@ public sealed class PrisonTimerSystem : EntitySystem
     {
         if (string.IsNullOrEmpty(label))
         {
+            _appearance.SetData(uid, TextScreenVisuals.DefaultText, string.Empty);
             _appearance.SetData(uid, TextScreenVisuals.ScreenText, string.Empty);
         }
         else
@@ -59,8 +60,9 @@ public sealed class PrisonTimerSystem : EntitySystem
 
         var text = (line1.Length > rowLength ? line1[..rowLength] : line1).PadRight(rowLength);
         if (!string.IsNullOrEmpty(line2))
-            text += (line2.Length > rowLength ? line2[..rowLength] : line2).PadRight(rowLength);
+            text += "\n" + (line2.Length > rowLength ? line2[..rowLength] : line2).PadRight(rowLength);
 
+        _appearance.SetData(uid, TextScreenVisuals.DefaultText, text);
         _appearance.SetData(uid, TextScreenVisuals.ScreenText, text);
     }
 }

@@ -32,6 +32,49 @@
   - type: Appearance
 
 - type: entity
+  id: MagazineGarand
+  name: "M1 Garand clip (.308 FMJ)"
+  description: An eight-round en-bloc clip for the M1 Garand, loaded with .308 FMJ cartridges.
+  parent: BaseItem
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 30
+  - type: Tag
+    tags:
+    - MagazineGarand
+  - type: Item
+    size: Small
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    cycleable: true
+    fillDelay: 0.1
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
+    whitelist:
+      tags:
+      - CartridgeHeavyRifle
+    capacity: 8
+    proto: CartridgeRifleHeavyFMJ
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/LightRifle/light_rifle_speed_loader.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-5
+      map: ["enum.GunVisualLayers.Mag"]
+      color: "#49392D"
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6
+    zeroVisible: false
+  - type: Appearance
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+
+- type: entity
   id: MagazineRifleHeavyEmpty
   name: "magazine (.308 any)"
   suffix: empty
@@ -71,32 +114,6 @@
       - state: inhand-right-mag
       - state: inhand-right-stripe
         color: "#575EF5"
-
-- type: entity
-  id: MagazineRifleHeavyHP
-  name: "magazine (.308 HP)"
-  parent: BaseMagazineRifleHeavy
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeRifleHeavyHP
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#F5514C"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#F5514C"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#F5514C"
 
 - type: entity
   id: MagazineRifleHeavyFMJ

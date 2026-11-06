@@ -1,6 +1,7 @@
 using Content.Server.Body.Systems;
 using Content.Shared._Sunrise.CarpQueen;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -15,10 +16,9 @@ namespace Content.Server._Sunrise.CarpQueen;
 /// Система обрабатывает укусы карпов-слуг:
 /// вводит 1 единицу каждого реагента из жидкости, в которой вылупился карп.
 /// </summary>
-public sealed class CarpServantBiteSystem : EntitySystem
+public sealed partial class CarpServantBiteSystem : EntitySystem
 {
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly IPrototypeManager _protos = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
 
     public override void Initialize()
     {
@@ -41,7 +41,7 @@ public sealed class CarpServantBiteSystem : EntitySystem
             var solution = new Solution();
             foreach (var (reagentId, _) in memory.RememberedReagents)
             {
-                if (_protos.HasIndex<ReagentPrototype>(reagentId))
+                if (ProtoMan.HasIndex<ReagentPrototype>(reagentId))
                 {
                     solution.AddReagent(reagentId, memory.BiteReagentAmount);
                 }

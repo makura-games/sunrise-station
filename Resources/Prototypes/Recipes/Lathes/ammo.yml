@@ -257,7 +257,8 @@
   id: MagazinePistolSubMachineGunTopMounted
   result: MagazinePistolSubMachineGunTopMounted
   materials:
-    Steel: 375 # Sunrise-edit
+    Steel: 225 # Sunrise-Edit - четверть стали в стоимости стандартных патронов заменена на пласталь
+    Plasteel: 75 # Sunrise-Edit
 
 #- type: latheRecipe
 #  parent: BaseAmmoBoxRecipe

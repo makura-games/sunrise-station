@@ -421,7 +421,7 @@
         - proto: MagazineBoxLightRifleSP
           prob: 0.2
           cost: 10
-        - proto: MagazineBoxLightRifleHP
+        - proto: MagazineBoxLightRifleSP
           prob: 0.2
           cost: 10
         - proto: MagazineBoxLightRifleFMJ
@@ -594,7 +594,7 @@
         - proto: MagazineBoxLightRifleSP
           prob: 0.2
           cost: 10
-        - proto: MagazineBoxLightRifleHP
+        - proto: MagazineBoxLightRifleSP
           prob: 0.2
           cost: 10
         - proto: MagazineBoxLightRifleFMJ

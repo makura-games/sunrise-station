@@ -41,4 +41,4 @@ marking-EarsArcanaAlt = ушки арканы альтернативные, уш
 marking-EarsArcana = ушки арканы, уши
 marking-SuccubusWingsDemon = крылья, спина [NEW]
 marking-SuccubusWingsDemonAnimated = крылья анимированные, спина [NEW]
-marking-SuccubusWingsDemonTwo = крылыя (приподнятые), спина [NEW]
+marking-SuccubusWingsDemonTwo = крылья (приподнятые), спина [NEW]

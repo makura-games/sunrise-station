@@ -16,10 +16,10 @@ public sealed partial class ExtraTab : Control
 {
     public const string LobbyBackgroundRandom = "Random";
 
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly ILogManager _log = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private ILogManager _log = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     private readonly ISawmill _sawmill;
 

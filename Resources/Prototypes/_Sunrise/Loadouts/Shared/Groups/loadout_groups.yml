@@ -193,7 +193,15 @@
   - BlueShieldBeret
   - BlueShieldSwatHelmet
   - BlueShieldTSFMarineHelmet
-  - BlueShieldTSFMARSOCHelmet
+
+- type: loadoutGroup
+  id: SunriseLoadoutGroupBlueShieldMask
+  name: loadout-group-blueshield-mask
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - SunriseLoadoutClothingMaskGasBlueShieldHalf
+  - SunriseLoadoutClothingMaskGasBlueShield
 
 - type: loadoutGroup
   id: BlueShieldBackpack
@@ -345,11 +353,11 @@
   minLimit: 1
   maxLimit: 1
   loadouts:
-  - BlueshieldACP14
-  - BlueshieldWT550
   - BlueshieldLecterMk2
-  - BlueshieldVP78
+  - BlueshieldWT550
+  - BlueshieldWT550Blue
   - BlueshieldAsh12
+  - BlueshieldLecterXL8
 
 - type: loadoutGroup
   id: BarberJumpsuit
@@ -430,7 +438,7 @@
   - MK58Box
   - MK58GoldBox
   - SnubRevolverBox
-  - WeaponDominator
+  - SunriseLaserPistol
   - WeaponDisabler
   - WeaponTaser
 
@@ -469,7 +477,6 @@
   - WeaponRevolverSnubRevolver
   - DetectiveWeapon20h
   - DetectiveWeapon50h
-  - DetectiveWeapon50h2
   - DetectiveWeapon100h
 
 - type: loadoutGroup
@@ -481,9 +488,9 @@
   - GlockBox
   - MK58Box
   - MK58GoldBox
-  - ACP14Box
   - SnubRevolverBox
-  - WeaponDominator
+  - SunriseLaserPistol
+  - CadetWeaponMiniEnergyGun
   - WeaponDisabler
   - WeaponTaser
 
@@ -494,8 +501,9 @@
   maxLimit: 1
   loadouts:
   - WeaponDisabler
-  - WeaponDominatorBrigmed
+  - SunriseWeaponTaserBrigmed
   - WeaponTaserBrigmed
+  - WeaponMiniEnergyGunBrigmed
 
 # Security  HoS
 - type: loadoutGroup
@@ -504,15 +512,8 @@
   minLimit: 1
   maxLimit: 1
   loadouts:
-  - GlockBox
-  - MK58Box
-  - ACP14Box
-  - MK58GoldBox
-  - HeadofSecurityWeapon20h
+  - HeadofSecurityWeapon
   - HeadofSecurityWeapon50h
-  - HeadofSecurityWeapon50h2
-  - HeadofSecurityWeapon100h
-  - HeadofSecurityWeapon100h2
 
 # Medical
 - type: loadoutGroup
@@ -565,7 +566,7 @@
   - SunriseGlovesNitrileRed
   - SunriseGlovesNitrileOrange
   - SunriseGlovesNitrileGreen
-  - NitrileGloves
+  - SunriseNitrileGloves
   - SunriseGlovesNitrileBlue
 
 - type: loadoutGroup
@@ -685,7 +686,7 @@
   - SunriseGlovesNitrileRed
   - SunriseGlovesNitrileOrange
   - SunriseGlovesNitrileGreen
-  - NitrileGloves
+  - SunriseNitrileGloves
   - SunriseGlovesNitrileBlue
 
 - type: loadoutGroup
@@ -748,7 +749,7 @@
   - SunriseGlovesNitrileRed
   - SunriseGlovesNitrileOrange
   - SunriseGlovesNitrileGreen
-  - NitrileGloves
+  - SunriseNitrileGloves
 
 - type: loadoutGroup
   id: SunriseChemistShoes
@@ -817,7 +818,7 @@
   loadouts:
   - LatexGloves
   - SunriseWhiteGloves
-  - NitrileGloves
+  - SunriseNitrileGloves
 
 - type: loadoutGroup
   id: SunrisePsychologistShoes
@@ -882,7 +883,7 @@
   - SunriseBlueGloves
   - SunriseGlovesNitrileRed
   - SunriseGlovesNitrileGreen
-  - NitrileGloves
+  - SunriseNitrileGloves
   - SunriseGlovesNitrileBlue
 
 - type: loadoutGroup
@@ -973,7 +974,7 @@
   - SunriseGlovesNitrileBlack
   - SunriseGlovesNitrileRed
   - SunriseGlovesNitrileGreen
-  - NitrileGloves
+  - SunriseNitrileGloves
 
 - type: loadoutGroup
   id: MedicalTrinkets
@@ -998,7 +999,7 @@
   name: loadout-group-jobtrinkets
   minLimit: 0
   loadouts:
-  - LizardPlushiePassenger
+  - SunriseLizardPlushiePassengerLoadout
   - SunriseRubberStampPassenger
   - SunriseToyFigurinePassenger
 

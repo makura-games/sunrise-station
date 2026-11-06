@@ -1,6 +1,6 @@
 - type: entity
   id: PartMilira
-  parent: [BaseItem, BasePart]
+  parent: OrganBase
   name: "milira body part"
   abstract: true
   components:
@@ -11,11 +11,14 @@
         Quantity: 3
       - ReagentId: Blood
         Quantity: 10
+  - type: VisualOrganMarkings
+    markingData:
+      group: Milira
 
 - type: entity
   id: TorsoMilira
   name: "milira torso"
-  parent: [PartMilira, BaseTorso]
+  parent: [PartMilira, OrganBaseTorso]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Milira/parts.rsi
@@ -31,11 +34,16 @@
 - type: entity
   id: HeadMilira
   name: "milira head"
-  parent: [PartMilira, BaseHead]
+  parent: [PartMilira, OrganBaseHead]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Milira/parts.rsi
     state: "head_m"
+  - type: VisualOrganMarkings
+    hideableLayers:
+    - enum.HumanoidVisualLayers.Hair
+    - enum.HumanoidVisualLayers.FacialHair
+    - enum.HumanoidVisualLayers.HeadTop
   - type: Extractable
     juiceSolution:
       reagents:
@@ -47,7 +55,7 @@
 - type: entity
   id: LeftArmMilira
   name: "left milira arm"
-  parent: [PartMilira, BaseLeftArm]
+  parent: [PartMilira, OrganBaseArmLeft]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Milira/parts.rsi
@@ -56,7 +64,7 @@
 - type: entity
   id: RightArmMilira
   name: "right milira arm"
-  parent: [PartMilira, BaseRightArm]
+  parent: [PartMilira, OrganBaseArmRight]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Milira/parts.rsi
@@ -65,7 +73,7 @@
 - type: entity
   id: LeftHandMilira
   name: "left milira hand"
-  parent: [PartMilira, BaseLeftHand]
+  parent: [PartMilira, OrganBaseHandLeft]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Milira/parts.rsi
@@ -74,7 +82,7 @@
 - type: entity
   id: RightHandMilira
   name: "right milira hand"
-  parent: [PartMilira, BaseRightHand]
+  parent: [PartMilira, OrganBaseHandRight]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Milira/parts.rsi
@@ -83,7 +91,7 @@
 - type: entity
   id: LeftLegMilira
   name: "left milira leg"
-  parent: [PartMilira, BaseLeftLeg]
+  parent: [PartMilira, OrganBaseLegLeft]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Milira/parts.rsi
@@ -92,7 +100,7 @@
 - type: entity
   id: RightLegMilira
   name: "right milira leg"
-  parent: [PartMilira, BaseRightLeg]
+  parent: [PartMilira, OrganBaseLegRight]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Milira/parts.rsi
@@ -101,7 +109,7 @@
 - type: entity
   id: LeftFootMilira
   name: "left milira foot"
-  parent: [PartMilira, BaseLeftFoot]
+  parent: [PartMilira, OrganBaseFootLeft]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Milira/parts.rsi
@@ -110,7 +118,7 @@
 - type: entity
   id: RightFootMilira
   name: "right milira foot"
-  parent: [PartMilira, BaseRightFoot]
+  parent: [PartMilira, OrganBaseFootRight]
   components:
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Milira/parts.rsi

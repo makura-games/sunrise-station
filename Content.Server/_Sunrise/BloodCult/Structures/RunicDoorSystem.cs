@@ -1,4 +1,4 @@
-﻿using Content.Server.Doors.Systems;
+using Content.Server.Doors.Systems;
 using Content.Shared._Sunrise.BloodCult.Components;
 using Content.Shared._Sunrise.BloodCult.Structures;
 using Content.Shared.Damage;
@@ -9,13 +9,13 @@ using Content.Shared.Throwing;
 
 namespace Content.Server._Sunrise.BloodCult.Structures;
 
-public sealed class RunicDoorSystem : EntitySystem
+public sealed partial class RunicDoorSystem : EntitySystem
 {
-    [Dependency] private readonly DoorSystem _doorSystem = default!;
-    [Dependency] private readonly SharedStunSystem _stunSystem = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private DoorSystem _doorSystem = default!;
+    [Dependency] private SharedStunSystem _stunSystem = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private DamageableSystem _damage = default!;
 
     public override void Initialize()
     {

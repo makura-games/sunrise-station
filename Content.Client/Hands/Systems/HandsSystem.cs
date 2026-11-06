@@ -17,6 +17,7 @@ using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
+using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -25,16 +26,15 @@ using Robust.Shared.Utility;
 namespace Content.Client.Hands.Systems
 {
     [UsedImplicitly]
-    public sealed class HandsSystem : SharedHandsSystem
+    public sealed partial class HandsSystem : SharedHandsSystem
     {
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly IUserInterfaceManager _ui = default!;
-        [Dependency] private readonly IPrototypeManager _prototype = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
+        [Dependency] private IUserInterfaceManager _ui = default!;
 
-        [Dependency] private readonly StrippableSystem _stripSys = default!;
-        [Dependency] private readonly SpriteSystem _sprite = default!;
-        [Dependency] private readonly ExamineSystem _examine = default!;
-        [Dependency] private readonly DisplacementMapSystem _displacement = default!;
+        [Dependency] private StrippableSystem _stripSys = default!;
+        [Dependency] private SpriteSystem _sprite = default!;
+        [Dependency] private ExamineSystem _examine = default!;
+        [Dependency] private DisplacementMapSystem _displacement = default!;
 
         public event Action<string?>? OnPlayerSetActiveHand;
         public event Action<Entity<HandsComponent>>? OnPlayerHandsAdded;
@@ -61,6 +61,13 @@ namespace Content.Client.Hands.Systems
         #region StateHandling
         private void HandleComponentState(Entity<HandsComponent> ent, ref ComponentHandleState args)
         {
+            // No need to update everything if we are only switching hands.
+            if (args.Current is HandsComponentActiveHandDeltaState activeHandState)
+            {
+                SetActiveHand(ent.AsNullable(), activeHandState.ActiveHandId);
+                return;
+            }
+
             if (args.Current is not HandsComponentState state)
                 return;
 
@@ -76,10 +83,18 @@ namespace Content.Client.Hands.Systems
             {
                 AddHand(ent.AsNullable(), handId, state.Hands[handId]);
             }
-            ent.Comp.SortedHands = new (state.SortedHands);
+            ent.Comp.SortedHands = new(state.SortedHands);
 
             SetActiveHand(ent.AsNullable(), state.ActiveHandId);
 
+            ent.Comp.ShowInHands = state.ShowInHands;
+            ent.Comp.HandDisplacement = state.HandDisplacement;
+            ent.Comp.LeftHandDisplacement = state.LeftHandDisplacement;
+            ent.Comp.RightHandDisplacement = state.RightHandDisplacement;
+            ent.Comp.CanBeStripped = state.CanBeStripped;
+
+            // TODO: Ideally this would only update if the displacement data actually changed, but there is no way to compare it since the type is not equatable.
+            UpdateAllHandVisuals((ent.Owner, ent.Comp));
             _stripSys.UpdateUi(ent);
         }
         #endregion
@@ -97,9 +112,11 @@ namespace Content.Client.Hands.Systems
         public override void DoDrop(Entity<HandsComponent?> ent,
             string handId,
             bool doDropInteraction = true,
-            bool log = true)
+            bool log = true,
+            EntityCoordinates? targetDropLocation = null
+        )
         {
-            base.DoDrop(ent, handId, doDropInteraction, log);
+            base.DoDrop(ent, handId, doDropInteraction, log, targetDropLocation);
 
             if (TryGetHeldItem(ent, handId, out var held) && TryComp(held, out SpriteComponent? sprite))
                 sprite.RenderOrder = EntityManager.CurrentTick.Value;
@@ -246,6 +263,20 @@ namespace Content.Client.Hands.Systems
         }
 
         /// <summary>
+        /// Update the players sprite with new in-hand visuals for all held items.
+        /// </summary>
+        private void UpdateAllHandVisuals(Entity<HandsComponent?> ent)
+        {
+            foreach (var handId in EnumerateHands(ent))
+            {
+                if (!TryGetHeldItem(ent, handId, out var held))
+                    continue;
+
+                UpdateHandVisuals(ent, held.Value, handId);
+            }
+        }
+
+        /// <summary>
         ///     Update the players sprite with new in-hand visuals.
         /// </summary>
         private void UpdateHandVisuals(Entity<HandsComponent?, SpriteComponent?> ent, EntityUid held, string handId)
@@ -323,58 +354,14 @@ namespace Content.Client.Hands.Systems
                 _sprite.LayerSetData((ent, sprite), index, layerData);
 
                 // Add displacement maps
-                var displacement = hand.Value.Location switch
-                {
-                    HandLocation.Left => handComp.LeftHandDisplacement,
-                    HandLocation.Right => handComp.RightHandDisplacement,
-                    _ => handComp.HandDisplacement
-                };
+                // Sunrise-Edit - учитываем displacement-карты выбранного типа тела.
+                var displacement = GetSunriseHandDisplacement(ent.Owner, hand.Value.Location, handComp);
 
                 if (displacement is not null && _displacement.TryAddDisplacement(displacement, (ent, sprite), index, key, out var displacementKey))
                     revealedLayers.Add(displacementKey);
             }
 
             RaiseLocalEvent(held, new HeldVisualsUpdatedEvent(ent, revealedLayers), true);
-        }
-
-        /// <summary>
-        ///     Get the appropriate displacement map for a hand, considering body type and hand location.
-        /// </summary>
-        private DisplacementData? GetHandDisplacement(EntityUid uid, HandLocation handLocation, HandsComponent handComp)
-        {
-            string? bodyTypeName = null;
-            if (TryComp(uid, out HumanoidAppearanceComponent? humanoid))
-            {
-                bodyTypeName = _prototype.Index(humanoid.BodyType).Name;
-            }
-
-            // First try to get body type specific displacement maps
-            if (bodyTypeName != null)
-            {
-                switch (handLocation)
-                {
-                    case HandLocation.Left:
-                        if (handComp.LeftHandBodyTypeDisplacements.TryGetValue(bodyTypeName, out var leftBodyTypeDisplacement))
-                            return leftBodyTypeDisplacement;
-                        break;
-                    case HandLocation.Right:
-                        if (handComp.RightHandBodyTypeDisplacements.TryGetValue(bodyTypeName, out var rightBodyTypeDisplacement))
-                            return rightBodyTypeDisplacement;
-                        break;
-                }
-
-                // Try generic body type displacement
-                if (handComp.BodyTypeDisplacements.TryGetValue(bodyTypeName, out var bodyTypeDisplacement))
-                    return bodyTypeDisplacement;
-            }
-
-            // Fall back to the original logic
-            return handLocation switch
-            {
-                HandLocation.Left => handComp.LeftHandDisplacement,
-                HandLocation.Right => handComp.RightHandDisplacement,
-                _ => handComp.HandDisplacement
-            };
         }
 
         private void OnVisualsChanged(EntityUid uid, HandsComponent component, VisualsChangedEvent args)

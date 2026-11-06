@@ -12,7 +12,6 @@ namespace Content.Server._Sunrise.Boss.Systems;
 /// </summary>
 public sealed class HellSpawnTentacleSystem : SharedHellSpawnTentacleSystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

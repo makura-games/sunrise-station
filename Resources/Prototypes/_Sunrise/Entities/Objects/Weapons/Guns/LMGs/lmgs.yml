@@ -136,7 +136,6 @@
         priority: 2
         whitelist:
           tags:
-          - MagazineRPD
           - LightRifleHeavy
       gun_chamber:
         name: Chamber
@@ -191,9 +190,9 @@
   - type: Gun
     minAngle: 6
     maxAngle: 90
-    angleIncrease: 2
+    angleIncrease: 4
     angleDecay: 60
-    fireRate: 12
+    fireRate: 11
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/LMGs/shot.ogg
       params:
@@ -242,163 +241,10 @@
   - type: HeldSpeedModifier
 
 - type: entity
-  name: DL6902 machine gun
-  id: WeaponDL6902
-  parent: BaseWeaponLightMachineGun
-  description: Cybersun heavy machine gun.
-  components:
-  - type: Item
-    size: Huge
-    shape:
-    - 0,0,6,3
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/LMGs/dl6902.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-3
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: GunWieldBonus
-    minAngle: 0
-    maxAngle: 0
-  - type: Gun
-    minAngle: 12
-    maxAngle: 90
-    angleIncrease: 1.75
-    angleDecay: 35
-    fireRate: 8
-    selectedMode: FullAuto
-    availableModes:
-      - FullAuto
-    soundGunshot:
-      collection: m249
-      params:
-        volume: 10
-    soundEmpty:
-      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
-  - type: MagazineVisuals
-    magState: mag
-    steps: 4
-    zeroVisible: true
-  - type: Appearance
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineDl6902
-        insertSound: /Audio/Weapons/Guns/MagIn/hpistol_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazineDl6902
-            - MagazineRPD
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgeLightRifleSP
-        priority: 1
-        whitelist:
-          tags:
-            - CartridgeLightRifle
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.85
-    sprintModifier: 0.85
-  - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
-  - type: HeldSpeedModifier
-  - type: GunRequiresWield
-  - type: StaticPrice
-    price: 10000
-
-- type: entity
-  name: pirate cannon
-  parent: BaseWeaponLightMachineGun
-  id: WeaponLightMachineGunPirateCannon
-  description: Kaboom!
-  components:
-    - type: Sprite
-      sprite: _Sunrise/Objects/Weapons/Guns/LMGs/piratecannon.rsi
-      layers:
-      - state: base
-        map: ["enum.GunVisualLayers.Base"]
-      - state: mag-3
-        map: ["enum.GunVisualLayers.Mag"]
-        type: ContainerContainer
-    - type: Clothing
-      sprite: _Sunrise/Objects/Weapons/Guns/LMGs/piratecannon.rsi
-    - type: Item
-      size: Huge
-      shape:
-      - 0,0,4,3
-      sprite: _Sunrise/Objects/Weapons/Guns/LMGs/piratecannon_inhands_64x.rsi
-      storedSprite:
-        state: storage
-        sprite: _Sunrise/Objects/Weapons/Guns/LMGs/piratecannon_storage_64x.rsi
-    - type: Gun
-      fireRate: 6.5
-      soundGunshot:
-        path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
-        params:
-          volume: -1
-          pitch: 1.2
-      projectileSpeed: 20
-      bigTrigger: true
-      selectedMode: FullAuto
-      availableModes:
-        - FullAuto
-    - type: GunRequiresWield
-    - type: ChamberMagazineAmmoProvider
-      soundRack:
-        path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
-        params:
-          volume: -10
-          pitch: 0.8
-      soundAutoEject:
-        path: /Audio/Weapons/Guns/MagOut/lmg_magout.ogg
-      autoEject: true
-    - type: ItemSlots
-      slots:
-        gun_magazine:
-          name: Magazine
-          startingItem: MagazineCannonBallMini
-          insertSound: /Audio/_Sunrise/Weapons/Guns/LMGs/reload.ogg
-          ejectSound: /Audio/_Sunrise/Weapons/Guns/LMGs/unload.ogg
-          priority: 2
-          whitelist:
-            tags:
-            - MagazineCannonBallMini
-        gun_chamber:
-          name: Chamber
-          startingItem: CannonBallMini
-          priority: 1
-          whitelist:
-            tags:
-            - CannonBallMini
-    - type: SpeedModifiedOnWield
-      walkModifier: 0.75
-      sprintModifier: 0.75
-    - type: Appearance
-    - type: MagazineVisuals
-      magState: mag
-      steps: 6
-      zeroVisible: true
-    - type: StaticPrice
-      price: 4000
-    - type: KnockbackByUserTag
-      doestContain:
-        Resomi:
-          knockback: 2
-          staminaMultiplier: 15
-        Felinid:
-          knockback: 1 #half of what resomi take
-          staminaMultiplier: 15
-
-- type: entity
-  name: L6 SAW
+  name: L6 MAX
   id: WeaponLightMachineGunL6Max
   parent: WeaponLightMachineGunL6
-  description: Developed by Waffle Corp, the L6 Squad Automatic Weapon is a deadly light machine gun often used by the Gorlex Marauders. Although bulky and cumbersome, its heavy barrel and high ammo capacity make it perfect for suppressing combatants with a hail of bullets. Feeds from .30 ammo belts.
+  description: Developed by Waffle Corporation, the L6 MAX is a heavily reinforced modification of the L6 machine gun that has gained popularity among the elite of the Gorlex Marauders. Its reinforced barrel and powerful .308 caliber allow it not only to suppress enemies with a hail of fire, but also to tear their cover to splinters. Feeds from .308 ammunition belts.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/LMGs/l6.rsi
@@ -426,9 +272,28 @@
       path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
     soundBoltOpened:
       path: /Audio/Weapons/Guns/Cock/shotgun_open.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RifleHeavyMagazineSP
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineMachineGunMG42
+          - MagazineMachineGunHeavyRifle
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeRifleHeavySP
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeHeavyRifle
   - type: SpeedModifiedOnWield
-    walkModifier: 0.90
-    sprintModifier: 0.90
+    walkModifier: 0.85
+    sprintModifier: 0.85
   - type: GunRequiresWield
   - type: ClothingSpeedModifier
     walkModifier: 1
@@ -440,9 +305,9 @@
   - type: Gun
     minAngle: 24
     maxAngle: 35
-    angleIncrease: 2
+    angleIncrease: 4
     angleDecay: 18
-    fireRate: 8
+    fireRate: 6
     soundGunshot:
       collection: m249 # Sunrise-Edit
       params:
@@ -450,278 +315,13 @@
         pitch: 1.1
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 4
-    pvsIncrease: 0.4
-
-- type: entity
-  id: WeaponMachineGunLCG
-  name: light chain gun
-  parent: BaseWeaponLightMachineGun
-  description: Light machine gun with a high rate of fire and low recoil. Effective for firing on the move and suppressing advancing squads. The high rate of fire and heat reduce accuracy, and prolonged firing increases the chance of jamming.
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/LMGs/light_chaingun/big.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/LMGs/light_chaingun/tiny.rsi
-  - type: Item
-    size: Ginormous
-    sprite: _Sunrise/Objects/Weapons/Guns/LMGs/light_chaingun/tiny.rsi
-  - type: GunWieldBonus
-    minAngle: 0
-    maxAngle: 0
-  - type: Gun
-    minAngle: 1
-    maxAngle: 45
-    angleIncrease: 1
-    angleDecay: 25
-    fireRate: 15
-    soundGunshot:
-      collection: L6
-      params:
-        volume: -6
-        pitch: 1.03
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineChainGunImprovised
-        insertSound: /Audio/_Sunrise/Weapons/Guns/LMGs/reload.ogg
-        ejectSound: /Audio/_Sunrise/Weapons/Guns/LMGs/unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineChainGun
-      gun_chamber:
-        name: Chamber
-        startingItem: null
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgeHeavyRifle
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-  - type: MagazineVisuals
-    magState: mag
-    steps: 6
-    zeroVisible: true
-  - type: Appearance
-  - type: Wieldable
-  - type: UseDelay
-    delay: 0.75
-  - type: GunRequiresWield
-  - type: ChamberMagazineAmmoProvider
-    boltClosed: null
-    soundRack:
-      path: /Audio/_Sunrise/Weapons/Guns/LMGs/cocked.ogg
-  - type: SpeedModifiedOnWield
-    walkModifier: 1
-    sprintModifier: 0.95
-  - type: HeldSpeedModifier
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 3
-    pvsIncrease: 0.3
-  - type: WeaponDismantleOnShoot
-    dismantleChance: 0.002 # 50% chance per 300 shots
-    dismantleDistance: 1
-    items:
-      - id: WeaponMachineGunLCGEmpty
-        launchAngle: 0
-        prob: 1
-      - id: MagazineChainGunRandomSpawner
-        launchAngle: 90
-        prob: 1
-      - id: MagazineChainGunLooseAmmoSpawner
-        launchAngle: -90
-        prob: 1
-
-- type: entity
-  id: WeaponMachineGunLCGEmpty
-  name: light chain gun
-  parent: WeaponMachineGunLCG
-  suffix: Empty
-  categories: [HideSpawnMenu]
-  components:
-    - type: ItemSlots
-      slots:
-        gun_magazine:
-          name: Magazine
-          startingItem: null
-          insertSound: /Audio/_Sunrise/Weapons/Guns/LMGs/reload.ogg
-          ejectSound: /Audio/_Sunrise/Weapons/Guns/LMGs/unload.ogg
-          priority: 2
-          whitelist:
-            tags:
-            - MagazineChainGun
-        gun_chamber:
-          name: Chamber
-          startingItem: null
-          priority: 1
-          whitelist:
-            tags:
-            - CartridgeHeavyRifle
-
-# region Magazines
-- type: entity
-  id: MagazineCannonBallMini
-  name: cannonball suitcase
-  description: A suitcase for neatly storing cannonballs for the pirate’s belt-fed cannon.
-  parent: BaseItem
-  components:
-  - type: Tag
-    tags:
-    - MagazineCannonBallMini
-  - type: BallisticAmmoProvider
-    mayTransfer: false
-    proto: CannonBallMini
-    whitelist:
-      tags:
-      - CannonBallMini
-    capacity: 50
-  - type: Item
-    size: Normal
-    shape:
-    - 0,0,2,1
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/cannonball_belt.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-5
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag
-    steps: 6
-    zeroVisible: false
-  - type: Appearance
-
-- type: entity
-  id: MagazineCannonBallGrapeshotMini
-  name: grapeshot suitcase
-  parent: MagazineCannonBallMini
-  suffix: Admeme
-  components:
-  - type: BallisticAmmoProvider
-    mayTransfer: false
-    proto: CannonBallGrapeshotMini
-    whitelist:
-      tags:
-      - CannonBallMini
-    capacity: 50
-
-- type: entity
-  id: MagazineChainGun
-  name: chaingun ammo drum
-  description: Heavy ammo drum for belt-fed chaingun.
-  parent: BaseItem
-  components:
-  - type: Tag
-    tags:
-    - MagazineChainGun
-  - type: BallisticAmmoProvider
-    mayTransfer: false
-    proto: CartridgeMinigun
-    whitelist:
-      tags:
-      - CartridgeMinigun
-      - CartridgeRifleImprovised
-    capacity: 300
-  - type: Item
-    size: Normal
-    shape:
-    - 0,0,1,1
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/chaingundrum.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-5
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag
-    steps: 6
-    zeroVisible: false
-  - type: Appearance
-
-- type: entity
-  id: MagazineChainGun250
-  name: chaingun ammo drum
-  parent: MagazineChainGun
-  suffix: 250
-  components:
-  - type: BallisticAmmoProvider
-    capacity: 250
-
-- type: entity
-  id: MagazineChainGun200
-  name: chaingun ammo drum
-  parent: MagazineChainGun
-  suffix: 200
-  components:
-  - type: BallisticAmmoProvider
-    capacity: 200
-
-- type: entity
-  id: MagazineChainGun100
-  name: chaingun ammo drum
-  parent: MagazineChainGun
-  suffix: 100
-  components:
-  - type: BallisticAmmoProvider
-    capacity: 100
-
-- type: entity
-  id: MagazineChainGunImprovised
-  name: chaingun ammo drum (5.56mm improvised)
-  parent: MagazineChainGun
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeRifleImprovised
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-      color: "#9e9292"
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-
-- type: entity
-  id: MagazineChainGunRandomSpawner
-  name: random chaingun ammo drum
-  categories: [HideSpawnMenu]
-  components:
-  - type: EntityTableSpawner
-    table: !type:GroupSelector
-      children:
-      - id: MagazineChainGun
-        weight: 1
-      - id: MagazineChainGun250
-        weight: 2
-      - id: MagazineChainGun200
-        weight: 3
-      - id: MagazineChainGun100
-        weight: 4
-
-- type: entity
-  id: MagazineChainGunLooseAmmoSpawner
-  name: random chaingun loose ammo
-  categories: [HideSpawnMenu]
-  components:
-  - type: EntityTableSpawner
-    table: !type:EntSelector
-      id: CartridgeMinigun
-      amount: !type:RangeNumberSelector
-        range: 3, 10
+    maxOffset: 2
+    pvsIncrease: 0.2
+  - type: KnockbackByUserTag
+    doestContain:
+      Resomi:
+        knockback: 2
+        staminaMultiplier: 15
+      Felinid:
+        knockback: 1 #half of what resomi take
+        staminaMultiplier: 15

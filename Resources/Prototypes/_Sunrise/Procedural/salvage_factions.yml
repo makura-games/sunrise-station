@@ -262,9 +262,6 @@
     - proto: MobPirateT1Spawner
       cost: 5
       prob: 0.1
-    - proto: MobPirateT1ExpeditionSpawner
-      cost: 5
-      prob: 0.1
     # range
     - proto: MobPirateT1ScrapSMG
       cost: 5
@@ -639,9 +636,6 @@
     - proto: MobRogueSiliconT2DerelictBorgAssault
       cost: 4
       prob: 0.06
-    - proto: MobRogueSiliconT3Terminator
-      cost: 4
-      prob: 0.05
     - proto: MobRogueSiliconT3Tesla
       cost: 8
       prob: 0.005

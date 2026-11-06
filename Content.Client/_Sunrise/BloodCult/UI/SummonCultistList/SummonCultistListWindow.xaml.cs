@@ -7,7 +7,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._Sunrise.BloodCult.UI.SummonCultistList;
 
 [GenerateTypedNameReferences]
-public partial class SummonCultistListWindow : DefaultWindow
+public sealed partial class SummonCultistListWindow : DefaultWindow
 {
     public Action<int, int>? ItemSelected;
 

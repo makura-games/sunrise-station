@@ -16,11 +16,10 @@
     action: NVDToggleAction
     mustEquip: true
     disableOnUnequip: true
-  - type: ComponentToggler
-    parent: true
-    components:
-      - type: NightVision
-        effect: EffectNightVisionGreen
+  - type: NightVision
+    enabled: false
+    relayOverlay: true
+    lightingColor: '#12AC2726'
 
 - type: entity
   name: NVD
@@ -123,11 +122,10 @@
     drawRate: 2
     useCharge: 10
   - type: ShowSyndicateIcons
-  - type: ComponentToggler
-    parent: true
-    components:
-      - type: NightVision
-        effect: EffectNightVisionSyndie
+  - type: NightVision
+    enabled: false
+    relayOverlay: true
+    lightingColor: '#D61B1B26'
 
 - type: entity
   parent: ClothingEyesNVD
@@ -161,11 +159,10 @@
   - type: VisionDarkener
     strength: 0.2
   - type: IdentityBlocker
-  - type: ComponentToggler
-    parent: true
-    components:
-      - type: NightVision
-        effect: EffectNightVisionHandcraft
+  - type: NightVision
+    enabled: false
+    relayOverlay: true
+    lightingColor: '#E9E50E26'
   - type: Tag
     tags:
     - NVDHandcrafted

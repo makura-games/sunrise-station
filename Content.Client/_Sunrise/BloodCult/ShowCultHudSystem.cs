@@ -1,14 +1,13 @@
-﻿using Content.Shared._Sunrise.BloodCult.Components;
+using Content.Shared._Sunrise.BloodCult.Components;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._Sunrise.BloodCult;
 
-public sealed class ShowCultHudSystem : EntitySystem
+public sealed partial class ShowCultHudSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public override void Initialize()
     {
@@ -25,7 +24,7 @@ public sealed class ShowCultHudSystem : EntitySystem
         if (!HasComp<BloodCultistComponent>(ent))
             return;
 
-        if (_prototype.TryIndex(bloodCultistComponent.StatusIcon, out var iconPrototype))
+        if (ProtoMan.TryIndex(bloodCultistComponent.StatusIcon, out var iconPrototype))
             args.StatusIcons.Add(iconPrototype);
     }
 }

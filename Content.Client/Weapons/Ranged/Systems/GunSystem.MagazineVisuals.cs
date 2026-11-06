@@ -28,6 +28,8 @@ public sealed partial class GunSystem
             _sprite.LayerSetRsiState((ent, sprite), GunVisualLayers.MagUnshaded, $"{ent.Comp.MagState}-unshaded-{ent.Comp.MagSteps - 1}");
             _sprite.LayerSetVisible((ent, sprite), GunVisualLayers.MagUnshaded, false);
         }
+
+        SetMagazineTipVisuals(ent, sprite, ent.Comp.MagSteps - 1, false); // Sunrise-Edit - синхронизация наконечников патронов
     }
 
     private void OnMagazineVisualsChange(Entity<MagazineVisualsComponent> ent, ref AppearanceChangeEvent args)
@@ -67,6 +69,8 @@ public sealed partial class GunSystem
                     _sprite.LayerSetVisible((ent, sprite), GunVisualLayers.MagUnshaded, false);
                 }
 
+                SetMagazineTipVisuals(ent, sprite, step, false); // Sunrise-Edit - скрытие наконечников пустого спидлоудера
+
                 return;
             }
 
@@ -81,6 +85,8 @@ public sealed partial class GunSystem
                 _sprite.LayerSetVisible((ent, sprite), GunVisualLayers.MagUnshaded, true);
                 _sprite.LayerSetRsiState((ent, sprite), GunVisualLayers.MagUnshaded, $"{ent.Comp.MagState}-unshaded-{step}");
             }
+
+            SetMagazineTipVisuals(ent, sprite, step, true); // Sunrise-Edit - обновление наконечников по числу патронов
         }
         else
         {
@@ -93,6 +99,8 @@ public sealed partial class GunSystem
             {
                 _sprite.LayerSetVisible((ent, sprite), GunVisualLayers.MagUnshaded, false);
             }
+
+            SetMagazineTipVisuals(ent, sprite, 0, false); // Sunrise-Edit - скрытие наконечников без магазина
         }
     }
 }

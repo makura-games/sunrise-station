@@ -199,26 +199,18 @@ public sealed partial class NetTexturesManager
         while (_preparedUploads.Count > 0)
         {
             var upload = _preparedUploads.Dequeue();
-            upload.Dispose();
+            upload.EnqueueDisposals(_deferredDisposals);
         }
 
         foreach (var assembly in _fallbackChunkAssemblies.Values)
         {
-            assembly.Dispose();
+            _deferredDisposals.Enqueue(assembly);
         }
 
         _fallbackChunkAssemblies.Clear();
 
-        foreach (var (_, texture) in _loadedTextures)
-        {
-            texture.Dispose();
-        }
-
-        foreach (var (_, rsi) in _loadedRsis)
-        {
-            rsi.Dispose();
-        }
-
+        // Опубликованные текстуры могут всё ещё использоваться UI или параллаксом.
+        // Их освободит финализатор после исчезновения последней внешней ссылки.
         _loadedTextures.Clear();
         _loadedRsis.Clear();
     }
@@ -316,7 +308,7 @@ public sealed partial class NetTexturesManager
             if (request.Generation == currentGeneration)
                 _preparedUploads.Enqueue(upload);
             else
-                upload.Dispose();
+                upload.EnqueueDisposals(_deferredDisposals);
         }
         else if (error != null && request.Generation == currentGeneration)
         {

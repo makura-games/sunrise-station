@@ -1,4 +1,4 @@
-ent-ActionBlink = Прыжок
+ent-ActionBlink = прыжок
     .desc = Телепортирует в выбранное место.
-ent-ActionVoidApplause = Хлопок Пустоты
+ent-ActionVoidApplause = хлопок Пустоты
     .desc = Хлопните в ладоши и поменяйтесь местами с целью.

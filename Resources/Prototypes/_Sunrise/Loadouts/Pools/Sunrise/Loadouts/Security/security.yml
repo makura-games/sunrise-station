@@ -137,19 +137,6 @@
     - MK58Box
 
 - type: loadout
-  id: ACP14Box
-  startingGear: ACP14Box
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: MasterSecurity
-
-- type: startingGear
-  id: ACP14Box
-  storage:
-    back:
-    - ACP14Box
-
-- type: loadout
   id: SnubRevolverBox
   startingGear: SnubRevolverBox
 
@@ -173,14 +160,14 @@
     - MK58GoldBox
 
 - type: loadout
-  id: WeaponDominator
-  startingGear: WeaponDominator
+  id: SunriseLaserPistol
+  startingGear: SunriseLaserPistol
 
 - type: startingGear
-  id: WeaponDominator
+  id: SunriseLaserPistol
   storage:
     back:
-    - WeaponDominator
+    - WeaponSunriseLaserPistol
 
 
 - type: startingGear
@@ -233,11 +220,21 @@
 
 ###
 - type: loadout
+  id: SunriseWeaponTaserBrigmed
+  startingGear: SunriseWeaponTaserBrigmed
+
+- type: startingGear
+  id: SunriseWeaponTaserBrigmed
+  storage:
+    back:
+    - WeaponTaser
+
+- type: loadout
   id: WeaponTaserBrigmed
   startingGear: WeaponTaserBrigmed
   effects:
   - !type:GroupLoadoutEffect
-    proto: MasterSecurity #MasterSecurityCam
+    proto: MasterSecurity
 
 - type: startingGear
   id: WeaponTaserBrigmed
@@ -246,14 +243,14 @@
     - WeaponAdvancedTaser
 
 - type: loadout
-  id: WeaponDominatorBrigmed
-  startingGear: WeaponDominatorBrigmed
+  id: WeaponMiniEnergyGunBrigmed
+  startingGear: WeaponMiniEnergyGunBrigmed
   effects:
   - !type:GroupLoadoutEffect
-    proto: MasterSecurityCam
+    proto: MasterSecurity
 
 - type: startingGear
-  id: WeaponDominatorBrigmed
+  id: WeaponMiniEnergyGunBrigmed
   storage:
     back:
-    - WeaponDominator
+    - WeaponMiniEnergyGun

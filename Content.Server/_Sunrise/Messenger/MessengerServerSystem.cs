@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared.Radio;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Shared.DeviceNetwork.Events;
+using DeviceNetworkPacketEvent = Content.Shared.DeviceNetwork.Events.DeviceNetworkPacketEvent<Content.Shared._Sunrise.DeviceNetwork.SunriseNetworkPayload>;
 using Content.Server.Station.Systems;
 using Content.Shared.GameTicking;
 using Content.Shared.DeviceNetwork;
@@ -9,7 +10,7 @@ using Content.Shared.DeviceNetwork.Components;
 using Content.Shared._Sunrise.Messenger;
 using Content.Shared.Inventory;
 using Robust.Shared.Prototypes;
-using Content.Server.CartridgeLoader;
+using Content.Shared.CartridgeLoader;
 using Content.Server.DeviceNetwork.Components;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Robust.Shared.Random;
@@ -23,17 +24,16 @@ namespace Content.Server._Sunrise.Messenger;
 /// </summary>
 public sealed partial class MessengerServerSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetwork = default!;
-    [Dependency] private readonly SingletonDeviceNetServerSystem _singletonServer = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoader = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetwork = default!;
+    [Dependency] private SingletonDeviceNetServerSystem _singletonServer = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private ISawmill Sawmill { get; set; } = default!;
     private bool _photoUploadEnabled = true;
@@ -43,7 +43,7 @@ public sealed partial class MessengerServerSystem : EntitySystem
     /// </summary>
     public string? GetGroupIdByRadioChannel(string radioChannelId)
     {
-        foreach (var proto in _prototypeManager.EnumeratePrototypes<MessengerAutoGroupPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<MessengerAutoGroupPrototype>())
         {
             if (proto.RadioChannel == radioChannelId)
                 return proto.GroupId;
@@ -95,9 +95,9 @@ public sealed partial class MessengerServerSystem : EntitySystem
             return;
         }
 
-        if (!_deviceNetwork.IsDeviceConnected(uid, serverDevice))
+        if (!_deviceNetwork.IsDeviceConnected((uid, serverDevice)))
         {
-            if (!_deviceNetwork.ConnectDevice(uid, serverDevice))
+            if (!_deviceNetwork.ConnectDevice((uid, serverDevice)))
             {
                 return;
             }
@@ -115,7 +115,7 @@ public sealed partial class MessengerServerSystem : EntitySystem
     {
     }
 
-    private void OnPacketReceived(EntityUid uid, MessengerServerComponent component, DeviceNetworkPacketEvent args)
+    private void OnPacketReceived(EntityUid uid, MessengerServerComponent component, ref DeviceNetworkPacketEvent args)
     {
         if (!_singletonServer.IsActiveServer(uid))
         {
