@@ -6,10 +6,10 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._Sunrise.Lathe;
 
-public sealed class SunriseLatheProgressSystem : EntitySystem
+public sealed partial class SunriseLatheProgressSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private static readonly ResPath ProgressRsi = new("_Sunrise/Interface/Machines/mechanical_progress_bar.rsi");
     private static readonly RSI.StateId BaseState = new("base");
