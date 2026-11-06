@@ -5,7 +5,6 @@ using Content.Server._Sunrise.Shuttles.Components;
 using Content.Server.Shuttles;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
-using Content.Shared.CCVar;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Robust.Shared.GameObjects;
@@ -162,63 +161,6 @@ public sealed class ArrivalsTest
         await server.WaitAssertion(() =>
         {
             Assert.That(entMan.GetComponent<DockingComponent>(secondDock).Docked, Is.False);
-        });
-
-        await pair.CleanReturnAsync();
-    }
-
-    [Test]
-    [Description("does not spawn an FTL visualizer after the destination map is deleted")]
-    public async Task DeletedTargetDuringFtlSkipsVisualizer()
-    {
-        await using var pair = await PoolManager.GetServerClient();
-        var server = pair.Server;
-        var entMan = server.EntMan;
-        var mapSys = server.System<SharedMapSystem>();
-        var shuttleSys = server.System<ShuttleSystem>();
-
-        var shuttleUid = EntityUid.Invalid;
-        var targetMapId = MapId.Nullspace;
-
-        await server.WaitPost(() =>
-        {
-            server.CfgMan.SetCVar(CCVars.FTLArrivalTime, 5f);
-            mapSys.CreateMap(out var sourceMapId);
-            var targetMap = mapSys.CreateMap(out targetMapId);
-            var shuttle = mapSys.CreateGridEntity(sourceMapId);
-
-            for (var x = -2; x <= 2; x++)
-            {
-                for (var y = -2; y <= 2; y++)
-                {
-                    mapSys.SetTile(shuttle.Owner, shuttle.Comp, new Vector2i(x, y), new Tile(1));
-                }
-            }
-
-            shuttleUid = shuttle.Owner;
-            var shuttleComponent = entMan.GetComponent<ShuttleComponent>(shuttleUid);
-            shuttleSys.FTLToCoordinates(
-                shuttleUid,
-                shuttleComponent,
-                new EntityCoordinates(targetMap, Vector2.Zero),
-                Angle.Zero,
-                startupTime: 0f,
-                hyperspaceTime: 0f);
-        });
-
-        await PoolManager.WaitUntil(server, () =>
-            entMan.TryGetComponent<FTLComponent>(shuttleUid, out var ftl) && ftl.State == FTLState.Travelling);
-
-        await server.WaitPost(() => mapSys.DeleteMap(targetMapId));
-
-        await PoolManager.WaitUntil(server, () =>
-            entMan.TryGetComponent<FTLComponent>(shuttleUid, out var ftl) && ftl.State == FTLState.Arriving);
-
-        await server.WaitAssertion(() =>
-        {
-            var ftl = entMan.GetComponent<FTLComponent>(shuttleUid);
-            Assert.That(ftl.VisualizerEntity, Is.Null);
-            entMan.RemoveComponent<FTLComponent>(shuttleUid);
         });
 
         await pair.CleanReturnAsync();

@@ -445,8 +445,7 @@ public sealed partial class ShuttleSystem
         var xform = _xformQuery.GetComponent(entity.Owner);
         DoSunriseFtlThrow(xform, Direction.North.ToVec()); // Sunrise-Edit - бросаем до смены поворота шаттла при выходе из FTL.
 
-        // Sunrise-Edit - карта назначения может быть удалена, пока шаттл находится в FTL.
-        if (entity.Comp1.VisualizerProto != null && _transform.IsValid(entity.Comp1.TargetCoordinates))
+        if (entity.Comp1.VisualizerProto != null)
         {
             comp.VisualizerEntity = SpawnAttachedTo(entity.Comp1.VisualizerProto, entity.Comp1.TargetCoordinates);
             DebugTools.Assert(Transform(comp.VisualizerEntity.Value).ParentUid == entity.Comp1.TargetCoordinates.EntityId);
