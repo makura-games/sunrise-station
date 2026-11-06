@@ -1,4 +1,5 @@
 using Content.Client.CombatMode;
+using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.CCVar;
 using Content.Shared.CombatMode;
 using Robust.Client.Graphics;
@@ -11,16 +12,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._Sunrise.CombatMode;
 
-public sealed class SunriseCombatModeIndicatorSystem : EntitySystem
+public sealed partial class SunriseCombatModeIndicatorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly CombatModeSystem _combatMode = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IResourceCache _resources = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private CombatModeSystem _combatMode = default!;
+    [Dependency] private IEyeManager _eye = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IResourceCache _resources = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private static readonly SoundSpecifier ToggleSound =
         new SoundPathSpecifier("/Audio/Machines/twobeep.ogg", AudioParams.Default.WithVolume(-4f));
@@ -30,7 +31,7 @@ public sealed class SunriseCombatModeIndicatorSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<CombatModeComponent, CombatModeChangedEvent>(OnCombatModeChanged);
-        Subs.CVar(_cfg, CCVars.CombatModeIndicatorsPointShow, OnShowIndicatorChanged, true);
+        Subs.CVar(_cfg, SunriseCCVars.CombatModeOverheadIndicatorEnabled, OnShowIndicatorChanged, true);
     }
 
     public override void Shutdown()
@@ -43,6 +44,9 @@ public sealed class SunriseCombatModeIndicatorSystem : EntitySystem
     private void OnCombatModeChanged(Entity<CombatModeComponent> ent, ref CombatModeChangedEvent args)
     {
         if (!_timing.IsFirstTimePredicted || ent.Owner != _player.LocalEntity)
+            return;
+
+        if (!_cfg.GetCVar(SunriseCCVars.CombatModeToggleSoundEnabled))
             return;
 
         _audio.PlayLocal(ToggleSound, ent, ent);
