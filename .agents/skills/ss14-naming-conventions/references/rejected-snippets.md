@@ -9,6 +9,8 @@
 | YAML names | Non-English fallback `name/description` | Violates the contract "YAML fallback = english source of truth" | Divergence from English locale |
 | FTL keys | Regular keys are not in `kebab-case` | Reduces uniformity and string search | Incompatible key format |
 | FTL content | OOC instructions in `.desc` without marker `OOC:` | Violating the IC/OOC Boundary | Content ambiguity |
+| FTL content | Lowercasing `uplink-*-name` by the `ent-*` rule | Uplink entries are UI card titles and follow vanilla title casing | Entity/store context confusion |
+| FTL content | Requiring visual-only text in `uplink-*-desc` | Vanilla uplink descriptions intentionally explain mechanics and contents | Entity/store context confusion |
 | FTL content | Entity names longer than 3 words and descriptions over limit | Reduces readability and UI density | Impractical text size |
 | Files | `snake_case` 3+ word YAML/FTL names for no good reason | Blurs the structure and makes navigation difficult | Overcomplicated names |
 | Examples quality | Fragments from TODO/HACK/FIXME on the topic | Risk of consolidating a controversial or temporary style | Explicit markers of technical debt |
