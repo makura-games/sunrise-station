@@ -494,11 +494,9 @@ public sealed partial class ShuttleSystem
                 .OrderBy(o => o.Item1.MapId.GetHashCode());
 
             // Get the first map that passes the FTL whitelist
-            // Sunrise edit start - если подходящей карты нет, шаттл остаётся в гиперпространстве
-            mapId = maps.FirstOrDefault(o =>
+            mapId = maps.First(o =>
                 _whitelistSystem.IsWhitelistPassOrNull(o.Item2.Whitelist, entity))
-                .Item1?.MapId ?? xform.MapID;
-            // Sunrise edit end
+                .Item1.MapId;
 
             TryFTLProximity(uid, _mapSystem.GetMap(mapId));
         }
