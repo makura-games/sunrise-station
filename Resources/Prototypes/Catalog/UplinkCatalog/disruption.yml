@@ -1,5 +1,3 @@
-# Disruption
-
 - type: listing
   id: UplinkSingularityGrenade
   name: uplink-singularity-grenade-name
@@ -12,6 +10,9 @@
     Telecrystal: 2
   categories:
     - UplinkDisruption
+
+
+# Disruption
 
 - type: listing
   id: UplinkAccessBreaker
@@ -26,6 +27,7 @@
   categories:
   - UplinkDisruption
 
+
 - type: listing
   id: UplinkEmag
   name: uplink-emag-name
@@ -38,6 +40,7 @@
     Telecrystal: 5
   categories:
   - UplinkDisruption
+
 
 - type: listing
   id: UplinkRadioJammer
@@ -52,6 +55,7 @@
   categories:
   - UplinkDisruption
 
+
 - type: listing
   id: UplinkSyndicateWeaponModule
   name: uplink-syndicate-weapon-module-name
@@ -65,11 +69,12 @@
   categories:
   - UplinkDisruption
 
+
 - type: listing
   id: UplinkDisposableTurret
   name: uplink-disposable-turret-name
   description: uplink-disposable-turret-desc
-  productEntity: ToolboxElectricalTurretFilled
+  productEntity: BoxWeaponTurretSyndicateDisposable # Sunrise-Edit
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 2
@@ -82,6 +87,7 @@
     blacklist:
       tags:
       - NukeOpsUplink
+
 
 - type: listing
   id: UplinkSyndicateMartyrModule
@@ -97,6 +103,7 @@
   categories:
     - UplinkDisruption
 
+
 - type: listing
   id: UplinkSoapSyndie
   name: uplink-soap-name
@@ -106,6 +113,64 @@
     Telecrystal: 1
   categories:
   - UplinkDisruption
+
+
+- type: listing
+  id: UplinkEcronizer
+  name: uplink-ecronizer-name
+  description: uplink-ecronizer-desc
+  productEntity: Ecronizer
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+
+
+- type: listing
+  id: UplinkLubeGrenade
+  name: uplink-lube-grenade-name
+  description: uplink-lube-grenade-desc
+  productEntity: LubeGrenade
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+
+
+- type: listing
+  id: UplinkGlueGrenade
+  name: uplink-glue-grenade-name
+  description: uplink-glue-grenade-desc
+  productEntity: GlueGrenade
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+
 
 - type: listing
   id: UplinkSlipocalypseClusterSoap
@@ -117,6 +182,7 @@
     Telecrystal: 1
   categories:
   - UplinkDisruption
+
 
 - type: listing
   id: UplinkToolbox
@@ -131,6 +197,7 @@
   categories:
   - UplinkDisruption
 
+
 - type: listing
   id: UplinkSyndicateJawsOfLife
   name: uplink-syndicate-jaws-of-life-name
@@ -144,19 +211,21 @@
   categories:
   - UplinkDisruption
 
+
 # Note: Removed for the time being until surgery/newmed is added. Considered bloat until then.
-# - type: listing
-#   id: UplinkDuffelSurgery
-#   name: uplink-duffel-surgery-name
-#   description: uplink-duffel-surgery-desc
-#   productEntity: ClothingBackpackDuffelSyndicateFilledMedical
-#   discountCategory: usualDiscounts
-#   discountDownTo:
-#     Telecrystal: 2
-#   cost:
-#     Telecrystal: 4
-#   categories:
-#   - UplinkDisruption
+- type: listing # Sunrise-edit
+  id: UplinkDuffelSurgery
+  name: uplink-duffel-surgery-name
+  description: uplink-duffel-surgery-desc
+  productEntity: ClothingBackpackDuffelSyndicateFilledMedical
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2 # Sunrise-Edit
+  categories:
+  - UplinkCybernetics #UplinkDisruption # Sunrise-Edit
+
 
 - type: listing
   id: UplinkSyndimovCircuitKit
@@ -177,6 +246,7 @@
        tags:
        - NukeOpsUplink
 
+
 - type: listing
   id: UplinkAntimovCircuitBoard
   name: uplink-antimov-law-name
@@ -194,6 +264,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+
 
 - type: listing
   id: UplinkSurplusBundle
@@ -217,6 +288,7 @@
       components:
       - SurplusBundle
 
+
 - type: listing
   id: UplinkStarterKit
   name: uplink-starter-kit-name
@@ -237,11 +309,12 @@
         components:
         - SurplusBundle
 
+
 - type: listing
   id: UplinkSingarityBeacon
   name: uplink-singularity-beacon-name
   description: uplink-singularity-beacon-desc
-  productEntity: SingularityBeacon
+  productEntity: BoxSingularityBeacon # Sunrise-Edit
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 4
@@ -258,6 +331,7 @@
     blacklist:
       components:
       - SurplusBundle
+
 
 - type: listing
   id: UplinkCameraBug

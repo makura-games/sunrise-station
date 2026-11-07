@@ -1,4 +1,4 @@
-# Objective
+#Objective items
 
 - type: listing
   id: uplinkHijackBeacon
@@ -14,7 +14,3 @@
     whitelist:
       components:
       - HijackTradeStationCondition
-  - !type:BuyerWhitelistCondition
-    blacklist:
-      components:
-      - SurplusBundle
