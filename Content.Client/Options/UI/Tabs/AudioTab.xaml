@@ -20,6 +20,9 @@
                 <CheckBox Name="EventMusicCheckBox" Text="{Loc 'ui-options-event-music'}" />
                 <CheckBox Name="AdminSoundsCheckBox" Text="{Loc 'ui-options-admin-sounds'}" />
                 <CheckBox Name="BwoinkSoundCheckBox" Text="{Loc 'ui-options-bwoink-sound'}" />
+                <!-- Sunrise edit start - добавляем настройку звука переключения боевого режима -->
+                <CheckBox Name="CombatModeToggleSoundCheckBox" Text="{Loc 'ui-options-combat-mode-toggle-sound'}" />
+                <!-- Sunrise edit end -->
                 <CheckBox Name="AudioHrtfCheckBox" Text="{Loc 'ui-options-audio-hrtf'}" />
                 <CheckBox Name="MuteUnfocusedCheckBox" Text="{Loc 'ui-options-mute-unfocused'}" />
             </BoxContainer>
