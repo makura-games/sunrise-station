@@ -53,6 +53,7 @@
     Plastic: 500
     Plasma: 150
     Silver: 50
+    Bluecrystal: 100 # Sunrise-Edit
 
 - type: latheRecipe
   id: SyringeBluespace
@@ -64,6 +65,7 @@
     Glass: 250
     Plasma: 100
     Silver: 50
+    Bluecrystal: 100 # Sunrise-Edit
 
 - type: latheRecipe
   id: PillCanister

@@ -1,0 +1,8 @@
+- type: latheRecipe
+  id: ArtificialBluecrystal
+  result: ArtificialBluecrystal1
+  completetime: 20
+  materials:
+    Silver: 800
+    Plasma: 1500
+    Uranium: 200

@@ -863,9 +863,6 @@ CratePartsT3: null
 CratePartsT3T4: null
 CratePartsT4: null
 
-#2027-07-17
-# WeaponRifleM90GrenadeLauncher: null # Sunrise-Edit - прототип сохранён для Sunrise-контента
-
 # region Sunrise-Start
 AirlockExternalGlassShuttleArrivals: AirlockExternalGlassShuttleArrivalsLocked
 AirlockHatchCentcommLocked: AirlockCentralCommandLocked
@@ -1223,7 +1220,7 @@ BlueprintMagAsh12Slug: BlueprintMagAsh12Basic
 BlueprintMagAsh12Beanbag: null
 BlueprintMagAsh12Flare: null
 ClothingBackpackDuffelWeaponRifleAsh12: Ash12Box
-WeaponRifleM90GrenadeLauncherBiocode: WeaponRifleM90GrenadeLauncher
+WeaponRifleM90GrenadeLauncherBiocode: null
 ClothingOuterEliteHardsuitUSSP: null
 GasMinerPlasma: null
 # 2026-08-14
@@ -1295,7 +1292,6 @@ CrateArmoryMP5: null
 ClothingBackpackDuffelWeaponSubMachineGunMP5Filled: null
 MagazineMP5: MagazinePistolHighCapacitySP
 MagazineMP5Extended: MagazinePistolHighCapacitySP
-# удаление и блок возможности замапить аплинки, чтобы Store не сериализовал каталоги в карты.
 BaseUplinkRadio: null
 BaseUplinkRadio20TC: null
 BaseUplinkRadio25TC: null
@@ -1324,7 +1320,14 @@ ClothingHandsPowerGlovesUplinkNTERTEpsilon: null
 DrinkDarkRedRumBottleFull: DrinkRedRumBottleFull
 # 2026-09-10
 ClothingOuterArmorBlueShield: null
-
+# 2026-10-06
+Bluecrystal10: null
+Bluecrystal15: null
+Bluecrystal25: null
+Crystallite: null
+Crystallite1: null
+Crystallite25: null
+Crystallite50: null
 WallRiveted: WallReinforced
 # region Sunrise-End
 
@@ -1364,7 +1367,7 @@ WallBasaltCobblebrick: WallConcrete
 WallIce: WallRockSnow
 
 #2026-07-17
-# WeaponRifleM90GrenadeLauncher: null # Sunrise-Edit - прототип сохранён для Sunrise-контента
+WeaponRifleM90GrenadeLauncher: null
 
 # 2026-07-18
 SheetGlassLingering0: null
@@ -1491,34 +1494,52 @@ FloorTileItemIronsandConcreteMono: null
 FloorTileItemIronsandConcreteSmooth: null
 IronSandstone: IronRock
 IronSandstoneMining: IronRock
-AsteroidRockBananium: AsteroidRock
-AsteroidRockBananiumCrab: AsteroidRock
-IronRockBananium: IronRock
-WallRockBananium: WallRock
-WallRockChromiteBananium: WallRockChromite
-WallRockSandBananium: WallRockSand
-WallRockSnowBananium: WallRockSnow
-MeteorRockBananium: AsteroidRock
-# WallRockBasalt: WallRock # Sunrise-Edit
+# AsteroidRockBananium: AsteroidRock # Sunrise-Edit - SAVE SUNRISE BANANA ROCK
+# AsteroidRockBananiumCrab: AsteroidRock # Sunrise-Edit
+# IronRockBananium: IronRock # Sunrise-Edit
+# WallRockBananium: WallRock # Sunrise-Edit
+# WallRockChromiteBananium: WallRockChromite # Sunrise-Edit
+# WallRockSandBananium: WallRockSand # Sunrise-Edit
+# WallRockSnowBananium: WallRockSnow # Sunrise-Edit
+# IronRockBananiumCrab: IronRock # Sunrise-Edit
+# WallRockBananiumCrab: WallRock # Sunrise-Edit
+WallRockBasaltBananiumCrab: WallRockBananiumCrab # Sunrise-Edit
+# WallRockChromiteBananiumCrab: WallRockChromite # Sunrise-Edit
+# WallRockSandBananiumCrab: WallRockSand # Sunrise-Edit
+# WallRockSnowBananiumCrab: WallRockSnow # Sunrise-Edit
+WallRockBasaltCoalCrab: WallRockCoalCrab
+WallRockBasaltGoldCrab: WallRockGoldCrab
+WallRockBasaltQuartzCrab: WallRockQuartzCrab
+WallRockBasaltSilverCrab: WallRockSilverCrab
+WallRockBasaltTinCrab: WallRockTinCrab
+WallRockBasaltUraniumCrab: WallRockUraniumCrab
+WallRockBasaltSaltCrab: WallRockSaltCrab
+WallRockBasaltPlasmaCrab: WallRockPlasmaCrab
+WallRockBasaltDiamondCrab: WallRockDiamondCrab
+WallRockAndesiteSaltCrab: WallRockSaltCrab
+WallRockAndesitePlasmaCrab: WallRockPlasmaCrab
+WallRockAndesiteDiamondCrab: WallRockDiamondCrab
+MeteorRockBananium: AsteroidRockBananium
+WallRockBasalt: WallRock
 WallRockBasaltCoal: WallRockCoal
 WallRockBasaltGold: WallRockGold
 WallRockBasaltDiamond: WallRockDiamond
 WallRockBasaltPlasma: WallRockPlasma
 WallRockBasaltQuartz: WallRockQuartz
 WallRockBasaltSilver: WallRockSilver
-# WallRockBasaltBananium: WallRock # Sunrise-Edit - сохраняем бананиумную базальтовую породу Sunrise
+WallRockBasaltBananium: WallRockBananium
 WallRockBasaltTin: WallRockTin
 WallRockBasaltUranium: WallRockUranium
 WallRockBasaltArtifactFragment: WallRockArtifactFragment
 WallRockBasaltSalt: WallRockSalt
-# WallRockAndesite: WallRock # Sunrise-Edit - сохраняем андезитовую породу Sunrise
+WallRockAndesite: WallRock
 WallRockAndesiteCoal: WallRockCoal
 WallRockAndesiteGold: WallRockGold
 WallRockAndesiteDiamond: WallRockDiamond
 WallRockAndesitePlasma: WallRockPlasma
 WallRockAndesiteQuartz: WallRockQuartz
 WallRockAndesiteSilver: WallRockSilver
-WallRockAndesiteBananium: WallRock
+WallRockAndesiteBananium: WallRockBananium
 WallRockAndesiteTin: WallRockTin
 WallRockAndesiteUranium: WallRockUranium
 WallRockAndesiteArtifactFragment: WallRockArtifactFragment

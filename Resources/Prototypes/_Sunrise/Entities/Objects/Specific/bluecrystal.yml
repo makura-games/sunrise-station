@@ -1,19 +1,102 @@
 - type: entity
+  parent: OreBase
+  id: BluecrystalOre
+  name: bluespace crystal ore
+  suffix: Full
+  components:
+  - type: Stack
+    stackType: BluecrystalOre
+  - type: Sprite
+    sprite: _Sunrise/Objects/Materials/ore.rsi
+    state: bluespace
+  - type: PhysicalComposition
+    materialComposition:
+      RawBluecrystal: 100
+  - type: Item
+    sprite: _Sunrise/Objects/Materials/ore.rsi
+  - type: Material
+  - type: Tag
+    tags:
+    - Ore
+    - OreBluecrystal
+
+- type: entity
+  parent: BluecrystalOre
+  id: BluecrystalOre1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
   name: Bluespace crystal
   parent: BaseItem
   id: Bluecrystal
-  suffix: 100 BC
-  description: It seems to shimmer with a attractive energy.
+  suffix: 3 BC
+  description: It shimmers with bluespace energy. When split, it releases a spatial burst.
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/bluecrystal.rsi
-    state: bluecrystal
+    layers:
+    - state: bluecrystal
+      map: [ "base" ]
+  - type: Appearance
   - type: Item
     sprite: _Sunrise/Objects/Specific/bluecrystal.rsi
     size: Tiny
   - type: Stack
-    count: 100
+    count: 3
     stackType: Bluecrystal
+    baseLayer: base
+    layerStates:
+    - bluecrystal
+    - bluecrystal2
+    - bluecrystal3
+    layerFunction: Threshold
+  - type: StackLayerThreshold
+    thresholds:
+    - 2
+    - 3
+  - type: Damageable
+    damageModifierSet: Glass
+  - type: Injurable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: TriggerOnUse
+  - type: SpawnOnTrigger
+    targetUser: true
+    useMapCoords: true
+    proto: TeleportEffectSource
+  - type: TimerTrigger
+    delay: 0.1
+    keyOut: teleport
+  - type: DamageOnTrigger
+    keysIn:
+    - teleport
+    ignoreResistances: true
+    damage:
+      types:
+        Blunt: 200
+  - type: ScramOnTrigger
+    keysIn:
+    - teleport
+    targetUser: true
+    teleportRadius: 10, 20
+    teleportTargetEffect: TeleportEffectTarget
+  - type: PhysicalComposition
+    materialComposition:
+      Bluecrystal: 100
+  - type: Material
+  - type: Tag
+    tags:
+    - RawMaterial
   - type: StaticPrice
     price: 0
   - type: StackPrice
@@ -21,6 +104,10 @@
   - type: Currency
     price:
       Bluecrystal: 1
+  - type: PointLight
+    radius: 1.5
+    energy: 0.5
+    color: "#3e7dff"
 
 - type: entity
   parent: Bluecrystal
@@ -33,31 +120,86 @@
     count: 1
 
 - type: entity
-  parent: Bluecrystal
-  id: Bluecrystal10
-  suffix: 10 BC
-  name: Bluespace crystal
-  description: It seems to shimmer with a attractive energy.
+  parent: BaseItem
+  id: ArtificialBluecrystal
+  suffix: Artificial, 1 BC
+  name: artificial bluespace crystal
+  description: A synthetic crystal manufactured by a protolathe. When split, it releases a short-range bluespace burst.
   components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/artificialbluecrystal.rsi
+    state: bluespace
+    layers:
+    - state: bluespace
+      map: [ "base" ]
+  - type: Appearance
+  - type: Item
+    sprite: _Sunrise/Objects/Specific/artificialbluecrystal.rsi
+    size: Tiny
   - type: Stack
-    count: 10
+    stackType: ArtificialBluecrystal
+    count: 3
+    maxCountOverride: 3
+    baseLayer: base
+    layerStates:
+    - bluespace
+    - bluespace_2
+    - bluespace_3
+    layerFunction: Threshold
+  - type: StackLayerThreshold
+    thresholds:
+    - 2
+    - 3
+  - type: Damageable
+    damageModifierSet: Glass
+  - type: Injurable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: TriggerOnUse
+  - type: SpawnOnTrigger
+    targetUser: true
+    useMapCoords: true
+    proto: TeleportEffectSource
+  - type: TimerTrigger
+    delay: 0.1
+    keyOut: teleport
+  - type: DamageOnTrigger
+    keysIn:
+    - teleport
+    ignoreResistances: true
+    damage:
+      types:
+        Blunt: 200
+  - type: ScramOnTrigger
+    keysIn:
+    - teleport
+    targetUser: true
+    teleportRadius: 5, 10
+    teleportTargetEffect: TeleportEffectTarget
+  - type: PhysicalComposition
+    materialComposition:
+      Bluecrystal: 100
+  - type: Material
+  - type: Tag
+    tags:
+    - RawMaterial
+  - type: PointLight
+    radius: 1.3
+    energy: 0.25
+    color: "#3e7dff"
 
 - type: entity
-  parent: Bluecrystal
-  id: Bluecrystal15
-  suffix: 15 BC
-  name: Bluespace crystal
-  description: It seems to shimmer with a attractive energy.
+  parent: ArtificialBluecrystal
+  id: ArtificialBluecrystal1
+  suffix: Artificial, 1 BC
   components:
   - type: Stack
-    count: 15
-
-- type: entity
-  parent: Bluecrystal
-  id: Bluecrystal25
-  suffix: 25 BC
-  name: Bluespace crystal
-  description: It seems to shimmer with a attractive energy.
-  components:
-  - type: Stack
-    count: 25
+    stackType: ArtificialBluecrystal
+    count: 1
