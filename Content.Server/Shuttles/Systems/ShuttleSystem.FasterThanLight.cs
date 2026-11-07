@@ -378,6 +378,11 @@ public sealed partial class ShuttleSystem
         var fromMatrix = _transform.GetWorldMatrix(xform);
         var fromRotation = _transform.GetWorldRotation(xform);
 
+        // Sunrise edit start - запоминаем карту старта для аварийного возврата.
+        if (fromMapUid != null)
+            RememberSunriseFtlOrigin(comp, xform.MapID, fromMatrix, fromRotation);
+        // Sunrise edit end
+
         var grid = _mapGridQuery.Comp(uid);
         var width = grid.LocalAABB.Width;
         var ftlMap = EnsureFTLMap();
@@ -489,16 +494,21 @@ public sealed partial class ShuttleSystem
 
         if (!Exists(entity.Comp1.TargetCoordinates.EntityId))
         {
-            // Get a list of maps
-            var maps = EntityQuery<MapComponent, FTLDestinationComponent>()
-                .OrderBy(o => o.Item1.MapId.GetHashCode());
+            // Sunrise edit start - при неудачном БСС пытаемся вернуть шаттл на прошлую карту
+            if (!TryRestoreSunriseFtlOrigin(uid, comp, xform, out mapId))
+            {
+                // Get a list of maps
+                var maps = EntityQuery<MapComponent, FTLDestinationComponent>()
+                    .OrderBy(o => o.Item1.MapId.GetHashCode());
 
-            // Get the first map that passes the FTL whitelist
-            mapId = maps.First(o =>
-                _whitelistSystem.IsWhitelistPassOrNull(o.Item2.Whitelist, entity))
-                .Item1.MapId;
+                // Get the first map that passes the FTL whitelist
+                mapId = maps.First(o =>
+                        _whitelistSystem.IsWhitelistPassOrNull(o.Item2.Whitelist, entity))
+                    .Item1.MapId;
 
-            TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+                TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+            }
+            // Sunrise edit end
         }
         // Docking FTL
         else if (_mapGridQuery.HasComp(target.EntityId) &&

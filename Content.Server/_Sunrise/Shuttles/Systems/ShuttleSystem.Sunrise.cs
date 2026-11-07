@@ -250,6 +250,44 @@ public sealed partial class ShuttleSystem
     }
 
     /// <summary>
+    /// Запоминает карту и мировые координаты, с которых шаттл уходит в FTL.
+    /// </summary>
+    private void RememberSunriseFtlOrigin(FTLComponent ftl, MapId fromMapId, Matrix3x2 fromMatrix, Angle fromRotation)
+    {
+        ftl.OriginMapId = fromMapId;
+        ftl.OriginPosition = fromMatrix.Translation;
+        ftl.OriginAngle = fromRotation;
+    }
+
+    /// <summary>
+    /// Возвращает шаттл на карту и позицию, с которых он стартовал в FTL.
+    /// </summary>
+    /// <returns><see langword="true"/>, если шаттл удалось вернуть на исходную карту.</returns>
+    private bool TryRestoreSunriseFtlOrigin(
+        EntityUid shuttleUid,
+        FTLComponent ftl,
+        TransformComponent xform,
+        out MapId mapId)
+    {
+        mapId = MapId.Nullspace;
+
+        if (ftl.OriginMapId is not { } originMapId ||
+            !_mapSystem.TryGetMap(originMapId, out var originMapUid))
+        {
+            return false;
+        }
+
+        _transform.SetCoordinates(
+            shuttleUid,
+            xform,
+            new EntityCoordinates(originMapUid.Value, ftl.OriginPosition),
+            rotation: ftl.OriginAngle);
+
+        mapId = originMapId;
+        return true;
+    }
+
+    /// <summary>
     /// Бросает незакреплённые динамические сущности вдоль движения FTL.
     /// </summary>
     private void DoSunriseFtlThrow(TransformComponent xform, Vector2 throwDirection)
