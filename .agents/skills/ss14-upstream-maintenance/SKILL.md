@@ -49,7 +49,7 @@ Makes it easy to see your changes against the background of vanilla code.
 
 **Format:**
 ```csharp
-// SERVERNAME edit start - brief reason for changes
+// SERVERNAME edit start - краткая причина изменений
 ```
 ...your code...
 ```csharp
@@ -60,17 +60,17 @@ Makes it easy to see your changes against the background of vanilla code.
 **Example (change value):**
 ```csharp
 component.Field2 = 321;
-// Fire edit start - increasing radius for balance
+// Fire edit start - увеличиваем радиус для баланса
 component.Field = 123;
 // Fire edit end
 ```
 
 **Example (changing logic):**
 ```csharp
-// Sunrise edit start - fixing double gateways
+// Sunrise edit start - исправляем двойные шлюзы
 if (TryComp<AirlockComponent>(uid, out var airlock))
 {
-    // ...new logic...
+    // ...новая логика...
 }
 // Sunrise edit end
 ```
@@ -81,7 +81,7 @@ Used when you add a **new** block of code (eg calling an event, checking) that w
 
 **Format:**
 ```csharp
-// SERVERNAME added start - brief reason for adding
+// SERVERNAME added start - краткая причина добавления
 ```
 ...new code...
 ```csharp
@@ -90,7 +90,7 @@ Used when you add a **new** block of code (eg calling an event, checking) that w
 
 **Example:**
 ```csharp
-// Fire added start - to know when the shy one was hit
+// Fire added start - чтобы знать, когда попали по Shy Guy
 _eventBus.RaiseLocalEvent(uid, new ProjectileHitEvent(projectile, entity));
 // Fire added end
 ```
@@ -115,21 +115,21 @@ namespace Content.Shared.Scp106.Systems;
 
 public abstract partial class SharedScp106System : EntitySystem
 {
-    // Vanilla code...
+    // Ванильный код...
 }
 ```
 
 *Your file (`Content.Shared/_Scp/Scp106/Systems/SharedScp106System.Fire.cs`):*
 ```csharp
-using Content.Shared.Scp106.Systems; // We use vanilla namespace
+using Content.Shared.Scp106.Systems; // Используем ванильное пространство имён
 
-// We suppress warning, since the file is physically located in another folder
+// Подавляем предупреждение, так как файл физически находится в другой папке
 // ReSharper disable once CheckNamespace
 namespace Content.Shared.Scp106.Systems;
 
 public abstract partial class SharedScp106System
 {
-    // Your new logic, accessible "as if" inside the original class
+    // Ваша новая логика, доступная «как будто» внутри оригинального класса
     public void MyNewMethod() { ... }
 }
 ```
@@ -156,19 +156,19 @@ Instead of editing the original, we create a **replacement heir**.
 *1. New prototype (`_Sunrise/Entities/Structures/Doors/Airlocks/access.yml`):*
 ```yaml
 - type: entity
-  parent: AirlockHatchSyndicate  # Inherit from the original
-  id: AirlockHatchSyndicateLocked # New ID
+  parent: AirlockHatchSyndicate  # Наследуемся от оригинала
+  id: AirlockHatchSyndicateLocked # Новый ID
   suffix: Syndicate, Locked
-  categories: [ HideSpawnMenu ] # Fire added - hide from spawn if this is a technical entity
+  categories: [ HideSpawnMenu ] # Fire added - скрываем из спавна, если это техническая сущность
   components:
   - type: AccessReader
-    access: [["SyndicateAgent"]] # Add the required changes
+    access: [["SyndicateAgent"]] # Добавляем необходимые изменения
 ```
 
 *2. Migration file (`Resources/migration.yml`):*
 Add an entry to the end of the file or to the appropriate section.
 ```yaml
-# ... existing migrations ...
+# ... существующие миграции ...
 
 # Sunrise edit
 AirlockHatchSyndicate: AirlockHatchSyndicateLocked
@@ -197,7 +197,7 @@ If migration is not possible (but try to use it!), use `edit` comments directly 
   id: VanillaEntity
   components:
   - type: Item
-    path: _FORKFOLDER/Objects/123.rsi # SERVERNAME edit - sprite replacement
+    path: _FORKFOLDER/Objects/123.rsi # SERVERNAME edit - замена спрайта
 ```
 
 ### 🚫 Anti-patterns (What NOT to do)
@@ -205,11 +205,11 @@ If migration is not possible (but try to use it!), use `edit` comments directly 
 ❌ **Direct code removal.**
 Instead of deleting, comment out the code and leave the mark `edit`.
 ```csharp
-// BAD:
+// ПЛОХО:
 // public void DeletedMethod() { }
 
-// GOOD:
-// SERVERNAME edit start - deleted because interferes with mechanics X
+// ХОРОШО:
+// SERVERNAME edit start - удалено, потому что мешает механике X
 // public void DeletedMethod() { ... }
 // SERVERNAME edit end
 ```
