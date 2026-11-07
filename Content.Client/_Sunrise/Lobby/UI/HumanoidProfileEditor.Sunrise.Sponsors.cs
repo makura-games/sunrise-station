@@ -45,7 +45,7 @@ public sealed partial class HumanoidProfileEditor
         ICommonSession session,
         IDependencyCollection collection)
     {
-        return new LoadoutWindow(profile, loadout, prototype, session, collection, _sponsorsMgr);
+        return new LoadoutWindow(profile, loadout, prototype, session, collection);
     }
 
     private void SetSunriseDefaultLoadout(RoleLoadout loadout)
@@ -53,8 +53,7 @@ public sealed partial class HumanoidProfileEditor
         loadout.SetDefault(
             Profile,
             _playerManager.LocalSession,
-            _prototypeManager,
-            GetSunriseSponsorPrototypes());
+            _prototypeManager);
     }
 
     private ProtoId<RoleLoadoutPrototype> GetSunriseEffectiveRoleLoadoutPrototype(string jobId)

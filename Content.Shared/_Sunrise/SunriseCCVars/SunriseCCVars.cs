@@ -100,6 +100,30 @@ public sealed partial class SunriseCCVars : CVars
     public static readonly CVarDef<string> SponsorApiToken =
         CVarDef.Create("sponsor.api_token", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
+    /// <summary>
+    /// Shared bearer token used to authenticate sponsor inventory webhook requests.
+    /// </summary>
+    public static readonly CVarDef<string> SponsorInventoryWebhookToken =
+        CVarDef.Create("sponsor.inventory_webhook_token", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    /// <summary>
+    /// Controls whether sponsor inventory webhook requests are restricted by client IP address.
+    /// </summary>
+    public static readonly CVarDef<bool> SponsorInventoryWebhookIpAllowlistEnabled =
+        CVarDef.Create("sponsor.inventory_webhook_ip_allowlist_enabled", false, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Comma-separated IP addresses or CIDR ranges allowed to call the sponsor inventory webhook.
+    /// </summary>
+    public static readonly CVarDef<string> SponsorInventoryWebhookIpAllowlist =
+        CVarDef.Create("sponsor.inventory_webhook_ip_allowlist", "", CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Comma-separated proxy CIDR ranges whose forwarded client IP headers may be trusted.
+    /// </summary>
+    public static readonly CVarDef<string> SponsorInventoryWebhookTrustedProxyCidrs =
+        CVarDef.Create("sponsor.inventory_webhook_trusted_proxy_cidrs", "", CVar.SERVERONLY | CVar.ARCHIVE);
+
     public static readonly CVarDef<string> SponsorGhostTheme =
         CVarDef.Create("sponsor.ghost_theme", "", CVar.CLIENTONLY | CVar.ARCHIVE);
 
@@ -108,6 +132,12 @@ public sealed partial class SunriseCCVars : CVars
 
     public static readonly CVarDef<string> SponsorProjectName =
         CVarDef.Create("sponsor.project_name", string.Empty, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Template for the sponsor donation page URL. Use %project% as the escaped sponsor project name.
+    /// </summary>
+    public static readonly CVarDef<string> SponsorDonateUrlTemplate =
+        CVarDef.Create("sponsor.donate_url_template", "https://stellarstories.ru/projects/%project%/donate", CVar.SERVER | CVar.REPLICATED);
 
     public static readonly CVarDef<int> SponsorMinPlaytimeHours =
         CVarDef.Create("sponsor.min_playtime_hours", 0, CVar.SERVERONLY | CVar.ARCHIVE);
@@ -584,4 +614,6 @@ public sealed partial class SunriseCCVars : CVars
     public static readonly CVarDef<bool> TutorialPromptSeen =
         CVarDef.Create("tutorial.prompt_seen", false, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    public static readonly CVarDef<string> AccountFundsLink =
+        CVarDef.Create("infolinks.payment", "https://ss14.org/payments", CVar.SERVER | CVar.REPLICATED);
 }

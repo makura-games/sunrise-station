@@ -1,0 +1,980 @@
+<s:SponsorWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:s="clr-namespace:Content.Client._Sunrise.Sponsor"
+    xmlns:sf="clr-namespace:Content.Client._Sunrise.Sheetlets.SciFiStyle"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    MinSize="1200 680"
+    SetSize="1200 680"
+    MouseFilter="Stop"
+    RectClipContent="True"
+    Resizable="True">
+
+    <PanelContainer
+        HorizontalExpand="True"
+        MouseFilter="Ignore"
+        StyleClasses="SciFiFrameBackground"
+        VerticalExpand="True" />
+
+    <PanelContainer
+        HorizontalExpand="True"
+        MouseFilter="Ignore"
+        StyleClasses="SciFiFramePanel"
+        VerticalExpand="True" />
+
+    <sf:SciFiFrame
+        HorizontalExpand="True"
+        MouseFilter="Ignore"
+        VerticalExpand="True" />
+
+    <BoxContainer
+        HorizontalExpand="True"
+        Margin="18 14 18 14"
+        Orientation="Vertical"
+        VerticalExpand="True">
+        <BoxContainer
+            HorizontalExpand="True"
+            MinHeight="36"
+            Orientation="Horizontal"
+            SeparationOverride="8">
+            <Label
+                FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                StyleClasses="LabelHeadingBigger"
+                Text="{Loc 'donation-terminal-title'}"
+                VAlign="Center" />
+            <Control HorizontalExpand="True" />
+            <TextureButton
+                Access="Public"
+                Name="CloseButton"
+                StyleClasses="windowCloseButton"
+                VerticalAlignment="Center" />
+        </BoxContainer>
+
+        <PanelContainer
+            Margin="0 8 0 0"
+            StyleClasses="SciFiTabBar">
+            <BoxContainer
+                Margin="6 4 6 0"
+                Orientation="Horizontal"
+                SeparationOverride="3">
+                <sf:SciFiSweepButton
+                    Access="Public"
+                    MinHeight="32"
+                    MinWidth="142"
+                    Name="MainTabButton"
+                    StyleClasses="SciFiTab"
+                    SweepIntensity="1.7"
+                    Text="{Loc 'donation-terminal-tab-main'}" />
+                <sf:SciFiSweepButton
+                    Access="Public"
+                    MinHeight="32"
+                    MinWidth="142"
+                    Name="ShopTabButton"
+                    StyleClasses="SciFiTab"
+                    SweepIntensity="1.7"
+                    Text="{Loc 'donation-terminal-tab-shop'}" />
+                <sf:SciFiSweepButton
+                    Access="Public"
+                    MinHeight="32"
+                    MinWidth="142"
+                    Name="SubscriptionsTabButton"
+                    StyleClasses="SciFiTab"
+                    SweepIntensity="1.7"
+                    Text="{Loc 'donation-terminal-tab-subscriptions'}" />
+                <Control HorizontalExpand="True" />
+                <BoxContainer
+                    Orientation="Horizontal"
+                    SeparationOverride="6"
+                    VerticalAlignment="Center">
+                    <Label
+                        FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                        Text="{Loc 'donation-terminal-balance'}"
+                        VAlign="Center" />
+                    <TextureRect
+                        SetSize="20 20"
+                        Stretch="KeepAspectCentered"
+                        TexturePath="/Textures/_Sunrise/Interface/Sponsor/telecrystal.png" />
+                    <Label
+                        Access="Public"
+                        FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                        Name="BalanceLabel"
+                        StyleClasses="LabelHeading"
+                        Text="0"
+                        VAlign="Center" />
+                    <sf:SciFiSweepButton
+                        Access="Public"
+                        Disabled="True"
+                        MinHeight="25"
+                        MinWidth="25"
+                        Name="BalanceButton"
+                        StyleClasses="SciFiIconButton"
+                        VerticalAlignment="Center">
+                        <TextureRect
+                            SetSize="20 20"
+                            Stretch="KeepAspectCentered"
+                            StyleClasses="SciFiIconButtonIcon"
+                            TexturePath="/Textures/Interface/VerbIcons/plus.svg.192dpi.png" />
+                    </sf:SciFiSweepButton>
+                </BoxContainer>
+            </BoxContainer>
+        </PanelContainer>
+
+        <PanelContainer
+            HorizontalExpand="True"
+            VerticalExpand="True">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat
+                    BackgroundColor="{x:Static sf:SciFiPalette.PanelBackground}"
+                    BorderColor="{x:Static sf:SciFiPalette.BorderDim}"
+                    BorderThickness="1" />
+            </PanelContainer.PanelOverride>
+            <BoxContainer
+                HorizontalExpand="True"
+                Margin="18"
+                Orientation="Vertical"
+                VerticalExpand="True">
+                <BoxContainer
+                    Access="Public"
+                    HorizontalExpand="True"
+                    Name="MainContent"
+                    Orientation="Vertical"
+                    SeparationOverride="14"
+                    VerticalExpand="True">
+                    <BoxContainer
+                        HorizontalExpand="True"
+                        Orientation="Vertical"
+                        SeparationOverride="10"
+                        VerticalExpand="True">
+                        <Label
+                            FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                            StyleClasses="LabelHeading"
+                            Text="{Loc 'donation-terminal-current-rank'}" />
+                        <controls:HLine
+                            Color="{x:Static sf:SciFiPalette.BorderDim}"
+                            Thickness="1" />
+                        <BoxContainer
+                            HorizontalExpand="True"
+                            Orientation="Horizontal"
+                            SeparationOverride="10">
+                            <BoxContainer
+                                MinWidth="128"
+                                Orientation="Vertical"
+                                SeparationOverride="4"
+                                VerticalAlignment="Center">
+                                <Label
+                                    Access="Public"
+                                    Align="Center"
+                                    FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                                    Name="MainSponsorTierBadgeLabel"
+                                    StyleClasses="LabelHeadingBigger"
+                                    Text="-" />
+                                <Label
+                                    Access="Public"
+                                    Align="Center"
+                                    FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                                    HorizontalExpand="True"
+                                    MaxWidth="128"
+                                    Name="MainSponsorTierBadgeCaption"
+                                    Text="" />
+                            </BoxContainer>
+
+                            <BoxContainer
+                                HorizontalExpand="True"
+                                MinWidth="410"
+                                Orientation="Vertical"
+                                SeparationOverride="8"
+                                VerticalAlignment="Center">
+                                <Label
+                                    Access="Public"
+                                    FontColorOverride="{x:Static sf:SciFiPalette.Text}"
+                                    Name="MainSubscriptionValue"
+                                    StyleClasses="LabelHeadingBigger"
+                                    Text="{Loc 'donation-terminal-loading'}" />
+                                <RichTextLabel
+                                    Access="Public"
+                                    HorizontalExpand="True"
+                                    Name="MainSubscriptionDescription"
+                                    StyleClasses="LabelSubText"
+                                    Text="{Loc 'donation-terminal-current-rank-hint'}" />
+                                <BoxContainer
+                                    HorizontalExpand="True"
+                                    Orientation="Horizontal"
+                                    SeparationOverride="8"
+                                    VerticalAlignment="Bottom">
+                                    <Button
+                                        Access="Public"
+                                        HorizontalExpand="True"
+                                        Name="MainSubscriptionDetailsButton"
+                                        StyleClasses="SciFiDonateButton"
+                                        Text="{Loc 'donation-terminal-details'}" />
+                                    <sf:SciFiSweepButton
+                                        Access="Public"
+                                        HorizontalExpand="True"
+                                        Name="MainSubscriptionPurchaseButton"
+                                        StyleClasses="SciFiButton"
+                                        Text="{Loc 'donation-terminal-purchase-sponsor'}" />
+                                </BoxContainer>
+                            </BoxContainer>
+
+                            <PanelContainer StyleClasses="SciFiDivider" />
+
+                            <BoxContainer
+                                MaxWidth="380"
+                                MinWidth="340"
+                                Orientation="Vertical"
+                                SeparationOverride="7"
+                                VerticalAlignment="Center">
+                                <Label
+                                    Access="Public"
+                                    FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                                    Name="MainBenefitsTitle"
+                                    StyleClasses="LabelHeading"
+                                    Text="{Loc 'donation-terminal-benefits'}" />
+                                <ScrollContainer
+                                    HScrollEnabled="False"
+                                    HorizontalExpand="True"
+                                    MaxHeight="180"
+                                    MinHeight="112"
+                                    VerticalExpand="True"
+                                    VScrollEnabled="True">
+                                    <BoxContainer
+                                        Access="Public"
+                                        HorizontalExpand="True"
+                                        Name="MainBenefitsList"
+                                        Orientation="Vertical"
+                                        SeparationOverride="5" />
+                                </ScrollContainer>
+                            </BoxContainer>
+                        </BoxContainer>
+
+                        <controls:HLine
+                            Color="{x:Static sf:SciFiPalette.BorderDim}"
+                            Thickness="1" />
+
+                        <BoxContainer
+                            HorizontalExpand="True"
+                            Orientation="Horizontal"
+                            SeparationOverride="8">
+                            <Label
+                                FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                                StyleClasses="LabelHeading"
+                                Text="{Loc 'donation-terminal-main-account-title'}"
+                                VAlign="Center" />
+                            <Control HorizontalExpand="True" />
+                            <sf:SciFiSweepButton
+                                Access="Public"
+                                MinWidth="220"
+                                Name="MainAccountManageButton"
+                                StyleClasses="SciFiButton"
+                                Text="{Loc 'user-profile-account-manage-button'}" />
+                        </BoxContainer>
+                        <RichTextLabel
+                            HorizontalExpand="True"
+                            StyleClasses="LabelSubText"
+                            Text="{Loc 'donation-terminal-main-account-description'}" />
+                        <BoxContainer
+                            HorizontalExpand="True"
+                            Orientation="Horizontal"
+                            SeparationOverride="14">
+                            <BoxContainer
+                                HorizontalExpand="True"
+                                Orientation="Vertical"
+                                SeparationOverride="5">
+                                <BoxContainer
+                                    HorizontalExpand="True"
+                                    Orientation="Horizontal"
+                                    SeparationOverride="8">
+                                    <TextureRect
+                                        MinWidth="28"
+                                        SetSize="32 32"
+                                        Stretch="KeepAspectCentered"
+                                        StyleClasses="SciFiButtonIcon"
+                                        TexturePath="/Textures/Interface/VerbIcons/information.svg.192dpi.png"
+                                        VerticalAlignment="Center" />
+                                    <Label
+                                        FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                                        MinWidth="118"
+                                        Text="{Loc 'donation-terminal-main-makura-id'}"
+                                        VAlign="Center" />
+                                    <Label
+                                        Access="Public"
+                                        FontColorOverride="{x:Static sf:SciFiPalette.Text}"
+                                        HorizontalExpand="True"
+                                        MaxHeight="42"
+                                        MinHeight="18"
+                                        Name="MainPlayerIdValue"
+                                        Text="{Loc 'donation-terminal-loading'}"
+                                        VAlign="Center" />
+                                </BoxContainer>
+                                <controls:HLine
+                                    Color="{x:Static sf:SciFiPalette.BorderDim}"
+                                    Thickness="1" />
+                                <BoxContainer
+                                    HorizontalExpand="True"
+                                    Orientation="Horizontal"
+                                    SeparationOverride="8">
+                                    <TextureRect
+                                        MinWidth="28"
+                                        SetSize="32 32"
+                                        Stretch="KeepAspectCentered"
+                                        StyleClasses="SciFiButtonIcon"
+                                        TexturePath="/Textures/Interface/VerbIcons/group.svg.192dpi.png"
+                                        VerticalAlignment="Center" />
+                                    <Label
+                                        FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                                        MinWidth="118"
+                                        Text="{Loc 'donation-terminal-main-player-name'}"
+                                        VAlign="Center" />
+                                    <Label
+                                        Access="Public"
+                                        FontColorOverride="{x:Static sf:SciFiPalette.Text}"
+                                        HorizontalExpand="True"
+                                        MaxHeight="42"
+                                        MinHeight="18"
+                                        Name="MainPlayerNameValue"
+                                        Text="{Loc 'donation-terminal-loading'}"
+                                        VAlign="Center" />
+                                </BoxContainer>
+                            </BoxContainer>
+
+                            <PanelContainer StyleClasses="SciFiDivider" />
+
+                            <BoxContainer
+                                HorizontalExpand="True"
+                                Orientation="Vertical"
+                                SeparationOverride="5">
+                                <BoxContainer
+                                    HorizontalExpand="True"
+                                    Orientation="Horizontal"
+                                    SeparationOverride="8">
+                                    <TextureRect
+                                        MinWidth="28"
+                                        SetSize="32 32"
+                                        Stretch="KeepAspectCentered"
+                                        StyleClasses="SciFiButtonIcon"
+                                        TexturePath="/Textures/Interface/discord.svg.192dpi.png"
+                                        VerticalAlignment="Center" />
+                                    <Label
+                                        FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                                        MinWidth="118"
+                                        Text="{Loc 'donation-terminal-main-discord'}"
+                                        VAlign="Center" />
+                                    <Label
+                                        Access="Public"
+                                        FontColorOverride="{x:Static sf:SciFiPalette.Text}"
+                                        HorizontalExpand="True"
+                                        MaxHeight="42"
+                                        MinHeight="18"
+                                        Name="MainDiscordValue"
+                                        Text="{Loc 'donation-terminal-loading'}"
+                                        VAlign="Center" />
+                                </BoxContainer>
+                                <controls:HLine
+                                    Color="{x:Static sf:SciFiPalette.BorderDim}"
+                                    Thickness="1" />
+                                <BoxContainer
+                                    HorizontalExpand="True"
+                                    Orientation="Horizontal"
+                                    SeparationOverride="8">
+                                    <TextureRect
+                                        MinWidth="28"
+                                        SetSize="32 32"
+                                        Stretch="KeepAspectCentered"
+                                        StyleClasses="SciFiButtonIcon"
+                                        TexturePath="/Textures/Interface/telegram.svg.192dpi.png"
+                                        VerticalAlignment="Center" />
+                                    <Label
+                                        FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                                        MinWidth="118"
+                                        Text="{Loc 'donation-terminal-main-telegram'}"
+                                        VAlign="Center" />
+                                    <Label
+                                        Access="Public"
+                                        FontColorOverride="{x:Static sf:SciFiPalette.Text}"
+                                        HorizontalExpand="True"
+                                        MaxHeight="42"
+                                        MinHeight="18"
+                                        Name="MainTelegramValue"
+                                        Text="{Loc 'donation-terminal-loading'}"
+                                        VAlign="Center" />
+                                </BoxContainer>
+                                <controls:HLine
+                                    Color="{x:Static sf:SciFiPalette.BorderDim}"
+                                    Thickness="1" />
+                                <BoxContainer
+                                    HorizontalExpand="True"
+                                    Orientation="Horizontal"
+                                    SeparationOverride="8">
+                                    <TextureRect
+                                        MinWidth="28"
+                                        SetSize="32 32"
+                                        Stretch="KeepAspectCentered"
+                                        StyleClasses="SciFiButtonIcon"
+                                        TexturePath="/Textures/_Sunrise/Interface/Icons/github-white.svg.192dpi.png"
+                                        VerticalAlignment="Center" />
+                                    <Label
+                                        FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                                        MinWidth="118"
+                                        Text="{Loc 'donation-terminal-main-github'}"
+                                        VAlign="Center" />
+                                    <Label
+                                        Access="Public"
+                                        FontColorOverride="{x:Static sf:SciFiPalette.Text}"
+                                        HorizontalExpand="True"
+                                        MaxHeight="42"
+                                        MinHeight="18"
+                                        Name="MainGithubValue"
+                                        Text="{Loc 'donation-terminal-loading'}"
+                                        VAlign="Center" />
+                                </BoxContainer>
+                            </BoxContainer>
+                        </BoxContainer>
+                    </BoxContainer>
+
+                    <Label
+                        Access="Public"
+                        Name="CurrentSubscriptionValue"
+                        Text=""
+                        Visible="False" />
+                </BoxContainer>
+
+                <BoxContainer
+                    Access="Public"
+                    HorizontalExpand="True"
+                    Name="SubscriptionDetailsContent"
+                    Orientation="Vertical"
+                    SeparationOverride="10"
+                    VerticalExpand="True"
+                    Visible="False">
+                    <ScrollContainer
+                        HScrollEnabled="True"
+                        HorizontalExpand="True"
+                        MaxHeight="42"
+                        VScrollEnabled="False">
+                        <BoxContainer
+                            Access="Public"
+                            Name="SubscriptionDetailsTierButtons"
+                            Orientation="Horizontal"
+                            SeparationOverride="6" />
+                    </ScrollContainer>
+                    <ScrollContainer
+                        HScrollEnabled="False"
+                        HorizontalExpand="True"
+                        VerticalExpand="True"
+                        VScrollEnabled="True">
+                        <BoxContainer
+                            HorizontalAlignment="Center"
+                            HorizontalExpand="True"
+                            MaxWidth="980"
+                            Orientation="Vertical"
+                            SeparationOverride="10">
+                            <BoxContainer
+                                Access="Public"
+                                HorizontalExpand="True"
+                                Name="SubscriptionDetailsBenefitsList"
+                                Orientation="Vertical"
+                                SeparationOverride="10" />
+                        </BoxContainer>
+                    </ScrollContainer>
+                    <BoxContainer
+                        HorizontalExpand="True"
+                        Orientation="Horizontal"
+                        SeparationOverride="6">
+                        <Button
+                            Access="Public"
+                            MinWidth="132"
+                            Name="SubscriptionDetailsBackButton"
+                            StyleClasses="SciFiDonateButton"
+                            Text="{Loc 'donation-terminal-subscription-details-back'}" />
+                        <Control HorizontalExpand="True" />
+                        <sf:SciFiSweepButton
+                            Access="Public"
+                            MinWidth="170"
+                            Name="SubscriptionDetailsPurchaseButton"
+                            StyleClasses="SciFiButton"
+                            Text="{Loc 'donation-terminal-purchase-sponsor'}" />
+                    </BoxContainer>
+                </BoxContainer>
+
+                <BoxContainer
+                    Access="Public"
+                    HorizontalExpand="True"
+                    Name="ShopContent"
+                    Orientation="Horizontal"
+                    SeparationOverride="14"
+                    VerticalExpand="True"
+                    Visible="False">
+                    <BoxContainer
+                        MinWidth="210"
+                        Orientation="Vertical"
+                        SeparationOverride="10"
+                        VerticalExpand="True">
+                        <Label
+                            FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                            StyleClasses="LabelHeading"
+                            Text="{Loc 'donation-terminal-shop-sidebar'}" />
+                        <BoxContainer
+                            Access="Public"
+                            Name="StoreCategoryList"
+                            Orientation="Vertical"
+                            SeparationOverride="5" />
+                        <controls:HLine
+                            Color="{x:Static sf:SciFiPalette.BorderDim}"
+                            Thickness="1" />
+                        <Label
+                            FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                            StyleClasses="LabelHeading"
+                            Text="{Loc 'donation-terminal-shop-filter-title'}" />
+                        <BoxContainer
+                            Access="Public"
+                            Name="StoreFilterList"
+                            Orientation="Vertical"
+                            SeparationOverride="5" />
+                        <LineEdit
+                            Access="Public"
+                            HorizontalExpand="True"
+                            Name="StoreSearch"
+                            PlaceHolder="{Loc 'donation-terminal-search-placeholder'}"
+                            StyleClasses="SciFiLineEdit" />
+                    </BoxContainer>
+
+                    <PanelContainer StyleClasses="SciFiDivider" />
+
+                    <BoxContainer
+                        HorizontalExpand="True"
+                        Orientation="Vertical"
+                        SeparationOverride="10"
+                        VerticalExpand="True">
+                        <BoxContainer
+                            HorizontalExpand="True"
+                            Orientation="Horizontal">
+                            <Label
+                                Access="Public"
+                                FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                                Name="StoreCatalogTitleLabel"
+                                StyleClasses="LabelHeading"
+                                Text="{Loc 'donation-terminal-shop-catalog'}"
+                                VAlign="Center" />
+                            <Control HorizontalExpand="True" />
+                            <Label
+                                Access="Public"
+                                FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                                Name="StoreCatalogCountLabel"
+                                VAlign="Center" />
+                        </BoxContainer>
+                        <ScrollContainer
+                            HScrollEnabled="False"
+                            HorizontalExpand="True"
+                            VerticalExpand="True"
+                            VScrollEnabled="True">
+                            <GridContainer
+                                Access="Public"
+                                Columns="3"
+                                HSeparationOverride="8"
+                                HorizontalExpand="True"
+                                Name="StoreCatalogGrid"
+                                VSeparationOverride="8" />
+                        </ScrollContainer>
+                        <Label
+                            Access="Public"
+                            Align="Center"
+                            FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                            Name="StoreEmptyLabel"
+                            Text="{Loc 'donation-terminal-shop-empty'}" />
+                        <Label
+                            Access="Public"
+                            FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                            Name="StoreStatusLabel"
+                            Text="" />
+                    </BoxContainer>
+
+                    <PanelContainer StyleClasses="SciFiDivider" />
+
+                    <PanelContainer
+                        MinWidth="360"
+                        VerticalExpand="True">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat
+                                BackgroundColor="{x:Static sf:SciFiPalette.PanelBackgroundDark}"
+                                BorderColor="{x:Static sf:SciFiPalette.BorderDim}"
+                                BorderThickness="1" />
+                        </PanelContainer.PanelOverride>
+                        <BoxContainer
+                            Margin="12"
+                            Orientation="Vertical"
+                            SeparationOverride="10"
+                            VerticalExpand="True">
+                            <Label
+                                Access="Public"
+                                FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                                Name="StoreDetailsTitleLabel"
+                                StyleClasses="LabelHeading"
+                                Text="{Loc 'donation-terminal-shop-details-title'}" />
+                            <controls:HLine
+                                Color="{x:Static sf:SciFiPalette.BorderDim}"
+                                Thickness="1" />
+                            <Label
+                                Access="Public"
+                                FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                                Name="StoreDetailsEmptyLabel"
+                                Text="{Loc 'donation-terminal-shop-details-placeholder'}" />
+                            <BoxContainer
+                                Access="Public"
+                                HorizontalExpand="True"
+                                Name="StoreDetailsContent"
+                                Orientation="Vertical"
+                                SeparationOverride="10"
+                                VerticalExpand="True"
+                                Visible="False">
+                                <BoxContainer
+                                    HorizontalExpand="True"
+                                    Orientation="Horizontal"
+                                    SeparationOverride="12">
+                                    <Control
+                                        Access="Public"
+                                        MinHeight="112"
+                                        MinWidth="112"
+                                        Name="StoreDetailsPreviewHost" />
+                                    <BoxContainer
+                                        HorizontalExpand="True"
+                                        Orientation="Vertical"
+                                        SeparationOverride="6">
+                                        <RichTextLabel
+                                            Access="Public"
+                                            HorizontalExpand="True"
+                                            MaxHeight="90"
+                                            MaxWidth="210"
+                                            MinHeight="48"
+                                            Name="StoreDetailsNameLabel"
+                                            StyleClasses="SciFiDetailsTitle" />
+                                        <BoxContainer
+                                            HorizontalExpand="True"
+                                            Orientation="Horizontal"
+                                            SeparationOverride="5">
+                                            <Label
+                                                Access="Public"
+                                                FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                                                Name="StoreDetailsPriceLabel"
+                                                StyleClasses="LabelHeading"
+                                                Text=""
+                                                VAlign="Center" />
+                                            <TextureRect
+                                                Access="Public"
+                                                Name="StoreDetailsPriceIcon"
+                                                SetSize="20 20"
+                                                Stretch="KeepAspectCentered"
+                                                TexturePath="/Textures/_Sunrise/Interface/Sponsor/telecrystal.png" />
+                                            <Label
+                                                Access="Public"
+                                                FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                                                Name="StoreDetailsPriceValueLabel"
+                                                StyleClasses="LabelHeading"
+                                                Text=""
+                                                VAlign="Center" />
+                                        </BoxContainer>
+                                    </BoxContainer>
+                                </BoxContainer>
+                                <controls:HLine
+                                    Color="{x:Static sf:SciFiPalette.BorderDim}"
+                                    Thickness="1" />
+                                <BoxContainer
+                                    HorizontalExpand="True"
+                                    Orientation="Vertical"
+                                    SeparationOverride="4">
+                                    <Label
+                                        FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                                        Text="{Loc 'donation-terminal-shop-details-level'}" />
+                                    <Label
+                                        Access="Public"
+                                        FontColorOverride="{x:Static sf:SciFiPalette.Text}"
+                                        MaxHeight="58"
+                                        MinHeight="32"
+                                        Name="StoreDetailsTierValue"
+                                        Text="" />
+                                </BoxContainer>
+                                <controls:HLine
+                                    Color="{x:Static sf:SciFiPalette.BorderDim}"
+                                    Thickness="1" />
+                                <Label
+                                    FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                                    Text="{Loc 'donation-terminal-shop-details-description'}" />
+                                <ScrollContainer
+                                    HScrollEnabled="False"
+                                    HorizontalExpand="True"
+                                    VerticalExpand="True"
+                                    VScrollEnabled="True">
+                                    <RichTextLabel
+                                        Access="Public"
+                                        HorizontalExpand="True"
+                                        MaxWidth="320"
+                                        Name="StoreDetailsDescriptionLabel" />
+                                </ScrollContainer>
+                                <sf:SciFiSweepButton
+                                    Access="Public"
+                                    HorizontalExpand="True"
+                                    MinHeight="32"
+                                    Name="StoreDetailsBuyButton"
+                                    StyleClasses="SciFiButton"
+                                    Text="{Loc 'donation-terminal-buy'}" />
+                            </BoxContainer>
+                        </BoxContainer>
+                    </PanelContainer>
+                </BoxContainer>
+
+                <BoxContainer
+                    Access="Public"
+                    HorizontalExpand="True"
+                    Name="SubscriptionsContent"
+                    Orientation="Vertical"
+                    SeparationOverride="10"
+                    VerticalExpand="True"
+                    Visible="False">
+                    <BoxContainer
+                        HorizontalExpand="True"
+                        Orientation="Horizontal"
+                        SeparationOverride="10">
+                        <BoxContainer
+                            HorizontalExpand="True"
+                            Orientation="Vertical"
+                            SeparationOverride="2">
+                            <Label
+                                FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                                StyleClasses="LabelHeading"
+                                Text="{Loc 'donation-terminal-subscriptions-list'}" />
+                            <Label
+                                FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                                Text="{Loc 'donation-terminal-subscriptions-hint'}" />
+                        </BoxContainer>
+                        <sf:SciFiSweepButton
+                            Access="Public"
+                            MinWidth="170"
+                            Name="SubscriptionPurchaseButton"
+                            StyleClasses="SciFiButton"
+                            Text="{Loc 'donation-terminal-purchase-sponsor'}"
+                            VerticalAlignment="Center" />
+                    </BoxContainer>
+                    <controls:HLine
+                        Color="{x:Static sf:SciFiPalette.BorderDim}"
+                        Thickness="1" />
+                    <ScrollContainer
+                        HScrollEnabled="True"
+                        HorizontalExpand="True"
+                        VerticalExpand="True"
+                        VScrollEnabled="False">
+                        <BoxContainer
+                            Access="Public"
+                            HorizontalExpand="True"
+                            Name="SubscriptionCards"
+                            Orientation="Horizontal"
+                            SeparationOverride="0"
+                            VerticalExpand="True" />
+                    </ScrollContainer>
+                </BoxContainer>
+
+                <BoxContainer
+                    Access="Public"
+                    HorizontalExpand="True"
+                    Name="PurchaseConfirmationContent"
+                    Orientation="Vertical"
+                    SeparationOverride="12"
+                    VerticalExpand="True"
+                    Visible="False">
+                    <BoxContainer
+                        HorizontalExpand="True"
+                        Orientation="Horizontal">
+                        <Label
+                            FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                            StyleClasses="LabelHeading"
+                            Text="{Loc 'donation-terminal-purchase-title'}"
+                            VAlign="Center" />
+                        <Control HorizontalExpand="True" />
+                        <BoxContainer
+                            Orientation="Horizontal"
+                            SeparationOverride="5"
+                            VerticalAlignment="Center">
+                            <Label
+                                FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                                Text="{Loc 'donation-terminal-purchase-details'}"
+                                VAlign="Center" />
+                            <TextureRect
+                                SetSize="18 18"
+                                Stretch="KeepAspectCentered"
+                                TexturePath="/Textures/_Sunrise/Interface/Sponsor/telecrystal.png" />
+                        </BoxContainer>
+                    </BoxContainer>
+                    <ScrollContainer
+                        HScrollEnabled="False"
+                        HorizontalExpand="True"
+                        VerticalExpand="True"
+                        VScrollEnabled="True">
+                        <BoxContainer
+                            HorizontalExpand="True"
+                            HorizontalAlignment="Center"
+                            MaxWidth="980"
+                            Orientation="Horizontal"
+                            SeparationOverride="10"
+                            VerticalAlignment="Center">
+                            <BoxContainer
+                                HorizontalExpand="True"
+                                MinWidth="520"
+                                Orientation="Vertical"
+                                SeparationOverride="8">
+                                    <BoxContainer
+                                        HorizontalExpand="True"
+                                        Orientation="Horizontal"
+                                        SeparationOverride="10">
+                                        <Control
+                                            Access="Public"
+                                            HorizontalAlignment="Center"
+                                            MinHeight="180"
+                                            MinWidth="180"
+                                            Name="PurchasePreviewHost"
+                                            VerticalAlignment="Center" />
+                                        <BoxContainer
+                                            HorizontalExpand="True"
+                                            Orientation="Vertical"
+                                            SeparationOverride="6">
+                                            <Label
+                                                Access="Public"
+                                                FontColorOverride="{x:Static sf:SciFiPalette.Text}"
+                                                MaxHeight="58"
+                                                MinHeight="34"
+                                                Name="PurchaseNameLabel"
+                                                StyleClasses="LabelHeading"
+                                                Text="" />
+                                            <controls:HLine
+                                                Color="{x:Static sf:SciFiPalette.BorderDim}"
+                                                Thickness="1" />
+                                            <BoxContainer
+                                                HorizontalExpand="True"
+                                                Orientation="Horizontal"
+                                                SeparationOverride="6">
+                                                <Label
+                                                    Access="Public"
+                                                    FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                                                    Name="PurchasePriceLabel"
+                                                    Text=""
+                                                    VAlign="Center" />
+                                                <Control HorizontalExpand="True" />
+                                                <TextureRect
+                                                    Access="Public"
+                                                    Name="PurchasePriceIcon"
+                                                    SetSize="20 20"
+                                                    Stretch="KeepAspectCentered"
+                                                    TexturePath="/Textures/_Sunrise/Interface/Sponsor/telecrystal.png" />
+                                                <Label
+                                                    Access="Public"
+                                                    FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                                                    Name="PurchasePriceValueLabel"
+                                                    StyleClasses="LabelHeading"
+                                                    Text=""
+                                                    VAlign="Center" />
+                                            </BoxContainer>
+                                        </BoxContainer>
+                                    </BoxContainer>
+                                    <RichTextLabel
+                                        HorizontalExpand="True"
+                                        StyleClasses="LabelSubText"
+                                        Text="{Loc 'donation-terminal-purchase-warning'}" />
+                            </BoxContainer>
+
+                            <PanelContainer StyleClasses="SciFiDivider" />
+
+                            <BoxContainer
+                                MaxWidth="300"
+                                MinWidth="300"
+                                Orientation="Vertical"
+                                SeparationOverride="6"
+                                VerticalAlignment="Center">
+                                    <Label
+                                        FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                                        StyleClasses="LabelHeading"
+                                        Text="{Loc 'donation-terminal-purchase-details'}" />
+                                    <controls:HLine
+                                        Color="{x:Static sf:SciFiPalette.BorderDim}"
+                                        Thickness="1" />
+                                    <Label
+                                        Access="Public"
+                                        FontColorOverride="{x:Static sf:SciFiPalette.Text}"
+                                        MaxHeight="42"
+                                        MinHeight="18"
+                                        Name="PurchaseTotalLabel"
+                                        Text="" />
+                                    <controls:HLine
+                                        Color="{x:Static sf:SciFiPalette.BorderDim}"
+                                        Thickness="1" />
+                                    <Label
+                                        Access="Public"
+                                        FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                                        MaxHeight="42"
+                                        MinHeight="18"
+                                        Name="PurchaseBalanceLabel"
+                                        Text="" />
+                                    <controls:HLine
+                                        Color="{x:Static sf:SciFiPalette.BorderDim}"
+                                        Thickness="1" />
+                                    <Label
+                                        Access="Public"
+                                        FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                                        MaxHeight="42"
+                                        MinHeight="18"
+                                        Name="PurchaseAfterBalanceLabel"
+                                        Text="" />
+                                    <controls:HLine
+                                        Color="{x:Static sf:SciFiPalette.BorderDim}"
+                                        Thickness="1" />
+                                    <RichTextLabel
+                                        Access="Public"
+                                        HorizontalExpand="True"
+                                        MaxWidth="300"
+                                        Name="PurchaseStatusLabel"
+                                        StyleClasses="LabelSubText" />
+                                    <BoxContainer
+                                        HorizontalExpand="True"
+                                        Orientation="Horizontal"
+                                        SeparationOverride="6">
+                                        <Button
+                                            Access="Public"
+                                            HorizontalExpand="True"
+                                            MinWidth="132"
+                                            Name="PurchaseCancelButton"
+                                            StyleClasses="SciFiDonateButton"
+                                            Text="{Loc 'donation-terminal-cancel'}" />
+                                        <sf:SciFiSweepButton
+                                            Access="Public"
+                                            HorizontalExpand="True"
+                                            MinWidth="160"
+                                            Name="PurchaseConfirmButton"
+                                            StyleClasses="SciFiButton"
+                                            Text="{Loc 'donation-terminal-confirm'}" />
+                                    </BoxContainer>
+                            </BoxContainer>
+                        </BoxContainer>
+                    </ScrollContainer>
+                </BoxContainer>
+            </BoxContainer>
+        </PanelContainer>
+
+        <BoxContainer
+            Margin="0 7 0 0"
+            Orientation="Horizontal">
+            <Label
+                Access="Public"
+                FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                Name="Footer" />
+            <Control HorizontalExpand="True" />
+            <Label
+                FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                Text="{Loc 'donation-terminal-footer-right'}" />
+        </BoxContainer>
+    </BoxContainer>
+
+    <s:SponsorWindowOpenAnimationOverlay
+        Access="Public"
+        HorizontalExpand="True"
+        MouseFilter="Ignore"
+        Name="OpenAnimationOverlay"
+        VerticalExpand="True"
+        Visible="False" />
+</s:SponsorWindow>

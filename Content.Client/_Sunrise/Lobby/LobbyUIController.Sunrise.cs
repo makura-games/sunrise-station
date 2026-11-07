@@ -13,10 +13,8 @@ using Content.Shared.Inventory;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
-using Content.Sunrise.Interfaces.Shared;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
-using Robust.Shared.IoC;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
@@ -31,13 +29,6 @@ public sealed partial class LobbyUIController
     [UISystemDependency] private readonly SunriseHumanoidProfileSystem _sunriseProfile = default!;
     [UISystemDependency] private readonly SunriseHumanoidProfileVisualSystem _sunriseProfileVisual = default!;
     [UISystemDependency] private readonly StationSpawningSystem _spawn = default!;
-    private ISharedSponsorsManager? _sponsorsManager;
-
-    private void InitializeSunrisePreviewHelpers()
-    {
-        IoCManager.Instance!.TryResolveType(out _sponsorsManager);
-    }
-
     /// <summary>
     /// Applies the highest priority job's clothes to the dummy.
     /// </summary>
@@ -46,7 +37,6 @@ public sealed partial class LobbyUIController
         var job = jobPrototype ?? GetPreferredJob(profile);
         GiveDummyJobClothes(dummy, profile, job);
 
-        var sponsorPrototypes = _sponsorsManager?.GetClientPrototypes().ToArray() ?? [];
         var jobLoadoutId = LoadoutSystem.GetJobPrototype(job.ID);
         var effectiveJobLoadoutId = LoadoutSystem.GetEffectiveRolePrototype(jobLoadoutId, _prototypeManager);
         if (!_prototypeManager.HasIndex(effectiveJobLoadoutId))
@@ -55,10 +45,7 @@ public sealed partial class LobbyUIController
         var loadout = profile.GetLoadoutOrDefault(
             jobLoadoutId,
             _playerManager.LocalSession,
-            profile.Species,
-            EntityManager,
-            _prototypeManager,
-            sponsorPrototypes);
+            _prototypeManager);
         GiveDummyLoadout(dummy, loadout, true);
     }
 
@@ -172,14 +159,10 @@ public sealed partial class LobbyUIController
         if (!_prototypeManager.HasIndex<RoleLoadoutPrototype>(effectiveJobLoadoutId))
             return dummy;
 
-        var sponsorPrototypes = _sponsorsManager?.GetClientPrototypes().ToArray() ?? [];
         var loadout = humanoid.GetLoadoutOrDefault(
             jobLoadoutId,
             _playerManager.LocalSession,
-            humanoid.Species,
-            EntityManager,
-            _prototypeManager,
-            sponsorPrototypes);
+            _prototypeManager);
         GiveDummyLoadout(dummy, loadout, jobClothes);
         return dummy;
     }
