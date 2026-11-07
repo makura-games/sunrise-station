@@ -52,13 +52,15 @@ The same general rules apply for any fork:
 2. Do not change the marker text, just adapt the comment syntax to the file language.
 3. Do not copy the marker style from neighbouring code and do not invent variants: the marker text is fixed for the fork and is taken only from the correspondence map in section 3.
 
-Select the comment syntax to match the file language and replace `<Prefix>` with the `Prefix` value of the selected row in section 3:
+Select the comment syntax to match the file language. This table defines only the comment wrapper: the marker text is taken verbatim from section 3:
 
-| File type | Edit | Added | Block edit | Block added |
-| --- | --- | --- | --- | --- |
-| `.cs`, `.swsl`, `.cpp`, `.hpp`, `.h`, `.java` | `// <Prefix> edit` | `// <Prefix> added` | `// <Prefix> edit start` … `// <Prefix> edit end` | `// <Prefix> added start` … `// <Prefix> added end` |
-| `.yml`, `.yaml`, `.ftl`, `.py`, `.sh` | `# <Prefix> edit` | `# <Prefix> added` | `# <Prefix> edit start` … `# <Prefix> edit end` | `# <Prefix> added start` … `# <Prefix> added end` |
-| `.xaml`, `.xml`, `.csproj`, `.props`, `.targets`, `.html`, `.htm` | `<!-- <Prefix> edit -->` | `<!-- <Prefix> added -->` | `<!-- <Prefix> edit start -->` … `<!-- <Prefix> edit end -->` | `<!-- <Prefix> added start -->` … `<!-- <Prefix> added end -->` |
+| File type | Single-line form | Block form |
+| --- | --- | --- |
+| `.cs`, `.swsl`, `.cpp`, `.hpp`, `.h`, `.java` | `// <exact marker>` | `// <exact block start>` … `// <exact block end>` |
+| `.yml`, `.yaml`, `.ftl`, `.py`, `.sh` | `# <exact marker>` | `# <exact block start>` … `# <exact block end>` |
+| `.xaml`, `.xml`, `.csproj`, `.props`, `.targets`, `.html`, `.htm` | `<!-- <exact marker> -->` | `<!-- <exact block start> -->` … `<!-- <exact block end> -->` |
+
+If the selected row in section 3 does not define a form (for example, block markers for Fish or Lust), do not invent one: follow the note in that row and the local file style.
 
 Rules for applying a marker:
 
