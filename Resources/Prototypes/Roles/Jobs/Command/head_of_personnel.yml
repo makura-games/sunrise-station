@@ -19,6 +19,11 @@
     - !type:DepartmentTimeRequirement
       department: Command
       time: 2.5h
+    # Sunrise added start - сохраняем чёрный список при переносе в требования роли
+    - !type:SpeciesRequirement
+      species: [Vox]
+      inverted: true
+    # Sunrise added end
   startingGear: HoPGear
   icon: "JobIconHeadOfPersonnel"
   supervisors: job-supervisors-captain
@@ -67,8 +72,6 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-  speciesBlacklist:
-  - Vox # Sunrise-Edit
 
 - type: startingGear
   id: HoPGear
