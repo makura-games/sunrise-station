@@ -95,9 +95,11 @@
 - type: entity
   parent: [ScatteringGrenadeBase, ImpactGrenadeBase, BaseSyndicateContraband]
   id: ClusterBananaPeel
-  suffix: cluster explosive, unarmed # Sunrise-Edit
-  name: banana # Sunrise-Edit
-  description: Rich in potassium. # Sunrise-Edit
+  # Sunrise edit start
+  name: banana
+  description: Rich in potassium.
+  # Sunrise edit end
+  suffix: cluster explosive, unarmed # Sunrise added
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/banana.rsi
