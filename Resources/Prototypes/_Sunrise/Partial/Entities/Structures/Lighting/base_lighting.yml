@@ -1,4 +1,4 @@
-# Частичные прототипы сохраняют визуалы освещения Sunrise поверх обновлений Wizden.
+# Частичные прототипы сохраняют эффекты Sunrise и используют апстримные корпуса светильников.
 
 - type: !PartialOnly entity
   id: BaseWallLight
@@ -12,8 +12,8 @@
   id: AlwaysPoweredWallLight
   components:
   - type: Sprite
-    sprite: _Sunrise/Structures/Wallmounts/lighting/light_tube.rsi
-    offset: 0, 0
+    sprite: Structures/Wallmounts/Lighting/light-tube.rsi
+    offset: 0, 1
     layers: !Clear
     - !Index:0
       map: ["enum.PoweredLightLayers.Base"]
@@ -27,15 +27,15 @@
   id: PoweredlightEmpty
   components:
   - type: Sprite
-    sprite: _Sunrise/Structures/Wallmounts/lighting/light_tube.rsi
-    offset: 0, 0
+    sprite: Structures/Wallmounts/Lighting/light-tube.rsi
+    offset: 0, 1
 
 - type: !PartialOnly entity
   id: SmallLight
   components:
   - type: Sprite
-    sprite: _Sunrise/Structures/Wallmounts/lighting/light_small.rsi
-    offset: 0, 0
+    sprite: Structures/Wallmounts/Lighting/light-small.rsi
+    offset: 0, 1
   - type: HolidayVisuals
     holidays:
       festive:
@@ -48,8 +48,8 @@
   id: PoweredSmallLightEmpty
   components:
   - type: Sprite
-    sprite: _Sunrise/Structures/Wallmounts/lighting/light_small.rsi
-    offset: 0, 0
+    sprite: Structures/Wallmounts/Lighting/light-small.rsi
+    offset: 0, 1
   - type: HolidayVisuals
     holidays:
       festive:
