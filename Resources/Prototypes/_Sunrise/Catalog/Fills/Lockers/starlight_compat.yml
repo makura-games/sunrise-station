@@ -93,6 +93,10 @@
           amount: 4
         - id: Binoculars
           amount: 2
+        - id: HandheldCriminalRecordsMonitor
+          amount: 2
+        - id: WeaponTaser
+          amount: 2
 
 - type: entity
   id: LockerWardenLargeEShotgunFilled
@@ -142,6 +146,8 @@
         - id: Binoculars
           amount: 2
         - id: HandheldCriminalRecordsMonitor
+          amount: 2
+        - id: WeaponTaser
           amount: 2
 
 - type: entityTable
