@@ -41211,7 +41211,7 @@ entities:
         categories:
         - CMOHeadOfDepartment
       - costModifiersBySourceId: {}
-        productEntity: EnergyShieldBiocode
+        productEntity: SunriseEnergyShield
         originalCost:
           Telecrystal: 9
         name: uplink-eshield-name
@@ -42502,7 +42502,7 @@ entities:
         categories:
         - UplinkAmmo
       - costModifiersBySourceId: {}
-        productEntity: EnergyShieldBiocode
+        productEntity: SunriseEnergyShield
         originalCost:
           Telecrystal: 6
         name: uplink-eshield-name
