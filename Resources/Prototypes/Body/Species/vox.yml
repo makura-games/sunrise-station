@@ -229,6 +229,9 @@
       reagents:
       - ReagentId: AmmoniaBlood
         Quantity: 600
+  - type: BloodSource # Sunrise-Edit - аммиачная кровь воксов
+    kind: Ammonia
+    value: 0.35
   - type: MeleeWeapon
     soundHit:
       collection: AlienClaw

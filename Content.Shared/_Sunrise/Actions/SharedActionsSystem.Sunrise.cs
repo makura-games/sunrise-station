@@ -91,4 +91,16 @@ public abstract partial class SharedActionsSystem
         ent.Comp.IgnoreContainer = value;
         DirtyField(ent, ent.Comp, nameof(TargetActionComponent.IgnoreContainer));
     }
+
+    /// <summary>
+    /// Изменяет максимальную дальность выбора цели для action.
+    /// </summary>
+    public void SetRange(Entity<TargetActionComponent?> ent, float value)
+    {
+        if (!_sunriseTargetActionQuery.Resolve(ent, ref ent.Comp) || ent.Comp.Range.Equals(value))
+            return;
+
+        ent.Comp.Range = value;
+        DirtyField(ent, ent.Comp, nameof(TargetActionComponent.Range));
+    }
 }

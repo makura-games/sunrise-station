@@ -489,7 +489,7 @@
       - !type:PopupMessage
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Arachnid, Slime ] # Sunrise edit
+          type: [ Animal, Vox, Arachnid, Slime, Vampire ] # Sunrise edit
           inverted: true
         type: Local
         visualType: MediumCaution
@@ -499,12 +499,12 @@
         probability: 0.1
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant, Arachnid, Slime ] # Sunrise edit
+          type: [ Animal, Vox, Plant, Arachnid, Slime, Vampire ] # Sunrise edit
           inverted: true
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant, Arachnid, Slime ] # Sunrise edit
+          type: [ Animal, Vox, Plant, Arachnid, Slime, Vampire ] # Sunrise edit
           inverted: true
         damage:
           types:
@@ -519,7 +519,7 @@
       - !type:AdjustReagent
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Arachnid, Slime ] # Sunrise edit
+          type: [ Animal, Arachnid, Slime, Vampire ] # Sunrise edit
         reagent: Protein
         amount: 0.5
       - !type:AdjustReagent

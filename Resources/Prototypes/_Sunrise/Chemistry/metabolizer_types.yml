@@ -29,3 +29,7 @@
 - type: metabolizerType
   id: InferiorVulpkanin
   name: metabolizer-type-inferior-vulpkanin
+
+- type: metabolizerType
+  id: Vampire
+  name: metabolizer-type-vampire

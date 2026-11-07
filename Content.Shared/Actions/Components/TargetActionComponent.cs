@@ -48,8 +48,10 @@ public sealed partial class TargetActionComponent : Component
     ///     The allowed range for a target to be. If zero or negative, the range check is skipped,
     ///     unless <see cref="CheckCanAccess"/> is true.
     /// </summary>
-    [DataField]
+    // Sunrise edit start - синхронизация изменяемой дальности action
+    [DataField, AutoNetworkedField]
     public float Range = SharedInteractionSystem.InteractionRange;
+    // Sunrise edit end
 
     /// <summary>
     ///     If the target is invalid, this bool determines whether the left-click will default to performing a standard-interaction
