@@ -29,4 +29,11 @@ public sealed partial class FTLComponent
     /// </summary>
     [DataField]
     public Vector2 OriginPosition;
+
+    /// <summary>
+    /// FTL завершён на месте, без карты назначения.
+    /// В этом состоянии не применяются эффекты прибытия (разморозка карты и Smimsh).
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool ArrivedInPlace;
 }

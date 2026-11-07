@@ -507,12 +507,16 @@ public sealed partial class ShuttleSystem
 
                 if (fallbackMap.Item1 == null)
                 {
-                    FinishSunriseFtlWithoutArrival(uid, comp);
-                    return;
+                    // Карт назначения нет: завершаем FTL на месте, пропуская Smimsh и разморозку карты.
+                    Log.Error($"Unable to find an FTL destination map for {ToPrettyString(uid)}, finishing FTL in place.");
+                    mapId = xform.MapID;
+                    comp.ArrivedInPlace = true;
                 }
-
-                mapId = fallbackMap.Item1.MapId;
-                TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+                else
+                {
+                    mapId = fallbackMap.Item1.MapId;
+                    TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+                }
             }
             // Sunrise edit end
         }
@@ -582,8 +586,14 @@ public sealed partial class ShuttleSystem
                 : FTLCooldown);
         comp.StateTime = StartEndTime.FromCurTime(_gameTiming, cooldown);
         _console.RefreshShuttleConsoles(uid);
-        _mapSystem.SetPaused(mapId, false);
-        Smimsh(uid, xform: xform);
+
+        // Sunrise edit start - на аварийном завершении не трогаем карту и не вызываем Smimsh.
+        if (!comp.ArrivedInPlace)
+        {
+            _mapSystem.SetPaused(mapId, false);
+            Smimsh(uid, xform: xform);
+        }
+        // Sunrise edit end
 
         var ftlEvent = new FTLCompletedEvent(uid, _mapSystem.GetMap(mapId));
         RaiseLocalEvent(uid, ref ftlEvent, true);

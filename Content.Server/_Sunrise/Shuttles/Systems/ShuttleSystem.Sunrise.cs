@@ -2,11 +2,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Server._Sunrise.Shuttles.Components;
 using Content.Server.Shuttles.Components;
-using Content.Server.Shuttles.Events;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Shuttles.Components;
-using Content.Shared.Shuttles.Systems;
 using Content.Shared.Timing;
 using Robust.Shared.Collections;
 using Robust.Shared.Map;
@@ -278,30 +276,6 @@ public sealed partial class ShuttleSystem
 
         mapId = originMapComp.MapId;
         return true;
-    }
-
-    /// <summary>
-    /// Завершает FTL, когда цель перелёта и карта возврата больше не существуют.
-    /// </summary>
-    /// <remarks>
-    /// Штатное прибытие не выполняется: шаттл остаётся на текущей карте, Smimsh не вызывается,
-    /// но состояние переходит в Cooldown, чтобы Arriving не повторялся каждый тик.
-    /// </remarks>
-    private void FinishSunriseFtlWithoutArrival(EntityUid shuttleUid, FTLComponent ftl)
-    {
-        Log.Error($"Unable to arrive {ToPrettyString(shuttleUid)}: FTL target and origin maps are gone, finishing FTL in place.");
-
-        ftl.TravelStream = _audio.Stop(ftl.TravelStream);
-
-        ftl.State = FTLState.Cooldown;
-        ftl.StateTime = StartEndTime.FromCurTime(_gameTiming, FTLCooldown);
-        _console.RefreshShuttleConsoles(shuttleUid);
-
-        if (Transform(shuttleUid).MapUid is { } mapUid)
-        {
-            var ev = new FTLCompletedEvent(shuttleUid, mapUid);
-            RaiseLocalEvent(shuttleUid, ref ev, true);
-        }
     }
 
     /// <summary>
