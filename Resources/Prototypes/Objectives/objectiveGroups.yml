@@ -113,6 +113,7 @@
     BibleStealObjective: 1
     ClothingNeckGoldmedalStealObjective: 1              #other
     ClothingNeckClownmedalStealObjective: 0.5
+    HOPSoftSuitStealObjective: 1 # Sunrise-Edit - добавляем цель на кражу скафандра главы персонала.
 
 - type: weightedRandom
   id: ThiefObjectiveGroupStructure

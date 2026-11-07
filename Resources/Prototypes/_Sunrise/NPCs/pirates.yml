@@ -1612,7 +1612,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/privateer.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Mask/neckgaiter.rsi
       state: equipped-MASK
@@ -1895,7 +1895,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/privateer.rsi
       state: equipped-OUTERCLOTHING
     - sprite: _Sunrise/Clothing/Head/Hardsuits/privateer.rsi
       state: equipped-HELMET
@@ -1954,7 +1954,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/privateer.rsi
       state: equipped-OUTERCLOTHING
     - sprite: _Sunrise/Clothing/Head/Hardsuits/privateer.rsi
       state: equipped-HELMET
@@ -2352,7 +2352,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/pirate.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/pirate.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
       state: equipped-head
@@ -2483,7 +2483,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/pirate.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/pirate.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Head/Helmets/podwars_helmet.rsi
       state: equipped-HELMET
@@ -2892,7 +2892,7 @@
     layers:
     - sprite: Mobs/Species/Vox/parts.rsi
       state: vox_m
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/pirate.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/pirate.rsi
       state: equipped-OUTERCLOTHING-vox
     - sprite: Clothing/Shoes/Boots/jumpboots.rsi
       state: equipped-FEET-vox
@@ -2939,7 +2939,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/pirate.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/pirate.rsi
       state: equipped-OUTERCLOTHING-reptilian
     - sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
       state: equipped-head-reptilian
@@ -3263,7 +3263,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/privateer.rsi
       state: equipped-OUTERCLOTHING
     - sprite: _Sunrise/Clothing/Head/Hardsuits/privateer.rsi
       state: equipped-HELMET
@@ -3296,7 +3296,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer_armored.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/privateer_armored.rsi
       state: equipped-OUTERCLOTHING
     - sprite: _Sunrise/Clothing/Head/Hardsuits/privateer.rsi
       state: equipped-HELMET
@@ -3335,7 +3335,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/privateer.rsi
       state: equipped-OUTERCLOTHING
     - sprite: _Sunrise/Clothing/Head/Hardsuits/privateer.rsi
       state: equipped-HELMET
@@ -3389,7 +3389,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/privateer.rsi
       state: equipped-OUTERCLOTHING
     - sprite: _Sunrise/Clothing/Head/Hardsuits/privateer.rsi
       state: equipped-HELMET
@@ -3442,7 +3442,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/privateer.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Mask/neckgaiter.rsi
       state: equipped-MASK
@@ -3504,7 +3504,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer_armored.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/privateer_armored.rsi
       state: equipped-OUTERCLOTHING
     - sprite: _Sunrise/Clothing/Head/Helmets/pirate_eva_alt.rsi
       state: equipped-HELMET
@@ -3561,7 +3561,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer_armored.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/privateer_armored.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Mask/neckgaiter.rsi
       state: equipped-MASK
@@ -3631,7 +3631,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/privateer.rsi
       state: equipped-OUTERCLOTHING
     - sprite: _Sunrise/Clothing/Head/Hardsuits/privateer.rsi
       state: equipped-HELMET
@@ -3782,7 +3782,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/privateer.rsi
       state: equipped-OUTERCLOTHING
     - sprite: _Sunrise/Clothing/Head/Hardsuits/privateer.rsi
       state: equipped-HELMET
@@ -3866,7 +3866,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer_armored.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/privateer_armored.rsi
       state: equipped-OUTERCLOTHING
     - sprite: _Sunrise/Clothing/Head/Hardsuits/privateer.rsi
       state: equipped-HELMET
@@ -3911,7 +3911,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/privateer.rsi
       state: equipped-OUTERCLOTHING
     - sprite: _Sunrise/Clothing/Head/Hardsuits/privateer.rsi
       state: equipped-HELMET
@@ -3953,7 +3953,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer_armored.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/privateer_armored.rsi
       state: equipped-OUTERCLOTHING
     - sprite: _Sunrise/Clothing/Head/Hardsuits/privateer.rsi
       state: equipped-HELMET
@@ -4049,7 +4049,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/privateer_armored.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/privateer_armored.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/OuterClothing/Coats/hos_trenchcoat.rsi
       state: equipped-OUTERCLOTHING
@@ -4230,7 +4230,7 @@
     - sprite: Clothing/Uniforms/Jumpsuits/Color/color.rsi
       state: equipped-INNERCLOTHING
       color: "#d3bf86"
-    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/piratecaptain.rsi
+    - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/Pirates/piratecaptain.rsi
       state: equipped-OUTERCLOTHING
     - sprite: _Sunrise/Clothing/Head/Hardsuits/piratecaptainhelm.rsi
       state: equipped-HELMET

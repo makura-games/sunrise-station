@@ -1,3 +1,56 @@
+# EVA главы персонала
+- type: entity
+  parent: [ ClothingOuterHardsuitBase, BaseCommandContraband, BaseGrandTheftContraband ]
+  id: ClothingOuterEVASuitHop
+  name: head of personnel's EVA suit
+  description: A special suit that protects against hazardous low-pressure environments and paper cuts. Designed for the Head of Personnel.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/hop_softsuit.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/hop_softsuit.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.525
+    lowPressureMultiplier: 1000
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+  - type: Pierceable
+    level: Metal
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.9
+        Piercing: 0.95
+        Heat: 0.9
+        Caustic: 0.9
+  - type: StaminaResistance
+    damageCoefficient: 0.8
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetSoftsuitHop
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+      cell_slot: !type:ContainerSlot {}
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellSmall
+        whitelist:
+          tags:
+          - PowerCell
+          - PowerCellSmall
+  - type: Tag
+    tags:
+    - Hardsuit
+    - CorgiWearable
+    - WhitelistChameleon
+  - type: StealTarget
+    stealGroup: HOPSoftSuit
 
 #CBURN Softsuit
 - type: entity

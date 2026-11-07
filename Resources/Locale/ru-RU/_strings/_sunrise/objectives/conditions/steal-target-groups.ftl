@@ -4,3 +4,4 @@ steal-target-groups-multiphase = X-01 мультифазный энергети�
 steal-target-groups-plutonium = плутониевое ядро
 steal-target-groups-advanced-defibrillator = продвинутый дефибриллятор
 steal-target-groups-hos-weapon = Наградное оружие ГСБ, ВТ550К или Матеба
+steal-target-groups-hop-softsuit = EVA главы персонала

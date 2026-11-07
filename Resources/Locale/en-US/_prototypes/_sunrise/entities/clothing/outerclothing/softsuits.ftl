@@ -25,3 +25,5 @@ ent-ClothingOuterEVASuitPirateArmoredAltDamaged = damaged armored boarding EVA s
 ent-ClothingOuterHardsuitScafDamaged = damaged EVA suit
     .desc = A green-and-brown EVA suit with split seams and punctured pressure layers. It no longer protects its wearer from the vacuum of space.
     .suffix = Pirates
+ent-ClothingOuterEVASuitHop = head of personnel's EVA suit
+    .desc = A special suit that protects against hazardous low-pressure environments and paper cuts. Designed for the Head of Personnel.
