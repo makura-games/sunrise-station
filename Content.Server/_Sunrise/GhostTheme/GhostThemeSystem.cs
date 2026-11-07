@@ -1,6 +1,6 @@
 // © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 using Content.Shared._Sunrise.GhostTheme;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Server.GameObjects;
@@ -13,7 +13,6 @@ namespace Content.Server._Sunrise.GhostTheme;
 
 public sealed partial class GhostThemeSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private UserInterfaceSystem _uiSystem = default!;
     [Dependency] private SponsorValidationSystem _validationSystem = default!;
     [Dependency] private PlayerCacheManager _playerCache = default!;
@@ -52,7 +51,7 @@ public sealed partial class GhostThemeSystem : EntitySystem
         if (!_validationSystem.ValidateGhostThemeSelection(msg.SelectedGhostTheme, actorComp.PlayerSession.UserId))
             return;
 
-        if (!_prototypeManager.TryIndex<GhostThemePrototype>(msg.SelectedGhostTheme, out var ghostThemePrototype))
+        if (!ProtoMan.TryIndex<GhostThemePrototype>(msg.SelectedGhostTheme, out var ghostThemePrototype))
             return;
 
         if (!_playerCache.TryGetCache(actorComp.PlayerSession.UserId, out var cache))
@@ -85,7 +84,7 @@ public sealed partial class GhostThemeSystem : EntitySystem
         if (!_validationSystem.ValidateGhostThemeSelection(ghostTheme, args.Player.UserId))
             return;
 
-        if (!_prototypeManager.TryIndex<GhostThemePrototype>(ghostTheme, out var ghostThemePrototype))
+        if (!ProtoMan.TryIndex<GhostThemePrototype>(ghostTheme, out var ghostThemePrototype))
             return;
 
         var themeComponent = EnsureComp<GhostThemeComponent>(uid);

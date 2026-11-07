@@ -31,9 +31,9 @@ public sealed partial class BanManager
     {
         _sunriseBanIpWhitelist.Clear();
 
-        foreach (var value in addresses.Split(','))
+        foreach (var value in addresses.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries))
         {
-            if (IPAddress.TryParse(value.Trim(), out var address))
+            if (IPAddress.TryParse(value, out var address))
             {
                 _sunriseBanIpWhitelist.Add(address);
                 continue;

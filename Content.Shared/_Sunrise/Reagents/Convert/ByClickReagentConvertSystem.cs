@@ -3,7 +3,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
@@ -44,7 +44,7 @@ public sealed partial class ByClickReagentConvertSystem : EntitySystem
                 continue;
 
             _useDelay.TryResetDelay(ent.Owner);
-            _popup.PopupClient(ent.Comp.PopupMessage, target, args.User);
+            _popup.PopupEntity(ent.Comp.PopupMessage, target, args.User);
             _audio.PlayPvs(ent.Comp.Sound, target);
             args.Handled = true;
             return;

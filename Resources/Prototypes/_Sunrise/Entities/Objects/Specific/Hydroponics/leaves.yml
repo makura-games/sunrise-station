@@ -7,7 +7,7 @@
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/cannabis_vita.rsi
   - type: Produce
-    seedId: CannabisVita
+    plantId: CannabisVitaPlants
   - type: Edible
   - type: Solution
     id: food

@@ -10,7 +10,6 @@
   startingGear: ChemistGear
   icon: "JobIconChemist"
   supervisors: job-supervisors-cmo
-  displayWeight: 30  # Sunrise
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-pharmacist
@@ -31,6 +30,7 @@
   job: Chemist
   equipment:
     head: ClothingHeadHatBeretMedic
+    eyes: ClothingEyesGlassesChemical
     mask: ClothingMaskSterile
     neck: ClothingNeckStethoscope
     outerClothing: ClothingOuterCoatLabChem

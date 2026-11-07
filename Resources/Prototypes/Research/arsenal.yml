@@ -128,6 +128,7 @@
   cost: 8000
   recipeUnlocks:
   - Truncheon
+  - EnergyBola # Sunrise-Add
   - TelescopicShield
   - HoloprojectorSecurity
   - WeaponDisablerSMG

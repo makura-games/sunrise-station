@@ -5,10 +5,11 @@
   components:
   - type: Action
     useDelay: 15
-    icon:
-      sprite: _Sunrise/Actions/zombie.rsi
-      state: jump
     itemIconStyle: NoItem
+  - type: Sprite
+    sprite: _Sunrise/Actions/zombie.rsi
+    layers:
+    - state: jump
   - type: TargetAction
     range: 200
     checkCanAccess: false
@@ -22,9 +23,10 @@
   components:
   - type: Action
     useDelay: 5
-    icon:
-      sprite: _Sunrise/Actions/zombie.rsi
-      state: the_look
     itemIconStyle: NoItem
+  - type: Sprite
+    sprite: _Sunrise/Actions/zombie.rsi
+    layers:
+    - state: the_look
   - type: InstantAction
     event: !type:ZombieFlairActionEvent

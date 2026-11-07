@@ -18,7 +18,6 @@ public abstract partial class SharedTutorialSystem : EntitySystem
 {
     [Dependency] private SharedTutorialConditionsSystem _tutorial = default!;
     [Dependency] private TutorialSoftLockSystem _softLock = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private EntityLookupSystem _lookupSystem = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
@@ -77,7 +76,7 @@ public abstract partial class SharedTutorialSystem : EntitySystem
             return;
 
         ent.Comp.TutorialInitialized = true;
-        ent.Comp.EndTime = _timing.CurTime + _proto.Index(ent.Comp.SequenceId).Duration;
+        ent.Comp.EndTime = _timing.CurTime + ProtoMan.Index(ent.Comp.SequenceId).Duration;
         UpdateTimeCounter(ent, ent.Comp.EndTime);
         OnStepChanged(ent, step);
     }

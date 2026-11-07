@@ -25,7 +25,6 @@ namespace Content.Server._Sunrise.TTS;
 public sealed partial class TTSSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private TTSManager _ttsManager = default!;
     [Dependency] private SharedTransformSystem _xforms = default!;
     [Dependency] private IRobustRandom _rng = default!;
@@ -84,7 +83,7 @@ public sealed partial class TTSSystem : EntitySystem
     private async void OnRequestPreviewTTS(RequestPreviewTTSEvent ev, EntitySessionEventArgs args)
     {
         if (!_isEnabled ||
-            !_prototypeManager.TryIndex<TTSVoicePrototype>(ev.VoiceId, out var protoVoice))
+            !ProtoMan.TryIndex<TTSVoicePrototype>(ev.VoiceId, out var protoVoice))
             return;
 
         var previewText = _rng.Pick(_sampleText);
@@ -137,7 +136,7 @@ public sealed partial class TTSSystem : EntitySystem
             return;
 
         // Get the collective mind prototype to use its voice
-        if (!_prototypeManager.TryIndex<CollectiveMindPrototype>(args.CollectiveMindId, out var collectiveMindProto))
+        if (!ProtoMan.TryIndex<CollectiveMindPrototype>(args.CollectiveMindId, out var collectiveMindProto))
             return;
 
         var voiceId = collectiveMindProto.VoiceId;
@@ -163,9 +162,9 @@ public sealed partial class TTSSystem : EntitySystem
 
     private bool GetVoicePrototype(ProtoId<TTSVoicePrototype>? voiceId, [NotNullWhen(true)] out TTSVoicePrototype? voicePrototype)
     {
-        if (!_prototypeManager.TryIndex(voiceId, out voicePrototype))
+        if (!ProtoMan.TryIndex(voiceId, out voicePrototype))
         {
-            return _prototypeManager.TryIndex(_defaultAnnounceVoice, out voicePrototype);
+            return ProtoMan.TryIndex(_defaultAnnounceVoice, out voicePrototype);
         }
 
         return true;

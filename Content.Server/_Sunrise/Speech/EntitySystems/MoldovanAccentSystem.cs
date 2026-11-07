@@ -1,9 +1,7 @@
 using System.Text;
 using Content.Server._Sunrise.Speech.Components;
-using Content.Server.Speech;
-using Content.Server.Speech.Components;
-using Content.Server.Speech.EntitySystems;
 using Content.Shared.Speech;
+using Content.Shared.Speech.EntitySystems;
 
 namespace Content.Server._Sunrise.Speech.EntitySystems;
 
@@ -20,7 +18,7 @@ public sealed partial class MoldovanAccentSystem : EntitySystem
         return _replacement.ApplyReplacements(message, "moldovan");
     }
 
-    private void OnAccent(EntityUid uid, MoldovanAccentComponent component, AccentGetEvent args)
+    private void OnAccent(Entity<MoldovanAccentComponent> ent, ref AccentGetEvent args)
     {
         args.Message = Accentuate(args.Message);
     }

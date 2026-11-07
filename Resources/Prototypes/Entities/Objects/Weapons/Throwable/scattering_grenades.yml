@@ -93,7 +93,7 @@
     price: 2500
 
 - type: entity
-  parent: [FragileGrenadeBase, ScatteringGrenadeBase, ImpactGrenadeBase, BaseSyndicateContraband]
+  parent: [ScatteringGrenadeBase, ImpactGrenadeBase, BaseSyndicateContraband]
   id: ClusterBananaPeel
   suffix: cluster explosive, unarmed # Sunrise-Edit
   name: banana # Sunrise-Edit

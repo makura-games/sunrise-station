@@ -532,30 +532,6 @@
     job: CentCommOperator
 
 - type: entity
-  parent: IDCardStandard
-  id: SeniorCourierIDCard
-  name: senior courier ID card
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
-    layers:
-    - state: default
-    - state: department-side
-      color: *color-supply
-    - sprite: *icon-rsi
-      offset: *icon-offset
-      state: CargoTechnician
-  - type: Access
-    tags:
-    - Cargo
-    - CargoPurchaseAccess
-    - Maintenance
-    - External
-  - type: IdCard
-    jobTitle: job-name-senior-courier
-    jobIcon: JobIconCargoTechnician
-
-- type: entity
   parent: [IDCardStandard, BaseTSFContraband]
   id: TSFIdCard
   name: TSF ID card

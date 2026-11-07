@@ -14,6 +14,12 @@
   naming: FirstLast
   dollPrototype: MobResomiDummy
   skinColoration: Hues
+  defaultSoundsBySex:
+  - UnisexResomi
+  - UnisexResomi
+  - UnisexResomi
+  voices:
+  - UnisexResomi
   minAge: 26
   youngAge: 50
   oldAge: 90

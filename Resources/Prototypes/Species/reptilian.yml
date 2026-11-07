@@ -11,6 +11,13 @@
   maleFirstNames: NamesReptilianMale
   femaleFirstNames: NamesReptilianFemale
   naming: FirstDashFirst
+  defaultSoundsBySex:
+  - MaleReptilian
+  - FemaleReptilian
+  - MaleReptilian
+  voices:
+  - MaleReptilian
+  - FemaleReptilian
   buttScan: # Sunrise edit
     sprite: /Textures/_Sunrise/CopyMachine/butts_scans.rsi
     state: human

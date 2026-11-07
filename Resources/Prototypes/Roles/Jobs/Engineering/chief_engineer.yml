@@ -13,12 +13,15 @@
     - !type:DepartmentTimeRequirement
       department: Engineering
       time: 10h
-  weight: 10
+    # Sunrise added start - сохраняем чёрный список при переносе в требования роли
+    - !type:SpeciesRequirement
+      species: [Vox]
+      inverted: true
+    # Sunrise added end
   startingGear: ChiefEngineerGear
   icon: "JobIconChiefEngineer"
   supervisors: job-supervisors-captain
   radioBold: true # Sunrise-Edit
-  displayWeight: 70 # Sunrise-Edit
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-chief-mechanic
@@ -38,8 +41,6 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-  speciesBlacklist:
-  - Vox # Sunrise-Edit
 
 - type: startingGear
   id: ChiefEngineerGear

@@ -11,6 +11,7 @@
   - type: Appearance
   - type: Item
     size: Large
+    shape: null
   - type: Clothing
     quickEquip: false
     slots:

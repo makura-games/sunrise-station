@@ -141,7 +141,7 @@ public abstract partial class SharedNestingSystem : EntitySystem
         if (_container.Insert(args.User, storageContainer))
             nestingComponent.InContainer = true;
         else
-            _popup.PopupClient(Loc.GetString("unsuccessfully-insert"), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString("unsuccessfully-insert"), args.User, args.User);
 
         args.Handled = true;
     }
@@ -208,7 +208,7 @@ public abstract partial class SharedNestingSystem : EntitySystem
         if (TryComp<MultiHandedItemComponent>(args.Args.Target.Value, out var multiHanded)
             && _hands.CountFreeHands(args.Args.User) < multiHanded!.HandsNeeded)
         {
-            _popup.PopupPredictedCursor(Loc.GetString("multi-handed-item-pick-up-fail",
+            _popup.PopupCursor(Loc.GetString("multi-handed-item-pick-up-fail",
                 ("number", multiHanded.HandsNeeded - 1), ("item", ent.Owner)), args.Args.User);
             return;
         }

@@ -24,3 +24,5 @@ tool-quality-digging-name = Копание
 tool-quality-digging-tool-name = Лопата
 tool-quality-brushing-name = Чистка
 tool-quality-brushing-tool-name = Проволочная щётка
+tool-quality-shearing-name = Стрижка
+tool-quality-shearing-tool-name = Кусачки

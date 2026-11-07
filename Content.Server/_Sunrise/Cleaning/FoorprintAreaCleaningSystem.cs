@@ -18,7 +18,6 @@ public sealed partial class FoorprintAreaCleaningSystem : EntitySystem
     #endregion
 
     [Dependency] private SharedGravitySystem _gravity = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private SharedTransformSystem _transformSystem = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
@@ -38,7 +37,7 @@ public sealed partial class FoorprintAreaCleaningSystem : EntitySystem
             || !_physicsQuery.TryGetComponent(uid, out var body)
             || body.BodyStatus == BodyStatus.InAir
             || _gravity.IsWeightless(uid)
-            || !_mapManager.TryFindGridAt(_transformSystem.GetMapCoordinates((uid, transform)), out var gridUid, out var grid))
+            || !_mapSystem.TryFindGridAt(_transformSystem.GetMapCoordinates((uid, transform)), out var gridUid, out var grid))
             return;
 
         var distanceMoved = (transform.LocalPosition - cleaner.LastStepPosition).Length();

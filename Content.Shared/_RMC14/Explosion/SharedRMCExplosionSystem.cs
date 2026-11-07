@@ -26,7 +26,6 @@ public abstract partial class SharedRMCExplosionSystem : EntitySystem
         DoEffect(ent);
     }
 
-    // Sunrise edit start
     public void DoEffect(Entity<CMExplosionEffectComponent> ent)
     {
         // Cleanup may fire trigger paths while parents are already terminating.
@@ -111,7 +110,6 @@ public abstract partial class SharedRMCExplosionSystem : EntitySystem
             Dirty(smoke, explosionSmokeEffectComponent);
         }
     }
-    // Sunrise edit end
 
     public void TryDoEffect(Entity<CMExplosionEffectComponent?> ent)
     {

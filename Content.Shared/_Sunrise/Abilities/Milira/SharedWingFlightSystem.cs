@@ -56,8 +56,8 @@ public abstract partial class SharedWingFlightSystem : EntitySystem
             StartInertia(ent);
         }
 
-        _movement.RefreshMovementSpeedModifiers(ent);
-        _movement.RefreshFrictionModifiers(ent);
+        _movement.RefreshMovementSpeedModifiers(ent.Owner);
+        _movement.RefreshFrictionModifiers(ent.Owner);
 
         Dirty(ent);
     }
@@ -68,7 +68,7 @@ public abstract partial class SharedWingFlightSystem : EntitySystem
         ent.Comp.InertiaEndTime = _timing.CurTime + ent.Comp.InertiaDuration;
         EnsureComp<ActiveWingFlightComponent>(ent.Owner);
 
-        _movement.RefreshFrictionModifiers(ent);
+        _movement.RefreshFrictionModifiers(ent.Owner);
 
         Dirty(ent);
     }
