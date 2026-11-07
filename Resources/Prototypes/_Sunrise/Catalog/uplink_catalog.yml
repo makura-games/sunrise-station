@@ -601,25 +601,6 @@
       - AssaultOpsUplink
 
 - type: listing
-  id: UplinkMagazineBauer127Blast
-  description: uplink-magazine-127blast-desc
-  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/sr127_mag.rsi, state: blast }
-  productEntity: MagazineBauer127Blast
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 2
-  cost:
-    Telecrystal: 3
-  categories:
-  - UplinkAmmo
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
-
-- type: listing
   id: UplinkMagazineBauer127HP
   description: uplink-magazine-127hp-desc
   icon: { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/sr127_mag.rsi, state: base_icon }
@@ -672,20 +653,6 @@
   productEntity: MagazineBoxAntiMaterielEmp
   cost:
     Telecrystal: 3
-  categories:
-  - UplinkAmmo
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - AssaultOpsUplink
-
-- type: listing
-  id: UplinkBoxAntiMaterielBlast
-  description: uplink-sniper-ammo-blast-desc
-  productEntity: MagazineBoxAntiMaterielBlast
-  cost:
-    Telecrystal: 4
   categories:
   - UplinkAmmo
   conditions:
@@ -2229,11 +2196,27 @@
   id: UplinkWeaponMechCombatKord
   name: uplink-mech-equipment-kord-name
   description: uplink-mech-equipment-kord-desc
-  productEntity: WeaponMechCombatKord
+  productEntity: SunriseCrateSyndicateKordBundle
   cost:
-    Telecrystal: 20
+    Telecrystal: 12
   categories:
   - UplinkMechs
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+    blacklist:
+      components:
+      - SurplusBundle
+
+- type: listing
+  id: UplinkMechKordAmmo
+  productEntity: MagazineBoxBeltLight127
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:

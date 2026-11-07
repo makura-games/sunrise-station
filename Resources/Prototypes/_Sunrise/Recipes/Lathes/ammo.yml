@@ -861,16 +861,6 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazineBauer127Blast
-  result: MagazineBauer127Blast
-  completetime: 3
-  materials:
-    Steel: 300
-    Plastic: 300
-    Gold: 100
-
-- type: latheRecipe
-  parent: BaseAmmoRecipe
   id: MagazineBauer127Frag
   result: MagazineBauer127Frag
   completetime: 3
@@ -911,16 +901,6 @@
     Steel: 1000
     Plastic: 1125
     Glass: 190
-
-- type: latheRecipe
-  parent: BaseAmmoRecipe
-  id: MagazineBoxBelt127Blast
-  result: MagazineBoxBelt127Blast
-  completetime: 3
-  materials:
-    Steel: 2500
-    Plastic: 3750
-    Gold: 1875
 
 - type: latheRecipe
   parent: BaseAmmoRecipe

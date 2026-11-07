@@ -1,0 +1,149 @@
+- type: entity
+  id: BaseSunriseBlyashankaPart
+  parent: BaseMechPart
+  abstract: true
+  components:
+  - type: Sprite
+    drawdepth: Items
+    noRot: false
+    sprite: _Sunrise/Objects/Specific/Mech/blyashanka_construction.rsi
+
+- type: entity
+  id: BaseSunriseBlyashankaPartItem
+  parent: BaseSunriseBlyashankaPart
+  abstract: true
+  components:
+  - type: Item
+    size: Ginormous
+
+- type: entity
+  id: SunriseBlyashankaHarness
+  parent: BaseSunriseBlyashankaPart
+  name: Blyashanka harness
+  description: The core of the Blyashanka.
+  components:
+  - type: Appearance
+  - type: ItemMapper
+    mapLayers:
+      banka_l_leg+o:
+        whitelist:
+          tags:
+          - SunriseBlyashankaLLeg
+      banka_r_leg+o:
+        whitelist:
+          tags:
+          - SunriseBlyashankaRLeg
+      banka_l_leg2+o:
+        whitelist:
+          tags:
+          - SunriseBlyashankaLLeg2
+      banka_r_leg2+o:
+        whitelist:
+          tags:
+          - SunriseBlyashankaRLeg2
+    sprite: _Sunrise/Objects/Specific/Mech/blyashanka_construction.rsi
+  - type: ContainerContainer
+    containers:
+      mech-assembly-container: !type:Container
+  - type: MechAssemblyVisuals
+    statePrefix: jar
+  - type: Sprite
+    state: banka_harness+o
+    noRot: true
+  - type: PartAssembly
+    parts:
+      SunriseBlyashanka:
+      - SunriseBlyashankaLLeg
+      - SunriseBlyashankaRLeg
+      - SunriseBlyashankaLLeg2
+      - SunriseBlyashankaRLeg2
+    containerId: mech-assembly-container
+  - type: Construction
+    graph: SunriseBlyashanka
+    node: start
+
+- type: entity
+  id: SunriseBlyashankaLLeg
+  parent: BaseSunriseBlyashankaPartItem
+  name: Blyashanka left leg
+  description: The left leg of the Blyashanka. It belongs on the chassis of the mech.
+  components:
+  - type: Sprite
+    state: banka_l_leg
+  - type: Tag
+    tags:
+    - SunriseBlyashankaLLeg
+
+- type: entity
+  id: SunriseBlyashankaRLeg
+  parent: BaseSunriseBlyashankaPartItem
+  name: Blyashanka right leg
+  description: The right leg of the Blyashanka. It belongs on the chassis of the mech.
+  components:
+  - type: Sprite
+    state: banka_r_leg
+  - type: Tag
+    tags:
+    - SunriseBlyashankaRLeg
+
+- type: entity
+  id: SunriseBlyashankaLLeg2
+  parent: BaseSunriseBlyashankaPartItem
+  name: left rear leg
+  description: The second left leg of the Blyashanka. It belongs on the chassis of the mech.
+  components:
+  - type: Sprite
+    state: banka_l_leg2
+  - type: Tag
+    tags:
+    - SunriseBlyashankaLLeg2
+
+- type: entity
+  id: SunriseBlyashankaRLeg2
+  parent: BaseSunriseBlyashankaPartItem
+  name: right rear leg
+  description: The second right leg of the Blyashanka. It belongs on the chassis of the mech.
+  components:
+  - type: Sprite
+    state: banka_r_leg2
+  - type: Tag
+    tags:
+    - SunriseBlyashankaRLeg2
+
+- type: entity
+  id: SunriseBlyashankaChassis
+  parent: BaseSunriseBlyashankaPart
+  name: Blyashanka chassis
+  description: An in-progress construction of the Blyashanka mech.
+  components:
+  - type: Appearance
+  - type: ContainerContainer
+    containers:
+      battery-container: !type:Container
+  - type: MechAssemblyVisuals
+    statePrefix: jar
+  - type: Sprite
+    noRot: true
+    state: jar1
+  - type: Construction
+    graph: SunriseBlyashanka
+    node: chassis
+    defaultTarget: blyashanka
+
+- type: entity
+  id: SunriseBlyashankaArmorPlate
+  parent: BaseExosuitParts
+  name: Blyashanka armor plates
+  description: Armor plates for the Blyashanka exosuit.
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Mech/blyashanka_construction.rsi
+    state: banka_armor
+  - type: Tag
+    tags:
+    - SunriseBlyashankaArmor
+  - type: GuideHelp
+    guides:
+    - Robotics

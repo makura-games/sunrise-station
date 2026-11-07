@@ -858,12 +858,13 @@
       - WeaponMechCombatUltraRifle
 
 
-# Doll House
+# Kolobok
 - type: entity
-  id: MechDollHouse
-  parent: [ MechBreakageDurand, BaseMech, CombatMech, BaseMajorContraband ]
-  name: Doll House
+  id: MechKolobok
+  parent: [ MechBreakageKolobok, BaseMech, CombatMech, BaseMajorContraband ] # Sunrise-edit
+  name: Kolobok
   description: The Heavy Mech USSP, a communist variant of the Durand, features stronger armor and a powerful machine gun.
+  suffix: Soviet Heavy Mech
   components:
   - type: FootprintEmitter # Sunrise-Add
     leftBareFootState: [ footprint-mech-heavy ]
@@ -874,15 +875,29 @@
     sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
     scale: 1.08, 1.08
     layers:
-    - map: [ "enum.MechVisualLayers.Base" ]
-      state: dollhouse
+    - map: [ "enum.MechVisualLayers.Base", "movement" ]
+      state: kolobok
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+      params:
+        pitch: 0.5
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: kolobok-moving
+    noMovementLayers:
+      movement:
+        state: kolobok
+  - type: DamageVisuals
+    thresholds: [ 50, 100, 150, 250, 350, 450 ]
+    trackAllDamage: true
+    damageOverlay:
+      sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
   - type: Mech
-    baseState: dollhouse
-    openState: dollhouse-open
-    brokenState: dollhouse-broken
+    baseState: kolobok
+    openState: kolobok-open
+    brokenState: kolobok-broken
     airtight: true
     maxEquipmentAmount: 2
   - type: Vehicle
@@ -895,37 +910,37 @@
     attackRate: 1
     damage:
       types:
-        Blunt: 40
-        Structural: 220
+        Blunt: 45
+        Structural: 300
     bluntStaminaDamageFactor: 1.5
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.5
-    baseSprintSpeed: 2
+    baseWalkSpeed: 1
+    baseSprintSpeed: 1.25
   - type: Loadout
     prototypes: [ MechArmorHeavySyndiLoadout ]
-  - type: CanMoveInAir
-  - type: MovementAlwaysTouching
   - type: Reflect
-    reflectProb: 0.15
+    reflectProb: 0.10
     spread: 180
     soundOnReflect: /Audio/_Starlight/Armor/Ricochet/ricochet1_1.ogg
     reflects:
     - NonEnergy
+  - type: CanMoveInAir
+  - type: MovementAlwaysTouching
   - type: Tag
     tags:
     - DoorBumpOpener
     - FootstepSound
-    - DollHouse
+    - Kolobok
   - type: AccessReader
-    access: [["NuclearOperative"]]
+    access: [[]]
   - type: MobThresholds
     thresholds:
       0: Alive
-      500: Critical
+      600: Critical
 
 - type: entity
-  id: MechDollHouseBattery
-  parent: MechDollHouse
+  id: MechKolobokBattery
+  parent: MechKolobok
   suffix: Battery
   components:
   - type: ContainerFill
@@ -934,10 +949,120 @@
       - PowerCageSyndicate
 
 - type: entity
-  id: MechDollHouseFilled
-  parent: MechDollHouseBattery
+  id: MechKolobokFilled
+  parent: MechKolobokBattery
   suffix: Battery, Filled
   components:
   - type: Mech
     startingEquipment:
       - WeaponMechCombatMaxim
+
+# Blyashanka
+- type: entity
+  id: SunriseMechBlyashanka
+  parent: [ MechBreakageBlyashanka, BaseMech, CombatMech, BaseMajorContraband ]
+  name: Blyashanka
+  suffix: Soviet Medium Mech
+  description: A medium four-legged USSP walker protected by Syndicate armor plating.
+  components:
+  - type: FootprintEmitter
+    leftBareFootState: [ footprint-mech-fourfoot ]
+    rightBareFootState: [ footprint-mech-fourfoot ]
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: _Sunrise/Objects/Specific/Mech/blyashanka.rsi
+    scale: 1.05, 1.05
+    layers:
+    - map: [ "enum.MechVisualLayers.Base", "movement" ]
+      state: base
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+      params:
+        pitch: 0.7
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: base-moving
+    noMovementLayers:
+      movement:
+        state: base
+  - type: DamageVisuals
+    thresholds: [ 50, 100, 150, 250, 350, 450 ]
+    trackAllDamage: true
+    damageOverlay:
+      sprite: _Sunrise/Objects/Specific/Mech/blyashanka.rsi
+  - type: Mech
+    baseState: base
+    openState: base-open
+    brokenState: base-broken
+    airtight: true
+    maxEquipmentAmount: 2
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
+      components:
+      - HumanoidProfile
+  - type: MeleeWeapon
+    hidden: true
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 20
+        Structural: 100
+    bluntStaminaDamageFactor: 0.5
+  - type: MeleeThrowOnHit
+    speed: 5
+    distance: 1
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.5
+    baseSprintSpeed: 4
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      250: 0.9
+      375: 0.7
+      450: 0.5
+  - type: Loadout
+    prototypes: [ MechArmorMediumSyndiLoadout ]
+  - type: CanMoveInAir
+  - type: MovementAlwaysTouching
+  - type: AccessReader
+    access: [[]]
+  - type: MobState
+    currentState: Alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      475: Critical
+
+- type: entity
+  id: SunriseMechBlyashankaBattery
+  parent: SunriseMechBlyashanka
+  suffix: Battery
+  components:
+  - type: ContainerFill
+    containers:
+      mech-battery-slot:
+      - PowerCageSyndicate
+
+- type: entity
+  id: SunriseMechBlyashankaFilled
+  parent: SunriseMechBlyashankaBattery
+  suffix: Battery, Filled
+  components:
+  - type: Mech
+    startingEquipment:
+      - SunriseWeaponMechCombatRpd
+      - SunriseWeaponMechCombatRpd
+
+- type: entity
+  id: SunriseMechBlyashankaConstructed
+  parent: SunriseMechBlyashanka
+  categories: [ HideSpawnMenu ]
+  suffix: Constructed, Armed
+  components:
+  - type: Mech
+    startingEquipment:
+      - SunriseWeaponMechCombatRpd
+      - SunriseWeaponMechCombatRpd

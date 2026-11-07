@@ -1,0 +1,103 @@
+{
+  "copyright" : "Sprited by .askal02 (discord) for SS14 Makura Games,",
+  "license" : "CC-BY-SA-4.0",
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+        "name": "base",
+        "directions": 4
+      },
+      {
+        "name": "base-moving",
+        "directions": 4,
+        "delays": [
+            [
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1
+            ],
+            [
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1
+            ],
+            [
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1
+            ],
+            [
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1
+            ]
+        ]
+      },
+      {
+        "name": "DamageOverlay_50",
+        "directions": 4
+      },
+      {
+        "name": "DamageOverlay_100",
+        "directions": 4
+      },
+      {
+        "name": "DamageOverlay_150",
+        "directions": 4
+      },
+      {
+        "name": "DamageOverlay_250",
+        "directions": 4
+      },
+      {
+        "name": "DamageOverlay_350",
+        "directions": 4
+      },
+      {
+        "name": "DamageOverlay_450",
+        "directions": 4
+      },
+      {
+        "name": "base-open",
+        "delays": [
+          [
+            0.15,
+            0.15,
+            0.15,
+            0.15,
+            0.2,
+            0.2,
+            0.2,
+            99
+          ]
+        ]
+      },
+      {
+        "name": "base-broken",
+        "delays": [
+          [
+            0.1,
+            0.1,
+            0.1,
+            0.1
+          ]
+        ]
+      }
+  ]
+}

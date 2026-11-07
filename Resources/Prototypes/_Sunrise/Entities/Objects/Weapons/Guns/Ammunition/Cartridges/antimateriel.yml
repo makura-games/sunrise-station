@@ -42,23 +42,6 @@
 
 - type: entity
   parent: CartridgeAntiMateriel
-  id: CartridgeAntiMaterielBlast
-  name: cartridge (15mm blast)
-  components:
-  - type: CartridgeAmmo
-    proto: BulletAntiMaterielBlast
-  - type: Sprite
-    scale: 0.8,0.8
-    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Casings/12.7x99.rsi
-    layers:
-    - state: base
-      map: [ "enum.AmmoVisualLayers.Base" ]
-    - state: tip
-      map: [ "enum.AmmoVisualLayers.Tip" ]
-      color: "#8d6425"
-
-- type: entity
-  parent: CartridgeAntiMateriel
   id: CartridgeAntiMaterielEmp
   name: cartridge (15mm emp)
   components:

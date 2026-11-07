@@ -1,0 +1,248 @@
+- type: entity
+  id: BaseSunriseBlyashankaProp
+  parent: BaseStructure
+  abstract: true
+  name: Blyashanka wreck
+  description: An inoperable Blyashanka mech hull, left behind as a monument to a lost battle.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: _Sunrise/Objects/Specific/Mech/blyashanka.rsi
+    scale: 1.05, 1.05
+  - type: Appearance
+  - type: Damageable
+    damageModifierSet: StructuralMetallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
+  - type: DamageVisuals
+    thresholds: [50, 100, 150, 250, 350, 450]
+    trackAllDamage: true
+    damageOverlay:
+      sprite: _Sunrise/Objects/Specific/Mech/blyashanka.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ScrapSteel:
+            min: 2
+            max: 4
+          SunriseMechBlyashankaHarnessSpawnerLow:
+            min: 1
+            max: 1
+          SunriseMechBlyashankaLLegSpawnerLow:
+            min: 1
+            max: 1
+          SunriseMechBlyashankaRLegSpawnerLow:
+            min: 1
+            max: 1
+          SunriseMechBlyashankaLLeg2SpawnerLow:
+            min: 1
+            max: 1
+          SunriseMechBlyashankaRLeg2SpawnerLow:
+            min: 1
+            max: 1
+          SunriseMechBlyashankaArmorPlateSpawnerLow:
+            min: 1
+            max: 1
+          MechGygaxBoardSpawnerLow:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: BaseSunriseBlyashankaProp
+  id: SunriseBlyashankaPropClosed
+  name: closed Blyashanka wreck
+  description: An inoperable Blyashanka mech hull with its cockpit sealed shut.
+  components:
+  - type: Sprite
+    state: base
+
+- type: entity
+  parent: BaseSunriseBlyashankaProp
+  id: SunriseBlyashankaPropOpen
+  name: open Blyashanka wreck
+  description: An inoperable Blyashanka mech hull with its cockpit left open.
+  components:
+  - type: Sprite
+    state: base-open
+
+- type: entity
+  parent: MarkerBase
+  id: SunriseBlyashankaPropClosedDamagedSpawner
+  name: randomly damaged closed Blyashanka wreck spawner
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _Sunrise/Objects/Specific/Mech/blyashanka.rsi
+      state: base
+  - type: RandomSpawner
+    offset: 0
+    prototypes:
+    - SunriseBlyashankaPropClosedDamaged50
+    - SunriseBlyashankaPropClosedDamaged100
+    - SunriseBlyashankaPropClosedDamaged150
+    - SunriseBlyashankaPropClosedDamaged250
+    - SunriseBlyashankaPropClosedDamaged350
+    - SunriseBlyashankaPropClosedDamaged450
+
+- type: entity
+  parent: MarkerBase
+  id: SunriseBlyashankaPropOpenDamagedSpawner
+  name: randomly damaged open Blyashanka wreck spawner
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _Sunrise/Objects/Specific/Mech/blyashanka.rsi
+      state: base-open
+  - type: RandomSpawner
+    offset: 0
+    prototypes:
+    - SunriseBlyashankaPropOpenDamaged50
+    - SunriseBlyashankaPropOpenDamaged100
+    - SunriseBlyashankaPropOpenDamaged150
+    - SunriseBlyashankaPropOpenDamaged250
+    - SunriseBlyashankaPropOpenDamaged350
+    - SunriseBlyashankaPropOpenDamaged450
+
+- type: entity
+  parent: SunriseBlyashankaPropClosed
+  id: SunriseBlyashankaPropClosedDamaged50
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 50
+
+- type: entity
+  parent: SunriseBlyashankaPropClosed
+  id: SunriseBlyashankaPropClosedDamaged100
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 100
+
+- type: entity
+  parent: SunriseBlyashankaPropClosed
+  id: SunriseBlyashankaPropClosedDamaged150
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 150
+
+- type: entity
+  parent: SunriseBlyashankaPropClosed
+  id: SunriseBlyashankaPropClosedDamaged250
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 250
+
+- type: entity
+  parent: SunriseBlyashankaPropClosed
+  id: SunriseBlyashankaPropClosedDamaged350
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 350
+
+- type: entity
+  parent: SunriseBlyashankaPropClosed
+  id: SunriseBlyashankaPropClosedDamaged450
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 450
+
+- type: entity
+  parent: SunriseBlyashankaPropOpen
+  id: SunriseBlyashankaPropOpenDamaged50
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 50
+
+- type: entity
+  parent: SunriseBlyashankaPropOpen
+  id: SunriseBlyashankaPropOpenDamaged100
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 100
+
+- type: entity
+  parent: SunriseBlyashankaPropOpen
+  id: SunriseBlyashankaPropOpenDamaged150
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 150
+
+- type: entity
+  parent: SunriseBlyashankaPropOpen
+  id: SunriseBlyashankaPropOpenDamaged250
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 250
+
+- type: entity
+  parent: SunriseBlyashankaPropOpen
+  id: SunriseBlyashankaPropOpenDamaged350
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 350
+
+- type: entity
+  parent: SunriseBlyashankaPropOpen
+  id: SunriseBlyashankaPropOpenDamaged450
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 450

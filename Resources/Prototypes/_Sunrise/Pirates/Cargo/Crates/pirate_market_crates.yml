@@ -774,17 +774,6 @@
 
 - type: entity
   parent: CratePiratePrivateSecure
-  id: CratePirateMagazineBoxAntiMaterielBlast
-  name: magazine box anti materiel blast crate
-  description: Contains six magazine box anti materiel blast items.
-  components:
-  - type: StorageFill
-    contents:
-      - id: MagazineBoxAntiMaterielBlast
-        amount: 6
-
-- type: entity
-  parent: CratePiratePrivateSecure
   id: CratePirateMagazineBoxAntiMaterielFrag
   name: magazine box anti materiel frag crate
   description: Contains six magazine box anti materiel frag items.

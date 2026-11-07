@@ -1,0 +1,248 @@
+- type: entity
+  id: BaseSunriseKolobokProp
+  parent: BaseStructure
+  abstract: true
+  name: Kolobok wreck
+  description: An inoperable Kolobok mech hull, left behind as a monument to a lost battle.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
+    scale: 1.08, 1.08
+  - type: Appearance
+  - type: Damageable
+    damageModifierSet: StructuralMetallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
+  - type: DamageVisuals
+    thresholds: [50, 100, 150, 250, 350, 450]
+    trackAllDamage: true
+    damageOverlay:
+      sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ScrapSteel:
+            min: 2
+            max: 4
+          MechKolobokHarnessSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokLArmSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokRArmSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokLLegSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokRLegSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokArmorPlateSpawner:
+            min: 1
+            max: 1
+          MechDurandBoardSpawnerLow:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: BaseSunriseKolobokProp
+  id: SunriseKolobokPropClosed
+  name: closed Kolobok wreck
+  description: An inoperable Kolobok mech hull with its cockpit sealed shut.
+  components:
+  - type: Sprite
+    state: kolobok
+
+- type: entity
+  parent: BaseSunriseKolobokProp
+  id: SunriseKolobokPropOpen
+  name: open Kolobok wreck
+  description: An inoperable Kolobok mech hull with its cockpit left open.
+  components:
+  - type: Sprite
+    state: kolobok-open
+
+- type: entity
+  parent: MarkerBase
+  id: SunriseKolobokPropClosedDamagedSpawner
+  name: randomly damaged closed Kolobok wreck spawner
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
+      state: kolobok
+  - type: RandomSpawner
+    offset: 0
+    prototypes:
+    - SunriseKolobokPropClosedDamaged50
+    - SunriseKolobokPropClosedDamaged100
+    - SunriseKolobokPropClosedDamaged150
+    - SunriseKolobokPropClosedDamaged250
+    - SunriseKolobokPropClosedDamaged350
+    - SunriseKolobokPropClosedDamaged450
+
+- type: entity
+  parent: MarkerBase
+  id: SunriseKolobokPropOpenDamagedSpawner
+  name: randomly damaged open Kolobok wreck spawner
+  suffix: Random
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
+      state: kolobok-open
+  - type: RandomSpawner
+    offset: 0
+    prototypes:
+    - SunriseKolobokPropOpenDamaged50
+    - SunriseKolobokPropOpenDamaged100
+    - SunriseKolobokPropOpenDamaged150
+    - SunriseKolobokPropOpenDamaged250
+    - SunriseKolobokPropOpenDamaged350
+    - SunriseKolobokPropOpenDamaged450
+
+- type: entity
+  parent: SunriseKolobokPropClosed
+  id: SunriseKolobokPropClosedDamaged50
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 50
+
+- type: entity
+  parent: SunriseKolobokPropClosed
+  id: SunriseKolobokPropClosedDamaged100
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 100
+
+- type: entity
+  parent: SunriseKolobokPropClosed
+  id: SunriseKolobokPropClosedDamaged150
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 150
+
+- type: entity
+  parent: SunriseKolobokPropClosed
+  id: SunriseKolobokPropClosedDamaged250
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 250
+
+- type: entity
+  parent: SunriseKolobokPropClosed
+  id: SunriseKolobokPropClosedDamaged350
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 350
+
+- type: entity
+  parent: SunriseKolobokPropClosed
+  id: SunriseKolobokPropClosedDamaged450
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 450
+
+- type: entity
+  parent: SunriseKolobokPropOpen
+  id: SunriseKolobokPropOpenDamaged50
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 50
+
+- type: entity
+  parent: SunriseKolobokPropOpen
+  id: SunriseKolobokPropOpenDamaged100
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 100
+
+- type: entity
+  parent: SunriseKolobokPropOpen
+  id: SunriseKolobokPropOpenDamaged150
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 150
+
+- type: entity
+  parent: SunriseKolobokPropOpen
+  id: SunriseKolobokPropOpenDamaged250
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 250
+
+- type: entity
+  parent: SunriseKolobokPropOpen
+  id: SunriseKolobokPropOpenDamaged350
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 350
+
+- type: entity
+  parent: SunriseKolobokPropOpen
+  id: SunriseKolobokPropOpenDamaged450
+  categories: [HideSpawnMenu]
+  components:
+  - type: Damageable
+    damage:
+      types:
+        Structural: 450

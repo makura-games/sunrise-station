@@ -30,6 +30,21 @@
 
 - type: entity
   parent: PosterBase
+  id: PosterContrabandSovietMechKolobokFortified
+  name: "Kolobok Fortified"
+  description: >-
+    SLOW DOESN'T MEAN WEAK.
+    STEEL ARMOR. HEAVY STEPS. INEVITABLE ONSHOW.
+
+    Soviet 'Mech "Kolobok".
+    The infantry's mainstay. The offensive shield.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/posters.rsi
+    state: kolobokfortified
+
+- type: entity
+  parent: PosterBase
   id: PosterLegitAIOverseer
   name: "AI is watching"
   description: "Anything can be automated, Security included"
