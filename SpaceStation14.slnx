@@ -24,8 +24,12 @@
     <File Path="README.md" />
   </Folder>
   <Project Path="Content.Benchmarks/Content.Benchmarks.csproj" />
-  <!-- <Project Path="Content.Client/Content.Client.csproj" /> --> <!-- Sunrise edit -->
+  <!-- Sunrise edit start -->
+  <!--
+  <Project Path="Content.Client/Content.Client.csproj" />
   <Project Path="Content.IntegrationTests/Content.IntegrationTests.csproj" />
+  -->
+  <!-- Sunrise edit end -->
   <Project Path="Content.MapRenderer/Content.MapRenderer.csproj" />
   <Project Path="Content.Packaging/Content.Packaging.csproj" />
   <Project Path="Content.PatreonParser/Content.PatreonParser.csproj">
@@ -33,12 +37,16 @@
     <BuildType Solution="Tools|*" Project="Debug" />
   </Project>
   <Project Path="Content.Replay/Content.Replay.csproj" />
+  <!-- Sunrise edit start -->
+  <!--
   <Project Path="Content.Server.Database/Content.Server.Database.csproj" />
-  <!-- <Project Path="Content.Server/Content.Server.csproj" /> --> <!-- Sunrise edit -->
+  <Project Path="Content.Server/Content.Server.csproj" />
   <Project Path="Content.Shared.Database/Content.Shared.Database.csproj" />
-  <!-- <Project Path="Content.Shared/Content.Shared.csproj" /> --> <!-- Sunrise edit -->
+  <Project Path="Content.Shared/Content.Shared.csproj" />
   <Project Path="Content.Tests/Content.Tests.csproj" />
   <Project Path="Content.Tools/Content.Tools.csproj" />
+  -->
+  <!-- Sunrise edit end -->
   <Project Path="Content.YAMLLinter/Content.YAMLLinter.csproj" />
   <Project Path="Pow3r/Pow3r.csproj" />
   <Folder Name="/RobustToolbox/.github/workflows/">
@@ -175,6 +183,15 @@
     <Project Path="Content.Client/Content.Client.csproj" />
     <Project Path="Content.Server/Content.Server.csproj" />
     <Project Path="Content.Shared/Content.Shared.csproj" />
+  </Folder>
+  <Folder Name="/Toolchain/">
+    <Project Path="Content.Tools/Content.Tools.csproj" />
+
+    <Project Path="Content.Tests/Content.Tests.csproj" />
+    <Project Path="Content.IntegrationTests/Content.IntegrationTests.csproj" />
+
+    <Project Path="Content.Server.Database/Content.Server.Database.csproj" />
+    <Project Path="Content.Shared.Database/Content.Shared.Database.csproj" />
   </Folder>
   <!-- Sunrise added end -->
 </Solution>
