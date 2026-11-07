@@ -60,9 +60,7 @@ Makes it easy to see your changes against the background of vanilla code.
 **Example (change value):**
 ```csharp
 component.Field2 = 321;
-// Fire edit start - увеличиваем радиус для баланса
-component.Field = 123;
-// Fire edit end
+component.Field = 123; // Fire edit - увеличиваем радиус для баланса
 ```
 
 **Example (changing logic):**
@@ -90,9 +88,7 @@ Used when you add a **new** block of code (eg calling an event, checking) that w
 
 **Example:**
 ```csharp
-// Fire added start - чтобы знать, когда попали по Shy Guy
-_eventBus.RaiseLocalEvent(uid, new ProjectileHitEvent(projectile, entity));
-// Fire added end
+_eventBus.RaiseLocalEvent(uid, new ProjectileHitEvent(projectile, entity)); // Fire added - чтобы знать, когда попали по Shy Guy
 ```
 
 ### 3. Partial Classes
