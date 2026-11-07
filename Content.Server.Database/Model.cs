@@ -490,7 +490,7 @@ namespace Content.Server.Database
     }
 
     [Table("player")]
-    public class Player
+    public partial class Player // Sunrise-Edit
     {
         public int Id { get; set; }
 

@@ -15,12 +15,20 @@ public abstract partial class ServerDbContext
     public DbSet<MentorHelpMessage> MentorHelpMessages { get; set; } = default!;
     public DbSet<UiLike> UiLikes { get; set; } = default!;
     public DbSet<TutorialCompletion> TutorialCompletions { get; set; } = default!;
+    public DbSet<PlayTimeSession> PlayTimeSession { get; set; } = default!;
 
     private static void ConfigureSunriseModel(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<JobAlternativeTitle>()
             .HasIndex(job => new { job.ProfileId, job.JobName })
             .IsUnique();
+
+        modelBuilder.Entity<PlayTimeSession>()
+            .HasOne(s => s.Player)
+            .WithMany()
+            .HasForeignKey(s => s.PlayerId)
+            .HasPrincipalKey(p => p.UserId)
+            .IsRequired();
     }
 }
 
@@ -204,4 +212,24 @@ public class TutorialCompletion
     public DateTimeOffset CompletedAt { get; set; }
     public int CompletionCount { get; set; } = 1;
     public double? AccountAgeDays { get; set; }
+}
+
+[Table("play_time_session")]
+[Index(nameof(EndTime))]
+[Index(nameof(PlayerId))]
+public sealed class PlayTimeSession
+{
+    [Required, Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
+
+    [Required, ForeignKey(nameof(Player))]
+    public Guid PlayerId { get; set; }
+
+    public Player Player { get; set; } = default!;
+
+    [Required]
+    public DateTime StartTime { get; set; }
+
+    [Required]
+    public DateTime EndTime { get; set; }
 }
