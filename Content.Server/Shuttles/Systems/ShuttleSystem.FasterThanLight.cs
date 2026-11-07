@@ -380,7 +380,7 @@ public sealed partial class ShuttleSystem
 
         // Sunrise edit start - запоминаем карту старта для аварийного возврата.
         if (fromMapUid != null)
-            RememberSunriseFtlOrigin(comp, xform.MapID, fromMatrix, fromRotation);
+            RememberSunriseFtlOrigin(comp, fromMapUid.Value, fromMatrix);
         // Sunrise edit end
 
         var grid = _mapGridQuery.Comp(uid);
@@ -495,7 +495,7 @@ public sealed partial class ShuttleSystem
         if (!Exists(entity.Comp1.TargetCoordinates.EntityId))
         {
             // Sunrise edit start - при неудачном БСС пытаемся вернуть шаттл на прошлую карту
-            if (!TryRestoreSunriseFtlOrigin(uid, comp, xform, out mapId))
+            if (!TryRestoreSunriseFtlOrigin(uid, comp, out mapId))
             {
                 // Get a list of maps
                 var maps = EntityQuery<MapComponent, FTLDestinationComponent>()

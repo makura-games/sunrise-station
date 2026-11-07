@@ -1,5 +1,4 @@
 using System.Numerics;
-using Robust.Shared.Map;
 
 #pragma warning disable IDE0130 // Пространство имён vanilla-компонента сохраняется для partial-расширения.
 namespace Content.Shared.Shuttles.Components;
@@ -23,17 +22,11 @@ public sealed partial class FTLComponent
     /// Нужна, чтобы вернуть шаттл туда, если цель перелёта перестала существовать.
     /// </summary>
     [DataField]
-    public MapId? OriginMapId;
+    public EntityUid? OriginMap;
 
     /// <summary>
-    /// Мировая позиция шаттла на момент старта FTL на <see cref="OriginMapId"/>.
+    /// Мировая позиция шаттла на момент старта FTL на <see cref="OriginMap"/>.
     /// </summary>
     [DataField]
     public Vector2 OriginPosition;
-
-    /// <summary>
-    /// Мировой поворот шаттла на момент старта FTL.
-    /// </summary>
-    [DataField]
-    public Angle OriginAngle;
 }

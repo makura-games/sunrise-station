@@ -252,38 +252,29 @@ public sealed partial class ShuttleSystem
     /// <summary>
     /// Запоминает карту и мировые координаты, с которых шаттл уходит в FTL.
     /// </summary>
-    private void RememberSunriseFtlOrigin(FTLComponent ftl, MapId fromMapId, Matrix3x2 fromMatrix, Angle fromRotation)
+    private void RememberSunriseFtlOrigin(FTLComponent ftl, EntityUid fromMap, Matrix3x2 fromMatrix)
     {
-        ftl.OriginMapId = fromMapId;
+        ftl.OriginMap = fromMap;
         ftl.OriginPosition = fromMatrix.Translation;
-        ftl.OriginAngle = fromRotation;
     }
 
     /// <summary>
     /// Возвращает шаттл на карту и позицию, с которых он стартовал в FTL.
     /// </summary>
     /// <returns><see langword="true"/>, если шаттл удалось вернуть на исходную карту.</returns>
-    private bool TryRestoreSunriseFtlOrigin(
-        EntityUid shuttleUid,
-        FTLComponent ftl,
-        TransformComponent xform,
-        out MapId mapId)
+    private bool TryRestoreSunriseFtlOrigin(EntityUid shuttleUid, FTLComponent ftl, out MapId mapId)
     {
         mapId = MapId.Nullspace;
 
-        if (ftl.OriginMapId is not { } originMapId ||
-            !_mapSystem.TryGetMap(originMapId, out var originMapUid))
+        if (ftl.OriginMap is not { } originMap ||
+            !TryComp<MapComponent>(originMap, out var originMapComp) ||
+            HasComp<FTLMapComponent>(originMap) ||
+            !TryFTLProximity(shuttleUid, new EntityCoordinates(originMap, ftl.OriginPosition)))
         {
             return false;
         }
 
-        _transform.SetCoordinates(
-            shuttleUid,
-            xform,
-            new EntityCoordinates(originMapUid.Value, ftl.OriginPosition),
-            rotation: ftl.OriginAngle);
-
-        mapId = originMapId;
+        mapId = originMapComp.MapId;
         return true;
     }
 
