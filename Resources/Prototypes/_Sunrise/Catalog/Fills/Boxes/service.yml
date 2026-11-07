@@ -15,3 +15,45 @@
     layers:
     - state: box
     - state: writing
+
+- type: entity
+  name: magic candle box
+  parent: BoxCandle
+  id: BoxCandleInfinite
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: CandleInfinite
+          amount: 2
+        - id: CandleBlueInfinite
+          amount: 2
+        - id: CandleRedInfinite
+          amount: 2
+        - id: CandleBlackInfinite
+          amount: 2
+        - id: CandleGreenInfinite
+          amount: 2
+        - id: CandlePurpleInfinite
+          amount: 2
+
+- type: entity
+  name: small magic candle box
+  parent: BoxCandleInfinite
+  id: BoxCandleInfiniteSmall
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: CandleRedSmallInfinite
+          amount: 4
+        - id: CandleGreenSmallInfinite
+          amount: 2
+        - id: CandleBlueSmallInfinite
+          amount: 2
+        - id: CandlePurpleSmallInfinite
+          amount: 2
+        - id: CandleBlackSmallInfinite
+          amount: 2
