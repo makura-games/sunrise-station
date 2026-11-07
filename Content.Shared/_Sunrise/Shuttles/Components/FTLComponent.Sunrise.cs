@@ -1,3 +1,5 @@
+using System.Numerics;
+
 #pragma warning disable IDE0130 // Пространство имён vanilla-компонента сохраняется для partial-расширения.
 namespace Content.Shared.Shuttles.Components;
 
@@ -14,4 +16,17 @@ public sealed partial class FTLComponent
     /// </summary>
     [DataField]
     public bool DeleteTrash;
+
+    /// <summary>
+    /// Карта, с которой шаттл стартовал в текущий FTL.
+    /// Нужна, чтобы вернуть шаттл туда, если цель перелёта перестала существовать.
+    /// </summary>
+    [DataField]
+    public EntityUid? OriginMap;
+
+    /// <summary>
+    /// Мировая позиция шаттла на момент старта FTL на <see cref="OriginMap"/>.
+    /// </summary>
+    [DataField]
+    public Vector2 OriginPosition;
 }
