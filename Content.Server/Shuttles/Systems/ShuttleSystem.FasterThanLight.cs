@@ -508,7 +508,7 @@ public sealed partial class ShuttleSystem
                 if (fallbackMap.Item1 == null)
                 {
                     // Карт назначения нет: завершаем FTL на месте, пропуская Smimsh и разморозку карты.
-                    Log.Warning($"Unable to find an FTL destination map for {ToPrettyString(uid)}, finishing FTL in place.");
+                    Log.Error($"Unable to find an FTL destination map for {ToPrettyString(uid)}, finishing FTL in place.");
                     mapId = xform.MapID;
                     comp.ArrivedInPlace = true;
                 }
