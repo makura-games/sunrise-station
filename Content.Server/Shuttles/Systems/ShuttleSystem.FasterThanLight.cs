@@ -502,10 +502,16 @@ public sealed partial class ShuttleSystem
                     .OrderBy(o => o.Item1.MapId.GetHashCode());
 
                 // Get the first map that passes the FTL whitelist
-                mapId = maps.First(o =>
-                        _whitelistSystem.IsWhitelistPassOrNull(o.Item2.Whitelist, entity))
-                    .Item1.MapId;
+                var fallbackMap = maps.FirstOrDefault(o =>
+                    _whitelistSystem.IsWhitelistPassOrNull(o.Item2.Whitelist, entity));
 
+                if (fallbackMap.Item1 == null)
+                {
+                    FinishSunriseFtlWithoutArrival(uid, comp);
+                    return;
+                }
+
+                mapId = fallbackMap.Item1.MapId;
                 TryFTLProximity(uid, _mapSystem.GetMap(mapId));
             }
             // Sunrise edit end
