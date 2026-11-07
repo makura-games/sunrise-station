@@ -8,7 +8,7 @@ description: Creation, copying, renaming, migration and review of SS14 loadout p
 Use this skill as a working standard for the job-loadout system in SS14 :)
 Goal: keep role equipment in one predictable graph `job -> roleLoadout -> loadoutGroup -> loadout`, without external references and without being out of sync with `startingGear`.
 
-## Area of ​​responsibility
+## Area of responsibility
 
 1. This skill covers `roleLoadout`, `loadoutGroup`, `loadout`, `startingGear` and job prototypes that issue equipment.
 2. This skill does not cover the naming of the entire project. For general naming rules, check `ss14-naming-conventions`.

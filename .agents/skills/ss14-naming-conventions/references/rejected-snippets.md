@@ -2,7 +2,7 @@
 
 | Zone | What's found | Why rejected | Signal |
 |---|---|---|---|
-| Dependencies | Areas with variations `_transformSystem`/`_playerManager` in the new code | Breaks canonical short form aliases for strict standard | Alias ​​style inconsistency |
+| Dependencies | Areas with variations `_transformSystem`/`_playerManager` in the new code | Breaks canonical short form aliases for strict standard | Alias style inconsistency |
 | Systems | System without obvious connection by name base with the main component | Degrades discoverability and API connectivity | Hard to find component/system pair |
 | Prototypes | lowercase ID like `clientsideclone` for a production entity | Contradicts strict `CamelCase` for new code | Historical legacy format |
 | Prototypes | New IDs without fork prefix in fork-only copies of vanilla | Breaks the namespace and complicates future merge | Potential ID collisions |

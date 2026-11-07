@@ -32,7 +32,7 @@ Choose it if the task is about:
 4. Client `AppearanceSystem` accepts state, updates the appearance data dictionary, and queues the update.
 5. During `FrameUpdate`, `AppearanceChangeEvent` is raised.
 6. Client visualizer systems (`VisualizerSystem<T>`) apply data to the sprite.
-7. If simple mapping of values ​​on layer-data is enough, `GenericVisualizerSystem` does this.
+7. If simple mapping of values on layer-data is enough, `GenericVisualizerSystem` does this.
 
 Idea: the server conveys not “how to draw”, but “what is visually true”; the client decides “how to draw” :)
 
@@ -127,7 +127,7 @@ Key methods:
 Important:
 
 - In the current API, appearance data keys are `Enum`.
-- Appearance values ​​must be correctly cloned/serializable.
+- Appearance values must be correctly cloned/serializable.
 
 ## 2) Client `AppearanceSystem`
 
@@ -166,7 +166,7 @@ Basic structure:
 
 Consequence:
 
-- appearance input values ​​are normalized to a string;
+- appearance input values are normalized to a string;
 - layer key can be an enum-reference or a regular string.
 
 ## 6) `GenericVisualizerSystem`
@@ -340,7 +340,7 @@ protected override void OnAppearanceChange(EntityUid uid, TriggerVisualsComponen
 ## Checklist before change ✅
 
 - Is the contract of keys and payload types described in the shared part?
-- Are appearance values ​​safe for clone/copy/state sync?
+- Are appearance values safe for clone/copy/state sync?
 - Have you selected the correct tool: `GenericVisualizer` or custom visualizer?
 - Are keys updated/cleared (`SetData`/`RemoveData`) symmetrical?
 - Is the client visualizer idempotent and does not depend on the random order of events?
