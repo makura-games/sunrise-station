@@ -447,9 +447,9 @@ public sealed partial class ShuttleSystem
         comp.StateTime = StartEndTime.FromCurTime(_gameTiming, DefaultArrivalTime);
         comp.State = FTLState.Arriving;
 
-        // Sunrise edit start
+        // Sunrise edit start - Бросаем до смены поворота шаттла при выходе из FTL.
         var xform = _xformQuery.GetComponent(entity.Owner);
-        DoSunriseFtlThrow(xform, Direction.North.ToVec()); // Бросаем до смены поворота шаттла при выходе из FTL.
+        DoSunriseFtlThrow(xform, Direction.North.ToVec());
         // Sunrise edit end
 
         if (entity.Comp1.VisualizerProto != null && FtlTargetIsValid(comp)) // Sunrise edit - скип если координаты не валидны
