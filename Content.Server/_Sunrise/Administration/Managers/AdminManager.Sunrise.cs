@@ -13,6 +13,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Administration.Managers;
 
 public sealed partial class AdminManager

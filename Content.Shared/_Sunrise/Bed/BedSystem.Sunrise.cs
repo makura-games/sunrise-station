@@ -1,6 +1,7 @@
 using Content.Shared._Sunrise.Bed;
 using Content.Shared.Inventory;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Bed;
 
 public sealed partial class BedSystem

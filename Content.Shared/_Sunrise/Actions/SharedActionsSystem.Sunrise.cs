@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._Sunrise.Antags.Abductor;
 using Content.Shared.Actions.Components;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Actions;
 
 public abstract partial class SharedActionsSystem
