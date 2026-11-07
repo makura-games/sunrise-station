@@ -19,7 +19,6 @@
       tags:
       - NukeOpsUplink
 
-
 - type: listing
   id: UplinkReinforcementRadioSyndicate
   name: uplink-reinforcement-radio-name
@@ -39,7 +38,6 @@
         tags:
           - NukeOpsUplink
 
-
 - type: listing
   id: UplinkReinforcementRadioSyndicateNukeops # Version for Nukeops that spawns another nuclear operative without the uplink.
   name: uplink-reinforcement-radio-nukeops-name
@@ -55,7 +53,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-
 
 # Move to _Sunrise
 #- type: listing
@@ -95,7 +92,6 @@
           - LoneOpsUplink # Sunrise-Edit
           - AssaultOpsUplink # Sunrise-Edit
 
-
 - type: listing
   id: UplinkReinforcementRadioSyndicateAncestorNukeops # Version for Nukeops that spawns a syndicate monkey with the NukeOperative component.
   name: uplink-reinforcement-radio-ancestor-name
@@ -116,7 +112,6 @@
           - NukeOpsUplink
           - LoneOpsUplink # Sunrise-Edit
 
-
 - type: listing
   id: UplinkCarpDehydrated
   name: uplink-carp-dehydrated-name
@@ -132,7 +127,6 @@
       tags:
       - NukeOpsUplink
       - AssaultOpsUplink # Sunrise-Edit
-
 
 - type: listing
   id: UplinkMobCatMicrobomb
@@ -155,7 +149,6 @@
       - AssaultOpsUplink
       - LoneOpsUplink
   # Sunrise-End
-
 
 - type: listing
   id: UplinkSyndicatePersonalAI
