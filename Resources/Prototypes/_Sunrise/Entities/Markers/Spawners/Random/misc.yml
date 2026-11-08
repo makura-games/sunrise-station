@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   name: Mining Rock Spawner
   id: RandomRockSpawner
   parent: MarkerBase
@@ -6,8 +6,8 @@
   - type: Sprite
     layers:
     - state: red
-    - sprite: _Sunrise/Structures/Walls/rock.rsi
-      state: rock_asteroid
+    - sprite: Structures/Walls/stone.rsi
+      state: full
   - type: RandomSpawner
     prototypes:
     - AsteroidRockMining
@@ -33,8 +33,8 @@
   - type: Sprite
     layers:
     - state: red
-    - sprite: _Sunrise/Structures/Walls/rock.rsi
-      state: rock
+    - sprite: Structures/Walls/stone-dirt.rsi
+      state: full
   - type: RandomSpawner
     prototypes:
       # Скалы без руды

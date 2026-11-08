@@ -1,0 +1,34 @@
+- type: entity
+  abstract: true
+  id: BaseSunriseVeinBluecrystal
+  description: An ore vein rich with bluespace crystal.
+  suffix: Bluespace Crystal
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreBluecrystal
+  - type: Sprite
+    layers:
+    - state: rock_bluespace
+      sprite: _Sunrise/Structures/Walls/stone-ore.rsi
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: AsteroidRockBluecrystal
+  parent: [ BaseSunriseVeinBluecrystal, AsteroidRock ]
+
+- type: entity
+  id: WallRockBluecrystal
+  parent: [ BaseSunriseVeinBluecrystal, WallRock ]
+
+- type: entity
+  id: WallRockChromiteBluecrystal
+  parent: [ BaseSunriseVeinBluecrystal, WallRockChromite ]
+
+- type: entity
+  id: WallRockSandBluecrystal
+  parent: [ BaseSunriseVeinBluecrystal, WallRockSand ]
+
+- type: entity
+  id: WallRockSnowBluecrystal
+  parent: [ BaseSunriseVeinBluecrystal, WallRockSnow ]

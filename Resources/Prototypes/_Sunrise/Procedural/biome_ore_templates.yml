@@ -3,7 +3,6 @@
   entityMask:
     AsteroidRock: AsteroidRockTinCrab
     WallRock: WallRockTinCrab
-    WallRockBasalt: WallRockBasaltTinCrab
     WallRockChromite: WallRockChromiteTinCrab
     WallRockSand: WallRockSandTinCrab
     WallRockSnow: WallRockSnowTinCrab
@@ -17,7 +16,6 @@
   entityMask:
     AsteroidRock: AsteroidRockQuartzCrab
     WallRock: WallRockQuartzCrab
-    WallRockBasalt: WallRockBasaltQuartzCrab
     WallRockChromite: WallRockChromiteQuartzCrab
     WallRockSnow: WallRockSnowQuartzCrab
   maxCount: 15
@@ -30,7 +28,6 @@
   entityMask:
     AsteroidRock: AsteroidRockCoalCrab
     WallRock: WallRockCoalCrab
-    WallRockBasalt: WallRockBasaltCoalCrab
     WallRockChromite: WallRockChromiteCoalCrab
     WallRockSand: WallRockSandCoalCrab
     WallRockSnow: WallRockSnowCoalCrab
@@ -44,7 +41,6 @@
   entityMask:
     AsteroidRock: AsteroidRockSaltCrab
     WallRock: WallRockSaltCrab
-    WallRockBasalt: WallRockBasaltSaltCrab
     WallRockChromite: WallRockChromiteSaltCrab
     WallRockSand: WallRockSandSaltCrab
     WallRockSnow: WallRockSnowSaltCrab
@@ -58,7 +54,6 @@
   entityMask:
     AsteroidRock: AsteroidRockGoldCrab
     WallRock: WallRockGoldCrab
-    WallRockBasalt: WallRockBasaltGoldCrab
     WallRockChromite: WallRockChromiteGoldCrab
     WallRockSand: WallRockSandGoldCrab
     WallRockSnow: WallRockSnowGoldCrab
@@ -72,7 +67,6 @@
   entityMask:
     AsteroidRock: AsteroidRockSilverCrab
     WallRock: WallRockSilverCrab
-    WallRockBasalt: WallRockBasaltSilverCrab
     WallRockChromite: WallRockChromiteSilverCrab
     WallRockSand: WallRockSandSilverCrab
     WallRockSnow: WallRockSnowSilverCrab
@@ -86,7 +80,6 @@
   entityMask:
     AsteroidRock: AsteroidRockPlasmaCrab
     WallRock: WallRockPlasmaCrab
-    WallRockBasalt: WallRockBasaltPlasmaCrab
     WallRockChromite: WallRockChromitePlasmaCrab
     WallRockSand: WallRockSandPlasmaCrab
     WallRockSnow: WallRockSnowPlasmaCrab
@@ -100,7 +93,6 @@
   entityMask:
     AsteroidRock: AsteroidRockUraniumCrab
     WallRock: WallRockUraniumCrab
-    WallRockBasalt: WallRockBasaltUraniumCrab
     WallRockChromite: WallRockChromiteUraniumCrab
     WallRockSand: WallRockSandUraniumCrab
     WallRockSnow: WallRockSnowUraniumCrab
@@ -114,7 +106,6 @@
   entityMask:
     AsteroidRock: AsteroidRockBananium
     WallRock: WallRockBananium
-    WallRockBasalt: WallRockBasaltBananium
     WallRockChromite: WallRockChromiteBananium
     WallRockSand: WallRockSandBananium
     WallRockSnow: WallRockSnowBananium
@@ -124,11 +115,23 @@
   radius: 4
 
 - type: biomeMarkerLayer
+  id: OreBluecrystal
+  entityMask:
+    AsteroidRock: AsteroidRockBluecrystal
+    WallRock: WallRockBluecrystal
+    WallRockChromite: WallRockChromiteBluecrystal
+    WallRockSand: WallRockSandBluecrystal
+    WallRockSnow: WallRockSnowBluecrystal
+  maxCount: 6
+  minGroupSize: 3
+  maxGroupSize: 6
+  radius: 4
+
+- type: biomeMarkerLayer
   id: OreBananiumCrab
   entityMask:
     AsteroidRock: AsteroidRockBananiumCrab
     WallRock: WallRockBananiumCrab
-    WallRockBasalt: WallRockBasaltBananiumCrab
     WallRockChromite: WallRockChromiteBananiumCrab
     WallRockSand: WallRockSandBananiumCrab
     WallRockSnow: WallRockSnowBananiumCrab
@@ -142,7 +145,6 @@
   entityMask:
     AsteroidRock: AsteroidRockDiamondCrab
     WallRock: WallRockDiamondCrab
-    WallRockBasalt: WallRockBasaltDiamondCrab
     WallRockChromite: WallRockChromiteDiamondCrab
     WallRockSand: WallRockSandDiamondCrab
     WallRockSnow: WallRockSnowDiamondCrab

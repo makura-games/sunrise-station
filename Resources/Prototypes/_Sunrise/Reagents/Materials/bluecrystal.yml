@@ -1,0 +1,16 @@
+- type: material
+  id: RawBluecrystal
+  stackEntity: BluecrystalOre1
+  name: materials-raw-bluecrystal
+  unit: materials-unit-chunk
+  icon: { sprite: _Sunrise/Objects/Materials/ore.rsi, state: bluespace }
+  color: "#3e7dff"
+  price: 0.2
+
+- type: material
+  id: Bluecrystal
+  stackEntity: ArtificialBluecrystal1
+  name: materials-bluecrystal
+  icon: { sprite: _Sunrise/Objects/Specific/bluecrystal.rsi, state: bluecrystal }
+  color: "#4c9dff"
+  price: 2.0

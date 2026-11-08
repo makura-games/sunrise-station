@@ -755,6 +755,22 @@
       - AssaultOpsUplink
 
 - type: listing
+  id: UplinkSyndicateBluespaceBeaker
+  name: uplink-syndicate-bluespace-beaker-name
+  description: uplink-syndicate-bluespace-beaker-desc
+  icon: { sprite: _Sunrise/Objects/Specific/Chemistry/beaker_syndicate_bluespace.rsi, state: beakersyndicatebluespace }
+  productEntity: SyndicateBluespaceBeaker
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkChemicals
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
   id: UplinkEcronizer
   name: uplink-ecronizer-name
   description: uplink-ecronizer-desc
