@@ -241,6 +241,44 @@ public sealed partial class ShuttleSystem
     }
 
     /// <summary>
+    /// Проверяет, что цель FTL ещё существует.
+    /// </summary>
+    /// <returns><see langword="true"/>, если исходная цель была валидной.</returns>
+    private bool FtlTargetIsValid(FTLComponent ftl)
+    {
+        return ftl.TargetCoordinates.IsValid(EntityManager);
+    }
+
+    /// <summary>
+    /// Запоминает карту и мировые координаты, с которых шаттл уходит в FTL.
+    /// </summary>
+    private void RememberSunriseFtlOrigin(FTLComponent ftl, EntityUid fromMap, Matrix3x2 fromMatrix)
+    {
+        ftl.OriginMap = fromMap;
+        ftl.OriginPosition = fromMatrix.Translation;
+    }
+
+    /// <summary>
+    /// Возвращает шаттл на карту и позицию, с которых он стартовал в FTL.
+    /// </summary>
+    /// <returns><see langword="true"/>, если шаттл удалось вернуть на исходную карту.</returns>
+    private bool TryRestoreSunriseFtlOrigin(EntityUid shuttleUid, FTLComponent ftl, out MapId mapId)
+    {
+        mapId = MapId.Nullspace;
+
+        if (ftl.OriginMap is not { } originMap ||
+            !TryComp<MapComponent>(originMap, out var originMapComp) ||
+            HasComp<FTLMapComponent>(originMap) ||
+            !TryFTLProximity(shuttleUid, new EntityCoordinates(originMap, ftl.OriginPosition)))
+        {
+            return false;
+        }
+
+        mapId = originMapComp.MapId;
+        return true;
+    }
+
+    /// <summary>
     /// Бросает незакреплённые динамические сущности вдоль движения FTL.
     /// </summary>
     private void DoSunriseFtlThrow(TransformComponent xform, Vector2 throwDirection)
