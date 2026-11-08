@@ -9,7 +9,7 @@ using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Robust.Shared.Prototypes;
 
-#pragma warning disable IDE0130
+// ReSharper disable once CheckNamespace
 namespace Content.Server.GameTicking.Rules;
 
 public sealed partial class NukeopsRuleSystem

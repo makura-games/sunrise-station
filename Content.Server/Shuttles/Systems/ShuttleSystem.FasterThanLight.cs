@@ -378,6 +378,11 @@ public sealed partial class ShuttleSystem
         var fromMatrix = _transform.GetWorldMatrix(xform);
         var fromRotation = _transform.GetWorldRotation(xform);
 
+        // Sunrise edit start - запоминаем карту старта для аварийного возврата.
+        if (fromMapUid != null)
+            RememberSunriseFtlOrigin(comp, fromMapUid.Value, fromMatrix);
+        // Sunrise edit end
+
         var grid = _mapGridQuery.Comp(uid);
         var width = grid.LocalAABB.Width;
         var ftlMap = EnsureFTLMap();
@@ -442,10 +447,12 @@ public sealed partial class ShuttleSystem
         comp.StateTime = StartEndTime.FromCurTime(_gameTiming, DefaultArrivalTime);
         comp.State = FTLState.Arriving;
 
+        // Sunrise edit start - Бросаем до смены поворота шаттла при выходе из FTL.
         var xform = _xformQuery.GetComponent(entity.Owner);
-        DoSunriseFtlThrow(xform, Direction.North.ToVec()); // Sunrise-Edit - бросаем до смены поворота шаттла при выходе из FTL.
+        DoSunriseFtlThrow(xform, Direction.North.ToVec());
+        // Sunrise edit end
 
-        if (entity.Comp1.VisualizerProto != null)
+        if (entity.Comp1.VisualizerProto != null && FtlTargetIsValid(comp)) // Sunrise edit - скип если координаты не валидны
         {
             comp.VisualizerEntity = SpawnAttachedTo(entity.Comp1.VisualizerProto, entity.Comp1.TargetCoordinates);
             DebugTools.Assert(Transform(comp.VisualizerEntity.Value).ParentUid == entity.Comp1.TargetCoordinates.EntityId);
@@ -487,16 +494,31 @@ public sealed partial class ShuttleSystem
 
         if (!Exists(entity.Comp1.TargetCoordinates.EntityId))
         {
-            // Get a list of maps
-            var maps = EntityQuery<MapComponent, FTLDestinationComponent>()
-                .OrderBy(o => o.Item1.MapId.GetHashCode());
+            // Sunrise edit start - при неудачном БСС пытаемся вернуть шаттл на прошлую карту
+            if (!TryRestoreSunriseFtlOrigin(uid, comp, out mapId))
+            {
+                // Get a list of maps
+                var maps = EntityQuery<MapComponent, FTLDestinationComponent>()
+                    .OrderBy(o => o.Item1.MapId.GetHashCode());
 
-            // Get the first map that passes the FTL whitelist
-            mapId = maps.First(o =>
-                _whitelistSystem.IsWhitelistPassOrNull(o.Item2.Whitelist, entity))
-                .Item1.MapId;
+                // Get the first map that passes the FTL whitelist
+                var fallbackMap = maps.FirstOrDefault(o =>
+                    _whitelistSystem.IsWhitelistPassOrNull(o.Item2.Whitelist, entity));
 
-            TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+                if (fallbackMap.Item1 == null)
+                {
+                    // Карт назначения нет: завершаем FTL на месте, пропуская Smimsh и разморозку карты.
+                    Log.Error($"Unable to find an FTL destination map for {ToPrettyString(uid)}, finishing FTL in place.");
+                    mapId = xform.MapID;
+                    comp.ArrivedInPlace = true;
+                }
+                else
+                {
+                    mapId = fallbackMap.Item1.MapId;
+                    TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+                }
+            }
+            // Sunrise edit end
         }
         // Docking FTL
         else if (_mapGridQuery.HasComp(target.EntityId) &&
@@ -564,8 +586,14 @@ public sealed partial class ShuttleSystem
                 : FTLCooldown);
         comp.StateTime = StartEndTime.FromCurTime(_gameTiming, cooldown);
         _console.RefreshShuttleConsoles(uid);
-        _mapSystem.SetPaused(mapId, false);
-        Smimsh(uid, xform: xform);
+
+        // Sunrise edit start - на аварийном завершении не трогаем карту и не вызываем Smimsh.
+        if (!comp.ArrivedInPlace)
+        {
+            _mapSystem.SetPaused(mapId, false);
+            Smimsh(uid, xform: xform);
+        }
+        // Sunrise edit end
 
         var ftlEvent = new FTLCompletedEvent(uid, _mapSystem.GetMap(mapId));
         RaiseLocalEvent(uid, ref ftlEvent, true);

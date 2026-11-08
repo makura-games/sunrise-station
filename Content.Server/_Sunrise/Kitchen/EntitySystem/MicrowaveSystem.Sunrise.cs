@@ -7,6 +7,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Kitchen;
 using Content.Shared.Stacks;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Kitchen.EntitySystems;
 
 public sealed partial class MicrowaveSystem

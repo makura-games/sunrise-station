@@ -3,6 +3,7 @@ using Content.Shared.Destructible.Thresholds;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.GameTicking.Components;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.GameTicking;
 
 /// <summary>

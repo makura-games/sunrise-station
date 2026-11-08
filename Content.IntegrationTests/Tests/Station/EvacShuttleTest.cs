@@ -52,7 +52,7 @@ public sealed class EvacShuttleTest : GameTest
         Assert.That(entMan.Count<StationEmergencyShuttleComponent>(), Is.EqualTo(1));
         Assert.That(entMan.Count<StationDataComponent>(), Is.EqualTo(2)); // Sunrise-edit
         Assert.That(entMan.Count<EmergencyShuttleComponent>(), Is.EqualTo(1));
-        Assert.That(entMan.Count<FTLMapComponent>(), Is.EqualTo(1)); // Sunrise-edit
+        Assert.That(entMan.Count<FTLMapComponent>(), Is.EqualTo(0));
 
         var station = (Entity<StationTransitHubComponent>) entMan.AllComponentsList<StationTransitHubComponent>().Single(); // Sunrise-Edit
         var data = entMan.GetComponent<StationDataComponent>(station);

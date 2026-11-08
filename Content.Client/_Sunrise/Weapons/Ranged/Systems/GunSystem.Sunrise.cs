@@ -2,7 +2,7 @@ using Content.Client.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Client.GameObjects;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Client.Weapons.Ranged.Systems
 {
     public sealed partial class GunSystem
