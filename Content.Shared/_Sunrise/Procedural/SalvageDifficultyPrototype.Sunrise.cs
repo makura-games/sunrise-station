@@ -1,9 +1,10 @@
 using System;
 using Robust.Shared.Prototypes;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Procedural;
 
-public sealed partial class SalvageDifficultyPrototype : IPrototype
+public sealed partial class SalvageDifficultyPrototype
 {
     [DataField]
     public string LootPrototype = "SalvageLoot";

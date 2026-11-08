@@ -188034,7 +188034,6 @@ entities:
       dnas: []
       fibers: []
       fingerprints: []
-    - type: ScaleSprite
     - type: InsideEntityStorage
       storage: 9
 - proto: LockboxCaptain

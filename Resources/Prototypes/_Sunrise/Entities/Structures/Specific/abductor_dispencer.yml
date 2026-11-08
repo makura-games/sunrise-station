@@ -1,6 +1,6 @@
 - type: entity
   id: AbductorDispencer
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   name: alien dispencer
   description: Dispence something wrong?
   components:

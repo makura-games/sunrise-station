@@ -2,7 +2,7 @@ using Content.Shared.Dataset;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Humanoid.Prototypes;
 
 public sealed partial class SpeciesPrototype

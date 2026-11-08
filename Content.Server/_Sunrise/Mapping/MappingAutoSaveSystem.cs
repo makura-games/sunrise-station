@@ -30,7 +30,6 @@ public sealed partial class MappingAutoSaveSystem : EntitySystem
     [Dependency] private TurfSystem _turf = default!;
     [Dependency] private WalledDecalRemovalSystem _walledDecal = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private ITileDefinitionManager _tileDefinition = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IConsoleHost _console = default!;
@@ -128,7 +127,7 @@ public sealed partial class MappingAutoSaveSystem : EntitySystem
         if (runCleanDeviceLinks)
             _deviceLink.CleanupLinksForMapSave(map.MapId);
 
-        foreach (var grid in _mapManager.GetAllGrids(map.MapId))
+        foreach (var grid in _map.GetAllGrids(map.MapId))
         {
             if (runFixGridAtmos)
                 RunMapSaveAutoFixGridAtmos(grid);

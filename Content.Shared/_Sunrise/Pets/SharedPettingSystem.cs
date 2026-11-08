@@ -175,7 +175,7 @@ public abstract partial class SharedPettingSystem : EntitySystem
             var message = Loc.GetString("pet-success",
                 ("name", Identity.Name(pet, EntityManager, master.Value)));
 
-            _popup.PopupClient(message, pet.Owner, master.Value);
+            _popup.PopupEntity(message, pet.Owner, master.Value);
         }
 
 

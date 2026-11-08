@@ -5,6 +5,9 @@
   playTimeTracker: AntagDragon # Sunrise-Edit
   objective: roles-antag-dragon-objective
   storytellerStress: 5.0 # Sunrise-Edit
+  tags:
+  - OffStation
+  - Midround
 
 - type: antagSpecifier
   parent: RestrictedAntag

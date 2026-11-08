@@ -1,3 +1,4 @@
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Atmos.Components;
 
 public sealed partial class AtmosAlertsComputerBoundInterfaceState

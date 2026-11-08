@@ -48,7 +48,9 @@
   description: A self-loading pirate musket modified for cyborg use.
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Item
     size: Large
     sprite: _Sunrise/Objects/Weapons/Guns/Snipers/musket.rsi

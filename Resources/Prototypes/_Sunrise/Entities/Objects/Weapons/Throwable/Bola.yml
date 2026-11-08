@@ -1,17 +1,26 @@
 - type: entity
-  name: security bola
-  parent: [Bola, BaseSecurityContraband]
-  id: BolaSecurity
-  description: Linked together with some spare cuffs and metal.
+  parent: BaseBola
+  id: EnergyBola
+  name: energy bola
+  description: An improved bola designed to restrain dangerous targets.
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Throwable/bola/bola_security.rsi
     state: icon
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 0
   - type: Ensnaring
+    freeTime: 2.5
+    breakoutTime: 4.0
     walkSpeed: 0.6
     sprintSpeed: 0.6
     staminaDamage: 10
     destroyOnRemove: true
+    canThrowTrigger: true
+    canMoveBreakout: true
+    maxEnsnares: 1
   - type: Tag
     tags:
     - BolaSecurity

@@ -30,12 +30,6 @@
   - PowerCageMedium
 
 - type: latheRecipePack
-  id: CargoSuit
-  recipes:
-  - CargoSuit
-  - BluespaceBox
-
-- type: latheRecipePack
   id: NightVisionDevice
   recipes:
   - BasicNVD

@@ -15,7 +15,6 @@ namespace Content.Client._Sunrise.Paint
         /// </summary>
 
         [Dependency] private SharedAppearanceSystem _appearance = default!;
-        [Dependency] private IPrototypeManager _protoMan = default!;
 
         public ShaderInstance? Shader; // in Robust.Client.Graphics so cannot move to shared component.
 
@@ -31,7 +30,7 @@ namespace Content.Client._Sunrise.Paint
         protected override void OnAppearanceChange(EntityUid uid, SprayPaintedComponent component, ref AppearanceChangeEvent args)
         {
             // ShaderPrototype sadly in Robust.Client, cannot move to shared component.
-            Shader = _protoMan.Index<ShaderPrototype>(component.ShaderName).Instance();
+            Shader = ProtoMan.Index<ShaderPrototype>(component.ShaderName).Instance();
 
             if (args.Sprite == null)
                 return;
@@ -97,7 +96,7 @@ namespace Content.Client._Sunrise.Paint
                 return;
 
             component.BeforeColor = sprite.Color;
-            Shader = _protoMan.Index<ShaderPrototype>(component.ShaderName).Instance();
+            Shader = ProtoMan.Index<ShaderPrototype>(component.ShaderName).Instance();
 
             if (!Terminating(uid))
             {

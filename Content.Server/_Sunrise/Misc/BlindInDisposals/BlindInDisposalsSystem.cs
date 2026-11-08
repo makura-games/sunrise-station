@@ -1,5 +1,5 @@
-using Content.Server.Disposal.Unit;
 using Content.Shared._Sunrise.VentCraw;
+using Content.Shared.Disposal.Unit;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Humanoid;
@@ -19,7 +19,7 @@ public sealed partial class BlindInDisposalsSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<BeingDisposedComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<BeingDisposedComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<BeingDisposedComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<BeingDisposedComponent, CanSeeAttemptEvent>(OnCanSee);
     }
 
@@ -33,7 +33,7 @@ public sealed partial class BlindInDisposalsSystem : EntitySystem
         _blindable.UpdateIsBlind(ent.Owner);
     }
 
-    private void OnShutdown(Entity<BeingDisposedComponent> ent, ref ComponentShutdown args)
+    private void OnRemove(Entity<BeingDisposedComponent> ent, ref ComponentRemove args)
     {
         if (!HasComp<BlindableComponent>(ent))
             return;

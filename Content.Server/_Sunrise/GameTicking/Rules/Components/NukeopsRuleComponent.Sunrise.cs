@@ -1,5 +1,7 @@
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Content.Shared.AlertLevel;
+using Robust.Shared.Prototypes;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.GameTicking.Rules.Components;
 
 public sealed partial class NukeopsRuleComponent
@@ -9,7 +11,7 @@ public sealed partial class NukeopsRuleComponent
     /// if null, the alert level will not change.
     /// </summary>
     [DataField]
-    public string? SetAlertlevel = "gamma";
+    public ProtoId<AlertLevelPrototype>? SetAlertlevel = "Gamma";
 
     /// <summary>
     /// How many seconds after the declaration of war, the alert level will change.

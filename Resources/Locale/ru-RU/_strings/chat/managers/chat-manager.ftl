@@ -139,3 +139,11 @@ chat-speech-verb-wawa-3 = объявляет
 chat-speech-verb-wawa-4 = размышляет
 # Sunrise-Sponsor-End
 chat-manager-send-ooc-admin-wrap-message = OOC: [bold]{ $patronTitle }{ $playerName }:[/bold] { $message }
+chat-manager-dead-chat-enabled-message = Мёртвый чат включён.
+chat-manager-dead-chat-disabled-message = Мёртвый чат отключён.
+chat-manager-speech-double-quote-begin = “
+chat-manager-speech-double-quote-end = ”
+chat-manager-follow-button = (F)
+chat-speech-verb-name-sheep = Овца
+chat-speech-verb-sheep-1 = блеет
+chat-speech-verb-sheep-2 = бекает
