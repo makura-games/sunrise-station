@@ -30,14 +30,13 @@ public sealed partial class GridDockSystem : EntitySystem
 
     private void OnStationPostInit(EntityUid uid, SpawnGridAndDockToStationComponent component, StationPostInitEvent args)
     {
+        if (!_cfg.GetCVar(CCVars.GridFill))
+            return;
+
         if (component.Grids.Count == 0)
             return;
 
         var ftlMap = _shuttles.EnsureSunriseFtlMap();
-
-        if (!_cfg.GetCVar(CCVars.GridFill))
-            return;
-
         var xformMap = Transform(ftlMap);
 
         if (!TryComp<StationDataComponent>(uid, out var stationData))
