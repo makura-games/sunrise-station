@@ -1,6 +1,6 @@
 using System.Numerics;
 
-#pragma warning disable IDE0130 // Пространство имён vanilla-компонента сохраняется для partial-расширения.
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Shuttles.Components;
 
 public sealed partial class FTLComponent

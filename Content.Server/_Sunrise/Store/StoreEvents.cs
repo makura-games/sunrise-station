@@ -1,6 +1,6 @@
 using Content.Shared.FixedPoint;
 
-#pragma warning disable IDE0130 // Пространство имён соответствует расширяемой системе.
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Store.Systems;
 
 [ByRefEvent]

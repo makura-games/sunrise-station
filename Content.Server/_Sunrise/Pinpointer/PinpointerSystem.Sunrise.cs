@@ -4,7 +4,7 @@ using Content.Shared.Verbs;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
-#pragma warning disable IDE0130 // Sunrise-Edit — partial для ванильной системы хранится в _Sunrise
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Pinpointer;
 
 public sealed partial class PinpointerSystem
