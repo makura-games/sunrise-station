@@ -1,3 +1,4 @@
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Wires;
 using Content.Shared.Doors.Components;
 

@@ -2,8 +2,7 @@ using Content.Shared._Sunrise.Weapons.DualWield;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 
-// File is intentionally placed in _Sunrise but extends the vanilla partial class.
-#pragma warning disable IDE0130
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Weapons.Ranged.Systems;
 
 public abstract partial class SharedGunSystem

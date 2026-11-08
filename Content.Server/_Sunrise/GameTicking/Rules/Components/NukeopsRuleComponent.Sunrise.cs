@@ -1,6 +1,7 @@
 using Content.Shared.AlertLevel;
 using Robust.Shared.Prototypes;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.GameTicking.Rules.Components;
 
 public sealed partial class NukeopsRuleComponent

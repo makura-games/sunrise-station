@@ -1,7 +1,7 @@
 using Content.Shared.Damage.Prototypes;
 using Robust.Shared.Prototypes;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Medical.Components;
 
 public sealed partial class HealthAnalyzerComponent

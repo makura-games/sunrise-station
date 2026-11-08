@@ -14,6 +14,7 @@ using Robust.Shared.Localization;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Preferences;
 
 public sealed partial class HumanoidCharacterProfile
