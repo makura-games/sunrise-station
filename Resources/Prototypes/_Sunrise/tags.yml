@@ -583,9 +583,6 @@
 
 # region Misc / fun
 - type: Tag
-  id: BluespaceBox
-
-- type: Tag
   id: ClownKudzu
 
 - type: Tag
