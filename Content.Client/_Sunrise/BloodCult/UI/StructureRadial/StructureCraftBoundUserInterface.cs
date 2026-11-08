@@ -18,7 +18,6 @@ public sealed partial class StructureCraftBoundUserInterface : BoundUserInterfac
     [Dependency] private IPlacementManager _placement = default!;
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
-    [Dependency] private IEntitySystemManager _systemManager = default!;
 
     private RadialContainer? _menu;
     private bool _selected;
@@ -101,12 +100,11 @@ public sealed partial class StructureCraftBoundUserInterface : BoundUserInterfac
         // if (construct.ID == "CultPylon" && CheckForStructure(player, id))
         // {
         //     var popup = _entMan.System<SharedPopupSystem>();
-        //     popup.PopupClient(Loc.GetString("cult-structure-craft-another-structure-nearby"), player.Value, player.Value);
+        //     popup.PopupEntity(Loc.GetString("cult-structure-craft-another-structure-nearby"), player.Value, player.Value);
         //     return;
         // }
 
-        var constructSystem = _systemManager.GetEntitySystem<ConstructionSystem>();
-        var hijack = new ConstructionPlacementHijack(constructSystem, construct);
+        var hijack = new ConstructionPlacementHijack(construct);
 
         _placement.BeginPlacing(newObj, hijack);
     }

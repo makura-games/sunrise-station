@@ -7,3 +7,5 @@ construction-menu-eraser-mode = Режим ластика
 construction-menu-craft = Создание
 construction-menu-search = Поиск
 construction-menu-grid-view = Вид сетки
+construction-menu-history-select-previous-recipe = ◄ Назад
+construction-menu-history-select-next-recipe = Далее ►

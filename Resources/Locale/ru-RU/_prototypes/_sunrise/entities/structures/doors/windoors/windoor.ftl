@@ -1,3 +1,3 @@
-ent-WindoorSecurePirateLocked = { ent-WindoorSecure }
+ent-WindoorPirateLocked = { ent-Windoor }
     .suffix = Пиратский, Закрыт
-    .desc = { ent-WindoorSecure.desc }
+    .desc = { ent-Windoor.desc }

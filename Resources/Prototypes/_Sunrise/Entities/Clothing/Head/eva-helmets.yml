@@ -76,11 +76,10 @@
     action: NVDToggleAction
     mustEquip: true
     disableOnUnequip: true
-  - type: ComponentToggler
-    parent: true
-    components:
-      - type: NightVision
-        effect: EffectNightVisionPirate
+  - type: NightVision
+    enabled: false
+    relayOverlay: true
+    lightingColor: '#FF983326'
   - type: PowerCellDraw
     drawRate: 5
     useCharge: 20

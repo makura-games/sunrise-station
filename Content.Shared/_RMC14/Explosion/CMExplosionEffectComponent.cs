@@ -13,13 +13,10 @@ public sealed partial class CMExplosionEffectComponent : Component
     [DataField]
     public EntProtoId? ShockWave = "RMCExplosionEffectGrenadeShockWave";
 
-    // Sunrise added
     [DataField]
     public EntProtoId? Smoke = "ExplosionEffectSmoke";
-    // Sunrise added
 }
 
-// Sunrise added start
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ExplosionSmokeEffectComponent : Component
 {
@@ -41,4 +38,3 @@ public sealed partial class ExplosionEffectComponent : Component
     [DataField, AutoNetworkedField]
     public float SizeModifier = 2f;
 }
-// Sunrise added end

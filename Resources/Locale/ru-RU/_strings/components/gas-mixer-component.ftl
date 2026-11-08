@@ -7,3 +7,4 @@ comp-gas-mixer-ui-needs-anchor = Сначала закрепите его!
 comp-gas-mixer-ui-mixer-status = Статус:
 comp-gas-mixer-ui-status-enabled = Вкл
 comp-gas-mixer-ui-status-disabled = Выкл
+comp-gas-mixer-ratio-examine = Соотношение бокового порта составляет [color={ $statusColor }]{ $sidePortRatio }[/color].

@@ -1,5 +1,5 @@
 - type: entity
-  parent: SimpleMobBase
+  parent: [SimpleMobBase, BaseSlicingRefinable]
   id: MobPibble
   name: Pibble
   description: Nanny dog. Or a lab mix, depending on who asks.
@@ -53,8 +53,8 @@
         Base: pibble_dead
       Dead:
         Base: pibble_dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeat
       amount: 3
   - type: ReplacementAccent

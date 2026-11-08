@@ -14,7 +14,6 @@ public sealed partial class RoundEndSummaryUIController : UIController,
     IOnSystemLoaded<ClientGameTicker>
 {
     [Dependency] private IInputManager _input = default!;
-    [Dependency] private ISharedPlayerManager _playerManager = default!;
 
     private RoundEndSummaryWindow? _window;
 
@@ -41,7 +40,13 @@ public sealed partial class RoundEndSummaryUIController : UIController,
             return;
 
         _window = new RoundEndSummaryWindow(message.GamemodeTitle, message.RoundEndText,
-            message.RoundDuration, message.RoundId, message.AllPlayersEndInfo, message.RoundEndStats, message.StatisticEntries, EntityManager, _playerManager, message.StorytellerName, message.StorytellerHistory); // Sunrise-Edit
+            message.RoundDuration,
+            message.RoundId,
+            message.AllPlayersEndInfo,
+            message.RoundEndStats,
+            message.StatisticEntries,
+            message.StorytellerName,
+            message.StorytellerHistory); // Sunrise-Edit
     }
 
     public void OnSystemLoaded(ClientGameTicker system)

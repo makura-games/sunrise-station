@@ -64,12 +64,14 @@
         - !type:TagCondition
           tag: "Flesh"
         amount: 0.1 
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         conditions:
         - !type:TagCondition
           tag: "Flesh"
         factor: 2.5
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         conditions:
         - !type:TagCondition
           tag: "Flesh"

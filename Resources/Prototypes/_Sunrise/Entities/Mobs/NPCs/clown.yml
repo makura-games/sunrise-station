@@ -12,8 +12,8 @@
   - type: Sprite
     drawdepth: Mobs
     sprite: _Sunrise/Mobs/Aliens/clown_kudzu.rsi
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: MaterialBananium1
     - id: SnapPopBox
       orGroup: ToyGroup

@@ -110,7 +110,7 @@ public sealed partial class LockSystem : EntitySystem
             return;
 
         if (!args.Silent)
-            _sharedPopupSystem.PopupClient(Loc.GetString("entity-storage-component-locked-message"), uid, args.User);
+            _sharedPopupSystem.PopupEntity(Loc.GetString("entity-storage-component-locked-message"), uid, args.User);
 
         args.Cancelled = true;
     }
@@ -180,7 +180,7 @@ public sealed partial class LockSystem : EntitySystem
 
         if (user is { Valid: true })
         {
-            _sharedPopupSystem.PopupClient(Loc.GetString("lock-comp-do-lock-success",
+            _sharedPopupSystem.PopupEntity(Loc.GetString("lock-comp-do-lock-success",
                 ("entityName", Identity.Name(uid, EntityManager))), uid, user);
         }
 
@@ -213,7 +213,7 @@ public sealed partial class LockSystem : EntitySystem
 
         if (user is { Valid: true })
         {
-            _sharedPopupSystem.PopupClient(Loc.GetString("lock-comp-do-unlock-success",
+            _sharedPopupSystem.PopupEntity(Loc.GetString("lock-comp-do-unlock-success",
                 ("entityName", Identity.Name(uid, EntityManager))), uid, user.Value);
         }
 
@@ -359,7 +359,7 @@ public sealed partial class LockSystem : EntitySystem
         if (!quiet)
         {
             var denyReason = accessEv.DenyReason ?? Loc.GetString(_defaultDenyReason);
-            _sharedPopupSystem.PopupClient(denyReason, ent, user);
+            _sharedPopupSystem.PopupEntity(denyReason, ent, user);
         }
         return false;
     }
@@ -444,7 +444,7 @@ public sealed partial class LockSystem : EntitySystem
 
         if (!args.Silent)
         {
-            _sharedPopupSystem.PopupClient(Loc.GetString("construction-step-condition-wire-panel-close"),
+            _sharedPopupSystem.PopupEntity(Loc.GetString("construction-step-condition-wire-panel-close"),
                 ent,
                 args.User);
         }
@@ -460,7 +460,7 @@ public sealed partial class LockSystem : EntitySystem
         if (!TryComp<LockComponent>(ent, out var lockComp) || !lockComp.Locked)
             return;
 
-        _sharedPopupSystem.PopupClient(Loc.GetString("lock-comp-generic-fail",
+        _sharedPopupSystem.PopupEntity(Loc.GetString("lock-comp-generic-fail",
             ("target", Identity.Entity(ent, EntityManager))),
             ent,
             args.User);
@@ -475,7 +475,7 @@ public sealed partial class LockSystem : EntitySystem
         if (!TryComp<LockComponent>(ent, out var lockComp) || !lockComp.Locked)
             return;
 
-        _sharedPopupSystem.PopupClient(Loc.GetString("lock-comp-generic-fail",
+        _sharedPopupSystem.PopupEntity(Loc.GetString("lock-comp-generic-fail",
                 ("target", Identity.Entity(ent, EntityManager))),
             ent,
             args.User);
@@ -497,7 +497,7 @@ public sealed partial class LockSystem : EntitySystem
 
         if (lockComp.Locked && component.Popup != null)
         {
-            _sharedPopupSystem.PopupClient(Loc.GetString(component.Popup), uid, args.User);
+            _sharedPopupSystem.PopupEntity(Loc.GetString(component.Popup), uid, args.User);
         }
 
         _audio.PlayPredicted(component.AccessDeniedSound, uid, args.User);
@@ -532,7 +532,7 @@ public sealed partial class LockSystem : EntitySystem
 
         if (lockComp.Locked && component.LockedPopup != null)
         {
-            _sharedPopupSystem.PopupClient(Loc.GetString(component.LockedPopup,
+            _sharedPopupSystem.PopupEntity(Loc.GetString(component.LockedPopup,
                     ("target", Identity.Entity(uid, EntityManager))),
                 uid,
                 args.User);

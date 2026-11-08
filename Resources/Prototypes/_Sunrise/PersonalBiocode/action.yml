@@ -5,9 +5,10 @@
   description: Remember to equip the important pieces of your suit before going into action.
   components:
   - type: Action
-    icon:
-      sprite: _Sunrise/Actions/Pets/radials.rsi
-      state: settings
     useDelay: 10
+  - type: Sprite
+    sprite: _Sunrise/Actions/Pets/radials.rsi
+    layers:
+    - state: settings
   - type: InstantAction
     event: !type:StoreDNAActionEvent

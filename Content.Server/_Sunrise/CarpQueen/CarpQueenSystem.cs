@@ -30,7 +30,7 @@ public sealed partial class CarpQueenSystem : SharedCarpQueenSystem
     [Dependency] private CarpEggSystem _carpEggs = default!;
     [Dependency] private PopupSystem _popup = default!;
     [Dependency] private ChatSystem _chat = default!;
-    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private SatiationSystem _satiation = default!;
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private NpcFactionSystem _npcFaction = default!;
 
@@ -47,8 +47,8 @@ public sealed partial class CarpQueenSystem : SharedCarpQueenSystem
     {
         base.OnStartup(uid, component, args);
 
-        if (TryComp<HungerComponent>(uid, out var hunger))
-            component.LastObservedHunger = _hunger.GetHunger(hunger);
+        if (TryComp<SatiationComponent>(uid, out var satiation))
+            component.LastObservedHunger = _satiation.GetValueOrNull((uid, satiation), SatiationSystem.Hunger) ?? 0f;
     }
 
     private void OnSummon(EntityUid uid, CarpQueenComponent component, CarpQueenSummonActionEvent args)
@@ -93,17 +93,18 @@ public sealed partial class CarpQueenSystem : SharedCarpQueenSystem
         }
 
         // Стоимость голода работает как у крысиного короля.
-        if (!TryComp<HungerComponent>(uid, out var hungerComp))
+        if (!TryComp<SatiationComponent>(uid, out var satiation))
             return;
 
-        if (_hunger.GetHunger(hungerComp) < component.HungerPerSummon)
+        if (_satiation.GetValueOrNull((uid, satiation), SatiationSystem.Hunger) is not { } hunger ||
+            hunger < component.HungerPerSummon)
         {
             _popup.PopupEntity(Loc.GetString("rat-king-too-hungry"), uid, uid);
             return;
         }
 
         args.Handled = true;
-        _hunger.ModifyHunger(uid, -component.HungerPerSummon, hungerComp);
+        _satiation.ModifyValue((uid, satiation), SatiationSystem.Hunger, -component.HungerPerSummon);
         // Создаем яйцо вместо мгновенного слуги.
         var egg = Spawn("MobCarpEgg", Transform(uid).Coordinates);
         var eggComp = EnsureComp<CarpEggComponent>(egg);
@@ -174,10 +175,12 @@ public sealed partial class CarpQueenSystem : SharedCarpQueenSystem
         base.Update(frameTime);
 
         // Небольшое самолечение при росте голода, то есть при еде.
-        var query = EntityQueryEnumerator<CarpQueenComponent, HungerComponent>();
-        while (query.MoveNext(out var uid, out var queen, out var hunger))
+        var query = EntityQueryEnumerator<CarpQueenComponent, SatiationComponent>();
+        while (query.MoveNext(out var uid, out var queen, out var satiation))
         {
-            var current = _hunger.GetHunger(hunger);
+            if (_satiation.GetValueOrNull((uid, satiation), SatiationSystem.Hunger) is not { } current)
+                continue;
+
             if (current > queen.LastObservedHunger)
             {
                 var delta = current - queen.LastObservedHunger;
@@ -228,7 +231,7 @@ public sealed partial class CarpQueenSystem : SharedCarpQueenSystem
         base.DoCommandCallout(uid, component);
 
         if (!component.OrderCallouts.TryGetValue(component.CurrentOrder, out var datasetId) ||
-            !PrototypeManager.TryIndex<LocalizedDatasetPrototype>(datasetId, out var datasetPrototype))
+            !ProtoMan.TryIndex<LocalizedDatasetPrototype>(datasetId, out var datasetPrototype))
             return;
 
         var msg = Random.Pick(datasetPrototype);

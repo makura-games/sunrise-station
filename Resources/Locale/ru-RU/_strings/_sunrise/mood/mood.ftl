@@ -21,11 +21,9 @@ alerts-mood-perfect-desc = Потрясающее настроение! Каже
 alerts-mood-dead-name = Мертв
 alerts-mood-dead-desc = ...
 mood-show-effects-start = [font size=12]Текущее настроение:[/font]
-mood-effect-HungerOverfed = Я так наелся, что вот-вот лопну!
 mood-effect-HungerOkay = Чувствую себя сытым.
 mood-effect-HungerPeckish = Не отказался бы от перекуса.
 mood-effect-HungerStarving = Мне срочно нужно поесть!
-mood-effect-ThirstOverHydrated = Голова кружится от переизбытка жидкости.
 mood-effect-ThirstOkay = Чувствую себя освеженным.
 mood-effect-ThirstThirsty = Губы немного пересохли.
 mood-effect-ThirstParched = Мне срочно нужно попить!

@@ -10,7 +10,7 @@ using Content.Shared.Body;
 
 namespace Content.Server._Sunrise.Antags.Abductor;
 
-public sealed partial class AbductorSystem : SharedAbductorSystem
+public sealed partial class AbductorSystem
 {
 
     [Dependency] private BodySystem _body = default!;

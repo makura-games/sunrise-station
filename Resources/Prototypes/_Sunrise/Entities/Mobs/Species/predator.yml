@@ -33,15 +33,17 @@
   abstract: true
   components:
   - type: Interactions
-  - type: Hunger
   - type: Icon # It will not have an icon in the adminspawn menu without this. Body parts seem fine for whatever reason.
     sprite: _Sunrise/Mobs/Species/Predator/parts.rsi
     state: full
-  - type: Thirst
-    dehydrationDamage:
-      types:
-        Bloodloss: 0.5
-        Asphyxiation: 0.5
+  - type: SatiationDamage
+    satiations:
+      Thirst:
+        thresholds:
+          Dead:
+            types:
+              Bloodloss: 0.5
+              Asphyxiation: 0.5
   - type: Perishable
   - type: HumanoidProfile
     species: Predator
@@ -60,10 +62,7 @@
         layer:
         - MobLayer
   - type: Vocal
-    sounds:
-      Male: Predator
-      Female: Predator
-      Unsexed: Predator
+    emoteSounds: Predator
   - type: TypingIndicator
     proto: alien
   - type: Damageable

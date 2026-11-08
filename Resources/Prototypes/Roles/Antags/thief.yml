@@ -6,6 +6,9 @@
   playTimeTracker: AntagThief # Sunrise-Edit
   objective: roles-antag-thief-objective
   guides: [ Thieves ]
+  tags:
+  - OnStation
+  - Roundstart
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 1h

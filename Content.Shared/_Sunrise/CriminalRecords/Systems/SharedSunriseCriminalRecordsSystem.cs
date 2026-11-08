@@ -7,7 +7,6 @@ namespace Content.Shared._Sunrise.CriminalRecords.Systems;
 
 public abstract partial class SharedSunriseCriminalRecordsSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SharedStationCorporateLawSystem _corporateLawSystem = default!;
 
     private static readonly Dictionary<int, (int Min, int Max)> CategoryRanges = new()
@@ -47,7 +46,7 @@ public abstract partial class SharedSunriseCriminalRecordsSystem : EntitySystem
         var lawProtos = new List<CorporateLawPrototype>();
         foreach (var id in @case.Laws)
         {
-            if (_prototypeManager.TryIndex(id, out var law))
+            if (ProtoMan.TryIndex(id, out var law))
                 lawProtos.Add(law);
         }
 
@@ -75,7 +74,7 @@ public abstract partial class SharedSunriseCriminalRecordsSystem : EntitySystem
                     bool blockViolatedBefore = allCases
                         .Where(c => c.Id != @case.Id && (c.Status == CriminalCaseStatus.Finished || c.Status == CriminalCaseStatus.Incarcerated || c.Status == CriminalCaseStatus.Closed))
                         .SelectMany(c => c.Laws)
-                        .Any(l => _prototypeManager.TryIndex(l, out var p) && p.LawIdentifier != null && p.LawIdentifier.Length > 0 && p.LawIdentifier[0] == block);
+                        .Any(l => ProtoMan.TryIndex(l, out var p) && p.LawIdentifier != null && p.LawIdentifier.Length > 0 && p.LawIdentifier[0] == block);
 
                     if (!blockViolatedBefore)
                     {
@@ -120,7 +119,7 @@ public abstract partial class SharedSunriseCriminalRecordsSystem : EntitySystem
         foreach (var circId in @case.Circumstances)
         {
             if (!circumstances.Contains(circId)) continue;
-            if (_prototypeManager.TryIndex<CorporateLawPrototype>(circId, out var law))
+            if (ProtoMan.TryIndex<CorporateLawPrototype>(circId, out var law))
             {
                 float p = (law.SentenceMultiplier - 1.0f) * 100f;
                 globalModifierPercent += p;
