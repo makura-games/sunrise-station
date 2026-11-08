@@ -300,6 +300,8 @@ uplink-ammo-lmguraniumkit-desc = Reloading! Contains 8 uranium magazines for the
 
 uplink-energy-dome-name = Personal energy dome
 uplink-energy-dome-desc = A personal shield generator that protects the wearer from lasers and bullets but prevents from using ranged weapons himself. Comes with a small power cell.
+uplink-energy-dome-grenade-name = Deployable portable shield generator
+uplink-energy-dome-grenade-desc = A deployable portable generator that creates a temporary Syndicate energy shield.
 
 uplink-syndicate-teleporter-name = Hand syndicate teleporter
 uplink-syndicate-teleporter-desc = An experimental hand teleporting device. Teleports its owner forward in a small area. Be careful not to end up in the wall.

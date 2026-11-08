@@ -1,41 +1,57 @@
 - type: entity
-  name: blood red backpack shield generator
-  description: A backpack shield generator that protects the wearer from lasers and bullets but prevents from using ranged weapons himself. Uses a power cell.
-  id: EnergyDomeGeneratorBackpackSyndie
-  parent: [ BaseItem, BaseSyndicateContraband ]
+  id: BaseSunriseEnergyDomeGeneratorTimed
+  parent: BaseStructureDynamic
+  abstract: true
   components:
-  - type: Item
-    size: Ginormous
-  - type: MultiHandedItem
-  - type: Clothing
-    quickEquip: false
-    slots:
-    - Back
-  - type: Sprite
-    sprite: _Sunrise/Objects/Tools/EnergyDome/syndie_back.rsi
-    layers:
-      - state: icon
-  - type: ContainerContainer
-    containers:
-      cell_slot: !type:ContainerSlot
-  - type: PowerCellSlot
-    cellSlotId: cell_slot
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCageHigh
-        whitelist:
-          tags:
-            - PowerCage
+  - type: InteractionOutline
   - type: EnergyDomeGenerator
-    damageEnergyDraw: 3
-    domePrototype: EnergyDomeMediumRed
-  - type: PowerCellDraw
-    drawRate: 0
-    useCharge: 0
+    canInteractUse: false
+    canDeviceNetworkUse: true
   - type: UseDelay
     delay: 10.0
+  - type: DeviceLinkSink
+    ports:
+    - On
+  - type: DeviceLinkSource
+    range: 0.1
+    ports:
+    - On
+  - type: AutoLinkReceiver
+    channel: SunriseEnergyDomeGrenade
+  - type: AutoLinkTransmitter
+    channel: SunriseEnergyDomeGrenade
+  - type: TriggerOnSpawn
+  - type: TimerTrigger
+    delay: 0.1
+    popup: null
+    examinable: false
+  - type: SignalOnTrigger
+    keysIn:
+    - timer
+    port: On
+  - type: TimedDespawn
+    lifetime: 180
+
+- type: entity
+  id: SunriseEnergyDomeGeneratorSyndieTimed
+  parent: [ BaseSunriseEnergyDomeGeneratorTimed, BaseSyndicateContraband ]
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Tools/EnergyDome/syndie_back.rsi
+    noRot: true
+    layers:
+      - state: icon
+  - type: Battery
+    maxCharge: 100000
+    startingCharge: 100000
+  - type: BatterySelfRecharger
+    autoRechargeRate: 100
+  - type: EnergyDomeGenerator
+    damageEnergyDraw: 50
+    domePrototype: EnergyDomeMediumRed
+  - type: SpawnOnDespawn
+    prototype: RedspaceImplantEffect
 
 - type: entity
   name: blood red personal shield generator
@@ -120,6 +136,7 @@
   - type: EnergyDomeGenerator
     damageEnergyDraw: 2
     domePrototype: EnergyDomeMediumBlue
+    canInteractUse: true
     canDeviceNetworkUse: true
   - type: PowerCellDraw
     drawRate: 0
@@ -142,43 +159,25 @@
     - Pirate
 
 - type: entity
-  name: BR-50c "Bastion"
-  description: A backpack shield generator that protects the wearer from lasers and bullets but prevents from using ranged weapons himself. Uses a power cell.
-  id: EnergyDomeGeneratorBackpackNT
-  parent: [ BaseItem, BaseCentcommContraband ]
+  id: SunriseEnergyDomeGeneratorNTTimed
+  parent: [ BaseSunriseEnergyDomeGeneratorTimed, BaseCentcommContraband ]
+  categories: [ HideSpawnMenu ]
   components:
-  - type: Item
-    size: Ginormous
-  - type: MultiHandedItem
-  - type: Clothing
-    quickEquip: false
-    slots:
-    - Back
   - type: Sprite
     sprite: _Sunrise/Objects/Tools/EnergyDome/nanotrasen_back.rsi
+    noRot: true
     layers:
       - state: icon
-  - type: ContainerContainer
-    containers:
-      cell_slot: !type:ContainerSlot
-  - type: PowerCellSlot
-    cellSlotId: cell_slot
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellNanoTrasen
-        whitelist:
-          tags:
-            - PowerCell
+  - type: Battery
+    maxCharge: 100000
+    startingCharge: 100000
   - type: EnergyDomeGenerator
-    damageEnergyDraw: 3
+    damageEnergyDraw: 75
     domePrototype: EnergyDomeMediumBlue
-  - type: PowerCellDraw
-    drawRate: 0
-    useCharge: 0
-  - type: UseDelay
-    delay: 10.0
+  - type: BatterySelfRecharger
+    autoRechargeRate: 125
+  - type: SpawnOnDespawn
+    prototype: BluespaceImplantEffect
 
 - type: entity
   name: BT-21b "Barrier"

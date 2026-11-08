@@ -1826,8 +1826,8 @@
       - ERTRed
 
 - type: listing
-  id: ERTUplinkEnergyDomeGeneratorBackpackNT
-  productEntity: EnergyDomeGeneratorBackpackNT
+  id: ERTUplinkEnergyDomeGrenade
+  productEntity: SunriseEnergyDomeGrenadeERT
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: nanotrasen_back }
   cost:
     Crystallite: 10
