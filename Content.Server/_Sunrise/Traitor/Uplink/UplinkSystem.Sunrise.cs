@@ -2,6 +2,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Traitor.Uplink;
 
 public sealed partial class UplinkSystem

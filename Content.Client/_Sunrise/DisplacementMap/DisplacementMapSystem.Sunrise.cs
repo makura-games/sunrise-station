@@ -1,6 +1,7 @@
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Client.DisplacementMap;
 
 public sealed partial class DisplacementMapSystem

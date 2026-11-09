@@ -4,6 +4,7 @@ using Content.Shared.VoiceMask;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Client.VoiceMask;
 
 public sealed partial class VoiceMaskBoundUserInterface

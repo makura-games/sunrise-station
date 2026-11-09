@@ -9,6 +9,7 @@ using Content.Shared.Paper;
 using Robust.Client.GameObjects;
 using Robust.Shared.Utility;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Client.Paper.UI;
 
 public sealed partial class PaperWindow

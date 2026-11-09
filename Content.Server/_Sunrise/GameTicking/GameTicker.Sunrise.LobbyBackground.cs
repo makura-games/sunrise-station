@@ -5,6 +5,7 @@ using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.GameTicking;
 using Robust.Shared.Prototypes;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.GameTicking;
 
 public sealed partial class GameTicker
