@@ -5345,97 +5345,81 @@ entities:
   - uid: 874
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 0.5,15.5
       parent: 1
   - uid: 875
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 6.5,17.5
       parent: 1
   - uid: 876
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -0.5,12.5
       parent: 1
   - uid: 877
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -0.5,14.5
       parent: 1
   - uid: 878
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 5.5,17.5
       parent: 1
   - uid: 879
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 1.5,17.5
       parent: 1
   - uid: 880
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 8.5,14.5
       parent: 1
   - uid: 881
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 8.5,13.5
       parent: 1
   - uid: 882
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 8.5,12.5
       parent: 1
   - uid: 883
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -0.5,13.5
       parent: 1
   - uid: 884
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 2.5,17.5
       parent: 1
   - uid: 885
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 0.5,16.5
       parent: 1
   - uid: 886
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 4.5,17.5
       parent: 1
   - uid: 887
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 3.5,17.5
       parent: 1
   - uid: 888
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 7.5,16.5
       parent: 1
   - uid: 889
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 7.5,15.5
       parent: 1
 - proto: GrilleDiagonal

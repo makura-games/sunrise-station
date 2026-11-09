@@ -19,7 +19,7 @@ using Content.Shared.Popups;
 
 namespace Content.Server._Sunrise.Antags.Abductor;
 
-public sealed partial class AbductorSystem : SharedAbductorSystem
+public sealed partial class AbductorSystem
 {
     [Dependency] private SharedAudioSystem _audioSystem = default!;
     [Dependency] private SharedColorFlashEffectSystem _color = default!;

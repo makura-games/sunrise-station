@@ -203,8 +203,8 @@
       - Taser
       - SecBeltEquip
       - Radio
-      components:
       - Stunbaton
+      components:
       - FlashOnTrigger
       - Flash
       - Handcuff
@@ -216,7 +216,7 @@
           - FlashOnTrigger
       stunbaton:
         whitelist:
-          components:
+          tags:
           - Stunbaton
     sprite: Clothing/Belt/belt_overlay.rsi
   - type: Appearance
@@ -366,6 +366,7 @@
         - JawsOfLife
         - GPS
         - WeldingMask
+        - Stunbaton
       components:
         - SprayPainter
         - NetworkConfigurator
@@ -375,7 +376,6 @@
         - TrayScanner
         - GasAnalyzer
         - HandLabeler
-        - Stunbaton
         - FlashOnTrigger
         - SmokeOnTrigger
         - Flash

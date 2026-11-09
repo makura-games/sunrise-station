@@ -5,12 +5,18 @@
   id: SoulShard
   components:
     - type: Sprite
-      state: icon
+      sprite: _Sunrise/BloodCult/soulstone.rsi
       layers:
         - state: soulstone
           map: ["hasSoul"]
-          sprite: _Sunrise/BloodCult/soulstone.rsi
     - type: MindContainer
+    - type: Input
+      context: ghost
+    - type: InputMover
+    - type: BlockMovement
+      blockInteraction: false
+      blockUse: false
+    - type: Examiner
     - type: SoulShard
     - type: PointLight
       color: Red

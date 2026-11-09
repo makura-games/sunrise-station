@@ -23,13 +23,3 @@
   - type: FactionClothingBlocker
   - type: StaticPrice
     price: 4000
-
-- type: entity
-  parent: SunriseEnergyShield
-  id: EnergyShieldBiocode
-  suffix: BIOCODE
-  components:
-  - type: Biocode
-    factions:
-    - Syndicate
-    - Pirate

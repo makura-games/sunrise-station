@@ -14,3 +14,4 @@ name-identifier-format-syndie-med-robot = ГРХ-МЕД-{ $number }
 name-identifier-format-syndie-reaper-robot = Жнец-{ $number }
 name-identifier-format-inferior-vulpkanin = ВП-{ $number }
 name-identifier-format-felinid = ФЕ-{ $number }
+name-identifier-format-parens = ({ $number })

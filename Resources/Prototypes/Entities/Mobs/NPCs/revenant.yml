@@ -39,8 +39,6 @@
       - Ghost
   - type: ContentEye
     maxZoom: 1.2, 1.2
-  - type: NameIdentifier
-    group: GenericNumber
   - type: GhostRole
     makeSentient: true
     name: ghost-role-information-revenant-name
@@ -88,6 +86,9 @@
     - NamesRevenantAdjective
     - NamesRevenantTheme
     nameFormat: name-format-revenant
+  - type: Grammar
+    attributes:
+      proper: true
   - type: Speech
     speechVerb: Ghost
   - type: Reactive
@@ -97,6 +98,7 @@
     tags:
     - SlowImmune
     - KnockdownImmune
+    - AllowPortalTraversal
     - NoPaint # Sunrise-Edit
   # Sunrise-start
   - type: TTS
@@ -107,5 +109,7 @@
     onBump: false
     requirePower: false
     shockDamage: 30
-  - type: ToggleableNightVision
+  - type: NightVision
+    enabled: false
+    action: ActionToggleNightVision
   # Sunrise-end

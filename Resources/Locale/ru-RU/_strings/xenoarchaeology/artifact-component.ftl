@@ -25,3 +25,4 @@ artifact-node-class-5 = [color=#7883ff]Световой[/color]
 artifact-node-class-6 = [color=#be78ff]Создание[/color]
 cmd-parse-failure-unlocknode-arg-num = Неверное количество аргументов
 cmd-parse-failure-unlocknode-invalid-entity = Указанная сущность netEntity не является действительным узлом
+artifact-unlock-state-continue = Изменения продолжаются, становясь всё интенсивнее...

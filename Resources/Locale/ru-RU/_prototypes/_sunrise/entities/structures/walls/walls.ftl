@@ -18,3 +18,10 @@ ent-WallReinforcedShuttle = укреплённая стена шаттла
 ent-WallReinforcedShuttleDiagonal = укреплённая стена шаттла
     .suffix = Укреплённая, Диагональ
     .desc = { ent-WallShuttleDiagonal.desc }
+
+ent-WallMiningReinforced = укреплённая шахтёрская стена
+    .suffix = Укреплённая
+    .desc = { ent-WallMining.desc }
+ent-WallMiningDiagonalReinforced = укреплённая шахтёрская стена
+    .suffix = Укреплённая, Диагональ
+    .desc = { ent-WallMiningDiagonal.desc }

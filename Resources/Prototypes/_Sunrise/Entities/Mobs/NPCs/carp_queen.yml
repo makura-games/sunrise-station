@@ -36,8 +36,12 @@
       accent: genericAggressive
   - type: TypingIndicator
     proto: slime
-  - type: Hunger
-  - type: Thirst
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: SimpleMobBaseHunger
+      Thirst:
+        prototype: SimpleMobBaseThirst
   - type: Puller
     needsHands: false
   - type: TTS

@@ -6,13 +6,11 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 36000 # 10h общего времени
-  weight: 2
   alwaysUseSpawner: true
   startingGear: PrisonTraineeGear
   icon: "JobIconPrisonTrainee"
   overrideConsoleVisibility: false
   supervisors: job-supervisors-head-of-prison
-  displayWeight: 15
   alternativeTitles:
   - job-alt-title-prison-rookie
   access:

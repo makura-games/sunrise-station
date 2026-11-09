@@ -16,7 +16,6 @@ public sealed partial class EpsilonDeathSquadLawsetRule : StationEventSystem<Eps
 {
     private EntityUid? _targetStation;
     [Dependency] private SiliconLawSystem _siliconLaw = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private const string DeathSquadLawsetId = "DeathSquadLawset";
 
@@ -35,7 +34,7 @@ public sealed partial class EpsilonDeathSquadLawsetRule : StationEventSystem<Eps
         }
 
         var lawsetId = DeathSquadLawsetId;
-        if (!_prototypeManager.TryIndex<SiliconLawsetPrototype>(lawsetId, out var lawsetProto))
+        if (!ProtoMan.TryIndex<SiliconLawsetPrototype>(lawsetId, out var lawsetProto))
         {
             Sawmill.Error($"Could not find lawset prototype: {lawsetId}");
             return;
@@ -44,7 +43,7 @@ public sealed partial class EpsilonDeathSquadLawsetRule : StationEventSystem<Eps
         var laws = new List<SiliconLaw>();
         foreach (var lawId in lawsetProto.Laws)
         {
-            if (!_prototypeManager.TryIndex<SiliconLawPrototype>(lawId, out var lawProto))
+            if (!ProtoMan.TryIndex<SiliconLawPrototype>(lawId, out var lawProto))
             {
                 Sawmill.Error($"Could not find law prototype: {lawId}");
                 return;

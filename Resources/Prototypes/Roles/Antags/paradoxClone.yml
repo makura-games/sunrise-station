@@ -6,6 +6,9 @@
   setPreference: false
   playTimeTracker: AntagParadoxClone # Sunrise-Edit
   storytellerStress: 0.5 # Sunrise-Edit
+  tags:
+  - OffStation
+  - Midround
 
 - type: antagSpecifier
   parent: RestrictedAntag

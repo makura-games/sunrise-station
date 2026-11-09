@@ -8,5 +8,3 @@ ent-BlueprintImplanterExtractor = { ent-TechnologyDiskBlueprint }
     .desc = Чертёж со схемой экстрактора.
 ent-BlueprintProtoAdrenalImplant = чертёж протоадреналинового импланта
     .desc = Чертёж со схемой протоадреналинового импланта. Его можно вставить в автолат.
-ent-BlueprintFishXenoReaper = чертёж ксеноборга-жнеца
-    .desc = Чертёж со схемой пустого шасси ксеноборга-жнеца. Его можно вставить в ядро-матерь.

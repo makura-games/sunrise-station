@@ -313,23 +313,23 @@
 
   - !type:DungeonEntranceDunGen
     count: 5
-    tile: FloorOldConcreteMono
+    tile: FloorConcreteMono
     contents: SovietDungeonEntrance
 
   - !type:RoomEntranceDunGen
-    tile: FloorOldConcrete
+    tile: FloorConcrete
     contents: SovietDungeonRoomEntrance
 
   - !type:EntranceFlankDunGen
-    tile: FloorOldConcrete
+    tile: FloorConcrete
     contents: SovietDungeonWindow
 
   - !type:WallMountDunGen
-    tile: FloorOldConcrete
+    tile: FloorConcrete
     contents: SovietDungeonWalls
 
   - !type:BoundaryWallDunGen
-    tile: FloorGrayConcrete
+    tile: FloorConcrete
     wall: WallReinforcedRust
     cornerWall: WallReinforced
 

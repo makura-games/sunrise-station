@@ -9,6 +9,12 @@
   - HumanoidXenoNormal
   dollPrototype: MobXenoDummy
   skinColoration: Hues
+  defaultSoundsBySex:
+  - XenoHumanoid
+  - XenoHumanoid
+  - XenoHumanoid
+  voices:
+  - XenoHumanoid
   maleFirstNames: names_xeno_first
   femaleFirstNames: names_xeno_first
   maleLastNames: names_xeno_last

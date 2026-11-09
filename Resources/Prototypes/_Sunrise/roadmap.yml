@@ -19,10 +19,6 @@
       name: roadmap-goal-new-guns-name
       desc: roadmap-goal-new-guns-desc
       state: Complete
-    - id: smart-viruse-name
-      name: roadmap-goal-smart-viruse-name
-      desc: roadmap-goal-smart-viruse-desc
-      state: Complete
     - id: assault-ops-name
       name: roadmap-goal-assault-ops-name
       desc: roadmap-goal-assault-ops-desc

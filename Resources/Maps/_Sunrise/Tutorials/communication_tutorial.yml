@@ -222,31 +222,26 @@ entities:
   - uid: 9
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 3.5,-2.5
       parent: 1
   - uid: 11
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 3.5,-0.5
       parent: 1
   - uid: 18
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: -2.5,-1.5
       parent: 1
   - uid: 25
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: -2.5,-0.5
       parent: 1
   - uid: 33
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: -2.5,-2.5
       parent: 1
 - proto: HighSecCentralCommandLocked

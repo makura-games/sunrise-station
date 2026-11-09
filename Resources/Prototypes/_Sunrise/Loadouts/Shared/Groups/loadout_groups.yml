@@ -510,7 +510,6 @@
   loadouts:
   - HeadofSecurityWeapon
   - HeadofSecurityWeapon50h
-  - HeadofSecurityWeapon1984h
 
 # Medical
 - type: loadoutGroup

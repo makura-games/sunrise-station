@@ -148,3 +148,7 @@ admin-trick-minigun-fire-description = Заставляет целевое ор�
 admin-trick-set-bullet-amount-description = Быстро устанавливает значение количества незаспавненных патронов в оружии.
 admin-smite-random-death-name = Случайная смерть
 admin-smite-random-death-description = Случайно выбирает очень трудно восстанавливаемую смерть.
+admin-smite-heartattack-name = Сердечный приступ
+admin-smite-make-stinky-name = Сделать вонючим
+admin-smite-heartattack-description = Немедленно убивает цель, нанося урон от удушья.
+admin-smite-make-stinky-description = Делает цель вонючей, заставляя её выделять аммиак. Фу!

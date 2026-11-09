@@ -64,8 +64,6 @@
     - SpeedLoaderShotgunEmpty
     - SpeedLoaderShotgunSlug
     - SpeedLoaderShotgunBeanbag
-    # PODAVLENIE
-    - BolaSecurity
 ####################################################
 
 - type: latheRecipePack
@@ -192,6 +190,7 @@
     - ScanGateMachineCircuitboard
     - WeaponSunriseLaserPistol
     - FlareGunSecurityUpgrade
+    - EnergyBola
 # Sunrise-TODO: Нужен ребаланс с учетом типов боеприпасов
 #    - BaseMagazinePistolCaselessRifleExtended
 #    - MagazinePPSH41Extended
@@ -219,6 +218,7 @@
     - MagazineBoxBelt127Emp
     #
     - EnergyDomeDirectionalTurtle
+    - SunriseEnergyShieldSec
     - WeaponTemperatureGun
     #- ModularReceiverAuto
     - LecterUpgrade

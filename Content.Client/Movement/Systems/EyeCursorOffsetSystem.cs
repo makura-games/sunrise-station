@@ -1,15 +1,16 @@
 using System.Numerics;
+using Content.Client.Hands.Systems;
 using Content.Client.Movement.Components;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Client.Viewport;
 using Content.Shared.Camera;
+using Content.Shared.Hands;
+using Content.Shared.Movement.Components;
 using Content.Shared.Input;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Shared.Map;
-using Robust.Client.Player;
-using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
@@ -20,6 +21,7 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
 {
     [Dependency] private IEyeManager _eyeManager = default!;
     [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private HandsSystem _handsSystem = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private InputSystem _inputSystem = default!;
 
@@ -50,6 +52,19 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
         _inputManager.SetInputCommand(ContentKeyFunctions.LookUp, input);
     }
     // Sunrise-End
+
+    [SubscribeLocalEvent]
+    private void OnHeldRelayedOffset(Entity<CursorOffsetInHandComponent> entity, ref HeldRelayedEvent<GetEyeOffsetRelayedEvent> args)
+    {
+        if (entity.Comp.UseActiveHand && (!_handsSystem.IsHeld(entity.Owner, out var holder) || _handsSystem.GetActiveItem(holder.Value) != entity))
+            return;
+
+        var offset = OffsetAfterMouse(entity.Owner, null);
+        if (offset == null)
+            return;
+
+        args.Args.Offset += offset.Value;
+    }
 
     private void OnGetEyeOffsetEvent(EntityUid uid, EyeCursorOffsetComponent component, ref GetEyeOffsetEvent args)
     {
@@ -116,7 +131,7 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
             //Makes the view not jump immediately when moving the cursor fast.
             if (component.CurrentPosition != component.TargetPosition)
             {
-                var vectorOffset = component.TargetPosition - component.CurrentPosition;
+                Vector2 vectorOffset = component.TargetPosition - component.CurrentPosition;
                 if (vectorOffset.Length() > component.OffsetSpeed)
                 {
                     vectorOffset = vectorOffset.Normalized() * component.OffsetSpeed; // TODO: Probably needs to properly account for time delta or something.

@@ -15,7 +15,6 @@ public sealed partial class LightingOverlaySystem : EntitySystem
     [Dependency] private IConfigurationManager _configuration = default!;
     [Dependency] private BloomOverlayTreeSystem _bloomTree = default!;
     [Dependency] private IOverlayManager _overlay = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private TransformSystem _transform = default!;
 
@@ -65,7 +64,7 @@ public sealed partial class LightingOverlaySystem : EntitySystem
 
         _bloomOverlay ??= new PointLightingOverlay(
             _bloomTree,
-            _prototype,
+            ProtoMan,
             _sprite,
             _transform,
             _pointLightQuery,
