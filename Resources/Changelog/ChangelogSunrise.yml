@@ -5076,3 +5076,17 @@
     message: Исправлен молот синдиката, его вновь можно взять в обе руки.
   id: 2050
   url: https://github.com/makura-games/sunrise-station/pull/4763
+- author: Ligyb
+  time: '2026-11-07T00:24:16.0000000+00:00'
+  changes:
+  - type: Tweak
+    message: Спонсоры теперь обходят чёрный список рас на роль
+  id: 2051
+  url: https://github.com/makura-games/sunrise-station/pull/4830
+- author: KaiserMaus
+  time: '2026-11-08T21:07:05.0000000+00:00'
+  changes:
+  - type: Remove
+    message: НаноТрейзен отозвала у РнД станции технологию производства блюспейс коробок и грузовых костюмов, они были удалены.
+  id: 2052
+  url: https://github.com/makura-games/sunrise-station/pull/4884

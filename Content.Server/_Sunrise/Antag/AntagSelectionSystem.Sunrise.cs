@@ -6,7 +6,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using AntagPrototype = Content.Shared.Roles.AntagPrototype;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Antag;
 
 public sealed partial class AntagSelectionSystem

@@ -9,6 +9,7 @@ using Content.Shared.Preferences.Loadouts;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Client.Lobby.UI;
 
 public sealed partial class HumanoidProfileEditor

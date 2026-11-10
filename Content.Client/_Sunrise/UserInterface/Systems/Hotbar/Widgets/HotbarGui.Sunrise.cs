@@ -1,7 +1,7 @@
 using Content.Client.UserInterface.Systems.Hands.Controls;
 using Content.Shared.Hands.Components;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Client.UserInterface.Systems.Hotbar.Widgets;
 
 public sealed partial class HotbarGui
