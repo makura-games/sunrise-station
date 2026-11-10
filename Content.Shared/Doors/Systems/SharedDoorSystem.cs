@@ -549,7 +549,10 @@ public abstract partial class SharedDoorSystem : EntitySystem
         var stunTime = door.DoorStunTime + door.OpenTimeOne;
         foreach (var entity in GetColliding(uid, physics, null, door.CheckFixtureCollision, door.AllowMachineLayer))
         {
-            door.CurrentlyCrushing.Add(entity);
+            // Sunrise edit start - исключение столкновений нужно только до автоматического открытия двери.
+            if (!door.ForcedCrushClose)
+                door.CurrentlyCrushing.Add(entity);
+            // Sunrise edit end
             if (door.CrushDamage != null)
                 _damageableSystem.TryChangeDamage(entity, door.CrushDamage, origin: uid);
 

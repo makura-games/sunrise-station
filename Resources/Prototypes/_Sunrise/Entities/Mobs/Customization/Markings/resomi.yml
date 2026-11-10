@@ -1,6 +1,6 @@
 - type: marking
   id: ResomiTail
-  bodyPart: Chest
+  bodyPart: Tail
   groupWhitelist: [ Resomi ]
   forcedColoring: true
   sprites:
@@ -9,7 +9,7 @@
 
 - type: marking
   id: ResomiTailFeathers
-  bodyPart: Chest
+  bodyPart: Tail
   groupWhitelist: [ Resomi ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/resomi_parts.rsi

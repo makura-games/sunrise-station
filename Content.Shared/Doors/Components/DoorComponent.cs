@@ -323,7 +323,7 @@ public sealed partial class DoorComponent : Component
 
     // Sunrise-Start
     [DataField]
-    public bool ForcedCrushClose = true;
+    public bool ForcedCrushClose; // Sunrise-Edit - принудительное закрытие включается только у специальных дверей.
     // Sunrise-End
 }
 

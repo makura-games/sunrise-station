@@ -10,7 +10,7 @@
     - FreeBorgsObjective
   - type: AntagSelection
     agentName: self-round-end-agent-name
-    selectionTime: JobsAssigned
+    selectionTime: RuleStarted
     antags:
     - !type:LinearAntagCount
       proto: SunriseSELFAgent

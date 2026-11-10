@@ -178,8 +178,8 @@
     parent: true
     components:
     - type: Stealth
-      minVisibility: 0.05
-      lastVisibility: 0.05
+      minVisibility: 0 # Sunrise-Edit - восстанавливаем полную невидимость фазовой маскировки.
+      lastVisibility: 0 # Sunrise-Edit
       shimmerFrequency: 0.05
   - type: PowerCellDraw
     drawRate: 1.8

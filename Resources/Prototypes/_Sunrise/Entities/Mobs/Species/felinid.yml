@@ -93,8 +93,8 @@
   - type: Destructible
     thresholds:
     - trigger:
-        !type:DamageGroupTrigger
-        damageGroup: Brute
+        !type:DamageTypeTrigger
+        damageType: Blunt
         damage: 300
       behaviors:
       - !type:GibBehavior { }

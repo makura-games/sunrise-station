@@ -48,13 +48,23 @@ public sealed partial class WalledDecalRemovalSystem : EntitySystem
         if (wallTiles.Count == 0)
             return 0;
 
+        var half = new Vector2(0.5f, 0.5f);
+
         foreach (var wallTile in wallTiles)
         {
+            // Decal.Coordinates - левый нижний угол декали, а GetDecalsIntersecting проверяет замкнутый Box2.
+            // Бокс самого тайла захватывал декали соседних тайлов (справа/сверху) на его границе,
+            // поэтому определяем тайл декали по её центру и сравниваем точно.
             var tilePosition = (Vector2) wallTile;
-            var bounds = new Box2(tilePosition, tilePosition + Vector2.One);
+            var bounds = new Box2(tilePosition - half, tilePosition + half);
 
-            foreach (var (decalId, _) in _decal.GetDecalsIntersecting(grid.Owner, bounds))
+            foreach (var (decalId, decal) in _decal.GetDecalsIntersecting(grid.Owner, bounds))
+            {
+                if ((decal.Coordinates + half).Floored() != wallTile)
+                    continue;
+
                 decalsToRemove.Add(decalId);
+            }
         }
 
         var removed = 0;

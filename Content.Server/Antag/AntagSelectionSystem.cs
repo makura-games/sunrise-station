@@ -872,6 +872,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
         var afterEv = new AfterAntagEntitySelectedEvent(player, antag, gameRule, prototype);
         RaiseLocalEvent(gameRule, ref afterEv, true);
+        CompleteSunriseForcedAntagSelection(gameRule); // Sunrise-Edit - завершаем принудительное назначение, чтобы культ получил жертвы.
     }
 
     private void AssignMind(Entity<AntagSelectionComponent> gameRule, ProtoId<AntagSpecifierPrototype> proto, EntityUid mind, EntityUid antag)
