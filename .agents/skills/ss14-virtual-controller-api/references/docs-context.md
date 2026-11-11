@@ -9,7 +9,7 @@
 ## Relevant pages
 
 1. `robust-toolbox/transform/physics.md` — date `2023-09-21`.
-What to take: the general idea of ​​the physics pipeline and the place of VirtualControllers.
+What to take: the general idea of the physics pipeline and the place of VirtualControllers.
 Limitation: Outdated page, do not use as a source for the exact API contract.
 
 2. `ss14-by-example/prediction-guide.md` — date `2026-02-04`.

@@ -85,7 +85,7 @@ The repository has scripts to simplify adding migrations to both contexts at onc
 ### ❌ 4. Changing already added migrations
 **Bad**: Editing a migration file that has already been merged into `master` and deployed.
 **Why**: This will break the migration history of all other developers and servers. `__EFMigrationsHistory` will contain the hash of the old version and EF Core will crash.
-**How ​​to**: If you find a bug in an old migration, create a **new** migration that fixes the problem.
+**How to**: If you find a bug in an old migration, create a **new** migration that fixes the problem.
 
 ## 🗑️ Deleting (rollback) local migration
 If you created a migration, but changed your mind (and haven’t committed/merged it yet):

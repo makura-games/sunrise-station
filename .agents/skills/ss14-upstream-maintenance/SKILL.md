@@ -18,7 +18,7 @@ After the active fork is determined, keep all new fork-owned code in that fork's
 > **Minimizing changes to vanilla files is MORE IMPORTANT than "pretty" architecture.**
 > It's better to leave the "dirty" hack in one line of the vanilla file than to rewrite half the system, creating hell when merging.
 
-## � Folder structure and Project Folder
+## 📁 Folder structure and Project Folder
 
 To clearly separate vanilla code from our modifications, a special project folder is used, starting with the symbol `_` (for example, `_Sunrise`, `_Scp`).
 
@@ -49,7 +49,7 @@ Makes it easy to see your changes against the background of vanilla code.
 
 **Format:**
 ```csharp
-// SERVERNAME edit start - brief reason for changes
+// SERVERNAME edit start - краткая причина изменений
 ```
 ...your code...
 ```csharp
@@ -60,17 +60,15 @@ Makes it easy to see your changes against the background of vanilla code.
 **Example (change value):**
 ```csharp
 component.Field2 = 321;
-// Fire edit start - increasing radius for balance
-component.Field = 123;
-// Fire edit end
+component.Field = 123; // Fire edit - увеличиваем радиус для баланса
 ```
 
 **Example (changing logic):**
 ```csharp
-// Sunrise edit start - fixing double gateways
+// Sunrise edit start - исправляем двойные шлюзы
 if (TryComp<AirlockComponent>(uid, out var airlock))
 {
-    // ...new logic...
+    // ...новая логика...
 }
 // Sunrise edit end
 ```
@@ -81,7 +79,7 @@ Used when you add a **new** block of code (eg calling an event, checking) that w
 
 **Format:**
 ```csharp
-// SERVERNAME added start - brief reason for adding
+// SERVERNAME added start - краткая причина добавления
 ```
 ...new code...
 ```csharp
@@ -90,9 +88,7 @@ Used when you add a **new** block of code (eg calling an event, checking) that w
 
 **Example:**
 ```csharp
-// Fire added start - to know when the shy one was hit
-_eventBus.RaiseLocalEvent(uid, new ProjectileHitEvent(projectile, entity));
-// Fire added end
+_eventBus.RaiseLocalEvent(uid, new ProjectileHitEvent(projectile, entity)); // Fire added - чтобы знать, когда попали по Shy Guy
 ```
 
 ### 3. Partial Classes
@@ -101,8 +97,10 @@ If you need to add a **new field, property or method** to an existing class or s
 Instead, create a `partial` class in your project folder (`_Scp`, `_Sunrise`, `_Starlight`).
 
 **Pattern:**
-1. Find the vanilla class (eg `SharedScp106System`).
-2. Create a file in your folder: `Content.Shared/_Scp/Scp106/Systems/SharedScp106System.Abilities.cs`.
+1. Find the upstream file that owns the behavior being extended.
+2. Mirror its name:
+   - `<UpstreamFile>.cs` → `<UpstreamFile>.<Fork>.cs`;
+   - `<UpstreamFile>.<Section>.cs` → `<UpstreamFile>.<Section>.<Fork>.cs`.
 3. Declare the class as `partial` with the same namespace.
 4. **Important:** Suppress the namespace mismatch warning if necessary.
 
@@ -113,21 +111,21 @@ namespace Content.Shared.Scp106.Systems;
 
 public abstract partial class SharedScp106System : EntitySystem
 {
-    // Vanilla code...
+    // Ванильный код...
 }
 ```
 
-*Your file (`Content.Shared/_Scp/Scp106/Systems/SharedScp106System.Store.cs`):*
+*Your file (`Content.Shared/_Scp/Scp106/Systems/SharedScp106System.Fire.cs`):*
 ```csharp
-using Content.Shared.Scp106.Systems; // We use vanilla namespace
+using Content.Shared.Scp106.Systems; // Используем ванильное пространство имён
 
-// We suppress warning, since the file is physically located in another folder
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// Подавляем предупреждение, так как файл физически находится в другой папке
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Scp106.Systems;
 
 public abstract partial class SharedScp106System
 {
-    // Your new logic, accessible "as if" inside the original class
+    // Ваша новая логика, доступная «как будто» внутри оригинального класса
     public void MyNewMethod() { ... }
 }
 ```
@@ -154,21 +152,21 @@ Instead of editing the original, we create a **replacement heir**.
 *1. New prototype (`_Sunrise/Entities/Structures/Doors/Airlocks/access.yml`):*
 ```yaml
 - type: entity
-  parent: AirlockHatchSyndicate  # Inherit from the original
-  id: AirlockHatchSyndicateLocked # New ID
+  parent: AirlockHatchSyndicate  # Наследуемся от оригинала
+  id: AirlockHatchSyndicateLocked # Новый ID
   suffix: Syndicate, Locked
-  categories: [ HideSpawnMenu ] # Fire added - hide from spawn if this is a technical entity
+  categories: [ HideSpawnMenu ] # Fire added - скрываем из спавна, если это техническая сущность
   components:
   - type: AccessReader
-    access: [["SyndicateAgent"]] # Add the required changes
+    access: [["SyndicateAgent"]] # Добавляем необходимые изменения
 ```
 
 *2. Migration file (`Resources/migration.yml`):*
 Add an entry to the end of the file or to the appropriate section.
 ```yaml
-# ... existing migrations ...
+# ... существующие миграции ...
 
-# Sunrise-Edit
+# Sunrise edit
 AirlockHatchSyndicate: AirlockHatchSyndicateLocked
 ```
 
@@ -195,7 +193,7 @@ If migration is not possible (but try to use it!), use `edit` comments directly 
   id: VanillaEntity
   components:
   - type: Item
-    path: _FORKFOLDER/Objects/123.rsi # SERVERNAME edit - sprite replacement
+    path: _FORKFOLDER/Objects/123.rsi # SERVERNAME edit - замена спрайта
 ```
 
 ### 🚫 Anti-patterns (What NOT to do)
@@ -203,11 +201,11 @@ If migration is not possible (but try to use it!), use `edit` comments directly 
 ❌ **Direct code removal.**
 Instead of deleting, comment out the code and leave the mark `edit`.
 ```csharp
-// BAD:
+// ПЛОХО:
 // public void DeletedMethod() { }
 
-// GOOD:
-// SERVERNAME edit start - deleted because interferes with mechanics X
+// ХОРОШО:
+// SERVERNAME edit start - удалено, потому что мешает механике X
 // public void DeletedMethod() { ... }
 // SERVERNAME edit end
 ```

@@ -213,7 +213,7 @@ void IBuiPreTickUpdate.PreTickUpdate()
 ```
 
 Pattern:
-- coalesce the values ​​of the sliders and send them in batches to tick.
+- coalesce the values of the sliders and send them in batches to tick.
 
 Anti-pattern:
 - send `SendMessage` for each pixel-move of the slider.
