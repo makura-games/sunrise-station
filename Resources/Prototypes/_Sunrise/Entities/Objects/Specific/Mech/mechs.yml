@@ -462,7 +462,6 @@
     baseState: paddy
     openState: paddy-open
     brokenState: paddy-broken
-    mechToPilotDamageMultiplier: 0.05
     airtight: true
     maxEquipmentAmount: 4
     #siren: true # Todo: port siren system from starlight

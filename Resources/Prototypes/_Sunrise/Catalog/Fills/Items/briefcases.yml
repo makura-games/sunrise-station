@@ -120,7 +120,7 @@
       storagebase: !type:AllSelector
         children:
         - id: WeaponRifleSKM24Syndi
-        - id: MagazineLightRifleSP
+        - id: MagazineLightRifle
           amount: 2
         - id: MagazineLightRifleFMJ
           amount: 2

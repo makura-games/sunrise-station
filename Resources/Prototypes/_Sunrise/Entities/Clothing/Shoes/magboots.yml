@@ -134,7 +134,7 @@
     walkModifier: 0.75
     sprintModifier: 0.7
   - type: ClothingSlowOnDamageModifier
-    modifier: 0.75
+    modifier: 0.5
 
 - type: entity
   parent: ClothingShoesBootsMagBase

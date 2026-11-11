@@ -70,7 +70,6 @@
   cost: 7500
   recipeUnlocks:
   - ClothingShoesBootsMagSci
-  - ClothingShoesBootsMagSec #Sunrise-Add
   - ClothingShoesBootsMoon
 
 - type: technology

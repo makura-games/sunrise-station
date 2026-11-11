@@ -47,7 +47,7 @@
   Вы можете брать те же виды снаряжения, что и предатели, но у вас доступно более качественное снаряжение и больше телекристаллов.
   <Box>
     <GuideEntityEmbed Entity="WeaponLightMachineGunL6" Caption="Weaponry"/>
-    <GuideEntityEmbed Entity="MagazineRifleBoxSP" State="icon" Caption="Ammo"/>
+    <GuideEntityEmbed Entity="MagazineLightRifleBox" State="icon" Caption="Ammo"/>
     <GuideEntityEmbed Entity="C4" Caption="Explosives"/>
     <GuideEntityEmbed Entity="ClothingOuterHardsuitJuggernaut" Caption="Wearables"/>
     <GuideEntityEmbed Entity="Stimpack" Caption="Chemicals"/>

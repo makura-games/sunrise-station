@@ -1,5 +1,5 @@
 - type: entity
-  parent: MagazineRifleBoxSP # It goes in a saw, its funny.
+  parent: MagazineLightRifleBox # It goes in a saw, its funny.
   id: MagazineFoamBox
   name: "L6 SAW magazine box (foam dart)"
   description: Box containing a 100-round belt of linked... foam darts?
@@ -11,3 +11,9 @@
         - BulletFoam
     proto: BulletFoam
     capacity: 100
+  - type: Sprite # Sunrise-Edit: не наследовать синюю SP-маркировку базового короба
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]

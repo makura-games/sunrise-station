@@ -1,0 +1,113 @@
+- type: constructionGraph
+  id: KammererUpgrade
+  start: kammerer
+  graph:
+  - node: kammerer
+    entity: WeaponShotgunKammererEmpty
+    edges:
+    - to: trenchKitInserted
+      steps:
+      - tag: UpgradeKammererTrench
+        name: construction-graph-tag-upgrade-kammerer-trench
+        store: kammerer-trench-kit
+    - to: sawnKitInserted
+      steps:
+      - tag: UpgradeKammererSawn
+        name: construction-graph-tag-upgrade-kammerer-sawn
+        store: kammerer-sawn-kit
+
+  - node: trenchKitInserted
+    edges:
+    - to: trenchOpened
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: trenchOpened
+    edges:
+    - to: trenchCut
+      steps:
+      - tool: Cutting
+        doAfter: 2
+
+  - node: trenchCut
+    edges:
+    - to: trenchClosed
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: trenchClosed
+    edges:
+    - to: trench
+      steps:
+      - tag: CombatKnife
+        name: construction-graph-tag-combat-knife
+        store: kammerer-trench-knife
+
+  - node: trench
+    entity: WeaponShotgunTrenchgun4034Empty
+    edges:
+    - to: kammerer
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tool: Cutting
+        doAfter: 2
+      - tool: Screwing
+        doAfter: 1
+      completed:
+      - !type:EmptyContainer
+        container: kammerer-trench-knife
+        pickup: true
+      - !type:EmptyContainer
+        container: kammerer-trench-kit
+        pickup: true
+
+  - node: sawnKitInserted
+    edges:
+    - to: sawnOpened
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: sawnOpened
+    edges:
+    - to: sawnLoaderInserted
+      steps:
+      - tag: SpeedLoaderShotgun
+        name: construction-graph-tag-speedloader-shotgun
+        store: kammerer-sawn-speedloader
+
+  - node: sawnLoaderInserted
+    edges:
+    - to: sawnFastened
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: sawnFastened
+    edges:
+    - to: sawn
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: sawn
+    entity: WeaponShotgunTrenchgun4034SawnEmpty
+    edges:
+    - to: kammerer
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      completed:
+      - !type:EmptyContainer
+        container: kammerer-sawn-speedloader
+        pickup: true
+      - !type:EmptyContainer
+        container: kammerer-sawn-kit
+        pickup: true

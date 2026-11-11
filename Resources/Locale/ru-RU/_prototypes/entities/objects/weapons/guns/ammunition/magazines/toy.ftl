@@ -1,2 +1,2 @@
 ent-MagazineFoamBox = короб (пенопласт)
-    .desc = { ent-MagazineRifleBox.desc }
+    .desc = { ent-MagazineLightRifleBox.desc }

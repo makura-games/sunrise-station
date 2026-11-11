@@ -40,7 +40,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifleSP
+        startingItem: MagazineLightRifle
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
@@ -50,7 +50,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
@@ -126,7 +125,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineRifleSP
+        startingItem: MagazineRifle
         insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_unload.ogg
         priority: 2
@@ -135,7 +134,6 @@
           - MagazineRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleSP
         priority: 1
         whitelist:
           tags:
@@ -154,10 +152,41 @@
     delay: 0.35
 
 - type: entity
+  name: Lecter
+  parent: WeaponRifleLecter
+  id: WeaponRifleLecterEmpty
+  suffix: Empty
+  categories: [HideSpawnMenu]
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: null
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: null
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeRifle
+  - type: Construction
+    graph: LecterSecurity
+    node: start
+    deconstructionTarget: null
+
+- type: entity
   name: Lecter Mk2
-  parent: [WeaponRifleLecter, GunLight]
+  parent: [GunMedium, WeaponRifleLecter]
   id: WeaponRifleLecterMk2
-  description: A high end military grade assault rifle. Uses .20 rifle ammo.
+  description: An upgraded variant of the Lecter platform, redesigned for sustained automatic fire. Its reinforced receiver and increased magazine capacity make it well suited for suppressive fire. Uses .20 rifle ammo.
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/lecter.rsi
@@ -166,6 +195,19 @@
         map: ["enum.GunVisualLayers.Base"]
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
+  - type: Gun
+    fireRate: 5
+    minAngle: 21
+    maxAngle: 32
+    angleIncrease: 1
+    angleDecay: 9.5
+    burstFireRate: 9
+    shotsPerBurst: 5
+    burstCooldown: 0.75
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    - FullAuto
   - type: Clothing
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/lecter.rsi
   - type: ContainerContainer
@@ -174,21 +216,35 @@
       gun_chamber: !type:ContainerSlot
   - type: MagazineVisuals
     magState: mag
-    steps: 5
+    steps: 6
     zeroVisible: true
   - type: ChamberMagazineAmmoProvider
     autoEject: true
   - type: Appearance
   - type: EyeCursorOffset
-    maxOffset: 5
-    pvsIncrease: 0.5
+    maxOffset: 2
+    pvsIncrease: 0.25
   - type: StaticPrice
     price: 975
   - type: Contraband
     allowedDepartments: [ CentralCommand, Security ]
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineRifleM52SP
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineRifle
+            - MagazineRifleM52
+        whitelistFailPopup: gun-magazine-whitelist-fail
   - type: Construction
     graph: LecterSecurity
     node: upgradelecter
+    deconstructionTarget: null
 
 - type: entity
   name: Lecter Mk2
@@ -207,6 +263,7 @@
         whitelist:
           tags:
             - MagazineRifle
+            - MagazineRifleM52
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -214,7 +271,73 @@
         priority: 1
         whitelist:
           tags:
-            - CartridgeRifle
+          - CartridgeRifle
+  - type: Construction
+    graph: LecterSecurity
+    node: upgradelecter
+    deconstructionTarget: null
+
+- type: entity
+  name: Leikha
+  parent: WeaponRifleLeikha
+  id: WeaponRifleLeikhaEmpty
+  suffix: Empty
+  categories: [HideSpawnMenu]
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: null
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: null
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeRifle
+  - type: Construction
+    graph: LecterSecurity
+    node: leikha
+    deconstructionTarget: null
+
+- type: entity
+  name: Larker
+  parent: WeaponRifleLarker
+  id: WeaponRifleLarkerEmpty
+  suffix: Empty
+  categories: [HideSpawnMenu]
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: null
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineHeavyRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: null
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeHeavyRifle
+  - type: Construction
+    graph: LecterSecurity
+    node: larker
+    deconstructionTarget: null
 
 - type: entity
   name: ASH-12
@@ -265,7 +388,6 @@
             - MagazineAsh12
       gun_chamber:
         name: Chamber
-        startingItem: ShellShotgunSlug
         priority: 1
         whitelist:
           tags:
@@ -334,7 +456,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifleSP
+        startingItem: MagazineLightRifle
         insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/skm24/skm_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_unload.ogg
         priority: 2
@@ -343,7 +465,6 @@
           - MagazineLightRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
@@ -393,7 +514,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleImprovised
         priority: 1
         whitelist:
           tags:
@@ -503,6 +623,108 @@
     availablePrefixes: []
 
 - type: entity
+  name: Lerka
+  parent: [ GunHeavy, BaseWeaponRifle, BaseSecurityContraband ]
+  id: WeaponRifleLerka
+  description: "A military-grade combat rifle built on the Lecter platform. Retrofitted with a burst receiver for controlled three-round bursts, offering increased stopping power at the cost of sustained fire. Chambered in .308 rifle."
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/lerka/big.rsi
+    layers:
+    - state: icon
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/lerka/tiny.rsi
+  - type: Item
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/lerka/tiny.rsi
+  - type: GunWieldBonus
+    minAngle: -25
+    maxAngle: -35
+  - type: Gun
+    minAngle: 30
+    maxAngle: 50
+    angleIncrease: 1.5
+    angleDecay: 12
+    fireRate: 3.5
+    shotsPerBurst: 3
+    burstCooldown: 0.75
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    - SemiAuto
+    burstFireRate: 11
+    soundGunshot:
+      path: /Audio/_Sunrise/Weapons/Guns/Rifles/skm28/skm28_shot.ogg
+      params:
+        pitch: 0.8
+  - type: GunRequiresWield
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineRifleHeavySP
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineHeavyRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeHeavyRifle
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6
+    zeroVisible: true
+  - type: Appearance
+  - type: Wieldable
+  - type: Construction
+    graph: LecterSecurity
+    node: lerka
+    deconstructionTarget: null
+
+- type: entity
+  name: Lerka
+  parent: WeaponRifleLerka
+  id: WeaponRifleLerkaEmpty
+  suffix: Empty
+  categories: [HideSpawnMenu]
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: null
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineHeavyRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: null
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeHeavyRifle
+  - type: Construction
+    graph: LecterSecurity
+    node: lerka
+    deconstructionTarget: null
+
+- type: entity
   name: SKM-28
   parent: [BaseWeaponRifle, BaseMajorContraband]
   id: WeaponRifleSKM28
@@ -554,7 +776,6 @@
             - MagazineHeavyRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleHeavySP
         priority: 1
         whitelist:
           tags:

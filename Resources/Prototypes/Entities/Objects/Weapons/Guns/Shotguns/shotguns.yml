@@ -249,11 +249,12 @@
   description: An old yet faithful design, and a favorite among irregular forces of many worlds. Uses .50 shotgun shells.
   components: # intend for Kammerer to have tighter choke for slower fire rate and/or manual cycling
   - type: Item
-    sprite: Objects/Weapons/Guns/Shotguns/pump_inhands_64x.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/pump_new/tiny.rsi # Sunrise-Edit
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Shotguns/pump.rsi
+    scale: 0.9, 0.9 # Sunrise-Edit
+    sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/pump_new/big.rsi # Sunrise-Edit
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Shotguns/pump.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/pump_new/tiny.rsi # Sunrise-Edit
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
     fireRate: 1.5 # Sunrise-edit

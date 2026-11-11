@@ -16,7 +16,7 @@
             - MagazinePistol
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolRubber
+        # startingItem: CartridgePistolRubber # Sunrise-Edit
         priority: 1
         whitelist:
           tags:
@@ -41,7 +41,7 @@
             - MagazineMagnum
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeMagnumRubber
+        # startingItem: CartridgeMagnumRubber # Sunrise-Edit
         priority: 1
         whitelist:
           tags:
@@ -110,7 +110,7 @@
           - MagazinePistol
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolSP
+        # startingItem: CartridgePistolSP # Sunrise-Edit
         priority: 1
         whitelist:
           tags:

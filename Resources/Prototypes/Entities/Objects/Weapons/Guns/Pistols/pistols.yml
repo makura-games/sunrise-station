@@ -56,7 +56,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolSP
         priority: 1
         whitelist:
           tags:
@@ -96,11 +95,9 @@
     maxAngle: 25
     angleIncrease: 2
     angleDecay: 20
-    selectedMode: FullAuto
+    selectedMode: FullAuto # Override of BaseWeaponPistol to default to full-auto
   - type: Sprite
     sprite: Objects/Weapons/Guns/Pistols/viper.rsi
-  - type: Gun
-    selectedMode: FullAuto # Override of BaseWeaponPistol to default to full-auto
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -116,7 +113,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolSP
         priority: 1
         whitelist:
           tags:
@@ -287,7 +283,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeMagnumSP
         priority: 1
         whitelist:
           tags:

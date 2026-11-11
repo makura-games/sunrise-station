@@ -135,7 +135,7 @@
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Launchers/m79_security_x48.rsi
     layers:
-      - state: icon
+      - state: base
         map: ["enum.GunVisualLayers.Base"]
   - type: Item
     size: Normal
@@ -179,7 +179,7 @@
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Launchers/m79_x48.rsi
     layers:
-      - state: icon
+      - state: base
         map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
     sprite: _Sunrise/Objects/Weapons/Guns/Launchers/m79.rsi

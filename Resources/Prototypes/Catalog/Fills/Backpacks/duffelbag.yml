@@ -127,7 +127,7 @@
       storagebase: !type:AllSelector
         children:
         - id: WeaponLightMachineGunL6Biocode # Sunrise-edit
-        - id: MagazineRifleBoxSP
+        - id: MagazineLightRifleBox
           amount: 2 #Sunrise-add
         - id: MagazineRifleBoxFMJ #Sunrise-add
 
@@ -164,14 +164,14 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: MagazinePistolSubMachineGunSP # Sunrise-Edit
+        - id: MagazinePistolSubMachineGun # Sunrise-Edit
           amount: 4
         - id: MagazineShotgun
           amount: 4
         - id: MagazineRifleFMJ # Sunrise-Edit
           amount: 3
         - id: MagazineShotgunSlug
-        - id: MagazineRifleBoxSP
+        - id: MagazineLightRifleBox
           amount: 2
 
 - type: entity

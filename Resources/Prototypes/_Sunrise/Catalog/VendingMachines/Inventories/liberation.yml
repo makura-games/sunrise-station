@@ -38,7 +38,6 @@
     WeaponRifleLecterMk2: 3
     WeaponRifleFoam: 3
     WeaponRifleM52: 3
-    WeaponRifleM90GrenadeLauncher: 3
     WeaponRifleLecter: 3
     WeaponRifleM16A4: 3
     WeaponRifleEstoc: 3
@@ -60,8 +59,7 @@
     WeaponEnergyShotgun: 3
     WeaponShotgunTrenchgun4034: 3
     WeaponShotgunTrenchgun4034Sawn: 3
-    WeaponShotgunRiot: 3
-    WeaponShotgunRiotSawn: 3
+    WeaponShotgunEnforcerRubber: 3
     WeaponShotgunCycler: 3
     WeaponShotgunGA12: 3
     WeaponShotgunMinotaur: 3
@@ -71,7 +69,7 @@
     WeaponSubMachineGunC20r: 3
     WeaponSubMachineGunVector: 3
     WeaponSubMachineGunDrozd: 3
-    WeaponSubMachineGunDrozdMk2: 3
+    WeaponSubMachineGunDrozdHeavy: 3
     WeaponSubMachineGunP90: 3
     WeaponSubMachineGunForged: 6
     WeaponSubMachineGunNewVector: 3
@@ -294,7 +292,7 @@
     MagazinePistolSubMachineGunRubber: 3
     MagazinePistolSubMachineGunUranium: 3
     MagazinePistolSubMachineGunIncendiary: 3
-    MagazinePistolSubMachineGunSP: 3
+    MagazinePistolSubMachineGun: 3
     MagazinePistolSubMachineGunHP: 3
     MagazinePistolSubMachineGunFMJ: 3
     MagazinePistolSubMachineGunAP: 3
@@ -304,8 +302,8 @@
     MagazinePistolSubMachineGunTopMountedIncendiary: 3
     MagazinePistolSubMachineGunTopMountedUranium: 3
     MagazinePistolSubMachineGunTopMountedHP: 3
-    MagazinePistolSubMachineGunTopMountedSP: 3
     MagazinePistolSubMachineGunTopMounted: 3
+    MagazinePistolSubMachineGunTopMountedFMJ: 3
     MagazinePistolSubMachineGunTopMountedAP: 3
     # Pistol Ammo
     MagazinePistolImprovisedFilled: 8
@@ -333,13 +331,13 @@
     MagazineRifleM52Incendiary: 5
     MagazineRifleM52Practice: 5
     MagazineRifleM52Uranium: 5
-    MagazineRifleSP: 10
+    MagazineRifle: 10
     MagazineRifleFMJ: 5
     MagazineRifleAP: 5
     MagazineBoxRifleSP: 6
     MagazineBoxRifleFMJ: 3
     MagazineBoxRifleAP: 3
-    MagazineLightRifleSP: 10
+    MagazineLightRifle: 10
     MagazineLightRifleFMJ: 5
     MagazineLightRifleAP: 5
     MagazineBoxLightRifleSP: 6

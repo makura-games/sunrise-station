@@ -42,7 +42,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineRifleBoxSP #Sunrise-Edit
+        startingItem: MagazineLightRifleBox #Sunrise-Edit
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
@@ -51,7 +51,6 @@
             - MagazineLightRifleBox
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleSP #Sunrise-Edit
         priority: 1
         whitelist:
           tags:

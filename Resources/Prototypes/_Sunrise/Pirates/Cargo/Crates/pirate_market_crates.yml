@@ -252,7 +252,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: MagazinePistolSubMachineGunSP
+      - id: MagazinePistolSubMachineGun
         amount: 2
       - id: MagazinePistolSubMachineGunHP
         amount: 2
@@ -874,7 +874,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: MagazineRifleSP
+      - id: MagazineRifle
         amount: 4
       - id: MagazineRifleFMJ
         amount: 2
@@ -1060,7 +1060,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: MagazinePistolHighCapacitySP
+      - id: MagazinePistolHighCapacity
         amount: 2
       - id: MagazinePistolHighCapacityHP
         amount: 2
@@ -1119,7 +1119,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: MagazineRifleBoxSP
+      - id: MagazineLightRifleBox
         amount: 2
       - id: MagazineRifleBoxFMJ
         amount: 2

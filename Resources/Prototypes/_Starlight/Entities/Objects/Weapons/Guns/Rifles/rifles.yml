@@ -145,7 +145,7 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleSP
+        # startingItem: CartridgeRifleSP # Sunrise-Edit
         priority: 1
         whitelist:
           tags:
@@ -187,7 +187,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineRifleSP
+        startingItem: MagazineRifle
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
@@ -197,7 +197,7 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleSP
+        # startingItem: CartridgeRifleSP # Sunrise-Edit
         priority: 1
         whitelist:
           tags:
@@ -241,7 +241,7 @@
     maxAngle: 32
     angleIncrease: 2.5
     angleDecay: 8
-    fireRate: 3.5
+    fireRate: 3
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -267,7 +267,7 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleHeavySP
+        # startingItem: CartridgeRifleHeavySP # Sunrise-Edit
         priority: 1
         whitelist:
           tags:

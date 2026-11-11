@@ -347,6 +347,20 @@
   maxStress: 80
 
 - type: storytellerMetadata
+  id: DragonSpawn
+  threatType: MinorAntag
+  threatCost: 100
+  minStationStrength: 20
+  maxStress: 75
+
+- type: storytellerMetadata
+  id: LoneOpsSpawn
+  threatType: MinorAntag
+  threatCost: 110
+  minStationStrength: 15
+  maxStress: 80
+
+- type: storytellerMetadata
   id: RevenantSpawn
   threatType: MinorAntag
   threatCost: 40
@@ -412,13 +426,6 @@
 # =============================================================================
 
 - type: storytellerMetadata
-  id: DragonSpawn
-  threatType: MajorAntag
-  threatCost: 100
-  minStationStrength: 20
-  maxStress: 75
-
-- type: storytellerMetadata
   id: NinjaSpawn
   threatType: MajorAntag
   threatCost: 120
@@ -431,13 +438,6 @@
   threatCost: 220
   minStationStrength: 30
   maxStress: 75
-
-- type: storytellerMetadata
-  id: LoneOpsSpawn
-  threatType: MajorAntag
-  threatCost: 90
-  minStationStrength: 15
-  maxStress: 80
 
 - type: storytellerMetadata
   id: WizardSpawn

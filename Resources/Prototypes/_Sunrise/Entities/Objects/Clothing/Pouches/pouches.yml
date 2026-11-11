@@ -246,7 +246,7 @@
       storagebase: !type:AllSelector
         children:
         - id: MagazineLightRifleFMJ
-        - id: MagazineLightRifleSP
+        - id: MagazineLightRifle
           amount: 2
 
 - type: entity

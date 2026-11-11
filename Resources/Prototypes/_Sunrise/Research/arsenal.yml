@@ -71,7 +71,7 @@
   - MagazinePistolFMJ
   - MagazinePistol40FMJ
   - MagazinePistolSubMachineGunFMJ
-  - MagazinePistolSubMachineGunTopMounted
+  - MagazinePistolSubMachineGunTopMountedFMJ
   - MagazineRifleFMJ
   - MagazineRifleHeavyFMJ
   technologyPrerequisites:
@@ -116,7 +116,7 @@
   id: ArmorPenetrationMunitions
   name: research-technology-armor-penetration
   icon:
-    sprite: Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/rifle_mag.rsi
     state: ap
   discipline: Arsenal
   tier: 3
@@ -263,10 +263,9 @@
   tier: 2
   cost: 7500
   recipeUnlocks:
-  - ClothingShoesBootsMagCombat
-  #- ModularReceiverAuto
-  - LecterUpgrade
-  - DrozdUpgrade
+  - ClothingShoesBootsMagSec
+  - KammererTrenchUpgradeKit
+  - KammererSawnUpgradeKit
   - ClothingHeadHelmetPubg
   - VestSecUpgradeBullet
   - VestSecUpgradeRiot
@@ -274,6 +273,7 @@
   - PouchAmmo
   technologyPrerequisites:
   - AdvancedRiotControl
+  - MagnetsTech
   radioChannels:
   - Security
 
@@ -288,7 +288,12 @@
   cost: 20000
   recipeUnlocks:
   - VestSecUpgradeBulletHeavy
-  - VestSecUpgradeWeb
+  - LecterUpgrade
+  - DrozdUpgrade
+  - LerkaUpgrade
+  - LarkerUpgrade
+  - MagazinePistol40SubMachineGunEmpty
+  - MagazineRifleM52Empty
   technologyPrerequisites:
   - CombatEquipment
   radioChannels:

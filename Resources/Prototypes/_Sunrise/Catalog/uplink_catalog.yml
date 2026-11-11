@@ -336,15 +336,6 @@
   - UplinkAmmo
 
 - type: listing
-  id: UplinkMagazineRifleHP
-  description: uplink-estoc-ammo-desc
-  productEntity: MagazineRifleSP
-  cost:
-    Telecrystal: 1
-  categories:
-  - UplinkAmmo
-
-- type: listing
   id: UplinkMagazineRifleFMJ
   description: uplink-estoc-ammo-desc
   productEntity: MagazineRifleFMJ
@@ -356,21 +347,7 @@
 - type: listing
   id: UplinkMagazineLightRifleSP
   description: uplink-skm24-ammo-desc
-  productEntity: MagazineLightRifleSP
-  cost:
-    Telecrystal: 2
-  categories:
-  - UplinkAmmo
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - AssaultOpsUplink
-
-- type: listing
-  id: UplinkMagazineLightRifleHP
-  description: uplink-skm24-ammo-desc
-  productEntity: MagazineLightRifleSP
+  productEntity: MagazineLightRifle
   cost:
     Telecrystal: 2
   categories:
@@ -410,20 +387,6 @@
       - AssaultOpsUplink
 
 - type: listing
-  id: UplinkMagazineRifleHeavyHP
-  description: uplink-skm28-ammo-desc
-  productEntity: MagazineRifleHeavySP
-  cost:
-    Telecrystal: 2
-  categories:
-  - UplinkAmmo
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - AssaultOpsUplink
-
-- type: listing
   id: UplinkMagazineRifleHeavyFMJ
   description: uplink-skm28-ammo-desc
   productEntity: MagazineRifleHeavyFMJ
@@ -441,7 +404,7 @@
 - type: listing
   id: UplinkMagazineLightRifleBox
   icon: { sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_box.rsi, state: icon }
-  productEntity: MagazineRifleBoxSP
+  productEntity: MagazineLightRifleBox
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 2
