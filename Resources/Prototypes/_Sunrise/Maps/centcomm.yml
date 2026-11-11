@@ -17,7 +17,11 @@
         - type: SpawnGridAndDockToStation
           grids:
           - gridPath: /Maps/_Sunrise/Shuttles/DSO/Other/gunship.yml
-            priorityTag: DockSecurity          
+            priorityTag: DockSecurity
+          - gridPath: /Maps/_Sunrise/Shuttles/DSO/Other/landing.yml
+            priorityTag: DockMining
+          - gridPath: /Maps/_Sunrise/Shuttles/DSO/Other/pts.yml
+            priorityTag: DockPersonal        
         - type: StationJobs
           availableJobs:
             #centcom
