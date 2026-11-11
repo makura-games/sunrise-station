@@ -4,7 +4,7 @@ meta:
   engineVersion: 289.0.3
   forkId: ""
   forkVersion: ""
-  time: 11/11/2026 17:09:44
+  time: 11/11/2026 19:44:42
   entityCount: 200
 maps: []
 grids:
@@ -620,10 +620,15 @@ entities:
       root: 1
       chunk: 0,-1
     - type: DecalChunk
-      maxDecalId: 41
+      maxDecalId: 42
       decals:
         version: 1
         nodes:
+        - node:
+            id: BoxGreyscale
+            color: '#FFFFFFFF'
+          decals:
+            42: 2,-3
         - node:
             id: BrickTileDarkLineE
             color: '#FFFFFFFF'
@@ -969,8 +974,6 @@ entities:
       parent: 1
       rot: 3.141592653589793 rad
       pos: 5.5,-2.5
-    - type: GasPressurePump
-      enabled: True
     - type: AtmosPipeColor
       color: '#0000FFFF'
   - uid: 90
@@ -1568,8 +1571,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 66
-      configurators:
-      - invalid
   - uid: 135
     components:
     - type: Transform
@@ -1578,8 +1579,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 66
-      configurators:
-      - invalid
 - proto: WeaponEnergyTurretCentralCommandControlPanel
   entities:
   - uid: 66

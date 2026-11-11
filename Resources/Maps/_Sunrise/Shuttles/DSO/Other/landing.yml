@@ -4,8 +4,8 @@ meta:
   engineVersion: 289.0.3
   forkId: ""
   forkVersion: ""
-  time: 11/11/2026 15:39:17
-  entityCount: 502
+  time: 11/11/2026 19:46:32
+  entityCount: 504
 maps: []
 grids:
 - 1
@@ -1942,14 +1942,6 @@ entities:
       pos: 4.5,-7.5
     - type: AtmosPipeColor
       color: '#FF0000FF'
-  - uid: 154
-    components:
-    - type: Transform
-      parent: 1
-      rot: -1.5707963267948966 rad
-      pos: 3.5,-8.5
-    - type: AtmosPipeColor
-      color: '#FF0000FF'
   - uid: 155
     components:
     - type: Transform
@@ -1988,14 +1980,6 @@ entities:
       parent: 1
       rot: 1.5707963267948966 rad
       pos: 8.5,-8.5
-    - type: AtmosPipeColor
-      color: '#FF0000FF'
-  - uid: 161
-    components:
-    - type: Transform
-      parent: 1
-      rot: 1.5707963267948966 rad
-      pos: 7.5,-8.5
     - type: AtmosPipeColor
       color: '#FF0000FF'
   - uid: 162
@@ -2200,6 +2184,24 @@ entities:
       pos: 2.5,-11.5
     - type: AtmosPipeColor
       color: '#0000FFFF'
+- proto: GasValve
+  entities:
+  - uid: 503
+    components:
+    - type: Transform
+      parent: 1
+      rot: -1.5707963267948966 rad
+      pos: 3.5,-8.5
+    - type: AtmosPipeColor
+      color: '#FF0000FF'
+  - uid: 504
+    components:
+    - type: Transform
+      parent: 1
+      rot: -1.5707963267948966 rad
+      pos: 7.5,-8.5
+    - type: AtmosPipeColor
+      color: '#FF0000FF'
 - proto: GasVentPump
   entities:
   - uid: 166
@@ -3111,6 +3113,22 @@ entities:
       anchored: True
     - type: Airtight
       airBlocked: True
+  - uid: 154
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.5,-4.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 161
+    components:
+    - type: Transform
+      parent: 1
+      pos: 6.5,-4.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
   - uid: 178
     components:
     - type: Transform
@@ -3784,8 +3802,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 120
-      configurators:
-      - invalid
   - uid: 448
     components:
     - type: Transform
@@ -3810,8 +3826,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 120
-      configurators:
-      - invalid
 - proto: WeaponEnergyTurretCentralCommandControlPanel
   entities:
   - uid: 120
