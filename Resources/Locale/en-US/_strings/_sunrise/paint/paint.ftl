@@ -6,3 +6,6 @@ paint-removed = Вы очищаете краску!
 paint-closed = Вы обязаны сначала открыть { THE($used) }!
 paint-verb = Покрасить
 paint-remove-verb = Очистить от краски
+paint-configure-verb = Configure
+paint-color-window-title = Paint color
+paint-color-window-apply = Apply
