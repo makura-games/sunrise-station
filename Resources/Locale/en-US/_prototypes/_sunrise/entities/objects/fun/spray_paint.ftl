@@ -1,4 +1,12 @@
 ent-PaintBase = spray paint
     .desc = A tin of spray paint.
-ent-SprayPaint = spray paint Gerry Prime
+ent-FunnyPaint = funny paint
+    .desc = A tin of funny paint, manufactured by Honk! Co.
+ent-FunnyPaintYellow = funny paint
+    .desc = A tin of funny paint, manufactured by Honk! Co.
+ent-DeathPaint = { ent-PaintBase }
+    .desc = { ent-PaintBase.desc }
+ent-DeathPaintTwo = { ent-PaintBase }
+    .desc = { ent-PaintBase.desc }
+ent-SprayPaint = gerry prime spray
     .desc = A spray paint can with an adjustable color.

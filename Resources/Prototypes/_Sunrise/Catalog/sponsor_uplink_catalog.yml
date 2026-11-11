@@ -2104,7 +2104,7 @@
     stock: 1
 
 - type: listing
-  id: UplinkSprayPaint
+  id: UplinkSunriseSprayPaint
   name: uplink-sunrise-spray-paint-name
   description: uplink-sunrise-spray-paint-desc
   productEntity: SprayPaint

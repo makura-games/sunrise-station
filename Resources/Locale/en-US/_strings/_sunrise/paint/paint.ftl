@@ -8,7 +8,4 @@ paint-verb = Покрасить
 paint-remove-verb = Очистить от краски
 paint-configure-verb = Configure
 paint-color-window-title = Paint color
-paint-color-window-description = Select the color that the spray can will apply.
-paint-color-window-rgb = RGB
-paint-color-window-hex = HEX
 paint-color-window-apply = Apply

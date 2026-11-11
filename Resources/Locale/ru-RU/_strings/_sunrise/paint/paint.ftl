@@ -8,7 +8,4 @@ paint-verb = Покрасить
 paint-remove-verb = Очистить от краски
 paint-configure-verb = Настроить
 paint-color-window-title = Цвет краски
-paint-color-window-description = Выберите цвет, который будет наносить баллончик.
-paint-color-window-rgb = RGB
-paint-color-window-hex = HEX
 paint-color-window-apply = Применить
