@@ -364,9 +364,20 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-      color: "#717171"
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#717171"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      - state: inhand-left-stripe
+        color: "#717171"
+      right:
+      - state: inhand-right
+      - state: inhand-right-stripe
+        color: "#717171"
 
 - type: entity
   id: MagazineRifleBoxIncendiary
@@ -377,10 +388,22 @@
     proto: CartridgeRifleIncendiary
   - type: Sprite
     layers:
-    - state: red
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#ff6e52"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      - state: inhand-left-stripe
+        color: "#ff6e52"
+      right:
+      - state: inhand-right
+      - state: inhand-right-stripe
+        color: "#ff6e52"
 
 - type: entity
   id: MagazineRifleBoxUranium
@@ -391,7 +414,19 @@
     proto: CartridgeRifleUranium
   - type: Sprite
     layers:
-    - state: uranium
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#40F57A"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      - state: inhand-left-stripe
+        color: "#40F57A"
+      right:
+      - state: inhand-right
+      - state: inhand-right-stripe
+        color: "#40F57A"

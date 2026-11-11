@@ -72,17 +72,17 @@
     - state: mag-4
       map: ["enum.GunVisualLayers.Mag"]
     - state: stripe
-      color: "#080706"
+      color: "#B68F0E"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#080706"
+        color: "#B68F0E"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#080706"
+        color: "#B68F0E"
 
 - type: entity
   id: RifleHeavyMagazineAP

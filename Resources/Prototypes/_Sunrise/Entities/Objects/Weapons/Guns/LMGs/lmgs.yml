@@ -243,7 +243,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 4
+    steps: 5
     zeroVisible: true
   - type: Appearance
   - type: StaticPrice
