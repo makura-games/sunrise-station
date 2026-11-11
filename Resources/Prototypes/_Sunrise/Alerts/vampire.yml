@@ -1,0 +1,42 @@
+- type: alert
+  id: VampireBlood
+  icons:
+  - sprite: _Sunrise/Interface/Alerts/blood_counter.rsi
+    state: background
+  alertViewEntity: AlertVampireBloodSpriteView
+  name: alerts-vampire-blood-name
+  description: alerts-vampire-blood-desc
+
+- type: entity
+  id: AlertVampireBloodSpriteView
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Interface/Alerts/blood_counter.rsi
+    layers:
+    - map: [ "enum.AlertVisualLayers.Base" ]
+    - map: [ "enum.VampireVisualLayers.Digit1" ]
+      offset: -0.45, 0
+    - map: [ "enum.VampireVisualLayers.Digit2" ]
+      offset: -0.25, 0
+    - map: [ "enum.VampireVisualLayers.Digit3" ]
+      offset: -0.05, 0
+    - map: [ "enum.VampireVisualLayers.Digit4" ]
+      offset: 0.15, 0
+
+- type: alert
+  id: VampireFed
+  icons:
+  - sprite: _Sunrise/Vampire/vampire_fed.rsi
+    state: vampire_fat
+  - sprite: _Sunrise/Vampire/vampire_fed.rsi
+    state: vampire_starving
+  - sprite: _Sunrise/Vampire/vampire_fed.rsi
+    state: vampire_hungry
+  - sprite: _Sunrise/Vampire/vampire_fed.rsi
+    state: vampire_fed
+  - sprite: _Sunrise/Vampire/vampire_fed.rsi
+    state: vampire_well_fed
+  maxSeverity: 5
+  name: alerts-vampire-fed-name
+  description: alerts-vampire-fed-desc

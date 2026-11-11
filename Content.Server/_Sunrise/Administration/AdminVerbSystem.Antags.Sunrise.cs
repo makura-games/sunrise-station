@@ -9,6 +9,7 @@ using Content.Server._Sunrise.AssaultOps;
 using Content.Server._Sunrise.FleshCult.GameRule;
 using Content.Server._Sunrise.BloodCult.GameRule;
 using Content.Server._Sunrise.GameTicking.Rules.Components;
+using Content.Server._Sunrise.Antags.Vampires.Systems;
 
 // ReSharper disable once CheckNamespace
 namespace Content.Server.Administration.Systems;
@@ -19,6 +20,8 @@ namespace Content.Server.Administration.Systems;
 /// </summary>
 public sealed partial class AdminVerbSystem
 {
+    [Dependency] private ServerVampireSystem _vampire = default!;
+
     private static readonly EntProtoId DefaultAssaultOpsRule = "AssaultOps";
     private static readonly EntProtoId DefaultFleshCultRule = "FleshCult";
     private static readonly EntProtoId DefaultSELFRule = "SiliconLiberation";
@@ -100,5 +103,22 @@ public sealed partial class AdminVerbSystem
             Message = Loc.GetString("admin-verb-make-selfagent"),
         };
         args.Verbs.Add(selfAgent);
+
+        if (!_vampire.CanMakeVampire(target))
+            return;
+
+        var vampireName = Loc.GetString("admin-verb-text-make-vampire");
+        Verb vampire = new()
+        {
+            Text = vampireName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(
+                new ResPath("/Textures/_Sunrise/Vampire/actions_vampire.rsi"),
+                "fangs_extended"),
+            Act = () => _vampire.TryMakeVampire(target),
+            Impact = LogImpact.High,
+            Message = string.Join(": ", vampireName, Loc.GetString("admin-verb-make-vampire")),
+        };
+        args.Verbs.Add(vampire);
     }
 }

@@ -80,6 +80,9 @@
       reagents:
       - ReagentId: FluorosulfuricAcidPredator
         Quantity: 300
+  - type: BloodSource
+    kind: Acid
+    value: 0
   - type: DamageVisuals
     damageOverlayGroups:
       Brute:

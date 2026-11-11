@@ -170,6 +170,9 @@
   id: AntagSELFAgent
 
 - type: playTimeTracker
+  id: AntagVampire
+
+- type: playTimeTracker
   id: AntagChangeling
 
 - type: playTimeTracker

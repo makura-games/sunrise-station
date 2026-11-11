@@ -18,10 +18,10 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
-using Content.Server.Body.Systems;
 using Content.Shared.Body.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared._Sunrise.Medical;
 using Content.Shared._Sunrise.Research.Artifact;
 
 namespace Content.Server.Medical;
@@ -253,8 +253,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
         if (TryComp<UnrevivableComponent>(entity, out var unrevivableComp) && unrevivableComp.Analyzable)
             unrevivable = true;
 
-        // Sunrise-Edit start - collect hunger, thirst, and raise analyze event
-        // Collect hunger and thirst data as percentages
+        // Sunrise-Edit start - показатели питания и событие анализа
         float hungerLevel = -1;
         float thirstLevel = -1;
 
@@ -273,10 +272,11 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
             }
         }
 
-        RaiseLocalEvent(entity, new EntityAnalyzedEvent());
-        // Sunrise-Edit end
+        var satiationEvent = new GetHealthAnalyzerSatiationEvent(hungerLevel, thirstLevel);
+        RaiseLocalEvent(entity, ref satiationEvent);
 
-        // Sunrise-Edit start - return state with hunger and thirst
+        RaiseLocalEvent(entity, new EntityAnalyzedEvent());
+
         return new HealthAnalyzerUiState(
             GetNetEntity(entity),
             bodyTemperature,
@@ -284,8 +284,8 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
             null,
             bleeding,
             unrevivable,
-            hungerLevel,
-            thirstLevel
+            satiationEvent.HungerLevel,
+            satiationEvent.ThirstLevel
         );
         // Sunrise-Edit end
     }

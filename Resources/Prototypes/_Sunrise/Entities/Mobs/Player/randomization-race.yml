@@ -8,6 +8,15 @@
     skinColor: "#E5BDA0FF"
 
 - type: entity
+  parent: MobHumanRandomization
+  id: SunriseMobHumanDarvinium
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: BloodSource
+    kind: Tainted
+    value: 0.2
+
+- type: entity
   parent: MobReptilian
   id: MobReptilianRandomization
   categories: [ HideSpawnMenu ]
@@ -78,6 +87,15 @@
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false
+
+- type: entity
+  parent: MobVulpkaninRandomization
+  id: SunriseMobVulpkaninDarvinium
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: BloodSource
+    kind: Tainted
+    value: 0.2
 
 - type: entity
   parent: MobFelinid
