@@ -55,6 +55,7 @@ public abstract partial class SharedCarryingSystem : EntitySystem
         SubscribeLocalEvent<ActiveCanBeCarriedComponent, PullAttemptEvent>(OnPullAttempt);
         SubscribeLocalEvent<ActiveCanBeCarriedComponent, StartClimbEvent>(OnStartClimb);
         SubscribeLocalEvent<ActiveCanBeCarriedComponent, BuckledEvent>(OnBuckleChange);
+        SubscribeLocalEvent<ActiveCanBeCarriedComponent, UnstrappedEvent>(OnUnstrapped);
         SubscribeLocalEvent<ActiveCanBeCarriedComponent, InteractionAttemptEvent>(OnInteractionAttempt);
     }
 
@@ -261,7 +262,7 @@ public abstract partial class SharedCarryingSystem : EntitySystem
             return;
 
         var target = ent.Comp.Target.Value;
-        _popup.PopupClient(Loc.GetString("carry-lying-cancel"), target, ent.Owner, PopupType.MediumCaution);
+        _popup.PopupEntity(Loc.GetString("carry-lying-cancel"), target, ent.Owner, PopupType.MediumCaution);
         DropCarried(ent.Owner, target);
     }
 
@@ -306,6 +307,17 @@ public abstract partial class SharedCarryingSystem : EntitySystem
         TryDropCarriedByTarget(ent.AsNullable());
     }
 
+    private void OnUnstrapped(Entity<ActiveCanBeCarriedComponent> ent, ref UnstrappedEvent args)
+    {
+        // Переносимый страп прикреплён к носильщику, поэтому отстёгнутая сущность ставится рядом с ним
+        // и становится ребёнком носильщика. Возвращаем её на грид, иначе она ходит вместе с ним сквозь стены.
+        var buckleXform = Transform(args.Buckle);
+        if (buckleXform.ParentUid == buckleXform.GridUid || buckleXform.ParentUid == buckleXform.MapUid)
+            return;
+
+        _transform.AttachToGridOrMap(args.Buckle, buckleXform);
+    }
+
     private void OnInteractionAttempt(Entity<ActiveCanBeCarriedComponent> ent, ref InteractionAttemptEvent args)
     {
         if (args.Target == null)
@@ -346,7 +358,7 @@ public abstract partial class SharedCarryingSystem : EntitySystem
 
         if (length >= carrier.Comp.MaxPickupTime)
         {
-            _popup.PopupPredicted(Loc.GetString("carry-too-heavy"), carried, carrier, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("carry-too-heavy"), carried, PopupType.SmallCaution);
             return;
         }
 

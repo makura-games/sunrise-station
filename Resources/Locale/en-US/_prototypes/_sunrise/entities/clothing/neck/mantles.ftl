@@ -1,8 +1,8 @@
-ent-ClothingNeckMantleERTLeader = ERT leader's mantle
+ent-ClothingNeckMantleERTLeader = eRT leader's mantle
     .desc = Extraordinary decorative drape over the shoulders.
 ent-ClothingNeckMantleAdjutant = adjutant mantle
     .desc = Lightweight, velvet, uninhibited movement, on one shoulder, as if it speaks to your precarious position of command..
-ent-ClothingHoSMantleCoat = HoS's mantle
+ent-ClothingHoSMantleCoat = hoS's mantle
     .desc = Kys.
 ent-ClothingBSMantle = blueshield mantle
     .desc = Mantle for command bodyguards.
@@ -15,4 +15,4 @@ ent-ClothingNeckMantleCaptainWhiteShoulder = white captain's shoulder mantle
 ent-ClothingNeckMantleCaptainBlackShoulder = black captain's shoulder mantle
     .desc = A one-shoulder mantle with a matte-black finish and reinforced seams. Built for everyday wear in 3025: durable, low-glare, and unlikely to snag on a doorframe… usually.
 ent-ClothingNeckMantleGoliathAlive = alive mantle
-    .desc = What is it? This... thing looks both mesmerizing and terrifying. It gives off a faint warmth, and… It’s clearly staring at me. WITH A LUST FOR THE FLESH
+    .desc = What is it? This... thing looks both mesmerizing and terrifying. It gives off a faint warmth, and… It’s clearly staring at me. WITH A LUST FOR THE FLESH.

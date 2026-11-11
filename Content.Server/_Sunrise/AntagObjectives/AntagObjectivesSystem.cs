@@ -40,7 +40,7 @@ public sealed partial class AntagObjectivesSystem : EntitySystem
                 if (info == null)
                     continue;
 
-                var issuer = Comp<ObjectiveComponent>(objective).LocIssuer;
+                var issuer = Comp<ObjectiveComponent>(objective).Issuer;
                 if (!objectives.ContainsKey(issuer))
                     objectives[issuer] = new List<ObjectiveInfo>();
                 objectives[issuer].Add(info.Value);

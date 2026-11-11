@@ -1,5 +1,4 @@
 ﻿using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Server._Sunrise.Soil;
 
@@ -9,8 +8,8 @@ namespace Content.Server._Sunrise.Soil;
 [RegisterComponent]
 public sealed partial class SoilComponent : Component
 {
-    [DataField(readOnly: true, customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string SpawnPrototype = "hydroponicsSoil";
+    [DataField(readOnly: true)]
+    public EntProtoId SpawnPrototype = "hydroponicsSoil";
 
     [DataField]
     public string PopupStringFailed = "soil-plant-failed";

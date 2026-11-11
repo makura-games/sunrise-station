@@ -1,0 +1,29 @@
+- type: !PartialOnly entity
+  id: PlasmaReinforcedWindowDirectional
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Windows/directional.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Windows/directional.rsi
+
+- type: !PartialOnly entity
+  id: ReinforcedPlasmaWindow
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Windows/reinforced_plasma_window.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Windows/reinforced_plasma_window.rsi
+    state: full
+
+- type: !PartialOnly entity
+  id: ReinforcedPlasmaWindowDiagonal
+  components:
+  - type: Sprite
+    layers: !Remove
+    drawdepth: WallTops
+    sprite: _Sunrise/Structures/Windows/reinforced_plasma_diagonal.rsi
+    state: state0
+  - type: Icon
+    sprite: _Sunrise/Structures/Windows/reinforced_plasma_diagonal.rsi
+    state: state0

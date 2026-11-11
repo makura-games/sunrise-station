@@ -1,7 +1,5 @@
 ent-BaseArachnidOrgan = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
-ent-OrganArachnidBrain = { ent-OrganHumanBrain }
-    .desc = { ent-OrganHumanBrain.desc }
 ent-OrganArachnidStomach = желудок
     .desc = Мерзость. Не перевариваю его.
 ent-OrganArachnidLungs = лёгкие
@@ -16,6 +14,8 @@ ent-OrganArachnidEyes = глаза
     .desc = Два - это уже слишком много.
 ent-OrganArachnidTongue = язык
     .desc = Мясистая мышца, используемая в основном для обмана.
+ent-OrganArachnidBrain = { ent-OrganHumanBrain }
+    .desc = { ent-OrganHumanBrain.desc }
 ent-OrganArachnidAppendix = { ent-OrganHumanAppendix }
     .desc = { ent-OrganHumanAppendix.desc }
 ent-OrganArachnidEars = { ent-OrganHumanEars }

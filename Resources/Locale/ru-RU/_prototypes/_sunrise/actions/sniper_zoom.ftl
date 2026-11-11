@@ -1,2 +1,2 @@
-ent-ActionTakeAim = Включить прицеливание
+ent-ActionTakeAim = включить прицеливание
     .desc = { "" }

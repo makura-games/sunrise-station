@@ -59,10 +59,10 @@ def main() -> None:
     if not os.environ.get("PUBLISH_FORK_ID", "").strip():
         fail("PUBLISH_FORK_ID is not configured or contains only whitespace.")
 
-    commit_hash = os.environ.get("COMMIT_HASH", "")
-    private_commit_hash = os.environ.get("PRIVATE_COMMIT_HASH", "")
-    current_ref_name = os.environ.get("CURRENT_REF_NAME", "")
-    current_ref_type = os.environ.get("CURRENT_REF_TYPE", "")
+    commit_hash = os.environ.get("COMMIT_HASH", "").strip()
+    private_commit_hash = os.environ.get("PRIVATE_COMMIT_HASH", "").strip()
+    current_ref_name = os.environ.get("CURRENT_REF_NAME", "").strip()
+    current_ref_type = os.environ.get("CURRENT_REF_TYPE", "").strip()
 
     if not commit_hash:
         if current_ref_type != "branch" or current_ref_name not in TRUSTED_BRANCHES:
@@ -73,13 +73,16 @@ def main() -> None:
     if private_commit_hash and not is_trusted_ref(private_commit_hash):
         fail("private_commit_hash must be a full 40-character SHA or the master/stable branch.")
 
-    use_private_content = os.environ.get("USE_PRIVATE_CONTENT", "").casefold() == "true"
+    use_private_content = os.environ.get("USE_PRIVATE_CONTENT", "").strip().casefold() == "true"
     if use_private_content:
         if not os.environ.get("PRIVATE_REPOSITORY", "").strip():
             fail("PRIVATE_REPOSITORY is required when private content is enabled.")
 
-        if not os.environ.get("PRIVATE_REPOSITORY_SSH_KEY", "").strip():
-            fail("PRIVATE_REPOSITORY_SSH_KEY is required when private content is enabled.")
+        if not os.environ.get("PRIVATE_APP_CLIENT_ID", "").strip():
+            fail("PRIVATE_APP_CLIENT_ID is required when private content is enabled.")
+
+        if not os.environ.get("PRIVATE_APP_PRIVATE_KEY", "").strip():
+            fail("PRIVATE_APP_PRIVATE_KEY is required when private content is enabled.")
 
 
 if __name__ == "__main__":

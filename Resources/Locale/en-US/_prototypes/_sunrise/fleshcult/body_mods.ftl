@@ -1,12 +1,12 @@
-ent-ClothingFleshSpiderLegs = Flesh Spider Legs
+ent-ClothingFleshSpiderLegs = flesh Spider Legs
     .desc = Flesh Spider Legs.
     .suffix = Flesh Cult
 ent-ClothingOuterArmorFlesh = flesh armor
-    .desc = flesh armor
+    .desc = Flesh armor.
     .suffix = Flesh Cult
 ent-ClothingOuterHeavyArmorFlesh = heavy flesh armor
-    .desc = heavy flesh armor
+    .desc = Heavy flesh armor.
     .suffix = Flesh Cult
 ent-ClothingHeadHelmetHeavyArmorFlesh = heavy flesh helmet
-    .desc = heavy flesh helmet
+    .desc = Heavy flesh helmet.
     .suffix = Flesh Cult

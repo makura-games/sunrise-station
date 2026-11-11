@@ -250,7 +250,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/large_explosive.rsi
+    sprite: _Sunrise/Clothing/Pouches/large_explosive.rsi
     layers:
     - state: icon
   - type: Item
@@ -1474,7 +1474,7 @@
     - id: ClothingOuterArmorScrap
       prob: 0.1
       orGroup: MurmilloHardsuitPool
-    - id: DrinkDarkRedRumBottleFull
+    - id: DrinkRedRumBottleFull
       prob: 0.33
       orGroup: MurmilloHardsuitPool
     - id: SunriseClothingBackpackMessengerPirateMurmilloDamaged
@@ -3492,14 +3492,11 @@
     - id: BrokenEnergyShield
       prob: 0.5
       orGroup: EnergyShieldPool
-    - id: EnergyShieldBiocode
-      prob: 0.5
-      orGroup: EnergyShieldPool
-    - id: EnergyShield
-      prob: 0.75
-      orGroup: EnergyShieldPool
     - id: SunriseEnergyShield
       prob: 0.2
+      orGroup: EnergyShieldPool
+    - id: EnergyShield
+      prob: 0.33
       orGroup: EnergyShieldPool
     - id: GrenadeStinger
       amount: 2
@@ -4161,7 +4158,7 @@
     - id: ClothingOuterArmorScrap
       prob: 0.1
       orGroup: MurmilloHardsuitPool
-    - id: DrinkDarkRedRumBottleFull
+    - id: DrinkRedRumBottleFull
       prob: 0.33
       orGroup: MurmilloHardsuitPool
     - id: SunriseClothingBackpackMessengerPirateMurmilloDamaged

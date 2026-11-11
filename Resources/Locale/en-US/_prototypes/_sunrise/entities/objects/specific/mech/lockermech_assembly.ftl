@@ -1,2 +1,2 @@
-ent-LockerMechChassis = LockerMech chassis
-    .desc = LockerMech chassis
+ent-LockerMechChassis = lockerMech chassis
+    .desc = LockerMech chassis.

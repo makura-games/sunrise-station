@@ -1,10 +1,10 @@
-ent-WeaponShotgunTrenchgun4034 = Trenchgun L-4034
+ent-WeaponShotgunTrenchgun4034 = trenchgun L-4034
     .desc = { ent-BaseWeaponShotgun.desc }
-ent-WeaponShotgunTrenchgun4034Sawn = Sawn Trenchgun L-4034
+ent-WeaponShotgunTrenchgun4034Sawn = sawn Trenchgun L-4034
     .desc = { ent-WeaponShotgunTrenchgun4034.desc }
-ent-WeaponShotgunTrenchgun4034SawnEmpty = Sawn Trenchgun L-4034
+ent-WeaponShotgunTrenchgun4034SawnEmpty = sawn Trenchgun L-4034
     .suffix = Empty
     .desc = { ent-WeaponShotgunTrenchgun4034Sawn.desc }
-ent-WeaponShotgunMinotaurAdmeme = AS-12 'Hasta la vista' Shotgun
+ent-WeaponShotgunMinotaurAdmeme = aS-12 'Hasta la vista' Shotgun
     .desc = Smooth, powerful, highly illegal. Full auto shotgun available at the market, utilizes standard 12g drum mags. Property of Admeme-Marauders. Can be dual wielded with another AS-12 for maximum carnage.
     .suffix = Admeme

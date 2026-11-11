@@ -1,8 +1,8 @@
 ent-BorgChassisSelectable = { ent-BaseBorgChassisNT }
     .desc = { ent-BaseBorgChassisNT.desc }
 ent-BorgChassisGeneric = { ent-BaseBorgChassisNT }
+    .suffix = Выбранный тип
     .desc = { ent-BaseBorgChassisNT.desc }
-    .suffix = выбранный тип
 ent-BorgChassisMining = киборг-шахтёр
     .desc = { ent-BaseBorgChassisNT.desc }
 ent-BorgChassisEngineer = киборг-инженер
@@ -19,5 +19,5 @@ ent-BorgChassisSyndicateMedical = медицинский киборг Синди
     .desc = Боевой медицинский киборг. Имеет ограниченный наступательный потенциал, но с лихвой компенсирует его своими вспомогательными возможностями.
 ent-BorgChassisSyndicateSaboteur = саботажный киборг синдиката
     .desc = Изящный инженерный киборг, оснащённый модулями скрытности. Проектор-хамелеон позволяет ему маскироваться под киборга нанотрейзен.
-ent-BorgChassisDerelict = Брошенный киборг
+ent-BorgChassisDerelict = брошенный киборг
     .desc = Гибрид человека и машины, помогающий в работе станции. Эта машина находится в очень запущенном состоянии.

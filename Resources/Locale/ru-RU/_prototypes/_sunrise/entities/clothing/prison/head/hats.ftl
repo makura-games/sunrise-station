@@ -1,4 +1,3 @@
-
 ent-ClothingHeadHatCapPrisonDoctor = фуражка тюремного доктора
     .desc = Тяжёлая, чистая, носитель её привык решать, кому жить, а кому нет.
 ent-ClothingHeadHatCapPrisonChef = фуражка тюремного повара
@@ -11,7 +10,7 @@ ent-ClothingHeadHatCapPrisonWorker = фуражка тюремного разн�
     .desc = Ткань потемнела от рудной пыли, а по краю следы ожогов, будто её носили те, кто стоял ближе всех к тому, что не должно было дышать.
 ent-ClothingHeadHatCapPrisonTrainee = фуражка тюремного стажёра
     .desc = Стильная оранжевая фуражка тюремного стажёра.
-
+# Prison berets
 ent-ClothingHeadHatBeretPrisonDoctor = берет тюремного доктора
     .desc = Мягкий, сдержанный, как и его владелец, привыкший к холодным телам и тёплому равнодушию.
 ent-ClothingHeadHatBeretPrisonChef = берет тюремного повара
@@ -24,7 +23,7 @@ ent-ClothingHeadHatBeretPrisonWorker = берет тюремного разно�
     .desc = Перекошенный, но ношен с гордостью, ибо её носитель отработал за многих не один раз.
 ent-ClothingHeadHatBeretPrisonTrainee = берет тюремного стажёра
     .desc = Свежий и новый, ещё не знает тяжести долгой службы, отмечен оранжевым цветом, показывающим путь к будущему.
-
+# Prison caps (alternate cap entries)
 ent-ClothingHeadCapPrisonDoctor = кепка тюремного доктора
     .desc = Простая и чистая, но треснутая от стирок, как символ тех, кто лечит сломанных системой.
 ent-ClothingHeadCapPrisonChef = кепка тюремного повара

@@ -1,3 +1,7 @@
+crafting-menu-name-improvised-modular-receiver = импровизированный модульный ресивер
+crafting-menu-text-improvised-modular-receiver = Грубый, но рабочий блок ствольной коробки, собранный из подручных материалов.
+crafting-menu-name-improvised-light-rifle-magazine = импровизированный винтовочный магазин
+crafting-menu-text-improvised-light-rifle-magazine = Кустарно собранный 20-зарядный магазин для самодельных винтовочных патронов.
 crafting-menu-name-FDB = кованый двуствольный дробовик
 crafting-menu-text-FDB = Кузен импровизированного дробовика, сделан из более качественных деталей и имеет дополнительный ствол! Однако на его изготовление потребуется время и сварочные принадлежности.
 crafting-menu-name-MP = самодельный пистолет
@@ -123,10 +127,5 @@ crafting-menu-name-IMGR556 = коробка патронов (5,56)
 crafting-menu-text-IMGR556 = Выглядит как кустарная коробка для патронов 5,56х45мм, с нарисованным от руки символом пули сверху. Смешивание калибров не рекомендовано.
 crafting-menu-name-IMGS = коробка патронов (.50 картечь)
 crafting-menu-text-IMGS = Выглядит как самодельная коробка для патронов .50 дробовика, с нарисованным от руки символом пули сверху. Смешивание калибров не рекомендовано.
-
 crafting-menu-name-ASSFP = набор деталей для кузни
 crafting-menu-text-ASSFP = Небольшой набор компонентов для сборки горна на наковальне, включает воспламенитель и клапаны.
-crafting-menu-name-improvised-modular-receiver = импровизированный модульный ресивер
-crafting-menu-text-improvised-modular-receiver = Грубый, но рабочий блок ствольной коробки, собранный из подручных материалов.
-crafting-menu-name-improvised-light-rifle-magazine = импровизированный винтовочный магазин
-crafting-menu-text-improvised-light-rifle-magazine = Кустарно собранный 20-зарядный магазин для самодельных винтовочных патронов.

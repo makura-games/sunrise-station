@@ -285,6 +285,21 @@
     - FaceCovered # INTERACTIONS
 
 - type: entity
+  parent: [ ClothingMaskGasSecurity, BaseSecurityContraband ]
+  id: ClothingMaskGasBlueShieldHalf
+  name: blueshield half mask
+  description: A compact gas mask for blueshield officers.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Mask/blueshield_half.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Mask/blueshield_half.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - FaceCovered # INTERACTIONS
+
+- type: entity
   parent: [ ClothingMaskBase, BaseMajorContraband ]
   id: ClothingMaskDogi
   name: samurai mask

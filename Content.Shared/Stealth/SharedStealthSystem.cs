@@ -98,7 +98,7 @@ public abstract partial class SharedStealthSystem : EntitySystem
 
     private void OnStealthGetState(EntityUid uid, StealthComponent component, ref ComponentGetState args)
     {
-        args.State = new StealthComponentState(component.LastVisibility, component.LastUpdated, component.Enabled, component.Mirage); // Sunrise-Edit
+        args.State = new StealthComponentState(component.LastVisibility, component.LastUpdated, component.Enabled, component.ShimmerFrequency, component.Mirage); // Sunrise edit
     }
 
     private void OnStealthHandleState(EntityUid uid, StealthComponent component, ref ComponentHandleState args)
@@ -110,6 +110,7 @@ public abstract partial class SharedStealthSystem : EntitySystem
         SetEnabled(uid, cast.Enabled, component);
         component.LastVisibility = cast.Visibility;
         component.LastUpdated = cast.LastUpdated;
+        component.ShimmerFrequency = cast.ShimmerFrequency;
     }
 
     private void OnMove(EntityUid uid, StealthOnMoveComponent component, ref MoveEvent args)

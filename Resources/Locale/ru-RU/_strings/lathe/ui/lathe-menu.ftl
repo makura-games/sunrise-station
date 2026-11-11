@@ -8,8 +8,8 @@ lathe-menu-search-filter = Фильтр
 lathe-menu-amount = Кол-во:
 lathe-menu-recipe-count =
     { $count ->
-        [1] { $count } Recipe
-       *[other] { $count } Recipes
+        [1] { $count } рецепт
+       *[other] { $count } рецептов
     }
 lathe-menu-reagent-slot-examine = Сбоку имеется отверстие для мензурки.
 lathe-reagent-dispense-no-container = Жидкость выливается из { $name } на пол!
@@ -28,13 +28,13 @@ lathe-menu-material-amount-missing =
        *[other] { NATURALFIXED($amount, 2) } { $unit } { $material } ([color=red]{ NATURALFIXED($missingAmount, 2) } { $unit } не хватает[/color])
     }
 lathe-menu-no-materials-message = Материалы не загружены
+lathe-menu-silo-linked-message = Хранилище подключено
 lathe-menu-fabricating-message = Производится...
 lathe-menu-materials-title = Материалы
 lathe-menu-queue-title = Очередь производства
-lathe-menu-silo-linked-message = Хранилище подключено
 lathe-menu-delete-fabricating-tooltip = Отменить печать текущего предмета.
 lathe-menu-delete-item-tooltip = Отменить печать этой партии.
 lathe-menu-move-up-tooltip = Переместить эту партию вперёд по очереди.
 lathe-menu-move-down-tooltip = Переместить эту партию назад по очереди.
-lathe-menu-item-single = {$index}. {$name}
-lathe-menu-item-batch = {$index}. {$name} ({$printed}/{$total})
+lathe-menu-item-single = { $index }. { $name }
+lathe-menu-item-batch = { $index }. { $name } ({ $printed }/{ $total })

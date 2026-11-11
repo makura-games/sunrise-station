@@ -11,7 +11,6 @@ namespace Content.Server._Sunrise.Humanoid;
 public sealed partial class HumanoidPhysicalStatsSystem : EntitySystem
 {
     [Dependency] private PhysicsSystem _physics = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -27,7 +26,7 @@ public sealed partial class HumanoidPhysicalStatsSystem : EntitySystem
 
     private void ApplyPhysicalStats(Entity<SunriseHumanoidProfileComponent> ent, ProtoId<SpeciesPrototype> speciesId, float width, float height)
     {
-        if (!_proto.TryIndex(speciesId, out var species))
+        if (!ProtoMan.TryIndex(speciesId, out var species))
             return;
 
         if (!TryComp<FixturesComponent>(ent.Owner, out var fixtures))

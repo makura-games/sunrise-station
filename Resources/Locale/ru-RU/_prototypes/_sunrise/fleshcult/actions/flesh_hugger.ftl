@@ -1,4 +1,4 @@
-ent-FleshHuggerJump = Прыжок
+ent-FleshHuggerJump = прыжок
     .desc = Позволяет вам прыгнуть в выбранном направлении. Если вы попадете в гуманоида без маски, вы зацепитесь за его лицо.
-ent-FleshHuggerGetOff = Слезть с лица
+ent-FleshHuggerGetOff = слезть с лица
     .desc = Позволяет вам спуститься с лица.

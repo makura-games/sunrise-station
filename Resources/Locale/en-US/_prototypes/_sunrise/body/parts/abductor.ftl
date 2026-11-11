@@ -1,8 +1,8 @@
-ent-PartAbductor = Abductor body part
+ent-PartAbductor = abductor body part
     .desc = { ent-BaseItem.desc }
-ent-TorsoAbductor = Abductor torso
+ent-TorsoAbductor = abductor torso
     .desc = { ent-PartAbductor.desc }
-ent-HeadAbductor = Abductor head
+ent-HeadAbductor = abductor head
     .desc = { ent-PartAbductor.desc }
 ent-LeftArmAbductor = left Abductor arm
     .desc = { ent-PartAbductor.desc }

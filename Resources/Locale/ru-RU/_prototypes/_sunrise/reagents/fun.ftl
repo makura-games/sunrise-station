@@ -1,2 +1,9 @@
 reagent-name-aphrodisiac = Афродизиак
 reagent-desc-aphrodisiac = Вещество, повышающее возбуждение или удовольствие.
+reagent-physical-desc-aphrodisiac = Мерцающая, рубиново-красная жидкость, мягко светящаяся на свету.
+reagent-name-celliminol = целлиминол
+reagent-desc-celliminol = Химикат криогенного действия. Мощный химикат разработанный компанией. Работает на мёртвых и живых.
+reagent-name-inc = чернила
+reagent-desc-inc = чернила
+reagent-name-universal-evaporator = универсальный испаритель
+reagent-desc-universal-evaporator = Испаряет жидкие реагенты, расщепляя ингибиторы, не позволяющие им переходить в газ.

@@ -123,6 +123,7 @@
   plantMetabolism:
   - !type:PlantAdjustMutationLevel
     amount: 0.3
+    mutationTable: RandomPlantMutations
   metabolisms:
     Bloodstream:
       metabolismRate: 0.25
@@ -155,9 +156,8 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:GenericStatusEffect
-        key: Muted
-        component: Muted
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMuted
         type: Add
         time: 30
 

@@ -1,12 +1,9 @@
 using System.Linq;
-using Content.Shared.PowerCell;
-using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.Medical.CrewMonitoring;
-using Content.Shared.Medical.SuitSensor;
 using Content.Shared.Pinpointer;
+using Content.Shared.PowerCell;
 using Robust.Server.GameObjects;
-using Robust.Shared.Map;
 
 
 namespace Content.Server.Medical.CrewMonitoring;
@@ -20,7 +17,6 @@ public sealed partial class CrewMonitoringConsoleSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<CrewMonitoringConsoleComponent, ComponentRemove>(OnRemove);
-        SubscribeLocalEvent<CrewMonitoringConsoleComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
         SubscribeLocalEvent<CrewMonitoringConsoleComponent, BoundUIOpenedEvent>(OnUIOpened);
 
         InitializeAlert(); // Sunrise - Add
@@ -31,31 +27,14 @@ public sealed partial class CrewMonitoringConsoleSystem : EntitySystem
         component.ConnectedSensors.Clear();
     }
 
-    private void OnPacketReceived(EntityUid uid, CrewMonitoringConsoleComponent component, DeviceNetworkPacketEvent args)
+    [SubscribeLocalEvent]
+    private void OnSuitSensorBroadcast(Entity<CrewMonitoringConsoleComponent> ent, ref DeviceNetworkPacketEvent<BroadcastSuitSensorStatePayload> args)
     {
-        var payload = args.Data;
-
-        // Check command
-        if (!payload.TryGetValue(DeviceNetworkConstants.Command, out string? command))
+        if (args.Data.MapId != Transform(ent.Owner).MapID)
             return;
 
-        if (command != DeviceNetworkConstants.CmdUpdatedState)
-            return;
-
-        if (!payload.TryGetValue(SuitSensorConstants.NET_STATUS_COLLECTION, out Dictionary<string, SuitSensorStatus>? sensorStatus))
-            return;
-
-        if (!payload.TryGetValue(SuitSensorConstants.MAP_ID, out MapId mapId))
-            return;
-
-        var consoleTransform = Transform(uid);
-        var consoleMapId = consoleTransform.MapID;
-
-        if (mapId != consoleMapId)
-            return;
-
-        component.ConnectedSensors = sensorStatus;
-        UpdateUserInterface(uid, component);
+        ent.Comp.ConnectedSensors = args.Data.SensorStatus;
+        UpdateUserInterface(ent, ent.Comp);
     }
 
     private void OnUIOpened(EntityUid uid, CrewMonitoringConsoleComponent component, BoundUIOpenedEvent args)

@@ -76,8 +76,8 @@ public sealed partial class RandomSentienceRule : StationEventSystem<RandomSenti
             station.Value,
             Loc.GetString("station-event-random-sentience-announcement",
                 ("kind1", kind1), ("kind2", kind2), ("kind3", kind3), ("amount", groupList.Count),
-                ("data", _random.Pick(PrototypeManager.Index(DataSourceNames))),
-                ("strength", _random.Pick(PrototypeManager.Index(IntelligenceLevelNames)))
+                ("data", _random.Pick(ProtoMan.Index(DataSourceNames))),
+                ("strength", _random.Pick(ProtoMan.Index(IntelligenceLevelNames)))
             ),
             playDefault: false,
             colorOverride: Color.Gold

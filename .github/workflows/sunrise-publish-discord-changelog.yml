@@ -1,4 +1,4 @@
-name: Publish Discord Changelog
+name: Publish Discord Changelog (Automatic)
 run-name: Discord changelog ${{ inputs.target_id }} for ${{ inputs.released_sha }}
 
 on:
@@ -9,13 +9,33 @@ on:
         required: true
         type: string
       released_sha:
-        description: SHA опубликованного коммита
+        description: SHA опубликованного коммита (служебный параметр автоматики)
         required: true
         type: string
       source_workflow_run_id:
         description: ID соответствующего запуска Publish Stable
         required: true
         type: string
+  workflow_call:
+    inputs:
+      target_id:
+        required: true
+        type: string
+      released_sha:
+        required: true
+        type: string
+      source_workflow_run_id:
+        default: ''
+        type: string
+      from_id:
+        default: ''
+        type: string
+      to_id:
+        default: ''
+        type: string
+      manual_range:
+        default: false
+        type: boolean
 
 permissions:
   actions: read # Чтение истории этой цели и истории стабильных публикаций.
@@ -57,4 +77,7 @@ jobs:
           CHANGELOG_TARGET_ID: ${{ steps.target.outputs.target_id }}
           RELEASED_SHA: ${{ inputs.released_sha }}
           SOURCE_WORKFLOW_RUN_ID: ${{ inputs.source_workflow_run_id }}
+          CHANGELOG_FROM_ID: ${{ inputs.from_id }}
+          CHANGELOG_TO_ID: ${{ inputs.to_id }}
+          CHANGELOG_MANUAL_RANGE: ${{ inputs.manual_range }}
         run: python Tools/_sunrise/changelog/actions_changelogs_since_last_run.py

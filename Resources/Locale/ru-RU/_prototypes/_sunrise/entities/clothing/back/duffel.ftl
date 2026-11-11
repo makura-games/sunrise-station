@@ -34,7 +34,6 @@ ent-ClothingBackpackDuffelYellow = жёлтый вещмешок
     .desc = Этот вещмешок выглядит великолепно.
 ent-ClothingBackpackDuffelRandomColorSpawner = вещмешок (случайный цвет)
     .desc = Вещмешок случайного цвета.
-
 ent-ClothingBackpackDuffelGreytideMaterials = вещмешок материалов грейтайда
     .desc = Вещмешок, набитый посылками контрабандных материалов.
     .suffix = Дебаг

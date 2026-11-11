@@ -22,6 +22,13 @@
   maleFirstNames: names_vulpkanin_male
   femaleFirstNames: names_vulpkanin_female
   # lastNames: names_vulpkanin_last # Sunrise-edit
+  defaultSoundsBySex:
+  - MaleVulpkanin
+  - FemaleVulpkanin
+  - MaleVulpkanin
+  voices:
+  - MaleVulpkanin
+  - FemaleVulpkanin
   maleLastNames: names_vulpkanin_last
   femaleLastNames: names_vulpkanin_last
   buttScan: # Sunrise edit

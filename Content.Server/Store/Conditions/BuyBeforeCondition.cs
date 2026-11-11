@@ -10,8 +10,8 @@ public sealed partial class BuyBeforeCondition : ListingCondition
     /// <summary>
     ///     Required listing(s) needed to purchase before this listing is available
     /// </summary>
-    [DataField(required: true)]
-    public HashSet<ProtoId<ListingPrototype>> Whitelist;
+    [DataField]
+    public HashSet<ProtoId<ListingPrototype>>? Whitelist;
 
     /// <summary>
     ///     Listing(s) that if bought, block this purchase, if any.
@@ -40,18 +40,22 @@ public sealed partial class BuyBeforeCondition : ListingCondition
             }
         }
 
-        foreach (var requiredListing in Whitelist)
+        if (Whitelist != null)
         {
-            foreach (var listing in allListings)
+            foreach (var requiredListing in Whitelist)
             {
-                if (listing.ID == requiredListing.Id)
+                foreach (var listing in allListings)
                 {
-                    purchasesFound = listing.PurchaseAmount > 0;
-                    break;
+                    if (listing.ID == requiredListing.Id)
+                    {
+                        purchasesFound = listing.PurchaseAmount > 0;
+                        break;
+                    }
                 }
             }
+            return purchasesFound;
         }
 
-        return purchasesFound;
+        return true;
     }
 }

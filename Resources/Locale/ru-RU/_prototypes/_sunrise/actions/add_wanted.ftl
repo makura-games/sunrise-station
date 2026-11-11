@@ -1,2 +1,2 @@
-ent-ActionAddWanted = Установить розыск
+ent-ActionAddWanted = установить розыск
     .desc = Устанавливает статус розыска на цель.

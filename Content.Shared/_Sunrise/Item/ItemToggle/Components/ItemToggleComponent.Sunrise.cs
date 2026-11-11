@@ -1,3 +1,4 @@
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Item.ItemToggle.Components;
 
 public sealed partial class ItemToggleComponent

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Content.Server.NPC.Components;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared.CombatMode;
+using Content.Shared.Storage.Components; // Sunrise-Edit
 using Robust.Server.Containers;
 
 namespace Content.Server.NPC.HTN.PrimitiveTasks.Operators.Combat.Melee;
@@ -32,6 +33,11 @@ public sealed partial class EscapeOperator : HTNOperator, IHtnConditionalShutdow
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
         var target = blackboard.GetValue<EntityUid>(TargetKey);
 
+        // Sunrise added start - цель не EntityStorage (рюкзак, вентиляция), Update завершит задачу с ошибкой
+        if (!_entManager.HasComponent<EntityStorageComponent>(target))
+            return;
+        // Sunrise added end
+
         if (_entityStorage.TryOpenStorage(owner, target))
         {
             TaskShutdown(blackboard, HTNOperatorStatus.Finished);
@@ -57,7 +63,15 @@ public sealed partial class EscapeOperator : HTNOperator, IHtnConditionalShutdow
             return (false, null);
         }
 
-        if (_entityStorage.TryOpenStorage(owner, target))
+        // Sunrise added start - выбраться можно только из EntityStorage, а не из рюкзака или вентиляции
+        if (!_container.TryGetOuterContainer(owner, _entManager.GetComponent<TransformComponent>(owner), out var outerContainer) ||
+            !_entManager.HasComponent<EntityStorageComponent>(outerContainer.Owner))
+        {
+            return (false, null);
+        }
+        // Sunrise added end
+
+        if (_entManager.HasComponent<EntityStorageComponent>(target) && _entityStorage.TryOpenStorage(owner, target)) // Sunrise-Edit - не логируем ошибку для целей без EntityStorage
         {
             return (false, null);
         }
@@ -103,6 +117,12 @@ public sealed partial class EscapeOperator : HTNOperator, IHtnConditionalShutdow
             {
                 status = HTNOperatorStatus.Finished;
             }
+            // Sunrise added start - цель не EntityStorage, сбегать некуда
+            else if (!_entManager.HasComponent<EntityStorageComponent>(target))
+            {
+                status = HTNOperatorStatus.Failed;
+            }
+            // Sunrise added end
             else
             {
                 if (_entityStorage.TryOpenStorage(owner, target))

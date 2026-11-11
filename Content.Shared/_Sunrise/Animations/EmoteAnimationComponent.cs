@@ -1,5 +1,3 @@
-﻿using Content.Shared.Actions;
-using Content.Shared.Chat.Prototypes;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -22,9 +20,3 @@ public sealed partial class EmoteAnimationComponent : Component
         }
     }
 }
-
-public sealed partial class EmoteActionEvent : InstantActionEvent
-{
-    [ViewVariables, DataField("emote", readOnly: true, required: true)]
-    public string Emote = default!;
-};

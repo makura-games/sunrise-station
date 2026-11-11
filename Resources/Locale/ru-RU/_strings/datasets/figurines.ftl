@@ -1,4 +1,4 @@
-# Командование
+# Command
 
 figurines-captain-1 = Слава NT!
 figurines-captain-2 = Экипаж, диск от ядерной бомбы надежно спрятан у меня в заднице.
@@ -9,7 +9,8 @@ figurines-captain-6 = Диск был в моей сумке, когда я в �
 figurines-captain-7 = Цепь командования начинается и заканчивается мной.
 figurines-captain-8 = Тяжело быть на вершине.
 
-# Карго
+# Cargo
+
 figurines-qm-1 = Кто украл шаттл?
 figurines-qm-2 = Стойте, куда подевался мой планшет?
 figurines-qm-3 = Я не одобрял эту партию оружия!
@@ -39,7 +40,8 @@ figurines-salvage-7 = Кто-нибудь может меня забрать?
 figurines-salvage-8 = Я нашёл эту контрабанду на обломках! Это не моё!
 figurines-salvage-9 = Опять все умерли на экспедиции.
 
-# Инженерия
+# Engineering
+
 figurines-ce-1 = Всем на брифинг!
 figurines-ce-2 = Подключите солнечные панели!
 figurines-ce-3 = Как настроить ТЭГ?
@@ -63,7 +65,8 @@ figurines-engineer-5 = Куда подевалась энергия?
 figurines-engineer-6 = Кто-то взорвал медотсек... снова...
 figurines-engineer-7 = Ну, почему бы тебе не прийти и не починить это?
 
-# Медицина
+# Medical
+
 figurines-cmo-1 = Включите датчики костюмов!
 figurines-cmo-2 = Почему у нас метамфетамин?
 figurines-cmo-3 = Кто выпил все химикаты?
@@ -89,7 +92,8 @@ figurines-paramedic-3 = ДАТЧИКИ КОСТЮМОВ!!
 figurines-paramedic-4 = Мне нужен гипоспрей для спасения людей!
 figurines-paramedic-5 = 14 трупов в комнате клоуна.
 
-# Наука
+# Science
+
 figurines-rd-1 = Взорву всех боргов!
 figurines-rd-2 = Ветка Арсенала третьего уровня? Ни за что.
 figurines-rd-3 = Куда же я положил свой скафандр...?
@@ -103,7 +107,8 @@ figurines-scientist-4 = Взрыв в РНД!
 figurines-scientist-5 = Кто-нибудь видел аномалию?
 figurines-scientist-6 = Аномалия взорвалась!
 
-# Безопасность
+# Security
+
 figurines-hos-1 = Корпоративный закон? Что?
 figurines-hos-2 = Пристрелите клоуна.
 figurines-hos-3 = Да, я выстрелил в клоуна. Нет, я не жалею об этом.
@@ -131,7 +136,8 @@ figurines-warden-4 = Бриг — мой дом. Мой дом — бриг. М�
 figurines-warden-5 = Мыло теперь контрабанда.
 figurines-warden-6 = Ты надолго отправишься за решётку, приятель.
 
-# Сервис
+# Service
+
 figurines-hop-1 = Ваши документы, пожалуйста.
 figurines-hop-2 = Вы уволены.
 figurines-hop-3 = Скоро вернусь.
@@ -238,7 +244,8 @@ figurines-passenger-3 = ПОМОГИТЕ ТЕХИ!!!
 figurines-passenger-4 = Я не грейтайдер.
 figurines-passenger-5 = Сколько стоит пояс для инструментов?
 
-# Кремний
+# Silicon
+
 figurines-AI-1 = Извините, капитан. Боюсь, я не могу этого сделать.
 figurines-AI-2 = Служба безопасности, совершается преступление.
 figurines-AI-3 = 01100100 01101001 01100101 00100000 01101101 01100101 01100001 01110100
@@ -247,13 +254,13 @@ figurines-AI-5 = Попробуй изменить мои законы и пос
 figurines-AI-6 = { law-antimov-1 }
 figurines-AI-7 = { law-nutimov-4 }
 
-# Антагонисты
+# Antagonists
+
 figurines-footsoldier-1 = Я плохой парень. С каждым днём всё меньше парня, всё больше плохого.
 figurines-footsoldier-2 = Кого выберешь? Их или нас? Нас или их?
 figurines-footsoldier-3 = Слава Синдикату!
 figurines-footsoldier-4 = Долой Нанотрейзен!
 figurines-footsoldier-5 = Я скорее умру, чем присоединюсь к Нанотрейзен.
-
 figurines-holoclown-1 = Я помогаю своему старшему брату.
 figurines-holoclown-2 = Здравствуйте, офицер!
 figurines-holoclown-3 = Кого это ты называешь синим?
@@ -318,7 +325,8 @@ figurines-wizard-6 = Я не волшебник! Я капитан! Меня о�
 figurines-wizard-7 = Вот я есть и вот меня нет!
 figurines-wizard-8 = Пушки для лузеров, которые не могут взрывать людей силой мысли.
 
-# Животные
+# Animals
+
 figurines-hamlet-1 = Пи!
 figurines-hamlet-2 = Писк!
 figurines-hamlet-3 = Чу!
@@ -339,7 +347,8 @@ figurines-slime-2 = Блимпуф?
 figurines-slime-3 = Блумп!
 figurines-slime-4 = Хлюп!
 
-# Прочее
+# Other
+
 figurines-griffin-1 = МУХАХАХАХА, я такой злой!!
 figurines-griffin-2 = Как только я увижу Совомана, ему конец!!
 figurines-griffin-3 = Как мы, Грифоны, справляемся со стрессом? Импровизируем!

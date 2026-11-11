@@ -1,7 +1,7 @@
 - type: gameMap
   id: SunrisePlasma
   mapName: 'Plasma'
-  mapPath: /Maps/_Sunrise/Station/plasma.yml
+  mapPath: /Maps/_Sunrise/Station/OutPool/plasma.yml
   minPlayers: 0
   maxRandomOffset: 0
   randomRotation: false

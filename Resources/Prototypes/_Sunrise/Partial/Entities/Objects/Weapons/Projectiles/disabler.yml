@@ -1,0 +1,5 @@
+- type: !PartialOnly entity
+  id: BulletDisabler
+  components:
+  - type: StaminaDamageOnCollide
+    damage: 32
