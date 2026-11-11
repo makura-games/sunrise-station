@@ -1,4 +1,4 @@
-# Job
+# Job Specific
 
 - type: listing
   id: uplinkGatfruitSeeds
@@ -17,6 +17,7 @@
     whitelist:
     - Botanist
 
+
 - type: listing
   id: uplinkHolyHandGrenade
   name: uplink-holy-hand-grenade-name
@@ -34,11 +35,13 @@
     whitelist:
     - Chaplain
 
+
 - type: listing
   id: uplinkRevolverCapGunFake
   name: uplink-revolver-cap-gun-fake-name
   description: uplink-revolver-cap-gun-fake-desc
-  productEntity: RevolverCapGunFake
+  icon: { sprite: Objects/Fun/capgun.rsi, state: icon } # Sunrise-Edit
+  productEntity: BoxCapGunFake # Sunrise-Edit
   discountCategory: rareDiscounts
   discountDownTo:
     Telecrystal: 2
@@ -52,11 +55,13 @@
     - Mime
     - Clown
 
+
 - type: listing
   id: UplinkClusterBananaPeel
   name: uplink-cluster-banana-peel-name
   description: uplink-cluster-banana-peel-desc
-  productEntity: ClusterBananaPeel
+  icon: { sprite: Objects/Specific/Hydroponics/banana.rsi, state: peel } # Sunrise-Edit
+  productEntity: BoxClusterBananaPeelExplosiveUnarmed # Sunrise-Edit
   discountCategory: rareDiscounts
   discountDownTo:
     Telecrystal: 3
@@ -68,6 +73,7 @@
   - !type:BuyerJobCondition
     whitelist:
     - Clown
+
 
 - type: listing
   id: UplinkHoloclownKit
@@ -86,6 +92,7 @@
   - !type:BuyerJobCondition
     whitelist:
     - Clown
+
 
 - type: listing
   id: uplinkHotPotato
@@ -107,6 +114,7 @@
     - Clown
     - Mime
 
+
 - type: listing
   id: UplinkChimpUpgradeKit
   name: uplink-chimp-upgrade-kit-name
@@ -123,6 +131,7 @@
     - !type:BuyerDepartmentCondition
       whitelist:
       - Science
+
 
 - type: listing
   id: uplinkProximityMine
@@ -145,6 +154,7 @@
       components:
       - SurplusBundle
 
+
 - type: listing
   id: UplinkSyndicateSpongeBox
   name: uplink-syndicate-sponge-box-name
@@ -166,12 +176,13 @@
     - ResearchDirector
     - Chef
 
+
 - type: listing
   id: UplinkCaneBlade
   name: uplink-cane-blade-name
   description: uplink-cane-blade-desc
   icon: { sprite:  Objects/Weapons/Melee/cane.rsi, state: cane}
-  productEntity: CaneSheathFilled
+  productEntity: BoxCaneBlade # Sunrise-Edit
   discountCategory: rareDiscounts
   discountDownTo:
     Telecrystal: 2
@@ -183,6 +194,7 @@
   - !type:BuyerJobCondition
     whitelist:
     - Librarian
+
 
 - type: listing
   id: UplinkCombatBakery
@@ -203,6 +215,7 @@
     - Chef
     - Mime
 
+
 - type: listing
   id: UplinkAcolyteArmor
   name: uplink-acolyte-armor-name
@@ -221,6 +234,7 @@
     whitelist:
     - Chaplain
 
+
 - type: listing
   id: UplinkSawAdvanced
   name: uplink-saw-advanced-name
@@ -238,6 +252,7 @@
   - !type:BuyerJobCondition
     whitelist:
     - MedicalDoctor
+
 
 - type: listing
   id: uplinkBriefcaseGun

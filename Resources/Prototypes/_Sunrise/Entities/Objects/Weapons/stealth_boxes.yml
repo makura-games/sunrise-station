@@ -1,0 +1,272 @@
+# Ящики для скрытой экипировки синдиката.
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxBackpackChameleon
+  name: chameleon kit box
+  description: A box containing a chameleon kit. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: Objects/Storage/boxes.rsi
+    state: box_of_doom_big
+  - type: Item
+    size: Huge
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingBackpackChameleonFillAgent
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxGlovesConducting
+  name: conducting gloves box
+  description: A box containing a pair of conducting gloves. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/boxicons.rsi
+    state: insulfake
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingHandsGlovesConducting
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxBoxingGlovesRigged
+  name: rigged boxing gloves box
+  description: A box containing a pair of rigged boxing gloves. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/boxicons.rsi
+    state: boxingglovesfake
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingHandsGlovesBoxingRiggedRed
+      orGroup: RiggedBoxingGloves
+    - id: ClothingHandsGlovesBoxingRiggedBlue
+      orGroup: RiggedBoxingGloves
+    - id: ClothingHandsGlovesBoxingRiggedGreen
+      orGroup: RiggedBoxingGloves
+    - id: ClothingHandsGlovesBoxingRiggedYellow
+      orGroup: RiggedBoxingGloves
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxMaskGasVoiceChameleon
+  name: chameleon voice mask box
+  description: A box containing a chameleon voice mask. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/boxicons.rsi
+    state: gasmaskfake
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingMaskGasVoiceChameleon
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxShoesChameleonNoSlips
+  name: no-slip shoes box
+  description: A box containing a pair of no-slip shoes. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/boxicons.rsi
+    state: shoesfake
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingShoesChameleonNoSlips
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxCapGunFake
+  name: lethal cap gun box
+  description: A box containing a lethal cap gun. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/boxicons.rsi
+    state: capgunlethal
+  - type: SpawnItemsOnUse
+    items:
+    - id: RevolverCapGunFake
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxNukeDiskFake
+  name: decoy nuclear authentication disk box
+  description: A box containing a decoy nuclear authentication disk. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/boxicons.rsi
+    state: nukediskfake
+  - type: SpawnItemsOnUse
+    items:
+    - id: NukeDiskFake
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxLanternFlash
+  name: extra-bright lantern
+  description: A box containing an extra-bright lantern. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/boxicons.rsi
+    state: lanternflash
+  - type: SpawnItemsOnUse
+    items:
+    - id: LanternFlash
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxBananaPeelExplosiveUnarmed
+  name: explosive banana box
+  description: A box containing an unarmed explosive banana. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/boxicons.rsi
+    state: bananafake
+  - type: SpawnItemsOnUse
+    items:
+    - id: TrashBananaPeelExplosiveUnarmed
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxWeaponTurretSyndicateDisposable
+  name: disposable ballistic turret box
+  description: A box containing a ballistic turret disguised as a toolbox. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/boxicons.rsi
+    state: sentry
+  - type: Item
+    size: Huge
+  - type: SpawnItemsOnUse
+    items:
+    - id: ToolboxElectricalTurretFilled
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxCaneBlade
+  name: cane blade box
+  description: A box containing a sheathed cane blade. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/boxicons.rsi
+    state: canefake
+  - type: SpawnItemsOnUse
+    items:
+    - id: CaneSheathFilled
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxClusterBananaPeelExplosiveUnarmed
+  name: cluster explosive banana box
+  description: A box containing a cluster explosive banana. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/boxicons.rsi
+    state: bananafake
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClusterBananaPeel
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxSyndicateBombFake
+  name: fake syndicate bomb box
+  description: A box containing an unarmed fake syndicate bomb. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/boxicons.rsi
+    state: syndiebombfake
+  - type: Item
+    size: Huge
+  - type: SpawnItemsOnUse
+    items:
+    - id: SyndicateBombFake
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxAgentIDCard
+  name: agent ID box
+  description: A box containing an Agent ID. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/boxicons.rsi
+    state: pdafake
+  - type: SpawnItemsOnUse
+    items:
+    - id: AgentIDCard
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxSyndicateBomb
+  name: syndicate bomb box
+  description: A box containing a syndicate bomb. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/boxicons.rsi
+    state: box_of_doom
+  - type: Item
+    size: Huge
+  - type: SpawnItemsOnUse
+    items:
+    - id: SyndicateBomb
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxSingularityBeacon
+  name: singularity beacon box
+  description: A box containing a singularity beacon. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/boxicons.rsi
+    state: syngularity
+  - type: SpawnItemsOnUse
+    items:
+    - id: SingularityBeacon
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BoxSyndicateBombEMP
+  name: syndicate EMP bomb box
+  description: A box containing a syndicate EMP bomb. Packaging disintegrates when opened, leaving no evidence behind.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Storage/boxicons.rsi
+    state: syndieempbombfake
+  - type: Item
+    size: Huge
+  - type: SpawnItemsOnUse
+    items:
+    - id: SyndicateBombEMP
+    sound:
+      path: /Audio/Effects/unwrap.ogg

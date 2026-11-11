@@ -1,5 +1,4 @@
 # Deception
-
 - type: listing
   id: UplinkSyndicateIDCard
   name: uplink-syndicate-id-card-name
@@ -10,11 +9,13 @@
   categories:
   - UplinkDeception
 
+
 - type: listing
   id: UplinkAgentIDCard
   name: uplink-agent-id-card-name
   description: uplink-agent-id-card-desc
-  productEntity: AgentIDCard
+  icon: { sprite: /Textures/Objects/Misc/id_cards.rsi, state: default } # Sunrise-Edit
+  productEntity: BoxAgentIDCard # Sunrise-Edit
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 1
@@ -22,6 +23,7 @@
     Telecrystal: 3
   categories:
   - UplinkDeception
+
 
 - type: listing
   id: UplinkStealthBox
@@ -36,6 +38,7 @@
   categories:
   - UplinkDeception
 
+
 - type: listing
   id: UplinkChameleonProjector
   name: uplink-chameleon-projector-name
@@ -48,6 +51,7 @@
     Telecrystal: 3
   categories:
   - UplinkDeception
+
 
 - type: listing
   id: UplinkHeadsetEncryptionKey
@@ -63,6 +67,7 @@
   categories:
   - UplinkDeception
 
+
 - type: listing
   id: UplinkBinaryTranslatorKey
   name: uplink-binary-translator-key-name
@@ -74,6 +79,7 @@
   categories:
   - UplinkDeception
 
+
 - type: listing
   id: UplinkCyberpen
   name: uplink-cyberpen-name
@@ -84,15 +90,18 @@
   categories:
   - UplinkDeception
 
+
 - type: listing
   id: UplinkDecoyDisk
   name: uplink-decoy-disk-name
   description: uplink-decoy-disk-desc
-  productEntity: NukeDiskFake
+  icon: { sprite: Objects/Misc/nukedisk.rsi, state: icon } # Sunrise-Edit
+  productEntity: BoxNukeDiskFake # Sunrise-Edit
   cost:
     Telecrystal: 1
   categories:
   - UplinkDeception
+
 
 - type: listing
   id: UplinkBribe
@@ -106,6 +115,7 @@
     Telecrystal: 4
   categories:
     - UplinkDeception
+
 
 # - type: listing
 #   id: UplinkGigacancerScanner
@@ -121,7 +131,8 @@
   id: UplinkSyndicateBombFake
   name: uplink-exploding-syndicate-bomb-fake-name
   description: uplink-exploding-syndicate-bomb-fake-desc
-  productEntity: SyndicateBombFake
+  icon: { sprite: Structures/Machines/bomb.rsi, state: syndicate-bomb } # Sunrise-Edit
+  productEntity: BoxSyndicateBombFake # Sunrise-Edit
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 1
@@ -136,11 +147,12 @@
       tags:
       - NukeOpsUplink
 
+
 - type: listing
   id: UplinkSyndicateBombFakeNukie
   name: uplink-exploding-syndicate-bomb-fake-name
   description: uplink-exploding-syndicate-bomb-fake-desc
-  productEntity: SyndicateBombFake
+  productEntity: BoxSyndicateBombFake # Sunrise-Edit
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 1
@@ -154,6 +166,7 @@
       tags:
       - NukeOpsUplink
 
+
 - type: listing
   id: UplinkTravelCamera
   name: uplink-travel-camera-name
@@ -163,6 +176,7 @@
     Telecrystal: 1
   categories:
   - UplinkDeception
+
 
 - type: listing
   id: UplinkSmugglerSatchel
