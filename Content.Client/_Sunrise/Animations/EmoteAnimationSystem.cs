@@ -4,18 +4,21 @@ using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 using Robust.Shared.Animations;
 using Robust.Shared.GameStates;
+using Robust.Shared.Timing;
 
 namespace Content.Client._Sunrise.Animations;
 
 public sealed partial class EmoteAnimationSystem : EntitySystem
 {
     [Dependency] private AnimationPlayerSystem _animationSystem = default!;
+    [Dependency] private SpriteAnimationSystem _spriteAnimation = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly Dictionary<string, Action<EntityUid>> _emoteList = new();
 
     public const string AnimationKey = "emoteAnimationKeyId";
     private const string AnimationKeyTurn = "emoteAnimationKeyId_rotate";
-    private const string StaminaAnimationKey = "stamina";
+    private const string JumpAnimationKey = "jump";
 
     public override void Initialize()
     {
@@ -23,70 +26,22 @@ public sealed partial class EmoteAnimationSystem : EntitySystem
 
         _emoteList.Add("Flip", uid =>
         {
-            if (_animationSystem.HasRunningAnimation(uid, AnimationKey))
-                return;
-
-            var baseAngle = Angle.Zero;
-            if (TryComp(uid, out SpriteComponent? sprite))
-            {
-                baseAngle = sprite.Rotation;
-            }
-
-            var animation = new Animation
-            {
-                Length = TimeSpan.FromMilliseconds(500),
-                AnimationTracks =
-                {
-                    new AnimationTrackComponentProperty
-                    {
-                        ComponentType = typeof(SpriteComponent),
-                        Property = nameof(SpriteComponent.Rotation),
-                        InterpolationMode = AnimationInterpolationMode.Linear,
-                        KeyFrames =
-                        {
-                            new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(baseAngle.Degrees - 10), 0f),
-                            new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(baseAngle.Degrees + 180), 0.25f),
-                            new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(baseAngle.Degrees + 360), 0.25f),
-                            new AnimationTrackProperty.KeyFrame(Angle.FromDegrees(baseAngle.Degrees), 0f),
-                        }
-                    }
-                }
-            };
-
-            _animationSystem.Play(uid, animation, AnimationKey);
+            _spriteAnimation.PlayRotation(uid, AnimationKey,
+                (Angle.FromDegrees(-10), 0f),
+                (Angle.FromDegrees(180), 0.25f),
+                (Angle.FromDegrees(360), 0.25f),
+                (Angle.Zero, 0f));
         });
-
-        // Анимация прыжка использует слот FatigueAnimation (StaminaAnimationKey),
-        // перехватывая его у периодической анимации из StunSystem, которая тоже имеет offset
-        // Это решает конфликт KeyFrame при одновременном наложении двух анимаций
         _emoteList.Add("Jump", uid =>
         {
-            if (_animationSystem.HasRunningAnimation(uid, StaminaAnimationKey))
-                _animationSystem.Stop(uid, StaminaAnimationKey);
-
-            var animation = new Animation
-            {
-                Length = TimeSpan.FromMilliseconds(500),
-                AnimationTracks =
-                {
-                    new AnimationTrackComponentProperty
-                    {
-                        ComponentType = typeof(SpriteComponent),
-                        Property = nameof(SpriteComponent.Offset),
-                        InterpolationMode = AnimationInterpolationMode.Cubic,
-                        KeyFrames =
-                        {
-                            new AnimationTrackProperty.KeyFrame(Vector2.Zero, 0f),
-                            new AnimationTrackProperty.KeyFrame(new Vector2(0, 0.3f), 0.125f),
-                            new AnimationTrackProperty.KeyFrame(new Vector2(0, 0.7f), 0.125f),
-                            new AnimationTrackProperty.KeyFrame(new Vector2(0, 0.3f), 0.125f),
-                            new AnimationTrackProperty.KeyFrame(Vector2.Zero, 0.125f)
-                        }
-                    }
-                }
-            };
-
-            _animationSystem.Play(uid, animation, StaminaAnimationKey);
+            _spriteAnimation.PlayOffset(uid,
+                JumpAnimationKey,
+                true,
+                (Vector2.Zero, 0f),
+                (new Vector2(0f, 0.3f), 0.125f),
+                (new Vector2(0f, 0.7f), 0.125f),
+                (new Vector2(0f, 0.3f), 0.125f),
+                (Vector2.Zero, 0.125f));
         });
 
         _emoteList.Add("Dance", uid =>
@@ -129,10 +84,21 @@ public sealed partial class EmoteAnimationSystem : EntitySystem
         if (args.Current is not EmoteAnimationComponent.EmoteAnimationComponentState state)
             return;
 
+        var replay = component.StartedAt == state.StartedAt;
         component.AnimationId = state.AnimationId;
+        component.StartedAt = state.StartedAt;
+        var elapsed = MathF.Max(0f, (float) (_timing.CurTime - state.StartedAt).TotalSeconds);
+        var duration = state.AnimationId == "Dance" ? 0.9f : 0.5f;
+        if (replay || elapsed >= duration)
+            return;
+
         if (_emoteList.TryGetValue(component.AnimationId, out var value))
         {
             value.Invoke(uid);
+            if (component.AnimationId == "Jump")
+                _spriteAnimation.Seek(uid, JumpAnimationKey, elapsed);
+            else if (component.AnimationId == "Flip")
+                _spriteAnimation.Seek(uid, AnimationKey, elapsed);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Client._Sunrise.Animations;
 using Content.Shared._Sunrise.Movement.Carrying;
 using Robust.Client.GameObjects;
 
@@ -7,7 +8,7 @@ namespace Content.Client._Sunrise.Movement;
 
 public sealed partial class CarryingSystem : SharedCarryingSystem
 {
-    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private SpriteAnimationSystem _spriteAnimation = default!;
 
     private readonly Dictionary<EntityUid, CarriedVisualState> _visualStates = new();
 
@@ -79,14 +80,14 @@ public sealed partial class CarryingSystem : SharedCarryingSystem
         if (!_visualStates.TryGetValue(ent.Owner, out var state))
         {
             state = new CarriedVisualState(
-                sprite.Offset,
+                _spriteAnimation.GetBaseOffset((ent.Owner, sprite)),
                 sprite.NoRotation,
                 sprite.EnableDirectionOverride,
                 sprite.DirectionOverride);
             _visualStates.Add(ent.Owner, state);
         }
 
-        _sprite.SetOffset((ent.Owner, sprite), state.Offset + new Vector2(0f, carrierComp.CarriedOffset));
+        _spriteAnimation.SetBaseOffset((ent.Owner, sprite), state.Offset + new Vector2(0f, carrierComp.CarriedOffset));
         sprite.NoRotation = true;
         sprite.EnableDirectionOverride = true;
         sprite.DirectionOverride = Direction.South;
@@ -100,7 +101,7 @@ public sealed partial class CarryingSystem : SharedCarryingSystem
         if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;
 
-        _sprite.SetOffset((uid, sprite), state.Offset);
+        _spriteAnimation.SetBaseOffset((uid, sprite), state.Offset);
         sprite.NoRotation = state.NoRotation;
         sprite.EnableDirectionOverride = state.EnableDirectionOverride;
         sprite.DirectionOverride = state.DirectionOverride;
