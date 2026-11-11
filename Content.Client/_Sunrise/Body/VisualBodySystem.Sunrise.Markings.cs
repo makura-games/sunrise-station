@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Client._Sunrise.MarkingEffectsClient;
 using Content.Shared._Sunrise.MarkingEffects;
+using Content.Shared._Sunrise.Mood;
 using Content.Shared.Body;
 using Content.Shared.DisplacementMap;
 using Content.Shared.Humanoid;
@@ -16,6 +17,8 @@ namespace Content.Client.Body;
 
 public sealed partial class VisualBodySystem
 {
+    [Dependency] private MoodVisualsSystem _moodVisuals = default!;
+
     public void ApplySunriseMarkingEffects(Entity<VisualOrganMarkingsComponent> ent, EntityUid target)
     {
         if (!TryComp<SpriteComponent>(target, out var spriteComp))

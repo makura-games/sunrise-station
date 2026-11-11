@@ -1,44 +1,41 @@
 - type: marking
-  id: MiliraEars
-  bodyPart: HeadTop
+  id: BaseSunriseMarkingMiliraEars
+  abstract: true
+  bodyPart: HeadSide
   forcedColoring: true
   groupWhitelist: [ Milira ]
+
+- type: marking
+  id: MiliraEars
+  parent: BaseSunriseMarkingMiliraEars
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Milira/milira_ears.rsi
     state: ears_standard
 
 - type: marking
   id: MiliraEarsShortened
-  bodyPart: HeadTop
-  forcedColoring: true
-  groupWhitelist: [ Milira ]
+  parent: BaseSunriseMarkingMiliraEars
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Milira/milira_ears.rsi
     state: ears_standard_shortened
 
 - type: marking
   id: MiliraEarsStraight
-  bodyPart: HeadTop
-  forcedColoring: true
-  groupWhitelist: [ Milira ]
+  parent: BaseSunriseMarkingMiliraEars
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Milira/milira_ears.rsi
     state: ears_straight
 
 - type: marking
   id: MiliraEarsCurved
-  bodyPart: HeadTop
-  forcedColoring: true
-  groupWhitelist: [ Milira ]
+  parent: BaseSunriseMarkingMiliraEars
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Milira/milira_ears.rsi
     state: ears_curved
 
 - type: marking
   id: MiliraEarsCurvedShortened
-  bodyPart: HeadTop
-  forcedColoring: true
-  groupWhitelist: [ Milira ]
+  parent: BaseSunriseMarkingMiliraEars
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Milira/milira_ears.rsi
     state: ears_curved_shortened
