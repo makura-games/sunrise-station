@@ -23,6 +23,9 @@
                        StyleClasses="LabelKeyText"/>
                 <CheckBox Name="ShowHeldItemCheckBox" Text="{Loc 'ui-options-show-held-item'}" />
                 <CheckBox Name="ShowCombatModeIndicatorsCheckBox" Text="{Loc 'ui-options-show-combat-mode-indicators'}" />
+                <!-- Sunrise edit start - отдельная настройка значка боевого режима -->
+                <CheckBox Name="ShowCombatModeOverheadIndicatorCheckBox" Text="{Loc 'ui-options-combat-mode-overhead-indicator'}" />
+                <!-- Sunrise edit end -->
                 <Label Text="{Loc 'ui-options-general-storage'}"
                        StyleClasses="LabelKeyText"/>
                 <CheckBox Name="OpaqueStorageWindowCheckBox" Text="{Loc 'ui-options-opaque-storage-window'}" />

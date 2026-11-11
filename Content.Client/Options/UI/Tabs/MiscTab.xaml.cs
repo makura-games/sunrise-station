@@ -52,6 +52,9 @@ public sealed partial class MiscTab : Control
         Control.AddOptionCheckBox(CCVars.LoocAboveHeadShow, ShowLoocAboveHeadCheckBox);
         Control.AddOptionCheckBox(CCVars.HudHeldItemShow, ShowHeldItemCheckBox);
         Control.AddOptionCheckBox(CCVars.CombatModeIndicatorsPointShow, ShowCombatModeIndicatorsCheckBox);
+        // Sunrise edit start - связываем отдельную настройку со значком над персонажем
+        Control.AddOptionCheckBox(SunriseCCVars.CombatModeOverheadIndicatorEnabled, ShowCombatModeOverheadIndicatorCheckBox);
+        // Sunrise edit end
         Control.AddOptionCheckBox(CCVars.OpaqueStorageWindow, OpaqueStorageWindowCheckBox);
         Control.AddOptionCheckBox(CCVars.ChatEnableFancyBubbles, FancySpeechBubblesCheckBox);
         Control.AddOptionCheckBox(CCVars.ChatFancyNameBackground, FancyNameBackgroundsCheckBox);
