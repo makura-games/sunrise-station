@@ -11,61 +11,53 @@ using Content.Server.Roles;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
-using Content.Server.AlertLevel;
 using Content.Shared.Database;
 using Content.Shared.Flash;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mind.Components;
-using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
+using Content.Shared.Revolutionary;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Roles.Components;
 using Content.Shared.Stunnable;
-using Content.Shared.Zombies;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Content.Shared.Cuffs.Components;
 using Robust.Shared.Player;
-using Content.Server.Administration.Managers;
-using Content.Server.Administration.Systems;
-using Content.Shared.Popups;
+using Content.Shared.Mindshield;
 
 namespace Content.Server.GameTicking.Rules;
 
 /// <summary>
 /// Where all the main stuff for Revolutionaries happens (Assigning Head Revs, Command on station, and checking for the game to end.)
 /// </summary>
-public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleComponent>
+public sealed partial class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleComponent>
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly EmergencyShuttleSystem _emergencyShuttle = default!;
-    [Dependency] private readonly EuiManager _euiMan = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly RoleSystem _role = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly AlertLevelSystem _alertLevel = default!; // Sunrise-Edit
-    [Dependency] private readonly AdminVerbSystem _adminVerbSystem = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
+    [Dependency] private EuiManager _euiMan = default!;
+    [Dependency] private IAdminLogManager _adminLogManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private RoleSystem _role = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private MindShieldSystem _mindShield = default!;
 
     //Used in OnPostFlash, no reference to the rule component is available
     public readonly ProtoId<NpcFactionPrototype> RevolutionaryNpcFaction = "Revolutionary";
     public readonly ProtoId<NpcFactionPrototype> RevPrototypeId = "Rev";
-    private Dictionary<EntityUid, TimeSpan> _scheduledSmites = new();
-
-
 
     public override void Initialize()
     {
@@ -88,37 +80,14 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
     protected override void ActiveTick(EntityUid uid, RevolutionaryRuleComponent component, GameRuleComponent gameRule, float frameTime)
     {
         base.ActiveTick(uid, component, gameRule, frameTime);
-        // Check for command loss or if a banned player needs to be smited.
         if (component.CommandCheck <= _timing.CurTime)
         {
             component.CommandCheck = _timing.CurTime + component.TimerWait;
 
-            // Check for command loss
             if (CheckCommandLose())
             {
-                //  Sunrise-Edit-Start
-                var stations = _stationSystem.GetStations();
-                foreach (var station in stations)
-                {
-                    _alertLevel.SetLevel(station, "epsilon", true, true, true);
-                }
-                _roundEnd.EndRound();
-                //  Sunrise-Edit-End
+                HandleSunriseCommandLoss(); // Sunrise-Edit - включаем Epsilon перед завершением раунда.
                 GameTicker.EndGameRule(uid, gameRule);
-            }
-
-            // Execute scheduled smites for banned players
-            if (_scheduledSmites.Count > 0)
-            {
-                var currentTime = _timing.CurTime;
-                foreach (var entity in _scheduledSmites.Keys.ToList().Where(entity => _scheduledSmites[entity] <= currentTime))
-                {
-                    if (Exists(entity))
-                    {
-                        _adminVerbSystem.RandomDeath(entity);
-                    }
-                    _scheduledSmites.Remove(entity);
-                }
             }
         }
     }
@@ -137,7 +106,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
         var index = (commandLost ? 1 : 0) | (revsLost ? 2 : 0);
         args.AddLine(Loc.GetString(Outcomes[index]));
 
-        var sessionData = _antag.GetAntagIdentifiers(uid);
+        var sessionData = _antag.GetAntagIdentifiers(uid).ToList();
         args.AddLine(Loc.GetString("rev-headrev-count", ("initialCount", sessionData.Count)));
         foreach (var (mind, data, name) in sessionData)
         {
@@ -174,16 +143,22 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
         if (!_mind.TryGetMind(ev.Target, out var mindId, out var mind) && !alwaysConvertible)
             return;
 
-        if (HasComp<RevolutionaryComponent>(ev.Target) ||
-            HasComp<MindShieldComponent>(ev.Target) ||
-            HasComp<CommandStaffComponent>(ev.Target) ||
+        // Sunrise-Edit - командование нельзя обратить даже через расширяемую проверку конвертации.
+        if (HasComp<CommandStaffComponent>(ev.Target) ||
             !HasComp<HumanoidProfileComponent>(ev.Target) &&
             !alwaysConvertible ||
             !_mobState.IsAlive(ev.Target) ||
-            HasComp<ZombieComponent>(ev.Target))
+            !HasComp<RevolutionaryConverterComponent>(ev.Used))
         {
             return;
         }
+
+        var attemptConvertEv = new AttemptConvertRevolutionaryEvent();
+        RaiseLocalEvent(ev.Target, ref attemptConvertEv);
+
+        _mindShield.GetMindshieldStatus(ev.Target, out var isMindshielded, out _);
+        if (attemptConvertEv.Cancelled || isMindshielded)
+            return;
 
         _npcFaction.AddFaction(ev.Target, RevolutionaryNpcFaction);
         var revComp = EnsureComp<RevolutionaryComponent>(ev.Target);
@@ -338,15 +313,6 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
         }
 
         return gone == list.Count || list.Count == 0;
-    }
-
-    private void KillDueToBan(EntityUid target)
-    {
-        _popup.PopupEntity(Loc.GetString("rev-banned"), target, target, PopupType.LargeCaution);
-
-        var randomDelay = new Random().Next(10, 60); // 10-60 seconds
-        var targetTime = _timing.CurTime + TimeSpan.FromSeconds(randomDelay);
-        _scheduledSmites[target] = targetTime;
     }
 
     private static readonly string[] Outcomes =

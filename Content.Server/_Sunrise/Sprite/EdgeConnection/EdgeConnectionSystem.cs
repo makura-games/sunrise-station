@@ -9,14 +9,14 @@ namespace Content.Server._Sunrise.Sprite.EdgeConnection;
 /// Handles visual edge connections between entities placed adjacent to each other.
 /// Updates appearance data based on neighboring entities with matching connection keys.
 /// </summary>
-public sealed class EdgeConnectionSystem : EntitySystem
+public sealed partial class EdgeConnectionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
     private const float MinimumMovementDistance = 0.005f;
 
-    private EntityQuery<EdgeConnectionComponent> _edgeQuery;
+    [Dependency] private EntityQuery<EdgeConnectionComponent> _edgeQuery = default!;
 
     public override void Initialize()
     {
@@ -27,7 +27,6 @@ public sealed class EdgeConnectionSystem : EntitySystem
         SubscribeLocalEvent<EdgeConnectionComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<EdgeConnectionComponent, MoveEvent>(OnMove);
 
-        _edgeQuery = GetEntityQuery<EdgeConnectionComponent>();
     }
 
     private void OnInit(Entity<EdgeConnectionComponent> ent, ref ComponentInit args)

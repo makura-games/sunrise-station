@@ -31,9 +31,9 @@ public sealed partial class CustomInteractionEditor : DefaultWindow
 
     #region Dependencies
 
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
-    [Dependency] private readonly CustomInteractionService _customInteractionService = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
+    [Dependency] private CustomInteractionService _customInteractionService = default!;
 
     private readonly SharedAudioSystem _audio = default!;
 

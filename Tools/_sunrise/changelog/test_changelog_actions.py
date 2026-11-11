@@ -1,3 +1,4 @@
+import base64
 import io
 import json
 import os
@@ -16,21 +17,137 @@ os.environ["CHANGELOG_FILE"] = "Resources/Changelog/ChangelogSunrise.yml"
 
 import actions_changelogs_since_last_run as discord_changelog
 import changelog_actions
+import changelog_schema
 import changelog_targets
 import dispatch_changelogs
 import manual_changelog
 
+discord_changelog.DISCORD_WEBHOOK_URL = (
+    "https://discord.com/api/webhooks/123/test-token"
+)
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-WORKFLOW_PATH = REPO_ROOT / ".github/workflows/changelog.yml"
-PUBLISH_WORKFLOW_PATH = REPO_ROOT / ".github/workflows/publish-stable.yml"
-DISCORD_WORKFLOW_PATH = REPO_ROOT / ".github/workflows/publish-discord-changelog.yml"
-DISPATCH_WORKFLOW_PATH = REPO_ROOT / ".github/workflows/dispatch-discord-changelogs.yml"
-VALIDATE_WORKFLOW_PATH = REPO_ROOT / ".github/workflows/validate-changelog.yml"
+WORKFLOW_PATH = REPO_ROOT / ".github/workflows/sunrise-changelog.yml"
+PUBLISH_WORKFLOW_PATH = REPO_ROOT / ".github/workflows/sunrise-publish-stable.yml"
+DISCORD_WORKFLOW_PATH = REPO_ROOT / ".github/workflows/sunrise-publish-discord-changelog.yml"
+DISPATCH_WORKFLOW_PATH = REPO_ROOT / ".github/workflows/sunrise-dispatch-discord-changelogs.yml"
+VALIDATE_WORKFLOW_PATH = REPO_ROOT / ".github/workflows/sunrise-validate-changelog.yml"
 RUNNER_PATH = REPO_ROOT / "Tools/_sunrise/changelog/run.sh"
 
 
 class ChangelogActionsTests(unittest.TestCase):
+    def test_manual_form_only_exposes_target_and_entry_ids(self):
+        path = REPO_ROOT / ".github/workflows/sunrise-send-discord-changelog-range.yml"
+        workflow = yaml.safe_load(path.read_text())
+        self.assertEqual({"target_id", "from_id", "to_id"}, set(workflow[True]["workflow_dispatch"]["inputs"]))
+        job = workflow["jobs"]["publish"]
+        self.assertEqual("${{ github.sha }}", job["with"]["released_sha"])
+        self.assertTrue(job["with"]["manual_range"])
+
+    def test_dispatcher_passes_exact_released_sha(self):
+        with patch.object(dispatch_changelogs, "github_request") as request:
+            dispatch_changelogs.dispatch_target("org/repo", "token", "master", "123", "a" * 40, "sunrise")
+        self.assertEqual({
+            "target_id": "sunrise", "released_sha": "a" * 40, "source_workflow_run_id": "123",
+        }, request.call_args.args[2]["inputs"])
+
+    def test_manual_empty_bounds_send_whole_file_without_history(self):
+        with patch.dict(os.environ, {
+            "CHANGELOG_FROM_ID": "", "CHANGELOG_TO_ID": "", "CHANGELOG_MANUAL_RANGE": "true",
+            "SOURCE_WORKFLOW_RUN_ID": "", "CHANGELOG_TARGET_ID": "sunrise", "RELEASED_SHA": "a" * 40,
+            "GITHUB_REPOSITORY": "org/repo", "GITHUB_TOKEN": "token", "GITHUB_RUN_ID": "123",
+            "DISCORD_WEBHOOK_URL": "https://discord.com/api/webhooks/123/test-token",
+        }), patch.object(discord_changelog, "get_released_changelog", return_value="Entries:\n- id: 10\n- id: 12\n"), patch.object(
+            discord_changelog, "get_last_changelog"
+        ) as history, patch.object(discord_changelog, "send_to_discord") as send:
+            discord_changelog.main()
+        history.assert_not_called()
+        self.assertEqual([10, 12], [entry["id"] for entry in send.call_args.args[0]])
+
+    def test_automatic_checkpoint_can_use_manual_delivery_history(self):
+        session = Mock()
+        current = {"id": 300, "created_at": "2026-09-27T00:00:00Z"}
+        session.get.return_value.json.return_value = {"workflow_runs": [
+            {"id": 250, "path": ".github/workflows/unrelated.yml", "display_title": f"Discord changelog sunrise for {'b' * 40}"},
+            {"id": 200, "path": ".github/workflows/sunrise-send-discord-changelog-range.yml", "display_title": f"Discord changelog sunrise for {'a' * 40}"},
+        ]}
+        with patch.object(discord_changelog, "get_current_run", return_value=current):
+            previous = discord_changelog.get_most_recent_workflow(session, "org/repo", "300", "sunrise")
+        self.assertEqual(200, previous["id"])
+        self.assertEqual("https://api.github.com/repos/org/repo/actions/runs", session.get.call_args.args[0])
+
+    def test_automatic_version_keeps_passed_sha_without_loading_source_run(self):
+        with patch.dict(os.environ, {
+            "CHANGELOG_FROM_ID": "", "CHANGELOG_TO_ID": "", "CHANGELOG_MANUAL_RANGE": "false",
+            "SOURCE_WORKFLOW_RUN_ID": "123", "CHANGELOG_TARGET_ID": "sunrise",
+            "RELEASED_SHA": "a" * 40, "GITHUB_SHA": "b" * 40, "GITHUB_REPOSITORY": "org/repo",
+            "GITHUB_TOKEN": "token", "GITHUB_RUN_ID": "456",
+            "DISCORD_WEBHOOK_URL": "https://discord.com/api/webhooks/123/test-token",
+        }), patch.object(dispatch_changelogs, "github_request") as request:
+            _, _, sha = discord_changelog.validate_runtime_environment()
+        self.assertEqual("a" * 40, sha)
+        request.assert_not_called()
+
+    def test_checkpoint_resolves_publish_run_and_keeps_legacy_sha(self):
+        session = Mock()
+        match = discord_changelog.DISCORD_RUN_TITLE_RE.fullmatch("Discord changelog sunrise for run 123")
+        with patch.object(discord_changelog, "get_current_run", return_value={
+            "display_title": f"Publish Stable {'a' * 40}", "head_commit": {"id": "b" * 40},
+        }) as load:
+            self.assertEqual("a" * 40, discord_changelog.checkpoint_sha(match, session, "org/repo"))
+            load.assert_called_once_with(session, "org/repo", "123")
+            load.reset_mock()
+            legacy = discord_changelog.DISCORD_RUN_TITLE_RE.fullmatch(f"Discord changelog sunrise for {'c' * 40}")
+            self.assertEqual("c" * 40, discord_changelog.checkpoint_sha(legacy, session, "org/repo"))
+            load.assert_not_called()
+
+    def test_manual_range_bypasses_history_and_source_run(self):
+        document = "Entries:\n- id: 10\n- id: 12\n- id: 15\n"
+        with patch.dict(os.environ, {
+            "CHANGELOG_FROM_ID": "12", "CHANGELOG_TO_ID": "",
+            "SOURCE_WORKFLOW_RUN_ID": "",
+            "CHANGELOG_TARGET_ID": "sunrise", "RELEASED_SHA": "a" * 40,
+            "GITHUB_REPOSITORY": "org/repo", "GITHUB_TOKEN": "token", "GITHUB_RUN_ID": "123",
+            "DISCORD_WEBHOOK_URL": "https://discord.com/api/webhooks/123/test-token",
+        }), patch.object(discord_changelog, "get_released_changelog", return_value=document), patch.object(
+            discord_changelog, "get_last_changelog"
+        ) as history, patch.object(discord_changelog, "send_to_discord") as send:
+            discord_changelog.main()
+        history.assert_not_called()
+        self.assertEqual([12, 15], [entry["id"] for entry in send.call_args.args[0]])
+
+    def test_manual_range_boundaries_and_invalid_ids(self):
+        document = {"Entries": [{"id": 15}, {"id": 10}, {"id": 12}]}
+        self.assertEqual([10, 12], [entry["id"] for entry in discord_changelog.select_id_range(document, None, 12)])
+        self.assertEqual([12], [entry["id"] for entry in discord_changelog.select_id_range(document, 12, 12)])
+        for entries in ([{"id": 10}, {"id": 10}], [{"id": True}], [{"id": "10"}], []):
+            with self.subTest(entries=entries), self.assertRaises(RuntimeError):
+                discord_changelog.select_id_range({"Entries": entries}, 10, None)
+        with self.assertRaises(RuntimeError):
+            discord_changelog.select_id_range(document, 20, None)
+        for start, end in (("15", "10"), ("0", ""), ("abc", "")):
+            with self.subTest(start=start, end=end), patch.dict(os.environ, {
+                "CHANGELOG_FROM_ID": start, "CHANGELOG_TO_ID": end,
+            }), self.assertRaises(RuntimeError):
+                discord_changelog.manual_id_range()
+
+    def test_rollback_changelog_uses_selected_sha(self):
+        selected_sha = "a" * 40
+        workflow_sha = "b" * 40
+        run = {
+            "display_title": f"Publish Stable {selected_sha.upper()}",
+            "head_commit": {"id": workflow_sha},
+        }
+        self.assertEqual(selected_sha, dispatch_changelogs.published_run_sha(run))
+        with patch.object(
+            dispatch_changelogs, "github_request", return_value=run
+        ):
+            self.assertEqual(selected_sha, dispatch_changelogs.resolve_released_sha("org/repo", "token", "123"))
+
+        self.assertEqual(workflow_sha, dispatch_changelogs.published_run_sha({"head_commit": run["head_commit"]}))
+        self.assertIsNone(dispatch_changelogs.published_run_sha({"head_commit": None}))
+
     def test_changelog_file_must_stay_inside_repository(self):
         for invalid_path in (
             "../outside.yml",
@@ -240,37 +357,43 @@ class ChangelogActionsTests(unittest.TestCase):
             parsed[1][0].changes,
         )
 
-    def test_parser_attaches_media_to_preceding_change(self):
+    def test_parser_reads_only_media_section_in_authored_order(self):
         parsed = changelog_actions.parse_pr_body(
+            "## Медиа (Видео/Скриншоты)\n"
+            "Рыба в игре\n"
+            "![Встроенная подпись](https://example.org/fish.png)\n"
+            "<!-- Служебный комментарий не становится описанием. -->\n"
+            "Демонстрация\n"
+            "механики\n"
+            "<img alt=\"image\" src=\"https://example.org/demo.gif\" />\n"
+            "[Видео](https://example.org/demo.webm)\n"
+            "### Следующий раздел\n"
+            "![Игнорируется](https://example.org/ignored.png)\n"
             ":cl: Иван\n"
             "- add: Добавлена новая рыба\n"
-            "media: https://example.org/fish.mp4\n"
-            "media: ![Рыба в игре](https://example.org/fish.png)\n"
-            "media: [Демонстрация](https://example.org/demo.webm)\n"
-            "ADMIN:\n"
-            "- fix: Исправлен доступ\n"
-            "media: ![Админская панель](https://example.org/admin.gif)",
+            "media: ![Вне раздела](https://example.org/outside.png)\n"
+            "![Тоже вне раздела](https://example.org/outside-2.png)",
             "Fallback",
-            ("Main", "Admin"),
         )
 
         self.assertEqual("Иван", parsed[0])
-        self.assertEqual([
-            {"url": "https://example.org/fish.mp4", "change": 0},
-            {"url": "https://example.org/fish.png", "description": "Рыба в игре", "change": 0},
-            {"url": "https://example.org/demo.webm", "description": "Демонстрация", "change": 0},
-        ], parsed[1][0].media)
         self.assertEqual(
-            [{"url": "https://example.org/admin.gif", "description": "Админская панель", "change": 0}],
-            parsed[1][1].media,
+            [{"type": "Add", "message": "Добавлена новая рыба"}],
+            parsed[1][0].changes,
         )
+        self.assertEqual([
+            {"url": "https://example.org/fish.png", "description": "Рыба в игре"},
+            {"url": "https://example.org/demo.gif", "description": "Демонстрация механики"},
+            {"url": "https://example.org/demo.webm", "description": "Видео"},
+        ], parsed[1][0].media)
 
     def test_parser_accepts_github_html_image(self):
         parsed = changelog_actions.parse_pr_body(
+            "## Медиа (Видео/Скриншоты) | Media (Video/Screenshots)\n"
+            "<img width=\"521\" height=\"404\" alt=\"image\" "
+            "src=\"https://github.com/user-attachments/assets/ff98fa13-dac1-48cf-bd9d-98e7110f33e6\" />\n"
             ":cl: KaiserMaus\n"
             "- fix: Исправлено ночное зрение вульп.\n"
-            "media: <img width=\"521\" height=\"404\" alt=\"image\" "
-            "src=\"https://github.com/user-attachments/assets/ff98fa13-dac1-48cf-bd9d-98e7110f33e6\" />\n"
             ":end-cl:",
             "Fallback",
         )
@@ -279,18 +402,83 @@ class ChangelogActionsTests(unittest.TestCase):
             [{
                 "url": "https://github.com/user-attachments/assets/ff98fa13-dac1-48cf-bd9d-98e7110f33e6",
                 "description": "image",
-                "change": 0,
             }],
             parsed[1][0].media,
         )
 
-    def test_parser_rejects_media_without_changes(self):
-        with self.assertRaisesRegex(ValueError, "категория Admin содержит медиа"):
+    def test_media_section_stops_at_any_heading_or_changelog(self):
+        for ending in ("# Раздел", "### Раздел", "###### Раздел", ":cl: Иван"):
+            with self.subTest(ending=ending):
+                media = changelog_actions.parse_pr_media_section(
+                    "## Media\n"
+                    "![Первое](https://example.org/first.png)\n"
+                    f"{ending}\n"
+                    "![Второе](https://example.org/second.png)"
+                )
+                self.assertEqual(
+                    [{"url": "https://example.org/first.png", "description": "Первое"}],
+                    media,
+                )
+
+        self.assertEqual(
+            [],
+            changelog_actions.parse_pr_media_section(
+                ":cl: Иван\n- add: Запись\n## Медиа\n![Поздно](https://example.org/late.png)"
+            ),
+        )
+
+    def test_media_marker_supports_translated_templates_and_heading_captions(self):
+        translated = changelog_actions.parse_pr_media_section(
+            "## Medien und Videos\n"
+            "<!-- changelog-media-section -->\n"
+            "Beschreibung aus der Vorlage\n"
+            "![Bild](https://example.org/image.png)\n"
+            "## Nächster Abschnitt"
+        )
+        self.assertEqual(
+            [{"url": "https://example.org/image.png", "description": "Beschreibung aus der Vorlage"}],
+            translated,
+        )
+
+        for heading in ("## Media — screenshots", "## Media: video", "## Медиа / Скриншоты"):
+            with self.subTest(heading=heading):
+                self.assertEqual(
+                    [{"url": "https://example.org/image.png", "description": "Подпись"}],
+                    changelog_actions.parse_pr_media_section(
+                        f"{heading}\nПодпись\n![Встроенный alt](https://example.org/image.png)"
+                    ),
+                )
+
+        self.assertEqual(
+            [],
+            changelog_actions.parse_pr_media_section(
+                "## Medien und Videos\n![Без маркера](https://example.org/image.png)"
+            ),
+        )
+
+        template = (REPO_ROOT / changelog_actions.PULL_REQUEST_TEMPLATE_PATH).read_text(encoding="utf-8")
+        self.assertIn("<!-- changelog-media-section -->", template)
+
+    def test_media_is_ignored_without_changelog_and_outside_media_section(self):
+        self.assertIsNone(
             changelog_actions.parse_pr_body(
-                ":cl: Иван\nADMIN:\nmedia: https://example.org/admin.png",
+                "## Медиа\n![Рыба](https://example.org/fish.png)",
                 "Fallback",
-                ("Main", "Admin"),
+            ),
+        )
+
+        output = io.StringIO()
+        with redirect_stdout(output):
+            parsed = changelog_actions.parse_pr_body(
+                ":cl: Иван\n"
+                "- add: Добавлена рыба\n"
+                "media: ![Вне раздела](https://example.org/outside.png)\n"
+                "![Тоже вне раздела](https://example.org/outside-2.png)",
+                "Fallback",
             )
+        self.assertEqual([], parsed[1][0].media)
+        self.assertEqual("Добавлена рыба", parsed[1][0].changes[0]["message"])
+        self.assertIn("Строка media: вне раздела", output.getvalue())
 
     def test_validation_reports_normalized_changelog(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -302,9 +490,11 @@ class ChangelogActionsTests(unittest.TestCase):
                     "pull_request": {
                         "number": 123,
                         "body": (
+                            "## Медиа\n"
+                            "Рыба\n"
+                            "<img alt=\"Старая подпись\" src=\"https://example.org/fish.png\" />\n"
                             ":cl: Иван\n"
-                            "- add: Добавлена <рыба>.\n"
-                            "media: <img alt=\"Рыба\" src=\"https://example.org/fish.png\" />"
+                            "- add: Добавлена <рыба>."
                         ),
                         "user": {"login": "Fallback"},
                     },
@@ -323,7 +513,8 @@ class ChangelogActionsTests(unittest.TestCase):
 
             summary = summary_path.read_text(encoding="utf-8")
 
-        self.assertIn("Результат разбора чейнджлога", summary)
+        self.assertIn("### Результат", summary)
+        self.assertIn("### Предварительный результат", summary)
         self.assertIn("author: Иван", summary)
         self.assertIn("Добавлена &lt;рыба&gt;.", summary)
         self.assertIn("https://example.org/fish.png", summary)
@@ -350,8 +541,11 @@ class ChangelogActionsTests(unittest.TestCase):
 
             summary = summary_path.read_text(encoding="utf-8")
 
-        self.assertIn("Чейнджлог не будет опубликован", summary)
-        self.assertIn("маркер `:cl:` или 🆑 отсутствует", summary)
+        self.assertIn("### Результат", summary)
+        self.assertIn("### Что это значит", summary)
+        self.assertIn("### Что делать дальше", summary)
+        self.assertIn("Блок чейнжлога в описании PR отсутствует", summary)
+        self.assertIn("добавьте блок `:cl:` по примеру из шаблона PR", summary)
 
     def test_validation_reports_parser_error(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -375,7 +569,7 @@ class ChangelogActionsTests(unittest.TestCase):
 
             summary = summary_path.read_text(encoding="utf-8")
 
-        self.assertIn("Ошибка разбора чейнджлога", summary)
+        self.assertIn("### Как исправить", summary)
         self.assertIn("не удалось распознать строку чейнжлога", summary)
 
     def test_manual_parser_requires_ci_author_and_supports_media(self):
@@ -627,15 +821,19 @@ class ChangelogActionsTests(unittest.TestCase):
             updater_path.write_bytes(
                 (REPO_ROOT / changelog_actions.UPDATER_PATH).read_bytes(),
             )
+            updater_path.with_name("changelog_schema.py").write_bytes(
+                (REPO_ROOT / "Tools/_sunrise/changelog/changelog_schema.py").read_bytes(),
+            )
 
             pull_request = {
                 "number": 123,
                 "merged": True,
                 "merged_at": "2026-07-29T11:16:50Z",
                 "body": (
+                    "## Медиа\n"
+                    "![Рыба](https://example.org/fish.png)\n"
                     ":cl: Tester\n"
-                    "- add: Added\n"
-                    "media: ![Рыба](https://example.org/fish.png)"
+                    "- add: Added"
                 ),
                 "html_url": "https://github.com/makura-games/sunrise-station/pull/123",
                 "user": {"login": "Fallback"},
@@ -654,7 +852,7 @@ class ChangelogActionsTests(unittest.TestCase):
             self.assertEqual("Tester", document["Entries"][0]["author"])
             self.assertEqual("Add", document["Entries"][0]["changes"][0]["type"])
             self.assertEqual(
-                [{"url": "https://example.org/fish.png", "description": "Рыба", "change": 0}],
+                [{"url": "https://example.org/fish.png", "description": "Рыба"}],
                 document["Entries"][0]["media"],
             )
             self.assertEqual("2026-07-29T11:16:50.0000000+00:00", document["Entries"][0]["time"])
@@ -662,6 +860,32 @@ class ChangelogActionsTests(unittest.TestCase):
                 0,
                 changelog_actions.write_pull_request_parts(repo_root, [pull_request], "master"),
             )
+
+    def test_updater_reports_multiple_categories_without_corrupting_json(self):
+        with tempfile.TemporaryDirectory() as directory:
+            repo_root = Path(directory)
+            changelog_dir = repo_root / changelog_actions.CHANGELOG_PATH
+            parts_dir = repo_root / changelog_actions.PARTS_PATH
+            updater_path = repo_root / changelog_actions.UPDATER_PATH
+            parts_dir.mkdir(parents=True)
+            updater_path.parent.mkdir(parents=True)
+            updater_path.write_bytes((REPO_ROOT / changelog_actions.UPDATER_PATH).read_bytes())
+            updater_path.with_name("changelog_schema.py").write_bytes(
+                (REPO_ROOT / "Tools/_sunrise/changelog/changelog_schema.py").read_bytes(),
+            )
+            (changelog_dir / "ChangelogSunrise.yml").write_text("Entries: []\n", encoding="utf-8")
+            (changelog_dir / "Fish.yml").write_text("Entries: []\n", encoding="utf-8")
+            (parts_dir / "fish.yml").write_text(
+                "category: Fish\nauthor: Рыба\nchanges:\n- type: Add\n  message: Добавлено\n",
+                encoding="utf-8",
+            )
+
+            reports = changelog_actions.update_changelogs(
+                repo_root,
+                {changelog_actions.MAIN_CATEGORY: "ChangelogSunrise.yml", "Fish": "Fish.yml"},
+            )
+
+        self.assertEqual([0, 1], [report["added"] for report in reports])
 
     def test_updater_handles_null_entries_deterministically_and_keeps_unicode(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -704,14 +928,33 @@ class ChangelogActionsTests(unittest.TestCase):
         self.assertEqual(2, len(message_lines))
         self.assertTrue(all(long_message in line for line in message_lines))
 
-    def test_updater_ignores_existing_entry_without_id(self):
+    def test_updater_repairs_missing_nested_and_duplicate_ids(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             changelog = root / "Changelog.yml"
             parts = root / "Parts"
             parts.mkdir()
             changelog.write_text(
-                "Entries:\n- author: Без идентификатора\n- author: С идентификатором\n  id: 7\n",
+                """Entries:
+- author: Без идентификатора
+  time: '2026-08-16T10:30:08+00:00'
+  changes:
+  - type: Add
+    message: Добавлено
+    id: 7
+- author: С идентификатором
+  time: '2026-08-16T11:30:08+00:00'
+  changes:
+  - type: Fix
+    message: Исправлено
+  id: 7
+- author: С повтором
+  time: '2026-08-16T12:30:08+00:00'
+  changes:
+  - type: Tweak
+    message: Изменено
+  id: 7
+""",
                 encoding="utf-8",
             )
             (parts / "part.yml").write_text(
@@ -719,7 +962,7 @@ class ChangelogActionsTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            subprocess.run(
+            result = subprocess.run(
                 [
                     sys.executable,
                     str(REPO_ROOT / "Tools/_sunrise/changelog/update_changelog.py"),
@@ -731,8 +974,39 @@ class ChangelogActionsTests(unittest.TestCase):
                 text=True,
             )
             document = yaml.safe_load(changelog.read_text(encoding="utf-8-sig"))
+            report = json.loads(result.stdout)
 
-        self.assertEqual(8, document["Entries"][-1]["id"])
+        self.assertEqual([7, 8, 9, 10], [entry["id"] for entry in document["Entries"]])
+        self.assertNotIn("id", document["Entries"][1]["changes"][0])
+        self.assertEqual(
+            ["nested_id", "missing_id", "duplicate_id"],
+            [repair["code"] for repair in report["repairs"]],
+        )
+
+    def test_updater_reports_non_mapping_changelog_root(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            changelog = root / "Changelog.yml"
+            parts = root / "Parts"
+            parts.mkdir()
+            changelog.write_text("- broken\n", encoding="utf-8")
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(REPO_ROOT / "Tools/_sunrise/changelog/update_changelog.py"),
+                    str(changelog),
+                    str(parts),
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                env={**os.environ, "PYTHONIOENCODING": "utf-8"},
+            )
+
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("Корень чейнжлога должен быть YAML-отображением", result.stderr)
 
     def test_changelog_targets_are_sorted_and_require_complete_configuration(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -889,7 +1163,7 @@ class ChangelogActionsTests(unittest.TestCase):
         }
 
         def request_response(path, *_args, **_kwargs):
-            if path.endswith("/actions/workflows/changelog.yml/runs"):
+            if path.endswith("/actions/workflows/sunrise-changelog.yml/runs"):
                 return response
             if path.endswith("/actions/runs/125/jobs"):
                 return {
@@ -918,7 +1192,7 @@ class ChangelogActionsTests(unittest.TestCase):
         self.assertEqual(
             [
                 call(
-                    "/repos/makura-games/sunrise-station/actions/workflows/changelog.yml/runs",
+                    "/repos/makura-games/sunrise-station/actions/workflows/sunrise-changelog.yml/runs",
                     {"status": "success", "per_page": 100},
                     token_environment="ACTIONS_TOKEN",
                 ),
@@ -1003,7 +1277,7 @@ class ChangelogActionsTests(unittest.TestCase):
 
         self.assertEqual(200, result["id"])
         self.assertEqual(
-            [call(session, current, 1), call(session, current, 2)],
+            [call(session, current, 1, repository="makura-games/fish-station"), call(session, current, 2, repository="makura-games/fish-station")],
             past_runs.call_args_list,
         )
 
@@ -1048,6 +1322,10 @@ class ChangelogActionsTests(unittest.TestCase):
 
     def test_first_discord_workflow_uses_previous_stable_publish(self):
         previous = {"id": 100, "head_commit": {"id": "abc"}}
+        first_attempt = {
+            "id": 250,
+            "display_title": f"Discord changelog sunrise for {'b' * 40}",
+        }
 
         with patch.dict(
             "os.environ",
@@ -1061,8 +1339,16 @@ class ChangelogActionsTests(unittest.TestCase):
         ), patch.object(
             discord_changelog,
             "get_most_recent_workflow",
-            side_effect=[None, previous],
+            return_value=None,
         ) as recent, patch.object(
+            discord_changelog,
+            "get_earliest_target_attempt",
+            return_value=first_attempt,
+        ) as earliest, patch.object(
+            discord_changelog,
+            "get_source_release_before_attempt",
+            return_value=previous,
+        ) as source, patch.object(
             discord_changelog,
             "get_last_changelog_by_sha",
             return_value="Entries: []",
@@ -1070,9 +1356,11 @@ class ChangelogActionsTests(unittest.TestCase):
             result = discord_changelog.get_last_changelog(Path("Resources/Changelog/ChangelogSunrise.yml"))
 
         self.assertEqual("Entries: []", result)
-        self.assertEqual("300", recent.call_args_list[0].args[2])
-        self.assertEqual("sunrise", recent.call_args_list[0].args[3])
-        self.assertEqual("200", recent.call_args_list[1].args[2])
+        recent.assert_called_once()
+        self.assertEqual("300", recent.call_args.args[2])
+        self.assertEqual("sunrise", recent.call_args.args[3])
+        self.assertEqual(("300", "sunrise"), earliest.call_args.args[2:])
+        self.assertEqual(("200", first_attempt), source.call_args.args[2:])
         self.assertEqual("abc", load.call_args.args[1])
         self.assertTrue(load.call_args.kwargs["allow_missing"])
 
@@ -1112,6 +1400,10 @@ class ChangelogActionsTests(unittest.TestCase):
     def test_discord_workflow_falls_back_when_previous_title_has_no_sha(self):
         previous_discord = {"id": 250, "display_title": "Старое имя запуска"}
         previous_stable = {"id": 100, "head_commit": {"id": "stable-sha"}}
+        first_attempt = {
+            "id": 251,
+            "display_title": f"Discord changelog sunrise for {'b' * 40}",
+        }
 
         with patch.dict(
             "os.environ",
@@ -1125,16 +1417,25 @@ class ChangelogActionsTests(unittest.TestCase):
         ), patch.object(
             discord_changelog,
             "get_most_recent_workflow",
-            side_effect=[previous_discord, previous_stable],
+            return_value=previous_discord,
         ) as recent, patch.object(
+            discord_changelog,
+            "get_earliest_target_attempt",
+            return_value=first_attempt,
+        ), patch.object(
+            discord_changelog,
+            "get_source_release_before_attempt",
+            return_value=previous_stable,
+        ), patch.object(
             discord_changelog,
             "get_last_changelog_by_sha",
             return_value="Entries: []",
         ) as load:
             discord_changelog.get_last_changelog(Path("Resources/Changelog/ChangelogSunrise.yml"))
 
-        self.assertEqual(["300", "200"], [item.args[2] for item in recent.call_args_list])
-        self.assertEqual("sunrise", recent.call_args_list[0].args[3])
+        recent.assert_called_once()
+        self.assertEqual("300", recent.call_args.args[2])
+        self.assertEqual("sunrise", recent.call_args.args[3])
         self.assertEqual("stable-sha", load.call_args.args[1])
 
     def test_checkpoint_falls_back_to_latest_changelog_entry(self):
@@ -1170,6 +1471,9 @@ class ChangelogActionsTests(unittest.TestCase):
             updater_path.parent.mkdir(parents=True)
             updater_path.write_bytes(
                 (REPO_ROOT / changelog_actions.UPDATER_PATH).read_bytes(),
+            )
+            updater_path.with_name("changelog_schema.py").write_bytes(
+                (REPO_ROOT / "Tools/_sunrise/changelog/changelog_schema.py").read_bytes(),
             )
             (changelog_dir / "ChangelogSunrise.yml").write_text("Entries: []\n", encoding="utf-8")
             event_path = repo_root / "event.json"
@@ -1240,7 +1544,7 @@ class ChangelogActionsTests(unittest.TestCase):
                 ), patch.object(discord_changelog.time, "sleep") as sleep:
                     discord_changelog.send_embed_discord({"description": "test"})
 
-                sleep.assert_called_once_with(discord_changelog.DISCORD_DEFAULT_RETRY_AFTER)
+                sleep.assert_called_once_with(1)
 
     def test_discord_accepts_message_and_no_content_statuses(self):
         for status_code in (200, 204):
@@ -1354,15 +1658,16 @@ class ChangelogActionsTests(unittest.TestCase):
 
         container = payload["components"][0]
         self.assertEqual(discord_changelog.DISCORD_COMPONENTS_V2_FLAG, payload["flags"])
-        self.assertEqual("### Автор", container["components"][0]["content"])
-        self.assertEqual("Текст", container["components"][1]["content"])
+        self.assertEqual("**Автор**", container["components"][0]["content"])
+        self.assertEqual({"type": 14, "divider": True, "spacing": 1}, container["components"][1])
+        self.assertEqual("Текст", container["components"][2]["content"])
         self.assertEqual(
             "attachment://media-1.png",
-            container["components"][2]["items"][0]["media"]["url"],
+            container["components"][3]["items"][0]["media"]["url"],
         )
         self.assertEqual(
             "attachment://media-2.mp4",
-            container["components"][2]["items"][1]["media"]["url"],
+            container["components"][3]["items"][1]["media"]["url"],
         )
         self.assertEqual(
             [
@@ -1373,6 +1678,29 @@ class ChangelogActionsTests(unittest.TestCase):
         )
         self.assertEqual(["files[0]", "files[1]"], [field for field, _ in files])
         self.assertEqual(("media-2.mp4", b"mp4", "video/mp4"), files[1][1])
+
+    def test_pr_media_gallery_is_rendered_last_after_divider(self):
+        image = discord_changelog.DownloadedMedia(
+            "image", "Изображение", b"png", "image/png", "media-1.png"
+        )
+        entry = {
+            "author": "Tester",
+            "changes": [{"type": "Add", "message": "Добавлена рыба"}],
+            "url": "https://example.org/pr/1",
+        }
+
+        payload, _ = discord_changelog.build_media_payload(
+            {"title": "👤 Tester", "description": ""},
+            [image],
+            entry,
+        )
+
+        components = payload["components"][0]["components"]
+        self.assertEqual({"type": 14, "divider": True, "spacing": 1}, components[1])
+        self.assertEqual("💡 **Добавлено**\n• Добавлена рыба", components[2]["content"])
+        self.assertEqual("[GitHub Pull Request](https://example.org/pr/1)", components[3]["content"])
+        self.assertEqual({"type": 14, "divider": True, "spacing": 2}, components[4])
+        self.assertEqual("attachment://media-1.png", components[5]["items"][0]["media"]["url"])
 
     def test_media_gallery_keeps_author_order_regardless_of_type(self):
         video = discord_changelog.DownloadedMedia(
@@ -1471,21 +1799,23 @@ class ChangelogActionsTests(unittest.TestCase):
         }
 
         payload, _ = discord_changelog.build_media_payload(
-            {"title": "Автор: Tester", "description": ""},
+            {"title": "👤 Tester", "description": ""},
             [image, video, second_image],
             entry,
         )
 
         components = payload["components"][0]["components"]
-        self.assertEqual("### Автор: Tester", components[0]["content"])
-        self.assertEqual("🆕 Первая строка", components[1]["content"])
-        self.assertEqual("attachment://media-1.png", components[2]["items"][0]["media"]["url"])
-        self.assertEqual("attachment://media-2.webm", components[2]["items"][1]["media"]["url"])
-        self.assertEqual({"type": 14, "divider": True, "spacing": 2}, components[3])
-        self.assertEqual("🪛 Вторая строка\n⚒️ Третья строка", components[4]["content"])
-        self.assertEqual("attachment://media-3.png", components[5]["items"][0]["media"]["url"])
-        self.assertEqual({"type": 14, "divider": True, "spacing": 1}, components[6])
-        self.assertEqual("[GitHub Pull Request](https://example.org/pr/1)", components[7]["content"])
+        self.assertEqual("**👤 Tester**", components[0]["content"])
+        self.assertEqual({"type": 14, "divider": True, "spacing": 1}, components[1])
+        self.assertEqual("💡 **Добавлено**\n• Первая строка", components[2]["content"])
+        self.assertEqual("attachment://media-1.png", components[3]["items"][0]["media"]["url"])
+        self.assertEqual("attachment://media-2.webm", components[3]["items"][1]["media"]["url"])
+        self.assertEqual({"type": 14, "divider": True, "spacing": 2}, components[4])
+        self.assertEqual("⚒️ **Изменено**\n• Третья строка", components[5]["content"])
+        self.assertEqual("attachment://media-3.png", components[6]["items"][0]["media"]["url"])
+        self.assertEqual({"type": 14, "divider": True, "spacing": 2}, components[7])
+        self.assertEqual("🪛 **Исправлено**\n• Вторая строка", components[8]["content"])
+        self.assertEqual("[GitHub Pull Request](https://example.org/pr/1)", components[9]["content"])
 
     def test_media_batches_obey_file_count_and_request_size(self):
         def batches_for(media):
@@ -1571,7 +1901,12 @@ class ChangelogActionsTests(unittest.TestCase):
             )
 
         self.assertEqual(
-            {"payload_json": json.dumps(payload, ensure_ascii=False)},
+            {
+                "payload_json": json.dumps(
+                    {**payload, "allowed_mentions": {"parse": []}},
+                    ensure_ascii=False,
+                )
+            },
             post.call_args_list[0].kwargs["data"],
         )
         self.assertEqual(files, post.call_args_list[0].kwargs["files"])
@@ -1579,16 +1914,27 @@ class ChangelogActionsTests(unittest.TestCase):
     def test_components_v2_payload_enables_webhook_components(self):
         payload = {"flags": discord_changelog.DISCORD_COMPONENTS_V2_FLAG, "components": []}
 
-        with patch.object(discord_changelog, "DISCORD_WEBHOOK_URL", "https://discord.example/webhook"), patch.object(
-            discord_changelog.requests, "post", return_value=Mock(status_code=204)
-        ) as post:
+        with (
+            patch.object(
+                discord_changelog, "DISCORD_WEBHOOK_URL",
+                "https://discord.com/api/webhooks/123/test-token",
+            ),
+            patch.object(
+                discord_changelog.requests, "post",
+                return_value=Mock(status_code=204),
+            ) as post,
+        ):
             discord_changelog.send_multipart_discord(
                 payload,
                 [],
                 deadline=discord_changelog.time.monotonic() + 10,
             )
 
-        self.assertEqual("https://discord.example/webhook?with_components=true", post.call_args.args[0])
+        self.assertEqual(
+            "https://discord.com/api/webhooks/123/test-token"
+            "?wait=true&with_components=true",
+            post.call_args.args[0],
+        )
 
     def test_media_send_failure_falls_back_to_text_and_warns(self):
         entry = {
@@ -1605,7 +1951,7 @@ class ChangelogActionsTests(unittest.TestCase):
             discord_changelog, "download_media", return_value=media
         ), patch.object(
             discord_changelog, "send_multipart_discord", side_effect=RuntimeError("Discord недоступен")
-        ) as multipart, patch.object(discord_changelog, "send_embed_discord") as text_send, redirect_stdout(output):
+        ) as multipart, patch.object(discord_changelog, "send_changelog_text") as text_send, redirect_stdout(output):
             discord_changelog.send_to_discord([entry])
 
         multipart.assert_called_once()
@@ -1630,7 +1976,7 @@ class ChangelogActionsTests(unittest.TestCase):
             return_value=iter([[image, video]]),
         ), patch.object(discord_changelog, "send_media_batch") as send, patch.object(
             discord_changelog,
-            "send_embed_discord",
+            "send_changelog_text",
         ) as send_text:
             discord_changelog.send_to_discord([entry])
 
@@ -1655,14 +2001,14 @@ class ChangelogActionsTests(unittest.TestCase):
             return_value=iter([[media], [media]]),
         ), patch.object(discord_changelog, "send_media_batch") as send, patch.object(
             discord_changelog,
-            "send_embed_discord",
+            "send_changelog_text",
         ) as send_text:
             discord_changelog.send_to_discord([entry])
 
-        self.assertEqual("Последняя часть", send.call_args_list[0].args[1]["description"])
+        self.assertEqual("💡 **Добавлено**\nПоследняя часть", send.call_args_list[0].args[1]["description"])
         self.assertEqual([None, None], [item.args[3] for item in send.call_args_list])
         send_text.assert_called_once()
-        self.assertEqual("Первая часть", send_text.call_args.args[0]["description"])
+        self.assertEqual("💡 **Добавлено**\nПервая часть", send_text.call_args.args[0]["description"])
 
     def test_all_split_text_parts_are_sent_when_there_is_no_media(self):
         entry = {"author": "Tester", "changes": [{"type": "Add", "message": "Добавлено"}]}
@@ -1675,13 +2021,90 @@ class ChangelogActionsTests(unittest.TestCase):
             discord_changelog,
             "iter_entry_media_batches",
             return_value=iter([]),
-        ), patch.object(discord_changelog, "send_embed_discord") as send:
+        ), patch.object(discord_changelog, "send_changelog_text") as send:
             discord_changelog.send_to_discord([entry])
 
         self.assertEqual(
-            ["Первая часть", "Последняя часть"],
+            ["💡 **Добавлено**\nПервая часть", "💡 **Добавлено**\nПоследняя часть"],
             [item.args[0]["description"] for item in send.call_args_list],
         )
+
+    def test_long_discord_group_repeats_its_heading_after_split(self):
+        parts = discord_changelog.format_grouped_change_parts(
+            [{"type": "Fix", "message": "Очень длинное исправление " * 20}],
+            limit=100,
+        )
+
+        self.assertGreater(len(parts), 1)
+        self.assertTrue(all(part.startswith("🪛 **Исправлено**\n") for part in parts))
+        self.assertTrue(all(len(part) <= 100 for part in parts))
+
+    def test_discord_groups_changes_in_fixed_order_and_keeps_author_order(self):
+        entry = {
+            "author": "Tester",
+            "changes": [
+                {"type": "Remove", "message": "Удалено"},
+                {"type": "Add", "message": "Добавлено первым"},
+                {"type": "Fix", "message": "Исправлено"},
+                {"type": "Tweak", "message": "Изменено"},
+                {"type": "Add", "message": "Добавлено вторым"},
+                {"type": "Legacy", "message": "Неизвестный старый тип"},
+            ],
+        }
+
+        with patch.object(discord_changelog, "DISCORD_WEBHOOK_URL", "https://discord.example/webhook"), patch.object(
+            discord_changelog,
+            "iter_entry_media_batches",
+            return_value=iter([]),
+        ), patch.object(discord_changelog, "send_changelog_text") as send:
+            discord_changelog.send_to_discord([entry])
+
+        embed = send.call_args.args[0]
+        self.assertEqual("👤 Tester", embed["title"])
+        self.assertEqual(
+            """💡 **Добавлено**
+• Добавлено первым
+• Добавлено вторым
+
+⚒️ **Изменено**
+• Изменено
+
+🪛 **Исправлено**
+• Исправлено
+
+❌ **Удалено**
+• Удалено
+
+❓ **Прочее**
+• Неизвестный старый тип""",
+            embed["description"],
+        )
+
+    def test_discord_skips_invalid_change_records_without_losing_valid_ones(self):
+        entry = {
+            "changes": [
+                "broken",
+                {},
+                {"type": "Add"},
+                {"type": None, "message": "Без типа"},
+                {"type": "Add", "message": "Рабочая запись"},
+                {"type": "Legacy", "message": "Неизвестный тип"},
+            ],
+        }
+
+        payload, _ = discord_changelog.build_media_payload(
+            {"title": "👤 Tester", "description": ""},
+            [],
+            entry,
+        )
+        content = "\n".join(
+            component.get("content", "")
+            for component in payload["components"][0]["components"]
+        )
+
+        self.assertIn("💡 **Добавлено**\n• Рабочая запись", content)
+        self.assertIn("❓ **Прочее**\n• Неизвестный тип", content)
+        self.assertNotIn("Без типа", content)
 
     def test_manual_and_reader_timestamps_support_optional_microseconds(self):
         self.assertRegex(manual_changelog.make_timestamp(), r"\.\d{6}\+00:00$")
@@ -1767,7 +2190,7 @@ class ChangelogActionsTests(unittest.TestCase):
         self.assertIn("dispatch_changelogs.py", dispatch_workflow)
         self.assertIn("workflow_dispatch:", discord_workflow)
         self.assertIn(
-            "run-name: Discord changelog ${{ inputs.target_id }} for ${{ inputs.released_sha }}",
+            "Discord changelog ${{ inputs.target_id }} for ${{ inputs.released_sha }}",
             discord_workflow,
         )
         self.assertIn("CHANGELOG_FILE: ${{ steps.target.outputs.changelog_file }}", discord_workflow)
@@ -1793,7 +2216,8 @@ class ChangelogActionsTests(unittest.TestCase):
 
         self.assertIn('if [[ -z "${MANUAL_CHANGELOG:-}" ]]', runner)
         self.assertNotIn("changelog-state.json", runner)
-        self.assertIn('git commit -m "Automatic changelog update [skip ci]"', runner)
+        self.assertIn('commit_message_file="$(mktemp)"', runner)
+        self.assertIn('git commit -F "$commit_message_file"', runner)
         self.assertIn('if [[ -z "${CHANGELOG_FILE:-}" ]]', runner)
         self.assertIn('changelog_directory="$(dirname -- "$CHANGELOG_FILE")"', runner)
         self.assertIn('"$category" == *".."*', runner)
@@ -1807,7 +2231,7 @@ class ChangelogActionsTests(unittest.TestCase):
         self.assertIn("Не удалось отправить чейнджлог после пяти попыток.", runner)
         self.assertNotIn("github.event.pull_request.head", workflow)
 
-    def test_validation_workflow_uses_trusted_parser_and_head_status(self):
+    def test_validation_workflow_uses_trusted_parser_and_single_check_run(self):
         workflow = VALIDATE_WORKFLOW_PATH.read_text(encoding="utf-8")
         document = yaml.load(workflow, Loader=yaml.BaseLoader)
 
@@ -1817,19 +2241,22 @@ class ChangelogActionsTests(unittest.TestCase):
             "types: [opened, edited, reopened, synchronize, ready_for_review]",
             workflow,
         )
-        self.assertIn("statuses: write", workflow)
+        self.assertNotIn("statuses: write", workflow)
+        self.assertIn("pull-requests: read", workflow)
         self.assertIn("group: validate-changelog-${{ github.event.pull_request.number }}", workflow)
         self.assertIn("cancel-in-progress: true", workflow)
         self.assertIn("ref: ${{ github.event.pull_request.base.ref }}", workflow)
         self.assertNotIn("ref: ${{ github.event.pull_request.head.sha }}", workflow)
         self.assertNotIn("github.event.pull_request.body", workflow)
         self.assertIn("persist-credentials: false", workflow)
-        self.assertIn("HEAD_SHA: ${{ github.event.pull_request.head.sha }}", workflow)
-        self.assertIn("context=changelog/parse", workflow)
-        self.assertIn("-f state=pending", workflow)
+        self.assertIn("name: Validate Changelog", workflow)
+        self.assertNotIn("HEAD_SHA: ${{ github.event.pull_request.head.sha }}", workflow)
+        self.assertNotIn("context=changelog/parse", workflow)
+        self.assertNotIn("-f state=pending", workflow)
         self.assertIn("--validate-only", workflow)
-        self.assertIn("continue-on-error: true", workflow)
-        self.assertIn("steps.parse.outcome != 'success'", workflow)
+        self.assertIn("GITHUB_TOKEN: ${{ github.token }}", workflow)
+        self.assertNotIn("continue-on-error: true", workflow)
+        self.assertNotIn("steps.parse.outcome != 'success'", workflow)
 
     def test_parts_staging_includes_new_file(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -1867,6 +2294,338 @@ class ChangelogActionsTests(unittest.TestCase):
             ],
             staged,
         )
+
+    def test_schema_validator_and_repair_share_issue_messages(self):
+        document = {
+            "Entries": [
+                {
+                    "author": "Fish",
+                    "time": "2026-08-16T10:30:08+00:00",
+                    "changes": [{"type": "Add", "message": "Карта", "id": 21}],
+                },
+                {
+                    "author": "Sunrise",
+                    "time": "2026-08-16T11:30:08+00:00",
+                    "changes": [{"type": "Fix", "message": "Исправление"}],
+                    "id": 7,
+                },
+                {
+                    "author": "Duplicate",
+                    "time": "2026-08-16T12:30:08+00:00",
+                    "changes": [{"type": "Tweak", "message": "Повтор"}],
+                    "id": 7,
+                },
+            ],
+        }
+
+        issues = changelog_schema.inspect_changelog_document(document)
+        repairs = changelog_schema.repair_changelog_document(document)
+
+        self.assertEqual(
+            [issue.message for issue in issues],
+            [repair.issue.message for repair in repairs],
+        )
+        self.assertEqual([7, 8, 9], sorted(entry["id"] for entry in document["Entries"]))
+        self.assertNotIn("id", document["Entries"][0]["changes"][0])
+
+    def test_commit_message_describes_repairs_and_keeps_normal_subject(self):
+        normal = changelog_actions.build_commit_message(
+            [{"file": "Resources/Changelog/ChangelogSunrise.yml", "added": 1, "repairs": []}],
+        )
+        repaired = changelog_actions.build_commit_message(
+            [
+                {
+                    "file": "Resources/Changelog/ChangelogFish.yml",
+                    "added": 2,
+                    "repairs": [
+                        {
+                            "code": "nested_id",
+                            "message": "Запись #1: ошибка id.",
+                            "resolution": "Поле id удалено.",
+                        },
+                    ],
+                },
+            ],
+        )
+
+        self.assertEqual("Automatic changelog update [skip ci]\n", normal)
+        self.assertTrue(repaired.startswith("Automatic changelog update + fix [skip ci]\n\n"))
+        self.assertIn("### Что исправлено в `Resources/Changelog/ChangelogFish.yml`", repaired)
+        self.assertIn("1. Проблема: Запись #1: ошибка id.", repaired)
+        self.assertIn("Решение: Поле id удалено.", repaired)
+        self.assertIn("### Почему это было необходимо", repaired)
+
+    def test_pr_file_validation_reuses_schema_diagnostic(self):
+        document = """Entries:
+- author: Fish
+  time: '2026-08-16T10:30:08+00:00'
+  changes:
+  - type: Add
+    message: Карта
+    id: 21
+"""
+        expected = (
+            "Запись #1, изменение #1: поле id находится внутри changes; "
+            "id должен быть полем записи."
+        )
+
+        with tempfile.TemporaryDirectory() as directory:
+            summary = Path(directory) / "summary.md"
+            with patch.dict(
+                "os.environ",
+                {
+                    "GITHUB_TOKEN": "token",
+                    "GITHUB_REPOSITORY": "makura-games/fish-station",
+                    "GITHUB_STEP_SUMMARY": str(summary),
+                },
+            ), patch.object(
+                changelog_actions,
+                "list_changed_changelog_paths",
+                return_value=["Resources/Changelog/ChangelogFish.yml"],
+            ), patch.object(
+                changelog_actions,
+                "load_repository_file",
+                return_value=document,
+            ):
+                with self.assertRaisesRegex(RuntimeError, "не прошёл проверку структуры"):
+                    changelog_actions.validate_changed_changelog_files(
+                        {"number": 123, "head": {"sha": "a" * 40}},
+                    )
+
+            report = summary.read_text(encoding="utf-8")
+
+        self.assertIn(expected, report)
+        self.assertIn("Перенесите id на уровень записи", report)
+
+    def test_changed_changelog_filter_includes_configured_category_files(self):
+        files = [
+            {"filename": "Resources/Changelog/ChangelogSunrise.yml"},
+            {"filename": "Resources/Changelog/Admin.yml"},
+            {"filename": "Resources/Changelog/Fish.yml"},
+            {"filename": "Resources/Changelog/Other.yml"},
+            {"filename": "Resources/Changelog/Nested/Admin.yml"},
+            {"filename": "Resources/Changelog/Admin.txt"},
+        ]
+        with patch.dict(
+            "os.environ",
+            {
+                "GITHUB_REPOSITORY": "makura-games/sunrise-station",
+                "CHANGELOG_EXTRA_CATEGORIES": "Admin, Fish",
+            },
+        ), patch.object(changelog_actions, "github_request", return_value=files):
+            paths = changelog_actions.list_changed_changelog_paths(123)
+
+        self.assertEqual(
+            [
+                "Resources/Changelog/Admin.yml",
+                "Resources/Changelog/ChangelogSunrise.yml",
+                "Resources/Changelog/Fish.yml",
+            ],
+            paths,
+        )
+
+    def test_large_repository_file_falls_back_to_git_blob(self):
+        text = "Entries: []\n# Рыба\n"
+        contents = {"encoding": "none", "content": "", "sha": "blob-sha"}
+        blob = {
+            "encoding": "base64",
+            "content": base64.b64encode(text.encode("utf-8")).decode("ascii"),
+        }
+        with patch.dict("os.environ", {"GITHUB_REPOSITORY": "makura-games/fish-station"}), patch.object(
+            changelog_actions,
+            "github_request",
+            side_effect=[contents, blob],
+        ) as request:
+            result = changelog_actions.load_repository_file(
+                "Resources/Changelog/ChangelogFish.yml",
+                "a" * 40,
+            )
+
+        self.assertEqual(text, result)
+        self.assertEqual(
+            call("/repos/makura-games/fish-station/git/blobs/blob-sha"),
+            request.call_args_list[1],
+        )
+
+    def test_yaml_error_without_problem_is_reported(self):
+        with tempfile.TemporaryDirectory() as directory:
+            summary = Path(directory) / "summary.md"
+            with patch.dict(
+                "os.environ",
+                {
+                    "GITHUB_TOKEN": "token",
+                    "GITHUB_REPOSITORY": "makura-games/fish-station",
+                    "GITHUB_STEP_SUMMARY": str(summary),
+                },
+            ), patch.object(
+                changelog_actions,
+                "list_changed_changelog_paths",
+                return_value=["Resources/Changelog/ChangelogFish.yml"],
+            ), patch.object(
+                changelog_actions,
+                "load_repository_file",
+                return_value="broken",
+            ), patch.object(
+                changelog_actions.yaml,
+                "safe_load",
+                side_effect=yaml.YAMLError("неверная кодировка"),
+            ):
+                with self.assertRaisesRegex(RuntimeError, "не прошёл проверку структуры"):
+                    changelog_actions.validate_changed_changelog_files(
+                        {"number": 123, "head": {"sha": "a" * 40}},
+                    )
+
+            report = summary.read_text(encoding="utf-8")
+
+        self.assertIn("неверная кодировка", report)
+
+    def test_discord_diff_falls_back_for_fish_ids_without_losing_entries(self):
+        old = {
+            "Entries": [
+                {
+                    "author": "Old",
+                    "time": "2026-08-16T10:30:08+00:00",
+                    "changes": [{"type": "Add", "message": "Карта", "id": 21}],
+                },
+                {
+                    "author": "Existing",
+                    "time": "2026-08-16T11:30:08+00:00",
+                    "changes": [{"type": "Fix", "message": "Старое"}],
+                    "id": 21,
+                },
+            ],
+        }
+        current = {
+            "Entries": [
+                {
+                    "author": "Old",
+                    "time": "2026-08-20T10:30:08+00:00",
+                    "changes": [{"type": "Add", "message": "Карта"}],
+                    "id": 27,
+                },
+                {
+                    "author": "New",
+                    "time": "2026-08-20T11:30:08+00:00",
+                    "changes": [{"type": "Fix", "message": "Новое"}],
+                    "id": 21,
+                },
+            ],
+        }
+
+        diff = list(discord_changelog.diff_changelog(old, current))
+
+        self.assertEqual(["New"], [entry["author"] for entry in diff])
+
+    def test_earliest_failed_target_attempt_is_used_for_bootstrap(self):
+        current = {
+            "id": 300,
+            "created_at": "2026-08-25T22:39:08Z",
+            "display_title": f"Discord changelog fish for {'d' * 40}",
+        }
+        past = {
+            "workflow_runs": [
+                {
+                    "id": 200,
+                    "created_at": "2026-08-18T23:03:34Z",
+                    "display_title": f"Discord changelog fish for {'b' * 40}",
+                },
+                {
+                    "id": 210,
+                    "created_at": "2026-08-18T23:03:36Z",
+                    "display_title": f"Discord changelog sunrise for {'b' * 40}",
+                },
+                {
+                    "id": 220,
+                    "created_at": "2026-08-18T23:15:39Z",
+                    "display_title": f"Discord changelog fish  for {'c' * 40}",
+                },
+            ],
+        }
+
+        with patch.object(discord_changelog, "get_current_run", return_value=current), patch.object(
+            discord_changelog,
+            "get_past_runs",
+            return_value=past,
+        ):
+            result = discord_changelog.get_earliest_target_attempt(
+                Mock(),
+                "makura-games/fish-station",
+                "300",
+                "fish",
+            )
+
+        self.assertEqual(200, result["id"])
+
+    def test_source_release_before_first_failed_attempt_stays_fixed(self):
+        first_sha = "b" * 40
+        first_attempt = {
+            "created_at": "2026-08-18T23:03:34Z",
+            "display_title": f"Discord changelog fish for {first_sha}",
+        }
+        source_run = {"workflow_url": "https://api.github.test/workflows/stable"}
+        source_history = {
+            "workflow_runs": [
+                {
+                    "id": 200,
+                    "created_at": "2026-08-18T22:50:00Z",
+                    "display_title": f"Publish Stable {first_sha}",
+                    "head_commit": {"id": "c" * 40},
+                },
+                {
+                    "id": 100,
+                    "created_at": "2026-08-14T22:00:00Z",
+                    "head_commit": {"id": "a" * 40},
+                },
+            ],
+        }
+
+        with patch.object(discord_changelog, "get_current_run", return_value=source_run), patch.object(
+            discord_changelog,
+            "get_past_runs",
+            return_value=source_history,
+        ):
+            result = discord_changelog.get_source_release_before_attempt(
+                Mock(),
+                "makura-games/fish-station",
+                "200",
+                first_attempt,
+            )
+
+        self.assertEqual(100, result["id"])
+
+    def test_source_release_falls_back_when_first_sha_is_absent(self):
+        first_attempt = {
+            "created_at": "2026-08-18T23:03:34Z",
+            "display_title": f"Discord changelog fish for {'b' * 40}",
+        }
+        source_run = {"workflow_url": "https://api.github.test/workflows/stable"}
+        latest_before_attempt = {
+            "id": 200,
+            "created_at": "2026-08-18T22:50:00Z",
+            "head_commit": {"id": "c" * 40},
+        }
+        incomplete_run = {
+            "id": 300,
+            "created_at": "2026-08-18T22:55:00Z",
+            "head_commit": None,
+        }
+
+        with patch.object(discord_changelog, "get_current_run", return_value=source_run), patch.object(
+            discord_changelog,
+            "get_past_runs",
+            return_value={"workflow_runs": [incomplete_run, latest_before_attempt]},
+        ):
+            result = discord_changelog.get_source_release_before_attempt(
+                Mock(),
+                "makura-games/fish-station",
+                "200",
+                first_attempt,
+            )
+
+        self.assertEqual(200, result["id"])
+
+    def test_target_id_trims_manual_whitespace(self):
+        self.assertEqual("fish", changelog_targets.validate_target_id(" fish "))
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-﻿ent-RMCStairs = stairs
+ent-RMCStairs = stairs
     .desc = The greatest invention since rocket-propelled grenades.
 ent-RMCStairsCorner = { ent-RMCStairs }
     .desc = { ent-RMCStairs.desc }

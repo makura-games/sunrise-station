@@ -10,7 +10,7 @@ namespace Content.Shared._Sunrise.Tutorial.Conditions;
 /// </summary>
 public sealed partial class ReachMarkerConditionSystem : TutorialConditionSystem<TutorialPlayerComponent, ReachMarkerCondition>
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     protected override void Condition(Entity<TutorialPlayerComponent> entity, ref TutorialConditionEvent<ReachMarkerCondition> args)
     {

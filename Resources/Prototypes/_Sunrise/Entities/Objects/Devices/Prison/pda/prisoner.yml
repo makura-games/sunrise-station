@@ -30,15 +30,16 @@
     id: PlanetPrisonerIDCard
   - type: PdaBorderColor
     borderColor: "#3b3b3b"
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-      - CrewManifestCartridge
-      - NewsReaderCartridge
-      - NavigatorCartridge
-      - MessengerCartridge
-      - PhotoCartridge
-      - CorporateLawCartridge
+  - type: EntityTableContainerFill
+    containers:
+      preinstalled-program-container: !type:AllSelector
+        children:
+        - id: CrewManifestCartridge
+        - id: NewsReaderCartridge
+        - id: NavigatorCartridge
+        - id: MessengerCartridge
+        - id: PhotoCartridge
+        - id: CorporateLawCartridge
 
 - type: entity
   parent: PlanetPrisonerPDA

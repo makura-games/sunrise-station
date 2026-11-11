@@ -11,10 +11,9 @@ namespace Content.Shared._Sunrise.Medical.PsychologistSystem;
 
 public sealed partial class PsychologistSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
 
     private readonly string _actionProto = "PsychologistAlcoholBlock";
 
@@ -85,7 +84,7 @@ public sealed partial class PsychologistSystem : EntitySystem
                     args.Cancelled = true;
                     return;
                 }
-                var reagent = _prototypeManager.Index<ReagentPrototype>($"{cont.Reagent}");
+                var reagent = ProtoMan.Index<ReagentPrototype>($"{cont.Reagent}");
 
                 if (reagent.Metabolisms != null)
                 {

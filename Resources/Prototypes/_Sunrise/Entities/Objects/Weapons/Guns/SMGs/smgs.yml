@@ -55,93 +55,25 @@
       path: /Audio/_Sunrise/Weapons/Guns/SMGs/p90_cocked.ogg
 
 - type: entity
-  name: MP5
-  parent: BaseWeaponSubMachineGun
-  id: WeaponSubMachineGunMP5
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/mp5/big.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/mp5/tiny.rsi
-  - type: Item
-    size: Large
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/mp5/tiny.rsi
-    storedOffset: 0,-2
-  - type: GunWieldBonus
-    minAngle: -5
-    maxAngle: -18
-  - type: Gun
-    minAngle: 7
-    maxAngle: 30
-    angleIncrease: 1.9
-    angleDecay: 18.5
-    fireRate: 6
-    burstFireRate: 8
-    selectedMode: FullAuto
-    availableModes:
-    - Burst
-    - FullAuto
-    shotsPerBurst: 3
-    burstCooldown: 0.15
-    soundGunshot:
-      collection: mp5
-      params:
-        volume: -1
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazinePistolSubMachineGunSP
-        insertSound: /Audio/_Sunrise/Weapons/Guns/SMGs/mp5/mp5_reload.ogg
-        ejectSound: /Audio/_Sunrise/Weapons/Guns/SMGs/mp5/mp5_unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineMP5
-          - MagazinePistolSubMachineGun
-          - MagazinePistolHighCapacity
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgePistolSP
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgePistol
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: Appearance
-  - type: Wieldable
-  - type: UseDelay
-    delay: 0.5
-  - type: ChamberMagazineAmmoProvider
-    soundRack:
-      path: /Audio/_Sunrise/Weapons/Guns/SMGs/mp5/mp5_cocked.ogg
-
-- type: entity
   name: New Vector
   parent: WeaponSubMachineGunDrozd
   id: WeaponSubMachineGunNewVector
+  description: A modern 30-round Vector by Waffle Corp chambered in .35 Auto. Its delayed-blowback system redirects the bolt assembly downward, helping control its high rate of fire.
   components:
   - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector/big.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector/tiny.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector.rsi
   - type: Item
     size: Large
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector/tiny.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector.rsi
   - type: Gun
+    fireRate: 12
     burstFireRate: 22
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/SMGs/new_vector/vector_shot.ogg
@@ -149,7 +81,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistolSubMachineGunSP
+        startingItem: MagazinePistolHighCapacityFMJ
         insertSound: /Audio/_Sunrise/Weapons/Guns/SMGs/new_vector/new_vector_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/SMGs/new_vector/new_vector_unload.ogg
         priority: 2
@@ -159,11 +91,11 @@
           - MagazinePistolHighCapacity
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolSP  # 57x28
+        startingItem: CartridgePistolSP
         priority: 1
         whitelist:
           tags:
-          - CartridgePistol  # 57x28
+          - CartridgePistol
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -232,92 +164,6 @@
         whitelist:
           tags:
             - CartridgePistol
-
-- type: entity
-  name: Lecter Mk3
-  parent: BaseWeaponSubMachineGun
-  id: WeaponRifleLecterMk3
-  description: A more advanced version of Lecter.
-  components:
-  - type: Item
-    size: Huge
-    shape:
-    - 0,0,3,2
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/lecter_mk3.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/lecter_mk3.rsi
-  - type: Gun
-    minAngle: 10
-    maxAngle: 35
-    angleIncrease: 2
-    angleDecay: 16
-    fireRate: 5.5
-    selectedMode: FullAuto
-    soundGunshot:
-      collection: aug
-    availableModes:
-    - FullAuto
-  - type: Wieldable
-  - type: GunWieldBonus
-    minAngle: -8
-    maxAngle: -22
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineRifleSP
-        insertSound: /Audio/Weapons/Guns/MagIn/rifle_load.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineRifle
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgeRifleSP
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgeRifle
-  - type: MagazineVisuals
-    magState: mag
-    steps: 5
-    zeroVisible: true
-  - type: Appearance
-  - type: Construction
-    graph: LecterSecurity
-    node: upgradelectermk3
-
-- type: entity
-  name: Lecter Mk3
-  parent: WeaponRifleLecterMk3
-  id: WeaponRifleLecterMk3Empty
-  categories: [HideSpawnMenu]
-  components:
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: null
-        insertSound: /Audio/Weapons/Guns/MagIn/rifle_load.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineRifle
-      gun_chamber:
-        name: Chamber
-        startingItem: null
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgeRifle
 
 - type: entity
   name: AJ-100
@@ -531,46 +377,49 @@
             - CartridgePistol
 
 - type: entity
-  name: C-40r submachine gun
+  name: Vector Super
   parent: [BaseWeaponSubMachineGun, BaseSyndicateContraband]
-  id: WeaponSubMachineGunC40r
-  description: Early model of classic 20-round bullpup submachine gun by "Waffle Corp" chambered for .40 high-stopping-power rounds. Previously widely used by the Gorlex Marauders. Effective at short to medium ranges, capable of 2-round burst or fully automatic fire.
+  id: WeaponSubMachineGunVector
+  description: An early 30-round Vector Super by Waffle Corp chambered in .40. Effective at short to medium range, it fires in two-round bursts or full auto. Its delayed-blowback system redirects the bolt assembly downward.
   components:
   - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi
   - type: Wieldable
     unwieldOnUse: false
   - type: GunWieldBonus
     minAngle: -19
     maxAngle: -16
   - type: Gun
+    fireRate: 10
     minAngle: 21
     maxAngle: 32
-    shotsPerBurst: 2
-    burstFireRate: 14
+    shotsPerBurst: 3
+    burstFireRate: 22
+    selectedMode: Burst
     availableModes:
     - Burst
     - FullAuto
+    - SemiAuto
     soundGunshot:
       collection: aug
   - type: ChamberMagazineAmmoProvider
     autoEject: true
   - type: MagazineVisuals
     magState: mag
-    steps: 6
+    steps: 1
     zeroVisible: true
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistol40SubMachineGunSP
+        startingItem: MagazinePistol40AP
         insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
         priority: 2

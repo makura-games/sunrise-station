@@ -63,6 +63,7 @@
 - type: entity
   parent: BaseSpeciesAppearance
   id: AppearanceVulpkanin
+  categories: [ HideSpawnMenu ]
   name: vulpkanin appearance
   components:
   - type: InitialBody
@@ -93,7 +94,7 @@
     #undergarmentBottom: UndergarmentBottomBoxersVulpkanin # Sunrise-edit
   - type: Inventory
 # SUNRISE EDIT
-    speciesId: vulpkanin
+    speciesId: human
     # FEMALE STRAIGHT
     femaleDisplacements:
       head-body-straight-big-muzzle:
@@ -107,6 +108,11 @@
             sprite: _Sunrise/Mobs/Species/Vulpkanin/displacement.rsi
             state: head_small_muzzle
       mask-body-straight-big-muzzle:
+        sizeMaps:
+          32:
+            sprite: _Sunrise/Mobs/Species/Vulpkanin/displacement.rsi
+            state: mask
+      mask-body-straight-small-muzzle:
         sizeMaps:
           32:
             sprite: _Sunrise/Mobs/Species/Vulpkanin/displacement.rsi
@@ -158,7 +164,7 @@
           32:
             sprite: _Sunrise/Mobs/Species/Vulpkanin/displacement.rsi
             state: head_big_muzzle
-      mask-curved-big-muzzle:
+      mask-body-curved-big-muzzle:
         sizeMaps:
           32:
             sprite: _Sunrise/Mobs/Species/Vulpkanin/displacement.rsi
@@ -309,11 +315,10 @@
     speechSounds: Vulpkanin
     speechVerb: Vulpkanin
     allowedEmotes: [ 'Bark', 'Snarl', 'Whine', 'Howl', 'Growl' ]
+  - type: TypingIndicator
+    proto: vulpkanin
   - type: Vocal
-    sounds:
-      Male: MaleVulpkanin
-      Female: FemaleVulpkanin
-      Unsexed: MaleVulpkanin
+    emoteSounds: MaleVulpkanin
   - type: Damageable
     damageModifierSet: Vulpkanin
   - type: MeleeWeapon
@@ -324,8 +329,6 @@
       types:
         Piercing: 2
         Slash: 3
-  - type: Temperature
-    specificHeat: 44
   - type: TemperatureDamage
     heatDamageThreshold: 320
     coldDamageThreshold: 230
@@ -337,9 +340,6 @@
         Heat: 2.5 # Per second, scales with temperature & other constants
   - type: Wagging
     action: ActionToggleWaggingVulpkanin
-  - type: TemperatureProtection
-    heatingCoefficient: 1.2
-    coolingCoefficient: 0.3
   - type: JumpAbility
     action: ActionVulpkaninGravityJump
     canCollide: true
@@ -352,7 +352,6 @@
         variation: 0.05
   # Sunrise edit start
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatVulpkanin
       amount: 5
@@ -368,10 +367,14 @@
     bloodReferenceSolution:
       reagents:
       - ReagentId: SulfurBlood
-        Quantity: 300
+        Quantity: 600
+  - type: CreamPied
+    sprite:
+      sprite: Effects/creampie.rsi
+      state: creampie_vulpkanin
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganVulpkanin
   abstract: true
   suffix: vulpkanin
@@ -434,6 +437,12 @@
     dependentHidingLayers:
       enum.HumanoidVisualLayers.Snout:
       - enum.HumanoidVisualLayers.SnoutCover
+    markingsDisplacement:
+      Hair:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vulpkanin/displacement.rsi
+            state: hair
 
 - type: entity
   parent: [ OrganBaseArmLeft, OrganVulpkaninExternal ]

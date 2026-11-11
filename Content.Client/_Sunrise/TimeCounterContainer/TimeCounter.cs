@@ -13,7 +13,7 @@ namespace Content.Client._Sunrise.TimeCounterContainer;
 [GenerateTypedNameReferences]
 public sealed partial class TimeCounter : PanelContainer
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
     private readonly TimeSpan? _endTime;
     private readonly char[] _textBuffer = new char[16];
     private readonly TimeCounterStyle _style;

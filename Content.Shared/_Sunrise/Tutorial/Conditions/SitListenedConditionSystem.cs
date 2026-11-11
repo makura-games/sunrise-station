@@ -13,7 +13,7 @@ namespace Content.Shared._Sunrise.Tutorial.Conditions;
 public sealed partial class SitListenedConditionSystem
     : EventListenedConditionSystemBase<SitListenedCondition>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

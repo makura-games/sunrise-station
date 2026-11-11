@@ -11,9 +11,9 @@ namespace Content.Client._Sunrise.BloodCult.UI.Altar;
 [GenerateTypedNameReferences]
 public sealed partial class AltarWindow : DefaultWindow
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
     private readonly SpriteSystem _spriteSystem;
 
     private List<AltarListingControl> _listingControls = new();

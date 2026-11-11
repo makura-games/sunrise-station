@@ -7,5 +7,8 @@ comp-window-damaged-3 = Имеется несколько маленьких т�
 comp-window-damaged-4 = Имеется несколько больших трещин.
 comp-window-damaged-5 = Имеется множество глубоких больших трещин.
 comp-window-damaged-6 = Всё в глубоких трещинах, вот-вот разрушится.
+
+### Interaction Messages
+
 # Shown when knocking on a window
 comp-window-knock = *тук тук*

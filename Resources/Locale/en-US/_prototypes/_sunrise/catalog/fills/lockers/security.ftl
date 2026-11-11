@@ -30,10 +30,6 @@ ent-GunSafeSubMachineGunVector = safe
     .suffix = Vector
     .desc = { ent-GunSafe.desc }
 
-ent-GunSafeSubMachineGunMP5 = safe
-    .suffix = MP5, SUNRISE
-    .desc = { ent-GunSafeBaseSecure.desc }
-
 ent-GunSafeSubMachineGunDrozdMk2 = safe
     .suffix = Drozd Mk2, SUNRISE
     .desc = { ent-GunSafeBaseSecure.desc }
@@ -66,51 +62,54 @@ ent-GunSafeShotgunRiot = safe
     .suffix = Shotgun Riot
     .desc = { ent-GunSafeBaseSecure.desc }
 
-ent-GunSafeShotgunCombat = safe
-    .suffix = Shotgun Combat
-    .desc = { ent-GunSafeBaseSecure.desc }
-
 ent-GunSafeDoubleBarreled = safe
     .desc = According to the paperwork — state-of-the-art tactical shotguns. In reality — antique double-barrels.
     .suffix = Shotgun Double-Barreled
 
-ent-GunSafeSuperweaponSmartGun = SMART safe
+ent-GunSafeSuperweaponSmartGun = sMART safe
     .desc = { ent-GunSafeSuperweaponSecureGamma.desc }
+    .suffix = SMART, Gamma
 
-ent-GunSafeSuperweaponLWAP = LWAP safe
+ent-GunSafeSuperweaponLWAP = lWAP safe
     .desc = { ent-GunSafeSuperweaponSecureGamma.desc }
+    .suffix = LWAP, Gamma
 
-ent-GunSafeSuperweaponRocketLauncher = RPG safe
+ent-GunSafeSuperweaponRocketLauncher = rPG safe
     .desc = { ent-GunSafeSuperweaponSecureGamma.desc }
+    .suffix = RPG, Gamma
 
 ent-GunSafeSuperweaponDisposableRocketLauncher = disposable launcher safe
     .desc = { ent-GunSafeSuperweaponSecureGamma.desc }
+    .suffix = Одноразовые гранатомёты, Гамма
 
-ent-GunSafeSuperIonRifle = Ion-Temperature safe
+ent-GunSafeSuperIonRifle = ion-Temperature safe
     .desc = { ent-GunSafeSuperweaponBaseSecure.desc }
+    .suffix = Ионно-термальная
 
-ent-GunSafeSuperDMR = Larker safe
+ent-GunSafeSuperDMR = larker safe
     .desc = { ent-GunSafeSuperweaponSecureGamma.desc }
+    .suffix = Ларкер
 
-ent-GunSafeSuperDMRElite = SKM-28 safe
+ent-GunSafeSuperDMRElite = sKM-28 safe
     .desc = { ent-GunSafeSuperweaponSecureGamma.desc }
+    .suffix = СКМ-28
 
-ent-SpawnerSafeSmallArms = Armory Safe Spawner
+ent-SpawnerSafeSmallArms = armory Safe Spawner
     .suffix = Armory, Pistols
     .desc = { ent-MarkerBase.desc }
 
-ent-SpawnerSafeShotguns = Armory Safe Spawner
+ent-SpawnerSafeShotguns = armory Safe Spawner
     .suffix = Armory, Shotguns
     .desc = { ent-MarkerBase.desc }
 
-ent-SpawnerSafeRifle = Armory Safe Spawner
+ent-SpawnerSafeRifle = armory Safe Spawner
     .suffix = Armory, Rifle
     .desc = { ent-MarkerBase.desc }
 
-ent-SpawnerSafeSMG = Armory Safe Spawner
+ent-SpawnerSafeSMG = armory Safe Spawner
     .suffix = Armory, SMG
     .desc = { ent-MarkerBase.desc }
 
-ent-SpawnerSafeEnergyGuns = Armory Safe Spawner
+ent-SpawnerSafeEnergyGuns = armory Safe Spawner
     .suffix = Armory, Laser/Energy
     .desc = { ent-MarkerBase.desc }

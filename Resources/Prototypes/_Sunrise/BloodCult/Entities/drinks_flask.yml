@@ -1,13 +1,13 @@
-﻿- type: entity
+- type: entity
   parent: DrinkBottleGlassBaseFull
   id: DrinkHolyWaterFull
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        reagents:
-        - ReagentId: Holywater
-          Quantity: 40
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Holywater
+        Quantity: 40
   - type: Sprite
     sprite: _Sunrise/BloodCult/holy_flask.rsi
 
@@ -16,12 +16,12 @@
   parent: DrinkBottleGlassBaseFull
   id: DrinkUnholyWaterFull
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        reagents:
-        - ReagentId: Unholywater
-          Quantity: 40
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: Unholywater
+        Quantity: 40
   - type: Sprite
     sprite: _Sunrise/BloodCult/holy_flask.rsi
     color: "#333333"

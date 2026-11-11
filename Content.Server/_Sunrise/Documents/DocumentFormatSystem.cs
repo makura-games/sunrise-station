@@ -6,11 +6,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.Documents;
 
-public sealed class DocumentFormatSystem : EntitySystem
+public sealed partial class DocumentFormatSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private StationSystem _station = default!;
 
     private TimeSpan _roundStart;
 

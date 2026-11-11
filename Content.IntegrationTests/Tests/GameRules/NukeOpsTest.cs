@@ -1,8 +1,8 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
-using Content.Server._Sunrise.StationCentComm;
 using Content.Server._Sunrise.TransitHub;
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Body.Components;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Presets;
@@ -32,10 +32,19 @@ using Robust.Shared.Prototypes;
 namespace Content.IntegrationTests.Tests.GameRules;
 
 [TestFixture]
-public sealed class NukeOpsTest
+public sealed class NukeOpsTest : GameTest
 {
     private static readonly ProtoId<NpcFactionPrototype> SyndicateFaction = "Syndicate";
     private static readonly ProtoId<NpcFactionPrototype> NanotrasenFaction = "NanoTrasen";
+
+    public override PoolSettings PoolSettings => new()
+    {
+        Dirty = true,
+        DummyTicker = false,
+        Connected = true,
+        InLobby = true
+    };
+
 
     /// <summary>
     /// Check that a nuke ops game mode can start without issue. I.e., that the nuke station and such all get loaded.
@@ -43,13 +52,7 @@ public sealed class NukeOpsTest
     [Test]
     public async Task TryStopNukeOpsFromConstantlyFailing()
     {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings
-        {
-            Dirty = true,
-            DummyTicker = false,
-            Connected = true,
-            InLobby = true
-        });
+        var pair = Pair;
 
         var server = pair.Server;
         var client = pair.Client;
@@ -115,7 +118,7 @@ public sealed class NukeOpsTest
         // Maps now exist
         Assert.That(entMan.Count<MapComponent>(), Is.GreaterThan(0));
         Assert.That(entMan.Count<MapGridComponent>(), Is.GreaterThan(0));
-        // Assert.That(entMan.Count<StationCentCommComponent>(), Is.EqualTo(1)); // Sunrise-edit
+        Assert.That(entMan.Count<StationTransitHubComponent>(), Is.Zero); // Sunrise-Edit
 
         // And we now have nukie related components
         Assert.That(entMan.Count<NukeopsRuleComponent>(), Is.EqualTo(1));
@@ -264,6 +267,5 @@ public sealed class NukeOpsTest
         });
 
         ticker.SetGamePreset((GamePresetPrototype?) null);
-        await pair.CleanReturnAsync();
     }
 }

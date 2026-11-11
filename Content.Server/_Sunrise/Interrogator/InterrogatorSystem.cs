@@ -21,18 +21,19 @@ using Content.Shared.Actions;
 
 namespace Content.Server._Sunrise.Interrogator
 {
-    public sealed class InterrogatorSystem : SharedInterrogatorSystem
+    public sealed partial class InterrogatorSystem : SharedInterrogatorSystem
     {
-        [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-        [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly PowerReceiverSystem _powerReceiverSystem = default!;
-        [Dependency] private readonly ClimbSystem _climbSystem = default!;
-        [Dependency] private readonly SharedContainerSystem _container = default!;
-        [Dependency] private readonly MobStateSystem _mobState = default!;
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
-        [Dependency] private readonly SharedPointLightSystem _light = default!;
-        [Dependency] private readonly SharedXenoArtifactSystem _xenoArtifactSystem = default!;
-        [Dependency] private readonly SharedActionsSystem _actions = default!;
+        [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+        [Dependency] private IAdminLogManager _adminLogger = default!;
+        [Dependency] private PowerReceiverSystem _powerReceiverSystem = default!;
+        [Dependency] private ClimbSystem _climbSystem = default!;
+        [Dependency] private SharedContainerSystem _container = default!;
+        [Dependency] private MobStateSystem _mobState = default!;
+        [Dependency] private SharedAudioSystem _audio = default!;
+        [Dependency] private SharedPointLightSystem _light = default!;
+        [Dependency] private SharedXenoArtifactSystem _xenoArtifactSystem = default!;
+        [Dependency] private SharedActionsSystem _actions = default!;
+        [Dependency] private EntityQuery<SubdermalImplantComponent> _implantQuery = default!;
 
         public override void Initialize()
         {
@@ -169,14 +170,12 @@ namespace Content.Server._Sunrise.Interrogator
             }
             if (_container.TryGetContainer(target, ImplanterComponent.ImplantSlotId, out var implantContainer))
             {
-                var implantCompQuery = GetEntityQuery<SubdermalImplantComponent>();
-
                 // Create a copy of the ContainedEntities list
                 var implants = implantContainer.ContainedEntities.ToList();
 
                 foreach (var implant in implants)
                 {
-                    if (!implantCompQuery.TryGetComponent(implant, out var implantComp))
+                    if (!_implantQuery.TryGetComponent(implant, out var implantComp))
                         continue;
 
                     // Don't remove a permanent implant and look for the next that can be drawn

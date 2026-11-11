@@ -20,12 +20,11 @@ namespace Content.Server._Sunrise.Abilities.Milira;
 /// </summary>
 public sealed partial class WingToggleSystem : SharedWingFlightSystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SunriseHumanoidMarkingSystem _sunriseMarking = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SunriseHumanoidMarkingSystem _sunriseMarking = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
 
     public override void Initialize()
     {
@@ -88,7 +87,7 @@ public sealed partial class WingToggleSystem : SharedWingFlightSystem
                 ? (current.EndsWith(suffix) ? current : $"{current}{suffix}")
                 : (current.EndsWith(suffix) ? current[..^suffix.Length] : current);
 
-            if (!_prototype.HasIndex<MarkingPrototype>(desired))
+            if (!ProtoMan.HasIndex<MarkingPrototype>(desired))
                 continue;
 
             if (desired == current)

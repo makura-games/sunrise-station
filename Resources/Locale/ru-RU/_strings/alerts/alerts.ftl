@@ -22,6 +22,8 @@ alerts-walking-name = Ходьба
 alerts-walking-desc = Вы идете, двигаясь в медленном темпе.
 alerts-stunned-name = [color=yellow]Оглушены[/color]
 alerts-stunned-desc = Вы [color=yellow]оглушены[/color]! Что-то мешает вам двигаться или взаимодействовать с объектами.
+alerts-knockdown-name = [color=yellow]Сбит с ног[/color]
+alerts-knockdown-desc = Ты [color=yellow]сбит с ног[/color]! Что-то подскользнулось или толкнуло тебя, затрудняя передвижение.
 alerts-handcuffed-name = [color=yellow]В наручниках[/color]
 alerts-handcuffed-desc = На вас [color=yellow]надели наручники[/color] и вы не можете использовать руки. Если кто-нибудь вас потащит, вы не сможете сопротивляться.
 alerts-ensnared-name = [color=yellow]Захваченный[/color]
@@ -76,18 +78,13 @@ alerts-revenant-essence-name = Эссенция
 alerts-revenant-essence-desc = Сила душ. Поддерживает вас и используется при использовании способностей. Медленно восстанавливается с течением времени.
 alerts-revenant-corporeal-name = Материальность
 alerts-revenant-corporeal-desc = Вы физически воплотились. Окружающие могут видеть и наносить вам вред.
+alerts-rooted-name = Прирос
+alerts-rooted-desc = Ты прирос к земле. Ты не можешь скользить, но поглощаешь жидкости под собой.
+alerts-stealthy-name = Карманная кража
+alerts-stealthy-desc = Показывает, что ты сейчас крадёшься по карманам. Нажми, чтобы переключить.
+alerts-prying-name = Вскрытие
+alerts-prying-desc = Ты умеешь открывать двери, взламывая их через альтернативное взаимодействие.
 alerts-changeling-chemicals-name = Химикаты
 alerts-changeling-chemicals-desc = Расходуйте химические вещества для использования своих способностей. Медленно регенерируются.
 alerts-changeling-biomass-name = Биомасса
 alerts-changeling-biomass-desc = Это ваше здоровье. Если оно достигнет 0 - это [color=red]конец игры[/color]. Поглощайте гуманоидов, чтобы восстановить часть его.
-alerts-knockdown-name = [color=yellow]Сбит с ног[/color]
-alerts-knockdown-desc = Ты [color=yellow]сбит с ног[/color]! Что-то подскользнулось или толкнуло тебя, затрудняя передвижение.
-
-alerts-rooted-name = Прирос
-alerts-rooted-desc = Ты прирос к земле. Ты не можешь скользить, но поглощаешь жидкости под собой.
-
-alerts-stealthy-name = Карманная кража
-alerts-stealthy-desc = Показывает, что ты сейчас крадёшься по карманам. Нажми, чтобы переключить.
-
-alerts-prying-name = Вскрытие
-alerts-prying-desc = Ты умеешь открывать двери, взламывая их через альтернативное взаимодействие.

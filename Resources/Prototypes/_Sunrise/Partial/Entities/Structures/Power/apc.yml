@@ -1,0 +1,42 @@
+- type: !PartialOnly entity
+  id: BaseAPC
+  components:
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _Sunrise/Structures/Power/apc.rsi
+    offset: 0, 0
+    layers: !Clear
+    - !Index:0
+      state: base
+    - !Index:0
+      state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      visible: false
+    - !Index:0
+      state: display-charging
+      shader: unshaded
+      map: ["enum.ApcVisualLayers.ChargeState"]
+    - !Index:0
+      state: channel0-auto_off
+      shader: unshaded
+      map: ["enum.ApcVisualLayers.Equipment"]
+      visible: false
+  - type: ApcVisuals
+    channelIndicatorPrefix: channel0
+    channelIndicatorSuffixes: [auto_off, auto_on, manual_off, auto_off]
+    screenStateSuffixes: [lack, charging, full, remote, lack]
+  - type: PowerMonitoringDevice
+    group: APC
+    sourceNode: input
+    loadNode: output
+    collectionName: apc
+    sprite: _Sunrise/Structures/Power/apc.rsi
+    state: static
+
+- type: !PartialOnly entity
+  id: APCFrame
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Power/apc.rsi
+    state: frame

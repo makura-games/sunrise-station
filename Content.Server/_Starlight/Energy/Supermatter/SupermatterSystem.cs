@@ -5,14 +5,14 @@ using Content.Server.Lightning;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Station.Systems;
 using Content.Server._Sunrise.Messenger;
-using Content.Shared._Sunrise.Storyteller; // Sunrise-Edit
+using Content.Shared._Sunrise.Storyteller;
 using Content.Shared.Abilities.Goliath;
 using Content.Shared.Atmos;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Projectiles;
 using Content.Shared.Radiation.Components;
@@ -24,21 +24,22 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Server.Radiation.Systems;
 
 namespace Content.Server.Starlight.Energy.Supermatter;
 
-public sealed class SupermatterSystem : AccUpdateEntitySystem
+public sealed partial class SupermatterSystem : AccUpdateEntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly LightningSystem _lightning = default!;
-    [Dependency] private readonly SupermatterCascadeSystem _cascade = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MessengerServerSystem _messenger = default!;
-    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private LightningSystem _lightning = default!;
+    [Dependency] private SupermatterCascadeSystem _cascade = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MessengerServerSystem _messenger = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private RadiationSystem _radiation = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteDamageGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnDamageGroup = "Burn";
@@ -67,7 +68,7 @@ public sealed class SupermatterSystem : AccUpdateEntitySystem
         if (TryComp<FixturesComponent>(args.User, out var fixture))
             damage = fixture.Fixtures.Select(x => x.Value.Density).Aggregate((i, p) => p + i) / 3;
 
-        _burn ??= _prototypes.Index(BurnDamageGroup);
+        _burn ??= ProtoMan.Index(BurnDamageGroup);
         _damageable.TryChangeDamage(ent.Owner, new(_burn, damage), true);
 
         QueueDel(args.User);
@@ -85,7 +86,7 @@ public sealed class SupermatterSystem : AccUpdateEntitySystem
         if (TryComp<FixturesComponent>(args.OtherEntity, out var fixture))
             damage = fixture.Fixtures.Select(x => x.Value.Density).Aggregate((i, p) => p + i) / 3;
 
-        _burn ??= _prototypes.Index(BurnDamageGroup);
+        _burn ??= ProtoMan.Index(BurnDamageGroup);
         _damageable.TryChangeDamage(ent.Owner, new(_burn, damage), true);
 
         QueueDel(args.OtherEntity);
@@ -117,7 +118,6 @@ public sealed class SupermatterSystem : AccUpdateEntitySystem
     {
         if (supermatter.Comp.Durability > 0.01) return;
 
-        // Sunrise-Edit
         RaiseLocalEvent(new SunriseSupermatterDelaminatedEvent(supermatter.Owner));
 
         _cascade.StartCascade(Transform(supermatter.Owner).Coordinates);
@@ -128,7 +128,7 @@ public sealed class SupermatterSystem : AccUpdateEntitySystem
     {
         var currentDurability = (int)Math.Floor(supermatter.Comp.Durability.Float());
         var lastDurability = (int)Math.Floor(supermatter.Comp.LastSendedDurability.Float());
-        _engi ??= _prototypes.Index(EngineeringRadioChannel);
+        _engi ??= ProtoMan.Index(EngineeringRadioChannel);
 
         if (Math.Abs(currentDurability - lastDurability) < 5)
             return;
@@ -178,7 +178,7 @@ public sealed class SupermatterSystem : AccUpdateEntitySystem
     private void HandleRadiation(Entity<SupermatterComponent> supermatter)
     {
         var radComp = EnsureComp<RadiationSourceComponent>(supermatter.Owner);
-        radComp.Intensity = supermatter.Comp.AccRadiation.Float();
+        _radiation.SetIntensity((supermatter, radComp), supermatter.Comp.AccRadiation.Float());
 
         supermatter.Comp.AccRadiation /= supermatter.Comp.RadiationStability;
     }
@@ -236,7 +236,7 @@ public sealed class SupermatterSystem : AccUpdateEntitySystem
     {
         if (gas.Temperature <= Const.MaxTemperature) return;
         _audio.PlayPvs(_random.Pick(Const.AudioBurn), supermatter.Owner);
-        _burn ??= _prototypes.Index(BurnDamageGroup);
+        _burn ??= ProtoMan.Index(BurnDamageGroup);
         DamageSpecifier damage = new(_burn, Const.MaxTemperature - gas.Temperature);
         _damageable.TryChangeDamage(supermatter.Owner, damage, true);
     }
@@ -245,7 +245,7 @@ public sealed class SupermatterSystem : AccUpdateEntitySystem
     {
         if (gas.Pressure >= Const.MinPressure && gas.Pressure <= Const.MaxPressure) return;
         _audio.PlayPvs(_random.Pick(Const.AudioCrack), supermatter.Owner);
-        _brute ??= _prototypes.Index(BruteDamageGroup);
+        _brute ??= ProtoMan.Index(BruteDamageGroup);
         DamageSpecifier damage = new(_brute, Math.Max(Const.MinPressure - gas.Pressure, gas.Pressure - Const.MaxPressure) / 100);
         _damageable.TryChangeDamage(supermatter.Owner, damage, true);
     }

@@ -1,0 +1,12 @@
+- type: construction
+  id: LockableButtonPersonal
+  graph: LockableButtonPersonal
+  startNode: start
+  targetNode: SignalButtonNode
+  category: construction-category-machines
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: true
+  conditions:
+    - !type:WallmountCondition

@@ -20,10 +20,10 @@ namespace Content.Client._Sunrise.CartridgeLoader.Cartridges;
 [GenerateTypedNameReferences]
 public sealed partial class MessagePanel : PanelContainer
 {
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly NetTexturesManager _netTexturesManager = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private NetTexturesManager _netTexturesManager = default!;
 
     private EmojiSystem? EmojiSystem => _entitySystemManager.GetEntitySystemOrNull<EmojiSystem>();
     private SpriteSystem GetSpriteSystem() => _entitySystemManager.GetEntitySystem<SpriteSystem>();

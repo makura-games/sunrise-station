@@ -22,34 +22,32 @@ namespace Content.Server._Sunrise.Footprints;
 /// <summary>
 /// Handles creation and management of footprints left by entities as they move.
 /// </summary>
-public sealed class FootprintSystem : EntitySystem
+public sealed partial class FootprintSystem : EntitySystem
 {
     #region Dependencies
 
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly MapSystem _mapSystem = default!;
-    [Dependency] private readonly GravitySystem _gravity = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly PuddleSystem _puddleSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private MapSystem _mapSystem = default!;
+    [Dependency] private GravitySystem _gravity = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private PuddleSystem _puddleSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     #endregion
 
     #region Entity Queries
 
-    private EntityQuery<TransformComponent> _transformQuery;
-    private EntityQuery<AppearanceComponent> _appearanceQuery;
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<SolutionContainerManagerComponent> _solutionQuery;
-    private EntityQuery<StandingStateComponent> _standingQuery;
-    private EntityQuery<FootprintComponent> _footprintQuery;
-    private EntityQuery<PressureProtectionComponent> _pressureQuery;
+    [Dependency] private EntityQuery<TransformComponent> _transformQuery = default!;
+    [Dependency] private EntityQuery<AppearanceComponent> _appearanceQuery = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private EntityQuery<SolutionManagerComponent> _solutionQuery = default!;
+    [Dependency] private EntityQuery<StandingStateComponent> _standingQuery = default!;
+    [Dependency] private EntityQuery<FootprintComponent> _footprintQuery = default!;
+    [Dependency] private EntityQuery<PressureProtectionComponent> _pressureQuery = default!;
 
     #endregion
 
@@ -65,24 +63,19 @@ public sealed class FootprintSystem : EntitySystem
     {
         base.Initialize();
 
-        _transformQuery = GetEntityQuery<TransformComponent>();
-        _appearanceQuery = GetEntityQuery<AppearanceComponent>();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _solutionQuery = GetEntityQuery<SolutionContainerManagerComponent>();
-        _standingQuery = GetEntityQuery<StandingStateComponent>();
-        _footprintQuery = GetEntityQuery<FootprintComponent>();
-        _pressureQuery = GetEntityQuery<PressureProtectionComponent>();
-
         SubscribeLocalEvent<FootprintEmitterComponent, ComponentStartup>(OnEmitterStartup);
         SubscribeLocalEvent<FootprintEmitterComponent, MoveEvent>(OnEntityMove);
-        SubscribeLocalEvent<FootprintEmitterComponent, ComponentInit>(OnFootprintEmitterInit);
+        SubscribeLocalEvent<FootprintEmitterComponent, MapInitEvent>(OnFootprintEmitterMapInit);
         SubscribeLocalEvent<FootprintComponent, ComponentStartup>(OnFootprintStartup);
     }
 
-    private void OnFootprintEmitterInit(Entity<FootprintEmitterComponent> entity, ref ComponentInit args)
+    private void OnFootprintEmitterMapInit(Entity<FootprintEmitterComponent> entity, ref MapInitEvent args)
     {
-        _solution.EnsureSolution(entity.Owner, entity.Comp.FootsSolutionName, out _, FixedPoint2.New(FootsVolume));
-        _solution.EnsureSolution(entity.Owner, entity.Comp.BodySurfaceSolutionName, out _, FixedPoint2.New(BodySurfaceVolume));
+        _solution.EnsureSolution(entity.Owner, entity.Comp.FootsSolutionName, out var feetSolution);
+        _solution.SetCapacity(feetSolution, FixedPoint2.New(FootsVolume));
+
+        _solution.EnsureSolution(entity.Owner, entity.Comp.BodySurfaceSolutionName, out var bodySolution);
+        _solution.SetCapacity(bodySolution, FixedPoint2.New(BodySurfaceVolume));
     }
 
     /// <summary>
@@ -140,7 +133,7 @@ public sealed class FootprintSystem : EntitySystem
     {
         var transform = Transform(ent);
         var mapCoords = _transform.GetMapCoordinates((ent, transform));
-        if (!_mapManager.TryFindGridAt(mapCoords, out var gridUid, out var grid))
+        if (!_mapSystem.TryFindGridAt(mapCoords, out var gridUid, out var grid))
             return;
 
         var tileRef = _mapSystem.GetTileRef((gridUid, grid), transform.Coordinates);
@@ -171,7 +164,7 @@ public sealed class FootprintSystem : EntitySystem
             {
                 if (_solution.TryGetSolution(footprint.Owner, footprint.Comp.ContainerName, out var stepSol))
                 {
-                    mergedSolution.AddSolution(stepSol.Value.Comp.Solution, _prototype);
+                    mergedSolution.AddSolution(stepSol.Value.Comp.Solution, ProtoMan);
                 }
                 QueueDel(footprint.Owner);
             }
@@ -239,7 +232,7 @@ public sealed class FootprintSystem : EntitySystem
 
         transform = Transform(ent);
         var mapCoords = _transform.GetMapCoordinates((ent, transform));
-        if (!_mapManager.TryFindGridAt(mapCoords, out gridUid, out var mapGrid))
+        if (!_mapSystem.TryFindGridAt(mapCoords, out gridUid, out var mapGrid))
             return false;
 
         grid = mapGrid;
@@ -324,7 +317,7 @@ public sealed class FootprintSystem : EntitySystem
 
         _appearance.SetData(entity,
             FootprintVisualParameter.TrackColor,
-            emitterSolution.GetColor(_prototype).WithAlpha(alpha),
+            emitterSolution.GetColor(ProtoMan).WithAlpha(alpha),
             appearance);
 
         return appearance;
@@ -382,9 +375,8 @@ public sealed class FootprintSystem : EntitySystem
     /// </summary>
     private void TransferReagents(EntityUid footprintEntity, Entity<FootprintEmitterComponent> emitter, Entity<SolutionComponent> emitterSolution, bool stand)
     {
-        if (!_solutionQuery.TryComp(footprintEntity, out var container)
-            || !_footprintQuery.TryComp(footprintEntity, out var footprint)
-            || !_solution.ResolveSolution((footprintEntity, container),
+        if (!_footprintQuery.TryComp(footprintEntity, out var footprint)
+            || !_solution.ResolveSolution(footprintEntity,
                 footprint.ContainerName,
                 ref footprint.SolutionContainer,
                 out _))

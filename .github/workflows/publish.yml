@@ -1,37 +1,34 @@
 name: Publish
 
 concurrency:
-  group: publish
+  group: disabled-wizden-publish # Sunrise-Edit - отключённый сценарий не должен отменять публикацию Sunrise
   cancel-in-progress: true
 
 on:
   workflow_dispatch:
-  schedule:
-  - cron: '0 10 * * *'
+  # schedule:
+   # - cron: '0 10 * * *'
 
 jobs:
   build:
+    if: false # Sunrise-Edit - заменён сценарием sunrise-publish.yml
     runs-on: ubuntu-latest
 
     steps:
-#    - name: Fail if not on master branch
-#      if: ${{GITHUB.REF_NAME != 'master'}}
-#      run: exit 1
+    - name: Fail if we are attempting to run on the master branch
+      if: ${{GITHUB.REF_NAME == 'master' && github.repository == 'space-wizards/space-station-14'}}
+      run: exit 1
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
+    - name: Install dependencies
+      run: sudo apt-get install -y python3-paramiko python3-lxml
 
-    - name: Install Dependencies
-      run: pip install pyyaml requests
-
-    - uses: actions/checkout@v4.2.2
+    - uses: actions/checkout@v7
       with:
         submodules: 'recursive'
-
+        fetch-depth: 0
+        filter: blob:none
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v4.1.0
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: 10.0.x
 
@@ -43,6 +40,41 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
 
+    # - name: Update changelog
+    #   run: |
+    #     dotnet tool install --global SpaceWizards.ChangelogTool --version 1.0.7
+    #     ss14-changelog update -d Resources/Changelog
+    #   env:
+    #     REPO: ${{ github.repository }}
+    #     BRANCH: stable
+    #     CHANGELOG_REPO_PATH: Resources/Changelog
+    #     EXTRA_CATEGORIES: Admin,Maps,Rules
+    #     GITHUB_TOKEN: ${{ secrets.CL_ACCESS_TOKEN }}
+
+    # - name: Commit and push changelog changes
+    #   id: changelog
+    #   run: |
+    #     git config user.name "Space-Wizards-Bot"
+    #     git config user.email "support@spacestation14.com"
+    #     if [ -n "$(git status --porcelain Resources/Changelog)" ]; then
+    #       git add Resources/Changelog
+    #       git commit -m "Update changelog"
+    #       git remote set-url origin "https://x-access-token:${CL_ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+    #       git push origin "HEAD:${GITHUB_REF_NAME}"
+    #       echo "committed=true" >> "$GITHUB_OUTPUT"
+    #     fi
+    #   env:
+    #     CL_ACCESS_TOKEN: ${{ secrets.CL_ACCESS_TOKEN }}
+
+    # - name: Create PR from stable to master
+    #   if: steps.changelog.outputs.committed == 'true'
+    #   env:
+    #     GH_TOKEN: ${{ secrets.CL_ACCESS_TOKEN }}
+    #   run: |
+    #     if [ -z "$(gh pr list --repo "$GITHUB_REPOSITORY" --head stable --base master --state open --json number --jq '.[].number')" ]; then
+    #       gh pr create --repo "$GITHUB_REPOSITORY" --base master --head stable --title "Update changelog" --body "Sync from release to master."
+    #     fi
+
     - name: Build Packaging
       run: dotnet build Content.Packaging --configuration Release --no-restore /m
 
@@ -53,7 +85,19 @@ jobs:
       run: dotnet run --project Content.Packaging client --no-wipe-release
 
     - name: Publish version
-      run: Tools/publish_multi_request.py --fork-id sunrise_station
+      run: Tools/publish_multi_request.py
       env:
         PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
         GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
+
+    - name: Publish changelog (Discord)
+      run: Tools/actions_changelogs_since_last_run.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DISCORD_WEBHOOK_URL: ${{ secrets.CHANGELOG_DISCORD_WEBHOOK }}
+
+    - name: Publish changelog (RSS)
+      continue-on-error: true
+      run: Tools/actions_changelog_rss.py
+      env:
+        CHANGELOG_RSS_KEY: ${{ secrets.CHANGELOG_RSS_KEY }}

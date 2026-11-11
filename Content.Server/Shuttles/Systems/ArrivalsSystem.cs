@@ -8,7 +8,6 @@ using Content.Server.DeviceNetwork.Systems;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;
 using Content.Server.Parallax;
-using Content.Server.Screens.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Spawners.Components;
@@ -20,12 +19,12 @@ using Content.Shared._Sunrise.UnbuildableGrid;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Damage.Components;
-using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Parallax.Biomes;
+using Content.Shared.RoundEnd;
 using Content.Shared.Preferences;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Roles;
@@ -49,27 +48,29 @@ namespace Content.Server.Shuttles.Systems;
 /// <summary>
 /// If enabled spawns players on a separate arrivals station before they can transfer to the main station.
 /// </summary>
-public sealed class ArrivalsSystem : EntitySystem
+public sealed partial class ArrivalsSystem : EntitySystem
 {
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly IConfigurationManager _cfgManager = default!;
-    [Dependency] private readonly IConsoleHost _console = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ActorSystem _actor = default!;
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly MapLoaderSystem _loader = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ShuttleSystem _shuttles = default!;
-    [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private IConfigurationManager _cfgManager = default!;
+    [Dependency] private IConsoleHost _console = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ActorSystem _actor = default!;
+    [Dependency] private BiomeSystem _biomes = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private MapLoaderSystem _loader = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ShuttleSystem _shuttles = default!;
+    [Dependency] private StationSpawningSystem _stationSpawning = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
 
-    private EntityQuery<PendingClockInComponent> _pendingQuery;
-    private EntityQuery<ArrivalsBlacklistComponent> _blacklistQuery;
-    private EntityQuery<MobStateComponent> _mobQuery;
+    [Dependency] private EntityQuery<PendingClockInComponent> _pendingQuery = default!;
+    [Dependency] private EntityQuery<ArrivalsBlacklistComponent> _blacklistQuery = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
 
     /// <summary>
     /// If enabled then spawns players on an alternate map so they can take a shuttle to the station.
@@ -114,10 +115,6 @@ public sealed class ArrivalsSystem : EntitySystem
         SubscribeLocalEvent<ArrivalsShuttleComponent, FTLCompletedEvent>(OnArrivalsDocked);
 
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(SendDirections);
-
-        _pendingQuery = GetEntityQuery<PendingClockInComponent>();
-        _blacklistQuery = GetEntityQuery<ArrivalsBlacklistComponent>();
-        _mobQuery = GetEntityQuery<MobStateComponent>();
 
         // Don't invoke immediately as it will get set in the natural course of things.
         Enabled = _cfgManager.GetCVar(CCVars.ArrivalsShuttles);
@@ -223,10 +220,10 @@ public sealed class ArrivalsSystem : EntitySystem
             TryComp<FTLComponent>(shuttleUid, out var ftlComp);
             var ftlTime = TimeSpan.FromSeconds(ftlComp?.TravelTime ?? _shuttles.DefaultTravelTime);
 
-            var payload = new NetworkPayload
+            var payload = new ScreenShuttlePayload
             {
-                [ShuttleTimerMasks.ShuttleMap] = shuttleUid,
-                [ShuttleTimerMasks.ShuttleTime] = ftlTime
+                Shuttle = shuttleUid,
+                ShuttleTime = ftlTime,
             };
 
             // unfortunate levels of spaghetti due to roundstart arrivals ftl behavior
@@ -239,16 +236,16 @@ public sealed class ArrivalsSystem : EntitySystem
                 sourceMap = station == null ? null : Transform(station.Value)?.MapUid;
                 arrivalsDelay += RoundStartFTLDuration;
                 component.FirstRun = false;
-                payload.Add(ShuttleTimerMasks.DestMap, Transform(args.TargetCoordinates.EntityId).MapUid);
-                payload.Add(ShuttleTimerMasks.DestTime, ftlTime);
+                payload.DestinationMap = Transform(args.TargetCoordinates.EntityId).MapUid;
+                payload.DestinationTime = ftlTime;
             }
             else
                 sourceMap = args.FromMapUid;
 
-            payload.Add(ShuttleTimerMasks.SourceMap, sourceMap);
-            payload.Add(ShuttleTimerMasks.SourceTime, ftlTime + TimeSpan.FromSeconds(arrivalsDelay));
+            payload.SourceMap = sourceMap;
+            payload.SourceTime = ftlTime + TimeSpan.FromSeconds(arrivalsDelay);
 
-            _deviceNetworkSystem.QueuePacket(shuttleUid, null, payload, netComp.TransmitFrequency);
+            _deviceNetworkSystem.SendPacket(shuttleUid, null, ref payload, netComp.TransmitFrequency);
         }
 
         // Don't do anything here when leaving arrivals.
@@ -297,15 +294,15 @@ public sealed class ArrivalsSystem : EntitySystem
 
         if (TryComp<DeviceNetworkComponent>(uid, out var netComp))
         {
-            var payload = new NetworkPayload
+            var payload = new ScreenShuttlePayload
             {
-                [ShuttleTimerMasks.ShuttleMap] = uid,
-                [ShuttleTimerMasks.ShuttleTime] = dockTime,
-                [ShuttleTimerMasks.SourceMap] = args.MapUid,
-                [ShuttleTimerMasks.SourceTime] = dockTime,
-                [ShuttleTimerMasks.Docked] = true
+                Shuttle = uid,
+                ShuttleTime = dockTime,
+                SourceMap = args.MapUid,
+                SourceTime = dockTime,
+                Docked = true,
             };
-            _deviceNetworkSystem.QueuePacket(uid, null, payload, netComp.TransmitFrequency);
+            _deviceNetworkSystem.SendPacket(uid, null, ref payload, netComp.TransmitFrequency);
         }
     }
 
@@ -535,43 +532,43 @@ public sealed class ArrivalsSystem : EntitySystem
         //SetupArrivalsStation();
     }
 
-    // private void SetupArrivalsStation()
-    // {
-    //     var path = new ResPath(_cfgManager.GetCVar(CCVars.ArrivalsMap));
-    //     _mapSystem.CreateMap(out var mapId, runMapInit: false);
-    //     var mapUid = _mapSystem.GetMap(mapId);
-    //
-    //     if (!_loader.TryLoadGrid(mapId, path, out var grid))
-    //         return;
-    //
-    //     _metaData.SetEntityName(mapUid, Loc.GetString("map-name-terminal"));
-    //
-    //     EnsureComp<ArrivalsSourceComponent>(grid.Value);
-    //     EnsureComp<ProtectedGridComponent>(grid.Value);
-    //     EnsureComp<PreventPilotComponent>(grid.Value);
-    //
-    //     // Setup planet arrivals if relevant
-    //     if (_cfgManager.GetCVar(CCVars.ArrivalsPlanet))
-    //     {
-    //         var template = _random.Pick(_arrivalsBiomeOptions);
-    //         _biomes.EnsurePlanet(mapUid, _protoManager.Index(template));
-    //         var restricted = new RestrictedRangeComponent
-    //         {
-    //             Range = 32f
-    //         };
-    //         AddComp(mapUid, restricted);
-    //     }
-    //
-    //     _mapSystem.InitializeMap(mapId);
-    //
-    //     // Handle roundstart stations.
-    //     var query = AllEntityQuery<StationArrivalsComponent>();
-    //
-    //     while (query.MoveNext(out var uid, out var comp))
-    //     {
-    //         SetupShuttle(uid, comp);
-    //     }
-    // }
+    private void SetupArrivalsStation()
+    {
+        var path = new ResPath(_cfgManager.GetCVar(CCVars.ArrivalsMap));
+        _mapSystem.CreateMap(out var mapId, runMapInit: false);
+        var mapUid = _mapSystem.GetMap(mapId);
+
+        if (!_loader.TryLoadGrid(mapId, path, out var grid))
+            return;
+
+        _metaData.SetEntityName(mapUid, Loc.GetString("map-name-terminal"));
+
+        EnsureComp<ArrivalsSourceComponent>(grid.Value);
+        EnsureComp<ProtectedGridComponent>(grid.Value);
+        EnsureComp<PreventPilotComponent>(grid.Value);
+
+        // Setup planet arrivals if relevant
+        if (_cfgManager.GetCVar(CCVars.ArrivalsPlanet))
+        {
+            var template = _random.Pick(_arrivalsBiomeOptions);
+            _biomes.EnsurePlanet(mapUid, ProtoMan.Index(template));
+            var restricted = new RestrictedRangeComponent
+            {
+                Range = 32f
+            };
+            AddComp(mapUid, restricted);
+        }
+
+        _mapSystem.InitializeMap(mapId);
+
+        // Handle roundstart stations.
+        var query = AllEntityQuery<StationArrivalsComponent>();
+
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            SetupShuttle(uid, comp);
+        }
+    }
 
     private void SetArrivals(bool obj)
     {

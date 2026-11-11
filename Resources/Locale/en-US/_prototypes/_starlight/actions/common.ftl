@@ -1,6 +1,6 @@
-ent-ActionToggleCyberLimb = Toggle Limb
+ent-ActionToggleCyberLimb = toggle Limb
     .desc = Toggle Limb.
-ent-ActionToggleCyberHandLeft = Toggle Hand.
-    .desc = Toggle the left hand
-ent-ActionToggleCyberHandRight = Toggle Hand.
-    .desc = Toggle the right hand
+ent-ActionToggleCyberHandLeft = toggle Hand
+    .desc = Toggle the left hand.
+ent-ActionToggleCyberHandRight = toggle Hand
+    .desc = Toggle the right hand.

@@ -8,7 +8,7 @@ namespace Content.Shared._Sunrise.Tutorial.EntitySystems;
 /// </summary>
 public sealed partial class TutorialSimulatedAlertSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
 
     public override void Initialize()
     {

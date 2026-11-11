@@ -10,7 +10,7 @@ namespace Content.Shared._Sunrise.Tutorial.Conditions;
 /// </summary>
 public sealed partial class GunShotListenedConditionSystem : EventListenedConditionSystemBase<GunShotListenedCondition>
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {

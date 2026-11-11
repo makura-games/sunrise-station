@@ -1,0 +1,12 @@
+recipe-CultGirder-name = runic girder
+recipe-CultGirder-description = A large structural element made of metal. This one bears a rune.
+recipe-AirlockGlassCult-name = runic airlock
+recipe-AirlockGlassCult-description = A strange glass airlock bearing a rune.
+recipe-CultPylon-name = pylon
+recipe-CultPylon-description = A mystical structure.
+recipe-AltarTome-name = archives
+recipe-AltarTome-description = A table piled high with secret manuscripts and books written in unknown languages.
+recipe-CultBloodAltar-name = altar
+recipe-CultBloodAltar-description = A bloody altar dedicated to some kind of creature.
+recipe-CultForge-name = forge
+recipe-CultForge-description = A forge where unholy weapons are made.

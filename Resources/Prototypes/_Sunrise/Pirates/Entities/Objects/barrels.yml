@@ -3,15 +3,15 @@
   id: ChemicalBarrelVodka
   suffix: Vodka, Vodkizine
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        maxVol: 500
-        reagents:
-        - ReagentId: Vodka
-          Quantity: 200
-        - ReagentId: Vodkizine
-          Quantity: 300
+  - type: Solution
+    id: tank
+    solution:
+      maxVol: 500
+      reagents:
+      - ReagentId: Vodka
+        Quantity: 200
+      - ReagentId: Vodkizine
+        Quantity: 300
 
 - type: entity
   parent: BaseBarrelChem
@@ -20,12 +20,12 @@
   components:
   - type: Sprite
     color: "#b0890a"
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        maxVol: 500
-        reagents:
-        - ReagentId: Rum
-          Quantity: 150
-        - ReagentId: RedRum
-          Quantity: 350
+  - type: Solution
+    id: tank
+    solution:
+      maxVol: 500
+      reagents:
+      - ReagentId: Rum
+        Quantity: 150
+      - ReagentId: RedRum
+        Quantity: 350

@@ -1,0 +1,14 @@
+- type: !PartialOnly tile
+  id: Plating
+  sprite: /Textures/_Sunrise/Tiles/plating.png
+  variants: 1
+
+- type: !PartialOnly tile
+  id: PlatingDamaged
+  sprite: /Textures/_Sunrise/Tiles/plating_damaged.png
+  variants: 3
+
+- type: !PartialOnly tile
+  id: PlatingSnow
+  sprite: /Textures/_Sunrise/Tiles/snow_plating.png #Not in the snow planet RSI because it doesn't have any metadata. Should probably be moved to its own folder later.
+  variants: 1

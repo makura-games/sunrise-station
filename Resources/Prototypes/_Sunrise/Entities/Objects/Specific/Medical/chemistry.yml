@@ -28,10 +28,10 @@
     fillBaseName: beaker
     inHandsMaxFillLevels: 3
     inHandsFillBaseName: -fill-
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 150
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 150
   - type: Destructible
     thresholds:
     - trigger:
@@ -59,10 +59,10 @@
   id: JugBluespace
   description: Uses bluespace technology to contain an impossible amount of liquid.
   components:
-    - type: SolutionContainerManager
-      solutions:
-        beaker:
-          maxVol: 2000
+    - type: Solution
+      id: beaker
+      solution:
+        maxVol: 2000
     - type: Sprite
       sprite: _Sunrise/Objects/Specific/Chemistry/jug_bluespace.rsi
       layers:
@@ -120,10 +120,10 @@
     fillBaseName: vial-1-
     inHandsMaxFillLevels: 4
     inHandsFillBaseName: -fill-
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 300
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 300
   - type: SolutionTransfer
     maxTransferAmount: 300
   - type: Item
@@ -138,17 +138,17 @@
   name: toxic mini syringe
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      injector:
-        maxVol: 5
-        reagents:
-        - ReagentId: Ipecac
-          Quantity: 3
-        - ReagentId: Licoxide
-          Quantity: 1
-        - ReagentId: Tricordrazine
-          Quantity: 1
+  - type: Solution
+    id: injector
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: Ipecac
+        Quantity: 3
+      - ReagentId: Licoxide
+        Quantity: 1
+      - ReagentId: Tricordrazine
+        Quantity: 1
   - type: TimedDespawn
     lifetime: 25
 
@@ -158,15 +158,15 @@
   name: burn treatment mini syringe
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      injector:
-        maxVol: 5
-        reagents:
-        - ReagentId: Pyrazine
-          Quantity: 2.25
-        - ReagentId: Dermaline
-          Quantity: 2.75
+  - type: Solution
+    id: injector
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: Pyrazine
+        Quantity: 2.25
+      - ReagentId: Dermaline
+        Quantity: 2.75
   - type: TimedDespawn
     lifetime: 25
   - type: SpawnOnDespawn
@@ -178,15 +178,15 @@
   name: trauma treatment mini syringe
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      injector:
-        maxVol: 5
-        reagents:
-        - ReagentId: Puncturase
-          Quantity: 4
-        - ReagentId: TranexamicAcid
-          Quantity: 1
+  - type: Solution
+    id: injector
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: Puncturase
+        Quantity: 4
+      - ReagentId: TranexamicAcid
+        Quantity: 1
   - type: TimedDespawn
     lifetime: 25
   - type: SpawnOnDespawn
@@ -198,15 +198,15 @@
   name: oxygenation mini syringe
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      injector:
-        maxVol: 5
-        reagents:
-        - ReagentId: DexalinPlus
-          Quantity: 2.5
-        - ReagentId: Saline
-          Quantity: 2.5
+  - type: Solution
+    id: injector
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: DexalinPlus
+        Quantity: 2.5
+      - ReagentId: Saline
+        Quantity: 2.5
   - type: TimedDespawn
     lifetime: 25
   - type: SpawnOnDespawn
@@ -218,13 +218,13 @@
   name: stimulant mini syringe
   categories: [ HideSpawnMenu ]
   components:
-  - type: SolutionContainerManager
-    solutions:
-      injector:
-        maxVol: 5
-        reagents:
-        - ReagentId: Ephedrine
-          Quantity: 5
+  - type: Solution
+    id: injector
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: Ephedrine
+        Quantity: 5
   - type: TimedDespawn
     lifetime: 25
   - type: SpawnOnDespawn

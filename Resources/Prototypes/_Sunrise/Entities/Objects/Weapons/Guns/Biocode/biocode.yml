@@ -209,8 +209,8 @@
     - Pirate
 
 - type: entity
-  parent: WeaponSubMachineGunC40r
-  id: WeaponSubMachineGunC40rBiocode
+  parent: WeaponSubMachineGunVector
+  id: WeaponSubMachineGunVectorBiocode
   suffix: BIOCODE
   components:
   - type: FactionWeaponBlocker

@@ -31,13 +31,12 @@ public sealed partial class AnomalyAutoInjectorSystem : EntitySystem
 {
     private static readonly ProtoId<DamageTypePrototype> CellularDamageType = "Cellular";
 
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -127,7 +126,7 @@ public sealed partial class AnomalyAutoInjectorSystem : EntitySystem
             if (!Exists(uid))
                 continue;
 
-            var damage = new DamageSpecifier(_proto.Index<DamageTypePrototype>(CellularDamageType), pending.CellularDamage);
+            var damage = new DamageSpecifier(ProtoMan.Index<DamageTypePrototype>(CellularDamageType), pending.CellularDamage);
             _damageableSystem.TryChangeDamage(uid, damage);
 
             if (!HasComp<InnerBodyAnomalyComponent>(uid))
@@ -146,7 +145,7 @@ public sealed partial class AnomalyAutoInjectorSystem : EntitySystem
     {
         injectionComponents = null;
 
-        if (!_proto.TryIndex<EntityPrototype>(protoId, out var protoTrap))
+        if (!ProtoMan.TryIndex<EntityPrototype>(protoId, out var protoTrap))
             return false;
 
         InnerBodyAnomalyInjectorComponent? anomalyInjector = null;

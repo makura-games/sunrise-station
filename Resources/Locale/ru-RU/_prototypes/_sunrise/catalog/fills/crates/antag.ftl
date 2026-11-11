@@ -1,6 +1,3 @@
-ent-CratePirateChestSun = { ent-CratePirate }
-    .suffix = Заполнен, Оружие, SUNRISE
-    .desc = { ent-CratePirate.desc }
 ent-CratePiraterEVASuitArmoredBundle = набор бронированных ева-костюмов пиратов
     .suffix = Заполнен, Санрайз
     .desc = { ent-CrateGenericSteel.desc }

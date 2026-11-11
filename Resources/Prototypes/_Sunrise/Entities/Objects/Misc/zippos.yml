@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseItem
   id: FlippoLighterSunriseBase
@@ -45,13 +45,13 @@
         base:
           True: { visible: false }
           False: { visible: true }
-  - type: SolutionContainerManager
-    solutions:
-      Welder:
-        reagents:
-        - ReagentId: WeldingFuel
-          Quantity: 12
-        maxVol: 12
+  - type: Solution
+    id: Welder
+    solution:
+      reagents:
+      - ReagentId: WeldingFuel
+        Quantity: 12
+      maxVol: 12
   - type: Welder
     fuelConsumption: 0.01
     fuelLitCost: 0.1

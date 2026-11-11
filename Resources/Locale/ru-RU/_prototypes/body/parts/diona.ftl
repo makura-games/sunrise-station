@@ -20,7 +20,6 @@ ent-LeftFootDiona = левая стопа дионы
     .desc = { ent-PartDiona.desc }
 ent-RightFootDiona = правая стопа дионы
     .desc = { ent-PartDiona.desc }
-
 ent-OrganDionaTorso = { ent-TorsoDiona }
     .desc = { ent-TorsoDiona.desc }
 ent-OrganDionaHead = { ent-HeadDiona }

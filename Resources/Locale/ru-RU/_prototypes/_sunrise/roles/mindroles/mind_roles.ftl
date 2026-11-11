@@ -1,10 +1,8 @@
-ent-MindRoleTerminator = Роль Терминатора
+ent-MindRoleFugitive = роль Беглеца
     .desc = { ent-BaseMindRoleAntag.desc }
-ent-MindRoleFugitive = Роль Беглеца
+ent-MindRolePlanetPrisoner = роль Заключенного
     .desc = { ent-BaseMindRoleAntag.desc }
-ent-MindRolePlanetPrisoner = Роль Заключенного
+ent-MindRoleLoneAbductor = роль Одинокого Абдуктора
     .desc = { ent-BaseMindRoleAntag.desc }
-ent-MindRoleLoneAbductor = Роль Одинокого Абдуктора
-    .desc = { ent-BaseMindRoleAntag.desc }
-ent-AbductorVictimRole = Жертва Абдуктора
+ent-AbductorVictimRole = жертва Абдуктора
     .desc = { ent-BaseMindRoleAntag.desc }

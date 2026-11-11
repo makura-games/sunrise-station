@@ -14,11 +14,11 @@ namespace Content.Shared._Sunrise.Razor;
 /// <summary>
 /// Система для электробритвы - копия ножниц с вайлдберрис. Бритва не может менять цвет волос!
 /// </summary>
-public abstract class SharedRazorSystem : EntitySystem
+public abstract partial class SharedRazorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SunriseHumanoidMarkingSystem _sunriseMarking = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SunriseHumanoidMarkingSystem _sunriseMarking = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
 
     public override void Initialize()
     {

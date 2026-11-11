@@ -9,6 +9,7 @@ using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.Destructible.Thresholds.Triggers;
 using Content.Shared.Tag;
+using Content.Shared.Wall;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
@@ -16,11 +17,12 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Sunrise.FleshCult.FleshGrowth;
 
-public sealed class SpreaderFleshSystem : EntitySystem
+public sealed partial class SpreaderFleshSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private DestructibleSystem _destructible = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
 
     private const int GrowthsPerInterval = 5;
     private const float UpdateInterval = 1.0f;
@@ -28,23 +30,21 @@ public sealed class SpreaderFleshSystem : EntitySystem
     private const int MinMaxSpawnCount = 1;
 
     private static readonly ProtoId<TagPrototype> DirectionalTag = "Directional";
-    private static readonly ProtoId<TagPrototype>[] WallOrWindowTags = ["Wall", "Window"];
+    private static readonly ProtoId<TagPrototype> WindowTag = "Window";
     private static readonly ProtoId<TagPrototype>[] FleshOrDirectionalTags = ["Flesh", "Directional"];
 
     private float _accumulatedFrameTime;
     private readonly HashSet<EntityUid> _edgeGrowths = new();
-    private EntityQuery<SpreaderFleshComponent> _spreaderQuery;
-    private EntityQuery<TransformComponent> _transformQuery;
-    private EntityQuery<MapGridComponent> _gridQuery;
+    [Dependency] private EntityQuery<SpreaderFleshComponent> _spreaderQuery = default!;
+    [Dependency] private EntityQuery<TransformComponent> _transformQuery = default!;
+    [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
+    [Dependency] private EntityQuery<WallComponent> _wallQuery = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<SpreaderFleshComponent, ComponentAdd>(SpreaderAddHandler);
         SubscribeLocalEvent<AirtightChanged>(OnAirtightChanged);
 
-        _spreaderQuery = GetEntityQuery<SpreaderFleshComponent>();
-        _transformQuery = GetEntityQuery<TransformComponent>();
-        _gridQuery = GetEntityQuery<MapGridComponent>();
     }
 
     private void OnAirtightChanged(ref AirtightChanged ev)
@@ -66,7 +66,7 @@ public sealed class SpreaderFleshSystem : EntitySystem
         if (!_gridQuery.TryGetComponent(transform.GridUid, out var grid))
             return;
 
-        var tile = grid.TileIndicesFor(transform.Coordinates);
+        var tile = _mapSystem.TileIndicesFor(transform.GridUid.Value, grid, transform.Coordinates);
 
         for (var i = 0; i < Atmospherics.Directions; i++)
         {
@@ -74,7 +74,7 @@ public sealed class SpreaderFleshSystem : EntitySystem
             if (!comp.AirBlockedDirection.IsFlagSet(direction))
                 continue;
 
-            var directionEnumerator = grid.GetAnchoredEntitiesEnumerator(
+            var directionEnumerator = _mapSystem.GetAnchoredEntitiesEnumerator(transform.GridUid.Value, grid,
                 SharedMapSystem.GetDirection(tile, direction.ToDirection()));
 
             while (directionEnumerator.MoveNext(out var ent))
@@ -124,11 +124,11 @@ public sealed class SpreaderFleshSystem : EntitySystem
             var direction = (DirectionFlag)(1 << i);
             var coords = transform.Coordinates.Offset(direction.AsDir().ToVec());
 
-            if (grid.GetTileRef(coords).Tile.IsEmpty || _robustRandom.Prob(1 - spreader.Chance))
+            if (_mapSystem.GetTileRef(transform.GridUid.Value, grid, coords).Tile.IsEmpty || _robustRandom.Prob(1 - spreader.Chance))
                 continue;
 
             var ents = _mapSystem.GetLocal(transform.GridUid.Value, grid, coords);
-            var entityUids = ents as EntityUid[] ?? ents.ToArray();
+            var entityUids = ents.ToArray();
 
             if (entityUids.Any(x => IsTileBlockedFrom(x, direction)))
                 continue;
@@ -156,7 +156,7 @@ public sealed class SpreaderFleshSystem : EntitySystem
 
         foreach (var entityUid in entities)
         {
-            if (_tagSystem.HasAnyTag(entityUid, WallOrWindowTags))
+            if (IsWallOrWindow(entityUid))
             {
                 if (!_tagSystem.HasAnyTag(entityUid, DirectionalTag))
                 {
@@ -193,21 +193,25 @@ public sealed class SpreaderFleshSystem : EntitySystem
 
         if (TryComp<DestructibleComponent>(fleshWall, out var destructible))
         {
-            SetupDestructibleComponent(destructible, entityStructureId);
+            SetupDestructibleComponent((fleshWall, destructible), entityStructureId);
         }
 
         foreach (var entityUid in existingEntities)
         {
-            if (_tagSystem.HasAnyTag(entityUid, WallOrWindowTags))
+            if (IsWallOrWindow(entityUid))
                 Del(entityUid);
         }
 
         return true;
     }
 
-    private void SetupDestructibleComponent(DestructibleComponent destructible, string entityStructureId)
+    private bool IsWallOrWindow(EntityUid entity)
     {
-        destructible.Thresholds.Clear();
+        return _wallQuery.HasComp(entity) || _tagSystem.HasTag(entity, WindowTag);
+    }
+
+    private void SetupDestructibleComponent(Entity<DestructibleComponent> destructible, string entityStructureId)
+    {
         var damageThreshold = new DamageThreshold
         {
             Trigger = new DamageTrigger { Damage = DefaultDamageThreshold }
@@ -227,7 +231,7 @@ public sealed class SpreaderFleshSystem : EntitySystem
             Acts = ThresholdActs.Destruction
         });
 
-        destructible.Thresholds.Add(damageThreshold);
+        _destructible.ReplaceThresholds(destructible, damageThreshold);
     }
 
     private bool IsTileBlockedFrom(EntityUid ent, DirectionFlag dir)

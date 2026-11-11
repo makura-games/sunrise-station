@@ -13,10 +13,10 @@ namespace Content.Client._Sunrise.Messenger;
 /// Тег для отображения эмодзи мессенджера в RichText.
 /// Разрешает только эмодзи из прототипов, чтобы игроки не могли использовать произвольные текстуры.
 /// </summary>
-public sealed class EmojiTag : IMarkupTagHandler
+public sealed partial class EmojiTag : IMarkupTagHandler
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
     private static SpriteSystem? _spriteSystem;
 

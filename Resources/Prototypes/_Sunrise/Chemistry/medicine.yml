@@ -81,12 +81,11 @@
           - !type:ReagentCondition
             reagent: BarozinePlus
             min: 30
-      - !type:GenericStatusEffect
-        key: PressureImmunity
-        component: PressureImmunity
-      - !type:GenericStatusEffect
-        key: Stutter
-        component: StutteringAccent
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPressureImmunity
+        type: Add
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectStutter
       - !type:Jitter
       - !type:Emote
         emote: Scream

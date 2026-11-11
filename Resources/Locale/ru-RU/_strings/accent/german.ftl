@@ -1,7 +1,4 @@
-# Sunrise-edit
-
 accent-german-words-1 = да
-accent-german-words-1-2 = ага
 accent-german-words-replace-1 = да
 accent-german-words-2 = нет
 accent-german-words-replace-2 = нейн
@@ -18,13 +15,14 @@ accent-german-words-replace-7 = манн
 accent-german-words-8 = мужики
 accent-german-words-replace-8 = манне
 accent-german-words-9 = женщина
-accent-german-words-9-2 = леди
 accent-german-words-replace-9 = фрау
 accent-german-words-10 = женщины
 accent-german-words-10-2 = дамы
 accent-german-words-replace-10 = фрауэн
 accent-german-words-11 = джентельмен
 accent-german-words-replace-11 = хеа
+accent-german-words-1-2 = ага
+accent-german-words-9-2 = леди
 accent-german-words-12 = джентельмены
 accent-german-words-replace-12 = хеъен
 accent-german-words-13 = мой бог

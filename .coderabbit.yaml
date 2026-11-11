@@ -19,6 +19,11 @@ knowledge_base:
 
 reviews:
   profile: assertive
+  request_changes_workflow: false
+  fail_commit_status: true
+  auto_review:
+    drafts: true
+    auto_pause_after_reviewed_commits: 0
   path_instructions:
     - path: "**/*"
       instructions: |

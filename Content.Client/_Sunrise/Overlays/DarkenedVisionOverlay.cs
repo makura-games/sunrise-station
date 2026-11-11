@@ -14,11 +14,11 @@ using Content.Client.Sunrise.Overlays;
 
 namespace Content.Client.Sunrise.Overlays;
 
-public sealed class DarkenedVisionOverlay : Overlay
+public sealed partial class DarkenedVisionOverlay : Overlay
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     public override bool RequestScreenTexture => true;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;

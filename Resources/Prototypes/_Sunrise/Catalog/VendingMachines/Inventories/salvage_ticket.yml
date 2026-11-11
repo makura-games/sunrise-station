@@ -224,6 +224,17 @@
   - !type:ListingLimitedStockCondition
     stock: 5
 
+- type: listing
+  id: VendorSalvageMedipenCaseSalvage
+  productEntity: MedipenCaseSalvage
+  cost:
+    SalvageTicket: 100
+  categories:
+  - SalvageEquipment
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 8
+
 # weapons
 - type: listing
   id: VendorSalvageWeaponLaserSvalinn

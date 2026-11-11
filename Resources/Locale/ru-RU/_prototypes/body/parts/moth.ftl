@@ -20,7 +20,6 @@ ent-LeftFootMoth = левая стопа нианы
     .desc = { ent-PartMoth.desc }
 ent-RightFootMoth = правая стопа нианы
     .desc = { ent-PartMoth.desc }
-
 ent-OrganMothTorso = { ent-TorsoMoth }
     .desc = { ent-TorsoMoth.desc }
 ent-OrganMothHead = { ent-HeadMoth }

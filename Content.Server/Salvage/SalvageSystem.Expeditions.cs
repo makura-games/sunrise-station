@@ -164,7 +164,7 @@ public sealed partial class SalvageSystem
         var roundDuration = _gameTicker.RunLevel == GameRunLevel.InRound
             ? _gameTicker.RoundDuration()
             : TimeSpan.Zero;
-        var availableDifficulties = _prototypeManager // Sunrise-Edit
+        var availableDifficulties = ProtoMan // Sunrise-Edit
             .EnumeratePrototypes<SalvageDifficultyPrototype>()
             .Where(d => d.Delay <= roundDuration && d.Probability > 0f)
             .ToDictionary(d => d.ID, d => d.Probability); // Sunrise-Edit
@@ -205,8 +205,8 @@ public sealed partial class SalvageSystem
             SalvageJobTime,
             EntityManager,
             _timing,
-            _logManager,
-            _prototypeManager,
+            LogManager,
+            ProtoMan,
             _anchorable,
             _biome,
             _dungeon,

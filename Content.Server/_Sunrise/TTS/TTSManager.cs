@@ -13,7 +13,7 @@ using Robust.Shared.Configuration;
 namespace Content.Server._Sunrise.TTS;
 
 // ReSharper disable once InconsistentNaming
-public sealed class TTSManager
+public sealed partial class TTSManager
 {
     private static readonly Histogram RequestTimings = Metrics.CreateHistogram(
         "tts_req_timings",
@@ -28,8 +28,8 @@ public sealed class TTSManager
         "tts_wanted_count",
         "Amount of wanted TTS audio.");
 
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ILogManager _logMan = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ILogManager _logMan = default!;
 
     private readonly HttpClient _httpClient = new();
 

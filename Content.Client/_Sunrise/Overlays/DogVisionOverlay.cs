@@ -9,10 +9,10 @@ using System.Numerics;
 
 namespace Content.Client._Sunrise.Overlays;
 
-public sealed class DogVisionOverlay : Overlay
+public sealed partial class DogVisionOverlay : Overlay
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] IEntityManager _entityManager = default!;
     public override bool RequestScreenTexture => true;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;

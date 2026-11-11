@@ -1,4 +1,12 @@
 - type: latheRecipe
+  parent: BaseToolRecipe
+  id: EnergyBola
+  result: EnergyBola
+  materials:
+    Steel: 600
+    Plastic: 50
+
+- type: latheRecipe
   id: WeaponMiniEnergyGun
   result: WeaponMiniEnergyGun
   categories:
@@ -93,18 +101,6 @@
     Gold: 50
 
 - type: latheRecipe
-  id: LecterMk3Upgrade
-  result: LecterMk3Upgrade
-  categories:
-  - Weapons
-  completetime: 24
-  materials:
-    Steel: 300
-    Plastic: 600
-    Gold: 100
-    Plasma: 100
-
-- type: latheRecipe
   id: EnergyDomeDirectionalTurtle
   result: EnergyDomeDirectionalTurtle
   completetime: 12
@@ -113,6 +109,18 @@
     Plastic: 500
     Gold: 250
     Uranium: 50
+
+- type: latheRecipe
+  parent: BaseShieldRecipe
+  id: SunriseEnergyShieldSec
+  result: SunriseEnergyShieldSec
+  completetime: 12
+  materials:
+    Steel: 1100
+    Glass: 600
+    Plastic: 600
+    Plasma: 200
+    Gold: 200
 
 # Mech Weapons
 - type: latheRecipe
@@ -460,12 +468,15 @@
     Glass: 250
 
 - type: latheRecipe
-  id: BolaSecurity
-  result: BolaSecurity
-  completetime: 2
+  id: PouchAmmo
+  result: PouchAmmo
+  categories:
+  - Clothing
+  completetime: 10
   materials:
-    Plastic: 300
-    Steel: 300
+    Cloth: 400
+    Durathread: 200
+    Plastic: 250
 
 # Milira equipment
 

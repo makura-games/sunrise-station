@@ -17,9 +17,9 @@ namespace Content.Client.Lobby
     /// </summary>
     public sealed partial class ClientPreferencesManager : IClientPreferencesManager
     {
-        [Dependency] private readonly IClientNetManager _netManager = default!;
-        [Dependency] private readonly IBaseClient _baseClient = default!;
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
+        [Dependency] private IClientNetManager _netManager = default!;
+        [Dependency] private IBaseClient _baseClient = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
         private ISharedSponsorsManager? _sponsorsManager; // Sunrise-Sponsors
 
         public event Action? OnServerDataLoaded;

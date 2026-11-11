@@ -1,13 +1,12 @@
-using Content.Server.Botany.Components;
 using Content.Shared.Botany.Components;
 using Content.Shared.CartridgeLoader;
 using Robust.Server.GameObjects;
 
 namespace Content.Server.CartridgeLoader.Cartridges;
 
-public sealed class PlantAnalyzerCartridgeSystem : EntitySystem
+public sealed partial class PlantAnalyzerCartridgeSystem : EntitySystem
 {
-    [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoaderSystem = null!;
+    [Dependency] private CartridgeLoaderSystem _cartridgeLoaderSystem = null!;
 
     public override void Initialize()
     {
@@ -29,7 +28,7 @@ public sealed class PlantAnalyzerCartridgeSystem : EntitySystem
         var loader = args.Loader;
 
         // Удаляем компонент только если больше нет картриджей с этим функционалом
-        if (!_cartridgeLoaderSystem.HasProgram<PlantAnalyzerCartridgeComponent>(loader))
+        if (!_cartridgeLoaderSystem.HasProgram<PlantAnalyzerCartridgeComponent>(loader.AsNullable()))
         {
             RemComp<PlantAnalyzerComponent>(loader);
         }

@@ -1,3 +1,5 @@
+# Non Descript Solo Antags
+
 - type: antag
   id: GenericAntagonist
   name: roles-antag-generic-solo-antagonist-name
@@ -5,6 +7,8 @@
   objective: never-shown
   playTimeTracker: AntagAntagonist # Sunrise-Edit
   storytellerStress: 1 # Sunrise-Edit
+
+# Non Descript Team Antags
 
 - type: antag
   id: GenericTeamAntagonist
@@ -14,18 +18,12 @@
   playTimeTracker: AntagTeamAntagonist # Sunrise-Edit
   storytellerStress: 1 # Sunrise-Edit
 
+# Free Agents
+
 - type: antag
   id: GenericFreeAgent
   name: roles-antag-generic-free-agent-name
   antagonist: true
   objective: never-shown
   playTimeTracker: AntagFreeAgent # Sunrise-Edit
-  storytellerStress: 0.5 # Sunrise-Edit
-
-- type: antag
-  id: GenericSiliconAntagonist
-  name: roles-antag-generic-silicon-antagonist-name
-  antagonist: true
-  objective: never-shown
-  playTimeTracker: AntagSiliconAntagonist # Sunrise-Edit
   storytellerStress: 0.5 # Sunrise-Edit

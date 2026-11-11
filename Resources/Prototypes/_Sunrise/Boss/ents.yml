@@ -1,4 +1,4 @@
-﻿# spawn animation, spawns actual narsie when it ends
+# spawn animation, spawns actual narsie when it ends
 - type: entity
   id: MobHellspawnBossSpawn
   suffix: Spawn
@@ -62,8 +62,9 @@
     components:
     - type: RadarBlip
   - type: Damageable
-    damageContainer: BiologicalMetaphysical
     damageModifierSet: HellSpawnBoss
+  - type: Injurable
+    damageContainer: BiologicalMetaphysical
   - type: ExplosionResistance
     damageCoefficient: 0.25
   - type: Fixtures
@@ -140,8 +141,8 @@
     distance: 2
     speed: 12
   # Abilities end
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: ClothingUniformJumpsuitGalaxyBlue
       prob: 0.75
     - id: ClothingUniformJumpsuitGalaxyRed
@@ -273,7 +274,9 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MeatLaserImpact
-  - type: PressureImmunity
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectPressureImmunity
   - type: Tag
     tags:
     - Hellspawn

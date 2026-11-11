@@ -23,8 +23,10 @@ namespace Content.Shared._Sunrise.Preferences;
 [Serializable, NetSerializable]
 public sealed partial class SunriseCharacterProfile : IEquatable<SunriseCharacterProfile>
 {
-    [DataField]
-    public ProtoId<TTSVoicePrototype> Voice = SunriseHumanoidProfileDefaults.DefaultVoice;
+    // Старые экспорты SunriseProfile сохраняют TTS под ключом voice.
+    // Нужен чтобы у персов в конфиге не слетело значение
+    [DataField("voice")]
+    public ProtoId<TTSVoicePrototype> TtsVoice = SunriseHumanoidProfileDefaults.DefaultVoice;
 
     [DataField]
     public ProtoId<BodyTypePrototype> BodyType = SunriseHumanoidProfileDefaults.DefaultBodyType;
@@ -46,7 +48,7 @@ public sealed partial class SunriseCharacterProfile : IEquatable<SunriseCharacte
 
     public SunriseCharacterProfile(SunriseCharacterProfile other)
     {
-        Voice = other.Voice;
+        TtsVoice = other.TtsVoice;
         BodyType = other.BodyType;
         Width = other.Width;
         Height = other.Height;
@@ -67,7 +69,7 @@ public sealed partial class SunriseCharacterProfile : IEquatable<SunriseCharacte
         var bodyType = SunriseHumanoidProfileDefaults.GetDefaultBodyType(species, sex, prototype);
         return new SunriseCharacterProfile
         {
-            Voice = GetDefaultVoice(sex),
+            TtsVoice = GetDefaultVoice(sex),
             BodyType = bodyType,
             Width = species?.DefaultWidth ?? 1f,
             Height = species?.DefaultHeight ?? 1f,
@@ -93,14 +95,14 @@ public sealed partial class SunriseCharacterProfile : IEquatable<SunriseCharacte
             .ToArray();
 
         if (voices.Length > 0)
-            profile.Voice = random.Pick(voices).ID;
+            profile.TtsVoice = random.Pick(voices).ID;
 
         return profile;
     }
 
-    public SunriseCharacterProfile WithVoice(ProtoId<TTSVoicePrototype> voice)
+    public SunriseCharacterProfile WithTtsVoice(ProtoId<TTSVoicePrototype> voice)
     {
-        return new(this) { Voice = voice };
+        return new(this) { TtsVoice = voice };
     }
 
     public SunriseCharacterProfile WithBodyType(ProtoId<BodyTypePrototype> bodyType)
@@ -174,11 +176,11 @@ public sealed partial class SunriseCharacterProfile : IEquatable<SunriseCharacte
         result.Width = Math.Clamp(result.Width, species.MinWidth, species.MaxWidth);
         result.Height = Math.Clamp(result.Height, species.MinHeight, species.MaxHeight);
 
-        if (!prototype.TryIndex<TTSVoicePrototype>(result.Voice, out var voice) ||
+        if (!prototype.TryIndex<TTSVoicePrototype>(result.TtsVoice, out var voice) ||
             !HumanoidCharacterProfile.CanHaveVoice(voice, sex) ||
             voice.SponsorOnly && !sponsorPrototypes.Contains(voice.ID))
         {
-            result.Voice = GetDefaultVoice(sex);
+            result.TtsVoice = GetDefaultVoice(sex);
         }
 
         var validAlternativeTitles = new Dictionary<ProtoId<JobPrototype>, LocId>();
@@ -205,7 +207,7 @@ public sealed partial class SunriseCharacterProfile : IEquatable<SunriseCharacte
         if (other is null)
             return false;
 
-        return Voice == other.Voice &&
+        return TtsVoice == other.TtsVoice &&
                BodyType == other.BodyType &&
                MathF.Abs(Width - other.Width) < 0.0001f &&
                MathF.Abs(Height - other.Height) < 0.0001f &&
@@ -219,6 +221,6 @@ public sealed partial class SunriseCharacterProfile : IEquatable<SunriseCharacte
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Voice, BodyType, Width, Height, _jobAlternativeTitles);
+        return HashCode.Combine(TtsVoice, BodyType, Width, Height, _jobAlternativeTitles);
     }
 }

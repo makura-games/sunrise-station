@@ -12,15 +12,15 @@
           - id: RubberStampIAA
 
 - type: entity
-  id: BriefcaseWeaponC40Filled
+  id: BriefcaseWeaponVectorFilled
   parent: BriefcaseWeaponSmall
-  name: secure C-40r case
+  name: secure Vector Super case
   components:
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: WeaponSubMachineGunC40r
+        - id: WeaponSubMachineGunVector
         - id: MagazineBoxPistol40SP
 
 - type: entity

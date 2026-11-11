@@ -14,10 +14,10 @@ namespace Content.Client._Sunrise.Mood;
 /// <summary>
 /// Применяет состояния настроения к настроенным слоям markings гуманоида.
 /// </summary>
-public sealed class MoodVisualizerSystem : VisualizerSystem<MoodVisualsComponent>
+public sealed partial class MoodVisualizerSystem : VisualizerSystem<MoodVisualsComponent>
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SunriseHumanoidBodySystem _body = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SunriseHumanoidBodySystem _body = default!;
 
     public override void Initialize()
     {

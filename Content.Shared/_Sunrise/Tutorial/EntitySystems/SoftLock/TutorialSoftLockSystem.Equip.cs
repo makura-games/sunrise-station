@@ -66,7 +66,7 @@ public sealed partial class TutorialSoftLockSystem
 
         args.Reason = ent.Comp.Popup;
         args.Cancel();
-        ShowPopup(args.Equipee, ent.Comp.Popup);
+        ShowPopup(args.EquipTarget, ent.Comp.Popup);
     }
 
     private void TryCancelBlockedEquip(Entity<TutorialEquipBlockedSoftLockComponent> ent, EquipAttemptBase args)
@@ -82,7 +82,7 @@ public sealed partial class TutorialSoftLockSystem
 
         args.Reason = ent.Comp.Popup;
         args.Cancel();
-        ShowPopup(args.Equipee, ent.Comp.Popup);
+        ShowPopup(args.EquipTarget, ent.Comp.Popup);
     }
 
     private void OnUnequipAttempt(Entity<TutorialUnequipSoftLockComponent> ent, ref IsUnequippingAttemptEvent args)

@@ -16,23 +16,6 @@
           amount: 4
 
 - type: entity
-  id: CrateArmoryCombatShotgun
-  parent: [ CrateWeaponSecure, BaseSecurityContraband ]
-  name: Combat Shotgun crate
-  description: Contains two Combat Shotgun with two Bandolier and four buckshot box. Requires Armory access to open.
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponShotgunCombat
-          amount: 2
-        - id: ClothingBeltBandolier
-          amount: 2
-        - id: BoxLethalshot
-          amount: 4
-
-- type: entity
   id: CrateArmoryShotgunAmmo
   parent: [ CrateWeaponSecure, BaseSecurityContraband ]
   name: Shotgun Ammo crate
@@ -47,21 +30,6 @@
         - id: BoxBeanbag
           amount: 2
         - id: BoxShotgunSlug
-          amount: 2
-
-- type: entity
-  id: CrateArmoryMP5
-  parent: [ CrateWeaponSecure, BaseSecurityContraband ]
-  name: MP5 crate
-  description: Contains two MP5 submachine gun with two mags. Requires Armory access to open.
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponSubMachineGunMP5
-          amount: 2
-        - id: MagazineMP5
           amount: 2
 
 - type: entity

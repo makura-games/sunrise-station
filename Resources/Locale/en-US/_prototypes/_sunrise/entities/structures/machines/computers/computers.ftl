@@ -7,3 +7,7 @@ ent-AbductorHumanObservationConsoleEye = abductor eye
     .suffix = DO NOT MAP
 ent-SlopDispenser = nutrient paste dispenser
     .desc = Produces tha slop using biomass. Can also convert plants to biomass for direct use.
+ent-SunriseComputerCriminalRecords = criminal records terminal
+    .desc = A computer used to view employees' criminal records.
+ent-ComputerPrisonerManagement = prisoner management console
+    .desc = A terminal used to manage prisoners and assign them to cells.

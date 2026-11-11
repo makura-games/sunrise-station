@@ -14,14 +14,14 @@
   parent: SoakedCigarette
   name: Gerat's sandworm cigarette
   components:
-  - type: SolutionContainerManager
-    solutions:
-      smokable:
-        maxVol: 50
-        reagents:
-          - ReagentId: Nicotine
-            Quantity: 10
-          - ReagentId: Omnizine
-            Quantity: 20
-          - ReagentId: Vodkizine
-            Quantity: 20
+  - type: Solution
+    id: smokable
+    solution:
+      maxVol: 50
+      reagents:
+        - ReagentId: Nicotine
+          Quantity: 10
+        - ReagentId: Omnizine
+          Quantity: 20
+        - ReagentId: Vodkizine
+          Quantity: 20

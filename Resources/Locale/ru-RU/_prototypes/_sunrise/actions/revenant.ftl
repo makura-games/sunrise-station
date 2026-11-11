@@ -1,4 +1,4 @@
-ent-ActionRevenantLock = Перегрузка шлюзов
+ent-ActionRevenantLock = перегрузка шлюзов
     .desc = Цена 60 эссенций.
-ent-ActionRevenantDrain = Похищение эссенции
+ent-ActionRevenantDrain = похищение эссенции
     .desc = Похищает эссенцию у ближайших живых жертв, нанося им генетический урон.

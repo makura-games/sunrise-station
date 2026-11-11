@@ -24,6 +24,7 @@ using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Tag;
 using Content.Shared.Traits.Assorted;
+using Content.Shared.Wall;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Map.Components;
@@ -36,11 +37,10 @@ namespace Content.Server._Sunrise.FleshCult;
 
 public sealed partial class FleshCultSystem
 {
-    [Dependency] private readonly FleshCultRuleSystem _fleshCultRule = default!;
-    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
-
-    private static readonly ProtoId<TagPrototype>[] FleshWallTags = ["Wall", "Flesh"];
-    private static readonly ProtoId<TagPrototype>[] FleshSpawnBlockingTags = ["Wall", "Window", "Flesh"];
+    [Dependency] private FleshCultRuleSystem _fleshCultRule = default!;
+    [Dependency] private SharedPointLightSystem _pointLight = default!;
+    [Dependency] private EntityQuery<WallComponent> _wallQuery = default!;
+    private static readonly ProtoId<TagPrototype>[] FleshSpawnBlockingTags = ["Window", "Flesh"];
 
     public void InitializeHeart()
     {
@@ -88,7 +88,7 @@ public sealed partial class FleshCultSystem
                     continue;
                 if (!TryComp<TagComponent>(ent, out var tagComponent))
                     continue;
-                if (_tagSystem.HasAllTags(tagComponent, FleshWallTags))
+                if (_wallQuery.HasComp(ent) && _tagSystem.HasTag(tagComponent, FleshTag))
                     _damageableSystem.TryChangeDamage(ent, component.DamageMobsIfHeartDestruct);
                 else
                     QueueDel(ent);
@@ -100,7 +100,7 @@ public sealed partial class FleshCultSystem
             {
                 if (!TryComp<TagComponent>(ent, out var tagComponent))
                     continue;
-                var isFleshWall = _tagSystem.HasAllTags(tagComponent, FleshWallTags);
+                var isFleshWall = _wallQuery.HasComp(ent) && _tagSystem.HasTag(tagComponent, FleshTag);
                 if (isFleshWall)
                 {
                     fleshWalls.Add(ent);
@@ -302,7 +302,7 @@ public sealed partial class FleshCultSystem
                 }
             }
 
-            var bodyType = _prototypeManager.Index(SkeletonBodyType);
+            var bodyType = ProtoMan.Index(SkeletonBodyType);
             foreach (var (key, data) in bodyType.Layers)
             {
                 if (key != HumanoidVisualLayers.Head)
@@ -357,14 +357,14 @@ public sealed partial class FleshCultSystem
             return;
 
         var localpos = xform.Coordinates.Position;
-        var tilerefs = grid.GetLocalTilesIntersecting(
+        var tilerefs = _mapSystem.GetLocalTilesIntersecting(xform.GridUid.Value, grid,
             new Box2(localpos + new Vector2(-radius, -radius), localpos + new Vector2(radius, radius))).ToArray();
         foreach (var tileref in tilerefs)
         {
             var canSpawnFloor = true;
-            foreach (var ent in grid.GetAnchoredEntities(tileref.GridIndices).ToList())
+            foreach (var ent in _mapSystem.GetAnchoredEntities(xform.GridUid.Value, grid, tileref.GridIndices).ToList())
             {
-                if (_tagSystem.HasAnyTag(ent, FleshSpawnBlockingTags))
+                if (_wallQuery.HasComp(ent) || _tagSystem.HasAnyTag(ent, FleshSpawnBlockingTags))
                     canSpawnFloor = false;
             }
             if (canSpawnFloor)
@@ -383,17 +383,16 @@ public sealed partial class FleshCultSystem
             return;
 
         var localpos = xform.Coordinates.Position;
-        var tilerefs = grid.GetLocalTilesIntersecting(
+        var tilerefs = _mapSystem.GetLocalTilesIntersecting(xform.GridUid.Value, grid,
             new Box2(localpos + new Vector2(-radius, -radius), localpos + new Vector2(radius, radius))).ToArray();
         _random.Shuffle(tilerefs);
-        var physQuery = GetEntityQuery<PhysicsComponent>();
         var amountCounter = 0;
         foreach (var tileref in tilerefs)
         {
             var valid = true;
-            foreach (var ent in grid.GetAnchoredEntities(tileref.GridIndices))
+            foreach (var ent in _mapSystem.GetAnchoredEntities((xform.GridUid.Value, grid), tileref.GridIndices))
             {
-                if (!physQuery.TryGetComponent(ent, out var body))
+                if (!_physicsQuery.TryGetComponent(ent, out var body))
                     continue;
                 if (body.BodyType != BodyType.Static ||
                     !body.Hard ||

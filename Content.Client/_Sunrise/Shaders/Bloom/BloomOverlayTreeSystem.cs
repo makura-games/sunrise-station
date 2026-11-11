@@ -9,9 +9,9 @@ namespace Content.Client._Sunrise.Shaders.Bloom;
 /// <summary>
 /// Maintains a spatial tree containing only lights compatible with the bloom overlay.
 /// </summary>
-public sealed class BloomOverlayTreeSystem : ComponentTreeSystem<BloomOverlayTreeComponent, BloomOverlayVisualsComponent>
+public sealed partial class BloomOverlayTreeSystem : ComponentTreeSystem<BloomOverlayTreeComponent, BloomOverlayVisualsComponent>
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     protected override bool DoFrameUpdate => true;
     protected override bool DoTickUpdate => false;

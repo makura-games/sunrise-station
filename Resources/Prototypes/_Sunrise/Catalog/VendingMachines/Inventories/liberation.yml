@@ -37,7 +37,6 @@
     WeaponRifleSKM24: 3
     WeaponRifleLecterMk2: 3
     WeaponRifleFoam: 3
-    WeaponRifleARG: 3
     WeaponRifleM52: 3
     WeaponRifleM90GrenadeLauncher: 3
     WeaponRifleLecter: 3
@@ -63,7 +62,6 @@
     WeaponShotgunTrenchgun4034Sawn: 3
     WeaponShotgunRiot: 3
     WeaponShotgunRiotSawn: 3
-    WeaponShotgunCombat: 3
     WeaponShotgunCycler: 3
     WeaponShotgunGA12: 3
     WeaponShotgunMinotaur: 3
@@ -71,14 +69,12 @@
 
     WeaponSubMachineGunAtreides: 3
     WeaponSubMachineGunC20r: 3
-    WeaponSubMachineGunC40r: 3
+    WeaponSubMachineGunVector: 3
     WeaponSubMachineGunDrozd: 3
     WeaponSubMachineGunDrozdMk2: 3
     WeaponSubMachineGunP90: 3
     WeaponSubMachineGunForged: 6
-    WeaponSubMachineGunMP5: 3
     WeaponSubMachineGunNewVector: 3
-    WeaponRifleLecterMk3: 3
     WeaponAJ100: 3
     WeaponSIAR52: 3
     WeaponSubMachineGunSP91RC: 3
@@ -321,7 +317,6 @@
     MagazinePistolSubMachineGunPPSH: 3
     MagazineP90: 5
     MagazineMP7: 5
-    MagazineMP5: 5
     MagazineBoxPistolRubber: 3
     MagazineBoxPistolSP: 3
     MagazineBoxPistolHP: 3
@@ -385,6 +380,18 @@
     # Test Tools
     AdminPDA: 3
     AccessConfiguratorUniversal: 3
+    # Uplinks
+    BaseUplinkRadioDebug: 3
+    BaseUplinkRadioDebug999: 3
+    BaseUplinkRadio60TC: 3
+    UplinkRadioAssaultOperatives40TC: 3
+    UplinkNTERTAmber: 3
+    UplinkNTERTRed: 3
+    UplinkNTERTGamma: 3
+    UplinkNTERTEpsilon: 3
+    UplinkNTERTBlueShield: 3
+    UplinkNTERTDebug: 3
+    PirateUplinkDebug: 3
     # Mechs
     MechHauler: 2
     MechBigYarrkeBattery: 2

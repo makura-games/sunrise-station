@@ -13,9 +13,9 @@ namespace Content.Shared._Sunrise.BloodCult;
 
 public sealed partial class DeconvertCultistEntityEffectSystem : EntityEffectSystem<BloodCultistComponent, DeconvertCultist>
 {
-    [Dependency] private readonly SharedStunSystem _sharedStunSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _sharedPopupSystem = default!;
-    [Dependency] private readonly EntityManager _entityManager = default!;
+    [Dependency] private SharedStunSystem _sharedStunSystem = default!;
+    [Dependency] private SharedPopupSystem _sharedPopupSystem = default!;
+    [Dependency] private EntityManager _entityManager = default!;
 
     private readonly string _сultistTag = "Cultist";
     private readonly string _deconvertedTag = "DeconvertedCultist";

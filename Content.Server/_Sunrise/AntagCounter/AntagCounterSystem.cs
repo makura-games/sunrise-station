@@ -7,10 +7,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.AntagCounter;
 
-public sealed class AntagCounterSystem : EntitySystem
+public sealed partial class AntagCounterSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly RoleSystem _role = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private RoleSystem _role = default!;
 
     private static readonly Gauge AntagCountMetric = Metrics
         .CreateGauge("antags_player_count", "Number of antags on the server.");

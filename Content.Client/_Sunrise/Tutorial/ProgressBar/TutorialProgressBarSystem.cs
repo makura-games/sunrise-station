@@ -15,12 +15,11 @@ namespace Content.Client._Sunrise.Tutorial.ProgressBar;
 /// <summary>
 /// Client-side system that attaches tutorial progress bars to the active in-game viewport.
 /// </summary>
-public sealed class TutorialProgressBarSystem : EntitySystem
+public sealed partial class TutorialProgressBarSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    private EntityQuery<ProgressBarUiComponent> _progressUiQuery;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
+    [Dependency] private EntityQuery<ProgressBarUiComponent> _progressUiQuery = default!;
     private LayoutContainer? _progressBarRoot;
     private bool _pendingRefresh;
 
@@ -34,7 +33,6 @@ public sealed class TutorialProgressBarSystem : EntitySystem
         SubscribeLocalEvent<TutorialProgressBarComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
         SubscribeLocalEvent<TutorialProgressBarComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
 
-        _progressUiQuery = GetEntityQuery<ProgressBarUiComponent>();
         _progressBarRoot = new LayoutContainer();
         _ui.OnScreenChanged += OnScreenChanged;
     }
@@ -100,7 +98,7 @@ public sealed class TutorialProgressBarSystem : EntitySystem
 
         var viewportContainer = _ui.ActiveScreen.FindControl<LayoutContainer>("ViewportContainer");
 
-        if (!_proto.TryIndex(player.SequenceId, out var sequence))
+        if (!ProtoMan.TryIndex(player.SequenceId, out var sequence))
             return;
 
         var total = sequence.Steps.Count;

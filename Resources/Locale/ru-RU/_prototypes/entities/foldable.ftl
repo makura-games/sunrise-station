@@ -1,4 +1,4 @@
 ent-BaseFoldable = сложенный
     .desc = { "" }
-ent-BaseDeployFoldable = Развернуть сложенный
+ent-BaseDeployFoldable = развернуть сложенный
     .desc = { ent-BaseFoldable.desc }

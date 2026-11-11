@@ -8,10 +8,10 @@ using Robust.Shared.Network;
 
 namespace Content.Client._Sunrise.PlayerCache;
 
-public sealed class PlayerCacheManager
+public sealed partial class PlayerCacheManager
 {
-    [Dependency] private readonly IClientNetManager _netManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private PlayerCacheData _cache = new();
 

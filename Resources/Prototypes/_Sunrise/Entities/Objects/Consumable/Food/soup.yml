@@ -18,15 +18,15 @@
       layers:
         - state: bowl
         - state: pelmeni
-    - type: SolutionContainerManager
-      solutions:
-        food:
-          maxVol: 30
-          reagents:
-            - ReagentId: Nutriment
-              Quantity: 10
-            - ReagentId: Protein
-              Quantity: 20
+    - type: Solution
+      id: food
+      solution:
+        maxVol: 30
+        reagents:
+          - ReagentId: Nutriment
+            Quantity: 10
+          - ReagentId: Protein
+            Quantity: 20
     - type: Tag
       tags:
       - Meat
@@ -45,14 +45,14 @@
     layers:
     - state: bowl
     - state: sawdust
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 7
-        - ReagentId: Water
-          Quantity: 10
-        - ReagentId: Vitamin
-          Quantity: 3
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 20
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 7
+      - ReagentId: Water
+        Quantity: 10
+      - ReagentId: Vitamin
+        Quantity: 3

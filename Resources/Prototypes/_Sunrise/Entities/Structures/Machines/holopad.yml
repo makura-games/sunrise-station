@@ -5,7 +5,7 @@
   suffix: salvage shuttle
   components:
   - type: Label
-    currentLabel: holopad-salvage-shuttle
+    localizedLabel: holopad-salvage-shuttle
   - type: AccessReader
     access: [[ "Salvage" ]]
     examinationText: access-reader-examination-functionality-restricted
@@ -16,7 +16,7 @@
   suffix: security shuttle
   components:
   - type: Label
-    currentLabel: holopad-security-shuttle
+    localizedLabel: holopad-security-shuttle
   - type: AccessReader
     access: [[ "Security" ]]
     examinationText: access-reader-examination-functionality-restricted

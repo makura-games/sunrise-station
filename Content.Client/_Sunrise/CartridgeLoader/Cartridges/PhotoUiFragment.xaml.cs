@@ -21,12 +21,12 @@ public sealed partial class PhotoUiFragment : BoxContainer
     public event Action? OnRequestGallery;
     public event Action<bool>? OnToggleFlash;
 
-    [Dependency] private readonly NetTexturesManager _netTexturesManager = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private NetTexturesManager _netTexturesManager = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     private Dictionary<string, PhotoItemControl> _photoControls = new();
     private string? _currentViewPhotoId;

@@ -7,7 +7,7 @@ namespace Content.Client._Sunrise.CartridgeLoader.Cartridges;
 
 public sealed partial class PhotoUi : UIFragment
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
     private PhotoUiFragment? _fragment;
 

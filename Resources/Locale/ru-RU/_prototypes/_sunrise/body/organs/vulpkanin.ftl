@@ -1,11 +1,9 @@
-﻿ent-OrganVulpkaninStomach = { ent-OrganAnimalStomach }
+ent-OrganVulpkaninStomach = { ent-OrganAnimalStomach }
     .desc = { ent-OrganAnimalStomach.desc }
-
-ent-OrganVulpkaninEyes = { ent-OrganHumanEyes }
-    .desc = { ent-OrganHumanEyes.desc }
-
 ent-OrganVulpkaninBrain = { ent-OrganHumanBrain }
     .desc = { ent-OrganHumanBrain.desc }
+ent-OrganVulpkaninEyes = { ent-OrganHumanEyes }
+    .desc = { ent-OrganHumanEyes.desc }
 ent-OrganVulpkaninTongue = { ent-OrganHumanTongue }
     .desc = { ent-OrganHumanTongue.desc }
 ent-OrganVulpkaninAppendix = { ent-OrganHumanAppendix }

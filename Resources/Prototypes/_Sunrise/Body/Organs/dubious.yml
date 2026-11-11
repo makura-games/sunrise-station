@@ -6,12 +6,12 @@
   - type: Organ
   - type: Extractable
     grindableSolutionName: organ
-  - type: SolutionContainerManager
-    solutions:
-      organ:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
+  - type: Solution
+    id: organ
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
   - type: Sprite
     layers: []
   - type: Metabolizer

@@ -944,7 +944,7 @@
     - id: WeaponShotgunGA12
       prob: 0.25
       orGroup: Weapons
-    - id: WeaponShotgunCombat
+    - id: WeaponShotgunEnforcer
       prob: 0.25
       orGroup: Weapons
     - id: WeaponShotgunBulldogBiocode

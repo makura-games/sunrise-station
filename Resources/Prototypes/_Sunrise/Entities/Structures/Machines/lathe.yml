@@ -159,6 +159,22 @@
     shape: Square
     requireInSpace: false
   - type: BlockedTool
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MachineFrameDestroyed:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
 
 - type: entity
   id: AmmoLathe

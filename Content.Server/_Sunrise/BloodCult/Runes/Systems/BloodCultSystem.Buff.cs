@@ -71,17 +71,18 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
 
         private bool AnyCultTilesNearby(EntityUid uid)
         {
-            var localpos = Transform(uid).Coordinates.Position;
+            var xform = Transform(uid);
+            var localpos = xform.Coordinates.Position;
 
             if (!TryComp<BloodCultistComponent>(uid, out var cultist))
                 return false;
 
             var radius = CultBuffComponent.NearbyTilesBuffRadius;
 
-            if (!TryComp<MapGridComponent>(Transform(uid).GridUid, out var grid))
+            if (!TryComp<MapGridComponent>(xform.GridUid, out var grid))
                 return false;
 
-            var tilesRefs = grid.GetLocalTilesIntersecting(new Box2(localpos + new Vector2(-radius, -radius),
+            var tilesRefs = _map.GetLocalTilesIntersecting(xform.GridUid.Value, grid, new Box2(localpos + new Vector2(-radius, -radius),
                 localpos + new Vector2(radius, radius)));
             var cultTileDef = (ContentTileDefinition)_tileDefinition[$"{CultTilePrototypeId}"];
             var cultTile = new Tile(cultTileDef.TileId);

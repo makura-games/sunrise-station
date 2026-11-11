@@ -20,8 +20,9 @@
     - Anchorable
   - type: Rotatable
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -309,6 +310,7 @@
     state: p_stair_wood_full
   - type: Damageable
     damageModifierSet: Wood
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
@@ -340,6 +342,7 @@
     state: p_stair_wood_full_corner
   - type: Damageable
     damageModifierSet: Wood
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
@@ -371,6 +374,7 @@
     state: p_stair_wood_left_cap
   - type: Damageable
     damageModifierSet: Wood
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
@@ -402,6 +406,7 @@
     state: p_stair_wood_right_cap
   - type: Damageable
     damageModifierSet: Wood
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
@@ -433,6 +438,7 @@
     state: p_stair_wood_solo_cap
   - type: Damageable
     damageModifierSet: Wood
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:

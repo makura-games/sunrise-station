@@ -1,9 +1,9 @@
-ent-BaseWeaponSubMachineGun = Стандартный ПП
+ent-BaseWeaponSubMachineGun = стандартный ПП
     .desc = Дерзай — налетай, целься и стреляй.
-ent-WeaponSubMachineGunAtreides = Атрейдес
+ent-WeaponSubMachineGunAtreides = атрейдес
     .desc = Пле-ке-ке-ке-ке! Использует патроны калибра .35 авто.
     .suffix = Пистолет-пулемёт
-ent-WeaponSubMachineGunC20r = C-20r
+ent-WeaponSubMachineGunC20r = с-20р
     .desc = Оружие, часто используемое печально известными ядерными оперативниками. Использует патроны калибра .35 авто.
     .suffix = Пистолет-пулемёт
 ent-WeaponSubMachineGunDrozd = дрозд

@@ -11,8 +11,6 @@
   startingGear: ResearchAssistantGear
   icon: "JobIconResearchAssistant"
   supervisors: job-supervisors-science
-  canBeAntag: false
-  displayWeight: 0 # Sunrise-Edit
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-lab-technician

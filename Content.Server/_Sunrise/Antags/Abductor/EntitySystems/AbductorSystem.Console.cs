@@ -14,18 +14,18 @@ using System.Linq;
 using Content.Server.VendingMachines;
 using Content.Shared._Sunrise.Movement.Carrying;
 using Content.Shared.VendingMachines;
+using Content.Shared.VendingMachines.Components;
 using Content.Shared.Popups;
 using Content.Shared.Starlight.ItemSwitch;
 using Robust.Shared.Audio;
 
 namespace Content.Server._Sunrise.Antags.Abductor;
 
-public sealed partial class AbductorSystem : SharedAbductorSystem
+public sealed partial class AbductorSystem
 {
-    [Dependency] private readonly NumberObjectiveSystem _number = default!;
-    [Dependency] private readonly SharedItemSwitchSystem _itemSwitch = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly VendingMachineSystem _vending = default!;
+    [Dependency] private NumberObjectiveSystem _number = default!;
+    [Dependency] private SharedItemSwitchSystem _itemSwitch = default!;
+    [Dependency] private VendingMachineSystem _vending = default!;
     private readonly SoundSpecifier _sendSound = new SoundPathSpecifier("/Audio/Voice/Human/wilhelm_scream.ogg");
     private readonly SoundSpecifier _alienTeleport = new SoundPathSpecifier("/Audio/_Sunrise/Abductor/alien_teleport.ogg");
 
@@ -228,7 +228,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
             var dispenser = GetEntity(args.Dispencer);
 
             if (TryComp<VendingMachineComponent>(dispenser, out var vendingComp))
-                _vending.RestockRandom(dispenser, vendingComp);
+                _vending.RestockRandom((dispenser, vendingComp));
         }
 
         _xformSys.SetCoordinates(victim, GetCoordinates(args.TargetCoordinates));

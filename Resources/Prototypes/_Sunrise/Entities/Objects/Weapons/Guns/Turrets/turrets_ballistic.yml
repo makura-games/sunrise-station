@@ -138,6 +138,7 @@
     - state: panel
       renderingStrategy: NoRotation
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:

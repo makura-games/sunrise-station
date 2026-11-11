@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: BaseNonCycleableAmmoItem # Sunrise-Edit - запрещаем извлекать патроны из вместительных коробок
   id: BaseMagazineBoxLightRifle
   name: ammunition box (.30 rifle)
   components:

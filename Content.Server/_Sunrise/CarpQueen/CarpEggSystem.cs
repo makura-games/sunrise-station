@@ -26,23 +26,22 @@ using Robust.Shared.Maths;
 
 namespace Content.Server._Sunrise.CarpQueen;
 
-public sealed class CarpEggSystem : CarpQueenAccessSystem
+public sealed partial class CarpEggSystem : CarpQueenAccessSystem
 {
-    [Dependency] private readonly PuddleSystem _puddles = default!;
-    [Dependency] private readonly IPrototypeManager _protos = default!;
-    [Dependency] private readonly IRobustRandom _rand = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedTransformSystem _xformSys = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly HTNSystem _htn = default!;
-    [Dependency] private readonly CarpQueenSystem _carpQueenSystem = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+    [Dependency] private PuddleSystem _puddles = default!;
+    [Dependency] private IRobustRandom _rand = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _xformSys = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private HTNSystem _htn = default!;
+    [Dependency] private CarpQueenSystem _carpQueenSystem = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedDestructibleSystem _destructible = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
 
     private static readonly ProtoId<ReagentPrototype> WaterReagent = "Water";
 
@@ -308,12 +307,12 @@ public sealed class CarpEggSystem : CarpQueenAccessSystem
         if (_puddles.TryGetPuddle(tile, out var puddle) && TryComp(puddle, out PuddleComponent? puddleComp) && puddleComp.Solution != null)
         {
             var sol = puddleComp.Solution.Value.Comp.Solution;
-            color = sol.GetColor(_protos);
+            color = sol.GetColor(ProtoMan);
         }
         else
         {
             // Запасной вариант для FloorWaterEntity: используем цвет реагента Water.
-            color = _protos.Index(WaterReagent).SubstanceColor;
+            color = ProtoMan.Index(WaterReagent).SubstanceColor;
         }
 
         // На сервере красим только свет; оттенок спрайта обрабатывается клиентским visualizer.
@@ -342,7 +341,7 @@ public sealed class CarpEggSystem : CarpQueenAccessSystem
             if (_puddles.TryGetPuddle(tile, out var puddle) && TryComp(puddle, out PuddleComponent? puddleComp) && puddleComp.Solution != null)
             {
                 var sol = puddleComp.Solution.Value.Comp.Solution;
-                liquidColor = sol.GetColor(_protos);
+                liquidColor = sol.GetColor(ProtoMan);
 
                 // Запоминаем все реагенты в растворе.
                 foreach (var (reagentId, quantity) in sol.Contents)
@@ -353,7 +352,7 @@ public sealed class CarpEggSystem : CarpQueenAccessSystem
             else
             {
                 // Запасной вариант для FloorWaterEntity: используем цвет реагента Water.
-                liquidColor = _protos.Index(WaterReagent).SubstanceColor;
+                liquidColor = ProtoMan.Index(WaterReagent).SubstanceColor;
                 rememberedReagents["Water"] = FixedPoint2.New(30); // Считаем это водой.
             }
         }
@@ -512,7 +511,7 @@ public sealed class CarpEggSystem : CarpQueenAccessSystem
     private void OnEggDestroyed(EntityUid uid, CarpEggComponent egg, DestructionEventArgs args)
     {
         // При разрушении разливаем 2 единицы случайного реагента.
-        var reagents = _protos.EnumeratePrototypes<ReagentPrototype>();
+        var reagents = ProtoMan.EnumeratePrototypes<ReagentPrototype>();
         string chosen = null!;
         var count = 0;
         foreach (var r in reagents)

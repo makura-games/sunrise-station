@@ -13,22 +13,20 @@ using Content.Shared.Damage.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
-using Robust.Shared.Random; // Sunrise-Edit
 
 namespace Content.Server.Dragon;
 
 /// <summary>
 /// Handles events for rift entities and rift updating.
 /// </summary>
-public sealed class DragonRiftSystem : EntitySystem
+public sealed partial class DragonRiftSystem : EntitySystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly DragonSystem _dragon = default!;
-    [Dependency] private readonly ISerializationManager _serManager = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IRobustRandom _random = default!; // Sunrise-Edit
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private DragonSystem _dragon = default!;
+    [Dependency] private ISerializationManager _serManager = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -82,20 +80,15 @@ public sealed class DragonRiftSystem : EntitySystem
 
                 var msg = Loc.GetString("carp-rift-warning",
                     ("location", FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((uid, xform)))));
-                _chat.DispatchGlobalAnnouncement(msg, playDefault: false, colorOverride: Color.Red);
+                _chat.DispatchGlobalAnnouncement(msg, playDefault: false, colorOverride: Color.Red); // Sunrise-Edit
                 _audio.PlayGlobal("/Audio/Misc/notice1.ogg", Filter.Broadcast(), true);
                 _navMap.SetBeaconEnabled(uid, true);
             }
 
             if (comp.SpawnAccumulator > comp.SpawnCooldown)
             {
-                // Sunrise edit start - разрешаем случайный выбор spawn-прототипа из настроенного списка
                 comp.SpawnAccumulator -= comp.SpawnCooldown;
-                var spawnPrototype = comp.SpawnPrototypes.Count > 0
-                    ? _random.Pick(comp.SpawnPrototypes)
-                    : comp.SpawnPrototype;
-                var ent = Spawn(spawnPrototype, xform.Coordinates);
-                // Sunrise edit end
+                var ent = Spawn(comp.SpawnPrototype, xform.Coordinates);
 
                 // Update their look to match the leader.
                 if (TryComp<RandomSpriteComponent>(comp.Dragon, out var randomSprite))

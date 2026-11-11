@@ -1,4 +1,4 @@
-ent-CrateCommandNTGygaxBundle = набор нанотрейзен "гигакс"
+ent-CrateCommandNTGygaxBundle = набор Нанотрейзен «Гигакс»
     .desc = Содержит набор легкобронированного меха нанотрейзен.
     .suffix = Заполненный
 ent-CrateCommandMarauderBundle = набор нанотрейзен "мародёр"

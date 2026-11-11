@@ -2,7 +2,7 @@ using Content.Server.Actions;
 using Content.Server.CriminalRecords.Systems;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Station.Systems;
-using Content.Server.StationRecords.Systems;
+using Content.Shared.StationRecords.Systems;
 using Content.Server._Sunrise.Messenger;
 using Content.Shared._Sunrise.AddWantedStatus;
 using Content.Shared.Actions;
@@ -16,11 +16,12 @@ namespace Content.Server._Sunrise.AddWantedStatus;
 
 public sealed partial class AddWantedStatusSystem : EntitySystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly CriminalRecordsSystem _criminalRecords = default!;
-    [Dependency] private readonly StationRecordsSystem _records = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly MessengerServerSystem _messenger = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private CriminalRecordsSystem _criminalRecords = default!;
+    [Dependency] private IdentitySystem _identity = default!;
+    [Dependency] private StationRecordsSystem _records = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private MessengerServerSystem _messenger = default!;
 
     public override void Initialize()
     {
@@ -87,10 +88,7 @@ public sealed partial class AddWantedStatusSystem : EntitySystem
         var officer = Loc.GetString("criminal-records-console-unknown-officer");
 
         // Officer
-        var getIdEvent = new TryGetIdentityShortInfoEvent(null, officerUid);
-        RaiseLocalEvent(getIdEvent);
-        if (getIdEvent.Title != null)
-            officer = getIdEvent.Title;
+        officer = _identity.GetIdentityShortInfo(officerUid) ?? officer;
 
         // Reason
         if (string.IsNullOrWhiteSpace(reason))

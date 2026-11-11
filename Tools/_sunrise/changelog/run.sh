@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Sunrise added start - автоматическое обновление чейнджлога через GitHub Actions
 
 set -euo pipefail
 
@@ -16,6 +15,10 @@ report_status() {
 
 git config user.name "Sunrise-Bot"
 git config user.email "sunrise.project.top@gmail.com"
+
+commit_message_file="$(mktemp)"
+trap 'rm -f -- "$commit_message_file"' EXIT
+export CHANGELOG_COMMIT_MESSAGE_FILE="$commit_message_file"
 
 if [[ -z "${CHANGELOG_FILE:-}" ]]; then
     report_status error "❌" "Переменная CHANGELOG_FILE не задана."
@@ -37,6 +40,7 @@ for category in "${extra_categories[@]}"; do
 done
 
 for attempt in {1..5}; do
+    : > "$commit_message_file"
     git fetch --no-tags origin master
     git reset --hard origin/master
     git clean -fd -- Resources/Changelog/Parts
@@ -59,7 +63,11 @@ for attempt in {1..5}; do
         exit 0
     fi
 
-    git commit -m "Automatic changelog update [skip ci]"
+    if [[ ! -s "$commit_message_file" ]]; then
+        report_status error "❌" "Не сформировано сообщение коммита чейнжлога."
+        exit 1
+    fi
+    git commit -F "$commit_message_file"
     if git push origin HEAD:master; then
         report_status notice "✅" "Чейнджлог успешно опубликован в master."
         exit 0
@@ -71,4 +79,3 @@ done
 
 report_status error "❌" "Не удалось отправить чейнджлог после пяти попыток."
 exit 1
-# Sunrise added end

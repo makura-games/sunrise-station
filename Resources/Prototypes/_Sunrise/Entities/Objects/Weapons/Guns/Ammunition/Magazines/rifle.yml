@@ -290,7 +290,7 @@
 - type: entity
   id: MagazineRifleBoxSP
   name: "L6 SAW magazine box (.20 rifle SP)"
-  parent: BaseMagazineRifle
+  parent: [ BaseNonCycleableAmmoProvider, BaseMagazineRifle ]
   description: Box containing a 200-round belt of linked .20 rifle rounds, used by light machine guns such as the L6. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: Tag

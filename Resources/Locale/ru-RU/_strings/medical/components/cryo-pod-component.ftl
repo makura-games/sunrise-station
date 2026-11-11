@@ -19,17 +19,16 @@ cryo-pod-window-status-cooling = Охлаждение пациента...
 cryo-pod-window-checklist-pressure = Давление в норме
 cryo-pod-window-checklist-chemicals = Реагенты доступны
 cryo-pod-window-checklist-temperature = Криогенная температура
-cryo-pod-window-checklist-fail = {$item} — НЕТ
+cryo-pod-window-checklist-fail = { $item } — НЕТ
 cryo-pod-window-warning-header = ВНИМАНИЕ
 cryo-pod-window-low-pressure-warning = Опасно низкое давление. Для безопасной работы давление газа должно быть около 100 кПа.
-cryo-pod-window-high-temperature-warning = Температура слишком высокая. Для реагента {CAPITALIZE($reagent)} требуется температура ниже {$temperature} K.
+cryo-pod-window-high-temperature-warning = Температура слишком высокая. Для реагента { CAPITALIZE($reagent) } требуется температура ниже { $temperature } K.
 cryo-pod-window-error-header = ОШИБКА
 # Shown when the eject button is pressed on a locked pod.
 cryo-pod-window-eject-error = Механизм извлечения не сработал. Обратитесь за помощью к сертифицированному инженеру Нанотрейзен.
-
 cryo-pod-window-chems-no-beaker = Мензурка не вставлена
 cryo-pod-window-chems-empty-beaker = Мензурка пуста
-cryo-pod-window-chems-injecting-tooltip = Вводится {$quantity} u.
+cryo-pod-window-chems-injecting-tooltip = Вводится { $quantity } u.
 cryo-pod-window-inject-1u = 1u
 cryo-pod-window-inject-5u = 5u
 cryo-pod-window-inject-10u = 10u

@@ -49,7 +49,7 @@
 
 - type: entity
   id: ShuttleGunBullfrog
-  parent: [ShuttleGunBase, ConstructibleMachine]
+  parent: [ ShuttleGunBase, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   name: EXP-3600g "Bullfrog"
   description: A powerful 40mm stationary automatic grenade launcher. A cartridge is required for use.
   components:
@@ -140,7 +140,7 @@
 
 - type: entity
   id: ShuttleGunLongbow
-  parent: [ShuttleGunBase, ConstructibleMachine]
+  parent: [ ShuttleGunBase, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   name: BAL-15 "Longbow"
   description: A powerful stationary heavy autocanon. A cartridge is required for use.
   #categories: [ DoNotMap ]
@@ -228,7 +228,7 @@
 
 - type: entity
   id: ShuttleGunVympel
-  parent: [ShuttleGunBase, ConstructibleMachine]
+  parent: [ ShuttleGunBase, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   name: BAL-15-2 "Vympel"
   description: A powerful stationary twin heavy autocanon. A cartridge is required for use.
   #categories: [ DoNotMap ]
@@ -328,7 +328,7 @@
 
 - type: entity
   id: ShuttleGunQuadling
-  parent: [ShuttleGunBase, ConstructibleMachine]
+  parent: [ ShuttleGunBase, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   name: BAL-15-4 "Quadling"
   description: THE POWER OF ELEVE... ahem, four barrels. Stationary quad heavy autocanon.
   #categories: [ DoNotMap ]
@@ -419,7 +419,7 @@
 
 - type: entity
   id: ShuttleGunSquall
-  parent: [ShuttleGunBase, ConstructibleMachine]
+  parent: [ ShuttleGunBase, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   name: BAL-308 "Squall"
   description: A powerful stationary minigun. A cartridge is required for use.
   #categories: [ DoNotMap ]
@@ -517,7 +517,7 @@
 # region ---- Lasers ----
 - type: entity
   id: ShuttleGunBeamstormMachineGun
-  parent: [ ShuttleGunBase, ConstructibleMachine]
+  parent: [ ShuttleGunBase, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   name: LSE-800e "Beamstorm machine gun"
   description: Advanced stationary laser unit. Effective against live targets and electronics. Draws directly from the ship's APC grid, and has an extremely high rate of fire.
   #categories: [ DoNotMap ]
@@ -591,7 +591,7 @@
 # TSL Tesla
 - type: entity
   id: ShuttleGunTeslaOrion
-  parent: [ ShuttleGunBase, ConstructibleMachine]
+  parent: [ ShuttleGunBase, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   name: TSL-200c "Orion"
   description: Hi-tech stationary energy unit based on the principle of an experimental Tesla engine.. Effective against electronics. Uses the power cage to fire tesla or ion bolt.
   #categories: [ DoNotMap ]
@@ -662,7 +662,7 @@
 
 - type: entity
   id: ShuttleGunTeslaHyperion
-  parent: [ ShuttleGunBase, ConstructibleMachine]
+  parent: [ ShuttleGunBase, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   name: TSL-300c "Hyperion"
   description: Hi-tech stationary energy unit based on the principle of an experimental Tesla engine.. Effective against electronics. Uses the power cage to fire tesla or ion bolt.
   #categories: [ DoNotMap ]
@@ -746,7 +746,7 @@
 # Scylla Laser Railgun - Grid-powered, cyan beam, extreme 1.2km range
 - type: entity
   id: ShuttleGunUlan
-  parent: ShuttleGunBase
+  parent: [ ShuttleGunBase, BaseMachineDestructible ]
   name: LSE-13000e "Ulan"
   description: An experimental grid-powered laser railgun that focuses ship power into a devastating 2-width electromagnetic melting beam. Draws directly from the ship's APC grid — no power cages required, but it will tax your reactor. Range exceeds 1 kilometer. The long recharge cycle after each shot is the only thing preventing total battlefield dominance.
   components:
@@ -836,7 +836,7 @@
 # Vanyk-MK2 60mm Rocket Launcher - Multi-rocket burst fire system
 - type: entity
   id: ShuttleGunRocketMetla120mm
-  parent: ShuttleGunBase
+  parent: [ ShuttleGunBase, BaseMachineDestructible ]
   name: RCT-120 "Metla"
   description: A 120mm rocket launcher system with two rails for rockets. Accurate and reliable, well suited for precision strikes against individual targets. Rockets must be loaded manually.
   components:

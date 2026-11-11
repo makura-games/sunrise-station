@@ -28,12 +28,12 @@ namespace Content.Server._Sunrise.MentorHelp
     {
         private const string RateLimitKey = "MentorHelp";
 
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly IAdminManager _adminManager = default!;
-        [Dependency] private readonly IConfigurationManager _config = default!;
-        [Dependency] private readonly GameTicker _gameTicker = default!;
-        [Dependency] private readonly IServerDbManager _dbManager = default!;
-        [Dependency] private readonly PlayerRateLimitManager _rateLimit = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
+        [Dependency] private IAdminManager _adminManager = default!;
+        [Dependency] private IConfigurationManager _config = default!;
+        [Dependency] private GameTicker _gameTicker = default!;
+        [Dependency] private IServerDbManager _dbManager = default!;
+        [Dependency] private PlayerRateLimitManager _rateLimit = default!;
         private ISharedSponsorsManager? _sponsorsManager; // Менеджер спонсоров Sunrise.
 
         private sealed class MentorStatisticsCache

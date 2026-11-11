@@ -27,19 +27,19 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.CryoTeleport;
 
-public sealed class CryoTeleportationSystem : EntitySystem
+public sealed partial class CryoTeleportationSystem : EntitySystem
 {
-    [Dependency] private readonly CryostorageSystem _cryostorage = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly TransformSystem _transformSystem = default!;
-    [Dependency] private readonly IPlayerManager _playerMan = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly BodySystem _bodySystem = default!;
+    [Dependency] private CryostorageSystem _cryostorage = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private TransformSystem _transformSystem = default!;
+    [Dependency] private IPlayerManager _playerMan = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private BodySystem _bodySystem = default!;
 
     private bool _enable;
     private TimeSpan _transferDelay;

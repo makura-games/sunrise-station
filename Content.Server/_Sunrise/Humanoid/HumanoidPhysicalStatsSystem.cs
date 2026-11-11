@@ -8,10 +8,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Humanoid;
 
-public sealed class HumanoidPhysicalStatsSystem : EntitySystem
+public sealed partial class HumanoidPhysicalStatsSystem : EntitySystem
 {
-    [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
 
     public override void Initialize()
     {
@@ -27,7 +26,7 @@ public sealed class HumanoidPhysicalStatsSystem : EntitySystem
 
     private void ApplyPhysicalStats(Entity<SunriseHumanoidProfileComponent> ent, ProtoId<SpeciesPrototype> speciesId, float width, float height)
     {
-        if (!_proto.TryIndex(speciesId, out var species))
+        if (!ProtoMan.TryIndex(speciesId, out var species))
             return;
 
         if (!TryComp<FixturesComponent>(ent.Owner, out var fixtures))

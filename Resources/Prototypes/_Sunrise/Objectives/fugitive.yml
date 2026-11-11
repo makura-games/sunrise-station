@@ -4,7 +4,7 @@
   id: BaseFugitiveObjective
   components:
   - type: Objective
-    issuer: syndicate
+    issuer: TheSyndicate
   - type: RoleRequirement
     roles:
     - FugitiveRole

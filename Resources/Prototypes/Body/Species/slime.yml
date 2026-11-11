@@ -5,6 +5,7 @@
     enum.HumanoidVisualLayers.Hair:
       limit: 1
       required: false
+      weight: 1
     enum.HumanoidVisualLayers.FacialHair:
       limit: 1
       required: false
@@ -51,6 +52,7 @@
 - type: entity
   parent: BaseSpeciesAppearance
   id: AppearanceSlimePerson
+  categories: [ HideSpawnMenu ]
   name: SlimePerson appearance
   components:
   - type: Inventory
@@ -124,13 +126,11 @@
   - type: TypingIndicator
     proto: slime
   - type: Vocal
-    sounds:
-      Male: MaleSlime
-      Female: FemaleSlime
-      Unsexed: MaleSlime
+    emoteSounds: MaleSlime
   - type: Damageable
     damageModifierSet: Slime
   - type: PassiveDamage # Around 8 damage a minute healed
+    intervalHaltOnDamageTaken: 5s
     allowedStates:
     - Alive
     damage:
@@ -151,7 +151,7 @@
     bloodReferenceSolution: # TODO Color slime blood based on their slime color or smth
       reagents:
       - ReagentId: Slime
-        Quantity: 300
+        Quantity: 600
   - type: Barotrauma
     damage:
       types:
@@ -179,7 +179,6 @@
         messages: [ "slime-hurt-by-water-popup" ]
         probability: 0.25
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatSlimeJelly # Sunrise
       amount: 5
@@ -201,7 +200,7 @@
   # Sunrise end
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganSlimePerson
   abstract: true
   suffix: slime person
@@ -219,7 +218,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Mobs/Species/Slime/organs.rsi
+    sprite: _Sunrise/Mobs/Species/Slime/organs_base.rsi # Sunrise-Edit
 
 - type: entity
   parent: OrganSlimePerson
@@ -280,10 +279,9 @@
   id: OrganSlimePersonCore
   name: sentient slime core
   components:
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      stomach:
-        maxVol: 50.0
+    - SolutionStomach
   - type: Stomach
   - type: Metabolizer
     maxReagents: 6

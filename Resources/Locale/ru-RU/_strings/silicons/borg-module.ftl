@@ -1,5 +1,4 @@
-borg-module-fit = Этот модуль подходит для {$types}.
-
+borg-module-fit = Этот модуль подходит для { $types }.
 borg-type-all = [color=white]любой киборг[/color]
 borg-type-salvage = [color= #d6b328]киборги-утилизаторы[/color]
 borg-type-engineer = [color= #ff9900]инженерные киборги[/color]
@@ -7,10 +6,8 @@ borg-type-generic = [color= #666680]универсальные киборги[/c
 borg-type-janitor = [color= #a747c0]уборочные киборги[/color]
 borg-type-medical = [color= #5995ba]медицинские киборги[/color]
 borg-type-service = [color= #508242]сервисные киборги[/color]
-
 borg-type-syndicate = [color= #962023]киборги Синдиката[/color]
 borg-type-syndicate-assault = [color= #680a0d]штурмовые киборги Синдиката[/color]
-
 xenoborg-type-all = [color= #3d94ff]любой ксеноборг[/color]
 xenoborg-type-engi = [color= #edd45b]инженерные ксеноборги[/color]
 xenoborg-type-heavy = [color= #d62020]тяжелые ксеноборги[/color]

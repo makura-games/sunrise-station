@@ -9,7 +9,7 @@ namespace Content.Server._Sunrise.BloodCult.Runes.Systems
 {
     public partial class BloodCultSystem
     {
-        [Dependency] private readonly PhysicsSystem _physicsSystem = default!;
+        [Dependency] private PhysicsSystem _physicsSystem = default!;
 
         public void InitializeBarrierSystem()
         {

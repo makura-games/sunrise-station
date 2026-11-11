@@ -1,4 +1,4 @@
-﻿using Content.Shared.DoAfter;
+using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
@@ -9,12 +9,12 @@ namespace Content.Shared._Sunrise.Paint;
 /// <summary>
 /// Removes paint from an entity.
 /// </summary>
-public sealed class PaintRemoverSystem : SharedPaintSystem
+public sealed partial class PaintRemoverSystem : SharedPaintSystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
 
     public override void Initialize()
     {
@@ -57,7 +57,7 @@ public sealed class PaintRemoverSystem : SharedPaintSystem
 
         paint.Enabled = false;
         _audio.PlayPredicted(component.Sound, target, args.User);
-        _popup.PopupClient(Loc.GetString("paint-removed", ("target", target)), args.User, args.User, PopupType.Medium);
+        _popup.PopupEntity(Loc.GetString("paint-removed", ("target", target)), args.User, args.User, PopupType.Medium);
         _appearanceSystem.SetData(target, PaintVisuals.Painted, false);
         RemComp<SprayPaintedComponent>(target);
         Dirty(target, paint);

@@ -3,7 +3,6 @@ using Content.Server.Radio.EntitySystems;
 using Content.Server.Station.Systems;
 using Content.Server._Sunrise.Messenger;
 using Content.Server.StationRecords;
-using Content.Server.StationRecords.Systems;
 using Content.Shared.Access.Systems;
 using Content.Shared.CriminalRecords;
 using Content.Shared.CriminalRecords.Components;
@@ -13,32 +12,35 @@ using Content.Shared.StationRecords;
 using Robust.Server.GameObjects;
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Security.Components;
 using System.Linq;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
-using Content.Shared.Roles.Jobs;
+using Content.Shared.StationRecords.Components;
+using Content.Shared.StationRecords.Events;
+using Content.Shared.StationRecords.Systems;
 
 namespace Content.Server.CriminalRecords.Systems;
 
 /// <summary>
 /// Handles all UI for criminal records console
 /// </summary>
-public sealed class CriminalRecordsConsoleSystem : SharedCriminalRecordsConsoleSystem
+public sealed partial class CriminalRecordsConsoleSystem : SharedCriminalRecordsConsoleSystem
 {
-    [Dependency] private readonly AccessReaderSystem _access = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly CriminalRecordsSystem _criminalRecords = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly StationRecordsSystem _records = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly MessengerServerSystem _messenger = default!;
+    [Dependency] private AccessReaderSystem _access = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private CriminalRecordsSystem _criminalRecords = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private RadioSystem _radio = default!;
+    [Dependency] private StationRecordsSystem _records = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private IdentitySystem _identity = default!;
+    [Dependency] private MessengerServerSystem _messenger = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<CriminalRecordsConsoleComponent, RecordModifiedEvent>(UpdateUserInterface);
-        SubscribeLocalEvent<CriminalRecordsConsoleComponent, AfterGeneralRecordCreatedEvent>(UpdateUserInterface);
+        SubscribeLocalEvent<CriminalRecordsConsoleComponent, GeneralRecordCreatedEvent>(UpdateUserInterface);
 
         Subs.BuiEvents<CriminalRecordsConsoleComponent>(CriminalRecordsConsoleKey.Key, subs =>
         {
@@ -64,6 +66,7 @@ public sealed class CriminalRecordsConsoleSystem : SharedCriminalRecordsConsoleS
         ent.Comp.ActiveKey = msg.SelectedKey;
         UpdateUserInterface(ent);
     }
+
     private void OnStatusFilterPressed(Entity<CriminalRecordsConsoleComponent> ent, ref CriminalRecordSetStatusFilter msg)
     {
         ent.Comp.FilterStatus = msg.FilterStatus;
@@ -78,13 +81,6 @@ public sealed class CriminalRecordsConsoleSystem : SharedCriminalRecordsConsoleS
             ent.Comp.Filter = new StationRecordsFilter(msg.Type, msg.Value);
             UpdateUserInterface(ent);
         }
-    }
-
-    private void GetOfficer(EntityUid uid, out string officer)
-    {
-        var tryGetIdentityShortInfoEvent = new TryGetIdentityShortInfoEvent(null, uid);
-        RaiseLocalEvent(tryGetIdentityShortInfoEvent);
-        officer = tryGetIdentityShortInfoEvent.Title ?? Loc.GetString("criminal-records-console-unknown-officer");
     }
 
     private void OnChangeStatus(Entity<CriminalRecordsConsoleComponent> ent, ref CriminalRecordChangeStatus msg)
@@ -112,8 +108,8 @@ public sealed class CriminalRecordsConsoleSystem : SharedCriminalRecordsConsoleS
 
         var oldStatus = record.Status;
 
-        var name = _records.RecordName(key.Value);
-        GetOfficer(mob.Value, out var officer);
+        var officer = _identity.GetIdentityShortInfo(mob.Value, ent)
+                      ?? Loc.GetString("criminal-records-console-unknown-officer");
 
         // when arresting someone add it to history automatically
         // fallback exists if the player was not set to wanted beforehand
@@ -125,18 +121,12 @@ public sealed class CriminalRecordsConsoleSystem : SharedCriminalRecordsConsoleS
         }
 
         // will probably never fail given the checks above
-        name = _records.RecordName(key.Value);
-        officer = Loc.GetString("criminal-records-console-unknown-officer");
+        var name = _records.RecordName(key.Value);
         var jobName = "Unknown";
 
         _records.TryGetRecord<GeneralStationRecord>(key.Value, out var entry);
         if (entry != null)
             jobName = entry.JobTitle;
-
-        var tryGetIdentityShortInfoEvent = new TryGetIdentityShortInfoEvent(null, mob.Value);
-        RaiseLocalEvent(tryGetIdentityShortInfoEvent);
-        if (tryGetIdentityShortInfoEvent.Title != null)
-            officer = tryGetIdentityShortInfoEvent.Title;
 
         _criminalRecords.TryChangeStatus(key.Value, msg.Status, msg.Reason, officer);
 
@@ -200,7 +190,8 @@ public sealed class CriminalRecordsConsoleSystem : SharedCriminalRecordsConsoleS
         if (line.Length < 1 || line.Length > ent.Comp.MaxStringLength)
             return;
 
-        GetOfficer(mob.Value, out var officer);
+        var officer = _identity.GetIdentityShortInfo(mob.Value, ent)
+                      ?? Loc.GetString("criminal-records-console-unknown-officer");
 
         if (!_criminalRecords.TryAddHistory(key.Value, line, officer))
             return;

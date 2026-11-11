@@ -9,10 +9,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Laws.Systems;
 
-public sealed class StationCorporateLawSystem : SharedStationCorporateLawSystem
+public sealed partial class StationCorporateLawSystem : SharedStationCorporateLawSystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public override void Initialize()
     {
@@ -29,7 +28,7 @@ public sealed class StationCorporateLawSystem : SharedStationCorporateLawSystem
     private void InitializeLawset(EntityUid station)
     {
         var lawsetId = _cfg.GetCVar(SunriseCCVars.CorporateLawSet);
-        if (!_proto.TryIndex<CorporateLawsetPrototype>(lawsetId, out var prototype))
+        if (!ProtoMan.TryIndex<CorporateLawsetPrototype>(lawsetId, out var prototype))
             return;
 
         if (!TryComp<StationCorporateLawComponent>(station, out var component))

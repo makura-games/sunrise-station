@@ -5,12 +5,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._Sunrise.GhostTheme;
 
-public sealed class GhostThemeSystem : EntitySystem
+public sealed partial class GhostThemeSystem : EntitySystem
 {
     private const string UpstreamGhostLayer = "ghostVariant";
 
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -25,7 +24,7 @@ public sealed class GhostThemeSystem : EntitySystem
             return;
 
         if (ent.Comp.GhostTheme == null ||
-            !_proto.TryIndex<GhostThemePrototype>(ent.Comp.GhostTheme, out var ghostTheme) ||
+            !ProtoMan.TryIndex<GhostThemePrototype>(ent.Comp.GhostTheme, out var ghostTheme) ||
             ghostTheme.UseUpstreamSprite)
         {
             RestoreUpstreamSprite((ent, sprite));

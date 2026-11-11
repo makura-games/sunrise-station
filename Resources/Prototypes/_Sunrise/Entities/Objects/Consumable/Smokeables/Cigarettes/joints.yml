@@ -22,12 +22,12 @@
   - type: Construction
     graph: smokeableJointVita
     node: jointVita
-  - type: SolutionContainerManager
-    solutions:
-      smokable:
-        maxVol: 30
-        reagents:
-        - ReagentId: THC
-          Quantity: 20
-        - ReagentId: Omnizine
-          Quantity: 10
+  - type: Solution
+    id: smokable
+    solution:
+      maxVol: 30
+      reagents:
+      - ReagentId: THC
+        Quantity: 20
+      - ReagentId: Omnizine
+        Quantity: 10

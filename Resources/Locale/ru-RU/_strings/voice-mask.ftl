@@ -4,10 +4,9 @@ voice-mask-name-change-info = Введите имя, которое вы хот�
 voice-mask-name-change-speech-style = Стиль речи
 voice-mask-name-change-set = Изменить имя
 voice-mask-name-change-set-description = Измените имя, которое другие будут слышать, когда вы говорите.
-voice-mask-popup-success = Имя успешно изменено.
-voice-mask-popup-failure = Имя не может быть изменено.
 voice-mask-name-change-toggle = Переключить голосовую маску
 voice-mask-name-change-accent-toggle = Блокировать акцент
-
 voice-mask-popup-toggle = Голосовая маска переключена.
 voice-mask-popup-accent-toggle = Акцент переключен.
+voice-mask-popup-success = Имя успешно изменено.
+voice-mask-popup-failure = Имя не может быть изменено.

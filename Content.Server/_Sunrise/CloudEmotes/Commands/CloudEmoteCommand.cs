@@ -1,19 +1,19 @@
-﻿using System.Linq;
+using System.Linq;
 using JetBrains.Annotations;
 using Robust.Shared.Console;
 using Content.Shared.Administration;
 using Robust.Shared.Map;
 using Robust.Server.GameObjects;
 using Content.Shared._Sunrise.CloudEmote;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 namespace Content.Server._Sunrise.CloudEmotes.Commands
 {
     [UsedImplicitly]
     [AnyCommand]
-    public sealed class CloudEmoteCommand : LocalizedCommands
+    public sealed partial class CloudEmoteCommand : LocalizedCommands
     {
-        [Dependency] private readonly IEntitySystemManager _entitySystems = default!;
-        [Dependency] private readonly IEntityManager _entityManager = default!;
+        [Dependency] private IEntitySystemManager _entitySystems = default!;
+        [Dependency] private IEntityManager _entityManager = default!;
         public override string Command => "emote";
         public string[] emotes = { "lenny", "mark", "nervous" };
 

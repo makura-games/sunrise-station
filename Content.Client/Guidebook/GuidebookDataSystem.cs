@@ -9,9 +9,9 @@ namespace Content.Client.Guidebook;
 /// Requests data from the server on <see cref="Initialize"/>.
 /// Can also be pushed new data when the server reloads prototypes.
 /// </summary>
-public sealed class GuidebookDataSystem : EntitySystem
+public sealed partial class GuidebookDataSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private INetManager _netManager = default!;
     private GuidebookData? _data;
 
     public override void Initialize()
@@ -19,14 +19,6 @@ public sealed class GuidebookDataSystem : EntitySystem
         base.Initialize();
 
         SubscribeNetworkEvent<UpdateGuidebookDataEvent>(OnServerUpdated);
-
-        // Request data from the server
-        _netManager.Connected += OnConnected;
-    }
-
-    private async void OnConnected(object? sender, NetChannelArgs e)
-    {
-        RaiseNetworkEvent(new RequestGuidebookDataEvent());
     }
 
     private void OnServerUpdated(UpdateGuidebookDataEvent args)

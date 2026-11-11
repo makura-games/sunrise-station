@@ -16,18 +16,6 @@
               impact: High
     - node: upgradelecter
       entity: WeaponRifleLecterMk2Empty
-      edges:
-        - to: upgradelectermk3
-          steps:
-            - tag: UpgradeLecterMk3
-              name: construction-graph-tag-upgrade-lecter-mk3
-              doAfter: 15
-          completed:
-            - !type:AdminLog
-              message: "Converted Lecter Mk2 to Lecter Mk3"
-              impact: High
-    - node: upgradelectermk3
-      entity: WeaponRifleLecterMk3Empty
 
 - type: constructionGraph
   id: DrozdSecurity

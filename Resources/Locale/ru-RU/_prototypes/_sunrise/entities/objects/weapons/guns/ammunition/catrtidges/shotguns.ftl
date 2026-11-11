@@ -9,16 +9,13 @@ ent-ShellShotgunImprovisedUranium = урановая картечь 12 кали�
 ent-ShellShotgunCoin = монетная пуля 12 калибра
     .desc = Самодельный патрон 12 калибра, выстреливающий горсткой из монет. Стопка имеет тенденцию распадаться при выстреле, ограничивая её эффективную дальность.
 ent-ShellShotgunBooze = резинавая пуля 12 калибра
-    .suffix = Алкогольный
     .desc = { ent-BaseShellShotgun.desc }
+    .suffix = Алкогольный
 ent-ShellShotgunHoly = святая пуля 12 калибра
     .desc = Во имя Света, Святых и 12-го калибра — аминь.
-ent-ShellShotgunBreaching = пробивная пуля 12 калибра
-    .desc = { ent-BaseShellShotgun.desc }
-
 ent-ShellShotgunBirdshot = мелкая дробь 12 калибра
     .desc = Патрон с широким разлётом, набитый десятками мелких дробин. Вблизи он выглядит особенно неприятно, но на расстоянии быстро теряет силу.
-
+ent-ShellShotgunBreaching = пробивная пуля 12 калибра
+    .desc = { ent-BaseShellShotgun.desc }
 ent-ShellShotgunFlechette = флешетта 12 калибра
     .desc = { ent-BaseShellShotgun.desc }
-

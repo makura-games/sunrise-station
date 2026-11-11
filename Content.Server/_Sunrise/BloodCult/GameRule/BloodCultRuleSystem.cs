@@ -5,7 +5,6 @@ using Content.Server._Sunrise.BloodCult.Runes.Systems;
 using Content.Server._Sunrise.TraitorTarget;
 using Content.Server.Antag;
 using Content.Server.Bed.Cryostorage;
-using Content.Server.Bible.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
@@ -17,21 +16,23 @@ using Content.Shared._Sunrise.CollectiveMind;
 using Content.Shared._Sunrise.Humanoid;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
+using Content.Shared.Bible.Components;
 using Content.Shared.Body.Systems;
-using Content.Shared.Clumsy;
+using Content.Shared.Clumsy.Components;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
-using Content.Shared.Mindshield.Components;
+using Content.Shared.Mindshield;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Roles;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusIcon.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Audio;
@@ -42,25 +43,27 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Sunrise.BloodCult.GameRule;
 
-public sealed class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleComponent>
+public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleComponent>
 {
-    [Dependency] private readonly AntagSelectionSystem _antagSelection = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly NpcFactionSystem _factionSystem = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
-    [Dependency] private readonly StorageSystem _storageSystem = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
-    [Dependency] private readonly KillCultistTargetsConditionSystem _cultistTargetsConditionSystem = default!;
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
-    [Dependency] private readonly SunriseHumanoidBodySystem _sunriseBody = default!;
+    [Dependency] private AntagSelectionSystem _antagSelection = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private NpcFactionSystem _factionSystem = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private SharedMindSystem _mindSystem = default!;
+    [Dependency] private MindShieldSystem _mindShield = default!;
+    [Dependency] private MobStateSystem _mobStateSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private RoundEndSystem _roundEndSystem = default!;
+    [Dependency] private StorageSystem _storageSystem = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
+    [Dependency] private KillCultistTargetsConditionSystem _cultistTargetsConditionSystem = default!;
+    [Dependency] private SharedRoleSystem _roles = default!;
+    [Dependency] private SunriseHumanoidBodySystem _sunriseBody = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     private static readonly ProtoId<TagPrototype> CultistTag = "Cultist";
     private static readonly ProtoId<TagPrototype> DeconvertedCultistTag = "DeconvertedCultist";
@@ -130,7 +133,7 @@ public sealed class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleComponent>
         var priorityTargets = potentialTargets
             .Where(target =>
                 HasComp<BibleUserComponent>(target) ||
-                HasComp<MindShieldComponent>(target))
+                IsMindshielded(target))
             .ToList();
 
         potentialTargets.RemoveAll(priorityTargets.Contains);
@@ -222,7 +225,7 @@ public sealed class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleComponent>
     private void AfterEntitySelected(Entity<BloodCultRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
         Log.Debug($"AfterAntagEntitySelected {ToPrettyString(ent)}");
-        MakeCultist(args.EntityUid, ent.Comp);
+        MakeCultist(args.EntityUid, ent.Comp, assignMindData: false);
     }
 
     private void OnCultistsStateChanged(EntityUid uid, BloodCultistComponent component, MobStateChangedEvent ev)
@@ -251,7 +254,7 @@ public sealed class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleComponent>
         var priorityTargets = potentialTargets
             .Where(target =>
                 HasComp<BibleUserComponent>(target) ||
-                HasComp<MindShieldComponent>(target))
+                IsMindshielded(target))
                 .ToList();
 
         potentialTargets.RemoveAll(priorityTargets.Contains);
@@ -282,6 +285,12 @@ public sealed class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleComponent>
     {
         _random.Shuffle(targets);
         return targets.Take(count).ToList();
+    }
+
+    private bool IsMindshielded(EntityUid target)
+    {
+        _mindShield.GetMindshieldStatus(target, out var mindshielded, out _);
+        return mindshielded;
     }
 
     public bool CultAwakened()
@@ -367,7 +376,7 @@ public sealed class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleComponent>
         var ev = new UpdateCultAppearance();
         RaiseLocalEvent(ev);
 
-        _actionsSystem.AddAction(uid, BloodCultistComponent.BloodMagicAction);
+        _actionsSystem.AddAction(uid, ref component.BloodMagicEntity, BloodCultistComponent.BloodMagicAction);
     }
 
     private void OnCultistComponentRemoved(EntityUid uid, BloodCultistComponent component, ComponentRemove args)
@@ -401,7 +410,13 @@ public sealed class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleComponent>
             CheckRoundShouldEnd();
         }
 
-        _actionsSystem.RemoveAction(uid, component.BloodMagicEntity);
+        if (component.BloodMagicEntity is { } bloodMagicEntity && !TerminatingOrDeleted(bloodMagicEntity))
+        {
+            _actionsSystem.RemoveAction(uid, bloodMagicEntity);
+            QueueDel(bloodMagicEntity);
+        }
+
+        component.BloodMagicEntity = null;
         if (TryComp<ActionsComponent>(uid, out var actionsComponent))
         {
             foreach (var userAction in actionsComponent.Actions)
@@ -482,7 +497,7 @@ public sealed class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleComponent>
         return potentialTargets;
     }
 
-    public bool MakeCultist(EntityUid cultist, BloodCultRuleComponent rule)
+    public bool MakeCultist(EntityUid cultist, BloodCultRuleComponent rule, bool assignMindData = true)
     {
         if (!_mindSystem.TryGetMind(cultist, out var mindId, out var mind))
             return false;
@@ -490,14 +505,15 @@ public sealed class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleComponent>
         if (_tagSystem.HasTag(cultist, DeconvertedCultistTag))
             return false;
 
-        _roles.MindAddRole(mindId, _mindRoleCultistPrototypeId);
+        // При выборе стартового антагониста роль и цель уже выдаются общими системами AntagSelection.
+        if (assignMindData)
+            _roles.MindAddRole(mindId, _mindRoleCultistPrototypeId);
 
         var isHumanoid = HasComp<HumanoidProfileComponent>(cultist);
 
         var cultistComponent = EnsureComp<BloodCultistComponent>(cultist);
 
-        if (HasComp<ClumsyComponent>(cultist))
-            RemComp<ClumsyComponent>(cultist);
+        RemoveClumsyStatusEffects(cultist);
 
         EnsureComp<CultMemberComponent>(cultist);
 
@@ -514,7 +530,7 @@ public sealed class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleComponent>
             EnsureComp<StatusIconComponent>(cultist);
 
         if (rule.CultType == null ||
-            !_prototype.TryIndex<BloodCultPrototype>($"{rule.CultType.Value.ToString()}Cult", out var cultPrototype))
+            !ProtoMan.TryIndex<BloodCultPrototype>($"{rule.CultType.Value.ToString()}Cult", out var cultPrototype))
             return false;
 
         cultistComponent.CultType = rule.CultType;
@@ -543,12 +559,28 @@ public sealed class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleComponent>
                 _chatManager.DispatchServerMessage(session, Loc.GetString("cult-role-greeting"));
             }
 
-            _mindSystem.TryAddObjective(mindId, mind, "CultistKillObjective");
+            if (assignMindData)
+                _mindSystem.TryAddObjective(mindId, mind, _cultistKillObjective);
         }
 
         Dirty(cultist, cultistComponent);
 
         return true;
+    }
+
+    private void RemoveClumsyStatusEffects(EntityUid cultist)
+    {
+        var prototypes = new List<EntProtoId>();
+        foreach (var status in _statusEffects.EnumerateStatusEffects<ClumsyGunStatusEffectComponent>(cultist))
+        {
+            if (MetaData(status.Owner).EntityPrototype is { } prototype)
+                prototypes.Add(prototype.ID);
+        }
+
+        foreach (var prototype in prototypes)
+        {
+            _statusEffects.TryRemoveStatusEffect(cultist, prototype);
+        }
     }
 
     private void OnNarsieSummon(CultNarsieSummoned ev)

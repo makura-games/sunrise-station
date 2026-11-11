@@ -17,6 +17,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.IdentityManagement;
 
 namespace Content.Client._Sunrise.InteractionsPanel;
 
@@ -25,13 +26,13 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
 {
     #region Dependencies
 
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly CustomInteractionService _customInteractionService = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private CustomInteractionService _customInteractionService = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     private readonly SpriteSystem _spriteSystem;
 
@@ -220,19 +221,21 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
         NetEntity targetEntity)
     {
         var selfTargeting = userEntity == targetEntity;
-        var nameUser = _entityManager.GetComponentOrNull<MetaDataComponent>(_entityManager.GetEntity(userEntity));
 
-        UserSpriteView.SetEntity(_entityManager.GetEntity(userEntity));
-        NameUser.Text = $"{nameUser?.EntityName}";
+        var user = _entityManager.GetEntity(userEntity);
+        var target = _entityManager.GetEntity(targetEntity);
+
+        UserSpriteView.SetEntity(user);
+        NameUser.Text = Identity.Name(user, _entityManager);
+
         TargetContainer.Visible = !selfTargeting;
 
         UserBoxShit.HorizontalAlignment = selfTargeting ? HAlignment.Center : HAlignment.Left;
 
         if (!selfTargeting)
         {
-            TargetSpriteView.SetEntity(_entityManager.GetEntity(targetEntity));
-            var nameTarget = _entityManager.GetComponentOrNull<MetaDataComponent>(_entityManager.GetEntity(targetEntity));
-            NameTarget.Text = $"{nameTarget?.EntityName}";
+            TargetSpriteView.SetEntity(target);
+            NameTarget.Text = Identity.Name(target, _entityManager);
             TargetSpriteView.InvalidateArrange();
             TargetSpriteView.InvalidateMeasure();
         }

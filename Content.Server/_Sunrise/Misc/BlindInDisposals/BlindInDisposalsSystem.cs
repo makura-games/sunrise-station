@@ -1,5 +1,5 @@
-using Content.Server.Disposal.Unit;
 using Content.Shared._Sunrise.VentCraw;
+using Content.Shared.Disposal.Unit;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Humanoid;
@@ -10,16 +10,16 @@ namespace Content.Server._Sunrise.Misc.BlindInDisposals;
 /// Простая система, делающая персонажа слепым, пока он находится в трубах.
 /// Из труб не должно быть видно реальный мир!!
 /// </summary>
-public sealed class BlindInDisposalsSystem : EntitySystem
+public sealed partial class BlindInDisposalsSystem : EntitySystem
 {
-    [Dependency] private readonly BlindableSystem _blindable = default!;
+    [Dependency] private BlindableSystem _blindable = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<BeingDisposedComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<BeingDisposedComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<BeingDisposedComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<BeingDisposedComponent, CanSeeAttemptEvent>(OnCanSee);
     }
 
@@ -33,7 +33,7 @@ public sealed class BlindInDisposalsSystem : EntitySystem
         _blindable.UpdateIsBlind(ent.Owner);
     }
 
-    private void OnShutdown(Entity<BeingDisposedComponent> ent, ref ComponentShutdown args)
+    private void OnRemove(Entity<BeingDisposedComponent> ent, ref ComponentRemove args)
     {
         if (!HasComp<BlindableComponent>(ent))
             return;

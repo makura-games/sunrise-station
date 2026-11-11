@@ -26,11 +26,10 @@
     - spicy
   - type: Sprite
     state: nian_ramen
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
         - ReagentId: Nutriment
           Quantity: 12
         - ReagentId: Protein
@@ -53,10 +52,9 @@
     - salty
   - type: Sprite
     state: diona_salad
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
+  - type: Solution
+    solution:
+      reagents:
         - ReagentId: Nutriment
           Quantity: 16
         - ReagentId: Vitamin
@@ -77,11 +75,10 @@
     - spicy
   - type: Sprite
     state: royal_xeno_soup
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
         - ReagentId: Nutriment
           Quantity: 12
         - ReagentId: Protein
@@ -108,11 +105,10 @@
     - salty
   - type: Sprite
     state: facehugger_soup
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
         - ReagentId: Nutriment
           Quantity: 10
         - ReagentId: Protein
@@ -135,11 +131,10 @@
     - meaty
   - type: Sprite
     state: demon_hell_chili
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
         - ReagentId: Nutriment
           Quantity: 12
         - ReagentId: Protein
@@ -162,10 +157,9 @@
     - salty
   - type: Sprite
     state: baked_resomi
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
+  - type: Solution
+    solution:
+      reagents:
         - ReagentId: Nutriment
           Quantity: 16
         - ReagentId: Protein
@@ -186,10 +180,9 @@
     - sweet
   - type: Sprite
     state: milir_wings_barbecue
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
+  - type: Solution
+    solution:
+      reagents:
         - ReagentId: Nutriment
           Quantity: 16
         - ReagentId: Protein
@@ -212,11 +205,10 @@
     - slimy
   - type: Sprite
     state: slime_bun
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 15
-        reagents:
+  - type: Solution
+    solution:
+      maxVol: 15
+      reagents:
         - ReagentId: Nutriment
           Quantity: 10
         - ReagentId: Sugar
@@ -234,10 +226,9 @@
     - salty
   - type: Sprite
     state: lizard_carp_nachos
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
+  - type: Solution
+    solution:
+      reagents:
         - ReagentId: Nutriment
           Quantity: 16
         - ReagentId: Protein
@@ -258,11 +249,10 @@
     - salty
   - type: Sprite
     state: swine_stew
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
         - ReagentId: Nutriment
           Quantity: 12
         - ReagentId: Protein
@@ -285,10 +275,9 @@
     - spicy
   - type: Sprite
     state: tajawarma
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
+  - type: Solution
+    solution:
+      reagents:
         - ReagentId: Nutriment
           Quantity: 16
         - ReagentId: Protein
@@ -309,11 +298,10 @@
     - cheesy
   - type: Sprite
     state: felmeni
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
         - ReagentId: Nutriment
           Quantity: 12
         - ReagentId: Protein
@@ -336,10 +324,9 @@
     - salty
   - type: Sprite
     state: vulp_loaf
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
+  - type: Solution
+    solution:
+      reagents:
         - ReagentId: Nutriment
           Quantity: 16
         - ReagentId: Protein

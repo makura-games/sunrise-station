@@ -6,7 +6,6 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 36000 #10 hr # Sunrise-RoleTime
-  canBeAntag: false
   icon: JobIconVisitor
   setPreference: false
   overrideConsoleVisibility: true

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-# Sunrise added start - независимый запуск всех настроенных чейнджлогов
 import json
 import os
 import re
+from collections.abc import Mapping
 from pathlib import Path
 from urllib.error import HTTPError
 from urllib.parse import quote
@@ -13,9 +13,10 @@ from changelog_targets import load_target, target_paths
 
 GITHUB_API_URL = os.environ.get("GITHUB_API_URL", "https://api.github.com")
 HTTP_REQUEST_TIMEOUT = 30
-PUBLISH_WORKFLOW = "publish-discord-changelog.yml"
+PUBLISH_WORKFLOW = "sunrise-publish-discord-changelog.yml"
 SHA_RE = re.compile(r"^[0-9a-f]{40,64}$")
 RUN_ID_RE = re.compile(r"^[1-9][0-9]*$")
+PUBLISH_RUN_TITLE_RE = re.compile(r"^Publish Stable (?P<sha>[0-9a-fA-F]{40})$")
 
 
 def require_environment(name: str) -> str:
@@ -46,6 +47,18 @@ def github_request(url: str, token: str, body: dict | None = None) -> dict:
         raise RuntimeError(f"GitHub API вернул {error.code}: {details}") from error
 
 
+def published_run_sha(run: Mapping) -> str | None:
+    # При откате head_commit относится к сценарию, а выбранный SHA хранится в заголовке запуска.
+    match = PUBLISH_RUN_TITLE_RE.fullmatch(str(run.get("display_title", "")))
+    if match:
+        return match.group("sha").lower()
+
+    # Старые публикации без выбора коммита используют SHA самого запуска.
+    head_commit = run.get("head_commit")
+    sha = head_commit.get("id") if isinstance(head_commit, Mapping) else None
+    return sha if isinstance(sha, str) else None
+
+
 def resolve_released_sha(repository: str, token: str, source_run_id: str) -> str:
     if not RUN_ID_RE.fullmatch(source_run_id):
         raise RuntimeError("SOURCE_WORKFLOW_RUN_ID должен содержать числовой ID запуска")
@@ -56,8 +69,7 @@ def resolve_released_sha(repository: str, token: str, source_run_id: str) -> str
             f"{GITHUB_API_URL}/repos/{repository}/actions/runs/{quote(source_run_id, safe='')}",
             token,
         )
-        head_commit = run.get("head_commit")
-        released_sha = head_commit.get("id", "") if isinstance(head_commit, dict) else ""
+        released_sha = published_run_sha(run) or ""
 
     if not SHA_RE.fullmatch(released_sha):
         raise RuntimeError("Не удалось определить SHA опубликованного коммита")
@@ -119,4 +131,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-# Sunrise added end
