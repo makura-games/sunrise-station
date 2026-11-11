@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Client._Sunrise.MarkingEffectsClient;
 using Content.Shared._Sunrise.MarkingEffects;
+using Content.Shared._Sunrise.Mood;
 using Content.Shared.Body;
 using Content.Shared.DisplacementMap;
 using Content.Shared.Humanoid;
@@ -16,6 +17,8 @@ namespace Content.Client.Body;
 
 public sealed partial class VisualBodySystem
 {
+    [Dependency] private MoodVisualsSystem _moodVisuals = default!;
+
     public void ApplySunriseMarkingEffects(Entity<VisualOrganMarkingsComponent> ent, EntityUid target)
     {
         if (!TryComp<SpriteComponent>(target, out var spriteComp))
@@ -128,12 +131,6 @@ public sealed partial class VisualBodySystem
         return layer == HumanoidVisualLayers.Special
             ? HumanoidVisualLayers.HeadTop
             : layer;
-    }
-
-    private void RaiseSunriseMarkingsUpdated(EntityUid target)
-    {
-        var ev = new SunriseMarkingsUpdatedEvent();
-        RaiseLocalEvent(target, ref ev);
     }
 
     private bool HasSunriseAliasedMarkingLayer(
@@ -252,9 +249,3 @@ public sealed partial class VisualBodySystem
         return markings.MarkingsDisplacement.GetValueOrDefault(layer);
     }
 }
-
-/// <summary>
-/// Вызывается на теле после перестроения клиентских слоёв markings.
-/// </summary>
-[ByRefEvent]
-public readonly record struct SunriseMarkingsUpdatedEvent;

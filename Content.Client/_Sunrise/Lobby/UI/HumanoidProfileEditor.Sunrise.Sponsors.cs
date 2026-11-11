@@ -19,10 +19,8 @@ public sealed partial class HumanoidProfileEditor
         var sponsorPrototypes = _sponsorsMgr?.GetClientPrototypes() ?? [];
 
         return _prototypeManager.EnumeratePrototypes<SpeciesPrototype>()
-            .Where(species => species.RoundStart &&
-                (_sponsorsMgr is null ||
-                    !species.SponsorOnly ||
-                    sponsorPrototypes.Contains(species.ID)));
+            .Where(species =>
+            HumanoidCharacterProfile.CanHaveSpecies(species, _sponsorsMgr is not null, sponsorPrototypes));
     }
 
     private FlavorText.FlavorText CreateSunriseFlavorText()
