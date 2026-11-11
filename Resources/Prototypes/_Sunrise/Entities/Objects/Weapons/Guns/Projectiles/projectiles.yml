@@ -1084,30 +1084,6 @@
     requireInSpace: true
 
 - type: entity
-  id: BulletAntiMaterielBlast
-  name: blast bullet
-  parent: BaseBulletTrigger
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    scale: 0.5, 0.5
-    layers:
-      - state: grenade
-  - type: ExplodeOnTrigger
-  - type: Explosive
-    explosionType: Default
-    totalIntensity: 50 # a ~1.5 tile radius
-    intensitySlope: 4
-    maxIntensity: 10
-    canCreateVacuum: false
-  - type: RadarBlip
-    color: "#FFAA33"
-    scale: 0.3
-    shape: Square
-    requireInSpace: true
-
-- type: entity
   id: BulletAntiMaterielEMP
   name: EMP bullet
   parent: BaseBulletTrigger

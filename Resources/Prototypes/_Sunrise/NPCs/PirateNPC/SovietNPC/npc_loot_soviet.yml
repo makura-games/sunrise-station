@@ -1316,20 +1316,18 @@
       prob: 0.4
     - id: LootSpawnerScienceMajor
       prob: 0.2
-    # durand
-    - id: GygaxArmorPlate
+    # Blyashanka
+    - id: SunriseBlyashankaArmorPlate
       prob: 0.1
-    - id: GygaxLArm
+    - id: SunriseBlyashankaLLeg2
       prob: 0.35
-    - id: GygaxRArm
+    - id: SunriseBlyashankaRLeg2
       prob: 0.35
-    - id: GygaxLLeg
+    - id: SunriseBlyashankaLLeg
       prob: 0.35
-    - id: GygaxRLeg
+    - id: SunriseBlyashankaRLeg
       prob: 0.35
-    - id: GygaxHarness
-      prob: 0.35
-    - id: GygaxHead
+    - id: SunriseBlyashankaHarness
       prob: 0.35
     - id: CratePirateSurplusBundle
       prob: 0.3

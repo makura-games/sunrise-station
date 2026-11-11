@@ -250,6 +250,127 @@
     - DurandArmorPlate
 
 - type: entity
+  id: MechKolobokHarnessSpawnerLow
+  name: mech kolobok harness spawner
+  parent: MechPartSpawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - KolobokHarness
+
+- type: entity
+  id: MechKolobokLArmSpawnerLow
+  name: mech kolobok left arm spawner
+  parent: MechPartSpawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - KolobokLArm
+
+- type: entity
+  id: MechKolobokRArmSpawnerLow
+  name: mech kolobok right arm spawner
+  parent: MechPartSpawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - KolobokRArm
+
+- type: entity
+  id: MechKolobokLLegSpawnerLow
+  name: mech kolobok left leg spawner
+  parent: MechPartSpawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - KolobokLLeg
+
+- type: entity
+  id: MechKolobokRLegSpawnerLow
+  name: mech kolobok right leg spawner
+  parent: MechPartSpawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - KolobokRLeg
+
+- type: entity
+  id: MechKolobokArmorPlateSpawner
+  name: mech kolobok armor plate spawner
+  parent: MechPartSpawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - KolobokArmorPlate
+    - SunriseScrapKolobokArmorPlate
+
+- type: entity
+  id: SunriseMechBlyashankaHarnessSpawnerLow
+  name: mech Blyashanka harness spawner
+  parent: MechPartSpawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - SunriseBlyashankaHarness
+
+- type: entity
+  id: SunriseMechBlyashankaLLegSpawnerLow
+  name: mech Blyashanka left leg spawner
+  parent: MechPartSpawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - SunriseBlyashankaLLeg
+
+- type: entity
+  id: SunriseMechBlyashankaRLegSpawnerLow
+  name: mech Blyashanka right leg spawner
+  parent: MechPartSpawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - SunriseBlyashankaRLeg
+
+- type: entity
+  id: SunriseMechBlyashankaLLeg2SpawnerLow
+  name: mech Blyashanka left leg 2 spawner
+  parent: MechPartSpawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - SunriseBlyashankaLLeg2
+
+- type: entity
+  id: SunriseMechBlyashankaRLeg2SpawnerLow
+  name: mech Blyashanka right leg 2 spawner
+  parent: MechPartSpawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - SunriseBlyashankaRLeg2
+
+- type: entity
+  id: SunriseMechBlyashankaArmorPlateSpawnerLow
+  name: mech Blyashanka armor plate spawner
+  parent: MechPartSpawnerLow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - SunriseBlyashankaArmorPlate
+
+- type: entity
   id: SunriseMechRoverArmorPlateSpawnerLow
   name: mech rover armor plate spawner
   parent: MechPartSpawnerLow
@@ -355,6 +476,52 @@
     damageCoefficient: 0.8
 
 - type: entity
+  id: MechBreakageBlyashanka
+  parent: MechBreakageGygax
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ScrapSteel:
+            min: 2
+            max: 4
+          SunriseMechBlyashankaHarnessSpawnerLow:
+            min: 1
+            max: 1
+          SunriseMechBlyashankaLLegSpawnerLow:
+            min: 1
+            max: 1
+          SunriseMechBlyashankaRLegSpawnerLow:
+            min: 1
+            max: 1
+          SunriseMechBlyashankaLLeg2SpawnerLow:
+            min: 1
+            max: 1
+          SunriseMechBlyashankaRLeg2SpawnerLow:
+            min: 1
+            max: 1
+          SunriseMechBlyashankaArmorPlateSpawnerLow:
+            min: 1
+            max: 1
+          MechGygaxBoardSpawnerLow:
+            min: 1
+            max: 1
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
   id: MechBreakageDurand
   abstract: true
   categories: [ HideSpawnMenu ]
@@ -397,6 +564,9 @@
           MechDurandBoardSpawnerLow:
             min: 1
             max: 1
+          SunriseScrapDurandCircuitBoard:
+            min: 1
+            max: 3
       - !type:ChangeConstructionNodeBehavior
         node: start
       - !type:DoActsBehavior
@@ -420,6 +590,52 @@
     - NonEnergy
   - type: ExplosionResistance
     damageCoefficient: 0.6
+
+- type: entity
+  id: MechBreakageKolobok
+  parent: MechBreakageDurand
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 800
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ScrapSteel:
+            min: 2
+            max: 4
+          MechKolobokHarnessSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokLArmSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokRArmSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokLLegSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokRLegSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokArmorPlateSpawner:
+            min: 1
+            max: 1
+          MechDurandBoardSpawnerLow:
+            min: 1
+            max: 1
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
 
 - type: entity
   id: MechBreakageRover

@@ -271,3 +271,64 @@
     - WeaponTurretRogueSiliconVympel
     - WeaponTurretRogueSiliconQuadling
     rareChance: 0.25
+
+- type: entity
+  name: tick swarm spawner
+  id: SunriseSalvageSpaceTickGroupSpawner
+  parent: MarkerBase
+  suffix: Salvage, 3-6
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Mobs/Aliens/Xenos/spacetick.rsi
+      state: icon
+  - type: EntityTableSpawner
+    offset: 1
+    table: !type:AllSelector
+      children:
+      - id: MobTickSalvage
+        amount: !type:RangeNumberSelector
+          range: 3, 6
+    deleteSpawnerAfterSpawn: true
+
+- type: entity
+  parent: MarkerBase
+  id: SalvageSpawnerMobMiningAsteroidTurret
+  name: Mining Asteroid Mob Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Aliens/Asteroid/goliath.rsi
+      state: goliath
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: MobGoliath
+        weight: 40
+      - id: MobHivelord
+        weight: 30
+      - id: MobBasilisk
+        weight: 20
+      - id: SunriseSalvageSpaceTickGroupSpawner
+        weight: 30
+      - !type:GroupSelector
+        weight: 20
+        children:
+        - id: WeaponTurretRogueSiliconStunner
+          weight: 35
+        - id: WeaponTurretRogueSiliconLaser
+          weight: 35
+        - id: WeaponTurretRogueSiliconLongbow
+          weight: 8
+        - id: WeaponTurretRogueSiliconAutocannon
+          weight: 8
+        - id: WeaponTurretRogueSiliconSquall
+          weight: 8
+        - id: WeaponTurretRogueSiliconBullfrog
+          weight: 2
+        - id: WeaponTurretRogueSiliconVympel
+          weight: 2
+        - id: WeaponTurretRogueSiliconQuadling
+          weight: 2

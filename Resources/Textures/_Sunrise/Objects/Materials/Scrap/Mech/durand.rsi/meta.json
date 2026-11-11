@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "copyright" : "Sprited by .askal02 (discord) for SS14 Makura Games, Warboss states by KaiserMaus (github),",
+  "license" : "CC-BY-SA-4.0",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "circuit-1"
+    },
+    {
+      "name": "circuit-2"
+    },
+    {
+      "name": "circuit-3"
+    },
+    {
+      "name": "circuit-4"
+    },
+    {
+      "name": "circuit-5"
+    },
+    {
+      "name": "circuit-6"
+    },
+    {
+      "name": "circuit-7"
+    },
+    {
+      "name": "circuit-8"
+    },
+    {
+      "name": "circuit-9"
+    },
+    {
+      "name": "circuit-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "circuit-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "armor-1"
+    },
+    {
+      "name": "armor-2"
+    },
+    {
+      "name": "armor-3"
+    },
+    {
+      "name": "armor-4"
+    }
+  ]
+}

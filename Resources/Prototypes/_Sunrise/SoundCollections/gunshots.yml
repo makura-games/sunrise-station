@@ -49,6 +49,11 @@
   - /Audio/_Sunrise/Weapons/Guns/Gunshots/m249-2.ogg
 
 - type: soundCollection
+  id: RPD
+  files:
+  - /Audio/_Sunrise/Weapons/Guns/LMGs/shot.ogg
+
+- type: soundCollection
   id: aug
   files:
   - /Audio/_Sunrise/Weapons/Guns/Gunshots/aug-1.ogg
