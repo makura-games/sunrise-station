@@ -39,3 +39,10 @@
   sprite:
     sprite: _Sunrise/Objects/Tanks/Jetpacks/ce_void.rsi
     state: icon
+
+- type: stealTargetGroup
+  id: HOPSoftSuit
+  name: steal-target-groups-hop-softsuit
+  sprite:
+    sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/hop_softsuit.rsi
+    state: icon

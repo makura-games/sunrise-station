@@ -147,6 +147,7 @@
     - id: SheetOfficePaper
     - id: WeaponMiniEnergyGun
     - id: PlantAnalyzerCartridge
+    - id: ClothingOuterEVASuitHop # Sunrise-Edit - добавляем скафандр главы персонала.
     # Sunrise-end
 
 - type: entity

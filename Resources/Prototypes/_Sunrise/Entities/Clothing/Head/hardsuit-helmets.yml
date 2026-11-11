@@ -167,28 +167,6 @@
       - state: equipped-HELMET
 
 - type: entity
-  parent: ClothingHeadHelmetHardsuitSecurity
-  id: ClothingHeadHelmetHardsuitSecuritySunrise
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Clothing/Head/Hardsuits/secoff.rsi
-    layers:
-    - state: icon
-    - state: icon-flash
-      visible: false
-      shader: unshaded
-      map: [light]
-  - type: Clothing
-    clothingVisuals:
-      head:
-      - state: off-equipped-HELMET
-  - type: ToggleableVisuals
-    spriteLayer: light
-    clothingVisuals:
-      head:
-      - state: on-equipped-HELMET
-
-- type: entity
   parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitPilot
   categories: [ HideSpawnMenu ]
@@ -197,7 +175,7 @@
   components:
   - type: BreathMask
   - type: Sprite
-    sprite: _Sunrise/Clothing/Head/Hardsuits/pilothardsuithelmet.rsi
+    sprite: _Sunrise/Clothing/Head/Hardsuits/security-ranger.rsi
     layers:
     - state: icon
     - state: icon-flash
@@ -205,16 +183,21 @@
       shader: unshaded
       map: [light]
   - type: Clothing
+    sprite: _Sunrise/Clothing/Head/Hardsuits/security-ranger.rsi
     clothingVisuals:
       head:
       - state: off-equipped-HELMET
+      head-vox:
+      - state: off-equipped-HELMET-vox
   - type: ToggleableVisuals
     spriteLayer: light
     clothingVisuals:
       head:
       - state: on-equipped-HELMET
+      head-vox:
+      - state: on-equipped-HELMET-vox
   - type: PointLight
-    color: cyan
+    color: "#ffeead"
   - type: PressureProtection
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000
@@ -1155,6 +1138,105 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitSecurity
+  id: ClothingHeadHelmetHardsuitSergeant
+  name: sergeant hardsuit helmet
+  description: A smoothly designed armored hardsuit helmet.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Head/Hardsuits/sergeant.rsi
+    layers:
+    - state: icon
+    - state: icon-flash
+      visible: false
+      shader: unshaded
+      map: [ light ]
+  - type: HandheldLight
+    addPrefix: false
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+      head-reptilian:
+      - state: on-equipped-HELMET-reptilian
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Head/Hardsuits/sergeant.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+      head-reptilian:
+      - state: off-equipped-HELMET-reptilian
+  - type: PointLight
+    color: "#dead68"
+    radius: 7
+    energy: 3
+  - type: Tag
+    tags:
+    - CorgiWearable
+    - WhitelistChameleon
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetSoftsuitHop
+  categories: [ HideSpawnMenu ]
+  name: head of personnel's EVA helmet
+  description: A lightweight EVA helmet designed for the Head of Personnel.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Head/Hardsuits/hop_softsuit.rsi
+    layers:
+    - state: icon
+    - state: icon-flash
+      visible: false
+      shader: unshaded
+      map: [ light ]
+  - type: HandheldLight
+    addPrefix: false
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+      head-vox:
+      - state: on-equipped-HELMET-vox
+      head-reptilian:
+      - state: on-equipped-HELMET-reptilian
+      head-dog:
+      - state: on-equipped-HELMET-dog
+      head-resomi:
+      - state: on-equipped-HELMET-resomi
+      head-arachnid:
+      - state: on-equipped-HELMET-arachnid
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Head/Hardsuits/hop_softsuit.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+      head-vox:
+      - state: off-equipped-HELMET-vox
+      head-reptilian:
+      - state: off-equipped-HELMET-reptilian
+      head-dog:
+      - state: off-equipped-HELMET-dog
+      head-resomi:
+      - state: off-equipped-HELMET-resomi
+      head-arachnid:
+      - state: off-equipped-HELMET-arachnid
+  - type: PointLight
+    color: "#adeeff"
+    radius: 7
+    energy: 3
+  - type: PressureProtection
+    highPressureMultiplier: 0.45
+    lowPressureMultiplier: 1000
+  - type: Tag
+    tags:
+    - HelmetEVA
+    - CorgiWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
