@@ -423,8 +423,8 @@ namespace Content.Client.Lobby.UI
             if (!disposing)
                 return;
 
-            _loadoutWindow?.Dispose();
-            _loadoutWindow = null;
+            // _loadoutWindow?.Dispose();
+            // _loadoutWindow = null;
         }
 
         protected override void EnteredTree()

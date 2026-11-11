@@ -7,7 +7,6 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using System.Linq;
-using Content.Sunrise.Interfaces.Shared; // Sunrise-Sponsors
 
 namespace Content.Client.Lobby.UI.Loadouts;
 
@@ -23,17 +22,15 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
     private Dictionary<string, bool> _openedGroups = new();
 
     private readonly LoadoutGroupPrototype _groupProto;
-    private readonly ISharedSponsorsManager? _sponsors;  // Sunrise-Sponsors
 
     public event Action<ProtoId<LoadoutPrototype>>? OnLoadoutPressed;
     public event Action<ProtoId<LoadoutPrototype>>? OnLoadoutUnpressed;
 
-    public LoadoutGroupContainer(HumanoidCharacterProfile profile, RoleLoadout loadout, LoadoutGroupPrototype groupProto, ICommonSession session, IDependencyCollection collection, ISharedSponsorsManager? sponsorsManager)  // Sunrise-Sponsors
+    public LoadoutGroupContainer(HumanoidCharacterProfile profile, RoleLoadout loadout, LoadoutGroupPrototype groupProto, ICommonSession session, IDependencyCollection collection)
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
         _groupProto = groupProto;
-        _sponsors = sponsorsManager;  // Sunrise-Sponsors
 
         RefreshLoadouts(profile, loadout, session, collection);
     }
@@ -221,8 +218,7 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
 
         var pressed = selected.Any(e => e.Prototype == proto.ID);
 
-        var sponsorPrototypes = _sponsors?.GetClientPrototypes().ToArray() ?? [];
-        var enabled = loadout.IsValid(profile, session, proto.ID, collection, sponsorPrototypes, out var reason);
+        var enabled = loadout.IsValid(profile, session, proto.ID, collection, out var reason);
 
         var cont = new LoadoutContainer(proto, !enabled, reason);
 

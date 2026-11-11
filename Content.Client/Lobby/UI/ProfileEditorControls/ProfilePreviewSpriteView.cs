@@ -19,7 +19,6 @@ public sealed partial class ProfilePreviewSpriteView : SpriteView
     public ProfilePreviewSpriteView()
     {
         IoCManager.InjectDependencies(this);
-        InitializeSunriseProfilePreview(); // Sunrise-Edit - инициализируем поддержку профиля Sunrise
     }
 
     /// <summary>

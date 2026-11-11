@@ -1,6 +1,0 @@
-- type: loadout
-  id: ContributorLoadout
-  sponsorOnly: true
-  storage:
-    back:
-    - ClothingNeckCloakContrib

@@ -1,0 +1,88 @@
+<ContainerButton xmlns="https://spacestation14.io"
+                 xmlns:sf="clr-namespace:Content.Client._Sunrise.Sheetlets.SciFiStyle"
+                 xmlns:system="clr-namespace:System;assembly=System.Runtime"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 MaxHeight="220"
+                 RectClipContent="True"
+                 MaxWidth="150"
+                 MinHeight="220"
+                 MinWidth="150">
+    <BoxContainer
+        HorizontalExpand="True"
+        Margin="6"
+        Orientation="Vertical"
+        SeparationOverride="5"
+        VerticalExpand="True">
+        <Control
+            HorizontalExpand="True"
+            MaxHeight="70"
+            MinHeight="68">
+            <EntityPrototypeView
+                Name="PackPreview"
+                HorizontalAlignment="Center"
+                OverrideDirection="South"
+                Scale="2.45 2.45"
+                SetSize="68 68" />
+        </Control>
+
+        <Label
+            Name="PackName"
+            Align="Center"
+            FontColorOverride="{x:Static sf:SciFiPalette.Text}"
+            HorizontalAlignment="Center"
+            HorizontalExpand="True"
+            MaxHeight="42"
+            MaxWidth="126"
+            MinHeight="36"
+            VAlign="Center" />
+
+        <BoxContainer
+            HorizontalExpand="True"
+            Orientation="Horizontal">
+            <Label
+                FontColorOverride="{x:Static sf:SciFiPalette.TextMuted}"
+                Text="{Loc 'donation-terminal-inventory-pack-kind'}"
+                VAlign="Center"
+                StyleClasses="font-small"/>
+            <Control HorizontalExpand="True" />
+            <Label
+                Name="PackProgress"
+                FontColorOverride="{x:Static sf:SciFiPalette.Accent}"
+                VAlign="Center"
+                StyleClasses="font-small"/>
+        </BoxContainer>
+
+        <Control VerticalExpand="True" />
+
+        <BoxContainer
+            HorizontalExpand="True"
+            Orientation="Vertical"
+            SeparationOverride="4">
+            <BoxContainer
+                HorizontalAlignment="Center"
+                Orientation="Horizontal"
+                SeparationOverride="3"
+                VerticalAlignment="Center">
+                <TextureRect
+                    SetSize="20 20"
+                    Stretch="KeepAspectCentered"
+                    TexturePath="/Textures/_Sunrise/Interface/Sponsor/telecrystal.png" />
+                <Label
+                    Name="PackPrice"
+                    FontColorOverride="{x:Static sf:SciFiPalette.Text}"
+                    MaxWidth="96"
+                    VAlign="Center"
+                    StyleClasses="font-small"/>
+            </BoxContainer>
+
+            <Button
+                Name="BuyButton"
+                HorizontalExpand="True"
+                MaxHeight="30"
+                MinHeight="30"
+                Text="{Loc 'donation-terminal-buy'}"
+                TextAlign="Center"
+                StyleClasses="SciFiBuyButton"/>
+        </BoxContainer>
+    </BoxContainer>
+</ContainerButton>

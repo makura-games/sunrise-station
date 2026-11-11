@@ -15,7 +15,7 @@ public sealed partial class LobbyCharacterPreviewPanel
 {
     [Dependency] private IEntityManager _entManager = default!;
 
-    public event Action? OnChangePetRequested;
+    public event Action? OnInventoryRequested;
 
     private EntityUid? _petPreviewDummy;
     private SpriteView? _petSpriteView;
@@ -23,7 +23,7 @@ public sealed partial class LobbyCharacterPreviewPanel
     private void InitializeSunrisePetPreview()
     {
         Header.Visible = false;
-        ChangePetButton.OnPressed += OnChangePetButtonPressed;
+        InventoryButton.OnPressed += OnInventoryButtonPressed;
     }
 
     public void SetPetSprite(EntityUid? uid)
@@ -60,7 +60,7 @@ public sealed partial class LobbyCharacterPreviewPanel
     {
         if (disposing)
         {
-            ChangePetButton.OnPressed -= OnChangePetButtonPressed;
+            InventoryButton.OnPressed -= OnInventoryButtonPressed;
 
             if (_petPreviewDummy is { } pet)
                 _entManager.DeleteEntity(pet);
@@ -71,9 +71,9 @@ public sealed partial class LobbyCharacterPreviewPanel
         base.Dispose(disposing);
     }
 
-    private void OnChangePetButtonPressed(BaseButton.ButtonEventArgs args)
+    private void OnInventoryButtonPressed(BaseButton.ButtonEventArgs args)
     {
-        OnChangePetRequested?.Invoke();
+        OnInventoryRequested?.Invoke();
     }
 
     private string WrapSunriseSummaryText(string text, float maxWidth)
