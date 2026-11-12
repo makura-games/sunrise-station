@@ -104,6 +104,7 @@ namespace Content.Server.Administration.Managers
                 UpdateDatabaseDeadminnedState(session, true);
             // Sunrise edit end
             reg.Data.Active = false;
+            SetDeadminned(session.UserId, true); // Sunrise-Edit - запоминаем deadmin на случай переподключения
 
             SendPermsChangedEvent(session);
             UpdateAdminStatus(session);
@@ -182,6 +183,7 @@ namespace Content.Server.Administration.Managers
                 UpdateDatabaseDeadminnedState(session, false);
             // Sunrise edit end
             reg.Data.Active = true;
+            SetDeadminned(session.UserId, false); // Sunrise-Edit - readmin снимает сохранённый deadmin
 
             if (!reg.Data.Stealth)
             {
@@ -446,6 +448,11 @@ namespace Content.Server.Administration.Managers
             // Make sure admin didn't disconnect while data was loading.
             if (session.Status != SessionStatus.InGame)
                 return null;
+
+            // Sunrise-start - восстанавливаем deadmin после переподключения.
+            if (result != null)
+                ApplyDeadminned(session.UserId, result.Value.dat);
+            // Sunrise-end
 
             return result;
         }
