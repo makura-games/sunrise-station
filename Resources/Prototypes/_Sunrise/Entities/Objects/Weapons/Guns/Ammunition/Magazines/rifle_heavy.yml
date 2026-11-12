@@ -45,6 +45,15 @@
     - MagazineGarand
   - type: Item
     size: Small
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      - state: inhand-left-stripe
+        color: "#B68F0E"
+      right:
+      - state: inhand-right
+      - state: inhand-right-stripe
+        color: "#B68F0E"
   - type: BallisticAmmoProvider
     mayTransfer: true
     cycleable: true
@@ -57,16 +66,18 @@
     capacity: 8
     proto: CartridgeRifleHeavyFMJ
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/LightRifle/light_rifle_speed_loader.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/SpeedLoaders/308_rifle_speed_loader.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-5
+    - state: mag-8
       map: ["enum.GunVisualLayers.Mag"]
-      color: "#49392D"
+    - state: mag-tip-8
+      map: ["enum.GunVisualLayers.Tip"] # Hide tips for FMJ
+      color: "#b68f0e02"
   - type: MagazineVisuals
     magState: mag
-    steps: 6
+    steps: 9
     zeroVisible: false
   - type: Appearance
   - type: ContainerContainer
