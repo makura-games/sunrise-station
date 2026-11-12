@@ -1,17 +1,50 @@
 # region Rifle
+
 - type: entity
-  id: MagazineRifleSP
-  name: "magazine (.20 rifle SP)"
+  id: BaseMagazineRifleExtended
   parent: BaseMagazineRifle
-  description: 25-round double stack magazine for combat rifles. Intended to hold general-purpose kinetic ammunition.
+  abstract: true
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 35
+  - type: Item
+    shape:
+    - 0,0,0,2
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      right:
+      - state: inhand-right-mag
+  - type: Sprite
+    layers:
+    - state: base-1
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-5
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6
+    zeroVisible: false
+
+- type: entity
+  id: MagazineRifleExtendedEmpty
+  parent: BaseMagazineRifleExtended
+  suffix: empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
+  id: MagazineRifleExtended
+  parent: BaseMagazineRifleExtended
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleSP
   - type: Sprite
     layers:
-    - state: base
+    - state: base-1
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-5
       map: ["enum.GunVisualLayers.Mag"]
     - state: stripe
       color: "#575EF5"
@@ -25,6 +58,13 @@
       - state: inhand-right-mag
       - state: inhand-right-stripe
         color: "#575EF5"
+
+- type: entity
+  id: MagazineRifleExtendedFMJ
+  parent: BaseMagazineRifleExtended
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifleFMJ
 
 - type: entity
   id: MagazineRifleFMJ
@@ -150,18 +190,12 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#080706"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#080706"
       right:
       - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#080706"
 
 - type: entity
   id: MagazineRifleM52AP
@@ -193,20 +227,10 @@
   id: MagazineRifleM52Empty
   name: "magazine (.20 rifle any)"
   suffix: empty
-  parent: BaseMagazineRifleM52
+  parent: MagazineRifleM52FMJ
   components:
   - type: BallisticAmmoProvider
     proto: null
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      right:
-      - state: inhand-right-mag
 
 - type: entity
   id: MagazineRifleM52Incendiary
@@ -287,31 +311,11 @@
         color: "#40F57A"
 
 # region LMG L6 SAW
-- type: entity
-  id: MagazineRifleBoxSP
-  name: "L6 SAW magazine box (.20 rifle SP)"
-  parent: [ BaseNonCycleableAmmoProvider, BaseMagazineRifle ]
-  description: Box containing a 200-round belt of linked .20 rifle rounds, used by light machine guns such as the L6. Intended to hold general-purpose kinetic ammunition.
-  components:
-  - type: Tag
-    tags:
-      - MagazineLightRifleBox
-  - type: BallisticAmmoProvider
-    proto: CartridgeRifleSP
-    capacity: 200
-  - type: Item
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_box.rsi
-  - type: MagazineVisuals
-    magState: mag
-    steps: 8
-    zeroVisible: false
-  - type: Appearance
 
 - type: entity
   id: MagazineRifleBoxEmpty
   name: "L6 SAW magazine box (.20 rifle any)"
-  parent: MagazineRifleBoxSP
+  parent: MagazineLightRifleBox
   description: Box containing a 200-round belt of linked .20 rifle rounds, used by light machine guns such as the L6.
   components:
   - type: Tag
@@ -322,6 +326,11 @@
   - type: Item
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_box.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
     steps: 8
@@ -331,16 +340,22 @@
 - type: entity
   id: MagazineRifleBoxFMJ
   name: "L6 SAW magazine box (.20 rifle FMJ)"
-  parent: MagazineRifleBoxSP
+  parent: MagazineLightRifleBox
   description: Box containing a 200-round belt of linked .20 rifle rounds, used by light machine guns such as the L6. Intended to hold FMJ kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleFMJ
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
   id: MagazineRifleBoxImprovised
   name: "L6 SAW magazine box (5.56mm improvised)"
-  parent: MagazineRifleBoxSP
+  parent: MagazineLightRifleBox
   description: Box containing a 200-round belt of linked 5.56mm improvised rounds, used by light machine guns such as the L6.
   components:
   - type: BallisticAmmoProvider
@@ -349,34 +364,69 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-      color: "#717171"
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#717171"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      - state: inhand-left-stripe
+        color: "#717171"
+      right:
+      - state: inhand-right
+      - state: inhand-right-stripe
+        color: "#717171"
 
 - type: entity
   id: MagazineRifleBoxIncendiary
   name: "L6 SAW magazine box (.20 rifle incendiary)"
-  parent: MagazineRifleBoxSP
+  parent: MagazineLightRifleBox
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleIncendiary
   - type: Sprite
     layers:
-    - state: red
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#ff6e52"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      - state: inhand-left-stripe
+        color: "#ff6e52"
+      right:
+      - state: inhand-right
+      - state: inhand-right-stripe
+        color: "#ff6e52"
 
 - type: entity
   id: MagazineRifleBoxUranium
   name: "L6 SAW magazine box (.20 rifle uranium)"
-  parent: MagazineRifleBoxSP
+  parent: MagazineLightRifleBox
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleUranium
   - type: Sprite
     layers:
-    - state: uranium
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#40F57A"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      - state: inhand-left-stripe
+        color: "#40F57A"
+      right:
+      - state: inhand-right
+      - state: inhand-right-stripe
+        color: "#40F57A"

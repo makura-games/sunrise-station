@@ -94149,6 +94149,7 @@ entities:
     - type: Transform
       parent: 14549
     - type: Clothing
+      slots: BACK
       inSlotFlag: BACK
       inSlot: back
     - type: Physics
@@ -94265,6 +94266,7 @@ entities:
     - type: Transform
       parent: 14549
     - type: Clothing
+      slots: EYES
       inSlotFlag: EYES
       inSlot: eyes
     - type: Physics
@@ -94653,6 +94655,7 @@ entities:
     - type: Transform
       parent: 14549
     - type: Clothing
+      slots: HEAD
       inSlotFlag: HEAD
       inSlot: head
     - type: Physics
@@ -95717,6 +95720,7 @@ entities:
     - type: Transform
       parent: 14549
     - type: Clothing
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
       inSlot: jumpsuit
     - type: Physics

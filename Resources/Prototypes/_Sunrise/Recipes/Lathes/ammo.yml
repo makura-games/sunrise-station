@@ -1,24 +1,4 @@
 ## Recipes
-- type: latheRecipe
-  id: MagazineBatteryLr30
-  parent: BaseAmmoRecipe
-  result: MagazineBatteryLr30
-  materials:
-    Steel: 250
-    Glass: 50
-    Plasma: 25
-    Gold: 25
-
-- type: latheRecipe
-  id: MagazineBatteryLr60
-  parent: BaseAmmoRecipe
-  result: MagazineBatteryLr60
-  materials:
-    Steel: 500
-    Glass: 100
-    Plasma: 50
-    Gold: 50
-
 # Blueprints
 - type: latheRecipe
   parent: BaseAmmoRecipe
@@ -260,8 +240,8 @@
 # .20 Rifle
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazineRifleSP
-  result: MagazineRifleSP
+  id: MagazineRifle
+  result: MagazineRifle
   materials:
     Steel: 475
 
@@ -310,8 +290,8 @@
 # .30 Rifle
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazineLightRifleSP
-  result: MagazineLightRifleSP
+  id: MagazineLightRifle
+  result: MagazineLightRifle
   materials:
     Steel: 565
 
@@ -368,8 +348,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePistolSP
-  result: MagazinePistolSP
+  id: MagazinePistol
+  result: MagazinePistol
   materials:
     Steel: 145
 
@@ -408,8 +388,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePistolSubMachineGunSP
-  result: MagazinePistolSubMachineGunSP
+  id: MagazinePistolSubMachineGun
+  result: MagazinePistolSubMachineGun
   materials:
     Steel: 300
 
@@ -446,6 +426,13 @@
 
 # .40 SMG
 - type: latheRecipe
+  parent: BaseEmptyAmmoRecipe
+  id: MagazinePistol40SubMachineGunEmpty
+  result: MagazinePistol40SubMachineGunEmpty
+  materials:
+    Steel: 35
+
+- type: latheRecipe
   parent: BaseAmmoRecipe
   id: MagazinePistol40SubMachineGunSP
   result: MagazinePistol40SubMachineGunSP
@@ -467,6 +454,14 @@
     Steel: 225
     Plasteel: 75
 
+# M52
+- type: latheRecipe
+  parent: BaseEmptyAmmoRecipe
+  id: MagazineRifleM52Empty
+  result: MagazineRifleM52Empty
+  materials:
+    Steel: 40
+
 # .35 Auto WT550
 - type: latheRecipe
   parent: BaseAmmoRecipe
@@ -478,8 +473,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePistolSubMachineGunTopMountedSP
-  result: MagazinePistolSubMachineGunTopMountedSP
+  id: MagazinePistolSubMachineGunTopMountedFMJ
+  result: MagazinePistolSubMachineGunTopMountedFMJ
   materials:
     Steel: 300
 
@@ -559,8 +554,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePistolHighCapacitySP
-  result: MagazinePistolHighCapacitySP
+  id: MagazinePistolHighCapacity
+  result: MagazinePistolHighCapacity
   materials:
     Steel: 200
 
@@ -761,8 +756,8 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazineRifleBoxSP
-  result: MagazineRifleBoxSP
+  id: MagazineLightRifleBox
+  result: MagazineLightRifleBox
   materials:
     Steel: 1100
 

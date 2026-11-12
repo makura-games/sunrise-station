@@ -18,7 +18,7 @@
   # name: uplink-pistol-magazine-c20r-name # Sunrise-Edit
   description: uplink-pistol-magazine-c20r-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
-  productEntity: MagazinePistolSubMachineGunSP # Sunrise-Edit
+  productEntity: MagazinePistolSubMachineGun # Sunrise-Edit
   cost:
     Telecrystal: 2
   categories:

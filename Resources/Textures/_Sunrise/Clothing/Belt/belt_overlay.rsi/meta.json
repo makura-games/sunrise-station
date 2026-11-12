@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "by KaiserMaus (github)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "launcher"
+    },
+    {
+      "name": "beltgrenade1"
+    },
+    {
+      "name": "beltgrenade2"
+    },
+    {
+      "name": "beltgrenade3"
+    },
+    {
+      "name": "beltgrenade4"
+    },
+    {
+      "name": "beltgrenade5"
+    },
+    {
+      "name": "launchergl70"
+    }
+  ]
+}

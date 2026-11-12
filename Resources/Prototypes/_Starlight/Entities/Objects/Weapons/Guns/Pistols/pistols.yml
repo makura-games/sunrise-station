@@ -16,7 +16,7 @@
             - MagazinePistol
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolRubber
+        # startingItem: CartridgePistolRubber # Sunrise-Edit
         priority: 1
         whitelist:
           tags:
@@ -41,7 +41,7 @@
             - MagazineMagnum
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeMagnumRubber
+        # startingItem: CartridgeMagnumRubber # Sunrise-Edit
         priority: 1
         whitelist:
           tags:
@@ -71,7 +71,7 @@
     minAngle: 5
     maxAngle: 30
     angleIncrease: 2
-    angleDecay: 15
+    angleDecay: 18
     fireRate: 6
     selectedMode: FullAuto
     availableModes:
@@ -110,7 +110,7 @@
           - MagazinePistol
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolSP
+        # startingItem: CartridgePistolSP # Sunrise-Edit
         priority: 1
         whitelist:
           tags:
@@ -130,8 +130,8 @@
   - type: Gun
     minAngle: 1
     maxAngle: 20
-    angleIncrease: 8
-    angleDecay: 7
+    angleIncrease: 5
+    angleDecay: 12
     fireRate: 7
     soundGunshot:
       path: /Audio/_Starlight/Weapons/Guns/Gunshots/colt.ogg

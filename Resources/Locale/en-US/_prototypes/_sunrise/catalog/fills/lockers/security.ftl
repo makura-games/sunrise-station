@@ -1,5 +1,5 @@
-ent-GunSafeEnergyGunMini = mini energy cannons safe
-    .suffix = SUNRISE
+ent-GunSafeEnergyGunMini = safe
+    .suffix = Mini energy guns
     .desc = { ent-GunSafe.desc }
 
 ent-GunSafeEnergyPistolDominator = safe
@@ -31,7 +31,7 @@ ent-GunSafeSubMachineGunVector = safe
     .desc = { ent-GunSafe.desc }
 
 ent-GunSafeSubMachineGunDrozdMk2 = safe
-    .suffix = Drozd Mk2, SUNRISE
+    .suffix = Deryaba / Drozd Mk2
     .desc = { ent-GunSafeBaseSecure.desc }
 
 ent-GunSafeSubMachineGunSP91RC = safe
@@ -50,49 +50,67 @@ ent-GunSafeRifleSKM24 = safe
     .suffix = SKM-24
     .desc = { ent-GunSafeBaseSecure.desc }
 
-ent-GunSafeRifleLecterMk2 = safe lecter Mk2
+ent-GunSafeRifleLecterMk2 = safe
     .suffix = Lecter Mk2
     .desc = { ent-GunSafeBaseSecure.desc }
 
 ent-GunSafeShotgunTrenchgun4034 = safe
     .suffix = Trenchgun 4034
-    .desc = { ent-GunSafe.desc }
-
-ent-GunSafeShotgunRiot = safe
-    .suffix = Shotgun Riot
     .desc = { ent-GunSafeBaseSecure.desc }
 
 ent-GunSafeDoubleBarreled = safe
     .desc = According to the paperwork — state-of-the-art tactical shotguns. In reality — antique double-barrels.
     .suffix = Shotgun Double-Barreled
 
-ent-GunSafeSuperweaponSmartGun = sMART safe
+ent-GunSafeSuperweaponSmartGun = safe
     .desc = { ent-GunSafeSuperweaponSecureGamma.desc }
     .suffix = SMART, Gamma
 
-ent-GunSafeSuperweaponLWAP = lWAP safe
+ent-GunSafeSuperweaponLWAP = safe
     .desc = { ent-GunSafeSuperweaponSecureGamma.desc }
     .suffix = LWAP, Gamma
 
-ent-GunSafeSuperweaponRocketLauncher = rPG safe
+ent-GunSafeSuperweaponRocketLauncher = safe
     .desc = { ent-GunSafeSuperweaponSecureGamma.desc }
     .suffix = RPG, Gamma
 
-ent-GunSafeSuperweaponDisposableRocketLauncher = disposable launcher safe
+ent-GunSafeSuperweaponDisposableRocketLauncher = safe
     .desc = { ent-GunSafeSuperweaponSecureGamma.desc }
     .suffix = Одноразовые гранатомёты, Гамма
 
-ent-GunSafeSuperIonRifle = ion-Temperature safe
+ent-GunSafeSuperIonRifle = safe
     .desc = { ent-GunSafeSuperweaponBaseSecure.desc }
     .suffix = Ионно-термальная
 
-ent-GunSafeSuperDMR = larker safe
+ent-GunSafeSuperDMR = safe
     .desc = { ent-GunSafeSuperweaponSecureGamma.desc }
     .suffix = Ларкер
 
-ent-GunSafeSuperDMRElite = sKM-28 safe
+ent-GunSafeSuperDMRElite = safe
     .desc = { ent-GunSafeSuperweaponSecureGamma.desc }
     .suffix = СКМ-28
+
+gun-safe-used-desc = A worn armory safe used by the previous shift. Some issued equipment was never returned, and other unexpected finds may have been left behind.
+
+ent-GunSafeLecterBeer = safe
+    .suffix = Lecter
+    .desc = { gun-safe-used-desc }
+
+ent-GunSafePistolGoldenMk58Trash = safe
+    .suffix = MK58
+    .desc = { gun-safe-used-desc }
+
+ent-GunSafeSubMachineGunDrozdTrash = safe
+    .suffix = Drozd
+    .desc = { gun-safe-used-desc }
+
+ent-GunSafeShotgunKammererTrash = safe
+    .suffix = Kammerer
+    .desc = { gun-safe-used-desc }
+
+ent-GunSafeLaserCarbineTrash = safe
+    .suffix = Laser carbine
+    .desc = { gun-safe-used-desc }
 
 ent-SpawnerSafeSmallArms = armory Safe Spawner
     .suffix = Armory, Pistols

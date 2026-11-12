@@ -44251,6 +44251,7 @@ entities:
       parent: 5881
     - type: Clothing
       inSlot: mask
+      slots: MASK
       inSlotFlag: MASK
     - type: Physics
       canCollide: False
@@ -44265,6 +44266,7 @@ entities:
       parent: 5885
     - type: Clothing
       inSlot: mask
+      slots: MASK
       inSlotFlag: MASK
     - type: Physics
       canCollide: False
@@ -44274,6 +44276,7 @@ entities:
       parent: 5888
     - type: Clothing
       inSlot: mask
+      slots: MASK
       inSlotFlag: MASK
     - type: Physics
       canCollide: False
@@ -44283,6 +44286,7 @@ entities:
       parent: 5891
     - type: Clothing
       inSlot: mask
+      slots: MASK
       inSlotFlag: MASK
     - type: Physics
       canCollide: False
@@ -44292,6 +44296,7 @@ entities:
       parent: 5894
     - type: Clothing
       inSlot: mask
+      slots: MASK
       inSlotFlag: MASK
     - type: Physics
       canCollide: False
@@ -44757,6 +44762,7 @@ entities:
       parent: 5881
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: Physics
       canCollide: False
@@ -44766,6 +44772,7 @@ entities:
       parent: 5885
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: Physics
       canCollide: False
@@ -44775,6 +44782,7 @@ entities:
       parent: 5888
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: Physics
       canCollide: False
@@ -44784,6 +44792,7 @@ entities:
       parent: 5891
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: Physics
       canCollide: False
@@ -44793,6 +44802,7 @@ entities:
       parent: 5894
     - type: Clothing
       inSlot: jumpsuit
+      slots: INNERCLOTHING
       inSlotFlag: INNERCLOTHING
     - type: Physics
       canCollide: False

@@ -50,18 +50,3 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
 
-# Magazines
-- type: entity
-  id: MagazineBatteryLr60
-  name: "large magazine (laser)"
-  parent: BaseMagazineBattery
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeBattery
-    capacity: 24
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]

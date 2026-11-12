@@ -36,32 +36,6 @@
       right:
       - state: inhand-right-mag
 
-- type: entity
-  id: MagazineMagnumRubber
-  name: pistol magazine (.45 magnum rubber)
-  parent: BaseMagazineMagnum
-  description: 7-round single stack pistol magazine. Intended to hold non-lethal kinetic ammunition.
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeMagnumRubber
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#00c1b8"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#00c1b8"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#00c1b8"
 
 - type: entity
   id: MagazineMagnum
@@ -70,25 +44,19 @@
   description: 7-round single stack pistol magazine. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeMagnumSP
+    proto: CartridgeMagnum
   - type: Sprite
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#575EF5"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#575EF5"
       right:
       - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#575EF5"
 
 - type: entity
   id: MagazineMagnumPractice
@@ -172,57 +140,3 @@
         color: "#540000"
 
 # Sunrise-start
-- type: entity
-  id: MagazineMagnumHP
-  name: pistol magazine (.45 magnum HP)
-  parent: BaseMagazineMagnum
-  description: 7-round single stack pistol magazine. Intended to hold hollow point kinetic ammunition.
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeMagnumHP
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#F5514C"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#F5514C"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#F5514C"
-
-- type: entity
-  id: MagazineMagnumFMJ
-  name: pistol magazine (.45 magnum FMJ)
-  parent: BaseMagazineMagnum
-  description: 7-round single stack pistol magazine. Intended to hold Full metal jacket kinetic ammunition.
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeMagnumFMJ
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#ffffff01"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#ffffff01"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#ffffff01"
-# Sunrise-End

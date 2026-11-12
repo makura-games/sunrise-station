@@ -179,16 +179,6 @@
     - Pirate
 
 - type: entity
-  parent: WeaponGrenadeLauncherGL70
-  id: WeaponGrenadeLauncherGL70Biocode
-  suffix: BIOCODE
-  components:
-  - type: FactionWeaponBlocker
-    factions:
-    - Syndicate
-    - Pirate
-
-- type: entity
   parent: WeaponShotgunMinotaur
   id: WeaponShotgunMinotaurBiocode
   suffix: BIOCODE

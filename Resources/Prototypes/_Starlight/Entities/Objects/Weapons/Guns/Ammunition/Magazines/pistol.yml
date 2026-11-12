@@ -211,11 +211,11 @@
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#080706"
+        color: "#B68F0E"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#080706"
+        color: "#B68F0E"
 
 - type: entity
   id: MagazinePistol40AP
@@ -422,11 +422,11 @@
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#080706"
+        color: "#B68F0E"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#080706"
+        color: "#B68F0E"
 
 - type: entity
   id: MagazinePistol40SubMachineGunAP

@@ -1,0 +1,17 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made by ME DIO(or no_mad), resprited by .askal02(discord)",
+    "size": {
+        "x": 64,
+        "y": 32
+    },
+    "states": [
+	{
+		"name": "icon"
+	},
+	{
+		"name": "bolt-open"
+    }
+    ]
+}

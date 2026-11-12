@@ -332,7 +332,7 @@
         color: "#277340"
 
 - type: entity
-  parent: MagazineRifleBoxSP
+  parent: MagazineLightRifleBox
   id: MagazineCapBox
   name: ammunition box (cap)
   components:
@@ -347,6 +347,12 @@
   - type: Tag
     tags:
       - MagazineBoxL6Cap
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
   parent: MagazineCapBox
@@ -384,7 +390,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeCap
         priority: 1
         whitelist:
           tags:
@@ -422,7 +427,6 @@
             - MagazineBoxL6Cap
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeCap
         priority: 1
         whitelist:
           tags:

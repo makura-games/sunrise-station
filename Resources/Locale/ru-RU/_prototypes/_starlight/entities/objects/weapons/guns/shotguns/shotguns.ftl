@@ -1,10 +1,3 @@
-ent-WeaponShotgunRiot = дробовик для подавления беспорядков
-    .desc = Прочный дробовик с увеличенным магазином и фиксированным тактическим прикладом, разработанный для несмертельного подавления беспорядков.
-ent-WeaponShotgunRiotSawn = обрез дробовика для подавления беспорядков
-    .desc = Пойдем со мной, если хочешь жить.
-ent-WeaponShotgunRiotSawnEmpty = { ent-WeaponShotgunRiotSawn }
-    .suffix = Пустой
-    .desc = { ent-WeaponShotgunRiotSawn.desc }
 ent-WeaponShotgunCycler = дробовик-циклер
     .desc = Продвинутый дробовик с двумя отдельными подствольными трубками, позволяющими быстро переключаться между типами боеприпасов.
 ent-WeaponShotgunGA12 = револьвер Ткач Я-Суй GA 12

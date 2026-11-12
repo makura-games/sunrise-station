@@ -77,7 +77,7 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: MagazinePistolSubMachineGunSP
+        - id: MagazinePistolSubMachineGun
           amount: 3
         - id: MagazinePistolSubMachineGunFMJ
           amount: 2
@@ -96,7 +96,7 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: MagazineRifleSP
+        - id: MagazineRifle
           amount: 3
         - id: MagazineRifleFMJ
           amount: 2
@@ -263,7 +263,7 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: MagazineRifleBoxSP
+        - id: MagazineLightRifleBox
           amount: 2
         - id: MagazineRifleBoxFMJ
   - type: Sprite

@@ -1,6 +1,6 @@
 ent-BaseMagazineRifleHeavy = магазин (.308)
     .desc = { ent-BaseItem.desc }
-ent-MagazineRifleHeavyEmpty = магазин (.308 любые)
+ent-MagazineRifleHeavyEmpty = магазин (.308)
     .suffix = Пустой
     .desc = { ent-BaseMagazineRifleHeavy.desc }
 ent-MagazineRifleHeavySP = магазин (.308)

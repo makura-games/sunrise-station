@@ -81703,6 +81703,8 @@ entities:
     - type: Transform
       parent: 2
       pos: 21.5,-20.5
+- proto: ChemDispenserEmpty
+  entities:
   - uid: 13463
     components:
     - type: Transform
@@ -81831,11 +81833,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 19.5,-18.5
-  - uid: 13485
-    components:
-    - type: Transform
-      parent: 2
-      pos: -22.5,31.5
 - proto: ChessBoard
   entities:
   - uid: 13486
@@ -264170,20 +264167,13 @@ entities:
     - type: Transform
       parent: 2
       pos: 18.5,-24.5
-- proto: VendingMachineMedicalBase
+- proto: VendingMachineMedicalSecurity
   entities:
   - uid: 42142
     components:
     - type: Transform
       parent: 2
       pos: -19.5,35.5
-- proto: VendingMachineMedicalSecurity
-  entities:
-  - uid: 33752
-    components:
-    - type: Transform
-      parent: 2
-      pos: -26.5,32.5
 - proto: VendingMachineMediDrobe
   entities:
   - uid: 34378

@@ -1,29 +1,4 @@
 # region Light Rifle
-- type: entity
-  id: MagazineLightRifleSP
-  name: "magazine (.30 rifle SP)"
-  parent: BaseMagazineLightRifle
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleSP
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#575EF5"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#575EF5"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#575EF5"
 
 - type: entity
   id: MagazineLightRifleFMJ

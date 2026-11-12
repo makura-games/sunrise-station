@@ -11,12 +11,6 @@
             "name": "base"
         },
         {
-            "name": "uranium"
-        },
-        {
-            "name": "red"
-        },
-        {
             "name": "icon"
         },
         {
@@ -46,6 +40,17 @@
         },
         {
             "name": "inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "stripe"
+        },
+        {
+            "name": "inhand-left-stripe",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right-stripe",
             "directions": 4
         }
     ]

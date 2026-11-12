@@ -3,6 +3,7 @@
   id: GlockBox
   name: glock box
   description: It contains a pistol and a magazine for it. Did you want something else?
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Storage/glockbox.rsi
@@ -65,6 +66,7 @@
   id: SnubRevolverBox
   name: snub-nosed revolver box
   description: Inside rests a snub-nosed revolver and a rubber speedloader. Old school, ready for action.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Revolvers/snub.rsi

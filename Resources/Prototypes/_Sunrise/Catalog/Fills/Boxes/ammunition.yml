@@ -19,7 +19,7 @@
         children:
         - id: MagazineRifleFMJ
           amount: 2
-        - id: MagazineRifleSP
+        - id: MagazineRifle
           amount: 2
         - id: MagazineRifleAP
           amount: 1

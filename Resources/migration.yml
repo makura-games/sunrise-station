@@ -62,7 +62,7 @@ MagazineMagnumSubMachineGunHighVelocity: null
 MagazinePistolCaselessRifleHighVelocity: MagazinePistolCaselessRifle
 MagazinePistolHighCapacityHighVelocity: MagazinePistolHighCapacityFMJ # Sunrise-Edit
 MagazinePistolHighVelocity: MagazinePistolFMJ # Sunrise-Edit
-MagazinePistolSubMachineGunHighVelocity: MagazinePistolSubMachineGunSP # Sunrise-Edit
+MagazinePistolSubMachineGunHighVelocity: MagazinePistolSubMachineGun
 MagazineRifleHighVelocity: MagazineRifleFMJ # Sunrise-Edit
 SpeedLoaderMagnumHighVelocity: SpeedLoaderMagnumFMJ # Sunrise-Edit
 SpeedLoaderPistolHighVelocity: null
@@ -301,13 +301,13 @@ CartridgeRifleRubber: CartridgeRifleSP # Sunrise-Edit
 CartridgeCaselessRifleRubber: CartridgeCaselessRifle
 # Sunrise-Edit
 # MagazinePistolRubber: MagazinePistol
-#MagazinePistolSubMachineGunRubber: MagazinePistolSubMachineGunSP # Sunrise-Edit
+#MagazinePistolSubMachineGunRubber: MagazinePistolSubMachineGun # Sunrise-Edit
 MagazinePistolCaselessRifleRubber: MagazinePistolCaselessRifle
 # Sunrise-Edit
 # MagazineMagnumRubber: MagazineMagnum
 MagazineMagnumSubMachineGunRubber: null
-MagazineLightRifleRubber: MagazineLightRifleSP # Sunrise-Edit
-MagazineRifleRubber: MagazineRifleSP # Sunrise-Edit
+MagazineLightRifleRubber: MagazineLightRifle
+MagazineRifleRubber: MagazineRifle
 MagazineCaselessRifleRubber: MagazinePistolCaselessRifle
 MagazineCaselessRifleShortRubber: null
 SpeedLoaderPistolRubber: null
@@ -864,7 +864,7 @@ CratePartsT3T4: null
 CratePartsT4: null
 
 #2027-07-17
-# WeaponRifleM90GrenadeLauncher: null # Sunrise-Edit - прототип сохранён для Sunrise-контента
+WeaponRifleM90GrenadeLauncher: null
 
 # region Sunrise-Start
 AirlockExternalGlassShuttleArrivals: AirlockExternalGlassShuttleArrivalsLocked
@@ -1024,10 +1024,13 @@ EnergyKatanaBiocode: null
 BoxMagazineRifle: BoxMagazineRifleSP
 MagazineBoxLightRifle: MagazineBoxLightRifleSP
 MagazineBoxPistol: MagazineBoxPistolSP
-MagazineLightRifleBox: MagazineRifleBoxSP
-MagazineLightRifle: MagazineLightRifleSP
-MagazinePistolSubMachineGun: MagazinePistolSubMachineGunSP
-MagazineRifle: MagazineRifleSP
+MagazineRifleBoxSP: MagazineLightRifleBox # Sunrise-Edit
+MagazineLightRifleSP: MagazineLightRifle # Sunrise-Edit
+MagazinePistolSubMachineGunSP: MagazinePistolSubMachineGun # Sunrise-Edit
+MagazineRifleSP: MagazineRifle # Sunrise-Edit
+MagazinePistolSP: MagazinePistol # Sunrise-Edit
+MagazinePistolHighCapacitySP: MagazinePistolHighCapacity # Sunrise-Edit
+MagazinePistolSubMachineGunTopMountedSP: MagazinePistolSubMachineGunTopMounted # Sunrise-Edit
 MagazineBoxMagnum: MagazineBoxMagnumSP
 SpeedLoaderMagnum: SpeedLoaderMagnumSP
 MagazineBoxRifle: MagazineBoxRifleSP
@@ -1085,7 +1088,6 @@ GunSafeSMRTGun: GunSafeSuperweaponSmartGun
 ComfyBrownChair: ComfyChairBrown
 #2026-02-28
 CartridgeRifle: CartridgeRifleSP
-MagazinePistolHighCapacity: MagazinePistolHighCapacitySP
 StorageCanisterBase: StorageCanister
 BulletAK570_90mmHE: BulletAK57090mmHE
 WeaponTurretVespera50mm: ShuttleGunVespera50mm
@@ -1188,7 +1190,7 @@ WeaponRifleBR64: WeaponRifleSKM28Nano
 ClothingBackpackDuffelWeaponRifleBR64Filled: ClothingBackpackDuffelWeaponRifleSKM28Filled
 WeaponShotgunMakeshift: WeaponShotgunImprovised
 MagazineVP78: MagazinePistol40FMJ
-MagazineNewVector: MagazinePistolHighCapacitySP
+MagazineNewVector: MagazinePistolHighCapacity
 WeaponShotgunSPAS12: WeaponShotgunEnforcer
 WeaponShotgunSPAS12Rubber: WeaponShotgunEnforcer
 GunSafeShotgunSPAS12: GunSafeShotgunEnforcer
@@ -1223,7 +1225,7 @@ BlueprintMagAsh12Slug: BlueprintMagAsh12Basic
 BlueprintMagAsh12Beanbag: null
 BlueprintMagAsh12Flare: null
 ClothingBackpackDuffelWeaponRifleAsh12: Ash12Box
-WeaponRifleM90GrenadeLauncherBiocode: WeaponRifleM90GrenadeLauncher
+WeaponRifleM90GrenadeLauncherBiocode: null
 ClothingOuterEliteHardsuitUSSP: null
 GasMinerPlasma: null
 # 2026-08-14
@@ -1268,10 +1270,10 @@ CartridgeRifleHP: CartridgeRifleSP
 CartridgeLightRifleHP: CartridgeLightRifleSP
 CartridgeRifleHeavyHP: CartridgeRifleHeavySP
 CartridgeHeavyRifleRHP: CartridgeHeavyRifleRSP
-MagazineRifleHP: MagazineRifleSP
+MagazineRifleHP: MagazineRifle
 MagazineRifleM52HP: MagazineRifleM52SP
 MagazineBoxRifleHP: MagazineBoxRifleSP
-MagazineLightRifleHP: MagazineLightRifleSP
+MagazineLightRifleHP: MagazineLightRifle
 MagazineBoxLightRifleHP: MagazineBoxLightRifleSP
 MagazineLightRifleBeltBoxHP: MagazineLightRifleBeltBox
 MagazineRifleHeavyHP: MagazineRifleHeavySP
@@ -1293,8 +1295,8 @@ WeaponSubMachineGunMP5: WeaponSubMachineGunNewVector
 GunSafeSubMachineGunMP5: GunSafeSubMachineGunVector
 CrateArmoryMP5: null
 ClothingBackpackDuffelWeaponSubMachineGunMP5Filled: null
-MagazineMP5: MagazinePistolHighCapacitySP
-MagazineMP5Extended: MagazinePistolHighCapacitySP
+MagazineMP5: MagazinePistolHighCapacity
+MagazineMP5Extended: MagazinePistolHighCapacity
 # удаление и блок возможности замапить аплинки, чтобы Store не сериализовал каталоги в карты.
 BaseUplinkRadio: null
 BaseUplinkRadio20TC: null
@@ -1321,14 +1323,27 @@ ClothingHandsPowerGlovesUplinkNTERTGamma: null
 ClothingHandsPowerGlovesUplinkNTERTGammaLeader: null
 ClothingHandsPowerGlovesUplinkNTERTCBURN: null
 ClothingHandsPowerGlovesUplinkNTERTEpsilon: null
+# 2026-10-01
+WeaponDecloner: null
+ClothingOuterVestWebSec: null
 DrinkDarkRedRumBottleFull: DrinkRedRumBottleFull
 # 2026-09-10
 ClothingOuterArmorBlueShield: null
-
+MagazineBatteryLr60: null
+# 2026-10-11
+SecBreachingHammer: SunriseDetonatorBundleSpawner
+SyndieBreachingHammer: SunriseDetonatorBundleSpawner
+# 2026-11-05
+WeaponEnergyGunPistol: WeaponAdvancedTaser
 WallRiveted: WallReinforced
 # 2026-11-07
 BluespaceBox: null
 ClothingOuterSuitCargo: null
+# 2026-11-10
+WeaponShotgunRiot: WeaponShotgunEnforcerRubber
+WeaponShotgunRiotSawn: WeaponShotgunTrenchgun4034Sawn
+WeaponShotgunRiotSawnEmpty: WeaponShotgunTrenchgun4034SawnEmpty
+GunSafeShotgunRiot: GunSafeShotgunEnforcer
 # region Sunrise-End
 
 # 2026-07-16
@@ -1365,9 +1380,6 @@ WallCobblebrick: WallConcrete
 WallAsteroidCobblebrick: WallConcrete
 WallBasaltCobblebrick: WallConcrete
 WallIce: WallRockSnow
-
-#2026-07-17
-# WeaponRifleM90GrenadeLauncher: null # Sunrise-Edit - прототип сохранён для Sunrise-контента
 
 # 2026-07-18
 SheetGlassLingering0: null

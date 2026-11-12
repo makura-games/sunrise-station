@@ -47,13 +47,6 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
       - !type:ExplodeBehavior
-    - trigger: # Sunrise-Edit: non-explosive destruction (slash-only, not from explosions)
-        !type:DamageTypeTrigger
-        damageType: Slash
-        damage: 50
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
     # the 50 damage destruction node is inherited from the parent
     # idea here is to prevent you from just beating it until it explodes.
   - type: Explosive
@@ -75,11 +68,6 @@
       # tags:
       # - Window
   # - type: StickyVisualizer
-  # Sunrise-Start
-  - type: GuideHelp
-    guides:
-    - SunriseDetonatorTriggers
-  # Sunrise-End
 
 - type: entity
   parent: CableDetStack

@@ -119,14 +119,14 @@
 - type: entity
   id: ClothingBackpackDuffelWeaponSubMachineGunDrozdMk2
   parent: ClothingBackpackDuffelMilitary
-  name: Bundle Drozd Mk2
-  description: Drozd Mk2 with 3 raspy magazines FMJ and 2 HP.
+  name: Bundle Deryaba
+  description: Deryaba with 3 raspy magazines FMJ and 2 HP.
   components:
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: WeaponSubMachineGunDrozdMk2
+        - id: WeaponSubMachineGunDrozdHeavy
         - id: MagazinePistolSubMachineGunFMJ
           amount: 3
         - id: MagazinePistolSubMachineGunHP
@@ -145,7 +145,7 @@
         - id: WeaponRifleLecterMk2
         - id: MagazineRifleFMJ
           amount: 3
-        - id: MagazineRifleSP
+        - id: MagazineRifle
           amount: 3
 
 - type: entity
@@ -191,7 +191,7 @@
       storagebase: !type:AllSelector
         children:
         - id: WeaponRifleLeikha
-        - id: MagazineRifleSP
+        - id: MagazineRifle
           amount: 4
 
 - type: entity
@@ -251,7 +251,7 @@
       storagebase: !type:AllSelector
         children:
         - id: WeaponRifleSKM24Nano
-        - id: MagazineLightRifleSP
+        - id: MagazineLightRifle
           amount: 5
         - id: MagazineLightRifleFMJ
 
@@ -521,9 +521,9 @@
           - id: WeaponRifleSKM24Nano
           - id: WeaponRifleSKM24Green
         - id: MagazineLightRifleFMJ
-        - id: MagazineLightRifleSP
-        - id: MagazineLightRifleSP
-        - id: MagazineLightRifleSP
+        - id: MagazineLightRifle
+        - id: MagazineLightRifle
+        - id: MagazineLightRifle
         - id: CigPackSyndicate
         - id: CheapLighter
 

@@ -47,7 +47,6 @@
             - MagazineDragunov
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeHeavyRifleRFMJ
         priority: 1
         whitelist:
           tags:
@@ -129,7 +128,6 @@
             - MagazineBauer127
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeAntiMateriel  # 062
         priority: 1
         whitelist:
           tags:
@@ -218,7 +216,6 @@
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Snipers/garand/garand_empty.ogg
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleHeavyFMJ
         priority: 1
         whitelist:
           tags:

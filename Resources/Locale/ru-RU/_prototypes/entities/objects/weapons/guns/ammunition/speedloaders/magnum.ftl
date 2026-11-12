@@ -1,6 +1,6 @@
 ent-BaseSpeedLoaderMagnum = спидлоадер (.45 магнум)
     .desc = { ent-BaseItem.desc }
-ent-SpeedLoaderMagnumEmpty = спидлоадер (.45 магнум любые)
+ent-SpeedLoaderMagnumEmpty = спидлоадер (.45 магнум)
     .desc = { ent-SpeedLoaderMagnum.desc }
 ent-SpeedLoaderMagnumSP = спидлоадер (.45 магнум)
     .desc = { ent-BaseSpeedLoaderMagnum.desc }

@@ -272,6 +272,26 @@
     state: frag
     suffix: false
 
+- type: entity
+  id: GrenadeBuckshot
+  name: buckshot grenade
+  description: A compact grenade cartridge that fires a wide spread of improvised buckshot.
+  parent: BaseGrenade
+  components:
+  - type: Item
+    size: Tiny
+  - type: CartridgeAmmo
+    proto: PelletShotgunImprovisedSpreadTraceLarge
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    layers:
+    - state: buck
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: buck
+    suffix: false
+
 # mech
 - type: entity
   id: CartridgeRocketFrag

@@ -18,8 +18,8 @@
     Plastic: 50
 
 - type: latheRecipe
-  id: WeaponEnergyGunPistol
-  result: WeaponEnergyGunPistol
+  id: WeaponAdvancedTaser
+  result: WeaponAdvancedTaser
   categories:
   - Weapons
   completetime: 5
@@ -99,6 +99,50 @@
     Steel: 150
     Plastic: 300
     Gold: 50
+
+- type: latheRecipe
+  id: LerkaUpgrade
+  result: LerkaUpgrade
+  categories:
+  - Weapons
+  completetime: 16
+  materials:
+    Steel: 150
+    Plastic: 300
+    Plasteel: 200
+    Gold: 50
+
+- type: latheRecipe
+  id: LarkerUpgrade
+  result: LarkerUpgrade
+  categories:
+  - Weapons
+  completetime: 16
+  materials:
+    Steel: 150
+    Plastic: 300
+    Plasteel: 200
+    Gold: 50
+
+- type: latheRecipe
+  id: KammererTrenchUpgradeKit
+  result: KammererTrenchUpgradeKit
+  categories:
+  - Weapons
+  completetime: 30
+  materials:
+    Steel: 650
+    Plastic: 500
+
+- type: latheRecipe
+  id: KammererSawnUpgradeKit
+  result: KammererSawnUpgradeKit
+  categories:
+  - Weapons
+  completetime: 30
+  materials:
+    Steel: 150
+    Plastic: 400
 
 - type: latheRecipe
   id: EnergyDomeDirectionalTurtle
@@ -368,29 +412,6 @@
     Durathread: 100
 
 - type: latheRecipe
-  id: ClothingShoesBootsMagCombat
-  result: ClothingShoesBootsMagCombat
-  categories:
-  - Clothing
-  completetime: 15
-  materials:
-    Steel: 1200
-    Plastic: 300
-    Durathread: 200
-
-- type: latheRecipe
-  id: VestSecUpgradeWeb
-  result: VestSecUpgradeWeb
-  categories:
-  - Clothing
-  completetime: 35
-  materials:
-    Durathread: 2000
-    Plastic: 500
-    Steel: 200
-    Plasma: 100
-
-- type: latheRecipe
   id: VestSecUpgradePlate
   result: VestSecUpgradePlate
   categories:
@@ -418,8 +439,9 @@
   - Clothing
   completetime: 20
   materials:
-    Durathread: 400
-    Plastic: 400
+    Durathread: 600
+    Plastic: 600
+    Plasteel: 500
 
 - type: latheRecipe
   id: VestSecUpgradeStab
@@ -549,14 +571,3 @@
     Plastic: 500
     Gold: 500
     Uranium: 400
-
-- type: latheRecipe
-  parent: BaseWeaponRecipeLong
-  id: WeaponDecloner
-  result: WeaponDecloner
-  materials:
-    Steel: 2000
-    Glass: 1000
-    Plastic: 750
-    Gold: 600
-    Uranium: 600

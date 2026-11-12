@@ -3560,7 +3560,7 @@
     - id: WeaponLightMachineGunL6Biocode
       prob: 0.5
       orGroup: WeaponMGPool
-    - id: MagazineRifleBoxSP
+    - id: MagazineLightRifleBox
       prob: 0.15
       orGroup: WeaponMGPool
     - id: MagazineRifleBoxFMJ
@@ -3881,10 +3881,6 @@
     - id: WeaponEarthGovLaserCarbine
       prob: 0.3
       orGroup: SMGLaserPool
-    - id: MagazineBatteryLr60
-      prob: 0.6
-    - id: MagazineBatteryLr60
-      prob: 0.4
     # Items
     - id: PirateMedSpawner03
     - id: ClothingOuterHardsuitPrivateer

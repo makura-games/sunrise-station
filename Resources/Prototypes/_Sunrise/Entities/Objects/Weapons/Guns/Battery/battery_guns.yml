@@ -22,7 +22,7 @@
       path: /Audio/_Sunrise/Weapons/Guns/Lasers/EG_R.ogg
   - type: BatteryAmmoProvider
     proto: RedLightLaser
-    fireCost: 50
+    fireCost: 60
   - type: ItemSlots
     slots:
       cell_slot:
@@ -68,15 +68,15 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Gun
-    fireRate: 6
+    fireRate: 5
     minAngle: 1
-    maxAngle: 15
-    angleIncrease: 0.75
+    maxAngle: 18
+    angleIncrease: 0.6
     angleDecay: 10
     selectedMode: FullAuto
     availableModes:
     - FullAuto
-    bigTrigger: true # Sunrise-Edit
+    bigTrigger: true
   - type: Clothing
     sprite: _Sunrise/Objects/Weapons/Guns/Battery/smg_laser.rsi
   - type: Item

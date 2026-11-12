@@ -58031,6 +58031,7 @@ entities:
     - type: Transform
       parent: 15428
     - type: Clothing
+      slots: HEAD
       inSlotFlag: HEAD
       inSlot: head
     - type: Physics
@@ -58339,6 +58340,7 @@ entities:
     - type: Transform
       parent: 15428
     - type: Clothing
+      slots: NECK
       inSlotFlag: NECK
       inSlot: neck
     - type: Physics

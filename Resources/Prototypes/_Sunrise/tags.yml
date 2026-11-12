@@ -157,6 +157,9 @@
   id: GasTank
 
 - type: Tag
+  id: SunriseGrenadeLauncherBandolierCompatible
+
+- type: Tag
   id: Nanopaste
 
 - type: Tag
@@ -301,6 +304,9 @@
   id: MagazineP90
 
 - type: Tag
+  id: MagazineP90Empty
+
+- type: Tag
   id: MagazinePistolDPSubMachineGun
 
 - type: Tag
@@ -376,10 +382,22 @@
   id: UpgradeKitStab
 
 - type: Tag
+  id: UpgradeKammererSawn
+
+- type: Tag
+  id: UpgradeKammererTrench
+
+- type: Tag
   id: UpgradeLecter
 
 - type: Tag
-  id: UpgradeWebVest
+  id: UpgradeLerka
+
+- type: Tag
+  id: UpgradeLarker
+
+- type: Tag
+  id: Binoculars
 
 - type: Tag
   id: WeaponPistolG22

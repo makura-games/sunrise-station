@@ -95,9 +95,6 @@
   id: LightRifleHeavy
 
 - type: Tag
-  id: MagazinePistolHighCapacitySP
-
-- type: Tag
   id: MagazineBattery
 
 - type: Tag

@@ -1,0 +1,15 @@
+- type: !PartialOnly entity
+  id: WeaponRifleLeikha
+  components:
+  - type: Construction
+    graph: LecterSecurity
+    node: leikha
+    deconstructionTarget: null
+
+- type: !PartialOnly entity
+  id: WeaponRifleLarker
+  components:
+  - type: Construction
+    graph: LecterSecurity
+    node: larker
+    deconstructionTarget: null

@@ -18,10 +18,6 @@
     size: Small
   - type: UseDelay
     delay: 0.5
-  - type: Gun
-    fireRate: 2
-    useKey: true
-    selectedMode: SemiAuto
   - type: MeleeWeapon
     wideAnimationRotation: 0
     range: 1
@@ -41,7 +37,7 @@
   components:
   - type: SpeedModifiedOnWield
     walkModifier: 1
-    sprintModifier: 0.95
+    sprintModifier: 0.9
   - type: HeldSpeedModifier
     walkModifier: 1
     sprintModifier: 0.95
@@ -52,10 +48,6 @@
     size: Normal
   - type: UseDelay
     delay: 0.75
-  - type: Gun
-    fireRate: 2
-    useKey: true
-    selectedMode: SemiAuto
   - type: MeleeWeapon
     angle: 60
     range: 1.5
@@ -86,10 +78,6 @@
     size: Large
   - type: UseDelay
     delay: 1
-  - type: Gun
-    fireRate: 2
-    useKey: true
-    selectedMode: SemiAuto
   - type: MeleeWeapon
     angle: 60
     range: 1.5
@@ -120,10 +108,6 @@
     size: Ginormous
   - type: UseDelay
     delay: 1.5
-  - type: Gun
-    fireRate: 2
-    useKey: true
-    selectedMode: SemiAuto
   - type: MeleeWeapon
     angle: 60
     range: 1.5
