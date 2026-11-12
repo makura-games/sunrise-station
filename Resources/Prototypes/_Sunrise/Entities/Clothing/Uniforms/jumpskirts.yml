@@ -134,6 +134,7 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformSkirtMantis
+  categories: [SponsorClassic]
   name: forensic mantis' jumpskirt
   description: Adapted from an ancient infantry uniform, this jumpskirt has superior mobility for tense situations.
   components:

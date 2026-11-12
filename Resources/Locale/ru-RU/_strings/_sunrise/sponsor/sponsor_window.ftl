@@ -8,7 +8,7 @@ donation-terminal-tab-subscriptions = Подписки
 donation-terminal-tab-inventory = Инвентарь
 
 donation-terminal-main-account-title = Аккаунт
-donation-terminal-main-account-description = Привязки Makura Games ID настраиваются на сайте аккаунта. Откройте управление аккаунтом, чтобы подключить внешние сервисы и проверить данные спонсорства.
+donation-terminal-main-account-description = Привязки MakuraGames ID настраиваются на сайте аккаунта. Откройте управление аккаунтом, чтобы подключить внешние сервисы и проверить данные спонсорства.
 donation-terminal-main-benefits-title = Преимущества { $title }
 donation-terminal-main-potential-benefits-title = Возможные преимущества
 donation-terminal-main-potential-benefit-slots = Дополнительные слоты персонажей

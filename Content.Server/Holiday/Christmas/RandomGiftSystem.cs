@@ -5,6 +5,7 @@ using Content.Shared.Examine;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Whitelist;
+using Content.Shared._Sunrise.SponsorInventory; // Sunrise-Edit: общий признак эксклюзивных спонсорских вещей.
 using Robust.Server.Audio;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
@@ -98,6 +99,11 @@ public sealed partial class RandomGiftSystem : EntitySystem
         {
             if (proto.Abstract || proto.HideSpawnMenu || proto.Components.ContainsKey(mapGridCompName) || !proto.Components.ContainsKey(physicsCompName))
                 continue;
+
+            // Sunrise added start - исключаем спонсорские вещи из обоих пулов случайных подарков.
+            if (SponsorExclusive.IsExclusive(proto))
+                continue;
+            // Sunrise added end
 
             _possibleGiftsUnsafe.Add(proto.ID);
 

@@ -354,6 +354,7 @@
 - type: entity
   parent: ClothingOuterBase
   id: ClothingOuterDiscoAssBlazer
+  categories: [SponsorClassic]
   name: disco ass blazer
   description: Looks like someone skinned this blazer off some long extinct disco-animal. It has an enigmatic white rectangle on the back and the right sleeve.
   components:

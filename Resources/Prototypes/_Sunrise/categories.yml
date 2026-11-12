@@ -7,3 +7,18 @@
   id: SurgerySteps
   name: categories-surgery-steps
   hideSpawnMenu: true
+
+# Обычные вещи из сборки, доступные также через спонсорский каталог.
+# Карты, раздатчики, лодауты, подарки и хамелеон для них разрешены.
+- type: entityCategory
+  id: SponsorClassic
+  name: entity-category-name-sponsor-classic
+  inheritable: true
+
+# Новые эксклюзивные спонсорские вещи: только выдача через спонсорский инвентарь.
+# Скрыты из меню спавна; бесплатные источники запрещены фильтрами и тестами.
+- type: entityCategory
+  id: SponsorExclusive
+  name: entity-category-name-sponsor-exclusive
+  hideSpawnMenu: true
+  inheritable: true

@@ -317,6 +317,7 @@
     - HideSpawnMenu
     - Debug
     - Spawner
+    - SponsorExclusive
 
 - type: entity
   id: SunriseEffectMagnetUltra

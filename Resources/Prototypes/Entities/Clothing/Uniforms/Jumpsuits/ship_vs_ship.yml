@@ -6,6 +6,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitRecruitNT
+  categories: [SponsorClassic] # Sunrise-Edit: обычная вещь также доступна в спонсорском каталоге.
   name: recruit jumpsuit
   description: A classy grey jumpsuit with blue trims. Perfect for the dignified helper.
   components:
@@ -29,6 +30,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitRepairmanNT
+  categories: [SponsorClassic] # Sunrise-Edit: обычная вещь также доступна в спонсорском каталоге.
   name: repairman jumpsuit
   description: A jumpsuit that reminds you of a certain crew-sector work position. Hopefully, you won't have to do the same job as THOSE freaks.
   components:

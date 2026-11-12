@@ -12,6 +12,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitAerostatic
+  categories: [SponsorClassic]
   name: aerostatic suit
   description: A crisp and well-pressed suit; professional, comfortable and curiously authoritative.
   components:
@@ -244,6 +245,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitMantis
+  categories: [SponsorClassic]
   name: forensic mantis' uniform
   description: Modeled after an ancient infantry uniform, this uniform has superior mobility for tense situations.
   components:
@@ -277,6 +279,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitSecSummer
+  categories: [SponsorClassic]
   name: summer security uniform
   description: A loose-fitting and casual variant of the standard security uniform.
   components:
@@ -299,6 +302,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformTShirtKhakiPants
+  categories: [SponsorClassic]
   name: drab t-shirt and khaki pants
   description: Some drab but functional clothing.
   components:
@@ -366,6 +370,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: UniformSecurityShortsRed
+  categories: [SponsorClassic]
   name: security shorts
   description: These are shorts, not boxers.
   components:
@@ -533,6 +538,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformUndershirt
+  categories: [SponsorClassic]
   name: undershirt
   description: Plain daily wear.
   components:

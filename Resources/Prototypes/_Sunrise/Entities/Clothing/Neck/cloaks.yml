@@ -189,6 +189,7 @@
 - type: entity
   parent: ClothingCloakBase # SUNRISE EDIT
   id: ClothingNeckKailoRen
+  categories: [SponsorClassic]
   name: black cloak
   description: Symbolic and capable of evoking awe and fear. Perfectly emphasizes the dark greatness of its owner.
   components:

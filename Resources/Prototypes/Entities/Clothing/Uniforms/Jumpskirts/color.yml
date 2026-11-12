@@ -432,6 +432,7 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtColorBrown
+  categories: [SponsorClassic] # Sunrise-Edit: обычная вещь также доступна в спонсорском каталоге.
   name: brown jumpskirt
   description: A generic brown jumpskirt with no rank markings.
   components:

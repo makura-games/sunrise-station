@@ -10,7 +10,7 @@ donation-terminal-tab-subscriptions = Subscriptions
 donation-terminal-tab-inventory = Inventory
 
 donation-terminal-main-account-title = Account
-donation-terminal-main-account-description = Makura Games ID links are managed on the account website. Open account management to connect external services and review sponsor data.
+donation-terminal-main-account-description = MakuraGames ID links are managed on the account website. Open account management to connect external services and review sponsor data.
 donation-terminal-main-benefits-title = { $title } benefits
 donation-terminal-main-potential-benefits-title = Potential benefits
 donation-terminal-main-potential-benefit-slots = Extra character slots

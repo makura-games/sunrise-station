@@ -15,6 +15,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared._Sunrise.Biocode;
+using Content.Shared._Sunrise.SponsorInventory; // Sunrise-Edit: общий признак эксклюзивных спонсорских вещей.
 
 namespace Content.Shared.Clothing.EntitySystems;
 
@@ -195,6 +196,11 @@ public abstract partial class SharedChameleonClothingSystem : EntitySystem
         // check if entity is valid
         if (proto.Abstract || proto.HideSpawnMenu)
             return false;
+
+        // Sunrise added start - эксклюзивная спонсорская внешность не копируется хамелеоном.
+        if (SponsorExclusive.IsExclusive(proto))
+            return false;
+        // Sunrise added end
 
         // check if it is marked as valid chameleon target
         if (!proto.TryComp(out TagComponent? tag, Factory) || !_tag.HasTag(tag, WhitelistChameleonTag))

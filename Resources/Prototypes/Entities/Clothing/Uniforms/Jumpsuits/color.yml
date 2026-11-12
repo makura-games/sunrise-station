@@ -401,6 +401,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitColorLightBrown
+  categories: [SponsorClassic] # Sunrise-Edit: обычная вещь также доступна в спонсорском каталоге.
   name: light brown jumpsuit
   description: A generic light brown jumpsuit with no rank markings.
   components:

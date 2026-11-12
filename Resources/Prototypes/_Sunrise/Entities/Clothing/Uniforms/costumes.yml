@@ -12,6 +12,7 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingCostumeArcDress
+  categories: [SponsorClassic]
   name: white shirt and purple skirt
   description: You feel a supernatural urge to put these on. It must be fate.
   components:
@@ -28,6 +29,7 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: UniformGeisha
+  categories: [SponsorClassic]
   name: geisha dress
   description: For a good hostess.
   components:
@@ -55,6 +57,7 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: UniformMaid
+  categories: [SponsorClassic]
   name: maid uniform
   description: Authentic, from Space France!
   components:
@@ -71,6 +74,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingCostumeBunnySuit
+  categories: [SponsorClassic]
   name: bunny suit
   description: Ready to go with stockings and a bow tie.
   components:
@@ -82,6 +86,7 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformSkirtTurtle
+  categories: [SponsorClassic]
   name: decorated turtle skirt
   description: A turtle skirt with yellow straps and soft fabric.
   components:
@@ -98,6 +103,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingCostumeNaota
+  categories: [SponsorClassic]
   name: turquoise hoodie and shorts
   description: A hoodie with a small kangaroo pouch.
   components:
@@ -109,6 +115,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformRat
+  categories: [SponsorClassic]
   name: rat king fan outfit
   description: Declare your allegiance to the rodent monarch, as well as your desire to see the station burn *at the same time!*
   components:
@@ -120,6 +127,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformDressRed
+  categories: [SponsorClassic]
   name: red dress
   description: A voluminous, fancy red dress.
   components:
@@ -139,6 +147,7 @@
 - type: entity
   parent: ClothingUniformSchoolgirlBase
   id: UniformSchoolgirlRed
+  categories: [SponsorClassic]
   name: red schoolgirl uniform
   components:
   - type: Sprite
@@ -169,6 +178,7 @@
 - type: entity
   parent: ClothingUniformSchoolgirlBase
   id: UniformSchoolgirlBlue
+  categories: [SponsorClassic]
   name: blue schoolgirl uniform
   components:
   - type: Sprite
@@ -184,6 +194,7 @@
 - type: entity
   parent: ClothingUniformSchoolgirlBase
   id: UniformSchoolgirlCyan
+  categories: [SponsorClassic]
   name: cyan schoolgirl uniform
   components:
   - type: Sprite
@@ -199,6 +210,7 @@
 - type: entity
   parent: ClothingUniformSchoolgirlBase
   id: UniformSchoolgirlGreen
+  categories: [SponsorClassic]
   name: green schoolgirl uniform
   components:
   - type: Sprite
@@ -214,6 +226,7 @@
 - type: entity
   parent: ClothingUniformSchoolgirlBase
   id: UniformSchoolgirlOrange
+  categories: [SponsorClassic]
   name: orange schoolgirl uniform
   components:
   - type: Sprite
@@ -244,6 +257,7 @@
 - type: entity
   parent: ClothingUniformSchoolgirlBase
   id: UniformSchoolgirlPurple
+  categories: [SponsorClassic]
   name: purple schoolgirl uniform
   components:
   - type: Sprite
@@ -261,6 +275,7 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformKendoHakama
+  categories: [SponsorClassic]
   name: hakama
   description: An elegant black and blue hakama that could be worn for kendo or formal events.
   components:
@@ -272,6 +287,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformMartialGi
+  categories: [SponsorClassic]
   name: gi
   description: A white top and bottom traditionally used in martial arts, often paired with a belt.
   components:
@@ -285,6 +301,7 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingKimonoBlue
+  categories: [SponsorClassic]
   name: blue kimono
   description: I'm blue da ba dee da ba da-ee!
   components:
@@ -301,6 +318,7 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingKimonoPink
+  categories: [SponsorClassic]
   name: pink kimono
   description: Pretty in pink, isn't she?
   components:
@@ -317,6 +335,7 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingKimonoPurple
+  categories: [SponsorClassic]
   name: purple kimono
   description: You definitely won't look like a maroon in this.
   components:
@@ -367,6 +386,7 @@
 - type: entity
   parent: ClothingUniformSchoolgirlBase
   id: UniformSchoolgirlDusk
+  categories: [SponsorClassic]
   name: dusk schoolgirl uniform
   description: Ready for school in modern style.
   components:
@@ -378,6 +398,7 @@
 - type: entity
   parent: ClothingUniformSchoolgirlBase
   id: UniformSchoolgirlBlazerTan
+  categories: [SponsorClassic]
   name: tan blazer schoolgirl uniform
   description: Ready for school in modern style. This set comes with a tan blazer.
   components:
@@ -396,6 +417,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformSchoolGakuranBlack
+  categories: [SponsorClassic]
   name: gakuran uniform
   description: A sleek school uniform.
   components:
