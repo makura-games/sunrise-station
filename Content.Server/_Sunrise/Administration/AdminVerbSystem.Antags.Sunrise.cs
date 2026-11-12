@@ -23,7 +23,6 @@ public sealed partial class AdminVerbSystem
 {
     private static readonly EntProtoId DefaultAssaultOpsRule = "AssaultOps";
     private static readonly EntProtoId DefaultFleshCultRule = "FleshCult";
-    // Явно выдаём обычного культиста, иначе при свободном слоте цель может получить роль лидера.
     private static readonly ProtoId<AntagSpecifierPrototype> DefaultFleshCultistAntag = "SunriseFleshCultist";
     private static readonly EntProtoId DefaultSELFRule = "SiliconLiberation";
     private static readonly SpriteSpecifier SelfAgentVerbIcon =
