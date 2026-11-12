@@ -1,5 +1,6 @@
 using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.Administration;
+using Content.Shared.Antag;
 using Content.Shared.Database;
 using Content.Shared.Mind.Components;
 using Content.Shared.Verbs;
@@ -22,6 +23,8 @@ public sealed partial class AdminVerbSystem
 {
     private static readonly EntProtoId DefaultAssaultOpsRule = "AssaultOps";
     private static readonly EntProtoId DefaultFleshCultRule = "FleshCult";
+    // Явно выдаём обычного культиста, иначе при свободном слоте цель может получить роль лидера.
+    private static readonly ProtoId<AntagSpecifierPrototype> DefaultFleshCultistAntag = "SunriseFleshCultist";
     private static readonly EntProtoId DefaultSELFRule = "SiliconLiberation";
     private static readonly SpriteSpecifier SelfAgentVerbIcon =
         new SpriteSpecifier.Rsi(new ResPath("/Textures/_Sunrise/Interface/Misc/self_icon.rsi"), "icon");
@@ -67,7 +70,7 @@ public sealed partial class AdminVerbSystem
                 new ResPath("_Sunrise/FleshCult/Interface/Actions/fleshCultistFleshHeart.png")),
             Act = () =>
             {
-                _antag.ForceMakeAntag<FleshCultRuleComponent>(targetPlayer, DefaultFleshCultRule);
+                _antag.ForceMakeAntag<FleshCultRuleComponent>(targetPlayer, DefaultFleshCultRule, DefaultFleshCultistAntag);
             },
             Impact = LogImpact.High,
             Message = Loc.GetString("admin-verb-make-flesh-cultist"),
