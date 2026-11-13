@@ -22,7 +22,7 @@
   - type: AmmoCounter
   - type: Gun
     fireRate: 2
-    projectileSpeed: 25 # Sunrise-Edit
+    projectileSpeed: 30 # Sunrise-Edit
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -74,7 +74,7 @@
   components:
   - type: Gun
     fireRate: 1.5
-    projectileSpeed: 35 # Sunrise-Edit
+    projectileSpeed: 37 # Sunrise-Edit
     pump: true
   - type: BallisticAmmoProvider
     whitelist:
@@ -226,7 +226,7 @@
   - type: BallisticAmmoProvider
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
-    projectileSpeed: 25 # Sunrise-Edit
+    projectileSpeed: 30 # Sunrise-Edit
     soundGunshot:
       collection: xm1014 # Sunrise-Edit
 
@@ -238,7 +238,7 @@
   - type: BallisticAmmoProvider
     proto: ShellShotgunBeanbag
   - type: Gun
-    projectileSpeed: 25 # Sunrise-Edit
+    projectileSpeed: 30 # Sunrise-Edit
     soundGunshot:
       collection: xm1014 # Sunrise-Edit
 
@@ -257,8 +257,8 @@
     sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/pump_new/tiny.rsi # Sunrise-Edit
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
-    fireRate: 1.5 # Sunrise-edit
-    projectileSpeed: 35 # Sunrise-Edit
+    fireRate: 1.75 # Sunrise-edit
+    projectileSpeed: 37 # Sunrise-Edit
   - type: GunSpreadModifier
     spread: 0.6
   - type: Tag
@@ -282,7 +282,7 @@
     sprite: Objects/Weapons/Guns/Shotguns/sawn_inhands_64x.rsi
   - type: Gun
     fireRate: 3
-    projectileSpeed: 25 # Sunrise-Edit
+    projectileSpeed: 30 # Sunrise-Edit
     soundGunshot:
       collection: m3 # Sunrise-Edit
   - type: CanDualWield # Sunrise-Edit
@@ -369,7 +369,7 @@
     sprite: Objects/Weapons/Guns/Shotguns/hm_pistol.rsi
   - type: Gun
     fireRate: 4
-    projectileSpeed: 25 # Sunrise-Edit
+    projectileSpeed: 30 # Sunrise-Edit
     soundGunshot:
       collection: m3 # Sunrise-Edit
   - type: BallisticAmmoProvider
@@ -393,7 +393,7 @@
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
     fireRate: 2
-    projectileSpeed: 25 # Sunrise-Edit
+    projectileSpeed: 30 # Sunrise-Edit
   - type: BallisticAmmoProvider
     # sunrise-start
     proto: CannonBallGrapeshotMini
@@ -421,7 +421,7 @@
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
     fireRate: 4 #No reason to stifle the firerate since you have to manually reload every time anyways.
-    projectileSpeed: 25 # Sunrise-Edit
+    projectileSpeed: 30 # Sunrise-Edit
     soundGunshot:
       collection: m3 # Sunrise-Edit
     bigTrigger: true # Sunrise-Edit
@@ -467,6 +467,6 @@
         volume: -3
         rolloffFactor: 1.3
     fireRate: 2
-    projectileSpeed: 25 # Sunrise-Edit
+    projectileSpeed: 30 # Sunrise-Edit
   - type: GunSpreadModifier
     spread: 0.8

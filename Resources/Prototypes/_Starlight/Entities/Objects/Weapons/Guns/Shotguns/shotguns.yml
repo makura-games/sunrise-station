@@ -12,7 +12,7 @@
   - type: Gun
     spread: 30
     fireRate: 2
-    projectileSpeed: 25
+    projectileSpeed: 30
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -71,7 +71,7 @@
     spread: 30
     selectedMode: SemiAuto
     fireRate: 2
-    projectileSpeed: 25
+    projectileSpeed: 30
     availableModes:
     - SemiAuto
   - type: GunSpreadModifier # Sunrise-Add
@@ -175,7 +175,7 @@
   - type: Gun
     spread: 15
     fireRate: 2.5
-    projectileSpeed: 25
+    projectileSpeed: 30
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Shotguns/forged_shotgun.rsi
   - type: Clothing

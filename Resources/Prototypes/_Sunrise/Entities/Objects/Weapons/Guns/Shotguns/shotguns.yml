@@ -23,7 +23,7 @@
     spread: 22
     pump: true
     fireRate: 2.75
-    projectileSpeed: 35
+    projectileSpeed: 37
   - type: GunSpreadModifier
     spread: 1.2
   - type: MeleeWeapon # TODO: Add ability to add reagents
@@ -139,7 +139,7 @@
   - type: Gun
     pump: true
     fireRate: 1.95
-    projectileSpeed: 35
+    projectileSpeed: 37
     useKey: true
     selectedMode: SemiAuto
   - type: GunSpreadModifier

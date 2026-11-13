@@ -69,16 +69,6 @@
     - Pirate
 
 - type: entity
-  parent: WeaponLauncherM79
-  id: WeaponLauncherM79Biocode
-  suffix: BIOCODE
-  components:
-  - type: FactionWeaponBlocker
-    factions:
-    - Syndicate
-    - Pirate
-
-- type: entity
   parent: WeaponSniperHristov
   id: WeaponSniperHristovBiocode
   suffix: BIOCODE

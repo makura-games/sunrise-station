@@ -186,7 +186,6 @@ construction-graph-tag-shell-shotgun-improvised-uranium-desc = описание 
 construction-graph-tag-shell-shotgun-coin = гильза дробовика с монетой
 construction-graph-tag-shell-shotgun-coin-desc = описание гильзы дробовика с монетой
 construction-graph-tag-upgradeflaregun = улучшение сигнального пистолета
-construction-graph-tag-upgradedrozd = комплект улучшения «Дрозд Мк2»
 construction-graph-tag-upgradelecter = улучшение Лектера
 construction-graph-tag-ModularReceiverAuto = автоматический модульный ресивер
 construction-graph-tag-coin = монета

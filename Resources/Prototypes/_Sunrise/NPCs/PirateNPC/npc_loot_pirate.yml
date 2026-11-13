@@ -2454,7 +2454,7 @@
     - id: WeaponLauncherM79
       prob: 0.5
       orGroup: Grenadier
-    - id: WeaponLauncherM79Biocode
+    - id: SunriseClothingBeltGrenadeLauncherBandolier
       prob: 0.25
       orGroup: Grenadier
     - id: BriefcaseWeaponM79Filled
