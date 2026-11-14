@@ -29,10 +29,6 @@ public sealed partial class SpawnPointSystem : EntitySystem
         var possiblePositions = new List<EntityCoordinates>();
         // Sunrise-Edit: Резервные точки профессий для карт без отдельной точки позднего подключения.
         var lateJoinFallbackPositions = new List<EntityCoordinates>();
-        // Sunrise added start - резервные точки той же станции, чтобы не спавнить на ЦК/аванпосте ЯО
-        var stationLateJoinPositions = new List<EntityCoordinates>();
-        var stationJobPositions = new List<EntityCoordinates>();
-        // Sunrise added end
 
         while (points.MoveNext(out var uid, out var spawnPoint, out var xform))
         {
@@ -58,12 +54,6 @@ public sealed partial class SpawnPointSystem : EntitySystem
                 lateJoinFallbackPositions.Add(xform.Coordinates);
             }
 
-            // Резервные точки станции на случай, если на карте нет спавнера нужной должности.
-            if (spawnPoint.SpawnType == SpawnPointType.LateJoin)
-                stationLateJoinPositions.Add(xform.Coordinates);
-            else if (spawnPoint.SpawnType == SpawnPointType.Job)
-                stationJobPositions.Add(xform.Coordinates);
-
             switch (spawnPointType)
             {
                 case SpawnPointType.Job when isMatchingJob && spawnPoint.SpawnType == SpawnPointType.Job:
@@ -81,18 +71,7 @@ public sealed partial class SpawnPointSystem : EntitySystem
         if (possiblePositions.Count == 0 && args.DesiredSpawnPointType == SpawnPointType.LateJoin)
             possiblePositions.AddRange(lateJoinFallbackPositions);
 
-        // Sunrise added start - если на карте станции нет спавнера должности (например, у должностей с alwaysUseSpawner),
-        // спавним на точке позднего подключения или любой точке должности этой же станции, а не на первом попавшемся спавнере (ЦК, аванпост ЯО).
-        if (possiblePositions.Count == 0 && args.DesiredSpawnPointType != SpawnPointType.Observer)
-        {
-            possiblePositions.AddRange(stationLateJoinPositions.Count > 0
-                ? stationLateJoinPositions
-                : stationJobPositions);
-
-            if (possiblePositions.Count > 0)
-                Log.Warning($"No spawn point for job {args.Job} on station {ToPrettyString(args.Station)}, using station fallback spawn point. RunLevel: {_gameTicker.RunLevel}");
-        }
-        // Sunrise added end
+        AddSunriseStationFallbackPositions(args, possiblePositions); // Sunrise-Edit - резервный спавн на LateJoin-точках заданной станции.
 
         if (possiblePositions.Count == 0)
         {

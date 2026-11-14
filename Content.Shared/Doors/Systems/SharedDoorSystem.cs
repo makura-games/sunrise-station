@@ -549,10 +549,8 @@ public abstract partial class SharedDoorSystem : EntitySystem
         var stunTime = door.DoorStunTime + door.OpenTimeOne;
         foreach (var entity in GetColliding(uid, physics, null, door.CheckFixtureCollision, door.AllowMachineLayer))
         {
-            // Sunrise edit start - исключение столкновений нужно только до автоматического открытия двери.
-            if (!door.ForcedCrushClose)
+            if (!door.ForcedCrushClose) // Sunrise-Edit - исключение столкновений нужно только до автоматического открытия двери.
                 door.CurrentlyCrushing.Add(entity);
-            // Sunrise edit end
             if (door.CrushDamage != null)
                 _damageableSystem.TryChangeDamage(entity, door.CrushDamage, origin: uid);
 
@@ -560,10 +558,6 @@ public abstract partial class SharedDoorSystem : EntitySystem
         }
 
         if (door.CurrentlyCrushing.Count == 0)
-            return;
-
-        // Sunrise-Edit - отдельные двери должны завершать принудительное закрытие даже при столкновении.
-        if (door.ForcedCrushClose)
             return;
 
         // queue the door to open so that the player is no longer stunned once it has FINISHED opening.
@@ -831,8 +825,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
         var door = ent.Comp;
         door.NextStateChange = null;
 
-        // Sunrise-Edit - принудительно закрываемым дверям не требуется автоматическое открытие.
-        if (door.CurrentlyCrushing.Count > 0 && door.State != DoorState.Opening && !door.ForcedCrushClose)
+        if (door.CurrentlyCrushing.Count > 0 && door.State != DoorState.Opening)
         {
             // This is a closed door that is crushing people and needs to auto-open. Note that we don't check "can open"
             // here. The door never actually finished closing and we don't want people to get stuck inside of doors.

@@ -15,6 +15,7 @@
   - type: TurretTargetSettings
     exemptAccessLevels:
     - CentralCommand
+    - Borg
   - type: DeployableTurretController
     accessLevels:
     - CentralCommand

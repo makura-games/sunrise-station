@@ -8,6 +8,7 @@
   - type: TurretTargetSettings
     exemptAccessLevels:
     - CentralCommand
+    - Borg
   - type: Machine
     board: WeaponEnergyTurretCentralCommandCircuitboard
   - type: DeviceNetwork
