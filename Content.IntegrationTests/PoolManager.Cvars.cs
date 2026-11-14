@@ -35,6 +35,10 @@ public static partial class PoolManager
         (CCVars.InteractionRateLimitPeriod.Name, "0.1"),
         (CCVars.MovementMobPushing.Name, "false"),
         (CCVars.ResourceUploadingStoreDeletionDays.Name, "0"),
+        // Sunrise added start - приватные системы в тестовых парах выключены.
+        // Имя строкой: проект тестов не знает о приватной части; в сборке без неё такого CVar просто нет.
+        ("anticheat.enabled", "false"),
+        // Sunrise added end
         // Sunrise added start - отсекаем информационный шум ещё во время запуска тестовой пары
         (Robust.Shared.CVars.LogLevel.Name, _Sunrise.TestLogging.DefaultLevel),
         // Sunrise added end

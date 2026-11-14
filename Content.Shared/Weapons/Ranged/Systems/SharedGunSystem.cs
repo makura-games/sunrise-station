@@ -67,6 +67,11 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] protected SharedTransformSystem TransformSystem = default!;
     [Dependency] protected TagSystem TagSystem = default!;
     [Dependency] protected ThrowingSystem ThrowingSystem = default!;
+#if SUNRISE_PRIVATE
+    // Sunrise added start - приватная проверка запросов
+    [Dependency] private Content.Shared.Melonity.SharedAntiCheatSystem _sunriseAntiCheat = default!;
+    // Sunrise added end
+#endif
 
     /// <summary>
     /// Default projectile speed
@@ -159,6 +164,12 @@ public abstract partial class SharedGunSystem : EntitySystem
         {
             return;
         }
+
+#if SUNRISE_PRIVATE
+        // Sunrise added start - приватная проверка запроса
+        _sunriseAntiCheat.CheckShootRequest(user.Value, msg, args.SenderSession);
+        // Sunrise added end
+#endif
 
         // Sunrise edit start - dual-wield shot alternation
         if (!TryHandleDualWieldShootRequest(user.Value, gun, msg, out var isDualWield, out var dualWield))
