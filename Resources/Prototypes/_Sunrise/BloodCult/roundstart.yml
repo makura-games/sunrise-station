@@ -11,7 +11,7 @@
     - CultistKillObjective
 #    Сюда нужно цель на призыв нарси.
   - type: AntagSelection
-    selectionTime: JobsAssigned
+    selectionTime: RuleStarted
     lateJoinAdditional: true
     antags:
     - !type:LinearAntagCount

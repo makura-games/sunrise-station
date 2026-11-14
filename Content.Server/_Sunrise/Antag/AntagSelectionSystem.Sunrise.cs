@@ -33,6 +33,9 @@ public sealed partial class AntagSelectionSystem
         {
             foreach (var role in definition.PrefRoles)
                 roles.Add(role.Id);
+
+            foreach (var role in definition.FallbackRoles)
+                roles.Add(role.Id);
         }
 
         return roles;
@@ -78,6 +81,12 @@ public sealed partial class AntagSelectionSystem
         HashSet<string> priorities)
     {
         foreach (var role in definition.PrefRoles)
+        {
+            if (priorities.Contains(role.Id))
+                return true;
+        }
+
+        foreach (var role in definition.FallbackRoles)
         {
             if (priorities.Contains(role.Id))
                 return true;
@@ -207,6 +216,12 @@ public sealed partial class AntagSelectionSystem
         }
 
         return commandCount < definition.MaxCommandStaff;
+    }
+
+    private void CompleteSunriseForcedAntagSelection(Entity<AntagSelectionComponent> gameRule)
+    {
+        if (gameRule.Comp.AssignmentHandled)
+            RaiseSunriseAntagSelectionComplete(gameRule);
     }
 
     private void RaiseSunriseAntagSelectionComplete(Entity<AntagSelectionComponent> gameRule)

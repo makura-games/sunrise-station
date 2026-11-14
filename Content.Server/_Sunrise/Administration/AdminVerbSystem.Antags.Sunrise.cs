@@ -1,6 +1,8 @@
 using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.Administration;
+using Content.Shared.Antag;
 using Content.Shared.Database;
+using Content.Shared.Mind.Components;
 using Content.Shared.Verbs;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
@@ -21,6 +23,7 @@ public sealed partial class AdminVerbSystem
 {
     private static readonly EntProtoId DefaultAssaultOpsRule = "AssaultOps";
     private static readonly EntProtoId DefaultFleshCultRule = "FleshCult";
+    private static readonly ProtoId<AntagSpecifierPrototype> DefaultFleshCultistAntag = "SunriseFleshCultist";
     private static readonly EntProtoId DefaultSELFRule = "SiliconLiberation";
     private static readonly SpriteSpecifier SelfAgentVerbIcon =
         new SpriteSpecifier.Rsi(new ResPath("/Textures/_Sunrise/Interface/Misc/self_icon.rsi"), "icon");
@@ -35,8 +38,10 @@ public sealed partial class AdminVerbSystem
         if (!_adminManager.HasAdminFlag(player, AdminFlags.Fun))
             return;
 
-        var bountyName = Loc.GetString("admin-smite-traitor-bounty-name");
-        var target = args.Target;
+        if (!HasComp<MindContainerComponent>(args.Target) || !TryComp<ActorComponent>(args.Target, out var targetActor))
+            return;
+
+        var targetPlayer = targetActor.PlayerSession;
 
 
         // Assault Operative
@@ -48,7 +53,7 @@ public sealed partial class AdminVerbSystem
                 "poster46_contraband"),
             Act = () =>
             {
-                _antag.ForceMakeAntag<AssaultOpsRuleComponent>(player, DefaultAssaultOpsRule);
+                _antag.ForceMakeAntag<AssaultOpsRuleComponent>(targetPlayer, DefaultAssaultOpsRule);
             },
             Impact = LogImpact.High,
             Message = Loc.GetString("admin-verb-make-assault-operative"),
@@ -64,7 +69,7 @@ public sealed partial class AdminVerbSystem
                 new ResPath("_Sunrise/FleshCult/Interface/Actions/fleshCultistFleshHeart.png")),
             Act = () =>
             {
-                _antag.ForceMakeAntag<FleshCultRuleComponent>(player, DefaultFleshCultRule);
+                _antag.ForceMakeAntag<FleshCultRuleComponent>(targetPlayer, DefaultFleshCultRule, DefaultFleshCultistAntag);
             },
             Impact = LogImpact.High,
             Message = Loc.GetString("admin-verb-make-flesh-cultist"),
@@ -79,7 +84,7 @@ public sealed partial class AdminVerbSystem
             Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/Objects/Weapons/Melee/cult_dagger.rsi"), "icon"),
             Act = () =>
             {
-                _antag.ForceMakeAntag<BloodCultRuleComponent>(player, "BloodCult");
+                _antag.ForceMakeAntag<BloodCultRuleComponent>(targetPlayer, "BloodCult");
             },
             Impact = LogImpact.High,
             Message = Loc.GetString("admin-verb-make-cultist"),
@@ -94,7 +99,7 @@ public sealed partial class AdminVerbSystem
             Icon = SelfAgentVerbIcon,
             Act = () =>
             {
-                _antag.ForceMakeAntag<SELFRuleComponent>(player, DefaultSELFRule);
+                _antag.ForceMakeAntag<SELFRuleComponent>(targetPlayer, DefaultSELFRule);
             },
             Impact = LogImpact.High,
             Message = Loc.GetString("admin-verb-make-selfagent"),

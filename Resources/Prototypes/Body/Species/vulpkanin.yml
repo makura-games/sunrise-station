@@ -94,7 +94,7 @@
     #undergarmentBottom: UndergarmentBottomBoxersVulpkanin # Sunrise-edit
   - type: Inventory
 # SUNRISE EDIT
-    speciesId: human
+    speciesId: vulpkanin # Sunrise-Edit - сохраняем видовые спрайты масок при подборе визуалов по типу тела
     # FEMALE STRAIGHT
     femaleDisplacements:
       head-body-straight-big-muzzle:

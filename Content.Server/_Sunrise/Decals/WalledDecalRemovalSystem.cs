@@ -4,6 +4,7 @@ using Content.Server.Decals;
 using Content.Shared.Decals;
 using Content.Shared.Tag;
 using Robust.Server.GameObjects;
+using Robust.Shared.GameStates;
 using Robust.Shared.Map.Components;
 
 namespace Content.Server._Sunrise.Decals;
@@ -13,6 +14,7 @@ namespace Content.Server._Sunrise.Decals;
 /// </summary>
 public sealed partial class WalledDecalRemovalSystem : EntitySystem
 {
+    [Dependency] private ChunkEntitySystem _chunkEntity = default!;
     [Dependency] private DecalSystem _decal = default!;
     [Dependency] private MapSystem _map = default!;
     [Dependency] private TagSystem _tag = default!;
@@ -34,7 +36,7 @@ public sealed partial class WalledDecalRemovalSystem : EntitySystem
     public int RemoveWalledDecals(Entity<MapGridComponent> grid)
     {
         var wallTiles = new HashSet<Vector2i>();
-        var decalsToRemove = new HashSet<DecalIndex>();
+        var decalsToRemove = new List<DecalIndex>();
         var childEnumerator = Transform(grid.Owner).ChildEnumerator;
 
         while (childEnumerator.MoveNext(out var child))
@@ -48,13 +50,21 @@ public sealed partial class WalledDecalRemovalSystem : EntitySystem
         if (wallTiles.Count == 0)
             return 0;
 
-        foreach (var wallTile in wallTiles)
-        {
-            var tilePosition = (Vector2) wallTile;
-            var bounds = new Box2(tilePosition, tilePosition + Vector2.One);
+        var half = new Vector2(0.5f, 0.5f);
 
-            foreach (var (decalId, _) in _decal.GetDecalsIntersecting(grid.Owner, bounds))
-                decalsToRemove.Add(decalId);
+        foreach (var chunk in _chunkEntity.GetChunks(grid))
+        {
+            if (!TryComp<DecalChunkComponent>(chunk, out var decals))
+                continue;
+
+            foreach (var (decalId, decal) in decals.Decals)
+            {
+                // Определяем тайл по центру декали, чтобы не затронуть соседние тайлы на границе.
+                if (!wallTiles.Contains((decal.Coordinates + half).Floored()))
+                    continue;
+
+                decalsToRemove.Add(new DecalIndex(chunk.Comp.Chunk, decalId));
+            }
         }
 
         var removed = 0;

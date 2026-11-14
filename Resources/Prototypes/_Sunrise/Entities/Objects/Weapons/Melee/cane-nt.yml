@@ -59,6 +59,7 @@
   - type: Item
     heldPrefix: off
     size: Normal
+  - type: MobilityAid
   - type: DisarmMalus
     malus: 0.300
   - type: Appearance
@@ -105,6 +106,7 @@
     shape:
     - 0,0,1,1
     sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/cane_shotgun.rsi
+  - type: MobilityAid
   - type: Appearance
   - type: Gun
     fireRate: 4
