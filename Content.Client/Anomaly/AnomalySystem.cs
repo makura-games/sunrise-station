@@ -22,6 +22,7 @@ public sealed partial class AnomalySystem : SharedAnomalySystem
 
         SubscribeLocalEvent<AnomalyComponent, AppearanceChangeEvent>(OnAppearanceChanged);
         SubscribeLocalEvent<AnomalyComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<AnomalyComponent, ComponentShutdown>(OnFloatingShutdown); // Sunrise-Edit
         SubscribeLocalEvent<AnomalyComponent, AnimationCompletedEvent>(OnAnimationComplete);
 
         SubscribeLocalEvent<AnomalySupercriticalComponent, ComponentShutdown>(OnShutdown);

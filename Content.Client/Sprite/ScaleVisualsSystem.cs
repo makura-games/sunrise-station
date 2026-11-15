@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Shared.Sprite;
+using Content.Client._Sunrise.Animations.SpriteAnimation.Systems;
 using Robust.Client.GameObjects;
 
 namespace Content.Client.Sprite;
@@ -7,6 +8,7 @@ namespace Content.Client.Sprite;
 public sealed partial class ScaleVisualsSystem : SharedScaleVisualsSystem
 {
     [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private SpriteAnimationSystem _spriteAnimation = default!; // Sunrise-Edit
 
     public override void Initialize()
     {
@@ -21,10 +23,10 @@ public sealed partial class ScaleVisualsSystem : SharedScaleVisualsSystem
             args.Sprite == null) return;
 
         // save the original scale
-        ent.Comp.OriginalScale ??= args.Sprite.Scale;
+        ent.Comp.OriginalScale ??= _spriteAnimation.GetBaseScale((ent.Owner, args.Sprite)); // Sunrise-Edit
 
         var vecScale = (Vector2)scale;
-        _sprite.SetScale((ent.Owner, args.Sprite), vecScale);
+        _spriteAnimation.SetBaseScale((ent.Owner, args.Sprite), vecScale); // Sunrise-Edit
     }
 
     // revert to the original scale
@@ -32,7 +34,9 @@ public sealed partial class ScaleVisualsSystem : SharedScaleVisualsSystem
     {
         base.ResetScale(ent);
 
-        if (ent.Comp.OriginalScale != null)
-            _sprite.SetScale(ent.Owner, ent.Comp.OriginalScale.Value);
+        // Sunrise edit start - восстанавливаем базу без вкладов анимаций
+        if (ent.Comp.OriginalScale != null && TryComp<SpriteComponent>(ent, out var sprite))
+            _spriteAnimation.SetBaseScale((ent.Owner, sprite), ent.Comp.OriginalScale.Value);
+        // Sunrise edit end
     }
 }

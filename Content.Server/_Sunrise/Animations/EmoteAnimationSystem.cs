@@ -36,7 +36,7 @@ public sealed partial class EmoteAnimationSystem : EntitySystem
 
     private void OnGetState(Entity<EmoteAnimationComponent> ent, ref ComponentGetState args)
     {
-        args.State = new EmoteAnimationComponent.EmoteAnimationComponentState(ent.Comp.AnimationId);
+        args.State = new EmoteAnimationComponentState(ent.Comp.AnimationId);
     }
 
     private void OnEmote(EntityUid uid, EmoteAnimationComponent component, ref EmoteEvent args)

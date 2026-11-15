@@ -7,9 +7,12 @@ namespace Content.Client.Rotation;
 
 public sealed partial class RotationVisualizerSystem : SharedRotationVisualsSystem
 {
-
     [Dependency] private AppearanceSystem _appearance = default!;
+    // Sunrise edit start - базовую позу обновляет Sunrise partial
+    /*
     [Dependency] private AnimationPlayerSystem _animation = default!;
+    */
+    // Sunrise edit end
 
     public override void Initialize()
     {
@@ -37,11 +40,11 @@ public sealed partial class RotationVisualizerSystem : SharedRotationVisualsSyst
         }
     }
 
-    /// <summary>
-    ///     Rotates a sprite between two animated keyframes given a certain time.
-    /// </summary>
     public void AnimateSpriteRotation(EntityUid uid, SpriteComponent spriteComp, Angle rotation, float animationTime)
     {
+        // Sunrise edit start - поза сохраняет независимые вклады анимаций
+        _pose.SetBasePose((uid, spriteComp), rotation, animationTime);
+        /*
         if (spriteComp.Rotation.Equals(rotation))
         {
             return;
@@ -75,5 +78,7 @@ public sealed partial class RotationVisualizerSystem : SharedRotationVisualsSyst
         };
 
         _animation.Play((uid, animationComp), animation, animationKey);
+        */
+        // Sunrise edit end
     }
 }

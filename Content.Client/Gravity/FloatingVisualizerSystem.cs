@@ -9,18 +9,29 @@ namespace Content.Client.Gravity;
 /// <inheritdoc/>
 public sealed partial class FloatingVisualizerSystem : SharedFloatingVisualizerSystem
 {
-    [Dependency] private AnimationPlayerSystem AnimationSystem = default!;
+    // Sunrise edit start - цикл анимации обслуживает Sunrise partial
+    // [Dependency] private AnimationPlayerSystem AnimationSystem = default!;
+    // Sunrise edit end
 
     public override void Initialize()
     {
         base.Initialize();
 
+        // Sunrise edit start - цикл анимации обслуживает SpriteAnimationSystem
+        /*
         SubscribeLocalEvent<FloatingVisualsComponent, AnimationCompletedEvent>(OnAnimationCompleted);
+        */
+        // Sunrise edit end
+
+        SubscribeLocalEvent<FloatingVisualsComponent, ComponentShutdown>(OnFloatingShutdown); // Sunrise-Edit
     }
 
     /// <inheritdoc/>
     public override void FloatAnimation(EntityUid uid, Vector2 offset, string animationKey, float animationTime, bool stop = false)
     {
+        // Sunrise edit start - цикл анимации обслуживает Sunrise partial
+        StartFloatAnimation(uid, offset, animationKey, animationTime, stop);
+        /*
         if (stop)
         {
             AnimationSystem.Stop(uid, animationKey);
@@ -50,8 +61,12 @@ public sealed partial class FloatingVisualizerSystem : SharedFloatingVisualizerS
 
         if (!AnimationSystem.HasRunningAnimation(uid, animationKey))
             AnimationSystem.Play(uid, animation, animationKey);
+        */
+        // Sunrise edit end
     }
 
+    // Sunrise edit start - цикл анимации обслуживает SpriteAnimationSystem
+    /*
     private void OnAnimationCompleted(EntityUid uid, FloatingVisualsComponent component, AnimationCompletedEvent args)
     {
         if (args.Key != component.AnimationKey)
@@ -59,4 +74,7 @@ public sealed partial class FloatingVisualizerSystem : SharedFloatingVisualizerS
 
         FloatAnimation(uid, component.Offset, component.AnimationKey, component.AnimationTime, stop: !component.CanFloat);
     }
+    */
+    // Sunrise edit end
+
 }

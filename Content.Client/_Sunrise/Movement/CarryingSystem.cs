@@ -1,5 +1,7 @@
 using System.Linq;
 using System.Numerics;
+using Content.Client._Sunrise.Animations;
+using Content.Client._Sunrise.Animations.SpriteAnimation.Systems;
 using Content.Shared._Sunrise.Movement.Carrying;
 using Robust.Client.GameObjects;
 
@@ -7,7 +9,11 @@ namespace Content.Client._Sunrise.Movement;
 
 public sealed partial class CarryingSystem : SharedCarryingSystem
 {
-    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private SpriteAnimationSystem _spriteAnimation = default!;
+
+    [Dependency] private SpritePoseSystem _pose = default!;
+
+    private const string AnimationKey = "carrying";
 
     private readonly Dictionary<EntityUid, CarriedVisualState> _visualStates = new();
 
@@ -78,37 +84,27 @@ public sealed partial class CarryingSystem : SharedCarryingSystem
 
         if (!_visualStates.TryGetValue(ent.Owner, out var state))
         {
-            state = new CarriedVisualState(
-                sprite.Offset,
-                sprite.NoRotation,
-                sprite.EnableDirectionOverride,
-                sprite.DirectionOverride);
+            state = new CarriedVisualState(sprite.NoRotation);
             _visualStates.Add(ent.Owner, state);
         }
 
-        _sprite.SetOffset((ent.Owner, sprite), state.Offset + new Vector2(0f, carrierComp.CarriedOffset));
+        _pose.Suspend((ent.Owner, sprite), Direction.South);
+        _spriteAnimation.SetOffsetContribution((ent.Owner, sprite), AnimationKey, new Vector2(0f, carrierComp.CarriedOffset));
         sprite.NoRotation = true;
-        sprite.EnableDirectionOverride = true;
-        sprite.DirectionOverride = Direction.South;
     }
 
     private void RestoreCarriedVisual(EntityUid uid)
     {
+        _spriteAnimation.Stop(uid, AnimationKey);
         if (!_visualStates.Remove(uid, out var state))
             return;
 
         if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;
 
-        _sprite.SetOffset((uid, sprite), state.Offset);
         sprite.NoRotation = state.NoRotation;
-        sprite.EnableDirectionOverride = state.EnableDirectionOverride;
-        sprite.DirectionOverride = state.DirectionOverride;
+        _pose.Resume((uid, sprite));
     }
 
-    private readonly record struct CarriedVisualState(
-        Vector2 Offset,
-        bool NoRotation,
-        bool EnableDirectionOverride,
-        Direction DirectionOverride);
+    private readonly record struct CarriedVisualState(bool NoRotation);
 }

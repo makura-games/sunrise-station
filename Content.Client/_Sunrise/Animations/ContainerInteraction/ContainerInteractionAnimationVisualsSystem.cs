@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._Sunrise.Animations.SpriteAnimation.Systems;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 using Robust.Shared.Animations;
@@ -10,7 +11,7 @@ namespace Content.Client._Sunrise.Animations.ContainerInteraction;
 
 public sealed partial class ContainerInteractionAnimationVisualsSystem : EntitySystem
 {
-    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private SpriteAnimationSystem _spriteAnimation = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IGameTiming _timing = default!;
 
@@ -30,6 +31,7 @@ public sealed partial class ContainerInteractionAnimationVisualsSystem : EntityS
 
         SubscribeLocalEvent<ContainerInteractionAnimationVisualsComponent, EntInsertedIntoContainerMessage>(HandleEvent);
         SubscribeLocalEvent<ContainerInteractionAnimationVisualsComponent, EntRemovedFromContainerMessage>(HandleEvent);
+        SubscribeLocalEvent<ContainerInteractionAnimationVisualsComponent, ComponentShutdown>(OnShutdown);
 
     }
 
@@ -43,17 +45,17 @@ public sealed partial class ContainerInteractionAnimationVisualsSystem : EntityS
         if (!_timing.IsFirstTimePredicted || IsClientSide(ent))
             return false;
 
-        if (!_spriteQuery.TryComp(ent, out var sprite))
+        if (!_spriteQuery.HasComp(ent))
             return false;
 
-        if (_animation.HasRunningAnimation(ent, InsertTrack))
+        if (_spriteAnimation.IsPlaying(ent.Owner, InsertTrack))
             return false;
 
-        DoAnimation(ent, sprite);
+        DoAnimation(ent);
         return true;
     }
 
-    private void DoAnimation(Entity<ContainerInteractionAnimationVisualsComponent> ent, SpriteComponent sprite)
+    private void DoAnimation(Entity<ContainerInteractionAnimationVisualsComponent> ent)
     {
         var targetScaleX = ent.Comp.Scale + _random.NextFloat(-ent.Comp.ScaleVariation, ent.Comp.ScaleVariation);
         var targetScaleY = ent.Comp.Scale + _random.NextFloat(-ent.Comp.ScaleVariation, ent.Comp.ScaleVariation);
@@ -75,12 +77,17 @@ public sealed partial class ContainerInteractionAnimationVisualsSystem : EntityS
                     KeyFrames =
                     {
                         new AnimationTrackProperty.KeyFrame(new Vector2(targetScaleX, targetScaleY), 0f),
-                        new AnimationTrackProperty.KeyFrame(sprite.Scale, ent.Comp.Duration),
+                        new AnimationTrackProperty.KeyFrame(Vector2.One, ent.Comp.Duration),
                     },
                 },
             },
         };
 
-        _animation.Play(ent, animation, InsertTrack);
+        _spriteAnimation.PlayScale(ent.Owner, animation, InsertTrack);
+    }
+
+    private void OnShutdown(Entity<ContainerInteractionAnimationVisualsComponent> ent, ref ComponentShutdown args)
+    {
+        _spriteAnimation.Stop(ent.Owner, InsertTrack);
     }
 }
