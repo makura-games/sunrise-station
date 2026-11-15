@@ -21,7 +21,7 @@
           - gridPath: /Maps/_Sunrise/Shuttles/DSO/Other/landing.yml
             priorityTag: DockMining
           - gridPath: /Maps/_Sunrise/Shuttles/DSO/Other/pts.yml
-            priorityTag: DockPersonal        
+            priorityTag: DockPersonal
         - type: StationJobs
           availableJobs:
             #centcom
