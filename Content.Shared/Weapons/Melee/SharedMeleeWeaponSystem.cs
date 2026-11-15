@@ -71,11 +71,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] private DamageExamineSystem _damageExamine = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private TagSystem _tagSystem = default!; // Sunrise-edit
-#if SUNRISE_PRIVATE
-    // Sunrise added start - приватная проверка запросов
-    [Dependency] private Content.Shared.Melonity.SharedAntiCheatSystem _sunriseAntiCheat = default!;
-    // Sunrise added end
-#endif
 
     [Dependency] private EntityQuery<DamageableComponent> _damageQuery = default!;
 

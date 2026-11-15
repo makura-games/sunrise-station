@@ -67,11 +67,6 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] protected SharedTransformSystem TransformSystem = default!;
     [Dependency] protected TagSystem TagSystem = default!;
     [Dependency] protected ThrowingSystem ThrowingSystem = default!;
-#if SUNRISE_PRIVATE
-    // Sunrise added start - приватная проверка запросов
-    [Dependency] private Content.Shared.Melonity.SharedAntiCheatSystem _sunriseAntiCheat = default!;
-    // Sunrise added end
-#endif
 
     /// <summary>
     /// Default projectile speed
