@@ -26,10 +26,10 @@ tilemap:
   6: Space
   7: FloorAstroGrass
   12: FloorBasalt
-  23: FloorDark
+  23: FloorDarkHerringbone
   18: FloorDarkMini
   19: FloorDarkMono
-  20: FloorDarkPlastic
+  20: FloorDark
   24: FloorGlass
   10: FloorGlassBronze
   8: FloorGlassPlasma
