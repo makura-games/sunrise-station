@@ -4,8 +4,8 @@ meta:
   engineVersion: 289.0.3
   forkId: ""
   forkVersion: ""
-  time: 11/15/2026 17:30:15
-  entityCount: 4308
+  time: 11/15/2026 18:26:28
+  entityCount: 4352
 maps: []
 grids:
 - 1
@@ -26,10 +26,10 @@ tilemap:
   6: Space
   7: FloorAstroGrass
   12: FloorBasalt
+  20: FloorDark
   23: FloorDarkHerringbone
   18: FloorDarkMini
   19: FloorDarkMono
-  20: FloorDark
   24: FloorGlass
   10: FloorGlassBronze
   8: FloorGlassPlasma
@@ -3400,53 +3400,6 @@ entities:
       parent: 710
     - type: Action
       container: 710
-- proto: ActionVendingThrow
-  entities:
-  - uid: 713
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 712
-    - type: Action
-      container: 712
-      attachedEntity: 712
-  - uid: 715
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 714
-    - type: Action
-      container: 714
-      attachedEntity: 714
-  - uid: 717
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 716
-    - type: Action
-      container: 716
-      attachedEntity: 716
-  - uid: 719
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 718
-    - type: Action
-      container: 718
-      attachedEntity: 718
-  - uid: 721
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 720
-    - type: Action
-      container: 720
-      attachedEntity: 720
 - proto: AdvancedJetInjector
   entities:
   - uid: 723
@@ -13042,6 +12995,7 @@ entities:
             id: BrickTileDarkLineE
             color: '#FFFFFFFF'
           decals:
+            4: 2,-20
             789: 3,-29
             790: 3,-28
             791: 3,-27
@@ -13134,6 +13088,7 @@ entities:
             id: BrickTileDarkLineW
             color: '#FFFFFFFF'
           decals:
+            5: 0,-20
             823: 4,-18
             2216: 9,-32
             2217: 9,-20
@@ -13146,6 +13101,20 @@ entities:
             3517: 4,-22
             3519: 4,-26
             3520: 4,-30
+        - node:
+            id: BrickTileSteelLineN
+            color: '#FFFFFFFF'
+          decals:
+            9: 0,-20
+            10: 1,-20
+            11: 2,-20
+        - node:
+            id: BrickTileSteelLineS
+            color: '#FFFFFFFF'
+          decals:
+            6: 0,-20
+            7: 1,-20
+            8: 2,-20
         - node:
             id: BrickTileSteelLineW
             color: '#FFFFFFFF'
@@ -13287,6 +13256,9 @@ entities:
             id: WarnFullGreyscale
             color: '#FFFFFFFF'
           decals:
+            1: 0,-20
+            2: 1,-20
+            3: 2,-20
             825: 4,-26
             826: 4,-30
             827: 4,-22
@@ -18756,36 +18728,6 @@ entities:
     components:
     - type: Transform
       parent: 2038
-    - type: EmitSoundOnCollide
-      nextSound: -78285.4854907
-    - type: Physics
-      canCollide: False
-  - uid: 2043
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 2042
-    - type: EmitSoundOnCollide
-      nextSound: -78285.4854907
-    - type: Physics
-      canCollide: False
-  - uid: 2045
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 2044
-    - type: EmitSoundOnCollide
-      nextSound: -78285.4854907
-    - type: Physics
-      canCollide: False
-  - uid: 2047
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 2046
     - type: EmitSoundOnCollide
       nextSound: -78285.4854907
     - type: Physics
@@ -33720,6 +33662,86 @@ entities:
       anchored: True
     - type: Airtight
       airBlocked: True
+  - uid: 712
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.5,-42.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 713
+    components:
+    - type: Transform
+      parent: 1
+      pos: 0.5,-42.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 714
+    components:
+    - type: Transform
+      parent: 1
+      pos: 6.5,-52.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 715
+    components:
+    - type: Transform
+      parent: 1
+      pos: 6.5,-54.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 716
+    components:
+    - type: Transform
+      parent: 1
+      pos: -3.5,-38.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 717
+    components:
+    - type: Transform
+      parent: 1
+      pos: -3.5,-40.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 718
+    components:
+    - type: Transform
+      parent: 1
+      pos: -3.5,-52.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 719
+    components:
+    - type: Transform
+      parent: 1
+      pos: -3.5,-54.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 720
+    components:
+    - type: Transform
+      parent: 1
+      pos: 7.5,-11.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 721
+    components:
+    - type: Transform
+      parent: 1
+      pos: 7.5,-13.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
   - uid: 776
     components:
     - type: Transform
@@ -34236,6 +34258,54 @@ entities:
       parent: 1
       rot: -1.5707963267948966 rad
       pos: -0.5,-9.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 2042
+    components:
+    - type: Transform
+      parent: 1
+      pos: 6.5,-38.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 2043
+    components:
+    - type: Transform
+      parent: 1
+      pos: 6.5,-40.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 2044
+    components:
+    - type: Transform
+      parent: 1
+      pos: -4.5,-11.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 2045
+    components:
+    - type: Transform
+      parent: 1
+      pos: -4.5,-13.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 2046
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.5,-50.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 2047
+    components:
+    - type: Transform
+      parent: 1
+      pos: 0.5,-50.5
       anchored: True
     - type: Airtight
       airBlocked: True
@@ -37431,6 +37501,358 @@ entities:
       anchored: True
     - type: Airtight
       airBlocked: True
+  - uid: 4309
+    components:
+    - type: Transform
+      parent: 1
+      pos: 5.5,-9.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4310
+    components:
+    - type: Transform
+      parent: 1
+      pos: 3.5,-9.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4311
+    components:
+    - type: Transform
+      parent: 1
+      pos: -2.5,-9.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4312
+    components:
+    - type: Transform
+      parent: 1
+      pos: -0.5,-9.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4313
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.5,-36.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4314
+    components:
+    - type: Transform
+      parent: 1
+      pos: 0.5,-36.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4315
+    components:
+    - type: Transform
+      parent: 1
+      pos: 0.5,-62.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4316
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.5,-62.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4317
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.5,-19.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4318
+    components:
+    - type: Transform
+      parent: 1
+      pos: 0.5,-19.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4319
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.5,-15.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4320
+    components:
+    - type: Transform
+      parent: 1
+      pos: 0.5,-15.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4321
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.5,-56.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4322
+    components:
+    - type: Transform
+      parent: 1
+      pos: 0.5,-56.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4323
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.5,-42.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4324
+    components:
+    - type: Transform
+      parent: 1
+      pos: 0.5,-42.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4325
+    components:
+    - type: Transform
+      parent: 1
+      pos: 6.5,-52.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4326
+    components:
+    - type: Transform
+      parent: 1
+      pos: 6.5,-54.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4327
+    components:
+    - type: Transform
+      parent: 1
+      pos: -3.5,-38.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4328
+    components:
+    - type: Transform
+      parent: 1
+      pos: -3.5,-40.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4329
+    components:
+    - type: Transform
+      parent: 1
+      pos: -3.5,-52.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4330
+    components:
+    - type: Transform
+      parent: 1
+      pos: -3.5,-54.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4331
+    components:
+    - type: Transform
+      parent: 1
+      pos: 7.5,-11.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4332
+    components:
+    - type: Transform
+      parent: 1
+      pos: 7.5,-13.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4333
+    components:
+    - type: Transform
+      parent: 1
+      pos: 6.5,-38.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4334
+    components:
+    - type: Transform
+      parent: 1
+      pos: 6.5,-40.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4335
+    components:
+    - type: Transform
+      parent: 1
+      pos: -4.5,-11.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4336
+    components:
+    - type: Transform
+      parent: 1
+      pos: -4.5,-13.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4337
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.5,-50.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4338
+    components:
+    - type: Transform
+      parent: 1
+      pos: 0.5,-50.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4339
+    components:
+    - type: Transform
+      parent: 1
+      pos: 5.5,-9.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4340
+    components:
+    - type: Transform
+      parent: 1
+      pos: 3.5,-9.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4341
+    components:
+    - type: Transform
+      parent: 1
+      pos: -2.5,-9.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4342
+    components:
+    - type: Transform
+      parent: 1
+      pos: -0.5,-9.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4343
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.5,-36.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4344
+    components:
+    - type: Transform
+      parent: 1
+      pos: 0.5,-36.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4345
+    components:
+    - type: Transform
+      parent: 1
+      pos: 0.5,-62.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4346
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.5,-62.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4347
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.5,-19.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4348
+    components:
+    - type: Transform
+      parent: 1
+      pos: 0.5,-19.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4349
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.5,-15.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4350
+    components:
+    - type: Transform
+      parent: 1
+      pos: 0.5,-15.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4351
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.5,-56.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
+  - uid: 4352
+    components:
+    - type: Transform
+      parent: 1
+      pos: 0.5,-56.5
+      anchored: True
+    - type: Airtight
+      airBlocked: True
 - proto: SunriseWallhornElectronics
   entities:
   - uid: 3415
@@ -39279,882 +39701,6 @@ entities:
       anchored: True
     - type: Physics
       bodyType: Static
-- proto: VendingMachineBooze
-  entities:
-  - uid: 718
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 1
-      pos: 7.5,-17.5
-    - type: SpookySpeaker
-      nextSpeakTime: -99.0529052
-    - type: VendingMachineEject
-      nextEmpEject: -99.0529052
-    - type: VendingMachine
-      inventory:
-        DrinkGlass:
-          type: Regular
-          id: null
-          amount: 20
-        DrinkShotGlass:
-          type: Regular
-          id: null
-          amount: 10
-        DrinkGlassCoupeShaped:
-          type: Regular
-          id: null
-          amount: 10
-        DrinkVacuumFlask:
-          type: Regular
-          id: null
-          amount: 5
-        DrinkFlaskBar:
-          type: Regular
-          id: null
-          amount: 5
-        DrinkShaker:
-          type: Regular
-          id: null
-          amount: 5
-        DrinkJigger:
-          type: Regular
-          id: null
-          amount: 5
-        DrinkIceBucket:
-          type: Regular
-          id: null
-          amount: 2
-        BarSpoon:
-          type: Regular
-          id: null
-          amount: 3
-        CustomDrinkJug:
-          type: Regular
-          id: null
-          amount: 2
-        DrinkCampariBottleFull:
-          type: Regular
-          id: null
-          amount: 5
-        DrinkAbsintheBottleFull:
-          type: Regular
-          id: null
-          amount: 2
-        DrinkAleBottleFull:
-          type: Regular
-          id: null
-          amount: 5
-        DrinkBeerBottleFull:
-          type: Regular
-          id: null
-          amount: 6
-        DrinkBlueCuracaoBottleFull:
-          type: Regular
-          id: null
-          amount: 2
-        DrinkCognacBottleFull:
-          type: Regular
-          id: null
-          amount: 4
-        DrinkCoconutWaterCarton:
-          type: Regular
-          id: null
-          amount: 3
-        DrinkColaBottleFull:
-          type: Regular
-          id: null
-          amount: 4
-        DrinkEnergyDrinkCan:
-          type: Regular
-          id: null
-          amount: 8
-        DrinkMilkCarton:
-          type: Regular
-          id: null
-          amount: 2
-        DrinkCreamCarton:
-          type: Regular
-          id: null
-          amount: 5
-        DrinkGinBottleFull:
-          type: Regular
-          id: null
-          amount: 3
-        DrinkGildlagerBottleFull:
-          type: Regular
-          id: null
-          amount: 2
-        DrinkGrenadineBottleFull:
-          type: Regular
-          id: null
-          amount: 2
-        DrinkJuiceLimeCarton:
-          type: Regular
-          id: null
-          amount: 3
-        DrinkJuiceLemonCarton:
-          type: Regular
-          id: null
-          amount: 3
-        DrinkJuicePineappleCarton:
-          type: Regular
-          id: null
-          amount: 3
-        DrinkJuiceOrangeCarton:
-          type: Regular
-          id: null
-          amount: 3
-        DrinkJuiceTomatoCarton:
-          type: Regular
-          id: null
-          amount: 3
-        DrinkCoffeeLiqueurBottleFull:
-          type: Regular
-          id: null
-          amount: 3
-        DrinkMelonLiquorBottleFull:
-          type: Regular
-          id: null
-          amount: 3
-        DrinkPatronBottleFull:
-          type: Regular
-          id: null
-          amount: 2
-        DrinkRumBottleFull:
-          type: Regular
-          id: null
-          amount: 4
-        DrinkSodaWaterCan:
-          type: Regular
-          id: null
-          amount: 8
-        DrinkSolDryCan:
-          type: Regular
-          id: null
-          amount: 8
-        DrinkSpaceMountainWindBottleFull:
-          type: Regular
-          id: null
-          amount: 3
-        DrinkSpaceUpBottleFull:
-          type: Regular
-          id: null
-          amount: 3
-        DrinkTequilaBottleFull:
-          type: Regular
-          id: null
-          amount: 3
-        DrinkTonicWaterCan:
-          type: Regular
-          id: null
-          amount: 8
-        DrinkVermouthBottleFull:
-          type: Regular
-          id: null
-          amount: 5
-        DrinkVodkaBottleFull:
-          type: Regular
-          id: null
-          amount: 5
-        DrinkWhiskeyBottleFull:
-          type: Regular
-          id: null
-          amount: 5
-        DrinkWineBottleFull:
-          type: Regular
-          id: null
-          amount: 5
-        DrinkChampagneBottleFull:
-          type: Regular
-          id: null
-          amount: 2
-        DrinkSakeBottleFull:
-          type: Regular
-          id: null
-          amount: 3
-        DrinkBeerCan:
-          type: Regular
-          id: null
-          amount: 9
-        DrinkWineCan:
-          type: Regular
-          id: null
-          amount: 5
-      contrabandInventory:
-        ChemistryBottleEthanol:
-          type: Contraband
-          id: null
-          amount: 3
-        DrinkBottleOfNothingFull:
-          type: Contraband
-          id: null
-          amount: 1
-        DrinkPoisonWinebottleFull:
-          type: Contraband
-          id: null
-          amount: 2
-    - type: ActionGrant
-      actionEntities:
-      - 719
-    - type: Vocalizer
-      nextVocalizeInterval: 67.5824862
-    - type: Actions
-      actions:
-      - 719
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 719
-- proto: VendingMachineChefvend
-  entities:
-  - uid: 712
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 1
-      pos: -4.5,-18.5
-    - type: SpookySpeaker
-      nextSpeakTime: -99.0529052
-    - type: VendingMachineEject
-      nextEmpEject: -99.0529052
-    - type: VendingMachine
-      inventory:
-        ReagentContainerFlour:
-          type: Regular
-          id: null
-          amount: 2
-        ReagentContainerCornmeal:
-          type: Regular
-          id: null
-          amount: 2
-        ReagentContainerSugar:
-          type: Regular
-          id: null
-          amount: 2
-        ReagentContainerRice:
-          type: Regular
-          id: null
-          amount: 2
-        FoodCondimentPacketSalt:
-          type: Regular
-          id: null
-          amount: 4
-        FoodCondimentBottleEnzyme:
-          type: Regular
-          id: null
-          amount: 2
-        FoodCondimentBottleHotsauce:
-          type: Regular
-          id: null
-          amount: 1
-        FoodCondimentBottleKetchup:
-          type: Regular
-          id: null
-          amount: 1
-        FoodCondimentBottleBBQ:
-          type: Regular
-          id: null
-          amount: 1
-        FoodCondimentBottleVinegar:
-          type: Regular
-          id: null
-          amount: 2
-        ReagentContainerOliveoil:
-          type: Regular
-          id: null
-          amount: 2
-        ReagentContainerMayo:
-          type: Regular
-          id: null
-          amount: 1
-        VariantCubeBox:
-          type: Regular
-          id: null
-          amount: 1
-        FoodContainerEgg:
-          type: Regular
-          id: null
-          amount: 1
-        DrinkMilkCarton:
-          type: Regular
-          id: null
-          amount: 2
-        DrinkSoyMilkCarton:
-          type: Regular
-          id: null
-          amount: 1
-        FoodButter:
-          type: Regular
-          id: null
-          amount: 3
-        FoodCheese:
-          type: Regular
-          id: null
-          amount: 1
-        FoodMeat:
-          type: Regular
-          id: null
-          amount: 6
-      emaggedInventory:
-        FoodMeatDragon:
-          type: Emagged
-          id: null
-          amount: 2
-      contrabandInventory:
-        EggBoxBroken:
-          type: Contraband
-          id: null
-          amount: 1
-        FoodBoxDonkpocket:
-          type: Contraband
-          id: null
-          amount: 1
-        FoodFrozenSandwich:
-          type: Contraband
-          id: null
-          amount: 2
-        FoodFrozenSandwichStrawberry:
-          type: Contraband
-          id: null
-          amount: 2
-        FoodMeatFish:
-          type: Contraband
-          id: null
-          amount: 3
-        FoodMeatHuman:
-          type: Contraband
-          id: null
-          amount: 3
-        FoodMeatVulpkanin:
-          type: Contraband
-          id: null
-          amount: 3
-        FoodMeatUnath:
-          type: Contraband
-          id: null
-          amount: 3
-        FoodMeatTajaran:
-          type: Contraband
-          id: null
-          amount: 3
-        FoodMeatSwine:
-          type: Contraband
-          id: null
-          amount: 3
-        FoodMeatSlimeJelly:
-          type: Contraband
-          id: null
-          amount: 3
-        FoodMeatResomi:
-          type: Contraband
-          id: null
-          amount: 3
-        FoodMeatNian:
-          type: Contraband
-          id: null
-          amount: 3
-        FoodMeatMilira:
-          type: Contraband
-          id: null
-          amount: 3
-        FoodMeatFelinid:
-          type: Contraband
-          id: null
-          amount: 3
-        FoodMeatDionaRoots:
-          type: Contraband
-          id: null
-          amount: 3
-        FoodMeatDemon:
-          type: Contraband
-          id: null
-          amount: 3
-        FoodMeatClown:
-          type: Contraband
-          id: null
-          amount: 2
-        FoodMeatAnomaly:
-          type: Contraband
-          id: null
-          amount: 1
-    - type: AccessReader
-      accessListsOriginal:
-      - - Service
-    - type: ActionGrant
-      actionEntities:
-      - 713
-    - type: Vocalizer
-      nextVocalizeInterval: 517.239036
-    - type: Actions
-      actions:
-      - 713
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 713
-- proto: VendingMachineDinnerware
-  entities:
-  - uid: 720
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 1
-      pos: -4.5,-17.5
-    - type: SpookySpeaker
-      nextSpeakTime: -99.0529052
-    - type: VendingMachineEject
-      nextEmpEject: -99.0529052
-    - type: VendingMachine
-      inventory:
-        ButchCleaver:
-          type: Regular
-          id: null
-          amount: 1
-        KitchenKnife:
-          type: Regular
-          id: null
-          amount: 5
-        RollingPin:
-          type: Regular
-          id: null
-          amount: 4
-        Spoon:
-          type: Regular
-          id: null
-          amount: 4
-        Fork:
-          type: Regular
-          id: null
-          amount: 4
-        PairedChopsticks:
-          type: Regular
-          id: null
-          amount: 4
-        FoodBowlBig:
-          type: Regular
-          id: null
-          amount: 10
-        FoodPlate:
-          type: Regular
-          id: null
-          amount: 10
-        FoodPlateSmall:
-          type: Regular
-          id: null
-          amount: 10
-        FoodPlateTin:
-          type: Regular
-          id: null
-          amount: 5
-        FoodPlateMuffinTin:
-          type: Regular
-          id: null
-          amount: 5
-        FoodKebabSkewer:
-          type: Regular
-          id: null
-          amount: 5
-        DrinkGlass:
-          type: Regular
-          id: null
-          amount: 5
-        Beaker:
-          type: Regular
-          id: null
-          amount: 5
-        LargeBeaker:
-          type: Regular
-          id: null
-          amount: 5
-        Pitcher:
-          type: Regular
-          id: null
-          amount: 2
-        DrinkMug:
-          type: Regular
-          id: null
-          amount: 5
-        DrinkMugBlack:
-          type: Regular
-          id: null
-          amount: 2
-        DrinkMugBlue:
-          type: Regular
-          id: null
-          amount: 2
-        DrinkMugGreen:
-          type: Regular
-          id: null
-          amount: 2
-        DrinkMugHeart:
-          type: Regular
-          id: null
-          amount: 1
-        DrinkMugMetal:
-          type: Regular
-          id: null
-          amount: 2
-        DrinkMugMoebius:
-          type: Regular
-          id: null
-          amount: 1
-        DrinkMugOne:
-          type: Regular
-          id: null
-          amount: 1
-        DrinkMugRainbow:
-          type: Regular
-          id: null
-          amount: 2
-        DrinkMugRed:
-          type: Regular
-          id: null
-          amount: 2
-      contrabandInventory:
-        CandyBowl:
-          type: Contraband
-          id: null
-          amount: 1
-        BarSpoon:
-          type: Contraband
-          id: null
-          amount: 2
-        DrinkShaker:
-          type: Contraband
-          id: null
-          amount: 2
-    - type: ActionGrant
-      actionEntities:
-      - 721
-    - type: Vocalizer
-      nextVocalizeInterval: 125.0651927
-    - type: Actions
-      actions:
-      - 721
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 721
-- proto: VendingMachineMedical
-  entities:
-  - uid: 714
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 1
-      pos: 7.5,-46.5
-    - type: VendingMachineEject
-      nextEmpEject: -99.0529052
-    - type: SpookySpeaker
-      nextSpeakTime: -99.0529052
-    - type: VendingMachine
-      inventory:
-        HandheldHealthAnalyzer:
-          type: Regular
-          id: null
-          amount: 3
-        Gauze:
-          type: Regular
-          id: null
-          amount: 5
-        Brutepack:
-          type: Regular
-          id: null
-          amount: 5
-        Ointment:
-          type: Regular
-          id: null
-          amount: 5
-        Bloodpack:
-          type: Regular
-          id: null
-          amount: 5
-        Tourniquet:
-          type: Regular
-          id: null
-          amount: 2
-        ChemistryBottleEpinephrine:
-          type: Regular
-          id: null
-          amount: 3
-        ChemistryBottleBicaridine:
-          type: Regular
-          id: null
-          amount: 1
-        Syringe:
-          type: Regular
-          id: null
-          amount: 5
-        JetInjector:
-          type: Regular
-          id: null
-          amount: 2
-        BoxBottle:
-          type: Regular
-          id: null
-          amount: 3
-        PillCanisterTricordrazine:
-          type: Regular
-          id: null
-          amount: 3
-        PillCanisterIron:
-          type: Regular
-          id: null
-          amount: 1
-        PillCanisterCopper:
-          type: Regular
-          id: null
-          amount: 1
-        PillCanisterPotassiumIodide:
-          type: Regular
-          id: null
-          amount: 1
-        SyringeIpecac:
-          type: Regular
-          id: null
-          amount: 1
-        ClothingEyesHudMedical:
-          type: Regular
-          id: null
-          amount: 2
-        ClothingEyesEyepatchHudMedical:
-          type: Regular
-          id: null
-          amount: 2
-        Ampula:
-          type: Regular
-          id: null
-          amount: 5
-        Dropper:
-          type: Regular
-          id: null
-          amount: 2
-        BaseChemistryEmptyVial:
-          type: Regular
-          id: null
-          amount: 2
-        PatchPack:
-          type: Regular
-          id: null
-          amount: 3
-        PatchPackBrute:
-          type: Regular
-          id: null
-          amount: 1
-        PatchPackHeat:
-          type: Regular
-          id: null
-          amount: 1
-        PatchBrute:
-          type: Regular
-          id: null
-          amount: 3
-        PatchBruteSmall:
-          type: Regular
-          id: null
-          amount: 6
-        PatchBurn:
-          type: Regular
-          id: null
-          amount: 3
-        PatchBurnSmall:
-          type: Regular
-          id: null
-          amount: 6
-      emaggedInventory:
-        Stimpack:
-          type: Emagged
-          id: null
-          amount: 2
-        PatchOmni:
-          type: Emagged
-          id: null
-          amount: 2
-        PatchPack:
-          type: Emagged
-          id: null
-          amount: 2
-      contrabandInventory:
-        PillCanisterRandom:
-          type: Contraband
-          id: null
-          amount: 3
-        PillSpaceDrugs:
-          type: Contraband
-          id: null
-          amount: 3
-        FoodApple:
-          type: Contraband
-          id: null
-          amount: 1
-        PatchMedical:
-          type: Contraband
-          id: null
-          amount: 6
-    - type: ActionGrant
-      actionEntities:
-      - 715
-    - type: Vocalizer
-      nextVocalizeInterval: 338.941007
-    - type: Actions
-      actions:
-      - 715
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 715
-- proto: VendingMachineSec
-  entities:
-  - uid: 716
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 1
-      pos: -3.5,-65.5
-    - type: SpookySpeaker
-      nextSpeakTime: -99.0529052
-    - type: VendingMachineEject
-      nextEmpEject: -99.0529052
-    - type: VendingMachine
-      inventory:
-        SecurityWhistle:
-          type: Regular
-          id: null
-          amount: 5
-        Handcuffs:
-          type: Regular
-          id: null
-          amount: 8
-        GrenadeFlashBang:
-          type: Regular
-          id: null
-          amount: 4
-        TearGasGrenade:
-          type: Regular
-          id: null
-          amount: 4
-        ClusterBangFull:
-          type: Regular
-          id: null
-          amount: 2
-        GrenadeStinger:
-          type: Regular
-          id: null
-          amount: 4
-        Flash:
-          type: Regular
-          id: null
-          amount: 5
-        Tourniquet:
-          type: Regular
-          id: null
-          amount: 12
-        FlashlightSeclite:
-          type: Regular
-          id: null
-          amount: 5
-        ClothingEyesGlassesSunglasses:
-          type: Regular
-          id: null
-          amount: 2
-        ClothingEyesHudSecurity:
-          type: Regular
-          id: null
-          amount: 2
-        ClothingEyesEyepatchHudSecurity:
-          type: Regular
-          id: null
-          amount: 2
-        ClothingBeltSecurityWebbing:
-          type: Regular
-          id: null
-          amount: 5
-        CombatKnife:
-          type: Regular
-          id: null
-          amount: 3
-        Zipties:
-          type: Regular
-          id: null
-          amount: 12
-        RiotShield:
-          type: Regular
-          id: null
-          amount: 2
-        RiotLaserShield:
-          type: Regular
-          id: null
-          amount: 2
-        RiotBulletShield:
-          type: Regular
-          id: null
-          amount: 2
-        RadioHandheldSecurity:
-          type: Regular
-          id: null
-          amount: 5
-        BolaSecurity:
-          type: Regular
-          id: null
-          amount: 5
-        HandheldCamera:
-          type: Regular
-          id: null
-          amount: 3
-      emaggedInventory:
-        ClothingEyesGlassesNVG:
-          type: Emagged
-          id: null
-          amount: 2
-        SmokeGrenade:
-          type: Emagged
-          id: null
-          amount: 2
-      contrabandInventory:
-        WeaponMeleeNeedle:
-          type: Contraband
-          id: null
-          amount: 2
-        FoodDonutHomer:
-          type: Contraband
-          id: null
-          amount: 12
-        FoodBoxDonut:
-          type: Contraband
-          id: null
-          amount: 2
-        ModularReceiverAuto:
-          type: Contraband
-          id: null
-          amount: 1
-    - type: ActionGrant
-      actionEntities:
-      - 717
-    - type: Vocalizer
-      nextVocalizeInterval: 312.2572998
-    - type: Actions
-      actions:
-      - 717
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 717
 - proto: VendingMachineSecDrobe
   entities:
   - uid: 3529
@@ -45005,74 +44551,6 @@ entities:
       parent: 1
       rot: 3.141592653589793 rad
       pos: 13.5,-60.5
-- proto: WindoorCommandLocked
-  entities:
-  - uid: 2042
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 1
-      pos: 2.5,-1.5
-    - type: WiresPanelSecurity
-      wiresAccessible: False
-      examine: wires-panel-component-on-examine-security-level2
-    - type: Construction
-      node: medSecurity
-    - type: DeviceNetwork
-      receiveFrequency: 1280
-      address: 2E3A-9E09
-    - type: ContainerContainer
-      containers:
-        board: !type:Container
-          ents:
-          - 2043
-          showEnts: False
-          occludes: True
-  - uid: 2044
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 1
-      pos: 1.5,-1.5
-    - type: WiresPanelSecurity
-      wiresAccessible: False
-      examine: wires-panel-component-on-examine-security-level2
-    - type: Construction
-      node: medSecurity
-    - type: DeviceNetwork
-      receiveFrequency: 1280
-      address: 5C23-CB89
-    - type: ContainerContainer
-      containers:
-        board: !type:Container
-          ents:
-          - 2045
-          showEnts: False
-          occludes: True
-  - uid: 2046
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 1
-      pos: 0.5,-1.5
-    - type: WiresPanelSecurity
-      wiresAccessible: False
-      examine: wires-panel-component-on-examine-security-level2
-    - type: Construction
-      node: medSecurity
-    - type: DeviceNetwork
-      receiveFrequency: 1280
-      address: 50F1-0648
-    - type: ContainerContainer
-      containers:
-        board: !type:Container
-          ents:
-          - 2047
-          showEnts: False
-          occludes: True
 - proto: WindowReinforcedDirectional
   entities:
   - uid: 478
