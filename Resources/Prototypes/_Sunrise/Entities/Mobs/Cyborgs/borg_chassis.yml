@@ -104,7 +104,7 @@
     voice: Sentrybot
   - type: Access
     groups: [AllAccess]
-    tags: [CentralCommand]
+    tags: [Borg, CentralCommand] # Borg - турели не должны стрелять по боргу
   - type: RandomMetadata
     nameSegments: [NamesBorg]
   - type: MovementSpeedModifier
