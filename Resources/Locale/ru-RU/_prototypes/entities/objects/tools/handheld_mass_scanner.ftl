@@ -8,3 +8,4 @@ ent-HandHeldMassScannerBorg = { ent-HandHeldMassScanner }
     .desc = { ent-HandHeldMassScanner.desc }
 ent-HandHeldMassScannerUnpowered = сканер массы киборга
     .desc = Ручной сканер массы, работающий от ваших собственных элементов питания.
+    .suffix = Ручной, всегда включён

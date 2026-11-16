@@ -20,7 +20,7 @@ namespace Content.Client.Lobby.UI.Roles;
 [GenerateTypedNameReferences]
 public sealed partial class RequirementsSelector : BoxContainer
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
     private readonly RadioOptions<int> _options;
     private readonly StripeBack _lockStripe;
     private List<ProtoId<GuideEntryPrototype>>? _guides;

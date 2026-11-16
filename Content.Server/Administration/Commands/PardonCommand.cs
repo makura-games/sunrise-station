@@ -6,10 +6,10 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands
 {
     [AdminCommand(AdminFlags.Ban)]
-    public sealed class PardonCommand : LocalizedCommands
+    public sealed partial class PardonCommand : LocalizedCommands
     {
-        [Dependency] private readonly IServerDbManager _dbManager = default!;
-        [Dependency] private readonly IBanManager _banManager = default!; // Sunrise-Edit
+        [Dependency] private IServerDbManager _dbManager = default!;
+        [Dependency] private IBanManager _banManager = default!; // Sunrise-Edit
 
         public override string Command => "pardon";
 

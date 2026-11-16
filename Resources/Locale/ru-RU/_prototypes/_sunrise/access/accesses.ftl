@@ -1,3 +1,8 @@
+id-card-access-level-iaa = Внутренние дела
+id-card-access-level-brigmedic = Бригмедик
+id-card-access-level-cadet = Кадет
+id-card-access-level-robotics = Робототехника
+id-card-access-level-pirate = Пиратский
 id-card-access-level-blueshield = Синий Щит
 id-card-access-level-blueshield-ensign = Лейтенант Синего Щита
 id-card-access-level-ntrep = Представитель NT
@@ -7,8 +12,3 @@ id-card-access-level-mail = Почтальйон
 id-card-access-level-cargo-purchase-access = Снабжение: заказы
 id-card-access-level-research-console-access = Науч. исследования
 id-card-access-level-mining = Шахтёр
-id-card-access-level-iaa = Внутренние дела
-id-card-access-level-brigmedic = Бригмедик
-id-card-access-level-cadet = Кадет
-id-card-access-level-robotics = Робототехника
-id-card-access-level-pirate = Пиратский

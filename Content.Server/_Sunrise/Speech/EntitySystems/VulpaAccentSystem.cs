@@ -1,14 +1,13 @@
 using System.Text.RegularExpressions;
 using Content.Server._Sunrise.Speech.Components;
-using Content.Server.Speech;
 using Content.Shared.Speech;
 using Robust.Shared.Random;
 
 namespace Content.Server._Sunrise.Speech.EntitySystems;
 
-public sealed class VulpaAccentSystem : EntitySystem
+public sealed partial class VulpaAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private static readonly Regex LowerErRegex = new("р+");
     private static readonly Regex UpperErRegex = new("Р+");
@@ -19,7 +18,7 @@ public sealed class VulpaAccentSystem : EntitySystem
         SubscribeLocalEvent<VulpaAccentComponent, AccentGetEvent>(OnAccent);
     }
 
-    private void OnAccent(EntityUid uid, VulpaAccentComponent component, AccentGetEvent args)
+    private void OnAccent(Entity<VulpaAccentComponent> ent, ref AccentGetEvent args)
     {
         var message = args.Message;
 

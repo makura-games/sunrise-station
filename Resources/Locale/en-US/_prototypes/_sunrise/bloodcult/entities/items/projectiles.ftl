@@ -1,4 +1,4 @@
-ent-BloodBoil = Blood Boil
+ent-BloodBoil = blood Boil
     .desc = { ent-BaseBullet.desc }
-ent-BloodBolt = Blood
+ent-BloodBolt = blood
     .desc = { ent-BaseBullet.desc }

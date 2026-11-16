@@ -4,7 +4,7 @@
   suffix: Pirate
   components:
   - type: Sprite
-    sprite: Objects/Tools/access_breaker.rsi
+    sprite: _Sunrise/Objects/Tools/access_breaker.rsi
     state: icon-pirate
 
 - type: entity

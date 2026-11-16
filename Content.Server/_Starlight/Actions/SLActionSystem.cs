@@ -10,9 +10,9 @@ namespace Content.Server._Starlight.Actions;
 
 public sealed partial class SLActionSystem : EntitySystem
 {
-    [Dependency] private readonly IReflectionManager _reflection = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
+    [Dependency] private IReflectionManager _reflection = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private ActionsSystem _actions = default!;
 
     private static MethodInfo? s_handlerMethod;
     public override void Initialize()

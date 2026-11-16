@@ -1,0 +1,330 @@
+{
+  "a": {
+    "state": "OPEN",
+    "isDraft": false,
+    "latestOpinionatedReviews": [
+      {
+        "id": "review-1",
+        "state": "CHANGES_REQUESTED",
+        "submittedAt": "2026-09-04T13:33:32Z",
+        "authorCanPushToRepository": true,
+        "author": {
+          "login": "reviewer-1"
+        }
+      }
+    ],
+    "reviewThreads": [
+      {
+        "isResolved": true,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-2",
+                "state": "COMMENTED",
+                "author": {
+                  "login": "reviewer-2"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "isResolved": false,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-2",
+                "state": "COMMENTED",
+                "author": {
+                  "login": "reviewer-2"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "isResolved": false,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-1",
+                "state": "CHANGES_REQUESTED",
+                "author": {
+                  "login": "reviewer-1"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "b": {
+    "state": "OPEN",
+    "isDraft": false,
+    "latestOpinionatedReviews": [
+      {
+        "id": "review-1",
+        "state": "CHANGES_REQUESTED",
+        "submittedAt": "2026-08-28T16:59:23Z",
+        "authorCanPushToRepository": true,
+        "author": {
+          "login": "reviewer-1"
+        }
+      }
+    ],
+    "reviewThreads": [
+      {
+        "isResolved": true,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-2",
+                "state": "COMMENTED",
+                "author": {
+                  "login": "reviewer-2"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "isResolved": true,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-2",
+                "state": "COMMENTED",
+                "author": {
+                  "login": "reviewer-2"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "isResolved": true,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-2",
+                "state": "COMMENTED",
+                "author": {
+                  "login": "reviewer-2"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "isResolved": true,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-2",
+                "state": "COMMENTED",
+                "author": {
+                  "login": "reviewer-2"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "isResolved": true,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-2",
+                "state": "COMMENTED",
+                "author": {
+                  "login": "reviewer-2"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "isResolved": true,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-3",
+                "state": "COMMENTED",
+                "author": {
+                  "login": "reviewer-1"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "isResolved": true,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-3",
+                "state": "COMMENTED",
+                "author": {
+                  "login": "reviewer-1"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "isResolved": true,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-3",
+                "state": "COMMENTED",
+                "author": {
+                  "login": "reviewer-1"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "isResolved": true,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-4",
+                "state": "COMMENTED",
+                "author": {
+                  "login": "reviewer-1"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "isResolved": true,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-5",
+                "state": "COMMENTED",
+                "author": {
+                  "login": "reviewer-2"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "isResolved": true,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-5",
+                "state": "COMMENTED",
+                "author": {
+                  "login": "reviewer-2"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "isResolved": true,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-1",
+                "state": "CHANGES_REQUESTED",
+                "author": {
+                  "login": "reviewer-1"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "isResolved": true,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-1",
+                "state": "CHANGES_REQUESTED",
+                "author": {
+                  "login": "reviewer-1"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "isResolved": true,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-1",
+                "state": "CHANGES_REQUESTED",
+                "author": {
+                  "login": "reviewer-1"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "isResolved": true,
+        "comments": {
+          "nodes": [
+            {
+              "pullRequestReview": {
+                "id": "review-1",
+                "state": "CHANGES_REQUESTED",
+                "author": {
+                  "login": "reviewer-1"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "c": {
+    "state": "OPEN",
+    "isDraft": true,
+    "latestOpinionatedReviews": [],
+    "reviewThreads": []
+  }
+}

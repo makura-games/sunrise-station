@@ -39,6 +39,7 @@
     ClothingEyesEyepatchHudMedical: 2
     AutoMenderBruteFilled: 1
     AutoMenderBurnFilled: 1
+    MedipenCaseSyndicate: 3
     SpaceMedipen: 1
     PatchPackHeat: 2
     PatchPackBrute: 2
@@ -104,6 +105,7 @@
     PillCanisterCharcoal: 1
     AutoMenderBruteFilled: 1
     AutoMenderBurnFilled: 1
+    MedipenCaseBrigmedic: 2
   contrabandInventory:
     PillCanisterRandom: 1
     ToyFigurineBrigmedic: 1

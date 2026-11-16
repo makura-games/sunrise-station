@@ -138,7 +138,7 @@
 - type: entity
   id: MagazineLightMachineGunMG60
   name: MG60 magazine
-  parent: BaseItem
+  parent: BaseNonCycleableAmmoItem
   components:
   - type: Tag
     tags:

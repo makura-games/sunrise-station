@@ -10,7 +10,7 @@ ent-SunrisePirateMarkerShot30 = 30-second marker
     .desc = { ent-PirateMarkerShot.desc }
 ent-SunrisePirateMarkerShot60 = 60-second marker
     .desc = { ent-PirateMarkerShot.desc }
-ent-BulletEMP = EMP impulse
+ent-BulletEMP = eMP impulse
     .desc = { ent-BaseBulletTrigger.desc }
 ent-RadiationBullet = radiation particle
     .desc = { ent-BaseBullet.desc }
@@ -20,7 +20,7 @@ ent-BulletGrenadeExplosive = explosive grenade
     .desc = { ent-BaseBulletGrenade.desc }
 ent-BulletGrenadeExplosiveShrapnel = shrapnel-explosive grenade
     .desc = Grenade that creates a small but devastating explosion.
-ent-BulletSmokeGrenade = Smoke grenade
+ent-BulletSmokeGrenade = smoke grenade
     .desc = { ent-BaseBulletGrenade.desc }
 ent-BulletTearGasGrenade = tear gase grenade
     .desc = { ent-BulletSmokeGrenade.desc }
@@ -61,7 +61,7 @@ ent-BulletImprovisedGrenadeGlass = glass grenade
 ent-SunriseBulletDisposableTrainingRocket = training rocket
     .desc = A light practice rocket with a blunt, low harm-looking casing.
 
-ent-SunriseBulletDisposableEmpRocket = EMP rocket
+ent-SunriseBulletDisposableEmpRocket = eMP rocket
     .desc = A small rocket with an electromagnetic charge packed into its nose.
 
 ent-SunriseBulletDisposableSmokeRocket = smoke rocket

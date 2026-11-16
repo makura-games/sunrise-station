@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# Sunrise added start - реестр независимо публикуемых чейнджлогов
 import argparse
 import os
 from collections.abc import Mapping
@@ -120,4 +119,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-# Sunrise added end

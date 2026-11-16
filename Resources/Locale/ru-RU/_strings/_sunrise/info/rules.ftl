@@ -1,3 +1,3 @@
 # Rules
 
-ui-rules-header-sunrise = Правила сервера Sunrise
+ui-rules-header-sunrise = Правила сервера Санрайз

@@ -25,7 +25,7 @@
 
 # Boxes
 - type: entity
-  parent: BaseMagazineBoxRifle
+  parent: [ BaseNonCycleableAmmoProvider, BaseMagazineBoxRifle ] # Sunrise-Edit - запрещаем извлекать патроны из вместительных коробок
   id: MagazineBoxRifleBig
   name: ammunition box (.20 rifle SP)
   components:

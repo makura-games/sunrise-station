@@ -1,6 +1,6 @@
 - type: technology
   id: EnergyBarriers
-  name: research-technology-energy_barriers
+  name: research-technology-energy-barriers
   icon:
     sprite: _Sunrise/Objects/Tools/EnergyDome/reinhardt.rsi
     state: icon
@@ -9,6 +9,23 @@
   cost: 6000
   recipeUnlocks:
   - EnergyDomeDirectionalTurtle
+  radioChannels:
+  - Security
+
+- type: technology
+  id: SunriseHolographicLightCrystallization
+  name: research-technology-holographic-light-crystallization
+  icon:
+    sprite: _Starlight/Objects/Weapons/Melee/cybershield.rsi
+    state: shield-icon
+  discipline: Arsenal
+  tier: 2
+  cost: 10000
+  recipeUnlocks:
+  - SunriseEnergyShieldSec
+  technologyPrerequisites:
+  - AdvancedRiotControl
+  - EnergyBarriers
   radioChannels:
   - Security
 
@@ -124,6 +141,9 @@
   - MagazinePistolHighCapacityAP
   - MagazineBoxHeavyRifleAP
   - MagazineRifleHeavyAP
+  technologyPrerequisites:
+  - SunriseFullMetalJacketAmmunition
+  - UraniumMunitions
   radioChannels:
   - Security
 
@@ -174,11 +194,11 @@
   id: Durand
   name: research-technology-durand
   icon:
-    sprite: Objects/Specific/Mech/durand.rsi
+    sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
     state: base
   discipline: Arsenal
-  tier: 3
-  cost: 16000
+  tier: 2
+  cost: 15000
   recipeUnlocks:
   - DurandHarness
   - DurandArmor
@@ -195,6 +215,7 @@
   - PowerCageHigh
   technologyPrerequisites:
   - Gygax
+  - EnergyBarriers
   radioChannels:
   - Security
 
@@ -205,12 +226,13 @@
     sprite: _Sunrise/Objects/Weapons/Guns/Battery/ion_rifle.rsi
     state: base
   discipline: Arsenal
-  tier: 3
-  cost: 15000
+  tier: 2
+  cost: 10000
   recipeUnlocks:
   - WeaponIonCarbine
+  - WeaponMechCombatIon
   technologyPrerequisites:
-  - PortableMicrofusionWeaponry
+  - Gygax
   - ThermalWeaponry
   radioChannels:
   - Security
@@ -227,7 +249,6 @@
 #  recipeUnlocks:
 #  - BaseMagazinePistolCaselessRifleExtended
 #  - MagazinePPSH41Extended
-#  - MagazineMP5Extended
 #  - MagazineMP7Extended
 #  - MagazineRifleExtended
 #  - MagazineDragunovExtended
@@ -252,6 +273,7 @@
   - VestSecUpgradeBullet
   - VestSecUpgradeRiot
   - VestSecUpgradeReflective
+  - PouchAmmo
   technologyPrerequisites:
   - AdvancedRiotControl
   radioChannels:
@@ -269,7 +291,6 @@
   recipeUnlocks:
   - VestSecUpgradeBulletHeavy
   - VestSecUpgradeWeb
-  - LecterMk3Upgrade
   technologyPrerequisites:
   - CombatEquipment
   radioChannels:

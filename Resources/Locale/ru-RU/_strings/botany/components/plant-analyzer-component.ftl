@@ -13,9 +13,11 @@ plant-analyzer-component-mutating = [color=#00ff5f]МУТИРУЕТ[color]
 plant-analyzer-component-kudzu = [color=red]КУДЗУ[color]
 plant-analyzer-soil = В этом { $holder } есть непоглощённые химические вещества: [color=white]{ $chemicals }[/color].
 plant-analyzer-soil-empty = В этом { $holder } нет непоглощенных химических веществ.
-plant-analyzer-component-environemt = Это [color=green]{ $seedName }[/color] требует атмосферы при уровне давления [color=lightblue]{ $kpa }кПа ± { $kpaTolerance }кПа[/color], температуры [color=lightsalmon]{ $temp }°к ± { $tempTolerance }°к[/color] и уровня освещения [color=white]{ $lightLevel } ± { $lightTolerance }[/color].
-plant-analyzer-component-environemt-void = Это [color=green]{ $seedName }[/color] должно выращиваться [bolditalic]в вакууме космоса[/bolditalic] при уровне освещения [color=white]{ $lightLevel } ± { $lightTolerance }[/color].
-plant-analyzer-component-environemt-gas = Это [color=green]{ $seedName }[/color] требует атмосферы, содержащей [bold]{ $gases }[/bold] при уровне давления [color=lightblue]{ $kpa }кПа ± { $kpaTolerance }кПа[/color], температуры [color=lightsalmon]{ $temp }°к ± { $tempTolerance }°к[/color] и уровне освещения [color=white]{ $lightLevel } ± { $lightTolerance }[/color].
+# Sunrise edit start - у растений больше нет требований к освещению.
+plant-analyzer-component-environemt = Это [color=green]{ $seedName }[/color] требует атмосферы при уровне давления [color=lightblue]{ $kpa }кПа ± { $kpaTolerance }кПа[/color] и температуры [color=lightsalmon]{ $temp }°К ± { $tempTolerance }°К[/color].
+plant-analyzer-component-environemt-void = Это [color=green]{ $seedName }[/color] должно выращиваться [bolditalic]в вакууме космоса[/bolditalic].
+plant-analyzer-component-environemt-gas = Это [color=green]{ $seedName }[/color] требует атмосферы, содержащей [bold]{ $gases }[/bold], при уровне давления [color=lightblue]{ $kpa }кПа ± { $kpaTolerance }кПа[/color] и температуры [color=lightsalmon]{ $temp }°К ± { $tempTolerance }°К[/color].
+# Sunrise edit end
 plant-analyzer-produce-plural = { $thing }
 plant-analyzer-output =
     { $yield ->
@@ -85,7 +87,6 @@ plant-analyzer-printout =
     {"    "}[bullet/] Состав: [bold]{$gasesIn}[/bold]
     {"    "}[bullet/] Давление: [color=lightblue]{$kpa}кПа ± {$kpaTolerance}кПа[/color]
     {"    "}[bullet/] Температура: [color=lightsalmon]{$temp}°к ± {$tempTolerance}°к[/color]
-    {"    "}[bullet/] Освещение: [color=gray][bold]{$lightLevel} ± {$lightTolerance}[/bold][/color]
     {"[bullet/]"} Цветы: {$yield ->
         [-1]{LOC("plant-analyzer-printout-missing")}
         [0][color=red]0[/color]

@@ -1,4 +1,4 @@
-﻿ent-RMCStairs = лестница
+ent-RMCStairs = лестница
     .desc = Величайшее изобретение со времён ракетных гранат.
 ent-RMCStairsCorner = { ent-RMCStairs }
     .desc = { ent-RMCStairs.desc }

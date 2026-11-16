@@ -58,6 +58,7 @@
   name: murmillo MOD-boots
   description: Heavy pirate magnetic boots with a Murmillo hardsuit ready to deploy without a MOD core.
   suffix: Pirate, MOD, Active
+  categories: [ HideSpawnMenu ]
   components:
   - type: ContainerContainer
     containers:
@@ -72,6 +73,7 @@
   name: murmillo MOD-boots
   description: Heavy pirate magnetic boots with a Murmillo hardsuit deployment system awaiting a MOD core.
   suffix: Pirate, MOD, Inactive
+  categories: [ HideSpawnMenu ]
   components:
   - type: ItemSlots
     slots:
@@ -94,7 +96,25 @@
   name: murmillo MOD-boots
   description: Heavy pirate magnetic boots containing a damaged Murmillo hardsuit and awaiting a MOD core.
   suffix: Pirate, MOD, Damaged, Inactive
+  categories: [ HideSpawnMenu ]
   components:
+  - type: ToggleableClothing
+    clothingPrototype: ClothingOuterHardsuitMurmilloDamaged
+
+- type: entity
+  parent: BaseSunriseClothingShoesBootsMagPirateMurmillo
+  id: SunriseClothingShoesBootsMagPirateMurmilloDamagedActive
+  name: murmillo MOD-boots
+  description: Heavy pirate magnetic boots with a damaged Murmillo hardsuit ready to deploy without a MOD core.
+  suffix: Pirate, MOD, Damaged, Active
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot
+      item: !type:ContainerSlot
+  - type: Modsuit
+    isActivated: true
   - type: ToggleableClothing
     clothingPrototype: ClothingOuterHardsuitMurmilloDamaged
 

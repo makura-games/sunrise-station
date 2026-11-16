@@ -8,10 +8,10 @@ namespace Content.Server.GenericAntag;
 /// Handles adding objectives to <see cref="GenericAntagComponent"/>s.
 /// Roundend summary is handled by <see cref="GenericAntagRuleSystem"/>.
 /// </summary>
-public sealed class GenericAntagSystem : EntitySystem
+public sealed partial class GenericAntagSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly GenericAntagRuleSystem _genericAntagRule = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private GenericAntagRuleSystem _genericAntagRule = default!;
 
     public override void Initialize()
     {

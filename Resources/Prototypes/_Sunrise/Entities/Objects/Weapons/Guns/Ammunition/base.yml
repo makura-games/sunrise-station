@@ -1,0 +1,11 @@
+- type: entity
+  id: BaseNonCycleableAmmoProvider
+  abstract: true
+  components:
+  - type: BallisticAmmoProvider
+    cycleable: false
+
+- type: entity
+  id: BaseNonCycleableAmmoItem
+  parent: [ BaseNonCycleableAmmoProvider, BaseItem ]
+  abstract: true

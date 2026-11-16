@@ -1,6 +1,6 @@
 using Robust.Shared.Player;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Administration.Managers;
 
 internal static class SunriseAdminPermissionsGuard

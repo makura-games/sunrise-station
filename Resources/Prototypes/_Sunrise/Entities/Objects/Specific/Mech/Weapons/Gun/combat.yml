@@ -108,7 +108,7 @@
       params:
         volume: -1
   - type: BatteryAmmoProvider
-    proto: IgnitionRedLaser # Sunrise-TODO: Нужен товый прототип для данной пушки
+    proto: SunriseMechHitscanIgnitionRedLaser
     fireCost: 15
   - type: Appearance
   - type: AmmoCounter

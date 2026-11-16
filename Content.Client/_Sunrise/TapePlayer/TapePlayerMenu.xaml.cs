@@ -11,7 +11,7 @@ namespace Content.Client._Sunrise.TapePlayer;
 [GenerateTypedNameReferences]
 public sealed partial class TapePlayerMenu : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
     private AudioSystem _audioSystem;
 
     /// <summary>

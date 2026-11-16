@@ -7,9 +7,9 @@ using Robust.Shared.GameObjects;
 
 namespace Content.Client._Sunrise.UserInterface.Systems.Messenger;
 
-public sealed class MessengerUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
+public sealed partial class MessengerUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
-    [Dependency] private readonly IEntityNetworkManager _netManager = default!;
+    [Dependency] private IEntityNetworkManager _netManager = default!;
 
     public void OnStateEntered(GameplayState state)
     {

@@ -35,7 +35,7 @@ CHANGELOG_FILE = configured_changelog_file()
 CATEGORY_FILES = {
     MAIN_CATEGORY: CHANGELOG_FILE.name,
 }
-WORKFLOW_FILE = "changelog.yml"
+WORKFLOW_FILE = "sunrise-changelog.yml"
 PARTS_PATH = Path("Resources/Changelog/Parts")
 CHANGELOG_PATH = CHANGELOG_FILE.parent
 PULL_REQUEST_TEMPLATE_PATH = Path(".github/PULL_REQUEST_TEMPLATE.md")

@@ -1,3 +1,5 @@
+ent-OrganMothStomach = { ent-OrganAnimalStomach }
+    .desc = { ent-OrganAnimalStomach.desc }
 ent-OrganMothBrain = { ent-OrganHumanBrain }
     .desc = { ent-OrganHumanBrain.desc }
 ent-OrganMothEyes = { ent-OrganHumanEyes }
@@ -12,8 +14,6 @@ ent-OrganMothLungs = { ent-OrganHumanLungs }
     .desc = { ent-OrganHumanLungs.desc }
 ent-OrganMothHeart = { ent-OrganAnimalHeart }
     .desc = { ent-OrganAnimalHeart.desc }
-ent-OrganMothStomach = { ent-OrganAnimalStomach }
-    .desc = { ent-OrganAnimalStomach.desc }
 ent-OrganMothLiver = { ent-OrganAnimalLiver }
     .desc = { ent-OrganAnimalLiver.desc }
 ent-OrganMothKidneys = { ent-OrganAnimalKidneys }

@@ -5,9 +5,9 @@ using Content.Shared.Weapons.Ranged.Events;
 
 namespace Content.Shared._Sunrise.Electrocution;
 
-public sealed class InsulatedGunSystem : EntitySystem
+public sealed partial class InsulatedGunSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -23,7 +23,7 @@ public sealed class InsulatedGunSystem : EntitySystem
         if (!ent.Comp.PreventOperatingGuns || args.Args.Used.Comp.BigTrigger)
             return;
 
-        _popup.PopupPredicted(Loc.GetString("gun-Insulated-gloves"), args.Args.User, args.Args.User);
+        _popup.PopupEntity(Loc.GetString("gun-Insulated-gloves"), args.Args.User);
         args.Args.Cancel();
     }
 }

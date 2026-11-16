@@ -4,9 +4,9 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared._Sunrise.Execution;
 using Content.Shared.Body.Components;
-using Content.Shared.Kitchen.Components;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Tools.Components;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
@@ -26,25 +26,25 @@ using Content.Shared.Explosion.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Weapons.Hitscan.Components;
 using Robust.Shared.Random;
+using Content.Shared.Body.Systems;
 
 namespace Content.Server._Sunrise.Execution;
 
 public sealed partial class ExecutionSystem : SharedExecutionSystem
 {
-    [Dependency] private readonly ContainerSystem _containerSystem = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly TransformSystem _transformSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly AudioSystem _audioSystem = default!;
-    [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstreamSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
-    [Dependency] private readonly SharedGunSystem _gunSystem = default!;
+    [Dependency] private ContainerSystem _containerSystem = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private TransformSystem _transformSystem = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
+    [Dependency] private AppearanceSystem _appearanceSystem = default!;
+    [Dependency] private AudioSystem _audioSystem = default!;
+    [Dependency] private ExplosionSystem _explosionSystem = default!;
+    [Dependency] private BloodstreamSystem _bloodstreamSystem = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MobStateSystem _mobStateSystem = default!;
+    [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
+    [Dependency] private SharedGunSystem _gunSystem = default!;
 
     private const float OverkillFractionMin = 0.05f;
     private const float OverkillFractionMax = 0.20f;
@@ -65,13 +65,16 @@ public sealed partial class ExecutionSystem : SharedExecutionSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SharpComponent, ExecutionDoAfterEvent>(OnDoafterMelee);
+        SubscribeLocalEvent<ToolComponent, ExecutionDoAfterEvent>(OnDoafterMelee);
         SubscribeLocalEvent<GunComponent, ExecutionDoAfterEvent>(OnDoafterGun);
     }
 
-    private void OnDoafterMelee(Entity<SharpComponent> ent, ref ExecutionDoAfterEvent args)
+    private void OnDoafterMelee(Entity<ToolComponent> ent, ref ExecutionDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled || args.Used == null || args.Target == null)
+            return;
+
+        if (!IsSlicingTool(ent))
             return;
 
         var attacker = args.User;
@@ -132,7 +135,7 @@ public sealed partial class ExecutionSystem : SharedExecutionSystem
         if (attemptEv.Cancelled)
         {
             if (attemptEv.Message != null)
-                _popupSystem.PopupClient(attemptEv.Message, weapon, attacker);
+                _popupSystem.PopupEntity(attemptEv.Message, weapon, attacker);
             return;
         }
 
@@ -183,7 +186,7 @@ public sealed partial class ExecutionSystem : SharedExecutionSystem
         {
             //🌟Starlight🌟 start
             case HitScanCartridgeAmmoComponent cartridge:
-                var hitscanProto = _prototypeManager.Index(cartridge.Hitscan);
+                var hitscanProto = ProtoMan.Index(cartridge.Hitscan);
                 firedPrototypeId = cartridge.Hitscan.Id;
 
                 if (hitscanProto.Damage is not null)
@@ -200,7 +203,7 @@ public sealed partial class ExecutionSystem : SharedExecutionSystem
                 break;
             //🌟Starlight🌟 end
             case CartridgeAmmoComponent cartridge:
-                var prototype = _prototypeManager.Index<EntityPrototype>(cartridge.Prototype);
+                var prototype = ProtoMan.Index<EntityPrototype>(cartridge.Prototype);
                 firedPrototypeId = cartridge.Prototype.Id;
                 prototype.TryGetComponent<ProjectileComponent>(out var projectilePrototype, _componentFactory);
 
@@ -285,7 +288,7 @@ public sealed partial class ExecutionSystem : SharedExecutionSystem
 
         if (isExplosive && forceLethal)
         {
-            var explosionType = _prototypeManager.Index(explosiveToTrigger!.Value.ExplosionType);
+            var explosionType = ProtoMan.Index(explosiveToTrigger!.Value.ExplosionType);
             ApplyExecutionDamage(victim, weapon, explosionType.DamagePerIntensity, forceLethal: true, ExplosiveOverkillFractionMin, ExplosiveOverkillFractionMax);
 
             if (TryComp<BloodstreamComponent>(victim, out var bloodstream))
