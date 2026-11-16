@@ -2,7 +2,8 @@
 
 import os
 import subprocess
-import requests
+
+from discord_notifications.transport import send_message
 
 DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
 DISCORD_ROLE_ID = os.environ.get("DISCORD_ROLE_ID")
@@ -52,9 +53,8 @@ def main():
         "allowed_mentions": {"roles": [DISCORD_ROLE_ID]}
     }
 
-    response = requests.post(DISCORD_WEBHOOK_URL, json=payload)
-    if response.status_code not in (200, 204):
-        print(f"Ошибка отправки: {response.status_code} {response.text}")
+    send_message(DISCORD_WEBHOOK_URL, payload)
+    print(f"Отправлено объявление об обновлении сервера: версия {build_hash}.")
 
 if __name__ == "__main__":
     main()

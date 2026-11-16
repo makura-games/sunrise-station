@@ -10,11 +10,11 @@ using Content.Shared.Clothing;
 
 namespace Content.Shared.Sunrise.Clothing.EntitySystems;
 
-public sealed class WeldingMaskSystem : EntitySystem
+public sealed partial class WeldingMaskSystem : EntitySystem
 {
-    [Dependency] private readonly ClothingSystem _clothing = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly SharedDarkenedVisionSystem _darkenedVision = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private SharedDarkenedVisionSystem _darkenedVision = default!;
 
     public override void Initialize()
     {

@@ -57,12 +57,12 @@ public sealed partial class MessengerUiFragment : BoxContainer
     private HashSet<string>? _lastGroupIds;
     private HashSet<string>? _lastPinnedChats;
     private int _lastActiveTab = -1;
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly NetTexturesManager _netTexturesManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private NetTexturesManager _netTexturesManager = default!;
 
     private CreateGroupDialog? _createGroupDialog;
     private AddUserDialog? _addUserDialog;

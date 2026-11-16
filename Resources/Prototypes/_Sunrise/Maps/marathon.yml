@@ -81,6 +81,7 @@
             #law
             IAA: [ 1, 1 ]
             Lawyer: [ 2, 3 ]
+            NtrOfficer: [1, 2]
             # silicon
             StationAi: [ 1, 1 ]
             Borg: [ 3, 3 ]
@@ -103,7 +104,6 @@
           - MiningOutpost
           - Tesla
           - XenobiologyRepair
-          - VirusologyAmbusol
           - Containment
           - WeaponsSecurity
           - MaintsRepair

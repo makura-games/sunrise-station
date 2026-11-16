@@ -15,7 +15,3 @@ ent-MobCarpServantDragon = servant dragon carp
 
 ent-MobCarpHoloDragon = holocarp
     .desc = { ent-MobCarpHolo.desc }
-ent-MobCarpRainbowDragon = rainbow carp
-    .desc = { ent-MobCarpRainbow.desc }
-ent-MobSharkDragon = sharkminnow
-    .desc = { ent-MobShark.desc }

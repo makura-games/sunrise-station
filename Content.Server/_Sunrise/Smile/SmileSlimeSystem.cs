@@ -1,4 +1,4 @@
-﻿using Content.Shared._Sunrise.Smile;
+using Content.Shared._Sunrise.Smile;
 using Content.Shared.Damage;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
@@ -20,17 +20,17 @@ using Content.Shared.Body;
 
 namespace Content.Server._Sunrise.Smile;
 
-public sealed class SmileSlimeSystem : EntitySystem
+public sealed partial class SmileSlimeSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly EntityManager _entMan = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private EntityManager _entMan = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
 
     private TimeSpan _nextTick = TimeSpan.Zero;
     private readonly TimeSpan _refreshCooldown = TimeSpan.FromSeconds(5);

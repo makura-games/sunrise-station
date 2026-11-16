@@ -1,7 +1,7 @@
 - type: gameMap
   id: SunriseSerpentcrest
   mapName: 'Serpentcrest'
-  mapPath: /Maps/_Sunrise/Station/Serpentcrest.yml
+  mapPath: /Maps/_Sunrise/Station/OutPool/serpentcrestt.yml
   minPlayers: 60
   maxPlayers: 150
   stations:

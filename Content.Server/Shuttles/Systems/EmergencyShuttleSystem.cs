@@ -15,7 +15,6 @@ using Content.Server.GameTicking.Events;
 using Content.Server.Parallax;
 using Content.Server.Pinpointer;
 using Content.Server.RoundEnd;
-using Content.Server.Screens.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Events;
@@ -28,7 +27,6 @@ using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Database;
-using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
@@ -38,6 +36,7 @@ using Content.Shared.Light.Components;
 using Content.Shared.Localizations;
 using Content.Shared.Parallax;
 using Content.Shared.Salvage;
+using Content.Shared.RoundEnd;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Events;
 using Content.Shared.Shuttles.Systems;
@@ -57,6 +56,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.Parallax.Biomes;
+using Content.Server.Screens.Components;
 
 namespace Content.Server.Shuttles.Systems;
 
@@ -66,29 +66,29 @@ public sealed partial class EmergencyShuttleSystem : SharedEmergencyShuttleSyste
      * Handles the escape shuttle + CentCom.
      */
 
-    [Dependency] private readonly IAdminLogManager _logger = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IAdminManager _admin = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly AccessReaderSystem _reader = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly CommunicationsConsoleSystem _commsConsole = default!;
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
-    [Dependency] private readonly DockingSystem _dock = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly IdCardSystem _idSystem = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly MapLoaderSystem _loader = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly ShuttleSystem _shuttle = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly TransformSystem _transformSystem = default!;
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly BiomeSystem _biomes = default!;
+    [Dependency] private IAdminLogManager _logger = default!;
+    [Dependency] private IAdminManager _admin = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private AccessReaderSystem _reader = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private CommunicationsConsoleSystem _commsConsole = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
+    [Dependency] private DockingSystem _dock = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private IdCardSystem _idSystem = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private MapLoaderSystem _loader = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ShuttleSystem _shuttle = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private TransformSystem _transformSystem = default!;
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private BiomeSystem _biomes = default!;
 
     private const float ShuttleSpawnBuffer = 1f;
 
@@ -239,16 +239,16 @@ public sealed partial class EmergencyShuttleSystem : SharedEmergencyShuttleSyste
 
         if (TryComp<DeviceNetworkComponent>(uid, out var netComp))
         {
-            var payload = new NetworkPayload
+            var payload = new ScreenShuttlePayload
             {
-                [ShuttleTimerMasks.ShuttleMap] = uid,
-                [ShuttleTimerMasks.SourceMap] = args.FromMapUid,
-                [ShuttleTimerMasks.DestMap] = _transformSystem.GetMap(args.TargetCoordinates),
-                [ShuttleTimerMasks.ShuttleTime] = ftlTime,
-                [ShuttleTimerMasks.SourceTime] = ftlTime,
-                [ShuttleTimerMasks.DestTime] = ftlTime
+                Shuttle = uid,
+                SourceMap = args.FromMapUid,
+                DestinationMap = _transformSystem.GetMap(args.TargetCoordinates),
+                ShuttleTime = ftlTime,
+                SourceTime = ftlTime,
+                DestinationTime = ftlTime,
             };
-            _deviceNetworkSystem.QueuePacket(uid, null, payload, netComp.TransmitFrequency);
+            _deviceNetworkSystem.SendPacket(uid, null, ref payload, netComp.TransmitFrequency);
         }
     }
 
@@ -261,27 +261,27 @@ public sealed partial class EmergencyShuttleSystem : SharedEmergencyShuttleSyste
         var shuttle = args.Entity;
         if (TryComp<DeviceNetworkComponent>(shuttle, out var net))
         {
-            var payload = new NetworkPayload
+            var payload = new ScreenShuttlePayload
             {
-                [ShuttleTimerMasks.ShuttleMap] = shuttle,
-                [ShuttleTimerMasks.SourceMap] = _roundEnd.GetTransitHub(), // Sunrise-Edit
-                [ShuttleTimerMasks.DestMap] = _roundEnd.GetStation(),
-                [ShuttleTimerMasks.ShuttleTime] = countdownTime,
-                [ShuttleTimerMasks.SourceTime] = countdownTime,
-                [ShuttleTimerMasks.DestTime] = countdownTime,
+                Shuttle = shuttle,
+                SourceMap = _roundEnd.GetCentcomm(), // Sunrise-Edit - метод возвращает карту транзитного хаба.
+                DestinationMap = _roundEnd.GetStation(),
+                ShuttleTime = countdownTime,
+                SourceTime = countdownTime,
+                DestinationTime = countdownTime,
             };
 
             // by popular request
             // https://discord.com/channels/310555209753690112/770682801607278632/1189989482234126356
             if (_random.Next(1000) == 0)
             {
-                payload.Add(ScreenMasks.Text, ShuttleTimerMasks.Kill);
-                payload.Add(ScreenMasks.Color, Color.Red);
+                payload.OverrideText = ShuttleTimerMasks.Kill;
+                payload.OverrideColor = Color.Red;
             }
             else
-                payload.Add(ScreenMasks.Text, ShuttleTimerMasks.Bye);
+                payload.OverrideText = ShuttleTimerMasks.Bye;
 
-            _deviceNetworkSystem.QueuePacket(shuttle, null, payload, net.TransmitFrequency);
+            _deviceNetworkSystem.SendPacket(shuttle, null, ref payload, net.TransmitFrequency);
         }
     }
 
@@ -411,17 +411,17 @@ public sealed partial class EmergencyShuttleSystem : SharedEmergencyShuttleSyste
         var time = TimeSpan.FromSeconds(_consoleAccumulator);
         if (TryComp<DeviceNetworkComponent>(shuttle, out var netComp))
         {
-            var payload = new NetworkPayload
+            var payload = new ScreenShuttlePayload
             {
-                [ShuttleTimerMasks.ShuttleMap] = shuttle,
-                [ShuttleTimerMasks.SourceMap] = targetXform.MapUid,
-                [ShuttleTimerMasks.DestMap] = _roundEnd.GetTransitHub(),
-                [ShuttleTimerMasks.ShuttleTime] = time,
-                [ShuttleTimerMasks.SourceTime] = time,
-                [ShuttleTimerMasks.DestTime] = time + TimeSpan.FromSeconds(TransitTime),
-                [ShuttleTimerMasks.Docked] = true,
+                Shuttle = shuttle,
+                SourceMap = targetXform.MapUid,
+                DestinationMap = _roundEnd.GetCentcomm(), // Sunrise-Edit - метод возвращает карту транзитного хаба.
+                ShuttleTime = time,
+                SourceTime = time,
+                DestinationTime = time + TimeSpan.FromSeconds(TransitTime),
+                Docked = true,
             };
-            _deviceNetworkSystem.QueuePacket(shuttle.Value, null, payload, netComp.TransmitFrequency);
+            _deviceNetworkSystem.SendPacket(shuttle.Value, null, ref payload, netComp.TransmitFrequency);
         }
 
         // Play announcement audio.
@@ -551,7 +551,7 @@ public sealed partial class EmergencyShuttleSystem : SharedEmergencyShuttleSyste
         var shuttlePath = ent.Comp1.EmergencyShuttlePath;
 
         // Sunrise-start
-        var mapId = _mapManager.CreateMap();
+        _mapSystem.CreateMap(out var mapId); // Sunrise-Edit - MapId получаем отдельно от UID карты.
 
         var mapOptions = new DeserializationOptions {};
         if (!_loader.TryLoadGrid(mapId, shuttlePath, out var shuttle, mapOptions))

@@ -31,7 +31,9 @@
     - state: eyes_night
   - type: FunctionalOrgan
     comps:
-    - type: ToggleableNightVision
+    - type: NightVision
+      enabled: false
+      action: ActionToggleNightVision
   - type: OrganVisualization
     layer: Eyes
     data:

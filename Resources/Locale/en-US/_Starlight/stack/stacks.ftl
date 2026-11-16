@@ -48,34 +48,40 @@ stack-rusty-metal-floor = rusty metal floor
 stack-steel-grate-floor = steel grate floor
 stack-tech-greeb-floor = tech maints greeb floor
 
-stack-bluespacecrystal = {$amount ->
-    [1] bluespace
-    *[other] bluespaces
-}
+stack-bluespacecrystal =
+    { $amount ->
+        [1] bluespace
+       *[other] bluespaces
+    }
 
-stack-adamantine = {$amount ->
-    [1] adamantine bar
-    *[other] adamantine bars
-}
+stack-adamantine =
+    { $amount ->
+        [1] adamantine bar
+       *[other] adamantine bars
+    }
 
 stack-bluespace-tile = bluespace tile
 stack-sepia-xenobiology-tile = sepia tile
 
-stack-empty-oilpack = {$amount ->
-    [1] emptyoilpack
-    *[other] emptyoilpacks
-}
+stack-empty-oilpack =
+    { $amount ->
+        [1] emptyoilpack
+       *[other] emptyoilpacks
+    }
 
-stack-wizcoin = {$amount ->
-    [1] wizcoin
-    *[other] wizcoins
-}
+stack-wizcoin =
+    { $amount ->
+        [1] wizcoin
+       *[other] wizcoins
+    }
 
-stack-abyssium-ore = {$amount ->
-    [1] abyssium ore
-    *[other] abyssium ores
-}
-stack-abyssium-bar = {$amount ->
-    [1] abyssium bar
-    *[other] abyssium bars
-}
+stack-abyssium-ore =
+    { $amount ->
+        [1] abyssium ore
+       *[other] abyssium ores
+    }
+stack-abyssium-bar =
+    { $amount ->
+        [1] abyssium bar
+       *[other] abyssium bars
+    }

@@ -6,7 +6,7 @@ namespace Content.Server._Sunrise.NPC.HTN;
 
 public sealed partial class StandingStatePrecondition : HTNPrecondition
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField("isStanding")]

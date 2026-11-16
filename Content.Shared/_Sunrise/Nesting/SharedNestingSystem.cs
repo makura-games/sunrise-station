@@ -20,13 +20,13 @@ namespace Content.Shared._Sunrise.Nesting;
 // 1. Использовать Entity<T>
 // 2. Нормальное форматирование
 // 3. Нормальный и понятный нейминг + документация
-public abstract class SharedNestingSystem : EntitySystem
+public abstract partial class SharedNestingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
     public const string BaseStorageId = "storagebase";
 
     public override void Initialize()
@@ -141,7 +141,7 @@ public abstract class SharedNestingSystem : EntitySystem
         if (_container.Insert(args.User, storageContainer))
             nestingComponent.InContainer = true;
         else
-            _popup.PopupClient(Loc.GetString("unsuccessfully-insert"), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString("unsuccessfully-insert"), args.User, args.User);
 
         args.Handled = true;
     }
@@ -208,7 +208,7 @@ public abstract class SharedNestingSystem : EntitySystem
         if (TryComp<MultiHandedItemComponent>(args.Args.Target.Value, out var multiHanded)
             && _hands.CountFreeHands(args.Args.User) < multiHanded!.HandsNeeded)
         {
-            _popup.PopupPredictedCursor(Loc.GetString("multi-handed-item-pick-up-fail",
+            _popup.PopupCursor(Loc.GetString("multi-handed-item-pick-up-fail",
                 ("number", multiHanded.HandsNeeded - 1), ("item", ent.Owner)), args.Args.User);
             return;
         }

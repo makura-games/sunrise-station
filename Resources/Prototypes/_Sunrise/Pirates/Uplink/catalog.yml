@@ -551,17 +551,6 @@
   - UplinkPirateRangedWeaponry
 
 - type: listing
-  id: UplinkPirateARG
-  name: uplink-weapon-arg-name
-  description: uplink-weapon-arg-desc
-  productEntity: ClothingBackpackMessengerMercenaryBundleARG
-  icon: { sprite: _Starlight/Objects/Weapons/Guns/Rifles/arg.rsi, state: icon }
-  cost:
-    Doubloon: 25
-  categories:
-  - UplinkPirateRangedWeaponry
-
-- type: listing
   id: UplinkPirateSKM28
   productEntity: WeaponRifleSKM28
   cost:
@@ -760,11 +749,11 @@
   - UplinkPirateRangedWeaponry
 
 - type: listing
-  id: UplinkPirateC40RBundle
-  name: uplink-c40r-bundle-name
-  description: uplink-c40r-bundle-desc
-  icon: { sprite: /Textures/_Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi, state: icon }
-  productEntity: ClothingBackpackDuffelSyndicateFilledSMG40
+  id: UplinkPirateVectorSuperBundle
+  name: uplink-vector-super-bundle-name
+  description: uplink-vector-super-bundle-desc
+  icon: { sprite: /Textures/_Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateFilledVectorSuper
   cost:
     Doubloon: 29
   categories:
@@ -816,7 +805,7 @@
   id: UplinkPirateFireAxeFlaming
   name: uplink-fire-axe-flaming-name
   description: uplink-fire-axe-flaming-desc
-  icon: { sprite: Objects/Weapons/Melee/fireaxeflaming.rsi, state: icon }
+  icon: { sprite: _Sunrise/Objects/Weapons/Melee/fireaxeflaming.rsi, state: icon }
   productEntity: FireAxeFlaming
   cost:
     Doubloon: 27
@@ -2340,7 +2329,7 @@
   name: uplink-chameleon-name
   description: uplink-chameleon-desc
   productEntity: ClothingBackpackChameleonFill
-  icon: { sprite: /Textures/Clothing/Uniforms/Jumpsuit/rainbow.rsi, state: icon }
+  icon: { sprite: /Textures/_Sunrise/Clothing/Uniforms/Jumpsuit/rainbow.rsi, state: icon }
   cost:
     Doubloon: 12
   categories:
@@ -2398,7 +2387,7 @@
 
 - type: listing
   id: UplinkPirateAmmoPouch
-  icon: { sprite: /Textures/_RMC14/Objects/Clothing/Pouches/large_ammo_mag.rsi, state: icon }
+  icon: { sprite: /Textures/_Sunrise/Clothing/Pouches/large_ammo_mag.rsi, state: icon }
   productEntity: PouchAmmo
   cost:
     Doubloon: 2
@@ -2407,7 +2396,7 @@
 
 - type: listing
   id: UplinkPiratePouchExplosive
-  icon: { sprite: /Textures/_RMC14/Objects/Clothing/Pouches/large_explosive.rsi, state: icon }
+  icon: { sprite: /Textures/_Sunrise/Clothing/Pouches/large_explosive.rsi, state: icon }
   productEntity: PouchExplosive
   cost:
     Doubloon: 2

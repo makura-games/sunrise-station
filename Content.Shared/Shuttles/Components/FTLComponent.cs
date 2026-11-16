@@ -38,7 +38,7 @@ public sealed partial class FTLComponent : Component
     /// <summary>
     /// Coordinates to arrive it: May be relative to another grid (for docking) or map coordinates.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField] // Sunrise-Edit: цель используется только сервером и может быть удалена до завершения FTL.
     public EntityCoordinates TargetCoordinates;
 
     [DataField, AutoNetworkedField]
@@ -53,7 +53,7 @@ public sealed partial class FTLComponent : Component
     [ViewVariables(VVAccess.ReadWrite), DataField("soundTravel")]
     public SoundSpecifier? TravelSound = new SoundPathSpecifier("/Audio/Effects/Shuttle/hyperspace_progress.ogg")
     {
-        Params = AudioParams.Default.WithVolume(-3f).WithLoop(true)
+        Params = AudioParams.Default.AddVolume(-3f).WithLoop(true)
     };
 
     [DataField]

@@ -1,4 +1,4 @@
-﻿using Content.Shared.Flesh;
+using Content.Shared.Flesh;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
@@ -6,10 +6,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._Sunrise.FleshCult;
 
-public sealed class SharedFleshMobSystem : EntitySystem
+public sealed partial class SharedFleshMobSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

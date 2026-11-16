@@ -12,8 +12,8 @@ namespace Content.Client._Sunrise.CriminalRecords.UI;
 [GenerateTypedNameReferences]
 public sealed partial class SunriseCriminalRecordsWindow : DefaultWindow
 {
-    [Dependency] private readonly IEntityManager _ent = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private readonly SharedStationCorporateLawSystem _stationLaw;
 

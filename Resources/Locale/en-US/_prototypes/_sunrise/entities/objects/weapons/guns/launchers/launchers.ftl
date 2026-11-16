@@ -1,8 +1,8 @@
-ent-WeaponLauncherRL5 = RL-5
+ent-WeaponLauncherRL5 = rL-5
     .desc = { ent-BaseWeaponLauncher.desc }
-ent-WeaponGrenadeLauncherGL70 = GL-70
+ent-WeaponGrenadeLauncherGL70 = gL-70
     .desc = { ent-BaseWeaponLauncher.desc }
-ent-WeaponGrenadeLauncherGL70Flash = GL-70
+ent-WeaponGrenadeLauncherGL70Flash = gL-70
     .suffix = GrenadeFlash
     .desc = { ent-WeaponGrenadeLauncherGL70.desc }
 ent-WeaponGrenadeLauncherSecurity = security grenade launcher
@@ -28,3 +28,5 @@ ent-SunriseWeaponDisposableRocketLauncherSmoke = disposable smoke launcher
 ent-SunriseWeaponDisposableRocketLauncherIncendiary = disposable thermobaric launcher
     .desc = A disposable launcher with a red stripe and a volatile thermobaric rocket sealed inside.
     .suffix = Thermobaric
+ent-WeaponGrenadeLauncherImprovised = bombaga
+    .desc = A new era of greytide.

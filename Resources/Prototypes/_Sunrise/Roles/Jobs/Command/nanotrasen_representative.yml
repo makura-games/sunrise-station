@@ -15,7 +15,6 @@
   joinNotifyCrew: true
   radioBold: true
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   alternativeTitles:
   - job-alt-title-nt-diplomat
   access:

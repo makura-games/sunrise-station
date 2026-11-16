@@ -7,12 +7,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.Abilities.Jump;
 
-public sealed class JumpSkillSystem : EntitySystem
+public sealed partial class JumpSkillSystem : EntitySystem
 {
-    [Dependency] private readonly ActionsSystem _action = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private ActionsSystem _action = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
 
     public override void Initialize()
     {

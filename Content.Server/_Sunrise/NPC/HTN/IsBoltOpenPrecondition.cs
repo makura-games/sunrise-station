@@ -8,7 +8,7 @@ namespace Content.Server._Sunrise.NPC.HTN;
 
 public sealed partial class IsBoltOpenPrecondition : HTNPrecondition
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     public override bool IsMet(NPCBlackboard blackboard)
     {

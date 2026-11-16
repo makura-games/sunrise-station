@@ -1,4 +1,4 @@
-﻿using Content.Shared._Sunrise.Boss.Components;
+using Content.Shared._Sunrise.Boss.Components;
 using Content.Shared._Sunrise.Boss.Events;
 using Content.Shared.Damage.Components;
 using Content.Shared.Movement.Components;
@@ -7,9 +7,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._Sunrise.Boss.Systems;
 
-public abstract class SharedHellSpawnInvincibilitySystem : EntitySystem
+public abstract partial class SharedHellSpawnInvincibilitySystem : EntitySystem
 {
-    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private MovementSpeedModifierSystem _movement = default!;
 
     /// <inheritdoc />
     public override void Initialize()

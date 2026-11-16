@@ -134,7 +134,9 @@
     armorPenetration: -1.00
     damage:
       types:
-        Piercing: 45 # +30%
+        Piercing: 35
+        Blunt: 5
+        Slash: 5
   - type: StaminaDamageOnCollide
     damage: 22
   - type: ProjectilePierce
@@ -325,7 +327,9 @@
     armorPenetration: -1.00
     damage:
       types:
-        Piercing: 21 # +30%
+        Piercing: 17
+        Blunt: 2
+        Slash: 2
   - type: StaminaDamageOnCollide
     damage: 8
   - type: ProjectilePierce
@@ -452,7 +456,9 @@
     armorPenetration: -1.00
     damage:
       types:
-        Piercing: 26 # +30%
+        Piercing: 20
+        Blunt: 3
+        Slash: 3
   - type: StaminaDamageOnCollide
     damage: 22
   - type: ProjectilePierce

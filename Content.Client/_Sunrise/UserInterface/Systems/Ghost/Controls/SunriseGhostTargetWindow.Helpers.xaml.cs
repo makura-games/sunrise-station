@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Systems;
 using Content.Shared.Roles;
-using GhostWarpPlayer = Content.Shared.Ghost.SharedGhostSystem.GhostWarpPlayer;
-using GhostWarpGlobalAntagonist = Content.Shared.Ghost.SharedGhostSystem.GhostWarpGlobalAntagonist;
+using GhostWarpPlayer = Content.Shared.Ghost.Systems.SharedGhostSystem.GhostWarpPlayer;
+using GhostWarpGlobalAntagonist = Content.Shared.Ghost.Systems.SharedGhostSystem.GhostWarpGlobalAntagonist;
 using Robust.Shared.Utility;
 
 

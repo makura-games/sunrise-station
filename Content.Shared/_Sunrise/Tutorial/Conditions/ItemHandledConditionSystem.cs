@@ -10,8 +10,8 @@ namespace Content.Shared._Sunrise.Tutorial.Conditions;
 public sealed partial class ItemHandledConditionSystem
     : TutorialConditionSystem<TutorialPlayerComponent, ItemHandledCondition>
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     protected override void Condition(Entity<TutorialPlayerComponent> entity, ref TutorialConditionEvent<ItemHandledCondition> args)
     {

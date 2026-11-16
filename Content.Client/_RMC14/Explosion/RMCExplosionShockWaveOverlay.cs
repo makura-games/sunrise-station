@@ -7,11 +7,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Explosion;
 
-public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscriber
+public sealed partial class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscriber
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private SharedTransformSystem? _xformSystem;
 
@@ -67,7 +67,7 @@ public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscrib
             currentTime = Math.Clamp(currentTime, 0.1f, float.MaxValue);
 
             _positions[_count] = tempCoords;
-            _falloffPower[_count] = distortion.FalloffPower ?? 20f; // Sunrise edit - фолбек
+            _falloffPower[_count] = distortion.FalloffPower ?? 20f; // фолбек
             _sharpness[_count] = distortion.Sharpness;
             _width[_count] = distortion.Width ?? 0.8f;
             _times[_count] = currentTime;

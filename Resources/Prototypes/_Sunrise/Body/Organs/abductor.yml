@@ -8,17 +8,10 @@
   - type: Organ
   - type: Extractable
     grindableSolutionName: organ
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      organ:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 5
+    - SolutionSunriseOrganNutriment
+    - SolutionSunriseRawProteinFood
   - type: FlavorProfile
     flavors:
       - people
@@ -45,17 +38,10 @@
   - type: Tag
     tags:
       - Meat
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      organ:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: GreyMatter
-          Quantity: 5
+    - SolutionSunriseOrganNutriment
+    - SolutionSunriseBrainFood
   - type: FlavorProfile
     flavors:
       - people
@@ -103,11 +89,11 @@
     layers:
       - state: lung-l
       - state: lung-r
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      Lung:
-        maxVol: 100
-        canReact: false
+    - SolutionSunriseOrganNutriment
+    - SolutionLungGas
+    - SolutionSunriseRawProteinFood
   - type: Lung
     alert: LowNitrogen
 
@@ -135,15 +121,11 @@
   components:
   - type: Sprite
     state: stomach
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      stomach:
-        maxVol: 50
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 5
+    - SolutionSunriseOrganNutriment
+    - SolutionSunriseStomachSmall
+    - SolutionSunriseRawProteinFood
   - type: Stomach
   # The stomach metabolizes stuff like foods and drinks.
   # TODO: Have it work off of the ent's solution container, and move this

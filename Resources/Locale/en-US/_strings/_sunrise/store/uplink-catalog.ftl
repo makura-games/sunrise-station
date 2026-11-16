@@ -39,6 +39,7 @@ uplink-grenade-launcher-emp-extended-ammo-desc = An extended 15-shell EMP cartri
 uplink-magazine-siar52-name = SMG Magazine (.25 caseless)
 uplink-pistol-stechkin-magazine-name = Pistol Magazine .40
 uplink-pistol-stechkin-magazine-desc = A 10-round pistol magazine, compatible with Stechkin series pistols.
+uplink-pistol-magazine-vector-super-desc = A 24-round SMG magazine. Compatible with the Vector Super.
 uplink-magazine-siar52-desc = A 30-round SMG magazine. Compatible with SIAR-52.
 uplink-magazine-bulldog-uraniumslug-desc = Shotgun magazine with 8 shells filled with uranium slugs. Compatible with the Bulldog.
 uplink-magazine-bulldog-uranium-desc = Shotgun magazine with 8 shells filled with uranium pellet. Compatible with the Bulldog.
@@ -87,6 +88,13 @@ uplink-pirate-ammo-308-mixed-name = Bulk basic magazines (.308)
 
 uplink-magazine-127hp-desc = A Bauer SR-127 magazine with 7 hollow point rounds. Trades almost all breaching power for massive personnel damage.
 uplink-sniper-ammo-hp-desc = A box of 14 hollow point cartridges for the Hristov sniper rifle or SR-127. Trades almost all breaching power for massive personnel damage.
+
+## Weapons (Sunrise)
+
+uplink-vector-super-bundle-name = Vector Super Bundle
+uplink-vector-super-bundle-desc = The iconic Vector Super submachine gun bundled with 12 assorted magazines.
+uplink-vector-super-name = Vector Super
+uplink-vector-super-desc = The iconic Vector Super submachine gun bundled with a box of standard .40-caliber ammunition.
 
 ## Misc
 
@@ -166,6 +174,8 @@ uplink-pirate-borg-random-desc = Calls in a random derelict cyborg with pirate l
 
 ## Equipment
 
+uplink-experimental-eshield-name = Experimental Energy Shield
+uplink-experimental-eshield-desc = An even more exotic energy shield that reflects nearly all laser beams and provides some protection against bullets and other physical attacks. It has a built-in self-recharging battery, but its frame can still fail after several cycles of active charging and discharging.
 uplink-hypo-name = Gorlax Hypospray
 uplink-hypo-desc = A chemical hypospray manufactured by the Syndicate, capable of instantly injecting up to 20u of reagents. Starts empty.
 uplink-polytrinic-acid-chemistry-bottle-name = Polytrinic Acid
@@ -309,10 +319,8 @@ uplink-x4-name = Composition X-4
 uplink-x4-desc = Used to put even bigger holes in areas you really hate.
 uplink-x4-bundle-name = X-4 Bundle
 uplink-x4-bundle-desc = A bundle of eight X-4. You must really want to blow the hell out of something.
-uplink-shuttle-board-name = Syndicate shuttle console board
-uplink-shuttle-board-desc = A computer printed circuit board for a syndicate shuttle console.
 uplink-shuttle-bundle-name = Syndicate shuttle crate
-uplink-shuttle-bundle-desc = Everything but the shuttle board. It's a shuttle in a crate* (Some assembly required).
+uplink-shuttle-bundle-desc = A bundle with everything needed to assemble a Syndicate shuttle. (Some assembly required).
 uplink-friendship-bundle-name = Friendship bundle
 uplink-lube-grenade-name = Lube Grenade
 uplink-lube-grenade-desc = A grenade that spreads a slippery cloud of lube around the detonation area.

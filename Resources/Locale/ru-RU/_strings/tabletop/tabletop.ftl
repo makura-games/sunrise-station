@@ -18,5 +18,11 @@ tabletop-parchis-board-name = Парчис
 ## Backgammon
 
 tabletop-backgammon-board-name = Короткие нарды
+
+## Checkers
+
 tabletop-checkers-board-name = Шашки
+
+## Battlemap
+
 tabletop-battlemap-board-name = Карта боя

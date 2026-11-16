@@ -15,9 +15,9 @@ namespace Content.Client._Sunrise.Pets;
 [GenerateTypedNameReferences]
 public sealed partial class LobbyPetPreviewPanel : Control
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly PlayerCacheManager _playerCache = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private PlayerCacheManager _playerCache = default!;
 
     private EntityUid? _previewDummy;
     private string? _currentPetSelection;

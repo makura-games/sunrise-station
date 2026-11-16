@@ -1,4 +1,4 @@
-﻿using Content.Server.Administration.Managers;
+using Content.Server.Administration.Managers;
 using Content.Server.Mind;
 using Content.Server.Roles;
 using Content.Shared._Sunrise.AntagObjectives;
@@ -9,12 +9,12 @@ using Content.Shared.Objectives.Systems;
 
 namespace Content.Server._Sunrise.AntagObjectives;
 
-public sealed class AntagObjectivesSystem : EntitySystem
+public sealed partial class AntagObjectivesSystem : EntitySystem
 {
-    [Dependency] private readonly MindSystem _minds = default!;
-    [Dependency] private readonly RoleSystem _roles = default!;
-    [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
-    [Dependency] private readonly IAdminManager _admins = default!;
+    [Dependency] private MindSystem _minds = default!;
+    [Dependency] private RoleSystem _roles = default!;
+    [Dependency] private SharedObjectivesSystem _objectives = default!;
+    [Dependency] private IAdminManager _admins = default!;
 
     public override void Initialize()
     {
@@ -40,7 +40,7 @@ public sealed class AntagObjectivesSystem : EntitySystem
                 if (info == null)
                     continue;
 
-                var issuer = Comp<ObjectiveComponent>(objective).LocIssuer;
+                var issuer = Comp<ObjectiveComponent>(objective).Issuer;
                 if (!objectives.ContainsKey(issuer))
                     objectives[issuer] = new List<ObjectiveInfo>();
                 objectives[issuer].Add(info.Value);

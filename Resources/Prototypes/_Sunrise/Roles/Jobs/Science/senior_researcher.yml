@@ -10,7 +10,6 @@
   startingGear: SeniorResearcherGear
   icon: "JobIconSeniorResearcher"
   supervisors: job-supervisors-rd
-  displayWeight: 35
   alternativeTitles:
   - job-alt-title-lead-researcher
   access:

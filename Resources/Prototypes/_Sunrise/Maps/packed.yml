@@ -3,7 +3,7 @@
   mapName: 'Packed'
   mapPath: /Maps/_Sunrise/Station/packed.yml
   minPlayers: 0
-  maxPlayers: 60
+  maxPlayers: 50
   stations:
     Packed:
       stationProto: StandardNanotrasenStation
@@ -79,6 +79,7 @@
             #law
             IAA: [ 1, 1 ]
             Lawyer: [ 2, 2 ]
+            NtrOfficer: [1, 1]
             # silicon
             StationAi: [ 1, 1 ]
             Borg: [ 3, 3 ]
@@ -101,7 +102,6 @@
           - MiningOutpost
           - Tesla
           - XenobiologyRepair
-          - VirusologyAmbusol
           - Containment
           - WeaponsSecurity
           - MaintsRepair

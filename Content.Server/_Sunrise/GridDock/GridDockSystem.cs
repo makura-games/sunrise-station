@@ -1,24 +1,27 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Server.Shuttles;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Events;
 using Content.Server.Station.Systems;
+using Content.Shared.CCVar;
 using Content.Shared.Station.Components;
+using Robust.Shared.Configuration;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 
 namespace Content.Server._Sunrise.GridDock;
 
-public sealed class GridDockSystem : EntitySystem
+public sealed partial class GridDockSystem : EntitySystem
 {
-    [Dependency] private readonly MapLoaderSystem _loader = default!;
-    [Dependency] private readonly ShuttleSystem _shuttles = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly DockingSystem _dockSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private MapLoaderSystem _loader = default!;
+    [Dependency] private ShuttleSystem _shuttles = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private DockingSystem _dockSystem = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public override void Initialize()
     {
@@ -27,6 +30,9 @@ public sealed class GridDockSystem : EntitySystem
 
     private void OnStationPostInit(EntityUid uid, SpawnGridAndDockToStationComponent component, StationPostInitEvent args)
     {
+        if (!_cfg.GetCVar(CCVars.GridFill))
+            return;
+
         if (component.Grids.Count == 0)
             return;
 
