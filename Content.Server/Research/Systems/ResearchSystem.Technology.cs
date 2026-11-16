@@ -17,6 +17,12 @@ public sealed partial class ResearchSystem
             return;
 
         primaryDb.MainDiscipline = otherDb.MainDiscipline;
+        // Sunrise added start - Synchronize research expansion state.
+        primaryDb.AdditionalDisciplines = new(otherDb.AdditionalDisciplines);
+        primaryDb.ResearchDisciplineLimit = otherDb.ResearchDisciplineLimit;
+        primaryDb.MaximumTechnologyTier = otherDb.MaximumTechnologyTier;
+        primaryDb.DisciplineLockoutTier = otherDb.DisciplineLockoutTier;
+        // Sunrise added end
         primaryDb.CurrentTechnologyCards = otherDb.CurrentTechnologyCards;
         primaryDb.SupportedDisciplines = otherDb.SupportedDisciplines;
         primaryDb.UnlockedTechnologies = otherDb.UnlockedTechnologies;
@@ -81,7 +87,8 @@ public sealed partial class ResearchSystem
             return false;
 
         AddTechnology(serverEnt.Value, prototype);
-        TrySetMainDiscipline(prototype, serverEnt.Value);
+        // Sunrise-Edit - Moved discipline selection into AddTechnology.
+        // TrySetMainDiscipline(prototype, serverEnt.Value);
         ModifyServerPoints(serverEnt.Value, -prototype.Cost);
         UpdateTechnologyCards(serverEnt.Value);
 
@@ -112,14 +119,21 @@ public sealed partial class ResearchSystem
         if (!Resolve(uid, ref component))
             return;
 
-        //todo this needs to support some other stuff, too
+        // todo this needs to support some other stuff, too
+        // Sunrise-Edit - Limit whole technologies by database tier and selected disciplines.
+        if (!IsTechnologyWithinTierLimit(component, technology) || !IsTechnologyWithinDisciplineLimit(component, technology))
+            return;
+
+        TrySetMainDiscipline(technology, uid, component); // Sunrise-Edit - Select the discipline for every technology source.
         foreach (var generic in technology.GenericUnlocks)
         {
             if (generic.PurchaseEvent != null)
-                RaiseLocalEvent(generic.PurchaseEvent);
+                RaiseLocalEvent(uid, generic.PurchaseEvent); // Sunrise-Edit - Apply the effect to the specific research database.
         }
 
-        component.UnlockedTechnologies.Add(technology.ID);
+        // Sunrise-Edit - Repeatable technologies are not saved as unlocked.
+        if (!technology.Repeatable)
+            component.UnlockedTechnologies.Add(technology.ID);
         var addedRecipes = new List<string>();
         foreach (var unlock in technology.RecipeUnlocks)
         {
@@ -148,11 +162,14 @@ public sealed partial class ResearchSystem
         if (!Resolve(uid, ref client, ref database, false))
             return false;
 
-        if (!TryGetClientServer(uid, out _, out var serverComp, client))
+        // Sunrise edit start - Check availability against the authoritative server database.
+        if (!TryGetClientServer(uid, out var server, out var serverComp, client) ||
+            !TryComp<TechnologyDatabaseComponent>(server, out var serverDatabase))
             return false;
 
-        if (!IsTechnologyAvailable(database, technology))
+        if (!IsTechnologyAvailable(serverDatabase, technology))
             return false;
+        // Sunrise edit end
 
         if (technology.Cost > serverComp.Points)
             return false;
@@ -165,6 +182,8 @@ public sealed partial class ResearchSystem
         if (args.Server != null)
             return;
         component.MainDiscipline = null;
+        component.AdditionalDisciplines.Clear(); // Sunrise-Edit - Reset additional disciplines.
+        component.ResearchDisciplineLimit = 1; // Sunrise-Edit - Restore the initial discipline limit.
         component.CurrentTechnologyCards = new List<string>();
         component.SupportedDisciplines = new List<ProtoId<TechDisciplinePrototype>>();
         component.UnlockedTechnologies = new List<ProtoId<TechnologyPrototype>>();

@@ -21,6 +21,18 @@
     },
     {
       "name": "syndicate"
+    },
+    {
+      "name": "techserver"
+    },
+    {
+      "name": "techserver_unshaded",
+            "delays": [
+                [
+                    0.15,
+                    0.15
+                ]
+            ]
     }
   ]
 }

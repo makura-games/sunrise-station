@@ -89,19 +89,34 @@ public sealed partial class ResearchConsoleMenu : FancyWindow
         if (!_entity.TryGetComponent(Entity, out TechnologyDatabaseComponent? database))
             return;
 
-        var disciplineText = Loc.GetString("research-discipline-none");
-        var disciplineColor = Color.Gray;
-        if (database.MainDiscipline != null)
+        // Sunrise edit start - Show all selected disciplines and available slots.
+        var selectedDisciplines = new List<ProtoId<TechDisciplinePrototype>>();
+        if (database.MainDiscipline is { } mainDiscipline)
+            selectedDisciplines.Add(mainDiscipline);
+        selectedDisciplines.AddRange(database.AdditionalDisciplines);
+
+        var disciplineText = new FormattedMessage();
+        foreach (var disciplineId in selectedDisciplines)
         {
-            var discipline = _prototype.Index<TechDisciplinePrototype>(database.MainDiscipline);
-            disciplineText = Loc.GetString(discipline.Name);
-            disciplineColor = discipline.Color;
+            if (!disciplineText.IsEmpty)
+                disciplineText.AddText(", ");
+
+            var discipline = _prototype.Index(disciplineId);
+            disciplineText.PushColor(discipline.Color);
+            disciplineText.AddText(Loc.GetString(discipline.Name));
+            disciplineText.Pop();
         }
 
+        if (disciplineText.IsEmpty)
+            disciplineText.AddText(Loc.GetString("research-discipline-none"));
+
         var msg = new FormattedMessage();
-        msg.AddMarkupOrThrow(Loc.GetString("research-console-menu-main-discipline",
-            ("name", disciplineText), ("color", disciplineColor)));
+        msg.AddMarkupOrThrow(Loc.GetString("research-console-menu-disciplines",
+            ("name", disciplineText.ToMarkup()),
+            ("count", selectedDisciplines.Count),
+            ("limit", database.ResearchDisciplineLimit)));
         MainDisciplineLabel.SetMessage(msg);
+        // Sunrise edit end
 
         TierDisplayContainer.Children.Clear();
         foreach (var disciplineId in database.SupportedDisciplines)

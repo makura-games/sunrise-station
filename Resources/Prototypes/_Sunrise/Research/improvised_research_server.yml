@@ -1,0 +1,62 @@
+- type: Tag
+  id: SunriseTelecomServerCircuitboard
+
+- type: entity
+  id: SunriseImprovisedResearchServerCircuitboardAssembly
+  parent: BaseItem
+  name: R&D board assembly
+  description: A crude assembly made from a telecommunications board, a personal AI, and high-voltage cable.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Misc/module.rsi
+    state: techserver
+  - type: Item
+    storedRotation: -90
+  - type: Construction
+    graph: SunriseImprovisedResearchServerCircuitboardGraph
+    node: assembled
+
+- type: entity
+  id: SunriseImprovisedResearchAndDevelopmentServerMachineCircuitboard
+  parent: ResearchAndDevelopmentServerMachineCircuitboard
+  name: makeshift R&D board
+  description: A roughly modified machine board for an improvised R&D server.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Misc/module.rsi
+    layers:
+    - state: techserver
+    - state: techserver_unshaded
+      shader: unshaded
+  - type: MachineBoard
+    prototype: SunriseImprovisedResearchAndDevelopmentServer
+    stackRequirements:
+      Plasma: 5
+  - type: Construction
+    graph: SunriseImprovisedResearchServerCircuitboardGraph
+    node: complete
+
+- type: entity
+  id: SunriseImprovisedResearchAndDevelopmentServer
+  parent: ResearchAndDevelopmentServer
+  name: improvised R&D server
+  description: A makeshift research server supporting basic technologies and one intermediate discipline.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/telecomms.rsi
+    snapCardinals: true
+    layers:
+    - state: telecom-nopower
+    - state: telecom-stripe
+    - state: telecom-on
+      shader: unshaded
+      visible: false
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: variant-science
+    - state: telecom-open
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: TechnologyDatabase
+    maximumTechnologyTier: 2
+    disciplineLockoutTier: 2
+  - type: Machine
+    board: SunriseImprovisedResearchAndDevelopmentServerMachineCircuitboard

@@ -1,0 +1,81 @@
+- type: technology
+  id: SunriseResearchGrant
+  name: research-technology-sunrise-grant
+  icon:
+    sprite: Interface/Misc/research_disciplines.rsi
+    state: civilianservices
+  discipline: CivilianServices
+  tier: 1
+  cost: 10000
+  repeatable: true
+  requiresResearchCompletion: true
+  genericUnlocks:
+  - unlockDescription: research-technology-sunrise-grant-unlock
+    purchaseEvent: !type:ResearchCargoGrantEvent
+      amount: 1000
+
+- type: technology
+  id: SunriseResearchDisciplineExpansion1
+  name: research-technology-sunrise-discipline-expansion-1
+  icon:
+    sprite: Interface/Misc/research_disciplines.rsi
+    state: experimental
+  discipline: Experimental
+  tier: 1
+  cost: 100000
+  requiresResearchCompletion: true
+  genericUnlocks:
+  - unlockDescription: research-technology-sunrise-discipline-expansion-unlock
+    purchaseEvent: !type:ResearchDisciplineUnlockEvent
+      amount: 1
+
+- type: technology
+  id: SunriseResearchDisciplineExpansion2
+  name: research-technology-sunrise-discipline-expansion-2
+  icon:
+    sprite: Interface/Misc/research_disciplines.rsi
+    state: experimental
+  discipline: Experimental
+  tier: 1
+  cost: 250000
+  requiresResearchCompletion: true
+  technologyPrerequisites:
+  - SunriseResearchDisciplineExpansion1
+  genericUnlocks:
+  - unlockDescription: research-technology-sunrise-discipline-expansion-unlock
+    purchaseEvent: !type:ResearchDisciplineUnlockEvent
+      amount: 1
+
+- type: technology
+  id: SunriseResearchDisciplineExpansion3
+  name: research-technology-sunrise-discipline-expansion-3
+  icon:
+    sprite: Interface/Misc/research_disciplines.rsi
+    state: experimental
+  discipline: Experimental
+  tier: 1
+  cost: 400000
+  requiresResearchCompletion: true
+  technologyPrerequisites:
+  - SunriseResearchDisciplineExpansion2
+  genericUnlocks:
+  - unlockDescription: research-technology-sunrise-discipline-expansion-unlock
+    purchaseEvent: !type:ResearchDisciplineUnlockEvent
+      amount: 1
+
+- type: technology
+  id: SunriseResearchDisciplineExpansion4
+  name: research-technology-sunrise-discipline-expansion-4
+  icon:
+    sprite: Interface/Misc/research_disciplines.rsi
+    state: biochemical
+  discipline: Biochemical
+  tier: 1
+  cost: 600000
+  requiresResearchCompletion: true
+  technologyPrerequisites:
+  - SunriseResearchDisciplineExpansion3
+  genericUnlocks:
+  - unlockDescription: research-technology-sunrise-discipline-expansion-unlock
+    purchaseEvent: !type:ResearchDisciplineUnlockEvent
+      amount: 1

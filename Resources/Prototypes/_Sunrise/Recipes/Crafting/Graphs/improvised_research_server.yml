@@ -1,0 +1,63 @@
+- type: constructionGraph
+  id: SunriseImprovisedResearchServerCircuitboardGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: assembled
+      steps:
+      - tag: SunriseTelecomServerCircuitboard
+        name: ent-TelecomServerCircuitboard
+        icon:
+          sprite: Objects/Misc/module.rsi
+          state: engineering
+      - component: PAI
+        name: ent-PersonalAI
+        icon:
+          sprite: Objects/Fun/pai.rsi
+          state: pai-base
+      - material: CableHV
+        amount: 10
+        doAfter: 5
+
+  - node: assembled
+    entity: SunriseImprovisedResearchServerCircuitboardAssembly
+    edges:
+    - to: welded
+      steps:
+      - tool: Welding
+        doAfter: 3
+  - node: welded
+    entity: SunriseImprovisedResearchServerCircuitboardAssembly
+    edges:
+    - to: casingOpen
+      steps:
+      - tool: Screwing
+        doAfter: 2
+  - node: casingOpen
+    entity: SunriseImprovisedResearchServerCircuitboardAssembly
+    edges:
+    - to: keyInserted
+      steps:
+      - tag: EncryptionScience
+        name: ent-EncryptionKeyScience
+        icon:
+          sprite: Objects/Devices/encryption_keys.rsi
+          state: sci_label
+  - node: keyInserted
+    entity: SunriseImprovisedResearchServerCircuitboardAssembly
+    edges:
+    - to: secured
+      steps:
+      - tool: Screwing
+        doAfter: 2
+  - node: secured
+    entity: SunriseImprovisedResearchServerCircuitboardAssembly
+    edges:
+    - to: complete
+      steps:
+      - tool: Pulsing
+        doAfter: 3
+
+  - node: complete
+    entity: SunriseImprovisedResearchAndDevelopmentServerMachineCircuitboard

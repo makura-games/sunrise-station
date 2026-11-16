@@ -66,6 +66,10 @@ public sealed partial class TechnologyDiskSystem : EntitySystem
         var bundles = new HashSet<(ProtoId<LatheRecipePrototype> recipe, ProtoId<TechDisciplinePrototype> discipline)>();
         foreach (var tech in ProtoMan.EnumeratePrototypes<TechnologyPrototype>())
         {
+            // Sunrise-Edit - Exclude final technologies from technology disks.
+            if (tech.RequiresResearchCompletion)
+                continue;
+
             if (tech.Tier != tier)
                 continue;
             if (ent.Comp.Discipline != null && tech.Discipline != ent.Comp.Discipline.Value)

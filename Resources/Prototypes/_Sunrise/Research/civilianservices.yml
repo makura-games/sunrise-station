@@ -41,6 +41,5 @@
   cost: 10000
   recipeUnlocks:
   - TelecomServerT3Circuitboard
-  - ResearchAndDevelopmentServerMachineCircuitboard
   technologyPrerequisites:
   - AudioVisualCommunicationT2
