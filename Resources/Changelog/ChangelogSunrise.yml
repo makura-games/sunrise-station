@@ -5125,3 +5125,10 @@
   media:
   - url: https://github.com/user-attachments/assets/4bef7b28-19b7-4e0d-aecb-cb39ce79cadd
     description: Новые шаттлы на станции ЦК.
+- author: KaiserMaus
+  time: '2026-11-16T18:40:43.0000000+00:00'
+  changes:
+  - type: Tweak
+    message: Консоль шаттлов теперь имеют встроенный динамик на манер громкоговорителя и сообщают глобальные уведомления, уведомления станции через консоль связи все ещё не слышно.
+  id: 2055
+  url: https://github.com/makura-games/sunrise-station/pull/4891
