@@ -5132,3 +5132,10 @@
     message: Консоль шаттлов теперь имеют встроенный динамик на манер громкоговорителя и сообщают глобальные уведомления, уведомления станции через консоль связи все ещё не слышно.
   id: 2055
   url: https://github.com/makura-games/sunrise-station/pull/4891
+- author: Nordstream17
+  time: '2026-11-16T18:46:04.0000000+00:00'
+  changes:
+  - type: Add
+    message: Добавлены коробки с волшебными свечами и маленькими волшебными свечами
+  id: 2056
+  url: https://github.com/makura-games/sunrise-station/pull/4604
