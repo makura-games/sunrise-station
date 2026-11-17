@@ -6,7 +6,7 @@ using Content.Shared._Sunrise.Shipyard.Prototypes;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Cargo.Components;
 using Content.Shared.Database;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Mind.Components;
 using Content.Shared.SSDIndicator;
 using Content.Shared.Station.Components;

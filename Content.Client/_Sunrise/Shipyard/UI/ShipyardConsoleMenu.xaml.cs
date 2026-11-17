@@ -12,7 +12,7 @@ namespace Content.Client._Sunrise.Shipyard.UI;
 [GenerateTypedNameReferences]
 public sealed partial class ShipyardConsoleMenu : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public event Action<ProtoId<ShipyardVesselPrototype>>? OnPurchase;
     public event Action? OnSell;
