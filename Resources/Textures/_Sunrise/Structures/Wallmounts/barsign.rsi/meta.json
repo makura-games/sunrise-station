@@ -5,7 +5,7 @@
     "y": 32
   },
   "license": "CC-BY-SA-4.0",
-  "copyright": "aliensjaws by Discord (bulbo44kkey), rndmoment by Discord (__infinity__) ",
+  "copyright": "aliensjaws by Discord (bulbo44kkey), rndmoment by Discord (__infinity__), drunkcherry by strol20 ",
   "states": [
     {
       "name": "aliensjaws",
@@ -64,6 +64,14 @@
     },
     {
       "name": "empty",
+      "delays": [
+        [
+          1
+        ]
+      ]
+    },
+    {
+      "name": "drunkcherry",
       "delays": [
         [
           1
