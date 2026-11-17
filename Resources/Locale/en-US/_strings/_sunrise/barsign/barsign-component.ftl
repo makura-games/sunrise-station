@@ -12,3 +12,8 @@ barsign-prototype-description-RNDmoment = Will RND manage this time?
 
 barsign-prototype-name-aliensjaws = Alien's Jaws
 barsign-prototype-description-aliensjaws = Get both your jaws ready for some acidic drinks!
+
+## Drunken Cherry
+
+barsign-prototype-name-drunken-cherry = Drunken Cherry
+barsign-prototype-description-drunken-cherry = A signature space liqueur made from the sweetest cherries in the galaxy!

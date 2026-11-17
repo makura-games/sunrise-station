@@ -13,3 +13,11 @@
     sprite: _Sunrise/Structures/Wallmounts/barsign.rsi
     state: rndmoment
   description: barsign-prototype-description-RNDmoment
+
+- type: barSign
+  id: SunriseDrunkenCherry
+  name: barsign-prototype-name-drunken-cherry
+  icon:
+    sprite: _Sunrise/Structures/Wallmounts/drunken_cherry.rsi
+    state: drunkcherry
+  description: barsign-prototype-description-drunken-cherry
