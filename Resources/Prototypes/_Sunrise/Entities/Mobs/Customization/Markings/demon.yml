@@ -69,25 +69,28 @@
     state: demon_ears
 
 - type: marking
-  id: DemonCowHorns
+  id: BaseSunriseMarkingDemonHorns
+  abstract: true
   bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  groupWhitelist: [ Demon, Milira ]
+
+- type: marking
+  id: DemonCowHorns
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: cow_horns
 
 - type: marking
   id: DemonHornsDeer
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: deer_antlers_horns
 
 - type: marking
   id: DemonHornsSmall
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: small_horns
@@ -149,128 +152,112 @@
 
 - type: marking
   id: DemonHornsDouble
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_double
 
 - type: marking
   id: DemonHornsDoubleAlt
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_double_alt
 
 - type: marking
   id: DemonHornsNarrow
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_narrow
 
 - type: marking
   id: DemonHornsGoatee
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_goatee
 
 - type: marking
   id: DemonHornsGoateeAlt
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_goatee_alt
 
 - type: marking
   id: DemonHornsSharp
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_sharp
 
 - type: marking
   id: DemonHornsGrowths
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_growths
 
 - type: marking
   id: DemonHornsBrokenOne
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_broken_one
 
 - type: marking
   id: DemonHornsStout
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_stout
 
 - type: marking
   id: DemonHornsEnormous
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_enormous
 
 - type: marking
   id: DemonHornsScythe
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_scythe
 
 - type: marking
   id: DemonHornsTapering
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_tapering
 
 - type: marking
   id: DemonHornsDirectional
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_directional
 
 - type: marking
   id: DemonHornsThick
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_thick
 
 - type: marking
   id: DemonHornsSickle
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_sickle
 
 - type: marking
   id: DemonHornsSlim
-  bodyPart: HeadTop
-  groupWhitelist: [ Demon ]
+  parent: BaseSunriseMarkingDemonHorns
   sprites:
   - sprite: _Sunrise/Mobs/Species/Demon/markings.rsi
     state: horns_slim
