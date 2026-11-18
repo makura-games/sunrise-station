@@ -1279,6 +1279,12 @@
     stackRequirements:
       Steel: 1
       Cable: 2
+  # Sunrise added start - board can be used to craft an improvised research server
+  - type: Tag
+    tags:
+    - Board
+    - SunriseTelecomServerCircuitboard
+  # Sunrise added end
 
 - type: entity
   parent: BaseMachineCircuitboard

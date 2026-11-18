@@ -68,11 +68,3 @@
     Glass: 250
     Gold: 100
     Silver: 100
-
-- type: latheRecipe
-  parent: BaseGoldCircuitboardRecipe
-  id: ResearchAndDevelopmentServerMachineCircuitboard
-  result: ResearchAndDevelopmentServerMachineCircuitboard
-  categories:
-  - Machines
-  - Research
