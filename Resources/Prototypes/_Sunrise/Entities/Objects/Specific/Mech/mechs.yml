@@ -520,7 +520,7 @@
 # region Pirate Yarrk
 - type: entity
   id: MechBigYarrke
-  parent: [ BaseMech, IndustrialMech, CombatMech, BaseMajorContraband ]
+  parent: [ SunriseMechBreakageDefault, BaseMech, IndustrialMech, CombatMech, BaseMajorContraband ]
   name: Big Yarrke
   description: A heavy ancient mech for cold harsh realities of deep space. It has built-in trusts and Mining Industrial Drill.
   components:
@@ -704,7 +704,7 @@
 
 - type: entity
   id: MechPhazon
-  parent: [ BaseMech, CombatMech, BaseSecurityScienceContraband ]
+  parent: [ SunriseMechBreakageDefault, BaseMech, CombatMech, BaseSecurityScienceContraband ]
   name: Phazon
   description: The most advanced mech on the market, the pinnacle of technological development, extremely mobile and deadly.
   components:

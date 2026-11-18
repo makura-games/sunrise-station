@@ -2839,6 +2839,25 @@
       - SurplusBundle
 
 - type: listing
+  id: UplinkPirateBlyashankaBundle
+  name: uplink-mech-teleporter-ussp-medium-name
+  description: uplink-mech-teleporter-ussp-medium-desc
+  icon: { sprite: /Textures/_Sunrise/Objects/Specific/Mech/blyashanka.rsi, state: base }
+  productEntity: CratePirateMechBlyashankaBundle
+  cost:
+    Doubloon: 175
+  categories:
+  - UplinkPirateMechs
+  restockTime: 3600
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
+
+- type: listing
   id: UplinkPirateKolobokBundle
   name: uplink-mech-teleporter-ussp-name
   description: uplink-mech-teleporter-ussp-desc

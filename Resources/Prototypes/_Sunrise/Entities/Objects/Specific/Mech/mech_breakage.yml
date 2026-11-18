@@ -368,7 +368,7 @@
   components:
   - type: RandomSpawner
     prototypes:
-    - SunriseBlyashankaArmorPlate
+    - SunriseScrapBlyashankaArmorPlate
 
 - type: entity
   id: SunriseMechRoverArmorPlateSpawnerLow
@@ -379,6 +379,30 @@
   - type: RandomSpawner
     prototypes:
     - SunriseRoverArmorPlate
+
+- type: entity
+  id: SunriseMechBreakageDefault
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ScrapSteel:
+            min: 2
+            max: 4
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   id: MechBreakageRipley
@@ -423,7 +447,19 @@
         acts: ["Destruction"]
 
 - type: entity
+  id: SunriseMechBreakageGygaxTraits
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: MeleeThrowOnHit
+    distance: 1.5
+    speed: 10
+  - type: ExplosionResistance
+    damageCoefficient: 0.8
+
+- type: entity
   id: MechBreakageGygax
+  parent: SunriseMechBreakageGygaxTraits
   abstract: true
   categories: [ HideSpawnMenu ]
   components:
@@ -469,15 +505,10 @@
         node: start
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: MeleeThrowOnHit
-    distance: 1.5
-    speed: 10
-  - type: ExplosionResistance
-    damageCoefficient: 0.8
 
 - type: entity
   id: MechBreakageBlyashanka
-  parent: MechBreakageGygax
+  parent: SunriseMechBreakageGygaxTraits
   abstract: true
   categories: [ HideSpawnMenu ]
   components:
@@ -522,7 +553,33 @@
         acts: [ "Destruction" ]
 
 - type: entity
+  id: SunriseMechBreakageDurandTraits
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnMeleeHit
+    targetIsUser: true
+    triggerEveryHit: true
+  - type: KnockdownOnTrigger
+    targetUser: true
+    knockdownAmount: 1
+    autoStand: true
+    drop: false
+  - type: MeleeThrowOnHit
+    distance: 2
+    speed: 18
+  - type: Reflect
+    reflectProb: 0.20
+    spread: 180
+    soundOnReflect: /Audio/_Starlight/Armor/Ricochet/ricochet1_1.ogg
+    reflects:
+    - NonEnergy
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+
+- type: entity
   id: MechBreakageDurand
+  parent: SunriseMechBreakageDurandTraits
   abstract: true
   categories: [ HideSpawnMenu ]
   components:
@@ -571,29 +628,9 @@
         node: start
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: TriggerOnMeleeHit
-    targetIsUser: true
-    triggerEveryHit: true
-  - type: KnockdownOnTrigger
-    targetUser: true
-    knockdownAmount: 1
-    autoStand: true
-    drop: false
-  - type: MeleeThrowOnHit
-    distance: 2
-    speed: 18
-  - type: Reflect
-    reflectProb: 0.20
-    spread: 180
-    soundOnReflect: /Audio/_Starlight/Armor/Ricochet/ricochet1_1.ogg
-    reflects:
-    - NonEnergy
-  - type: ExplosionResistance
-    damageCoefficient: 0.6
-
 - type: entity
   id: MechBreakageKolobok
-  parent: MechBreakageDurand
+  parent: SunriseMechBreakageDurandTraits
   abstract: true
   categories: [ HideSpawnMenu ]
   components:
@@ -639,7 +676,7 @@
 
 - type: entity
   id: MechBreakageRover
-  parent: MechBreakageDurand
+  parent: SunriseMechBreakageDurandTraits
   abstract: true
   categories: [ HideSpawnMenu ]
   components:

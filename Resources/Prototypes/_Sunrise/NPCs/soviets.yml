@@ -11,6 +11,8 @@
   categories: [ Spawner ]
   components:
   - type: Climbing
+  - type: IdBind
+    bindPDAOwner: false
   # Allows ghosts/admins to quickly warp to soviets from the ghost teleport panel
   - type: GhostPanelAntagonistMarker
     name: ghost-panel-antagonist-soviet-name
@@ -1526,8 +1528,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      800: Critical
-      801: Dead
+      600: Critical
+      601: Dead
   - type: TriggerOnMobstateChange
     mobState:
     - Dead
@@ -1583,7 +1585,7 @@
     - trigger:
         !type:DamageTypeTrigger
         damageType: Heat
-        damage: 1500
+        damage: 2500
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawnInContainer: true
@@ -1624,7 +1626,7 @@
     baseCritThreshold: 9999
   - type: MovementSpeedModifier
     baseWalkSpeed: 1
-    baseSprintSpeed: 1
+    baseSprintSpeed: 0.75
   - type: ExplosionResistance
     damageCoefficient: 0.7
   - type: Repairable

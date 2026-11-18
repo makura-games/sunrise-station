@@ -141,6 +141,7 @@
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Mech/durand_construction.rsi
     state: kolobok_armor
+    noRot: true
   - type: Tag
     tags:
     - KolobokArmor

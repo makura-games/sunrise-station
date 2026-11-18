@@ -8,4 +8,7 @@ ent-SunriseScrapDurandCircuitBoardSpawner = спавнер плат Дюранд
 ent-SunriseScrapKolobokArmorPlate = повреждённые бронеплиты Колобка
     .desc = Повреждённые бронеплиты от меха Колобок. Они уже не годятся для сборки, но сохраняют ценные металлы.
 
+ent-SunriseScrapBlyashankaArmorPlate = повреждённые бронеплиты Бляшанки
+    .desc = Повреждённые бронеплиты от меха Бляшанка. Они уже не годятся для сборки, но сохраняют ценные металлы.
+
 ent-SunriseDurandCircuitBoardRepairResultSpawner = результат ремонта Дюранда

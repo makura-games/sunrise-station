@@ -72,12 +72,13 @@
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Materials/Scrap/Mech/durand.rsi
+    noRot: true
     layers:
     - state: armor-1
       map: [ "base" ]
   - type: Item
     sprite: _Sunrise/Objects/Materials/Scrap/Mech/durand.rsi
-    size: Large
+    size: Ginormous
   - type: RandomSprite
     available:
     - base:
@@ -90,6 +91,27 @@
       Steel: 3500
       Plasteel: 2000
       Silver: 900
+
+- type: entity
+  parent: SunriseScrapKolobokArmorPlate
+  id: SunriseScrapBlyashankaArmorPlate
+  name: damaged Blyashanka armor plates
+  description: Damaged armor plates from a Blyashanka mech. They are no longer fit for assembly, but retain valuable metals.
+  components:
+  - type: Sprite
+    layers:
+    - state: armor-5
+      map: [ "base" ]
+  - type: RandomSprite
+    available:
+    - base:
+        armor-5: ""
+        armor-6: ""
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 2000
+      Plasteel: 1000
+      Silver: 400
 
 - type: entity
   id: SunriseDurandCircuitBoardRepairResultSpawner

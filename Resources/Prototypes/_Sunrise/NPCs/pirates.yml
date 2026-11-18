@@ -123,6 +123,8 @@
   id: MobPirateBase
   suffix: AI, Pirate
   components:
+  - type: NameIdentifier
+    group: GenericNumber
   # Allows ghosts/admins to quickly warp to pirates from the ghost teleport panel
   - type: GhostPanelAntagonistMarker
     name: ghost-panel-antagonist-pirate-name

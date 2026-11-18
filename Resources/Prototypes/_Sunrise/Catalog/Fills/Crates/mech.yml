@@ -1,7 +1,3 @@
-# Debug suffix instead of category
-# so that there is a chance that the item will drop from the artifact as one of the rare rewards
-# the debug boxes of furs themselves are not something OP
-
 - type: entity
   parent: CrateScience
   id: SunriseCrateDurandAssembly
@@ -79,7 +75,6 @@
   name: Rover assembly crate
   description: >-
     A crate containing essential components to assemble a Rover mech. It does not include common mech parts, which must be obtained separately. The crate is marked with a warning: "For Cybersun Industries personnel only."
-  suffix: Debug
   components:
   - type: EntityTableContainerFill
     containers:

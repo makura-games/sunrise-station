@@ -142,14 +142,28 @@
   id: CratePirateMechKolobokBundle
   suffix: Filled
   parent: CrateLivestock
-  name: Blackmarket USSP mech bundle
-  description: Contains a set of Cybersun medium armored mechs.
+  name: USSP heavy mech crate
+  description: Contains a fully equipped heavy USSP mech and a repair kit.
   components:
   - type: EntityTableContainerFill
     containers:
       entity_storage: !type:AllSelector
         children:
         - id: MechKolobokFilled
+        - id: ToolboxSyndicateFilledRepair
+
+- type: entity
+  id: CratePirateMechBlyashankaBundle
+  suffix: Filled
+  parent: CrateLivestock
+  name: USSP medium mech crate
+  description: Contains a fully equipped medium USSP mech and a repair kit.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: SunriseMechBlyashankaFilled
         - id: ToolboxSyndicateFilledRepair
 
 - type: entity

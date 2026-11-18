@@ -141,6 +141,7 @@
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Mech/blyashanka_construction.rsi
     state: banka_armor
+    noRot: true
   - type: Tag
     tags:
     - SunriseBlyashankaArmor

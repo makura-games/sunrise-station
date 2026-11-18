@@ -8,4 +8,7 @@ ent-SunriseScrapDurandCircuitBoardSpawner = durand scrap spawner
 ent-SunriseScrapKolobokArmorPlate = damaged Kolobok armor plates
     .desc = Damaged armor plates from a Kolobok mech. They are no longer fit for assembly, but retain valuable metals.
 
+ent-SunriseScrapBlyashankaArmorPlate = damaged Blyashanka armor plates
+    .desc = Damaged armor plates from a Blyashanka mech. They are no longer fit for assembly, but retain valuable metals.
+
 ent-SunriseDurandCircuitBoardRepairResultSpawner = durand repair result
