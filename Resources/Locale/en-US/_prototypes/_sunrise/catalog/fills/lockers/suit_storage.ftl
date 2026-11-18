@@ -1,8 +1,8 @@
 ent-SuitStorageBlueShield = { ent-SuitStorageBase }
     .suffix = BlueShield
     .desc = { ent-SuitStorageBase.desc }
-ent-SuitStorageSecSunrise = { ent-SuitStorageBase }
-    .suffix = Security, Sunrise
+ent-SuitStorageSergeant = { ent-SuitStorageBase }
+    .suffix = Sergeant, Sunrise
     .desc = { ent-SuitStorageBase.desc }
 ent-SuitStorageEVAPirateSun = { ent-SuitStorageBase }
     .suffix = Pirate EVA, Sunrise

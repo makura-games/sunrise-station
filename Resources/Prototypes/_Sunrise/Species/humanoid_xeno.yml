@@ -38,7 +38,7 @@
 - type: bodyType
   id: HumanoidXenoNormal
   name: body-normal
-  visualKey: body-normal
+  visualKey: body-curved-tajaran
   layers:
     Head:
       sprite: _Sunrise/Mobs/Species/HumanoidXeno/parts.rsi

@@ -1,8 +1,8 @@
 ent-SuitStorageBlueShield = { ent-SuitStorageBase }
     .suffix = Синий щит
     .desc = { ent-SuitStorageBase.desc }
-ent-SuitStorageSecSunrise = { ent-SuitStorageBase }
-    .suffix = Служба безопасности, Санрайз
+ent-SuitStorageSergeant = { ent-SuitStorageBase }
+    .suffix = Сержант/Инструктор
     .desc = { ent-SuitStorageBase.desc }
 ent-SuitStorageEVAPirateSun = { ent-SuitStorageBase }
     .suffix = Пираты ЕВА, Санрайз
