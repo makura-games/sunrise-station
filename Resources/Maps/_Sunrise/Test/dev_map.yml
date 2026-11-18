@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 10/17/2026 15:27:39
-  entityCount: 3822
+  entityCount: 3824
 maps:
 - 23
 grids:
@@ -12111,6 +12111,20 @@ entities:
     - type: Transform
       parent: 1
       pos: 66.5,64.5
+- proto: ComputerShipyard
+  entities:
+  - uid: 3823
+    components:
+    - type: Transform
+      parent: 1
+      pos: 25.5,13.5
+- proto: ComputerShipyardSecurity
+  entities:
+  - uid: 3824
+    components:
+    - type: Transform
+      parent: 1
+      pos: 24.5,13.5
 - proto: ComputerShuttle
   entities:
   - uid: 2638
