@@ -25,6 +25,41 @@
     price: 20000
 
 - type: entity
+  id: SunriseWeaponMechCombatRpd
+  name: mounted RPD-M
+  description: A mech-mounted adaptation of the RPD-Sh fed directly by the mech's power supply.
+  suffix: Mech Weapon, Combat, USSP
+  parent: [ BaseMechWeaponRange, CombatMechEquipment ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/LMGs/rpd/big.rsi
+    state: icon
+  - type: Gun
+    minAngle: 6
+    maxAngle: 60
+    angleIncrease: 1
+    angleDecay: 25
+    fireRate: 7.5
+    burstFireRate: 8
+    shotsPerBurst: 12
+    selectedMode: Burst
+    availableModes:
+      - Burst
+    soundGunshot:
+      collection: RPD
+  - type: BatteryAmmoProvider
+    proto: CartridgeLightRifleSP
+    fireCost: 5
+  - type: Appearance
+  - type: AmmoCounter
+  - type: Tag
+    tags:
+    - CombatMech
+    - SunriseBlyashankaRpd
+  - type: StaticPrice
+    price: 3500
+
+- type: entity
   id: WeaponMechCombatMaxim
   name: Mounted Kardashev-Maxim
   description: An ancient heavy machine gun given new life as a mech-mounted gun
@@ -166,22 +201,41 @@
     sprite: _Sunrise/Objects/Specific/Mech/mecha_kord_inhands.rsi
     size: Ginormous
   - type: Gun
-    minAngle: 2
-    maxAngle: 50
-    angleIncrease: 5
-    angleDecay: 35
-    fireRate: 3.7
-    selectedMode: FullAuto
+    selectedMode: Burst
     availableModes:
-    - FullAuto
+    - Burst
+    burstFireRate: 6
+    shotsPerBurst: 4
+    burstCooldown: 1.5
+    minAngle: 2
+    maxAngle: 35
+    angleIncrease: 2
+    angleDecay: 30
+    projectileSpeed: 25
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ship_duster.ogg
       params:
         volume: 15
         pitch: 1.9
-  - type: BatteryAmmoProvider
-    proto: CartridgeRifleHeavy127mm
-    fireCost: 25
+  - type: MagazineAmmoProvider
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        startingItem: MagazineBoxBeltLight127
+        name: Magazine
+        priority: 2
+        whitelist:
+          tags:
+          - LightAmmoBelt127
+        insertSound:
+          path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
+          params:
+            pitch: 1.2
+            variation: 0.08
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
   - type: Appearance
   - type: AmmoCounter
   - type: StaticPrice
