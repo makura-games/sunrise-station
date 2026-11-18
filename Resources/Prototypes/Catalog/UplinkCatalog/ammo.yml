@@ -11,8 +11,8 @@
   categories:
   - UplinkAmmo
 
-# For the C20R
 
+# For the C20R
 - type: listing
   id: UplinkMagazinePistolSubMachineGun
   # name: uplink-pistol-magazine-c20r-name # Sunrise-Edit
@@ -31,8 +31,8 @@
       - AssaultOpsUplink
   #Sunrise-end
 
-# For the Bulldog
 
+# For the Bulldog
 - type: listing
   id: UplinkMagazineShotgunPellet
   #name: uplink-magazine-bulldog-pellet-name # Sunrise-Edit
@@ -43,6 +43,7 @@
     Telecrystal: 2
   categories:
   - UplinkAmmo
+
 
 - type: listing
   id: UplinkMagazineShotgunSlug
@@ -55,8 +56,8 @@
   categories:
   - UplinkAmmo
 
-# For the Cobra
 
+# For the Cobra
 - type: listing
   id: UplinkMagazinePistolCaselessRifle
   name: uplink-pistol-magazine-caseless-name
@@ -68,8 +69,8 @@
   categories:
   - UplinkAmmo
 
-# For the Mosin
 
+# For the mosin
 - type: listing
   id: UplinkMosinAmmo
   name: uplink-mosin-ammo-name
@@ -87,8 +88,8 @@
       - AssaultOpsUplink
   #Sunrise-end
 
-# For the Estoc
 
+# For the Estoc
 - type: listing
   id: UplinkEstocAmmo
   #name: uplink-estoc-ammo-name # Sunrise-edit
@@ -99,8 +100,8 @@
   categories:
   - UplinkAmmo
 
-# For the Hristov
 
+# for the hristov
 - type: listing
   id: UplinkHristovAmmo
   name: uplink-sniper-ammo-name
@@ -117,6 +118,7 @@
       tags:
       - AssaultOpsUplink
   #Sunrise-end
+
 
 - type: listing
   id: UplinkAmmoBundle
@@ -138,6 +140,7 @@
         components:
           - SurplusBundle
 
+
 # for the clake:
 - type: listing
   id: GrenadeFrag
@@ -149,6 +152,7 @@
   categories:
   - UplinkAmmo
 
+
 - type: listing
   id: GrenadeBlast
   name: uplink-ammo-blast-name
@@ -157,4 +161,4 @@
   cost:
     Telecrystal: 3
   categories:
-    - UplinkAmmo
+  - UplinkAmmo

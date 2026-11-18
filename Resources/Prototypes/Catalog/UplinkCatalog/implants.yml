@@ -4,7 +4,7 @@
   id: UplinkStorageImplanter
   name: uplink-storage-implanter-name
   description: uplink-storage-implanter-desc
-  icon: { sprite: /Textures/_Sunrise/Clothing/Back/Resprites/Backpacks/backpack.rsi, state: icon } # Sunrise-Edit
+  icon: { sprite: /Textures/Clothing/Back/Backpacks/backpack.rsi, state: icon }
   productEntity: StorageImplanter
   discountCategory: rareDiscounts
   discountDownTo:
@@ -20,6 +20,7 @@
           - NukeOpsUplink
           - LoneOpsUplink # Sunrise-Add
 
+
 - type: listing
   id: UplinkFreedomImplanter
   name: uplink-freedom-implanter-name
@@ -34,6 +35,7 @@
   categories:
     - UplinkImplants
 
+
 - type: listing
   id: UplinkScramImplanter
   name: uplink-scram-implanter-name
@@ -47,6 +49,7 @@
     Telecrystal: 2 # it's a gamble that may kill you easily so 1 TC per use.
   categories:
     - UplinkImplants
+
 
 - type: listing
   id: UplinkDnaScramblerImplant
@@ -69,6 +72,7 @@
       - FugitiveUplink
   #Sunrise-end
 
+
 - type: listing
   id: UplinkEmpImplanter
   name: uplink-emp-implanter-name
@@ -83,6 +87,7 @@
   categories:
     - UplinkImplants
 
+
 - type: listing
   id: UplinkRadioImplanter
   name: uplink-radio-implanter-name
@@ -96,6 +101,7 @@
     Telecrystal: 2
   categories:
   - UplinkImplants
+
 
 - type: listing
   id: UplinkMicroBombImplanter
@@ -114,6 +120,7 @@
       - NukeOpsUplink
       - LoneOpsUplink # Sunrise-Edit
 
+
 - type: listing
   id: UplinkMacroBombImplanter
   name: uplink-macro-bomb-implanter-name
@@ -131,6 +138,7 @@
       - NukeOpsUplink
       - LoneOpsUplink # Sunrise-Edit
 
+
 - type: listing
   id: UplinkDeathAcidifierImplanter
   name: uplink-death-acidifier-implant-name
@@ -147,6 +155,7 @@
         tags:
           - NukeOpsUplink
           - LoneOpsUplink # Sunrise-Edit
+
 
 - type: listing
   id: UplinkUplinkImplanter # uplink uplink real
@@ -167,6 +176,7 @@
           - AssaultOpsUplink
           - FugitiveUplink
 
+
 - type: listing
   id: UplinkDeathRattle
   name: uplink-deathrattle-implant-name
@@ -182,6 +192,7 @@
       tags:
       - NukeOpsUplink
 
+
 - type: listing
   id: UplinkFakeMindshield
   name: uplink-fake-mindshield-name
@@ -194,6 +205,7 @@
     Telecrystal: 3 # Sunrise-Edit
   categories:
   - UplinkImplants
+
 
 - type: listing
   id: UplinkVoiceMaskImplant

@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Sprited by KaiserMaus based on existing sprites",
+    "copyright": "Sprited by KaiserMaus based on existing sprites; bananafake, boxingglovesfake, canefake, capgunlethal, gasmaskfake, insul, insulfake, lanternflash, nukediskfake, pdafake, sentry, shoesfake, syndiebombfake, syndieempbombfake by K-Dynamic (github)",
     "size": {
         "x": 32,
         "y": 32
@@ -18,6 +18,51 @@
         },
         {
             "name": "jammer"
+        },
+        {
+            "name": "bananafake"
+        },
+        {
+            "name": "boxingglovesfake"
+        },
+        {
+            "name": "canefake"
+        },
+        {
+            "name": "capgunlethal"
+        },
+        {
+            "name": "gasmaskfake"
+        },
+        {
+            "name": "insul"
+        },
+        {
+            "name": "insulfake"
+        },
+        {
+            "name": "lanternflash"
+        },
+        {
+            "name": "nukediskfake"
+        },
+        {
+            "name": "pdafake"
+        },
+        {
+            "name": "sentry"
+        },
+        {
+            "name": "shoesfake"
+        },
+        {
+            "name": "syndiebombfake"
+        },
+        {
+            "name": "syndieempbombfake"
+        },
+        {
+            "name": "syngularity"
         }
     ]
 }

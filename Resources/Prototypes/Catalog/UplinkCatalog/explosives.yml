@@ -18,6 +18,7 @@
       tags:
       - NukeOpsUplink
 
+
 - type: listing
   id: UplinkSmokeGrenade
   name: uplink-smoke-grenade-name
@@ -27,13 +28,7 @@
     Telecrystal: 1
   categories:
   - UplinkExplosives
-  # Sunrise added start - исключаем товар из аплинка штурмовых оперативников
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - AssaultOpsUplink
-  # Sunrise added end
+
 
 - type: listing
   id: UplinkSyndieMiniBomb
@@ -52,6 +47,7 @@
     blacklist:
       tags:
       - AssaultOpsUplink
+
 
 - type: listing
   id: UplinkGrenadePenguin
@@ -73,6 +69,7 @@
       - AssaultOpsUplink
   #Sunrise-end
 
+
 - type: listing
   id: UplinkC4
   name: uplink-c4-name
@@ -85,6 +82,7 @@
     Telecrystal: 2
   categories:
   - UplinkExplosives
+
 
 - type: listing
   id: UplinkGrenadierRig
@@ -105,6 +103,7 @@
       - NukeOpsUplink
       - LoneOpsUplink #Sunrise added
 
+
 - type: listing
   id: UplinkC4Bundle
   name: uplink-c4-bundle-name
@@ -118,6 +117,7 @@
   categories:
   - UplinkExplosives
 
+
 - type: listing
   id: UplinkEmpGrenade
   name: uplink-emp-grenade-name
@@ -130,6 +130,7 @@
     Telecrystal: 2
   categories:
   - UplinkExplosives
+
 
 - type: listing
   id: UplinkExplodingPen
@@ -145,11 +146,12 @@
   categories:
   - UplinkExplosives
 
+
 - type: listing
   id: UplinkSyndicateBomb
   name: uplink-exploding-syndicate-bomb-name
   description: uplink-exploding-syndicate-bomb-desc
-  productEntity: SyndicateBomb
+  productEntity: BoxSyndicateBomb # Sunrise-Edit
   cost:
     Telecrystal: 11
   categories:
@@ -163,11 +165,12 @@
       - LoneOpsUplink
       - AssaultOpsUplink
 
+
 - type: listing
   id: UplinkSyndicateBombNukie
   name: uplink-exploding-syndicate-bomb-name
   description: uplink-exploding-syndicate-bomb-desc
-  productEntity: SyndicateBomb
+  productEntity: BoxSyndicateBomb # Sunrise-Edit
   cost:
     Telecrystal: 11
   categories:
@@ -179,6 +182,7 @@
       - NukeOpsUplink
       - LoneOpsUplink
       - AssaultOpsUplink
+
 
 - type: listing
   id: UplinkGrenadeShrapnel
@@ -200,6 +204,7 @@
       - AssaultOpsUplink
   #Sunrise-end
 
+
 - type: listing
   id: UplinkGrenadeIncendiary
   name: uplink-incendiary-grenade-name
@@ -212,6 +217,14 @@
     Telecrystal: 4
   categories:
   - UplinkExplosives
+  #Sunrise-start
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - AssaultOpsUplink
+  #Sunrise-end
+
 
 - type: listing
   id: UplinkPowerSink
