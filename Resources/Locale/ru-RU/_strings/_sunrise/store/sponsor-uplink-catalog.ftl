@@ -261,16 +261,12 @@ uplink-sunrise-tape-player-name = Магнитофон
 
 ## Paint
 
-uplink-sunrise-spray-paint-desc = Баночка аэрозольной краски.
-uplink-sunrise-spray-paint-blue-name = Баллончик краски (синий)
-uplink-sunrise-spray-paint-black-name = Баллончик краски (чёрный)
-uplink-sunrise-spray-paint-red-name = Баллончик краски (красный)
-uplink-sunrise-spray-paint-green-name = Баллончик краски (зелёный)
-uplink-sunrise-spray-paint-orange-name = Баллончик краски (оранжевый)
-uplink-sunrise-spray-paint-purple-name = Баллончик краски (фиолетовый)
-uplink-sunrise-spray-paint-white-name = Баллончик краски (белый)
+uplink-sunrise-spray-paint-name = настраиваемый баллончик краски
+uplink-sunrise-spray-paint-desc = Баллончик аэрозольной краски с настраиваемым цветом.
+
 uplink-sunrise-box-arbiter-bundle-name = Набор Арбитра
 uplink-sunrise-box-redmist-bundle-name = Набор Красного Тумана
+
 uplink-sunrise-rcd-ammo-name = Картридж РСУ
 uplink-sunrise-rcd-name = РСУ
 uplink-sunrise-holographic-paper-name = Голо-планшет

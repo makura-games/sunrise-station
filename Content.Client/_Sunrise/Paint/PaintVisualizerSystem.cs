@@ -46,7 +46,8 @@ namespace Content.Client._Sunrise.Paint
                 if (spriteLayer is not Layer layer)
                     continue;
 
-                if (layer.Shader == null) // If shader isn't null we dont want to replace the original shader.
+                // Ну и херня
+                if (layer.Shader == null && layer.ShaderPrototype == null)
                 {
                     layer.Shader = Shader;
                     layer.Color = component.Color;
