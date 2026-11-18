@@ -1,0 +1,85 @@
+# region Syndicate
+
+- type: entity
+  parent: PlayerBorgSyndicateMedicalBattery
+  id: PlayerBorgSyndicateMedicalBatteryGhostRole
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-syndicate-medical-cyborg-name
+    description: ghost-role-information-syndicate-medical-cyborg-description
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+    mindRoles:
+    - MindRoleGhostRoleSilicon
+
+- type: entity
+  parent: PlayerBorgSyndicateReaperBattery
+  id: PlayerBorgSyndicateReaperBatteryGhostRole
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-syndicate-reaper-cyborg-name
+    description: ghost-role-information-syndicate-reaper-cyborg-description
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+    mindRoles:
+    - MindRoleGhostRoleSilicon
+
+- type: entity
+  parent: PlayerBorgHeavySyndicateCombatBattery
+  id: PlayerBorgHeavySyndicateCombatBatteryGhostRole
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-syndicate-heavy-cyborg-name
+    description: ghost-role-information-syndicate-heavy-cyborg-description
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+    mindRoles:
+    - MindRoleGhostRoleSilicon
+
+- type: entity
+  parent: PlayerBorgSyndicateAssaultBattery
+  id: PlayerBorgSyndicateAssaultBatteryGhostRole
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-syndicate-cyborg-assault-name
+    description: ghost-role-information-syndicate-cyborg-description
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+    mindRoles:
+    - MindRoleGhostRoleSilicon
+
+- type: entity
+  parent: PlayerBorgSyndicateSaboteurBattery
+  id: PlayerBorgSyndicateSaboteurBatteryGhostRole
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-syndicate-saboteur-cyborg-name
+    description: ghost-role-information-syndicate-saboteur-cyborg-description
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+    mindRoles:
+    - MindRoleGhostRoleSilicon
+
+- type: entity
+  parent: PlayerBorgChassisSyndicateSpiderBattery
+  id: PlayerBorgChassisSyndicateSpiderBatteryGhostRole
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRole
+    name: ghost-role-information-syndicate-spider-cyborg-name
+    description: ghost-role-information-syndicate-spider-cyborg-description
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+    mindRoles:
+    - MindRoleGhostRoleSilicon
