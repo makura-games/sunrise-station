@@ -1361,8 +1361,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      300: Critical
-      301: Dead
+      475: Critical
+      476: Dead
   - type: TriggerOnMobstateChange
     mobState:
     - Dead
@@ -1381,16 +1381,18 @@
     allowedStates:
     - Alive
     - Critical
+    interval: 5
   - type: SlowOnDamage
     speedModifierThresholds:
-      150: 0.9
-      250: 0.8
+      100: 0.95
+      200: 0.9
       300: 0.7
+      400: 0.5
   - type: Stamina
     baseCritThreshold: 9999
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 3.5
+    baseWalkSpeed: 2.5
+    baseSprintSpeed: 4
   - type: ExplosionResistance
     damageCoefficient: 0.7
   - type: Repairable
@@ -1616,6 +1618,7 @@
     allowedStates:
     - Alive
     - Critical
+    interval: 5
   - type: SlowOnDamage
     speedModifierThresholds:
       150: 0.9
