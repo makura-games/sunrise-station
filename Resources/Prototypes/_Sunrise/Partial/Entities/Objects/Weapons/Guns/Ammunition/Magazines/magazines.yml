@@ -1,0 +1,285 @@
+# Стандартные магазины используют SP-патроны на Sunrise без отдельных *SP ID.
+
+- type: !PartialOnly entity
+  id: BaseMagazineRifle
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/rifle_mag.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+
+- type: !PartialOnly entity
+  id: MagazinePistol
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistolSP
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: sp
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left: !Clear
+      - !Index:0
+        state: inhand-left-mag
+      - !Index:0
+        state: inhand-left-stripe
+        color: "#575EF5"
+      right: !Clear
+      - !Index:0
+        state: inhand-right-mag
+      - !Index:0
+        state: inhand-right-stripe
+        color: "#575EF5"
+
+- type: !PartialOnly entity
+  id: MagazinePistolHighCapacity
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistolSP
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - !Index:0
+      state: stripe
+      color: "#575EF5"
+  - type: Item
+    inhandVisuals:
+      left: !Clear
+      - !Index:0
+        state: inhand-left-mag
+      - !Index:0
+        state: inhand-left-stripe
+        color: "#575EF5"
+      right: !Clear
+      - !Index:0
+        state: inhand-right-mag
+      - !Index:0
+        state: inhand-right-stripe
+        color: "#575EF5"
+
+- type: !PartialOnly entity
+  id: MagazinePistolSubMachineGun
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistolSP
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - !Index:0
+      state: stripe
+      color: "#575EF5"
+  - type: Item
+    inhandVisuals:
+      left: !Clear
+      - !Index:0
+        state: inhand-left-mag
+      - !Index:0
+        state: inhand-left-stripe
+        color: "#575EF5"
+      right: !Clear
+      - !Index:0
+        state: inhand-right-mag
+      - !Index:0
+        state: inhand-right-stripe
+        color: "#575EF5"
+
+- type: !PartialOnly entity
+  id: MagazinePistolSubMachineGunTopMounted
+  name: WT550 magazine (.35 auto top-mounted)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistolSP
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-unshaded-1
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+    - !Index:0
+      state: stripe
+      color: "#575EF5"
+  - type: Item
+    storedRotation: -90
+    inhandVisuals:
+      left: !Clear
+      - !Index:0
+        state: inhand-left
+      - !Index:0
+        state: inhand-left-stripe
+        color: "#575EF5"
+      right: !Clear
+      - !Index:0
+        state: inhand-right
+      - !Index:0
+        state: inhand-right-stripe
+        color: "#575EF5"
+
+- type: !PartialOnly entity
+  id: MagazinePistolSubMachineGunTopMountedEmpty
+  components:
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-unshaded-1
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Item
+    inhandVisuals:
+      left: !Clear
+      - !Index:0
+        state: inhand-left
+      right: !Clear
+      - !Index:0
+        state: inhand-right
+
+- type: !PartialOnly entity
+  id: MagazineMagnum
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeMagnumSP
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - !Index:0
+      state: stripe
+      color: "#575EF5"
+  - type: Item
+    inhandVisuals:
+      left: !Clear
+      - !Index:0
+        state: inhand-left-mag
+      - !Index:0
+        state: inhand-left-stripe
+        color: "#575EF5"
+      right: !Clear
+      - !Index:0
+        state: inhand-right-mag
+      - !Index:0
+        state: inhand-right-stripe
+        color: "#575EF5"
+
+- type: !PartialOnly entity
+  id: MagazineRifle
+  name: "magazine (.20 rifle)"
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifleSP
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - !Index:0
+      state: stripe
+      color: "#575EF5"
+  - type: Item
+    inhandVisuals:
+      left: !Clear
+      - !Index:0
+        state: inhand-left-mag
+      - !Index:0
+        state: inhand-left-stripe
+        color: "#575EF5"
+      right: !Clear
+      - !Index:0
+        state: inhand-right-mag
+      - !Index:0
+        state: inhand-right-stripe
+        color: "#575EF5"
+
+# Базовые определения этих актуальных ванильных ID временно добавлены в
+# _Sunrise/Entities/Objects/Weapons/Guns/Ammunition/Magazines/vanilla.yml.
+- type: !PartialOnly entity
+  id: MagazineLightRifle
+  name: "magazine (.30 rifle)"
+  parent: BaseMagazineLightRifle
+  description: Curved 30-round double stack magazine for combat rifles. Intended to hold general-purpose kinetic ammunition.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeLightRifleSP
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - !Index:0
+      state: stripe
+      color: "#575EF5"
+  - type: Item
+    inhandVisuals:
+      left: !Clear
+      - !Index:0
+        state: inhand-left-mag
+      - !Index:0
+        state: inhand-left-stripe
+        color: "#575EF5"
+      right: !Clear
+      - !Index:0
+        state: inhand-right-mag
+      - !Index:0
+        state: inhand-right-stripe
+        color: "#575EF5"
+
+- type: !PartialOnly entity
+  id: MagazineLightRifleBox
+  name: "L6 SAW magazine box (.20 rifle)"
+  parent: [ BaseNonCycleableAmmoProvider, BaseMagazineRifle ]
+  description: Box containing a 200-round belt of linked .20 rifle rounds, used by light machine guns such as the L6. Intended to hold general-purpose kinetic ammunition.
+  components:
+  - type: Tag
+    tags:
+    - MagazineLightRifleBox
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifleSP
+    capacity: 200
+  - type: Item
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_box.rsi
+    layers: !Clear
+    - !Index:0
+      state: uranium
+      color: "#575EF5"
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 8
+    zeroVisible: false
+  - type: Appearance
+

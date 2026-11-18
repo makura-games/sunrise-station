@@ -1,9 +1,7 @@
 ent-WeaponRifleAk = AKMS
     .desc = A somewhat battered combat rifle of a design originating from old Earth. Favored by criminals, militias, and terrorists due to its famed reliability and easy-to-manufacture design. Feeds from .30 rifle magazines.
-ent-WeaponRifleM90GrenadeLauncher = M-90gl
-    .desc = An older bullpup carbine model, with an attached underbarrel grenade launcher. Uses .20 rifle ammo.
 ent-WeaponRifleLecter = Lecter
-    .desc = A high end military grade assault rifle. Uses .20 rifle ammo.
+    .desc = A popular gas-operated combat rifle used heavily by Nanotrasen and SolGov. Operating in semi-automatic or fully automatic modes, its accuracy, stopping power, and reliability make it effective in nearly any environment. Feeds from .20 rifle magazines.
 ent-WeaponRifleLecterXL8 = XL8
     .desc = The Experimental Lecter 8. An unreasonably expensive military-grade assault rifle with an integrated optic. Uses .20 rifle ammo.
 ent-WeaponRifleEstoc = Estoc DMR

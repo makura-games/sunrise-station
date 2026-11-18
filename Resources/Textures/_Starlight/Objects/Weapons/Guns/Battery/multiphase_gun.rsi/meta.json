@@ -164,6 +164,14 @@
 		{
 			"name": "destroy-inhand-right",
 			"directions": 4
+		},
+        {
+			"name": "stun-inhand-left",
+			"directions": 4
+		},
+		{
+			"name": "stun-inhand-right",
+			"directions": 4
 		}
     ]
 }

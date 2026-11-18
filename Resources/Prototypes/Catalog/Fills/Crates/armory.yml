@@ -10,7 +10,7 @@
         children:
         - id: WeaponSubMachineGunWt550
           amount: 2
-        - id: MagazinePistolSubMachineGunTopMountedSP # Sunrise-Edit
+        - id: MagazinePistolSubMachineGunTopMounted # Sunrise-Edit
           amount: 4
 
 - type: entity
@@ -111,7 +111,7 @@
           amount: 2
         - id: ClothingHeadHelmetRiot
           amount: 2
-        - id: WeaponShotgunRiot #Sunrise-Edit
+        - id: WeaponShotgunEnforcerRubber
           amount: 2
         - id: BoxBeanbag
           amount: 2

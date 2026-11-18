@@ -39,7 +39,7 @@
   tier: 2
   cost: 10000
   recipeUnlocks:
-  - WeaponEnergyGunPistol
+  - WeaponAdvancedTaser
   - WeaponMiniEnergyGun
   technologyPrerequisites:
   - NonlethalAmmunition
@@ -71,7 +71,7 @@
   - MagazinePistolFMJ
   - MagazinePistol40FMJ
   - MagazinePistolSubMachineGunFMJ
-  - MagazinePistolSubMachineGunTopMounted
+  - MagazinePistolSubMachineGunTopMountedFMJ
   - MagazineRifleFMJ
   - MagazineRifleHeavyFMJ
   technologyPrerequisites:
@@ -91,7 +91,6 @@
   recipeUnlocks:
   - WeaponLaserSvalinn
   - SunriseWeaponLaserCarbineBattery
-  - MagazineBatteryLr30
   technologyPrerequisites:
   - WeaponizedLaserManipulation
   radioChannels:
@@ -108,7 +107,6 @@
   cost: 12500
   recipeUnlocks:
   - WeaponLaserLNT620
-  - MagazineBatteryLr60
   technologyPrerequisites:
   - SunriseBatteryEnergyWeaponry
   radioChannels:
@@ -118,7 +116,7 @@
   id: ArmorPenetrationMunitions
   name: research-technology-armor-penetration
   icon:
-    sprite: Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/rifle_mag.rsi
     state: ap
   discipline: Arsenal
   tier: 3
@@ -265,10 +263,9 @@
   tier: 2
   cost: 7500
   recipeUnlocks:
-  - ClothingShoesBootsMagCombat
-  #- ModularReceiverAuto
-  - LecterUpgrade
-  - DrozdUpgrade
+  - ClothingShoesBootsMagSec
+  - KammererTrenchUpgradeKit
+  - KammererSawnUpgradeKit
   - ClothingHeadHelmetPubg
   - VestSecUpgradeBullet
   - VestSecUpgradeRiot
@@ -276,6 +273,7 @@
   - PouchAmmo
   technologyPrerequisites:
   - AdvancedRiotControl
+  - MagnetsTech
   radioChannels:
   - Security
 
@@ -283,14 +281,19 @@
   id: AdvancedCombatEquipment
   name: research-technology-advanced-combat-equipment
   icon:
-    sprite: _Sunrise/Clothing/OuterClothing/Vests/web_armor_sec.rsi
+    sprite: _Sunrise/Clothing/OuterClothing/Vests/web_armor_blue.rsi
     state: icon
   discipline: Arsenal
   tier: 3
   cost: 20000
   recipeUnlocks:
   - VestSecUpgradeBulletHeavy
-  - VestSecUpgradeWeb
+  - LecterUpgrade
+  - DrozdUpgrade
+  - LerkaUpgrade
+  - LarkerUpgrade
+  - MagazinePistol40SubMachineGunEmpty
+  - MagazineRifleM52Empty
   technologyPrerequisites:
   - CombatEquipment
   radioChannels:
@@ -347,20 +350,6 @@
   - Security
 
 # Tier 4
-- type: technology
-  id: DecloneTechnology
-  name: research-technology-declone-technology
-  icon:
-    sprite: _Starlight/Objects/Weapons/Guns/Battery/decloner.rsi
-    state: icon
-  discipline: Arsenal
-  tier: 4
-  cost: 30000
-  recipeUnlocks:
-  - WeaponDecloner
-  radioChannels:
-  - Security
-
 - type: technology
   id: ScanGateTechnology
   name: research-technology-scan-gate

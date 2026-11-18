@@ -17,14 +17,7 @@
     - Back
     - suitStorage
   - type: AmmoCounter
-  - type: GunWieldBonus # Sunrise-start
-    minAngle: -20
-    maxAngle: -30
   - type: Gun
-    minAngle: 21
-    maxAngle: 60
-    angleIncrease: 1.25
-    angleDecay: 20  # Sunrise-end
     fireRate: 5
     selectedMode: FullAuto
     availableModes:
@@ -39,7 +32,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifleSP
+        startingItem: MagazineLightRifle
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
@@ -49,7 +42,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
@@ -95,7 +87,14 @@
         map: ["enum.GunVisualLayers.Base"]
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -16
   - type: Gun
+    minAngle: 21
+    maxAngle: 32
+    angleIncrease: 1.5
+    angleDecay: 9.5
     soundGunshot:
       collection: ak47 # Sunrise-Edit
   - type: ChamberMagazineAmmoProvider
@@ -105,7 +104,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifleSP
+        startingItem: MagazineLightRifle
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
@@ -115,7 +114,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
@@ -145,14 +143,21 @@
         map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/lecter_new.rsi # Sunrise-Edit
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -18
   - type: Gun
+    minAngle: 21
+    maxAngle: 32
+    angleIncrease: 1
+    angleDecay: 9.5
     soundGunshot:
       collection: galil # Sunrise-Edit
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineRifleSP
+        startingItem: MagazineRifle
         insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
         priority: 2
@@ -162,7 +167,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleSP
         priority: 1
         whitelist:
           tags:
@@ -226,6 +230,10 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Rifles/estoc.rsi
   - type: Gun
+    minAngle: 21
+    maxAngle: 32
+    angleIncrease: 0.5
+    angleDecay: 4
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/estocshot.ogg
     shotsPerBurst: 3
@@ -248,7 +256,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleSP
         priority: 1
         whitelist:
           tags:

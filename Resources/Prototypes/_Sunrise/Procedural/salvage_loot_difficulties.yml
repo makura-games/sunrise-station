@@ -206,6 +206,14 @@
   loots:
     - !type:RandomSpawnsLoot
       entries:
+        - proto: MagazineGarand
+          prob: 0.1
+        - proto: BriefcaseWeaponGarandFilled
+          prob: 0.01
+          cost: 25
+        - proto: BlueprintMagazineGarand
+          prob: 0.05
+          cost: 5
         - proto: AdvMopItem
           prob: 0.5
         - proto: AmmoTechFabCircuitboard
@@ -374,6 +382,14 @@
   loots:
     - !type:RandomSpawnsLoot
       entries:
+        - proto: MagazineGarand
+          prob: 0.2
+        - proto: BriefcaseWeaponGarandFilled
+          prob: 0.03
+          cost: 25
+        - proto: BlueprintMagazineGarand
+          prob: 0.1
+          cost: 5
         - proto: AmmoTechFabCircuitboard
           prob: 0.25
           cost: 15
@@ -544,6 +560,14 @@
   loots:
     - !type:RandomSpawnsLoot
       entries:
+        - proto: MagazineGarand
+          prob: 0.25
+        - proto: BriefcaseWeaponGarandFilled
+          prob: 0.05
+          cost: 25
+        - proto: BlueprintMagazineGarand
+          prob: 0.2
+          cost: 5
         - proto: AmmoTechFabCircuitboard
           prob: 0.25
           cost: 15

@@ -576,3 +576,105 @@
       - HandGrenadeAmmo
       - MagazineGrenade
       - Grenade
+  - type: ItemSlots
+    slots:
+      grenade_launcher:
+        whitelist:
+          tags:
+          - SunriseGrenadeLauncherBandolierCompatible
+  - type: ItemMapper
+    sprite: _Sunrise/Clothing/Belt/belt_overlay.rsi
+    containerWhitelist:
+    - grenade_launcher
+    mapLayers:
+      launchergl70:
+        whitelist:
+          tags:
+          - SunriseGrenadeLauncherBandolierCompatible
+  - type: Appearance
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+      grenade_launcher: !type:ContainerSlot
+
+- type: entity
+  parent: ClothingBeltStorageBase
+  id: SunriseClothingBeltGrenadeLauncherBandolier
+  name: grenade launcher bandolier
+  description: A bandolier with grenade pouches and a separate attachment for a grenade launcher.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Belt/soviet_bandolier.rsi
+    layers:
+    - state: icon
+    - state: beltgrenade1
+      sprite: _Sunrise/Clothing/Belt/belt_overlay.rsi
+      map: ["beltgrenade1"]
+      visible: false
+    - state: beltgrenade2
+      sprite: _Sunrise/Clothing/Belt/belt_overlay.rsi
+      map: ["beltgrenade2"]
+      visible: false
+    - state: beltgrenade3
+      sprite: _Sunrise/Clothing/Belt/belt_overlay.rsi
+      map: ["beltgrenade3"]
+      visible: false
+    - state: beltgrenade4
+      sprite: _Sunrise/Clothing/Belt/belt_overlay.rsi
+      map: ["beltgrenade4"]
+      visible: false
+    - state: beltgrenade5
+      sprite: _Sunrise/Clothing/Belt/belt_overlay.rsi
+      map: ["beltgrenade5"]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Belt/soviet_bandolier.rsi
+    equippedState: equipped-BELT
+    slots:
+    - BELT
+    - SUITSTORAGE
+  - type: Storage
+    hideStackVisualsWhenClosed: false
+    grid:
+    - 0,0,1,4
+    whitelist:
+      tags:
+      - Grenade
+      - HandGrenadeAmmo
+      - MagazineGrenade
+  - type: ItemSlots
+    slots:
+      grenade_launcher:
+        whitelist:
+          tags:
+          - SunriseGrenadeLauncherBandolierCompatible
+  - type: ItemMapper
+    sprite: _Sunrise/Clothing/Belt/belt_overlay.rsi
+    containerWhitelist:
+    - grenade_launcher
+    mapLayers:
+      launcher:
+        whitelist:
+          tags:
+          - SunriseGrenadeLauncherBandolierCompatible
+  - type: ItemCounter
+    count:
+      tags:
+      - Grenade
+      - HandGrenadeAmmo
+      - MagazineGrenade
+    amount: 5
+    composite: true
+    layerStates:
+    - beltgrenade1
+    - beltgrenade2
+    - beltgrenade3
+    - beltgrenade4
+    - beltgrenade5
+  - type: Appearance
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+      grenade_launcher: !type:ContainerSlot

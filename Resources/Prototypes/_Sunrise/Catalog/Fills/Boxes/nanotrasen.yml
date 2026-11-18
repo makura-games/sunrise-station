@@ -292,7 +292,7 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: MagazineRifleSP
+        - id: MagazineRifle
           amount: 3
         - id: MagazineRifleFMJ
 
@@ -319,9 +319,9 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: MagazinePistolSubMachineGunTopMountedSP
-          amount: 2
         - id: MagazinePistolSubMachineGunTopMounted
+          amount: 2
+        - id: MagazinePistolSubMachineGunTopMountedFMJ
         - id: MagazinePistolSubMachineGunTopMountedHP
 
 - type: entity

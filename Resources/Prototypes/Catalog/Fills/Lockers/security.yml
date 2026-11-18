@@ -208,7 +208,7 @@
 - type: entity
   parent: [GunSafeNonlethalHandgunBaseSecureSunrise, BaseSecurityContraband] # Sunrise-Edit
   id: GunSafeDisabler
-  name: disabler safe
+  name: safe # Sunrise-Edit - унификация названий оружейных сейфов
   components:
   # Sunrise-Start
   - type: EntityStorageVisuals
@@ -229,7 +229,7 @@
 - type: entity
   parent: [GunSafeHandgunBaseSecureSunrise, BaseSecurityContraband] # Sunrise-Edit
   id: GunSafePistolMk58
-  name: mk58 safe
+  name: safe # Sunrise-Edit - унификация названий оружейных сейфов
   components:
   # Sunrise-Start
   - type: EntityStorageVisuals
@@ -252,7 +252,7 @@
 - type: entity
   parent: [GunSafeBaseSecureSunrise, BaseSecurityContraband] # Sunrise-Edit
   id: GunSafeRifleLecter
-  name: lecter safe
+  name: safe # Sunrise-Edit - унификация названий оружейных сейфов
   components:
   # Sunrise-Start
   - type: EntityStorageVisuals
@@ -271,7 +271,7 @@
       amount: 2
     # Sunrise-Start
     - id: WeaponRifleLeikha
-    - id: MagazineRifleSP
+    - id: MagazineRifle
       amount: 6 # Sunrise-Edit - заменяем удалённые HP-магазины на базовые
     - id: MagazineRifleFMJ
       amount: 2
@@ -280,7 +280,7 @@
 - type: entity
   parent: [GunSafeBaseSecureSunrise, BaseSecurityContraband] # Sunrise-Edit
   id: GunSafeSubMachineGunDrozd
-  name: drozd safe
+  name: safe # Sunrise-Edit - унификация названий оружейных сейфов
   components:
   # Sunrise-Start
   - type: EntityStorageVisuals
@@ -299,11 +299,13 @@
       amount: 2
     - id: MagazinePistolSubMachineGun
       amount: 4
+    - id: DrozdUpgrade # Sunrise-Edit - редкий комплект улучшения
+      prob: 0.05
 
 - type: entity
   parent: [GunSafeBaseSecureSunrise, BaseSecurityContraband] # Sunrise-Edit
   id: GunSafeShotgunEnforcer
-  name: enforcer safe
+  name: safe # Sunrise-Edit - унификация названий оружейных сейфов
   components:
   # Sunrise-Start
   - type: EntityStorageVisuals
@@ -323,7 +325,7 @@
 - type: entity
   parent: [GunSafeBaseSecureSunrise, BaseSecurityContraband] # Sunrise-Edit
   id: GunSafeShotgunKammerer
-  name: kammerer safe
+  name: safe # Sunrise-Edit - унификация названий оружейных сейфов
   components:
   # Sunrise-Start
   - type: EntityStorageVisuals
@@ -344,7 +346,7 @@
   id: GunSafeSubMachineGunWt550
   suffix: Wt550
   parent: [GunSafeBaseSecureSunrise, BaseSecurityContraband] # Sunrise-Edit
-  name: wt550 safe
+  name: safe # Sunrise-Edit - унификация названий оружейных сейфов
   components:
   # Sunrise-Start
   - type: EntityStorageVisuals
@@ -367,7 +369,7 @@
 - type: entity
   parent: [GunSafeBaseSecureSunrise, BaseSecurityContraband] # Sunrise-Edit
   id: GunSafeLaserCarbine
-  name: laser safe
+  name: safe # Sunrise-Edit - унификация названий оружейных сейфов
   components:
   # Sunrise-Start
   - type: EntityStorageVisuals

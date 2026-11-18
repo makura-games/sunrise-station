@@ -1,22 +1,19 @@
 - type: entity
-  name: Trenchgun L-4034
-  parent: [BaseWeaponShotgun, GunMedium, BaseSecurityContraband]
+  name: Kammerer Trench
+  parent: [BaseWeaponShotgunPump, GunMedium, BaseSecurityContraband]
   id: WeaponShotgunTrenchgun4034
+  description: An improved variant of the Kammerer, featuring an ergonomic pump fore-end for faster cycling, a ventilated barrel shroud for improved heat dissipation, and an integrated bayonet for close-quarters combat. Uses .50 shotgun shells.
   components:
   - type: Sprite
-    scale: 0.8, 0.8
+    scale: 0.9, 0.9
     sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/trenchgun_l_4034/big.rsi
   - type: Item
     size: Large
-    sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/trenchgun_l_4034/tiny.rsi
+    shape:
+    - 0,0,5,0
+    sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/trenchgun_l_4034/trench_inhands_64x.rsi
   - type: Clothing
     sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/trenchgun_l_4034/tiny.rsi
-  - type: BallisticAmmoProvider
-    capacity: 6
-    soundRack:
-      path: /Audio/_Sunrise/Weapons/Guns/Shotguns/trenchgun_l4034/trenchgun_l4034_pump.ogg
-    soundInsert:
-      path: /Audio/_Sunrise/Weapons/Guns/Shotguns/Different/insert.ogg
   - type: Tag
     tags:
     - WeaponShotgunKammerer
@@ -25,26 +22,123 @@
   - type: Gun
     spread: 22
     pump: true
-    fireRate: 1.8
+    fireRate: 2.75
     projectileSpeed: 35
   - type: GunSpreadModifier
     spread: 1.2
+  - type: MeleeWeapon # TODO: Add ability to add reagents
+    range: 2.2
+    wideAnimationRotation: -90
+    damage:
+      types:
+        Piercing: 12
+        Bloodloss: 1
+    angle: 0
+    animation: WeaponArcThrust
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
   - type: Construction
-    graph: ShotgunTrenchgun4034Sawn
-    node: start
+    graph: KammererUpgrade
+    node: trench
     deconstructionTarget: null
 
 - type: entity
-  name: Sawn Trenchgun L-4034
+  name: Kammerer Trench
   parent: WeaponShotgunTrenchgun4034
+  id: WeaponShotgunTrenchgun4034Empty
+  suffix: Empty
+  categories: [HideSpawnMenu]
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+  - type: Construction
+    graph: KammererUpgrade
+    node: trench
+    deconstructionTarget: null
+
+- type: entity
+  name: Kammerer
+  parent: WeaponShotgunKammerer
+  id: WeaponShotgunKammererEmpty
+  suffix: Empty
+  categories: [HideSpawnMenu]
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+  - type: Construction
+    graph: KammererUpgrade
+    node: kammerer
+    deconstructionTarget: null
+
+- type: entity
+  name: Kammerer Sawn-off
+  parent: [BaseWeaponShotgunPump, BaseSecurityContraband]
   id: WeaponShotgunTrenchgun4034Sawn
+  description: A shortened variant of the Kammerer, designed for easier handling in confined spaces. Features an integrated shell holder for carrying additional ammunition. Uses .50 shotgun shells.
   components:
   - type: Sprite
-    scale: 0.85, 0.85
-    sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/trenchgun_l_4034_sawn/big.rsi
+    scale: 0.9, 0.9
+    sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/pump_sawn.rsi
+    layers:
+    - state: icon
+    - map: ["enum.StorageFillLayers.Fill"]
+      visible: false
+  - type: ContainerInteractionAnimationVisuals
+  - type: Storage
+    grid:
+    - 0,0,4,0
+    maxItemSize: Tiny
+    clickInsert: false
+    whitelist:
+      tags:
+      - ShellShotgun
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+      storagebase: !type:Container
+        ents: []
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: ShellShotgun
+        amount: 5
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.StorageUsed:
+        enum.StorageFillLayers.Fill:
+          "0":
+            visible: false
+          "1":
+            state: fill-1
+            visible: true
+          "2":
+            state: fill-2
+            visible: true
+          "3":
+            state: fill-3
+            visible: true
+          "4":
+            state: fill-4
+            visible: true
+          "5":
+            state: fill-5
+            visible: true
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,3,0
+    sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/pump_sawn_inhands_64x.rsi
+  - type: Clothing
+    sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/pump_sawn.rsi
   - type: Gun
     pump: true
-    fireRate: 2
+    fireRate: 1.95
     projectileSpeed: 35
     useKey: true
     selectedMode: SemiAuto
@@ -61,36 +155,32 @@
     autoAttack: false
   - type: AltFireMelee
     attackType: Light
-  - type: Item
-    size: Normal
-    shape:
-    - 0,0,2,0
-    sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/trenchgun_l_4034_sawn/tiny.rsi
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/trenchgun_l_4034_sawn/tiny.rsi
   - type: BallisticAmmoProvider
-    capacity: 4
+    capacity: 5
   - type: UseDelay
-    delay: 0.25
+    delay: 0.1
   - type: SpeedModifiedOnWield
     walkModifier: 0.95
     sprintModifier: 0.95
   - type: Construction
-    graph: ShotgunTrenchgun4034Sawn
-    node: shotgun4034sawn
+    graph: KammererUpgrade
+    node: sawn
     deconstructionTarget: null
 
 - type: entity
-  name: Sawn Trenchgun L-4034
+  name: Kammerer Sawn-off
   parent: WeaponShotgunTrenchgun4034Sawn
   suffix: Empty
   id: WeaponShotgunTrenchgun4034SawnEmpty
+  categories: [HideSpawnMenu]
   components:
   - type: BallisticAmmoProvider
     proto: null
+  - type: EntityTableContainerFill
+    containers: {}
   - type: Construction
-    graph: ShotgunTrenchgun4034Sawn
-    node: shotgun4034sawn
+    graph: KammererUpgrade
+    node: sawn
     deconstructionTarget: null
 
 # region Admeme

@@ -1,0 +1,7 @@
+- type: !PartialOnly entity
+  id: WeaponShotgunKammerer
+  components:
+  - type: Construction
+    graph: KammererUpgrade
+    node: kammerer
+    deconstructionTarget: null

@@ -16,3 +16,15 @@
               impact: High
     - node: auto
       entity: WeaponGrenadeLauncherSecurity
+      edges:
+        - to: revolver
+          steps:
+            - tag: UpgradeFlareGun
+              name: construction-graph-tag-upgradeflaregun
+              doAfter: 8
+          completed:
+            - !type:AdminLog
+              message: "Converted security grenade launcher to revolver grenade launcher"
+              impact: High
+    - node: revolver
+      entity: WeaponGrenadeLauncherSecurityRevolver

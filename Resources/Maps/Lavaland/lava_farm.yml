@@ -144,6 +144,7 @@ entities:
     - type: Transform
       parent: 149
     - type: Clothing
+      slots: SUITSTORAGE
       inSlotFlag: SUITSTORAGE
       inSlot: suitstorage
     - type: Physics
@@ -530,6 +531,7 @@ entities:
     - type: Transform
       parent: 149
     - type: Clothing
+      slots: HEAD
       inSlotFlag: HEAD
       inSlot: head
 - proto: ClothingMaskGas
@@ -539,6 +541,7 @@ entities:
     - type: Transform
       parent: 149
     - type: Clothing
+      slots: MASK
       inSlotFlag: MASK
       inSlot: mask
     - type: Physics
@@ -550,6 +553,7 @@ entities:
     - type: Transform
       parent: 149
     - type: Clothing
+      slots: OUTERCLOTHING
       inSlotFlag: OUTERCLOTHING
       inSlot: outerClothing
     - type: Physics

@@ -186,16 +186,6 @@
     back:
     - WeaponDisabler
 
-- type: loadout
-  id: WeaponTaser
-  startingGear: WeaponTaser
-
-- type: startingGear
-  id: WeaponTaser
-  storage:
-    back:
-    - WeaponAdvancedTaser
-
 - type: loadoutEffectGroup
   id: MasterSecurityCam
   effects:
@@ -219,29 +209,6 @@
     - MasterHandheldCamera
 
 ###
-- type: loadout
-  id: SunriseWeaponTaserBrigmed
-  startingGear: SunriseWeaponTaserBrigmed
-
-- type: startingGear
-  id: SunriseWeaponTaserBrigmed
-  storage:
-    back:
-    - WeaponTaser
-
-- type: loadout
-  id: WeaponTaserBrigmed
-  startingGear: WeaponTaserBrigmed
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: MasterSecurity
-
-- type: startingGear
-  id: WeaponTaserBrigmed
-  storage:
-    back:
-    - WeaponAdvancedTaser
-
 - type: loadout
   id: WeaponMiniEnergyGunBrigmed
   startingGear: WeaponMiniEnergyGunBrigmed

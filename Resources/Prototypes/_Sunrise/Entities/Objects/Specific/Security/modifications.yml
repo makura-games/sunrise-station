@@ -74,6 +74,42 @@
     - UpgradeLecter
 
 - type: entity
+  id: LerkaUpgrade
+  name: upgrade kit (Lerka)
+  parent: BaseSecurityUpgrade
+  components:
+  - type: Tag
+    tags:
+    - UpgradeLerka
+
+- type: entity
+  id: LarkerUpgrade
+  name: upgrade kit (Larker)
+  parent: BaseSecurityUpgrade
+  components:
+  - type: Tag
+    tags:
+    - UpgradeLarker
+
+- type: entity
+  id: KammererTrenchUpgradeKit
+  name: upgrade kit (Kammerer Trench)
+  parent: BaseSecurityUpgrade
+  components:
+  - type: Tag
+    tags:
+    - UpgradeKammererTrench
+
+- type: entity
+  id: KammererSawnUpgradeKit
+  name: upgrade kit (Kammerer Sawn-off)
+  parent: BaseSecurityUpgrade
+  components:
+  - type: Tag
+    tags:
+    - UpgradeKammererSawn
+
+- type: entity
   name: G.O.R.I.L.L.A. gauntlet upgrade chip
   parent: [BaseItem, BaseSyndicateContraband]
   id:  GauntletGORILLAUpgradeKit
@@ -87,15 +123,6 @@
   - type: Tag
     tags:
     - GorillaUpgradeKit
-
-- type: entity
-  id: VestSecUpgradeWeb
-  name: upgrade kit (Web Vest)
-  parent: BaseSecurityUpgrade
-  components:
-  - type: Tag
-    tags:
-    - UpgradeWebVest
 
 - type: entity
   id: VestSecUpgradePlate

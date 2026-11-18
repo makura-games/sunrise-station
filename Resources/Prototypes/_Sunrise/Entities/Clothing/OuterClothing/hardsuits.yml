@@ -912,7 +912,7 @@
         passiveVisibilityRate: -1.5
         movementVisibilityRate: 0.05
   - type: PowerCellDraw
-    drawRate: 7 # 500 seconds on PowerCellSyndicate
+    drawRate: 5 # 360 seconds on PowerCellSyndicate
   - type: ToggleCellDraw
   - type: PowerCellSlot
     cellSlotId: cell_slot

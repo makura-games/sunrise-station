@@ -86,18 +86,23 @@
     zeroVisible: true
   - type: BatteryAmmoProvider
     proto: BulletDisabler
-    fireCost: 75
+    fireCost: 83
   - type: Clothing
     sprite: _Starlight/Objects/Weapons/Guns/Battery/multiphase_gun.rsi
   - type: BatteryWeaponFireModes
     fireModes:
     - proto: BulletDisabler
-      fireCost: 75
+      fireCost: 83
       magState: disable
       visualState: disable-unshaded
       heldPrefix: disabler
+    - proto: BulletTaser
+      fireCost: 166
+      magState: stun
+      visualState: stun-unshaded
+      heldPrefix: stun
     - proto: RedMediumLaser
-      fireCost: 150
+      fireCost: 125
       magState: kill
       visualState: kill-unshaded
       heldPrefix: lethal
@@ -107,7 +112,7 @@
       visualState: destroy-unshaded
       heldPrefix: destroy
     - proto: BulletEMP
-      fireCost: 300
+      fireCost: 500
       magState: ion
       visualState: ion-unshaded
       heldPrefix: special
@@ -118,8 +123,8 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: Battery
-    maxCharge: 1500
-    startingCharge: 1500
+    maxCharge: 2500
+    startingCharge: 2500
   - type: EmpImmune
   - type: Tag
     tags:
@@ -127,7 +132,7 @@
     - Sidearm
     - BigSmallArms
   - type: StaticPrice
-    price: 750
+    price: 9750
   - type: StealTarget
     stealGroup: WeaponEnergyGunMultiphase
 
@@ -221,30 +226,6 @@
     fireCost: 62.5
   - type: StaticPrice
     price: 300
-
-- type: entity
-  parent: [BaseWeaponBatterySmall, BaseSecurityContraband ]
-  id: WeaponDecloner
-  name: decloner
-  components:
-  - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Battery/decloner.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: normal
-      shader: unshaded
-    - state: mag-unshaded-4
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
-  - type: BatteryAmmoProvider
-    proto: DecloneBolt
-    fireCost: 200
-  - type: MagazineVisuals
-    magState: mag
-    steps: 5
-    zeroVisible: true
-  - type: Appearance
 
 - type: entity
   name: m1911

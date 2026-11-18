@@ -3,38 +3,304 @@
   start: start
   graph:
     - node: start
-      entity: WeaponRifleLecter
+      entity: WeaponRifleLecterEmpty
       edges:
-        - to: upgradelecter
+        - to: lecterMk2KitInserted
           steps:
             - tag: UpgradeLecter
               name: construction-graph-tag-upgradelecter
-              doAfter: 10
+              store: lecter-mk2-upgrade-kit
+        - to: leikhaBinocularsInserted
+          steps:
+            - tag: Binoculars
+              name: construction-graph-tag-binoculars
+              store: lecter-binoculars
+
+    - node: lecterMk2KitInserted
+      edges:
+        - to: lecterMk2Opened
+          steps:
+            - tool: Screwing
+              doAfter: 1
+
+    - node: lecterMk2Opened
+      edges:
+        - to: lecterMk2Reinforced
+          steps:
+            - tool: Anchoring
+              doAfter: 2
+
+    - node: lecterMk2Reinforced
+      edges:
+        - to: lecterMk2Welded
+          steps:
+            - tool: Welding
+              doAfter: 2
+
+    - node: lecterMk2Welded
+      edges:
+        - to: upgradelecter
+          steps:
+            - tool: Screwing
+              doAfter: 1
           completed:
             - !type:AdminLog
               message: "Converted Lecter to Lecter Mk2"
               impact: High
+
     - node: upgradelecter
       entity: WeaponRifleLecterMk2Empty
+      edges:
+        - to: start
+          steps:
+            - tool: Screwing
+              doAfter: 1
+            - tool: Welding
+              doAfter: 2
+            - tool: Anchoring
+              doAfter: 2
+            - tool: Screwing
+              doAfter: 1
+          completed:
+            - !type:EmptyContainer
+              container: lecter-mk2-upgrade-kit
+              pickup: true
+
+    - node: leikhaBinocularsInserted
+      edges:
+        - to: leikhaOpened
+          steps:
+            - tool: Screwing
+              doAfter: 1
+
+    - node: leikhaOpened
+      edges:
+        - to: leikhaMounted
+          steps:
+            - tool: Anchoring
+              doAfter: 2
+
+    - node: leikhaMounted
+      edges:
+        - to: leikha
+          steps:
+            - tool: Screwing
+              doAfter: 1
+          completed:
+            - !type:AdminLog
+              message: "Converted Lecter to Leikha"
+              impact: High
+
+    - node: leikha
+      entity: WeaponRifleLeikhaEmpty
+      edges:
+        - to: start
+          steps:
+            - tool: Screwing
+              doAfter: 1
+            - tool: Anchoring
+              doAfter: 2
+            - tool: Screwing
+              doAfter: 1
+          completed:
+            - !type:EmptyContainer
+              container: lecter-binoculars
+              pickup: true
+        - to: larkerKitInserted
+          steps:
+            - tag: UpgradeLarker
+              name: construction-graph-tag-upgradelarker
+              store: larker-upgrade-kit
+        - to: lerkaKitInserted
+          steps:
+            - tag: UpgradeLerka
+              name: construction-graph-tag-upgradelerka
+              store: lerka-upgrade-kit
+
+    - node: larkerKitInserted
+      edges:
+        - to: larkerHudInserted
+          steps:
+            - tag: HudSecurity
+              name: construction-graph-tag-security-hud
+              store: larker-security-hud
+
+    - node: larkerHudInserted
+      edges:
+        - to: larkerOpened
+          steps:
+            - tool: Screwing
+              doAfter: 1
+
+    - node: larkerOpened
+      edges:
+        - to: larkerRechambered
+          steps:
+            - tool: Anchoring
+              doAfter: 2
+
+    - node: larkerRechambered
+      edges:
+        - to: larkerWelded
+          steps:
+            - tool: Welding
+              doAfter: 2
+
+    - node: larkerWelded
+      edges:
+        - to: larker
+          steps:
+            - tool: Screwing
+              doAfter: 1
+          completed:
+            - !type:AdminLog
+              message: "Converted Leikha to Larker"
+              impact: High
+
+    - node: larker
+      entity: WeaponRifleLarkerEmpty
+      edges:
+        - to: leikha
+          steps:
+            - tool: Screwing
+              doAfter: 1
+            - tool: Welding
+              doAfter: 2
+            - tool: Anchoring
+              doAfter: 2
+            - tool: Screwing
+              doAfter: 1
+          completed:
+            - !type:EmptyContainer
+              container: larker-security-hud
+              pickup: true
+            - !type:EmptyContainer
+              container: larker-upgrade-kit
+              pickup: true
+
+    - node: lerkaKitInserted
+      edges:
+        - to: lerkaOpened
+          steps:
+            - tool: Screwing
+              doAfter: 1
+
+    - node: lerkaOpened
+      edges:
+        - to: lerkaRechambered
+          steps:
+            - tool: Anchoring
+              doAfter: 2
+
+    - node: lerkaRechambered
+      edges:
+        - to: lerkaWelded
+          steps:
+            - tool: Welding
+              doAfter: 2
+
+    - node: lerkaWelded
+      edges:
+        - to: lerka
+          steps:
+            - tool: Screwing
+              doAfter: 1
+          completed:
+            - !type:AdminLog
+              message: "Converted Leikha to Lerka"
+              impact: High
+
+    - node: lerka
+      entity: WeaponRifleLerkaEmpty
+      edges:
+        - to: leikha
+          steps:
+            - tool: Screwing
+              doAfter: 1
+            - tool: Welding
+              doAfter: 2
+            - tool: Anchoring
+              doAfter: 2
+            - tool: Screwing
+              doAfter: 1
+          completed:
+            - !type:EmptyContainer
+              container: lerka-upgrade-kit
+              pickup: true
 
 - type: constructionGraph
   id: DrozdSecurity
   start: start
   graph:
     - node: start
-      entity: WeaponSubMachineGunDrozd
+      entity: WeaponSubMachineGunDrozdEmpty
       edges:
-        - to: upgradedrozd
+        - to: drozdKitInserted
           steps:
             - tag: UpgradeDrozd
               name: construction-graph-tag-upgradedrozd
-              doAfter: 10
+              store: drozd-upgrade-kit
+
+    - node: drozdKitInserted
+      edges:
+        - to: drozdOpened
+          steps:
+            - tool: Screwing
+              doAfter: 1
+
+    - node: drozdOpened
+      edges:
+        - to: drozdMagazineInserted
+          steps:
+            - tag: MagazineP90Empty
+              name: construction-graph-tag-magazine-p90-empty
+              store: drozd-p90-magazine
+
+    - node: drozdMagazineInserted
+      edges:
+        - to: drozdRechambered
+          steps:
+            - tool: Anchoring
+              doAfter: 2
+
+    - node: drozdRechambered
+      edges:
+        - to: drozdCut
+          steps:
+            - tool: Cutting
+              doAfter: 2
+
+    - node: drozdCut
+      edges:
+        - to: upgradedrozd
+          steps:
+            - tool: Screwing
+              doAfter: 1
           completed:
             - !type:AdminLog
               message: "Converted Drozd to Drozd Mk2"
               impact: High
+
     - node: upgradedrozd
       entity: WeaponSubMachineGunDrozdMk2Empty
+      edges:
+        - to: start
+          steps:
+            - tool: Screwing
+              doAfter: 1
+            - tool: Cutting
+              doAfter: 2
+            - tool: Anchoring
+              doAfter: 2
+            - tool: Screwing
+              doAfter: 1
+          completed:
+            - !type:EmptyContainer
+              container: drozd-upgrade-kit
+              pickup: true
+            - !type:EmptyContainer
+              container: drozd-p90-magazine
+              pickup: true
 
 - type: constructionGraph
   id: UpgradeArmorVest
@@ -58,13 +324,6 @@
             - tag: UpgradeKitHeat
               name: construction-graph-tag-absrbvest
               doAfter: 5
-        - to: webvest
-          steps:
-            - tag: UpgradeWebVest
-              name: construction-graph-tag-webvest
-              doAfter: 15
-    - node: webvest
-      entity: ClothingOuterVestWebSec
     - node: plate
       entity: ClothingOuterArmorPlate
       edges:
@@ -205,8 +464,8 @@
               doAfter: 5
         - to: webvest
           steps:
-            - tag: UpgradeWebVest
-              name: construction-graph-tag-webvest
+            - tag: UpgradeKitBulletHeavy
+              name: construction-graph-tag-hblltvest
               doAfter: 15
     - node: webvest
       entity: ClothingOuterVestWebBlue

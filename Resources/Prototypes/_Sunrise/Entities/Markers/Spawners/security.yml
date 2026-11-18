@@ -1,0 +1,13 @@
+- type: entity
+  parent: MarkerBase
+  id: SunriseDetonatorBundleSpawner
+  name: detonator bundle spawner
+  components:
+  - type: EntityTableSpawner
+    offset: 0.2
+    table: !type:AllSelector
+      children:
+      - id: BoxDetonator
+      - id: CableDetStack10
+      - id: CableDetStack10
+        prob: 0.5

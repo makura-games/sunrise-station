@@ -1,0 +1,26 @@
+- type: constructionGraph
+  id: CartridgeBattery
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: cartridge
+      steps:
+      - anyTags:
+        - PowerCell
+        name: construction-graph-tag-power-cell
+        icon:
+          sprite: Objects/Power/power_cells.rsi
+          state: small
+        doAfter: 0.5
+      - material: Steel
+        amount: 1
+        doAfter: 0.5
+      - material: Manipulator
+        amount: 1
+        doAfter: 0.5
+      - material: CableHV
+        amount: 1
+        doAfter: 0.5
+  - node: cartridge
+    entity: CartridgeBattery

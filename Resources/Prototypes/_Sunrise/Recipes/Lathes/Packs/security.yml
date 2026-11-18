@@ -29,7 +29,7 @@
     - MagazineLightRifleBeltBoxSP
     - MagazineLightRifleBeltBoxEmpty
     # Light Rifle
-    - MagazineLightRifleSP
+    - MagazineLightRifle
     - MagazineLightRifleEmpty
     # Magnum
     - SpeedLoaderMagnumSP
@@ -37,7 +37,7 @@
     - SpeedLoaderMagnumRubber
     - SpeedLoaderMagnumEmpty
     # Pistol
-    - MagazinePistolSP
+    - MagazinePistol
     - MagazinePistolHP
     - MagazinePistolRubber
     - MagazinePistolEmpty
@@ -45,15 +45,15 @@
     - MagazinePistol40HP
     - MagazinePistol40Empty
     # SMG
-    - MagazinePistolSubMachineGunSP
+    - MagazinePistolSubMachineGun
     - MagazinePistolSubMachineGunHP
     - MagazinePistolSubMachineGunEmpty
     # SMG Top Mounted
-    - MagazinePistolSubMachineGunTopMountedSP
+    - MagazinePistolSubMachineGunTopMounted
     - MagazinePistolSubMachineGunTopMountedHP
     - MagazinePistolSubMachineGunTopMountedEmpty
     # Rifle
-    - MagazineRifleSP
+    - MagazineRifle
     - MagazineRifleEmpty
     # Rifle Heavy
     - MagazineRifleHeavySP
@@ -106,7 +106,7 @@
     - MagazineLightRifleBeltBoxFMJ
     - MagazineLightRifleBeltBoxEmpty
     # Light Rifle
-    - MagazineLightRifleSP
+    - MagazineLightRifle
     - MagazineLightRifleFMJ
     - MagazineLightRifleEmpty
     # Magnum
@@ -116,7 +116,7 @@
     - SpeedLoaderMagnumRubber
     - SpeedLoaderMagnumEmpty
     # Pistol
-    - MagazinePistolSP
+    - MagazinePistol
     - MagazinePistolHP
     - MagazinePistolFMJ
     - MagazinePistolRubber
@@ -126,19 +126,19 @@
     - MagazinePistol40FMJ
     - MagazinePistol40Empty
     # Pistol High Capacity
-    - MagazinePistolHighCapacitySP
+    - MagazinePistolHighCapacity
     - MagazinePistolHighCapacityHP
     - MagazinePistolHighCapacityFMJ
     - MagazinePistolHighCapacityRubber
     - MagazinePistolHighCapacityEmpty
     # SMG
-    - MagazinePistolSubMachineGunSP
+    - MagazinePistolSubMachineGun
     - MagazinePistolSubMachineGunHP
     - MagazinePistolSubMachineGunFMJ
     - MagazinePistolSubMachineGunEmpty
     # Rifle LMG
     - MagazineRifleBoxFMJ
-    - MagazineRifleBoxSP
+    - MagazineLightRifleBox
     - MagazineRifleBoxEmpty
     # Rifle Heavy
     - MagazineRifleHeavyFMJ
@@ -177,20 +177,17 @@
     - MagazinePistolFMJ
     - MagazinePistol40FMJ
     - MagazinePistolSubMachineGunFMJ
-    - MagazinePistolSubMachineGunTopMounted
+    - MagazinePistolSubMachineGunTopMountedFMJ
     - MagazineRifleFMJ
     - MagazineRifleHeavyFMJ
     - ComputerGunneryCircuitboard
     - WeaponMiniEnergyGun
-    - WeaponEnergyGunPistol
+    - WeaponAdvancedTaser
     - WeaponLaserSvalinn
     - SunriseWeaponLaserCarbineBattery
     - WeaponLaserLNT620
     - WeaponIonCarbine
-    - WeaponDecloner
     - ScanGateMachineCircuitboard
-    - MagazineBatteryLr30
-    - MagazineBatteryLr60
     - WeaponSunriseLaserPistol
     - FlareGunSecurityUpgrade
     - EnergyBola
@@ -226,6 +223,12 @@
     #- ModularReceiverAuto
     - LecterUpgrade
     - DrozdUpgrade
+    - LerkaUpgrade
+    - LarkerUpgrade
+    - KammererTrenchUpgradeKit
+    - KammererSawnUpgradeKit
+    - MagazinePistol40SubMachineGunEmpty
+    - MagazineRifleM52Empty
   #####################BOX#######################
   # Light Rifle
     - MagazineBoxLightRifleIncendiary
@@ -309,14 +312,12 @@
   recipes:
     - ClothingHeadHelmetPubg
     - ClothingShoesBootsMagSec
-    - ClothingShoesBootsMagCombat
     - VestSecUpgradePlate
     - VestSecUpgradeStab
     - VestSecUpgradeHeat
     - VestSecUpgradeBullet
     - VestSecUpgradeRiot
     - VestSecUpgradeReflective
-    - VestSecUpgradeWeb
     - VestSecUpgradeBulletHeavy
     - ClothingOuterArmorMiliraLight
     - ClothingOuterArmorMiliraHeavy
@@ -345,18 +346,18 @@
   recipes:
     #####################MAGAZINE#######################
     # Light Rifle
-    - MagazineLightRifleSP
+    - MagazineLightRifle
     - MagazineLightRifleFMJ
     # SMG
-    - MagazinePistolSubMachineGunSP
+    - MagazinePistolSubMachineGun
     - MagazinePistolSubMachineGunHP
     - MagazinePistolSubMachineGunFMJ
     # SMG Top Mounted
-    - MagazinePistolSubMachineGunTopMounted # FMJ
-    - MagazinePistolSubMachineGunTopMountedSP
+    - MagazinePistolSubMachineGunTopMountedFMJ
+    - MagazinePistolSubMachineGunTopMounted
     - MagazinePistolSubMachineGunTopMountedHP
     # Rifle
-    - MagazineRifleSP
+    - MagazineRifle
     - MagazineRifleFMJ
     # Shotgun Speedloader
     - SpeedLoaderShellShotgun
@@ -438,14 +439,14 @@
   - SpeedLoaderMagnumHP
   - SpeedLoaderMagnumFMJ
   # Pistol
-  - MagazinePistolSP
+  - MagazinePistol
   - MagazinePistolHP
   - MagazinePistolFMJ
   - MagazinePistol40SP
   - MagazinePistol40HP
   - MagazinePistol40FMJ
   # Pistol High Capacity
-  - MagazinePistolHighCapacitySP
+  - MagazinePistolHighCapacity
   - MagazinePistolHighCapacityHP
   - MagazinePistolHighCapacityFMJ
   # LMG
