@@ -10,6 +10,8 @@
     name: ghost-role-information-pirate-reprogrammed-cyborg-name
     description: ghost-role-information-pirate-reprogrammed-cyborg-description
     rules: ghost-role-information-silicon-rules
+    mindRoles:
+    - MindRolePirate
     raffle:
       settings: default
     reregister: false
@@ -27,6 +29,8 @@
     name: ghost-role-information-pirate-reprogrammed-medical-cyborg-name
     description: ghost-role-information-pirate-reprogrammed-cyborg-description
     rules: ghost-role-information-silicon-rules
+    mindRoles:
+    - MindRolePirate
     raffle:
       settings: default
     reregister: false
@@ -44,6 +48,8 @@
     name: ghost-role-information-pirate-reprogrammed-mining-cyborg-name
     description: ghost-role-information-pirate-reprogrammed-cyborg-description
     rules: ghost-role-information-silicon-rules
+    mindRoles:
+    - MindRolePirate
     raffle:
       settings: default
     reregister: false
@@ -61,6 +67,8 @@
     name: ghost-role-information-pirate-reprogrammed-syndicate-cyborg-name
     description: ghost-role-information-pirate-reprogrammed-cyborg-description
     rules: ghost-role-information-silicon-rules
+    mindRoles:
+    - MindRolePirate
     raffle:
       settings: default
     reregister: false
@@ -76,7 +84,7 @@
     description: ghost-role-information-pirate-description
     rules: ghost-role-information-rules-team-antagonist
     mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
+    - MindRolePirate
     raffle:
       settings: default
     reregister: false
