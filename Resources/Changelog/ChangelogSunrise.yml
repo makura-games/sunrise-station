@@ -5139,3 +5139,10 @@
     message: Добавлены коробки с волшебными свечами и маленькими волшебными свечами
   id: 2056
   url: https://github.com/makura-games/sunrise-station/pull/4604
+- author: ThereDrD
+  time: '2026-11-18T14:45:11.0000000+00:00'
+  changes:
+  - type: Fix
+    message: Исправлена техническая уязвимость в правах технической команды
+  id: 2057
+  url: https://github.com/makura-games/sunrise-station/pull/4894
