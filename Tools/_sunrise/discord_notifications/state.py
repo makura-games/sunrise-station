@@ -106,16 +106,19 @@ def snapshots(github: GitHub, current: dict) -> list[dict]:
                 document = None
                 run_attempt = source.get("run_attempt")
                 if not artifact["expired"]:
-                    document = github.artifact_json(
-                        artifact["id"], "discord-state.json"
-                    )
-                    checkpoint = (
-                        document.get("checkpoint", {})
-                        if isinstance(document, dict)
-                        else {}
-                    )
-                    if run_attempt is None:
-                        run_attempt = checkpoint.get("run_attempt")
+                    try:
+                        document = github.artifact_json(
+                            artifact["id"], "discord-state.json"
+                        )
+                        checkpoint = (
+                            document.get("checkpoint", {})
+                            if isinstance(document, dict)
+                            else {}
+                        )
+                        if run_attempt is None:
+                            run_attempt = checkpoint.get("run_attempt")
+                    except GitHubError:
+                        document = None
                 if type(run_attempt) is not int or run_attempt <= 0:
                     run_attempt = None
                 result.append(
@@ -162,12 +165,33 @@ def send_was_attempted(
 def restore(github: GitHub, current: dict, path: Path, hours: int) -> None:
     available = snapshots(github, current)
     if available:
-        latest = available[0]
-        if latest["expired"]:
+        target_snapshot = None
+        target_document = None
+        for item in available:
+            if item["expired"]:
+                continue
+            doc = item["_document"]
+            if doc is None:
+                try:
+                    doc = github.artifact_json(item["id"], "discord-state.json")
+                except GitHubError:
+                    continue
+            target_snapshot = item
+            target_document = doc
+            break
+
+        if target_snapshot is None:
+            if all(item["expired"] for item in available):
+                raise GitHubError(
+                    "Срок хранения последнего снимка истёк. "
+                    "Нужна сохранённая копия очереди; пустая очередь не создана"
+                )
             raise GitHubError(
-                "Срок хранения последнего снимка истёк. "
+                "Все найденные снимки очереди повреждены или недоступны. "
                 "Нужна сохранённая копия очереди; пустая очередь не создана"
             )
+
+        latest = target_snapshot
         attempt = latest["_run_attempt"]
         attempts = range(attempt, attempt + 1) if attempt is not None else None
         if latest["name"] == ARTIFACTS[0] and send_was_attempted(
@@ -177,9 +201,7 @@ def restore(github: GitHub, current: dict, path: Path, hours: int) -> None:
                 "Последний снимок создан до уже начатой отправки. "
                 "Автоматический повтор запрещён во избежание дубликатов"
             )
-        document = latest["_document"] or github.artifact_json(
-            latest["id"], "discord-state.json"
-        )
+        document = target_document
         validate(document)
         checkpoint = document["checkpoint"]
         if (
@@ -244,9 +266,15 @@ def prune(github: GitHub, current: dict, uploaded_id: int) -> None:
     for name in ARTIFACTS:
         older = [item for item in available if item["name"] == name][3:]
         for artifact in older:
-            github.json(
-                "DELETE", f"{github.root}/actions/artifacts/{artifact['id']}"
-            )
+            try:
+                github.json(
+                    "DELETE", f"{github.root}/actions/artifacts/{artifact['id']}"
+                )
+            except GitHubError as error:
+                print(
+                    f"Предупреждение: не удалось удалить устаревший артефакт "
+                    f"{artifact['id']}: {error}"
+                )
     print("Сохранены три последних снимка каждого вида; старые удалены.")
 
 
