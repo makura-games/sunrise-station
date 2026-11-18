@@ -104,6 +104,7 @@ public sealed partial class PlayTimeTrackingManager : ISharedPlaytimeManager, IP
         // NOTE: This is run **out** of simulation. This is intentional.
 
         UpdateDirtyPlayers();
+        UpdatePlayTimeSessions(); // Sunrise-Edit - обновление сессий игрового времени
 
         if (_timing.RealTime < _lastSave + _saveInterval)
             return;
@@ -163,6 +164,8 @@ public sealed partial class PlayTimeTrackingManager : ISharedPlaytimeManager, IP
             _runtimeLog.LogException(e, "PlayTime CalcTrackers");
             data.ActiveTrackers.Clear();
         }
+
+        UpdatePlayTimeSessionActivity(dirty, data); // Sunrise-Edit - учёт только активного игрового времени Overall
     }
 
     /// <summary>
@@ -329,6 +332,7 @@ public sealed partial class PlayTimeTrackingManager : ISharedPlaytimeManager, IP
 
     public void ClientDisconnected(ICommonSession session)
     {
+        OnPlayTimeSessionDisconnected(session); // Sunrise-Edit - сохранение сессии игрового времени при выходе
         SaveSession(session);
 
         _playTimeData.Remove(session);
@@ -437,7 +441,7 @@ public sealed partial class PlayTimeTrackingManager : ISharedPlaytimeManager, IP
     /// <summary>
     /// Play time info for a particular player.
     /// </summary>
-    private sealed class PlayTimeData
+    private sealed partial class PlayTimeData // Sunrise-Edit
     {
         // Queued update flags
         public bool IsDirty;
