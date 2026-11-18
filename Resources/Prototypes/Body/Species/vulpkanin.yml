@@ -368,6 +368,9 @@
       reagents:
       - ReagentId: SulfurBlood
         Quantity: 600
+  - type: BloodSource # Sunrise-Edit
+    kind: Sulfur
+    value: 0.6
   - type: CreamPied
     sprite:
       sprite: Effects/creampie.rsi

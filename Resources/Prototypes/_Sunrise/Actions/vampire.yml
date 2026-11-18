@@ -1,0 +1,113 @@
+# Базовые способности
+
+- type: entity
+  parent: BaseAction
+  id: ActionVampireToggleFangs
+  name: Extend Fangs
+  description: Drink blood with an empty hand to sate hunger and heal wounds.
+  components:
+  - type: Action
+    useDelay: 2
+    itemIconStyle: NoItem
+    priority: 1
+  - type: Sprite
+    sprite: _Sunrise/Vampire/actions_vampire.rsi
+    layers:
+    - state: fangs_retracted
+      map: ["enum.ActionVisuals.Icon"]
+    - state: fangs_extended
+      map: ["enum.ActionVisuals.IconToggled"]
+      visible: false
+  - type: InstantAction
+    event: !type:VampireToggleFangsActionEvent {}
+  - type: VampireAction
+
+- type: entity
+  parent: BaseAction
+  id: ActionVampireGlare
+  name: Glare
+  description: Exhausts and paralyzes nearby creatures.
+  components:
+  - type: Action
+    useDelay: 12
+    itemIconStyle: NoItem
+    priority: 2
+  - type: Sprite
+    sprite: _Sunrise/Vampire/actions_vampire.rsi
+    layers:
+    - state: glare
+      map: ["enum.ActionVisuals.Icon"]
+  - type: InstantAction
+    event: !type:VampireGlareActionEvent {}
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: AutoRecharge
+    rechargeDuration: 55
+  - type: VampireAction
+
+- type: entity
+  parent: BaseAction
+  id: ActionVampireSleep
+  name: Sleep
+  description: Puts the target to sleep after a brief concentration.
+  components:
+  - type: Action
+    useDelay: 15
+    itemIconStyle: NoItem
+    priority: 25
+  - type: Sprite
+    sprite: _Sunrise/Vampire/actions_vampire.rsi
+    layers:
+    - state: sleep_icon
+      map: ["enum.ActionVisuals.Icon"]
+  - type: GenericVisualizer
+    visuals:
+      enum.ActionState.Toggled:
+        enum.ActionVisuals.Icon:
+          True: { visible: true }
+          False: { visible: true }
+      enum.LimitedChargesState.HasCharges:
+        enum.ActionVisuals.Icon:
+          True: { color: White }
+          False: { color: DimGray }
+  - type: TargetAction
+    range: 2
+    checkCanAccess: false
+    interactOnMiss: false
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      components:
+      - HumanoidProfile
+    event: !type:VampireSleepActionEvent
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: AutoRecharge
+    rechargeDuration: 110
+  - type: VampireAction
+    bloodCost: 20
+
+- type: entity
+  parent: BaseAction
+  id: ActionVampireRejuvenateI
+  name: Rejuvenation
+  description: Removes stuns and knockdown and restores stamina. Greater power also heals wounds and purges poisons.
+  components:
+  - type: Action
+    useDelay: 8
+    itemIconStyle: NoItem
+    priority: 3
+    checkCanInteract: false
+    checkConsciousness: false
+  - type: Sprite
+    sprite: _Sunrise/Vampire/actions_vampire.rsi
+    layers:
+    - state: rejuvinate
+      map: ["enum.ActionVisuals.Icon"]
+  - type: InstantAction
+    event: !type:VampireRejuvenateActionEvent {}
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: AutoRecharge
+    rechargeDuration: 75
+  - type: VampireAction

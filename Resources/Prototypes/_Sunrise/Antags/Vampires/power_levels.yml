@@ -1,0 +1,388 @@
+- type: vampirePowerLevel
+  id: SunriseVampirePowerNeonate
+  level: Neonate
+  requiredTotalBlood: 0
+  maxBloodFullness: 200
+  fullnessDecayPerSecond: 0.15
+  fangs:
+    sipInterval: 1.25
+    bloodGain: 10
+    targetBloodDrain: 20
+    biteDamage:
+      types:
+        Piercing: 0.5
+    bleedAmount: 1
+    range: 1.5
+    maxBloodPerTarget: 200
+    healing:
+      types:
+        Blunt: -0.33
+        Slash: -0.33
+        Piercing: -0.34
+        Heat: -0.25
+        Shock: -0.25
+        Cold: -0.25
+        Caustic: -0.25
+        Poison: -2
+        Asphyxiation: -4
+  glare:
+    action:
+      maxCharges: 1
+      rechargeDuration: 55
+      useDelay: 12
+    range: 1
+    frontParalyzeDuration: 4.5
+    sideParalyzeDuration: 1
+    staminaDamage: 30
+    muteToxinAmount: 0.3
+    flashProtectionEffectScale: 0
+  sleep:
+    action:
+      maxCharges: 1
+      rechargeDuration: 110
+      useDelay: 15
+    channelTime: 6
+    targetRange: 2
+    breakRange: 2.5
+    duration: 20
+    bloodCost: 20
+  rejuvenation:
+    action:
+      maxCharges: 1
+      rechargeDuration: 75
+      useDelay: 8
+    staminaRestoreAmount: 25
+
+- type: vampirePowerLevel
+  id: SunriseVampirePowerAwakened
+  level: Awakened
+  requiredTotalBlood: 200
+  maxBloodFullness: 225
+  fullnessDecayPerSecond: 0.14
+  fangs:
+    sipInterval: 1.2
+    bloodGain: 12
+    targetBloodDrain: 20
+    biteDamage:
+      types:
+        Piercing: 0.6
+    bleedAmount: 1
+    range: 1.5
+    maxBloodPerTarget: 225
+    healing:
+      types:
+        Blunt: -0.5
+        Slash: -0.5
+        Piercing: -0.5
+        Heat: -0.38
+        Shock: -0.37
+        Cold: -0.38
+        Caustic: -0.37
+        Poison: -3
+        Asphyxiation: -5
+  glare:
+    action:
+      maxCharges: 1
+      rechargeDuration: 52
+      useDelay: 12
+    range: 1.25
+    frontParalyzeDuration: 6
+    sideParalyzeDuration: 1.5
+    staminaDamage: 35
+    muteToxinAmount: 0.4
+    flashProtectionEffectScale: 0.35
+  sleep:
+    action:
+      maxCharges: 1
+      rechargeDuration: 105
+      useDelay: 15
+    channelTime: 5.75
+    targetRange: 2
+    breakRange: 2.5
+    duration: 20
+    bloodCost: 18
+  rejuvenation:
+    action:
+      maxCharges: 1
+      rechargeDuration: 70
+      useDelay: 8
+    staminaRestoreAmount: 35
+
+- type: vampirePowerLevel
+  id: SunriseVampirePowerNightborn
+  level: Nightborn
+  requiredTotalBlood: 600
+  maxBloodFullness: 260
+  fullnessDecayPerSecond: 0.12
+  fangs:
+    sipInterval: 1.15
+    bloodGain: 14
+    targetBloodDrain: 20
+    biteDamage:
+      types:
+        Piercing: 0.7
+    bleedAmount: 1
+    range: 1.5
+    maxBloodPerTarget: 250
+    healing:
+      types:
+        Blunt: -0.67
+        Slash: -0.66
+        Piercing: -0.67
+        Heat: -0.5
+        Shock: -0.5
+        Cold: -0.5
+        Caustic: -0.5
+        Poison: -4
+        Asphyxiation: -6
+  glare:
+    action:
+      maxCharges: 2
+      rechargeDuration: 48
+      useDelay: 11
+    range: 1.5
+    frontParalyzeDuration: 8
+    sideParalyzeDuration: 2
+    staminaDamage: 45
+    muteToxinAmount: 0.6
+    flashProtectionEffectScale: 0.55
+  sleep:
+    action:
+      maxCharges: 2
+      rechargeDuration: 95
+      useDelay: 14
+    channelTime: 5.5
+    targetRange: 2.25
+    breakRange: 2.75
+    duration: 20
+    bloodCost: 15
+  rejuvenation:
+    action:
+      maxCharges: 2
+      rechargeDuration: 65
+      useDelay: 7
+    staminaRestoreAmount: 50
+    reagentPurgeAmount: 10
+    healApplications: 5
+    healInterval: 3.25
+    healing:
+      types:
+        Blunt: -1.5
+        Slash: -1.5
+        Piercing: -1.5
+        Heat: -1.25
+        Shock: -1.25
+        Cold: -1.25
+        Caustic: -1.25
+        Poison: -5
+        Asphyxiation: -6
+
+- type: vampirePowerLevel
+  id: SunriseVampirePowerAncient
+  level: Ancient
+  requiredTotalBlood: 1000
+  maxBloodFullness: 300
+  fullnessDecayPerSecond: 0.1
+  fangs:
+    sipInterval: 1.1
+    bloodGain: 16
+    targetBloodDrain: 20
+    biteDamage:
+      types:
+        Piercing: 0.8
+    bleedAmount: 1
+    range: 1.5
+    maxBloodPerTarget: 275
+    healing:
+      types:
+        Blunt: -0.83
+        Slash: -0.83
+        Piercing: -0.84
+        Heat: -0.63
+        Shock: -0.62
+        Cold: -0.63
+        Caustic: -0.62
+        Poison: -5
+        Asphyxiation: -8
+  glare:
+    action:
+      maxCharges: 2
+      rechargeDuration: 45
+      useDelay: 10
+    range: 1.75
+    frontParalyzeDuration: 8
+    sideParalyzeDuration: 2.5
+    staminaDamage: 50
+    muteToxinAmount: 0.75
+    flashProtectionEffectScale: 0.7
+  sleep:
+    action:
+      maxCharges: 2
+      rechargeDuration: 90
+      useDelay: 13
+    channelTime: 5.25
+    targetRange: 2.5
+    breakRange: 3
+    duration: 20
+    bloodCost: 13
+    ignoresFaith: true
+  rejuvenation:
+    action:
+      maxCharges: 2
+      rechargeDuration: 60
+      useDelay: 7
+    staminaRestoreAmount: 65
+    reagentPurgeAmount: 15
+    healApplications: 5
+    healInterval: 3
+    healing:
+      types:
+        Blunt: -2
+        Slash: -2
+        Piercing: -2
+        Heat: -1.5
+        Shock: -1.5
+        Cold: -1.5
+        Caustic: -1.5
+        Poison: -6
+        Asphyxiation: -8
+
+# Этот уровень будет выдаваться отдельной механикой возвышения.
+- type: vampirePowerLevel
+  id: SunriseVampirePowerAscendant
+  level: Ascendant
+  maxBloodFullness: 350
+  fullnessDecayPerSecond: 0.08
+  fangs:
+    sipInterval: 1
+    bloodGain: 19
+    targetBloodDrain: 22
+    biteDamage:
+      types:
+        Piercing: 0.95
+    bleedAmount: 1.25
+    range: 1.75
+    maxBloodPerTarget: 325
+    healing:
+      types:
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
+        Heat: -0.75
+        Shock: -0.75
+        Cold: -0.75
+        Caustic: -0.75
+        Poison: -6
+        Asphyxiation: -10
+  glare:
+    action:
+      maxCharges: 3
+      rechargeDuration: 40
+      useDelay: 9
+    range: 2
+    frontParalyzeDuration: 8
+    sideParalyzeDuration: 3
+    staminaDamage: 60
+    muteToxinAmount: 1
+    flashProtectionEffectScale: 0.85
+  sleep:
+    action:
+      maxCharges: 3
+      rechargeDuration: 85
+      useDelay: 12
+    channelTime: 5
+    targetRange: 3
+    breakRange: 3.5
+    duration: 22
+    bloodCost: 10
+    ignoresFaith: true
+  rejuvenation:
+    action:
+      maxCharges: 3
+      rechargeDuration: 55
+      useDelay: 6
+    staminaRestoreAmount: 80
+    reagentPurgeAmount: 20
+    healApplications: 6
+    healInterval: 2.75
+    healing:
+      types:
+        Blunt: -2.5
+        Slash: -2.5
+        Piercing: -2.5
+        Heat: -2
+        Shock: -2
+        Cold: -2
+        Caustic: -2
+        Poison: -8
+        Asphyxiation: -10
+
+# Этот уровень выставляется только администрацией.
+- type: vampirePowerLevel
+  id: SunriseVampirePowerAbsolute
+  level: Absolute
+  maxBloodFullness: 500
+  fullnessDecayPerSecond: 0
+  fangs:
+    sipInterval: 0.9
+    bloodGain: 22
+    targetBloodDrain: 24
+    biteDamage:
+      types:
+        Piercing: 1.1
+    bleedAmount: 1.5
+    range: 2
+    maxBloodPerTarget: 400
+    healing:
+      types:
+        Blunt: -1.17
+        Slash: -1.16
+        Piercing: -1.17
+        Heat: -0.88
+        Shock: -0.87
+        Cold: -0.88
+        Caustic: -0.87
+        Poison: -7
+        Asphyxiation: -12
+  glare:
+    action:
+      maxCharges: 6
+      rechargeDuration: 35
+      useDelay: 8
+    range: 2.5
+    frontParalyzeDuration: 15
+    sideParalyzeDuration: 3.5
+    staminaDamage: 80
+    muteToxinAmount: 1.25
+    flashProtectionEffectScale: 1
+  sleep:
+    action:
+      maxCharges: 6
+      rechargeDuration: 70
+      useDelay: 10
+    channelTime: 4.5
+    targetRange: 3.5
+    breakRange: 4
+    duration: 25
+    bloodCost: 5
+    ignoresFaith: true
+  rejuvenation:
+    action:
+      maxCharges: 6
+      rechargeDuration: 45
+      useDelay: 5
+    staminaRestoreAmount: 100
+    reagentPurgeAmount: 25
+    healApplications: 6
+    healInterval: 2.5
+    healing:
+      types:
+        Blunt: -3.5
+        Slash: -3.5
+        Piercing: -3.5
+        Heat: -3
+        Shock: -3
+        Cold: -3
+        Caustic: -3
+        Poison: -12
+        Asphyxiation: -14
