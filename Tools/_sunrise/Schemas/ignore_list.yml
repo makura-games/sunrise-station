@@ -147,6 +147,7 @@ ignore_list:
   - 'Plague inc 2.0'
   - 'Discord'
   - 'Telegram'
+  - 'Guid'
   - 'AMLG-90'
   - 'TR-263'
   - 'LAW-12'    # Для ent-WeaponShotgunSPAS12

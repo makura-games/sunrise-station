@@ -17,6 +17,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
 using Robust.Shared.Maths;
 using Robust.Shared.Utility;
+using Content.Client._Sunrise.Sponsor;
 
 namespace Content.Client._Sunrise.Lobby.UI;
 
@@ -39,7 +40,7 @@ public sealed partial class SunriseLobbyGui : UIScreen
 
     [ViewVariables(VVAccess.ReadWrite)]
     public Vector2 Offset;
-
+    public const string SponsorStripTexturePath = "/Textures/_Sunrise/Interface/Lobby/sponsor_strip.png";
     public const string DefaultIconExpanded = "/Textures/Interface/Nano/inverted_triangle.svg.png";
     public const string DefaultIconCollapsed = "/Textures/Interface/Nano/top_triangle.svg.png";
     public const string StylePropertyIconExpanded = "IconExpanded";
@@ -50,6 +51,7 @@ public sealed partial class SunriseLobbyGui : UIScreen
 
     private float _bottomCenterProfileExpandedWidth = float.NaN;
     private readonly StyleBoxTexture _back;
+    private readonly StyleBoxTexture _sponsorStripBack;
 
     public SunriseLobbyGui()
     {
@@ -62,6 +64,7 @@ public sealed partial class SunriseLobbyGui : UIScreen
 
         LeaveButton.OnPressed += _ => _console.ExecuteCommand("disconnect");
         OptionsButton.OnPressed += _ => UserInterfaceManager.GetUIController<OptionsUIController>().ToggleWindow();
+        DonateButton.OnPressed += _ => UserInterfaceManager.GetUIController<SponsorWindowUIController>().ToggleWindow();
 
         Offset = new Vector2(_random.Next(0, 1000), _random.Next(0, 1000));
         RectClipContent = true;
@@ -74,7 +77,16 @@ public sealed partial class SunriseLobbyGui : UIScreen
         };
         _back.SetPatchMargin(StyleBox.Margin.All, 10);
 
+        var sponsorStripTex = _resource.GetTexture(SponsorStripTexturePath);
+        _sponsorStripBack = new StyleBoxTexture
+        {
+            Texture = sponsorStripTex,
+        };
+        _sponsorStripBack.SetPatchMargin(StyleBox.Margin.All, 14);
+
         LeftTopPanel.PanelOverride = _back;
+
+        SponsorStripPanel.PanelOverride = _sponsorStripBack;
 
         RightPanel.PanelOverride = _back;
 
@@ -241,6 +253,7 @@ public sealed partial class SunriseLobbyGui : UIScreen
     private void SetLobbyOpacity(float opacity)
     {
         _back.Modulate = new Color(37, 37, 42).WithAlpha(opacity);
+        _sponsorStripBack.Modulate = Color.White.WithAlpha(opacity);
     }
 
     #endregion

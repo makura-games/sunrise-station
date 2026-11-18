@@ -9,7 +9,6 @@
 
 - type: loadout
   id: FishnetTights
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -18,13 +17,11 @@
 
 - type: loadout
   id: KneeWhiteSocks
-  sponsorOnly: false
   equipment:
     socks: ClothingKneeWhite
 
 - type: loadout
   id: KneeFishnetSocks
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -33,7 +30,6 @@
 
 - type: loadout
   id: Pantyhose
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -42,13 +38,11 @@
 
 - type: loadout
   id: ShortBlackSocks
-  sponsorOnly: false
   equipment:
     socks: ClothingShortBlack
 
 - type: loadout
   id: StockingsBlue
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -57,7 +51,6 @@
 
 - type: loadout
   id: StockingsCyan
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -66,7 +59,6 @@
 
 - type: loadout
   id: StockingsDpink
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -75,7 +67,6 @@
 
 - type: loadout
   id: StockingsGreen
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -84,7 +75,6 @@
 
 - type: loadout
   id: Stockingslpink
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -93,7 +83,6 @@
 
 - type: loadout
   id: StockingsOrange
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -102,7 +91,6 @@
 
 - type: loadout
   id: StockingsPurple
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -111,7 +99,6 @@
 
 - type: loadout
   id: StockingsWhiteSheer
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -120,7 +107,6 @@
 
 - type: loadout
   id: StockingsBlackSheer
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -129,7 +115,6 @@
 
 - type: loadout
   id: StockingsGarter
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -138,7 +123,6 @@
 
 - type: loadout
   id: ThighAceSocks
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -147,7 +131,6 @@
 
 - type: loadout
   id: ThighAsblastusaSocks
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -156,7 +139,6 @@
 
 - type: loadout
   id: ThighBeeSocks
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -165,7 +147,6 @@
 
 - type: loadout
   id: ThighBlackSocks
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -174,7 +155,6 @@
 
 - type: loadout
   id: ThighCommieSocks
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -183,7 +163,6 @@
 
 - type: loadout
   id: ThighRainbowSocks
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -192,7 +171,6 @@
 
 - type: loadout
   id: ThighTransSocks
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -201,7 +179,6 @@
 
 - type: loadout
   id: ThighUkSocks
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -210,7 +187,6 @@
 
 - type: loadout
   id: ThighChristmasSocks
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -225,72 +201,60 @@
 
 - type: loadout
   id: KneeAceSocks
-  sponsorOnly: false
   equipment:
     socks: ClothingKneeAce
 
 - type: loadout
   id: KneeAssblastusaSocks
-  sponsorOnly: false
   equipment:
     socks: ClothingKneeAsblastusa
 
 - type: loadout
   id: KneeBeeSocks
-  sponsorOnly: false
   equipment:
     socks: ClothingKneeBee
 
 - type: loadout
   id: KneeBlackSocks
-  sponsorOnly: false
   equipment:
     socks: ClothingKneeBlack
 
 - type: loadout
   id: KneeCommieSocks
-  sponsorOnly: false
   equipment:
     socks: ClothingKneeCommie
 
 - type: loadout
   id: KneeRainbowSocks
-  sponsorOnly: false
   equipment:
     socks: ClothingKneeRainbow
 
 - type: loadout
   id: KneeStripedSocks
-  sponsorOnly: false
   equipment:
     socks: ClothingKneeStriped
 
 - type: loadout
   id: KneeThinSocks
-  sponsorOnly: false
   equipment:
     socks: ClothingKneeThin
 
 - type: loadout
   id: KneeTransSocks
-  sponsorOnly: false
   equipment:
     socks: ClothingKneeTrans
 
 - type: loadout
   id: KneeUkSocks
-  sponsorOnly: false
   equipment:
     socks: ClothingKneeUk
 
 - type: loadout
   id: NormBlackSocks
-  sponsorOnly: false
   equipment:
     socks: ClothingNormBlack
 
 - type: loadout
   id: NormWhiteSocks
-  sponsorOnly: false
   equipment:
     socks: ClothingNormWhite

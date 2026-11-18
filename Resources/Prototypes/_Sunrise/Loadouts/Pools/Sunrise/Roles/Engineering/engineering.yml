@@ -17,7 +17,6 @@
   - GroupSpeciesBreathTool
   - TrinketsEngineering
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobTechnicalAssistant
@@ -38,7 +37,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobStationEngineer
@@ -60,7 +58,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobAtmosphericTechnician
@@ -81,4 +78,3 @@
   - Bra
   - Pants
   - Socks
-  - Contributors

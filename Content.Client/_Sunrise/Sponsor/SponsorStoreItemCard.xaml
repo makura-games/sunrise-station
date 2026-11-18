@@ -1,0 +1,75 @@
+<ContainerButton xmlns="https://spacestation14.io"
+                 xmlns:sf="clr-namespace:Content.Client._Sunrise.Sheetlets.SciFiStyle"
+                 xmlns:system="clr-namespace:System;assembly=System.Runtime"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 MaxHeight="220"
+                 MaxWidth="150"
+                 MinHeight="220"
+                 MinWidth="150"
+                 RectClipContent="True">
+    <BoxContainer
+        HorizontalExpand="True"
+        Margin="6"
+        Orientation="Vertical"
+        SeparationOverride="5"
+        VerticalExpand="True">
+        <Control
+            HorizontalExpand="True"
+            Margin="0 6 0 0"
+            MaxHeight="74"
+            MinHeight="72">
+            <BoxContainer
+                HorizontalAlignment="Left"
+                Margin="0 0 0 0"
+                MouseFilter="Ignore"
+                Orientation="Horizontal"
+                SeparationOverride="3"
+                VerticalAlignment="Top">
+                <TextureRect
+                    SetSize="20 20"
+                    Stretch="KeepAspectCentered"
+                    TexturePath="/Textures/_Sunrise/Interface/Sponsor/telecrystal.png" />
+                <Label
+                    Name="ItemPrice"
+                    FontColorOverride="{x:Static sf:SciFiPalette.Text}"
+                    MaxWidth="96"
+                    VAlign="Center"
+                    StyleClasses="font-small" />
+            </BoxContainer>
+            <EntityPrototypeView
+                Name="ItemPreview"
+                HorizontalAlignment="Center"
+                OverrideDirection="South"
+                Scale="2.6 2.6"
+                SetSize="72 72" />
+        </Control>
+
+        <Label
+            Name="ItemName"
+            Align="Center"
+            FontColorOverride="{x:Static sf:SciFiPalette.Text}"
+            HorizontalAlignment="Center"
+            HorizontalExpand="True"
+            Margin="0 3 0 0"
+            MaxHeight="56"
+            MaxWidth="126"
+            MinHeight="42"
+            VAlign="Center" />
+
+        <Control VerticalExpand="True" />
+
+        <BoxContainer
+            HorizontalExpand="True"
+            Orientation="Vertical"
+            SeparationOverride="4">
+            <Button
+                Name="BuyButton"
+                HorizontalExpand="True"
+                MaxHeight="30"
+                MinHeight="30"
+                Text="{Loc 'donation-terminal-buy'}"
+                TextAlign="Center"
+                StyleClasses="SciFiBuyButton" />
+        </BoxContainer>
+    </BoxContainer>
+</ContainerButton>

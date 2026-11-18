@@ -8,6 +8,7 @@
     xmlns:lobbyUi="clr-namespace:Content.Client.Lobby.UI"
     xmlns:maths="clr-namespace:Robust.Shared.Maths;assembly=Robust.Shared.Maths"
     xmlns:serversHub="clr-namespace:Content.Client._Sunrise.ServersHub"
+    xmlns:sf="clr-namespace:Content.Client._Sunrise.Sheetlets.SciFiStyle"
     xmlns:style="clr-namespace:Content.Client.Stylesheets"
     xmlns:userProfile="clr-namespace:Content.Client._Sunrise.UserProfile"
     xmlns:vote="clr-namespace:Content.Client.Voting.UI"
@@ -130,7 +131,54 @@
                                         Visible="False" />
                                 </BoxContainer>
                             </PanelContainer>
+                            <PanelContainer
+                    HorizontalExpand="True"
+                    Margin="3,6,3,3"
+                    MinHeight="74"
+                    Name="SponsorStripPanel"
+                    Access="Public"
+                    RectClipContent="True">
+                    <BoxContainer
+                        HorizontalExpand="True"
+                        Margin="10,8,10,8"
+                        Orientation="Horizontal"
+                        SeparationOverride="8"
+                        VerticalAlignment="Center">
+                        <Control
+                            HorizontalExpand="True"
+                            MinWidth="140"
+                            SizeFlagsStretchRatio="1" />
+                        <Control
+                            HorizontalExpand="True"
+                            MinWidth="140"
+                            SizeFlagsStretchRatio="1" />
+                        <sf:SciFiPillSweepButton
+                            Access="Public"
+                            HorizontalAlignment="Right"
+                            MinHeight="36"
+                            MinWidth="178"
+                            Name="DonateButton"
+                            StyleClasses="SciFiButton SciFiPillButton"
+                            VerticalAlignment="Center">
                             <BoxContainer
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal"
+                                SeparationOverride="6"
+                                VerticalAlignment="Center">
+                                <TextureRect
+                                    SetSize="22 22"
+                                    Stretch="KeepAspectCentered"
+                                    StyleClasses="SciFiButtonIcon"
+                                    TexturePath="/Textures/Interface/character.svg.192dpi.png" />
+                                <Label
+                                    StyleClasses="SciFiButtonLabel"
+                                    Text="{Loc 'donation-terminal-lobby-button'}"
+                                    VAlign="Center" />
+                            </BoxContainer>
+                        </sf:SciFiPillSweepButton>
+                    </BoxContainer>
+                </PanelContainer>
+                <BoxContainer
                                 Access="Public"
                                 HorizontalAlignment="Left"
                                 Margin="0,8"

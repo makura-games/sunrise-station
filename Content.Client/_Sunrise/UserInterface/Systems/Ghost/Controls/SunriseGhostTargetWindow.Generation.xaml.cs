@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Content.Client._Sunrise.UserInterface.Controls;
+using Content.Shared._Sunrise.Helpers;
 using Robust.Client.UserInterface.Controls;
 using GhostWarpPlayer = Content.Shared.Ghost.Systems.SharedGhostSystem.GhostWarpPlayer;
 using GhostWarpPlace = Content.Shared.Ghost.Systems.SharedGhostSystem.GhostWarpPlace;
@@ -117,7 +118,7 @@ public sealed partial class SunriseGhostTargetWindow
             var placeButton = new RichTextButton
             {
                 ModulateSelfOverride = PlaceButtonColor,
-                Text = FormattedMessage.EscapeText(UiTextHelper.TruncateWithEllipsis(place.Name, MaxLenghtWithoutIcons)),
+                Text = FormattedMessage.EscapeText(place.Name.TruncateWithEllipsis(MaxLenghtWithoutIcons)),
                 TextAlign = Label.AlignMode.Right,
                 HorizontalAlignment = HAlignment.Center,
                 VerticalAlignment = VAlignment.Center,
@@ -169,7 +170,7 @@ public sealed partial class SunriseGhostTargetWindow
                 var playerButton = new RichTextButton
                 {
                     ModulateSelfOverride = AntagonistButtonColor,
-                    Text = FormattedMessage.EscapeText(UiTextHelper.TruncateWithEllipsis(antag.Name, MaxLenghtWithoutIcons)),
+                    Text = FormattedMessage.EscapeText(antag.Name.TruncateWithEllipsis(MaxLenghtWithoutIcons)),
                     TextAlign = Label.AlignMode.Right,
                     HorizontalAlignment = HAlignment.Center,
                     VerticalAlignment = VAlignment.Center,

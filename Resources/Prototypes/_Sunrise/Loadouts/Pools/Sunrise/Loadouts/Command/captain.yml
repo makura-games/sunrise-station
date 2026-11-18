@@ -1,6 +1,5 @@
 - type: loadout
   id: EliteCaptainCap
-  sponsorOnly: false
   equipment:
     head: ClothingHeadEliteCaptainCap
 
@@ -77,7 +76,6 @@
 
 - type: loadout
   id: CaptainEliteCloak
-  sponsorOnly: false
   equipment:
     neck: ClothingEliteNeckCloakCaptain
   effects:
@@ -228,7 +226,6 @@
 
 - type: loadout
   id: CaptainOuterOverCoat
-  sponsorOnly: false
   equipment:
     outerClothing: ClothingOuterCoatCaptainOvercoat
 

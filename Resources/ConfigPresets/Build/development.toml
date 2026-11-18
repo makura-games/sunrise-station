@@ -69,6 +69,10 @@ max_ip_connections = 413
 
 [sponsor]
 enabled = true
+project_name = "test"
+api_url = "http://127.0.0.1:27600"
+api_token = "local"
+inventory_webhook_token = "local"
 
 # Sunrise-Edit
 [npc]

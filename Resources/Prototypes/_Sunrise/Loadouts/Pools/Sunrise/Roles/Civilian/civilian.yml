@@ -17,7 +17,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobBartender
@@ -35,7 +34,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobServiceWorker
@@ -50,7 +48,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobChef
@@ -68,7 +65,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobLibrarian
@@ -83,7 +79,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobLawyer
@@ -99,7 +94,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobChaplain
@@ -119,7 +113,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobJanitor
@@ -138,7 +131,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobBotanist
@@ -155,7 +147,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobClown
@@ -174,7 +165,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobMime
@@ -193,7 +183,6 @@
   - Bra
   - Pants
   - Socks
-  - Contributors
 
 - type: roleLoadout
   id: SunriseJobMusician
@@ -211,4 +200,3 @@
   - Bra
   - Pants
   - Socks
-  - Contributors

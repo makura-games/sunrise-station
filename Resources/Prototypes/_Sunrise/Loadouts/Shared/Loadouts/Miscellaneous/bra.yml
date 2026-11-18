@@ -8,7 +8,6 @@
 
 - type: loadout
   id: WhiteNekoBra
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -17,7 +16,6 @@
 
 - type: loadout
   id: BlackNekoBra
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -26,7 +24,6 @@
 
 - type: loadout
   id: AssblastusaBra
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -35,7 +32,6 @@
 
 - type: loadout
   id: BikiniBra
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -44,7 +40,6 @@
 
 - type: loadout
   id: BraletteBra
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -53,7 +48,6 @@
 
 - type: loadout
   id: CommieBra
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -62,7 +56,6 @@
 
 - type: loadout
   id: KinkyBra
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -71,7 +64,6 @@
 
 - type: loadout
   id: LaceBra
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -80,7 +72,6 @@
 
 - type: loadout
   id: SportBra
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -89,7 +80,6 @@
 
 - type: loadout
   id: ThongBra
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -98,7 +88,6 @@
 
 - type: loadout
   id: UkBra
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -107,7 +96,6 @@
 
 - type: loadout
   id: PinkBra
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -116,7 +104,6 @@
 
 - type: loadout
   id: PurpleBra
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -125,7 +112,6 @@
 
 - type: loadout
   id: BlackBra
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -134,7 +120,6 @@
 
 - type: loadout
   id: ChristmasBra
-  sponsorOnly: false
   effects:
   - !type:GroupLoadoutEffect
     proto: WomanMoment
@@ -143,66 +128,55 @@
 
 - type: loadout
   id: BraTshirtWhite
-  sponsorOnly: false
   equipment:
     bra: ClothingBraTshirtWhite
 
 - type: loadout
   id: BraTshirtRed
-  sponsorOnly: false
   equipment:
     bra: ClothingBraTshirtRed
 
 - type: loadout
   id: BraTshirtYellow
-  sponsorOnly: false
   equipment:
     bra: ClothingBraTshirtYellow
 
 - type: loadout
   id: BraTshirtGreen
-  sponsorOnly: false
   equipment:
     bra: ClothingBraTshirtGreen
 
 - type: loadout
   id: BraTshirtBlue
-  sponsorOnly: false
   equipment:
     bra: ClothingBraTshirtBlue
 
 - type: loadout
   id: BraTshirtLightBlue
-  sponsorOnly: false
   equipment:
     bra: ClothingBraTshirtLightBlue
 
 - type: loadout
   id: BraTshirtBlack
-  sponsorOnly: false
   equipment:
     bra: ClothingBraTshirtBlack
 
 - type: loadout
   id: BraTshirtGrey
-  sponsorOnly: false
   equipment:
     bra: ClothingBraTshirtGrey
 
 - type: loadout
   id: BraTshirtPurple
-  sponsorOnly: false
   equipment:
     bra: ClothingBraTshirtPurple
 
 - type: loadout
   id: BraTshirtBrown
-  sponsorOnly: false
   equipment:
     bra: ClothingBraTshirtBrown
 
 - type: loadout
   id: BraTshirtOrange
-  sponsorOnly: false
   equipment:
     bra: ClothingBraTshirtOrange
