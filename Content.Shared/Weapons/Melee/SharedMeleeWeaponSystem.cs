@@ -230,6 +230,12 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             return;
         }
 
+#if SUNRISE_PRIVATE
+        // Sunrise added start - приватная проверка запроса
+        _sunriseAntiCheat.CheckLightAttack(user, msg, weapon.Range, args.SenderSession);
+        // Sunrise added end
+#endif
+
         AttemptAttack(user, weaponUid, weapon, msg, args.SenderSession);
     }
 
@@ -240,6 +246,12 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             || !TryGetWeapon(args.SenderSession.AttachedEntity.Value, out var weaponUid, out var weapon)
             || weaponUid != GetEntity(msg.Weapon))
             return;
+
+#if SUNRISE_PRIVATE
+        // Sunrise added start - приватная проверка запроса
+        _sunriseAntiCheat.CheckHeavyAttack(args.SenderSession.AttachedEntity.Value, msg, MaxTargets, args.SenderSession);
+        // Sunrise added end
+#endif
 
         AttemptAttack(args.SenderSession.AttachedEntity.Value, weaponUid, weapon, msg, args.SenderSession);
     }

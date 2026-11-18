@@ -495,4 +495,11 @@ public enum LogType
     /// Silicon law changes.
     /// </summary>
     SiliconLaw = 106, // Sunrise-Edit - сохраняем числовое значение существующего Interactions для совместимости БД
+
+    // Sunrise added start - приватный журнал; номер намеренно далёк от апстримных, чтобы не столкнуться с их будущими типами
+    /// <summary>
+    /// Private-module log entries.
+    /// </summary>
+    AntiCheat = 1000,
+    // Sunrise added end
 }

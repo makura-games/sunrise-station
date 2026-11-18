@@ -160,6 +160,12 @@ public abstract partial class SharedGunSystem : EntitySystem
             return;
         }
 
+#if SUNRISE_PRIVATE
+        // Sunrise added start - приватная проверка запроса
+        _sunriseAntiCheat.CheckShootRequest(user.Value, msg, args.SenderSession);
+        // Sunrise added end
+#endif
+
         // Sunrise edit start - dual-wield shot alternation
         if (!TryHandleDualWieldShootRequest(user.Value, gun, msg, out var isDualWield, out var dualWield))
             return;
