@@ -12,3 +12,8 @@ barsign-prototype-description-RNDmoment = Справится ли РНД в эт
 
 barsign-prototype-name-aliensjaws = Пасть Чужого
 barsign-prototype-description-aliensjaws = Приготовьте обе свои челюсти для дегустирования кислотных напитков!
+
+## Drunken Cherry
+
+barsign-prototype-name-drunken-cherry = П'яна вишня
+barsign-prototype-description-drunken-cherry = Фірмова космічна наливка, зроблена з найсолодших вишеньок в усій галактиці!

@@ -1,0 +1,24 @@
+- type: entity
+  parent: BaseStructure
+  id: SunrisePigMonument
+  name: pig monument
+  description: A monument to the eternal provider of the people of the USSP.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Decoration/pig_monument.rsi
+    state: icon
+    drawdepth: Mobs
+    noRot: true
+    offset: "0.0,0.5"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.55,-0.25,0.55,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
