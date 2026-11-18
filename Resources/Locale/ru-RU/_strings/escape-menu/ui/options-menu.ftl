@@ -62,6 +62,10 @@ ui-options-highlights-color = Цвет выделений:
 ui-options-highlights-color-example = Это выделенный текст!
 ui-options-show-held-item = Показать удерживаемый элемент рядом с курсором
 ui-options-show-combat-mode-indicators = Показать индикатор боевого режима рядом с курсором
+# Sunrise edit start - названия независимых настроек боевого режима
+ui-options-combat-mode-overhead-indicator = Показывать значок боевого режима над персонажем
+ui-options-combat-mode-toggle-sound = Проигрывать звук при переключении боевого режима
+# Sunrise edit end
 ui-options-opaque-storage-window = Непрозрачность окна хранилища
 ui-options-show-ooc-patron-color = Цветной ник в OOC для патронов с Patreon
 ui-options-show-looc-on-head = Показывать LOOC-чат над головами персонажей
