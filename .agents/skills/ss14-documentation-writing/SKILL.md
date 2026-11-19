@@ -26,7 +26,7 @@ Goal: leave only useful documentation that speeds up reviews and reduces the ris
 
 ### Language
 
-1. Comments and `summary` in fork-owned code (`_Sunrise`, `_Scp`, `_Fish`, `_Lust`, `Sunrise edit` blocks) are written in Russian.
+1. Write comments and all XML documentation text in fork-owned code (`_Sunrise`, `_Scp`, `_Fish`, `_Lust`, `Sunrise edit` blocks) in Russian, including text in `<summary>`, `<remarks>`, `<param>`, and `<returns>`.
 2. Upstream comments are never translated or rewritten, even next to a fork edit; identifiers, XML tags and API names stay English.
 3. Logs stay in English.
 
@@ -203,7 +203,7 @@ Comment: the first header is correct, the second is broken due to the lack of a 
 
 ## Checklist before PR
 
-1. New comments and `summary` in fork-owned code are in Russian; upstream comments are untouched; logs are in English.
+1. New comments and all XML documentation text in fork-owned code are in Russian. Upstream comments are untouched. Logs are in English.
 2. Added `summary` for public and intersystem contracts.
 3. In partial systems there is a brief description of the role of the part.
 4. Complex blocks received a short explanation "why".
