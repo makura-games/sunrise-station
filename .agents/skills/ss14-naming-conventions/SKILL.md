@@ -96,9 +96,9 @@ Use it as a guideline: if new code/content doesn't follow the rules below, it's 
 2. SHOULD: maximum 2 words if the context is already expressed by folders.
 3. MUST: C# file in `CamelCase`, the name matches the key class.
 4. MUST: a partial extending an upstream type mirrors the upstream file:
-   - with an upstream section → `<UpstreamFile>.<Section>.<Fork>.cs`;
-   - without an upstream section → `<UpstreamFile>.<Fork>.cs`;
-   - a fork extension large enough to need its own partial → `<UpstreamFile>.<Fork>.<Specific>.cs`.
+   - With an upstream section, use `<UpstreamFile>.<Section>.<Fork>.cs`. `<Section>` is the suffix already present in the upstream filename. The client partial `ContentAudioSystem.LobbyMusic.Sunrise.cs` extends `ContentAudioSystem.LobbyMusic.cs`, where `LobbyMusic` is the section and `Sunrise` is the fork name.
+   - Without an upstream section, use `<UpstreamFile>.<Fork>.cs`. The server partial `ContentAudioSystem.Sunrise.cs` extends `ContentAudioSystem.cs`.
+   - For a fork extension large enough to need its own partial, use `<UpstreamFile>.<Fork>.<Specific>.cs`. The client file `ContentAudioSystem.Sunrise.RoundEndMusic.cs` adds round-end music in a dedicated partial. `RoundEndMusic` describes the fork feature.
 
 ## Decision Tree
 
