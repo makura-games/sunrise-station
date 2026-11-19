@@ -537,7 +537,6 @@
       map: ["base"]
   # Sunrise-Start
   - type: MovementSpeedModifier
-    baseSprintSpeed: 12
     baseWalkSpeed: 30
   # Sunrise-End
   - type: CameraActiveOnCollideCollider
