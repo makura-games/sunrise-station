@@ -535,6 +535,10 @@
     - state: ai_camera
       shader: unshaded
       map: ["base"]
+  # Sunrise-Start
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 30
+  # Sunrise-End
   - type: CameraActiveOnCollideCollider
 
 # The holographic representation of the AI that is projected from a holopad.
