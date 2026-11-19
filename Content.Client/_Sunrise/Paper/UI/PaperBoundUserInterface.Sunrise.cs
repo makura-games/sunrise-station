@@ -1,5 +1,6 @@
 using static Content.Shared.Paper.PaperComponent;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Client.Paper.UI;
 
 public sealed partial class PaperBoundUserInterface

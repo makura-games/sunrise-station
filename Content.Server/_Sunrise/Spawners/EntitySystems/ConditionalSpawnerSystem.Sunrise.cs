@@ -2,7 +2,7 @@ using Content.Shared.Tag;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
-#pragma warning disable IDE0130 // Пространство имён vanilla-системы сохраняется для partial-расширения.
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Spawners.EntitySystems;
 
 public sealed partial class ConditionalSpawnerSystem

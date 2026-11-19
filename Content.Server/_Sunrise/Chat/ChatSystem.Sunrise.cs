@@ -9,7 +9,7 @@ using Robust.Shared.Audio;
 using Content.Server._Sunrise.Chat;
 using Content.Shared.Database;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Chat.Systems;
 
 public sealed partial class ChatSystem

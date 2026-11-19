@@ -211,7 +211,7 @@
   - type: GameRule
     minPlayers: 5
   - type: AntagSelection
-    selectionTime: JobsAssigned # Sunrise-Edit
+    selectionTime: RuleStarted # Sunrise-Edit - поддерживаем назначение после профессий и при запуске правила в середине раунда.
     lateJoinAdditional: false # Sunrise-Edit
     antags:
     - !type:LinearAntagCount
@@ -272,7 +272,7 @@
     minPlayers: 45 # Sunrise-Edit
   - type: RevolutionaryRule
   - type: AntagSelection
-    selectionTime: JobsAssigned # Sunrise-Edit
+    selectionTime: RuleStarted # Sunrise-Edit - выбираем после назначения профессий на старте и при запуске правила в середине раунда.
     antags:
     - !type:LinearAntagCount
       proto: HeadRev
@@ -351,7 +351,7 @@
     #  max: 900
   - type: ZombieRule
   - type: AntagSelection
-    selectionTime: JobsAssigned # Sunrise-Edit
+    selectionTime: RuleStarted # Sunrise-Edit - поддерживаем назначение после профессий и при запуске правила в середине раунда.
     antags:
     - !type:LinearAntagCount
       proto: InitialInfected
