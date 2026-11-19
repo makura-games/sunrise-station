@@ -1,5 +1,3 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt;
-
 using Content.Shared._Sunrise.Humanoid;
 using Content.Shared.Body;
 using Content.Shared.DoAfter;
