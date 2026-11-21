@@ -166,12 +166,18 @@ public abstract partial class SharedGunSystem : EntitySystem
         // Sunrise added end
 #endif
 
+        // Sunrise added start - неконечные координаты отклоняем до изменения оружия, независимо от настроек античита
+        var coordinates = GetCoordinates(msg.Coordinates);
+        if (!TransformSystem.IsValid(coordinates))
+            return;
+        // Sunrise added end
+
         // Sunrise edit start - dual-wield shot alternation
         if (!TryHandleDualWieldShootRequest(user.Value, gun, msg, out var isDualWield, out var dualWield))
             return;
         // Sunrise edit end
 
-        gun.Comp.ShootCoordinates = GetCoordinates(msg.Coordinates);
+        gun.Comp.ShootCoordinates = coordinates; // Sunrise-Edit - координаты проверены до изменения оружия
         gun.Comp.Target = GetEntity(msg.Target);
         AttemptShoot(user.Value, gun);
         if (msg.Continuous)

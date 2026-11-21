@@ -392,6 +392,11 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
     /// <returns>True if attack successful</returns>
     private bool AttemptAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, AttackEvent attack, ICommonSession? session)
     {
+        // Sunrise added start - ни сетевой запрос, ни прямой вызов не должны исполнять атаку с неконечными координатами
+        if (!TransformSystem.IsValid(GetCoordinates(attack.Coordinates)))
+            return false;
+        // Sunrise added end
+
         var curTime = Timing.CurTime;
 
         if (weapon.NextAttack > curTime)
