@@ -359,6 +359,7 @@
       - state: inhand-right
   - type: Modsuit
   - type: ToggleableClothing
+    action: ActionToggleSuitPiece
     clothingPrototype: SunriseClothingShoesBootsMagPirateMurmilloActive
     requiredSlot: back
     slot: shoes

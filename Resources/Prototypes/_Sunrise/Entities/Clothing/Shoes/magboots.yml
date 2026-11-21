@@ -48,6 +48,7 @@
     requireActivated: false
   - type: Modsuit
   - type: ToggleableClothing
+    action: ActionToggleSuitPiece
     clothingPrototype: ClothingOuterHardsuitMurmillo
     requiredSlot: feet
     slot: outerClothing
