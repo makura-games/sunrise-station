@@ -4,6 +4,7 @@
     - disconnect
     - help
     - list
+    - loglevel # Sunrise-Edit
     - quit
     - hardquit
     - svbind

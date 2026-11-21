@@ -5083,3 +5083,66 @@
     message: Спонсоры теперь обходят чёрный список рас на роль
   id: 2051
   url: https://github.com/makura-games/sunrise-station/pull/4830
+- author: KaiserMaus
+  time: '2026-11-08T21:07:05.0000000+00:00'
+  changes:
+  - type: Remove
+    message: НаноТрейзен отозвала у РнД станции технологию производства блюспейс коробок и грузовых костюмов, они были удалены.
+  id: 2052
+  url: https://github.com/makura-games/sunrise-station/pull/4884
+- author: kanopus7
+  time: '2026-11-15T08:07:20.0000000+00:00'
+  changes:
+  - type: Fix
+    message: Исправлено исчезновение декалей при сохранении карт.
+  - type: Fix
+    message: Исправлены спавн боргов на чужих станциях и обстрел дружественных боргов турелями.
+  - type: Fix
+    message: Исправлена выдача антагонистов посреди раунда и через админку.
+  - type: Fix
+    message: Восстановлены приоритеты спонсоров на антагонистов и дополнительные слоты персонажей.
+  - type: Fix
+    message: Устранён проход сквозь закрытые двери эвакуации.
+  - type: Fix
+    message: Исправлены сброс внешности резоми, отображение масок вульп и возвращена полная невидимость для ниндзи.
+  - type: Fix
+    message: Устранено получение лишних реагентов при изготовлении медипенов.
+  id: 2053
+  url: https://github.com/makura-games/sunrise-station/pull/4886
+- author: privett
+  time: '2026-11-16T02:23:02.0000000+00:00'
+  changes:
+  - type: Add
+    message: Добавлены шаттлы QLMX Personal Transport Shuttle и QLMX Landing Craft Utility для Центрального командования.
+  - type: Fix
+    message: Доступные игровые карты были изменены с учетом исправления ошибок.
+  - type: Fix
+    message: Большинство шлюзов за исключением некоторых закрытых помещений были заменены на стеклянные, что в случае их закрытия позволяет видеть происходящее в другом помещении.
+  - type: Fix
+    message: Произведена оптимизация избыточной численности службы безопасности на станции Delta.
+  id: 2054
+  url: https://github.com/makura-games/sunrise-station/pull/4887
+  media:
+  - url: https://github.com/user-attachments/assets/4bef7b28-19b7-4e0d-aecb-cb39ce79cadd
+    description: Новые шаттлы на станции ЦК.
+- author: KaiserMaus
+  time: '2026-11-16T18:40:43.0000000+00:00'
+  changes:
+  - type: Tweak
+    message: Консоль шаттлов теперь имеют встроенный динамик на манер громкоговорителя и сообщают глобальные уведомления, уведомления станции через консоль связи все ещё не слышно.
+  id: 2055
+  url: https://github.com/makura-games/sunrise-station/pull/4891
+- author: Nordstream17
+  time: '2026-11-16T18:46:04.0000000+00:00'
+  changes:
+  - type: Add
+    message: Добавлены коробки с волшебными свечами и маленькими волшебными свечами
+  id: 2056
+  url: https://github.com/makura-games/sunrise-station/pull/4604
+- author: ThereDrD
+  time: '2026-11-18T14:45:11.0000000+00:00'
+  changes:
+  - type: Fix
+    message: Исправлена техническая уязвимость в правах технической команды
+  id: 2057
+  url: https://github.com/makura-games/sunrise-station/pull/4894
