@@ -14,13 +14,6 @@
     - state: icon
       map: [ "enum.DiseaseCultureVisualLayers.Base" ]
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.DiseaseCultureVisuals.State:
-        enum.DiseaseCultureVisualLayers.Base:
-          Empty: { state: icon }
-          Growing: { state: icon }
-          Grown: { state: infected }
   - type: Tag
     tags:
     - Recyclable

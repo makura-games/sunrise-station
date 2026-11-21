@@ -25,10 +25,6 @@
           False: { state: unlit }
   - type: Machine
     board: SunriseDiseaseMicroscopeCircuitboard
-  - type: GuideHelp
-    guides:
-    - SunriseVirologySelection
-    - SunriseVirologyBiosafety
   - type: ItemSlots
   - type: ContainerContainer
     containers:
@@ -51,12 +47,6 @@
     solution: microscope
   - type: ExaminableSolution
     solution: microscope
-  - type: ActivatableUI
-    key: enum.DiseaseMicroscopeUiKey.Key
-  - type: UserInterface
-    interfaces:
-      enum.DiseaseMicroscopeUiKey.Key:
-        type: DiseaseMicroscopeBoundUserInterface
 
 - type: entity
   parent: BaseMachineCircuitboard

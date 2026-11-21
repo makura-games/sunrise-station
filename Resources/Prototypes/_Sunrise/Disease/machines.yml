@@ -40,12 +40,6 @@
   - type: MaterialStorage
     materialWhiteList:
     - Biomass
-  - type: ActivatableUI
-    key: enum.VaccinatorUiKey.Key
-  - type: UserInterface
-    interfaces:
-      enum.VaccinatorUiKey.Key:
-        type: VaccinatorBoundUserInterface
   - type: GenericVisualizer
     visuals:
       enum.PowerDeviceVisuals.VisualState:
@@ -95,14 +89,6 @@
       state: generic_panel_open
   - type: AccessReader
     access: [["Medical"], ["ChiefMedicalOfficer"], ["Research"]]
-  - type: ActivatableUI
-    key: enum.DiseaseDatabaseUiKey.Key
-  - type: UserInterface
-    interfaces:
-      enum.DiseaseDatabaseUiKey.Key:
-        type: DiseaseDatabaseBoundUserInterface
-      enum.WiresUiKey.Key:
-        type: WiresBoundUserInterface
   - type: Computer
     board: SunriseDiseaseDatabaseCircuitboard
   - type: PointLight
@@ -143,17 +129,6 @@
       shader: unshaded
       map: [ "sterilizerStatus" ]
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.PowerDeviceVisuals.Powered:
-        sterilizerStatus:
-          True: { visible: true }
-          False: { visible: false }
-      enum.DiseaseSterilizerVisuals.State:
-        sterilizerStatus:
-          Idle: { state: idle }
-          Spraying: { state: spray }
-          Alarm: { state: alarm }
   # Через арку проходят насквозь: фикстура не твёрдая и только ловит шаги.
   - type: Fixtures
     fixtures:
