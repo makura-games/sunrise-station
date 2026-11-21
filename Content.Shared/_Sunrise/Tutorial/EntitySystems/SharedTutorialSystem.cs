@@ -1,9 +1,6 @@
 using Content.Shared._Sunrise.Tutorial.Components;
-using Content.Shared._Sunrise.Tutorial.Conditions;
 using Content.Shared._Sunrise.Tutorial.EntitySystems.SoftLock;
 using Content.Shared.EntityEffects;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Inventory;
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -16,11 +13,8 @@ namespace Content.Shared._Sunrise.Tutorial.EntitySystems;
 /// </summary>
 public abstract partial class SharedTutorialSystem : EntitySystem
 {
-    [Dependency] private SharedTutorialConditionsSystem _tutorial = default!;
     [Dependency] private TutorialSoftLockSystem _softLock = default!;
     [Dependency] private EntityLookupSystem _lookupSystem = default!;
-    [Dependency] private InventorySystem _inventory = default!;
-    [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
     [Dependency] private SharedEntityEffectsSystem _entityEffects = default!;
@@ -37,7 +31,7 @@ public abstract partial class SharedTutorialSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        if (_timing.ApplyingState)
+        if (!_net.IsServer || _timing.ApplyingState)
             return;
 
         var query = EntityQueryEnumerator<TutorialPlayerComponent>();

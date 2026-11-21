@@ -50,9 +50,10 @@
       popup: combat-tut-softlock-follow-step
     - type: TutorialAttackSoftLock
       popup: combat-tut-softlock-follow-step
-  conditions:
-  - !type:StepDelayCondition
-    delay: 11
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 11
 
 - type: tutorialStep
   id: CombatTutActionBar
@@ -75,9 +76,10 @@
       popup: combat-tut-softlock-follow-step
     - type: TutorialAttackSoftLock
       popup: combat-tut-softlock-follow-step
-  conditions:
-  - !type:StepDelayCondition
-    delay: 11
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 11
 
 - type: tutorialStep
   id: CombatTutEnableCombatMode
@@ -112,8 +114,9 @@
       popup: combat-tut-softlock-keep-weapon
     - type: TutorialAttackSoftLock
       popup: combat-tut-softlock-follow-step
-  conditions:
-  - !type:CombatModeCondition
+  completion:
+    all:
+    - !type:CombatModeObjectiveCondition
 
 - type: tutorialStep
   id: CombatTutUnarmedAttack
@@ -137,14 +140,16 @@
       allowUnarmed: true
       popup: combat-tut-softlock-attack-target
   failures:
-  - conditions:
-    - !type:CombatModeCondition
-      enabled: false
+  - when:
+      all:
+      - !type:CombatModeObjectiveCondition
+        enabled: false
     repairStep: CombatTutEnableCombatMode
-  conditions:
-  - !type:MeleeHitListenedCondition
-    target: CombatTutorialPlayer
-    hitTarget: CombatTutorialTargetHuman
+  completion:
+    all:
+    - !type:MeleeHitObjectiveCondition
+      target: CombatTutorialPlayer
+      hitTarget: CombatTutorialTargetHuman
 
 - type: tutorialStep
   id: CombatTutExplainStamina
@@ -170,9 +175,10 @@
     - type: TutorialSimulatedAlert
       alert: Stamina
       severity: 4
-  conditions:
-  - !type:StepDelayCondition
-    delay: 12
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 12
 
 - type: tutorialStep
   id: CombatTutExplainAttackTypes
@@ -190,9 +196,10 @@
     - type: TutorialAttackSoftLock
       silent: true
       popup: combat-tut-softlock-follow-step
-  conditions:
-  - !type:StepDelayCondition
-    delay: 13
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 13
 
 - type: tutorialStep
   id: CombatTutDisarm
@@ -216,13 +223,15 @@
       allowDisarm: true
       popup: combat-tut-softlock-disarm-target
   failures:
-  - conditions:
-    - !type:CombatModeCondition
-      enabled: false
+  - when:
+      all:
+      - !type:CombatModeObjectiveCondition
+        enabled: false
     repairStep: CombatTutEnableCombatMode
-  conditions:
-  - !type:DisarmListenedCondition
-    target: CombatTutorialTargetHuman
+  completion:
+    all:
+    - !type:DisarmObjectiveCondition
+      target: CombatTutorialTargetHuman
 
 - type: tutorialStep
   id: CombatTutTakeMelee
@@ -258,9 +267,10 @@
     - type: TutorialAttackSoftLock
       silent: true
       popup: combat-tut-softlock-follow-step
-  conditions:
-  - !type:PickupListenedCondition
-    target: SurvivalKnife
+  completion:
+    all:
+    - !type:PickupObjectiveCondition
+      target: SurvivalKnife
 
 - type: tutorialStep
   id: CombatTutMeleeAttack
@@ -299,19 +309,22 @@
       - SurvivalKnife
       popup: combat-tut-softlock-attack-target
   failures:
-  - conditions:
-    - !type:HoldInHandsCondition
-      item: SurvivalKnife
-      inverted: true
+  - when:
+      all:
+      - !type:HoldInHandsObjectiveCondition
+        item: SurvivalKnife
+        inverted: true
     repairStep: CombatTutTakeMelee
-  - conditions:
-    - !type:CombatModeCondition
-      enabled: false
+  - when:
+      all:
+      - !type:CombatModeObjectiveCondition
+        enabled: false
     repairStep: CombatTutEnableCombatMode
-  conditions:
-  - !type:MeleeHitListenedCondition
-    target: SurvivalKnife
-    hitTarget: CombatTutorialTargetHuman
+  completion:
+    all:
+    - !type:MeleeHitObjectiveCondition
+      target: SurvivalKnife
+      hitTarget: CombatTutorialTargetHuman
 
 - type: tutorialStep
   id: CombatTutWideAttack
@@ -350,20 +363,23 @@
       - SurvivalKnife
       popup: combat-tut-softlock-wide-target
   failures:
-  - conditions:
-    - !type:HoldInHandsCondition
-      item: SurvivalKnife
-      inverted: true
+  - when:
+      all:
+      - !type:HoldInHandsObjectiveCondition
+        item: SurvivalKnife
+        inverted: true
     repairStep: CombatTutTakeMelee
-  - conditions:
-    - !type:CombatModeCondition
-      enabled: false
+  - when:
+      all:
+      - !type:CombatModeObjectiveCondition
+        enabled: false
     repairStep: CombatTutEnableCombatMode
-  conditions:
-  - !type:MeleeHitListenedCondition
-    target: SurvivalKnife
-    hitTarget: CombatTutorialTargetHuman
-    wide: true
+  completion:
+    all:
+    - !type:MeleeHitObjectiveCondition
+      target: SurvivalKnife
+      hitTarget: CombatTutorialTargetHuman
+      wide: true
 
 - type: tutorialStep
   id: CombatTutReturnMelee
@@ -394,9 +410,10 @@
     - type: TutorialAttackSoftLock
       silent: true
       popup: combat-tut-softlock-follow-step
-  conditions:
-  - !type:DropListenedCondition
-    target: SurvivalKnife
+  completion:
+    all:
+    - !type:DropObjectiveCondition
+      target: SurvivalKnife
 
 - type: tutorialStep
   id: CombatTutTakePistol
@@ -432,9 +449,10 @@
     - type: TutorialAttackSoftLock
       silent: true
       popup: combat-tut-softlock-follow-step
-  conditions:
-  - !type:PickupListenedCondition
-    target: CombatTutorialWeaponDisablerPractice
+  completion:
+    all:
+    - !type:PickupObjectiveCondition
+      target: CombatTutorialWeaponDisablerPractice
 
 - type: tutorialStep
   id: CombatTutShootTarget
@@ -471,20 +489,23 @@
       - CombatTutorialWeaponDisablerPractice
       popup: combat-tut-softlock-shoot-target
   failures:
-  - conditions:
-    - !type:HoldInHandsCondition
-      item: CombatTutorialWeaponDisablerPractice
-      inverted: true
+  - when:
+      all:
+      - !type:HoldInHandsObjectiveCondition
+        item: CombatTutorialWeaponDisablerPractice
+        inverted: true
     repairStep: CombatTutTakePistol
-  - conditions:
-    - !type:CombatModeCondition
-      enabled: false
+  - when:
+      all:
+      - !type:CombatModeObjectiveCondition
+        enabled: false
     repairStep: CombatTutEnableCombatMode
-  conditions:
-  - !type:ProjectileHitListenedCondition
-    target: CombatTutorialWeaponDisablerPractice
-    hitTarget: TargetSyndicate
-    count: 3
+  completion:
+    all:
+    - !type:ProjectileHitObjectiveCondition
+      target: CombatTutorialWeaponDisablerPractice
+      hitTarget: TargetSyndicate
+      count: 3
 
 - type: tutorialStep
   id: CombatTutDisableCombatMode
@@ -516,9 +537,10 @@
     - type: TutorialAttackSoftLock
       silent: true
       popup: combat-tut-softlock-follow-step
-  conditions:
-  - !type:CombatModeCondition
-    enabled: false
+  completion:
+    all:
+    - !type:CombatModeObjectiveCondition
+      enabled: false
 
 - type: tutorialStep
   id: CombatTutReturnPistol
@@ -548,9 +570,10 @@
       popup: combat-tut-softlock-return-weapon
     - type: TutorialAttackSoftLock
       popup: combat-tut-softlock-follow-step
-  conditions:
-  - !type:DropListenedCondition
-    target: CombatTutorialWeaponDisablerPractice
+  completion:
+    all:
+    - !type:DropObjectiveCondition
+      target: CombatTutorialWeaponDisablerPractice
 
 - type: tutorialStep
   id: CombatTutTakeCarbine
@@ -586,9 +609,10 @@
     - type: TutorialAttackSoftLock
       silent: true
       popup: combat-tut-softlock-follow-step
-  conditions:
-  - !type:PickupListenedCondition
-    target: WeaponLaserCarbinePractice
+  completion:
+    all:
+    - !type:PickupObjectiveCondition
+      target: WeaponLaserCarbinePractice
 
 - type: tutorialStep
   id: CombatTutShootCarbineUnwielded
@@ -627,19 +651,22 @@
       - WeaponLaserCarbinePractice
       popup: combat-tut-softlock-shoot-carbine
   failures:
-  - conditions:
-    - !type:HoldInHandsCondition
-      item: WeaponLaserCarbinePractice
-      inverted: true
+  - when:
+      all:
+      - !type:HoldInHandsObjectiveCondition
+        item: WeaponLaserCarbinePractice
+        inverted: true
     repairStep: CombatTutTakeCarbine
-  - conditions:
-    - !type:CombatModeCondition
-      enabled: false
+  - when:
+      all:
+      - !type:CombatModeObjectiveCondition
+        enabled: false
     repairStep: CombatTutEnableCombatMode
-  conditions:
-  - !type:GunShotListenedCondition
-    target: WeaponLaserCarbinePractice
-    count: 3
+  completion:
+    all:
+    - !type:GunShotObjectiveCondition
+      target: WeaponLaserCarbinePractice
+      count: 3
 
 - type: tutorialStep
   id: CombatTutWieldCarbine
@@ -672,14 +699,16 @@
       silent: true
       popup: combat-tut-softlock-follow-step
   failures:
-  - conditions:
-    - !type:HoldInHandsCondition
-      item: WeaponLaserCarbinePractice
-      inverted: true
+  - when:
+      all:
+      - !type:HoldInHandsObjectiveCondition
+        item: WeaponLaserCarbinePractice
+        inverted: true
     repairStep: CombatTutTakeCarbine
-  conditions:
-  - !type:WieldedCondition
-    item: WeaponLaserCarbinePractice
+  completion:
+    all:
+    - !type:WieldedObjectiveCondition
+      item: WeaponLaserCarbinePractice
 
 - type: tutorialStep
   id: CombatTutShootCarbineWielded
@@ -716,24 +745,28 @@
       - WeaponLaserCarbinePractice
       popup: combat-tut-softlock-shoot-carbine
   failures:
-  - conditions:
-    - !type:HoldInHandsCondition
-      item: WeaponLaserCarbinePractice
-      inverted: true
+  - when:
+      all:
+      - !type:HoldInHandsObjectiveCondition
+        item: WeaponLaserCarbinePractice
+        inverted: true
     repairStep: CombatTutTakeCarbine
-  - conditions:
-    - !type:WieldedCondition
-      item: WeaponLaserCarbinePractice
-      wielded: false
+  - when:
+      all:
+      - !type:WieldedObjectiveCondition
+        item: WeaponLaserCarbinePractice
+        wielded: false
     repairStep: CombatTutWieldCarbine
-  - conditions:
-    - !type:CombatModeCondition
-      enabled: false
+  - when:
+      all:
+      - !type:CombatModeObjectiveCondition
+        enabled: false
     repairStep: CombatTutEnableCombatMode
-  conditions:
-  - !type:GunShotListenedCondition
-    target: WeaponLaserCarbinePractice
-    count: 3
+  completion:
+    all:
+    - !type:GunShotObjectiveCondition
+      target: WeaponLaserCarbinePractice
+      count: 3
 
 - type: tutorialStep
   id: CombatTutChargeCarbine
@@ -761,13 +794,15 @@
       silent: true
       popup: combat-tut-softlock-follow-step
   failures:
-  - conditions:
-    - !type:CombatModeCondition
+  - when:
+      all:
+      - !type:CombatModeObjectiveCondition
     repairStep: CombatTutDisableCombatMode
-  conditions:
-  - !type:ItemInsertedListenedCondition
-    target: WeaponCapacitorRecharger
-    item: WeaponLaserCarbinePractice
+  completion:
+    all:
+    - !type:ItemInsertedObjectiveCondition
+      target: WeaponCapacitorRecharger
+      item: WeaponLaserCarbinePractice
 
 - type: tutorialStep
   id: CombatTutForceEscalation
@@ -784,9 +819,10 @@
       popup: combat-tut-softlock-follow-step
     - type: TutorialAttackSoftLock
       popup: combat-tut-softlock-follow-step
-  conditions:
-  - !type:StepDelayCondition
-    delay: 17
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 17
 
 - type: tutorialStep
   id: CombatTutFinish
@@ -803,9 +839,10 @@
       popup: combat-tut-softlock-follow-step
     - type: TutorialAttackSoftLock
       popup: combat-tut-softlock-follow-step
-  conditions:
-  - !type:StepDelayCondition
-    delay: 10
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 10
 
 - type: entity
   parent: MobHuman
@@ -837,7 +874,6 @@
   components:
   - type: BatterySelfRecharger
     autoRechargeRate: 125
-  - type: TutorialProjectileSource
 
 - type: entity
   parent: BaseTutorialPlayer

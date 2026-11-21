@@ -98,9 +98,10 @@
     text: intro-tut-welcome-bubble
   chatMessage: intro-tut-welcome-chat
   ttsMessage: intro-tut-welcome-tts
-  conditions:
-  - !type:StepDelayCondition
-    delay: 13
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 13
 
 #  1. Walk around to learn movement
 - type: tutorialStep
@@ -124,8 +125,9 @@
     name: Hotbar
   - !type:UiByName
     name: HandContainer
-  conditions:
-  - !type:SwapHandsListenedCondition
+  completion:
+    all:
+    - !type:SwapHandsObjectiveCondition
 
 #  3. Explain the left item status panel
 - type: tutorialStep
@@ -140,9 +142,10 @@
     name: Hotbar
   - !type:UiByName
     name: StatusPanelLeft
-  conditions:
-  - !type:StepDelayCondition
-    delay: 8
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 8
 
 #  4. Head to the locker room
 - type: tutorialStep
@@ -154,10 +157,11 @@
   chatMessage: intro-tut-go-locker-room-chat
   ttsMessage: intro-tut-go-locker-room-tts
   observeRange: 30
-  conditions:
-  - !type:ReachMarkerCondition
-    marker: IntroTutMarkerLockerRoom
-    distance: 2
+  completion:
+    all:
+    - !type:ReachMarkerObjectiveCondition
+      marker: IntroTutMarkerLockerRoom
+      distance: 2
 
 #  5. Examine the clothing vending machine
 - type: tutorialStep
@@ -177,9 +181,10 @@
   chatMessage: intro-tut-examine-clothing-vendor-chat
   ttsMessage: intro-tut-examine-clothing-vendor-tts
   observeRange: 12
-  conditions:
-  - !type:ExamineListenedCondition
-    target: VendingMachineClothing
+  completion:
+    all:
+    - !type:ExamineObjectiveCondition
+      target: VendingMachineClothing
 
 #  6. Open the clothing vending machine
 - type: tutorialStep
@@ -192,9 +197,10 @@
   chatMessage: intro-tut-open-clothing-vendor-chat
   ttsMessage: intro-tut-open-clothing-vendor-tts
   observeRange: 12
-  conditions:
-  - !type:BuiOpenListenedCondition
-    target: VendingMachineClothing
+  completion:
+    all:
+    - !type:BuiOpenObjectiveCondition
+      target: VendingMachineClothing
 
 #  7. Take any clothing from the vending machine
 - type: tutorialStep
@@ -214,10 +220,11 @@
   chatMessage: intro-tut-take-clothing-chat
   ttsMessage: intro-tut-take-clothing-tts
   observeRange: 12
-  conditions:
-  - !type:VendingMachineTakeListenedCondition
-    target: VendingMachineClothing
-    itemTarget: ClothingHeadHatBeret
+  completion:
+    all:
+    - !type:VendingMachineTakeObjectiveCondition
+      target: VendingMachineClothing
+      itemTarget: ClothingHeadHatBeret
 
 #  8. Explain inventory
 - type: tutorialStep
@@ -232,14 +239,15 @@
     name: Inventory
   - !type:UiByName
     name: InventoryButton
-  conditions:
-  - !type:UiControlVisibleCondition
-    control: InventoryHeadSlot
-    selectors:
-    - !type:UiByName
-      name: Inventory
-    - !type:UiByName
-      name: SlotButton_head
+  completion:
+    all:
+    - !type:UiControlVisibleObjectiveCondition
+      control: InventoryHeadSlot
+      selectors:
+      - !type:UiByName
+        name: Inventory
+      - !type:UiByName
+        name: SlotButton_head
 
 #  9. Take the beret in hand
 - type: tutorialStep
@@ -255,9 +263,10 @@
   uiHighlight:
   - !type:UiByEntityPrototype
     prototype: ClothingHeadHatBeret
-  conditions:
-  - !type:ActiveHandContainsCondition
-    item: ClothingHeadHatBeret
+  completion:
+    all:
+    - !type:ActiveHandContainsObjectiveCondition
+      item: ClothingHeadHatBeret
 
 # 10. Equip the new clothing
 - type: tutorialStep
@@ -272,10 +281,11 @@
     name: Inventory
   - !type:UiByName
     name: SlotButton_head
-  conditions:
-  - !type:EquipListenedCondition
-    target: ClothingHeadHatBeret
-    slot: HEAD
+  completion:
+    all:
+    - !type:EquipObjectiveCondition
+      target: ClothingHeadHatBeret
+      slot: HEAD
 
 # 11. Point at a nearby entity
 - type: tutorialStep
@@ -288,8 +298,9 @@
   chatMessage: intro-tut-point-clothing-vendor-chat
   ttsMessage: intro-tut-point-clothing-vendor-tts
   observeRange: 12
-  conditions:
-  - !type:PointListenedCondition
+  completion:
+    all:
+    - !type:PointObjectiveCondition
 
 # 12. Drop the old clothing item (skipped if the player has nothing in hand)
 - type: tutorialStep
@@ -299,11 +310,12 @@
     text: intro-tut-drop-old-clothing-bubble
   chatMessage: intro-tut-drop-old-clothing-chat
   ttsMessage: intro-tut-drop-old-clothing-tts
-  conditions: []
-  anyConditions:
-  - !type:DropListenedCondition
-  - !type:HoldInHandsCondition
-    inverted: true
+  completion:
+    all: []
+    any:
+    - !type:DropObjectiveCondition
+    - !type:HoldInHandsObjectiveCondition
+      inverted: true
 
 # 13. Go to the center of the location
 - type: tutorialStep
@@ -315,10 +327,11 @@
   chatMessage: intro-tut-go-center-chat
   ttsMessage: intro-tut-go-center-tts
   observeRange: 30
-  conditions:
-  - !type:ReachMarkerCondition
-    marker: IntroTutMarkerCenter
-    distance: 2
+  completion:
+    all:
+    - !type:ReachMarkerObjectiveCondition
+      marker: IntroTutMarkerCenter
+      distance: 2
 
 # 14. Sit on a chair
 - type: tutorialStep
@@ -331,9 +344,10 @@
   chatMessage: intro-tut-sit-chair-chat
   ttsMessage: intro-tut-sit-chair-tts
   observeRange: 12
-  conditions:
-  - !type:SitListenedCondition
-    target: Chair
+  completion:
+    all:
+    - !type:SitObjectiveCondition
+      target: Chair
 
 # 15. Stand up from the chair
 - type: tutorialStep
@@ -346,9 +360,10 @@
   chatMessage: intro-tut-stand-from-chair-chat
   ttsMessage: intro-tut-stand-from-chair-tts
   observeRange: 12
-  conditions:
-  - !type:BuckledCondition
-    buckled: false
+  completion:
+    all:
+    - !type:BuckledObjectiveCondition
+      buckled: false
 
 # 16. Pull a chair
 - type: tutorialStep
@@ -361,9 +376,10 @@
   chatMessage: intro-tut-pull-chair-chat
   ttsMessage: intro-tut-pull-chair-tts
   observeRange: 12
-  conditions:
-  - !type:PullingCondition
-    target: Chair
+  completion:
+    all:
+    - !type:PullingObjectiveCondition
+      target: Chair
 
 # 17. Release the chair
 - type: tutorialStep
@@ -376,10 +392,11 @@
   chatMessage: intro-tut-release-chair-chat
   ttsMessage: intro-tut-release-chair-tts
   observeRange: 12
-  conditions:
-  - !type:PullingCondition
-    target: Chair
-    inverted: true
+  completion:
+    all:
+    - !type:PullingObjectiveCondition
+      target: Chair
+      inverted: true
 
 # 18. Lie down and stand up
 - type: tutorialStep
@@ -389,9 +406,10 @@
     text: intro-tut-lie-down-stand-up-bubble
   chatMessage: intro-tut-lie-down-stand-up-chat
   ttsMessage: intro-tut-lie-down-stand-up-tts
-  conditions:
-  - !type:LieDownStandUpListenedCondition
-    count: 2
+  completion:
+    all:
+    - !type:LieDownStandUpObjectiveCondition
+      count: 2
 
 # 19. Explain action bar
 - type: tutorialStep
@@ -406,9 +424,10 @@
     name: Actions
   - !type:UiByName
     name: ActionsContainer
-  conditions:
-  - !type:StepDelayCondition
-    delay: 10
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 10
 
 - type: entity
   parent: BaseTutorialPlayer

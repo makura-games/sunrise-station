@@ -57,9 +57,10 @@
     text: comm-tut-welcome-bubble
   chatMessage: comm-tut-welcome-chat
   ttsMessage: comm-tut-welcome-tts
-  conditions:
-  - !type:StepDelayCondition
-    delay: 13
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 13
 
 - type: tutorialStep
   id: CommTutLocalChat
@@ -75,9 +76,10 @@
     name: ChatInput
   - !type:UiByName
     name: Input
-  conditions:
-  - !type:ChatMessageListenedCondition
-    kind: Local
+  completion:
+    all:
+    - !type:ChatMessageObjectiveCondition
+      kind: Local
 
 - type: tutorialStep
   id: CommTutWhisper
@@ -93,9 +95,10 @@
     name: ChatInput
   - !type:UiByName
     name: Input
-  conditions:
-  - !type:ChatMessageListenedCondition
-    kind: Whisper
+  completion:
+    all:
+    - !type:ChatMessageObjectiveCondition
+      kind: Whisper
 
 - type: tutorialStep
   id: CommTutEmote
@@ -111,9 +114,10 @@
     name: ChatInput
   - !type:UiByName
     name: Input
-  conditions:
-  - !type:ChatMessageListenedCondition
-    kind: Emote
+  completion:
+    all:
+    - !type:ChatMessageObjectiveCondition
+      kind: Emote
 
 - type: tutorialStep
   id: CommTutLooc
@@ -129,9 +133,10 @@
     name: ChatInput
   - !type:UiByName
     name: Input
-  conditions:
-  - !type:ChatMessageListenedCondition
-    kind: Looc
+  completion:
+    all:
+    - !type:ChatMessageObjectiveCondition
+      kind: Looc
 
 - type: tutorialStep
   id: CommTutRadioExplain
@@ -147,9 +152,10 @@
     name: ChatInput
   - !type:UiByName
     name: ChannelSelector
-  conditions:
-  - !type:StepDelayCondition
-    delay: 15
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 15
 
 - type: tutorialStep
   id: CommTutCommonRadio
@@ -165,10 +171,11 @@
     name: ChatInput
   - !type:UiByName
     name: Input
-  conditions:
-  - !type:ChatMessageListenedCondition
-    kind: Radio
-    channel: Common
+  completion:
+    all:
+    - !type:ChatMessageObjectiveCondition
+      kind: Radio
+      channel: Common
 
 - type: tutorialStep
   id: CommTutOpenInventory
@@ -182,14 +189,15 @@
     name: Inventory
   - !type:UiByName
     name: InventoryButton
-  conditions:
-  - !type:UiControlVisibleCondition
-    control: InventoryEarsSlot
-    selectors:
-    - !type:UiByName
-      name: Inventory
-    - !type:UiByName
-      name: SlotButton_ears
+  completion:
+    all:
+    - !type:UiControlVisibleObjectiveCondition
+      control: InventoryEarsSlot
+      selectors:
+      - !type:UiByName
+        name: Inventory
+      - !type:UiByName
+        name: SlotButton_ears
 
 - type: tutorialStep
   id: CommTutRadioUi
@@ -203,9 +211,10 @@
     name: Inventory
   - !type:UiByName
     name: SlotButton_ears
-  conditions:
-  - !type:ExamineListenedCondition
-    target: CommunicationTutorialHeadset
+  completion:
+    all:
+    - !type:ExamineObjectiveCondition
+      target: CommunicationTutorialHeadset
 
 - type: tutorialStep
   id: CommTutDepartmentRadio
@@ -221,10 +230,11 @@
     name: ChatInput
   - !type:UiByName
     name: Input
-  conditions:
-  - !type:ChatMessageListenedCondition
-    kind: DepartmentRadio
-    channel: Engineering
+  completion:
+    all:
+    - !type:ChatMessageObjectiveCondition
+      kind: DepartmentRadio
+      channel: Engineering
 
 - type: tutorialStep
   id: CommTutHelpRequestExample
@@ -233,9 +243,10 @@
     text: comm-tut-help-request-example-bubble
   chatMessage: comm-tut-help-request-example-chat
   ttsMessage: comm-tut-help-request-example-tts
-  conditions:
-  - !type:StepDelayCondition
-    delay: 9
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 9
 
 - type: tutorialStep
   id: CommTutOpenMessenger
@@ -251,8 +262,9 @@
     name: SecondHotbar
   - !type:UiByName
     name: SlotButton_id
-  conditions:
-  - !type:MessengerOpenedListenedCondition
+  completion:
+    all:
+    - !type:MessengerOpenedObjectiveCondition
 
 - type: tutorialStep
   id: CommTutMessengerChats
@@ -267,9 +279,10 @@
     controlType: MessengerUiFragment
   - !type:UiByName
     name: GroupChatsTab
-  conditions:
-  - !type:StepDelayCondition
-    delay: 10
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 10
 
 - type: tutorialStep
   id: CommTutMessengerMessages
@@ -284,9 +297,10 @@
     controlType: MessengerUiFragment
   - !type:UiByName
     name: MessagesContainer
-  conditions:
-  - !type:StepDelayCondition
-    delay: 10
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 10
 
 - type: tutorialStep
   id: CommTutMessengerGroupTab
@@ -300,14 +314,15 @@
     controlType: MessengerUiFragment
   - !type:UiByName
     name: GroupChatsTab
-  conditions:
-  - !type:UiButtonPressedCondition
-    button: CommTutMessengerGroupTab
-    selectors:
-    - !type:UiByType
-      controlType: MessengerUiFragment
-    - !type:UiByName
-      name: GroupChatsTab
+  completion:
+    all:
+    - !type:UiButtonPressedObjectiveCondition
+      button: CommTutMessengerGroupTab
+      selectors:
+      - !type:UiByType
+        controlType: MessengerUiFragment
+      - !type:UiByName
+        name: GroupChatsTab
 
 - type: tutorialStep
   id: CommTutMessengerCommonChat
@@ -321,14 +336,15 @@
     controlType: MessengerUiFragment
   - !type:UiByName
     name: MessengerGroupChat_common
-  conditions:
-  - !type:UiButtonPressedCondition
-    button: CommTutMessengerCommonChat
-    selectors:
-    - !type:UiByType
-      controlType: MessengerUiFragment
-    - !type:UiByName
-      name: MessengerGroupChat_common
+  completion:
+    all:
+    - !type:UiButtonPressedObjectiveCondition
+      button: CommTutMessengerCommonChat
+      selectors:
+      - !type:UiByType
+        controlType: MessengerUiFragment
+      - !type:UiByName
+        name: MessengerGroupChat_common
 
 - type: tutorialStep
   id: CommTutSendMessenger
@@ -342,8 +358,9 @@
     controlType: MessengerUiFragment
   - !type:UiByName
     name: SendButton
-  conditions:
-  - !type:MessengerMessageListenedCondition
+  completion:
+    all:
+    - !type:MessengerMessageObjectiveCondition
 
 - type: tutorialStep
   id: CommTutAskHelp
@@ -357,9 +374,10 @@
     name: TopBar
   - !type:UiByName
     name: AHelpButton
-  conditions:
-  - !type:StepDelayCondition
-    delay: 14
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 14
 
 - type: startingGear
   id: CommunicationTutorialPlayerGear

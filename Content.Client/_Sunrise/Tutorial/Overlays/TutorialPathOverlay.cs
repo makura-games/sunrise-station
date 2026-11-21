@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._Sunrise.Objectives;
 using Content.Shared._Sunrise.Tutorial.Components;
 using Content.Shared._Sunrise.Tutorial.Conditions;
 using Content.Shared._Sunrise.Tutorial.Prototypes;
@@ -125,23 +126,23 @@ public sealed class TutorialPathOverlay(
                 return DefaultZoneRadius;
         }
 
-        if (TryGetMarkerDistance(step.Conditions, out var distance) ||
-            TryGetMarkerDistance(step.AnyConditions, out distance))
+        if (TryGetMarkerDistance(step.Completion.All, out var distance) ||
+            TryGetMarkerDistance(step.Completion.Any, out distance))
             return distance;
 
         return DefaultZoneRadius;
     }
 
-    private static bool TryGetMarkerDistance(List<TutorialCondition> conditions, out float distance)
+    private static bool TryGetMarkerDistance(List<ObjectiveCondition> conditions, out float distance)
     {
         foreach (var condition in conditions)
         {
             switch (condition)
             {
-                case ReachMarkerCondition reach:
+                case ReachMarkerObjectiveCondition reach:
                     distance = reach.Distance;
                     return true;
-                case ItemPlacedNearMarkerCondition placed:
+                case ItemPlacedNearMarkerObjectiveCondition placed:
                     distance = placed.Distance;
                     return true;
             }
