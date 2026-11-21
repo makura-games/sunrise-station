@@ -86,16 +86,6 @@ public abstract partial class ObjectiveEventConditionSystem<TCondition, TOwnerCo
     /// </summary>
     protected ObjectiveSystem Objectives => _objectives;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ObjectiveConditionValidationEvent<TCondition>>(OnValidation);
-        SubscribeLocalEvent<ObjectiveConditionActivatedEvent<TCondition>>(OnActivated);
-        SubscribeLocalEvent<ObjectiveConditionEvaluateEvent<TCondition>>(OnEvaluate);
-        SubscribeLocalEvent<ObjectiveConditionDeactivatedEvent<TCondition>>(OnDeactivated);
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -104,6 +94,7 @@ public abstract partial class ObjectiveEventConditionSystem<TCondition, TOwnerCo
         CleanupEmptyObservers();
     }
 
+    [SubscribeLocalEvent]
     private void OnValidation(ref ObjectiveConditionValidationEvent<TCondition> args)
     {
         args.Handled = true;
@@ -118,6 +109,7 @@ public abstract partial class ObjectiveEventConditionSystem<TCondition, TOwnerCo
         args.Error = error;
     }
 
+    [SubscribeLocalEvent]
     private void OnActivated(ref ObjectiveConditionActivatedEvent<TCondition> args)
     {
         if (TerminatingOrDeleted(args.Context.Owner))
@@ -130,15 +122,32 @@ public abstract partial class ObjectiveEventConditionSystem<TCondition, TOwnerCo
         RefreshObservers(args.Context, args.Condition, owner);
     }
 
+    [SubscribeLocalEvent]
     private void OnEvaluate(ref ObjectiveConditionEvaluateEvent<TCondition> args)
     {
-        if (!TryComp(args.Context.Owner, out TOwnerComponent? owner))
+        // Наблюдатели здесь не пересобираются: полный скан делается на активации,
+        // а дальше дополняются через OnEntityAcquired, когда владелец берёт предмет в руки или надевает его.
+        if (!HasComp<TOwnerComponent>(args.Context.Owner))
             return;
 
-        RefreshObservers(args.Context, args.Condition, owner);
         Evaluate(args.Context, args.Condition, ref args);
     }
 
+    [SubscribeLocalEvent]
+    private void OnEntityAcquired(ref ObjectiveConditionEntityAcquiredEvent<TCondition> args)
+    {
+        if ((args.Condition.Target == null && !args.Condition.ObserveAnyWithoutTarget) ||
+            !TryComp(args.Context.Owner, out TOwnerComponent? owner) ||
+            !owner.ObservedEntities.TryGetValue(args.Context.Handle, out var observed))
+        {
+            return;
+        }
+
+        RemoveDeletedObservers(args.Context.Handle, observed);
+        TryObserve(args.Context, args.Condition, args.Context.Owner, args.Target, observed);
+    }
+
+    [SubscribeLocalEvent]
     private void OnDeactivated(ref ObjectiveConditionDeactivatedEvent<TCondition> args)
     {
         if (!TryComp(args.Context.Owner, out TOwnerComponent? owner))

@@ -13,6 +13,7 @@ namespace Content.Shared._Sunrise.Tutorial.Conditions;
 public sealed partial class ReachMarkerObjectiveConditionSystem : ObjectiveConditionSystem<TutorialPlayerComponent, ReachMarkerObjectiveCondition>
 {
     [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TutorialMarkerConditionCacheSystem _markers = default!;
 
     protected override bool Validate(ReachMarkerObjectiveCondition condition, out string? error)
     {
@@ -28,16 +29,15 @@ public sealed partial class ReachMarkerObjectiveConditionSystem : ObjectiveCondi
         if (playerPos.MapId == MapId.Nullspace)
             return;
 
-        var query = EntityQueryEnumerator<TutorialGoalMarkerComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out _, out var xform))
+        // Маркеры ищутся один раз на условие и берутся из кэша, а не перебором всех маркеров карты.
+        var markers = _markers.GetMarkers(args.Context, args.Condition.Marker, entity.Comp.Grid);
+        for (var i = 0; i < markers.Count; i++)
         {
-            if (args.Condition.Marker is { } marker && !marker.Equals(Prototype(uid)?.ID))
+            var marker = markers[i];
+            if (TerminatingOrDeleted(marker))
                 continue;
 
-            if (xform.GridUid != entity.Comp.Grid)
-                continue;
-
-            var markerPos = _transform.GetMapCoordinates(uid, xform: xform);
+            var markerPos = _transform.GetMapCoordinates(marker);
             if (markerPos.MapId != playerPos.MapId)
                 continue;
 
@@ -47,6 +47,12 @@ public sealed partial class ReachMarkerObjectiveConditionSystem : ObjectiveCondi
             args.Satisfied = true;
             return;
         }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnDeactivated(ref ObjectiveConditionDeactivatedEvent<ReachMarkerObjectiveCondition> args)
+    {
+        _markers.Release(args.Context);
     }
 }
 

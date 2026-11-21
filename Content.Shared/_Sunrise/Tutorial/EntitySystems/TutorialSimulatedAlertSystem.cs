@@ -12,15 +12,15 @@ public sealed partial class TutorialSimulatedAlertSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<TutorialSimulatedAlertComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<TutorialSimulatedAlertComponent, ComponentShutdown>(OnShutdown);
     }
 
+    [SubscribeLocalEvent]
     private void OnStartup(Entity<TutorialSimulatedAlertComponent> ent, ref ComponentStartup args)
     {
         _alerts.ShowAlert(ent.Owner, ent.Comp.Alert, ent.Comp.Severity);
     }
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<TutorialSimulatedAlertComponent> ent, ref ComponentShutdown args)
     {
         _alerts.ClearAlert(ent.Owner, ent.Comp.Alert);

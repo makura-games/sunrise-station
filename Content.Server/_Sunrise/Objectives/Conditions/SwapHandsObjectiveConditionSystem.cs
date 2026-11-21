@@ -18,9 +18,6 @@ public sealed partial class SwapHandsObjectiveConditionSystem : ObjectiveEventCo
     {
         base.Initialize();
 
-        // Клик по кнопке руки приходит сетевым RequestSetHandEvent, а не направленным событием сущности.
-        SubscribeAllEvent<RequestSetHandEvent>(OnRequestSetHand);
-
         // Горячие клавиши SwapHands обрабатываются на сервере через InputCmdHandler.
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.SwapHands,
@@ -36,6 +33,8 @@ public sealed partial class SwapHandsObjectiveConditionSystem : ObjectiveEventCo
         CommandBinds.Unregister<SwapHandsObjectiveConditionSystem>();
     }
 
+    // Клик по кнопке руки приходит сетевым RequestSetHandEvent, а не направленным событием сущности.
+    [EventSubscription]
     private void OnRequestSetHand(RequestSetHandEvent msg, EntitySessionEventArgs args)
     {
         var player = args.SenderSession.AttachedEntity;

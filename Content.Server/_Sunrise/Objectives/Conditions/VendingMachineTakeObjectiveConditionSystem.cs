@@ -3,6 +3,7 @@ using Content.Shared._Sunrise.Objectives;
 using Content.Shared._Sunrise.Objectives.Conditions;
 using Content.Shared.VendingMachines;
 using Robust.Shared.Prototypes;
+using Content.Shared.VendingMachines.Components;
 
 namespace Content.Server._Sunrise.Objectives.Conditions;
 

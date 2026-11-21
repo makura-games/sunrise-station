@@ -17,7 +17,9 @@ using Content.Shared._Sunrise.Tutorial.Events;
 using Content.Shared._Sunrise.Tutorial.Prototypes;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
+using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
+using static Robust.UnitTesting.RobustIntegrationTest;
 
 namespace Content.IntegrationTests.Tests._Sunrise.Objectives;
 
@@ -176,13 +178,17 @@ public sealed class ObjectiveSystemTest
 
         await server.WaitAssertion(() =>
         {
+            // Проверяем валидацию напрямую: TryStartObjective пишет ошибку в лог, а пул тестов считает это падением.
             var owner = entityManager.SpawnEntity(null, MapCoordinates.Nullspace);
 
-            Assert.That(objectives.TryStartObjective(
+            AssertInvalid(objectives, owner, new ObjectiveDefinition(), MonitorOptions());
+
+            var invalidRange = MonitorOptions();
+            invalidRange.ObservationRange = -1f;
+            AssertInvalid(objectives,
                 owner,
-                new ObjectiveDefinition(),
-                MonitorOptions(),
-                out _), Is.False);
+                new ObjectiveDefinition { All = [new PickupObjectiveCondition()] },
+                invalidRange);
 
             var duplicateIds = new ObjectiveDefinition
             {
@@ -195,7 +201,7 @@ public sealed class ObjectiveSystemTest
                     new PickupObjectiveCondition { Id = "duplicate" },
                 ],
             };
-            Assert.That(objectives.TryStartObjective(owner, duplicateIds, MonitorOptions(), out _), Is.False);
+            AssertInvalid(objectives, owner, duplicateIds, MonitorOptions());
 
             var negativeCount = new ObjectiveDefinition
             {
@@ -204,7 +210,29 @@ public sealed class ObjectiveSystemTest
                     new PickupObjectiveCondition { Count = -1 },
                 ],
             };
-            Assert.That(objectives.TryStartObjective(owner, negativeCount, MonitorOptions(), out _), Is.False);
+            AssertInvalid(objectives, owner, negativeCount, MonitorOptions());
+
+            // Инвертированный счётчик («ещё не поднимал») выполнен уже на старте: в OneShot это ошибка,
+            // а в Monitor (failures/preconditions) — законная конструкция.
+            var invertedHistory = new ObjectiveDefinition
+            {
+                All =
+                [
+                    new PickupObjectiveCondition { Inverted = true },
+                ],
+            };
+            AssertInvalid(objectives, owner, invertedHistory, OneShotRetainedOptions());
+            Assert.That(objectives.TryValidateObjective(
+                owner,
+                invertedHistory,
+                MonitorOptions(),
+                out var monitorError), Is.True, monitorError);
+
+            Assert.That(objectives.TryValidateObjective(
+                owner,
+                new ObjectiveDefinition { All = [new PickupObjectiveCondition()] },
+                MonitorOptions(),
+                out var validError), Is.True, validError);
         });
 
         await pair.CleanReturnAsync();
@@ -294,11 +322,13 @@ public sealed class ObjectiveSystemTest
                 new ObjectiveConditionHandle(objective, "pickup"),
                 out _), Is.True);
 
-            Assert.That(objectives.TryStartObjective(
+            // Невалидный прототип проверяем через валидацию, чтобы не писать ошибку в лог.
+            Assert.That(objectives.TryValidateObjective(
                 owner,
                 new ProtoId<ObjectivePrototype>(InvalidNamedObjectiveId),
                 MonitorOptions(),
-                out _), Is.False);
+                out var error), Is.False);
+            Assert.That(error, Is.Not.Null.And.Not.Empty);
         });
 
         await pair.CleanReturnAsync();
@@ -392,14 +422,14 @@ public sealed class ObjectiveSystemTest
             Assert.That(inventory.TryEquip(owner, hardhat, "head", silent: true, force: true), Is.True);
         });
 
-        await server.WaitRunTicks(1);
+        await WaitForEvaluation(server);
         await server.WaitAssertion(() =>
         {
             AssertStatus(objectives, inventoryObjective, active: true, satisfied: true, completed: false);
             Assert.That(inventory.TryUnequip(owner, "head", silent: true, force: true), Is.True);
         });
 
-        await server.WaitRunTicks(1);
+        await WaitForEvaluation(server);
         await server.WaitAssertion(() =>
         {
             AssertStatus(objectives, inventoryObjective, active: true, satisfied: false, completed: false);
@@ -420,14 +450,14 @@ public sealed class ObjectiveSystemTest
             combat.SetInCombatMode(owner, true);
         });
 
-        await server.WaitRunTicks(1);
+        await WaitForEvaluation(server);
         await server.WaitAssertion(() =>
         {
             AssertStatus(objectives, combatObjective, active: true, satisfied: true, completed: false);
             combat.SetInCombatMode(owner, false);
         });
 
-        await server.WaitRunTicks(1);
+        await WaitForEvaluation(server);
         await server.WaitAssertion(() =>
         {
             AssertStatus(objectives, combatObjective, active: true, satisfied: false, completed: false);
@@ -455,14 +485,14 @@ public sealed class ObjectiveSystemTest
             tool.ConnectedInternalsEntity = owner;
         });
 
-        await server.WaitRunTicks(1);
+        await WaitForEvaluation(server);
         await server.WaitAssertion(() =>
         {
             AssertStatus(objectives, internalsObjective, active: true, satisfied: true, completed: false);
             entityManager.GetComponent<BreathToolComponent>(breathTool).ConnectedInternalsEntity = null;
         });
 
-        await server.WaitRunTicks(1);
+        await WaitForEvaluation(server);
         await server.WaitAssertion(() =>
             AssertStatus(objectives, internalsObjective, active: true, satisfied: false, completed: false));
 
@@ -477,6 +507,7 @@ public sealed class ObjectiveSystemTest
         var entityManager = server.EntMan;
         var objectives = server.System<ObjectiveSystem>();
         var transform = server.System<SharedTransformSystem>();
+        var mapSystem = server.System<SharedMapSystem>();
         var map = await pair.CreateTestMap();
         var otherMap = await pair.CreateTestMap();
 
@@ -497,8 +528,15 @@ public sealed class ObjectiveSystemTest
             var tutorial = entityManager.EnsureComponent<TutorialPlayerComponent>(owner);
             tutorial.Grid = map.Grid;
 
-            var marker = entityManager.SpawnEntity("TutorialGoalMarker", coordinates);
-            transform.SetLocalPosition(marker, new Vector2(3f, 0f));
+            // Маркер заякорен (MarkerBase), поэтому SetLocalPosition его не сдвинет: кладём тайл и спавним сразу на месте.
+            // Тайлы на всём пути игрока, чтобы промежуточные шаги не отцепляли его от грида.
+            Vector2i markerTile = new(3, 0);
+            for (var x = 1; x <= markerTile.X; x++)
+            {
+                mapSystem.SetTile(map.Grid, new Vector2i(x, 0), map.Tile.Tile);
+            }
+
+            entityManager.SpawnEntity("TutorialGoalMarker", new EntityCoordinates(map.Grid, markerTile.X, markerTile.Y));
             entityManager.SpawnEntity("TutorialGoalMarker", otherMap.GridCoords);
 
             var elapsed = new ObjectiveDefinition
@@ -556,21 +594,24 @@ public sealed class ObjectiveSystemTest
             Assert.That(objectives.TryStartObjective(
                 owner,
                 observeCrowbar,
-                MonitorOptions(),
+                ObservingMonitorOptions(),
                 out firstObserverObjective), Is.True);
             Assert.That(objectives.TryStartObjective(
                 owner,
                 observeCrowbar,
-                MonitorOptions(),
+                ObservingMonitorOptions(),
                 out secondObserverObjective), Is.True);
 
             var observer = entityManager.GetComponent<ObjectiveInteractionObserverComponent>(observed);
             Assert.That(observer.Registrations, Has.Count.EqualTo(2));
 
+            // Путь считается по MoveEvent, а скачок длиннее 2 м отбрасывается как телепорт, поэтому идём по шагам.
+            transform.SetLocalPosition(owner, new Vector2(1f, 0f));
+            transform.SetLocalPosition(owner, new Vector2(2f, 0f));
             transform.SetLocalPosition(owner, new Vector2(3f, 0f));
         });
 
-        await server.WaitRunTicks(1);
+        await WaitForEvaluation(server);
         await server.WaitAssertion(() =>
         {
             AssertStatus(objectives, travelObjective, active: true, satisfied: true, completed: false);
@@ -589,7 +630,7 @@ public sealed class ObjectiveSystemTest
             Assert.That(objectives.TryStartObjective(
                 owner,
                 observeCrowbar,
-                MonitorOptions(),
+                ObservingMonitorOptions(),
                 out thirdObserverObjective), Is.True);
             Assert.That(entityManager.HasComponent<ObjectiveInteractionObserverComponent>(observed), Is.True);
             entityManager.DeleteEntity(observed);
@@ -776,10 +817,13 @@ public sealed class ObjectiveSystemTest
             Assert.That(objectives.TryAddConditionProgress(
                 new ObjectiveConditionHandle(runtime.Failures[0], "all:0"),
                 1), Is.True);
+            // Состояние целей обновляется сразу, а события (и флаги шага) приходят только из ObjectiveSystem.Update.
+            AssertStatus(objectives, runtime.Completion, active: false, satisfied: true, completed: true);
+            AssertStatus(objectives, runtime.Failures[0], active: true, satisfied: true, completed: false);
             Assert.Multiple(() =>
             {
-                Assert.That(runtime.CompletionSatisfied, Is.True);
-                Assert.That(runtime.FailuresSatisfied[0], Is.True);
+                Assert.That(runtime.CompletionSatisfied, Is.False);
+                Assert.That(runtime.FailuresSatisfied[0], Is.False);
             });
         });
 
@@ -847,6 +891,105 @@ public sealed class ObjectiveSystemTest
         await pair.CleanReturnAsync();
     }
 
+    [Test]
+    public async Task InvertedLiveConditionIsEvaluatedBeforeObjectiveCompletes()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var entityManager = server.EntMan;
+        var objectives = server.System<ObjectiveSystem>();
+        var hands = server.System<SharedHandsSystem>();
+        var map = await pair.CreateTestMap();
+
+        await server.WaitAssertion(() =>
+        {
+            var owner = entityManager.SpawnEntity("MobHuman", map.GridCoords);
+            var crowbar = entityManager.SpawnEntity("Crowbar", map.GridCoords);
+            Assert.That(hands.TryPickupAnyHand(owner, crowbar, checkActionBlocker: false, animate: false), Is.True);
+
+            // Владелец не в боевом режиме и держит лом: ни одна альтернатива не выполнена,
+            // и цель не должна закрыться на старте до опроса инвертированного условия.
+            var definition = new ObjectiveDefinition
+            {
+                Any =
+                [
+                    new CombatModeObjectiveCondition(),
+                    new HoldInHandsObjectiveCondition { Item = "Crowbar", Inverted = true },
+                ],
+            };
+
+            Assert.That(objectives.TryStartObjective(
+                owner,
+                definition,
+                OneShotRetainedOptions(),
+                out var objective), Is.True);
+            AssertStatus(objectives, objective, active: true, satisfied: false, completed: false);
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task AllTutorialStepObjectiveDefinitionsAreValid()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var entityManager = server.EntMan;
+        var objectives = server.System<ObjectiveSystem>();
+        var prototype = server.ResolveDependency<IPrototypeManager>();
+
+        await server.WaitAssertion(() =>
+        {
+            var owner = entityManager.SpawnEntity(null, MapCoordinates.Nullspace);
+            Assert.Multiple(() =>
+            {
+                foreach (var step in prototype.EnumeratePrototypes<TutorialStepPrototype>())
+                {
+                    if (step.Abstract)
+                        continue;
+
+                    // Режимы как в TutorialObjectiveSystem: completion — OneShot, остальное — Monitor.
+                    var completionOptions = new ObjectiveStartOptions
+                    {
+                        Mode = ObjectiveRunMode.OneShot,
+                        ObservationRange = step.ObserveRange,
+                    };
+                    var monitorOptions = new ObjectiveStartOptions
+                    {
+                        Mode = ObjectiveRunMode.Monitor,
+                        ObservationRange = step.ObserveRange,
+                    };
+
+                    // Пустой completion допустим: шаг завершается сразу.
+                    if (step.Completion.All.Count != 0 || step.Completion.Any.Count != 0)
+                        AssertValid(objectives, owner, step.Completion, completionOptions, $"{step.ID} completion");
+
+                    if (step.Preconditions != null)
+                        AssertValid(objectives, owner, step.Preconditions, monitorOptions, $"{step.ID} preconditions");
+
+                    for (var i = 0; i < step.Failures.Count; i++)
+                    {
+                        AssertValid(objectives, owner, step.Failures[i].When, monitorOptions, $"{step.ID} failure {i}");
+                    }
+                }
+            });
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    private static void AssertValid(
+        ObjectiveSystem objectives,
+        EntityUid owner,
+        ObjectiveDefinition definition,
+        ObjectiveStartOptions options,
+        string source)
+    {
+        Assert.That(objectives.TryValidateObjective(owner, definition, options, out var error),
+            Is.True,
+            $"Tutorial objective definition {source} is invalid: {error}");
+    }
+
     private static ObjectiveStartOptions MonitorOptions()
     {
         return new ObjectiveStartOptions
@@ -854,6 +997,13 @@ public sealed class ObjectiveSystemTest
             Mode = ObjectiveRunMode.Monitor,
             CompletionRetention = ObjectiveCompletionRetention.Retain,
         };
+    }
+
+    private static ObjectiveStartOptions ObservingMonitorOptions()
+    {
+        var options = MonitorOptions();
+        options.ObservationScope = ObjectiveObservationScope.Default;
+        return options;
     }
 
     private static ObjectiveStartOptions OneShotRetainedOptions()
@@ -873,6 +1023,25 @@ public sealed class ObjectiveSystemTest
             CompletionRetention = ObjectiveCompletionRetention.Retain,
             SourceIdentifier = "TutorialCompletion",
         };
+    }
+
+    /// <summary>
+    /// Ждёт хотя бы одну периодическую оценку live-условий.
+    /// </summary>
+    private static async Task WaitForEvaluation(ServerIntegrationInstance server)
+    {
+        var ticks = (int)Math.Ceiling(ObjectiveSystem.EvaluationInterval / server.Timing.TickPeriod) + 1;
+        await server.WaitRunTicks(ticks);
+    }
+
+    private static void AssertInvalid(
+        ObjectiveSystem objectives,
+        EntityUid owner,
+        ObjectiveDefinition definition,
+        ObjectiveStartOptions options)
+    {
+        Assert.That(objectives.TryValidateObjective(owner, definition, options, out var error), Is.False);
+        Assert.That(error, Is.Not.Null.And.Not.Empty);
     }
 
     private static void AssertStatus(

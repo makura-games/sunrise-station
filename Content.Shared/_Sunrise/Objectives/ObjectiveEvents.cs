@@ -4,6 +4,7 @@ namespace Content.Shared._Sunrise.Objectives;
 
 /// <summary>
 /// Raised after an objective instance is linked to its owner and activated.
+/// Queued and raised from <see cref="ObjectiveSystem.Update"/>, not from inside the triggering gameplay handler.
 /// </summary>
 [ByRefEvent]
 public readonly record struct ObjectiveStartedEvent(
@@ -14,6 +15,7 @@ public readonly record struct ObjectiveStartedEvent(
 
 /// <summary>
 /// Raised whenever stored progress or evaluated state for one condition changes.
+/// Queued and raised from <see cref="ObjectiveSystem.Update"/>, not from inside the triggering gameplay handler.
 /// </summary>
 [ByRefEvent]
 public readonly record struct ObjectiveConditionChangedEvent(
@@ -28,6 +30,7 @@ public readonly record struct ObjectiveConditionChangedEvent(
 
 /// <summary>
 /// Raised on both false-to-true and true-to-false graph transitions.
+/// Queued and raised from <see cref="ObjectiveSystem.Update"/>, not from inside the triggering gameplay handler.
 /// </summary>
 [ByRefEvent]
 public readonly record struct ObjectiveStateChangedEvent(
@@ -40,6 +43,7 @@ public readonly record struct ObjectiveStateChangedEvent(
 
 /// <summary>
 /// Raised when an objective graph transitions to satisfied.
+/// Queued and raised from <see cref="ObjectiveSystem.Update"/>, not from inside the triggering gameplay handler.
 /// </summary>
 [ByRefEvent]
 public readonly record struct ObjectiveCompletedEvent(
@@ -50,6 +54,7 @@ public readonly record struct ObjectiveCompletedEvent(
 
 /// <summary>
 /// Raised after an active objective is transferred to another owner.
+/// Queued and raised from <see cref="ObjectiveSystem.Update"/>, not from inside the triggering gameplay handler.
 /// </summary>
 [ByRefEvent]
 public readonly record struct ObjectiveOwnerChangedEvent(
@@ -61,6 +66,7 @@ public readonly record struct ObjectiveOwnerChangedEvent(
 
 /// <summary>
 /// Raised after condition bindings are deactivated and an objective is stopped.
+/// Queued and raised from <see cref="ObjectiveSystem.Update"/>, not from inside the triggering gameplay handler.
 /// </summary>
 [ByRefEvent]
 public readonly record struct ObjectiveStoppedEvent(

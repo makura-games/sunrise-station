@@ -11,13 +11,8 @@ namespace Content.Server._Sunrise.Objectives.Conditions;
 public sealed partial class StorageOpenObjectiveConditionSystem
     : ObjectiveEventConditionSystem<StorageOpenObjectiveCondition, ObjectiveContainerOwnerComponent, ObjectiveContainerObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        // Шкафы, ящики и подобные хранилища открываются физически через EntityStorageComponent.
-        SubscribeLocalEvent<ObjectiveContainerObserverComponent, StorageOpenAttemptEvent>(OnEntityStorageOpen);
-    }
-
+    // Шкафы, ящики и подобные хранилища открываются физически через EntityStorageComponent.
+    [SubscribeLocalEvent]
     private void OnEntityStorageOpen(Entity<ObjectiveContainerObserverComponent> ent, ref StorageOpenAttemptEvent args)
     {
         if (args.Cancelled)

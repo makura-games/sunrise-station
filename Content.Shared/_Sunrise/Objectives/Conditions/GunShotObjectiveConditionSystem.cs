@@ -13,12 +13,7 @@ public sealed partial class GunShotObjectiveConditionSystem : ObjectiveEventCond
 {
     [Dependency] private SharedHandsSystem _hands = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveCombatObserverComponent, AmmoShotEvent>(OnAmmoShot);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAmmoShot(Entity<ObjectiveCombatObserverComponent> ent, ref AmmoShotEvent args)
     {
         if (args.Shooter is { } shooter)

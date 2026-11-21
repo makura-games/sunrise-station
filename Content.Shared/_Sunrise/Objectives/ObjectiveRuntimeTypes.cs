@@ -34,9 +34,10 @@ public sealed class ObjectiveStartOptions
     public ObjectiveCompletionRetention CompletionRetention = ObjectiveCompletionRetention.Remove;
 
     /// <summary>
-    /// Entity locations inspected by target-oriented conditions.
+    /// Entity locations inspected by target-oriented conditions. Observation is opt-in:
+    /// consumers that need observer-based conditions must enable the required scopes explicitly.
     /// </summary>
-    public ObjectiveObservationScope ObservationScope = ObjectiveObservationScope.Default;
+    public ObjectiveObservationScope ObservationScope = ObjectiveObservationScope.None;
 
     /// <summary>
     /// Maximum range for nearby-entity observation.

@@ -10,12 +10,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 /// </summary>
 public sealed partial class ActivateActionObjectiveConditionSystem : ObjectiveEventConditionSystem<ActivateActionObjectiveCondition, ObjectiveInteractionOwnerComponent, ObjectiveInteractionObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveInteractionObserverComponent, ActionAttemptEvent>(OnAttemptAction);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAttemptAction(Entity<ObjectiveInteractionObserverComponent> ent, ref ActionAttemptEvent args)
     {
         RecordObservedEvent(ent, DefaultKey, args.User);

@@ -11,13 +11,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 public sealed partial class MeleeHitObjectiveConditionSystem
     : ObjectiveEventConditionSystem<MeleeHitObjectiveCondition, ObjectiveCombatOwnerComponent, ObjectiveCombatObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveCombatObserverComponent, MeleeHitEvent>(OnObservedWeaponHit);
-        SubscribeLocalEvent<ObjectiveCombatOwnerComponent, MeleeHitEvent>(OnUnarmedHit);
-    }
-
+    [SubscribeLocalEvent]
     private void OnObservedWeaponHit(Entity<ObjectiveCombatObserverComponent> ent, ref MeleeHitEvent args)
     {
         if (ent.Owner == args.User || !ent.Comp.Registrations.ContainsValue(args.User))
@@ -26,6 +20,7 @@ public sealed partial class MeleeHitObjectiveConditionSystem
         RecordHits(ent, args);
     }
 
+    [SubscribeLocalEvent]
     private void OnUnarmedHit(Entity<ObjectiveCombatOwnerComponent> ent, ref MeleeHitEvent args)
     {
         if (args.User != ent.Owner || args.Weapon != ent.Owner)

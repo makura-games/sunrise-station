@@ -9,12 +9,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 /// </summary>
 public sealed partial class DoorOpenObjectiveConditionSystem : ObjectiveEventConditionSystem<DoorOpenObjectiveCondition, ObjectiveInteractionOwnerComponent, ObjectiveInteractionObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveInteractionObserverComponent, BeforeDoorOpenedEvent>(OnBeforeDoorOpened);
-    }
-
+    [SubscribeLocalEvent]
     private void OnBeforeDoorOpened(Entity<ObjectiveInteractionObserverComponent> ent, ref BeforeDoorOpenedEvent args)
     {
         if (args.User is null)

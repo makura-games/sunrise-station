@@ -16,6 +16,7 @@ public sealed partial class ItemPlacedNearMarkerObjectiveConditionSystem
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TutorialMarkerConditionCacheSystem _markers = default!;
 
     private readonly HashSet<EntityUid> _nearbyEntities = [];
 
@@ -35,16 +36,16 @@ public sealed partial class ItemPlacedNearMarkerObjectiveConditionSystem
             return;
 
         var maximumDistanceSquared = args.Condition.Distance * args.Condition.Distance;
-        var markerQuery = EntityQueryEnumerator<TutorialGoalMarkerComponent, TransformComponent>();
-        while (markerQuery.MoveNext(out var markerUid, out _, out var markerXform))
+
+        // Маркеры ищутся один раз на условие и берутся из кэша, а не перебором всех маркеров карты.
+        var markers = _markers.GetMarkers(args.Context, args.Condition.Marker, entity.Comp.Grid);
+        for (var i = 0; i < markers.Count; i++)
         {
-            if (!args.Condition.Marker.Equals(Prototype(markerUid)?.ID))
+            var markerUid = markers[i];
+            if (TerminatingOrDeleted(markerUid))
                 continue;
 
-            if (markerXform.GridUid != entity.Comp.Grid)
-                continue;
-
-            var markerPosition = _transform.GetMapCoordinates(markerUid, xform: markerXform);
+            var markerPosition = _transform.GetMapCoordinates(markerUid);
             if (markerPosition.MapId == MapId.Nullspace)
                 continue;
 
@@ -80,6 +81,12 @@ public sealed partial class ItemPlacedNearMarkerObjectiveConditionSystem
                 return;
             }
         }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnDeactivated(ref ObjectiveConditionDeactivatedEvent<ItemPlacedNearMarkerObjectiveCondition> args)
+    {
+        _markers.Release(args.Context);
     }
 }
 

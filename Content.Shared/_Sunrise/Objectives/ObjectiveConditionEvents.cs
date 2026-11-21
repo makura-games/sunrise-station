@@ -18,6 +18,9 @@ public interface IObjectiveConditionEventRaiser
     bool? RaiseEvaluate<TCondition>(ObjectiveConditionContext context, TCondition condition)
         where TCondition : ObjectiveConditionBase<TCondition>;
 
+    void RaiseEntityAcquired<TCondition>(ObjectiveConditionContext context, TCondition condition, EntityUid target)
+        where TCondition : ObjectiveConditionBase<TCondition>;
+
     void RaiseDeactivated<TCondition>(ObjectiveConditionContext context, TCondition condition)
         where TCondition : ObjectiveConditionBase<TCondition>;
 }
@@ -57,6 +60,17 @@ public record struct ObjectiveConditionEvaluateEvent<TCondition>(
 {
     public bool? Satisfied;
 }
+
+/// <summary>
+/// Notifies an active condition that its owner acquired an entity in hands or equipment,
+/// allowing observer registrations to be updated by events instead of periodic scans.
+/// </summary>
+[ByRefEvent]
+public readonly record struct ObjectiveConditionEntityAcquiredEvent<TCondition>(
+    ObjectiveConditionContext Context,
+    TCondition Condition,
+    EntityUid Target)
+    where TCondition : ObjectiveConditionBase<TCondition>;
 
 /// <summary>
 /// Removes condition-specific registrations and observers.

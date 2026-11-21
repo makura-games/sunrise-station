@@ -77,15 +77,6 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
 
         _input.FirstChanceOnKeyEvent += OnFirstChanceKeyEvent;
 
-        SubscribeLocalEvent<TutorialBubbleComponent, AfterAutoHandleStateEvent>(AfterAutoHandleState);
-        SubscribeLocalEvent<TutorialBubbleComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<TutorialBubbleComponent, ComponentShutdown>(OnComponentShutdown);
-        SubscribeLocalEvent<TutorialPlayerComponent, AfterAutoHandleStateEvent>(OnTutorialPlayerState);
-        SubscribeLocalEvent<TutorialBubbleComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<TutorialBubbleComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
-        SubscribeNetworkEvent<TutorialWindowDataResponseEvent>(OnWindowDataResponse);
-        SubscribeNetworkEvent<TutorialStartDeniedEvent>(OnStartDenied);
-
         _tutorialBubbleRoot = new LayoutContainer
         {
             MouseFilter = Control.MouseFilterMode.Ignore,
@@ -147,6 +138,7 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
         RefreshUiHighlight();
     }
 
+    [SubscribeNetworkEvent]
     private void OnStartDenied(TutorialStartDeniedEvent msg, EntitySessionEventArgs args)
     {
         if (string.IsNullOrEmpty(msg.Reason))
@@ -155,11 +147,13 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
         _ui.Popup(msg.Reason, null, false);
     }
 
+    [SubscribeLocalEvent]
     private void OnPlayerAttached(Entity<TutorialBubbleComponent> ent, ref LocalPlayerAttachedEvent ev)
     {
         RefreshBubbles();
     }
 
+    [SubscribeLocalEvent]
     private void OnPlayerDetached(Entity<TutorialBubbleComponent> ent, ref LocalPlayerDetachedEvent ev)
     {
         SetHighlight(null);
@@ -167,6 +161,7 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
         _tutorialBubbleRoot?.Orphan();
     }
 
+    [SubscribeLocalEvent]
     private void OnTutorialPlayerState(Entity<TutorialPlayerComponent> ent, ref AfterAutoHandleStateEvent ev)
     {
         if (_player.LocalEntity != ent.Owner)
@@ -218,18 +213,21 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
         sprite.RenderOrder = EntityManager.CurrentTick.Value;
     }
 
+    [SubscribeLocalEvent]
     private void AfterAutoHandleState(Entity<TutorialBubbleComponent> ent, ref AfterAutoHandleStateEvent ev)
     {
         SetHighlight(ent);
         UpdateBubble(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnComponentInit(Entity<TutorialBubbleComponent> ent, ref ComponentInit ev)
     {
         SetHighlight(ent);
         UpdateBubble(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnComponentShutdown(Entity<TutorialBubbleComponent> ent, ref ComponentShutdown ev)
     {
         if (_highlightedTarget == ent.Owner)
@@ -432,6 +430,7 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
         return _cfg.GetCVar(SunriseCCVars.TutorialPromptSkipDelay);
     }
 
+    [SubscribeNetworkEvent]
     private void OnWindowDataResponse(TutorialWindowDataResponseEvent msg, EntitySessionEventArgs args)
     {
         CompletedTutorials.Clear();

@@ -10,12 +10,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 public sealed partial class HealthAnalyzerScanObjectiveConditionSystem
     : ObjectiveEventConditionSystem<HealthAnalyzerScanObjectiveCondition, ObjectiveHealthOwnerComponent, ObjectiveHealthObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveHealthObserverComponent, EntityAnalyzedEvent>(OnEntityAnalyzed);
-    }
-
+    [SubscribeLocalEvent]
     private void OnEntityAnalyzed(Entity<ObjectiveHealthObserverComponent> ent, ref EntityAnalyzedEvent args)
     {
         RecordObservedEvent(ent, DefaultKey);

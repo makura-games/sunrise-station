@@ -10,18 +10,13 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 /// </summary>
 public sealed partial class UseObjectiveConditionSystem : ObjectiveEventConditionSystem<UseObjectiveCondition, ObjectiveInteractionOwnerComponent, ObjectiveInteractionObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveInteractionOwnerComponent, UserInteractUsingEvent>(OnUserInteractUsing);
-        SubscribeLocalEvent<ObjectiveInteractionObserverComponent, UseInHandEvent>(OnUseInHand);
-    }
-
+    [SubscribeLocalEvent]
     private void OnUserInteractUsing(Entity<ObjectiveInteractionOwnerComponent> ent, ref UserInteractUsingEvent args)
     {
         RecordEvent(ent, DefaultKey, args.Target, args.Used);
     }
 
+    [SubscribeLocalEvent]
     private void OnUseInHand(Entity<ObjectiveInteractionObserverComponent> ent, ref UseInHandEvent args)
     {
         RecordObservedEvent(ent, DefaultKey, args.User);

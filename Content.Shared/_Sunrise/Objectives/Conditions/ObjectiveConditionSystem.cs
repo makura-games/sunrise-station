@@ -5,18 +5,11 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 /// <summary>
 /// Base system for a live condition evaluated against one component on the objective owner.
 /// </summary>
-public abstract class ObjectiveConditionSystem<TComponent, TCondition> : EntitySystem
+public abstract partial class ObjectiveConditionSystem<TComponent, TCondition> : EntitySystem
     where TComponent : Component
     where TCondition : ObjectiveConditionBase<TCondition>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ObjectiveConditionValidationEvent<TCondition>>(OnValidation);
-        SubscribeLocalEvent<ObjectiveConditionEvaluateEvent<TCondition>>(OnEvaluate);
-    }
-
+    [SubscribeLocalEvent]
     private void OnValidation(ref ObjectiveConditionValidationEvent<TCondition> args)
     {
         args.Handled = true;
@@ -24,6 +17,7 @@ public abstract class ObjectiveConditionSystem<TComponent, TCondition> : EntityS
         args.Error = error;
     }
 
+    [SubscribeLocalEvent]
     private void OnEvaluate(ref ObjectiveConditionEvaluateEvent<TCondition> args)
     {
         args.Satisfied = false;

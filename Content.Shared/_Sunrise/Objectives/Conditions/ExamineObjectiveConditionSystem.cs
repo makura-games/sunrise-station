@@ -10,12 +10,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 /// </summary>
 public sealed partial class ExamineObjectiveConditionSystem : ObjectiveEventConditionSystem<ExamineObjectiveCondition, ObjectiveInteractionOwnerComponent, ObjectiveInteractionObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveInteractionObserverComponent, ExaminedEvent>(OnExamined);
-    }
-
+    [SubscribeLocalEvent]
     private void OnExamined(Entity<ObjectiveInteractionObserverComponent> ent, ref ExaminedEvent args)
     {
         RecordObservedEvent(ent, DefaultKey, args.Examiner, args.Examined);

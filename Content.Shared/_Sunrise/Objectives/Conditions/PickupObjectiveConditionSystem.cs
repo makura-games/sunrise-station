@@ -11,12 +11,8 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 public sealed partial class PickupObjectiveConditionSystem : ObjectiveEventConditionSystem<PickupObjectiveCondition, ObjectiveInteractionOwnerComponent, ObjectiveInteractionObserverComponent>
 {
     [Dependency] private IGameTiming _timing = default!;
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveInteractionOwnerComponent, DidEquipHandEvent>(OnDidEquipHand);
-    }
 
+    [SubscribeLocalEvent]
     private void OnDidEquipHand(Entity<ObjectiveInteractionOwnerComponent> ent, ref DidEquipHandEvent args)
     {
         if (_timing.ApplyingState)

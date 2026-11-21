@@ -12,16 +12,7 @@ namespace Content.Server._Sunrise.Objectives.Conditions;
 public sealed partial class ChatMessageObjectiveConditionSystem
     : ObjectiveEventConditionSystem<ChatMessageObjectiveCondition, ObjectiveCommunicationOwnerComponent, ObjectiveCommunicationObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ObjectiveCommunicationOwnerComponent, EntitySpokeEvent>(OnEntitySpoke);
-        SubscribeLocalEvent<ObjectiveCommunicationOwnerComponent, EntityEmotedEvent>(OnEntityEmoted);
-        SubscribeLocalEvent<ObjectiveCommunicationOwnerComponent, InGameOocMessageAttemptEvent>(OnInGameOocMessageAttempt);
-        SubscribeLocalEvent<RadioSpokeEvent>(OnRadioSpoke);
-    }
-
+    [SubscribeLocalEvent]
     private void OnEntitySpoke(Entity<ObjectiveCommunicationOwnerComponent> ent, ref EntitySpokeEvent args)
     {
         if (args.Channel != null)
@@ -36,11 +27,13 @@ public sealed partial class ChatMessageObjectiveConditionSystem
         RecordEvent(ent, ChatMessageObjectiveCondition.GetCounterKey(ObjectiveChatMessageKind.Local));
     }
 
+    [SubscribeLocalEvent]
     private void OnEntityEmoted(Entity<ObjectiveCommunicationOwnerComponent> ent, ref EntityEmotedEvent args)
     {
         RecordEvent(ent, ChatMessageObjectiveCondition.GetCounterKey(ObjectiveChatMessageKind.Emote));
     }
 
+    [SubscribeLocalEvent]
     private void OnInGameOocMessageAttempt(Entity<ObjectiveCommunicationOwnerComponent> ent, ref InGameOocMessageAttemptEvent args)
     {
         if (args.Cancelled)
@@ -55,6 +48,7 @@ public sealed partial class ChatMessageObjectiveConditionSystem
         RecordEvent(ent, ChatMessageObjectiveCondition.GetCounterKey(ObjectiveChatMessageKind.Looc));
     }
 
+    [SubscribeLocalEvent]
     private void OnRadioSpoke(RadioSpokeEvent args)
     {
         if (!HasComp<ObjectiveCommunicationOwnerComponent>(args.Source))

@@ -27,12 +27,6 @@ public sealed partial class TutorialProgressBarSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<TutorialProgressBarComponent, ComponentInit>(OnProgressInit);
-        SubscribeLocalEvent<TutorialProgressBarComponent, ComponentShutdown>(OnProgressShutdown);
-        SubscribeLocalEvent<TutorialProgressBarComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<TutorialProgressBarComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
-        SubscribeLocalEvent<TutorialProgressBarComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
-
         _progressBarRoot = new LayoutContainer();
         _ui.OnScreenChanged += OnScreenChanged;
     }
@@ -58,26 +52,33 @@ public sealed partial class TutorialProgressBarSystem : EntitySystem
         _pendingRefresh = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnPlayerAttached(Entity<TutorialProgressBarComponent> ent, ref LocalPlayerAttachedEvent ev)
     {
         _pendingRefresh = true;
     }
+
+    [SubscribeLocalEvent]
     private void OnPlayerDetached(Entity<TutorialProgressBarComponent> ent, ref LocalPlayerDetachedEvent ev)
     {
         _progressBarRoot?.Orphan();
         RemoveAllBars();
         _pendingRefresh = false;
     }
+
+    [SubscribeLocalEvent]
     private void OnAfterAutoHandleState(Entity<TutorialProgressBarComponent> ent, ref AfterAutoHandleStateEvent ev)
     {
         UpdateProgressBar(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnProgressInit(Entity<TutorialProgressBarComponent> ent, ref ComponentInit ev)
     {
         UpdateProgressBar(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnProgressShutdown(Entity<TutorialProgressBarComponent> ent, ref ComponentShutdown ev)
     {
         RemoveProgressBar(ent.Owner);

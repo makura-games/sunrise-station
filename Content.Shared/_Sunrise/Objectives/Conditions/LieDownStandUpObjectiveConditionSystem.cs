@@ -10,18 +10,13 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 public sealed partial class LieDownStandUpObjectiveConditionSystem
     : ObjectiveEventConditionSystem<LieDownStandUpObjectiveCondition, ObjectiveInteractionOwnerComponent, ObjectiveInteractionObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveInteractionOwnerComponent, DownedEvent>(OnDowned);
-        SubscribeLocalEvent<ObjectiveInteractionOwnerComponent, StoodEvent>(OnStood);
-    }
-
+    [SubscribeLocalEvent]
     private void OnDowned(Entity<ObjectiveInteractionOwnerComponent> ent, ref DownedEvent args)
     {
         RecordEvent(ent, DefaultKey);
     }
 
+    [SubscribeLocalEvent]
     private void OnStood(Entity<ObjectiveInteractionOwnerComponent> ent, ref StoodEvent args)
     {
         RecordEvent(ent, DefaultKey);

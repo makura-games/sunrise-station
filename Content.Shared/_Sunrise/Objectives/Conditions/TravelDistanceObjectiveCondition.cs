@@ -1,5 +1,3 @@
-using Robust.Shared.Map;
-
 namespace Content.Shared._Sunrise.Objectives.Conditions;
 
 /// <summary>
@@ -15,50 +13,42 @@ public sealed partial class TravelDistanceObjectiveCondition : ObjectiveConditio
 }
 
 /// <summary>
-/// Stores accumulated distance independently for every active condition handle.
+/// Накапливает пройденный владельцем путь для каждого активного условия.
+/// Висит на владельце цели, чтобы получать его <see cref="MoveEvent"/>.
 /// </summary>
 [RegisterComponent]
-public sealed partial class ActiveTravelDistanceObjectiveComponent : Component
+public sealed partial class ObjectiveTravelDistanceOwnerComponent : Component
 {
     /// <summary>
-    /// Travel states keyed by condition handle.
+    /// Накопленный путь по хэндлу условия.
     /// </summary>
-    public Dictionary<ObjectiveConditionHandle, ObjectiveTravelState> States = [];
+    [ViewVariables]
+    public Dictionary<ObjectiveConditionHandle, ObjectiveTravelProgress> Progress = [];
 }
 
 /// <summary>
-/// Mutable travel accumulator for one condition instance.
+/// Изменяемый накопитель пути одного условия.
 /// </summary>
-public sealed class ObjectiveTravelState
+public sealed class ObjectiveTravelProgress
 {
     /// <summary>
-    /// Last owner position used to calculate the next segment.
-    /// </summary>
-    public MapCoordinates? LastPosition;
-
-    /// <summary>
-    /// Distance accumulated on matching maps.
+    /// Пройденное расстояние в мировых единицах.
     /// </summary>
     public float Distance;
 }
 
 /// <summary>
-/// Tracks travel-distance condition lifecycles per objective instance.
+/// Tracks travel-distance condition lifecycles and accumulates the owner's path from movement events.
 /// </summary>
 public sealed partial class TravelDistanceObjectiveConditionSystem : EntitySystem
 {
-    [Dependency] private SharedTransformSystem _transform = default!;
+    /// <summary>
+    /// Перемещение длиннее этого за одно событие считается телепортом и не засчитывается.
+    /// Обычная ходьба, бег и толчки дают на порядок меньшие шаги за тик.
+    /// </summary>
+    private const float MaxSegmentLength = 2f;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ObjectiveConditionValidationEvent<TravelDistanceObjectiveCondition>>(OnValidation);
-        SubscribeLocalEvent<ObjectiveConditionActivatedEvent<TravelDistanceObjectiveCondition>>(OnActivated);
-        SubscribeLocalEvent<ObjectiveConditionEvaluateEvent<TravelDistanceObjectiveCondition>>(OnEvaluate);
-        SubscribeLocalEvent<ObjectiveConditionDeactivatedEvent<TravelDistanceObjectiveCondition>>(OnDeactivated);
-    }
-
+    [SubscribeLocalEvent]
     private void OnValidation(ref ObjectiveConditionValidationEvent<TravelDistanceObjectiveCondition> args)
     {
         args.Handled = true;
@@ -66,48 +56,50 @@ public sealed partial class TravelDistanceObjectiveConditionSystem : EntitySyste
         args.Error = args.Valid ? null : "travel distance cannot be negative";
     }
 
+    [SubscribeLocalEvent]
     private void OnActivated(ref ObjectiveConditionActivatedEvent<TravelDistanceObjectiveCondition> args)
     {
-        var active = EnsureComp<ActiveTravelDistanceObjectiveComponent>(args.Context.Objective);
-        active.States[args.Context.Handle] = new ObjectiveTravelState
-        {
-            LastPosition = GetPosition(args.Context.Owner),
-        };
+        if (TerminatingOrDeleted(args.Context.Owner))
+            return;
+
+        var owner = EnsureComp<ObjectiveTravelDistanceOwnerComponent>(args.Context.Owner);
+        owner.Progress[args.Context.Handle] = new ObjectiveTravelProgress();
     }
 
+    [SubscribeLocalEvent]
     private void OnEvaluate(ref ObjectiveConditionEvaluateEvent<TravelDistanceObjectiveCondition> args)
     {
-        if (!TryComp(args.Context.Objective, out ActiveTravelDistanceObjectiveComponent? active) ||
-            !active.States.TryGetValue(args.Context.Handle, out var state))
-        {
-            args.Satisfied = false;
-            return;
-        }
-
-        var position = GetPosition(args.Context.Owner);
-        if (position != null && state.LastPosition is { } previous && previous.MapId == position.Value.MapId)
-            state.Distance += (position.Value.Position - previous.Position).Length();
-
-        state.LastPosition = position;
-        args.Satisfied = state.Distance >= args.Condition.Distance;
+        args.Satisfied = TryComp(args.Context.Owner, out ObjectiveTravelDistanceOwnerComponent? owner) &&
+                         owner.Progress.TryGetValue(args.Context.Handle, out var progress) &&
+                         progress.Distance >= args.Condition.Distance;
     }
 
+    [SubscribeLocalEvent]
     private void OnDeactivated(ref ObjectiveConditionDeactivatedEvent<TravelDistanceObjectiveCondition> args)
     {
-        if (!TryComp(args.Context.Objective, out ActiveTravelDistanceObjectiveComponent? active))
+        if (!TryComp(args.Context.Owner, out ObjectiveTravelDistanceOwnerComponent? owner))
             return;
 
-        active.States.Remove(args.Context.Handle);
-        if (active.States.Count == 0 && !TerminatingOrDeleted(args.Context.Objective))
-            RemComp<ActiveTravelDistanceObjectiveComponent>(args.Context.Objective);
+        owner.Progress.Remove(args.Context.Handle);
+        if (owner.Progress.Count == 0 && !TerminatingOrDeleted(args.Context.Owner))
+            RemComp<ObjectiveTravelDistanceOwnerComponent>(args.Context.Owner);
     }
 
-    private MapCoordinates? GetPosition(EntityUid owner)
+    [SubscribeLocalEvent]
+    private void OnOwnerMove(Entity<ObjectiveTravelDistanceOwnerComponent> ent, ref MoveEvent args)
     {
-        if (TerminatingOrDeleted(owner))
-            return null;
+        // Смена родителя (переход между гридами, контейнеры) даёт координаты в разных системах отсчёта,
+        // поэтому такой шаг пропускаем: реальный путь при нём ничтожен.
+        if (args.ParentChanged || args.OnlyRotation)
+            return;
 
-        var position = _transform.GetMapCoordinates(owner);
-        return position.MapId == MapId.Nullspace ? null : position;
+        var segment = (args.NewPosition.Position - args.OldPosition.Position).Length();
+        if (segment <= 0f || segment > MaxSegmentLength)
+            return;
+
+        foreach (var progress in ent.Comp.Progress.Values)
+        {
+            progress.Distance += segment;
+        }
     }
 }

@@ -1,25 +1,41 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Hands;
+using Content.Shared.Inventory.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._Sunrise.Objectives;
 
 /// <summary>
 /// Owns the lifecycle and state of server-authoritative objective instances.
 /// </summary>
+/// <remarks>
+/// All objective lifecycle events (<see cref="ObjectiveStartedEvent"/>, <see cref="ObjectiveStateChangedEvent"/>,
+/// <see cref="ObjectiveCompletedEvent"/> and others) are queued and raised from <see cref="Update"/>,
+/// never synchronously from inside gameplay event handlers. Objective status queried through
+/// <see cref="TryGetObjectiveStatus"/> is always up to date.
+/// </remarks>
 public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionEventRaiser
 {
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
+    /// <summary>
+    /// Интервал периодической оценки live-условий активных целей.
+    /// </summary>
+    public static readonly TimeSpan EvaluationInterval = TimeSpan.FromSeconds(0.25);
 
-        SubscribeLocalEvent<ObjectiveOwnerComponent, EntityTerminatingEvent>(OnOwnerTerminating);
-        SubscribeLocalEvent<ObjectiveRuntimeComponent, EntityTerminatingEvent>(OnObjectiveTerminating);
-    }
+    // Снапшот целей на текущую оценку: обработчики событий цели могут стартовать новые цели,
+    // а добавление ActiveObjectiveComponent во время обхода EntityQueryEnumerator ломает энумератор.
+    private readonly List<Entity<ObjectiveRuntimeComponent>> _toEvaluate = [];
+
+    // События цели, ожидающие рассылки из Update.
+    private readonly Queue<Action> _pendingEvents = new();
+
+    private TimeSpan _nextEvaluation;
 
     public override void Update(float frameTime)
     {
@@ -28,16 +44,99 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
         if (!_net.IsServer)
             return;
 
-        var query = EntityQueryEnumerator<ActiveObjectiveComponent, ObjectiveRuntimeComponent>();
-        while (query.MoveNext(out var uid, out _, out var objective))
+        if (_timing.CurTime >= _nextEvaluation)
         {
-            if (TerminatingOrDeleted(uid))
-                continue;
+            _nextEvaluation = _timing.CurTime + EvaluationInterval;
 
-            EvaluateObjective((uid, objective));
+            _toEvaluate.Clear();
+            var query = EntityQueryEnumerator<ActiveObjectiveComponent, ObjectiveRuntimeComponent>();
+            while (query.MoveNext(out var uid, out _, out var objective))
+            {
+                _toEvaluate.Add((uid, objective));
+            }
+
+            foreach (var objective in _toEvaluate)
+            {
+                if (TerminatingOrDeleted(objective))
+                    continue;
+
+                EvaluateObjective(objective);
+            }
+
+            _toEvaluate.Clear();
+        }
+
+        DispatchPendingEvents();
+    }
+
+    /// <summary>
+    /// Ставит событие цели в очередь. Оно будет разослано из <see cref="Update"/>,
+    /// чтобы потребители не реагировали посреди чужого игрового обработчика.
+    /// </summary>
+    private void QueueObjectiveEvent<T>(T ev) where T : struct
+    {
+        _pendingEvents.Enqueue(() =>
+        {
+            var copy = ev;
+            RaiseLocalEvent(ref copy);
+        });
+    }
+
+    private void DispatchPendingEvents()
+    {
+        // Рассылаем только накопленное к этому моменту: события, поставленные обработчиками,
+        // уйдут следующим тиком, поэтому зациклиться здесь нельзя.
+        var count = _pendingEvents.Count;
+        for (var i = 0; i < count; i++)
+        {
+            _pendingEvents.Dequeue().Invoke();
         }
     }
 
+    [SubscribeLocalEvent]
+    private void OnOwnerDidEquipHand(Entity<ObjectiveOwnerComponent> ent, ref DidEquipHandEvent args)
+    {
+        NotifyEntityAcquired(ent, args.Equipped, ObjectiveObservationScope.Hands);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnOwnerDidEquip(Entity<ObjectiveOwnerComponent> ent, ref DidEquipEvent args)
+    {
+        NotifyEntityAcquired(ent, args.Equipment, ObjectiveObservationScope.Equipment);
+    }
+
+    /// <summary>
+    /// Сообщает условиям активных целей владельца о новой сущности в руках или экипировке,
+    /// чтобы наблюдатели обновлялись по событиям, а не на каждой оценке.
+    /// </summary>
+    private void NotifyEntityAcquired(
+        Entity<ObjectiveOwnerComponent> owner,
+        EntityUid target,
+        ObjectiveObservationScope scope)
+    {
+        if (!_net.IsServer || TerminatingOrDeleted(target))
+            return;
+
+        var objectives = new List<EntityUid>(owner.Comp.Objectives);
+        for (var i = 0; i < objectives.Count; i++)
+        {
+            if (!TryComp(objectives[i], out ObjectiveRuntimeComponent? objective) ||
+                !objective.ConditionsActive ||
+                (objective.Options.ObservationScope & scope) == 0 ||
+                !HasComp<ActiveObjectiveComponent>(objectives[i]))
+            {
+                continue;
+            }
+
+            foreach (var runtime in objective.Conditions.Values)
+            {
+                var context = GetContext((objectives[i], objective), runtime.Key);
+                runtime.Condition.RaiseEntityAcquired(context, target, this);
+            }
+        }
+    }
+
+    [SubscribeLocalEvent]
     private void OnOwnerTerminating(Entity<ObjectiveOwnerComponent> ent, ref EntityTerminatingEvent args)
     {
         var objectives = new List<EntityUid>(ent.Comp.Objectives);
@@ -49,8 +148,13 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnObjectiveTerminating(Entity<ObjectiveRuntimeComponent> ent, ref EntityTerminatingEvent args)
     {
+        // Компонент без запущенной цели (например, добавленный вручную) не должен рассылать событие остановки.
+        if (!ent.Comp.TrackedOwner.Valid)
+            return;
+
         if (!HasComp<StoppingObjectiveComponent>(ent))
         {
             DeactivateConditions(ent);
@@ -105,12 +209,15 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
     {
         objective = EntityUid.Invalid;
 
-        if (!owner.Owner.Valid ||
-            TerminatingOrDeleted(owner) ||
-            !float.IsFinite(options.ObservationRange) ||
-            options.ObservationRange < 0f ||
-            !TryBuildConditions(owner, definition, options, requireStableIds, out var conditions))
+        if (!owner.Owner.Valid || TerminatingOrDeleted(owner))
+            return false;
+
+        if (!TryBuildConditions(owner, definition, options, requireStableIds, out var conditions, out var error))
         {
+            Log.Error("Cannot start objective {Objective} for {Owner}: {Error}",
+                prototype?.Id ?? "inline",
+                ToPrettyString(owner),
+                error);
             return false;
         }
 
@@ -133,10 +240,9 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
             objective,
             prototype,
             objectiveComponent.Options.SourceIdentifier);
-        RaiseLocalEvent(ref started);
+        QueueObjectiveEvent(started);
 
         EvaluateObjective((objective, objectiveComponent));
-        UpdateObjectiveState((objective, objectiveComponent));
         return true;
     }
 
@@ -222,12 +328,11 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
             objective,
             objective.Comp.Prototype,
             objective.Comp.Options.SourceIdentifier);
-        RaiseLocalEvent(ref changed);
+        QueueObjectiveEvent(changed);
 
         if (active)
         {
             EvaluateObjective((objective, objective.Comp));
-            UpdateObjectiveState((objective, objective.Comp));
         }
 
         return true;
@@ -270,6 +375,47 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
         if (!_net.IsServer || !TryGetActiveRuntime(handle, out var objective, out var runtime))
             return false;
 
+        ApplyReportedState(objective, handle, runtime, satisfied);
+        UpdateObjectiveState(objective);
+        return true;
+    }
+
+    /// <summary>
+    /// Validates an inline objective definition without starting it or writing errors to the log.
+    /// </summary>
+    public bool TryValidateObjective(
+        EntityUid owner,
+        ObjectiveDefinition definition,
+        ObjectiveStartOptions options,
+        [NotNullWhen(false)] out string? error)
+    {
+        return TryBuildConditions(owner, definition, options, false, out _, out error);
+    }
+
+    /// <summary>
+    /// Validates a reusable objective prototype without starting it or writing errors to the log.
+    /// </summary>
+    public bool TryValidateObjective(
+        EntityUid owner,
+        ProtoId<ObjectivePrototype> prototypeId,
+        ObjectiveStartOptions options,
+        [NotNullWhen(false)] out string? error)
+    {
+        if (!_prototype.TryIndex(prototypeId, out var prototype))
+        {
+            error = $"unknown objective prototype {prototypeId}";
+            return false;
+        }
+
+        return TryBuildConditions(owner, prototype.Definition, options, true, out _, out error);
+    }
+
+    private void ApplyReportedState(
+        Entity<ObjectiveRuntimeComponent> objective,
+        ObjectiveConditionHandle handle,
+        ObjectiveConditionRuntimeState runtime,
+        bool satisfied)
+    {
         var previousProgress = runtime.Progress;
         var previousRaw = runtime.RawSatisfied;
         var previousSatisfied = runtime.Satisfied;
@@ -283,8 +429,6 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
             previousProgress,
             previousRaw,
             previousSatisfied);
-        UpdateObjectiveState(objective);
-        return true;
     }
 
     /// <summary>
@@ -339,19 +483,26 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
         ObjectiveDefinition definition,
         ObjectiveStartOptions options,
         bool requireStableIds,
-        out Dictionary<string, ObjectiveConditionRuntimeState> runtimes)
+        out Dictionary<string, ObjectiveConditionRuntimeState> runtimes,
+        [NotNullWhen(false)] out string? error)
     {
         runtimes = [];
-        if (definition.All.Count == 0 && definition.Any.Count == 0)
+        if (!float.IsFinite(options.ObservationRange) || options.ObservationRange < 0f)
         {
-            Log.Error("Cannot start an empty objective definition for {Owner}", ToPrettyString(owner));
+            error = $"observation range {options.ObservationRange} must be finite and non-negative";
             return false;
         }
 
-        if (!TryAddConditions(owner, definition.All, options, requireStableIds, "all", runtimes))
+        if (definition.All.Count == 0 && definition.Any.Count == 0)
+        {
+            error = "objective definition is empty";
+            return false;
+        }
+
+        if (!TryAddConditions(owner, definition.All, options, requireStableIds, "all", runtimes, out error))
             return false;
 
-        return TryAddConditions(owner, definition.Any, options, requireStableIds, "any", runtimes);
+        return TryAddConditions(owner, definition.Any, options, requireStableIds, "any", runtimes, out error);
     }
 
     private bool TryAddConditions(
@@ -360,7 +511,8 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
         ObjectiveStartOptions options,
         bool requireStableIds,
         string group,
-        Dictionary<string, ObjectiveConditionRuntimeState> runtimes)
+        Dictionary<string, ObjectiveConditionRuntimeState> runtimes,
+        [NotNullWhen(false)] out string? error)
     {
         for (var i = 0; i < conditions.Count; i++)
         {
@@ -370,9 +522,7 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
             {
                 if (requireStableIds)
                 {
-                    Log.Error("Named objective condition {Condition} in group {Group} has no stable id",
-                        condition.GetType().Name,
-                        group);
+                    error = $"named objective condition {condition.GetType().Name} in group {group} has no stable id";
                     return false;
                 }
 
@@ -381,15 +531,23 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
 
             if (runtimes.ContainsKey(key))
             {
-                Log.Error("Objective condition id {ConditionId} is duplicated", key);
+                error = $"objective condition id {key} is duplicated";
                 return false;
             }
 
-            if (!condition.RaiseValidation(owner, options, this, out var error))
+            // Инвертированный счётчик означает «событие ещё не произошло», а это правда уже в момент старта:
+            // OneShot-цель с таким условием закрылась бы мгновенно. В Monitor-режиме (failures/preconditions) это законно.
+            if (condition.Inverted && condition.IsProgressBased && options.Mode == ObjectiveRunMode.OneShot)
             {
-                Log.Error("Objective condition {Condition} is invalid: {Error}",
-                    condition.GetType().Name,
-                    error ?? "unspecified validation error");
+                error = $"inverted history condition {condition.GetType().Name} is satisfied immediately " +
+                        "in one-shot mode; use it only in monitor objectives";
+                return false;
+            }
+
+            if (!condition.RaiseValidation(owner, options, this, out var conditionError))
+            {
+                error = $"objective condition {condition.GetType().Name} is invalid: " +
+                        (conditionError ?? "unspecified validation error");
                 return false;
             }
 
@@ -403,6 +561,7 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
             runtimes.Add(key, runtime);
         }
 
+        error = null;
         return true;
     }
 
@@ -424,18 +583,34 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
         if (!objective.Comp.ConditionsActive || !HasComp<ActiveObjectiveComponent>(objective))
             return;
 
+        // Сначала опрашиваем все условия, затем применяем результаты и один раз пересчитываем цель:
+        // иначе цель оценивается на смеси свежих и устаревших значений (например, инвертированное
+        // live-условие считается выполненным до своего первого опроса).
+        List<(ObjectiveConditionRuntimeState Runtime, bool Satisfied)>? reports = null;
         foreach (var runtime in objective.Comp.Conditions.Values)
         {
-            if (!HasComp<ActiveObjectiveComponent>(objective))
-                return;
-
             var context = GetContext(objective, runtime.Key);
             var reported = runtime.Condition.RaiseEvaluate(context, this);
             if (reported == null)
                 continue;
 
-            TrySetConditionSatisfied(context.Handle, reported.Value);
+            reports ??= [];
+            reports.Add((runtime, reported.Value));
         }
+
+        if (reports != null)
+        {
+            for (var i = 0; i < reports.Count; i++)
+            {
+                if (!HasComp<ActiveObjectiveComponent>(objective) || HasComp<StoppingObjectiveComponent>(objective))
+                    return;
+
+                var (runtime, satisfied) = reports[i];
+                ApplyReportedState(objective, new ObjectiveConditionHandle(objective, runtime.Key), runtime, satisfied);
+            }
+        }
+
+        UpdateObjectiveState(objective);
     }
 
     private void DeactivateConditions(Entity<ObjectiveRuntimeComponent> objective)
@@ -469,7 +644,7 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
             previous,
             satisfied,
             objective.Comp.Options.SourceIdentifier);
-        RaiseLocalEvent(ref changed);
+        QueueObjectiveEvent(changed);
 
         if (!satisfied)
             return;
@@ -479,7 +654,7 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
             objective,
             objective.Comp.Prototype,
             objective.Comp.Options.SourceIdentifier);
-        RaiseLocalEvent(ref completed);
+        QueueObjectiveEvent(completed);
 
         if (objective.Comp.Options.Mode == ObjectiveRunMode.Monitor)
             return;
@@ -541,7 +716,7 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
             runtime.RawSatisfied,
             runtime.Satisfied,
             objective.Comp.Options.SourceIdentifier);
-        RaiseLocalEvent(ref changed);
+        QueueObjectiveEvent(changed);
     }
 
     private static void RefreshConditionState(ObjectiveConditionRuntimeState runtime)
@@ -604,7 +779,7 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
             objective.Comp.Prototype,
             reason,
             objective.Comp.Options.SourceIdentifier);
-        RaiseLocalEvent(ref stopped);
+        QueueObjectiveEvent(stopped);
     }
 
     private void UnlinkOwner(Entity<ObjectiveRuntimeComponent> objective)
@@ -656,6 +831,15 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
         var ev = new ObjectiveConditionEvaluateEvent<TCondition>(context, condition);
         RaiseLocalEvent(ref ev);
         return ev.Satisfied;
+    }
+
+    void IObjectiveConditionEventRaiser.RaiseEntityAcquired<TCondition>(
+        ObjectiveConditionContext context,
+        TCondition condition,
+        EntityUid target)
+    {
+        var ev = new ObjectiveConditionEntityAcquiredEvent<TCondition>(context, condition, target);
+        RaiseLocalEvent(ref ev);
     }
 
     void IObjectiveConditionEventRaiser.RaiseDeactivated<TCondition>(

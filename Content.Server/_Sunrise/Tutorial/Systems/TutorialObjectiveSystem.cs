@@ -18,16 +18,7 @@ public sealed partial class TutorialObjectiveSystem : EntitySystem
     private const string PreconditionsSource = "TutorialPreconditions";
     private const string FailureSourcePrefix = "TutorialFailure:";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<TutorialStepActivatedEvent>(OnStepActivated);
-        SubscribeLocalEvent<TutorialTrackingEndedEvent>(OnTrackingEnded);
-        SubscribeLocalEvent<ObjectiveStateChangedEvent>(OnObjectiveStateChanged);
-        SubscribeLocalEvent<ObjectiveStoppedEvent>(OnObjectiveStopped);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStepActivated(ref TutorialStepActivatedEvent args)
     {
         ClearStepObjectives(args.Player);
@@ -35,34 +26,49 @@ public sealed partial class TutorialObjectiveSystem : EntitySystem
             return;
 
         var runtime = EnsureComp<TutorialStepObjectivesComponent>(args.Player);
-        runtime.PreconditionsSatisfied = step.Preconditions == null;
+        runtime.PreconditionsSatisfied = true;
 
-        if (!TryStart(
-                args.Player,
-                step.Completion,
-                ObjectiveRunMode.OneShot,
-                CompletionSource,
-                step.ObserveRange,
-                out runtime.Completion,
-                out runtime.CompletionSatisfied))
+        if (IsEmpty(step.Completion))
+        {
+            // Пустой completion, как и до перехода на Objective System, завершает шаг сразу.
+            runtime.CompletionSatisfied = true;
+        }
+        else if (!TryStart(
+                     args.Player,
+                     step.Completion,
+                     ObjectiveRunMode.OneShot,
+                     CompletionSource,
+                     step.ObserveRange,
+                     out runtime.Completion,
+                     out runtime.CompletionSatisfied))
         {
             Log.Error("Failed to start completion objective for tutorial step {Step} and player {Player}",
                 step.ID,
                 ToPrettyString(args.Player));
+
+            runtime.CompletionSatisfied = true;
         }
 
-        if (step.Preconditions != null &&
-            TryStart(
-                args.Player,
-                step.Preconditions,
-                ObjectiveRunMode.Monitor,
-                PreconditionsSource,
-                step.ObserveRange,
-                out var preconditions,
-                out var preconditionsSatisfied))
+        if (step.Preconditions != null && !IsEmpty(step.Preconditions))
         {
-            runtime.Preconditions = preconditions;
-            runtime.PreconditionsSatisfied = preconditionsSatisfied;
+            if (TryStart(
+                    args.Player,
+                    step.Preconditions,
+                    ObjectiveRunMode.Monitor,
+                    PreconditionsSource,
+                    step.ObserveRange,
+                    out var preconditions,
+                    out var preconditionsSatisfied))
+            {
+                runtime.Preconditions = preconditions;
+                runtime.PreconditionsSatisfied = preconditionsSatisfied;
+            }
+            else
+            {
+                Log.Error("Failed to start preconditions objective for tutorial step {Step} and player {Player}",
+                    step.ID,
+                    ToPrettyString(args.Player));
+            }
         }
 
         for (var i = 0; i < step.Failures.Count; i++)
@@ -91,11 +97,13 @@ public sealed partial class TutorialObjectiveSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnTrackingEnded(ref TutorialTrackingEndedEvent args)
     {
         ClearStepObjectives(args.Player);
     }
 
+    [SubscribeLocalEvent]
     private void OnObjectiveStateChanged(ref ObjectiveStateChangedEvent args)
     {
         if (!TryComp(args.Owner, out TutorialStepObjectivesComponent? runtime))
@@ -118,6 +126,7 @@ public sealed partial class TutorialObjectiveSystem : EntitySystem
             runtime.FailuresSatisfied[failure] = args.Satisfied;
     }
 
+    [SubscribeLocalEvent]
     private void OnObjectiveStopped(ref ObjectiveStoppedEvent args)
     {
         if (!TryComp(args.Owner, out TutorialStepObjectivesComponent? runtime))
@@ -147,6 +156,8 @@ public sealed partial class TutorialObjectiveSystem : EntitySystem
         {
             Mode = mode,
             CompletionRetention = ObjectiveCompletionRetention.Retain,
+            // Туториалу нужны наблюдатели для условий с Target, поэтому включаем их явно.
+            ObservationScope = ObjectiveObservationScope.Default,
             ObservationRange = range,
             SourceIdentifier = source,
         };
@@ -160,6 +171,11 @@ public sealed partial class TutorialObjectiveSystem : EntitySystem
 
         satisfied = status.Satisfied;
         return true;
+    }
+
+    private static bool IsEmpty(ObjectiveDefinition definition)
+    {
+        return definition.All.Count == 0 && definition.Any.Count == 0;
     }
 
     private void ClearStepObjectives(EntityUid player)

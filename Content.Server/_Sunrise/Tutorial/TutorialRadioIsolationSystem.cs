@@ -9,14 +9,7 @@ public sealed partial class TutorialRadioIsolationSystem : EntitySystem
     [Dependency] private EntityQuery<TutorialPlayerComponent> _tutorialPlayerQuery = default!;
     [Dependency] private EntityQuery<TransformComponent> _transformQuery = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<RadioReceiveAttemptEvent>(OnRadioReceiveAttempt);
-
-    }
-
+    [SubscribeLocalEvent]
     private void OnRadioReceiveAttempt(ref RadioReceiveAttemptEvent args)
     {
         if (args.Cancelled)

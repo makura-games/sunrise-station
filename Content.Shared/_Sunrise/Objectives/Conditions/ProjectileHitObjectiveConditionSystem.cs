@@ -12,13 +12,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 public sealed partial class ProjectileHitObjectiveConditionSystem
     : ObjectiveEventConditionSystem<ProjectileHitObjectiveCondition, ObjectiveCombatOwnerComponent, ObjectiveCombatObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveProjectileSourceComponent, AmmoShotEvent>(OnAmmoShot);
-        SubscribeLocalEvent<ObjectiveCombatObserverComponent, ProjectileHitEvent>(OnProjectileHit);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAmmoShot(Entity<ObjectiveProjectileSourceComponent> ent, ref AmmoShotEvent args)
     {
         if (!TryComp<ObjectiveCombatObserverComponent>(ent, out var sourceObservable) ||
@@ -37,6 +31,7 @@ public sealed partial class ProjectileHitObjectiveConditionSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnProjectileHit(Entity<ObjectiveCombatObserverComponent> projectile, ref ProjectileHitEvent args)
     {
         if (args.Shooter is not { } shooter)

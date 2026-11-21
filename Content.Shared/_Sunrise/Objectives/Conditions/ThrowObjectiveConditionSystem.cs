@@ -9,12 +9,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 /// </summary>
 public sealed partial class ThrowObjectiveConditionSystem : ObjectiveEventConditionSystem<ThrowObjectiveCondition, ObjectiveInteractionOwnerComponent, ObjectiveInteractionObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveInteractionObserverComponent, ThrownEvent>(OnThrown);
-    }
-
+    [SubscribeLocalEvent]
     private void OnThrown(Entity<ObjectiveInteractionObserverComponent> ent, ref ThrownEvent args)
     {
         if (args.User == null)

@@ -14,12 +14,7 @@ public sealed partial class ItemInsertedObjectiveConditionSystem
 {
     [Dependency] private IGameTiming _timing = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveContainerObserverComponent, EntInsertedIntoContainerMessage>(OnInserted);
-    }
-
+    [SubscribeLocalEvent]
     private void OnInserted(Entity<ObjectiveContainerObserverComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         if (_timing.ApplyingState || ent.Comp.Registrations.Count == 0)

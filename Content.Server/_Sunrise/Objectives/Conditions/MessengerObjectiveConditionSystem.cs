@@ -19,13 +19,6 @@ public sealed partial class MessengerOpenedObjectiveConditionSystem
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ObjectiveCommunicationOwnerComponent, MessengerOpenedEvent>(OnMessengerOpened);
-    }
-
     protected override void Evaluate(
         ObjectiveConditionContext context,
         MessengerOpenedObjectiveCondition condition,
@@ -34,6 +27,7 @@ public sealed partial class MessengerOpenedObjectiveConditionSystem
         args.Satisfied = IsMessengerOpen(context.Owner);
     }
 
+    [SubscribeLocalEvent]
     private void OnMessengerOpened(Entity<ObjectiveCommunicationOwnerComponent> ent, ref MessengerOpenedEvent args)
     {
         RecordEvent(ent, nameof(MessengerOpenedObjectiveCondition));
@@ -91,13 +85,7 @@ public sealed partial class MessengerOpenedObjectiveConditionSystem
 public sealed partial class MessengerMessageObjectiveConditionSystem
     : ObjectiveEventConditionSystem<MessengerMessageObjectiveCondition, ObjectiveCommunicationOwnerComponent, ObjectiveCommunicationObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ObjectiveCommunicationOwnerComponent, MessengerMessageSentEvent>(OnMessengerMessageSent);
-    }
-
+    [SubscribeLocalEvent]
     private void OnMessengerMessageSent(Entity<ObjectiveCommunicationOwnerComponent> ent, ref MessengerMessageSentEvent args)
     {
         RecordEvent(ent, MessengerMessageObjectiveCondition.GetCounterKey());

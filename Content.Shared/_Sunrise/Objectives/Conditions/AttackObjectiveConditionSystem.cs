@@ -10,12 +10,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 /// </summary>
 public sealed partial class AttackObjectiveConditionSystem : ObjectiveEventConditionSystem<AttackObjectiveCondition, ObjectiveCombatOwnerComponent, ObjectiveCombatObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveCombatObserverComponent, AttackedEvent>(OnMeleeHit);
-    }
-
+    [SubscribeLocalEvent]
     private void OnMeleeHit(Entity<ObjectiveCombatObserverComponent> ent, ref AttackedEvent args)
     {
         RecordObservedEvent(ent, DefaultKey, args.User, secondaryTarget: args.Used);

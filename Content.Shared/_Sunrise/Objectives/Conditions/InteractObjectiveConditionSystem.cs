@@ -9,12 +9,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 /// </summary>
 public sealed partial class InteractObjectiveConditionSystem : ObjectiveEventConditionSystem<InteractObjectiveCondition, ObjectiveInteractionOwnerComponent, ObjectiveInteractionObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveInteractionOwnerComponent, UserInteractHandEvent>(OnUserInteractHand);
-    }
-
+    [SubscribeLocalEvent]
     private void OnUserInteractHand(Entity<ObjectiveInteractionOwnerComponent> ent, ref UserInteractHandEvent args)
     {
         RecordEvent(ent, DefaultKey, args.Target);

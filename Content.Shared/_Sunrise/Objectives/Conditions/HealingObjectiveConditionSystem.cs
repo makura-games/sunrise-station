@@ -12,17 +12,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 public sealed partial class HealingObjectiveConditionSystem
     : ObjectiveEventConditionSystem<HealingObjectiveCondition, ObjectiveHealthOwnerComponent, ObjectiveHealthObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveHealthObserverComponent, HealingDoAfterEvent>(
-            OnHealingCompleted,
-            after: [typeof(HealingSystem)]);
-        SubscribeLocalEvent<ObjectiveHealthOwnerComponent, HealingDoAfterEvent>(
-            OnSelfHealingCompleted,
-            after: [typeof(HealingSystem)]);
-    }
-
+    [SubscribeLocalEvent(after: [typeof(HealingSystem)])]
     private void OnHealingCompleted(Entity<ObjectiveHealthObserverComponent> ent, ref HealingDoAfterEvent args)
     {
         if (!args.Handled || args.Cancelled || !TryGetPrototypeId(args.Used, out var item))
@@ -31,6 +21,7 @@ public sealed partial class HealingObjectiveConditionSystem
         RecordObservedEvent(ent, HealingObjectiveCondition.GetCounterKey(item), args.User);
     }
 
+    [SubscribeLocalEvent(after: [typeof(HealingSystem)])]
     private void OnSelfHealingCompleted(Entity<ObjectiveHealthOwnerComponent> ent, ref HealingDoAfterEvent args)
     {
         if (!args.Handled || args.Cancelled)

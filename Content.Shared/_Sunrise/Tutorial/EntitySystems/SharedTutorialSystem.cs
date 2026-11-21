@@ -1,3 +1,4 @@
+using Content.Shared._Sunrise.Objectives;
 using Content.Shared._Sunrise.Tutorial.Components;
 using Content.Shared._Sunrise.Tutorial.EntitySystems.SoftLock;
 using Content.Shared.EntityEffects;
@@ -24,7 +25,10 @@ public abstract partial class SharedTutorialSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<TutorialPlayerComponent, EntityTerminatingEvent>(OnTutorialPlayerTerminating);
+
+        // События целей рассылаются из ObjectiveSystem.Update: обновляемся после него,
+        // чтобы флаги шага, выставленные этими событиями, учитывались в том же тике.
+        UpdatesAfter.Add(typeof(ObjectiveSystem));
     }
 
     public override void Update(float frameTime)
@@ -75,6 +79,7 @@ public abstract partial class SharedTutorialSystem : EntitySystem
         OnStepChanged(ent, step);
     }
 
+    [SubscribeLocalEvent]
     private void OnTutorialPlayerTerminating(Entity<TutorialPlayerComponent> ent, ref EntityTerminatingEvent args)
     {
         ClearTracking(ent);

@@ -12,12 +12,7 @@ public sealed partial class DropObjectiveConditionSystem : ObjectiveEventConditi
 {
     [Dependency] private IGameTiming _timing = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveInteractionObserverComponent, DroppedEvent>(OnDropped);
-    }
-
+    [SubscribeLocalEvent]
     private void OnDropped(Entity<ObjectiveInteractionObserverComponent> ent, ref DroppedEvent args)
     {
         if (_timing.ApplyingState)

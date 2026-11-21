@@ -9,7 +9,7 @@ namespace Content.Server._Sunrise.Tutorial.Conditions;
 /// <summary>
 /// Validates and records client-reported tutorial button interactions.
 /// </summary>
-public sealed class UiButtonPressedObjectiveConditionSystem :
+public sealed partial class UiButtonPressedObjectiveConditionSystem :
     ObjectiveEventConditionSystem<UiButtonPressedObjectiveCondition, ObjectiveUiOwnerComponent, ObjectiveUiObserverComponent>
 {
     protected override bool Validate(UiButtonPressedObjectiveCondition condition, out string? error)
@@ -20,12 +20,7 @@ public sealed class UiButtonPressedObjectiveConditionSystem :
         return error == null;
     }
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeNetworkEvent<TutorialUiButtonPressedEvent>(OnUiButtonPressed);
-    }
-
+    [SubscribeNetworkEvent]
     private void OnUiButtonPressed(TutorialUiButtonPressedEvent message, EntitySessionEventArgs args)
     {
         if (args.SenderSession.AttachedEntity is not { } player)

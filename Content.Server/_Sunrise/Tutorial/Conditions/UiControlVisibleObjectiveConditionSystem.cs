@@ -9,7 +9,7 @@ namespace Content.Server._Sunrise.Tutorial.Conditions;
 /// <summary>
 /// Validates and records client-reported tutorial control visibility.
 /// </summary>
-public sealed class UiControlVisibleObjectiveConditionSystem :
+public sealed partial class UiControlVisibleObjectiveConditionSystem :
     ObjectiveEventConditionSystem<UiControlVisibleObjectiveCondition, ObjectiveUiOwnerComponent, ObjectiveUiObserverComponent>
 {
     protected override bool Validate(UiControlVisibleObjectiveCondition condition, out string? error)
@@ -20,12 +20,7 @@ public sealed class UiControlVisibleObjectiveConditionSystem :
         return error == null;
     }
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeNetworkEvent<TutorialUiControlVisibleEvent>(OnUiControlVisible);
-    }
-
+    [SubscribeNetworkEvent]
     private void OnUiControlVisible(TutorialUiControlVisibleEvent message, EntitySessionEventArgs args)
     {
         if (args.SenderSession.AttachedEntity is not { } player)

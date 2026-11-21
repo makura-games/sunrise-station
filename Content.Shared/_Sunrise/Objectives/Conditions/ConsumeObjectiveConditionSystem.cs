@@ -9,12 +9,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 /// </summary>
 public sealed partial class ConsumeObjectiveConditionSystem : ObjectiveEventConditionSystem<ConsumeObjectiveCondition, ObjectiveHealthOwnerComponent, ObjectiveHealthObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveHealthObserverComponent, IngestedEvent>(OnIngested);
-    }
-
+    [SubscribeLocalEvent]
     private void OnIngested(Entity<ObjectiveHealthObserverComponent> ent, ref IngestedEvent args)
     {
         // Target — сущность, которая ест; при принудительном кормлении User может отличаться.

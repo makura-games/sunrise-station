@@ -9,12 +9,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 /// </summary>
 public sealed partial class PointObjectiveConditionSystem : ObjectiveEventConditionSystem<PointObjectiveCondition, ObjectiveInteractionOwnerComponent, ObjectiveInteractionObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveInteractionOwnerComponent, AfterPointedAtEvent>(OnAfterPointedAt);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAfterPointedAt(Entity<ObjectiveInteractionOwnerComponent> ent, ref AfterPointedAtEvent args)
     {
         RecordEvent(ent, DefaultKey, args.Pointed);

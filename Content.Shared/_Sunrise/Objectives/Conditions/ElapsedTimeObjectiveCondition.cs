@@ -33,16 +33,7 @@ public sealed partial class ElapsedTimeObjectiveConditionSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ObjectiveConditionValidationEvent<ElapsedTimeObjectiveCondition>>(OnValidation);
-        SubscribeLocalEvent<ObjectiveConditionActivatedEvent<ElapsedTimeObjectiveCondition>>(OnActivated);
-        SubscribeLocalEvent<ObjectiveConditionEvaluateEvent<ElapsedTimeObjectiveCondition>>(OnEvaluate);
-        SubscribeLocalEvent<ObjectiveConditionDeactivatedEvent<ElapsedTimeObjectiveCondition>>(OnDeactivated);
-    }
-
+    [SubscribeLocalEvent]
     private void OnValidation(ref ObjectiveConditionValidationEvent<ElapsedTimeObjectiveCondition> args)
     {
         args.Handled = true;
@@ -50,12 +41,14 @@ public sealed partial class ElapsedTimeObjectiveConditionSystem : EntitySystem
         args.Error = args.Valid ? null : "elapsed duration cannot be negative";
     }
 
+    [SubscribeLocalEvent]
     private void OnActivated(ref ObjectiveConditionActivatedEvent<ElapsedTimeObjectiveCondition> args)
     {
         var active = EnsureComp<ActiveElapsedObjectiveComponent>(args.Context.Objective);
         active.Deadlines[args.Context.Handle] = _timing.CurTime + args.Condition.Delay;
     }
 
+    [SubscribeLocalEvent]
     private void OnEvaluate(ref ObjectiveConditionEvaluateEvent<ElapsedTimeObjectiveCondition> args)
     {
         args.Satisfied = TryComp(args.Context.Objective, out ActiveElapsedObjectiveComponent? active) &&
@@ -63,6 +56,7 @@ public sealed partial class ElapsedTimeObjectiveConditionSystem : EntitySystem
                          _timing.CurTime >= deadline;
     }
 
+    [SubscribeLocalEvent]
     private void OnDeactivated(ref ObjectiveConditionDeactivatedEvent<ElapsedTimeObjectiveCondition> args)
     {
         if (!TryComp(args.Context.Objective, out ActiveElapsedObjectiveComponent? active))

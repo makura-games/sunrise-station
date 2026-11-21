@@ -69,20 +69,6 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
         Subs.CVar(_cfg, SunriseCCVars.TutorialCooldown, v => _cooldown = v, true);
         Subs.CVar(_cfg, SunriseCCVars.TutorialMaxActive, v => _maxTutorials = v, true);
         _player.PlayerStatusChanged += OnPlayerStatusChanged;
-        SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
-        SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEnd);
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
-
-        SubscribeLocalEvent<TutorialPlayerComponent, TutorialStepChangedEvent>(OnStepChanged);
-        SubscribeLocalEvent<TutorialPlayerComponent, TutorialStepsCompletedEvent>(OnStepsCompleted);
-        SubscribeLocalEvent<TutorialPlayerComponent, TutorialEndedEvent>(OnTutorialComplete);
-
-        SubscribeLocalEvent<TutorialPlayerComponent, ExpandPvsEvent>(OnExpandPvs);
-
-        SubscribeNetworkEvent<TutorialQuitRequestEvent>(OnTutorialQuitRequest);
-        SubscribeNetworkEvent<TutorialStartRequestEvent>(OnStartRequest);
-        SubscribeNetworkEvent<TutorialWindowDataRequestEvent>(OnWindowDataRequest);
     }
     public override void Shutdown()
     {
@@ -113,11 +99,13 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
         TryQueueCompletedTutorialRespawn(args.Session);
     }
 
+    [SubscribeLocalEvent]
     private void OnPlayerAttached(PlayerAttachedEvent args)
     {
         SchedulePendingRespawnAfterAttach(args.Player);
     }
 
+    [SubscribeLocalEvent]
     private void OnPlayerDetached(PlayerDetachedEvent args)
     {
         if (_activeTutorialTransitions.Contains(args.Player.UserId))
@@ -132,6 +120,7 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
         QueueDetachedTutorialLobby(args.Entity, args.Player);
     }
 
+    [SubscribeLocalEvent]
     private void OnRoundEnd(RoundEndMessageEvent args)
     {
         _pendingCompletionRespawns.Clear();
@@ -140,6 +129,7 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
         _pendingDetachedTutorialLobbyBuffer.Clear();
     }
 
+    [SubscribeLocalEvent]
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent args)
     {
         _pendingCompletionRespawns.Clear();
@@ -148,6 +138,7 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
         _pendingDetachedTutorialLobbyBuffer.Clear();
     }
 
+    [SubscribeLocalEvent]
     private void OnExpandPvs(Entity<TutorialPlayerComponent> ent, ref ExpandPvsEvent args)
     {
         args.Entities ??= [];
@@ -161,6 +152,7 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
             args.Entities.Add(ent.Comp.Target.Value);
     }
 
+    [SubscribeLocalEvent]
     private void OnStepsCompleted(Entity<TutorialPlayerComponent> ent, ref TutorialStepsCompletedEvent args)
     {
         if (!_player.TryGetSessionByEntity(ent, out var session) || session.Status != SessionStatus.InGame)
@@ -181,6 +173,7 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
         ShowCompletionEui(ent.Owner, session);
     }
 
+    [SubscribeLocalEvent]
     private void OnTutorialComplete(Entity<TutorialPlayerComponent> ent, ref TutorialEndedEvent args)
     {
         var hasUserId = TryGetTutorialUserId(ent, out var userId);
@@ -466,6 +459,7 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
         return true;
     }
 
+    [SubscribeNetworkEvent]
     private async void OnWindowDataRequest(TutorialWindowDataRequestEvent msg, EntitySessionEventArgs args)
     {
         List<string>? completed = null;
@@ -483,6 +477,7 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
             Filter.SinglePlayer(args.SenderSession));
     }
 
+    [SubscribeNetworkEvent]
     private void OnStartRequest(TutorialStartRequestEvent msg, EntitySessionEventArgs args)
     {
         if (!ProtoMan.TryIndex(msg.SequenceId, out var sequence))
@@ -547,6 +542,7 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
         return true;
     }
 
+    [SubscribeNetworkEvent]
     private void OnTutorialQuitRequest(TutorialQuitRequestEvent msg, EntitySessionEventArgs args)
     {
         if (args.SenderSession.AttachedEntity is not { } entity)
@@ -603,6 +599,7 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
         return true;
     }
 
+    [SubscribeLocalEvent]
     private async void OnStepChanged(EntityUid uid, TutorialPlayerComponent comp, TutorialStepChangedEvent args)
     {
         try

@@ -10,12 +10,7 @@ namespace Content.Server._Sunrise.Objectives.Conditions;
 public sealed partial class BuiOpenObjectiveConditionSystem
     : ObjectiveEventConditionSystem<BuiOpenObjectiveCondition, ObjectiveInteractionOwnerComponent, ObjectiveInteractionObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveInteractionObserverComponent, BoundUIOpenedEvent>(OnBoundUIOpened);
-    }
-
+    [SubscribeLocalEvent]
     private void OnBoundUIOpened(Entity<ObjectiveInteractionObserverComponent> ent, ref BoundUIOpenedEvent args)
     {
         RecordObservedEvent(ent, DefaultKey, args.Actor);

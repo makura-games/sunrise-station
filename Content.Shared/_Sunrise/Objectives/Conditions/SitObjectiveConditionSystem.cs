@@ -15,12 +15,7 @@ public sealed partial class SitObjectiveConditionSystem
 {
     [Dependency] private IGameTiming _timing = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveInteractionOwnerComponent, BuckledEvent>(OnBuckled);
-    }
-
+    [SubscribeLocalEvent]
     private void OnBuckled(Entity<ObjectiveInteractionOwnerComponent> ent, ref BuckledEvent args)
     {
         if (_timing.ApplyingState)

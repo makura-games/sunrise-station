@@ -24,12 +24,12 @@ public sealed partial class ObjectiveRuntimeComponent : Component
     /// <summary>
     /// Behavior definition used by this runtime instance.
     /// </summary>
-    public ObjectiveDefinition Definition = default!;
+    public ObjectiveDefinition Definition = new();
 
     /// <summary>
     /// Immutable-at-runtime launch options copied when the objective starts.
     /// </summary>
-    public ObjectiveStartOptions Options = default!;
+    public ObjectiveStartOptions Options = new();
 
     /// <summary>
     /// Runtime state keyed by a stable or generated condition key.

@@ -19,6 +19,12 @@ public abstract partial class ObjectiveCondition
     public bool Inverted;
 
     /// <summary>
+    /// Whether the condition is satisfied by accumulated event history rather than by a live state.
+    /// An inverted history condition means "the event has not happened yet".
+    /// </summary>
+    public virtual bool IsProgressBased => false;
+
+    /// <summary>
     /// Calculates the non-inverted condition state from runtime progress and an explicitly reported state.
     /// </summary>
     public virtual bool GetRawSatisfied(int progress, bool reportedSatisfied)
@@ -38,6 +44,11 @@ public abstract partial class ObjectiveCondition
 
     internal abstract bool? RaiseEvaluate(
         ObjectiveConditionContext context,
+        IObjectiveConditionEventRaiser raiser);
+
+    internal abstract void RaiseEntityAcquired(
+        ObjectiveConditionContext context,
+        EntityUid target,
         IObjectiveConditionEventRaiser raiser);
 
     internal abstract void RaiseDeactivated(
@@ -83,6 +94,15 @@ public abstract partial class ObjectiveConditionBase<TCondition> : ObjectiveCond
             : null;
     }
 
+    internal override void RaiseEntityAcquired(
+        ObjectiveConditionContext context,
+        EntityUid target,
+        IObjectiveConditionEventRaiser raiser)
+    {
+        if (this is TCondition condition)
+            raiser.RaiseEntityAcquired(context, condition, target);
+    }
+
     internal override void RaiseDeactivated(
         ObjectiveConditionContext context,
         IObjectiveConditionEventRaiser raiser)
@@ -103,6 +123,9 @@ public abstract partial class ObjectiveCountConditionBase<TCondition> : Objectiv
     /// </summary>
     [DataField]
     public int Count = 1;
+
+    /// <inheritdoc />
+    public override bool IsProgressBased => true;
 
     /// <inheritdoc />
     public override bool GetRawSatisfied(int progress, bool reportedSatisfied)

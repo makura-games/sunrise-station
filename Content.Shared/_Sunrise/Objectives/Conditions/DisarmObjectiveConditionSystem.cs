@@ -11,14 +11,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 public sealed partial class DisarmObjectiveConditionSystem
     : ObjectiveEventConditionSystem<DisarmObjectiveCondition, ObjectiveCombatOwnerComponent, ObjectiveCombatObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveCombatObserverComponent, DisarmedEvent>(
-            OnDisarmed,
-            after: [typeof(SharedStaminaSystem)]);
-    }
-
+    [SubscribeLocalEvent(after: [typeof(SharedStaminaSystem)])]
     private void OnDisarmed(Entity<ObjectiveCombatObserverComponent> ent, ref DisarmedEvent args)
     {
         if (!args.Handled)

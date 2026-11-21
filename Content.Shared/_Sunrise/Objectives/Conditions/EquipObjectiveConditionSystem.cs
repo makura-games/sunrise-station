@@ -13,12 +13,8 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 public sealed partial class EquipObjectiveConditionSystem : ObjectiveEventConditionSystem<EquipObjectiveCondition, ObjectiveInteractionOwnerComponent, ObjectiveInteractionObserverComponent>
 {
     [Dependency] private IGameTiming _timing = default!;
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveInteractionOwnerComponent, DidEquipEvent>(OnDidEquip);
-    }
 
+    [SubscribeLocalEvent]
     private void OnDidEquip(Entity<ObjectiveInteractionOwnerComponent> ent, ref DidEquipEvent args)
     {
         if (_timing.ApplyingState)

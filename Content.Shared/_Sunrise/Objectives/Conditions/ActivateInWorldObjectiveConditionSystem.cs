@@ -9,12 +9,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 /// </summary>
 public sealed partial class ActivateInWorldObjectiveConditionSystem : ObjectiveEventConditionSystem<ActivateInWorldObjectiveCondition, ObjectiveInteractionOwnerComponent, ObjectiveInteractionObserverComponent>
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ObjectiveInteractionObserverComponent, ActivateInWorldEvent>(OnActivateInWorld);
-    }
-
+    [SubscribeLocalEvent]
     private void OnActivateInWorld(Entity<ObjectiveInteractionObserverComponent> ent, ref ActivateInWorldEvent args)
     {
         RecordObservedEvent(ent, DefaultKey, args.User);
