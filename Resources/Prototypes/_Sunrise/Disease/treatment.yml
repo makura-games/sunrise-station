@@ -3,7 +3,7 @@
   parent: BaseItem
   id: SunriseDiseaseVaccine
   name: vaccine
-  description: A single-use injector. Cures the loaded strain and protects against catching it again.
+  description: A single-use injector of cloudy fluid with a blank label.
   components:
   - type: Item
     size: Tiny
@@ -20,7 +20,7 @@
   parent: SunriseDiseaseVaccine
   id: SunriseDiseaseSerum
   name: serum
-  description: A single-use injector made from the blood of a recovered donor. Treats the illness but grants no protection.
+  description: A single-use injector of yellowish plasma with a blank label.
   components:
   - type: Sprite
     sprite: Objects/Specific/Medical/medipen.rsi
@@ -35,7 +35,7 @@
   parent: BaseItem
   id: SunriseDiseaseFailedVaccine
   name: spoiled serum
-  description: A cloudy ampoule of useless protein sludge. The antigen did not match.
+  description: A cloudy ampoule of separated protein sludge.
   components:
   - type: Item
     size: Tiny

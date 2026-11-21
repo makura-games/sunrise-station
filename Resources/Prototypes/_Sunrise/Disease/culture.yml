@@ -4,7 +4,7 @@
   parent: BaseItem
   id: SunrisePetriDish
   name: petri dish
-  description: A sterile dish with nutrient medium. Inoculate it with a sample and wait for the culture to grow.
+  description: A sterile dish with a thin layer of nutrient medium under the lid.
   components:
   - type: Item
     size: Tiny
@@ -23,7 +23,7 @@
   parent: BaseAmmoProvider
   id: SunrisePetriDishBox
   name: petri dish dispenser
-  description: Dispenses sterile petri dishes for growing cultures.
+  description: A dispenser box with sterile petri dishes inside.
   components:
   - type: Sprite
     layers:
@@ -34,7 +34,7 @@
   parent: BaseItem
   id: SunriseDiseaseStrainVial
   name: strain sample
-  description: A sealed vial with a lab sample of a strain. Useless as an infection source, but a culture grows from it.
+  description: A sealed vial with a lab sample of a strain.
   components:
   # Спрайты в руках берутся у обычной пробирки, своих у штаммов нет.
   - type: Item

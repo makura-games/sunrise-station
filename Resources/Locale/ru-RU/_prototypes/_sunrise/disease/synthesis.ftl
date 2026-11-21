@@ -1,10 +1,13 @@
 ent-SunriseDiseaseBlankSample = заготовка штамма
     .desc = Запечатанная пробирка с неизученной питательной средой.
 ent-SunriseDiseaseBlankSampleWeak = { ent-SunriseDiseaseBlankSample }
+    .suffix = Слабая
     .desc = { ent-SunriseDiseaseBlankSample.desc }
 ent-SunriseDiseaseBlankSampleModerate = { ent-SunriseDiseaseBlankSample }
+    .suffix = Средняя
     .desc = { ent-SunriseDiseaseBlankSample.desc }
 ent-SunriseDiseaseBlankSampleStrong = { ent-SunriseDiseaseBlankSample }
+    .suffix = Сильная
     .desc = { ent-SunriseDiseaseBlankSample.desc }
 ent-SunriseDiseaseBlankSampleBox = раздатчик заготовок штаммов
     .desc = Коробка-раздатчик с запечатанными пробирками внутри.

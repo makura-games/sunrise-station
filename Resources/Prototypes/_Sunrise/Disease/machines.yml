@@ -3,7 +3,7 @@
   parent: DiseaseDiagnoser
   id: SunriseDiseaseDiagnoser
   name: disease diagnoser
-  description: Analyzes a disease sample and prints a report.
+  description: A squat machine with a sample tray and a printer slot.
   components:
   - type: ItemSlots
   # Контейнеры машины перечисляются целиком: словарь не наследуется, а перезаписывается.
@@ -23,7 +23,7 @@
   parent: Vaccinator
   id: SunriseVaccinator
   name: vaccinator
-  description: Synthesizes vaccines from antigens and extracts serum from donor blood.
+  description: A tall machine with two slots and a rack of ampoules behind glass.
   components:
 
 # Отчёт диагностера. Ванильный лист — узкая кассовая лента, в которой длинные
@@ -73,7 +73,7 @@
   parent: BaseComputerAiAccess
   id: SunriseDiseaseDatabaseConsole
   name: virus database console
-  description: Keeps everything the station knows about known strains and dispenses lab samples of them.
+  description: A terminal with a scrolling catalogue readout and a dispenser slot.
   components:
   - type: Sprite
     layers:
@@ -99,7 +99,7 @@
 - type: entity
   parent: BaseComputerCircuitboard
   id: SunriseDiseaseDatabaseCircuitboard
-  name: virus database console board
+  name: virus database board
   description: A computer printed circuit board for a virus database console.
   components:
   - type: Sprite
@@ -114,7 +114,7 @@
   parent: [ BaseMachinePowered, ConstructibleMachine, BaseMachineDestructible ]
   id: SunriseDiseaseSterilizerArch
   name: sterilizer arch
-  description: A walk-through arch that sprays everyone passing under it with disinfectant and beeps at the infected. Kills the contagion on carried items and on the dead, but cannot cure the living.
+  description: A walk-through arch lined with nozzles and a strip of indicators.
   placement:
     mode: SnapgridCenter
   components:
@@ -162,7 +162,7 @@
 - type: entity
   parent: BaseMachineCircuitboard
   id: SunriseDiseaseSterilizerCircuitboard
-  name: sterilizer arch machine board
+  name: sterilizer arch board
   description: A machine printed circuit board for a sterilizer arch.
   components:
   - type: Sprite

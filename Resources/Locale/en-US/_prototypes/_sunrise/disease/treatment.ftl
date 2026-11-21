@@ -62,3 +62,4 @@ ent-SunriseDiseaseSprayer = disinfectant sprayer
     .desc = A hand sprayer with a measuring scale on the canister.
 ent-SunriseClothingEyesHudVirology = virology hud
     .desc = A light heads-up display with a teal lens on a thin arc.
+ent-SunriseDiseaseVesselBreach = { ent-BaseGameRule }

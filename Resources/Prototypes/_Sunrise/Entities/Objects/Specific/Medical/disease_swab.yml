@@ -2,7 +2,7 @@
   parent: BaseItem
   id: SunriseDiseaseSwab
   name: medical swab
-  description: A sterile swab for taking pathogen samples from patients and suspicious objects. Single use only.
+  description: A sterile cotton swab in a paper wrapper.
   components:
   - type: Item
     size: Tiny

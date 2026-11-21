@@ -8,7 +8,7 @@
   parent: [ ClothingEyesHudBase, ShowMedicalIcons ]
   id: SunriseClothingEyesHudMedicalVirology
   name: medical virology hud
-  description: A medical heads-up display with a built-in contamination scanner. Shows the crew's health and highlights contaminated items nearby.
+  description: A medical heads-up display with an extra optical module in a teal casing.
   components:
 
 # Биозащита.
@@ -76,7 +76,7 @@
   id: SunriseDiseaseSprayerLarge
   name: large disinfectant sprayer
   suffix: Empty
-  description: A large pressurized sprayer for disinfectant. Holds enough to treat a whole ward.
+  description: A roomy canister with a hand pump and a long hose.
   components:
   - type: Sprite
     sprite: Objects/Tools/Hydroponics/sprays.rsi
@@ -93,7 +93,7 @@
   parent: [ BaseMedicalContraband, SmokeGrenade ]
   id: SunriseDisinfectantGrenade
   name: disinfectant grenade
-  description: A canister of aerosolised disinfectant. Kills the contagion on contaminated items and on the dead in a wide radius.
+  description: A canister with a green stripe and a droplet pictogram on the side.
   components:
 
 # Облачко, которое стерилизующая арка оставляет после распыления.
@@ -130,7 +130,7 @@
   parent: BaseItem
   id: SunriseDiseaseVaccineInjector
   name: vaccine injector
-  description: A reusable pneumatic injector. Load a vaccine and it will dose the crew one after another without using the vaccine up.
+  description: A reusable pneumatic injector with a window for the cartridge.
   components:
   - type: Item
     size: Small

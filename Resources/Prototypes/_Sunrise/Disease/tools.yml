@@ -5,7 +5,7 @@
   parent: BaseItem
   id: SunriseDiseaseScanner
   name: disease analyzer
-  description: A hand-held analyzer that checks an object or a person for an infection and prints the report on the spot. Runs on paper.
+  description: A hand-held analyzer with a narrow printer slot and a roll of paper.
   components:
 
 # Пульверизатор по образцу садовых опрыскивателей: обеззараживает не прибор, а реагент,
@@ -28,7 +28,7 @@
   id: SunriseDiseaseSprayer
   name: disinfectant sprayer
   suffix: Filled
-  description: A pressurized sprayer of disinfectant. Kills the contagion on contaminated items and on the dead, and does nothing for the living - that is what a vaccine is for.
+  description: A hand sprayer with a measuring scale on the canister.
   components:
   - type: Sprite
     sprite: Objects/Tools/Hydroponics/sprays.rsi
@@ -51,7 +51,7 @@
   parent: ClothingEyesHudBase
   id: SunriseClothingEyesHudVirology
   name: virology hud
-  description: A heads-up display that highlights contaminated items nearby. It cannot tell what they carry and does not see infection in living people.
+  description: A light heads-up display with a teal lens on a thin arc.
   components:
   - type: Sprite
     sprite: _Sunrise/Clothing/Eyes/Hud/virology.rsi

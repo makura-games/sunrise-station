@@ -70,7 +70,7 @@
   parent: SunriseDiseaseStrainVial
   id: SunriseDiseaseSelectedSample
   name: designed strain sample
-  description: A sealed vial with a strain assembled under a microscope and a built-in injector.
+  description: A sealed vial with a built-in injector and a handwritten label.
   components:
   - type: Sprite
     state: designed

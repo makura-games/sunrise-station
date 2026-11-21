@@ -2,7 +2,7 @@
   parent: BaseVendingMachineRestock
   id: SunriseVendingMachineRestockViroDrobe
   name: ViroDrobe restock box
-  description: A sealed restock box with a biohazard stripe. Slot into the virology vendor.
+  description: A sealed box with a biohazard stripe along the side.
   components:
   - type: VendingMachineRestock
     canRestock:
@@ -18,9 +18,19 @@
   parent: CrateMedicalSecure
   id: SunriseCrateVendingMachineRestockViroDrobeFilled
   name: ViroDrobe restock crate
-  description: Contains a restock box for the virology vendor.
+  description: A crate with a restock box inside.
   components:
   - type: EntityTableContainerFill
     containers:
       entity_storage:
         id: SunriseVendingMachineRestockViroDrobe
+
+- type: cargoProduct
+  id: SunriseCrateVendingMachineRestockViroDrobe
+  icon:
+    sprite: Objects/Specific/Service/vending_machine_restock.rsi
+    state: base
+  product: SunriseCrateVendingMachineRestockViroDrobeFilled
+  cost: 3200
+  category: cargoproduct-category-name-medical
+  group: market

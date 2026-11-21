@@ -59,7 +59,7 @@
 - type: entity
   parent: SunriseDiseaseResearchVessel
   id: SunriseDiseaseResearchVesselExperimental
-  name: experimental viral research vessel
+  name: experimental viral vessel
   description: A tall overclocked culture column wrapped in glowing tubes. The glass hums faintly under the pressure.
   components:
   - type: Sprite
@@ -73,7 +73,7 @@
 - type: entity
   parent: BaseMachineCircuitboard
   id: SunriseDiseaseResearchVesselExperimentalCircuitboard
-  name: experimental viral vessel board
+  name: experimental vessel board
   description: A machine printed circuit board for an experimental viral research vessel.
   components:
   - type: Sprite
@@ -89,7 +89,7 @@
 - type: entity
   parent: BaseFlatpack
   id: SunriseDiseaseResearchVesselFlatpack
-  name: viral research vessel flatpack
+  name: viral vessel flatpack
   description: A flatpack used for constructing a viral research vessel.
   components:
   - type: Flatpack

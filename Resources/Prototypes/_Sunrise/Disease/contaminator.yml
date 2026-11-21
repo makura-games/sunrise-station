@@ -1,8 +1,8 @@
 - type: entity
   parent: [ SunriseDiseaseStrainVial, BaseSyndicateContraband ]
   id: SunriseSyndicateDiseaseVial
-  name: foodborne culture vial
-  description: A vial of engineered culture. Contains two doses for contaminating food or open drinks. Can also be used to seed a Petri dish, consuming the vial.
+  name: unmarked vial
+  description: A mysterious vial with unknown contents.
   components:
   - type: Sprite
     color: "#D9A7B8"

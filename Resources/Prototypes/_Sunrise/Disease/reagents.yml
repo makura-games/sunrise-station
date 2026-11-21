@@ -38,9 +38,9 @@
 - type: reaction
   id: SunriseDisinfectant
   reactants:
-    Chlorine:
-      amount: 1
     Ethanol:
+      amount: 1
+    Iodine:
       amount: 1
   products:
     SunriseDisinfectant: 2

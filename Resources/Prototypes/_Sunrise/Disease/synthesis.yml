@@ -31,7 +31,7 @@
   parent: SunrisePetriDishBox
   id: SunriseDiseaseBlankSampleBox
   name: strain blank dispenser
-  description: Dispenses sealed vials of uncharacterized culture medium.
+  description: A dispenser box with sealed vials inside.
 
 - type: entity
   parent: CrateMedicalSecure

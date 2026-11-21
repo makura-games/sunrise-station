@@ -62,3 +62,4 @@ ent-SunriseDiseaseSprayer = распылитель-обеззараживате�
     .desc = Ручной пульверизатор с мерной шкалой на баллоне.
 ent-SunriseClothingEyesHudVirology = вирусологический визор
     .desc = Лёгкий визор с бирюзовой линзой на тонкой дуге.
+ent-SunriseDiseaseVesselBreach = { ent-BaseGameRule }

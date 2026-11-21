@@ -30,7 +30,7 @@
 - type: entity
   id: SunriseDiseaseSporeGrowth
   name: spore growth
-  description: A cluster of swollen fungal sacs on a bed of purple mycelium. They pulse slowly, shedding fine green dust.
+  description: A cluster of swollen fungal sacs growing out of the floor. Fine dust drifts around them.
   placement:
     mode: SnapgridCenter
   components:
