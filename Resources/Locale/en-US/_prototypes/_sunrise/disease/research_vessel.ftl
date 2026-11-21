@@ -1,0 +1,10 @@
+ent-SunriseDiseaseResearchVessel = viral research vessel
+    .desc = A sealed culture vessel with a glass chamber, a sampling port and a research terminal.
+ent-SunriseDiseaseResearchVesselCircuitboard = viral vessel board
+    .desc = A machine printed circuit board for a viral research vessel.
+ent-SunriseDiseaseResearchVesselExperimental = experimental viral research vessel
+    .desc = A tall overclocked culture column wrapped in glowing tubes. The glass hums faintly under the pressure.
+ent-SunriseDiseaseResearchVesselExperimentalCircuitboard = experimental viral vessel board
+    .desc = A machine printed circuit board for an experimental viral research vessel.
+ent-SunriseDiseaseResearchVesselFlatpack = viral research vessel flatpack
+    .desc = A flatpack used for constructing a viral research vessel.

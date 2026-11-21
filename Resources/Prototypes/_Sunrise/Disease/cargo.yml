@@ -1,0 +1,26 @@
+- type: entity
+  parent: BaseVendingMachineRestock
+  id: SunriseVendingMachineRestockViroDrobe
+  name: ViroDrobe restock box
+  description: A sealed restock box with a biohazard stripe. Slot into the virology vendor.
+  components:
+  - type: VendingMachineRestock
+    canRestock:
+    - ViroDrobeInventory
+  - type: Sprite
+    layers:
+    - state: base
+    - state: green_bit
+      shader: unshaded
+    - state: refill_medical
+
+- type: entity
+  parent: CrateMedicalSecure
+  id: SunriseCrateVendingMachineRestockViroDrobeFilled
+  name: ViroDrobe restock crate
+  description: Contains a restock box for the virology vendor.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: SunriseVendingMachineRestockViroDrobe

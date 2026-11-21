@@ -1,0 +1,52 @@
+// Ореол заражённого предмета для оверлея болезней: мягкое пульсирующее свечение по контуру спрайта
+// и бегущий по самому предмету болезненный блик. Ореол рисуется в полную яркость, как индикация визора,
+// а сам предмет остаётся под обычным освещением.
+
+uniform highp vec4 glow_color;
+uniform highp float glow_width;
+uniform highp float pulse_speed;
+
+// Наибольшая непрозрачность спрайта на кольце заданного радиуса вокруг точки.
+highp float ringAlpha(highp vec2 uv, highp vec2 radius)
+{
+    highp vec2 diagonal = radius * 0.7071;
+    highp float a = 0.0;
+    a = max(a, texture2D(TEXTURE, uv + vec2(radius.x, 0.0)).a);
+    a = max(a, texture2D(TEXTURE, uv - vec2(radius.x, 0.0)).a);
+    a = max(a, texture2D(TEXTURE, uv + vec2(0.0, radius.y)).a);
+    a = max(a, texture2D(TEXTURE, uv - vec2(0.0, radius.y)).a);
+    a = max(a, texture2D(TEXTURE, uv + diagonal).a);
+    a = max(a, texture2D(TEXTURE, uv - diagonal).a);
+    a = max(a, texture2D(TEXTURE, uv + vec2(diagonal.x, -diagonal.y)).a);
+    a = max(a, texture2D(TEXTURE, uv + vec2(-diagonal.x, diagonal.y)).a);
+    return a;
+}
+
+// Тело fragment() встраивается в шаблон шейдера до записи результата, поэтому ранний return
+// выбросил бы пиксель целиком: ветки разведены через if/else.
+void fragment()
+{
+    highp vec4 col = zTexture(UV);
+    highp float pulse = 0.65 + 0.35 * sin(TIME * pulse_speed);
+
+    if (col.a > 0.01)
+    {
+        // Узкая полоса бежит по предмету по диагонали, а весь предмет чуть отливает цветом визора.
+        highp float band = fract((UV.x + UV.y) * 1.5 - TIME * 0.35);
+        highp float shimmer = smoothstep(0.0, 0.06, band) * (1.0 - smoothstep(0.06, 0.18, band));
+        highp float tint = (0.1 + 0.08 * pulse + 0.3 * shimmer) * glow_color.a;
+        COLOR = vec4(mix(col.rgb, glow_color.rgb * col.a, tint), col.a);
+    }
+    else
+    {
+        // Три кольца с затуханием дают мягкий край вместо жёсткой обводки.
+        highp vec2 ringStep = TEXTURE_PIXEL_SIZE * glow_width / 3.0;
+        highp float glow = ringAlpha(UV, ringStep);
+        glow = max(glow, 0.6 * ringAlpha(UV, ringStep * 2.0));
+        glow = max(glow, 0.3 * ringAlpha(UV, ringStep * 3.0));
+
+        highp float alpha = glow_color.a * glow * pulse;
+        COLOR = vec4(glow_color.rgb * alpha, alpha);
+        lightSample = vec3(1.0);
+    }
+}

@@ -1,0 +1,102 @@
+# Редкие находки и локальные очаги. Один источник выпускает один штамм и только один раз.
+- type: entity
+  parent: CrateMedical
+  id: SunriseCrateBiologicalSalvage
+  name: abandoned biocontainer
+  description: An old research container with a cracked seal and dried biological residue around the lid.
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:TriggerBehavior
+        keyOut: biohazard
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+
+- type: entity
+  parent: SunriseDiseaseCloud
+  id: SunriseDiseaseSporeCloud
+  name: spore cloud
+  description: A thin cloud of drifting green spores.
+  categories: [ HideSpawnMenu ]
+  components:
+
+# Нарост заражает тремя путями: рукой (контакт), ногой (шаг по нему) и облаком спор, если его разбить.
+# Дезинфектант гасит все три разом.
+  - type: TimedDespawn
+    lifetime: 6
+- type: entity
+  id: SunriseDiseaseSporeGrowth
+  name: spore growth
+  description: A cluster of swollen fungal sacs on a bed of purple mycelium. They pulse slowly, shedding fine green dust.
+  placement:
+    mode: SnapgridCenter
+  components:
+
+# Маркер исчезает при старте карты; в большинстве раундов на его месте ничего нет.
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _Sunrise/Disease/spores.rsi
+    state: growth
+    drawdepth: SmallObjects
+  # Срабатывает и на обычном шаге, а не только на бегу.
+  - type: StepTrigger
+    requiredTriggeredSpeed: 1
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      spores:
+        shape: !type:PhysShapeAabb
+          bounds: "-0.3,-0.3,0.3,0.3"
+        hard: false
+        layer: [ LowImpassable ]
+        mask: [ SmallMobMask ]
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Injurable
+    damageContainer: StructuralBiological
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:TriggerBehavior
+        keyOut: biohazard
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+- type: entity
+  parent: MarkerBase
+  id: SunriseDiseaseSporeGrowthSpawner
+  name: spore growth spawner
+  suffix: 15%
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _Sunrise/Disease/spores.rsi
+      state: growth
+  - type: RandomSpawner
+    prototypes: [ SunriseDiseaseSporeGrowth ]
+    chance: 0.15
+    offset: 0
+
+# Эти животные — скрытые резервуары: передают только укусом, сами не кашляют и не болеют.
+- type: entity
+  parent: MobCarpSalvage
+  id: SunriseMobCarpSalvageInfected
+  name: space carp
+  description: It's a space carp.
+  suffix: Salvage, infected bites
+
+- type: entity
+  parent: MobSpiderSpaceSalvage
+  id: SunriseMobSpiderSalvageInfected
+  name: space spider
+  description: A large spider adapted to the vacuum of space.
+  suffix: Salvage, infected bites

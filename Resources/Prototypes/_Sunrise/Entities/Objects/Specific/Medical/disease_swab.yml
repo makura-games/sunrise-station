@@ -1,0 +1,15 @@
+- type: entity
+  parent: BaseItem
+  id: SunriseDiseaseSwab
+  name: medical swab
+  description: A sterile swab for taking pathogen samples from patients and suspicious objects. Single use only.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _Sunrise/Disease/disease_swab.rsi
+    state: icon
+  - type: Tag
+    tags:
+    - Recyclable
+    - Trash

@@ -1,0 +1,87 @@
+# Источники заражения, которые заводят болезнь в раунд: заражённый груз и зверьё из вентиляции.
+# Прототипы под каждую болезнь не плодим: штамм выбирается при появлении предмета
+# либо проставляется правилом события.
+
+# Заражённая гуманитарная помощь: снаружи это обычный ящик медикаментов, который приходит
+# грузовым заказом вместе с настоящими подарками. Отличить его от соседних по партии нельзя,
+# поэтому очаг ищут уже по заболевшим, а не по виду ящика.
+- type: entity
+  parent: CrateMedicalSupplies
+  id: SunriseCrateContaminatedAid
+  suffix: Contaminated
+
+- type: entity
+  parent: CrateMedical
+  id: SunriseCrateContaminatedBiowaste
+  name: biowaste crate
+  description: A sealed crate of medical waste. The seal does not look intact.
+
+# Мышь-переносчик сама не болеет: симптомов у неё нет, заразу она передаёт только укусом.
+# Опознать её можно лишь по поведению — она не убегает, а бросается на экипаж.
+# Без родителя: иначе спрайт обычной мыши перебил бы серую и коричневую.
+- type: entity
+  abstract: true
+  id: SunriseMobMouseInfectedBase
+  suffix: Infected
+  components:
+  # Обычная мышь ходит по MouseCompound: поесть и бездельничать, боевой ветки там нет.
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  # Укус почти не ранит, но прокушенная кожа — прямой путь для заразы.
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 1
+
+- type: entity
+  parent: [ MobMouse, SunriseMobMouseInfectedBase ]
+  id: SunriseMobMouseInfected
+
+- type: entity
+  parent: [ MobMouse1, SunriseMobMouseInfectedBase ]
+  id: SunriseMobMouseInfectedGrey
+
+- type: entity
+  parent: [ MobMouse2, SunriseMobMouseInfectedBase ]
+  id: SunriseMobMouseInfectedBrown
+
+# Облако заразного аэрозоля. Болезнь в него проставляет тот, кто облако выпустил.
+- type: entity
+  id: SunriseDiseaseCloud
+  name: strange haze
+  description: A cloud of sticky haze. Breathing it in seems like a bad idea.
+  categories: [ HideSpawnMenu ]
+  components:
+
+# Культура из разбитого сосуда: плотное облако на пол-отсека, которому не нужен воздушный путь штамма.
+  - type: Sprite
+    sprite: Effects/chemsmoke.rsi
+    state: chemsmoke
+    color: "#8FBF6F"
+  - type: TimedDespawn
+    lifetime: 20
+  - type: Tag
+    tags:
+    - HideContextMenu
+- type: entity
+  parent: SunriseDiseaseCloud
+  id: SunriseDiseaseCloudBreach
+  name: dense culture haze
+  description: A thick, glistening fog of escaped culture. It clings to everything.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Effects/chemsmoke.rsi
+    state: chemsmoke
+    color: "#8FBF6F"
+    scale: 2.5,2.5
+  - type: TimedDespawn
+    lifetime: 45

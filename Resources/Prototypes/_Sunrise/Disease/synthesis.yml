@@ -1,0 +1,46 @@
+# Параметры заготовки выбираются при появлении, до этого она не содержит известного штамма.
+- type: entity
+  parent: SunriseDiseaseStrainVial
+  id: SunriseDiseaseBlankSample
+  name: strain blank
+  description: A sealed vial of uncharacterized culture medium.
+  components:
+
+# Заготовки фиксированного уровня: удобно спавнить для отладки, как ксеноартефакты нужной сложности.
+  - type: Sprite
+    state: blank
+  # Заготовка — редкий расходник: продаётся вдвое дешевле закупки, чтобы перепродажа не окупалась.
+  - type: StaticPrice
+    price: 400
+- type: entity
+  parent: SunriseDiseaseBlankSample
+  id: SunriseDiseaseBlankSampleWeak
+  suffix: Weak
+
+- type: entity
+  parent: SunriseDiseaseBlankSample
+  id: SunriseDiseaseBlankSampleModerate
+  suffix: Moderate
+
+- type: entity
+  parent: SunriseDiseaseBlankSample
+  id: SunriseDiseaseBlankSampleStrong
+  suffix: Strong
+
+- type: entity
+  parent: SunrisePetriDishBox
+  id: SunriseDiseaseBlankSampleBox
+  name: strain blank dispenser
+  description: Dispenses sealed vials of uncharacterized culture medium.
+
+- type: entity
+  parent: CrateMedicalSecure
+  id: SunriseCrateDiseaseSynthesis
+  name: strain synthesis crate
+  description: Culture medium and sealed vials for a virology laboratory.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: SunriseDiseaseBlankSampleBox

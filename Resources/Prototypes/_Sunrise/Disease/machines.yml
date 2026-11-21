@@ -1,0 +1,203 @@
+# Наследники ванильных машин: сами машины уже стоят на картах, подмена идёт через migration.yml.
+- type: entity
+  parent: DiseaseDiagnoser
+  id: SunriseDiseaseDiagnoser
+  name: disease diagnoser
+  description: Analyzes a disease sample and prints a report.
+  components:
+  - type: ItemSlots
+  # Контейнеры машины перечисляются целиком: словарь не наследуется, а перезаписывается.
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      diseaseSample: !type:ContainerSlot
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.VisualState:
+        enum.DiseaseMachineVisualLayers.IsRunning:
+          True: { state: running }
+          False: { state: icon }
+
+- type: entity
+  parent: Vaccinator
+  id: SunriseVaccinator
+  name: vaccinator
+  description: Synthesizes vaccines from antigens and extracts serum from donor blood.
+  components:
+
+# Отчёт диагностера. Ванильный лист — узкая кассовая лента, в которой длинные
+# строки симптомов переносятся по одному слову, поэтому берём широкий бланк.
+  - type: ItemSlots
+  # Контейнеры машины перечисляются целиком: словарь не наследуется, а перезаписывается.
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      vaccinatorSample: !type:ContainerSlot
+      vaccinatorBlood: !type:ContainerSlot
+  # Биомасса — сырьё для препаратов: её же едят клонеры, так что источник в медотделе уже есть.
+  - type: MaterialStorage
+    materialWhiteList:
+    - Biomass
+  - type: ActivatableUI
+    key: enum.VaccinatorUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.VaccinatorUiKey.Key:
+        type: VaccinatorBoundUserInterface
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.VisualState:
+        enum.DiseaseMachineVisualLayers.IsRunning:
+          True: { state: running }
+          False: { state: icon }
+- type: entity
+  parent: DiagnosisReportPaper
+  id: SunriseDiagnosisReportPaper
+  name: disease diagnoser report
+  description: A chilling medical receipt.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: paper_receipt_horizontal
+    - state: paper_receipt_horizontal_words
+      map: ["enum.PaperVisualLayers.Writing"]
+      visible: false
+    - state: paper_stamp-generic
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
+  - type: PaperVisuals
+    backgroundPatchMargin: 6.0, 0.0, 6.0, 0.0
+    contentMargin: 12.0, 0.0, 12.0, 0.0
+    # Высота ограничена: отчёт на несколько строк, лишнюю пустую ленту тянуть не нужно.
+    maxWritableArea: 440.0, 260.0
+
+# Консоль базы данных вирусов: знания о штаммах, прогресс исследования и выдача лабораторных образцов.
+- type: entity
+  parent: BaseComputerAiAccess
+  id: SunriseDiseaseDatabaseConsole
+  name: virus database console
+  description: Keeps everything the station knows about known strains and dispenses lab samples of them.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: comm_monitor
+    - map: ["computerLayerKeys"]
+      state: med_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: AccessReader
+    access: [["Medical"], ["ChiefMedicalOfficer"], ["Research"]]
+  - type: ActivatableUI
+    key: enum.DiseaseDatabaseUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.DiseaseDatabaseUiKey.Key:
+        type: DiseaseDatabaseBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: Computer
+    board: SunriseDiseaseDatabaseCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 4.0
+    color: "#1f8c28"
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: SunriseDiseaseDatabaseCircuitboard
+  name: virus database console board
+  description: A computer printed circuit board for a virus database console.
+  components:
+  - type: Sprite
+    state: cpu_science
+  - type: ComputerBoard
+    prototype: SunriseDiseaseDatabaseConsole
+
+# Стерилизующая арка у входа в карантин: обдаёт прошедшего дезинфектантом из своего бака
+# и пищит, если через неё прошёл заражённый. Корпус и табло — по образцу сканирующей рамки.
+# Болезнь внутри живого она не лечит, зато гасит очаги на вещах и заразу на мёртвом теле.
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseMachineDestructible ]
+  id: SunriseDiseaseSterilizerArch
+  name: sterilizer arch
+  description: A walk-through arch that sprays everyone passing under it with disinfectant and beeps at the infected. Kills the contagion on carried items and on the dead, but cannot cure the living.
+  placement:
+    mode: SnapgridCenter
+  components:
+  # Арка рисуется поверх мобов: проходящий оказывается под перекладиной, а не перед ней.
+  - type: Sprite
+    sprite: _Sunrise/Disease/sterilizer_arch.rsi
+    drawdepth: OverMobs
+    snapCardinals: true
+    layers:
+    - state: base
+    - state: idle
+      shader: unshaded
+      map: [ "sterilizerStatus" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        sterilizerStatus:
+          True: { visible: true }
+          False: { visible: false }
+      enum.DiseaseSterilizerVisuals.State:
+        sterilizerStatus:
+          Idle: { state: idle }
+          Spraying: { state: spray }
+          Alarm: { state: alarm }
+  # Через арку проходят насквозь: фикстура не твёрдая и только ловит шаги.
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        hard: false
+        layer:
+        - LowImpassable
+  # Срабатывает на входе под арку: отклик совпадает с шагом, а не приходит при выходе.
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 0.2
+    stepOn: true
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: Machine
+    board: SunriseDiseaseSterilizerCircuitboard
+  - type: Solution
+    id: tank
+    solution:
+      maxVol: 100
+  - type: RefillableSolution
+    solution: tank
+  - type: DrainableSolution
+    solution: tank
+  - type: ExaminableSolution
+    solution: tank
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: SunriseDiseaseSterilizerCircuitboard
+  name: sterilizer arch machine board
+  description: A machine printed circuit board for a sterilizer arch.
+  components:
+  - type: Sprite
+    state: medical
+  - type: MachineBoard
+    prototype: SunriseDiseaseSterilizerArch
+    stackRequirements:
+      Manipulator: 1
+      Cable: 5
+    tagRequirements:
+      GlassBeaker:
+        amount: 1
+        defaultPrototype: Beaker
