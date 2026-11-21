@@ -26,16 +26,6 @@
 ####
 
 - type: entity
-  id: PracticeBulletTrace
-  parent: BulletTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 2
-
-- type: entity
   id: AntiMaterielBulletTrace
   parent: BulletTrace
   categories: [ HideSpawnMenu ]
@@ -67,32 +57,6 @@
     damage:
       types:
         Blunt: 20000
-
-- type: entity
-  id: RubberBulletTrace
-  parent: BulletTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 1
-  - type: StaminaDamageOnCollide
-    damage: 12
-  - type: HitscanBasicVisuals
-    muzzleFlash:
-      sprite: _Starlight/Objects/Weapons/Guns/Projectiles/projectiles.rsi
-      state: muzzle
-    travelFlash:
-      sprite: _Starlight/Objects/Weapons/Guns/Projectiles/projectiles.rsi
-      state: trace
-    impactFlash:
-      sprite: _Starlight/Objects/Weapons/Guns/Projectiles/projectiles.rsi
-      state: impact
-    bullet:
-      sprite:
-        sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-        state: rubber
 
 ### magnum
 
@@ -170,7 +134,9 @@
     armorPenetration: -1.00
     damage:
       types:
-        Piercing: 45 # +30%
+        Piercing: 35
+        Blunt: 5
+        Slash: 5
   - type: StaminaDamageOnCollide
     damage: 22
   - type: ProjectilePierce
@@ -242,37 +208,6 @@
         state: practice
 
 - type: entity
-  id: BulletMagnumTraceIncendiary
-  parent: BulletTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 3
-        Heat: 32
-  - type: ProjectilePierce
-    chance: 0.69
-    deviation: 0.05
-  - type: ProjectileRicochet
-    chance: 0.48
-  - type: HitscanIgniteEffect
-  - type: HitscanBasicVisuals
-    muzzleFlash:
-      sprite: _Starlight/Objects/Weapons/Guns/Projectiles/projectiles.rsi
-      state: muzzle
-    travelFlash:
-      sprite: _Starlight/Objects/Weapons/Guns/Projectiles/projectiles.rsi
-      state: trace
-    impactFlash:
-      sprite: _Starlight/Objects/Weapons/Guns/Projectiles/projectiles.rsi
-      state: impact
-    bullet:
-      sprite:
-        sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-        state: incendiary
-
-- type: entity
   id: BulletMagnumTraceUranium
   parent: BulletTrace
   categories: [ HideSpawnMenu ]
@@ -309,7 +244,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
-    armorPenetration: 0.69
+    armorPenetration: 0.50
     damage:
       types:
         Piercing: 25 #- 30%
@@ -392,7 +327,9 @@
     armorPenetration: -1.00
     damage:
       types:
-        Piercing: 21 # +30%
+        Piercing: 17
+        Blunt: 2
+        Slash: 2
   - type: StaminaDamageOnCollide
     damage: 8
   - type: ProjectilePierce
@@ -444,28 +381,6 @@
         state: practice
 
 - type: entity
-  id: BulletPistolTraceIncendiary
-  parent: BulletTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 2
-        Heat: 14
-  - type: HitscanIgniteEffect
-  - type: ProjectilePierce
-    chance: 0.69
-    deviation: 0.2
-  - type: ProjectileRicochet
-    chance: 0.48
-  - type: HitscanBasicVisuals
-    bullet:
-      sprite:
-        sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-        state: incendiary
-
-- type: entity
   id: BulletPistolTraceUranium
   parent: BulletTrace
   categories: [ HideSpawnMenu ]
@@ -493,7 +408,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
-    armorPenetration: 0.69
+    armorPenetration: 0.50
     damage:
       types:
         Piercing: 10 #- 40%
@@ -541,7 +456,9 @@
     armorPenetration: -1.00
     damage:
       types:
-        Piercing: 26 # +30%
+        Piercing: 20
+        Blunt: 3
+        Slash: 3
   - type: StaminaDamageOnCollide
     damage: 22
   - type: ProjectilePierce
@@ -585,7 +502,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
-    armorPenetration: 0.50
+    armorPenetration: 0.30
     damage:
       types:
         Piercing: 13 #- 35%
@@ -604,26 +521,6 @@
         state: ap
 
 ### caseless rifle <<<<<<<<<<<<<<<
-
-- type: entity
-  id: BulletCaselessRifleTrace
-  parent: BulletTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 19
-
-- type: entity
-  id: BulletCaselessRiflePracticeTrace
-  parent: BulletTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 2
 
 ### heavy rifle <<<<<<<<<<<<<<<<<<
 
@@ -735,7 +632,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
-    armorPenetration: 0.69
+    armorPenetration: 0.50
     damage:
       types:
         Piercing: 12 #- 35%
@@ -770,28 +667,6 @@
       sprite:
         sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
         state: practice
-
-- type: entity
-  id: BulletLightRifleTraceIncendiary
-  parent: BulletTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 3
-        Heat: 16
-  - type: HitscanIgniteEffect
-  - type: ProjectilePierce
-    chance: 0.69
-    deviation: 0.05
-  - type: ProjectileRicochet
-    chance: 0.48
-  - type: HitscanBasicVisuals
-    bullet:
-      sprite:
-        sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-        state: incendiary
 
 - type: entity
   id: BulletLightRifleTraceUranium
@@ -892,7 +767,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
-    armorPenetration: 0.69
+    armorPenetration: 0.50
     damage:
       types:
         Piercing: 11 #- 35%
@@ -925,27 +800,6 @@
       sprite:
         sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
         state: practice
-
-- type: entity
-  id: BulletRifleTraceIncendiary
-  parent: BulletTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 2
-        Heat: 15
-  - type: HitscanIgniteEffect
-  - type: ProjectilePierce
-    chance: 0.69
-  - type: ProjectileRicochet
-    chance: 0.48
-  - type: HitscanBasicVisuals
-    bullet:
-      sprite:
-        sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-        state: incendiary
 
 - type: entity
   id: BulletRifleTraceUranium
@@ -1007,23 +861,6 @@
         state: slug
 
 - type: entity
-  id: PelletShotgunFlareTrace
-  parent: BulletTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 28
-  - type: ProjectilePierce
-    chance: 0.08
-  - type: HitscanBasicVisuals
-    bullet:
-      sprite:
-        sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-        state: slug
-
-- type: entity
   id: PelletShotgunTrace
   parent: BulletTrace
   categories: [ HideSpawnMenu ]
@@ -1053,37 +890,6 @@
   components:
   - type: ProjectileSpread
     proto: PelletShotgunTrace
-    count: 12
-    spread: 15
-
-- type: entity
-  id: PelletShotgunIncendiaryTrace
-  parent: BulletTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 2
-        Heat: 3
-  - type: StaminaDamageOnCollide # Sunrise-add
-    damage: 2
-  - type: ProjectilePierce
-    chance: 0.02
-  - type: HitscanIgniteEffect
-  - type: HitscanBasicVisuals
-    bullet:
-      sprite:
-        sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-        state: buckshot-flare
-
-- type: entity
-  id: PelletShotgunIncendiarySpreadTrace
-  parent: PelletShotgunIncendiaryTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: ProjectileSpread
-    proto: PelletShotgunIncendiaryTrace
     count: 12
     spread: 15
 
@@ -1374,62 +1180,6 @@
       state: impact_blue
 
 - type: entity
-  id: DeleteBeam
-  name: erasing beam
-  parent: BasicHitscanNoBeam
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Heat: 10
-        Blunt: 40
-  - type: HitscanBasicVisuals
-    muzzleFlash:
-      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
-      state: muzzle_blue
-    travelFlash:
-      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
-      state: beam_blue
-    impactFlash:
-      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
-      state: impact_blue
-
-- type: entity
-  id: DisablerBoltPractice
-  name: disabler bolt practice
-  parent: BasicHitscanNoBeam
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: HitscanBasicRaycast
-    collisionMask: BulletImpassable
-  - type: HitscanBasicVisuals
-    bullet:
-      sprite:
-        sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
-        state: omnilaser
-  - type: HitscanBasicEffects
-    hitColor: blue
-
-- type: entity
-  id: DisablerBolt
-  name: disabler bolt
-  parent: DisablerBoltPractice
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: StaminaDamageOnCollide
-    damage: 25
-
-- type: entity
-  id: DisablerBoltSmg
-  name: disabler bolt smg
-  parent: DisablerBolt
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: StaminaDamageOnCollide
-    damage: 15
-
-- type: entity
   id: TaserBolt
   name: taser bolt
   parent: BasicHitscanNoBeam
@@ -1451,66 +1201,6 @@
         sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
         state: spark
       color: "#ffff33"
-
-- type: entity
-  id: TaserBoltExtreme
-  name: taser bolt
-  parent: EnergyTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Heat: 0
-  - type: StaminaDamageOnCollide
-    damage: 100
-    #knockdownAmount: 0.5
-    #maxLength: 5
-  - type: HitscanBasicVisuals
-    bullet:
-      sprite:
-        sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-        state: spark
-      color: "#ffff33"
-
-- type: entity
-  id: AdvancedTaserBolt
-  name: taser bolt
-  parent: EnergyTrace
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Heat: 5
-  - type: StaminaDamageOnCollide
-    damage: 33
-  - type: HitscanCrawlerTargetEffects
-    knockdownDuration: 3s
-  - type: HitscanBasicRaycast
-    maxDistance: 7
-  - type: HitscanBasicVisuals
-    bullet:
-      sprite:
-        sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-        state: spark
-      color: "#ffff33"
-
-- type: entity
-  id: EmpPulse
-  name: EMP impulse
-  parent: EnergyTrace
-  components:
-  - type: HitscanEmpEffect
-    emp:
-      range: 2
-      energyConsumption: 30000
-      disableDuration: 10
-  - type: HitscanBasicVisuals
-    bullet:
-      sprite:
-        sprite: Effects/emp.rsi
-        state: emp_pulse
 
 - type: entity
   id: DecloneBolt
@@ -1567,45 +1257,6 @@
     userWhitelist:
       components:
       - Body
-
-- type: entity
-  id: PointDefenseBeam
-  name: Point Defense beam
-  parent: BasicHitscanNoBeam
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: HitscanBasicRaycast
-    maxDistance: 25
-  - type: HitscanBasicVisuals
-    muzzleFlash:
-      sprite: _Starlight/Objects/Weapons/Guns/Projectiles/projectiles.rsi
-      state: pd_muzzle
-    travelFlash:
-      sprite: _Starlight/Objects/Weapons/Guns/Projectiles/projectiles.rsi
-      state: pd_trace
-    impactFlash:
-      sprite: _Starlight/Objects/Weapons/Guns/Projectiles/projectiles.rsi
-      state: pd_impact
-
-# Xeno
-
-- type: entity
-  id: BulletAcidHitscan
-  parent: BasicHitscan
-  name: acid spit
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Caustic: 8
-  - type: HitscanBasicRaycast
-    collisionMask: BulletImpassable
-  - type: HitscanBasicVisuals
-    bullet:
-      sprite:
-        sprite: Objects/Weapons/Guns/Projectiles/xeno_toxic.rsi
-        state: xeno_toxic
 
 # Apollo Heavy Laser - shuttle cannon beam
 - type: entity

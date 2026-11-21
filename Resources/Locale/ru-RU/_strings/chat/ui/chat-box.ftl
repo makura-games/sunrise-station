@@ -14,11 +14,9 @@ hud-chatbox-select-channel-OOC = OOC
 hud-chatbox-select-channel-Damage = Повреждения
 hud-chatbox-select-channel-Visual = Действия
 hud-chatbox-select-channel-Radio = Рация
-hud-chatbox-select-channel-CollectiveMind = Коллективный разум
 hud-chatbox-channel-Admin = Админ Разное
 hud-chatbox-channel-AdminAlert = Админ Уведомления
 hud-chatbox-channel-AdminChat = Админ Чат
-hud-chatbox-channel-Chat = Чат
 hud-chatbox-channel-Dead = Мёртвые
 hud-chatbox-channel-Emotes = Эмоции
 hud-chatbox-channel-Local = Рядом
@@ -33,9 +31,12 @@ hud-chatbox-channel-Damage = Повреждения
 hud-chatbox-channel-Unspecified = Неопределённый
 hud-chatbox-highlights = Выделения:
 hud-chatbox-highlights-button = Подтвердить
-hud-chatbox-highlights-tooltip = Слова должны быть разделены переносом строки,
-                                 если они обрамлены кавычками ", они будут выделены
-                                 только если разделены пробелами или знаками препинания.
-hud-chatbox-highlights-placeholder = @МкХэндс
-                                     "Судья"
-                                     Медицина
+hud-chatbox-highlights-tooltip =
+    Слова должны быть разделены переносом строки,
+    если они обрамлены кавычками ", они будут выделены
+    только если разделены пробелами или знаками препинания.
+hud-chatbox-highlights-placeholder =
+    @МкХэндс
+    "Судья"
+    Медицина
+hud-chatbox-channel-Chat = Чат

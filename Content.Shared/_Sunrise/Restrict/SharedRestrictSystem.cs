@@ -10,9 +10,9 @@ using Robust.Shared.Random;
 namespace Content.Shared._Sunrise.Restrict;
 public abstract partial class SharedRestrictSystem : EntitySystem
 {
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<RestrictByUserTagComponent, AttemptMeleeEvent>(OnAttemptMelee);
@@ -26,7 +26,7 @@ public abstract partial class SharedRestrictSystem : EntitySystem
         {
             args.Cancelled = true;
             if (ent.Comp.Messages.Count != 0)
-                _popup.PopupClient(Loc.GetString(_random.Pick(ent.Comp.Messages)), args.Uid);
+                _popup.PopupEntity(Loc.GetString(_random.Pick(ent.Comp.Messages)), args.Uid, args.Uid);
         }
     }
 

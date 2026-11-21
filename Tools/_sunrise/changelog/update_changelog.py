@@ -2,10 +2,15 @@
 
 import argparse
 import datetime
+import json
 import os
+import sys
+from collections.abc import Mapping
 from typing import Any, List
 
 import yaml
+
+from changelog_schema import ChangelogSchemaError, format_issue_for_user, repair_changelog_document
 
 MAX_ENTRIES = 5000
 CATEGORY_MAIN = "Main"
@@ -38,24 +43,42 @@ def main():
     with open(args.changelog_file, "r", encoding="utf-8-sig") as file:
         current_data = yaml.load(file, Loader=NoDatesSafeLoader)
 
-    entries_list: List[Any] = [] if current_data is None else current_data.get("Entries") or []
+    if current_data is None:
+        current_data = {"Entries": []}
+    elif isinstance(current_data, Mapping) and current_data.get("Entries") is None:
+        current_data["Entries"] = []
+
+    try:
+        repairs = repair_changelog_document(current_data)
+    except ChangelogSchemaError as error:
+        for issue in error.issues:
+            print(
+                f"::error::{args.changelog_file}: {format_issue_for_user(issue)}",
+                file=sys.stderr,
+            )
+        raise
+    entries_list: List[Any] = current_data["Entries"]
     max_id = max(
-        (entry["id"] for entry in entries_list if isinstance(entry, dict) and type(entry.get("id")) is int),
+        (entry["id"] for entry in entries_list),
         default=0,
     )
+    added_entries = 0
 
     for part_name in sorted(os.listdir(args.parts_dir)):
         if not part_name.endswith(".yml"):
             continue
 
         part_path = os.path.join(args.parts_dir, part_name)
-        print(part_path)
+        print(part_path, file=sys.stderr)
         with open(part_path, "r", encoding="utf-8-sig") as file:
             part = yaml.load(file, Loader=NoDatesSafeLoader)
 
         part_category = part.get("category", CATEGORY_MAIN)
         if part_category != args.category:
-            print(f"Skipping: wrong category ({part_category} vs {args.category})")
+            print(
+                f"Skipping: wrong category ({part_category} vs {args.category})",
+                file=sys.stderr,
+            )
             continue
 
         changes = part["changes"]
@@ -74,18 +97,15 @@ def main():
             if media := part.get("media"):
                 entry["media"] = media
             entries_list.append(entry)
+            added_entries += 1
 
         os.remove(part_path)
 
-    print(f"Have {len(entries_list)} changelog entries")
-    entries_list.sort(
-        key=lambda entry: entry["id"]
-        if isinstance(entry, dict) and type(entry.get("id")) is int
-        else 0,
-    )
+    print(f"Have {len(entries_list)} changelog entries", file=sys.stderr)
+    entries_list.sort(key=lambda entry: entry["id"])
     overflow = len(entries_list) - MAX_ENTRIES
     if overflow > 0:
-        print(f"Removing {overflow} old entries.")
+        print(f"Removing {overflow} old entries.", file=sys.stderr)
         entries_list = entries_list[overflow:]
 
     new_data = {"Entries": entries_list}
@@ -100,6 +120,23 @@ def main():
             sort_keys=False,
             width=2**31 - 1,
         )
+
+    print(
+        json.dumps(
+            {
+                "added": added_entries,
+                "repairs": [
+                    {
+                        "code": repair.issue.code,
+                        "message": repair.issue.message,
+                        "resolution": repair.resolution,
+                    }
+                    for repair in repairs
+                ],
+            },
+            ensure_ascii=False,
+        ),
+    )
 
 
 main()

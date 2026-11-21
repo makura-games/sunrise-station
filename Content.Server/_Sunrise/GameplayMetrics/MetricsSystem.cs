@@ -25,7 +25,6 @@ using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using PrometheusMetrics = Prometheus.Metrics;
 
 namespace Content.Server._Sunrise.GameplayMetrics;
 
@@ -33,18 +32,18 @@ namespace Content.Server._Sunrise.GameplayMetrics;
 /// Server-side system that reports gameplay metrics to Prometheus.
 /// Covers: retention, balance, general stats, job popularity.
 /// </summary>
-public sealed class MetricsSystem : EntitySystem
+public sealed partial class MetricsSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly MindSystem _minds = default!;
-    [Dependency] private readonly RoleSystem _roles = default!;
-    [Dependency] private readonly ObjectivesSystem _objectives = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IServerPreferencesManager _prefs = default!;
-    [Dependency] private readonly SharedJobSystem _jobs = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private MindSystem _minds = default!;
+    [Dependency] private RoleSystem _roles = default!;
+    [Dependency] private ObjectivesSystem _objectives = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IServerPreferencesManager _prefs = default!;
+    [Dependency] private SharedJobSystem _jobs = default!;
 
-    private static readonly Counter PlayerDisconnectsTotal = PrometheusMetrics.CreateCounter(
+    private static readonly Counter PlayerDisconnectsTotal = Metrics.CreateCounter(
         "ss14_player_disconnect_total",
         "Player disconnects with context labels.",
         new CounterConfiguration
@@ -52,7 +51,7 @@ public sealed class MetricsSystem : EntitySystem
             LabelNames = ["gamemode", "mob_state", "job", "is_antag"]
         });
 
-    private static readonly Histogram PlayerSessionDurationSeconds = PrometheusMetrics.CreateHistogram(
+    private static readonly Histogram PlayerSessionDurationSeconds = Metrics.CreateHistogram(
         "ss14_player_session_duration_seconds",
         "Player in-game session duration in seconds.",
         new HistogramConfiguration
@@ -62,7 +61,7 @@ public sealed class MetricsSystem : EntitySystem
             Buckets = Histogram.ExponentialBuckets(60, 1.7, 15)
         });
 
-    private static readonly Histogram PlayerDeathsPerRound = PrometheusMetrics.CreateHistogram(
+    private static readonly Histogram PlayerDeathsPerRound = Metrics.CreateHistogram(
         "ss14_player_deaths_per_round",
         "Number of deaths per player per round.",
         new HistogramConfiguration
@@ -72,7 +71,7 @@ public sealed class MetricsSystem : EntitySystem
             Buckets = Histogram.LinearBuckets(0, 1, 11)
         });
 
-    private static readonly Histogram PlayerTimeToFirstDeathSeconds = PrometheusMetrics.CreateHistogram(
+    private static readonly Histogram PlayerTimeToFirstDeathSeconds = Metrics.CreateHistogram(
         "ss14_player_time_to_first_death_seconds",
         "Time in seconds from round start until a player's first death.",
         new HistogramConfiguration
@@ -83,63 +82,63 @@ public sealed class MetricsSystem : EntitySystem
         });
 
     // RETENTION: round-end snapshot gauges
-    private static readonly Gauge RoundEndSurvivalRateGauge = PrometheusMetrics.CreateGauge(
+    private static readonly Gauge RoundEndSurvivalRateGauge = Metrics.CreateGauge(
         "ss14_round_end_survival_rate",
         "Fraction of non-observer players still alive at round end (0–1).");
 
-    private static readonly Gauge RoundEndConnectedRateGauge = PrometheusMetrics.CreateGauge(
+    private static readonly Gauge RoundEndConnectedRateGauge = Metrics.CreateGauge(
         "ss14_round_end_connected_rate",
         "Fraction of players still connected when the round ended (0–1).");
 
     // BALANCE: store / uplink
-    private static readonly Counter StoreCurrencySpentTotal = PrometheusMetrics.CreateCounter(
+    private static readonly Counter StoreCurrencySpentTotal = Metrics.CreateCounter(
         "ss14_store_currency_spent_total",
         "Total currency units spent in stores, by currency type.",
         new CounterConfiguration { LabelNames = ["currency"] });
 
     // BALANCE: cargo
-    private static readonly Counter CargoOrdersFulfilledTotal = PrometheusMetrics.CreateCounter(
+    private static readonly Counter CargoOrdersFulfilledTotal = Metrics.CreateCounter(
         "ss14_cargo_order_fulfilled_total",
         "Cargo orders fulfilled, by product prototype ID.",
         new CounterConfiguration { LabelNames = ["product_id"] });
 
     // BALANCE: antag objectives
-    private static readonly Counter AntagObjectivesCompletedTotal = PrometheusMetrics.CreateCounter(
+    private static readonly Counter AntagObjectivesCompletedTotal = Metrics.CreateCounter(
         "ss14_antag_objectives_completed_total",
         "Antag objectives completed at round end, by antag role.",
         new CounterConfiguration { LabelNames = ["antag_role"] });
 
-    private static readonly Counter AntagObjectivesTotalCount = PrometheusMetrics.CreateCounter(
+    private static readonly Counter AntagObjectivesTotalCount = Metrics.CreateCounter(
         "ss14_antag_objectives_all_total",
         "All antag objectives assigned at round end, by antag role.",
         new CounterConfiguration { LabelNames = ["antag_role"] });
 
-    private static readonly Counter RoundsByGamemodeTotal = PrometheusMetrics.CreateCounter(
+    private static readonly Counter RoundsByGamemodeTotal = Metrics.CreateCounter(
         "ss14_rounds_by_gamemode_total",
         "Total finished rounds per gamemode.",
         new CounterConfiguration { LabelNames = ["gamemode"] });
 
     // GENERAL: damage & healing
-    private static readonly Counter DamageDealtToPlayersTotal = PrometheusMetrics.CreateCounter(
+    private static readonly Counter DamageDealtToPlayersTotal = Metrics.CreateCounter(
         "ss14_damage_dealt_to_players_total",
         "Total raw damage dealt to player-controlled entities.");
 
-    private static readonly Counter HealingDoneToPlayersTotal = PrometheusMetrics.CreateCounter(
+    private static readonly Counter HealingDoneToPlayersTotal = Metrics.CreateCounter(
         "ss14_healing_done_to_players_total",
         "Total healing done to player-controlled entities.");
 
-    private static readonly Counter PlayerDeathsTotal = PrometheusMetrics.CreateCounter(
+    private static readonly Counter PlayerDeathsTotal = Metrics.CreateCounter(
         "ss14_player_deaths_total",
         "Total player deaths during rounds.",
         new CounterConfiguration { LabelNames = ["job", "gamemode"] });
 
     // JOB POPULARITY
-    private static readonly Counter JobAssignedTotal = PrometheusMetrics.CreateCounter(
+    private static readonly Counter JobAssignedTotal = Metrics.CreateCounter(
         "ss14_job_assigned_total",
         "Job assignments at round end (one per player-role pair), by job ID.",
         new CounterConfiguration { LabelNames = ["job_id"] });
 
-    private static readonly Counter JobPriorityVotesTotal = PrometheusMetrics.CreateCounter(
+    private static readonly Counter JobPriorityVotesTotal = Metrics.CreateCounter(
         "ss14_job_priority_votes_total",
         "How many players had each job at each priority when the round started.",
         new CounterConfiguration { LabelNames = ["job_id", "priority"] });

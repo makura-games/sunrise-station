@@ -8,10 +8,10 @@ namespace Content.Shared._Sunrise.Objectives;
 /// <summary>
 /// Owns the lifecycle and state of server-authoritative objective instances.
 /// </summary>
-public sealed class ObjectiveSystem : EntitySystem, IObjectiveConditionEventRaiser
+public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionEventRaiser
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {

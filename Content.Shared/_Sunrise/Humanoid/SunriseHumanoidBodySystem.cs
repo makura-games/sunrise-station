@@ -10,9 +10,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Sunrise.Humanoid;
 
-public sealed class SunriseHumanoidBodySystem : EntitySystem
+public sealed partial class SunriseHumanoidBodySystem : EntitySystem
 {
-    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
 
     public void SetSkinColor(EntityUid uid, Color skinColor, bool sync = true)
     {

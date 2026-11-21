@@ -45,9 +45,9 @@ public sealed class ObjectiveTravelState
 /// <summary>
 /// Tracks travel-distance condition lifecycles per objective instance.
 /// </summary>
-public sealed class TravelDistanceObjectiveConditionSystem : EntitySystem
+public sealed partial class TravelDistanceObjectiveConditionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

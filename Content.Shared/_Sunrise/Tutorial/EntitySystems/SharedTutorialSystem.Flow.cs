@@ -78,7 +78,7 @@ public abstract partial class SharedTutorialSystem
 
     private void Advance(Entity<TutorialPlayerComponent> ent, ProtoId<TutorialStepPrototype>? stepId = null)
     {
-        if (!_proto.TryIndex(ent.Comp.SequenceId, out var sequence))
+        if (!ProtoMan.TryIndex(ent.Comp.SequenceId, out var sequence))
             return;
 
         if (stepId == null)
@@ -108,7 +108,7 @@ public abstract partial class SharedTutorialSystem
             UpdateProgressBar(ent, index);
         }
 
-        if (!_proto.TryIndex(stepId.Value, out var step))
+        if (!ProtoMan.TryIndex(stepId.Value, out var step))
             return;
 
         OnStepChanged(ent, step);

@@ -10,7 +10,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 public sealed partial class InternalsEnabledObjectiveConditionSystem
     : ObjectiveConditionSystem<InternalsComponent, InternalsEnabledObjectiveCondition>
 {
-    [Dependency] private readonly SharedInternalsSystem _internals = default!;
+    [Dependency] private SharedInternalsSystem _internals = default!;
 
     protected override void Condition(Entity<InternalsComponent> entity, ref ObjectiveConditionEvaluateEvent<InternalsEnabledObjectiveCondition> args)
     {

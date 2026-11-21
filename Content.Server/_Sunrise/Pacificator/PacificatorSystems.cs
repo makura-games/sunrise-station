@@ -12,16 +12,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.Pacificator;
 
-public sealed class PacificatorSystems : EntitySystem
+public sealed partial class PacificatorSystems : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly AmbientSoundSystem _ambientSoundSystem = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PowerReceiverSystem _powerReceiver = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private AmbientSoundSystem _ambientSoundSystem = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PowerReceiverSystem _powerReceiver = default!;
 
     public override void Initialize()
     {

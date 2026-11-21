@@ -1,29 +1,21 @@
-second = { $count ->
-    [one] секунда
-    [few] секунды
-    [many] секунд
-   *[other] секунд
-}
-dead = { $count ->
-    [one] мёртвый
-    [few] мёртвых
-    [many] мёртвых
-   *[other] мёртвых
-}
--create-3rd-person =
-    { $chance ->
-        [1] Создаёт
-       *[other] создают
-    }
--cause-3rd-person =
+reagent-effect-guidebook-cause-flesh-cultist-infection =
     { $chance ->
         [1] Вызывает
        *[other] вызывают
+    } плотскую инфекцию культиста
+second =
+    { $count ->
+        [one] секунда
+        [few] секунды
+        [many] секунд
+       *[other] секунд
     }
--satiate-3rd-person =
-    { $chance ->
-        [1] Насыщает
-       *[other] насыщают
+dead =
+    { $count ->
+        [one] мёртвый
+        [few] мёртвых
+        [many] мёртвых
+       *[other] мёртвых
     }
 reagent-effect-guidebook-create-entity-reaction-effect =
     { $chance ->
@@ -378,8 +370,3 @@ reagent-effect-guidebook-plant-seeds-remove =
         [1] Удаляет
        *[other] удаляет
     } семена растения
-reagent-effect-guidebook-cause-flesh-cultist-infection =
-    { $chance ->
-        [1] Вызывает
-       *[other] вызывают
-    } плотскую инфекцию культиста

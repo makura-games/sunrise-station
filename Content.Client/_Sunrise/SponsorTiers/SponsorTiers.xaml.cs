@@ -15,7 +15,7 @@ namespace Content.Client._Sunrise.SponsorTiers;
 [GenerateTypedNameReferences]
 public sealed partial class SponsorTiers : Control
 {
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
 
     private readonly ISharedSponsorsManager? _sponsorsManager;
 

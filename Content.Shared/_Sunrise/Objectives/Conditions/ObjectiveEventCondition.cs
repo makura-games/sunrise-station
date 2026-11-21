@@ -63,15 +63,15 @@ public interface IObjectiveEventObserverComponent
 /// <summary>
 /// Base system for one event-history condition and its semantic registration components.
 /// </summary>
-public abstract class ObjectiveEventConditionSystem<TCondition, TOwnerComponent, TObserverComponent> : EntitySystem
+public abstract partial class ObjectiveEventConditionSystem<TCondition, TOwnerComponent, TObserverComponent> : EntitySystem
     where TCondition : ObjectiveEventConditionBase<TCondition>
     where TOwnerComponent : Component, IObjectiveEventOwnerComponent, new()
     where TObserverComponent : Component, IObjectiveEventObserverComponent, new()
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly ObjectiveSystem _objectives = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private ObjectiveSystem _objectives = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     private readonly HashSet<EntityUid> _emptyOwners = [];
     private readonly HashSet<EntityUid> _emptyObservers = [];

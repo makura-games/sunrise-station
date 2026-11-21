@@ -10,8 +10,8 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 public sealed partial class ItemHandledObjectiveConditionSystem
     : ObjectiveConditionSystem<HandsComponent, ItemHandledObjectiveCondition>
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     protected override void Condition(Entity<HandsComponent> entity, ref ObjectiveConditionEvaluateEvent<ItemHandledObjectiveCondition> args)
     {

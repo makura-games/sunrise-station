@@ -12,7 +12,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 public sealed partial class WieldedObjectiveConditionSystem
     : ObjectiveConditionSystem<HandsComponent, WieldedObjectiveCondition>
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     protected override void Condition(Entity<HandsComponent> entity, ref ObjectiveConditionEvaluateEvent<WieldedObjectiveCondition> args)
     {

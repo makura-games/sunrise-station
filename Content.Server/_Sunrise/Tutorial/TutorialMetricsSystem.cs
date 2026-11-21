@@ -7,64 +7,63 @@ using Robust.Server.DataMetrics;
 using Robust.Shared.Asynchronous;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
-using PrometheusMetrics = Prometheus.Metrics;
 
 namespace Content.Server._Sunrise.Tutorial;
 
 /// <summary>
 /// Exposes aggregated tutorial completion table data through Prometheus.
 /// </summary>
-public sealed class TutorialMetricsSystem : EntitySystem
+public sealed partial class TutorialMetricsSystem : EntitySystem
 {
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly IMetricsManager _metrics = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ITaskManager _task = default!;
-    [Dependency] private readonly ILogManager _log = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private IMetricsManager _metrics = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ITaskManager _task = default!;
+    [Dependency] private ILogManager _log = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private static readonly TimeSpan RefreshInterval = TimeSpan.FromMinutes(1);
 
-    private static readonly Gauge TutorialFirstTimeCompletedPlayers = PrometheusMetrics.CreateGauge(
+    private static readonly Gauge TutorialFirstTimeCompletedPlayers = Metrics.CreateGauge(
         "ss14_tutorial_completed_players",
         "Players that completed each tutorial sequence for the first time.",
         new GaugeConfiguration { LabelNames = ["tutorial_id"] });
 
-    private static readonly Gauge TutorialNewAccountCompletedPlayers = PrometheusMetrics.CreateGauge(
+    private static readonly Gauge TutorialNewAccountCompletedPlayers = Metrics.CreateGauge(
         "ss14_tutorial_new_account_completed_players",
         "Players that first completed each tutorial sequence while their account was new.",
         new GaugeConfiguration { LabelNames = ["tutorial_id"] });
 
-    private static readonly Gauge TutorialCompletionCount = PrometheusMetrics.CreateGauge(
+    private static readonly Gauge TutorialCompletionCount = Metrics.CreateGauge(
         "ss14_tutorial_completion_count",
         "Total completion count recorded for each tutorial sequence.",
         new GaugeConfiguration { LabelNames = ["tutorial_id"] });
 
-    private static readonly Counter TutorialStartedTotal = PrometheusMetrics.CreateCounter(
+    private static readonly Counter TutorialStartedTotal = Metrics.CreateCounter(
         "ss14_tutorial_started_total",
         "Tutorial sequence starts, used to measure tutorial popularity.",
         new CounterConfiguration { LabelNames = ["tutorial_id"] });
 
-    private static readonly Gauge TutorialAccountAgeSamples = PrometheusMetrics.CreateGauge(
+    private static readonly Gauge TutorialAccountAgeSamples = Metrics.CreateGauge(
         "ss14_tutorial_account_age_samples",
         "First tutorial completion rows with account age data.",
         new GaugeConfiguration { LabelNames = ["tutorial_id"] });
 
-    private static readonly Gauge TutorialAverageAccountAgeDays = PrometheusMetrics.CreateGauge(
+    private static readonly Gauge TutorialAverageAccountAgeDays = Metrics.CreateGauge(
         "ss14_tutorial_average_account_age_days",
         "Average account age in days when each tutorial sequence was first completed.",
         new GaugeConfiguration { LabelNames = ["tutorial_id"] });
 
-    private static readonly Gauge TutorialLastCompletedAtUnixTime = PrometheusMetrics.CreateGauge(
+    private static readonly Gauge TutorialLastCompletedAtUnixTime = Metrics.CreateGauge(
         "ss14_tutorial_last_completed_at_unixtime",
         "Unix timestamp of the latest completion for each tutorial sequence.",
         new GaugeConfiguration { LabelNames = ["tutorial_id"] });
 
-    private static readonly Gauge TutorialMetricsLastRefreshUnixTime = PrometheusMetrics.CreateGauge(
+    private static readonly Gauge TutorialMetricsLastRefreshUnixTime = Metrics.CreateGauge(
         "ss14_tutorial_metrics_last_refresh_unixtime",
         "Unix timestamp of the last successful tutorial metrics refresh.");
 
-    private static readonly Gauge TutorialNewAccountThresholdSeconds = PrometheusMetrics.CreateGauge(
+    private static readonly Gauge TutorialNewAccountThresholdSeconds = Metrics.CreateGauge(
         "ss14_tutorial_new_account_threshold_seconds",
         "Maximum account age counted as a new account for tutorial completion metrics.");
 

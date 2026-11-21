@@ -1,10 +1,12 @@
 ## Traitor
 
-# Shown at the end of a round of Traitor
+traitor-round-end-codewords = Кодовыми словами были: [color=White]{ $codewords }[/color].
 traitor-round-end-agent-name = предатель
 objective-issuer-syndicate = [color=crimson]Синдикат[/color]
 objective-issuer-unknown = Неизвестно
-traitor-round-end-codewords = Кодовыми словами были: [color=White]{ $codewords }[/color].
+
+# Shown at the end of a round of Traitor
+
 traitor-title = Предатели
 traitor-description = Среди нас есть предатели...
 traitor-not-enough-ready-players = Недостаточно игроков готовы к игре! Из { $minimumPlayers } необходимых игроков готовы { $readyPlayersCount }. Нельзя запустить пресет Предатели.
@@ -34,12 +36,12 @@ traitor-role-codewords =
 traitor-role-uplink-code =
     Установите рингтон Вашего КПК на [color = lightgray]{ $code }[/color] чтобы заблокировать или разблокировать аплинк.
     Не забудьте заблокировать его и сменить код, иначе кто угодно из экипажа станции сможет открыть аплинк!
+traitor-role-uplink-implant =
+    Ваш имплант аплинка активирован, зайдите в него с хотбара.
+    Подключение безопасно, если только кто-то не удалит его из вашего тела.
 # don't need all the flavour text for character menu
 traitor-role-codewords-short =
     Кодовые слова:
     { $codewords }.
-traitor-role-uplink-implant =
-    Ваш имплант аплинка активирован, зайдите в него с хотбара.
-    Подключение безопасно, если только кто-то не удалит его из вашего тела.
 traitor-role-uplink-code-short = Ваш код аплинка: { $code }. Установите его в качестве рингтона КПК для доступа к аплинку.
 traitor-role-uplink-implant-short = Ваш аплинк был имплантирован. Зайдите на него с хотбара.

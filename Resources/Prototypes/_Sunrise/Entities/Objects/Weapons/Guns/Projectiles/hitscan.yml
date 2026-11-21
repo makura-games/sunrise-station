@@ -1,3 +1,42 @@
+# Клиент предсказывает выстрелы меха и создаёт локальную hitscan-сущность.
+# Технические варианты не дают этим сущностям накапливаться после стрельбы.
+- type: entity
+  id: BaseSunriseMechHitscan
+  abstract: true
+  components:
+  - type: TimedDespawn
+    lifetime: 0.1
+
+- type: entity
+  id: SunriseMechHitscanPulse
+  parent: [ Pulse, BaseSunriseMechHitscan ]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: SunriseMechHitscanIgnitionRedLaser
+  parent: [ IgnitionRedLaser, BaseSunriseMechHitscan ]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: SunriseMechHitscanRedHeavyLaser
+  parent: [ RedHeavyLaser, BaseSunriseMechHitscan ]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: SunriseMechHitscanRedLaser
+  parent: [ RedLaser, BaseSunriseMechHitscan ]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: SunriseMechHitscanRedLaserBeam
+  parent: [ RedLaserBeam, BaseSunriseMechHitscan ]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: SunriseMechHitscanRedMediumLaser
+  parent: [ RedMediumLaser, BaseSunriseMechHitscan ]
+  categories: [ HideSpawnMenu ]
+
 - type: entity
   id: RedShuttleMediumLaser
   parent: BasicHitscan
@@ -37,7 +76,7 @@
     damage:
       types:
         Piercing: 25
-        Structural: 10
+        Structural: 3
   - type: StaminaDamageOnCollide
     damage: 15
   - type: ProjectilePierce
@@ -75,8 +114,8 @@
     armorPenetration: 0.25
     damage:
       types:
-        Piercing: 20 #- 30%
-        Structural: 5
+        Piercing: 15 #- 40%
+        Structural: 1
   - type: StaminaDamageOnCollide
     damage: 10
   - type: ProjectilePierce
@@ -166,11 +205,10 @@
     shape: Triangle
     requireInSpace: true
   - type: Projectile
-    armorPenetration: 0.69
+    armorPenetration: 0.50
     damage:
       types:
         Piercing: 15 #- 40%
-        Structural: 2
   - type: StaminaDamageOnCollide
     damage: 8
   - type: ProjectilePierce
@@ -334,13 +372,6 @@
       sprite:
         sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
         state: xray
-
-- type: entity
-  id: AdvancedDisablerBolt
-  parent: DisablerBolt
-  components:
-  - type: StaminaDamageOnCollide
-    damage: 35
 
 - type: entity
   id: PelletShotgunImprovisedSpreadTraceLarge

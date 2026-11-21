@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseWall
+  parent: [ BaseWall, StructureHealthWallWeak ]
   id: WallFlesh
   name: flesh wall
   components:
@@ -17,14 +17,13 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Damageable
-    damageModifierSet: Wood
+    damageModifierSet: WoodMod
   - type: IconSmooth
     key: walls
     base: flesh
   - type: Tag
     tags:
     - Flesh
-    - Wall
     - Window
   - type: TemperatureDamage
     heatDamage:

@@ -1,4 +1,4 @@
-﻿using Content.Server._Sunrise.BloodCult.Items.Components;
+using Content.Server._Sunrise.BloodCult.Items.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Popups;
 using Content.Server.Station.Components;
@@ -21,19 +21,21 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.BloodCult.Items.Systems;
 
-public sealed class TorchCultistsProviderSystem : EntitySystem
+public sealed partial class TorchCultistsProviderSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
-    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedInteractionSystem _interactionSystem = default!;
+    [Dependency] private SharedPointLightSystem _pointLight = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private MapSystem _map = default!;
 
     public override void Initialize()
     {
@@ -212,11 +214,10 @@ public sealed class TorchCultistsProviderSystem : EntitySystem
             }
 
             // don't spawn inside of solid objects
-            var physQuery = GetEntityQuery<PhysicsComponent>();
             var valid = true;
-            foreach (var ent in gridComp.GetAnchoredEntities(tile))
+            foreach (var ent in _map.GetAnchoredEntities(grid, gridComp, tile))
             {
-                if (!physQuery.TryGetComponent(ent, out var body))
+                if (!_physicsQuery.TryGetComponent(ent, out var body))
                     continue;
 
                 if (body.BodyType != BodyType.Static ||
@@ -231,7 +232,7 @@ public sealed class TorchCultistsProviderSystem : EntitySystem
             if (!valid)
                 continue;
 
-            targetCoords = gridComp.GridTileToLocal(tile);
+            targetCoords = _map.GridTileToLocal(grid, gridComp, tile);
             break;
         }
 

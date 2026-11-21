@@ -35,7 +35,7 @@ messenger-connection-label =
     Статус подключения: { $status ->
         [connecting] { messenger-status-connecting }
         [disconnected] { messenger-status-disconnected }
-        *[connected] { messenger-status-connected }
+       *[connected] { messenger-status-connected }
     }
 messenger-system-user-added = добавил(а) { $userName } в группу
 messenger-system-user-removed = удалил(а) { $userName } из группы
@@ -44,10 +44,10 @@ messenger-system-user-removed-by = { $removerName } удалил(а) { $userName
 messenger-emoji-recent-title = Недавно использованные
 messenger-emoji-recent-empty-hint = Здесь будут находиться недавно использованные смайлики
 messenger-emoji-favorite-title = Избранные
-messenger-emoji-favorite-hint = ПКМ по общему списку для добавления.
+messenger-emoji-favorite-hint =
+    ПКМ по общему списку для добавления.
     ПКМ по избранным для удаления.
 messenger-emoji-all-title = Все смайлики
-
 messenger-notification-message = Новое сообщение от { $name }
 messenger-group-notification-message = Новое сообщение в группе { $name }
 messenger-invite-notification-message = Вас пригласили в группу { $name }

@@ -11,7 +11,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 /// </summary>
 public sealed partial class GunShotObjectiveConditionSystem : ObjectiveEventConditionSystem<GunShotObjectiveCondition, ObjectiveCombatOwnerComponent, ObjectiveCombatObserverComponent>
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {

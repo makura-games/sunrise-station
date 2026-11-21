@@ -1,5 +1,5 @@
 ent-SuitStorageEVA = { ent-SuitStorageBase }
-    .suffix = EVA
+    .suffix = ЕВА
     .desc = { ent-SuitStorageBase.desc }
 ent-SuitStorageEVAAlternate = { ent-SuitStorageBase }
     .suffix = EVA, Большой шлем

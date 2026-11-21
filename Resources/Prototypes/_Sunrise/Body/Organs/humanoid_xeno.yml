@@ -1,5 +1,27 @@
 # © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 - type: entity
+  id: SolutionHumanoidXenoFood
+  parent: Solution
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: FluorosulfuricAcidHumanoidXeno
+        Quantity: 5
+
+- type: entity
+  id: SolutionHumanoidXenoStomach
+  parent: SolutionStomach
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      maxVol: 100
+
+- type: entity
   id: BaseHumanoidXenoOrgan
   parent: BaseItem
   abstract: true
@@ -9,17 +31,10 @@
   - type: Organ
   - type: Extractable
     grindableSolutionName: organ
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      organ:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: FluorosulfuricAcidHumanoidXeno
-          Quantity: 5
+    - SolutionSunriseOrganNutriment
+    - SolutionHumanoidXenoFood
   - type: FlavorProfile
     flavors:
       - people
@@ -46,17 +61,10 @@
   - type: Tag
     tags:
     - Meat
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      organ:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: GreyMatter
-          Quantity: 5
+    - SolutionSunriseOrganNutriment
+    - SolutionSunriseBrainFood
   - type: FlavorProfile
     flavors:
     - people
@@ -103,20 +111,11 @@
       - state: lung-r
   - type: Lung
   - type: Metabolizer
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      organ:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-      Lung:
-        maxVol: 100.0
-        canReact: false
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: FluorosulfuricAcidHumanoidXeno
-          Quantity: 5
+    - SolutionSunriseOrganNutriment
+    - SolutionLungGas
+    - SolutionHumanoidXenoFood
 
 - type: entity
   id: OrganHumanoidXenoHeart
@@ -139,15 +138,11 @@
   components:
   - type: Sprite
     state: stomach
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      stomach:
-        maxVol: 100
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: FluorosulfuricAcidHumanoidXeno
-          Quantity: 5
+    - SolutionSunriseOrganNutriment
+    - SolutionHumanoidXenoStomach
+    - SolutionHumanoidXenoFood
   - type: Stomach
   - type: Metabolizer
     maxReagents: 3

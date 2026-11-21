@@ -295,9 +295,6 @@
   id: MagazineMachineGunMG42
 
 - type: Tag
-  id: MagazineMP5
-
-- type: Tag
   id: MagazineMP7
 
 - type: Tag
@@ -380,9 +377,6 @@
 
 - type: Tag
   id: UpgradeLecter
-
-- type: Tag
-  id: UpgradeLecterMk3
 
 - type: Tag
   id: UpgradeWebVest
@@ -584,10 +578,10 @@
 - type: Tag
   id: SpecialMech
 
-# region Misc / fun
 - type: Tag
-  id: BluespaceBox
+  id: SunriseRoverArmor
 
+# region Misc / fun
 - type: Tag
   id: ClownKudzu
 
@@ -788,3 +782,6 @@
 # region Medicine
 - type: Tag
   id: AutoMender  # Используется для whitelist у ClothingBeltMedical =3
+
+- type: Tag
+  id: MedipenCase # Используется для whitelist у ClothingBeltMedical

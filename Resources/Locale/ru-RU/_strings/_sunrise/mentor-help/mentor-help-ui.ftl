@@ -1,3 +1,5 @@
+mentor-help-unknown-user = Неизвестный
+mentor-help-teleport = Телепорт
 ui-lobby-mhelp-button = Помощь наставникам
 ui-options-function-open-mentor-help = Открыть Ментор помощь
 ui-options-function-open-help-choice = Открыть выбор помощи
@@ -18,7 +20,6 @@ mentor-help-claim = Взять
 mentor-help-unassign = Освободить
 mentor-help-close-ticket = Закрыть
 mentor-help-close-confirm = Вы уверены?
-mentor-help-teleport = Телепорт
 mentor-help-cancel = Отмена
 mentor-help-close = Закрыть
 mentor-help-auto-open-tickets = Авто-открытие
@@ -40,10 +41,9 @@ mentor-help-status-awaiting = Ожидает ответа
 mentor-help-status-closed = Закрыт
 mentor-help-status-unknown = Неизвестно
 mentor-help-unassigned = Не назначен
-mentor-help-unknown-user = Неизвестный
 
 # Ticket info
-mentor-help-ticket-info = Статус: {$status} | Назначен: {$assigned} | Создан: {$created}
+mentor-help-ticket-info = Статус: { $status } | Назначен: { $assigned } | Создан: { $created }
 
 # Reply input
 mentor-help-reply-placeholder = Введите ваш ответ...
@@ -63,9 +63,9 @@ mentor-help-statistics-title = Статистика ментор помощи
 mentor-help-statistics-header = Статистика работы менторов
 mentor-help-statistics-content = Здесь будет отображаться статистика по количеству обработанных тикетов и сообщений каждого ментора.
 
-mentor-help-status-label = Статус: {$status}
-mentor-help-assigned-label = Назначен: {$assigned}
-mentor-help-created-label = Создан: {$created}
+mentor-help-status-label = Статус: { $status }
+mentor-help-assigned-label = Назначен: { $assigned }
+mentor-help-created-label = Создан: { $created }
 mentor-help-label-id = ID:
 mentor-help-label-subject = Тема:
 

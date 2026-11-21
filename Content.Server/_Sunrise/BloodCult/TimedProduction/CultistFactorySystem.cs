@@ -1,4 +1,4 @@
-﻿using Content.Shared._Sunrise.BloodCult;
+using Content.Shared._Sunrise.BloodCult;
 using Content.Shared._Sunrise.BloodCult.Components;
 using Content.Shared._Sunrise.BloodCult.UI;
 using Content.Shared.Hands.EntitySystems;
@@ -11,13 +11,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Sunrise.BloodCult.TimedProduction;
 
-public sealed class CultistFactorySystem : EntitySystem
+public sealed partial class CultistFactorySystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

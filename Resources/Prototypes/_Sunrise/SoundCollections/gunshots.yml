@@ -65,12 +65,6 @@
   - /Audio/_Sunrise/Weapons/Guns/Gunshots/ump45-1.ogg
 
 - type: soundCollection
-  id: mp5
-  files:
-  - /Audio/_Sunrise/Weapons/Guns/Gunshots/mp5-1.ogg
-  - /Audio/_Sunrise/Weapons/Guns/Gunshots/mp5-2.ogg
-
-- type: soundCollection
   id: p90
   files:
   - /Audio/_Sunrise/Weapons/Guns/Gunshots/p90-1.ogg

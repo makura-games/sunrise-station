@@ -12,11 +12,11 @@ using Content.Shared._Sunrise.CloudEmote;
 using Robust.Client.GameObjects;
 using Robust.Shared.Map;
 
-public sealed class CloudEmoteSystem : SharedCloudEmoteSystem // Ideally better to be replaced to Control, like SpeechBubble.cs
+public sealed partial class CloudEmoteSystem : SharedCloudEmoteSystem // Ideally better to be replaced to Control, like SpeechBubble.cs
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
     private ISawmill _sawmill = default!;
     private static readonly float GAP_SIZE = 0.3f;
     public CloudEmoteSystem()

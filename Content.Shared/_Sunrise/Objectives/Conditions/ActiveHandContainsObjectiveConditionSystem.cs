@@ -11,7 +11,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 public sealed partial class ActiveHandContainsObjectiveConditionSystem
     : ObjectiveConditionSystem<HandsComponent, ActiveHandContainsObjectiveCondition>
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     protected override void Condition(Entity<HandsComponent> entity, ref ObjectiveConditionEvaluateEvent<ActiveHandContainsObjectiveCondition> args)
     {

@@ -15,9 +15,9 @@ namespace Content.Server._Sunrise.Objectives.Conditions;
 public sealed partial class MessengerOpenedObjectiveConditionSystem
     : ObjectiveEventConditionSystem<MessengerOpenedObjectiveCondition, ObjectiveCommunicationOwnerComponent, ObjectiveCommunicationObserverComponent>
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

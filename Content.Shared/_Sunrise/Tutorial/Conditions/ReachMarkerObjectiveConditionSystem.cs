@@ -12,7 +12,7 @@ namespace Content.Shared._Sunrise.Tutorial.Conditions;
 /// </summary>
 public sealed partial class ReachMarkerObjectiveConditionSystem : ObjectiveConditionSystem<TutorialPlayerComponent, ReachMarkerObjectiveCondition>
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     protected override bool Validate(ReachMarkerObjectiveCondition condition, out string? error)
     {

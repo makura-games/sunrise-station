@@ -10,7 +10,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 /// </summary>
 public sealed partial class HoldInHandsObjectiveConditionSystem : ObjectiveConditionSystem<HandsComponent, HoldInHandsObjectiveCondition>
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     protected override void Condition(Entity<HandsComponent> entity, ref ObjectiveConditionEvaluateEvent<HoldInHandsObjectiveCondition> args)
     {

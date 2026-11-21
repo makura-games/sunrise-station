@@ -5,7 +5,7 @@ namespace Content.Shared._Sunrise.Helpers;
 
 public abstract partial class SharedSunriseHelpersSystem : EntitySystem
 {
-    [Dependency] private readonly EntityManager _entMan = default!;
+    [Dependency] private EntityManager _entMan = default!;
 
     #region Get All/First entity
 

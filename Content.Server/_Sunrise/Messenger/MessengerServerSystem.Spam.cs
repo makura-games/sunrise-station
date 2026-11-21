@@ -104,7 +104,7 @@ public sealed partial class MessengerServerSystem
 
     private void SendSpamWave(EntityUid uid, MessengerServerComponent component)
     {
-        var prototypes = _prototypeManager.EnumeratePrototypes<MessengerSpamPrototype>().ToList();
+        var prototypes = ProtoMan.EnumeratePrototypes<MessengerSpamPrototype>().ToList();
         if (prototypes.Count == 0)
             return;
 
@@ -169,7 +169,7 @@ public sealed partial class MessengerServerSystem
 
     private string GetRandomString(string datasetId)
     {
-        if (!_prototypeManager.TryIndex(datasetId, out LocalizedDatasetPrototype? dataset))
+        if (!ProtoMan.TryIndex(datasetId, out LocalizedDatasetPrototype? dataset))
             return "Error";
 
         var key = _random.Pick(dataset.Values);

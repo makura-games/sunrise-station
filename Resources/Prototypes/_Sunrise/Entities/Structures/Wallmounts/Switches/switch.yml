@@ -5,3 +5,12 @@
   components:
   - type: AccessReader
     access: [["Pirate"]]
+
+- type: entity
+  parent: LockableButton
+  id: LockableButtonPersonal
+  suffix: General access
+  components:
+  - type: Construction
+    graph: LockableButtonPersonal
+    node: SignalButtonNode

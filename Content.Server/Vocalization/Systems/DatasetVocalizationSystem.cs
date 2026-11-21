@@ -6,10 +6,9 @@ using Robust.Shared.Random;
 namespace Content.Server.Vocalization.Systems;
 
 /// <inheritdoc cref="DatasetVocalizerComponent"/>
-public sealed partial class DatasetVocalizationSystem : EntitySystem    // Sunrise-Edit
+public sealed partial class DatasetVocalizationSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -27,7 +26,7 @@ public sealed partial class DatasetVocalizationSystem : EntitySystem    // Sunri
         if (args.Handled)
             return;
 
-        var dataset = _protoMan.Index(ent.Comp.Dataset);
+        var dataset = ProtoMan.Index(ent.Comp.Dataset);
 
         args.Message = _random.Pick(dataset);
         args.Handled = true;

@@ -10,7 +10,7 @@ namespace Content.Client._Sunrise.SponsorTiers;
 [GenerateTypedNameReferences]
 public sealed partial class SponsorTiersUi : DefaultWindow
 {
-    [Dependency] private readonly ServersHubManager _serversHubManager = default!;
+    [Dependency] private ServersHubManager _serversHubManager = default!;
 
     public SponsorTiersUi()
     {

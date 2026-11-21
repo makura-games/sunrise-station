@@ -29,9 +29,9 @@ public sealed partial class ActiveElapsedObjectiveComponent : Component
 /// <summary>
 /// Tracks elapsed-time condition lifecycles without relying on a consumer-owned start timestamp.
 /// </summary>
-public sealed class ElapsedTimeObjectiveConditionSystem : EntitySystem
+public sealed partial class ElapsedTimeObjectiveConditionSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

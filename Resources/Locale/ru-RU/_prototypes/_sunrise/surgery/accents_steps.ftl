@@ -1,6 +1,6 @@
-ent-SurgeryStepExposeVocalCords = Вскрыть голосовые связки
+ent-SurgeryStepExposeVocalCords = вскрыть голосовые связки
     .desc = { ent-SurgeryStepBase.desc }
-ent-SurgeryStepAdjustVocalCords = Скорректировать голосовые связки
+ent-SurgeryStepAdjustVocalCords = скорректировать голосовые связки
     .desc = { ent-SurgeryStepBase.desc }
-ent-SurgeryStepSutureIncision = Зашить разрез
+ent-SurgeryStepSutureIncision = зашить разрез
     .desc = { ent-SurgeryStepBase.desc }

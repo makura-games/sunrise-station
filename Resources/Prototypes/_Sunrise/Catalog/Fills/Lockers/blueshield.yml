@@ -9,10 +9,10 @@
         children:
         - id: CigarGoldCase
           prob: 0.25
-        - id: ClothingMaskGasBlueShield
         - id: ClothingHeadsetAltCommand
         - id: HandheldBSOCrewMonitor
         - id: WeaponMultiphaseGun
+        - id: MedipenCaseBlueShield
 
 - type: entity
   id: LockerBlueshieldFilledHardsuit
@@ -25,9 +25,9 @@
         children:
         - id: CigarGoldCase
           prob: 0.25
-        - id: ClothingMaskGasBlueShield
         - id: ClothingHeadsetAltCommand
         - id: HandheldBSOCrewMonitor
         - id: WeaponMultiphaseGun
         - id: ClothingOuterHardsuitBlueShield
         - id: OxygenTankFilled
+        - id: MedipenCaseBlueShield

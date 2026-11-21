@@ -1,0 +1,43 @@
+- type: lobbyArt
+  id: SunriseWizardsWarden
+  background: /NetTextures/Lobby/Arts/_Wizards/warden.webp
+
+- type: lobbyArt
+  id: SunriseWizardsPharmacy
+  background: /NetTextures/Lobby/Arts/_Wizards/pharmacy.webp
+
+- type: lobbyArt
+  id: SunriseWizardsSsxiv
+  background: /NetTextures/Lobby/Arts/_Wizards/ssxiv.webp
+
+- type: lobbyArt
+  id: SunriseWizardsSusstation
+  background: /NetTextures/Lobby/Arts/_Wizards/susstation.webp
+
+- type: lobbyArt
+  id: SunriseWizardsSkellyVsTheRev
+  background: /NetTextures/Lobby/Arts/_Wizards/skellyvstherev.webp
+
+- type: lobbyArt
+  id: SunriseWizardsDoomed
+  background: /NetTextures/Lobby/Arts/_Wizards/doomed.webp
+
+- type: lobbyArt
+  id: SunriseWizardsBlueprint
+  background: /NetTextures/Lobby/Arts/_Wizards/blueprint.webp
+
+- type: lobbyArt
+  id: SunriseWizardsBehonker
+  background: /NetTextures/Lobby/Arts/_Wizards/behonker.webp
+
+- type: lobbyArt
+  id: SunriseWizardsJustAWeekAway
+  background: /NetTextures/Lobby/Arts/_Wizards/justaweekaway.webp
+
+- type: lobbyArt
+  id: SunriseWizardsJaniShootout
+  background: /NetTextures/Lobby/Arts/_Wizards/janishootout.webp
+
+- type: lobbyArt
+  id: SunriseWizardsInvisibleWall
+  background: /NetTextures/Lobby/Arts/_Wizards/invisiblewall.webp

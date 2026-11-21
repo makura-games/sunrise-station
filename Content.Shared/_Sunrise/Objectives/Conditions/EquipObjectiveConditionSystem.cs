@@ -12,7 +12,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 /// </summary>
 public sealed partial class EquipObjectiveConditionSystem : ObjectiveEventConditionSystem<EquipObjectiveCondition, ObjectiveInteractionOwnerComponent, ObjectiveInteractionObserverComponent>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
     public override void Initialize()
     {
         base.Initialize();

@@ -7,7 +7,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 public sealed partial class InventorySlotContainsObjectiveConditionSystem
     : ObjectiveConditionSystem<InventoryComponent, InventorySlotContainsObjectiveCondition>
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     protected override void Condition(Entity<InventoryComponent> entity, ref ObjectiveConditionEvaluateEvent<InventorySlotContainsObjectiveCondition> args)
     {

@@ -1,12 +1,12 @@
 ent-BaseConstruct = { "" }
     .desc = { "" }
 ent-JuggernautConstruct = juggernaut
-    .desc = big and scary
+    .desc = Big and scary.
 ent-ArtificerConstruct = artificer
-    .desc = create some shit
+    .desc = Create some shit.
 ent-WraithConstruct = wraith
-    .desc = run...
+    .desc = Run...
 ent-ReaperConstruct = reaper
-    .desc = run...
+    .desc = Run...
 ent-ConstructShell = construct shell
-    .desc = empty construct shell
+    .desc = Empty construct shell.

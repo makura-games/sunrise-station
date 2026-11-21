@@ -1,4 +1,4 @@
-ent-BaseBulletStarlight = BaseBullet
+ent-BaseBulletStarlight = baseBullet
     .desc = If you can see this you're probably dead!
 ent-BulletAdvTaser = taser bolt
     .desc = { ent-BaseBulletStarlight.desc }

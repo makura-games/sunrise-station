@@ -2,6 +2,7 @@ name: "Labels: Size"
 on: pull_request_target
 jobs:
   size-label:
+    if: false # Sunrise-Edit - устаревший сценарий Wizden отключён
     runs-on: ubuntu-latest
     steps:
       - name: size-label

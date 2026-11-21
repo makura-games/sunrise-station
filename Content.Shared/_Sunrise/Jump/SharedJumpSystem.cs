@@ -1,7 +1,7 @@
 using Content.Shared._Sunrise.Animations;
 using Content.Shared.Chat;
 using Content.Shared.Chat.Prototypes;
-using Content.Shared.Climbing.Systems;
+using Content.Shared.Climbing.Components;
 using Content.Shared.Emoting;
 using Content.Shared.Gravity;
 using Content.Shared.Mobs.Systems;
@@ -26,31 +26,29 @@ using Robust.Shared.Timing;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Damage.Components;
-using Content.Shared.Ghost;
 using Content.Shared.Buckle;
 
 namespace Content.Shared._Sunrise.Jump;
 
 public abstract partial class SharedJumpSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly StandingStateSystem _standingState = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
-    [Dependency] private readonly ClimbSystem _climb = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedStaminaSystem _staminaSystem = default!;
-    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private SharedGravitySystem _gravity = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StandingStateSystem _standingState = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedStaminaSystem _staminaSystem = default!;
+    [Dependency] private SharedBuckleSystem _buckle = default!;
 
 
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<FixturesComponent> _fixturesQuery;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private EntityQuery<FixturesComponent> _fixturesQuery = default!;
 
     private static readonly EntProtoId JumpStatusEffectKey = "StatusEffectJump";
     private static readonly ProtoId<EmotePrototype> EmoteJumpProto = "Jump";
@@ -69,9 +67,6 @@ public abstract partial class SharedJumpSystem : EntitySystem
         SubscribeLocalEvent<BunnyHopComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMoveSpeed);
         SubscribeLocalEvent<EmoteAnimationComponent, BeforeEmoteEvent>(CheckEmote);
         SubscribeLocalEvent<JumpStatusEffectComponent, StatusEffectRelayedEvent<TryStandDoAfterEvent>>(OnStandAttempt);
-
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _fixturesQuery = GetEntityQuery<FixturesComponent>();
 
         _cfg.OnValueChanged(SunriseCCVars.SunriseCCVars.JumpEnable, OnJumpEnableChanged, true);
         _cfg.OnValueChanged(SunriseCCVars.SunriseCCVars.BunnyHopEnable, OnBunnyHopEnableChanged, true);
@@ -209,7 +204,8 @@ public abstract partial class SharedJumpSystem : EntitySystem
         if (HasComp<ThrownItemComponent>(uid))
             return false;
 
-        if (_climb.IsClimbing(uid))
+        if (TryComp<ClimbingComponent>(uid, out var climbing) &&
+            (climbing.IsClimbing || climbing.NextTransition != null || climbing.DoAfter != null))
             return false;
 
         if (_buckle.IsBuckled(uid))
@@ -269,7 +265,7 @@ public abstract partial class SharedJumpSystem : EntitySystem
             var speedMultiplier = bunnyHopComp.SpeedMultiplier += _bunnyHopSpeedUpPerJump;
             bunnyHopComp.SpeedMultiplier = Math.Min(speedMultiplier, _bunnyHopSpeedLimit);
 
-            _movementSpeedModifier.RefreshMovementSpeedModifiers(ent);
+            _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
         }
 
         return true;

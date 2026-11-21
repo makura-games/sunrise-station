@@ -1,6 +1,6 @@
-ent-BaseWizardObjective = Базовая цель волшебника
+ent-BaseWizardObjective = базовая цель волшебника
     .desc = { ent-BaseObjective.desc }
-ent-WizardSurviveObjective = Выжить
+ent-WizardSurviveObjective = выжить
     .desc = Федерация Космических Волшебников хочет, чтобы вы жили!
-ent-WizardDemonstrateObjective = Продемонстрировать силу
+ent-WizardDemonstrateObjective = продемонстрировать силу
     .desc = Устройте станции хорошую демонстрацию своих магических сил!

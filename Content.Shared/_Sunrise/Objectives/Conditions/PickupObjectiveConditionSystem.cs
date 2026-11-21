@@ -10,7 +10,7 @@ namespace Content.Shared._Sunrise.Objectives.Conditions;
 /// </summary>
 public sealed partial class PickupObjectiveConditionSystem : ObjectiveEventConditionSystem<PickupObjectiveCondition, ObjectiveInteractionOwnerComponent, ObjectiveInteractionObserverComponent>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
     public override void Initialize()
     {
         base.Initialize();

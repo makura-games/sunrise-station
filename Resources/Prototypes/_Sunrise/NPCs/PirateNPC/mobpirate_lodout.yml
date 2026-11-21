@@ -447,7 +447,7 @@
 - type: startingGear
   id: MobPirateT3SMGGear
   equipment:
-    gloves: ClothingHandsSMGC40
+    gloves: ClothingHandsSMGVectorSuper
     belt: ClothingBeltSyndieWebbingTier3SMG
     pocket1: PouchAmmoFilledPistol40
     pocket2: MagazinePistol40SubMachineGunSP
@@ -465,7 +465,7 @@
 - type: startingGear
   id: MobPirateT3MedicGear
   equipment:
-    gloves: ClothingHandsSMGC40
+    gloves: ClothingHandsSMGVectorSuper
     back: ClothingBackDuffelMercenaryTier3Medic
     belt: ClothingBeltMedicalFilled
     shoes: ClothingShoesBootsMagCombat

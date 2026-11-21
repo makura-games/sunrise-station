@@ -9,10 +9,10 @@ namespace Content.Server._Sunrise.Tutorial.Systems;
 /// <summary>
 /// Owns Objective System instances for the currently active tutorial step.
 /// </summary>
-public sealed class TutorialObjectiveSystem : EntitySystem
+public sealed partial class TutorialObjectiveSystem : EntitySystem
 {
-    [Dependency] private readonly ObjectiveSystem _objectives = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private ObjectiveSystem _objectives = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private const string CompletionSource = "TutorialCompletion";
     private const string PreconditionsSource = "TutorialPreconditions";

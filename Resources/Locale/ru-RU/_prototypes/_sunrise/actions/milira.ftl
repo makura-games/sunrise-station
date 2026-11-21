@@ -1,5 +1,5 @@
-ent-ActionToggleWings = Расправить крылья
+ent-ActionToggleWings = расправить крылья
     .desc = Расправить или сложить свои крылья. На вас не должно быть верхней одежды.
 
-ent-ActionToggleFlight = Взмахнуть крыльями
+ent-ActionToggleFlight = взмахнуть крыльями
     .desc = Перейти в полёт, увеличивая скорость ценой выносливости.
