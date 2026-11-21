@@ -1,0 +1,15 @@
+ent-SunriseDiseaseBlankSample = strain blank
+    .desc = A sealed vial of uncharacterized culture medium.
+ent-SunriseDiseaseBlankSampleWeak = { ent-SunriseDiseaseBlankSample }
+    .suffix = Weak
+    .desc = { ent-SunriseDiseaseBlankSample.desc }
+ent-SunriseDiseaseBlankSampleModerate = { ent-SunriseDiseaseBlankSample }
+    .suffix = Moderate
+    .desc = { ent-SunriseDiseaseBlankSample.desc }
+ent-SunriseDiseaseBlankSampleStrong = { ent-SunriseDiseaseBlankSample }
+    .suffix = Strong
+    .desc = { ent-SunriseDiseaseBlankSample.desc }
+ent-SunriseDiseaseBlankSampleBox = strain blank dispenser
+    .desc = A dispenser box with sealed vials inside.
+ent-SunriseCrateDiseaseSynthesis = strain synthesis crate
+    .desc = Culture medium and sealed vials for a virology laboratory.

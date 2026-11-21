@@ -1,0 +1,100 @@
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine, StructureHealthMachine ]
+  id: SunriseDiseaseResearchVessel
+  name: viral research vessel
+  description: A sealed culture vessel with a glass chamber, a sampling port and a research terminal.
+  components:
+  # По образцу сосуда аномалии: культура в колбе и индикатор питания светятся отдельными слоями.
+  - type: Sprite
+    sprite: _Sunrise/Disease/research_vessel.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.DiseaseResearchVesselVisualLayers.Base"]
+    - state: culture
+      shader: unshaded
+      visible: false
+      map: ["vesselCulture"]
+    - state: powered
+      shader: unshaded
+      visible: false
+      map: ["vesselPowered"]
+  - type: Machine
+    board: SunriseDiseaseResearchVesselCircuitboard
+  - type: ResearchClient
+  - type: ActivatableUI
+    key: enum.ResearchClientUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.DiseaseResearchVesselVisuals.Loaded:
+        vesselCulture:
+          True: { visible: true }
+          False: { visible: false }
+      enum.DiseaseResearchVesselVisuals.Active:
+        vesselPowered:
+          True: { visible: true }
+          False: { visible: false }
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: SunriseDiseaseResearchVesselCircuitboard
+  name: viral vessel board
+  description: A machine printed circuit board for a viral research vessel.
+  components:
+  - type: Sprite
+    state: medical
+  - type: MachineBoard
+    prototype: SunriseDiseaseResearchVessel
+    stackRequirements:
+      Manipulator: 2
+      Glass: 5
+      Cable: 5
+
+- type: entity
+  parent: SunriseDiseaseResearchVessel
+  id: SunriseDiseaseResearchVesselExperimental
+  name: experimental viral vessel
+  description: A tall overclocked culture column wrapped in glowing tubes. The glass hums faintly under the pressure.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Disease/research_vessel_experimental.rsi
+    offset: 0,0.5
+    drawdepth: Mobs
+  - type: SpriteFade
+  - type: Machine
+    board: SunriseDiseaseResearchVesselExperimentalCircuitboard
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: SunriseDiseaseResearchVesselExperimentalCircuitboard
+  name: experimental vessel board
+  description: A machine printed circuit board for an experimental viral research vessel.
+  components:
+  - type: Sprite
+    state: medical
+  - type: MachineBoard
+    prototype: SunriseDiseaseResearchVesselExperimental
+    stackRequirements:
+      Manipulator: 3
+      Glass: 10
+      Cable: 5
+      MetalRod: 4
+
+- type: entity
+  parent: BaseFlatpack
+  id: SunriseDiseaseResearchVesselFlatpack
+  name: viral vessel flatpack
+  description: A flatpack used for constructing a viral research vessel.
+  components:
+  - type: Flatpack
+    entity: SunriseDiseaseResearchVessel
+  - type: Sprite
+    layers:
+    - state: base
+    - state: overlay

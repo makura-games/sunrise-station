@@ -1,0 +1,114 @@
+# Препараты из вакцинатора. Болезнь и код штамма проставляет машина при изготовлении.
+- type: entity
+  parent: BaseItem
+  id: SunriseDiseaseVaccine
+  name: vaccine
+  description: A single-use injector of cloudy fluid with a blank label.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: Objects/Specific/Medical/medipen.rsi
+    state: salpen
+  - type: Label
+  - type: Tag
+    tags:
+    - Trash
+    - SunriseDiseaseVaccine
+
+- type: entity
+  parent: SunriseDiseaseVaccine
+  id: SunriseDiseaseSerum
+  name: serum
+  description: A single-use injector of yellowish plasma with a blank label.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/medipen.rsi
+    state: medipen
+  # Сыворотку в многоразовый инжектор не вставить: её запас ограничен кровью донора.
+  - type: Tag
+    tags:
+    - Trash
+    - SunriseDiseaseSerum
+
+- type: entity
+  parent: BaseItem
+  id: SunriseDiseaseFailedVaccine
+  name: spoiled serum
+  description: A cloudy ampoule of separated protein sludge.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: Objects/Specific/Medical/medipen.rsi
+    state: medipen
+    color: "#8A9A5B"
+  - type: Tag
+    tags:
+    - Recyclable
+    - Trash
+
+# Таблетки. Симптоматика есть в медотделе на старте, подавление докупается в карго.
+- type: entity
+  parent: Pill
+  id: SunrisePillAntitussive
+  name: pill
+  suffix: Antitussive, 20u
+  components:
+  - type: Pill
+    pillType: 11
+  - type: Sprite
+    state: pill12
+  - type: Label
+    localizedLabel: pill-label-sunrise-antitussive-20u
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SunriseAntitussive
+        Quantity: 20
+
+- type: entity
+  parent: PillCanister
+  id: SunrisePillCanisterAntitussive
+  name: pill canister
+  suffix: Antitussive, 5
+  components:
+  - type: Label
+    localizedLabel: pill-label-sunrise-antitussive-20u
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: SunrisePillAntitussive
+        amount: 5
+
+- type: entity
+  parent: Pill
+  id: SunrisePillAntimicrobial
+  name: pill
+  suffix: Antimicrobial, 20u
+  components:
+  - type: Pill
+    pillType: 14
+  - type: Sprite
+    state: pill15
+  - type: Label
+    localizedLabel: pill-label-sunrise-antimicrobial-20u
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SunriseAntimicrobial
+        Quantity: 20
+
+- type: entity
+  parent: PillCanister
+  id: SunrisePillCanisterAntimicrobial
+  name: pill canister
+  suffix: Antimicrobial, 5
+  components:
+  - type: Label
+    localizedLabel: pill-label-sunrise-antimicrobial-20u
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: SunrisePillAntimicrobial
+        amount: 5

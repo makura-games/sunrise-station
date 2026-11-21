@@ -1,0 +1,15 @@
+ent-SunriseCrateBiologicalSalvage = заброшенный биоконтейнер
+    .desc = Старый исследовательский контейнер с треснувшим уплотнителем и засохшими биологическими следами вокруг крышки.
+ent-SunriseDiseaseSporeCloud = облако спор
+    .desc = Тонкая взвесь дрейфующих зелёных спор.
+ent-SunriseDiseaseSporeGrowth = споровый нарост
+    .desc = Гроздь вздувшихся грибных мешочков, проросших откуда-то из пола. Вокруг витает мелкая пыль.
+ent-SunriseDiseaseSporeGrowthSpawner = спавнер спорового нароста
+    .desc = { ent-MarkerBase.desc }
+    .suffix = 15%
+ent-SunriseMobCarpSalvageInfected = космический карп
+    .desc = Это космический карп.
+    .suffix = Утилизация, заразные укусы
+ent-SunriseMobSpiderSalvageInfected = космический паук
+    .desc = Большой паук, приспособленный к космическому вакууму.
+    .suffix = Утилизация, заразные укусы

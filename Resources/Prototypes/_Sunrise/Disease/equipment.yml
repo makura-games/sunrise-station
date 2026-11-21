@@ -1,0 +1,163 @@
+# Снаряжение вирусологии, которое открывается исследованиями: визоры, биозащита,
+# средства дезинфекции и многоразовый вакцинный инжектор.
+
+# Основы вирусологии.
+
+# Медицинский HUD с визором вирусолога в одних очках: иконки здоровья и подсветка заражённых предметов.
+- type: entity
+  parent: [ ClothingEyesHudBase, ShowMedicalIcons ]
+  id: SunriseClothingEyesHudMedicalVirology
+  name: medical virology hud
+  description: A medical heads-up display with an extra optical module in a teal casing.
+  components:
+
+# Биозащита.
+
+# Фильтр мелкой фракции задерживает почти все капли: втрое лучше обычной стерильной маски.
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Eyes/Hud/medvirology.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Eyes/Hud/medvirology.rsi
+  - type: Tag
+    tags:
+    - HudMedical
+    - PetWearable
+    - WhitelistChameleon
+- type: entity
+  parent: ClothingMaskSterile
+  id: SunriseClothingMaskSterileAdvanced
+  name: filtering sterile mask
+  description: A tight-fitting sterile mask with a pale green filter layer.
+  components:
+
+# Защиту рук и чистоту перчаток лабораторные перчатки берут у нитриловых.
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Mask/sterile_filtering.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Mask/sterile_filtering.rsi
+- type: entity
+  parent: ClothingHandsGlovesNitrile
+  id: SunriseClothingHandsGlovesVirology
+  name: virology gloves
+  description: Thick teal gloves with a glossy antiseptic coating and reinforced cuffs.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Hands/Gloves/virology.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Hands/Gloves/virology.rsi
+
+# Герметичный биокостюм с избыточным давлением полностью закрывает от касаний, укусов, наростов,
+# капель и облаков. Сам он заразу не собирает, переносчиком становятся только обычные перчатки.
+- type: entity
+  parent: ClothingOuterBioVirology
+  id: SunriseClothingOuterBioVirologyAdvanced
+  name: sealed bio suit
+  description: A sealed, positive-pressure bio suit in bright white with teal panels.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/OuterClothing/Bio/virology_sealed.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/OuterClothing/Bio/virology_sealed.rsi
+
+- type: entity
+  parent: ClothingHeadHatHoodBioVirology
+  id: SunriseClothingHeadHatHoodBioVirologyAdvanced
+  name: sealed bio hood
+  description: A sealed hood with a wide teal-tinted filtered visor.
+  components:
+
+# Распылитель побольше: тот же реагент, но запаса хватает на обработку целого отсека.
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Head/Hoods/Bio/virology_sealed.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Head/Hoods/Bio/virology_sealed.rsi
+- type: entity
+  parent: SunriseDiseaseSprayer
+  id: SunriseDiseaseSprayerLarge
+  name: large disinfectant sprayer
+  suffix: Empty
+  description: A roomy canister with a hand pump and a long hose.
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/Hydroponics/sprays.rsi
+    state: pestspray
+  - type: Solution
+    solution:
+      maxVol: 150
+  - type: Spray
+    transferAmount: 10
+
+# Обычный химический дым тут не годится: он реагирует только с кровотоком живых и не трогает
+# заражённые предметы. Поэтому граната гасит очаги сама, а дым выпускает только для вида.
+- type: entity
+  parent: [ BaseMedicalContraband, SmokeGrenade ]
+  id: SunriseDisinfectantGrenade
+  name: disinfectant grenade
+  description: A canister with a green stripe and a droplet pictogram on the side.
+  components:
+
+# Облачко, которое стерилизующая арка оставляет после распыления.
+  - type: Sprite
+    sprite: Objects/Weapons/Grenades/smoke.rsi
+    color: "#AEE6E6"
+  - type: SmokeOnTrigger
+    keysIn:
+    - timer
+    duration: 8
+    spreadAmount: 20
+- type: entity
+  id: SunriseDisinfectantMist
+  name: disinfectant mist
+  description: A fine mist of disinfectant settling down.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Effects/chemsmoke.rsi
+    state: chemsmoke
+    color: "#AEE6E6AA"
+    drawdepth: Effects
+  - type: TimedDespawn
+    lifetime: 1.5
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# Массовая вакцинация.
+
+# Вакцина в слоте не расходуется: одна ампула прививает весь отдел. Сыворотку сюда не вставить,
+# её запас ограничен кровью донора.
+- type: entity
+  parent: BaseItem
+  id: SunriseDiseaseVaccineInjector
+  name: vaccine injector
+  description: A reusable pneumatic injector with a window for the cartridge.
+  components:
+  - type: Item
+    size: Small
+    sprite: _Sunrise/Disease/vaccine_injector.rsi
+  - type: Sprite
+    sprite: _Sunrise/Disease/vaccine_injector.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Disease/vaccine_injector.rsi
+    quickEquip: false
+    slots:
+    - Belt
+  - type: ItemSlots
+    slots:
+      vaccine:
+        name: disease-slot-vaccine
+        whitelist:
+          tags:
+          - SunriseDiseaseVaccine
+  - type: ContainerContainer
+    containers:
+      vaccine: !type:ContainerSlot
+  # Заряженная вакцина видна в окошке инжектора.
+  - type: ItemMapper
+    mapLayers:
+      loaded:
+        whitelist:
+          tags:
+          - SunriseDiseaseVaccine
+  - type: Appearance

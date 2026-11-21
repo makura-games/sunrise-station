@@ -1,0 +1,51 @@
+# Чашки Петри и лабораторные образцы штаммов: второй путь исследования, не требующий больных.
+
+- type: entity
+  parent: BaseItem
+  id: SunrisePetriDish
+  name: petri dish
+  description: A sterile dish with a thin layer of nutrient medium under the lid.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _Sunrise/Disease/petri_dish.rsi
+    layers:
+    - state: icon
+      map: [ "enum.DiseaseCultureVisualLayers.Base" ]
+  - type: Appearance
+  - type: Tag
+    tags:
+    - Recyclable
+    - Trash
+
+- type: entity
+  parent: BaseAmmoProvider
+  id: SunrisePetriDishBox
+  name: petri dish dispenser
+  description: A dispenser box with sterile petri dishes inside.
+  components:
+  - type: Sprite
+    layers:
+    - state: boxwide
+    - state: beaker
+
+- type: entity
+  parent: BaseItem
+  id: SunriseDiseaseStrainVial
+  name: strain sample
+  description: A sealed vial with a lab sample of a strain.
+  components:
+  # Спрайты в руках берутся у обычной пробирки, своих у штаммов нет.
+  - type: Item
+    size: Tiny
+    sprite: Objects/Specific/Chemistry/vial.rsi
+  # Цвет наклейки отличает штамм из базы, заготовку и спроектированный штамм.
+  - type: Sprite
+    sprite: _Sunrise/Disease/strain_vial.rsi
+    state: strain
+  - type: Label
+  - type: Tag
+    tags:
+    - Recyclable
+    - Trash

@@ -1,0 +1,10 @@
+ent-SunriseDiseaseResearchVessel = вирусологический сосуд
+    .desc = Герметичный сосуд для культур со стеклянной камерой, пробоотборником и исследовательским терминалом.
+ent-SunriseDiseaseResearchVesselCircuitboard = плата вирусологического сосуда
+    .desc = Печатная плата для вирусологического исследовательского сосуда.
+ent-SunriseDiseaseResearchVesselExperimental = экспериментальный вирусологический сосуд
+    .desc = Высокая разогнанная колонна для культур, обвитая светящимися трубками. Стекло тихо гудит под давлением.
+ent-SunriseDiseaseResearchVesselExperimentalCircuitboard = плата опытного сосуда
+    .desc = Печатная плата для экспериментального вирусологического сосуда.
+ent-SunriseDiseaseResearchVesselFlatpack = флэтпак вирусологического сосуда
+    .desc = Флэтпак для сборки вирусологического сосуда.

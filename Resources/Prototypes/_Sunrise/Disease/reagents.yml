@@ -1,0 +1,74 @@
+# Реагенты системы болезней. Ни один из них не лечит полностью: это задача вакцины или сыворотки.
+- type: reagent
+  id: SunriseAntitussive
+  name: reagent-name-sunrise-antitussive
+  group: Medicine
+  desc: reagent-desc-sunrise-antitussive
+  physicalDesc: reagent-physical-desc-sunrise-antitussive
+  flavor: medicine
+  color: "#C9A227"
+- type: reagent
+  id: SunriseAntimicrobial
+  name: reagent-name-sunrise-antimicrobial
+  group: Medicine
+  desc: reagent-desc-sunrise-antimicrobial
+  physicalDesc: reagent-physical-desc-sunrise-antimicrobial
+  flavor: bitter
+  color: "#4F8A8B"
+- type: reagent
+  id: SunriseDisinfectant
+  name: reagent-name-sunrise-disinfectant
+  group: Medicine
+  desc: reagent-desc-sunrise-disinfectant
+  physicalDesc: reagent-physical-desc-sunrise-disinfectant
+  flavor: bitter
+  color: "#AEE6E6"
+  metabolisms:
+    Bloodstream:
+      metabolismRate: 0.5
+      effects:
+      # Внутрь его не принимают: это наружное средство для очагов, а не лекарство.
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 1
+
+# Что именно гасит заразу и сколько его должно попасть за одно касание.
+# Облако из распылителя отдаёт раствор долями, так что одна капля очаг не гасит.
+- type: reaction
+  id: SunriseDisinfectant
+  reactants:
+    Ethanol:
+      amount: 1
+    Iodine:
+      amount: 1
+  products:
+    SunriseDisinfectant: 2
+
+# Готовая тара с дезинфектантом, как у ванильных реагентов: бутылка для выдачи из химии
+# и мензурка на рабочее место. Рецепт из дозатора при этом никуда не девается.
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: SunriseChemistryBottleDisinfectant
+  suffix: disinfectant
+  components:
+  - type: Label
+    localizedLabel: reagent-name-sunrise-disinfectant
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SunriseDisinfectant
+        Quantity: 30
+
+- type: entity
+  parent: Beaker
+  id: SunriseBeakerSmallDisinfectant
+  suffix: disinfectant
+  components:
+  - type: Label
+    localizedLabel: reagent-name-sunrise-disinfectant
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SunriseDisinfectant
+        Quantity: 60
