@@ -64,10 +64,15 @@ public sealed partial class SunriseInventorySystem
         return true;
     }
 
-    private bool TryEquipSponsorItem(EntityUid mob, string slot, SponsorInventoryItemInfo item)
+    /// <summary>
+    /// Надевает спонсорскую вещь в слот, заменяя штатную вещь профессии. Содержимое хранилища старой вещи
+    /// и вещи из зависимых слотов (карманы, ID-карта, хранилище костюма) переносятся на новую экипировку.
+    /// </summary>
+    internal bool TryEquipSponsorItem(EntityUid mob, string slot, SponsorInventoryItemInfo item)
     {
         var spawned = Spawn(item.EntityPrototype, Transform(mob).Coordinates);
-        if (!_inventory.CanEquip(mob, spawned, slot, out _))
+        // Слот обычно уже занят штатной вещью профессии, поэтому проверяем его как свободный: замена идёт ниже.
+        if (!_inventory.CanEquip(mob, spawned, slot, out _, assumeEmpty: true))
         {
             QueueDel(spawned);
             return false;
@@ -92,6 +97,7 @@ public sealed partial class SunriseInventorySystem
             return false;
         }
 
+        RestoreDependentSlotItems(mob, replacement.DependentItems);
         DeletePreviousSponsorItem(replacement);
         return true;
     }
@@ -107,16 +113,71 @@ public sealed partial class SunriseInventorySystem
 
         var previousItem = existing.Value;
 
+        // Вещи из зависимых слотов снимаем заранее: иначе снятие основной вещи бросит их на пол.
+        var dependentItems = TakeDependentSlotItems(mob, slot);
+
         // Storage contents are detached before unequip so rollback can restore the old container.
         var previousStorageItems = TakeStorageItems(previousItem);
         if (_inventory.TryUnequip(mob, slot, out _, silent: true, force: true, reparent: false))
         {
-            replacement = new SponsorSlotReplacement(previousItem, previousStorageItems);
+            replacement = new SponsorSlotReplacement(previousItem, previousStorageItems, dependentItems);
             return true;
         }
 
         MoveStorageItemsOrDelete(previousItem, previousStorageItems);
+        RestoreDependentSlotItems(mob, dependentItems);
         return false;
+    }
+
+    /// <summary>
+    /// Снимает вещи из слотов, которые зависят от заменяемого (например, карманы и ID-карта зависят от формы).
+    /// </summary>
+    private List<(string Slot, EntityUid Item)> TakeDependentSlotItems(EntityUid mob, string slot)
+    {
+        var items = new List<(string Slot, EntityUid Item)>();
+        if (!_inventory.TryGetSlots(mob, out var slots))
+            return items;
+
+        foreach (var definition in slots)
+        {
+            if (definition.DependsOn != slot ||
+                !_inventory.TryUnequip(mob, definition.Name, out var removed, silent: true, force: true, reparent: false) ||
+                removed == null)
+            {
+                continue;
+            }
+
+            items.Add((definition.Name, removed.Value));
+        }
+
+        return items;
+    }
+
+    /// <summary>
+    /// Возвращает вещи в зависимые слоты. Если новая экипировка не даёт слот (например, хранилище костюма),
+    /// вещь кладётся в рюкзак, а если места нет — остаётся рядом с игроком.
+    /// </summary>
+    private void RestoreDependentSlotItems(EntityUid mob, List<(string Slot, EntityUid Item)>? items)
+    {
+        if (items == null)
+            return;
+
+        foreach (var (slot, item) in items)
+        {
+            if (TerminatingOrDeleted(item) || _inventory.TryEquip(mob, item, slot, silent: true))
+                continue;
+
+            TryStoreInBack(mob, item);
+        }
+    }
+
+    private bool TryStoreInBack(EntityUid mob, EntityUid item)
+    {
+        return _inventory.TryGetSlotEntity(mob, "back", out var back) &&
+               TryComp<StorageComponent>(back, out var storage) &&
+               TryComp<ItemComponent>(item, out var itemComp) &&
+               _storage.TryGetAvailableGridSpace((back.Value, storage), (item, itemComp), out var location) &&
+               _storage.InsertAt((back.Value, storage), (item, itemComp), location.Value, out _, playSound: false, stackAutomatically: false);
     }
 
     private bool TryFinishSponsorSlotReplacement(
@@ -148,6 +209,8 @@ public sealed partial class SunriseInventorySystem
 
         if (replacement.PreviousStorageItems != null)
             MoveStorageItemsOrDelete(replacement.PreviousItem.Value, replacement.PreviousStorageItems);
+
+        RestoreDependentSlotItems(mob, replacement.DependentItems);
     }
 
     private void DeletePreviousSponsorItem(SponsorSlotReplacement replacement)
@@ -246,8 +309,9 @@ public sealed partial class SunriseInventorySystem
 
     private readonly record struct SponsorSlotReplacement(
         EntityUid? PreviousItem,
-        List<EntityUid>? PreviousStorageItems)
+        List<EntityUid>? PreviousStorageItems,
+        List<(string Slot, EntityUid Item)>? DependentItems)
     {
-        public static readonly SponsorSlotReplacement Empty = new(null, null);
+        public static readonly SponsorSlotReplacement Empty = new(null, null, null);
     }
 }
