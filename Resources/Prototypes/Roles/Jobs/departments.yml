@@ -96,6 +96,7 @@
   - Psychologist
   - Paramedic
   - MedicalPathologist  # Sunrise-pathologist
+  - Virologist  # Sunrise-virologist
 
 - type: department
   id: Science

@@ -92,3 +92,5 @@ JobPrisonScientist = тюремный учёный
 JobUSSPCaptain = капитан СССП
 JobBarber = парикмахер
 JobAdjutant = адъютант
+job-description-virologist = Выявляйте вспышки, растите культуры и делайте вакцины, пока отдел не слёг целиком.
+job-alt-title-epidemiologist = Эпидемиолог

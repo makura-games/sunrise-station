@@ -1,0 +1,29 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+              Orientation="Vertical"
+              Margin="5 5 5 5">
+    <PanelContainer HorizontalExpand="True">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxFlat BorderThickness="1" BorderColor="#777777"/>
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical">
+            <PanelContainer Name="NameBackground" HorizontalExpand="True" VerticalExpand="False">
+                <RichTextLabel Name="SymptomName" HorizontalAlignment="Center"/>
+            </PanelContainer>
+            <BoxContainer Name="EffectsContainer" HorizontalExpand="True">
+                <Collapsible HorizontalExpand="True">
+                    <CollapsibleHeading Title="{Loc 'guidebook-disease-symptom-effects-header'}"/>
+                    <CollapsibleBody>
+                        <BoxContainer Name="EffectsDescriptionContainer"
+                                      Orientation="Vertical"
+                                      Margin="25 0 10 0"
+                                      HorizontalExpand="True"/>
+                    </CollapsibleBody>
+                </Collapsible>
+            </BoxContainer>
+            <BoxContainer Margin="10 5 10 10" HorizontalExpand="True">
+                <RichTextLabel Name="SymptomProperties" HorizontalAlignment="Left"/>
+            </BoxContainer>
+        </BoxContainer>
+    </PanelContainer>
+</BoxContainer>

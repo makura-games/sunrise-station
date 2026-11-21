@@ -95,3 +95,5 @@ ent-PiratePDAMusicPassengerId = { ent-PiratePDAMusic }
     .desc = { ent-PiratePDAMusic.desc }
 ent-SecuritySergeantPDA = КПК сержанта СБ
     .desc = Всё ещё работает. В отличие от владельца, не кричит на вас.
+ent-VirologistPDA = КПК вирусолога
+    .desc = Слабо пахнет дезинфектантом.

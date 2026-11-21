@@ -6,6 +6,14 @@
 - type: latheRecipePack
   id: CircuitDynamicSunrise
   recipes:
+  # Вирусология: платы машин отдела и стерилизующей арки.
+  - DiagnoserMachineCircuitboard
+  - VaccinatorMachineCircuitboard
+  - SunriseDiseaseMicroscopeCircuitboard
+  - SunriseDiseaseResearchVesselCircuitboard
+  - SunriseDiseaseResearchVesselExperimentalCircuitboard
+  - SunriseDiseaseDatabaseCircuitboard
+  - SunriseDiseaseSterilizerCircuitboard
   - GygaxCentralElectronics
   - GygaxPeripheralsElectronics
   - GygaxTargetingElectronics

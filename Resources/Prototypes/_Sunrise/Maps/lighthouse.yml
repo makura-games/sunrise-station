@@ -31,6 +31,7 @@
             CargoTechnician: [ 2, 2 ]
             MedicalDoctor: [ 5, 7 ]
             Chemist: [ 2, 3 ]
+            Virologist: [ 1, 1 ]
             ResearchDirector: [ 1, 1 ]
             Scientist: [ 3, 3 ]
             HeadOfSecurity: [ 1, 1 ]

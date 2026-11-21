@@ -87,3 +87,5 @@ JobNtrLeadGuard = командир ИСН
 JobNtrOfficer = офицер ИСН
 JobMailCarrier = почтальон
 job-name-TSF = Trans-Solar Federation
+job-description-virologist = Track outbreaks, grow cultures and make vaccines before the whole department goes down.
+job-alt-title-epidemiologist = Epidemiologist

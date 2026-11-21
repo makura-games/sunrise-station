@@ -267,7 +267,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsMedical ]
+      board: [ DoorElectronicsVirology ] # Sunrise-Edit - доступ вирусологии вместо общемедицинского
 
 - type: entity
   parent: AirlockChemistry
@@ -699,7 +699,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsMedical ]
+      board: [ DoorElectronicsVirology ] # Sunrise-Edit - доступ вирусологии вместо общемедицинского
 
 - type: entity
   parent: AirlockScienceGlass

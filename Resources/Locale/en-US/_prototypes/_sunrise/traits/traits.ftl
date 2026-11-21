@@ -13,3 +13,5 @@ trait-transliteration-accent-name = Transliteration Accent
 trait-transliteration-accent-desc = You keep mixing sounds, transliterating words as you go.
 
 trait-category-vocal = Vocal
+trait-sunrise-cold-name = Cold
+trait-sunrise-cold-desc = You started the shift with a cold. You will cough and sneeze for a while, but it is not contagious and clears up on its own.

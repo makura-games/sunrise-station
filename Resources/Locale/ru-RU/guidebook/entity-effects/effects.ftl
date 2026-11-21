@@ -177,13 +177,15 @@ entity-effect-guidebook-status-effect-indef =
         [0] немедленно
        *[other] после задержки { NATURALFIXED($delay, 3) } { MANY("second", $delay) }
     }
+# Sunrise-Edit - в ветке [update] стоял LOC($key), но эффект опрокидывания аргумент key не передаёт,
+# и гайдбук падал при отрисовке. Заменено на обычное слово, как в соседних ветках.
 entity-effect-guidebook-knockdown =
     { $type ->
         [update]
             { $chance ->
                 [1] Вызывает
                *[other] вызывают
-            } { LOC($key) } минимум на { NATURALFIXED($time, 3) } { MANY("second", $time) } без накопления
+            } опрокидывание минимум на { NATURALFIXED($time, 3) } { MANY("second", $time) } без накопления
         [add]
             { $chance ->
                 [1] Вызывает

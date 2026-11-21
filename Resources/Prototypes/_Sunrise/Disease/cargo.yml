@@ -1,0 +1,53 @@
+# Товар под заражённый ящик. Он лежит в отдельном рынке, которого нет в allowedGroups
+# грузовых консолей, поэтому заказать его со станции нельзя — только прислать событием.
+- type: cargoMarket
+  id: SunriseCovertShipments
+
+- type: cargoProduct
+  id: SunriseContaminatedAid
+  icon:
+    sprite: Objects/Specific/Medical/firstaidkits.rsi
+    state: firstaid
+  product: SunriseCrateContaminatedAid
+  cost: 2400
+  category: cargoproduct-category-name-medical
+  group: SunriseCovertShipments
+
+# Набор пополнения ViroDrobe. Автомат выдаёт заготовки и приборы, поэтому общий набор гардеробов
+# его больше не пополняет, а этот стоит не дешевле ящика синтеза в пересчёте на заготовки.
+- type: entity
+  parent: BaseVendingMachineRestock
+  id: SunriseVendingMachineRestockViroDrobe
+  name: ViroDrobe restock box
+  description: A sealed restock box with a biohazard stripe. Slot into the virology vendor.
+  components:
+  - type: VendingMachineRestock
+    canRestock:
+    - ViroDrobeInventory
+  - type: Sprite
+    layers:
+    - state: base
+    - state: green_bit
+      shader: unshaded
+    - state: refill_medical
+
+- type: entity
+  parent: CrateMedicalSecure
+  id: SunriseCrateVendingMachineRestockViroDrobeFilled
+  name: ViroDrobe restock crate
+  description: Contains a restock box for the virology vendor.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: SunriseVendingMachineRestockViroDrobe
+
+- type: cargoProduct
+  id: SunriseCrateVendingMachineRestockViroDrobe
+  icon:
+    sprite: Objects/Specific/Service/vending_machine_restock.rsi
+    state: base
+  product: SunriseCrateVendingMachineRestockViroDrobeFilled
+  cost: 3200
+  category: cargoproduct-category-name-medical
+  group: market

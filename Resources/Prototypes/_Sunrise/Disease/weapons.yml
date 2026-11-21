@@ -1,0 +1,64 @@
+# Аэрозольное снаряжение ядерных оперативников и диверсионного отряда.
+
+- type: entity
+  parent: [ VolatileGrenadeBase, TimerGrenadeBase, BaseSyndicateContraband ]
+  id: SunriseVirologyGrenade
+  name: biohazard canister
+  description: A sealed canister of weaponised aerosol. The label is a biohazard trefoil and nothing else.
+  components:
+  # Зелёный оттенок отличает баллон от обычных гранат Синдиката прямо в руках.
+  - type: Sprite
+    sprite: Objects/Weapons/Grenades/syndgrenade.rsi
+    color: "#8FBF6F"
+  - type: DiseaseCloudOnTrigger
+    keysIn:
+    - timer
+    diseases:
+    - SunriseSyndicateHaze
+    cloudPrototype: SunriseSyndicateDiseaseCloud
+    clouds: 8
+    spreadRange: 4
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
+    sound:
+      path: /Audio/Effects/spray.ogg
+    positional: true
+  - type: DeleteOnTrigger
+    keysIn:
+    - timer
+  - type: TimerTriggerVisuals
+    primingSound:
+      path: /Audio/Items/smoke_grenade_prime.ogg
+
+# Более плотный аэрозоль использует ту же механику заражения, что и облака артефакта.
+- type: entity
+  parent: SunriseDiseaseCloud
+  id: SunriseSyndicateDiseaseCloud
+  name: infectious aerosol
+  description: A dense green haze carrying a persistent chemical smell.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: DiseaseCloud
+    range: 2.5
+    chance: 0.8
+  - type: TimedDespawn
+    lifetime: 25
+
+- type: listing
+  id: SunriseUplinkVirologyGrenade
+  name: uplink-sunrise-virology-grenade-name
+  description: uplink-sunrise-virology-grenade-desc
+  productEntity: SunriseVirologyGrenade
+  cost:
+    Telecrystal: 8
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - AssaultOpsUplink
+  - !type:ListingLimitedStockCondition
+    stock: 2

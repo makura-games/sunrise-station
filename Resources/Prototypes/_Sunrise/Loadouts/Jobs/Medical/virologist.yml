@@ -1,0 +1,42 @@
+# Снаряжение вирусолога собрано из уже существующей ванильной одежды вирусологии:
+# костюмы, рюкзаки и биозащита от прежней версии отдела остались в игре.
+
+- type: loadout
+  id: SunriseVirologistJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitVirology
+
+- type: loadout
+  id: SunriseVirologistJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtVirology
+
+- type: loadout
+  id: SunriseVirologistBackpack
+  equipment:
+    back: ClothingBackpackVirology
+
+- type: loadout
+  id: SunriseVirologistSatchel
+  equipment:
+    back: ClothingBackpackSatchelVirology
+
+- type: loadout
+  id: SunriseVirologistDuffel
+  equipment:
+    back: ClothingBackpackDuffelVirology
+
+- type: loadoutGroup
+  id: SunriseVirologistJumpsuit
+  name: loadout-group-virologist-jumpsuit
+  loadouts:
+  - SunriseVirologistJumpsuit
+  - SunriseVirologistJumpskirt
+
+- type: loadoutGroup
+  id: SunriseVirologistBackpack
+  name: loadout-group-virologist-backpack
+  loadouts:
+  - SunriseVirologistBackpack
+  - SunriseVirologistSatchel
+  - SunriseVirologistDuffel

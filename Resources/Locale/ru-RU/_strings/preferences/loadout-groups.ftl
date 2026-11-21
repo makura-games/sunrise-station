@@ -180,3 +180,5 @@ loadout-group-tramdriver-jumpsuit = Комбинезон водителя тра
 loadout-group-tramdriver-outerclothing = Костюм водителя трамвая
 loadout-group-tramdriver-hat = Шапка водителя трамвая
 loadout-group-tramdriver-gloves = Перчатки водителя трамвая
+loadout-group-virologist-jumpsuit = Вирусолог: униформа
+loadout-group-virologist-backpack = Вирусолог: рюкзак

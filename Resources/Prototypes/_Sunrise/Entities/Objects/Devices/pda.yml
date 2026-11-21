@@ -533,3 +533,13 @@
   components:
   - type: Pda
     id: PassengerIDCard
+
+# Вирусолог: внешне КПК химика, внутри своя карта.
+- type: entity
+  parent: ChemistryPDA
+  id: VirologistPDA
+  name: virologist PDA
+  description: Smells faintly of disinfectant.
+  components:
+  - type: Pda
+    id: VirologistIDCard

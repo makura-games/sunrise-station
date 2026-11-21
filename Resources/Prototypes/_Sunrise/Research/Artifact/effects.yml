@@ -459,3 +459,24 @@
   - type: XAECreateGas
     gases:
       Helium: 300
+
+# Выброс заразного аэрозоля: артефакт окутывает отсек облаками, которыми опасно дышать.
+- type: entity
+  id: SunriseEffectDiseaseCloud
+  parent: BaseXenoArtifactEffect
+  description: Releases clouds of infectious haze
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: XenoArtifactNode
+    maxDurability: 5
+    maxDurabilityCanDecreaseBy:
+      min: 0
+      max: 3
+  - type: XAEDiseaseCloud
+    clouds: 3
+    spreadRange: 2.5
+    diseases:
+    - SunriseInfluenza
+    - SunriseGastroenteritis
+    - SunriseXenoSpores
+    - SunriseAnomalousBlight

@@ -49,6 +49,7 @@
   - CargoPurchaseAccess  # Sunrise-edit
   - ResearchConsoleAccess  # Sunrise-edit
 
+  - Virology # Sunrise-edit - вирусологическая лаборатория
 - type: accessGroup
   id: General
   tags:

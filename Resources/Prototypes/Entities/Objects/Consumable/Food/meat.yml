@@ -67,6 +67,14 @@
     entity: FoodMeatRotten
     # once it would say bloated, turn into the rotten prototype
     stage: 1
+  # Sunrise-Edit start - редкий шанс, что сырое мясо окажется с паразитами.
+  # Виды, чей желудок переваривает сырьё, от такого мяса не заболеют.
+  - type: DiseaseContamination
+    chance: 0.05
+    diseases:
+    - SunriseParasiticInfestation
+    - SunriseGastroenteritis
+  # Sunrise-Edit end
 
 # Raw
 
@@ -1482,6 +1490,13 @@
       - state: generic-pink-inhand-left
       right:
       - state: generic-pink-inhand-right
+  # Sunrise-Edit start - сырые котлеты не наследуют FoodMeatRawBase, поэтому шанс ставится отдельно
+  - type: DiseaseContamination
+    chance: 0.05
+    diseases:
+    - SunriseParasiticInfestation
+    - SunriseGastroenteritis
+  # Sunrise-Edit end
 
 - type: entity
   parent: FoodMeatCutletBase

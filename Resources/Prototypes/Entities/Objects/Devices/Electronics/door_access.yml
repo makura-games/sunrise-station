@@ -49,6 +49,7 @@
     access: [["Bar"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       red: RedAlertAccesses
       blue: BlueAlertAccessesHOS
       yellow: YellowAlertAccesses
@@ -67,6 +68,7 @@
     access: [["Bar"], ["Kitchen"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       red: RedAlertAccesses
       blue: BlueAlertAccessesHOS
       yellow: YellowAlertAccesses
@@ -85,6 +87,7 @@
     access: [["Hydroponics"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       red: RedAlertAccesses
       blue: BlueAlertAccessesHOS
       yellow: YellowAlertAccesses
@@ -102,6 +105,7 @@
     access: [["Chapel"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       red: RedAlertAccesses
       blue: BlueAlertAccessesHOS
       yellow: YellowAlertAccesses
@@ -120,6 +124,7 @@
     access: [["Theatre"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       red: RedAlertAccesses
       blue: BlueAlertAccessesHOS
       yellow: YellowAlertAccesses
@@ -138,6 +143,7 @@
     access: [["Kitchen"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       red: RedAlertAccesses
       blue: BlueAlertAccessesHOS
       yellow: YellowAlertAccesses
@@ -156,6 +162,7 @@
     access: [["Kitchen"], ["Hydroponics"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       red: RedAlertAccesses
       blue: BlueAlertAccessesHOS
       yellow: YellowAlertAccesses
@@ -174,6 +181,7 @@
     access: [["Janitor"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       red: RedAlertAccesses
       blue: BlueAlertAccessesHOS
       yellow: YellowAlertAccesses
@@ -209,6 +217,7 @@
     access: [["Service"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       red: RedAlertAccesses
       blue: BlueAlertAccessesHOS
       yellow: YellowAlertAccesses
@@ -235,6 +244,7 @@
     access: [["Quartermaster"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       delta: AllAccess
     # Sunrise-end
 
@@ -247,6 +257,7 @@
     access: [["Salvage"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       blue: BlueAlertAccessesHOS
       red: RedAlertAccesses
       yellow: YellowAlertAccesses
@@ -264,6 +275,7 @@
     access: [["Cargo"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       blue: BlueAlertAccessesHOS
       red: RedAlertAccesses
       yellow: YellowAlertAccesses
@@ -294,6 +306,7 @@
     access: [["Atmospherics"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       blue: BlueAlertAccessesHOS
       red: RedAlertAccesses
       gamma: GammaAlertAccesses
@@ -310,6 +323,7 @@
     access: [["Engineering"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       blue: BlueAlertAccessesHOS
       red: RedAlertAccesses
       gamma: GammaAlertAccesses
@@ -356,6 +370,7 @@
     access: [["Research"], ["Medical"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       blue: BlueAlertAccessesHOS
       red: RedAlertAccesses
       yellow: YellowAlertAccesses
@@ -373,6 +388,7 @@
     access: [["Research"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       blue: BlueAlertAccessesHOS
       red: RedAlertAccesses
       yellow: YellowAlertAccesses
@@ -554,6 +570,7 @@
     access: [["Maintenance"]]
     # Sunrise-start
     alertAccesses:
+      violet: VioletAlertAccesses # Sunrise-Edit - биологическая угроза
       blue: BlueAlertAccesses
       red: RedAlertAccesses
       gamma: GammaAlertAccesses

@@ -7,6 +7,11 @@
   - Chemist
   - Cloning
   - Cryogenics
+  # Sunrise added start - вирусология
+  - SunriseVirologySelection
+  - SunriseVirologyBiosafety
+  - SunriseVirologySymptoms
+  # Sunrise added end
 
 - type: guideEntry
   id: MedicalDoctor

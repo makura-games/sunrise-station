@@ -9,3 +9,60 @@
     whitelist:
       tags:
       - SovietPinsExped
+
+# Вирусология: повод работать в лаборатории и без вспышки на станции.
+
+# Вакцины против любых штаммов: ЦК пополняет запасы на случай эпидемий в секторе.
+- type: cargoBounty
+  id: SunriseBountyVaccine
+  reward: 7500
+  description: bounty-description-sunrise-vaccine
+  idPrefix: SUN
+  entries:
+  - name: bounty-item-sunrise-vaccine
+    amount: 3
+    whitelist:
+      tags:
+      - SunriseDiseaseVaccine
+
+# Сыворотка требует переболевшего донора, поэтому она дороже вакцины.
+- type: cargoBounty
+  id: SunriseBountySerum
+  reward: 8000
+  description: bounty-description-sunrise-serum
+  idPrefix: SUN
+  entries:
+  - name: bounty-item-sunrise-serum
+    amount: 2
+    whitelist:
+      tags:
+      - SunriseDiseaseSerum
+
+# Коллекция штаммов: подойдут и лабораторные копии из базы, заготовки не принимаются.
+- type: cargoBounty
+  id: SunriseBountyStrainSamples
+  reward: 4000
+  description: bounty-description-sunrise-strain-samples
+  idPrefix: SUN
+  entries:
+  - name: bounty-item-sunrise-strain-sample
+    amount: 3
+    whitelist:
+      components:
+      - DiseaseStrainSample
+    blacklist:
+      components:
+      - DiseaseBlankSample
+
+# Только оригинальная пробирка из микроскопа: копии из базы данных не принимаются.
+- type: cargoBounty
+  id: SunriseBountyDesignedStrain
+  reward: 12000
+  description: bounty-description-sunrise-designed-strain
+  idPrefix: SUN
+  entries:
+  - name: bounty-item-sunrise-designed-strain
+    amount: 1
+    whitelist:
+      components:
+      - DiseaseStrainInjector

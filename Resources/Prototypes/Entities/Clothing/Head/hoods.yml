@@ -26,6 +26,11 @@
       Snout: HEAD
       HeadTop: HEAD
       HeadSide: HEAD
+  # Sunrise added start - капюшон с фильтром задерживает половину капель
+  - type: DiseaseProtection
+    routes: [ Droplet ]
+    coefficient: 0.5
+  # Sunrise added end
 
 - type: entity
   parent: ClothingHeadHatHoodBioGeneral

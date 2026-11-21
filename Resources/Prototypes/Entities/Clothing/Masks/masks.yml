@@ -20,6 +20,15 @@
     layers:
       Snout: Mask
     hideOnToggle: true
+  # Sunrise added start - противогаз полностью отсекает капли, но сужает обзор
+  - type: DiseaseProtection
+    routes: [ Droplet ]
+    coefficient: 0
+  - type: ImageOverlay
+    pathToOverlayImage: "/Textures/Clothing/Head/Welding/weldingTexture.png"
+    additionalColorOverlay: "#00000030"
+    scale: 1.35,1.35
+  # Sunrise added end
 
 - type: entity
   parent: [ClothingMaskGas, BaseSecurityContraband]
@@ -154,6 +163,11 @@
     materialComposition:
       Steel: 50
       Plastic: 50
+  # Sunrise added start - плотная медицинская маска задерживает больше капель, чем дыхательная
+  - type: DiseaseProtection
+    routes: [ Droplet ]
+    coefficient: 0.4
+  # Sunrise added end
 
 - type: entity
   parent: ClothingMaskBreathMedical
@@ -201,6 +215,11 @@
       Plastic: 100
   - type: StaticPrice
     price: 30 # increases in price after decomposed into raw materials
+  # Sunrise added start - дыхательная маска задерживает часть капель
+  - type: DiseaseProtection
+    routes: [ Droplet ]
+    coefficient: 0.5
+  # Sunrise added end
 
 - type: entity
   parent: ClothingMaskBase
@@ -354,6 +373,11 @@
       Plastic: 25
   - type: StaticPrice
     price: 5
+  # Sunrise added start - маска защищает от капельной передачи
+  - type: DiseaseProtection
+    routes: [ Droplet ]
+    coefficient: 0.25
+  # Sunrise added end
 
 - type: entity
   parent: ClothingMaskBase

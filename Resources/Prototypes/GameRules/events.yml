@@ -25,6 +25,15 @@
     - id: VentClog
     - id: VentFleshWorms # Sunrise-Edit
     - id: VentbullMigration # Sunrise-Edit
+    # Sunrise-Edit start - болезни
+    - id: SunriseMinorOutbreak
+    - id: SunriseModerateOutbreak
+    - id: SunriseSevereOutbreak
+    - id: SunriseContaminatedCargo
+    - id: SunriseSpoiledFoodBatch
+    - id: SunriseInfectedVermin
+    - id: SunriseDiseaseVesselBreach
+    # Sunrise-Edit end
 
 - type: entityTable
   id: BasicAntagEventsTable

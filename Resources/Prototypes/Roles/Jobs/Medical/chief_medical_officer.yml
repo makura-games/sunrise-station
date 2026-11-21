@@ -31,6 +31,7 @@
   - ChiefMedicalOfficer
   - Brig
   - Cryogenics
+  - Virology # Sunrise-Edit - доступ в вирусологическую лабораторию
   special:
   - !type:AddImplantSpecial
     implants: [ DeathRattleImplantBlueShield ] # Sunrise-Edit

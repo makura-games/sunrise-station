@@ -30,6 +30,7 @@
             ChiefMedicalOfficer: [ 1, 1 ]
             MedicalDoctor: [ 3, 5 ]
             Chemist: [ 2, 2 ]
+            Virologist: [ 1, 1 ]
             Paramedic: [ 1, 2 ]
             ResearchDirector: [ 1, 1 ]
             Scientist: [ 3, 5 ]

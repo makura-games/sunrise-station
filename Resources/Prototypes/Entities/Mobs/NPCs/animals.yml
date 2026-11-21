@@ -1814,6 +1814,8 @@
   # Sunrise-start
   - type: AttackOnInteractionFail
     attackMemoryLength: 10
+  # Подопытные вирусологии: единственное зверьё, которое вообще умеет болеть.
+  - type: DiseaseHost
   # Sunrise-end
 
 

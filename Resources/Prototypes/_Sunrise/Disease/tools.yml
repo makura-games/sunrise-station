@@ -1,0 +1,65 @@
+# Полевые инструменты вирусолога: карманный анализатор, распылитель-обеззараживатель и визор.
+# Все работают по очагам вне лаборатории, где диагностер и вакцинатор недоступны.
+
+- type: entity
+  parent: BaseItem
+  id: SunriseDiseaseScanner
+  name: disease analyzer
+  description: A hand-held analyzer that checks an object or a person for an infection and prints the report on the spot. Runs on paper.
+  components:
+  # Спрайты в руках общие с медицинским анализатором, иконка своя.
+  - type: Item
+    heldPrefix: analyzer
+    storedRotation: -90
+    sprite: Objects/Specific/Medical/healthanalyzer.rsi
+  - type: Sprite
+    sprite: _Sunrise/Disease/disease_analyzer.rsi
+    layers:
+    - state: icon
+    - state: analyzer
+      shader: unshaded
+  - type: DiseaseScanner
+  - type: UseDelay
+    delay: 0.5
+
+# Пульверизатор по образцу садовых опрыскивателей: обеззараживает не прибор, а реагент,
+# так что распылитель ничего не знает о болезнях и заправляется в химии как обычная бутылка.
+- type: entity
+  parent: SprayBottleBase
+  id: SunriseDiseaseSprayer
+  name: disinfectant sprayer
+  suffix: Filled
+  description: A pressurized sprayer of disinfectant. Kills the contagion on contaminated items and on the dead, and does nothing for the living - that is what a vaccine is for.
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/Hydroponics/sprays.rsi
+    state: nolabelspray
+  - type: Item
+    sprite: Objects/Tools/Hydroponics/sprays.rsi
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SunriseDisinfectant
+        Quantity: 60
+  - type: Spray
+    transferAmount: 5
+  - type: Tag
+    tags:
+    - Spray
+
+# Очки показывают только заражённые предметы рядом: больных людей вирусолог ищет анализатором и мазками.
+- type: entity
+  parent: ClothingEyesHudBase
+  id: SunriseClothingEyesHudVirology
+  name: virology hud
+  description: A heads-up display that highlights contaminated items nearby. It cannot tell what they carry and does not see infection in living people.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Eyes/Hud/virology.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Eyes/Hud/virology.rsi
+  - type: DiseaseVision
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon

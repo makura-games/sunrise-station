@@ -18,3 +18,16 @@
       Male: MaleFelinid
       Female: FemaleFelinid
       Unsexed: MaleFelinid
+
+- type: trait
+  id: SunriseRoleplayCold
+  name: trait-sunrise-cold-name
+  description: trait-sunrise-cold-desc
+  category: Quirks
+  blacklist:
+    tags:
+    - SiliconEmotes
+  components:
+  - type: DiseaseStartInfected
+    diseases:
+    - SunriseRoleplayCold

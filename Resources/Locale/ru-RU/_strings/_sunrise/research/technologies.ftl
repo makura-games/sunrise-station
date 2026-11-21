@@ -41,3 +41,7 @@ research-technology-compact-defibrilation = Компактная дефибри�
 research-technology-advanced-compact-defibrilation = Продвинутая дефибрилляция
 research-technology-advance-secborgs-combat = Продвинутые боевые модули СБ боргов
 research-technology-milira-equipment = Снаряжение Милир
+research-technology-sunrise-virology-basics = Основы вирусологии
+research-technology-sunrise-biohazard-protection = Биозащита
+research-technology-sunrise-mass-vaccination = Массовая вакцинация
+research-technology-sunrise-experimental-virology = Экспериментальная вирусология

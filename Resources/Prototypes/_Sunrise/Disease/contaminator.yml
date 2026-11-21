@@ -1,0 +1,47 @@
+# Пищевой штамм не передаётся от носителя касанием или каплями.
+- type: disease
+  parent: SunriseGastroenteritis
+  id: SunriseSyndicateFoodborneVirus
+  name: disease-syndicate-foodborne-name
+  description: disease-syndicate-foodborne-description
+  classification: Viral
+  routes: [ Ingestion ]
+  treatmentHints:
+  - disease-hint-fluids
+  - disease-hint-source
+  - disease-hint-syndicate-foodborne
+
+- type: entity
+  parent: [ SunriseDiseaseStrainVial, BaseSyndicateContraband ]
+  id: SunriseSyndicateDiseaseVial
+  name: foodborne culture vial
+  description: A vial of engineered culture. Contains two doses for contaminating food or open drinks. Can also be used to seed a Petri dish, consuming the vial.
+  components:
+  - type: Sprite
+    color: "#D9A7B8"
+  - type: DiseaseContaminator
+    disease: SunriseSyndicateFoodborneVirus
+    uses: 2
+    delay: 3
+    whitelist:
+      components: [ Edible ]
+
+- type: listing
+  id: SunriseUplinkSyndicateDiseaseVial
+  name: uplink-sunrise-disease-vial-name
+  description: uplink-sunrise-disease-vial-desc
+  productEntity: SunriseSyndicateDiseaseVial
+  cost:
+    Telecrystal: 6
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Virologist
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle

@@ -15,6 +15,8 @@
     table: !type:GroupSelector
       prob: 0.9
       children:
+      - id: SunriseCrateBiologicalSalvage # Sunrise-Edit — редкая бионаходка, около 2% успешных спавнов
+        weight: 0.1
       - id: CrateSalvageAssortedGoodies
         weight: 0.6
       - !type:GroupSelector
@@ -66,6 +68,12 @@
   id: SalvageMobTable
   table: !type:GroupSelector
     children:
+    # Sunrise added start — около 6% пула, заражают только укусом с шансом 10%
+    - id: SunriseMobCarpSalvageInfected
+      weight: 0.4
+    - id: SunriseMobSpiderSalvageInfected
+      weight: 0.4
+    # Sunrise added end
     - id: MobCarpSalvage
       weight: 5
     - id: MobTickSalvage

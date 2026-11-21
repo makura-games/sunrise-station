@@ -1,0 +1,532 @@
+# Туториал селекции: от заготовки до выведенного штамма и сосуда для исследования.
+# Микроскоп здесь учебный: резервуар полный, а заготовка всегда слабая, поэтому партия выигрывается
+# с первого раза и урок укладывается в несколько минут.
+
+- type: tutorialSequence
+  id: VirologySelectionTutorial
+  duration: 900
+  estimatedDuration:
+    minimum: 360
+    maximum: 660
+  priority: 1
+  name: virology-selection-tutorial-name
+  tooltip: virology-selection-tutorial-tooltip
+  grid: /Maps/_Sunrise/Tutorials/virology_selection_tutorial.yml
+  playerEntity: VirologySelectionTutorialPlayer
+  steps:
+  - SelectionTutWelcome
+  - SelectionTutTakeBlank
+  - SelectionTutInsertBlank
+  - SelectionTutOpenMicroscope
+  - SelectionTutExplainSample
+  - SelectionTutExplainReservoir
+  - SelectionTutExplainSelector
+  - SelectionTutPrepare
+  - SelectionTutExplainField
+  - SelectionTutNutrient
+  - SelectionTutExplainRival
+  - SelectionTutInhibitor
+  - SelectionTutForecast
+  - SelectionTutExplainGauge
+  - SelectionTutFinishMatch
+  - SelectionTutExplainGenome
+  - SelectionTutAdvance
+  - SelectionTutProduce
+  - SelectionTutTakeStrain
+  - SelectionTutInsertVessel
+  - SelectionTutExplainVessel
+  - SelectionTutFinish
+  - TutorialMHelp
+
+- type: tutorialStep
+  id: SelectionTutWelcome
+  parent: BaseTutorialStepBase
+  bubble:
+    text: selection-tut-welcome-bubble
+  chatMessage: selection-tut-welcome-chat
+  ttsMessage: selection-tut-welcome-tts
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 10
+
+- type: tutorialStep
+  id: SelectionTutTakeBlank
+  parent: BaseTutorialStepBase
+  target: SunriseDiseaseBlankSampleWeak
+  bubble:
+    text: selection-tut-take-blank-bubble
+    attachToTarget: true
+  chatMessage: selection-tut-take-blank-chat
+  ttsMessage: selection-tut-take-blank-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: SunriseDiseaseBlankSampleWeak
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseBlankSampleWeak
+  conditions:
+  - !type:PickupListenedCondition
+    target: SunriseDiseaseBlankSampleWeak
+
+- type: tutorialStep
+  id: SelectionTutInsertBlank
+  parent: BaseTutorialStepBase
+  target: VirologyTutorialMicroscope
+  bubble:
+    text: selection-tut-insert-blank-bubble
+    attachToTarget: true
+  chatMessage: selection-tut-insert-blank-chat
+  ttsMessage: selection-tut-insert-blank-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: VirologyTutorialMicroscope
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseBlankSampleWeak
+  conditions:
+  - !type:ItemInsertedListenedCondition
+    item: SunriseDiseaseBlankSampleWeak
+    target: VirologyTutorialMicroscope
+
+- type: tutorialStep
+  id: SelectionTutOpenMicroscope
+  parent: BaseTutorialStepBase
+  target: VirologyTutorialMicroscope
+  bubble:
+    text: selection-tut-open-microscope-bubble
+    attachToTarget: true
+  chatMessage: selection-tut-open-microscope-chat
+  ttsMessage: selection-tut-open-microscope-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: VirologyTutorialMicroscope
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:BuiOpenListenedCondition
+    target: VirologyTutorialMicroscope
+
+# --- Разбор окна ---
+
+- type: tutorialStep
+  id: SelectionTutExplainSample
+  parent: BaseTutorialStepBase
+  bubble:
+    text: selection-tut-explain-sample-bubble
+  chatMessage: selection-tut-explain-sample-chat
+  ttsMessage: selection-tut-explain-sample-tts
+  blockUiInteraction: true
+  uiHighlight:
+  - !type:UiByName
+    name: SampleLabel
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 12
+
+- type: tutorialStep
+  id: SelectionTutExplainReservoir
+  parent: BaseTutorialStepBase
+  bubble:
+    text: selection-tut-explain-reservoir-bubble
+  chatMessage: selection-tut-explain-reservoir-chat
+  ttsMessage: selection-tut-explain-reservoir-tts
+  blockUiInteraction: true
+  uiHighlight:
+  - !type:UiByName
+    name: ReservoirHeader
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 12
+
+- type: tutorialStep
+  id: SelectionTutExplainSelector
+  parent: BaseTutorialStepBase
+  bubble:
+    text: selection-tut-explain-selector-bubble
+  chatMessage: selection-tut-explain-selector-chat
+  ttsMessage: selection-tut-explain-selector-tts
+  blockUiInteraction: true
+  uiHighlight:
+  - !type:UiByName
+    name: SymptomSelector
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 13
+
+# --- Партия ---
+
+- type: tutorialStep
+  id: SelectionTutPrepare
+  parent: BaseTutorialStepBase
+  bubble:
+    text: selection-tut-prepare-bubble
+  chatMessage: selection-tut-prepare-chat
+  ttsMessage: selection-tut-prepare-tts
+  uiHighlight:
+  - !type:UiByName
+    name: PrepareButton
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:UiButtonPressedCondition
+    button: SelectionTutPrepareButton
+    selectors:
+    - !type:UiByName
+      name: PrepareButton
+
+- type: tutorialStep
+  id: SelectionTutExplainField
+  parent: BaseTutorialStepBase
+  bubble:
+    text: selection-tut-explain-field-bubble
+  chatMessage: selection-tut-explain-field-chat
+  ttsMessage: selection-tut-explain-field-tts
+  blockUiInteraction: true
+  uiHighlight:
+  - !type:UiByName
+    name: CultureField
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 14
+
+- type: tutorialStep
+  id: SelectionTutNutrient
+  parent: BaseTutorialStepBase
+  bubble:
+    text: selection-tut-nutrient-bubble
+  chatMessage: selection-tut-nutrient-chat
+  ttsMessage: selection-tut-nutrient-tts
+  uiHighlight:
+  - !type:UiByName
+    name: NutrientButton
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:UiButtonPressedCondition
+    button: SelectionTutNutrientButton
+    selectors:
+    - !type:UiByName
+      name: NutrientButton
+
+- type: tutorialStep
+  id: SelectionTutExplainRival
+  parent: BaseTutorialStepBase
+  bubble:
+    text: selection-tut-explain-rival-bubble
+  chatMessage: selection-tut-explain-rival-chat
+  ttsMessage: selection-tut-explain-rival-tts
+  blockUiInteraction: true
+  uiHighlight:
+  - !type:UiByName
+    name: RivalLabel
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 12
+
+- type: tutorialStep
+  id: SelectionTutInhibitor
+  parent: BaseTutorialStepBase
+  bubble:
+    text: selection-tut-inhibitor-bubble
+  chatMessage: selection-tut-inhibitor-chat
+  ttsMessage: selection-tut-inhibitor-tts
+  uiHighlight:
+  - !type:UiByName
+    name: InhibitorButton
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:UiButtonPressedCondition
+    button: SelectionTutInhibitorButton
+    selectors:
+    - !type:UiByName
+      name: InhibitorButton
+
+- type: tutorialStep
+  id: SelectionTutForecast
+  parent: BaseTutorialStepBase
+  bubble:
+    text: selection-tut-forecast-bubble
+  chatMessage: selection-tut-forecast-chat
+  ttsMessage: selection-tut-forecast-tts
+  uiHighlight:
+  - !type:UiByName
+    name: ForecastButton
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:UiButtonPressedCondition
+    button: SelectionTutForecastButton
+    selectors:
+    - !type:UiByName
+      name: ForecastButton
+
+- type: tutorialStep
+  id: SelectionTutExplainGauge
+  parent: BaseTutorialStepBase
+  bubble:
+    text: selection-tut-explain-gauge-bubble
+  chatMessage: selection-tut-explain-gauge-chat
+  ttsMessage: selection-tut-explain-gauge-tts
+  blockUiInteraction: true
+  uiHighlight:
+  - !type:UiByName
+    name: MatchGauge
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 14
+
+- type: tutorialStep
+  id: SelectionTutFinishMatch
+  parent: BaseTutorialStepBase
+  bubble:
+    text: selection-tut-finish-match-bubble
+  chatMessage: selection-tut-finish-match-chat
+  ttsMessage: selection-tut-finish-match-tts
+  uiHighlight:
+  - !type:UiByName
+    name: FinishButton
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:UiButtonPressedCondition
+    button: SelectionTutFinishButton
+    selectors:
+    - !type:UiByName
+      name: FinishButton
+
+# --- Геном и выпуск ---
+
+- type: tutorialStep
+  id: SelectionTutExplainGenome
+  parent: BaseTutorialStepBase
+  bubble:
+    text: selection-tut-explain-genome-bubble
+  chatMessage: selection-tut-explain-genome-chat
+  ttsMessage: selection-tut-explain-genome-tts
+  blockUiInteraction: true
+  uiHighlight:
+  - !type:UiByName
+    name: GenomeStrip
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 15
+
+- type: tutorialStep
+  id: SelectionTutAdvance
+  parent: BaseTutorialStepBase
+  bubble:
+    text: selection-tut-advance-bubble
+  chatMessage: selection-tut-advance-chat
+  ttsMessage: selection-tut-advance-tts
+  uiHighlight:
+  - !type:UiByName
+    name: AdvanceButton
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:UiButtonPressedCondition
+    button: SelectionTutAdvanceButton
+    selectors:
+    - !type:UiByName
+      name: AdvanceButton
+
+- type: tutorialStep
+  id: SelectionTutProduce
+  parent: BaseTutorialStepBase
+  bubble:
+    text: selection-tut-produce-bubble
+  chatMessage: selection-tut-produce-chat
+  ttsMessage: selection-tut-produce-tts
+  uiHighlight:
+  - !type:UiByName
+    name: ProduceButton
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:UiButtonPressedCondition
+    button: SelectionTutProduceButton
+    selectors:
+    - !type:UiByName
+      name: ProduceButton
+
+- type: tutorialStep
+  id: SelectionTutTakeStrain
+  parent: BaseTutorialStepBase
+  target: SunriseDiseaseSelectedSample
+  bubble:
+    text: selection-tut-take-strain-bubble
+  chatMessage: selection-tut-take-strain-chat
+  ttsMessage: selection-tut-take-strain-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: SunriseDiseaseSelectedSample
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseSelectedSample
+  conditions:
+  - !type:PickupListenedCondition
+    target: SunriseDiseaseSelectedSample
+
+- type: tutorialStep
+  id: SelectionTutInsertVessel
+  parent: BaseTutorialStepBase
+  target: SunriseDiseaseResearchVessel
+  bubble:
+    text: selection-tut-insert-vessel-bubble
+    attachToTarget: true
+  chatMessage: selection-tut-insert-vessel-chat
+  ttsMessage: selection-tut-insert-vessel-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: SunriseDiseaseResearchVessel
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseSelectedSample
+    - type: TutorialDropSoftLock
+      popup: selection-tut-softlock-keep-strain
+  conditions:
+  - !type:ItemInsertedListenedCondition
+    item: SunriseDiseaseSelectedSample
+    target: SunriseDiseaseResearchVessel
+
+- type: tutorialStep
+  id: SelectionTutExplainVessel
+  parent: BaseTutorialStepBase
+  target: SunriseDiseaseResearchVessel
+  bubble:
+    text: selection-tut-explain-vessel-bubble
+    attachToTarget: true
+  chatMessage: selection-tut-explain-vessel-chat
+  ttsMessage: selection-tut-explain-vessel-tts
+  observeRange: 14
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 15
+
+- type: tutorialStep
+  id: SelectionTutFinish
+  parent: BaseTutorialStepBase
+  bubble:
+    text: selection-tut-finish-bubble
+  chatMessage: selection-tut-finish-chat
+  ttsMessage: selection-tut-finish-tts
+  conditions:
+  - !type:StepDelayCondition
+    delay: 12
+
+# --- Игрок и машины ---
+
+- type: entity
+  parent: BaseTutorialPlayer
+  id: VirologySelectionTutorialPlayer
+  components:
+  - type: Loadout
+    prototypes: [VirologyTutorialPlayerGear]
+  - type: Godmode
+  - type: TutorialAttackSoftLock
+  - type: TutorialInteractSoftLock
+    targets:
+    - Poweredlight
+
+# Учебному микроскопу хватает реагентов на всю партию, доливать по ходу урока не нужно.
+- type: entity
+  parent: SunriseDiseaseMicroscope
+  id: VirologyTutorialMicroscope
+  suffix: Training
+  components:
+  - type: Solution
+    id: microscope
+    solution:
+      maxVol: 200
+      reagents:
+      - ReagentId: EZNutrient
+        Quantity: 100
+      - ReagentId: Phenol
+        Quantity: 100

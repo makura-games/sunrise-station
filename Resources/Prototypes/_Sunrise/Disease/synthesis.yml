@@ -1,0 +1,160 @@
+# Параметры заготовки выбираются при появлении, до этого она не содержит известного штамма.
+- type: entity
+  parent: SunriseDiseaseStrainVial
+  id: SunriseDiseaseBlankSample
+  name: strain blank
+  description: A sealed vial of uncharacterized culture medium.
+  components:
+  - type: Sprite
+    state: blank
+  # Заготовка — редкий расходник: продаётся вдвое дешевле закупки, чтобы перепродажа не окупалась.
+  - type: StaticPrice
+    price: 400
+  - type: DiseaseBlankSample
+    profiles:
+      Weak:
+        weight: 50
+        minSymptoms: 6
+        maxSymptoms: 8
+        minMaxStage: 2
+        maxMaxStage: 3
+        minResistance: 0.05
+        maxResistance: 0.15
+        beneficialChance: 0.08
+      Moderate:
+        weight: 35
+        minSymptoms: 9
+        maxSymptoms: 12
+        minMaxStage: 4
+        maxMaxStage: 5
+        minResistance: 0.15
+        maxResistance: 0.3
+        beneficialChance: 0.15
+      Strong:
+        weight: 15
+        minSymptoms: 13
+        maxSymptoms: 16
+        minMaxStage: 6
+        maxMaxStage: 7
+        minResistance: 0.3
+        maxResistance: 0.45
+        beneficialChance: 0.25
+    symptoms:
+    - symptom: SymptomSoreThroat
+    - symptom: SymptomCough
+    - symptom: SymptomSneeze
+    - symptom: SymptomHeadache
+    - symptom: SymptomRash
+    - symptom: SymptomFever
+    - symptom: SymptomNausea
+    - symptom: SymptomMuscleAche
+    - symptom: SymptomFatigue
+    - symptom: SymptomChills
+    - symptom: SymptomDizziness
+    - symptom: SymptomBlurredVision
+    - symptom: SymptomNosebleed
+      weight: 0.7
+    - symptom: SymptomAnemia
+      weight: 0.7
+    - symptom: SymptomHallucinations
+      weight: 0.7
+    - symptom: SymptomHyperthermia
+      weight: 0.5
+    - symptom: SymptomSuffocation
+      weight: 0.5
+    - symptom: SymptomToxemia
+      weight: 0.5
+    - symptom: SymptomLuminescence
+    - symptom: SunriseSymptomItch
+    - symptom: SunriseSymptomPhlegm
+    - symptom: SunriseSymptomSalivation
+    - symptom: SunriseSymptomTwitch
+    - symptom: SunriseSymptomLaughter
+    - symptom: SunriseSymptomScreaming
+    - symptom: SunriseSymptomHonking
+    - symptom: SunriseSymptomHairLoss
+    - symptom: SunriseSymptomVoraciousAppetite
+    - symptom: SunriseSymptomPacifism
+    - symptom: SunriseSymptomGasSynthesis
+    - symptom: SunriseSymptomBeeCough
+      weight: 0.5
+    - symptom: SunriseSymptomHistamineSynthesis
+    - symptom: SunriseSymptomUnstableNucleotide
+      weight: 0.5
+    - symptom: SunriseSymptomNarcolepsy
+      weight: 0.7
+    - symptom: SunriseSymptomBlackout
+      weight: 0.7
+    - symptom: SunriseSymptomSeizures
+      weight: 0.7
+    - symptom: SunriseSymptomCellularDecay
+      weight: 0.5
+    - symptom: SunriseSymptomRadiationSickness
+      weight: 0.5
+    - symptom: SunriseSymptomMonkism
+      weight: 0.2
+    # Полезный симптом выпадает отдельным броском с шансом уровня и всегда на последнюю стадию,
+    # где партия самая трудная.
+    beneficialSymptoms:
+    - symptom: SunriseSymptomRegeneration
+    - symptom: SunriseSymptomAdrenaline
+    - symptom: SunriseSymptomEfficientMetabolism
+    - symptom: SunriseSymptomEndurance
+    - symptom: SunriseSymptomDetoxification
+    - symptom: SunriseSymptomCapaciousLungs
+    - symptom: SunriseSymptomTricordrazineSynthesis
+    # Пробелы генома: каждая стадия с этим шансом получает один из них сверх обычных вариантов.
+    fillerChance: 0.5
+    fillerSymptoms:
+    - symptom: SunriseSymptomNil
+    - symptom: SunriseSymptomWaiting
+
+# Заготовки фиксированного уровня: удобно спавнить для отладки, как ксеноартефакты нужной сложности.
+- type: entity
+  parent: SunriseDiseaseBlankSample
+  id: SunriseDiseaseBlankSampleWeak
+  suffix: Weak
+  components:
+  - type: DiseaseBlankSample
+    quality: Weak
+
+- type: entity
+  parent: SunriseDiseaseBlankSample
+  id: SunriseDiseaseBlankSampleModerate
+  suffix: Moderate
+  components:
+  - type: DiseaseBlankSample
+    quality: Moderate
+
+- type: entity
+  parent: SunriseDiseaseBlankSample
+  id: SunriseDiseaseBlankSampleStrong
+  suffix: Strong
+  components:
+  - type: DiseaseBlankSample
+    quality: Strong
+
+- type: entity
+  parent: SunrisePetriDishBox
+  id: SunriseDiseaseBlankSampleBox
+  name: strain blank dispenser
+  description: Dispenses sealed vials of uncharacterized culture medium.
+  components:
+  - type: BallisticAmmoProvider
+    whitelist:
+      components:
+      - DiseaseStrainSample
+    proto: SunriseDiseaseBlankSample
+    capacity: 5
+
+- type: entity
+  parent: CrateMedicalSecure
+  id: SunriseCrateDiseaseSynthesis
+  name: strain synthesis crate
+  description: Culture medium and sealed vials for a virology laboratory.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: SunriseDiseaseBlankSampleBox

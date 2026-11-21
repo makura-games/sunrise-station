@@ -1,0 +1,39 @@
+<ui:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                x:Class="Content.Client._Sunrise.Disease.Database.DiseaseDatabaseWindow"
+                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+                SetSize="620 460"
+                Title="{Loc 'disease-database-ui-title'}"
+                MinSize="560 400">
+    <BoxContainer Margin="6 4" Orientation="Horizontal" SeparationOverride="6">
+        <BoxContainer Orientation="Vertical" MinWidth="200" SeparationOverride="2">
+            <Label Text="{Loc 'disease-database-ui-strains'}" StyleClasses="LabelKeyText" />
+            <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                <BoxContainer Name="StrainContainer" Orientation="Vertical" SeparationOverride="2" />
+            </ScrollContainer>
+        </BoxContainer>
+
+        <PanelContainer StyleClasses="HighDivider" SetWidth="2" VerticalExpand="True" />
+
+        <BoxContainer Name="DetailsBlock" Orientation="Vertical" HorizontalExpand="True" SeparationOverride="4">
+            <Label Name="StrainLabel" Text="{Loc 'disease-database-ui-empty'}" StyleClasses="LabelHeading" />
+            <Label Name="SyndromeLabel" Text="" />
+            <Label Name="ClassLabel" Text="" />
+            <Label Text="{Loc 'disease-database-ui-symptoms'}" StyleClasses="LabelKeyText" />
+            <BoxContainer Name="SymptomContainer" Orientation="Vertical" SeparationOverride="0" />
+
+            <PanelContainer StyleClasses="LowDivider" />
+
+            <Label Name="ResearchLabel" Text="" />
+            <ProgressBar Name="ResearchBar" MinValue="0" MaxValue="1" SetHeight="18" MinHeight="18" HorizontalExpand="True" />
+
+            <!-- Главный вывод по штамму: есть вакцина или нет. Цвет выставляется в коде.
+                 Надпись забирает свободное место блока и встаёт в его центре. -->
+            <Label Name="RecipeLabel" Text="" StyleClasses="LabelHeading"
+                   HorizontalExpand="True" VerticalExpand="True"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Align="Center" />
+
+            <Button Name="DispenseButton" Text="{Loc 'disease-database-ui-dispense'}" HorizontalExpand="True" MinHeight="30" />
+        </BoxContainer>
+    </BoxContainer>
+</ui:FancyWindow>

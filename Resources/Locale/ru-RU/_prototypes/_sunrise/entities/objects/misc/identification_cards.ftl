@@ -143,3 +143,5 @@ ent-USSPCaptainDamagedIDCardRandomSpawner = спавнер случайной п
     .desc = Создаёт случайный вариант повреждённой ID карты капитана СССП.
 ent-CommaidIDCard = ID карта горничной командования
     .desc = { ent-IDCardStandard.desc }
+ent-VirologistIDCard = ID карта вирусолога
+    .desc = { ent-IDCardStandard.desc }

@@ -1,0 +1,78 @@
+# Реагенты системы болезней. Ни один из них не лечит полностью: это задача вакцины или сыворотки.
+- type: reagent
+  id: SunriseAntitussive
+  name: reagent-name-sunrise-antitussive
+  group: Medicine
+  desc: reagent-desc-sunrise-antitussive
+  physicalDesc: reagent-physical-desc-sunrise-antitussive
+  flavor: medicine
+  color: "#C9A227"
+  metabolisms:
+    Bloodstream:
+      metabolismRate: 0.5
+      effects:
+      # Снимает проявления, но не трогает ни развитие болезни, ни её заразность.
+      - !type:RelieveSymptoms
+        duration: 25
+        maxDuration: 120
+
+- type: reagent
+  id: SunriseAntimicrobial
+  name: reagent-name-sunrise-antimicrobial
+  group: Medicine
+  desc: reagent-desc-sunrise-antimicrobial
+  physicalDesc: reagent-physical-desc-sunrise-antimicrobial
+  flavor: bitter
+  color: "#4F8A8B"
+  metabolisms:
+    Bloodstream:
+      metabolismRate: 0.5
+      effects:
+      # Тормозит развитие и снижает заразность, выигрывая время на поиск вакцины.
+      - !type:SuppressDisease
+        duration: 20
+        maxDuration: 180
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: SunriseAntimicrobial
+          min: 25
+        damage:
+          types:
+            Poison: 1
+
+- type: reagent
+  id: SunriseDisinfectant
+  name: reagent-name-sunrise-disinfectant
+  group: Medicine
+  desc: reagent-desc-sunrise-disinfectant
+  physicalDesc: reagent-physical-desc-sunrise-disinfectant
+  flavor: bitter
+  color: "#AEE6E6"
+  metabolisms:
+    Bloodstream:
+      metabolismRate: 0.5
+      effects:
+      # Внутрь его не принимают: это наружное средство для очагов, а не лекарство.
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 1
+
+# Что именно гасит заразу и сколько его должно попасть за одно касание.
+# Облако из распылителя отдаёт раствор долями, так что одна капля очаг не гасит.
+- type: diseaseDisinfectant
+  id: SunriseDisinfectant
+  reagent: SunriseDisinfectant
+  minAmount: 1
+
+# Рецепт на реагентах из любого дозатора: обеззараживание не должно зависеть от карго.
+- type: reaction
+  id: SunriseDisinfectant
+  reactants:
+    Chlorine:
+      amount: 1
+    Ethanol:
+      amount: 1
+  products:
+    SunriseDisinfectant: 2

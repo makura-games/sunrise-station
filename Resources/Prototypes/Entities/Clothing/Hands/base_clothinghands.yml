@@ -32,6 +32,13 @@
     damageProtection:
       flatReductions:
         Heat: 5 # the average lightbulb only does around four damage!
+  # Sunrise added start - перчатки закрывают руки от контактной заразы, но собирают её на себя
+  - type: DiseaseProtection
+    routes: [ Contact ]
+    contactKinds: [ Touch ]
+    coefficient: 0
+  - type: DiseaseResidue
+  # Sunrise added end
 
 - type: entity
   abstract: true

@@ -1,0 +1,67 @@
+# Чашки Петри и лабораторные образцы штаммов: второй путь исследования, не требующий больных.
+
+- type: entity
+  parent: BaseItem
+  id: SunrisePetriDish
+  name: petri dish
+  description: A sterile dish with nutrient medium. Inoculate it with a sample and wait for the culture to grow.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _Sunrise/Disease/petri_dish.rsi
+    layers:
+    - state: icon
+      map: [ "enum.DiseaseCultureVisualLayers.Base" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.DiseaseCultureVisuals.State:
+        enum.DiseaseCultureVisualLayers.Base:
+          Empty: { state: icon }
+          Growing: { state: icon }
+          Grown: { state: infected }
+  - type: DiseaseCulture
+  - type: Tag
+    tags:
+    - Recyclable
+    - Trash
+
+- type: entity
+  parent: BaseAmmoProvider
+  id: SunrisePetriDishBox
+  name: petri dish dispenser
+  description: Dispenses sterile petri dishes for growing cultures.
+  components:
+  - type: Sprite
+    layers:
+    - state: boxwide
+    - state: beaker
+  # Коробка выдаёт чашки по одной и не держит десяток сущностей сразу.
+  - type: BallisticAmmoProvider
+    whitelist:
+      components:
+      - DiseaseCulture
+    proto: SunrisePetriDish
+    capacity: 5
+
+- type: entity
+  parent: BaseItem
+  id: SunriseDiseaseStrainVial
+  name: strain sample
+  description: A sealed vial with a lab sample of a strain. Useless as an infection source, but a culture grows from it.
+  components:
+  # Спрайты в руках берутся у обычной пробирки, своих у штаммов нет.
+  - type: Item
+    size: Tiny
+    sprite: Objects/Specific/Chemistry/vial.rsi
+  # Цвет наклейки отличает штамм из базы, заготовку и спроектированный штамм.
+  - type: Sprite
+    sprite: _Sunrise/Disease/strain_vial.rsi
+    state: strain
+  - type: DiseaseStrainSample
+  - type: Label
+  - type: Tag
+    tags:
+    - Recyclable
+    - Trash

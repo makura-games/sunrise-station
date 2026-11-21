@@ -1,0 +1,9 @@
+# Ореол очагов в оверлее болезней. Цвет и ширину система задаёт на копии шейдера под каждый вид очага.
+- type: shader
+  id: SunriseDiseaseVisionGlow
+  kind: source
+  path: "/Textures/_Sunrise/Shaders/disease_vision_glow.swsl"
+  params:
+    glow_color: "#9BE05ACC"
+    glow_width: 3
+    pulse_speed: 3

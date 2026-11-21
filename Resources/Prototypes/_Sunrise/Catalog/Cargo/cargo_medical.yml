@@ -1,4 +1,24 @@
 - type: cargoProduct
+  id: SunriseCrateEpidemicResponse
+  icon:
+    sprite: Objects/Specific/Chemistry/pills.rsi
+    state: pill12
+  product: SunriseCrateEpidemicResponse
+  cost: 1800
+  category: cargoproduct-category-name-medical
+  group: market
+
+- type: cargoProduct
+  id: SunriseDiseaseDatabaseCircuitboard
+  icon:
+    sprite: Objects/Misc/module.rsi
+    state: cpu_science
+  product: SunriseDiseaseDatabaseCircuitboard
+  cost: 900
+  category: cargoproduct-category-name-medical
+  group: market
+
+- type: cargoProduct
   id: CrateNPCVariantCubeBoxSunrise
   icon:
     sprite: Objects/Misc/monkeycube.rsi
@@ -7,3 +27,14 @@
   cost: 12000
   category: cargoproduct-category-name-medical
   group: market
+
+- type: cargoProduct
+  id: SunriseCrateDiseaseSynthesis
+  icon:
+    sprite: Objects/Specific/Chemistry/vial.rsi
+    state: vial
+  product: SunriseCrateDiseaseSynthesis
+  cost: 4000
+  category: cargoproduct-category-name-medical
+  group: market
+

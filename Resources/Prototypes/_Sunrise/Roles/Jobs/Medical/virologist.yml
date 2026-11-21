@@ -1,0 +1,37 @@
+- type: job
+  id: Virologist
+  name: job-name-virologist
+  description: job-description-virologist
+  playTimeTracker: JobVirologist
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 18000 # 5 часов
+  startingGear: VirologistGear
+  icon: "JobIconVirologist"
+  supervisors: job-supervisors-cmo
+  alternativeTitles:
+  - job-alt-title-epidemiologist
+  access:
+  - Medical
+  - Virology
+  - Maintenance
+
+- type: startingGear
+  id: VirologistGear
+  equipment:
+    id: VirologistPDA
+    ears: ClothingHeadsetMedical
+
+# Иконку JobIconVirologist и название должности апстрим объявляет сам, поэтому здесь их нет.
+- type: chameleonOutfit
+  id: VirologistChameleonOutfit
+  job: Virologist
+  equipment:
+    head: ClothingHeadHatBeretMedic
+    mask: ClothingMaskSterile
+    neck: ClothingNeckStethoscope
+    outerClothing: ClothingOuterCoatLab
+    gloves: ClothingHandsGlovesLatex
+    jumpsuit: ClothingUniformJumpsuitVirology
+    back: ClothingBackpackVirology

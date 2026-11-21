@@ -696,21 +696,24 @@
   physicalDesc: reagent-physical-desc-crisp
   flavor: medicine
   color: "#86caf7"
-  metabolisms:
-    Bloodstream:
-      effects:
-        - !type:CureZombieInfection
-          conditions:
-            - !type:ReagentCondition
-              reagent: Ambuzol
-              min: 15
-    Digestion:
-      effects:
-        - !type:CureZombieInfection
-          conditions:
-            - !type:ReagentCondition
-              reagent: Ambuzol
-              min: 15
+  # Sunrise-Start - лечение зомби-заражения убрано: этим занимается вирусология,
+  # зомби-штамм закрывается вакциной до обращения. Реагент оставлен инертным.
+  # metabolisms:
+  #   Bloodstream:
+  #     effects:
+  #       - !type:CureZombieInfection
+  #         conditions:
+  #           - !type:ReagentCondition
+  #             reagent: Ambuzol
+  #             min: 15
+  #   Digestion:
+  #     effects:
+  #       - !type:CureZombieInfection
+  #         conditions:
+  #           - !type:ReagentCondition
+  #             reagent: Ambuzol
+  #             min: 15
+  # Sunrise-End
 
 - type: reagent
   id: AmbuzolPlus
@@ -720,23 +723,25 @@
   physicalDesc: reagent-physical-desc-crisp
   flavor: medicine
   color: "#1274b5"
-  metabolisms:
-    Bloodstream:
-      effects:
-        - !type:CureZombieInfection
-          innoculate: true
-          conditions:
-            - !type:ReagentCondition
-              reagent: AmbuzolPlus
-              min: 5
-    Digestion:
-      effects:
-      - !type:CureZombieInfection
-        innoculate: true
-        conditions:
-        - !type:ReagentCondition
-          reagent: AmbuzolPlus
-          min: 5
+  # Sunrise-Start - лечение и прививка от зомби-заражения убраны: этим занимается вирусология.
+  # metabolisms:
+  #   Bloodstream:
+  #     effects:
+  #       - !type:CureZombieInfection
+  #         innoculate: true
+  #         conditions:
+  #           - !type:ReagentCondition
+  #             reagent: AmbuzolPlus
+  #             min: 5
+  #   Digestion:
+  #     effects:
+  #     - !type:CureZombieInfection
+  #       innoculate: true
+  #       conditions:
+  #       - !type:ReagentCondition
+  #         reagent: AmbuzolPlus
+  #         min: 5
+  # Sunrise-End
 
 - type: reagent
   id: PulpedBananaPeel

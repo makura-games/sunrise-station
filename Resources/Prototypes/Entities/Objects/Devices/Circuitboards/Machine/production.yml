@@ -227,7 +227,7 @@
   - type: Sprite
     state: medical
   - type: MachineBoard
-    prototype: Vaccinator
+    prototype: SunriseVaccinator # Sunrise-Edit - машина системы болезней
     stackRequirements:
       Manipulator: 2
       Cable: 5
@@ -244,7 +244,7 @@
   - type: Sprite
     state: medical
   - type: MachineBoard
-    prototype: DiseaseDiagnoser
+    prototype: SunriseDiseaseDiagnoser # Sunrise-Edit - машина системы болезней
     stackRequirements:
       Cable: 5
     tagRequirements:
@@ -252,9 +252,11 @@
         amount: 1
         defaultPrototype: Beaker
     componentRequirements:
-      BotanySwab:
+      # Sunrise edit start - свой мазок вместо ботанического
+      DiseaseSwab:
         amount: 1
-        defaultPrototype: DiseaseSwab
+        defaultPrototype: SunriseDiseaseSwab
+      # Sunrise edit end
 
 - type: entity
   id: ArtifactAnalyzerMachineCircuitboard

@@ -123,7 +123,7 @@
     - RoboDrobeInventory
     - SciDrobeInventory
     - SecDrobeInventory
-    - ViroDrobeInventory
+    # - ViroDrobeInventory # Sunrise-Edit - у автомата вирусолога свой набор пополнения
     - WinterDrobeInventory
     - CuraDrobeInventory
   - type: Sprite

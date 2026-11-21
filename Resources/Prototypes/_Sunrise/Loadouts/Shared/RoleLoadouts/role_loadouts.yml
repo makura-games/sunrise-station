@@ -172,6 +172,22 @@
   - Contributors
 
 - type: roleLoadout
+  id: JobVirologist
+  groups:
+  - SunriseVirologistJumpsuit
+  - MedicalMask
+  - SunriseGlasses
+  - ChemistOuterClothing
+  - MedicalShoes
+  - SunriseVirologistBackpack
+  - GroupTankHarness
+  - SurvivalMedical
+  - SunriseTrinkets
+  - MedicalTrinkets
+  - GroupSpeciesBreathToolMedical
+  - Bra
+
+- type: roleLoadout
   id: JobMedicalPathologist
   groups:
   - PathologistHead

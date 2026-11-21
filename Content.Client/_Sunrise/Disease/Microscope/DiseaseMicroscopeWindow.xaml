@@ -1,0 +1,123 @@
+<ui:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+                xmlns:microscope="clr-namespace:Content.Client._Sunrise.Disease.Microscope"
+                Title="{Loc 'disease-microscope-title'}"
+                MinSize="948 650" SetSize="1048 730">
+    <BoxContainer Orientation="Vertical" Margin="6 4" SeparationOverride="4">
+        <!-- Шапка машины: слот с образцом, его сведения и строка результата последней операции. -->
+        <BoxContainer SeparationOverride="6">
+            <PanelContainer StyleClasses="BackgroundPanelDark">
+                <SpriteView Name="SampleView" OverrideDirection="South" Scale="2 2" SetSize="52 52"
+                            VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </PanelContainer>
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center" SeparationOverride="2">
+                <Label Name="SampleLabel" StyleClasses="LabelHeading" ClipText="True" />
+                <Label Name="StatusLabel" ClipText="True" />
+            </BoxContainer>
+            <Button Name="SampleButton" VerticalAlignment="Center" Text="{Loc 'disease-microscope-insert'}" />
+        </BoxContainer>
+        <PanelContainer StyleClasses="HighDivider" />
+        <BoxContainer VerticalExpand="True" SeparationOverride="6">
+            <PanelContainer StyleClasses="PanelDeep" HorizontalExpand="True" VerticalExpand="True">
+                <microscope:DiseaseCultureControl Name="CultureField" Margin="4"
+                                                  HorizontalExpand="True" VerticalExpand="True" />
+            </PanelContainer>
+            <!-- Ширина колонки задана под ряд инструментов: втроём они не влезали в прежние 304. -->
+            <BoxContainer Orientation="Vertical" MinWidth="352" MaxWidth="352" VerticalExpand="True" SeparationOverride="4">
+                <PanelContainer StyleClasses="PanelDeep">
+                    <BoxContainer Orientation="Vertical" SeparationOverride="4">
+                        <ui:StripeBack>
+                            <Label Name="GenomeHeader" Text="{Loc 'disease-microscope-genome'}" Align="Center" Margin="0 3" />
+                        </ui:StripeBack>
+                        <BoxContainer Orientation="Vertical" Margin="6 2 6 6">
+                            <microscope:DiseaseGenomeStrip Name="GenomeStrip" />
+                        </BoxContainer>
+                    </BoxContainer>
+                </PanelContainer>
+                <PanelContainer StyleClasses="PanelDeep">
+                    <BoxContainer Orientation="Vertical" SeparationOverride="4">
+                        <ui:StripeBack>
+                            <Label Name="ReservoirHeader" Text="{Loc 'disease-microscope-reservoir'}" Align="Center" Margin="0 3" />
+                        </ui:StripeBack>
+                        <BoxContainer Orientation="Vertical" Margin="6 2 6 6" SeparationOverride="2">
+                            <BoxContainer SeparationOverride="4">
+                                <Label Name="NutrientLabel" HorizontalExpand="True" StyleClasses="LabelSubText" ClipText="True" />
+                                <Label Name="NutrientCostLabel" StyleClasses="LabelSubText" />
+                            </BoxContainer>
+                            <ProgressBar Name="NutrientBar" MinValue="0" MaxValue="1" MinHeight="8" />
+                            <BoxContainer SeparationOverride="4">
+                                <Label Name="InhibitorLabel" HorizontalExpand="True" StyleClasses="LabelSubText" ClipText="True" />
+                                <Label Name="InhibitorCostLabel" StyleClasses="LabelSubText" />
+                            </BoxContainer>
+                            <ProgressBar Name="InhibitorBar" MinValue="0" MaxValue="1" MinHeight="8" />
+                        </BoxContainer>
+                    </BoxContainer>
+                </PanelContainer>
+                <PanelContainer Name="SetupPanel" StyleClasses="PanelDeep">
+                    <BoxContainer Orientation="Vertical" SeparationOverride="4">
+                        <ui:StripeBack>
+                            <Label Name="SetupHeader" Align="Center" Margin="0 3" />
+                        </ui:StripeBack>
+                        <BoxContainer Orientation="Vertical" Margin="6 2 6 6" SeparationOverride="4">
+                            <OptionButton Name="SymptomSelector" HorizontalExpand="True" />
+                            <Button Name="PrepareButton" Text="{Loc 'disease-microscope-prepare'}" MinHeight="30" />
+                            <Button Name="AdvanceButton" Text="{Loc 'disease-microscope-advance'}" Visible="False" />
+                        </BoxContainer>
+                    </BoxContainer>
+                </PanelContainer>
+                <!-- Селекция путей передачи открывается только после снятия блокировки машины. -->
+                <PanelContainer Name="TransmissionPanel" StyleClasses="PanelDeep" Visible="False">
+                    <BoxContainer Orientation="Vertical" SeparationOverride="4">
+                        <ui:StripeBack>
+                            <Label Name="TransmissionHeader" Text="{Loc 'disease-microscope-transmission'}" Align="Center" Margin="0 3" />
+                        </ui:StripeBack>
+                        <BoxContainer Orientation="Vertical" Margin="6 2 6 6" SeparationOverride="4">
+                            <!-- Пути собраны в один ряд, как инструменты партии; развитые остаются нажатыми,
+                                 а их полный список — в подсказке заголовка. -->
+                            <BoxContainer HorizontalExpand="True" SeparationOverride="0">
+                                <Button Name="ContactButton" Text="{Loc 'disease-microscope-route-contact-short'}"
+                                        StyleClasses="OpenRight" ToggleMode="True" HorizontalExpand="True" />
+                                <Button Name="IngestionButton" Text="{Loc 'disease-microscope-route-ingestion-short'}"
+                                        StyleClasses="OpenBoth" ToggleMode="True" HorizontalExpand="True" />
+                                <Button Name="DropletButton" Text="{Loc 'disease-microscope-route-droplet-short'}"
+                                        StyleClasses="OpenLeft" ToggleMode="True" HorizontalExpand="True" />
+                            </BoxContainer>
+                        </BoxContainer>
+                    </BoxContainer>
+                </PanelContainer>
+                <PanelContainer Name="MatchPanel" StyleClasses="PanelDeep" Visible="False">
+                    <BoxContainer Orientation="Vertical" SeparationOverride="4">
+                        <ui:StripeBack>
+                            <Label Name="StageLabel" Align="Center" Margin="0 3" MouseFilter="Stop" />
+                        </ui:StripeBack>
+                        <BoxContainer Orientation="Vertical" Margin="6 2 6 6" SeparationOverride="4">
+                            <BoxContainer SeparationOverride="6">
+                                <Label Name="TargetLabel" HorizontalExpand="True" ClipText="True" />
+                                <Label Name="RivalLabel" Align="Right" ClipText="True" />
+                            </BoxContainer>
+                            <microscope:DiseaseMatchGauge Name="MatchGauge" MouseFilter="Stop" />
+                            <PanelContainer StyleClasses="LowDivider" />
+                            <!-- Доли ширины розданы по длине надписей: короткому «Питанию» её нужно меньше. -->
+                            <BoxContainer HorizontalExpand="True" SeparationOverride="0">
+                                <Button Name="ForecastButton" StyleClasses="OpenRight"
+                                        HorizontalExpand="True" SizeFlagsStretchRatio="1.1" />
+                                <Button Name="NutrientButton" Text="{Loc 'disease-microscope-tool-nutrient'}"
+                                        StyleClasses="OpenBoth" ToggleMode="True"
+                                        HorizontalExpand="True" SizeFlagsStretchRatio="0.8" />
+                                <Button Name="InhibitorButton" Text="{Loc 'disease-microscope-tool-inhibitor'}"
+                                        StyleClasses="OpenLeft" ToggleMode="True"
+                                        HorizontalExpand="True" SizeFlagsStretchRatio="1.1" />
+                            </BoxContainer>
+                            <Button Name="FinishButton" Text="{Loc 'disease-microscope-finish'}" MinHeight="32" />
+                        </BoxContainer>
+                    </BoxContainer>
+                </PanelContainer>
+                <PanelContainer StyleClasses="PanelDeep">
+                    <BoxContainer Orientation="Vertical" Margin="6 4" SeparationOverride="2">
+                        <Button Name="ProduceButton" Text="{Loc 'disease-microscope-produce'}" MinHeight="30" />
+                    </BoxContainer>
+                </PanelContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</ui:FancyWindow>

@@ -231,3 +231,6 @@
 
 - type: playTimeTracker
   id: AntagZombie
+
+- type: playTimeTracker
+  id: JobVirologist

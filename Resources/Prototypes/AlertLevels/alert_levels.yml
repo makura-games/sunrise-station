@@ -69,6 +69,10 @@
   emergencyLightColor: Violet
   forceEnableEmergencyLights: true
   shuttleTime: 600
+  # Sunrise edit start - настройки автоматического обновления доступов
+  extendedAccessOptions:
+    announcement: access-system-accesses-delay-violet
+  # Sunrise edit end
 
 - type: alertLevel
   abstract: true

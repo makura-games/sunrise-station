@@ -41,6 +41,7 @@
     SeniorPhysician: 0.75
     ChiefMedicalOfficer: 0.75
     MedicalPathologist: 0.60
+    Virologist: 0.60
 
     # Science
     ResearchAssistant: 1.20

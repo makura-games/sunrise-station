@@ -11,3 +11,5 @@ trait-russian-accent-desc = Ты говоришь с отчётливым рус
 trait-transliteration-accent-name = Транслитерация
 trait-transliteration-accent-desc = Постоянно миксуешь звуки, транслитерируя слова на лету.
 trait-category-vocal = Голосовые
+trait-sunrise-cold-name = Простуда
+trait-sunrise-cold-desc = Вы вышли на смену простывшим. Через некоторое время начнёте кашлять и чихать, но болезнь не заразна и пройдёт сама.

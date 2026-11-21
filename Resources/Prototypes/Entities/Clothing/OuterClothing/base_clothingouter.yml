@@ -192,6 +192,12 @@
   - type: HideLayerClothing
     slots:
     - Tail
+  # Sunrise added start - заразы через кусание в скафе хуже проходит
+  - type: DiseaseProtection
+    routes: [ Contact ]
+    contactKinds: [ Bite, Step ]
+    coefficient: 0.25
+  # Sunrise added end
 
 - type: entity
   abstract: true

@@ -11,3 +11,9 @@
     - type: Tag
       tags:
       - Ring
+    # Не перчатки: руки открыты, заразу не задерживают.
+    - type: DiseaseProtection
+      routes: [ Contact ]
+      coefficient: 1
+    - type: DiseaseResidue
+      pickUpChance: 0

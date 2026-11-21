@@ -693,12 +693,6 @@
         - !type:ReagentCondition
           reagent: ShamblersJuiceSunrise
           min: 15
-      - !type:CureZombieInfection
-        probability: 0.35
-        conditions:
-        - !type:ReagentCondition
-          reagent: ShamblersJuiceSunrise
-          min: 15
       - !type:AdjustTemperature
         amount: -2000
       - !type:AdjustTemperature

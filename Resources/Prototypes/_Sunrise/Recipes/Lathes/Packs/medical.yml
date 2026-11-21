@@ -28,6 +28,18 @@
   - DefibrillatorCompact
   - AdvancedDefibrillatorCompact
   - DnaInjector
+  # Вирусология: открывается исследованиями «Основы вирусологии», «Биозащита» и «Массовая вакцинация».
+  - SunriseDiseaseSwab
+  - SunrisePetriDish
+  - SunriseClothingEyesHudVirology
+  - SunriseClothingEyesHudMedicalVirology
+  - SunriseClothingMaskSterileAdvanced
+  - SunriseClothingHandsGlovesVirology
+  - SunriseClothingOuterBioVirologyAdvanced
+  - SunriseClothingHeadHatHoodBioVirologyAdvanced
+  - SunriseDiseaseSprayerLarge
+  - SunriseDisinfectantGrenade
+  - SunriseDiseaseVaccineInjector
 
 - type: latheRecipePack
   id: SurgeryDynamicSunrise

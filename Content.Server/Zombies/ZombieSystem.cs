@@ -1,4 +1,5 @@
 using Content.Shared.NPC.Prototypes;
+using Content.Server._Sunrise.Disease.Components; // Sunrise-Edit - наследование штамма зомби
 using Content.Server.Actions;
 using Content.Server.Body.Systems;
 using Content.Server.Chat;
@@ -277,6 +278,11 @@ namespace Content.Server.Zombies
                     if (HasComp<ZombieImmuneComponent>(uid) || cannotSpread || !_random.Prob(GetZombieInfectionChance(uid, entity.Comp)))
                         continue;
 
+                    // Sunrise added start - штамм зомби наследуется по цепочке укусов.
+                    // Ставится до PendingZombieComponent: вирусология читает источник при его запуске.
+                    EnsureComp<DiseaseZombieSourceComponent>(uid).Source = entity.Owner;
+                    // Sunrise added end
+
                     EnsureComp<PendingZombieComponent>(uid);
                     EnsureComp<ZombifyOnDeathComponent>(uid);
                 }
@@ -284,6 +290,10 @@ namespace Content.Server.Zombies
                 {
                     if (HasComp<ZombieImmuneComponent>(uid) || cannotSpread)
                         continue;
+
+                    // Sunrise added start - штамм зомби наследуется и когда поднимают мертвеца.
+                    EnsureComp<DiseaseZombieSourceComponent>(uid).Source = entity.Owner;
+                    // Sunrise added end
 
                     // If the target is dead and can be infected, infect.
                     ZombifyEntity(uid);

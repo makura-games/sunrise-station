@@ -489,6 +489,7 @@
   - type: Item
     heldPrefix: stomach
   - type: OrganStomach # Sunrise-edit
+  - type: DiseaseDigestion # Sunrise-Edit - желудок хуже заражается привычной для него пищей
 
 - type: entity
   parent: Solution

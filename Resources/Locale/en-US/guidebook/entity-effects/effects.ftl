@@ -170,12 +170,14 @@ entity-effect-guidebook-status-effect-indef =
         *[other] after a {NATURALFIXED($delay, 3)} second delay
     }
 
+# Sunrise-Edit - the [update] branch called LOC($key), but the knockdown effect never passes a key
+# argument, which crashed the guidebook. Replaced with the plain word, like the neighbouring branches.
 entity-effect-guidebook-knockdown =
     { $type ->
         [update]{ $chance ->
                     [1] Causes
                     *[other] cause
-                    } {LOC($key)} for at least {NATURALFIXED($time, 3)} {MANY("second", $time)} without accumulation
+                    } knockdown for at least {NATURALFIXED($time, 3)} {MANY("second", $time)} without accumulation
         [add]   { $chance ->
                     [1] Causes
                     *[other] cause

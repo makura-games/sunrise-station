@@ -148,3 +148,5 @@ ent-USSPCaptainDamagedIDCardRandomSpawner = random damaged USSP captain ID card 
     .desc = Spawns a random visual variant of a damaged USSP captain ID card.
 ent-CommaidIDCard = command maid ID card
     .desc = { ent-IDCardStandard.desc }
+ent-VirologistIDCard = virologist ID card
+    .desc = { ent-IDCardStandard.desc }

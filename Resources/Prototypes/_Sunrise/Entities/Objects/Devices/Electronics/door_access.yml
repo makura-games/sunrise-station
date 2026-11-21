@@ -69,3 +69,19 @@
   components:
   - type: AccessReader
     access: [["Security"], ["Cadet"], ["Command"], ["Brigmedic"]]
+
+# Дверь вирусологической лаборатории: пускает вирусолога и главврача, остальной медотдел — нет.
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsVirology
+  suffix: Virology, Locked
+  components:
+  - type: AccessReader
+    access: [["Virology"]]
+    alertAccesses:
+      violet: VioletAlertAccesses
+      blue: BlueAlertAccessesHOS
+      red: RedAlertAccesses
+      yellow: YellowAlertAccesses
+      gamma: GammaAlertAccesses
+      delta: AllAccess

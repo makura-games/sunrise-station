@@ -55,3 +55,6 @@ guide-entry-sr-rule-ccp = Политика создания персонажей
 guide-entry-sr-rule-pana = Препятствование аресту неантагонистами
 guide-entry-improvised-grenade-casing = Improvised grenade casing
 guide-entry-detonator-triggers = Explosive cord and triggers
+guide-entry-sunrise-virology-selection = Strain selection
+guide-entry-sunrise-virology-biosafety = Biosafety
+guide-entry-sunrise-virology-symptoms = Symptoms

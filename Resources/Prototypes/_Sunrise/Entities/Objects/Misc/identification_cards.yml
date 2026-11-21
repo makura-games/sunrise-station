@@ -264,6 +264,25 @@
 
 - type: entity
   parent: IDCardStandard
+  id: VirologistIDCard
+  name: Virologist ID card
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Misc/id_cards.rsi
+    layers:
+    - state: default
+    - state: department-side
+      color: "#68aed6"
+    - sprite: /Textures/Interface/Misc/job_icons.rsi
+      offset: *icon-offset
+      state: Virologist
+  - type: Item
+    heldPrefix: default
+  - type: PresetIdCard
+    job: Virologist
+
+- type: entity
+  parent: IDCardStandard
   id: USSPIDCard
   name: USSP ID card
   suffix: Crew

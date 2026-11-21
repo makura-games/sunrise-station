@@ -541,3 +541,45 @@
   minStationStrength: 20
   maxStress: 75
   weightModifier: 1.0
+
+# =============================================================================
+# 🦠 БОЛЕЗНИ
+# =============================================================================
+
+- type: storytellerMetadata
+  id: SunriseMinorOutbreak
+  threatType: MinorCalm
+  threatCost: 10
+  maxStress: 90
+
+- type: storytellerMetadata
+  id: SunriseSpoiledFoodBatch
+  threatType: MinorCalm
+  threatCost: 20
+  maxStress: 85
+
+- type: storytellerMetadata
+  id: SunriseContaminatedCargo
+  threatType: MinorCalm
+  threatCost: 30
+  maxStress: 80
+
+- type: storytellerMetadata
+  id: SunriseInfectedVermin
+  threatType: Neutral
+  threatCost: 30
+  maxStress: 80
+
+- type: storytellerMetadata
+  id: SunriseModerateOutbreak
+  threatType: MajorCalm
+  threatCost: 60
+  minStationStrength: 15
+  maxStress: 80
+
+- type: storytellerMetadata
+  id: SunriseSevereOutbreak
+  threatType: MajorCalm
+  threatCost: 140
+  minStationStrength: 30
+  maxStress: 70

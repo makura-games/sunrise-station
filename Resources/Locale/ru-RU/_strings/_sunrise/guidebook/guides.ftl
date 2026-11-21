@@ -55,3 +55,6 @@ guide-entry-sr-rule-pana = Препятствование аресту неан�
 guide-entry-improvised-grenade-casing = Самодельная граната (корпус)
 guide-entry-detonator-triggers = Взрывной шнур и триггеры
 guide-entry-sr-rule-excep-3-7 = Исключение/прецедент 3.7
+guide-entry-sunrise-virology-selection = Селекция штаммов
+guide-entry-sunrise-virology-biosafety = Биобезопасность
+guide-entry-sunrise-virology-symptoms = Симптомы

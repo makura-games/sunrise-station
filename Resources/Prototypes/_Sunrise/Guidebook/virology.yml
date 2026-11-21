@@ -1,0 +1,15 @@
+- type: guideEntry
+  id: SunriseVirologySelection
+  name: guide-entry-sunrise-virology-selection
+  text: "/ServerInfo/Guidebook/_Sunrise/Virology/Selection.xml"
+
+- type: guideEntry
+  id: SunriseVirologyBiosafety
+  name: guide-entry-sunrise-virology-biosafety
+  text: "/ServerInfo/Guidebook/_Sunrise/Virology/Biosafety.xml"
+
+# Страница собирается из прототипов симптомов: добавленный симптом попадает в неё сам.
+- type: guideEntry
+  id: SunriseVirologySymptoms
+  name: guide-entry-sunrise-virology-symptoms
+  text: "/ServerInfo/Guidebook/_Sunrise/Virology/Symptoms.xml"

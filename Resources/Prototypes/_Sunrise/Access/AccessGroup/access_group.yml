@@ -38,3 +38,15 @@
   id: CaptainAlertAccesses
   tags:
   - Captain
+
+# Фиолетовый код — биологическая угроза. Медотдел получает проход в отделы без охраны,
+# чтобы искать очаги и вакцинировать экипаж, не бегая за головами отделов.
+# Командование, безопасность, оружейная, ИИ и хранилище остаются закрытыми.
+- type: accessGroup
+  id: VioletAlertAccesses
+  tags:
+  - ChiefMedicalOfficer
+  - Medical
+  - Chemistry
+  - Paramedic
+  - Virology

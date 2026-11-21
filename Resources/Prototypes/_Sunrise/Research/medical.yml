@@ -498,3 +498,82 @@
   - MedicalScannerMachineCircuitboard
   radioChannels:
   - Medical
+
+# Вирусология: расходники и машины отдела, затем биозащита и массовая вакцинация.
+
+- type: technology
+  id: SunriseVirologyBasicsTech
+  name: research-technology-sunrise-virology-basics
+  icon:
+    sprite: _Sunrise/Disease/petri_dish.rsi
+    state: icon
+  discipline: Biochemical
+  tier: 1
+  cost: 5000
+  recipeUnlocks:
+  - SunriseDiseaseSwab
+  - SunrisePetriDish
+  - SunriseClothingEyesHudVirology
+  - SunriseClothingEyesHudMedicalVirology
+  - DiagnoserMachineCircuitboard
+  - VaccinatorMachineCircuitboard
+  - SunriseDiseaseMicroscopeCircuitboard
+  - SunriseDiseaseResearchVesselCircuitboard
+  - SunriseDiseaseDatabaseCircuitboard
+  radioChannels:
+  - Medical
+
+- type: technology
+  id: SunriseBiohazardProtectionTech
+  name: research-technology-sunrise-biohazard-protection
+  icon:
+    sprite: Clothing/OuterClothing/Bio/virology.rsi
+    state: icon
+  discipline: Biochemical
+  tier: 2
+  cost: 7500
+  recipeUnlocks:
+  - SunriseClothingMaskSterileAdvanced
+  - SunriseClothingHandsGlovesVirology
+  - SunriseClothingOuterBioVirologyAdvanced
+  - SunriseClothingHeadHatHoodBioVirologyAdvanced
+  - SunriseDiseaseSprayerLarge
+  - SunriseDisinfectantGrenade
+  - SunriseDiseaseSterilizerCircuitboard
+  technologyPrerequisites:
+  - SunriseVirologyBasicsTech
+  radioChannels:
+  - Medical
+
+- type: technology
+  id: SunriseMassVaccinationTech
+  name: research-technology-sunrise-mass-vaccination
+  icon:
+    sprite: _Sunrise/Disease/vaccine_injector.rsi
+    state: icon
+  discipline: Biochemical
+  tier: 3
+  cost: 10000
+  recipeUnlocks:
+  - SunriseDiseaseVaccineInjector
+  technologyPrerequisites:
+  - SunriseBiohazardProtectionTech
+  radioChannels:
+  - Medical
+
+# Экспериментальная вирусология: разогнанный сосуд, как экспериментальный сосуд у аномалий.
+- type: technology
+  id: SunriseExperimentalVirologyTech
+  name: research-technology-sunrise-experimental-virology
+  icon:
+    sprite: _Sunrise/Disease/research_vessel_experimental.rsi
+    state: base
+  discipline: Biochemical
+  tier: 2
+  cost: 10000
+  recipeUnlocks:
+  - SunriseDiseaseResearchVesselExperimentalCircuitboard
+  technologyPrerequisites:
+  - SunriseVirologyBasicsTech
+  radioChannels:
+  - Medical

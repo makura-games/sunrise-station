@@ -70,6 +70,7 @@
     Magistrat: 75
     NtrOfficer: 40
     MedicalPathologist: 0
+    Virologist: 0
     SeniorPhysician: 35
     HeadOfPrison: 100
     PlanetPrisoner: 10

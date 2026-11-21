@@ -28,3 +28,7 @@ research-technology-budget-cyber-organs = Budget CyberOrgans
 research-technology-advanced-cyberlimbs = Advanced cyberorgans
 research-technology-ion-weaponry = Ion Weaponry
 research-technology-full-metal-jacket-ammunition = Full Metal Jacket Ammunition
+research-technology-sunrise-virology-basics = Virology Basics
+research-technology-sunrise-biohazard-protection = Biohazard Protection
+research-technology-sunrise-mass-vaccination = Mass Vaccination
+research-technology-sunrise-experimental-virology = Experimental Virology

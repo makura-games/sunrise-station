@@ -1,0 +1,140 @@
+# Рецепты вирусологии, открываемые исследованиями. Расходники и снаряжение печатает медицинский
+# лейт, платы машин — схемопринтер.
+
+# Основы вирусологии.
+
+- type: latheRecipe
+  id: SunriseDiseaseSwab
+  result: SunriseDiseaseSwab
+  completetime: 1
+  materials:
+    Cloth: 20
+    Plastic: 20
+
+- type: latheRecipe
+  id: SunrisePetriDish
+  result: SunrisePetriDish
+  completetime: 1
+  materials:
+    Glass: 100
+    Plastic: 50
+
+- type: latheRecipe
+  id: SunriseClothingEyesHudVirology
+  result: SunriseClothingEyesHudVirology
+  categories:
+  - Clothing
+  completetime: 2
+  materials:
+    Steel: 200
+    Glass: 300
+    Plastic: 100
+
+- type: latheRecipe
+  id: SunriseClothingEyesHudMedicalVirology
+  result: SunriseClothingEyesHudMedicalVirology
+  categories:
+  - Clothing
+  completetime: 3
+  materials:
+    Steel: 300
+    Glass: 400
+    Plastic: 200
+    Silver: 100
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: DiagnoserMachineCircuitboard
+  result: DiagnoserMachineCircuitboard
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: VaccinatorMachineCircuitboard
+  result: VaccinatorMachineCircuitboard
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: SunriseDiseaseMicroscopeCircuitboard
+  result: SunriseDiseaseMicroscopeCircuitboard
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: SunriseDiseaseDatabaseCircuitboard
+  result: SunriseDiseaseDatabaseCircuitboard
+
+# Биозащита.
+
+- type: latheRecipe
+  id: SunriseClothingMaskSterileAdvanced
+  result: SunriseClothingMaskSterileAdvanced
+  categories:
+  - Clothing
+  completetime: 2
+  materials:
+    Plastic: 100
+    Cloth: 50
+
+- type: latheRecipe
+  id: SunriseClothingHandsGlovesVirology
+  result: SunriseClothingHandsGlovesVirology
+  categories:
+  - Clothing
+  completetime: 2
+  materials:
+    Plastic: 100
+    Durathread: 200
+
+- type: latheRecipe
+  id: SunriseClothingOuterBioVirologyAdvanced
+  result: SunriseClothingOuterBioVirologyAdvanced
+  categories:
+  - Clothing
+  completetime: 5
+  materials:
+    Cloth: 400
+    Plastic: 300
+    Durathread: 200
+
+- type: latheRecipe
+  id: SunriseClothingHeadHatHoodBioVirologyAdvanced
+  result: SunriseClothingHeadHatHoodBioVirologyAdvanced
+  categories:
+  - Clothing
+  completetime: 3
+  materials:
+    Cloth: 200
+    Plastic: 200
+    Glass: 100
+
+- type: latheRecipe
+  id: SunriseDiseaseSprayerLarge
+  result: SunriseDiseaseSprayerLarge
+  completetime: 2
+  materials:
+    Plastic: 300
+    Steel: 100
+
+- type: latheRecipe
+  id: SunriseDisinfectantGrenade
+  result: SunriseDisinfectantGrenade
+  completetime: 3
+  materials:
+    Steel: 150
+    Plastic: 100
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: SunriseDiseaseSterilizerCircuitboard
+  result: SunriseDiseaseSterilizerCircuitboard
+
+# Массовая вакцинация.
+
+- type: latheRecipe
+  id: SunriseDiseaseVaccineInjector
+  result: SunriseDiseaseVaccineInjector
+  completetime: 4
+  materials:
+    Steel: 300
+    Plastic: 200
+    Glass: 200
+    Silver: 100

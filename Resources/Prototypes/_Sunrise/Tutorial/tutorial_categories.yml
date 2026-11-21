@@ -10,3 +10,11 @@
   - MedicalTutorial
   - FoodTutorial
   - CombatTutorial
+
+# Профильные обучения: нужны не всем, поэтому вынесены из набора для начинающих.
+- type: tutorialCategory
+  id: MedTutorials
+  name: med-tutorials
+  tutorials:
+  - VirologyTutorial
+  - VirologySelectionTutorial

@@ -30,6 +30,11 @@
     - FullBodyOuter
     - WhitelistChameleon
   # Sunrise-End
+  # Sunrise added start - биокостюм наполовину закрывает тело от касаний, укусов и наростов
+  - type: DiseaseProtection
+    routes: [ Contact ]
+    coefficient: 0.5
+  # Sunrise added end
 
 - type: entity
   parent: ClothingOuterBioGeneral

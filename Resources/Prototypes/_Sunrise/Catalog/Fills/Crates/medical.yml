@@ -12,6 +12,31 @@
 
 - type: entity
   parent: CrateMedicalSecure
+  id: SunriseCrateEpidemicResponse
+  name: epidemic response crate
+  description: Swabs, suppressants and protective masks for an outbreak.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: SunriseDiseaseSwab
+          amount: 10
+        - id: SunrisePillCanisterAntimicrobial
+          amount: 2
+        - id: SunrisePillCanisterAntitussive
+        - id: BoxSterileMask
+          amount: 2
+        # Сырьё вакцинатора: его же можно намолоть в биореклаймере, но на старте вспышки взять негде.
+        - id: MaterialBiomass
+        # Чашки для культур: исследование штамма без живых больных.
+        - id: SunrisePetriDishBox
+        # Полевой набор: найти очаг и погасить его, не возвращаясь в лабораторию.
+        - id: SunriseDiseaseScanner
+        - id: SunriseDiseaseSprayer
+
+- type: entity
+  parent: CrateMedicalSecure
   id: SunriseCrateMedicalManualHealingDebug
   name: manual medicine debug crate
   description: Contains manual-use healing items for debugging.

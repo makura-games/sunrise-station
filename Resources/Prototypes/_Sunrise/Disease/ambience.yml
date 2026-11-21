@@ -1,0 +1,24 @@
+# Эмбиент вирусологии. Играет рядом с вакцинатором, то есть фактически в лаборатории.
+- type: soundCollection
+  id: SunriseAmbienceVirology
+  files:
+  - /Audio/_Sunrise/Ambience/Medical/ambivir1.ogg
+  - /Audio/_Sunrise/Ambience/Medical/ambivir2.ogg
+
+# Приоритет выше медицинского (3): вирусология стоит внутри медотсека, и её трек
+# должен перебивать общий медицинский эмбиент.
+- type: ambientMusic
+  id: SunriseVirology
+  sound:
+    params:
+      volume: -10
+    collection: SunriseAmbienceVirology
+  priority: 4
+  allowRepeat: false
+  conditions:
+  - !type:NearbyComponentsCondition
+    anchored: true
+    count: 1
+    range: 6
+    components:
+    - type: Vaccinator

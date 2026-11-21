@@ -243,6 +243,12 @@
     damageProtection:
       flatReductions:
         Heat: 0 # no protection
+  # Открытые пальцы заразу не задерживают и на ткани её не уносят.
+  - type: DiseaseProtection
+    routes: [ Contact ]
+    coefficient: 1
+  - type: DiseaseResidue
+    pickUpChance: 0
   - type: MeleeWeapon
     attackRate: 2
     damage:

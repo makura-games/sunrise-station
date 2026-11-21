@@ -95,3 +95,5 @@ ent-PiratePDAMusicPassengerId = { ent-PiratePDAMusic }
     .desc = { ent-PiratePDAMusic.desc }
 ent-SecuritySergeantPDA = security sergeant's PDA
     .desc = Still works. Unlike its owner, it doesn't yell at you.
+ent-VirologistPDA = virologist PDA
+    .desc = Smells faintly of disinfectant.

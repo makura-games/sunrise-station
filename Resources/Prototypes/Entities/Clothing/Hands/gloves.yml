@@ -192,6 +192,10 @@
   - type: Fiber
     fiberMaterial: fibers-nitrile
   - type: FingerprintMask
+  # Sunrise added start - нитрил отталкивает заразу: перчатки защищают, но сами не загрязняются
+  - type: DiseaseResidue
+    pickUpChance: 0
+  # Sunrise added end
 
 - type: entity
   parent: ClothingHandsButcherable
@@ -380,6 +384,13 @@
     damageProtection:
       flatReductions:
         Heat: 0 # no protection
+  # Sunrise added start - открытые пальцы заразу не задерживают и на ткани её не уносят
+  - type: DiseaseProtection
+    routes: [ Contact ]
+    coefficient: 1
+  - type: DiseaseResidue
+    pickUpChance: 0
+  # Sunrise added end
 
 - type: entity
   parent: ClothingHandsBase
@@ -398,6 +409,13 @@
     damageProtection:
       flatReductions:
         Heat: 0 # no protection
+  # Sunrise added start - открытые пальцы заразу не задерживают и на ткани её не уносят
+  - type: DiseaseProtection
+    routes: [ Contact ]
+    coefficient: 1
+  - type: DiseaseResidue
+    pickUpChance: 0
+  # Sunrise added end
 
 - type: entity
   parent: ClothingHandsSmooth # SUNRISE EDIT
@@ -416,6 +434,13 @@
     damageProtection:
       flatReductions:
         Heat: 0 # no protection
+  # Sunrise added start - открытые пальцы заразу не задерживают и на ткани её не уносят
+  - type: DiseaseProtection
+    routes: [ Contact ]
+    coefficient: 1
+  - type: DiseaseResidue
+    pickUpChance: 0
+  # Sunrise added end
 
 - type: entity
   # Intentionally named after regular gloves, they're meant to be sneaky.

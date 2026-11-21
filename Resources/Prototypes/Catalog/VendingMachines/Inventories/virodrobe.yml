@@ -10,3 +10,12 @@
     ClothingBackpackVirology: 2
     ClothingBackpackSatchelVirology: 2
     ClothingBackpackDuffelVirology: 2
+    # Sunrise added start - расходники и приборы вирусолога, пополняются отдельным набором из карго
+    SunriseDiseaseSwab: 6
+    SunrisePetriDish: 4
+    SunriseDiseaseBlankSample: 2
+    SunrisePillCanisterAntitussive: 2
+    SunriseDiseaseScanner: 2
+    SunriseDiseaseSprayer: 2
+    SunriseClothingEyesHudVirology: 2
+    # Sunrise added end

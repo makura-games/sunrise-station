@@ -1,0 +1,5 @@
+# Своё ускорение для симптома болезни: общий эффект реагентов перезаписал бы ломоту и стимуляторы.
+- type: entity
+  parent: StatusEffectSpeed
+  id: SunriseDiseaseAdrenalineStatusEffect
+  name: adrenaline surge

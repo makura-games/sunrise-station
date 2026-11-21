@@ -1,0 +1,728 @@
+# Туториал вирусологии: цепочка от больного до вакцины.
+# Машины здесь — учебные копии с укороченными таймерами, а учебный штамм не передаётся,
+# поэтому игрок не заболеет посреди урока и не будет ждать настоящие минуты роста культуры.
+
+- type: tutorialSequence
+  id: VirologyTutorial
+  duration: 900
+  estimatedDuration:
+    minimum: 420
+    maximum: 780
+  priority: 0
+  name: virology-tutorial-name
+  tooltip: virology-tutorial-tooltip
+  grid: /Maps/_Sunrise/Tutorials/virology_tutorial.yml
+  playerEntity: VirologyTutorialPlayer
+  steps:
+  - VirologyTutWelcome
+  - VirologyTutEquipMask
+  - VirologyTutEquipGloves
+  - VirologyTutExamineGloves
+  - VirologyTutEquipVisor
+  - VirologyTutReachWard
+  - VirologyTutExaminePatient
+  - VirologyTutTakeSwab
+  - VirologyTutSwabPatient
+  - VirologyTutSwabWait
+  - VirologyTutSpotSource
+  - VirologyTutTakeSprayer
+  - VirologyTutDisinfect
+  - VirologyTutReachLab
+  - VirologyTutSeedDish
+  - VirologyTutGrowWait
+  - VirologyTutTakeDish
+  - VirologyTutInsertDiagnoser
+  - VirologyTutReadReport
+  - VirologyTutOpenDatabase
+  - VirologyTutExplainDatabase
+  - VirologyTutInsertVaccinator
+  - VirologyTutOpenVaccinator
+  - VirologyTutExplainBatches
+  - VirologyTutProduceVaccine
+  - VirologyTutInjectPatient
+  - VirologyTutFinish
+  - TutorialMHelp
+
+# --- Биозащита ---
+
+- type: tutorialStep
+  id: VirologyTutWelcome
+  parent: BaseTutorialStepBase
+  bubble:
+    text: virology-tut-welcome-bubble
+  chatMessage: virology-tut-welcome-chat
+  ttsMessage: virology-tut-welcome-tts
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 9
+
+- type: tutorialStep
+  id: VirologyTutEquipMask
+  parent: BaseTutorialStepBase
+  target: ClothingMaskSterile
+  bubble:
+    text: virology-tut-equip-mask-bubble
+    attachToTarget: true
+  chatMessage: virology-tut-equip-mask-chat
+  ttsMessage: virology-tut-equip-mask-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: ClothingMaskSterile
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - ClothingMaskSterile
+  conditions:
+  - !type:EquipListenedCondition
+    target: ClothingMaskSterile
+
+- type: tutorialStep
+  id: VirologyTutEquipGloves
+  parent: BaseTutorialStepBase
+  target: ClothingHandsGlovesNitrile
+  bubble:
+    text: virology-tut-equip-gloves-bubble
+    attachToTarget: true
+  chatMessage: virology-tut-equip-gloves-chat
+  ttsMessage: virology-tut-equip-gloves-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: ClothingHandsGlovesNitrile
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - ClothingHandsGlovesNitrile
+  conditions:
+  - !type:EquipListenedCondition
+    target: ClothingHandsGlovesNitrile
+
+# Кнопка «Защита от заразы» в осмотре работает так же, как показатели брони.
+- type: tutorialStep
+  id: VirologyTutExamineGloves
+  parent: BaseTutorialStepBase
+  target: ClothingHandsGlovesNitrile
+  bubble:
+    text: virology-tut-examine-gloves-bubble
+  chatMessage: virology-tut-examine-gloves-chat
+  ttsMessage: virology-tut-examine-gloves-tts
+  observeRange: 14
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:ExamineListenedCondition
+    target: ClothingHandsGlovesNitrile
+
+- type: tutorialStep
+  id: VirologyTutEquipVisor
+  parent: BaseTutorialStepBase
+  target: SunriseClothingEyesHudVirology
+  bubble:
+    text: virology-tut-equip-visor-bubble
+    attachToTarget: true
+  chatMessage: virology-tut-equip-visor-chat
+  ttsMessage: virology-tut-equip-visor-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: SunriseClothingEyesHudVirology
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseClothingEyesHudVirology
+  conditions:
+  - !type:EquipListenedCondition
+    target: SunriseClothingEyesHudVirology
+
+# --- Палата: мазок и очаг ---
+
+- type: tutorialStep
+  id: VirologyTutReachWard
+  parent: BaseTutorialReachStepBase
+  bubble:
+    text: virology-tut-reach-ward-bubble
+  chatMessage: virology-tut-reach-ward-chat
+  ttsMessage: virology-tut-reach-ward-tts
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:ReachMarkerCondition
+    marker: VirologyTutMarkerWard
+
+- type: tutorialStep
+  id: VirologyTutExaminePatient
+  parent: BaseTutorialStepBase
+  target: VirologyTutorialPatient
+  bubble:
+    text: virology-tut-examine-patient-bubble
+    attachToTarget: true
+  chatMessage: virology-tut-examine-patient-chat
+  ttsMessage: virology-tut-examine-patient-tts
+  observeRange: 14
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:ExamineListenedCondition
+    target: VirologyTutorialPatient
+
+- type: tutorialStep
+  id: VirologyTutTakeSwab
+  parent: BaseTutorialStepBase
+  target: SunriseDiseaseSwab
+  bubble:
+    text: virology-tut-take-swab-bubble
+    attachToTarget: true
+  chatMessage: virology-tut-take-swab-chat
+  ttsMessage: virology-tut-take-swab-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: SunriseDiseaseSwab
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseSwab
+  conditions:
+  - !type:PickupListenedCondition
+    target: SunriseDiseaseSwab
+
+- type: tutorialStep
+  id: VirologyTutSwabPatient
+  parent: BaseTutorialStepBase
+  target: VirologyTutorialPatient
+  bubble:
+    text: virology-tut-swab-patient-bubble
+    attachToTarget: true
+  chatMessage: virology-tut-swab-patient-chat
+  ttsMessage: virology-tut-swab-patient-tts
+  observeRange: 14
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseSwab
+    - type: TutorialDropSoftLock
+      popup: virology-tut-softlock-keep-swab
+  conditions:
+  - !type:UseListenedCondition
+    target: VirologyTutorialPatient
+
+# Пауза под do-after мазка: образец попадает на тампон только в конце.
+- type: tutorialStep
+  id: VirologyTutSwabWait
+  parent: BaseTutorialStepBase
+  conditions:
+  - !type:StepDelayCondition
+    delay: 3
+
+- type: tutorialStep
+  id: VirologyTutSpotSource
+  parent: BaseTutorialStepBase
+  target: VirologyTutorialTray
+  bubble:
+    text: virology-tut-spot-source-bubble
+    attachToTarget: true
+  chatMessage: virology-tut-spot-source-chat
+  ttsMessage: virology-tut-spot-source-tts
+  observeRange: 14
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseSwab
+  conditions:
+  - !type:ExamineListenedCondition
+    target: VirologyTutorialTray
+
+- type: tutorialStep
+  id: VirologyTutTakeSprayer
+  parent: BaseTutorialStepBase
+  target: SunriseDiseaseSprayer
+  bubble:
+    text: virology-tut-take-sprayer-bubble
+    attachToTarget: true
+  chatMessage: virology-tut-take-sprayer-chat
+  ttsMessage: virology-tut-take-sprayer-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: SunriseDiseaseSprayer
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseSwab
+      - SunriseDiseaseSprayer
+  conditions:
+  - !type:PickupListenedCondition
+    target: SunriseDiseaseSprayer
+
+- type: tutorialStep
+  id: VirologyTutDisinfect
+  parent: BaseTutorialStepBase
+  target: VirologyTutorialTray
+  bubble:
+    text: virology-tut-disinfect-bubble
+    attachToTarget: true
+  chatMessage: virology-tut-disinfect-chat
+  ttsMessage: virology-tut-disinfect-tts
+  observeRange: 14
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseSwab
+      - SunriseDiseaseSprayer
+    - type: TutorialDropSoftLock
+      popup: virology-tut-softlock-keep-swab
+  conditions:
+  - !type:UseListenedCondition
+    target: VirologyTutorialTray
+
+# --- Лаборатория: культура и анализ ---
+
+- type: tutorialStep
+  id: VirologyTutReachLab
+  parent: BaseTutorialReachStepBase
+  bubble:
+    text: virology-tut-reach-lab-bubble
+  chatMessage: virology-tut-reach-lab-chat
+  ttsMessage: virology-tut-reach-lab-tts
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseSwab
+      - SunriseDiseaseSprayer
+    - type: TutorialDropSoftLock
+      popup: virology-tut-softlock-keep-swab
+  conditions:
+  - !type:ReachMarkerCondition
+    marker: VirologyTutMarkerLab
+
+- type: tutorialStep
+  id: VirologyTutSeedDish
+  parent: BaseTutorialStepBase
+  target: VirologyTutorialDish
+  bubble:
+    text: virology-tut-seed-dish-bubble
+    attachToTarget: true
+  chatMessage: virology-tut-seed-dish-chat
+  ttsMessage: virology-tut-seed-dish-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: VirologyTutorialDish
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseSwab
+      - VirologyTutorialDish
+  conditions:
+  - !type:UseListenedCondition
+    target: VirologyTutorialDish
+
+# Учебная чашка растит культуру десять секунд вместо минуты.
+- type: tutorialStep
+  id: VirologyTutGrowWait
+  parent: BaseTutorialStepBase
+  bubble:
+    text: virology-tut-grow-wait-bubble
+  chatMessage: virology-tut-grow-wait-chat
+  ttsMessage: virology-tut-grow-wait-tts
+  conditions:
+  - !type:StepDelayCondition
+    delay: 12
+
+- type: tutorialStep
+  id: VirologyTutTakeDish
+  parent: BaseTutorialStepBase
+  target: VirologyTutorialDish
+  bubble:
+    text: virology-tut-take-dish-bubble
+    attachToTarget: true
+  chatMessage: virology-tut-take-dish-chat
+  ttsMessage: virology-tut-take-dish-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: VirologyTutorialDish
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseSwab
+      - VirologyTutorialDish
+  conditions:
+  - !type:PickupListenedCondition
+    target: VirologyTutorialDish
+
+- type: tutorialStep
+  id: VirologyTutInsertDiagnoser
+  parent: BaseTutorialStepBase
+  target: VirologyTutorialDiagnoser
+  bubble:
+    text: virology-tut-insert-diagnoser-bubble
+    attachToTarget: true
+  chatMessage: virology-tut-insert-diagnoser-chat
+  ttsMessage: virology-tut-insert-diagnoser-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: VirologyTutorialDiagnoser
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseSwab
+      - VirologyTutorialDish
+  conditions:
+  - !type:ItemInsertedListenedCondition
+    item: VirologyTutorialDish
+    target: VirologyTutorialDiagnoser
+
+- type: tutorialStep
+  id: VirologyTutReadReport
+  parent: BaseTutorialStepBase
+  bubble:
+    text: virology-tut-read-report-bubble
+  chatMessage: virology-tut-read-report-chat
+  ttsMessage: virology-tut-read-report-tts
+  conditions:
+  - !type:StepDelayCondition
+    delay: 12
+
+- type: tutorialStep
+  id: VirologyTutOpenDatabase
+  parent: BaseTutorialStepBase
+  target: SunriseDiseaseDatabaseConsole
+  bubble:
+    text: virology-tut-open-database-bubble
+    attachToTarget: true
+  chatMessage: virology-tut-open-database-chat
+  ttsMessage: virology-tut-open-database-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: SunriseDiseaseDatabaseConsole
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseSwab
+  conditions:
+  - !type:BuiOpenListenedCondition
+    target: SunriseDiseaseDatabaseConsole
+
+- type: tutorialStep
+  id: VirologyTutExplainDatabase
+  parent: BaseTutorialStepBase
+  bubble:
+    text: virology-tut-explain-database-bubble
+  chatMessage: virology-tut-explain-database-chat
+  ttsMessage: virology-tut-explain-database-tts
+  blockUiInteraction: true
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 14
+
+# --- Вакцина ---
+
+- type: tutorialStep
+  id: VirologyTutInsertVaccinator
+  parent: BaseTutorialStepBase
+  target: VirologyTutorialVaccinator
+  bubble:
+    text: virology-tut-insert-vaccinator-bubble
+    attachToTarget: true
+  chatMessage: virology-tut-insert-vaccinator-chat
+  ttsMessage: virology-tut-insert-vaccinator-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: VirologyTutorialVaccinator
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseSwab
+  conditions:
+  - !type:ItemInsertedListenedCondition
+    item: SunriseDiseaseSwab
+    target: VirologyTutorialVaccinator
+
+- type: tutorialStep
+  id: VirologyTutOpenVaccinator
+  parent: BaseTutorialStepBase
+  target: VirologyTutorialVaccinator
+  bubble:
+    text: virology-tut-open-vaccinator-bubble
+    attachToTarget: true
+  chatMessage: virology-tut-open-vaccinator-chat
+  ttsMessage: virology-tut-open-vaccinator-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: VirologyTutorialVaccinator
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:BuiOpenListenedCondition
+    target: VirologyTutorialVaccinator
+
+- type: tutorialStep
+  id: VirologyTutExplainBatches
+  parent: BaseTutorialStepBase
+  bubble:
+    text: virology-tut-explain-batches-bubble
+  chatMessage: virology-tut-explain-batches-chat
+  ttsMessage: virology-tut-explain-batches-tts
+  blockUiInteraction: true
+  uiHighlight:
+  - !type:UiByName
+    name: BatchContainer
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 16
+
+- type: tutorialStep
+  id: VirologyTutProduceVaccine
+  parent: BaseTutorialStepBase
+  target: SunriseDiseaseVaccine
+  bubble:
+    text: virology-tut-produce-vaccine-bubble
+  chatMessage: virology-tut-produce-vaccine-chat
+  ttsMessage: virology-tut-produce-vaccine-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByName
+    name: ProduceButton
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseVaccine
+  conditions:
+  - !type:PickupListenedCondition
+    target: SunriseDiseaseVaccine
+
+- type: tutorialStep
+  id: VirologyTutInjectPatient
+  parent: BaseTutorialStepBase
+  target: VirologyTutorialPatient
+  bubble:
+    text: virology-tut-inject-patient-bubble
+    attachToTarget: true
+  chatMessage: virology-tut-inject-patient-chat
+  ttsMessage: virology-tut-inject-patient-tts
+  observeRange: 14
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - SunriseDiseaseVaccine
+    - type: TutorialDropSoftLock
+      popup: virology-tut-softlock-keep-vaccine
+  conditions:
+  - !type:UseListenedCondition
+    target: VirologyTutorialPatient
+
+- type: tutorialStep
+  id: VirologyTutFinish
+  parent: BaseTutorialStepBase
+  bubble:
+    text: virology-tut-finish-bubble
+  chatMessage: virology-tut-finish-chat
+  ttsMessage: virology-tut-finish-tts
+  conditions:
+  - !type:StepDelayCondition
+    delay: 12
+
+# --- Маркеры карты ---
+
+- type: entity
+  name: virology tutorial ward marker
+  id: VirologyTutMarkerWard
+  parent: TutorialGoalMarker
+
+- type: entity
+  name: virology tutorial lab marker
+  id: VirologyTutMarkerLab
+  parent: TutorialGoalMarker
+
+# --- Игрок ---
+
+# КПК выдаётся ради карты доступа: без неё не открыть консоль базы вирусов.
+- type: startingGear
+  id: VirologyTutorialPlayerGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitVirology
+    shoes: ClothingShoesColorWhite
+    back: ClothingBackpackVirology
+    id: VirologistPDA
+    ears: ClothingHeadsetMedical
+
+- type: entity
+  parent: BaseTutorialPlayer
+  id: VirologyTutorialPlayer
+  components:
+  - type: Loadout
+    prototypes: [VirologyTutorialPlayerGear]
+  - type: Godmode
+  - type: TutorialAttackSoftLock
+  - type: TutorialInteractSoftLock
+    targets:
+    - Poweredlight
+
+# --- Учебный штамм и пациент ---
+
+# Учебная простуда: без путей передачи, поэтому от пациента никто не заразится.
+# Набор симптомов задан руками, чтобы отчёт и партии вакцинатора выглядели одинаково у всех.
+- type: disease
+  id: SunriseTutorialCold
+  name: disease-tutorial-cold-name
+  description: disease-tutorial-cold-description
+  syndrome: disease-syndrome-respiratory
+  classification: Viral
+  routes: [ None ]
+  rollStrain: false
+  treatmentHints:
+  - disease-hint-rest
+  - disease-hint-mask
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 900
+  regression:
+    minDuration: 60
+    chance: 0.1
+    maxDuration: 180
+  stages:
+  - advance:
+      minDuration: 600
+      chance: 0.05
+      maxDuration: 900
+    minSymptoms: 3
+    maxSymptoms: 3
+    symptomPool:
+    - symptom: SymptomCough
+    - symptom: SymptomSoreThroat
+    - symptom: SymptomHeadache
+
+- type: entity
+  parent: MobHuman
+  id: VirologyTutorialPatient
+  name: virology tutorial patient
+  suffix: Training
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: DiseaseStartInfected
+    diseases:
+    - SunriseTutorialCold
+  - type: PassiveDamage
+    damage: {}
+
+- type: entity
+  parent: MarkerBase
+  id: VirologyTutorialPatientSpawner
+  name: virology tutorial patient spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - VirologyTutorialPatient
+
+# --- Учебные предметы и машины ---
+
+# Поднос с учебным штаммом: светится в визоре, но никого не заражает.
+- type: entity
+  parent: FoodPlateTin
+  id: VirologyTutorialTray
+  name: contaminated tray
+  suffix: Training
+  description: A used tray from the ward. Something dried on it.
+  components:
+  - type: DiseaseSource
+    templates: [ SunriseTutorialCold ]
+    routes: [ Contact ]
+    contactChance: 0
+    ingestionChance: 0
+
+- type: entity
+  parent: SunrisePetriDish
+  id: VirologyTutorialDish
+  suffix: Training
+  components:
+  - type: DiseaseCulture
+    growTime: 10
+
+- type: entity
+  parent: SunriseDiseaseDiagnoser
+  id: VirologyTutorialDiagnoser
+  suffix: Training
+  components:
+  - type: DiseaseDiagnoser
+    printDelay: 4
+
+# Учебному вакцинатору не нужна биомасса, а промывка после промаха занимает секунды.
+- type: entity
+  parent: SunriseVaccinator
+  id: VirologyTutorialVaccinator
+  suffix: Training
+  components:
+  - type: Vaccinator
+    synthesisDelay: 4
+    trialCost: 0
+    productionCost: 0
+    failureCooldown: 5

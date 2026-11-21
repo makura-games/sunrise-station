@@ -1,0 +1,49 @@
+<ui:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+                SetSize="560 560"
+                Title="{Loc 'vaccinator-ui-title'}"
+                MinSize="540 440">
+    <BoxContainer Margin="6 4" Orientation="Vertical" SeparationOverride="4">
+        <Label Name="StatusLabel" Text="" StyleClasses="LabelSubText" Visible="False" />
+
+        <!-- Блок растягивается на ту же область, что и список партий: место между разделителями занято всегда. -->
+        <BoxContainer Name="ProductionBlock" Orientation="Vertical" VerticalExpand="True" SeparationOverride="2" Visible="False">
+            <Label Name="ProductionHeaderLabel" Text="{Loc 'vaccinator-ui-production-header'}" StyleClasses="LabelKeyText" />
+
+            <!-- Состояние производства стоит в середине свободного места, а не жмётся к заголовку. -->
+            <BoxContainer Orientation="Vertical" VerticalExpand="True" VerticalAlignment="Center"
+                          HorizontalExpand="True" SeparationOverride="4">
+                <Label Name="ProductionHintLabel" Text="" StyleClasses="LabelHeading"
+                       HorizontalExpand="True" HorizontalAlignment="Center" Align="Center" />
+                <Label Name="ProductionStatusLabel" Text=""
+                       HorizontalExpand="True" HorizontalAlignment="Center" Align="Center" />
+            </BoxContainer>
+
+            <Button Name="ProduceButton" Text="{Loc 'vaccinator-ui-produce'}" HorizontalExpand="True" MinHeight="30" />
+        </BoxContainer>
+
+        <BoxContainer Name="BatchBlock" Orientation="Vertical" VerticalExpand="True" SeparationOverride="2">
+            <Label Name="BatchHeaderLabel" Text="{Loc 'vaccinator-ui-batches-header'}" StyleClasses="LabelKeyText" Align="Center"/>
+
+            <!-- Заглушка держит высоту блока, пока партий нет: иначе разделители схлопываются вплотную.
+                 Надпись забирает свободное место блока и встаёт в его центре.
+                 RichTextLabel, а не Label: Label не переносит текст, и длинная подсказка уезжает за край.
+                 Перенос считается по MaxWidth, поэтому ширина задана явно, с запасом от ширины окна. -->
+            <RichTextLabel Name="BatchPlaceholderLabel" StyleClasses="LabelText" Visible="False"
+                           MaxWidth="500" VerticalExpand="True"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+            <ScrollContainer Name="BatchScroll" VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
+                <!-- Отступы между карточками задаёт сама карточка, поэтому разделители сетки нулевые. -->
+                <GridContainer Name="BatchContainer" Columns="2" HorizontalAlignment="Center"
+                               HSeparationOverride="0" VSeparationOverride="0" />
+            </ScrollContainer>
+        </BoxContainer>
+
+        <PanelContainer StyleClasses="LowDivider" />
+
+        <Label Text="{Loc 'vaccinator-ui-serum-header'}" StyleClasses="LabelKeyText" />
+        <Label Name="SerumHintLabel" Text="{Loc 'vaccinator-ui-serum-empty'}" StyleClasses="LabelSubText" />
+        <BoxContainer Name="SerumContainer" Orientation="Vertical" SeparationOverride="2" />
+    </BoxContainer>
+</ui:FancyWindow>
