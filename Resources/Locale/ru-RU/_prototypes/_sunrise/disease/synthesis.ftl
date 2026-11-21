@@ -7,6 +7,6 @@ ent-SunriseDiseaseBlankSampleModerate = { ent-SunriseDiseaseBlankSample }
 ent-SunriseDiseaseBlankSampleStrong = { ent-SunriseDiseaseBlankSample }
     .desc = { ent-SunriseDiseaseBlankSample.desc }
 ent-SunriseDiseaseBlankSampleBox = раздатчик заготовок штаммов
-    .desc = Выдаёт запечатанные пробирки с неизученной питательной средой.
+    .desc = Коробка-раздатчик с запечатанными пробирками внутри.
 ent-SunriseCrateDiseaseSynthesis = ящик синтеза штаммов
     .desc = Питательные среды и запечатанные пробирки для вирусологической лаборатории.

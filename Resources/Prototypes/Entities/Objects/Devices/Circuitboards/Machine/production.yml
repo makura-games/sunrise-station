@@ -252,11 +252,9 @@
         amount: 1
         defaultPrototype: Beaker
     componentRequirements:
-      # Sunrise edit start - свой мазок вместо ботанического
-      DiseaseSwab:
+      BotanySwab:
         amount: 1
-        defaultPrototype: SunriseDiseaseSwab
-      # Sunrise edit end
+        defaultPrototype: DiseaseSwab
 
 - type: entity
   id: ArtifactAnalyzerMachineCircuitboard

@@ -1,4 +1,4 @@
 ent-SunriseVendingMachineRestockViroDrobe = набор пополнения ViroDrobe
-    .desc = Запечатанный набор пополнения. Вставляется в автомат вирусолога.
+    .desc = Запечатанная коробка с полосой биологической опасности.
 ent-SunriseCrateVendingMachineRestockViroDrobeFilled = ящик пополнения ViroDrobe
-    .desc = Содержит набор пополнения для автомата вирусолога.
+    .desc = Ящик с набором пополнения внутри.

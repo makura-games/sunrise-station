@@ -7,6 +7,6 @@ ent-SunriseDiseaseBlankSampleModerate = { ent-SunriseDiseaseBlankSample }
 ent-SunriseDiseaseBlankSampleStrong = { ent-SunriseDiseaseBlankSample }
     .desc = { ent-SunriseDiseaseBlankSample.desc }
 ent-SunriseDiseaseBlankSampleBox = strain blank dispenser
-    .desc = Dispenses sealed vials of uncharacterized culture medium.
+    .desc = A dispenser box with sealed vials inside.
 ent-SunriseCrateDiseaseSynthesis = strain synthesis crate
     .desc = Culture medium and sealed vials for a virology laboratory.
