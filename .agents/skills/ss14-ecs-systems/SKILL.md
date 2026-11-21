@@ -472,25 +472,73 @@ public sealed partial class MyEffectsSystem : EntitySystem, IEntityEffectRaiser
 }
 ```
 
-## Public methods of the system (API)
+## Public methods of the system (API) and Interaction Flow (`OnEvent -> TryDo -> CanDo -> Do`)
 
-Systems provide public methods for interaction between other systems:
+Systems provide public methods for interaction between other systems. The `Entity<T?>` pattern with `Resolve` allows calling code to optionally pass a component — the system will resolve it automatically.
+
+For actions and interactions, always separate responsibilities into three levels (`OnEvent -> TryDo -> CanDo -> Do`):
+
+1. **Event Handler (`On[EventName]`)**: Entry point subscribed via `SubscribeLocalEvent`. Checks only event validity (`args.Handled`) and delegates to `Try...`.
+2. **Action Attempt (`public bool TryAction(Entity<TComp?> ent, ...)`)**: Public API. Calls `CanAction` first; if `false`, returns `false`. Otherwise mutates state, plays predicted audio/popups, raises events, and returns `true`.
+3. **Feasibility Check (`public bool CanAction(Entity<TComp?> ent, ..., bool quiet = false)`)**: Pure validation. **Never** mutates component state; may show failure popups only when `!quiet`. Use `out string? reason` if callers need the failure text, while keeping the return type `bool`.
 
 ```csharp
-public void SetSpeed(Entity<MyComponent?> ent, float speed)
+private void OnUseInHand(Entity<WieldableComponent> ent, ref UseInHandEvent args)
 {
-    if (!Resolve(ent, ref ent.Comp))
+    if (args.Handled)
         return;
 
-    ent.Comp.Speed = speed;
-    Dirty(ent);
+    if (TryWield(ent.AsNullable(), args.User))
+        args.Handled = true;
+}
 
-    // Additional logic: update motion, send event
-    RaiseLocalEvent(ent, new SpeedChangedEvent(speed));
+public bool TryWield(Entity<WieldableComponent?> wieldable, EntityUid user)
+{
+    if (!Resolve(wieldable, ref wieldable.Comp, false))
+        return false;
+
+    if (!CanWield(wieldable, user))
+        return false;
+
+    SetWielded(wieldable, true);
+
+    if (wieldable.Comp.WieldSound != null)
+        _audio.PlayPredicted(wieldable.Comp.WieldSound, wieldable, user);
+
+    var ev = new ItemWieldedEvent(user);
+    RaiseLocalEvent(wieldable, ref ev);
+
+    _popup.PopupPredicted(Loc.GetString("wieldable-component-successful-wield", ("item", wieldable.Owner)), user, user);
+    return true;
+}
+
+public bool CanWield(Entity<WieldableComponent?> wieldable, EntityUid user, bool quiet = false)
+{
+    if (!Resolve(wieldable, ref wieldable.Comp, false))
+        return false;
+
+    if (!TryComp<HandsComponent>(user, out var hands))
+    {
+        if (!quiet)
+            _popup.PopupEntity(Loc.GetString("wieldable-component-no-hands"), user, user);
+        return false;
+    }
+
+    if (!_hands.IsHolding((user, hands), wieldable, out _))
+    {
+        if (!quiet)
+            _popup.PopupEntity(Loc.GetString("wieldable-component-not-in-hands", ("item", wieldable.Owner)), user, user);
+        return false;
+    }
+
+    return true;
 }
 ```
 
-The `Entity<T?>` pattern with `Resolve` allows the calling code to optionally pass a component - the system will receive it itself.
+**Anti-patterns to avoid:**
+- **Fat event handler**: putting validation and state changes directly inside `OnEvent` (cannot be reused by verbs, commands, or other systems).
+- **Side-effects in `CanDo`**: mutating component data (e.g., decrementing ammo) inside `Can...`.
+- **Blind `TryDo`**: skipping `CanDo` inside `TryDo` and assuming the caller already validated preconditions.
 
 ## Logging
 
@@ -516,118 +564,13 @@ Log.Warning("Error: {Entity}", ToPrettyString(uid));  // no prototype, no contex
 
 ## Event types
 
-### Cancellable
+See `ss14-events` for full event patterns. Quick summary:
 
-```csharp
-public sealed class MyAttemptEvent : CancellableEntityEventArgs
-{
-    // Other systems may call args.Cancel() to cancel the action
-}
-```
+- **Cancellable**: inherit `CancellableEntityEventArgs` (or struct with `Cancelled`) and pass by `ref`.
+- **Handled**: inherit `HandledEntityEventArgs` (`args.Handled = true`).
+- **By-ref struct**: mark with `[ByRefEvent]` (`public record struct MyEvent(...)`) and subscribe with `ref`.
+- **Naming**: always end with `Event` (`InteractUsingEvent`, `PickupAttemptEvent`, `MobStateChangedEvent`).
 
-### Handled
+## Hot-path optimizations
 
-```csharp
-public sealed class MyHandledEvent : HandledEntityEventArgs
-{
-    // args.Handled = true; — marks the event as processed
-}
-```
-
-### By-ref struct (performance)
-
-```csharp
-[ByRefEvent]
-public record struct MyPerformantEvent(EntityUid Target, float Value);
-```
-
-`[ByRefEvent]` passes the structure by reference instead of copying it - used for frequently called events. When using `[ByRefEvent]` in a subscription, the event parameter must be with `ref`.
-
-### Event Naming
-
-- Names always end with `Event`: `InteractUsingEvent`, `DamageChangedEvent`
-- Attempts: `AttemptEvent` / `Attempt`: `PickupAttemptEvent`
-- Notifications: descriptive name: `MobStateChangedEvent`, `StackCountChangedEvent`
-
-## Hot-path optimizations (addition)
-
-### 1) Precompute invariants before nested loops
-
-```csharp
-var fastPath = false;
-var itemShape = ItemSystem.GetItemShape(itemEnt); // We receive the form once.
-var fastAngles = itemShape.Count == 1;
-
-if (itemShape.Count == 1 && itemShape[0].Contains(Vector2i.Zero))
-    fastPath = true;
-
-var angles = new ValueList<Angle>();
-if (!fastAngles)
-{
-    for (var angle = startAngle; angle <= Angle.FromDegrees(360 - startAngle); angle += Math.PI / 2f)
-        angles.Add(angle); // We prepared a set of corners once.
-}
-else
-{
-    angles.Add(startAngle);
-    if (itemShape[0].Width != itemShape[0].Height)
-        angles.Add(startAngle + Angle.FromDegrees(90));
-}
-
-while (chunkEnumerator.MoveNext(out var storageChunk))
-{
-    for (var y = bottom; y <= top; y++)
-    {
-        for (var x = left; x <= right; x++)
-        {
-            foreach (var angle in angles)
-            {
-                // The main heavy check uses already precomputed values.
-            }
-        }
-    }
-}
-```
-
-### 1.1) Store the aggregate (`TargetCount`/`BurstShotsCount`) as a state
-
-```csharp
-// Instead of recalculating “how many shots have already been fired in burst” at each step:
-if (gun.BurstActivated)
-{
-    gun.BurstShotsCount += shots; // Incremental counter.
-    if (gun.BurstShotsCount >= gun.ShotsPerBurstModified)
-    {
-        gun.BurstActivated = false;
-        gun.BurstShotsCount = 0;
-    }
-}
-```
-
-### 2) Don't use LINQ in hot loops
-
-```csharp
-// ✅ For hot-path: explicit loop and early exit.
-for (var i = 0; i < entities.Count; i++)
-{
-    var uid = entities[i];
-    if (!TryComp<MyComponent>(uid, out var comp))
-        continue;
-    Process(uid, comp);
-}
-
-// ❌ Avoid in hot-path:
-// entities.Where(...).Select(...).ToList();
-```
-
-### 3) Component order in `EntityQueryEnumerator`
-
-Put the rarer component first to reduce the intersection of sets:
-
-```csharp
-var query = EntityQueryEnumerator<ActiveTimerTriggerComponent, TimerTriggerComponent>();
-```
-
-### 4) Early `continue/return` are required for cheap filters
-
-First cheap checks, then expensive calculations/events. This reduces the average iteration cost and reduces profiler noise.
+For `Update()` loops, frequent event handlers, allocation reduction, `EntityQueryEnumerator` component ordering, and caching invariants, activate the `ss14-standard-optimizations` skill.

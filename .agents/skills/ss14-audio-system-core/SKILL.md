@@ -8,12 +8,6 @@ description: Explains the AudioSystem architecture in Space Station 14 at the sh
 Use this skill as an architectural playbook for AudioSystem :)
 Keep your focus on fresh code and check its relevance through `git blame` (cutoff: `2024-02-19`).
 
-## What to download first
-
-1. `references/fresh-pattern-catalog.md` - confirmed fresh patterns ✅
-2. `references/rejected-snippets.md` - old and risky zones that cannot be copied ⚠️
-3. `references/docs-context.md` - what to take from docs and where docs can become outdated
-
 ## Source of truth
 
 1. The codebase is the primary source of truth.

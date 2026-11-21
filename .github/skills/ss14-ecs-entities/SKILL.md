@@ -1,6 +1,6 @@
 ---
 name: ss14-ecs-entities
-description: Working with entities in Space Station 14 — EntityUid, Entity<T>, implicit Entity<T>-as-EntityUid usage, component operations, containers, network identity, and entity lifecycle
+description: Working with entities in Space Station 14 — EntityUid, typed Entity wrappers, implicit conversion to EntityUid, component operations, containers, network identity, and entity lifecycle
 metadata:
   source_skill: "../../../.agents/skills/ss14-ecs-entities/SKILL.md"
 ---

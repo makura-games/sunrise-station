@@ -8,16 +8,10 @@ description: A practical documentation standard in Space Station 14 for C#, SWSL
 Use this skill as a strict working standard for documentation in SS14 ✍️
 Goal: leave only useful documentation that speeds up reviews and reduces the risk of incorrect system expansion.
 
-## Reading order
-
-1. Read `references/fresh-pattern-catalog.md` first.
-2. Then read `references/rejected-snippets.md`.
-3. At the end, check the context in `references/docs-context.md`.
-
 ## Source of truth
 
 1. The source of truth for documentation rules is the current code.
-2. Documentation from `docs` is required reading, but is used as a secondary layer (terms, intent, restrictions) because it may lag.
+2. Documentation from `docs` is used as a secondary layer (terms, intent, restrictions) because it may lag.
 3. For any target subsystem, always look not only at the system itself, but also at its usage in `server/shared/client`, especially unusual calls and non-standard flags.
 4. Cut off examples older than cutoff `2024-02-20`.
 5. Do not use fragments with `TODO`/`HACK`/`FIXME` as a reference if they affect the documentation itself or show controversial behavior.
@@ -26,8 +20,9 @@ Goal: leave only useful documentation that speeds up reviews and reduces the ris
 
 ### Language
 
-1. Write documentation in English.
-2. Do not distort identifiers and XML tags and do not mix languages ​​in one doc block.
+1. Write XML documentation (`/// <summary>`, `<remarks>`, `<param>`) in English.
+2. Follow `AGENTS.md` for inline explanatory comments, `using` comments, and `Sunrise-Edit` reason phrases (written in Russian, keeping English identifiers/types untranslated).
+3. Do not distort identifiers and XML tags.
 
 ### C# and SWSL
 

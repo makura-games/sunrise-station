@@ -1,6 +1,6 @@
 ---
 name: ss14-loadout-authoring
-description: Creation, copying, renaming, migration and review of SS14 loadout prototypes (`roleLoadout`, `loadoutGroup`, `loadout`) in fork folders like `_Scp`: naming, isolation from vanilla, transfer of mandatory equipment from `startingGear`, `startingGear` synchronization and processing of hidden jobs/departments. Use when changing job prototypes and any loadout system files.
+description: Creation, copying, renaming, migration and review of SS14 loadout prototypes (`roleLoadout`, `loadoutGroup`, `loadout`) in fork folders like `_Sunrise`: naming, isolation from vanilla, transfer of mandatory equipment from `startingGear`, `startingGear` synchronization and processing of hidden jobs/departments. Use when changing job prototypes and any loadout system files.
 ---
 
 # SS14 Loadout Authoring
@@ -54,10 +54,10 @@ Goal: keep role equipment in one predictable graph `job -> roleLoadout -> loadou
 
 ### Prototype ID
 
-1. `loadout`: `ScpLoadout` + `ItemPrototypeId`.
-2. `loadoutGroup`: `<ForkName(Sunrise, Scp, or another)>LoadoutGroup` + slot name or generic group name.
+1. `loadout`: `SunriseLoadout` + `ItemPrototypeId`.
+2. `loadoutGroup`: `SunriseLoadoutGroup` + slot name or generic group name.
 3. `roleLoadout`: `Job<RoleId>`.
-4. If the same `ItemPrototypeId` is needed in two different contexts and without the suffix there will be a collision, add a short context tail: `ScpLoadoutFlashlightLanternCargo`, `ScpLoadoutFlashlightLanternEngineering`.
+4. If the same `ItemPrototypeId` is needed in two different contexts and without the suffix there will be a collision, add a short context tail: `SunriseLoadoutFlashlightLanternCargo`, `SunriseLoadoutFlashlightLanternEngineering`.
 5. Do not leave new local IDs without a fork prefix.
 
 ### Group naming
@@ -139,8 +139,8 @@ Use this step when the project is still in hybrid state or the user explicitly a
 
 1. Copy the external `loadoutGroup` to the local fork path and immediately rewrite the role’s link.
 2. Copy the outer `loadout` after the group until the graph becomes completely local.
-3. Give `loadout` ID in the format `ScpLoadout<ItemPrototypeId>`.
-4. Give `loadoutGroup` ID in the format `ScpLoadoutGroup<SlotOrConcept>`, and not according to the historical copy source.
+3. Give `loadout` ID in the format `SunriseLoadout<ItemPrototypeId>`.
+4. Give `loadoutGroup` ID in the format `SunriseLoadoutGroup<SlotOrConcept>`, and not according to the historical copy source.
 5. Reuse common groups between roles if the slot and semantics really match.
 6. Do role-specific override groups if only one role requires a different `minLimit` or another set of options.
 7. Transfer required items from `startingGear` to hidden required groups and then remove `startingGear` from the job.
@@ -150,7 +150,7 @@ Use this step when the project is still in hybrid state or the user explicitly a
 
 ## Anti-patterns ❌
 
-1. Leave the `_ForkName` role to refer to the vanilla one or `_Sunrise` `loadoutGroup`.
+1. Leave the `_Sunrise` role to refer to the vanilla one or a foreign fork `loadoutGroup`.
 2. Copy loadout files to `Imports/...` instead of the mirror local path.
 3. Give new local IDs vanilla names without a fork prefix.
 4. Name files and prototypes by vanilla position, if the role has already been renamed in the fork.
@@ -168,21 +168,21 @@ Use this step when the project is still in hybrid state or the user explicitly a
 
 ```yaml
 - type: loadout
-  id: ScpLoadoutKeyCardMedicalSpecialist
+  id: SunriseLoadoutKeyCardMedicalSpecialist
   equipment:
     id: KeyCardMedicalSpecialist
 
 - type: loadoutGroup
-  id: ScpLoadoutGroupIdKeyCardMedicalSpecialist
+  id: SunriseLoadoutGroupIdKeyCardMedicalSpecialist
   name: loadout-group-id
   minLimit: 1
   loadouts:
-  - ScpLoadoutKeyCardMedicalSpecialist
+  - SunriseLoadoutKeyCardMedicalSpecialist
 
 - type: roleLoadout
   id: JobMedicalSpecialist
   groups:
-  - ScpLoadoutGroupIdKeyCardMedicalSpecialist
+  - SunriseLoadoutGroupIdKeyCardMedicalSpecialist
 ```
 
 Comment: The required ID card moves from `startingGear` to the hidden required group and becomes part of the loadout graph.
@@ -191,11 +191,11 @@ Comment: The required ID card moves from `startingGear` to the hidden required g
 
 ```yaml
 - type: loadoutGroup
-  id: ScpLoadoutGroupMedicalShoes
+  id: SunriseLoadoutGroupMedicalShoes
   name: loadout-group-shoes
   loadouts:
-  - ScpLoadoutClothingShoesColorWhite
-  - ScpLoadoutClothingShoesBootsWinterMed
+  - SunriseLoadoutClothingShoesColorWhite
+  - SunriseLoadoutClothingShoesBootsWinterMed
 
 - type: startingGear
   id: MedicalSpecialistGear
@@ -220,19 +220,19 @@ Comment: This default role remains at `startingGear`. A new `roleLoadout` is not
 
 ```yaml
 - type: loadoutGroup
-  id: ScpLoadoutGroupSecurityBackpack
+  id: SunriseLoadoutGroupSecurityBackpack
   name: loadout-group-backpack
   loadouts:
-  - ScpLoadoutClothingBackpackSecurity
-  - ScpLoadoutClothingBackpackSatchelSecurity
-  - ScpLoadoutClothingBackpackDuffelSecurity
+  - SunriseLoadoutClothingBackpackSecurity
+  - SunriseLoadoutClothingBackpackSatchelSecurity
+  - SunriseLoadoutClothingBackpackDuffelSecurity
 ```
 
 Comment: if the set is the same for several security roles, do not duplicate the group for each position. Make a new group only if one role needs a different set or another requirement.
 
 ## Checklist before PR
 
-1. All new IDs correspond to the scheme `ScpLoadout*` / `ScpLoadoutGroup*` / `Job<RoleId>`.
+1. All new IDs correspond to the scheme `SunriseLoadout*` / `SunriseLoadoutGroup*` / `Job<RoleId>`.
 2. All new files are located in the mirror local path and are named in `snake_case`.
 3. Fork roles do not have references to vanilla or other fork-loadout prototypes.
 4. For visible roles, mandatory equipment is not left only in `startingGear`.

@@ -12,9 +12,7 @@ knowledge_base:
   code_guidelines:
     enabled: true
     filePatterns:
-      - "**/.agent/rules/*.md"
-      - "**/.agent/skills/*/SKILL.md"
-      - "**/.agents/rules/*.md"
+      - "**/AGENTS.md"
       - "**/.agents/skills/*/SKILL.md"
 
 reviews:
@@ -28,9 +26,9 @@ reviews:
     - path: "**/*"
       instructions: |
          Treat the repository instruction stack as the source of truth for this codebase.
-         Always apply the root `AGENTS.md` first, because it defines how repository rules and skills must be selected for each task.
-         Use `.agents/rules/*.md` and `.agents/skills/*/SKILL.md` as the Codex-facing review knowledge base.
-         Treat `.agents/` as the canonical source tree. Treat `.agent/`, `.claude/`, `.cursor/`, and `.github/` as compatibility bridge trees.
+         Always apply the root `AGENTS.md` first, because it defines the permanent repository rules and how skills must be selected for each task.
+         Use `AGENTS.md` and `.agents/skills/*/SKILL.md` as the Codex-facing review knowledge base.
+         Treat `.agents/skills/` as the canonical skill tree. Treat `.claude/skills/`, `.cursor/skills/`, and `.github/skills/` as compatibility bridge trees.
          Prefer repository-specific rules and skills over generic framework advice or web-derived guidance when they conflict.
          When inferring the active fork from a git remote slug or GitHub repository identifier, ignore the owner or organization segment and use only the repository name plus the actual project folder and local edit markers. For example, evaluate `makura-games/project-fire` by `project-fire`, not by `makura-games`.
          Do not hard-code Sunrise from the `makura-games` organization name. If the exact repository slug is `project-fire` or the active project folder is `_Scp`, review as Fire: use the `Fire` prefix, `_Scp` project folder, and `Fire edit` / `Fire added` markers. If the exact repository slug is `sunrise-station` or the active project folder is `_Sunrise`, review as Sunrise.
@@ -42,7 +40,7 @@ reviews:
         - Always apply `ss14-naming-conventions`, `ss14-ecs-prototypes`, and `ss14-upstream-maintenance`.
         - Also apply `ss14-ecs-components`, `ss14-ecs-entities`, `ss14-ecs-systems`, `ss14-events`, and `ss14-prediction`.
         - Apply `ss14-documentation-writing` for large C# changes and `ss14-standard-optimizations` when hot paths, `Update()`, or frequently raised events are touched.
-        Enforce the interaction rule from `.agents/rules/ss14-interaction-flow.md`: `OnEvent -> TryDo -> CanDo -> Do`.
+        Enforce the interaction rule from `AGENTS.md` and `ss14-ecs-systems`: `OnEvent -> TryDo -> CanDo -> Do`.
         Prefer minimal hooks in vanilla files and keep new logic in the active fork project folder (`_Scp` for Fire, `_Sunrise` for Sunrise, `_Fish` for Fish, `_Lust` for Lust) or partial classes when possible.
     - path: "Content.*/**/*System*.cs"
       instructions: |
@@ -78,39 +76,29 @@ reviews:
         Flag unexplained magic waits such as `RunTicks(123)` / `WaitRunTicks(123)` when the tick count has no synchronization reason or comment.
         `Dirty = true` and `Pool = false` should stay minimal and justified, not default cargo-cult settings.
         For server+client tests, verify that client and server assertions account for synchronization and tick propagation instead of assuming same-tick visibility.
-    - path: ".agent/**"
-      instructions: |
-        Treat `.agent/` as a compatibility bridge tree for repository rules and skills.
-        If rules or skills change here, matching canonical files in `.agents/` and bridges in `.claude/`, `.cursor/`, and `.github/` must stay synchronized per the authoring policies.
-        Flag missing bridge updates and suggest running `pwsh ./.agents/rules/check-rule-bridges.ps1` and `pwsh ./.agents/skills/check-skill-bridges.ps1` when these files change.
     - path: ".agents/**"
       instructions: |
-        Treat `.agents/` as the canonical source tree for repository rules and skills.
-        Ensure every bridge still points back to the correct `.agents/` source and stays synchronized with canonical content and trigger metadata.
+        Treat `.agents/skills/` as the canonical source tree for repository skills.
+        Ensure every bridge in `.claude/skills/`, `.cursor/skills/`, and `.github/skills/` still points back to the correct `.agents/skills/` source and stays synchronized with canonical metadata.
+        Flag missing bridge updates and suggest running `pwsh ./.agents/skills/check-skill-bridges.ps1` when these files change.
   pre_merge_checks:
     override_requested_reviewers_only: true
     custom_checks:
       - mode: error
         name: "SS14 bridge sync"
         instructions: |
-          Fail if this PR changes any canonical rule or skill under `.agents/rules/` or `.agents/skills/` without updating every required bridge in `.agent/`, `.claude/`, `.cursor/`, and `.github/` in the same PR.
-          Required rule bridges:
-          - `.agent/rules/<same-file>.md`
-          - `.claude/rules/<same-file>.md`
-          - `.cursor/rules/<same-file>.md`
-          - `.github/rules/<same-file>.md`
+          Fail if this PR changes any canonical skill under `.agents/skills/` without updating every required bridge in `.claude/`, `.cursor/`, and `.github/` in the same PR.
           Required skill bridges:
-          - `.agent/skills/<skill-name>/SKILL.md`
           - `.claude/skills/<skill-name>/SKILL.md`
           - `.cursor/skills/<skill-name>/SKILL.md`
           - `.github/skills/<skill-name>/SKILL.md`
-          Also fail if a changed bridge points to the wrong `.agents` source path or if synchronized trigger/name/description metadata diverges from the canonical source.
+          Also fail if a changed bridge points to the wrong `.agents` source path or if synchronized name/description metadata diverges from the canonical source.
           Pass only if all changed canonical files and bridge files remain synchronized.
       - mode: error
         name: "SS14 fork/project folder selection"
         instructions: |
           Run this check for every PR that adds or moves fork-owned code, prototypes, assets, or upstream edit markers.
-          Determine the active fork using `.agents/rules/ss14-codebase-prefix-detection.md`. Ignore the GitHub owner or organization segment: `makura-games` alone must not imply Sunrise.
+          Determine the active fork using `AGENTS.md` (`Sunrise`, `_Sunrise`, `Sunrise-Edit`, `Sunrise edit/added start/end`).
           Fail if exact Fire signals (`project-fire`, `_Scp`, or Fire markers) are reviewed as Sunrise or if new Fire-owned files are placed under `_Sunrise` instead of `_Scp`.
           Fail if exact Sunrise signals (`sunrise-station`, `_Sunrise`, or Sunrise markers) are reviewed as Fire or if new Sunrise-owned files are placed under `_Scp` instead of `_Sunrise`.
           Do not fail merely because the PR touches vanilla files. New fork logic still belongs in the active fork project folder, while vanilla files should contain only minimal hooks with the active fork's markers.
@@ -119,7 +107,7 @@ reviews:
         name: "SS14 C# rules"
         instructions: |
           Run this check only when the PR changes `.cs` files.
-          Treat `AGENTS.md`, `.agents/rules/*.md`, and the following skills as mandatory review criteria for changed C# code:
+          Treat `AGENTS.md` and the following skills as mandatory review criteria for changed C# code:
           - `ss14-naming-conventions`
           - `ss14-ecs-prototypes`
           - `ss14-upstream-maintenance`
@@ -141,7 +129,7 @@ reviews:
         name: "SS14 YAML/FTL rules"
         instructions: |
           Run this check only when the PR changes `.yml`, `.yaml`, or `.ftl` files.
-          Treat `AGENTS.md`, `.agents/rules/*.md`, and the following skills as mandatory review criteria for changed content files:
+          Treat `AGENTS.md` and the following skills as mandatory review criteria for changed content files:
           - `ss14-naming-conventions`
           - `ss14-ecs-prototypes`
           - `ss14-upstream-maintenance`

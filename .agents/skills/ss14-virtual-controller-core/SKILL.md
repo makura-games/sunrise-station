@@ -8,12 +8,6 @@ description: Parses the VirtualController architecture in Space Station 14: the 
 Use this skill as an architectural playbook for VirtualController :)
 Keep your focus on fresh code and check its relevance through `git log`/`blame` (cutoff: `2024-02-20`).
 
-## What to download first
-
-1. `references/fresh-pattern-catalog.md` - patterns with an obvious freshness status (`Use` / `Limited`) ✅
-2. `references/rejected-snippets.md` - zones that cannot be taken as a standard ⚠️
-3. `references/docs-context.md` - how to use docs safely
-
 ## Source of truth
 
 1. The codebase is the primary source of truth.

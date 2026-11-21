@@ -8,12 +8,6 @@ description: Gives a practical catalog of the AudioSystem API in Space Station 1
 Use this skill when you need to quickly select the correct AudioSystem method and apply it without regressions :)
 Freshness reference: `git blame` with cutoff `2024-02-19`.
 
-## What to download
-
-1. `references/fresh-pattern-catalog.md` - API registry with recommendations.
-2. `references/rejected-snippets.md` - legacy/TODO/dangerous scenarios.
-3. `references/docs-context.md` - how to use docs safely.
-
 ## Quick API selection
 
 1. We need a sound “for everyone around the source”: `PlayPvs(sound, uid/coords, params)`.

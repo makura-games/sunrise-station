@@ -8,12 +8,6 @@ description: Gives a practical catalog of APIs around the VirtualController in S
 Use this skill when you need to quickly choose the correct method and avoid getting physics/prediction regression 😎
 Freshness reference: `git log`/`blame` with cutoff `2024-02-20`.
 
-## What to download
-
-1. `references/fresh-pattern-catalog.md` - register of methods with freshness marking (`Use` / `Limited`).
-2. `references/rejected-snippets.md` - risky places and misuse practices.
-3. `references/docs-context.md` - how to read docs without conflicting with the code.
-
 ## Quick API selection
 
 1. You need a controller for the physics step: inherit from `VirtualController` and implement `UpdateBeforeSolve`/`UpdateAfterSolve`.
