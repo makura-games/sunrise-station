@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Taken from https://github.com/ParadiseSS13/Paradise/. Taken from https://github.com/DeltaV-Station/Delta-v at commit ff8118f7eb27a867b631f27c6fdbb223999ff5f9.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

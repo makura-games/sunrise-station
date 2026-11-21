@@ -1,0 +1,58 @@
+# Эксклюзивные вещи спонсорского инвентаря из подборки арт-директора (ноябрь 2026).
+# Если меняете ID вещи, поправьте entityPrototype в спонсорском каталоге сайта, иначе купившие перестанут её получать.
+
+- type: entity
+  parent: ClothingShoesBase
+  id: SunriseSponsorClothingShoesBootsThigh
+  name: thigh-high boots
+  description: A pair of casual boots that reach up to the thighs.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Shoes/thighboots.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Shoes/thighboots.rsi
+
+- type: entity
+  parent: ClothingShoesClown
+  id: SunriseSponsorClothingShoesClownLarge
+  name: large clown shoes
+  description: "When you need to stand out in a room full of clowns!"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Shoes/clown_big.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Shoes/clown_big.rsi
+    clothingVisuals:
+      shoes:
+      - state: equipped-FEET
+        offset: 0, -0.02
+
+- type: entity
+  parent: ClothingShoesBase
+  id: SunriseSponsorClothingModsuitShoesSecurity
+  name: security MOD boots
+  description: Chunky dark boots from a security MOD. They look solid even without the rest of the suit.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Shoes/security.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Shoes/security.rsi
+
+- type: entity
+  parent: ClothingShoesBase
+  id: SunriseSponsorClothingShoeSlippersLizard
+  name: lizard slippers
+  description: An adorable pair of slippers that resemble a lizardperson. Combine them with some other green clothing and you'll be the coolest crewmember on the station.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Shoes/lizard-slippers.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Shoes/lizard-slippers.rsi

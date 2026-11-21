@@ -1,0 +1,12 @@
+ent-SunriseSponsorClothingPantsSwimBlack = black swimsuit
+    .desc = A stylish black swimsuit for the beach or the pool.
+ent-SunriseSponsorClothingPantsSwimBlue = blue swimsuit
+    .desc = A bright blue swimsuit, perfect for summer days.
+ent-SunriseSponsorClothingPantsSwimCentcom = CentCom swimsuit
+    .desc = What, not a report? A green swimsuit with gold trim in CentCom colors.
+ent-SunriseSponsorClothingPantsSwimPurple = purple swimsuit
+    .desc = A beautiful purple swimsuit with an elegant design.
+ent-SunriseSponsorClothingPantsSwimSani = psychologist's swimsuit
+    .desc = A daring swimsuit of black-and-white straps. The psychologist insists it's part of the therapy.
+ent-SunriseSponsorClothingPantsSwimWatermelon = watermelon swimsuit
+    .desc = Look at those melons! A juicy swimsuit with a watermelon print.

@@ -1,0 +1,86 @@
+# Эксклюзивные вещи спонсорского инвентаря из подборки арт-директора (ноябрь 2026).
+# Если меняете ID вещи, поправьте entityPrototype в спонсорском каталоге сайта, иначе купившие перестанут её получать.
+
+- type: entity
+  parent: ClothingPantsBaseButcherable
+  id: SunriseSponsorClothingPantsSwimBlack
+  name: black swimsuit
+  description: A stylish black swimsuit for the beach or the pool.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Pants/swim_black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Pants/swim_black.rsi
+    equippedState: equipped-INNERCLOTHING
+
+- type: entity
+  parent: ClothingPantsBaseButcherable
+  id: SunriseSponsorClothingPantsSwimBlue
+  name: blue swimsuit
+  description: A bright blue swimsuit, perfect for summer days.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Pants/swim_blue.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Pants/swim_blue.rsi
+    equippedState: equipped-INNERCLOTHING
+
+- type: entity
+  parent: ClothingPantsBaseButcherable
+  id: SunriseSponsorClothingPantsSwimCentcom
+  name: CentCom swimsuit
+  description: "What, not a report? A green swimsuit with gold trim in CentCom colors."
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Pants/swim_centcom.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Pants/swim_centcom.rsi
+    equippedState: equipped-INNERCLOTHING
+
+- type: entity
+  parent: ClothingPantsBaseButcherable
+  id: SunriseSponsorClothingPantsSwimPurple
+  name: purple swimsuit
+  description: A beautiful purple swimsuit with an elegant design.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Pants/swim_purp.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Pants/swim_purp.rsi
+    equippedState: equipped-INNERCLOTHING
+
+- type: entity
+  parent: ClothingPantsBaseButcherable
+  id: SunriseSponsorClothingPantsSwimSani
+  name: psychologist's swimsuit
+  description: A daring swimsuit of black-and-white straps. The psychologist insists it's part of the therapy.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Pants/swim_sani.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Pants/swim_sani.rsi
+    equippedState: equipped-INNERCLOTHING
+
+- type: entity
+  parent: ClothingPantsBaseButcherable
+  id: SunriseSponsorClothingPantsSwimWatermelon
+  name: watermelon swimsuit
+  description: "Look at those melons! A juicy swimsuit with a watermelon print."
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Pants/swim_watermelon.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Pants/swim_watermelon.rsi
+    equippedState: equipped-INNERCLOTHING

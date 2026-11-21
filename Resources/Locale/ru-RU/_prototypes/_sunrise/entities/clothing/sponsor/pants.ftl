@@ -1,0 +1,12 @@
+ent-SunriseSponsorClothingPantsSwimBlack = чёрный купальник
+    .desc = Стильный чёрный купальник для пляжа или бассейна.
+ent-SunriseSponsorClothingPantsSwimBlue = синий купальник
+    .desc = Яркий синий купальник, идеальный для летних дней.
+ent-SunriseSponsorClothingPantsSwimCentcom = купальник Центкома
+    .desc = Что, не отчёт? Зелёный купальник с золотой отделкой в цветах Центкома.
+ent-SunriseSponsorClothingPantsSwimPurple = фиолетовый купальник
+    .desc = Красивый фиолетовый купальник элегантного фасона.
+ent-SunriseSponsorClothingPantsSwimSani = купальник психолога
+    .desc = Смелый купальник из чёрно-белых ремешков. Психолог уверяет, что это часть терапии.
+ent-SunriseSponsorClothingPantsSwimWatermelon = арбузный купальник
+    .desc = Только погляди на эти «арбузы»! Сочный купальник с арбузным принтом.

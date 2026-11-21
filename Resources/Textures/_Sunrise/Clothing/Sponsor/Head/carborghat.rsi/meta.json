@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "made by Frogoo (discord/github) for ss14. Taken from https://github.com/funky-station/funky-station at commit bb9d52964c12b2e5989489996abea646b22f7010.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-HELMET",
+      "directions": 4
+    }
+  ]
+}

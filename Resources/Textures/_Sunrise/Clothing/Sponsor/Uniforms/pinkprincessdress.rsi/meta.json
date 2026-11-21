@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "By DOSRG (github) for Impstation, Anomalocarid Sprites by ATDoop (github). Taken from https://github.com/impstation/imp-station-14 at commit 9a1efc64f1617a3f28600d9357a0feb0544d304d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "equipped-INNERCLOTHING-gray",
+      "directions": 4
+    },
+    {
+      "name": "equipped-INNERCLOTHING-gastropoid",
+      "directions": 4
+    },
+    {
+      "name": "equipped-INNERCLOTHING-anomalocarid",
+      "directions": 4
+    },
+    {
+      "name": "equipped-INNERCLOTHING-ungu",
+      "directions": 4
+    }
+  ]
+}

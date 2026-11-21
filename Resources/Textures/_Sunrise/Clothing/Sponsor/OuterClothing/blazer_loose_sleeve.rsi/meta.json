@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from World Server at commit https://github.com/GeneriedJenelle/The-World-Server-Redux/commit/8f59da5859624db9078322a5b214381c09d1b953. Taken from https://github.com/Simple-Station/Einstein-Engines at commit 10d41858d88d3ba9d36fdd9c98595d89701f1cbb.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-OUTERCLOTHING",
+      "directions": 4
+    }
+  ]
+}

@@ -1,0 +1,1185 @@
+# Эксклюзивные вещи спонсорского инвентаря из подборки арт-директора (ноябрь 2026).
+# Если меняете ID вещи, поправьте entityPrototype в спонсорском каталоге сайта, иначе купившие перестанут её получать.
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterCoatHOPGreatcoat
+  name: HoP's greatcoat
+  description: Papers, please.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/hop_greatcoat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/hop_greatcoat.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterBikerJacket
+  name: biker jacket
+  description: "Bad to the bone!"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/biker_jacket.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/biker_jacket.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: StaminaResistance
+    damageCoefficient: 0.9
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingHeadHatFestiveLights
+  name: festive lights
+  description: A string of red and green lights. Seems like you got tangled up in it.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/festive_lights.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/festive_lights.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterCoatTrader
+  name: trader bomber jacket
+  description: A brown leather bomber jacket with a fur collar and a patch on the sleeve, the kind TSF traders wear.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_tsf.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_tsf.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: StaminaResistance
+    damageCoefficient: 0.9
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterCoatHoPLong
+  name: HoP's longcoat
+  description: A smart longcoat for the head of personnel.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/hoplongcoat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/hoplongcoat.rsi
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: SunriseSponsorClothingOuterCargoWindbreaker
+  name: cargo tech windbreaker
+  description: We work to earn the right to work.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/cargo_windbreaker.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon-open
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/cargo_windbreaker.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-unzip-verb
+    unfoldVerbText: fold-zip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+
+- type: entity
+  parent: ClothingOuterWinterCoat
+  id: SunriseSponsorClothingOuterCoatParamedicJacket
+  name: paramedic jacket
+  description: "A stylish dark blue jacket decorated with white stripes and a cross. Nine out of ten paramedics recommend \"Do Not Revive\"."
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/paramedic.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon-open
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/paramedic.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-unzip-verb
+    unfoldVerbText: fold-zip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+
+- type: entity
+  parent: ClothingOuterWinterCoat
+  id: SunriseSponsorClothingOuterWinterChef
+  name: chef's freezer coat
+  description: A coat specifically designed for work inside cold storage, sorely needed by cold-blooded lizard chefs.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/chef_freezer_coat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/chef_freezer_coat.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterCoatHyenhSweater
+  name: comfy sweater
+  description: A soft beige knit sweater. It's comfy.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/hyenh.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/hyenh.rsi
+
+- type: entity
+  parent: ClothingOuterWinterCoat
+  id: SunriseSponsorClothingOuterCoatMagi
+  name: magistrate's longcoat
+  description: A long black coat with gold buttons and a blue collar, befitting a magistrate. Brought to you by the NanoTrasen Fashion Board.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/magi_overcoat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/magi_overcoat.rsi
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.8
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterPunkJacket
+  name: punk jacket
+  description: A battered black leather jacket with silver zippers. Made for the stage, not for the dress code.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/Punk_jacket.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/Punk_jacket.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterSuitWitchRobes
+  name: black-and-white witch robes
+  description: "A black-and-white witch's outfit with a frilly apron. Magic is all about the spell power, ZE!"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/witch_robes.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/witch_robes.rsi
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: SunriseSponsorClothingOuterCoatBomberCargoLoose
+  name: loose cargo bomber
+  description: A brown bomber jacket, worn low and loose. There's a Cargonian C on the back.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_cargo_loose.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon-open
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_cargo_loose.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-zip-verb
+    unfoldVerbText: fold-unzip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+
+- type: entity
+  parent: ClothingOuterWinterCoat
+  id: SunriseSponsorClothingOuterWinterAtmos
+  name: atmospherics winter coat
+  description: A bright yellow coat with teal-striped sleeves. If you're cold, he's cold. Get Tropico out of the atmospherics bay.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/atmos_insulated_coat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/atmos_insulated_coat.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterRoughSweater
+  name: rough sweater
+  description: A bright green, roughly knitted sweater. Smells like buttercups.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/rough_sweater.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/rough_sweater.rsi
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: SunriseSponsorClothingOuterCoatBomberMedicalLoose
+  name: loose medical bomber
+  description: A blue bomber jacket, worn low and loose. Embroidered on the back is a caduceus, to remind you to do no harm.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_medical_loose.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon-open
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_medical_loose.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-zip-verb
+    unfoldVerbText: fold-unzip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: SunriseSponsorClothingOuterCoatBomberScienceLoose
+  name: loose science bomber
+  description: A purple bomber jacket, worn low and loose. Embroidered on the back is a microscope, because it's important to fuss over the little things.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_science_loose.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon-open
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_science_loose.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-zip-verb
+    unfoldVerbText: fold-unzip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: SunriseSponsorClothingOuterCoatBomberSecurityLoose
+  name: loose security bomber
+  description: A red bomber jacket, worn low and loose. The shield on the back is sewn with special high-vis thread.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_security_loose.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon-open
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_security_loose.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-zip-verb
+    unfoldVerbText: fold-unzip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: StaminaResistance
+    damageCoefficient: 0.9
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: SunriseSponsorClothingOuterCoatBomberWhiteLoose
+  name: loose white bomber
+  description: A plain white bomber jacket, worn low and loose.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_white_loose.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon-open
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_white_loose.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-zip-verb
+    unfoldVerbText: fold-unzip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterSuitWitchRobesImp
+  name: purple witch robes
+  description: "A dark witch's robe with a big purple bow and a frilly hem. Magic is all about the spell power, ZE!"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/witchrobe.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/witchrobe.rsi
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: SunriseSponsorClothingOuterCoatBomberBrigmedLoose
+  name: loose brigmedic bomber
+  description: A white bomber jacket, worn with the sleeves pushed up. Embroidered on the back is a reminder to do harm only some of the time.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_brigmed_loose.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon-open
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_brigmed_loose.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-zip-verb
+    unfoldVerbText: fold-unzip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterArmorTCFLHeavy
+  name: TCAF plate carrier
+  description: A bulky plate carrier worn by members of the Tau Ceti Armed Forces. Once common to the Sol Alliance, this wargear is now often made locally by companies such as Five-Points Armory, BRDI, or even NanoTrasen.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/TCAF_plate_carrier_heavy.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/TCAF_plate_carrier_heavy.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.65
+        Slash: 0.65
+        Piercing: 0.6
+        Heat: 0.7
+        Caustic: 0.75
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: StaminaResistance
+    damageCoefficient: 0.9
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOutercorset
+  name: corset
+  description: A black corset. A little bit tight.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/corset.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/corset.rsi
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: SunriseSponsorClothingOuterCoatLabMedical
+  name: medical lab coat
+  description: A white lab coat with light blue accents, the everyday choice of medical staff.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/medical_lab.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon-open
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/medical_lab.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-unzip-verb
+    unfoldVerbText: fold-zip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: SunriseSponsorClothingOuterCoatLabChemistLong
+  name: long chemist lab coat
+  description: A NanoTrasen standard lab coat for medical personnel, but long and with bright orange accents.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/chemistry_long_lab.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon-open
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/chemistry_long_lab.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-unzip-verb
+    unfoldVerbText: fold-zip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterBlazerLooseSleeve
+  name: loose sleeve blazer
+  description: A white blazer with loose, flowing sleeves. One of those hippie-formal wannabe blazers.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/blazer_loose_sleeve.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/blazer_loose_sleeve.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterChefIdris
+  name: white chef jacket
+  description: A crisp white double-breasted chef jacket with a teal neckerchief. Spotless, for now.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/chef_idris.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/chef_idris.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterChefOrion
+  name: brown double-breasted jacket
+  description: A sturdy brown double-breasted jacket with a stand-up collar. It smells faintly of coffee and old case files.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/chef_orion.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/chef_orion.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: StaminaResistance
+    damageCoefficient: 0.9
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterCoatHoSTrench
+  name: head of security's trenchcoat
+  description: A long black trenchcoat with gold buttons, adding style to those with a commanding presence.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/hos_trenchcoat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/hos_trenchcoat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.65
+        Slash: 0.65
+        Piercing: 0.6
+        Heat: 0.7
+        Caustic: 0.75
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: StaminaResistance
+    damageCoefficient: 0.9
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterApronCuteBar
+  name: frilly apron
+  description: A cute white apron with frills and black trim.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/aproncutebar.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/aproncutebar.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterArmorCaptainCarapace
+  name: captain's carapace
+  description: A polished dark blue chestpiece with gold fittings. Issued only to the station's finest.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/captain_carapace.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/captain_carapace.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.6
+        Heat: 0.5
+        Caustic: 0.9
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterWizard
+  name: wizard robes
+  description: A bizarre blue robe encrusted with gems. Some of the gems seem to have imperfections.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/wizard.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/wizard.rsi
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: SunriseSponsorClothingOuterCoatBomberMedical
+  name: medical bomber jacket
+  description: A blue bomber jacket, worn with the sleeves pushed up. Embroidered on the back is a caduceus, to remind you to do no harm.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_medical.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon-open
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_medical.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-zip-verb
+    unfoldVerbText: fold-unzip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: SunriseSponsorClothingOuterCoatBomberScience
+  name: science bomber jacket
+  description: A purple bomber jacket, worn with the sleeves pushed up. Embroidered on the back is a microscope, because it's important to fuss over the little things.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_science.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon-open
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/bomber_science.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-zip-verb
+    unfoldVerbText: fold-unzip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterCoatPufferPink
+  name: pink puffer coat
+  description: An oversized pink puffer coat made of high-quality nylon.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/big_puffercoat_pink.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/big_puffercoat_pink.rsi
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: SunriseSponsorClothingOuterChapsBlack
+  name: black chaps
+  description: Dress right for the rodeo with these black chaps. Just don't forget your pants.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/black.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon-open
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/black.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-OUTERCLOTHING
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-unzip-verb
+    unfoldVerbText: fold-zip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: SunriseSponsorClothingOuterChapsBrown
+  name: brown chaps
+  description: Dress right for the rodeo with these brown chaps. Just don't forget your pants.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/brown.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon-open
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/brown.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-OUTERCLOTHING
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-unzip-verb
+    unfoldVerbText: fold-zip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
+  id: SunriseSponsorClothingOuterChapsWhite
+  name: white chaps
+  description: Dress right for the rodeo with these white chaps. Just don't forget your pants.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/white.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon-open
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/white.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-OUTERCLOTHING
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-unzip-verb
+    unfoldVerbText: fold-zip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+
+- type: entity
+  parent: [ ClothingOuterBaseToggleable, ClothingOuterStorageBase ]
+  id: SunriseSponsorClothingCoatReligionLeader
+  name: religious leader's robe
+  description: A royally religious black robe with gold trim that will show your apostles their place.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/chaplain_leader.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/chaplain_leader.rsi
+  - type: ToggleableClothing
+    clothingPrototype: SunriseSponsorClothingHeadHatHoodChaplainLeader
+    slot: head
+    verbText: toggle-clothing-verb-hood
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+      storagebase: !type:Container
+        ents: []
+
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: SunriseSponsorClothingHeadHatHoodChaplainLeader
+  name: religious leader's hood
+  description: A fine way to stress the NOT sectarian order of a NOT cult.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/chaplain_leader_hood.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/chaplain_leader_hood.rsi
+  - type: HideLayerClothing
+    slots: [ Hair, Snout, HeadTop, HeadSide ]
+
+- type: entity
+  parent: [ ClothingOuterBaseToggleable, ClothingOuterStorageBase ]
+  id: SunriseSponsorClothingOuterSpiderRobe
+  name: ominous spider robe
+  description: A robe popular among spider cults. It looks oddly familiar.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/chaplain_web.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/chaplain_web.rsi
+  - type: ToggleableClothing
+    clothingPrototype: SunriseSponsorClothingHeadHatWebHood
+    slot: head
+    verbText: toggle-clothing-verb-hood
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+      storagebase: !type:Container
+        ents: []
+
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: SunriseSponsorClothingHeadHatWebHood
+  name: ominous spider hood
+  description: An ominous dark hood to match the spider robe. Well... now you're part of the web.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/chaplain_web_hood.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/chaplain_web_hood.rsi
+  - type: HideLayerClothing
+    slots: [ Hair, Snout, HeadTop, HeadSide ]
+
+- type: entity
+  parent: [ ClothingOuterBaseToggleable, ClothingOuterStorageBase ]
+  id: SunriseSponsorClothingOuterHoodieChaplainWhite
+  name: white chaplain's hoodie
+  description: Beautiful, strict white vestments of a chaplain, with orange trim.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/chaplain_hoodie_white.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/chaplain_hoodie_white.rsi
+  - type: ToggleableClothing
+    clothingPrototype: SunriseSponsorClothingHeadHatHoodChaplainHoodWhite
+    slot: head
+    verbText: toggle-clothing-verb-hood
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+      storagebase: !type:Container
+        ents: []
+
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: SunriseSponsorClothingHeadHatHoodChaplainHoodWhite
+  name: white chaplain's hood
+  description: Maximum piety in this star system.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/chaplain_white_hood.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/chaplain_white_hood.rsi
+  - type: HideLayerClothing
+    slots: [ Hair ]
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterCoatBrigmedicWB
+  name: brigmedic windbreaker
+  description: A brigmedic's trusty red windbreaker with a white cross on the back, ready for all the space wind.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/brigmedicWB.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/brigmedicWB.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Caustic: 0.75
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterCoatInvestigator
+  name: investigator's pea coat
+  description: A black double-breasted pea coat with red shoulder marks. The mere sight of it makes suspects far more willing to confess.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/investigator_coat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/investigator_coat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.65
+        Slash: 0.65
+        Piercing: 0.6
+        Heat: 0.7
+        Caustic: 0.75
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: StaminaResistance
+    damageCoefficient: 0.9
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterCoatSecurity
+  name: security coat
+  description: A warm, formal black-and-red security coat with a fur collar. Expensive to make, so it's sewn only in small batches.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/sec_coat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/sec_coat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.65
+        Slash: 0.65
+        Piercing: 0.7
+        Heat: 0.7
+        Caustic: 0.9
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: StaminaResistance
+    damageCoefficient: 0.9
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterWhiteSweatshirtTop
+  name: white sweatshirt top
+  description: A stylish white sweatshirt top from the Dar-Vaxed modeling agency.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/white_sweatshirttop.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/white_sweatshirttop.rsi
+
+- type: entity
+  parent: ClothingOuterWinterCoat
+  id: SunriseSponsorClothingOuterWinterCoatLightColorDarkBlue
+  name: navy light jacket
+  description: A light and stylish navy jacket with a fur collar.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/light_winter_coat_darkblue.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/light_winter_coat_darkblue.rsi
+
+- type: entity
+  parent: ClothingOuterWinterCoat
+  id: SunriseSponsorClothingOuterWinterCoatLightColorRed
+  name: red light jacket
+  description: A light and stylish red jacket with a fur collar.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/light_winter_coat_red.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/light_winter_coat_red.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: StaminaResistance
+    damageCoefficient: 0.9
+
+- type: entity
+  parent: ClothingOuterWinterCoat
+  id: SunriseSponsorClothingOuterWinterCoatLightColorYellow
+  name: yellow light jacket
+  description: A light and stylish yellow jacket with a fur collar.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/light_winter_coat_yellow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/light_winter_coat_yellow.rsi
+
+- type: entity
+  parent: [ ClothingOuterBaseToggleable, ClothingOuterStorageBase ]
+  id: SunriseSponsorClothingOuterArmorHeretic
+  name: ominous robe
+  description: A ragged, dusty set of robes. Strange eyes line the inside.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/eldritch_armor.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/eldritch_armor.rsi
+  - type: ToggleableClothing
+    clothingPrototype: SunriseSponsorClothingHeadHatHoodHeretic
+    slot: head
+    verbText: toggle-clothing-verb-hood
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+      storagebase: !type:Container
+        ents: []
+
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: SunriseSponsorClothingHeadHatHoodHeretic
+  name: ominous hood
+  description: A torn, dust-caked hood. Strange eyes line the inside.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/eldritch_hood.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/eldritch_hood.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterLowerFurCoat
+  name: white fur coat
+  description: A plain white fur coat, casually slipped off the shoulders.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/lower_fur_coat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/lower_fur_coat.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterCoatLabChem
+  name: chemist lab coat
+  description: A white lab coat with orange stripes on the shoulders. It smells faintly of reagents.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/labcoat_chem.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/labcoat_chem.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterChameleon
+  name: vest
+  description: A thick vest with a rubbery, water-resistant shell.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/vest.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/vest.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterSweaterBrown
+  name: brown sweater
+  description: A big, fluffy patterned sweater that feels very cozy.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/sweater_brown.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/sweater_brown.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterSweaterMedical
+  name: medical sweater
+  description: A big, fluffy sweater styled for the Medical department.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/sweater_medical.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/sweater_medical.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterSweaterScience
+  name: science sweater
+  description: A big, fluffy sweater styled for the Science department.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/sweater_science.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/sweater_science.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterSweaterSecurity
+  name: security sweater
+  description: A big, fluffy sweater styled for the Security department.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/sweater_security.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/sweater_security.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: StaminaResistance
+    damageCoefficient: 0.9
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: SunriseSponsorClothingOuterCoatSuitBlue
+  name: blue suit jacket
+  description: A fancy blue suit jacket.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/blue.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/blue.rsi
+
+- type: entity
+  parent: ClothingOuterWinterCoat
+  id: SunriseSponsorClothingOuterSovietCoat
+  name: soviet greatcoat
+  description: A long khaki greatcoat. Smells like damp concrete and expired rations.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/soviet_greatcoat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/OuterClothing/soviet_greatcoat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: StaminaResistance
+    damageCoefficient: 0.9

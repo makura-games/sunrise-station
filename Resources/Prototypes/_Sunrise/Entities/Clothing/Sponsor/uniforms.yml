@@ -1,0 +1,3370 @@
+# Эксклюзивные вещи спонсорского инвентаря из подборки арт-директора (ноябрь 2026).
+# Если меняете ID вещи, поправьте entityPrototype в спонсорском каталоге сайта, иначе купившие перестанут её получать.
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtDetectiveCasual
+  name: casual detective fatigues
+  description: A white shirt with a red collar and a black skirt. Comfortable, modern and stylish.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/detective_casual.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/detective_casual.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJulianneVA11HALLA
+  name: smoke-scented bartender uniform
+  description: "Smoke clings to it, heavy and suffocating. Somehow, it makes you want to cry. Care for another round, sir?"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/alt_purplebartender.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/alt_purplebartender.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformColouredDressExquisitePurple
+  name: exquisite purple dress
+  description: An elegant dark dress with bright purple trim.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/purple.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/purple.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitJacketHoP
+  name: HoP's jacket
+  description: A strict suit for boring work.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hop_jumpsuit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hop_jumpsuit.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtQMFormalDress
+  name: quartermaster's formal dress
+  description: Inspired by the quartermasters of militaries past, the perfect outfit for supplying a formal occasion.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/qmformaldress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/qmformaldress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtHopFormal
+  name: HoP's dress
+  description: A well-made formal dress with gold buttons and red trim. Might as well look sharp when botany goes up in flames.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hopformaldress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hopformaldress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformSweatercutBeige
+  name: beige cutout sweater
+  description: In theory, this sweater is meant to be cozy, not to attract attention.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/sweatercut_beige.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/sweatercut_beige.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformBrownSuitSkirt
+  name: brown suitskirt
+  description: Not even the worst coffee spills will show up on this puppy, guaranteed.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/brownsuit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/brownsuit.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtReporter
+  name: reporter's dress
+  description: An extravagant black dress designed to catch the attention of as many people as possible.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/reporter_dress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/reporter_dress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtCSS
+  name: service chief's jumpskirt
+  description: A sharp green waistcoat over a white shirt. Smart, but flashy.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/css.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/css.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtDressShirtBlue
+  name: blue shirt with skirt
+  description: A blue dress shirt with a matching black skirt. How bold.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/dress_skirt_blue.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/dress_skirt_blue.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtDressClub
+  name: club dress
+  description: This well-tailored dress ate and left no crumbs.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/club_dress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/club_dress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtCargoFormal
+  name: formal cargo jumpskirt
+  description: An official jumpskirt that combines practicality with a professional look. Its tailored cut keeps a neat, structured silhouette.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cargoformal.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cargoformal.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitSecFormal
+  name: security formal suit
+  description: A ceremonial suit of Station Security, for special occasions of any kind.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/secformal.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/secformal.rsi
+
+- type: entity
+  parent: [ ClothingUniformSkirtBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingUniformJumpskirtQMTurtleneck
+  name: quartermaster's turtleneck skirt
+  description: A sharp turtleneck made for the hardy work environment of supply.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/qmturtleskirt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/qmturtleskirt.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#b7793d"
+      right:
+      - state: inhand-right
+        color: "#b7793d"
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-verb-clothing-jacket
+    unfoldVerbText: unfold-verb-clothing-jacket
+  - type: FoldableClothing
+    foldedEquippedPrefix: folded
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtSmuggler
+  name: smuggler's business skirt
+  description: A skirt made of the finest fabric, for business meetings.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/smugglerskirt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/smugglerskirt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitCaptainRoyal
+  name: captain's royal uniform
+  description: A royally luxurious uniform. Perfect for commanding the station in the midst of a nuclear operative incursion.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/captain_royal.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/captain_royal.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitSyndicateBusinessSuitHarmony
+  name: syndicate business suit
+  description: For agents who prefer a bit more elegance.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/syndie_business.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/syndie_business.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformBlueshield
+  name: blueshield jumpskirt
+  description: A dark Blueshield uniform with blue shoulder trim and a pleated plaid skirt.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/blueshield.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/blueshield.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitDressShirtBlue
+  name: blue dress shirt
+  description: A blue dress shirt with a matching pair of black pants. How bold.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/dress_shirt_blue.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/dress_shirt_blue.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformCmoturtleskirt
+  name: doctor's turtleneck skirt
+  description: A white ribbed turtleneck with a blue pleated skirt, in medical colors.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cmoturtleskirt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cmoturtleskirt.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtWaitress
+  name: waitress outfit
+  description: "A white blouse, a blue vest and a black skirt. Waitress, waitress, another serving, please!"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/waitress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/waitress.rsi
+
+- type: entity
+  parent: [ ClothingUniformSkirtBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingUniformJumpskirtParamedic
+  name: paramedic jumpskirt
+  description: "It's got a plus on it, that's a good thing, right?"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/paramedic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/paramedic.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#364660"
+      right:
+      - state: inhand-right
+        color: "#364660"
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-verb-clothing-jacket
+    unfoldVerbText: unfold-verb-clothing-jacket
+  - type: FoldableClothing
+    foldedEquippedPrefix: folded
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitBarber
+  name: barber's suit
+  description: A red-and-white striped shirt, white trousers and a golden bow tie. It's just so good.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/barber.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/barber.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingCostumeArcDress
+  name: shirt with purple skirt
+  description: You feel a supernatural urge to put these on. It must be fate.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/arc.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/arc.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformSergeantSkirt
+  name: security sergeant's jumpskirt
+  description: The skirted uniform of a highly skilled member of security. Sergeants are the guiding light of the station's safety.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/sergeantskirt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/sergeantskirt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitDisheveled
+  name: disheveled suit
+  description: What might pass as well-maintained formal attire, if you're blind.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/disheveled.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/disheveled.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtAngelDress
+  name: angel dress
+  description: "A soft pink frilly dress. Could you stop sabotaging my business?!"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/angeldress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/angeldress.rsi
+
+- type: entity
+  parent: [ ClothingUniformBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingUniformJumpsuitASOOperations
+  name: support officer's uniform
+  description: An operations uniform typically worn by auxiliary support officers. This one has a dark blue camo pattern.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/aso_operations.rsi
+    layers:
+    - state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/aso_operations.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtCargoSalvageFormal
+  name: formal salvage jumpskirt
+  description: Pairs perfectly with a pickaxe. A rugged yet stylish skirted jumpsuit with a practical cut for salvage work.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/salvageformal.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/salvageformal.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformMusicianSingerDress
+  name: lounge singer's dress
+  description: A form-fitting silk dress, perfect for performing at fancy nightclubs. Or at dive bars on backwater space stations.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mus_singerdress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mus_singerdress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformPinkPrincessDress
+  name: pink princess dress
+  description: A sweet and fluffy dress fit for royalty... though it is a little itchy.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/pinkprincessdress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/pinkprincessdress.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitSuitStriped
+  name: striped suit
+  description: A red and white striped ensemble with dark suspenders.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/striped_suit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/striped_suit.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtNTFormalDress
+  name: NanoTrasen formal dress
+  description: Combines sleek, upper-class elegance with NanoTrasen's signature aura of faint totalitarian menace.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/nanotrasenformaldress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/nanotrasenformaldress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformLushRoseWeddingDress
+  name: rose-white wedding dress
+  description: A lush white dress with pink trim and a big bow on the back. Made especially for a princess.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/lush_rose_wedding_dress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/lush_rose_wedding_dress.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformCmoturtle
+  name: doctor's turtleneck
+  description: A white ribbed turtleneck with blue trousers, in medical colors.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cmoturtle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cmoturtle.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtMime
+  name: mime jumpskirt
+  description: A black-and-white striped top with a black skirt. ...
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mime.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mime.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtWarden
+  name: warden's uniform
+  description: A formal security suit for officers, complete with a NanoTrasen belt buckle.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/armourer.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/armourer.rsi
+
+- type: entity
+  parent: [ ClothingUniformSkirtBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingUniformDressPrecise
+  name: plaid dress
+  description: A charming dress in neat geometric plaid.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/precise_dress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/precise_dress.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-unzip-verb
+    unfoldVerbText: fold-zip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: folded
+
+- type: entity
+  parent: [ ClothingUniformSkirtBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingUniformJumpskirtMedicalNurseElegant
+  name: elegant nurse outfit
+  description: It'll lift your mood, and not just your mood.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/Sex_nurseUniform.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/Sex_nurseUniform.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-verb-clothing-jacket
+    unfoldVerbText: unfold-verb-clothing-jacket
+  - type: FoldableClothing
+    foldedEquippedPrefix: folded
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformMNKOfficeSkirt
+  name: MNK office skirt
+  description: An MNK outfit within office dress code.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/office_skirt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/office_skirt.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtCmoVest
+  name: CMO's vest jumpskirt
+  description: A cozy teal cotton vest with a green cross pin, paired with a white button-up shirt.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cmo_vest.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cmo_vest.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtFencing
+  name: fencer's jumpskirt
+  description: The classic uniform for a student of fencing.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/fencer.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/fencer.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtRippedPunk
+  name: ripped punk skirt
+  description: A black ripped skirt and a fishnet top. Real punks always ignore the 'Dry Clean Only' tag.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/rippedpunk.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/rippedpunk.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtHD
+  name: hospitality director's jumpskirt
+  description: A uniform of splendid sartorial make, fit for the head of the service department.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hd_uniform.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hd_uniform.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtMimeCropped
+  name: cropped mime jumpskirt
+  description: "A cropped striped top with a short black skirt. ...?"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mimecropped.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mimecropped.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtMimeNouveau
+  name: nouveau mime jumpskirt
+  description: "A dark dress with a striped collar and a white frilly hem. ...!?"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mimenouveau.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mimenouveau.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformPostmasterSkirt
+  name: postmaster's jumpskirt
+  description: A stylish yet practical jumpskirt that marks a veteran courier. In a pinch, the buttons could even stamp a wax seal.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/postmaster_skirt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/postmaster_skirt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitLittleGuyOveralls
+  name: little guy overalls
+  description: "Blue overalls over a red-and-white striped shirt. I'm just a little guy!"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/littleguy_overalls.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/littleguy_overalls.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtKimonoColor
+  name: pale kimono
+  description: A traditional Japanese kimono in pale colors.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/kimono_color.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/kimono_color.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtDressLongFlared
+  name: long flared dress
+  description: A long dress that flares out at the bottom.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/long_flared_dress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/long_flared_dress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtDressLongSleeve
+  name: long-sleeve A-line dress
+  description: A dress with a flared bottom and sleeves that cover the arms.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/longsleeve_dress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/longsleeve_dress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtDressOpenShoulder
+  name: open-shoulder dress
+  description: No sleeves in this dress, only style fierce enough to snatch wigs.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/openshoulder_dress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/openshoulder_dress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtDressPuffy
+  name: puffy dress
+  description: An iconic dress with a very puffy skirt.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/puffydress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/puffydress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformWhiteShortWeddingDress
+  name: short wedding dress
+  description: "A white dress with gold sequins. For those who are tired of floor-length dresses!"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/white_short_wedding_dress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/white_short_wedding_dress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtDressShort
+  name: short dress
+  description: A short, plain dress.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/short_dress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/short_dress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtClown
+  name: clown jumpskirt
+  description: "HONK!"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/clown_skirt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/clown_skirt.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtMedicalApron
+  name: medical apron jumpskirt
+  description: The white apron keeps chemical spills and blood from staining the light blue scrubs.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/medical_apron.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/medical_apron.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformCreamSuitSkirt
+  name: cream suitskirt
+  description: A suit fit for a humble, small-town gentleman with something to say.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/creamsuit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/creamsuit.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtMedicalOffset
+  name: medical offset jumpskirt
+  description: A light blue asymmetrical scrub set with white accents.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/medical_offset.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/medical_offset.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtCurator
+  name: sensible skirt
+  description: It's sensible. Too sensible...
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/curator.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/curator.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitChaplainPilgrimVest
+  name: pilgrim suit
+  description: "Knock knock! Would you care to have a word about our Lord and Savior Nar... err, Space Jeebus?"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/chaplain-pilgrim.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/chaplain-pilgrim.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtPharmacist
+  name: pharmacist jumpskirt
+  description: There are still some odd stains on this jumpskirt. Hm.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/pharmacist.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/pharmacist.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtHoPShirt
+  name: HoP's shirt
+  description: Ian left fur all over your other uniform. Can't wear it now, it'd be embarrassing.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hopshirt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hopshirt.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtJournalist
+  name: journalist suitskirt
+  description: If journalism is good, it is controversial, by nature.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/journalist.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/journalist.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtSecCadet
+  name: security cadet jumpskirt
+  description: A simple uniform for security cadets. It's a bit small, but it should do for training purposes.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/securitycadet.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/securitycadet.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformNightclubSuitSkirt
+  name: nightclub suitskirt
+  description: "A sharp dark suit with a skirt. ID, please?"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/nightclubsuit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/nightclubsuit.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitChemShirt
+  name: formal chemistry suit
+  description: There are still some odd stains on this suit. Hm.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/chemshirtsuit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/chemshirtsuit.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtStingray
+  name: cyber bartender skirt
+  description: It's time to mix drinks and change lives.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/stingray.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/stingray.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitRedSweaterHeart
+  name: red heart sweater
+  description: A cozy red sweater with a white heart, knitted with love.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/redsweaterheart_suit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/redsweaterheart_suit.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitClownAlt
+  name: clown jumpsuit
+  description: "HONK! A patchwork jumpsuit split into loud blue and red halves, with bright orange buttons."
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/clown_jumpsuit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/clown_jumpsuit.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitEngineeringTankTop
+  name: engineering tank top
+  description: A white tank top over a pair of hardy engineering cargo pants. Nothing if not practical.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/engineertanktop.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/engineertanktop.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitWhiteSweaterHeart
+  name: white sweater with heart
+  description: A warm white sweater with a red heart, paired with a red plaid skirt. Made with love.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/whitesweaterheart_suit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/whitesweaterheart_suit.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitMedicalCustodian
+  name: medical custodian jumpsuit
+  description: A cute jumpsuit worn by medical custodians. It's perfect for running from one end of the medbay to the other, over and over.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/medicalcustodian.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/medicalcustodian.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformTurtleneckSkirtColorWhite
+  name: white turtleneck with skirt
+  description: A generic white turtleneck with a black skirt and no rank markings.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    layers:
+    - state: icon
+    - state: skirt-icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+      - state: skirt-equipped-INNERCLOTHING
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      - state: skirt-inhand-left
+      right:
+      - state: inhand-right
+      - state: skirt-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformTurtleneckSkirtColorGrey
+  name: grey turtleneck with skirt
+  description: A tasteful grey turtleneck with a black skirt that reminds you of the good old days.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    layers:
+    - state: icon
+      color: "#b3b3b3"
+    - state: skirt-icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#b3b3b3"
+      - state: skirt-equipped-INNERCLOTHING
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#b3b3b3"
+      - state: skirt-inhand-left
+      right:
+      - state: inhand-right
+        color: "#b3b3b3"
+      - state: skirt-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformTurtleneckSkirtColorBlack
+  name: black turtleneck with skirt
+  description: A generic black turtleneck with a matching black skirt and no rank markings.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    layers:
+    - state: icon
+      color: "#3f3f3f"
+    - state: skirt-icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#3f3f3f"
+      - state: skirt-equipped-INNERCLOTHING
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#3f3f3f"
+      - state: skirt-inhand-left
+      right:
+      - state: inhand-right
+        color: "#3f3f3f"
+      - state: skirt-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformTurtleneckSkirtColorBlue
+  name: blue turtleneck with skirt
+  description: A generic blue turtleneck with a black skirt and no rank markings.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    layers:
+    - state: icon
+      color: "#52aecc"
+    - state: skirt-icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#52aecc"
+      - state: skirt-equipped-INNERCLOTHING
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#52aecc"
+      - state: skirt-inhand-left
+      right:
+      - state: inhand-right
+        color: "#52aecc"
+      - state: skirt-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformTurtleneckSkirtColorDarkBlue
+  name: dark blue turtleneck with skirt
+  description: A generic dark blue turtleneck with a black skirt and no rank markings.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    layers:
+    - state: icon
+      color: "#3285ba"
+    - state: skirt-icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#3285ba"
+      - state: skirt-equipped-INNERCLOTHING
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#3285ba"
+      - state: skirt-inhand-left
+      right:
+      - state: inhand-right
+        color: "#3285ba"
+      - state: skirt-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformTurtleneckSkirtColorTeal
+  name: teal turtleneck with skirt
+  description: A generic teal turtleneck with a black skirt and no rank markings.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    layers:
+    - state: icon
+      color: "#77f3b7"
+    - state: skirt-icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#77f3b7"
+      - state: skirt-equipped-INNERCLOTHING
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#77f3b7"
+      - state: skirt-inhand-left
+      right:
+      - state: inhand-right
+        color: "#77f3b7"
+      - state: skirt-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformTurtleneckSkirtColorGreen
+  name: green turtleneck with skirt
+  description: A generic green turtleneck with a black skirt and no rank markings.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    layers:
+    - state: icon
+      color: "#9ed63a"
+    - state: skirt-icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#9ed63a"
+      - state: skirt-equipped-INNERCLOTHING
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#9ed63a"
+      - state: skirt-inhand-left
+      right:
+      - state: inhand-right
+        color: "#9ed63a"
+      - state: skirt-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformTurtleneckSkirtColorDarkGreen
+  name: dark green turtleneck with skirt
+  description: A generic dark green turtleneck with a black skirt and no rank markings.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    layers:
+    - state: icon
+      color: "#79CC26"
+    - state: skirt-icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#79CC26"
+      - state: skirt-equipped-INNERCLOTHING
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#79CC26"
+      - state: skirt-inhand-left
+      right:
+      - state: inhand-right
+        color: "#79CC26"
+      - state: skirt-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformTurtleneckSkirtColorOrange
+  name: orange turtleneck with skirt
+  description: A generic orange turtleneck with a black skirt and no rank markings.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    layers:
+    - state: icon
+      color: "#ff8c19"
+    - state: skirt-icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#ff8c19"
+      - state: skirt-equipped-INNERCLOTHING
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#ff8c19"
+      - state: skirt-inhand-left
+      right:
+      - state: inhand-right
+        color: "#ff8c19"
+      - state: skirt-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformTurtleneckSkirtColorPink
+  name: pink turtleneck with skirt
+  description: A generic pink turtleneck with a black skirt and no rank markings.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    layers:
+    - state: icon
+      color: "#ffa69b"
+    - state: skirt-icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#ffa69b"
+      - state: skirt-equipped-INNERCLOTHING
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#ffa69b"
+      - state: skirt-inhand-left
+      right:
+      - state: inhand-right
+        color: "#ffa69b"
+      - state: skirt-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformTurtleneckSkirtColorRed
+  name: red turtleneck with skirt
+  description: A generic red turtleneck with a black skirt and no rank markings.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    layers:
+    - state: icon
+      color: "#eb0c07"
+    - state: skirt-icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#eb0c07"
+      - state: skirt-equipped-INNERCLOTHING
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#eb0c07"
+      - state: skirt-inhand-left
+      right:
+      - state: inhand-right
+        color: "#eb0c07"
+      - state: skirt-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformTurtleneckSkirtColorYellow
+  name: yellow turtleneck with skirt
+  description: A generic yellow turtleneck with a black skirt and no rank markings.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    layers:
+    - state: icon
+      color: "#ffe14d"
+    - state: skirt-icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#ffe14d"
+      - state: skirt-equipped-INNERCLOTHING
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#ffe14d"
+      - state: skirt-inhand-left
+      right:
+      - state: inhand-right
+        color: "#ffe14d"
+      - state: skirt-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformTurtleneckSkirtColorPurple
+  name: purple turtleneck with skirt
+  description: A generic light purple turtleneck with a black skirt and no rank markings.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    layers:
+    - state: icon
+      color: "#9f70cc"
+    - state: skirt-icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#9f70cc"
+      - state: skirt-equipped-INNERCLOTHING
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#9f70cc"
+      - state: skirt-inhand-left
+      right:
+      - state: inhand-right
+        color: "#9f70cc"
+      - state: skirt-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformTurtleneckSkirtColorLightBrown
+  name: light brown turtleneck with skirt
+  description: A generic light brown turtleneck with a black skirt and no rank markings.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    layers:
+    - state: icon
+      color: "#c59431"
+    - state: skirt-icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#c59431"
+      - state: skirt-equipped-INNERCLOTHING
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#c59431"
+      - state: skirt-inhand-left
+      right:
+      - state: inhand-right
+        color: "#c59431"
+      - state: skirt-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformTurtleneckSkirtColorBrown
+  name: brown turtleneck with skirt
+  description: A generic brown turtleneck with a black skirt and no rank markings.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    layers:
+    - state: icon
+      color: "#a17229"
+    - state: skirt-icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#a17229"
+      - state: skirt-equipped-INNERCLOTHING
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#a17229"
+      - state: skirt-inhand-left
+      right:
+      - state: inhand-right
+        color: "#a17229"
+      - state: skirt-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformTurtleneckSkirtColorMaroon
+  name: maroon turtleneck with skirt
+  description: A generic maroon turtleneck with a black skirt and no rank markings.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    layers:
+    - state: icon
+      color: "#cc295f"
+    - state: skirt-icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/color_turtle.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#cc295f"
+      - state: skirt-equipped-INNERCLOTHING
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#cc295f"
+      - state: skirt-inhand-left
+      right:
+      - state: inhand-right
+        color: "#cc295f"
+      - state: skirt-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtCoroner
+  name: pathologist jumpskirt
+  description: A black jumpskirt for those who work with the dead, proving that style doesn't have to die with the patients. Perfect for a professional with a sense of dark humor.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/coroner.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/coroner.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformScrubsColorBlueSleeveless
+  name: sleeveless medical scrubs
+  description: The generalist blue scrubs of medical personnel everywhere. You couldn't afford an undershirt with your salary.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/bluesleeveless.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/bluesleeveless.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformScrubsColorGreenSleeveless
+  name: sleeveless surgical scrubs
+  description: A set of green scrubs worn by surgical staff, who always seem to misplace their watches.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/greensleeveless.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/greensleeveless.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtSalvageLead
+  name: salvage lead's jumpskirt
+  description: A snappy jumpskirt with a yellow shirt and a sturdy set of overalls. It's very dirty.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/salvagelead.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/salvagelead.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtSalvageMedic
+  name: salvage medic's jumpskirt
+  description: A snappy jumpskirt with a purple shirt, a white cross on the back and a sturdy set of overalls. It's very bloody.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/salvagemedic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/salvagemedic.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtSeniorChemist
+  name: senior chemist jumpskirt
+  description: A sign of skill, prestige and alchemical prowess.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/senior_chemist.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/senior_chemist.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitSweaterHolidayRedDark
+  name: red holiday sweater
+  description: A red holiday sweater worn with black pants. Warm, bright, festive and, most importantly, stylish.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/sweater_red_dark.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/sweater_red_dark.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitChiefJusticeWhite
+  name: chief justice's white jumpsuit
+  description: A modest white office shirt with hard-earned rank epaulettes and a black tie.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cj_white.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cj_white.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitMimeSuaveBlack
+  name: mime costume with black pants
+  description: A suave mime costume with a fitted top, suspenders and black trousers in bold black and white. Entertaining yet chic, it exudes mystery and confidence.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/suave-mime-black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/suave-mime-black.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpsuitSuitTan
+  name: beige evening suit
+  description: An elegant beige evening suit with a fitted blazer and flared trousers. Perfect for special evening events.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/suit_tan.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/suit_tan.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformColouredTurtleneckSkirtStylishCyan
+  name: stylish cyan turtleneck skirt
+  description: A cyan turtleneck paired with a dark pleated skirt and a neat belt. Simple, but undeniably stylish.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cyan.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cyan.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformColouredTurtleneckSkirtStylishOrange
+  name: stylish orange turtleneck skirt
+  description: An orange turtleneck paired with a dark pleated skirt and a neat belt. Looks just as good in the office as in the warehouse.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/orange.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/orange.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformColouredTurtleneckSkirtStylishPurple
+  name: stylish purple turtleneck skirt
+  description: A purple turtleneck paired with a dark pleated skirt and a neat belt. Proof that scientists can have taste.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/purple_mono.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/purple_mono.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformColouredTurtleneckSkirtStylishRed
+  name: stylish red turtleneck skirt
+  description: A red turtleneck paired with a dark pleated skirt and a neat belt. Strict, tidy and undeniably stylish.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/red.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/red.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformColouredTurtleneckSuitClassicalCyan
+  name: classical cyan turtleneck suit
+  description: A classic cyan turtleneck tucked into light grey trousers. Timeless and always tidy.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cyan_mono.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cyan_mono.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformColouredTurtleneckSuitClassicalOrange
+  name: classical orange turtleneck suit
+  description: A classic orange turtleneck tucked into light grey trousers. Comfortable enough for a long shift among the crates.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/orange_mono.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/orange_mono.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformColouredTurtleneckSuitFancyOrange
+  name: fancy orange turtleneck suit
+  description: A fancy orange turtleneck with gold shoulder trim and a buckled belt, worn with dark trousers. Dressed up even for a routine delivery.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/orange_2.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/orange_2.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformColouredTurtleneckSuitFancyRed
+  name: fancy red turtleneck suit
+  description: A fancy red turtleneck with gold shoulder trim and a buckled belt, worn with dark trousers. Smart enough for any parade.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/red_mono.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/red_mono.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformColouredTurtleneckSuitStylishPurple
+  name: stylish purple turtleneck suit
+  description: A stylish purple turtleneck worn with dark trousers and a neat belt. Looks sharp both in the lab and in the robotics bay.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/purple_2.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/purple_2.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitViperGroupTurtleneck
+  name: Viper Group turtleneck
+  description: A dark red turtleneck with black shoulder panels, bearing the colours of the Vipers.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/viper_group_turtleneck.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/viper_group_turtleneck.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpsuitSec
+  name: security jumpsuit
+  description: A jumpsuit of dense, sturdy fabric in red and black security colours.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/security.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/security.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: overlay-inhand-left
+      right:
+      - state: overlay-inhand-right
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtSec
+  name: security jumpskirt
+  description: A jumpskirt of dense, sturdy fabric in red and black security colours.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/security_mono.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/security_mono.rsi
+  - type: Item
+    inhandVisuals:
+      left: []
+      right: []
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitHoSParadeMale
+  name: red HoS parade uniform
+  description: Luxury wear for male heads of security, for special occasions. A red tunic with gold epaulettes and black trousers.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hos_parade.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hos_parade.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtJanimaid
+  name: maid uniform
+  description: A dark blue maid dress with a crisp white apron. For professionals, not posers.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/janimaid.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/janimaid.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtHoSAlt
+  name: head of security's turtleneck skirt
+  description: It's a turtleneck worn by those strong and disciplined enough to achieve the position of head of security. It comes with a red pleated skirt.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hos_alt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hos_alt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitHoSAlt
+  name: head of security's turtleneck
+  description: It's a turtleneck worn by those strong and disciplined enough to achieve the position of head of security.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hos_alt_nova.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hos_alt_nova.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitHosFormal
+  name: head of security's formal suit
+  description: A suit for special occasions.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hosformal.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hosformal.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitHoSParadeMaleNova
+  name: black HoS parade uniform
+  description: Luxury wear for male heads of security, for special occasions. A black tunic with gold epaulettes and red-striped trousers.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hos_parade_nova.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hos_parade_nova.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitMagistrateFormal
+  name: magistrate's formal suit
+  description: Fancy attire for a judge of corporate law.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/magistrateformal.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/magistrateformal.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtCargoSalvage
+  name: plaid salvage jumpskirt
+  description: "A practical salvage jumpskirt: a purple shirt, sturdy brown overalls and a plaid skirt. It pairs perfectly with a pickaxe."
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/salvage.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/salvage.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitCoroner
+  name: pathologist jumpsuit
+  description: "Issued to trained professionals, this jumpsuit bears the phrase \"I don't just work with the dead, I dance with them on their final parade!\" A unique touch of dark humor."
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/coroner_wizden.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/coroner_wizden.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitMimeSuaveWhite
+  name: mime costume with white pants
+  description: A suave mime costume with a fitted top, suspenders and white trousers in bold black and white. Entertaining yet chic, it exudes mystery and confidence.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/suave-mime.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/suave-mime.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformFlamboyantUniformSuit
+  name: flamboyant outfit
+  description: A frilly cream shirt with puffed sleeves, dark trousers and gold buttons. You must really like vampires.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/flamboyant.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/flamboyant.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformMechanicOverallsUniformSuit
+  name: mechanic overalls
+  description: Sturdy brown overalls over a work shirt, made for hard-working mechanics. Smells like oil.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mechanic_overalls.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mechanic_overalls.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitCmoVest
+  name: chief medical officer's vest
+  description: A cozy teal cotton vest with a green cross pin, worn over a white button-up shirt.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cmo_vest_wizden.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cmo_vest_wizden.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitHopFormal
+  name: head of personnel's formal suit
+  description: A well-made suit with gold buttons and a red trim. Might as well look sharp when botany goes up in flames.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hopformal.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hopformal.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtHoP
+  name: head of personnel's jumpskirt
+  description: A neat blue jumpskirt with gold buttons, gold epaulettes and a red hem. It pairs well with the head of personnel's formal suit.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hopformaldress_imp.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hopformaldress_imp.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtNurse
+  name: nurse skirt
+  description: Time to carry the medical department.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/nurse.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/nurse.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitCapFormal
+  name: captain's formal suit
+  description: A suit for special occasions.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/capformal.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/capformal.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtCapFormalDress
+  name: captain's navy formal dress
+  description: A dark navy dress with gold trim for special occasions.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/capformaldress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/capformaldress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtCMOFormal
+  name: chief medical officer's formal dress
+  description: The chief medical officer's formal attire, perfect for meetings and hands-off work.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cmo_formal.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cmo_formal.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtHoSGrey
+  name: head of security's grey jumpskirt
+  description: A grey jumpskirt for the head of security. Unfortunately, it looks a lot like a passenger's uniform.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hos_grey.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hos_grey.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitDetectiveGrey
+  name: noir suit
+  description: A hard-boiled private investigator's grey suit, complete with tie clip.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/det_noir.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/det_noir.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitMimeCropped
+  name: cropped mime suit
+  description: A black-and-white striped crop top with dark trousers. The mime says nothing, but the outfit speaks for itself.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mimecropped_imp.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mimecropped_imp.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitMimeNouveau
+  name: nouveau mime suit
+  description: A striped shirt under dark dungarees with orange buttons, a fresh take on the classic mime look. The silence has never been louder.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mimenouveau_imp.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mimenouveau_imp.rsi
+
+- type: entity
+  parent: [ ClothingUniformBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingUniformJumpsuitHoSGrey
+  name: head of security's grey jumpsuit
+  description: A grey jumpsuit for the head of security, unfortunately resembling a passenger's uniform.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hos_grey_imp.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hos_grey_imp.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-verb-clothing-jacket
+    unfoldVerbText: unfold-verb-clothing-jacket
+  - type: FoldableClothing
+    foldedEquippedPrefix: folded
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformNightclubSuit
+  name: nightclub suit
+  description: "ID, please? A sleek black suit with a blue shirt, just like a nightclub bouncer's."
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/nightclubsuit_imp.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/nightclubsuit_imp.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformEngineerTSF
+  name: TSF engineer uniform
+  description: A white shirt with orange shoulder panels and blue trousers, the work clothes of TSF fleet engineers.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/engineer_tsf.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/engineer_tsf.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitERTSecurity
+  name: ERT security uniform
+  description: A special suit made for the elite security officers of CentCom.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/ert_security.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/ert_security.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformSweatercutBlack
+  name: black cutout sweater
+  description: A black sweater with an open back. In theory, it's meant to keep you warm, not attract attention.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/sweatercut_black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/sweatercut_black.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformSweatercutWhite
+  name: white cutout sweater
+  description: A white sweater with an open back. In theory, it's meant to keep you warm, not attract attention.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/sweatercut_white.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/sweatercut_white.rsi
+
+- type: entity
+  parent: [ ClothingUniformSkirtBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingUniformDressDarkblue
+  name: neat navy dress
+  description: A tidy dress with a white top and a long navy skirt. Suits a working woman and a housewife alike.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/darkblue_dress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/darkblue_dress.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-unzip-verb
+    unfoldVerbText: fold-zip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: folded
+
+- type: entity
+  parent: [ ClothingUniformSkirtBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingUniformJumpskirtDetectiveOld
+  name: old detective outfit
+  description: A worn shirt with a tie, suspenders and a skirt. Whoever wears this clearly values old principles and cherishes her things.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/detective_old.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/detective_old.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-unzip-verb
+    unfoldVerbText: fold-zip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: folded
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformDressVintage
+  name: vintage dress
+  description: A beautiful vintage dress for special occasions.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/dress_vintage.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/dress_vintage.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformDressElegantBlack
+  name: elegant night dress
+  description: A rather modest black dress covering the whole body.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/elegant_black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/elegant_black.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformDressEveningCyan
+  name: cyan evening dress
+  description: An elegant light cyan dress for formal receptions.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/evening_dress_cyan.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/evening_dress_cyan.rsi
+
+- type: entity
+  parent: [ ClothingUniformSkirtBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingJumpskirtHopAlt
+  name: head of personnel's suitskirt
+  description: A blue jacket with red piping and a pleated black skirt. A well-made business uniform for those heads of personnel who can afford it.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/jumpskirt_alt_hop.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon_vest
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/jumpskirt_alt_hop.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+  - type: FoldableClothing
+    foldedEquippedPrefix: vest
+    foldedHeldPrefix: vest
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtHopWarm
+  name: head of personnel's turtleneck skirt
+  description: A blue knitted turtleneck and a pleated black skirt. Rather bland and inoffensive.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/jumpskirt_hop.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/jumpskirt_hop.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformDressNightBlack
+  name: black sequin dress
+  description: A sparkling black dress for parties and celebrations.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/night_black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/night_black.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformDressNightRed
+  name: red sequin dress
+  description: A sparkling red dress for parties and celebrations.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/night_red.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/night_red.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformDressNightWhite
+  name: white sequin dress
+  description: A sparkling white dress for parties and celebrations.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/night_white.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/night_white.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformDressPink
+  name: quirky pink dress
+  description: An unusual pink dress of a quirky cut.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/pink_dress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/pink_dress.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformAiryBlackSuit
+  name: airy black suit
+  description: Gothic, strict, sexy. For those who like to show off their pretty bra.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/airy_black_suit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/airy_black_suit.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformAiryWhiteSuit
+  name: airy white suit
+  description: The airy suit, only in white. Better not wear a black bra under a white shirt.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/airy_white_suit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/airy_white_suit.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformHalloweenBadPoliceSuit
+  name: bad cop costume
+  description: A tight navy bodysuit with gold buttons. Arrest me, please.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/bad_police.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/bad_police.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitBartenderVest
+  name: bartender's uniform with vest
+  description: A nice and tidy uniform with a vest. Shame about the bar though.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/bartender_vest.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/bartender_vest.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitBartenderVestGreen
+  name: green bartender's uniform
+  description: A nice and tidy uniform with a green shirt and a vest. Shame about the bar though.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/bartender_vest_green.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/bartender_vest_green.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitBartenderVestRed
+  name: red bartender's uniform
+  description: A nice and tidy uniform with a red shirt and a vest. Shame about the bar though.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/bartender_vest_red.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/bartender_vest_red.rsi
+
+- type: entity
+  parent: [ ClothingUniformBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingUniformJumpsuitSuitBeige
+  name: beige suit
+  description: A simple beige suit with a white shirt.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/beige_suit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/beige_suit.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-unzip-verb
+    unfoldVerbText: fold-zip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: folded
+
+- type: entity
+  parent: [ ClothingUniformBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingUniformBlackWeddingSuit
+  name: men's wedding suit
+  description: A black suit with a red tie for a significant occasion.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/black_wedding_suit_male.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/black_wedding_suit_male.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-unzip-verb
+    unfoldVerbText: fold-zip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: folded
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformBlackWeddingWomenSuit
+  name: women's wedding suit
+  description: A black women's suit for those who are tired of dresses. Looks sexy.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/black_wedding_women_suit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/black_wedding_women_suit.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitOldGreySuit
+  name: old grey suit
+  description: The suit itself is new, but its cut is long outdated by the standards of the Dar-Vaxed modeling agency. Surprising that it's still on sale.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/grey_suit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/grey_suit.rsi
+
+- type: entity
+  parent: [ ClothingUniformBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingJumpsuitHopAlt
+  name: head of personnel's business suit
+  description: A blue jacket with red piping, a white shirt with a red tie and dark trousers. A well-made business uniform for those heads of personnel who can afford it.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/jumpsuit_alt_hop.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon_vest
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/jumpsuit_alt_hop.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+  - type: FoldableClothing
+    foldedEquippedPrefix: vest
+    foldedHeldPrefix: vest
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingJumpsuitSecOffMogesGray
+  name: Moges security suit
+  description: "Freeze, Moges Vice! Not quite formal, but perfect for the tropics: the suit of a security officer from the Nanotrasen branch on planet Moges. Only veterans of the service wear one."
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/jumpsuit_sec_moges_gray.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/jumpsuit_sec_moges_gray.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitOldBrownSuit
+  name: old brown suit
+  description: A carefully kept white shirt and a brown jacket. Perhaps it was once bright brown before it faded. Made by the Dar-Vaxed modeling agency.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/old_brown_shirt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/old_brown_shirt.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformBurgundyDress
+  name: burgundy dress
+  description: A short burgundy dress with thin straps.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/burgundy_dress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/burgundy_dress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformBurgundyDressAlt
+  name: burgundy dress with sleeves
+  description: A short burgundy dress with black and red sleeves.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/burgundy_dress_alt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/burgundy_dress_alt.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformCocktailDress
+  name: cocktail dress
+  description: A dress with red and white elements and a bow in the middle.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cocktail_dress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cocktail_dress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformEveningDress
+  name: evening dress
+  description: A medium-length, semi-fitted dress with a deep neckline and a thigh-high slit.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/evening_dress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/evening_dress.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformOktoberfestBlueCheckered
+  name: blue bavarian suit
+  description: A traditional Bavarian men's suit with short trousers and a blue checked shirt. Just right for Oktoberfest.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/oktoberfest_male_bluecheck.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/oktoberfest_male_bluecheck.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformOktoberfestGreenCheckered
+  name: green bavarian suit
+  description: A traditional Bavarian men's suit with short trousers and a green checked shirt. Just right for Oktoberfest.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/oktoberfest_male_greencheck.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/oktoberfest_male_greencheck.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformOktoberfestWhite
+  name: white bavarian suit
+  description: A traditional Bavarian men's suit with short trousers and a white shirt. Just right for Oktoberfest.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/oktoberfest_male_white.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/oktoberfest_male_white.rsi
+
+- type: entity
+  parent: [ ClothingUniformSkirtBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingUniformJumpskirtSecGrey
+  name: grey security jumpskirt
+  description: A tactical relic of years past before Nanotrasen decided it was cheaper to dye the suits red instead of washing out the blood.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/security_grey.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/security_grey.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-unzip-verb
+    unfoldVerbText: fold-zip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: folded
+
+- type: entity
+  parent: [ ClothingUniformSkirtBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingUniformJumpskirtBartender
+  name: bartender's uniform
+  description: A nice and tidy uniform. Shame about the bar though.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/bartender.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/bartender.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-unzip-verb
+    unfoldVerbText: fold-zip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: folded
+
+- type: entity
+  parent: [ ClothingUniformSkirtBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingUniformJumpskirtChef
+  name: chef jacket with skirt
+  description: A long-sleeved white chef jacket and a black skirt. Can't cook without them.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/chef.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/chef.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-unzip-verb
+    unfoldVerbText: fold-zip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: folded
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtMimeAdt
+  name: mime jumpskirt with belt
+  description: A striped top, a black skirt with a belt and a meaningful silence.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mime_adt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mime_adt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitMime
+  name: mime suit
+  description: A striped top, black trousers and a meaningful silence.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mime_2.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/mime_2.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtChemistry
+  name: chemistry jumpskirt
+  description: There are some odd stains on this jumpskirt. Hm.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/chemistry.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/chemistry.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtSuitBlueBlazer
+  name: blue blazer with skirt
+  description: "A bold yet conservative outfit: a red pencil skirt and a navy blazer."
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/blue_blazer.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/blue_blazer.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtDressCheongsamBlue
+  name: blue cheongsam
+  description: A body-hugging Chinese dress of blue fabric patterned with flowering branches.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cheongsamblue.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cheongsamblue.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtDressCheongsamRed
+  name: red cheongsam
+  description: A body-hugging red Chinese dress with a golden leaf trim climbing up the garment.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cheongsamred.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cheongsamred.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtDressLacyGown
+  name: lacy gown
+  description: A beautiful lacy gown with lace trim at the hem.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/lacy_gown.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/lacy_gown.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitSuitBlueBlazer
+  name: blue blazer
+  description: "A bold yet conservative outfit: red corduroys, a navy blazer and a tie."
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/blue_blazer_ee.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/blue_blazer_ee.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitSuitVictorianRedVest
+  name: red victorian suit
+  description: A fancy Victorian-style suit with a red vest.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/victorian_red_vest.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/victorian_red_vest.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitSuitVictorianVest
+  name: victorian suit
+  description: A fancy Victorian-style suit with a dark vest.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/victorian_vest.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/victorian_vest.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitJournalist
+  name: journalist suit
+  description: If journalism is good, it is controversial, by nature.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/journalist_cd.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/journalist_cd.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitCMOTurtle
+  name: chief medical officer's turtleneck
+  description: It's a turtleneck worn by those with the experience to be Chief Medical Officer.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cmo_turtle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cmo_turtle.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtMusician
+  name: musician's skirt
+  description: A fancy skirt for the musically inclined. Perfect for any lounge act.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/musician.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/musician.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitMusician
+  name: musician's tuxedo
+  description: A fancy tuxedo for the musically inclined. Perfect for any lounge act.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/musician_adt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/musician_adt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitQMFormal
+  name: quartermaster's formal suit
+  description: Inspired by the military quartermasters of the past, a fine outfit for formal occasions.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/qm_suit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/qm_suit.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitClown
+  name: clown suit
+  description: "HONK! A striped top, suspenders and puffy red trousers."
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/clown.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/clown.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtBartenderPurple
+  name: purple bartender's uniform
+  description: A white shirt, a lilac vest and a pleated skirt. A special purple outfit for serving drinks.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/bartender_purple.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/bartender_purple.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtChefFunky
+  name: chef jumpskirt
+  description: A short-sleeved white chef jacket with a red collar and a pleated black skirt. Can't cook without this.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/chef_funky.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/chef_funky.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtLawyerPurple
+  name: purple lawyer suitskirt
+  description: A stylish purple piece worn by lawyers and show people.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/lawyerpurple.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/lawyerpurple.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtSeniorCargo
+  name: senior cargo tech jumpskirt
+  description: A brown vest over a grey shirt and a pleated grey skirt. A sign of skill and prestige within the cargo department.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/senior_cargo.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/senior_cargo.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformBrosBlazer
+  name: BROS blazer with shirt
+  description: "BROS... Two! A dark grey blazer, a white shirt and jeans."
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/brosblazer.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/brosblazer.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformBrownSuit
+  name: brown suit
+  description: A brown suit with a blue tie. Not even the worst coffee spills will show up on this puppy, guaranteed.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/brownsuit_funky.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/brownsuit_funky.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitChef
+  name: chef uniform
+  description: A short-sleeved white chef jacket with a red collar and black trousers. Can't cook without this.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/chef_2.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/chef_2.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformCreamSuit
+  name: cream suit
+  description: A suit fit for a humble small-town gentleman with something to say.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/creamsuit_funky.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/creamsuit_funky.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitLiaisonExpensiveSuitJacketOnly
+  name: expensive black suit
+  description: A luxurious black checked designer suit, beyond the reach of the average person. The choice of top executives and the affluent elite.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/expensive_suit_five.rsi
+    layers:
+    - state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/expensive_suit_five.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitLiaisonExpensiveSuitBrownJacket
+  name: expensive brown suit
+  description: A luxurious brown checked designer suit, beyond the reach of the average person. The choice of top executives and the affluent elite.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/expensive_suit_four.rsi
+    layers:
+    - state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/expensive_suit_four.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitLiaisonCharcoal
+  name: liaison's charcoal suit
+  description: A stiff, stylish charcoal suit commonly worn by corporate businessmen. Expertly crafted to make you look like a smug snob.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/liaison_charcoal.rsi
+    layers:
+    - state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/liaison_charcoal.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitLiaisonOuting
+  name: liaison's outfit
+  description: A casual outfit consisting of a collared shirt and a vest. Looks like something you might wear on the weekends, or on a visit to a derelict colony.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/liaison_outing.rsi
+    layers:
+    - state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/liaison_outing.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitLiaisonOutingRed
+  name: liaison's red outfit
+  description: A casual outfit consisting of a red collared shirt and a vest. Looks like something you might wear on the weekends, or on a visit to a derelict colony.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/liaison_outing_red.rsi
+    layers:
+    - state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/liaison_outing_red.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtBrigmedicTurtle
+  name: brigmedic's turtleneck skirt
+  description: A comfortable and tight-fitting turtleneck with a skirt for those with the dedication to become a brigmedic.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/brigmedic_alt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/brigmedic_alt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpsuitSalvageSpecialist
+  name: salvage specialist's jumpsuit
+  description: A comfortable, sturdy jumpsuit. It's very dirty.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/explorer.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/explorer.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformMedicalVest
+  name: medical vest uniform
+  description: A cozy light blue cotton vest over a white button-up shirt.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/medical_vest.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/medical_vest.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformBrosBlazerSkirt
+  name: BROS blazer with skirt
+  description: "BROS... Two! A black blazer, a printed T-shirt and a denim skirt."
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/brosblazer_delta.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/brosblazer_delta.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformBrosBlazerDelta
+  name: BROS blazer with T-shirt
+  description: "BROS... Two! A black blazer, a printed T-shirt and jeans."
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/brosblazer_2.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/brosblazer_2.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformHitmanSuit
+  name: contract killer suit
+  description: A strict black suit with a red tie. Fits in at any event, office or space station.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hitmansuit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/hitmansuit.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformMNKDressBlack
+  name: MNK black dress
+  description: A sleek black dress sporting a signature MNK window.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/black_dress.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/black_dress.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformPhysicianCasual
+  name: physician's dress suit
+  description: A white button-down shirt with brown trousers and a blue waistcoat. An orange tie shows seniority, and there is a blue cross on the right sleeve.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/physician_casual.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/physician_casual.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpsuitCargoTechWork
+  name: cargo technician's work jumpsuit
+  description: Grey bib overalls over a brown shirt. Hauling heavy crates of metal is easiest in thick coveralls.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cargotech.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/cargotech.rsi
+
+- type: entity
+  parent: [ ClothingUniformSkirtBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingUniformJumpsuitSalvageSpecialistUndershirt
+  name: salvager's tank top
+  description: A purple tank top and worn work trousers. Smells of sweat and blood.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/salvage2.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/salvage2.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-verb-clothing-jacket
+    unfoldVerbText: unfold-verb-clothing-jacket
+  - type: FoldableClothing
+    foldedEquippedPrefix: folded
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingJumpsuitAlt
+  name: alt girl jumpsuit
+  description: A black off-shoulder top and a frilly skirt in gothic style. Fills you not with determination, but with love.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/jumpskirt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/jumpskirt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingJumpsuitNoface
+  name: knitted outfit
+  description: A short dark knitted top and thigh garters. For some reason, you only got this half of the turtleneck.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/uniform.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/uniform.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtSalvageSpecialist
+  name: brown salvage jumpskirt
+  description: A snappy jumpskirt of sturdy brown fabric with blue trim. It's very dirty.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/salvage_goob.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/salvage_goob.rsi
+
+- type: entity
+  parent: [ ClothingUniformSkirtBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingUniformJumpskirtScientist
+  name: scientist jumpskirt
+  description: It's made of a special fiber that increases perceived intelligence and decreases personal ethics. It has markings that denote the wearer as a scientist.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/scientist.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/scientist.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-verb-clothing-jacket
+    unfoldVerbText: unfold-verb-clothing-jacket
+  - type: FoldableClothing
+    foldedEquippedPrefix: folded
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtDressOpenShoulderGoob
+  name: short open-shoulder dress
+  description: No sleeves in this dress, only style fierce enough to snatch wigs.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/openshoulder_dress_goob.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/openshoulder_dress_goob.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformEnvirosuitSyndie
+  name: syndicate envirosuit
+  description: A form-fitting black envirosuit with blood-red inserts in Syndicate style.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/syndie.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/syndie.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtBlueshieldTacticalMaid
+  name: tactical maid uniform
+  description: A black maid uniform with blue trim. It is assumed that the best maids should have designer suits, and this one is tailored for Blueshield officers.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/blueshield_tacticalmaid.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/blueshield_tacticalmaid.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtJanimaidAdt
+  name: NT maid outfit
+  description: An updated maid outfit from NT. For professionals, not the posers.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/janimaid_adt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/janimaid_adt.rsi
+
+- type: entity
+  parent: [ ClothingUniformBase, ClothingUniformFoldableBase ]
+  id: SunriseSponsorClothingUniformJumpsuitNTRoboticist
+  name: NT roboticist jumpsuit
+  description: "The uniform of Nanotrasen roboticists: blue overalls over a grey shirt."
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/nt_roboticist.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/nt_roboticist.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    foldVerbText: fold-verb-clothing-jacket
+    unfoldVerbText: unfold-verb-clothing-jacket
+  - type: FoldableClothing
+    foldedEquippedPrefix: folded
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: SunriseSponsorClothingUniformJumpskirtJanimaidmini
+  name: maid uniform with miniskirt
+  description: Elite service, not just a shiny wrapper.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/janimaidmini.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/janimaidmini.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingJumpsuitBunnySuit
+  name: black bunny suit
+  description: A tight black bodysuit. In this suit, you feel like the heroine of a novel.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/bunnysuitSuit.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/bunnysuitSuit.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: SunriseSponsorClothingUniformJumpskirtCommandMaid
+  name: command maid uniform
+  description: A stylish maid uniform specially designed for elite command maids. Combines professionalism with a touch of elegance.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/command_maid.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Uniforms/command_maid.rsi

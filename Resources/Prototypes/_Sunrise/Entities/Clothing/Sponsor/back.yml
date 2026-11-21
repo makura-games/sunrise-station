@@ -1,0 +1,29 @@
+# Эксклюзивные вещи спонсорского инвентаря из подборки арт-директора (ноябрь 2026).
+# Если меняете ID вещи, поправьте entityPrototype в спонсорском каталоге сайта, иначе купившие перестанут её получать.
+
+- type: entity
+  parent: ClothingBackpack
+  id: SunriseSponsorClothingBackpackGreenshield
+  name: greenshield cloak
+  description: A heavy dark cloak that Greenshield officers wear slung over the back.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Back/thermalcloak.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Back/thermalcloak.rsi
+
+- type: entity
+  parent: ClothingBackpack
+  id: SunriseSponsorClothingBlackBackpackJetTSF
+  name: TSF fleet backpack
+  description: A black military backpack with teal side panels, as issued to the TSF fleet.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Back/backpack_jet_tsf.rsi
+    layers:
+    - state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Back/backpack_jet_tsf.rsi

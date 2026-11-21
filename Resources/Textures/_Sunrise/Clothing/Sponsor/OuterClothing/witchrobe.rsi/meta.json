@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "made by LandsharkRAWR for IMPstation, Ungu modified by Starlighthowls. Anom edit by atdoop (github). Taken from https://github.com/impstation/imp-station-14 at commit 9a1efc64f1617a3f28600d9357a0feb0544d304d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-OUTERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "equipped-OUTERCLOTHING-anomalocarid",
+      "directions": 4
+    },
+    {
+      "name": "equipped-OUTERCLOTHING-ungu",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

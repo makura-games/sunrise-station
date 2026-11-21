@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Paradise Station from commit https://github.com/ss220-space/Paradise/commit/306311f23c91cf0e3c201945dd4647cc06faef88. Taken from https://github.com/AdventureTimeSS14/space_station_ADT at commit 233701e7fe06012d305bd442a1c5c86b179a1652.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-OUTERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

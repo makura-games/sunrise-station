@@ -1,0 +1,509 @@
+# Эксклюзивные вещи спонсорского инвентаря из подборки арт-директора (ноябрь 2026).
+# Если меняете ID вещи, поправьте entityPrototype в спонсорском каталоге сайта, иначе купившие перестанут её получать.
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatHopHat
+  name: HoP's cap
+  description: The head of personnel's magnificent, stylish cap.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/hophat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/hophat.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatCake
+  name: cake hat
+  description: You put the cake on your head. Brilliant.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/cake_hat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/cake_hat.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+        offset: 0, 0.14
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatChickenhead
+  name: chicken head
+  description: "It's a chicken head. Bok bok bok!"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/chickenhead.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/chickenhead.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatChef
+  name: chef's hat
+  description: It's a hat used by chefs to keep hair out of your food. Judging by the food in the mess, they don't work.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/chefhat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/chefhat.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatWizardFake
+  name: fake wizard hat
+  description: It has WIZZARD written across it in sequins. Comes with a cool beard.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/fake_wizard_hat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/fake_wizard_hat.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatBraided
+  name: braided sunhat
+  description: A small braided hat for sunny summer days.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/braided.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/braided.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatCardborg
+  name: cardborg helmet
+  description: A hat made out of a box.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/carborghat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/carborghat.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatCaptainBicorn
+  name: captain's bicorne
+  description: "Why be king when you can be emperor?"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/captain_royal_hat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/captain_royal_hat.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatNiko
+  name: not-a-cat hat
+  description: A big brown hat. You only get one shot. It smells of gyros and feta cheese.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/nikohat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/nikohat.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatElf
+  name: elf hat
+  description: Santa's little helper's hat.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/elf.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/elf.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatFestiveHatGreen
+  name: festive green hat
+  description: Festive headwear to get you in the holiday spirit.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/festive_green.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/festive_green.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadDemonicHornsDeer
+  name: demonic deer horns
+  description: The horns of the radio demon. Brrr...
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/demonic_deer_horns.rsi
+    state: icon
+    color: "#4e4e4e"
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/demonic_deer_horns.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+        color: "#4e4e4e"
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatHelmetVenerator
+  name: venerator headpiece
+  description: A golden halo of rays, the light of Christ. Strangely, it gives off no light at all.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/venerator.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/venerator.rsi
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop: HEAD
+      HeadSide: HEAD
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatReindeer
+  name: reindeer headband
+  description: A festive antlered headband to get you in the holiday spirit.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/reindeer.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/reindeer.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadFloatingFloraCrown
+  name: floating flora crown
+  description: "A crown of floating flowers! Isn't that neat?"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/floatingfloracrown.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/floatingfloracrown.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatPrincess
+  name: princess hat
+  description: "A tall pink cone hat with a golden streamer at the tip. Did you know these are actually called hennins?"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/princesshat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/princesshat.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatWitch1
+  name: witch hat
+  description: A witch's hat.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/witchhat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/witchhat.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatWideBrimmed
+  name: wide-brimmed sunhat
+  description: "A wide-brimmed summer hat, perfect for sunny days. But where would a space station get those?"
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/widebrimmed.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/widebrimmed.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadBeretSquadCharlie
+  name: beret with purple badge
+  description: A dark grey beret with a small purple badge on the side. It looks military, but pairs surprisingly well with a lab coat.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/charlie.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/charlie.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatTVHead
+  name: TV head
+  description: An old boxy television worn over the head, its cord dangling behind. The label says it will make you look like a true Tumblr sexyman, whatever that means.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/tv_head.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/tv_head.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatStrawHatWide
+  name: wide straw hat
+  description: A wide-brimmed straw hat with a blue ribbon. Makes you look mysterious.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/widestrawhat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/widestrawhat.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+        offset: 0, 0.08
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadOfficerBeret
+  name: black officer's beret
+  description: A black beret with a silver badge on the side. Officers wear it at a rakish angle to look sharp on patrol.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/officer_beret.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/officer_beret.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatFedoraBrown
+  name: brown fedora
+  description: It's a brown fedora.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/brownfedora.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/brownfedora.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatHopcap
+  name: head of personnel's dress cap
+  description: A grand, stylish head of personnel's cap.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/hopcap.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/hopcap.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatBeretHoS
+  name: head of security's beret
+  description: A black beret with a commander's rank emblem. For officers that are more inclined towards style than safety.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/beret_hos.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/beret_hos.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatHoshat
+  name: head of security's cap
+  description: The robust standard-issue cap of the head of security. For showing the officers who's in charge.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/hoshat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/hoshat.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatCapcap
+  name: captain's cap
+  description: A grand, stylish cap worn by the captain. Shows the station who's in charge.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/capcap.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/capcap.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatWizard
+  name: wizard hat
+  description: A strange-looking blue hat that most certainly belonged to a powerful magic-user.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/wizardhat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/wizardhat.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+        offset: 0, 0.125
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatWideBrimmedBlack
+  name: black wide-brimmed hat
+  description: An elegant wide-brimmed summer hat, perfect for mourning.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/widebrimmed_black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/widebrimmed_black.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadShamanSkull
+  name: shaman skull
+  description: The bleached skull of a horned beast, worn as a headdress. Its empty eye sockets stare at everyone you meet.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/shaman_skull.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/shaman_skull.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HEAD
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatSecurityTrooper
+  name: trooper hat
+  description: A campaign hat for NT troopers. It originally came with a case, but you lost it.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/security_trooper_hat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/security_trooper_hat.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatTrapperBlack
+  name: black trapper hat
+  description: A black trapper hat with fluffy fur flaps.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/trapper_black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/trapper_black.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatTrapperGray
+  name: grey trapper hat
+  description: A grey trapper hat with fluffy fur flaps.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/trapper_gray.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/trapper_gray.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadBeretASO
+  name: support officer's beret
+  description: A black beret with a badge, as worn by Auxiliary Support Officers.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/beret_aso.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/beret_aso.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadCapSPPPolBlack
+  name: commissar's peaked cap
+  description: A black peaked cap issued to political commissars of all stripes. It reminds you of October.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/kommisar_cap_black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/kommisar_cap_black.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: SunriseSponsorClothingHeadHatNTNCGrey
+  name: grey naval cap
+  description: A grey Nanotrasen navy marine cap with a black visor.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/ntncgreyhat.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/ntncgreyhat.rsi

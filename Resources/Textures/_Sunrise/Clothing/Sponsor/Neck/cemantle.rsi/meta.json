@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "made by augustsun(Discord)/august-sun(GitHub) for SS14. Taken from https://github.com/cosmatic-drift-14/cosmatic-drift at commit f1d8af814e2906a18c0c429c3c90373b0029ba28.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-NECK",
+      "directions": 4
+    }
+  ]
+}

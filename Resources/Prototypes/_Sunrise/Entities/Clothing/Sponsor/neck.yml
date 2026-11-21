@@ -1,0 +1,286 @@
+# Эксклюзивные вещи спонсорского инвентаря из подборки арт-директора (ноябрь 2026).
+# Если меняете ID вещи, поправьте entityPrototype в спонсорском каталоге сайта, иначе купившие перестанут её получать.
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingNeckCloakCapFormal
+  name: captain's formal cloak
+  description: A lavish and decorated cloak for special occasions.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/capcloakformal.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/capcloakformal.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingNeckMantleMiningBlood
+  name: bloody miner's mantle
+  description: A miner's mantle covered in the blood of enemies.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/bloodMining_mantle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/bloodMining_mantle.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingNeckGeneralFormalCloak
+  name: general's formal cloak
+  description: A lavish black cloak with gold trim, worn only on special occasions.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/generalformal.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/generalformal.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingAdmiralShoulder
+  name: captain-admiral's cloak
+  description: A massive blue cloak with gold trim. It is presented to captains who have been through a lot...
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/captain_admiral.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/captain_admiral.rsi
+
+- type: entity
+  parent: [ ClothingNeckBase, BaseFoldable ]
+  id: SunriseSponsorClothingNeckDarkCloakVClose
+  name: dark cloak
+  description: A long, loose garment the color of night that flows elegantly around the figure, adding an air of mystery.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/darkcloakclose.rsi
+    layers:
+    - state: icon
+      map: [ unfoldedLayer ]
+    - state: icon-open
+      map: [ foldedLayer ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/darkcloakclose.rsi
+  - type: ToggleableClothing
+    clothingPrototype: SunriseSponsorClothingHeadDarkHoodV
+    slot: head
+    verbText: toggle-clothing-verb-hood
+    requiredSlot: [ neck ]
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-zip-verb
+    foldVerbText: fold-unzip-verb
+
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: SunriseSponsorClothingHeadDarkHoodV
+  name: dark cloak hood
+  description: Deep and soft as a shadow, it frames the face with a sense of cozy mystery. It perfectly complements the cloak, giving its wearer the look of a mysterious wanderer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Head/darkhood.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Head/darkhood.rsi
+  - type: HideLayerClothing
+    slots: [ Hair ]
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingNeckMantleMining
+  name: miner's mantle
+  description: Looks like you just tore down a cargo banner and put it on.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/mining_mantle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/mining_mantle.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingNeckMantleCE
+  name: chief engineer's manica
+  description: Segmented orange pieces covering the shoulders and arms of an experienced chief engineer. They signify the hazards of the job and the dangers faced to earn it.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/cemantle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/cemantle.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingNeckCloakFugitiveCloak
+  name: monochrome cloak
+  description: A black cloak with white crosses and a fluffy white collar. It's a federal crime, buster.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/fugitivecloak.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/fugitivecloak.rsi
+  - type: HideLayerClothing
+    slots: [ Tail ]
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingNeckCloakGoldenCentComm
+  name: gilded CentCom cloak
+  description: A luxurious gold-gilded cloak worn by the highest-ranking officials.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/goldcentcom.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/goldcentcom.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingNeckAngelWings
+  name: angel wings
+  description: Snow-white angel wings. I can be your angel...
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/angelwings.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/angelwings.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingNeckMimeMantleOffShoulder
+  name: mime's off-shoulder mantle
+  description: A black-and-white striped mantle made for mimes, worn off the shoulders.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/mimeoffshouldermantle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/mimeoffshouldermantle.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingNeckCloakHop
+  name: head of personnel's cloak
+  description: A blue cloak with red shoulders and gold buttons, proving you are the gatekeeper to any airlock on the station.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/hop.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/hop.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingNeckCloakHos
+  name: head of security's cloak
+  description: An exquisite dark and red cloak fitting for those who can assert dominance over wrongdoers. Take a stab at being civil in prosecution.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/hos.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/hos.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingNeckPocscloak2
+  name: black officer's cloak
+  description: A heavy black cloak with gold studs along the edges and a gold emblem on the back. It makes any officer look like the one in charge.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/pocscloak2.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/pocscloak2.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingNeckHosRobe
+  name: head of security's decadent robe
+  description: A comfy formal robe in deep red with gold epaulettes, given to veteran heads of security.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/hosrobe.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/hosrobe.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingNeckCloakCapFormalImp
+  name: captain's navy formal cloak
+  description: A lavish dark navy cloak with gold trim for special occasions.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/capcloakformal_imp.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/capcloakformal_imp.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingNeckBronzeCross
+  name: bronze cross
+  description: A cross cast from bronze, hung on a beaded cord. Grandma would surely have pressed it to your bruises.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/bronze_cross.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/bronze_cross.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingCloakCmo
+  name: chief medical officer's cloak
+  description: A sterile blue cloak with a green cross, radiating with a sense of duty and willingness to help others.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/cmo.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/cmo.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SunriseSponsorClothingNeckMantleBlueshield
+  name: blueshield officer mantle
+  description: A dark blue mantle with gold trim. Cut so as not to get in the way of a bodyguard's work.
+  categories: [ SponsorExclusive ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Sponsor/Neck/bsomantle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Sponsor/Neck/bsomantle.rsi

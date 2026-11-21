@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://discord.com/channels/1202734573247795300/1282475354723713080/1282475354723713080. Taken from https://github.com/Goob-Station/Goob-Station at commit cc1d2c911f5cb6c90b36e0899ce918010bd41262.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-NECK",
+      "directions": 4
+    },
+    {
+      "name": "equipped-NECK-vox",
+      "directions": 4
+    }
+  ]
+}
