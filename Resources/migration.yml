@@ -1330,6 +1330,9 @@ WallRiveted: WallReinforced
 # 2026-10-28 - машины системы болезней
 DiseaseDiagnoser: SunriseDiseaseDiagnoser
 Vaccinator: SunriseVaccinator
+# 2026-11-07
+BluespaceBox: null
+ClothingOuterSuitCargo: null
 # region Sunrise-End
 
 # 2026-07-16
