@@ -100,22 +100,6 @@
         - id: BoxMagazineRifleNanotrasen
           amount: 2
 
-- type: entity
-  parent: GunSafeSuperweaponSecureGamma
-  id: GunSafeSuperDMRElite
-  name: safe
-  components:
-  - type: EntityStorageVisuals
-    stateDoorClosed: skm28
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponRifleSKM28Nano
-          amount: 2
-        - id: BoxMagazineRifleNanotrasen
-          amount: 2
-
 # region Energy Guns
 - type: entity
   parent: GunSafeBaseSecure
@@ -362,7 +346,6 @@
         children:
         - id: WeaponRifleLecterMk2
           amount: 2
-        - id: WeaponRifleLeikha
         - id: MagazineRifleEmpty
           amount: 8
         - id: MagazineBoxRifleSP
@@ -715,7 +698,7 @@
       weight: 1
     - id: LecterUpgrade
       weight: 2
-    - id: LerkaUpgrade
+    - id: LeikhaUpgrade
       weight: 1
     - id: LarkerUpgrade
       weight: 1
@@ -952,7 +935,6 @@
       children:
       - id: GunSafeSuperDMR
       - id: GunSafeRifleM52
-      - id: GunSafeSuperDMRElite
 
 # Laser/energy Spawner
 - type: entity

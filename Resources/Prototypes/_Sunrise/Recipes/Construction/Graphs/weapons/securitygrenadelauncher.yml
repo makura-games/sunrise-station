@@ -4,27 +4,124 @@
   graph:
     - node: start
       entity: WeaponFlareGunSecurity
-      edges:
-        - to: auto
-          steps:
-            - tag: UpgradeFlareGun
-              name: construction-graph-tag-upgradeflaregun
-              doAfter: 8
-          completed:
-            - !type:AdminLog
-              message: "Converted FlareGun to GrenadeLauncher"
-              impact: High
     - node: auto
       entity: WeaponGrenadeLauncherSecurity
       edges:
+        - to: flareKit
+          conditions:
+            - !type:ContainerNotEmpty
+              container: security-flare-gun
+          steps:
+            - tool: Screwing
+              doAfter: 8
+          completed:
+            - !type:EmptyContainer
+              container: security-flare-gun
+              pickup: true
+    - node: flareKit
+      entity: FlareGunSecurityUpgrade
+      edges:
+        - to: auto
+          steps:
+            - tag: WeaponFlareGunSecurityUpgradeBase
+              name: construction-graph-tag-security-flare-gun
+              store: security-flare-gun
+              doAfter: 8
+    - node: kit
+      entity: SecurityGrenadeLauncherRevolverUpgrade
+      edges:
+        - to: revolverWeaponInserted
+          steps:
+            - tag: WeaponGrenadeLauncherSecurityUpgradeBase
+              name: construction-graph-tag-security-grenade-launcher
+              store: security-grenade-launcher
+    - node: revolverWeaponInserted
+      edges:
+        - to: revolverOpened
+          steps:
+            - tool: Screwing
+              doAfter: 2
+    - node: revolverOpened
+      edges:
+        - to: revolverBarrel1
+          steps:
+            - tag: ModularBarrel
+              name: crafting-menu-name-MB
+              store: revolver-barrel-1
+    - node: revolverBarrel1
+      edges:
+        - to: revolverBarrel2
+          steps:
+            - tag: ModularBarrel
+              name: crafting-menu-name-MB
+              store: revolver-barrel-2
+    - node: revolverBarrel2
+      edges:
+        - to: revolverBarrel3
+          steps:
+            - tag: ModularBarrel
+              name: crafting-menu-name-MB
+              store: revolver-barrel-3
+    - node: revolverBarrel3
+      edges:
+        - to: revolverBarrel4
+          steps:
+            - tag: ModularBarrel
+              name: crafting-menu-name-MB
+              store: revolver-barrel-4
+    - node: revolverBarrel4
+      edges:
+        - to: revolverBarrel5
+          steps:
+            - tag: ModularBarrel
+              name: crafting-menu-name-MB
+              store: revolver-barrel-5
+    - node: revolverBarrel5
+      edges:
+        - to: revolverWelded
+          steps:
+            - tool: Welding
+              doAfter: 3
+    - node: revolverWelded
+      edges:
         - to: revolver
           steps:
-            - tag: UpgradeFlareGun
-              name: construction-graph-tag-upgradeflaregun
-              doAfter: 8
+            - tool: Screwing
+              doAfter: 2
           completed:
             - !type:AdminLog
               message: "Converted security grenade launcher to revolver grenade launcher"
               impact: High
     - node: revolver
       entity: WeaponGrenadeLauncherSecurityRevolver
+      edges:
+        - to: kit
+          conditions:
+            - !type:ContainerNotEmpty
+              container: security-grenade-launcher
+          steps:
+            - tool: Screwing
+              doAfter: 2
+            - tool: Welding
+              doAfter: 3
+            - tool: Screwing
+              doAfter: 2
+          completed:
+            - !type:EmptyContainer
+              container: revolver-barrel-1
+              pickup: true
+            - !type:EmptyContainer
+              container: revolver-barrel-2
+              pickup: true
+            - !type:EmptyContainer
+              container: revolver-barrel-3
+              pickup: true
+            - !type:EmptyContainer
+              container: revolver-barrel-4
+              pickup: true
+            - !type:EmptyContainer
+              container: revolver-barrel-5
+              pickup: true
+            - !type:EmptyContainer
+              container: security-grenade-launcher
+              pickup: true

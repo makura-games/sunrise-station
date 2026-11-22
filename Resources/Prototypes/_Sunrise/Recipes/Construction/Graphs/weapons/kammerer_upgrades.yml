@@ -4,17 +4,93 @@
   graph:
   - node: kammerer
     entity: WeaponShotgunKammererEmpty
+
+  - node: specialKitStart
+    entity: KammererSpecialUpgradeKit
+    edges:
+    - to: specialWeaponInserted
+      steps:
+      - tag: WeaponShotgunKammererBase
+        name: construction-graph-tag-kammerer-base
+        store: kammerer-special-weapon
+
+  - node: specialWeaponInserted
+    edges:
+    - to: specialOpened
+      steps:
+      - tool: Screwing
+        doAfter: 2
+
+  - node: specialOpened
+    edges:
+    - to: specialBarrelInserted
+      steps:
+      - tag: ModularBarrel
+        name: crafting-menu-name-MB
+        store: kammerer-special-barrel
+
+  - node: specialBarrelInserted
+    edges:
+    - to: specialWelded
+      steps:
+      - tool: Welding
+        doAfter: 2
+
+  - node: specialWelded
+    edges:
+    - to: special
+      steps:
+      - tool: Screwing
+        doAfter: 2
+
+  - node: special
+    entity: WeaponShotgunKammererSpecialEmpty
+    edges:
+    - to: specialKitStart
+      conditions:
+      - !type:ContainerNotEmpty
+        container: kammerer-special-weapon
+      steps:
+      - tool: Screwing
+        doAfter: 2
+      - tool: Welding
+        doAfter: 2
+      - tool: Screwing
+        doAfter: 2
+      completed:
+      - !type:EmptyContainer
+        container: kammerer-special-barrel
+        pickup: true
+      - !type:EmptyContainer
+        container: kammerer-special-weapon
+        pickup: true
+
+  - node: trenchKitStart
+    entity: KammererTrenchUpgradeKit
     edges:
     - to: trenchKitInserted
       steps:
-      - tag: UpgradeKammererTrench
-        name: construction-graph-tag-upgrade-kammerer-trench
-        store: kammerer-trench-kit
+      - tag: WeaponShotgunKammererBase
+        name: construction-graph-tag-kammerer-base
+        store: kammerer-trench-weapon
+
+  - node: sawnKitStart
+    entity: KammererSawnUpgradeKit
+    edges:
     - to: sawnKitInserted
       steps:
-      - tag: UpgradeKammererSawn
-        name: construction-graph-tag-upgrade-kammerer-sawn
-        store: kammerer-sawn-kit
+      - tag: WeaponShotgunKammererBase
+        name: construction-graph-tag-kammerer-base
+        store: kammerer-sawn-weapon
+
+  - node: enforcerKitStart
+    entity: KammererEnforcerUpgradeKit
+    edges:
+    - to: enforcerKitInserted
+      steps:
+      - tag: WeaponShotgunKammererBase
+        name: construction-graph-tag-kammerer-base
+        store: kammerer-enforcer-weapon
 
   - node: trenchKitInserted
     edges:
@@ -48,6 +124,24 @@
   - node: trench
     entity: WeaponShotgunTrenchgun4034Empty
     edges:
+    - to: trenchKitStart
+      conditions:
+      - !type:ContainerNotEmpty
+        container: kammerer-trench-weapon
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tool: Cutting
+        doAfter: 2
+      - tool: Screwing
+        doAfter: 1
+      completed:
+      - !type:EmptyContainer
+        container: kammerer-trench-knife
+        pickup: true
+      - !type:EmptyContainer
+        container: kammerer-trench-weapon
+        pickup: true
     - to: kammerer
       steps:
       - tool: Screwing
@@ -96,6 +190,24 @@
   - node: sawn
     entity: WeaponShotgunTrenchgun4034SawnEmpty
     edges:
+    - to: sawnKitStart
+      conditions:
+      - !type:ContainerNotEmpty
+        container: kammerer-sawn-weapon
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      completed:
+      - !type:EmptyContainer
+        container: kammerer-sawn-speedloader
+        pickup: true
+      - !type:EmptyContainer
+        container: kammerer-sawn-weapon
+        pickup: true
     - to: kammerer
       steps:
       - tool: Screwing
@@ -110,4 +222,95 @@
         pickup: true
       - !type:EmptyContainer
         container: kammerer-sawn-kit
+        pickup: true
+
+  - node: enforcerKitInserted
+    edges:
+    - to: enforcerOpened
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: enforcerOpened
+    edges:
+    - to: enforcerFirstLoaderInserted
+      steps:
+      - tag: SpeedLoaderShotgun
+        name: construction-graph-tag-speedloader-shotgun
+        store: kammerer-enforcer-first-speedloader
+
+  - node: enforcerFirstLoaderInserted
+    edges:
+    - to: enforcerFirstLoaderFastened
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: enforcerFirstLoaderFastened
+    edges:
+    - to: enforcerSecondLoaderInserted
+      steps:
+      - tag: SpeedLoaderShotgun
+        name: construction-graph-tag-speedloader-shotgun
+        store: kammerer-enforcer-second-speedloader
+
+  - node: enforcerSecondLoaderInserted
+    edges:
+    - to: enforcerSecondLoaderFastened
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: enforcerSecondLoaderFastened
+    edges:
+    - to: enforcer
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: enforcer
+    entity: WeaponShotgunEnforcerRed
+    edges:
+    - to: enforcerKitStart
+      conditions:
+      - !type:ContainerNotEmpty
+        container: kammerer-enforcer-weapon
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      completed:
+      - !type:EmptyContainer
+        container: kammerer-enforcer-first-speedloader
+        pickup: true
+      - !type:EmptyContainer
+        container: kammerer-enforcer-second-speedloader
+        pickup: true
+      - !type:EmptyContainer
+        container: kammerer-enforcer-weapon
+        pickup: true
+    - to: kammerer
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      completed:
+      - !type:EmptyContainer
+        container: kammerer-enforcer-first-speedloader
+        pickup: true
+      - !type:EmptyContainer
+        container: kammerer-enforcer-second-speedloader
+        pickup: true
+      - !type:EmptyContainer
+        container: kammerer-enforcer-kit
         pickup: true

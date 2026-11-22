@@ -132,7 +132,9 @@
   - TelescopicShield
   - HoloprojectorSecurity
   - WeaponDisablerSMG
-  - FlareGunSecurityUpgrade # Sunrise-Add
+  - KammererSpecialUpgradeKit # Sunrise-Add
+  - BoxShotgunHeavy # Sunrise-Add
+  - BoxShotgunBirdshotHeavy # Sunrise-Add
   - VestSecUpgradePlate # Sunrise-Add
   - VestSecUpgradeStab # Sunrise-Add
   - VestSecUpgradeHeat # Sunrise-Add

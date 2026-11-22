@@ -52,6 +52,7 @@
       - HandGrenade
       - Grenade
       - HandGrenadeAmmo
+      - GrenadeLessLethal
       components:
       - ProjectileGrenade
       - FlashOnTrigger
@@ -156,6 +157,7 @@
       - MagazinePistolCaselessRifle
       - MagazineMagnum
       - MagazinePistolDP
+      - MagazinePistolLightRifleAuto
       - MagazinePistolDPSubMachineGun
       - MagazinePistolImprovised
       - SpeedLoaderMagnum
@@ -237,6 +239,18 @@
           amount: 1
 
 - type: entity
+  parent: PouchAmmoPistol
+  id: PouchAmmoFilledPistolLightRifleAuto
+  suffix: Filled, 7.62 Auto
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: MagazinePistolLightRifleAuto
+          amount: 4
+
+- type: entity
   parent: PouchAmmo
   id: PouchAmmoFilledLightRifle
   suffix: Filled, light rifle
@@ -314,3 +328,24 @@
       components:
         - DoorElectronics
         - Circuitboard
+
+# region peacekeeper
+- type: entity
+  parent: [ClothingBeltStorageBase, BaseSecurityContraband]
+  id: ClothingPouchPeacekeeper
+  name: less lethal grenade pouch
+  description: Tactical storage for less lethal grenades.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Neck/Pouch/grenade.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Neck/Pouch/grenade.rsi
+    slots:
+    - NECK
+  - type: Storage
+    grid:
+    - 0,0,3,1
+    whitelist:
+      tags:
+      - GrenadeLessLethal
+  - type: Appearance

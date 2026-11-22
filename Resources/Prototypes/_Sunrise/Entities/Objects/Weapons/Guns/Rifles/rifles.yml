@@ -278,37 +278,6 @@
     deconstructionTarget: null
 
 - type: entity
-  name: Leikha
-  parent: WeaponRifleLeikha
-  id: WeaponRifleLeikhaEmpty
-  suffix: Empty
-  categories: [HideSpawnMenu]
-  components:
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: null
-        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineRifle
-        whitelistFailPopup: gun-magazine-whitelist-fail
-      gun_chamber:
-        name: Chamber
-        startingItem: null
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgeRifle
-  - type: Construction
-    graph: LecterSecurity
-    node: leikha
-    deconstructionTarget: null
-
-- type: entity
   name: Larker
   parent: WeaponRifleLarker
   id: WeaponRifleLarkerEmpty
@@ -623,22 +592,25 @@
     availablePrefixes: []
 
 - type: entity
-  name: Lerka
+  name: Leikha
   parent: [ GunHeavy, BaseWeaponRifle, BaseSecurityContraband ]
-  id: WeaponRifleLerka
+  id: WeaponRifleLeikha
   description: "A military-grade combat rifle built on the Lecter platform. Retrofitted with a burst receiver for controlled three-round bursts, offering increased stopping power at the cost of sustained fire. Chambered in .308 rifle."
   components:
+  - type: Tag
+    tags:
+    - WeaponRifleLeikhaUpgradeBase
   - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/lerka/big.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/leikha/big.rsi
     layers:
     - state: icon
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/lerka/tiny.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/leikha/tiny.rsi
   - type: Item
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/lerka/tiny.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/leikha/tiny.rsi
   - type: GunWieldBonus
     minAngle: -25
     maxAngle: -35
@@ -654,7 +626,7 @@
     availableModes:
     - Burst
     - SemiAuto
-    burstFireRate: 11
+    burstFireRate: 12
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/skm28/skm28_shot.ogg
       params:
@@ -690,13 +662,13 @@
   - type: Wieldable
   - type: Construction
     graph: LecterSecurity
-    node: lerka
+    node: leikhaConversion
     deconstructionTarget: null
 
 - type: entity
-  name: Lerka
-  parent: WeaponRifleLerka
-  id: WeaponRifleLerkaEmpty
+  name: Leikha
+  parent: WeaponRifleLeikha
+  id: WeaponRifleLeikhaEmpty
   suffix: Empty
   categories: [HideSpawnMenu]
   components:
@@ -721,8 +693,9 @@
           - CartridgeHeavyRifle
   - type: Construction
     graph: LecterSecurity
-    node: lerka
+    node: leikhaConversion
     deconstructionTarget: null
+
 
 - type: entity
   name: SKM-28

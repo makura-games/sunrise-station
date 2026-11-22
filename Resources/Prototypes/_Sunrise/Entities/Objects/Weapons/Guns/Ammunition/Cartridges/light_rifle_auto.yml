@@ -1,0 +1,21 @@
+- type: entity
+  id: CartridgeLightRifleAuto
+  name: cartridge (7.62 Auto)
+  description: A standard USSP pistol and submachine gun cartridge.
+  parent: BaseCartridgeLightRifleSP
+  categories: []
+  components:
+  - type: Tag
+    tags:
+    - CartridgeLightRifleAuto
+  - type: CartridgeAmmo
+    proto: BulletLightRifleAuto
+  - type: Sprite
+    scale: 0.45, 0.55
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#d4ae55"
+

@@ -60,6 +60,16 @@
 
 - type: latheRecipe
   parent: BaseWeaponRecipeSidearm
+  id: SecurityGrenadeLauncherRevolverUpgrade
+  result: SecurityGrenadeLauncherRevolverUpgrade
+  categories:
+  - Weapons
+  materials:
+    Plastic: 50
+    Steel: 250
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeSidearm
   id: FlareGunSecurityUpgrade
   result: FlareGunSecurityUpgrade
   categories:
@@ -67,6 +77,16 @@
   materials:
     Plastic: 50
     Steel: 250
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeSidearm
+  id: KammererSpecialUpgradeKit
+  result: KammererSpecialUpgradeKit
+  categories:
+  - Weapons
+  materials:
+    Plastic: 200
+    Steel: 500
 
 # - type: latheRecipe # Not use right now
 #   id: ModularReceiverAuto
@@ -101,8 +121,8 @@
     Gold: 50
 
 - type: latheRecipe
-  id: LerkaUpgrade
-  result: LerkaUpgrade
+  id: LeikhaUpgrade
+  result: LeikhaUpgrade
   categories:
   - Weapons
   completetime: 16
@@ -143,6 +163,16 @@
   materials:
     Steel: 150
     Plastic: 400
+
+- type: latheRecipe
+  id: KammererEnforcerUpgradeKit
+  result: KammererEnforcerUpgradeKit
+  categories:
+  - Weapons
+  completetime: 30
+  materials:
+    Steel: 650
+    Plastic: 500
 
 - type: latheRecipe
   id: EnergyDomeDirectionalTurtle
@@ -571,3 +601,12 @@
     Plastic: 500
     Gold: 500
     Uranium: 400
+- type: latheRecipe
+  parent: BaseWeaponRecipeSidearm
+  id: DrozdHeavyUpgradeKit
+  result: DrozdHeavyUpgradeKit
+  categories: [Weapons]
+  materials:
+    Steel: 500
+    Plastic: 200
+

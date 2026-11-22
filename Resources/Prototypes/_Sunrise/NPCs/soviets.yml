@@ -371,7 +371,7 @@
     prototypes:
     - MobSovietGearPPSHSL
   - type: BatteryAmmoProvider
-    proto: CartridgePistolFMJ
+    proto: CartridgeLightRifleAuto
     fireCost: 1
   - type: BatterySelfRecharger
     autoRechargePauseTime: 2
@@ -565,13 +565,13 @@
     prototypes:
     - MobSovietGearRangedT1
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 1
+    rechargeCooldown: 0.75
     rechargeSound:
       path: /Audio/_Sunrise/Effects/silence.ogg
   - type: BasicEntityAmmoProvider
-    proto: CartridgePistolFMJ
-    capacity: 11
-    count: 11
+    proto: CartridgeLightRifleAuto
+    capacity: 20
+    count: 20
   - type: Gun
     showExamineText: false
     minAngle: 10
@@ -583,7 +583,7 @@
     - SemiAuto
     useKey: true
     soundGunshot:
-      collection: m1984
+      path: /Audio/_Starlight/Weapons/Guns/Gunshots/ppsh.ogg
     soundEmpty:
       path: /Audio/_RMC14/Weapons/Guns/gun_cmb_click1.ogg
 
@@ -791,7 +791,7 @@
     - sprite: Clothing/Hands/Gloves/mercfingerless.rsi
       state: equipped-HAND
   - type: BasicEntityAmmoProvider
-    proto: CartridgePistolFMJ
+    proto: CartridgeLightRifleAuto
     capacity: 35
     count: 35
   - type: Gun
@@ -1008,7 +1008,7 @@
     - sprite: _Sunrise/Clothing/Head/Hats/beret_atmos.rsi
       state: equipped-HELMET
   - type: BatteryAmmoProvider
-    proto: CartridgePistolFMJ
+    proto: CartridgeLightRifleAuto
     fireCost: 1
   - type: BatterySelfRecharger
     autoRechargePauseTime: 1
@@ -1075,7 +1075,7 @@
       state: equipped-HAND
       color: "#3CB57C"
   - type: BatteryAmmoProvider
-    proto: CartridgePistolFMJ
+    proto: CartridgeLightRifleAuto
     fireCost: 1
   - type: BatterySelfRecharger
     autoRechargePauseTime: 4
@@ -1190,20 +1190,20 @@
     - sprite: Objects/Tanks/oxygen.rsi
       state: equipped-SUITSTORAGE
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 2
+    rechargeCooldown: 3
     rechargeSound:
       path: /Audio/_Sunrise/Effects/silence.ogg
   - type: BasicEntityAmmoProvider
-    proto: ShellShotgunFlechette
-    capacity: 8
-    count: 8
+    proto: ShellShotgunFlechetteHeavy
+    capacity: 5
+    count: 5
   - type: Gun
-    fireRate: 2
+    fireRate: 1
     selectedMode: FullAuto
     availableModes:
     - FullAuto
     soundGunshot:
-      collection: xm1014
+      path: /Audio/_Sunrise/Weapons/Guns/Shotguns/kammerer_special/gun_shotgun_heavy.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: NPCUseActionWhenTargetInRange
@@ -1218,18 +1218,49 @@
       minRange: 5
       maxRange: 12
     - actionId: ActionGunGrenadeExplosiveShrapnelSpell
-      minRange: 5
+      minRange: 6
+      maxRange: 12
+    - actionId: ActionSovietPeacekeeperBaton
+      minRange: 6
+      maxRange: 12
+    - actionId: ActionSovietPeacekeeperFlash
+      minRange: 6
+      maxRange: 12
+    - actionId: ActionSovietPeacekeeperGas
+      minRange: 6
+      maxRange: 12
+    - actionId: ActionSovietPeacekeeperStinger
+      minRange: 6
+      maxRange: 12
+    - actionId: ActionSovietPeacekeeperShrapnel
+      minRange: 6
+      maxRange: 12
+    - actionId: ActionSovietPeacekeeperEMP
+      minRange: 6
+      maxRange: 12
+    - actionId: ActionSovietPeacekeeperFlare
+      minRange: 6
       maxRange: 12
 
 - type: entity
   parent:
   - MobSovietT3Shotgun
-  id: MobSovietT3ShotgunIncendiary
+  id: MobSovietT3ShotgunHeavy
   components:
   - type: BasicEntityAmmoProvider
-    proto: ShellShotgunIncendiary
-    capacity: 8
-    count: 8
+    proto: ShellShotgunHeavy
+    capacity: 5
+    count: 5
+
+- type: entity
+  parent:
+  - MobSovietT3Shotgun
+  id: MobSovietT3ShotgunBirdshot
+  components:
+  - type: BasicEntityAmmoProvider
+    proto: ShellShotgunBirdshotHeavy
+    capacity: 5
+    count: 5
 
 - type: entity
   name: marine ranger
@@ -1875,7 +1906,8 @@
       - MobSovietT2Rifle
       - MobSovietT2RifleW
       - MobSovietT3Shotgun
-      - MobSovietT3ShotgunIncendiary
+      - MobSovietT3ShotgunHeavy
+      - MobSovietT3ShotgunBirdshot
       - MobSovietT3Rifle
       - MobSovietT2Raider
     rarePrototypes:
@@ -2165,9 +2197,11 @@
     - !type:EntSelector
       id: MobSovietT3Rifle
       prob: 1
-    - !type:EntSelector
-      id: MobSovietT3Shotgun
-      prob: 1
+    - !type:GroupSelector
+      children:
+      - id: MobSovietT3Shotgun
+      - id: MobSovietT3ShotgunHeavy
+      - id: MobSovietT3ShotgunBirdshot
 
 - type: entity
   name: soviet light mechanized squad spawner
@@ -2206,9 +2240,11 @@
     - !type:EntSelector
       id: MobSovietT3Rifle
       prob: 1
-    - !type:EntSelector
-      id: MobSovietT3ShotgunIncendiary
-      prob: 1
+    - !type:GroupSelector
+      children:
+      - id: MobSovietT3Shotgun
+      - id: MobSovietT3ShotgunHeavy
+      - id: MobSovietT3ShotgunBirdshot
 
 - type: entity
   name: soviet heavy mechanized squad spawner

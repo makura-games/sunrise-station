@@ -42,7 +42,6 @@
     WeaponRifleM16A4: 3
     WeaponRifleEstoc: 3
     WeaponRifleLecterXL8: 3
-    WeaponRifleLeikha: 3
     WeaponRifleAsh12: 3
 
     WeaponShotgunBulldog: 3
@@ -282,6 +281,7 @@
     MagazinePistol40HP: 3
     MagazinePistol40FMJ: 3
     MagazinePistol40AP: 3
+    MagazinePistolLightRifleAuto: 3
     # Pistol 40 smg Ammo
     MagazinePistol40SubMachineGunSP: 3
     MagazinePistol40SubMachineGunHP: 3

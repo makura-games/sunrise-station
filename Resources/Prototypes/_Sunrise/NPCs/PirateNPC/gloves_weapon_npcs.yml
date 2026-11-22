@@ -1219,6 +1219,12 @@
   parent: [SovietArmorFlak, ClothingHandsBlackPistol, SovietMeleeNoArc]
   id: ClothingHandsBlackPistolSovietFlak
   categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    clothingVisuals:
+      gloves:
+      - sprite: _Starlight/Objects/Weapons/Guns/Pistols/aps.rsi
+        state: inhand-left
 
 - type: entity
   parent: [ClothingHandsDp28, SovietArmorFlak, SovietMeleeNoArc]
@@ -1284,6 +1290,12 @@
   parent: [SovietArmorUSSPHeavy, ClothingHandsBlackShotgunSoviet, SovietMeleeNoArc]
   id: ClothingHandsBlackShotgunSovietUSSPHeavy
   categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    clothingVisuals:
+      gloves:
+      - sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/type23.rsi
+        state: wielded-inhand-right
 
 - type: entity
   parent: [ClothingHandsPPSHSoviet, SovietArmorFlak, SovietMeleeNoArc]

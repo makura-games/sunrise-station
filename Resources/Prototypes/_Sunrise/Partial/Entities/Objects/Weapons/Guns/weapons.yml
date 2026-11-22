@@ -1,0 +1,500 @@
+# region Magazines
+# Стандартные магазины используют SP-патроны на Sunrise без отдельных *SP ID.
+
+- type: !PartialOnly entity
+  id: BaseMagazineRifle
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/rifle_mag.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+
+- type: !PartialOnly entity
+  id: MagazinePistol
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistolSP
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: sp
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left: !Clear
+      - !Index:0
+        state: inhand-left-mag
+      - !Index:0
+        state: inhand-left-stripe
+        color: "#575EF5"
+      right: !Clear
+      - !Index:0
+        state: inhand-right-mag
+      - !Index:0
+        state: inhand-right-stripe
+        color: "#575EF5"
+
+- type: !PartialOnly entity
+  id: MagazinePistolHighCapacity
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistolSP
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - !Index:0
+      state: stripe
+      color: "#575EF5"
+  - type: Item
+    inhandVisuals:
+      left: !Clear
+      - !Index:0
+        state: inhand-left-mag
+      - !Index:0
+        state: inhand-left-stripe
+        color: "#575EF5"
+      right: !Clear
+      - !Index:0
+        state: inhand-right-mag
+      - !Index:0
+        state: inhand-right-stripe
+        color: "#575EF5"
+
+- type: !PartialOnly entity
+  id: MagazinePistolSubMachineGun
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistolSP
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - !Index:0
+      state: stripe
+      color: "#575EF5"
+  - type: Item
+    inhandVisuals:
+      left: !Clear
+      - !Index:0
+        state: inhand-left-mag
+      - !Index:0
+        state: inhand-left-stripe
+        color: "#575EF5"
+      right: !Clear
+      - !Index:0
+        state: inhand-right-mag
+      - !Index:0
+        state: inhand-right-stripe
+        color: "#575EF5"
+
+- type: !PartialOnly entity
+  id: MagazinePistolSubMachineGunTopMounted
+  name: WT550 magazine (.35 auto top-mounted)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgePistolSP
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-unshaded-1
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+    - !Index:0
+      state: stripe
+      color: "#575EF5"
+  - type: Item
+    storedRotation: -90
+    inhandVisuals:
+      left: !Clear
+      - !Index:0
+        state: inhand-left
+      - !Index:0
+        state: inhand-left-stripe
+        color: "#575EF5"
+      right: !Clear
+      - !Index:0
+        state: inhand-right
+      - !Index:0
+        state: inhand-right-stripe
+        color: "#575EF5"
+
+- type: !PartialOnly entity
+  id: MagazinePistolSubMachineGunTopMountedEmpty
+  components:
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-unshaded-1
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Item
+    inhandVisuals:
+      left: !Clear
+      - !Index:0
+        state: inhand-left
+      right: !Clear
+      - !Index:0
+        state: inhand-right
+
+- type: !PartialOnly entity
+  id: MagazineMagnum
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeMagnumSP
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - !Index:0
+      state: stripe
+      color: "#575EF5"
+  - type: Item
+    inhandVisuals:
+      left: !Clear
+      - !Index:0
+        state: inhand-left-mag
+      - !Index:0
+        state: inhand-left-stripe
+        color: "#575EF5"
+      right: !Clear
+      - !Index:0
+        state: inhand-right-mag
+      - !Index:0
+        state: inhand-right-stripe
+        color: "#575EF5"
+
+- type: !PartialOnly entity
+  id: MagazineRifle
+  name: "magazine (.20 rifle)"
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifleSP
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - !Index:0
+      state: stripe
+      color: "#575EF5"
+  - type: Item
+    inhandVisuals:
+      left: !Clear
+      - !Index:0
+        state: inhand-left-mag
+      - !Index:0
+        state: inhand-left-stripe
+        color: "#575EF5"
+      right: !Clear
+      - !Index:0
+        state: inhand-right-mag
+      - !Index:0
+        state: inhand-right-stripe
+        color: "#575EF5"
+
+# Базовые определения этих актуальных ванильных ID временно добавлены в
+# _Sunrise/Entities/Objects/Weapons/Guns/Ammunition/Magazines/vanilla.yml.
+- type: !PartialOnly entity
+  id: MagazineLightRifle
+  name: "magazine (.30 rifle)"
+  parent: BaseMagazineLightRifle
+  description: Curved 30-round double stack magazine for combat rifles. Intended to hold general-purpose kinetic ammunition.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeLightRifleSP
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - !Index:0
+      state: stripe
+      color: "#575EF5"
+  - type: Item
+    inhandVisuals:
+      left: !Clear
+      - !Index:0
+        state: inhand-left-mag
+      - !Index:0
+        state: inhand-left-stripe
+        color: "#575EF5"
+      right: !Clear
+      - !Index:0
+        state: inhand-right-mag
+      - !Index:0
+        state: inhand-right-stripe
+        color: "#575EF5"
+
+- type: !PartialOnly entity
+  id: MagazineLightRifleBox
+  name: "L6 SAW magazine box (.20 rifle)"
+  parent: [ BaseNonCycleableAmmoProvider, BaseMagazineRifle ]
+  description: Box containing a 200-round belt of linked .20 rifle rounds, used by light machine guns such as the L6. Intended to hold general-purpose kinetic ammunition.
+  components:
+  - type: Tag
+    tags:
+    - MagazineLightRifleBox
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifleSP
+    capacity: 200
+  - type: Item
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_box.rsi
+    layers: !Clear
+    - !Index:0
+      state: uranium
+      color: "#575EF5"
+      map: ["enum.GunVisualLayers.Base"]
+    - !Index:0
+      state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 7
+    zeroVisible: false
+  - type: Appearance
+# endregion
+
+# region Ammunition
+- type: !PartialOnly entity
+  id: GrenadeBaton
+  parent: [ BaseGrenade, BaseSecurityContraband]
+  description: Crack skulls, break jaws.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletGrenadeBaton
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/peacekeeper.rsi
+    layers: !Clear
+    - !Index:0
+      state: baton
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: baton
+    suffix: false
+  - type: Tag
+    tags:
+    - GrenadeLessLethal
+
+- type: !PartialOnly entity
+  id: GrenadeFlash
+  description: EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+  components:
+  - type: Sprite
+    scale: 0.7,0.65
+  - type: Tag
+    tags:
+    - GrenadeLessLethal
+
+- type: !PartialOnly entity
+  id: BulletGrenadeBaton
+  components:
+  - type: Projectile
+    deleteOnCollide: true
+    damage:
+      types:
+        Blunt: 15
+  - type: StaminaDamageOnCollide
+    damage: 65
+# endregion
+
+# region Launchers
+- type: !PartialOnly entity
+  id: WeaponLauncherRocket
+  components:
+  - type: Item
+    sprite: Objects/Weapons/Guns/Launchers/rocket.rsi
+
+- type: !PartialOnly entity
+  id: WeaponLauncherChinaLake
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/china_lake_x48.rsi
+  - type: Item
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/china_lake.rsi
+  - type: Clothing
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/china_lake.rsi
+  - type: BallisticAmmoProvider
+    capacity: 4
+  - type: CustomSpriteAmmoCounter
+    loadedAmmoSprite: Interface/ItemStatus/Grenade/not_spent.png
+    spentAmmoSprite: Interface/ItemStatus/Grenade/spent.png
+# endregion
+
+# region Rifles
+- type: !PartialOnly entity
+  id: WeaponRifleLecter
+  components:
+  - type: Tag
+    tags:
+    - WeaponRifleLecterUpgradeBase
+# endregion
+
+# region Shotguns
+- type: !PartialOnly entity
+  id: WeaponShotgunEnforcer
+  components:
+  - type: Gun
+    projectileSpeed: 30
+    soundGunshot:
+      collection: xm1014
+  - type: ContainerInteractionAnimationVisuals
+  - type: Appearance
+  - type: WeaponStorageColor
+    useStorage: true
+    fullItemTag: SpeedLoaderShotgun
+    fullItemState: fill-speedloader
+  - type: Storage
+    grid:
+    - 0,0,5,0
+    maxItemSize: Normal
+    clickInsert: false
+    whitelist:
+      tags:
+      - ShellShotgun
+      - SpeedLoaderShotgun
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: ShellShotgun
+        amount: 6
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/enforcer/big.rsi
+    layers: !Clear
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+    - { state: fill-1, map: [ storage-fill ], visible: false }
+    - { state: fill-1-tip, map: [ storage-tip ], visible: false }
+
+- type: !PartialOnly entity
+  id: WeaponShotgunEnforcerRubber
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: ShellShotgunBeanbag
+        amount: 6
+
+- type: !PartialOnly entity
+  id: WeaponShotgunDoubleBarreledRubber
+  components:
+  - !Remove type: BallisticAmmoProvider
+  - type: RevolverAmmoProvider
+    proto: ShellShotgunBeanbag
+
+- type: !PartialOnly entity
+  id: WeaponShotgunSawnEmpty
+  components:
+  - !Remove type: BallisticAmmoProvider
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+      - ShellShotgun
+    proto: null
+    capacity: 2
+    chambers: [ null, null ]
+    ammoSlots: [ null, null ]
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
+
+- type: !PartialOnly entity
+  id: WeaponShotgunHandmade
+  components:
+  - type: Gun
+    projectileSpeed: 30
+    soundGunshot:
+      collection: m3
+
+- type: !PartialOnly entity
+  id: WeaponShotgunBlunderbuss
+  components:
+  - type: Gun
+    projectileSpeed: 30
+  - type: BallisticAmmoProvider
+    proto: CannonBallGrapeshotMini
+    whitelist:
+      tags:
+      - ShellShotgun
+      - CannonBallMini
+
+- type: !PartialOnly entity
+  id: WeaponShotgunImprovised
+  components:
+  - type: Gun
+    projectileSpeed: 30
+    soundGunshot:
+      collection: m3
+    bigTrigger: true
+
+- type: !PartialOnly entity
+  id: WeaponShotgunHushpup
+  components:
+  - type: Gun
+    projectileSpeed: 30
+# endregion
+
+# region SMGs
+- type: !PartialOnly entity
+  id: WeaponSubMachineGunDrozd
+  components:
+  - type: Tag
+    tags:
+    - WeaponSubMachineGunDrozdUpgradeBase
+# endregion
+
+
+# region Projectiles
+- type: !PartialOnly entity
+  id: PelletGrapeshot
+  components:
+  - type: Projectile
+    armorPenetration: -0.1
+# endregion
+# region Launchers
+- type: !PartialOnly entity
+  id: WeaponFlareGunSecurity
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - WeaponFlareGunSecurityUpgradeBase
+# endregion

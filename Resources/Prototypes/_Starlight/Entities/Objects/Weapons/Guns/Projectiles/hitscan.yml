@@ -870,7 +870,7 @@
     armorPenetration: -0.2 # Sunrise-edit
     damage:
       types:
-        Piercing: 5
+        Piercing: 9
         Structural: 5
   - type: StaminaDamageOnCollide # Sunrise-add
     damage: 2
@@ -1032,7 +1032,7 @@
     armorPenetration: -0.4
     damage:
       types:
-        Piercing: 3
+        Piercing: 6
   - type: ProjectilePierce
     chance: 0.001
   - type: HitscanBasicVisuals

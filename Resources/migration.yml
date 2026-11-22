@@ -1344,6 +1344,8 @@ WeaponShotgunRiot: WeaponShotgunEnforcerRubber
 WeaponShotgunRiotSawn: WeaponShotgunTrenchgun4034Sawn
 WeaponShotgunRiotSawnEmpty: WeaponShotgunTrenchgun4034SawnEmpty
 GunSafeShotgunRiot: GunSafeShotgunEnforcer
+# 2026-11-19
+GunSafeSuperDMRElite: GunSafeSuperDMR
 # region Sunrise-End
 
 # 2026-07-16

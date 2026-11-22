@@ -10,7 +10,7 @@
       entity_storage: !type:AllSelector
         children:
         - id: SunriseWeaponPistolAPS
-        - id: PouchAmmoFilledPistol40
+        - id: PouchAmmoFilledPistolLightRifleAuto
         - id: CombatKnife
         - id: CamoUniformSuit
         - id: ClothingHeadHatSolidHeadband

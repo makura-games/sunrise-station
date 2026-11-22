@@ -454,6 +454,14 @@
     Steel: 225
     Plasteel: 75
 
+# P90
+- type: latheRecipe
+  parent: BaseEmptyAmmoRecipe
+  id: MagazineP90Empty
+  result: MagazineP90Empty
+  materials:
+    Steel: 40
+
 # M52
 - type: latheRecipe
   parent: BaseEmptyAmmoRecipe

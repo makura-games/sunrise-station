@@ -4,23 +4,65 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+    sprite: _Sunrise/Objects/Misc/upgrades.rsi
     scale: 0.85, 0.85
     state: closed
   - type: Item
-    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+    sprite: _Sunrise/Objects/Misc/upgrades.rsi
     size: Large
     shape:
     - 0,0,2,1
 
 - type: entity
-  id: FlareGunSecurityUpgrade
-  name: upgrade kit (security flare gun)
+  id: DrozdHeavyUpgradeKit
+  name: Drozd Heavy upgrade kit
+  description: A kit for converting a Drozd into a Deryaba.
+  parent: BaseSecurityUpgrade
+  components:
+  - type: Construction
+    graph: DrozdSecurity
+    node: drozdHeavyKit
+    defaultTarget: drozdHeavy
+    deconstructionTarget: null
+
+- type: entity
+  id: SecurityGrenadeLauncherRevolverUpgrade
+  name: security grenade launcher upgrade kit
   parent: BaseSecurityUpgrade
   components:
   - type: Tag
     tags:
     - UpgradeFlareGun
+  - type: Construction
+    graph: GrenadeLauncherSecurity
+    node: kit
+    defaultTarget: revolver
+    deconstructionTarget: null
+
+- type: entity
+  id: FlareGunSecurityUpgrade
+  name: security grenade launcher conversion kit
+  parent: BaseSecurityUpgrade
+  components:
+  - type: Construction
+    graph: GrenadeLauncherSecurity
+    node: flareKit
+    defaultTarget: auto
+    deconstructionTarget: null
+
+- type: entity
+  id: KammererSpecialUpgradeKit
+  name: Kammerer Special upgrade kit
+  parent: BaseSecurityUpgrade
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Misc/upgrades.rsi
+    state: heavy_shot
+  - type: Construction
+    graph: KammererUpgrade
+    node: specialKitStart
+    defaultTarget: special
+    deconstructionTarget: null
 
 - type: entity
   parent: BaseItem
@@ -64,6 +106,12 @@
     tags:
     - UpgradeDrozd
 
+  - type: Construction
+    graph: DrozdSecurity
+    node: drozdKitStart
+    defaultTarget: upgradedrozd
+    deconstructionTarget: null
+
 - type: entity
   id: LecterUpgrade
   name: upgrade kit (Lecter)
@@ -73,14 +121,22 @@
     tags:
     - UpgradeLecter
 
+  - type: Construction
+    graph: LecterSecurity
+    node: lecterKitStart
+    defaultTarget: upgradelecter
+    deconstructionTarget: null
+
 - type: entity
-  id: LerkaUpgrade
-  name: upgrade kit (Lerka)
+  id: LeikhaUpgrade
+  name: upgrade kit (Leikha)
   parent: BaseSecurityUpgrade
   components:
-  - type: Tag
-    tags:
-    - UpgradeLerka
+  - type: Construction
+    graph: LecterSecurity
+    node: leikhaConversionKitStart
+    defaultTarget: leikhaConversion
+    deconstructionTarget: null
 
 - type: entity
   id: LarkerUpgrade
@@ -91,23 +147,62 @@
     tags:
     - UpgradeLarker
 
+  - type: Construction
+    graph: LecterSecurity
+    node: larkerKitStart
+    defaultTarget: larker
+    deconstructionTarget: null
+
 - type: entity
   id: KammererTrenchUpgradeKit
   name: upgrade kit (Kammerer Trench)
   parent: BaseSecurityUpgrade
   components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Misc/upgrades.rsi
+    state: trench
   - type: Tag
     tags:
     - UpgradeKammererTrench
+  - type: Construction
+    graph: KammererUpgrade
+    node: trenchKitStart
+    defaultTarget: trench
+    deconstructionTarget: null
 
 - type: entity
   id: KammererSawnUpgradeKit
   name: upgrade kit (Kammerer Sawn-off)
   parent: BaseSecurityUpgrade
   components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Misc/upgrades.rsi
+    state: sawn
   - type: Tag
     tags:
     - UpgradeKammererSawn
+  - type: Construction
+    graph: KammererUpgrade
+    node: sawnKitStart
+    defaultTarget: sawn
+    deconstructionTarget: null
+
+- type: entity
+  id: KammererEnforcerUpgradeKit
+  name: upgrade kit (Enforcer)
+  parent: BaseSecurityUpgrade
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Misc/upgrades.rsi
+    state: enforcer
+  - type: Tag
+    tags:
+    - UpgradeKammererEnforcer
+  - type: Construction
+    graph: KammererUpgrade
+    node: enforcerKitStart
+    defaultTarget: enforcer
+    deconstructionTarget: null
 
 - type: entity
   name: G.O.R.I.L.L.A. gauntlet upgrade chip

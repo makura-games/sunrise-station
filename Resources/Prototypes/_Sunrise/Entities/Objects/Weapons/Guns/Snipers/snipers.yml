@@ -112,9 +112,11 @@
     soundEmpty:
       path: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/empty.ogg
   - type: ChamberMagazineAmmoProvider
-  - type: BallisticAmmoProvider
     soundRack:
       path: /Audio/_Sunrise/Weapons/Guns/Snipers/Bauer127/bauer127_bolt.ogg
+  - type: CustomSpriteAmmoCounter
+    loadedAmmoSprite: Interface/ItemStatus/Sniper_Cartriges/not_spent.png
+    spentAmmoSprite: Interface/ItemStatus/Sniper_Cartriges/spent.png
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -292,6 +294,7 @@
   name: Kardashev-Mosin
   parent: [WeaponSniperMosin, BaseGunWieldable, BaseMajorContraband]
   id: WeaponSniperMosinLubed
+  categories: [ HideSpawnMenu ]
   description: A relic Kardashev-Mosin rifle that has survived countless wars, and it's still deadly. Freshly unsealed, heavily greased — ready for the next war! Uses .30 caliber rounds.
   components:
   - type: Sprite

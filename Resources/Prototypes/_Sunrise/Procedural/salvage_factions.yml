@@ -542,9 +542,12 @@
     - proto: MobSovietT3Shotgun
       cost: 18
       prob: 0.03
-    - proto: MobSovietT3ShotgunIncendiary
-      cost: 20
-      prob: 0.02
+    - proto: MobSovietT3ShotgunHeavy
+      cost: 16
+      prob: 0.03
+    - proto: MobSovietT3ShotgunBirdshot
+      cost: 16
+      prob: 0.03
     - proto: MobSovietT3Rifle
       cost: 15
       prob: 0.04

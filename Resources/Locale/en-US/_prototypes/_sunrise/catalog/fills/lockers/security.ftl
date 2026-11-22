@@ -86,10 +86,6 @@ ent-GunSafeSuperDMR = safe
     .desc = { ent-GunSafeSuperweaponSecureGamma.desc }
     .suffix = Ларкер
 
-ent-GunSafeSuperDMRElite = safe
-    .desc = { ent-GunSafeSuperweaponSecureGamma.desc }
-    .suffix = СКМ-28
-
 gun-safe-used-desc = A worn armory safe used by the previous shift. Some issued equipment was never returned, and other unexpected finds may have been left behind.
 
 ent-GunSafeLecterBeer = safe

@@ -576,6 +576,7 @@
       - HandGrenadeAmmo
       - MagazineGrenade
       - Grenade
+      - GrenadeLessLethal
   - type: ItemSlots
     slots:
       grenade_launcher:
@@ -643,12 +644,15 @@
       - Grenade
       - HandGrenadeAmmo
       - MagazineGrenade
+      - GrenadeLessLethal
+      - ShellShotgunHeavy
   - type: ItemSlots
     slots:
       grenade_launcher:
         whitelist:
           tags:
           - SunriseGrenadeLauncherBandolierCompatible
+          - SunriseHeavyShotgunBandolierCompatible
   - type: ItemMapper
     sprite: _Sunrise/Clothing/Belt/belt_overlay.rsi
     containerWhitelist:
@@ -658,12 +662,15 @@
         whitelist:
           tags:
           - SunriseGrenadeLauncherBandolierCompatible
+          - SunriseHeavyShotgunBandolierCompatible
   - type: ItemCounter
     count:
       tags:
       - Grenade
       - HandGrenadeAmmo
       - MagazineGrenade
+      - GrenadeLessLethal
+      - ShellShotgunHeavy
     amount: 5
     composite: true
     layerStates:

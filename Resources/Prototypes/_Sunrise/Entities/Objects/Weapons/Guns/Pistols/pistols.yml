@@ -344,37 +344,38 @@
   name: stechkin APS
   parent: [WeaponPistolMk58, BaseSovietContraband]
   id: SunriseWeaponPistolAPS
-  description: A high quality firearm issued to SNKVD elites and high ranking officials. It's half pistol, half closing argument. Uses .40 ammo.
+  description: A high quality firearm issued to SNKVD elites and high ranking officials. It's half pistol, half closing argument. Uses 7.62 Auto ammo.
   components:
     - type: Sprite
       sprite: _Starlight/Objects/Weapons/Guns/Pistols/aps.rsi
     - type: Clothing
       sprite: _Starlight/Objects/Weapons/Guns/Pistols/aps.rsi
     - type: Gun
-      selectedMode: SemiAuto
-      shotsPerBurst: 3
+      selectedMode: Burst
+      shotsPerBurst: 5
+      burstFireRate: 12
       availableModes:
         - Burst
         - SemiAuto
       soundGunshot:
-        path: /Audio/_Starlight/Weapons/Guns/Gunshots/1suppres.ogg
+        path: /Audio/_Starlight/Weapons/Guns/Gunshots/ppsh.ogg
     - type: Contraband
       severity: Soviet
     - type: ItemSlots
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazinePistol40AP
+          startingItem: MagazinePistolLightRifleAuto
           insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
           priority: 2
           whitelist:
             tags:
-              - MagazinePistolDP
+              - MagazinePistolLightRifleAuto
           whitelistFailPopup: gun-magazine-whitelist-fail
         gun_chamber:
           name: Chamber
           priority: 1
           whitelist:
             tags:
-              - CartridgePistolDP
+              - CartridgeLightRifleAuto

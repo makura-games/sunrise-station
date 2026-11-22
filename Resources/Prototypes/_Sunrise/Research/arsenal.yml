@@ -64,6 +64,7 @@
   - MagazineBoxRifleFMJ
   - MagazineBoxHeavyRifleFMJ
   - BoxShotgunFlechette
+  - BoxShotgunFlechetteHeavy
   - MagazineLightRifleBeltBoxFMJ
   - MagazineLightRifleFMJ
   - SpeedLoaderMagnumFMJ
@@ -227,6 +228,7 @@
   tier: 2
   cost: 10000
   recipeUnlocks:
+  - BoxPeacekeeperEMP
   - WeaponIonCarbine
   - WeaponMechCombatIon
   technologyPrerequisites:
@@ -263,6 +265,7 @@
   tier: 2
   cost: 7500
   recipeUnlocks:
+  - FlareGunSecurityUpgrade
   - ClothingShoesBootsMagSec
   - KammererTrenchUpgradeKit
   - KammererSawnUpgradeKit
@@ -290,9 +293,13 @@
   - VestSecUpgradeBulletHeavy
   - LecterUpgrade
   - DrozdUpgrade
-  - LerkaUpgrade
+  - DrozdHeavyUpgradeKit
+  - LeikhaUpgrade
   - LarkerUpgrade
+  - KammererEnforcerUpgradeKit
+  - SecurityGrenadeLauncherRevolverUpgrade
   - MagazinePistol40SubMachineGunEmpty
+  - MagazineP90Empty
   - MagazineRifleM52Empty
   technologyPrerequisites:
   - CombatEquipment

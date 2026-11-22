@@ -1,11 +1,11 @@
 ent-WeaponLauncherRL5 = rL-5
     .desc = { ent-BaseWeaponLauncher.desc }
-ent-WeaponGrenadeLauncherGL70 = gL-70
-    .desc = { ent-BaseWeaponLauncher.desc }
-ent-WeaponGrenadeLauncherSecurity = security grenade launcher
-    .desc = A security flare gun modification that allows for the safe launch of any hand grenade over long distances. "Warning" Firing at close range or directly at obstacles is not recommended — risk of grenade bounce-back.
-ent-WeaponGrenadeLauncherSecurityRevolver = security revolver launcher
-    .desc = A five-shot security grenade launcher designed to fire both standard and hand grenades.
+ent-WeaponGrenadeLauncherGL70 = GL70 Basilisk
+    .desc = .desc = BLOOP! BLOOP! BLOOP! BLOOP! BLOOP! BLOOP! A true stress-relief toy for true demo men.
+ent-WeaponGrenadeLauncherSecurity = peacekeeper
+    .desc = A multi purpose single-shot grenade launcher with a break-open action.
+ent-WeaponGrenadeLauncherSecurityRevolver = Roarmaker
+    .desc = A security-grade, five-shot revolver grenade launcher designed to fire only less-lethal grenades.
 ent-WeaponLauncherM79 = m79 grenade launcher
     .desc = A single-shot, break-action grenade launcher. It is a powerful weapon that can fire a variety of grenades and hand granades.
 

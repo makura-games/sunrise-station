@@ -110,7 +110,7 @@
   name: PPSH 59 SMG
   parent: [BaseWeaponSubMachineGun, BaseSovietContraband]
   id: WeaponSubMachineGunPPSH
-  description: Beloved by USSP veterans and feared by friendly fire protocols everywhere. Uses .35 ammo.
+  description: Beloved by USSP veterans and feared by friendly fire protocols everywhere. Uses 7.62 Auto ammo.
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/SMGs/ppsh41/big.rsi
@@ -164,7 +164,7 @@
         priority: 1
         whitelist:
           tags:
-            - CartridgePistol
+            - CartridgeLightRifleAuto
 
 - type: entity
   name: AJ-100
@@ -331,10 +331,14 @@
 
 - type: entity
   name: Deryaba
-  parent: [BaseWeaponSubMachineGun, BaseSecurityContraband]
+  parent: [WeaponSubMachineGunDrozd, BaseSecurityContraband]
   id: WeaponSubMachineGunDrozdHeavy
   description: An upgraded variant of the Drozd, featuring a redesigned firing mechanism capable of chambering multiple ammunition types .35 auto or .40. Its controlled two-round burst provides improved handling and flexibility in combat. Feeds from compatible SMG magazines.
   components:
+    - type: Construction
+      graph: DrozdSecurity
+      node: drozdHeavy
+      deconstructionTarget: null
     - type: Sprite
       sprite: _Sunrise/Objects/Weapons/Guns/SMGs/drozd.rsi
       layers:
@@ -354,6 +358,7 @@
       maxAngle: 30
       fireRate: 5.5
       burstFireRate: 20
+      shotsPerBurst: 2
       soundGunshot:
         collection: famas # Sunrise-Edit
         params:
@@ -362,7 +367,6 @@
       availableModes:
       - Burst
       - FullAuto
-      shotsPerBurst: 2
     - type: MagazineVisuals
       magState: mag
       steps: 5
@@ -389,6 +393,7 @@
             tags:
             - CartridgePistol
             - CartridgePistolDP
+
 - type: entity
   name: Deryaba
   parent: WeaponSubMachineGunDrozdHeavy

@@ -1,0 +1,8 @@
+- type: soundCollection
+  id: SunriseShotgunPump
+  files:
+  - /Audio/_Sunrise/Weapons/Guns/Shotguns/Different/pump.ogg
+  - /Audio/_Sunrise/Weapons/Guns/Shotguns/Different/pump_action_1.ogg
+  - /Audio/_Sunrise/Weapons/Guns/Shotguns/Different/pump_action_2.ogg
+  - /Audio/_Sunrise/Weapons/Guns/Shotguns/Different/pump_action_3.ogg
+  - /Audio/_Sunrise/Weapons/Guns/Shotguns/Different/pump_action_4.ogg

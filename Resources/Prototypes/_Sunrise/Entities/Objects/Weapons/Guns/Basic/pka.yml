@@ -59,6 +59,9 @@
     bigTrigger: true
   - type: AmmoCounter
   - type: Appearance
+  - type: CustomSpriteAmmoCounter
+    loadedAmmoSprite: Interface/ItemStatus/PKA/not_spent.png
+    spentAmmoSprite: Interface/ItemStatus/PKA/spent.png
   - type: GenericVisualizer
     visuals:
       enum.AmmoVisuals.HasAmmo:
@@ -124,6 +127,9 @@
       params:
         variation: 0.12
     bigTrigger: true
+  - type: CustomSpriteAmmoCounter
+    loadedAmmoSprite: Interface/ItemStatus/PKA/not_spent.png
+    spentAmmoSprite: Interface/ItemStatus/PKA/spent.png
   - type: AmmoCounter
   - type: Appearance
   - type: GenericVisualizer
@@ -133,7 +139,7 @@
           True: { visible: False }
           False: { visible: True }
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 2
+    rechargeCooldown: 1.6
     rechargeSound:
       path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
       params:
@@ -153,8 +159,8 @@
         staminaMultiplier: 15
   - type: BasicEntityAmmoProvider
     proto: BulletKineticShuttle
-    capacity: 9
-    count: 9
+    capacity: 7
+    count: 7
   - type: UpgradeableGun
     whitelist:
       tags:

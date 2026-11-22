@@ -1,6 +1,11 @@
 - type: latheRecipePack
   id: SecurityStaticSunrise
   recipes:
+    - BoxPeacekeeperBaton
+    - BoxPeacekeeperFlash
+    - BoxPeacekeeperGas
+    - BoxPeacekeeperStinger
+    - BoxPeacekeeperFlare
     ######################BOX#######################
     # Light Rifle
     - MagazineBoxLightRifleSP
@@ -190,6 +195,12 @@
     - ScanGateMachineCircuitboard
     - WeaponSunriseLaserPistol
     - FlareGunSecurityUpgrade
+    - SecurityGrenadeLauncherRevolverUpgrade
+    - KammererSpecialUpgradeKit
+    - BoxShotgunHeavy
+    - BoxShotgunBirdshotHeavy
+    - BoxShotgunFlechetteHeavy
+    - BoxPeacekeeperEMP
     - EnergyBola
 # Sunrise-TODO: Нужен ребаланс с учетом типов боеприпасов
 #    - BaseMagazinePistolCaselessRifleExtended
@@ -223,11 +234,13 @@
     #- ModularReceiverAuto
     - LecterUpgrade
     - DrozdUpgrade
-    - LerkaUpgrade
+    - DrozdHeavyUpgradeKit
+    - LeikhaUpgrade
     - LarkerUpgrade
     - KammererTrenchUpgradeKit
     - KammererSawnUpgradeKit
     - MagazinePistol40SubMachineGunEmpty
+    - MagazineP90Empty
     - MagazineRifleM52Empty
   #####################BOX#######################
   # Light Rifle

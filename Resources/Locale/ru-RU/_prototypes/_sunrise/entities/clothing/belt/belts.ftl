@@ -68,5 +68,5 @@ ent-ClothingBeltMilitaryWebbingMedRaidFilled = армейская РПС Рей�
     .desc = Ременно-плечевая система тактических ремней, которую носят оперативники-рейдеры, имеет дополнительное дюротканевое покрытие для сохранности химикатов в боевых условиях.
 ent-ClothingSovietBandolier = советский патронташ
     .desc = Пахнет маслом, потом и сомнительными решениями.
-ent-SunriseClothingBeltGrenadeLauncherBandolier = патронташ гранатомётчика
+ent-SunriseClothingBeltGrenadeLauncherBandolier = патронташ гренадёра
     .desc = Патронташ с подсумками для гранат и отдельным креплением для гранатомёта.

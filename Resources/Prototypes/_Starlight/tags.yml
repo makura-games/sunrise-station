@@ -137,8 +137,5 @@
   id: MagazineGrenade120mm
 
 - type: Tag
-  id: Cartridge20mmAutocannon
-
-- type: Tag
   id: Stairs
 

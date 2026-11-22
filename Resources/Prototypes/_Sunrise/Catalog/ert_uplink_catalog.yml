@@ -57,7 +57,7 @@
 - type: listing
   id: ERTUplinkWeaponRifleLeikhaFilled
   name: ntuplink-gun-bundle-leikha-name
-  icon: { sprite: _Starlight/Objects/Weapons/Guns/Rifles/m16a4.rsi, state: base }
+  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Rifles/leikha/big.rsi, state: icon }
   productEntity: ClothingBackpackDuffelWeaponRifleLeikhaFilled
   cost:
     Bluecrystal: 13

@@ -72,7 +72,10 @@
   parent: BaseMagazinePistolSubMachineGun
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgePistolSP
+    proto: CartridgeLightRifleAuto
+    whitelist:
+      tags:
+      - CartridgeLightRifleAuto
     capacity: 35
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Ammunition/Magazine/SMGs/ppsh.rsi

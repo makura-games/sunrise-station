@@ -191,7 +191,7 @@
       storagebase: !type:AllSelector
         children:
         - id: WeaponRifleLeikha
-        - id: MagazineRifle
+        - id: MagazineRifleHeavySP
           amount: 4
 
 - type: entity

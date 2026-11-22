@@ -45,8 +45,9 @@
     pvsIncrease: 0.4
 
 - type: entity
-  name: GL-70
+  name: GL-70 Basilisk
   parent: BaseWeaponLauncher
+  description: BLOOP! BLOOP! BLOOP! BLOOP! BLOOP! BLOOP! A true stress-relief toy for true demo men.
   id: WeaponGrenadeLauncherGL70
   components:
   - type: Sprite
@@ -66,10 +67,10 @@
     sprite: _Sunrise/Objects/Weapons/Guns/Launchers/gl70/tiny.rsi
   - type: AmmoCounter
   - type: Gun
-    fireRate: 1.5
-    selectedMode: SemiAuto
+    fireRate: 1
+    selectedMode: FullAuto
     availableModes:
-    - SemiAuto
+    - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
   - type: ContainerContainer
@@ -104,10 +105,10 @@
     - SunriseGrenadeLauncherBandolierCompatible
 
 - type: entity
-  name: security revolver launcher
+  name: Roarmaker
   parent: [WeaponGrenadeLauncherGL70, BaseSecurityContraband]
   id: WeaponGrenadeLauncherSecurityRevolver
-  description: A five-shot security grenade launcher designed to fire both standard and hand grenades.
+  description: A security-grade, five-shot revolver grenade launcher designed to fire only less-lethal grenades.
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Launchers/grenadegun_security.rsi
@@ -122,15 +123,20 @@
     capacity: 5
     chambers: [ True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null ]
+    whitelist:
+      tags:
+      - GrenadeLessLethal
+    proto: null
   - type: Construction
     graph: GrenadeLauncherSecurity
     node: revolver
+    deconstructionTarget: null
 
 - type: entity
-  name: security grenade Launcher
-  parent: [WeaponFlareGunSecurity, BaseSecurityContraband]
+  name: peacekeeper
+  parent: [BaseWeaponLauncher, BaseSecurityContraband]
   id: WeaponGrenadeLauncherSecurity
-  description: A security flare gun modification that allows for the safe launch of any hand grenade over long distances. "Warning" Firing at close range or directly at obstacles is not recommended — risk of grenade bounce-back.
+  description: A multi purpose single-shot grenade launcher with a break-open action.
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Launchers/m79_security_x48.rsi
@@ -138,37 +144,57 @@
       - state: base
         map: ["enum.GunVisualLayers.Base"]
   - type: Item
-    size: Normal
+    size: Large
     sprite: _Sunrise/Objects/Weapons/Guns/Launchers/m79_security.rsi
+    shape:
+    - 0,0,2,1
   - type: Clothing
     sprite: _Sunrise/Objects/Weapons/Guns/Launchers/m79_security.rsi
     slots:
     - Back
     - suitStorage
+  - type: CustomSpriteAmmoCounter
+    loadedAmmoSprite: Interface/ItemStatus/Grenade/not_spent.png
+    spentAmmoSprite: Interface/ItemStatus/Grenade/spent.png
   - type: ItemSlots
     slots:
       gun_chamber:
         name: Chamber
         priority: 1
+        disableEject: true
         whitelist:
           tags:
-            - HandGrenadeAmmo
+            - GrenadeLessLethal
+        startingItem: GrenadeBaton
+  - type: ContainerContainer
+    containers:
+      gun_chamber: !type:ContainerSlot
+  - type: ChamberMagazineAmmoProvider
+    autoCycle: false
+    boltClosed: false
+    canRack: false
+    soundBoltClosed: /Audio/Weapons/Guns/Cock/revolver_cock.ogg
+    soundBoltOpened: /Audio/Weapons/Guns/Cock/revolver_cock.ogg
+    soundRack: /Audio/Weapons/Guns/Cock/revolver_cock.ogg
+  - type: AmmoCounter
+  - type: GunRequiresWield
   - type: Appearance
+  - type: Construction
+    graph: GrenadeLauncherSecurity
+    node: auto
+    deconstructionTarget: null
   - type: Gun
-    projectileSpeed: 20
-    fireRate: 8
+    projectileSpeed: 35
+    fireRate: 1
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/flaregun.ogg
-    bigTrigger: true
-  - type: UseDelayOnShoot
-  - type: UseDelay
-    delay: 0.85 #No script abuse
+      path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
   - type: Tag
     tags:
     - SunriseGrenadeLauncherBandolierCompatible
+    - WeaponGrenadeLauncherSecurityUpgradeBase
 
 - type: entity
   name: m79 grenade launcher

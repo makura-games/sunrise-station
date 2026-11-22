@@ -1,0 +1,67 @@
+- type: entity
+  abstract: true
+  id: ActionSovietPeacekeeperBase
+  parent: ActionGunGrenadeSmokeSpell
+
+- type: entity
+  id: ActionSovietPeacekeeperBaton
+  parent: ActionSovietPeacekeeperBase
+  components:
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: BulletGrenadeBaton
+      projectileSpeed: 25
+
+- type: entity
+  id: ActionSovietPeacekeeperFlash
+  parent: ActionSovietPeacekeeperBase
+  components:
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: BulletGrenadeFlash
+      projectileSpeed: 25
+
+- type: entity
+  id: ActionSovietPeacekeeperGas
+  parent: ActionSovietPeacekeeperBase
+  components:
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: BulletGrenadeGas
+      projectileSpeed: 25
+
+- type: entity
+  id: ActionSovietPeacekeeperStinger
+  parent: ActionSovietPeacekeeperBase
+  components:
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: BulletGrenadePeacekeeperStinger
+      projectileSpeed: 25
+
+- type: entity
+  id: ActionSovietPeacekeeperShrapnel
+  parent: ActionSovietPeacekeeperBase
+  components:
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: BulletGrenadePeacekeeperShrapnel
+      projectileSpeed: 25
+
+- type: entity
+  id: ActionSovietPeacekeeperEMP
+  parent: ActionSovietPeacekeeperBase
+  components:
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: BulletGrenadePeacekeeperEMP
+      projectileSpeed: 25
+
+- type: entity
+  id: ActionSovietPeacekeeperFlare
+  parent: ActionSovietPeacekeeperBase
+  components:
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: BulletGrenadePeacekeeperFlare
+      projectileSpeed: 25
