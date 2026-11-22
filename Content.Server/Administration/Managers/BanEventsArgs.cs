@@ -16,7 +16,7 @@ public sealed class ServerBanIssuedEvent : EventArgs
     public uint? Minutes { get; init; }
     public string Reason { get; init; } = string.Empty;
     public DateTimeOffset Time { get; init; }
-    public ServerBanDef? BanDef { get; init; }
+    public BanDef? BanDef { get; init; }
 }
 
 public sealed class ServerBanPardonedEvent : EventArgs
@@ -25,14 +25,14 @@ public sealed class ServerBanPardonedEvent : EventArgs
     public NetUserId? PardoningAdmin { get; init; }
     public DateTimeOffset Time { get; init; }
     public int BanId { get; init; }
-    public ServerBanDef? BanDef { get; init; }
+    public BanDef? BanDef { get; init; }
 }
 
 public sealed class PlayerConnectingWithBanEvent : EventArgs
 {
     public ICommonSession Session { get; init; } = default!;
     public NetUserId UserId { get; init; }
-    public List<ServerBanDef> Bans { get; init; } = new();
+    public List<BanDef> Bans { get; init; } = new();
     public bool AllowConnection { get; set; }
     public TimeSpan ConnectionDuration { get; set; } = TimeSpan.FromSeconds(5);
 }
@@ -40,7 +40,7 @@ public sealed class PlayerConnectingWithBanEvent : EventArgs
 public sealed class PlayerKickingForBanEvent : EventArgs
 {
     public ICommonSession Session { get; init; } = default!;
-    public ServerBanDef BanDef { get; init; } = default!;
+    public BanDef BanDef { get; init; } = default!;
     public bool DelayKick { get; set; }
     public TimeSpan KickDelay { get; set; } = TimeSpan.FromSeconds(3);
 }

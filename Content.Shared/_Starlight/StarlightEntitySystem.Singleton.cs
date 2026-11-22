@@ -14,7 +14,7 @@ public sealed partial class StarlightEntitySystem : EntitySystem
     {
         uid = EntityUid.Invalid;
 
-        if (!_prototypes.HasIndex(surgeryOrStep))
+        if (!ProtoMan.HasIndex(surgeryOrStep))
         {
             _sawmill.Error("Prototype '{PrototypeId}' is not registered. Cannot retrieve or spawn a singleton entity.", surgeryOrStep); 
             return false;

@@ -30,12 +30,6 @@ public sealed class LogFilter
 
     public int? LastLogId { get; set; }
 
-    public string? LastLogCursor { get; set; }
-
-    // Sunrise edit start - показываем overfetch count для обновления cursor на уровне страницы
-    public int LokiCursorOverfetch { get; set; }
-    // Sunrise edit end
-
     public int LogsSent { get; set; }
 
     public int? Limit { get; set; }

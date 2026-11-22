@@ -17,7 +17,7 @@ public enum NarsieVisuals : byte
 }
 
 [RegisterComponent, NetworkedComponent]
-public partial class NarsieComponent : Component
+public sealed partial class NarsieComponent : Component
 {
 }
 

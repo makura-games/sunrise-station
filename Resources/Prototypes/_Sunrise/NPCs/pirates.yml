@@ -1,7 +1,7 @@
 - type: entity
   name: monkey
   id: MobBasePirateMonkey
-  parent: MobBaseAncestor
+  parent: [ SunrisePrimateDarviniumBody, MobBaseAncestor ]
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   suffix: fake pirate
   components:
@@ -63,28 +63,28 @@
       id: OrganHumanBrain
       prob: 0.01
     - !type:EntSelector
-      id: LeftArmHuman
+      id: OrganHumanArmLeft
       prob: 0.01
     - !type:EntSelector
-      id: RightArmHuman
+      id: OrganHumanArmRight
       prob: 0.01
     - !type:EntSelector
-      id: LeftHandHuman
+      id: OrganHumanHandLeft
       prob: 0.01
     - !type:EntSelector
-      id: RightHandHuman
+      id: OrganHumanHandRight
       prob: 0.01
     - !type:EntSelector
-      id: LeftLegHuman
+      id: OrganHumanLegLeft
       prob: 0.01
     - !type:EntSelector
-      id: RightLegHuman
+      id: OrganHumanLegRight
       prob: 0.01
     - !type:EntSelector
-      id: LeftFootHuman
+      id: OrganHumanFootLeft
       prob: 0.01
     - !type:EntSelector
-      id: RightFootHuman
+      id: OrganHumanFootRight
       prob: 0.01
     - !type:EntSelector
       id: ScrapMedkit
@@ -146,6 +146,9 @@
   - type: NpcFactionMember
     factions:
     - Pirate
+  - type: Access
+    tags:
+    - Pirate
   - type: NpcVeteranFollower
   - type: CollectiveMind
     minds:
@@ -161,6 +164,8 @@
     - Dead
   - type: TimedDespawn
     lifetime: 3600
+  - type: SpawnOnDespawn
+    prototype: RedspaceImplantEffect
   - type: RemoveComponentsOnTrigger
     triggerOnce: true
     components:
@@ -230,7 +235,6 @@
     allowedStates:
     - Alive
     - Critical
-    damageCap: 115
   - type: Stamina
     baseCritThreshold: 150
   - type: DamageStateVisuals
@@ -238,7 +242,6 @@
     defaultRotation: 90
     horizontalRotation: 90
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatHuman
       amount: 5
@@ -260,8 +263,11 @@
     interfaces:
       enum.StrippingUiKey.Key:
        type: StrippableBoundUserInterface
-  - type: ToggleableNightVision
-    effect: EffectNightVisionPirate
+  - type: NightVision
+    enabled: false
+    action: ActionToggleNightVision
+    prioritized: false
+    lightingColor: '#FF983326'
   - type: ComplexInteraction
   - type: AnomalyAccent
   - type: TTS
@@ -304,11 +310,9 @@
     allowedStates:
     - Alive
     - Critical
-    damageCap: 95
   - type: Stamina
     baseCritThreshold: 100
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeat
       amount: 5
@@ -551,6 +555,12 @@
       - MobPirateT1SMG
       - MobPirateT1Flintlock
     rarePrototypes:
+      - PirateSquadT1LMG
+      - PirateSquadT1Breach
+      - PirateSquadT1Assault
+      - PirateSquadT1Heavy
+      - PirateSquadT1Infiltrator
+      - PirateSquadT1Monkey
       - MobPirateT1MonkeyFireBomb
       - MobPirateT1MonkeyEDagger
       - MobPirateT1Hunter
@@ -567,7 +577,7 @@
       - MobPirateT1BorgAssault
       - MobPirateT1BorgMining
       - MobPirateT1BorgDerelict
-    rareChance: 0.2
+    rareChance: 0.15
 
 - type: entity
   name: pirate T2 spawner
@@ -609,8 +619,10 @@
       - MobPirateT2Mech
       - MobPirateT2Juggernaut
       - MobPirateT2JuggernautMG
+      - MobPirateT1BorgAssault
       - MobPirateT2BorgAssault
-    rareChance: 0.2
+      - MobPirateT1BorgMining
+    rareChance: 0.15
 
 - type: entity
   name: pirate T3 spawner
@@ -646,7 +658,8 @@
       - MobPirateT3Grenadier
       - MobPirateT3Infiltrator
       - MobPirateT3Sniper
-    rareChance: 0.2
+      - MobPirateT1BorgAssault
+    rareChance: 0.15
 
 # mixed all tiers spawner
 - type: entity
@@ -898,7 +911,7 @@
     layers:
     - sprite: _Sunrise/Mobs/Species/Templates/human.rsi
       state: human
-    - sprite: Clothing/Uniforms/Jumpsuit/pirate.rsi
+    - sprite: Clothing/Uniforms/Jumpsuits/Special/pirate.rsi
       state: equipped-INNERCLOTHING
     - sprite: _Sunrise/Clothing/OuterClothing/Suits/pirateeva_armored.rsi
       state: equipped-OUTERCLOTHING-reptilian
@@ -1133,9 +1146,10 @@
     count: 1
   - type: LeechOnMarker
     leech:
-      groups:
-        Brute: -30
       types:
+        Blunt: -10
+        Slash: -10
+        Piercing: -10
         Heat: -10
         Bloodloss: -5
         Mangleness: -5
@@ -1204,9 +1218,10 @@
     count: 1
   - type: LeechOnMarker
     leech:
-      groups:
-        Brute: -30
       types:
+        Blunt: -10
+        Slash: -10
+        Piercing: -10
         Heat: -10
         Bloodloss: -5
         Mangleness: -5
@@ -1336,8 +1351,7 @@
     speechSounds: Parrot
     speechVerb: Parrot
   - type: Vocal
-    sounds:
-      Unsexed: Parrot
+    emoteSounds: Parrot
   - type: ActiveListener
   - type: Vocalizer
   - type: RadioVocalizer
@@ -1439,10 +1453,16 @@
     threshold: 0.9
     aliveTargets: false
     damage:
-      groups:
-        Brute: -20
-        Burn: -10
-        Airloss: -5
+      types:
+        Blunt: -6.67
+        Slash: -6.67
+        Piercing: -6.66
+        Heat: -2.5
+        Shock: -2.5
+        Cold: -2.5
+        Caustic: -2.5
+        Asphyxiation: -2.5
+        Bloodloss: -2.5
     whitelist:
       components:
       - NpcVeteranFollower
@@ -1459,10 +1479,16 @@
       threshold: 0.9
       aliveTargets: false
       damage:
-        groups:
-          Brute: -20
-          Burn: -10
-          Airloss: -5
+        types:
+          Blunt: -6.67
+          Slash: -6.67
+          Piercing: -6.66
+          Heat: -2.5
+          Shock: -2.5
+          Cold: -2.5
+          Caustic: -2.5
+          Asphyxiation: -2.5
+          Bloodloss: -2.5
       whitelist:
         components:
         - NpcVeteranFollower
@@ -1525,10 +1551,16 @@
     threshold: 0.9
     aliveTargets: false
     damage:
-      groups:
-        Brute: -20
-        Burn: -10
-        Airloss: -5
+      types:
+        Blunt: -6.67
+        Slash: -6.67
+        Piercing: -6.66
+        Heat: -2.5
+        Shock: -2.5
+        Cold: -2.5
+        Caustic: -2.5
+        Asphyxiation: -2.5
+        Bloodloss: -2.5
     whitelist:
       components:
       - NpcVeteranFollower
@@ -1545,10 +1577,16 @@
       threshold: 0.9
       aliveTargets: false
       damage:
-        groups:
-          Brute: -20
-          Burn: -10
-          Airloss: -5
+        types:
+          Blunt: -6.67
+          Slash: -6.67
+          Piercing: -6.66
+          Heat: -2.5
+          Shock: -2.5
+          Cold: -2.5
+          Caustic: -2.5
+          Asphyxiation: -2.5
+          Bloodloss: -2.5
       whitelist:
         components:
         - NpcVeteranFollower
@@ -1618,10 +1656,16 @@
     threshold: 0.9
     aliveTargets: false
     damage:
-      groups:
-        Brute: -30
-        Burn: -20
-        Airloss: -10
+      types:
+        Blunt: -10
+        Slash: -10
+        Piercing: -10
+        Heat: -5
+        Shock: -5
+        Cold: -5
+        Caustic: -5
+        Asphyxiation: -5
+        Bloodloss: -5
     whitelist:
       components:
       - NpcVeteranFollower
@@ -1638,10 +1682,16 @@
       threshold: 0.9
       aliveTargets: false
       damage:
-        groups:
-          Brute: -30
-          Burn: -20
-          Airloss: -10
+        types:
+          Blunt: -10
+          Slash: -10
+          Piercing: -10
+          Heat: -5
+          Shock: -5
+          Cold: -5
+          Caustic: -5
+          Asphyxiation: -5
+          Bloodloss: -5
       whitelist:
         components:
         - NpcVeteranFollower
@@ -2305,9 +2355,9 @@
     - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/pirate.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-      state: equipped-HELMET
+      state: equipped-head
     - sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-      state: equipped-HELMET-unshaded
+      state: equipped-head-unshaded
       shader: unshaded
   - type: BasicEntityAmmoProvider
     proto: Bola
@@ -2391,12 +2441,12 @@
     - sprite: _Sunrise/Clothing/Head/Helmets/pirate_eva_alt.rsi
       state: on-equipped-HELMET
       shader: unshaded
-    - sprite: Clothing/Uniforms/Jumpsuit/gladiator.rsi
+    - sprite: Clothing/Uniforms/Jumpsuits/Civilian/gladiator.rsi
       state: equipped-INNERCLOTHING
     - sprite: Clothing/Head/Hats/gladiator.rsi
       state: equipped-HELMET
   - type: BasicEntityAmmoProvider
-    proto: BolaSecurity
+    proto: EnergyBola
     capacity: 1
     count: 1
   - type: RechargeBasicEntityAmmo
@@ -2438,7 +2488,7 @@
     - sprite: Clothing/Head/Helmets/podwars_helmet.rsi
       state: equipped-HELMET
     - sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-      state: equipped-HELMET-unshaded
+      state: equipped-head-unshaded
       shader: unshaded
     - sprite: Clothing/Head/Hats/gladiator.rsi
       state: equipped-HELMET
@@ -2542,7 +2592,6 @@
     allowedStates:
     - Alive
     - Critical
-    damageCap: 400
   - type: SlowOnDamage
     speedModifierThresholds:
       50: 1.1
@@ -2630,7 +2679,6 @@
     allowedStates:
     - Alive
     - Critical
-    damageCap: 250
   - type: SlowOnDamage
     speedModifierThresholds:
       50: 1.1
@@ -2666,10 +2714,10 @@
     count: 1
   - type: LeechOnMarker
     leech:
-      groups:
-        Brute: -30
       types:
-        Piercing: -15
+        Blunt: -10
+        Slash: -10
+        Piercing: -25
         Heat: -5
         Bloodloss: -5
         Mangleness: -5
@@ -2740,7 +2788,6 @@
     allowedStates:
     - Alive
     - Critical
-    damageCap: 250
   - type: Stamina
     baseCritThreshold: 500
   - type: FootstepModifier
@@ -2850,9 +2897,9 @@
     - sprite: Clothing/Shoes/Boots/jumpboots.rsi
       state: equipped-FEET-vox
     - sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-      state: equipped-HELMET-vox
+      state: equipped-head-vox
     - sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-      state: equipped-HELMET-unshaded-vox
+      state: equipped-head-unshaded-vox
       shader: unshaded
   - type: BasicEntityAmmoProvider
     proto: CannonBallGrapeshot
@@ -2895,9 +2942,9 @@
     - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/pirate.rsi
       state: equipped-OUTERCLOTHING-reptilian
     - sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-      state: equipped-HELMET-reptilian
+      state: equipped-head-reptilian
     - sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-      state: equipped-HELMET-unshaded-reptilian
+      state: equipped-head-unshaded-reptilian
       shader: unshaded
   - type: BasicEntityAmmoProvider
     proto: CannonBall
@@ -2920,9 +2967,9 @@
     - sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
       state: equipped-OUTERCLOTHING-reptilian
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: equipped-HELMET
+      state: equipped-head
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: on-equipped-HELMET
+      state: equipped-head-unshaded
       shader: unshaded
     - sprite: Clothing/Belt/assault.rsi
       state: equipped-BELT
@@ -2965,9 +3012,9 @@
     - sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
       state: equipped-OUTERCLOTHING-reptilian
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: equipped-HELMET
+      state: equipped-head
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: on-equipped-HELMET
+      state: equipped-head-unshaded
       shader: unshaded
     - sprite: Clothing/Belt/assault.rsi
       state: equipped-BELT
@@ -3012,9 +3059,9 @@
     - sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: equipped-HELMET
+      state: equipped-head
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: on-equipped-HELMET
+      state: equipped-head-unshaded
       shader: unshaded
   - type: BasicEntityAmmoProvider
     proto: CannonBallGrapeshotMini
@@ -3041,9 +3088,9 @@
     - sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: equipped-HELMET
+      state: equipped-head
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: on-equipped-HELMET
+      state: equipped-head-unshaded
       shader: unshaded
   - type: BasicEntityAmmoProvider
     proto: CannonBallGlassshot
@@ -3063,9 +3110,9 @@
     - sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: equipped-HELMET
+      state: equipped-head
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: on-equipped-HELMET
+      state: equipped-head-unshaded
       shader: unshaded
   - type: BasicEntityAmmoProvider
     proto: CannonBallMini
@@ -3087,9 +3134,9 @@
     - sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
       state: equipped-OUTERCLOTHING-vox
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: equipped-HELMET-vox
+      state: equipped-head-vox
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: on-equipped-HELMET-vox
+      state: equipped-head-unshaded-vox
       shader: unshaded
   - type: RechargeBasicEntityAmmo
     rechargeCooldown: 8
@@ -3115,8 +3162,7 @@
     speechSounds: Parrot
     speechVerb: Parrot
   - type: Vocal
-    sounds:
-      Unsexed: Parrot
+    emoteSounds: Parrot
   - type: ActiveListener
   - type: Vocalizer
   - type: RadioVocalizer
@@ -3170,9 +3216,9 @@
     - sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: equipped-HELMET
+      state: equipped-head
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: on-equipped-HELMET
+      state: equipped-head-unshaded
       shader: unshaded
     - sprite: Clothing/Belt/assault.rsi
       state: equipped-BELT
@@ -4090,7 +4136,7 @@
     - sprite: Clothing/OuterClothing/Hardsuits/maxim.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Head/Hardsuits/maxim.rsi
-      state: equipped-HELMET-reptilian
+      state: equipped-head-reptilian
     - sprite: Clothing/Shoes/Boots/jumpboots.rsi
       state: equipped-FEET
   - type: HellSpawnInvincibility
@@ -4181,7 +4227,7 @@
     layers:
     - sprite: _Sunrise/Mobs/Species/Templates/human.rsi
       state: human
-    - sprite: Clothing/Uniforms/Jumpsuit/color.rsi
+    - sprite: Clothing/Uniforms/Jumpsuits/Color/color.rsi
       state: equipped-INNERCLOTHING
       color: "#d3bf86"
     - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/piratecaptain.rsi
@@ -4239,7 +4285,7 @@
   - type: Sprite
     drawdepth: Mobs
     noRot: true
-    sprite: Objects/Specific/Mech/durand.rsi
+    sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
     scale: 1.08, 1.08
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -4306,7 +4352,6 @@
     allowedStates:
     - Alive
     - Critical
-    damageCap: 450
   - type: SlowOnDamage
     speedModifierThresholds:
       150: 0.9

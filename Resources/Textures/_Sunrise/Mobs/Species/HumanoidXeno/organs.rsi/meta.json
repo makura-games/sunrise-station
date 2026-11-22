@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CLA",
-  "copyright": "© SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt",
+  "copyright": "© SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt",
   "size": {
     "x": 32,
     "y": 32
@@ -17,7 +17,10 @@
       "name": "brain"
     },
     {
-      "name": "eyes"
+      "name": "eyeball-l"
+    },
+    {
+      "name": "eyeball-r"
     },
     {
       "name": "brain-inhand-left",

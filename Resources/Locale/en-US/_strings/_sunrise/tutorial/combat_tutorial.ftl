@@ -1,8 +1,8 @@
 combat-tutorial-name = Combat and self-defense
 combat-tutorial-tooltip = Learn to use combat mode safely, distinguish attack types, and handle training weapons.
 
-combat-tut-welcome-bubble = This tutorial covers combat mode and safe weapon handling.
-combat-tut-welcome-chat = You will try an unarmed strike, disarming, precise and wide attacks with a training weapon, a safe practice pistol, and a laser carbine. The tutorial also covers two-handed accuracy, ammunition types, and when to disable combat mode.
+combat-tut-welcome-bubble = Welcome! This tutorial covers combat mode and safe weapon handling.
+combat-tut-welcome-chat = Welcome! You will try an unarmed strike, disarming, precise and wide attacks with a training weapon, a safe practice pistol, and a laser carbine. The tutorial also covers two-handed accuracy, ammunition types, and when to disable combat mode.
 combat-tut-welcome-tts = Welcome! This tutorial will teach you combat mode, several kinds of attacks, and how to avoid endangering others with accidental strikes.
 
 combat-tut-action-bar-bubble = This is the action bar. It contains your character's abilities and toggles.
@@ -29,21 +29,21 @@ combat-tut-disarm-bubble = Disarm the training partner with an empty hand [tutke
 combat-tut-disarm-chat = Keep your active hand empty, point at the training partner, and press the secondary mouse button. Disarming shoves the target, drains stamina, and may knock an item out of their active hand.
 combat-tut-disarm-tts = Disarm the training partner with your empty active hand and the secondary mouse button.
 
-combat-tut-take-melee-bubble = Pick up the highlighted training blade [tutkeybind="UIClick"].
-combat-tut-take-melee-chat = Pick up the foam blade with a free hand. It is suitable for safely learning melee controls, but real weapons can inflict severe injuries.
-combat-tut-take-melee-tts = Pick up the highlighted training blade from the table.
+combat-tut-take-melee-bubble = Pick up the highlighted survival knife [tutkeybind="UIClick"].
+combat-tut-take-melee-chat = Pick up the survival knife with a free hand. This is a real melee weapon, so follow the instructions and attack only the training partner.
+combat-tut-take-melee-tts = Pick up the highlighted survival knife from the table.
 
-combat-tut-melee-attack-bubble = Strike the partner with the training blade [tutkeybind="UIClick"].
-combat-tut-melee-attack-chat = Hold the blade in your active hand and perform one normal attack against the training partner with the primary mouse button. An empty-hand strike, disarming, or an attack against another target will not count.
-combat-tut-melee-attack-tts = Strike the training partner once with a normal training blade attack.
+combat-tut-melee-attack-bubble = Strike the partner with the survival knife [tutkeybind="UIClick"].
+combat-tut-melee-attack-chat = Hold the knife in your active hand and perform one normal attack against the training partner with the primary mouse button. An empty-hand strike, disarming, or an attack against another target will not count.
+combat-tut-melee-attack-tts = Strike the training partner once with a normal survival knife attack.
 
-combat-tut-wide-attack-bubble = Perform a wide blade attack [tutkeybind="UIRightClick"].
-combat-tut-wide-attack-chat = Keep holding the blade, point at the training partner, and press the secondary mouse button. A wide attack covers the area in front of you and may hit several targets, so only use it when bystanders are clear.
-combat-tut-wide-attack-tts = Perform a wide training blade attack against the partner with the secondary mouse button.
+combat-tut-wide-attack-bubble = Perform a wide knife attack [tutkeybind="UIRightClick"].
+combat-tut-wide-attack-chat = Keep holding the knife, point at the training partner, and press the secondary mouse button. A wide attack covers the area in front of you and may hit several targets, so only use it when bystanders are clear.
+combat-tut-wide-attack-tts = Perform a wide survival knife attack against the partner with the secondary mouse button.
 
-combat-tut-return-melee-bubble = Put down the training blade [tutkeybind="Drop"].
-combat-tut-return-melee-chat = Free your hand before the next exercise. Put the training blade down nearby; there is no separate return point here.
-combat-tut-return-melee-tts = Put down the training blade before moving on to shooting.
+combat-tut-return-melee-bubble = Put down the survival knife [tutkeybind="Drop"].
+combat-tut-return-melee-chat = Free your hand before the next exercise. Put the survival knife down nearby; there is no separate return point here.
+combat-tut-return-melee-tts = Put down the survival knife before moving on to shooting.
 
 combat-tut-take-pistol-bubble = Pick up the highlighted practice pistol [tutkeybind="UIClick"].
 combat-tut-take-pistol-chat = This pistol uses safe training charges. Real ballistic and energy weapons are far more dangerous and may require authorization from your role.
@@ -93,10 +93,10 @@ combat-tut-softlock-follow-step = Follow the current tutorial instruction first.
 combat-tut-softlock-pickup-highlighted = Pick up only the highlighted training weapon right now.
 combat-tut-softlock-attack-target = Only the instructed strike against the training partner is allowed during this step.
 combat-tut-softlock-disarm-target = Disarm the training partner with an empty hand now.
-combat-tut-softlock-wide-target = Perform a wide training blade attack against the partner now.
+combat-tut-softlock-wide-target = Perform a wide survival knife attack against the partner now.
 combat-tut-softlock-shoot-target = Fire only the practice pistol at the target.
 combat-tut-softlock-keep-weapon = Do not drop or store the weapon; it is needed for the current exercise.
-combat-tut-softlock-keep-melee = Strike the training target with the training blade first.
+combat-tut-softlock-keep-melee = Strike the training target with the survival knife first.
 combat-tut-softlock-keep-pistol = Finish the practice pistol exercise first.
 combat-tut-softlock-keep-carbine = Do not drop or store the carbine; it is needed for the current exercise.
 combat-tut-softlock-shoot-one-handed = Fire three shots while holding the carbine with one hand first.

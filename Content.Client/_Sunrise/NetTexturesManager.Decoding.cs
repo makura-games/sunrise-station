@@ -28,9 +28,7 @@ public sealed partial class NetTexturesManager
         _preparingResources.Remove(resourceKey);
         _pendingResources.Remove(resourceKey);
 
-        if (_loadedTextures.Remove(resourceKey, out var oldTexture))
-            oldTexture.Dispose();
-
+        // Не освобождаем заменяемую запись явно: её Texture могла быть передана внешнему UI.
         _loadedTextures[resourceKey] = loadedTexture;
         ResourceLoaded?.Invoke(resourceKey);
     }
@@ -45,9 +43,7 @@ public sealed partial class NetTexturesManager
         _preparingResources.Remove(resourceKey);
         _pendingResources.Remove(resourceKey);
 
-        if (_loadedRsis.Remove(resourceKey, out var oldRsi))
-            oldRsi.Dispose();
-
+        // Не освобождаем заменяемую запись явно: её состояния могли быть переданы внешнему UI.
         _loadedRsis[resourceKey] = loadedRsi;
         ResourceLoaded?.Invoke(resourceKey);
     }
@@ -72,7 +68,7 @@ public sealed partial class NetTexturesManager
 
             if (upload.Generation != ReadSessionGeneration())
             {
-                _preparedUploads.Dequeue().Dispose();
+                _preparedUploads.Dequeue().EnqueueDisposals(_deferredDisposals);
                 continue;
             }
 
@@ -91,12 +87,12 @@ public sealed partial class NetTexturesManager
             }
             catch (OperationCanceledException)
             {
-                _preparedUploads.Dequeue().Dispose();
+                _preparedUploads.Dequeue().EnqueueDisposals(_deferredDisposals);
                 _preparingResources.Remove(upload.ResourceKey);
             }
             catch (Exception ex)
             {
-                _preparedUploads.Dequeue().Dispose();
+                _preparedUploads.Dequeue().EnqueueDisposals(_deferredDisposals);
                 MarkResourceFailed(upload.ResourceKey, ex.Message);
             }
         }

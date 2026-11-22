@@ -1,2 +1,2 @@
-ent-PaperVigersRayBirthdayInvitation = Birthday invitation
+ent-PaperVigersRayBirthdayInvitation = birthday invitation
     .desc = Someone has invited you to a party...

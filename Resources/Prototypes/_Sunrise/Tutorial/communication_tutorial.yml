@@ -1,6 +1,9 @@
 - type: tutorialSequence
   id: CommunicationTutorial
   duration: 960
+  estimatedDuration:
+    minimum: 420
+    maximum: 840
   priority: 2
   name: communication-tutorial-name
   tooltip: communication-tutorial-tooltip
@@ -8,6 +11,8 @@
   grid: /Maps/_Sunrise/Tutorials/communication_tutorial.yml
   playerEntity: CommunicationTutorialPlayer
   steps:
+  # Приветствие и обзор туториала
+  - CommTutWelcome
   # 1. Local chat
   - CommTutLocalChat
   # 2. Whisper
@@ -24,28 +29,37 @@
   - CommTutOpenInventory
   # 8. Examine headset
   - CommTutRadioUi
-  # 9. Engineering frequency key
-  - CommTutDepartmentRadioExplain
-  # 10. Department radio
+  # 9. Department radio
   - CommTutDepartmentRadio
-  # 11. Help request example
+  # 10. Help request example
   - CommTutHelpRequestExample
-  # 12. Open PDA messenger
+  # 11. Open PDA messenger
   - CommTutOpenMessenger
-  # 13. Messenger chats list
+  # 12. Messenger chats list
   - CommTutMessengerChats
-  # 14. Messenger message area
+  # 13. Messenger message area
   - CommTutMessengerMessages
-  # 15. Open group chats tab
+  # 14. Open group chats tab
   - CommTutMessengerGroupTab
-  # 16. Select common messenger chat
+  # 15. Select common messenger chat
   - CommTutMessengerCommonChat
-  # 17. Send messenger message
+  # 16. Send messenger message
   - CommTutSendMessenger
-  # 18. IC, LOOC and AHelp
+  # 17. IC, LOOC and AHelp
   - CommTutAskHelp
-  # 19. Mentor help
+  # 18. Mentor help
   - TutorialMHelp
+
+- type: tutorialStep
+  id: CommTutWelcome
+  parent: BaseTutorialStepBase
+  bubble:
+    text: comm-tut-welcome-bubble
+  chatMessage: comm-tut-welcome-chat
+  ttsMessage: comm-tut-welcome-tts
+  conditions:
+  - !type:StepDelayCondition
+    delay: 13
 
 - type: tutorialStep
   id: CommTutLocalChat
@@ -135,7 +149,7 @@
     name: ChannelSelector
   conditions:
   - !type:StepDelayCondition
-    delay: 19
+    delay: 15
 
 - type: tutorialStep
   id: CommTutCommonRadio
@@ -194,24 +208,6 @@
     target: CommunicationTutorialHeadset
 
 - type: tutorialStep
-  id: CommTutDepartmentRadioExplain
-  parent: BaseTutorialStepBase
-  bubble:
-    text: comm-tut-department-radio-explain-bubble
-  chatMessage: comm-tut-department-radio-explain-chat
-  ttsMessage: comm-tut-department-radio-explain-tts
-  uiHighlight:
-  - !type:UiByName
-    name: Chat
-  - !type:UiByName
-    name: ChatInput
-  - !type:UiByName
-    name: Input
-  conditions:
-  - !type:StepDelayCondition
-    delay: 15
-
-- type: tutorialStep
   id: CommTutDepartmentRadio
   parent: BaseTutorialStepBase
   bubble:
@@ -239,7 +235,7 @@
   ttsMessage: comm-tut-help-request-example-tts
   conditions:
   - !type:StepDelayCondition
-    delay: 7
+    delay: 9
 
 - type: tutorialStep
   id: CommTutOpenMessenger
@@ -273,7 +269,7 @@
     name: GroupChatsTab
   conditions:
   - !type:StepDelayCondition
-    delay: 6
+    delay: 10
 
 - type: tutorialStep
   id: CommTutMessengerMessages
@@ -290,7 +286,7 @@
     name: MessagesContainer
   conditions:
   - !type:StepDelayCondition
-    delay: 6
+    delay: 10
 
 - type: tutorialStep
   id: CommTutMessengerGroupTab
@@ -363,7 +359,7 @@
     name: AHelpButton
   conditions:
   - !type:StepDelayCondition
-    delay: 7
+    delay: 14
 
 - type: startingGear
   id: CommunicationTutorialPlayerGear

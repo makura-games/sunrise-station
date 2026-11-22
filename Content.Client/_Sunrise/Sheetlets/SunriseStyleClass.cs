@@ -13,4 +13,9 @@ public static class SunriseStyleClass
     public const string TutorialBubbleFrame = "TutorialBubbleFrame";
     public const string TutorialKeybindFrame = "TutorialKeybindFrame";
     public const string PrisonerRecordPanel = "PrisonerRecordPanel";
+    public const string StyleClassSocialBox = "SocialBox";
+    public const string StyleClassSocialButton = "SocialButton";
+    public const string StyleClassSocialButtonForum = "SocialButtonForum";
+    public const string StyleClassSocialButtonDiscord = "SocialButtonDiscord";
+    public const string StyleClassSocialButtonTelegram = "SocialButtonTelegram";
 }

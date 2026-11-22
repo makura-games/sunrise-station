@@ -1,11 +1,11 @@
-﻿// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt;
+// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt;
 
-using Content.Shared._Sunrise.Razor;
+using Content.Shared._Sunrise.Humanoid;
+using Content.Shared.Body;
 using Content.Shared.DoAfter;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Interaction;
-using Content.Shared._Sunrise.Razor;
 using Content.Shared.UserInterface;
 using Robust.Shared.Serialization;
 
@@ -14,10 +14,11 @@ namespace Content.Shared._Sunrise.Razor;
 /// <summary>
 /// Система для электробритвы - копия ножниц с вайлдберрис. Бритва не может менять цвет волос!
 /// </summary>
-public abstract class SharedRazorSystem : EntitySystem
+public abstract partial class SharedRazorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SunriseHumanoidMarkingSystem _sunriseMarking = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
 
     public override void Initialize()
     {
@@ -27,6 +28,16 @@ public abstract class SharedRazorSystem : EntitySystem
         SubscribeLocalEvent<RazorComponent, BeforeActivatableUIOpenEvent>(OnBeforeUIOpen);
         SubscribeLocalEvent<RazorComponent, ActivatableUIOpenAttemptEvent>(OnAttemptOpenUI);
         SubscribeLocalEvent<RazorComponent, BoundUserInterfaceCheckRangeEvent>(OnMirrorRangeCheck);
+    }
+
+    public static HumanoidVisualLayers LayerFromCategory(RazorCategory category)
+    {
+        return category switch
+        {
+            RazorCategory.Hair => HumanoidVisualLayers.Hair,
+            RazorCategory.FacialHair => HumanoidVisualLayers.FacialHair,
+            _ => HumanoidVisualLayers.Hair,
+        };
     }
 
     private void OnRazorInteract(Entity<RazorComponent> mirror, ref AfterInteractEvent args)
@@ -58,7 +69,7 @@ public abstract class SharedRazorSystem : EntitySystem
     {
         var user = component.Target ?? args.User;
 
-        if (!HasComp<HumanoidAppearanceComponent>(user))
+        if (!HasComp<HumanoidProfileComponent>(user) || !HasComp<VisualBodyComponent>(user))
             args.Cancel();
     }
 
@@ -69,25 +80,28 @@ public abstract class SharedRazorSystem : EntitySystem
 
     protected void UpdateInterface(EntityUid mirrorUid, EntityUid targetUid, RazorComponent component)
     {
-        if (!TryComp<HumanoidAppearanceComponent>(targetUid, out var humanoid))
+        if (!TryComp<HumanoidProfileComponent>(targetUid, out var profile))
             return;
 
         component.Target ??= targetUid;
 
-        var hair = humanoid.MarkingSet.TryGetCategory(MarkingCategories.Hair, out var hairMarkings)
-            ? new List<Marking>(hairMarkings)
-            : [];
+        _sunriseMarking.TryGetLayerMarkings(targetUid, HumanoidVisualLayers.Hair, out var hair);
+        _sunriseMarking.TryGetLayerMarkings(targetUid, HumanoidVisualLayers.FacialHair, out var facialHair);
 
-        var facialHair = humanoid.MarkingSet.TryGetCategory(MarkingCategories.FacialHair, out var facialHairMarkings)
-            ? new List<Marking>(facialHairMarkings)
-            : [];
+        var hairLimit = _sunriseMarking.TryGetLayerLimit(targetUid, HumanoidVisualLayers.Hair, out var resolvedHairLimit)
+            ? resolvedHairLimit
+            : 0;
+        var facialHairLimit = _sunriseMarking.TryGetLayerLimit(targetUid, HumanoidVisualLayers.FacialHair, out var resolvedFacialHairLimit)
+            ? resolvedFacialHairLimit
+            : 0;
 
         var state = new RazorUiState(
-            humanoid.Species,
+            profile.Species,
+            profile.Sex,
             hair,
-            humanoid.MarkingSet.PointsLeft(MarkingCategories.Hair) + hair.Count,
+            hairLimit,
             facialHair,
-            humanoid.MarkingSet.PointsLeft(MarkingCategories.FacialHair) + facialHair.Count);
+            facialHairLimit);
 
         // TODO: Component states
         component.Target = targetUid;
@@ -140,6 +154,7 @@ public sealed class RazorAddSlotMessage(RazorCategory category) : BoundUserInter
 [Serializable, NetSerializable]
 public sealed class RazorUiState(
     string species,
+    Sex sex,
     List<Marking> hair,
     int hairSlotTotal,
     List<Marking> facialHair,
@@ -149,6 +164,7 @@ public sealed class RazorUiState(
     public NetEntity Target;
 
     public string Species = species;
+    public Sex Sex = sex;
 
     public List<Marking> Hair = hair;
     public int HairSlotTotal = hairSlotTotal;

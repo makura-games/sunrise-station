@@ -1,14 +1,14 @@
 using Content.Shared.Roles;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.AssaultOps;
 
 [RegisterComponent]
 public sealed partial class AssaultOperativeSpawnerComponent : Component
 {
-    [DataField("rolePrototype", customTypeSerializer:typeof(PrototypeIdSerializer<AntagPrototype>), required:true)]
-    public string OperativeRolePrototype = default!;
+    [DataField("rolePrototype", required: true)]
+    public ProtoId<AntagPrototype> OperativeRolePrototype;
 
-    [DataField("startingGearPrototype", customTypeSerializer:typeof(PrototypeIdSerializer<StartingGearPrototype>), required:true)]
-    public string OperativeStartingGear = default!;
+    [DataField("startingGearPrototype", required: true)]
+    public ProtoId<StartingGearPrototype> OperativeStartingGear;
 }

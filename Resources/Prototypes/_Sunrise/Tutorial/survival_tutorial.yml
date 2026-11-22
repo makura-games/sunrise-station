@@ -1,6 +1,9 @@
 - type: tutorialSequence
   id: SurvivalTutorial
   duration: 420
+  estimatedDuration:
+    minimum: 180
+    maximum: 360
   priority: 4
   name: survival-tutorial-name
   tooltip: survival-tutorial-tooltip
@@ -40,7 +43,7 @@
       blockAll: true
   conditions:
   - !type:StepDelayCondition
-    delay: 10
+    delay: 12
 
 - type: tutorialStep
   id: SurvivalTutOpenEmergencyEquipment
@@ -78,7 +81,7 @@
       blockAll: true
   conditions:
   - !type:StepDelayCondition
-    delay: 11
+    delay: 15
 
 - type: tutorialStep
   id: SurvivalTutOxygenWarning
@@ -87,6 +90,11 @@
     text: survival-tut-oxygen-warning-bubble
   chatMessage: survival-tut-oxygen-warning-chat
   ttsMessage: survival-tut-oxygen-warning-tts
+  uiHighlight:
+  - !type:UiByName
+    name: AlertContainer
+  - !type:UiByAlertPrototype
+    prototype: TutorialLowOxygen
   effects:
   - !type:TutorialComponentEffect
     components:
@@ -101,7 +109,7 @@
       severity: 2
   conditions:
   - !type:StepDelayCondition
-    delay: 11
+    delay: 14
 
 - type: tutorialStep
   id: SurvivalTutTakeMask
@@ -136,7 +144,7 @@
 - type: tutorialStep
   id: SurvivalTutTakeOxygenTank
   parent: BaseTutorialStepBase
-  target: OxygenTankFilled
+  target: SunriseSurvivalTutorialOxygenTankFilled
   bubble:
     text: survival-tut-take-oxygen-tank-bubble
     attachToTarget: true
@@ -145,22 +153,22 @@
   observeRange: 12
   uiHighlight:
   - !type:UiByEntityPrototype
-    prototype: OxygenTankFilled
+    prototype: SunriseSurvivalTutorialOxygenTankFilled
   effects:
   - !type:TutorialComponentEffect
     removeOnExit: false
     components:
     - type: TutorialOpenUiSoftLock
       targets:
-      - OxygenTankFilled
+      - SunriseSurvivalTutorialOxygenTankFilled
   - !type:TutorialComponentEffect
     components:
     - type: TutorialPickupSoftLock
       allowedItems:
-      - OxygenTankFilled
+      - SunriseSurvivalTutorialOxygenTankFilled
   conditions:
   - !type:PickupListenedCondition
-    target: OxygenTankFilled
+    target: SunriseSurvivalTutorialOxygenTankFilled
 
 - type: tutorialStep
   id: SurvivalTutOpenInventory
@@ -180,7 +188,7 @@
     - type: TutorialPickupSoftLock
       allowedItems:
       - ClothingMaskBreath
-      - OxygenTankFilled
+      - SunriseSurvivalTutorialOxygenTankFilled
   conditions:
   - !type:UiControlVisibleCondition
     control: InventoryHeadSlot
@@ -234,7 +242,7 @@
     components:
     - type: TutorialPickupSoftLock
       allowedItems:
-      - OxygenTankFilled
+      - SunriseSurvivalTutorialOxygenTankFilled
   conditions:
   - !type:InternalsEnabledCondition
 
@@ -255,7 +263,7 @@
       blockAll: true
   conditions:
   - !type:StepDelayCondition
-    delay: 10
+    delay: 9
 
 - type: tutorialStep
   id: SurvivalTutPressureWarning
@@ -264,6 +272,11 @@
     text: survival-tut-pressure-warning-bubble
   chatMessage: survival-tut-pressure-warning-chat
   ttsMessage: survival-tut-pressure-warning-tts
+  uiHighlight:
+  - !type:UiByName
+    name: AlertContainer
+  - !type:UiByAlertPrototype
+    prototype: TutorialLowPressure
   effects:
   - !type:TutorialComponentEffect
     components:
@@ -369,7 +382,7 @@
       blockAll: true
   conditions:
   - !type:StepDelayCondition
-    delay: 10
+    delay: 11
 
 - type: tutorialStep
   id: SurvivalTutFinish
@@ -388,7 +401,7 @@
       blockAll: true
   conditions:
   - !type:StepDelayCondition
-    delay: 10
+    delay: 13
 
 - type: startingGear
   id: SurvivalTutorialPlayerGear
@@ -406,6 +419,15 @@
   - type: Godmode
 
 - type: entity
+  parent: OxygenTankFilled
+  id: SunriseSurvivalTutorialOxygenTankFilled
+  suffix: Training
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ActivatableUI
+    verbOnly: true
+
+- type: entity
   id: TutorialClosetEmergencyFilledOxygen
   parent: ClosetEmergency
   suffix: Filled, Guaranteed Oxygen
@@ -416,7 +438,7 @@
         children:
         - id: ClothingMaskBreath
         - id: ClothingOuterSuitEmergency
-        - id: OxygenTankFilled
+        - id: SunriseSurvivalTutorialOxygenTankFilled
         - id: ToolboxEmergencyFilled
           prob: 0.5
         - id: MedkitOxygenFilled

@@ -1,8 +1,8 @@
 food-tutorial-name = Food and drink
 food-tutorial-tooltip = Learn to monitor hunger and thirst, choose safe food, and return bar dishes.
 
-food-tut-welcome-bubble = This tutorial covers hunger, thirst, and food safety.
-food-tut-welcome-chat = You will learn two status alerts, try a simple meal and drink, then identify a suspicious product.
+food-tut-welcome-bubble = Welcome! This tutorial covers hunger, thirst, and food safety.
+food-tut-welcome-chat = Welcome! You will learn two status alerts, try a simple meal and drink, then identify a suspicious product.
 food-tut-welcome-tts = Hello! This tutorial teaches you to monitor hunger and thirst, choose safe food, and avoid unknown substances.
 
 food-tut-reach-bar-bubble = Follow the marker to the small bar.
@@ -58,6 +58,7 @@ food-tut-finish-chat = Watch status alerts early, choose clearly identified food
 food-tut-finish-tts = Complete! Watch your hunger and thirst, check suspicious food and drinks, and return reusable dishes after visiting a bar.
 
 food-tut-softlock-pickup-highlighted = Pick up the highlighted item now.
+food-tut-softlock-ingest-blocked = Do not consume this item yet. Pick it up first.
 food-tut-softlock-keep-drink = Do not put away or drop the glass: drink the lemonade first.
 food-tut-softlock-put-drink-down = Put the glass on the marked table now.
 food-tut-softlock-keep-meal = Do not put away or drop the food: eat it first.

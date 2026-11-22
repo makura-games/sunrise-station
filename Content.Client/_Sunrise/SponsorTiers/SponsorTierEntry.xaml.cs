@@ -1,12 +1,15 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
+// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 using System.Numerics;
+using Content.Client._Sunrise.Humanoid;
 using Content.Client._Sunrise.TTS;
-using Content.Client.Humanoid;
+using Content.Client.Body;
 using Content.Client.Lobby;
 using Content.Client.Resources;
 using Content.Client.Stylesheets;
+using Content.Shared._Sunrise.Humanoid;
 using Content.Shared._Sunrise.GhostTheme;
 using Content.Shared._Sunrise.TTS;
+using Content.Shared.Body;
 using Content.Shared.Clothing;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
@@ -35,12 +38,12 @@ namespace Content.Client._Sunrise.SponsorTiers;
 [GenerateTypedNameReferences]
 public sealed partial class SponsorTierEntry : Control
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IClientPreferencesManager _preferencesManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IConfigurationManager _configManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IClientPreferencesManager _preferencesManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private MarkingManager _marking = default!;
 
     private readonly LobbyUIController _lobbyUIController;
     private readonly ISharedSponsorsManager? _sponsorsManager;
@@ -258,7 +261,7 @@ public sealed partial class SponsorTierEntry : Control
                 var dummy = _prototypeManager.Index(humanoid.Species).DollPrototype;
                 dummyEnt = _entityManager.SpawnEntity(dummy, MapCoordinates.Nullspace);
 
-                _entityManager.System<HumanoidAppearanceSystem>().LoadProfile(dummyEnt, humanoid);
+                ApplyProfile(dummyEnt, humanoid);
                 _lobbyUIController.GiveDummyJobClothes(dummyEnt, humanoid, roleProto);
 
                 var jobLoadoutId = LoadoutSystem.GetJobPrototype(roleProto.ID);
@@ -323,17 +326,12 @@ public sealed partial class SponsorTierEntry : Control
             if (!_prototypeManager.TryIndex(marking, out MarkingPrototype? markingProto))
                 continue;
 
-            var species = markingProto.SpeciesRestrictions is { Count: > 0 }
-                ? markingProto.SpeciesRestrictions[0]
-                : (string)SharedHumanoidAppearanceSystem.DefaultSpecies;
+            var species = GetPreviewSpecies(markingProto);
 
             if (!_prototypeManager.TryIndex(species, out SpeciesPrototype? speciesProto))
                 continue;
 
             var dummyEnt = _entityManager.SpawnEntity(speciesProto.DollPrototype, MapCoordinates.Nullspace);
-
-            var humanoidAppearance = _entityManager.EnsureComponent<HumanoidAppearanceComponent>(dummyEnt);
-            var spriteComponent = _entityManager.EnsureComponent<SpriteComponent>(dummyEnt);
 
             var view = new SpriteView
             {
@@ -341,8 +339,8 @@ public sealed partial class SponsorTierEntry : Control
                 Scale = new Vector2(4, 4),
             };
 
-            _entityManager.System<HumanoidAppearanceSystem>().ApplyMarking(markingProto, null, true,
-                (dummyEnt, humanoidAppearance, spriteComponent));
+            var markings = _marking.ConvertMarkings(new List<Marking> { markingProto.AsMarking() }, species);
+            _entityManager.System<VisualBodySystem>().ApplyMarkings(dummyEnt, markings);
 
             view.SetEntity(dummyEnt);
             _spriteViews.Add(view);
@@ -408,7 +406,7 @@ public sealed partial class SponsorTierEntry : Control
                 var dummy = _prototypeManager.Index(humanoid.Species).DollPrototype;
                 dummyEnt = _entityManager.SpawnEntity(dummy, MapCoordinates.Nullspace);
 
-                _entityManager.System<HumanoidAppearanceSystem>().LoadProfile(dummyEnt, humanoid);
+                ApplyProfile(dummyEnt, humanoid);
                 _lobbyUIController.GiveDummyJobClothes(dummyEnt, humanoid, roleProto);
 
                 var jobLoadoutId = LoadoutSystem.GetJobPrototype(roleProto.ID);
@@ -463,7 +461,7 @@ public sealed partial class SponsorTierEntry : Control
                 var dummy = _prototypeManager.Index(humanoid.Species).DollPrototype;
                 dummyEnt = _entityManager.SpawnEntity(dummy, MapCoordinates.Nullspace);
 
-                _entityManager.System<HumanoidAppearanceSystem>().LoadProfile(dummyEnt, humanoid);
+                ApplyProfile(dummyEnt, humanoid);
                 _lobbyUIController.GiveDummyJobClothes(dummyEnt, humanoid, roleProto);
 
                 var jobLoadoutId = LoadoutSystem.GetJobPrototype(roleProto.ID);
@@ -499,6 +497,29 @@ public sealed partial class SponsorTierEntry : Control
     private void LoadSponsorShopItems()
     {
         // SUNRISE-TODO: Отображение содержимого магазина спонсоров
+    }
+
+    private void ApplyProfile(EntityUid dummyEnt, HumanoidCharacterProfile humanoid)
+    {
+        _entityManager.System<VisualBodySystem>().ApplyProfileTo(dummyEnt, humanoid);
+        _entityManager.System<HumanoidProfileSystem>().ApplyProfileTo(dummyEnt, humanoid);
+        _entityManager.System<SunriseHumanoidProfileSystem>().ApplyProfileTo(dummyEnt, humanoid);
+        _entityManager.System<SunriseHumanoidProfileVisualSystem>().Refresh(dummyEnt);
+    }
+
+    private ProtoId<SpeciesPrototype> GetPreviewSpecies(MarkingPrototype marking)
+    {
+        if (marking.GroupWhitelist != null)
+        {
+            foreach (var group in marking.GroupWhitelist)
+            {
+                var speciesId = (string) group;
+                if (_prototypeManager.HasIndex<SpeciesPrototype>(speciesId))
+                    return speciesId;
+            }
+        }
+
+        return SunriseHumanoidProfileDefaults.DefaultSpecies;
     }
 
     private PanelContainer CreateEntityIcon(string name, SpriteView spriteView)

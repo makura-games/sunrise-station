@@ -2,7 +2,6 @@
   id: BaseSunriseMarkingHumanHair
   abstract: true
   bodyPart: Hair
-  markingCategory: Hair
 
 - type: marking
   id: HumanHairAfricanPigtails

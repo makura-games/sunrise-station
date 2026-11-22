@@ -1,16 +1,15 @@
 using Content.Server._Sunrise.Speech.Components;
-using Content.Server.Speech.Components;
-using Content.Server.Speech.EntitySystems;
 using Content.Shared.Speech;
+using Content.Shared.Speech.EntitySystems;
 
 namespace Content.Server._Sunrise.Speech.EntitySystems;
 
 /// <summary>
 /// System that gives the speaker a formal accent by expanding abbreviations.
 /// </summary>
-public sealed class FormalAccentSystem : EntitySystem // Fish-edit
+public sealed partial class FormalAccentSystem : EntitySystem
 {
-    [Dependency] private readonly ReplacementAccentSystem _replacement = default!;
+    [Dependency] private ReplacementAccentSystem _replacement = default!;
 
     public override void Initialize()
     {
@@ -29,8 +28,8 @@ public sealed class FormalAccentSystem : EntitySystem // Fish-edit
         return msg;
     }
 
-    private void OnAccentGet(EntityUid uid, FormalAccentComponent component, AccentGetEvent args)
+    private void OnAccentGet(Entity<FormalAccentComponent> ent, ref AccentGetEvent args)
     {
-        args.Message = Accentuate(args.Message, component);
+        args.Message = Accentuate(args.Message, ent.Comp);
     }
-} // Fish-edit
+}

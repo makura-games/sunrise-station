@@ -1,6 +1,9 @@
 - type: tutorialSequence
   id: CombatTutorial
   duration: 720
+  estimatedDuration:
+    minimum: 300
+    maximum: 600
   priority: 7
   name: combat-tutorial-name
   tooltip: combat-tutorial-tooltip
@@ -96,13 +99,13 @@
       popup: combat-tut-softlock-follow-step
     - type: TutorialStorageInsertSoftLock
       items:
-      - FoamBlade
+      - SurvivalKnife
       - CombatTutorialWeaponDisablerPractice
       - WeaponLaserCarbinePractice
       popup: combat-tut-softlock-keep-weapon
     - type: TutorialEquipBlockedSoftLock
       items:
-      - FoamBlade
+      - SurvivalKnife
       - CombatTutorialWeaponDisablerPractice
       - WeaponLaserCarbinePractice
       blockAllSlots: true
@@ -169,7 +172,7 @@
       severity: 4
   conditions:
   - !type:StepDelayCondition
-    delay: 15
+    delay: 12
 
 - type: tutorialStep
   id: CombatTutExplainAttackTypes
@@ -189,7 +192,7 @@
       popup: combat-tut-softlock-follow-step
   conditions:
   - !type:StepDelayCondition
-    delay: 18
+    delay: 13
 
 - type: tutorialStep
   id: CombatTutDisarm
@@ -224,7 +227,7 @@
 - type: tutorialStep
   id: CombatTutTakeMelee
   parent: BaseTutorialStepBase
-  target: FoamBlade
+  target: SurvivalKnife
   bubble:
     text: combat-tut-take-melee-bubble
     attachToTarget: true
@@ -233,23 +236,23 @@
   observeRange: 14
   uiHighlight:
   - !type:UiByEntityPrototype
-    prototype: FoamBlade
+    prototype: SurvivalKnife
   effects:
   - !type:TutorialComponentEffect
     components:
     - type: TutorialPickupSoftLock
       allowedItems:
-      - FoamBlade
+      - SurvivalKnife
       popup: combat-tut-softlock-pickup-highlighted
     - type: TutorialDropSoftLock
       popup: combat-tut-softlock-keep-melee
     - type: TutorialStorageInsertSoftLock
       items:
-      - FoamBlade
+      - SurvivalKnife
       popup: combat-tut-softlock-keep-melee
     - type: TutorialEquipBlockedSoftLock
       items:
-      - FoamBlade
+      - SurvivalKnife
       blockAllSlots: true
       popup: combat-tut-softlock-keep-melee
     - type: TutorialAttackSoftLock
@@ -257,7 +260,7 @@
       popup: combat-tut-softlock-follow-step
   conditions:
   - !type:PickupListenedCondition
-    target: FoamBlade
+    target: SurvivalKnife
 
 - type: tutorialStep
   id: CombatTutMeleeAttack
@@ -271,7 +274,7 @@
   observeRange: 14
   uiHighlight:
   - !type:UiByEntityPrototype
-    prototype: FoamBlade
+    prototype: SurvivalKnife
   effects:
   - !type:TutorialComponentEffect
     components:
@@ -282,23 +285,23 @@
       popup: combat-tut-softlock-keep-melee
     - type: TutorialStorageInsertSoftLock
       items:
-      - FoamBlade
+      - SurvivalKnife
       popup: combat-tut-softlock-keep-melee
     - type: TutorialEquipBlockedSoftLock
       items:
-      - FoamBlade
+      - SurvivalKnife
       blockAllSlots: true
       popup: combat-tut-softlock-keep-melee
     - type: TutorialAttackSoftLock
       allowedTargets:
       - CombatTutorialTargetHuman
       allowedMeleeWeapons:
-      - FoamBlade
+      - SurvivalKnife
       popup: combat-tut-softlock-attack-target
   failures:
   - conditions:
     - !type:HoldInHandsCondition
-      item: FoamBlade
+      item: SurvivalKnife
       inverted: true
     repairStep: CombatTutTakeMelee
   - conditions:
@@ -307,7 +310,7 @@
     repairStep: CombatTutEnableCombatMode
   conditions:
   - !type:MeleeHitListenedCondition
-    target: FoamBlade
+    target: SurvivalKnife
     hitTarget: CombatTutorialTargetHuman
 
 - type: tutorialStep
@@ -322,7 +325,7 @@
   observeRange: 14
   uiHighlight:
   - !type:UiByEntityPrototype
-    prototype: FoamBlade
+    prototype: SurvivalKnife
   effects:
   - !type:TutorialComponentEffect
     components:
@@ -333,23 +336,23 @@
       popup: combat-tut-softlock-keep-melee
     - type: TutorialStorageInsertSoftLock
       items:
-      - FoamBlade
+      - SurvivalKnife
       popup: combat-tut-softlock-keep-melee
     - type: TutorialEquipBlockedSoftLock
       items:
-      - FoamBlade
+      - SurvivalKnife
       blockAllSlots: true
       popup: combat-tut-softlock-keep-melee
     - type: TutorialAttackSoftLock
       allowedTargets:
       - CombatTutorialTargetHuman
       allowedMeleeWeapons:
-      - FoamBlade
+      - SurvivalKnife
       popup: combat-tut-softlock-wide-target
   failures:
   - conditions:
     - !type:HoldInHandsCondition
-      item: FoamBlade
+      item: SurvivalKnife
       inverted: true
     repairStep: CombatTutTakeMelee
   - conditions:
@@ -358,7 +361,7 @@
     repairStep: CombatTutEnableCombatMode
   conditions:
   - !type:MeleeHitListenedCondition
-    target: FoamBlade
+    target: SurvivalKnife
     hitTarget: CombatTutorialTargetHuman
     wide: true
 
@@ -371,21 +374,21 @@
   ttsMessage: combat-tut-return-melee-tts
   uiHighlight:
   - !type:UiByEntityPrototype
-    prototype: FoamBlade
+    prototype: SurvivalKnife
   effects:
   - !type:TutorialComponentEffect
     components:
     - type: TutorialPickupSoftLock
       allowedItems:
-      - FoamBlade
+      - SurvivalKnife
       popup: combat-tut-softlock-return-weapon
     - type: TutorialStorageInsertSoftLock
       items:
-      - FoamBlade
+      - SurvivalKnife
       popup: combat-tut-softlock-return-weapon
     - type: TutorialEquipBlockedSoftLock
       items:
-      - FoamBlade
+      - SurvivalKnife
       blockAllSlots: true
       popup: combat-tut-softlock-return-weapon
     - type: TutorialAttackSoftLock
@@ -393,7 +396,7 @@
       popup: combat-tut-softlock-follow-step
   conditions:
   - !type:DropListenedCondition
-    target: FoamBlade
+    target: SurvivalKnife
 
 - type: tutorialStep
   id: CombatTutTakePistol
@@ -783,7 +786,7 @@
       popup: combat-tut-softlock-follow-step
   conditions:
   - !type:StepDelayCondition
-    delay: 21
+    delay: 17
 
 - type: tutorialStep
   id: CombatTutFinish
@@ -802,10 +805,10 @@
       popup: combat-tut-softlock-follow-step
   conditions:
   - !type:StepDelayCondition
-    delay: 12
+    delay: 10
 
 - type: entity
-  parent: BaseMobHuman
+  parent: MobHuman
   id: CombatTutorialTargetHuman
   name: training partner
   suffix: Tutorial

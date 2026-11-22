@@ -2,8 +2,7 @@
 - type: marking
   id: ReptilianHornsArgali2
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/horns.rsi
     state: horns_argali2
@@ -11,8 +10,7 @@
 - type: marking
   id: ReptilianHornsAyrshire2
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/horns.rsi
     state: horns_ayrshire2
@@ -20,8 +18,7 @@
 - type: marking
   id: ReptilianHornsBambi
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/horns.rsi
     state: horns_bambi
@@ -29,8 +26,7 @@
 - type: marking
   id: ReptilianHornsBig
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/horns.rsi
     state: horns_big
@@ -38,8 +34,7 @@
 - type: marking
   id: ReptilianHornsBighorn2
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/horns.rsi
     state: horns_bighorn2
@@ -47,8 +42,7 @@
 - type: marking
   id: ReptilianHornsCorkscrew
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/horns.rsi
     state: horns_corkscrew
@@ -56,8 +50,7 @@
 - type: marking
   id: ReptilianHornsDeathclaw
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/horns.rsi
     state: horns_deathclaw
@@ -65,8 +58,7 @@
 - type: marking
   id: ReptilianHornsDeathclawgreat
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/horns.rsi
     state: horns_deathclawgreat
@@ -74,8 +66,7 @@
 - type: marking
   id: ReptilianHornsDouble2
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/horns.rsi
     state: horns_double2
@@ -83,8 +74,7 @@
 - type: marking
   id: ReptilianHornsDragon
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/horns.rsi
     state: horns_dragon
@@ -92,8 +82,7 @@
 - type: marking
   id: ReptilianHornsMohawk
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/horns.rsi
     state: horns_mohawk
@@ -101,8 +90,7 @@
 - type: marking
   id: ReptilianHornsOlddragon
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/horns.rsi
     state: horns_olddragon
@@ -110,8 +98,7 @@
 - type: marking
   id: ReptilianHornsMyrsore2
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/horns.rsi
     state: horns_myrsore2
@@ -119,8 +106,7 @@
 - type: marking
   id: ReptilianHornsTrike
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/horns.rsi
     state: horns_trike
@@ -128,8 +114,7 @@
 - type: marking
   id: ReptilianHornsFullSpike
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/horns.rsi
     state: full_spike
@@ -137,8 +122,7 @@
 - type: marking
   id: ReptilianHornsLittleTrike
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/horns.rsi
     state: little_trike
@@ -147,8 +131,7 @@
 - type: marking
   id: ReptilianTailCurved
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/tails.rsi
     state: tail_curved
@@ -158,8 +141,7 @@
 - type: marking
   id: ReptilianTailFlexible
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/tails.rsi
     state: tail_flexible
@@ -169,8 +151,7 @@
 - type: marking
   id: ReptilianTailSpiky
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/tails.rsi
     state: tail_spiky
@@ -180,8 +161,7 @@
 - type: marking
   id: ReptilianTailRidge
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/tails.rsi
     state: tail_ridge
@@ -193,8 +173,7 @@
 - type: marking
   id: ReptilianTailSpike
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/tails.rsi
     state: tail_spike
@@ -204,8 +183,7 @@
 - type: marking
   id: ReptilianTailOverBig
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/tails.rsi
     state: tail_big
@@ -215,8 +193,7 @@
 - type: marking
   id: ReptilianTailOverBigSpike
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/tails.rsi
     state: tail_big_spike
@@ -226,8 +203,7 @@
 - type: marking
   id: ReptilianTailUltraBig
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/tails48.rsi
     state: base
@@ -237,8 +213,7 @@
 - type: marking
   id: ReptilianTailUltraBigSpike
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/tails48.rsi
     state: spike
@@ -248,8 +223,7 @@
 - type: marking
   id: ReptilianTailUltraBigRidge
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/tails48.rsi
     state: base
@@ -262,8 +236,7 @@
 - type: marking
   id: ReptilianChestPrickly
   bodyPart: Back
-  markingCategory: Back
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/body.rsi
     state: body_prickly
@@ -271,8 +244,7 @@
 - type: marking
   id: ReptilianChestRidge
   bodyPart: Back
-  markingCategory: Back
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/body.rsi
     state: body_ridge
@@ -280,8 +252,7 @@
 - type: marking
   id: ReptilianChestUnderbellyF
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/body.rsi
     state: body_underbelly_f
@@ -289,8 +260,7 @@
 - type: marking
   id: ReptilianChestRidgeDouble
   bodyPart: Back
-  markingCategory: Back
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/body.rsi
     state: body_ridge_double
@@ -298,8 +268,7 @@
 - type: marking
   id: ReptilianChestRidgeSmall
   bodyPart: Back
-  markingCategory: Back
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/body.rsi
     state: body_ridge_small
@@ -308,8 +277,7 @@
 - type: marking
   id: ReptilianFrillsCollar
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/frills.rsi
     state: frills_collar
@@ -319,8 +287,7 @@
 - type: marking
   id: ReptilianFrillsFins
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/frills.rsi
     state: frills_fins
@@ -330,8 +297,7 @@
 - type: marking
   id: ReptilianFrillsFinsKing
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/frills.rsi
     state: frills_finsking
@@ -341,8 +307,7 @@
 - type: marking
   id: ReptilianFrillsFinsBig
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/frills.rsi
     state: frills_fins_big
@@ -352,8 +317,7 @@
 - type: marking
   id: ReptilianFrillsRidge
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/frills.rsi
     state: frills_ridge
@@ -361,8 +325,7 @@
 - type: marking
   id: ReptilianFrillsRidgeFull
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/frills.rsi
     state: frills_ridge_full
@@ -370,8 +333,7 @@
 - type: marking
   id: ReptilianFrillsRidgeSmall
   bodyPart: HeadSide
-  markingCategory: HeadSide
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/frills.rsi
     state: frills_ridge_small
@@ -380,9 +342,8 @@
 - type: marking
   id: ReptilianSnoutFlat
   bodyPart: Snout
-  markingCategory: Snout
   forcedColoring: true
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/snout.rsi
     state: snout_flat
@@ -390,9 +351,8 @@
 - type: marking
   id: ReptilianSnoutHigh
   bodyPart: Snout
-  markingCategory: Snout
   forcedColoring: true
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/snout.rsi
     state: snout_high
@@ -400,9 +360,8 @@
 - type: marking
   id: ReptilianSnoutCroc
   bodyPart: Snout
-  markingCategory: Snout
   forcedColoring: true
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/snout.rsi
     state: snout_croc
@@ -410,9 +369,8 @@
 - type: marking
   id: ReptilianSnoutTumb
   bodyPart: Snout
-  markingCategory: Snout
   forcedColoring: true
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/snout.rsi
     state: snout_tumb
@@ -420,9 +378,8 @@
 - type: marking
   id: ReptilianSnoutBeak
   bodyPart: Snout
-  markingCategory: Snout
   forcedColoring: true
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/snout.rsi
     state: snout_beak
@@ -430,9 +387,8 @@
 - type: marking
   id: ReptilianSnoutSmall
   bodyPart: Snout
-  markingCategory: Snout
   forcedColoring: true
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [ Reptilian ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/snout.rsi
     state: snout_small

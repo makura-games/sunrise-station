@@ -5,7 +5,7 @@ namespace Content.Client._Sunrise.UserInterface.Radial;
 
 public sealed partial class RadialContainerCommandTest : LocalizedCommands
 {
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
 
     public override string Command => "radialtest";
 

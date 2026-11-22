@@ -75,8 +75,6 @@
   parent: BaseToolSurgery
   description: A surgical tool used to make incisions into flesh.
   components:
-  - type: Sharp
-    butcherDelayModifier: 1.5 # Butchering with a scalpel, regardless of the type, will take 50% longer
   - type: Tool
     qualities:
       - Cutting
@@ -267,8 +265,10 @@
   components:
   - type: MeleeWeapon
     damage:
-      groups:
-        Brute: 15
+      types:
+        Blunt: 5
+        Slash: 5
+        Piercing: 5
   - type: Sprite
     state: advanced-setter
   - type: Item
@@ -287,7 +287,6 @@
   parent: BaseToolSurgery
   description: For cutting wood and other objects to pieces. Or sawing bones, in case of emergency.
   components:
-  - type: Sharp
   - type: Utensil
     types:
       - Knife
@@ -300,7 +299,8 @@
     storedRotation: 90
   - type: Tool
     qualities:
-      - Sawing
+    - Sawing
+    - Slicing
   - type: SurgeryTool
     startSound:
       path: /Audio/_Sunrise/Medical/Surgery/bone_saw.ogg
@@ -321,8 +321,8 @@
     heldPrefix: improv
   - type: MeleeWeapon
     damage:
-      groups:
-        Brute: 10
+      types:
+        Slash: 10
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Tool
@@ -345,8 +345,8 @@
     heldPrefix: electric
   - type: MeleeWeapon
     damage:
-      groups:
-        Brute: 15
+      types:
+        Slash: 15
     soundHit:
       path: /Audio/Items/drill_hit.ogg
   - type: Tool

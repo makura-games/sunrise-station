@@ -19,7 +19,7 @@
     name: MHelpButton
   conditions:
   - !type:StepDelayCondition
-    delay: 7
+    delay: 9
 
 # Steps where the player moves/walks.
 - type: tutorialStep

@@ -3,18 +3,16 @@
 # This accent makes speech more formal by expanding common abbreviations
 
 # Russian abbreviations moved from chatsanitize
-accent-formal-words-97 = рнд
-accent-formal-words-replace-97 = научный отдел
-accent-formal-words-98 = сб
-accent-formal-words-replace-98 = служба безопасности
-accent-formal-words-99 = кеп
-accent-formal-words-replace-99 = капитан
-accent-formal-words-100 = кэп
-accent-formal-words-replace-100 = капитан
 accent-formal-words-101 = авд
 accent-formal-words-replace-101 = агент внутренних дел
 accent-formal-words-102 = адик
 accent-formal-words-replace-102 = адъютант
+accent-formal-words-103 = вв
+accent-formal-words-replace-103 = ведущий врач
+accent-formal-words-104 = ви
+accent-formal-words-replace-104 = ведущий инженер
+accent-formal-words-105 = ву
+accent-formal-words-replace-105 = ведущий учёный
 accent-formal-words-106 = гп
 accent-formal-words-replace-106 = глава персонала
 accent-formal-words-107 = хоп
@@ -78,7 +76,7 @@ accent-formal-words-replace-135 = офицер центрального кома
 accent-formal-words-136 = исны
 accent-formal-words-replace-136 = офицеры исполнительной судебно-надзорной службы
 accent-formal-words-137 = пнт
-accent-formal-words-replace-137 = представитель NanoTrasen
+accent-formal-words-replace-137 = представитель Нанотрейзен
 accent-formal-words-139 = нио
 accent-formal-words-replace-139 = научный отдел
 accent-formal-words-140 = варденом
@@ -99,5 +97,15 @@ accent-formal-words-147 = нра
 accent-formal-words-replace-147 = научного руководителя
 accent-formal-words-148 = нру
 accent-formal-words-replace-148 = научному руководителю
+
 # Fish-edit-end
 
+# Russian abbreviations moved from chatsanitize
+accent-formal-words-97 = рнд
+accent-formal-words-replace-97 = научный отдел
+accent-formal-words-98 = сб
+accent-formal-words-replace-98 = служба безопасности
+accent-formal-words-99 = кеп
+accent-formal-words-replace-99 = капитан
+accent-formal-words-100 = кэп
+accent-formal-words-replace-100 = капитан

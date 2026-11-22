@@ -10,6 +10,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Nutrition;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
@@ -38,7 +39,9 @@ public sealed partial class TutorialSoftLockSystem
         SubscribeLocalEvent<TutorialBuckleSoftLockComponent, BuckleAttemptEvent>(OnBuckleAttempt);
         SubscribeLocalEvent<TutorialWieldSoftLockComponent, WieldAttemptEvent>(OnWieldAttempt);
 
+        SubscribeLocalEvent<TutorialSoftLockEntityComponent, EdibleEvent>(OnEdible);
         SubscribeLocalEvent<TutorialSoftLockEntityComponent, ActivatableUIOpenAttemptEvent>(OnBuiOpen);
+        SubscribeLocalEvent<TutorialIngestSoftLockComponent, TutorialShouldMarkEntityEvent>(OnIngestShouldMarkEntity);
         SubscribeLocalEvent<TutorialOpenUiSoftLockComponent, TutorialShouldMarkEntityEvent>(OnOpenUiShouldMarkEntity);
     }
 
@@ -89,6 +92,26 @@ public sealed partial class TutorialSoftLockSystem
         ShowPopup(args.Uid, ent.Comp.Popup);
     }
 
+    private void OnEdible(Entity<TutorialSoftLockEntityComponent> ent, ref EdibleEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        foreach (var player in ent.Comp.Players)
+        {
+            if (player != args.User ||
+                !TryComp<TutorialIngestSoftLockComponent>(player, out var softLock) ||
+                !IsAllowedPrototype(ent, softLock.Targets))
+            {
+                continue;
+            }
+
+            args.Cancelled = true;
+            ShowPopup(args.User, softLock.Popup);
+            return;
+        }
+    }
+
     private void OnBuiOpen(Entity<TutorialSoftLockEntityComponent> ent, ref ActivatableUIOpenAttemptEvent args)
     {
         if (args.Cancelled)
@@ -100,8 +123,12 @@ public sealed partial class TutorialSoftLockSystem
         if (!ShouldBlockInteract(softLock.Targets, null, ent, args.User))
             return;
 
-        args.Silent = true;
         args.Cancel();
+
+        if (args.Silent)
+            return;
+
+        args.Silent = true;
         ShowPopup(args.User, softLock.Popup);
     }
 
@@ -113,6 +140,16 @@ public sealed partial class TutorialSoftLockSystem
             return;
 
         if (!HasComp<ActivatableUIComponent>(args.Target))
+            return;
+
+        args.ShouldMark = IsAllowedPrototype(args.Target, ent.Comp.Targets);
+    }
+
+    private void OnIngestShouldMarkEntity(
+        Entity<TutorialIngestSoftLockComponent> ent,
+        ref TutorialShouldMarkEntityEvent args)
+    {
+        if (args.ShouldMark)
             return;
 
         args.ShouldMark = IsAllowedPrototype(args.Target, ent.Comp.Targets);

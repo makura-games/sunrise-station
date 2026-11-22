@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: BaseWallmountGlass
+  parent: [ BaseWallmountGlass, StructureHealthFurnitureWeak ]
   id: Mirror
   name: mirror
   description: 'Mirror mirror on the wall , who''s the most robust of them all?'
@@ -10,27 +10,29 @@
     sprite: Structures/Wallmounts/mirror.rsi
     state: mirror
   # Вырезал ввиду наличия багов + нелогичности в использовании зеркала для смены цвета волос и их размера.
-  # - type: MagicMirror #instant and silent # Sunrise Edit Start
-  #   changeHairSound: null
-  #   addSlotTime: 0
-  #   removeSlotTime: 0
-  #   selectSlotTime: 0
-  #   changeSlotTime: 0
-  # - type: ActivatableUI
-  #   key: enum.MagicMirrorUiKey.Key
-  #   singleUser: true
-  # - type: UserInterface
-  #   interfaces:
-  #     enum.MagicMirrorUiKey.Key:
-  #       type: MagicMirrorBoundUserInterface # Sunrise Edit End
+  #- type: MagicMirror
+  #  organs:
+  #  - Head
+  #  layers:
+  #  - Hair
+  #  - FacialHair
+  #  changeHairSound: null
+  #  modifyTime: 0
+  #- type: ActivatableUI
+  #  key: enum.MagicMirrorUiKey.Key
+  #  singleUser: true
+  #- type: UserInterface
+  #  interfaces:
+  #    enum.MagicMirrorUiKey.Key:
+  #      type: MagicMirrorBoundUserInterface
+  - type: Damageable
+    damageModifierSet: GlassMod
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 5
       behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
       - !type:PlaySoundBehavior
         sound:
           collection: MetalGlassBreak

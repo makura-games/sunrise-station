@@ -8,6 +8,7 @@
     revertOnCrit: false
     revertOnDeath: false
 
+# Превращения Darvinium переносят существующий mind в новую сущность.
 - type: polymorph
   id: PermanentlyHuman
   configuration:
@@ -17,7 +18,6 @@
     inventory: Transfer
     revertOnCrit: false
     revertOnDeath: false
-    blockIfHasMind: true
 
 - type: polymorph
   id: PermanentlyReptilian
@@ -28,7 +28,6 @@
     inventory: Transfer
     revertOnCrit: false
     revertOnDeath: false
-    blockIfHasMind: true
 
 - type: polymorph
   id: PermanentlyTajaran
@@ -40,7 +39,6 @@
     revertOnCrit: false
     revertOnDeath: false
     allowRepeatedMorphs: true
-    blockIfHasMind: true
 
 - type: polymorph
   id: PermanentlySlime
@@ -50,7 +48,6 @@
     transferName: true
     revertOnCrit: false
     revertOnDeath: false
-    blockIfHasMind: true
 
 - type: polymorph
   id: PermanentlyMoth
@@ -61,7 +58,6 @@
     inventory: Transfer
     revertOnCrit: false
     revertOnDeath: false
-    blockIfHasMind: true
 
 - type: polymorph
   id: PermanentlySwine
@@ -72,7 +68,6 @@
     inventory: Transfer
     revertOnCrit: false
     revertOnDeath: false
-    blockIfHasMind: true
 
 - type: polymorph
   id: PermanentlyVox
@@ -82,7 +77,6 @@
     transferName: true
     revertOnCrit: false
     revertOnDeath: false
-    blockIfHasMind: true
 
 - type: polymorph
   id: PermanentlyVulpkanin
@@ -93,7 +87,6 @@
     inventory: Transfer
     revertOnCrit: false
     revertOnDeath: false
-    blockIfHasMind: true
 
 # TODO: Генетика
 #- type: polymorph

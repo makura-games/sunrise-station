@@ -1,3 +1,3 @@
-ent-RandomHumanoidSpawnerBlueShieldOperative = BlueShield Operative
+ent-RandomHumanoidSpawnerBlueShieldOperative = blueShield Operative
     .suffix = BlueShieldRole, Basic
     .desc = { ent-RandomHumanoidSpawnerERTLeader.desc }

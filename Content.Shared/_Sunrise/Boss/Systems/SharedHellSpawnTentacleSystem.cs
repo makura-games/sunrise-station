@@ -1,13 +1,13 @@
-﻿using Content.Shared._Sunrise.Boss.Components;
+using Content.Shared._Sunrise.Boss.Components;
 using Content.Shared.Actions;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Sunrise.Boss.Systems;
 
 /// <inheritdoc/>
-public abstract class SharedHellSpawnTentacleSystem : EntitySystem
+public abstract partial class SharedHellSpawnTentacleSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     // Статические значения
 

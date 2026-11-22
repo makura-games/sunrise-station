@@ -1,4 +1,3 @@
-﻿using Content.Shared.Body.Part;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Item;
 using Robust.Shared.GameStates;
@@ -15,7 +14,7 @@ namespace Content.Shared.Starlight.Medical.Surgery.Effects.Step;
 public sealed partial class SurgeryLimbSlotConditionComponent : Component
 {
     [DataField]
-    public string Slot;
+    public string Slot = string.Empty;
 }
 
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedSurgerySystem))]
@@ -29,38 +28,42 @@ public sealed partial class SurgeryItemSizeConditionComponent : Component
 public sealed partial class SurgeryPartConditionComponent : Component
 {
     [DataField]
-    public List<BodyPartType> Parts = [];
+    public List<string> Parts = [];
 }
+
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedSurgerySystem))]
 public sealed partial class SurgerySpeciesConditionComponent : Component
 {
     [DataField]
     public HashSet<ProtoId<SpeciesPrototype>> SpeciesBlacklist = [];
-    
+
     [DataField]
     public HashSet<ProtoId<SpeciesPrototype>> SpeciesWhitelist = [];
 }
+
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedSurgerySystem))]
 public sealed partial class SurgeryOrganExistConditionComponent : Component
 {
     [DataField]
     public ComponentRegistry? Organ;
-    
+
     [DataField]
     public string? Container;
 }
+
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedSurgerySystem))]
 public sealed partial class SurgeryHasCompConditionComponent : Component
 {
     [DataField]
     public ComponentRegistry? Component;
 }
+
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedSurgerySystem))]
 public sealed partial class SurgeryOrganDontExistConditionComponent : Component
 {
     [DataField]
     public ComponentRegistry? Organ;
-    
+
     [DataField]
     public string? Container;
 }

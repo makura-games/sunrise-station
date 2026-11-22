@@ -27,6 +27,7 @@
   components:
   - type: VendingMachine
     pack: MailDrobeInventory
+  - type: VendingMachineVisuals
     offState: off
     brokenState: broken
     normalState: normal-unshaded
@@ -49,15 +50,16 @@
     color: "#4b93ad"
 
 - type: entity
-  parent: VendingMachine
+  parent: BaseVendingMachine
   id: VendingMachineMNKDrobe
   name: MNK Drobe
   description: Quality garments provided by MoNoKrome.
   components:
-  #- type: VendingMachine
-  #  pack: MNKDrobeInventory
-  #  offState: off
-  #  brokenState: broken
+  - type: VendingMachine
+    pack: MNKDrobeInventory
+  - type: VendingMachineVisuals
+    offState: off
+    brokenState: broken
   - type: Sprite
     sprite: _Sunrise/Structures/Machines/VendingMachines/mnkdrobe.rsi
     layers:
@@ -74,6 +76,7 @@
   components:
   - type: VendingMachine
     pack: PaintVendInventory
+  - type: VendingMachineVisuals
     offState: off
     brokenState: broken
     normalState: normal-unshaded
@@ -104,12 +107,14 @@
   components:
     - type: VendingMachine
       pack: AbductorGlandInventory
+      forceRandom: RandomOrganDubious
+    - type: VendingMachineVisuals
       offState: icon
       brokenState: icon
       normalState: icon
       denyState: icon
+    - type: VendingMachineEject
       ejectDelay: 2
-      forceRandom: RandomOrganDubious
     - type: Sprite
       sprite: _Sunrise/Abductor/Structures/abductor_dispencer.rsi
       layers:
@@ -130,10 +135,12 @@
   components:
   - type: VendingMachine
     pack: LiberationInventory
+  - type: VendingMachineVisuals
     offState: off
     brokenState: broken
     normalState: normal-unshaded
     # denyState: deny-unshaded
+  - type: VendingMachineEject
     soundVend:
       path: /Audio/_Sunrise/Items/merikayeah.ogg
       params:
@@ -166,10 +173,12 @@
   components:
   - type: VendingMachine
     pack: TankDispenserEVAInventory
+  - type: VendingMachineVisuals
     offState: off
     brokenState: broken
     normalState: normal-unshaded
     denyState: deny-unshaded
+  - type: VendingMachineEject
     soundVend:
       path: /Audio/_Sunrise/Items/GasTanks/remove.ogg
       params:
@@ -199,13 +208,16 @@
   #   guides:
   #   - ####
 - type: entity
-  parent: VendingMachine
+  parent: BaseVendingMachine
   id: VendingMachineDressCloset
   name: dress closet
   description: To be perfect.
   components:
   - type: VendingMachine
     pack: DressClosetInventory
+  - type: VendingMachineVisuals
+    offState: off
+    brokenState: broken
   - type: Sprite
     sprite: _Sunrise/Structures/Machines/VendingMachines/dresscloset.rsi
     layers:
@@ -222,6 +234,7 @@
   components:
   - type: VendingMachine
     pack: InstrumentsMateInventory
+  - type: VendingMachineVisuals
     offState: off
     normalState: normal-unshaded
   - type: Vocalizer

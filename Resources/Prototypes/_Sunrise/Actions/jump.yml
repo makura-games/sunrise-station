@@ -6,10 +6,11 @@
   components:
   - type: Action
     useDelay: 20
-    icon:
-      sprite: _Sunrise/Actions/zombie.rsi
-      state: jump
     itemIconStyle: NoItem
+  - type: Sprite
+    sprite: _Sunrise/Actions/zombie.rsi
+    layers:
+    - state: jump
   - type: TargetAction
     range: 200
     checkCanAccess: false
@@ -24,9 +25,10 @@
   - type: Action
     useDelay: 1
     itemIconStyle: NoItem
-    icon:
-      sprite: _Sunrise/Actions/resomi.rsi
-      state: bird_call
+  - type: Sprite
+    sprite: _Sunrise/Actions/resomi.rsi
+    layers:
+    - state: bird_call
   - type: LimitedCharges
     maxCharges: 3
   - type: AutoRecharge

@@ -1,6 +1,10 @@
 communication-tutorial-name = Communication and radio
 communication-tutorial-tooltip = Learn to use local chat, whispering, emotes, LOOC, radio, and messenger.
 
+comm-tut-welcome-bubble = Welcome! This tutorial covers chat, radio, and messenger communication.
+comm-tut-welcome-chat = Welcome! You will learn how to speak, whisper, use emotes and LOOC, communicate over common and department radio, use the messenger, and find help channels.
+comm-tut-welcome-tts = Welcome! You will learn how to speak, whisper, use emotes and LOOC, communicate over common and department radio, use the messenger, and find help channels.
+
 comm-tut-local-chat-bubble = Write a short phrase in local chat. For example: "Hello".
 comm-tut-local-chat-chat = First, let's check normal speech. Local chat is only heard by people standing near you.
 comm-tut-local-chat-tts = First, let's check normal speech. Local chat is only heard by people standing near you.
@@ -33,13 +37,9 @@ comm-tut-radio-ui-bubble = Examine the headset in your ears slot with [tutkeybin
 comm-tut-radio-ui-chat = Your headset decides which channels you can use. You have an engineering headset: besides common, it gives you engineering.
 comm-tut-radio-ui-tts = Your headset decides which channels you can use. You have an engineering headset: besides common, it gives you engineering.
 
-comm-tut-department-radio-explain-bubble = The engineering frequency key is :e. Put it at the very start, add a space, then write your message.
-comm-tut-department-radio-explain-chat = Use “:e” for engineering. The letter depends on the selected channel and your current keyboard layout.
-comm-tut-department-radio-explain-tts = The engineering frequency key is colon E. Put it at the very start of the message, add a space, and then write your request.
-
-comm-tut-department-radio-bubble = Write in the engineering channel. You can start the message with :e, for example: ":e Need help in maintenance".
-comm-tut-department-radio-chat = Departments often handle their tasks in departmental channels. This creates less noise for the whole station.
-comm-tut-department-radio-tts = Start the message with colon E and send it to engineering. This keeps unnecessary traffic out of common.
+comm-tut-department-radio-bubble = Send a message to engineering: start it with :e, add a space, and write the text, for example: ":e Need help in maintenance".
+comm-tut-department-radio-chat = The engineering channel is available through your headset. With an English keyboard layout, use “:e” at the start so your department hears the request without adding noise to common.
+comm-tut-department-radio-tts = The engineering channel is available through your headset. With an English keyboard layout, start the message with colon E, add a space, and write the text. Your department will hear the request without adding noise to common.
 
 comm-tut-help-request-example-bubble = A good help request is short and clear: where you are, what happened, and what help you need.
 comm-tut-help-request-example-chat = Example: "Engineering, maint tunnel near brig, no power, need an engineer". Try to include the place, the problem, and the action needed.

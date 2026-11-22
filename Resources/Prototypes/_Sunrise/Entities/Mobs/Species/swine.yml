@@ -1,20 +1,56 @@
 - type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceSwine
+  name: swine appearance
+  components:
+  - type: InitialBody
+    organs:
+      Torso: TorsoSwine
+      Head: HeadSwine
+      ArmLeft: LeftArmSwine
+      ArmRight: RightArmSwine
+      HandRight: RightHandSwine
+      HandLeft: LeftHandSwine
+      LegLeft: LeftLegSwine
+      LegRight: RightLegSwine
+      FootLeft: LeftFootSwine
+      FootRight: RightFootSwine
+      Brain: OrganHumanBrain
+      Eyes: OrganHumanEyes
+      Tongue: OrganHumanTongue
+      Heart: OrganAnimalHeart
+      Lungs: OrganHumanLungs
+      Stomach: OrganSwineStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganHumanKidneys
+
+- type: entity
   name: Urist McPig
-  parent: BaseMobSpeciesOrganic
+  parent:
+  - AppearanceSwine
+  - BaseSpeciesMobOrganic
   id: BaseMobSwine
   abstract: true
   components:
   - type: Interactions
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Swine
-  - type: Hunger
-    baseDecayRate: 0.08
-  - type: Thirst
-    baseDecayRate: 0.15
-    dehydrationDamage:
-      types:
-        Bloodloss: 0.5
-        Asphyxiation: 0.5
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: SunriseFastHunger
+      Thirst:
+        prototype: SunriseFastThirst
+  - type: SatiationDamage
+    satiations:
+      Thirst:
+        thresholds:
+          Dead:
+            types:
+              Bloodloss: 0.5
+              Asphyxiation: 0.5
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Swine/parts.rsi
     state: full
@@ -23,7 +59,6 @@
     speechVerb: Swine
     allowedEmotes: ['Oink']
   - type: MovementSpeedModifier
-    baseSprintSpeed: 0.9
   - type: SlowOnDamage
     speedModifierThresholds:
       80: 0.9
@@ -47,20 +82,14 @@
         - MobMask
         layer:
         - MobLayer
-  - type: Body
-    prototype: Swine
-    requiredLegs: 2
   - type: Vocal
-    sounds:
-      Male: UnisexSwine
-      Female: UnisexSwine
-      Unsexed: UnisexSwine
+    emoteSounds: UnisexSwine
   - type: SwineAccent
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Swine
+  - type: Injurable
+    damageContainer: Biological
   - type: Butcherable
-    butcheringType: Spike # TODO human.
     spawned:
     - id: FoodMeatSwine
       amount: 5
@@ -71,10 +100,12 @@
 - type: entity
   save: false
   name: Urist McHands
-  parent: MobHumanDummy
+  parent: AppearanceSwine
   id: MobSwineDummy
   categories: [ HideSpawnMenu ]
   description: A dummy swine meant to be used in character setup.
   components:
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Swine
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers

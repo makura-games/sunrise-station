@@ -11,7 +11,7 @@ The rule of this skill is: **if there is a conflict, the current code wins**.
 | Reduced allocations | Recommendations for reusing memory | Uses `ValueList` as fields and `ArrayPool` for temporary buffers | Reuse collections, don't create them for every frame |
 | Abandoning LINQ in hot-path | Indirectly through perf guides and examples | Critical loops are mostly written via `for/foreach` | In hot LINQ code, replace with explicit loops |
 | `Component + ActiveComponent` | ECS State through Components Architecture | Active markers are actually used to narrow query | Use Active Components for Limited Sampling |
-| `EntityQuery` for `TryComp/HasComp/Resolve` | Query API Recommendations | Systems cache `EntityQuery<T>` and use its methods | For frequent checks, go to the query cache |
+| `EntityQuery` for `TryComp/HasComp/Resolve` | Query API Recommendations | `EntitySystem` получает `EntityQuery<T>` из системной dependency-коллекции; глобальная IoC его не регистрирует | Для частых проверок в системе использовать dependency-query, вне системы выбирать `IEntityManager` или передачу через конструктор |
 | Component order in `EntityQueryEnumerator` | Not always clearly stated in docs | In runtime there is a direct comment about the rare first component | Put the rarest component first |
 | `ByRef record struct` events | There is guidance about by-ref events | In server/shared there are `[ByRefEvent] record struct` + `RaiseLocalEvent(..., ref ...)` | For frequent local events, use the by-ref structure |
 | `DirtyField` vs `Dirty` | There are recommendations about field deltas | In network components with multiple fields, use `DirtyField` | When changing a field selectively, select `DirtyField` |

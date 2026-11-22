@@ -55,14 +55,33 @@ public sealed partial class TutorialSequencePrototype : IPrototype
     public EntProtoId PlayerEntity;
 
     /// <summary>
-    ///     Duration of tutorial
+    ///     Maximum runtime before the tutorial is ended automatically.
     /// </summary>
     [DataField(required: true)]
     public TimeSpan Duration;
+
+    /// <summary>
+    ///     Estimated completion time displayed in the tutorial selection UI.
+    /// </summary>
+    [DataField(required: true)]
+    public TutorialDurationRange EstimatedDuration;
 
     /// <summary>
     ///     Ordered list of tutorial steps that make up this sequence.
     /// </summary>
     [DataField]
     public List<ProtoId<TutorialStepPrototype>> Steps = [];
+}
+
+/// <summary>
+///     Estimated minimum and maximum tutorial completion time.
+/// </summary>
+[DataDefinition]
+public readonly partial record struct TutorialDurationRange
+{
+    [DataField(required: true)]
+    public TimeSpan Minimum { get; init; }
+
+    [DataField(required: true)]
+    public TimeSpan Maximum { get; init; }
 }

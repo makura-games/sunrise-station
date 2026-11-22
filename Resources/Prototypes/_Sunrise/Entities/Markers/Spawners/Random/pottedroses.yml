@@ -8,14 +8,14 @@
       - state: red
       - sprite: Structures/Furniture/potted_plants.rsi
         state: random
-  - type: RandomSpawner
+  - type: EntityTableSpawner
     offset: 0
-    prototypes:
-      - PottedPlantRose
-      - PottedPlantRose1
-      - PottedPlantRose2
-      - PottedPlantRose3
-      - PottedPlantRose4
-      - PottedPlantRose5
-      - PottedPlantRose6
-    chance: 1
+    table: !type:GroupSelector
+      children:
+      - id: PottedPlantRose
+      - id: PottedPlantRose1
+      - id: PottedPlantRose2
+      - id: PottedPlantRose3
+      - id: PottedPlantRose4
+      - id: PottedPlantRose5
+      - id: PottedPlantRose6

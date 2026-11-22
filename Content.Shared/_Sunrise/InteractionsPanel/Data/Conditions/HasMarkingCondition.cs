@@ -1,4 +1,4 @@
-using Content.Shared.Humanoid;
+using Content.Shared.Body;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._Sunrise.InteractionsPanel.Data.Conditions;
@@ -28,15 +28,19 @@ public sealed partial class HasMarkingCondition : IAppearCondition
 
     private bool HasAnyMarking(EntityUid uid, EntityManager entMan)
     {
-        if (!entMan.TryGetComponent<HumanoidAppearanceComponent>(uid, out var appearance))
+        var visualBody = entMan.System<SharedVisualBodySystem>();
+        if (!visualBody.TryGatherMarkingsData(uid, null, out _, out _, out var applied))
             return false;
 
-        foreach (var markingList in appearance.MarkingSet.Markings.Values)
+        foreach (var layerMap in applied.Values)
         {
-            foreach (var marking in markingList)
+            foreach (var markingList in layerMap.Values)
             {
-                if (MarkingWhitelist.Contains(marking.MarkingId))
-                    return true;
+                foreach (var marking in markingList)
+                {
+                    if (MarkingWhitelist.Contains(marking.MarkingId))
+                        return true;
+                }
             }
         }
 

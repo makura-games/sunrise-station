@@ -1,5 +1,6 @@
 using Content.Server.Atmos.Components;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Atmos.EntitySystems;
 using Robust.Shared.Map.Components;
 
 namespace Content.Server.Atmos.EntitySystems;
@@ -34,6 +35,7 @@ public sealed partial class AtmosphereSystem
             AtmosphereProcessingState.HighPressureDelta => ProcessHighPressureDelta(ent),
             AtmosphereProcessingState.DeltaPressure => ProcessDeltaPressure(ent),
             AtmosphereProcessingState.Hotspots => ProcessHotspots(ent),
+            AtmosphereProcessingState.ChargedElectrovae => ProcessChargedElectrovaeTiles(ent), // Sunrise-Edit
             AtmosphereProcessingState.Superconductivity => ProcessSuperconductivity(ent),
             AtmosphereProcessingState.PipeNet => ProcessPipeNets(ent),
             AtmosphereProcessingState.AtmosDevices => mapEnt is not null

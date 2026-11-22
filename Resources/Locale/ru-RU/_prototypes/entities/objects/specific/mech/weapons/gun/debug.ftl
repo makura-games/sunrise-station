@@ -1,5 +1,5 @@
 ent-WeaponMechDebugBallistic = дебаг бенг
-    .suffix = Оружие мехов, ДЕБАГ, Ballistic
+    .suffix = Оружие мехов, ДЕБАГ, баллистика
     .desc = { ent-BaseMechWeaponRange.desc }
 ent-WeaponMechDebugLaser = дебаг пау
     .desc = Оружие, использующее свет, усиленный стимулированным излучением.

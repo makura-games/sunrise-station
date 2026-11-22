@@ -24,14 +24,14 @@ namespace Content.Client._Sunrise.Lobby.UI;
 [GenerateTypedNameReferences]
 public sealed partial class SunriseLobbyGui : UIScreen
 {
-    [Dependency] private readonly IClientConsoleHost _console = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IParallaxManager _parallax = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IResourceCache _resource = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IUriOpener _uri = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private IClientConsoleHost _console = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IParallaxManager _parallax = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IResourceCache _resource = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IUriOpener _uri = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     public string LobbyParallax = "FastSpace";
     public bool ShowParallax;

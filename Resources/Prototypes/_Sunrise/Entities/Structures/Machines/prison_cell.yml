@@ -27,6 +27,7 @@
     rowOffset: 6
     rows: 2
     rowLength: 6
+    scrollEnabled: false
 
 - type: entity
   parent: LockerSecurity

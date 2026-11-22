@@ -1,5 +1,4 @@
-using System.Text;
-using Content.Server.Administration.Managers;
+﻿using Content.Server.Administration.Managers; // Sunrise-Edit - события помилования
 using Content.Server.Database;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
@@ -7,15 +6,16 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands
 {
     [AdminCommand(AdminFlags.Ban)]
-    public sealed class PardonCommand : LocalizedCommands
+    public sealed partial class PardonCommand : LocalizedCommands
     {
-        [Dependency] private readonly IServerDbManager _dbManager = default!;
+        [Dependency] private IServerDbManager _dbManager = default!;
+        [Dependency] private IBanManager _banManager = default!; // Sunrise-Edit
 
         public override string Command => "pardon";
 
         public override async void Execute(IConsoleShell shell, string argStr, string[] args)
         {
-            var banMan = IoCManager.Resolve<IBanManager>();
+            var player = shell.Player;
 
             if (args.Length != 1)
             {
@@ -29,7 +29,7 @@ namespace Content.Server.Administration.Commands
                 return;
             }
 
-            var ban = await _dbManager.GetServerBanAsync(banId);
+            var ban = await _dbManager.GetBanAsync(banId);
 
             if (ban == null)
             {
@@ -52,7 +52,7 @@ namespace Content.Server.Administration.Commands
                 return;
             }
 
-            await banMan.PardonBan(shell.Player, banId, ban); // Sunrise-Edit
+            await _banManager.PardonBan(player, banId, ban); // Sunrise-Edit
 
             shell.WriteLine(Loc.GetString($"cmd-pardon-success", ("id", banId)));
         }

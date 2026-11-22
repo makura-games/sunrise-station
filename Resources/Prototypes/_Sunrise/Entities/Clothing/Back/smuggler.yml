@@ -22,6 +22,8 @@
     state: parcel-medium
   - type: Item
     size: Small
+  - type: WrappedParcel
+    getsSizeFromContent: false
   - type: EntityTableContainerFill
     containers:
       contents: !type:NestedSelector
@@ -38,6 +40,8 @@
     state: parcel-medium
   - type: Item
     size: Normal
+  - type: WrappedParcel
+    getsSizeFromContent: false
   - type: EntityTableContainerFill
     containers:
       contents: !type:NestedSelector

@@ -1,0 +1,13 @@
+humanoid-profile-editor-body-type-label = Body type:
+body-normal = Standard
+body-slim = Slim
+body-slim-f = Slim
+body-slim-m = Slim
+body-fat-f = Heavy
+body-fat-m = Heavy
+body-giga-f = Muscular
+body-giga-m = Muscular
+body-distrofik-f = Emaciated
+body-distrofik-m = Emaciated
+body-curved-tajaran = Curved legs
+body-slim-tajaran = Slim

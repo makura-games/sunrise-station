@@ -8,11 +8,11 @@ namespace Content.Server._Sunrise.Biocode.Systems;
 /// <summary>
 /// Server-side implementation of biocode deactivation system.
 /// </summary>
-public sealed class ServerBiocodeDeactivationSystem : BiocodeDeactivationSystem
+public sealed partial class ServerBiocodeDeactivationSystem : BiocodeDeactivationSystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly PinpointerSystem _pinpointerSystem = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private PinpointerSystem _pinpointerSystem = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     private static readonly ISawmill Sawmill = Logger.GetSawmill("biocode.deactivation");
 
@@ -27,7 +27,7 @@ public sealed class ServerBiocodeDeactivationSystem : BiocodeDeactivationSystem
         if (TryComp<PinpointerComponent>(uid, out var pinpointer))
         {
             // Always ensure the pinpointer is deactivated
-            _pinpointerSystem.SetActive(uid, false, pinpointer);
+            _pinpointerSystem.SetActive((uid, pinpointer), false);
 
             // Force update appearance to ensure visual state is correct
             if (TryComp<AppearanceComponent>(uid, out var appearance))

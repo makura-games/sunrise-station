@@ -17,6 +17,24 @@
 		"name": "base"
 	},
 	{
+		"name": "icon_white"
+	},
+	{
+		"name": "bolt-open_white"
+	},
+	{
+		"name": "base_white"
+	},
+	{
+		"name": "icon_green"
+	},
+	{
+		"name": "bolt-open_green"
+	},
+	{
+		"name": "base_green"
+	},
+	{
 		"name": "mag-0"
     },
 	{

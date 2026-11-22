@@ -1,3 +1,4 @@
+#nullable enable
 using System.Numerics;
 using Content.IntegrationTests.Pair;
 using Content.Server._Sunrise.Shuttles.Components;
@@ -76,7 +77,7 @@ public sealed class ArrivalsTest
 
         await server.WaitPost(() =>
         {
-            var other = server.MapMan.CreateGridEntity(map.MapId);
+            var other = mapSys.CreateGridEntity(map.MapId);
             mapSys.SetTile(other.Owner, other.Comp, Vector2i.Zero, new Tile(1));
             xformSys.SetLocalPosition(other.Owner, Landing);
 
@@ -177,7 +178,7 @@ public sealed class ArrivalsTest
 
         await server.WaitPost(() =>
         {
-            var grid = server.MapMan.CreateGridEntity(mapId);
+            var grid = mapSys.CreateGridEntity(mapId);
             shuttleUid = grid.Owner;
 
             for (var x = -2; x <= 2; x++)
@@ -203,7 +204,7 @@ public sealed class ArrivalsTest
         var mapSys = server.System<SharedMapSystem>();
         var xformSys = server.System<SharedTransformSystem>();
 
-        var grid = server.MapMan.CreateGridEntity(mapId);
+        var grid = mapSys.CreateGridEntity(mapId);
         foreach (var tile in tiles)
         {
             mapSys.SetTile(grid.Owner, grid.Comp, tile, new Tile(1));

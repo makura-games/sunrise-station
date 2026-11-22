@@ -1,8 +1,7 @@
 - type: marking
   id: Belly1
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_chest.rsi
       state: belly1
@@ -10,8 +9,7 @@
 - type: marking
   id: Belly2
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_chest.rsi
       state: belly2
@@ -19,8 +17,7 @@
 - type: marking
   id: Belly3
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_chest.rsi
       state: belly3
@@ -28,8 +25,7 @@
 - type: marking
   id: Belly4
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_chest.rsi
       state: chest
@@ -37,8 +33,7 @@
 - type: marking
   id: BodyStripes
   bodyPart: LLeg
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: stripes_body
@@ -46,8 +41,7 @@
 - type: marking
   id: BodyBlots
   bodyPart: LLeg
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: blots_body
@@ -55,8 +49,7 @@
 - type: marking
   id: patch2
   bodyPart: LLeg
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: patch
@@ -64,8 +57,7 @@
 - type: marking
   id: BodySkeleton
   bodyPart: LLeg
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: skeleton_body
@@ -73,8 +65,7 @@
 - type: marking
   id: BodyStripesLArm
   bodyPart: LArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: stripes_l_arm
@@ -82,8 +73,7 @@
 - type: marking
   id: BodyStripesRArm
   bodyPart: RArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: stripes_r_arm
@@ -91,8 +81,7 @@
 - type: marking
   id: BodyStripesLLeg
   bodyPart: LLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: stripes_l_leg
@@ -100,8 +89,7 @@
 - type: marking
   id: BodyStripesRLeg
   bodyPart: RLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: stripes_r_leg
@@ -109,8 +97,7 @@
 - type: marking
   id: BodyBlotsLArm
   bodyPart: LArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: blots_l_arm
@@ -118,8 +105,7 @@
 - type: marking
   id: BodyBlotsRArm
   bodyPart: RArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: blots_r_arm
@@ -127,8 +113,7 @@
 - type: marking
   id: BodyBlotsLLeg
   bodyPart: LLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: blots_l_leg
@@ -136,8 +121,7 @@
 - type: marking
   id: BodyBlotsRLeg
   bodyPart: RLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: blots_r_leg
@@ -145,8 +129,7 @@
 - type: marking
   id: BodyPatch2LArm
   bodyPart: LArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: patch_l_arm
@@ -154,8 +137,7 @@
 - type: marking
   id: BodyPatch2RArm
   bodyPart: RArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: patch_r_arm
@@ -163,8 +145,7 @@
 - type: marking
   id: BodyPatch2LLeg
   bodyPart: LLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: patch_l_leg
@@ -172,8 +153,7 @@
 - type: marking
   id: BodyPatch2RLeg
   bodyPart: RLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: patch_r_leg
@@ -181,8 +161,7 @@
 - type: marking
   id: BodySkeletonLArm
   bodyPart: LArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: skeleton_l_arm
@@ -190,8 +169,7 @@
 - type: marking
   id: BodySkeletonRArm
   bodyPart: RArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: skeleton_r_arm
@@ -199,8 +177,7 @@
 - type: marking
   id: BodySkeletonLLeg
   bodyPart: LLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: skeleton_l_leg
@@ -208,8 +185,7 @@
 - type: marking
   id: BodySkeletonRLeg
   bodyPart: RLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_overlay.rsi
       state: skeleton_r_leg
@@ -217,8 +193,7 @@
 - type: marking
   id: TailWingler3
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
       state: tail_m
@@ -228,8 +203,7 @@
 - type: marking
   id: TailWingler2
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
       state: tail_m
@@ -239,8 +213,7 @@
 - type: marking
   id: TailWingler1
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
       state: tail_m
@@ -250,8 +223,7 @@
 - type: marking
   id: TailTip
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
       state: tail_m
@@ -261,8 +233,7 @@
 - type: marking
   id: TailRing
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
       state: tail_m
@@ -272,8 +243,7 @@
 - type: marking
   id: TailSkeleton
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
       state: tail_m
@@ -283,8 +253,7 @@
 - type: marking
   id: TailFluffy
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
       state: tail_m
@@ -294,8 +263,7 @@
 - type: marking
   id: TajaranTailDefault
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
       state: tail_m
@@ -303,8 +271,7 @@
 - type: marking
   id: Head1
   bodyPart: Head
-  markingCategory: HeadTop
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_head.rsi
       state: outears
@@ -314,8 +281,7 @@
 - type: marking
   id: Head5
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_head.rsi
       state: nose
@@ -323,8 +289,7 @@
 - type: marking
   id: Head7
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_head.rsi
       state: patch_2
@@ -332,8 +297,7 @@
 - type: marking
   id: Head8
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_head.rsi
       state: tiger_face
@@ -341,8 +305,7 @@
 - type: marking
   id: Head9
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_head.rsi
       state: tiger_head
@@ -350,8 +313,7 @@
 - type: marking
   id: HeadEyesStripes
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_head.rsi
       state: eye_stripes_head
@@ -359,8 +321,7 @@
 - type: marking
   id: HeadStar
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_head.rsi
       state: star_head
@@ -368,8 +329,7 @@
 - type: marking
   id: HeadRacoon
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_head.rsi
       state: raccoon-head
@@ -377,8 +337,7 @@
 - type: marking
   id: HeadMane
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_head.rsi
       state: mane_head
@@ -386,8 +345,7 @@
 - type: marking
   id: Head4
   bodyPart: Head
-  markingCategory: Snout
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_head.rsi
       state: muzzleinears
@@ -395,8 +353,7 @@
 - type: marking
   id: Head2
   bodyPart: Head
-  markingCategory: Snout
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_head.rsi
       state: muzzle
@@ -404,8 +361,7 @@
 - type: marking
   id: BodyAshwalker
   bodyPart: LLeg
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: ashwalker
@@ -413,8 +369,7 @@
 - type: marking
   id: BodyCheetor
   bodyPart: LLeg
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: cheetor
@@ -422,8 +377,7 @@
 - type: marking
   id: BodyPaintedBack
   bodyPart: LLeg
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: painted_back
@@ -431,8 +385,7 @@
 - type: marking
   id: BodySpottyShoulders
   bodyPart: LLeg
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: spotty_shoulders
@@ -440,8 +393,7 @@
 - type: marking
   id: BodyAshwalkerLArm
   bodyPart: LArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: ashwalker_l_arm
@@ -449,8 +401,7 @@
 - type: marking
   id: BodyAshwalkerRArm
   bodyPart: RArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: ashwalker_r_arm
@@ -458,8 +409,7 @@
 - type: marking
   id: BodyAshwalkerLLeg
   bodyPart: LLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: ashwalker_l_leg
@@ -467,8 +417,7 @@
 - type: marking
   id: BodyAshwalkerRLeg
   bodyPart: RLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: ashwalker_r_leg
@@ -476,8 +425,7 @@
 - type: marking
   id: BodyCheetorLArm
   bodyPart: LArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: cheetor_l_arm
@@ -485,8 +433,7 @@
 - type: marking
   id: BodyCheetorRArm
   bodyPart: RArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: cheetor_r_arm
@@ -494,8 +441,7 @@
 - type: marking
   id: BodyCheetorLLeg
   bodyPart: LLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: cheetor_l_leg
@@ -503,8 +449,7 @@
 - type: marking
   id: BodyCheetorRLeg
   bodyPart: RLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: cheetor_r_leg
@@ -512,8 +457,7 @@
 - type: marking
   id: BodyPaintedBackLArm
   bodyPart: LArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: painted_back_l_arm
@@ -521,8 +465,7 @@
 - type: marking
   id: BodyPaintedBackRArm
   bodyPart: RArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: painted_back_r_arm
@@ -530,8 +473,7 @@
 - type: marking
   id: BodyPaintedBackLLeg
   bodyPart: LLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: painted_back_l_leg
@@ -539,8 +481,7 @@
 - type: marking
   id: BodyPaintedBackRLeg
   bodyPart: RLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: painted_back_r_leg
@@ -548,8 +489,7 @@
 - type: marking
   id: BodySpottyShouldersLArm
   bodyPart: LArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: spotty_shoulders_l_arm
@@ -557,8 +497,7 @@
 - type: marking
   id: BodySpottyShouldersRArm
   bodyPart: RArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: spotty_shoulders_r_arm
@@ -566,8 +505,7 @@
 - type: marking
   id: BodySpottyShouldersLLeg
   bodyPart: LLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: spotty_shoulders_l_leg
@@ -575,8 +513,7 @@
 - type: marking
   id: BodySpottyShouldersRLeg
   bodyPart: RLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: spotty_shoulders_r_leg
@@ -584,8 +521,7 @@
 - type: marking
   id: TailDamaged
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: tail_damaged
@@ -593,8 +529,7 @@
 - type: marking
   id: HeadEyeColor
   bodyPart: Eyes
-  markingCategory: Head
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: eye_color
@@ -602,8 +537,7 @@
 - type: marking
   id: HeadJaguarFacemarks
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: jaguar_facemarks
@@ -611,8 +545,7 @@
 - type: marking
   id: HeadTopEarsFloppy
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: ears_floppy
@@ -620,8 +553,7 @@
 - type: marking
   id: HeadTopCutEarLeft
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: cut_ear_left
@@ -629,8 +561,7 @@
 - type: marking
   id: HeadTopCutEarRight
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: cut_ear_right
@@ -638,8 +569,7 @@
 - type: marking
   id: HeadTopEarringLeft
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: earring_left
@@ -647,8 +577,7 @@
 - type: marking
   id: HeadTopEarringRight
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: earring_right
@@ -656,8 +585,7 @@
 - type: marking
   id: FacialHairCheeks1
   bodyPart: Snout
-  markingCategory: Snout
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: cheeks_1
@@ -665,8 +593,7 @@
 - type: marking
   id: FacialHairCheeksLynx
   bodyPart: Snout
-  markingCategory: Snout
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: lynx_cheeks
@@ -674,8 +601,7 @@
 - type: marking
   id: FacialHairCheeksMassive
   bodyPart: Snout
-  markingCategory: Snout
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: massive_cheeks
@@ -683,8 +609,7 @@
 - type: marking
   id: FacialHairCheeksPuffy
   bodyPart: Snout
-  markingCategory: Snout
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [ Tajaran ]
   sprites:
     - sprite: _Sunrise/Mobs/Customization/Tajaran/tajaran_custom.rsi
       state: puffy_cheeks

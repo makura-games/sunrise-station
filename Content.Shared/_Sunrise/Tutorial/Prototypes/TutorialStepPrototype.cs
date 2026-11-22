@@ -74,7 +74,7 @@ public sealed partial class TutorialStepPrototype : IPrototype, IInheritingProto
     ///     TTS voice prototype used to play the TTS message.
     /// </summary>
     [DataField]
-    public ProtoId<TTSVoicePrototype> VoiceId = "ember_spirit_dota_2";
+    public ProtoId<TTSVoicePrototype> VoiceId = "DictorVsevolodKuznetsov";
 
     /// <summary>
     ///     If true, this step may be skipped without blocking tutorial progress.

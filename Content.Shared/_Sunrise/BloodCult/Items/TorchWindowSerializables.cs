@@ -9,7 +9,7 @@ public enum CultTeleporterUiKey
 }
 
 [Serializable, NetSerializable]
-public class TorchWindowItemSelectedMessage : BoundUserInterfaceMessage
+public sealed class TorchWindowItemSelectedMessage : BoundUserInterfaceMessage
 {
     public TorchWindowItemSelectedMessage(string entUid, string selectedItem)
     {
@@ -22,7 +22,7 @@ public class TorchWindowItemSelectedMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
-public class TorchWindowBUIState : BoundUserInterfaceState
+public sealed class TorchWindowBUIState : BoundUserInterfaceState
 {
     public TorchWindowBUIState(Dictionary<string, string> items)
     {

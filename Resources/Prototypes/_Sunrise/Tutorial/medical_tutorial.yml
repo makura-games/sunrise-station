@@ -1,6 +1,9 @@
 - type: tutorialSequence
   id: MedicalTutorial
   duration: 720
+  estimatedDuration:
+    minimum: 300
+    maximum: 600
   priority: 5
   name: medical-tutorial-name
   tooltip: medical-tutorial-tooltip
@@ -44,7 +47,7 @@
       blockAll: true
   conditions:
   - !type:StepDelayCondition
-    delay: 9
+    delay: 8
 
 - type: tutorialStep
   id: MedicalTutFindPatient
@@ -149,7 +152,7 @@
       blockAll: true
   conditions:
   - !type:StepDelayCondition
-    delay: 10
+    delay: 14
 
 - type: tutorialStep
   id: MedicalTutExplainAnalyzerVitals
@@ -201,7 +204,7 @@
       blockAll: true
   conditions:
   - !type:StepDelayCondition
-    delay: 10
+    delay: 9
 
 - type: tutorialStep
   id: MedicalTutExplainAnalyzerDamage
@@ -226,7 +229,7 @@
       blockAll: true
   conditions:
   - !type:StepDelayCondition
-    delay: 10
+    delay: 9
 
 - type: tutorialStep
   id: MedicalTutExplainAnalyzerGroups
@@ -251,7 +254,7 @@
       blockAll: true
   conditions:
   - !type:StepDelayCondition
-    delay: 10
+    delay: 9
 
 - type: tutorialStep
   id: MedicalTutTakeGauze
@@ -435,6 +438,8 @@
   uiHighlight:
   - !type:UiByName
     name: AlertContainer
+  - !type:UiByAlertPrototype
+    prototype: HumanHealth
   effects:
   - !type:TutorialRemoveComponentEffect
     components:
@@ -451,12 +456,12 @@
       blockAll: true
   conditions:
   - !type:StepDelayCondition
-    delay: 8
+    delay: 12
 
 - type: tutorialStep
   id: MedicalTutTakeSelfOintment
   parent: BaseTutorialStepBase
-  target: Ointment1
+  target: SunriseMedicalTutorialSelfOintment
   bubble:
     text: medical-tut-take-self-ointment-bubble
     attachToTarget: true
@@ -465,16 +470,16 @@
   observeRange: 14
   uiHighlight:
   - !type:UiByEntityPrototype
-    prototype: Ointment1
+    prototype: SunriseMedicalTutorialSelfOintment
   effects:
   - !type:TutorialComponentEffect
     components:
     - type: TutorialPickupSoftLock
       allowedItems:
-      - Ointment1
+      - SunriseMedicalTutorialSelfOintment
   conditions:
   - !type:PickupListenedCondition
-    target: Ointment1
+    target: SunriseMedicalTutorialSelfOintment
 
 - type: tutorialStep
   id: MedicalTutApplySelfOintment
@@ -486,25 +491,25 @@
   observeRange: 14
   uiHighlight:
   - !type:UiByEntityPrototype
-    prototype: Ointment1
+    prototype: SunriseMedicalTutorialSelfOintment
   effects:
   - !type:TutorialComponentEffect
     components:
     - type: TutorialPickupSoftLock
       allowedItems:
-      - Ointment1
+      - SunriseMedicalTutorialSelfOintment
     - type: TutorialDropSoftLock
       popup: medical-tut-softlock-keep-self-ointment
   - !type:TutorialComponentEffect
     components:
     - type: TutorialStorageInsertSoftLock
       items:
-      - Ointment1
+      - SunriseMedicalTutorialSelfOintment
       popup: medical-tut-softlock-keep-self-ointment
   conditions:
   - !type:HealingListenedCondition
     target: MedicalTutorialPlayer
-    item: Ointment1
+    item: SunriseMedicalTutorialSelfOintment
 
 - type: tutorialStep
   id: MedicalTutFinish
@@ -538,9 +543,28 @@
   - type: Loadout
     prototypes: [MedicalTutorialPlayerGear]
   - type: Godmode
+  - type: TutorialAttackSoftLock
+  - type: TutorialInteractSoftLock
+    targets:
+    - Poweredlight
+
+- type: stack
+  parent: Ointment
+  id: SunriseMedicalTutorialSelfOintmentStack
+  spawn: SunriseMedicalTutorialSelfOintment
 
 - type: entity
-  parent: BaseMobHuman
+  parent: Ointment1
+  id: SunriseMedicalTutorialSelfOintment
+  name: ointment
+  suffix: Training
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Stack
+    stackType: SunriseMedicalTutorialSelfOintmentStack
+
+- type: entity
+  parent: MobHuman
   id: MedicalTutorialPatient
   name: medical tutorial patient
   suffix: Training

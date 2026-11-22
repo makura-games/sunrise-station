@@ -1,2 +1,2 @@
-ent-MobPredator = Predator
+ent-MobPredator = predator
     .desc = { ent-BaseMobPredator.desc }

@@ -6,10 +6,9 @@ using Content.Sunrise.Interfaces.Shared;
 
 namespace Content.Server._Sunrise.SponsorLoadout;
 
-public sealed class SponsorLoadoutSystem : EntitySystem
+public sealed partial class SponsorLoadoutSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly StationSpawningSystem _spawn = default!;
+    [Dependency] private StationSpawningSystem _spawn = default!;
     private ISharedSponsorsManager? _sponsorsManager;
 
     public override void Initialize()
@@ -25,7 +24,7 @@ public sealed class SponsorLoadoutSystem : EntitySystem
 
         if (!_sponsorsManager.TryGetSpawnEquipment(ev.Player.UserId, out var spawnEquipment))
             return;
-        if (!_prototypeManager.TryIndex<SponsorLoadoutPrototype>(spawnEquipment, out var loadout))
+        if (!ProtoMan.TryIndex<SponsorLoadoutPrototype>(spawnEquipment, out var loadout))
             return;
         var isWhitelisted = ev.JobId != null &&
                             loadout.WhitelistJobs != null &&
@@ -39,7 +38,7 @@ public sealed class SponsorLoadoutSystem : EntitySystem
         if (isWhitelisted || isBlacklisted || isSpeciesRestricted)
             return;
 
-        if (!_prototypeManager.TryIndex(loadout.Equipment, out var startingGear))
+        if (!ProtoMan.TryIndex(loadout.Equipment, out var startingGear))
             return;
 
         _spawn.EquipStartingGear(ev.Mob, startingGear);

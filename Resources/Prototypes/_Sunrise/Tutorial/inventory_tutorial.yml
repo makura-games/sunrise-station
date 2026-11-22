@@ -1,6 +1,9 @@
 - type: tutorialSequence
   id: InventoryTutorial
   duration: 720
+  estimatedDuration:
+    minimum: 360
+    maximum: 600
   priority: 1
   name: inventory-tutorial-name
   tooltip: inventory-tutorial-tooltip
@@ -8,6 +11,7 @@
   texture: /Textures/_Sunrise/Tutorial/inventory_tutorial.png
   playerEntity: InventoryTutorialPlayer
   steps:
+  - InvTutWelcome
   - InvTutHandsIntro
   - InvTutPickUpFirstHandItem
   - InvTutSwitchToEmptyHand
@@ -118,6 +122,22 @@
       name: SlotButton_head
 
 - type: tutorialStep
+  id: InvTutWelcome
+  parent: BaseTutorialStepBase
+  bubble:
+    text: inv-tut-welcome-bubble
+  chatMessage: inv-tut-welcome-chat
+  ttsMessage: inv-tut-welcome-tts
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 20
+
+- type: tutorialStep
   id: InvTutHandsIntro
   parent: BaseTutorialStepBase
   bubble:
@@ -136,7 +156,7 @@
       blockAll: true
   conditions:
   - !type:StepDelayCondition
-    delay: 8
+    delay: 14
 
 - type: tutorialStep
   id: InvTutPickUpFirstHandItem
@@ -255,10 +275,37 @@
     - !type:ItemHandledCondition
       item: Pen
       inverted: true
-    repairStep: InvTutPickUpFirstHandItem
+    repairStep: InvTutRepairHandItems
   conditions:
   - !type:DropListenedCondition
     target: Screwdriver
+
+- type: tutorialStep
+  id: InvTutRepairHandItems
+  parent: BaseTutorialStepBase
+  bubble:
+    text: inv-tut-repair-hand-items-bubble
+  chatMessage: inv-tut-repair-hand-items-chat
+  ttsMessage: inv-tut-repair-hand-items-tts
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - Pen
+      - Screwdriver
+    - type: TutorialDropSoftLock
+      popup: inv-tut-softlock-keep-hand-items
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - Pen
+      - Screwdriver
+      popup: inv-tut-softlock-keep-hand-items
+  conditions:
+  - !type:ItemHandledCondition
+    item: Pen
+  - !type:ItemHandledCondition
+    item: Screwdriver
 
 - type: tutorialStep
   id: InvTutSwitchToFirstHand
@@ -1150,6 +1197,11 @@
     - type: TutorialStorageCloseSoftLock
       targets:
       - InventoryTutorialWardrobe
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - FlashlightLantern
+      blockAllSlots: true
+      popup: inv-tut-softlock-use-hand
   conditions:
   - !type:ItemHandledCondition
     item: FlashlightLantern
@@ -1179,6 +1231,11 @@
       - FlashlightLantern
       targets:
       - ClothingBackpack
+      popup: inv-tut-softlock-open-storage-first
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - FlashlightLantern
+      blockAllSlots: true
       popup: inv-tut-softlock-open-storage-first
     - type: TutorialDropSoftLock
       popup: inv-tut-softlock-open-storage-first
@@ -1396,7 +1453,7 @@
   ttsMessage: inv-tut-final-state-tts
   conditions:
   - !type:StepDelayCondition
-    delay: 5
+    delay: 6
 
 - type: entity
   parent: PassengerPDA

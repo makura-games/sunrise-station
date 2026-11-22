@@ -19,23 +19,26 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 using Content.Server.Body.Systems;
+using Content.Shared.Body.Systems;
 using Content.Shared.Nutrition.Components;
+using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared._Sunrise.Research.Artifact;
 
 namespace Content.Server.Medical;
 
-public sealed class HealthAnalyzerSystem : EntitySystem
+public sealed partial class HealthAnalyzerSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PowerCellSystem _cell = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly TransformSystem _transformSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstreamSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PowerCellSystem _cell = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private TransformSystem _transformSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private BloodstreamSystem _bloodstreamSystem = default!;
+    [Dependency] private SatiationSystem _satiation = default!; // Sunrise-Edit
 
     public override void Initialize()
     {
@@ -71,11 +74,12 @@ public sealed class HealthAnalyzerSystem : EntitySystem
             var patientCoordinates = Transform(patient).Coordinates;
             if (component.MaxScanRange != null && !_transformSystem.InRange(patientCoordinates, transform.Coordinates, component.MaxScanRange.Value))
             {
-                //Range too far, disable updates
-                StopAnalyzingEntity((uid, component), patient);
+                //Range too far, disable updates until they are back in range
+                PauseAnalyzingEntity((uid, component), patient);
                 continue;
             }
 
+            component.IsAnalyzerActive = true;
             UpdateScannedUser(uid, patient, true);
         }
     }
@@ -181,6 +185,21 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         UpdateScannedUser(healthAnalyzer, target, false);
     }
 
+
+    /// <summary>
+    /// If the scanner is active, sends one last update and sets it to inactive.
+    /// </summary>
+    /// <param name="healthAnalyzer">The health analyzer that's receiving the updates</param>
+    /// <param name="target">The entity to analyze</param>
+    private void PauseAnalyzingEntity(Entity<HealthAnalyzerComponent> healthAnalyzer, EntityUid target)
+    {
+        if (!healthAnalyzer.Comp.IsAnalyzerActive)
+            return;
+
+        UpdateScannedUser(healthAnalyzer, target, false);
+        healthAnalyzer.Comp.IsAnalyzerActive = false;
+    }
+
     /// <summary>
     /// Send an update for the target to the healthAnalyzer
     /// </summary>
@@ -217,7 +236,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         var bodyTemperature = float.NaN;
 
         if (TryComp<TemperatureComponent>(entity, out var temp))
-            bodyTemperature = temp.CurrentTemperature;
+            bodyTemperature = temp.Temperature;
 
         var bloodAmount = float.NaN;
         var bleeding = false;
@@ -239,16 +258,19 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         float hungerLevel = -1;
         float thirstLevel = -1;
 
-        if (TryComp<HungerComponent>(entity, out var hunger))
+        if (TryComp<SatiationComponent>(entity, out var satiation))
         {
-            // Calculate hunger as percentage (max hunger is 200.0f from Overfed threshold)
-            hungerLevel = (hunger.LastAuthoritativeHungerValue / 200.0f) * 100.0f;
-        }
+            if (_satiation.GetValueOrNull((entity, satiation), SatiationSystem.Hunger) is { } hunger &&
+                _satiation.GetMaximumValue((entity, satiation), SatiationSystem.Hunger) is { } maxHunger)
+            {
+                hungerLevel = hunger / maxHunger * 100f;
+            }
 
-        if (TryComp<ThirstComponent>(entity, out var thirst))
-        {
-            // Calculate thirst as percentage (max thirst is 600.0f from OverHydrated threshold)
-            thirstLevel = (thirst.CurrentThirst / 600.0f) * 100.0f;
+            if (_satiation.GetValueOrNull((entity, satiation), SatiationSystem.Thirst) is { } thirst &&
+                _satiation.GetMaximumValue((entity, satiation), SatiationSystem.Thirst) is { } maxThirst)
+            {
+                thirstLevel = thirst / maxThirst * 100f;
+            }
         }
 
         RaiseLocalEvent(entity, new EntityAnalyzedEvent());

@@ -1,6 +1,9 @@
 - type: tutorialSequence
   id: AccessTutorial
   duration: 600
+  estimatedDuration:
+    minimum: 180
+    maximum: 420
   priority: 3
   name: access-tutorial-name
   tooltip: access-tutorial-tooltip
@@ -30,7 +33,7 @@
   ttsMessage: access-tut-welcome-tts
   conditions:
   - !type:StepDelayCondition
-    delay: 6
+    delay: 15
 
 - type: tutorialStep
   id: AccessTutIdCard
@@ -173,7 +176,7 @@
   ttsMessage: access-tut-finish-tts
   conditions:
   - !type:StepDelayCondition
-    delay: 5
+    delay: 13
 
 - type: startingGear
   id: AccessTutorialPlayerGear

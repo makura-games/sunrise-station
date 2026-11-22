@@ -1,0 +1,13 @@
+- type: entity
+  id: VentCrawHolder
+  name: vent crawling holder
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: VentCrawHolder
+  - type: InputMover
+  - type: ContainerContainer
+    containers:
+      VentCrawHolderComponent: !type:Container
+  - type: Physics
+    bodyType: KinematicController
+    canCollide: false

@@ -8,7 +8,7 @@
     specialDigestible:
       components:
         - Identity
-    isDigestibleAddition: true
+    isSpecialDigestibleExclusive: false
 
 - type: entity
   id: OrganPrimateHeart
@@ -39,7 +39,7 @@
 
 - type: entity
   id: SentientWildSlimeCore
-  parent: SentientSlimeCore
+  parent: OrganSlimePersonCore
   name: slime core
   categories: [ HideSpawnMenu ]
   components:

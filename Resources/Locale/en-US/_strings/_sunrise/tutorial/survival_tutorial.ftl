@@ -1,9 +1,9 @@
 survival-tutorial-name = Survival and environmental hazards
 survival-tutorial-tooltip = Learn how to read atmospheric alerts and use emergency equipment.
 
-survival-tut-welcome-bubble = Learn how to respond to missing air and low pressure.
-survival-tut-welcome-chat = This tutorial teaches a simple survival order: leave immediate danger when possible, protect yourself, then repair the problem or help others.
-survival-tut-welcome-tts = This tutorial teaches a simple survival order: leave immediate danger when possible, protect yourself, then repair the problem or help others.
+survival-tut-welcome-bubble = Welcome! This tutorial covers missing air, low pressure, and emergency equipment.
+survival-tut-welcome-chat = Welcome! You will learn how to recognize dangerous atmospheric conditions, use emergency equipment, and restore a safe air supply and pressure.
+survival-tut-welcome-tts = Welcome! You will learn how to recognize dangerous atmospheric conditions, use emergency equipment, and restore a safe air supply and pressure.
 
 survival-tut-open-emergency-equipment-bubble = Open the emergency locker with [tutkeybind="UIClick"].
 survival-tut-open-emergency-equipment-chat = Emergency lockers are commonly placed in station corridors. This one contains everything needed for the training scenario.

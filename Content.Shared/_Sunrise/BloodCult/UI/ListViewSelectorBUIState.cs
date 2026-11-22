@@ -9,7 +9,7 @@ public enum ListViewSelectorUiKey
 }
 
 [Serializable, NetSerializable]
-public class ListViewItemSelectedMessage : BoundUserInterfaceMessage
+public sealed class ListViewItemSelectedMessage : BoundUserInterfaceMessage
 {
     public ListViewItemSelectedMessage(string selectedItem)
     {

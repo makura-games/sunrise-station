@@ -558,14 +558,14 @@
 
 - type: entity
   parent: BaseSunriseHandsNoGlovesPiratePrivateer
-  id: ClothingHandsSMGC40
-  suffix: C40 SMG
+  id: ClothingHandsSMGVectorSuper
+  suffix: Vector Super
   categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     clothingVisuals:
       gloves:
-      - sprite: _Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi
+      - sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi
         state: wielded-inhand-right
 
 - type: entity
@@ -638,18 +638,6 @@
     clothingVisuals:
       gloves:
       - sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Green/tiny.rsi
-        state: wielded-inhand-right
-
-- type: entity
-  parent: BaseSunriseHandsNoGlovesPirateEva
-  id: ClothingHandsMp38
-  suffix: mp38
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Clothing
-    clothingVisuals:
-      gloves:
-      - sprite: _Sunrise/Objects/Weapons/Guns/SMGs/mp38/tiny.rsi
         state: wielded-inhand-right
 
 - type: entity
@@ -925,9 +913,10 @@
       path: "/Audio/Items/drill_use.ogg"
     attackRate: 5
     damage:
-      groups:
-        Brute: 9
       types:
+        Blunt: 3
+        Slash: 3
+        Piercing: 3
         Structural: 25
     bluntStaminaDamageFactor: 1.5
 
@@ -1252,11 +1241,6 @@
   categories: [ HideSpawnMenu ]
 
 - type: entity
-  parent: [SovietArmorNoArmor, ClothingHandsMp38, SovietMeleeNoArc]
-  id: ClothingHandsMp38SovietNoOuter
-  categories: [ HideSpawnMenu ]
-
-- type: entity
   parent: [ClothingHandsBottle, SovietArmorNoArmor, SovietMeleeNoArc]
   id: ClothingHandsBottleSovietNoOuter
   categories: [ HideSpawnMenu ]
@@ -1360,6 +1344,23 @@
         Heat: 5
         Slash: 5
         Piercing: 4
+
+- type: entity
+  abstract: true
+  id: PirateArmorMurmilo
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.7
+        Piercing: 0.8
+        Heat: 0.8
+      flatReductions:
+        Blunt: 3
+        Heat: 3
+        Slash: 3
+        Piercing: 6
 
 - type: entity
   abstract: true
@@ -1555,6 +1556,11 @@
 
 - type: entity
   abstract: true
+  id: BaseSunriseHandsNoGlovesPirateMurmilo
+  parent: [ClothingHandsNoGloves, PirateArmorMurmilo]
+
+- type: entity
+  abstract: true
   id: BaseSunriseHandsNoGlovesPiratePrivateer
   parent: [ClothingHandsNoGloves, PirateArmorPrivateer]
 
@@ -1625,7 +1631,12 @@
   categories: [ HideSpawnMenu ]
 
 - type: entity
-  parent: BaseSunriseHandsNoGlovesPirateMechArmor
+  parent: [ClothingHandsBaseNPC, PirateArmorMurmilo]
+  id: ClothingHandsPirateArmorMurmilo
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseSunriseHandsNoGlovesPirateMurmilo
   id: ClothingLightMachineGunPirateCannonJugg
   suffix: lmg pirate cannon
   categories: [ HideSpawnMenu ]

@@ -1,6 +1,9 @@
 - type: tutorialSequence
   id: FoodTutorial
   duration: 600
+  estimatedDuration:
+    minimum: 240
+    maximum: 480
   priority: 6
   name: food-tutorial-name
   tooltip: food-tutorial-tooltip
@@ -17,10 +20,10 @@
   - FoodTutPutDrinkDown
   - FoodTutTakeMeal
   - FoodTutEatMeal
+  - FoodTutReturnDish
   - FoodTutReagentWarning
   - FoodTutExamineSuspiciousDrink
   - FoodTutUnsafeItems
-  - FoodTutReturnDish
   - FoodTutFinish
   - TutorialMHelp
 
@@ -34,7 +37,8 @@
   effects:
   - !type:TutorialEntityEffect
     effects:
-    - !type:SatiateHunger
+    - !type:Satiate
+      satiationType: Hunger
       factor: -15
   - !type:TutorialComponentEffect
     components:
@@ -42,7 +46,7 @@
       blockAll: true
   conditions:
   - !type:StepDelayCondition
-    delay: 9
+    delay: 10
 
 - type: tutorialStep
   id: FoodTutReachBar
@@ -123,6 +127,10 @@
       allowedItems:
       - DrinkLemonadeGlass
       popup: food-tut-softlock-pickup-highlighted
+    - type: TutorialIngestSoftLock
+      targets:
+      - DrinkLemonadeGlass
+      popup: food-tut-softlock-ingest-blocked
   conditions:
   - !type:PickupListenedCondition
     target: DrinkLemonadeGlass
@@ -222,6 +230,10 @@
       allowedItems:
       - FoodMealNachos
       popup: food-tut-softlock-pickup-highlighted
+    - type: TutorialIngestSoftLock
+      targets:
+      - FoodMealNachos
+      popup: food-tut-softlock-ingest-blocked
     - type: TutorialDropSoftLock
       popup: food-tut-softlock-keep-dishes
     - type: TutorialStorageInsertSoftLock
@@ -313,7 +325,7 @@
       popup: food-tut-softlock-keep-dishes
   conditions:
   - !type:StepDelayCondition
-    delay: 11
+    delay: 12
 
 - type: tutorialStep
   id: FoodTutExamineSuspiciousDrink
@@ -417,7 +429,7 @@
   ttsMessage: food-tut-finish-tts
   conditions:
   - !type:StepDelayCondition
-    delay: 10
+    delay: 11
 
 - type: startingGear
   id: FoodTutorialPlayerGear
@@ -433,17 +445,12 @@
   components:
   - type: Loadout
     prototypes: [FoodTutorialPlayerGear]
-  - type: Hunger
-    baseDecayRate: 0
-    thresholds:
-      Overfed: 200
-      Okay: 111
-      Peckish: 100
-      Starving: 50
-      Dead: 0
-  - type: Thirst
-    baseDecayRate: 0
-    startingThirst: 295
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: SunriseTutorialHunger
+      Thirst:
+        prototype: SunriseTutorialThirst
   - type: Godmode
 
 - type: entity

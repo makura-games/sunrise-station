@@ -1,2 +1,2 @@
-ent-FleshSpiderWebAction = Плетение паутины
+ent-FleshSpiderWebAction = плетение паутины
     .desc = Создает паутину вокруг вас.

@@ -255,7 +255,7 @@
       prototypes: [ SyndicateRaidGear ]
       roleLoadout: [ RoleSurvivalSyndicate ]
     - type: RandomMetadata
-      nameSegments: [NamesDeathCommando]
+      nameSegments: [NamesDeathCommandoFirst, NamesDeathCommandoLast]
 
 # Pirate
 - type: entity
@@ -312,7 +312,7 @@
       prototypes: [ PirateScoonerEVAGear ]
       roleLoadout: [ RoleSurvivalScooner ]
     - type: RandomMetadata
-      nameSegments: [NamesDeathCommando]
+      nameSegments: [NamesDeathCommandoFirst, NamesDeathCommandoLast]
 
 - type: entity
   name: Scooner spawner
@@ -368,7 +368,7 @@
       prototypes: [ PirateScoonerOldEVAGear ]
       roleLoadout: [ RoleSurvivalScooner ]
     - type: RandomMetadata
-      nameSegments: [NamesDeathCommando]
+      nameSegments: [NamesDeathCommandoFirst, NamesDeathCommandoLast]
 
 - type: entity
   abstract: true
@@ -382,7 +382,7 @@
   - type: RandomHumanoidAppearance
     randomizeName: false
   - type: RandomMetadata
-    nameSegments: [NamesDeathCommando]
+    nameSegments: [NamesDeathCommandoFirst, NamesDeathCommandoLast]
   - type: NpcFactionMember
     factions:
     - Pirate

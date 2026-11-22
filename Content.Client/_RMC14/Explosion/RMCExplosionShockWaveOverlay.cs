@@ -7,11 +7,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Explosion;
 
-public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscriber
+public sealed partial class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscriber
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private SharedTransformSystem? _xformSystem;
 
@@ -19,6 +19,7 @@ public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscrib
     public override bool RequestScreenTexture => true;
 
     private readonly ShaderInstance _shader;
+    private readonly string _shockWave = "RMCShockWave";
 
     /// <summary>
     ///     Maximum number of distortions that can be shown on screen at a time.
@@ -28,7 +29,7 @@ public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscrib
     public RMCExplosionShockWaveOverlay()
     {
         IoCManager.InjectDependencies(this);
-        _shader = _prototypeManager.Index<ShaderPrototype>("RMCShockWave").Instance().Duplicate();
+        _shader = _prototypeManager.Index<ShaderPrototype>(_shockWave).Instance().Duplicate();
     }
 
     private readonly Vector2[] _positions = new Vector2[MaxCount];
@@ -66,7 +67,7 @@ public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscrib
             currentTime = Math.Clamp(currentTime, 0.1f, float.MaxValue);
 
             _positions[_count] = tempCoords;
-            _falloffPower[_count] = distortion.FalloffPower ?? 20f; // Sunrise edit - фолбек
+            _falloffPower[_count] = distortion.FalloffPower ?? 20f; // фолбек
             _sharpness[_count] = distortion.Sharpness;
             _width[_count] = distortion.Width ?? 0.8f;
             _times[_count] = currentTime;

@@ -1,11 +1,8 @@
-﻿using Content.Shared.Body.Part;
-using Content.Shared.Humanoid.Prototypes;
-using Content.Shared.Humanoid;
 using System.Linq;
-using Content.Shared.Starlight.Medical.Surgery.Steps.Parts;
-using Content.Shared.Starlight.Medical.Surgery.Events;
+using Content.Shared.Body;
+using Content.Shared.Humanoid;
 using Content.Shared.Starlight.Medical.Surgery.Effects.Step;
-using Content.Shared.Body.Systems;
+using Content.Shared.Starlight.Medical.Surgery.Events;
 
 namespace Content.Shared.Starlight.Medical.Surgery;
 // Based on the RMC14.
@@ -13,6 +10,7 @@ namespace Content.Shared.Starlight.Medical.Surgery;
 public abstract partial class SharedSurgerySystem
 {
     protected List<Type> _accents = [];
+
     private void InitializeConditions()
     {
         _accents = _reflectionManager.FindTypesWithAttribute<RegisterComponentAttribute>()
@@ -30,76 +28,22 @@ public abstract partial class SharedSurgerySystem
 
     private void OnOrganDontExistConditionValid(Entity<SurgeryOrganDontExistConditionComponent> ent, ref SurgeryValidEvent args)
     {
-        if (ent.Comp.Organ?.Count != 1) return;
+        if (ent.Comp.Organ?.Count != 1)
+            return;
+
         var type = ent.Comp.Organ.Values.First().Component.GetType();
-        
-        if (ent.Comp.Container != null)
-        {
-            foreach (var slotId in Comp<BodyPartComponent>(args.Part).Organs.Keys)
-            {
-                if (ent.Comp.Container == slotId)
-                {
-                    if (!_containers.TryGetContainer(args.Part, ent.Comp.Container, out var container))
-                        continue;
-                    
-                    foreach (var containedEnt in container.ContainedEntities)
-                    {
-                        if (HasComp(containedEnt, type))
-                        {
-                            args.Cancelled = true;
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-        else
-        {
-            var organs = _body.GetPartOrgans(args.Part, Comp<BodyPartComponent>(args.Part));
-            foreach (var organ in organs)
-                if (HasComp(organ.Id, type))
-                {
-                    args.Cancelled = true;
-                    return;
-                }
-        }
+        if (TryFindBodyEntityWithComponent(args.Body, type, ent.Comp.Container, out _))
+            args.Cancelled = true;
     }
+
     private void OnOrganExistConditionValid(Entity<SurgeryOrganExistConditionComponent> ent, ref SurgeryValidEvent args)
     {
-        if (ent.Comp.Organ?.Count != 1) return;
-        
-        var type = ent.Comp.Organ.Values.First().Component.GetType();
-        
-        EntityUid mainPart = args.Part;
-        
-        if (TryComp<BodyPartComponent>(args.Body, out var itemPart))
-            mainPart = args.Body;
+        if (ent.Comp.Organ?.Count != 1)
+            return;
 
-        if (ent.Comp.Container != null)
-        {
-            foreach (var slotId in Comp<BodyPartComponent>(mainPart).Organs.Keys)
-            {
-                if (ent.Comp.Container == slotId)
-                {
-                    if (!_containers.TryGetContainer(mainPart, SharedBodySystem.GetOrganContainerId(ent.Comp.Container), out var container))
-                        continue;
-                        
-                    foreach (var containedEnt in container.ContainedEntities)
-                        if (HasComp(containedEnt, type))
-                            return;
-                        
-                    args.Cancelled = true;
-                }
-            }
-        }
-        else
-        {
-            var organs = _body.GetPartOrgans(mainPart, Comp<BodyPartComponent>(mainPart));
-            foreach (var organ in organs)
-                if (HasComp(organ.Id, type))
-                    return;
+        var type = ent.Comp.Organ.Values.First().Component.GetType();
+        if (!TryFindBodyEntityWithComponent(args.Body, type, ent.Comp.Container, out _))
             args.Cancelled = true;
-        }
     }
 
     private void OnPartConditionValid(Entity<SurgeryPartConditionComponent> ent, ref SurgeryValidEvent args)
@@ -107,18 +51,16 @@ public abstract partial class SharedSurgerySystem
         if (ent.Comp.Parts.Count == 0)
             return;
 
-        if (TryComp<BodyPartComponent>(args.Body, out var itemPart) && itemPart.PartType is BodyPartType item && !ent.Comp.Parts.Contains(item))
+        if (!TryComp<OrganComponent>(args.Part, out var organ) ||
+            !ent.Comp.Parts.Contains(GetSurgeryPart(organ)))
         {
-            Logger.Warning("don't have part at part");
             args.Cancelled = true;
         }
-
-        if (CompOrNull<BodyPartComponent>(args.Part)?.PartType is BodyPartType part && !ent.Comp.Parts.Contains(part))
-            args.Cancelled = true;
     }
+
     private void OnSpeciesConditionValid(Entity<SurgerySpeciesConditionComponent> ent, ref SurgeryValidEvent args)
     {
-        if (!EntityManager.TryGetComponent<HumanoidAppearanceComponent>(args.Body, out var humanoidAppearanceComponent))
+        if (!TryComp<HumanoidProfileComponent>(args.Body, out var humanoidAppearanceComponent))
         {
             args.Cancelled = true;
             return;
@@ -136,24 +78,37 @@ public abstract partial class SharedSurgerySystem
             return;
         }
     }
+
     private void OnAnyAccentConditionValid(Entity<SurgeryAnyAccentConditionComponent> ent, ref SurgeryValidEvent args)
     {
         foreach (var accent in _accents)
+        {
             if (HasComp(args.Body, accent))
                 return;
+        }
+
         args.Cancelled = true;
     }
+
     private void OnAnyLimbSlotConditionValid(Entity<SurgeryAnyLimbSlotConditionComponent> ent, ref SurgeryValidEvent args)
     {
-        if (CompOrNull<BodyPartComponent>(args.Part) is not BodyPartComponent bodyPartComponent)
+        if (TryGetFreeAttachmentSlot(args.Body, args.Part, out var slot))
+        {
+            args.Suffix = slot;
             return;
+        }
 
-        if (_body.TryGetFreePartSlot(args.Part, out var slotId, bodyPartComponent))
-            args.Suffix = slotId;
-        else
-            args.Cancelled = true;
+        args.Cancelled = true;
     }
-    private void OnLimbSlotConditionValid(Entity<SurgeryLimbSlotConditionComponent> ent, ref SurgeryValidEvent args) 
-        => args.Cancelled = !(_containers.TryGetContainer(args.Part, SharedBodySystem.GetPartSlotContainerId(ent.Comp.Slot), out var container)
-            && container.ContainedEntities.Count == 0);
+
+    private void OnLimbSlotConditionValid(Entity<SurgeryLimbSlotConditionComponent> ent, ref SurgeryValidEvent args)
+    {
+        if (CanAttachToSlot(args.Body, args.Part, ent.Comp.Slot))
+        {
+            args.Suffix = ent.Comp.Slot;
+            return;
+        }
+
+        args.Cancelled = true;
+    }
 }

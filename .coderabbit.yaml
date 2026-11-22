@@ -19,6 +19,11 @@ knowledge_base:
 
 reviews:
   profile: assertive
+  request_changes_workflow: false
+  fail_commit_status: true
+  auto_review:
+    drafts: true
+    auto_pause_after_reviewed_commits: 0
   path_instructions:
     - path: "**/*"
       instructions: |
@@ -27,8 +32,8 @@ reviews:
          Use `.agents/rules/*.md` and `.agents/skills/*/SKILL.md` as the Codex-facing review knowledge base.
          Treat `.agents/` as the canonical source tree. Treat `.agent/`, `.claude/`, `.cursor/`, and `.github/` as compatibility bridge trees.
          Prefer repository-specific rules and skills over generic framework advice or web-derived guidance when they conflict.
-         When inferring the active fork from a git remote slug or GitHub repository identifier, ignore the owner or organization segment and use only the repository name plus the actual project folder and local edit markers. For example, evaluate `space-sunrise/project-fire` by `project-fire`, not by `space-sunrise`.
-         Do not hard-code Sunrise from the `space-sunrise` organization name. If the exact repository slug is `project-fire` or the active project folder is `_Scp`, review as Fire: use the `Fire` prefix, `_Scp` project folder, and `Fire edit` / `Fire added` markers. If the exact repository slug is `sunrise-station` or the active project folder is `_Sunrise`, review as Sunrise.
+         When inferring the active fork from a git remote slug or GitHub repository identifier, ignore the owner or organization segment and use only the repository name plus the actual project folder and local edit markers. For example, evaluate `makura-games/project-fire` by `project-fire`, not by `makura-games`.
+         Do not hard-code Sunrise from the `makura-games` organization name. If the exact repository slug is `project-fire` or the active project folder is `_Scp`, review as Fire: use the `Fire` prefix, `_Scp` project folder, and `Fire edit` / `Fire added` markers. If the exact repository slug is `sunrise-station` or the active project folder is `_Sunrise`, review as Sunrise.
          For a single-line upstream edit, a single-line marker in the active fork's native style is sufficient. Do not require `edit start/end` or `added start/end` blocks unless the fork edit spans multiple lines.
          Ignore a leading UTF-8 BOM (`U+FEFF`) at the start of a text file. Do not request BOM removal unless the PR is explicitly about file encoding.
     - path: "**/*.cs"
@@ -105,7 +110,7 @@ reviews:
         name: "SS14 fork/project folder selection"
         instructions: |
           Run this check for every PR that adds or moves fork-owned code, prototypes, assets, or upstream edit markers.
-          Determine the active fork using `.agents/rules/ss14-codebase-prefix-detection.md`. Ignore the GitHub owner or organization segment: `space-sunrise` alone must not imply Sunrise.
+          Determine the active fork using `.agents/rules/ss14-codebase-prefix-detection.md`. Ignore the GitHub owner or organization segment: `makura-games` alone must not imply Sunrise.
           Fail if exact Fire signals (`project-fire`, `_Scp`, or Fire markers) are reviewed as Sunrise or if new Fire-owned files are placed under `_Sunrise` instead of `_Scp`.
           Fail if exact Sunrise signals (`sunrise-station`, `_Sunrise`, or Sunrise markers) are reviewed as Fire or if new Sunrise-owned files are placed under `_Scp` instead of `_Sunrise`.
           Do not fail merely because the PR touches vanilla files. New fork logic still belongs in the active fork project folder, while vanilla files should contain only minimal hooks with the active fork's markers.

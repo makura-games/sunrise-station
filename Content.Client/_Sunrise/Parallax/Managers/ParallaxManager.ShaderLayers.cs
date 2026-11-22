@@ -10,7 +10,7 @@ namespace Content.Client.Parallax.Managers;
 
 public sealed partial class ParallaxManager : IPostInjectInit
 {
-    [Dependency] private readonly NetTexturesManager _netTexturesManager = default!;
+    [Dependency] private NetTexturesManager _netTexturesManager = default!;
 
     private static readonly ShaderParallaxTextureSource StarTextureSource = new();
 

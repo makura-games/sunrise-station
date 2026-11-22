@@ -102,3 +102,4 @@ tts-voice-name-crysis2-ai-uscaucasian-01 = (NEW) [Crysis 2] Оперативни
 tts-voice-name-crysis2-ai-blackops-04 = (NEW) [Crysis 2] Оперативник Blackops 04
 tts-voice-name-lol-akshan = (NEW) [LOL] Акшан
 tts-voice-name-crysis2-ai-usafrician-01-v2 = (NEW) [Crysis 2] Оперативник 1 2.0
+tts-voice-name-heartstone-thrud = [Heartstone] Трад

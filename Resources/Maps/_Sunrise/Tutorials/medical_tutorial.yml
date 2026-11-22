@@ -506,6 +506,8 @@ entities:
     - type: Transform
       pos: 1.8153343,-1.4570222
       parent: 1
+- proto: SunriseMedicalTutorialSelfOintment
+  entities:
   - uid: 117
     components:
     - type: Transform

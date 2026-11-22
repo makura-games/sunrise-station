@@ -1,8 +1,7 @@
 - type: marking
   id: MiliraWingBasic
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Milira]
+  groupWhitelist: [ Milira ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Milira/wings.rsi
     state: wing_basic
@@ -10,8 +9,7 @@
 - type: marking
   id: MiliraWingBasicOpen
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: []
+  groupWhitelist: [  ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Milira/wings_open.rsi
     state: wing_basic_open
@@ -19,8 +17,7 @@
 - type: marking
   id: MiliraWingBasicFlight
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: []
+  groupWhitelist: [  ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Milira/wings_flight.rsi
     state: wing_basic_flight
@@ -28,14 +25,13 @@
 - type: marking
   id: MiliraWingMechanical
   bodyPart: Tail
-  markingCategory: Tail
   forcedColoring: true
   coloring:
     default:
       type:
         !type:SimpleColoring
         color: "#FFFFFF"
-  speciesRestriction: [Milira]
+  groupWhitelist: [ Milira ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Milira/wings_mechanical.rsi
     state: wing_mechanical
@@ -43,8 +39,7 @@
 - type: marking
   id: MiliraWingMechanicalOpen
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: []
+  groupWhitelist: [  ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Milira/wings_mechanical_open.rsi
     state: wing_mechanical_open
@@ -52,8 +47,7 @@
 - type: marking
   id: MiliraWingMechanicalFlight
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: []
+  groupWhitelist: [  ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Milira/wings_mechanical_flight.rsi
     state: wing_mechanical_flight

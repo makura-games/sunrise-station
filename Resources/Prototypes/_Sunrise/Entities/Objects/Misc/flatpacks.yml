@@ -27,9 +27,55 @@
 
 - type: entity
   parent: BaseFlatpack
+  id: ShuttleGunLightRifleImprovisedFlatpack
+  components:
+  - type: Flatpack
+    entity: ShuttleGunLightRifleImprovised
+
+- type: entity
+  parent: BaseFlatpack
+  id: ShuttleGunLightRifleSPFlatpack
+  components:
+  - type: Flatpack
+    entity: ShuttleGunLightRifleSP
+
+- type: entity
+  parent: BaseFlatpack
+  id: ShuttleGunLightRifleFMJFlatpack
+  components:
+  - type: Flatpack
+    entity: ShuttleGunLightRifleFMJ
+
+- type: entity
+  parent: BaseFlatpack
+  id: ShuttleGunLightRifleAPFlatpack
+  components:
+  - type: Flatpack
+    entity: ShuttleGunLightRifleAP
+
+- type: entity
+  parent: BaseFlatpack
   id: MechMiningPodFlatpack
   name: Mining Pod flatpack
   description: A flatpack used for constructing a Mining Pod.
   components:
   - type: Flatpack
     entity: MechMiningPod
+
+- type: entity
+  parent: [ BaseFlatpack, BaseSyndicateContraband ]
+  id: ComputerPirateUplinkFlatpack
+  name: black market console flatpack
+  description: A flatpack used for constructing a black market console.
+  components:
+  - type: Flatpack
+    entity: ComputerPirateUplink
+
+- type: entity
+  parent: [ BaseFlatpack, BaseSyndicateContraband ]
+  id: ComputerPirateExchangerFlatpack
+  name: black market exchanger flatpack
+  description: A flatpack used for constructing a black market exchanger.
+  components:
+  - type: Flatpack
+    entity: ComputerPirateExchanger

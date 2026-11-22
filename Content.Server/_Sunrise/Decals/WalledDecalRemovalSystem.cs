@@ -1,8 +1,10 @@
+using System.Numerics;
 using Content.Server._Sunrise.Mapping;
 using Content.Server.Decals;
 using Content.Shared.Decals;
 using Content.Shared.Tag;
 using Robust.Server.GameObjects;
+using Robust.Shared.GameStates;
 using Robust.Shared.Map.Components;
 
 namespace Content.Server._Sunrise.Decals;
@@ -10,11 +12,12 @@ namespace Content.Server._Sunrise.Decals;
 /// <summary>
 /// Removes decals that now overlap wall tiles on a grid.
 /// </summary>
-public sealed class WalledDecalRemovalSystem : EntitySystem
+public sealed partial class WalledDecalRemovalSystem : EntitySystem
 {
-    [Dependency] private readonly DecalSystem _decal = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private ChunkEntitySystem _chunkEntity = default!;
+    [Dependency] private DecalSystem _decal = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     /// <summary>
     /// Removes decals that overlap wall tiles on the specified grid.
@@ -32,11 +35,8 @@ public sealed class WalledDecalRemovalSystem : EntitySystem
     /// </summary>
     public int RemoveWalledDecals(Entity<MapGridComponent> grid)
     {
-        if (!TryComp<DecalGridComponent>(grid.Owner, out var decalGrid))
-            return 0;
-
         var wallTiles = new HashSet<Vector2i>();
-        var decalsToRemove = new HashSet<uint>();
+        var decalsToRemove = new List<DecalIndex>();
         var childEnumerator = Transform(grid.Owner).ChildEnumerator;
 
         while (childEnumerator.MoveNext(out var child))
@@ -50,12 +50,20 @@ public sealed class WalledDecalRemovalSystem : EntitySystem
         if (wallTiles.Count == 0)
             return 0;
 
-        foreach (var chunk in decalGrid.ChunkCollection.ChunkCollection.Values)
+        var half = new Vector2(0.5f, 0.5f);
+
+        foreach (var chunk in _chunkEntity.GetChunks(grid))
         {
-            foreach (var (decalId, decal) in chunk.Decals)
+            if (!TryComp<DecalChunkComponent>(chunk, out var decals))
+                continue;
+
+            foreach (var (decalId, decal) in decals.Decals)
             {
-                if (wallTiles.Contains(GetDecalTileIndices(decal, grid.Comp)))
-                    decalsToRemove.Add(decalId);
+                // Определяем тайл по центру декали, чтобы не затронуть соседние тайлы на границе.
+                if (!wallTiles.Contains((decal.Coordinates + half).Floored()))
+                    continue;
+
+                decalsToRemove.Add(new DecalIndex(chunk.Comp.Chunk, decalId));
             }
         }
 
@@ -67,13 +75,5 @@ public sealed class WalledDecalRemovalSystem : EntitySystem
         }
 
         return removed;
-    }
-
-    private static Vector2i GetDecalTileIndices(Decal decal, MapGridComponent grid)
-    {
-        var decalCenter = decal.Coordinates + grid.TileSizeHalfVector;
-        return new Vector2i(
-            (int)Math.Floor(decalCenter.X / grid.TileSize),
-            (int)Math.Floor(decalCenter.Y / grid.TileSize));
     }
 }

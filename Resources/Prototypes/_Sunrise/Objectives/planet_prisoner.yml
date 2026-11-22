@@ -4,7 +4,7 @@
   id: BasePlanetPrisonerObjective
   components:
   - type: Objective
-    issuer: syndicate
+    issuer: TheSyndicate
   - type: RoleRequirement
     roles:
     - PlanetPrisonerRole

@@ -13,7 +13,6 @@
   startingGear: RoboticistGear
   icon: JobIconRoboticist
   supervisors: job-supervisors-rd
-  displayWeight: 30
   alternativeTitles:
   - job-alt-title-cyberneticist
   - job-alt-title-ripperdoc

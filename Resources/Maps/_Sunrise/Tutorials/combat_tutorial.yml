@@ -326,7 +326,7 @@ entities:
     - type: Transform
       pos: 11.5,1.5
       parent: 1
-- proto: FoamBlade
+- proto: SurvivalKnife
   entities:
   - uid: 35
     components:
