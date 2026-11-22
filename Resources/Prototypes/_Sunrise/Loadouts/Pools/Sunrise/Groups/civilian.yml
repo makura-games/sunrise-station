@@ -6,7 +6,15 @@
   minLimit: 0
   maxLimit: 1
   loadouts:
-  - ReporterTapeRecorderBox
+  - SunriseOtherTapeRecorderBox
+
+- type: loadoutGroup
+  id: SunriseLawJobTools
+  name: loadout-group-jobtrinkets
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - SunriseOtherTapeRecorderBox
 
 - type: loadoutGroup
   id: SunriseCommonBackpack
