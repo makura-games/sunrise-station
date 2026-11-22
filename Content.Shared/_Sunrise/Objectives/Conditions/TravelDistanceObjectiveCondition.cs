@@ -13,17 +13,31 @@ public sealed partial class TravelDistanceObjectiveCondition : ObjectiveConditio
 }
 
 /// <summary>
-/// Накапливает пройденный владельцем путь для каждого активного условия.
-/// Висит на владельце цели, чтобы получать его <see cref="MoveEvent"/>.
+/// Хранит накопленный путь условий на сущности цели. Живёт столько же, сколько цель,
+/// поэтому перенос цели на другого владельца не сбрасывает пройденное расстояние.
 /// </summary>
 [RegisterComponent]
-public sealed partial class ObjectiveTravelDistanceOwnerComponent : Component
+public sealed partial class ObjectiveTravelDistanceComponent : Component
 {
     /// <summary>
     /// Накопленный путь по хэндлу условия.
     /// </summary>
     [ViewVariables]
     public Dictionary<ObjectiveConditionHandle, ObjectiveTravelProgress> Progress = [];
+}
+
+/// <summary>
+/// Висит на текущем владельце цели, чтобы получать его <see cref="MoveEvent"/>.
+/// Ссылается на те же накопители, что лежат в <see cref="ObjectiveTravelDistanceComponent"/> цели.
+/// </summary>
+[RegisterComponent]
+public sealed partial class ObjectiveTravelDistanceOwnerComponent : Component
+{
+    /// <summary>
+    /// Накопители активных условий этого владельца по хэндлу.
+    /// </summary>
+    [ViewVariables]
+    public Dictionary<ObjectiveConditionHandle, ObjectiveTravelProgress> Tracked = [];
 }
 
 /// <summary>
@@ -59,29 +73,38 @@ public sealed partial class TravelDistanceObjectiveConditionSystem : EntitySyste
     [SubscribeLocalEvent]
     private void OnActivated(ref ObjectiveConditionActivatedEvent<TravelDistanceObjectiveCondition> args)
     {
+        // Накопитель создаётся один раз на условие; повторная активация после переноса переиспользует его.
+        var objective = EnsureComp<ObjectiveTravelDistanceComponent>(args.Context.Objective);
+        if (!objective.Progress.TryGetValue(args.Context.Handle, out var progress))
+        {
+            progress = new ObjectiveTravelProgress();
+            objective.Progress.Add(args.Context.Handle, progress);
+        }
+
         if (TerminatingOrDeleted(args.Context.Owner))
             return;
 
         var owner = EnsureComp<ObjectiveTravelDistanceOwnerComponent>(args.Context.Owner);
-        owner.Progress[args.Context.Handle] = new ObjectiveTravelProgress();
+        owner.Tracked[args.Context.Handle] = progress;
     }
 
     [SubscribeLocalEvent]
     private void OnEvaluate(ref ObjectiveConditionEvaluateEvent<TravelDistanceObjectiveCondition> args)
     {
-        args.Satisfied = TryComp(args.Context.Owner, out ObjectiveTravelDistanceOwnerComponent? owner) &&
-                         owner.Progress.TryGetValue(args.Context.Handle, out var progress) &&
+        args.Satisfied = TryComp(args.Context.Objective, out ObjectiveTravelDistanceComponent? objective) &&
+                         objective.Progress.TryGetValue(args.Context.Handle, out var progress) &&
                          progress.Distance >= args.Condition.Distance;
     }
 
     [SubscribeLocalEvent]
     private void OnDeactivated(ref ObjectiveConditionDeactivatedEvent<TravelDistanceObjectiveCondition> args)
     {
+        // Снимаем только подписку владельца; накопитель остаётся на цели до её удаления.
         if (!TryComp(args.Context.Owner, out ObjectiveTravelDistanceOwnerComponent? owner))
             return;
 
-        owner.Progress.Remove(args.Context.Handle);
-        if (owner.Progress.Count == 0 && !TerminatingOrDeleted(args.Context.Owner))
+        owner.Tracked.Remove(args.Context.Handle);
+        if (owner.Tracked.Count == 0 && !TerminatingOrDeleted(args.Context.Owner))
             RemComp<ObjectiveTravelDistanceOwnerComponent>(args.Context.Owner);
     }
 
@@ -97,7 +120,7 @@ public sealed partial class TravelDistanceObjectiveConditionSystem : EntitySyste
         if (segment <= 0f || segment > MaxSegmentLength)
             return;
 
-        foreach (var progress in ent.Comp.Progress.Values)
+        foreach (var progress in ent.Comp.Tracked.Values)
         {
             progress.Distance += segment;
         }

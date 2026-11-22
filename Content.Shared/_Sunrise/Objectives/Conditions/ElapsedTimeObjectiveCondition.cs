@@ -15,7 +15,8 @@ public sealed partial class ElapsedTimeObjectiveCondition : ObjectiveConditionBa
 }
 
 /// <summary>
-/// Stores deadlines for active elapsed-time conditions on an objective entity.
+/// Stores deadlines for elapsed-time conditions on an objective entity.
+/// Deadlines live as long as the objective entity, so re-activation after a transfer keeps the original timer.
 /// </summary>
 [RegisterComponent]
 public sealed partial class ActiveElapsedObjectiveComponent : Component
@@ -45,7 +46,7 @@ public sealed partial class ElapsedTimeObjectiveConditionSystem : EntitySystem
     private void OnActivated(ref ObjectiveConditionActivatedEvent<ElapsedTimeObjectiveCondition> args)
     {
         var active = EnsureComp<ActiveElapsedObjectiveComponent>(args.Context.Objective);
-        active.Deadlines[args.Context.Handle] = _timing.CurTime + args.Condition.Delay;
+        active.Deadlines.TryAdd(args.Context.Handle, _timing.CurTime + args.Condition.Delay);
     }
 
     [SubscribeLocalEvent]
@@ -54,16 +55,5 @@ public sealed partial class ElapsedTimeObjectiveConditionSystem : EntitySystem
         args.Satisfied = TryComp(args.Context.Objective, out ActiveElapsedObjectiveComponent? active) &&
                          active.Deadlines.TryGetValue(args.Context.Handle, out var deadline) &&
                          _timing.CurTime >= deadline;
-    }
-
-    [SubscribeLocalEvent]
-    private void OnDeactivated(ref ObjectiveConditionDeactivatedEvent<ElapsedTimeObjectiveCondition> args)
-    {
-        if (!TryComp(args.Context.Objective, out ActiveElapsedObjectiveComponent? active))
-            return;
-
-        active.Deadlines.Remove(args.Context.Handle);
-        if (active.Deadlines.Count == 0 && !TerminatingOrDeleted(args.Context.Objective))
-            RemComp<ActiveElapsedObjectiveComponent>(args.Context.Objective);
     }
 }

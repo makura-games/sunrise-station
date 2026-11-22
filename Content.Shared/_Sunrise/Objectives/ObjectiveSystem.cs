@@ -363,12 +363,14 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
             previousProgress,
             previousRaw,
             previousSatisfied);
-        UpdateObjectiveState(objective);
+        EvaluateObjective(objective);
         return true;
     }
 
     /// <summary>
     /// Reports the current reversible state of one condition.
+    /// Intended for conditions without their own evaluation handler: the objective is re-evaluated
+    /// right after the report, so a condition that answers evaluation will overwrite the reported value.
     /// </summary>
     public bool TrySetConditionSatisfied(ObjectiveConditionHandle handle, bool satisfied)
     {
@@ -376,7 +378,9 @@ public sealed partial class ObjectiveSystem : EntitySystem, IObjectiveConditionE
             return false;
 
         ApplyReportedState(objective, handle, runtime, satisfied);
-        UpdateObjectiveState(objective);
+
+        // Как и для прогресса, цель пересчитывается только на свежем опросе остальных live-условий.
+        EvaluateObjective(objective);
         return true;
     }
 
