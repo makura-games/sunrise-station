@@ -1,0 +1,24 @@
+- type: entity
+  id: CartridgeRifleImprovised
+  name: improvised cartridge (5.56mm)
+  description: A handmade 5.56mm rifle round with a rough steel core and too much phosphorus packed behind it.
+  parent: [BaseCartridgeRifle, BaseMinorContraband]
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRifleTraceImprovised
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Casings/5.56x45_improvised.rsi
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#717171"
+  - type: Tag
+    tags:
+    - Cartridge
+    - CartridgeRifle
+    - CartridgeRifleImprovised
+  - type: Construction
+    graph: ImprovisedRifleBulletGraph
+    node: shell

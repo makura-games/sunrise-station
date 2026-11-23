@@ -1,9 +1,9 @@
-using JetBrains.Annotations;
+using Content.Shared.Destructible.Thresholds;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Presets;
 
-[Prototype, PublicAPI]
+[Prototype]
 public sealed partial class GamePresetPoolPrototype : IPrototype
 {
     /// <inheritdoc/>
@@ -13,6 +13,6 @@ public sealed partial class GamePresetPoolPrototype : IPrototype
     /// <summary>
     ///     Presets with their respective player limits.
     /// </summary>
-    [DataField("presets", required: true)]
-    public Dictionary<string, int[]> Presets { get; private set; } = new();
+    [DataField(required: true)]
+    public Dictionary<string, MinMax> Presets { get; private set; } = new();
 }

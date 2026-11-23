@@ -19,7 +19,7 @@ public sealed partial class SexCondition : IAppearCondition
     {
         if (CheckInitiator)
         {
-            if (!entityManager.TryGetComponent<HumanoidAppearanceComponent>(initiator, out var initiatorAppearance))
+            if (!entityManager.TryGetComponent<HumanoidProfileComponent>(initiator, out var initiatorAppearance))
                 return false;
 
             if (initiatorAppearance.Sex != RequiredSex)
@@ -28,7 +28,7 @@ public sealed partial class SexCondition : IAppearCondition
 
         if (CheckTarget)
         {
-            if (!entityManager.TryGetComponent<HumanoidAppearanceComponent>(target, out var targetAppearance))
+            if (!entityManager.TryGetComponent<HumanoidProfileComponent>(target, out var targetAppearance))
                 return false;
 
             if (targetAppearance.Sex != RequiredSex)

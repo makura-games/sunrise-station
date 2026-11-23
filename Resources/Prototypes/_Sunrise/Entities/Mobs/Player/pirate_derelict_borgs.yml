@@ -1,0 +1,103 @@
+- type: entity
+  parent: PlayerBorgDerelictGhostRole
+  id: PlayerBorgPirateDerelictGhostRole
+  suffix: Ghost role, Pirate, Ion stormed
+  components:
+  - type: SiliconLawProvider
+    laws: PirateLawset
+    subverted: true
+  - type: GhostRole
+    name: ghost-role-information-pirate-reprogrammed-cyborg-name
+    description: ghost-role-information-pirate-reprogrammed-cyborg-description
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+    reregister: false
+    job: Borg
+
+- type: entity
+  parent: PlayerMedicalBorgDerelictGhostRole
+  id: PlayerMedicalBorgPirateDerelictGhostRole
+  suffix: Ghost role, Pirate, Ion stormed
+  components:
+  - type: SiliconLawProvider
+    laws: PirateLawset
+    subverted: true
+  - type: GhostRole
+    name: ghost-role-information-pirate-reprogrammed-medical-cyborg-name
+    description: ghost-role-information-pirate-reprogrammed-cyborg-description
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+    reregister: false
+    job: Borg
+
+- type: entity
+  parent: PlayerMiningBorgDerelictGhostRole
+  id: PlayerMiningBorgPirateDerelictGhostRole
+  suffix: Ghost role, Pirate, Ion stormed
+  components:
+  - type: SiliconLawProvider
+    laws: PirateLawset
+    subverted: true
+  - type: GhostRole
+    name: ghost-role-information-pirate-reprogrammed-mining-cyborg-name
+    description: ghost-role-information-pirate-reprogrammed-cyborg-description
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+    reregister: false
+    job: Borg
+
+- type: entity
+  parent: PlayerBorgSyndicateDerelictGhostRole
+  id: PlayerBorgSyndicatePirateDerelictGhostRole
+  suffix: Ghost role, Pirate, Ion stormed
+  components:
+  - type: SiliconLawProvider
+    laws: PirateLawset
+    subverted: true
+  - type: GhostRole
+    name: ghost-role-information-pirate-reprogrammed-syndicate-cyborg-name
+    description: ghost-role-information-pirate-reprogrammed-cyborg-description
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+    reregister: false
+    job: Borg
+
+- type: entity
+  parent: BorgChassisPirateBattery
+  id: PlayerBorgPirateAssaultGhostRole
+  suffix: Ghost role, Pirate
+  components:
+  - type: GhostRole
+    name: roles-antag-pirate-assault-cyborg-name
+    description: ghost-role-information-pirate-description
+    rules: ghost-role-information-rules-team-antagonist
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
+    raffle:
+      settings: default
+    reregister: false
+    job: Borg
+  - type: GhostTakeoverAvailable
+
+- type: entity
+  id: PlayerBorgPirateDerelictRandomSpawner
+  name: reprogrammed derelict cyborg spawner
+  suffix: Pirate
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Mobs/Silicon/chassis.rsi
+    state: derelict
+  - type: RandomSpawner
+    prototypes:
+    - PlayerBorgPirateDerelictGhostRole
+    - PlayerMedicalBorgPirateDerelictGhostRole
+    - PlayerMiningBorgPirateDerelictGhostRole
+    rarePrototypes:
+    - PlayerBorgSyndicatePirateDerelictGhostRole
+    rareChance: 0.25
+    offset: 0

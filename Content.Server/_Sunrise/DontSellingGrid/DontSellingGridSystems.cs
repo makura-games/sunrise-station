@@ -7,14 +7,14 @@ using Robust.Shared.Containers;
 
 namespace Content.Server._Sunrise.DontSellingGrid;
 
-public sealed class StationDontSellingSystems : EntitySystem
+public sealed partial class StationDontSellingSystems : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
 
     private readonly HashSet<Entity<StaticPriceComponent>> _entities = [];
 
-    private EntityQuery<ContainerManagerComponent> _containerQuery;
-    private EntityQuery<StationDontSellingGridComponent> _stationQuery;
+    [Dependency] private EntityQuery<ContainerManagerComponent> _containerQuery = default!;
+    [Dependency] private EntityQuery<StationDontSellingGridComponent> _stationQuery = default!;
 
     public override void Initialize()
     {
@@ -25,8 +25,6 @@ public sealed class StationDontSellingSystems : EntitySystem
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawning);
         SubscribeLocalEvent<DontSellComponent, PriceCalculationEvent>(OnCalculatePrice);
 
-        _containerQuery = GetEntityQuery<ContainerManagerComponent>();
-        _stationQuery = GetEntityQuery<StationDontSellingGridComponent>();
     }
 
     #region Event handlers

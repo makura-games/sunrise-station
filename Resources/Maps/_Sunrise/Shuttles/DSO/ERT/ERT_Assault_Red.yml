@@ -2093,7 +2093,6 @@ entities:
   - uid: 17
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 1.5,-1.5
       parent: 1
   - uid: 79
@@ -2104,7 +2103,6 @@ entities:
   - uid: 93
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 0.5,-1.5
       parent: 1
   - uid: 279
@@ -2514,6 +2512,8 @@ entities:
     - type: Transform
       pos: 1.526844,9.891994
       parent: 1
+- proto: RandomHumanoidSpawnerERTEngineerGammaHighPopulation
+  entities:
   - uid: 323
     components:
     - type: Transform
@@ -2552,6 +2552,8 @@ entities:
     - type: Transform
       pos: -0.49097443,0.33317924
       parent: 1
+- proto: RandomHumanoidSpawnerERTSecurityRedHighPopulation
+  entities:
   - uid: 327
     components:
     - type: Transform

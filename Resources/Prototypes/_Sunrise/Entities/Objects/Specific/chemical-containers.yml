@@ -4,95 +4,12 @@
   parent: BaseChemistryBottleFilled
   components:
   - type: Label
-    currentLabel: reagent-name-polytrinic-acid
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: PolytrinicAcid
-          Quantity: 30
+    localizedLabel: reagent-name-polytrinic-acid
+  - type: Solution
+    id: drink
+    solution:
+      maxVol: 30
+      reagents:
+      - ReagentId: PolytrinicAcid
+        Quantity: 30
 
-- type: entity
-  parent: Jug
-  suffix: bicaridine
-  id: JugBicaridineSunrise
-  components:
-  - type: Label
-    currentLabel: reagent-name-bicaridine
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        reagents:
-        - ReagentId: Bicaridine
-          Quantity: 200
-
-- type: entity
-  parent: Jug
-  suffix: dermaline
-  id: JugDermalineSunrise
-  components:
-  - type: Label
-    currentLabel: reagent-name-dermaline
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        reagents:
-        - ReagentId: Dermaline
-          Quantity: 200
-
-- type: entity
-  parent: Jug
-  suffix: dexalin
-  id: JugDexalinSunrise
-  components:
-  - type: Label
-    currentLabel: reagent-name-dexalin
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        reagents:
-        - ReagentId: Dexalin
-          Quantity: 200
-
-- type: entity
-  parent: Jug
-  suffix: dexalin+
-  id: JugDexalinPlusSunrise
-  components:
-  - type: Label
-    currentLabel: reagent-name-dexalin-plus
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        reagents:
-        - ReagentId: DexalinPlus
-          Quantity: 200
-
-- type: entity
-  parent: Jug
-  suffix: dylovene
-  id: JugDyloveneSunrise
-  components:
-  - type: Label
-    currentLabel: reagent-name-dylovene
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        reagents:
-        - ReagentId: Dylovene
-          Quantity: 200
-
-- type: entity
-  parent: Jug
-  suffix: saline
-  id: JugSalineSunrise
-  components:
-  - type: Label
-    currentLabel: reagent-name-saline
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        reagents:
-        - ReagentId: Saline
-          Quantity: 200

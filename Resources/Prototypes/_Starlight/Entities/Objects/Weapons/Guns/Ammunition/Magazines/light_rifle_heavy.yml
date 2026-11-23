@@ -1,6 +1,6 @@
 - type: entity
   id: RifleHeavyBase
-  parent: BaseItem
+  parent: BaseNonCycleableAmmoItem # Sunrise-Edit - запрещаем извлекать патроны из вместительных магазинов
   abstract: true
   components:
   - type: Tag
@@ -15,7 +15,7 @@
   - type: Item
     size: Normal
     shape:
-    - 0,0,1,2
+    - 0,0,1,1
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/mg42_large.rsi
     layers:
@@ -57,32 +57,6 @@
       - state: inhand-right-mag
       - state: inhand-right-stripe
         color: "#575EF5"
-
-- type: entity
-  id: RifleHeavyMagazineHP
-  name: "belt box (.308 HP)"
-  parent: RifleHeavyBase
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeRifleHeavyHP
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-4
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#F5514C"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#F5514C"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#F5514C"
 
 - type: entity
   id: RifleHeavyMagazineFMJ
@@ -206,95 +180,3 @@
       - state: inhand-right-mag
       - state: inhand-right-stripe
         color: "#40F57A"
-
-- type: entity
-  id: RifleHeavyMagazineArtillery
-  name: "Magazine Box (.308 space)"
-  parent: RifleHeavyMagazineHP
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeRifleHeavyArtillery
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-4
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#d740f5"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#d740f5"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#d740f5"
-
-- type: entity
-  id: RifleHeavyMagazineArtilleryLarge
-  name: "Large Magazine Box (.308 space)"
-  parent: RifleHeavyMagazineArtillery
-  components:
-  - type: Sprite
-    scale: 1.1,1.25
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-4
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#d740f5"
-  - type: Item
-    size: Large
-    shape:
-    - 0,0,4,1
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#d740f5"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#d740f5"
-  - type: BallisticAmmoProvider
-    mayTransfer: false
-    fillDelay: 1
-    proto: CartridgeRifleHeavyArtillery
-    capacity: 300
-
-- type: entity
-  id: RifleHeavyMagazineArtilleryLargeExtra
-  name: "Extra Large Magazine Box (.308 space)"
-  parent: RifleHeavyMagazineArtillery
-  components:
-  - type: Sprite
-    scale: 1.3,1.6
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-4
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#d740f5"
-  - type: Item
-    size: Large
-    shape:
-    - 0,0,4,2
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#d740f5"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#d740f5"
-  - type: BallisticAmmoProvider
-    mayTransfer: false
-    fillDelay: 1
-    proto: CartridgeRifleHeavyArtillery
-    capacity: 900

@@ -9,6 +9,9 @@
     <PackageReference Include="NUnit" />
     <PackageReference Include="NUnit3TestAdapter" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <!-- Sunrise added start - подключаем перехват загрузки текстур в интеграционных тестах -->
+    <PackageReference Include="MonoMod.RuntimeDetour" />
+    <!-- Sunrise added end -->
     <PackageReference Include="SpaceWizards.NFluidsynth" PrivateAssets="all" />
   </ItemGroup>
   <ItemGroup>

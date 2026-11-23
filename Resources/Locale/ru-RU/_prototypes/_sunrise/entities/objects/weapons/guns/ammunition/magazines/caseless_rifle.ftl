@@ -1,9 +1,2 @@
 ent-BaseMagazinePistolCaselessRifleExtended = расширенный пистолетный магазин (.25 безгильзовый)
     .desc = { ent-BaseMagazinePistolCaselessRifle.desc }
-ent-MagazineCannonBallMini = чемодан ядер
-    .desc = Чемодан для аккуратного хранения ядер от пиратского ядромёта с ленточной подачей.
-ent-MagazineCannonBallGrapeshotMini = чемодан картечи
-    .suffix = Адмемы
-    .desc = Чемодан для аккуратного хранения картечи от пиратского ядромёта с ленточной подачей.
-ent-MagazinePistolSubMachineGunCaselessExtended = Расширенный магазин (.25 безгильзовые)
-    .desc = { ent-BaseMagazineLightRifle.desc }

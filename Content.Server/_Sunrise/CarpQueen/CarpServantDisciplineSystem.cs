@@ -17,11 +17,11 @@ namespace Content.Server._Sunrise.CarpQueen;
 /// Если владелец бьет прирученного карпа голыми руками или перчатками, карп прекращает атаковать текущую цель.
 /// Карп продолжит атаковать эту цель, если атакующий повредит владельца.
 /// </summary>
-public sealed class CarpServantDisciplineSystem : EntitySystem
+public sealed partial class CarpServantDisciplineSystem : EntitySystem
 {
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {

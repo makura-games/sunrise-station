@@ -18,7 +18,7 @@ public sealed partial class StationAiBodySystem
      * while the AI is operating through a body.
      */
 
-    [Dependency] private readonly SiliconLawSystem _siliconLaw = default!;
+    [Dependency] private SiliconLawSystem _siliconLaw = default!;
 
     #region Initialize
 

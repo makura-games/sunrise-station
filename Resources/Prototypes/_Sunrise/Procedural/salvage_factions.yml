@@ -205,29 +205,29 @@
     # squad spawners
     - proto: PirateSquadT2LMG
       cost: 30
-      prob: 0.08
+      prob: 0.03
     - proto: PirateSquadT2Breach
       cost: 20
-      prob: 0.08
+      prob: 0.03
     - proto: PirateSquadT2Assault
       cost: 30
-      prob: 0.08
+      prob: 0.03
     - proto: PirateSquadT2Heavy
       cost: 40
-      prob: 0.05
+      prob: 0.01
     - proto: PirateSquadT2Infiltrator
       cost: 30
-      prob: 0.08
+      prob: 0.03
     # unique squads
     - proto: PirateSquadT2Control
       cost: 35
-      prob: 0.07
+      prob: 0.01
     - proto: PirateSquadT2AntiCrowd
       cost: 30
-      prob: 0.07
+      prob: 0.01
     - proto: PirateSquadT2Random
       cost: 25
-      prob: 0.02
+      prob: 0.05
     # borgs
     - proto: MobPirateT1BorgAssault
       cost: 4
@@ -253,17 +253,15 @@
     DefenseStructure: WeaponTurretPirateDisposable
     Megafauna: MobPirateT2Boss
 
+# region PiratesT3
 - type: salvageFaction
   id: PiratesT3
   desc: salvage-faction-scrappers
   entries:
       # melee
-    - proto: MobPirateT1ExpeditionSpawner
-      cost: 3
-      prob: 0.05
     - proto: MobPirateT1Spawner
       cost: 5
-      prob: 0.05
+      prob: 0.1
     # range
     - proto: MobPirateT1ScrapSMG
       cost: 5
@@ -292,25 +290,25 @@
     # squad spawners
     - proto: PirateSquadT1LMG
       cost: 25
-      prob: 0.05
+      prob: 0.03
     - proto: PirateSquadT1Breach
       cost: 25
-      prob: 0.05
+      prob: 0.03
     - proto: PirateSquadT1Assault
       cost: 25
-      prob: 0.05
+      prob: 0.03
     - proto: PirateSquadT1Heavy
       cost: 25
-      prob: 0.05
+      prob: 0.03
     - proto: PirateSquadT1Infiltrator
       cost: 25
-      prob: 0.05
+      prob: 0.03
     - proto: PirateSquadT1Monkey
       cost: 25
-      prob: 0.05
+      prob: 0.03
     - proto: PirateSquadT1Random
       cost: 25
-      prob: 0.1
+      prob: 0.05
     # melee
     - proto: MobPirateT3Bola
       cost: 8
@@ -387,38 +385,38 @@
     # T1 add
     - proto: PirateSquadT1LMG
       cost: 20
-      prob: 0.05
+      prob: 0.02
     - proto: PirateSquadT1Breach
       cost: 20
-      prob: 0.05
+      prob: 0.02
     - proto: PirateSquadT1Assault
       cost: 20
-      prob: 0.05
+      prob: 0.02
     - proto: PirateSquadT1Heavy
       cost: 20
-      prob: 0.05
+      prob: 0.02
     - proto: PirateSquadT1Infiltrator
       cost: 20
-      prob: 0.05
+      prob: 0.02
     - proto: PirateSquadT1Monkey
       cost: 18
-      prob: 0.05
+      prob: 0.02
     - proto: PirateSquadT1Random
       cost: 20
       prob: 0.02
     # unique squads
     - proto: PirateSquadT3ShieldPhalanx
       cost: 45
-      prob: 0.08
+      prob: 0.03
     - proto: PirateSquadT3Suppressor
       cost: 60
-      prob: 0.08
+      prob: 0.03
     - proto: PirateSquadT3Universal
       cost: 55
-      prob: 0.08
+      prob: 0.03
     - proto: PirateSquadT3Random
       cost: 65
-      prob: 0.02
+      prob: 0.05
     # borgs
     - proto: MobPirateT1BorgAssault
       cost: 5
@@ -486,25 +484,25 @@
       prob: 0.03
     - proto: SovietSquadPatrol
       cost: 20
-      prob: 0.25
+      prob: 0.15
     - proto: SovietSquadInfantry
       cost: 50
-      prob: 0.1
+      prob: 0.05
     - proto: SovietSquadInfantry2
       cost: 50
-      prob: 0.1
+      prob: 0.05
     - proto: SovietSquadSmg
       cost: 50
-      prob: 0.1
+      prob: 0.05
     - proto: SovietSquadAssault
       cost: 60
-      prob: 0.1
+      prob: 0.05
     - proto: SovietSquadLmg
       cost: 30
-      prob: 0.1
+      prob: 0.05
     - proto: SovietSquadMmg
       cost: 30
-      prob: 0.1
+      prob: 0.05
     - proto: MobSovietBear
       cost: 10
       prob: 0.02
@@ -558,25 +556,25 @@
       prob: 0.2
     - proto: SovietSquadInfantry
       cost: 40
-      prob: 0.15
+      prob: 0.1
     - proto: SovietSquadInfantry2
       cost: 45
-      prob: 0.1
+      prob: 0.05
     - proto: SovietSquadSmg
       cost: 40
-      prob: 0.1
+      prob: 0.05
     - proto: SovietSquadAssault
       cost: 50
-      prob: 0.1
+      prob: 0.05
     - proto: SovietSquadLmg
       cost: 25
-      prob: 0.15
+      prob: 0.05
     - proto: SovietSquadMmg
       cost: 30
-      prob: 0.12
+      prob: 0.05
     - proto: SovietSquadLightMechanized
       cost: 100
-      prob: 0.1
+      prob: 0.05
     - proto: SovietSquadHeavyMechanized
       cost: 150
       prob: 0.05
@@ -613,7 +611,7 @@
       prob: 0.2
     - proto: MobRogueSiliconT1Viscerator
       cost: 1
-      prob: 0.1
+      prob: 0.03
     - proto: SpawnMobRogueSiliconT1VisceratorSquad
       cost: 4
       prob: 0.2
@@ -638,9 +636,6 @@
     - proto: MobRogueSiliconT2DerelictBorgAssault
       cost: 4
       prob: 0.06
-    - proto: MobRogueSiliconT3Terminator
-      cost: 4
-      prob: 0.05
     - proto: MobRogueSiliconT3Tesla
       cost: 8
       prob: 0.005

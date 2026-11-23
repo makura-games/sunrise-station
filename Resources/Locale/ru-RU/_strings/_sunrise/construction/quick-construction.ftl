@@ -1,4 +1,7 @@
-quickconstruction-category-pipe = трубы
+quickconstruction-category-pipes = трубы
+quickconstruction-category-atmos-pipes = атмосферные трубы
+quickconstruction-category-disposal-pipes = утилизационные трубы
+quickconstruction-category-atmospherics = вентиляция
 quickconstruction-category-tile = плитка
 quickconstruction-category-railing = перила
 quickconstruction-category-steel = сталь

@@ -6,13 +6,13 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Server._Sunrise.Abilities
 {
-    public sealed class PieThrowerSystem : EntitySystem
+    public sealed partial class PieThrowerSystem : EntitySystem
     {
-        [Dependency] private readonly SharedActionsSystem _actions = default!;
-        [Dependency] private readonly IEntityManager _entityManager = default!;
-        [Dependency] private readonly TransformSystem _transformSystem = default!;
-        [Dependency] private readonly ThrowingSystem _throwing = default!;
-        [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+        [Dependency] private SharedActionsSystem _actions = default!;
+        [Dependency] private IEntityManager _entityManager = default!;
+        [Dependency] private TransformSystem _transformSystem = default!;
+        [Dependency] private ThrowingSystem _throwing = default!;
+        [Dependency] private SharedAudioSystem _audioSystem = default!;
 
         public override void Initialize()
         {

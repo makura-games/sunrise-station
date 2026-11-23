@@ -1,0 +1,280 @@
+- type: entity
+  id: ShellShotgunImprovisedEmpty
+  name: empty improvised shell
+  description: A hollow homemade shotgun shell that can be filled with a somewhat deadly variety of makeshift pellets.
+  parent: [BaseItem, BaseMinorContraband ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/shotgun_shell.rsi
+    layers:
+    - state: improvised-empty
+  - type: Item
+    size: Tiny
+  - type: Solution
+    id: shell
+    solution:
+      maxVol: 5
+  - type: MixableSolution
+    solution: shell
+  - type: FitsInDispenser
+    solution: shell
+  - type: RefillableSolution
+    solution: shell
+  - type: DrainableSolution
+    solution: shell
+  - type: ExaminableSolution
+    solution: shell
+  - type: DrawableSolution
+    solution: shell
+  - type: InjectableSolution
+    solution: shell
+  - type: SolutionTransfer
+  - type: SolutionItemStatus
+    solution: shell
+  - type: Spillable
+    solution: shell
+  - type: Construction
+    graph: ImprovisedShotgunShellEmptyGraph
+    node: shell
+  - type: Tag
+    tags:
+    - ShellShotgunEmpty
+
+- type: entity
+  id: ShellShotgunImprovised
+  name: improvised shell (glass)
+  description: A homemade shotgun shell that shoots painful glass shrapnel. The spread is so wide that it couldn't hit the broad side of a barn.
+  parent: [BaseShellShotgun, BaseMinorContraband ]
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgun
+    - ShellShotgunLight
+  - type: Sprite
+    layers:
+      - state: improvised
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#555555"
+  - type: Construction
+    graph: ImprovisedShotgunShellGraph
+    node: shell
+  - type: CartridgeAmmo
+    soundEject:
+      collection: ShellEject
+    proto: PelletShotgunImprovisedSpreadTrace
+  - type: SpentAmmoVisuals
+    state: "improvised"
+
+- type: entity
+  id: ShellShotgunImprovisedIncendiary
+  name: improvised shell (incendiary)
+  description: A homemade shotgun shell that shoots burning glass shrapnel. The spread is so wide that it couldn't hit the broad side of a barn.
+  parent: [BaseShellShotgun, BaseMinorContraband ]
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - ShellShotgun
+    - ShellShotgunLight
+  - type: Sprite
+    layers:
+      - state: improvised-incendiary
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: Construction
+    graph: ImprovisedIncendiaryShotgunShellGraph
+    node: shell
+  - type: CartridgeAmmo
+    soundEject:
+      collection: ShellEject
+    proto: PelletShotgunImprovisedIncendiarySpread
+  - type: SpentAmmoVisuals
+    state: "improvised-incendiary"
+    revealSpent: false
+    tip: false
+
+- type: entity
+  id: ShellShotgunImprovisedUranium
+  name: improvised shell (uranium glass)
+  description: A homemade shotgun shell that shoots painful uranium glass shrapnel. The spread is so wide that it couldn't hit the broad side of a barn.
+  parent: [BaseShellShotgun, BaseMinorContraband ]
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - ShellShotgun
+    - ShellShotgunLight
+  - type: Sprite
+    layers:
+      - state: improvised-uranium
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: Construction
+    graph: ImprovisedUraniumShotgunShellGraph
+    node: shell
+  - type: CartridgeAmmo
+    soundEject:
+      collection: ShellEject
+    proto: PelletShotgunImprovisedUraniumSpread
+  - type: SpentAmmoVisuals
+    state: "improvised-uranium"
+    revealSpent: false
+    tip: false
+
+- type: entity
+  id: ShellShotgunCoin
+  name: improvised shell (coin slug)
+  description: A homemade shotgun slug that shoots a cylinder of coins. The stack has a tendency to break apart in the blast, limiting its effective range.
+  parent: [BaseShellShotgun, BaseMinorContraband ]
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - ShellShotgun
+    - ShotgunSlug
+    - ShellShotgunLight
+  - type: Sprite
+    layers:
+      - state: coinshot
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: Construction
+    graph: CoinShotgunShellGraph
+    node: shell
+  - type: CartridgeAmmo
+    soundEject:
+      collection: ShellEject
+    proto: PelletShotgunCoinSpread
+  - type: SpentAmmoVisuals
+    state: "coinshot"
+    revealSpent: false
+    tip: false
+
+- type: entity
+  id: ShellShotgunBooze
+  name: shell (.50 beanbag)
+  parent: [ BaseShellShotgun, BaseSecurityBartenderContraband ]
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - ShellShotgun
+    - ShellShotgunLight
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#149A1E"
+  - type: CartridgeAmmo
+    proto: PelletShotgunBooze
+  - type: ChemicalAmmo
+  - type: Solution
+    id: ammo
+    solution:
+      reagents:
+      - ReagentId: Nocturine
+        Quantity: 15
+      - ReagentId: BacchusBlessing
+        Quantity: 8
+      - ReagentId: THC
+        Quantity: 10
+      - ReagentId: MuteToxin
+        Quantity: 2
+  - type: SolutionTransfer
+    maxTransferAmount: 35
+
+- type: entity
+  id: ShellShotgunHoly
+  name: shell (.50 holy)
+  parent: [ BaseShellShotgun, BaseSecurityContraband]
+  components:
+  - type: Sprite
+    layers:
+      - state: slug
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip-long
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#e4e4e4"
+      - state: holy
+  - type: CartridgeAmmo
+    proto: PelletShotgunHoly
+  - type: ChemicalAmmo
+  - type: Solution
+    id: ammo
+    solution:
+      reagents:
+      - ReagentId: Holywater
+        Quantity: 4
+  - type: SolutionTransfer
+    maxTransferAmount: 4
+  - type: Tag
+    tags:
+    - Cartridge
+    - ShellShotgun
+    - ShellShotgunLight
+
+- type: entity
+  id: ShellShotgunFlechette
+  name: shell (.50 flechette)
+  parent: [ BaseShellShotgun, BaseMajorContraband ]
+  components:
+  - type: Sprite
+    layers:
+      - state: slug
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip-long
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#5da0b5"
+      - state: holy
+        color: "#07252eb5"
+  - type: CartridgeAmmo
+    soundEject:
+      collection: ShellEject
+    proto: PelletShotgunFlechetteSpreadTrace
+  - type: Tag
+    tags:
+    - Cartridge
+    - ShellShotgun
+
+- type: entity
+  parent: [ BaseShellShotgun, BaseSecuritySalvageContraband ]
+  id: ShellShotgunBirdshot
+  name: 12 gauge birdshot
+  description: A wide-spread shell loaded with dozens of tiny pellets. Devastating up close, nearly useless at range.
+  components:
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#B87333"
+      - state: spent
+        map: [ "enum.AmmoVisualLayers.Spent" ]
+        visible: false
+  - type: CartridgeAmmo
+    soundEject:
+      collection: ShellEject
+    proto: PelletShotgunBirdshotSpreadTrace
+  - type: Tag
+    tags:
+    - Cartridge
+    - ShellShotgun
+
+- type: entity
+  id: ShellShotgunBreaching
+  name: shell (.50 breaching)
+  parent: [ BaseShellShotgun, BaseSyndicateContraband ]
+  components:
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#0096FF"
+  - type: CartridgeAmmo
+    soundEject:
+      collection: ShellEject
+    proto: PelletShotgunBreachSpreadTrace

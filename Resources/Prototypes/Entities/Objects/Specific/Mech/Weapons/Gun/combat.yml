@@ -16,7 +16,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: BatteryAmmoProvider
-    proto: Pulse # Sunrise-Edit
+    proto: SunriseMechHitscanPulse # Sunrise-Edit - удаляем предсказанную hitscan-сущность
     fireCost: 80
   - type: Appearance
   - type: AmmoCounter
@@ -39,7 +39,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: BatteryAmmoProvider
-    proto: IgnitionRedLaser # Sunrise-Edit
+    proto: SunriseMechHitscanIgnitionRedLaser # Sunrise-Edit - удаляем предсказанную hitscan-сущность
     fireCost: 35
   - type: Appearance
   - type: AmmoCounter
@@ -85,7 +85,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
   - type: BatteryAmmoProvider
-    proto: RedHeavyLaser # Sunrise-Edit
+    proto: SunriseMechHitscanRedHeavyLaser # Sunrise-Edit - удаляем предсказанную hitscan-сущность
     fireCost: 28
   - type: Appearance
   - type: AmmoCounter
@@ -114,7 +114,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
   - type: BatteryAmmoProvider
-    proto: RedLaser
+    proto: SunriseMechHitscanRedLaser # Sunrise-Edit - удаляем предсказанную hitscan-сущность
     fireCost: 14
   - type: Appearance
   - type: AmmoCounter
@@ -198,7 +198,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
   - type: BatteryAmmoProvider
-    proto: TaserBolt
+    proto: BulletTaser # Sunrise-Edit - используем ванильный физический снаряд
     fireCost: 40
   - type: Appearance
   - type: AmmoCounter
@@ -310,10 +310,11 @@
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: BatteryAmmoProvider
-    proto: EmpPulse
+    proto: BulletEMP # Sunrise-Edit - используем физический EMP-снаряд вместо hitscan
     fireCost: 400
   - type: Appearance
   - type: AmmoCounter
+  - type: EmpImmune
   - type: Battery
     maxCharge: 400
     startingCharge: 400
@@ -347,7 +348,7 @@
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: BatteryAmmoProvider
-    proto: RedLaserBeam
+    proto: SunriseMechHitscanRedLaserBeam # Sunrise-Edit - удаляем предсказанную hitscan-сущность
     fireCost: 20
   - type: Appearance
   - type: AmmoCounter
@@ -397,15 +398,15 @@
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_missilerack
   - type: Gun
-    minAngle: 1
-    maxAngle: 25
-    angleIncrease: 5
+    minAngle: 5
+    maxAngle: 75
+    angleIncrease: 8
     angleDecay: 4
     fireRate: 1
     burstFireRate: 9
     shotsPerBurst: 9
-    burstCooldown: 30
-    projectileSpeed: 22
+    burstCooldown: 50
+    projectileSpeed: 20
     selectedMode: Burst
     availableModes:
       - SemiAuto
@@ -413,7 +414,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
   - type: BatteryAmmoProvider
-    proto: BulletWeakRocket
+    proto: BulletMechWeakRocket # Sunrise-Edit
     fireCost: 100
   - type: Appearance
   - type: AmmoCounter

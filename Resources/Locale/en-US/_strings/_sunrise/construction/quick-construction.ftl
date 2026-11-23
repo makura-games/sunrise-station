@@ -1,4 +1,7 @@
-quickconstruction-category-pipe = pipes
+quickconstruction-category-pipes = pipes
+quickconstruction-category-atmos-pipes = atmos pipes
+quickconstruction-category-disposal-pipes = disposal pipes
+quickconstruction-category-atmospherics = atmospherics
 quickconstruction-category-tile = tiles
 quickconstruction-category-railing = railings
 quickconstruction-category-steel = steel

@@ -126,6 +126,19 @@
 
 - type: entity
   parent: CrateAmmunitionSmall
+  id: CrateAmmunitionSmallMaxim
+  name: old small ammunition crate
+  suffix: Filled, Maxim
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: MagazineLightRifleMaxim
+          amount: 4
+
+- type: entity
+  parent: CrateAmmunitionSmall
   id: CrateAmmunitionSmallSKM24
   name: old small ammunition crate
   suffix: Filled, SKM-24
@@ -215,8 +228,9 @@
       storagebase: !type:Container {}
       entity_storage: !type:Container {}
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Wood
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -254,6 +268,7 @@
     sprite: _Sunrise/Objects/Storage/wrapped_rifle.rsi
     state: base
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
@@ -328,6 +343,8 @@
     - id: CrateAmmunitionSmallDragunov
       weight: 0.15
     - id: CrateAmmunitionSmallDP28
+      weight: 0.15
+    - id: CrateAmmunitionSmallMaxim
       weight: 0.15
     - id: CrateAmmunitionSmallSKM24
       weight: 0.3

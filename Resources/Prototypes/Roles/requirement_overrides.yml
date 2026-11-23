@@ -2,6 +2,11 @@
   id: Reduced
   jobs:
     Captain:
+    # Sunrise added start - ограничение расы для должности
+    - !type:SpeciesRequirement
+      species: [Vox]
+      inverted: true
+    # Sunrise added end
     - !type:DepartmentTimeRequirement
       department: Engineering
       time: 1h

@@ -1,0 +1,23 @@
+- type: entity
+  id: SunriseAirlockPirateRandomSpawner
+  parent: MarkerBase
+  name: Pirate Airlock Spawner
+  description: Randomly spawns a pirate airlock.
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _Sunrise/Structures/Doors/Airlocks/Standard/Pirate/pirate.rsi
+      state: closed
+  - type: RandomSpawner
+    prototypes:
+    - SunriseAirlockPirate
+    - SunriseAirlockPirateLine
+    - SunriseAirlockPirateLineMarked
+    - SunriseAirlockPirateMarked
+    - SunriseAirlockPirateRusty
+    - SunriseAirlockPirateRustyMarked
+    chance: 1
+    offset: 0
+  placement:
+    mode: AlignTileAny

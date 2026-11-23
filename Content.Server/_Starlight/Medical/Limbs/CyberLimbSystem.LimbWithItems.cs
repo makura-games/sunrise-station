@@ -1,16 +1,11 @@
-using System.Linq;
 using Content.Shared._Starlight.Medical.Limbs;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Part;
+using Content.Shared.Body;
 using Content.Shared.Hands.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Starlight;
 using Robust.Shared.Containers;
-using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Prototypes;
-using static Content.Server.Power.Pow3r.PowerState;
 
 namespace Content.Server._Starlight.Medical.Limbs;
 
@@ -18,7 +13,6 @@ public sealed partial class CyberLimbSystem : EntitySystem
 {
     public void InitializeLimbWithItems()
     {
-        base.Initialize();
         SubscribeLocalEvent<LimbWithItemsComponent, ToggleLimbEvent>(OnLimbToggle);
         SubscribeLocalEvent<BodyComponent, LimbRemovedEvent<LimbWithItemsComponent>>(LimbWithItemsRemoved);
 
@@ -66,8 +60,8 @@ public sealed partial class CyberLimbSystem : EntitySystem
             }
         }
 
-        if (_slEnt.TryEntity<BaseLayerIdComponent, BaseLayerIdToggledComponent, BodyPartComponent>(ent.Owner, out var limb, false)
-            && _slEnt.TryEntity<HumanoidAppearanceComponent>(args.Performer, out var performer, false))
+        if (_slEnt.TryEntity<BaseLayerDataComponent, BaseLayerToggledDataComponent, OrganComponent>(ent.Owner, out var limb, false)
+            && _slEnt.TryEntity<HumanoidProfileComponent>(args.Performer, out var performer, false))
             _limb.ToggleLimbVisual(performer, limb, ent.Comp.Toggled);
 
         _audio.PlayPvs(ent.Comp.Sound, args.Performer);

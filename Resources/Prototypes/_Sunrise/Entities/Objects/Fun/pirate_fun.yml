@@ -1,0 +1,107 @@
+- type: entity
+  parent: BaseItem
+  id: RobotParrot
+  name: robot parrot
+  description: A pirate's best friend.
+  components:
+  - type: Instrument
+    allowPercussion: false
+    handheld: false
+    program: 2
+    bank: 100
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+        requireInputValidation: false
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+        requireInputValidation: false
+      enum.InstrumentUiKey.Key:
+        type: InstrumentBoundUserInterface
+        requireInputValidation: false
+      enum.StationMapUiKey.Key:
+        type: StationMapBoundUserInterface
+        requireInputValidation: false
+  - type: Sprite
+    sprite: _Sunrise/Objects/Fun/robotparrot.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Sunrise/Objects/Fun/robotparrot.rsi
+    slots:
+    - neck
+  - type: Input
+    context: "human"
+  - type: PAI
+  - type: BlockMovement
+    blockInteraction: false
+  - type: ToggleableGhostRole
+    examineTextMindPresent: pai-system-pai-installed
+    examineTextMindSearching: pai-system-still-searching
+    examineTextNoMind: pai-system-off
+    beginSearchingText: pai-system-searching
+    roleName: pai-system-role-name
+    roleDescription: pai-system-role-description
+    roleRules: ghost-role-information-familiar-rules
+    mindRoles:
+    - MindRoleGhostRoleFamiliar
+    wipeVerbText: pai-system-wipe-device-verb-text
+    wipeVerbPopup: pai-system-wiped-device
+    stopSearchVerbText: pai-system-stop-searching-verb-text
+    stopSearchVerbPopup: pai-system-stopped-searching
+  - type: Examiner
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Freelance
+  - type: ActiveRadio
+    channels:
+    - Freelance
+  - type: DoAfter
+  - type: Actions
+  - type: ActionGrant
+    actions:
+    - ActionPAIOpenShop
+  - type: Store
+    categories:
+    - PAIAbilities
+    currencyWhitelist:
+    - SiliconMemory
+    balance:
+      SiliconMemory: 30
+  - type: RadarConsole
+    maxRange: 256
+    followEntity: true
+  - type: TypingIndicator
+    proto: robot
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Pai
+  - type: MobState
+    allowedStates:
+    - Alive
+  - type: StationAiVision
+    range: 1
+  - type: TTS
+    voice: Portal2FactCore
+  - type: InnateItem
+    instantActions:
+    - PortableSurveillanceCameraMonitorUnpowered
+    - HandheldStationMapUnpowered
+    - HandheldEmergencyCrewMonitorBorg
+    entityTargetActions:
+    - HandheldHealthAnalyzer
+  - type: BorgBrain
+  - type: ContainerContainer
+    containers:
+      innate_items: !type:Container
+  - type: ChangeVoiceInContainer
+    whitelist:
+      components:
+      - SecretStash
+      - WrappedParcel
+  - type: Vocal
+    emoteSounds: UnisexSilicon
+  - type: Tag
+    tags:
+    - SiliconEmotes

@@ -25,20 +25,19 @@ namespace Content.Server._Sunrise.CopyMachine;
 
 public sealed partial class CopyMachineSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly PaperSystem _paper = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly MaterialStorageSystem _materialStorage = default!;
-    [Dependency] private readonly IResourceManager _resourceManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IConfigurationManager _configManager = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly LabelSystem _label = default!;
-    [Dependency] private readonly DocumentFormatSystem _documentFormat = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private PaperSystem _paper = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private MaterialStorageSystem _materialStorage = default!;
+    [Dependency] private IResourceManager _resourceManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IConfigurationManager _configManager = default!;
+    [Dependency] private EmagSystem _emag = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private LabelSystem _label = default!;
+    [Dependency] private DocumentFormatSystem _documentFormat = default!;
 
     private readonly Dictionary<string, string> _documentContentByTemplateId = new();
 
@@ -57,7 +56,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
         SubscribeLocalEvent<CopyMachineComponent, CopyMachineCopyMessage>(OnCopyRequested);
         SubscribeLocalEvent<CopyMachineComponent, CopyMachineCancelJobMessage>(OnCancelJobRequested);
         SubscribeLocalEvent<CopyMachineComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<CopyMachineComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
+        SubscribeLocalEvent<CopyMachineComponent, SolutionChangedEvent>(OnSolutionChanged);
         SubscribeLocalEvent<CopyMachineComponent, EntInsertedIntoContainerMessage>(OnEntityInsertedIntoCopySlot);
         SubscribeLocalEvent<CopyMachineComponent, EntRemovedFromContainerMessage>(OnEntityRemovedFromCopySlot);
         SubscribeLocalEvent<CopyMachineComponent, MaterialAmountChangedEvent>(OnMaterialAmountChanged);
@@ -115,7 +114,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
     private bool TryGetConfiguredTemplatePool([NotNullWhen(true)] out DocTemplatePoolPrototype? templatePoolPrototype)
     {
         var templatePoolId = _configManager.GetCVar(SunriseCCVars.DocumentTemplatePool);
-        return _prototypeManager.TryIndex(templatePoolId, out templatePoolPrototype);
+        return ProtoMan.TryIndex(templatePoolId, out templatePoolPrototype);
     }
 
     private void RebuildDocumentTemplateContentCache()
@@ -127,7 +126,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
 
         foreach (var templateId in templatePoolPrototype.Templates)
         {
-            if (!_prototypeManager.TryIndex(templateId, out var templatePrototype))
+            if (!ProtoMan.TryIndex(templateId, out var templatePrototype))
                 continue;
 
             using var file = _resourceManager.ContentFileReadText(templatePrototype.Content);
@@ -160,7 +159,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
 
         foreach (var templateId in templatePoolPrototype.Templates)
         {
-            if (!_prototypeManager.TryIndex(templateId, out var templatePrototype))
+            if (!ProtoMan.TryIndex(templateId, out var templatePrototype))
                 continue;
 
             if (!IsTemplateCategoryAllowed(ent, templatePrototype.Category))
@@ -178,7 +177,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
         if (ent.Comp.TemplateCategoryGroupId is not { } groupId)
             return true;
 
-        return _prototypeManager.TryIndex(groupId, out DocTemplateCategoryGroupPrototype? group) &&
+        return ProtoMan.TryIndex(groupId, out DocTemplateCategoryGroupPrototype? group) &&
             group.Categories.Contains(categoryId);
     }
 
@@ -188,7 +187,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
     }
 
     private void OnUiOpened(Entity<CopyMachineComponent> ent, ref BoundUIOpenedEvent args) => UpdateUserInterface(ent);
-    private void OnSolutionChanged(Entity<CopyMachineComponent> ent, ref SolutionContainerChangedEvent args) => QueueUIUpdate(ent);
+    private void OnSolutionChanged(Entity<CopyMachineComponent> ent, ref SolutionChangedEvent args) => QueueUIUpdate(ent);
     private void OnEntityRemovedFromCopySlot(Entity<CopyMachineComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         if (args.Container.ID != CopyMachineComponent.CopySlotId)
@@ -246,7 +245,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
 
     private void OnMapInit(Entity<CopyMachineComponent> ent, ref MapInitEvent args)
     {
-        _itemSlots.AddItemSlot(ent, CopyMachineComponent.CopySlotId, ent.Comp.CopySlot);
+        _itemSlots.AddItemSlot((ent.Owner, null), CopyMachineComponent.CopySlotId, ent.Comp.CopySlot);
         UpdateRunningAppearance(ent, false);
 
         UpdateAvailableTemplates(ent);
@@ -268,7 +267,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
 
         foreach (var templateId in templatePoolPrototype.Templates)
         {
-            if (!_prototypeManager.TryIndex(templateId, out var templatePrototype))
+            if (!ProtoMan.TryIndex(templateId, out var templatePrototype))
                 continue;
 
             if (!IsTemplateCategoryAllowed(ent, templatePrototype.Category))
@@ -304,7 +303,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
     {
         if (jobType == CopyMachineJobType.Print &&
             templateId != null &&
-            _prototypeManager.TryIndex<DocTemplatePrototype>(templateId, out var templatePrototype))
+            ProtoMan.TryIndex<DocTemplatePrototype>(templateId, out var templatePrototype))
         {
             return Loc.GetString(templatePrototype.Name);
         }
@@ -372,7 +371,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
 
     private bool TryConsumeInkAndPaper(Entity<CopyMachineComponent> ent)
     {
-        if (!_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.Solution, out _, out var solution))
+        if (!_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.Solution, out var solutionEntity, out var solution))
             return false;
 
         var inkReagentId = new ReagentId(ent.Comp.IncReagentProto, null);
@@ -383,7 +382,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
         if (!_materialStorage.TryChangeMaterialAmount(ent, ent.Comp.PaperMaterial, -ent.Comp.PaperCost))
             return false;
 
-        solution.RemoveReagent(inkReagentId, ent.Comp.IncCost);
+        _solutionContainer.RemoveReagent(solutionEntity.Value, inkReagentId, ent.Comp.IncCost);
 
         return true;
     }
@@ -393,7 +392,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
         if (!HasAvailableTemplate(ent, templateId))
             return false;
 
-        if (!_prototypeManager.TryIndex(templateId, out DocTemplatePrototype? templatePrototype))
+        if (!ProtoMan.TryIndex(templateId, out DocTemplatePrototype? templatePrototype))
             return false;
 
         if (!IsTemplateCategoryAllowed(ent, templatePrototype.Category))
@@ -422,7 +421,7 @@ public sealed partial class CopyMachineSystem : EntitySystem
             return false;
 
         if (!_documentContentByTemplateId.TryGetValue(templateId, out var templateContent) ||
-            !_prototypeManager.TryIndex<DocTemplatePrototype>(templateId, out var templatePrototype))
+            !ProtoMan.TryIndex<DocTemplatePrototype>(templateId, out var templatePrototype))
             return false;
 
         var paperEntity = Spawn(ent.Comp.PaperProtoId, Transform(ent).Coordinates);

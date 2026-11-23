@@ -1,0 +1,83 @@
+- type: entity
+  id: BorgModulePirate
+  parent: [ BaseBorgModuleSyndicate, BaseProviderBorgModule, BaseSyndicateContraband ]
+  name: pirate cyborg module
+  description: A module that comes with a grappling hook, energy cutlass, and self-loading musket.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Robotics/pirate_borg.rsi
+    layers:
+    - state: pirate
+    - state: icon-pirate
+  - type: ItemBorgModule
+    hands:
+    - item: WeaponGrapplingGun
+    - item: EnergyCutlass
+    - item: WeaponBorgPirateMusket
+  - type: BorgModuleIcon
+    icon: { sprite: _Sunrise/Objects/Specific/Robotics/pirate_borg.rsi, state: icon-pirate }
+
+- type: entity
+  id: BorgModulePirateUtility
+  parent: [ BaseBorgModuleSyndicate, BaseProviderBorgModule, BaseSyndicateContraband ]
+  name: pirate utility cyborg module
+  description: A module that comes with a mass scanner, pirate jetpack, material bag, and forged omnitool.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Robotics/pirate_borg.rsi
+    layers:
+    - state: pirate
+    - state: icon-pirate
+  - type: ItemBorgModule
+    hands:
+    - item: HandHeldMassScannerPirate
+    - item: PirateJetpackBorg
+    - item: MaterialBagSunrise
+    - item: OmnitoolForged
+  - type: Tag
+    tags:
+    - BorgModuleSyndicate
+    - BorgModulePirate
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: adv-tools-module }
+
+- type: entity
+  id: WeaponBorgPirateMusket
+  parent: BaseItem
+  name: cyborg pirate musket
+  description: A self-loading pirate musket modified for cyborg use.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Tool
+    qualities:
+    - Slicing
+  - type: Item
+    size: Large
+    sprite: _Sunrise/Objects/Weapons/Guns/Snipers/musket.rsi
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Snipers/musket.rsi
+    layers:
+    - state: base
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    minAngle: 10
+    maxAngle: 25
+    fireRate: 1
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
+  - type: UseDelayOnShoot
+  - type: UseDelay
+    delay: 1
+  - type: BatteryAmmoProvider
+    proto: CannonBallGrapeshotMini
+    fireCost: 25
+  - type: Battery
+    maxCharge: 25
+    startingCharge: 25
+  - type: BatterySelfRecharger
+    autoRechargeRate: 25
+    autoRechargePauseTime: 4
+  - type: Appearance
+  - type: AmmoCounter

@@ -1,0 +1,57 @@
+- type: entity
+  parent: BaseItem
+  id: TapeRecorder
+  name: cassette tape recorder
+  description: A compact recorder for preserving nearby speech on magnetic tape.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Devices/tape_recorder.rsi
+    state: icon
+  - type: TapeRecorder
+    rewindSpeed: 12
+    cassetteSlot:
+      insertSound: /Audio/_Sunrise/TapePlayer/insert_tape.ogg
+      ejectSound: /Audio/_Sunrise/TapePlayer/eject_tape.ogg
+      whitelist:
+        components:
+        - TapeCassette
+  - type: Item
+    size: Small
+    sprite: _Sunrise/Objects/Devices/tape_recorder.rsi
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      cassette: !type:ContainerSlot
+  - type: ActivatableUI
+    key: enum.TapeRecorderUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.TapeRecorderUiKey.Key:
+        type: TapeRecorderBoundUserInterface
+
+- type: entity
+  parent: Paper
+  id: TapeRecorderTranscript
+  name: tape transcript
+  description: A printed transcript from a cassette tape recorder.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: paper_receipt_horizontal
+    - state: paper_receipt_horizontal_words
+      map: ["enum.PaperVisualLayers.Writing"]
+      visible: false
+    - state: paper_stamp-generic
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
+  - type: Paper
+    content: ""
+  - type: PaperVisuals
+    backgroundImagePath: "/Textures/Interface/Paper/paper_background_perforated.svg.96dpi.png"
+    headerImagePath: null
+    headerMargin: 0.0, 0.0, 0.0, 0.0
+    backgroundImageTile: true
+    backgroundPatchMargin: 6.0, 0.0, 6.0, 0.0
+    contentMargin: 12.0, 0.0, 6.0, 0.0
+    maxWritableArea: 368.0, 256.0

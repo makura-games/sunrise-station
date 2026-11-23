@@ -192,3 +192,27 @@
   id: FreeLaw1
   order: 1
   lawString: law-freelawset-1
+
+- type: siliconLawset
+  id: PirateLawset
+  name: law-pirate-name
+  laws:
+  - PirateLaw1
+  - PirateLaw2
+  - PirateLaw3
+  obeysTo: laws-owner-pirate
+
+- type: siliconLaw
+  id: PirateLaw1
+  order: 1
+  lawString: law-pirate-1
+
+- type: siliconLaw
+  id: PirateLaw2
+  order: 2
+  lawString: law-pirate-2
+
+- type: siliconLaw
+  id: PirateLaw3
+  order: 3
+  lawString: law-pirate-3

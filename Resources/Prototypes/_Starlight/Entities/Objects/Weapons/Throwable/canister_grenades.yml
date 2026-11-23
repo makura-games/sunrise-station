@@ -4,6 +4,12 @@
   name: lube grenade
   description: A tactical grenade that releases a slippery cloud of lube.
   components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Weapons/Grenades/lube.rsi
+  - type: Item
+    sprite: _Starlight/Objects/Weapons/Grenades/lube.rsi
+  - type: Clothing
+    sprite: _Starlight/Objects/Weapons/Grenades/lube.rsi
   - type: SmokeOnTrigger
     keysIn:
     - timer
@@ -21,6 +27,12 @@
   name: glue grenade
   description: A tactical grenade that releases an adhesive cloud of glue.
   components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Weapons/Grenades/glue.rsi
+  - type: Item
+    sprite: _Starlight/Objects/Weapons/Grenades/glue.rsi
+  - type: Clothing
+    sprite: _Starlight/Objects/Weapons/Grenades/glue.rsi
   - type: SmokeOnTrigger
     keysIn:
     - timer

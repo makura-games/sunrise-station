@@ -43,6 +43,12 @@
                 <Label Text="{Loc 'ui-options-sunrise-general-graphics'}" StyleClasses="LabelKeyText"/>
                 <CheckBox Name="ChatIconsEnableCheckBox" Text="{Loc 'ui-options-chat-icons-enable'}" />
                 <CheckBox Name="ChatPointingVisualsEnableCheckBox" Text="{Loc 'ui-options-chat-pointing-visuals-enable'}" />
+                <CheckBox Name="LightBloomEnabledCheckBox"
+                          Text="{Loc 'ui-options-light-bloom-enable'}"
+                          ToolTip="{Loc 'ui-options-light-bloom-enable-tooltip'}" />
+                <ui:OptionSlider Name="LightBloomStrengthSlider"
+                                 Title="{Loc 'ui-options-light-bloom-strength'}"
+                                 ToolTip="{Loc 'ui-options-light-bloom-strength-tooltip'}" />
 
             </BoxContainer>
         </ScrollContainer>

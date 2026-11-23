@@ -30,7 +30,8 @@
   - type: Store
     name: store-preset-name-blackmarket
     categories:
-    - UplinkPirateWeaponry
+    - UplinkPirateMeleeWeaponry
+    - UplinkPirateRangedWeaponry
     - UplinkPirateAmmo
     - UplinkPirateExplosives
     - UplinkPirateChemicals
@@ -40,6 +41,7 @@
     - UplinkPirateCybernetics
     - UplinkPirateAllies
     - UplinkPirateWearables
+    - UplinkPirateArmor
     - UplinkPiratePointless
     - UplinkPirateMechs
     - UplinkPirateBundle

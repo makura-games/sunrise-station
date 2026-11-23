@@ -1,0 +1,81 @@
+- type: entity
+  id: BorgChassisPirate
+  parent: BaseBorgChassis
+  name: pirate boarding cyborg
+  description: A hardy machine built for killing landlubbers.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Pirate
+  - type: Sprite
+    sprite: _Sunrise/Mobs/Silicon/pirate_borg_chassis.rsi
+    layers:
+    - state: pirate
+    - state: pirate_e
+      map: ["enum.BorgVisualLayers.Light"]
+      shader: unshaded
+      visible: false
+    - state: pirate_l
+      shader: unshaded
+      map: ["light"]
+      visible: false
+  - type: Access
+    tags:
+    - Pirate
+  - type: AccessReader
+    access: [["Pirate"]]
+  - type: BorgChassis
+    maxModules: 3
+    moduleWhitelist:
+      tags:
+      - BorgModulePirate
+    hasMindState: pirate_e
+    noMindState: pirate
+  - type: SiliconLawProvider
+    laws: PirateLawset
+    subverted: true
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Binary
+    - Freelance
+  - type: ActiveRadio
+    channels:
+    - Binary
+    - Freelance
+  - type: Speech
+    speechSounds: SyndieBorg
+    allowedEmotes:
+    - Laugh
+  - type: Vocal
+    emoteSounds: UnisexSiliconSyndicate
+  - type: InteractionPopup
+    interactSuccessString: petting-success-syndicate-cyborg
+    interactFailureString: petting-failure-syndicate-cyborg
+    interactSuccessSound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+  - type: BorgTransponder
+    disableProof: true
+    sprite:
+      sprite: _Sunrise/Mobs/Silicon/pirate_borg_chassis.rsi
+      state: pirate_icon
+    name: pirate boarding cyborg
+
+- type: entity
+  id: BorgChassisPirateBattery
+  parent: BorgChassisPirate
+  name: pirate boarding cyborg
+  description: A hardy machine built for killing landlubbers.
+  suffix: Battery, Module, Pirate
+  components:
+  - type: ContainerFill
+    containers:
+      borg_brain:
+      - Boris
+      borg_module:
+      - BorgModulePirate
+      - BorgModulePirateUtility
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellHyper

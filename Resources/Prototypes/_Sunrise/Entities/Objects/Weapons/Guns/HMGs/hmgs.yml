@@ -69,6 +69,13 @@
     proto: CartridgeRifleIncendiary
 
 - type: entity
+  id: PowerpackMinigunMG100Improvised
+  parent: PowerpackMinigunMG100
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifleImprovised
+
+- type: entity
   id: BasePowerpackMG100
   parent: BaseItem
   abstract: true

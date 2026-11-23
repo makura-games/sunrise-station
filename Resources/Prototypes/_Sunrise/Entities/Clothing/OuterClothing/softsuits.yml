@@ -84,6 +84,7 @@
   - type: ItemSlots
     slots:
       beakerSlot:
+        startingItem: AmpulaBuccaneerSpirit
         whitelist:
           tags:
           - FitsHardsuit
@@ -110,15 +111,15 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.65
+        Blunt: 0.7
         Slash: 0.75
         Piercing: 0.8
-        Heat: 0.5
+        Heat: 0.8
         Radiation: 0.7
         Caustic: 0.7
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 0.99
+    sprintModifier: 0.99
   - type: StaminaResistance
     damageCoefficient: 0.8
   - type: ClothingSlowOnDamageModifier
@@ -126,7 +127,7 @@
   - type: Storage
     grid:
     - 0,0,1,2
-    - 0,3,1,2
+    - 0,2,1,3
     - 3,0,4,2
   - type: HeldSpeedModifier
   - type: Tag
@@ -154,12 +155,12 @@
         Blunt: 0.6
         Slash: 0.65
         Piercing: 0.7
-        Heat: 0.5
-        Radiation: 0.5
-        Caustic: 0.5
+        Heat: 0.6
+        Radiation: 0.6
+        Caustic: 0.6
   - type: ClothingSpeedModifier
-    walkModifier: 0.85
-    sprintModifier: 0.85
+    walkModifier: 0.9
+    sprintModifier: 0.9
   - type: StaminaResistance
     damageCoefficient: 0.75
   - type: ClothingSlowOnDamageModifier
@@ -176,6 +177,7 @@
   - type: ItemSlots
     slots:
       beakerSlot:
+        startingItem: AmpulaBuccaneerSpirit
         whitelist:
           tags:
           - FitsHardsuit
@@ -221,13 +223,80 @@
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 0.95
+    sprintModifier: 0.95
   - type: StaticPrice
     price: 4000
   - type: Tag
     tags:
     - SuitEVA
+    - FullBodyOuter
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingOuterEVASuitPirate
+  id: ClothingOuterEVASuitPirateDamaged
+  name: damaged boarding EVA suit
+  description: A battered boarding EVA suit with punctured pressure layers. It no longer protects its wearer from space.
+  components:
+  - type: PressureProtection
+    highPressureMultiplier: 1
+    lowPressureMultiplier: 1
+  - type: TemperatureProtection
+    coefficient: 1
+  - type: Tag
+    tags:
+    - MonkeyWearable
+    - FullBodyOuter
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingOuterEVASuitPirateArmored
+  id: ClothingOuterEVASuitPirateArmoredDamaged
+  name: damaged armored boarding EVA suit
+  description: An armored boarding EVA suit with torn seals and punctured pressure layers. It no longer protects its wearer from space.
+  components:
+  - type: PressureProtection
+    highPressureMultiplier: 1
+    lowPressureMultiplier: 1
+  - type: TemperatureProtection
+    coefficient: 1
+  - type: Tag
+    tags:
+    - MonkeyWearable
+    - FullBodyOuter
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingOuterEVASuitPirateArmoredAlt
+  id: ClothingOuterEVASuitPirateArmoredAltDamaged
+  name: damaged armored boarding EVA suit
+  description: An armored boarding EVA suit with a painted skull and enough punctures to ruin the pressure seal. It no longer protects its wearer from space.
+  components:
+  - type: PressureProtection
+    highPressureMultiplier: 1
+    lowPressureMultiplier: 1
+  - type: TemperatureProtection
+    coefficient: 1
+  - type: Tag
+    tags:
+    - MonkeyWearable
+    - FullBodyOuter
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingOuterHardsuitScaf
+  id: ClothingOuterHardsuitScafDamaged
+  name: damaged SCAF EVA suit
+  description: A green-and-brown EVA suit with split seams and punctured pressure layers. It no longer protects its wearer from space.
+  components:
+  - type: PressureProtection
+    highPressureMultiplier: 1
+    lowPressureMultiplier: 1
+  - type: TemperatureProtection
+    coefficient: 1
+  - type: Tag
+    tags:
     - FullBodyOuter
     - WhitelistChameleon
 
@@ -265,7 +334,7 @@
   - type: HeldSpeedModifier
   - type: EmitSoundOnWearerMove
     sound:
-      collection: FootstepHeavy
+      collection: FootstepBoots
       params:
         volume: -6
         variation: 0.09

@@ -305,8 +305,10 @@
     - Biological
     delay: 1.6
     damage:
-      groups:
-        Brute: -18
+      types:
+        Blunt: -6
+        Slash: -6
+        Piercing: -6
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
     healingEndSound:
@@ -630,8 +632,6 @@
       Alive:
         reagent: Omnizine
         quantity: 10
-        minDamage: 49
-        maxDamage: 120
       Critical:
         reagent: Omnizine
         quantity: 10

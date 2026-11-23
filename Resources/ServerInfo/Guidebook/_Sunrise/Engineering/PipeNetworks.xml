@@ -1,0 +1,41 @@
+﻿<Document>
+  # Трубопроводные сети
+  Трубопроводные сети, обычно называемые пайпнетами, - это серия соединённых [textlink="труб" link="Pipes"], обычно выполняющих общую задачу.
+
+  <Box>
+    <GuideEntityEmbed Entity="GasPipeStraight" Caption=""/>
+    <GuideEntityEmbed Entity="GasPipeHalf" Caption=""/>
+    <GuideEntityEmbed Entity="GasPipeBend" Caption=""/>
+    <GuideEntityEmbed Entity="GasPipeTJunction" Caption=""/>
+    <GuideEntityEmbed Entity="GasPipeFourway" Caption=""/>
+    <GuideEntityEmbed Entity="GasPressurePump" Caption=""/>
+    <GuideEntityEmbed Entity="GasVolumePump" Caption=""/>
+  </Box>
+
+  Пайпнеты используются по всей станции, чтобы доставлять, удалять или иначе перемещать газ.
+  Хорошие примеры - станционные Distro и Wastenet, которые соответственно доставляют пригодный для дыхания воздух и удаляют отходные газы.
+
+  ## Как работают пайпнеты
+  В Space Station 14 пайпнет ведёт себя как единый определённый объём с точками входа и выхода на концах сети.
+  Принудительная подача или откачка газа [textlink="насосом" link="Pumps"] влияет на всю сеть, а не только на трубу, к которой он подключён.
+
+  Пайпнеты разделяются только устройствами, способными прерывать поток, или некоторыми специальными устройствами.
+  Например, [textlink="насос давления" link="Pumps"] не позволит газу пройти через себя, если он не запитан или ему нечего качать.
+
+  Примеры устройств, разделяющих трубопроводные сети:
+  - [textlink="Насосы давления и объёмные насосы" link="Pumps"]
+  - [textlink="Газовые смесители и фильтры" link="MixingAndFiltering"]
+  - [textlink="Все клапаны" link="Valves"]
+  - [textlink="Радиаторы" link="Radiators"]
+
+  Ниже показан пример пайпнета, разделённого [textlink="насосом" link="Pumps"] на два отдельных пайпнета:
+
+  <Box>
+    <GuideEntityEmbed Entity="GasPipeStraight" Caption="Пайпнет 1" Rotation="90"/>
+    <GuideEntityEmbed Entity="GasPipeStraight" Caption="" Rotation="90"/>
+    <GuideEntityEmbed Entity="GasPressurePump" Caption="Разделитель сетей" Rotation="90"/>
+    <GuideEntityEmbed Entity="GasPipeStraight" Caption="" Rotation="90"/>
+    <GuideEntityEmbed Entity="GasPipeStraight" Caption="Пайпнет 2" Rotation="90"/>
+  </Box>
+
+</Document>

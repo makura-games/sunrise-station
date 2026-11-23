@@ -6,3 +6,5 @@ ent-BulletRifleIncendiary = пуля (0.20 винтовочная зажигат
     .desc = { ent-BaseBulletIncendiary.desc }
 ent-BulletRifleUranium = пуля (0.20 винтовочная урановая)
     .desc = { ent-BaseBulletUranium.desc }
+ent-BulletRifleTraceImprovised = самодельная пуля (5,56мм)
+    .desc = Грубая пуля 5,56мм, способная пробить укрытие или срикошетить от него.

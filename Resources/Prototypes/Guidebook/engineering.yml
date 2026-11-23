@@ -43,7 +43,7 @@
 - type: guideEntry
   id: Atmospherics
   name: guide-entry-atmospherics
-  text: "/ServerInfo/Guidebook/Engineering/Atmospherics.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/Atmospherics.xml" # Sunrise-Edit
   children:
   - GasManipulation
   - AtmosphericsSystems
@@ -54,7 +54,7 @@
 - type: guideEntry
   id: GasManipulation
   name: guide-entry-gasmanipulation
-  text: "/ServerInfo/Guidebook/Engineering/GasManipulation.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/GasManipulation.xml" # Sunrise-Edit
   children:
   - AtmosphereInOut
   - Pipes
@@ -69,17 +69,17 @@
 - type: guideEntry
   id: Pipes
   name: guide-entry-pipes
-  text: "/ServerInfo/Guidebook/Engineering/Pipes.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/Pipes.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: Pumps
   name: guide-entry-pumps
-  text: "/ServerInfo/Guidebook/Engineering/Pumps.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/Pumps.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: AtmosphereInOut
   name: guide-entry-atmosphereinout
-  text: "/ServerInfo/Guidebook/Engineering/AtmosphereInOut.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/AtmosphereInOut.xml" # Sunrise-Edit
   children:
   - AirVent
   - PassiveVent
@@ -90,32 +90,32 @@
 - type: guideEntry
   id: AirVent
   name: guide-entry-airvent
-  text: "/ServerInfo/Guidebook/Engineering/AirVent.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/AirVent.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: PassiveVent
   name: guide-entry-passivevent
-  text: "/ServerInfo/Guidebook/Engineering/PassiveVent.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/PassiveVent.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: AirInjector
   name: guide-entry-airinjector
-  text: "/ServerInfo/Guidebook/Engineering/AirInjector.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/AirInjector.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: AirScrubber
   name: guide-entry-airscrubber
-  text: "/ServerInfo/Guidebook/Engineering/AirScrubber.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/AirScrubber.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: PortableScrubber
   name: guide-entry-portablescrubber
-  text: "/ServerInfo/Guidebook/Engineering/PortableScrubber.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/PortableScrubber.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: Valves
   name: guide-entry-valves
-  text: "/ServerInfo/Guidebook/Engineering/Valves.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/Valves.xml" # Sunrise-Edit
   children:
   - ManualValve
   - SignalValve
@@ -126,64 +126,64 @@
 - type: guideEntry
   id: ManualValve
   name: guide-entry-manualvalve
-  text: "/ServerInfo/Guidebook/Engineering/ManualValve.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/ManualValve.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: SignalValve
   name: guide-entry-signalvalve
-  text: "/ServerInfo/Guidebook/Engineering/SignalValve.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/SignalValve.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: PneumaticValve
   name: guide-entry-pneumaticvalve
-  text: "/ServerInfo/Guidebook/Engineering/PneumaticValve.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/PneumaticValve.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: PassiveGate
   name: guide-entry-passivegate
-  text: "/ServerInfo/Guidebook/Engineering/PassiveGate.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/PassiveGate.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: PressureRegulator
   name: guide-entry-ressureregulator
-  text: "/ServerInfo/Guidebook/Engineering/PressureRegulator.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/PressureRegulator.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: MixingAndFiltering
   name: guide-entry-mixingandfiltering
-  text: "/ServerInfo/Guidebook/Engineering/MixingAndFiltering.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/MixingAndFiltering.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: GasCanisters
   name: guide-entry-gascanisters
-  text: "/ServerInfo/Guidebook/Engineering/GasCanisters.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/GasCanisters.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: Thermomachines
   name: guide-entry-thermomachines
-  text: "/ServerInfo/Guidebook/Engineering/Thermomachines.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/Thermomachines.xml" # Sunrise-Edit
   children:
   - Radiators
 
 - type: guideEntry
   id: GasCondensing
   name: guide-entry-gascondensing
-  text: "/ServerInfo/Guidebook/Engineering/GasCondensing.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/GasCondensing.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: GasRecycling
   name: guide-entry-gasrecycling
-  text: "/ServerInfo/Guidebook/Engineering/GasRecycling.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/GasRecycling.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: Radiators
   name: guide-entry-radiators
-  text: "/ServerInfo/Guidebook/Engineering/Radiators.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/Radiators.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: AtmosphericsSystems
   name: guide-entry-atmosphericssystems
-  text: "/ServerInfo/Guidebook/Engineering/AtmosphericsSystems.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/AtmosphericsSystems.xml" # Sunrise-Edit
   children:
   - PipeNetworks
   - DeviceMonitoringAndControl
@@ -193,12 +193,12 @@
 - type: guideEntry
   id: PipeNetworks
   name: guide-entry-pipenetworks
-  text: "/ServerInfo/Guidebook/Engineering/PipeNetworks.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/PipeNetworks.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: DeviceMonitoringAndControl
   name: guide-entry-devicemonitoringandcontrol
-  text: "/ServerInfo/Guidebook/Engineering/DeviceMonitoringAndControl.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/DeviceMonitoringAndControl.xml" # Sunrise-Edit
   children:
   - AirAlarms
   - AtmosphericAlertsComputer
@@ -207,32 +207,32 @@
 - type: guideEntry
   id: AirAlarms
   name: guide-entry-airalarms
-  text: "/ServerInfo/Guidebook/Engineering/AirAlarms.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/AirAlarms.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: AtmosphericAlertsComputer
   name: guide-entry-atmosphericalertscomputer
-  text: "/ServerInfo/Guidebook/Engineering/AtmosphericAlertsComputer.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/AtmosphericAlertsComputer.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: AtmosphericNetworkMonitor
   name: guide-entry-atmosphericnetworkmonitor
-  text: "/ServerInfo/Guidebook/Engineering/AtmosphericNetworkMonitor.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/AtmosphericNetworkMonitor.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: FireAndGasControl
   name: guide-entry-fireandgascontrol
-  text: "/ServerInfo/Guidebook/Engineering/FireAndGasControl.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/FireAndGasControl.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: GasMiningAndStorage
   name: guide-entry-gasminingandstorage
-  text: "/ServerInfo/Guidebook/Engineering/GasMiningAndStorage.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/GasMiningAndStorage.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: AtmosphericUpsets
   name: guide-entry-atmosphericupsets
-  text: "/ServerInfo/Guidebook/Engineering/AtmosphericUpsets.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/AtmosphericUpsets.xml" # Sunrise-Edit
   children:
   - Fires
   - Spacing
@@ -241,27 +241,27 @@
 - type: guideEntry
   id: Fires
   name: guide-entry-fires
-  text: "/ServerInfo/Guidebook/Engineering/Fires.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/Fires.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: Spacing
   name: guide-entry-spacing
-  text: "/ServerInfo/Guidebook/Engineering/Spacing.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/Spacing.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: DeltaPressure
   name: guide-entry-deltapressure
-  text: "/ServerInfo/Guidebook/Engineering/DeltaPressure.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/DeltaPressure.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: AtmosTools
   name: guide-entry-atmostools
-  text: "/ServerInfo/Guidebook/Engineering/AtmosTools.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/AtmosTools.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: Gasses
   name: guide-entry-gasses
-  text: "/ServerInfo/Guidebook/Engineering/Gasses.xml"
+  text: "/ServerInfo/Guidebook/_Sunrise/Engineering/Gasses.xml" # Sunrise-Edit
 
 - type: guideEntry
   id: ShuttleCraft

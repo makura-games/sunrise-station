@@ -1,5 +1,6 @@
 ﻿using Content.Shared._Sunrise.Tutorial.Components;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Sunrise.Tutorial.Conditions;
 
@@ -20,6 +21,9 @@ public sealed partial class AttackListenedConditionSystem : EventListenedConditi
             return;
 
         RecordEvent(args.User, DefaultKey, ent, args.Used);
+
+        if (Tutorial.TryGetPrototypeId(args.Used, out var usedPrototype))
+            RecordEvent(args.User, AttackListenedCondition.GetUsedKey(usedPrototype), ent);
     }
 }
 
@@ -28,5 +32,21 @@ public sealed partial class AttackListenedConditionSystem : EventListenedConditi
 /// </summary>
 public sealed partial class AttackListenedCondition : EventListenedConditionBase<AttackListenedCondition>
 {
+    /// <summary>
+    /// Необязательный прототип сущности, которой должен быть нанесён удар.
+    /// Для безоружной атаки это прототип самого игрока.
+    /// </summary>
+    [DataField]
+    public EntProtoId? Used;
+
+    public override string CounterKey => Used is { } used
+        ? GetUsedKey(used)
+        : base.CounterKey;
+
     public override bool ObserveAnyWithoutTarget => true;
+
+    public static string GetUsedKey(EntProtoId used)
+    {
+        return string.Concat(nameof(AttackListenedCondition), ".Used.", used.Id);
+    }
 }

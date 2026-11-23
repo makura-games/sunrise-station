@@ -1,14 +1,14 @@
-﻿using Content.Client.UserInterface.Systems.Chat;
+using Content.Client.UserInterface.Systems.Chat;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 
 namespace Content.Client._Sunrise.ChatIcons;
 
-public sealed class ChatIconsSystem : EntitySystem
+public sealed partial class ChatIconsSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IUserInterfaceManager _uiMan = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IUserInterfaceManager _uiMan = default!;
 
     public override void Initialize()
     {

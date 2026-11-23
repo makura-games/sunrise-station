@@ -50,9 +50,10 @@
 - type: startingGear
   id: MobSovietGearRangedSMG
   equipment:
-    gloves: ClothingHandsMp38SovietNoOuter
+    gloves: ClothingHandsPPSHSovietNoOuter
     shoes: ClothingShoesBootsWork
     pocket1: MagazinePistolSubMachineGunEmpty
+    belt: ClothingBeltWebbingSovietTier1PPSHSL
 
 - type: startingGear
   id: MobSovietGearRangedRifleMosin
@@ -201,7 +202,6 @@
     pocket2: GygaxPeripheralsElectronics
     shoes: ClothingBackOreCrateTier2Gygax
     back: GygaxCentralElectronics
-    belt: MechPaintGygaxMolot
 
 - type: startingGear
   id: MobSovietGearT3Mech
@@ -211,4 +211,3 @@
     pocket2: DurandPeripheralsElectronics
     shoes: ClothingBackOreCrateTier3Mech
     back: DurandTargetingElectronics
-    belt: MechPaintDurandDollhouse

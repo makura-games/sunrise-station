@@ -16,3 +16,20 @@
     tags:
     - HideContextMenu
   - type: AnimationPlayer
+
+- type: entity
+  id: AcidifierItem
+  name: acid
+  description: Melts your things into a puddle of yuck!
+  components:
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    scale: 0.6,0.6
+    noRot: true
+    sprite: /Textures/Effects/acidifier.rsi
+    state: acid
+  - type: TimedDespawn
+    lifetime: 1.5

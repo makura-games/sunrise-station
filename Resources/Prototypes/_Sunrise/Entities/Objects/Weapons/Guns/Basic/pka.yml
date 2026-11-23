@@ -93,7 +93,7 @@
 - type: entity
   name: portable proto-kinetic "Matter Dematerializer"
   id: WeaponProtoKineticHeavy
-  parent: [ BaseItem, BaseSalvageMiningContraband ]
+  parent: [ BaseItem, BaseGunWieldable, BaseSalvageMiningContraband ]
   description: A stationary salvager mining turret converted into a portable variant. Extremely heavy and exceptionally effective at excavating asteroids or the faces of anyone who interferes.
   components:
   - type: Sprite
@@ -103,16 +103,19 @@
   - type: Item
     sprite: _Sunrise/Objects/Weapons/Guns/Basic/kinetic_heavy.rsi
     size: Ginormous
+  - type: GunWieldBonus
+    minAngle: -2
+    maxAngle: -16
   - type: Gun
     projectileSpeed: 15
     fireRate: 1.4
     selectedMode: Burst
     angleDecay: 45
-    minAngle: 5
+    minAngle: 3
     maxAngle: 18
-    burstFireRate: 3
+    burstFireRate: 4
     shotsPerBurst: 4
-    burstCooldown: 1.6
+    burstCooldown: 1.5
     availableModes:
     - SemiAuto
     - Burst
@@ -139,7 +142,7 @@
   - type: HeldSpeedModifier
     walkModifier: 0.75
     sprintModifier: 0.75
-  - type: MultiHandedItem
+  - type: GunRequiresWield
   - type: KnockbackByUserTag
     doestContain:
       Resomi:

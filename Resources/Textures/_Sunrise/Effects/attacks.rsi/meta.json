@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1edc6b52c3f8d3fed95b2d4eecbdeef37b93f2ba/icons/effects/attacks.dmi via RMC-14",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "grab",
+      "delays": [
+        [
+          0.16,
+          0.16,
+          0.16,
+          0.16
+        ]
+      ]
+    }
+  ]
+}

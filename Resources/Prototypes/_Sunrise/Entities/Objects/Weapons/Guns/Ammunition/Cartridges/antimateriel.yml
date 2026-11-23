@@ -1,0 +1,92 @@
+- type: entity
+  parent: [ BaseCartridge, BaseMajorContraband ]
+  id: CartridgeAntiMaterielPenetrator
+  name: cartridge (15mm armor-pierce)
+  description: A high-power cartridge used by high-precision rifles.
+  components:
+  - type: Tag
+    tags:
+    - CartridgeAntiMateriel
+  - type: CartridgeAmmo
+    proto: AntiMaterielBulletTrace
+  - type: Sprite
+    scale: 0.8,0.8
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Casings/12.7x99.rsi
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#9b0000"
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 20
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgeAntiMaterielFrag
+  name: cartridge (15mm frag)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielFrag
+  - type: Sprite
+    scale: 0.8,0.8
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Casings/12.7x99.rsi
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#7ea53b"
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgeAntiMaterielBlast
+  name: cartridge (15mm blast)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielBlast
+  - type: Sprite
+    scale: 0.8,0.8
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Casings/12.7x99.rsi
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#8d6425"
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgeAntiMaterielEmp
+  name: cartridge (15mm emp)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielEMP
+  - type: Sprite
+    scale: 0.8,0.8
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Casings/12.7x99.rsi
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#005396"
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgeAntiMaterielHP
+  name: cartridge (15mm hollow point)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielHP
+  - type: Sprite
+    scale: 0.8,0.8
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Casings/12.7x99.rsi
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#F5514C"

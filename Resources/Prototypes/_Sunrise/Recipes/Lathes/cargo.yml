@@ -2,21 +2,3 @@
   parent: [ BaseGoldCircuitboardRecipe, BaseSupplyMachineRecipeCategory ]
   id: SunriseAdvancedSalvageMagnetMachineCircuitboard
   result: SunriseAdvancedSalvageMagnetMachineCircuitboard
-
-- type: latheRecipe
-  id: CargoSuit
-  result: ClothingOuterSuitCargo
-  completetime: 10
-  materials:
-    Steel: 2500
-    Plastic: 1000
-    Plasma: 500
-
-- type: latheRecipe
-  id: BluespaceBox
-  result: BluespaceBox
-  completetime: 5
-  materials:
-    Steel: 500
-    Plastic: 100
-    Plasma: 500

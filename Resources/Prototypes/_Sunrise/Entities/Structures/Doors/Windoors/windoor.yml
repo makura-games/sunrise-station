@@ -1,0 +1,8 @@
+- type: entity
+  parent: Windoor
+  id: WindoorPirateLocked
+  suffix: Pirate, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsPirate ]

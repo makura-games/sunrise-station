@@ -1,0 +1,27 @@
+﻿- type: entity
+  parent: [ BaseHighlyIllegalContraband, C4 ]
+  id: GunpowderCharge
+  name: dynamite
+  description: Old-fashioned explosive made with gunpowder, commonly used among pirates.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Bombs/dynamite.rsi
+    state: icon
+    layers:
+    - state: icon
+      map: [ "base" ]
+  - type: Explosive
+    explosionType: DemolitionCharge
+    totalIntensity: 60
+    intensitySlope: 3
+    maxIntensity: 15
+    canCreateVacuum: false
+  - type: TimerTrigger
+    keysIn:
+    - trigger
+    - stuck
+    delay: 10
+    delayOptions: [ 10, 30 ]
+    initialBeepDelay: 0
+    beepSound: /Audio/Effects/lightburn.ogg
+

@@ -12,6 +12,15 @@
     proto: MasterDetective
 
 - type: loadoutEffectGroup
+  id: JuniorDetective
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobDetective
+      time: 10h
+
+- type: loadoutEffectGroup
   id: MasterDetective
   effects:
   - !type:JobRequirementLoadoutEffect
@@ -39,6 +48,15 @@
       time: 360000 #100 hrs
 
 - type: loadout
+  id: DetectiveTapeRecorderBox
+  storage:
+    back:
+    - BoxTapeRecorder
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JuniorDetective
+
+- type: loadout
   id: DetectiveWeapon
   equipment:
     pocket1: WeaponRevolverInspector
@@ -60,14 +78,6 @@
   id: DetectiveWeapon50h
   equipment:
     pocket1: WeaponRevolverSpearhead
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: MasterDetective50h
-
-- type: loadout
-  id: DetectiveWeapon50h2
-  equipment:
-    pocket1: WeaponRevolverSpearheadBlack
   effects:
   - !type:GroupLoadoutEffect
     proto: MasterDetective50h

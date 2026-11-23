@@ -52,24 +52,68 @@
     containers:
       board: [ DoorElectronicsNtrep ]
 
-#Hatches
 - type: entity
-  parent: AirlockHatch
-  id: AirlockHatchCentcommLocked
-  name: CentCom Hatch
-  suffix: CentCom, Locked
+  parent: AirlockSalvageLocked
+  id: AirlockPirateLocked
+  suffix: Pirate, Locked
   components:
-  - type: AccessReader
-    access: [["CentralCommand"]]
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsPirate ]
 
 - type: entity
-  parent: AirlockHatch
-  id: AirlockHatchSyndicateLocked
-  name: Syndicate Hatch
-  suffix: Syndicate, Locked
+  parent: AirlockSalvageGlassLocked
+  id: AirlockPirateGlassLocked
+  suffix: Pirate, Locked
   components:
-  - type: AccessReader
-    access: [["SyndicateAgent"]]
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsPirate ]
+
+- type: entity
+  parent: AirlockExternalNukeopLocked
+  id: AirlockExternalPirateLocked
+  suffix: External, Pirate, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsPirate ]
+
+- type: entity
+  parent: AirlockExternalGlassNukeopLocked
+  id: AirlockExternalGlassPirateLocked
+  suffix: External, Glass, Pirate, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsPirate ]
+
+- type: entity
+  parent: AirlockExternalGlassShuttleNukeopLocked
+  id: AirlockExternalGlassShuttlePirateLocked
+  suffix: External, Docking, Pirate, Locked, Glass
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsPirate ]
+
+- type: entity
+  parent: AirlockSyndicateNukeopLocked
+  id: AirlockSyndicatePirateLocked
+  suffix: Pirate, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsPirate ]
+
+- type: entity
+  parent: AirlockSyndicateNukeopGlassLocked
+  id: AirlockSyndicatePirateGlassLocked
+  suffix: Pirate, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsPirate ]
 
 - type: entity
   parent: AirlockMaint

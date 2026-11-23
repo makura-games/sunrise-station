@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 270.0.0
+  engineVersion: 271.1.0
   forkId: ""
   forkVersion: ""
-  time: 01/02/2026 04:07:02
+  time: 07/17/2026 19:53:18
   entityCount: 640
 maps: []
 grids:
@@ -565,6 +565,8 @@ entities:
       color: '#0F0F0F4B'
       flags: HideLabel
     - type: ExplosionAirtightGrid
+    - type: TileHistory
+      chunkHistory: {}
 - proto: AccessBreakerPirate
   entities:
   - uid: 270
@@ -660,7 +662,7 @@ entities:
       - 534
     - type: Fixtures
       fixtures: {}
-- proto: AirlockExternalGlassShuttleSyndicateLocked
+- proto: AirlockExternalGlassShuttlePirateLocked
   entities:
   - uid: 3
     components:
@@ -785,7 +787,7 @@ entities:
     - type: Transform
       pos: 7.3237934,-11.239611
       parent: 1
-- proto: AtmosDeviceFanDirectionalDev
+- proto: AtmosDeviceFanDirectional
   entities:
   - uid: 16
     components:
@@ -2106,8 +2108,6 @@ entities:
           - 625
           - 626
           - 627
-    - type: UserInterface
-      actors: {}
     - type: ActiveUserInterface
 - proto: ComputerIdUSSP
   entities:
@@ -2117,7 +2117,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 0.5,-3.5
       parent: 1
-- proto: ComputerIFFSyndicate
+- proto: ComputerIFF
   entities:
   - uid: 253
     components:
@@ -3357,7 +3357,7 @@ entities:
     - type: Transform
       pos: -2.5,-10.5
       parent: 1
-- proto: LockableButtonNukeOps
+- proto: LockableButtonPirate
   entities:
   - uid: 86
     components:
@@ -4539,7 +4539,7 @@ entities:
     - type: Transform
       pos: 3.5297904,-7.3595576
       parent: 1
-- proto: VendingMachineWallMedicalCivilian
+- proto: VendingMachineWallMedicalCivilianSyndicate
   entities:
   - uid: 102
     components:
@@ -5003,7 +5003,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 3.5,-4.5
       parent: 1
-- proto: WindoorSecureNukeopLocked
+- proto: WindoorPirateLocked
   entities:
   - uid: 570
     components:

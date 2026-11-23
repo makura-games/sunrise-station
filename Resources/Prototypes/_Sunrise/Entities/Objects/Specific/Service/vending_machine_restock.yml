@@ -16,3 +16,21 @@
     - state: refill_paint
   - type: StaticPrice
     price: 2000
+
+- type: entity
+  parent: BaseVendingMachineRestock
+  id: VendingMachineRestockInstrumentsMate
+  name: InstrumentsMate restock box
+  description: Slot it into your InstrumentsMate to turn the world into a musical!
+  components:
+  - type: VendingMachineRestock
+    canRestock:
+    - InstrumentsMateInventory
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Service/vending_machine_restock.rsi
+    layers:
+    - state: refill_instruments
+    - state: green_bit
+      shader: unshaded
+  - type: StaticPrice
+    price: -3000

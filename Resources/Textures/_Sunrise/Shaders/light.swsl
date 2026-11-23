@@ -1,0 +1,53 @@
+uniform sampler2D SCREEN_TEXTURE;
+uniform lowp float base_haze;
+uniform lowp float haze_divisor;
+
+const lowp float[3] weights = float[](0.2, 0.0625, 0.0375);
+
+lowp float adjust_alpha(lowp vec4 background) {
+    lowp float average_color = dot(background.rgb, vec3(0.3333));
+    lowp float boost = 1.0 - (1.0 - average_color) / 1.15;
+    lowp float transition = clamp((average_color - 0.035) / haze_divisor, 0.0, 2.0);
+    return boost * (1.0 - transition) + transition;
+}
+
+lowp vec4 add_haze(lowp vec4 color, lowp float intensity) {
+    return vec4(mix(color.rgb, vec3(0.9, 0.85, 0.8), intensity), color.a);
+}
+
+lowp vec4 blur_sample(lowp vec2 offset, lowp vec2 uv, lowp vec2 fragment, lowp int step) {
+    lowp vec4 sampleColor = zTexture(uv + offset * TEXTURE_PIXEL_SIZE) * weights[step];
+    sampleColor = add_haze(sampleColor, base_haze);
+    sampleColor.a *= adjust_alpha(zTextureSpec(SCREEN_TEXTURE, (fragment + offset) * SCREEN_PIXEL_SIZE));
+    return sampleColor;
+}
+
+lowp vec2 blur_offset(lowp int index, lowp float step) {
+    lowp vec3 basis = vec3(1.0, 0.0, -1.0);
+    lowp vec2 offsets[8];
+    offsets[0] = basis.xy;
+    offsets[1] = -basis.xy;
+    offsets[2] = basis.yx;
+    offsets[3] = -basis.yx;
+    offsets[4] = basis.xx;
+    offsets[5] = basis.xz;
+    offsets[6] = basis.zx;
+    offsets[7] = basis.zz;
+    return offsets[index % 8] * step;
+}
+
+void fragment() {
+    lowp vec4 sprite = zTexture(UV);
+    if (sprite.a == 0.0)
+        discard;
+
+    lowp vec4 result = blur_sample(vec2(0.0), UV.xy, FRAGCOORD.xy, 0);
+    for (lowp int ring = 0; ring < 2; ring++) {
+        lowp float step = float(ring + 1);
+        for (lowp int sample_index = 0; sample_index < 8; sample_index++) {
+            result += blur_sample(blur_offset(sample_index, step), UV.xy, FRAGCOORD.xy, ring + 1);
+        }
+    }
+
+    COLOR = add_haze(result, 0.2);
+}

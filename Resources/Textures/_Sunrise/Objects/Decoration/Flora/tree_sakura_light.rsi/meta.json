@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-4.0",
+    "copyright": "Made by yuzuki.mori(Discord)",
+    "size": {
+        "x": 64,
+        "y": 72
+    },
+    "states": [
+        {
+            "name": "sakura"
+        }
+    ]
+}

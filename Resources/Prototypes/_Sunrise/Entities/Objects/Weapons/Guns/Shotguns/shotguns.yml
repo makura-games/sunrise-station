@@ -1,34 +1,4 @@
 - type: entity
-  name: Spas-12
-  parent: [BaseWeaponShotgun, BaseSecurityContraband]
-  id: WeaponShotgunSPAS12
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/spas_12_2/tiny.rsi
-  - type: Item
-    size: Large
-    sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/spas_12_2/big.rsi
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/spas_12_2/tiny.rsi
-  - type: BallisticAmmoProvider
-    capacity: 8
-  - type: Wieldable
-  - type: GunRequiresWield
-  - type: Gun
-    fireRate: 2
-    projectileSpeed: 25
-    soundGunshot:
-      path: /Audio/_Sunrise/Weapons/Guns/Shotguns/spas_12/spas12_shot.ogg
-
-- type: entity
-  parent: WeaponShotgunSPAS12
-  id: WeaponShotgunSPAS12Rubber
-  suffix: Non-Lethal
-  components:
-  - type: BallisticAmmoProvider
-    proto: ShellShotgunBeanbag
-
-- type: entity
   name: Trenchgun L-4034
   parent: [BaseWeaponShotgun, GunMedium, BaseSecurityContraband]
   id: WeaponShotgunTrenchgun4034
@@ -57,6 +27,8 @@
     pump: true
     fireRate: 1.8
     projectileSpeed: 35
+  - type: GunSpreadModifier
+    spread: 1.2
   - type: Construction
     graph: ShotgunTrenchgun4034Sawn
     node: start
@@ -152,6 +124,8 @@
     - FullAuto
     soundGunshot:
       path: /Audio/_Starlight/Weapons/Guns/Gunshots/minotaur.ogg
+  - type: GunSpreadModifier
+    spread: 1.2
   - type: ItemSlots
     slots:
       gun_magazine:

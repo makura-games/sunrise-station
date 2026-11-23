@@ -1,4 +1,3 @@
-using Content.Shared.Actions;
 using Content.Shared.Armor;
 using Content.Shared.Inventory;
 using Content.Shared.Movement.Systems;
@@ -6,7 +5,7 @@ using Content.Shared.NameModifier.EntitySystems;
 
 namespace Content.Shared.Zombies;
 
-public abstract class SharedZombieSystem : EntitySystem
+public abstract partial class SharedZombieSystem : EntitySystem
 {
     /// <inheritdoc/>
     public override void Initialize()
@@ -37,7 +36,7 @@ public abstract class SharedZombieSystem : EntitySystem
 
     private void OnRefreshSpeed(EntityUid uid, ZombieComponent component, RefreshMovementSpeedModifiersEvent args)
     {
-        var mod = component.ZombieMovementSpeedBuff;
+        var mod = component.ZombieMovementSpeedDebuff;
         args.ModifySpeed(mod, mod);
     }
 
@@ -46,7 +45,3 @@ public abstract class SharedZombieSystem : EntitySystem
         args.AddModifier("zombie-name-prefix");
     }
 }
-
-public sealed partial class ZombieJumpActionEvent : WorldTargetActionEvent;
-
-public sealed partial class ZombieFlairActionEvent : InstantActionEvent;

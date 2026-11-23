@@ -11,7 +11,7 @@
       entity_storage: !type:AllSelector
         children:
         - id: WeaponLightMachineGunM492
-        - id: MagazineLightRifleBeltBoxHP
+        - id: MagazineLightRifleBeltBox
           prob: 0.2
         - id: MagazineLightRifleBeltBoxFMJ
           prob: 0.2
@@ -51,6 +51,26 @@
           prob: 0.25
 
 - type: entity
+  parent: GunSafeSuperweaponSecureGamma
+  id: GunSafeSuperweaponDisposableRocketLauncher
+  name: Disposable RPG safe
+  components:
+  - type: EntityStorageVisuals
+    stateDoorClosed: rpg
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: SunriseWeaponDisposableRocketLauncherSmoke
+          amount: 6
+        - id: SunriseWeaponDisposableRocketLauncher
+          amount: 3
+        - id: SunriseWeaponDisposableRocketLauncherEmp
+          amount: 3
+        - id: SunriseWeaponDisposableRocketLauncherSmoke
+          amount: 3
+
+- type: entity
   parent: GunSafeSuperweaponBaseSecure
   id: GunSafeSuperIonRifle
   name: Ion-Temperature safe
@@ -65,7 +85,7 @@
         - id: WeaponTemperatureGun
 
 - type: entity
-  parent: GunSafeSuperweaponBaseSecure
+  parent: GunSafeSuperweaponSecureGamma
   id: GunSafeSuperDMR
   name: Larker safe
   components:
@@ -81,7 +101,7 @@
           amount: 2
 
 - type: entity
-  parent: GunSafeSuperweaponBaseSecure
+  parent: GunSafeSuperweaponSecureGamma
   id: GunSafeSuperDMRElite
   name: SKM-28 safe
   components:
@@ -111,45 +131,17 @@
           amount: 6
 
 - type: entity
-  id: GunSafeEnergyGunPistolSecurity
-  parent: GunSafeBaseSecure
-  name: safe
-  suffix: Energy Pistol «Judge»
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponEnergyGunPistolSecurity
-          amount: 4
-
-- type: entity
   id: GunSafeEnergyPistolDominator
   parent: GunSafeBaseSecure
   name: safe
-  suffix: Energy Pistol «Dominator»
+  suffix: Mini energy guns
   components:
   - type: EntityTableContainerFill
     containers:
       entity_storage: !type:AllSelector
         children:
-        - id: WeaponDominator
+        - id: WeaponMiniEnergyGun
           amount: 4
-
-- type: entity
-  parent: GunSafeBaseSecureSunrise
-  id: GunSafeEnergyGun
-  name: safe
-  suffix: Energy guns
-  components:
-  - type: EntityStorageVisuals
-    stateDoorClosed: energy
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponEnergyGun
-          amount: 3
 
 - type: entity
   parent: GunSafeBaseSecureSunrise
@@ -164,21 +156,6 @@
       entity_storage: !type:AllSelector
         children:
         - id: WeaponLaserLNT620
-          amount: 3
-
-- type: entity
-  parent: GunSafeBaseSecureSunrise
-  id: GunSafeEnergyGunSMG
-  name: safe
-  suffix: Tactical Energy guns
-  components:
-  - type: EntityStorageVisuals
-    stateDoorClosed: energysmg
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponEnergyGunTactical
           amount: 3
 
 # region Pistols safes
@@ -246,21 +223,6 @@
         - id: PouchAmmoFilledPistol40
           amount: 4
 
-- type: entity
-  parent: GunSafePistolG22 #GunSafeHandgunBaseSecureSunrise
-  id: GunSafePistolACP14
-  name: safe
-  suffix: ACP-14
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponPistolACP14
-          amount: 4
-        - id: PouchAmmoFilledPistol40
-          amount: 4
-
 # region SMGs safes
 
 - type: entity
@@ -277,51 +239,6 @@
           amount: 2
         - id: MagazinePistolSubMachineGunSP
           amount: 6
-
-- type: entity
-  parent: GunSafeBaseSecure
-  id: GunSafeSubMachineGunMP7
-  name: safe
-  suffix: MP7
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponSubMachineGunMP7
-          amount: 2
-        - id: MagazinePistolHighCapacityFMJ
-          amount: 4
-
-- type: entity
-  parent: GunSafeBaseSecure
-  id: GunSafeSubMachineGunSkorpion
-  name: safe
-  suffix: Skorpion
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponSubMachineGunSkorpion
-          amount: 3
-        - id: MagazinePistolSubMachineGunSP
-          amount: 6
-
-- type: entity
-  parent: GunSafeBaseSecure
-  id: GunSafeSubMachineGunMP5
-  name: safe
-  suffix: MP5
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponSubMachineGunMP5
-          amount: 2
-        - id: MagazinePistolSubMachineGunSP
-          amount: 4
 
 - type: entity
   parent: GunSafeBaseSecureSunrise
@@ -400,38 +317,15 @@
         children:
         - id: WeaponRifleLecterMk2
           amount: 2
-        - id: WeaponRifleG36
+        - id: WeaponRifleLeikha
         - id: MagazineRifleSP
-          amount: 4
-        - id: MagazineRifleHP
-          amount: 2
+          amount: 6
         - id: MagazineRifleFMJ
           amount: 2
-
-- type: entity
-  parent: GunSafeBaseSecure
-  id: GunSafeRifleFamas
-  name: safe
-  suffix: Famas
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponRifleFamas
-          amount: 2
-        - id: WeaponRifleG36
-        - id: MagazineRifleSP
-          amount: 4
-        - id: MagazineRifleHP
-          amount: 2
-        - id: MagazineRifleFMJ
-          amount: 2
-
 
 - type: entity
   parent: GunSafeBaseSecureSunrise
-  id: GunSafeRifleAKMU
+  id: GunSafeRifleSKM24
   name: safe
   suffix: SKM-24
   components:
@@ -482,10 +376,8 @@
             weight: 0.1
           - id: WeaponRifleSKM24Nano
         - id: MagazineLightRifleSP
-          amount: 4
+          amount: 6
         - id: MagazineLightRifleFMJ
-          amount: 2
-        - id: MagazineLightRifleHP
           amount: 2
 
 # region Shotguns safes
@@ -537,52 +429,6 @@
 
 - type: entity
   parent: GunSafeBaseSecureSunrise
-  id: GunSafeShotgunSPAS12
-  name: safe
-  suffix: LAW-12
-  components:
-  - type: EntityStorageVisuals
-    stateDoorClosed: enforcer
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponShotgunSPAS12
-          amount: 2
-        - id: SpeedLoaderShellShotgun
-          amount: 4
-        - id: BoxBeanbag
-          amount: 1
-        - id: BoxShotgunSlug
-          amount: 1
-        - id: BoxShotgunFlare
-          amount: 1
-
-- type: entity
-  parent: GunSafeBaseSecureSunrise
-  id: GunSafeShotgunCombat
-  name: safe
-  suffix: Shotgun Combat
-  components:
-  - type: EntityStorageVisuals
-    stateDoorClosed: enforcer
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponShotgunCombat
-          amount: 2
-        - id: SpeedLoaderShellShotgun
-          amount: 4
-        - id: BoxBeanbag
-          amount: 1
-        - id: BoxShotgunSlug
-          amount: 1
-        - id: BoxShotgunFlare
-          amount: 1
-
-- type: entity
-  parent: GunSafeBaseSecureSunrise
   id: GunSafeDoubleBarreled
   name: safe
   description: According to the paperwork — state-of-the-art tactical shotguns. In reality — antique double-barrels.
@@ -620,7 +466,7 @@
         children:
         - id: WeaponRifleLecter
         - id: MagazineRifleSP
-        - id: MagazineRifleHP
+          amount: 2
         - id: DrinkBottleBeer
         - id: DrinkBeerCan
           amount: 2
@@ -744,21 +590,17 @@
       children:
       - id: GunSafePistolMk58
       - id: GunSafePistolG22
-      - id: GunSafeEnergyGunPistolSecurity
       - id: GunSafePistolGoldenMk58Trash
     - !type:GroupSelector
       weight: 25
       children:
-      - id: GunSafeEnergyPistolDominator
       - id: GunSafeEnergyGunMini
       - id: GunSafeSnubRevolver
     - !type:GroupSelector
       weight: 5
       children:
-      - id: GunSafePistolACP14
       - id: GunSafePistolVP78
       - id: GunSafePistolM1984
-      - id: GunSafeSubMachineGunSkorpion
     - id: SpawnerSafeLethal
       weight: 15
 
@@ -798,9 +640,7 @@
     - !type:GroupSelector
       weight: 5
       children:
-      - id: GunSafeShotgunSPAS12
       - id: GunSafeShotgunEnforcer
-      - id: GunSafeShotgunCombat
     - id: SpawnerSafeLethal
       weight: 15
 
@@ -834,14 +674,9 @@
       weight: 40
       children:
       - id: GunSafeLecterBeer
-      - id: GunSafeRifleAKMU
+      - id: GunSafeRifleSKM24
       - id: GunSafeRifleLecterMk2
       - id: GunSafeRifleM16A4
-      - id: GunSafeSuperDMR
-    - !type:GroupSelector
-      weight: 5
-      children:
-      - id: GunSafeRifleFamas
     - id: SpawnerSafeLethal
       weight: 15
 
@@ -871,14 +706,12 @@
       weight: 55
       children:
       - id: GunSafeSubMachineGunDrozd
-      - id: GunSafeSubMachineGunMP5
       - id: GunSafeSubMachineGunDrozdTrash
     - !type:GroupSelector
       weight: 45
       children:
       - id: GunSafeSubMachineGunDrozdMk2
       - id: GunSafeSubMachineGunWt550
-      - id: GunSafeSubMachineGunMP7
       - id: GunSafeSubMachineGunSP91RC
       - id: GunSafeSubMachineGunVector
     - id: SpawnerSafeLethal
@@ -912,6 +745,7 @@
       - id: GunSafeSuperweaponLWAP
       - id: GunSafeSuperweaponSmartGun
       - id: GunSafeSuperweaponRocketLauncher
+      - id: GunSafeSuperweaponDisposableRocketLauncher
     - !type:GroupSelector
       weight: 20
       children:
@@ -944,13 +778,11 @@
     - !type:GroupSelector
       weight: 65
       children:
-      - id: GunSafeEnergyGun
       - id: GunSafeLaserCarbine
       - id: GunSafeLaserCarbineTrash
     - !type:GroupSelector
       weight: 25
       children:
-      - id: GunSafeEnergyGunSMG
       - id: GunSafeLaserGunSMG
     - !type:GroupSelector
       weight: 5
@@ -990,20 +822,16 @@
       weight: 25
       children:
       - id: GunSafeSubMachineGunDrozdMk2
-      - id: GunSafeSubMachineGunMP7
       - id: GunSafeSubMachineGunSP91RC
       - id: GunSafeSubMachineGunVector
     - !type:GroupSelector
       weight: 25
       children:
-      - id: GunSafeRifleAKMU
+      - id: GunSafeRifleSKM24
       - id: GunSafeRifleLecterMk2
       - id: GunSafeRifleM16A4
-      - id: GunSafeRifleFamas
-      - id: GunSafeSuperDMR
     - !type:GroupSelector
       weight: 10
       children:
-      - id: GunSafeEnergyGunSMG
       - id: GunSafeLaserGunSMG
       - id: GunSafeEnergyGunMini

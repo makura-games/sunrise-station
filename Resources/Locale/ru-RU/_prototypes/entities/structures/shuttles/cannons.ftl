@@ -42,23 +42,21 @@ ent-ShuttleGunTeslaOrion = TSL-200c "Орион"
 ent-ShuttleGunTeslaHyperion = TSL-300c "Гиперион"
     .desc = Улучшенный вариант ионной установки Орион, усилены компоненты и добавлена консоль контроля выходной мощности. Значительно эффективнее против электронной техники. Использует энергоячейки для выстрела разрядом Тесла или ионным болтом.
     .suffix = НЕ МАППИТЬ
-ent-SignalButtonLongbow = кнопка огня Longbow 15
+ent-SignalButtonLongbow = кнопка огня лонгбоу 15
     .desc = { ent-SignalButton.desc }
     .suffix = Автосвязь
 ent-SignalButtonVympel = кнопка огня Вымпел 15-2
     .desc = { ent-SignalButton.desc }
     .suffix = Автосвязь
-ent-SignalButtonQuadling = кнопка огня Quadling 15-4
+ent-SignalButtonQuadling = кнопка огня квадлинг 15-4
     .desc = { ent-SignalButton.desc }
     .suffix = Автосвязь
 ent-SignalButtonSquall = кнопка огня Шквал 308
     .desc = { ent-SignalButton.desc }
     .suffix = Автосвязь
-
 ent-ShuttleGunUlan = LSE-13000e "Улан"
     .desc = Экспериментальная рельсотронная лазерная установка, питаемая от корабельной энергосети. Формирует разрушительный электромагнитный луч и не требует энергоячеек, но создаёт экстремальную нагрузку на реактор. Жестко закреплена и не поворачивается.
     .suffix = НЕ МАППИТЬ
-
 ent-SignalButtonUlan = кнопка огня Улан
     .desc = { ent-SignalButton.desc }
     .suffix = Автосвязь

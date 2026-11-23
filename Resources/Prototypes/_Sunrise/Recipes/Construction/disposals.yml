@@ -1,0 +1,8 @@
+- type: construction
+  id: DisposalMachineFrame
+  graph: DisposalMachine
+  startNode: start
+  targetNode: frame
+  category: construction-category-utilities
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false

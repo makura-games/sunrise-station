@@ -25,7 +25,7 @@
 
 # Boxes
 - type: entity
-  parent: BaseMagazineBoxRifle
+  parent: [ BaseNonCycleableAmmoProvider, BaseMagazineBoxRifle ] # Sunrise-Edit - запрещаем извлекать патроны из вместительных коробок
   id: MagazineBoxRifleBig
   name: ammunition box (.20 rifle SP)
   components:
@@ -58,20 +58,6 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: sp
-
-- type: entity
-  parent: BaseMagazineBoxRifle
-  id: MagazineBoxRifleHP
-  name: ammunition box (.20 rifle HP)
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeRifleHP
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
   parent: BaseMagazineBoxRifle

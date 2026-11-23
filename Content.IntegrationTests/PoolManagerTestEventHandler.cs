@@ -10,6 +10,9 @@ public sealed class PoolManagerTestEventHandler
     [OneTimeSetUp]
     public void Setup()
     {
+        // Sunrise added start - не декодируем изображения, когда тестам достаточно структуры RSI
+        _Sunrise.Patches.RsiLoadingPatch.Apply();
+        // Sunrise added end
         PoolManager.Startup();
         // If the tests seem to be stuck, we try to end it semi-nicely
         _ = Task.Delay(MaximumTotalTestingTimeLimit).ContinueWith(_ =>
@@ -30,6 +33,16 @@ public sealed class PoolManagerTestEventHandler
     [OneTimeTearDown]
     public void TearDown()
     {
-        PoolManager.Shutdown();
+        // Sunrise edit start - гарантированно снимаем глобальные перехваты после набора тестов
+        try
+        {
+            PoolManager.Shutdown();
+        }
+        finally
+        {
+            _Sunrise.Patches.EventTimingSummaryPatch.Unpatch();
+            _Sunrise.Patches.RsiLoadingPatch.Unpatch();
+        }
+        // Sunrise edit end
     }
 }

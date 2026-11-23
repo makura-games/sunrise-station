@@ -9,3 +9,377 @@
   products:
     Halon: 4.2
     Oxygen: 0.42
+
+- type: reaction
+  id: ChargedElectrovaeEmpExplosion
+  impact: High
+  reactants:
+    ChargedElectrovae:
+      amount: 5
+    Oxygen:
+      amount: 1
+  effects:
+  - !type:Emp
+    rangeModifier: 0.2
+    maxRange: 10
+    energyConsumption: 10000
+    duration: 12
+
+- type: reaction
+  id: ChargedElectrovaeRelease
+  minTemp: 281
+  reactants:
+    ChargedElectrovae:
+      amount: 0.63
+    Water:
+      amount: 1
+  effects:
+  - !type:CreateGas
+    gas: ChargedElectrovae
+
+- type: reaction
+  id: ElectrovaeRelease
+  minTemp: 288
+  reactants:
+    Electrovae:
+      amount: 0.63
+    Water:
+      amount: 1
+  effects:
+  - !type:CreateGas
+    gas: Electrovae
+
+- type: reaction
+  id: ChargedElectrovaeUERelease
+  minTemp: 281
+  reactants:
+    ChargedElectrovae:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: ChargedElectrovae
+
+- type: reaction
+  id: ElectrovaeUERelease
+  minTemp: 288
+  reactants:
+    Electrovae:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: Electrovae
+
+- type: reaction
+  id: HeliumUERelease
+  minTemp: 4
+  reactants:
+    Helium:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: Helium
+
+- type: reaction
+  id: HydrogenUERelease
+  minTemp: 20
+  reactants:
+    Hydrogen:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: Hydrogen
+
+- type: reaction
+  id: TritiumRelease
+  minTemp: 20
+  reactants:
+    Tritium:
+      amount: 0.63
+    Oxygen:
+      amount: 1
+  effects:
+  - !type:CreateGas
+    gas: Tritium
+
+- type: reaction
+  id: TritiumUERelease
+  minTemp: 20
+  reactants:
+    Tritium:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: Tritium
+
+- type: reaction
+  id: OxygenUERelease
+  minTemp: 90
+  reactants:
+    Oxygen:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: Oxygen
+
+- type: reaction
+  id: NitrogenUERelease
+  minTemp: 77
+  reactants:
+    Nitrogen:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: Nitrogen
+
+- type: reaction
+  id: PluoxiumRelease
+  minTemp: 161
+  reactants:
+    Pluoxium:
+      amount: 0.63
+    Water:
+      amount: 1
+  effects:
+  - !type:CreateGas
+    gas: Pluoxium
+
+- type: reaction
+  id: PluoxiumUERelease
+  minTemp: 161
+  reactants:
+    Pluoxium:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: Pluoxium
+
+- type: reaction
+  id: HyperNobliumUERelease
+  minTemp: 165
+  reactants:
+    Hyper-Noblium:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: HyperNoblium
+
+- type: reaction
+  id: NitrousOxideUERelease
+  minTemp: 185
+  reactants:
+    NitrousOxide:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: NitrousOxide
+
+- type: reaction
+  id: CarbonDioxideUERelease
+  minTemp: 195
+  reactants:
+    CarbonDioxide:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: CarbonDioxide
+
+- type: reaction
+  id: HalonUERelease
+  minTemp: 215
+  reactants:
+    Halon:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: Halon
+
+- type: reaction
+  id: PlasmaRelease
+  minTemp: 231
+  reactants:
+    Plasma:
+      amount: 0.63
+    Fluorine:
+      amount: 1
+  effects:
+  - !type:CreateGas
+    gas: Plasma
+
+- type: reaction
+  id: PlasmaUERelease
+  minTemp: 231
+  reactants:
+    Plasma:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: Plasma
+
+- type: reaction
+  id: HealiumUERelease
+  minTemp: 233
+  reactants:
+    Healium:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: Healium
+
+- type: reaction
+  id: HealiumRelease
+  minTemp: 233
+  reactants:
+    Healium:
+      amount: 0.63
+    Water:
+      amount: 1
+  effects:
+  - !type:CreateGas
+    gas: Healium
+
+- type: reaction
+  id: NitriumRelease
+  minTemp: 240
+  reactants:
+    Nitrium:
+      amount: 0.63
+    Water:
+      amount: 1
+  effects:
+  - !type:CreateGas
+    gas: Nitrium
+
+- type: reaction
+  id: NitriumUERelease
+  minTemp: 240
+  reactants:
+    Nitrium:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: Nitrium
+
+- type: reaction
+  id: FrezonUERelease
+  minTemp: 243
+  reactants:
+    Frezon:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: Frezon
+
+- type: reaction
+  id: ZaukerUERelease
+  minTemp: 319
+  reactants:
+    Zauker:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: Zauker
+
+- type: reaction
+  id: ZaukerDecay
+  reactants:
+    Zauker:
+      amount: 2.1
+    Oxygen:
+      amount: 0.01
+  products:
+    Oxygen: 0.64
+    Nitrogen: 1.47
+
+- type: reaction
+  id: ProtoNitrateUERelease
+  minTemp: 323
+  reactants:
+    Proto-Nitrate:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: ProtoNitrate
+
+- type: reaction
+  id: BZRelease
+  minTemp: 353
+  reactants:
+    BZ:
+      amount: 0.63
+    SulfuricAcid:
+      amount: 1
+  effects:
+  - !type:CreateGas
+    gas: BZ
+
+- type: reaction
+  id: BZUERelease
+  minTemp: 353
+  reactants:
+    BZ:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: BZ
+
+- type: reaction
+  id: WaterVaporRelease
+  minTemp: 353
+  reactants:
+    Water:
+      amount: 0.63
+    SulfuricAcid:
+      amount: 1
+  effects:
+  - !type:CreateGas
+    gas: WaterVapor
+
+- type: reaction
+  id: WaterVaporUERelease
+  minTemp: 353
+  reactants:
+    Water:
+      amount: 0.63
+    UE:
+      amount: 0.1
+  effects:
+  - !type:CreateGas
+    gas: WaterVapor

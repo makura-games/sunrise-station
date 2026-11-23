@@ -1,6 +1,6 @@
-ent-SurgeryStepExposeVocalCords = Expose Vocal Cords
+ent-SurgeryStepExposeVocalCords = expose Vocal Cords
     .desc = { ent-SurgeryStepBase.desc }
-ent-SurgeryStepAdjustVocalCords = Adjust Vocal Cords
+ent-SurgeryStepAdjustVocalCords = adjust Vocal Cords
     .desc = { ent-SurgeryStepBase.desc }
-ent-SurgeryStepSutureIncision = Suture Incision
+ent-SurgeryStepSutureIncision = suture Incision
     .desc = { ent-SurgeryStepBase.desc }

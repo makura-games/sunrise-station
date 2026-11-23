@@ -1,0 +1,13 @@
+- type: entity
+  id: SunriseEffectGrab
+  categories: [ HideSpawnMenu ]
+  save: false
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Effects/attacks.rsi
+    noRot: true
+    state: grab
+    drawdepth: Effects
+  - type: Tag
+    tags:
+    - HideContextMenu

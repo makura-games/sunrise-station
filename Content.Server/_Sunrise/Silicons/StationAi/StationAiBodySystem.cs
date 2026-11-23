@@ -19,8 +19,8 @@ namespace Content.Server._Sunrise.Silicons.StationAi;
 /// </summary>
 public sealed partial class StationAiBodySystem : EntitySystem
 {
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly SiliconVoiceSystem _siliconVoice = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private SiliconVoiceSystem _siliconVoice = default!;
 
     public override void Initialize()
     {

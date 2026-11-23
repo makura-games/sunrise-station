@@ -23,6 +23,9 @@
   id: CartridgeLightRifleImprovised
 
 - type: Tag
+  id: CartridgeRifleImprovised
+
+- type: Tag
   id: ImprovisedMultitool
 
 - type: Tag

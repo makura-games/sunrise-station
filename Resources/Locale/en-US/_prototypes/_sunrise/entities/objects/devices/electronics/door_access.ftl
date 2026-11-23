@@ -22,3 +22,6 @@ ent-DoorElectronicsSecurityInternalAffairs = { ent-DoorElectronics }
 ent-DoorElectronicsBrigmed = { ent-DoorElectronics }
     .suffix = Brigmed, Locked
     .desc = { ent-DoorElectronics.desc }
+ent-DoorElectronicsPirate = { ent-DoorElectronics }
+    .suffix = Pirate, Locked
+    .desc = { ent-DoorElectronics.desc }

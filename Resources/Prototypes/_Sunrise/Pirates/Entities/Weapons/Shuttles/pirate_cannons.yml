@@ -1,0 +1,126 @@
+- type: entity
+  id: ShuttleGunLightRifleBase
+  parent: ShuttleGunAutocannon
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    drawdepth: Mobs
+    layers:
+    - state: syndie_lethal
+  - type: BatteryAmmoProvider
+    proto: BulletLightRifleTraceSP
+    fireCost: 1
+  - type: Gun
+    fireRate: 6
+    burstFireRate: 8
+    shotsPerBurst: 8
+    burstCooldown: 0.5
+    projectileSpeed: 40
+    minAngle: 1
+    maxAngle: 30
+    angleIncrease: 3
+    angleDecay: 15
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
+
+- type: entity
+  id: ShuttleGunLightRiflePirateBase
+  parent: ShuttleGunLightRifleBase
+  abstract: true
+  suffix: Pirate
+  components:
+  - type: CombatMode
+    toggleMouseRotator: false
+  - type: NpcFactionMember
+    factions:
+    - Pirate
+  - type: HTN
+    rootTask:
+      task: TurretCompound
+
+- type: entity
+  parent: ShuttleGunLightRiflePirateBase
+  id: ShuttleGunLightRifleImprovised
+  components:
+  - type: BatteryAmmoProvider
+    proto: BulletLightRifleTraceImprovised
+
+- type: entity
+  parent: ShuttleGunLightRiflePirateBase
+  id: ShuttleGunLightRifleSP
+
+- type: entity
+  parent: ShuttleGunLightRiflePirateBase
+  id: ShuttleGunLightRifleFMJ
+  components:
+  - type: BatteryAmmoProvider
+    proto: BulletLightRifleTraceFMJ
+
+- type: entity
+  parent: ShuttleGunLightRiflePirateBase
+  id: ShuttleGunLightRifleAP
+  components:
+  - type: BatteryAmmoProvider
+    proto: BulletLightRifleTraceAP
+
+- type: entity
+  parent: ShuttleGunLightRiflePirateBase
+  id: ShuttleGunPirateCoveTurret
+  components:
+  - type: Anchorable
+    flags:
+    - Anchorable
+  - type: BatteryAmmoProvider
+    proto: BulletLightRifleTraceAP
+
+- type: entity
+  id: ShuttleGunPirateBombard
+  parent: ShuttleGunBase
+  components:
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Damageable
+    damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Sprite
+    scale: 1.5, 1
+    sprite: Objects/Weapons/Guns/Shuttles/pirate_cannon.rsi
+    layers:
+    - state: base
+  - type: Gun
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    - FullAuto
+    burstFireRate: 100
+    shotsPerBurst: 3
+    burstCooldown: 3
+    minAngle: 1
+    maxAngle: 20
+    angleIncrease: 5
+    angleDecay: 20
+    projectileSpeed: 35
+    fireRate: 5
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CannonBall
+    capacity: 5
+    proto: CannonBall
+    soundInsert:
+      path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg

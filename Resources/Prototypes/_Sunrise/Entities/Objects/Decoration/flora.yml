@@ -17,3 +17,36 @@
         density: 2000
         layer:
         - WallLayer
+
+- type: entity
+  parent: floraSakuraTree
+  id: floraSakuraTreeDark
+  name: sakura tree
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Decoration/Flora/tree_sakura_dark.rsi
+    offset: 0,0.3
+    layers:
+    - state: sakura
+
+- type: entity
+  parent: floraSakuraTree
+  id: floraSakuraTreeLight
+  name: sakura tree
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Decoration/Flora/tree_sakura_light.rsi
+    offset: 0,0.3
+    layers:
+    - state: sakura
+
+- type: entity
+  parent: floraSakuraTree
+  id: floraSakuraTreeMotley
+  name: sakura tree
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Decoration/Flora/tree_sakura_motley.rsi
+    offset: 0,0.3
+    layers:
+    - state: sakura

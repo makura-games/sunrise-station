@@ -9,3 +9,5 @@ ent-WrenchAbductor = abductor's wrench
     .desc = { ent-Wrench.desc }
 ent-MultitoolAbductor = abductor's multitool
     .desc = { ent-Multitool.desc }
+ent-HandHeldMassScannerPirate = holographic pirate map
+    .desc = A hand-held mass scanner disguised as a glowing pirate chart.

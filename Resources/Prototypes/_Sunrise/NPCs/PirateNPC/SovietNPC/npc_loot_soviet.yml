@@ -568,7 +568,7 @@
     - id: WeaponLightMachineGunDP28
       prob: 0.05
       orGroup: DP28Pool
-    - id: WeaponPistolHIB88M4
+    - id: WeaponPistolViper
       prob: 0.5
       orGroup: DP28Pool
     - id: CrateAmmunitionSmallLightRifle
@@ -610,7 +610,7 @@
     - id: WeaponLightMachineGunMG60Empty
       prob: 0.25
       orGroup: DP28Pool
-    - id: WeaponPistolHIB88M4
+    - id: WeaponPistolViper
       prob: 0.3
       orGroup: DP28Pool
     - id: CrateAmmunitionSmallLightRifle
@@ -671,7 +671,7 @@
     - id: WeaponLightMachineGunRPD
       prob: 0.05
       orGroup: MgPool
-    - id: WeaponPistolHIB88M4
+    - id: WeaponPistolViper
       prob: 0.5
       orGroup: MgPool
     - id: MagazineLightRifleBeltBoxFMJ
@@ -942,16 +942,16 @@
     - id: PirateCashSpawner03
     # Weapons
     - id: WeaponShotgunGA12
-      prob: 0.75
+      prob: 0.25
       orGroup: Weapons
-    - id: WeaponShotgunCombat
-      prob: 0.5
+    - id: WeaponShotgunEnforcer
+      prob: 0.25
       orGroup: Weapons
     - id: WeaponShotgunBulldogBiocode
-      prob: 0.4
+      prob: 0.3
       orGroup: Weapons
     - id: WeaponShotgunBulldog
-      prob: 0.1
+      prob: 0.25
       orGroup: Weapons
     - id: MagazineShotgunXL
       prob: 0.05
@@ -1224,10 +1224,10 @@
     - id: PirateCashSpawner06
     # Weapons
     - id: WeaponRifleType88AMRBiocode
-      prob: 0.65
+      prob: 0.5
       orGroup: PistolT3Pool
     - id: WeaponRifleType88AMR
-      prob: 0.4
+      prob: 0.5
       orGroup: PistolT3Pool
     # Armor
     - id: SovietSoldierPoolLootSpawner
@@ -1335,15 +1335,20 @@
       prob: 0.3
     # Weapon
     - id: WeaponShotgunMinotaur
-      prob: 0.05
+      prob: 0.4
+      orGroup: WeaponPool
     - id: WeaponShotgunMinotaurBiocode
-      prob: 0.25
+      prob: 0.4
+      orGroup: WeaponPool
     - id: MagazineShotgunXL
-      prob: 0.3
+      prob: 0.2
+      orGroup: WeaponPool
     - id: MagazineShotgunFlechetteXL
       prob: 0.15
+      orGroup: WeaponPool
     - id: MagazineShotgunSlugXL
       prob: 0.05
+      orGroup: WeaponPool
     # Present for looters
     - id: BulletTearGasGrenade
       prob: 0.3

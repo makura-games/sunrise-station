@@ -18,7 +18,7 @@
       sound:
         path: /Audio/_Sunrise/Effects/electrical_short_circuit2.ogg
     - type: TimedDespawn
-      lifetime: 90
+      lifetime: 120
     - type: EvaporationSparkle
     - type: Transform
       noRot: true
@@ -39,6 +39,8 @@
   description: Call in a freelancer of questionable quality, instantly! Basic pirate equipment provided.
   suffix: Pirate
   components:
+  - type: SpawnOnDespawn
+    prototype: Doubloon29
   - type: GhostRole
     name: ghost-role-information-pirate-name
     description: ghost-role-information-pirate-description
@@ -61,6 +63,26 @@
   description: Call in a freelancer of questionable quality, instantly! Basic rookie-pirate equipment provided.
   suffix: Pirate, EVA
   components:
+  - type: SpawnOnDespawn
+    prototype: Doubloon20
   - type: GhostRoleMobSpawner
     prototype: MobHumanPirateScoonerOldReinforcement
     selectablePrototypes: ["PirateScoonerHumanOld", "PirateScoonerReptilianOld", "PirateScoonerDwarfOld", "PirateScoonerVoxOld", "PirateScoonerVulpkaninOld"]
+
+- type: entity
+  parent: ReinforcementPirateScooner
+  id: ReinforcementRadioPirateAssaultCyborg
+  name: pirate boarding cyborg reinforcement radio
+  description: Call in a pirate boarding cyborg to assist you.
+  suffix: Pirate, Cyborg
+  components:
+  - type: GhostRole
+    name: roles-antag-pirate-assault-cyborg-name
+    description: ghost-role-information-pirate-description
+    rules: ghost-role-information-rules-team-antagonist
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
+    raffle:
+      settings: default
+  - type: GhostRoleMobSpawner
+    prototype: BorgChassisPirateBattery

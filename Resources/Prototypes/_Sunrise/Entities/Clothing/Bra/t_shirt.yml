@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingBraBaseButcherable
+  parent: ClothingBraStorageBase
   id: ClothingBraTshirtWhite
   name: white t-shirt
   description: T-shirt for hot weather.
@@ -25,7 +25,7 @@
         color: "#cfcfcf"
 
 - type: entity
-  parent: ClothingBraBaseButcherable
+  parent: ClothingBraStorageBase
   id: ClothingBraTshirtRed
   name: red t-shirt
   description: T-shirt for hot weather.
@@ -51,7 +51,7 @@
         color: "#bb1515"
 
 - type: entity
-  parent: ClothingBraBaseButcherable
+  parent: ClothingBraStorageBase
   id: ClothingBraTshirtYellow
   name: yellow t-shirt
   description: T-shirt for hot weather.
@@ -77,7 +77,7 @@
         color: "#d6c617"
 
 - type: entity
-  parent: ClothingBraBaseButcherable
+  parent: ClothingBraStorageBase
   id: ClothingBraTshirtGreen
   name: green t-shirt
   description: T-shirt for hot weather.
@@ -103,7 +103,7 @@
         color: "#13bc13"
 
 - type: entity
-  parent: ClothingBraBaseButcherable
+  parent: ClothingBraStorageBase
   id: ClothingBraTshirtBlue
   name: blue t-shirt
   description: T-shirt for hot weather.
@@ -129,7 +129,7 @@
         color: "#322fd3"
 
 - type: entity
-  parent: ClothingBraBaseButcherable
+  parent: ClothingBraStorageBase
   id: ClothingBraTshirtLightBlue
   name: light blue t-shirt
   description: T-shirt for hot weather.
@@ -155,7 +155,7 @@
         color: "#3ab7e9"
 
 - type: entity
-  parent: ClothingBraBaseButcherable
+  parent: ClothingBraStorageBase
   id: ClothingBraTshirtBlack
   name: black t-shirt
   description: T-shirt for hot weather.
@@ -181,7 +181,7 @@
         color: "#4a4a4a"
 
 - type: entity
-  parent: ClothingBraBaseButcherable
+  parent: ClothingBraStorageBase
   id: ClothingBraTshirtGrey
   name: grey t-shirt
   description: T-shirt for hot weather.
@@ -207,7 +207,7 @@
         color: "#a8a8a8"
 
 - type: entity
-  parent: ClothingBraBaseButcherable
+  parent: ClothingBraStorageBase
   id: ClothingBraTshirtPurple
   name: purple t-shirt
   description: T-shirt for hot weather.
@@ -233,7 +233,7 @@
         color: "#983bc6"
 
 - type: entity
-  parent: ClothingBraBaseButcherable
+  parent: ClothingBraStorageBase
   id: ClothingBraTshirtBrown
   name: brown t-shirt
   description: T-shirt for hot weather.
@@ -259,7 +259,7 @@
         color: "#946e3f"
 
 - type: entity
-  parent: ClothingBraBaseButcherable
+  parent: ClothingBraStorageBase
   id: ClothingBraTshirtOrange
   name: orange t-shirt
   description: T-shirt for hot weather.

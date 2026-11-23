@@ -10,20 +10,19 @@ namespace Content.Shared.Humanoid
     /// <summary>
     /// Figure out how to name a humanoid with these extensions.
     /// </summary>
-    public sealed class NamingSystem : EntitySystem
+    public sealed partial class NamingSystem : EntitySystem
     {
         private static readonly ProtoId<SpeciesPrototype> FallbackSpecies = "Human";
 
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IRobustRandom _random = default!;
 
         public string GetName(string species, Gender? gender = null)
         {
             // if they have an old species or whatever just fall back to human I guess?
             // Some downstream is probably gonna have this eventually but then they can deal with fallbacks.
-            if (!_prototypeManager.TryIndex(species, out SpeciesPrototype? speciesProto))
+            if (!ProtoMan.TryIndex(species, out SpeciesPrototype? speciesProto))
             {
-                speciesProto = _prototypeManager.Index(FallbackSpecies);
+                speciesProto = ProtoMan.Index(FallbackSpecies);
                 Log.Warning($"Unable to find species {species} for name, falling back to {FallbackSpecies}");
             }
 
@@ -53,14 +52,14 @@ namespace Content.Shared.Humanoid
             switch (gender)
             {
                 case Gender.Male:
-                    return _random.Pick(_prototypeManager.Index(speciesProto.MaleFirstNames));
+                    return _random.Pick(ProtoMan.Index(speciesProto.MaleFirstNames));
                 case Gender.Female:
-                    return _random.Pick(_prototypeManager.Index(speciesProto.FemaleFirstNames));
+                    return _random.Pick(ProtoMan.Index(speciesProto.FemaleFirstNames));
                 default:
                     if (_random.Prob(0.5f))
-                        return _random.Pick(_prototypeManager.Index(speciesProto.MaleFirstNames));
+                        return _random.Pick(ProtoMan.Index(speciesProto.MaleFirstNames));
                     else
-                        return _random.Pick(_prototypeManager.Index(speciesProto.FemaleFirstNames));
+                        return _random.Pick(ProtoMan.Index(speciesProto.FemaleFirstNames));
             }
         }
 
@@ -70,14 +69,14 @@ namespace Content.Shared.Humanoid
             switch (gender)
             {
                 case Gender.Male:
-                    return _random.Pick(_prototypeManager.Index(speciesProto.MaleLastNames));
+                    return _random.Pick(ProtoMan.Index(speciesProto.MaleLastNames));
                 case Gender.Female:
-                    return _random.Pick(_prototypeManager.Index(speciesProto.FemaleLastNames));
+                    return _random.Pick(ProtoMan.Index(speciesProto.FemaleLastNames));
                 default:
                     if (_random.Prob(0.5f))
-                        return _random.Pick(_prototypeManager.Index(speciesProto.MaleLastNames));
+                        return _random.Pick(ProtoMan.Index(speciesProto.MaleLastNames));
                     else
-                        return _random.Pick(_prototypeManager.Index(speciesProto.FemaleLastNames));
+                        return _random.Pick(ProtoMan.Index(speciesProto.FemaleLastNames));
             }
         }
         // Russian-LastnameGender-End

@@ -1,0 +1,66 @@
+﻿<Document>
+  # Добыча и хранение газов
+  Газы часто расходуются безвозвратно. Независимо от того, потеряны ли они в [textlink="космос" link="Spacing"] или использованы в камере сгорания, станции нужно производить новый газ взамен потерянного.
+  Также станции нужно хранить этот газ безопасно и эффективно.
+
+  ## Добытчики газа
+  Добытчики газа используются для пополнения газовых запасов станции. Они находятся в газовых резервуарах атмоса.
+
+  <Box>
+    <GuideEntityEmbed Entity="GasMinerOxygenStation"/>
+    <GuideEntityEmbed Entity="GasMinerNitrogenStation"/>
+  </Box>
+
+  Добытчики газа постоянно производят газ комнатной температуры и подают его в окружающую атмосферу. Им не нужно питание, и они не прекращают работу, пока не достигнут заданного [bold]давления отсечки[/bold].
+
+  Дополнительную информацию о добытчиках газа можно увидеть, осмотрев их через [color=yellow][bold][keybind="ExamineEntity"][/bold][/color].
+  Попробуйте осмотреть добытчики газа, показанные выше.
+
+  Добытчики газа имеют уровни: у более крупных версий давление отсечки выше, чем у малых.
+
+  <Box>
+    <GuideEntityEmbed Entity="GasMinerNitrogen" Caption="300 кПа"/>
+    <GuideEntityEmbed Entity="GasMinerNitrogenStation" Caption="1000 кПа"/>
+    <GuideEntityEmbed Entity="GasMinerNitrogenStationLarge" Caption="4500 кПа"/>
+  </Box>
+
+  Если добытчики газа когда-либо открутят от станции, их можно снова закрепить обычным гаечным ключом.
+
+  ## Хранение газа
+  Газовые резервуары используются для хранения газа, произведённого добытчиками, и для передачи его другим процессам. Они находятся в атмосе.
+
+  <Box>
+    <GuideEntityEmbed Entity="WallReinforced" Rotation="0" Caption="" Margin="0"/>
+    <GuideEntityEmbed Entity="WallReinforced" Rotation="0" Caption="" Margin="0"/>
+    <GuideEntityEmbed Entity="WallReinforced" Rotation="0" Caption="" Margin="0"/>
+    <GuideEntityEmbed Entity="WallReinforced" Rotation="0" Caption="" Margin="0"/>
+    <GuideEntityEmbed Entity="WallReinforced" Rotation="0" Caption="" Margin="0"/>
+  </Box>
+  <Box>
+    <GuideEntityEmbed Entity="ReinforcedPlasmaWindow" Rotation="0" Caption="" Margin="0"/>
+    <GuideEntityEmbed Entity="GasOutletInjector" Rotation="270" Caption="" Margin="0"/>
+    <GuideEntityEmbed Entity="GasMinerOxygenStation" Rotation="0" Caption="" Margin="0"/>
+    <GuideEntityEmbed Entity="GasPassiveVent" Rotation="0" Caption="" Margin="0"/>
+    <GuideEntityEmbed Entity="WallReinforced" Rotation="0" Caption="" Margin="0"/>
+  </Box>
+  <Box>
+    <GuideEntityEmbed Entity="WallReinforced" Rotation="0" Caption="" Margin="0"/>
+    <GuideEntityEmbed Entity="WallReinforced" Rotation="0" Caption="" Margin="0"/>
+    <GuideEntityEmbed Entity="WallReinforced" Rotation="0" Caption="" Margin="0"/>
+    <GuideEntityEmbed Entity="WallReinforced" Rotation="0" Caption="" Margin="0"/>
+    <GuideEntityEmbed Entity="WallReinforced" Rotation="0" Caption="" Margin="0"/>
+  </Box>
+
+  <Box>
+    [color=#999999][italic]Пример небольшого газового резервуара[italic][/color]
+  </Box>
+
+  Различные атмосферные процессы подают газы в газовые резервуары и забирают их оттуда.
+  Например:
+  - Добытчик газа подаёт свежие газы в резервуары, если там есть место.
+  - Сеть переработки закачивает восстановленные газы в резервуары для повторного использования.
+  - Системы вроде distronet и камеры сгорания забирают газы из резервуаров.
+
+  Газовые резервуары устроены так, чтобы их можно было измерять [textlink="газоанализатором" link="AtmosTools"].
+  Поскольку выходная вентиляция является [textlink="пассивной вентиляцией" link="PassiveVent"], можно использовать [textlink="газоанализатор" link="AtmosTools"] на входе [textlink="насоса" link="Pumps"], который забирает газ из резервуара, чтобы измерить содержимое резервуара.
+</Document>

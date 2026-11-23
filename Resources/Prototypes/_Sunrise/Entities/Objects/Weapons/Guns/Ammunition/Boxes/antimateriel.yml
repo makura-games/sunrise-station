@@ -1,0 +1,278 @@
+- type: entity
+  abstract: true
+  parent: BaseMagazineBoxAntiMateriel
+  id: BaseSunriseMagazineBoxAntiMateriel
+  name: ammunition box (15mm anti-materiel)
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 14
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,1,1
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Boxes/anti_materiel.rsi
+
+- type: entity
+  id: BaseMagazineBoxBelt127
+  name: heavy ammo belt (15mm anti-materiel)
+  description: Big ammo belt for big beast.
+  parent: [ BaseItem, BaseSecurityContraband ]
+  abstract: true
+  components:
+  - type: MultiHandedItem
+  - type: HeldSpeedModifier
+    walkModifier: 0.95
+    sprintModifier: 0.95
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgeAntiMateriel
+    proto: CartridgeAntiMateriel
+    capacity: 50
+    fillDelay: 0.1
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Boxes/heavyammobelt.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-19
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 19
+    zeroVisible: false
+  - type: Appearance
+  - type: Item
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Boxes/heavyammobelt.rsi
+    layers:
+    - state: icon
+    size: Large
+    shape:
+    - 0,0,2,1
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+  - type: Tag
+    tags:
+    - HeavyAmmoBelt127
+
+- type: entity
+  id: MagazineBoxBelt127Empty
+  name: heavy ammo belt (15mm any)
+  suffix: empty
+  parent: BaseMagazineBoxBelt127
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      right:
+      - state: inhand-right-mag
+
+- type: entity
+  id: MagazineBoxBelt127
+  name: heavy ammo belt (15mm armor-pierce)
+  parent: BaseMagazineBoxBelt127
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielPenetrator
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#9b0000"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#9b0000"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#9b0000"
+
+- type: entity
+  id: MagazineBoxBelt127Artillery
+  name: heavy ammo belt (15mm anti-materiel)
+  parent: BaseMagazineBoxBelt127
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMateriel
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#7f009b"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      right:
+      - state: inhand-right-mag
+
+- type: entity
+  id: MagazineBoxBelt127Frag
+  name: heavy ammo belt (15mm frag)
+  parent: BaseMagazineBoxBelt127
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielFrag
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#7ea53b"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#7ea53b"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#7ea53b"
+
+- type: entity
+  id: MagazineBoxBelt127Blast
+  name: heavy ammo belt (15mm blast)
+  parent: BaseMagazineBoxBelt127
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielBlast
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#8d6425"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#8d6425"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#8d6425"
+
+- type: entity
+  id: MagazineBoxBelt127Emp
+  name: heavy ammo belt (15mm emp)
+  parent: BaseMagazineBoxBelt127
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielEmp
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#008cff"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#008cff"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#008cff"
+
+- type: entity
+  parent: BaseSunriseMagazineBoxAntiMateriel
+  id: MagazineBoxAntiMaterielAP
+  name: ammunition box (15mm penetrator)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielPenetrator
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ap
+
+- type: entity
+  parent: BaseSunriseMagazineBoxAntiMateriel
+  id: MagazineBoxAntiMaterielEmp
+  name: ammunition box (15mm emp)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielEmp
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: emp
+
+- type: entity
+  parent: BaseSunriseMagazineBoxAntiMateriel
+  id: MagazineBoxAntiMaterielFrag
+  name: ammunition box (15mm frag)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielFrag
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: frag
+
+- type: entity
+  parent: BaseSunriseMagazineBoxAntiMateriel
+  id: MagazineBoxAntiMaterielBlast
+  name: ammunition box (15mm blast)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielBlast
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: blast
+
+- type: entity
+  parent: BaseSunriseMagazineBoxAntiMateriel
+  id: MagazineBoxAntiMaterielHP
+  name: ammunition box (15mm hollow point)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielHP
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Boxes/hristov_hollow_point.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]

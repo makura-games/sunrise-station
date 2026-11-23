@@ -1,7 +1,6 @@
 ent-ReinforcementRadioSyndicateCyborgMedical = радио подкрепления мед.киборга
     .desc = { ent-ReinforcementRadioSyndicateCyborgAssault.desc }
     .suffix = Ядерные оперативники
-ent-ReinforcementRadioSyndicateCyborgReaper = радио подкрепления киборга-жнеца
     .desc = { ent-ReinforcementRadioSyndicateCyborgAssault.desc }
     .suffix = Ядерные оперативники
 ent-ReinforcementRadioSyndicateCyborgAssault = радио подкрепления штурмового киборга Синдиката
@@ -22,3 +21,6 @@ ent-ReinforcementPirateScooner = телепортация человека
 ent-ReinforcementPirateScoonerEVA = { ent-ReinforcementPirateScooner }
     .desc = Позовите фрилансера сомнительного качества мгновенно! Выдаётся базовое снаряжение новичка-пирата.
     .suffix = Пират, EVA
+ent-ReinforcementRadioPirateAssaultCyborg = радио подкрепления пиратского абордажного киборга
+    .desc = Вызывает пиратского абордажного киборга вам на помощь.
+    .suffix = Пират, киборг

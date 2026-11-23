@@ -1,0 +1,28 @@
+- type: vendingMachineInventory
+  id: InstrumentsMateInventory
+  startingInventory:
+    AcousticGuitarInstrument: 3
+    ElectricGuitarInstrument: 3
+    RockGuitarInstrument: 2
+    BassGuitarInstrument: 2
+    BanjoInstrument: 2
+    ViolaInstrument: 2
+    ViolinInstrument: 3
+    CelloInstrument: 2
+    AccordionInstrument: 2
+    GlockenspielInstrument: 2
+    KalimbaInstrument: 2
+    RecorderInstrument: 2
+    ClarinetInstrument: 2
+    OcarinaInstrument: 2
+    PanFluteInstrument: 2
+    SaxophoneInstrument: 2
+    TrumpetInstrument: 2
+    EuphoniumInstrument: 2
+  contrabandInventory:
+    ClothingUniformMetatonTishka: 2
+    ToyFigurineMusician: 1
+    BananaPhoneInstrument: 1
+    WoodblockInstrument: 1
+    MusicBoxInstrument: 2
+    BagpipeInstrument: 1

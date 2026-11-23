@@ -1,0 +1,11 @@
+ent-BaseTapeCassette = cassette tape
+    .desc = A small magnetic tape cassette.
+ent-TapeCassetteOneMinute = cassette tape
+    .desc = A small magnetic tape cassette with one minute of recording time.
+    .suffix = 1 minute
+ent-TapeCassetteTwoMinutes = cassette tape
+    .desc = A small magnetic tape cassette with two minutes of recording time.
+    .suffix = 2 minutes
+ent-TapeCassetteThreeMinutes = cassette tape
+    .desc = A small magnetic tape cassette with three minutes of recording time.
+    .suffix = 3 minutes

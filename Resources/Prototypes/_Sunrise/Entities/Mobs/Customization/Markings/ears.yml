@@ -1,0 +1,102 @@
+- type: marking
+  id: FoxEars
+  bodyPart: HeadTop
+  groupWhitelist: [Human]
+  sponsorOnly: false
+  sprites:
+  - sprite: _Sunrise/Mobs/Customization/fox_parts.rsi
+    state: ears_fox_outer
+  - sprite: _Sunrise/Mobs/Customization/fox_parts.rsi
+    state: ears_fox_inner
+
+- type: marking
+  id: RabbitEars
+  bodyPart: HeadTop
+  groupWhitelist: [Human]
+  sponsorOnly: false
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      ears_cat_inner:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: _Sunrise/Mobs/Customization/rabbit_markings_parts.rsi
+    state: ears_rabbit_outer
+  - sprite: _Sunrise/Mobs/Customization/rabbit_markings_parts.rsi
+    state: ears_rabbit_inner
+
+- type: marking
+  id: RabbitEarsMirror
+  bodyPart: HeadTop
+  groupWhitelist: [Human]
+  sponsorOnly: false
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      ears_cat_inner:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: _Sunrise/Mobs/Customization/rabbit_markings_parts.rsi
+    state: ears_rabbit_outer_mir
+  - sprite: _Sunrise/Mobs/Customization/rabbit_markings_parts.rsi
+    state: ears_rabbit_inner_mir
+
+- type: marking
+  id: RabbitEarsUp
+  bodyPart: HeadTop
+  sponsorOnly: false
+  groupWhitelist: [Human]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      ears_cat_inner:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: _Sunrise/Mobs/Customization/rabbit_ears_up.rsi
+    state: ears_rabbit_up_outer
+  - sprite: _Sunrise/Mobs/Customization/rabbit_ears_up.rsi
+    state: ears_rabbit_up_inner
+
+- type: marking
+  id: RabbitEarsUpMirror
+  bodyPart: HeadTop
+  sponsorOnly: false
+  groupWhitelist: [Human]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      ears_cat_inner:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: _Sunrise/Mobs/Customization/rabbit_ears_up.rsi
+    state: ears_rabbit_up_outer_mir
+  - sprite: _Sunrise/Mobs/Customization/rabbit_ears_up.rsi
+    state: ears_rabbit_up_inner_mir

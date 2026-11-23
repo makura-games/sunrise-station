@@ -19,6 +19,7 @@
     implants:
     - MindShieldImplant
     - DeathRattleImplantERT
+    - NutrimentImplant
 
 - type: randomHumanoidSettings
   id: EventHumanoidDeathSquadSunrise
@@ -31,3 +32,4 @@
     - DeathRattleImplantDeathSquad
     - FreedomImplant
     - DeathAcidifierImplant
+    - NutrimentImplant

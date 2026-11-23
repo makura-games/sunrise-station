@@ -53,6 +53,27 @@
           doAfter: 0.5
     - node: rifle
       entity: MagazineBoxImprovisedRifle
+    - node: startrifle556
+      edges:
+      - to: rifle556
+        steps:
+        - tag: ImprovisedAmmoBox
+          icon:
+            sprite: _Starlight/Objects/Weapons/Guns/Ammunition/Boxes/improvised.rsi
+            state: base
+          name: crafting-menu-name-IMGB
+          doAfter: 10
+        - material: Steel
+          amount: 15
+          doAfter: 0.5
+        - material: CrushedPhosphorus
+          amount: 15
+          doAfter: 0.5
+        - material: CrushedPhosphorus
+          amount: 15
+          doAfter: 0.5
+    - node: rifle556
+      entity: MagazineBoxImprovisedRifle556
     - node: startmagnum
       edges:
       - to: magnum

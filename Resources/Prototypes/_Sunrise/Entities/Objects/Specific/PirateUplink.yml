@@ -87,6 +87,26 @@
 
 - type: entity
   parent: Doubloon
+  id: Doubloon20
+  name: Doubloon
+  suffix: 20 DB
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Stack
+    count: 20
+
+- type: entity
+  parent: Doubloon
+  id: Doubloon29
+  name: Doubloon
+  suffix: 29 DB
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Stack
+    count: 29
+
+- type: entity
+  parent: Doubloon
   id: Doubloon50
   name: Doubloon
   suffix: 50 DB
@@ -157,11 +177,12 @@
     energy: 1.6
     color: "#c99342"
   - type: AccessReader
-    access: [[ "NuclearOperative" ]]
+    access: [[ "Pirate" ]]
   - type: UserInterface
     interfaces:
       enum.StoreUiKey.Key:
         type: StoreBoundUserInterface
+  - type: ActivatableUIRequiresAccess
   - type: ActivatableUI
     key: enum.StoreUiKey.Key
   - type: Store

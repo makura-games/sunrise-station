@@ -6,6 +6,11 @@
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Melee/syndicate_rapier.rsi
+    layers:
+    - state: icon
+    - state: spear1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
   - type: DisarmMalus
     malus: 0.6
   - type: MeleeWeapon
@@ -19,10 +24,10 @@
     resistanceBypass: true
     soundHit:
         path: /Audio/Weapons/bladeslice.ogg
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        maxVol: 10
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 10
   - type: MeleeChemicalInjector
     solution: melee
   - type: RefillableSolution
@@ -31,6 +36,13 @@
     solution: melee
   - type: SolutionTransfer
     maxTransferAmount: 1
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    solutionName: melee
+    maxFillLevels: 1
+    fillBaseName: spear
+    inHandsFillBaseName: -fill-
+    inHandsMaxFillLevels: 1
   - type: Reflect
     reflects:
     - NonEnergy
@@ -119,9 +131,10 @@
       count: 1
     - type: LeechOnMarker
       leech:
-        groups:
-          Brute: -30
         types:
+          Blunt: -10
+          Slash: -10
+          Piercing: -10
           Bloodloss: -5
     - type: Item
       storedSprite:

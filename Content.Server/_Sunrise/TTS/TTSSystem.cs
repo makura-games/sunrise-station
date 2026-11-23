@@ -13,6 +13,7 @@ using Content.Shared._Sunrise.AnnouncementSpeaker.Events;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
+using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -23,13 +24,13 @@ namespace Content.Server._Sunrise.TTS;
 // ReSharper disable once InconsistentNaming
 public sealed partial class TTSSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly TTSManager _ttsManager = default!;
-    [Dependency] private readonly SharedTransformSystem _xforms = default!;
-    [Dependency] private readonly IRobustRandom _rng = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly AnnouncementSpeakerSystem _announcementSpeakerSystem = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private TTSManager _ttsManager = default!;
+    [Dependency] private SharedTransformSystem _xforms = default!;
+    [Dependency] private IRobustRandom _rng = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private AnnouncementSpeakerSystem _announcementSpeakerSystem = default!;
+    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
 
     private readonly List<string> _sampleText =
         new()
@@ -53,7 +54,8 @@ public sealed partial class TTSSystem : EntitySystem
     private bool _isEnabled;
     private string _defaultAnnounceVoice = "Hanson";
     private List<ICommonSession> _ignoredRecipients = new();
-    private const float AnnouncementTtsVolumeModifier = 0.75f; // громкость объявлений в динамиках по сравнению с обычной речью
+    private const float AnnouncementTtsVolumeModifier = 0.68f; // громкость объявлений в динамиках по сравнению с обычной речью
+    private const int MaxAnnouncementTtsSources = 4;
     private const float WhisperVoiceVolumeModifier = 0.6f; // how far whisper goes in world units
     private const int WhisperVoiceRange = 3; // how far whisper goes in world units
     private string _radioEffect = string.Empty;
@@ -81,7 +83,7 @@ public sealed partial class TTSSystem : EntitySystem
     private async void OnRequestPreviewTTS(RequestPreviewTTSEvent ev, EntitySessionEventArgs args)
     {
         if (!_isEnabled ||
-            !_prototypeManager.TryIndex<TTSVoicePrototype>(ev.VoiceId, out var protoVoice))
+            !ProtoMan.TryIndex<TTSVoicePrototype>(ev.VoiceId, out var protoVoice))
             return;
 
         var previewText = _rng.Pick(_sampleText);
@@ -134,7 +136,7 @@ public sealed partial class TTSSystem : EntitySystem
             return;
 
         // Get the collective mind prototype to use its voice
-        if (!_prototypeManager.TryIndex<CollectiveMindPrototype>(args.CollectiveMindId, out var collectiveMindProto))
+        if (!ProtoMan.TryIndex<CollectiveMindPrototype>(args.CollectiveMindId, out var collectiveMindProto))
             return;
 
         var voiceId = collectiveMindProto.VoiceId;
@@ -160,9 +162,9 @@ public sealed partial class TTSSystem : EntitySystem
 
     private bool GetVoicePrototype(ProtoId<TTSVoicePrototype>? voiceId, [NotNullWhen(true)] out TTSVoicePrototype? voicePrototype)
     {
-        if (!_prototypeManager.TryIndex(voiceId, out voicePrototype))
+        if (!ProtoMan.TryIndex(voiceId, out voicePrototype))
         {
-            return _prototypeManager.TryIndex(_defaultAnnounceVoice, out voicePrototype);
+            return ProtoMan.TryIndex(_defaultAnnounceVoice, out voicePrototype);
         }
 
         return true;
@@ -218,19 +220,19 @@ public sealed partial class TTSSystem : EntitySystem
         if (ev.TtsData == null || ev.TtsData.Length <= 0)
             return;
 
-        var speakerData = new List<(EntityUid Uid, AnnouncementSpeakerComponent Comp)>();
+        var speakerData = new List<(MapCoordinates Coordinates, AnnouncementSpeakerComponent Comp)>();
         foreach (var speaker in speakers)
         {
             if (!TryComp<AnnouncementSpeakerComponent>(speaker, out var speakerComp))
                 continue;
-            if (!speakerComp.Enabled)
+            if (!speakerComp.Enabled || speakerComp.VolumeModifier <= 0f)
                 continue;
             if (speakerComp.RequiresPower)
             {
                 if (!TryComp<ApcPowerReceiverComponent>(speaker, out var powerReceiver) || !powerReceiver.Powered)
                     continue;
             }
-            speakerData.Add((speaker, speakerComp));
+            speakerData.Add((_xforms.GetMapCoordinates(speaker), speakerComp));
         }
 
         // Для каждого игрока на станции определяем, какие динамики он слышит
@@ -240,18 +242,22 @@ public sealed partial class TTSSystem : EntitySystem
             if (_ignoredRecipients.Contains(actor.PlayerSession))
                 continue;
 
-            var heardSpeakers = new List<MultiSpeakerTtsSource>();
-            foreach (var (speakerUid, speakerComp) in speakerData)
-            {
-                if (Transform(speakerUid).Coordinates.TryDistance(EntityManager, playerXform.Coordinates, out var dist) &&
-                    dist <= speakerComp.Range)
-                {
-                    heardSpeakers.Add(new MultiSpeakerTtsSource(
-                        _xforms.GetMapCoordinates(speakerUid),
-                        speakerComp.VolumeModifier,
-                        speakerComp.Range));
-                }
-            }
+            var playerCoordinates = _xforms.GetMapCoordinates(playerXform);
+            var heardSpeakers = speakerData
+                .Where(speaker => speaker.Coordinates.MapId == playerCoordinates.MapId)
+                .Select(speaker => (
+                    speaker.Coordinates,
+                    speaker.Comp,
+                    DistanceSquared: (speaker.Coordinates.Position - playerCoordinates.Position).LengthSquared()))
+                .Where(speaker => speaker.DistanceSquared <= speaker.Comp.Range * speaker.Comp.Range)
+                .OrderBy(speaker => speaker.DistanceSquared)
+                .Take(MaxAnnouncementTtsSources)
+                .Select(speaker => new MultiSpeakerTtsSource(
+                    speaker.Coordinates,
+                    speaker.Comp.VolumeModifier,
+                    speaker.Comp.Range))
+                .ToList();
+
             if (heardSpeakers.Count > 0)
             {
                 var evMulti = new PlayMultiSpeakerTTSEvent(heardSpeakers, ev.TtsData, volumeModifier: AnnouncementTtsVolumeModifier);
@@ -318,8 +324,7 @@ public sealed partial class TTSSystem : EntitySystem
             return;
 
         // TODO: Check obstacles
-        var xformQuery = GetEntityQuery<TransformComponent>();
-        var sourcePos = _xforms.GetWorldPosition(xformQuery.GetComponent(uid), xformQuery);
+        var sourcePos = _xforms.GetWorldPosition(_xformQuery.GetComponent(uid), _xformQuery);
         var receptions = Filter.Pvs(uid).Recipients;
         foreach (var session in receptions)
         {
@@ -329,8 +334,8 @@ public sealed partial class TTSSystem : EntitySystem
             if (_ignoredRecipients.Contains(session))
                 return;
 
-            var xform = xformQuery.GetComponent(session.AttachedEntity.Value);
-            var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).LengthSquared();
+            var xform = _xformQuery.GetComponent(session.AttachedEntity.Value);
+            var distance = (sourcePos - _xforms.GetWorldPosition(xform, _xformQuery)).LengthSquared();
 
             if (distance > WhisperVoiceRange)
                 continue;

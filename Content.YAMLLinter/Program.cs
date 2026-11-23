@@ -1,78 +1,75 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Content.IntegrationTests;
+using Content.IntegrationTests._Sunrise.Patches;
+using Content.IntegrationTests.Utility;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Reflection;
 using Robust.Shared.Serialization.Markdown.Validation;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Robust.UnitTesting;
+using Robust.UnitTesting.Pool;
 
 namespace Content.YAMLLinter
 {
     internal static class Program
     {
+        private static readonly ExternalTestContext TestContext = new("YAML Linter", StreamWriter.Null);
+
         private static async Task<int> Main(string[] _)
         {
+            // Sunrise edit start - линтеру нужны метаданные RSI, но не декодированные изображения
+            RsiLoadingPatch.Apply();
+            GameDataScrounger.NoScrounging = true; // Ugly hack for YAML Linter.
             PoolManager.Startup();
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-
-            var (errors, fieldErrors) = await RunValidation();
-
-            var count = errors.Count + fieldErrors.Count;
-
-            if (count == 0)
+            try
             {
-                Console.WriteLine($"No errors found in {(int) stopwatch.Elapsed.TotalMilliseconds} ms.");
-                PoolManager.Shutdown();
-                return 0;
-            }
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
 
-            foreach (var (file, errorHashset) in errors)
-            {
-                foreach (var errorNode in errorHashset)
+                var (errors, fieldErrors) = await RunValidation();
+
+                var count = errors.Count + fieldErrors.Count;
+
+                if (count == 0)
                 {
-                    // TODO YAML LINTER Fix inheritance
-                    // If a parent/abstract prototype has na error, this will misreport the file name (but with the correct line/column).
-                    Console.WriteLine($"::error in {file}({errorNode.Node.Start.Line},{errorNode.Node.Start.Column})  {errorNode.ErrorReason}");
+                    Console.WriteLine($"No errors found in {(int) stopwatch.Elapsed.TotalMilliseconds} ms.");
+                    return 0;
                 }
-            }
 
-            foreach (var error in fieldErrors)
+                foreach (var (file, errorHashset) in errors)
+                {
+                    foreach (var errorNode in errorHashset)
+                    {
+                        // TODO YAML LINTER Fix inheritance
+                        // If a parent/abstract prototype has na error, this will misreport the file name (but with the correct line/column).
+                        Console.WriteLine($"::error in {file}({errorNode.Node.Start.Line},{errorNode.Node.Start.Column})  {errorNode.ErrorReason}");
+                    }
+                }
+
+                foreach (var error in fieldErrors)
+                {
+                    Console.WriteLine(error);
+                }
+
+                Console.WriteLine($"{count} errors found in {(int) stopwatch.Elapsed.TotalMilliseconds} ms.");
+                return -1;
+            }
+            finally
             {
-                Console.WriteLine(error);
+                PoolManager.Shutdown();
+                RsiLoadingPatch.Unpatch();
             }
-
-            Console.WriteLine($"{count} errors found in {(int) stopwatch.Elapsed.TotalMilliseconds} ms.");
-            PoolManager.Shutdown();
-            return -1;
+            // Sunrise edit end
         }
 
-        private static async Task<(Dictionary<string, HashSet<ErrorNode>> YamlErrors, List<string> FieldErrors)>
-            ValidateClient()
-        {
-            await using var pair = await PoolManager.GetServerClient();
-            var client = pair.Client;
-            var result = await ValidateInstance(client);
-            await pair.CleanReturnAsync();
-            return result;
-        }
-
-        private static async Task<(Dictionary<string, HashSet<ErrorNode>> YamlErrors, List<string> FieldErrors)>
-            ValidateServer()
-        {
-            await using var pair = await PoolManager.GetServerClient();
-            var server = pair.Server;
-            var result = await ValidateInstance(server);
-            await pair.CleanReturnAsync();
-            return result;
-        }
-
-        private static async Task<(Dictionary<string, HashSet<ErrorNode>>, List<string>)> ValidateInstance(
+        // Sunrise edit start - используем одну пару и проверяем обе стороны одновременно
+        private static async Task<(Dictionary<string, HashSet<ErrorNode>> YamlErrors, List<string> FieldErrors)> ValidateInstance(
             RobustIntegrationTest.IntegrationInstance instance)
         {
             var protoMan = instance.ResolveDependency<IPrototypeManager>();
@@ -110,14 +107,21 @@ namespace Content.YAMLLinter
         public static async Task<(Dictionary<string, HashSet<ErrorNode>> YamlErrors, List<string> FieldErrors)>
             RunValidation()
         {
-            var (clientAssemblies, serverAssemblies) = await GetClientServerAssemblies();
+            await using var pair = await PoolManager.GetServerClient(testContext: TestContext);
+            var clientAssemblies = GetAssemblies(pair.Client);
+            var serverAssemblies = GetAssemblies(pair.Server);
             var serverTypes = serverAssemblies.SelectMany(n => n.GetTypes()).Select(t => t.Name).ToHashSet();
             var clientTypes = clientAssemblies.SelectMany(n => n.GetTypes()).Select(t => t.Name).ToHashSet();
 
             var yamlErrors = new Dictionary<string, HashSet<ErrorNode>>();
 
-            var serverErrors = await ValidateServer();
-            var clientErrors = await ValidateClient();
+            var serverValidation = ValidateInstance(pair.Server);
+            var clientValidation = ValidateInstance(pair.Client);
+            await Task.WhenAll(serverValidation, clientValidation);
+
+            var serverErrors = await serverValidation;
+            var clientErrors = await clientValidation;
+            await pair.CleanReturnAsync();
 
             foreach (var (key, val) in serverErrors.YamlErrors)
             {
@@ -174,22 +178,11 @@ namespace Content.YAMLLinter
             return (yamlErrors, fieldErrors);
         }
 
-        private static async Task<(Assembly[] clientAssemblies, Assembly[] serverAssemblies)>
-            GetClientServerAssemblies()
+        private static Assembly[] GetAssemblies(RobustIntegrationTest.IntegrationInstance instance)
         {
-            await using var pair = await PoolManager.GetServerClient();
-
-            var result = (GetAssemblies(pair.Client), GetAssemblies(pair.Server));
-
-            await pair.CleanReturnAsync();
-
-            return result;
-
-            Assembly[] GetAssemblies(RobustIntegrationTest.IntegrationInstance instance)
-            {
-                var refl = instance.ResolveDependency<IReflectionManager>();
-                return refl.Assemblies.ToArray();
-            }
+            var refl = instance.ResolveDependency<IReflectionManager>();
+            return refl.Assemblies.ToArray();
         }
+        // Sunrise edit end
     }
 }

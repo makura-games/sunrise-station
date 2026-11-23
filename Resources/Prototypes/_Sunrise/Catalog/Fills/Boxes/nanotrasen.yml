@@ -218,38 +218,8 @@
     - state: flashbang
 
 - type: entity
-  name: ERT Leader kit box
-  parent: [BoxCardboard, BaseCentcommContraband]
-  id: BoxErtLeaderKit
-  description: Base Leader Kit created for centcomm squad members.
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Storage/boxes_sunrise.rsi
-    layers:
-    - state: boxwidetoy
-    - state: wide_ert
-  - type: Storage
-    grid:
-    - 0,0,4,3
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: PortableSurveillanceCameraMonitorUnpowered
-        - id: HandheldCriminalRecordsMonitorUnpowered
-        - id: PinpointerUniversal
-        - id: PinpointerNuclear
-        - id: DoubleEmergencyOxygenTankFilled
-        - id: MedipenCombatInjector
-        - id: AutoMenderBruteFilled
-        - id: AutoMenderBurnFilled
-        - id: FoodTinMRE
-        - id: FoodSnackMaysonEnergy
-        - id: DrinkMREFlask
-
-- type: entity
   name: ERT base kit box
-  parent: [BoxCardboard, BaseCentcommContraband]
+  parent: [BoxSurvivalMilitaryDouble, BaseCentcommContraband]
   id: BoxErtBaseKit
   description: Base Security Kit created for centcomm squad members.
   components:
@@ -260,22 +230,15 @@
     - state: wide_ert
   - type: Storage
     grid:
-    - 0,0,4,3
+    - 0,0,3,1
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
         children:
         - id: DoubleEmergencyOxygenTankFilled
-          amount: 2
-        - id: DrinkMREFlask
-        - id: FoodSnackNutribrick
         - id: FireExtinguisherMini
         - id: MedipenCombatInjector
-        - id: AutoMenderBruteFilled
-        - id: AutoMenderBurnFilled
         - id: HandHeldMassScanner
-        - id: Telebaton
-        - id: FoodTinMRE
 
 #ammo kits
 - type: entity
@@ -289,9 +252,8 @@
       storagebase: !type:AllSelector
         children:
         - id: MagazineRifleHeavySP
-          amount: 2
+          amount: 3
         - id: MagazineRifleHeavyFMJ
-        - id: MagazineRifleHeavyHP
 
 - type: entity
   name: .308 incendiary magazines kit
@@ -317,9 +279,8 @@
       storagebase: !type:AllSelector
         children:
         - id: MagazineRifleM52SP
-          amount: 2
+          amount: 3
         - id: MagazineRifleM52FMJ
-        - id: MagazineRifleM52HP
 
 - type: entity
   name: 5,56 magazines kit
@@ -332,9 +293,8 @@
       storagebase: !type:AllSelector
         children:
         - id: MagazineRifleSP
-          amount: 2
+          amount: 3
         - id: MagazineRifleFMJ
-        - id: MagazineRifleHP
 
 - type: entity
   name: 5,56 incendiary magazines kit

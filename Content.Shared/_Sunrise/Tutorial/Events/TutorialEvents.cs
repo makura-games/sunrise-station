@@ -49,3 +49,15 @@ public sealed class TutorialWindowDataResponseEvent(List<string> completedTutori
 {
     public List<string> CompletedTutorials = completedTutorials;
 }
+
+[NetSerializable, Serializable]
+public sealed class TutorialUiButtonPressedEvent(string button) : EntityEventArgs
+{
+    public string Button = button;
+}
+
+[NetSerializable, Serializable]
+public sealed class TutorialUiControlVisibleEvent(string control) : EntityEventArgs
+{
+    public string Control = control;
+}

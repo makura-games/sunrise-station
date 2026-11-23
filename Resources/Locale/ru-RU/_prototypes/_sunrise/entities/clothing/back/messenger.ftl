@@ -14,9 +14,9 @@ ent-ClothingBackpackMessengerArcadia = сумка-мессенджер Арка�
     .desc = { ent-ClothingBackpackMessengerPassenger.desc }
 ent-ClothingBackpackMessengerPirate = пиратская сумка-мессенджер
     .desc = Прочная сумка-мессенджер для военных преступлений. Яррр.
-
-ent-ClothingBackpackMessengerPirateBundleSKM24Scrap = набор SKM-24 (хлам)
-    .desc = Содержит самую дешёвую штурмовую винтовку.
-
-ent-ClothingBackpackMessengerMercenaryBundleARG = набор ARG
-    .desc = Содержит стандартную штурмовую винтовку.
+ent-SunriseClothingBackpackMessengerPirateMurmilloActive = MOD-мессенджер «Мурмилло»
+    .desc = Пиратская сумка-мессенджер с MOD-сьютом «Мурмилло», готовым к развёртыванию без MOD-ядра.
+ent-SunriseClothingBackpackMessengerPirateMurmillo = MOD-мессенджер «Мурмилло»
+    .desc = Пиратская сумка-мессенджер с MOD-сьютом «Мурмилло», ожидающим установки MOD-ядра.
+ent-SunriseClothingBackpackMessengerPirateMurmilloDamaged = MOD-мессенджер «Мурмилло»
+    .desc = Пиратская сумка-мессенджер с повреждённым MOD-сьютом «Мурмилло», ожидающим установки MOD-ядра.

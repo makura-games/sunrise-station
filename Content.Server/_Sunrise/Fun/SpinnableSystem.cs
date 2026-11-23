@@ -4,15 +4,15 @@ using Content.Shared._Sunrise.Fun;
 using Content.Shared.Popups;
 using Content.Shared.Hands;
 using Content.Shared.Verbs;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 
 namespace Content.Server._Sunrise.Fun
 {
     public sealed partial class SpinnerSystem : EntitySystem
     {
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly SharedTransformSystem _xform = default!;
-        [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private SharedTransformSystem _xform = default!;
+        [Dependency] private SharedPopupSystem _popupSystem = default!;
 
         public override void Initialize()
         {

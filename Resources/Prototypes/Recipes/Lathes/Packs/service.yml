@@ -58,11 +58,18 @@
   - WeaponSprayNozzle
   - ClothingBackpackWaterTank
   - MegaSprayBottle
+  - TrashBagHolding
 
 - type: latheRecipePack
   id: Instruments
   recipes:
   - SynthesizerInstrument
+  # sunrise-start
+  - TapeRecorder
+  - TapeCassetteOneMinute
+  - TapeCassetteTwoMinutes
+  - TapeCassetteThreeMinutes
+  # sunrise-end
   - PushHorn
 
 - type: latheRecipePack

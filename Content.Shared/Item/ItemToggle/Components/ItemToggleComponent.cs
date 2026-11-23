@@ -1,3 +1,4 @@
+using Content.Shared.Interaction.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
@@ -18,15 +19,6 @@ public sealed partial class ItemToggleComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool Activated = false;
-
-
-    // Sunrise-start
-    /// <summary>
-    /// Можно ли нам активировать если предмет в руках
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool CanActivateInhand = true;
-    // Sunrise-end
 
     /// <summary>
     /// Can the entity be activated in the world.
@@ -92,8 +84,11 @@ public sealed partial class ItemToggleComponent : Component
     [DataField, AutoNetworkedField]
     public SoundSpecifier? SoundFailToActivate;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField]
-    public bool DeactivateUnequippedHand;
+    /// <summary>
+    /// Does toggling this item require <see cref="ComplexInteractionComponent"/>?
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool RequireComplexInteract = true;
 }
 
 /// <summary>

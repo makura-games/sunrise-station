@@ -8,7 +8,6 @@
   - type: ContainerContainer
     containers:
       key_slots: !type:Container
-      cell_slot: !type:ContainerSlot {} # Sunrise-Edit
   - type: ContainerFill
     containers:
       key_slots:
@@ -29,16 +28,6 @@
     guides:
     - Radio
   # Sunrise-Start
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-name
-        startingItem: PowerCellSmall
-        blacklist:
-          tags:
-          - PowerCage
-  - type: PowerCellSlot
-    cellSlotId: cell_slot
   - type: UserInterface
     interfaces:
       enum.HeadsetUiKey.Key:

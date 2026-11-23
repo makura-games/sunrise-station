@@ -14,6 +14,12 @@
       - FootstepSound
 
 - type: entity
+  save: false
+  name: Urist McAbductor
+  parent: MobAbductor
+  id: MobAbductorNonAntag
+
+- type: entity
   name: abductor scientist
   parent: MobAbductor
   id: MobAbductorScientist

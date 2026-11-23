@@ -17,6 +17,9 @@ public sealed partial class TestPair
 {
     protected override async Task Cleanup()
     {
+        // Sunrise added start - выводим стоимость текущего теста до очистки пары
+        await PrintTimingDiagnostics();
+        // Sunrise added end
         await base.Cleanup();
         await ResetModifiedPreferences();
     }
@@ -56,6 +59,10 @@ public sealed partial class TestPair
         await Server.WaitPost(() => Server.EntMan.FlushEntities());
         await Server.WaitPost(() => gameTicker.RestartRound());
         await RunTicksSync(1);
+
+        // Sunrise added start - новая точка отсчёта исключает стоимость переработки пары
+        await ResetTimingDiagnostics();
+        // Sunrise added end
     }
 
     public override void ValidateSettings(PairSettings s)

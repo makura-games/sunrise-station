@@ -42,7 +42,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: BatteryAmmoProvider
-    proto: RedMediumLaser
+    proto: SunriseMechHitscanRedMediumLaser
     fireCost: 100
   - type: Appearance
   - type: AmmoCounter

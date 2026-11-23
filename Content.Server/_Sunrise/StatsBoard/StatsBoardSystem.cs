@@ -7,14 +7,13 @@ using Content.Server.Store.Systems;
 using Content.Shared._Sunrise.StatsBoard;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Cargo.Components;
-using Content.Shared.Clumsy;
 using Content.Shared.Construction;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Electrocution;
 using Content.Shared.Fluids;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Interaction.Components;
@@ -22,7 +21,10 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
+using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Slippery;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -33,15 +35,19 @@ using Content.Shared.Damage.Systems;
 
 namespace Content.Server.StatsBoard;
 
-public sealed class StatsBoardSystem : EntitySystem
+public sealed partial class StatsBoardSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly MindSystem _mindSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private MindSystem _mindSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+
+    private static readonly ProtoId<TagPrototype> HamsterTag = "Hamster";
+    private static readonly ProtoId<TagPrototype> MouseTag = "Mouse";
+    private static readonly EntProtoId<StatusEffectComponent> ClumsyClownStatusEffect = "StatusEffectClumsyClown";
 
     private (EntityUid? killer, EntityUid? victim, TimeSpan time) _firstMurder = (null, null, TimeSpan.Zero);
     private EntityUid? _hamsterKiller;
@@ -53,7 +59,7 @@ public sealed class StatsBoardSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ActorComponent, DamageChangedEvent>(OnDamageModify);
+        SubscribeLocalEvent<ActorComponent, DamageDealtEvent>(OnDamageModify);
         SubscribeLocalEvent<ActorComponent, SlippedEvent>(OnSlippedEvent);
         SubscribeLocalEvent<ActorComponent, CreamedEvent>(OnCreamedEvent);
         SubscribeLocalEvent<ActorComponent, InteractionAttemptEvent>(OnInteractionAttempt);
@@ -104,7 +110,7 @@ public sealed class StatsBoardSystem : EntitySystem
         if (!_statisticEntries.TryGetValue(uid, out var value))
             return;
 
-        if (!TryComp<MetaDataComponent>(ev.Item, out var metaDataComponent))
+        if (!TryComp(ev.Item, out MetaDataComponent? metaDataComponent))
             return;
 
         if (metaDataComponent.EntityPrototype == null)
@@ -126,7 +132,7 @@ public sealed class StatsBoardSystem : EntitySystem
         value.CuffedCount += 1;
         if (_clownCuffed.clown != null)
             return;
-        if (!HasComp<ClumsyComponent>(uid))
+        if (!_statusEffects.HasStatusEffect(uid, ClumsyClownStatusEffect))
             return;
         _clownCuffed.clown = uid;
         _clownCuffed.time = _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan);
@@ -207,7 +213,7 @@ public sealed class StatsBoardSystem : EntitySystem
                     origin = args.Origin.Value;
                 }
 
-                if (_firstMurder.victim == null && HasComp<HumanoidAppearanceComponent>(uid))
+                if (_firstMurder.victim == null && HasComp<HumanoidProfileComponent>(uid))
                 {
                     _firstMurder.victim = uid;
                     _firstMurder.killer = origin;
@@ -217,7 +223,7 @@ public sealed class StatsBoardSystem : EntitySystem
 
                 if (origin != null)
                 {
-                    if (_hamsterKiller == null && _tagSystem.HasTag(uid, "Hamster"))
+                    if (_hamsterKiller == null && _tagSystem.HasTag(uid, HamsterTag))
                     {
                         _hamsterKiller = origin.Value;
                     }
@@ -225,12 +231,12 @@ public sealed class StatsBoardSystem : EntitySystem
                     if (!_statisticEntries.TryGetValue(origin.Value, out var originEntry))
                         return;
 
-                    if (_tagSystem.HasTag(uid, "Mouse"))
+                    if (_tagSystem.HasTag(uid, MouseTag))
                     {
                         originEntry.KilledMouseCount += 1;
                     }
 
-                    if (HasComp<HumanoidAppearanceComponent>(uid))
+                    if (HasComp<HumanoidProfileComponent>(uid))
                         originEntry.HumanoidKillCount += 1;
                 }
 
@@ -239,48 +245,38 @@ public sealed class StatsBoardSystem : EntitySystem
         }
     }
 
-    private void OnDamageModify(EntityUid uid, ActorComponent comp, DamageChangedEvent ev)
+    private void OnDamageModify(EntityUid uid, ActorComponent comp, ref DamageDealtEvent ev)
     {
-        DamageGetModify(uid, ev);
+        DamageGetModify(uid, ev.Damage);
 
-        if (ev.Origin != null)
-            DamageTakeModify(ev.Origin.Value, ev);
+        if (ev.Origin is { } origin)
+            DamageTakeModify(origin, ev.Damage);
     }
 
-    private void DamageTakeModify(EntityUid uid, DamageChangedEvent ev)
+    private void DamageTakeModify(EntityUid uid, DamageSpecifier damage)
     {
         if (!_statisticEntries.TryGetValue(uid, out var value))
             return;
 
-        if (ev.DamageDelta == null)
-            return;
+        var total = damage.GetTotal().Int();
 
-        if (ev.DamageIncreased)
-        {
-            value.TotalInflictedDamage += ev.DamageDelta.GetTotal().Int();
-        }
-        else
-        {
-            value.TotalInflictedHeal += Math.Abs(ev.DamageDelta.GetTotal().Int());
-        }
+        if (total > 0)
+            value.TotalInflictedDamage += total;
+        else if (total < 0)
+            value.TotalInflictedHeal += Math.Abs(total);
     }
 
-    private void DamageGetModify(EntityUid uid, DamageChangedEvent ev)
+    private void DamageGetModify(EntityUid uid, DamageSpecifier damage)
     {
         if (!_statisticEntries.TryGetValue(uid, out var value))
             return;
 
-        if (ev.DamageDelta == null)
-            return;
+        var total = damage.GetTotal().Int();
 
-        if (ev.DamageIncreased)
-        {
-            value.TotalTakeDamage += ev.DamageDelta.GetTotal().Int();
-        }
-        else
-        {
-            value.TotalTakeHeal += Math.Abs(ev.DamageDelta.GetTotal().Int());
-        }
+        if (total > 0)
+            value.TotalTakeDamage += total;
+        else if (total < 0)
+            value.TotalTakeHeal += Math.Abs(total);
     }
 
     private void OnSlippedEvent(EntityUid uid, ActorComponent comp, ref SlippedEvent ev)
@@ -288,7 +284,7 @@ public sealed class StatsBoardSystem : EntitySystem
         if (!_statisticEntries.TryGetValue(uid, out var value))
             return;
 
-        if (HasComp<HumanoidAppearanceComponent>(uid))
+        if (HasComp<HumanoidProfileComponent>(uid))
             value.SlippedCount += 1;
     }
 
@@ -311,8 +307,8 @@ public sealed class StatsBoardSystem : EntitySystem
             if (!_statisticEntries.TryGetValue(ent, out var value))
                 return;
 
-            if (TryComp<TransformComponent>(ent, out var transformComponent) &&
-                transformComponent.GridUid == null && HasComp<HumanoidAppearanceComponent>(ent))
+            if (TryComp(ent, out TransformComponent? transformComponent) &&
+                transformComponent.GridUid == null && HasComp<HumanoidProfileComponent>(ent))
                 value.SpaceTime += TimeSpan.FromSeconds(frameTime);
 
             if (TryComp<CuffableComponent>(ent, out var cuffableComponent) &&
@@ -400,9 +396,9 @@ public sealed class StatsBoardSystem : EntitySystem
 
         foreach (var (uid, data) in _statisticEntries)
         {
-            if (TryComp<HumanoidAppearanceComponent>(uid, out var humanoidAppearanceComponent))
+            if (TryComp<HumanoidProfileComponent>(uid, out var humanoidAppearanceComponent))
             {
-                var speciesProto = _prototypeManager.Index<SpeciesPrototype>(humanoidAppearanceComponent.Species);
+                var speciesProto = ProtoMan.Index<SpeciesPrototype>(humanoidAppearanceComponent.Species);
 
                 if (roundSpecies.TryGetValue(speciesProto.Name, out var count))
                 {
@@ -765,7 +761,7 @@ public sealed class StatsBoardSystem : EntitySystem
         if (_statisticEntries.TryGetValue(uid, out var value))
             return value.Name;
 
-        if (TryComp<MetaDataComponent>(uid, out var metaDataComponent))
+        if (TryComp(uid, out MetaDataComponent? metaDataComponent))
             return metaDataComponent.EntityName;
 
         return "Кто это блядь?";

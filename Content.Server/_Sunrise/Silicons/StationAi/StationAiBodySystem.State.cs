@@ -26,10 +26,10 @@ public sealed partial class StationAiBodySystem
      * between the AI brain entity and the controlled body.
      */
 
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedAccessSystem _access = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedAccessSystem _access = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private static readonly ProtoId<TagPrototype> StationAiCommunicationBoardTag = "StationAiCommunicationBoard";
 

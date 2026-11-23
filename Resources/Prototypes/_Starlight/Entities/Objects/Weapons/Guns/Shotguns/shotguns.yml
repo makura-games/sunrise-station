@@ -9,6 +9,8 @@
   - type: Gun
     spread: 20
     projectileSpeed: 35
+  - type: GunSpreadModifier # Sunrise-Add
+    spread: 1.2
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Shotguns/riot.rsi
   - type: Clothing
@@ -33,15 +35,19 @@
   - type: Clothing
     sprite: _Starlight/Objects/Weapons/Guns/Shotguns/riot_sawn.rsi
   - type: Item
-    size: Small
+    size: Normal
     shape:
     - 0,0,2,0
     sprite: _Starlight/Objects/Weapons/Guns/Shotguns/riot_sawn_inhands_64x.rsi
   - type: Gun
+    fireRate: 1.65
     spread: 30
     projectileSpeed: 35
+  - type: GunSpreadModifier # Sunrise-Add
+    spread: 1.4
   - type: BallisticAmmoProvider
     capacity: 5
+    proto: ShellShotgunBeanbag
   - type: Construction
     graph: ShotgunRiotSawn
     node: shotgunsawn
@@ -62,25 +68,6 @@
     graph: ShotgunRiotSawn
     node: shotgunsawn
     deconstructionTarget: null
-
-- type: entity
-  name: combat shotgun
-  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
-  id: WeaponShotgunCombat
-  description: A semi automatic shotgun with tactical furniture and a six-shell capacity underneath.
-  components:
-  - type: Item
-    sprite: _Starlight/Objects/Weapons/Guns/Shotguns/cshotgun_inhands_64x.rsi
-  - type: Gun
-    spread: 20
-    projectileSpeed: 25
-  - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Shotguns/cshotgun.rsi
-  - type: Clothing
-    sprite: _Starlight/Objects/Weapons/Guns/Shotguns/cshotgun.rsi
-  - type: GunRequiresWield
-  - type: BallisticAmmoProvider
-    capacity: 7
 
 - type: entity
   name: cycler shotgun
@@ -219,6 +206,8 @@
     - FullAuto
     soundGunshot:
       path: /Audio/_Starlight/Weapons/Guns/Gunshots/minotaur.ogg
+  - type: GunSpreadModifier # Sunrise-Add
+    spread: 1.2
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -256,7 +245,7 @@
     - 0,0,4,0
   - type: Gun
     spread: 15
-    fireRate: 3
+    fireRate: 2.5
     projectileSpeed: 25
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Shotguns/forged_shotgun.rsi
@@ -290,39 +279,3 @@
         knockback: 0.4
         staminaMultiplier: 15
   # Sunrise-End
-
-- type: entity
-  name: makeshift shotgun
-  parent: [WeaponFlareGunSecurity, BaseMinorContraband, BaseGunShotgunSound] # Sunrise edit - shotgun handling sounds
-  id: WeaponShotgunMakeshift
-  description: A small hand-cannon that fires .50 shotgun shells. Has no cloth to hold it together, so it has a high chance of falling apart with every shot.
-  components:
-  - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Shotguns/makeshift_shotgun.rsi
-    layers:
-      - state: base
-        map: ["enum.GunVisualLayers.Base"]
-  - type: Item
-    size: Small
-    sprite: _Starlight/Objects/Weapons/Guns/Shotguns/makeshift_shotgun.rsi
-  - type: Construction
-    graph: MakeshiftShotgunGraph
-    node: shotgun
-  - type: WeaponDismantleOnShoot
-    dismantleChance: 0.50
-    selfDamage:
-      types:
-        Blunt: 5
-        Heat: 5
-    items:
-      - id: ModularBarrel
-        launchAngle: 0
-        prob: 1
-      - id: ModularReceiver
-        launchAngle: 90
-        prob: 0.10
-      - id: RifleStock
-        launchAngle: 180
-        prob: 0.80
-  - type: Gun
-    projectileSpeed: 25

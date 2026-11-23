@@ -8,7 +8,6 @@
   - type: ContainerContainer
     containers:
       key_slots: !type:Container
-      cell_slot: !type:ContainerSlot {}
   - type: Headset
     toggleAction: ActionToggleHeadset
   - type: EncryptionKeyHolder
@@ -21,20 +20,10 @@
     slots:
     - ears
     sprite: Clothing/Ears/Headsets/base.rsi
-  - type: PowerCellSlot
-    cellSlotId: cell_slot
   - type: UserInterface
     interfaces:
       enum.HeadsetUiKey.Key:
         type: HeadsetBoundUserInterface
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-name
-        startingItem: PowerCellSmall
-        blacklist:
-          tags:
-          - PowerCage
 
 - type: entity
   abstract: true
@@ -47,11 +36,6 @@
     state: icon_alt
   - type: Clothing
     equippedPrefix: alt
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-name
-        startingItem: PowerCellSmall
 
 - type: entity
   parent: ClothingHeadset
@@ -132,7 +116,7 @@
     sprite: _Sunrise/Clothing/Ears/Headsets/command.rsi
 
 - type: entity
-  parent: ClothingHeadset
+  parent: [ClothingHeadset, BaseCommandContraband]
   id: ClothingHeadsetBlueShieldEnsign
   name: blue shield ensign headset
   description:
@@ -159,6 +143,7 @@
       key_slots:
       - EncryptionKeyBlueShield
       - EncryptionKeyCommon
+      - EncryptionKeyCommand # Cause we dont have Ensign on station.
   - type: Sprite
     sprite: _Sunrise/Clothing/Ears/Headsets/command.rsi
   - type: Clothing

@@ -25,7 +25,7 @@ public abstract partial class SharedBorgSwitchableTypeSystem
     {
         return Resolve(ent, ref ent.Comp, false) &&
                ent.Comp.SelectedBorgType == null &&
-               Prototypes.HasIndex(borgType);
+               ProtoMan.HasIndex(borgType);
     }
 
     /// <summary>

@@ -134,7 +134,7 @@
     Slime: 10
     Sugar: 5
   solids:
-    SentientSlimeCore: 1
+    OrganSlimePersonCore: 1
     FoodBreadBun: 1
 
 - type: microwaveMealRecipe

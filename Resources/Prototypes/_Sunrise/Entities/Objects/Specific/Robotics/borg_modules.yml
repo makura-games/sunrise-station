@@ -111,6 +111,9 @@
   parent: BaseBorgModule
   abstract: true
   components:
+  - type: BorgModule
+    borgFitTypes:
+    - borg-type-security
   - type: Tag
     tags:
     - BorgModuleSecurity
@@ -216,6 +219,8 @@
   - type: ItemBorgModule
     hands:
     - item: JetpackBorg
+    - item: BorgHandheldGPSBasic
+    - item: HandHeldMassScannerBorg
   - type: BorgModuleIcon
     icon: { sprite: Objects/Tanks/Jetpacks/void.rsi, state: icon }
 
@@ -323,7 +328,6 @@
           components:
           - Flash
           - Battery
-          - BodyPart
           - TileFrictionModifier
           - CablePlacer
           - BorgModule
@@ -339,50 +343,6 @@
           - Healing
   - type: BorgModuleIcon
     icon: { sprite: Objects/Specific/Robotics/borgmodule.rsi, state: science }
-
-# Xeno Borgs Stuff
-- type: entity
-  parent: [ BaseXenoborgModuleHeavy, BaseProviderBorgModule, BaseXenoborgContraband ]
-  id: XenoborgModuleXray
-  name: x-ray xenoborg module
-  description: Module with a x-ray cannon gun.
-  components:
-  - type: Sprite
-    layers:
-    - state: xenoborg_heavy
-    - state: icon-grappling-gun
-  - type: ItemBorgModule
-    hands:
-    - item: XenoborgXrayGun
-  - type: BorgModuleIcon
-    icon: { sprite: _Sunrise/Interface/Actions/actions_borg.rsi, state: xenoborg-laser4-module }
-
-- type: entity
-  parent: [ BaseXenoborgModuleHeavy, BaseProviderBorgModule, BaseXenoborgContraband ]
-  id: XenoborgModuleTurboLaser
-  name: turbo-laser xenoborg module
-  description: Module with a heavy machinegun laser.
-  components:
-  - type: Sprite
-    layers:
-    - state: xenoborg_heavy
-    - state: icon-combat
-      sprite: _Sunrise/Objects/Specific/Robotics/borgmodule.rsi
-  - type: ItemBorgModule
-    hands:
-    - item: XenoborgLaserMinigun
-  - type: BorgModuleIcon
-    icon: { sprite: _Sunrise/Interface/Actions/actions_borg.rsi, state: xenoborg-laser3-module }
-
-- type: entity
-  parent: XenoborgModuleHeavyLaser
-  id: XenoborgModuleTemperature
-  name: temperature xenoborg module
-  description: Module with a self-recharging temperature gun.
-  components:
-  - type: ItemBorgModule
-    hands:
-    - item: XenoborgTemperatureGun
 
 - type: entity
   id: BorgModulePaperwork
@@ -656,7 +616,6 @@
           - Organ
           - OrganDamage
           - FunctionalOrgan
-          - BodyPart
   - type: BorgModuleIcon
     icon:
       sprite: Interface/Actions/actions_borg.rsi
@@ -666,13 +625,31 @@
 
 - type: entity
   id: BorgModuleSyndicateCombatAdvanced
-  parent: [ BaseBorgModuleSyndicate, BaseProviderBorgModule ]
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
   name: advanced combat syndicate cyborg module
   components:
   - type: Sprite
     layers:
     - state: syndicate
     - state: icon-syndicate
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: base-icon-inhand-left
+        color: "#FF0000"
+      - state: base-module-inhand-left
+        color: "#891417"
+      - state: base-part-inhand-left
+      - state: base-stripes-inhand-left
+        color: "#7B0F12"
+      right:
+      - state: base-icon-inhand-right
+        color: "#FF0000"
+      - state: base-module-inhand-right
+        color: "#891417"
+      - state: base-part-inhand-right
+      - state: base-stripes-inhand-right
+        color: "#7B0F12"
   - type: ItemBorgModule
     hands:
     - item: WeaponPistolEchis
@@ -680,13 +657,31 @@
 
 - type: entity
   id: BorgModuleSyndicateHypoAdvanced
-  parent: [ BaseBorgModuleSyndicate, BaseProviderBorgModule ]
+  parent: [ BaseBorgModuleMedical, BaseProviderBorgModule ]
   name: advanced hypo syndicate cyborg module
   components:
   - type: Sprite
     layers:
     - state: syndicate
     - state: icon-syndicate
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: base-icon-inhand-left
+        color: "#FF0000"
+      - state: base-module-inhand-left
+        color: "#891417"
+      - state: base-part-inhand-left
+      - state: base-stripes-inhand-left
+        color: "#7B0F12"
+      right:
+      - state: base-icon-inhand-right
+        color: "#FF0000"
+      - state: base-module-inhand-right
+        color: "#891417"
+      - state: base-part-inhand-right
+      - state: base-stripes-inhand-right
+        color: "#7B0F12"
   - type: ItemBorgModule
     hands:
     - item: HypoBorgSaboteurSyndicate
@@ -696,13 +691,31 @@
 
 - type: entity
   id: BorgModuleSyndicatePenetration
-  parent: [ BaseBorgModuleSyndicate, BaseProviderBorgModule ]
+  parent: [ BaseBorgModuleEngineering, BaseProviderBorgModule ]
   name: syndicate penetration cyborg module
   components:
   - type: Sprite
     layers:
     - state: syndicate
     - state: icon-syndicate
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: base-icon-inhand-left
+        color: "#FF0000"
+      - state: base-module-inhand-left
+        color: "#891417"
+      - state: base-part-inhand-left
+      - state: base-stripes-inhand-left
+        color: "#7B0F12"
+      right:
+      - state: base-icon-inhand-right
+        color: "#FF0000"
+      - state: base-module-inhand-right
+        color: "#891417"
+      - state: base-part-inhand-right
+      - state: base-stripes-inhand-right
+        color: "#7B0F12"
   - type: ItemBorgModule
     hands:
     - item: SyndicateJawsOfLife

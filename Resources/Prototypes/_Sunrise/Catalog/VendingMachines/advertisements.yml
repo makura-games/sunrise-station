@@ -17,6 +17,12 @@
     count: 7
 
 - type: localizedDataset
+  id: InstrumentsMateAds
+  values:
+    prefix: advertisement-instrumentsmate-
+    count: 7
+
+- type: localizedDataset
   id: ATMAds
   values:
     prefix: advertisement-ATM-

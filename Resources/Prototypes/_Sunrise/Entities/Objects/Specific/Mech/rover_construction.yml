@@ -1,0 +1,17 @@
+- type: entity
+  id: SunriseRoverArmorPlate
+  parent: BaseExosuitParts
+  name: rover armor plates
+  description: Armor plates made of plasteel for the Rover combat exosuit.
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Mech/durand_construction.rsi
+    state: darkdurand_armor
+  - type: Tag
+    tags:
+    - SunriseRoverArmor
+  - type: GuideHelp
+    guides:
+    - Robotics

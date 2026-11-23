@@ -50,27 +50,27 @@
       weight: 1
       # создают различные газы
     - id: XenoArtifactEffectCreationGasElectrovae
-      weight: 1.0
+      weight: 0.6
     - id: XenoArtifactEffectCreationGasBZ
-      weight: 0.5
+      weight: 0.3
     - id: XenoArtifactEffectCreationGasHealium
-      weight: 0.5
+      weight: 0.3
     - id: XenoArtifactEffectCreationGasNitrium
-      weight: 0.5
+      weight: 0.3
     - id: XenoArtifactEffectCreationGasChargedElectrovae
-      weight: 0.8
+      weight: 0.5
     - id: XenoArtifactEffectCreationGasHalon
-      weight: 0.2
+      weight: 0.1
     - id: XenoArtifactEffectCreationGasPluoxium
-      weight: 0.2
+      weight: 0.1
     - id: XenoArtifactEffectCreationGasZauker
-      weight: 0.1
+      weight: 0.05
     - id: XenoArtifactEffectCreationGasHydrogen
-      weight: 1.0
+      weight: 0.6
     - id: XenoArtifactEffectCreationGasProtoNitrate
-      weight: 0.1
+      weight: 0.05
     - id: XenoArtifactEffectCreationGasHelium
-      weight: 1.0
+      weight: 0.6
       
 
 - type: entityTable
@@ -189,26 +189,32 @@
 
 # Триггеры
 
-- type: weightedRandomXenoArchTrigger
+- type: entityTable
   id: SunriseDefaultTriggers
-  weights:
-    TriggerMusic: 1
-    TriggerHeat: 1
-    TriggerCold: 0.5
-    TriggerPlasma: 0.5
-    TriggerRadiation: 0.5
-    TriggerPressureHigh: 0.5
-    TriggerPressureLow: 1
-    TriggerExamine: 1
-    TriggerBruteDamage: 1
-    TriggerWrenching: 1
-    TriggerPrying: 1
-    TriggerScrewing: 1
-    TriggerPulsing: 1
-    #TriggerTimer: 1 # Sunrise edit  - Timer triggers disabled for artifacts. They are bugged
-    TriggerBlood: 1
-    TriggerThrow: 1
-    TriggerDeath: 1
-    TriggerMagnet: 1
-    # Дальше наши самописные
-    TriggerHealthAnalyzer: 1
+  table: !type:GroupSelector
+    conditionsForChildren:
+    - !type:ExcludeEntitiesFromContextCondition
+    children:
+    - id: TriggerMusic
+    - id: TriggerHeat
+    - id: TriggerCold
+      weight: 0.5
+    - id: TriggerPlasma
+      weight: 0.5
+    - id: TriggerRadiation
+      weight: 0.5
+    - id: TriggerPressureHigh
+      weight: 0.5
+    - id: TriggerPressureLow
+    - id: TriggerExamine
+    - id: TriggerBruteDamage
+    - id: TriggerWrenching
+    - id: TriggerPrying
+    - id: TriggerScrewing
+    - id: TriggerPulsing
+    # TriggerTimer отключён: триггер некорректно самопроизвольно активирует артефакты.
+    - id: TriggerBlood
+    - id: TriggerThrow
+    - id: TriggerDeath
+    - id: TriggerMagnet
+    - id: TriggerHealthAnalyzer

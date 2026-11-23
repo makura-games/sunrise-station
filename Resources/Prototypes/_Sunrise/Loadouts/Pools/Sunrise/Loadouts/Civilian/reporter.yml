@@ -1,0 +1,5 @@
+- type: loadout
+  id: ReporterTapeRecorderBox
+  storage:
+    back:
+    - BoxTapeRecorder

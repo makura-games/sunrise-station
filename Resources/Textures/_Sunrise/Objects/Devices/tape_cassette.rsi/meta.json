@@ -1,0 +1,20 @@
+{
+    "version": 1,
+    "license": "CLA",
+    "copyright": "Made for Sunrise by yuzuki.mori (discord: yuzuki.mori)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "red"
+        },
+        {
+            "name": "yellow"
+        },
+        {
+            "name": "green"
+        }
+    ]
+}

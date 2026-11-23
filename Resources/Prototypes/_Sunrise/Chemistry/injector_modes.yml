@@ -1,0 +1,14 @@
+## Hyposprays
+- type: injectorMode
+  abstract: true
+  parent: BaseJetInjectorMode
+  id: BaseSyndicateJetInjectorMode
+  mobTime: 0.35
+
+- type: injectorMode
+  parent: [ BaseSyndicateJetInjectorMode, BaseInjectMode ]
+  id: SyndicateJetInjectorInjectMode
+
+- type: injectorMode
+  parent: [ BaseSyndicateJetInjectorMode, BaseDynamicMode ]
+  id: SyndicateJetInjectorDynamicMode

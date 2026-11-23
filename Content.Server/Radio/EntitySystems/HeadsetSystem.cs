@@ -2,7 +2,6 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Chat;
 using Content.Shared.Interaction;
-using Content.Shared.PowerCell;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
@@ -11,20 +10,15 @@ using Content.Shared._Sunrise.TTS;
 using Robust.Server.GameObjects;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Audio.Systems;
-using Content.Server.Power.EntitySystems;
 
 namespace Content.Server.Radio.EntitySystems;
 
 public sealed partial class HeadsetSystem : SharedHeadsetSystem
 {
-    [Dependency] private readonly INetManager _netMan = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly BatterySystem _battery = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private INetManager _netMan = default!;
+    [Dependency] private RadioSystem _radio = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {
@@ -63,11 +57,6 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
             && TryComp(component.Headset, out EncryptionKeyHolderComponent? keys)
             && keys.Channels.Contains(args.Channel.ID))
         {
-            // Sunrise-Start
-            if (TryComp<HeadsetComponent>(component.Headset, out var headset) && !_powerCell.TryUseCharge(component.Headset, headset.SendChargeCost, uid))
-                return;
-            // Sunrise-End
-
             _radio.SendRadioMessage(uid, args.Message, args.Channel, component.Headset);
             args.Channel = null; // prevent duplicate messages from other listeners.
         }
@@ -78,9 +67,9 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
         base.OnGotEquipped(ent, ref args);
         if (ent.Comp.IsEquipped && ent.Comp.Enabled)
         {
-            EnsureComp<WearingHeadsetComponent>(args.Equipee).Headset = ent;
+            EnsureComp<WearingHeadsetComponent>(args.EquipTarget).Headset = ent;
             UpdateRadioChannels(ent, ent.Comp);
-            _actions.AddAction(args.Equipee, ref ent.Comp.ToggleActionEntity, ent.Comp.ToggleAction, ent); // Sunrise-Add
+            _actions.AddAction(args.EquipTarget, ref ent.Comp.ToggleActionEntity, ent.Comp.ToggleAction, ent); // Sunrise-Add
         }
     }
 
@@ -88,11 +77,11 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
     {
         base.OnGotUnequipped(ent, ref args);
         RemComp<ActiveRadioComponent>(ent);
-        RemComp<WearingHeadsetComponent>(args.Equipee);
+        RemComp<WearingHeadsetComponent>(args.EquipTarget);
         // Sunrise-Start
-        if (TryComp<ActionComponent>(ent.Comp.ToggleActionEntity, out var action) && action.AttachedEntity == args.Equipee)
+        if (TryComp<ActionComponent>(ent.Comp.ToggleActionEntity, out var action) && action.AttachedEntity == args.EquipTarget)
         {
-            _actions.RemoveAction(args.Equipee, ent.Comp.ToggleActionEntity);
+            _actions.RemoveAction(args.EquipTarget, ent.Comp.ToggleActionEntity);
         }
         // Sunrise-End
     }
@@ -140,24 +129,6 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
         // Sunrise-Start
         if (!ent.Comp.EnabledChannels.GetValueOrDefault(args.Channel.ID, true))
             return;
-
-        if (!_powerCell.TryUseCharge(ent.Owner, ent.Comp.ReceiveChargeCost))
-            return;
-
-        ent.Comp.ReceivedMessagesSinceLastNotify++;
-        if (ent.Comp.ReceivedMessagesSinceLastNotify % 5 == 0)
-        {
-            if (_powerCell.TryGetBatteryFromSlotOrEntity(ent.Owner, out var battery))
-            {
-                var level = _battery.GetChargeLevel(battery.Value.AsNullable());
-                if (level <= 0.10f)
-                {
-                    var parentUid = Transform(ent).ParentUid;
-                    if (parentUid.IsValid())
-                        _audio.PlayPvs(ent.Comp.LowBatteryNotifySound, parentUid);
-                }
-            }
-        }
         // Sunrise-End
 
         // TODO: change this when a code refactor is done

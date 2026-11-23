@@ -1,0 +1,12 @@
+marking-RabbitEars = Кроличьи ушки
+marking-RabbitEars-ears_rabbit_outer = Наружное ухо
+marking-RabbitEars-ears_rabbit_inner = Внутреннее ухо
+marking-RabbitEarsMirror = Кроличьи ушки (зеркально)
+marking-RabbitEarsMirror-ears_rabbit_outer_mir = Наружное ухо
+marking-RabbitEarsMirror-ears_rabbit_inner_mir = Внутреннее ухо
+marking-RabbitEarsUp = Поднятые кроличьи ушки
+marking-RabbitEarsUp-ears_rabbit_up_outer = Наружное ухо
+marking-RabbitEarsUp-ears_rabbit_up_inner = Внутреннее ухо
+marking-RabbitEarsUpMirror = Поднятые кроличьи ушки (зеркально)
+marking-RabbitEarsUpMirror-ears_rabbit_up_outer_mir = Наружное ухо
+marking-RabbitEarsUpMirror-ears_rabbit_up_inner_mir = Внутреннее ухо

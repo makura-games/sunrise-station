@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using Content.Server._Sunrise.Presets;
+using Content.Server._Sunrise.Storyteller.Systems;
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.Discord.WebhookMessages;
@@ -10,6 +11,7 @@ using Content.Server.GameTicking;
 using Content.Server.GameTicking.Presets;
 using Content.Server.Roles;
 using Content.Server.RoundEnd;
+using Content.Shared.Destructible.Thresholds;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -27,10 +29,10 @@ namespace Content.Server.Voting.Managers
 {
     public sealed partial class VoteManager
     {
-        [Dependency] private readonly IPlayerLocator _locator = default!;
-        [Dependency] private readonly ILogManager _logManager = default!;
-        [Dependency] private readonly IBanManager _bans = default!;
-        [Dependency] private readonly VoteWebhooks _voteWebhooks = default!;
+        [Dependency] private IPlayerLocator _locator = default!;
+        [Dependency] private ILogManager _logManager = default!;
+        [Dependency] private IBanManager _bans = default!;
+        [Dependency] private VoteWebhooks _voteWebhooks = default!;
 
         private VotingSystem? _votingSystem;
         private RoleSystem? _roleSystem;
@@ -229,6 +231,9 @@ namespace Content.Server.Voting.Managers
 
         private void CreatePresetVote(ICommonSession? initiator)
         {
+            if (TryCreateSunriseTwoStagePresetVote(initiator)) // Sunrise-Edit
+                return;
+
             var presets = GetGamePresetsSunrise(); // Sunrise-Edit
 
             // Sunrise-Start
@@ -356,9 +361,14 @@ namespace Content.Server.Voting.Managers
                 var ticker = _entityManager.EntitySysManager.GetEntitySystem<GameTicker>();
                 if (ticker.RunLevel == GameRunLevel.PreRoundLobby) // Sunrise-Edit
                 {
-                    if (_gameMapManager.TrySelectMapIfEligible(picked.ID))
+                    if (_gameMapManager.CheckMapExists(picked.ID))
                     {
+                        _gameMapManager.SelectMap(picked.ID);
                         ticker.UpdateInfoText();
+                    }
+                    else
+                    {
+                        _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-map-invalid", ("winner", picked.MapName)));
                     }
                     ticker.UpdateInfoText(); // Sunrise-Edit
                 }
@@ -390,7 +400,7 @@ namespace Content.Server.Voting.Managers
                 _votingSystem = _entityManager.SystemOrNull<VotingSystem>();
 
             // Check that the initiator is actually allowed to do a votekick.
-            if (_votingSystem != null && !await _votingSystem.CheckVotekickInitEligibility(initiator))
+            if (_votingSystem != null && !_votingSystem.CheckVotekickInitEligibility(initiator))
             {
                 _logManager.GetSawmill("admin.votekick").Warning($"User {initiator} attempted a votekick, despite not being eligible to!");
                 _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick attempted by {initiator}, but they are not eligible to votekick!");
@@ -423,14 +433,7 @@ namespace Content.Server.Voting.Managers
             }
             var targetUid = located.UserId;
             var targetHWid = located.LastHWId;
-            (IPAddress, int)? targetIP = null;
-
-            if (located.LastAddress is not null)
-            {
-                targetIP = located.LastAddress.AddressFamily is AddressFamily.InterNetwork
-                    ? (located.LastAddress, 32) // People with ipv4 addresses get a /32 address so we ban that
-                    : (located.LastAddress, 64); // This can only be an ipv6 address. People with ipv6 address should get /64 addresses so we ban that.
-            }
+            var targetIP = located.LastAddress;
 
             if (!_playerManager.TryGetSessionById(located.UserId, out ICommonSession? targetSession))
             {
@@ -597,7 +600,15 @@ namespace Content.Server.Voting.Managers
 
                         uint minutes = (uint)_cfg.GetCVar(CCVars.VotekickBanDuration);
 
-                        _bans.CreateServerBan(targetUid, target, null, targetIP, targetHWid, minutes, severity, reasonLocalised + ". " + note); // Sunrise-Edit
+                        var banInfo = new CreateServerBanInfo(reasonLocalised + ". " + note); // Sunrise-Edit
+                        banInfo.AddUser(targetUid, target);
+                        banInfo.AddHWId(targetHWid);
+                        banInfo.AddAddress(targetIP);
+                        banInfo.WithSeverity(severity);
+                        if (minutes > 0)
+                            banInfo.WithMinutes(minutes);
+
+                        _bans.CreateServerBan(banInfo);
                     }
                 }
                 else
@@ -661,74 +672,25 @@ namespace Content.Server.Voting.Managers
         // Sunrise-Start
         private Dictionary<string, string> GetGamePresetsSunrise()
         {
-            var presets = new Dictionary<string, string>();
-
-            var ticker = _entityManager.EntitySysManager.GetEntitySystem<GameTicker>();
+            var ticker = _entityManager.System<GameTicker>();
             var excluded = ticker.ExcludedPresets.ToHashSet();
-            var validPresets = new List<GamePresetPrototype>();
             var presetPoolId = _cfg.GetCVar(SunriseCCVars.GamePresetPool);
 
-            if (_prototypeManager.TryIndex<GamePresetPoolPrototype>(presetPoolId, out var presetPoolProto))
+            if (!_prototypeManager.TryIndex<GamePresetPoolPrototype>(presetPoolId, out var presetPoolProto))
+                return new Dictionary<string, string>();
+
+            var poolPresets = new Dictionary<string, MinMax>(presetPoolProto.Presets);
+            _entityManager.System<StorytellerSystem>().AdjustPresetPool(poolPresets);
+            var presets = ticker.GetEligibleVotePresets(poolPresets, _playerManager.PlayerCount, excluded);
+
+            if (presets.Count == 0 && excluded.Count > 0)
             {
-                // Sunrise-Start
-                var poolPresets = new Dictionary<string, int[]>(presetPoolProto.Presets);
-                _Sunrise.Storyteller.StorytellerPresetHelper.AdjustPresetPool(poolPresets, _cfg, _playerManager.PlayerCount);
-                // Sunrise-End
-
-                foreach (var (presetId, limits) in poolPresets)
-                {
-                    // Sunrise-Start
-                    if (!_Sunrise.Storyteller.StorytellerPresetHelper.ShouldBypassExclusion(presetId) && excluded.Contains(presetId))
-                        continue;
-                    // Sunrise-End
-
-                    if (!_prototypeManager.TryIndex<GamePresetPrototype>(presetId, out var preset))
-                        continue;
-
-                    if (!preset.ShowInVote)
-                        continue;
-
-                    var minPlayers = limits.Length > 0 ? limits[0] : int.MinValue;
-                    var maxPlayers = limits.Length > 1 ? limits[1] : int.MaxValue;
-
-                    if (_playerManager.PlayerCount < minPlayers || _playerManager.PlayerCount > maxPlayers)
-                        continue;
-
-                    validPresets.Add(preset);
-                }
-
-                if (validPresets.Count == 0 && excluded.Count > 0)
-                {
-                    ticker.ClearExcludedPresets();
-                    foreach (var (presetId, limits) in poolPresets)
-                    {
-                        if (!_prototypeManager.TryIndex<GamePresetPrototype>(presetId, out var preset))
-                            continue;
-
-                        if (!preset.ShowInVote)
-                            continue;
-
-                        var minPlayers = limits.Length > 0 ? limits[0] : int.MinValue;
-                        var maxPlayers = limits.Length > 1 ? limits[1] : int.MaxValue;
-
-                        if (_playerManager.PlayerCount < minPlayers || _playerManager.PlayerCount > maxPlayers)
-                            continue;
-
-                        validPresets.Add(preset);
-                    }
-                }
+                ticker.ClearExcludedPresets();
+                presets = ticker.GetEligibleVotePresets(poolPresets, _playerManager.PlayerCount);
             }
 
-            if (validPresets.Count == 0)
-            {
+            if (presets.Count == 0)
                 Logger.Warning("No suitable game modes for the current player count.");
-                return presets;
-            }
-
-            foreach (var preset in validPresets)
-            {
-                presets[preset.ID] = preset.ModeTitle;
-            }
 
             return presets;
         }

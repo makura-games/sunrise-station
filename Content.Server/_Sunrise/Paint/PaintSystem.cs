@@ -1,4 +1,4 @@
-﻿using Content.Server.Chemistry.Containers.EntitySystems;
+using Content.Server.Chemistry.EntitySystems;
 using Content.Shared._Sunrise.Paint;
 using Content.Shared.DoAfter;
 using Content.Shared.Humanoid;
@@ -18,16 +18,16 @@ namespace Content.Server._Sunrise.Paint;
 /// <summary>
 /// Colors target and consumes reagent on each color success.
 /// </summary>
-public sealed class PaintSystem : SharedPaintSystem
+public sealed partial class PaintSystem : SharedPaintSystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly OpenableSystem _openable = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private OpenableSystem _openable = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -106,7 +106,7 @@ public sealed class PaintSystem : SharedPaintSystem
             return;
         }
 
-        if (entity.Comp.Blacklist != null && _whitelist.IsValid(entity.Comp.Blacklist, target) || HasComp<HumanoidAppearanceComponent>(target) || HasComp<SubFloorHideComponent>(target))
+        if (entity.Comp.Blacklist != null && _whitelist.IsValid(entity.Comp.Blacklist, target) || HasComp<HumanoidProfileComponent>(target) || HasComp<SubFloorHideComponent>(target))
         {
             _popup.PopupEntity(Loc.GetString("paint-failure", ("target", args.Target)), args.User, args.User, PopupType.Medium);
             return;
@@ -138,7 +138,7 @@ public sealed class PaintSystem : SharedPaintSystem
                                                                      _whitelist.IsValid(entity.Comp.Blacklist,
                                                                          slotEnt.Value)
                                                                      || HasComp<RandomSpriteComponent>(slotEnt.Value) ||
-                                                                     HasComp<HumanoidAppearanceComponent>(
+                                                                     HasComp<HumanoidProfileComponent>(
                                                                          slotEnt.Value))
                             return;
 
@@ -167,12 +167,12 @@ public sealed class PaintSystem : SharedPaintSystem
 
     private bool TryPaint(Entity<PaintComponent> reagent, EntityUid target)
     {
-        if (HasComp<HumanoidAppearanceComponent>(target) || HasComp<SubFloorHideComponent>(target))
+        if (HasComp<HumanoidProfileComponent>(target) || HasComp<SubFloorHideComponent>(target))
             return false;
 
-        if (_solutionContainer.TryGetSolution(reagent.Owner, reagent.Comp.Solution, out _, out var solution))
+        if (_solutionContainer.TryGetSolution(reagent.Owner, reagent.Comp.Solution, out var solutionEntity, out _))
         {
-            var quantity = solution.RemoveReagent(reagent.Comp.Reagent, reagent.Comp.ConsumptionUnit);
+            var quantity = _solutionContainer.RemoveReagent(solutionEntity.Value, reagent.Comp.Reagent, reagent.Comp.ConsumptionUnit);
             if (quantity > 0)// checks quantity of solution is more than 0.
                 return true;
 

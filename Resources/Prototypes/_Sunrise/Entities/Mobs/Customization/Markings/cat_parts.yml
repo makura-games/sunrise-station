@@ -1,8 +1,7 @@
 - type: marking
   id: CatEarsStubby
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Human, Dwarf, Felinid, Vulpkanin]
+  groupWhitelist: [ Human, Dwarf, Felinid, Vulpkanin ]
   sponsorOnly: false
   coloring:
     default:
@@ -25,8 +24,7 @@
 - type: marking
   id: CatEarsCurled
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Human, Dwarf, Felinid, Vulpkanin]
+  groupWhitelist: [ Human, Dwarf, Felinid, Vulpkanin ]
   sponsorOnly: false
   coloring:
     default:
@@ -49,8 +47,7 @@
 - type: marking
   id: CatEarsTorn
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Human, Dwarf, Felinid, Vulpkanin]
+  groupWhitelist: [ Human, Dwarf, Felinid, Vulpkanin ]
   sponsorOnly: false
   coloring:
     default:
@@ -73,8 +70,7 @@
 - type: marking
   id: CatTailStripes
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Human, Dwarf, Felinid, Vulpkanin]
+  groupWhitelist: [ Human, Dwarf, Felinid, Vulpkanin ]
   sponsorOnly: false
   coloring:
     default:

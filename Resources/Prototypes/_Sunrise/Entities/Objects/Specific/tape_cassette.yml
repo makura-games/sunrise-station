@@ -1,0 +1,47 @@
+- type: entity
+  parent: BaseItem
+  id: BaseTapeCassette
+  name: cassette tape
+  description: A small magnetic tape cassette.
+  abstract: true
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _Sunrise/Objects/Devices/tape_cassette.rsi
+    state: red
+  - type: TapeCassette
+
+- type: entity
+  parent: BaseTapeCassette
+  id: TapeCassetteOneMinute
+  name: cassette tape
+  description: A small magnetic tape cassette with one minute of recording time.
+  suffix: 1 minute
+  components:
+  - type: TapeCassette
+    capacity: 60
+
+- type: entity
+  parent: BaseTapeCassette
+  id: TapeCassetteTwoMinutes
+  name: cassette tape
+  description: A small magnetic tape cassette with two minutes of recording time.
+  suffix: 2 minutes
+  components:
+  - type: Sprite
+    state: yellow
+  - type: TapeCassette
+    capacity: 120
+
+- type: entity
+  parent: BaseTapeCassette
+  id: TapeCassetteThreeMinutes
+  name: cassette tape
+  description: A small magnetic tape cassette with three minutes of recording time.
+  suffix: 3 minutes
+  components:
+  - type: Sprite
+    state: green
+  - type: TapeCassette
+    capacity: 180

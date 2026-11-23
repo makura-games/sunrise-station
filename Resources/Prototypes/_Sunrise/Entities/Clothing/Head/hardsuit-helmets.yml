@@ -1,4 +1,79 @@
 - type: entity
+  id: BaseSunriseHardsuitHelmetNVD
+  abstract: true
+  components:
+  - type: UseDelay
+    delay: 3
+  - type: ToggleClothing
+    action: NVDToggleAction
+    mustEquip: true
+    disableOnUnequip: true
+  - type: ItemToggle
+    predictable: false
+    onUse: false
+    canActivateInhand: false
+    soundActivate:
+      path: /Audio/_Sunrise/Items/Goggles/activate.ogg
+    soundDeactivate:
+      path: /Audio/_Sunrise/Items/Goggles/deactivate.ogg
+    soundFailToActivate:
+      path: /Audio/Machines/button.ogg
+
+- type: entity
+  id: SunriseHardsuitHelmetNightVisionCyan
+  abstract: true
+  components:
+  - type: NightVision
+    enabled: false
+    relayOverlay: true
+    lightingColor: '#00FFFF26'
+
+- type: entity
+  id: SunriseHardsuitHelmetNightVisionGreen
+  abstract: true
+  components:
+  - type: NightVision
+    enabled: false
+    relayOverlay: true
+    lightingColor: '#12AC2726'
+
+- type: entity
+  id: SunriseHardsuitHelmetNightVisionWhite
+  abstract: true
+  components:
+  - type: NightVision
+    enabled: false
+    relayOverlay: true
+    lightingColor: '#FFFFFF26'
+
+- type: entity
+  id: SunriseHardsuitHelmetNightVisionMint
+  abstract: true
+  components:
+  - type: NightVision
+    enabled: false
+    relayOverlay: true
+    lightingColor: '#ADFFEC26'
+
+- type: entity
+  id: SunriseHardsuitHelmetNightVisionPurple
+  abstract: true
+  components:
+  - type: NightVision
+    enabled: false
+    relayOverlay: true
+    lightingColor: '#CBADFF26'
+
+- type: entity
+  id: SunriseHardsuitHelmetNightVisionSyndie
+  abstract: true
+  components:
+  - type: NightVision
+    enabled: false
+    relayOverlay: true
+    lightingColor: '#D61B1B26'
+
+- type: entity
   parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetCBURNLeader
   categories: [ HideSpawnMenu ]
@@ -27,8 +102,7 @@
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: TemperatureProtection
-    heatingCoefficient: 0.005
-    coolingCoefficient: 0.005
+    coefficient: 0.005
   - type: Armor
     modifiers:
       coefficients:
@@ -50,8 +124,21 @@
   components:
   - type: Sprite
     sprite: _Sunrise/Clothing/Head/Hardsuits/blueshield.rsi
+    layers:
+    - state: icon
+    - state: icon-flash
+      visible: false
+      shader: unshaded
+      map: [light]
   - type: Clothing
-    sprite: _Sunrise/Clothing/Head/Hardsuits/blueshield.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
   - type: PointLight
     color: "#adeeff"
   - type: PressureProtection
@@ -75,6 +162,9 @@
     sprite: _Sunrise/Clothing/Head/Hardsuits/ntrguard_head.rsi
   - type: Clothing
     sprite: _Sunrise/Clothing/Head/Hardsuits/ntrguard_head.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
 
 - type: entity
   parent: ClothingHeadHelmetHardsuitSecurity
@@ -82,8 +172,21 @@
   components:
   - type: Sprite
     sprite: _Sunrise/Clothing/Head/Hardsuits/secoff.rsi
+    layers:
+    - state: icon
+    - state: icon-flash
+      visible: false
+      shader: unshaded
+      map: [light]
   - type: Clothing
-    sprite: _Sunrise/Clothing/Head/Hardsuits/secoff.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
 
 - type: entity
   parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
@@ -95,8 +198,21 @@
   - type: BreathMask
   - type: Sprite
     sprite: _Sunrise/Clothing/Head/Hardsuits/pilothardsuithelmet.rsi
+    layers:
+    - state: icon
+    - state: icon-flash
+      visible: false
+      shader: unshaded
+      map: [light]
   - type: Clothing
-    sprite: _Sunrise/Clothing/Head/Hardsuits/pilothardsuithelmet.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
   - type: PointLight
     color: cyan
   - type: PressureProtection
@@ -121,6 +237,9 @@
     sprite: _Sunrise/Clothing/Head/Hardsuits/ussp_elite.rsi
   - type: Clothing
     sprite: _Sunrise/Clothing/Head/Hardsuits/ussp_elite.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -142,6 +261,9 @@
     sprite: _Sunrise/Clothing/Head/Hardsuits/ussp_heavy.rsi
   - type: Clothing
     sprite: _Sunrise/Clothing/Head/Hardsuits/ussp_heavy.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -163,6 +285,9 @@
     sprite: _Sunrise/Clothing/Head/Hardsuits/ussp_light.rsi
   - type: Clothing
     sprite: _Sunrise/Clothing/Head/Hardsuits/ussp_light.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000
@@ -183,8 +308,21 @@
   components:
   - type: Sprite
     sprite: _Sunrise/Clothing/Head/Hardsuits/engineering_compact.rsi
+    layers:
+    - state: icon
+    - state: icon-flash
+      visible: false
+      shader: unshaded
+      map: [light]
   - type: Clothing
-    sprite: _Sunrise/Clothing/Head/Hardsuits/engineering_compact.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
   - type: PointLight
     color: cyan
   - type: PressureProtection
@@ -203,8 +341,21 @@
   components:
   - type: Sprite
     sprite: _Sunrise/Clothing/Head/Hardsuits/ueg_paratrooperh.rsi
+    layers:
+    - state: icon
+    - state: icon-flash
+      visible: false
+      shader: unshaded
+      map: [light]
   - type: Clothing
-    sprite: _Sunrise/Clothing/Head/Hardsuits/ueg_paratrooperh.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
   - type: PointLight
     color: cyan
   - type: PressureProtection
@@ -229,8 +380,21 @@
   components:
   - type: Sprite
     sprite: _Sunrise/Clothing/Head/Hardsuits/ueg_captainh.rsi
+    layers:
+    - state: icon
+    - state: icon-flash
+      visible: false
+      shader: unshaded
+      map: [light]
   - type: Clothing
-    sprite: _Sunrise/Clothing/Head/Hardsuits/ueg_captainh.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
   - type: PointLight
     color: cyan
   - type: PressureProtection
@@ -262,6 +426,9 @@
     sprite: _Sunrise/Clothing/Head/Hardsuits/piratecaptainhelm.rsi
   - type: Clothing
     sprite: _Sunrise/Clothing/Head/Hardsuits/piratecaptainhelm.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
@@ -287,6 +454,9 @@
     sprite: _Sunrise/Clothing/Head/Hardsuits/piratecaptainhelm.rsi
   - type: Clothing
     sprite: _Sunrise/Clothing/Head/Hardsuits/piratecaptainhelm.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
 
 - type: entity
   parent: ClothingHeadHelmetHardsuitPirateCapSun
@@ -308,17 +478,63 @@
   - type: StaticPrice
     price: 1000
   - type: Appearance
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitPrivateer
+  id: ClothingHeadHelmetHardsuitPrivateSec
+  categories: [ HideSpawnMenu ]
+  name: private sec hardsuit helmet
+  description: A special hardsuit helmet, made for private sec.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Head/Hardsuits/private_sec.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Head/Hardsuits/private_sec.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      - state: on-equipped-HELMET # Always on, cause infitity NVD
+        shader: unshaded
+  - type: StaticPrice
+    price: 1000
+  - type: Appearance
+
+- type: entity
+  parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase, BaseMajorContraband]
+  id: SunriseClothingHeadHelmetHardsuitRogue
+  categories: [ HideSpawnMenu ]
+  name: rogue combat suit helmet
+  description: Little space won't keep a tricorn out of style.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Head/Hardsuits/rogue.rsi
+    layers:
+    - state: icon
+    - state: icon-flash
+      visible: false
+      shader: unshaded
+      map: [light]
+  - type: Clothing
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+  - type: PointLight
+    color: "#ffeead"
   - type: UseDelay
     delay: 3.0
   - type: ToggleClothing
     action: NVDToggleAction
     mustEquip: true
     disableOnUnequip: true
-  - type: ComponentToggler
-    parent: true
-    components:
-      - type: NightVision
-        effect: EffectNightVisionPirate
+  - type: NightVision
+    enabled: false
+    relayOverlay: true
+    lightingColor: '#FF983326'
   - type: ItemToggle
     predictable: false
     onUse: false
@@ -342,7 +558,7 @@
         Caustic: 0.9
 
 - type: entity
-  parent: ClothingHeadHardsuitBase #[ ClothingHeadSuitWithLightBase ]
+  parent: ClothingHeadHardsuitBase
   id: ClothingHeadHelmetHardsuitInfiltration
   categories: [ HideSpawnMenu ]
   name: syndicate infiltration hardsuit helmet
@@ -351,8 +567,39 @@
     sprite: _Starlight/Objects/Clothing/Head/Hardsuits/infiltrationsyndie.rsi
   - type: Clothing
     sprite: _Starlight/Objects/Clothing/Head/Hardsuits/infiltrationsyndie.rsi
-  #- type: PointLight
-    #color: "#880808"
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+  - type: UseDelay
+    delay: 3
+  - type: ToggleClothing
+    action: NVDToggleAction
+    mustEquip: true
+    disableOnUnequip: true
+  - type: NightVision
+    enabled: false
+    relayOverlay: true
+    lightingColor: '#D61B1B26'
+  - type: PowerCellDraw
+    drawRate: 2
+    useCharge: 20
+  - type: Battery
+    maxCharge: 600
+    startingCharge: 600
+  - type: BatterySelfRecharger
+    autoRechargeRate: 6
+    autoRechargePauseTime: 1
+  - type: ItemToggle
+    predictable: false
+    onUse: false
+    canActivateInhand: false
+    soundActivate:
+      path: /Audio/_Sunrise/Items/Goggles/activate.ogg
+    soundDeactivate:
+      path: /Audio/_Sunrise/Items/Goggles/deactivate.ogg
+    soundFailToActivate:
+      path: /Audio/Machines/button.ogg
+  - type: ToggleCellDraw
   - type: PressureProtection
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 10000
@@ -361,12 +608,26 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.9  
+        Blunt: 0.9
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
   - type: FlashImmunity
   - type: EyeProtection
+  - type: ActivatableUI
+    requireActiveHand: false
+    inHandsOnly: false
+    key: enum.SurveillanceCameraMonitorUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SurveillanceCameraMonitorUiKey.Key:
+        type: SurveillanceCameraMonitorBoundUserInterface
+  - type: DeviceNetwork
+    deviceNetId: Wired
+    receiveFrequencyId: SurveillanceCamera
+    transmitFrequencyId: SurveillanceCamera
+  - type: WiredNetworkConnection
+  - type: SurveillanceCameraMonitor
 
 #Goliath Hardsuit
 - type: entity
@@ -428,11 +689,10 @@
     action: NVDToggleAction
     mustEquip: true
     disableOnUnequip: true
-  - type: ComponentToggler
-    parent: true
-    components:
-      - type: NightVision
-        effect: EffectNightVisionSyndie
+  - type: NightVision
+    enabled: false
+    relayOverlay: true
+    lightingColor: '#D61B1B26'
   - type: PowerCellDraw
     drawRate: 2
     useCharge: 20
@@ -585,6 +845,9 @@
     sprite: _Sunrise/Clothing/Head/Hardsuits/spacehazard.rsi
   - type: Clothing
     sprite: _Sunrise/Clothing/Head/Hardsuits/spacehazard.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000
@@ -754,3 +1017,175 @@
   - type: Tag
     tags:
     - CorgiWearable
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitPirateBlackbeard
+  name: blackbeard hardsuit helmet
+  description: A heavily armored pirate helmet.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Head/Hardsuits/blackbeard.rsi
+    layers:
+    - state: icon
+    - state: icon-flash
+      visible: false
+      shader: unshaded
+      map: [light]
+  - type: Clothing
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+  - type: PointLight
+    color: red
+    radius: 5
+    energy: 3
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitPirateDavyJones
+  name: davy jones hardsuit helmet
+  description: A heavily armored pirate helmet.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Head/Hardsuits/davyjones.rsi
+    layers:
+    - state: icon
+    - state: icon-flash
+      visible: false
+      shader: unshaded
+      map: [light]
+  - type: Clothing
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+  - type: PointLight
+    color: green
+    radius: 5
+    energy: 3
+    mask: /Textures/Effects/LightMasks/triple.png
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitPirateDavyJones
+  id: ClothingHeadHelmetHardsuitMurmillo
+  name: murmillo hardsuit helmet
+  suffix: Pirate
+  categories: [ HideSpawnMenu ]
+  description: A heavy helmet with a glowing green night-vision visor.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Head/Hardsuits/murmillo.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Head/Hardsuits/murmillo.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      - state: equipped-HELMET-unshaded
+        shader: unshaded
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: ToggleClothing
+    action: NVDToggleAction
+    mustEquip: true
+    disableOnUnequip: true
+  - type: NightVision
+    enabled: false
+    relayOverlay: true
+    lightingColor: '#12AC2726'
+  - type: ItemToggle
+    predictable: false
+    onUse: false
+    canActivateInhand: false
+    soundActivate:
+      path: /Audio/_Sunrise/Items/Goggles/activate.ogg
+    soundDeactivate:
+      path: /Audio/_Sunrise/Items/Goggles/deactivate.ogg
+    soundFailToActivate:
+      path: /Audio/Machines/button.ogg
+  - type: PointLight
+    color: green
+    radius: 2.5
+    energy: 1.75
+    mask: /Textures/Effects/LightMasks/triple.png
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitPirateBuccaneer
+  name: buccaneer hardsuit helmet
+  description: A heavily armored pirate helmet.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Head/Hardsuits/buccaneer.rsi
+    layers:
+    - state: icon
+    - state: icon-flash
+      visible: false
+      shader: unshaded
+      map: [light]
+  - type: Clothing
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+  - type: PointLight
+    color: cyan
+    radius: 7
+    energy: 3
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitPirateSwashbuckler
+  name: swashbuckler hardsuit helmet
+  description: A heavily armored pirate helmet.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Head/Hardsuits/swashbuckler.rsi
+    layers:
+    - state: icon
+    - state: icon-flash
+      visible: false
+      shader: unshaded
+      map: [light]
+  - type: Clothing
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+  - type: PointLight
+    color: cyan
+    radius: 7
+    energy: 3
+    mask: /Textures/Effects/LightMasks/triple.png
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+
+

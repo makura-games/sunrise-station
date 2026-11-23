@@ -15,11 +15,11 @@ using Robust.Shared.Map;
 namespace Content.Shared._Starlight.Knockback;
 public abstract partial class SharedKnockbackSystem : EntitySystem
 {
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] protected readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] protected SharedTransformSystem _transformSystem = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
 
     public override void Initialize()
     {
@@ -103,7 +103,7 @@ public abstract partial class SharedKnockbackSystem : EntitySystem
 
     private bool CheckForNoSlips(EntityUid uid)
     {
-        if (EntityManager.TryGetComponent(uid, out NoSlipComponent? flashImmunityComponent))
+        if (TryComp(uid, out NoSlipComponent? flashImmunityComponent))
         {
             return true;
         }
@@ -114,7 +114,7 @@ public abstract partial class SharedKnockbackSystem : EntitySystem
             var slots = _inventory.GetSlotEnumerator((uid, inventoryComp), SlotFlags.WITHOUT_POCKET);
             while (slots.MoveNext(out var slot))
             {
-                if (slot.ContainedEntity != null && EntityManager.TryGetComponent(slot.ContainedEntity, out NoSlipComponent? wornNoSlipComponent))
+                if (slot.ContainedEntity != null && TryComp(slot.ContainedEntity, out NoSlipComponent? wornNoSlipComponent))
                 {
                     return true;
                 }

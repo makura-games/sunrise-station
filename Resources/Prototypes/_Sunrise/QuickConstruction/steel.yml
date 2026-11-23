@@ -12,14 +12,63 @@
 
 - type: quickConstructionCategory
   id: Pipes
-  name: quickconstruction-category-pipe
+  name: quickconstruction-category-pipes
+  icon: { sprite: Structures/Piping/Atmospherics/pipe.rsi, state: storageStraight }
+  categoryEntries:
+  - AtmosPipes
+  - DisposalPipes
+  - Atmospherics
+
+- type: quickConstructionCategory
+  id: AtmosPipes
+  name: quickconstruction-category-atmos-pipes
   icon: { sprite: Structures/Piping/Atmospherics/pipe.rsi, state: storageStraight }
   constructionEntries:
+  - GasPipeHalf
   - GasPipeStraight
   - GasPipeBend
   - GasPipeTJunction
   - GasPipeFourway
   - GasPipeManifold
+
+- type: quickConstructionCategory
+  id: DisposalPipes
+  name: quickconstruction-category-disposal-pipes
+  icon: { sprite: Structures/Piping/disposal.rsi, state: conpipe-s }
+  constructionEntries:
+  - DisposalMachineFrame
+  - DisposalPipe
+  - DisposalTagger
+  - DisposalSignaller
+  - DisposalTrunk
+  - DisposalRouter
+  - DisposalSignalRouter
+  - DisposalJunction
+  - DisposalYJunction
+  - DisposalXJunction
+  - DisposalBend
+
+- type: quickConstructionCategory
+  id: Atmospherics
+  name: quickconstruction-category-atmospherics
+  icon: { sprite: Structures/Piping/Atmospherics/vent.rsi, state: vent_off }
+  constructionEntries:
+  - GasPipeSensor
+  - GasVentPump
+  - GasPassiveVent
+  - GasVentScrubber
+  - GasOutletInjector
+  - GasPressurePump
+  - GasVolumePump
+  - GasPassiveGate
+  - GasPressureRegulator
+  - GasValve
+  - SignalControlledValve
+  - GasPort
+  - HeatExchanger
+  - HeatExchangerBend
+  - GasFilter
+  - GasMixer
 
 - type: quickConstructionCategory
   id: SteelTiles

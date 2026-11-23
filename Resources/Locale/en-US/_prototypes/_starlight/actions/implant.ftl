@@ -1,6 +1,8 @@
-ent-ActionActivateMagillitisSerumImplant = Magillitis Serum
+ent-ActionActivateMagillitisSerumImplant = magillitis Serum
     .desc = An experimental biochip which causes irreversable rapid muscular growth in Hominidae. Side-affects may include hypertrichosis, violent outbursts, and an unending affinity for bananas.
-ent-ActionActivateBluespaceImplant = Bluespace Implant
-    .desc = An advanced subdermal implant that teleports the user far away when activated.
-ent-ActionActivateRedspaceImplant = Redspace Implant
-    .desc = An advanced subdermal implant that teleports the user far away when activated.
+# Sunrise-Edit - уточнено необратимое удаление персонажа
+ent-ActionActivateBluespaceImplant = bluespace Implant
+    .desc = An advanced subdermal implant that teleports its user beyond the operation area when activated. Activation is irreversible. OOC: The user's character is permanently removed from the round.
+# Sunrise-Edit - уточнено необратимое удаление персонажа
+ent-ActionActivateRedspaceImplant = redspace Implant
+    .desc = An advanced subdermal implant that teleports its user beyond the operation area when activated. Activation is irreversible. OOC: The user's character is permanently removed from the round.

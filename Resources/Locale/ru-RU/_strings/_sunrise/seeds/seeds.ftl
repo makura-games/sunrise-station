@@ -14,3 +14,6 @@ seeds-whiterose-name = белая роза
 seeds-whiterose-display-name = белая роза
 seeds-sunflower-name = подсолнух
 seeds-sunflower-display-name = подсолнух
+seeds-geranium-name = герань
+seeds-snapcorn-name = кукурузные хлопья
+seeds-white-lily-name = белая лилия

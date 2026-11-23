@@ -3,6 +3,9 @@
   id: CantInteract
 
 - type: Tag
+  id: CannotBeFlatpacked
+
+- type: Tag
   id: Directional
 
 - type: Tag
@@ -15,6 +18,9 @@
   id: NoPaint
 
 - type: Tag
+  id: BigSmallArms
+
+- type: Tag
   id: NoSpinOnThrow
 
 - type: Tag
@@ -22,6 +28,13 @@
 
 - type: Tag
   id: ForceNoTileWalls
+
+# region Hardsuit injection
+- type: Tag
+  id: FitsHardsuit
+
+- type: Tag
+  id: FitsMurmilloHardsuit
 
 # region Uplinks
 - type: Tag
@@ -62,6 +75,10 @@
 
 - type: Tag
   id: SyndieAgentUplink
+
+# region Ammunition
+- type: Tag
+  id: CartridgeMinigun
 
 # region Species / roles / targets
 - type: Tag
@@ -122,6 +139,9 @@
 
 - type: Tag
   id: BorgModuleSecurity
+
+- type: Tag
+  id: BorgModulePirate
 
 # region Tools / devices
 - type: Tag
@@ -227,9 +247,6 @@
   id: HeavyAmmoBelt127
 
 - type: Tag
-  id: MagazineACP14
-
-- type: Tag
   id: MagazineAR18
 
 - type: Tag
@@ -242,9 +259,6 @@
   id: MagazineBoxL6Cap
 
 - type: Tag
-  id: MagazineBR64
-
-- type: Tag
   id: MagazineCannonBallMini
 
 - type: Tag
@@ -254,31 +268,22 @@
   id: MagazineChainGun
 
 - type: Tag
-  id: MagazineDeagle
-
-- type: Tag
-  id: MagazineDl6902
-
-- type: Tag
   id: MagazineDragunov
 
 - type: Tag
-  id: MagazineGlock22
-
-- type: Tag
-  id: MagazineGlock22Metus
+  id: MagazineGarand
 
 - type: Tag
   id: MagazineHeavyRifle
-
-- type: Tag
-  id: MagazineHIBrowning
 
 - type: Tag
   id: MagazineLightMachineGunMG60
 
 - type: Tag
   id: MagazineLightRiflePan
+
+- type: Tag
+  id: MagazineLightRifleImprovised
 
 - type: Tag
   id: MagazineM28
@@ -290,19 +295,10 @@
   id: MagazineMachineGunMG42
 
 - type: Tag
-  id: MagazineMP5
-
-- type: Tag
   id: MagazineMP7
 
 - type: Tag
-  id: MagazineNewVector
-
-- type: Tag
   id: MagazineP90
-
-- type: Tag
-  id: MagazinePistolCaselessRifleTec9
 
 - type: Tag
   id: MagazinePistolDPSubMachineGun
@@ -312,15 +308,6 @@
 
 - type: Tag
   id: MagazinePistolSubMachineGunCap
-
-- type: Tag
-  id: MagazineRPD
-
-- type: Tag
-  id: MagazineScorpion
-
-- type: Tag
-  id: MagazineVP78
 
 # region Weapons
 
@@ -339,6 +326,9 @@
 
 - type: Tag
   id: EnergySword
+
+- type: Tag
+  id: SunriseSyndicateRing
 
 - type: Tag
   id: GorillaUpgradeKit
@@ -588,10 +578,10 @@
 - type: Tag
   id: SpecialMech
 
-# region Misc / fun
 - type: Tag
-  id: BluespaceBox
+  id: SunriseRoverArmor
 
+# region Misc / fun
 - type: Tag
   id: ClownKudzu
 
@@ -792,6 +782,9 @@
 # region Medicine
 - type: Tag
   id: AutoMender  # Используется для whitelist у ClothingBeltMedical =3
+
+- type: Tag
+  id: MedipenCase # Используется для whitelist у ClothingBeltMedical
 
 - type: Tag
   id: StationAiCommunicationBoard

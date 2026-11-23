@@ -16,13 +16,12 @@ namespace Content.Server.Silicons.Borgs;
 /// <summary>
 /// System that handles cyborg voice changing functionality.
 /// </summary>
-public sealed class SiliconVoiceSystem : EntitySystem
+public sealed partial class SiliconVoiceSystem : EntitySystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     private const string BorgVoiceChangeActionId = "ActionChangeBorgVoice";
     private static readonly EntProtoId BorgVoiceChangeAction = BorgVoiceChangeActionId;
@@ -79,7 +78,7 @@ public sealed class SiliconVoiceSystem : EntitySystem
         // Validate the voice prototype exists and player can use it
         if (!CanUseVoice(uid, component, args.VoiceId, session))
         {
-            if (!_prototypeManager.TryIndex<TTSVoicePrototype>(args.VoiceId, out var voicePrototype))
+            if (!ProtoMan.TryIndex<TTSVoicePrototype>(args.VoiceId, out var voicePrototype))
             {
                 _popup.PopupEntity(Loc.GetString("borg-voice-popup-invalid"), uid, args.Actor, PopupType.MediumCaution);
                 return;
@@ -93,7 +92,7 @@ public sealed class SiliconVoiceSystem : EntitySystem
         }
 
         // Get the voice prototype for the success message
-        if (!_prototypeManager.TryIndex<TTSVoicePrototype>(args.VoiceId, out var voice))
+        if (!ProtoMan.TryIndex<TTSVoicePrototype>(args.VoiceId, out var voice))
             return;
 
         // Set the new voice
@@ -113,7 +112,7 @@ public sealed class SiliconVoiceSystem : EntitySystem
 
         if (component.SelectedVoiceId == null)
         {
-            var availableVoices = _prototypeManager
+            var availableVoices = ProtoMan
                 .EnumeratePrototypes<TTSVoicePrototype>().Where(v => v.RoundStart && !v.SponsorOnly && CanUseVoice(uid, component, v.ID, null!)).ToList();
 
             if (availableVoices.Any())
@@ -164,7 +163,7 @@ public sealed class SiliconVoiceSystem : EntitySystem
 
     private BorgVoiceChangeState CreateVoiceChangeState(EntityUid uid, BorgVoiceComponent component, ICommonSession player)
     {
-        var availableVoices = _prototypeManager
+        var availableVoices = ProtoMan
             .EnumeratePrototypes<TTSVoicePrototype>()
             .Where(v => v.RoundStart && CanUseVoice(uid, component, v.ID, player))
             .Select(v => v.ID)
@@ -175,7 +174,7 @@ public sealed class SiliconVoiceSystem : EntitySystem
 
     private bool CanUseVoice(EntityUid uid, BorgVoiceComponent component, string voiceId, ICommonSession player)
     {
-        if (!_prototypeManager.TryIndex<TTSVoicePrototype>(voiceId, out var voice))
+        if (!ProtoMan.TryIndex<TTSVoicePrototype>(voiceId, out var voice))
             return false;
 
         if (voice.SponsorOnly)

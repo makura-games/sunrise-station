@@ -1,13 +1,17 @@
 using System.Linq;
 using Content.Client.Weapons.Ranged.Components;
+using Content.Shared.Tag;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Client.GameObjects;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Client.Weapons.Ranged.Systems;
 
 public sealed partial class GunSystem
 {
+    private static readonly ProtoId<TagPrototype> ShotgunShellTag = "ShellShotgun";
+
     private void InitializeSpentAmmo()
     {
         SubscribeLocalEvent<SpentAmmoVisualsComponent, AppearanceChangeEvent>(OnSpentAmmoAppearance);
@@ -26,7 +30,7 @@ public sealed partial class GunSystem
         var spent = (bool)varSpent;
 
         // Sunrise edit start - restore Starlight modular Spent layer logic dynamically
-        var revealSpent = ent.Comp.RevealSpent || TagSystem.HasTag(ent, "ShellShotgun");
+        var revealSpent = ent.Comp.RevealSpent || TagSystem.HasTag(ent, ShotgunShellTag);
 
         if (revealSpent)
         {

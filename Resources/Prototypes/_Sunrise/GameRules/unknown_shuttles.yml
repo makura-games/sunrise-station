@@ -11,6 +11,18 @@
     gridPath: "/Maps/_Sunrise/Shuttles/DSO/ERT/ERT-Small-Amber.yml"
 
 - type: entity
+  id: ERTShuttleInstaSquad
+  parent: BaseUnknownShuttleRule
+  components:
+  - type: StationEvent
+    startAnnouncement: null
+    startAudio: /Audio/_Sunrise/Announcements/sunrise_ert_accepted.ogg
+    duration: -0
+    endAudio: /Audio/_Sunrise/Announcements/sunrise_ert_accepted.ogg
+  - type: LoadMapRule
+    gridPath: "/Maps/_Sunrise/Shuttles/DSO/ERT/ERT-Small-Red.yml"
+
+- type: entity
   id: ERTShuttleMediumRed
   parent: BaseUnknownShuttleRule
   components:

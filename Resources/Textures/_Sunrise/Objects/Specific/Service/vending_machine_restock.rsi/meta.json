@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Original source: https://github.com/tgstation/tgstation/blob/master/icons/obj/vending_restock.dmi @ commit 014c44ef6279beb02a5f3e76824439fa57181c22",
+  "copyright": "Original source: https://github.com/tgstation/tgstation/blob/master/icons/obj/vending_restock.dmi @ commit 014c44ef6279beb02a5f3e76824439fa57181c22, refill_instruments made by yuzuki.mori (Discord)",
   "size": {
     "x": 32,
     "y": 32
@@ -20,9 +20,12 @@
     },
     {
         "name": "green_bit"
-      },
+    },
     {
       "name": "refill_paint"
+    },
+    {
+      "name": "refill_instruments"
     },
     {
         "name": "icon_cargo_paint"

@@ -1,0 +1,44 @@
+- type: latheRecipe
+  id: TapeRecorder
+  result: TapeRecorder
+  categories:
+  - Service
+  completetime: 4
+  materials:
+    Steel: 500
+    Plastic: 100
+    Glass: 200
+    Silver: 100
+
+- type: latheRecipe
+  id: TapeCassetteOneMinute
+  result: TapeCassetteOneMinute
+  categories:
+  - Service
+  completetime: 2
+  materials:
+    Plastic: 300
+    Glass: 100
+
+- type: latheRecipe
+  id: TapeCassetteTwoMinutes
+  result: TapeCassetteTwoMinutes
+  categories:
+  - Service
+  completetime: 2
+  materials:
+    Plastic: 300
+    Glass: 100
+    Plasma: 100
+
+- type: latheRecipe
+  id: TapeCassetteThreeMinutes
+  result: TapeCassetteThreeMinutes
+  categories:
+  - Service
+  completetime: 2
+  materials:
+    Plastic: 400
+    Glass: 200
+    Plasma: 100
+    Silver: 50

@@ -19,7 +19,7 @@
   parent: BaseSubdermalImplant
   id: BluespaceImplant
   name: bluespace implant
-  description: An advanced subdermal implant that, when activated, teleports the user far away.
+  description: "An advanced subdermal implant that teleports its user beyond the operation area when activated. Activation is irreversible. OOC: The user's character is permanently removed from the round."
   categories: [ HideSpawnMenu ]
   components:
   - type: SubdermalImplant
@@ -38,7 +38,7 @@
   parent: BaseSubdermalImplant
   id: RedspaceImplant
   name: redspace implant
-  description: An advanced subdermal implant that, when activated, teleports the user far away.
+  description: "An advanced subdermal implant that teleports its user beyond the operation area when activated. Activation is irreversible. OOC: The user's character is permanently removed from the round."
   categories: [ HideSpawnMenu ]
   components:
   - type: SubdermalImplant

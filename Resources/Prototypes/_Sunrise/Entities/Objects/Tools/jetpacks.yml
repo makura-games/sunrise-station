@@ -12,7 +12,7 @@
     - Back
     - suitStorage
   - type: GasTank
-    outputPressure: 42.6
+    releasePressure: 42.6
     air:
       volume: 1.5
   - type: Tag
@@ -27,7 +27,7 @@
   parent: JetpackImprovised
   components:
   - type: GasTank
-    outputPressure: 42.6
+    releasePressure: 42.6
     air:
       volume: 1.5
       temperature: 293.15
@@ -71,7 +71,7 @@
   parent: JetpackVoidEngineer
   components:
   - type: GasTank
-    outputPressure: 42.6
+    releasePressure: 42.6
     air:
       volume: 5
       temperature: 293.15
@@ -122,7 +122,7 @@
         - suitStorage
         - Belt
     - type: GasTank
-      outputPressure: 42.6
+      releasePressure: 42.6
       air:
         volume: 5
         temperature: 293.15
@@ -172,7 +172,7 @@
         - suitStorage
         - Belt
     - type: GasTank
-      outputPressure: 42.6
+      releasePressure: 42.6
       air:
         volume: .4
 
@@ -184,7 +184,7 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 42.6
+    releasePressure: 42.6
     air:
       # 1 minute of thrust
       volume: .4
@@ -192,3 +192,47 @@
       moles:
         - 0.082055162 # oxygen
         - 0.082055162 # nitrogen
+
+- type: entity
+  parent: [ BaseHighlyIllegalContraband, JetpackBlack ]
+  id: PirateJetpack
+  name: pirate jetpack
+  suffix: Pirate
+  components:
+  - type: Item
+    sprite: _Sunrise/Objects/Tanks/Jetpacks/pirate_jetpack.rsi
+  - type: Sprite
+    sprite: _Sunrise/Objects/Tanks/Jetpacks/pirate_jetpack.rsi
+  - type: Clothing
+    sprite: _Sunrise/Objects/Tanks/Jetpacks/pirate_jetpack.rsi
+    slots:
+    - Back
+
+- type: entity
+  parent: PirateJetpack
+  id: PirateJetpackFilled
+  suffix: Filled, Pirate
+  components:
+  - type: GasTank
+    releasePressure: 42.6
+    air:
+      volume: 5
+      temperature: 293.15
+      moles:
+      - 1.025689525
+      - 1.025689525
+
+- type: entity
+  parent: PirateJetpack
+  id: PirateJetpackBorg
+  name: pirate borg jetpack
+  suffix: Infinite, Pirate
+  components:
+  - type: GasRegeneration
+    airRegenerate:
+      volume: 1
+      temperature: 293.15
+      moles:
+      - 0.0008
+  - type: Jetpack
+    moleUsage: 0

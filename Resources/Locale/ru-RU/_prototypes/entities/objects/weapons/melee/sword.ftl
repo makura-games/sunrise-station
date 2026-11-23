@@ -12,5 +12,5 @@ ent-EnergyKatana = энергокатана
     .desc = Катана, наделённая сильной энергией.
 ent-Claymore = клеймор
     .desc = Древний воинский меч.
-ent-Throngler = Нагибатор
+ent-Throngler = нагибатор
     .desc = Зачем вы это сделали?

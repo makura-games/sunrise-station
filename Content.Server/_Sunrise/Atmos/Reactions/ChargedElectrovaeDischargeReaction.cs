@@ -14,8 +14,7 @@ public sealed partial class ChargedElectrovaeDischargeReaction : IGasReactionEff
 {
     public ReactionResult React(GasMixture mixture, IGasMixtureHolder? holder, AtmosphereSystem atmosphereSystem, float heatScale)
     {
-        var initialHyperNoblium = mixture.GetMoles(Gas.HyperNoblium);
-        if (initialHyperNoblium >= 5.0f && mixture.Temperature > 20f)
+        if (atmosphereSystem.IsSunriseReactionSuppressed(mixture))
             return ReactionResult.NoReaction;
 
         const float intensityDivisor = 2f;

@@ -1,0 +1,40 @@
+- type: entity
+  parent: [ ClothingHandsBase, BaseHighlyIllegalContraband ]
+  id: ClothingHandsPirateHook
+  name: pirate hook
+  description: Sharp and pointy. Shiver me timbers!
+  suffix: Pirate
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Melee/pirate_hook.rsi
+    scale: 0.75, 0.75
+  - type: Clothing
+    sprite: _Sunrise/Objects/Weapons/Melee/pirate_hook.rsi
+  - type: MeleeWeapon
+    autoAttack: true
+    animation: WeaponArcThrust
+    mustBeEquippedToUse: true
+    damage:
+      types:
+        Slash: 12
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: PirateAccent
+    relayAccent: true
+
+- type: entity
+  parent: ClothingHandsPirateHook
+  id: ClothingHandsShoddyPirateHook
+  name: shoddy pirate hook
+  description: Sharp and pointy, just a bit less than the real thing.
+  suffix: Pirate
+  components:
+  - type: MeleeWeapon
+    autoAttack: true
+    animation: WeaponArcThrust
+    mustBeEquippedToUse: true
+    damage:
+      types:
+        Slash: 10
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg

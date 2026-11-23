@@ -180,69 +180,79 @@
 
 #Pirate uplink categoires
 - type: storeCategory
-  id: UplinkPirateWeaponry
-  name: store-category-weapons
+  id: UplinkPirateMeleeWeaponry
+  name: store-category-melee-weapons
   priority: 0
+
+- type: storeCategory
+  id: UplinkPirateRangedWeaponry
+  name: store-category-ranged-weapons
+  priority: 1
 
 - type: storeCategory
   id: UplinkPirateAmmo
   name: store-category-ammo
-  priority: 1
+  priority: 2
 
 - type: storeCategory
   id: UplinkPirateExplosives
   name: store-category-explosives
-  priority: 2
+  priority: 3
 
 - type: storeCategory
   id: UplinkPirateWearables
   name: store-category-wearables
-  priority: 3
+  priority: 4
+
+- type: storeCategory
+  id: UplinkPirateArmor
+  name: store-category-armor-protection
+  priority: 5
 
 - type: storeCategory
   id: UplinkPirateChemicals
   name: store-category-chemicals
-  priority: 4
+  priority: 6
 
 - type: storeCategory
   id: UplinkPirateDeception
   name: store-category-deception
-  priority: 5
+  priority: 7
 
 - type: storeCategory
   id: UplinkPirateDisruption
   name: store-category-disruption
-  priority: 6
+  priority: 8
 
 - type: storeCategory
   id: UplinkPirateImplants
   name: store-category-implants
-  priority: 7
+  priority: 9
 
 - type: storeCategory
   id: UplinkPirateAllies
   name: store-category-allies
-  priority: 8 # Sunrise-Edit
+  priority: 10 # Sunrise-Edit
 
 - type: storeCategory
   id: UplinkPiratePointless
   name: store-category-pointless
-  priority: 9 # Sunrise-Edit
+  priority: 11 # Sunrise-Edit
 
 - type: storeCategory
   id: UplinkPirateCybernetics
   name: store-category-cybernetics
-  priority: 10
+  priority: 12
 
 - type: storeCategory
   id: UplinkPirateMechs
   name: store-category-mechs
-  priority: 11
+  priority: 13
 
 - type: storeCategory
   id: UplinkPirateBundle
   name: store-category-lootbox
-  priority: 12
+  priority: 14
 
 - type: storeCategory
   id: UplinkPirateExchanger

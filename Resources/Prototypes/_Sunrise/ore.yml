@@ -7,6 +7,70 @@
     OreCarpRainbow: 7
     OreCarpDragon: 3
 
+- type: weightedRandomOre
+  id: SunriseVGRoidOreIronCrabChance
+  weights:
+    OreSteel: 19
+    OreIronCrab: 1
+
+- type: weightedRandomOre
+  id: SunriseVGRoidOreCoalCrabChance
+  weights:
+    OreCoal: 19
+    OreCoalCrab: 1
+
+- type: weightedRandomOre
+  id: SunriseVGRoidOreQuartzCrabChance
+  weights:
+    OreSpaceQuartz: 19
+    OreQuartzCrab: 1
+
+- type: weightedRandomOre
+  id: SunriseVGRoidOreSaltCrabChance
+  weights:
+    OreSalt: 19
+    OreSaltCrab: 1
+
+- type: weightedRandomOre
+  id: SunriseVGRoidOreGoldCrabChance
+  weights:
+    OreGold: 19
+    OreGoldCrab: 1
+
+- type: weightedRandomOre
+  id: SunriseVGRoidOreSilverCrabChance
+  weights:
+    OreSilver: 19
+    OreSilverCrab: 1
+
+- type: weightedRandomOre
+  id: SunriseVGRoidOrePlasmaCrabChance
+  weights:
+    OrePlasma: 19
+    OrePlasmaCrab: 1
+
+- type: weightedRandomOre
+  id: SunriseVGRoidOreUraniumCrabChance
+  weights:
+    OreUranium: 19
+    OreUraniumCrab: 1
+
+- type: weightedRandomOre
+  id: SunriseVGRoidOreBananiumCrabChance
+  weights:
+    OreBananium: 19
+    OreBananiumCrab: 1
+
+- type: weightedRandomOre
+  id: SunriseVGRoidOreDiamondCrabChance
+  weights:
+    OreDiamond: 19
+    OreDiamondCrab: 1
+
+- type: ore
+  id: OreBananiumCrab
+  oreEntity: MobSpawnCrabBananium
+
 - type: ore
   id: OreCarpDungeon
   oreEntity: MobCarpDungeon

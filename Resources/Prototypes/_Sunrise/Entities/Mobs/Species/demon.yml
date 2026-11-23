@@ -1,19 +1,51 @@
 - type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceDemon
+  name: demon appearance
+  components:
+  - type: InitialBody
+    organs:
+      Torso: TorsoDemon
+      Head: HeadDemon
+      ArmLeft: LeftArmDemon
+      ArmRight: RightArmDemon
+      HandRight: RightHandDemon
+      HandLeft: LeftHandDemon
+      LegLeft: LeftLegDemon
+      LegRight: RightLegDemon
+      FootLeft: LeftFootDemon
+      FootRight: RightFootDemon
+      Brain: OrganHumanBrain
+      Eyes: OrganHumanEyes
+      Tongue: OrganHumanTongue
+      Heart: OrganAnimalHeart
+      Lungs: OrganHumanLungs
+      Stomach: OrganDemonStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganHumanKidneys
+
+- type: entity
   save: false
   name: Urisst' Mzhand Demon
-  parent: BaseMobSpeciesOrganic
+  parent:
+  - AppearanceDemon
+  - BaseSpeciesMobOrganic
   id: BaseMobDemon
   abstract: true
   components:
   - type: Interactions
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Demon
-  - type: Hunger
-  - type: Thirst
-    dehydrationDamage:
-      types:
-        Bloodloss: 0.5
-        Asphyxiation: 0.5
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers
+  - type: SatiationDamage
+    satiations:
+      Thirst:
+        thresholds:
+          Dead:
+            types:
+              Bloodloss: 0.5
+              Asphyxiation: 0.5
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Demon/parts.rsi
     state: full_m
@@ -21,22 +53,16 @@
     netsync: false
     noRot: true
     drawdepth: Mobs
-  - type: Body
-    prototype: Demon
-    requiredLegs: 2
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatDemon
       amount: 5
   - type: Speech
     speechSounds: Lizard
   - type: Vocal
-    sounds:
-      Male: MaleHuman
-      Female: FemaleHuman
-      Unsexed: FemaleHuman
+    emoteSounds: MaleHuman
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: MeleeWeapon
     hidden: true
@@ -48,8 +74,7 @@
       types:
         Piercing: 5
   - type: Temperature
-    currentTemperature: 310.15
-    specificHeat: 46
+    temperature: 310.15
   - type: TemperatureDamage
     heatDamageThreshold: 400
     coldDamageThreshold: 193  #starting temperature damage treshold
@@ -75,13 +100,15 @@
 - type: entity
   save: false
   name: Urist McHands
-  parent: MobHumanDummy
+  parent: AppearanceDemon
   id: MobDemonDummy
   categories: [ HideSpawnMenu ]
   description: A dummy reptilian meant to be used in character setup.
   components:
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Demon
+  - type: SunriseHumanoidProfile
+  - type: SunriseHumanoidBaseLayers
   - type: Inventory
     femaleDisplacements:
       jumpsuit:

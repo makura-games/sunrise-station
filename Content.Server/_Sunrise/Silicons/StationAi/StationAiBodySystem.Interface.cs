@@ -18,8 +18,8 @@ public sealed partial class StationAiBodySystem
      * and the body list sent to the AI body selection interface.
      */
 
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     private static readonly SpriteSpecifier BodyEnterVerbIcon =
         new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/in.svg.192dpi.png"));

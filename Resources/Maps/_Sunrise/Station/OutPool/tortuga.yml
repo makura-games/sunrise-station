@@ -122583,14 +122583,14 @@ entities:
     - pos: 5.5,76.5
       parent: 33
       type: Transform
-- proto: HeadHuman
+- proto: OrganHumanHead
   entities:
   - uid: 12943
     components:
     - pos: -5.405867,54.30053
       parent: 33
       type: Transform
-- proto: HeadSkeleton
+- proto: OrganSkeletonPersonHead
   entities:
   - uid: 27810
     components:

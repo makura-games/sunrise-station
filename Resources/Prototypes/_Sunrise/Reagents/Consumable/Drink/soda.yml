@@ -14,14 +14,11 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 1
@@ -43,15 +40,15 @@
   flavor: soda
   color: "#2E6671"
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:Polymorph
         prototype: ChangelingStingHuman
-        probability: 0.0277
+        probability: 0.0008365
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:AdjustReagent
         reagent: ChangelingStingSunrise
         amount: -1000
@@ -59,14 +56,14 @@
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:Polymorph
         prototype: ChangelingStingReptilian
-        probability: 0.0557
+        probability: 0.001682
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:AdjustReagent
         reagent: ChangelingStingSunrise
         amount: -1000
@@ -74,14 +71,14 @@
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:Polymorph
         prototype: ChangelingStingTajaran
-        probability: 0.0833
+        probability: 0.0025154
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:AdjustReagent
         reagent: ChangelingStingSunrise
         amount: -1000
@@ -89,14 +86,14 @@
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:Polymorph
         prototype: ChangelingStingSlime
-        probability: 0.111
+        probability: 0.0033519
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:AdjustReagent
         reagent: ChangelingStingSunrise
         amount: -1000
@@ -104,14 +101,14 @@
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:Polymorph
         prototype: ChangelingStingMoth
-        probability: 0.139
+        probability: 0.0041974
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:AdjustReagent
         reagent: ChangelingStingSunrise
         amount: -1000
@@ -119,14 +116,14 @@
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:Polymorph
         prototype: ChangelingStingSwine
-        probability: 0.1667
+        probability: 0.0050338
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:AdjustReagent
         reagent: ChangelingStingSunrise
         amount: -1000
@@ -134,14 +131,14 @@
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:Polymorph
         prototype: ChangelingStingResomi
-        probability: 0.1943
+        probability: 0.0058673
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:AdjustReagent
         reagent: ChangelingStingSunrise
         amount: -1000
@@ -149,14 +146,14 @@
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:Polymorph
         prototype: ChangelingStingVox
-        probability: 0.2223
+        probability: 0.0067128
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:AdjustReagent
         reagent: ChangelingStingSunrise
         amount: -1000
@@ -164,14 +161,14 @@
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:Polymorph
         prototype: ChangelingStingVulpkanin
-        probability: 0.25
+        probability: 0.0075493
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:AdjustReagent
         reagent: ChangelingStingSunrise
         amount: -1000
@@ -179,14 +176,14 @@
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:Polymorph
         prototype: ChangelingStingFelinid
-        probability: 0.2777
+        probability: 0.0083857
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:AdjustReagent
         reagent: ChangelingStingSunrise
         amount: -1000
@@ -194,14 +191,14 @@
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:Polymorph
         prototype: ChangelingStingHumanoidXeno
-        probability: 0.3057
+        probability: 0.0092312
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:AdjustReagent
         reagent: ChangelingStingSunrise
         amount: -1000
@@ -209,14 +206,14 @@
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:Polymorph
         prototype: ChangelingStingHumanRename
-        probability: 0.3333
+        probability: 0.0100647
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
       - !type:AdjustReagent
         reagent: ChangelingStingSunrise
         amount: -1000
@@ -224,7 +221,7 @@
         conditions:
         - !type:ReagentCondition
           reagent: ChangelingStingSunrise
-          min: 25
+          min: 5
 
 - type: reagent
   id: DrGibbSunrise
@@ -241,7 +238,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:PopupMessage
         conditions:
@@ -278,14 +275,11 @@
   flavor: energydrink
   color: "#ffffbf"
   metabolisms:
-    Drink:
+    Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 2
@@ -326,14 +320,11 @@
   color: "#9385bf"
   fizziness: 0.9 # gamers crave the fizz
   metabolisms:
-    Drink:
+    Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 1
@@ -345,7 +336,7 @@
         - !type:TemperatureCondition
           min: 310
         amount: -6000
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:ModifyStatusEffect
         effectProto: StatusEffectStimulantsStamina
@@ -361,9 +352,8 @@
         effectProto: StatusEffectForcedSleeping
         time: 2
         type: Remove
-      - !type:GenericStatusEffect
-        key: Adrenaline
-        component: IgnoreSlowOnDamage
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectAdrenaline
         time: 2
 
 - type: reagent
@@ -381,14 +371,11 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 1
@@ -400,7 +387,7 @@
         - !type:TemperatureCondition
           min: 310
         amount: -6000
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -451,14 +438,11 @@
   metamorphicChangeColor: false
   fizziness: 0.4
   metabolisms:
-    Drink:
+    Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 1
@@ -470,7 +454,7 @@
         - !type:TemperatureCondition
           min: 310
         amount: -6000
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -520,7 +504,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:AdjustTemperature
         amount: -2000
@@ -529,7 +513,7 @@
         - !type:TemperatureCondition
           min: 310
         amount: -6000
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -554,14 +538,11 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 1
@@ -596,17 +577,13 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
-      - !type:GenericStatusEffect
-        key: PressureImmunity
-        component: PressureImmunity
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectPressureImmunity
         time: 1
         type: Add
         probability: 0.5
@@ -614,9 +591,8 @@
         - !type:ReagentCondition
           reagent: SpaceUpSunrise
           min: 10
-      - !type:GenericStatusEffect
-        key: Stutter
-        component: StutteringAccent
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectStutter
       - !type:Jitter
       - !type:Emote
         emote: Scream
@@ -640,14 +616,11 @@
   flavor: starkistsoda
   color: "#9F3400"
   metabolisms:
-    Drink:
+    Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:ModifyStatusEffect
         effectProto: StatusEffectDrowsiness
         time: 1
@@ -679,18 +652,15 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
         factor: 2
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:AdjustReagent
         reagent: Theobromine
         amount: 0.1
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         conditions:
@@ -700,8 +670,6 @@
         damage:
           types:
             Poison: 1
-    Narcotic:
-      effects:
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.16
         sprintSpeedModifier: 1.16
@@ -715,7 +683,7 @@
   flavor: metallic
   color: "#66538F"
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:ModifyStatusEffect
         effectProto: StatusEffectZombieAccent

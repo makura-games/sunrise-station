@@ -51,5 +51,6 @@
           True: { state: icon }
           False: { state: switchblade }
   - type: UseDelay # bug fix to prevent spamming use to reset the swing delay
+    delay: 0.3
   - type: ThrowingAngle
     angle: 180

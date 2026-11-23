@@ -9,7 +9,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.GameTicking.Rules.Components;
 
-[RegisterComponent, Access(typeof(NukeopsRuleSystem))]
+[RegisterComponent, AutoGenerateComponentPause, Access(typeof(NukeopsRuleSystem))] // Sunrise-Edit
 public sealed partial class NukeopsRuleComponent : Component
 {
     /// <summary>
@@ -117,8 +117,7 @@ public enum WinType : byte
     /// </summary>
     OpsMajor,
     /// <summary>
-    ///     Minor win. All nukies were alive at the end of the round.
-    ///     Alternatively, some nukies were alive, but the disk was left behind.
+    ///     Operative minor win. At least one nukie survived, and the disk was left behind.
     /// </summary>
     OpsMinor,
     /// <summary>

@@ -1,0 +1,66 @@
+﻿<Document>
+  # Перепад давления
+  Перепад давления, или ΔP, - это разница давления между двумя областями.
+  Эта разница может создавать силу, действующую на объекты между областями, нанося некоторым объектам [bold]урон давлением[/bold].
+
+  Различные стеклянные объекты, например окна, виндоры и ставни, могут получать урон давлением, если ΔP между двумя сторонами достаточно велик.
+  Этот урон может разбить такие объекты, позволив газу свободно течь между областями.
+
+  У разных типов объектов разные пороги ΔP, которые они выдерживают до разрушения.
+  Обычно чем прочнее стекло, тем выше порог. Тонкие объекты также имеют более низкие пороги.
+
+  Стены, шлюзы и пожарные шлюзы не подвержены воздействию ΔP.
+
+  ## Обычное стекло и объекты
+  <Box>
+    <GuideEntityEmbed Entity="Window" Caption=""/>
+    <GuideEntityEmbed Entity="WindowDirectional" Caption=""/>
+    <GuideEntityEmbed Entity="Windoor" Caption=""/>
+    <GuideEntityEmbed Entity="ShuttersWindow" Caption=""/>
+    <GuideEntityEmbed Entity="InflatableWall" Caption=""/>
+  </Box>
+
+  Обычное полноразмерное стекло и другие слабые объекты выдерживают ΔP до [color=orange][protodata="Window" comp="DeltaPressure" member="MinPressureDelta"/] кПа[/color], прежде чем начнут трескаться.
+
+  Стекло четвертного размера, например направленные окна, выдерживает ΔP до [color=orange][protodata="WindowDirectional" comp="DeltaPressure" member="MinPressureDelta"/] кПа[/color], прежде чем начнёт трескаться.
+
+  ## Укреплённое стекло и объекты
+  <Box>
+    <GuideEntityEmbed Entity="ReinforcedWindow" Caption=""/>
+    <GuideEntityEmbed Entity="WindowReinforcedDirectional" Caption=""/>
+    <GuideEntityEmbed Entity="ShuttleWindow" Caption=""/>
+  </Box>
+
+  Укреплённое полноразмерное стекло выдерживает ΔP до [color=orange][protodata="ReinforcedWindow" comp="DeltaPressure" member="MinPressureDelta"/] кПа[/color], прежде чем начнёт трескаться.
+
+  Укреплённое стекло четвертного размера выдерживает ΔP до [color=orange][protodata="WindowReinforcedDirectional" comp="DeltaPressure" member="MinPressureDelta"/] кПа[/color], прежде чем начнёт трескаться.
+
+  ## Плазменное и урановое стекло
+  <Box>
+    <GuideEntityEmbed Entity="PlasmaWindow" Caption=""/>
+    <GuideEntityEmbed Entity="PlasmaWindowDirectional" Caption=""/>
+    <GuideEntityEmbed Entity="WindoorPlasma" Caption=""/>
+    <GuideEntityEmbed Entity="UraniumWindow" Caption=""/>
+    <GuideEntityEmbed Entity="UraniumWindowDirectional" Caption=""/>
+    <GuideEntityEmbed Entity="WindoorUranium" Caption=""/>
+  </Box>
+
+  Плазменное и урановое стекло выдерживает ΔP до [color=orange][protodata="PlasmaWindow" comp="DeltaPressure" member="MinPressureDelta"/] кПа[/color], прежде чем начнёт трескаться.
+
+  Плазменное и урановое стекло четвертного размера выдерживает ΔP до [color=orange][protodata="PlasmaWindowDirectional" comp="DeltaPressure" member="MinPressureDelta"/] кПа[/color], прежде чем начнёт трескаться.
+
+  ## Укреплённое плазменное и урановое стекло
+
+  <Box>
+    <GuideEntityEmbed Entity="ReinforcedPlasmaWindow" Caption=""/>
+    <GuideEntityEmbed Entity="PlasmaReinforcedWindowDirectional" Caption=""/>
+    <GuideEntityEmbed Entity="ReinforcedUraniumWindow" Caption=""/>
+    <GuideEntityEmbed Entity="UraniumReinforcedWindowDirectional" Caption=""/>
+
+  </Box>
+
+  Укреплённое плазменное и урановое стекло выдерживает ΔP до [color=orange][protodata="ReinforcedPlasmaWindow" comp="DeltaPressure" member="MinPressureDelta"/] кПа[/color], прежде чем начнёт трескаться.
+
+  Укреплённое плазменное и урановое стекло четвертного размера выдерживает ΔP до [color=orange][protodata="PlasmaReinforcedWindowDirectional" comp="DeltaPressure" member="MinPressureDelta"/] кПа[/color], прежде чем начнёт трескаться.
+
+</Document>

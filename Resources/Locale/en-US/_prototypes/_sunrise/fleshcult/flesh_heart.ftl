@@ -1,2 +1,2 @@
-ent-FleshHeart = Flesh Heart
-    .desc = Flesh Heart
+ent-FleshHeart = flesh Heart
+    .desc = Flesh Heart.

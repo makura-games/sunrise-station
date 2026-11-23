@@ -1,6 +1,14 @@
 # Sunrise-specific civilian and wildcard loadout groups.
 
 - type: loadoutGroup
+  id: SunriseReporterJobTools
+  name: loadout-group-jobtrinkets
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ReporterTapeRecorderBox
+
+- type: loadoutGroup
   id: SunriseCommonBackpack
   name: loadout-group-backpack
   loadouts:

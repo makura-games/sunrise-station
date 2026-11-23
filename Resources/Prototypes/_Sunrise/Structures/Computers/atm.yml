@@ -6,8 +6,8 @@
   parent: BaseComputer
   components:
   - type: StationAiWhitelist
-  - type: ApcPowerReceiver
-    powerLoad: 350
+  - type: PowerState
+    workingPowerDraw: 350
   - type: ExtensionCableReceiver
   - type: PointLight
     radius: 1.8
@@ -102,8 +102,9 @@
   - type: Computer
     board: FPIATMComputerCircuitboard
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: GenericVisualizer
     visuals:
       enum.EdgeConnectionVisuals.ConnectionMask:

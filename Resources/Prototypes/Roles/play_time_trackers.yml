@@ -50,46 +50,25 @@
   id: JobERTChaplain
 
 - type: playTimeTracker
-  id: JobERTChaplainVeteran
-
-- type: playTimeTracker
   id: JobERTEngineer
-
-- type: playTimeTracker
-  id: JobERTEngineerVeteran
 
 - type: playTimeTracker
   id: JobERTJanitor
 
 - type: playTimeTracker
-  id: JobERTJanitorVeteran
-
-- type: playTimeTracker
   id: JobERTLeader
-
-- type: playTimeTracker
-  id: JobERTLeaderVeteran
 
 - type: playTimeTracker
   id: JobERTMedical
 
 - type: playTimeTracker
-  id: JobERTMedicalVeteran
-
-- type: playTimeTracker
   id: JobERTSecurity
-
-- type: playTimeTracker
-  id: JobERTSecurityVeteran
 
 - type: playTimeTracker
   id: JobDeathSquad
 
 - type: playTimeTracker
   id: JobCBURN
-
-- type: playTimeTracker
-  id: JobCBURNVeteran
 
 - type: playTimeTracker
   id: JobHeadOfPersonnel
@@ -162,6 +141,9 @@
 
 - type: playTimeTracker
   id: JobTechnicalAssistant
+
+- type: playTimeTracker
+  id: JobTramDriver
 
 - type: playTimeTracker
   id: JobVisitor

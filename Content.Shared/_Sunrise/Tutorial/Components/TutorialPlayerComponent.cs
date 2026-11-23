@@ -23,6 +23,12 @@ public sealed partial class TutorialPlayerComponent : Component
     public int StepIndex;
 
     /// <summary>
+    /// Temporary step shown instead of the sequence step until a recoverable failure is fixed.
+    /// </summary>
+    [ViewVariables, AutoNetworkedField]
+    public ProtoId<TutorialStepPrototype>? ActiveStepOverride;
+
+    /// <summary>
     /// Entity currently hosting the tutorial bubble, if any.
     /// </summary>
     [ViewVariables, AutoNetworkedField]
@@ -39,6 +45,12 @@ public sealed partial class TutorialPlayerComponent : Component
     /// </summary>
     [ViewVariables, AutoNetworkedField]
     public bool TutorialInitialized;
+
+    /// <summary>
+    /// Game time when the current tutorial step became active.
+    /// </summary>
+    [ViewVariables, AutoPausedField]
+    public TimeSpan StepStartedAt;
 
     /// <summary>
     /// Absolute game time when this tutorial session expires.

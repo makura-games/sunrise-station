@@ -26,17 +26,19 @@
     - spicy
   - type: Sprite
     state: nian_ramen
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
         - ReagentId: Nutriment
           Quantity: 12
         - ReagentId: Protein
           Quantity: 10
         - ReagentId: Water
           Quantity: 8
+  - type: Tag
+    tags:
+      - Meat
 
 - type: entity
   parent: FoodSpeciesDishBase
@@ -50,14 +52,16 @@
     - salty
   - type: Sprite
     state: diona_salad
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
+  - type: Solution
+    solution:
+      reagents:
         - ReagentId: Nutriment
           Quantity: 16
         - ReagentId: Vitamin
           Quantity: 10
+  - type: Tag
+    tags:
+      - Fruit
 
 - type: entity
   parent: FoodSpeciesBowlDishBase
@@ -71,11 +75,10 @@
     - spicy
   - type: Sprite
     state: royal_xeno_soup
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
         - ReagentId: Nutriment
           Quantity: 12
         - ReagentId: Protein
@@ -86,6 +89,9 @@
           Quantity: 1
         - ReagentId: Kelotane
           Quantity: 1
+  - type: Tag
+    tags:
+      - Meat
 
 - type: entity
   parent: FoodSpeciesBowlDishBase
@@ -99,17 +105,19 @@
     - salty
   - type: Sprite
     state: facehugger_soup
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
         - ReagentId: Nutriment
           Quantity: 10
         - ReagentId: Protein
           Quantity: 10
         - ReagentId: Water
           Quantity: 10
+  - type: Tag
+    tags:
+      - Meat
 
 - type: entity
   parent: FoodSpeciesBowlDishBase
@@ -123,17 +131,19 @@
     - meaty
   - type: Sprite
     state: demon_hell_chili
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
         - ReagentId: Nutriment
           Quantity: 12
         - ReagentId: Protein
           Quantity: 12
         - ReagentId: Water
           Quantity: 6
+  - type: Tag
+    tags:
+      - Meat
 
 - type: entity
   parent: FoodSpeciesDishBase
@@ -147,14 +157,16 @@
     - salty
   - type: Sprite
     state: baked_resomi
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
+  - type: Solution
+    solution:
+      reagents:
         - ReagentId: Nutriment
           Quantity: 16
         - ReagentId: Protein
           Quantity: 10
+  - type: Tag
+    tags:
+      - Meat
 
 - type: entity
   parent: FoodSpeciesDishBase
@@ -168,16 +180,18 @@
     - sweet
   - type: Sprite
     state: milir_wings_barbecue
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
+  - type: Solution
+    solution:
+      reagents:
         - ReagentId: Nutriment
           Quantity: 16
         - ReagentId: Protein
           Quantity: 10
         - ReagentId: Holywater
           Quantity: 2
+  - type: Tag
+    tags:
+      - Meat
 
 - type: entity
   parent: FoodSpeciesDishBase
@@ -191,11 +205,10 @@
     - slimy
   - type: Sprite
     state: slime_bun
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 15
-        reagents:
+  - type: Solution
+    solution:
+      maxVol: 15
+      reagents:
         - ReagentId: Nutriment
           Quantity: 10
         - ReagentId: Sugar
@@ -213,14 +226,16 @@
     - salty
   - type: Sprite
     state: lizard_carp_nachos
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
+  - type: Solution
+    solution:
+      reagents:
         - ReagentId: Nutriment
           Quantity: 16
         - ReagentId: Protein
           Quantity: 8
+  - type: Tag
+    tags:
+      - Meat
 
 - type: entity
   parent: FoodSpeciesBowlDishBase
@@ -234,17 +249,19 @@
     - salty
   - type: Sprite
     state: swine_stew
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
         - ReagentId: Nutriment
           Quantity: 12
         - ReagentId: Protein
           Quantity: 12
         - ReagentId: Water
           Quantity: 6
+  - type: Tag
+    tags:
+      - Meat
 
 - type: entity
   parent: FoodSpeciesDishBase
@@ -258,14 +275,16 @@
     - spicy
   - type: Sprite
     state: tajawarma
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
+  - type: Solution
+    solution:
+      reagents:
         - ReagentId: Nutriment
           Quantity: 16
         - ReagentId: Protein
           Quantity: 10
+  - type: Tag
+    tags:
+      - Meat
 
 - type: entity
   parent: FoodSpeciesBowlDishBase
@@ -279,17 +298,19 @@
     - cheesy
   - type: Sprite
     state: felmeni
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
         - ReagentId: Nutriment
           Quantity: 12
         - ReagentId: Protein
           Quantity: 12
         - ReagentId: Water
           Quantity: 6
+  - type: Tag
+    tags:
+      - Meat
 
 - type: entity
   parent: FoodSpeciesDishBase
@@ -303,11 +324,13 @@
     - salty
   - type: Sprite
     state: vulp_loaf
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
+  - type: Solution
+    solution:
+      reagents:
         - ReagentId: Nutriment
           Quantity: 16
         - ReagentId: Protein
           Quantity: 10
+  - type: Tag
+    tags:
+      - Meat

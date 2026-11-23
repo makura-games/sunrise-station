@@ -114,6 +114,12 @@
       job: ERTLeader
     - type: Loadout
       prototypes: [ ERTLeaderGearGamma ]
+    - type: AutoImplant
+      implants:
+      - MindShieldImplant
+      - DeathRattleImplantERT
+      - NutrimentImplant
+      - BluespaceImplant
     - type: RandomMetadata
       nameSegments:
       - NamesMilitaryFirstLeaderGamma
@@ -206,6 +212,12 @@
       job: ERTSecurity
     - type: Loadout
       prototypes: [ ERTSecurityGearGamma ]
+    - type: AutoImplant
+      implants:
+      - MindShieldImplant
+      - DeathRattleImplantERT
+      - NutrimentImplant
+      - BluespaceImplant
     - type: RandomMetadata
       nameSegments:
       - NamesMilitaryFirstGamma
@@ -280,6 +292,12 @@
       - NamesMilitaryLast
     - type: Loadout
       prototypes: [ ERTChaplainGearGamma ]
+    - type: AutoImplant
+      implants:
+      - MindShieldImplant
+      - DeathRattleImplantERT
+      - NutrimentImplant
+      - BluespaceImplant
 
 ## ERT Janitor
 
@@ -346,6 +364,12 @@
       job: ERTJanitor
     - type: Loadout
       prototypes: [ ERTJanitorGearGamma ]
+    - type: AutoImplant
+      implants:
+      - MindShieldImplant
+      - DeathRattleImplantERT
+      - NutrimentImplant
+      - BluespaceImplant
     - type: RandomMetadata
       nameSegments:
       - NamesMilitaryFirstGammaSpecial
@@ -415,6 +439,12 @@
       job: ERTEngineer
     - type: Loadout
       prototypes: [ ERTEngineerGearGamma ]
+    - type: AutoImplant
+      implants:
+      - MindShieldImplant
+      - DeathRattleImplantERT
+      - NutrimentImplant
+      - BluespaceImplant
     - type: RandomMetadata
       nameSegments:
       - NamesMilitaryFirstGammaSpecial
@@ -484,6 +514,12 @@
       job: ERTMedical
     - type: Loadout
       prototypes: [ ERTMedicalGearGamma ]
+    - type: AutoImplant
+      implants:
+      - MindShieldImplant
+      - DeathRattleImplantERT
+      - NutrimentImplant
+      - BluespaceImplant
     - type: RandomMetadata
       nameSegments:
       - NamesMilitaryFirstGammaSpecial

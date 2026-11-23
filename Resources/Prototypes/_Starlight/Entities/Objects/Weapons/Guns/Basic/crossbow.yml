@@ -20,7 +20,9 @@
     - suitStorage
   - type: Item
     sprite: _Starlight/Objects/Weapons/Guns/Basic/large_crossbow_x64.rsi
-    size: Huge
+    size: Large
+    shape:
+    - 0,0,3,1
   - type: Wieldable
   - type: GunRequiresWield
   - type: CursorOffsetRequiresWield

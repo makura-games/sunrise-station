@@ -5,10 +5,10 @@
   description: A refined cryptographic sequencer used by S.E.L.F. It can remove laws from cyborgs and law boards.
   components:
   - type: Emag
-    emagSound:
-      path: /Audio/_Sunrise/Ambience/Antag/SELF.ogg
   - type: LawsetEmag
     lawset: FreeLawset
+    emaggedSound:
+      path: /Audio/_Sunrise/Ambience/Antag/SELF.ogg
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/SELF/freemag.rsi
     state: icon

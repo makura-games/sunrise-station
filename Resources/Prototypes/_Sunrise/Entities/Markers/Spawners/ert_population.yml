@@ -1,0 +1,78 @@
+- type: entity
+  abstract: true
+  parent: MarkerBase
+  id: BaseRandomHumanoidSpawnerERTHighPopulation
+  name: high-population ERT spawner
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: EntityTableSpawner
+    offset: 0
+    table: !type:NoneSelector
+
+- type: entity
+  parent: BaseRandomHumanoidSpawnerERTHighPopulation
+  id: RandomHumanoidSpawnerERTEngineerAmberHighPopulation
+  suffix: ERTRole, Amber, 80+ players
+  components:
+  - type: EntityTableSpawner
+    offset: 0
+    table: !type:EntSelector
+      id: RandomHumanoidSpawnerERTEngineerAmber
+      conditions:
+      - !type:PlayerCountCondition
+        min: 80
+
+- type: entity
+  parent: BaseRandomHumanoidSpawnerERTHighPopulation
+  id: RandomHumanoidSpawnerERTEngineerGammaHighPopulation
+  suffix: ERTRole, Gamma, 80+ players
+  components:
+  - type: EntityTableSpawner
+    offset: 0
+    table: !type:EntSelector
+      id: RandomHumanoidSpawnerERTEngineerGamma
+      conditions:
+      - !type:PlayerCountCondition
+        min: 80
+
+- type: entity
+  parent: BaseRandomHumanoidSpawnerERTHighPopulation
+  id: RandomHumanoidSpawnerERTSecurityAmberHighPopulation
+  suffix: ERTRole, Amber, 80+ players
+  components:
+  - type: EntityTableSpawner
+    offset: 0
+    table: !type:EntSelector
+      id: RandomHumanoidSpawnerERTSecurityAmber
+      conditions:
+      - !type:PlayerCountCondition
+        min: 80
+
+- type: entity
+  parent: BaseRandomHumanoidSpawnerERTHighPopulation
+  id: RandomHumanoidSpawnerERTSecurityGammaHighPopulation
+  suffix: ERTRole, Gamma, 80+ players
+  components:
+  - type: EntityTableSpawner
+    offset: 0
+    table: !type:EntSelector
+      id: RandomHumanoidSpawnerERTSecurityGamma
+      conditions:
+      - !type:PlayerCountCondition
+        min: 80
+
+- type: entity
+  parent: BaseRandomHumanoidSpawnerERTHighPopulation
+  id: RandomHumanoidSpawnerERTSecurityRedHighPopulation
+  suffix: ERTRole, Red, 80+ players
+  components:
+  - type: EntityTableSpawner
+    offset: 0
+    table: !type:EntSelector
+      id: RandomHumanoidSpawnerERTSecurityRed
+      conditions:
+      - !type:PlayerCountCondition
+        min: 80

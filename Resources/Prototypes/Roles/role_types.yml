@@ -47,15 +47,3 @@
   name: role-type-silicon-antagonist-name
   color: '#c832e6'
   symbol: "⛞"
-
-- type: roleType
-  id: CorporateAligned
-  name: role-type-corporate-aligned-name
-  color: '#134975'
-  symbol: "*"
-
-- type: roleType
-  id: TSFAligned
-  name: role-type-tsf-aligned-name
-  color: '#22a7ff'
-  symbol: "*"

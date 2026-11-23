@@ -1,5 +1,3 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt
-
 using System.Numerics;
 using Content.Client._Sunrise.PlayerCache;
 using Content.Shared._Sunrise.Pets;
@@ -15,14 +13,12 @@ namespace Content.Client._Sunrise.Pets;
 [GenerateTypedNameReferences]
 public sealed partial class LobbyPetPreviewPanel : Control
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly PlayerCacheManager _playerCache = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private PlayerCacheManager _playerCache = default!;
 
     private EntityUid? _previewDummy;
     private string? _currentPetSelection;
-
-    public event Action? OnChangePetRequested;
 
     public LobbyPetPreviewPanel()
     {
@@ -95,9 +91,9 @@ public sealed partial class LobbyPetPreviewPanel : Control
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
-        
+
         _playerCache.CacheChanged -= UpdateSelectedPetFromCache;
-        
+
         if (_previewDummy != null)
         {
             _entManager.DeleteEntity(_previewDummy.Value);

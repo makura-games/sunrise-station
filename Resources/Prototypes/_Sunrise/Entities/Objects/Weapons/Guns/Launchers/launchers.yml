@@ -261,3 +261,236 @@
           tags:
           - ImprovisedGrenade
           - HandGrenadeAmmo
+
+- type: entity
+  id: BaseWeaponDisposableRocketLauncher
+  name: disposable rocket launcher
+  parent: [BaseItem, BaseGunWieldable]
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/disposal_rocket_launcher.rsi
+    layers:
+    - state: unwielded
+      map: [ base ]
+    - state: untype
+      map: [ type ]
+    - state: wielded
+      map: [ wielded ]
+      visible: false
+    - state: wieldedtype
+      map: [ wieldedType ]
+      visible: false
+  - type: Clothing
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/disposal_rocket_launcher.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,2,1
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/disposal_rocket_launcher.rsi
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 500
+  - type: Tag
+    tags:
+    - Recyclable
+  - type: Wieldable
+    unwieldOnUse: false
+    wieldSound:
+      path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
+  - type: Gun
+    fireRate: 0.5
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
+  - type: BasicEntityAmmoProvider
+    proto: Bullet60mmRocketStarlight
+    capacity: 1
+    count: 1
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WieldableVisuals.Wielded:
+        base:
+          True: { visible: false }
+          False: { visible: true }
+        type:
+          True: { visible: false }
+          False: { visible: true }
+        wielded:
+          True: { visible: true }
+          False: { visible: false }
+        wieldedType:
+          True: { visible: true }
+          False: { visible: false }
+      enum.AmmoVisuals.HasAmmo:
+        base:
+          False: { visible: false }
+        type:
+          False: { visible: false }
+        wielded:
+          False: { visible: true }
+        wieldedType:
+          False: { visible: false }
+  - type: UseDelay
+    delay: 1
+  - type: GunRequiresWield
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.7
+    sprintModifier: 0.7
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 3
+    pvsIncrease: 0.3
+  - type: EmitSoundOnPickup
+    sound:
+      collection: RiflesPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RiflesDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: RiflesDrop
+  - type: KnockbackByUserTag
+    doestContain:
+      Resomi:
+        knockback: 10
+        staminaMultiplier: 8
+      Felinid:
+        knockback: 5
+        staminaMultiplier: 8
+
+- type: entity
+  id: SunriseWeaponDisposableRocketLauncherTraining
+  parent: BaseWeaponDisposableRocketLauncher
+  name: disposable training rocket launcher
+  suffix: Training
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/disposal_rocket_launcher.rsi
+    layers:
+    - state: unwielded
+      map: [ base ]
+    - state: untype
+      map: [ type ]
+      color: "#ffffff"
+    - state: wielded
+      map: [ wielded ]
+      visible: false
+    - state: wieldedtype
+      map: [ wieldedType ]
+      color: "#ffffff"
+      visible: false
+  - type: BasicEntityAmmoProvider
+    proto: SunriseBulletDisposableTrainingRocket
+    capacity: 1
+    count: 1
+
+- type: entity
+  id: SunriseWeaponDisposableRocketLauncherEmp
+  parent: BaseWeaponDisposableRocketLauncher
+  name: disposable EMP rocket launcher
+  suffix: EMP
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/disposal_rocket_launcher.rsi
+    layers:
+    - state: unwielded
+      map: [ base ]
+    - state: untype
+      map: [ type ]
+      color: "#5aa7ff"
+    - state: wielded
+      map: [ wielded ]
+      visible: false
+    - state: wieldedtype
+      map: [ wieldedType ]
+      color: "#5aa7ff"
+      visible: false
+  - type: BasicEntityAmmoProvider
+    proto: SunriseBulletDisposableEmpRocket
+    capacity: 1
+    count: 1
+
+- type: entity
+  id: SunriseWeaponDisposableRocketLauncher
+  parent: BaseWeaponDisposableRocketLauncher
+  name: disposable rocket launcher
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/disposal_rocket_launcher.rsi
+    layers:
+    - state: unwielded
+      map: [ base ]
+    - state: untype
+      map: [ type ]
+      color: "#44ffaa"
+    - state: wielded
+      map: [ wielded ]
+      visible: false
+    - state: wieldedtype
+      map: [ wieldedType ]
+      color: "#44ffaa"
+      visible: false
+  - type: BasicEntityAmmoProvider
+    proto: Bullet60mmRocketStarlight
+    capacity: 1
+    count: 1
+
+- type: entity
+  id: SunriseWeaponDisposableRocketLauncherSmoke
+  parent: BaseWeaponDisposableRocketLauncher
+  name: disposable smoke rocket launcher
+  suffix: Smoke
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/disposal_rocket_launcher.rsi
+    layers:
+    - state: unwielded
+      map: [ base ]
+    - state: untype
+      map: [ type ]
+      color: "#201919"
+    - state: wielded
+      map: [ wielded ]
+      visible: false
+    - state: wieldedtype
+      map: [ wieldedType ]
+      color: "#201919"
+      visible: false
+  - type: BasicEntityAmmoProvider
+    proto: SunriseBulletDisposableSmokeRocket
+    capacity: 1
+    count: 1
+
+- type: entity
+  id: SunriseWeaponDisposableRocketLauncherIncendiary
+  parent: BaseWeaponDisposableRocketLauncher
+  name: disposable incendiary launcher
+  suffix: Incendiary
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/disposal_rocket_launcher.rsi
+    layers:
+    - state: unwielded
+      map: [ base ]
+    - state: untype
+      map: [ type ]
+      color: "#ff3333"
+    - state: wielded
+      map: [ wielded ]
+      visible: false
+    - state: wieldedtype
+      map: [ wieldedType ]
+      color: "#ff3333"
+      visible: false
+  - type: BasicEntityAmmoProvider
+    proto: SunriseBulletDisposableIncendiaryRocket
+    capacity: 1
+    count: 1

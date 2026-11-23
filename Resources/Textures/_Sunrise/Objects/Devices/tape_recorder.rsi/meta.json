@@ -1,0 +1,47 @@
+{
+    "version": 1,
+    "license": "CLA",
+    "copyright": "Made for Sunrise by yuzuki.mori (discord: yuzuki.mori)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "empty"
+        },
+        {
+            "name": "red"
+        },
+        {
+            "name": "red-alt"
+        },
+        {
+            "name": "yellow"
+        },
+        {
+            "name": "yellow-alt"
+        },
+        {
+            "name": "green"
+        },
+        {
+            "name": "green-alt"
+        },
+        {
+            "name": "inhand-left"
+        },
+        {
+            "name": "inhand-right"
+        },
+        {
+            "name": "inhand-left-alt"
+        },
+        {
+            "name": "inhand-right-alt"
+        }
+    ]
+}

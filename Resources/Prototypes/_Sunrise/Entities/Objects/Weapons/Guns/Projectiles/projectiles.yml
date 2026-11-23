@@ -1,4 +1,3 @@
-# region Base Projectiles
 - type: entity
   id: BaseBulletGrenade
   parent: BaseItem
@@ -33,6 +32,108 @@
         restitution: 0.05
         friction: 0.5
 # endregion Base Projectiles
+
+- type: entity
+  id: BulletMechWeakRocket
+  parent: BulletWeakRocket
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Explosive
+    maxTileBreak: 0
+
+- type: entity
+  id: SunriseBulletDisposableTrainingRocket
+  name: training rocket
+  parent: BulletWeakRocket
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    scale: 1.5, 1.5
+    layers:
+    - state: smallfrag
+
+- type: entity
+  id: SunriseBulletDisposableEmpRocket
+  name: EMP rocket
+  parent: BulletWeakRocket
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    scale: 1.5, 1.5
+    layers:
+    - state: smallfrag
+  - type: EmpOnTrigger
+    range: 6.5
+    energyConsumption: 50000
+  - type: Ammo
+    muzzleFlash: null
+
+- type: entity
+  id: SunriseBulletDisposableSmokeRocket
+  name: smoke rocket
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    rotation: -90
+    layers:
+    - state: rocket60mm
+  - type: SmokeOnTrigger
+    duration: 30
+    spreadAmount: 50
+  - type: EmitSoundOnTrigger
+    sound: /Audio/Items/smoke_grenade_smoke.ogg
+    positional: true
+  - type: DeleteOnTrigger
+  - type: Ammo
+    muzzleFlash: null
+  - type: PointLight
+    radius: 3.5
+    color: gray
+    energy: 0.5
+
+- type: entity
+  id: SunriseBulletDisposableIncendiaryRocket
+  name: thermobaric rocket
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    rotation: -90
+    layers:
+    - state: rocket60mm
+  - type: SmokeOnTrigger
+    duration: 30
+    spreadAmount: 60
+    solution:
+      reagents:
+      - ReagentId: PolytrinicAcid
+        Quantity: 30
+      - ReagentId: Napalm
+        Quantity: 60
+      - ReagentId: Phlogiston
+        Quantity: 10
+  - type: EmitSoundOnTrigger
+    sound: /Audio/Items/smoke_grenade_smoke.ogg
+    positional: true
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 0.01
+    intensitySlope: 1
+    maxIntensity: 0.01
+    tileBreakScale: 0.01
+  - type: DeleteOnTrigger
+  - type: Ammo
+    muzzleFlash: null
+  - type: PointLight
+    radius: 3.5
+    color: orange
+    energy: 0.5
 
 # region Sunrise ION
 - type: entity
@@ -105,7 +206,7 @@
   - type: RadarBlip
     color: "#55B8FF"
     scale: 1.1
-    shape: Circle # Sunrise-Edit
+    shape: Circle
     requireInSpace: true
 
 - type: entity
@@ -136,7 +237,7 @@
   - type: RadarBlip
     color: "#339CFF"
     scale: 1.35
-    shape: Circle # Sunrise-Edit
+    shape: Circle
     requireInSpace: true
   - type: ContainerContainer
     containers:
@@ -193,11 +294,11 @@
   - type: RadarBlip
     color: "#2F8BFF"
     scale: 1.25
-    shape: Circle # Sunrise-Edit
+    shape: Circle
     requireInSpace: true
 
 - type: entity
-  id: TeslaGunBulletOrion # Sunrise-Add
+  id: TeslaGunBulletOrion
   parent: TeslaGunBullet
   categories: [ HideSpawnMenu ]
   components:
@@ -404,7 +505,7 @@
   - type: SmokeOnTrigger
     keysIn:
     - timer
-    duration: 45 # Sunrise-Edit
+    duration: 45
     spreadAmount: 50
   - type: Ammo
     muzzleFlash: null
@@ -577,7 +678,7 @@
     keysIn:
     - timer
     sound:
-      path: "/Audio/_Sunrise/flashbang.ogg" # Sunrise-Edit
+      path: "/Audio/_Sunrise/flashbang.ogg"
       params:
         volume: 20
   - type: SpawnOnTrigger
@@ -908,25 +1009,6 @@
     - timer
 
 - type: entity
-  id: BulletHeavyRifleArtillery
-  name: bullet (.308)
-  parent: BaseBullet
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 25
-        Structural: 15
-  - type: StaminaDamageOnCollide
-    damage: 5
-  - type: RadarBlip
-    color: "#FF6A6A"
-    scale: 0.3
-    shape: Triangle
-    requireInSpace: true
-
-- type: entity
   id: BulletArtilleryShapnel
   name: bullet
   parent: BaseBullet
@@ -1067,6 +1149,21 @@
     scale: 0.3
     shape: Triangle
     requireInSpace: true
+
+- type: entity
+  id: BulletAntiMaterielHP
+  name: bullet (15mm hollow point)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 75
+        Blunt: 10
+        Slash: 10
+  - type: StaminaDamageOnCollide
+    damage: 40
 
 - type: entity
   id: BulletGrenadeFragArtillery
@@ -1358,15 +1455,15 @@
     drop: false
   - type: StaminaDamageOnCollide #additional stam damage to make repeated pushups less of a viable counter
     damage: 45
-  - type: SolutionContainerManager
-    solutions:
-      bolt:
-        maxVol: 3
-        reagents:
-        - ReagentId: Toxin
-          Quantity: 1.5
-        - ReagentId: Lead
-          Quantity: 1.5
+  - type: Solution
+    id: bolt
+    solution:
+      maxVol: 3
+      reagents:
+      - ReagentId: Toxin
+        Quantity: 1.5
+      - ReagentId: Lead
+        Quantity: 1.5
   - type: SolutionInjectOnProjectileHit
     transferAmount: 3
     solution: bolt
@@ -1453,3 +1550,47 @@
     count: 6
     spread: 20
 # end region PKA
+# Тяжёлый лазерный снаряд Sunrise, ранее находившийся в vanilla projectiles.yml.
+- type: entity
+  id: BulletLaserDestroy
+  parent: BaseBullet
+  name: destroying bolt
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: FlyBySound
+    sound:
+      collection: EnergyMiss
+      params:
+        volume: 5
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    layers:
+    - state: heavylaser
+      shader: unshaded
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.3,0.15,0.3"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+      fly-by:
+        shape:
+          !type:PhysShapeCircle
+          radius: 1.5
+        layer:
+        - Impassable
+        - MidImpassable
+        - HighImpassable
+        - LowImpassable
+        hard: false
+  - type: Ammo
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 50

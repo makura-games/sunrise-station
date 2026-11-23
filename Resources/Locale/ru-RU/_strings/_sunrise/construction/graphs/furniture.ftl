@@ -109,6 +109,6 @@ recipe-ChairWoodBench-description = Получили занозу? По край
 recipe-ChairWood-name = деревянный стул
 recipe-ChairWood-description = Вы сидите на нём. Либо по вашей воле, либо по принуждению.
 recipe-ChairWeb-name = паутинный стул
-recipe-ChairWeb-description = Для настоящих web-разработчиков.
+recipe-ChairWeb-description = Для настоящих веб-разработчиков.
 recipe-TableWeb-name = паутинный стол
 recipe-TableWeb-description = Очень гладкий и удивительно прочный.

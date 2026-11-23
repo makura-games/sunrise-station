@@ -1,3 +1,4 @@
+using System.Numerics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -27,6 +28,21 @@ public sealed partial class TutorialSequencePrototype : IPrototype
     public string Tooltip = string.Empty;
 
     /// <summary>
+    ///     Lower values are shown earlier inside a tutorial category.
+    /// </summary>
+    [DataField]
+    public int Priority;
+
+    /// <summary>
+    ///     Optional preview image displayed in the tutorial selection UI.
+    /// </summary>
+    [DataField]
+    public ResPath? Texture;
+
+    [DataField]
+    public Vector2 CropFocus = new(0.5f, 0.5f);
+
+    /// <summary>
     ///     Grid map loaded for this tutorial sequence.
     /// </summary>
     [DataField(required: true)]
@@ -39,20 +55,33 @@ public sealed partial class TutorialSequencePrototype : IPrototype
     public EntProtoId PlayerEntity;
 
     /// <summary>
-    ///     Texture displayed for this tutorial in the tutorial menu.
-    /// </summary>
-    [DataField(required: true)]
-    public ResPath Texture;
-
-    /// <summary>
-    ///     Duration of tutorial
+    ///     Maximum runtime before the tutorial is ended automatically.
     /// </summary>
     [DataField(required: true)]
     public TimeSpan Duration;
+
+    /// <summary>
+    ///     Estimated completion time displayed in the tutorial selection UI.
+    /// </summary>
+    [DataField(required: true)]
+    public TutorialDurationRange EstimatedDuration;
 
     /// <summary>
     ///     Ordered list of tutorial steps that make up this sequence.
     /// </summary>
     [DataField]
     public List<ProtoId<TutorialStepPrototype>> Steps = [];
+}
+
+/// <summary>
+///     Estimated minimum and maximum tutorial completion time.
+/// </summary>
+[DataDefinition]
+public readonly partial record struct TutorialDurationRange
+{
+    [DataField(required: true)]
+    public TimeSpan Minimum { get; init; }
+
+    [DataField(required: true)]
+    public TimeSpan Maximum { get; init; }
 }

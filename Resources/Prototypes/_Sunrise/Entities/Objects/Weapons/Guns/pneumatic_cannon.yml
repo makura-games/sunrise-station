@@ -44,9 +44,63 @@
     size: Normal
     shape:
     - 0,0,1,1
+    storedOffset: 0,-4
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
         children:
         - id: MiniSyringe
           amount: 10
+
+- type: entity
+  name: automatic syringe gun
+  description: Once a heavily modified toy for fun, this syringe gun can no longer be loaded by hand. Its built-in microreactor cell now synthesizes disposable syringes internally. No fun allowed.
+  parent: [BaseWeaponBattery, BaseMinorContraband]
+  id: LauncherSyringeAuto
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Cannons/syringe_gun.rsi
+    layers:
+    - state: syringe_gun
+  - type: Gun
+    fireRate: 1.3
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/syringe_gun.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg
+    clumsyProof: true
+  - type: BatteryAmmoProvider
+    proto: MiniSyringePyraDerma
+    fireCost: 1
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: MiniSyringePyraDerma
+      fireCost: 1
+    - proto: MiniSyringePunctTranex
+      fireCost: 1
+    - proto: MiniSyringeDexPlusSaline
+      fireCost: 1
+    - proto: MiniSyringeEphedrine
+      fireCost: 1
+  - type: Battery
+    maxCharge: 3
+    startingCharge: 3
+  - type: BatterySelfRecharger
+    autoRechargeRate: 0.111111
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,0
+    - 0,1,0,1
+    storedOffset: -5,-5
+    sprite: _Sunrise/Objects/Weapons/Guns/Cannons/syringe_gun.rsi
+  - type: Clothing
+    sprite: _Sunrise/Objects/Weapons/Guns/Cannons/syringe_gun.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage

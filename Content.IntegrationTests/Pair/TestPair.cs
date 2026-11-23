@@ -1,9 +1,7 @@
 ﻿#nullable enable
 using System.Collections.Generic;
-using Robust.Client.Audio.Midi;
 using Content.Client.IoC;
 using Content.Client.Parallax.Managers;
-using Content.IntegrationTests._Sunrise;
 using Content.IntegrationTests.Tests.Destructible;
 using Content.IntegrationTests.Tests.DeviceNetwork;
 using Content.Server.GameTicking;
@@ -39,12 +37,20 @@ public sealed partial class TestPair : RobustIntegrationTest.TestPair
                 map.Log.Level = LogLevel.Warning;
         };
 
+        // Sunrise added start - применяем ограничение и к журналам, созданным после чтения CVar
+        ConfigureLogLevels();
+        // Sunrise added end
+
         var settings = (PoolSettings)Settings;
         if (!settings.DummyTicker)
         {
             var gameTicker = Server.System<GameTicker>();
             await Server.WaitPost(() => gameTicker.RestartRound());
         }
+
+        // Sunrise added start - включаем диагностику времени только по запросу
+        await InitializeTimingDiagnostics();
+        // Sunrise added end
     }
 
     public override async Task RevertModifiedCvars()
@@ -94,15 +100,6 @@ public sealed partial class TestPair : RobustIntegrationTest.TestPair
         {
             LoadConfigAndUserData = false,
         };
-
-        // Sunrise edit start - подменяем клиентский MIDI backend до сборки IoC graph, чтобы instrument tests оставались headless
-        var previousInitIoC = opts.InitIoC;
-        opts.InitIoC = () =>
-        {
-            previousInitIoC?.Invoke();
-            IoCManager.Register<IMidiManager, DummyMidiManager>(true);
-        };
-        // Sunrise edit end
 
         opts.BeforeStart += () =>
         {

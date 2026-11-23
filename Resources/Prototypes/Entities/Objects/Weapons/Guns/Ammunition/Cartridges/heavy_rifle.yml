@@ -24,6 +24,12 @@
   name: cartridge (.10 rifle)
   parent: BaseCartridgeHeavyRifle
   components:
+  # Sunrise-start
+  - type: Tag
+    tags:
+    - CartridgeHeavyRifle
+    - CartridgeMinigun
   - type: CartridgeAmmo
     proto: BulletMinigunTrace
+  # Sunrise-end
     deleteOnSpawn: true

@@ -113,15 +113,14 @@
                                                 StyleClasses="ButtonBig"
                                                 Text="{Loc 'ui-lobby-ready-up-button'}"
                                                 ToggleMode="True" />
-                                            <cc:CommandButton
+                                            <Button
+                                                Name="TutorialButton"
                                                 Access="Public"
-                                                Command="ghostroles"
                                                 HorizontalAlignment="Stretch"
                                                 HorizontalExpand="True"
                                                 MinWidth="200"
-                                                Name="GhostRolesButton"
-                                                StyleClasses="ButtonBig"
-                                                Text="{Loc 'ghost-roles-window-title'}" />
+                                                StyleClasses="ButtonBig negative"
+                                                Text="{Loc 'ui-tutorial'}" />
                                         </BoxContainer>
                                     </controls:StripeBack>
                                     <RichTextLabel

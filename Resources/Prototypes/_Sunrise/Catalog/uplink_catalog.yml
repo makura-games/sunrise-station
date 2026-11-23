@@ -44,8 +44,8 @@
 
 - type: listing
   id: UplinkAmmoPouch
-  icon: { sprite: _RMC14/Objects/Clothing/Pouches/large_ammo_mag.rsi, state: icon }
-  productEntity: PouchAmmo
+  icon: { sprite: _Sunrise/Clothing/Pouches/medium_ammo_mag_pmc.rsi, state: icon }
+  productEntity: PouchAmmoSyndi
   categories:
   - UplinkWearables
   conditions:
@@ -53,13 +53,48 @@
     stock: 2
 
 - type: listing
-  id: UplinkPouchExplosive
-  icon: { sprite: _RMC14/Objects/Clothing/Pouches/large_explosive.rsi, state: icon }
-  productEntity: PouchExplosive
-  cost:
+  id: UplinkAmmoPouchMedium
+  icon: { sprite: _Sunrise/Clothing/Pouches/large_ammo_mag_pmc.rsi, state: icon }
+  productEntity: PouchAmmoMediumSyndi
+  discountDownTo:
     Telecrystal: 1
+  cost:
+    Telecrystal: 2
   categories:
   - UplinkWearables
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+
+- type: listing
+  id: UplinkAmmoPouchLarge
+  icon: { sprite: _Sunrise/Clothing/Pouches/mg_ammo.rsi, state: icon }
+  productEntity: PouchAmmoLarge
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkWearables
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+
+- type: listing
+  id: UplinkPouchExplosive
+  icon: { sprite: _Sunrise/Clothing/Pouches/large_explosive.rsi, state: icon }
+  productEntity: PouchExplosive
+  categories:
+  - UplinkWearables
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 2
 
 - type: listing
   id: UplinkClothingEyesHudSyndicateMech
@@ -108,7 +143,7 @@
   id: UplinkOuterHardsuitChameleon
   name: uplink-clothing-outer-hardsuit-chameleon-name
   description: uplink-clothing-hardsuit-chameleon-desc
-  productEntity: ClothingOuterHardsuitChameleon
+  productEntity: BoxHardsuitChameleon
   discountCategory: rareDiscounts
   discountDownTo:
     Telecrystal: 3
@@ -130,6 +165,26 @@
   productEntity: ClothingOuterVestWebEliteChameleon
   cost:
     Telecrystal: 6
+  categories:
+  - UplinkWearables
+
+- type: listing
+  id: UplinkClothingBeltSyndicateUtility
+  name: uplink-clothing-belt-syndicate-utility-name
+  description: uplink-clothing-belt-syndicate-utility-desc
+  productEntity: ClothingBeltSyndicateUtility
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkWearables
+
+- type: listing
+  id: UplinkClothingBeltSyndicateUtilityChameleon
+  name: uplink-clothing-belt-syndicate-utility-chameleon-name
+  description: uplink-clothing-belt-syndicate-utility-chameleon-desc
+  productEntity: ClothingBeltSyndicateUtilityChameleon
+  cost:
+    Telecrystal: 2
   categories:
   - UplinkWearables
 
@@ -208,7 +263,7 @@
 
 - type: listing
   id: UplinkMagazinePistol40SMGSP
-  description: uplink-pistol-magazine-c40r-desc
+  description: uplink-pistol-magazine-vector-super-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
   productEntity: MagazinePistol40SubMachineGunSP
   cost:
@@ -218,7 +273,7 @@
 
 - type: listing
   id: UplinkMagazinePistol40SMGHP
-  description: uplink-pistol-magazine-c40r-desc
+  description: uplink-pistol-magazine-vector-super-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
   productEntity: MagazinePistol40SubMachineGunHP
   cost:
@@ -228,7 +283,7 @@
 
 - type: listing
   id: UplinkMagazinePistol40SMGFMJ
-  description: uplink-pistol-magazine-c40r-desc
+  description: uplink-pistol-magazine-vector-super-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
   productEntity: MagazinePistol40SubMachineGunFMJ
   cost:
@@ -283,7 +338,7 @@
 - type: listing
   id: UplinkMagazineRifleHP
   description: uplink-estoc-ammo-desc
-  productEntity: MagazineRifleHP
+  productEntity: MagazineRifleSP
   cost:
     Telecrystal: 1
   categories:
@@ -306,15 +361,25 @@
     Telecrystal: 2
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - AssaultOpsUplink
 
 - type: listing
   id: UplinkMagazineLightRifleHP
   description: uplink-skm24-ammo-desc
-  productEntity: MagazineLightRifleHP
+  productEntity: MagazineLightRifleSP
   cost:
     Telecrystal: 2
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - AssaultOpsUplink
 
 - type: listing
   id: UplinkMagazineLightRifleFMJ
@@ -324,33 +389,53 @@
     Telecrystal: 2
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - AssaultOpsUplink
 
 - type: listing
   id: UplinkMagazineRifleHeavySP
   description: uplink-skm28-ammo-desc
   productEntity: MagazineRifleHeavySP
   cost:
-    Telecrystal: 3
+    Telecrystal: 2
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - AssaultOpsUplink
 
 - type: listing
   id: UplinkMagazineRifleHeavyHP
   description: uplink-skm28-ammo-desc
-  productEntity: MagazineRifleHeavyHP
+  productEntity: MagazineRifleHeavySP
   cost:
-    Telecrystal: 3
+    Telecrystal: 2
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - AssaultOpsUplink
 
 - type: listing
   id: UplinkMagazineRifleHeavyFMJ
   description: uplink-skm28-ammo-desc
   productEntity: MagazineRifleHeavyFMJ
   cost:
-    Telecrystal: 3
+    Telecrystal: 2
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - AssaultOpsUplink
 
 # For the LMG
 - type: listing
@@ -389,6 +474,43 @@
       - NukeOpsUplink
       - LoneOpsUplink
 
+# For the L6 MAX
+- type: listing
+  id: UplinkRifleHeavyMagazineSP
+  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/mg42_large.rsi, state: icon }
+  productEntity: RifleHeavyMagazineSP
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+
+- type: listing
+  id: UplinkRifleHeavyMagazineFMJ
+  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/mg42_large.rsi, state: icon }
+  productEntity: RifleHeavyMagazineFMJ
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 3
+  cost:
+    Telecrystal: 5
+  categories:
+  - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+
 # For the SIAR52
 - type: listing
   id: UplinkMagazinePistolSubMachineGunCaselessExtended
@@ -403,26 +525,6 @@
     Telecrystal: 3
   categories:
   - UplinkAmmo
-
-- type: listing
-  id: UplinkMagazineDl6902
-  name: uplink-magazine-dl6902-name
-  description: uplink-magazine-dl6902-desc
-  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/dl6902_mag.rsi, state: base }
-  productEntity: MagazineDl6902
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 3
-  cost:
-    Telecrystal: 6
-  categories:
-  - UplinkAmmo
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
 
 # region SR-127
 - type: listing
@@ -440,6 +542,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
+      - AssaultOpsUplink
 
 - type: listing
   id: UplinkMagazineBauer127Penetrator
@@ -459,6 +562,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
+      - AssaultOpsUplink
 
 - type: listing
   id: UplinkMagazineBauer127Frag
@@ -484,11 +588,8 @@
   description: uplink-magazine-127emp-desc
   icon: { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/sr127_mag.rsi, state: emp }
   productEntity: MagazineBauer127Emp
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 1
   cost:
-    Telecrystal: 2
+    Telecrystal: 1
   categories:
   - UplinkAmmo
   conditions:
@@ -497,6 +598,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
+      - AssaultOpsUplink
 
 - type: listing
   id: UplinkMagazineBauer127Blast
@@ -508,6 +610,25 @@
     Telecrystal: 2
   cost:
     Telecrystal: 3
+  categories:
+  - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+
+- type: listing
+  id: UplinkMagazineBauer127HP
+  description: uplink-magazine-127hp-desc
+  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/sr127_mag.rsi, state: base_icon }
+  productEntity: MagazineBauer127HP
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
   categories:
   - UplinkAmmo
   conditions:
@@ -574,6 +695,20 @@
       - AssaultOpsUplink
 
 - type: listing
+  id: UplinkBoxAntiMaterielHP
+  description: uplink-sniper-ammo-hp-desc
+  productEntity: MagazineBoxAntiMaterielHP
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - AssaultOpsUplink
+
+- type: listing
   id: UplinkMagazineDragunov
   description: uplink-magazine-dragunov-sp-desc
   icon: { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/dragunov_mag.rsi, state: base }
@@ -585,9 +720,9 @@
 
 - type: listing
   id: UplinkMagazineDragunovHP
-  description: uplink-magazine-dragunov-hp-desc
+  description: uplink-magazine-dragunov-sp-desc
   icon: { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/dragunov_mag.rsi, state: base }
-  productEntity: MagazineDragunovHP
+  productEntity: MagazineDragunovSP
   cost:
     Telecrystal: 1
   categories:
@@ -602,6 +737,109 @@
     Telecrystal: 1
   categories:
   - UplinkAmmo
+
+- type: listing
+  id: UplinkMagazineDragunovAPAssaultOps
+  name: uplink-magazine-dragunov-ap-name
+  description: uplink-magazine-dragunov-ap-desc
+  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/dragunov_mag.rsi, state: base }
+  productEntity: MagazineDragunovAP
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - AssaultOpsUplink
+
+- type: listing
+  id: UplinkEcronizer
+  name: uplink-ecronizer-name
+  description: uplink-ecronizer-desc
+  productEntity: Ecronizer
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkLubeGrenade
+  name: uplink-lube-grenade-name
+  description: uplink-lube-grenade-desc
+  productEntity: LubeGrenade
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkGlueGrenade
+  name: uplink-glue-grenade-name
+  description: uplink-glue-grenade-desc
+  productEntity: GlueGrenade
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkGrenadeLauncherChinaLake
+  name: uplink-grenade-launcher-china-lake-name
+  description: uplink-grenade-launcher-china-lake-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Launchers/china_lake.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateFilledGrenadeLauncher
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 14
+  cost:
+    Telecrystal: 20
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+
+- type: listing
+  id: UplinkDuffelSurgery
+  name: uplink-duffel-surgery-name
+  description: uplink-duffel-surgery-desc
+  productEntity: ClothingBackpackDuffelSyndicateFilledMedical
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkCybernetics
 
 - type: listing
   id: UplinkMagazineDragunovIncendiary
@@ -631,6 +869,22 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
+
+- type: listing
+  id: UplinkMagazineDragunovUraniumAssaultOps
+  name: uplink-magazine-dragunov-uranium-name
+  description: uplink-magazine-dragunov-uranium-desc
+  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/dragunov_mag.rsi, state: base }
+  productEntity: MagazineDragunovUranium
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - AssaultOpsUplink
 
 # For the mosin
 - type: listing
@@ -693,9 +947,9 @@
   productEntity: SyndicateVisceratorClusterGrenade
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 2
   cost:
-    Telecrystal: 5
+    Telecrystal: 4
   categories:
   - UplinkExplosives
 
@@ -965,12 +1219,12 @@
   - UplinkPointless
 
 - type: listing
-  id: UplinkMechPaintMaulerMeowler
-  name: uplink-mechpaint-mauler-name
-  description: uplink-mechpaint-mauler-desc
-  productEntity: MechPaintMaulerMeowler
+  id: SunriseUplinkSyndicateRing
+  name: uplink-syndicate-ring-name
+  description: uplink-syndicate-ring-desc
+  productEntity: SunriseSyndicateRing
   cost:
-    Telecrystal: 1
+    Telecrystal: 18
   categories:
   - UplinkPointless
   conditions:
@@ -978,7 +1232,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink
 
 - type: listing
   id: UplinkClothingBackpackSyndie
@@ -1008,9 +1261,14 @@
   discountDownTo:
     Telecrystal: 5
   cost:
-    Telecrystal: 8
+    Telecrystal: 9
   categories:
   - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - AssaultOpsUplink
 
 - type: listing
   id: UplinkSKM28
@@ -1025,6 +1283,32 @@
     Telecrystal: 18
   categories:
   - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - AssaultOpsUplink
+
+- type: listing
+  id: UplinkWeaponType88AMRAssaultOps
+  name: uplink-type88-amr-name
+  description: uplink-type88-amr-desc
+  productEntity: BriefcaseWeaponType88AMRFilled
+  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Snipers/type88/big.rsi, state: base }
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 14
+  cost:
+    Telecrystal: 18
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+      - AssaultOpsUplink
 
 - type: listing
   id: UplinkAJ100
@@ -1036,7 +1320,7 @@
   discountDownTo:
     Telecrystal: 8
   cost:
-    Telecrystal: 11
+    Telecrystal: 13
   categories:
   - UplinkWeaponry
   conditions:
@@ -1045,6 +1329,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
+      - AssaultOpsUplink
 
 - type: listing
   id: UplinkClothingBackpackSyndieAJ100Filled
@@ -1067,11 +1352,11 @@
       - LoneOpsUplink
 
 - type: listing
-  id: UplinkC40R
-  name: uplink-c40r-name
-  description: uplink-c40r-desc
-  icon: { sprite: _Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi, state: icon }
-  productEntity: BriefcaseWeaponC40Filled
+  id: UplinkVectorSuper
+  name: uplink-vector-super-name
+  description: uplink-vector-super-desc
+  icon: { sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi, state: icon }
+  productEntity: BriefcaseWeaponVectorFilled
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 8
@@ -1087,11 +1372,11 @@
       - LoneOpsUplink
 
 - type: listing
-  id: UplinkC40RBundle
-  name: uplink-c40r-bundle-name
-  description: uplink-c40r-bundle-desc
-  icon: { sprite: _Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi, state: icon }
-  productEntity: ClothingBackpackDuffelSyndicateFilledSMG40
+  id: UplinkVectorSuperBundle
+  name: uplink-vector-super-bundle-name
+  description: uplink-vector-super-bundle-desc
+  icon: { sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateFilledVectorSuper
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 10
@@ -1114,9 +1399,9 @@
   productEntity: ClothingBackpackDuffelSyndicateFilledLMGMax
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 20
+    Telecrystal: 24
   cost:
-    Telecrystal: 25
+    Telecrystal: 30
   categories:
   - UplinkWeaponry
   conditions:
@@ -1124,26 +1409,6 @@
     blacklist:
       tags:
       - AssaultOpsUplink
-
-- type: listing
-  id: UplinkClothingBackpackSyndieDL6902Filled
-  name: uplink-clothing-backpack-syndie-dl6902-name
-  productEntity: ClothingBackpackSyndieDL6902Filled
-  description: uplink-clothing-backpack-syndie-dl6902-desc
-  icon: { sprite: _Sunrise/Objects/Weapons/Guns/LMGs/dl6902.rsi, state: icon }
-  discountCategory: veryRareDiscounts
-  discountDownTo:
-    Telecrystal: 20
-  cost:
-    Telecrystal: 30
-  categories:
-  - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
 
 - type: listing
   id: UplinkPowerpackDL6902
@@ -1174,7 +1439,7 @@
   discountDownTo:
     Telecrystal: 8
   cost:
-    Telecrystal: 9
+    Telecrystal: 11
   categories:
   - UplinkWeaponry
   conditions:
@@ -1183,12 +1448,13 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
+      - AssaultOpsUplink
 
 - type: listing
   id: UplinkClothingBackpackSyndieSIAR52Filled
   name: uplink-clothing-backpack-syndie-siar52-name
   productEntity: ClothingBackpackSyndieSIAR52Filled
-  description: uplink-clothing-backpack-syndie-siar52-name
+  description: uplink-clothing-backpack-syndie-siar52-desc
   icon: { sprite: _Sunrise/Objects/Weapons/Guns/SMGs/iar_52.rsi, state: icon }
   discountCategory: veryRareDiscounts
   discountDownTo:
@@ -1203,6 +1469,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
+      - AssaultOpsUplink
 
 - type: listing
   id: UplinkWeaponLaserMinigun
@@ -1232,7 +1499,7 @@
   discountDownTo:
     Telecrystal: 15
   cost:
-    Telecrystal: 25
+    Telecrystal: 20
   categories:
   - UplinkWeaponry
   conditions:
@@ -1264,7 +1531,7 @@
   discountDownTo:
     Telecrystal: 18
   cost:
-    Telecrystal: 23
+    Telecrystal: 28
   categories:
   - UplinkWeaponry
   conditions:
@@ -1276,27 +1543,6 @@
 
 # region Hardsuits
 - type: listing
-  id: UplinkHardsuitInfiltrationNukie
-  name: uplink-hardsuit-infiltration-name
-  description: uplink-hardsuit-infiltration-desc
-  icon: { sprite: _Starlight/Objects/Clothing/OuterClothing/Hardsuits/infiltrationsyndie.rsi, state: icon }
-  productEntity: ClothingBackpackDuffelSyndicateFilledInfiltration
-  discountCategory: veryRareDiscounts
-  discountDownTo:
-    Telecrystal: 5
-  cost:
-    Telecrystal: 10
-  categories:
-  - UplinkWearables
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
-      - AssaultOpsUplink
-
-- type: listing
   id: UplinkHardsuitInfiltration
   name: uplink-hardsuit-infiltration-name
   description: uplink-hardsuit-infiltration-desc
@@ -1304,19 +1550,11 @@
   productEntity: ClothingBackpackDuffelSyndicateFilledInfiltration
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 5
+    Telecrystal: 8
   cost:
     Telecrystal: 10
   categories:
   - UplinkWearables
-  restockTime: 1800
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
-      - AssaultOpsUplink
 
 # region Objective-specific
 - type: listing
@@ -1328,7 +1566,7 @@
     state: closed
   productEntity: ToolboxSyndicateFilledCoreExtraction
   categories:
-  - UplinkObjectives
+  - UplinkObjective
   conditions:
   - !type:ObjectiveUnlockCondition
   - !type:ListingLimitedStockCondition
@@ -1553,6 +1791,12 @@
     Telecrystal: 1
   categories:
     - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
 
 - type: listing
   id: UplinkSyndicateRapier
@@ -1578,13 +1822,13 @@
   id: UplinkFireAxeFlaming
   name: uplink-fire-axe-flaming-name
   description: uplink-fire-axe-flaming-desc
-  icon: { sprite: Objects/Weapons/Melee/fireaxeflaming.rsi, state: icon }
+  icon: { sprite: _Sunrise/Objects/Weapons/Melee/fireaxeflaming.rsi, state: icon }
   productEntity: FireAxeFlaming
   discountCategory: rareDiscounts
   discountDownTo:
     Telecrystal: 4
   cost:
-    Telecrystal: 6
+    Telecrystal: 8
   categories:
   - UplinkWeaponry
 
@@ -1601,32 +1845,13 @@
   categories:
   - UplinkWeaponry
 
-- type: listing
-  id: UplinkEswordNuke
-  name: uplink-esword-name
-  description: uplink-esword-desc
-  icon: { sprite: Objects/Weapons/Melee/e_sword.rsi, state: icon }
-  discountCategory: veryRareDiscounts
-  discountDownTo:
-    Telecrystal: 5
-  productEntity: EnergySwordBiocode
-  cost:
-    Telecrystal: 12
-  categories:
-  - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-
 - type: listing # Starlight
   id: UplinkWeaponPistolStechkinBundle
   name: uplink-stechkin-bundle-name
   description: uplink-stechkin-bundle-desc
   icon:
     {
-      sprite: /Textures/_Starlight/Objects/Weapons/Guns/Pistols/stechkin.rsi,
+      sprite: /Textures/_Starlight/Objects/Weapons/Guns/Pistols/aps.rsi,
       state: icon,
     }
   productEntity: BigBoxSyndicateBundle
@@ -1637,6 +1862,11 @@
     Telecrystal: 6
   categories:
     - UplinkWeaponry
+  conditions:
+    - !type:StoreWhitelistCondition
+      blacklist:
+        tags:
+          - AssaultOpsUplink
 
 - type: listing
   id: UplinkPolytrinicAcidChemistryBottle
@@ -1778,7 +2008,7 @@
   icon: { sprite: Objects/Specific/Mech/gygax.rsi, state: darkgygax }
   productEntity: CrateCybersunDarkGygaxBundle
   cost:
-    Telecrystal: 30
+    Telecrystal: 40
   categories:
   - UplinkMechs
   conditions:
@@ -1866,11 +2096,31 @@
   description: uplink-mech-equipment-shotgun-desc
   icon: { sprite: Objects/Specific/Mech/mecha_equipment.rsi, state: mecha_scatter }
   productEntity: WeaponMechCombatShotgun
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkMechs
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+    blacklist:
+      components:
+      - SurplusBundle
+
+- type: listing
+  id: UplinkMechShotgunAuto
+  name: uplink-mech-equipment-shotgun-auto-name
+  description: uplink-mech-equipment-shotgun-auto-desc
+  icon: { sprite: Objects/Specific/Mech/mecha_equipment.rsi, state: mecha_scatter }
+  productEntity: WeaponMechCombatShotgunAuto
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 3
   cost:
-    Telecrystal: 4
+    Telecrystal: 5
   categories:
   - UplinkMechs
   conditions:
@@ -1893,7 +2143,7 @@
   discountDownTo:
     Telecrystal: 4
   cost:
-    Telecrystal: 6
+    Telecrystal: 5
   categories:
   - UplinkMechs
   conditions:
@@ -1954,6 +2204,8 @@
 
 - type: listing
   id: UplinkMechChainSword
+  name: uplink-mech-equipment-chain-sword-name
+  description: uplink-mech-equipment-chain-sword-desc
   icon: { sprite: Objects/Specific/Mech/mecha_equipment.rsi, state: mecha_chainsword }
   productEntity: WeaponMechChainSword
   discountCategory: rareDiscounts
@@ -1987,7 +2239,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink
     blacklist:
       components:
       - SurplusBundle
@@ -2030,13 +2281,14 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink
     blacklist:
       components:
       - SurplusBundle
 
 - type: listing
   id: UplinkMechChaingun
+  name: uplink-mech-equipment-chaingun-name
+  description: uplink-mech-equipment-chaingun-desc
   productEntity: WeaponMechCombatChaingun
   cost:
     Telecrystal: 10
@@ -2053,27 +2305,12 @@
       - SurplusBundle
 
 - type: listing
-  id: UplinkMechMaxim
-  productEntity: WeaponMechCombatMaxim
-  cost:
-    Telecrystal: 12
-  categories:
-  - UplinkMechs
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
-    blacklist:
-      components:
-      - SurplusBundle
-
-- type: listing
   id: UplinkMechHeavyRifle
+  name: uplink-mech-equipment-heavy-rifle-name
+  description: uplink-mech-equipment-heavy-rifle-desc
   productEntity: WeaponMechCombatHeavyRifle
   cost:
-    Telecrystal: 13
+    Telecrystal: 15
   categories:
   - UplinkMechs
   conditions:
@@ -2101,7 +2338,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink
     blacklist:
       components:
       - SurplusBundle
@@ -2323,6 +2559,11 @@
     Telecrystal: 7
   categories:
   - UplinkExplosives
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - AssaultOpsUplink
 
 - type: listing
   id: UplinkX4
@@ -2348,7 +2589,7 @@
   discountDownTo:
     Telecrystal: 12
   cost:
-    Telecrystal: 18
+    Telecrystal: 14
   categories:
   - UplinkExplosives
   conditions:
@@ -2374,26 +2615,26 @@
     whitelist:
     - AtmosphericTechnician
 
-# - type: listing
-#   id: UplinkMedHyposprayNoFilter  # Sunrise-todo: change to jet injector
-#   name: uplink-med-hypospray-name
-#   description: uplink-med-hypospray-desc
-#   productEntity: HyposprayMedicalNoFilterBox
-#   discountCategory: rareDiscounts
-#   discountDownTo:
-#     Telecrystal: 2
-#   cost:
-#     Telecrystal: 4
-#   categories:
-#   - UplinkJob
-#   conditions:
-#   - !type:BuyerJobCondition
-#     whitelist:
-#     - MedicalDoctor
-#     - Chemist
-#     - Paramedic
-#     - SeniorPhysician
-#     - MedicalIntern
+- type: listing
+  id: UplinkMedHyposprayNoFilter
+  name: uplink-med-hypospray-name
+  description: uplink-med-hypospray-desc
+  productEntity: JetInjectorSyndicateBox
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - MedicalDoctor
+    - Chemist
+    - Paramedic
+    - SeniorPhysician
+    - MedicalIntern
 
 - type: listing
   id: UplinkSyringePistol
@@ -2442,6 +2683,7 @@
 
 - type: listing
   id: UplinkMechMissileRack8Frag
+  name: uplink-mech-missile-rack8frag-name
   description: uplink-mech-missile-rack8frag-desc
   productEntity: WeaponMechCombatMissileRack8Frag
   discountCategory: veryRareDiscounts
@@ -2549,6 +2791,8 @@
 
 - type: listing
   id: UplinkMechChainSwordRoboticist
+  name: uplink-mech-equipment-chain-sword-name
+  description: uplink-mech-equipment-chain-sword-desc
   icon: { sprite: Objects/Specific/Mech/mecha_equipment.rsi, state: mecha_chainsword }
   productEntity: WeaponMechChainSword
   discountCategory: rareDiscounts
@@ -2570,8 +2814,29 @@
       - SurplusBundle
 
 - type: listing
+  id: UplinkRoverAssemblyRoboticist
+  name: uplink-rover-assembly-crate-name
+  description: uplink-rover-assembly-crate-desc
+  icon: { sprite: _Sunrise/Objects/Specific/Mech/durand_construction.rsi, state: darkdurand_armor }
+  productEntity: SunriseCrateRoverAssembly
+  cost:
+    Telecrystal: 8
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 3
+  - !type:BuyerJobCondition
+    whitelist:
+    - Roboticist
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
+
+- type: listing
   id: UplinkDeathRipley
-  name: uplink-mech-teleporter-heavy-name
+  name: uplink-mech-teleporter-death-name
   description: uplink-mech-teleporter-death-desc
   icon: { sprite: Objects/Specific/Mech/ripley.rsi, state: death }
   productEntity: CrateCybersunRipleyBundle
@@ -2611,24 +2876,6 @@
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
-  - !type:BuyerJobCondition
-    whitelist:
-    - Roboticist
-  - !type:BuyerWhitelistCondition
-    blacklist:
-      components:
-      - SurplusBundle
-
-- type: listing
-  id: UplinkWeaponMechCombatKordRoboticist
-  name: uplink-mech-equipment-kord-name
-  description: uplink-mech-equipment-kord-desc
-  productEntity: WeaponMechCombatKord
-  cost:
-    Telecrystal: 15
-  categories:
-  - UplinkJob
-  conditions:
   - !type:BuyerJobCondition
     whitelist:
     - Roboticist
@@ -2694,6 +2941,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
+      - AssaultOpsUplink
 
 - type: listing
   id: UplinkWeaponShotgunMinotaurBundle
@@ -2782,29 +3030,9 @@
       - AssaultOpsUplink
 
 - type: listing
-  id: UplinkGrenadeLauncherM79Bundle
-  name: uplink-grenade-launcher-m79-bundle-name
-  description: uplink-grenade-launcher-m79-bundle-desc
-  icon: { sprite: _RMC14/Objects/Weapons/Guns/Launchers/m79/big.rsi, state: base }
-  productEntity: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherM79
-  discountCategory: veryRareDiscounts
-  discountDownTo:
-    Telecrystal: 10 # Good morning Vietnam!
-  cost:
-    Telecrystal: 14
-  categories:
-  - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink
-
-- type: listing
   id: UplinkGrenadeLauncherGL70
-  name: uplink-grenade-launcher-gl70-name
-  description: uplink-grenade-launcher-gl70-desc
+  name: uplink-sunrise-grenade-launcher-gl70-name
+  description: uplink-sunrise-grenade-launcher-gl70-desc
   icon: { sprite: _Sunrise/Objects/Weapons/Guns/HMGs/gl-64/big.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherGL70
   discountCategory: veryRareDiscounts
@@ -3062,7 +3290,7 @@
   id: UplinkSunriseClericalErrorDeclaratorNuke
   productEntity: SunriseClericalErrorDeclarator
   cost:
-    Telecrystal: 10
+    Telecrystal: 9
   categories:
   - UplinkDisruption
   conditions:
@@ -3098,7 +3326,7 @@
   id: UplinkSunriseBreakerFlipDeclaratorNuke
   productEntity: SunriseBreakerFlipDeclarator
   cost:
-    Telecrystal: 10
+    Telecrystal: 9
   categories:
   - UplinkDisruption
   conditions:
@@ -3134,7 +3362,7 @@
   id: UplinkSunrisePowerGridCheckDeclaratorNuke
   productEntity: SunrisePowerGridCheckDeclarator
   cost:
-    Telecrystal: 10
+    Telecrystal: 9
   categories:
   - UplinkDisruption
   conditions:
@@ -3170,7 +3398,7 @@
   id: UplinkSunriseMeteorDustDeclaratorNuke
   productEntity: SunriseMeteorDustDeclarator
   cost:
-    Telecrystal: 10
+    Telecrystal: 9
   categories:
   - UplinkDisruption
   conditions:
@@ -3262,20 +3490,6 @@
   - UplinkPointless
 
 - type: listing
-  id: UplinkWeaponPistolTec9
-  name: uplink-pistoltec9-name
-  description: uplink-pistoltec9-desc
-  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Pistols/tec9tactical/big.rsi, state: icon }
-  productEntity: WeaponPistolTec9
-  discountCategory: rareDiscounts
-  discountDownTo:
-    Telecrystal: 3
-  cost:
-    Telecrystal: 5
-  categories:
-  - UplinkWeaponry
-
-- type: listing
   id: UplinkPizzaBomb
   name: uplink-pizza-bomb-name
   description: uplink-pizza-bomb-desc
@@ -3289,7 +3503,7 @@
     - UplinkExplosives
 
 - type: listing
-  id: UplinkEshieldTraitor
+  id: UplinkEshield
   name: uplink-eshield-name
   description: uplink-eshield-desc
   icon:
@@ -3298,18 +3512,25 @@
   productEntity: EnergyShield
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 3
   cost:
-    Telecrystal: 4
+    Telecrystal: 6
   categories:
     - UplinkWeaponry
-  conditions:
-    - !type:StoreWhitelistCondition
-      blacklist:
-        tags:
-          - NukeOpsUplink
-          - LoneOpsUplink
-          - AssaultOpsUplink
+
+- type: listing
+  id: UplinkEshieldExperimental
+  name: uplink-experimental-eshield-name
+  description: uplink-experimental-eshield-desc
+  icon: { sprite: /Textures/Objects/Weapons/Melee/e_shield.rsi, state: eshield-on }
+  productEntity: SunriseEnergyShield
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 6
+  cost:
+    Telecrystal: 12
+  categories:
+  - UplinkWeaponry
 
 - type: listing
   id: UplinkCornivoreGloves
@@ -3339,28 +3560,16 @@
   - UplinkWeaponry
 
 - type: listing
-  id: UplinkWeaponStechkinAPS
-  name: uplink-stechkin-aps-name
-  description: uplink-stechkin-aps-desc
-  productEntity: SunriseWeaponPistolAPS
-  discountCategory: rareDiscounts
-  discountDownTo:
-    Telecrystal: 3
-  cost:
-    Telecrystal: 4
-  categories:
-  - UplinkWeaponry
-
-- type: listing
   id: UplinkWeaponBreachingHammer
   name: uplink-SyndieBreachingHammer-name
   description: uplink-SyndieBreachingHammer-desc
   productEntity: SyndieBreachingHammer
+  icon: { sprite: _Sunrise/Objects/Weapons/Melee/syndie_breaching_hammer.rsi, state: icon }
   discountCategory: rareDiscounts
   discountDownTo:
     Telecrystal: 5
   cost:
-    Telecrystal: 6
+    Telecrystal: 7
   categories:
   - UplinkWeaponry
 
@@ -3414,6 +3623,23 @@
   - UplinkWearables
 
 - type: listing
+  id: UplinkGrenadeBelt
+  name: uplink-grenade-belt-name
+  description: uplink-grenade-belt-desc
+  icon: { sprite: _Sunrise/Clothing/Belt/grenadebelt.rsi, state: icon }
+  productEntity: ClothingBeltMilitaryBeltGrenade
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkWearables
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+
+- type: listing
   id: UplinkClothingOuterElegantArmorRaidNuke
   name: uplink-syndie-maid-raid-name
   description: uplink-syndie-maid-raid-desc
@@ -3454,20 +3680,6 @@
     blacklist:
       components:
       - SurplusBundle
-
-- type: listing
-  id: SyndicateShuttleBoard
-  name: uplink-shuttle-board-name
-  description: uplink-shuttle-board-desc
-  productEntity: SyndicateShuttleConsoleCircuitboard
-  icon: { sprite: Objects/Misc/module.rsi, state: cpu_syndicate }
-  discountCategory: rareDiscounts
-  discountDownTo:
-    Telecrystal: 1
-  cost:
-    Telecrystal: 2
-  categories:
-  - UplinkShuttle
 
 - type: listing
   id: SyndicateGunneryBoard
@@ -3595,3 +3807,140 @@
     blacklist:
       components:
       - SurplusBundle
+
+# region Assault Ops
+- type: listing
+  id: UplinkCleanerGrenadeAcidBoxAssaultOps
+  name: uplink-heavy-cleanade-name
+  description: uplink-heavy-cleanade-desc
+  productEntity: CleanerGrenadeAcidBox
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - AssaultOpsUplink
+
+- type: listing
+  id: UplinkCaneShotgunAssaultOps
+  name: uplink-cane-shotgun-name
+  description: uplink-cane-shotgun-desc
+  icon: { sprite: Objects/Weapons/Melee/cane.rsi, state: cane }
+  productEntity: CaneShotgunBox
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - AssaultOpsUplink
+
+- type: listing
+  id: UplinkContortionistJumpsuitAssaultOps
+  name: uplink-contortionist-jumpsuit-name
+  description: uplink-contortionist-jumpsuit-desc
+  productEntity: ClothingUniformJumpsuitAtmosSyndie
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 8
+  cost:
+    Telecrystal: 12
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - AssaultOpsUplink
+
+- type: listing
+  id: UplinkCaneBladeAssaultOps
+  name: uplink-cane-blade-name
+  description: uplink-cane-blade-desc
+  icon: { sprite: Objects/Weapons/Melee/cane.rsi, state: cane }
+  productEntity: CaneSheathFilled
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - AssaultOpsUplink
+
+- type: listing
+  id: uplinkBriefcaseGunAssOps
+  name: uplink-briefcase-gun-name
+  description: uplink-briefcase-gun-desc
+  productEntity: WeaponSubMachineGunBriefcase
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 4
+  cost:
+    Telecrystal: 8
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - AssaultOpsUplink
+
+- type: listing
+  id: UplinkSyringePistolAssaultOps
+  productEntity: LauncherSyringePistol
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkChemicals
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - AssaultOpsUplink
+
+- type: listing
+  id: UplinkSyringeGunAutoAssaultOps
+  productEntity: LauncherSyringeRapid
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkChemicals
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - AssaultOpsUplink
+
+- type: listing
+  id: UplinkMedHyposprayNoFilterAssaultOps
+  name: uplink-med-hypospray-name
+  description: uplink-med-hypospray-desc
+  productEntity: JetInjectorSyndicateBox
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkChemicals
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - AssaultOpsUplink

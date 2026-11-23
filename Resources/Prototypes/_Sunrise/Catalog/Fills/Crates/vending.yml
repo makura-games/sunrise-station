@@ -22,3 +22,16 @@
       entity_storage: !type:AllSelector
         children:
         - id: VendingMachineRestockDonk
+
+- type: entity
+  id: CrateVendingMachineRestockInstrumentsMateFilled
+  parent: CratePlastic
+  name: InstrumentsMate restock crate
+  description: Contains restock box for InstrumentsMate vending machine.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: VendingMachineRestockInstrumentsMate
+          amount: 1

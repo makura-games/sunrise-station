@@ -23,7 +23,7 @@
   editors: Odleer
 
 - files: ["marathon.yml"]
-  editors: Odleer
+  editors: SliZen, kerrfuss
 
 - files: ["cluster.yml"]
   editors: Odleer
@@ -31,4 +31,8 @@
 - files: ["meta.yml"]
   editors: J C Denton, freychik
 
+- files: ["packed.yml"]
+  editors: SliZen, privett
 
+- files: ["train.yml"]
+  editors: kerrfuss, SliZen

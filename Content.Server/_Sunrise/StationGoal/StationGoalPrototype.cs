@@ -1,6 +1,4 @@
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
 namespace Content.Server._Sunrise.StationGoal
 {
@@ -14,13 +12,11 @@ namespace Content.Server._Sunrise.StationGoal
         public string Text { get; set; } = string.Empty;
 
         // Sunrise-start
-        [ViewVariables(VVAccess.ReadWrite),
-         DataField("lockBoxPrototypeId", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-        public string LockBoxPrototypeId = "LockboxCaptain";
+        [ViewVariables(VVAccess.ReadWrite), DataField]
+        public EntProtoId LockBoxPrototypeId = "LockboxCaptain";
 
-        [ViewVariables(VVAccess.ReadOnly),
-         DataField("extraItems", customTypeSerializer: typeof(PrototypeIdListSerializer<EntityPrototype>))]
-        public List<string?> ExtraItems = new();
+        [ViewVariables(VVAccess.ReadOnly), DataField]
+        public List<EntProtoId> ExtraItems = [];
         // Sunrise-end
 
         [DataField]
