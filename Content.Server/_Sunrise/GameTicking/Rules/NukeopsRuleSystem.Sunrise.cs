@@ -3,6 +3,7 @@ using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.AlertLevel;
 using Robust.Shared.Timing;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.GameTicking.Rules;
 
 public sealed partial class NukeopsRuleSystem

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using Content.Shared._Sunrise.MarkingEffects;
 using Robust.Shared.Prototypes;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Humanoid.Markings;
 
 [StructLayout(LayoutKind.Auto)]

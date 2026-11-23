@@ -1,6 +1,6 @@
 using System.Globalization;
 
-#pragma warning disable IDE0130 // Пространство имён vanilla-системы сохраняется для partial-расширения.
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Silicons.Laws;
 
 public sealed partial class IonLawLocalizationSystem

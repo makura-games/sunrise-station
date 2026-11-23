@@ -14,11 +14,7 @@
     - id: ClothingHandsKnuckleDustersQM
     - id: PlushieLizardJobQuartermaster
       prob: 0.02
-    # Sunrise-start: Flippos + Cargo suit
-    - id: ClothingOuterSuitCargo
-    - id: BluespaceBox
-    - id: BluespaceBox
-      prob: 0.25
+    # Sunrise-start: Flippos
     - id: FlippoLighterSunriseQm
     # Sunrise-end
 
