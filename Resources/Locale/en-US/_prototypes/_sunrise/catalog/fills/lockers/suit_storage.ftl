@@ -16,3 +16,6 @@ ent-SuitStoragePirateCapSun = { ent-SuitStorageBase }
 ent-SuitStorageSyndieChameleon = { ent-SuitStorageBase }
     .suffix = Syndicate Chameleon
     .desc = { ent-SuitStorageBase.desc }
+ent-SuitStorageBrigmedic = { ent-SuitStorageBase }
+    .suffix = Brigmedic, Sunrise
+    .desc = { ent-SuitStorageBase.desc }

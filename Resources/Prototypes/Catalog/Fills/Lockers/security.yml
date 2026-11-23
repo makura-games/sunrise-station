@@ -118,7 +118,6 @@
     - id: WeaponDisabler
     - id: TrackingImplanter
       amount: 2
-    - id: ClothingOuterHardsuitBrigmedicSunrise # Sunrise-edit
     - id: MedipenCaseBrigmedic # Sunrise-edit
     - id: BoxSterileMask
     - id: ClothingHeadHatBeretBrigmedic

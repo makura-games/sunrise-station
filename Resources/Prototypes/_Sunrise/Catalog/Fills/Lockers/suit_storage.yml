@@ -1,4 +1,19 @@
 - type: entity
+  id: SuitStorageBrigmedic
+  parent: SuitStorageBase
+  suffix: Brigmedic, Sunrise
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: OxygenTankFilled
+        - id: ClothingOuterHardsuitBrigmedicSunrise
+        - id: ClothingMaskBreath
+  - type: AccessReader
+    access: [["Brigmedic"]]
+
+- type: entity
   id: SuitStorageBlueShield
   parent: SuitStorageBase
   suffix: BlueShield

@@ -1,0 +1,17 @@
+- type: entity
+  id: LockerBrigmedicFilledHardsuit
+  parent: LockerBrigmedicFilled
+  suffix: Brigmedic, Filled, Hardsuit
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillLockerBrigmedicHardsuit
+
+- type: entityTable
+  id: FillLockerBrigmedicHardsuit
+  table: !type:AllSelector
+    children:
+    - !type:NestedSelector
+      tableId: FillLockerBrigmedic
+    - id: ClothingOuterHardsuitBrigmedicSunrise
