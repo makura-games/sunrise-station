@@ -40,9 +40,6 @@
     holidays:
       festive:
       - WinterPresents
-  - type: HolidayRsiSwap
-    sprite:
-      festive: _Sunrise/Structures/Wallmounts/lighting/light_small_gift.rsi
 
 - type: !PartialOnly entity
   id: PoweredSmallLightEmpty
@@ -54,9 +51,6 @@
     holidays:
       festive:
       - WinterPresents
-  - type: HolidayRsiSwap
-    sprite:
-      festive: _Sunrise/Structures/Wallmounts/lighting/light_small_gift.rsi
 
 - type: !PartialOnly entity
   id: EmergencyLight

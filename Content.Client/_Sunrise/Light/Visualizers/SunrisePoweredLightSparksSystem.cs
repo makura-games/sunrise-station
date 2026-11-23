@@ -269,15 +269,14 @@ public sealed partial class SunrisePoweredLightSparksSystem : VisualizerSystem<S
 
     private bool TryGetSparkLayer(Entity<SpriteComponent> sprite, string layerKey, [NotNullWhen(true)] out Layer? layer)
     {
-        var layerIndex = SpriteSystem.LayerMapReserve(sprite.AsNullable(), layerKey);
+        if (!SpriteSystem.LayerMapTryGet(sprite.AsNullable(), layerKey, out var layerIndex, false))
+        {
+            layer = null;
+            return false;
+        }
+
         if (!SpriteSystem.TryGetLayer(sprite.AsNullable(), layerIndex, out layer, false))
             return false;
-
-        SpriteSystem.LayerSetData(layer, new PrototypeLayerData
-        {
-            Shader = SpriteSystem.UnshadedId.Id,
-            Visible = false,
-        });
 
         return true;
     }

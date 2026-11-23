@@ -108,6 +108,7 @@
   suffix: Empty
   description: "A light fixture. Draws power and produces light when equipped with a light tube."
   components:
+  # Sunrise edit start - добавлены слои включённой лампы и искр
   - type: Sprite
     sprite: Structures/Wallmounts/Lighting/light-tube.rsi
     offset: 0, 1
@@ -116,11 +117,11 @@
       state: empty
     - map: ["sunrisePoweredLightOn"]
       state: base
+      shader: unshaded
       visible: false
     - map: ["enum.PoweredLightLayers.Glow"]
       state: glow
       shader: unshaded
-    # Sunrise edit start - добавлены слои мерцания и искр
     - map: ["sunrisePoweredLightFlicker"]
       sprite: _Sunrise/Structures/Wallmounts/lighting/light_tube_sparks.rsi
       state: spark-light1
@@ -131,7 +132,7 @@
       state: spark-sparks1
       shader: unshaded
       visible: false
-    # Sunrise edit end
+  # Sunrise edit end
   # Sunrise edit start - добавлены эффекты искр для разбитой лампы
   - type: SunrisePoweredLightSparks
     flickerSound:
@@ -339,6 +340,7 @@
   suffix: Empty
   description: "A light fixture. Draws power and produces light when equipped with a light bulb."
   components:
+  # Sunrise edit start - добавлены слои включённой лампы и искр
   - type: Sprite
     sprite: Structures/Wallmounts/Lighting/light-small.rsi
     layers:
@@ -346,11 +348,11 @@
       state: empty
     - map: ["sunrisePoweredLightOn"]
       state: base
+      shader: unshaded
       visible: false
     - map: ["enum.PoweredLightLayers.Glow"]
       state: glow
       shader: unshaded
-    # Sunrise edit start - добавлены слои мерцания и искр
     - map: ["sunrisePoweredLightFlicker"]
       sprite: _Sunrise/Structures/Wallmounts/lighting/light_small_sparks.rsi
       state: spark-light1
@@ -361,7 +363,7 @@
       state: spark-sparks1
       shader: unshaded
       visible: false
-    # Sunrise edit end
+  # Sunrise edit end
   # Sunrise edit start - добавлены эффекты искр для разбитой лампы
   - type: SunrisePoweredLightSparks
     flickerSound:

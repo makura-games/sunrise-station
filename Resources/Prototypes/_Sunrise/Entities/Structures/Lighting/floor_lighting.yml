@@ -6,6 +6,7 @@
   components:
   - type: Sprite
     sprite: _Sunrise/Structures/Lighting/floor_lighting.rsi
+    offset: 0, 0
     drawdepth: FloorObjects
     state: base
   - type: Fixtures
@@ -36,6 +37,7 @@
   components:
   - type: Sprite
     sprite: _Sunrise/Structures/Lighting/floor_lighting.rsi
+    offset: 0, 0
     drawdepth: FloorObjects
   - type: Fixtures
     fixtures:
@@ -57,6 +59,7 @@
   components:
   - type: Sprite
     sprite: _Sunrise/Structures/Lighting/floor_lighting.rsi
+    offset: 0, 0
     drawdepth: FloorObjects
   - type: Fixtures
     fixtures:
@@ -77,5 +80,7 @@
   suffix: Always powered
   parent: PoweredFloorlight
   components:
+  - type: Sprite
+    offset: 0, 0
   - type: ApcPowerReceiver
     needsPower: false
