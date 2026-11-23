@@ -13,10 +13,11 @@
     size: Ginormous
   - type: Gun
     minAngle: 8
-    maxAngle: 75
-    angleIncrease: 1.5 # Примерно 3 секунды стрельбы до максимального разброса.
+    maxAngle: 60
+    angleIncrease: 1 # Примерно 3 секунды стрельбы до максимального разброса.
     angleDecay: 40
-    fireRate: 12
+    fireRate: 11
+    projectileSpeed: 30
     selectedMode: FullAuto
     availableModes:
     - FullAuto
@@ -24,31 +25,27 @@
       path: /Audio/_Sunrise/Weapons/Guns/HMGs/minigun_shot.ogg
   - type: ClothingSlotAmmoProvider
   - type: SlotBasedConnectedContainer
-    targetSlot: BACK
+    targetSlot: SuitStorage
     containerWhitelist:
       tags:
       - PowerpackMinigunMG100
   - type: Appearance
   - type: Wieldable
   - type: UseDelay
-    delay: 1
+    delay: 2
   - type: GunRequiresWield
 
 - type: entity
   id: PowerpackMinigunMG100
-  parent: [ BasePowerpackMG100, ClothingBackpack ]
+  parent: BasePowerpackMG100
+  name: MG-100 powerpack
+  description: A heavy ammunition pack with a mount for a minigun.
   components:
   - type: Item
     size: Ginormous
   - type: BallisticAmmoProvider
     mayTransfer: True
     proto: CartridgeRifleSP
-  - type: Storage
-    maxItemSize: Huge
-    grid:
-    - 0,0,5,3
-  - type: ExplosionResistance
-    damageCoefficient: 0.1
   - type: ItemSlots
     slots:
       weapon_slot:
@@ -84,21 +81,20 @@
     tags:
     - PowerpackMinigunMG100
   - type: Clothing
-    slots: BACK
+    slots: SuitStorage
     sprite: _Sunrise/Objects/Weapons/Guns/Powerpacks/Powerpacks/backpack.rsi
   - type: BallisticAmmoProvider
     mayTransfer: true
     whitelist:
       tags:
       - CartridgeLightRifle
-    capacity: 1600
+    capacity: 1200
   - type: ClothingSpeedModifier
     walkModifier: 0.5
     sprintModifier: 0.5
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
-      storagebase: !type:Container
       weapon_slot: !type:ContainerSlot
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Powerpacks/Powerpacks/backpack.rsi
@@ -113,104 +109,3 @@
     zeroVisible: false
   - type: Appearance
 
-- type: entity
-  name: DL6902 machine gun
-  parent: BaseItem
-  id: WeaponDL6902PowerPack
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/LMGs/dl6902_feed.rsi
-    state: icon
-  - type: Item
-    sprite: _Sunrise/Objects/Weapons/Guns/LMGs/dl6902_feed.rsi
-    size: Huge
-    shape:
-    - 0,0,6,4
-  - type: Gun
-    minAngle: 5
-    maxAngle: 80
-    angleIncrease: 3
-    angleDecay: 30
-    fireRate: 8
-    selectedMode: FullAuto
-    availableModes:
-    - FullAuto
-    soundGunshot:
-      collection: m249
-      params:
-        volume: 10
-  - type: ClothingSlotAmmoProvider
-  - type: SlotBasedConnectedContainer
-    targetSlot: BACK
-    containerWhitelist:
-      tags:
-      - PowerpackDL6902
-  - type: Appearance
-  - type: Wieldable
-  - type: UseDelay
-    delay: 0.5
-  - type: GunRequiresWield
-  - type: StaticPrice
-    price: 7500
-  - type: DisarmMalus
-    malus: 0
-
-- type: entity
-  name: DL6902 Powerpack
-  id: PowerpackDL6902
-  parent: [ BasePowerpackMG100, ClothingBackpack ]
-  components:
-  - type: Item
-    size: Ginormous
-  - type: Clothing
-    slots: BACK
-    sprite: _Sunrise/Objects/Weapons/Guns/Powerpacks/Powerpacks/syndie_backpack.rsi
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Powerpacks/Powerpacks/syndie_backpack.rsi
-    layers:
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag
-    steps: 2
-    zeroVisible: false
-  - type: Appearance
-  - type: BallisticAmmoProvider
-    mayTransfer: true
-    whitelist:
-      tags:
-      - CartridgeLightRifle
-    proto: CartridgeLightRifleFMJ
-    capacity: 900
-  - type: ClothingSpeedModifier
-    walkModifier: 0.75
-    sprintModifier: 0.75
-  - type: Storage
-    maxItemSize: Huge
-    grid:
-    - 0,0,6,4
-  - type: ExplosionResistance
-    damageCoefficient: 0.1
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: CrazyGlue
-      weapon_slot: !type:AllSelector
-        children:
-        - id: WeaponDL6902PowerPack
-  - type: ItemSlots
-    slots:
-      weapon_slot:
-        ejectOnInteract: true
-        whitelist:
-          components:
-          - ClothingSlotAmmoProvider
-  - type: StaticPrice
-    price: 5500
-  - type: Tag
-    tags:
-    - PowerpackDL6902

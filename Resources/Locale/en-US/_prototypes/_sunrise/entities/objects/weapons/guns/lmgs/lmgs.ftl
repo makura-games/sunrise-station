@@ -1,9 +1,4 @@
-ent-WeaponLightMachineGunMG60 = mG-60
-    .desc = { ent-BaseWeaponLightMachineGun.desc }
 ent-WeaponLightMachineGunRPD = rPD
     .desc = { ent-BaseWeaponLightMachineGun.desc }
 ent-WeaponMachineGunMG42 = mG-342
     .desc = { ent-BaseWeaponLightMachineGun.desc }
-ent-WeaponLightMachineGunMG60Empty = { ent-WeaponLightMachineGunMG60 }
-    .suffix = Empty
-    .desc = { ent-WeaponLightMachineGunMG60.desc }

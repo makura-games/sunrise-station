@@ -1,5 +1,3 @@
-ent-WeaponLauncherRL5 = rL-5
-    .desc = { ent-BaseWeaponLauncher.desc }
 ent-WeaponGrenadeLauncherGL70 = GL70 Basilisk
     .desc = .desc = BLOOP! BLOOP! BLOOP! BLOOP! BLOOP! BLOOP! A true stress-relief toy for true demo men.
 ent-WeaponGrenadeLauncherSecurity = peacekeeper

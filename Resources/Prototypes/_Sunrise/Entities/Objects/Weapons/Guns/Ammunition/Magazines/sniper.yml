@@ -119,32 +119,6 @@
         color: "#7ea53b"
 
 - type: entity
-  id: MagazineBauer127Blast
-  name: magazine (15mm blast)
-  parent: BaseMagazineBauer127
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeAntiMaterielBlast
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-6
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#8d6425"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#8d6425"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#8d6425"
-
-- type: entity
   id: MagazineBauer127Emp
   name: magazine (15mm emp)
   parent: BaseMagazineBauer127
@@ -226,7 +200,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 2
+    steps: 5
     zeroVisible: false
   - type: Appearance
 
@@ -237,7 +211,7 @@
   parent: BaseMagazineDragunov
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeHeavyRifleRSP
+    proto: CartridgeHeavyRifleRFMJ
     capacity: 20
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/dragunov_mag.rsi
@@ -252,33 +226,10 @@
       - state: inhand-left-mag
       right:
       - state: inhand-right-mag
-
-- type: entity
-  id: MagazineDragunovSP
-  name: "magazine Dragunov (7,62mmR SP)"
-  suffix: Sunrise
-  parent: BaseMagazineDragunov
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeHeavyRifleRSP
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#575EF5"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#575EF5"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#575EF5"
+  - type: MagazineVisuals
+    magState: mag
+    steps: 7
+    zeroVisible: false
 
 - type: entity
   id: MagazineDragunovFMJ
@@ -332,7 +283,7 @@
   id: MagazineDragunovEmpty
   name: "magazine (7,62mmR any)"
   suffix: Sunrise, empty
-  parent: MagazineDragunovSP
+  parent: BaseMagazineDragunov
   components:
   - type: BallisticAmmoProvider
     proto: null
@@ -353,7 +304,7 @@
   id: MagazineDragunovIncendiary
   name: "magazine (7,62mmR incendiary)"
   suffix: Sunrise
-  parent: MagazineDragunovSP
+  parent: BaseMagazineDragunov
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeHeavyRifleRIncendiary

@@ -220,7 +220,7 @@
   id: SmugglerSunriseRareWeaponsTable
   table: !type:GroupSelector
     children:
-    - id: WeaponRevolverSnubRevolver
+    - id: WeaponRevolverInspector
     - id: WeaponRevolverPirate
     - id: WeaponRevolverPython
       weight: 0.5

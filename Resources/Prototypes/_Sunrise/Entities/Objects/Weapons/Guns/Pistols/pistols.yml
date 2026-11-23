@@ -52,50 +52,6 @@
     attackType: Heavy
 
 - type: entity
-  name: combat pistol VP-70
-  parent: BaseWeaponPistolSunrise
-  id: WeaponPistolVP78
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/vp78.rsi
-  - type: Item
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/vp78.rsi
-  - type: Gun
-    fireRate: 4.25
-    selectedMode: FullAuto
-    availableModes:
-    - FullAuto
-    soundGunshot:
-      path: /Audio/_Sunrise/Weapons/Guns/Pistols/vp70_shot.ogg
-    soundEmpty:
-      path: /Audio/_Sunrise/Weapons/Guns/Pistols/vp70_empty.ogg
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazinePistol40FMJ
-        insertSound: /Audio/_Sunrise/Weapons/Guns/Pistols/vp70_reload.ogg
-        ejectSound: /Audio/_Sunrise/Weapons/Guns/Pistols/vp70_unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazinePistolDP
-      gun_chamber:
-        name: Chamber
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgePistol
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-
-- type: entity
   name: Glock-22 Prison
   description: Manufactured by special order for prison complex security. Semi-automatic firearm chambered in .35 Auto.
   parent: BaseWeaponPistol

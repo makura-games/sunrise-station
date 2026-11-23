@@ -1,7 +1,5 @@
 ent-MagazineP90 = p90 magazine
     .desc = { ent-BaseItem.desc }
-ent-MagazineMP7 = mP7 magazine
-    .desc = { ent-BaseItem.desc }
 ent-MagazinePistolSubMachineGunPPSHExtended = PPSH drum magazine
     .desc = Uses 7.62 Auto cartridges.
 ent-MagazinePistolLightRifleAuto = APS magazine
@@ -12,8 +10,6 @@ ent-MagazinePistolLightRifleAutoEmpty = { ent-MagazinePistolLightRifleAuto }
 ent-MagazinePistolSubMachineGunPPSHEmpty = { ent-MagazinePistolSubMachineGunPPSH }
     .desc = { ent-MagazinePistolSubMachineGunPPSH.desc }
     .suffix = Empty
-ent-MagazineMP7Extended = { ent-MagazineMP7 }
-    .desc = { ent-MagazineMP7.desc }
 ent-MagazineP90Extended = { ent-MagazineP90 }
     .desc = { ent-MagazineP90.desc }
 ent-MagazineP90HP = p-90 magazine (HP)

@@ -38,7 +38,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineDragunovSP
+        startingItem: MagazineDragunovFMJ
         insertSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Dragunov/dragunov_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Dragunov/dragunov_unload.ogg
         priority: 2
@@ -62,8 +62,8 @@
     zeroVisible: true
   - type: Appearance
   - type: SpeedModifiedOnWield
-    walkModifier: 0.25
-    sprintModifier: 0.25
+    walkModifier: 0.3
+    sprintModifier: 0.3
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 13

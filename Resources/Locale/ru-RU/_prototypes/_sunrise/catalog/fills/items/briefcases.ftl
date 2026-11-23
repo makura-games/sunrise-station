@@ -7,7 +7,6 @@ ent-BriefcaseWeaponType88AMRFilled = кейс для Тип 88
     .desc = { ent-BriefcaseWeapon.desc }
 ent-BriefcaseWeaponGarandFilled = оружейный кейс гаранд
     .desc = Прочный оружейный кейс с винтовкой М1 Гаранда, запасной обоймой .308 и чертежом для производства новых обойм.
-ent-BriefcaseWeaponVectorFilled = кейс для «Вектора Супер»
     .desc = { ent-BriefcaseWeaponSmall.desc }
 ent-BriefcaseWeaponSIAR52Filled = кейс для SIAR-52
     .desc = { ent-BriefcaseWeaponSmall.desc }

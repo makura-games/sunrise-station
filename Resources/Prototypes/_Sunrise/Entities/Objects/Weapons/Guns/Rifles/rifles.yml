@@ -407,7 +407,7 @@
     maxAngle: 40
     angleIncrease: 2
     angleDecay: 10
-    fireRate: 4.45
+    fireRate: 4.25
     selectedMode: FullAuto
     availableModes:
       - FullAuto
@@ -415,10 +415,6 @@
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/skm24/skm_shot.ogg
   - type: ChamberMagazineAmmoProvider
-    availablePrefixes:
-    - ""
-    - white
-    - green
     soundRack:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/skm24/skm_cocked.ogg
   - type: ItemSlots
@@ -447,14 +443,6 @@
     steps: 7
     zeroVisible: true
   - type: Appearance
-
-- type: entity
-  parent: WeaponRifleSKM24
-  id: WeaponRifleSKM24White
-
-- type: entity
-  parent: WeaponRifleSKM24
-  id: WeaponRifleSKM24Green
 
 - type: entity
   parent: WeaponRifleSKM24
@@ -576,22 +564,6 @@
     availablePrefixes: []
 
 - type: entity
-  parent: [BaseSecurityContraband, WeaponRifleSKM24]
-  id: WeaponRifleSKM24Nano
-  suffix: NanoTrasen
-  description: Cheap and reliable. Enough firepower, little accuracy. Easy to repair, hard to control during sustained. Money doesn't smell.
-  components:
-  - type: Sprite
-    scale: 0.9,0.9
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Nano/big.rsi
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Nano/tiny.rsi
-  - type: Item
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Nano/tiny.rsi
-  - type: ChamberMagazineAmmoProvider
-    availablePrefixes: []
-
-- type: entity
   name: Leikha
   parent: [ GunHeavy, BaseWeaponRifle, BaseSecurityContraband ]
   id: WeaponRifleLeikha
@@ -626,7 +598,7 @@
     availableModes:
     - Burst
     - SemiAuto
-    burstFireRate: 12
+    burstFireRate: 11
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/skm28/skm28_shot.ogg
       params:
@@ -699,9 +671,9 @@
 
 - type: entity
   name: SKM-28
-  parent: [BaseWeaponRifle, BaseMajorContraband]
+  parent: [ BaseSovietContraband, WeaponRifleLeikha]
   id: WeaponRifleSKM28
-  description: A marksman conversion of the standard SKM-24. Features an extended heavy barrel, reworked internals, and a mounted optical sight. Chambered in .308.
+  description: A battle rifle conversion of the standard SKM-24. Features an extended heavy barrel, reworked internals. Chambered in 7,62mmR.
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Base/big.rsi
@@ -722,7 +694,7 @@
     maxAngle: 50
     angleIncrease: 1.5
     angleDecay: 12
-    fireRate: 4
+    fireRate: 3.5
     shotsPerBurst: 3
     selectedMode: Burst
     availableModes:
@@ -732,7 +704,7 @@
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/skm28/skm28_shot.ogg
       params:
-        pitch: 0.8
+        pitch: 0.5
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/skm24/skm_cocked.ogg
@@ -740,19 +712,19 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineRifleHeavySP
-        insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/skm24/skm_reload.ogg
-        ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/m28/m28_unload.ogg
+        startingItem: MagazineDragunovExtended
+        insertSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Dragunov/dragunov_reload.ogg
+        ejectSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Dragunov/dragunov_unload.ogg
         priority: 2
         whitelist:
           tags:
-            - MagazineHeavyRifle
+            - MagazineDragunov
       gun_chamber:
         name: Chamber
         priority: 1
         whitelist:
           tags:
-            - CartridgeHeavyRifle
+            - CartridgeHeavyRifleR
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -763,32 +735,22 @@
     zeroVisible: true
   - type: Appearance
   - type: Wieldable
-  - type: UseDelay
-    delay: 0.75
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 7
-    pvsIncrease: 0.7
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.9
-    sprintModifier: 0.9
+  - type: MeleeWeapon # TODO: Add ability to add reagents
+    range: 2.2
+    wideAnimationRotation: -90
+    damage:
+      types:
+        Piercing: 13
+        Bloodloss: 2
+    angle: 0
+    animation: WeaponArcThrust
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
 
 - type: entity
-  parent: WeaponRifleSKM28
-  id: WeaponRifleSKM28Syndi
-  description: A marksman conversion of the standard SKM-24. Features an extended heavy barrel, reworked internals, and a mounted optical sight. Chambered in .308. Good choice Nukie.
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Syndicate/big.rsi
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Syndicate/tiny.rsi
-  - type: Item
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Syndicate/tiny.rsi
-
-- type: entity
-  parent: [BaseSecurityContraband, WeaponRifleSKM28]
+  parent: [BaseCentcommContraband, WeaponRifleLeikha]
   id: WeaponRifleSKM28Nano
-  description: A marksman conversion of the standard SKM-24. Features an extended heavy barrel, reworked internals, and a mounted optical sight. Chambered in .308. Money doesn't smell.
+  description: An experimental conversion of the Leikha rifle. It has an extended heavy barrel, and an integrated optical sight. It offers improved accuracy and effectiveness at long range. Uses .308 rifle ammunition.
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Nano/big.rsi
@@ -796,3 +758,22 @@
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Nano/tiny.rsi
   - type: Item
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Nano/tiny.rsi
+  - type: Gun
+    angleIncrease: 0.75
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        startingItem: MagazineRifleHeavySP
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineHeavyRifle
+      gun_chamber:
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeHeavyRifle
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 4
+    pvsIncrease: 0.4

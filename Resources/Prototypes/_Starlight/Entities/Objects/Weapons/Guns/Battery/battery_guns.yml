@@ -218,11 +218,13 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Gun
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/xenofirebeam.ogg
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
   - type: BatteryAmmoProvider
-    proto: IgnitionRedLaser
+    proto: XenoborgFireLaser
     fireCost: 62.5
   - type: StaticPrice
     price: 300
@@ -270,75 +272,6 @@
       fireCost: 100
       magState: destroy
       heldPrefix: destroy
-
-- type: entity
-  parent: [ BaseWeaponBattery, BaseGunWieldable, BaseCentcommContraband ]
-  id: WeaponEnergySniper
-  name: LWAP
-  components:
-  - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Battery/energy_sniper.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-unshaded-4
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
-  - type: Item
-    size: Ginormous
-  - type: Clothing
-    quickEquip: false
-    slots:
-    - Back
-  - type: Gun
-    fireRate: 0.25
-  - type: BatteryAmmoProvider
-    proto: SniperBolt
-    fireCost: 50
-  - type: MagazineVisuals
-    magState: mag
-    steps: 5
-    zeroVisible: true
-  - type: Appearance
-  - type: GunRequiresWield
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 8
-    pvsIncrease: 0.8
-
-- type: entity
-  name: ANNIHILATOR
-  parent: [ WeaponPulseCarbine, BaseMajorContraband ]
-  id: WeaponANNIHILATOR
-  description: A weapon that is almost as infamous as its users.
-  components:
-  - type: Appearance
-  - type: Gun
-    selectedMode: Burst
-    fireRate: 3
-    shotsPerBurst: 5
-    availableModes:
-      - Burst
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: MagazineVisuals
-    magState: destroy
-    steps: 5
-    zeroVisible: true
-  - type: BatteryAmmoProvider
-    proto: DestroyBeam
-    fireCost: 100
-  - type: BatteryWeaponFireModes
-    fireModes:
-    - proto: DestroyBeam
-      fireCost: 100
-      magState: destroy
-      visualState: destroy
-  - type: Battery
-    maxCharge: 2000
-    startingCharge: 2000
-  - type: BatterySelfRecharger
-    autoRechargeRate: 500
 
 - type: entity
   parent: BaseWeaponBatterySmall

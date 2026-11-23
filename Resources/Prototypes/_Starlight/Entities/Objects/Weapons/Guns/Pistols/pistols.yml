@@ -132,7 +132,7 @@
     maxAngle: 20
     angleIncrease: 5
     angleDecay: 12
-    fireRate: 7
+    fireRate: 6
     soundGunshot:
       path: /Audio/_Starlight/Weapons/Guns/Gunshots/colt.ogg
 

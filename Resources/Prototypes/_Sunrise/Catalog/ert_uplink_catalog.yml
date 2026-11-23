@@ -73,7 +73,7 @@
 
 - type: listing
   id: ERTUplinkWeaponRifleSKM24Filled
-  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: skm24nano }
+  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: skm24 }
   productEntity: ClothingBackpackDuffelWeaponRifleSKM24Filled
   cost:
     Bluecrystal: 12
@@ -116,22 +116,6 @@
     stock: 3
   - !type:StoreWhitelistCondition
     blacklist:
-      tags:
-      - CBURN
-
-- type: listing
-  id: ERTUplinkWeaponRifleSKM28FilledCBURN
-  productEntity: ClothingBackpackDuffelWeaponRifleSKM28FilledCBURN
-  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: skm28 }
-  cost:
-    Bluecrystal: 15
-  categories:
-  - NTAutoGun
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 3
-  - !type:StoreWhitelistCondition
-    whitelist:
       tags:
       - CBURN
 
@@ -268,24 +252,6 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - ERTGamma
-      - ERTEpsilon
-
-- type: listing
-  id: ERTUplinkWeaponShotgunCycler
-  productEntity: ClothingBackpackDuffelWeaponShotgunCycler
-  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: cycler }
-  cost:
-    Bluecrystal: 20
-  categories:
-  - NTAutoGun
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 2
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - CBURN
       - ERTGamma
       - ERTEpsilon
 

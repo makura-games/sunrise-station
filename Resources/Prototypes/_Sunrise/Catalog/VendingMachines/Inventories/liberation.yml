@@ -8,7 +8,6 @@
     WeaponPistolFlintlock: 3
     WeaponPistolCHIMP: 3
     WeaponPulsePistol: 3
-    WeaponPistolVP78: 3
     WeaponPistolEnforcer: 3
     WeaponPistolEchis: 3
     WeaponPistolDeagle: 6
@@ -28,7 +27,6 @@
     WeaponRevolverMakeshift: 3
     WeaponRevolverImprovised: 3
     WeaponRevolverForged: 3
-    WeaponRevolverSnubRevolver: 3
     WeaponRevolverMatebaNew: 3
     WeaponRevolverSpearhead: 6
 
@@ -59,22 +57,18 @@
     WeaponShotgunTrenchgun4034: 3
     WeaponShotgunTrenchgun4034Sawn: 3
     WeaponShotgunEnforcerRubber: 3
-    WeaponShotgunCycler: 3
     WeaponShotgunGA12: 3
     WeaponShotgunMinotaur: 3
     WeaponShotgunForged: 3
 
     WeaponSubMachineGunAtreides: 3
     WeaponSubMachineGunC20r: 3
-    WeaponSubMachineGunVector: 3
     WeaponSubMachineGunDrozd: 3
     WeaponSubMachineGunDrozdHeavy: 3
     WeaponSubMachineGunP90: 3
     WeaponSubMachineGunForged: 6
-    WeaponSubMachineGunNewVector: 3
     WeaponAJ100: 3
     WeaponSIAR52: 3
-    WeaponSubMachineGunSP91RC: 3
     WeaponSubMachineGunPPSH: 3
     WeaponSubMachineGunWt550: 3
     WeaponSubMachineGunC20rROW: 3
@@ -94,7 +88,6 @@
     WeaponLauncherChinaLake: 3
     WeaponLauncherRocket: 3
     WeaponLauncherPirateCannon: 3
-    WeaponLauncherRL5: 3
     WeaponGrenadeLauncherGL70: 3
     WeaponGrenadeLauncherSecurity: 3
     WeaponLauncherM79: 3
@@ -109,7 +102,6 @@
     WeaponLightMachineGunL6: 3
     WeaponLightMachineGunL6Max: 3
     WeaponLightMachineGunL6C: 3
-    WeaponLightMachineGunMG60: 3
     WeaponLightMachineGunRPD: 3
     WeaponMachineGunMG42: 3
     WeaponMinigunMG100: 3
@@ -117,7 +109,6 @@
     PowerpackMinigunMG100Incendiary: 3
     WeaponLightMachineGunM492Cburn: 3
     WeaponLightMachineGunM492: 3
-    PowerpackDL6902: 3
     WeaponMinigun: 3
     WeaponLightMachineGunDP28: 3
     WeaponLightMachineGunPirateCannon: 3
@@ -153,9 +144,7 @@
     WeaponGunLaserCarbineAutomatic: 3
     WeaponM1911: 3
     WeaponEnergyGunPistol: 3
-    WeaponEnergySniper: 3
     WeaponEnergyMagnum: 3
-    WeaponANNIHILATOR: 3
     WeaponToecloner: 3
     WeaponEnergyCrossbowLarge: 3
     WeaponEnergyCrossbow: 3
@@ -164,11 +153,6 @@
     WeaponEarthGovLaserRifle: 3
     WeaponEarthGovLaserCarbine: 3
     WeaponEarthGovLaserMG: 3
-    WeaponEarthGovXRay: 3
-    WeaponEarthGovLaserSniper: 3
-    WeaponSyndieLaserGun: 3
-    WeaponSyndieLaserPistol: 3
-    WeaponLaserMinigun: 3
     WeaponSniperPulseCarbine: 3
     WeaponAlien: 3
 
@@ -177,7 +161,6 @@
     WeaponImprovisedPneumaticCannon: 3
     WeaponArcMeleeMoltenCollider: 3
     WeaponArcMoltenAmputator: 3
-    WeaponDL6902PowerPack: 3
     WeaponMachineGunLCG: 3
     WeaponMeleeMimicry: 3
     WeaponMeleeMoltenAmputator: 3
@@ -193,13 +176,9 @@
     WeaponProtoKineticRepeater: 3
     WeaponProtoKineticShotgun: 3
     WeaponRifleLarker: 3
-    WeaponRifleSKM24Green: 3
-    WeaponRifleSKM24Nano: 3
     WeaponRifleSKM24Scrap: 3
     WeaponRifleSKM24Syndi: 3
-    WeaponRifleSKM24White: 3
     WeaponRifleSKM28Nano: 3
-    WeaponRifleSKM28Syndi: 3
     WeaponRifleType88AMR: 3
     WeaponSniperMosinLubed: 3
     WeaponTurretPirate: 3
@@ -229,7 +208,6 @@
     WeaponMechCombatPirateCannon: 3
     WeaponMechCombatPirateGrapeshot: 3
     WeaponMechCombatPirateGlassshot: 3
-    WeaponMechCombatUVM31: 3
     WeaponMechCombatDuster: 3
 
     WeaponWaterPistol: 3
@@ -312,7 +290,6 @@
     MagazinePistolSubMachineGunPPSHExtended: 3
     MagazinePistolSubMachineGunPPSH: 3
     MagazineP90: 5
-    MagazineMP7: 5
     MagazineBoxPistolRubber: 3
     MagazineBoxPistolSP: 3
     MagazineBoxPistolHP: 3
@@ -352,11 +329,10 @@
     MagazineBoxHeavyRiflePractice: 3
     MagazineBoxHeavyRifleIncendiary: 3
     MagazineBoxHeavyRifleUranium: 3
-    MagazineDragunovSP: 5
+    MagazineDragunovFMJ: 5
     MagazineBauer127: 5
     MagazineBoxAntiMateriel: 3
     # LMG Ammo
-    MagazineLightMachineGunMG60: 5
     MagazineLightRifleBeltBox: 10
     MagazineLightRifleBeltBoxFMJ: 5
     MagazineLightRifleBeltBoxAP: 5

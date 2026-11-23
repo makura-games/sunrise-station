@@ -137,14 +137,14 @@
     - MK58Box
 
 - type: loadout
-  id: SnubRevolverBox
-  startingGear: SnubRevolverBox
+  id: InspectorRevolverBox
+  startingGear: InspectorRevolverBox
 
 - type: startingGear
-  id: SnubRevolverBox
+  id: InspectorRevolverBox
   storage:
     back:
-    - SnubRevolverBox
+    - InspectorRevolverBox
 
 - type: loadout
   id: MK58GoldBox

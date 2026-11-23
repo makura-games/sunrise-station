@@ -337,9 +337,9 @@
   - type: Clothing
     clothingVisuals:
       gloves:
-      - sprite: _Starlight/Objects/Weapons/Guns/Revolvers/snub.rsi
+      - sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi
         state: inhand-right
-      - sprite: _Starlight/Objects/Weapons/Guns/Revolvers/snub.rsi
+      - sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi
         state: inhand-left
 
 - type: entity
@@ -557,18 +557,6 @@
         state: wielded-inhand-right
 
 - type: entity
-  parent: BaseSunriseHandsNoGlovesPiratePrivateer
-  id: ClothingHandsSMGVectorSuper
-  suffix: Vector Super
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Clothing
-    clothingVisuals:
-      gloves:
-      - sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi
-        state: wielded-inhand-right
-
-- type: entity
   parent: BaseSunriseHandsNoGlovesPirateUSSPHeavy
   id: ClothingHandsDragunov
   suffix: dragunov
@@ -637,7 +625,7 @@
   - type: Clothing
     clothingVisuals:
       gloves:
-      - sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Green/tiny.rsi
+      - sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Base/tiny.rsi
         state: wielded-inhand-right
 
 - type: entity
@@ -698,18 +686,6 @@
     clothingVisuals:
       gloves:
       - sprite: _Starlight/Objects/Weapons/Guns/LMGs/DP28.rsi
-        state: wielded-inhand-right
-
-- type: entity
-  parent: ClothingHandsNoGloves
-  id: ClothingHandsPKM
-  suffix: PKM
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Clothing
-    clothingVisuals:
-      gloves:
-      - sprite: _Sunrise/Objects/Weapons/Guns/LMGs/mg60/tiny.rsi
         state: wielded-inhand-right
 
 - type: entity
@@ -1232,7 +1208,7 @@
   categories: [ HideSpawnMenu ]
 
 - type: entity
-  parent: [ClothingHandsPKM, SovietArmorFlak, SovietMeleeNoArc]
+  parent: [ClothingHandsNoGloves, SovietArmorFlak, SovietMeleeNoArc]
   id: ClothingHandsSovietFlakPKM
   categories: [ HideSpawnMenu ]
 

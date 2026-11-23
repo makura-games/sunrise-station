@@ -339,14 +339,6 @@
   - UplinkPirateRangedWeaponry
 
 - type: listing
-  id: UplinkPirateSnubRevolver
-  productEntity: WeaponRevolverSnubRevolver
-  cost:
-    Doubloon: 10
-  categories:
-  - UplinkPirateRangedWeaponry
-
-- type: listing
   id: UplinkPirateRevolverSpearhead
   productEntity: WeaponRevolverSpearhead
   cost:
@@ -473,15 +465,6 @@
   productEntity: WeaponLaserSvalinn
   cost:
     Doubloon: 8
-  categories:
-  - UplinkPirateRangedWeaponry
-
-- type: listing
-  id: UplinkPiratePistolVP78
-  productEntity: WeaponPistolVP78
-  cost:
-    Doubloon: 16
-  restockTime: 2700
   categories:
   - UplinkPirateRangedWeaponry
 
@@ -745,31 +728,6 @@
   productEntity: SunriseWeaponDisposableRocketLauncherIncendiary
   cost:
     Doubloon: 9
-  categories:
-  - UplinkPirateRangedWeaponry
-
-- type: listing
-  id: UplinkPirateVectorSuperBundle
-  name: uplink-vector-super-bundle-name
-  description: uplink-vector-super-bundle-desc
-  icon: { sprite: /Textures/_Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi, state: icon }
-  productEntity: ClothingBackpackDuffelSyndicateFilledVectorSuper
-  cost:
-    Doubloon: 29
-  categories:
-  - UplinkPirateRangedWeaponry
-  restockTime: 2700
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 2
-
-- type: listing
-  id: UplinkPirateSyndieLaserGun
-  name: uplink-weapon-syndie-laser-gun-name
-  productEntity: WeaponSyndieLaserGun
-  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Battery/syndielasergun.rsi, state: icon }
-  cost:
-    Doubloon: 43
   categories:
   - UplinkPirateRangedWeaponry
 
@@ -1038,19 +996,6 @@
     stock: 2
 
 - type: listing
-  id: UplinkPirateHristovAmmoBlast
-  name: uplink-pirate-ammo-hristov-blast-name
-  description: uplink-sniper-ammo-blast-desc
-  productEntity: CratePirateMagazineBoxAntiMaterielBlast
-  cost:
-    Doubloon: 12
-  categories:
-  - UplinkPirateAmmo
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 2
-
-- type: listing
   id: UplinkPirateBoxImprovisedRifle
   name: uplink-pirate-ammo-improvised-rifle-name
   productEntity: CratePirateMagazineBoxImprovisedRifle
@@ -1272,10 +1217,10 @@
 
 - type: listing
   id: UplinkPirateMagDragunov
-  name: uplink-pirate-ammo-dragunov-sp-name
+  name: uplink-pirate-ammo-dragunov-fmj-name
   description: uplink-magazine-dragunov-desc
   icon: { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/dragunov_mag.rsi, state: base }
-  productEntity: CratePirateMagazineDragunovSP
+  productEntity: CratePirateMagazineDragunovFMJ
   cost:
     Doubloon: 6
   categories:

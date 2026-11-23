@@ -289,10 +289,10 @@
   - SalvageWeapons
 
 - type: listing
-  id: VendorSalvageWeaponShotgunCycler
-  productEntity: WeaponShotgunCycler
+  id: VendorSalvageWeaponLaserImmolator
+  productEntity: WeaponLaserImmolator
   cost:
-    SalvageTicket: 900
+    SalvageTicket: 800
   categories:
   - SalvageWeapons
   conditions:

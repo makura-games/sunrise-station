@@ -1,7 +1,5 @@
 ent-MagazineMachineGunMG42 = малый короб .308
     .desc = { ent-BaseItem.desc }
-ent-MagazineLightMachineGunMG60 = короб ПКМ
-    .desc = Короб для ПКМ с длинной  лентой 7,62х54ммR.
 ent-MagazineVP70 = магазин вп70
     .desc = { ent-BaseItem.desc }
 ent-MagazinePistolSubMachineGunCaselessExtended = расширенный магазин (.25 безгильзовые)

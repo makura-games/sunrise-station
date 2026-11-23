@@ -195,22 +195,6 @@
           amount: 4
 
 - type: entity
-  id: ClothingBackpackDuffelWeaponShotgunCycler
-  parent: ClothingBackpackDuffelMilitary
-  name: Bundle Assault Shotgun
-  description: Assault Shotgun with 6 raspy speedloaders.
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: WeaponShotgunCycler
-        - id: SpeedLoaderShellShotgun
-          amount: 2
-        - id: SpeedLoaderShotgunSlug
-          amount: 2
-
-- type: entity
   id: ClothingBackpackDuffelWeaponShotgun4034Filled
   parent: ClothingBackpackDuffelMilitary
   name: Bundle Trenchgun 4034
@@ -239,6 +223,8 @@
         - id: BoxLethalshot
         - id: BoxShotgunFlare
         - id: BoxShotgunSlug
+        - id: SpeedLoaderShellShotgun
+        - id: SpeedLoaderShotgunSlug
 
 - type: entity
   id: ClothingBackpackDuffelWeaponRifleSKM24Filled
@@ -250,7 +236,7 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: WeaponRifleSKM24Nano
+        - id: WeaponRifleSKM24
         - id: MagazineLightRifle
           amount: 5
         - id: MagazineLightRifleFMJ
@@ -284,21 +270,6 @@
         - id: MagazineRifleHeavyFMJ
         - id: MagazineRifleHeavySP
           amount: 5
-
-- type: entity
-  id: ClothingBackpackDuffelWeaponRifleSKM28FilledCBURN
-  parent: ClothingBackpackDuffelCBURN
-  name: Bundle SKM-28
-  description: SKM-28 with 6 raspy Incendiary magazines.
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: WeaponRifleSKM28
-        - id: MagazineRifleHeavyIncendiary
-          amount: 6
-        - id: FireExtinguisher
 
 - type: entity
   id: ClothingBackpackDuffelWeaponLightMachineGunM492
@@ -504,30 +475,6 @@
         - id: DoubleEmergencyNitrogenTankFilled
 
 - type: entity
-  id: ClothingBackpackMessengerMercenaryBundleSKM24
-  parent: ClothingBackpackMessengerMercenary
-  name: SKM-24 bundle
-  description: Contains the cheap assault rifle.
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - !type:GroupSelector
-          children:
-          - id: WeaponRifleSKM24
-          - id: WeaponRifleSKM24Syndi
-          - id: WeaponRifleSKM24White
-          - id: WeaponRifleSKM24Nano
-          - id: WeaponRifleSKM24Green
-        - id: MagazineLightRifleFMJ
-        - id: MagazineLightRifle
-        - id: MagazineLightRifle
-        - id: MagazineLightRifle
-        - id: CigPackSyndicate
-        - id: CheapLighter
-
-- type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherGL70
   name: GL-70 grenade launcher bundle
@@ -546,24 +493,6 @@
         - id: GrenadeBlastTimer
         - id: GrenadeEMPTimer
         - id: GrenadeEMP
-
-- type: entity
-  parent: ClothingBackpackDuffelSyndicateBundle
-  id: ClothingBackpackDuffelSyndicateFilledVectorSuper
-  name: Vector Super bundle
-  description: "Old faithful: The classic Vector Super submachine gun, bundled with twelve assorted magazines."
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: WeaponSubMachineGunVectorBiocode
-        - id: MagazinePistol40SubMachineGunSP
-          amount: 6
-        - id: MagazinePistol40SubMachineGunFMJ
-          amount: 4
-        - id: MagazinePistol40SubMachineGunHP
-          amount: 2
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle

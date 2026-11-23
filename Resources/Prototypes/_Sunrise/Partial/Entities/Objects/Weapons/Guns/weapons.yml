@@ -335,6 +335,11 @@
   components:
   - type: Item
     sprite: Objects/Weapons/Guns/Launchers/rocket.rsi
+    inhandVisuals:
+      left: !Clear
+      - state: rocket0-inhand-left
+      right: !Clear
+      - state: rocket0-inhand-right
 
 - type: !PartialOnly entity
   id: WeaponLauncherChinaLake

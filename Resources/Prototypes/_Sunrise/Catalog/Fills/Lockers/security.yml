@@ -20,19 +20,6 @@
 
 - type: entity
   parent: GunSafeSuperweaponSecureGamma
-  id: GunSafeSuperweaponLWAP
-  name: safe
-  components:
-  - type: EntityStorageVisuals
-    stateDoorClosed: lwap
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponEnergySniper
-
-- type: entity
-  parent: GunSafeSuperweaponSecureGamma
   id: GunSafeSuperweaponRocketLauncher
   name: safe
   components:
@@ -42,7 +29,6 @@
     containers:
       entity_storage: !type:AllSelector
         children:
-        - id: WeaponLauncherRL5
         - id: CartridgeRocketFrag
           prob: 0.75
         - id: CartridgeRocketFrag
@@ -185,26 +171,11 @@
     containers:
       entity_storage: !type:AllSelector
         children:
-        - id: WeaponRevolverSnubRevolver
+        - id: WeaponRevolverInspector
           amount: 4
         - id: SpeedLoaderMagnumSP
           amount: 6
         - id: SpeedLoaderMagnumRubber
-          amount: 4
-
-- type: entity
-  parent: GunSafePistolG22 #GunSafeHandgunBaseSecureSunrise
-  id: GunSafePistolVP78
-  name: safe
-  suffix: VP-78
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: WeaponPistolVP78
-          amount: 4
-        - id: PouchAmmoFilledPistol40
           amount: 4
 
 # region SMGs safes
@@ -219,8 +190,6 @@
     containers:
       entity_storage: !type:AllSelector
         children:
-        - id: WeaponSubMachineGunNewVector
-          amount: 2
         - id: MagazinePistolSubMachineGun
           amount: 6
 
@@ -296,8 +265,6 @@
     containers:
       entity_storage: !type:AllSelector
         children:
-        - id: WeaponSubMachineGunSP91RC
-          amount: 2
         - id: MagazinePistolSubMachineGun
           amount: 4
 
@@ -359,7 +326,9 @@
   suffix: SKM-24
   components:
   - type: EntityStorageVisuals
-    stateDoorClosed: rifle
+    stateDoorClosed: door
+  - type: Sprite
+    sprite: _Sunrise/Structures/Storage/Gunsafes/syndicate.rsi
   - type: EntityTableContainerFill
     containers:
       entity_storage: !type:AllSelector
@@ -367,43 +336,27 @@
         - !type:GroupSelector
           children:
           - id: WeaponRifleSKM24
-            weight: 0.33
-          - id: WeaponRifleSKM24White
-            weight: 0.33
-          - id: WeaponRifleSKM24Green
-            weight: 0.33
           - id: WeaponRifleSKM24Scrap
             weight: 0.05
             amount: 3
           - id: WeaponRifleSKM24Syndi
             weight: 0.1
-          - id: WeaponRifleSKM24Nano
         - !type:GroupSelector
           children:
           - id: WeaponRifleSKM24
-            weight: 0.33
-          - id: WeaponRifleSKM24White
-            weight: 0.33
-          - id: WeaponRifleSKM24Green
           - id: WeaponRifleSKM24Scrap
             weight: 0.05
             amount: 3
           - id: WeaponRifleSKM24Syndi
             weight: 0.1
-          - id: WeaponRifleSKM24Nano
         - !type:GroupSelector
           children:
           - id: WeaponRifleSKM24
-            weight: 0.33
-          - id: WeaponRifleSKM24White
-            weight: 0.33
-          - id: WeaponRifleSKM24Green
           - id: WeaponRifleSKM24Scrap
             weight: 0.05
             amount: 3
           - id: WeaponRifleSKM24Syndi
             weight: 0.1
-          - id: WeaponRifleSKM24Nano
         - id: MagazineLightRifle
           amount: 6
         - id: MagazineLightRifleFMJ
@@ -778,7 +731,6 @@
     - !type:GroupSelector
       weight: 5
       children:
-      - id: GunSafePistolVP78
       - id: GunSafePistolM1984
     - id: SpawnerSafeLethal
       weight: 15
@@ -926,7 +878,6 @@
     - !type:GroupSelector
       weight: 70
       children:
-      - id: GunSafeSuperweaponLWAP
       - id: GunSafeSuperweaponSmartGun
       - id: GunSafeSuperweaponRocketLauncher
       - id: GunSafeSuperweaponDisposableRocketLauncher

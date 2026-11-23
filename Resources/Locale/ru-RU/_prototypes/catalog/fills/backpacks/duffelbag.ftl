@@ -56,7 +56,6 @@ ent-ClothingBackpackDuffelSyndicateFilledGrenadeLauncher = набор "чайн�
     .desc = Старый гранатомет Чайна-Лейк, снабженный 9 гранатами различной поражающей способности.
 ent-ClothingBackpackDuffelSyndicateRaidBundle = набор рейдерского костюма Синдиката
     .desc = Содержит прочный рейдерский бронекостюм Синдиката.
-ent-ClothingBackpackDuffelSyndicateFilledVectorSuper = набор «Вектор Супер»
     .desc = Классический пистолет-пулемёт «Вектор Супер» в комплекте с двенадцатью магазинами разных типов.
 ent-ClothingBackpackDuffelSyndicateFilledGrenadeLauncherM79 = набор "M79"
     .desc = Старый гранатомет M79, снабженный 9 гранатами различной поражающей способности.

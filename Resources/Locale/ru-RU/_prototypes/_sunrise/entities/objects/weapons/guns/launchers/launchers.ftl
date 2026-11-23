@@ -1,5 +1,3 @@
-ent-WeaponLauncherRL5 = RL-5
-    .desc = Древний ручной реактивный гранатомёт.
 ent-WeaponGrenadeLauncherGL70 = GL70 Василиск
     .desc = БЛУП! БЛУП! БЛУП! БЛУП! БЛУП! БЛУП! Настоящая антистресс-игрушка для настоящих подрывников.
 ent-WeaponGrenadeLauncherSecurity = миротворец

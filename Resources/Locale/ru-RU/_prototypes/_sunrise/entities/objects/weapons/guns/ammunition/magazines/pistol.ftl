@@ -1,7 +1,5 @@
 ent-MagazineP90 = магазин P-90
     .desc = 50-ти зарядный магазин. Использует патроны калибра .35 авто.
-ent-MagazineMP7 = магазин ПП MP7
-    .desc = Использует патроны калибра .35 авто.
 ent-MagazinePistolSubMachineGunPPSHExtended = барабан ППШ
     .desc = Использует патроны 7,62 авто.
 ent-MagazinePistolLightRifleAuto = магазин АПС
@@ -12,8 +10,6 @@ ent-MagazinePistolLightRifleAutoEmpty = { ent-MagazinePistolLightRifleAuto }
 ent-MagazinePistolSubMachineGunPPSHEmpty = { ent-MagazinePistolSubMachineGunPPSH }
     .desc = { ent-MagazinePistolSubMachineGunPPSH.desc }
     .suffix = Пустой
-ent-MagazineMP7Extended = расширенный магазин MP7
-    .desc = { ent-MagazineMP7.desc }
 ent-MagazineP90Extended = расширенный магазин P90
     .desc = { ent-MagazineP90.desc }
 ent-MagazineP90HP = магазин P-90 (эксп)

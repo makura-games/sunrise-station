@@ -86,13 +86,6 @@ ent-PirateSquadT3Universal = pirate squad spawner (T3 universal)
 ent-PirateSquadT3Random = pirate squad spawner (random T3)
     .desc = Spawns a random T3 pirate squad.
     .suffix = T3, Случайный
-
-ent-MobPirateT1ExpeditionSpawner = pirate T1 expedition spawner
-    .desc = Randomly spawns a Tier 1 pirate expedition unit.
-ent-MobPirateT2ExpeditionSpawner = pirate T2 expedition spawner
-    .desc = Randomly spawns a Tier 2 pirate expedition unit.
-ent-MobPirateT3ExpeditionSpawner = pirate T3 expedition spawner
-    .desc = Randomly spawns a Tier 3 pirate expedition unit.
 ent-MobPirateAllTiersExpeditionSpawner = pirate T1-T3 expedition spawner
     .desc = Randomly spawns a pirate expedition spawner from any tier.
 ent-MobPirateMonkeyAnyExpeditionSpawner = pirate monkey expedition spawner

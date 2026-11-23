@@ -601,6 +601,17 @@
     Plastic: 500
     Gold: 500
     Uranium: 400
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponLaserImmolator
+  result: WeaponLaserImmolator
+  materials:
+    Steel: 1500
+    Glass: 500
+    Plastic: 250
+    Gold: 250
+
 - type: latheRecipe
   parent: BaseWeaponRecipeSidearm
   id: DrozdHeavyUpgradeKit

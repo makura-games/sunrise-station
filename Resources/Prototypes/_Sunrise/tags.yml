@@ -234,9 +234,6 @@
   id: PipeBomb
 
 - type: Tag
-  id: PowerpackDL6902
-
-- type: Tag
   id: PowerpackFlame
 
 - type: Tag
@@ -289,9 +286,6 @@
   id: MagazineHeavyRifle
 
 - type: Tag
-  id: MagazineLightMachineGunMG60
-
-- type: Tag
   id: MagazineLightRiflePan
 
 - type: Tag
@@ -305,9 +299,6 @@
 
 - type: Tag
   id: MagazineMachineGunMG42
-
-- type: Tag
-  id: MagazineMP7
 
 - type: Tag
   id: MagazineP90

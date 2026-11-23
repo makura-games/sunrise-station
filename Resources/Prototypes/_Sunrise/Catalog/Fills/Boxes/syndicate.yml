@@ -137,7 +137,7 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: MagazineDragunovSP
+        - id: MagazineDragunovFMJ
           amount: 2
         - id: MagazineDragunovExtended
           amount: 2
@@ -164,7 +164,7 @@
           amount: 2
         - id: MagazineBauer127Frag
           amount: 2
-        - id: MagazineBauer127Blast
+        - id: MagazineBauer127Frag
           amount: 2
         - id: MagazineBauer127Emp
           amount: 2

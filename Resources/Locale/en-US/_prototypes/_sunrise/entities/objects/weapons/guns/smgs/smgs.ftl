@@ -1,7 +1,5 @@
 ent-WeaponSubMachineGunP90 = p-90
     .desc = { ent-BaseWeaponSubMachineGun.desc }
-ent-WeaponSubMachineGunNewVector = new Vector
-    .desc = A modern 30-round Vector by Waffle Corp chambered in .35 Auto. Its delayed-blowback system redirects the bolt assembly downward, helping control its high rate of fire.
 ent-WeaponSubMachineGunPPSH = pPSH 59 SMG
     .desc = Beloved by USSP veterans and feared by friendly fire protocols everywhere. Uses 7.62 Auto ammo.
 ent-WeaponAJ100 = aJ-100
@@ -21,5 +19,3 @@ ent-WeaponSubMachineGunDrozdMk2 = Drozd Mk2
 ent-WeaponSubMachineGunDrozdMk2Empty = { ent-WeaponSubMachineGunDrozdMk2 }
     .desc = { ent-WeaponSubMachineGunDrozdMk2.desc }
     .suffix = Empty
-ent-WeaponSubMachineGunVector = vector Super
-    .desc = An early 30-round Vector Super by Waffle Corp chambered in .40. Effective at short to medium range, it fires in two-round bursts or full auto. Its delayed-blowback system redirects the bolt assembly downward.

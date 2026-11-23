@@ -22,7 +22,6 @@ ent-GunSafeSnubRevolver = safe
     .suffix = Snub Revolver
     .desc = { ent-GunSafeBaseSecure.desc }
 
-ent-GunSafePistolVP78 = safe
     .suffix = VP-78
     .desc = { ent-GunSafeBaseSecure.desc }
 
@@ -66,7 +65,6 @@ ent-GunSafeSuperweaponSmartGun = safe
     .desc = { ent-GunSafeSuperweaponSecureGamma.desc }
     .suffix = SMART, Gamma
 
-ent-GunSafeSuperweaponLWAP = safe
     .desc = { ent-GunSafeSuperweaponSecureGamma.desc }
     .suffix = LWAP, Gamma
 

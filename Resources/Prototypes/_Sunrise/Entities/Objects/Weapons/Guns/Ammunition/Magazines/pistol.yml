@@ -76,39 +76,6 @@
     proto: CartridgePistolAP
 
 - type: entity
-  id: MagazineMP7
-  name: MP7 magazine
-  parent: BaseItem
-  components:
-  - type: Tag
-    tags:
-    - MagazineMP7
-  - type: BallisticAmmoProvider
-    mayTransfer: true
-    proto: CartridgePistolFMJ
-    whitelist:
-      tags:
-      - CartridgePistol
-    capacity: 35
-  - type: Item
-    size: Small
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/mp7.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag
-    steps: 2
-    zeroVisible: false
-  - type: Appearance
-
-- type: entity
   id: MagazinePistolSubMachineGunPPSHExtended
   name: PPSH magazine
   parent: BaseNonCycleableAmmoItem
@@ -177,13 +144,6 @@
   components:
   - type: BallisticAmmoProvider
     proto: null
-
-- type: entity
-  parent: MagazineMP7
-  id: MagazineMP7Extended
-  components:
-  - type: BallisticAmmoProvider
-    capacity: 42
 
 - type: entity
   id: MagazinePistolSubMachineGunFMJ

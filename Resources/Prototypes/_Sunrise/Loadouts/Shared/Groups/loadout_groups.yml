@@ -437,7 +437,7 @@
   - GlockBox
   - MK58Box
   - MK58GoldBox
-  - SnubRevolverBox
+  - InspectorRevolverBox
   - SunriseLaserPistol
   - WeaponDisabler
 
@@ -461,7 +461,7 @@
   - CadetWeaponGlockBox
   - CadetWeaponMK58Box
   - MK58GoldBox
-  - SnubRevolverBox
+  - InspectorRevolverBox
   - CadetWeaponMiniEnergyGun
   - CadetWeaponDisabler
 
@@ -473,7 +473,6 @@
   maxLimit: 1
   loadouts:
   - DetectiveWeapon
-  - WeaponRevolverSnubRevolver
   - DetectiveWeapon20h
   - DetectiveWeapon50h
   - DetectiveWeapon100h
@@ -487,7 +486,7 @@
   - GlockBox
   - MK58Box
   - MK58GoldBox
-  - SnubRevolverBox
+  - InspectorRevolverBox
   - SunriseLaserPistol
   - CadetWeaponMiniEnergyGun
   - WeaponDisabler
