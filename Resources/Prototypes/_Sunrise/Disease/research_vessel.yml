@@ -4,21 +4,33 @@
   name: viral research vessel
   description: A sealed culture vessel with a glass chamber, a sampling port and a research terminal.
   components:
-  # По образцу сосуда аномалии: культура в колбе и индикатор питания светятся отдельными слоями.
+  # По образцу сосуда аномалии: корпус, подсветка стекла и культура лежат отдельными слоями.
   - type: Sprite
     sprite: _Sunrise/Disease/research_vessel.rsi
     noRot: true
     layers:
     - state: base
       map: ["enum.DiseaseResearchVesselVisualLayers.Base"]
-    - state: culture
-      shader: unshaded
-      visible: false
-      map: ["vesselCulture"]
+    # Лючок открыт, пока внутри нет образца.
+    - state: open
+      map: ["vesselOpen"]
     - state: powered
       shader: unshaded
       visible: false
       map: ["vesselPowered"]
+    # Образец виден тёмным силуэтом в стекле, пока исследование не идёт.
+    - state: sample
+      visible: false
+      map: ["vesselSample"]
+    # Светящаяся культура и бегущие полосы сканера — только во время исследования.
+    - state: culture
+      shader: unshaded
+      visible: false
+      map: ["vesselCulture"]
+    - state: running
+      shader: unshaded
+      visible: false
+      map: ["vesselRunning"]
   - type: Machine
     board: SunriseDiseaseResearchVesselCircuitboard
   - type: ResearchClient
@@ -32,12 +44,22 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
+      enum.PowerDeviceVisuals.Powered:
+        vesselPowered:
+          True: { visible: true }
+          False: { visible: false }
       enum.DiseaseResearchVesselVisuals.Loaded:
+        vesselSample:
+          True: { visible: true }
+          False: { visible: false }
+        vesselOpen:
+          True: { visible: false }
+          False: { visible: true }
+      enum.DiseaseResearchVesselVisuals.Active:
         vesselCulture:
           True: { visible: true }
           False: { visible: false }
-      enum.DiseaseResearchVesselVisuals.Active:
-        vesselPowered:
+        vesselRunning:
           True: { visible: true }
           False: { visible: false }
 

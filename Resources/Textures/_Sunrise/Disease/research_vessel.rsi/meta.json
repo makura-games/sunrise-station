@@ -11,10 +11,18 @@
       "name": "base"
     },
     {
+      "name": "open"
+    },
+    {
+      "name": "sample"
+    },
+    {
+      "name": "powered"
+    },
+    {
       "name": "culture",
       "delays": [
         [
-          0.3,
           0.3,
           0.3,
           0.3
@@ -22,13 +30,17 @@
       ]
     },
     {
-      "name": "powered",
+      "name": "running",
       "delays": [
         [
-          0.3,
-          0.3,
-          0.3,
-          0.3
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
         ]
       ]
     }
