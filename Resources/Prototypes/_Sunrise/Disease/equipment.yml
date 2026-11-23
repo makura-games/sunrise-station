@@ -10,10 +10,6 @@
   name: medical virology hud
   description: A medical heads-up display with an extra optical module in a teal casing.
   components:
-
-# Биозащита.
-
-# Фильтр мелкой фракции задерживает почти все капли: втрое лучше обычной стерильной маски.
   - type: Sprite
     sprite: _Sunrise/Clothing/Eyes/Hud/medvirology.rsi
   - type: Clothing
@@ -23,18 +19,22 @@
     - HudMedical
     - PetWearable
     - WhitelistChameleon
+
+# Биозащита.
+
+# Фильтр мелкой фракции задерживает почти все капли: втрое лучше обычной стерильной маски.
 - type: entity
   parent: ClothingMaskSterile
   id: SunriseClothingMaskSterileAdvanced
   name: filtering sterile mask
   description: A tight-fitting sterile mask with a pale green filter layer.
   components:
-
-# Защиту рук и чистоту перчаток лабораторные перчатки берут у нитриловых.
   - type: Sprite
     sprite: _Sunrise/Clothing/Mask/sterile_filtering.rsi
   - type: Clothing
     sprite: _Sunrise/Clothing/Mask/sterile_filtering.rsi
+
+# Защиту рук и чистоту перчаток лабораторные перчатки берут у нитриловых.
 - type: entity
   parent: ClothingHandsGlovesNitrile
   id: SunriseClothingHandsGlovesVirology
@@ -65,14 +65,15 @@
   name: sealed bio hood
   description: A sealed hood with a wide teal-tinted filtered visor.
   components:
-
-# Распылитель побольше: тот же реагент, но запаса хватает на обработку целого отсека.
   - type: Sprite
     sprite: _Sunrise/Clothing/Head/Hoods/Bio/virology_sealed.rsi
   - type: Clothing
     sprite: _Sunrise/Clothing/Head/Hoods/Bio/virology_sealed.rsi
+
+# Распылитель побольше: тот же реагент, но запаса хватает на обработку целого отсека.
+# Приезжает пустым, поэтому наследует общий баллон, а не наполненный распылитель.
 - type: entity
-  parent: SunriseDiseaseSprayer
+  parent: SunriseDiseaseSprayerBase
   id: SunriseDiseaseSprayerLarge
   name: large disinfectant sprayer
   suffix: Empty
@@ -95,8 +96,6 @@
   name: disinfectant grenade
   description: A canister with a green stripe and a droplet pictogram on the side.
   components:
-
-# Облачко, которое стерилизующая арка оставляет после распыления.
   - type: Sprite
     sprite: Objects/Weapons/Grenades/smoke.rsi
     color: "#AEE6E6"
@@ -105,6 +104,8 @@
     - timer
     duration: 8
     spreadAmount: 20
+
+# Облачко, которое стерилизующая арка оставляет после распыления.
 - type: entity
   id: SunriseDisinfectantMist
   name: disinfectant mist

@@ -1,3 +1,3 @@
-ent-SunriseDiseaseDebugDonut = suspicious donut
-    .desc = It smells slightly off.
-    .suffix = Debug
+ent-SunriseDiseaseDebugDonut = { ent-FoodDonutPlain }
+    .desc = { ent-FoodDonutPlain.desc }
+    .suffix = Debug, Infected

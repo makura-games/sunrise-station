@@ -77,7 +77,6 @@
       Manipulator: 2
       Glass: 5
       Cable: 5
-
 - type: entity
   parent: SunriseDiseaseResearchVessel
   id: SunriseDiseaseResearchVesselExperimental
@@ -107,7 +106,6 @@
       Glass: 10
       Cable: 5
       MetalRod: 4
-
 - type: entity
   parent: BaseFlatpack
   id: SunriseDiseaseResearchVesselFlatpack

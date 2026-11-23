@@ -7,9 +7,6 @@
   name: disease analyzer
   description: A hand-held analyzer with a narrow printer slot and a roll of paper.
   components:
-
-# Пульверизатор по образцу садовых опрыскивателей: обеззараживает не прибор, а реагент,
-# так что распылитель ничего не знает о болезнях и заправляется в химии как обычная бутылка.
   # Спрайты в руках общие с медицинским анализатором, иконка своя.
   - type: Item
     heldPrefix: analyzer
@@ -23,28 +20,37 @@
       shader: unshaded
   - type: UseDelay
     delay: 0.5
+
+# Пульверизатор по образцу садовых опрыскивателей: обеззараживает не прибор, а реагент,
+# так что распылитель ничего не знает о болезнях и заправляется в химии как обычная бутылка.
 - type: entity
+  abstract: true
   parent: SprayBottleBase
-  id: SunriseDiseaseSprayer
-  name: disinfectant sprayer
-  suffix: Filled
-  description: A hand sprayer with a measuring scale on the canister.
+  id: SunriseDiseaseSprayerBase
   components:
   - type: Sprite
     sprite: Objects/Tools/Hydroponics/sprays.rsi
     state: nolabelspray
   - type: Item
     sprite: Objects/Tools/Hydroponics/sprays.rsi
-  - type: Solution
-    solution:
-      reagents:
-      - ReagentId: SunriseDisinfectant
-        Quantity: 60
   - type: Spray
     transferAmount: 5
   - type: Tag
     tags:
     - Spray
+
+- type: entity
+  parent: SunriseDiseaseSprayerBase
+  id: SunriseDiseaseSprayer
+  name: disinfectant sprayer
+  suffix: Filled
+  description: A hand sprayer with a measuring scale on the canister.
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SunriseDisinfectant
+        Quantity: 60
 
 # Очки показывают только заражённые предметы рядом: больных людей вирусолог ищет анализатором и мазками.
 - type: entity

@@ -25,9 +25,6 @@
   name: vaccinator
   description: A tall machine with two slots and a rack of ampoules behind glass.
   components:
-
-# Отчёт диагностера. Ванильный лист — узкая кассовая лента, в которой длинные
-# строки симптомов переносятся по одному слову, поэтому берём широкий бланк.
   - type: ItemSlots
   # Контейнеры машины перечисляются целиком: словарь не наследуется, а перезаписывается.
   - type: ContainerContainer
@@ -46,6 +43,9 @@
         enum.DiseaseMachineVisualLayers.IsRunning:
           True: { state: running }
           False: { state: icon }
+
+# Отчёт диагностера. Ванильный лист — узкая кассовая лента, в которой длинные
+# строки симптомов переносятся по одному слову, поэтому берём широкий бланк.
 - type: entity
   parent: DiagnosisReportPaper
   id: SunriseDiagnosisReportPaper

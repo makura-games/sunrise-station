@@ -1,2 +1,2 @@
-ent-SunriseSyndicateDiseaseVial = неизвестная пробирка
-    .desc = Загадочная пробирка с неизвестным содержимым.
+ent-SunriseSyndicateDiseaseVial = { ent-ChemistryEmptyVial }
+    .desc = { ent-ChemistryEmptyVial.desc }

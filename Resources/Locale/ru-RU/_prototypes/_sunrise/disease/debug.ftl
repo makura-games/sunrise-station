@@ -1,3 +1,3 @@
-ent-SunriseDiseaseDebugDonut = подозрительный пончик
-    .desc = Пахнет слегка несвежим.
-    .suffix = Отладка
+ent-SunriseDiseaseDebugDonut = { ent-FoodDonutPlain }
+    .desc = { ent-FoodDonutPlain.desc }
+    .suffix = Отладка, Зараженный

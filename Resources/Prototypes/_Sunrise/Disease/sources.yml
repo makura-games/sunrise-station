@@ -60,8 +60,6 @@
   description: A cloud of sticky haze. Breathing it in seems like a bad idea.
   categories: [ HideSpawnMenu ]
   components:
-
-# Культура из разбитого сосуда: плотное облако на пол-отсека, которому не нужен воздушный путь штамма.
   - type: Sprite
     sprite: Effects/chemsmoke.rsi
     state: chemsmoke
@@ -71,6 +69,8 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+# Культура из разбитого сосуда: плотное облако на пол-отсека, которому не нужен воздушный путь штамма.
 - type: entity
   parent: SunriseDiseaseCloud
   id: SunriseDiseaseCloudBreach

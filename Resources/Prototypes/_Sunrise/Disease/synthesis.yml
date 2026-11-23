@@ -5,13 +5,13 @@
   name: strain blank
   description: A sealed vial of uncharacterized culture medium.
   components:
-
-# Заготовки фиксированного уровня: удобно спавнить для отладки, как ксеноартефакты нужной сложности.
   - type: Sprite
     state: blank
   # Заготовка — редкий расходник: продаётся вдвое дешевле закупки, чтобы перепродажа не окупалась.
   - type: StaticPrice
     price: 400
+
+# Заготовки фиксированного уровня: удобно спавнить для отладки, как ксеноартефакты нужной сложности.
 - type: entity
   parent: SunriseDiseaseBlankSample
   id: SunriseDiseaseBlankSampleWeak
