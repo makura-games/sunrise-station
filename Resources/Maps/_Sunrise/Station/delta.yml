@@ -265490,7 +265490,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 13.5,-12.5
-- proto: SuitStorageBrigmedic
+- proto: SunriseSuitStorageBrigmedic
   entities:
   - uid: 44673
     components:

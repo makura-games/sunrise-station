@@ -1,5 +1,5 @@
 - type: entity
-  id: SuitStorageBrigmedic
+  id: SunriseSuitStorageBrigmedic
   parent: SuitStorageBase
   suffix: Brigmedic, Sunrise
   components:

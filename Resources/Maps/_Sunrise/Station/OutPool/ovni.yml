@@ -49859,7 +49859,7 @@ entities:
     - pos: 0.5,-11.5
       parent: 8
       type: Transform
-- proto: LockerBrigmedicFilled
+- proto: SunriseLockerBrigmedicFilledHardsuit
   entities:
   - uid: 11803
     components:

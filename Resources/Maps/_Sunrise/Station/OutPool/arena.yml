@@ -103131,7 +103131,7 @@ entities:
     - pos: 6.5,-0.5
       parent: 6747
       type: Transform
-- proto: LockerBrigmedicFilled
+- proto: SunriseLockerBrigmedicFilledHardsuit
   entities:
   - uid: 17169
     components:

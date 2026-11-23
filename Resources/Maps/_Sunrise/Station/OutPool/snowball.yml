@@ -102843,7 +102843,7 @@ entities:
     - type: Transform
       pos: 58.5,82.5
       parent: 2
-- proto: LockerBrigmedicFilled
+- proto: SunriseLockerBrigmedicFilledHardsuit
   entities:
   - uid: 14346
     components:

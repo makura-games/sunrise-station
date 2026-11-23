@@ -163739,7 +163739,7 @@ entities:
         - 0
         - 0
         - 0
-- proto: LockerBrigmedicFilled
+- proto: SunriseLockerBrigmedicFilledHardsuit
   entities:
   - uid: 24805
     components:

@@ -78919,7 +78919,7 @@ entities:
         moles:
           Oxygen: 3.3523011
           Nitrogen: 12.611038
-- proto: LockerBrigmedicFilled
+- proto: SunriseLockerBrigmedicFilledHardsuit
   entities:
   - uid: 11040
     components:

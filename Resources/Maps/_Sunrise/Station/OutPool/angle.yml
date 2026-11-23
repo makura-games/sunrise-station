@@ -78669,7 +78669,7 @@ entities:
     - pos: -3.5,-8.5
       parent: 9
       type: Transform
-- proto: LockerBrigmedicFilled
+- proto: SunriseLockerBrigmedicFilledHardsuit
   entities:
   - uid: 6923
     components:
