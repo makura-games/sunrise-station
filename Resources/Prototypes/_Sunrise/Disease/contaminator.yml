@@ -1,3 +1,16 @@
+# Пищевой штамм не передаётся от носителя касанием или каплями.
+- type: disease
+  parent: SunriseGastroenteritis
+  id: SunriseSyndicateFoodborneVirus
+  name: disease-syndicate-foodborne-name
+  description: disease-syndicate-foodborne-description
+  classification: Viral
+  routes: [ Ingestion ]
+  treatmentHints:
+  - disease-hint-fluids
+  - disease-hint-source
+  - disease-hint-syndicate-foodborne
+
 - type: entity
   parent: [ SunriseDiseaseStrainVial, BaseSyndicateContraband ]
   id: SunriseSyndicateDiseaseVial

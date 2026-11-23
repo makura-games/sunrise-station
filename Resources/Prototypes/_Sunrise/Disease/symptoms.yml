@@ -1,0 +1,829 @@
+# Общий набор симптомов: болезни ссылаются на них из пулов стадий с собственными весами.
+# severity — тяжесть для носителя: из неё и заразности считается сила болезни,
+# а сила задаёт размер загадки с партиями вакцины.
+# suppressClaim и unstableClaim — строки свойств пробных партий, по одной на симптом.
+
+# Лёгкие
+- type: diseaseSymptom
+  id: SymptomSoreThroat
+  name: disease-symptom-sore-throat
+  suppressClaim: disease-claim-suppresses-sore-throat
+  unstableClaim: disease-claim-unstable-with-sore-throat
+  probability: 0.15
+  severity: 1
+  effects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Small
+    messages: [ "disease-symptom-sore-throat-popup" ]
+
+- type: diseaseSymptom
+  id: SymptomCough
+  name: disease-symptom-cough
+  suppressClaim: disease-claim-suppresses-cough
+  unstableClaim: disease-claim-unstable-with-cough
+  probability: 0.2
+  severity: 1
+  effects:
+  - !type:Emote
+    emote: Cough
+    showInChat: true
+  spread:
+    range: 1.5
+    chance: 0.15
+
+- type: diseaseSymptom
+  id: SymptomSneeze
+  name: disease-symptom-sneeze
+  suppressClaim: disease-claim-suppresses-sneeze
+  unstableClaim: disease-claim-unstable-with-sneeze
+  probability: 0.12
+  severity: 1
+  effects:
+  - !type:Emote
+    emote: Sneeze
+    showInChat: true
+  spread:
+    range: 2
+    chance: 0.2
+
+- type: diseaseSymptom
+  id: SymptomHeadache
+  name: disease-symptom-headache
+  suppressClaim: disease-claim-suppresses-headache
+  unstableClaim: disease-claim-unstable-with-headache
+  probability: 0.12
+  severity: 1
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Small
+    messages: [ "disease-symptom-headache-onset" ]
+  effects:
+  - !type:StaminaDamage
+    damage: 3
+
+- type: diseaseSymptom
+  id: SymptomRash
+  name: disease-symptom-rash
+  suppressClaim: disease-claim-suppresses-rash
+  unstableClaim: disease-claim-unstable-with-rash
+  probability: 0.1
+  severity: 1
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Medium
+    messages: [ "disease-symptom-rash-onset" ]
+  effects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Small
+    messages: [ "disease-symptom-rash-popup" ]
+
+# Средние
+- type: diseaseSymptom
+  id: SymptomFever
+  name: disease-symptom-fever
+  suppressClaim: disease-claim-suppresses-fever
+  unstableClaim: disease-claim-unstable-with-fever
+  probability: 0.15
+  severity: 2
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: MediumCaution
+    messages: [ "disease-symptom-fever-onset" ]
+  effects:
+  - !type:Jitter
+    amplitude: 3
+    frequency: 3
+    time: 4
+
+- type: diseaseSymptom
+  id: SymptomNausea
+  name: disease-symptom-nausea
+  suppressClaim: disease-claim-suppresses-nausea
+  unstableClaim: disease-claim-unstable-with-nausea
+  probability: 0.05
+  severity: 2
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: MediumCaution
+    messages: [ "disease-symptom-nausea-onset" ]
+  effects:
+  - !type:Vomit
+
+- type: diseaseSymptom
+  id: SymptomMuscleAche
+  name: disease-symptom-muscle-ache
+  suppressClaim: disease-claim-suppresses-muscle-ache
+  unstableClaim: disease-claim-unstable-with-muscle-ache
+  probability: 0.2
+  severity: 2
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Medium
+    messages: [ "disease-symptom-muscle-ache-onset" ]
+  effects:
+  - !type:MovementSpeedModifier
+    walkSpeedModifier: 0.85
+    sprintSpeedModifier: 0.85
+    time: 12
+
+- type: diseaseSymptom
+  id: SymptomFatigue
+  name: disease-symptom-fatigue
+  suppressClaim: disease-claim-suppresses-fatigue
+  unstableClaim: disease-claim-unstable-with-fatigue
+  probability: 0.15
+  severity: 2
+  effects:
+  - !type:StaminaDamage
+    damage: 8
+
+- type: diseaseSymptom
+  id: SymptomChills
+  name: disease-symptom-chills
+  suppressClaim: disease-claim-suppresses-chills
+  unstableClaim: disease-claim-unstable-with-chills
+  probability: 0.15
+  severity: 2
+  effects:
+  - !type:AdjustTemperature
+    amount: -3000
+
+- type: diseaseSymptom
+  id: SymptomDizziness
+  name: disease-symptom-dizziness
+  suppressClaim: disease-claim-suppresses-dizziness
+  unstableClaim: disease-claim-unstable-with-dizziness
+  probability: 0.1
+  severity: 2
+  effects:
+  - !type:Drunk
+    boozePower: 10
+
+- type: diseaseSymptom
+  id: SymptomBlurredVision
+  name: disease-symptom-blurred-vision
+  suppressClaim: disease-claim-suppresses-blurred-vision
+  unstableClaim: disease-claim-unstable-with-blurred-vision
+  probability: 0.1
+  severity: 2
+  effects:
+  - !type:EyeDamage
+    amount: 1
+
+# Тяжёлые
+- type: diseaseSymptom
+  id: SymptomNosebleed
+  name: disease-symptom-nosebleed
+  suppressClaim: disease-claim-suppresses-nosebleed
+  unstableClaim: disease-claim-unstable-with-nosebleed
+  probability: 0.12
+  severity: 3
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: MediumCaution
+    messages: [ "disease-symptom-nosebleed-onset" ]
+  effects:
+  - !type:ModifyBleed
+    amount: 0.5
+
+- type: diseaseSymptom
+  id: SymptomAnemia
+  name: disease-symptom-anemia
+  suppressClaim: disease-claim-suppresses-anemia
+  unstableClaim: disease-claim-unstable-with-anemia
+  probability: 0.15
+  severity: 3
+  effects:
+  - !type:ModifyBloodLevel
+    amount: -2
+
+- type: diseaseSymptom
+  id: SymptomHallucinations
+  name: disease-symptom-hallucinations
+  suppressClaim: disease-claim-suppresses-hallucinations
+  unstableClaim: disease-claim-unstable-with-hallucinations
+  probability: 0.1
+  severity: 3
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: LargeCaution
+    messages: [ "disease-symptom-hallucinations-onset" ]
+  effects:
+  - !type:Drunk
+    boozePower: 25
+
+- type: diseaseSymptom
+  id: SymptomHyperthermia
+  name: disease-symptom-hyperthermia
+  suppressClaim: disease-claim-suppresses-hyperthermia
+  unstableClaim: disease-claim-unstable-with-hyperthermia
+  probability: 0.2
+  severity: 4
+  effects:
+  - !type:AdjustTemperature
+    amount: 8000
+
+- type: diseaseSymptom
+  id: SymptomSuffocation
+  name: disease-symptom-suffocation
+  suppressClaim: disease-claim-suppresses-suffocation
+  unstableClaim: disease-claim-unstable-with-suffocation
+  probability: 0.25
+  severity: 4
+  suppressible: false
+  effects:
+  - !type:HealthChange
+    damage:
+      types:
+        Asphyxiation: 0.6
+
+- type: diseaseSymptom
+  id: SymptomToxemia
+  name: disease-symptom-toxemia
+  suppressClaim: disease-claim-suppresses-toxemia
+  unstableClaim: disease-claim-unstable-with-toxemia
+  probability: 0.5
+  severity: 4
+  suppressible: false
+  effects:
+  - !type:HealthChange
+    damage:
+      types:
+        Poison: 0.5
+
+# Аномальные
+- type: diseaseSymptom
+  id: SymptomLuminescence
+  name: disease-symptom-luminescence
+  suppressClaim: disease-claim-suppresses-luminescence
+  unstableClaim: disease-claim-unstable-with-luminescence
+  probability: 0.3
+  severity: 1
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Medium
+    messages: [ "disease-symptom-luminescence-onset" ]
+  effects:
+  - !type:Glow
+    radius: 2
+
+# Синдикатский аэрозоль: усиленная передача и временные эффекты без урона здоровью.
+- type: diseaseSymptom
+  id: SunriseSymptomHazeCough
+  name: disease-symptom-cough
+  suppressClaim: disease-claim-suppresses-cough
+  unstableClaim: disease-claim-unstable-with-cough
+  probability: 0.6
+  severity: 1
+  effects:
+  - !type:Emote
+    emote: Cough
+    showInChat: false
+  spread:
+    range: 2.5
+    chance: 0.5
+
+- type: diseaseSymptom
+  id: SunriseSymptomHazeWeakness
+  name: disease-symptom-muscle-ache
+  suppressClaim: disease-claim-suppresses-muscle-ache
+  unstableClaim: disease-claim-unstable-with-muscle-ache
+  probability: 1
+  severity: 2
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Medium
+    messages: [ "disease-symptom-muscle-ache-onset" ]
+  effects:
+  - !type:MovementSpeedModifier
+    walkSpeedModifier: 0.7
+    sprintSpeedModifier: 0.7
+    time: 6
+
+- type: diseaseSymptom
+  id: SunriseSymptomHazeFatigue
+  name: disease-symptom-fatigue
+  suppressClaim: disease-claim-suppresses-fatigue
+  unstableClaim: disease-claim-unstable-with-fatigue
+  probability: 0.35
+  severity: 2
+  effects:
+  - !type:StaminaDamage
+    damage: 8
+
+- type: diseaseSymptom
+  id: SunriseSymptomHazeTremor
+  name: disease-symptom-haze-tremor
+  suppressClaim: disease-claim-suppresses-haze-tremor
+  unstableClaim: disease-claim-unstable-with-haze-tremor
+  probability: 0.4
+  severity: 2
+  effects:
+  - !type:Jitter
+    amplitude: 3
+    frequency: 3
+    time: 4
+
+# Полезные: в природных болезнях не встречаются, выводятся только под микроскопом.
+# Заготовка изредка кладёт один такой симптом на последнюю стадию, поэтому severity у них нулевая:
+# бафф не должен делать загадку с вакциной сложнее. Каждый бафф чем-то расплачивается.
+# Частота срабатывания считается от шага болезни в 5 секунд.
+- type: diseaseSymptom
+  id: SunriseSymptomRegeneration
+  name: disease-symptom-regeneration
+  suppressClaim: disease-claim-suppresses-regeneration
+  unstableClaim: disease-claim-unstable-with-regeneration
+  beneficial: true
+  # Срабатывает каждый шаг: около 10 брута и 10 ожогов в минуту,
+  # зато голод тратится примерно вдвое быстрее.
+  probability: 1
+  severity: 0
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Medium
+    messages: [ "disease-symptom-regeneration-onset" ]
+  effects:
+  - !type:HealthChange
+    damage:
+      groups:
+        Brute: -0.85
+        Burn: -0.85
+  - !type:Satiate
+    satiationType: Hunger
+    factor: -0.15
+
+- type: diseaseSymptom
+  id: SunriseSymptomAdrenaline
+  name: disease-symptom-adrenaline
+  suppressClaim: disease-claim-suppresses-adrenaline
+  unstableClaim: disease-claim-unstable-with-adrenaline
+  beneficial: true
+  # Ускорение на 15% примерно четверть времени, за каждый прилив — глоток воды.
+  probability: 0.15
+  severity: 0
+  effects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Small
+    messages: [ "disease-symptom-adrenaline-popup" ]
+  - !type:MovementSpeedModifier
+    walkSpeedModifier: 1.15
+    sprintSpeedModifier: 1.15
+    time: 6
+    effectProto: SunriseDiseaseAdrenalineStatusEffect
+  - !type:Satiate
+    satiationType: Thirst
+    factor: -2
+
+- type: diseaseSymptom
+  id: SunriseSymptomEfficientMetabolism
+  name: disease-symptom-efficient-metabolism
+  suppressClaim: disease-claim-suppresses-efficient-metabolism
+  unstableClaim: disease-claim-unstable-with-efficient-metabolism
+  beneficial: true
+  # Возвращает примерно половину того, что тратится на голод и жажду: есть и пить всё равно нужно.
+  probability: 0.3
+  severity: 0
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Small
+    messages: [ "disease-symptom-efficient-metabolism-onset" ]
+  effects:
+  - !type:Satiate
+    satiationType: Hunger
+    factor: 0.25
+  - !type:Satiate
+    satiationType: Thirst
+    factor: 0.85
+
+- type: diseaseSymptom
+  id: SunriseSymptomEndurance
+  name: disease-symptom-endurance
+  suppressClaim: disease-claim-suppresses-endurance
+  unstableClaim: disease-claim-unstable-with-endurance
+  beneficial: true
+  # Каждый шаг снимает 5 урона выносливости, в том числе во время паузы после удара,
+  # когда обычное восстановление стоит. Жажда тратится примерно вдвое быстрее.
+  probability: 1
+  severity: 0
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Small
+    messages: [ "disease-symptom-endurance-onset" ]
+  effects:
+  - !type:StaminaDamage
+    damage: -5
+  - !type:Satiate
+    satiationType: Thirst
+    factor: -0.5
+
+- type: diseaseSymptom
+  id: SunriseSymptomDetoxification
+  name: disease-symptom-detoxification
+  suppressClaim: disease-claim-suppresses-detoxification
+  unstableClaim: disease-claim-unstable-with-detoxification
+  beneficial: true
+  # Около 6 токсинов в минуту. Печень работает на износ: каждое очищение отдаётся слабостью.
+  probability: 0.5
+  severity: 0
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Small
+    messages: [ "disease-symptom-detoxification-onset" ]
+  effects:
+  - !type:HealthChange
+    damage:
+      groups:
+        Toxin: -1
+  - !type:StaminaDamage
+    damage: 4
+
+- type: diseaseSymptom
+  id: SunriseSymptomCapaciousLungs
+  name: disease-symptom-capacious-lungs
+  suppressClaim: disease-claim-suppresses-capacious-lungs
+  unstableClaim: disease-claim-unstable-with-capacious-lungs
+  beneficial: true
+  # Около 12 удушья в минуту: не спасает в вакууме, но заметно растягивает запас времени.
+  # Голод тратится примерно вдвое быстрее.
+  probability: 1
+  severity: 0
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Small
+    messages: [ "disease-symptom-capacious-lungs-onset" ]
+  effects:
+  - !type:HealthChange
+    damage:
+      groups:
+        Airloss: -1
+  - !type:Satiate
+    satiationType: Hunger
+    factor: -0.15
+
+- type: diseaseSymptom
+  id: SunriseSymptomTricordrazineSynthesis
+  name: disease-symptom-tricordrazine-synthesis
+  suppressClaim: disease-claim-suppresses-tricordrazine-synthesis
+  unstableClaim: disease-claim-unstable-with-tricordrazine-synthesis
+  beneficial: true
+  # По юниту трикордразина примерно раз в 15 секунд: мягкое лечение всего понемногу за счёт голода.
+  probability: 0.3
+  severity: 0
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Small
+    messages: [ "disease-symptom-tricordrazine-synthesis-onset" ]
+  effects:
+  - !type:AddReagentToBloodstream
+    reagent: Tricordrazine
+    quantity: 1
+  - !type:Satiate
+    satiationType: Hunger
+    factor: -0.3
+
+# Пробелы генома: ничего не делают и в природе не встречаются. Заготовка с шансом добавляет
+# их на стадии сверх обычных вариантов, чтобы вирусолог мог оставить стадию безвредной.
+- type: diseaseSymptom
+  id: SunriseSymptomNil
+  name: disease-symptom-nil
+  suppressClaim: disease-claim-suppresses-nil
+  unstableClaim: disease-claim-unstable-with-nil
+  probability: 0
+  severity: 0
+  effects: []
+
+- type: diseaseSymptom
+  id: SunriseSymptomWaiting
+  name: disease-symptom-waiting
+  suppressClaim: disease-claim-suppresses-waiting
+  unstableClaim: disease-claim-unstable-with-waiting
+  probability: 0
+  severity: 0
+  effects: []
+
+# Лёгкие симптомы по мотивам SS13: неприятно и заметно со стороны, но без вреда здоровью.
+- type: diseaseSymptom
+  id: SunriseSymptomItch
+  name: disease-symptom-itch
+  suppressClaim: disease-claim-suppresses-itch
+  unstableClaim: disease-claim-unstable-with-itch
+  probability: 0.12
+  severity: 1
+  effects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Small
+    messages:
+    - disease-symptom-itch-popup-1
+    - disease-symptom-itch-popup-2
+
+- type: diseaseSymptom
+  id: SunriseSymptomPhlegm
+  name: disease-symptom-phlegm
+  suppressClaim: disease-claim-suppresses-phlegm
+  unstableClaim: disease-claim-unstable-with-phlegm
+  probability: 0.12
+  severity: 1
+  effects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Small
+    messages: [ "disease-symptom-phlegm-popup" ]
+  - !type:Emote
+    emote: Cough
+    showInChat: true
+  spread:
+    range: 1.5
+    chance: 0.1
+
+- type: diseaseSymptom
+  id: SunriseSymptomSalivation
+  name: disease-symptom-salivation
+  suppressClaim: disease-claim-suppresses-salivation
+  unstableClaim: disease-claim-unstable-with-salivation
+  probability: 0.1
+  severity: 1
+  effects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Small
+    messages: [ "disease-symptom-salivation-popup" ]
+
+- type: diseaseSymptom
+  id: SunriseSymptomTwitch
+  name: disease-symptom-twitch
+  suppressClaim: disease-claim-suppresses-twitch
+  unstableClaim: disease-claim-unstable-with-twitch
+  probability: 0.15
+  severity: 1
+  effects:
+  - !type:Jitter
+    amplitude: 2
+    frequency: 4
+    time: 2
+
+- type: diseaseSymptom
+  id: SunriseSymptomLaughter
+  name: disease-symptom-laughter
+  suppressClaim: disease-claim-suppresses-laughter
+  unstableClaim: disease-claim-unstable-with-laughter
+  probability: 0.1
+  severity: 1
+  effects:
+  - !type:Emote
+    emote: Laugh
+    showInChat: true
+
+- type: diseaseSymptom
+  id: SunriseSymptomScreaming
+  name: disease-symptom-screaming
+  suppressClaim: disease-claim-suppresses-screaming
+  unstableClaim: disease-claim-unstable-with-screaming
+  probability: 0.06
+  severity: 1
+  effects:
+  - !type:Emote
+    emote: Scream
+    showInChat: true
+
+# Гудок доступен только синтетикам, поэтому эмоция навязывается принудительно.
+- type: diseaseSymptom
+  id: SunriseSymptomHonking
+  name: disease-symptom-honking
+  suppressClaim: disease-claim-suppresses-honking
+  unstableClaim: disease-claim-unstable-with-honking
+  probability: 0.1
+  severity: 1
+  effects:
+  - !type:Emote
+    emote: Honk
+    showInChat: true
+    force: true
+
+- type: diseaseSymptom
+  id: SunriseSymptomHairLoss
+  name: disease-symptom-hair-loss
+  suppressClaim: disease-claim-suppresses-hair-loss
+  unstableClaim: disease-claim-unstable-with-hair-loss
+  # Волосы выпадают в первые минуты, а заново отращённые у цирюльника выпадут снова.
+  probability: 0.1
+  severity: 1
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Medium
+    messages: [ "disease-symptom-hair-loss-onset" ]
+  effects:
+  - !type:HairLoss
+
+# Средние.
+- type: diseaseSymptom
+  id: SunriseSymptomVoraciousAppetite
+  name: disease-symptom-voracious-appetite
+  suppressClaim: disease-claim-suppresses-voracious-appetite
+  unstableClaim: disease-claim-unstable-with-voracious-appetite
+  # Голод тратится примерно втрое быстрее.
+  probability: 0.3
+  severity: 2
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Medium
+    messages: [ "disease-symptom-voracious-appetite-onset" ]
+  effects:
+  - !type:Satiate
+    satiationType: Hunger
+    factor: -1
+
+- type: diseaseSymptom
+  id: SunriseSymptomPacifism
+  name: disease-symptom-pacifism
+  suppressClaim: disease-claim-suppresses-pacifism
+  unstableClaim: disease-claim-unstable-with-pacifism
+  # Примерно треть времени больной не может ударить.
+  probability: 0.25
+  severity: 2
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: Medium
+    messages: [ "disease-symptom-pacifism-onset" ]
+  effects:
+  - !type:GenericStatusEffect
+    key: Pacified
+    component: Pacified
+    time: 6
+
+- type: diseaseSymptom
+  id: SunriseSymptomGasSynthesis
+  name: disease-symptom-gas-synthesis
+  suppressClaim: disease-claim-suppresses-gas-synthesis
+  unstableClaim: disease-claim-unstable-with-gas-synthesis
+  # Понемногу копит углекислоту: опасно в тесной закрытой каюте, а не на всей станции.
+  probability: 0.15
+  severity: 2
+  effects:
+  - !type:CreateGas
+    gas: CarbonDioxide
+    moles: 1
+  - !type:PopupMessage
+    type: Pvs
+    visualType: Small
+    messages: [ "disease-symptom-gas-synthesis-popup" ]
+
+- type: diseaseSymptom
+  id: SunriseSymptomBeeCough
+  name: disease-symptom-bee-cough
+  suppressClaim: disease-claim-suppresses-bee-cough
+  unstableClaim: disease-claim-unstable-with-bee-cough
+  # Редкий: пчела в среднем раз в три минуты, иначе отдел зарастает роем.
+  probability: 0.03
+  severity: 2
+  effects:
+  - !type:Emote
+    emote: Cough
+    showInChat: true
+  - !type:SpawnEntity
+    entity: MobBee
+  - !type:PopupMessage
+    type: Local
+    visualType: MediumCaution
+    messages: [ "disease-symptom-bee-cough-popup" ]
+
+- type: diseaseSymptom
+  id: SunriseSymptomHistamineSynthesis
+  name: disease-symptom-histamine-synthesis
+  suppressClaim: disease-claim-suppresses-histamine-synthesis
+  unstableClaim: disease-claim-unstable-with-histamine-synthesis
+  probability: 0.15
+  severity: 2
+  effects:
+  - !type:AddReagentToBloodstream
+    reagent: Histamine
+    quantity: 1
+
+- type: diseaseSymptom
+  id: SunriseSymptomUnstableNucleotide
+  name: disease-symptom-unstable-nucleotide
+  suppressClaim: disease-claim-suppresses-unstable-nucleotide
+  unstableClaim: disease-claim-unstable-with-unstable-nucleotide
+  # Иногда цепляет вторую болезнь — космическую простуду — через обычные проверки заражения.
+  probability: 0.03
+  severity: 2
+  effects:
+  - !type:InfectDisease
+    disease: SunriseSpaceCold
+    route: Contact
+
+# Тяжёлые.
+- type: diseaseSymptom
+  id: SunriseSymptomNarcolepsy
+  name: disease-symptom-narcolepsy
+  suppressClaim: disease-claim-suppresses-narcolepsy
+  unstableClaim: disease-claim-unstable-with-narcolepsy
+  probability: 0.04
+  severity: 3
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: MediumCaution
+    messages: [ "disease-symptom-narcolepsy-onset" ]
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectForcedSleeping
+    time: 6
+
+- type: diseaseSymptom
+  id: SunriseSymptomBlackout
+  name: disease-symptom-blackout
+  suppressClaim: disease-claim-suppresses-blackout
+  unstableClaim: disease-claim-unstable-with-blackout
+  probability: 0.05
+  severity: 3
+  effects:
+  - !type:GenericStatusEffect
+    key: TemporaryBlindness
+    component: TemporaryBlindness
+    time: 5
+  - !type:PopupMessage
+    type: Local
+    visualType: MediumCaution
+    messages: [ "disease-symptom-blackout-popup" ]
+
+- type: diseaseSymptom
+  id: SunriseSymptomSeizures
+  name: disease-symptom-seizures
+  suppressClaim: disease-claim-suppresses-seizures
+  unstableClaim: disease-claim-unstable-with-seizures
+  probability: 0.04
+  severity: 3
+  effects:
+  - !type:ModifyKnockdown
+    time: 2
+    drop: true
+  - !type:Jitter
+    amplitude: 5
+    frequency: 5
+    time: 4
+
+- type: diseaseSymptom
+  id: SunriseSymptomCellularDecay
+  name: disease-symptom-cellular-decay
+  suppressClaim: disease-claim-suppresses-cellular-decay
+  unstableClaim: disease-claim-unstable-with-cellular-decay
+  probability: 0.3
+  severity: 4
+  effects:
+  - !type:HealthChange
+    damage:
+      types:
+        Cellular: 0.5
+
+- type: diseaseSymptom
+  id: SunriseSymptomRadiationSickness
+  name: disease-symptom-radiation-sickness
+  suppressClaim: disease-claim-suppresses-radiation-sickness
+  unstableClaim: disease-claim-unstable-with-radiation-sickness
+  probability: 0.3
+  severity: 4
+  effects:
+  - !type:HealthChange
+    damage:
+      types:
+        Radiation: 0.5
+
+# Превращение откатывается при крите и смерти, так что исход тяжёлый, но не окончательный.
+- type: diseaseSymptom
+  id: SunriseSymptomMonkism
+  name: disease-symptom-monkism
+  suppressClaim: disease-claim-suppresses-monkism
+  unstableClaim: disease-claim-unstable-with-monkism
+  probability: 0.05
+  severity: 5
+  suppressible: false
+  onsetEffects:
+  - !type:PopupMessage
+    type: Local
+    visualType: LargeCaution
+    messages: [ "disease-symptom-monkism-onset" ]
+  effects:
+  - !type:Polymorph
+    prototype: Monkey
