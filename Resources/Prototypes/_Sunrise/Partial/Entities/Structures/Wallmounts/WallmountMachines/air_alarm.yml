@@ -1,0 +1,30 @@
+# Панели тревоги используют состояния RSI Sunrise вместо новых раздельных спрайтов Wizden.
+
+- type: !PartialOnly entity
+  id: AirAlarm
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/air_monitors.rsi
+    offset: 0, 0
+    layers: !Clear
+    - state: alarmp
+      map: ["airAlarmBase"]
+    - state: alarm0
+      map: ["airAlarmState"]
+    - state: alarmx
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+
+- type: !PartialOnly entity
+  id: AirAlarmAssembly
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/air_monitors.rsi
+    layers: !Clear
+    - state: alarm_b1
+      map: ["enum.ConstructionVisuals.Layer"]
+  - type: GenericVisualizer
+    visuals:
+      enum.ConstructionVisuals.Key:
+        enum.ConstructionVisuals.Layer:
+          assembly: { state: alarm_b1 }
+          electronics: { state: alarm_b1 }

@@ -3,9 +3,9 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._Sunrise.NewLife
 {
-    public abstract class SharedNewLifeSystem : EntitySystem
+    public abstract partial class SharedNewLifeSystem : EntitySystem
     {
-        [Dependency] protected readonly SharedPopupSystem Popup = default!;
+        [Dependency] protected SharedPopupSystem Popup = default!;
 
         public override void Initialize()
         {

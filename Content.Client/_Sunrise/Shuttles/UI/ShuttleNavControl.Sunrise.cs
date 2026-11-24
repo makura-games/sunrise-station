@@ -4,6 +4,7 @@ using Content.Shared.Shuttles.Components;
 using Robust.Client.Graphics;
 using Robust.Shared.Map;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Client.Shuttles.UI;
 
 public sealed partial class ShuttleNavControl

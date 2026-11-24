@@ -1,6 +1,4 @@
-﻿// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt;
-
-using System.Linq;
+﻿using System.Linq;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
@@ -16,8 +14,8 @@ namespace Content.Client._Sunrise.Razor;
 [GenerateTypedNameReferences]
 public sealed partial class RazorSingleMarkingPicker : BoxContainer
 {
-    [Dependency] private readonly MarkingManager _markingManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private MarkingManager _markingManager = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public Action<(int slot, string id)>? OnMarkingSelect;
     public Action<int>? OnSlotRemove;

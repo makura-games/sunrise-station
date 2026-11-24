@@ -2845,13 +2845,11 @@ entities:
   - uid: 385
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 0.5,-13.5
       parent: 1
   - uid: 386
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 6.5,-13.5
       parent: 1
   - uid: 387
@@ -2862,103 +2860,86 @@ entities:
   - uid: 388
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 2.5,1.5
       parent: 1
   - uid: 389
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 3.5,2.5
       parent: 1
   - uid: 390
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 4.5,1.5
       parent: 1
   - uid: 391
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 0.5,-2.5
       parent: 1
   - uid: 392
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 0.5,-3.5
       parent: 1
   - uid: 393
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 6.5,-2.5
       parent: 1
   - uid: 394
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 6.5,-3.5
       parent: 1
   - uid: 395
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 10.5,-7.5
       parent: 1
   - uid: 396
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 11.5,-11.5
       parent: 1
   - uid: 397
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 8.5,-13.5
       parent: 1
   - uid: 398
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 3.5,-14.5
       parent: 1
   - uid: 399
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -1.5,-13.5
       parent: 1
   - uid: 400
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -3.5,-7.5
       parent: 1
   - uid: 401
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -4.5,-11.5
       parent: 1
   - uid: 402
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 2.5,-10.5
       parent: 1
   - uid: 403
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 3.5,-10.5
       parent: 1
   - uid: 404
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 4.5,-10.5
       parent: 1
 - proto: Gyroscope

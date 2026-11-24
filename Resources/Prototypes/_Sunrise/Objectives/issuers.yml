@@ -1,0 +1,19 @@
+- type: objectiveIssuer
+  id: SunriseFleshCult
+  name: flesh-cult
+
+- type: objectiveIssuer
+  id: SunriseAbductors
+  name: objective-issuer-abductors
+
+- type: objectiveIssuer
+  id: SunriseAbductorVictim
+  name: objective-issuer-abductor-victim
+
+- type: objectiveIssuer
+  id: SunriseSelf
+  name: objective-issuer-self
+
+- type: objectiveIssuer
+  id: SunriseBloodCult
+  name: objective-issuer-cult

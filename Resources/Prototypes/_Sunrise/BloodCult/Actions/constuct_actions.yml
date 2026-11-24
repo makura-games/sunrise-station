@@ -1,14 +1,15 @@
-﻿- type: entity
+- type: entity
   parent: BaseAction
   id: ArtificerCreateSoulStone
   categories: [ HideSpawnMenu ]
   components:
     - type: Action
-      icon:
-        sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-        state: phaseshift
       useDelay: 300
       sound: /Audio/_Sunrise/BloodCult/curse.ogg
+    - type: Sprite
+      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+      layers:
+      - state: phaseshift
     - type: InstantAction
       event: !type:ArtificerCreateSoulStoneActionEvent
 
@@ -19,11 +20,12 @@
   components:
     - type: Action
       itemIconStyle: NoItem
-      icon:
-        sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-        state: artificer
       sound: /Audio/_Sunrise/BloodCult/curse.ogg
       useDelay: 180
+    - type: Sprite
+      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+      layers:
+      - state: artificer
     - type: InstantAction
       event: !type:ArtificerCreateConstructShellActionEvent
 
@@ -34,11 +36,12 @@
   components:
     - type: Action
       itemIconStyle: NoItem
-      icon:
-        sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-        state: floorconstruct
       sound: /Audio/_Sunrise/BloodCult/curse.ogg
       useDelay: 2
+    - type: Sprite
+      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+      layers:
+      - state: floorconstruct
     - type: InstantAction
       event: !type:ArtificerConvertCultistFloorActionEvent
 
@@ -49,11 +52,12 @@
   components:
     - type: Action
       itemIconStyle: NoItem
-      icon:
-        sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-        state: lesserconstruct
       sound: /Audio/_Sunrise/BloodCult/curse.ogg
       useDelay: 20
+    - type: Sprite
+      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+      layers:
+      - state: lesserconstruct
     - type: InstantAction
       event: !type:ArtificerCreateCultistWallActionEvent
 
@@ -64,11 +68,12 @@
   components:
     - type: Action
       itemIconStyle: NoItem
-      icon:
-        sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-        state: lesserconstruct
       sound: /Audio/_Sunrise/BloodCult/curse.ogg
       useDelay: 60
+    - type: Sprite
+      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+      layers:
+      - state: lesserconstruct
     - type: InstantAction
       event: !type:ArtificerCreateCultistAirlockActionEvent
 
@@ -79,11 +84,12 @@
   components:
     - type: Action
       itemIconStyle: NoItem
-      icon:
-        sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-        state: phaseshift
       sound: /Audio/_Sunrise/BloodCult/wraith_phase.ogg
       useDelay: 20
+    - type: Sprite
+      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+      layers:
+      - state: phaseshift
     - type: InstantAction
       event: !type:WraithPhaseActionEvent
 
@@ -94,9 +100,10 @@
   components:
     - type: Action
       itemIconStyle: NoItem
-      icon:
-        sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
-        state: cultforcewall
       useDelay: 35
+    - type: Sprite
+      sprite: /Textures/_Sunrise/BloodCult/actions_cult.rsi
+      layers:
+      - state: cultforcewall
     - type: InstantAction
       event: !type:JuggernautCreateWallActionEvent

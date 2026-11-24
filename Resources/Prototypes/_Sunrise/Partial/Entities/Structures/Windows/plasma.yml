@@ -1,0 +1,29 @@
+- type: !PartialOnly entity
+  id: PlasmaWindowDirectional
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Windows/directional.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Windows/directional.rsi
+
+- type: !PartialOnly entity
+  id: PlasmaWindow
+  components:
+  - type: Sprite
+    layers: !Remove
+    sprite: _Sunrise/Structures/Windows/plasma_window.rsi
+  - type: Icon
+    sprite: _Sunrise/Structures/Windows/plasma_window.rsi
+    state: full
+
+- type: !PartialOnly entity
+  id: PlasmaWindowDiagonal
+  components:
+  - type: Sprite
+    layers: !Remove
+    drawdepth: WallTops
+    sprite: _Sunrise/Structures/Windows/plasma_diagonal.rsi
+    state: state0
+  - type: Icon
+    sprite: _Sunrise/Structures/Windows/plasma_diagonal.rsi
+    state: state0

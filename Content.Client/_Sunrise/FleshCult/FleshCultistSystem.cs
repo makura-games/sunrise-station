@@ -1,11 +1,10 @@
-﻿using Content.Shared._Sunrise.FleshCult;
+using Content.Shared._Sunrise.FleshCult;
 using Content.Shared.StatusIcon.Components;
 using Robust.Shared.Prototypes;
 namespace Content.Client._Sunrise.FleshCult;
 
-public sealed class FleshCultistSystem : EntitySystem
+public sealed partial class FleshCultistSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {
@@ -17,7 +16,7 @@ public sealed class FleshCultistSystem : EntitySystem
 
     private void GetFleshCultistIcon(Entity<FleshCultistComponent> ent, ref GetStatusIconsEvent args)
     {
-        var iconPrototype = _prototype.Index(ent.Comp.StatusIcon);
+        var iconPrototype = ProtoMan.Index(ent.Comp.StatusIcon);
         args.StatusIcons.Add(iconPrototype);
     }
 
@@ -26,7 +25,7 @@ public sealed class FleshCultistSystem : EntitySystem
         if (HasComp<FleshCultistComponent>(ent))
             return;
 
-        var iconPrototype = _prototype.Index(ent.Comp.StatusIcon);
+        var iconPrototype = ProtoMan.Index(ent.Comp.StatusIcon);
         args.StatusIcons.Add(iconPrototype);
     }
 }

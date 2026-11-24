@@ -48,26 +48,26 @@ using ClientRsi = Robust.Client.Graphics.RSI;
 namespace Content.Client.Lobby
 {
     // TODO: Полностью скопировать в папку санрайза, это сбросить до состояния оффов или закоментировать
-    public sealed class LobbyState : Robust.Client.State.State
+    public sealed partial class LobbyState : Robust.Client.State.State
     {
-        [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
-        [Dependency] private readonly IEntityManager _entityManager = default!;
-        [Dependency] private readonly IResourceCache _resourceCache = default!;
-        [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly IVoteManager _voteManager = default!;
-        [Dependency] private readonly ClientsidePlaytimeTrackingManager _playtimeTracking = default!;
-        [Dependency] private readonly IPrototypeManager _protoMan = default!;
-        [Dependency] private readonly IParallaxManager _parallaxManager = default!;
-        [Dependency] private readonly ISerializationManager _serialization = default!;
-        [Dependency] private readonly IResourceManager _resource = default!;
-        [Dependency] private readonly ServersHubManager _serversHubManager = default!;
-        [Dependency] private readonly ContributorsManager _contributorsManager = default!;
-        [Dependency] private readonly ChangelogManager _changelogManager = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly NetTexturesManager _netTexturesManager = default!;
-        [Dependency] private readonly ILogManager _logManager = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
+        [Dependency] private IClientConsoleHost _consoleHost = default!;
+        [Dependency] private IEntityManager _entityManager = default!;
+        [Dependency] private IResourceCache _resourceCache = default!;
+        [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private IVoteManager _voteManager = default!;
+        [Dependency] private ClientsidePlaytimeTrackingManager _playtimeTracking = default!;
+        [Dependency] private IPrototypeManager _protoMan = default!;
+        [Dependency] private IParallaxManager _parallaxManager = default!;
+        [Dependency] private ISerializationManager _serialization = default!;
+        [Dependency] private IResourceManager _resource = default!;
+        [Dependency] private ServersHubManager _serversHubManager = default!;
+        [Dependency] private ContributorsManager _contributorsManager = default!;
+        [Dependency] private ChangelogManager _changelogManager = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private NetTexturesManager _netTexturesManager = default!;
+        [Dependency] private ILogManager _logManager = default!;
+        [Dependency] private IRobustRandom _random = default!;
 
         private ClientGameTicker _gameTicker = default!;
         private ContentAudioSystem _contentAudioSystem = default!;

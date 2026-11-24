@@ -6,6 +6,9 @@
   playTimeTracker: AntagThief # Sunrise-Edit
   objective: roles-antag-thief-objective
   guides: [ Thieves ]
+  tags:
+  - OnStation
+  - Roundstart
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 1h
@@ -14,6 +17,24 @@
     sprite: /Textures/_Sunrise/Interface/Misc/antag_preview.rsi
     state: thief
   storytellerStress: 0.5 # Sunrise-Edit
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: Thief
+  prefRoles:
+  - Thief
+  allowNonHumans: true
+  multiAntagSetting: NotExclusive
+  startingGear: ThiefGear
+  components:
+  # - type: Pacified # Sunrise-Edit
+  - type: Thieving
+    stripTimeReduction: 2
+    stealthy: true
+  mindRoles:
+  - MindRoleThief
+  briefing:
+    sound: "/Audio/Misc/thief_greeting.ogg"
 
 - type: startingGear
   id: ThiefGear

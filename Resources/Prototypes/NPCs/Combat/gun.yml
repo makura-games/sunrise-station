@@ -96,13 +96,28 @@
 - type: htnCompound
   id: RangedCombatCompound
   branches:
-    # Sunrise-Edit-Start
+    # Close or rack the gun chamber if necessary
     - preconditions:
-        - !type:IsBoltOpenPrecondition
+        - !type:ActiveHandComponentPrecondition
+          components:
+            - type: Gun
+        - !type:GunAmmoPrecondition
+          minPercent: 0.001
+        - !type:NeedToRackBoltPrecondition
       tasks:
         - !type:HTNPrimitiveTask
-          operator: !type:CloseBoltOperator
-    # Sunrise-Edit-End
+          operator: !type:RackBoltOperator
+
+    # Wield gun
+    - preconditions:
+        - !type:ActiveHandComponentPrecondition
+          components:
+            - type: Gun
+        - !type:WieldedPrecondition
+          wielded: false
+      tasks:
+        - !type:HTNPrimitiveTask
+          operator: !type:WieldOperator
 
     # Move to target and shoot them if ammo
     - preconditions:
@@ -142,14 +157,11 @@
 #          task: PickupAmmoCompound
 
     # Pickup gun with ammo if we have no ammo
-    -  preconditions:
-         - !type:ActiveHandComponentPrecondition
-           components:
-             - type: Gun
-           invert: true
-       tasks:
-         - !type:HTNCompoundTask
-           task: PickupGunCompound
+    - preconditions:
+        - !type:ActiveHandFreePrecondition
+      tasks:
+        - !type:HTNCompoundTask
+          task: PickupGunCompound
 
     # Discard gun if no ammo
     - preconditions:

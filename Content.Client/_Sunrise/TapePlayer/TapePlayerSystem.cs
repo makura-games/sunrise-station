@@ -3,15 +3,16 @@ using Content.Shared._Sunrise.TapePlayer;
 using Robust.Client.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 
 namespace Content.Client._Sunrise.TapePlayer
 {
-    public sealed class TapePlayerSystem : SharedTapePlayerSystem
+    public sealed partial class TapePlayerSystem : SharedTapePlayerSystem
     {
-        [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
-        [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly INetManager _netManager = default!;
+        [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
+        [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private IClientNetManager _netManager = default!;
 
         private bool _tapePlayerClientEnabled;
 
@@ -30,6 +31,7 @@ namespace Content.Client._Sunrise.TapePlayer
         {
             base.Shutdown();
             _cfg.UnsubValueChanged(SunriseCCVars.TapePlayerClientEnabled, OnTapePlayerClientOptionChanged);
+            _netManager.Connected -= OnConnected;
         }
 
         private void OnTapePlayerClientOptionChanged(bool option)
@@ -39,7 +41,7 @@ namespace Content.Client._Sunrise.TapePlayer
                 RaiseNetworkEvent(new ClientOptionTapePlayerEvent(_tapePlayerClientEnabled));
         }
 
-        private async void OnConnected(object? sender, NetChannelArgs e)
+        private void OnConnected(object? sender, NetChannelArgs args)
         {
             RaiseNetworkEvent(new ClientOptionTapePlayerEvent(_tapePlayerClientEnabled));
         }

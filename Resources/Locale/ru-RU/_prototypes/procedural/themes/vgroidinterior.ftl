@@ -1,2 +1,2 @@
-ent-VGRoidInteriorRoomMarker = Маркер интерьера VGRoid
+ent-VGRoidInteriorRoomMarker = маркер интерьера ВГРоид
     .desc = { ent-BaseRoomMarker.desc }

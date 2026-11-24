@@ -1,4 +1,3 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 using System.Numerics;
 using Content.Client._Sunrise.Humanoid;
 using Content.Client._Sunrise.TTS;
@@ -38,12 +37,12 @@ namespace Content.Client._Sunrise.SponsorTiers;
 [GenerateTypedNameReferences]
 public sealed partial class SponsorTierEntry : Control
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IClientPreferencesManager _preferencesManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly MarkingManager _marking = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IClientPreferencesManager _preferencesManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private MarkingManager _marking = default!;
 
     private readonly LobbyUIController _lobbyUIController;
     private readonly ISharedSponsorsManager? _sponsorsManager;

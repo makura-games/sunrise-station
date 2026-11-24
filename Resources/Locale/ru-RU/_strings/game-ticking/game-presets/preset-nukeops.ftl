@@ -20,6 +20,17 @@ nukeops-cond-nukiesabandoned = Ядерные оперативники были 
 nukeops-cond-allnukiesdead = Все ядерные оперативники погибли.
 nukeops-cond-somenukiesalive = Несколько ядерных оперативников погибли.
 nukeops-cond-allnukiesalive = Все ядерные оперативники выжили.
+nukeops-disk-location-title = Конечное местоположение диска:
+nukeops-disk-carried-by =
+    { " " }находится у [color=White]{ $name }[/color], [color=orange]{ $job }[/color], { $location } { $user ->
+        [unknown] { "" }
+       *[other] ([color=gray]{ $user }[/color])
+    }
+storage-hierarchy-list =
+    { $items-left ->
+        [0] { $existing-text } { $item },
+       *[other] { $existing-text } { $item }, в
+    }
 nukeops-list-start = Ядерными оперативниками были:
 nukeops-list-name = - [color=White]{ $name }[/color]
 nukeops-list-name-user = - [color=White]{ $name }[/color] ([color=gray]{ $user }[/color])
@@ -27,5 +38,5 @@ nukeops-not-enough-ready-players = Недостаточно игроков го�
 nukeops-no-one-ready = Нет готовых игроков! Нельзя запустить пресет Ядерные оперативники.
 nukeops-role-commander = Командир
 nukeops-role-agent = Агент
-nukeops-role-medic = Медик
 nukeops-role-operator = Оператор
+nukeops-role-medic = Медик

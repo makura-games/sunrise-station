@@ -12,7 +12,6 @@
   setPreference: false
   icon: JobIconTSF
   supervisors: job-supervisors-nobody
-  canBeAntag: false
   accessGroups:
   - AllAccess
   special:

@@ -1,4 +1,4 @@
-ent-ClusterSyndyFlashGrenade = Поцелуй Бога
+ent-ClusterSyndyFlashGrenade = поцелуй Бога
     .desc = Вероятность того, что вас забанят за использование этой гранаты, составляет 99,9%.
 ent-SyndyClusterGrenade = кластерная минибомба синдиката
     .desc = Если вам не важна точность, то этот выбор для вас.

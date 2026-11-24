@@ -16,6 +16,7 @@ from .github import GitHub, GitHubError
 from .metadata import enrich_event
 from .state import State
 from .transport import (
+    DiscordDeliveryUncertainError,
     DiscordError,
     DiscordPublishTimeoutError,
     UnexpectedDiscordStatusError,
@@ -127,6 +128,12 @@ def enqueue(
     record_key, editing, forget = message_reference(event, payload)
     messages = state.data.setdefault("messages", {})
     message_ids = messages.get(record_key, []) if editing else []
+    if editing and not any(message_ids):
+        log(
+            f"Пропущено изменение: исходное сообщение Discord для "
+            f"{explanation} неизвестно."
+        )
+        return
     created_at = utc_now()
     for index, part in enumerate(parts):
         part_key = key if len(parts) == 1 else f"{key}:part{index + 1:05d}"
@@ -336,6 +343,12 @@ def deliver_pending(
         if key not in state.data["pending"]:
             continue
         retry = item.get("retry", {})
+        if not force_retry and retry.get("manual"):
+            log(
+                f"Сообщение {key} ожидает ручной проверки результата "
+                "предыдущей отправки."
+            )
+            continue
         if not force_retry and retry.get("after", 0) > time.time():
             log(f"Сообщение {key} ожидает назначенного повтора.")
             continue
@@ -362,6 +375,7 @@ def deliver_pending(
                 delete=item.get("delete", False),
                 attempts=config["delivery"]["attempts"],
                 timeout=config["delivery"]["request_timeout"],
+                retry_ambiguous_creates=False,
                 deadline=min(
                     deadline - 20,
                     time.monotonic() + config["delivery"]["message_timeout"],
@@ -369,9 +383,17 @@ def deliver_pending(
                 report=log,
             )
             if not receipt.get("id"):
-                raise ValueError(
+                raise DiscordDeliveryUncertainError(
                     "Discord не вернул ID сообщения; доставка не подтверждена"
                 )
+        except DiscordDeliveryUncertainError as error:
+            failures += 1
+            log(
+                f"Неизвестен результат отправки: {error}. "
+                "Автоматический повтор отключён во избежание дубликатов."
+            )
+            defer(state, item, config, manual=True)
+            continue
         except (
             DiscordError,
             DiscordPublishTimeoutError,
@@ -410,12 +432,13 @@ def deliver_pending(
                 state.data["messages"].pop(record_key, None)
             elif item.get("delete"):
                 if record_key in state.data["messages"]:
-                    state.data["messages"][record_key] = state.data[
-                        "messages"
-                    ][record_key][: item["part_count"]]
+                    message_ids = state.data["messages"].pop(record_key)
+                    state.data["messages"][record_key] = message_ids[
+                        : item["part_count"]
+                    ]
             else:
                 part_count = item["part_count"]
-                message_ids = state.data["messages"].get(record_key, [])
+                message_ids = state.data["messages"].pop(record_key, [])
                 message_ids = (message_ids[:part_count] + [None] * part_count)[
                     :part_count
                 ]
@@ -455,13 +478,19 @@ def deliver_pending(
     return failures
 
 
-def defer(state: State, item: dict, config: dict) -> None:
+def defer(
+    state: State, item: dict, config: dict, *, manual: bool = False
+) -> None:
     attempts = item.get("retry", {}).get("attempts", 0) + 1
     delay = min(
         config["delivery"]["retry_interval"] * 2 ** min(attempts - 1, 12),
         config["delivery"]["max_retry_interval"],
     )
-    item["retry"] = {"attempts": attempts, "after": time.time() + delay}
+    item["retry"] = {
+        "attempts": attempts,
+        "after": time.time() + delay,
+        "manual": manual,
+    }
     state.save()
 
 

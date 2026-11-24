@@ -22,6 +22,12 @@ fax-machine-ui-paper-inserted = Бумага в лотке
 fax-machine-ui-paper-not-inserted = Нет бумаги
 fax-machine-chat-notify = Получено новое сообщение с "{ $fax }" факса
 fax-machine-printed-paper-name = распечатанная бумага
+fax-machine-sender-info =
+    ─────────────────────────────────────
+    Факс отправлен
+    от: { $sender_name } [адрес: { $sender_addr }]
+    кому: { $recipient_name } [адрес: { $recipient_addr }]
+    в: { $time }
 fax-lable-err = ОШИБКА*?*%!
 fax-label-captain = Кабинет капитана
 fax-label-captainoffice = Кабинет капитана
@@ -81,10 +87,3 @@ fax-label-mailroom = Почта
 fax-label-bar = Бар
 fax-label-courthhouse = Зал суда
 fax-label-representative = Представитель
-
-fax-machine-sender-info =
-    ─────────────────────────────────────
-    Факс отправлен
-    от: {$sender_name} [адрес: {$sender_addr}]
-    кому: {$recipient_name} [адрес: {$recipient_addr}]
-    в: {$time}

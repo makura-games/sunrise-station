@@ -21,9 +21,9 @@ namespace Content.Server._Sunrise.PrometheusMetrics;
 /// <see cref="PlayerTraits"/>, <see cref="PlayerMarkings"/>
 /// </para>
 /// </remarks>
-public sealed class PlayerSpawnMetricsSystem : EntitySystem
+public sealed partial class PlayerSpawnMetricsSystem : EntitySystem
 {
-    [Dependency] private readonly JobSystem _job = default!;
+    [Dependency] private JobSystem _job = default!;
 
     private const string NotFound = "not_found";
     private const string RoundStart = "roundstart";
@@ -146,7 +146,7 @@ public sealed class PlayerSpawnMetricsSystem : EntitySystem
         var speciesProto = ev.Profile.Species.Id;
         var characterBodyType = GetBodyType(ev.Profile.BodyType);
         var characterGender = EnumToString(ev.Profile.Gender);
-        var voiceProto = ev.Profile.Voice.Id;
+        var voiceProto = ev.Profile.TtsVoice.Id;
 
         PlayerCharacterStatsOnSpawn
             .WithLabels(entityProto, speciesProto, characterBodyType, characterGender, voiceProto)

@@ -11,6 +11,8 @@ from .github import GitHub, GitHubError
 
 ARTIFACTS = ("discord-notification-queue", "discord-notification-state")
 SEND_STEP = "Отправить очередь в Discord"
+# ponytail: фиксированного предела достаточно; конфиг нужен только при реальной нехватке.
+HISTORY_LIMIT = 10_000
 
 
 def validate(document: dict) -> None:
@@ -48,11 +50,25 @@ class State:
         return json.dumps(self.data, ensure_ascii=False, separators=(",", ":"))
 
     def save(self) -> None:
+        trim_history(self.data)
         serialized = self.serialize()
         if serialized == self.saved:
             return
         write_state(self.path, serialized)
         self.saved = serialized
+
+
+def trim_history(document: dict) -> None:
+    messages = document["messages"]
+    if len(messages) > HISTORY_LIMIT:
+        document["messages"] = dict(list(messages.items())[-HISTORY_LIMIT:])
+    comments = document["commit_comments"]
+    if len(comments) > HISTORY_LIMIT:
+        document["commit_comments"] = dict(
+            sorted(
+                comments.items(), key=lambda item: item[1], reverse=True
+            )[:HISTORY_LIMIT]
+        )
 
 
 def write_state(path: Path, serialized: str) -> None:
@@ -87,8 +103,60 @@ def snapshots(github: GitHub, current: dict) -> list[dict]:
                 and run["event"]
                 in {"schedule", "workflow_run", "workflow_dispatch"}
             ):
-                result.append(artifact)
-    return sorted(result, key=lambda item: item["id"], reverse=True)
+                document = None
+                run_attempt = source.get("run_attempt")
+                if not artifact["expired"]:
+                    document = github.artifact_json(
+                        artifact["id"], "discord-state.json"
+                    )
+                    checkpoint = (
+                        document.get("checkpoint", {})
+                        if isinstance(document, dict)
+                        else {}
+                    )
+                    if run_attempt is None:
+                        run_attempt = checkpoint.get("run_attempt")
+                if type(run_attempt) is not int or run_attempt <= 0:
+                    run_attempt = None
+                result.append(
+                    {
+                        **artifact,
+                        "_delivery_run": run,
+                        "_document": document,
+                        "_run_attempt": run_attempt,
+                    }
+                )
+    return sorted(
+        result,
+        key=lambda item: (
+            item["_delivery_run"]["created_at"],
+            item["_delivery_run"]["id"],
+            item["_run_attempt"] or 0,
+            item["created_at"],
+            item["name"] == ARTIFACTS[1],
+        ),
+        reverse=True,
+    )
+
+
+def send_was_attempted(
+    github: GitHub, run: dict, attempts: range | None = None
+) -> bool:
+    if attempts is None:
+        attempts = range(1, run["run_attempt"] + 1)
+    for attempt in attempts:
+        jobs = github.pages(
+            f"{github.root}/actions/runs/{run['id']}/"
+            f"attempts/{attempt}/jobs",
+            "jobs",
+        )
+        if any(
+            step["name"] == SEND_STEP and step["conclusion"] != "skipped"
+            for job in jobs
+            for step in job.get("steps", [])
+        ):
+            return True
+    return False
 
 
 def restore(github: GitHub, current: dict, path: Path, hours: int) -> None:
@@ -100,11 +168,27 @@ def restore(github: GitHub, current: dict, path: Path, hours: int) -> None:
                 "Срок хранения последнего снимка истёк. "
                 "Нужна сохранённая копия очереди; пустая очередь не создана"
             )
-        document = github.artifact_json(latest["id"], "discord-state.json")
+        attempt = latest["_run_attempt"]
+        attempts = range(attempt, attempt + 1) if attempt is not None else None
+        if latest["name"] == ARTIFACTS[0] and send_was_attempted(
+            github, latest["_delivery_run"], attempts
+        ):
+            raise GitHubError(
+                "Последний снимок создан до уже начатой отправки. "
+                "Автоматический повтор запрещён во избежание дубликатов"
+            )
+        document = latest["_document"] or github.artifact_json(
+            latest["id"], "discord-state.json"
+        )
         validate(document)
         checkpoint = document["checkpoint"]
-        if checkpoint["run_id"] != latest["workflow_run"]["id"]:
-            raise GitHubError("Снимок очереди принадлежит другому запуску")
+        if (
+            checkpoint["run_id"] != latest["workflow_run"]["id"]
+            or checkpoint["run_attempt"] != latest["_run_attempt"]
+        ):
+            raise GitHubError(
+                "Снимок очереди принадлежит другому запуску или попытке"
+            )
         print(
             f"Очередь восстановлена из артефакта {latest['id']}. "
             f"Ожидают доставки: {len(document['pending'])}."
@@ -123,23 +207,12 @@ def restore(github: GitHub, current: dict, path: Path, hours: int) -> None:
             attempts = range(1, run["run_attempt"] + 1)
             if run["id"] == current["id"]:
                 attempts = range(1, current["run_attempt"])
-            for attempt in attempts:
-                jobs = github.pages(
-                    f"{github.root}/actions/runs/{run['id']}/"
-                    f"attempts/{attempt}/jobs",
-                    "jobs",
+            if send_was_attempted(github, run, attempts):
+                raise GitHubError(
+                    "Артефакты очереди потеряны, "
+                    "но отправка уже запускалась. "
+                    "Автоматический сброс запрещён; восстановите снимок"
                 )
-                if any(
-                    step["name"] == SEND_STEP
-                    and step["conclusion"] != "skipped"
-                    for job in jobs
-                    for step in job.get("steps", [])
-                ):
-                    raise GitHubError(
-                        "Артефакты очереди потеряны, "
-                        "но отправка уже запускалась. "
-                        "Автоматический сброс запрещён; восстановите снимок"
-                    )
         document = {
             "version": 1,
             "cursor": (datetime.now(UTC) - timedelta(hours=hours)).strftime(

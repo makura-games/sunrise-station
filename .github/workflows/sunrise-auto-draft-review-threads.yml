@@ -17,26 +17,27 @@ on:
         type: number
   schedule:
     # Резервная синхронизация нужна для Resolve conversation: у GitHub Actions нет такого триггера.
-    - cron: "2/5 * * * *"
+    - cron: "7/10 * * * *"
 
 permissions: {}
 
 jobs:
   sync-draft-state:
     if: >-
-      github.event_name != 'issue_comment' ||
+      (github.event_name != 'issue_comment' ||
       (github.event.issue.pull_request &&
       ((github.event.sender.type == 'Bot' && github.event.sender.login == 'coderabbitai[bot]') ||
       (github.event.action != 'created' && github.event.comment.user.type == 'Bot' &&
-      github.event.sender.login != github.event.comment.user.login)))
+      github.event.sender.login != github.event.comment.user.login)))) &&
+      (github.event_name != 'pull_request_target' ||
+      (github.event.action != 'converted_to_draft' && github.event.action != 'ready_for_review') ||
+      github.event.sender.type != 'Bot')
     concurrency:
       # ponytail: общая очередь исключает гонки; пропущенные задания в неё не попадают.
       group: ${{ github.workflow }}
       cancel-in-progress: false
       queue: max
     runs-on: ubuntu-latest
-    env:
-      AUTO_DRAFT_ALLOW_CODERABBIT_RATE_LIMIT: ${{ vars.AUTO_DRAFT_ALLOW_CODERABBIT_RATE_LIMIT != 'false' }}
     steps:
       - name: Generate GitHub App token
         id: app-token
@@ -59,18 +60,14 @@ jobs:
           persist-credentials: false
           sparse-checkout: Tools/_sunrise/auto_draft
           sparse-checkout-cone-mode: false
+      # Sunrise edit start - фиксируем Python с поддержкой tomllib
+      - name: Setup Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: "3.11"
+      # Sunrise edit end
       - name: Sync draft state
-        uses: actions/github-script@v9
         env:
           AUTO_DRAFT_APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
-        with:
-          github-token: ${{ steps.app-token.outputs.token }}
-          script: |
-            try {
-              const run = require(`${process.env.GITHUB_WORKSPACE}/Tools/_sunrise/auto_draft/review_threads.js`);
-              await run({ github, context, core });
-            } catch (error) {
-              core.error(`Автодрафт не завершился: ${error.message}`);
-              await core.summary.addHeading('❌ Автодрафт не завершился').addCodeBlock(error.message).write();
-              throw error;
-            }
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: python3 Tools/_sunrise/auto_draft/review_threads.py

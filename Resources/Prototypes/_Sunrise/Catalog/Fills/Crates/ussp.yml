@@ -228,8 +228,9 @@
       storagebase: !type:Container {}
       entity_storage: !type:Container {}
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Wood
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -267,6 +268,7 @@
     sprite: _Sunrise/Objects/Storage/wrapped_rifle.rsi
     state: base
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:

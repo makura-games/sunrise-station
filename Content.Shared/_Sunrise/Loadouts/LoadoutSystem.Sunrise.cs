@@ -4,11 +4,12 @@ using Content.Shared.Preferences.Loadouts;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Clothing;
 
 public sealed partial class LoadoutSystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private static bool _customLoadoutEnabled = SunriseCCVars.CustomLoadoutEnabled.DefaultValue;
     private static string _loadoutPool = SunriseCCVars.LoadoutPool.DefaultValue;

@@ -10,12 +10,12 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Sunrise.Research.Artifact.Effects.WhitelistSwap;
 
-public sealed class ArtifactWhitelistSwapSystem : BaseXAESystem<ArtifactWhitelistSwapComponent>
+public sealed partial class ArtifactWhitelistSwapSystem : BaseXAESystem<ArtifactWhitelistSwapComponent>
 {
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SunriseHelpersSystem _helpers = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SunriseHelpersSystem _helpers = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     protected override void OnActivated(Entity<ArtifactWhitelistSwapComponent> ent, ref XenoArtifactNodeActivatedEvent args)
     {

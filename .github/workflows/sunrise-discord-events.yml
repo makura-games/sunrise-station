@@ -29,6 +29,11 @@ permissions: {}
 
 jobs:
   capture:
+    if: >-
+      github.event.sender.type != 'Bot' ||
+      (github.event_name == 'pull_request_target' &&
+      github.event.action == 'closed' &&
+      github.event.pull_request.merged == true)
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:

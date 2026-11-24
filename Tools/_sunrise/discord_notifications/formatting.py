@@ -208,7 +208,7 @@ def render_embed(
                 prefix = config["text"][f"{action}_comment"]
             embed["title"] = (
                 f"{config['icons']['comment']} "
-                f"[{repository.split('/')[-1]}] {prefix} "
+                f"{prefix} "
                 f"{config['text']['pull_request']} #{number}: {title}"
             ).strip()
         else:
@@ -255,7 +255,7 @@ def render_embed(
             )
             target = f"{config['text'][kind]} #{number}: {title}"
         embed["title"] = (
-            f"{config['icons']['comment']} [{repository.split('/')[-1]}] "
+            f"{config['icons']['comment']} "
             f"{prefix} {target}"
         ).strip()
         embed.pop("color", None)

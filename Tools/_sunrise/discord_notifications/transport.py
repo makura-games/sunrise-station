@@ -28,6 +28,10 @@ class UnexpectedDiscordStatusError(RuntimeError):
         )
 
 
+class DiscordDeliveryUncertainError(RuntimeError):
+    """Discord мог принять новое сообщение, но не подтвердил результат."""
+
+
 class DiscordPublishTimeoutError(TimeoutError):
     def __init__(self) -> None:
         super().__init__("Истекло время отправки сообщения в Discord")
@@ -86,6 +90,7 @@ def send_message(
     delete: bool = False,
     attempts: int = 6,
     timeout: float = 30,
+    retry_ambiguous_creates: bool = True,
     deadline: float | None = None,
     report: Callable[[str], None] = print,
 ) -> dict:
@@ -202,10 +207,17 @@ def send_message(
             error = DiscordError(status, reason)
             if status != 429 and not 500 <= status <= 599:
                 raise error
+            if (
+                not retry_ambiguous_creates
+                and message_id is None
+                and status != 429
+            ):
+                raise DiscordDeliveryUncertainError(str(error))
             if status == 429:
                 delay = retry_after(response)
         except (requests.ConnectionError, requests.Timeout):
-            pass
+            if not retry_ambiguous_creates and message_id is None:
+                raise DiscordDeliveryUncertainError(str(error)) from None
         report(f"Попытка {attempt}/{attempts} не удалась: {error}.")
         if attempt == attempts or delay >= deadline - time.monotonic():
             raise error

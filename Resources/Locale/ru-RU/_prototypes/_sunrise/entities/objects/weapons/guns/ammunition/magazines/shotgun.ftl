@@ -6,16 +6,14 @@ ent-MagazineAsh12Beanbag = магазин АШ-12 травматический
     .desc = { ent-BaseMagazineAsh12.desc }
 ent-MagazineAsh12Flare = магазин АШ-12 фальшфейер
     .desc = { ent-BaseMagazineAsh12.desc }
+ent-BaseMagazineShotgunXL = XL барабан 12 калибра
+    .desc = { ent-BaseItem.desc }
 ent-MagazineShotgunUranium = барабан урановых 12 калибра
     .desc = { ent-BaseMagazineShotgun.desc }
 ent-MagazineShotgunBreach = барабан пробивных 12 калибра
     .desc = { ent-BaseMagazineShotgun.desc }
-
 ent-MagazineShotgunFlechette = барабан флешетты 12 калибра
     .desc = { ent-BaseMagazineShotgun.desc }
-
-ent-BaseMagazineShotgunXL = XL барабан 12 калибра
-    .desc = { ent-BaseItem.desc }
 ent-MagazineShotgunFlechetteXL = XL барабан флешетты 12 калибра
     .desc = { ent-BaseMagazineShotgunXL.desc }
 ent-MagazineShotgunIncendiaryXL = XL барабан зажигательных 12 калибра

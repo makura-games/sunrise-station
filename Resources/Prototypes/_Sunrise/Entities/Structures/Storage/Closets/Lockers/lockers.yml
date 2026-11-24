@@ -241,7 +241,7 @@
 
 - type: entity
   id: LockerBlueShield
-  parent: LockerBaseSecure
+  parent: LockerBase
   name: blue shield officer's locker
   components:
     - type: Appearance
@@ -276,7 +276,7 @@
 
 - type: entity
   id: LockerPilot
-  parent: LockerBaseSecure
+  parent: LockerBase
   name: security pilot's locker
   components:
   - type: Appearance
@@ -304,7 +304,7 @@
 - type: entity
   id: ClosetPatologoanatom
   name: patologoanatom's locker
-  parent: LockerBaseSecure
+  parent: LockerBase
   suffix: Empty
   components:
   - type: Sprite
@@ -357,7 +357,7 @@
 
 - type: entity
   id: LockerMiningSpecialist
-  parent: LockerBaseSecure
+  parent: LockerBase
   suffix: Empty
   name: mining specialist's equipment
   description: Nevermind the pickaxe.
@@ -397,9 +397,9 @@
 
 # Representative
 - type: entity
-  id: LockerRepresentative
+  id: SunriseLockerRepresentative
   name: representative locker
-  parent: LockerBaseSecure
+  parent: LockerBase
   components:
   - type: Appearance
   - type: AccessReader
@@ -412,7 +412,7 @@
 - type: entity
   id: LockerRepresentativeEmpty
   name: representative locker
-  parent: LockerBaseSecure
+  parent: LockerBase
   suffix: Empty
   components:
   - type: Appearance
@@ -425,7 +425,7 @@
 
 - type: entity
   id: LockerRepresentativeFilled
-  parent: LockerRepresentative
+  parent: SunriseLockerRepresentative
   suffix: Filled
   components:
   - type: EntityTableContainerFill

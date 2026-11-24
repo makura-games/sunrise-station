@@ -877,6 +877,26 @@
       offset: *icon-offset
       state: Zookeeper
 
+- type: entity
+  parent: IDCardStandard
+  id: TramDriverIDCard
+  name: tram driver ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - sprite: Objects/Misc/id_cards.rsi # Sunrise-Edit - новые полосы TramDriver берём из RSI Wizden.
+      state: stripe_top
+      color: "#ffc500"
+    - sprite: Objects/Misc/id_cards.rsi # Sunrise-Edit - новые полосы TramDriver берём из RSI Wizden.
+      state: stripe_bottom
+      color: "#454a50"
+    - sprite: *icon-rsi
+      offset: *icon-offset
+      state: TramDriver
+  - type: PresetIdCard
+    job: TramDriver
+
 #Supply
 
 - type: entity
@@ -897,6 +917,23 @@
       state: CargoTechnician
   - type: PresetIdCard
     job: CargoTechnician
+
+- type: entity
+  parent: CargoIDCard
+  id: SeniorCourierIDCard
+  name: senior courier ID card
+  components:
+  # Sunrise-Start
+  - type: Sprite
+    sprite: *id-rsi-sunrise
+    layers:
+    - state: default
+    - state: department-side
+      color: *color-supply-top
+  # Sunrise-End
+    - sprite: *icon-rsi
+      offset: *icon-offset
+      state: SeniorCourier
 
 - type: entity
   parent: IDCardStandard
@@ -1000,15 +1037,36 @@
 #Antags
 
 - type: entity
-  parent: [PassengerIDCard, BaseChameleon]
+  parent: [IDCardStandard, BaseChameleon]
   id: AgentIDCard
+  name: passenger ID card
   suffix: Agent
   components:
+  - type: Sprite
+    layers:
+    - state: default
+    - sprite: *icon-rsi
+      offset: *icon-offset
+      state: Passenger
   - type: Access
     tags:
     - Maintenance
     - SyndicateAgent
   - type: AgentIDCard
+    iconGroups:
+    - CommandIconGroup
+    - SecurityIconGroup
+    - ResearchIconGroup
+    - CargoIconGroup
+    - EngineeringIconGroup
+    - MedicalIconGroup
+    - ServiceIconGroup
+    - CivilianIconGroup
+    - EntertainerIconGroup
+    - SiliconIconGroup
+    - BlankIconGroup
+    - ThreatIconGroup
+    - CentCommIconGroup
   - type: UIRequiresLock
   - type: ActivatableUI
     key: enum.AgentIDCardUiKey.Key
@@ -1437,9 +1495,24 @@
     tags:
     - DoorBumpOpener
   - type: AgentIDCard
+    iconGroups:
+    - CommandIconGroup
+    - SecurityIconGroup
+    - ResearchIconGroup
+    - CargoIconGroup
+    - EngineeringIconGroup
+    - MedicalIconGroup
+    - ServiceIconGroup
+    - CivilianIconGroup
+    - EntertainerIconGroup
+    - SiliconIconGroup
+    - BlankIconGroup
+    - ThreatIconGroup
+    - CentCommIconGroup
+    - AdminIconGroup
   - type: ActivatableUI
     key: enum.AgentIDCardUiKey.Key
-    inHandsOnly: true
+    verbText: agent-id-open-ui-verb
   - type: UserInterface
     interfaces:
       enum.AgentIDCardUiKey.Key:

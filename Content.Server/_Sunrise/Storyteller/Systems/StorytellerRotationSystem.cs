@@ -9,10 +9,10 @@ namespace Content.Server._Sunrise.Storyteller.Systems;
 /// Puts the Insane storyteller on cooldown if it was just played,
 /// and removes the cooldown if a different preset was played.
 /// </summary>
-public sealed class StorytellerRotationSystem : EntitySystem
+public sealed partial class StorytellerRotationSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private GameTicker _ticker = default!;
 
     public override void Initialize()
     {

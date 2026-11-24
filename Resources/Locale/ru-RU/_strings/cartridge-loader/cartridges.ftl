@@ -5,7 +5,9 @@ nano-task-program-name = НаноТаск
 news-read-program-name = Новости станции
 crew-manifest-program-name = Манифест экипажа
 messenger-program-name = РобастЧат
+photo-program-name = ФлешСнэп
 crew-manifest-cartridge-loading = Загрузка...
+crew-manifest-cartridge-loading-failed = Не удалось загрузить список экипажа!
 net-probe-program-name = Зонд сетей
 net-probe-scan = Просканирован { $device }!
 net-probe-label-name = Название
@@ -24,11 +26,10 @@ log-probe-printout-entry = #{ $number } / { $time } / { $accessor }
 astro-nav-program-name = АстроНав
 navigator-program-name = Навигатор
 navigator-cartridge-loading = Загрузка карты...
-photo-program-name = ФлешСнэп
-
 med-tek-program-name = МедТек
-# Wanted list cartridge
-wanted-list-program-name = Список разыскиваемых
+
+# NanoTask cartridge
+
 nano-task-ui-heading-high-priority-tasks =
     { $amount ->
         [zero] Нет задач высокого приоритета
@@ -67,6 +68,8 @@ nano-task-printed-requester = Запрашивающий: { $requester }
 nano-task-printed-high-priority = Приоритет: Высокий
 nano-task-printed-medium-priority = Приоритет: Средний
 nano-task-printed-low-priority = Приоритет: Низкий
+# Wanted list cartridge
+wanted-list-program-name = Список разыскиваемых
 wanted-list-label-no-records = Все в порядке, ковбой
 wanted-list-search-placeholder = Поиск по имени и статусу
 wanted-list-age-label = [color=darkgray]Возвраст:[/color] [color=white]{ $age }[/color]

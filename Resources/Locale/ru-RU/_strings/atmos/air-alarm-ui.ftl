@@ -3,6 +3,7 @@
 
 ## Window
 
+air-alarm-ui-title = Воздушная сигнализация
 air-alarm-ui-access-denied = Недостаточный уровень доступа!
 air-alarm-ui-window-pressure-label = Давление
 air-alarm-ui-window-temperature-label = Температура
@@ -11,7 +12,17 @@ air-alarm-ui-window-address-label = Адрес
 air-alarm-ui-window-device-count-label = Всего устройств
 air-alarm-ui-window-resync-devices-label = Ресинхр
 air-alarm-ui-window-mode-label = Режим
+air-alarm-ui-window-mode-select-locked-label = [bold][color=red] Сбой переключателя режимов! [/color][/bold]
 air-alarm-ui-window-auto-mode-label = Авто-режим
+-air-alarm-state-name =
+    { $state ->
+        [normal] Норма
+        [warning] Внимание
+        [danger] Опасность
+        [emagged] Взломано
+       *[invalid] Недействительно
+    }
+air-alarm-ui-window-listing-title = { $address } : { -air-alarm-state-name(state: $state) }
 air-alarm-ui-window-pressure = { $pressure } кПа
 air-alarm-ui-window-pressure-indicator = Давление: [color={ $color }]{ $pressure } кПа[/color]
 air-alarm-ui-window-temperature = { $tempC } °C ({ $temperature } К)
@@ -28,6 +39,14 @@ air-alarm-ui-mode-wide-filtering = Фильтрация (широкая)
 air-alarm-ui-mode-fill = Заполнение
 air-alarm-ui-mode-panic = Паника
 air-alarm-ui-mode-none = Нет
+air-alarm-ui-pump-direction-siphoning = Откачка
+air-alarm-ui-pump-direction-scrubbing = Фильтрация
+air-alarm-ui-pump-direction-releasing = Выпуск
+air-alarm-ui-pressure-bound-nobound = Без ограничений
+air-alarm-ui-pressure-bound-internalbound = Внутреннее ограничение
+air-alarm-ui-pressure-bound-externalbound = Внешнее ограничение
+air-alarm-ui-pressure-bound-both = Оба
+air-alarm-ui-widget-gas-filters = Газовые фильтры
 
 ## Widgets
 
@@ -52,6 +71,8 @@ air-alarm-ui-vent-internal-bound-label = Внутренняя граница
 air-alarm-ui-scrubber-pump-direction-label = Направление
 air-alarm-ui-scrubber-volume-rate-label = Объём (Л)
 air-alarm-ui-scrubber-wide-net-label = ШирокаяСеть
+air-alarm-ui-scrubber-select-all-gases-label = Выбрать всё
+air-alarm-ui-scrubber-deselect-all-gases-label = Снять всё
 
 ### Thresholds
 
@@ -66,32 +87,3 @@ air-alarm-ui-thresholds-upper-warning-bound = Верхняя тревожная 
 air-alarm-ui-thresholds-lower-warning-bound = Нижняя тревожная граница
 air-alarm-ui-thresholds-copy = Копирование пороговых значений на все устройства
 air-alarm-ui-thresholds-copy-tooltip = Копирует пороговые значения датчиков этого устройства на все устройства в этой вкладке воздушной тревоги.
-
-air-alarm-ui-title = Воздушная сигнализация
-
-air-alarm-ui-window-mode-select-locked-label = [bold][color=red] Сбой переключателя режимов! [/color][/bold]
-
--air-alarm-state-name = { $state ->
-    [normal] Норма
-    [warning] Внимание
-    [danger] Опасность
-    [emagged] Взломано
-   *[invalid] Недействительно
-}
-
-air-alarm-ui-window-listing-title = {$address} : {-air-alarm-state-name(state:$state)}
-
-
-air-alarm-ui-pump-direction-siphoning = Откачка
-air-alarm-ui-pump-direction-scrubbing = Фильтрация
-air-alarm-ui-pump-direction-releasing = Выпуск
-
-air-alarm-ui-pressure-bound-nobound = Без ограничений
-air-alarm-ui-pressure-bound-internalbound = Внутреннее ограничение
-air-alarm-ui-pressure-bound-externalbound = Внешнее ограничение
-air-alarm-ui-pressure-bound-both = Оба
-
-air-alarm-ui-widget-gas-filters = Газовые фильтры
-
-air-alarm-ui-scrubber-select-all-gases-label = Выбрать всё
-air-alarm-ui-scrubber-deselect-all-gases-label = Снять всё

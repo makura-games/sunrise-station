@@ -9,7 +9,7 @@ namespace Content.Server._Sunrise.BloodCult.Items.Systems;
 /// </summary>
 public sealed partial class CultMirrorShieldSystem
 {
-    [Dependency] private readonly IConsoleHost _console = default!;
+    [Dependency] private IConsoleHost _console = default!;
 
     private void InitializeCommands()
     {

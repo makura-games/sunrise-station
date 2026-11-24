@@ -1,5 +1,3 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt;
-
 using Content.Server.DoAfter;
 using Content.Server.Popups;
 using Content.Shared._Sunrise.HairDye;
@@ -15,11 +13,11 @@ namespace Content.Server._Sunrise.HairDye;
 /// <summary>
 /// Система, обрабатывающая красители для волос.
 /// </summary>
-public sealed class HairDyeSystem : EntitySystem
+public sealed partial class HairDyeSystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SunriseHumanoidMarkingSystem _sunriseMarking = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private DoAfterSystem _doAfter = default!;
+    [Dependency] private SunriseHumanoidMarkingSystem _sunriseMarking = default!;
 
     public override void Initialize()
     {

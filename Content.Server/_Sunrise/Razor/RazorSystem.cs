@@ -1,5 +1,3 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt;
-
 using Content.Server.DoAfter;
 using Content.Shared._Sunrise.Humanoid;
 using Content.Shared._Sunrise.Razor;
@@ -10,11 +8,11 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Server._Sunrise.Razor;
 
-public sealed class RazorSystem : SharedRazorSystem
+public sealed partial class RazorSystem : SharedRazorSystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly DoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly SunriseHumanoidMarkingSystem _sunriseMarking = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DoAfterSystem _doAfterSystem = default!;
+    [Dependency] private SunriseHumanoidMarkingSystem _sunriseMarking = default!;
 
     public override void Initialize()
     {

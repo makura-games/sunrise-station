@@ -17,8 +17,8 @@ namespace Content.Client.MassMedia.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class ArticleEditorPanel : Control
 {
-    [Dependency] private readonly NetTexturesManager _netTexturesManager = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private NetTexturesManager _netTexturesManager = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
 
     public event Action? PublishButtonPressed;
     public event Action<string, string, List<string>?>? ArticleDraftUpdated; // Sunrise-Edit

@@ -1,4 +1,4 @@
-﻿using Content.Shared._Sunrise.Boss.Components;
+using Content.Shared._Sunrise.Boss.Components;
 using Content.Shared._Sunrise.Boss.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -12,14 +12,14 @@ using Robust.Shared.Physics.Systems;
 namespace Content.Server._Sunrise.Boss.Systems;
 
 /// <inheritdoc/>
-public sealed class DamageOnCollideSystem : SharedDamageOnCollideSystem
+public sealed partial class DamageOnCollideSystem : SharedDamageOnCollideSystem
 {
 
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly ILogManager _log = default!;
-    [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private ILogManager _log = default!;
+    [Dependency] private SharedBroadphaseSystem _broadphase = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     private ISawmill _sawmill = default!;
 

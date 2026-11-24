@@ -20,7 +20,6 @@ ent-LeftFootArachnid = левая стопа арахнида
     .desc = { ent-PartArachnid.desc }
 ent-RightFootArachnid = правая стопа арахнида
     .desc = { ent-PartArachnid.desc }
-
 ent-OrganArachnidTorso = { ent-TorsoArachnid }
     .desc = { ent-TorsoArachnid.desc }
 ent-OrganArachnidHead = { ent-HeadArachnid }
