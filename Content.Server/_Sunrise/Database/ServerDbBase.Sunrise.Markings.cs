@@ -1,7 +1,7 @@
 using Content.Shared._Sunrise.MarkingEffects;
 using Content.Shared.Humanoid.Markings;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Database;
 
 public abstract partial class ServerDbBase

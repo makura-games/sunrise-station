@@ -1,7 +1,7 @@
 using Content.Shared.StatusIcon.Components;
 using Content.Shared.Standing;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Client.Access.Systems;
 
 public sealed partial class JobStatusSystem

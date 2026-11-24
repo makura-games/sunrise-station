@@ -29,22 +29,14 @@ public sealed partial class DragonRiftComponent : SharedDragonRiftComponent
     /// Accumulation of the spawn timer.
     /// </summary>
     [DataField]
-    public float SpawnAccumulator = 50f; // Sunrise-Edit
+    public float SpawnAccumulator = 30f;
 
     /// <summary>
     /// How long it takes for a new spawn to be added.
     /// </summary>
     [DataField]
-    public float SpawnCooldown = 50f; // Sunrise-Edit
+    public float SpawnCooldown = 30f;
 
     [DataField("spawn")]
     public EntProtoId SpawnPrototype = "MobCarpDragon";
-
-    // Sunrise edit start
-    /// <summary>
-    /// Prototypes that can be spawned by this rift.
-    /// </summary>
-    [DataField]
-    public List<EntProtoId> SpawnPrototypes = new();
-    // Sunrise edit end
 }

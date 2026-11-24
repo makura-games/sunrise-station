@@ -24,7 +24,7 @@ namespace Content.Server.Holiday
 
         public override void Initialize()
         {
-            Subs.CVar(_configManager, CCVars.HolidaysEnabled, OnHolidaysEnableChange);
+            Subs.CVar(_configManager, CCVars.HolidaysEnabled, OnHolidaysEnableChange, true); // Sunrise-Edit
             SubscribeLocalEvent<GameRunLevelChangedEvent>(OnRunLevelChanged);
             SubscribeLocalEvent<HolidayVisualsComponent, ComponentInit>(OnVisualsInit);
             SubscribeLocalEvent<PointLightComponent, MapInitEvent>(OnLightMapInit);

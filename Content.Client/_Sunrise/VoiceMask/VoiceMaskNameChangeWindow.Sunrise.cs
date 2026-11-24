@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._Sunrise.TTS;
 using Robust.Shared.Prototypes;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Client.VoiceMask;
 
 public sealed partial class VoiceMaskNameChangeWindow
