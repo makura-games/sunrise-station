@@ -1832,7 +1832,7 @@
   cost:
     Crystallite: 10
   categories:
-    - NTEquipment
+    - NTAdditional
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1

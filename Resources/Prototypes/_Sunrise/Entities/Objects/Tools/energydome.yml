@@ -31,6 +31,11 @@
     port: On
   - type: TimedDespawn
     lifetime: 180
+  - type: Battery
+    maxCharge: 100000
+    startingCharge: 100000
+  - type: SpawnOnDespawn
+    prototype: RedspaceImplantEffect
 
 - type: entity
   id: SunriseEnergyDomeGeneratorSyndieTimed
@@ -42,16 +47,12 @@
     noRot: true
     layers:
       - state: icon
-  - type: Battery
-    maxCharge: 100000
-    startingCharge: 100000
   - type: BatterySelfRecharger
     autoRechargeRate: 100
   - type: EnergyDomeGenerator
+    # Купол выдерживает примерно 2000 урона до разрядки батареи.
     damageEnergyDraw: 50
     domePrototype: EnergyDomeMediumRed
-  - type: SpawnOnDespawn
-    prototype: RedspaceImplantEffect
 
 - type: entity
   name: blood red personal shield generator
@@ -168,10 +169,8 @@
     noRot: true
     layers:
       - state: icon
-  - type: Battery
-    maxCharge: 100000
-    startingCharge: 100000
   - type: EnergyDomeGenerator
+    # Купол выдерживает примерно 1300 урона до разрядки батареи.
     damageEnergyDraw: 75
     domePrototype: EnergyDomeMediumBlue
   - type: BatterySelfRecharger
