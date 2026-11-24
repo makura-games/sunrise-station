@@ -1,1 +1,1 @@
-ent-SunriseFloorSnowAlt = зимнее покрытие
+tiles-snow-alt = снежное покрытие

@@ -1,1 +1,1 @@
-ent-SunriseFloorSnowAlt = snow plating
+tiles-snow-alt = snow plating
