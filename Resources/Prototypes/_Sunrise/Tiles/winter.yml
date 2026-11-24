@@ -2,6 +2,6 @@
   id: SunriseFloorSnowAlt
   parent: BaseFloorPlanet
   name: tiles-snow-alt
-  sprite: /Textures/Tiles/Planet/Snow/snow.png
+  sprite: /Textures/Tiles/Snow/snow.png
   footstepSounds:
     collection: FootstepSnow
