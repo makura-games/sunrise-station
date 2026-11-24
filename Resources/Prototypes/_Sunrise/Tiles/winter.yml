@@ -3,5 +3,6 @@
   parent: BaseFloorPlanet
   name: tiles-snow-alt
   sprite: /Textures/Tiles/Snow/snow.png
+  variants: 6
   footstepSounds:
     collection: FootstepSnow
