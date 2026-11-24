@@ -1,6 +1,6 @@
 using System.Globalization;
 
-#pragma warning disable IDE0130 // Пространство имён vanilla-системы сохраняется для partial-расширения.
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Silicons.Laws;
 
 public sealed partial class IonLawLocalizationSystem
@@ -35,13 +35,13 @@ public sealed partial class IonLawLocalizationSystem
 
     private void RegisterFallbackIonFunctions(CultureInfo defaultCulture)
     {
-        foreach (var culture in _loc.GetFoundCultures())
+        foreach (var culture in Loc.GetFoundCultures())
         {
-            if (!_loc.HasCulture(culture) || culture.Name == defaultCulture.Name)
+            if (!Loc.HasCulture(culture) || culture.Name == defaultCulture.Name)
                 continue;
 
             foreach (var functionName in IonFunctionNames)
-                _loc.AddFunction(culture, functionName, _ => GetIonLawValue(functionName));
+                Loc.AddFunction(culture, functionName, _ => GetIonLawValue(functionName));
         }
     }
 }

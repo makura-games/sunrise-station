@@ -1,4 +1,3 @@
-# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 - type: reagent
   id: FluorosulfuricAcidHumanoidXeno
   name: reagent-name-fluorosulfuric-acid
@@ -123,6 +122,7 @@
   plantMetabolism:
   - !type:PlantAdjustMutationLevel
     amount: 0.3
+    mutationTable: RandomPlantMutations
   metabolisms:
     Bloodstream:
       metabolismRate: 0.25
@@ -155,9 +155,8 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:GenericStatusEffect
-        key: Muted
-        component: Muted
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMuted
         type: Add
         time: 30
 

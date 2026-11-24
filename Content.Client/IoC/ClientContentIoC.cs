@@ -5,6 +5,7 @@ using Content.Client._Sunrise.IoC;
 using Content.Client._Sunrise.PlayerCache;
 using Content.Client._Sunrise.ServersHub;
 using Content.Client.Administration.Managers;
+using Content.Client.Audio.Midi;
 using Content.Client.Changelog;
 using Content.Client.Chat.Managers;
 using Content.Client.Clickable;
@@ -72,6 +73,7 @@ namespace Content.Client.IoC
             collection.Register<ClientsidePlaytimeTrackingManager>();
             collection.Register<ClientFeedbackManager>();
             collection.Register<ISharedFeedbackManager, ClientFeedbackManager>();
+            collection.Register<MidiFileCollectionManager>();
 
             // Sunrise-Start
             collection.Register<ServersHubManager>();

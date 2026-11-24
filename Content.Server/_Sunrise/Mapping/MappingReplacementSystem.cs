@@ -16,7 +16,6 @@ public sealed partial class MappingReplacementSystem : EntitySystem
     [Dependency] private MapSystem _map = default!;
     [Dependency] private TransformSystem _transform = default!;
     [Dependency] private IComponentFactory _factory = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private EntityQuery<MapGridComponent> _mapGridQuery = default!;
     [Dependency] private EntityQuery<MappingReplacementComponent> _replacementQuery = default!;
 
@@ -107,7 +106,7 @@ public sealed partial class MappingReplacementSystem : EntitySystem
     {
         replacement = default!;
 
-        var prototype = _prototype.Index(prototypeId);
+        var prototype = ProtoMan.Index(prototypeId);
         if (!prototype.Components.TryGetValue(_factory.GetComponentName<MappingReplacementComponent>(), out var compRegistry))
             return false;
 

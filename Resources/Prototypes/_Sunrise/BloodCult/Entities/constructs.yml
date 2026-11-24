@@ -62,7 +62,7 @@
         - CannotSuicide
         - DoorBumpOpener
     - type: CultMember
-    - type: DamageOverlay
+    - type: SunriseDamagePopup
     - type: TTS
       voice: dragon_knight_dragon_dota_2
 
@@ -95,6 +95,11 @@
       actions: [JuggernautCreateWall]
     - type: Hands
       showInHands: true
+      startingHands:
+        hand_right:
+          location: Right
+        hand_left:
+          location: Left
     - type: ContainerContainer
       containers:
         body_organs: !type:Container

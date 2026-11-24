@@ -35,7 +35,6 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
     [Dependency] private IOverlayManager _overlayManager = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private PlayerCacheManager _playerCache = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
 
@@ -93,8 +92,8 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
         };
         _ui.OnScreenChanged += OnScreenChanged;
 
-        _shaderInstance = _proto.Index(TutorialShader).InstanceUnique();
-        _overlayManager.AddOverlay(new TutorialPathOverlay(EntityManager, _player, _timing, _transform, _proto));
+        _shaderInstance = ProtoMan.Index(TutorialShader).InstanceUnique();
+        _overlayManager.AddOverlay(new TutorialPathOverlay(EntityManager, _player, _timing, _transform, ProtoMan));
     }
 
     public override void Update(float frameTime)

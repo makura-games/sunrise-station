@@ -1,7 +1,7 @@
 - type: gameMap
   id: SunriseOasis
   mapName: 'Oasis'
-  mapPath: /Maps/_Sunrise/Station/oasis.yml
+  mapPath: /Maps/_Sunrise/Station/OutPool/oasis.yml
   minPlayers: 40
   stations:
     Oasis:
@@ -84,6 +84,7 @@
             #law
             IAA: [ 1, 1 ]
             Lawyer: [ 3, 3 ]
+            NtrOfficer: [1, 2]
             # silicon
             StationAi: [ 1, 1 ]
             Borg: [ 3, 3 ]
@@ -106,7 +107,6 @@
           - MiningOutpost
           - Tesla
           - XenobiologyRepair
-          - VirusologyAmbusol
           - Containment
           - WeaponsSecurity
           - MaintsRepair

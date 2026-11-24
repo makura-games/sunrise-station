@@ -151,10 +151,7 @@ public abstract partial class SharedItemSwitchSystem : EntitySystem
                 _audio.PlayPvs(state.SoundFailToActivate, uid);
 
             if (attempt.Popup != null && user != null)
-                if (predicted)
-                    _popup.PopupClient(attempt.Popup, uid, user.Value);
-                else
-                    _popup.PopupEntity(attempt.Popup, uid, user.Value);
+                _popup.PopupEntity(attempt.Popup, uid, user.Value);
 
             return false;
         }

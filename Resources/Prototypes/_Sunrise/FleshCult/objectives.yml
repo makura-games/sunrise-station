@@ -5,7 +5,7 @@
   components:
     - type: Objective
       difficulty: 1.5
-      issuer: flesh-cult
+      issuer: SunriseFleshCult
     - type: RoleRequirement
       roles:
       - FleshCultistRole

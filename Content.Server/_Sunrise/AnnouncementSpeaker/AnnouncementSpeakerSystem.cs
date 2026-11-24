@@ -33,7 +33,6 @@ public sealed partial class AnnouncementSpeakerSystem : EntitySystem
 
     [Dependency] private SharedAudioSystem _audioSystem = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private TTSSystem _ttsSystem = default!;
 
@@ -209,9 +208,9 @@ public sealed partial class AnnouncementSpeakerSystem : EntitySystem
     /// </summary>
     private bool GetVoicePrototype(ProtoId<TTSVoicePrototype> voiceId, [NotNullWhen(true)] out TTSVoicePrototype? voicePrototype)
     {
-        if (!_prototypeManager.TryIndex(voiceId, out voicePrototype))
+        if (!ProtoMan.TryIndex(voiceId, out voicePrototype))
         {
-            return _prototypeManager.TryIndex(FallbackVoice, out voicePrototype);
+            return ProtoMan.TryIndex(FallbackVoice, out voicePrototype);
         }
         return true;
     }

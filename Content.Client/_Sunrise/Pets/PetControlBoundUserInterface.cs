@@ -71,6 +71,7 @@ public sealed partial class PetControlBoundUserInterface : BoundUserInterface
         // May god forgive us.
         // Чтобы реализовать поддержку ивентов вместо сообщений буи мне пришлось использовать систему-пустышку.
 
+        // TODO: Это щиткод, переделать на буи ивенты
         _clientPetSystem.RaiseFuckingEvent(Owner, ev);
     }
 

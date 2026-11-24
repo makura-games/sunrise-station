@@ -44,7 +44,7 @@
     - HandheldStationMapUnpowered
   - type: Access
     tags:
-    - Borg # Без него ИИ турели стреляют по СБ боргам
+    - Borg # турели ИИ и станции не должны стрелять по боргу этого типа
     - EmergencyShuttleRepealAll
     - Command
     - Lawyer
@@ -204,7 +204,7 @@
     laws: SecurityLawsetAiAssigned
   - type: Access
     tags:
-    - Borg # Без него ИИ турели стреляют по СБ боргам
+    - Borg # турели ИИ и станции не должны стрелять по боргу этого типа
     - EmergencyShuttleRepealAll
     - Command
     - Lawyer

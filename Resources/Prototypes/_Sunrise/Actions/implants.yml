@@ -13,10 +13,11 @@
     useDelay: 10
     itemIconStyle: BigAction
     priority: -20
-    icon:
-      sprite: Structures/Specific/anomaly.rsi
-      state: anom4
 
+  - type: Sprite
+    sprite: Structures/Specific/anomaly.rsi
+    layers:
+    - state: anom4
 - type: entity
   id: ActionActivateSmokeGrenadeImplant
   name: Activate Smoke Grenade
@@ -27,9 +28,10 @@
     useDelay: 5
     itemIconStyle: BigAction
     priority: -20
-    icon:
-      sprite: Objects/Weapons/Grenades/smoke.rsi
-      state: icon
+  - type: Sprite
+    sprite: Objects/Weapons/Grenades/smoke.rsi
+    layers:
+    - state: icon
   - type: InstantAction
     event: !type:ActivateImplantEvent
   - type: LimitedCharges
@@ -44,10 +46,13 @@
   description: Activates your creepy laugh implant, which will produce the signature sound of the Syndicate cyborg.
   components:
   - type: Action
-    icon: { sprite: Mobs/Species/Skeleton/parts.rsi, state: skull_icon }
     useDelay: 3
     itemIconStyle: BigAction
 
+  - type: Sprite
+    sprite: Mobs/Species/Skeleton/parts.rsi
+    layers:
+    - state: skull_icon
 - type: entity
   parent: BaseImplantAction
   id: ActionActivateProtoAdrenalImplant
@@ -64,10 +69,11 @@
     useDelay: 1
     itemIconStyle: BigAction
     priority: -20
-    icon:
-      sprite: _Sunrise/Objects/Specific/Medical/medipen.rsi
-      state: microstimpen
 
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Medical/medipen.rsi
+    layers:
+    - state: microstimpen
 - type: entity
   parent: BaseImplantAction
   id: ActionActivateAdrenalImplant
@@ -84,10 +90,11 @@
     useDelay: 1
     itemIconStyle: BigAction
     priority: -20
-    icon:
-      sprite: _Sunrise/Objects/Specific/Medical/medipen.rsi
-      state: stimpen
 
+  - type: Sprite
+    sprite: _Sunrise/Objects/Specific/Medical/medipen.rsi
+    layers:
+    - state: stimpen
 - type: entity
   parent: BaseImplantAction
   id: ActionActivateStimpackImplant
@@ -104,10 +111,11 @@
     useDelay: 1
     itemIconStyle: BigAction
     priority: -20
-    icon:
-      sprite: Objects/Specific/Medical/medipen.rsi
-      state: stimpen
 
+  - type: Sprite
+    sprite: Objects/Specific/Medical/medipen.rsi
+    layers:
+    - state: stimpen
 - type: entity
   parent: BaseImplantAction
   id: ActionActivateNutrimentImplant
@@ -124,10 +132,11 @@
     useDelay: 1
     itemIconStyle: BigAction
     priority: -20
-    icon:
-      sprite: Objects/Consumable/Food/burger.rsi
-      state: bigbite
 
+  - type: Sprite
+    sprite: Objects/Consumable/Food/burger.rsi
+    layers:
+    - state: bigbite
 - type: entity
   parent: BaseImplantAction
   id: ActionActivateReviverImplant
@@ -140,9 +149,10 @@
     useDelay: 6
     itemIconStyle: BigAction
     priority: -20
-    icon:
-      sprite: _Sunrise/Entities/Objects/Implants/implants.rsi
-      state: reviver_implant
+  - type: Sprite
+    sprite: _Sunrise/Entities/Objects/Implants/implants.rsi
+    layers:
+    - state: reviver_implant
   - type: InstantAction
     event: !type:ActivateImplantEvent
   - type: LimitedCharges

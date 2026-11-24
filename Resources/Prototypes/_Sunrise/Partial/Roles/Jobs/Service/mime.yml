@@ -1,0 +1,7 @@
+- type: !PartialOnly entity
+  id: ActionMimeInvisibleWall
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Walls/solid.rsi
+    layers: !Clear
+    - state: full

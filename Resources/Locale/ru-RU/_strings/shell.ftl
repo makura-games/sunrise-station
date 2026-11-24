@@ -62,3 +62,5 @@ shell-argument-number-invalid = Аргумент { $index } должен быт�
 # Hints
 shell-argument-username-hint = <username>
 shell-argument-username-optional-hint = [логин]
+shell-invalid-bool-value = Недопустимое логическое значение: «{ $value }»
+shell-argument-chat-invalid = Аргумент { $index } должен быть действительным чатом!

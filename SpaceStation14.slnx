@@ -23,6 +23,8 @@
     <File Path="Directory.Packages.props" />
     <File Path="README.md" />
   </Folder>
+  <!-- Sunrise edit start -->
+  <!--
   <Project Path="Content.Benchmarks/Content.Benchmarks.csproj" />
   <Project Path="Content.Client/Content.Client.csproj" />
   <Project Path="Content.IntegrationTests/Content.IntegrationTests.csproj" />
@@ -40,12 +42,9 @@
   <Project Path="Content.Tests/Content.Tests.csproj" />
   <Project Path="Content.Tools/Content.Tools.csproj" />
   <Project Path="Content.YAMLLinter/Content.YAMLLinter.csproj" />
+  -->
+  <!-- Sunrise edit end -->
   <Project Path="Pow3r/Pow3r.csproj" />
-  <Folder Name="/Sunrise/">
-    <Project Path="Sunrise/Content.Sunrise.Interfaces.Shared/Content.Sunrise.Interfaces.Shared.csproj" />
-    <Project Path="Sunrise/Content.Sunrise.Interfaces.Client/Content.Sunrise.Interfaces.Client.csproj" />
-    <Project Path="Sunrise/Content.Sunrise.Interfaces.Server/Content.Sunrise.Interfaces.Server.csproj" />
-  </Folder>
   <Folder Name="/RobustToolbox/.github/workflows/">
     <File Path="RobustToolbox/.github/workflows/benchmarks.yml" />
     <File Path="RobustToolbox/.github/workflows/build-all-configurations.yml" />
@@ -155,6 +154,7 @@
     <Project Path="RobustToolbox/Robust.Server.IntegrationTests/Robust.Server.IntegrationTests.csproj" />
     <Project Path="RobustToolbox/Robust.Server.Testing/Robust.Server.Testing.csproj" />
     <Project Path="RobustToolbox/Robust.Server/Robust.Server.csproj" />
+    <Project Path="RobustToolbox/Robust.Shared.EntitySystemSubscriptionsGenerator/Robust.Shared.EntitySystemSubscriptionsGenerator.csproj" />
     <Project Path="RobustToolbox/Robust.Shared.IntegrationTests/Robust.Shared.IntegrationTests.csproj" />
     <Project Path="RobustToolbox/Robust.Shared.Maths.Testing/Robust.Shared.Maths.Testing.csproj" />
     <Project Path="RobustToolbox/Robust.Shared.Maths.Tests/Robust.Shared.Maths.Tests.csproj" />
@@ -170,4 +170,36 @@
     </Project>
     <File Path="RobustToolbox/RobustToolbox.slnx" />
   </Folder>
+  <!-- Sunrise added start -->
+  <Folder Name="/Sunrise/">
+    <Project Path="Sunrise/Content.Sunrise.Interfaces.Client/Content.Sunrise.Interfaces.Client.csproj" />
+    <Project Path="Sunrise/Content.Sunrise.Interfaces.Server/Content.Sunrise.Interfaces.Server.csproj" />
+    <Project Path="Sunrise/Content.Sunrise.Interfaces.Shared/Content.Sunrise.Interfaces.Shared.csproj" />
+  </Folder>
+  <Folder Name="/Game Content/">
+    <Project Path="Content.Client/Content.Client.csproj" />
+    <Project Path="Content.Server/Content.Server.csproj" />
+    <Project Path="Content.Shared/Content.Shared.csproj" />
+  </Folder>
+  <Folder Name="/Testing/">
+    <Project Path="Content.Tests/Content.Tests.csproj" />
+    <Project Path="Content.IntegrationTests/Content.IntegrationTests.csproj" />
+    <Project Path="Content.Benchmarks/Content.Benchmarks.csproj" />
+    <Project Path="Content.YAMLLinter/Content.YAMLLinter.csproj" />
+  </Folder>
+  <Folder Name="/Databases/">
+    <Project Path="Content.Server.Database/Content.Server.Database.csproj" />
+    <Project Path="Content.Shared.Database/Content.Shared.Database.csproj" />
+  </Folder>
+  <Folder Name="/Toolchain/">
+    <Project Path="Content.Tools/Content.Tools.csproj" />
+    <Project Path="Content.MapRenderer/Content.MapRenderer.csproj" />
+    <Project Path="Content.PatreonParser/Content.PatreonParser.csproj">
+      <BuildType Solution="DebugOpt|*" Project="Debug" />
+      <BuildType Solution="Tools|*" Project="Debug" />
+    </Project>
+    <Project Path="Content.Replay/Content.Replay.csproj" />
+    <Project Path="Content.Packaging/Content.Packaging.csproj" />
+  </Folder>
+  <!-- Sunrise added end -->
 </Solution>

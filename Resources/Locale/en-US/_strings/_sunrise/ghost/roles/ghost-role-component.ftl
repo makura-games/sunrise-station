@@ -2,8 +2,6 @@ ghost-role-information-fugitive-name = Беглец
 ghost-role-information-fugitive-description = Вы сбежавший заключённый. Ваша цель - выжить.
 ghost-role-information-syndicate-medical-cyborg-name = Медицинский борг синдиката
 ghost-role-information-syndicate-medical-cyborg-description = Смерть NT.
-ghost-role-information-syndicate-reaper-cyborg-name = Борг синдиката "Жнец"
-ghost-role-information-syndicate-reaper-cyborg-description = Смерть NT.
 ghost-role-information-syndicate-heavy-cyborg-name = Тяжелый боевой борг синдиката
 ghost-role-information-syndicate-heavy-cyborg-description = Смерть NT.
 ghost-role-information-syndicate-spider-cyborg-name = Диверсионный борг синдиката
@@ -48,8 +46,6 @@ job-rules-tsf-aligned = You are {role-type-tsf-aligned-name}.
                         You are to serve the interests of the Trans-Solar Federation.
                         Remember, you do NOT serve the crew.
 ghost-role-information-sentient-carpholo-name = Sentient Holocarp
-ghost-role-information-sentient-carprainbow-name = Sentient Rainbow Carp
-ghost-role-information-sentient-carpshark-name = Sentient Carpshark
 
 ghost-role-information-one-star-unit-dungeon-name = One Star Unit
 ghost-role-information-guardian-unit-dungeon-name = Guardian Unit

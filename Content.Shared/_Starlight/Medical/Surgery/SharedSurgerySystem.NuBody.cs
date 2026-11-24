@@ -236,7 +236,7 @@ public abstract partial class SharedSurgerySystem
                _containers.Remove(entity, container, destination: destination);
     }
 
-    // Sunrise added start - проверяем surgery-органы по категории, когда marker-компонент есть не на всех прототипах
+    // проверяем surgery-органы по категории, когда marker-компонент есть не на всех прототипах
     protected bool MatchesSurgeryRequirement(EntityUid entity, Type componentType)
     {
         if (GetRequirementOrganCategory(componentType) is not { } category)
@@ -279,5 +279,4 @@ public abstract partial class SharedSurgerySystem
 
         return null;
     }
-    // Sunrise added end
 }

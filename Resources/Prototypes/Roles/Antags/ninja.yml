@@ -7,6 +7,9 @@
   objective: roles-antag-space-ninja-objective
   guides: [ SpaceNinja ]
   storytellerStress: 5.0 # Sunrise-Edit
+  tags:
+  - OffStation
+  - Midround
 
 - type: antagSpecifier
   parent: RestrictedAntag

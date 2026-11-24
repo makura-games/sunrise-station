@@ -1,0 +1,81 @@
+- type: !PartialOnly entity
+  id: SignalSwitch
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/switch.rsi
+    offset: 0, 0
+    drawdepth: SmallObjects
+    layers: !Clear
+    - state: off
+      map: ["shaded"]
+  - type: GenericVisualizer
+    visuals:
+      enum.SwitchVisuals.Visuals:
+        unshaded: !Remove
+
+- type: !PartialOnly entity
+  id: SignalButton
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/switch.rsi
+    offset: 0, 0
+    drawdepth: SmallObjects
+    layers: !Clear
+    - state: dead
+
+- type: !PartialOnly entity
+  id: ApcNetSwitch
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/switch.rsi
+    offset: 0, 0
+    drawdepth: SmallObjects
+    layers: !Clear
+    - state: off
+      map: ["shaded"]
+  - type: GenericVisualizer
+    visuals:
+      enum.SwitchVisuals.Visuals:
+        unshaded: !Remove
+
+- type: !PartialOnly entity
+  id: LockableButton
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/locked_switch.rsi
+    offset: 0, 0
+    layers: !Clear
+    - state: base
+    - state: locked
+      map: ["lock-shaded"]
+      shader: unshaded
+  - type: GenericVisualizer
+    visuals:
+      enum.LockVisuals.Locked:
+        lock-shaded:
+          True: { state: locked }
+          False: { state: unlocked }
+        lock-unshaded: !Remove
+
+- type: !PartialOnly entity
+  id: ButtonFrame
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Wallmounts/switch_frame.rsi
+    offset: 0, 0
+    state: grey
+
+- type: !PartialOnly entity
+  id: ButtonFrameCautionSecurity
+  components:
+  - type: Sprite
+    state: caution_security
+
+# У прежнего RSI нет состояния white, поэтому новый вариант рамки остаётся на Wizden-спрайте.
+- type: !PartialOnly entity
+  id: ButtonFrameWhite
+  components:
+  - type: Sprite
+    sprite: Structures/Wallmounts/switch-frame.rsi
+    state: white
+

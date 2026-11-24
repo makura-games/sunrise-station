@@ -29,7 +29,6 @@ namespace Content.Server._Sunrise.CarpQueen;
 public sealed partial class CarpEggSystem : CarpQueenAccessSystem
 {
     [Dependency] private PuddleSystem _puddles = default!;
-    [Dependency] private IPrototypeManager _protos = default!;
     [Dependency] private IRobustRandom _rand = default!;
     [Dependency] private NPCSystem _npc = default!;
     [Dependency] private SharedMapSystem _map = default!;
@@ -308,12 +307,12 @@ public sealed partial class CarpEggSystem : CarpQueenAccessSystem
         if (_puddles.TryGetPuddle(tile, out var puddle) && TryComp(puddle, out PuddleComponent? puddleComp) && puddleComp.Solution != null)
         {
             var sol = puddleComp.Solution.Value.Comp.Solution;
-            color = sol.GetColor(_protos);
+            color = sol.GetColor(ProtoMan);
         }
         else
         {
             // Запасной вариант для FloorWaterEntity: используем цвет реагента Water.
-            color = _protos.Index(WaterReagent).SubstanceColor;
+            color = ProtoMan.Index(WaterReagent).SubstanceColor;
         }
 
         // На сервере красим только свет; оттенок спрайта обрабатывается клиентским visualizer.
@@ -342,7 +341,7 @@ public sealed partial class CarpEggSystem : CarpQueenAccessSystem
             if (_puddles.TryGetPuddle(tile, out var puddle) && TryComp(puddle, out PuddleComponent? puddleComp) && puddleComp.Solution != null)
             {
                 var sol = puddleComp.Solution.Value.Comp.Solution;
-                liquidColor = sol.GetColor(_protos);
+                liquidColor = sol.GetColor(ProtoMan);
 
                 // Запоминаем все реагенты в растворе.
                 foreach (var (reagentId, quantity) in sol.Contents)
@@ -353,7 +352,7 @@ public sealed partial class CarpEggSystem : CarpQueenAccessSystem
             else
             {
                 // Запасной вариант для FloorWaterEntity: используем цвет реагента Water.
-                liquidColor = _protos.Index(WaterReagent).SubstanceColor;
+                liquidColor = ProtoMan.Index(WaterReagent).SubstanceColor;
                 rememberedReagents["Water"] = FixedPoint2.New(30); // Считаем это водой.
             }
         }
@@ -512,7 +511,7 @@ public sealed partial class CarpEggSystem : CarpQueenAccessSystem
     private void OnEggDestroyed(EntityUid uid, CarpEggComponent egg, DestructionEventArgs args)
     {
         // При разрушении разливаем 2 единицы случайного реагента.
-        var reagents = _protos.EnumeratePrototypes<ReagentPrototype>();
+        var reagents = ProtoMan.EnumeratePrototypes<ReagentPrototype>();
         string chosen = null!;
         var count = 0;
         foreach (var r in reagents)

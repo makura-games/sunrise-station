@@ -503,8 +503,6 @@
     - sprite: _Sunrise/Mobs/Customization/human_hair.rsi
       state: ziegler
 
-### NEW SUNRISE SPRITES LICENSED UNDER CLA:
-
 - type: marking
   id: HairBasarab
   parent: BaseSunriseMarkingHumanHair

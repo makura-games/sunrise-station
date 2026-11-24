@@ -2,8 +2,6 @@ ghost-role-information-fugitive-name = Беглец
 ghost-role-information-fugitive-description = Вы сбежавший заключённый. Ваша цель - выжить.
 ghost-role-information-syndicate-medical-cyborg-name = Медицинский борг синдиката
 ghost-role-information-syndicate-medical-cyborg-description = Смерть NT.
-ghost-role-information-syndicate-reaper-cyborg-name = Борг синдиката "Жнец"
-ghost-role-information-syndicate-reaper-cyborg-description = Смерть NT.
 ghost-role-information-syndicate-heavy-cyborg-name = Тяжелый боевой борг синдиката
 ghost-role-information-syndicate-heavy-cyborg-description = Смерть NT.
 ghost-role-information-syndicate-spider-cyborg-name = Диверсионный борг синдиката "Инфильтратор"
@@ -47,8 +45,6 @@ job-rules-tsf-aligned =
     Вы должны служить интересам Транс-Солнечной Федерации.
     Помните: вы НЕ служите экипажу.
 ghost-role-information-sentient-carpholo-name = Разумный голокарп
-ghost-role-information-sentient-carprainbow-name = Разумный радужный карп
-ghost-role-information-sentient-carpshark-name = Разумная карпоакула
 ghost-role-information-one-star-unit-dungeon-name = Юнит «Одинокая звезда»
 ghost-role-information-guardian-unit-dungeon-name = Юнит-страж
 ghost-role-information-one-star-unit-dungeon-description = [11201010111002] Работайте с другими автоматонами, защищайте комплекс и уничтожайте всех нарушителей. [1110220001010002220]

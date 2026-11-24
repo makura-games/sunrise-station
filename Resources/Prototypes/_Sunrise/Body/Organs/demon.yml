@@ -6,5 +6,4 @@
   - type: SolutionManager
     solutions:
     - SolutionSunriseStomachSmall
-    - SolutionSunriseRawProteinFood
   - type: Stomach

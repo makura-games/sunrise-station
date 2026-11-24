@@ -68,7 +68,7 @@ public sealed partial class PersonalBiocodeSystem : SharedPersonalBiocodeSystem 
         {
             if (TryComp(args.EquipTarget, out DnaComponent? PersonNDA) && comp.DNA == PersonNDA.DNA)
             {
-                _popupSystem.PopupClient("biocode-equip-failure", args.EquipTarget, args.EquipTarget, PopupType.MediumCaution);
+                _popupSystem.PopupEntity("biocode-equip-failure", args.EquipTarget, args.EquipTarget, PopupType.MediumCaution);
                 return;
             }
 
