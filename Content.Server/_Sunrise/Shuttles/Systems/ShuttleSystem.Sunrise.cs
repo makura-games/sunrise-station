@@ -12,7 +12,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 
-#pragma warning disable IDE0130 // Пространство имён vanilla-системы сохраняется для partial-расширения.
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Shuttles.Systems;
 
 public sealed partial class ShuttleSystem
@@ -238,6 +238,44 @@ public sealed partial class ShuttleSystem
     {
         var speed = _cfg.GetCVar(SunriseCCVars.FTLSpeed);
         _physics.SetLinearVelocity(shuttleUid, new Vector2(0f, speed), body: body);
+    }
+
+    /// <summary>
+    /// Проверяет, что цель FTL ещё существует.
+    /// </summary>
+    /// <returns><see langword="true"/>, если исходная цель была валидной.</returns>
+    private bool FtlTargetIsValid(FTLComponent ftl)
+    {
+        return ftl.TargetCoordinates.IsValid(EntityManager);
+    }
+
+    /// <summary>
+    /// Запоминает карту и мировые координаты, с которых шаттл уходит в FTL.
+    /// </summary>
+    private void RememberSunriseFtlOrigin(FTLComponent ftl, EntityUid fromMap, Matrix3x2 fromMatrix)
+    {
+        ftl.OriginMap = fromMap;
+        ftl.OriginPosition = fromMatrix.Translation;
+    }
+
+    /// <summary>
+    /// Возвращает шаттл на карту и позицию, с которых он стартовал в FTL.
+    /// </summary>
+    /// <returns><see langword="true"/>, если шаттл удалось вернуть на исходную карту.</returns>
+    private bool TryRestoreSunriseFtlOrigin(EntityUid shuttleUid, FTLComponent ftl, out MapId mapId)
+    {
+        mapId = MapId.Nullspace;
+
+        if (ftl.OriginMap is not { } originMap ||
+            !TryComp<MapComponent>(originMap, out var originMapComp) ||
+            HasComp<FTLMapComponent>(originMap) ||
+            !TryFTLProximity(shuttleUid, new EntityCoordinates(originMap, ftl.OriginPosition)))
+        {
+            return false;
+        }
+
+        mapId = originMapComp.MapId;
+        return true;
     }
 
     /// <summary>

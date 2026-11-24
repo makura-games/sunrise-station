@@ -6,6 +6,7 @@ using Content.Shared.Silicons.StationAi;
 using Content.Shared.StationRecords.Components;
 using Robust.Shared.Random;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.StationRecords.Systems;
 
 public sealed partial class StationRecordsSystem

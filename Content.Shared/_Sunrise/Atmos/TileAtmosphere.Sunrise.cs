@@ -1,3 +1,4 @@
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Atmos;
 
 public sealed partial class TileAtmosphere

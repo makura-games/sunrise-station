@@ -70,7 +70,7 @@ namespace Content.Client.Lobby.UI
             StatsButton.OnPressed += _ => new PlaytimeStatsWindow().OpenCentered();
 
             _cfg.OnValueChanged(CCVars.SeeOwnNotes, p => AdminRemarksButton.Visible = p, true);
-            _cfg.OnValueChanged(CCVars.GameMaxCharacterSlots, _ => ReloadCharacterPickers());
+            // _cfg.OnValueChanged(CCVars.GameMaxCharacterSlots, _ => ReloadCharacterPickers()); // Sunrise-Edit - лимит слотов берётся из Settings при подключении.
 
             _cfg.OnValueChanged(SunriseCCVars.LobbyOpacity, OnLobbyOpacityChanged);
         }
@@ -101,7 +101,7 @@ namespace Content.Client.Lobby.UI
                 return;
             }
 
-            var maxCharactersSlots = _cfg.GetCVar(CCVars.GameMaxCharacterSlots);
+            var maxCharactersSlots = _preferencesManager.Settings!.MaxCharacterSlots; // Sunrise-Edit - серверный лимит включает дополнительные слоты спонсора.
 
             _createNewCharacterButton.ToolTip =
                 Loc.GetString("character-setup-gui-create-new-character-button-tooltip",

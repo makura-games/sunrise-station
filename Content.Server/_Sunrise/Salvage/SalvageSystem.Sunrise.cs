@@ -1,9 +1,8 @@
 using Content.Server.Salvage.Magnet;
 using Content.Shared.Salvage.Magnet;
 
-#pragma warning disable IDE0130
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Salvage;
-#pragma warning restore IDE0130
 
 public sealed partial class SalvageSystem
 {

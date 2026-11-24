@@ -4,6 +4,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Item.ItemToggle.Components;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Item.ItemToggle;
 
 public sealed partial class ItemToggleSystem

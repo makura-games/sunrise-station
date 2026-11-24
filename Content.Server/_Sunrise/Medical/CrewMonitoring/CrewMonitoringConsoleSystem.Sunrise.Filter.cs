@@ -4,6 +4,7 @@ using Content.Shared.Medical.SuitSensors;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Medical.CrewMonitoring;
 
 public sealed partial class CrewMonitoringConsoleSystem
