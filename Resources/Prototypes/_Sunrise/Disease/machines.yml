@@ -6,7 +6,6 @@
   description: A squat machine with a sample tray and a printer slot.
   components:
   - type: ItemSlots
-  # Контейнеры машины перечисляются целиком: словарь не наследуется, а перезаписывается.
   - type: ContainerContainer
     containers:
       machine_board: !type:Container
@@ -26,14 +25,12 @@
   description: A tall machine with two slots and a rack of ampoules behind glass.
   components:
   - type: ItemSlots
-  # Контейнеры машины перечисляются целиком: словарь не наследуется, а перезаписывается.
   - type: ContainerContainer
     containers:
       machine_board: !type:Container
       machine_parts: !type:Container
       vaccinatorSample: !type:ContainerSlot
       vaccinatorBlood: !type:ContainerSlot
-  # Биомасса — сырьё для препаратов: её же едят клонеры, так что источник в медотделе уже есть.
   - type: MaterialStorage
     materialWhiteList:
     - Biomass
@@ -44,8 +41,7 @@
           True: { state: running }
           False: { state: icon }
 
-# Отчёт диагностера. Ванильный лист — узкая кассовая лента, в которой длинные
-# строки симптомов переносятся по одному слову, поэтому берём широкий бланк.
+# Отчёт диагностера.
 - type: entity
   parent: DiagnosisReportPaper
   id: SunriseDiagnosisReportPaper
@@ -65,7 +61,6 @@
   - type: PaperVisuals
     backgroundPatchMargin: 6.0, 0.0, 6.0, 0.0
     contentMargin: 12.0, 0.0, 12.0, 0.0
-    # Высота ограничена: отчёт на несколько строк, лишнюю пустую ленту тянуть не нужно.
     maxWritableArea: 440.0, 260.0
 
 # Консоль базы данных вирусов: знания о штаммах, прогресс исследования и выдача лабораторных образцов.
@@ -108,8 +103,7 @@
     prototype: SunriseDiseaseDatabaseConsole
 
 # Стерилизующая арка у входа в карантин: обдаёт прошедшего дезинфектантом из своего бака
-# и пищит, если через неё прошёл заражённый. Корпус и табло — по образцу сканирующей рамки.
-# Болезнь внутри живого она не лечит, зато гасит очаги на вещах и заразу на мёртвом теле.
+# и пищит, если через неё прошёл заражённый.
 - type: entity
   parent: [ BaseMachinePowered, ConstructibleMachine, BaseMachineDestructible ]
   id: SunriseDiseaseSterilizerArch
@@ -118,7 +112,6 @@
   placement:
     mode: SnapgridCenter
   components:
-  # Арка рисуется поверх мобов: проходящий оказывается под перекладиной, а не перед ней.
   - type: Sprite
     sprite: _Sunrise/Disease/sterilizer_arch.rsi
     drawdepth: OverMobs
@@ -129,7 +122,6 @@
       shader: unshaded
       map: [ "sterilizerStatus" ]
   - type: Appearance
-  # Через арку проходят насквозь: фикстура не твёрдая и только ловит шаги.
   - type: Fixtures
     fixtures:
       fix1:
@@ -139,7 +131,6 @@
         hard: false
         layer:
         - LowImpassable
-  # Срабатывает на входе под арку: отклик совпадает с шагом, а не приходит при выходе.
   - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.2

@@ -4,7 +4,6 @@
   name: disease microscope
   description: A laboratory microscope with a sealed culture stage and two reagent pipettes.
   components:
-  # Свой корпус: микроскоп больше не выглядит как диагностер, от которого унаследован.
   - type: Sprite
     sprite: _Sunrise/Disease/Microscope/microscope.rsi
     layers:
@@ -13,7 +12,6 @@
     - state: unlit
       shader: unshaded
       map: ["enum.DiseaseMachineVisualLayers.IsOn"]
-  # Под питанием экран и камера с культурой оживают.
   - type: GenericVisualizer
     visuals:
       enum.PowerDeviceVisuals.VisualState:
@@ -36,7 +34,6 @@
     solution:
       maxVol: 100
       reagents:
-      # Запаса хватает на полный цикл сложной культуры, где каждая капля стоит дороже.
       - ReagentId: EZNutrient
         Quantity: 40
       - ReagentId: Phenol

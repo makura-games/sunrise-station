@@ -6,7 +6,6 @@
   name: biohazard canister
   description: A sealed canister with a sprayer head. The label is a biohazard trefoil and nothing else.
   components:
-  # Зелёный оттенок отличает баллон от обычных гранат Синдиката прямо в руках.
   - type: Sprite
     sprite: Objects/Weapons/Grenades/syndgrenade.rsi
     color: "#8FBF6F"
@@ -23,7 +22,6 @@
     primingSound:
       path: /Audio/Items/smoke_grenade_prime.ogg
 
-# Более плотный аэрозоль использует ту же механику заражения, что и облака артефакта.
 - type: entity
   parent: SunriseDiseaseCloud
   id: SunriseSyndicateDiseaseCloud

@@ -1,10 +1,6 @@
-# Источники заражения, которые заводят болезнь в раунд: заражённый груз и зверьё из вентиляции.
-# Прототипы под каждую болезнь не плодим: штамм выбирается при появлении предмета
-# либо проставляется правилом события.
+# Источники заражения, которые заводят болезнь в раунд.
 
-# Заражённая гуманитарная помощь: снаружи это обычный ящик медикаментов, который приходит
-# грузовым заказом вместе с настоящими подарками. Отличить его от соседних по партии нельзя,
-# поэтому очаг ищут уже по заболевшим, а не по виду ящика.
+# Ящик-обманка, заразный.
 - type: entity
   parent: CrateMedicalSupplies
   id: SunriseCrateContaminatedAid
@@ -16,22 +12,18 @@
   name: biowaste crate
   description: A sealed crate of medical waste. The seal does not look intact.
 
-# Мышь-переносчик сама не болеет: симптомов у неё нет, заразу она передаёт только укусом.
-# Опознать её можно лишь по поведению — она не убегает, а бросается на экипаж.
-# Без родителя: иначе спрайт обычной мыши перебил бы серую и коричневую.
+# Мышь которая заражает и бьет, потому что бешенная.
 - type: entity
   abstract: true
   id: SunriseMobMouseInfectedBase
   suffix: Infected
   components:
-  # Обычная мышь ходит по MouseCompound: поесть и бездельничать, боевой ветки там нет.
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
   - type: NpcFactionMember
     factions:
     - SimpleHostile
-  # Укус почти не ранит, но прокушенная кожа — прямой путь для заразы.
   - type: MeleeWeapon
     soundHit:
       path: /Audio/Effects/bite.ogg
@@ -42,18 +34,17 @@
         Piercing: 1
 
 - type: entity
-  parent: [ MobMouse, SunriseMobMouseInfectedBase ]
+  parent: [ SunriseMobMouseInfectedBase, MobMouse ]
   id: SunriseMobMouseInfected
 
 - type: entity
-  parent: [ MobMouse1, SunriseMobMouseInfectedBase ]
+  parent: [ SunriseMobMouseInfectedBase, MobMouse1 ]
   id: SunriseMobMouseInfectedGrey
 
 - type: entity
-  parent: [ MobMouse2, SunriseMobMouseInfectedBase ]
+  parent: [ SunriseMobMouseInfectedBase, MobMouse2 ]
   id: SunriseMobMouseInfectedBrown
 
-# Облако заразного аэрозоля. Болезнь в него проставляет тот, кто облако выпустил.
 - type: entity
   id: SunriseDiseaseCloud
   name: strange haze

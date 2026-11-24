@@ -25,7 +25,6 @@
   - type: Sprite
     sprite: Objects/Specific/Medical/medipen.rsi
     state: medipen
-  # Сыворотку в многоразовый инжектор не вставить: её запас ограничен кровью донора.
   - type: Tag
     tags:
     - Trash

@@ -22,7 +22,7 @@
 
 # Биозащита.
 
-# Фильтр мелкой фракции задерживает почти все капли: втрое лучше обычной стерильной маски.
+# Маска с защитой от вирусов в трое лучше обычной.
 - type: entity
   parent: ClothingMaskSterile
   id: SunriseClothingMaskSterileAdvanced
@@ -34,7 +34,6 @@
   - type: Clothing
     sprite: _Sunrise/Clothing/Mask/sterile_filtering.rsi
 
-# Защиту рук и чистоту перчаток лабораторные перчатки берут у нитриловых.
 - type: entity
   parent: ClothingHandsGlovesNitrile
   id: SunriseClothingHandsGlovesVirology
@@ -47,7 +46,7 @@
     sprite: _Sunrise/Clothing/Hands/Gloves/virology.rsi
 
 # Герметичный биокостюм с избыточным давлением полностью закрывает от касаний, укусов, наростов,
-# капель и облаков. Сам он заразу не собирает, переносчиком становятся только обычные перчатки.
+# капель и облаков.
 - type: entity
   parent: ClothingOuterBioVirology
   id: SunriseClothingOuterBioVirologyAdvanced
@@ -70,26 +69,7 @@
   - type: Clothing
     sprite: _Sunrise/Clothing/Head/Hoods/Bio/virology_sealed.rsi
 
-# Распылитель побольше: тот же реагент, но запаса хватает на обработку целого отсека.
-# Приезжает пустым, поэтому наследует общий баллон, а не наполненный распылитель.
-- type: entity
-  parent: SunriseDiseaseSprayerBase
-  id: SunriseDiseaseSprayerLarge
-  name: large disinfectant sprayer
-  suffix: Empty
-  description: A roomy canister with a hand pump and a long hose.
-  components:
-  - type: Sprite
-    sprite: Objects/Tools/Hydroponics/sprays.rsi
-    state: pestspray
-  - type: Solution
-    solution:
-      maxVol: 150
-  - type: Spray
-    transferAmount: 10
-
-# Обычный химический дым тут не годится: он реагирует только с кровотоком живых и не трогает
-# заражённые предметы. Поэтому граната гасит очаги сама, а дым выпускает только для вида.
+# Дым здесь чисто для визуала.
 - type: entity
   parent: [ BaseMedicalContraband, SmokeGrenade ]
   id: SunriseDisinfectantGrenade
@@ -125,8 +105,7 @@
 
 # Массовая вакцинация.
 
-# Вакцина в слоте не расходуется: одна ампула прививает весь отдел. Сыворотку сюда не вставить,
-# её запас ограничен кровью донора.
+# Вакцина в слоте не расходуется, одна ампула может привить бесчиленное число сущностей.
 - type: entity
   parent: BaseItem
   id: SunriseDiseaseVaccineInjector
@@ -154,7 +133,6 @@
   - type: ContainerContainer
     containers:
       vaccine: !type:ContainerSlot
-  # Заряженная вакцина видна в окошке инжектора.
   - type: ItemMapper
     mapLayers:
       loaded:

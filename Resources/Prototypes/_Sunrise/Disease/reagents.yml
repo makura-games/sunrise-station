@@ -1,4 +1,6 @@
 # Реагенты системы болезней. Ни один из них не лечит полностью: это задача вакцины или сыворотки.
+
+# Подавляет симптомы
 - type: reagent
   id: SunriseAntitussive
   name: reagent-name-sunrise-antitussive
@@ -7,6 +9,8 @@
   physicalDesc: reagent-physical-desc-sunrise-antitussive
   flavor: medicine
   color: "#C9A227"
+
+# Подавляет развитие и распространение болезни
 - type: reagent
   id: SunriseAntimicrobial
   name: reagent-name-sunrise-antimicrobial
@@ -15,6 +19,8 @@
   physicalDesc: reagent-physical-desc-sunrise-antimicrobial
   flavor: bitter
   color: "#4F8A8B"
+
+# Раствор для удаления заразы с объектов
 - type: reagent
   id: SunriseDisinfectant
   name: reagent-name-sunrise-disinfectant
@@ -27,7 +33,6 @@
     Bloodstream:
       metabolismRate: 0.5
       effects:
-      # Внутрь его не принимают: это наружное средство для очагов, а не лекарство.
       - !type:HealthChange
         damage:
           types:
@@ -42,8 +47,6 @@
   products:
     SunriseDisinfectant: 2
 
-# Готовая тара с дезинфектантом, как у ванильных реагентов: бутылка для выдачи из химии
-# и мензурка на рабочее место. Рецепт из дозатора при этом никуда не девается.
 - type: entity
   parent: BaseChemistryBottleFilled
   id: SunriseChemistryBottleDisinfectant

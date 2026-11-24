@@ -1,5 +1,4 @@
 # Полевые инструменты вирусолога: карманный анализатор, распылитель-обеззараживатель и визор.
-# Все работают по очагам вне лаборатории, где диагностер и вакцинатор недоступны.
 
 - type: entity
   parent: BaseItem
@@ -7,7 +6,6 @@
   name: disease analyzer
   description: A hand-held analyzer with a narrow printer slot and a roll of paper.
   components:
-  # Спрайты в руках общие с медицинским анализатором, иконка своя.
   - type: Item
     heldPrefix: analyzer
     storedRotation: -90
@@ -21,8 +19,7 @@
   - type: UseDelay
     delay: 0.5
 
-# Пульверизатор по образцу садовых опрыскивателей: обеззараживает не прибор, а реагент,
-# так что распылитель ничего не знает о болезнях и заправляется в химии как обычная бутылка.
+# Пульверизатор по образцу садовых опрыскивателей
 - type: entity
   abstract: true
   parent: SprayBottleBase

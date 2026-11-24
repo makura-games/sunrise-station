@@ -4,25 +4,21 @@
   name: viral research vessel
   description: A sealed culture vessel with a glass chamber, a sampling port and a research terminal.
   components:
-  # По образцу сосуда аномалии: корпус, подсветка стекла и культура лежат отдельными слоями.
   - type: Sprite
     sprite: _Sunrise/Disease/research_vessel.rsi
     noRot: true
     layers:
     - state: base
       map: ["enum.DiseaseResearchVesselVisualLayers.Base"]
-    # Лючок открыт, пока внутри нет образца.
     - state: open
       map: ["vesselOpen"]
     - state: powered
       shader: unshaded
       visible: false
       map: ["vesselPowered"]
-    # Образец виден тёмным силуэтом в стекле, пока исследование не идёт.
     - state: sample
       visible: false
       map: ["vesselSample"]
-    # Светящаяся культура и бегущие полосы сканера — только во время исследования.
     - state: culture
       shader: unshaded
       visible: false
@@ -77,6 +73,7 @@
       Manipulator: 2
       Glass: 5
       Cable: 5
+
 - type: entity
   parent: SunriseDiseaseResearchVessel
   id: SunriseDiseaseResearchVesselExperimental
@@ -106,6 +103,7 @@
       Glass: 10
       Cable: 5
       MetalRod: 4
+
 - type: entity
   parent: BaseFlatpack
   id: SunriseDiseaseResearchVesselFlatpack

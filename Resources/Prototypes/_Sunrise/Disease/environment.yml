@@ -1,4 +1,4 @@
-# Редкие находки и локальные очаги. Один источник выпускает один штамм и только один раз.
+# Источники очагов вирусов.
 - type: entity
   parent: CrateMedical
   id: SunriseCrateBiologicalSalvage
@@ -7,7 +7,8 @@
   components:
   - type: Destructible
     thresholds:
-    - trigger: !type:DamageTrigger
+    - trigger:
+        !type:DamageTrigger
         damage: 100
       behaviors:
       - !type:TriggerBehavior
@@ -26,7 +27,6 @@
     lifetime: 6
 
 # Нарост заражает тремя путями: рукой (контакт), ногой (шаг по нему) и облаком спор, если его разбить.
-# Дезинфектант гасит все три разом.
 - type: entity
   id: SunriseDiseaseSporeGrowth
   name: spore growth
@@ -42,7 +42,6 @@
     sprite: _Sunrise/Disease/spores.rsi
     state: growth
     drawdepth: SmallObjects
-  # Срабатывает и на обычном шаге, а не только на бегу.
   - type: StepTrigger
     requiredTriggeredSpeed: 1
   - type: Physics
@@ -61,7 +60,8 @@
     damageContainer: StructuralBiological
   - type: Destructible
     thresholds:
-    - trigger: !type:DamageTrigger
+    - trigger:
+        !type:DamageTrigger
         damage: 10
       behaviors:
       - !type:TriggerBehavior
@@ -69,7 +69,6 @@
       - !type:DoActsBehavior
         acts: [ Destruction ]
 
-# Маркер исчезает при старте карты; в большинстве раундов на его месте ничего нет.
 - type: entity
   parent: MarkerBase
   id: SunriseDiseaseSporeGrowthSpawner
@@ -86,7 +85,7 @@
     chance: 0.15
     offset: 0
 
-# Эти животные — скрытые резервуары: передают только укусом, сами не кашляют и не болеют.
+# Опасные зараженные животные
 - type: entity
   parent: MobCarpSalvage
   id: SunriseMobCarpSalvageInfected
