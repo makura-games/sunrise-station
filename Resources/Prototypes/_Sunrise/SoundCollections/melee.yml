@@ -23,3 +23,18 @@
   id: MimicryBladeHit
   files:
   - /Audio/_Sunrise/Weapons/Melee/mimicry_swing.ogg
+
+- type: soundCollection
+  id: ChainSaw
+  files:
+  - /Audio/Weapons/chainsaw_rev.ogg
+  - /Audio/Weapons/chainsaw_rev.ogg
+  - /Audio/Weapons/chainsaw_rev.ogg
+  - /Audio/Weapons/chainsaw_rev.ogg
+  - /Audio/Weapons/chainsaw_rev.ogg
+  - /Audio/Weapons/chainsaw_rev.ogg
+  - /Audio/Weapons/chainsaw_rev.ogg
+  - /Audio/Weapons/chainsaw_rev.ogg
+  - /Audio/Weapons/chainsaw_rev.ogg
+  - /Audio/_Sunrise/Weapons/Melee/hit.ogg
+  - /Audio/_Sunrise/Weapons/Melee/miss.ogg

@@ -1204,6 +1204,7 @@
     startingEquipment:
       - WeaponMechCombatMissileRack8
       - WeaponMechCombatShotgunAuto
+      - WeaponMechChainSword
 
 # Mauler
 - type: entity
