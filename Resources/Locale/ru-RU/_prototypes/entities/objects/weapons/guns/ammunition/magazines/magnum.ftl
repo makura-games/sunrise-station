@@ -1,6 +1,6 @@
 ent-BaseMagazineMagnum = пистолетный магазин (.45 магнум)
     .desc = { ent-BaseMagazinePistol.desc }
-ent-MagazineMagnumEmpty = пистолетный магазин (.45 магнум любые)
+ent-MagazineMagnumEmpty = пистолетный магазин (.45 магнум)
     .desc = { ent-BaseMagazineMagnum.desc }
     .suffix = Пустой
 ent-MagazineMagnumRubber = пистолетный магазин (.45 магнум резиновые)
@@ -19,7 +19,7 @@ ent-MagazineMagnumAP = пистолетный магазин (.45 магнум �
     .desc = { ent-BaseMagazineMagnum.desc }
 ent-BaseMagazineMagnumSubMachineGun = магазин Вектора (.45 магнум)
     .desc = { ent-BaseItem.desc }
-ent-MagazineMagnumSubMachineGunEmpty = магазин Вектора (.45 магнум любые)
+ent-MagazineMagnumSubMachineGunEmpty = магазин Вектора (.45 магнум)
     .suffix = Пустой
     .desc = { ent-BaseMagazineMagnumSubMachineGun.desc }
 ent-MagazineMagnumSubMachineGun = магазин Вектора (.45 магнум)

@@ -437,10 +437,9 @@
   - GlockBox
   - MK58Box
   - MK58GoldBox
-  - SnubRevolverBox
+  - InspectorRevolverBox
   - SunriseLaserPistol
   - WeaponDisabler
-  - WeaponTaser
 
 - type: loadoutGroup
   id: SecurityGlasses
@@ -462,7 +461,7 @@
   - CadetWeaponGlockBox
   - CadetWeaponMK58Box
   - MK58GoldBox
-  - SnubRevolverBox
+  - InspectorRevolverBox
   - CadetWeaponMiniEnergyGun
   - CadetWeaponDisabler
 
@@ -474,7 +473,6 @@
   maxLimit: 1
   loadouts:
   - DetectiveWeapon
-  - WeaponRevolverSnubRevolver
   - DetectiveWeapon20h
   - DetectiveWeapon50h
   - DetectiveWeapon100h
@@ -488,11 +486,10 @@
   - GlockBox
   - MK58Box
   - MK58GoldBox
-  - SnubRevolverBox
+  - InspectorRevolverBox
   - SunriseLaserPistol
   - CadetWeaponMiniEnergyGun
   - WeaponDisabler
-  - WeaponTaser
 
 - type: loadoutGroup
   id: SunriseBrigmedGun
@@ -501,8 +498,6 @@
   maxLimit: 1
   loadouts:
   - WeaponDisabler
-  - SunriseWeaponTaserBrigmed
-  - WeaponTaserBrigmed
   - WeaponMiniEnergyGunBrigmed
 
 # Security  HoS

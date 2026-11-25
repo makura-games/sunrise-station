@@ -1,0 +1,44 @@
+# Эти ID уже существуют в актуальном upstream, но отсутствуют в текущей базе Sunrise.
+# Файл можно удалить после их переноса вместе с очередным upstream-обновлением.
+
+- type: entity
+  parent: BaseMagazineLightRifle
+  id: MagazineLightRifleBox
+  name: "L6 SAW magazine box (.30 rifle)"
+  description: Box containing a 100-round belt of linked .30 rifle rounds, used by light machine guns such as the L6. Intended to hold general-purpose kinetic ammunition.
+  components:
+  - type: Tag
+    tags:
+    - MagazineLightRifleBox
+  - type: BallisticAmmoProvider
+    proto: CartridgeLightRifle
+    capacity: 100
+  - type: Item
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_box.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 8
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseMagazineLightRifle
+  id: MagazineLightRifle
+  name: "magazine (.30 rifle)"
+  description: Curved 30-round double stack magazine for combat rifles. Intended to hold general-purpose kinetic ammunition.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeLightRifle
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      right:
+      - state: inhand-right-mag

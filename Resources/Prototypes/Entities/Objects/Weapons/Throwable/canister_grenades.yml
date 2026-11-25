@@ -83,10 +83,6 @@
   - type: StaticPrice
     price: 350
   #Sunrise-Start
-  - type: CartridgeAmmo
-    proto: BulletMetalFoamGrenade
-    deleteOnSpawn: true
-  - type: SpentAmmoVisuals
   - type: Tag
     tags:
     - HandGrenadeAmmo
@@ -135,10 +131,6 @@
     - type: TriggerOnUse
     - type: TimerTrigger
   #Sunrise-Start
-  - type: CartridgeAmmo
-    proto: BulletAirGrenade
-    deleteOnSpawn: true
-  - type: SpentAmmoVisuals
   - type: Tag
     tags:
     - HandGrenadeAmmo

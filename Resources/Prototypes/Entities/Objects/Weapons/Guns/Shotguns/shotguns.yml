@@ -1,198 +1,140 @@
-- type: entity
-  name: BaseWeaponShotgun
-  parent: [BaseItem, GunMedium, BaseGunShotgunSound] # Sunrise edit - shotgun handling sounds
-  id: BaseWeaponShotgunAny
-  description: A rooty tooty point and shooty.
-  abstract: true
-  components:
-  - type: Sprite
-    layers:
-    - state: icon
-      map: [ "enum.GunVisualLayers.Base" ]
-  - type: Item
-    size: Large
-    shape:
-    - 0,0,4,0
-  - type: Clothing
-    sprite: Objects/Weapons/Guns/Shotguns/db_shotgun.rsi
-    quickEquip: false
-    slots:
-    - Back
-    - suitStorage
-  - type: AmmoCounter
-  - type: Gun
-    fireRate: 2
-    projectileSpeed: 25 # Sunrise-Edit
-    selectedMode: SemiAuto
-    availableModes:
-    - SemiAuto
-    soundGunshot:
-      collection: xm1014 # Sunrise-Edit
-    soundEmpty:
-      path: /Audio/Weapons/Guns/Empty/empty.ogg
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-        ents: []
-  - type: StaticPrice
-    price: 500
-  - type: RestrictByUserTag
-    doestContain:
-    - Abductor
-    messages:
-    - abductor-gun-restricted-1
-  - type: KnockbackByUserTag
-    doestContain:
-      Resomi:
-        knockback: 3
-        staminaMultiplier: 20
-      Felinid:
-        knockback: 1.5 #half of what resomi take
-        staminaMultiplier: 20
+# Sunrise edit start - прототип перенесён в _Sunrise
+# - type: entity
+#   name: BaseWeaponShotgun
+#   parent: BaseItem
+#   id: BaseWeaponShotgun
+#   description: A rooty tooty point and shooty.
+#   abstract: true
+#   components:
+#   - type: Sprite
+#     layers:
+#     - state: icon
+#       map: [ "enum.GunVisualLayers.Base" ]
+#   - type: Item
+#     size: Large
+#     shape:
+#     - 0,0,4,0
+#   - type: Clothing
+#     sprite: Objects/Weapons/Guns/Shotguns/db_shotgun.rsi
+#     quickEquip: false
+#     slots:
+#     - Back
+#     - suitStorage
+#   - type: AmmoCounter
+#   - type: Gun
+#     fireRate: 2
+#     selectedMode: SemiAuto
+#     availableModes:
+#     - SemiAuto
+#     soundGunshot:
+#       path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
+#     soundEmpty:
+#       path: /Audio/Weapons/Guns/Empty/empty.ogg
+#   - type: CustomSpriteAmmoCounter
+#     loadedAmmoSprite: Interface/ItemStatus/Shotgun_Shells/not_spent.png
+#     spentAmmoSprite: Interface/ItemStatus/Shotgun_Shells/spent.png
+#   - type: BallisticAmmoProvider
+#     whitelist:
+#       tags:
+#       - ShellShotgun
+#     capacity: 7
+#     proto: ShellShotgun
+#     soundInsert:
+#       path: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
+#   - type: ContainerContainer
+#     containers:
+#       ballistic-ammo: !type:Container
+#         ents: []
+#   - type: StaticPrice
+#     price: 500
+# Sunrise edit end
 
-- type: entity
-  parent: BaseWeaponShotgunAny
-  id: BaseWeaponShotgun
-  abstract: true
-  components:
-  - type: CustomSpriteAmmoCounter
-    loadedAmmoSprite: Interface/ItemStatus/Shotgun_Shells/not_spent.png
-    spentAmmoSprite: Interface/ItemStatus/Shotgun_Shells/spent.png
-  - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-      - ShellShotgun
-    capacity: 7
-    proto: ShellShotgun
-    soundInsert:
-      path: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
+# Sunrise edit start - прототип перенесён в _Sunrise
+# - type: entity
+#   name: Bulldog
+#   # Don't parent to BaseWeaponShotgun because it differs significantly
+#   parent: [BaseItem, BaseGunWieldable, BaseSyndicateContraband]
+#   id: WeaponShotgunBulldog
+#   description: An automatic magazine-fed shotgun for close-quarters combat. Kicks like a mule on steroids. Uses .50 shotgun shells.
+#   components:
+#   - type: Sprite
+#     sprite: Objects/Weapons/Guns/Shotguns/bulldog.rsi
+#     layers:
+#     - state: base
+#       map: ["enum.GunVisualLayers.Base"]
+#     - state: mag-0
+#       map: ["enum.GunVisualLayers.Mag"]
+#   - type: Item
+#     size: Large
+#   - type: Clothing
+#     sprite: Objects/Weapons/Guns/Shotguns/bulldog.rsi
+#     quickEquip: false
+#     slots:
+#     - Back
+#     - suitStorage
+#   - type: AmmoCounter
+#   - type: CustomSpriteAmmoCounter
+#     loadedAmmoSprite: Interface/ItemStatus/Shotgun_Shells/not_spent.png
+#     spentAmmoSprite: Interface/ItemStatus/Shotgun_Shells/spent.png
+#   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
+#   - type: Gun
+#     fireRate: 2
+#     selectedMode: FullAuto
+#     availableModes:
+#     - FullAuto
+#     soundGunshot:
+#       path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
+#     soundEmpty:
+#       path: /Audio/Weapons/Guns/Empty/empty.ogg
+#   - type: ItemSlots
+#     slots:
+#       gun_magazine:
+#         name: Magazine
+#         startingItem: MagazineShotgun
+#         priority: 2
+#         whitelist:
+#           tags:
+#           - MagazineShotgun
+#         whitelistFailPopup: gun-magazine-whitelist-fail
+#         insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+#         ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+#   - type: ContainerContainer
+#     containers:
+#       gun_magazine: !type:ContainerSlot
+#       gun_chamber: !type:ContainerSlot
+#   - type: MagazineAmmoProvider
+#   - type: MagazineVisuals
+#     magState: mag
+#     steps: 1
+#     zeroVisible: true
+#   - type: Appearance
+#   - type: StaticPrice
+#     price: 5000
+# Sunrise edit end
 
-- type: entity
-  parent: [BaseWeaponShotgunAny, GunLight]
-  id: BaseWeaponShotgunPump
-  abstract: true
-  components:
-  - type: Gun
-    fireRate: 1.5
-    projectileSpeed: 35 # Sunrise-Edit
-    pump: true
-  - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-      - ShellShotgun
-    capacity: 7
-    proto: ShellShotgun
-    soundInsert:
-      path: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
-    soundRack:
-      path: /Audio/_Sunrise/Weapons/Guns/Shotguns/trenchgun_l4034/trenchgun_l4034_pump.ogg
-
-- type: entity
-  name: Bulldog
-  # Don't parent to BaseWeaponShotgun because it differs significantly
-  parent: [BaseItem, BaseGunWieldable, BaseSyndicateContraband, GunLight, BaseGunShotgunSound] # Sunrise edit - shotgun handling sounds
-  id: WeaponShotgunBulldog
-  description: An automatic magazine-fed shotgun for close-quarters combat. Kicks like a mule on steroids. Uses .50 shotgun shells.
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Shotguns/bulldog.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Item
-    size: Large
-  - type: Clothing
-    sprite: Objects/Weapons/Guns/Shotguns/bulldog.rsi
-    quickEquip: false
-    slots:
-    - Back
-    - suitStorage
-  - type: AmmoCounter
-  - type: CustomSpriteAmmoCounter
-    loadedAmmoSprite: Interface/ItemStatus/Shotgun_Shells/not_spent.png
-    spentAmmoSprite: Interface/ItemStatus/Shotgun_Shells/spent.png
-  #- type: GunRequiresWield #remove when inaccuracy on spreads is fixed # Sunrise-Edit
-  - type: Gun
-    fireRate: 2
-    projectileSpeed: 30 # Sunrise-Edit
-    selectedMode: FullAuto
-    availableModes:
-    - FullAuto
-    soundGunshot:
-      collection: xm1014 # Sunrise-Edit
-    soundEmpty:
-      path: /Audio/Weapons/Guns/Empty/empty.ogg
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineShotgun
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineShotgun
-        whitelistFailPopup: gun-magazine-whitelist-fail
-        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-  - type: MagazineAmmoProvider
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: Appearance
-  - type: StaticPrice
-    price: 5000
-  # Sunrise-Start
-  - type: CanDualWield
-    dualWieldInaccuracyPenalty: 2
-    dualWieldFireRatePenalty: 0.35
-    dualWieldRecoilPenalty: 0.35
-  # Sunrise-End
-
-- type: entity
-  name: double-barreled shotgun
-  parent: [BaseWeaponShotgunAny, BaseGunWieldable, BaseSecurityBartenderContraband] # Sunrise-Edit
-  id: WeaponShotgunDoubleBarreled
-  description: An immortal classic. Uses .50 shotgun shells.
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Shotguns/db_shotgun.rsi
-  - type: Item
-    sprite: Objects/Weapons/Guns/Shotguns/db_shotgun_inhands_64x.rsi
-  - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
-  - type: Gun
-    fireRate: 3
-  - type: GunSpreadModifier
-    spread: 0.6
-  # - type: BallisticAmmoProvider # Sunrise-Edit
-  #   capacity: 2
-  - type: Construction
-    graph: ShotgunSawn
-    node: start
-    deconstructionTarget: null
-  # Sunrise-Start
-  - type: RevolverAmmoProvider
-    whitelist:
-      tags:
-      - ShellShotgun
-      #- SpeedLoaderShotgun
-    proto: ShellShotgun
-    capacity: 2
-    chambers: [ True, True ]
-    ammoSlots: [ null, null ]
-    soundInsert:
-      path: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-      revolver-ammo: !type:Container
-  # Sunrise-End
+# Sunrise edit start - прототип перенесён в _Sunrise
+# - type: entity
+#   name: double-barreled shotgun
+#   parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityBartenderContraband]
+#   id: WeaponShotgunDoubleBarreled
+#   description: An immortal classic. Uses .50 shotgun shells.
+#   components:
+#   - type: Sprite
+#     sprite: Objects/Weapons/Guns/Shotguns/db_shotgun.rsi
+#   - type: Item
+#     sprite: Objects/Weapons/Guns/Shotguns/db_shotgun_inhands_64x.rsi
+#   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
+#   - type: Gun
+#     fireRate: 3
+#   - type: GunSpreadModifier
+#     spread: 0.6
+#   - type: BallisticAmmoProvider
+#     capacity: 2
+#   - type: Construction
+#     graph: ShotgunSawn
+#     node: start
+#     deconstructionTarget: null
+# Sunrise edit end
 
 - type: entity
   name: double-barreled shotgun
@@ -201,15 +143,8 @@
   description: An immortal classic. Uses .50 shotgun shells.
   suffix: Non-Lethal
   components:
-  # Sunrise-Start
-  # - type: BallisticAmmoProvider
-  #   proto: ShellShotgunBeanbag
-  - type: RevolverAmmoProvider
-    whitelist:
-      tags:
-      - ShellShotgun
+  - type: BallisticAmmoProvider
     proto: ShellShotgunBeanbag
-  # Sunrise-End
 
 - type: entity
   name: Enforcer
@@ -225,10 +160,6 @@
     sprite: Objects/Weapons/Guns/Shotguns/enforcer_inhands_64x.rsi
   - type: BallisticAmmoProvider
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
-  - type: Gun
-    projectileSpeed: 25 # Sunrise-Edit
-    soundGunshot:
-      collection: xm1014 # Sunrise-Edit
 
 - type: entity
   parent: WeaponShotgunEnforcer
@@ -237,92 +168,57 @@
   components:
   - type: BallisticAmmoProvider
     proto: ShellShotgunBeanbag
-  - type: Gun
-    projectileSpeed: 25 # Sunrise-Edit
-    soundGunshot:
-      collection: xm1014 # Sunrise-Edit
 
-- type: entity
-  name: Kammerer
-  parent: [BaseWeaponShotgunPump, BaseGunWieldable, BaseSecurityContraband]
-  id: WeaponShotgunKammerer
-  description: An old yet faithful design, and a favorite among irregular forces of many worlds. Uses .50 shotgun shells.
-  components: # intend for Kammerer to have tighter choke for slower fire rate and/or manual cycling
-  - type: Item
-    sprite: Objects/Weapons/Guns/Shotguns/pump_inhands_64x.rsi
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Shotguns/pump.rsi
-  - type: Clothing
-    sprite: Objects/Weapons/Guns/Shotguns/pump.rsi
-  - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
-  - type: Gun
-    fireRate: 1.5 # Sunrise-edit
-    projectileSpeed: 35 # Sunrise-Edit
-  - type: GunSpreadModifier
-    spread: 0.6
-  - type: Tag
-    tags:
-    - WeaponShotgunKammerer
+# Sunrise edit start - прототип перенесён в _Sunrise
+# - type: entity
+#   name: Kammerer
+#   parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
+#   id: WeaponShotgunKammerer
+#   description: An old yet faithful design, and a favorite among irregular forces of many worlds. Uses .50 shotgun shells.
+#   components: # intend for Kammerer to have tighter choke for slower fire rate and/or manual cycling
+#   - type: Item
+#     sprite: Objects/Weapons/Guns/Shotguns/pump_inhands_64x.rsi
+#   - type: Sprite
+#     sprite: Objects/Weapons/Guns/Shotguns/pump.rsi
+#   - type: Clothing
+#     sprite: Objects/Weapons/Guns/Shotguns/pump.rsi
+#   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
+#   - type: Gun
+#     fireRate: 1
+#   - type: GunSpreadModifier
+#     spread: 0.6
+#   - type: Tag
+#     tags:
+#     - WeaponShotgunKammerer
+# Sunrise edit end
 
-- type: entity
-  name: sawn-off shotgun
-  parent: [ BaseWeaponShotgunAny, BaseSecurityBartenderContraband ] # Sunrise-Edit
-  id: WeaponShotgunSawn
-  description: Groovy! Uses .50 shotgun shells.
-  components: # needs to be super inaccurate because you don't need to wield it
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Shotguns/sawn.rsi
-  - type: Clothing
-    sprite: Objects/Weapons/Guns/Shotguns/sawn.rsi
-  - type: Item
-    size: Small
-    shape:
-    - 0,0,2,0
-    sprite: Objects/Weapons/Guns/Shotguns/sawn_inhands_64x.rsi
-  - type: Gun
-    fireRate: 3
-    projectileSpeed: 25 # Sunrise-Edit
-    soundGunshot:
-      collection: m3 # Sunrise-Edit
-  - type: CanDualWield # Sunrise-Edit
-    dualWieldInaccuracyPenalty: 3
-    dualWieldFireRatePenalty: 0.25
-    dualWieldRecoilPenalty: 0.25
-  - type: GunSpreadModifier
-    spread: 1.8 # Sunrise-Edit
-  # - type: BallisticAmmoProvider   # Sunrise-Start
-  #   capacity: 2
-  - type: Construction
-    graph: ShotgunSawn
-    node: shotgunsawn
-    deconstructionTarget: null
-  # Sunrise-Start
-  - type: RevolverAmmoProvider
-    whitelist:
-      tags:
-      - ShellShotgun
-    proto: ShellShotgun
-    capacity: 2
-    chambers: [ True, True ]
-    ammoSlots: [ null, null ]
-    soundInsert:
-      path: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-      revolver-ammo: !type:Container
-  - type: KnockbackByUserTag
-    doestContain:
-      Resomi:
-        knockback: 3
-        staminaMultiplier: 20
-      Felinid:
-        knockback: 1.5 #half of what resomi take
-        staminaMultiplier: 20
-      AnomalyHost:
-        knockback: 0.4
-        staminaMultiplier: 15
-  # Sunrise-End
+# Sunrise edit start - прототип перенесён в _Sunrise
+# - type: entity
+#   name: sawn-off shotgun
+#   parent: [ BaseWeaponShotgun, BaseSecurityBartenderContraband ]
+#   id: WeaponShotgunSawn
+#   description: Groovy! Uses .50 shotgun shells.
+#   components: # needs to be super inaccurate because you don't need to wield it
+#   - type: Sprite
+#     sprite: Objects/Weapons/Guns/Shotguns/sawn.rsi
+#   - type: Clothing
+#     sprite: Objects/Weapons/Guns/Shotguns/sawn.rsi
+#   - type: Item
+#     size: Small
+#     shape:
+#     - 0,0,2,0
+#     sprite: Objects/Weapons/Guns/Shotguns/sawn_inhands_64x.rsi
+#   - type: Gun
+#     fireRate: 3
+#   - type: GunSpreadModifier
+#     spread: 1.4
+#   - type: BallisticAmmoProvider
+#     capacity: 2
+#   - type: Construction
+#     graph: ShotgunSawn
+#     node: shotgunsawn
+#     deconstructionTarget: null
+# Sunrise edit end
 
 - type: entity
   name: sawn-off shotgun
@@ -331,24 +227,12 @@
   description: Groovy! Uses .50 shotgun shells.
   suffix: Empty
   components:
-  # - type: BallisticAmmoProvider  # Sunrise-Edit
-  #   proto: null
+  - type: BallisticAmmoProvider
+    proto: null
   - type: Construction
     graph: ShotgunSawn
     node: shotgunsawn
     deconstructionTarget: null
-  # Sunrise-Start
-  - type: RevolverAmmoProvider
-    whitelist:
-      tags:
-      - ShellShotgun
-    proto: null
-    capacity: 2
-    chambers: [ null, null ]
-    ammoSlots: [ null, null ]
-    soundInsert:
-      path: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
-  # Sunrise-End
 
 - type: entity
   name: handmade pistol
@@ -368,9 +252,6 @@
     sprite: Objects/Weapons/Guns/Shotguns/hm_pistol.rsi
   - type: Gun
     fireRate: 4
-    projectileSpeed: 25 # Sunrise-Edit
-    soundGunshot:
-      collection: m3 # Sunrise-Edit
   - type: BallisticAmmoProvider
     capacity: 1
   - type: Construction
@@ -392,15 +273,7 @@
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
     fireRate: 2
-    projectileSpeed: 25 # Sunrise-Edit
   - type: BallisticAmmoProvider
-    # sunrise-start
-    proto: CannonBallGrapeshotMini
-    whitelist:
-      tags:
-      - ShellShotgun
-      - CannonBallMini
-   # sunrise-end
     capacity: 1
   - type: StaticPrice
     price: 0
@@ -420,10 +293,6 @@
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
     fireRate: 4 #No reason to stifle the firerate since you have to manually reload every time anyways.
-    projectileSpeed: 25 # Sunrise-Edit
-    soundGunshot:
-      collection: m3 # Sunrise-Edit
-    bigTrigger: true # Sunrise-Edit
   - type: BallisticAmmoProvider
     capacity: 1
     proto: null
@@ -466,6 +335,5 @@
         volume: -3
         rolloffFactor: 1.3
     fireRate: 2
-    projectileSpeed: 25 # Sunrise-Edit
   - type: GunSpreadModifier
     spread: 0.8

@@ -1572,7 +1572,7 @@
       amount: 3
       prob: 0.1
       orGroup: AntiMaterielRare
-    - id: CartridgeAntiMaterielBlast
+    - id: CartridgeAntiMaterielFrag
       amount: 3
       prob: 0.1
       orGroup: AntiMaterielRare
@@ -1627,9 +1627,9 @@
       prob: 0.25
     - id: SpeedLoaderMagnumAP
       prob: 0.05
-    - id: WeaponRevolverSnubRevolver
+    - id: WeaponRevolverInspector
       prob: 0.9
-    - id: WeaponRevolverSnubRevolver
+    - id: WeaponRevolverInspector
       prob: 0.3
     - id: PirateMedSpawner05
     - id: BrutepackAdvanced1
@@ -1987,9 +1987,9 @@
       prob: 0.25
     - id: SpeedLoaderMagnumAP
       prob: 0.05
-    - id: WeaponRevolverSnubRevolver
+    - id: WeaponRevolverInspector
       prob: 0.9
-    - id: WeaponRevolverSnubRevolver
+    - id: WeaponRevolverInspector
       prob: 0.3
     - id: PirateMedSpawner05
     - id: BrutepackAdvanced1
@@ -2454,7 +2454,7 @@
     - id: WeaponLauncherM79
       prob: 0.5
       orGroup: Grenadier
-    - id: WeaponLauncherM79Biocode
+    - id: SunriseClothingBeltGrenadeLauncherBandolier
       prob: 0.25
       orGroup: Grenadier
     - id: BriefcaseWeaponM79Filled
@@ -2516,7 +2516,7 @@
       prob: 0.5
       orGroup: dragunovPool
     # Items
-    - id: MagazineDragunovSP
+    - id: MagazineDragunovFMJ
       amount: 2
       prob: 0.3
       orGroup: dragunovAmmoPool
@@ -2900,13 +2900,13 @@
     - id: WeaponRifleSKM24Syndi
       prob: 0.5
       orGroup: Skm25Pool
-    - id: WeaponRifleSKM24Green
+    - id: WeaponRifleSKM24
       prob: 0.15
       orGroup: Skm25Pool
-    - id: WeaponRifleSKM24White
+    - id: WeaponRifleSKM24
       prob: 0.15
       orGroup: Skm25Pool
-    - id: WeaponRifleSKM24Nano
+    - id: WeaponRifleSKM24
       prob: 0.15
       orGroup: Skm25Pool
     - id: WeaponRifleSKM24
@@ -3100,13 +3100,13 @@
     - id: WeaponRifleSKM24
       prob: 0.4
       orGroup: Skm25Pool
-    - id: WeaponRifleSKM24Green
+    - id: WeaponRifleSKM24
       prob: 0.25
       orGroup: Skm25Pool
-    - id: WeaponRifleSKM24White
+    - id: WeaponRifleSKM24
       prob: 0.25
       orGroup: Skm25Pool
-    - id: WeaponRifleSKM24Nano
+    - id: WeaponRifleSKM24
       prob: 0.15
       orGroup: Skm25Pool
     - id: MagazineLightRifleEmpty
@@ -3560,7 +3560,7 @@
     - id: WeaponLightMachineGunL6Biocode
       prob: 0.5
       orGroup: WeaponMGPool
-    - id: MagazineRifleBoxSP
+    - id: MagazineLightRifleBox
       prob: 0.15
       orGroup: WeaponMGPool
     - id: MagazineRifleBoxFMJ
@@ -3684,12 +3684,6 @@
     - id: PirateCashSpawner01
     - id: PirateCashSpawner03
     # Weapons
-    - id: WeaponSyndieLaserGun
-      prob: 0.3
-      orGroup: LaserGunPool
-    - id: WeaponSyndieLaserGunBiocode
-      prob: 0.3
-      orGroup: LaserGunPool
     - id: WeaponLaserCannon
       prob: 0.3
       orGroup: LaserGunPool
@@ -3744,12 +3738,6 @@
     - id: PirateCashSpawner01
     - id: PirateCashSpawner03
     # Weapons
-    - id: WeaponSubMachineGunVector
-      prob: 0.4
-      orGroup: VectorSuperPool
-    - id: WeaponSubMachineGunVectorBiocode
-      prob: 0.5
-      orGroup: VectorSuperPool
     # Items
     - id: PirateMedSpawner03
     - id: ClothingOuterHardsuitPrivateer
@@ -3881,10 +3869,6 @@
     - id: WeaponEarthGovLaserCarbine
       prob: 0.3
       orGroup: SMGLaserPool
-    - id: MagazineBatteryLr60
-      prob: 0.6
-    - id: MagazineBatteryLr60
-      prob: 0.4
     # Items
     - id: PirateMedSpawner03
     - id: ClothingOuterHardsuitPrivateer
@@ -4045,9 +4029,9 @@
     # Weapons
     - id: CombatKnife
       prob: 0.15
-    - id: WeaponRifleSKM28Syndi
+    - id: WeaponRifleSKM28
       prob: 0.7
-    - id: WeaponPistolVP78
+    - id: WeaponPistolM1911
       prob: 0.3
     # Armor
     - id: ClothingOuterHardsuitPrivateerArmored

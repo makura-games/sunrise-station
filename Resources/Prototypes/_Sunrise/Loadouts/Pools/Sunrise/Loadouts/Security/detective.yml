@@ -62,11 +62,6 @@
     pocket1: WeaponRevolverInspector
 
 - type: loadout
-  id: WeaponRevolverSnubRevolver
-  equipment:
-    pocket1: WeaponRevolverSnubRevolver
-
-- type: loadout
   id: DetectiveWeapon20h
   equipment:
     pocket1: WeaponRevolverDeckard

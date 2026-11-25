@@ -32,15 +32,19 @@
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_immolator
   - type: Gun
-    fireRate: 2
-    selectedMode: FullAuto
-    availableModes:
-      - FullAuto
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      path: /Audio/Weapons/Guns/Gunshots/xenofirebeam.ogg
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    minAngle: 2
+    maxAngle: 30
+    angleIncrease: 3
+    angleDecay: 15
+    burstCooldown: 0.5
   - type: BatteryAmmoProvider
-    proto: SunriseMechHitscanIgnitionRedLaser # Sunrise-Edit - удаляем предсказанную hitscan-сущность
-    fireCost: 35
+    proto: XenoborgFireLaser
+    fireCost: 100
   - type: Appearance
   - type: AmmoCounter
 

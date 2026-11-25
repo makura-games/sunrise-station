@@ -1,102 +1,4 @@
 - type: entity
-  name: MG-60
-  parent: BaseWeaponLightMachineGun
-  id: WeaponLightMachineGunMG60
-  components:
-  - type: Sprite
-    scale: 0.9,0.9
-    sprite: _Sunrise/Objects/Weapons/Guns/LMGs/mg60/big.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/LMGs/mg60/tiny.rsi
-  - type: Item
-    size: Ginormous
-    sprite: _Sunrise/Objects/Weapons/Guns/LMGs/mg60/tiny.rsi
-  - type: GunWieldBonus
-    minAngle: 0
-    maxAngle: 0
-  - type: Gun
-    minAngle: 5
-    maxAngle: 60
-    angleIncrease: 1
-    angleDecay: 20
-    fireRate: 6.5
-    soundGunshot:
-      collection: m249 # Sunrise-Edit
-      params:
-        volume: 10
-        pitch: 1.1
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineLightMachineGunMG60
-        insertSound: /Audio/_Sunrise/Weapons/Guns/LMGs/reload.ogg
-        ejectSound: /Audio/_Sunrise/Weapons/Guns/LMGs/unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineLightMachineGunMG60
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgeRifleHeavySP
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgeHeavyRifleR
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: Appearance
-  - type: Wieldable
-  - type: UseDelay
-    delay: 1
-  - type: GunRequiresWield
-  - type: ChamberMagazineAmmoProvider
-    soundRack:
-      path: /Audio/_Sunrise/Weapons/Guns/LMGs/cocked.ogg
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.75
-    sprintModifier: 0.75
-  - type: ClothingSpeedModifier
-    walkModifier: 0.85
-    sprintModifier: 0.85
-  - type: HeldSpeedModifier
-
-- type: entity
-  name: MG-60
-  parent: WeaponLightMachineGunMG60
-  id: WeaponLightMachineGunMG60Empty
-  components:
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: null
-        insertSound: /Audio/_Sunrise/Weapons/Guns/LMGs/reload.ogg
-        ejectSound: /Audio/_Sunrise/Weapons/Guns/LMGs/unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineLightMachineGunMG60
-      gun_chamber:
-        name: Chamber
-        startingItem: null
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgeHeavyRifleR
-
-- type: entity
   name: RPD
   parent: BaseWeaponLightMachineGun
   id: WeaponLightMachineGunRPD
@@ -117,12 +19,12 @@
     sprite: _Sunrise/Objects/Weapons/Guns/LMGs/rpd/tiny.rsi
   - type: GunWieldBonus
     minAngle: -20
-    maxAngle: -60
+    maxAngle: -55
   - type: Gun
     minAngle: 24
-    maxAngle: 120
-    angleIncrease: 3
-    angleDecay: 25
+    maxAngle: 80
+    angleIncrease: 1.5
+    angleDecay: 15
     fireRate: 7.5
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/LMGs/shot.ogg
@@ -139,7 +41,6 @@
           - LightRifleHeavy
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
@@ -159,12 +60,9 @@
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/_Sunrise/Weapons/Guns/LMGs/cocked.ogg
-  - type: SpeedModifiedOnWield
+  - type: ClothingSpeedModifier
     walkModifier: 0.85
     sprintModifier: 0.85
-  - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
   - type: HeldSpeedModifier
 
 - type: entity
@@ -189,9 +87,9 @@
     maxAngle: 0
   - type: Gun
     minAngle: 6
-    maxAngle: 90
-    angleIncrease: 4
-    angleDecay: 60
+    maxAngle: 60
+    angleIncrease: 3
+    angleDecay: 30
     fireRate: 11
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/LMGs/shot.ogg
@@ -211,7 +109,6 @@
           - MagazineMachineGunHeavyRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleHeavySP
         priority: 1
         whitelist:
           tags:
@@ -232,12 +129,9 @@
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/_Sunrise/Weapons/Guns/LMGs/cocked.ogg
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.75
-    sprintModifier: 0.75
   - type: ClothingSpeedModifier
-    walkModifier: 0.85
-    sprintModifier: 0.85
+    walkModifier: 0.65
+    sprintModifier: 0.65
   - type: HeldSpeedModifier
 
 - type: entity
@@ -255,7 +149,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 4
+    steps: 5
     zeroVisible: true
   - type: Appearance
   - type: StaticPrice
@@ -286,27 +180,23 @@
           - MagazineMachineGunHeavyRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleHeavySP
         priority: 1
         whitelist:
           tags:
             - CartridgeHeavyRifle
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.85
-    sprintModifier: 0.85
   - type: GunRequiresWield
   - type: ClothingSpeedModifier
-    walkModifier: 1
-    sprintModifier: 0.90
+    walkModifier: 0.75
+    sprintModifier: 0.75
   - type: HeldSpeedModifier
   - type: GunWieldBonus
     minAngle: -23
-    maxAngle: -22
+    maxAngle: -25
   - type: Gun
     minAngle: 24
-    maxAngle: 35
-    angleIncrease: 4
-    angleDecay: 18
+    maxAngle: 45
+    angleIncrease: 1.5
+    angleDecay: 14
     fireRate: 6
     soundGunshot:
       collection: m249 # Sunrise-Edit

@@ -57,7 +57,7 @@
 - type: listing
   id: ERTUplinkWeaponRifleLeikhaFilled
   name: ntuplink-gun-bundle-leikha-name
-  icon: { sprite: _Starlight/Objects/Weapons/Guns/Rifles/m16a4.rsi, state: base }
+  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Rifles/leikha/big.rsi, state: icon }
   productEntity: ClothingBackpackDuffelWeaponRifleLeikhaFilled
   cost:
     Bluecrystal: 13
@@ -73,7 +73,7 @@
 
 - type: listing
   id: ERTUplinkWeaponRifleSKM24Filled
-  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: skm24nano }
+  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: skm24 }
   productEntity: ClothingBackpackDuffelWeaponRifleSKM24Filled
   cost:
     Bluecrystal: 12
@@ -116,22 +116,6 @@
     stock: 3
   - !type:StoreWhitelistCondition
     blacklist:
-      tags:
-      - CBURN
-
-- type: listing
-  id: ERTUplinkWeaponRifleSKM28FilledCBURN
-  productEntity: ClothingBackpackDuffelWeaponRifleSKM28FilledCBURN
-  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: skm28 }
-  cost:
-    Bluecrystal: 15
-  categories:
-  - NTAutoGun
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 3
-  - !type:StoreWhitelistCondition
-    whitelist:
       tags:
       - CBURN
 
@@ -268,24 +252,6 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - ERTGamma
-      - ERTEpsilon
-
-- type: listing
-  id: ERTUplinkWeaponShotgunCycler
-  productEntity: ClothingBackpackDuffelWeaponShotgunCycler
-  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: cycler }
-  cost:
-    Bluecrystal: 20
-  categories:
-  - NTAutoGun
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 2
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - CBURN
       - ERTGamma
       - ERTEpsilon
 
@@ -494,21 +460,6 @@
     Crystallite: 1
   categories:
   - NTAmmo
-
-- type: listing
-  id: ERTUplinkMagazineBatteryLr60
-  productEntity: MagazineBatteryLr60
-  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: lr30 }
-  cost:
-    Crystallite: 3
-  categories:
-  - NTAmmo
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - ERTGamma
-      - CBURN
 
 # .40/.45 ACP #Коробки#
 - type: listing
@@ -945,8 +896,8 @@
     stock: 5
 
 - type: listing
-  id: ERTUplinkWeaponGrenadeLauncherGL70Flash
-  productEntity: WeaponGrenadeLauncherGL70Flash
+  id: ERTUplinkWeaponGrenadeLauncherSecurityRevolver
+  productEntity: WeaponGrenadeLauncherSecurityRevolver
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: gl79 }
   cost:
     Bluecrystal: 20

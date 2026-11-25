@@ -20,3 +20,13 @@ ent-MagazineM28Extended = расширенный магазин M28
     .desc = { ent-MagazineM28.desc }
 ent-MagazineRifleImprovised = магазин (5,56 самодельный)
     .desc = 25-зарядный двухрядный магазин для боевых винтовок. Предназначен для самодельных патронов.
+
+ent-BaseMagazineRifleExtended = увеличенный магазин (5,56)
+    .desc = Увеличенный двухрядный магазин для боевых винтовок ёмкостью 35 патронов.
+ent-MagazineRifleExtendedEmpty = увеличенный магазин (5,56)
+    .suffix = Пустой
+    .desc = { ent-BaseMagazineRifleExtended.desc }
+ent-MagazineRifleExtended = увеличенный магазин (5,56)
+    .desc = { ent-BaseMagazineRifleExtended.desc }
+ent-MagazineRifleExtendedFMJ = увеличенный магазин (5,56 ПП)
+    .desc = { ent-BaseMagazineRifleExtended.desc }

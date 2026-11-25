@@ -40,7 +40,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifleSP
+        startingItem: MagazineLightRifle
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
@@ -50,7 +50,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
@@ -106,12 +105,12 @@
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/m16a4/tiny.rsi
   - type: GunWieldBonus
     minAngle: -20
-    maxAngle: -45
+    maxAngle: -35
   - type: Gun
     minAngle: 23
-    maxAngle: 90
+    maxAngle: 55
     angleIncrease: 1.25
-    angleDecay: 20
+    angleDecay: 14
     fireRate: 6
     burstFireRate: 9
     selectedMode: Burst
@@ -126,7 +125,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineRifleSP
+        startingItem: MagazineRifle
         insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_unload.ogg
         priority: 2
@@ -135,7 +134,6 @@
           - MagazineRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleSP
         priority: 1
         whitelist:
           tags:
@@ -154,10 +152,41 @@
     delay: 0.35
 
 - type: entity
+  name: Lecter
+  parent: WeaponRifleLecter
+  id: WeaponRifleLecterEmpty
+  suffix: Empty
+  categories: [HideSpawnMenu]
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: null
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: null
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeRifle
+  - type: Construction
+    graph: LecterSecurity
+    node: start
+    deconstructionTarget: null
+
+- type: entity
   name: Lecter Mk2
-  parent: [WeaponRifleLecter, GunLight]
+  parent: [GunMedium, WeaponRifleLecter]
   id: WeaponRifleLecterMk2
-  description: A high end military grade assault rifle. Uses .20 rifle ammo.
+  description: An upgraded variant of the Lecter platform, redesigned for sustained automatic fire. Its reinforced receiver and increased magazine capacity make it well suited for suppressive fire. Uses .20 rifle ammo.
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/lecter.rsi
@@ -166,6 +195,19 @@
         map: ["enum.GunVisualLayers.Base"]
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
+  - type: Gun
+    fireRate: 5
+    minAngle: 21
+    maxAngle: 32
+    angleIncrease: 1
+    angleDecay: 9.5
+    burstFireRate: 9
+    shotsPerBurst: 5
+    burstCooldown: 0.75
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    - FullAuto
   - type: Clothing
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/lecter.rsi
   - type: ContainerContainer
@@ -174,21 +216,35 @@
       gun_chamber: !type:ContainerSlot
   - type: MagazineVisuals
     magState: mag
-    steps: 5
+    steps: 6
     zeroVisible: true
   - type: ChamberMagazineAmmoProvider
     autoEject: true
   - type: Appearance
   - type: EyeCursorOffset
-    maxOffset: 5
-    pvsIncrease: 0.5
+    maxOffset: 2
+    pvsIncrease: 0.25
   - type: StaticPrice
     price: 975
   - type: Contraband
     allowedDepartments: [ CentralCommand, Security ]
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineRifleM52SP
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineRifle
+            - MagazineRifleM52
+        whitelistFailPopup: gun-magazine-whitelist-fail
   - type: Construction
     graph: LecterSecurity
     node: upgradelecter
+    deconstructionTarget: null
 
 - type: entity
   name: Lecter Mk2
@@ -207,6 +263,7 @@
         whitelist:
           tags:
             - MagazineRifle
+            - MagazineRifleM52
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
@@ -214,7 +271,42 @@
         priority: 1
         whitelist:
           tags:
-            - CartridgeRifle
+          - CartridgeRifle
+  - type: Construction
+    graph: LecterSecurity
+    node: upgradelecter
+    deconstructionTarget: null
+
+- type: entity
+  name: Larker
+  parent: WeaponRifleLarker
+  id: WeaponRifleLarkerEmpty
+  suffix: Empty
+  categories: [HideSpawnMenu]
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: null
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineHeavyRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: null
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeHeavyRifle
+  - type: Construction
+    graph: LecterSecurity
+    node: larker
+    deconstructionTarget: null
 
 - type: entity
   name: ASH-12
@@ -265,7 +357,6 @@
             - MagazineAsh12
       gun_chamber:
         name: Chamber
-        startingItem: ShellShotgunSlug
         priority: 1
         whitelist:
           tags:
@@ -308,8 +399,15 @@
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Base/tiny.rsi
   - type: Item
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Base/tiny.rsi
+  - type: GunWieldBonus
+    minAngle: -18
+    maxAngle: -18
   - type: Gun
-    fireRate: 4.45
+    minAngle: 21
+    maxAngle: 40
+    angleIncrease: 2
+    angleDecay: 10
+    fireRate: 4.25
     selectedMode: FullAuto
     availableModes:
       - FullAuto
@@ -317,17 +415,13 @@
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/skm24/skm_shot.ogg
   - type: ChamberMagazineAmmoProvider
-    availablePrefixes:
-    - ""
-    - white
-    - green
     soundRack:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/skm24/skm_cocked.ogg
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineLightRifleSP
+        startingItem: MagazineLightRifle
         insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/skm24/skm_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/AK/ak_unload.ogg
         priority: 2
@@ -336,7 +430,6 @@
           - MagazineLightRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
@@ -350,14 +443,6 @@
     steps: 7
     zeroVisible: true
   - type: Appearance
-
-- type: entity
-  parent: WeaponRifleSKM24
-  id: WeaponRifleSKM24White
-
-- type: entity
-  parent: WeaponRifleSKM24
-  id: WeaponRifleSKM24Green
 
 - type: entity
   parent: WeaponRifleSKM24
@@ -386,7 +471,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleImprovised
         priority: 1
         whitelist:
           tags:
@@ -480,26 +564,116 @@
     availablePrefixes: []
 
 - type: entity
-  parent: [BaseSecurityContraband, WeaponRifleSKM24]
-  id: WeaponRifleSKM24Nano
-  suffix: NanoTrasen
-  description: Cheap and reliable. Enough firepower, little accuracy. Easy to repair, hard to control during sustained. Money doesn't smell.
+  name: Leikha
+  parent: [ GunHeavy, BaseWeaponRifle, BaseSecurityContraband ]
+  id: WeaponRifleLeikha
+  description: "A military-grade combat rifle built on the Lecter platform. Retrofitted with a burst receiver for controlled three-round bursts, offering increased stopping power at the cost of sustained fire. Chambered in .308 rifle."
   components:
+  - type: Tag
+    tags:
+    - WeaponRifleLeikhaUpgradeBase
   - type: Sprite
-    scale: 0.9,0.9
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Nano/big.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/leikha/big.rsi
+    layers:
+    - state: icon
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Nano/tiny.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/leikha/tiny.rsi
   - type: Item
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Nano/tiny.rsi
-  - type: ChamberMagazineAmmoProvider
-    availablePrefixes: []
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/leikha/tiny.rsi
+  - type: GunWieldBonus
+    minAngle: -25
+    maxAngle: -35
+  - type: Gun
+    minAngle: 30
+    maxAngle: 50
+    angleIncrease: 1.5
+    angleDecay: 12
+    fireRate: 3.5
+    shotsPerBurst: 3
+    burstCooldown: 0.75
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    - SemiAuto
+    burstFireRate: 11
+    soundGunshot:
+      path: /Audio/_Sunrise/Weapons/Guns/Rifles/skm28/skm28_shot.ogg
+      params:
+        pitch: 0.8
+  - type: GunRequiresWield
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineRifleHeavySP
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineHeavyRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeHeavyRifle
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6
+    zeroVisible: true
+  - type: Appearance
+  - type: Wieldable
+  - type: Construction
+    graph: LecterSecurity
+    node: leikhaConversion
+    deconstructionTarget: null
+
+- type: entity
+  name: Leikha
+  parent: WeaponRifleLeikha
+  id: WeaponRifleLeikhaEmpty
+  suffix: Empty
+  categories: [HideSpawnMenu]
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: null
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineHeavyRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: null
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeHeavyRifle
+  - type: Construction
+    graph: LecterSecurity
+    node: leikhaConversion
+    deconstructionTarget: null
+
 
 - type: entity
   name: SKM-28
-  parent: [BaseWeaponRifle, BaseMajorContraband]
+  parent: [ BaseSovietContraband, WeaponRifleLeikha]
   id: WeaponRifleSKM28
-  description: A marksman conversion of the standard SKM-24. Features an extended heavy barrel, reworked internals, and a mounted optical sight. Chambered in .308.
+  description: A battle rifle conversion of the standard SKM-24. Features an extended heavy barrel, reworked internals. Chambered in 7,62mmR.
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Base/big.rsi
@@ -514,13 +688,13 @@
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Base/tiny.rsi
   - type: GunWieldBonus
     minAngle: -28
-    maxAngle: -50
+    maxAngle: -35
   - type: Gun
     minAngle: 30
-    maxAngle: 65
+    maxAngle: 50
     angleIncrease: 1.5
-    angleDecay: 15
-    fireRate: 4
+    angleDecay: 12
+    fireRate: 3.5
     shotsPerBurst: 3
     selectedMode: Burst
     availableModes:
@@ -530,7 +704,7 @@
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/skm28/skm28_shot.ogg
       params:
-        pitch: 0.8
+        pitch: 0.5
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/skm24/skm_cocked.ogg
@@ -538,20 +712,19 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineRifleHeavySP
-        insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/skm24/skm_reload.ogg
-        ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/m28/m28_unload.ogg
+        startingItem: MagazineDragunovExtended
+        insertSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Dragunov/dragunov_reload.ogg
+        ejectSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Dragunov/dragunov_unload.ogg
         priority: 2
         whitelist:
           tags:
-            - MagazineHeavyRifle
+            - MagazineDragunov
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleHeavySP
         priority: 1
         whitelist:
           tags:
-            - CartridgeHeavyRifle
+            - CartridgeHeavyRifleR
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -562,32 +735,22 @@
     zeroVisible: true
   - type: Appearance
   - type: Wieldable
-  - type: UseDelay
-    delay: 0.75
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 7
-    pvsIncrease: 0.7
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.9
-    sprintModifier: 0.9
+  - type: MeleeWeapon # TODO: Add ability to add reagents
+    range: 2.2
+    wideAnimationRotation: -90
+    damage:
+      types:
+        Piercing: 13
+        Bloodloss: 2
+    angle: 0
+    animation: WeaponArcThrust
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
 
 - type: entity
-  parent: WeaponRifleSKM28
-  id: WeaponRifleSKM28Syndi
-  description: A marksman conversion of the standard SKM-24. Features an extended heavy barrel, reworked internals, and a mounted optical sight. Chambered in .308. Good choice Nukie.
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Syndicate/big.rsi
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Syndicate/tiny.rsi
-  - type: Item
-    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Syndicate/tiny.rsi
-
-- type: entity
-  parent: [BaseSecurityContraband, WeaponRifleSKM28]
+  parent: [BaseCentcommContraband, WeaponRifleLeikha]
   id: WeaponRifleSKM28Nano
-  description: A marksman conversion of the standard SKM-24. Features an extended heavy barrel, reworked internals, and a mounted optical sight. Chambered in .308. Money doesn't smell.
+  description: An experimental conversion of the Leikha rifle. It has an extended heavy barrel, and an integrated optical sight. It offers improved accuracy and effectiveness at long range. Uses .308 rifle ammunition.
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Nano/big.rsi
@@ -595,3 +758,22 @@
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Nano/tiny.rsi
   - type: Item
     sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Nano/tiny.rsi
+  - type: Gun
+    angleIncrease: 0.75
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        startingItem: MagazineRifleHeavySP
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineHeavyRifle
+      gun_chamber:
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeHeavyRifle
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 4
+    pvsIncrease: 0.4

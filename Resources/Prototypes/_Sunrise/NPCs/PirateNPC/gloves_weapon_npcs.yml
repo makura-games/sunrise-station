@@ -196,7 +196,7 @@
   - type: Clothing
     clothingVisuals:
       gloves:
-      - sprite: _RMC14/Objects/Weapons/Guns/Launchers/m79/tiny.rsi
+      - sprite: _Sunrise/Objects/Weapons/Guns/Launchers/m79.rsi
         state: wielded-inhand-left
 
 - type: entity
@@ -337,9 +337,9 @@
   - type: Clothing
     clothingVisuals:
       gloves:
-      - sprite: _Starlight/Objects/Weapons/Guns/Revolvers/snub.rsi
+      - sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi
         state: inhand-right
-      - sprite: _Starlight/Objects/Weapons/Guns/Revolvers/snub.rsi
+      - sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi
         state: inhand-left
 
 - type: entity
@@ -557,18 +557,6 @@
         state: wielded-inhand-right
 
 - type: entity
-  parent: BaseSunriseHandsNoGlovesPiratePrivateer
-  id: ClothingHandsSMGVectorSuper
-  suffix: Vector Super
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Clothing
-    clothingVisuals:
-      gloves:
-      - sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi
-        state: wielded-inhand-right
-
-- type: entity
   parent: BaseSunriseHandsNoGlovesPirateUSSPHeavy
   id: ClothingHandsDragunov
   suffix: dragunov
@@ -637,7 +625,7 @@
   - type: Clothing
     clothingVisuals:
       gloves:
-      - sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Green/tiny.rsi
+      - sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Base/tiny.rsi
         state: wielded-inhand-right
 
 - type: entity
@@ -698,18 +686,6 @@
     clothingVisuals:
       gloves:
       - sprite: _Starlight/Objects/Weapons/Guns/LMGs/DP28.rsi
-        state: wielded-inhand-right
-
-- type: entity
-  parent: ClothingHandsNoGloves
-  id: ClothingHandsPKM
-  suffix: PKM
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Clothing
-    clothingVisuals:
-      gloves:
-      - sprite: _Sunrise/Objects/Weapons/Guns/LMGs/mg60/tiny.rsi
         state: wielded-inhand-right
 
 - type: entity
@@ -1126,8 +1102,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.9
-        Slash: 0.8
+        Blunt: 1
+        Slash: 0.9
         Piercing: 0.6
         Heat: 0.6
         Radiation: 0.9
@@ -1139,8 +1115,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.7
+        Blunt: 1
+        Slash: 0.85
         Piercing: 0.5
         Heat: 0.5
         Radiation: 0.8
@@ -1152,8 +1128,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.65
-        Slash: 0.65
+        Blunt: 1
+        Slash: 0.825
         Piercing: 0.6
         Heat: 0.7
         Caustic: 0.75
@@ -1165,8 +1141,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.6
+        Blunt: 1
+        Slash: 0.8
         Piercing: 0.5
         Heat: 0.65
         Caustic: 0.7
@@ -1178,8 +1154,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.4
-        Slash: 0.4
+        Blunt: 1
+        Slash: 0.7
         Piercing: 0.4
         Heat: 0.4
         Radiation: 0.4
@@ -1219,6 +1195,12 @@
   parent: [SovietArmorFlak, ClothingHandsBlackPistol, SovietMeleeNoArc]
   id: ClothingHandsBlackPistolSovietFlak
   categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    clothingVisuals:
+      gloves:
+      - sprite: _Starlight/Objects/Weapons/Guns/Pistols/aps.rsi
+        state: inhand-left
 
 - type: entity
   parent: [ClothingHandsDp28, SovietArmorFlak, SovietMeleeNoArc]
@@ -1226,7 +1208,7 @@
   categories: [ HideSpawnMenu ]
 
 - type: entity
-  parent: [ClothingHandsPKM, SovietArmorFlak, SovietMeleeNoArc]
+  parent: [ClothingHandsNoGloves, SovietArmorFlak, SovietMeleeNoArc]
   id: ClothingHandsSovietFlakPKM
   categories: [ HideSpawnMenu ]
 
@@ -1284,6 +1266,12 @@
   parent: [SovietArmorUSSPHeavy, ClothingHandsBlackShotgunSoviet, SovietMeleeNoArc]
   id: ClothingHandsBlackShotgunSovietUSSPHeavy
   categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    clothingVisuals:
+      gloves:
+      - sprite: _Sunrise/Objects/Weapons/Guns/Shotguns/type23.rsi
+        state: wielded-inhand-right
 
 - type: entity
   parent: [ClothingHandsPPSHSoviet, SovietArmorFlak, SovietMeleeNoArc]
@@ -1321,8 +1309,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.7
+        Blunt: 1
+        Slash: 0.85
         Piercing: 0.5
         Heat: 0.7
 
@@ -1333,16 +1321,15 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.65
-        Slash: 0.65
+        Blunt: 1
+        Slash: 0.825
         Piercing: 0.5
         Shock: 3
         Heat: 0.8
         Structural: 0.15
       flatReductions:
-        Blunt: 5
         Heat: 5
-        Slash: 5
+        Slash: 2.5
         Piercing: 4
 
 - type: entity
@@ -1352,14 +1339,13 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.7
+        Blunt: 1
+        Slash: 0.85
         Piercing: 0.8
         Heat: 0.8
       flatReductions:
-        Blunt: 3
         Heat: 3
-        Slash: 3
+        Slash: 1.5
         Piercing: 6
 
 - type: entity
@@ -1369,8 +1355,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.65
+        Blunt: 1
+        Slash: 0.825
         Piercing: 0.7
         Heat: 0.5
         Radiation: 0.5
@@ -1383,8 +1369,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.8
-        Slash: 0.8
+        Blunt: 1
+        Slash: 0.9
         Piercing: 0.9
         Heat: 0.4
         Caustic: 0.75
@@ -1396,8 +1382,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.4
-        Slash: 0.45
+        Blunt: 1
+        Slash: 0.725
         Piercing: 0.5
         Heat: 0.35
         Radiation: 0.3
@@ -1410,8 +1396,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.4
-        Slash: 0.45
+        Blunt: 1
+        Slash: 0.725
         Piercing: 0.25
         Heat: 0.35
         Radiation: 0.3
@@ -1424,8 +1410,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.45
-        Slash: 0.5
+        Blunt: 1
+        Slash: 0.75
         Piercing: 0.3
         Heat: 0.4
         Radiation: 0.3
@@ -1438,8 +1424,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.35
-        Slash: 0.4
+        Blunt: 1
+        Slash: 0.7
         Piercing: 0.45
         Heat: 0.5
         Radiation: 0.4
@@ -1452,8 +1438,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.35
-        Slash: 0.4
+        Blunt: 1
+        Slash: 0.7
         Piercing: 0.2
         Heat: 0.5
         Radiation: 0.4
@@ -1466,8 +1452,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.6
+        Blunt: 1
+        Slash: 0.8
         Piercing: 0.2
         Heat: 0.9
         Radiation: 0.9
@@ -1480,8 +1466,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.3
-        Slash: 0.3
+        Blunt: 1
+        Slash: 0.65
         Piercing: 0.3
         Heat: 0.3
         Radiation: 0.4
@@ -1494,8 +1480,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.7
+        Blunt: 1
+        Slash: 0.85
         Piercing: 0.5
         Heat: 0.7
         Radiation: 0.3
@@ -1508,8 +1494,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.5
-        Slash: 0.4
+        Blunt: 1
+        Slash: 0.7
         Piercing: 0.35
         Heat: 0.5
         Radiation: 0.3
@@ -1522,8 +1508,8 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.4
-        Slash: 0.4
+        Blunt: 1
+        Slash: 0.7
         Piercing: 0.5
         Heat: 0.4
         Radiation: 0.9

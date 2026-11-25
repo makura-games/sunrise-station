@@ -20,3 +20,13 @@ ent-MagazineM28Extended = { ent-MagazineM28 }
     .desc = { ent-MagazineM28.desc }
 ent-MagazineRifleImprovised = magazine (.20 rifle improvised)
     .desc = 25-round double stack magazine for combat rifles. Intended to hold improvised ammunition.
+
+ent-BaseMagazineRifleExtended = extended magazine (.20 rifle)
+    .desc = A 35-round extended double-stack magazine for combat rifles.
+ent-MagazineRifleExtendedEmpty = extended magazine (.20 rifle)
+    .suffix = empty
+    .desc = { ent-BaseMagazineRifleExtended.desc }
+ent-MagazineRifleExtended = extended magazine (.20 rifle)
+    .desc = { ent-BaseMagazineRifleExtended.desc }
+ent-MagazineRifleExtendedFMJ = extended magazine (.20 rifle FMJ)
+    .desc = { ent-BaseMagazineRifleExtended.desc }

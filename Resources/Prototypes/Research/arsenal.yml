@@ -132,7 +132,9 @@
   - TelescopicShield
   - HoloprojectorSecurity
   - WeaponDisablerSMG
-  - FlareGunSecurityUpgrade # Sunrise-Add
+  - KammererSpecialUpgradeKit # Sunrise-Add
+  - BoxShotgunHeavy # Sunrise-Add
+  - BoxShotgunBirdshotHeavy # Sunrise-Add
   - VestSecUpgradePlate # Sunrise-Add
   - VestSecUpgradeStab # Sunrise-Add
   - VestSecUpgradeHeat # Sunrise-Add
@@ -285,6 +287,7 @@
   cost: 8000
   recipeUnlocks:
   - WeaponTemperatureGun
+  - WeaponLaserImmolator  # Sunrise-Add
 
 - type: technology
   id: AdvancedShuttleWeapon
@@ -306,14 +309,10 @@
   - ShuttleGunTeslaOrionCircuitboard
   - ShuttleGunBeamstormMachineGunCircuitboard
   - MagazineBauer127
-  #- MagazineBauer127Penetrator # To much
-  #- MagazineBauer127Blast # To much
   - MagazineBauer127Frag
   - MagazineBauer127Emp
   - MagazineBoxBelt127Empty
-  #- MagazineBoxBelt127 # To much
   - MagazineBoxBelt127Artillery
-  #- MagazineBoxBelt127Blast # To much
   - MagazineBoxBelt127Frag
   - MagazineBoxBelt127Emp
   - RifleHeavyMagazineAP # Sunrise-Add

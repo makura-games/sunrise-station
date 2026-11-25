@@ -72,7 +72,10 @@
   parent: BaseMagazinePistolSubMachineGun
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgePistolSP
+    proto: CartridgeLightRifleAuto
+    whitelist:
+      tags:
+      - CartridgeLightRifleAuto
     capacity: 35
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Ammunition/Magazine/SMGs/ppsh.rsi
@@ -211,11 +214,11 @@
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#080706"
+        color: "#B68F0E"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#080706"
+        color: "#B68F0E"
 
 - type: entity
   id: MagazinePistol40AP
@@ -422,11 +425,11 @@
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#080706"
+        color: "#B68F0E"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#080706"
+        color: "#B68F0E"
 
 - type: entity
   id: MagazinePistol40SubMachineGunAP

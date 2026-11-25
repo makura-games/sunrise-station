@@ -1,12 +1,3 @@
-ent-WeaponShotgunRiot = riot shotgun
-    .desc = A sturdy shotgun with a longer magazine and a fixed tactical stock designed for non-lethal riot control.
-ent-WeaponShotgunRiotSawn = sawn-off riot shotgun
-    .desc = Come with me if you want to live.
-ent-WeaponShotgunRiotSawnEmpty = { ent-WeaponShotgunRiotSawn }
-    .suffix = Empty
-    .desc = { ent-WeaponShotgunRiotSawn.desc }
-ent-WeaponShotgunCycler = cycler shotgun
-    .desc = An advanced shotgun with two separate magazine tubes, allowing you to quickly toggle between ammo types.
 ent-WeaponShotgunGA12 = tkach Ya-Sui GA 12 revolver
     .desc = An outdated sidearm rarely seen in use by certain PMCs that operate throughout the frontier systems, featuring a three-shell cylinder. Thats right, shell, this one shoots twelve gauge.
 ent-WeaponShotgunMinotaur = aS-12 'Minotaur' Shotgun

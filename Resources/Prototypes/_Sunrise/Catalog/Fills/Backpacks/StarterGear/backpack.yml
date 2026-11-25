@@ -12,10 +12,10 @@
         - id: WeaponAJ100Biocode
         - id: MagazinePistolSubMachineGun
         - id: MagazinePistol40SubMachineGunSP
-        - id: MagazineRifleSP
-        - id: MagazineLightRifleSP
+        - id: MagazineRifle
+        - id: MagazineLightRifle
         - id: MagazinePistol40SP
-        - id: MagazinePistolHighCapacitySP
+        - id: MagazinePistolHighCapacity
         - id: MagazinePistol
 
 - type: entity

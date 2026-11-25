@@ -1,61 +1,16 @@
 ﻿- type: entity
-  name: RL-5
+  name: GL-70 Basilisk
   parent: BaseWeaponLauncher
-  id: WeaponLauncherRL5
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/HMGs/rpg/big.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/HMGs/rpg/tiny.rsi
-  - type: Item
-    size: Ginormous
-    sprite: _Sunrise/Objects/Weapons/Guns/HMGs/rpg/tiny.rsi
-  - type: Gun
-    fireRate: 0.5
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
-  - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-      - CartridgeRocket
-    proto: CartridgeRocket
-    capacity: 1
-    soundInsert:
-      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-  - type: MagazineVisuals
-    magState: mag
-    steps: 2
-    zeroVisible: false
-  - type: Appearance
-  - type: Wieldable
-  - type: UseDelay
-    delay: 1
-  - type: GunRequiresWield
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.5
-    sprintModifier: 0.5
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 4
-    pvsIncrease: 0.4
-
-- type: entity
-  name: GL-70
-  parent: BaseWeaponLauncher
+  description: BLOOP! BLOOP! BLOOP! BLOOP! BLOOP! BLOOP! A true stress-relief toy for true demo men.
   id: WeaponGrenadeLauncherGL70
   components:
   - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/HMGs/gl-64/big.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/gl70/big.rsi
     layers:
     - state: icon
       map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/HMGs/gl-64/tiny.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/gl70/tiny.rsi
     slots:
     - Back
     - suitStorage
@@ -63,13 +18,13 @@
     size: Huge
     shape:
     - 0,0,4,2
-    sprite: _Sunrise/Objects/Weapons/Guns/HMGs/gl-64/tiny.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/gl70/tiny.rsi
   - type: AmmoCounter
   - type: Gun
-    fireRate: 1.5
-    selectedMode: SemiAuto
+    fireRate: 1
+    selectedMode: FullAuto
     availableModes:
-    - SemiAuto
+    - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
   - type: ContainerContainer
@@ -99,61 +54,101 @@
   - type: EyeCursorOffset
     maxOffset: 4
     pvsIncrease: 0.4
+  - type: Tag
+    tags:
+    - SunriseGrenadeLauncherBandolierCompatible
 
 - type: entity
-  name: GL-70
-  parent: WeaponGrenadeLauncherGL70
-  id: WeaponGrenadeLauncherGL70Flash
-  suffix: GrenadeFlash
-  components:
-  - type: RevolverAmmoProvider
-    whitelist:
-      tags:
-      - Grenade
-      - HandGrenadeAmmo
-    proto: GrenadeFlashBang
-    capacity: 6
-    chambers: [ True, True, True, True, True, True ]
-    ammoSlots: [ null, null, null, null, null, null ]
-
-- type: entity
-  name: security grenade Launcher
-  parent: [WeaponFlareGunSecurity, BaseSecurityContraband]
-  id: WeaponGrenadeLauncherSecurity
-  description: A security flare gun modification that allows for the safe launch of any hand grenade over long distances. "Warning" Firing at close range or directly at obstacles is not recommended — risk of grenade bounce-back.
+  name: Roarmaker
+  parent: [WeaponGrenadeLauncherGL70, BaseSecurityContraband]
+  id: WeaponGrenadeLauncherSecurityRevolver
+  description: A security-grade, five-shot revolver grenade launcher designed to fire only less-lethal grenades.
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Launchers/grenadegun_security.rsi
     layers:
+    - state: icon
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Clothing
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/grenadegun_security.rsi
+  - type: Item
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/grenadegun_security.rsi
+  - type: RevolverAmmoProvider
+    capacity: 5
+    chambers: [ True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null ]
+    whitelist:
+      tags:
+      - GrenadeLessLethal
+    proto: null
+  - type: Construction
+    graph: GrenadeLauncherSecurity
+    node: revolver
+    deconstructionTarget: null
+
+- type: entity
+  name: peacekeeper
+  parent: [BaseWeaponLauncher, BaseSecurityContraband]
+  id: WeaponGrenadeLauncherSecurity
+  description: A multi purpose single-shot grenade launcher with a break-open action.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/m79_security_x48.rsi
+    layers:
       - state: base
         map: ["enum.GunVisualLayers.Base"]
   - type: Item
-    size: Normal
-    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/grenadegun_security.rsi
+    size: Large
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/m79_security.rsi
+    shape:
+    - 0,0,2,1
+  - type: Clothing
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/m79_security.rsi
+    slots:
+    - Back
+    - suitStorage
+  - type: CustomSpriteAmmoCounter
+    loadedAmmoSprite: Interface/ItemStatus/Grenade/not_spent.png
+    spentAmmoSprite: Interface/ItemStatus/Grenade/spent.png
   - type: ItemSlots
     slots:
       gun_chamber:
         name: Chamber
         priority: 1
+        disableEject: true
         whitelist:
           tags:
-            - HandGrenadeAmmo
+            - GrenadeLessLethal
+        startingItem: GrenadeBaton
+  - type: ContainerContainer
+    containers:
+      gun_chamber: !type:ContainerSlot
+  - type: ChamberMagazineAmmoProvider
+    autoCycle: false
+    boltClosed: false
+    canRack: false
+    soundBoltClosed: /Audio/Weapons/Guns/Cock/revolver_cock.ogg
+    soundBoltOpened: /Audio/Weapons/Guns/Cock/revolver_cock.ogg
+    soundRack: /Audio/Weapons/Guns/Cock/revolver_cock.ogg
+  - type: AmmoCounter
+  - type: GunRequiresWield
   - type: Appearance
+  - type: Construction
+    graph: GrenadeLauncherSecurity
+    node: auto
+    deconstructionTarget: null
   - type: Gun
-    projectileSpeed: 20
-    fireRate: 8
+    projectileSpeed: 35
+    fireRate: 1
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/flaregun.ogg
-    bigTrigger: true
-  - type: UseDelayOnShoot
-  - type: UseDelay
-    delay: 0.85 #No script abuse
+      path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
   - type: Tag
     tags:
-    - Sidearm
+    - SunriseGrenadeLauncherBandolierCompatible
+    - WeaponGrenadeLauncherSecurityUpgradeBase
 
 - type: entity
   name: m79 grenade launcher
@@ -162,12 +157,12 @@
   description: A single-shot, break-action grenade launcher. It is a powerful weapon that can fire a variety of grenades and hand granades.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Launchers/m79/big.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/m79_x48.rsi
     layers:
       - state: base
         map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Launchers/m79/tiny.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/m79.rsi
     slots:
     - Back
     - suitStorage
@@ -175,7 +170,7 @@
     size: Huge
     shape:
     - 0,0,4,2
-    sprite: _RMC14/Objects/Weapons/Guns/Launchers/m79/tiny.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/m79.rsi
   - type: Gun
     fireRate: 1.35
     selectedMode: SemiAuto

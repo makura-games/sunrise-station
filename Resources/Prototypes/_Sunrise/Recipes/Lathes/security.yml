@@ -18,8 +18,8 @@
     Plastic: 50
 
 - type: latheRecipe
-  id: WeaponEnergyGunPistol
-  result: WeaponEnergyGunPistol
+  id: WeaponAdvancedTaser
+  result: WeaponAdvancedTaser
   categories:
   - Weapons
   completetime: 5
@@ -60,6 +60,16 @@
 
 - type: latheRecipe
   parent: BaseWeaponRecipeSidearm
+  id: SecurityGrenadeLauncherRevolverUpgrade
+  result: SecurityGrenadeLauncherRevolverUpgrade
+  categories:
+  - Weapons
+  materials:
+    Plastic: 50
+    Steel: 250
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeSidearm
   id: FlareGunSecurityUpgrade
   result: FlareGunSecurityUpgrade
   categories:
@@ -67,6 +77,16 @@
   materials:
     Plastic: 50
     Steel: 250
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeSidearm
+  id: KammererSpecialUpgradeKit
+  result: KammererSpecialUpgradeKit
+  categories:
+  - Weapons
+  materials:
+    Plastic: 200
+    Steel: 500
 
 # - type: latheRecipe # Not use right now
 #   id: ModularReceiverAuto
@@ -99,6 +119,60 @@
     Steel: 150
     Plastic: 300
     Gold: 50
+
+- type: latheRecipe
+  id: LeikhaUpgrade
+  result: LeikhaUpgrade
+  categories:
+  - Weapons
+  completetime: 16
+  materials:
+    Steel: 150
+    Plastic: 300
+    Plasteel: 200
+    Gold: 50
+
+- type: latheRecipe
+  id: LarkerUpgrade
+  result: LarkerUpgrade
+  categories:
+  - Weapons
+  completetime: 16
+  materials:
+    Steel: 150
+    Plastic: 300
+    Plasteel: 200
+    Gold: 50
+
+- type: latheRecipe
+  id: KammererTrenchUpgradeKit
+  result: KammererTrenchUpgradeKit
+  categories:
+  - Weapons
+  completetime: 30
+  materials:
+    Steel: 650
+    Plastic: 500
+
+- type: latheRecipe
+  id: KammererSawnUpgradeKit
+  result: KammererSawnUpgradeKit
+  categories:
+  - Weapons
+  completetime: 30
+  materials:
+    Steel: 150
+    Plastic: 400
+
+- type: latheRecipe
+  id: KammererEnforcerUpgradeKit
+  result: KammererEnforcerUpgradeKit
+  categories:
+  - Weapons
+  completetime: 30
+  materials:
+    Steel: 650
+    Plastic: 500
 
 - type: latheRecipe
   id: EnergyDomeDirectionalTurtle
@@ -368,29 +442,6 @@
     Durathread: 100
 
 - type: latheRecipe
-  id: ClothingShoesBootsMagCombat
-  result: ClothingShoesBootsMagCombat
-  categories:
-  - Clothing
-  completetime: 15
-  materials:
-    Steel: 1200
-    Plastic: 300
-    Durathread: 200
-
-- type: latheRecipe
-  id: VestSecUpgradeWeb
-  result: VestSecUpgradeWeb
-  categories:
-  - Clothing
-  completetime: 35
-  materials:
-    Durathread: 2000
-    Plastic: 500
-    Steel: 200
-    Plasma: 100
-
-- type: latheRecipe
   id: VestSecUpgradePlate
   result: VestSecUpgradePlate
   categories:
@@ -418,8 +469,9 @@
   - Clothing
   completetime: 20
   materials:
-    Durathread: 400
-    Plastic: 400
+    Durathread: 600
+    Plastic: 600
+    Plasteel: 500
 
 - type: latheRecipe
   id: VestSecUpgradeStab
@@ -552,11 +604,20 @@
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
-  id: WeaponDecloner
-  result: WeaponDecloner
+  id: WeaponLaserImmolator
+  result: WeaponLaserImmolator
   materials:
-    Steel: 2000
-    Glass: 1000
-    Plastic: 750
-    Gold: 600
-    Uranium: 600
+    Steel: 1500
+    Glass: 500
+    Plastic: 250
+    Gold: 250
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeSidearm
+  id: DrozdHeavyUpgradeKit
+  result: DrozdHeavyUpgradeKit
+  categories: [Weapons]
+  materials:
+    Steel: 500
+    Plastic: 200
+

@@ -1,38 +1,4 @@
 - type: entity
-  name: SP-91-RC
-  parent: [WeaponSubMachineGunDrozdMk2, BaseSecurityContraband]
-  id: WeaponSubMachineGunSP91RC
-  description: Compact submachine gun designed for riot control.
-  components:
-  - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/SMGs/sp91rc.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Wieldable
-    unwieldOnUse: false
-  - type: GunWieldBonus
-    minAngle: -19
-    maxAngle: -16
-  - type: Gun
-    fireRate: 13
-    selectedMode: Burst
-    shotsPerBurst: 5
-    availableModes:
-      - Burst
-    soundGunshot:
-      path: /Audio/_Starlight/Weapons/Guns/Gunshots/1sp_91.ogg
-  - type: MagazineVisuals
-    magState: mag
-    steps: 5
-    zeroVisible: true
-  - type: Appearance
-  - type: ChamberMagazineAmmoProvider
-    autoEject: true
-
-- type: entity
   name: Type U3 Uzi
   parent: [BaseWeaponSubMachineGun, BaseMajorContraband]
   id: SunriseWeaponSubMachineGunUzi
@@ -53,8 +19,8 @@
     fireRate: 12
     minAngle: 1
     maxAngle: 25
-    angleIncrease: 8
-    angleDecay: 5
+    angleIncrease: 4
+    angleDecay: 14
     selectedMode: FullAuto
     shotsPerBurst: 4
     availableModes:
@@ -84,7 +50,7 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolSP
+        # startingItem: CartridgePistolSP # Sunrise-Edit
         priority: 1
         whitelist:
           tags:
@@ -110,8 +76,9 @@
   - type: Gun
     fireRate: 9
     minAngle: 32
-    angleIncrease: 3
     maxAngle: 64
+    angleIncrease: 4
+    angleDecay: 8
     selectedMode: FullAuto
     availableModes:
       - FullAuto
@@ -191,6 +158,7 @@
     minAngle: 16
     angleIncrease: 3
     maxAngle: 32
+    angleDecay: 12
   - type: Appearance
   - type: Construction
     graph: ImprovisedSMGGraph
@@ -240,8 +208,9 @@
   - type: Gun
     fireRate: 5
     minAngle: 16
-    angleIncrease: 3
     maxAngle: 32
+    angleIncrease: 2
+    angleDecay: 14
   - type: Appearance
   - type: WeaponDismantleOnShoot
     dismantleChance: 0

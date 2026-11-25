@@ -1,0 +1,24 @@
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: BoxShotgunHeavy
+  result: BoxShotgunHeavy
+  materials:
+    Steel: 300
+    Plastic: 50
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: BoxShotgunBirdshotHeavy
+  result: BoxShotgunBirdshotHeavy
+  materials:
+    Steel: 300
+    Plastic: 50
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: BoxShotgunFlechetteHeavy
+  result: BoxShotgunFlechetteHeavy
+  materials:
+    Steel: 80
+    Plasteel: 300
+    Plastic: 50

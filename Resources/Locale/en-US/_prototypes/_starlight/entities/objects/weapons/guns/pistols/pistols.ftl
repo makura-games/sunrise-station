@@ -23,6 +23,6 @@ ent-WeaponPistolSP8T = sp-8t
 ent-WeaponPistolSP8AR = sp-8ar
     .desc = { ent-WeaponPistolDP.desc }
 ent-SunriseWeaponPistolAPS = stechkin APS
-    .desc = A high quality firearm issued to SNKVD elites and high ranking officials. It's half pistol, half closing argument.
+    .desc = A high quality firearm issued to SNKVD elites and high ranking officials. Uses 7.62 Auto ammo.
 ent-WeaponPistolM1911 = m1911
     .desc = A classic .45 handgun with a small magazine capacity.

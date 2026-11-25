@@ -26,7 +26,6 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineBatteryLr30
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
@@ -39,7 +38,8 @@
     containers:
       gun_magazine: !type:ContainerSlot
   - type: Gun
-    fireRate: 4.5
+    projectileSpeed: 18
+    fireRate: 4
     selectedMode: FullAuto
     availableModes:
       - SemiAuto
@@ -74,7 +74,6 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineBatteryLr30 #MagazineBatteryLr60
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
@@ -93,6 +92,7 @@
     containers:
       gun_magazine: !type:ContainerSlot
   - type: Gun
+    projectileSpeed: 25
     fireRate: 6
     shotsPerBurst: 2
     burstFireRate: 10
@@ -145,69 +145,11 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleSP
+        # startingItem: CartridgeRifleSP # Sunrise-Edit
         priority: 1
         whitelist:
           tags:
             - CartridgeRifle
-
-- type: entity
-  name: Leikha
-  parent: [ BaseWeaponRifle, BaseSecurityContraband ]
-  id: WeaponRifleLeikha
-  description: A high end military grade assault rifle. This one has been retrofitted with a scope and a burst receiver. Uses .20 rifle ammo.
-  components:
-  - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Rifles/m16a4.rsi
-    layers:
-    - state: base
-      map: [ "enum.GunVisualLayers.Base" ]
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-  - type: Clothing
-    sprite: _Starlight/Objects/Weapons/Guns/Rifles/m16a4.rsi
-  - type: Gun
-    burstFireRate: 12
-    shotsPerBurst: 3
-    burstCooldown: 0.55
-    selectedMode: Burst
-    availableModes:
-    - Burst
-    - SemiAuto
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/ltrifle.ogg
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineRifleSP
-        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineRifle
-        whitelistFailPopup: gun-magazine-whitelist-fail
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgeRifleSP
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgeRifle
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot ""
-      gun_chamber: !type:ContainerSlot ""
-  - type: MagazineVisuals
-    magState: mag
-    steps: 5
-    zeroVisible: true
-  - type: Appearance
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 3
-    pvsIncrease: 0.3
 
 - type: entity
   name: Larker
@@ -215,6 +157,10 @@
   id: WeaponRifleLarker
   description: "A scoped marksman rifle for medium range engagements, built on the Lecter platform.\nChambered in .308 rifle."
   components:
+  - type: Construction
+    graph: LecterSecurity
+    node: larker
+    deconstructionTarget: null
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/L10_big.rsi
     layers:
@@ -226,8 +172,15 @@
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/L10.rsi
   - type: Item
     sprite: _Starlight/Objects/Weapons/Guns/Rifles/L10.rsi
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -18
   - type: Gun
-    fireRate: 3.5
+    minAngle: 21
+    maxAngle: 32
+    angleIncrease: 2.5
+    angleDecay: 8
+    fireRate: 3
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -253,7 +206,7 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleHeavySP
+        # startingItem: CartridgeRifleHeavySP # Sunrise-Edit
         priority: 1
         whitelist:
           tags:

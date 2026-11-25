@@ -1,29 +1,4 @@
 # region Light Rifle
-- type: entity
-  id: MagazineLightRifleSP
-  name: "magazine (.30 rifle SP)"
-  parent: BaseMagazineLightRifle
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeLightRifleSP
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#575EF5"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#575EF5"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#575EF5"
 
 - type: entity
   id: MagazineLightRifleFMJ
@@ -135,37 +110,3 @@
     steps: 2
     zeroVisible: false
   - type: Appearance
-- type: entity
-  id: MagazineLightMachineGunMG60
-  name: MG60 magazine
-  parent: BaseNonCycleableAmmoItem
-  components:
-  - type: Tag
-    tags:
-    - MagazineLightMachineGunMG60
-  - type: BallisticAmmoProvider
-    mayTransfer: true
-    proto: CartridgeHeavyRifleRSP  # 762x54
-    whitelist:
-      tags:
-      - CartridgeHeavyRifleR  # 762x54
-    capacity: 100
-  - type: Item
-    size: Normal
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/mg60.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag
-    steps: 2
-    zeroVisible: false
-  - type: Appearance
-
-# region Other

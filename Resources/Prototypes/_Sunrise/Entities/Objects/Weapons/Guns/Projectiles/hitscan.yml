@@ -38,6 +38,17 @@
   categories: [ HideSpawnMenu ]
 
 - type: entity
+  parent: RedHeavyLaser
+  id: RedSniperLaser
+  name: red high-precision laser ray
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 42
+
+- type: entity
   id: RedShuttleMediumLaser
   parent: BasicHitscan
   categories: [ HideSpawnMenu ]
@@ -394,3 +405,51 @@
     proto: PelletShotgunImprovisedSpreadTraceLarge
     count: 24
     spread: 50
+
+- type: entity
+  id: PelletGrapeshotHeavySpread
+  parent: PelletGrapeshotSpread
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    spread: 15
+    count: 6
+
+- type: entity
+  id: PelletShotgunBirdshotHeavySpread
+  parent: PelletShotgunSpreadTrace
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    count: 24
+    spread: 30
+
+- type: entity
+  id: PelletShotgunFlechetteHeavySpread
+  parent: PelletShotgunFlechetteSpreadTrace
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    count: 16
+    spread: 20
+
+
+- type: entity
+  id: BulletLightRifleAuto
+  parent: BulletTrace
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    armorPenetration: 0.15
+    damage:
+      types:
+        Piercing: 13
+  - type: StaminaDamageOnCollide
+    damage: 8
+  - type: ProjectilePierce
+    chance: 0.6
+    deviation: 0.15
+    pierceLevel: HardenedMetal
+  - type: ProjectileRicochet
+    chance: 0.7
+

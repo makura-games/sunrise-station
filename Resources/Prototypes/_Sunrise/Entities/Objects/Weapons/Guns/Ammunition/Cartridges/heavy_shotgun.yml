@@ -1,0 +1,55 @@
+- type: entity
+  id: ShellShotgunHeavy
+  parent: [BaseShellShotgun, BaseSecurityContraband]
+  name: heavy shotgun shell (buckshot)
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgunHeavy
+  - type: Sprite
+    scale: 1,1
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Casings/heavy_shotgun_shell.rsi
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - !Index:0
+      state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
+      color: "#F4001F"
+  - type: CartridgeAmmo
+    proto: PelletGrapeshotHeavySpread
+
+- type: entity
+  id: ShellShotgunFlechetteHeavy
+  parent: ShellShotgunHeavy
+  name: heavy shotgun shell (flechette)
+  components:
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - !Index:0
+      state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
+      color: "#5da0b5"
+  - type: CartridgeAmmo
+    proto: PelletShotgunFlechetteHeavySpread
+
+- type: entity
+  id: ShellShotgunBirdshotHeavy
+  parent: ShellShotgunHeavy
+  name: heavy shotgun shell (birdshot)
+  components:
+  - type: Sprite
+    layers: !Clear
+    - !Index:0
+      state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - !Index:0
+      state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
+      color: "#B87333"
+  - type: CartridgeAmmo
+    proto: PelletShotgunBirdshotHeavySpread

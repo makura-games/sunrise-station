@@ -16,6 +16,14 @@
             "directions": 1
         },
         {
+            "name": "base-worn",
+            "directions": 1
+        },
+        {
+            "name": "open-worn",
+            "directions": 1
+        },
+        {
             "name": "door",
             "directions": 1
         },
@@ -60,6 +68,10 @@
             "directions": 1
         },
         {
+            "name": "laser-worn",
+            "directions": 1
+        },
+        {
             "name": "enforcer",
             "directions": 1
         },
@@ -68,11 +80,23 @@
             "directions": 1
         },
         {
+            "name": "kammerer-worn",
+            "directions": 1
+        },
+        {
             "name": "lecter",
             "directions": 1
         },
         {
+            "name": "lecter-worn",
+            "directions": 1
+        },
+        {
             "name": "drozd",
+            "directions": 1
+        },
+        {
+            "name": "drozd-worn",
             "directions": 1
         },
         {

@@ -18,6 +18,8 @@
   - type: Gun
     minAngle: 21
     maxAngle: 32
+    angleIncrease: 1.25
+    angleDecay: 14
     fireRate: 9
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/SMGs/p90_shot.ogg
@@ -36,7 +38,6 @@
           - MagazineP90
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolSP
         priority: 1
         whitelist:
           tags:
@@ -55,62 +56,10 @@
       path: /Audio/_Sunrise/Weapons/Guns/SMGs/p90_cocked.ogg
 
 - type: entity
-  name: New Vector
-  parent: WeaponSubMachineGunDrozd
-  id: WeaponSubMachineGunNewVector
-  description: A modern 30-round Vector by Waffle Corp chambered in .35 Auto. Its delayed-blowback system redirects the bolt assembly downward, helping control its high rate of fire.
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector.rsi
-  - type: Item
-    size: Large
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector.rsi
-  - type: Gun
-    fireRate: 12
-    burstFireRate: 22
-    soundGunshot:
-      path: /Audio/_Sunrise/Weapons/Guns/SMGs/new_vector/vector_shot.ogg
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazinePistolHighCapacityFMJ
-        insertSound: /Audio/_Sunrise/Weapons/Guns/SMGs/new_vector/new_vector_reload.ogg
-        ejectSound: /Audio/_Sunrise/Weapons/Guns/SMGs/new_vector/new_vector_unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazinePistolSubMachineGun
-          - MagazinePistolHighCapacity
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgePistolSP
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgePistol
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: Appearance
-  - type: Wieldable
-  - type: UseDelay
-    delay: 0.5
-
-#PPSH
-- type: entity
   name: PPSH 59 SMG
   parent: [BaseWeaponSubMachineGun, BaseSovietContraband]
   id: WeaponSubMachineGunPPSH
-  description: Beloved by USSP veterans and feared by friendly fire protocols everywhere. Uses .35 ammo.
+  description: Beloved by USSP veterans and feared by friendly fire protocols everywhere. Uses 7.62 Auto ammo.
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/SMGs/ppsh41/big.rsi
@@ -131,7 +80,9 @@
   - type: Gun
     minAngle: 21
     maxAngle: 32
-    fireRate: 15
+    angleIncrease: 2.5
+    angleDecay: 16
+    fireRate: 12
     selectedMode: FullAuto
     availableModes:
     - SemiAuto
@@ -159,11 +110,10 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolSP
         priority: 1
         whitelist:
           tags:
-            - CartridgePistol
+            - CartridgeLightRifleAuto
 
 - type: entity
   name: AJ-100
@@ -223,7 +173,6 @@
           - MagazinePistolDP
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolSP
         priority: 1
         whitelist:
           tags:
@@ -264,9 +213,9 @@
     maxAngle: -22
   - type: Gun
     minAngle: 7
-    maxAngle: 66
-    angleIncrease: 2
-    angleDecay: 22
+    maxAngle: 46
+    angleIncrease: 1.75
+    angleDecay: 18
     fireRate: 7
     selectedMode: FullAuto
     soundGunshot:
@@ -288,7 +237,6 @@
             - MagazineCaselessRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeCaselessRifle
         priority: 1
         whitelist:
           tags:
@@ -300,11 +248,46 @@
   - type: Appearance
 
 - type: entity
-  name: Drozd Mk2
-  parent: [WeaponSubMachineGunDrozd]
-  id: WeaponSubMachineGunDrozdMk2
-  description: An improved variant of the Drozd submachine gun developed by NanoTrasen’s Small Arms Division. It features an exceptional rate of fire in burst mode, making it effective for holding defensive positions or engaging targets at medium to long ranges. Equipped with an automatic magazine release for faster reloads. Uses .35 SMG magazines.
+  name: Drozd
+  parent: WeaponSubMachineGunDrozd
+  id: WeaponSubMachineGunDrozdEmpty
+  suffix: Empty
+  categories: [HideSpawnMenu]
   components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: null
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazinePistolSubMachineGun
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: null
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgePistol
+  - type: Construction
+    graph: DrozdSecurity
+    node: start
+    deconstructionTarget: null
+
+- type: entity
+  name: Deryaba
+  parent: [WeaponSubMachineGunDrozd, BaseSecurityContraband]
+  id: WeaponSubMachineGunDrozdHeavy
+  description: An upgraded variant of the Drozd, featuring a redesigned firing mechanism capable of chambering multiple ammunition types .35 auto or .40. Its controlled two-round burst provides improved handling and flexibility in combat. Feeds from compatible SMG magazines.
+  components:
+    - type: Construction
+      graph: DrozdSecurity
+      node: drozdHeavy
+      deconstructionTarget: null
     - type: Sprite
       sprite: _Sunrise/Objects/Weapons/Guns/SMGs/drozd.rsi
       layers:
@@ -317,13 +300,14 @@
     - type: Wieldable
       unwieldOnUse: false
     - type: GunWieldBonus
-      minAngle: -19
+      minAngle: -18
       maxAngle: -20
     - type: Gun
       minAngle: 21
-      maxAngle: 32
-      fireRate: 6
+      maxAngle: 30
+      fireRate: 5.5
       burstFireRate: 20
+      shotsPerBurst: 2
       soundGunshot:
         collection: famas # Sunrise-Edit
         params:
@@ -332,28 +316,37 @@
       availableModes:
       - Burst
       - FullAuto
-      shotsPerBurst: 3
-      burstCooldown: 0.325
     - type: MagazineVisuals
       magState: mag
       steps: 5
       zeroVisible: true
-    - type: ChamberMagazineAmmoProvider
-      autoEject: true
     - type: Appearance
-    - type: SpeedModifiedOnWield
-      walkModifier: 0.97
-      sprintModifier: 0.97
-    - type: ClothingSpeedModifier
-      walkModifier: 0.99
-      sprintModifier: 0.99
-    - type: Contraband
-      allowedDepartments: [ CentralCommand, Security ]
+    - type: ItemSlots
+      slots:
+        gun_magazine:
+          name: Magazine
+          startingItem: MagazinePistol40SubMachineGunSP
+          insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+          ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+          priority: 2
+          whitelist:
+            tags:
+            - MagazinePistolSubMachineGun
+            - MagazinePistolDPSubMachineGun
+          whitelistFailPopup: gun-magazine-whitelist-fail
+        gun_chamber:
+          name: Chamber
+          startingItem: null
+          priority: 1
+          whitelist:
+            tags:
+            - CartridgePistol
+            - CartridgePistolDP
 
 - type: entity
-  name: Drozd Mk2
-  parent: WeaponSubMachineGunDrozdMk2
-  id: WeaponSubMachineGunDrozdMk2Empty
+  name: Deryaba
+  parent: WeaponSubMachineGunDrozdHeavy
+  id: WeaponSubMachineGunDrozdHeavyEmpty
   categories: [HideSpawnMenu]
   components:
     - type: ItemSlots
@@ -367,6 +360,7 @@
           whitelist:
             tags:
             - MagazinePistolSubMachineGun
+            - MagazinePistolDPSubMachineGun
           whitelistFailPopup: gun-magazine-whitelist-fail
         gun_chamber:
           name: Chamber
@@ -375,66 +369,88 @@
           whitelist:
             tags:
             - CartridgePistol
+            - CartridgePistolDP
 
 - type: entity
-  name: Vector Super
-  parent: [BaseWeaponSubMachineGun, BaseSyndicateContraband]
-  id: WeaponSubMachineGunVector
-  description: An early 30-round Vector Super by Waffle Corp chambered in .40. Effective at short to medium range, it fires in two-round bursts or full auto. Its delayed-blowback system redirects the bolt assembly downward.
+  name: Drozd Mk2
+  parent: [GunMedium, WeaponSubMachineGunDrozd]
+  id: WeaponSubMachineGunDrozdMk2
+  description: An updated variant of the Drozd, featuring a redesigned receiver with a top-mounted magazine system. Compatible with magazines from the VT550 and P90, offering increased ammunition capacity and sustained fire through its extended five-round burst. Uses .35 Auto ammunition.
   components:
   - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/drozd_mk2.rsi
     layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi
-  - type: Wieldable
-    unwieldOnUse: false
-  - type: GunWieldBonus
-    minAngle: -19
-    maxAngle: -16
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
   - type: Gun
-    fireRate: 10
-    minAngle: 21
-    maxAngle: 32
-    shotsPerBurst: 3
-    burstFireRate: 22
-    selectedMode: Burst
-    availableModes:
-    - Burst
-    - FullAuto
-    - SemiAuto
+    burstFireRate: 12
+    shotsPerBurst: 5
     soundGunshot:
-      collection: aug
+      path: /Audio/_Sunrise/Weapons/Guns/SMGs/p90_shot.ogg
+      params:
+        volume: -1
   - type: ChamberMagazineAmmoProvider
     autoEject: true
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
+    soundRack:
+      path: /Audio/_Sunrise/Weapons/Guns/SMGs/p90_cocked.ogg
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistol40AP
+        startingItem: MagazineP90
         insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazinePistolDPSubMachineGun
-          - MagazinePistolDP
+          - MagazinePistolSubMachineGunTopMounted
+          - MagazineP90
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol40SP
+        startingItem: null
         priority: 1
         whitelist:
           tags:
-          - CartridgePistolDP
-  - type: Appearance
-  - type: StaticPrice
-    price: 5000
+          - CartridgePistol
+  - type: MagazineVisuals
+    magState: mag
+    steps: 8
+    zeroVisible: true
+  - type: Construction
+    graph: DrozdSecurity
+    node: upgradedrozd
+    deconstructionTarget: null
+
+- type: entity
+  name: Drozd Mk2
+  parent: WeaponSubMachineGunDrozdMk2
+  id: WeaponSubMachineGunDrozdMk2Empty
+  categories: [HideSpawnMenu]
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: null
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazinePistolSubMachineGunTopMounted
+          - MagazineP90
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: null
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgePistol
+  - type: Construction
+    graph: DrozdSecurity
+    node: upgradedrozd
+    deconstructionTarget: null

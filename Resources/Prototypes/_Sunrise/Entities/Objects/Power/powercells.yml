@@ -3,7 +3,7 @@
   description: A rechargeable standardized power cell. This one looks like a rare and powerful Syndicate combat variant.
   id: PowerCellSyndicate
   suffix: Full
-  parent: BasePowerCell
+  parent: PowerCellHyper
   components:
   - type: Sprite
     layers:
@@ -12,9 +12,6 @@
     - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
       state: o2
       shader: unshaded
-  - type: Battery
-    maxCharge: 3600
-    startingCharge: 3600
   - type: EmpImmune
 
 - type: entity
@@ -22,7 +19,7 @@
   description: A rechargeable standardized power cell. This one looks like a rare and powerful NanoTrasen combat variant.
   id: PowerCellNanoTrasen
   suffix: Full
-  parent: BasePowerCell
+  parent: PowerCellHyper
   components:
   - type: Sprite
     layers:
@@ -31,9 +28,6 @@
     - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
       state: o2
       shader: unshaded
-  - type: Battery
-    maxCharge: 3600
-    startingCharge: 3600
   - type: EmpImmune
 
 - type: entity #makeshift, by Noychik

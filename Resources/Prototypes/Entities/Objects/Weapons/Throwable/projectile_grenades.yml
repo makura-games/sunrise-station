@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseItem
   id: ProjectileGrenadeBase
@@ -76,10 +76,6 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
-  - type: CartridgeAmmo #Sunrise-Start
-    proto: BulletGrenadeStinger
-    deleteOnSpawn: true
-  - type: SpentAmmoVisuals
   - type: Tag
     tags:
     - HandGrenadeAmmo #Sunrise-End
@@ -115,10 +111,6 @@
     positional: true
   - type: StaticPrice
     price: 1500
-  - type: CartridgeAmmo #Sunrise-Start
-    proto: BulletGrenadeIncendiary
-    deleteOnSpawn: true
-  - type: SpentAmmoVisuals
   - type: Tag
     tags:
     - HandGrenadeAmmo #Sunrise-End
@@ -154,10 +146,6 @@
     positional: true
   - type: StaticPrice
     price: 1500
-  - type: CartridgeAmmo #Sunrise-Start
-    proto: BulletGrenadeShrapnel
-    deleteOnSpawn: true
-  - type: SpentAmmoVisuals
   - type: Tag
     tags:
     - HandGrenadeAmmo #Sunrise-End

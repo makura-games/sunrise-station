@@ -12,18 +12,6 @@
           - id: RubberStampIAA
 
 - type: entity
-  id: BriefcaseWeaponVectorFilled
-  parent: BriefcaseWeaponSmall
-  name: secure Vector Super case
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: WeaponSubMachineGunVector
-        - id: MagazineBoxPistol40SP
-
-- type: entity
   id: BriefcaseWeaponUziFilled
   parent: BriefcaseWeaponSmall
   name: secure Uzi case
@@ -120,7 +108,7 @@
       storagebase: !type:AllSelector
         children:
         - id: WeaponRifleSKM24Syndi
-        - id: MagazineLightRifleSP
+        - id: MagazineLightRifle
           amount: 2
         - id: MagazineLightRifleFMJ
           amount: 2
@@ -134,7 +122,7 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: WeaponRifleSKM28Syndi
+        - id: WeaponRifleSKM28
         - id: MagazineRifleHeavySP
           amount: 4
 

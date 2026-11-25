@@ -52,7 +52,7 @@
   equipment:
     gloves: ClothingHandsPPSHSovietNoOuter
     shoes: ClothingShoesBootsWork
-    pocket1: MagazinePistolSubMachineGunEmpty
+    pocket1: MagazinePistolSubMachineGunPPSHEmpty
     belt: ClothingBeltWebbingSovietTier1PPSHSL
 
 - type: startingGear

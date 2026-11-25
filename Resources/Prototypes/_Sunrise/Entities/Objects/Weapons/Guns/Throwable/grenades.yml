@@ -37,10 +37,6 @@
         volume: 5
     initialBeepDelay: 0
     beepInterval: 2
-  - type: CartridgeAmmo
-    proto: BulletGrenadeExplosiveShrapnel
-    deleteOnSpawn: true
-  - type: SpentAmmoVisuals
   - type: Tag
     tags:
     - HandGrenadeAmmo

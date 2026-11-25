@@ -307,7 +307,7 @@
   components:
   - type: SpawnItemsOnUse
     items:
-    - id: WeaponRifleSKM24Green
+    - id: WeaponRifleSKM24
       prob: 0.25
     - id: MagazineLightRifleEmpty
       prob: 0.8
@@ -405,7 +405,7 @@
   components:
   - type: SpawnItemsOnUse
     items:
-    - id: WeaponRifleSKM24Green
+    - id: WeaponRifleSKM24
       prob: 0.25
     - id: MagazineLightRifleEmpty
       prob: 0.8
@@ -436,7 +436,7 @@
     - id: PirateCashSpawner07
       prob: 0.5
     # Weapons
-    - id: WeaponPistolM1984
+    - id: SunriseWeaponPistolAPS
       prob: 0.25
       orGroup: Weapon
     - id: WeaponSubMachineGunPPSH
@@ -513,7 +513,7 @@
     # Cash
     - id: PirateCashSpawner08
     # Weapons
-    - id: WeaponPistolMk58
+    - id: SunriseWeaponPistolAPS
       prob: 0.9
     # Armor
     - id: ClothingOuterArmorSovietPlateRandomSpawner
@@ -536,16 +536,16 @@
   components:
   - type: SpawnItemsOnUse
     items:
-    - id: MagazinePistol
+    - id: MagazinePistolLightRifleAuto
       prob: 0.9
-    - id: MagazinePistolEmpty
+    - id: MagazinePistolLightRifleAutoEmpty
       prob: 0.9
-    - id: MagazinePistolEmpty
+    - id: MagazinePistolLightRifleAutoEmpty
       prob: 0.8
-    - id: MagazinePistolEmpty
+    - id: MagazinePistolLightRifleAutoEmpty
       amount: 2
       prob: 0.4
-    - id: MagazineBoxPistolFMJ
+    - id: MagazineBoxLightRifleAuto
       prob: 0.3
     - id: SovietDamagedIDCardSpawner
     - id: SovietSmokingSpawner
@@ -568,7 +568,7 @@
     - id: WeaponLightMachineGunDP28
       prob: 0.05
       orGroup: DP28Pool
-    - id: WeaponPistolViper
+    - id: SunriseWeaponPistolAPS
       prob: 0.5
       orGroup: DP28Pool
     - id: CrateAmmunitionSmallLightRifle
@@ -604,13 +604,7 @@
     - id: PirateCashSpawner08
     - id: PirateCashSpawner08
     # Weapons
-    - id: WeaponLightMachineGunMG60
-      prob: 0.05
-      orGroup: DP28Pool
-    - id: WeaponLightMachineGunMG60Empty
-      prob: 0.25
-      orGroup: DP28Pool
-    - id: WeaponPistolViper
+    - id: SunriseWeaponPistolAPS
       prob: 0.3
       orGroup: DP28Pool
     - id: CrateAmmunitionSmallLightRifle
@@ -645,14 +639,12 @@
     items:
     # Items
     - id: PirateMedSpawner03
-    - id: MagazinePistol
+    - id: MagazinePistolLightRifleAuto
       prob: 0.6
-    - id: MagazinePistolEmpty
+    - id: MagazinePistolLightRifleAutoEmpty
       prob: 0.3
-    - id: MagazineLightMachineGunMG60
-      prob: 0.1
-    - id: MagazineLightMachineGunMG60
-      prob: 0.1
+    - id: MagazineBoxLightRifleAuto
+      prob: 0.15
     - id: SovietDamagedIDCardSpawner
     - id: SovietSmokingSpawner
     sound:
@@ -671,7 +663,7 @@
     - id: WeaponLightMachineGunRPD
       prob: 0.05
       orGroup: MgPool
-    - id: WeaponPistolViper
+    - id: SunriseWeaponPistolAPS
       prob: 0.5
       orGroup: MgPool
     - id: MagazineLightRifleBeltBoxFMJ
@@ -705,11 +697,13 @@
     items:
     # Items
     - id: PirateMedSpawner03
-    - id: MagazinePistol
+    - id: MagazinePistolLightRifleAuto
       prob: 0.3
-    - id: MagazinePistolEmpty
+    - id: MagazinePistolLightRifleAutoEmpty
       amount: 2
       prob: 0.4
+    - id: MagazineBoxLightRifleAuto
+      prob: 0.15
     - id: MagazineLightRifleMaxim
       prob: 0.1
     - id: MagazineLightRifleMaxim
@@ -728,11 +722,13 @@
     items:
     # Items
     - id: PirateMedSpawner03
-    - id: MagazinePistol
+    - id: MagazinePistolLightRifleAuto
       prob: 0.3
-    - id: MagazinePistolEmpty
+    - id: MagazinePistolLightRifleAutoEmpty
       amount: 2
       prob: 0.4
+    - id: MagazineBoxLightRifleAuto
+      prob: 0.15
     - id: MagazineLightRifleBeltBoxEmpty
       prob: 0.25
     - id: MagazineLightRifleBeltBoxFMJ
@@ -921,9 +917,9 @@
       prob: 0.6
     - id: SpeedLoaderMagnumEmpty
       prob: 0.1
-    - id: MagazineBoxPistolFMJ
+    - id: MagazineBoxLightRifleAuto
       prob: 0.9
-    - id: MagazineBoxPistolFMJ
+    - id: MagazineBoxLightRifleAuto
       prob: 0.2
     - id: SovietDamagedIDCardSpawner
     - id: SovietSmokingSpawner
@@ -941,21 +937,10 @@
     # Cash
     - id: PirateCashSpawner03
     # Weapons
-    - id: WeaponShotgunGA12
+    - id: WeaponShotgunType23
+      prob: 0.5
+    - id: SunriseClothingBeltGrenadeLauncherBandolier
       prob: 0.25
-      orGroup: Weapons
-    - id: WeaponShotgunEnforcer
-      prob: 0.25
-      orGroup: Weapons
-    - id: WeaponShotgunBulldogBiocode
-      prob: 0.3
-      orGroup: Weapons
-    - id: WeaponShotgunBulldog
-      prob: 0.25
-      orGroup: Weapons
-    - id: MagazineShotgunXL
-      prob: 0.05
-      orGroup: Weapons
     # Armor
     - id: ClothingOuterHeavyHardsuitUSSP
       prob: 0.25
@@ -990,24 +975,26 @@
   components:
   - type: SpawnItemsOnUse
     items:
-    - id: BoxShotgunSlug
-      prob: 0.4
-    - id: BoxShotgunSlug
-      prob: 0.15
-    - id: MagazineShotgunEmpty
+    - id: BoxShotgunHeavy
       prob: 0.5
-    - id: MagazineShotgunEmpty
-      prob: 0.3
-    - id: MagazineShotgunSlug
-      prob: 0.15
-    - id: MagazineShotgunSlug
-      prob: 0.15
-    - id: MagazineShotgun
-      prob: 0.15
-    - id: MagazineShotgun
-      prob: 0.1
-    - id: MagazineShotgunIncendiary
-      prob: 0.1
+    - id: BoxShotgunBirdshotHeavy
+      prob: 0.4
+    - id: BoxShotgunFlechetteHeavy
+      prob: 0.35
+    - id: GrenadeBaton
+      prob: 0.25
+    - id: GrenadeFlash
+      prob: 0.25
+    - id: GrenadeGaslauncher
+      prob: 0.25
+    - id: GrenadeStingerlauncher
+      prob: 0.25
+    - id: GrenadeShrapnellauncher
+      prob: 0.25
+    - id: GrenadeEMPlauncher
+      prob: 0.2
+    - id: GrenadeFlarelauncher
+      prob: 0.2
     - id: SovietDamagedIDCardSpawner
     - id: SovietSmokingSpawner
     sound:
@@ -1026,13 +1013,13 @@
     - id: PirateCashSpawner07
       prob: 0.5
     # Weapons
-    - id: WeaponPistolM1984
+    - id: SunriseWeaponPistolAPS
       prob: 0.5
       orGroup: PistolT3Pool
-    - id: WeaponPistolViper
+    - id: SunriseWeaponPistolAPS
       prob: 0.5
       orGroup: PistolT3Pool
-    - id: MagazineBoxPistolSP
+    - id: MagazineBoxLightRifleAuto
       prob: 0.7
     # Items
     - id: ClothingOuterLightHardsuitUSSP
@@ -1068,16 +1055,16 @@
     state: icon
   - type: SpawnItemsOnUse
     items:
-    - id: MagazinePistol
+    - id: MagazinePistolLightRifleAuto
       prob: 0.9
-    - id: MagazinePistolEmpty
+    - id: MagazinePistolLightRifleAutoEmpty
       prob: 0.9
-    - id: MagazinePistolEmpty
+    - id: MagazinePistolLightRifleAutoEmpty
       prob: 0.8
-    - id: MagazinePistolEmpty
+    - id: MagazinePistolLightRifleAutoEmpty
       amount: 2
       prob: 0.4
-    - id: MagazineBoxPistolFMJ
+    - id: MagazineBoxLightRifleAuto
       prob: 0.3
     # Bonus Loot T3
     - id: PirateAmpulaSpawnerT3
@@ -1137,7 +1124,7 @@
     # Cash
     - id: PirateCashSpawner07
     # Weapons
-    - id: WeaponRifleSKM24Green
+    - id: WeaponRifleSKM24
       prob: 0.9
     - id: MagazineLightRifleEmpty
       prob: 0.9

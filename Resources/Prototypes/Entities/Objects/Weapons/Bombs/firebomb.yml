@@ -52,10 +52,6 @@
     graph: FireBomb
     node: firebomb
   # Sunrise-Start
-  - type: CartridgeAmmo
-    proto: BulletFireBomb
-    deleteOnSpawn: true
-  - type: SpentAmmoVisuals
   - type: Tag
     tags:
     - HandGrenadeAmmo

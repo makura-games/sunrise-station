@@ -236,8 +236,6 @@
       prob: 0.5
     - id: EnergyShield
       prob: 0.9
-    - id: WeaponShotgunCycler
-      prob: 0.05
     - id: HyperEutacticBlade
       prob: 0.1
     # Boss lunch

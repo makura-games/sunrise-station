@@ -69,16 +69,6 @@
     - Pirate
 
 - type: entity
-  parent: WeaponLauncherM79
-  id: WeaponLauncherM79Biocode
-  suffix: BIOCODE
-  components:
-  - type: FactionWeaponBlocker
-    factions:
-    - Syndicate
-    - Pirate
-
-- type: entity
   parent: WeaponSniperHristov
   id: WeaponSniperHristovBiocode
   suffix: BIOCODE
@@ -149,46 +139,6 @@
     - Pirate
 
 - type: entity
-  parent: WeaponSyndieLaserPistol
-  id: WeaponSyndieLaserPistolBiocode
-  suffix: BIOCODE
-  components:
-  - type: FactionWeaponBlocker
-    factions:
-    - Syndicate
-    - Pirate
-
-- type: entity
-  parent: WeaponLaserMinigun
-  id: WeaponLaserMinigunBiocode
-  suffix: BIOCODE
-  components:
-  - type: FactionWeaponBlocker
-    factions:
-    - Syndicate
-    - Pirate
-
-- type: entity
-  parent: WeaponSyndieLaserGun
-  id: WeaponSyndieLaserGunBiocode
-  suffix: BIOCODE
-  components:
-  - type: FactionWeaponBlocker
-    factions:
-    - Syndicate
-    - Pirate
-
-- type: entity
-  parent: WeaponGrenadeLauncherGL70
-  id: WeaponGrenadeLauncherGL70Biocode
-  suffix: BIOCODE
-  components:
-  - type: FactionWeaponBlocker
-    factions:
-    - Syndicate
-    - Pirate
-
-- type: entity
   parent: WeaponShotgunMinotaur
   id: WeaponShotgunMinotaurBiocode
   suffix: BIOCODE
@@ -201,16 +151,6 @@
 - type: entity
   parent: WeaponEnergyCrossbow
   id: WeaponEnergyCrossbowBiocode
-  suffix: BIOCODE
-  components:
-  - type: FactionWeaponBlocker
-    factions:
-    - Syndicate
-    - Pirate
-
-- type: entity
-  parent: WeaponSubMachineGunVector
-  id: WeaponSubMachineGunVectorBiocode
   suffix: BIOCODE
   components:
   - type: FactionWeaponBlocker

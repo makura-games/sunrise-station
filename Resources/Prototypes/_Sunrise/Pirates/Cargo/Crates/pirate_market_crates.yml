@@ -94,19 +94,6 @@
 
 - type: entity
   parent: CratePiratePrivateSecure
-  id: CratePirateMagazineBatteryLr60
-  name: LR-60 magazine crate
-  description: Contains six large laser magazines.
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: MagazineBatteryLr60
-          amount: 6
-
-- type: entity
-  parent: CratePiratePrivateSecure
   id: CratePirateMicroBombImplanter
   name: micro-bomb implanter crate
   description: Contains three micro-bomb implanters.
@@ -265,7 +252,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: MagazinePistolSubMachineGunSP
+      - id: MagazinePistolSubMachineGun
         amount: 2
       - id: MagazinePistolSubMachineGunHP
         amount: 2
@@ -774,17 +761,6 @@
 
 - type: entity
   parent: CratePiratePrivateSecure
-  id: CratePirateMagazineBoxAntiMaterielBlast
-  name: magazine box anti materiel blast crate
-  description: Contains six magazine box anti materiel blast items.
-  components:
-  - type: StorageFill
-    contents:
-      - id: MagazineBoxAntiMaterielBlast
-        amount: 6
-
-- type: entity
-  parent: CratePiratePrivateSecure
   id: CratePirateMagazineBoxAntiMaterielFrag
   name: magazine box anti materiel frag crate
   description: Contains six magazine box anti materiel frag items.
@@ -887,7 +863,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: MagazineRifleSP
+      - id: MagazineRifle
         amount: 4
       - id: MagazineRifleFMJ
         amount: 2
@@ -962,13 +938,13 @@
 
 - type: entity
   parent: CratePiratePrivateSecure
-  id: CratePirateMagazineDragunovSP
-  name: magazine dragunov sp crate
-  description: Contains six magazine dragunov sp items.
+  id: CratePirateMagazineDragunovFMJ
+  name: magazine Dragunov FMJ crate
+  description: Contains six Dragunov FMJ magazines.
   components:
   - type: StorageFill
     contents:
-      - id: MagazineDragunovSP
+      - id: MagazineDragunovFMJ
         amount: 6
 
 - type: entity
@@ -1073,7 +1049,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: MagazinePistolHighCapacitySP
+      - id: MagazinePistolHighCapacity
         amount: 2
       - id: MagazinePistolHighCapacityHP
         amount: 2
@@ -1132,7 +1108,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: MagazineRifleBoxSP
+      - id: MagazineLightRifleBox
         amount: 2
       - id: MagazineRifleBoxFMJ
         amount: 2

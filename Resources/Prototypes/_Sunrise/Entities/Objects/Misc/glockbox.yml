@@ -3,6 +3,7 @@
   id: GlockBox
   name: glock box
   description: It contains a pistol and a magazine for it. Did you want something else?
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Storage/glockbox.rsi
@@ -62,31 +63,21 @@
 
 - type: entity
   parent: GlockBox
-  id: SnubRevolverBox
-  name: snub-nosed revolver box
-  description: Inside rests a snub-nosed revolver and a rubber speedloader. Old school, ready for action.
+  id: InspectorRevolverBox
+  name: Inspector revolver box
+  description: Inside rests an Inspector revolver and a rubber speedloader. Old school, ready for action.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Revolvers/snub.rsi
+    sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi
     layers:
     - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: WeaponRevolverSnubRevolver
+      - id: WeaponRevolverInspector
       - id: SpeedLoaderMagnumRubber
     sound:
       path: /Audio/Effects/unwrap.ogg
-
-- type: entity
-  parent: GlockBox
-  id: VP78Box
-  name: VP78 box
-  description: It contains a VP78 and a whole pouch of magazines for it. You will definitely have enough.
-  components:
-  - type: SpawnItemsOnUse
-    items:
-      - id: WeaponPistolVP78
-      - id: PouchAmmoFilledPistol40
 
 - type: entity
   parent: GlockBox

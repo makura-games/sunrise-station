@@ -1,5 +1,3 @@
-ent-WeaponSubMachineGunSP91RC = SP-91-RC
-    .desc = Компактный пистолет-пулемет, предназначенный для контроля беспорядков.
 ent-WeaponSubMachineGunMakeshift = самодельный ПП
     .desc = Скрепленный тканью и мечтами, он зловеще дребезжит при каждом выстреле.
 ent-WeaponSubMachineGunImprovised = импровизированный ПП

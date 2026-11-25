@@ -1,5 +1,3 @@
-ent-WeaponSubMachineGunSP91RC = sP-91-RC
-    .desc = Compact submachine gun designed for riot control.
 ent-WeaponSubMachineGunMakeshift = makeshift SMG
     .desc = Held together with cloth and dreams, it rattles ominously with every shot.
 ent-WeaponSubMachineGunImprovised = improvised SMG

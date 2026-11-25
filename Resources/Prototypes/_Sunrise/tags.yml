@@ -157,6 +157,9 @@
   id: GasTank
 
 - type: Tag
+  id: SunriseGrenadeLauncherBandolierCompatible
+
+- type: Tag
   id: Nanopaste
 
 - type: Tag
@@ -207,6 +210,15 @@
   id: HandGrenadeAmmo
 
 - type: Tag
+  id: GrenadeLessLethal
+
+- type: Tag
+  id: ShellShotgunHeavy
+
+- type: Tag
+  id: SunriseHeavyShotgunBandolierCompatible
+
+- type: Tag
   id: ImprovisedAmmoBox
 
 - type: Tag
@@ -220,9 +232,6 @@
 
 - type: Tag
   id: PipeBomb
-
-- type: Tag
-  id: PowerpackDL6902
 
 - type: Tag
   id: PowerpackFlame
@@ -277,9 +286,6 @@
   id: MagazineHeavyRifle
 
 - type: Tag
-  id: MagazineLightMachineGunMG60
-
-- type: Tag
   id: MagazineLightRiflePan
 
 - type: Tag
@@ -295,10 +301,10 @@
   id: MagazineMachineGunMG42
 
 - type: Tag
-  id: MagazineMP7
+  id: MagazineP90
 
 - type: Tag
-  id: MagazineP90
+  id: MagazineP90Empty
 
 - type: Tag
   id: MagazinePistolDPSubMachineGun
@@ -355,6 +361,18 @@
   id: UpgradeFlareGun
 
 - type: Tag
+  id: WeaponGrenadeLauncherSecurityUpgradeBase
+
+- type: Tag
+  id: WeaponFlareGunSecurityUpgradeBase
+
+- type: Tag
+  id: CartridgeLightRifleAuto
+
+- type: Tag
+  id: MagazinePistolLightRifleAuto
+
+- type: Tag
   id: UpgradeKitBullet
 
 - type: Tag
@@ -376,10 +394,25 @@
   id: UpgradeKitStab
 
 - type: Tag
+  id: UpgradeKammererSawn
+
+- type: Tag
+  id: UpgradeKammererEnforcer
+
+- type: Tag
+  id: WeaponShotgunKammererBase
+
+- type: Tag
+  id: UpgradeKammererTrench
+
+- type: Tag
   id: UpgradeLecter
 
 - type: Tag
-  id: UpgradeWebVest
+  id: UpgradeLarker
+
+- type: Tag
+  id: Binoculars
 
 - type: Tag
   id: WeaponPistolG22
@@ -785,3 +818,12 @@
 
 - type: Tag
   id: MedipenCase # Используется для whitelist у ClothingBeltMedical
+
+- type: Tag
+  id: WeaponRifleLecterUpgradeBase
+
+- type: Tag
+  id: WeaponRifleLeikhaUpgradeBase
+
+- type: Tag
+  id: WeaponSubMachineGunDrozdUpgradeBase

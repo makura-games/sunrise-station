@@ -222,10 +222,9 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 20 # Sunrise-edit
-        Blunt: 5 # Sunrise-edit
+        Piercing: 25
   - type: StaminaDamageOnCollide # Sunrise-add
-    damage: 15 # Sunrise-add
+    damage: 8 # Sunrise-add
 
 - type: entity
   parent: PelletGrapeshot

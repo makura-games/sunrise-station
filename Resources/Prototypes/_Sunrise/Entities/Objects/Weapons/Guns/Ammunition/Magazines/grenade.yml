@@ -57,14 +57,6 @@
     proto: ShellBlastArtillery
 
 - type: entity
-  parent: BaseMagazineGrenadeExtended
-  id: MagazineGrenadeBatonExtended
-  name: baton grenade extended cartridge
-  components:
-  - type: BallisticAmmoProvider
-    proto: ShellBatonArtillery
-
-- type: entity
   parent: BaseMagazineGrenade
   id: MagazineGrenadeFragTimer
   name: timer frag grenade cartridge

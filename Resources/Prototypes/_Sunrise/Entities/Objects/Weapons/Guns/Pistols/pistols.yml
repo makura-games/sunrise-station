@@ -27,10 +27,10 @@
     - suitStorage
     - Belt
   - type: Gun
-    minAngle: 4.7 #Max Effect Range 8
-    maxAngle: 14.1
-    angleIncrease: 1.25
-    angleDecay: 0.5
+    minAngle: 3
+    maxAngle: 24
+    angleIncrease: 2
+    angleDecay: 14
     fireRate: 4
     useKey: true
     selectedMode: SemiAuto
@@ -50,51 +50,6 @@
       collection: MetalThud
   - type: AltFireMelee
     attackType: Heavy
-
-- type: entity
-  name: combat pistol VP-70
-  parent: BaseWeaponPistolSunrise
-  id: WeaponPistolVP78
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/vp78.rsi
-  - type: Item
-    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/vp78.rsi
-  - type: Gun
-    fireRate: 4.25
-    selectedMode: FullAuto
-    availableModes:
-    - FullAuto
-    soundGunshot:
-      path: /Audio/_Sunrise/Weapons/Guns/Pistols/vp70_shot.ogg
-    soundEmpty:
-      path: /Audio/_Sunrise/Weapons/Guns/Pistols/vp70_empty.ogg
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazinePistol40FMJ
-        insertSound: /Audio/_Sunrise/Weapons/Guns/Pistols/vp70_reload.ogg
-        ejectSound: /Audio/_Sunrise/Weapons/Guns/Pistols/vp70_unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazinePistolDP
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgePistol40FMJ # .45 ACP
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgePistol
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
 
 - type: entity
   name: Glock-22 Prison
@@ -129,7 +84,6 @@
           - MagazinePistolHighCapacityRubber
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolRubber
         priority: 1
         whitelist:
           tags:
@@ -168,7 +122,7 @@
     minAngle: 3
     maxAngle: 35
     angleIncrease: 5
-    angleDecay: 10
+    angleDecay: 16
     fireRate: 3.5 # 122 dps - 105 for mateba
     availableModes:
     - SemiAuto
@@ -195,7 +149,6 @@
           - MagazineMagnum
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeMagnumSP
         priority: 1
         whitelist:
           tags:
@@ -316,7 +269,6 @@
           - MagazinePistolDP
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol40FMJ # .45 ACP
         priority: 1
         whitelist:
           tags:
@@ -348,38 +300,38 @@
   name: stechkin APS
   parent: [WeaponPistolMk58, BaseSovietContraband]
   id: SunriseWeaponPistolAPS
-  description: A high quality firearm issued to SNKVD elites and high ranking officials. It's half pistol, half closing argument. Uses .40 ammo.
+  description: A high quality firearm issued to SNKVD elites and high ranking officials. It's half pistol, half closing argument. Uses 7.62 Auto ammo.
   components:
     - type: Sprite
       sprite: _Starlight/Objects/Weapons/Guns/Pistols/aps.rsi
     - type: Clothing
       sprite: _Starlight/Objects/Weapons/Guns/Pistols/aps.rsi
     - type: Gun
-      selectedMode: SemiAuto
-      shotsPerBurst: 3
+      selectedMode: Burst
+      shotsPerBurst: 5
+      burstFireRate: 12
       availableModes:
         - Burst
         - SemiAuto
       soundGunshot:
-        path: /Audio/_Starlight/Weapons/Guns/Gunshots/1suppres.ogg
+        path: /Audio/_Starlight/Weapons/Guns/Gunshots/ppsh.ogg
     - type: Contraband
       severity: Soviet
     - type: ItemSlots
       slots:
         gun_magazine:
           name: Magazine
-          startingItem: MagazinePistol40AP
+          startingItem: MagazinePistolLightRifleAuto
           insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
           ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
           priority: 2
           whitelist:
             tags:
-              - MagazinePistolDP
+              - MagazinePistolLightRifleAuto
           whitelistFailPopup: gun-magazine-whitelist-fail
         gun_chamber:
           name: Chamber
-          startingItem: CartridgePistol40AP
           priority: 1
           whitelist:
             tags:
-              - CartridgePistolDP
+              - CartridgeLightRifleAuto

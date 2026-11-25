@@ -1,0 +1,270 @@
+﻿
+- type: entity
+  parent: [BaseGrenade, BaseSecurityContraband]
+  id: GrenadeEMPlauncher
+  name: EMP grenade
+  description: An electromagnetic pulse grenade round for the Peacekeeper.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletGrenadePeacekeeperEMP
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/peacekeeper.rsi
+    layers:
+    - state: emp
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: spent
+    suffix: false
+  - type: Tag
+    tags:
+    - GrenadeLessLethal
+
+- type: entity
+  parent: BulletGrenadeEMP
+  id: BulletGrenadePeacekeeperEMP
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/peacekeeper.rsi
+    layers:
+    - state: armedemp
+
+- type: entity
+  id: GrenadeFlarelauncher
+  name: flare grenade round
+  description: A grenade round that scatters illuminating pellets on impact.
+  parent: [BaseGrenade, BaseSecurityContraband]
+  components:
+  - type: CartridgeAmmo
+    proto: BulletGrenadePeacekeeperFlare
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/peacekeeper.rsi
+    layers:
+    - state: flash
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: blast
+    suffix: false
+  - type: Tag
+    tags:
+    - GrenadeLessLethal
+
+- type: entity
+  id: BulletGrenadePeacekeeperFlare
+  name: flare grenade
+  parent: BaseBulletTrigger
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+    - state: grenade
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: ProjectileGrenade
+    triggerKey: trigger
+    fillPrototype: PelletShotgunFlare
+    capacity: 6
+  - type: DeleteOnTrigger
+
+- type: entity
+  id: GrenadeGaslauncher
+  name: gas grenade
+  description: Able to choke a room or several of your friends.
+  parent: [ BaseGrenade, BaseSecurityContraband]
+  components:
+  - type: CartridgeAmmo
+    proto: BulletGrenadeGas
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/peacekeeper.rsi
+    layers:
+    - state: gas
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: blast
+    suffix: false
+  - type: Tag
+    tags:
+    - GrenadeLessLethal
+
+- type: entity
+  id: GrenadeShrapnellauncher
+  name: shrapnel grenade round
+  description: A grenade round that scatters lethal shrapnel after impact.
+  parent: [BaseGrenade, BaseMajorContraband]
+  components:
+  - type: CartridgeAmmo
+    proto: BulletGrenadePeacekeeperShrapnel
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/peacekeeper.rsi
+    layers:
+    - state: shrapnel
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: shrapnel
+    suffix: false
+  - type: Tag
+    tags:
+    - Grenade
+    - GrenadeLessLethal
+
+- type: entity
+  id: BulletGrenadePeacekeeperShrapnel
+  name: armed shrapnel grenade
+  parent: BaseBulletTrigger
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/peacekeeper.rsi
+    layers:
+    - state: armedshrapnel
+  - type: SpawnOnTrigger
+    proto: Grenade20mmShrapnel
+  - type: DeleteOnTrigger
+
+- type: entity
+  id: Grenade20mmShrapnel
+  parent: Grenade20mmStinger
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/peacekeeper.rsi
+    layers:
+    - state: armedshrapnel
+  - type: ProjectileGrenade
+    fillPrototype: PelletClusterLessLethal
+    capacity: 25
+
+- type: entity
+  id: GrenadeStingerlauncher
+  name: stinger grenade
+  description: An unruly crowd's favourite.
+  parent: [ BaseGrenade, BaseSecurityContraband]
+  components:
+  - type: CartridgeAmmo
+    proto: BulletGrenadePeacekeeperStinger
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/peacekeeper.rsi
+    layers:
+    - state: stinger
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: blast
+    suffix: false
+  - type: Tag
+    tags:
+    - GrenadeLessLethal
+
+- type: entity
+  id: BulletGrenadePeacekeeperStinger
+  name: armed stinger grenade
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: SpawnOnTrigger
+    proto: Grenade20mmStinger
+  - type: DeleteOnTrigger
+
+- type: entity
+  id: BulletGrenadeGas
+  name: armed gas grenade
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: SpawnOnTrigger
+    proto: Grenade20mmGas
+  - type: DeleteOnTrigger
+
+
+- type: entity
+  parent: BaseBullet
+  id: PelletClusterLesserRubber
+  categories: [ HideSpawnMenu ]
+  name: pellet (ball, rubber)
+  components:
+  - type: Projectile
+    deleteOnCollide: false
+    damage:
+      types:
+       Piercing: 0
+       Blunt: 1
+  - type: StaminaDamageOnCollide
+    damage: 20
+  - type: TimedDespawn
+    lifetime: 0.25
+
+- type: entity
+  id: Grenade20mmStinger
+  parent: ProjectileGrenadeBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/peacekeeper.rsi
+    layers:
+    - state: armedstinger
+  - type: GenericVisualizer
+    visuals: {}
+  - type: TriggerOnSpawn
+  - type: TimerTrigger
+    beepSound:
+      path: /Audio/Effects/beep1.ogg
+      params:
+        volume: 5
+    initialBeepDelay: 0
+    beepInterval: 0.5
+    delay: 1.5
+
+  - type: ProjectileGrenade
+    triggerKey: timer
+    fillPrototype: PelletClusterLesserRubber
+    capacity: 30
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
+    sound:
+      path: /Audio/Effects/flash_bang.ogg
+  - type: DeleteOnTrigger
+    keysIn:
+    - timer
+
+- type: entity
+  id: Grenade20mmGas
+  parent: ProjectileGrenadeBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/peacekeeper.rsi
+    layers:
+    - state: armedgas
+  - type: GenericVisualizer
+    visuals: {}
+  - type: TriggerOnSpawn
+  - type: TimerTrigger
+    delay: 1.5
+  - type: SmokeOnTrigger
+    keysIn:
+    - timer
+    duration: 10
+    spreadAmount: 15
+    smokePrototype: TearGasSmokeWhite
+    solution:
+      reagents:
+      - ReagentId: TearGas
+        Quantity: 20
+  - type: DeleteOnTrigger
+    keysIn:
+    - timer

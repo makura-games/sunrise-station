@@ -1,6 +1,11 @@
 - type: latheRecipePack
   id: SecurityStaticSunrise
   recipes:
+    - BoxPeacekeeperBaton
+    - BoxPeacekeeperFlash
+    - BoxPeacekeeperGas
+    - BoxPeacekeeperStinger
+    - BoxPeacekeeperFlare
     ######################BOX#######################
     # Light Rifle
     - MagazineBoxLightRifleSP
@@ -29,7 +34,7 @@
     - MagazineLightRifleBeltBoxSP
     - MagazineLightRifleBeltBoxEmpty
     # Light Rifle
-    - MagazineLightRifleSP
+    - MagazineLightRifle
     - MagazineLightRifleEmpty
     # Magnum
     - SpeedLoaderMagnumSP
@@ -37,7 +42,7 @@
     - SpeedLoaderMagnumRubber
     - SpeedLoaderMagnumEmpty
     # Pistol
-    - MagazinePistolSP
+    - MagazinePistol
     - MagazinePistolHP
     - MagazinePistolRubber
     - MagazinePistolEmpty
@@ -45,15 +50,15 @@
     - MagazinePistol40HP
     - MagazinePistol40Empty
     # SMG
-    - MagazinePistolSubMachineGunSP
+    - MagazinePistolSubMachineGun
     - MagazinePistolSubMachineGunHP
     - MagazinePistolSubMachineGunEmpty
     # SMG Top Mounted
-    - MagazinePistolSubMachineGunTopMountedSP
+    - MagazinePistolSubMachineGunTopMounted
     - MagazinePistolSubMachineGunTopMountedHP
     - MagazinePistolSubMachineGunTopMountedEmpty
     # Rifle
-    - MagazineRifleSP
+    - MagazineRifle
     - MagazineRifleEmpty
     # Rifle Heavy
     - MagazineRifleHeavySP
@@ -106,7 +111,7 @@
     - MagazineLightRifleBeltBoxFMJ
     - MagazineLightRifleBeltBoxEmpty
     # Light Rifle
-    - MagazineLightRifleSP
+    - MagazineLightRifle
     - MagazineLightRifleFMJ
     - MagazineLightRifleEmpty
     # Magnum
@@ -116,7 +121,7 @@
     - SpeedLoaderMagnumRubber
     - SpeedLoaderMagnumEmpty
     # Pistol
-    - MagazinePistolSP
+    - MagazinePistol
     - MagazinePistolHP
     - MagazinePistolFMJ
     - MagazinePistolRubber
@@ -126,19 +131,19 @@
     - MagazinePistol40FMJ
     - MagazinePistol40Empty
     # Pistol High Capacity
-    - MagazinePistolHighCapacitySP
+    - MagazinePistolHighCapacity
     - MagazinePistolHighCapacityHP
     - MagazinePistolHighCapacityFMJ
     - MagazinePistolHighCapacityRubber
     - MagazinePistolHighCapacityEmpty
     # SMG
-    - MagazinePistolSubMachineGunSP
+    - MagazinePistolSubMachineGun
     - MagazinePistolSubMachineGunHP
     - MagazinePistolSubMachineGunFMJ
     - MagazinePistolSubMachineGunEmpty
     # Rifle LMG
     - MagazineRifleBoxFMJ
-    - MagazineRifleBoxSP
+    - MagazineLightRifleBox
     - MagazineRifleBoxEmpty
     # Rifle Heavy
     - MagazineRifleHeavyFMJ
@@ -177,23 +182,27 @@
     - MagazinePistolFMJ
     - MagazinePistol40FMJ
     - MagazinePistolSubMachineGunFMJ
-    - MagazinePistolSubMachineGunTopMounted
+    - MagazinePistolSubMachineGunTopMountedFMJ
     - MagazineRifleFMJ
     - MagazineRifleHeavyFMJ
     - ComputerGunneryCircuitboard
     - WeaponMiniEnergyGun
-    - WeaponEnergyGunPistol
+    - WeaponAdvancedTaser
     - WeaponLaserSvalinn
     - SunriseWeaponLaserCarbineBattery
     - WeaponLaserLNT620
     - WeaponIonCarbine
-    - WeaponDecloner
     - ScanGateMachineCircuitboard
-    - MagazineBatteryLr30
-    - MagazineBatteryLr60
     - WeaponSunriseLaserPistol
     - FlareGunSecurityUpgrade
+    - SecurityGrenadeLauncherRevolverUpgrade
+    - KammererSpecialUpgradeKit
+    - BoxShotgunHeavy
+    - BoxShotgunBirdshotHeavy
+    - BoxShotgunFlechetteHeavy
+    - BoxPeacekeeperEMP
     - EnergyBola
+    - WeaponLaserImmolator
 # Sunrise-TODO: Нужен ребаланс с учетом типов боеприпасов
 #    - BaseMagazinePistolCaselessRifleExtended
 #    - MagazinePPSH41Extended
@@ -210,13 +219,11 @@
     - MagazineBauer127
 #    - MagazineBauer127Penetrator
     - MagazineBoxBelt127Artillery
-#    - MagazineBauer127Blast
     - MagazineBauer127Frag
     - MagazineBauer127Emp
     - MagazineBoxBelt127Empty
 #    - MagazineBoxBelt127
     - MagazineBoxBelt127Artillery
-#    - MagazineBoxBelt127Blast
     - MagazineBoxBelt127Frag
     - MagazineBoxBelt127Emp
     #
@@ -226,6 +233,14 @@
     #- ModularReceiverAuto
     - LecterUpgrade
     - DrozdUpgrade
+    - DrozdHeavyUpgradeKit
+    - LeikhaUpgrade
+    - LarkerUpgrade
+    - KammererTrenchUpgradeKit
+    - KammererSawnUpgradeKit
+    - MagazinePistol40SubMachineGunEmpty
+    - MagazineP90Empty
+    - MagazineRifleM52Empty
   #####################BOX#######################
   # Light Rifle
     - MagazineBoxLightRifleIncendiary
@@ -309,14 +324,12 @@
   recipes:
     - ClothingHeadHelmetPubg
     - ClothingShoesBootsMagSec
-    - ClothingShoesBootsMagCombat
     - VestSecUpgradePlate
     - VestSecUpgradeStab
     - VestSecUpgradeHeat
     - VestSecUpgradeBullet
     - VestSecUpgradeRiot
     - VestSecUpgradeReflective
-    - VestSecUpgradeWeb
     - VestSecUpgradeBulletHeavy
     - ClothingOuterArmorMiliraLight
     - ClothingOuterArmorMiliraHeavy
@@ -345,18 +358,18 @@
   recipes:
     #####################MAGAZINE#######################
     # Light Rifle
-    - MagazineLightRifleSP
+    - MagazineLightRifle
     - MagazineLightRifleFMJ
     # SMG
-    - MagazinePistolSubMachineGunSP
+    - MagazinePistolSubMachineGun
     - MagazinePistolSubMachineGunHP
     - MagazinePistolSubMachineGunFMJ
     # SMG Top Mounted
-    - MagazinePistolSubMachineGunTopMounted # FMJ
-    - MagazinePistolSubMachineGunTopMountedSP
+    - MagazinePistolSubMachineGunTopMountedFMJ
+    - MagazinePistolSubMachineGunTopMounted
     - MagazinePistolSubMachineGunTopMountedHP
     # Rifle
-    - MagazineRifleSP
+    - MagazineRifle
     - MagazineRifleFMJ
     # Shotgun Speedloader
     - SpeedLoaderShellShotgun
@@ -369,7 +382,7 @@
     # .60/15mm cannon
     - MagazineBauer127
     - MagazineBauer127Penetrator
-    - MagazineBauer127Blast
+    - MagazineBauer127Frag
     - MagazineBauer127Frag
     - MagazineBauer127Emp
     # .60/15mm auto-cannon
@@ -399,7 +412,7 @@
     # Shuttle stuff
   - ShellBlastArtillery
   - MagazineBoxBelt127Frag
-  - MagazineBoxBelt127Blast
+  - MagazineBoxBelt127Frag
   - MagazineBoxBelt127Emp
   - ShuttleGunQuadlingCircuitboard
   - ShuttleGunTeslaHyperionCircuitboard
@@ -438,14 +451,14 @@
   - SpeedLoaderMagnumHP
   - SpeedLoaderMagnumFMJ
   # Pistol
-  - MagazinePistolSP
+  - MagazinePistol
   - MagazinePistolHP
   - MagazinePistolFMJ
   - MagazinePistol40SP
   - MagazinePistol40HP
   - MagazinePistol40FMJ
   # Pistol High Capacity
-  - MagazinePistolHighCapacitySP
+  - MagazinePistolHighCapacity
   - MagazinePistolHighCapacityHP
   - MagazinePistolHighCapacityFMJ
   # LMG

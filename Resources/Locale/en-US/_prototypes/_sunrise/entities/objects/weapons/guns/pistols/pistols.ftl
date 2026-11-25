@@ -1,7 +1,6 @@
 ent-BaseWeaponPistolSunrise = basePistol
     .desc = A rooty tooty point and shooty.
     .suffix = Sunrise
-ent-WeaponPistolVP78 = combat pistol VP-70
     .desc = { ent-BaseWeaponPistol.desc }
 ent-WeaponPistolG22Prison = glock-22 Prison
     .desc = Manufactured by special order for prison complex security. Semi-automatic firearm chambered in .35 Auto.

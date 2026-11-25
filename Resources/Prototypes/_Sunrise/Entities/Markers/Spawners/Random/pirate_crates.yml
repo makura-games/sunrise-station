@@ -51,10 +51,8 @@
     - CratePirateImprovisedExplosives
     - CratePirateJetpack
     - CratePirateKidnap
-    - CratePirateMagazineBatteryLr60
     - CratePirateMagazineBoxAntiMateriel
     - CratePirateMagazineBoxAntiMaterielAP
-    - CratePirateMagazineBoxAntiMaterielBlast
     - CratePirateMagazineBoxAntiMaterielFrag
     - CratePirateMagazineBoxImprovisedMagnum
     - CratePirateMagazineBoxImprovisedPistol
@@ -69,7 +67,7 @@
     - CratePirateMagazineCannonBallMini
     - CratePirateMagazineChainGun
     - CratePirateMagazineChainGunImprovised
-    - CratePirateMagazineDragunovSP
+    - CratePirateMagazineDragunovFMJ
     - CratePirateMagazineLightRifleBeltBoxAP
     - CratePirateMagazineLightRifleBeltBoxIncendiary
     - CratePirateMagazineLightRifleBeltBoxMixed

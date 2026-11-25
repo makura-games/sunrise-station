@@ -76,28 +76,28 @@
 - type: vendingMachineInventory
   id: NanoMedSecurityInventory
   startingInventory:
-    HandheldHealthAnalyzer: 3
-    BodyBagFolded: 5
-    Brutepack: 3
-    RedBrutePack: 2
-    Ointment: 3
-    RedOintment: 2
-    Blueointment20: 2
-    RedPunctPack: 2
-    RedLacePack: 2
-    RedBruizPack: 2
-    RegenerativeMesh: 2
-    MedicatedSuture: 2
-    Bloodpack: 5
-    Tourniquet: 5
-    ChemistryBottleEpinephrine: 3
+    HandheldHealthAnalyzer: 2
+    BodyBagFolded: 4
+    Brutepack: 2
+    RedBrutePack: 1
+    Ointment: 2
+    RedOintment: 1
+    Blueointment20: 1
+    RedPunctPack: 1
+    RedLacePack: 1
+    RedBruizPack: 1
+    RegenerativeMesh: 1
+    MedicatedSuture: 1
+    Bloodpack: 4
+    Tourniquet: 4
+    ChemistryBottleEpinephrine: 2
     ChemistryBottleBicaridine: 1
     ChemistryBottleBruizine: 1
     ChemistryBottleDermaline: 1
     ChemistryBottleDexalin: 1
     ChemistryBottleDylovene: 1
-    Syringe: 3
-    PillCanisterTricordrazine: 2
+    Syringe: 2
+    PillCanisterTricordrazine: 1
     PillCanisterIron: 1
     PillCanisterCopper: 1
     PillCanisterPotassiumIodide: 1
@@ -105,7 +105,7 @@
     PillCanisterCharcoal: 1
     AutoMenderBruteFilled: 1
     AutoMenderBurnFilled: 1
-    MedipenCaseBrigmedic: 2
+    MedipenCaseBrigmedic: 1
   contrabandInventory:
     PillCanisterRandom: 1
     ToyFigurineBrigmedic: 1
@@ -121,17 +121,17 @@
   id: NanoMedSecurityWallInventory
   startingInventory:
     HandheldHealthAnalyzer: 1
-    BodyBagFolded: 2
-    RedBrutePack: 2
-    RedOintment: 2
+    BodyBagFolded: 1
+    RedBrutePack: 1
+    RedOintment: 1
     Blueointment20: 1
     RedPunctPack10: 1
     RedLacePack10: 1
     RedBruizPack10: 1
-    Bloodpack: 5
-    Tourniquet: 5
-    ChemistryBottleEpinephrine: 2
-    Syringe: 2
+    Bloodpack: 4
+    Tourniquet: 4
+    ChemistryBottleEpinephrine: 1
+    Syringe: 1
     PillCanisterTricordrazine: 1
   contrabandInventory:
     PillCanisterRandom: 1

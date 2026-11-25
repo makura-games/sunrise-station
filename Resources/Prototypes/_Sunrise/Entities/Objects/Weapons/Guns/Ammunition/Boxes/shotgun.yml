@@ -51,3 +51,49 @@
         color: "#5da0b5"
         map: ["enum.GunVisualLayers.Mag"]
       - state: flechette
+
+# region heavy
+- type: entity
+  abstract: true
+  parent: AmmoProviderShotgunShell
+  id: AmmoProviderShotgunShellHeavy
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 12
+    whitelist:
+      tags:
+      - ShellShotgunHeavy
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: lethal
+
+- type: entity
+  parent: AmmoProviderShotgunShellHeavy
+  id: BoxShotgunHeavy
+  name: ammunition box (6-gauge buckshot)
+  description: A box of 6-gauge buckshot shells.
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunHeavy
+
+- type: entity
+  parent: AmmoProviderShotgunShellHeavy
+  id: BoxShotgunBirdshotHeavy
+  name: ammunition box (6-gauge birdshot)
+  description: A box of 6-gauge birdshot shells.
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunBirdshotHeavy
+
+- type: entity
+  parent: AmmoProviderShotgunShellHeavy
+  id: BoxShotgunFlechetteHeavy
+  name: ammunition box (6-gauge flechette)
+  description: A box of 6-gauge flechette shells.
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunFlechetteHeavy

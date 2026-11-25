@@ -28,7 +28,7 @@
     - PinpointerNuclear
     - Flash
     - HoloprojectorField
-    - WeaponAdvancedTaser
+    - WeaponEnergyGunPistol
     - ClothingHandsPowerGlovesUplinkNTERTAmberLeader
     belt:
     - Handcuffs
@@ -66,7 +66,7 @@
     - PinpointerNuclear
     - Flash
     - HoloprojectorField
-    - WeaponAdvancedTaser
+    - WeaponEnergyGunPistol
     - ClothingHandsPowerGlovesUplinkNTERTRedLeader
     belt:
     - Handcuffs
@@ -104,7 +104,7 @@
     - PinpointerNuclear
     - Flash
     - HoloprojectorField
-    - WeaponAdvancedTaser
+    - WeaponEnergyGunPistol
     - DoorRemoteOmni
     - ClothingHandsPowerGlovesUplinkNTERTGammaLeader
     belt:
@@ -168,7 +168,7 @@
     pocket1: DoubleEmergencyOxygenTankFilled
     pocket2: PouchAmmoFilledPistol40
   inhand:
-  - WeaponPistolVP78
+  - WeaponPistolMk58
   - BoxZiptie
   storage:
     back:

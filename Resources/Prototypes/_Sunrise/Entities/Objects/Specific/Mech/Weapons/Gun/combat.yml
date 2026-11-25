@@ -85,37 +85,6 @@
     price: 1000
 
 - type: entity
-  id: WeaponMechCombatUVM31
-  name: UVM-31 "Drake"
-  description: A heavy weapon of mass destruction developed by Cybersun based on the minigun. now on a sturdy tripod that allows you to fire directly from the MECH!
-  suffix: Mech Weapon, Gun, Combat, Laser , Minigun
-  parent: [ BaseMechWeaponRange, CombatMechEquipment ]
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Specific/Mech/mecha_uvm31.rsi
-    state: mecha_uvm31
-  - type: Gun
-    minAngle: 1
-    maxAngle: 12
-    angleIncrease: 1
-    angleDecay: 15
-    fireRate: 12
-    selectedMode: FullAuto
-    availableModes:
-      - FullAuto
-    soundGunshot:
-      collection: syndi_plasma
-      params:
-        volume: -1
-  - type: BatteryAmmoProvider
-    proto: SunriseMechHitscanIgnitionRedLaser
-    fireCost: 15
-  - type: Appearance
-  - type: AmmoCounter
-  - type: StaticPrice
-    price: 10000
-
-- type: entity
   id: WeaponMechCombatDuster
   name: Mounted EXP-220 Duster
   description: An  heavy Auto Cannon as a mech-mounted gun with Frag ammo

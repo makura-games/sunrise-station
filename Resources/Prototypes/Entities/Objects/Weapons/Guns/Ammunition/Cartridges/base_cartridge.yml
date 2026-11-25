@@ -1,6 +1,51 @@
+  # Sunrise-Start
 - type: entity
   abstract: true
-  parent: [ BaseItem, BaseItemDestructible ]
+  id: BaseItemNoThrowDamage
+  components:
+  - type: Animateable
+  - type: Clickable
+  - type: InteractionOutline
+  - type: MovedByPressure
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Effects/drop.ogg
+      params:
+        volume: 2
+  - type: DamageOnHighSpeedImpact
+    damage:
+      types:
+        Blunt: 5
+    soundHit:
+      collection: MetalThud
+  - type: CollisionWake
+  - type: GravityAffected
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3  # fite me
+        friction: 0.2
+  - type: Sprite
+    drawdepth: Items
+    noRot: false
+  - type: Pullable
+  - type: DamageExaminable
+  - type: Rotatable
+    increment: 30
+  # Sunrise-End
+
+- type: entity
+  abstract: true
+  parent: [ BaseItemNoThrowDamage, BaseItemDestructible ] # Sunrise-Edit
   id: BaseCartridge
   components:
   - type: Sprite
@@ -33,8 +78,4 @@
   - type: GuideHelp
     guides:
     - SunriseAmmunition
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 0
   # Sunrise-End

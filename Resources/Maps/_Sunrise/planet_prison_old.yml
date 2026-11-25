@@ -33521,8 +33521,8 @@ entities:
         name: uplink-grenade-launcher-m79-name
         id: UplinkPirateGrenadeLauncherM79
         icon:
-          sprite: /Textures/_RMC14/Objects/Weapons/Guns/Launchers/m79/big.rsi
-          state: base
+          sprite: /Textures/_Sunrise/Objects/Weapons/Guns/Launchers/m79_x48.rsi
+          state: icon
         discountDownTo: {}
         description: uplink-grenade-launcher-m79-desc
         conditions:
@@ -34916,10 +34916,10 @@ entities:
         categories:
         - UplinkPirateCybernetics
       - costModifiersBySourceId: {}
-        productEntity: WeaponGrenadeLauncherGL70Flash
+        productEntity: WeaponGrenadeLauncherSecurityRevolver
         originalCost:
           Bluecrystal: 20
-        id: ERTUplinkWeaponGrenadeLauncherGL70Flash
+        id: ERTUplinkWeaponGrenadeLauncherSecurityRevolver
         icon:
           sprite: _Sunrise/Interface/Misc/nt_icons.rsi
           state: gl79
@@ -39507,8 +39507,8 @@ entities:
         name: uplink-grenade-launcher-m79-name
         id: UplinkGrenadeLauncherM79
         icon:
-          sprite: _RMC14/Objects/Weapons/Guns/Launchers/m79/big.rsi
-          state: base
+          sprite: _Sunrise/Objects/Weapons/Guns/Launchers/m79_x48.rsi
+          state: icon
         discountDownTo:
           Telecrystal: 10
         discountCategory: veryRareDiscounts
