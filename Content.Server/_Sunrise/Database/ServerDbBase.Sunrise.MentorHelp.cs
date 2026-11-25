@@ -6,7 +6,7 @@ using Content.Shared._Sunrise.MentorHelp;
 using Content.Shared.Database;
 using Microsoft.EntityFrameworkCore;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Database;
 
 public abstract partial class ServerDbBase

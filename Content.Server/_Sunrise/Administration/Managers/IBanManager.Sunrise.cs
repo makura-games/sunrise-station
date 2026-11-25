@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Content.Server.Database;
 using Robust.Shared.Player;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Administration.Managers;
 
 public partial interface IBanManager

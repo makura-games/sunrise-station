@@ -1,5 +1,6 @@
 using Content.IntegrationTests._Sunrise.Patches;
 
+// ReSharper disable once CheckNamespace
 namespace Content.IntegrationTests.Pair;
 
 public sealed partial class TestPair

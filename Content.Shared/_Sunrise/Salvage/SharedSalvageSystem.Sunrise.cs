@@ -4,6 +4,7 @@ using Content.Shared.Salvage.Expeditions;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Salvage;
 
 public abstract partial class SharedSalvageSystem

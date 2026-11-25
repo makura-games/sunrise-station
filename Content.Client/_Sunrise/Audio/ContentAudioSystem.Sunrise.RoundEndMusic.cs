@@ -7,7 +7,7 @@ using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Client.Audio;
 
 public sealed partial class ContentAudioSystem

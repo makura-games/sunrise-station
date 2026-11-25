@@ -68,8 +68,8 @@
             Detective: [ 1, 1 ]
             Brigmedic: [ 1, 2 ]
             SecurityPilot: [ 1, 1 ]
-            SecurityOfficer: [ 5, 7 ]
-            SecurityCadet: [ 2, 4 ] # intern, exclude from dept count
+            SecurityOfficer: [ 4, 5 ]
+            SecurityCadet: [ 1, 2 ] # intern, exclude from dept count
             #supply (9-10)
             Quartermaster: [ 1, 1 ]
             SalvageSpecialist: [ 3, 4 ]

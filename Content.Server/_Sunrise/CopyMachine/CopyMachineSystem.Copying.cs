@@ -5,7 +5,7 @@ using Content.Shared.Paper;
 
 namespace Content.Server._Sunrise.CopyMachine;
 
-public sealed partial class CopyMachineSystem : EntitySystem
+public sealed partial class CopyMachineSystem
 {
     private bool TryCopyFromSlotOrButtScan(Entity<CopyMachineComponent> ent)
     {

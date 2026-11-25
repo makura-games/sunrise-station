@@ -1,7 +1,8 @@
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Wires;
 using Content.Shared.Doors.Components;
 
-public abstract partial class BaseWireAction : IWireAction
+public abstract partial class BaseWireAction
 {
     public void WireCutSparks(EntityUid uid)
     {
