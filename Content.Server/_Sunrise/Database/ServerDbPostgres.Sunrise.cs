@@ -3,7 +3,7 @@ using System.Collections.Immutable;
 using System.Net;
 using Robust.Shared.Network;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Database;
 
 public sealed partial class ServerDbPostgres

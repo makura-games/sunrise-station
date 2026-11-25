@@ -46,7 +46,7 @@
           True: { visible: false }
           False: { visible: true }
   - type: Solution
-    id: Welder
+    id: welder
     solution:
       reagents:
       - ReagentId: WeldingFuel

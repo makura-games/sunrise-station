@@ -1,5 +1,6 @@
 using Content.Server.Vocalization.Components;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Vocalization.Systems;
 
 public sealed partial class DatasetVocalizationSystem

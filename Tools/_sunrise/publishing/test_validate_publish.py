@@ -32,13 +32,52 @@ class PublishTests(unittest.TestCase):
             main()
             with patch.dict(os.environ, {"COMMIT_HASH": "a" * 40}):
                 main()
+            with patch.dict(os.environ, {
+                "CURRENT_REF_NAME": "stable",
+                "COMMIT_HASH": "",
+            }):
+                main()
+            with patch.dict(os.environ, {
+                "CURRENT_REF_NAME": "stable",
+                "COMMIT_HASH": "   ",
+            }):
+                main()
+            with patch.dict(os.environ, {
+                "USE_PRIVATE_CONTENT": "true",
+                "PRIVATE_REPOSITORY": "org/private",
+                "PRIVATE_APP_CLIENT_ID": "test-client-id",
+                "PRIVATE_APP_PRIVATE_KEY": "test-private-key",
+            }):
+                main()
+            with patch.dict(os.environ, {
+                "CURRENT_REF_NAME": "  stable  ",
+                "CURRENT_REF_TYPE": "  branch  ",
+                "COMMIT_HASH": "   ",
+                "PRIVATE_COMMIT_HASH": "   ",
+                "USE_PRIVATE_CONTENT": "  true  ",
+                "PRIVATE_REPOSITORY": "  org/private  ",
+                "PRIVATE_APP_CLIENT_ID": "  test-client-id  ",
+                "PRIVATE_APP_PRIVATE_KEY": "  test-private-key  ",
+            }):
+                main()
             for invalid in (
                 {"ROBUST_CDN_URL": "http://cdn.example"}, {"PUBLISH_FORK_ID": " "},
                 {"COMMIT_HASH": "master"}, {"COMMIT_HASH": "abc123"},
                 {"PRIVATE_COMMIT_HASH": "refs/pull/1/head"},
                 {"CURRENT_REF_TYPE": "tag"}, {"CURRENT_REF_NAME": "feature"},
+                {"CURRENT_REF_NAME": "stable", "CURRENT_REF_TYPE": "tag"},
+                {"CURRENT_REF_NAME": "stable", "COMMIT_HASH": "invalid"},
                 {"USE_PRIVATE_CONTENT": "true"},
                 {"USE_PRIVATE_CONTENT": "true", "PRIVATE_REPOSITORY": "org/private"},
+                {"USE_PRIVATE_CONTENT": "true", "PRIVATE_REPOSITORY": "   "},
+                {"USE_PRIVATE_CONTENT": "true", "PRIVATE_APP_CLIENT_ID": "test-client-id", "PRIVATE_APP_PRIVATE_KEY": "test-private-key"},
+                {"USE_PRIVATE_CONTENT": "true", "PRIVATE_REPOSITORY": "   ", "PRIVATE_APP_CLIENT_ID": "test-client-id", "PRIVATE_APP_PRIVATE_KEY": "test-private-key"},
+                {"USE_PRIVATE_CONTENT": "true", "PRIVATE_REPOSITORY": "org/private", "PRIVATE_APP_PRIVATE_KEY": "test-private-key"},
+                {"USE_PRIVATE_CONTENT": "true", "PRIVATE_REPOSITORY": "org/private", "PRIVATE_APP_CLIENT_ID": "", "PRIVATE_APP_PRIVATE_KEY": "test-private-key"},
+                {"USE_PRIVATE_CONTENT": "true", "PRIVATE_REPOSITORY": "org/private", "PRIVATE_APP_CLIENT_ID": "   ", "PRIVATE_APP_PRIVATE_KEY": "test-private-key"},
+                {"USE_PRIVATE_CONTENT": "true", "PRIVATE_REPOSITORY": "org/private", "PRIVATE_APP_CLIENT_ID": "test-client-id"},
+                {"USE_PRIVATE_CONTENT": "true", "PRIVATE_REPOSITORY": "org/private", "PRIVATE_APP_CLIENT_ID": "test-client-id", "PRIVATE_APP_PRIVATE_KEY": ""},
+                {"USE_PRIVATE_CONTENT": "true", "PRIVATE_REPOSITORY": "org/private", "PRIVATE_APP_CLIENT_ID": "test-client-id", "PRIVATE_APP_PRIVATE_KEY": "   "},
             ):
                 with self.subTest(invalid=invalid), patch.dict(os.environ, invalid), self.assertRaises(SystemExit):
                     main()

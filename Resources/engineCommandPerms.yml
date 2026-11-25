@@ -125,6 +125,7 @@
   - gc
   - saveconfig
   - testlog
+  - loglevel # Sunrise-Edit
   - sudo
   - scsi
   - csi
@@ -146,5 +147,5 @@
 
 - Commands:
   - "|"
-  - loglevel
+  # - loglevel # Sunrise-Edit
   - oldhelp

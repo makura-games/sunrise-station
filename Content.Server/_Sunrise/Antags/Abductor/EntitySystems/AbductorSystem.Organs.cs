@@ -24,7 +24,7 @@ using Content.Shared.Speech.EntitySystems;
 
 namespace Content.Server._Sunrise.Antags.Abductor;
 
-public sealed partial class AbductorSystem : SharedAbductorSystem
+public sealed partial class AbductorSystem
 {
     [Dependency] private IGameTiming _time = default!;
     [Dependency] private DamageableSystem _damageable = default!;

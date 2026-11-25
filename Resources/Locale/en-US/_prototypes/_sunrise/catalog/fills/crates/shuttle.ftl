@@ -1,5 +1,5 @@
 ent-CrateSyndicateShuttleBundle = syndicate shuttle bundle crate
-    .desc = A bundle crate with everything needed to assemble a syndicate shuttle, except the shuttle console board.
+    .desc = A bundle with everything needed to assemble a syndicate shuttle, including its console board. (Some assembly required).
 ent-CrateSyndicateFriendshipBundle = friendship bundle crate
     .desc = A bundle crate with components needed to assemble the BAL-20 "Friendship" shuttle cannon.
 ent-CrateSyndicateBullfrogBundle = bullfrog bundle crate

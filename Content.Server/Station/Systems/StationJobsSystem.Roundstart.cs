@@ -353,10 +353,6 @@ public sealed partial class StationJobsSystem
                 if (!ProtoMan.Resolve(jobId, out var job))
                     continue;
 
-                // Sunrise-Edit - учитываем ограничения роли по расе персонажа.
-                if (job.SpeciesBlacklist.Contains(profile.Species))
-                    continue;
-
                 if (whitelist != null && !whitelist.Contains(jobId))
                     continue;
 

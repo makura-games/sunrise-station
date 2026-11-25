@@ -2,6 +2,7 @@
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Monitor;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Atmos.Monitor.Components;
 
 public sealed partial class AtmosMonitorComponent
