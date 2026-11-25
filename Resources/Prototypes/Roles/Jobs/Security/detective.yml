@@ -7,10 +7,14 @@
   - !type:RoleTimeRequirement
     role: JobSecurityOfficer
     time: 5h
+  # Sunrise added start - сохраняем чёрный список при переносе в требования роли
+  - !type:SpeciesRequirement
+    species: [Vox]
+    inverted: true
+  # Sunrise added end
   startingGear: DetectiveGear
   icon: "JobIconDetective"
   supervisors: job-supervisors-hos
-  displayWeight: 20  # Sunrise
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-investigator
@@ -28,8 +32,6 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
-  speciesBlacklist:
-  - Vox
 
 - type: startingGear
   id: DetectiveGear

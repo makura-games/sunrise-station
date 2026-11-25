@@ -79,10 +79,8 @@
         - MobMask
         layer:
         - MobLayer
-  - type: Hunger
   - type: Puller
     needsHands: false
-  - type: Thirst
   - type: Icon
     sprite: _Sunrise/Mobs/Species/Resomi/parts.rsi
     state: full
@@ -91,7 +89,6 @@
   - type: Injurable
     damageContainer: Biological
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatResomi
       amount: 5
@@ -113,8 +110,7 @@
       types:
         Slash: 5
   - type: Temperature
-    currentTemperature: 310.15
-    specificHeat: 42
+    temperature: 310.15
   - type: TemperatureDamage
     heatDamageThreshold: 313
     coldDamageThreshold: 230
@@ -274,15 +270,15 @@
           32:
             sprite: _Sunrise/Mobs/Species/Resomi/displacement.rsi
             state: belt
-  - type: ToggleableNightVision
-    effect: EffectNightVisioSpecies
+  - type: NightVision
+    enabled: false
+    action: ActionToggleNightVision
+    prioritized: false
+    lightingColor: '#FFFFFF15'
   - type: FlashModifier
     modifier: 2
   - type: Vocal
-    sounds:
-      Male: UnisexResomi
-      Female: UnisexResomi
-      Unsexed: UnisexResomi
+    emoteSounds: UnisexResomi
   - type: TypingIndicator
     proto: resomi
   - type: Speech

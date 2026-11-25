@@ -163,3 +163,5 @@ reagent-desc-retroindralyne = очень старое противорадиац
 
 reagent-name-barozine-plus = барозин плюс
 reagent-desc-barozine-plus = барозин, усовершенствованная версия специально для медипенов. Менее токсичен.
+reagent-name-romerodone = ромеродон
+reagent-desc-romerodone = Побочный продукт центрифугирования крови зомби. Возможно, из этого можно сделать лекарство.

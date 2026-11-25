@@ -379,8 +379,8 @@
       path: /Audio/Items/wirecutter_drop.ogg
   - type: Tag
     tags:
-    - PlantSampleTaker
     - Wirecutter
+  - type: BotanySampleTaker
   - type: MeleeWeapon
     wideAnimationRotation: -90
     damage:
@@ -452,7 +452,7 @@
     selectedMode: FullAuto
     fireRate: 3.5
   - type: BatteryAmmoProvider
-    proto: BulletDisablerSmg
+    proto: BulletDisablerSmgSlowing
     fireCost: 50
 
 - type: entity

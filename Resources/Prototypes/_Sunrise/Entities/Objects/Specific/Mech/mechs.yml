@@ -16,6 +16,8 @@
   save: false
   abstract: true
   components:
+  - type: VehicleHandBlocker
+    blockedHands: 2
   - type: RadarBlip
     color: "#FFD700FF"
     scale: 1.1
@@ -29,6 +31,11 @@
     factions:
     - NanoTrasen
   - type: Mech
+  - type: Vehicle
+    canAttack: true
+  - type: ContainerVehicle
+    containerId: mech-pilot-slot
+  - type: ContainerVehicleEntry
     entryDelay: 1
   - type: MechVulnerableToEMP
   - type: MechAir
@@ -95,7 +102,6 @@
     - Alive
     - Critical
   - type: MobThresholds
-    currentThresholdState : Alive
     thresholds:
       0: Alive
       300: Critical
@@ -129,6 +135,7 @@
     guides:
     - Robotics
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
@@ -191,18 +198,19 @@
     baseState: sec_pod
     openState: sec_pod_open
     brokenState: sec_pod_broken
-    mechToPilotDamageMultiplier: 0.0
     maxEquipmentAmount: 2
     airtight: true
-    pilotWhitelist:
-      components:
-        - HumanoidProfile
     equipmentWhitelist:
       tags:
       - CombatMech
       - PaddyMech
     startingEquipment:
       - WeaponMechCombatSolarisLaser
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
+      components:
+      - HumanoidProfile
   - type: Reflect
     reflectProb: 0.05
     spread: 180
@@ -210,7 +218,6 @@
     reflects:
     - NonEnergy
   - type: MobThresholds
-    currentThresholdState: Alive
     thresholds:
       0: Alive
       250: Critical
@@ -266,18 +273,19 @@
     baseState: mining_pod
     openState: mining_pod_open
     brokenState: mining_pod_broken
-    mechToPilotDamageMultiplier: 0.0
     maxEquipmentAmount: 4
     airtight: true
-    pilotWhitelist:
-      components:
-        - HumanoidProfile
     equipmentWhitelist:
       tags:
       - IndustrialMech
     startingEquipment:
       - WeaponMechIndustrialPlasmaCutterLight #Нужно сделать улучшения WeaponMechIndustrialKineticAccelerator по аналогии с ручным для прогресса в раунде
       - MechEquipmentGrabberSmallMining
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
+      components:
+      - HumanoidProfile
   - type: Reflect
     reflectProb: 0.05
     spread: 180
@@ -285,7 +293,6 @@
     reflects:
     - NonEnergy
   - type: MobThresholds
-    currentThresholdState: Alive
     thresholds:
       0: Alive
       250: Critical
@@ -377,15 +384,16 @@
     baseState: death
     openState: death-open
     brokenState: death-broken
-    mechToPilotDamageMultiplier: 0.0
     airtight: true
-    pilotWhitelist:
-      components:
-        - HumanoidProfile
     equipmentWhitelist:
       tags:
       - IndustrialMech
       - CombatMech
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
+      components:
+      - HumanoidProfile
   - type: MeleeThrowOnHit
     distance: 1.5
     speed: 10
@@ -414,7 +422,6 @@
     - FootstepSound
     - Ripley
   - type: MobThresholds
-    currentThresholdState : Alive
     thresholds:
       0: Alive
       400: Critical
@@ -436,7 +443,7 @@
 # region Paddy
 - type: entity
   id: MechPaddy
-  parent: [ MechBreakageRipley, BaseMech, CombatMech, IndustrialMech, BaseSecurityContraband ] # Sunrise-edit
+  parent: [ MechBreakageRipley, BaseMech, CombatMech, IndustrialMech, BaseSecurityContraband ]
   name: Paddy
   description: Autonomous Power Loader Unit Subtype Paddy. A Modified MK-II Ripley design intended for light security use.
   components:
@@ -462,13 +469,14 @@
     baseState: paddy
     openState: paddy-open
     brokenState: paddy-broken
-    mechToPilotDamageMultiplier: 0.0
     airtight: true
     maxEquipmentAmount: 4
     #siren: true # Todo: port siren system from starlight
-    pilotWhitelist:
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
       components:
-        - HumanoidProfile
+      - HumanoidProfile
   - type: Reflect
     reflectProb: 0.05
     spread: 180
@@ -539,15 +547,24 @@
     baseState: bigbrother
     openState: bigbrother-open
     brokenState: bigbrother-broken
-    mechToPilotDamageMultiplier: 0.4
     airtight: true
-    pilotWhitelist:
-      components:
-        - HumanoidProfile
     equipmentWhitelist:
       tags:
       - IndustrialMech
       - CombatMech
+  - type: Vehicle
+    transferDamageModifier:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.4
+        Cold: 0.4
+        Heat: 0.4
+        Shock: 0.4
+        Radiation: 0.8
+    operatorWhitelist:
+      components:
+      - HumanoidProfile
   - type: Loadout
     prototypes: [ MechArmorMediumSyndiLoadout ]
   - type: MeleeWeapon
@@ -603,10 +620,12 @@
       mech-battery-slot:
       - PowerCageHigh
 
+# region Durand base
 
+# Rover
 - type: entity
   id: MechRoverSyndie
-  parent: [ MechBreakageRover, BaseMech, CombatMech, BaseSyndicateContraband ] # Sunrise-edit
+  parent: [ MechBreakageRover, BaseMech, CombatMech, BaseSyndicateContraband ]
   name: Rover
   description: A modified Durand used for nefarious purposes. On the back of the armor plate there is an inscription "Cybersun Inc."
   components:
@@ -640,12 +659,21 @@
     baseState: darkdurand
     openState: darkdurand-open
     brokenState: darkdurand-broken
-    mechToPilotDamageMultiplier: 0.15
     airtight: true
     maxEquipmentAmount: 5
-    pilotWhitelist:
+  - type: Vehicle
+    transferDamageModifier:
+      coefficients:
+        Blunt: 0.15
+        Slash: 0.15
+        Piercing: 0.15
+        Cold: 0.15
+        Heat: 0.15
+        Shock: 0.15
+        Radiation: 0.3
+    operatorWhitelist:
       components:
-        - HumanoidProfile
+      - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -662,7 +690,6 @@
   - type: CanMoveInAir
   - type: MovementAlwaysTouching
   - type: MobThresholds
-    currentThresholdState : Alive
     thresholds:
       0: Alive
       400: Critical
@@ -693,7 +720,7 @@
 # Doll House
 - type: entity
   id: MechDollHouse
-  parent: [ MechBreakageDurand, BaseMech, CombatMech, BaseMajorContraband ] # Sunrise-edit
+  parent: [ MechBreakageDurand, BaseMech, CombatMech, BaseMajorContraband ]
   name: Doll House
   description: The Heavy Mech USSP, a communist variant of the Durand, features stronger armor and a powerful machine gun.
   components:
@@ -715,12 +742,21 @@
     baseState: dollhouse
     openState: dollhouse-open
     brokenState: dollhouse-broken
-    mechToPilotDamageMultiplier: 0.2
     airtight: true
     maxEquipmentAmount: 2
-    pilotWhitelist:
+  - type: Vehicle
+    transferDamageModifier:
+      coefficients:
+        Blunt: 0.2
+        Slash: 0.2
+        Piercing: 0.2
+        Cold: 0.2
+        Heat: 0.2
+        Shock: 0.2
+        Radiation: 0.4
+    operatorWhitelist:
       components:
-        - HumanoidProfile
+      - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -750,7 +786,6 @@
   - type: AccessReader
     access: [["NuclearOperative"]]
   - type: MobThresholds
-    currentThresholdState : Alive
     thresholds:
       0: Alive
       500: Critical

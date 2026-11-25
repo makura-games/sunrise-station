@@ -23,8 +23,6 @@ roadmap-goal-syndicate-cyborgs-desc = More advanced and useful syndicate borgs.
 roadmap-goal-new-guns-name = Expanded Firearms
 roadmap-goal-new-guns-desc = Adding a variety of firearms (what about a flamethrower?).
 
-roadmap-goal-smart-viruse-name = Intelligent Disease
-roadmap-goal-smart-viruse-desc = An antagonist whose goal is to infect the station with a disease.
 
 roadmap-goal-cargo-rework-name = Cargo Rework
 roadmap-goal-cargo-rework-desc = Removal of the trade outpost and cargo shuttle, implementing buying and selling on the station.

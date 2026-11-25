@@ -64,9 +64,7 @@ namespace Content.Server._Sunrise.VentCraw
             if (args.Handled || args.Cancelled || args.Args.Target == null || args.Args.Used == null)
                 return;
 
-            TryInsert(args.Args.Target.Value, args.Args.Used.Value);
-
-            args.Handled = true;
+            args.Handled = TryInsert(args.Args.Target.Value, args.User);
         }
 
         private void TryEnter(EntityUid uid, EntityUid user, VentCrawlerComponent crawler)
@@ -206,14 +204,22 @@ namespace Content.Server._Sunrise.VentCraw
 
             var holder = Spawn(VentCrawEntryComponent.HolderPrototypeId, _transform.GetMapCoordinates(uid));
             var holderComponent = Comp<VentCrawHolderComponent>(holder);
+            holderComponent.FirstEntry = true;
 
-            TryInsert(holder, entity, holderComponent);
+            if (!TryInsert(holder, entity, holderComponent))
+            {
+                QueueDel(holder);
+                return false;
+            }
+
+            if (!EnterTube(holder, uid, holderComponent))
+                return false;
 
             _mover.SetRelay(entity, holder);
             ventCrawlerComponent.InTube = true;
             Dirty(entity, ventCrawlerComponent);
 
-            return EnterTube(holder, uid, holderComponent);
+            return true;
         }
     }
 }

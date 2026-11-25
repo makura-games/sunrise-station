@@ -134,8 +134,8 @@
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncher
-  name: China-Lake bundle
-  description: "An old China-Lake grenade launcher bundled with 11 rounds of various destruction capability."
+  name: China Lake bundle
+  description: "An old China Lake grenade launcher bundled with 11 rounds of various destruction capability."
   components:
   - type: EntityTableContainerFill
     containers:
@@ -152,26 +152,6 @@
           amount: 2
         - id: PouchExplosiveGrenadeFragTimerFilled
         - id: GrenadeEMPTimer
-          amount: 2
-
-- type: entity
-  parent: ClothingBackpackDuffelSyndicateBundle
-  id: ClothingBackpackDuffelSyndicateFilledCarbine
-  name: M-90gl bundle
-  description: "A versatile battle rifle with an attached grenade launcher, bundled with 3 magazines and 6 grenades of various capabilities."
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: WeaponRifleM90GrenadeLauncher
-        - id: MagazineRifle
-          amount: 2
-        - id: GrenadeBlastTimer # Sunrise-edit
-          amount: 2
-        - id: GrenadeFlash # Sunrise-edit
-          amount: 2
-        - id: GrenadeFragTimer # Sunrise-edit
           amount: 2
 
 - type: entity
@@ -386,9 +366,8 @@
         - id: SyringeRomerol
         - id: WeaponRevolverPython
         - id: MagazineBoxMagnumIncendiary
-        - id: PillAmbuzolPlus
-        - id: PillAmbuzol
-          amount: 3
+        - id: PillCanisterAmbuzol
+          amount: 5
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateMedicalBundle

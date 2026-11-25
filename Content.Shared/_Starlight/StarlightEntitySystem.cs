@@ -8,7 +8,6 @@ namespace Content.Server.Administration.Systems;
 public sealed partial class StarlightEntitySystem : EntitySystem
 {
     [Robust.Shared.IoC.Dependency] private ILogManager _logManager = default!;
-    [Robust.Shared.IoC.Dependency] private IPrototypeManager _prototypes = default!;
 
     ISawmill _sawmill = default!;
 

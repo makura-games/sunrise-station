@@ -29,13 +29,13 @@
   - type: MultipleTool
     statusShowBehavior: true
     entries:
-      - behavior: Prying
+      - behavior: [ Prying ]
         sprite:
           sprite: _Starlight/Objects/Tools/makeshift_omnitool.rsi
           state: wrench
         useSound:
           path: /Audio/Items/crowbar.ogg
-      - behavior: Anchoring
+      - behavior: [ Anchoring ]
         sprite:
           sprite: _Starlight/Objects/Tools/makeshift_omnitool.rsi
           state: wrenchflipped
@@ -67,17 +67,17 @@
   - type: MultipleTool
     statusShowBehavior: true
     entries:
-      - behavior: Prying
+      - behavior: [ Prying ]
         sprite:
           sprite: _Starlight/Objects/Tools/makeshift_omnitool.rsi
           state: screwdriver
         useSound:
           path: /Audio/Items/crowbar.ogg
-      - behavior: Screwing
+      - behavior: [ Screwing ]
         sprite:
           sprite: _Starlight/Objects/Tools/makeshift_omnitool.rsi
           state: screwdriverflipped
-      - behavior: Anchoring
+      - behavior: [ Anchoring ]
         sprite:
           sprite: _Starlight/Objects/Tools/makeshift_omnitool.rsi
           state: screwdriverflipped
@@ -110,23 +110,23 @@
   - type: MultipleTool
     statusShowBehavior: true
     entries:
-      - behavior: Prying
+      - behavior: [ Prying ]
         sprite:
           sprite: _Starlight/Objects/Tools/makeshift_omnitool.rsi
           state: wirecutter
         useSound:
           path: /Audio/Items/crowbar.ogg
-      - behavior: Screwing
+      - behavior: [ Screwing ]
         sprite:
           sprite: _Starlight/Objects/Tools/makeshift_omnitool.rsi
           state: wirecutterflipped
-      - behavior: Anchoring
+      - behavior: [ Anchoring ]
         sprite:
           sprite: _Starlight/Objects/Tools/makeshift_omnitool.rsi
           state: wirecutterflipped
         useSound:
           path: /Audio/Items/ratchet.ogg
-      - behavior: Cutting
+      - behavior: [ Cutting ]
         sprite:
           sprite: _Starlight/Objects/Tools/makeshift_omnitool.rsi
           state: wirecutterside
@@ -183,8 +183,8 @@
       path: /Audio/Items/wirecutter_drop.ogg
   - type: Tag
     tags:
-    - PlantSampleTaker
     - ImprovisedWirecutter
+  - type: BotanySampleTaker
   - type: Sprite
     sprite: _Starlight/Objects/Tools/improvised_wirecutters.rsi
     state: cutters
@@ -306,7 +306,7 @@
   - type: Tool
     useSound:
       collection: Welder
-    qualities: Welding
+    qualities: [ Welding ]
   - type: Solution
     id: Welder
     solution:
@@ -489,7 +489,7 @@
         - type: Tool
           useSound:
             collection: Welder
-          qualities: Welding
+          qualities: [ Welding ]
           speedModifier: 0.75
         - type: PointLight
           enabled: false
@@ -532,9 +532,9 @@
       - Multitool
       - DoorElectronicsConfigurator
       - Wrench
-      - PlantSampleTaker
       - Wirecutter
       - Screwdriver
+  - type: BotanySampleTaker
 
 - type: entity
   name: forged omnitool
@@ -558,7 +558,7 @@
   - type: Tool
     useSound:
       collection: Welder
-    qualities: Welding
+    qualities: [ Welding ]
   - type: Solution
     id: Welder
     solution:
@@ -732,7 +732,7 @@
         - type: Tool
           useSound:
             collection: Welder
-          qualities: Welding
+          qualities: [ Welding ]
         - type: PointLight
           enabled: false
           radius: 2.5
@@ -771,6 +771,6 @@
       - Multitool
       - DoorElectronicsConfigurator
       - Wrench
-      - PlantSampleTaker
       - Wirecutter
       - Screwdriver
+  - type: BotanySampleTaker

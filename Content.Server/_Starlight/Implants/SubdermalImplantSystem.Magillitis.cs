@@ -4,7 +4,7 @@ using Content.Shared.Popups;
 using Content.Shared.Zombies;
 using Robust.Shared.Player;
 
-#pragma warning disable IDE0130 // Пространство имён соответствует расширяемой системе.
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Implants;
 
 public sealed partial class SubdermalImplantSystem
@@ -12,11 +12,8 @@ public sealed partial class SubdermalImplantSystem
     [Dependency] private PolymorphSystem _polymorph = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
-    private void InitializeStarlight()
-    {
-        SubscribeLocalEvent<SubdermalImplantComponent, UseMagillitisSerumImplantEvent>(OnMagillitisSerumImplant);
-    }
 
+    [SubscribeLocalEvent]
     private void OnMagillitisSerumImplant(
         Entity<SubdermalImplantComponent> ent,
         ref UseMagillitisSerumImplantEvent args)

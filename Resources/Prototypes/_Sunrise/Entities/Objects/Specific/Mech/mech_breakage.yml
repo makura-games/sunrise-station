@@ -265,6 +265,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
@@ -289,6 +290,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
@@ -343,6 +345,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
@@ -420,6 +423,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
@@ -469,6 +473,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
@@ -534,6 +539,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
@@ -583,6 +589,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger

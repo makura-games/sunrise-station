@@ -1,0 +1,21 @@
+# Частичные прототипы сохраняют тайлы и параллаксы Sunrise поверх обновлений Wizden.
+
+- type: !PartialOnly parallax
+  id: Dirt
+  layers: !Clear
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_Sunrise/Tiles/Planet/Grass/grass.png"
+      slowness: 0
+      scale: "1, 1"
+      shader: ""
+
+- type: !PartialOnly parallax
+  id: Grass
+  layers: !Clear
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: /Textures/_Sunrise/Tiles/Planet/Grass/grass.png
+      slowness: 0
+      scale: "1, 1"
+      shader: ""

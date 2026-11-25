@@ -30,7 +30,5 @@
 
 - type: damageContainer
   id: Rift
-  supportedGroups:
-  - Brute
   supportedTypes:
   - Heat

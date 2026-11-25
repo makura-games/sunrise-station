@@ -29,8 +29,7 @@ public sealed partial class FleshCultRuleSystem : GameRuleSystem<FleshCultRuleCo
     [Dependency] private NpcFactionSystem _npcFaction = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
 
-    [ValidatePrototypeId<AntagPrototype>]
-    private const string LeaderAntagProto = "FleshCultistLeader";
+    private static readonly ProtoId<AntagPrototype> LeaderAntagProto = "FleshCultistLeader";
     private static readonly EntProtoId FleshCultGameRule = "FleshCult";
 
     public override void Initialize()

@@ -12,7 +12,6 @@
   supervisors: job-supervisors-centcom
   setPreference: true
   radioBold: true
-  displayWeight: 75
   access:
   - Magistrat
   - Bar

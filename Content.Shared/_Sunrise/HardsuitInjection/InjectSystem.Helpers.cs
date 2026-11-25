@@ -26,7 +26,7 @@ public sealed partial class InjectSystem
 
         component.Locked = !component.Locked;
 
-        _itemSlotsSystem.SetLock(uid, component.ContainerId, component.Locked, comp);
+        _itemSlotsSystem.SetLock((uid, comp), component.ContainerId, component.Locked);
 
         if (component.Locked)
         {
@@ -76,10 +76,10 @@ public sealed partial class InjectSystem
 
         if (action == null) return;
         if (action.Value.Comp.AttachedEntity == null) return;
-        if (TryComp<ItemSlotsComponent>(action.Value.Comp.AttachedEntity, out var itemslots)) return;
+        if (!TryComp<ItemSlotsComponent>(uid, out var itemSlots)) return;
 
         var user = action.Value.Comp.AttachedEntity.Value;
-        var beaker = _itemSlotsSystem.GetItemOrNull(uid, component.ContainerId, itemslots);
+        var beaker = _itemSlotsSystem.GetItemOrNull((uid, itemSlots), component.ContainerId);
 
         if (beaker == null)
         {

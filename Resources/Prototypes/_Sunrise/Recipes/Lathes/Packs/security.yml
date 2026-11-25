@@ -58,8 +58,10 @@
     # Rifle Heavy
     - MagazineRifleHeavySP
     - MagazineRifleHeavyEmpty
-    # PODAVLENIE
-    - BolaSecurity
+    # Shotgun Speedloader
+    - SpeedLoaderShotgunBirdshot
+    - SpeedLoaderShotgunSlug
+    - SpeedLoaderShotgunBeanbag
 ####################################################
 
 - type: latheRecipePack
@@ -188,6 +190,7 @@
     - MagazineBatteryLr60
     - WeaponSunriseLaserPistol
     - FlareGunSecurityUpgrade
+    - EnergyBola
 # Sunrise-TODO: Нужен ребаланс с учетом типов боеприпасов
 #    - BaseMagazinePistolCaselessRifleExtended
 #    - MagazinePPSH41Extended
@@ -215,6 +218,7 @@
     - MagazineBoxBelt127Emp
     #
     - EnergyDomeDirectionalTurtle
+    - SunriseEnergyShieldSec
     - WeaponTemperatureGun
     #- ModularReceiverAuto
     - LecterUpgrade
@@ -317,6 +321,7 @@
     - ClothingOuterHardsuitMilira
     - ClothingHeadHelmetEVAMilira
     - ClothingEyesHudMilira
+    - PouchAmmo
 
 - type: latheRecipePack
   id: SecurityDynamicSunriseMech

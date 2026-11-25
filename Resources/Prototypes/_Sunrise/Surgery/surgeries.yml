@@ -793,7 +793,7 @@
     organ:
     - type: OrganBrain
   - type: Sprite
-    sprite: Mobs/Species/Slime/organs.rsi
+    sprite: _Sunrise/Mobs/Species/Slime/organs_base.rsi
     state: brain
 
 - type: entity
@@ -823,7 +823,7 @@
     organ:
     - type: OrganBrain
   - type: Sprite
-    sprite: Mobs/Species/Slime/organs.rsi
+    sprite: _Sunrise/Mobs/Species/Slime/organs_base.rsi
     state: brain
 #
 # - type: entity #Sunrise-TODO: Port Пауков Ужаса

@@ -3,10 +3,10 @@
   parent: ClothingBeltSheathSyndicate
   suffix: Filled
   components:
-  - type: ContainerFill
+  - type: EntityTableContainerFill
     containers:
       item:
-      - SyndicateRapierBiocode
+        id: SyndicateRapierBiocode
 
 - type: entity
   parent: [BaseItem, BaseSyndicateContraband]

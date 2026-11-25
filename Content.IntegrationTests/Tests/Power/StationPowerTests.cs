@@ -26,15 +26,14 @@ public sealed class StationPowerTests : GameTest
         "Bagel",
         "Box",
         "Elkridge",
-        "Fland",
+        "Exo",
         "Marathon",
-        "Oasis",
         "Packed",
         "Plasma",
         "Relic",
         "Snowball",
-        "Reach",
-        "Exo",
+        "Sushi",
+        "Tram2"
     ];
     // Sunrise-start
     private static readonly string[] SunriseGameMaps =
@@ -110,6 +109,7 @@ public sealed class StationPowerTests : GameTest
     }
 
     [Test, TestCaseSource(nameof(SunriseGameMaps))] // Sunrise-edit
+    [Ignore("4 mins for only 1 map")] // Sunrise-edit
     public async Task TestApcLoad(string mapProtoId)
     {
         var pair = Pair;

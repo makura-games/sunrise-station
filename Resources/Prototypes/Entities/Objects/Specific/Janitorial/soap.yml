@@ -154,7 +154,7 @@
   - type: Residue
     residueColor: residue-red
   - type: StaticPrice
-    price: 500
+    price: 400
 
 - type: entity
   parent: BaseSoap

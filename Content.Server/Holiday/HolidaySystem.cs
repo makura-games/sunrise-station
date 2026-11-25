@@ -6,14 +6,12 @@ using Content.Shared.Holiday;
 using Robust.Server.GameObjects;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Configuration;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Holiday
 {
     public sealed partial class HolidaySystem : EntitySystem
     {
         [Dependency] private IConfigurationManager _configManager = default!;
-        [Dependency] private IPrototypeManager _prototypeManager = default!;
         [Dependency] private IChatManager _chatManager = default!;
         [Dependency] private SharedAppearanceSystem _appearance = default!;
         [Dependency] private SharedPointLightSystem _point = default!;
@@ -26,7 +24,7 @@ namespace Content.Server.Holiday
 
         public override void Initialize()
         {
-            Subs.CVar(_configManager, CCVars.HolidaysEnabled, OnHolidaysEnableChange);
+            Subs.CVar(_configManager, CCVars.HolidaysEnabled, OnHolidaysEnableChange, true); // Sunrise-Edit
             SubscribeLocalEvent<GameRunLevelChangedEvent>(OnRunLevelChanged);
             SubscribeLocalEvent<HolidayVisualsComponent, ComponentInit>(OnVisualsInit);
             SubscribeLocalEvent<PointLightComponent, MapInitEvent>(OnLightMapInit);
@@ -44,7 +42,7 @@ namespace Content.Server.Holiday
 
             var now = DateTime.Now;
 
-            foreach (var holiday in _prototypeManager.EnumeratePrototypes<HolidayPrototype>())
+            foreach (var holiday in ProtoMan.EnumeratePrototypes<HolidayPrototype>())
             {
                 if (holiday.ShouldCelebrate(now))
                 {
@@ -78,7 +76,7 @@ namespace Content.Server.Holiday
 
         public bool IsCurrentlyHoliday(string holiday)
         {
-            if (!_prototypeManager.TryIndex(holiday, out HolidayPrototype? prototype))
+            if (!ProtoMan.TryIndex(holiday, out HolidayPrototype? prototype))
                 return false;
 
             return _currentHolidays.Contains(prototype);

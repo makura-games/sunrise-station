@@ -79,3 +79,7 @@ names-xenoborg-dataset-78 = Штурм-О-Трон
 names-xenoborg-dataset-79 = ДЕБАГ
 names-xenoborg-dataset-80 = В.У.Л.Ь.П.А
 names-xenoborg-dataset-81 = Робаст-О-Трон
+names-xenoborg-dataset-82 = Тостер Судного дня
+names-xenoborg-dataset-83 = Ультражестокий
+names-xenoborg-dataset-84 = Боевой модуль
+names-xenoborg-dataset-85 = Буквально убьёт вас и превратит в ксеноборга

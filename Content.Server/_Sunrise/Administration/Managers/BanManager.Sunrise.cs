@@ -10,7 +10,7 @@ using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Administration.Managers;
 
 public sealed partial class BanManager
@@ -31,9 +31,9 @@ public sealed partial class BanManager
     {
         _sunriseBanIpWhitelist.Clear();
 
-        foreach (var value in addresses.Split(','))
+        foreach (var value in addresses.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries))
         {
-            if (IPAddress.TryParse(value.Trim(), out var address))
+            if (IPAddress.TryParse(value, out var address))
             {
                 _sunriseBanIpWhitelist.Add(address);
                 continue;

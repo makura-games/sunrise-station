@@ -1,5 +1,5 @@
 ﻿using Content.Shared.Interaction;
-using Content.Shared.Mech.Components;
+using Content.Shared.Vehicle.Components;
 
 namespace Content.Shared.MouseRotator;
 
@@ -34,10 +34,11 @@ public abstract partial class SharedMouseRotatorSystem : EntitySystem
 
             var target = uid;
 
-            if (TryComp<MechPilotComponent>(uid, out var mechPilot))
+            if (TryComp<VehicleOperatorComponent>(uid, out var vehicleOperator) &&
+                vehicleOperator.Vehicle is { } vehicle)
             {
-                target = mechPilot.Mech;
-                xform = Transform(mechPilot.Mech);
+                target = vehicle;
+                xform = Transform(vehicle);
             }
 
             if (_rotate.TryRotateTo(

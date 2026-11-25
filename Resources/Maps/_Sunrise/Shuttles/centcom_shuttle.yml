@@ -1167,43 +1167,36 @@ entities:
   - uid: 7801
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 6.5,3.5
       parent: 7656
   - uid: 7802
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 2.5,3.5
       parent: 7656
   - uid: 7803
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 2.5,4.5
       parent: 7656
   - uid: 7804
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 3.5,5.5
       parent: 7656
   - uid: 7805
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 4.5,5.5
       parent: 7656
   - uid: 7806
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 5.5,5.5
       parent: 7656
   - uid: 7807
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 6.5,4.5
       parent: 7656
 - proto: GrilleDiagonal

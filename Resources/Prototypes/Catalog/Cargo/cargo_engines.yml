@@ -41,7 +41,7 @@
 - type: cargoProduct
   id: EngineSingularityCollector
   icon:
-    sprite: Structures/Power/Generation/Singularity/collector.rsi
+    sprite: _Sunrise/Structures/Power/Generation/Singularity/collector.rsi # Sunrise-Edit - показываем наш спрайт коллектора
     state: ca_on
   product: CrateEngineeringSingularityCollector
   cost: 1000
@@ -94,6 +94,6 @@
     sprite: Structures/Power/Generation/Tesla/coil.rsi
     state: grounding_rod
   product: CrateEngineeringTeslaGroundingRod
-  cost: 400
+  cost: 600
   category: cargoproduct-category-name-engineering
   group: market

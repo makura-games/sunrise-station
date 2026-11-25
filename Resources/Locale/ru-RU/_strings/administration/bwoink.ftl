@@ -26,3 +26,4 @@ bwoink-system-player-reconnecting = переподключился.
 bwoink-system-player-banned = был забанен за: { $banReason }
 bwoink-message-admin-only = (Только для админов)
 bwoink-message-silent = (Тихо)
+bwoink-message-name-link = (?)

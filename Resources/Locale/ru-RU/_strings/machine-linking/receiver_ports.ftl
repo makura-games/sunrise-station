@@ -63,3 +63,7 @@ signal-port-name-trigger = Триггер
 signal-port-description-trigger = Запускает определённый механизм на устройстве.
 signal-port-name-timer = Таймер
 signal-port-description-timer = Запускает отчёт таймера на устройстве.
+signal-port-name-target-receiver = Приёмник целей
+signal-port-description-target-receiver = Получает информацию о цели от поисковика целей.
+signal-port-name-target-source = Поисковик целей
+signal-port-description-target-source = Отправляет информацию о цели приёмнику целей.

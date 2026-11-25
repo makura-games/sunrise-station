@@ -1,4 +1,3 @@
-# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 - type: species
   id: Predator
   name: species-name-predator
@@ -9,6 +8,12 @@
   - PredatorNormal
   dollPrototype: MobPredatorDummy
   skinColoration: Hues
+  defaultSoundsBySex:
+  - Predator
+  - Predator
+  - Predator
+  voices:
+  - Predator
   defaultHeight: 1.05
   defaultWidth: 1.1
   maxHeight: 1.15

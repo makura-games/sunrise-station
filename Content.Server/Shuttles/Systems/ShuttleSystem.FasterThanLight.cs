@@ -28,25 +28,25 @@ using Content.Server._Sunrise.Shuttles.Components;
 
 namespace Content.Server.Shuttles.Systems;
 
+/// <summary>
+/// This is a way to move a shuttle from one location to another, via an intermediate map for fanciness.
+/// </summary>
 public sealed partial class ShuttleSystem
 {
-    /*
-     * This is a way to move a shuttle from one location to another, via an intermediate map for fanciness.
-     */
-
     [Dependency] private EntityQuery<BodyComponent> _bodyQuery = default!;
     [Dependency] private EntityQuery<FTLSmashImmuneComponent> _immuneQuery = default!;
     [Dependency] private EntityQuery<MapGridComponent> _mapGridQuery = default!;
     [Dependency] private EntityQuery<MapComponent> _mapQuery = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
 
     private readonly SoundSpecifier _startupSound = new SoundPathSpecifier("/Audio/Effects/Shuttle/hyperspace_begin.ogg")
     {
-        Params = AudioParams.Default.WithVolume(-5f),
+        Params = AudioParams.Default.AddVolume(-5f),
     };
 
     private readonly SoundSpecifier _arrivalSound = new SoundPathSpecifier("/Audio/Effects/Shuttle/hyperspace_end.ogg")
     {
-        Params = AudioParams.Default.WithVolume(-5f),
+        Params = AudioParams.Default.AddVolume(-5f),
     };
 
     public float DefaultStartupTime;
@@ -228,7 +228,7 @@ public sealed partial class ShuttleSystem
         {
 
             // Too large to FTL
-            if (FTLMassLimit > 0 &&  shuttlePhysics.Mass > FTLMassLimit)
+            if (FTLMassLimit > 0 && shuttlePhysics.Mass > FTLMassLimit)
             {
                 reason = Loc.GetString("shuttle-console-mass");
                 return false;
@@ -348,7 +348,7 @@ public sealed partial class ShuttleSystem
 
         _thruster.DisableLinearThrusters(shuttle);
         _thruster.EnableLinearThrustDirection(shuttle, DirectionFlag.North);
-        _thruster.SetAngularThrust(shuttle, false);
+        _thruster.SetAngularThrustVisualState(shuttle, false);
         _dockSystem.UndockDocks(uid);
 
         component = AddComp<FTLComponent>(uid);
@@ -377,6 +377,11 @@ public sealed partial class ShuttleSystem
         var fromMapUid = xform.MapUid;
         var fromMatrix = _transform.GetWorldMatrix(xform);
         var fromRotation = _transform.GetWorldRotation(xform);
+
+        // Sunrise edit start - запоминаем карту старта для аварийного возврата.
+        if (fromMapUid != null)
+            RememberSunriseFtlOrigin(comp, fromMapUid.Value, fromMatrix);
+        // Sunrise edit end
 
         var grid = _mapGridQuery.Comp(uid);
         var width = grid.LocalAABB.Width;
@@ -408,7 +413,7 @@ public sealed partial class ShuttleSystem
         LeaveNoFTLBehind((entity.Owner, xform), oldGridMatrix, oldMapUid);
 
         // Reset rotation so they always face the same direction.
-        xform.LocalRotation = Angle.Zero;
+        _transform.SetLocalRotation(entity, Angle.Zero, xform);
         _index += width + Buffer;
         comp.StateTime = StartEndTime.FromCurTime(_gameTiming, comp.TravelTime - DefaultArrivalTime);
 
@@ -442,10 +447,12 @@ public sealed partial class ShuttleSystem
         comp.StateTime = StartEndTime.FromCurTime(_gameTiming, DefaultArrivalTime);
         comp.State = FTLState.Arriving;
 
+        // Sunrise edit start - Бросаем до смены поворота шаттла при выходе из FTL.
         var xform = _xformQuery.GetComponent(entity.Owner);
-        DoSunriseFtlThrow(xform, Direction.North.ToVec()); // Sunrise-Edit - бросаем до смены поворота шаттла при выходе из FTL.
+        DoSunriseFtlThrow(xform, Direction.North.ToVec());
+        // Sunrise edit end
 
-        if (entity.Comp1.VisualizerProto != null)
+        if (entity.Comp1.VisualizerProto != null && FtlTargetIsValid(comp)) // Sunrise edit - скип если координаты не валидны
         {
             comp.VisualizerEntity = SpawnAttachedTo(entity.Comp1.VisualizerProto, entity.Comp1.TargetCoordinates);
             DebugTools.Assert(Transform(comp.VisualizerEntity.Value).ParentUid == entity.Comp1.TargetCoordinates.EntityId);
@@ -487,13 +494,31 @@ public sealed partial class ShuttleSystem
 
         if (!Exists(entity.Comp1.TargetCoordinates.EntityId))
         {
-            // Uhh good luck
-            // Pick earliest map?
-            var maps = EntityQuery<MapComponent>().Select(o => o.MapId).ToList();
-            var map = maps.Min(o => o.GetHashCode());
+            // Sunrise edit start - при неудачном БСС пытаемся вернуть шаттл на прошлую карту
+            if (!TryRestoreSunriseFtlOrigin(uid, comp, out mapId))
+            {
+                // Get a list of maps
+                var maps = EntityQuery<MapComponent, FTLDestinationComponent>()
+                    .OrderBy(o => o.Item1.MapId.GetHashCode());
 
-            mapId = new MapId(map);
-            TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+                // Get the first map that passes the FTL whitelist
+                var fallbackMap = maps.FirstOrDefault(o =>
+                    _whitelistSystem.IsWhitelistPassOrNull(o.Item2.Whitelist, entity));
+
+                if (fallbackMap.Item1 == null)
+                {
+                    // Карт назначения нет: завершаем FTL на месте, пропуская Smimsh и разморозку карты.
+                    Log.Error($"Unable to find an FTL destination map for {ToPrettyString(uid)}, finishing FTL in place.");
+                    mapId = xform.MapID;
+                    comp.ArrivedInPlace = true;
+                }
+                else
+                {
+                    mapId = fallbackMap.Item1.MapId;
+                    TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+                }
+            }
+            // Sunrise edit end
         }
         // Docking FTL
         else if (_mapGridQuery.HasComp(target.EntityId) &&
@@ -561,8 +586,14 @@ public sealed partial class ShuttleSystem
                 : FTLCooldown);
         comp.StateTime = StartEndTime.FromCurTime(_gameTiming, cooldown);
         _console.RefreshShuttleConsoles(uid);
-        _mapSystem.SetPaused(mapId, false);
-        Smimsh(uid, xform: xform);
+
+        // Sunrise edit start - на аварийном завершении не трогаем карту и не вызываем Smimsh.
+        if (!comp.ArrivedInPlace)
+        {
+            _mapSystem.SetPaused(mapId, false);
+            Smimsh(uid, xform: xform);
+        }
+        // Sunrise edit end
 
         var ftlEvent = new FTLCompletedEvent(uid, _mapSystem.GetMap(mapId));
         RaiseLocalEvent(uid, ref ftlEvent, true);
@@ -609,14 +640,6 @@ public sealed partial class ShuttleSystem
                     break;
             }
         }
-    }
-
-    private float GetSoundRange(EntityUid uid)
-    {
-        if (!_mapGridQuery.TryComp(uid, out var grid))
-            return 4f;
-
-        return MathF.Max(grid.LocalAABB.Width, grid.LocalAABB.Height) + 12.5f;
     }
 
     /// <summary>
@@ -730,7 +753,7 @@ public sealed partial class ShuttleSystem
     {
         config = null;
 
-        if (!TryComp(shuttleUid, out TransformComponent?  shuttleXform) ||
+        if (!TryComp(shuttleUid, out TransformComponent? shuttleXform) ||
             !TryComp(targetUid, out TransformComponent? targetXform) ||
             targetXform.MapUid == null ||
             !targetXform.MapUid.Value.IsValid())
@@ -822,7 +845,7 @@ public sealed partial class ShuttleSystem
             // We don't include this in the actual targetAABB because then we would be double-expanding it.
             // Once in this loop, then again when placing the shuttle later.
             // Note that targetAABB already has expansionAmount factored in already.
-            _mapManager.FindGridsIntersecting(mapId, targetAABB.Enlarged(maxOffset), ref grids);
+            Maps.FindGridsIntersecting(mapId, targetAABB.Enlarged(maxOffset), ref grids);
 
             foreach (var grid in grids)
             {

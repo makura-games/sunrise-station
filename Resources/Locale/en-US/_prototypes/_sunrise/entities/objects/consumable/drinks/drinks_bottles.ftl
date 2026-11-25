@@ -6,6 +6,3 @@ ent-DrinkVodkizineBottleFull = vodkizine bottle
 
 ent-DrinkRedRumBottleFull = red rum bottle
     .desc = A bottle of strong red rum.
-
-ent-DrinkDarkRedRumBottleFull = dark-red rum bottle
-    .desc = A bottle of dangerously strong dark red rum.
