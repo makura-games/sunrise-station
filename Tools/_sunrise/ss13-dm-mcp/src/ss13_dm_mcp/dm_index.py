@@ -134,16 +134,32 @@ class DmIndex:
         if self._initialized and not removed and not changed:
             return False
 
+        # Read and parse all changed files before mutating state; skip transient OSErrors
+        # without caching their stat_sig so subsequent calls retry cleanly.
+        staged_stats: dict[str, tuple[int, int]] = {}
+        staged_texts: dict[str, str] = {}
+        staged_parsed: dict[str, ParsedDmFile] = {}
+        for rel, path, stat_sig in changed:
+            try:
+                text = path.read_text(encoding="utf-8-sig", errors="replace")
+            except OSError:
+                continue
+            staged_parsed[rel] = parse_dm_file(rel, text)
+            staged_texts[rel] = text
+            staged_stats[rel] = stat_sig
+
+        if not removed and not staged_parsed:
+            return False
+
         for rel in removed:
             self._file_stats.pop(rel, None)
             self._file_parsed.pop(rel, None)
             self._file_texts.pop(rel, None)
 
-        for rel, path, stat_sig in changed:
+        for rel, stat_sig in staged_stats.items():
             self._file_stats[rel] = stat_sig
-            text = path.read_text(encoding="utf-8-sig", errors="replace")
-            self._file_texts[rel] = text
-            self._file_parsed[rel] = parse_dm_file(rel, text)
+            self._file_texts[rel] = staged_texts[rel]
+            self._file_parsed[rel] = staged_parsed[rel]
 
         self._rebuild_indices()
         self._initialized = True
@@ -461,10 +477,12 @@ class DmIndex:
 
         for rel in rel_files:
             text = self._file_texts[rel]
-            if not rx.search(text):
+            if not text or not rx.search(text):
                 continue
 
             lines = text.splitlines()
+            if not lines:
+                continue
             # Build character offsets of line starts for O(log N) line lookup
             line_starts: list[int] = []
             offset = 0

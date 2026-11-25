@@ -28,8 +28,9 @@ Read-only Python MCP-сервер для чтения кодовой базы Sp
 ### Вариант 2: глобальная editable-установка в `PATH` (без абсолютного пути к серверу)
 
 ```bash
-uv pip install --system -e Tools/_sunrise/ss13-dm-mcp
+uv tool install -e Tools/_sunrise/ss13-dm-mcp
 ```
+*(Либо `uv pip install --system -e Tools/_sunrise/ss13-dm-mcp`, если системный Python не помечен как `EXTERNALLY-MANAGED`.)*
 
 После этого команда `ss13-dm-mcp` доступна глобально из любого каталога.
 
@@ -87,6 +88,22 @@ python3 -m venv .venv
 }
 ```
 
+**Через `.venv` (Вариант 3, без `uv`):**
+```json
+{
+  "mcpServers": {
+    "ss13-dm": {
+      "command": "<REPO_ROOT>/Tools/_sunrise/ss13-dm-mcp/.venv/Scripts/python.exe",
+      "args": ["-m", "ss13_dm_mcp.server"],
+      "env": {
+        "SS13_REPO_PATH": "<PATH_TO_SS13_REPO>"
+      }
+    }
+  }
+}
+```
+*(На Linux/macOS/WSL замените `.venv/Scripts/python.exe` на `.venv/bin/python`.)*
+
 ### Codex (`~/.codex/config.toml`)
 
 **Через `uv`:**
@@ -107,10 +124,10 @@ env = { SS13_REPO_PATH = "<PATH_TO_SS13_REPO>" }
 ## Запуск тестов
 
 ```powershell
-# Только юнит-тесты (smoke-тесты пропускаются, если не задан SS13_REPO_PATH)
+# Только юнит-тесты и синтетический stdio-тест (Paradise smoke-тесты пропускаются, если не указан билд Paradise)
 uv --directory Tools/_sunrise/ss13-dm-mcp run --extra dev pytest -v
 
-# Включая smoke-тесты на локальном билде SS13
-$env:SS13_REPO_PATH = "<PATH_TO_SS13_REPO>"
+# Включая smoke-тесты на локальном билде Paradise (нужны clockwork_mob.dm / cogscarab.dm / clockwork.dmi)
+$env:SS13_REPO_PATH = "<PATH_TO_PARADISE_REPO>"
 uv --directory Tools/_sunrise/ss13-dm-mcp run --extra dev pytest -v
 ```

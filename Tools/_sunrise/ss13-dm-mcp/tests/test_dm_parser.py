@@ -13,15 +13,17 @@ from ss13_dm_mcp.config import load_repo_config, safe_resolve_under_repo
 from ss13_dm_mcp.dm_index import DmIndex
 from ss13_dm_mcp.dm_parser import parse_dm_file
 
-def _get_ss13_repo() -> Path | None:
+def _get_paradise_repo() -> Path | None:
     raw = os.environ.get("SS13_REPO_PATH", "").strip()
     if not raw:
         return None
     p = Path(raw).expanduser().resolve()
-    return p if p.is_dir() else None
+    if not (p / "code" / "game" / "gamemodes" / "clockwork" / "cogscarab.dm").is_file():
+        return None
+    return p
 
 
-_SS13_REPO = _get_ss13_repo()
+_PARADISE_REPO = _get_paradise_repo()
 
 
 def test_parse_indentation_relative_paths_and_comments() -> None:
@@ -155,18 +157,18 @@ def test_scattered_defs_inheritance_and_mtime_refresh(tmp_path: Path) -> None:
         "/atom/movable",
     ]
 
-    # Modify file with new mtime + size
-    time.sleep(0.02)
+    # Modify file with new size + explicit mtime bump
     f2.write_text(
         "/mob/living\n\tname = \"living\"\n\n"
-        "/mob/living/custom\n\tparent_type = /mob\n\thealth = 300\n",
+        "/mob/living/custom\n\tparent_type = /mob\n\thealth = 3000\n",
         encoding="utf-8",
     )
-    os.utime(f2, None)
+    st = f2.stat()
+    os.utime(f2, ns=(st.st_atime_ns, st.st_mtime_ns + 1_000_000_000))
     assert idx.ensure_fresh() is True
     t_custom2 = idx.get_type("/mob/living/custom", include_inherited=False)
     vars_map2 = {v["name"]: v for v in t_custom2["vars"]}
-    assert vars_map2["health"]["value"] == "300"
+    assert vars_map2["health"]["value"] == "3000"
 
     # Delete f2
     f2.unlink()
@@ -193,11 +195,51 @@ def test_config_multi_repos_and_path_traversal(tmp_path: Path) -> None:
     with pytest.raises(ValueError):
         safe_resolve_under_repo(r1, "../../Windows/System32")
 
+    # Explicit SS13_REPOS["default"] is preserved when SS13_REPO_PATH points elsewhere
+    cfg2 = load_repo_config(
+        {
+            "SS13_REPO_PATH": str(r2),
+            "SS13_REPOS": json.dumps({"default": str(r1), "tg": str(r2)}),
+        }
+    )
+    assert cfg2.resolve(None) == ("tg", r2.resolve())
+    assert cfg2.resolve("default") == ("default", r1.resolve())
 
-@pytest.mark.skipif(_SS13_REPO is None, reason="Set SS13_REPO_PATH to run SS13 repo smoke tests")
+
+def test_root_types_without_slash_global_vars_ifdef_and_empty_file(tmp_path: Path) -> None:
+    (tmp_path / "code").mkdir()
+    (tmp_path / "code" / "empty.dm").write_text("", encoding="utf-8")
+    (tmp_path / "code" / "edge.dm").write_text(
+        'var/weather = "sunny"\n\n'
+        "datum/widget\n"
+        "\tproc/run()\n"
+        "#ifdef DEBUG\n"
+        "\t\treturn 1\n"
+        "#endif\n",
+        encoding="utf-8",
+    )
+    idx = DmIndex(tmp_path, repo_name="edge")
+    idx.ensure_fresh()
+
+    root_info = idx.get_type("/", include_inherited=False)
+    assert {v["name"]: v["value"] for v in root_info["vars"]}["weather"] == '"sunny"'
+
+    w_info = idx.get_type("/datum/widget", include_inherited=False)
+    assert "error" not in w_info
+    assert any(p["name"] == "run" for p in w_info["procs"])
+
+    proc = idx.get_proc("/datum/widget", "run")
+    assert "#endif" in proc["implementations"][0]["source"]
+
+    # Empty .dm file does not crash search_code("^")
+    hits = idx.search_code("^", limit=10)
+    assert hits["returned"] >= 1
+
+
+@pytest.mark.skipif(_PARADISE_REPO is None, reason="Set SS13_REPO_PATH to a Paradise build to run Paradise smoke tests")
 def test_paradise_dm_smoke() -> None:
-    assert _SS13_REPO is not None
-    idx = DmIndex(_SS13_REPO, repo_name="paradise")
+    assert _PARADISE_REPO is not None
+    idx = DmIndex(_PARADISE_REPO, repo_name="paradise")
     idx.ensure_fresh()
 
     # 1. clockwork_mob.dm

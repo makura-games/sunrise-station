@@ -109,7 +109,7 @@ def test_ftl_audit_parity_proto_and_cs(tmp_path: Path) -> None:
         encoding="utf-8",
     )
     (repo / "Content.Shared" / "Test" / "Foo.cs").write_text(
-        'var a = Loc.GetString("ui-only-ru");\nvar b = Loc.GetString("missing-cs-key");\n',
+        'var a = Loc.GetString("ui-only-ru");\nvar b = Loc.GetString(\n    "missing-cs-key"\n);\n',
         encoding="utf-8",
     )
 
@@ -142,6 +142,20 @@ def test_ftl_audit_parity_proto_and_cs(tmp_path: Path) -> None:
     miss_res = audit_ftl(repo, proto_idx, ftl_idx, path_prefix="_Sunrise/nonexistent/clockwork")
     assert "error" in miss_res
     assert len(miss_res["matched_dirs"]) >= 1
+
+    # cs_path_prefix traversal outside repo_root is rejected
+    trav_res = audit_ftl(
+        repo, proto_idx, ftl_idx, path_prefix="_Sunrise", cs_path_prefix="../outside"
+    )
+    assert "error" in trav_res["cs_check"]
+
+    # Malformed RSI meta.json returns diagnostic error instead of crashing
+    bad_rsi = repo / "Resources" / "Textures" / "Bad.rsi"
+    bad_rsi.mkdir(parents=True)
+    (bad_rsi / "meta.json").write_text('{"version": 1, "size": {"x": "oops", "y": 32}, "states": []}', encoding="utf-8")
+    bad_res = audit_rsi(repo, "Bad.rsi", check_attributions=False)
+    assert bad_res["ok"] is False
+    assert any("Invalid RSI size" in iss for iss in bad_res["issues"])
 
 
 def test_real_repo_smoke_rsi_and_ftl() -> None:

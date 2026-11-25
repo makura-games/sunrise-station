@@ -39,7 +39,15 @@ def _construct_node_value(loader: yaml.SafeLoader, node: yaml.Node) -> Any:
         return loader.construct_sequence(node, deep=True)
     if isinstance(node, yaml.ScalarNode):
         val = loader.construct_scalar(node)
-        return None if val == "" else val
+        if val == "":
+            return None
+        if not node.style:
+            resolved_tag = loader.resolve(yaml.ScalarNode, val, (True, False))
+            if resolved_tag != "tag:yaml.org,2002:str":
+                ctor = loader.yaml_constructors.get(resolved_tag)
+                if ctor is not None:
+                    return ctor(loader, node)
+        return val
     return None
 
 

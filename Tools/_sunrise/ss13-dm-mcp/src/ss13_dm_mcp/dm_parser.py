@@ -92,6 +92,25 @@ _VAR_MODIFIERS = frozenset(
     }
 )
 _VAR_MACRO_PREFIXES = ("VAR_PRIVATE", "VAR_PROTECTED", "VAR_FINAL", "VAR_PUBLIC")
+_DM_BUILTIN_ROOTS = frozenset(
+    {
+        "datum",
+        "atom",
+        "area",
+        "turf",
+        "obj",
+        "mob",
+        "client",
+        "world",
+        "list",
+        "image",
+        "icon",
+        "sound",
+        "matrix",
+        "regex",
+        "savefile",
+    }
+)
 _DM_KEYWORDS = frozenset(
     {
         "if",
@@ -524,6 +543,7 @@ def parse_dm_file(rel_path: str, text: str) -> ParsedDmFile:
     active_proc: ProcDef | None = None
     active_proc_indent = -1
     active_proc_last_line = 0
+    proc_ifdef_depth = 0
     collecting_proc_args = False
     proc_args_depth = 0
     proc_args_parts: list[str] = []
@@ -542,7 +562,7 @@ def parse_dm_file(rel_path: str, text: str) -> ParsedDmFile:
             locs.append(line_no)
 
     def _close_active_proc() -> None:
-        nonlocal active_proc, active_proc_indent, active_proc_last_line, collecting_proc_args
+        nonlocal active_proc, active_proc_indent, active_proc_last_line, proc_ifdef_depth, collecting_proc_args
         if active_proc is None:
             return
         active_proc.end_line = max(active_proc.line, active_proc_last_line)
@@ -557,6 +577,7 @@ def parse_dm_file(rel_path: str, text: str) -> ParsedDmFile:
         active_proc = None
         active_proc_indent = -1
         active_proc_last_line = 0
+        proc_ifdef_depth = 0
         collecting_proc_args = False
 
     def _pop_stack_to(target_indent: int, end_line_no: int) -> None:
@@ -593,10 +614,20 @@ def parse_dm_file(rel_path: str, text: str) -> ParsedDmFile:
                 parts.append(stripped_lines[j])
             end_ln = j + 1
             joined = " ".join(p for p in parts if p)
-            if joined.lstrip("#").lstrip().startswith("define"):
+            directive = joined.lstrip("#").lstrip().split(None, 1)[0] if joined.lstrip("#").lstrip() else ""
+            if directive == "define":
                 d = _parse_define_line(joined, rel_path, start_ln, end_ln)
                 if d is not None:
                     result.defines.append(d)
+            if active_proc is not None:
+                if directive in ("if", "ifdef", "ifndef"):
+                    proc_ifdef_depth += 1
+                    active_proc_last_line = end_ln
+                elif directive in ("elif", "else") and proc_ifdef_depth > 0:
+                    active_proc_last_line = end_ln
+                elif directive == "endif" and proc_ifdef_depth > 0:
+                    proc_ifdef_depth -= 1
+                    active_proc_last_line = end_ln
             prev_nonempty_line = end_ln
             i = j + 1
             continue
@@ -807,9 +838,8 @@ def parse_dm_file(rel_path: str, text: str) -> ParsedDmFile:
             s.startswith("var/")
             or any(s.startswith(m + "/") for m in _VAR_MACRO_PREFIXES)
         )
-        if (cur_mode == "var" and cur_type is not None) or (
-            is_explicit_var_decl and cur_type is not None
-        ):
+        if (cur_mode == "var" and cur_type is not None) or is_explicit_var_decl:
+            var_owner = cur_type if cur_type is not None else "/"
             lhs = s[:eq_idx].strip() if eq_idx != -1 else s
             val = s[eq_idx + 1 :].strip() if eq_idx != -1 else None
             prefix = top.var_prefix if (top and cur_mode == "var") else ""
@@ -824,7 +854,7 @@ def parse_dm_file(rel_path: str, text: str) -> ParsedDmFile:
                     file=rel_path,
                     line=line_no,
                 )
-                result.vars_by_type.setdefault(cur_type, []).append(vdef)
+                result.vars_by_type.setdefault(var_owner, []).append(vdef)
                 if val is not None:
                     pdepth = _paren_delta(val)
                     if pdepth > 0 or val.endswith("\\"):
@@ -875,22 +905,28 @@ def parse_dm_file(rel_path: str, text: str) -> ParsedDmFile:
                 i += 1
                 continue
 
-            if cur_mode == "type" and cur_type is not None and _RE_REL_TYPE.match(s):
+            if _RE_REL_TYPE.match(s):
                 first_seg = s.split("/", 1)[0]
-                if first_seg not in _DM_KEYWORDS:
-                    tp = normalize_typepath(f"{cur_type}/{s}")
-                    _record_type(tp, line_no)
-                    stack.append(
-                        _StackEntry(
-                            indent=indent,
-                            typepath=tp,
-                            mode="type",
-                            var_prefix="",
-                            start_line=line_no,
+                if first_seg not in _DM_KEYWORDS and s not in _VAR_MACRO_PREFIXES:
+                    if cur_mode == "type" and cur_type is not None:
+                        tp = normalize_typepath(f"{cur_type}/{s}")
+                    elif cur_type is None and ("/" in s or first_seg in _DM_BUILTIN_ROOTS):
+                        tp = normalize_typepath(f"/{s}")
+                    else:
+                        tp = ""
+                    if tp:
+                        _record_type(tp, line_no)
+                        stack.append(
+                            _StackEntry(
+                                indent=indent,
+                                typepath=tp,
+                                mode="type",
+                                var_prefix="",
+                                start_line=line_no,
+                            )
                         )
-                    )
-                    i += 1
-                    continue
+                        i += 1
+                        continue
 
         i += 1
 

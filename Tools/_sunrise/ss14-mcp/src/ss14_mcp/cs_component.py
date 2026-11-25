@@ -196,12 +196,19 @@ def _split_attributes(attr_text: str) -> list[str]:
 def _find_matching_brace(text: str, open_idx: int) -> int:
     depth = 0
     in_str = False
+    in_verbatim = False
     in_char = False
     i = open_idx
     n = len(text)
     while i < n:
         ch = text[i]
-        if in_str:
+        if in_verbatim:
+            if ch == '"':
+                if i + 1 < n and text[i + 1] == '"':
+                    i += 2
+                    continue
+                in_verbatim = False
+        elif in_str:
             if ch == "\\" and i + 1 < n:
                 i += 2
                 continue
@@ -214,6 +221,14 @@ def _find_matching_brace(text: str, open_idx: int) -> int:
             if ch == "'":
                 in_char = False
         else:
+            if ch == "@" and i + 1 < n and text[i + 1] == '"':
+                in_verbatim = True
+                i += 2
+                continue
+            if ch == "$" and i + 2 < n and text[i + 1] == "@" and text[i + 2] == '"':
+                in_verbatim = True
+                i += 3
+                continue
             if ch == '"':
                 in_str = True
             elif ch == "'":
@@ -300,7 +315,11 @@ def _extract_default_value(tail: str) -> str | None:
                 and (idx + 1 >= n or stripped[idx + 1] != ">")
             ):
                 val = stripped[idx + 1 :].rstrip(";").strip()
-                return " ".join(val.split()) if val else None
+                if not val:
+                    return None
+                if "\n" not in val and "\r" not in val:
+                    return val
+                return " ".join(line.strip() for line in val.splitlines() if line.strip())
         idx += 1
     return None
 
@@ -315,6 +334,7 @@ def _parse_class_members(
     n = len(body)
     i = 0
     in_str = False
+    in_verbatim = False
     in_char = False
     pending_attrs: list[str] = []
     stmt_start: int | None = None
@@ -322,6 +342,14 @@ def _parse_class_members(
 
     while i < n:
         ch = body[i]
+        if in_verbatim:
+            if ch == '"':
+                if i + 1 < n and body[i + 1] == '"':
+                    i += 2
+                    continue
+                in_verbatim = False
+            i += 1
+            continue
         if in_str:
             if ch == "\\" and i + 1 < n:
                 i += 2
@@ -339,6 +367,14 @@ def _parse_class_members(
             i += 1
             continue
 
+        if ch == "@" and i + 1 < n and body[i + 1] == '"':
+            in_verbatim = True
+            i += 2
+            continue
+        if ch == "$" and i + 2 < n and body[i + 1] == "@" and body[i + 2] == '"':
+            in_verbatim = True
+            i += 3
+            continue
         if ch == '"':
             in_str = True
             i += 1
@@ -625,9 +661,9 @@ class ComponentIndex:
             self._file_fragments.pop(rel, None)
 
         for rel, path, sig in changed:
-            self._file_stats[rel] = sig
             try:
                 self._file_fragments[rel] = _parse_cs_file(path, rel)
+                self._file_stats[rel] = sig
             except OSError:
                 self._file_fragments[rel] = []
 

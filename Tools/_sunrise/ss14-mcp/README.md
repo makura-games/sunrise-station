@@ -19,7 +19,7 @@
 После `git clone` достаточно иметь установленный [`uv`](https://docs.astral.sh/uv/) — проектные конфиги уже лежат в репозитории и не требуют ручной правки глобального `mcp_config`:
 
 - **Antigravity:** workspace-плагин `.agents/plugins/ss14-sunrise/` (`plugin.json` + `mcp_config.json`, включён по умолчанию).
-- **Codex (CLI / IDE):** `.codex/config.toml` (подхватывается автоматически после добавления репозитория в доверенные проекты).
+- **Codex (CLI / IDE):** `.codex/config.toml` (подхватывается автоматически при запуске из корня доверенного репозитория).
 - **Claude Code:** `.mcp.json` в корне репозитория.
 - **Cursor:** `.cursor/mcp.json`.
 
@@ -108,5 +108,6 @@ python3 -m venv .venv
 ## Запуск тестов
 
 ```powershell
-.\.venv\Scripts\pytest.exe -v
+uv --directory Tools/_sunrise/ss14-mcp run --extra dev pytest -v
 ```
+*(Если используете `.venv` из Варианта 3: `.\.venv\Scripts\pytest.exe -v`.)*

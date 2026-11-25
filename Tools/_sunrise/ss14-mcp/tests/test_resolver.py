@@ -18,7 +18,12 @@ def _make_mini_repo(tmp_path: Path) -> Path:
 
 
 def test_c_loader_active() -> None:
-    assert USING_C_LOADER is True
+    import yaml
+
+    if hasattr(yaml, "CSafeLoader"):
+        assert USING_C_LOADER is True
+    else:
+        assert USING_C_LOADER is False
 
 
 def test_yaml_custom_tags_and_lines() -> None:
@@ -223,17 +228,13 @@ def test_real_repo_smoke_prototypes() -> None:
     idx = ProtoIndex(repo)
     resolver = PrototypeResolver(idx)
 
-    # SheetBrass has a _Sunrise/Partial patch adding Tag SunriseClockworkBrassSheet
-    brass = resolver.resolve_prototype("SheetBrass")
-    assert "error" not in brass
-    assert any("_Sunrise/Partial" in p for p in brass["partials_applied"])
-    comps = {c["type"]: c for c in brass["components"]}
-    assert "RadialBuilderMaterial" in comps
-    assert "SunriseClockworkBrassSheet" in comps["Tag"]["tags"]
-    assert any(
-        "Tag.tags overrides parent values" in w and "partial" in w.lower()
-        for w in brass["warnings"]
-    )
+    # AirAlarm exists on master and has a _Sunrise/Partial patch + Tag.tags override warning
+    alarm = resolver.resolve_prototype("AirAlarm")
+    assert "error" not in alarm
+    assert any("_Sunrise/Partial" in p for p in alarm["partials_applied"])
+    comps = {c["type"]: c for c in alarm["components"]}
+    assert "AirAlarm" in comps["Tag"]["tags"]
+    assert any("Tag.tags overrides parent values" in w for w in alarm["warnings"])
 
     # BaseBorgChassisNT has multiple inheritance [BaseBorgChassis, BaseBorgTransponder]
     borg = resolver.resolve_prototype("BaseBorgChassisNT")
@@ -257,10 +258,10 @@ def test_real_repo_smoke_prototypes() -> None:
     air_comps = {c["type"]: c for c in airlock["components"]}
     assert "layers" not in air_comps["Sprite"]
 
-    # Query by Sunrise tag
-    q = resolver.query_prototypes(tag="SunriseClockworkBrassSheet", limit=10)
+    # Query by tag present on master
+    q = resolver.query_prototypes(tag="AirAlarm", limit=10)
     assert q["total_matched"] >= 1
-    assert any(item["id"] == "SheetBrass" for item in q["items"])
+    assert any(item["id"] == "AirAlarm" for item in q["items"])
 
 
 def test_find_repo_root_cwd_and_outside_fallback(tmp_path: Path, monkeypatch) -> None:
@@ -276,3 +277,70 @@ def test_find_repo_root_cwd_and_outside_fallback(tmp_path: Path, monkeypatch) ->
     outside.mkdir()
     monkeypatch.chdir(outside)
     assert find_repo_root() == expected
+
+
+def test_first_parent_wins_categories_partial_parent_and_numeric_remove(tmp_path: Path) -> None:
+    repo = _make_mini_repo(tmp_path)
+    (repo / "Resources" / "Prototypes" / "items.yml").write_text(
+        """
+- type: entity
+  id: BaseFirst
+  abstract: true
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    state: first_state
+  - type: Numerical
+    values: [1, 2, 3]
+
+- type: entity
+  id: BaseSecond
+  abstract: true
+  components:
+  - type: Sprite
+    state: second_state
+    sprite: second.rsi
+
+- type: entity
+  id: BaseAlt
+  abstract: true
+  components:
+  - type: AltMarker
+
+- type: entity
+  id: ChildProto
+  parent: [BaseFirst, BaseSecond]
+""",
+        encoding="utf-8",
+    )
+    (repo / "Resources" / "Prototypes" / "_Sunrise" / "Partial" / "p.yml").write_text(
+        """
+- type: !PartialOnly entity
+  id: ChildProto
+  parent: [BaseFirst, BaseAlt]
+  components:
+  - type: Numerical
+    values:
+    - !Remove 2
+  - type: FreshList
+    items:
+    - !Index:0 first
+    - !Index:0 zero
+""",
+        encoding="utf-8",
+    )
+
+    resolver = PrototypeResolver(ProtoIndex(repo))
+    res = resolver.resolve_prototype("ChildProto")
+    assert "error" not in res
+    # categories is NeverPushInheritance -> not inherited from BaseFirst
+    assert "categories" not in res["fields"]
+    comps = {c["type"]: c for c in res["components"]}
+    # First parent (BaseFirst) wins over BaseSecond for Sprite.state
+    assert comps["Sprite"]["state"] == "first_state"
+    # Partial parent override brings in BaseAlt
+    assert "AltMarker" in comps
+    # !Remove 2 matches int 2
+    assert comps["Numerical"]["values"] == [1, 3]
+    # !Index:0 on new list builds ["zero", "first"]
+    assert comps["FreshList"]["items"] == ["zero", "first"]

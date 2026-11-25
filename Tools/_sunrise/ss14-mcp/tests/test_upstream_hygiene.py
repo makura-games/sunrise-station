@@ -61,9 +61,36 @@ def test_upstream_hygiene_markers_and_base_ref(tmp_path: Path) -> None:
     assert res_md["counts"]["untracked_other"] == 2
     assert set(res_md["untracked_other"]) == {"notes.md", "meta.json"}
 
-    # 5. Invalid base_ref returns error
+    # 5. Invalid base_ref (and blob ref) returns error
     res_err = check_upstream_hygiene(tmp_path, base_ref="nonexistent-ref-12345")
     assert "error" in res_err
+    res_blob = check_upstream_hygiene(tmp_path, base_ref="HEAD:Content.Server/Vanilla.cs")
+    assert "error" in res_blob
+
+    # 6. Edit inside an existing Sunrise edit start/end block in a committed file passes
+    subprocess.run(["git", "add", "."], cwd=tmp_path, check=True, capture_output=True)
+    subprocess.run(["git", "commit", "-m", "markers"], cwd=tmp_path, check=True, capture_output=True)
+    (tmp_path / "Content.Server" / "Vanilla.cs").write_text(
+        "// Sunrise edit start - тест\nclass Vanilla { int x = 2; }\n// Sunrise edit end\n",
+        encoding="utf-8",
+    )
+    subprocess.run(["git", "add", "Content.Server/Vanilla.cs"], cwd=tmp_path, check=True, capture_output=True)
+    subprocess.run(["git", "commit", "-m", "block"], cwd=tmp_path, check=True, capture_output=True)
+    (tmp_path / "Content.Server" / "Vanilla.cs").write_text(
+        "// Sunrise edit start - тест\nclass Vanilla { int x = 3; }\n// Sunrise edit end\n",
+        encoding="utf-8",
+    )
+    res_block = check_upstream_hygiene(tmp_path)
+    assert res_block["ok"] is True
+
+    # 7. Out-of-order end before start is caught as unclosed_blocks
+    (tmp_path / "Content.Server" / "Vanilla.cs").write_text(
+        "// Sunrise edit end\n// Sunrise edit start - тест\nclass Vanilla { int x = 4; }\n",
+        encoding="utf-8",
+    )
+    res_unclosed = check_upstream_hygiene(tmp_path)
+    assert res_unclosed["ok"] is False
+    assert res_unclosed["counts"]["unclosed_marker_blocks"] >= 1
 
 
 def test_real_repo_smoke_hygiene() -> None:

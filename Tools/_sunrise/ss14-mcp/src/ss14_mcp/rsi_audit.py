@@ -46,6 +46,10 @@ def _resolve_asset_path(
             continue
         ci = resolve_case_insensitive_path(repo_root, cand)
         if ci is not None and ci.exists():
+            try:
+                ci.resolve().relative_to(repo_root.resolve())
+            except ValueError:
+                continue
             return ci
     return None
 
@@ -241,12 +245,33 @@ def audit_rsi(
             "rsi_path": to_posix_rel(resolved_rsi, repo_root),
         }
 
+    if not isinstance(meta, dict):
+        return {
+            "error": "meta.json root must be a JSON object.",
+            "rsi_path": to_posix_rel(resolved_rsi, repo_root),
+        }
+
+    def _safe_int(val: Any, default: int = 0) -> int | None:
+        if val is None or isinstance(val, bool):
+            return default
+        try:
+            return int(val)
+        except (TypeError, ValueError):
+            return None
+
     issues: list[str] = []
-    size_obj = meta.get("size") or {}
-    size_x = int(size_obj.get("x", 0) or 0)
-    size_y = int(size_obj.get("y", 0) or 0)
-    if size_x <= 0 or size_y <= 0:
+    size_obj = meta.get("size")
+    if not isinstance(size_obj, dict):
         issues.append(f"Invalid RSI size: {size_obj!r}")
+        size_x = 0
+        size_y = 0
+    else:
+        parsed_x = _safe_int(size_obj.get("x", 0), 0)
+        parsed_y = _safe_int(size_obj.get("y", 0), 0)
+        size_x = parsed_x if parsed_x is not None else 0
+        size_y = parsed_y if parsed_y is not None else 0
+        if parsed_x is None or parsed_y is None or size_x <= 0 or size_y <= 0:
+            issues.append(f"Invalid RSI size: {size_obj!r}")
 
     states_raw = meta.get("states") or []
     if not isinstance(states_raw, list):
@@ -262,7 +287,12 @@ def audit_rsi(
             issues.append(f"Malformed state entry: {state!r}")
             continue
         name = str(state["name"])
-        directions = int(state.get("directions", 1) or 1)
+        parsed_dirs = _safe_int(state.get("directions", 1), 1)
+        if parsed_dirs is None or parsed_dirs <= 0:
+            issues.append(f"State '{name}': invalid directions {state.get('directions')!r}.")
+            directions = 1
+        else:
+            directions = parsed_dirs
         delays = state.get("delays")
 
         expected_slots = directions
@@ -428,11 +458,16 @@ def audit_rsi(
             if _match_attribution(resolved_rsi, attr_path, entries) is not None:
                 rsi_entry_matched = True
             else:
-                for st in states_out:
-                    st_png = resolved_rsi / f"{st['name']}.png"
-                    if _match_attribution(st_png, attr_path, entries) is not None:
-                        rsi_entry_matched = True
-                        break
+                existing_pngs = [
+                    resolved_rsi / f"{st['name']}.png"
+                    for st in states_out
+                    if st.get("exists")
+                ]
+                if existing_pngs:
+                    rsi_entry_matched = all(
+                        _match_attribution(st_png, attr_path, entries) is not None
+                        for st_png in existing_pngs
+                    )
 
         attributions_info = {
             "meta_license": meta_license,

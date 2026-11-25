@@ -89,10 +89,10 @@ class FtlIndex:
                     stats.pop(rel, None)
                     file_keys.pop(rel, None)
                 for rel, p, sig in changed:
-                    stats[rel] = sig
                     try:
                         text = p.read_text(encoding="utf-8-sig", errors="replace")
                         file_keys[rel] = _FTL_KEY_RE.findall(text)
+                        stats[rel] = sig
                     except OSError:
                         file_keys[rel] = []
 
@@ -180,6 +180,10 @@ def _collect_cs_loc_keys(
     target = resolve_case_insensitive_path(repo_root, cleaned)
     if target is None or not target.exists():
         return None, {}
+    try:
+        target.resolve().relative_to(repo_root.resolve())
+    except ValueError:
+        return None, {}
 
     cs_files: list[Path] = []
     if target.is_file():
@@ -207,10 +211,10 @@ def _collect_cs_loc_keys(
             text = cs_file.read_text(encoding="utf-8-sig", errors="replace")
         except OSError:
             continue
-        for idx, line in enumerate(text.splitlines(), start=1):
-            for match in _LOC_CALL_RE.finditer(line):
-                loc_key = match.group(1)
-                key_locations.setdefault(loc_key, []).append(f"{rel}:{idx}")
+        for match in _LOC_CALL_RE.finditer(text):
+            loc_key = match.group(1)
+            line_no = text.count("\n", 0, match.start()) + 1
+            key_locations.setdefault(loc_key, []).append(f"{rel}:{line_no}")
     return target, key_locations
 
 

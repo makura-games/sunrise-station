@@ -10,6 +10,7 @@ from typing import Any
 from .proto_index import ProtoIndex, PrototypeRecord
 
 _RESERVED_TOP_KEYS = {"type", "id", "parent", "abstract", "components"}
+_NON_INHERITED_TOP_KEYS = {"categories"}
 
 
 @dataclass(slots=True)
@@ -47,6 +48,10 @@ def _strip_op_wrappers(val: Any) -> Any:
             return _strip_op_wrappers(val.get("__value__"))
         return {k: _strip_op_wrappers(v) for k, v in val.items()}
     if isinstance(val, list):
+        if _contains_partial_list_ops(val):
+            out_list: list[Any] = []
+            _apply_list_patch(out_list, val)
+            return out_list
         return [_strip_op_wrappers(item) for item in val if not _is_op(item, "remove")]
     return copy.deepcopy(val)
 
@@ -209,6 +214,14 @@ class PrototypeResolver:
                     break
         return matches
 
+    def _effective_parents(self, rec: PrototypeRecord) -> list[str]:
+        """Return effective parent list for a record, respecting partial parent overrides."""
+        parents = list(rec.parents)
+        for partial_rec in self.index.partials.get((rec.proto_type, rec.proto_id), ()):
+            if "parent" in partial_rec.raw:
+                parents = list(partial_rec.parents)
+        return parents
+
     def _collect_merge_order(
         self,
         proto_type: str,
@@ -228,7 +241,8 @@ class PrototypeResolver:
             return
 
         visiting.add(proto_id)
-        for parent_id in rec.parents:
+        # First parent wins in SS14: merge later parents first so earlier parents override them.
+        for parent_id in reversed(self._effective_parents(rec)):
             self._collect_merge_order(
                 proto_type, parent_id, visiting, visited, order, missing_parents
             )
@@ -268,6 +282,7 @@ class PrototypeResolver:
             warnings.append(f"Missing parent prototype '{mp}' (type={proto_type})")
 
         for rec in order:
+            is_target = rec.proto_id == root_rec.proto_id
             self._apply_record(
                 rec,
                 components_by_type,
@@ -275,6 +290,7 @@ class PrototypeResolver:
                 fields,
                 warnings,
                 is_partial=False,
+                is_target=is_target,
             )
             for partial_rec in self.index.partials.get(
                 (rec.proto_type, rec.proto_id), []
@@ -287,6 +303,7 @@ class PrototypeResolver:
                     fields,
                     warnings,
                     is_partial=True,
+                    is_target=is_target,
                 )
 
         # Deduplicate warnings preserving order.
@@ -311,10 +328,13 @@ class PrototypeResolver:
         warnings: list[str],
         *,
         is_partial: bool,
+        is_target: bool = True,
     ) -> None:
         loc = f"{rec.file}:{rec.line}"
         for key, val in rec.raw.items():
             if key in _RESERVED_TOP_KEYS:
+                continue
+            if not is_target and key in _NON_INHERITED_TOP_KEYS:
                 continue
             if _is_op(val, "remove") and val.get("__value__") is None:
                 fields.pop(key, None)
@@ -593,9 +613,11 @@ class PrototypeResolver:
         }
 
         if direction in ("up", "both"):
+            up_counter = {"count": 0, "truncated": False}
             result["ancestors"] = self._build_up_tree(
-                proto_type, proto_id, clamped_depth, set()
+                proto_type, proto_id, clamped_depth, set(), up_counter, max_nodes=200
             )
+            result["ancestors_truncated"] = up_counter["truncated"]
 
         if direction in ("down", "both"):
             counter = {"count": 0, "truncated": False}
@@ -612,6 +634,8 @@ class PrototypeResolver:
         proto_id: str,
         remaining_depth: int,
         visiting: set[str],
+        counter: dict[str, Any],
+        max_nodes: int,
     ) -> list[dict[str, Any]]:
         if remaining_depth <= 0 or proto_id in visiting:
             return []
@@ -621,7 +645,11 @@ class PrototypeResolver:
 
         visiting.add(proto_id)
         nodes: list[dict[str, Any]] = []
-        for parent_id in rec.parents:
+        for parent_id in self._effective_parents(rec):
+            if counter["count"] >= max_nodes:
+                counter["truncated"] = True
+                break
+            counter["count"] += 1
             p_rec = self.index.definitions.get((proto_type, parent_id))
             if p_rec is None:
                 nodes.append({"id": parent_id, "missing": True})
@@ -631,9 +659,14 @@ class PrototypeResolver:
                 "abstract": p_rec.abstract,
                 "source": f"{p_rec.file}:{p_rec.line}",
             }
-            if remaining_depth > 1 and p_rec.parents:
+            if remaining_depth > 1 and self._effective_parents(p_rec):
                 node["parents"] = self._build_up_tree(
-                    proto_type, p_rec.proto_id, remaining_depth - 1, visiting
+                    proto_type,
+                    p_rec.proto_id,
+                    remaining_depth - 1,
+                    visiting,
+                    counter,
+                    max_nodes,
                 )
             nodes.append(node)
         visiting.remove(proto_id)

@@ -61,24 +61,30 @@ def _scan_markers(text: str) -> dict[str, Any]:
     end_count = 0
     legacy_start = 0
     legacy_end = 0
+    open_standard = 0
+    open_legacy = 0
 
     for line in lines:
         if _MARKER_LINE_RE.search(line):
             inline_count += 1
         if _MARKER_START_RE.search(line):
             start_count += 1
+            open_standard += 1
         if _MARKER_END_RE.search(line):
             end_count += 1
+            if open_standard > 0:
+                open_standard -= 1
         if _LEGACY_START_RE.search(line):
             legacy_start += 1
+            open_legacy += 1
         if _LEGACY_END_RE.search(line):
             legacy_end += 1
+            if open_legacy > 0:
+                open_legacy -= 1
 
     has_standard_marker = (inline_count > 0) or (start_count > 0)
     has_legacy_marker = legacy_start > 0
-    unclosed_blocks = max(0, start_count - end_count) + max(
-        0, legacy_start - legacy_end
-    )
+    unclosed_blocks = open_standard + open_legacy
 
     return {
         "has_marker": has_standard_marker or has_legacy_marker,
@@ -91,9 +97,9 @@ def _scan_markers(text: str) -> dict[str, Any]:
     }
 
 
-def _extract_added_diff_lines(
+def _extract_added_diff_info(
     repo_root: Path, rel_path: str, base_ref: str | None
-) -> str:
+) -> tuple[str, list[int]]:
     if base_ref:
         res = _run_git(repo_root, ["diff", "--unified=0", base_ref, "--", rel_path])
         text = res.stdout
@@ -105,12 +111,44 @@ def _extract_added_diff_lines(
         text = f"{res_u.stdout}\n{res_s.stdout}"
 
     added: list[str] = []
+    added_lines: list[int] = []
+    curr_new_line = 0
+    in_hunk = False
+    hunk_re = re.compile(r"^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@")
+
     for line in text.splitlines():
+        hm = hunk_re.match(line)
+        if hm:
+            curr_new_line = int(hm.group(1))
+            in_hunk = True
+            continue
         if line.startswith("+++") or line.startswith("---"):
+            in_hunk = False
             continue
         if line.startswith("+"):
             added.append(line[1:])
-    return "\n".join(added)
+            if in_hunk:
+                added_lines.append(curr_new_line)
+                curr_new_line += 1
+    return "\n".join(added), added_lines
+
+
+def _line_ranges_of_marker_blocks(text: str) -> list[tuple[int, int]]:
+    """Return 1-based inclusive (start, end) line ranges for Sunrise edit/added blocks."""
+    ranges: list[tuple[int, int]] = []
+    std_stack: list[int] = []
+    leg_stack: list[int] = []
+    lines = text.splitlines()
+    for idx, line in enumerate(lines, start=1):
+        if _MARKER_START_RE.search(line):
+            std_stack.append(idx)
+        elif _MARKER_END_RE.search(line) and std_stack:
+            ranges.append((std_stack.pop(), idx))
+        if _LEGACY_START_RE.search(line):
+            leg_stack.append(idx)
+        elif _LEGACY_END_RE.search(line) and leg_stack:
+            ranges.append((leg_stack.pop(), idx))
+    return ranges
 
 
 def check_upstream_hygiene(
@@ -126,12 +164,16 @@ def check_upstream_hygiene(
     changed: list[tuple[str, str]] = []  # (status, rel_path)
 
     if base_ref:
-        verify = _run_git(repo_root, ["rev-parse", "--verify", base_ref])
+        verify = _run_git(repo_root, ["rev-parse", "--verify", f"{base_ref}^{{tree}}"])
         if verify.returncode != 0:
             return {
                 "error": f"Invalid base_ref '{base_ref}': {verify.stderr.strip()}"
             }
         diff_res = _run_git(repo_root, ["diff", "--name-status", "-z", base_ref])
+        if diff_res.returncode != 0:
+            return {
+                "error": f"git diff failed for base_ref '{base_ref}': {diff_res.stderr.strip()}"
+            }
         tokens = [t for t in diff_res.stdout.split("\0") if t]
         idx = 0
         while idx < len(tokens):
@@ -148,11 +190,21 @@ def check_upstream_hygiene(
         untracked = _run_git(
             repo_root, ["ls-files", "--others", "--exclude-standard", "-z"]
         )
+        if untracked.returncode != 0:
+            return {
+                "error": f"git ls-files failed: {untracked.stderr.strip()}"
+            }
         for rel in untracked.stdout.split("\0"):
             if rel:
                 changed.append(("??", rel))
     else:
-        st_res = _run_git(repo_root, ["status", "--porcelain=v1", "-z"])
+        st_res = _run_git(
+            repo_root, ["status", "--porcelain=v1", "--untracked-files=all", "-z"]
+        )
+        if st_res.returncode != 0:
+            return {
+                "error": f"git status failed: {st_res.stderr.strip()}"
+            }
         entries = st_res.stdout.split("\0")
         i = 0
         while i < len(entries):
@@ -160,10 +212,11 @@ def check_upstream_hygiene(
             if not entry or len(entry) < 4:
                 i += 1
                 continue
-            status = entry[:2].strip() or "M"
+            status_raw = entry[:2]
+            status = status_raw.strip() or "M"
             rel_path = entry[3:]
-            if status.startswith("R") and i + 1 < len(entries):
-                rel_path = entries[i + 1]
+            if ("R" in status_raw or "C" in status_raw) and i + 1 < len(entries):
+                # In porcelain v1 -z, entry[3:] is the destination path; next token is the source.
                 i += 2
             else:
                 i += 1
@@ -224,8 +277,25 @@ def check_upstream_hygiene(
                     content = ""
                 marker_info = _scan_markers(content)
             else:
-                diff_added = _extract_added_diff_lines(repo_root, rel_path, base_ref)
+                diff_added, added_lines = _extract_added_diff_info(
+                    repo_root, rel_path, base_ref
+                )
                 marker_info = _scan_markers(diff_added)
+                if not marker_info["has_marker"] and added_lines:
+                    file_path = repo_root / rel_path
+                    try:
+                        file_content = file_path.read_text(
+                            encoding="utf-8-sig", errors="replace"
+                        )
+                    except OSError:
+                        file_content = ""
+                    block_ranges = _line_ranges_of_marker_blocks(file_content)
+                    if block_ranges and all(
+                        any(start <= ln <= end for start, end in block_ranges)
+                        for ln in added_lines
+                    ):
+                        marker_info["has_marker"] = True
+                        marker_info["has_standard_marker"] = True
 
             if not marker_info["has_marker"]:
                 counts["unmarked_outside_sunrise"] += 1

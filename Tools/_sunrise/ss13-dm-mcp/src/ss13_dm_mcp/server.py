@@ -36,24 +36,32 @@ class ServerContext:
         self._dm_indices.clear()
         self._dmi_inspectors.clear()
 
-    def get_dm_index(self, repo: str | None = None) -> DmIndex:
+    def get_dm_index(self, repo: str | None = None) -> tuple[str, DmIndex]:
         name, root = self.config.resolve(repo)
         idx = self._dm_indices.get(root)
         if idx is None:
             idx = DmIndex(root, repo_name=name)
             self._dm_indices[root] = idx
-        return idx
+        return name, idx
 
-    def get_dmi_inspector(self, repo: str | None = None) -> DmiInspector:
+    def get_dmi_inspector(self, repo: str | None = None) -> tuple[str, DmiInspector]:
         name, root = self.config.resolve(repo)
         insp = self._dmi_inspectors.get(root)
         if insp is None:
             insp = DmiInspector(root, repo_name=name)
             self._dmi_inspectors[root] = insp
-        return insp
+        return name, insp
 
 
 _CTX = ServerContext()
+
+
+def _with_repo_name(result: dict[str, Any], repo_name: str) -> dict[str, Any]:
+    if result.get("repo") == repo_name:
+        return result
+    updated = dict(result)
+    updated["repo"] = repo_name
+    return updated
 
 
 @mcp.tool()
@@ -65,10 +73,14 @@ def dm_get_type(
 ) -> dict[str, Any]:
     """Inspect a DM typepath: all definition locations, resolved vars, and proc/verb signatures."""
     try:
-        return _CTX.get_dm_index(repo).get_type(
-            typepath=typepath,
-            include_inherited=include_inherited,
-            filter_prefix=filter_prefix,
+        name, idx = _CTX.get_dm_index(repo)
+        return _with_repo_name(
+            idx.get_type(
+                typepath=typepath,
+                include_inherited=include_inherited,
+                filter_prefix=filter_prefix,
+            ),
+            name,
         )
     except ValueError as exc:
         return {"error": str(exc)}
@@ -83,10 +95,14 @@ def dm_get_proc(
 ) -> dict[str, Any]:
     """Return exact source code of a DM proc/verb (and optionally parent ..() implementations)."""
     try:
-        return _CTX.get_dm_index(repo).get_proc(
-            typepath=typepath,
-            proc_name=proc_name,
-            include_parents=include_parents,
+        name, idx = _CTX.get_dm_index(repo)
+        return _with_repo_name(
+            idx.get_proc(
+                typepath=typepath,
+                proc_name=proc_name,
+                include_parents=include_parents,
+            ),
+            name,
         )
     except ValueError as exc:
         return {"error": str(exc)}
@@ -100,7 +116,8 @@ def dm_search_defines(
 ) -> dict[str, Any]:
     """Search #define macros by name with file and line numbers."""
     try:
-        return _CTX.get_dm_index(repo).search_defines(query=query, limit=limit)
+        name, idx = _CTX.get_dm_index(repo)
+        return _with_repo_name(idx.search_defines(query=query, limit=limit), name)
     except ValueError as exc:
         return {"error": str(exc)}
 
@@ -114,10 +131,14 @@ def dm_search_code(
 ) -> dict[str, Any]:
     """Fast regex search across .dm files returning file:line, enclosing type/proc, and context."""
     try:
-        return _CTX.get_dm_index(repo).search_code(
-            pattern=pattern,
-            subpath=subpath,
-            limit=limit,
+        name, idx = _CTX.get_dm_index(repo)
+        return _with_repo_name(
+            idx.search_code(
+                pattern=pattern,
+                subpath=subpath,
+                limit=limit,
+            ),
+            name,
         )
     except ValueError as exc:
         return {"error": str(exc)}
@@ -132,10 +153,14 @@ def dmi_inspect(
 ) -> dict[str, Any]:
     """Inspect a BYOND .dmi spritesheet's zTXt metadata and optionally SHA256 hashes of states/frames."""
     try:
-        return _CTX.get_dmi_inspector(repo).inspect(
-            dmi_path=dmi_path,
-            state=state,
-            include_frame_hashes=include_frame_hashes,
+        name, insp = _CTX.get_dmi_inspector(repo)
+        return _with_repo_name(
+            insp.inspect(
+                dmi_path=dmi_path,
+                state=state,
+                include_frame_hashes=include_frame_hashes,
+            ),
+            name,
         )
     except ValueError as exc:
         return {"error": str(exc)}

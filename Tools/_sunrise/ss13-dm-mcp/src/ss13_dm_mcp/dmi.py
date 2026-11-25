@@ -177,7 +177,7 @@ class DmiInspector:
     def __init__(self, repo_root: Path, repo_name: str = "default") -> None:
         self.repo_root = repo_root
         self.repo_name = repo_name
-        self._cache: dict[str, tuple[tuple[int, int], dict[str, Any]]] = {}
+        self._cache: dict[tuple[str, str | None, bool], tuple[tuple[int, int], dict[str, Any]]] = {}
 
     def inspect(
         self,
@@ -197,7 +197,7 @@ class DmiInspector:
 
         st = resolved.stat()
         sig = (st.st_mtime_ns, st.st_size)
-        cache_key = f"{rel_path}|{state or ''}|{int(include_frame_hashes)}"
+        cache_key = (rel_path, state, include_frame_hashes)
         cached = self._cache.get(cache_key)
         if cached is not None and cached[0] == sig:
             return cached[1]

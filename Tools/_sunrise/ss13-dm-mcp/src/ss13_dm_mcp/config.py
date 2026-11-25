@@ -14,40 +14,64 @@ class RepoConfig:
     """Configured SS13 build repositories."""
 
     default_name: str | None
+    default_path: Path | None
     repos: dict[str, Path]
     _lower_map: dict[str, str]
 
-    def __init__(self, default_name: str | None, repos: dict[str, Path]) -> None:
+    def __init__(
+        self,
+        default_name: str | None,
+        repos: dict[str, Path],
+        default_path: Path | None = None,
+    ) -> None:
         self.default_name = default_name
+        self.default_path = default_path
         self.repos = dict(repos)
         self._lower_map = {k.lower(): k for k in self.repos}
 
     def resolve(self, repo: str | None = None) -> tuple[str, Path]:
         """Resolve a repository name (or default) to (canonical_name, root_path)."""
-        if not self.repos:
+        if not self.repos and self.default_path is None:
             raise ValueError(
                 "No SS13 repository configured. Set SS13_REPO_PATH or SS13_REPOS."
             )
 
         if repo is None or not repo.strip():
-            key = self.default_name
-            if key is None:
+            if self.default_name is not None and self.default_name in self.repos:
+                key = self.default_name
+                root = self.repos[key]
+            elif self.default_path is not None:
+                key = "default"
+                root = self.default_path
+            else:
                 key = next(iter(self.repos))
+                root = self.repos[key]
         else:
             req = repo.strip()
             if req in self.repos:
                 key = req
+                root = self.repos[key]
             elif req.lower() in self._lower_map:
                 key = self._lower_map[req.lower()]
-            elif req.lower() == "default" and self.default_name is not None:
-                key = self.default_name
+                root = self.repos[key]
+            elif req.lower() == "default":
+                if self.default_name is not None and self.default_name in self.repos:
+                    key = self.default_name
+                    root = self.repos[key]
+                elif self.default_path is not None:
+                    key = "default"
+                    root = self.default_path
+                else:
+                    available = ", ".join(sorted(self.repos.keys()))
+                    raise ValueError(
+                        f"Unknown SS13 repository '{req}'. Configured repos: [{available}]."
+                    )
             else:
                 available = ", ".join(sorted(self.repos.keys()))
                 raise ValueError(
                     f"Unknown SS13 repository '{req}'. Configured repos: [{available}]."
                 )
 
-        root = self.repos[key]
         if not root.is_dir():
             raise ValueError(
                 f"Configured SS13 repository '{key}' path does not exist or is not a directory: {root}"
@@ -78,23 +102,27 @@ def load_repo_config(env: Mapping[str, str] | None = None) -> RepoConfig:
             repos[name.strip()] = Path(path_val.strip()).expanduser().resolve()
 
     default_name: str | None = None
+    default_path: Path | None = None
     raw_default = source.get("SS13_REPO_PATH", "").strip()
     if raw_default:
-        default_path = Path(raw_default).expanduser().resolve()
+        resolved_default = Path(raw_default).expanduser().resolve()
         matched_name: str | None = None
         for name, existing_path in repos.items():
-            if existing_path == default_path:
+            if existing_path == resolved_default:
                 matched_name = name
                 break
         if matched_name is not None:
             default_name = matched_name
-        else:
-            repos["default"] = default_path
+        elif "default" not in repos:
+            repos["default"] = resolved_default
             default_name = "default"
+        else:
+            # Preserve explicit SS13_REPOS["default"]; keep SS13_REPO_PATH as unnamed default_path
+            default_path = resolved_default
     elif repos:
         default_name = "default" if "default" in repos else next(iter(repos))
 
-    return RepoConfig(default_name=default_name, repos=repos)
+    return RepoConfig(default_name=default_name, repos=repos, default_path=default_path)
 
 
 def to_posix_rel(path: Path, repo_root: Path) -> str:

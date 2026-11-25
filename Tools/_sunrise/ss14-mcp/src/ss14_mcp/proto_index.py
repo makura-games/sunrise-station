@@ -104,24 +104,29 @@ class ProtoIndex:
             self.parse_errors.pop(rel, None)
 
         for rel, path, stat_sig in changed:
-            self._file_stats[rel] = stat_sig
-            self._parse_file(rel, path)
+            if self._parse_file(rel, path):
+                self._file_stats[rel] = stat_sig
 
         self._rebuild_indices()
         self._initialized = True
         self.generation += 1
         return True
 
-    def _parse_file(self, rel_path: str, path: Path) -> None:
+    def _parse_file(self, rel_path: str, path: Path) -> bool:
         records: list[PrototypeRecord] = []
         is_partial_dir = "_sunrise/partial/" in rel_path.lower()
         try:
             text = path.read_text(encoding="utf-8-sig", errors="replace")
+        except OSError as exc:
+            self._file_records[rel_path] = []
+            self.parse_errors[rel_path] = str(exc)
+            return False
+        try:
             entries = load_yaml_entries_with_lines(text)
         except Exception as exc:
             self._file_records[rel_path] = []
             self.parse_errors[rel_path] = str(exc)
-            return
+            return True
 
         self.parse_errors.pop(rel_path, None)
         for line_no, entry in entries:
@@ -157,6 +162,7 @@ class ProtoIndex:
                 )
             )
         self._file_records[rel_path] = records
+        return True
 
     def _rebuild_indices(self) -> None:
         definitions: dict[tuple[str, str], PrototypeRecord] = {}
@@ -174,7 +180,11 @@ class ProtoIndex:
                     definitions[key] = rec
 
         for (proto_type, proto_id), rec in definitions.items():
-            for parent_id in rec.parents:
+            eff_parents = list(rec.parents)
+            for p_rec in partials.get((proto_type, proto_id), ()):
+                if "parent" in p_rec.raw:
+                    eff_parents = list(p_rec.parents)
+            for parent_id in eff_parents:
                 children_map[(proto_type, parent_id)].append(proto_id)
 
         self.definitions = definitions

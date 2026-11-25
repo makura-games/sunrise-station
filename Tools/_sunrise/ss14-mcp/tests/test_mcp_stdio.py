@@ -45,14 +45,14 @@ async def _run_stdio_smoke() -> None:
             assert expected.issubset(tool_names), f"Missing tools: {expected - tool_names}"
 
             r1 = _parse_tool_json(
-                await session.call_tool("ss14_resolve_prototype", {"proto_id": "SheetBrass"})
+                await session.call_tool("ss14_resolve_prototype", {"proto_id": "AirAlarm"})
             )
-            assert r1["id"] == "SheetBrass"
+            assert r1["id"] == "AirAlarm"
 
             r2 = _parse_tool_json(
                 await session.call_tool(
                     "ss14_query_prototypes",
-                    {"tag": "SunriseClockworkBrassSheet", "limit": 5},
+                    {"tag": "AirAlarm", "limit": 5},
                 )
             )
             assert r2["total_matched"] >= 1

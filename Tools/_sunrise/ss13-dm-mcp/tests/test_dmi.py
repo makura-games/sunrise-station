@@ -13,15 +13,17 @@ from PIL.PngImagePlugin import PngInfo
 
 from ss13_dm_mcp.dmi import DmiInspector
 
-def _get_ss13_repo() -> Path | None:
+def _get_paradise_repo() -> Path | None:
     raw = os.environ.get("SS13_REPO_PATH", "").strip()
     if not raw:
         return None
     p = Path(raw).expanduser().resolve()
-    return p if p.is_dir() else None
+    if not (p / "icons" / "obj" / "clockwork.dmi").is_file():
+        return None
+    return p
 
 
-_SS13_REPO = _get_ss13_repo()
+_PARADISE_REPO = _get_paradise_repo()
 
 
 def _make_synthetic_dmi(path: Path, *, duplicate_frames: bool = False) -> None:
@@ -108,6 +110,22 @@ def test_dmi_ztxt_slicing_hashes_and_mtime(tmp_path: Path) -> None:
     assert st2["all_frames_identical"] is True
     assert st2["unique_frame_hashes"] == 4
 
+    # Verify None vs "" cache key separation
+    empty_state_dmi = tmp_path / "icons" / "mob" / "empty_state.dmi"
+    img2 = Image.new("RGBA", (16, 8), (1, 2, 3, 255))
+    meta2 = PngInfo()
+    meta2.add_text(
+        "Description",
+        '# BEGIN DMI\nversion = 4.0\n\twidth = 8\n\theight = 8\nstate = ""\n\tdirs = 1\n\tframes = 1\nstate = "walk"\n\tdirs = 1\n\tframes = 1\n# END DMI\n',
+        zip=True,
+    )
+    img2.save(empty_state_dmi, "PNG", pnginfo=meta2)
+    res_all = insp.inspect("icons/mob/empty_state.dmi", state=None)
+    res_empty = insp.inspect("icons/mob/empty_state.dmi", state="")
+    assert res_all["states_returned"] == 2
+    assert res_empty["states_returned"] == 1
+    assert res_empty["states"][0]["name"] == ""
+
     # Missing state & path traversal
     missing = insp.inspect("icons/mob/test.dmi", state="nonexistent")
     assert "error" in missing
@@ -115,10 +133,10 @@ def test_dmi_ztxt_slicing_hashes_and_mtime(tmp_path: Path) -> None:
         insp.inspect("../../secret.dmi")
 
 
-@pytest.mark.skipif(_SS13_REPO is None, reason="Set SS13_REPO_PATH to run SS13 repo smoke tests")
+@pytest.mark.skipif(_PARADISE_REPO is None, reason="Set SS13_REPO_PATH to a Paradise build to run Paradise DMI smoke tests")
 def test_paradise_clockwork_dmi_smoke() -> None:
-    assert _SS13_REPO is not None
-    insp = DmiInspector(_SS13_REPO, repo_name="paradise")
+    assert _PARADISE_REPO is not None
+    insp = DmiInspector(_PARADISE_REPO, repo_name="paradise")
     res = insp.inspect("icons/obj/clockwork.dmi", state="clock_slab", include_frame_hashes=True)
     assert res["version"] == "4.0"
     assert res["width"] == 32
