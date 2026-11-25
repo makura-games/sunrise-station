@@ -29,13 +29,27 @@
 - Английские идентификаторы, имена типов, API, loc-key и маркеры не переводить.
 - Для `Sponsor*` в описаниях использовать термин **«спонсор»** (не `donor` / `donator`).
 
-## RIDER MCP
+## MCP-СЕРВЕРЫ
 
+Используй доступные в текущей сессии MCP-серверы вместо ручного shell/grep-поиска и чтения больших файлов целиком. Если какой-то опциональный MCP не подключён — работай обычными инструментами без попыток устанавливать или запускать его без запроса. Подробные сценарии, матрица выбора и аргументы — в скилле `ss14-mcp-workflows`.
+
+### Rider MCP
 При доступном Rider MCP всегда используй его вместо shell-аналогов:
 1. Навигация: `search_symbol`, `search_text`, `search_regex`, `search_file`, `list_directory_tree`.
 2. Анализ: `read_file`, `get_symbol_info`, `get_file_problems` (исправляй ошибки/предупреждения Rider в затронутых файлах, кроме ложных срабатываний на задуманный public API).
 3. Правки: `replace_text_in_file`, `rename_refactoring`, `reformat_file`.
 4. Запрещено: `execute_terminal_command`, `execute_run_configuration`, `get_run_configurations`, `get_project_modules`, `get_project_dependencies`.
+
+### `ss14-mcp` (командный read-only MCP в `Tools/_sunrise/ss14-mcp`)
+При доступности используй для анализа YAML-прототипов, `[DataField]` и пред-PR проверок:
+1. Прототипы и наследование: `ss14_resolve_prototype` (цепочка `parent` + `_Sunrise/Partial` + предупреждения о затирании списков родителя), `ss14_query_prototypes`, `ss14_get_inheritance_tree`.
+2. C#-компоненты: `ss14_inspect_component` (`[DataField]`, типы, дефолты, сетевые атрибуты).
+3. Аудит: `ss14_audit_rsi` (`meta.json`, PNG, дубли кадров, звуки, `attributions.yml`), `ss14_audit_ftl` (паритет `ru-RU` ↔ `en-US`, `ent-*`, `Loc.GetString`), `ss14_check_upstream_hygiene` (`git diff` вне `_Sunrise` и маркеры `Sunrise-Edit`).
+
+### `ss13-dm-mcp` (опциональный локальный read-only MCP для сборок SS13)
+При доступности (особенно при портировании фич из SS13) используй вместо ручного чтения `.dm` и `.dmi`:
+1. DM-код и макросы: `dm_get_type`, `dm_get_proc` (`include_parents=True` для цепочки `..()`), `dm_search_defines`, `dm_search_code`.
+2. Спрайтшиты `.dmi`: `dmi_inspect` (`zTXt`-метаданные + `include_frame_hashes=True` для сверки кадров/задержек с `ss14_audit_rsi`).
 
 ## ТЕСТИРОВАНИЕ
 
