@@ -1,0 +1,6 @@
+{
+  "name": "ss14-sunrise",
+  "displayName": "SS14 Sunrise MCP",
+  "description": "Read-only MCP server for Space Station 14 (sunrise-station) prototypes, components, RSI/FTL audits, and upstream hygiene.",
+  "version": "0.1.0"
+}

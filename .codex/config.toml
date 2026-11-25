@@ -1,0 +1,3 @@
+[mcp_servers.ss14-sunrise]
+command = "uv"
+args = ["--directory", "Tools/_sunrise/ss14-mcp", "run", "ss14-mcp"]
