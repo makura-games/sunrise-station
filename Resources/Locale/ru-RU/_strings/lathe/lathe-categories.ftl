@@ -8,4 +8,3 @@ lathe-category-mechs-gygax = Гигакс
 lathe-category-mechs-durand = Дюранд
 lathe-category-mechs-equipment = Оборудование механоидов
 lathe-category-mechs-weapons = Вооружение механоидов
-lathe-category-mechs-phazon = Фазон

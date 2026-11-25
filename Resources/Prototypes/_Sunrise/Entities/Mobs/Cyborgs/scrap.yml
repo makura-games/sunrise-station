@@ -1,0 +1,15 @@
+- type: entity
+  id: SunriseBorgScrapSpawner
+  parent: MarkerBase
+  name: destroyed cyborg salvage spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - ScrapSteel
+    rareChance: 0.2
+    rarePrototypes:
+    - ScrapGlass
+    - CyborgEndoskeleton
+    offset: 0.2
+    deleteSpawnerAfterSpawn: true

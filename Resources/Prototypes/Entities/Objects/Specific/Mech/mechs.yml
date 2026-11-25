@@ -67,11 +67,13 @@
     voice: NecoArcTwo
 
 - type: entity
+  parent: SunriseTemperatureLow # Sunrise-Edit
   id: BaseMech
   save: false
   abstract: true
   components:
   - type: MobMover
+  - type: NoSlip
   - type: Mech
   - type: MechAir
   - type: AirFilter
@@ -115,7 +117,6 @@
         Slash: -15
         Piercing: -15
         Caustic: -15
-        Structural: -15
         Mangleness: 5 # Sunrise-Edit
   - type: UserInterface
     interfaces:
@@ -142,7 +143,7 @@
   - type: InteractionOutline
   - type: MovementSpeedModifier
     baseWalkSpeed: 1
-    baseSprintSpeed: 3.9 # sunrise-edit
+    baseSprintSpeed: 2
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -150,8 +151,6 @@
   - type: Pullable
   - type: Physics
     bodyType: KinematicController
-    angularDamping: 10 # sunrise-edit
-    linearDamping: 10 # sunrise-edit
   - type: GravityAffected
   - type: Clickable
   - type: WiresPanel
@@ -161,7 +160,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.45
-        density: 10000 # sunrise-edit
+        density: 1000
         mask:
         - MobMask
         layer:
@@ -258,7 +257,7 @@
 # Ripley MK-I
 - type: entity
   id: MechRipley
-  parent: [ MechBreakageRipley, BaseMech, IndustrialMech, BaseCargoContraband ] # Sunrise-edit
+  parent: [ SunriseTemperatureLow, MechBreakageRipley, BaseMech, IndustrialMech, BaseCargoContraband ] # Sunrise-edit
   name: Ripley APLU
   description: Versatile and lightly armored, the Ripley is useful for almost any heavy work scenario. The "APLU" stands for Autonomous Power Loading Unit.
   components:
@@ -291,7 +290,7 @@
       types:
         Blunt: 14 #intentionally shit so people realize that going into combat with the ripley is usually a bad idea.
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2 # Sunrise-edit: starlight parity
+    baseWalkSpeed: 2.25 # Sunrise-Edit
     baseSprintSpeed: 3.6 # Sunrise-edit: starlight parity
   - type: Reflect
     reflectProb: 0.05
@@ -318,7 +317,7 @@
 # Ripley MK-II
 - type: entity
   id: MechRipley2
-  parent: [ MechBreakageRipley, BaseMech, IndustrialMech, BaseCargoContraband ] # Sunrise-edit
+  parent: [ SunriseTemperatureLow, MechBreakageRipley, BaseMech, IndustrialMech, BaseCargoContraband ] # Sunrise-edit
   name: Ripley APLU MK-II
   description: The "MK-II" has a pressurized cabin for space operations, but the added weight has slowed it down.
   components:
@@ -347,7 +346,7 @@
     baseState: ripleymkii
     openState: ripleymkii-open
     brokenState: ripleymkii-broken
-    mechToPilotDamageMultiplier: 0.0 # Sunrise edit
+    mechToPilotDamageMultiplier: 0.4
     airtight: true
     pilotWhitelist:
       components:
@@ -360,8 +359,8 @@
         Blunt: 20
     bluntStaminaDamageFactor: 1
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 3
+    baseWalkSpeed: 1
+    baseSprintSpeed: 2
   # Sunrise-Start
   - type: Loadout
     prototypes: [ MechArmorMediumNTLoadout ]
@@ -391,7 +390,7 @@
 # Clarke
 - type: entity
   id: MechClarke
-  parent: [ BaseMech, IndustrialMech, BaseCargoContraband ]
+  parent: [ SunriseTemperatureHigh , SunriseMechBreakageDefault, BaseMech, IndustrialMech, BaseCargoContraband ] # Sunrise-Edit
   name: Clarke
   description: A fast-moving mech for space travel. It has built-in trusts.
   components:
@@ -410,7 +409,7 @@
     baseState: clarke
     openState: clarke-open
     brokenState: clarke-broken
-    mechToPilotDamageMultiplier: 0.0 # Sunrise edit
+    mechToPilotDamageMultiplier: 0.5
     airtight: true
     pilotWhitelist:
       components:
@@ -420,7 +419,7 @@
     attackRate: 1
     damage:
       types:
-        Blunt: 26
+        Blunt: 25
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.5
     baseSprintSpeed: 4.5
@@ -487,7 +486,7 @@
     baseState: honker
     openState: honker-open
     brokenState: honker-broken
-    mechToPilotDamageMultiplier: 0.0 # Sunrise edit
+    mechToPilotDamageMultiplier: 0.5
     airtight: true # Space Honks is real.
     pilotWhitelist:
       components:
@@ -501,10 +500,11 @@
     - NonEnergy
   - type: MeleeWeapon
     hidden: true
-    attackRate: 1
+    attackRate: 0.75
     damage:
       types:
-        Structural: 2
+        Blunt: 25 #thwack
+        Structural: 20
     soundHit:
       path: /Audio/Items/bikehorn.ogg
   - type: MeleeThrowOnHit
@@ -558,9 +558,12 @@
     baseState: hamtr
     openState: hamtr-open
     brokenState: hamtr-broken
-    mechToPilotDamageMultiplier: 0.0 # Sunrise edit
+    mechToPilotDamageMultiplier: 0.2
     maxEquipmentAmount: 2
     airtight: true
+    equipmentWhitelist:
+      tags:
+      - SmallMech
     pilotWhitelist:
       tags:
       - Hamster
@@ -659,7 +662,7 @@
     currentThresholdState : Alive
     thresholds:
       0: Alive
-      200: Critical
+      250: Critical
     showOverlays: false
     allowRevives: true
   # Sunrise-Start
@@ -707,7 +710,7 @@
     baseState: base
     openState: base-open
     brokenState: base-broken
-    mechToPilotDamageMultiplier: 0.0 # Sunrise edit
+    mechToPilotDamageMultiplier: 0.3
     airtight: true
     pilotWhitelist:
       components:
@@ -718,11 +721,11 @@
     damage:
       types:
         Blunt: 30
-        Structural: 180
+        Structural: 100
     bluntStaminaDamageFactor: 1.5
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
-    baseSprintSpeed: 4
+    baseSprintSpeed: 3.3
   - type: Reflect
     reflectProb: 0.05
     spread: 180
@@ -737,7 +740,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      325: Critical
+      250: Critical
 
 - type: entity
   id: MechGygaxBattery
@@ -790,7 +793,7 @@
     baseState: base
     openState: base-open
     brokenState: base-broken
-    mechToPilotDamageMultiplier: 0.0 # Sunrise edit
+    mechToPilotDamageMultiplier: 0.25
     airtight: true
     pilotWhitelist:
       components:
@@ -801,7 +804,7 @@
     damage:
       types:
         Blunt: 40
-        Structural: 220
+        Structural: 150
     bluntStaminaDamageFactor: 1.5
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.5
@@ -820,7 +823,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      500: Critical
+      400: Critical
 
 - type: entity
   id: MechDurandBattery
@@ -859,7 +862,7 @@
     baseState: marauder
     openState: marauder-open
     brokenState: marauder-broken
-    mechToPilotDamageMultiplier: 0.0 # Sunrise edit
+    mechToPilotDamageMultiplier: 0.1
     airtight: true
     maxEquipmentAmount: 4
     pilotWhitelist:
@@ -874,8 +877,8 @@
         Structural: 200
     bluntStaminaDamageFactor: 1.5
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.5
-    baseSprintSpeed: 2
+    baseWalkSpeed: 1
+    baseSprintSpeed: 1.5
   # Sunrise-Start
   - type: Loadout
     prototypes: [ MechArmorHeavyNTLoadout ]
@@ -892,7 +895,7 @@
     currentThresholdState : Alive
     thresholds:
       0: Alive
-      600: Critical
+      500: Critical
     showOverlays: false
     allowRevives: true
   - type: AccessReader
@@ -945,7 +948,7 @@
     baseState: seraph
     openState: seraph-open
     brokenState: seraph-broken
-    mechToPilotDamageMultiplier: 0.0 # Sunrise edit
+    mechToPilotDamageMultiplier: 0.05
     airtight: true
     maxEquipmentAmount: 5
     pilotWhitelist:
@@ -960,7 +963,7 @@
         Structural: 400
     bluntStaminaDamageFactor: 1.5
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1
+    baseWalkSpeed: 2.2
     baseSprintSpeed: 3.7
   # Sunrise-Start
   - type: Loadout
@@ -978,7 +981,7 @@
     currentThresholdState : Alive
     thresholds:
       0: Alive
-      700: Critical
+      550: Critical
     showOverlays: false
     allowRevives: true
   - type: AccessReader
@@ -1033,7 +1036,7 @@
     baseState: darkgygax
     openState: darkgygax-open
     brokenState: darkgygax-broken
-    mechToPilotDamageMultiplier: 0.0 # Sunrise edit
+    mechToPilotDamageMultiplier: 0.15
     airtight: true
     maxEquipmentAmount: 4
     pilotWhitelist:
@@ -1048,8 +1051,8 @@
         Structural: 200
     bluntStaminaDamageFactor: 1.5
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2.5
-    baseSprintSpeed: 4
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 3.7
   # Sunrise-Start
   - type: Loadout
     prototypes: [ MechArmorMediumSyndiLoadout ]
@@ -1071,7 +1074,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      375: Critical
+      300: Critical
   - type: AccessReader
     access: [["NuclearOperative"]]
   # Sunrise-End
@@ -1123,7 +1126,7 @@
     baseState: mauler
     openState: mauler-open
     brokenState: mauler-broken
-    mechToPilotDamageMultiplier: 0.0 # Sunrise edit
+    mechToPilotDamageMultiplier: 0.1
     airtight: true
     maxEquipmentAmount: 5
     pilotWhitelist:
@@ -1134,12 +1137,12 @@
     attackRate: 1
     damage:
       types:
-        Blunt: 75
+        Blunt: 50
         Structural: 400
     bluntStaminaDamageFactor: 1.5
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.5
-    baseSprintSpeed: 2
+    baseWalkSpeed: 1
+    baseSprintSpeed: 1.5
   # Sunrise-Start
   - type: Loadout
     prototypes: [ MechArmorHeavySyndiLoadout ]
@@ -1161,7 +1164,7 @@
     currentThresholdState : Alive
     thresholds:
       0: Alive
-      600: Critical
+      500: Critical
     showOverlays: false
     allowRevives: true
   - type: AccessReader

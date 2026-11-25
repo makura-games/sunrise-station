@@ -1,4 +1,13 @@
 - type: damageContainer
+  id: Xenoborg
+  supportedGroups:
+  - Brute
+  supportedTypes:
+  - Heat
+  - Shock
+  - Caustic
+
+- type: damageContainer
   id: Synth
   supportedGroups:
   - Brute
@@ -17,7 +26,6 @@
   - Heat
   - Shock
   - Caustic
-  - Structural
   - Mangleness
 
 - type: damageContainer

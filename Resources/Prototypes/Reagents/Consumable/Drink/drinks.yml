@@ -428,6 +428,18 @@
   boilingPoint: 100.0
   meltingPoint: 0.0
   friction: 0.4
+   # Sunrise-Start
+  reactiveEffects:
+    Extinguish:
+      methods: [ Touch ]
+      effects:
+      - !type:Extinguish
+      - !type:AdjustTemperature
+        conditions:
+        - !type:TemperatureCondition
+          min: 293.15
+        amount: -300000
+   # Sunrise-End
   metabolisms:
     Digestion:
       effects:

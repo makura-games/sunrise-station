@@ -27,35 +27,6 @@
       - MechBigYarrkeBattery
 
 - type: entity
-  name: NTGygax Spawner
-  id: SpawnMechNTGygax
-  parent: MarkerBase
-  components:
-  - type: Sprite
-    layers:
-      - state: green
-      - sprite: Objects/Specific/Mech/gygax.rsi
-        state: ntgygax
-  - type: ConditionalSpawner
-    prototypes:
-      - MechNTGygaxBattery
-
-- type: entity
-  name: NTGygax Spawner
-  suffix: Filled
-  id: SpawnMechNTGygaxFilled
-  parent: MarkerBase
-  components:
-  - type: Sprite
-    layers:
-      - state: green
-      - sprite: Objects/Specific/Mech/gygax.rsi
-        state: ntgygax
-  - type: ConditionalSpawner
-    prototypes:
-      - MechNTGygaxFilled
-
-- type: entity
   name: Sec Pod Spawner
   suffix: Filled
   id: SpawnMechSecPodFilled

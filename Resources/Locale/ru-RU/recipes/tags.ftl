@@ -154,10 +154,6 @@ construction-graph-tag-gygax-weapon-control-and-targeting-module = модуль 
 construction-graph-tag-durand-central-control-module = модуль центрального управления
 construction-graph-tag-durand-peripherals-control-module = модуль управления периферией
 construction-graph-tag-durand-weapon-control-and-targeting-module = модуль управления оружием и наведения
-# Phazon
-construction-graph-tag-phazon-central-control-module = модуль центрального управления
-construction-graph-tag-phazon-peripherals-control-module = модуль управления периферией
-construction-graph-tag-phazon-weapon-control-and-targeting-module = модуль управления оружием и наведения
 step-trashgun-smallbattery = малая батарея
 step-trashgun-pipe = труба
 step-powercage-name = энергоблок
@@ -166,7 +162,6 @@ construction-graph-tag-exosuit-thruster = двигатель экзокостю�
 construction-graph-tag-phasic-scanning-module = модуль фазового сканирования
 construction-graph-tag-capacitor = конденсатор
 construction-graph-tag-any-anomaly-core = любое ядро аномалии
-construction-graph-tag-phazon-armor-plates = бронеплиты
 construction-graph-tag-durand-armor-plates = бронеплиты
 construction-graph-tag-gygax-armor-plates = бронеплиты
 # Полы (floor tiles)

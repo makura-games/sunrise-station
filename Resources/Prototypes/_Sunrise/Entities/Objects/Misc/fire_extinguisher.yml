@@ -28,3 +28,19 @@
       - ReagentId: Water
         Quantity: 10
     duration: 10
+
+- type: entity
+  parent: FireExtinguisherMini
+  id: FireExtinguisherMiniFrezone
+  name: frezon pocket fire extinguisher
+  description: A compact fire extinguisher filled with frezon.
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Frezon
+        Quantity: 60
+  - type: Sprite
+    sprite: _Sunrise/Objects/Misc/fire_extinguisher_mini.rsi
+  - type: Item
+    sprite: _Sunrise/Objects/Misc/fire_extinguisher_mini.rsi

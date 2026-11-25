@@ -82,6 +82,12 @@
     params:
       volume: -15
   addComponents:
+  - type: TemperatureDamage
+    heatDamageThreshold: 2500
+    coldDamageThreshold: 0
+    heatDamage:
+      types:
+        Heat: 0.1
   - type: ShowHealthBars
     damageContainers:
     - Inorganic
@@ -141,6 +147,12 @@
       volume: -15
 
   addComponents:
+  - type: TemperatureDamage
+    heatDamageThreshold: 1200
+    coldDamageThreshold: 0
+    heatDamage:
+      types:
+        Heat: 0.2
   - type: InnateItem
     instantActions:
     - HandheldStationMapUnpowered

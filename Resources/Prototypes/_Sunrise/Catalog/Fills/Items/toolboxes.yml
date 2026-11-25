@@ -26,7 +26,7 @@
         children:
         - id: Crowbar
         - id: Screwdriver
-        - id: Wirecutter
+        - id: FireExtinguisherMiniFrezone
         - id: WelderIndustrial
         - id: Multitool
         - id: ClothingHandsGlovesCombatCQC

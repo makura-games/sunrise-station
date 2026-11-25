@@ -342,6 +342,19 @@
   color: "#3a758c"
   boilingPoint: -195.8
   meltingPoint: -210.0
+  # Sunrise-Start
+  tileReactions:
+  - !type:ExtinguishTileReaction { }
+  - !type:CreateEntityTileReaction
+    entity: SunriseFrezonCooling
+  reactiveEffects:
+    Extinguish:
+      methods: [ Touch ]
+      effects:
+      - !type:Extinguish
+      - !type:AdjustTemperature
+        amount: -1500000
+  # Sunrise-End
   metabolisms:
     Bloodstream:
       effects:

@@ -391,21 +391,6 @@
   id: GygaxTargetingElectronics
   result: GygaxTargetingElectronics
 
-# - type: latheRecipe
-#   parent: BaseGoldCircuitboardRecipe
-#   id: PhazonCentralElectronics
-#   result: PhazonCentralElectronics
-
-# - type: latheRecipe
-#   parent: BaseGoldCircuitboardRecipe
-#   id: PhazonPeripheralsElectronics
-#   result: PhazonPeripheralsElectronics
-
-# - type: latheRecipe
-#   parent: BaseGoldCircuitboardRecipe
-#   id: PhazonTargetingElectronics
-#   result: PhazonTargetingElectronics
-
 - type: latheRecipe
   parent: BaseSilverCircuitboardRecipe
   id: DurandCentralElectronics

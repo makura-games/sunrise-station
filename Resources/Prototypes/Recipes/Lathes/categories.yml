@@ -220,10 +220,6 @@
   name: lathe-category-mechs-durand
 
 - type: latheCategory
-  id: Phazon
-  name: lathe-category-mechs-phazon
-
-- type: latheCategory
   id: MechEquipment
   name: lathe-category-mechs-equipment
 

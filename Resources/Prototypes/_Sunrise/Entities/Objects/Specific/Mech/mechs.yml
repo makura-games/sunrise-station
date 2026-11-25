@@ -12,6 +12,7 @@
 # region Base Mechs
 - type: entity
   id: BaseMechPod
+  parent: SunriseTemperatureLow
   save: false
   abstract: true
   components:
@@ -64,12 +65,11 @@
     doAfterDelay: 1
     damage:
       types:
-        Blunt: -25
-        Slash: -25
-        Piercing: -25
-        Caustic: -25
-        Structural: -25
-        Mangleness: 2
+        Blunt: -15
+        Slash: -15
+        Piercing: -15
+        Caustic: -15
+        Mangleness: 5 # Sunrise-Edit
   - type: UserInterface
     interfaces:
       enum.MechUiKey.Key:
@@ -213,7 +213,7 @@
     currentThresholdState: Alive
     thresholds:
       0: Alive
-      225: Critical
+      250: Critical
     showOverlays: false
     allowRevives: true
   - type: ContainerFill
@@ -288,7 +288,7 @@
     currentThresholdState: Alive
     thresholds:
       0: Alive
-      200: Critical
+      250: Critical
     showOverlays: false
     allowRevives: true
   - type: ContainerFill
@@ -353,7 +353,7 @@
 # Ripley MK-II "Death"
 - type: entity
   id: MechRipley2Death
-  parent: [ MechRipley2, IndustrialMech, CombatMech, BaseMajorContraband ]
+  parent: [ SunriseTemperatureHigh , MechRipley2, IndustrialMech, CombatMech, BaseMajorContraband ]
   name: Ripley APLU MK-II
   description: The "MK-II" has a pressurized cabin for space opera....wait!! why is it red? Oh no, it's a Death Ripley!
   components:
@@ -519,7 +519,7 @@
 # region Pirate Yarrk
 - type: entity
   id: MechBigYarrke
-  parent: [ BaseMech, IndustrialMech, CombatMech, BaseMajorContraband ]
+  parent: [ SunriseTemperatureHigh , SunriseMechBreakageDefault, BaseMech, IndustrialMech, CombatMech, BaseMajorContraband ]
   name: Big Yarrke
   description: A heavy ancient mech for cold harsh realities of deep space. It has built-in trusts and Mining Industrial Drill.
   components:
@@ -539,7 +539,7 @@
     baseState: bigbrother
     openState: bigbrother-open
     brokenState: bigbrother-broken
-    mechToPilotDamageMultiplier: 0.05
+    mechToPilotDamageMultiplier: 0.4
     airtight: true
     pilotWhitelist:
       components:
@@ -564,8 +564,8 @@
     soundHit:
       path: "/Audio/Items/drill_use.ogg"
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 3.6
+    baseWalkSpeed: 1
+    baseSprintSpeed: 2
   - type: CanMoveInAir
   - type: MovementAlwaysTouching
   - type: Reflect
@@ -603,163 +603,7 @@
       mech-battery-slot:
       - PowerCageHigh
 
-# region NT ERT Gygax
-# NT Gygax
-- type: entity
-  id: MechNTGygax
-  parent: [ MechBreakageGygax, BaseMech, CombatMech, BaseSecurityScienceContraband ] # Sunrise-edit
-  name: Nanotrasen Special Gygax
-  description: "Nanotrasen's trump card when solving problems. High durability, increased protection against shock, explosions, temperature, shots: conventional, laser and energy, as well as expanded equipment slots allow to turn the situation on the station upside down. Gas pedals consume a colossal amount of energy."
-  components:
-  - type: Sprite
-    drawdepth: Mobs
-    noRot: true
-    sprite: Objects/Specific/Mech/gygax.rsi
-    layers:
-    - map: [ "enum.MechVisualLayers.Base" ]
-      state: ntgygax
-  - type: FootstepModifier
-    footstepSoundCollection:
-      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
-      params:
-        pitch: 0.8
-  - type: Mech
-    baseState: ntgygax
-    openState: ntgygax-open
-    brokenState: ntgygax-broken
-    mechToPilotDamageMultiplier: 0.0
-    airtight: true
-    maxEquipmentAmount: 4
-    pilotWhitelist:
-      components:
-        - HumanoidProfile
-  - type: MeleeWeapon
-    hidden: true
-    attackRate: 1
-    damage:
-      types:
-        Blunt: 30
-        Structural: 180
-    bluntStaminaDamageFactor: 1.5
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 3.5
-  - type: Reflect
-    reflectProb: 0.10
-    spread: 180
-    soundOnReflect: /Audio/_Starlight/Armor/Ricochet/ricochet1_1.ogg
-    reflects:
-    - NonEnergy
-  - type: Loadout
-    prototypes: [ MechArmorMediumNTLoadout ]
-  - type: CanMoveInAir
-  - type: MovementAlwaysTouching
-  - type: Tag
-    tags:
-    - DoorBumpOpener
-    - FootstepSound
-    - Gygax
-  - type: AccessReader
-    access: [["CentralCommand"]]
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      350: Critical
 
-- type: entity
-  id: MechNTGygaxBattery
-  parent: MechNTGygax
-  suffix: Battery
-  components:
-  - type: ContainerFill
-    containers:
-      mech-battery-slot:
-      - PowerCageERT
-
-- type: entity
-  id: MechNTGygaxFilled
-  parent: MechNTGygaxBattery
-  suffix: Battery, Filled
-  components:
-  - type: Mech
-    startingEquipment:
-      - WeaponMechChainSword
-      - WeaponMechCombatShotgunAuto
-      - WeaponMechCombatPulseRifle
-      - WeaponMechCombatMissileRack8
-
-# region Phazon
-
-- type: entity
-  id: MechPhazon
-  parent: [ BaseMech, CombatMech, BaseSecurityScienceContraband ]
-  name: Phazon
-  description: The most advanced mech on the market, the pinnacle of technological development, extremely mobile and deadly.
-  components:
-  - type: Sprite
-    drawdepth: Mobs
-    noRot: true
-    sprite: _Sunrise/Objects/Specific/Mech/mecha.rsi # Sunrise-edit
-    scale: 1.08, 1.08
-    layers:
-    - map: [ "enum.MechVisualLayers.Base" ]
-      state: phazon
-  - type: FootstepModifier
-    footstepSoundCollection:
-      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
-  - type: Mech
-    baseState: phazon
-    openState: phazon-open
-    brokenState: phazon-broken
-    mechToPilotDamageMultiplier: 0.0
-    maxEquipmentAmount: 5
-    airtight: true
-    pilotWhitelist:
-      components:
-        - HumanoidProfile
-  - type: MeleeWeapon
-    hidden: true
-    attackRate: 1
-    damage:
-      types:
-        Blunt: 20
-        Structural: 80
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 3.2
-    baseSprintSpeed: 4
-  - type: Reflect
-    reflectProb: 0.5
-    spread: 180
-    soundOnReflect: /Audio/_Starlight/Armor/Ricochet/ricochet1_1.ogg
-    reflects:
-    - NonEnergy
-    - Energy
-  - type: MobThresholds
-    currentThresholdState : Alive
-    thresholds:
-      0: Alive
-      220: Critical
-    showOverlays: false
-    allowRevives: true
-  - type: Tag
-    tags:
-    - DoorBumpOpener
-    - FootstepSound
-    - Phazon
-
-- type: entity
-  id: MechPhazonBattery
-  parent: MechPhazon
-  suffix: Battery
-  components:
-  - type: ContainerFill
-    containers:
-      mech-battery-slot:
-      - PowerCageHigh
-
-# region Durand base
-
-# Rover
 - type: entity
   id: MechRoverSyndie
   parent: [ MechBreakageRover, BaseMech, CombatMech, BaseSyndicateContraband ] # Sunrise-edit
@@ -796,7 +640,7 @@
     baseState: darkdurand
     openState: darkdurand-open
     brokenState: darkdurand-broken
-    mechToPilotDamageMultiplier: 0.0
+    mechToPilotDamageMultiplier: 0.15
     airtight: true
     maxEquipmentAmount: 5
     pilotWhitelist:
@@ -807,8 +651,8 @@
     attackRate: 1
     damage:
       types:
-        Blunt: 45
-        Structural: 300
+        Blunt: 30
+        Structural: 200
     bluntStaminaDamageFactor: 1.5
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.5
@@ -821,7 +665,7 @@
     currentThresholdState : Alive
     thresholds:
       0: Alive
-      500: Critical
+      400: Critical
   - type: AccessReader
     access: [["NuclearOperative"]]
 
@@ -871,7 +715,7 @@
     baseState: dollhouse
     openState: dollhouse-open
     brokenState: dollhouse-broken
-    mechToPilotDamageMultiplier: 0.0
+    mechToPilotDamageMultiplier: 0.2
     airtight: true
     maxEquipmentAmount: 2
     pilotWhitelist:
@@ -929,3 +773,5 @@
   - type: Mech
     startingEquipment:
       - WeaponMechCombatMaxim
+
+# Blyashanka

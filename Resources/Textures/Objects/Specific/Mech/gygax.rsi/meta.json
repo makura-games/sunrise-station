@@ -62,41 +62,6 @@
       ]
     },
     {
-      "name": "ntgygax",
-      "directions": 4
-    },
-    {
-      "name": "ntgygax-open",
-      "delays": [
-        [
-          0.1,
-          0.05,
-          0.05,
-          0.05,
-          0.1,
-          0.05,
-          0.05,
-          0.05,
-          0.1
-        ]
-      ]
-    },
-    {
-      "name": "ntgygax-broken",
-      "delays": [
-        [
-          5,
-          0.05,
-          0.05,
-          0.05,
-          0.1,
-          0.1,
-          0.5,
-          0.1
-        ]
-      ]
-    },
-    {
       "name": "darkgygax",
       "directions": 4
     },

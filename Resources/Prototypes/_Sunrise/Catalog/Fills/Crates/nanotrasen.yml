@@ -1,23 +1,4 @@
 - type: entity
-  id: CrateCommandNTGygaxBundle
-  suffix: Filled
-  parent: CrateCommandSecure
-  name: Nanotrasen gygax bundle
-  description: Contains a set of Nanotrasen light armored mechs.
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage: !type:AllSelector
-        children:
-        - id: MechNTGygaxFilled
-        - id: HandheldMechAnalyzer
-        - id: Nanopaste
-        - id: CableApcStack
-        - id: ToolboxMechanicalFilled
-        - id: TowelColorNT
-        - id: WelderIndustrial
-
-- type: entity
   id: CrateCommandMarauderBundle
   suffix: Filled
   parent: CrateCommandSecure

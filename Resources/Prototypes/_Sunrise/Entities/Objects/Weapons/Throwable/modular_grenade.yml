@@ -1,0 +1,17 @@
+- type: entity
+  parent: ModularGrenade
+  id: ModularGrenadeExplosive
+  suffix: Explosive, Timer
+  components:
+  - type: Construction
+    node: grenade
+  - type: ContainerContainer
+    containers:
+      payload: !type:Container
+      payloadTrigger: !type:Container
+  - type: ContainerFill
+    containers:
+      payload:
+      - ExplosivePayload
+      payloadTrigger:
+      - TimerTrigger
