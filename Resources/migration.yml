@@ -1628,3 +1628,6 @@ DrinkWaterJug: JugWater
 
 #2026-09-05
 AsimovCircuitBoard: CrewsimovCircuitBoard
+MagazineP90HP: MagazineP90AP
+MagazineP90FMJ: MagazineP90AP
+MagazineP90Incendiary: MagazineP90AP

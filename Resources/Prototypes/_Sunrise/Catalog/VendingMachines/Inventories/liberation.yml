@@ -282,6 +282,7 @@
     MagazineMagnumUranium: 3
     MagazineMagnumAP: 3
     # Pistol 40 mag Ammo
+    MagazinePistolLightRifleAuto: 3
     MagazinePistol40SP: 3
     MagazinePistol40HP: 3
     MagazinePistol40FMJ: 3

@@ -290,46 +290,13 @@
   - UplinkAmmo
 
 - type: listing
-  id: UplinkMagazinePistol40FMJ
-  name: uplink-pistol-stechkin-magazine-name
-  description: uplink-pistol-stechkin-magazine-desc
-  icon: { sprite: _Starlight/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/40.rsi, state: fmj}
-  productEntity: MagazinePistol40FMJ
+  id: UplinkMagazinePistolLightRifleAuto
+  name: uplink-pistol-aps-magazine-name
+  description: uplink-pistol-aps-magazine-desc
+  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/762auto.rsi, state: base }
+  productEntity: MagazinePistolLightRifleAuto
   cost:
     Telecrystal: 1
-  categories:
-  - UplinkAmmo
-
-- type: listing
-  id: UplinkMagazinePistol40SP
-  name: uplink-pistol-stechkin-magazine-name
-  description: uplink-pistol-stechkin-magazine-desc
-  icon: { sprite: _Starlight/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/40.rsi, state: sp }
-  productEntity: MagazinePistol40SP
-  cost:
-    Telecrystal: 1
-  categories:
-  - UplinkAmmo
-
-- type: listing
-  id: UplinkMagazinePistol40HP
-  name: uplink-pistol-stechkin-magazine-name
-  description: uplink-pistol-stechkin-magazine-desc
-  icon: { sprite: _Starlight/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/40.rsi, state: red }
-  productEntity: MagazinePistol40HP
-  cost:
-    Telecrystal: 1
-  categories:
-  - UplinkAmmo
-
-- type: listing
-  id: UplinkMagazinePistol40AP
-  name: uplink-pistol-stechkin-magazine-name
-  description: uplink-pistol-stechkin-magazine-desc
-  icon: { sprite: _Starlight/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/40.rsi, state: ap }
-  productEntity: MagazinePistol40AP
-  cost:
-    Telecrystal: 2
   categories:
   - UplinkAmmo
 

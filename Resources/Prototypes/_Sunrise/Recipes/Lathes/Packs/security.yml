@@ -187,6 +187,9 @@
     - WeaponSunriseLaserPistol
     - FlareGunSecurityUpgrade
     - EnergyBola
+    - BoxShotgunHeavy
+    - BoxShotgunBirdshotHeavy
+    - BoxShotgunFlechetteHeavy
 # Sunrise-TODO: Нужен ребаланс с учетом типов боеприпасов
 #    - BaseMagazinePistolCaselessRifleExtended
 #    - MagazinePPSH41Extended

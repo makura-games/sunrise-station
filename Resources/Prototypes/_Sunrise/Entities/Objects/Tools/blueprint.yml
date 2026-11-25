@@ -126,6 +126,16 @@
 # region security
 - type: entity
   parent: BaseBlueprintSecurity
+  id: BlueprintMagazineBoxRifleAuto
+  name: P-90 ammunition blueprint
+  description: A blueprint for producing boxes of P-90 cartridges in an autolathe or security fabricator.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - MagazineBoxRifleAuto
+
+- type: entity
+  parent: BaseBlueprintSecurity
   id: BlueprintMagAsh12Basic
   name: ash-12 magazine basic blueprint
   description: A blueprint with a schematic of a ash-12 magazine with all basic variants. It can be inserted into an autolathe and security fabricator.

@@ -299,9 +299,7 @@
         children:
         - id: WeaponSubMachineGunP90
         - id: MagazineP90
-          amount: 2
-        - id: MagazineP90HP
-        - id: MagazineP90FMJ
+          amount: 4
 
 - type: entity
   id: ClothingBackpackDuffelWeaponRifleLeikhaFilled

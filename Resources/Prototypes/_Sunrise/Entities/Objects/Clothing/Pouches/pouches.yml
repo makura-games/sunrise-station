@@ -146,6 +146,7 @@
       - MagazinePistolCaselessRifle
       - MagazineMagnum
       - MagazinePistolDP
+      - MagazinePistolLightRifleAuto
       - MagazinePistolDPSubMachineGun
       - MagazinePistolImprovised
       - SpeedLoaderMagnum
@@ -225,6 +226,18 @@
           amount: 1
         - id: MagazinePistol40HP
           amount: 1
+
+- type: entity
+  parent: PouchAmmoPistol
+  id: PouchAmmoFilledPistolLightRifleAuto
+  suffix: Filled pistol 7.62 Auto
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: MagazinePistolLightRifleAuto
+          amount: 4
 
 - type: entity
   parent: PouchAmmo

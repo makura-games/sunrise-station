@@ -31971,23 +31971,6 @@ entities:
         categories:
         - Debug
       - costModifiersBySourceId: {}
-        productEntity: MagazineP90FMJ
-        originalCost:
-          Crystallite: 3
-        id: ERTUplinkMagazineP90FMJ
-        icon:
-          sprite: _Sunrise/Interface/Misc/nt_icons.rsi
-          state: mag_p90
-        discountDownTo: {}
-        conditions:
-        - !type:StoreWhitelistCondition
-          whitelist:
-            tags:
-            - ERTGamma
-            - ERTEpsilon
-        categories:
-        - NTAmmo
-      - costModifiersBySourceId: {}
         productEntity: ClothingBeltSalvageWebbing
         originalCost:
           Doubloon: 4
@@ -37331,23 +37314,6 @@ entities:
         categories:
         - UplinkChemicals
       - costModifiersBySourceId: {}
-        productEntity: MagazineP90HP
-        originalCost:
-          Crystallite: 2
-        id: ERTUplinkMagazineP90HP
-        icon:
-          sprite: _Sunrise/Interface/Misc/nt_icons.rsi
-          state: mag_p90
-        discountDownTo: {}
-        conditions:
-        - !type:StoreWhitelistCondition
-          whitelist:
-            tags:
-            - ERTGamma
-            - ERTEpsilon
-        categories:
-        - NTAmmo
-      - costModifiersBySourceId: {}
         productEntity: SyndicateRapierToxinBox
         originalCost:
           Telecrystal: 8
@@ -40033,22 +39999,6 @@ entities:
             - AssaultOpsUplink
         categories:
         - UplinkAllies
-      - costModifiersBySourceId: {}
-        productEntity: MagazineP90Incendiary
-        originalCost:
-          Crystallite: 4
-        id: ERTUplinkMagazineP90Incendiary
-        icon:
-          sprite: _Sunrise/Interface/Misc/nt_icons.rsi
-          state: mag_p90
-        discountDownTo: {}
-        conditions:
-        - !type:StoreWhitelistCondition
-          whitelist:
-            tags:
-            - ERTEpsilon
-        categories:
-        - NTAmmo
       - costModifiersBySourceId: {}
         productEntity: WetFloorSignMineExplosive
         originalCost:

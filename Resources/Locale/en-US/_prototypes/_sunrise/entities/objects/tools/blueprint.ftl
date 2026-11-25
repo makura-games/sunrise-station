@@ -8,3 +8,5 @@ ent-BlueprintImplanterExtractor = { ent-TechnologyDiskBlueprint }
     .desc = { ent-TechnologyDiskBlueprint.desc }
 ent-BlueprintProtoAdrenalImplant = proto-adrenal implant blueprint
     .desc = A blueprint with a schematic of a proto-adrenal implant. It can be inserted into a medical techfab.
+ent-BlueprintMagazineBoxRifleAuto = P-90 ammunition blueprint
+    .desc = A blueprint for producing boxes of P-90 cartridges in an autolathe or security fabricator.

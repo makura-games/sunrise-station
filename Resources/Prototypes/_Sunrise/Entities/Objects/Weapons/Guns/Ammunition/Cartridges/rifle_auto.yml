@@ -1,0 +1,33 @@
+- type: entity
+  id: CartridgeRifleAuto
+  name: .224 auto
+  parent: BaseCartridgeRifle
+  components:
+  - type: Tag
+    tags:
+    - CartridgeRifleAuto
+  - type: CartridgeAmmo
+    proto: BulletRifleAuto
+  - type: Sprite
+    scale: 0.45, 0.55
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#3F47DB"
+
+- type: entity
+  id: CartridgeRifleAutoAP
+  name: .224 auto (AP)
+  parent: CartridgeRifleAuto
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRifleAutoAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+    - state: tip
+      map: [ "enum.AmmoVisualLayers.Tip" ]
+      color: "#540000"

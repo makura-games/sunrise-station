@@ -1,0 +1,12 @@
+- type: entity
+  id: MagazineBoxRifleAuto
+  name: ammunition box (rifle auto)
+  description: A box of cartridges for the P-90 submachine gun.
+  parent: MagazineBoxRifleSP
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifleAuto
+    capacity: 50
+    whitelist:
+      tags:
+      - CartridgeRifleAuto
