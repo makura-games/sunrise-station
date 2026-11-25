@@ -38,7 +38,7 @@
   components:
   - type: Item
     size: Tiny
-    sprite: Objects/Specific/Chemistry/vial.rsiм.
+    sprite: Objects/Specific/Chemistry/vial.rsi
   - type: Sprite
     sprite: _Sunrise/Disease/strain_vial.rsi
     state: strain
