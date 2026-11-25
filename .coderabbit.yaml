@@ -98,7 +98,7 @@ reviews:
         name: "SS14 fork/project folder selection"
         instructions: |
           Run this check for every PR that adds or moves fork-owned code, prototypes, assets, or upstream edit markers.
-          Determine the active fork using `AGENTS.md` (`Sunrise`, `_Sunrise`, `Sunrise-Edit`, `Sunrise edit/added start/end`).
+          Determine the active fork using `AGENTS.md` (`Sunrise`, `_Sunrise`, `Sunrise edit`, `Sunrise added`, `Sunrise edit/added start/end`).
           Fail if exact Fire signals (`project-fire`, `_Scp`, or Fire markers) are reviewed as Sunrise or if new Fire-owned files are placed under `_Sunrise` instead of `_Scp`.
           Fail if exact Sunrise signals (`sunrise-station`, `_Sunrise`, or Sunrise markers) are reviewed as Fire or if new Sunrise-owned files are placed under `_Scp` instead of `_Sunrise`.
           Do not fail merely because the PR touches vanilla files. New fork logic still belongs in the active fork project folder, while vanilla files should contain only minimal hooks with the active fork's markers.

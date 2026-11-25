@@ -23,7 +23,7 @@ description: Practical guide to using Rider MCP, ss14-mcp, and ss13-dm-mcp toget
 | Быстрая выжимка `[DataField]` и сетевых атрибутов `*Component.cs` | **`ss14-mcp`**: `ss14_inspect_component` |
 | Проверка `.rsi` (`meta.json`, PNG, дубли кадров, звуки, `attributions.yml`) | **`ss14-mcp`**: `ss14_audit_rsi` |
 | Паритет локализации `ru-RU ↔ en-US`, `ent-*` и `Loc.GetString` | **`ss14-mcp`**: `ss14_audit_ftl` |
-| Аудит `git diff` вне `_Sunrise` и маркеров `Sunrise-Edit` по `AGENTS.md` | **`ss14-mcp`**: `ss14_check_upstream_hygiene` |
+| Аудит `git diff` вне `_Sunrise` и маркеров `Sunrise edit`/`Sunrise added` по `AGENTS.md` | **`ss14-mcp`**: `ss14_check_upstream_hygiene` |
 | Инспекция DM-типа SS13 (файлы, `var`, сигнатуры `proc`/`verb`) | **`ss13-dm-mcp`**: `dm_get_type` |
 | Исходный код DM-процедуры и цепочки переопределений `..()` | **`ss13-dm-mcp`**: `dm_get_proc` |
 | Поиск `#define`-макросов SS13 | **`ss13-dm-mcp`**: `dm_search_defines` |
@@ -62,7 +62,7 @@ description: Practical guide to using Rider MCP, ss14-mcp, and ss13-dm-mcp toget
 3. **Пред-PR чеклист:**
    - при добавлении/правке спрайтов и звуков — `ss14_audit_rsi(..., check_attributions=True)`;
    - при добавлении/правке локализации — `ss14_audit_ftl(path_prefix=...)`;
-   - перед завершением задачи — `ss14_check_upstream_hygiene()` для проверки маркеров `Sunrise-Edit` вне `_Sunrise`.
+   - перед завершением задачи — `ss14_check_upstream_hygiene()` для проверки маркеров `Sunrise edit`/`Sunrise added` вне `_Sunrise`.
 
 ### 2. Портирование фичи из SS13 в SS14 (`ss13-dm-mcp` + `ss14-mcp`)
 1. **Разбор логики SS13:** начни с `dm_get_type(typepath)` для обзора переменных и сигнатур, затем читай только нужные процедуры через `dm_get_proc(..., include_parents=True)` и константы через `dm_search_defines`.

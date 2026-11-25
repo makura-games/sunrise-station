@@ -11,9 +11,9 @@
 ## Форк Sunrise и маркеры правок
 
 - Префикс кодовой базы: `Sunrise`. Папка для нового кода, `partial`-систем, прототипов и ассетов: `_Sunrise`. Префикс новых форк-ID прототипов: `Sunrise*`.
-- В ванильных файлах оставлять только минимальные хуки с маркерами:
-  - Однострочный: `// Sunrise-Edit - причина` (C#), `# Sunrise-Edit - причина` (YAML/FTL), `<!-- Sunrise-Edit -->` (XML/XAML).
-  - Многострочный: `// Sunrise edit start - причина` … `// Sunrise edit end` или `// Sunrise added start - причина` … `// Sunrise added end` (в YAML/FTL с `#`).
+- В ванильных файлах оставлять только минимальные хуки с маркерами (написание строго фиксировано, с учётом регистра и без дефиса; исторические варианты из соседнего кода в новых правках не копировать):
+  - Однострочный: `// Sunrise edit - причина`, `// Sunrise added - причина` (C#); `# Sunrise edit - причина`, `# Sunrise added - причина` (YAML/FTL); `<!-- Sunrise edit - причина -->`, `<!-- Sunrise added - причина -->` (XML/XAML).
+  - Многострочный: `// Sunrise edit start - причина` … `// Sunrise edit end` или `// Sunrise added start - причина` … `// Sunrise added end` (в YAML/FTL с `#`; `start` и `end` используются только парно, у `end` причина не пишется).
 - При правке файлов внутри унаследованных модулей (`_Starlight`, `_RMC14`, `_Fish`, `_Afterlight`, `_FarHorizons`) сохранять их локальную структуру, но новые фичи Sunrise класть в `_Sunrise`.
 
 ## Архитектурные инварианты C#
@@ -25,9 +25,10 @@
 
 ## Язык комментариев и словарь
 
-- Пояснения в inline-комментариях, у `using` и в reason-фразах у `Sunrise-Edit` / `Sunrise edit|added start` писать по-русски (`/// <summary>` — по-английски согласно `ss14-documentation-writing`).
-- Английские идентификаторы, имена типов, API, loc-key и маркеры не переводить.
-- Для `Sponsor*` в описаниях использовать термин **«спонсор»** (не `donor` / `donator`).
+- Комментарии и XML-документацию (`/// <summary>`, `<remarks>`, `<param>`, `<returns>`) в форк-коде (`_Sunrise`, блоки `Sunrise edit` / `Sunrise added`), комментарии у `using` и reason-фразы у маркеров `Sunrise edit`, `Sunrise added`, `Sunrise edit start/end`, `Sunrise added start/end` писать по-русски.
+- Upstream-комментарии не переводить и не переписывать; логи оставлять на английском.
+- Английские идентификаторы, имена типов, API, XML-теги, loc-key и канонические маркеры не переводить.
+- В описаниях рядом с кодом для `Sponsor*` использовать термин **«спонсор»** (`donor` и `donator` не использовать).
 
 ## MCP-СЕРВЕРЫ
 
@@ -44,7 +45,7 @@
 При доступности используй для анализа YAML-прототипов, `[DataField]` и пред-PR проверок:
 1. Прототипы и наследование: `ss14_resolve_prototype` (цепочка `parent` + `_Sunrise/Partial` + предупреждения о затирании списков родителя), `ss14_query_prototypes`, `ss14_get_inheritance_tree`.
 2. C#-компоненты: `ss14_inspect_component` (`[DataField]`, типы, дефолты, сетевые атрибуты).
-3. Аудит: `ss14_audit_rsi` (`meta.json`, PNG, дубли кадров, звуки, `attributions.yml`), `ss14_audit_ftl` (паритет `ru-RU` ↔ `en-US`, `ent-*`, `Loc.GetString`), `ss14_check_upstream_hygiene` (`git diff` вне `_Sunrise` и маркеры `Sunrise-Edit`).
+3. Аудит: `ss14_audit_rsi` (`meta.json`, PNG, дубли кадров, звуки, `attributions.yml`), `ss14_audit_ftl` (паритет `ru-RU` ↔ `en-US`, `ent-*`, `Loc.GetString`), `ss14_check_upstream_hygiene` (`git diff` вне `_Sunrise` и маркеры `Sunrise edit`/`Sunrise added`).
 
 ### `ss13-dm-mcp` (опциональный read-only MCP в `Tools/_sunrise/ss13-dm-mcp` для сборок SS13)
 При доступности (требует `SS13_REPO_PATH` на внешний билд SS13; особенно полезен при портировании фич из SS13) используй вместо ручного чтения `.dm` и `.dmi`:

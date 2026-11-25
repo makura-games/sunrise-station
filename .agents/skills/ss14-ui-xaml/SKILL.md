@@ -28,7 +28,7 @@ AdminPanel.xaml.cs -> public sealed partial class AdminPanel : FancyWindow
 
 ## Statically retrieving data in XAML
 
-For static values ​​use `x:Static` and `x:Type`.
+For static values use `x:Static` and `x:Type`.
 
 When needed:
 - size/parameter constants from C#;
