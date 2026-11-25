@@ -155,7 +155,7 @@
 - type: entity
   id: WeaponMechCombatKord
   name: mounted "Kord"
-  description: Rapid-fire machine gun chambered for 12.7 x 108 mm
+  description: Rapid-fire machine gun chambered for 13 mm cartridges.
   suffix: Mech Weapon, Combat, Kord
   parent: [ BaseMechWeaponRange, CombatMechEquipment ]
   components:
@@ -180,7 +180,7 @@
         volume: 15
         pitch: 1.9
   - type: BatteryAmmoProvider
-    proto: CartridgeRifleHeavy127mm
+    proto: CartridgeRifleHeavy13mm
     fireCost: 25
   - type: Appearance
   - type: AmmoCounter

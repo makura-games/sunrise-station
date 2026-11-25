@@ -1142,25 +1142,72 @@
         state: practice
 
 - type: entity
-  id: BulletRifleHeavy127mm
-  parent: [ BulletStoppingPowerMagnum, BulletRifleTraceHeavyPractice ]
+  id: BulletRifleHeavy13mm
+  parent: BulletRifleTraceHeavyPractice
   categories: [ HideSpawnMenu ]
   components:
+  - type: RadarBlip
+    color: "#FF6A6A"
+    scale: 0.45
+    shape: Triangle
+    requireInSpace: true
+  - type: Projectile
+    armorPenetration: -0.15
+    damage:
+      types:
+        Piercing: 28
+        Structural: 5
+    penetrationThreshold: 150
+    penetrationDamageTypeRequirement:
+    - Structural
+  - type: ProjectilePierce
+    chance: 0.5
+    deviation: 0.05
+    pierceLevel: Metal
+  - type: ProjectileRicochet
+    chance: 0.5
+
+- type: entity
+  id: BulletRifleHeavy13mmHP
+  parent: BulletRifleHeavy13mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    armorPenetration: -0.5
+    damage:
+      types:
+        Piercing: 28
+        Blunt: 4
+        Slash: 4
+  - type: ProjectilePierce
+    chance: 0.05
+    deviation: 0.05
+    pierceLevel: Metal
+  - type: ProjectileRicochet
+    chance: 0.05
+
+- type: entity
+  id: BulletRifleHeavy13mmAP
+  parent: [ BulletStoppingPowerWeak, BulletRifleTraceHeavyFMJ ]
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RadarBlip
+    scale: 0.45
   - type: Projectile
     armorPenetration: 0.25
     damage:
       types:
-        Piercing: 35
-        Structural: 50
+        Piercing: 29
+        Structural: 25
     penetrationThreshold: 360
     penetrationDamageTypeRequirement:
     - Structural
   - type: ProjectilePierce
-    chance: 0.6
+    chance: 0.75
     deviation: 0.05
     pierceLevel: Rock
   - type: ProjectileRicochet
-    chance: 0.4
+    chance: 0.75
 
 - type: entity
   id: BulletRifleTraceHeavyAP

@@ -30,3 +30,12 @@ ent-MagazineBoxRifleMachineIncendiary = ammunition box (7.62mmR incendiary)
     .desc = A cardboard box of 7.62mmR rounds. Intended to hold self-igniting incendiary ammunition.
 ent-MagazineBoxRifleMachineUranium = ammunition box (7.62mmR uranium)
     .desc = A cardboard box of 7.62mmR rounds. Intended to hold exotic uranium-core ammunition.
+
+ent-MagazineBoxHeavyRifle13mm = ammunition box (13mm)
+    .desc = A box of 10 13x55 mm cartridges for the ASH-13.
+
+ent-MagazineBoxHeavyRifle13mmHP = ammunition box (13mm HP)
+    .desc = A box of 10 HP 13x55 mm cartridges for the ASH-13.
+
+ent-MagazineBoxHeavyRifle13mmAP = ammunition box (13mm AP)
+    .desc = A box of 10 AP 13x55 mm cartridges for the ASH-13.

@@ -1015,7 +1015,7 @@ RandomHumanoidSpawnerERTLeaderGammaVeteran: RandomHumanoidSpawnerERTLeaderGamma
 VendingMachineMayson: null
 DrinkLukin: null
 DrinkFourteenLokoPlusCan: null
-MagazineAsh12: null
+MagazineAsh12: MagazineAsh13
 ClothingHeadHelmetSpaceNinjaBiocode: null
 ClothingHandsGlovesSpaceNinjaBiocode: null
 ClothingOuterSuitSpaceNinjaBiocode: null
@@ -1219,10 +1219,10 @@ GunSafeEnergyPistolDominator: GunSafeEnergyGunMini
 GunSafeSubMachineGunSkorpion: GunSafeSubMachineGunWt550
 WeaponSubMachineGunSkorpion: WeaponSubMachineGunWt550
 MagazineScorpion: MagazinePistolSubMachineGunTopMounted
-BlueprintMagAsh12Slug: BlueprintMagAsh12Basic
+BlueprintMagAsh12Slug: BlueprintAmmo13mm
 BlueprintMagAsh12Beanbag: null
 BlueprintMagAsh12Flare: null
-ClothingBackpackDuffelWeaponRifleAsh12: Ash12Box
+ClothingBackpackDuffelWeaponRifleAsh12: Ash13Box
 WeaponRifleM90GrenadeLauncherBiocode: WeaponRifleM90GrenadeLauncher
 ClothingOuterEliteHardsuitUSSP: null
 GasMinerPlasma: null
@@ -1631,3 +1631,10 @@ AsimovCircuitBoard: CrewsimovCircuitBoard
 MagazineP90HP: MagazineP90AP
 MagazineP90FMJ: MagazineP90AP
 MagazineP90Incendiary: MagazineP90AP
+WeaponRifleAsh12: WeaponRifleAsh13
+CartridgeRifleHeavy127mm: CartridgeRifleHeavy13mm
+BlueprintMagAsh12Basic: BlueprintAmmo13mm
+MagazineAsh12Slug: null
+MagazineAsh12Beanbag: null
+MagazineAsh12Flare: null
+Ash12Box: Ash13Box

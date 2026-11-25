@@ -34,3 +34,12 @@ ent-SpeedLoaderHeavyRifleRIncendiary = speed loader (7.62mmR incendiary)
     .desc = { ent-BaseItem.desc }
 ent-CartridgeRifleHeavy127mm = cartridge (12.7 mm)
     .desc = { ent-BaseItem.desc }
+
+ent-CartridgeRifleHeavy13mm = cartridge (13mm)
+    .desc = { ent-BaseItem.desc }
+
+ent-CartridgeRifleHeavy13mmHP = cartridge (13mm HP)
+    .desc = { ent-BaseItem.desc }
+
+ent-CartridgeRifleHeavy13mmAP = cartridge (13mm AP)
+    .desc = { ent-BaseItem.desc }

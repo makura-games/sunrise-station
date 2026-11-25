@@ -47,14 +47,13 @@
   - type: Appearance
 
 - type: entity
-  id: BaseMagazineAsh12
-  name: "ash-12 magazine(.50 slug)"
+  id: BaseMagazineAsh13Rifle
   parent: [ BaseItem, BaseSecurityContraband ]
   abstract: true
   components:
   - type: Tag
     tags:
-      - MagazineAsh12
+    - MagazineAsh13Rifle
   - type: Sprite
     scale: 0.8,0.8
     sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/ash12.rsi
@@ -69,9 +68,9 @@
     mayTransfer: true
     whitelist:
       tags:
-        - ShotgunSlug
+      - CartridgeRifleHeavy13mm
     capacity: 10
-    proto: ShellShotgunSlug
+    proto: CartridgeRifleHeavy13mm
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -82,9 +81,9 @@
   - type: Appearance
 
 - type: entity
-  id: MagazineAsh12Slug
-  name: ash-12 magazine slug
-  parent: BaseMagazineAsh12
+  id: MagazineAsh13
+  parent: BaseMagazineAsh13Rifle
+  name: ash-13 magazine (13mm)
   components:
   - type: Sprite
     layers:
@@ -93,39 +92,23 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: stripe
-      color: "#780606"
+      color: "#977917"
 
 - type: entity
-  id: MagazineAsh12Beanbag
-  name: ash-12 magazine beanbag
-  parent: BaseMagazineAsh12
+  id: MagazineAsh13HP
+  parent: MagazineAsh13
+  name: ash-13 magazine (13mm HP)
   components:
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#149A1E"
   - type: BallisticAmmoProvider
-    proto: ShellShotgunBeanbag
+    proto: CartridgeRifleHeavy13mmHP
 
 - type: entity
-  id: MagazineAsh12Flare
-  name: ash-12 magazine flare
-  parent: BaseMagazineAsh12
+  id: MagazineAsh13AP
+  parent: MagazineAsh13
+  name: ash-13 magazine (13mm AP)
   components:
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#FFFF0B"
   - type: BallisticAmmoProvider
-    proto: ShellShotgunFlare
+    proto: CartridgeRifleHeavy13mmAP
 
 # region Bulldog
 - type: entity

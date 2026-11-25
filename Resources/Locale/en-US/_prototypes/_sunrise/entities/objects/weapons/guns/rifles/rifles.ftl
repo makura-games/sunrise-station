@@ -29,3 +29,6 @@ ent-WeaponRifleSKM28Nano = sKM-28
     .desc = A marksman conversion of the standard SKM-24. Features an extended heavy barrel, reworked internals, and a mounted optical sight. Chambered in .308. Money doesn't smell.
 ent-WeaponRifleAsh12 = ash-12
     .desc = A heavy automatic rifle chambered in shotgun shells. Hits like a hammer.
+
+ent-WeaponRifleAsh13 = ash-13
+    .desc = A heavy automatic rifle chambered in 13x55 mm cartridges. Hits like a hammer.

@@ -145,6 +145,14 @@
   parent: WeaponRevolverMateba
   id: WeaponRevolverMatebaNew
   components:
+  - type: RevolverAmmoProvider
+    proto: CartridgeRifleHeavy13mm
+    capacity: 5
+    chambers: [ True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null ]
+    whitelist:
+      tags:
+      - CartridgeRifleHeavy13mm
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/Pistols/mateba.rsi
   - type: Clothing

@@ -10,3 +10,5 @@ ent-BlueprintProtoAdrenalImplant = proto-adrenal implant blueprint
     .desc = A blueprint with a schematic of a proto-adrenal implant. It can be inserted into a medical techfab.
 ent-BlueprintMagazineBoxRifleAuto = P-90 ammunition blueprint
     .desc = A blueprint for producing boxes of P-90 cartridges in an autolathe or security fabricator.
+ent-BlueprintAmmo13mm = 13mm ammunition blueprint
+    .desc = A blueprint for an ash-13 magazine and three types of 13x55 mm ammunition boxes. It can be inserted into an autolathe and security fabricator.

@@ -214,9 +214,9 @@
             - CartridgeRifle
 
 - type: entity
-  name: ASH-12
+  name: ASH-13
   parent: [GunLight, BaseWeaponRifle]
-  id: WeaponRifleAsh12
+  id: WeaponRifleAsh13
   components:
   - type: Sprite
     scale: 0.8,0.8
@@ -242,7 +242,7 @@
   - type: Gun
     minAngle: 15
     maxAngle: 30
-    angleIncrease: 3
+    angleIncrease: 2
     angleDecay: 15
     fireRate: 2.85
     soundGunshot:
@@ -253,19 +253,20 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineAsh12Slug
+        startingItem: MagazineAsh13
         insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/ash12/ash12_mag_in.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/ash12/ash12_mag_out.ogg
         priority: 3
         whitelist:
           tags:
-            - MagazineAsh12
+            - MagazineAsh13Rifle
       gun_chamber:
         name: Chamber
+        startingItem: CartridgeRifleHeavy13mm
         priority: 1
         whitelist:
           tags:
-            - ShotgunSlug
+            - CartridgeRifleHeavy13mm
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot

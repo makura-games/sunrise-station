@@ -109,8 +109,8 @@
 
 - type: entity
   parent: BaseItem
-  id: Ash12Box
-  name: Ash12
+  id: Ash13Box
+  name: ASH-13
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -123,8 +123,26 @@
     - 0,0,4,2
   - type: SpawnItemsOnUse
     items:
-      - id: WeaponRifleAsh12
-      - id: MagazineAsh12Beanbag
-      - id: BlueprintMagAsh12Basic
+      - id: WeaponRifleAsh13
+      - id: MagazineAsh13
+      - id: BlueprintAmmo13mm
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: GlockBox
+  id: MatebaNewBox
+  name: mateba new box
+  description: It contains a Mateba revolver and a 13mm ammunition blueprint.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Pistols/mateba.rsi
+    layers:
+    - state: icon
+  - type: SpawnItemsOnUse
+    items:
+    - id: WeaponRevolverMatebaNew
+    - id: BlueprintAmmo13mm
     sound:
       path: /Audio/Effects/unwrap.ogg

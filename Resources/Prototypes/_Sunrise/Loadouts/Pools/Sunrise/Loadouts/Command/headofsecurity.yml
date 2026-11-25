@@ -29,7 +29,7 @@
 - type: loadout
   id: HeadofSecurityWeapon50h
   equipment:
-    pocket1: WeaponRevolverMatebaNew
+    pocket1: MatebaNewBox
   effects:
   - !type:GroupLoadoutEffect
     proto: MasterHoS50h

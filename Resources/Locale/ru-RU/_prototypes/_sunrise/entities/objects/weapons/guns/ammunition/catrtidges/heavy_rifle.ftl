@@ -34,3 +34,12 @@ ent-SpeedLoaderHeavyRifleRIncendiary = клипса (7,62к зажигатель
     .desc = { ent-BaseItem.desc }
 ent-CartridgeRifleHeavy127mm = патрон (12,7мм)
     .desc = { ent-BaseItem.desc }
+
+ent-CartridgeRifleHeavy13mm = патрон (13мм)
+    .desc = { ent-BaseItem.desc }
+
+ent-CartridgeRifleHeavy13mmHP = патрон (13мм эксп)
+    .desc = { ent-BaseItem.desc }
+
+ent-CartridgeRifleHeavy13mmAP = патрон (13мм ББ)
+    .desc = { ent-BaseItem.desc }

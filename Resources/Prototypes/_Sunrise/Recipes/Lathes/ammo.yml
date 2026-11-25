@@ -21,31 +21,6 @@
 
 # Blueprints
 - type: latheRecipe
-  parent: BaseAmmoRecipe
-  id: MagazineAsh12Slug
-  result: MagazineAsh12Slug
-  materials:
-    Steel: 250
-    Plastic: 100
-
-- type: latheRecipe
-  parent: BaseAmmoRecipe
-  id: MagazineAsh12Flare
-  result: MagazineAsh12Flare
-  materials:
-    Steel: 150
-    Plastic: 70
-
-- type: latheRecipe
-  parent: BaseAmmoRecipe
-  id: MagazineAsh12Beanbag
-  result: MagazineAsh12Beanbag
-  materials:
-    Steel: 150
-    Plastic: 140
-
-# .40 Pistol (.45 ACP)
-- type: latheRecipe
   parent: BaseEmptyAmmoRecipe
   id: MagazinePistol40Empty
   result: MagazinePistol40Empty
@@ -82,6 +57,40 @@
     Steel: 115
     Plasteel: 55
     Uranium: 20
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineAsh13
+  result: MagazineAsh13
+  materials:
+    Steel: 400
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineBoxHeavyRifle13mm
+  result: MagazineBoxHeavyRifle13mm
+  materials:
+    Steel: 325
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineBoxHeavyRifle13mmHP
+  result: MagazineBoxHeavyRifle13mmHP
+  materials:
+    Steel: 250
+    Plasteel: 25
+    Plastic: 25
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineBoxHeavyRifle13mmAP
+  result: MagazineBoxHeavyRifle13mmAP
+  materials:
+    Steel: 250
+    Plasteel: 100
+    Uranium: 50
+
+# .40 Pistol (.45 ACP)
 
 # .40 Pistol Box
 - type: latheRecipe

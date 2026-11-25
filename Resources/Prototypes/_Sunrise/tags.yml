@@ -195,6 +195,9 @@
   id: CartridgeHeavyRifleR
 
 - type: Tag
+  id: CartridgeRifleHeavy13mm
+
+- type: Tag
   id: FireBomb
 
 - type: Tag
@@ -250,7 +253,7 @@
   id: MagazineAR18
 
 - type: Tag
-  id: MagazineAsh12
+  id: MagazineAsh13Rifle
 
 - type: Tag
   id: MagazineBauer127

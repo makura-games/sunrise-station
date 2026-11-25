@@ -12,3 +12,9 @@ ent-DeagleGoldBox = golden Eagle
     .desc = Contains a pistol, a magazine, and a blueprint for .45 Magnum magazines for it. Did you want something else?
 ent-Ash12Box = aSH-12
     .desc = An ASH-12 weapon and a blueprint for its magazines. Did you want something else?
+
+ent-Ash13Box = ASH-13
+    .desc = An ASH-13 weapon, magazine, and a blueprint for its ammunition. Did you want something else?
+
+ent-MatebaNewBox = Mateba New box
+    .desc = It contains a Mateba revolver and a 13mm ammunition blueprint.
