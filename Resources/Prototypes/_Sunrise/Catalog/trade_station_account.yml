@@ -1,0 +1,7 @@
+- type: cargoAccount
+  id: SunriseTradeStation
+  name: sunrise-trade-station-account-name
+  code: sunrise-trade-station-account-code
+  color: "#b48b57"
+  radioChannel: Supply
+  acquisitionSlip: PaperAcquisitionSlipCargo

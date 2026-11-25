@@ -1625,3 +1625,7 @@ DrinkWaterJug: JugWater
 
 #2026-09-05
 AsimovCircuitBoard: CrewsimovCircuitBoard
+
+# Sunrise-Edit
+CrateSyndicateSuperSurplusBundleAgent: CrateSyndicateSurplusBundle
+CrateSyndicateSuperSurplusBundleNuke: CrateSyndicateSurplusBundleNuke

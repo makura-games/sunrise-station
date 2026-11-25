@@ -246,9 +246,18 @@ public sealed partial class HijackBeaconSystem : EntitySystem
         station.Hacked = true;
         Dirty(beaconXForm.GridUid.Value, station);
 
+        // Sunrise-Edit: refresh open consoles after the ATS hijack.
+        var stationHijacked = new TradeStationHijackedEvent();
+        RaiseLocalEvent(beaconXForm.GridUid.Value, ref stationHijacked);
+
         // Broadcast that the ATS has been hacked.
         var ev = new HijackBeaconSuccessEvent(ent.Comp.Fine);
         RaiseLocalEvent(ref ev);
+
+        // Sunrise-Start Reward after successful hijack.
+        var rewardEvent = new HijackBeaconRewardEvent();
+        RaiseLocalEvent(ent, ref rewardEvent);
+        // Sunrise-End
 
         //global announcement
         var sender = Loc.GetString("hijack-beacon-announcement-sender");
@@ -351,3 +360,11 @@ public record struct HijackBeaconSuccessEvent(int Fine)
 {
     public int Total = 0;
 };
+
+// Sunrise-Start Reward after successful hijack.
+[ByRefEvent]
+public readonly record struct HijackBeaconRewardEvent;
+
+[ByRefEvent]
+public readonly record struct TradeStationHijackedEvent;
+// Sunrise-End

@@ -64,7 +64,7 @@
 - type: weightedRandom
   id: TraitorObjectiveGroupOther
   weights:
-    # HijackTradeStationObjective: 1 # Sunrise-Edit - торговая станция отсутствует на картах Sunrise.
+    HijackTradeStationObjective: 1
     MailFraudObjective: 1
 
 

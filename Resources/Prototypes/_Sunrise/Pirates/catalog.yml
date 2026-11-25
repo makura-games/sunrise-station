@@ -1,0 +1,367 @@
+﻿- type: cargoAccount
+  id: Pirates
+  name: cargo-account-pirate-name
+  code: cargo-account-pirate-code
+  color: "#a15608"
+  radioChannel: Pirate
+  acquisitionSlip: PaperAcquisitionSlipCargo
+
+- type: cargoBountyGroup
+  id: Pirates
+
+- type: cargoBountyGroup
+  id: PirateBountyScrapper
+
+- type: cargoBountyGroup
+  id: PirateBountyPirate
+
+- type: cargoBountyGroup
+  id: PirateBountyFreelancer
+
+- type: cargoMarket
+  id: pirateMarket
+
+- type: cargoMarket
+  id: pirateMarketPirate
+
+- type: cargoMarket
+  id: pirateMarketFreelance
+
+- type: cargoMarket
+  id: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketCutlass
+  icon:
+    sprite: Objects/Weapons/Melee/cutlass.rsi
+    state: icon
+  product: Cutlass
+  cost: 1000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketFlintlock
+  icon:
+    sprite: Objects/Weapons/Guns/Snipers/flintlock.rsi
+    state: base
+  product: WeaponPistolFlintlock
+  cost: 1000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketRomulan
+  icon:
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/romulan.rsi
+    state: icon
+  product: SunriseWeaponRifleRomulan
+  cost: 5000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketCannon
+  icon:
+    sprite: Objects/Weapons/Guns/Launchers/pirate_cannon.rsi
+    state: icon
+  product: WeaponLauncherPirateCannon
+  cost: 3000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketDisposableLauncherTraining
+  icon:
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/disposal_rocket_launcher.rsi
+    state: unwielded
+  product: CratePirateDisposableLauncherTraining
+  cost: 1000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketDisposableLauncherEmp
+  icon:
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/disposal_rocket_launcher.rsi
+    state: unwielded
+  product: CratePirateDisposableLauncherEmp
+  cost: 2500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketDisposableLauncherSmoke
+  icon:
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/disposal_rocket_launcher.rsi
+    state: unwielded
+  product: CratePirateDisposableLauncherSmoke
+  cost: 1500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketDisposableLauncher
+  icon:
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/disposal_rocket_launcher.rsi
+    state: unwielded
+  product: CratePirateDisposableLauncher
+  cost: 5000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketDisposableLauncherIncendiary
+  icon:
+    sprite: _Sunrise/Objects/Weapons/Guns/Launchers/disposal_rocket_launcher.rsi
+    state: unwielded
+  product: CratePirateDisposableLauncherIncendiary
+  cost: 7500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketShuttleGunKineticFlatpack
+  icon:
+    sprite: Objects/Devices/flatpack.rsi
+    state: base
+  product: ShuttleGunKineticFlatpack
+  cost: 750
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketShuttleGunLightRifleImprovisedFlatpack
+  icon:
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_lethal
+  product: ShuttleGunLightRifleImprovisedFlatpack
+  cost: 2000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketShuttleGunLightRifleSPFlatpack
+  icon:
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_lethal
+  product: ShuttleGunLightRifleSPFlatpack
+  cost: 3000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketShuttleGunLightRifleFMJFlatpack
+  icon:
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_lethal
+  product: ShuttleGunLightRifleFMJFlatpack
+  cost: 5000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketShuttleGunLightRifleAPFlatpack
+  icon:
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_lethal
+  product: ShuttleGunLightRifleAPFlatpack
+  cost: 10500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketComputerGunneryCircuitboard
+  icon:
+    sprite: Objects/Misc/module.rsi
+    state: cpu_syndicate
+  product: ComputerGunneryCircuitboard
+  cost: 1000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketSyndicateShuttleConsoleCircuitboard
+  icon:
+    sprite: Objects/Misc/module.rsi
+    state: cpu_syndicate
+  product: SyndicateShuttleConsoleCircuitboard
+  cost: 1000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketComputerPirateUplinkFlatpack
+  icon:
+    sprite: Objects/Devices/flatpack.rsi
+    state: base
+  product: ComputerPirateUplinkFlatpack
+  cost: 5000
+  category: pirateproduct-category-name-tools
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketComputerPirateExchangerFlatpack
+  icon:
+    sprite: Objects/Devices/flatpack.rsi
+    state: base
+  product: ComputerPirateExchangerFlatpack
+  cost: 3000
+  category: pirateproduct-category-name-tools
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketShipCannon
+  icon:
+    sprite: Objects/Weapons/Guns/Shuttles/pirate_cannon.rsi
+    state: base
+  product: ShuttleGunPirateCannon
+  cost: 3000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketShuttleGunPirateBombard
+  icon:
+    sprite: Objects/Weapons/Guns/Shuttles/pirate_cannon.rsi
+    state: base
+  product: ShuttleGunPirateBombard
+  cost: 5000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketSyndicateShuttleBundle
+  icon:
+    sprite: Structures/Shuttles/thruster.rsi
+    state: base
+  product: CrateSyndicateShuttleBundle
+  cost: 2750
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketSyndicateFriendshipBundle
+  icon:
+    sprite: Objects/Weapons/Guns/Shuttles/launcher.rsi
+    state: exp-320g
+  product: CrateSyndicateFriendshipBundle
+  cost: 4000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketSyndicateLongbowBundle
+  icon:
+    sprite: _Sunrise/Objects/Weapons/Guns/Shuttles/bal_127.rsi
+    state: bal-127
+  product: CrateSyndicateLongbowBundle
+  cost: 4500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketSyndicateBullfrogBundle
+  icon:
+    sprite: _Sunrise/Objects/Weapons/Guns/Shuttles/exp_3600.rsi
+    state: bal-127
+  product: CrateSyndicateBullfrogBundle
+  cost: 6000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketSyndicateQuadlingBundle
+  icon:
+    sprite: _Sunrise/Objects/Weapons/Guns/Shuttles/bal_127_4.rsi
+    state: bal-127
+  product: CrateSyndicateQuadlingBundle
+  cost: 5500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketPirateEVA
+  icon:
+    sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
+    state: icon
+  product: SuitStorageEVAPirate
+  cost: 1500
+  category: pirateproduct-category-name-armor
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketRogueHardsuit
+  icon:
+    sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/rogue.rsi
+    state: icon
+  product: SunriseClothingOuterHardsuitRogue
+  cost: 4000
+  category: pirateproduct-category-name-armor
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketAppraisalTool
+  icon:
+    sprite: Objects/Tools/appraisal-tool.rsi
+    state: icon
+  product: AppraisalTool
+  cost: 500
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketUranium
+  icon:
+    sprite: Objects/Materials/Sheets/other.rsi
+    state: uranium_3
+  product: SheetUranium
+  cost: 3000
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketPlasma
+  icon:
+    sprite: Objects/Materials/Sheets/other.rsi
+    state: plasma_3
+  product: CrateMaterialPlasma
+  cost: 1500
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketAmeFuel
+  icon:
+    sprite: Objects/Power/AME/ame_jar.rsi
+    state: jar
+  product: CrateEngineeringAMEJar
+  cost: 2000
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketVodkaBarrel
+  icon:
+    sprite: Structures/Storage/barrels.rsi
+    state: metalbarrel
+  product: ChemicalBarrelVodka
+  cost: 1500
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketRumBarrel
+  icon:
+    sprite: Structures/Storage/barrels.rsi
+    state: metalbarrel
+  product: ChemicalBarrelRum
+  cost: 2500
+  category: pirateproduct-category-name-tools
+  group: pirateMarketPirate
+
+- type: entity
+  id: PiratePalletSell
+  name: pirate-selling-pallet-name
+  description: pirate-selling-pallet-description
+  parent: CargoPalletSell

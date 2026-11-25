@@ -35377,7 +35377,7 @@ entities:
         categories:
         - NTPistols
       - costModifiersBySourceId: {}
-        productEntity: CrateSyndicateSuperSurplusBundleAgent
+        productEntity: CrateSyndicateSurplusBundle
         originalCost:
           Telecrystal: 40
         name: uplink-super-surplus-bundle-name
@@ -36217,7 +36217,7 @@ entities:
         categories:
         - UplinkDisruption
       - costModifiersBySourceId: {}
-        productEntity: CrateSyndicateSuperSurplusBundleNuke
+        productEntity: CrateSyndicateSurplusBundleNuke
         originalCost:
           Telecrystal: 40
         name: uplink-super-surplus-bundle-name

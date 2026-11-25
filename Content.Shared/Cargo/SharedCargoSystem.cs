@@ -1,4 +1,5 @@
 using Content.Shared.Cargo.Components;
+using Content.Shared._Sunrise.TradeStation; // Sunrise-Edit: exclude the ATS account from station fines.
 using Content.Shared.Cargo.Prototypes;
 using Content.Shared.HijackBeacon;
 using JetBrains.Annotations;
@@ -32,6 +33,9 @@ public abstract partial class SharedCargoSystem : EntitySystem
         var stationQuery = EntityQueryEnumerator<StationBankAccountComponent>();
         while (stationQuery.MoveNext(out var uid, out var comp))
         {
+            if (HasComp<SunriseTradeStationAccountComponent>(uid)) // Sunrise-Edit: the ATS account is not a station account.
+                continue;
+
             foreach (var (account, cash) in comp.Accounts)
             {
                 comp.Accounts[account] = cash - args.Fine;

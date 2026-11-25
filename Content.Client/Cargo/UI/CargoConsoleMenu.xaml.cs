@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._Sunrise.TradeStation; // Sunrise-Edit: display ATS prices.
 using Content.Client.Cargo.Systems;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Cargo;
@@ -42,6 +43,7 @@ namespace Content.Client.Cargo.UI
         private string? _category;
 
         public List<ProtoId<CargoProductPrototype>> ProductCatalogue = new();
+        public bool SyndicateAvailable; // Sunrise-Edit: access is specific to the current visitor.
 
         public CargoConsoleMenu(EntityUid owner, IEntityManager entMan, IPrototypeManager protoManager, SpriteSystem spriteSystem)
         {
@@ -131,6 +133,10 @@ namespace Content.Client.Cargo.UI
 
                     yield return cargoPrototype;
                 }
+
+                // Sunrise-Edit: the personal product is excluded from shared UI state.
+                if (SyndicateAvailable && _protoManager.TryIndex<CargoProductPrototype>(SunriseTradeStationPricing.SyndicateProduct, out var syndicate))
+                    yield return syndicate;
             }
         }
 
@@ -155,12 +161,16 @@ namespace Content.Client.Cargo.UI
                     search.Length != 0 && prototype.Description.ToLowerInvariant().Contains(search) ||
                     search.Length == 0 && _category != null && Loc.GetString(prototype.Category).Equals(_category))
                 {
+                    // Sunrise-Edit: display the markup for the standard ATS catalogue.
+                    var price = _entityManager.HasComponent<SunriseTradeStationConsoleComponent>(_owner) && prototype.Group == "market"
+                        ? SunriseTradeStationPricing.BaseUnitPrice(prototype.Cost)
+                        : prototype.Cost;
                     var button = new CargoProductRow
                     {
                         Product = prototype,
                         ProductName = { Text = prototype.Name },
                         MainButton = { ToolTip = prototype.Description },
-                        PointCost = { Text = Loc.GetString("cargo-console-menu-points-amount", ("amount", prototype.Cost.ToString())) },
+                        PointCost = { Text = Loc.GetString("cargo-console-menu-points-amount", ("amount", price.ToString())) }, // Sunrise-Edit: ATS price.
                         Icon = { Texture = _spriteSystem.Frame0(prototype.Icon) },
                     };
                     button.MainButton.OnPressed += args =>

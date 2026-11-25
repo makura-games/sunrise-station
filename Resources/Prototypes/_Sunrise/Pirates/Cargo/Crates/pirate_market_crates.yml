@@ -1,4 +1,17 @@
 - type: entity
+  parent: CratePiratePrivateSecure
+  id: CratePiratePrivateerHardsuit
+  name: freelance hardsuit crate
+  description: Contains one random freelance hardsuit.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:GroupSelector
+        children:
+        - id: ClothingOuterHardsuitPrivateer
+        - id: ClothingOuterHardsuitPrivateerArmored
+
+- type: entity
   parent: CratePrivateSecure
   id: CratePiratePrivateSecure
   name: rusty crate
@@ -774,17 +787,6 @@
 
 - type: entity
   parent: CratePiratePrivateSecure
-  id: CratePirateMagazineBoxAntiMaterielBlast
-  name: magazine box anti materiel blast crate
-  description: Contains six magazine box anti materiel blast items.
-  components:
-  - type: StorageFill
-    contents:
-      - id: MagazineBoxAntiMaterielBlast
-        amount: 6
-
-- type: entity
-  parent: CratePiratePrivateSecure
   id: CratePirateMagazineBoxAntiMaterielFrag
   name: magazine box anti materiel frag crate
   description: Contains six magazine box anti materiel frag items.
@@ -942,23 +944,23 @@
   parent: CratePiratePrivateSecure
   id: CratePirateMagazineChainGun
   name: chaingun magazine crate
-  description: Contains six chaingun magazines.
+  description: Contains few chaingun magazines.
   components:
   - type: StorageFill
     contents:
       - id: MagazineChainGun
-        amount: 6
+        amount: 3
 
 - type: entity
   parent: CratePiratePrivateSecure
   id: CratePirateMagazineChainGunImprovised
   name: chaingun improvised magazine crate
-  description: Contains six chaingun magazines.
+  description: Contains few chaingun magazines.
   components:
   - type: StorageFill
     contents:
       - id: MagazineChainGunImprovised
-        amount: 6
+        amount: 3
 
 - type: entity
   parent: CratePiratePrivateSecure

@@ -31,5 +31,7 @@
     - CartridgeMinigun
   - type: CartridgeAmmo
     proto: BulletMinigunTrace
-  # Sunrise-end
     deleteOnSpawn: true
+  - type: StaticPrice
+    price: 3
+  # Sunrise-end

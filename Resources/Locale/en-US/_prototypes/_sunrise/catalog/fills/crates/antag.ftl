@@ -4,6 +4,3 @@ ent-CratePiraterEVASuitArmoredBundle = armored pirate EVA suit bundle
 ent-CratePiraterEVASuitBundle = pirate EVA suit bundle
     .suffix = Filled, Sunrise
     .desc = { ent-CrateGenericSteel.desc }
-ent-CrateSyndicateSuperSurplusBundleAgent = syndicate super surplus crate
-    .suffix = Agent
-    .desc = Contains 125 telecrystals worth of completely random Syndicate items.

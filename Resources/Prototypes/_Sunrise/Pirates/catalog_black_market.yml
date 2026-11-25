@@ -1,0 +1,1495 @@
+# Pirate black market goods for cargo.
+# Price: 1 doubloon = 250 credits.
+
+- type: cargoProduct
+  id: PirateMarketMagChestCannonBall
+  icon:
+    { sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi, state: ball }
+  product: CratePirateChestCannonBall
+  cost: 2500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketChestCannonBallPlasteel
+  icon:
+    { sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi, state: ball }
+  product: CratePirateChestCannonBallPlasteel
+  cost: 1000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketChestCannonBallFuze
+  icon:
+    { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi, state: fuzeball }
+  product: CratePirateChestCannonBallFuze
+  cost: 2000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketChestGlassshot
+  icon:
+    { sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi, state: glassshot }
+  product: CratePirateChestGlassshot
+  cost: 2500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketChestCannonEMP
+  icon:
+    { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi, state: empball }
+  product: CratePirateChestCannonEMP
+  cost: 2000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketChestBallMiniMix
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateChestCannonBallMiniMix
+  cost: 1250
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketMagCannonBallMini
+  icon:
+    { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/cannonball_belt.rsi, state: base }
+  product: CratePirateMagazineCannonBallMini
+  cost: 2000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: SunrisePirateMarketDravon75mmAmmo
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: SunriseCratePirateDravon75mmAmmo
+  cost: 3000
+  category: pirateproduct-category-name-ammo
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: SunrisePirateMarketMagazine50mmRocket
+  icon:
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/50mm_cartridge_rct.rsi
+    state: base
+  product: SunriseCratePirateMagazine50mmRocket
+  cost: 5000
+  category: pirateproduct-category-name-ammo
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: SunrisePirateMarketAK57090mmAmmo
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: SunriseCratePirateAK57090mmAmmo
+  cost: 5000
+  category: pirateproduct-category-name-ammo
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: SunrisePirateMarketRocket120mm
+  icon:
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives_x48.rsi
+    state: rocket120mm
+  product: SunriseCratePirateRocket120mm
+  cost: 4000
+  category: pirateproduct-category-name-ammo
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: SunrisePirateMarketRocket120mmLongFlight
+  icon:
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives_x48.rsi
+    state: rocket120mm
+  product: SunriseCratePirateRocket120mmLongFlight
+  cost: 5000
+  category: pirateproduct-category-name-ammo
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: SunrisePirateMarketMagazine120mmBlast
+  icon:
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/120mm_cartridge.rsi
+    state: base
+  product: SunriseCratePirateMagazine120mmBlast
+  cost: 12000
+  category: pirateproduct-category-name-ammo
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: SunrisePirateMarketLeviathan240mmHE
+  icon:
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    state: blast240mm
+  product: SunriseCratePirateLeviathan240mmHE
+  cost: 11750
+  category: pirateproduct-category-name-ammo
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: SunrisePirateMarketLeviathan240mmCluster
+  icon:
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    state: cluster240mm
+  product: SunriseCratePirateLeviathan240mmCluster
+  cost: 12500
+  category: pirateproduct-category-name-ammo
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: SunrisePirateMarketLeviathan240mmNuke
+  icon:
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
+    state: nuke240mm
+  product: SunriseCratePirateLeviathan240mmNuke
+  cost: 15000
+  category: pirateproduct-category-name-ammo
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: SunrisePirateMarketCharon280mmSlug
+  icon:
+    sprite: _Starlight/Objects/Weapons/Guns/ArtilleryAmmo/charon_ammo.rsi
+    state: railgun_slug
+  product: SunriseCratePirateCharon280mmSlug
+  cost: 7500
+  category: pirateproduct-category-name-ammo
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: SunrisePirateMarketCharon280mmSubnuclear
+  icon:
+    sprite: _Starlight/Objects/Weapons/Guns/ArtilleryAmmo/charon_ammo.rsi
+    state: subnuclear
+  product: SunriseCratePirateCharon280mmSubnuclear
+  cost: 15000
+  category: pirateproduct-category-name-ammo
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketChestGrapeshot
+  icon:
+    { sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi, state: grapeshot }
+  product: CratePirateChestGrapeshot
+  cost: 2500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketMagChainGun
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineChainGun
+  cost: 7500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketMagChainGunImprovised
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineChainGunImprovised
+  cost: 2500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketMagSMGAP
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
+  product: CratePirateMagazinePistolSubMachineGunAP
+  cost: 3500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketMagSMGIncendiary
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
+  product: CratePirateMagazinePistolSubMachineGunIncendiary
+  cost: 2500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketMagSMGMixed
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
+  product: CratePirateSubMachineGunAmmo
+  cost: 1250
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketMagSMGRubber
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
+  product: CratePirateMagazinePistolSubMachineGunRubber
+  cost: 500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketSpeedLoaderMagnumAP
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi, state: icon }
+  product: CratePirateSpeedLoaderMagnumAP
+  cost: 1500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketSpeedLoaderMagnum
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi, state: icon }
+  product: CratePirateMagnumAmmo
+  cost: 750
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketHristovAmmo
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineBoxAntiMateriel
+  cost: 2000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketHristovAmmoAP
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineBoxAntiMaterielAP
+  cost: 2500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketHristovAmmoFrag
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineBoxAntiMaterielFrag
+  cost: 3000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarket40MagAP
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi, state: red-icon }
+  product: CratePirateMagazinePistol40AP
+  cost: 2500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarket40MagMixed
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi, state: red-icon }
+  product: CratePirateMagazinePistol40Mixed
+  cost: 750
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarket9mmMagAP
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi, state: red-icon }
+  product: CratePirateMagazinePistolHighCapacityAP
+  cost: 2500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarket9mmMagMixed
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi, state: red-icon }
+  product: CratePirateMagazinePistolHighCapacityMixed
+  cost: 500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketBox556Mixed
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineBoxRifleMixed
+  cost: 900
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketMagazineRifleBoxIncendiary
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_box.rsi, state: icon }
+  product: CratePirateMagazineRifleBoxIncendiary
+  cost: 4000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketRifleAmmo
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateRifleAmmo
+  cost: 1250
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketShotgunAmmo
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateShotgunAmmo
+  cost: 1250
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketMagazineRifleBoxMixed
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineRifleBoxMixed
+  cost: 1250
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketBox556AP
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineBoxRifleAP
+  cost: 1500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketBox556Incendiary
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineBoxRifleIncendiary
+  cost: 1000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketMag556Mixed
+  icon:
+    { sprite: Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi, state: base }
+  product: CratePirateMagazineRifleMixed
+  cost: 1000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketPRDBeltBoxMixed
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineLightRifleBeltBoxMixed
+  cost: 1250
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketPRDBeltBoxAP
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineLightRifleBeltBoxAP
+  cost: 2000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketPRDBeltBoxIncendiary
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineLightRifleBeltBoxIncendiary
+  cost: 1750
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketPRDBeltBoxUranium
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineLightRifleBeltBoxUranium
+  cost: 2250
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketMagDragunov
+  icon:
+    { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/dragunov_mag.rsi, state: base }
+  product: CratePirateMagazineDragunovSP
+  cost: 1500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketCrateAmmo762RFMJ
+  icon:
+    { sprite: _Sunrise/Structures/Storage/Crates/woodcrate_ussp_small.rsi, state: icon }
+  product: CrateAmmunitionSmallLightRifle
+  cost: 1250
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketCrateAmmoMaxim
+  icon:
+    { sprite: _Sunrise/Structures/Storage/Crates/woodcrate_ussp_small.rsi, state: icon }
+  product: CrateAmmunitionSmallMaxim
+  cost: 2500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketBox762RAP
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineBoxRifleMachineAP
+  cost: 3000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketBox762RIncendiary
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineBoxRifleMachineIncendiary
+  cost: 2000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketBox762RMixed
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineBoxRifleMachineMixed
+  cost: 800
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketMag308AP
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineRifleHeavyAP
+  cost: 3500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketMag308Mixed
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineRifleHeavyMixed
+  cost: 750
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketExplosiveGrenadeFlash
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: GrenadeFlashBang
+  cost: 250
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketSmokeGrenade
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: SmokeGrenade
+  cost: 750
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketC4Bundle
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: ClothingBackpackDuffelSyndicateC4tBundle
+  cost: 7750
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketEmpGrenade
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CannonBallEMPshot
+  cost: 900
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketGrenadeShrapnel
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: GrenadeShrapnel
+  cost: 1500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketGrenadeIncendiary
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: GrenadeIncendiary
+  cost: 1500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketImprovisedExplosives
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateImprovisedExplosives
+  cost: 750
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketGunpowderChargeCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateGunpowderCharge
+  cost: 3250
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketMagazineGrenadeFragTimer
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Grenade/grenade_cartridge.rsi, state: icon }
+  product: MagazineGrenadeFragTimer
+  cost: 2500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketMagazineGrenadeBlastTimer
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Grenade/grenade_cartridge.rsi, state: icon }
+  product: MagazineGrenadeBlastTimer
+  cost: 2500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketMagazineGrenadeEMPTimer
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Grenade/grenade_cartridge.rsi, state: icon }
+  product: MagazineGrenadeEMPTimer
+  cost: 2500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketMagazineGrenadeFragContact
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Grenade/grenade_cartridge.rsi, state: icon }
+  product: MagazineGrenadeFragContact
+  cost: 3750
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketMagazineGrenadeBlastContact
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Grenade/grenade_cartridge.rsi, state: icon }
+  product: MagazineGrenadeBlastContact
+  cost: 3750
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketMagazineGrenadeEMPContact
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Grenade/grenade_cartridge.rsi, state: icon }
+  product: MagazineGrenadeEMPContact
+  cost: 3750
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketMagazineGrenadeFragExtended
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Grenade/grenade_cartridge.rsi, state: icon }
+  product: MagazineGrenadeFragExtended
+  cost: 5625
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketMagazineGrenadeBlastExtended
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Grenade/grenade_cartridge.rsi, state: icon }
+  product: MagazineGrenadeBlastExtended
+  cost: 5625
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketMagazineGrenadeEMPExtended
+  icon:
+    { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Grenade/grenade_cartridge.rsi, state: icon }
+  product: MagazineGrenadeEMPExtended
+  cost: 5625
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketCombatMedkit
+  icon:
+    { sprite: Objects/Specific/Medical/firstaidkits.rsi, state: blackkit }
+  product: CratePirateCombatMedkit
+  cost: 1250
+  category: pirateproduct-category-name-tools
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketAdvancedMedkit
+  icon:
+    { sprite: Objects/Specific/Medical/firstaidkits.rsi, state: advkit }
+  product: CratePirateAdvancedMedkit
+  cost: 750
+  category: pirateproduct-category-name-tools
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketCombatMedipen
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CombatMedipen
+  cost: 1500
+  category: pirateproduct-category-name-tools
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketStimkit
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: StimkitFilled
+  cost: 3500
+  category: pirateproduct-category-name-tools
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketMedsBundle
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: ClothingBackpackDuffelSyndicateMedicalBundleFilled
+  cost: 15500
+  category: pirateproduct-category-name-tools
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketCoalpenKit
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CoalpenKitFilled
+  cost: 750
+  category: pirateproduct-category-name-tools
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketHandcuffs
+  icon:
+    { sprite: /Textures/Objects/Misc/handcuffs.rsi, state: handcuff }
+  product: Handcuffs
+  cost: 250
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketAccessBreakerLimited
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: AccessBreakerPirateLimited
+  cost: 2000
+  category: pirateproduct-category-name-tools
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketIK30
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateIK30
+  cost: 6000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketMagazineBatteryLr60
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMagazineBatteryLr60
+  cost: 3000
+  category: pirateproduct-category-name-ammo
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketAccessBreaker
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: AccessBreakerPirate
+  cost: 2250
+  category: pirateproduct-category-name-tools
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketKidnapCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateKidnap
+  cost: 1500
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketEmag
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: Emag
+  cost: 2500
+  category: pirateproduct-category-name-tools
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketRadioJammer
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: SunriseWeaponRevolverPirateJammer
+  cost: 1250
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketSyndicateWeaponModule
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: BorgModuleSyndicateWeapon
+  cost: 2500
+  category: pirateproduct-category-name-tools
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketToolbox
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: ToolboxSyndicateFilled
+  cost: 1500
+  category: pirateproduct-category-name-tools
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketToolboxAllTools
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: ToolboxMechanicalFilledAllTools
+  cost: 250
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketSyndicateJawsOfLife
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: SyndicateJawsOfLife
+  cost: 1000
+  category: pirateproduct-category-name-tools
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketTechFab
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: PirateTechFabCircuitboard
+  cost: 8250
+  category: pirateproduct-category-name-tools
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketPowerSink
+  icon:
+    sprite: Objects/Power/powersink.rsi
+    state: powersink
+  product: PiratePowerSink
+  cost: 2500
+  category: pirateproduct-category-name-tools
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketCameraBug
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CameraBug
+  cost: 2000
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketDuffelSurgery
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: ClothingBackpackDuffelSyndicateFilledMedical
+  cost: 750
+  category: pirateproduct-category-name-tools
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketSyndieIntellicard
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: SyndieIntellicard
+  cost: 2000
+  category: pirateproduct-category-name-tools
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketRadioImplanterFreelance
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateRadioImplanterFreelance
+  cost: 1200
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketMicroBombImplanter
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMicroBombImplanter
+  cost: 3000
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketDeathRattle
+  icon:
+    sprite: Objects/Storage/boxes.rsi
+    state: box_of_doom
+  product: BoxFreelanceRattleImplants
+  cost: 1000
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketChameleonProjector
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: ChameleonProjector
+  cost: 5250
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketUltrabrightLantern
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: LanternFlash
+  cost: 250
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketDecoyKit
+  icon:
+    { sprite: /Textures/_Sunrise/Objects/Tools/Decoys/pirate_decoy.rsi, state: afolded }
+  product: ClothingBackpackMessengerPirateDecoyKitFilled
+  cost: 750
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketAppraisalToolCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateAppraisalTool
+  cost: 750
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketMassScannerCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMassScanner
+  cost: 1000
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketFultonCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateFulton
+  cost: 1250
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketJetpack
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: JetpackBlackFilled
+  cost: 1000
+  category: pirateproduct-category-name-armor
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketJetpackMini
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: JetpackMiniFilled
+  cost: 300
+  category: pirateproduct-category-name-armor
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketGasMaskCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateGasMask
+  cost: 500
+  category: pirateproduct-category-name-armor
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketChestRigSalvage
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: ClothingBeltSalvageWebbing
+  cost: 1000
+  category: pirateproduct-category-name-armor
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketChestRigFilled
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: ClothingBeltMilitaryWebbingMedRaidFilled
+  cost: 5000
+  category: pirateproduct-category-name-armor
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketWebvestCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateWebvest
+  cost: 4000
+  category: pirateproduct-category-name-armor
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketMercenaryWebvestCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMercenaryWebvest
+  cost: 7500
+  category: pirateproduct-category-name-armor
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketSovietArmorVestCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateSovietArmorVest
+  cost: 5000
+  category: pirateproduct-category-name-armor
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketMagPirate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: ClothingShoesBootsMagPirate
+  cost: 1500
+  category: pirateproduct-category-name-armor
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketBootsMagSyndie
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: ClothingShoesBootsMagSyndie
+  cost: 2500
+  category: pirateproduct-category-name-armor
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketClothingEyesGlassesThermal
+  icon:
+    { sprite: /Textures/_Sunrise/Clothing/Eyes/Glasses/synd_thermal.rsi, state: icon }
+  product: ClothingEyesGlassesThermalSec
+  cost: 2500
+  category: pirateproduct-category-name-armor
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketMessengerRandom
+  icon:
+    { sprite: /Textures/_Sunrise/Clothing/Back/Messenger/color.rsi, state: icon }
+  product: RandomBackpackContrabandMessengerSpawner
+  cost: 1250
+  category: pirateproduct-category-name-armor
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketSuitBundle
+  icon:
+    { sprite: /Textures/_Sunrise/Clothing/OuterClothing/Suits/pirateeva.rsi, state: icon }
+  product: CratePirateEVASuitBundle
+  cost: 5000
+  category: pirateproduct-category-name-armor
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketBundlePirateEva
+  icon:
+    { sprite: /Textures/_Sunrise/Clothing/OuterClothing/Suits/pirateeva_armored.rsi, state: icon }
+  product: ClothingBackpackDuffelMilitaryBundlePirateEva
+  cost: 5750
+  category: pirateproduct-category-name-armor
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketHardsuitPirate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: ClothingOuterHardsuitPirate
+  cost: 5750
+  category: pirateproduct-category-name-armor
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketHardsuitPirateCap
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: ClothingOuterHardsuitPirateCapSun
+  cost: 6500
+  category: pirateproduct-category-name-armor
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketBuccaneerHardsuitCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateBuccaneerHardsuit
+  cost: 7500
+  category: pirateproduct-category-name-armor
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketBlackbeardHardsuitCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateBlackbeardHardsuit
+  cost: 8750
+  category: pirateproduct-category-name-armor
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketDavyJonesHardsuitCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateDavyJonesHardsuit
+  cost: 11250
+  category: pirateproduct-category-name-armor
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketMurmilloHardsuitCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMurmilloHardsuit
+  cost: 15000
+  category: pirateproduct-category-name-armor
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketSwashbucklerHardsuitCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateSwashbucklerHardsuit
+  cost: 7000
+  category: pirateproduct-category-name-armor
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketPrivateer
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePiratePrivateerHardsuit
+  cost: 9000
+  category: pirateproduct-category-name-armor
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketMechYarrkeBundle
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMechYarrkeBundle
+  cost: 25000
+  category: pirateproduct-category-name-armor
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketMechDollHouseBundle
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMechDollHouseBundle
+  cost: 50000
+  category: pirateproduct-category-name-armor
+  group: pirateMarketFreelance
+
+- type: cargoProduct
+  id: PirateMarketMechGunBundle
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMechGunBundle
+  cost: 22000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketAk
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateAk
+  cost: 8500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketBlunderbuss
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateBlunderbuss
+  cost: 2000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketHandcannon
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateHandcannon
+  cost: 7000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketCutlassCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateCutlass
+  cost: 1000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketFlintlockCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateFlintlock
+  cost: 1000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketRevolver
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateRevolver
+  cost: 2500
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketRifleLeverMagnum
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateRifleLeverMagnum
+  cost: 5000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketMakeshiftLaser
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateMakeshiftLaser
+  cost: 2000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketDavyJonesLocker
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateDavyJones
+  cost: 250
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketRobotParrot
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateRobotParrot
+  cost: 2000
+  category: cargoproduct-category-name-fun
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketShotgunDoubleBarreled
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateShotgunDoubleBarreled
+  cost: 4000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketJetpackCrate
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateJetpack
+  cost: 2500
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketGrapplingGun
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateGrapplingGun
+  cost: 2000
+  category: pirateproduct-category-name-tools
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketEyepatch
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CratePirateEyepatch
+  cost: 500
+  category: cargoproduct-category-name-fun
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketGreytideMakeshiftWeapons
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CrateGreytideMakeshiftWeapons
+  cost: 2750
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketGreytideImprovisedWeapons
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CrateGreytideImprovisedWeapons
+  cost: 1750
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketGreytideForgedWeapons
+  icon:
+    sprite: Structures/Storage/Crates/piratechest.rsi
+    state: crate_icon
+  product: CrateGreytideForgedWeapons
+  cost: 3000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+# region Reinforcements
+- type: cargoProduct
+  id: SunrisePirateMarketRandomSquadT1
+  icon:
+    sprite: Objects/Misc/Handy_Flags/pirate_handy_flag.rsi
+    state: icon
+  product: PirateSquadT1Random
+  cost: 10000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarket
+
+- type: cargoProduct
+  id: SunrisePirateMarketRandomSquadT2
+  icon:
+    sprite: Objects/Misc/Handy_Flags/pirate_handy_flag.rsi
+    state: icon
+  product: PirateSquadT2Random
+  cost: 25000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: SunrisePirateMarketRandomSquadT3
+  icon:
+    sprite: Objects/Misc/Handy_Flags/pirate_handy_flag.rsi
+    state: icon
+  product: PirateSquadT3Random
+  cost: 50000
+  category: pirateproduct-category-name-weapons
+  group: pirateMarketFreelance
+
+# region Gambla
+- type: cargoProduct
+  id: PirateMarketSyndicateSurplusBundle
+  icon:
+    sprite: Structures/Storage/Crates/syndicate.rsi
+    state: icon
+  product: CrateSyndicateSurplusBundle
+  cost: 50000
+  category: cargoproduct-category-name-fun
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketPirateSurplusBundle
+  icon:
+    sprite: _Sunrise/Structures/Storage/Crates/piratechestsecure.rsi
+    state: crate_icon
+  product: CratePirateSurplusBundle
+  cost: 20000
+  category: cargoproduct-category-name-fun
+  group: pirateMarket
+
+- type: cargoProduct
+  id: PirateMarketPirateSuperSurplusBundle
+  icon:
+    sprite: _Sunrise/Structures/Storage/Crates/piratechestsecure.rsi
+    state: crate_icon
+  product: CratePirateSuperSurplusBundle
+  cost: 35000
+  category: cargoproduct-category-name-fun
+  group: pirateMarketPirate
+
+- type: cargoProduct
+  id: PirateMarketSyndicateSuperSurplusBundle
+  icon:
+    sprite: Structures/Storage/Crates/syndicate.rsi
+    state: icon
+  product: CrateSyndicateSuperSurplusBundle
+  cost: 100000
+  category: cargoproduct-category-name-fun
+  group: pirateMarketBaron
+
+- type: cargoProduct
+  id: PirateMarketGrandLottery
+  icon:
+    sprite: Objects/Economy/cash.rsi
+    state: cash_1000000
+  product: CrateCargoGambling
+  cost: 15000
+  category: cargoproduct-category-name-fun
+  group: pirateMarket

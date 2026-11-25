@@ -1,0 +1,115 @@
+- type: entity
+  id: SunriseComputerTradeStationOrders
+  parent: ComputerCargoOrders
+  name: trade station order console
+  description: A terminal for ordering goods at the automated trade station.
+  components:
+  - type: SunriseTradeStationConsole
+  - type: GenericVisualizer
+    visuals:
+      enum.ComputerVisuals.Powered:
+        computerLayerScreen:
+          True: { visible: true, shader: unshaded }
+          False: { visible: false }
+        computerLayerKeys:
+          True: { visible: true, shader: unshaded }
+          False: { visible: true, shader: shaded }
+      enum.EdgeConnectionVisuals.ConnectionMask:
+        computerLayerBody:
+          None: { state: computer, sprite: Structures/Machines/computers.rsi }
+          West: { state: computer_r, sprite: _Starlight/Structures/Machines/computers.rsi }
+          East: { state: computer_l, sprite: _Starlight/Structures/Machines/computers.rsi }
+          East, West: { state: computer_l_r, sprite: _Starlight/Structures/Machines/computers.rsi }
+      enum.SunriseTradeStationConsoleVisuals.BlackMarket:
+        computerLayerScreen:
+          True: { sprite: _Sunrise/Structures/Machines/computers.rsi, state: requestpirate }
+          False: { sprite: Structures/Machines/computers.rsi, state: request }
+  - type: AccessReader
+    enabled: false
+  - type: Anchorable
+    flags: None
+  - type: Construction
+    graph: SunriseTradeStationComputer
+    node: computer
+    deconstructionTarget: null
+    containers:
+    - board
+  - type: Computer
+    board: SunriseTradeStationOrdersComputerCircuitboard
+  - !Remove type: Destructible
+  - type: SunriseTradeStationComputer
+  - type: CargoOrderConsole
+    account: SunriseTradeStation
+    transferUnbounded: true
+    unboundedAccountActionDelay: 0
+
+- type: entity
+  id: SunriseComputerTradeStationSale
+  parent: ComputerPalletConsole
+  name: trade station sale console
+  description: A terminal for selling goods at the automated trade station.
+  components:
+  - type: AccessReader
+    enabled: false
+  - type: Anchorable
+    flags: None
+  - type: Construction
+    graph: SunriseTradeStationComputer
+    node: computer
+    deconstructionTarget: null
+    containers:
+    - board
+  - type: Computer
+    board: SunriseTradeStationSaleComputerCircuitboard
+  - !Remove type: Destructible
+  - type: SunriseTradeStationComputer
+
+- type: entity
+  id: SunriseTradeStationComputerBroken
+  parent: ComputerBroken
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Godmode
+  - type: Anchorable
+    flags: None
+  - type: Construction
+    graph: SunriseTradeStationComputer
+    node: monitorBroken
+    deconstructionTarget: null
+    containers:
+    - board
+  - !Remove type: Destructible
+
+- type: entity
+  id: SunriseTradeStationComputerFrame
+  parent: ComputerFrame
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Godmode
+  - type: Anchorable
+    flags: None
+  - type: Construction
+    graph: SunriseTradeStationComputer
+    node: monitorMissing
+    deconstructionTarget: null
+    containers:
+    - board
+  - !Remove type: Destructible
+
+- type: entity
+  id: SunriseTradeStationOrdersComputerCircuitboard
+  parent: CargoRequestComputerCircuitboard
+  categories: [ HideSpawnMenu ]
+  name: trade station order computer board
+  components:
+  - type: ComputerBoard
+    prototype: SunriseComputerTradeStationOrders
+
+- type: entity
+  id: SunriseTradeStationSaleComputerCircuitboard
+  parent: CargoSaleComputerCircuitboard
+  categories: [ HideSpawnMenu ]
+  name: trade station sale computer board
+  components:
+  - type: ComputerBoard
+    prototype: SunriseComputerTradeStationSale
