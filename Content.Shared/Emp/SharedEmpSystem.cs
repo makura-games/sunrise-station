@@ -21,10 +21,10 @@ public abstract partial class SharedEmpSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     // Sunrise-Edit-Start
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
 
-    private static readonly ProtoId<TagPrototype> IPCTag = "IPC";
+    private static ProtoId<TagPrototype> IPCTag = "IPC";
     // Sunrise-Edit-End
 
     [Dependency] private EntityQuery<EmpResistanceComponent> _resistanceQuery = default!;

@@ -26,8 +26,8 @@ marking-IPC_RArm2 = рука тип человек
 marking-IPC_RArm4 = рука тип ящер
 
 marking-IPC_LArm1 = рука тип базовый
-marking-IPC_LArm2 = рука тип человек
-marking-IPC_LArm4 = рука тип ящер
+marking-IPC_LArm2 = рука тип ящер
+marking-IPC_LArm4 = рука тип человек
 
 marking-IPC_RHand1 = кисть типа базовый
 marking-IPC_RHand2 = кисть типа ящер

@@ -2,7 +2,7 @@
   save: false
   name: IPC
   parent: BaseMobIPC
-  id: MobIPC
+  id: SunriseMobIPC
   components:
     - type: CombatMode
     - type: InteractionPopup

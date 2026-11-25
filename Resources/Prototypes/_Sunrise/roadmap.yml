@@ -34,7 +34,7 @@
     - id: ipc-name
       name: roadmap-goal-ipc-name
       desc: roadmap-goal-ipc-desc
-      state: Planned
+      state: Complete
     - id: mechs-name
       name: roadmap-goal-mechs-name
       desc: roadmap-goal-mechs-desc

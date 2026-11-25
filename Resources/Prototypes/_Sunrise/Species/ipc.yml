@@ -2,12 +2,13 @@
   id: IPC
   name: species-name-IPC
   roundStart: true
-  prototype: MobIPC
+  prototype: SunriseMobIPC
   bodyTypes:
   - IPCNormal
   dollPrototype: MobIPCDummy
   skinColoration: Hues
   maleFirstNames: names_ipc
+  femaleFirstNames: names_ipc
   naming: First
   youngAge: 1
   oldAge: 1000
