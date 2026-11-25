@@ -12,9 +12,7 @@ namespace Content.Server._Sunrise.StationCentComm;
 
 public sealed partial class StationCentCommSystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private GameTicker _gameTicker = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private ShuttleSystem _shuttle = default!;
     [Dependency] private MapSystem _map = default!;
 
@@ -34,8 +32,8 @@ public sealed partial class StationCentCommSystem : EntitySystem
         QueueDel(component.Entity);
         component.Entity = EntityUid.Invalid;
 
-        if (_mapManager.MapExists(component.MapId))
-            _mapManager.DeleteMap(component.MapId);
+        if (_map.MapExists(component.MapId))
+            _map.DeleteMap(component.MapId);
 
         component.MapId = MapId.Nullspace;
     }
@@ -65,26 +63,23 @@ public sealed partial class StationCentCommSystem : EntitySystem
             return;
         }
 
-        if (component.Station != null)
+        if (ProtoMan.TryIndex<GameMapPrototype>(component.Station, out var gameMap))
         {
-            if (_prototypeManager.TryIndex<GameMapPrototype>(component.Station, out var gameMap))
-            {
-                _gameTicker.LoadGameMap(gameMap, out var mapId);
-                component.MapId = mapId;
+            _gameTicker.LoadGameMap(gameMap, out var mapId);
+            component.MapId = mapId;
 
-                var mapEnt = _map.GetMapOrInvalid(mapId);
+            var mapEnt = _map.GetMapOrInvalid(mapId);
 
-                if (_shuttle.TryAddFTLDestination(mapId, true, out var ftlDestination))
-                    ftlDestination.Whitelist = component.ShuttleWhitelist;
+            if (_shuttle.TryAddFTLDestination(mapId, true, out var ftlDestination))
+                ftlDestination.Whitelist = component.ShuttleWhitelist;
 
-                EnsureComp<AlwaysPoweredMapComponent>(mapEnt);
+            EnsureComp<AlwaysPoweredMapComponent>(mapEnt);
 
-                _map.InitializeMap(mapId);
-            }
-            else
-            {
-                _sawmill.Warning("No Centcomm map found, skipping setup.");
-            }
+            _map.InitializeMap(mapId);
+        }
+        else
+        {
+            _sawmill.Warning("No Centcomm map found, skipping setup.");
         }
     }
 }

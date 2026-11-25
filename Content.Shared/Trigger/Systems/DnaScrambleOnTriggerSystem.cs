@@ -17,7 +17,7 @@ public sealed partial class DnaScrambleOnTriggerSystem : XOnTriggerSystem<DnaScr
     [Dependency] private HumanoidProfileSystem _humanoidProfile = default!;
     [Dependency] private SharedVisualBodySystem _visualBody = default!;
     [Dependency] private IdentitySystem _identity = default!;
-    [Dependency] private SharedForensicsSystem _forensics = default!;
+    [Dependency] private ForensicsSystem _forensics = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SunriseHumanoidProfileSystem _sunriseProfile = default!; // Sunrise-Edit
@@ -47,7 +47,6 @@ public sealed partial class DnaScrambleOnTriggerSystem : XOnTriggerSystem<DnaScr
         RemComp<DetailExaminableComponent>(target); // remove MRP+ custom description if one exists
         _identity.QueueIdentityUpdate(target); // manually queue identity update since we don't raise the event
 
-        // Can't use PopupClient or PopupPredicted because the trigger might be unpredicted.
         _popup.PopupEntity(Loc.GetString("scramble-on-trigger-popup"), target, target);
 
         var ev = new DnaScrambledEvent(target);

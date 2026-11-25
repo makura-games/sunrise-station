@@ -1,7 +1,7 @@
 using Content.Shared._Sunrise.AnnouncementSpeaker.Events;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared._Sunrise.TTS;
-using Content.Shared.Ghost;
+using Content.Shared.Ghost.Components;
 using Robust.Client.Audio;
 using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
@@ -12,6 +12,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
 namespace Content.Client._Sunrise.TTS;
@@ -28,7 +29,7 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private IResourceCache _resourceCache = default!;
     [Dependency] private IDependencyCollection _dependencyCollection = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
-    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
     [Dependency] private SharedTransformSystem _xformSystem = default!;
 
     private ISawmill _sawmill = default!;
@@ -70,6 +71,7 @@ public sealed partial class TTSSystem : EntitySystem
         SubscribeNetworkEvent<PlayTTSEvent>(OnPlayTTS);
         SubscribeNetworkEvent<StopTTSEvent>(OnStopTTS);
         SubscribeNetworkEvent<PlayMultiSpeakerTTSEvent>(OnPlayMultiSpeakerTTS);
+        _netManager.Connected += OnConnected;
     }
 
     public override void Shutdown()
@@ -85,8 +87,8 @@ public sealed partial class TTSSystem : EntitySystem
         _currentPlaying = null;
         _groupedPlaying.Clear();
         _ttsQueue.Clear();
+        _netManager.Connected -= OnConnected;
 
-        _netManager.Connected += OnConnected;
     }
 
     public void RequestPreviewTts(string voiceId)
@@ -121,7 +123,7 @@ public sealed partial class TTSSystem : EntitySystem
         _ghostRadioEnabled = option;
     }
 
-    private async void OnConnected(object? sender, NetChannelArgs e)
+    private void OnConnected(object? sender, NetChannelArgs args)
     {
         RaiseNetworkEvent(new ClientOptionTTSEvent(_ttsClientEnable));
     }

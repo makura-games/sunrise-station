@@ -16,12 +16,15 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 10h
-  weight: 10
+    # Sunrise added start - сохраняем чёрный список при переносе в требования роли
+    - !type:SpeciesRequirement
+      species: [Vox]
+      inverted: true
+    # Sunrise added end
   startingGear: HoSGear
   icon: "JobIconHeadOfSecurity"
   supervisors: job-supervisors-captain
   radioBold: true # Sunrise-Edit
-  displayWeight: 80 # Sunrise-Edit
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-security-chief
@@ -46,8 +49,6 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-  speciesBlacklist:
-  - Vox # Sunrise-Edit
 
 - type: startingGear
   id: HoSGear
@@ -65,5 +66,6 @@
   job: HeadOfSecurity
   hasMindShield: true
   equipment:
+    head: ClothingHeadHatBeretHoS
     mask: ClothingMaskGasSecurity
     neck: ClothingNeckCloakHos

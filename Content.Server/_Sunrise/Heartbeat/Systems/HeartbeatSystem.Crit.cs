@@ -1,14 +1,15 @@
 ﻿using Content.Server._Sunrise.Heartbeat.Components;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
 
 namespace Content.Server._Sunrise.Heartbeat.Systems;
 
 public sealed partial class HeartbeatSystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     // Минимальное и максимальное время между ударами сердца
     private const float MinimumCooldown = 0.5f;
@@ -16,7 +17,7 @@ public sealed partial class HeartbeatSystem
 
     private void OnMobStateChanged(Entity<CritHeartbeatComponent> ent, ref MobStateChangedEvent args)
     {
-        if (args.NewMobState != MobState.Critical)
+        if (!_mobState.IsCritical(ent))
         {
             RemComp<ActiveHeartbeatComponent>(ent);
             return;

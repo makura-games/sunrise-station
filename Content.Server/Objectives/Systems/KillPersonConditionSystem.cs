@@ -1,13 +1,9 @@
-using Content.Server._Sunrise.TraitorTarget;
 using Content.Server.Objectives.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Shared.CCVar;
-using Content.Shared.Humanoid;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Robust.Shared.Configuration;
-using Content.Shared.Mobs.Systems;
-using Content.Shared.Mobs.Components;
 
 namespace Content.Server.Objectives.Systems;
 
@@ -20,7 +16,6 @@ public sealed partial class KillPersonConditionSystem : EntitySystem
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private TargetObjectiveSystem _target = default!;
-    [Dependency] private MobStateSystem _mobState = default!;
 
     public override void Initialize()
     {
@@ -68,24 +63,4 @@ public sealed partial class KillPersonConditionSystem : EntitySystem
 
         return 1f; // Good job you did it woohoo
     }
-
-    // Sunrise-Start
-    public HashSet<Entity<MindComponent>> GetAliveTargetsExcept(EntityUid exclude)
-    {
-        var allTargets = new HashSet<Entity<MindComponent>>();
-
-        var query = EntityQueryEnumerator<MobStateComponent, AntagTargetComponent, HumanoidProfileComponent>();
-        while (query.MoveNext(out var uid, out var mobState, out var antagTarget, out _))
-        {
-            if (!_mind.TryGetMind(uid, out var mind, out var mindComp) ||
-                mind == exclude || !_mobState.IsAlive(uid, mobState) ||
-                antagTarget.KillerMind != null)
-                continue;
-
-            allTargets.Add(new Entity<MindComponent>(mind, mindComp));
-        }
-
-        return allTargets;
-    }
-    // Sunrise-End
 }

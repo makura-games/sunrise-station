@@ -23,11 +23,9 @@
   icon: "JobIconPrisonWorker"
   overrideConsoleVisibility: false
   supervisors: job-supervisors-head-of-prison
-  weight: 4
   alwaysUseSpawner: true
   alternativeTitles:
   - job-alt-title-penal-laborer
-  displayWeight: 80
   access:
    - Security
    - Brig

@@ -28,7 +28,7 @@ public sealed partial class RequireProjectileTargetSystem : EntitySystem
 
         var other = args.OtherEntity;
         if (TryComp(other, out ProjectileComponent? projectile) &&
-            CompOrNull<TargetedProjectileComponent>(other)?.Target != GetNetEntity(ent))
+            CompOrNull<TargetedProjectileComponent>(other)?.Target != ent)
         {
             // Prevents shooting out of while inside of crates
             var shooter = projectile.Shooter;

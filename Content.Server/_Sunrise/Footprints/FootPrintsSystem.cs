@@ -34,8 +34,6 @@ public sealed partial class FootprintSystem : EntitySystem
     [Dependency] private MapSystem _mapSystem = default!;
     [Dependency] private GravitySystem _gravity = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private PuddleSystem _puddleSystem = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
 
@@ -135,7 +133,7 @@ public sealed partial class FootprintSystem : EntitySystem
     {
         var transform = Transform(ent);
         var mapCoords = _transform.GetMapCoordinates((ent, transform));
-        if (!_mapManager.TryFindGridAt(mapCoords, out var gridUid, out var grid))
+        if (!_mapSystem.TryFindGridAt(mapCoords, out var gridUid, out var grid))
             return;
 
         var tileRef = _mapSystem.GetTileRef((gridUid, grid), transform.Coordinates);
@@ -166,7 +164,7 @@ public sealed partial class FootprintSystem : EntitySystem
             {
                 if (_solution.TryGetSolution(footprint.Owner, footprint.Comp.ContainerName, out var stepSol))
                 {
-                    mergedSolution.AddSolution(stepSol.Value.Comp.Solution, _prototype);
+                    mergedSolution.AddSolution(stepSol.Value.Comp.Solution, ProtoMan);
                 }
                 QueueDel(footprint.Owner);
             }
@@ -234,7 +232,7 @@ public sealed partial class FootprintSystem : EntitySystem
 
         transform = Transform(ent);
         var mapCoords = _transform.GetMapCoordinates((ent, transform));
-        if (!_mapManager.TryFindGridAt(mapCoords, out gridUid, out var mapGrid))
+        if (!_mapSystem.TryFindGridAt(mapCoords, out gridUid, out var mapGrid))
             return false;
 
         grid = mapGrid;
@@ -319,7 +317,7 @@ public sealed partial class FootprintSystem : EntitySystem
 
         _appearance.SetData(entity,
             FootprintVisualParameter.TrackColor,
-            emitterSolution.GetColor(_prototype).WithAlpha(alpha),
+            emitterSolution.GetColor(ProtoMan).WithAlpha(alpha),
             appearance);
 
         return appearance;

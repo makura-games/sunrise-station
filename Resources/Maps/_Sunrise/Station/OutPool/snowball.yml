@@ -103596,7 +103596,7 @@ entities:
       canCollide: False
     - type: InsideEntityStorage
       storage: 7668
-- proto: MagicalLamp
+- proto: GuardianDeck
   entities:
   - uid: 14415
     components:

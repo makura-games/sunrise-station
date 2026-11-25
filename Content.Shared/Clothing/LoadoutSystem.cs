@@ -21,7 +21,6 @@ public sealed partial class LoadoutSystem : EntitySystem
 
     [Dependency] private ActorSystem _actors = default!;
     [Dependency] private SharedStationSpawningSystem _station = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
@@ -46,7 +45,7 @@ public sealed partial class LoadoutSystem : EntitySystem
     {
         EntProtoId? proto = null;
 
-        if (_protoMan.Resolve(loadout.StartingGear, out var gear))
+        if (ProtoMan.Resolve(loadout.StartingGear, out var gear))
         {
             proto = GetFirstOrNull(gear);
         }
@@ -67,12 +66,12 @@ public sealed partial class LoadoutSystem : EntitySystem
 
         if (count == 1)
         {
-            if (gear.Equipment.Count == 1 && _protoMan.Resolve(gear.Equipment.Values.First(), out var proto))
+            if (gear.Equipment.Count == 1 && ProtoMan.Resolve(gear.Equipment.Values.First(), out var proto))
             {
                 return proto.ID;
             }
 
-            if (gear.Inhand.Count == 1 && _protoMan.Resolve(gear.Inhand[0], out proto))
+            if (gear.Inhand.Count == 1 && ProtoMan.Resolve(gear.Inhand[0], out proto))
             {
                 return proto.ID;
             }
@@ -92,10 +91,10 @@ public sealed partial class LoadoutSystem : EntitySystem
 
     public string GetName(LoadoutPrototype loadout)
     {
-        if (loadout.DummyEntity is not null && _protoMan.Resolve(loadout.DummyEntity, out var proto))
+        if (loadout.DummyEntity is not null && ProtoMan.Resolve(loadout.DummyEntity, out var proto))
             return proto.Name;
 
-        if (_protoMan.Resolve(loadout.StartingGear, out var gear))
+        if (ProtoMan.Resolve(loadout.StartingGear, out var gear))
         {
             return GetName(gear);
         }
@@ -115,12 +114,12 @@ public sealed partial class LoadoutSystem : EntitySystem
 
         if (count == 1)
         {
-            if (gear.Equipment.Count == 1 && _protoMan.TryIndex<EntityPrototype>(gear.Equipment.Values.First(), out var proto))
+            if (gear.Equipment.Count == 1 && ProtoMan.TryIndex<EntityPrototype>(gear.Equipment.Values.First(), out var proto))
             {
                 return proto.Name;
             }
 
-            if (gear.Inhand.Count == 1 && _protoMan.TryIndex<EntityPrototype>(gear.Inhand[0], out proto))
+            if (gear.Inhand.Count == 1 && ProtoMan.TryIndex<EntityPrototype>(gear.Inhand[0], out proto))
             {
                 return proto.Name;
             }
@@ -130,7 +129,7 @@ public sealed partial class LoadoutSystem : EntitySystem
                 if (values.Count != 1)
                     continue;
 
-                if (_protoMan.TryIndex<EntityPrototype>(values[0], out proto))
+                if (ProtoMan.TryIndex<EntityPrototype>(values[0], out proto))
                 {
                     return proto.Name;
                 }
@@ -163,11 +162,11 @@ public sealed partial class LoadoutSystem : EntitySystem
         // Then, randomly pick a RoleLoadout profile from those specified, and process/equip all LoadoutGroups from it.
         // For non-roundstart mobs there is no SelectedLoadout data, so minValue must be set in each LoadoutGroup to force selection.
         var id = _random.Pick(loadoutGroups);
-        var effectiveId = GetEffectiveRolePrototype(id, _protoMan); // Sunrise-edit
-        var proto = _protoMan.Index(effectiveId); // Sunrise-edit
+        var effectiveId = GetEffectiveRolePrototype(id, ProtoMan); // Sunrise-edit
+        var proto = ProtoMan.Index(effectiveId); // Sunrise-edit
         var loadout = new RoleLoadout(id);
         // Sunrise-Fix: Я пока-что в душе не ебу как здесь достать спонсорские прототипы, потому []
-        loadout.SetDefault(GetProfile(uid), _actors.GetSession(uid), _protoMan, [], true);
+        loadout.SetDefault(GetProfile(uid), _actors.GetSession(uid), ProtoMan, [], true);
         _station.EquipRoleLoadout(uid, loadout, proto);
 
         GearEquipped(uid);

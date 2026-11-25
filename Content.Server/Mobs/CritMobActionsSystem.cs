@@ -6,10 +6,11 @@ using Content.Shared.Chat;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Speech.Muting;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Players;
 using Robust.Server.Console;
 using Robust.Shared.Player;
-using Content.Shared.Speech.Muting;
 
 namespace Content.Server.Mobs;
 
@@ -24,6 +25,7 @@ public sealed partial class CritMobActionsSystem : EntitySystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private PopupSystem _popupSystem = default!;
     [Dependency] private QuickDialogSystem _quickDialog = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
     [Dependency] private GhostSystem _ghostSystem = default!; // Sunrise edit
 
     private const int MaxLastWordsLength = 30;
@@ -55,7 +57,7 @@ public sealed partial class CritMobActionsSystem : EntitySystem
         if (!_mobState.IsCritical(uid))
             return;
 
-        if (HasComp<MutedComponent>(uid))
+        if (_statusEffects.HasEffectComp<MutedStatusEffectComponent>(uid))
         {
             _popupSystem.PopupEntity(Loc.GetString("fake-death-muted"), uid, uid);
             return;

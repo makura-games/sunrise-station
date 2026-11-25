@@ -58,8 +58,6 @@
     # Rifle Heavy
     - MagazineRifleHeavySP
     - MagazineRifleHeavyEmpty
-    # PODAVLENIE
-    - BolaSecurity
 ####################################################
 
 - type: latheRecipePack
@@ -188,6 +186,7 @@
     - MagazineBatteryLr60
     - WeaponSunriseLaserPistol
     - FlareGunSecurityUpgrade
+    - EnergyBola
 # Sunrise-TODO: Нужен ребаланс с учетом типов боеприпасов
 #    - BaseMagazinePistolCaselessRifleExtended
 #    - MagazinePPSH41Extended
@@ -215,6 +214,7 @@
     - MagazineBoxBelt127Emp
     #
     - EnergyDomeDirectionalTurtle
+    - SunriseEnergyShieldSec
     - WeaponTemperatureGun
     #- ModularReceiverAuto
     - LecterUpgrade

@@ -1,5 +1,3 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
-
 using System.Linq;
 using Content.Shared.Actions;
 using Content.Shared.Bed.Sleep;
@@ -175,7 +173,7 @@ public abstract partial class SharedPettingSystem : EntitySystem
             var message = Loc.GetString("pet-success",
                 ("name", Identity.Name(pet, EntityManager, master.Value)));
 
-            _popup.PopupClient(message, pet.Owner, master.Value);
+            _popup.PopupEntity(message, pet.Owner, master.Value);
         }
 
 

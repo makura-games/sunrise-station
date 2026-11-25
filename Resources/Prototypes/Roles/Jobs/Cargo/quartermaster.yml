@@ -13,12 +13,15 @@
     - !type:DepartmentTimeRequirement
       department: Cargo
       time: 10h
-  weight: 10
+    # Sunrise added start - сохраняем чёрный список при переносе в требования роли
+    - !type:SpeciesRequirement
+      species: [Vox]
+      inverted: true
+    # Sunrise added end
   startingGear: QuartermasterGear
   icon: "JobIconQuarterMaster"
   supervisors: job-supervisors-captain
   radioBold: true # Sunrise-Edit
-  displayWeight: 40  # Sunrise-Edit
   # Sunrise-Start
   alternativeTitles:
   - job-alt-title-intendant
@@ -43,8 +46,6 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-  speciesBlacklist:
-  - Vox # Sunrise-Edit
 
 - type: startingGear
   id: QuartermasterGear

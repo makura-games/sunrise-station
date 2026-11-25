@@ -159,7 +159,6 @@ storyteller-metadata-unknownshuttlecargo-end = Потерянный грузов
 
 # Derelict Cyborgs
 storyteller-metadata-derelictmedicalcyborgspawn-start = Запылившиеся реле щёлкнули: на станции пробудился к жизни старый заброшенный мед-киборг.
-storyteller-metadata-derelictsyndicatereapercyborgspawn-start = В тёмных закоулках раздался тяжёлый механический скрежет: активирован грозный боевой киборг Синдиката класса "Жнец"!
 storyteller-metadata-derelictjanitorcyborgspawn-start = Электроника ожила с тихим писком: на палубу выкатился заброшенный киборг-уборщик.
 storyteller-metadata-derelictengineercyborgspawn-start = Индикаторы замигали зелёным: к выполнению задач приступил заброшенный инженерный киборг.
 storyteller-metadata-derelictminingcyborgspawn-start = На окраине астероида послышался гул сервоприводов: очнулся от сна заброшенный киборг-шахтёр.

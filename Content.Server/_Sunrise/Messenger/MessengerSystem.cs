@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using Content.Server.CartridgeLoader;
+using Content.Shared.CartridgeLoader;
 using Content.Server._Sunrise.CartridgeLoader.Cartridges;
 using Content.Shared._Sunrise.Messenger;
 using Content.Shared.Inventory;
@@ -31,10 +31,11 @@ public sealed partial class MessengerSystem : EntitySystem
         if (!TryFindPda(user.Value, out var pda))
             return;
 
-        if (!_cartridgeLoader.TryGetProgram<MessengerCartridgeComponent>(pda.Value, out var programUid) || programUid is not { } program)
+        if (!TryComp<CartridgeLoaderComponent>(pda.Value, out var loader) ||
+            _cartridgeLoader.TryGetProgram<MessengerCartridgeComponent>((pda.Value, loader)) is not { } program)
             return;
 
-        _cartridgeLoader.ActivateProgram(pda.Value, program);
+        _cartridgeLoader.ActivateProgram((pda.Value, loader), program);
 
         _ui.OpenUi(pda.Value, PdaUiKey.Key, args.SenderSession);
     }

@@ -173,7 +173,8 @@ uplink-pirate-borg-random-name = Перепрошитый заброшенный
 uplink-pirate-borg-random-desc = Вызывает случайного заброшенного киборга с пиратскими законами, повреждёнными ионными бурями. Его законы могут оказаться не на вашей стороне.
 
 ## Equipment
-
+uplink-experimental-eshield-name = Экспериментальный энергощит
+uplink-experimental-eshield-desc = Ещё более экзотический энергощит, отражающий почти все лазерные лучи, а также немного защищающий от пуль и других физических атак. Имеет встроенную самозаряжающуюся батарею, но после нескольких циклов активной зарядки и разрядки корпус щита всё же может сломаться.
 uplink-hypo-name = Горлекс гипоспрей
 uplink-hypo-desc = Химический гипоспрей, произведёный синдикатом, способный мгновенно впрыснуть до 20 ед. реагентов. Изначально пуст.
 uplink-polytrinic-acid-chemistry-bottle-name = Политриновая кислота
@@ -295,10 +296,8 @@ uplink-x4-name = Взрывчатка X-4
 uplink-x4-desc = Используется, чтобы проделывать еще более большие дыры там, где вы это очень хотите.
 uplink-x4-bundle-name = Набор X-4
 uplink-x4-bundle-desc = Набор из восьми зарядов X-4. Похоже, вы действительно хотите разнести что-то к чертям.
-uplink-shuttle-board-name = плата консоли шаттла синдиката
-uplink-shuttle-board-desc = Печатная плата для консоли шаттла синдиката.
 uplink-shuttle-bundle-name = ящик сборки шаттла
-uplink-shuttle-bundle-desc = Всё, кроме платы шаттла. Шаттл в ящике* (Требуется сборка).
+uplink-shuttle-bundle-desc = Набор со всем необходимым для сборки шаттла синдиката. (Требуется сборка).
 uplink-friendship-bundle-name = ящик «Дружба»
 uplink-lube-grenade-name = Граната со смазкой
 uplink-lube-grenade-desc = Граната, создающая в зоне детонации скользкое облако смазки.
@@ -411,8 +410,6 @@ uplink-grenade-launcher-m79-name = М79
 uplink-grenade-launcher-m79-desc = Старый однозарядный гранатомёт с тремя таймерными осколочными гранатами и одной ЭМИ-гранатой.
 uplink-grenade-launcher-m79-bundle-name = Набор M79
 uplink-grenade-launcher-m79-bundle-desc = Набор однозарядного гранатомёта вместе с сумкой запасных снарядов, чтобы начать гранатомётную вечеринку в джунглях.
-uplink-experimental-eshield-name = Экспериментальный энергощит
-uplink-experimental-eshield-desc = Ещё более экзотический энергощит, отражающий почти все лазерные лучи, а также немного защищающий от пуль и других физических атак. Имет встроенную самозаряжающеюся батарею.
 uplink-mech-equipment-immolation-gun-name = пушка-испепелитель ZFI
 uplink-mech-equipment-immolation-gun-desc = Оружие для боевых мехов, стреляющее высокотемпературными лучами.
 uplink-launcher-cream-pie-fake-name = Фальшивый пирогомёт

@@ -1,4 +1,3 @@
-# © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
 - type: species
   id: HumanoidXeno
   name: species-name-xeno
@@ -9,6 +8,12 @@
   - HumanoidXenoNormal
   dollPrototype: MobXenoDummy
   skinColoration: Hues
+  defaultSoundsBySex:
+  - XenoHumanoid
+  - XenoHumanoid
+  - XenoHumanoid
+  voices:
+  - XenoHumanoid
   maleFirstNames: names_xeno_first
   femaleFirstNames: names_xeno_first
   maleLastNames: names_xeno_last

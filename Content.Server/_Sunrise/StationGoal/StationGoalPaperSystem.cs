@@ -15,7 +15,6 @@ namespace Content.Server._Sunrise.StationGoal
 {
     public sealed partial class StationGoalPaperSystem : EntitySystem
     {
-        [Dependency] private IPrototypeManager _prototypeManager = default!;
         [Dependency] private ContainerSystem _containerSystem = default!;
         [Dependency] private PaperSystem _paperSystem = default!;
         [Dependency] private IPlayerManager _playerManager = default!;
@@ -41,7 +40,7 @@ namespace Content.Server._Sunrise.StationGoal
                 StationGoalPrototype? selGoal = null;
                 foreach (var goalId in tempGoals)
                 {
-                    var goalProto = _prototypeManager.Index(goalId);
+                    var goalProto = ProtoMan.Index(goalId);
 
                     if (playerCount < goalProto.MinPlayers)
                         continue;
@@ -62,7 +61,7 @@ namespace Content.Server._Sunrise.StationGoal
         }
 
         public bool SendStationGoal(EntityUid? ent, ProtoId<StationGoalPrototype> goal)
-            => SendStationGoal(ent, _prototypeManager.Index(goal));
+            => SendStationGoal(ent, ProtoMan.Index(goal));
 
         public bool SendStationGoal(EntityUid? ent, StationGoalPrototype goal)
         {
@@ -73,7 +72,7 @@ namespace Content.Server._Sunrise.StationGoal
 
             SpriteSpecifier? header = null;
             var poolId = _cfg.GetCVar(SunriseCCVars.DocumentTemplatePool);
-            if (_prototypeManager.TryIndex<DocTemplatePoolPrototype>(poolId, out var poolProto))
+            if (ProtoMan.TryIndex<DocTemplatePoolPrototype>(poolId, out var poolProto))
                 header = poolProto.StationGoalHeader;
 
             var printout = new FaxPrintout(
@@ -118,7 +117,7 @@ namespace Content.Server._Sunrise.StationGoal
 
         private EntityUid SpawnPaperGoal(EntityCoordinates coords, FaxPrintout printout)
         {
-            var entityToSpawn = printout.PrototypeId.Length == 0 ? "Paper" : printout.PrototypeId;
+            var entityToSpawn = printout.PrototypeId.Id.Length == 0 ? "Paper" : printout.PrototypeId.Id;
             var printed = Spawn(entityToSpawn, coords);
             if (!TryComp<PaperComponent>(printed, out var paper))
                 return printed;

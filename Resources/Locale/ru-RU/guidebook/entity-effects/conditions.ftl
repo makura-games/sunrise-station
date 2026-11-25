@@ -84,3 +84,12 @@ entity-condition-guidebook-internals =
         [true] использует внутренние системы
        *[false] дышит атмосферным воздухом
     }
+entity-condition-guidebook-total-satiation =
+    { $max ->
+        [2147483648] у цели всего не менее { NATURALFIXED($min, 2) } { $type }
+       *[other]
+            { $min ->
+                [0] у цели всего не более { NATURALFIXED($max, 2) } { $type }
+               *[other] у цели всего от { NATURALFIXED($min, 2) } до { NATURALFIXED($max, 2) } { $type }
+            }
+    }

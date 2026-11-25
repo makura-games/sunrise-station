@@ -1,4 +1,12 @@
 - type: latheRecipe
+  parent: BaseToolRecipe
+  id: EnergyBola
+  result: EnergyBola
+  materials:
+    Steel: 600
+    Plastic: 50
+
+- type: latheRecipe
   id: WeaponMiniEnergyGun
   result: WeaponMiniEnergyGun
   categories:
@@ -101,6 +109,18 @@
     Plastic: 500
     Gold: 250
     Uranium: 50
+
+- type: latheRecipe
+  parent: BaseShieldRecipe
+  id: SunriseEnergyShieldSec
+  result: SunriseEnergyShieldSec
+  completetime: 12
+  materials:
+    Steel: 1100
+    Glass: 600
+    Plastic: 600
+    Plasma: 200
+    Gold: 200
 
 # Mech Weapons
 - type: latheRecipe
@@ -457,14 +477,6 @@
     Cloth: 400
     Durathread: 200
     Plastic: 250
-
-- type: latheRecipe
-  id: BolaSecurity
-  result: BolaSecurity
-  completetime: 2
-  materials:
-    Plastic: 300
-    Steel: 300
 
 # Milira equipment
 

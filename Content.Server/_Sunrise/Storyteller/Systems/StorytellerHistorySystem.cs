@@ -34,7 +34,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Server.Bed.Cryostorage;
 using Content.Shared.Bed.Cryostorage;
-using Content.Server.AlertLevel;
+using Content.Shared.AlertLevel;
 using Robust.Shared.Random;
 
 namespace Content.Server._Sunrise.Storyteller.Systems;
@@ -45,7 +45,6 @@ namespace Content.Server._Sunrise.Storyteller.Systems;
 /// </summary>
 public sealed partial class StorytellerHistorySystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _protoManager = default!;
     [Dependency] private DamageableSystem _damageableSystem = default!;
     [Dependency] private GameTicker _gameTicker = default!;
     [Dependency] private MindSystem _mindSystem = default!;
@@ -80,7 +79,7 @@ public sealed partial class StorytellerHistorySystem : EntitySystem
 
         // Sunrise-Edit - Custom story tracking events
         SubscribeLocalEvent<GameRuleEndedEvent>(OnGameRuleEnded);
-        SubscribeLocalEvent<AlertLevelChangedEvent>(OnAlertLevelChanged);
+        SubscribeLocalEvent<SunriseAlertLevelChangedEvent>(OnAlertLevelChanged);
         SubscribeLocalEvent<SingularityComponent, ComponentInit>(OnSingularityInit);
         SubscribeLocalEvent<TeslaEnergyBallComponent, ComponentInit>(OnTeslaInit);
         SubscribeLocalEvent<SupermatterComponent, ComponentStartup>(OnSupermatterStartup);
@@ -170,12 +169,12 @@ public sealed partial class StorytellerHistorySystem : EntitySystem
         }
 
         var ruleName = args.RuleId;
-        if (_protoManager.TryIndex<EntityPrototype>(args.RuleId, out var entityProto))
+        if (ProtoMan.TryIndex<EntityPrototype>(args.RuleId, out var entityProto))
         {
             ruleName = Loc.TryGetString(entityProto.Name, out var locName) ? locName : entityProto.Name;
         }
 
-        if (_protoManager.TryIndex<StorytellerMetadataPrototype>(args.RuleId, out var metadata))
+        if (ProtoMan.TryIndex<StorytellerMetadataPrototype>(args.RuleId, out var metadata))
         {
             var targetKey = !string.IsNullOrEmpty(metadata.DescriptionLocKey) && Loc.TryGetString(metadata.DescriptionLocKey, out _)
                 ? metadata.DescriptionLocKey
@@ -305,12 +304,12 @@ public sealed partial class StorytellerHistorySystem : EntitySystem
 
     private void OnTechnologyDatabaseModified(EntityUid uid, TechnologyDatabaseComponent component, ref TechnologyDatabaseModifiedEvent args)
     {
-        foreach (var discipline in _protoManager.EnumeratePrototypes<TechDisciplinePrototype>())
+        foreach (var discipline in ProtoMan.EnumeratePrototypes<TechDisciplinePrototype>())
         {
             if (_researchedDisciplines.Contains(discipline.ID))
                 continue;
 
-            var allTechs = _protoManager.EnumeratePrototypes<TechnologyPrototype>()
+            var allTechs = ProtoMan.EnumeratePrototypes<TechnologyPrototype>()
                 .Where(t => t.Discipline == discipline.ID)
                 .ToList();
 
@@ -336,7 +335,7 @@ public sealed partial class StorytellerHistorySystem : EntitySystem
             return;
 
         var jobName = Loc.GetString("storyteller-history-arrival-no-job");
-        if (!string.IsNullOrEmpty(args.JobId) && _protoManager.TryIndex<JobPrototype>(args.JobId, out var jobProto))
+        if (!string.IsNullOrEmpty(args.JobId) && ProtoMan.TryIndex<JobPrototype>(args.JobId, out var jobProto))
         {
             jobName = Loc.TryGetString(jobProto.Name, out var locName) ? locName : args.JobId;
         }
@@ -533,12 +532,12 @@ public sealed partial class StorytellerHistorySystem : EntitySystem
         var hasAutoEnd = Loc.TryGetString(autoEndKey, out _);
 
         var ruleName = args.RuleId;
-        if (_protoManager.TryIndex<EntityPrototype>(args.RuleId, out var entityProto))
+        if (ProtoMan.TryIndex<EntityPrototype>(args.RuleId, out var entityProto))
         {
             ruleName = Loc.TryGetString(entityProto.Name, out var locName) ? locName : entityProto.Name;
         }
 
-        if (_protoManager.TryIndex<StorytellerMetadataPrototype>(args.RuleId, out var metadata) &&
+        if (ProtoMan.TryIndex<StorytellerMetadataPrototype>(args.RuleId, out var metadata) &&
             !string.IsNullOrEmpty(metadata.EndedLocKey) &&
             Loc.TryGetString(metadata.EndedLocKey, out _))
         {
@@ -550,7 +549,7 @@ public sealed partial class StorytellerHistorySystem : EntitySystem
         }
     }
 
-    private void OnAlertLevelChanged(AlertLevelChangedEvent args)
+    private void OnAlertLevelChanged(ref SunriseAlertLevelChangedEvent args)
     {
         var now = _gameTicker.RoundDuration();
 
@@ -567,15 +566,17 @@ public sealed partial class StorytellerHistorySystem : EntitySystem
             return;
         }
 
-        var localizedNew = Loc.TryGetString($"alert-level-{args.AlertLevel.ToLower()}", out var newName) ? newName : args.AlertLevel;
-        var colorNew = GetAlertLevelColor(args.AlertLevel);
+        var alertLevel = args.AlertLevel.Id;
+        var previousLevel = args.PreviousLevel.Id;
+        var localizedNew = Loc.TryGetString($"alert-level-{alertLevel.ToLowerInvariant()}", out var newName) ? newName : alertLevel;
+        var colorNew = GetAlertLevelColor(alertLevel);
 
-        if (!string.IsNullOrEmpty(args.PreviousLevel) && args.PreviousLevel != args.AlertLevel && _alertLevelStartTimes.TryGetValue(args.PreviousLevel, out var prevStart))
+        if (args.PreviousLevel != args.AlertLevel && _alertLevelStartTimes.TryGetValue(previousLevel, out var prevStart))
         {
             var duration = now - prevStart;
             var minutes = (int) Math.Max(1, Math.Round(duration.TotalMinutes));
-            var localizedPrev = Loc.TryGetString($"alert-level-{args.PreviousLevel.ToLower()}", out var prevName) ? prevName : args.PreviousLevel;
-            var colorPrev = GetAlertLevelColor(args.PreviousLevel);
+            var localizedPrev = Loc.TryGetString($"alert-level-{previousLevel.ToLowerInvariant()}", out var prevName) ? prevName : previousLevel;
+            var colorPrev = GetAlertLevelColor(previousLevel);
 
             LogHistoryEntry(StorytellerHistoryType.StationEvent, "storyteller-history-alert-level-changed-with-prev",
                 ("level", (object) localizedNew),
@@ -584,7 +585,7 @@ public sealed partial class StorytellerHistorySystem : EntitySystem
                 ("prevColor", (object) colorPrev),
                 ("duration", (object) minutes));
 
-            _alertLevelStartTimes.Remove(args.PreviousLevel);
+            _alertLevelStartTimes.Remove(previousLevel);
         }
         else
         {
@@ -593,7 +594,7 @@ public sealed partial class StorytellerHistorySystem : EntitySystem
                 ("color", (object) colorNew));
         }
 
-        _alertLevelStartTimes[args.AlertLevel] = now;
+        _alertLevelStartTimes[alertLevel] = now;
     }
 
     private string GetAlertLevelColor(string level)
@@ -614,6 +615,7 @@ public sealed partial class StorytellerHistorySystem : EntitySystem
             case "gamma":
                 return "#e67e22"; // Orange/Gamma
             case "delta":
+            case "deltanuke":
                 return "#8e44ad"; // Dark violet/Delta
             default:
                 return "#7DF9FF"; // Default light blue

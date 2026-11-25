@@ -1,5 +1,6 @@
 - type: entity
   id: BaseRustGoldComputer
+  parent: BaseComputer
   abstract: true
   components:
   - type: GenericVisualizer

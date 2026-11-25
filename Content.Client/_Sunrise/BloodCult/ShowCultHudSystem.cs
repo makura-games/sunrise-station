@@ -8,7 +8,6 @@ namespace Content.Client._Sunrise.BloodCult;
 public sealed partial class ShowCultHudSystem : EntitySystem
 {
     [Dependency] private IPlayerManager _player = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {
@@ -25,7 +24,7 @@ public sealed partial class ShowCultHudSystem : EntitySystem
         if (!HasComp<BloodCultistComponent>(ent))
             return;
 
-        if (_prototype.TryIndex(bloodCultistComponent.StatusIcon, out var iconPrototype))
+        if (ProtoMan.TryIndex(bloodCultistComponent.StatusIcon, out var iconPrototype))
             args.StatusIcons.Add(iconPrototype);
     }
 }

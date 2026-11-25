@@ -161,17 +161,20 @@
     state: icon
   discipline: Arsenal
   tier: 2
-  cost: 8000
+  cost: 10000 # Sunrise-Edit
   recipeUnlocks:
   - Truncheon
   - TelescopicShield
   - HoloprojectorSecurity
-  - FlareGunSecurityUpgrade # Sunrise-Add
-  - VestSecUpgradePlate # Sunrise-Add
-  - VestSecUpgradeStab # Sunrise-Add
-  - VestSecUpgradeHeat # Sunrise-Add
-  radioChannels: # Sunrise-Add
+  # Sunrise-Start
+  - EnergyBola
+  - FlareGunSecurityUpgrade
+  - VestSecUpgradePlate
+  - VestSecUpgradeStab
+  - VestSecUpgradeHeat
+  radioChannels:
   - Security
+  # Sunrise-End
 
 - type: technology
   id: ConcentratedLaserWeaponry

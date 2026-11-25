@@ -37,7 +37,6 @@ namespace Content.Server._Sunrise.Tutorial;
 public sealed partial class TutorialSystem : SharedTutorialSystem
 {
     [Dependency] private TTSSystem _tts = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IChatManager _chat = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private GameTicker _ticker = default!;
@@ -330,7 +329,7 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
 
     private bool IsTutorialStepsCompleted(Entity<TutorialPlayerComponent> ent)
     {
-        return _proto.TryIndex(ent.Comp.SequenceId, out var sequence) &&
+        return ProtoMan.TryIndex(ent.Comp.SequenceId, out var sequence) &&
                ent.Comp.StepIndex >= sequence.Steps.Count;
     }
 
@@ -424,7 +423,7 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
         if (!TryComp(player, out TutorialPlayerComponent? comp))
             return false;
 
-        return TutorialPrototypeOrdering.TryGetNextTutorial(_proto, comp.SequenceId, out nextTutorial);
+        return TutorialPrototypeOrdering.TryGetNextTutorial(ProtoMan, comp.SequenceId, out nextTutorial);
     }
 
     private bool TryStartNextTutorial(EntityUid player)
@@ -487,7 +486,7 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
 
     private void OnStartRequest(TutorialStartRequestEvent msg, EntitySessionEventArgs args)
     {
-        if (!_proto.TryIndex(msg.SequenceId, out var sequence))
+        if (!ProtoMan.TryIndex(msg.SequenceId, out var sequence))
             return;
 
         if (!CanStartTutorial(args.SenderSession, out var reason))
@@ -617,7 +616,7 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
             if (!TryGetCurrentStep((uid, comp), out var step))
                 return;
 
-            if (!_proto.TryIndex(step.VoiceId, out var voice))
+            if (!ProtoMan.TryIndex(step.VoiceId, out var voice))
                 return;
 
             var sequenceId = comp.SequenceId;

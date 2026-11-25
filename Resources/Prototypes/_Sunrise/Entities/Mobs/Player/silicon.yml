@@ -197,26 +197,6 @@
 
 
 - type: entity
-  id: PlayerBorgSyndicateReaperBattery
-  parent: BorgChassisSyndicateReaper
-  suffix: Battery, Tools
-  components:
-    - type: NukeOperative
-    - type: GhostPanelAntagonistMarker
-      name: ghost-panel-antagonist-nukeops-name
-      description: ghost-panel-antagonist-nukeops-description
-      priority: 25
-    - type: ContainerFill
-      containers:
-        borg_brain:
-          - Sofia
-    - type: ItemSlots
-      slots:
-        cell_slot:
-          name: power-cell-slot-component-slot-name-default
-          startingItem: PowerCellSyndicate
-
-- type: entity
   id: PlayerBorgHeavySyndicateCombatBattery
   parent: BorgChassisSyndicateHeavy
   suffix: Battery, Tools
@@ -320,38 +300,6 @@
     price: 500
 
 - type: entity
-  parent: SyndicateReaperBorgChassisDerelictSunrise
-  id: PlayerSyndicateReaperBorgDerelict
-  suffix: Battery, Module
-  components:
-  - type: ContainerFill
-    containers:
-      borg_brain:
-      - Sofia # Sunrise-Edit
-      borg_module:
-      - BorgModuleSyndicateGeneric
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellHyper
-  - type: RandomMetadata
-    nameSegments: [NamesDeathCommando]
-
-- type: entity
-  parent: PlayerSyndicateReaperBorgDerelict
-  id: PlayerBorgSyndicateReaperDerelictGhostRoleSunrise
-  suffix: Ghost role
-  components:
-  - type: GhostRole
-    name: ghost-role-information-derelict-syndicate-reaper-cyborg-name
-    description: ghost-role-information-derelict-syndicate-reaper-cyborg-description
-    rules: ghost-role-information-silicon-rules
-    raffle:
-      settings: default
-  - type: GhostTakeoverAvailable
-
-- type: entity
   parent: SyndicateSaboteurBorgChassisDerelictSunrise
   id: PlayerSyndicateSaboteurBorgDerelict
   suffix: Battery, Module
@@ -359,7 +307,7 @@
   - type: ContainerFill
     containers:
       borg_brain:
-      - Sofia # Sunrise-Edit
+      - Sofia
       borg_module:
       - BorgModuleSyndicateGeneric
       - BorgScoutModuleSyndicateTool
@@ -369,7 +317,7 @@
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHyper
   - type: RandomMetadata
-    nameSegments: [NamesDeathCommando]
+    nameSegments: [NamesDeathCommandoFirst, NamesDeathCommandoLast]
 
 - type: entity
   parent: PlayerSyndicateSaboteurBorgDerelict
@@ -392,7 +340,7 @@
   - type: ContainerFill
     containers:
       borg_brain:
-      - Sofia # Sunrise-Edit
+      - Sofia
       borg_module:
       - BorgModuleSyndicateGeneric
       - BorgModuleSyndicateMedical
@@ -402,7 +350,7 @@
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHyper
   - type: RandomMetadata
-    nameSegments: [NamesDeathCommando]
+    nameSegments: [NamesDeathCommandoFirst, NamesDeathCommandoLast]
 
 - type: entity
   parent: PlayerSyndicateMedicalBorgDerelict

@@ -8,7 +8,6 @@ collective-mind-dioneas = Дионея
 collective-mind-arachnids = Арахниды
 collective-mind-carp = Карпы
 collective-mind-zombie = Зомби
-collective-mind-changeling = Генокрад
 collective-mind-blood-cult = Культ Крови
 collective-mind-pirate = Пираты
 collective-mind-abductor = Абдукторы

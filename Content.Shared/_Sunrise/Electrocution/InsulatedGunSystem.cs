@@ -23,7 +23,7 @@ public sealed partial class InsulatedGunSystem : EntitySystem
         if (!ent.Comp.PreventOperatingGuns || args.Args.Used.Comp.BigTrigger)
             return;
 
-        _popup.PopupPredicted(Loc.GetString("gun-Insulated-gloves"), args.Args.User, args.Args.User);
+        _popup.PopupEntity(Loc.GetString("gun-Insulated-gloves"), args.Args.User);
         args.Args.Cancel();
     }
 }
