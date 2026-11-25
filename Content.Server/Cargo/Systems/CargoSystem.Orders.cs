@@ -6,8 +6,11 @@ using Content.Shared.Cargo.BUI;
 using Content.Shared.Cargo.Components;
 using Content.Shared.Cargo.Events;
 using Content.Shared.Cargo.Prototypes;
+using Content.Shared._Sunrise.TradeStation; // Sunrise-Edit: deposit funds into the ATS account.
+using Content.Shared.UserInterface; // Sunrise-Edit: check black market access.
 using Content.Shared.Database;
 using Content.Shared.Emag.Systems;
+using Content.Shared.HijackBeacon; // Sunrise-Edit: handle the ATS hijack.
 using Content.Shared.Interaction;
 using Content.Shared.Labels.Components;
 using Content.Shared.Paper;
@@ -35,6 +38,11 @@ namespace Content.Server.Cargo.Systems
             SubscribeLocalEvent<CargoOrderConsoleComponent, ComponentInit>(OnInit);
             SubscribeLocalEvent<CargoOrderConsoleComponent, InteractUsingEvent>(OnInteractUsing);
             SubscribeLocalEvent<CargoOrderConsoleComponent, GotEmaggedEvent>(OnEmagged);
+            SubscribeLocalEvent<SunriseTradeStationConsoleComponent, ActivatableUIOpenAttemptEvent>(OnTradeStationUiAttempt); // Sunrise-Edit
+            SubscribeLocalEvent<SunriseTradeStationConsoleComponent, BoundUserInterfaceMessageAttempt>(OnTradeStationUiMessageAttempt); // Sunrise-Edit
+            SubscribeLocalEvent<SunriseTradeStationConsoleComponent, SunriseTradeStationSyndicateRequest>(OnTradeStationSyndicateRequest); // Sunrise-Edit
+            SubscribeLocalEvent<SunriseTradeStationConsoleComponent, BoundUIOpenedEvent>(OnTradeStationSyndicateUiOpened); // Sunrise-Edit
+            SubscribeLocalEvent<TradeStationComponent, TradeStationHijackedEvent>(OnTradeStationHijacked); // Sunrise-Edit
         }
 
         private void OnInteractUsingCash(EntityUid uid, CargoOrderConsoleComponent component, ref InteractUsingEvent args)
@@ -45,6 +53,10 @@ namespace Content.Server.Cargo.Systems
                 return;
 
             var stationUid = _station.GetOwningStation(args.Used);
+
+            // Sunrise-Edit: visitors may carry cash from another station.
+            if (_station.GetOwningStation(uid) is { } consoleStation && HasComp<SunriseTradeStationAccountComponent>(consoleStation))
+                stationUid = consoleStation;
 
             if (!TryComp(stationUid, out StationBankAccountComponent? bank))
                 return;
@@ -94,6 +106,22 @@ namespace Content.Server.Cargo.Systems
 
         private void OnInteractUsing(EntityUid uid, CargoOrderConsoleComponent component, ref InteractUsingEvent args)
         {
+            // Sunrise edit start - the ATS console and account must be used together.
+            var tradeConsole = HasComp<SunriseTradeStationConsoleComponent>(uid);
+            var tradeAccount = HasComp<SunriseTradeStationAccountComponent>(_station.GetOwningStation(uid));
+            if (tradeConsole != tradeAccount || (tradeAccount && HasComp<CargoSlipComponent>(args.Used)))
+                return;
+            // Sunrise edit end
+
+            // Sunrise edit start - direct interaction also requires a pirate ID card.
+            if (!CanUseTradeStationBlackMarket(uid, args.User))
+            {
+                _popup.PopupCursor(Loc.GetString("cargo-console-order-not-allowed"), args.User);
+                args.Handled = true;
+                return;
+            }
+            // Sunrise edit end
+
             if (HasComp<CashComponent>(args.Used))
             {
                 OnInteractUsingCash(uid, component, ref args);
@@ -107,6 +135,7 @@ namespace Content.Server.Cargo.Systems
         private void OnInit(EntityUid uid, CargoOrderConsoleComponent orderConsole, ComponentInit args)
         {
             var station = _station.GetOwningStation(uid);
+
             UpdateOrderState(uid, station);
         }
 
@@ -114,6 +143,16 @@ namespace Content.Server.Cargo.Systems
         {
             if (!_emag.CompareFlag(args.Type, EmagType.Interaction))
                 return;
+
+            // Sunrise edit start - the temporary black market requires a pirate ID card.
+            if (HasComp<SunriseTradeStationConsoleComponent>(ent))
+            {
+                ActivateTradeStationBlackMarket(ent);
+                args.Handled = true;
+                args.Repeatable = true;
+                return;
+            }
+            // Sunrise edit end
 
             if (_emag.CheckFlag(ent, EmagType.Interaction))
                 return;
@@ -142,6 +181,10 @@ namespace Content.Server.Cargo.Systems
             if (args.Actor is not { Valid: true } player)
                 return;
 
+            // Sunrise-Edit: ATS orders do not require separate approval.
+            if (HasComp<SunriseTradeStationConsoleComponent>(uid))
+                return;
+
             if (component.Mode != CargoOrderConsoleMode.DirectOrder)
                 return;
 
@@ -153,6 +196,10 @@ namespace Content.Server.Cargo.Systems
             }
 
             var station = _station.GetOwningStation(uid);
+
+            // Sunrise-Edit: approving other orders must not bypass ATS rules.
+            if (HasComp<SunriseTradeStationAccountComponent>(station))
+                return;
 
             // No station to deduct from.
             if (!TryComp(station, out StationBankAccountComponent? bank) ||
@@ -274,7 +321,7 @@ namespace Content.Server.Cargo.Systems
             UpdateOrders(station.Value);
         }
 
-        private EntityUid? TryFulfillOrder(Entity<StationDataComponent> stationData, ProtoId<CargoAccountPrototype> account, CargoOrderData order, StationCargoOrderDatabaseComponent orderDatabase)
+        private EntityUid? TryFulfillOrder(Entity<StationDataComponent> stationData, ProtoId<CargoAccountPrototype> account, CargoOrderData order, StationCargoOrderDatabaseComponent orderDatabase, string? invoiceOverride = null) // Sunrise-Edit: ATS invoices depend on the catalogue.
         {
             // Sunrise-Edit
             //_listEnts.Clear();
@@ -294,7 +341,7 @@ namespace Content.Server.Cargo.Systems
                     {
                         var coordinates = new EntityCoordinates(gridUid, pad.Transform.LocalPosition); // Sunrise-Edit
 
-                        if (FulfillOrder(order, account, coordinates, orderDatabase.PrinterOutput))
+                        if (FulfillOrder(order, account, coordinates, invoiceOverride ?? orderDatabase.PrinterOutput)) // Sunrise-Edit: use the selected ATS invoice.
                         {
                             tradeDestination = gridUid; // Sunrise-Edit
                             order.NumDispatched++;
@@ -378,10 +425,17 @@ namespace Content.Server.Cargo.Systems
             if (args.Actor is not { Valid: true } player)
                 return;
 
+            if (!CanUseTradeStationBlackMarket(uid, player)) // Sunrise-Edit: check access for every order.
+                return;
+
             if (args.Amount <= 0)
                 return;
 
             var stationUid = _station.GetOwningStation(uid);
+
+            // Sunrise-Edit: ordinary consoles and ATS consoles cannot spend each other's funds.
+            if (HasComp<SunriseTradeStationConsoleComponent>(uid) != HasComp<SunriseTradeStationAccountComponent>(stationUid))
+                return;
 
             if (!TryGetOrderDatabase(stationUid, out var orderDatabase))
                 return;
@@ -395,8 +449,16 @@ namespace Content.Server.Cargo.Systems
                 return;
             }
 
-            if (!GetAvailableProducts((uid, component)).Contains(args.CargoProductId))
+            if (!GetAvailableProducts((uid, component)).Contains(args.CargoProductId) &&
+                !(args.CargoProductId == SunriseTradeStationPricing.SyndicateProduct && CanUseTradeStationSyndicate(uid, player))) // Sunrise-Edit
                 return;
+
+            // Sunrise-Edit: ATS orders are paid immediately without cargo approval.
+            if (HasComp<SunriseTradeStationAccountComponent>(stationUid))
+            {
+                TryPurchaseTradeStationOrder(uid, component, args, product, stationUid.Value, bank, orderDatabase);
+                return;
+            }
 
             if (component.Mode == CargoOrderConsoleMode.PrintSlip)
             {
@@ -435,6 +497,9 @@ namespace Content.Server.Cargo.Systems
                 return;
 
             if (!TryComp<StationCargoOrderDatabaseComponent>(station, out var orderDatabase))
+                return;
+
+            if (!orderDatabase.Orders.ContainsKey(console.Account)) // Sunrise-Edit: another station may not have the ATS account.
                 return;
 
             if (_uiSystem.HasUi(consoleUid, CargoConsoleUiKey.Orders))

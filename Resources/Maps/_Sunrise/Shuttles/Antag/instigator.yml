@@ -1916,7 +1916,7 @@ entities:
       parent: 1
       rot: 1.5707963267948966 rad
       pos: -1.5,3.5
-- proto: CrateSyndicateSuperSurplusBundleNuke
+- proto: CrateSyndicateSurplusBundleNuke
   entities:
   - uid: 459
     components:

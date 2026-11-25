@@ -24,6 +24,8 @@ public sealed class CargoTest : GameTest
     [
         // This is ignored because it is explicitly intended to be able to sell for more than it costs.
         new("FunCrateGambling"),
+        // Sunrise-Edit — the crate contents and value are randomized.
+        new("SunriseTradeStationSyndicateSurplus"),
     ];
 
     [SidedDependency(Side.Server)]

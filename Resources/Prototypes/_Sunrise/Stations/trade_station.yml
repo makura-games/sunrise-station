@@ -1,0 +1,21 @@
+- type: entity
+  id: SunriseTradeStationAccount
+  parent: BaseStation
+  categories: [ HideSpawnMenu ]
+  name: automated trade station
+  components:
+  - type: SunriseTradeStationAccount
+  - type: StationBankAccount
+    primaryAccount: SunriseTradeStation
+    accounts:
+      SunriseTradeStation: 0
+    revenueDistribution:
+      SunriseTradeStation: 1
+    primaryCut: 1
+    increasePerSecond: 0
+  - type: StationCargoOrderDatabase
+    markets:
+    - market
+    - pirateMarket
+    orders:
+      SunriseTradeStation: []

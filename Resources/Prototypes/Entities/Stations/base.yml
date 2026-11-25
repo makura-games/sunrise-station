@@ -54,12 +54,16 @@
 #      path: /Maps/Shuttles/cargo.yml
     - type: GridSpawn
       groups:
-#        trade: !type:GridSpawnGroup
-#          addComponents:
-#            - type: ProtectedGrid
-#            - type: TradeStation
-#          paths:
-#            - /Maps/Shuttles/trading_outpost.yml
+        # Sunrise edit start - separate trading station near the main station.
+        trade: !type:GridSpawnGroup
+          stationGrid: false
+          addComponents:
+            - type: ProtectedGrid
+            - type: TradeStation
+            - type: SunriseTradeStationGrid
+          paths:
+            - /Maps/_Sunrise/Shuttles/trading_outpost.yml
+        # Sunrise edit end
         # Spawn last
         ruins: !type:GridSpawnGroup
           hide: true

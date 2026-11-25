@@ -283,6 +283,8 @@
     steps: 6
     zeroVisible: false
   - type: Appearance
+  - type: StaticPrice
+    price: 600
 
 - type: entity
   id: MagazineChainGun250
@@ -325,6 +327,8 @@
       color: "#9e9292"
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: StaticPrice
+    price: 300
 
 - type: entity
   id: MagazineChainGunRandomSpawner

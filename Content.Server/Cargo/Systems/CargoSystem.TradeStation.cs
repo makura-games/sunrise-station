@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Server.Cargo.Components;
+using Content.Shared._Sunrise.TradeStation; // Sunrise-Edit: all ATS sales go to its account.
 using Content.Shared.Cargo;
 using Content.Shared.Cargo.BUI;
 using Content.Shared.Cargo.Components;
@@ -245,7 +246,7 @@ public sealed partial class CargoSystem
         foreach (var (_, sellComponent, value) in goods)
         {
             Dictionary<ProtoId<CargoAccountPrototype>, double> distribution;
-            if (sellComponent != null)
+            if (sellComponent != null && !HasComp<SunriseTradeStationAccountComponent>(station)) // Sunrise-Edit: the ATS has no departmental accounts.
             {
                 var cut = _lockboxCutEnabled ? bankAccount.LockboxCut : bankAccount.PrimaryCut;
                 distribution = new Dictionary<ProtoId<CargoAccountPrototype>, double>

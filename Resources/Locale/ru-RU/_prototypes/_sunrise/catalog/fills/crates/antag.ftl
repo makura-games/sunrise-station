@@ -4,6 +4,3 @@ ent-CratePiraterEVASuitArmoredBundle = набор бронированных е�
 ent-CratePiraterEVASuitBundle = набор ева-костюмов пиратов
     .suffix = Заполнен, Санрайз
     .desc = { ent-CrateGenericSteel.desc }
-ent-CrateSyndicateSuperSurplusBundleAgent = супер-набор припасов синдиката
-    .suffix = Агент
-    .desc = Содержит 125 телекристаллов случайных предметов синдиката.

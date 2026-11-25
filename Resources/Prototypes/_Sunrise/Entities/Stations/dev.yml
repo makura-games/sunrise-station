@@ -10,7 +10,6 @@
   - BaseStationMainStation
   components:
   - type: Transform
-
 - type: entity
   categories: [ HideSpawnMenu ]
   id: SunriseStandardDevStation
@@ -37,3 +36,13 @@
   - BaseStationMainStation
   components:
   - type: Transform
+  - type: GridSpawn
+    groups:
+      trade: !type:GridSpawnGroup
+        stationGrid: false
+        addComponents:
+        - type: ProtectedGrid
+        - type: TradeStation
+        - type: SunriseTradeStationGrid
+        paths:
+        - /Maps/_Sunrise/Shuttles/trading_outpost.yml

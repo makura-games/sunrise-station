@@ -1,0 +1,48 @@
+- type: constructionGraph
+  id: SunriseTradeStationComputer
+  start: monitorBroken
+  graph:
+  - node: computer
+    entity: !type:BoardNodeEntity { container: board }
+  - node: monitorBroken
+    entity: SunriseTradeStationComputerBroken
+    edges:
+    - to: brokenMonitorUnsecured
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Screwing
+  - node: brokenMonitorUnsecured
+    entity: SunriseTradeStationComputerBroken
+    edges:
+    - to: monitorMissing
+      conditions:
+      - !type:EntityAnchored {}
+      completed:
+      - !type:SpawnPrototype
+        prototype: ShardGlass
+        amount: 2
+      steps:
+      - tool: Prying
+        doAfter: 2
+  - node: monitorMissing
+    entity: SunriseTradeStationComputerFrame
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: monitorUnsecured
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - material: Glass
+        amount: 2
+  - node: monitorUnsecured
+    entity: SunriseTradeStationComputerFrame
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: computer
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Screwing

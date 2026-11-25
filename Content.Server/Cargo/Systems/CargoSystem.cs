@@ -11,6 +11,8 @@ using Content.Shared.Cargo;
 using Content.Shared.Cargo.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Mind; // Sunrise-Edit: antagonist access to the ATS.
+using Content.Shared.Roles; // Sunrise-Edit: antagonist access to the ATS.
 using Content.Shared.Mobs.Components;
 using Content.Shared.Paper;
 using Robust.Server.GameObjects;
@@ -41,6 +43,8 @@ public sealed partial class CargoSystem : SharedCargoSystem
     [Dependency] private RadioSystem _radio = default!;
     [Dependency] private IdentitySystem _identity = default!;
     [Dependency] private MessengerServerSystem _messenger = default!;
+    [Dependency] private SharedMindSystem _mind = default!; // Sunrise-Edit
+    [Dependency] private SharedRoleSystem _roles = default!; // Sunrise-Edit
 
     [Dependency] private EntityQuery<CargoSellBlacklistComponent> _cargoSellBlacklistQuery = default!;
     [Dependency] private EntityQuery<MobStateComponent> _mobStateQuery = default!;
@@ -64,6 +68,7 @@ public sealed partial class CargoSystem : SharedCargoSystem
     {
         base.Update(frameTime);
         UpdateConsole();
+        UpdateTradeStationBlackMarkets(); // Sunrise-Edit: end the temporary black market mode.
         UpdateTelepad(frameTime);
         UpdateBounty();
     }

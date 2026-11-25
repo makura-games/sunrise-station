@@ -12,19 +12,6 @@
     - NukeOpsUplink
 
 - type: entity
-  id: CrateSyndicateSuperSurplusBundleNuke
-  parent: [ CrateSyndicate, StorePresetUplink, BaseSyndicateContraband ]
-  name: Syndicate super surplus crate
-  description: Contains 125 telecrystals worth of completely random Syndicate items.
-  suffix: NUKE
-  components:
-  - type: SurplusBundle
-    totalPrice: 125
-  - type: Tag
-    tags:
-    - NukeOpsUplink
-
-- type: entity
   id: CratePirateSurplusBundle
   parent: [ CratePirateChestSecure, StorePresetPirateUplink, BaseSyndicateContraband ]
   name: pirate chest

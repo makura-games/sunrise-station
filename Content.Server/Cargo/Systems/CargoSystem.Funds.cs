@@ -1,4 +1,8 @@
 using System.Linq;
+// Sunrise edit start - ATS account and black market support.
+using Content.Server._Sunrise.TradeStation;
+using Content.Shared._Sunrise.TradeStation;
+// Sunrise edit end
 using Content.Shared.Cargo.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -25,9 +29,22 @@ public sealed partial class CargoSystem
 
     private void OnWithdrawFunds(Entity<CargoOrderConsoleComponent> ent, ref CargoConsoleWithdrawFundsMessage args)
     {
+        // Sunrise edit start - restrict ATS withdrawals to authorized visitors and cash.
+        if (!CanUseTradeStationBlackMarket(ent, args.Actor))
+            return;
+
+        if (HasComp<SunriseTradeStationConsoleComponent>(ent) && args.Account != null)
+            return;
+        // Sunrise edit end
+
         if (_station.GetOwningStation(ent) is not { } station ||
             !TryComp<StationBankAccountComponent>(station, out var bank))
             return;
+
+        // Sunrise edit start - isolate the ATS account from station consoles.
+        if (HasComp<SunriseTradeStationConsoleComponent>(ent) != HasComp<SunriseTradeStationAccountComponent>(station))
+            return;
+        // Sunrise edit end
 
         if (args.Account == ent.Comp.Account ||
             args.Amount <= 0 ||
@@ -45,7 +62,9 @@ public sealed partial class CargoSystem
         }
 
         ent.Comp.NextAccountActionTime = Timing.CurTime + ent.Comp.AccountActionDelay;
-        UpdateBankAccount((station, bank), -args.Amount, ent.Comp.Account, dirty: false);
+        // Sunrise edit start - update the ATS balance immediately.
+        UpdateBankAccount((station, bank), -args.Amount, ent.Comp.Account, dirty: HasComp<SunriseTradeStationConsoleComponent>(ent));
+        // Sunrise edit end
         _audio.PlayPvs(ApproveSound, ent);
 
         var ourAccount = ProtoMan.Index(ent.Comp.Account);
@@ -56,7 +75,9 @@ public sealed partial class CargoSystem
             var stackPrototype = ProtoMan.Index(ent.Comp.CashType);
             _stack.SpawnAtPosition(args.Amount, stackPrototype, Transform(ent).Coordinates);
 
-            if (!_emag.CheckFlag(ent, EmagType.Interaction))
+            // Sunrise edit start - suppress withdrawal announcements for a hijacked ATS or black market console.
+            if (!_emag.CheckFlag(ent, EmagType.Interaction) && !SuppressTradeStationWithdrawalBroadcast(ent))
+            // Sunrise edit end
             {
                 var msg = Loc.GetString("cargo-console-fund-withdraw-broadcast",
                     ("name", name),
@@ -86,8 +107,26 @@ public sealed partial class CargoSystem
         }
     }
 
+    // Sunrise edit start - determine whether ATS withdrawals should be announced.
+    private bool SuppressTradeStationWithdrawalBroadcast(EntityUid console)
+    {
+        if (!HasComp<SunriseTradeStationConsoleComponent>(console))
+            return false;
+
+        if (HasComp<SunriseTradeStationBlackMarketComponent>(console))
+            return true;
+
+        return TryComp<TradeStationComponent>(Transform(console).GridUid, out var station) && station.Hacked;
+    }
+    // Sunrise edit end
+
     private void OnToggleLimit(Entity<CargoOrderConsoleComponent> ent, ref CargoConsoleToggleLimitMessage args)
     {
+        // Sunrise edit start - ATS withdrawals are always unlimited.
+        if (HasComp<SunriseTradeStationConsoleComponent>(ent))
+            return;
+        // Sunrise edit end
+
         if (!_accessReaderSystem.FindAccessTags(args.Actor).Intersect(ent.Comp.RemoveLimitAccess).Any())
         {
             _popup.PopupCursor(Loc.GetString("cargo-console-order-not-allowed"), args.Actor);

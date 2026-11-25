@@ -1,5 +1,6 @@
 using Content.Client.Cargo.UI;
 using Content.Shared.Cargo;
+using Content.Shared._Sunrise.TradeStation; // Sunrise-Edit: personal catalogue after the ATS hijack.
 using Content.Shared.Cargo.BUI;
 using Content.Shared.Cargo.Components;
 using Content.Shared.Cargo.Events;
@@ -104,7 +105,22 @@ namespace Content.Client.Cargo.BUI
             };
 
             _menu.OpenCentered();
+            if (EntMan.HasComponent<SunriseTradeStationConsoleComponent>(Owner)) // Sunrise-Edit
+                SendMessage(new SunriseTradeStationSyndicateRequest());
         }
+
+        // Sunrise edit start - the server reports access only to the current visitor.
+        protected override void ReceiveMessage(BoundUserInterfaceMessage message)
+        {
+            base.ReceiveMessage(message);
+            if (message is not SunriseTradeStationSyndicateResponse response || _menu == null)
+                return;
+
+            _menu.SyndicateAvailable = response.Allowed;
+            _menu.PopulateProducts();
+            _menu.PopulateCategories();
+        }
+        // Sunrise edit end
 
         private void Populate(List<CargoOrderData> orders)
         {

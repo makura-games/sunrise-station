@@ -1,0 +1,55 @@
+- type: entity
+  id: SunrisePaperCargoInvoiceHijacked
+  parent: PaperCargoInvoice
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+      color: "#680f15"
+    - state: paper_words
+      map: ["enum.PaperVisualLayers.Writing"]
+      color: "#680f15"
+      visible: false
+    - state: paper_stamp-generic
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
+  - type: PaperVisuals
+    backgroundModulate: "#680f15"
+    contentImageModulate: "#680f15"
+    headerImagePath: "/Textures/Interface/Paper/paper_heading_syndicate_logo.svg.96dpi.png"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: paper-inhand-left
+        color: "#680f15"
+      right:
+      - state: paper-inhand-right
+        color: "#680f15"
+
+- type: entity
+  id: SunrisePaperCargoInvoicePirate
+  parent: PaperCargoInvoice
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+      color: "#ffca85"
+    - state: paper_words
+      map: ["enum.PaperVisualLayers.Writing"]
+      color: "#ffca85"
+      visible: false
+    - state: paper_stamp-generic
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
+  - type: PaperVisuals
+    backgroundModulate: "#ffca85"
+    contentImageModulate: "#ffca85"
+    headerImagePath: "/Textures/Interface/Paper/paper_heading_pirate_logo.svg.96dpi.png"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: paper-inhand-left
+        color: "#ffca85"
+      right:
+      - state: paper-inhand-right
+        color: "#ffca85"

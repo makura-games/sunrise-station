@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Server._Sunrise.TradeStation;
 using Content.Server.Shuttles.Components;
 using Content.Server.Station.Events;
 using Content.Shared.CCVar;
@@ -159,8 +160,24 @@ public sealed partial class ShuttleSystem
 
     private void GridSpawns(EntityUid uid, GridSpawnComponent component)
     {
-        if (!_cfg.GetCVar(CCVars.GridFill))
-            return;
+        // Sunrise edit start - spawn the ATS even when ordinary extra grids are disabled.
+        var gridFillEnabled = _cfg.GetCVar(CCVars.GridFill);
+        if (!gridFillEnabled)
+        {
+            var hasTradeStation = false;
+            foreach (var group in component.Groups.Values)
+            {
+                if (group.AddComponents.ContainsKey("SunriseTradeStationGrid"))
+                {
+                    hasTradeStation = true;
+                    break;
+                }
+            }
+
+            if (!hasTradeStation)
+                return;
+        }
+        // Sunrise edit end
 
         var targetGrid = _station.GetLargestGrid(uid);
 
@@ -172,6 +189,15 @@ public sealed partial class ShuttleSystem
 
         foreach (var group in component.Groups.Values)
         {
+            // Sunrise edit start - other grids still depend on the GridFill setting.
+            var tradeStationGroup = group.AddComponents.ContainsKey("SunriseTradeStationGrid");
+            if (!gridFillEnabled && !tradeStationGroup)
+                continue;
+
+            if (tradeStationGroup && HasTradeStationFor(uid))
+                continue;
+            // Sunrise edit end
+
             var count = _random.Next(group.MinCount, group.MaxCount + 1);
 
             for (var i = 0; i < count; i++)
@@ -212,11 +238,29 @@ public sealed partial class ShuttleSystem
                 }
 
                 EntityManager.AddComponents(spawned, group.AddComponents);
+
+                // Sunrise-Edit: the ATS has its own account but pays a share to the main station.
+                if (TryComp<SunriseTradeStationGridComponent>(spawned, out var tradeStation))
+                    tradeStation.MainStation = uid;
             }
         }
 
         _mapSystem.DeleteMap(mapId);
     }
+
+    // Sunrise edit start - re-enabling GridFill must not spawn a second ATS.
+    private bool HasTradeStationFor(EntityUid station)
+    {
+        var query = EntityQueryEnumerator<SunriseTradeStationGridComponent>();
+        while (query.MoveNext(out _, out var tradeStation))
+        {
+            if (tradeStation.MainStation == station)
+                return true;
+        }
+
+        return false;
+    }
+    // Sunrise edit end
 
     private void OnGridFillMapInit(EntityUid uid, GridFillComponent component, MapInitEvent args)
     {

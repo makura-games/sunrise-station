@@ -1,0 +1,12 @@
+- type: cargoMarket
+  id: SunriseTradeStationSyndicate
+
+- type: cargoProduct
+  id: SunriseTradeStationSyndicateSurplus
+  icon:
+    sprite: Structures/Storage/Crates/syndicate.rsi
+    state: icon
+  product: CrateSyndicateSurplusBundle
+  cost: 50000
+  category: cargoproduct-category-name-fun
+  group: SunriseTradeStationSyndicate
