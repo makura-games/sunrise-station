@@ -57,10 +57,22 @@
 
 - type: entity
   id: BulletRifleAuto
-  parent: BulletPistolTraceSP
+  parent: BulletLightRifleAuto
   categories: [ HideSpawnMenu ]
 
 - type: entity
   id: BulletRifleAutoAP
   parent: BulletRifleTraceAP
   categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    armorPenetration: 0.5
+    damage:
+      types:
+        Piercing: 8
+  - type: ProjectilePierce
+    chance: 0.8
+    deviation: 0.15
+    pierceLevel: HardenedMetal
+  - type: ProjectileRicochet
+    chance: 0.8
