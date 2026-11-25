@@ -71,6 +71,8 @@ public sealed partial class SpawnPointSystem : EntitySystem
         if (possiblePositions.Count == 0 && args.DesiredSpawnPointType == SpawnPointType.LateJoin)
             possiblePositions.AddRange(lateJoinFallbackPositions);
 
+        AddSunriseStationFallbackPositions(args, possiblePositions); // Sunrise-Edit - резервный спавн на LateJoin-точках заданной станции.
+
         if (possiblePositions.Count == 0)
         {
             // Ok we've still not returned, but we need to put them /somewhere/.
