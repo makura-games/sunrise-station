@@ -1,0 +1,20 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:style="clr-namespace:Content.Client.Stylesheets"
+                      xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                      Title="{Loc 'paint-color-window-title'}"
+                      MinWidth="420">
+    <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="8">
+        <PanelContainer Name="ColorPreview" MinHeight="60">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="White" />
+            </PanelContainer.PanelOverride>
+        </PanelContainer>
+        <ColorSelectorSliders Name="ColorSelector" IsAlphaVisible="False" />
+        <Button Name="ApplyButton"
+                Text="{Loc 'paint-color-window-apply'}"
+                HorizontalAlignment="Right"
+                StyleClasses="{x:Static style:StyleClass.Positive}" />
+    </BoxContainer>
+</controls:FancyWindow>
