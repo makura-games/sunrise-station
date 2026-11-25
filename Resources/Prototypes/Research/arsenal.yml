@@ -286,6 +286,8 @@
   cost: 8000
   recipeUnlocks:
   - WeaponTemperatureGun
+  - WeaponLaserImmolator # Sunrise-added
+  - WeaponMechCombatAMLG90 # Sunrise-added
 
 - type: technology
   id: AdvancedShuttleWeapon

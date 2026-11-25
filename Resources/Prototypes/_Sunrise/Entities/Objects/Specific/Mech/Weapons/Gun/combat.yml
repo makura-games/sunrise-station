@@ -25,6 +25,38 @@
     price: 20000
 
 - type: entity
+  id: WeaponMechCombatHeavyRifle
+  name: Mounted Heavy Rifle Gun
+  description: A battlemech-mounted heavy rifle with selectable armor-piercing, anti-materiel, and hollow-point ammunition. Its ammunition feed must be configured on the weapon before installation.
+  suffix: Mech Weapon, Gun, Combat, Selectable Ammo
+  parent: [ BaseMechWeaponRange, CombatMechEquipment ]
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_antimatrifle
+  - type: Gun
+    fireRate: 1
+    selectedMode: SemiAuto
+    availableModes:
+      - SemiAuto
+    soundGunshot:
+      path: /Audio/_Sunrise/Weapons/Guns/Snipers/Bauer127/bauer127_shot.ogg
+  - type: BatteryAmmoProvider
+    proto: CartridgeAntiMaterielPenetrator
+    fireCost: 125
+  - type: BatteryWeaponFireModes
+    currentFireMode: 1
+    fireModes:
+    - proto: CartridgeAntiMaterielPenetrator
+      fireCost: 125
+    - proto: CartridgeAntiMateriel
+      fireCost: 100
+    - proto: CartridgeAntiMaterielHP
+      fireCost: 100
+  - type: Appearance
+  - type: AmmoCounter
+
+- type: entity
   id: WeaponMechCombatMaxim
   name: Mounted Kardashev-Maxim
   description: An ancient heavy machine gun given new life as a mech-mounted gun

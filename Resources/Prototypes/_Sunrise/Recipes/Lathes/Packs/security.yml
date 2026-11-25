@@ -184,6 +184,7 @@
     - SunriseWeaponLaserCarbineBattery
     - WeaponLaserLNT620
     - WeaponIonCarbine
+    - WeaponLaserImmolator
     - WeaponDecloner
     - ScanGateMachineCircuitboard
     - MagazineBatteryLr30
@@ -326,6 +327,7 @@
 - type: latheRecipePack
   id: SecurityDynamicSunriseMech
   recipes:
+    - WeaponMechCombatAMLG90
     - WeaponMechCombatImmolationGun
     - WeaponMechCombatSolarisLaser
     - WeaponMechCombatFiredartLaser

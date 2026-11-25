@@ -45,40 +45,6 @@
   - type: AmmoCounter
 
 - type: entity
-  id: WeaponMechCombatHeavyRifle
-  name: Mounted Heavy Rifle Gun
-  description: A battlemech-mounted heavy rifle with selectable armor-piercing, anti-materiel, and hollow-point ammunition. Its ammunition feed must be configured on the weapon before installation.
-  suffix: Mech Weapon, Gun, Combat, Selectable Ammo
-  parent: [ BaseMechWeaponRange, CombatMechEquipment ]
-  components:
-  - type: Sprite
-    sprite: Objects/Specific/Mech/mecha_equipment.rsi
-    state: mecha_antimatrifle
-  - type: Gun
-    fireRate: 1
-    selectedMode: SemiAuto
-    availableModes:
-      - SemiAuto
-    soundGunshot:
-      path: /Audio/_Sunrise/Weapons/Guns/Snipers/Bauer127/bauer127_shot.ogg
-  - type: BatteryAmmoProvider
-    proto: CartridgeAntiMaterielPenetrator
-    fireCost: 125
-  # Sunrise added start - выбор типа боеприпаса перед установкой на меха
-  - type: BatteryWeaponFireModes
-    currentFireMode: 1
-    fireModes:
-    - proto: CartridgeAntiMaterielPenetrator
-      fireCost: 125
-    - proto: CartridgeAntiMateriel
-      fireCost: 100
-    - proto: CartridgeAntiMaterielHP
-      fireCost: 100
-  # Sunrise added end
-  - type: Appearance
-  - type: AmmoCounter
-
-- type: entity
   id: WeaponMechCombatSolarisLaser
   name: CH-LC "Solaris" laser cannon
   description: An experimental combat mounted laser cannon that causes more damage, but also has a greater cooldown than a "Firedart".
@@ -346,21 +312,22 @@
     heldPrefix: amlg90
   # Sunrise-end
   - type: Gun
-    minAngle: -10
-    maxAngle: 10
+    minAngle: 2
+    maxAngle: 30
+    angleIncrease: 3
     fireRate: 5
-    shotsPerBurst: 3
-    burstCooldown: 0.75
+    shotsPerBurst: 5
+    burstCooldown: 0.35
     selectedMode: Burst
     availableModes:
       - Burst
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/laser.ogg
+      path: /Audio/Weapons/Guns/Gunshots/xenofirebeam.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: BatteryAmmoProvider
-    proto: SunriseMechHitscanRedLaserBeam # Sunrise-Edit - удаляем предсказанную hitscan-сущность
-    fireCost: 20
+    proto: XenoborgFireLaser
+    fireCost: 45
   - type: Appearance
   - type: AmmoCounter
   - type: Tag
