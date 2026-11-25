@@ -4,6 +4,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Client._Sunrise.UserInterface.Controls;
@@ -18,6 +19,7 @@ public class SunriseStaticSpriteView : Control
     private EntityUid? _sourceEntity;
     private EntityUid? _previewEntity;
     private Angle _rotation;
+    private readonly EntProtoId _previewEntityProtoId = "hoverentity";
 
     [ViewVariables]
     private Entity<SpriteComponent> Entity { get; set; }
@@ -100,9 +102,7 @@ public class SunriseStaticSpriteView : Control
 
     public void SetEntity(EntityUid uid)
     {
-        if (_sourceEntity == uid &&
-            _previewEntity is { } preview &&
-            !_entityMan.Deleted(preview))
+        if (_sourceEntity == uid && !_entityMan.Deleted(_previewEntity))
         {
             return;
         }
@@ -136,8 +136,8 @@ public class SunriseStaticSpriteView : Control
             return;
         }
 
-        if (_previewEntity == null || _entityMan.Deleted(_previewEntity))
-            _previewEntity = _entityMan.SpawnEntity("hoverentity", MapCoordinates.Nullspace);
+        if (_entityMan.Deleted(_previewEntity))
+            _previewEntity = _entityMan.SpawnEntity(_previewEntityProtoId, MapCoordinates.Nullspace);
 
         if (!_entityMan.TryGetComponent(_previewEntity, out SpriteComponent? previewSprite))
         {
@@ -148,8 +148,7 @@ public class SunriseStaticSpriteView : Control
         // Создаем глубокую копию спрайта на отдельной клиентской сущности.
         _sprite.CopySprite((uid, sprite), (_previewEntity.Value, previewSprite));
 
-        _rotation = sprite.Rotation;
-
+        _rotation = previewSprite.Rotation;
         _cachedSprite = previewSprite;
         Entity = (_previewEntity.Value, previewSprite);
         InvalidateMeasure();
