@@ -87,13 +87,16 @@ reviews:
       - mode: error
         name: "SS14 bridge sync"
         instructions: |
-          Fail if this PR changes any canonical skill under `.agents/skills/` without updating every required bridge in `.claude/`, `.cursor/`, and `.github/` in the same PR.
-          Required skill bridges:
+          Check synchronization between canonical skills in `.agents/skills/<skill-name>/SKILL.md` and their required bridges:
           - `.claude/skills/<skill-name>/SKILL.md`
           - `.cursor/skills/<skill-name>/SKILL.md`
           - `.github/skills/<skill-name>/SKILL.md`
-          Also fail if a changed bridge points to the wrong `.agents` source path or if synchronized name/description metadata diverges from the canonical source.
-          Pass only if all changed canonical files and bridge files remain synchronized.
+          Fail if:
+          - a canonical skill is added, renamed, or deleted without adding, renaming, or deleting every required bridge in the same PR;
+          - a canonical skill's `name` or `description` frontmatter changes without updating every required bridge so that `name` and `description` match;
+          - any bridge is missing, points to the wrong `../../../.agents/skills/<skill-name>/SKILL.md` path (`metadata.source_skill` or markdown link), or diverges in `name`/`description` from the canonical source.
+          Do NOT fail and do NOT require editing bridge files when only the markdown body or internal files of a canonical skill change, provided all required bridges already exist and their `name`, `description`, and canonical source path match.
+          Pass if all canonical skills and their required bridges remain synchronized.
       - mode: error
         name: "SS14 fork/project folder selection"
         instructions: |

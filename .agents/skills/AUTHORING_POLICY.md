@@ -17,8 +17,10 @@ For every skill in `.agents/skills/<skill-name>`, keep matching bridge files:
 - `.cursor/skills/<skill-name>/SKILL.md`
 - `.github/skills/<skill-name>/SKILL.md`
 
-When creating, updating, renaming, or deleting a skill in `.agents/skills`, apply the same bridge
-change in `.claude/skills`, `.cursor/skills`, and `.github/skills` in the same pull request.
+When creating, renaming, deleting, or changing the `name`/`description` metadata of a skill in
+`.agents/skills`, apply the matching bridge update in `.claude/skills`, `.cursor/skills`, and
+`.github/skills` in the same pull request. Body-only edits to `.agents/skills/<skill-name>/SKILL.md`
+do not require modifying bridge files if their metadata and source path already match.
 
 ## Bridge Contract
 
