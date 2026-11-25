@@ -51,7 +51,7 @@
   - type: Fingerprint
   - type: Blindable
   - type: Temperature
-    currentTemperature: 310.15
+    temperature: 310.15
     specificHeat: 46
   - type: TemperatureDamage
     heatDamageThreshold: 350
@@ -149,13 +149,6 @@
     - AnomalyHost
     - IPC
     - CannotSuicide
-  - type: Butcherable
-    butcheringType: Spike
-    spawned:
-    - id: SheetSteel10
-    - id: SheetPlastic10
-    - id: SheetGlass10
-    - id: CableApcStack10
   - type: SurgeryTarget
   - type: DarkenedVision
   - type: CanEscapeInventory
