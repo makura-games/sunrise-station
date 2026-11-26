@@ -23,7 +23,7 @@ namespace Content.Server.Administration.Systems;
 /// </summary>
 public sealed partial class AdminVerbSystem
 {
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
 
     private static readonly EntProtoId DefaultAssaultOpsRule = "AssaultOps";
     private static readonly EntProtoId DefaultFleshCultRule = "FleshCult";
