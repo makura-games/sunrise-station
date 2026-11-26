@@ -3,7 +3,7 @@ using Content.Client._Sunrise.Sandbox.Transparency.Systems;
 using Robust.Client.UserInterface;
 using Robust.Shared.Console;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Client.UserInterface.Systems.Sandbox;
 
 public sealed partial class SandboxUIController

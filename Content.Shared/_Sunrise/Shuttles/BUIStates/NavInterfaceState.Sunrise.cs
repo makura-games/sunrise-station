@@ -3,6 +3,7 @@ using Content.Shared.Shuttles.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Shuttles.BUIStates;
 
 public sealed partial class NavInterfaceState
