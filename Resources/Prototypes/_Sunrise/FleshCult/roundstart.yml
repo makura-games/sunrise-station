@@ -13,7 +13,7 @@
     - FleshCultSurviveObjective
   - type: AntagSelection
     agentName: flesh-cult-round-end-agent-name
-    selectionTime: JobsAssigned
+    selectionTime: RuleStarted
     antags:
     - !type:FixedAntagCount
       proto: SunriseFleshCultistLeader

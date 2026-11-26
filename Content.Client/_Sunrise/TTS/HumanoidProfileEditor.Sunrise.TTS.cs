@@ -3,6 +3,7 @@ using Content.Client._Sunrise.TTS;
 using Content.Shared._Sunrise.TTS;
 using Content.Shared.Preferences;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Client.Lobby.UI;
 
 public sealed partial class HumanoidProfileEditor

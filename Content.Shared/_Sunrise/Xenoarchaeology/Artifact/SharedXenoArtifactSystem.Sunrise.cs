@@ -5,6 +5,7 @@ using Robust.Shared.GameObjects;
 using Content.Shared._Sunrise.Misc;
 using System.Collections.Generic;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Xenoarchaeology.Artifact;
 
 public abstract partial class SharedXenoArtifactSystem

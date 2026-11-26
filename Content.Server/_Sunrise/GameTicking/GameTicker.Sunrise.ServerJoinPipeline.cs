@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Content.Server._Sunrise.GameTicking;
 using Robust.Shared.Player;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.GameTicking;
 
 public sealed partial class GameTicker

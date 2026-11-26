@@ -7,7 +7,7 @@ using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+// ReSharper disable once CheckNamespace
 namespace Content.Server.GameTicking.Rules;
 
 public abstract partial class GameRuleSystem<T> where T : IComponent

@@ -1,7 +1,7 @@
-#pragma warning disable IDE0130 // Namespace does not match folder structure
 using Content.Server._Sunrise.Chat.Sanitization;
 using Content.Shared.Chat;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Chat.Systems;
 
 public sealed partial class ChatSystem

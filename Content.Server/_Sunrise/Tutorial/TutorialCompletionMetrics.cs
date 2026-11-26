@@ -1,6 +1,5 @@
-#pragma warning disable IDE0130
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Database;
-#pragma warning restore IDE0130
 
 /// <summary>
 /// Aggregated tutorial completion data used by Prometheus metrics.
