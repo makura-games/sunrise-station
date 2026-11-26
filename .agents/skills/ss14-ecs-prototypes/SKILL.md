@@ -351,6 +351,7 @@ ent-MyEntityId = entity name
 3. **In the YAML prototype - only fallback in English**: the `name` and `description` fields in YAML serve as a fallback if there is no localization
 4. **Names are inherited from the parent** automatically via FTL - the child uses the parent’s name if its own is not specified
 5. **`suffix`** - for marking options in the spawn panel, not visible to players
+6. **Uplink card titles are an explicit exception**: `uplink-*-name` starts with an uppercase letter, and `uplink-*-desc` may describe product mechanics. Do not apply the general lowercase or visual-only rules to store cards.
 
 ### Internal Entities
 

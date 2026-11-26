@@ -65,9 +65,10 @@ Use it as a guideline: if new code/content doesn't follow the rules below, it's 
 
 1. MUST: `name` and `description` fallback in YAML be written in English.
 2. MUST: fallback content in YAML matches the meaning of the English localization.
-3. MUST: the name of the entity in localization is in lower case, maximum 3 words.
+3. MUST: the name of an entity in `ent-*` localization is in lower case, maximum 3 words.
 4. MUST: description of the entity - with a capital letter, maximum 3 sentences.
 5. SHOULD: do not use quotes unless escaping is required.
+6. MUST: start store card titles in `uplink-*-name` with an uppercase letter; these are UI titles, not `ent-*` entity names.
 
 ### 6) Localization keys
 
@@ -79,9 +80,10 @@ Use it as a guideline: if new code/content doesn't follow the rules below, it's 
 ### 7) Localization content
 
 1. MUST: content is written in the language of a specific locale.
-2. MUST: write the name/desc of entities in IC style as an external observable description.
+2. MUST: write `ent-*` name/desc of entities in IC style as an external observable description.
 3. MUST: Explicitly mark OOC text with the prefix `OOC:`.
 4. MUST NOT: Mix in-game descriptions with OOC instructions without a marker.
+5. MAY: describe a product's purpose, contents, and gameplay properties in `uplink-*-desc` without `OOC:`, as the vanilla catalog does. Do not apply the "visual properties only" restriction for `ent-* .desc` to store cards.
 
 ### 8) Variables in the code
 
@@ -144,6 +146,8 @@ Use it as a guideline: if new code/content doesn't follow the rules below, it's 
 10. OOC hint in `.desc` without the `OOC:` marker.
 11. Description longer than 3 sentences or name longer than 3 words.
 12. Private fields without `_` (except constants).
+13. Lowercase `uplink-*-name` copied from the entity-name convention.
+14. Requiring a visual-only `uplink-*-desc` by applying the `ent-* .desc` convention to store cards.
 
 ## Code examples
 
@@ -246,6 +250,15 @@ armable-examine-not-armed = {CAPITALIZE(THE($name))} needs to be armed.
 
 Comment: Non-entity keys go to `kebab-case`.
 
+### Example 10: uplink card title and mechanical description
+
+```ftl
+uplink-energy-dome-grenade-name = Deployable portable shield generator
+uplink-energy-dome-grenade-desc = Creates a temporary Syndicate energy shield when deployed.
+```
+
+Comment: `uplink-*-name` is a UI title and starts with a capital letter. Its description may explain the product's behavior; it is not an entity `.desc`.
+
 ## Checklist before PR
 
 1. All new C# types and fields are named according to the rules above.
@@ -254,6 +267,8 @@ Comment: Non-entity keys go to `kebab-case`.
 4. FTL keys are divided into `ent-*` and `kebab-case` according to their purpose.
 5. `name/description` fallback in YAML - in English and consistent with the English locale.
 6. There is no OOC text without a `OOC:` marker.
+7. `ent-*` names start with lowercase, while `uplink-*-name` store-card titles start with uppercase.
+8. Mechanical details in `uplink-*-desc` were not rejected under the visual-only rule for entity `.desc`.
 
 ## Extension rule
 
