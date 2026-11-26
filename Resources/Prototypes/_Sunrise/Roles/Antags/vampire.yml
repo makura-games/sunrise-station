@@ -1,0 +1,7 @@
+- type: antag
+  id: Vampire
+  name: roles-antag-vampire-name
+  antagonist: true
+  setPreference: false
+  objective: roles-antag-vampire-description
+  playTimeTracker: AntagVampire

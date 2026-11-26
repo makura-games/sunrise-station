@@ -115,6 +115,9 @@
       reagents:
       - ReagentId: CopperBlood
         Quantity: 600
+  - type: BloodSource # Sunrise-Edit
+    kind: Copper
+    value: 0.75
   - type: MeleeWeapon
     animation: WeaponArcBite
     soundHit:

@@ -6,3 +6,5 @@ metabolizer-type-wild-slime = Дикий слайм
 metabolizer-type-felinid = Фелинид
 metabolizer-type-kobold = Кобольд
 metabolizer-type-inferior-vulpkanin = Низший вульканин
+
+metabolizer-type-vampire = Вампир

@@ -1,0 +1,109 @@
+using Content.Server.Mind;
+using Content.Server.Objectives.Systems;
+using Content.Server.Objectives;
+using Content.Server.Roles;
+using Content.Server._Sunrise.Antags.Vampires.Components;
+using Content.Shared.Mind;
+using Content.Shared.Objectives.Components;
+using Content.Shared.Random;
+using Content.Shared._Sunrise.Antags.Vampires.Components;
+using Robust.Shared.Prototypes;
+
+namespace Content.Server._Sunrise.Antags.Vampires.Systems;
+
+public sealed partial class ServerVampireSystem
+{
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private NumberObjectiveSystem _number = default!;
+    [Dependency] private ObjectivesSystem _objectives = default!;
+    [Dependency] private RoleSystem _role = default!;
+
+    [SubscribeLocalEvent]
+    public void OnBloodDrainGetProgress(Entity<BloodDrainConditionComponent> ent, ref ObjectiveGetProgressEvent args)
+    {
+        var target = _number.GetTarget(ent);
+        if (args.Mind.OwnedEntity is not { } body ||
+            !_feedingQuery.TryComp(body, out var feeding))
+        {
+            args.Progress = 0f;
+            return;
+        }
+
+        args.Progress = target > 0f
+            ? MathF.Min((float)feeding.TotalBlood / target, 1f)
+            : 1f;
+    }
+
+    /// <summary>
+    /// Проверяет наличие сущности и разума, отсутствие вампиризма.
+    /// </summary>
+    public bool CanMakeVampire(EntityUid target)
+    {
+        return target.IsValid() &&
+            Exists(target) &&
+            !HasComp<VampireComponent>(target) &&
+            _mind.TryGetMind(target, out _, out _);
+    }
+
+    /// <summary>
+    /// Обращает в вампира; отказ в выдаче цели не отменяет обращение.
+    /// </summary>
+    public bool TryMakeVampire(EntityUid target)
+    {
+        if (!CanMakeVampire(target))
+            return false;
+
+        if (!_mind.TryGetMind(target, out var mindId, out var mind))
+            return false;
+
+        var configuration = EnsureComp<VampireConfigurationComponent>(target);
+        EnsureComp<VampireComponent>(target);
+        _role.MindAddRole(mindId, configuration.MindRole, mind, silent: true);
+
+        foreach (var objective in configuration.Objectives)
+        {
+            TryAddVampireObjective((mindId, mind), objective);
+        }
+
+        foreach (var objectiveGroup in configuration.ObjectiveGroups)
+        {
+            TryAddRandomVampireObjective(
+                (mindId, mind),
+                objectiveGroup,
+                configuration.ObjectiveMaxDifficulty);
+        }
+
+        var briefing = Loc.GetString("vampire-role-greeting");
+        _antag.SendBriefing(target, briefing, Color.Yellow, configuration.BriefingSound);
+        return true;
+    }
+
+    private void TryAddVampireObjective(Entity<MindComponent> mind, EntProtoId objective)
+    {
+        if (_mind.TryAddObjective(mind, mind.Comp, objective))
+            return;
+
+        Log.Error(
+            $"Не удалось выдать цель вампира {objective} сущности {ToPrettyString(mind.Comp.OwnedEntity)}");
+    }
+
+    private void TryAddRandomVampireObjective(
+        Entity<MindComponent> mind,
+        ProtoId<WeightedRandomPrototype> objectiveGroup,
+        float maxDifficulty)
+    {
+        if (_objectives.GetRandomObjective(
+                mind,
+                mind.Comp,
+                objectiveGroup,
+                maxDifficulty) is { } objective)
+        {
+            _mind.AddObjective(mind, mind.Comp, objective);
+            return;
+        }
+
+        Log.Error(
+            $"Не удалось выбрать цель вампира из группы {objectiveGroup} " +
+            $"для {ToPrettyString(mind.Comp.OwnedEntity)}");
+    }
+}

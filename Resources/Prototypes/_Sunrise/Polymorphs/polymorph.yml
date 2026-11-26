@@ -12,7 +12,7 @@
 - type: polymorph
   id: PermanentlyHuman
   configuration:
-    entity: MobHumanRandomization
+    entity: SunriseMobHumanDarvinium
     forced: true
     transferName: true
     inventory: Transfer
@@ -81,7 +81,7 @@
 - type: polymorph
   id: PermanentlyVulpkanin
   configuration:
-    entity: MobVulpkaninRandomization
+    entity: SunriseMobVulpkaninDarvinium
     forced: true
     transferName: true
     inventory: Transfer
