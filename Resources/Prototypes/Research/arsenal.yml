@@ -307,13 +307,11 @@
   - ShuttleGunBeamstormMachineGunCircuitboard
   - MagazineBauer127
   #- MagazineBauer127Penetrator # To much
-  #- MagazineBauer127Blast # To much
   - MagazineBauer127Frag
   - MagazineBauer127Emp
   - MagazineBoxBelt127Empty
   #- MagazineBoxBelt127 # To much
   - MagazineBoxBelt127Artillery
-  #- MagazineBoxBelt127Blast # To much
   - MagazineBoxBelt127Frag
   - MagazineBoxBelt127Emp
   - RifleHeavyMagazineAP # Sunrise-Add
