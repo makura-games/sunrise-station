@@ -31,20 +31,7 @@ namespace Content.Shared._Sunrise.Tutorial.EntitySystems.SoftLock;
 /// </summary>
 public sealed partial class TutorialSoftLockSystem
 {
-    public void InitializeInteractions()
-    {
-        SubscribeLocalEvent<TutorialInteractSoftLockComponent, InteractionAttemptEvent>(OnHeldItemInteractionAttempt);
-        SubscribeLocalEvent<TutorialAttackSoftLockComponent, AttackAttemptEvent>(OnAttackAttempt);
-        SubscribeLocalEvent<TutorialAttackSoftLockComponent, ShotAttemptedEvent>(OnShotAttempted);
-        SubscribeLocalEvent<TutorialBuckleSoftLockComponent, BuckleAttemptEvent>(OnBuckleAttempt);
-        SubscribeLocalEvent<TutorialWieldSoftLockComponent, WieldAttemptEvent>(OnWieldAttempt);
-
-        SubscribeLocalEvent<TutorialSoftLockEntityComponent, EdibleEvent>(OnEdible);
-        SubscribeLocalEvent<TutorialSoftLockEntityComponent, ActivatableUIOpenAttemptEvent>(OnBuiOpen);
-        SubscribeLocalEvent<TutorialIngestSoftLockComponent, TutorialShouldMarkEntityEvent>(OnIngestShouldMarkEntity);
-        SubscribeLocalEvent<TutorialOpenUiSoftLockComponent, TutorialShouldMarkEntityEvent>(OnOpenUiShouldMarkEntity);
-    }
-
+    [SubscribeLocalEvent]
     private void OnBuckleAttempt(Entity<TutorialBuckleSoftLockComponent> ent, ref BuckleAttemptEvent args)
     {
         if (args.Cancelled)
@@ -55,6 +42,7 @@ public sealed partial class TutorialSoftLockSystem
             ShowPopup(args.User ?? ent.Owner, ent.Comp.Popup);
     }
 
+    [SubscribeLocalEvent]
     private void OnWieldAttempt(Entity<TutorialWieldSoftLockComponent> ent, ref WieldAttemptEvent args)
     {
         if (args.Cancelled)
@@ -64,6 +52,7 @@ public sealed partial class TutorialSoftLockSystem
         ShowPopup(ent, ent.Comp.Popup);
     }
 
+    [SubscribeLocalEvent]
     private void OnAttackAttempt(Entity<TutorialAttackSoftLockComponent> ent, ref AttackAttemptEvent args)
     {
         if (args.Cancelled)
@@ -72,6 +61,7 @@ public sealed partial class TutorialSoftLockSystem
         TryBlockAttack(ent, args);
     }
 
+    [SubscribeLocalEvent]
     private void OnShotAttempted(Entity<TutorialAttackSoftLockComponent> ent, ref ShotAttemptedEvent args)
     {
         if (args.Cancelled)
@@ -80,6 +70,7 @@ public sealed partial class TutorialSoftLockSystem
         TryBlockShot(ent, ref args);
     }
 
+    [SubscribeLocalEvent]
     private void OnHeldItemInteractionAttempt(Entity<TutorialInteractSoftLockComponent> ent, ref InteractionAttemptEvent args)
     {
         if (args.Cancelled || args.Target is not { } target)
@@ -92,6 +83,7 @@ public sealed partial class TutorialSoftLockSystem
         ShowPopup(args.Uid, ent.Comp.Popup);
     }
 
+    [SubscribeLocalEvent]
     private void OnEdible(Entity<TutorialSoftLockEntityComponent> ent, ref EdibleEvent args)
     {
         if (args.Cancelled)
@@ -112,6 +104,7 @@ public sealed partial class TutorialSoftLockSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnBuiOpen(Entity<TutorialSoftLockEntityComponent> ent, ref ActivatableUIOpenAttemptEvent args)
     {
         if (args.Cancelled)
@@ -132,6 +125,7 @@ public sealed partial class TutorialSoftLockSystem
         ShowPopup(args.User, softLock.Popup);
     }
 
+    [SubscribeLocalEvent]
     private void OnOpenUiShouldMarkEntity(
         Entity<TutorialOpenUiSoftLockComponent> ent,
         ref TutorialShouldMarkEntityEvent args)
@@ -145,6 +139,7 @@ public sealed partial class TutorialSoftLockSystem
         args.ShouldMark = IsAllowedPrototype(args.Target, ent.Comp.Targets);
     }
 
+    [SubscribeLocalEvent]
     private void OnIngestShouldMarkEntity(
         Entity<TutorialIngestSoftLockComponent> ent,
         ref TutorialShouldMarkEntityEvent args)

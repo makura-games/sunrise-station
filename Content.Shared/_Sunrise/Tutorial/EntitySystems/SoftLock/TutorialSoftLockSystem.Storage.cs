@@ -26,18 +26,7 @@ namespace Content.Shared._Sunrise.Tutorial.EntitySystems.SoftLock;
 /// </summary>
 public sealed partial class TutorialSoftLockSystem
 {
-    public void InitializeStorage()
-    {
-        SubscribeLocalEvent<TutorialSoftLockEntityComponent, StorageCloseAttemptEvent>(OnStorageCloseAttempt);
-        SubscribeLocalEvent<TutorialSoftLockEntityComponent, StorageInsertFailedEvent>(OnStorageInsertFailed);
-        SubscribeLocalEvent<TutorialSoftLockEntityComponent, InteractionAttemptEvent>(OnHeldItemStorageInteractionAttempt);
-        SubscribeLocalEvent<TutorialSoftLockEntityComponent, ContainerGettingInsertedAttemptEvent>(OnContainerGettingInsertedAttempt);
-
-        SubscribeLocalEvent<TutorialStorageCloseSoftLockComponent, TutorialShouldMarkEntityEvent>(OnStorageCloseShouldMarkEntity);
-        SubscribeLocalEvent<TutorialStorageInsertSoftLockComponent, TutorialShouldMarkEntityEvent>(OnStorageInsertShouldMarkEntity);
-        SubscribeLocalEvent<TutorialStorageInteractSoftLockComponent, TutorialShouldMarkEntityEvent>(OnStorageInteractShouldMarkEntity);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStorageCloseAttempt(Entity<TutorialSoftLockEntityComponent> ent, ref StorageCloseAttemptEvent args)
     {
         if (args.Cancelled || args.User is not { } user)
@@ -56,6 +45,7 @@ public sealed partial class TutorialSoftLockSystem
         ShowPopup(user, softLock.Popup);
     }
 
+    [SubscribeLocalEvent]
     private void OnStorageInsertFailed(Entity<TutorialSoftLockEntityComponent> ent, ref StorageInsertFailedEvent args)
     {
         if (_timing.ApplyingState)
@@ -74,6 +64,7 @@ public sealed partial class TutorialSoftLockSystem
         ShowPopup(args.Player, softLock.Popup);
     }
 
+    [SubscribeLocalEvent]
     private void OnHeldItemStorageInteractionAttempt(Entity<TutorialSoftLockEntityComponent> ent, ref InteractionAttemptEvent args)
     {
         if (args.Cancelled || args.Target is not { } target)
@@ -92,6 +83,7 @@ public sealed partial class TutorialSoftLockSystem
         ShowPopup(args.Uid, softLock.Popup);
     }
 
+    [SubscribeLocalEvent]
     private void OnContainerGettingInsertedAttempt(
         Entity<TutorialSoftLockEntityComponent> ent, ref
         ContainerGettingInsertedAttemptEvent args)
@@ -122,6 +114,7 @@ public sealed partial class TutorialSoftLockSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnStorageCloseShouldMarkEntity(
         Entity<TutorialStorageCloseSoftLockComponent> ent,
         ref TutorialShouldMarkEntityEvent args)
@@ -135,6 +128,7 @@ public sealed partial class TutorialSoftLockSystem
         args.ShouldMark = IsAllowedPrototype(args.Target, ent.Comp.Targets);
     }
 
+    [SubscribeLocalEvent]
     private void OnStorageInsertShouldMarkEntity(
         Entity<TutorialStorageInsertSoftLockComponent> ent,
         ref TutorialShouldMarkEntityEvent args)
@@ -147,6 +141,7 @@ public sealed partial class TutorialSoftLockSystem
             IsStorageSourceAllowed(args.Target, ent.Comp.Items, ent.Comp.Targets);
     }
 
+    [SubscribeLocalEvent]
     private void OnStorageInteractShouldMarkEntity(
         Entity<TutorialStorageInteractSoftLockComponent> ent,
         ref TutorialShouldMarkEntityEvent args)

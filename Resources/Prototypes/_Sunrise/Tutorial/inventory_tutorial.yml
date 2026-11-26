@@ -112,14 +112,15 @@
     components:
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:UiControlVisibleCondition
-    control: InventoryHeadSlot
-    selectors:
-    - !type:UiByName
-      name: Inventory
-    - !type:UiByName
-      name: SlotButton_head
+  completion:
+    all:
+    - !type:UiControlVisibleObjectiveCondition
+      control: InventoryHeadSlot
+      selectors:
+      - !type:UiByName
+        name: Inventory
+      - !type:UiByName
+        name: SlotButton_head
 
 - type: tutorialStep
   id: InvTutWelcome
@@ -133,9 +134,10 @@
     components:
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 20
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 20
 
 - type: tutorialStep
   id: InvTutHandsIntro
@@ -154,9 +156,10 @@
     components:
     - type: TutorialPickupSoftLock
       blockAll: true
-  conditions:
-  - !type:StepDelayCondition
-    delay: 14
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 14
 
 - type: tutorialStep
   id: InvTutPickUpFirstHandItem
@@ -179,9 +182,10 @@
     - type: TutorialPickupSoftLock
       allowedItems:
       - Pen
-  conditions:
-  - !type:ItemHandledCondition
-    item: Pen
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: Pen
 
 - type: tutorialStep
   id: InvTutSwitchToEmptyHand
@@ -205,11 +209,13 @@
       - Pen
       popup: inv-tut-softlock-keep-hand-item
   preconditions:
-  - !type:ItemHandledCondition
-    item: Pen
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: Pen
   preconditionFailStep: InvTutPickUpFirstHandItem
-  conditions:
-  - !type:SwapHandsListenedCondition
+  completion:
+    all:
+    - !type:SwapHandsObjectiveCondition
 
 - type: tutorialStep
   id: InvTutPickUpSecondHandItem
@@ -240,11 +246,13 @@
       - Screwdriver
       popup: inv-tut-softlock-keep-hand-items
   preconditions:
-  - !type:ItemHandledCondition
-    item: Pen
-  conditions:
-  - !type:ItemHandledCondition
-    item: Screwdriver
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: Pen
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: Screwdriver
 
 - type: tutorialStep
   id: InvTutDropSecondHandItem
@@ -267,18 +275,21 @@
       - Screwdriver
       popup: inv-tut-softlock-drop-item
   preconditions:
-  - !type:ItemHandledCondition
-    item: Pen
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: Pen
   preconditionFailStep: InvTutPickUpFirstHandItem
   failures:
-  - conditions:
-    - !type:ItemHandledCondition
-      item: Pen
-      inverted: true
+  - when:
+      all:
+      - !type:ItemHandledObjectiveCondition
+        item: Pen
+        inverted: true
     repairStep: InvTutRepairHandItems
-  conditions:
-  - !type:DropListenedCondition
-    target: Screwdriver
+  completion:
+    all:
+    - !type:DropObjectiveCondition
+      target: Screwdriver
 
 - type: tutorialStep
   id: InvTutRepairHandItems
@@ -301,11 +312,12 @@
       - Pen
       - Screwdriver
       popup: inv-tut-softlock-keep-hand-items
-  conditions:
-  - !type:ItemHandledCondition
-    item: Pen
-  - !type:ItemHandledCondition
-    item: Screwdriver
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: Pen
+    - !type:ItemHandledObjectiveCondition
+      item: Screwdriver
 
 - type: tutorialStep
   id: InvTutSwitchToFirstHand
@@ -327,11 +339,13 @@
       - Pen
       popup: inv-tut-softlock-keep-hand-item
   preconditions:
-  - !type:ItemHandledCondition
-    item: Pen
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: Pen
   preconditionFailStep: InvTutPickUpFirstHandItem
-  conditions:
-  - !type:SwapHandsListenedCondition
+  completion:
+    all:
+    - !type:SwapHandsObjectiveCondition
 
 - type: tutorialStep
   id: InvTutThrowFirstHandItem
@@ -354,17 +368,19 @@
       - Pen
       popup: inv-tut-softlock-keep-hand-item
   failures:
-  - conditions:
-    - !type:ItemHandledCondition
-      item: Pen
-      inverted: true
-    - !type:ThrowListenedCondition
-      target: Pen
-      inverted: true
+  - when:
+      all:
+      - !type:ItemHandledObjectiveCondition
+        item: Pen
+        inverted: true
+      - !type:ThrowObjectiveCondition
+        target: Pen
+        inverted: true
     repairStep: InvTutRepairThrowFirstHandItem
-  conditions:
-  - !type:ThrowListenedCondition
-    target: Pen
+  completion:
+    all:
+    - !type:ThrowObjectiveCondition
+      target: Pen
 
 - type: tutorialStep
   id: InvTutRepairThrowFirstHandItem
@@ -391,9 +407,10 @@
       items:
       - Pen
       popup: inv-tut-softlock-keep-hand-item
-  conditions:
-  - !type:ItemHandledCondition
-    item: Pen
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: Pen
 
 - type: tutorialStep
   id: InvTutOpenWardrobe
@@ -417,9 +434,10 @@
     - type: TutorialStorageCloseSoftLock
       targets:
       - InventoryTutorialWardrobe
-  conditions:
-  - !type:StorageOpenListenedCondition
-    target: InventoryTutorialWardrobe
+  completion:
+    all:
+    - !type:StorageOpenObjectiveCondition
+      target: InventoryTutorialWardrobe
 
 - type: tutorialStep
   id: InvTutTakeShoes
@@ -444,9 +462,10 @@
     - type: TutorialStorageCloseSoftLock
       targets:
       - InventoryTutorialWardrobe
-  conditions:
-  - !type:ItemHandledCondition
-    item: ClothingShoesColorBlack
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: ClothingShoesColorBlack
 
 - type: tutorialStep
   id: InvTutEquipShoes
@@ -478,10 +497,11 @@
       targets:
       - InventoryTutorialWardrobe
       popup: inv-tut-softlock-equip-item
-  conditions:
-  - !type:EquipListenedCondition
-    target: ClothingShoesColorBlack
-    slot: FEET
+  completion:
+    all:
+    - !type:EquipObjectiveCondition
+      target: ClothingShoesColorBlack
+      slot: FEET
 
 - type: tutorialStep
   id: InvTutTakeGloves
@@ -506,9 +526,10 @@
     - type: TutorialStorageCloseSoftLock
       targets:
       - InventoryTutorialWardrobe
-  conditions:
-  - !type:ItemHandledCondition
-    item: ClothingHandsGlovesColorBlack
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: ClothingHandsGlovesColorBlack
 
 - type: tutorialStep
   id: InvTutEquipGloves
@@ -540,10 +561,11 @@
       targets:
       - InventoryTutorialWardrobe
       popup: inv-tut-softlock-equip-item
-  conditions:
-  - !type:EquipListenedCondition
-    target: ClothingHandsGlovesColorBlack
-    slot: GLOVES
+  completion:
+    all:
+    - !type:EquipObjectiveCondition
+      target: ClothingHandsGlovesColorBlack
+      slot: GLOVES
 
 - type: tutorialStep
   id: InvTutTakeEyes
@@ -568,9 +590,10 @@
     - type: TutorialStorageCloseSoftLock
       targets:
       - InventoryTutorialWardrobe
-  conditions:
-  - !type:ItemHandledCondition
-    item: ClothingEyesGlassesGar
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: ClothingEyesGlassesGar
 
 - type: tutorialStep
   id: InvTutEquipEyes
@@ -602,10 +625,11 @@
       targets:
       - InventoryTutorialWardrobe
       popup: inv-tut-softlock-equip-item
-  conditions:
-  - !type:EquipListenedCondition
-    target: ClothingEyesGlassesGar
-    slot: EYES
+  completion:
+    all:
+    - !type:EquipObjectiveCondition
+      target: ClothingEyesGlassesGar
+      slot: EYES
 
 - type: tutorialStep
   id: InvTutTakeEars
@@ -630,9 +654,10 @@
     - type: TutorialStorageCloseSoftLock
       targets:
       - InventoryTutorialWardrobe
-  conditions:
-  - !type:ItemHandledCondition
-    item: ClothingHeadsetGrey
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: ClothingHeadsetGrey
 
 - type: tutorialStep
   id: InvTutEquipEars
@@ -664,10 +689,11 @@
       targets:
       - InventoryTutorialWardrobe
       popup: inv-tut-softlock-equip-item
-  conditions:
-  - !type:EquipListenedCondition
-    target: ClothingHeadsetGrey
-    slot: EARS
+  completion:
+    all:
+    - !type:EquipObjectiveCondition
+      target: ClothingHeadsetGrey
+      slot: EARS
 
 - type: tutorialStep
   id: InvTutTakeMask
@@ -692,9 +718,10 @@
     - type: TutorialStorageCloseSoftLock
       targets:
       - InventoryTutorialWardrobe
-  conditions:
-  - !type:ItemHandledCondition
-    item: ClothingMaskBreath
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: ClothingMaskBreath
 
 - type: tutorialStep
   id: InvTutEquipMask
@@ -726,10 +753,11 @@
       targets:
       - InventoryTutorialWardrobe
       popup: inv-tut-softlock-equip-item
-  conditions:
-  - !type:EquipListenedCondition
-    target: ClothingMaskBreath
-    slot: MASK
+  completion:
+    all:
+    - !type:EquipObjectiveCondition
+      target: ClothingMaskBreath
+      slot: MASK
 
 - type: tutorialStep
   id: InvTutTakeHead
@@ -754,9 +782,10 @@
     - type: TutorialStorageCloseSoftLock
       targets:
       - InventoryTutorialWardrobe
-  conditions:
-  - !type:ItemHandledCondition
-    item: ClothingHeadHatBeret
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: ClothingHeadHatBeret
 
 - type: tutorialStep
   id: InvTutEquipHead
@@ -788,10 +817,11 @@
       targets:
       - InventoryTutorialWardrobe
       popup: inv-tut-softlock-equip-item
-  conditions:
-  - !type:EquipListenedCondition
-    target: ClothingHeadHatBeret
-    slot: HEAD
+  completion:
+    all:
+    - !type:EquipObjectiveCondition
+      target: ClothingHeadHatBeret
+      slot: HEAD
 
 - type: tutorialStep
   id: InvTutTakeNeck
@@ -816,9 +846,10 @@
     - type: TutorialStorageCloseSoftLock
       targets:
       - InventoryTutorialWardrobe
-  conditions:
-  - !type:ItemHandledCondition
-    item: ClothingNeckScarfStripedRed
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: ClothingNeckScarfStripedRed
 
 - type: tutorialStep
   id: InvTutEquipNeck
@@ -850,10 +881,11 @@
       targets:
       - InventoryTutorialWardrobe
       popup: inv-tut-softlock-equip-item
-  conditions:
-  - !type:EquipListenedCondition
-    target: ClothingNeckScarfStripedRed
-    slot: NECK
+  completion:
+    all:
+    - !type:EquipObjectiveCondition
+      target: ClothingNeckScarfStripedRed
+      slot: NECK
 
 - type: tutorialStep
   id: InvTutTakeOuter
@@ -878,9 +910,10 @@
     - type: TutorialStorageCloseSoftLock
       targets:
       - InventoryTutorialWardrobe
-  conditions:
-  - !type:ItemHandledCondition
-    item: ClothingOuterWinterCoat
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: ClothingOuterWinterCoat
 
 - type: tutorialStep
   id: InvTutEquipOuter
@@ -912,10 +945,11 @@
       targets:
       - InventoryTutorialWardrobe
       popup: inv-tut-softlock-equip-item
-  conditions:
-  - !type:EquipListenedCondition
-    target: ClothingOuterWinterCoat
-    slot: OUTERCLOTHING
+  completion:
+    all:
+    - !type:EquipObjectiveCondition
+      target: ClothingOuterWinterCoat
+      slot: OUTERCLOTHING
 
 - type: tutorialStep
   id: InvTutTakeBack
@@ -940,9 +974,10 @@
     - type: TutorialStorageCloseSoftLock
       targets:
       - InventoryTutorialWardrobe
-  conditions:
-  - !type:ItemHandledCondition
-    item: ClothingBackpack
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: ClothingBackpack
 
 - type: tutorialStep
   id: InvTutEquipBack
@@ -976,10 +1011,11 @@
       targets:
       - InventoryTutorialWardrobe
       popup: inv-tut-softlock-equip-item
-  conditions:
-  - !type:EquipListenedCondition
-    target: ClothingBackpack
-    slot: BACK
+  completion:
+    all:
+    - !type:EquipObjectiveCondition
+      target: ClothingBackpack
+      slot: BACK
 
 - type: tutorialStep
   id: InvTutTakeBelt
@@ -1005,9 +1041,10 @@
     - type: TutorialStorageCloseSoftLock
       targets:
       - InventoryTutorialWardrobe
-  conditions:
-  - !type:ItemHandledCondition
-    item: ClothingBeltUtility
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: ClothingBeltUtility
 
 - type: tutorialStep
   id: InvTutEquipBelt
@@ -1041,10 +1078,11 @@
       targets:
       - InventoryTutorialWardrobe
       popup: inv-tut-softlock-equip-item
-  conditions:
-  - !type:EquipListenedCondition
-    target: ClothingBeltUtility
-    slot: BELT
+  completion:
+    all:
+    - !type:EquipObjectiveCondition
+      target: ClothingBeltUtility
+      slot: BELT
 
 - type: tutorialStep
   id: InvTutTakeId
@@ -1069,9 +1107,10 @@
     - type: TutorialStorageCloseSoftLock
       targets:
       - InventoryTutorialWardrobe
-  conditions:
-  - !type:ItemHandledCondition
-    item: InventoryTutorialPDA
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: InventoryTutorialPDA
 
 - type: tutorialStep
   id: InvTutEquipId
@@ -1105,10 +1144,11 @@
       targets:
       - InventoryTutorialWardrobe
       popup: inv-tut-softlock-equip-item
-  conditions:
-  - !type:EquipListenedCondition
-    target: InventoryTutorialPDA
-    slot: IDCARD
+  completion:
+    all:
+    - !type:EquipObjectiveCondition
+      target: InventoryTutorialPDA
+      slot: IDCARD
 
 - type: tutorialStep
   id: InvTutTakePaper
@@ -1134,9 +1174,10 @@
     - type: TutorialStorageCloseSoftLock
       targets:
       - InventoryTutorialWardrobe
-  conditions:
-  - !type:ItemHandledCondition
-    item: Paper
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: Paper
 
 - type: tutorialStep
   id: InvTutPutPaperPocket
@@ -1168,10 +1209,11 @@
       - ClothingOuterWinterCoat
       - InventoryTutorialPDA
       popup: inv-tut-softlock-use-highlighted-slot
-  conditions:
-  - !type:EquipListenedCondition
-    target: Paper
-    slot: POCKET
+  completion:
+    all:
+    - !type:EquipObjectiveCondition
+      target: Paper
+      slot: POCKET
 
 - type: tutorialStep
   id: InvTutTakeFlashlight
@@ -1202,9 +1244,10 @@
       - FlashlightLantern
       blockAllSlots: true
       popup: inv-tut-softlock-use-hand
-  conditions:
-  - !type:ItemHandledCondition
-    item: FlashlightLantern
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: FlashlightLantern
 
 - type: tutorialStep
   id: InvTutOpenBackpack
@@ -1240,12 +1283,14 @@
     - type: TutorialDropSoftLock
       popup: inv-tut-softlock-open-storage-first
   preconditions:
-  - !type:ItemHandledCondition
-    item: FlashlightLantern
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: FlashlightLantern
   preconditionFailStep: InvTutTakeFlashlight
-  conditions:
-  - !type:BuiOpenListenedCondition
-    target: ClothingBackpack
+  completion:
+    all:
+    - !type:BuiOpenObjectiveCondition
+      target: ClothingBackpack
 
 - type: tutorialStep
   id: InvTutPutFlashlightBackpack
@@ -1280,10 +1325,11 @@
       popup: inv-tut-softlock-use-open-storage
     - type: TutorialDropSoftLock
       popup: inv-tut-softlock-use-open-storage
-  conditions:
-  - !type:StorageContainsCondition
-    storage: ClothingBackpack
-    item: FlashlightLantern
+  completion:
+    all:
+    - !type:StorageContainsObjectiveCondition
+      storage: ClothingBackpack
+      item: FlashlightLantern
 
 - type: tutorialStep
   id: InvTutTakeFlashlightBack
@@ -1311,9 +1357,10 @@
       popup: inv-tut-softlock-keep-backpack
     - type: TutorialDropSoftLock
       popup: inv-tut-softlock-use-hand
-  conditions:
-  - !type:HoldInHandsCondition
-    item: FlashlightLantern
+  completion:
+    all:
+    - !type:HoldInHandsObjectiveCondition
+      item: FlashlightLantern
 
 - type: tutorialStep
   id: InvTutTakeScrewdriver
@@ -1336,9 +1383,10 @@
     - type: TutorialUnequipSoftLock
       slots: All
       popup: inv-tut-softlock-keep-dressed
-  conditions:
-  - !type:ItemHandledCondition
-    item: Screwdriver
+  completion:
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: Screwdriver
 
 - type: tutorialStep
   id: InvTutOpenToolbelt
@@ -1369,12 +1417,14 @@
     - type: TutorialDropSoftLock
       popup: inv-tut-softlock-open-storage-first
   preconditions:
-  - !type:ItemHandledCondition
-    item: Screwdriver
+    all:
+    - !type:ItemHandledObjectiveCondition
+      item: Screwdriver
   preconditionFailStep: InvTutTakeScrewdriver
-  conditions:
-  - !type:BuiOpenListenedCondition
-    target: ClothingBeltUtility
+  completion:
+    all:
+    - !type:BuiOpenObjectiveCondition
+      target: ClothingBeltUtility
 
 - type: tutorialStep
   id: InvTutPutScrewdriverToolbelt
@@ -1409,10 +1459,11 @@
       popup: inv-tut-softlock-use-open-storage
     - type: TutorialDropSoftLock
       popup: inv-tut-softlock-use-open-storage
-  conditions:
-  - !type:StorageContainsCondition
-    storage: ClothingBeltUtility
-    item: Screwdriver
+  completion:
+    all:
+    - !type:StorageContainsObjectiveCondition
+      storage: ClothingBeltUtility
+      item: Screwdriver
 
 - type: tutorialStep
   id: InvTutTakeScrewdriverBack
@@ -1440,9 +1491,10 @@
       popup: inv-tut-softlock-keep-belt
     - type: TutorialDropSoftLock
       popup: inv-tut-softlock-use-hand
-  conditions:
-  - !type:HoldInHandsCondition
-    item: Screwdriver
+  completion:
+    all:
+    - !type:HoldInHandsObjectiveCondition
+      item: Screwdriver
 
 - type: tutorialStep
   id: InvTutFinalState
@@ -1451,9 +1503,10 @@
     text: inv-tut-final-state-bubble
   chatMessage: inv-tut-final-state-chat
   ttsMessage: inv-tut-final-state-tts
-  conditions:
-  - !type:StepDelayCondition
-    delay: 6
+  completion:
+    all:
+    - !type:ElapsedTimeObjectiveCondition
+      delay: 6
 
 - type: entity
   parent: PassengerPDA

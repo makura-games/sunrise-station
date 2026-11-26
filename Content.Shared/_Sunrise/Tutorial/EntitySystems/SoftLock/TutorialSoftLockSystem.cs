@@ -37,18 +37,7 @@ public sealed partial class TutorialSoftLockSystem : EntitySystem
 
     private readonly Dictionary<EntityUid, TimeSpan> _lastPopupTimes = new();
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        InitializeEquip();
-        InitializeStorage();
-        InitializePickup();
-        InitializeInteractions();
-
-        SubscribeLocalEvent<TutorialSoftLockTrackerComponent, DidEquipHandEvent>(OnHandEquipped);
-        SubscribeLocalEvent<TutorialSoftLockTrackerComponent, ComponentShutdown>(OnTrackerShutdown);
-    }
+    [SubscribeLocalEvent]
     private void OnTrackerShutdown(Entity<TutorialSoftLockTrackerComponent> ent, ref ComponentShutdown args)
     {
         foreach (var target in ent.Comp.LinkedEntities)

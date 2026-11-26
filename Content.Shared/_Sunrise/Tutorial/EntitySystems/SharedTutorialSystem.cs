@@ -1,9 +1,7 @@
+using Content.Shared._Sunrise.Objectives;
 using Content.Shared._Sunrise.Tutorial.Components;
-using Content.Shared._Sunrise.Tutorial.Conditions;
 using Content.Shared._Sunrise.Tutorial.EntitySystems.SoftLock;
 using Content.Shared.EntityEffects;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Inventory;
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -16,11 +14,8 @@ namespace Content.Shared._Sunrise.Tutorial.EntitySystems;
 /// </summary>
 public abstract partial class SharedTutorialSystem : EntitySystem
 {
-    [Dependency] private SharedTutorialConditionsSystem _tutorial = default!;
     [Dependency] private TutorialSoftLockSystem _softLock = default!;
     [Dependency] private EntityLookupSystem _lookupSystem = default!;
-    [Dependency] private InventorySystem _inventory = default!;
-    [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
     [Dependency] private SharedEntityEffectsSystem _entityEffects = default!;
@@ -30,14 +25,17 @@ public abstract partial class SharedTutorialSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<TutorialPlayerComponent, EntityTerminatingEvent>(OnTutorialPlayerTerminating);
+
+        // События целей рассылаются из ObjectiveSystem.Update: обновляемся после него,
+        // чтобы флаги шага, выставленные этими событиями, учитывались в том же тике.
+        UpdatesAfter.Add(typeof(ObjectiveSystem));
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        if (_timing.ApplyingState)
+        if (!_net.IsServer || _timing.ApplyingState)
             return;
 
         var query = EntityQueryEnumerator<TutorialPlayerComponent>();
@@ -81,6 +79,7 @@ public abstract partial class SharedTutorialSystem : EntitySystem
         OnStepChanged(ent, step);
     }
 
+    [SubscribeLocalEvent]
     private void OnTutorialPlayerTerminating(Entity<TutorialPlayerComponent> ent, ref EntityTerminatingEvent args)
     {
         ClearTracking(ent);

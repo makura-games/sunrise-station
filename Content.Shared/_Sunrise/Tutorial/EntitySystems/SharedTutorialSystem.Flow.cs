@@ -40,17 +40,14 @@ public abstract partial class SharedTutorialSystem
         if (ent.Comp.ActiveStepOverride == null && TryEnterRepairStep(ent, step))
             return;
 
-        if (!_tutorial.TryConditions(ent, step.Preconditions))
+        if (!ArePreconditionsSatisfied(ent, step))
         {
             // A missing fail step intentionally means "skip this step".
             Advance(ent, step.PreconditionFailStep);
             return;
         }
 
-        if (!_tutorial.TryConditions(ent, step.Conditions))
-            return;
-
-        if (step.AnyConditions.Count > 0 && !_tutorial.TryAnyCondition(ent, step.AnyConditions))
+        if (!IsCompletionSatisfied(ent))
             return;
 
         if (ent.Comp.ActiveStepOverride != null)
@@ -60,6 +57,23 @@ public abstract partial class SharedTutorialSystem
         }
 
         Advance(ent);
+    }
+
+    private bool IsCompletionSatisfied(Entity<TutorialPlayerComponent> ent)
+    {
+        return TryComp(ent, out TutorialStepObjectivesComponent? objectives) &&
+               objectives.CompletionSatisfied;
+    }
+
+    private bool ArePreconditionsSatisfied(
+        Entity<TutorialPlayerComponent> ent,
+        TutorialStepPrototype step)
+    {
+        if (step.Preconditions == null)
+            return true;
+
+        return TryComp(ent, out TutorialStepObjectivesComponent? objectives) &&
+               objectives.PreconditionsSatisfied;
     }
 
     private void Advance(Entity<TutorialPlayerComponent> ent, ProtoId<TutorialStepPrototype>? stepId = null)
@@ -111,7 +125,6 @@ public abstract partial class SharedTutorialSystem
 
     private void OnStepChanged(Entity<TutorialPlayerComponent> ent, TutorialStepPrototype step)
     {
-        ResetTracking(ent);
         ClearTutorialBubble(ent);
         ent.Comp.Target = null;
         ent.Comp.StepStartedAt = _timing.CurTime;
@@ -119,7 +132,13 @@ public abstract partial class SharedTutorialSystem
 
         RaiseLocalEvent(ent, new TutorialStepChangedEvent());
 
-        if (_tutorial.TryConditions(ent, step.Preconditions))
+        if (_net.IsServer)
+        {
+            var activatedEvent = new TutorialStepActivatedEvent(ent, step.ID);
+            RaiseLocalEvent(ref activatedEvent);
+        }
+
+        if (ArePreconditionsSatisfied(ent, step))
         {
             UpdateTutorialBubble(ent, step);
             ApplyStepEffects(ent, step);

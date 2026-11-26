@@ -1,0 +1,77 @@
+using Content.Shared._Sunrise.Objectives;
+using Content.Shared._Sunrise.Objectives.Conditions;
+using Content.Shared._Sunrise.Tutorial.Components;
+using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
+
+namespace Content.Shared._Sunrise.Tutorial.Conditions;
+
+/// <summary>
+/// Checks if the player has reached a <see cref="TutorialGoalMarkerComponent"/> entity
+/// within the specified distance.
+/// </summary>
+public sealed partial class ReachMarkerObjectiveConditionSystem : ObjectiveConditionSystem<TutorialPlayerComponent, ReachMarkerObjectiveCondition>
+{
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TutorialMarkerConditionCacheSystem _markers = default!;
+
+    protected override bool Validate(ReachMarkerObjectiveCondition condition, out string? error)
+    {
+        error = !float.IsFinite(condition.Distance) || condition.Distance < 0f
+            ? "marker distance must be finite and non-negative"
+            : null;
+        return error == null;
+    }
+
+    protected override void Condition(Entity<TutorialPlayerComponent> entity, ref ObjectiveConditionEvaluateEvent<ReachMarkerObjectiveCondition> args)
+    {
+        var playerPos = _transform.GetMapCoordinates(entity.Owner);
+        if (playerPos.MapId == MapId.Nullspace)
+            return;
+
+        // Маркеры ищутся один раз на условие и берутся из кэша, а не перебором всех маркеров карты.
+        var markers = _markers.GetMarkers(args.Context, args.Condition.Marker, entity.Comp.Grid);
+        for (var i = 0; i < markers.Count; i++)
+        {
+            var marker = markers[i];
+            if (TerminatingOrDeleted(marker))
+                continue;
+
+            var markerPos = _transform.GetMapCoordinates(marker);
+            if (markerPos.MapId != playerPos.MapId)
+                continue;
+
+            if ((markerPos.Position - playerPos.Position).Length() >= args.Condition.Distance)
+                continue;
+
+            args.Satisfied = true;
+            return;
+        }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnDeactivated(ref ObjectiveConditionDeactivatedEvent<ReachMarkerObjectiveCondition> args)
+    {
+        _markers.Release(args.Context);
+    }
+}
+
+/// <summary>
+/// Checks if the player has reached a tutorial goal marker within a given distance.
+/// If <see cref="Marker"/> is not set, any <see cref="TutorialGoalMarkerComponent"/> entity qualifies.
+/// </summary>
+public sealed partial class ReachMarkerObjectiveCondition : ObjectiveConditionBase<ReachMarkerObjectiveCondition>
+{
+    /// <summary>
+    /// Prototype ID of the marker to reach.
+    /// Leave empty to match any <see cref="TutorialGoalMarkerComponent"/>.
+    /// </summary>
+    [DataField]
+    public EntProtoId? Marker;
+
+    /// <summary>
+    /// Maximum distance in world units at which the condition is satisfied.
+    /// </summary>
+    [DataField]
+    public float Distance = 1.5f;
+}

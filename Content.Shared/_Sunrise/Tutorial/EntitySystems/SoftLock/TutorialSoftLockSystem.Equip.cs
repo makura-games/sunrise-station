@@ -9,18 +9,7 @@ namespace Content.Shared._Sunrise.Tutorial.EntitySystems.SoftLock;
 /// </summary>
 public sealed partial class TutorialSoftLockSystem
 {
-    public void InitializeEquip()
-    {
-        SubscribeLocalEvent<TutorialEquipSoftLockComponent, IsEquippingAttemptEvent>(OnEquipAttempt);
-        SubscribeLocalEvent<TutorialEquipSoftLockComponent, IsEquippingTargetAttemptEvent>(OnEquipTargetAttempt);
-
-        SubscribeLocalEvent<TutorialEquipBlockedSoftLockComponent, IsEquippingAttemptEvent>(OnBlockedEquipAttempt);
-        SubscribeLocalEvent<TutorialEquipBlockedSoftLockComponent, IsEquippingTargetAttemptEvent>(OnBlockedEquipTargetAttempt);
-
-        SubscribeLocalEvent<TutorialUnequipSoftLockComponent, IsUnequippingAttemptEvent>(OnUnequipAttempt);
-        SubscribeLocalEvent<TutorialUnequipSoftLockComponent, IsUnequippingTargetAttemptEvent>(OnUnequipTargetAttempt);
-    }
-
+    [SubscribeLocalEvent]
     private void OnEquipAttempt(Entity<TutorialEquipSoftLockComponent> ent, ref IsEquippingAttemptEvent args)
     {
         if (_timing.ApplyingState)
@@ -29,6 +18,7 @@ public sealed partial class TutorialSoftLockSystem
         TryCancelEquip(ent, args);
     }
 
+    [SubscribeLocalEvent]
     private void OnEquipTargetAttempt(Entity<TutorialEquipSoftLockComponent> ent, ref IsEquippingTargetAttemptEvent args)
     {
         if (_timing.ApplyingState)
@@ -37,6 +27,7 @@ public sealed partial class TutorialSoftLockSystem
         TryCancelEquip(ent, args);
     }
 
+    [SubscribeLocalEvent]
     private void OnBlockedEquipAttempt(Entity<TutorialEquipBlockedSoftLockComponent> ent, ref IsEquippingAttemptEvent args)
     {
         if (_timing.ApplyingState)
@@ -45,6 +36,7 @@ public sealed partial class TutorialSoftLockSystem
         TryCancelBlockedEquip(ent, args);
     }
 
+    [SubscribeLocalEvent]
     private void OnBlockedEquipTargetAttempt(Entity<TutorialEquipBlockedSoftLockComponent> ent, ref IsEquippingTargetAttemptEvent args)
     {
         if (_timing.ApplyingState)
@@ -85,6 +77,7 @@ public sealed partial class TutorialSoftLockSystem
         ShowPopup(args.EquipTarget, ent.Comp.Popup);
     }
 
+    [SubscribeLocalEvent]
     private void OnUnequipAttempt(Entity<TutorialUnequipSoftLockComponent> ent, ref IsUnequippingAttemptEvent args)
     {
         if (_timing.ApplyingState)
@@ -93,6 +86,7 @@ public sealed partial class TutorialSoftLockSystem
         TryCancelUnequip(ent, args);
     }
 
+    [SubscribeLocalEvent]
     private void OnUnequipTargetAttempt(Entity<TutorialUnequipSoftLockComponent> ent, ref IsUnequippingTargetAttemptEvent args)
     {
         if (_timing.ApplyingState)
@@ -101,6 +95,7 @@ public sealed partial class TutorialSoftLockSystem
         TryCancelUnequip(ent, args);
     }
 
+    [SubscribeLocalEvent]
     private void OnHandEquipped(Entity<TutorialSoftLockTrackerComponent> ent, ref DidEquipHandEvent args)
     {
         if (_timing.ApplyingState)

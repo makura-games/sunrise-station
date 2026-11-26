@@ -27,14 +27,7 @@ namespace Content.Shared._Sunrise.Tutorial.EntitySystems.SoftLock;
 /// </summary>
 public sealed partial class TutorialSoftLockSystem
 {
-    public void InitializePickup()
-    {
-        SubscribeLocalEvent<TutorialDropSoftLockComponent, DropAttemptEvent>(OnDropAttempt);
-        SubscribeLocalEvent<TutorialDropSoftLockComponent, BeforeThrowEvent>(OnBeforeThrow);
-        SubscribeLocalEvent<TutorialPickupSoftLockComponent, PickupAttemptEvent>(OnPickupAttempt);
-
-    }
-
+    [SubscribeLocalEvent]
     private void OnDropAttempt(Entity<TutorialDropSoftLockComponent> ent, ref DropAttemptEvent args)
     {
         if (args.Cancelled)
@@ -44,6 +37,7 @@ public sealed partial class TutorialSoftLockSystem
         ShowPopup(ent, ent.Comp.Popup);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeThrow(Entity<TutorialDropSoftLockComponent> ent, ref BeforeThrowEvent args)
     {
         if (args.Cancelled)
@@ -53,6 +47,7 @@ public sealed partial class TutorialSoftLockSystem
         ShowPopup(ent, ent.Comp.Popup);
     }
 
+    [SubscribeLocalEvent]
     private void OnPickupAttempt(Entity<TutorialPickupSoftLockComponent> ent, ref PickupAttemptEvent args)
     {
         if (args.Cancelled || !ent.Comp.BlockAll && IsAllowedPrototype(args.Item, ent.Comp.AllowedItems))

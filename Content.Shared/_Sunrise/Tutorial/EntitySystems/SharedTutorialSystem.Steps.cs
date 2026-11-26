@@ -38,7 +38,7 @@ public abstract partial class SharedTutorialSystem
         for (var i = 0; i < step.Failures.Count; i++)
         {
             var failure = step.Failures[i];
-            if (!IsFailureRuleMet(ent, failure))
+            if (!IsFailureRuleMet(ent, i))
                 continue;
 
             return EnterRepairStep(ent, failure.RepairStep);
@@ -47,15 +47,12 @@ public abstract partial class SharedTutorialSystem
         return false;
     }
 
-    private bool IsFailureRuleMet(Entity<TutorialPlayerComponent> ent, TutorialFailureRule failure)
+    private bool IsFailureRuleMet(Entity<TutorialPlayerComponent> ent, int index)
     {
-        if (failure.Conditions.Count == 0 && failure.AnyConditions.Count == 0)
-            return false;
-
-        if (!_tutorial.TryConditions(ent, failure.Conditions))
-            return false;
-
-        return failure.AnyConditions.Count == 0 || _tutorial.TryAnyCondition(ent, failure.AnyConditions);
+        return TryComp(ent, out TutorialStepObjectivesComponent? objectives) &&
+               index >= 0 &&
+               index < objectives.FailuresSatisfied.Count &&
+               objectives.FailuresSatisfied[index];
     }
 
     private bool EnterRepairStep(Entity<TutorialPlayerComponent> ent, ProtoId<TutorialStepPrototype> repairStepId)
@@ -82,6 +79,7 @@ public abstract partial class SharedTutorialSystem
 
     private void ClearActiveStepState(Entity<TutorialPlayerComponent> ent)
     {
+        ClearTracking(ent);
         ClearStepEffects(ent);
         ClearTutorialBubble(ent);
     }
