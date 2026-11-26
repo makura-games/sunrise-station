@@ -4,6 +4,11 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <Nullable>disable</Nullable>
   </PropertyGroup>
+  <!-- Sunrise added start - тесты приватной части подключаются, только если она лежит рядом -->
+  <ItemGroup Condition="Exists('..\SunrisePrivate\Content.IntegrationTests')">
+    <Compile Include="..\SunrisePrivate\Content.IntegrationTests\**\*.cs" Link="SunrisePrivate\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+  <!-- Sunrise added end -->
   <Import Project="../MSBuild/Content.props" />
   <ItemGroup>
     <PackageReference Include="NUnit" />
