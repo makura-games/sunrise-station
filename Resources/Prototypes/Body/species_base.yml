@@ -263,4 +263,6 @@
   - type: Mood
   - type: CritHeartbeat
   - type: PetOnInteract
+  # Зараза берётся только на тех, кто умеет болеть: прочее зверьё её не обсчитывает.
+  - type: DiseaseHost
   # Sunrise-End

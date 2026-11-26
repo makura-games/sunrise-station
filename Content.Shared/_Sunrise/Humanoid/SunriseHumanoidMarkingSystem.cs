@@ -178,6 +178,23 @@ public sealed partial class SunriseHumanoidMarkingSystem : EntitySystem
         return false;
     }
 
+    /// <summary>
+    /// Снимает все маркировки слоя, например всю причёску разом.
+    /// </summary>
+    /// <returns>True, если на слое было что снимать.</returns>
+    public bool ClearLayer(EntityUid uid, HumanoidVisualLayers layer)
+    {
+        if (!TryGetLayerMarkingsForEdit(uid, layer, out var markings, out var layerMarkings) ||
+            layerMarkings.Count == 0)
+        {
+            return false;
+        }
+
+        layerMarkings.Clear();
+        _visualBody.ApplyMarkings(uid, markings);
+        return true;
+    }
+
     public bool RemoveMarking(EntityUid uid, HumanoidVisualLayers layer, int index)
     {
         if (!TryGetLayerMarkingsForEdit(uid, layer, out var markings, out var layerMarkings))

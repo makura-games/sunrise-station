@@ -1,0 +1,1216 @@
+# Набор болезней станции. Каждая запись — архетип: класс возбудителя, пути передачи и форма стадий
+# заданы жёстко, а какие именно симптомы достанутся штамму этого раунда, решает rollCount.
+# Поэтому заучить «эта болезнь — кашель и жар» нельзя: в следующий раз тот же архетип
+# проявится иначе, и загадка вакцины соберётся из других свойств.
+
+# Слабые: разгадываются с одного отчёта, учат цепочке и никого не убивают.
+
+- type: disease
+  id: SunriseSpaceCold
+  name: disease-space-cold-name
+  description: disease-space-cold-description
+  syndrome: disease-syndrome-respiratory
+  classification: Viral
+  routes: [ Droplet, Contact ]
+  # Лёгкая зараза проходит сама, если отлежаться.
+  sleepCureTime: 180
+  treatmentHints:
+  - disease-hint-rest
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 900
+  regression:
+    minDuration: 30
+    chance: 0.3
+    maxDuration: 90
+  stages:
+  - advance:
+      minDuration: 60
+      chance: 0.25
+      maxDuration: 120
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 120
+      chance: 0.1
+      maxDuration: 300
+    enterEffects:
+    - !type:PopupMessage
+      type: Local
+      visualType: Medium
+      messages: [ "disease-space-cold-onset" ]
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomSneeze
+      weight: 5
+    - symptom: SymptomSoreThroat
+      weight: 5
+    - symptom: SymptomCough
+      weight: 4
+    - symptom: SymptomHeadache
+      weight: 3
+
+- type: disease
+  id: SunriseMoldAllergy
+  name: disease-mold-allergy-name
+  description: disease-mold-allergy-description
+  syndrome: disease-syndrome-dermal
+  classification: Environmental
+  # Споры плесени не передаются от человека к человеку: заразиться можно только от очага.
+  routes: [ Contact ]
+  # Лёгкая зараза проходит сама, если отлежаться.
+  sleepCureTime: 180
+  treatmentHints:
+  - disease-hint-source
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: None
+  regression:
+    minDuration: 40
+    chance: 0.25
+    maxDuration: 120
+  stages:
+  - advance:
+      minDuration: 30
+      chance: 0.3
+      maxDuration: 90
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 150
+      chance: 0.1
+      maxDuration: 300
+    rollCount: 2
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomSneeze
+      weight: 5
+    - symptom: SymptomRash
+      weight: 5
+    - symptom: SymptomHeadache
+      weight: 3
+    - symptom: SymptomBlurredVision
+      weight: 2
+
+# Средние: требуют лаборатории, но лечатся и без вакцины, если дотерпеть.
+
+- type: disease
+  id: SunriseGastroenteritis
+  name: disease-gastroenteritis-name
+  description: disease-gastroenteritis-description
+  syndrome: disease-syndrome-digestive
+  classification: Bacterial
+  routes: [ Ingestion, Contact ]
+  treatmentHints:
+  - disease-hint-fluids
+  - disease-hint-source
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 1200
+  regression:
+    minDuration: 30
+    chance: 0.2
+    maxDuration: 90
+  stages:
+  - advance:
+      minDuration: 45
+      chance: 0.25
+      maxDuration: 120
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 120
+      chance: 0.12
+      maxDuration: 240
+    contactSpreadChance: 0.04
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomNausea
+      weight: 6
+    - symptom: SymptomFatigue
+      weight: 4
+    - symptom: SymptomChills
+      weight: 3
+    - symptom: SymptomHeadache
+      weight: 3
+  - advance:
+      minDuration: 180
+      chance: 0.1
+      maxDuration: 300
+    contactSpreadChance: 0.06
+    rollCount: 2
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomNausea
+      weight: 5
+    - symptom: SymptomAnemia
+      weight: 3
+    - symptom: SymptomMuscleAche
+      weight: 3
+    - symptom: SymptomToxemia
+      weight: 2
+
+- type: disease
+  id: SunriseInfluenza
+  name: disease-influenza-name
+  description: disease-influenza-description
+  syndrome: disease-syndrome-febrile
+  classification: Viral
+  routes: [ Droplet, Contact ]
+  treatmentHints:
+  - disease-hint-rest
+  - disease-hint-mask
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 1200
+  regression:
+    minDuration: 30
+    chance: 0.2
+    maxDuration: 90
+  stages:
+  - advance:
+      minDuration: 60
+      chance: 0.25
+      maxDuration: 150
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 120
+      chance: 0.12
+      maxDuration: 240
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomCough
+      weight: 5
+    - symptom: SymptomFever
+      weight: 5
+    - symptom: SymptomMuscleAche
+      weight: 4
+    - symptom: SymptomSoreThroat
+      weight: 3
+    - symptom: SymptomHeadache
+      weight: 3
+  - advance:
+      minDuration: 180
+      chance: 0.1
+      maxDuration: 360
+    spreadMultiplier: 1.4
+    rollCount: 2
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomFever
+      weight: 5
+    - symptom: SymptomFatigue
+      weight: 4
+    - symptom: SymptomCough
+      weight: 4
+    - symptom: SymptomHyperthermia
+      weight: 2
+
+- type: disease
+  id: SunriseParasiticInfestation
+  name: disease-parasites-name
+  description: disease-parasites-description
+  syndrome: disease-syndrome-parasitic
+  classification: Parasitic
+  # Контакт нужен для укусов и гниющих тел: у стадий contactSpreadChance нулевой,
+  # поэтому от человека к человеку паразиты касанием не переходят.
+  routes: [ Ingestion, Contact ]
+  treatmentHints:
+  - disease-hint-fluids
+  - disease-hint-source
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: None
+  regression:
+    minDuration: 45
+    chance: 0.15
+    maxDuration: 120
+  stages:
+  - advance:
+      minDuration: 120
+      chance: 0.2
+      maxDuration: 300
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 180
+      chance: 0.12
+      maxDuration: 300
+    rollCount: 2
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomNausea
+      weight: 5
+    - symptom: SymptomFatigue
+      weight: 5
+    - symptom: SymptomMuscleAche
+      weight: 4
+    - symptom: SymptomDizziness
+      weight: 3
+  - advance:
+      minDuration: 240
+      chance: 0.1
+      maxDuration: 420
+    rollCount: 2
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomAnemia
+      weight: 5
+    - symptom: SymptomNausea
+      weight: 4
+    - symptom: SymptomFatigue
+      weight: 3
+    - symptom: SymptomToxemia
+      weight: 2
+
+# Тяжёлые: без вмешательства медотдела опасны.
+
+- type: disease
+  id: SunrisePneumonia
+  name: disease-pneumonia-name
+  description: disease-pneumonia-description
+  syndrome: disease-syndrome-respiratory
+  classification: Bacterial
+  routes: [ Droplet, Contact ]
+  treatmentHints:
+  - disease-hint-mask
+  - disease-hint-isolation
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 1200
+  regression:
+    minDuration: 40
+    chance: 0.15
+    maxDuration: 120
+  stages:
+  - advance:
+      minDuration: 60
+      chance: 0.25
+      maxDuration: 150
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 150
+      chance: 0.12
+      maxDuration: 300
+    contactSpreadChance: 0.04
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomCough
+      weight: 6
+    - symptom: SymptomFever
+      weight: 5
+    - symptom: SymptomFatigue
+      weight: 4
+    - symptom: SymptomChills
+      weight: 3
+  # Последняя стадия сама не заканчивается: тяжёлую болезнь снимает только медотдел.
+  - advance:
+      minDuration: 240
+      chance: 0
+    spreadMultiplier: 1.5
+    contactSpreadChance: 0.06
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomSuffocation
+      weight: 5
+    - symptom: SymptomHyperthermia
+      weight: 4
+    - symptom: SymptomCough
+      weight: 4
+    - symptom: SymptomFatigue
+      weight: 3
+
+- type: disease
+  id: SunriseXenoSpores
+  name: disease-xeno-spores-name
+  description: disease-xeno-spores-description
+  syndrome: disease-syndrome-dermal
+  classification: Fungal
+  routes: [ Contact, Droplet ]
+  treatmentHints:
+  - disease-hint-isolation
+  - disease-hint-source
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 1800
+  regression:
+    minDuration: 60
+    chance: 0.12
+    maxDuration: 180
+  stages:
+  # Долгая инкубация: больных мало и появляются они поздно, поэтому штамм изучают по культурам.
+  - advance:
+      minDuration: 180
+      chance: 0.15
+      maxDuration: 420
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 180
+      chance: 0.1
+      maxDuration: 360
+    contactSpreadChance: 0.05
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomRash
+      weight: 6
+    - symptom: SymptomCough
+      weight: 4
+    - symptom: SymptomFatigue
+      weight: 4
+    - symptom: SymptomBlurredVision
+      weight: 2
+  # Последняя стадия сама не заканчивается: тяжёлую болезнь снимает только медотдел.
+  - advance:
+      minDuration: 240
+      chance: 0
+    contactSpreadChance: 0.08
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomSuffocation
+      weight: 5
+    - symptom: SymptomRash
+      weight: 4
+    - symptom: SymptomAnemia
+      weight: 3
+    - symptom: SymptomHyperthermia
+      weight: 3
+
+- type: disease
+  id: SunriseHemorrhagicFever
+  name: disease-hemorrhagic-name
+  description: disease-hemorrhagic-description
+  syndrome: disease-syndrome-hemorrhagic
+  classification: Viral
+  routes: [ Contact, Droplet ]
+  treatmentHints:
+  - disease-hint-isolation
+  - disease-hint-fluids
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 1800
+  regression:
+    minDuration: 60
+    chance: 0.12
+    maxDuration: 180
+  stages:
+  - advance:
+      minDuration: 60
+      chance: 0.25
+      maxDuration: 150
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 150
+      chance: 0.12
+      maxDuration: 300
+    contactSpreadChance: 0.05
+    rollCount: 2
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomFever
+      weight: 5
+    - symptom: SymptomHeadache
+      weight: 4
+    - symptom: SymptomMuscleAche
+      weight: 4
+    - symptom: SymptomDizziness
+      weight: 3
+  # Последняя стадия сама не заканчивается: тяжёлую болезнь снимает только медотдел.
+  - advance:
+      minDuration: 210
+      chance: 0
+    contactSpreadChance: 0.08
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomNosebleed
+      weight: 5
+    - symptom: SymptomAnemia
+      weight: 5
+    - symptom: SymptomToxemia
+      weight: 4
+    - symptom: SymptomHyperthermia
+      weight: 3
+
+- type: disease
+  id: SunriseAnomalousBlight
+  name: disease-anomalous-blight-name
+  description: disease-anomalous-blight-description
+  syndrome: disease-syndrome-anomalous
+  classification: Anomalous
+  routes: [ Contact, Droplet ]
+  treatmentHints:
+  - disease-hint-isolation
+  - disease-hint-no-suppressants
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 1800
+  # Супрессанты аномальную заразу не тормозят: остаётся только вакцина.
+  suppressionPausesProgression: false
+  regression:
+    minDuration: 60
+    chance: 0.1
+    maxDuration: 180
+  stages:
+  - advance:
+      minDuration: 90
+      chance: 0.2
+      maxDuration: 240
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 150
+      chance: 0.12
+      maxDuration: 300
+    rollCount: 2
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomLuminescence
+      weight: 6
+    - symptom: SymptomHallucinations
+      weight: 4
+    - symptom: SymptomDizziness
+      weight: 4
+    - symptom: SymptomBlurredVision
+      weight: 3
+  # Последняя стадия сама не заканчивается: тяжёлую болезнь снимает только медотдел.
+  - advance:
+      minDuration: 240
+      chance: 0
+    spreadMultiplier: 1.3
+    contactSpreadChance: 0.06
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomHallucinations
+      weight: 5
+    - symptom: SymptomToxemia
+      weight: 5
+    - symptom: SymptomSuffocation
+      weight: 4
+    - symptom: SymptomLuminescence
+      weight: 3
+
+# Отыгрышная простуда из черты: не передаётся, не калечит, проходит сама.
+- type: disease
+  id: SunriseRoleplayCold
+  name: disease-roleplay-cold-name
+  description: disease-roleplay-cold-description
+  syndrome: disease-syndrome-respiratory
+  classification: Viral
+  # Ни одного пути передачи: заразить таким соседей нельзя.
+  routes: [ None ]
+  treatmentHints:
+  - disease-hint-rest
+  # Штамм не катается: игрок отыгрывает знакомую простуду, а не загадку для вирусолога.
+  rollStrain: false
+  immunity:
+    type: Temporary
+    duration: 1800
+  regression:
+    minDuration: 60
+    chance: 0.3
+    maxDuration: 180
+  stages:
+  - advance:
+      minDuration: 300
+      chance: 0.15
+      maxDuration: 900
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 300
+      chance: 0.2
+      maxDuration: 900
+    enterEffects:
+    - !type:PopupMessage
+      type: Local
+      visualType: Medium
+      messages: [ "disease-roleplay-cold-onset" ]
+    minSymptoms: 2
+    maxSymptoms: 3
+    symptomPool:
+    - symptom: SymptomSneeze
+      weight: 5
+    - symptom: SymptomCough
+      weight: 5
+    - symptom: SymptomSoreThroat
+      weight: 5
+
+# Зомби-зараза глазами вирусологии. Сама по себе она не передаётся моей системой —
+# обращение считает зомби-код, — но носителем становится и укушенный, и обратившийся,
+# поэтому с них берут мазок, заводят дело и закрывают вопрос вакциной.
+- type: disease
+  id: SunriseZombieVirus
+  name: disease-zombie-name
+  description: disease-zombie-description
+  syndrome: disease-syndrome-anomalous
+  classification: Viral
+  routes: [ None ]
+  treatmentHints:
+  - disease-hint-zombie
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Permanent
+  # Хроническая: сама не отступает и супрессантами не тормозится.
+  suppressionPausesProgression: false
+  regression:
+    minDuration: 600
+    chance: 0
+  stages:
+  - advance:
+      minDuration: 600
+      chance: 0
+    rollCount: 3
+    minSymptoms: 2
+    maxSymptoms: 3
+    symptomPool:
+    - symptom: SymptomFever
+      weight: 5
+    - symptom: SymptomMuscleAche
+      weight: 5
+    - symptom: SymptomNausea
+      weight: 4
+    - symptom: SymptomHallucinations
+      weight: 4
+    - symptom: SymptomAnemia
+      weight: 3
+
+# Архетип-рамка для штаммов, собранных вирусологом в селекционном микроскопе: пути передачи,
+# иммунитет и скорость развития. Стадии и симптомы задаёт сам геном, поэтому число таких штаммов
+# за смену ничем не ограничено, а форма последней стадии повторяется для всех, что длиннее рамки.
+- type: disease
+  id: SunriseDesignedStrainBase
+  name: disease-designed-name
+  description: disease-designed-description
+  syndrome: disease-syndrome-unknown
+  classification: Viral
+  routes: [ Injection ]
+  treatmentHints:
+  - disease-hint-isolation
+  blacklist:
+    tags:
+    - SiliconEmotes
+  # Набор симптомов задан руками, поэтому бросок штамма отключён.
+  rollStrain: false
+  immunity:
+    type: Temporary
+    duration: 900
+  regression:
+    minDuration: 60
+    chance: 0.2
+    maxDuration: 180
+  stages:
+  - advance:
+      minDuration: 60
+      chance: 0.3
+      maxDuration: 120
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 90
+      chance: 0.22
+      maxDuration: 240
+    minSymptoms: 1
+    maxSymptoms: 1
+    spreadMultiplier: 1.0
+    contactSpreadChance: 0.04
+  - advance:
+      minDuration: 120
+      chance: 0.19
+      maxDuration: 300
+    minSymptoms: 1
+    maxSymptoms: 1
+    spreadMultiplier: 1.1
+    contactSpreadChance: 0.06
+
+# Аэрозольный штамм даёт только временные дебафы и проходит самостоятельно.
+- type: disease
+  id: SunriseSyndicateHaze
+  name: disease-syndicate-haze-name
+  description: disease-syndicate-haze-description
+  syndrome: disease-syndrome-respiratory
+  classification: Viral
+  routes: [ Droplet, Contact ]
+  processInterval: 3
+  rollStrain: false
+  treatmentHints:
+  - disease-hint-mask
+  - disease-hint-isolation
+  - disease-hint-rest
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 900
+  regression:
+    minDuration: 20
+    chance: 0.35
+    maxDuration: 45
+  stages:
+  # Короткая инкубация оставляет время отойти от облака и включить баллон.
+  - advance:
+      minDuration: 10
+      chance: 0.5
+      maxDuration: 20
+    minSymptoms: 0
+    maxSymptoms: 0
+  # Кашель появляется у каждого носителя и разносит штамм после рассеивания облака.
+  - advance:
+      minDuration: 30
+      chance: 0.4
+      maxDuration: 60
+    spreadMultiplier: 1.4
+    contactSpreadChance: 0.3
+    minSymptoms: 1
+    maxSymptoms: 1
+    symptomPool:
+    - symptom: SunriseSymptomHazeCough
+  # На пике гарантированы слабость, утомление и дрожь; повреждения органов исключены.
+  - advance:
+      minDuration: 120
+      chance: 0.3
+      maxDuration: 180
+    spreadMultiplier: 1.8
+    contactSpreadChance: 0.4
+    minSymptoms: 3
+    maxSymptoms: 3
+    symptomPool:
+    - symptom: SunriseSymptomHazeWeakness
+    - symptom: SunriseSymptomHazeFatigue
+    - symptom: SunriseSymptomHazeTremor
+
+# Болезни по мотивам симптомов SS13. Устроены так же, как основной набор: слабые учат цепочке,
+# средние требуют лаборатории, тяжёлые без вмешательства медотдела калечат или убивают.
+
+# Слабые.
+
+# Клоунская лихорадка: безвредна, но шумна — больной гудит, хохочет и дёргается.
+- type: disease
+  id: SunriseClownFever
+  name: disease-clown-fever-name
+  description: disease-clown-fever-description
+  syndrome: disease-syndrome-neurological
+  classification: Viral
+  routes: [ Droplet, Contact ]
+  # Лёгкая зараза проходит сама, если отлежаться.
+  sleepCureTime: 180
+  treatmentHints:
+  - disease-hint-rest
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 900
+  regression:
+    minDuration: 30
+    chance: 0.3
+    maxDuration: 90
+  stages:
+  - advance:
+      minDuration: 60
+      chance: 0.25
+      maxDuration: 120
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 120
+      chance: 0.1
+      maxDuration: 300
+    enterEffects:
+    - !type:PopupMessage
+      type: Local
+      visualType: Medium
+      messages: [ "disease-clown-fever-onset" ]
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SunriseSymptomHonking
+      weight: 6
+    - symptom: SunriseSymptomLaughter
+      weight: 5
+    - symptom: SunriseSymptomTwitch
+      weight: 3
+    - symptom: SymptomSneeze
+      weight: 2
+
+# Слизистый бронхит: мокрота, слюна и кашель, расходится по воздуху.
+- type: disease
+  id: SunriseMucusBronchitis
+  name: disease-mucus-bronchitis-name
+  description: disease-mucus-bronchitis-description
+  syndrome: disease-syndrome-respiratory
+  classification: Bacterial
+  routes: [ Droplet, Contact ]
+  # Лёгкая зараза проходит сама, если отлежаться.
+  sleepCureTime: 180
+  treatmentHints:
+  - disease-hint-rest
+  - disease-hint-mask
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 900
+  regression:
+    minDuration: 30
+    chance: 0.3
+    maxDuration: 90
+  stages:
+  - advance:
+      minDuration: 60
+      chance: 0.25
+      maxDuration: 120
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 120
+      chance: 0.1
+      maxDuration: 300
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SunriseSymptomPhlegm
+      weight: 6
+    - symptom: SunriseSymptomSalivation
+      weight: 4
+    - symptom: SymptomCough
+      weight: 4
+    - symptom: SymptomSoreThroat
+      weight: 3
+
+# Средние.
+
+# Бродильная диспепсия: бактерии в кишечнике разводят газ и аппетит. Приходит с испорченной едой.
+- type: disease
+  id: SunriseBacterialFermentation
+  name: disease-bacterial-fermentation-name
+  description: disease-bacterial-fermentation-description
+  syndrome: disease-syndrome-digestive
+  classification: Bacterial
+  routes: [ Ingestion, Contact ]
+  treatmentHints:
+  - disease-hint-fluids
+  - disease-hint-source
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 1200
+  regression:
+    minDuration: 30
+    chance: 0.2
+    maxDuration: 90
+  stages:
+  - advance:
+      minDuration: 45
+      chance: 0.25
+      maxDuration: 120
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 120
+      chance: 0.12
+      maxDuration: 240
+    contactSpreadChance: 0.03
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SunriseSymptomVoraciousAppetite
+      weight: 5
+    - symptom: SunriseSymptomSalivation
+      weight: 4
+    - symptom: SymptomNausea
+      weight: 4
+    - symptom: SunriseSymptomGasSynthesis
+      weight: 3
+  - advance:
+      minDuration: 180
+      chance: 0.1
+      maxDuration: 360
+    contactSpreadChance: 0.05
+    rollCount: 2
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SunriseSymptomGasSynthesis
+      weight: 5
+    - symptom: SunriseSymptomVoraciousAppetite
+      weight: 4
+    - symptom: SymptomNausea
+      weight: 3
+
+# Ульевая лихорадка: личинки в лёгких, больной выкашливает пчёл.
+- type: disease
+  id: SunriseHiveFever
+  name: disease-hive-fever-name
+  description: disease-hive-fever-description
+  syndrome: disease-syndrome-parasitic
+  classification: Parasitic
+  routes: [ Contact ]
+  treatmentHints:
+  - disease-hint-isolation
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 1200
+  regression:
+    minDuration: 40
+    chance: 0.2
+    maxDuration: 120
+  stages:
+  - advance:
+      minDuration: 60
+      chance: 0.25
+      maxDuration: 150
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 120
+      chance: 0.12
+      maxDuration: 240
+    contactSpreadChance: 0.04
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SunriseSymptomItch
+      weight: 5
+    - symptom: SymptomRash
+      weight: 4
+    - symptom: SunriseSymptomHistamineSynthesis
+      weight: 3
+    - symptom: SymptomCough
+      weight: 3
+  - advance:
+      minDuration: 180
+      chance: 0.1
+      maxDuration: 360
+    contactSpreadChance: 0.06
+    rollCount: 2
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SunriseSymptomBeeCough
+      weight: 5
+    - symptom: SunriseSymptomHistamineSynthesis
+      weight: 4
+    - symptom: SunriseSymptomItch
+      weight: 3
+
+# Вирус апатии: больному не хочется ни драться, ни бодрствовать.
+- type: disease
+  id: SunriseApathyVirus
+  name: disease-apathy-virus-name
+  description: disease-apathy-virus-description
+  syndrome: disease-syndrome-neurological
+  classification: Viral
+  routes: [ Droplet, Contact ]
+  treatmentHints:
+  - disease-hint-rest
+  - disease-hint-mask
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 1200
+  regression:
+    minDuration: 30
+    chance: 0.2
+    maxDuration: 90
+  stages:
+  - advance:
+      minDuration: 60
+      chance: 0.25
+      maxDuration: 150
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 120
+      chance: 0.12
+      maxDuration: 240
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SunriseSymptomPacifism
+      weight: 5
+    - symptom: SymptomFatigue
+      weight: 4
+    - symptom: SunriseSymptomLaughter
+      weight: 3
+    - symptom: SunriseSymptomVoraciousAppetite
+      weight: 3
+  - advance:
+      minDuration: 180
+      chance: 0.1
+      maxDuration: 360
+    spreadMultiplier: 1.2
+    rollCount: 2
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SunriseSymptomPacifism
+      weight: 5
+    - symptom: SunriseSymptomNarcolepsy
+      weight: 4
+    - symptom: SymptomFatigue
+      weight: 3
+
+# Тяжёлые.
+
+# Нейротропная лихорадка: вирус бьёт по нервной системе — судороги, слепота, провалы в сон.
+- type: disease
+  id: SunriseNeurotropicFever
+  name: disease-neurotropic-fever-name
+  description: disease-neurotropic-fever-description
+  syndrome: disease-syndrome-neurological
+  classification: Viral
+  routes: [ Droplet, Contact ]
+  treatmentHints:
+  - disease-hint-isolation
+  - disease-hint-mask
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 1200
+  regression:
+    minDuration: 40
+    chance: 0.15
+    maxDuration: 120
+  stages:
+  - advance:
+      minDuration: 60
+      chance: 0.25
+      maxDuration: 150
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 150
+      chance: 0.12
+      maxDuration: 300
+    contactSpreadChance: 0.04
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SunriseSymptomTwitch
+      weight: 6
+    - symptom: SymptomHeadache
+      weight: 5
+    - symptom: SunriseSymptomScreaming
+      weight: 3
+    - symptom: SymptomFever
+      weight: 3
+  # Последняя стадия сама не заканчивается: тяжёлую болезнь снимает только медотдел.
+  - advance:
+      minDuration: 240
+      chance: 0
+    spreadMultiplier: 1.3
+    contactSpreadChance: 0.06
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SunriseSymptomSeizures
+      weight: 5
+    - symptom: SunriseSymptomBlackout
+      weight: 4
+    - symptom: SunriseSymptomNarcolepsy
+      weight: 4
+    - symptom: SymptomHallucinations
+      weight: 3
+
+# Синдром Радиана: облучённая ткань распадается, а заразу переносят руки и инструменты.
+- type: disease
+  id: SunriseRadianSyndrome
+  name: disease-radian-syndrome-name
+  description: disease-radian-syndrome-description
+  syndrome: disease-syndrome-anomalous
+  classification: Environmental
+  routes: [ Contact ]
+  treatmentHints:
+  - disease-hint-source
+  - disease-hint-isolation
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 1800
+  regression:
+    minDuration: 60
+    chance: 0.12
+    maxDuration: 180
+  stages:
+  - advance:
+      minDuration: 90
+      chance: 0.2
+      maxDuration: 240
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 150
+      chance: 0.12
+      maxDuration: 300
+    contactSpreadChance: 0.04
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SunriseSymptomHairLoss
+      weight: 6
+    - symptom: SymptomNausea
+      weight: 5
+    - symptom: SymptomFatigue
+      weight: 4
+    - symptom: SunriseSymptomUnstableNucleotide
+      weight: 2
+  # Последняя стадия сама не заканчивается: тяжёлую болезнь снимает только медотдел.
+  - advance:
+      minDuration: 240
+      chance: 0
+    contactSpreadChance: 0.06
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SunriseSymptomRadiationSickness
+      weight: 5
+    - symptom: SunriseSymptomCellularDecay
+      weight: 4
+    - symptom: SunriseSymptomHairLoss
+      weight: 3
+    - symptom: SymptomNosebleed
+      weight: 3
+
+# Обезьяний ретровирус: перестраивает геном носителя. Превращение — редкий исход последней стадии,
+# и оно откатывается при крите и смерти, поэтому это не окончательная гибель персонажа.
+- type: disease
+  id: SunriseSimianRetrovirus
+  name: disease-simian-retrovirus-name
+  description: disease-simian-retrovirus-description
+  syndrome: disease-syndrome-anomalous
+  classification: Anomalous
+  routes: [ Contact, Droplet ]
+  treatmentHints:
+  - disease-hint-isolation
+  - disease-hint-no-suppressants
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 1800
+  # Как и прочая аномальная зараза, супрессантами не тормозится.
+  suppressionPausesProgression: false
+  regression:
+    minDuration: 60
+    chance: 0.1
+    maxDuration: 180
+  stages:
+  - advance:
+      minDuration: 90
+      chance: 0.2
+      maxDuration: 240
+    minSymptoms: 0
+    maxSymptoms: 0
+  - advance:
+      minDuration: 150
+      chance: 0.12
+      maxDuration: 300
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SunriseSymptomVoraciousAppetite
+      weight: 5
+    - symptom: SunriseSymptomScreaming
+      weight: 4
+    - symptom: SunriseSymptomHairLoss
+      weight: 3
+    - symptom: SunriseSymptomTwitch
+      weight: 3
+  # Последняя стадия сама не заканчивается: тяжёлую болезнь снимает только медотдел.
+  - advance:
+      minDuration: 300
+      chance: 0
+    spreadMultiplier: 1.2
+    contactSpreadChance: 0.05
+    rollCount: 3
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SunriseSymptomCellularDecay
+      weight: 5
+    - symptom: SunriseSymptomUnstableNucleotide
+      weight: 3
+    - symptom: SunriseSymptomScreaming
+      weight: 3
+    - symptom: SunriseSymptomMonkism
+      weight: 2

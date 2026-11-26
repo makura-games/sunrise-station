@@ -1,3 +1,71 @@
+# Отладочная болезнь: случайные симптомы по стадиям, вероятностные переходы, постепенное выздоровление и иммунитет.
+- type: disease
+  id: DebugDisease
+  name: disease-debug-name
+  description: disease-debug-description
+  syndrome: disease-syndrome-respiratory
+  classification: Viral
+  routes: [ Contact, Ingestion, Droplet ]
+  treatmentHints:
+  - disease-debug-treatment-hint
+  blacklist:
+    tags:
+    - SiliconEmotes
+  immunity:
+    type: Temporary
+    duration: 600
+  regression:
+    minDuration: 20
+    chance: 0.25
+    maxDuration: 60
+  stages:
+  # Инкубация
+  - advance:
+      minDuration: 40
+      chance: 0.2
+      maxDuration: 90
+    minSymptoms: 0
+    maxSymptoms: 0
+  # Лёгкая стадия: тяжёлые симптомы почти не выпадают
+  - advance:
+      minDuration: 60
+      chance: 0.1
+      maxDuration: 180
+    enterEffects:
+    - !type:PopupMessage
+      type: Local
+      visualType: Medium
+      messages: [ "disease-debug-popup-unwell" ]
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomSoreThroat
+      weight: 5
+    - symptom: SymptomCough
+      weight: 5
+    - symptom: SymptomSneeze
+      weight: 4
+    - symptom: SymptomFever
+      weight: 1
+  # Тяжёлая стадия: после неё болезнь начинает отступать сама
+  - advance:
+      minDuration: 90
+      chance: 0.1
+      maxDuration: 240
+    spreadMultiplier: 1.5
+    contactSpreadChance: 0.05
+    minSymptoms: 1
+    maxSymptoms: 2
+    symptomPool:
+    - symptom: SymptomCough
+      weight: 3
+    - symptom: SymptomFever
+      weight: 4
+    - symptom: SymptomNausea
+      weight: 3
+    - symptom: SymptomToxemia
+      weight: 2
+
 - type: entity
   parent: FoodDonutPlain
   id: SunriseDiseaseDebugDonut
