@@ -1,5 +1,5 @@
 ---
-name: SS14 ECS Components
+name: ss14-ecs-components
 description: Architecture guide for Component in Space Station 14 — data containers, attributes, networking, state-as-component pattern, and marker components
 ---
 

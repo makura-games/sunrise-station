@@ -2,10 +2,9 @@
 
 ## Scope
 
-This repository uses five skill trees:
+This repository uses four skill trees:
 
-- `.agents/skills` is the source of truth and stores full skill content and resources.
-- `.agent/skills` is the Antigravity compatibility layer.
+- `.agents/skills` is the source of truth (used directly by Antigravity) and stores full skill content and resources.
 - `.claude/skills` is the Claude Code compatibility layer.
 - `.cursor/skills` is the Cursor compatibility layer.
 - `.github/skills` is the GitHub Copilot compatibility layer.
@@ -14,23 +13,21 @@ This repository uses five skill trees:
 
 For every skill in `.agents/skills/<skill-name>`, keep matching bridge files:
 
-- `.agent/skills/<skill-name>/SKILL.md`
 - `.claude/skills/<skill-name>/SKILL.md`
 - `.cursor/skills/<skill-name>/SKILL.md`
 - `.github/skills/<skill-name>/SKILL.md`
 
-When creating, updating, renaming, or deleting a skill in `.agents/skills`, apply the same bridge
-change in `.agent/skills`, `.claude/skills`, `.cursor/skills`, and `.github/skills` in the same
-pull request.
+When creating, renaming, deleting, or changing the `name`/`description` metadata of a skill in
+`.agents/skills`, apply the matching bridge update in `.claude/skills`, `.cursor/skills`, and
+`.github/skills` in the same pull request. Body-only edits to `.agents/skills/<skill-name>/SKILL.md`
+do not require modifying bridge files if their metadata and source path already match.
 
 ## Bridge Contract
 
-Each Antigravity bridge SKILL file must contain:
+Each canonical source SKILL file in `.agents/skills/<skill-name>/SKILL.md` must contain:
 
-- `name`: exact `<skill-name>` folder name in hyphen-case.
-- `description`: synchronized copy of canonical description from `.agents/skills/<skill-name>/SKILL.md`.
-- `metadata.source_skill`: `../../../.agents/skills/<skill-name>/SKILL.md`.
-- A reference in the markdown body to `../../../.agents/skills/<skill-name>/SKILL.md`.
+- `name`: exact `<skill-name>` folder name in hyphen-case (`kebab-case`).
+- `description`: canonical trigger and scope description.
 
 Each Claude bridge SKILL file must contain:
 
@@ -54,7 +51,7 @@ Each GitHub Copilot bridge SKILL file must contain:
 ## PR Checklist Gate
 
 A PR is incomplete if any skill exists in `.agents/skills` without matching bridges in
-`.agent/skills`, `.claude/skills`, `.cursor/skills`, and `.github/skills`.
+`.claude/skills`, `.cursor/skills`, and `.github/skills`.
 
 Run this check before pushing:
 

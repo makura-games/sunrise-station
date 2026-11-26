@@ -8,12 +8,6 @@ description: Parses the AtmosSystem architecture in Space Station 14 at the serv
 Use this skill as an architectural playbook for AtmosSystem :)
 Keep your focus on the current code and check for freshness via `git blame` (cutoff: `2024-02-19`).
 
-## What to download first
-
-1. `references/fresh-pattern-catalog.md` - fresh working patterns ✅
-2. `references/rejected-snippets.md` - old/problem areas that cannot be taken as a standard ⚠️
-3. `references/docs-context.md` - supporting ideas from docs (not the source of truth)
-
 ## Source of truth
 
 1. The codebase is the primary source of truth.

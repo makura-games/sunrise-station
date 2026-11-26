@@ -8,9 +8,9 @@ description: Guide to working with Space Station 14 forks with project-folder pa
 This skill describes the standards and patterns adopted in Space Station 14 forks with project-folder isolation (`_Sunrise`, `_Scp`, `_Fish`, `_Lust`) for working with code inherited from the upstream.
 **Main goal:** Maintain the ability to easily receive updates from the upstream (merge), minimizing manual edits in case of conflicts.
 
-Before making changes, first determine the active codebase prefix, project folder and edit markers using the `ss14-codebase-prefix-detection` rule.
+Before making changes, check the active codebase prefix (`Sunrise`), project folder (`_Sunrise`), and edit markers (`Sunrise edit`, `Sunrise added`, `Sunrise edit start/end`, `Sunrise added start/end`) in `AGENTS.md`.
 
-After the active fork is determined, keep all new fork-owned code in that fork's project folder. Do not switch folders because the touched behavior is vanilla, inherited from another fork, or looks "not fork-specific". For Fire, the correct folder is `_Scp`; new code, prototypes and assets for Fire go there even when the hook or parent prototype lives in vanilla or in a Sunrise-looking repository mirror.
+Keep all new fork-owned code in the active fork's project folder (`_Sunrise`). Do not switch folders because the touched behavior is vanilla or looks "not fork-specific".
 
 ## ⚠️ Golden rule
 

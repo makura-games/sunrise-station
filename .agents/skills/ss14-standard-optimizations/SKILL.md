@@ -20,11 +20,9 @@ The main reference: the current behavior of the code. Documentation is an auxili
 2. Optimization complicates the code more than it provides benefits.
 3. No measurable symptom (frame time, GC, network delta size).
 
-## Reading order of resources
+## Extended code examples (On-Demand)
 
-1. Open `references/optimization-patterns.md` - quick selection matrix.
-2. Open `references/annotated-code-examples.md` - live examples with comments.
-3. Open `references/docs-reconciliation.md` - comparison of docs and actual code.
+Read `references/annotated-code-examples.md` only if you need full production code examples for the cards below.
 
 ## Source of truth and boundaries of trust
 

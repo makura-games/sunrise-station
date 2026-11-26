@@ -8,12 +8,6 @@ description: Strict naming standards in Space Station 14 for C#, YAML prototypes
 This skill sets a single strict naming standard for SS14 code, prototypes and localization :)
 Use it as a guideline: if new code/content doesn't follow the rules below, it's a bug, not a "style variation."
 
-## Reading order
-
-1. Read `references/fresh-pattern-catalog.md` first.
-2. Then read `references/rejected-snippets.md`.
-3. At the end, check the terminology and boundaries of the docs in `references/docs-context.md`.
-
 ## Source of truth
 
 1. The source of truth for the rules is the current code base.

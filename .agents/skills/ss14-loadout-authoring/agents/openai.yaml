@@ -1,4 +1,0 @@
-interface:
-  display_name: "SS14 Loadout Authoring"
-  short_description: "Create and migrate SS14 role loadouts"
-  default_prompt: "Use this skill when creating, renaming, migrating, or validating role loadouts, loadout groups, loadouts, and startingGear synchronization in SS14 prototypes."

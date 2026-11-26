@@ -1,5 +1,5 @@
 ---
-name: SS14 ECS Prototypes
+name: ss14-ecs-prototypes
 description: YAML prototypes in Space Station 14 — entity definitions, field inheritance, prototype classes, YAML linter, naming conventions, and localization
 ---
 

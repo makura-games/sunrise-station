@@ -131,7 +131,7 @@ Check:
 
 ```yaml
 ---
-name: ss14-example-system-core
+name: ss14-skill-authoring
 description: Deep analysis of the architecture and lifecycle of ExampleSystem in SS14: event ordering, critical invariants, server/client/shared interaction, and safe extension patterns. Use it when you need to understand the system before changes, debug regressions, or design new functionality.
 ---
 ```

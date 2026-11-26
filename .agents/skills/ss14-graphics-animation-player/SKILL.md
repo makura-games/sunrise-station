@@ -1,5 +1,5 @@
 ---
-name: SS14 Graphics AnimationPlayer
+name: ss14-graphics-animation-player
 description: A deep practical guide to entity animations using the AnimationPlayerSystem in SS14: lifecycle, API, track types, keyframes/interpolation/easing, completion events, patterns and anti-patterns for production code.
 ---
 

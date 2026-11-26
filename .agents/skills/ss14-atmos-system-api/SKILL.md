@@ -7,12 +7,6 @@ description: Gives a complete practical analysis of the AtmosSystem API in Space
 
 Use this skill when you need to quickly select the right AtmosSystem method and apply it without regressions :)
 
-## What to download
-
-1. `references/fresh-pattern-catalog.md` - complete API registry with a freshness mark.
-2. `references/rejected-snippets.md` - methods/scenarios with restrictions and TODO.
-3. `references/docs-context.md` - connection of API solutions with documentation and design intent.
-
 ## Quick method selection
 
 1. You need to get gas around the entity: `GetContainingMixture(...)`.
