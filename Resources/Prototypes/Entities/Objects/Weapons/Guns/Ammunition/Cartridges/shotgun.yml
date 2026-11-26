@@ -101,7 +101,7 @@
   - type: CartridgeAmmo
     soundEject:
       collection: ShellEject
-    proto: PelletShotgunSpreadTrace
+    proto: PelletShotgunTraceSpread
 
 - type: entity
   id: ShellShotgunIncendiary
@@ -134,7 +134,7 @@
   - type: CartridgeAmmo
     soundEject:
       collection: ShellEject
-    proto: PelletShotgunPracticeSpreadTrace
+    proto: PelletShotgunTracePracticeSpread
 
 - type: entity
   parent: [ SolutionAmmo, SolutionToolVeryTiny, BaseShellShotgun, BaseSecurityContraband ]
@@ -187,7 +187,7 @@
 #   - type: CartridgeAmmo
 #     soundEject:
 #       collection: ShellEject
-#     proto: PelletShotgunImprovisedSpreadTrace
+#     proto: PelletShotgunTraceImprovisedSpread
 
 - type: entity
   id: ShellShotgunUranium
@@ -205,4 +205,4 @@
   - type: CartridgeAmmo
     soundEject:
       collection: ShellEject
-    proto: PelletShotgunUraniumSpreadTrace
+    proto: PelletShotgunTraceUraniumSpread

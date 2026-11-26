@@ -36,7 +36,6 @@
           - MagazineP90
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolSP
         priority: 1
         whitelist:
           tags:
@@ -91,7 +90,6 @@
           - MagazinePistolHighCapacity
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolSP
         priority: 1
         whitelist:
           tags:
@@ -159,7 +157,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolSP
         priority: 1
         whitelist:
           tags:
@@ -223,7 +220,6 @@
           - MagazinePistolDP
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistolSP
         priority: 1
         whitelist:
           tags:
@@ -288,7 +284,6 @@
             - MagazineCaselessRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeCaselessRifle
         priority: 1
         whitelist:
           tags:
@@ -370,7 +365,6 @@
           whitelistFailPopup: gun-magazine-whitelist-fail
         gun_chamber:
           name: Chamber
-          startingItem: null
           priority: 1
           whitelist:
             tags:
@@ -430,7 +424,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol40SP
         priority: 1
         whitelist:
           tags:

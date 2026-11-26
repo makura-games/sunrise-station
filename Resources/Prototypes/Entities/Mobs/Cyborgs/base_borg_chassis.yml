@@ -9,6 +9,7 @@
   - type: Reactive
     groups:
       Acidic: [Touch]
+      Extinguish: [Touch] # Sunrise-Edit
   - type: DamageOnHighSpeedImpact
     damage:
       types:
@@ -122,7 +123,6 @@
         Heat: -5
         Shock: -5
         Caustic: -5
-        Structural: -10
         Mangleness: 1
   - type: Loadout
     prototypes: [ BorgArmorSiliconLoadout ]
@@ -279,7 +279,7 @@
 
 - type: entity
   abstract: true
-  parent: BaseBorgChassisNotIonStormable
+  parent: [SunriseTemperatureBase, BaseBorgChassisNotIonStormable] # Sunrise-Edit
   id: BaseBorgChassis
   components:
   - type: IonStormTarget
@@ -307,6 +307,13 @@
         - borg_brain
         - borg_module
         - cell_slot
+      # Sunrise-Start
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SunriseBorgScrapSpawner: # Sunrise-Edit
+            min: 1
+            max: 1
+      # Sunrise-End
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
 
@@ -418,7 +425,7 @@
 
 - type: entity
   id: BaseBorgChassisSyndicate
-  parent: BaseBorgChassis
+  parent: [SunriseTemperatureLow, BaseBorgChassis] # Sunrise-Edit
   abstract: true
   components:
   - type: NpcFactionMember
@@ -505,7 +512,7 @@
 
 - type: entity
   id: BaseBorgChassisSyndicateDerelict #For assault borg and maybe others in time
-  parent: BaseBorgChassis # We don't want them to see Nukies or have syndi comms, their database is out of date
+  parent: [SunriseTemperatureLow, BaseBorgChassis] # Sunrise-Edit
   abstract: true
   components:
   - type: SiliconLawProvider
@@ -558,7 +565,7 @@
   # Sunrise-end
 
 - type: entity
-  parent: BaseBorgChassisNotIonStormable
+  parent: [SunriseTemperatureLow, BaseBorgChassisNotIonStormable] # Sunrise-Edit
   id: BaseXenoborgChassis
   name: xenoborg
   description: A man-machine hybrid that aims to replicate itself. They love extracting brains to insert into fresh Xenoborg chassis to grow their army.

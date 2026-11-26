@@ -1277,6 +1277,12 @@ MagazineBoxHeavyRifleHP: MagazineBoxHeavyRifleSP
 RifleHeavyMagazineHP: RifleHeavyMagazineSP
 MagazineDragunovHP: MagazineDragunovSP
 MagazineBoxRifleMachineHP: MagazineBoxRifleMachineSP
+# 2026-08-27
+PottedPlantAlt9: PottedPlantRose5
+HandheldRoboAnalyzerEmpty: HandheldRoboAnalyzer
+HandheldRoboAnalyzerUnpowered: HandheldRoboAnalyzer
+HandheldMechAnalyzerEmpty: HandheldMechAnalyzer
+HandheldMechAnalyzerUnpowered: HandheldMechAnalyzer
 # 2026-09-06
 MechDollHouse: MechKolobok
 MechDollHouseBattery: MechKolobokBattery
@@ -1329,6 +1335,9 @@ ClothingHandsPowerGlovesUplinkNTERTGamma: null
 ClothingHandsPowerGlovesUplinkNTERTGammaLeader: null
 ClothingHandsPowerGlovesUplinkNTERTCBURN: null
 ClothingHandsPowerGlovesUplinkNTERTEpsilon: null
+# 2026-09-26
+SpeedLoaderShotgunEmpty: null
+SpeedLoaderShellShotgun: SpeedLoaderShotgunBuck
 DrinkDarkRedRumBottleFull: DrinkRedRumBottleFull
 # 2026-09-10
 ClothingOuterArmorBlueShield: null
@@ -1337,7 +1346,7 @@ WallRiveted: WallReinforced
 # 2026-11-07
 BluespaceBox: null
 ClothingOuterSuitCargo: null
-
+SpawnMechNTGygaxFilled: CrateCommandMarauderBundle
 # 2026-11-21 - машины системы болезней
 DiseaseDiagnoser: SunriseDiseaseDiagnoser
 Vaccinator: SunriseVaccinator

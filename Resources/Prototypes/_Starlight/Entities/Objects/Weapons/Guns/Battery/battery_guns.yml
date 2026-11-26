@@ -213,11 +213,13 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Gun
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/xenofirebeam.ogg
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
   - type: BatteryAmmoProvider
-    proto: IgnitionRedLaser
+    proto: XenoborgFireLaser
     fireCost: 62.5
   - type: StaticPrice
     price: 300

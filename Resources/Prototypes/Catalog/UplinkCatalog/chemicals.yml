@@ -57,7 +57,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink
 
 - type: listing
   id: UplinkNocturineChemistryBottle
@@ -151,4 +150,3 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Edit

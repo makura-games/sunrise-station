@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseBulletIncendiary
+  parent: [ BulletStoppingPowerStrong, BaseBulletIncendiary ]
   id: BulletRifleHeavyIncendiary
   categories: [ HideSpawnMenu ]
   name: bullet (.308 incendiary)
@@ -19,7 +19,7 @@
   id: PelletShotgunImprovisedIncendiary
   name: improvised incendiary pellet
   categories: [ HideSpawnMenu ]
-  parent: BaseBulletIncendiary
+  parent: [ BulletStoppingPowerWeak, BaseBulletIncendiary ]
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
@@ -51,7 +51,7 @@
   id: PelletShotgunImprovisedUranium
   name: improvised uranium pellet
   categories: [ HideSpawnMenu ]
-  parent: BaseBullet
+  parent: [ BulletStoppingPowerWeak, BaseBullet ]
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
@@ -81,7 +81,7 @@
   id: PelletShotgunCoin
   name: pellet (coin slug)
   categories: [ HideSpawnMenu ]
-  parent: BaseBullet
+  parent: [ BulletStoppingPowerWeak, BaseBullet ]
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi

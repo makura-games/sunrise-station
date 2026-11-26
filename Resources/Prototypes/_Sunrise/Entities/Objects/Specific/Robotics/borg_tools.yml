@@ -575,7 +575,7 @@
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_antimatrifle
   - type: Gun
-    fireRate: 0.45
+    fireRate: 0.75
     selectedMode: FullAuto
     availableModes:
       - FullAuto

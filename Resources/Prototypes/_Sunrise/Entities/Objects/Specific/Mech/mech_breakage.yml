@@ -386,10 +386,11 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 500
+        damage: 400
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -410,10 +411,11 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 500
+        damage: 400
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -459,15 +461,16 @@
 
 - type: entity
   id: MechBreakageGygax
-  parent: SunriseMechBreakageGygaxTraits
+  parent: [ SunriseTemperatureModerate , SunriseMechBreakageGygaxTraits ]
   abstract: true
   categories: [ HideSpawnMenu ]
   components:
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 500
+        damage: 400
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -567,10 +570,10 @@
     autoStand: true
     drop: false
   - type: MeleeThrowOnHit
-    distance: 2
-    speed: 18
+    distance: 1.5
+    speed: 15
   - type: Reflect
-    reflectProb: 0.20
+    reflectProb: 0.1
     spread: 180
     soundOnReflect: /Audio/_Starlight/Armor/Ricochet/ricochet1_1.ogg
     reflects:
@@ -580,15 +583,16 @@
 
 - type: entity
   id: MechBreakageDurand
-  parent: SunriseMechBreakageDurandTraits
+  parent: [ SunriseTemperatureHigh , SunriseMechBreakageDurandTraits ]
   abstract: true
   categories: [ HideSpawnMenu ]
   components:
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 700
+        damage: 650
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -629,6 +633,7 @@
         node: start
       - !type:DoActsBehavior
         acts: ["Destruction"]
+
 - type: entity
   id: MechBreakageKolobok
   parent: SunriseMechBreakageDurandTraits
@@ -676,16 +681,83 @@
         acts: ["Destruction"]
 
 - type: entity
-  id: MechBreakageRover
-  parent: SunriseMechBreakageDurandTraits
+  id: MechBreakageKolobok
+  parent: [ SunriseTemperatureHigh , SunriseMechBreakageDurandTraits ]
   abstract: true
   categories: [ HideSpawnMenu ]
   components:
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 700
+        damage: 650
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ScrapSteel:
+            min: 2
+            max: 4
+          MechKolobokHarnessSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokLArmSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokRArmSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokLLegSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokRLegSpawnerLow:
+            min: 1
+            max: 1
+          MechKolobokArmorPlateSpawner:
+            min: 1
+            max: 1
+          MechDurandBoardSpawnerLow:
+            min: 1
+            max: 1
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: TriggerOnMeleeHit
+    targetIsUser: true
+    triggerEveryHit: true
+  - type: KnockdownOnTrigger
+    targetUser: true
+    knockdownAmount: 1
+    autoStand: true
+    drop: false
+  - type: MeleeThrowOnHit
+    distance: 2
+    speed: 18
+  - type: Reflect
+    reflectProb: 0.20
+    spread: 180
+    soundOnReflect: /Audio/_Starlight/Armor/Ricochet/ricochet1_1.ogg
+    reflects:
+    - NonEnergy
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+
+- type: entity
+  id: MechBreakageRover
+  parent: [ SunriseTemperatureHigh , SunriseMechBreakageDurandTraits ]
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Destructible
+    generateOverkillThreshold: false
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 650
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -726,14 +798,16 @@
 
 - type: entity
   id: MechBreakageMarauderFamily
+  parent: SunriseTemperatureHigh
   abstract: true
   categories: [ HideSpawnMenu ]
   components:
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 800
+        damage: 750
       behaviors:
       - !type:PlaySoundBehavior
         sound:

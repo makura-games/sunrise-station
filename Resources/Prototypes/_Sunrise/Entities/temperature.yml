@@ -1,0 +1,55 @@
+- type: entity
+  id: SunriseTemperatureBase
+  abstract: true
+  components:
+  - type: AtmosExposed
+  - type: Reactive
+    groups:
+      Extinguish: [ Touch ]
+  - type: Temperature
+    thermalConductivity: 265
+    specificHeat: 500
+  - type: TemperatureSpeed
+    thresholds:
+      205.54: 0.95
+      137.93: 0.9
+      2.7: 0.8
+  - type: TemperatureDamage
+    heatDamageThreshold: 800
+    coldDamageThreshold: 0
+    heatDamage:
+      types:
+        Heat: 0.35
+
+- type: entity
+  id: SunriseTemperatureLow
+  parent: SunriseTemperatureBase
+  abstract: true
+  components:
+  - type: TemperatureDamage
+    heatDamageThreshold: 1200
+    heatDamage:
+      types:
+        Heat: 0.2
+
+- type: entity
+  id: SunriseTemperatureModerate
+  parent: SunriseTemperatureBase
+  abstract: true
+  components:
+  - type: TemperatureDamage
+    heatDamageThreshold: 2500
+    heatDamage:
+      types:
+        Heat: 0.1
+
+- type: entity
+  id: SunriseTemperatureHigh
+  parent: SunriseTemperatureBase
+  abstract: true
+  components:
+  - type: TemperatureDamage
+    heatDamageThreshold: 5000
+    heatDamage:
+      types:
+        Heat: 0.05

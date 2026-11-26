@@ -579,36 +579,6 @@
   id: PaddyMech
 
 - type: Tag
-  id: Phazon
-
-- type: Tag
-  id: PhazonArmor
-
-- type: Tag
-  id: PhazonCentralControlModule
-
-- type: Tag
-  id: PhazonHead
-
-- type: Tag
-  id: PhazonLArm
-
-- type: Tag
-  id: PhazonLLeg
-
-- type: Tag
-  id: PhazonPeripheralsControlModule
-
-- type: Tag
-  id: PhazonRArm
-
-- type: Tag
-  id: PhazonRLeg
-
-- type: Tag
-  id: PhazonTargetingControlModule
-
-- type: Tag
   id: Ripley
 
 - type: Tag

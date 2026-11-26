@@ -242,7 +242,7 @@
     WeaponWaterBlasterSuper: 3
 
     # Ammo Shotgun
-    SpeedLoaderShellShotgun: 8
+    SpeedLoaderShotgunBuck: 8
     SpeedLoaderShotgunIncendiary: 8
     SpeedLoaderShotgunSlug: 8
     SpeedLoaderShotgunBeanbag: 8
@@ -403,10 +403,8 @@
     MechMarauderFilled: 2
     MechSeraphFilled: 2
     MechLockerBattery: 2
-    MechPhazonBattery: 2
     MechHonkerFilled: 2
     MechRoverSyndieFilled: 2
     MechDurandBattery: 2
-    MechNTGygaxFilled: 2
     MechGygaxSyndieFilled: 2
     MechGygaxBattery: 2

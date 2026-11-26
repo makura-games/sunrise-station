@@ -124,6 +124,18 @@
 
 # Mech Weapons
 - type: latheRecipe
+  id: WeaponMechCombatAMLG90
+  result: WeaponMechCombatAMLG90
+  categories:
+  - MechWeapons
+  completetime: 20
+  materials:
+    Steel: 2800
+    Plastic: 1000
+    Plasma: 750
+    Glass: 500
+
+- type: latheRecipe
   id: WeaponMechCombatIon
   result: WeaponMechCombatIon
   categories:
@@ -549,6 +561,16 @@
     Plastic: 500
     Gold: 500
     Uranium: 400
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeLong
+  id: WeaponLaserImmolator
+  result: WeaponLaserImmolator
+  materials:
+    Steel: 1500
+    Glass: 500
+    Plastic: 250
+    Gold: 250
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong

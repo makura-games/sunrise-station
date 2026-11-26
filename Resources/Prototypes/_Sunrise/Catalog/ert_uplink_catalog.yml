@@ -1928,31 +1928,13 @@
       - ERTGamma
 
 - type: listing
-  id: ERTUplinkNTGygax
-  name: ntuplink-mech-teleporter-medium-name
-  description: ntuplink-mech-teleporter-medium-desc
-  icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: mech_ntgygax }
-  productEntity: CrateCommandNTGygaxBundle
-  cost:
-    Bluecrystal: 100
-  categories:
-  - NTMechs
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - ERTGamma
-
-- type: listing
   id: ERTUplinkMarauder
   name: ntuplink-mech-teleporter-heavy-name
   description: ntuplink-mech-teleporter-heavy-desc
   icon: { sprite: _Sunrise/Interface/Misc/nt_icons.rsi, state: mech_marauder }
   productEntity: CrateCommandMarauderBundle
   cost:
-    Bluecrystal: 120
+    Bluecrystal: 100
   categories:
   - NTMechs
   conditions:

@@ -1,0 +1,11 @@
+- type: entity
+  id: SunriseFrezonCooling
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: AtmosExposed
+  - type: Temperature
+    temperature: 2.7
+    specificHeat: 10000
+    thermalConductivity: 10000
+  - type: TimedDespawn
+    lifetime: 3

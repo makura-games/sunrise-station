@@ -1,5 +1,3 @@
-ntuplink-mech-teleporter-medium-name = Телепортер Штурмового Меха.
-ntuplink-mech-teleporter-medium-desc = Содержит ящик со быстрым мехом Нанотрейзен. Быстрый, средне бронированный мех на службе Нанотрейзен. Вы умрёте первым. зато КАК!
 ntuplink-mech-teleporter-heavy-name = Телепортер Тяжелого Меха.
 ntuplink-mech-teleporter-heavy-desc = Содержит ящик с тяжелым мехом Нанотрейзен. Настолько медлителен, насколько защищен. Вы умрёте последним.
 ntuplink-mech-teleporter-eliteheavy-name = Телепортер Тяжелого Элитного Меха.

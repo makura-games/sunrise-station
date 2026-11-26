@@ -90,7 +90,6 @@
       blacklist:
         tags:
           - NukeOpsUplink
-          - LoneOpsUplink # Sunrise-Edit
           - AssaultOpsUplink # Sunrise-Edit
 
 - type: listing
@@ -111,7 +110,6 @@
       whitelist:
         tags:
           - NukeOpsUplink
-          - LoneOpsUplink # Sunrise-Edit
 
 - type: listing
   id: UplinkCarpDehydrated
@@ -148,7 +146,6 @@
     blacklist:
       tags:
       - AssaultOpsUplink
-      - LoneOpsUplink
   # Sunrise-End
 
 - type: listing

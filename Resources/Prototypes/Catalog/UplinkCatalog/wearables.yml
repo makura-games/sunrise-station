@@ -144,7 +144,6 @@
     blacklist:
       tags:
       - AssaultOpsUplink
-      - LoneOpsUplink
   #Sunrise-end
 
 - type: listing
@@ -162,7 +161,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Edit
 
 - type: listing
   id: UplinkHardsuitSyndieElite
@@ -179,7 +177,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Edit
 
 - type: listing
   id: UplinkClothingOuterHardsuitJuggernaut
@@ -196,7 +193,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Edit
 
 - type: listing
   id: UplinkClothingEyesHudSyndicate
@@ -212,7 +208,6 @@
       whitelist:
         tags:
           - NukeOpsUplink
-          - LoneOpsUplink # Sunrise-Edit
 
 - type: listing
   id: UplinkBackpackSyndicate

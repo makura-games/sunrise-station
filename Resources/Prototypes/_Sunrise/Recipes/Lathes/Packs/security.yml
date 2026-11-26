@@ -59,9 +59,7 @@
     - MagazineRifleHeavySP
     - MagazineRifleHeavyEmpty
     # Shotgun Speedloader
-    - SpeedLoaderShellShotgun
     - SpeedLoaderShotgunBirdshot
-    - SpeedLoaderShotgunEmpty
     - SpeedLoaderShotgunSlug
     - SpeedLoaderShotgunBeanbag
 ####################################################
@@ -145,9 +143,8 @@
     - MagazineRifleHeavySP
     - MagazineRifleHeavyEmpty
     # Shotgun Speedloader
-    - SpeedLoaderShellShotgun
+    - SpeedLoaderShotgunBuck
     - SpeedLoaderShotgunBirdshot
-    - SpeedLoaderShotgunEmpty
     - SpeedLoaderShotgunSlug
     - SpeedLoaderShotgunBeanbag
     # Pirate cannon
@@ -187,6 +184,7 @@
     - SunriseWeaponLaserCarbineBattery
     - WeaponLaserLNT620
     - WeaponIonCarbine
+    - WeaponLaserImmolator
     - WeaponDecloner
     - ScanGateMachineCircuitboard
     - MagazineBatteryLr30
@@ -295,6 +293,7 @@
     - RifleHeavyMagazineIncendiary
     - RifleHeavyMagazineUranium
   # Shotgun
+    - SpeedLoaderShotgunBeanbag
     - SpeedLoaderShotgunIncendiary
     - SpeedLoaderShotgunUranium
     - SpeedLoaderShotgunFlechette
@@ -326,6 +325,7 @@
 - type: latheRecipePack
   id: SecurityDynamicSunriseMech
   recipes:
+    - WeaponMechCombatAMLG90
     - WeaponMechCombatImmolationGun
     - WeaponMechCombatSolarisLaser
     - WeaponMechCombatFiredartLaser
@@ -357,7 +357,7 @@
     - MagazineRifleSP
     - MagazineRifleFMJ
     # Shotgun Speedloader
-    - SpeedLoaderShellShotgun
+    - SpeedLoaderShotgunBuck
     - SpeedLoaderShotgunBirdshot
     - SpeedLoaderShotgunSlug
     # Shuttle stuff

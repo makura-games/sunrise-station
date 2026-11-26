@@ -94,50 +94,6 @@
             "name": "seraph-broken"
         },
         {
-            "name": "phazon",
-            "directions": 4
-        },
-        {
-            "name": "phazon-open"
-        },
-        {
-            "name": "phazon-phase",
-            "directions": 4,
-            "delays": [
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
-                ]
-            ]
-        },
-        {
-            "name": "phazon-broken"
-        },
-        {
             "name": "ripley-old",
             "directions": 4
         },

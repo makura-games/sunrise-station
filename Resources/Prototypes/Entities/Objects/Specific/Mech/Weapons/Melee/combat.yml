@@ -12,16 +12,36 @@
     sprite: _Sunrise/Objects/Specific/Mech/mecha_inhand.rsi
     heldPrefix: chainsword
   # Sunrise-end
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/Weapons/chainsaw_pull.ogg
+  - type: ClothingSpeedModifier
+    sprintModifier: 0.3
+  - type: AmbientSound
+    range: 5
+    volume: 10
+    sound:
+      path: /Audio/_Sunrise/Weapons/Melee/idle.ogg
+      params:
+        variation: 0.250
   - type: MeleeWeapon
+    animation: WeaponArcSlash
     autoAttack: true
     angle: 0
     wideAnimationRotation: -90
     soundHit:
-      path: "/Audio/Weapons/chainsaw_rev.ogg"
-    attackRate: 3.5
+      collection: ChainSaw
+    params:
+      variation: 0.05
+      volume: 8
+    soundSwing:
+      collection: ChainSaw
+      params:
+        volume: 5
+    attackRate: 4
     damage:
       types:
-        Structural: 60
-        Piercing: 7
-        Slash: 7
-        Blunt: 10
+        Structural: 50
+        Piercing: 6
+        Slash: 8
+        Blunt: 5

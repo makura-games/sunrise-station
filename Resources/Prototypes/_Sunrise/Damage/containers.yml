@@ -6,7 +6,6 @@
   - Heat
   - Shock
   - Caustic
-  - Structural
 
 - type: damageContainer
   id: Synth
@@ -27,7 +26,6 @@
   - Heat
   - Shock
   - Caustic
-  - Structural
   - Mangleness
 
 - type: damageContainer

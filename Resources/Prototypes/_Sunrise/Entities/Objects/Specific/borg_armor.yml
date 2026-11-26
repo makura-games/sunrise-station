@@ -22,7 +22,6 @@
         Heat: 0.5
         Shock: 0.7
         Caustic: 1
-        Structural: 0.2
   - type: Unremoveable
   - type: Pierceable
     level: Metal
@@ -51,7 +50,6 @@
         Heat: 0.5
         Shock: 0.6
         Caustic: 1
-        Structural: 0.2
   - type: Unremoveable
   - type: Pierceable
     level: Rock

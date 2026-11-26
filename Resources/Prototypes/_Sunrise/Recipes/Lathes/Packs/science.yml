@@ -9,9 +9,6 @@
   - GygaxCentralElectronics
   - GygaxPeripheralsElectronics
   - GygaxTargetingElectronics
-  # - PhazonCentralElectronics
-  # - PhazonPeripheralsElectronics
-  # - PhazonTargetingElectronics
   - DurandCentralElectronics
   - DurandPeripheralsElectronics
   - DurandTargetingElectronics

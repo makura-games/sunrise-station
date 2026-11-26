@@ -103,7 +103,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink #Sunrise added
 
 - type: listing
   id: UplinkC4Bundle
@@ -160,7 +159,6 @@
     blacklist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink
       - AssaultOpsUplink
 
 - type: listing
@@ -177,7 +175,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink
       - AssaultOpsUplink
 
 - type: listing

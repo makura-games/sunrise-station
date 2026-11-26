@@ -4,6 +4,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Magboots
+  - type: ComplexInteraction # Sunrise-added - боевые мехи поддерживают сложные взаимодействия
+  - type: VehicleHandBlocker # Sunrise-Edit
+    blockedHands: 2
   - type: Mech
     equipmentWhitelist:
       tags:
@@ -21,6 +24,8 @@
   abstract: true
   categories: [ HideSpawnMenu ]
   components:
+  - type: VehicleHandBlocker # Sunrise-Edit
+    blockedHands: 2
   - type: Mech
     equipmentWhitelist:
       tags:
@@ -40,6 +45,7 @@
   abstract: true
   categories: [ HideSpawnMenu ]
   components:
+  - type: ComplexInteraction # Sunrise-added - специальные мехи поддерживают сложные взаимодействия
   - type: Mech
     equipmentWhitelist:
       tags:
@@ -54,6 +60,7 @@
   abstract: true
   categories: [ HideSpawnMenu ]
   components:
+  - type: ComplexInteraction # Sunrise-added - малые мехи поддерживают сложные взаимодействия
   - type: Mech
     equipmentWhitelist:
       tags:
@@ -64,12 +71,12 @@
     voice: NecoArcTwo
 
 - type: entity
-  abstract: true
-  parent: StructureHealthMachineMassive
+  parent: [ SunriseTemperatureLow, StructureHealthMachineMassive ] # Sunrise-Edit
   id: BaseMech
   save: false
   components:
   - type: MobMover
+  - type: NoSlip
   - type: Mech
   - type: MechAir
   - type: Vehicle
@@ -118,7 +125,6 @@
         Slash: -15
         Piercing: -15
         Caustic: -15
-        Structural: -15
         Mangleness: 5 # Sunrise-Edit
   - type: UserInterface
     interfaces:
@@ -145,7 +151,7 @@
   - type: InteractionOutline
   - type: MovementSpeedModifier
     baseWalkSpeed: 1
-    baseSprintSpeed: 3.9 # sunrise-edit
+    baseSprintSpeed: 2
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -153,8 +159,6 @@
   - type: Pullable
   - type: Physics
     bodyType: KinematicController
-    angularDamping: 10 # sunrise-edit
-    linearDamping: 10 # sunrise-edit
   - type: GravityAffected
   - type: Clickable
   - type: WiresPanel
@@ -164,7 +168,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.45
-        density: 10000 # sunrise-edit
+        density: 1000
         mask:
         - MobMask
         layer:
@@ -222,6 +226,7 @@
     guides:
     - Robotics
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
@@ -257,12 +262,11 @@
   - type: ExplosionResistance # Sunrise-Edit
     damageCoefficient: 0.9 # Sunrise-Edit
   - type: ProtectedFromStepTriggers # Sunrise-added
-  - type: ComplexInteraction # Sunrise-added
 
 # Ripley MK-I
 - type: entity
   id: MechRipley
-  parent: [ MechBreakageRipley, BaseMech, IndustrialMech, BaseCargoContraband ] # Sunrise-edit
+  parent: [ SunriseTemperatureLow, MechBreakageRipley, BaseMech, IndustrialMech, BaseCargoContraband ] # Sunrise-edit
   name: Ripley APLU
   description: Versatile and lightly armored, the Ripley is useful for almost any heavy work scenario. The "APLU" stands for Autonomous Power Loading Unit.
   components:
@@ -305,7 +309,7 @@
       types:
         Blunt: 14 #intentionally shit so people realize that going into combat with the ripley is usually a bad idea.
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2 # Sunrise-edit: starlight parity
+    baseWalkSpeed: 2.25 # Sunrise-Edit
     baseSprintSpeed: 3.6 # Sunrise-edit: starlight parity
   - type: Reflect
     reflectProb: 0.05
@@ -332,7 +336,7 @@
 # Ripley MK-II
 - type: entity
   id: MechRipley2
-  parent: [ MechBreakageRipley, BaseMech, IndustrialMech, BaseCargoContraband ] # Sunrise-edit
+  parent: [ SunriseTemperatureLow, MechBreakageRipley, BaseMech, IndustrialMech, BaseCargoContraband ] # Sunrise-edit
   name: Ripley APLU MK-II
   description: The "MK-II" has a pressurized cabin for space operations, but the added weight has slowed it down.
   components:
@@ -363,7 +367,15 @@
     brokenState: ripleymkii-broken
     airtight: true
   - type: Vehicle
-    transferDamage: false # Sunrise-Edit - этот мех не передаёт урон пилоту
+    transferDamageModifier:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.4
+        Cold: 0.4
+        Heat: 0.4
+        Shock: 0.4
+        Radiation: 0.8
     operatorWhitelist:
       components:
         - HumanoidProfile
@@ -375,8 +387,8 @@
         Blunt: 20
     bluntStaminaDamageFactor: 1
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 3
+    baseWalkSpeed: 1
+    baseSprintSpeed: 2
   # Sunrise-Start
   - type: Loadout
     prototypes: [ MechArmorMediumNTLoadout ]
@@ -406,7 +418,7 @@
 # Clarke
 - type: entity
   id: MechClarke
-  parent: [ SunriseMechBreakageDefault, BaseMech, IndustrialMech, BaseCargoContraband ] # Sunrise-Edit
+  parent: [ SunriseTemperatureHigh , SunriseMechBreakageDefault, BaseMech, IndustrialMech, BaseCargoContraband ] # Sunrise-Edit
   name: Clarke
   description: A fast-moving mech for space travel. It has built-in trusts.
   components:
@@ -427,7 +439,15 @@
     brokenState: clarke-broken
     airtight: true
   - type: Vehicle
-    transferDamage: false # Sunrise-Edit - этот мех не передаёт урон пилоту
+    transferDamageModifier:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Cold: 0.5
+        Heat: 0.5
+        Shock: 0.5
+        Radiation: 1
     operatorWhitelist:
       components:
         - HumanoidProfile
@@ -436,7 +456,7 @@
     attackRate: 1
     damage:
       types:
-        Blunt: 26
+        Blunt: 25
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.5
     baseSprintSpeed: 4.5
@@ -505,7 +525,15 @@
     brokenState: honker-broken
     airtight: true # Space Honks is real.
   - type: Vehicle
-    transferDamage: false # Sunrise-Edit - сохраняем прежнее отсутствие урона пилоту
+    transferDamageModifier:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Cold: 0.5
+        Heat: 0.5
+        Shock: 0.5
+        Radiation: 1
     operatorWhitelist:
       components:
       - HumanoidProfile
@@ -520,10 +548,11 @@
     - NonEnergy
   - type: MeleeWeapon
     hidden: true
-    attackRate: 1
+    attackRate: 0.75
     damage:
       types:
-        Structural: 2
+        Blunt: 25 #thwack
+        Structural: 20
     soundHit:
       path: /Audio/Items/bikehorn.ogg
   - type: MeleeThrowOnHit
@@ -592,6 +621,7 @@
         Cold: 0.2
         Heat: 0.2
         Shock: 0.2
+        Radiation: 0.4
     operatorWhitelist:
       tags:
       - Hamster
@@ -629,6 +659,7 @@
   name: Vim
   description: A miniature exosuit from Nanotrasen, developed to let the irreplaceable station pets live a little longer.
   components:
+  - type: ComplexInteraction # Sunrise-added - Vim не относится к промышленным мехам
   - type: FootprintEmitter # Sunrise-Add
   - type: Sprite
     drawdepth: Mobs
@@ -694,7 +725,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      200: Critical
+      250: Critical
     showOverlays: false
     allowRevives: true
   # Sunrise-Start
@@ -744,7 +775,15 @@
     brokenState: base-broken
     airtight: true
   - type: Vehicle
-    transferDamage: false # Sunrise-Edit - этот мех не передаёт урон пилоту
+    transferDamageModifier:
+      coefficients:
+        Blunt: 0.3
+        Slash: 0.3
+        Piercing: 0.3
+        Cold: 0.3
+        Heat: 0.3
+        Shock: 0.3
+        Radiation: 0.6
     operatorWhitelist:
       components:
         - HumanoidProfile
@@ -754,11 +793,11 @@
     damage:
       types:
         Blunt: 30
-        Structural: 180
+        Structural: 100
     bluntStaminaDamageFactor: 1.5
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
-    baseSprintSpeed: 4
+    baseSprintSpeed: 3.3
   - type: Reflect
     reflectProb: 0.05
     spread: 180
@@ -773,7 +812,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      325: Critical
+      250: Critical
 
 - type: entity
   id: MechGygaxBattery
@@ -828,7 +867,15 @@
     brokenState: base-broken
     airtight: true
   - type: Vehicle
-    transferDamage: false # Sunrise-Edit - этот мех не передаёт урон пилоту
+    transferDamageModifier:
+      coefficients:
+        Blunt: 0.25
+        Slash: 0.25
+        Piercing: 0.25
+        Cold: 0.25
+        Heat: 0.25
+        Shock: 0.25
+        Radiation: 0.5
     operatorWhitelist:
       components:
         - HumanoidProfile
@@ -838,7 +885,7 @@
     damage:
       types:
         Blunt: 40
-        Structural: 220
+        Structural: 150
     bluntStaminaDamageFactor: 1.5
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.5
@@ -857,7 +904,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      500: Critical
+      400: Critical
 
 - type: entity
   id: MechDurandBattery
@@ -899,7 +946,15 @@
     airtight: true
     maxEquipmentAmount: 4
   - type: Vehicle
-    transferDamage: false # Sunrise-Edit - этот мех не передаёт урон пилоту
+    transferDamageModifier:
+      coefficients:
+        Blunt: 0.1
+        Slash: 0.1
+        Piercing: 0.1
+        Cold: 0.1
+        Heat: 0.1
+        Shock: 0.1
+        Radiation: 0.2
     operatorWhitelist:
       components:
         - HumanoidProfile
@@ -912,8 +967,8 @@
         Structural: 200
     bluntStaminaDamageFactor: 1.5
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.5
-    baseSprintSpeed: 2
+    baseWalkSpeed: 1
+    baseSprintSpeed: 1.5
   # Sunrise-Start
   - type: Loadout
     prototypes: [ MechArmorHeavyNTLoadout ]
@@ -929,7 +984,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      600: Critical
+      500: Critical
     showOverlays: false
     allowRevives: true
   - type: AccessReader
@@ -985,7 +1040,15 @@
     airtight: true
     maxEquipmentAmount: 5
   - type: Vehicle
-    transferDamage: false # Sunrise-Edit - этот мех не передаёт урон пилоту
+    transferDamageModifier:
+      coefficients:
+        Blunt: 0.05
+        Slash: 0.05
+        Piercing: 0.05
+        Cold: 0.05
+        Heat: 0.05
+        Shock: 0.05
+        Radiation: 0.1
     operatorWhitelist:
       components:
         - HumanoidProfile
@@ -998,7 +1061,7 @@
         Structural: 400
     bluntStaminaDamageFactor: 1.5
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1
+    baseWalkSpeed: 2.2
     baseSprintSpeed: 3.7
   # Sunrise-Start
   - type: Loadout
@@ -1015,7 +1078,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      700: Critical
+      550: Critical
     showOverlays: false
     allowRevives: true
   - type: AccessReader
@@ -1073,7 +1136,15 @@
     airtight: true
     maxEquipmentAmount: 4
   - type: Vehicle
-    transferDamage: false # Sunrise-Edit - этот мех не передаёт урон пилоту
+    transferDamageModifier:
+      coefficients:
+        Blunt: 0.15
+        Slash: 0.15
+        Piercing: 0.15
+        Cold: 0.15
+        Heat: 0.15
+        Shock: 0.15
+        Radiation: 0.3
     operatorWhitelist:
       components:
         - HumanoidProfile
@@ -1086,8 +1157,8 @@
         Structural: 200
     bluntStaminaDamageFactor: 1.5
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2.5
-    baseSprintSpeed: 4
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 3.7
   # Sunrise-Start
   - type: Loadout
     prototypes: [ MechArmorMediumSyndiLoadout ]
@@ -1109,7 +1180,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      375: Critical
+      300: Critical
   - type: AccessReader
     access: [["NuclearOperative"]]
   # Sunrise-End
@@ -1133,6 +1204,7 @@
     startingEquipment:
       - WeaponMechCombatMissileRack8
       - WeaponMechCombatShotgunAuto
+      - WeaponMechChainSword
 
 # Mauler
 - type: entity
@@ -1164,7 +1236,15 @@
     airtight: true
     maxEquipmentAmount: 5
   - type: Vehicle
-    transferDamage: false # Sunrise-Edit - этот мех не передаёт урон пилоту
+    transferDamageModifier:
+      coefficients:
+        Blunt: 0.1
+        Slash: 0.1
+        Piercing: 0.1
+        Cold: 0.1
+        Heat: 0.1
+        Shock: 0.1
+        Radiation: 0.2
     operatorWhitelist:
       components:
         - HumanoidProfile
@@ -1173,12 +1253,12 @@
     attackRate: 1
     damage:
       types:
-        Blunt: 75
+        Blunt: 50
         Structural: 400
     bluntStaminaDamageFactor: 1.5
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.5
-    baseSprintSpeed: 2
+    baseWalkSpeed: 1
+    baseSprintSpeed: 1.5
   # Sunrise-Start
   - type: Loadout
     prototypes: [ MechArmorHeavySyndiLoadout ]
@@ -1199,7 +1279,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      600: Critical
+      500: Critical
     showOverlays: false
     allowRevives: true
   - type: AccessReader
@@ -1222,8 +1302,4 @@
   components:
   - type: Mech
     startingEquipment:
-      - WeaponMechCombatMG
-      - WeaponMechCombatShotgun
-      - WeaponMechCombatMissileRack6
-
-
+      - WeaponMechCombatUltraRifle

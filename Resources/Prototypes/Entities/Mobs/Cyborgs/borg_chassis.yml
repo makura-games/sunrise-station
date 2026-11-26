@@ -46,7 +46,7 @@
 
 - type: entity
   id: BorgChassisMining
-  parent: BorgChassisSelectable
+  parent: [SunriseTemperatureLow, BorgChassisSelectable] # Sunrise-Edit
   name: salvage cyborg
   components:
   # Sunrise-Start
@@ -60,7 +60,7 @@
 
 - type: entity
   id: BorgChassisEngineer
-  parent: BorgChassisSelectable
+  parent: [SunriseTemperatureModerate , BorgChassisSelectable] # Sunrise-Edit
   name: engineer cyborg
   components:
   - type: BorgSwitchableType
@@ -275,7 +275,7 @@
       path: /Audio/Ambience/Objects/periodic_beep.ogg
 
 - type: entity
-  parent: BaseBorgChassisDerelict
+  parent: [SunriseTemperatureModerate , BaseBorgChassisDerelict] # Sunrise-Edit
   id: EngineeringBorgChassisDerelict
   name: derelict engineer cyborg
   description: A man-machine hybrid that assists the engineering department. This one seems to have chunks of strange crystals pockmarking its surface.
@@ -380,7 +380,7 @@
     - Biological
 
 - type: entity
-  parent: BaseBorgChassisDerelict
+  parent: [SunriseTemperatureLow, BaseBorgChassisDerelict] # Sunrise-Edit
   id: MiningBorgChassisDerelict
   name: derelict salvage cyborg
   description: A man-machine hybrid that assists the cargo department. This one has seen the wrong side of a gibtonite chunk.

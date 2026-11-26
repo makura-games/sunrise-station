@@ -54,24 +54,6 @@
       - Robotics
 
 - type: entity
-  id: PhazonArmorPlate
-  parent: BaseExosuitParts
-  name: phazon armor plates
-  description: Armor plates made of steel for Phazon exosuit.
-  components:
-    - type: Item
-      storedRotation: 0
-    - type: Sprite
-      sprite: Objects/Specific/Mech/phazon_construction.rsi
-      state: phazon_armor
-    - type: Tag
-      tags:
-      - PhazonArmor
-    - type: GuideHelp
-      guides:
-      - Robotics
-
-- type: entity
   id: RipleyUpgradeKit
   parent: BaseExosuitParts
   name: exosuit upgrade kit

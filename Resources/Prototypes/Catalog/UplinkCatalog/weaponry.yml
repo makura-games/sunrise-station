@@ -181,7 +181,6 @@
     blacklist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink
   # Sunrise-end
 
 - type: listing
@@ -216,7 +215,6 @@
     blacklist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Add
       - AssaultOpsUplink # Sunrise-Add
 
 - type: listing
@@ -237,7 +235,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Add
 
 - type: listing
   id: UplinkBulldog
@@ -257,7 +254,6 @@
     blacklist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Add
 
 - type: listing
   id: UplinkBulldogBundle
@@ -277,7 +273,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Add
 
 - type: listing
   id: UplinkEstocBundle
@@ -297,7 +292,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Add
 
 - type: listing
   id: UplinkGrenadeLauncher
@@ -314,7 +308,6 @@
     blacklist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Edit
       - AssaultOpsUplink # Sunrise-Edit
 
 # Sunrise edit start - листинг заменён вариантом для China Lake в каталоге Sunrise

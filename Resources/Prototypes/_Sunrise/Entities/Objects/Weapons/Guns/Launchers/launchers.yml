@@ -192,7 +192,6 @@
     slots:
       gun_chamber:
         name: Chamber
-        startingItem: GrenadeFragTimer
         priority: 1
         whitelist:
           tags:
@@ -255,7 +254,6 @@
     slots:
       gun_chamber:
         name: Chamber
-        startingItem: null
         priority: 1
         whitelist:
           tags:
