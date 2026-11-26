@@ -125,7 +125,7 @@ public sealed partial class AdminVerbSystem
 
         foreach (var role in mind.MindRoleContainer.ContainedEntities)
         {
-            if (MetaData(role).EntityPrototype?.ID == PirateMindRoleId.Id)
+            if (Prototype(role)?.ID == PirateMindRoleId.Id)
                 return;
         }
 
