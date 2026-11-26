@@ -1,12 +1,12 @@
 using Content.Server._Sunrise.Mech.Components;
 using Content.Server.Mech.Systems;
-using Content.Shared.ActionBlocker;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mech.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
+using Content.Shared.Vehicle;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
@@ -17,7 +17,7 @@ namespace Content.Server._Sunrise.Mech.Systems;
 /// </summary>
 public sealed partial class InstalledMechBatterySystem : EntitySystem
 {
-    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private VehicleSystem _vehicle = default!;
     [Dependency] private SharedBatterySystem _battery = default!;
     [Dependency] private MechSystem _mech = default!;
     [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
@@ -49,7 +49,7 @@ public sealed partial class InstalledMechBatterySystem : EntitySystem
 
     private void OnChargeChanged(Entity<InstalledMechBatteryComponent> ent, ref ChargeChangedEvent args)
     {
-        if (!_mechQuery.TryComp(ent.Comp.Mech, out var mech))
+        if (!ent.Comp.Mech.IsValid() || !_mechQuery.TryComp(ent.Comp.Mech, out var mech))
             return;
 
         if (mech.BatterySlot.ContainedEntity != ent.Owner)
@@ -71,7 +71,7 @@ public sealed partial class InstalledMechBatterySystem : EntitySystem
 
             installed.NextUpdate = curTime + UpdateInterval;
 
-            if (!_mechQuery.TryComp(installed.Mech, out var mech) || mech.BatterySlot.ContainedEntity != uid)
+            if (!installed.Mech.IsValid() || !_mechQuery.TryComp(installed.Mech, out var mech) || mech.BatterySlot.ContainedEntity != uid)
             {
                 RemCompDeferred<InstalledMechBatteryComponent>(uid);
                 continue;
@@ -113,7 +113,7 @@ public sealed partial class InstalledMechBatterySystem : EntitySystem
         mech.Comp.MaxEnergy = maxEnergy;
 
         Dirty(mech);
-        _actionBlocker.UpdateCanMove(mech);
+        _vehicle.RefreshCanRun(mech);
         _mech.UpdateUserInterface(mech, mech.Comp);
     }
 }

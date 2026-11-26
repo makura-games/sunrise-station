@@ -69,7 +69,7 @@ public abstract partial class SharedGunSystem
     private bool TryGetSunriseMechAmmoSource(MechAmmoProviderComponent component, out Entity<MechComponent> mech)
     {
         mech = default;
-        if (component.FireCost <= 0f || component.Mech is not { } mechUid)
+        if (component.FireCost <= 0f || component.Mech is not { } mechUid || !mechUid.IsValid())
             return false;
 
         if (!TryComp<MechComponent>(mechUid, out var mechComponent))

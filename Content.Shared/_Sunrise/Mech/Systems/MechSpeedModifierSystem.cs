@@ -19,7 +19,7 @@ public sealed class MechSpeedModifierSystem : EntitySystem
     private void OnRefreshMovementSpeed(Entity<MechComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
         var battery = ent.Comp.BatterySlot.ContainedEntity;
-        if (battery == null)
+        if (battery == null || !battery.Value.IsValid())
             return;
 
         if (!TryComp<MechSpeedModifierComponent>(battery.Value, out var modifier))
