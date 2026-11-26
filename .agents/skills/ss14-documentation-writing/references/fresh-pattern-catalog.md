@@ -9,7 +9,7 @@
 | Shared gameplay docs | `summary` on actions + short comments on critical checks | `MimePowersSystem.OnInvisibleWall(...)` | 2025-09-05 | Use |
 | Client gameplay docs | `summary` + explanation of complex transformations, not all lines in a row | `ClickableSystem.CheckClick(...)` | 2025-05-18 | Use |
 | Server gameplay docs | `summary` + `remarks` for an invariant important for calls to other methods | `AccessOverriderSystem.PrivilegedIdIsAuthorized(...)` | 2025-12-16 | Use |
-| Large subsystem docs | Dividing a large system into partial parts with a separate area of ​​responsibility | `SharedScp096System` family | 2026-01-24 | Use |
+| Large subsystem docs | Dividing a large system into partial parts with a separate area of responsibility | `SharedScp096System` family | 2026-01-24 | Use |
 | Cross-system docs | Check for unusual API calls in system consumers | `Scp096PhotoSystem`, `ArtifactScp096MadnessSystem` + `TryAddTarget(..., true, true)` | 2026-01-08 / 2025-11-29 | Use |
 | YAML docs | Concise group comments (1 line) between prototype blocks | `salvage reward` catalog groups (`# Rank 2`, `# Rank 3`) | 2025-09-18 | Use |
 | FTL docs | Correct group separator in the format `## Group Name` | `battery menu` localization section | 2025-04-28 | Use |
