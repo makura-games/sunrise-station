@@ -47,6 +47,7 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Server._Sunrise.Auth;
+using Content.Server._Sunrise.ExternalServices.VictoriaLogs;
 
 namespace Content.Server.Entry
 {
@@ -97,6 +98,7 @@ namespace Content.Server.Entry
         [Dependency] private TTSManager _ttsManager = default!; // Sunrise-Edit
         [Dependency] private NetTexturesManager _netTexturesManager = default!; // Sunrise-Edit
         [Dependency] private DiscordWebhook _discord = default!; // Sunrise-Edit
+        [Dependency] private VictoriaLogs _victoria = default!; // Sunrise-Edit
         [Dependency] private MapperSyncManager _mapperSyncManager = default!; // Sunrise-Edit
         [Dependency] private AccountCreationManager _accountCreation = default!; // Sunrise-Edit
         private IIPBlockingSystem? _ipBlockingSystem;
@@ -230,11 +232,11 @@ namespace Content.Server.Entry
             switch (level)
             {
                 case ModUpdateLevel.PostEngine:
-                {
-                    _euiManager.SendUpdates();
-                    _voteManager.Update();
-                    break;
-                }
+                    {
+                        _euiManager.SendUpdates();
+                        _voteManager.Update();
+                        break;
+                    }
 
                 case ModUpdateLevel.FramePostEngine:
                     _updateManager.Update();
@@ -270,6 +272,14 @@ namespace Content.Server.Entry
 
             // Sunrise added start
             _discord.Dispose();
+
+            // Здесь я должен написать важный комментарий о том, что после Dispose у VictoriaLogs происходит не совсем правильные вещи.
+            // Если во время сохранения логов сервер выключается и код доходит сюда, то все сохраняемые в этот момент логи будут потеряны.
+            // Это, кстати, стандартная логика и обычного AdminLogManager при работе из базы данных.
+            // Но стоит учитывать, что такое поведение есть.
+            // Я сохранил его, потому что код так будет куда проще, меньше изменений кода оффов.
+            // А сами логи(пока что только админ) под выключение сервера - не очень важны и их можно отбросить.
+            _victoria.Dispose();
             // Sunrise added end
         }
 
