@@ -1,0 +1,54 @@
+- type: entity
+  parent: SunriseDiseaseStrainVial
+  id: SunriseDiseaseBlankSample
+  name: strain blank
+  description: A sealed vial of uncharacterized culture medium.
+  components:
+  - type: Sprite
+    state: blank
+  - type: StaticPrice
+    price: 400
+
+# Заготовки фиксированного уровня: удобно спавнить для отладки, как ксеноартефакты нужной сложности.
+- type: entity
+  parent: SunriseDiseaseBlankSample
+  id: SunriseDiseaseBlankSampleWeak
+  suffix: Weak
+
+- type: entity
+  parent: SunriseDiseaseBlankSample
+  id: SunriseDiseaseBlankSampleModerate
+  suffix: Moderate
+
+- type: entity
+  parent: SunriseDiseaseBlankSample
+  id: SunriseDiseaseBlankSampleStrong
+  suffix: Strong
+
+- type: entity
+  parent: SunrisePetriDishBox
+  id: SunriseDiseaseBlankSampleBox
+  name: strain blank box
+  description: A wide cardboard box with a vial pictogram on the label.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: SunriseDiseaseBlankSample
+        amount: 5
+  - type: Sprite
+    layers:
+    - state: boxwide
+    - state: vials
+
+- type: entity
+  parent: CrateMedicalSecure
+  id: SunriseCrateDiseaseSynthesis
+  name: strain synthesis crate
+  description: Culture medium and sealed vials for a virology laboratory.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: SunriseDiseaseBlankSampleBox
