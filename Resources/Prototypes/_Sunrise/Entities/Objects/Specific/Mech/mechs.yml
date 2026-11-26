@@ -240,7 +240,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - SunriseMechReactorWorkhorse
+      - SunriseMechReactorStandard
   - type: AccessReader
     access: [["Security"]]
   - type: RadarBlip
@@ -315,7 +315,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageMedium
+      - SunriseMechReactorStandard
   - type: AccessReader
     access: [["Mining"]]
   - type: Storage
@@ -361,7 +361,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - SunriseMechReactorWorkhorse
+      - SunriseMechReactorStandard
   - type: Tag
     tags:
     - DoorBumpOpener # No paint unique ripley
@@ -521,7 +521,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - SunriseMechReactorWorkhorse
+      - SunriseMechReactorStandard
 
 - type: entity
   id: MechPaddyFilled
@@ -629,7 +629,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - SunriseMechReactorWorkhorse
+      - SunriseMechReactorStandard
 
 # region NT ERT Gygax
 # NT Gygax
@@ -784,7 +784,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - SunriseMechReactorWorkhorse
+      - SunriseMechReactorStandard
 
 # region Durand base
 
