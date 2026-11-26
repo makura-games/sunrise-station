@@ -11,7 +11,6 @@
   categories:
     - UplinkDisruption
 
-
 # Disruption
 
 - type: listing
@@ -27,7 +26,6 @@
   categories:
   - UplinkDisruption
 
-
 - type: listing
   id: UplinkEmag
   name: uplink-emag-name
@@ -40,7 +38,6 @@
     Telecrystal: 5
   categories:
   - UplinkDisruption
-
 
 - type: listing
   id: UplinkRadioJammer
@@ -55,7 +52,6 @@
   categories:
   - UplinkDisruption
 
-
 - type: listing
   id: UplinkSyndicateWeaponModule
   name: uplink-syndicate-weapon-module-name
@@ -68,7 +64,6 @@
     Telecrystal: 5
   categories:
   - UplinkDisruption
-
 
 - type: listing
   id: UplinkDisposableTurret
@@ -88,7 +83,6 @@
       tags:
       - NukeOpsUplink
 
-
 - type: listing
   id: UplinkSyndicateMartyrModule
   name: uplink-syndicate-martyr-module-name
@@ -103,7 +97,6 @@
   categories:
     - UplinkDisruption
 
-
 - type: listing
   id: UplinkSoapSyndie
   name: uplink-soap-name
@@ -113,7 +106,6 @@
     Telecrystal: 1
   categories:
   - UplinkDisruption
-
 
 - type: listing
   id: UplinkSlipocalypseClusterSoap
@@ -125,7 +117,6 @@
     Telecrystal: 1
   categories:
   - UplinkDisruption
-
 
 - type: listing
   id: UplinkToolbox
@@ -140,7 +131,6 @@
   categories:
   - UplinkDisruption
 
-
 - type: listing
   id: UplinkSyndicateJawsOfLife
   name: uplink-syndicate-jaws-of-life-name
@@ -153,7 +143,6 @@
     Telecrystal: 2
   categories:
   - UplinkDisruption
-
 
 # Note: Removed for the time being until surgery/newmed is added. Considered bloat until then.
 # - type: listing
@@ -188,7 +177,6 @@
        tags:
        - NukeOpsUplink
 
-
 - type: listing
   id: UplinkAntimovCircuitBoard
   name: uplink-antimov-law-name
@@ -206,7 +194,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-
 
 - type: listing
   id: UplinkSurplusBundle
@@ -230,7 +217,6 @@
       components:
       - SurplusBundle
 
-
 - type: listing
   id: UplinkStarterKit
   name: uplink-starter-kit-name
@@ -250,7 +236,6 @@
       blacklist:
         components:
         - SurplusBundle
-
 
 - type: listing
   id: UplinkSingarityBeacon
@@ -273,7 +258,6 @@
     blacklist:
       components:
       - SurplusBundle
-
 
 - type: listing
   id: UplinkCameraBug
