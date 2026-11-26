@@ -13,5 +13,6 @@
     hasLampOnSpawn: LightTube
   - type: Sprite
     sprite: _Sunrise/Structures/Wallmounts/abductor_askal_lamp.rsi
+    offset: 0, 0
 
 
