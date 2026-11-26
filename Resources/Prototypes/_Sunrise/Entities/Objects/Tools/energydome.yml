@@ -7,8 +7,6 @@
   - type: EnergyDomeGenerator
     canInteractUse: false
     canDeviceNetworkUse: true
-  - type: UseDelay
-    delay: 10.0
   - type: DeviceLinkSink
     ports:
     - On
