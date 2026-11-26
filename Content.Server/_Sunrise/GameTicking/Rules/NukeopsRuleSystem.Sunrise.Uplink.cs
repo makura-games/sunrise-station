@@ -18,7 +18,7 @@ public sealed partial class NukeopsRuleSystem
     [Dependency] private UplinkSystem _uplinkSystem = default!;
 
     private static readonly ProtoId<AntagPrototype> CommanderAntagProto = "NukeopsCommander";
-    private const int FighterUplinkTc = 30;
+    private const int FighterUplinkTc = 40;
 
     private bool TryDistributeExtraTcSunrise(Entity<NukeopsRuleComponent> nukieRule)
     {
@@ -29,11 +29,7 @@ public sealed partial class NukeopsRuleSystem
         if (nukieRule.Comp.RoundstartOperatives == 0)
             return true;
 
-        var fightersCount = Math.Max(nukieRule.Comp.RoundstartOperatives - 1, 0);
-        if (fightersCount == 0)
-            return true;
-
-        var bonusTc = GetCommanderWarBonusTc(fightersCount);
+        var bonusTc = GetCommanderWarBonusTc(nukieRule.Comp.RoundstartOperatives);
         _store.TryAddCurrency(new() { { TelecrystalCurrencyPrototype, bonusTc } }, commanderUplink, store);
 
         var msg = Loc.GetString("store-currency-war-boost-given", ("target", commanderUplink));

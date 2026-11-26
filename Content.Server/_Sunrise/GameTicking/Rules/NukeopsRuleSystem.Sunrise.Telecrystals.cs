@@ -5,8 +5,9 @@ namespace Content.Server.GameTicking.Rules;
 
 public sealed partial class NukeopsRuleSystem
 {
-    private const int CommanderBaseTc = 50;
-    private const int CommanderTcPerFighter = 30;
+    private const int CommanderBaseTc = 40;
+    private const int CommanderTcPerFighter = 5;
+    private const int CommanderWarTcPerOperative = 40;
 
     private static FixedPoint2 GetCommanderTcPerFighter()
     {
@@ -18,8 +19,8 @@ public sealed partial class NukeopsRuleSystem
         return CommanderBaseTc + CommanderTcPerFighter * fightersCount;
     }
 
-    private static FixedPoint2 GetCommanderWarBonusTc(int fightersCount)
+    private static FixedPoint2 GetCommanderWarBonusTc(int operativesCount)
     {
-        return CommanderTcPerFighter * fightersCount;
+        return CommanderWarTcPerOperative * operativesCount;
     }
 }
