@@ -1,5 +1,6 @@
-﻿using Content.Shared.Throwing;
+using Content.Shared.Throwing;
 using Robust.Client.Animations;
+using System.Numerics;
 using Robust.Client.GameObjects;
 using Robust.Shared.Animations;
 
@@ -10,8 +11,12 @@ namespace Content.Client.Throwing;
 /// </summary>
 public sealed partial class ThrownItemVisualizerSystem : EntitySystem
 {
+    // Sunrise edit start - анимации обрабатывает Sunrise partial
+    /*
     [Dependency] private AnimationPlayerSystem _anim = default!;
     [Dependency] private SpriteSystem _sprite = default!;
+    */
+    // Sunrise edit end
 
     private const string AnimationKey = "thrown-item";
 
@@ -25,6 +30,8 @@ public sealed partial class ThrownItemVisualizerSystem : EntitySystem
 
     private void OnAutoHandleState(EntityUid uid, ThrownItemComponent component, ref AfterAutoHandleStateEvent args)
     {
+        // Sunrise edit start - анимация без захвата масштаба других эффектов
+        /*
         if (!TryComp<SpriteComponent>(uid, out var sprite) || !component.Animate)
             return;
 
@@ -39,10 +46,15 @@ public sealed partial class ThrownItemVisualizerSystem : EntitySystem
 
         component.OriginalScale = sprite.Scale;
         _anim.Play((uid, animationPlayer), anim, AnimationKey);
+        */
+        ApplyThrowAnimation((uid, component));
+        // Sunrise edit end
     }
 
     private void OnShutdown(EntityUid uid, ThrownItemComponent component, ComponentShutdown args)
     {
+        // Sunrise edit start - анимация без захвата масштаба других эффектов
+        /*
         if (!_anim.HasRunningAnimation(uid, AnimationKey))
             return;
 
@@ -50,6 +62,9 @@ public sealed partial class ThrownItemVisualizerSystem : EntitySystem
             _sprite.SetScale((uid, sprite), component.OriginalScale.Value);
 
         _anim.Stop(uid, AnimationKey);
+        */
+        _spriteAnimation.Stop(uid, AnimationKey);
+        // Sunrise edit end
     }
 
     private static Animation? GetAnimation(Entity<ThrownItemComponent, SpriteComponent> ent)
@@ -60,7 +75,7 @@ public sealed partial class ThrownItemVisualizerSystem : EntitySystem
         if (length <= TimeSpan.Zero)
             return null;
 
-        var scale = ent.Comp2.Scale;
+        var scale = Vector2.One; // Sunrise-Edit - множитель относительно базы
         var lenFloat = (float)length.TotalSeconds;
 
         // TODO use like actual easings here

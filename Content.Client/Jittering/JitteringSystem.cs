@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._Sunrise.Animations.SpriteAnimation.Systems;
 using Content.Shared.Jittering;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
@@ -9,8 +10,12 @@ namespace Content.Client.Jittering
     public sealed partial class JitteringSystem : SharedJitteringSystem
     {
         [Dependency] private IRobustRandom _random = default!;
-        [Dependency] private AnimationPlayerSystem _animationPlayer = default!;
+        [Dependency] private SpriteAnimationSystem _spriteAnimation = default!; // Sunrise-Edit
+        // Sunrise edit start - цикл анимации обслуживает SpriteAnimationSystem
+        /*
         [Dependency] private SpriteSystem _sprite = default!;
+        */
+        // Sunrise edit end
 
         private readonly float[] _sign = { -1, 1 };
         private readonly string _jitterAnimationKey = "jittering";
@@ -19,9 +24,14 @@ namespace Content.Client.Jittering
         {
             base.Initialize();
 
+            // Sunrise edit start - цикл анимации обслуживает SpriteAnimationSystem
+            /*
+            SubscribeLocalEvent<JitteringComponent, AnimationCompletedEvent>(OnAnimationCompleted);
+            */
+            // Sunrise edit end
+
             SubscribeLocalEvent<JitteringComponent, ComponentStartup>(OnStartup);
             SubscribeLocalEvent<JitteringComponent, ComponentShutdown>(OnShutdown);
-            SubscribeLocalEvent<JitteringComponent, AnimationCompletedEvent>(OnAnimationCompleted);
         }
 
         private void OnStartup(EntityUid uid, JitteringComponent jittering, ComponentStartup args)
@@ -29,21 +39,21 @@ namespace Content.Client.Jittering
             if (!TryComp(uid, out SpriteComponent? sprite))
                 return;
 
-            var animationPlayer = EnsureComp<AnimationPlayerComponent>(uid);
-
-            jittering.StartOffset = sprite.Offset;
-            _animationPlayer.Play((uid, animationPlayer), GetAnimation(jittering, sprite), _jitterAnimationKey);
+            // Sunrise edit start - перенос анимации в новую систему
+            jittering.StartOffset = _spriteAnimation.GetBaseOffset((uid, sprite));
+            _spriteAnimation.PlayLoop(uid, _jitterAnimationKey, PlayAnimation);
+            // Sunrise edit end
         }
 
         private void OnShutdown(EntityUid uid, JitteringComponent jittering, ComponentShutdown args)
         {
-            if (TryComp(uid, out AnimationPlayerComponent? animationPlayer))
-                _animationPlayer.Stop(uid, animationPlayer, _jitterAnimationKey);
-
-            if (TryComp(uid, out SpriteComponent? sprite))
-                _sprite.SetOffset((uid, sprite), jittering.StartOffset);
+            // Sunrise edit start - перенос анимации в новую систему
+            _spriteAnimation.Stop(uid, _jitterAnimationKey);
+            // Sunrise edit end
         }
 
+        // Sunrise edit start - цикл анимации обслуживает SpriteAnimationSystem
+        /*
         private void OnAnimationCompleted(EntityUid uid, JitteringComponent jittering, AnimationCompletedEvent args)
         {
             if (args.Key != _jitterAnimationKey)
@@ -56,6 +66,8 @@ namespace Content.Client.Jittering
                 && TryComp(uid, out SpriteComponent? sprite))
                 _animationPlayer.Play((uid, animationPlayer), GetAnimation(jittering, sprite), _jitterAnimationKey);
         }
+        */
+        // Sunrise edit end
 
         private Animation GetAnimation(JitteringComponent jittering, SpriteComponent sprite)
         {

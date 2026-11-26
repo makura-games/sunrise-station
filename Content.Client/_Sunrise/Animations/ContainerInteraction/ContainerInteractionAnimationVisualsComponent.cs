@@ -1,4 +1,4 @@
-﻿namespace Content.Client._Sunrise.Animations.ContainerInteraction;
+namespace Content.Client._Sunrise.Animations.ContainerInteraction;
 
 /// <summary>
 /// Компонент, создающий анимации взаимодействия с контейнерами.
@@ -8,7 +8,7 @@
 public sealed partial class ContainerInteractionAnimationVisualsComponent : Component
 {
     /// <summary>
-    /// Базовый скейл применяемый к спрайту сущности.
+    /// Множитель масштаба поверх базы спрайта
     /// </summary>
     [DataField]
     public float Scale = 1.1f;

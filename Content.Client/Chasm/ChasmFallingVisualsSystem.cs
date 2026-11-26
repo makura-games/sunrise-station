@@ -10,10 +10,14 @@ namespace Content.Client.Chasm;
 /// </summary>
 public sealed partial class ChasmFallingVisualsSystem : EntitySystem
 {
+    // Sunrise edit start - падение использует общий множитель спрайта
+    /*
     [Dependency] private AnimationPlayerSystem _anim = default!;
     [Dependency] private SpriteSystem _sprite = default!;
 
     [Dependency] private EntityQuery<AnimationPlayerComponent> _animationPlayerQuery;
+    */
+    // Sunrise edit end
     [Dependency] private EntityQuery<SpriteComponent> _spriteQuery;
 
     private const string ChasmFallAnimationKey = "chasm_fall";
@@ -34,6 +38,8 @@ public sealed partial class ChasmFallingVisualsSystem : EntitySystem
             return;
         }
 
+        // Sunrise edit start - отдельный множитель вместо изменения базы
+        /*
         entity.Comp.OriginalScale = sprite.Scale;
 
         if (!_animationPlayerQuery.TryComp(entity, out var player) ||
@@ -43,6 +49,9 @@ public sealed partial class ChasmFallingVisualsSystem : EntitySystem
         }
 
         _anim.Play((entity, player), GetFallingAnimation(entity.Comp), ChasmFallAnimationKey);
+        */
+        StartFallingAnimation(entity, sprite);
+        // Sunrise edit end
     }
 
     private void OnComponentRemove(Entity<ChasmFallingComponent> entity, ref ComponentRemove args)
@@ -52,6 +61,8 @@ public sealed partial class ChasmFallingVisualsSystem : EntitySystem
             return;
         }
 
+        // Sunrise edit start - снимаем только вклад падения, актуальная база сохраняется
+        /*
         _sprite.SetScale((entity, sprite), entity.Comp.OriginalScale);
 
         if (!_animationPlayerQuery.TryComp(entity, out var player) ||
@@ -61,8 +72,13 @@ public sealed partial class ChasmFallingVisualsSystem : EntitySystem
         }
 
         _anim.Stop((entity, player), ChasmFallAnimationKey);
+        */
+        StopFallingAnimation((entity.Owner, sprite));
+        // Sunrise edit end
     }
 
+    // Sunrise edit start - относительные кадры строятся в Sunrise partial
+    /*
     private static Animation GetFallingAnimation(ChasmFallingComponent component)
     {
         return new Animation
@@ -84,4 +100,6 @@ public sealed partial class ChasmFallingVisualsSystem : EntitySystem
             },
         };
     }
+    */
+    // Sunrise edit end
 }

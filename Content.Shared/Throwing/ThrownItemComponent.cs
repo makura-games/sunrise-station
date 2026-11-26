@@ -45,10 +45,14 @@ namespace Content.Shared.Throwing
         [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
         public bool PlayLandSound;
 
+        // Sunrise edit start - масштаб броска хранится отдельным вкладом на клиенте
+        /*
         /// <summary>
         ///     Used to restore state after the throwing scale animation is finished.
         /// </summary>
         [DataField]
         public Vector2? OriginalScale = null;
+        */
+        // Sunrise edit end
     }
 }

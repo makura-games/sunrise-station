@@ -1,5 +1,6 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared.Medical.Cryogenics;
+using Content.Client._Sunrise.Animations.SpriteAnimation.Systems;
 using Robust.Client.GameObjects;
 
 namespace Content.Client.Medical.Cryogenics;
@@ -7,6 +8,7 @@ namespace Content.Client.Medical.Cryogenics;
 public sealed partial class CryoPodSystem : SharedCryoPodSystem
 {
     [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private SpriteAnimationSystem _spriteAnimation = default!; // Sunrise-Edit
 
     public override void Initialize()
     {
@@ -24,8 +26,10 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
             return;
         }
 
-        component.PreviousOffset = spriteComponent.Offset;
-        _sprite.SetOffset((uid, spriteComponent), new Vector2(0, 1));
+        // Sunrise edit start - тряска не должна попадать в сохранённое смещение
+        component.PreviousOffset = _spriteAnimation.GetBaseOffset((uid, spriteComponent));
+        _spriteAnimation.SetBaseOffset((uid, spriteComponent), new Vector2(0, 1));
+        // Sunrise edit end
     }
 
     private void OnCryoPodRemoval(EntityUid uid, InsideCryoPodComponent component, ComponentRemove args)
@@ -35,7 +39,7 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
             return;
         }
 
-        _sprite.SetOffset((uid, spriteComponent), component.PreviousOffset);
+        _spriteAnimation.SetBaseOffset((uid, spriteComponent), component.PreviousOffset); // Sunrise-Edit
     }
 
     private void OnAppearanceChange(EntityUid uid, CryoPodComponent component, ref AppearanceChangeEvent args)

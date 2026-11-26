@@ -1,5 +1,6 @@
-﻿using Content.Shared.Nutrition.AnimalHusbandry;
+using Content.Shared.Nutrition.AnimalHusbandry;
 using Robust.Client.GameObjects;
+using Content.Client._Sunrise.Animations.SpriteAnimation.Systems;
 
 namespace Content.Client.Nutrition.EntitySystems;
 
@@ -9,6 +10,7 @@ namespace Content.Client.Nutrition.EntitySystems;
 public sealed partial class InfantSystem : EntitySystem
 {
     [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private SpriteAnimationSystem _spriteAnimation = default!; // Sunrise-Edit
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -22,8 +24,10 @@ public sealed partial class InfantSystem : EntitySystem
         if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;
 
-        component.DefaultScale = sprite.Scale;
-        _sprite.SetScale((uid, sprite), component.VisualScale);
+        // Sunrise edit start - сохраняем базу без временных множителей
+        component.DefaultScale = _spriteAnimation.GetBaseScale((uid, sprite));
+        _spriteAnimation.SetBaseScale((uid, sprite), component.VisualScale);
+        // Sunrise edit end
     }
 
     private void OnShutdown(EntityUid uid, InfantComponent component, ComponentShutdown args)
@@ -31,6 +35,6 @@ public sealed partial class InfantSystem : EntitySystem
         if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;
 
-        _sprite.SetScale((uid, sprite), component.DefaultScale);
+        _spriteAnimation.SetBaseScale((uid, sprite), component.DefaultScale); // Sunrise-Edit
     }
 }
