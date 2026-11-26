@@ -65,10 +65,7 @@ public sealed partial class DiseaseSystem : EntitySystem
     /// <param name="source">Заражённый носитель или предмет, если есть.</param>
     /// <param name="chance">Шанс заражения до учёта защиты.</param>
     /// <param name="contact">Чем произошёл контакт: от этого зависит, какая экипировка защищает.</param>
-    /// <param name="ignoreRoutes">
-    /// Заражать, даже если штамм не умеет передаваться этим путём. Для аварий, когда наружу
-    /// вырывается лабораторная культура; защита по <paramref name="route"/> всё равно действует.
-    /// </param>
+    /// <param name="ignoreRoutes"> Заражать, даже если штамм не умеет передаваться этим путём.</param>
     /// <returns>True, если цель заразилась.</returns>
     public bool TryInfect(
         EntityUid target,
@@ -93,8 +90,7 @@ public sealed partial class DiseaseSystem : EntitySystem
     /// Проверяет, может ли сущность заразиться болезнью по указанному пути, без учёта защиты и шанса.
     /// </summary>
     /// <remarks>
-    /// Первой стоит проверка <see cref="DiseaseHostComponent"/>: кто болеть не умеет,
-    /// тот отсекается до всей прочей работы. Умышленное заражение через <see cref="Infect"/>
+    /// Умышленное заражение через <see cref="Infect"/>
     /// эту проверку не проходит и работает на любом мобе.
     /// </remarks>
     /// <param name="ignoreRoutes">Не требовать, чтобы штамм поддерживал путь <paramref name="route"/>.</param>
@@ -418,7 +414,6 @@ public sealed partial class DiseaseSystem : EntitySystem
         var ev = new DiseaseCuredEvent(instance.Disease, reason);
         RaiseLocalEvent(ent, ref ev);
 
-        // Компонент носителя существует, только пока есть хотя бы одна болезнь.
         if (ent.Comp.Diseases.Count == 0)
             RemComp(ent, ent.Comp);
     }

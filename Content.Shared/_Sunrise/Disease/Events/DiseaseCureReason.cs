@@ -21,7 +21,7 @@ public enum DiseaseCureReason : byte
     Admin,
 
     /// <summary>
-    /// Носителя омолодили.
+    /// Носителя возродили командой.
     /// </summary>
     Rejuvenate,
 }

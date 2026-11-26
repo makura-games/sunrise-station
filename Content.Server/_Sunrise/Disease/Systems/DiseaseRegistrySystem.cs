@@ -9,38 +9,19 @@ using Robust.Shared.Random;
 namespace Content.Server._Sunrise.Disease.Systems;
 
 /// <summary>
-/// Заводит болезни раунда как сущности и выдаёт их по прототипу-шаблону.
+/// Спавнит болезни раунда как сущности и выдаёт их по прототипу-шаблону.
 /// </summary>
 /// <remarks>
-/// Прототип описывает рамку — класс возбудителя, пути передачи, форму стадий и возможные симптомы, —
-/// а конкретный набор симптомов катается при создании болезни. Поэтому выученная картина
-/// «эта болезнь — это кашель и жар» не работает: в следующем раунде тот же архетип
-/// проявится чиханием и тошнотой. Выведенные под микроскопом штаммы создаются той же системой,
-/// только их стадии задаёт вирусолог, а не бросок.
+/// Прототип описывает рамку - класс возбудителя, пути передачи, форму стадий и возможные симптомы, —
+/// а конкретный набор симптомов рандомизируется при создании болезни. Поэтому выучить симптомы болезни нельзя
+/// Выведенные под микроскопом штаммы создаются той же системой,
+/// только их стадии задаются направленно.
 /// </remarks>
 public sealed partial class DiseaseRegistrySystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
-
-    /// <summary>Болезни раунда, уже созданные по своим прототипам.</summary>
-    private readonly Dictionary<ProtoId<DiseasePrototype>, EntityUid> _natural = new();
-
-    /// <summary>Все живые болезни раунда, включая выведенные.</summary>
-    private readonly List<EntityUid> _diseases = new();
-
-    /// <summary>Уже выданные коды штаммов: два штамма не должны называться одинаково.</summary>
-    private readonly HashSet<string> _codes = new();
-
-    /// <summary>
-    /// Штаммы раунда по их кодам.
-    /// </summary>
-    /// <remarks>
-    /// По коду болезнь адресуют админские команды: имени прототипа не хватает, когда в раунде
-    /// живут несколько штаммов одной болезни, и у выведенных штаммов прототипа нет вовсе.
-    /// </remarks>
-    private readonly Dictionary<string, EntityUid> _byCode = new();
 
     /// <summary>Буквы кода штамма: без похожих на цифры, чтобы код читался с бумаги.</summary>
     private const string CodeLetters = "ABCDEFGHJKLMNPQRSTUVWXYZ";
@@ -50,16 +31,12 @@ public sealed partial class DiseaseRegistrySystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnRoundRestart(RoundRestartCleanupEvent args)
     {
-        foreach (var disease in _diseases)
+        var diseases = EntityQueryEnumerator<DiseaseDefinitionComponent>();
+        while (diseases.MoveNext(out var disease, out _))
         {
             if (!TerminatingOrDeleted(disease))
                 QueueDel(disease);
         }
-
-        _natural.Clear();
-        _diseases.Clear();
-        _codes.Clear();
-        _byCode.Clear();
     }
 
     /// <summary>
@@ -68,19 +45,24 @@ public sealed partial class DiseaseRegistrySystem : EntitySystem
     /// <returns>Null, если прототипа нет.</returns>
     public EntityUid? GetNatural(ProtoId<DiseasePrototype> template)
     {
-        if (_natural.TryGetValue(template, out var existing) && !TerminatingOrDeleted(existing))
-            return existing;
+        var diseases = EntityQueryEnumerator<DiseaseDefinitionComponent>();
+        while (diseases.MoveNext(out var existing, out var definition))
+        {
+            // Удаляемая болезнь не годится: на рестарте раунда все они стоят в очереди на удаление.
+            if (definition.Natural && definition.Template == template && !TerminatingOrDeleted(existing))
+                return existing;
+        }
 
         if (!_proto.TryIndex(template, out var proto))
             return null;
 
         var disease = Create(proto);
-        _natural[template] = disease;
+        Comp<DiseaseDefinitionComponent>(disease).Natural = true;
         return disease;
     }
 
     /// <summary>
-    /// Заводит новый штамм по прототипу.
+    /// Создает новый штамм по прототипу.
     /// </summary>
     /// <remarks>
     /// В отличие от <see cref="GetNatural"/> каждый вызов создаёт отдельную болезнь со своим кодом
@@ -143,17 +125,25 @@ public sealed partial class DiseaseRegistrySystem : EntitySystem
     }
 
     /// <summary>
-    /// Находит штамм раунда по коду с этикетки. Регистр не важен.
+    /// Находит штамм раунда по коду.
     /// </summary>
     /// <returns>False, если такого кода в раунде не было или штамм уже удалён.</returns>
     public bool TryGetByCode(string code, out EntityUid disease)
     {
         disease = default;
-        if (!_byCode.TryGetValue(code.ToUpperInvariant(), out var existing) || TerminatingOrDeleted(existing))
-            return false;
 
-        disease = existing;
-        return true;
+        var diseases = EntityQueryEnumerator<DiseaseDefinitionComponent>();
+        while (diseases.MoveNext(out var existing, out var definition))
+        {
+            if (!string.Equals(definition.StrainCode, code, StringComparison.OrdinalIgnoreCase)
+                || TerminatingOrDeleted(existing))
+                continue;
+
+            disease = existing;
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>Жив ли ещё этот штамм: сущность не удалена и это действительно болезнь.</summary>
@@ -162,10 +152,12 @@ public sealed partial class DiseaseRegistrySystem : EntitySystem
         return !TerminatingOrDeleted(disease) && _definitionQuery.HasComp(disease);
     }
 
-    /// <summary>Все болезни, заведённые в этом раунде.</summary>
-    public IReadOnlyList<EntityUid> GetDiseases()
+    /// <summary>
+    /// Все живые болезни раунда, включая выведенные.
+    /// </summary>
+    public EntityQueryEnumerator<DiseaseDefinitionComponent> GetDiseases()
     {
-        return _diseases;
+        return EntityQueryEnumerator<DiseaseDefinitionComponent>();
     }
 
     /// <summary>Пул симптомов стадии у этого штамма.</summary>
@@ -190,13 +182,11 @@ public sealed partial class DiseaseRegistrySystem : EntitySystem
     /// </summary>
     private EntityUid Create(DiseasePrototype proto, IReadOnlyList<DiseaseStagePool>? genome = null)
     {
-        // Болезнь живёт в нигде: она не предмет на станции, а запись о том, чем болеют люди.
         var disease = Spawn(null, MapCoordinates.Nullspace);
         var comp = EnsureComp<DiseaseDefinitionComponent>(disease);
 
         comp.Template = proto.ID;
         comp.StrainCode = CreateCode();
-        _byCode[comp.StrainCode] = disease;
         comp.Name = proto.Name;
         comp.Description = proto.Description;
         comp.Syndrome = proto.Syndrome;
@@ -222,7 +212,6 @@ public sealed partial class DiseaseRegistrySystem : EntitySystem
         if (genome == null)
             EnsureDropletSymptom(comp, proto);
 
-        _diseases.Add(disease);
         _metaData.SetEntityName(disease, $"disease {proto.ID}");
         return disease;
     }
@@ -237,22 +226,22 @@ public sealed partial class DiseaseRegistrySystem : EntitySystem
         {
             code = $"{CodeLetters[_random.Next(CodeLetters.Length)]}{CodeLetters[_random.Next(CodeLetters.Length)]}-{_random.Next(100, 1000)}";
         }
-        while (!_codes.Add(code));
+        while (TryGetByCode(code, out _));
 
         return code;
     }
 
     /// <summary>
-    /// Катает штамм: по каждой стадии оставляет из пула столько симптомов, сколько велит архетип.
+    /// Рандомизирует штамм: по каждой стадии оставляет из пула столько симптомов, сколько велит архетип.
     /// </summary>
     private List<DiseaseStage> RollStages(DiseasePrototype proto)
     {
         var stages = new List<DiseaseStage>(proto.Stages.Count);
         foreach (var stage in proto.Stages)
         {
-            // Полезные симптомы выводятся только под микроскопом: в природной болезни их не бывает,
-            // даже если прототип по ошибке их перечислил.
-            var source = stage.SymptomPool.FindAll(entry => !IsBeneficial(entry.Symptom));
+            // Пул прототипа общий для всех штаммов, а TopUp дописывает симптомы в стадию штамма,
+            // поэтому берём копию.
+            var source = new List<DiseaseSymptomEntry>(stage.SymptomPool);
 
             // Болезни с выключенным броском работают ровно так, как написаны в прототипе.
             var rollCount = proto.RollStrain ? stage.RollCount : 0;
@@ -271,8 +260,10 @@ public sealed partial class DiseaseRegistrySystem : EntitySystem
     /// </summary>
     private static List<DiseaseStage> BuildStages(DiseasePrototype proto, IReadOnlyList<DiseaseStagePool> genome)
     {
-        var stages = new List<DiseaseStage>(genome.Count + 1);
-        stages.Add(CopyStage(proto.Stages[0], new List<DiseaseSymptomEntry>()));
+        var stages = new List<DiseaseStage>(genome.Count + 1)
+        {
+            CopyStage(proto.Stages[0], new List<DiseaseSymptomEntry>())
+        };
 
         for (var i = 0; i < genome.Count; i++)
         {
@@ -347,7 +338,7 @@ public sealed partial class DiseaseRegistrySystem : EntitySystem
     }
 
     /// <summary>
-    /// Добирает симптомы из непопавших в бросок, пока штамм не станет пригодным для загадки.
+    /// Добирает симптомы из непопавших в бросок, пока штамм не станет пригодным для селекции.
     /// </summary>
     private void TopUp(DiseasePrototype proto, DiseaseDefinitionComponent comp)
     {
@@ -358,7 +349,7 @@ public sealed partial class DiseaseRegistrySystem : EntitySystem
                 if (comp.Symptoms.Count >= proto.MinStrainSymptoms)
                     return;
 
-                if (comp.Symptoms.Contains(entry.Symptom) || IsBeneficial(entry.Symptom))
+                if (comp.Symptoms.Contains(entry.Symptom))
                     continue;
 
                 comp.Stages[i].SymptomPool.Add(entry);
@@ -373,7 +364,6 @@ public sealed partial class DiseaseRegistrySystem : EntitySystem
     /// <remarks>
     /// Берётся самая ранняя стадия, где штамму уже достался такой симптом. Если не досталось,
     /// в первую стадию с симптомами кладётся вариант из пула архетипа, а если нет и его — кашель.
-    /// Выведенный штамм проявляет все симптомы стадии, поэтому добавленный кашель проявится у каждого носителя.
     /// </remarks>
     private void EnsureDropletSymptom(DiseaseDefinitionComponent comp, DiseasePrototype proto)
     {
@@ -402,6 +392,11 @@ public sealed partial class DiseaseRegistrySystem : EntitySystem
                 return;
             }
         }
+
+        // Геном без единого симптома оставил бы воздушный штамм без способа разлетаться:
+        // запасной симптом кладётся в первую стадию после инкубации.
+        if (first < 0)
+            first = Math.Min(1, comp.Stages.Count - 1);
 
         if (first < 0)
             return;
@@ -448,7 +443,7 @@ public sealed partial class DiseaseRegistrySystem : EntitySystem
     /// Может ли штамм вызвать хоть один полезный симптом.
     /// </summary>
     /// <remarks>
-    /// Без взлома микроскопа такой штамм остаётся уколом, а авария сосуда не даёт ему поблажки на путь передачи.
+    /// Без взлома микроскопа такой штамм остаётся уколом, а авария сосуда не даёт ему путь передачи.
     /// </remarks>
     public bool IsBeneficial(EntityUid disease)
     {

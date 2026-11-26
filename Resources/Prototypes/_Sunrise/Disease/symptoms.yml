@@ -631,8 +631,6 @@
     type: Local
     visualType: Medium
     messages: [ "disease-symptom-hair-loss-onset" ]
-  effects:
-  - !type:HairLoss
 
 # Средние.
 - type: diseaseSymptom
@@ -725,13 +723,8 @@
   name: disease-symptom-unstable-nucleotide
   suppressClaim: disease-claim-suppresses-unstable-nucleotide
   unstableClaim: disease-claim-unstable-with-unstable-nucleotide
-  # Иногда цепляет вторую болезнь — космическую простуду — через обычные проверки заражения.
   probability: 0.03
   severity: 2
-  effects:
-  - !type:InfectDisease
-    disease: SunriseSpaceCold
-    route: Contact
 
 # Тяжёлые.
 - type: diseaseSymptom

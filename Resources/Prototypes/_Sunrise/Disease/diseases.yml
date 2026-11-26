@@ -288,7 +288,7 @@
     - symptom: SymptomToxemia
       weight: 2
 
-# Тяжёлые: без вмешательства медотдела доводят до смерти.
+# Тяжёлые: без вмешательства медотдела опасны.
 
 - type: disease
   id: SunrisePneumonia
@@ -334,10 +334,10 @@
       weight: 4
     - symptom: SymptomChills
       weight: 3
+  # Последняя стадия сама не заканчивается: тяжёлую болезнь снимает только медотдел.
   - advance:
       minDuration: 240
-      chance: 0.08
-      maxDuration: 420
+      chance: 0
     spreadMultiplier: 1.5
     contactSpreadChance: 0.06
     rollCount: 3
@@ -398,10 +398,10 @@
       weight: 4
     - symptom: SymptomBlurredVision
       weight: 2
+  # Последняя стадия сама не заканчивается: тяжёлую болезнь снимает только медотдел.
   - advance:
       minDuration: 240
-      chance: 0.08
-      maxDuration: 420
+      chance: 0
     contactSpreadChance: 0.08
     rollCount: 3
     minSymptoms: 1
@@ -460,10 +460,10 @@
       weight: 4
     - symptom: SymptomDizziness
       weight: 3
+  # Последняя стадия сама не заканчивается: тяжёлую болезнь снимает только медотдел.
   - advance:
       minDuration: 210
-      chance: 0.08
-      maxDuration: 360
+      chance: 0
     contactSpreadChance: 0.08
     rollCount: 3
     minSymptoms: 1
@@ -523,10 +523,10 @@
       weight: 4
     - symptom: SymptomBlurredVision
       weight: 3
+  # Последняя стадия сама не заканчивается: тяжёлую болезнь снимает только медотдел.
   - advance:
       minDuration: 240
-      chance: 0.08
-      maxDuration: 420
+      chance: 0
     spreadMultiplier: 1.3
     contactSpreadChance: 0.06
     rollCount: 3
@@ -1067,10 +1067,10 @@
       weight: 3
     - symptom: SymptomFever
       weight: 3
+  # Последняя стадия сама не заканчивается: тяжёлую болезнь снимает только медотдел.
   - advance:
       minDuration: 240
-      chance: 0.08
-      maxDuration: 420
+      chance: 0
     spreadMultiplier: 1.3
     contactSpreadChance: 0.06
     rollCount: 3
@@ -1131,10 +1131,10 @@
       weight: 4
     - symptom: SunriseSymptomUnstableNucleotide
       weight: 2
+  # Последняя стадия сама не заканчивается: тяжёлую болезнь снимает только медотдел.
   - advance:
       minDuration: 240
-      chance: 0.08
-      maxDuration: 420
+      chance: 0
     contactSpreadChance: 0.06
     rollCount: 3
     minSymptoms: 1
@@ -1196,10 +1196,10 @@
       weight: 3
     - symptom: SunriseSymptomTwitch
       weight: 3
+  # Последняя стадия сама не заканчивается: тяжёлую болезнь снимает только медотдел.
   - advance:
       minDuration: 300
-      chance: 0.06
-      maxDuration: 480
+      chance: 0
     spreadMultiplier: 1.2
     contactSpreadChance: 0.05
     rollCount: 3

@@ -141,7 +141,7 @@ disease-hint-fluids = обильное питьё, следить за обез�
 disease-hint-source = найти и уничтожить очаг заражения
 disease-hint-mask = стерильные маски всему отделу
 disease-hint-isolation = изолировать заболевших немедленно
-disease-hint-no-suppressants = супрессанты бесполезны, нужна вакцина
+disease-hint-no-suppressants = супрессанты снимают проявления, но не останавливают болезнь, нужна вакцина
 
 ## Болезни
 

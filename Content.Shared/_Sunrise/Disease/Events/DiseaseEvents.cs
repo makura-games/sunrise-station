@@ -89,11 +89,6 @@ public readonly record struct DiseaseCuredEvent(
 /// <summary>
 /// Поднимается на мазке, когда им взяли образец с цели.
 /// </summary>
-/// <remarks>
-/// Нужно, чтобы сам мазок остался общим для клиента и сервера: do-after, отметка об использовании
-/// и сообщения предсказываются, а записать, что попало на мазок, может только сервер —
-/// болезни живут там.
-/// </remarks>
 /// <param name="User">Кто взял мазок.</param>
 /// <param name="Target">С кого или с чего взяли образец.</param>
 [ByRefEvent]
@@ -102,10 +97,6 @@ public readonly record struct DiseaseSwabTakenEvent(EntityUid User, EntityUid Ta
 /// <summary>
 /// Поднимается на привитом в момент укола, а не по окончании выздоровления.
 /// </summary>
-/// <remarks>
-/// Нужно для болезней, у которых прививка делает что-то сверх иммунитета: например,
-/// зомби-вакцина обязана отменить обращение немедленно, иначе укушенный успеет обратиться.
-/// </remarks>
 /// <param name="Disease">Штамм, против которого привили.</param>
 [ByRefEvent]
 public readonly record struct DiseaseVaccinatedEvent(EntityUid Disease);

@@ -7,13 +7,10 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Sunrise.Disease.Systems;
 
+
+// Часть системы про симптомы: взвешенный выбор при входе в стадию, броски симптомов и их снятие.
 public sealed partial class DiseaseSystem
 {
-    /*
-     * Часть системы про симптомы: взвешенный выбор при входе в стадию, броски симптомов и их снятие.
-     * Симптомы накапливаются от стадии к стадии, поэтому у двух носителей одной болезни картина может отличаться.
-     */
-
     /// <summary>
     /// Проверяет, проявился ли симптом у данного экземпляра болезни.
     /// </summary>
@@ -141,8 +138,6 @@ public sealed partial class DiseaseSystem
         DiseaseDefinitionComponent proto,
         bool suppressed)
     {
-        var stage = proto.Stages[instance.Stage];
-
         for (var i = 0; i < instance.Symptoms.Count; i++)
         {
             if (!_proto.TryIndex(instance.Symptoms[i].Symptom, out var symptom))
@@ -159,9 +154,6 @@ public sealed partial class DiseaseSystem
             // Эффекты симптома могли вылечить эту болезнь.
             if (!ent.Comp.Diseases.Contains(instance))
                 return;
-
-            if (symptom.Spread is { } spread)
-                SpreadDroplets(ent, instance, proto, stage, spread);
         }
     }
 }

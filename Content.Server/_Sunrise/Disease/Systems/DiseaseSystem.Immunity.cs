@@ -4,15 +4,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Disease.Systems;
 
+// Часть системы про иммунитет
 public sealed partial class DiseaseSystem
 {
-    /*
-     * Часть системы про иммунитет: проверка иммунитета и его выдача после выздоровления.
-     */
-
     [Dependency] private EntityQuery<DiseaseImmunityComponent> _immunityQuery = default!;
-
-    private readonly List<EntityUid> _expiredImmunities = new();
 
     /// <summary>
     /// Проверяет, есть ли у сущности действующий иммунитет к болезни.
@@ -57,16 +52,10 @@ public sealed partial class DiseaseSystem
     {
         var curTime = _timing.CurTime;
 
-        _expiredImmunities.Clear();
         foreach (var (disease, expiresAt) in immunity.Immunities)
         {
             if (expiresAt != null && expiresAt <= curTime)
-                _expiredImmunities.Add(disease);
-        }
-
-        foreach (var disease in _expiredImmunities)
-        {
-            immunity.Immunities.Remove(disease);
+                immunity.Immunities.Remove(disease);
         }
     }
 }

@@ -7,7 +7,6 @@ namespace Content.Shared._Sunrise.Disease.Prototypes;
 
 /// <summary>
 /// Неизменяемое описание болезни: стадии, симптомы, передача, лечение и данные для диагностики.
-/// Ход болезни у конкретного носителя здесь не хранится — он живёт в серверном компоненте носителя.
 /// </summary>
 [Prototype]
 public sealed partial class DiseasePrototype : IPrototype, IInheritingPrototype
@@ -17,10 +16,6 @@ public sealed partial class DiseasePrototype : IPrototype, IInheritingPrototype
     public string ID { get; private set; } = default!;
 
     /// <inheritdoc/>
-    /// <remarks>
-    /// Наследование нужно архетипам-заготовкам: несколько болезней отличаются только идентификатором,
-    /// а рамка у них общая.
-    /// </remarks>
     [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<DiseasePrototype>))]
     public string[]? Parents { get; private set; }
 
@@ -31,8 +26,7 @@ public sealed partial class DiseasePrototype : IPrototype, IInheritingPrototype
     #region Diagnostics
 
     /// <summary>
-    /// Название болезни для админских инструментов и гайдбука. Анализ образца его не раскрывает:
-    /// игроки опознают болезнь по коду штамма и замеченным симптомам.
+    /// Название болезни для админских инструментов и гайдбука.
     /// </summary>
     [DataField(required: true)]
     public LocId Name;
@@ -79,8 +73,8 @@ public sealed partial class DiseasePrototype : IPrototype, IInheritingPrototype
     public TimeSpan ProcessInterval = TimeSpan.FromSeconds(5);
 
     /// <summary>
-    /// Перекатывает ли штамм раунда то, какие симптомы из пулов стадий у болезни вообще будут.
-    /// Выключается для болезней, которые должны оставаться узнаваемыми, вроде отыгрышной простуды.
+    /// Рандомит ли штамм раунда то, какие симптомы из пулов стадий у болезни вообще будут.
+    /// Выключается для болезней, которые должны оставаться узнаваемыми.
     /// </summary>
     [DataField]
     public bool RollStrain = true;
@@ -90,8 +84,7 @@ public sealed partial class DiseasePrototype : IPrototype, IInheritingPrototype
     /// </summary>
     /// <remarks>
     /// Если бросок стадий дал меньше, набор добирается из непопавших записей пулов.
-    /// Меньше нельзя: по симптомам строятся свойства пробных партий в микроскопе,
-    /// и на пустом наборе загадка не соберётся.
+    /// Меньше нельзя: по симптомам строятся свойства пробных партий в микроскопе
     /// </remarks>
     [DataField]
     public int MinStrainSymptoms = 3;
@@ -113,7 +106,7 @@ public sealed partial class DiseasePrototype : IPrototype, IInheritingPrototype
     #region Transmission
 
     /// <summary>
-    /// Пути передачи, доступные этой болезни. Попытка заразить другим путём не пройдёт.
+    /// Пути передачи, доступные этой болезни.
     /// </summary>
     [DataField]
     public DiseaseTransmissionRoute Routes = DiseaseTransmissionRoute.None;
@@ -146,8 +139,7 @@ public sealed partial class DiseasePrototype : IPrototype, IInheritingPrototype
     #region Treatment
 
     /// <summary>
-    /// Сколько прогресса лечения нужно набрать, чтобы началось выздоровление. Лечебные эффекты
-    /// добавляют прогресс по своей силе, поэтому болезнь может требовать курса, а не одной дозы.
+    /// Сколько прогресса лечения нужно набрать, чтобы началось выздоровление.
     /// </summary>
     [DataField]
     public float CureThreshold = 1f;
@@ -155,18 +147,11 @@ public sealed partial class DiseasePrototype : IPrototype, IInheritingPrototype
     /// <summary>
     /// Сколько нужно проспать, чтобы вылечиться с нуля. Ноль — сон от этой болезни не помогает.
     /// </summary>
-    /// <remarks>
-    /// Выражено временем, а не скоростью, чтобы в прототипе читалось сразу: «отлежаться три минуты».
-    /// Внутри переводится в прогресс лечения, поэтому сон и лекарства складываются: проспавший половину
-    /// срока добирает остальное дозой. Лечит и подавленную болезнь — подавление тормозит развитие,
-    /// а не выздоровление. Годится только лёгким болезням: от тяжёлых организм сам не отобьётся.
-    /// </remarks>
     [DataField]
     public TimeSpan SleepCureTime = TimeSpan.Zero;
 
     /// <summary>
     /// Останавливает ли подавляющее лечение ещё и переход на следующую стадию.
-    /// Выздоровление не останавливается никогда.
     /// </summary>
     [DataField]
     public bool SuppressionPausesProgression = true;

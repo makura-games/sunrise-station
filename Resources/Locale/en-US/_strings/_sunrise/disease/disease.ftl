@@ -141,8 +141,7 @@ disease-hint-fluids = plenty of fluids, watch for dehydration
 disease-hint-source = find and destroy the source
 disease-hint-mask = sterile masks for the whole department
 disease-hint-isolation = isolate the sick immediately
-disease-hint-no-suppressants = suppressants are useless, a vaccine is needed
-
+disease-hint-no-suppressants = suppressants mask the symptoms but do not stop the disease, a vaccine is needed
 ## Diseases
 
 disease-space-cold-name = space cold

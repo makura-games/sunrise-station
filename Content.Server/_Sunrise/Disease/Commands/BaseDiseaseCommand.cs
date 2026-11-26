@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server._Sunrise.Disease.Commands;
 
 /// <summary>
-/// Общий разбор аргументов и автодополнение для админ-команд болезней.
+/// Проверки для админ команд системы болезней.
 /// </summary>
 public abstract partial class BaseDiseaseCommand : LocalizedEntityCommands
 {
@@ -16,7 +16,7 @@ public abstract partial class BaseDiseaseCommand : LocalizedEntityCommands
     [Dependency] protected IPrototypeManager Proto = default!;
 
     /// <summary>
-    /// Разбирает аргумент с сущностью и выводит ошибку, если это не удалось.
+    /// Проверка для сущности и аргументов.
     /// </summary>
     protected bool TryParseEntity(IConsoleShell shell, string arg, out EntityUid uid)
     {
@@ -34,12 +34,11 @@ public abstract partial class BaseDiseaseCommand : LocalizedEntityCommands
     }
 
     /// <summary>
-    /// Разбирает аргумент с болезнью, которой цель болеет прямо сейчас.
+    /// Проверяет аргумент с болезнью, которой цель болеет прямо сейчас.
     /// </summary>
     /// <remarks>
-    /// Принимает и код штамма с этикетки, и ID прототипа. По прототипу ищется та болезнь,
-    /// которая у цели уже есть: штаммов одного прототипа в раунде может быть несколько,
-    /// и админ обычно имеет в виду тот, который перед ним. Новых штаммов не заводит.
+    /// Принимает и код штамма (NN-123), и ID прототипа. Если по прототипу, то ищется болезнь,
+    /// которая уже есть у цели: штаммов одного прототипа в раунде может быть несколько.
     /// </remarks>
     protected bool TryParseDiseaseOf(IConsoleShell shell, EntityUid target, string arg, out EntityUid disease)
     {
@@ -66,7 +65,7 @@ public abstract partial class BaseDiseaseCommand : LocalizedEntityCommands
     }
 
     /// <summary>
-    /// Разбирает аргумент с болезнью для заражения.
+    /// Проверяет аргумент с болезнью для заражения.
     /// </summary>
     /// <remarks>
     /// Код штамма берёт существующий штамм, ID прототипа — общий штамм раунда, заводя его при нужде.
@@ -88,7 +87,7 @@ public abstract partial class BaseDiseaseCommand : LocalizedEntityCommands
     }
 
     /// <summary>
-    /// Как назвать болезнь в ответе команды: кодом штамма и, если он есть, прототипом.
+    /// Какое название получит болезнь в ответе на команду: кодом штамма и, если он есть, прототипом.
     /// </summary>
     protected string DescribeDisease(EntityUid disease)
     {

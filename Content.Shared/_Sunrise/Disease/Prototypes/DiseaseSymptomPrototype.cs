@@ -3,10 +3,6 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Sunrise.Disease.Prototypes;
 
-/// <summary>
-/// Переиспользуемый симптом болезни. Фиксированного набора симптомов у болезней нет: каждая стадия
-/// вытягивает их из взвешенного пула, поэтому одна и та же болезнь у разных носителей выглядит по-разному.
-/// </summary>
 [Prototype]
 public sealed partial class DiseaseSymptomPrototype : IPrototype
 {
@@ -38,7 +34,6 @@ public sealed partial class DiseaseSymptomPrototype : IPrototype
 
     /// <summary>
     /// Эффекты, которые применяются к носителю каждый раз, когда симптом срабатывает.
-    /// Лучше брать готовые: <c>Emote</c>, <c>Vomit</c>, <c>PopupMessage</c>, <c>HealthChange</c> или <c>ModifyStatusEffect</c>.
     /// </summary>
     [DataField(required: true)]
     public EntityEffect[] Effects = default!;
@@ -61,8 +56,7 @@ public sealed partial class DiseaseSymptomPrototype : IPrototype
 
     /// <summary>
     /// Насколько симптом тяжёл для носителя. В отличие от <see cref="DiseaseSymptomEntry.Weight"/>,
-    /// который влияет только на частоту выпадения, это идёт в оценку силы болезни,
-    /// а та задаёт размер загадки с вакциной.
+    /// который влияет только на частоту выпадения, это идёт в оценку силы болезни.
     /// </summary>
     [DataField]
     public float Severity = 1f;
@@ -78,7 +72,6 @@ public sealed partial class DiseaseSymptomPrototype : IPrototype
     /// </summary>
     /// <remarks>
     /// В природных болезнях такие симптомы не проявляются: реестр вычищает их из пулов стадий.
-    /// Получить их можно только под микроскопом — изредка заготовка кладёт один на последнюю стадию.
     /// </remarks>
     [DataField]
     public bool Beneficial;

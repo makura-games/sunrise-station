@@ -10,7 +10,7 @@ namespace Content.Server._Sunrise.Disease.Components;
 /// поэтому цикл развития обходит только больных.
 /// </summary>
 /// <remarks>
-/// Только сервер, не сетевится: клиент видит лишь последствия симптомов.
+/// Система серверная для защиты данной информации от клиента.
 /// </remarks>
 [RegisterComponent, AutoGenerateComponentPause, Access(typeof(DiseaseSystem))]
 public sealed partial class DiseaseCarrierComponent : Component
@@ -31,9 +31,6 @@ public sealed partial class DiseaseCarrierComponent : Component
 /// <summary>
 /// Ход одной болезни у одного носителя.
 /// </summary>
-/// <remarks>
-/// Все таймеры — накопители, которые двигает цикл развития, поэтому пауза карты их не сбивает.
-/// </remarks>
 public sealed class DiseaseInstance(EntityUid disease, TimeSpan infectedAt)
 {
     /// <summary>

@@ -10,15 +10,13 @@ namespace Content.Shared._Sunrise.Disease.Prototypes;
 public sealed partial class DiseaseStage
 {
     /// <summary>
-    /// Когда болезнь перейдёт на следующую стадию. На последней это запускает естественное выздоровление,
-    /// а нулевой шанс без максимума делает болезнь хронической.
+    /// Когда болезнь перейдёт на следующую стадию.
     /// </summary>
     [DataField]
     public DiseaseProgression Advance = new();
 
     /// <summary>
     /// Симптомы, которые могут проявиться при входе носителя в эту стадию.
-    /// Симптомы, вытянутые на прежних стадиях, остаются.
     /// </summary>
     [DataField]
     public List<DiseaseSymptomEntry> SymptomPool = new();
@@ -27,10 +25,6 @@ public sealed partial class DiseaseStage
     /// Сколько симптомов из <see cref="SymptomPool"/> достанется штамму этого раунда.
     /// Ноль оставляет весь пул, и тогда стадия каждый раунд одинаковая.
     /// </summary>
-    /// <remarks>
-    /// Это бросок на раунд, а не на носителя: штамм решает, что болезнь вообще умеет,
-    /// а <see cref="MinSymptoms"/> и <see cref="MaxSymptoms"/> — что из этого покажет конкретный носитель.
-    /// </remarks>
     [DataField]
     public int RollCount;
 

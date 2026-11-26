@@ -1,7 +1,6 @@
 using System.Numerics;
 using Content.Server._Sunrise.Disease.Components;
 using Content.Shared._Sunrise.Disease.Prototypes;
-using Content.Shared.GameTicking;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._Sunrise.Disease.Systems;
@@ -29,25 +28,14 @@ public sealed partial class DiseaseStrengthSystem : EntitySystem
     private const float DropletWeight = 2f;
 
     /// <summary>
-    /// Во сколько набор симптомов штамма весит в силе.
+    /// Вес, с которым в силу входит суммарная тяжесть всех симптомов штамма.
     /// </summary>
     /// <remarks>
-    /// Считается отдельно от стадий, потому что стадии дают среднюю тяжесть, а станции важно,
-    /// сколько всего разных симптомов штамм способен выдать и насколько они тяжёлые.
-    /// По этой же величине исследовательский отдел будет начислять очки за изученный штамм.
+    /// Стадии дают среднюю тяжесть, поэтому сами по себе они считают штамм с десятком симптомов
+    /// так же, как штамм с двумя. Широту набора добавляет отдельное слагаемое, а вес у него меньше
+    /// единицы, потому что часть той же тяжести уже посчитана в среднем по стадиям.
     /// </remarks>
     private const float SymptomWeight = 0.75f;
-
-    /// <summary>
-    /// Профили сложности по убыванию порога силы. Кеш прототипов.
-    /// </summary>
-    private readonly List<DiseaseDifficultyPrototype> _profiles = new();
-
-    [SubscribeLocalEvent]
-    private void OnRoundRestart(RoundRestartCleanupEvent args)
-    {
-        _profiles.Clear();
-    }
 
     /// <summary>
     /// Возвращает силу болезни: заразность плюс тяжесть симптомов.
@@ -70,33 +58,21 @@ public sealed partial class DiseaseStrengthSystem : EntitySystem
     /// <returns>Null, если профилей в прототипах нет вообще.</returns>
     public DiseaseDifficultyPrototype? GetDifficulty(EntityUid disease)
     {
-        EnsureProfiles();
-
-        if (_profiles.Count == 0)
-            return null;
-
         var strength = GetStrength(disease);
-        foreach (var profile in _profiles)
-        {
-            if (strength >= profile.MinStrength)
-                return profile;
-        }
-
-        // Профиля с нулевым порогом может не оказаться: берём самый мягкий из существующих.
-        return _profiles[^1];
-    }
-
-    private void EnsureProfiles()
-    {
-        if (_profiles.Count > 0)
-            return;
+        DiseaseDifficultyPrototype? matched = null;
+        DiseaseDifficultyPrototype? softest = null;
 
         foreach (var profile in _proto.EnumeratePrototypes<DiseaseDifficultyPrototype>())
         {
-            _profiles.Add(profile);
+            if (strength >= profile.MinStrength && (matched == null || profile.MinStrength > matched.MinStrength))
+                matched = profile;
+
+            if (softest == null || profile.MinStrength < softest.MinStrength)
+                softest = profile;
         }
 
-        _profiles.Sort((a, b) => b.MinStrength.CompareTo(a.MinStrength));
+        // Профиля с нулевым порогом может не оказаться: берём самый мягкий из существующих.
+        return matched ?? softest;
     }
 
     /// <summary>

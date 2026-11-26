@@ -1,8 +1,7 @@
 namespace Content.Shared._Sunrise.Disease.Prototypes;
 
 /// <summary>
-/// Выброс капель, привязанный к симптому. Срабатывает только вместе с самим симптомом,
-/// поэтому любая передача между носителями видна игрокам.
+/// Выброс капель, привязанный к симптому.
 /// </summary>
 [DataDefinition]
 public sealed partial class DiseaseSpread

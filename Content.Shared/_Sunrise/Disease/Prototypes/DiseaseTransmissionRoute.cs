@@ -6,9 +6,6 @@ namespace Content.Shared._Sunrise.Disease.Prototypes;
 /// Пути, которыми болезнь попадает в нового носителя.
 /// Болезнь передаётся только теми путями, что перечислены в <see cref="DiseasePrototype.Routes"/>.
 /// </summary>
-/// <remarks>
-/// В YAML набор флагов пишется последовательностью: <c>routes: [ Contact, Ingestion ]</c>.
-/// </remarks>
 [Flags, Serializable, NetSerializable]
 public enum DiseaseTransmissionRoute : byte
 {

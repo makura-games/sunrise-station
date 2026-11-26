@@ -265,10 +265,4 @@
   - type: PetOnInteract
   # Зараза берётся только на тех, кто умеет болеть: прочее зверьё её не обсчитывает.
   - type: DiseaseHost
-  # В разлагающейся плоти заводится своя зараза, независимо от причины смерти.
-  - type: DiseaseRotSource
-    diseases:
-    - SunriseParasiticInfestation
-    - SunriseBacterialFermentation
-    - SunriseGastroenteritis
   # Sunrise-End

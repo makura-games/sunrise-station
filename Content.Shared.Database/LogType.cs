@@ -496,10 +496,7 @@ public enum LogType
     /// </summary>
     SiliconLaw = 106, // Sunrise-Edit - сохраняем числовое значение существующего Interactions для совместимости БД
 
-    // Sunrise added start - журналирование системы болезней
-    /// <summary>
-    /// Sunrise disease system logs.
-    /// </summary>
+    // Sunrise added start
     Disease = 1007,
     // Sunrise added end
 }

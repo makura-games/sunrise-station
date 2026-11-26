@@ -4,7 +4,6 @@ namespace Content.Shared._Sunrise.Disease.Prototypes;
 
 /// <summary>
 /// Симптомы, доступные заготовке на одной стадии развития.
-/// Поздние стадии собираются из более тяжёлых симптомов, поэтому партия под микроскопом усложняется.
 /// </summary>
 [DataDefinition, Serializable, NetSerializable]
 public sealed partial class DiseaseStagePool

@@ -7,7 +7,7 @@ namespace Content.Shared._Sunrise.Disease.Prototypes;
 /// </summary>
 /// <remarks>
 /// Нужен экипировке, которая закрывает только часть тела: перчатки спасают от касания руками,
-/// но не от укуса в ногу и не от наростов на полу. В YAML пишется списком: <c>contactKinds: [ Bite, Step ]</c>.
+/// но не от укуса в ногу и не от наростов на полу.
 /// </remarks>
 [Flags, Serializable, NetSerializable]
 public enum DiseaseContactKind : byte

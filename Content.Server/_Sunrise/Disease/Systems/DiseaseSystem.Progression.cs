@@ -9,13 +9,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._Sunrise.Disease.Systems;
 
+// Часть системы про развитие болезни: периодическая обработка носителей и вероятностная смена стадий.
 public sealed partial class DiseaseSystem
 {
-    /*
-     * Часть системы про развитие болезни: периодическая обработка носителей и вероятностная смена стадий.
-     * Активная болезнь продвигается вперёд, а при выздоровлении откатывается по стадиям назад.
-     */
-
     /// <summary>
     /// Шаг цикла развития. За один шаг каждый таймер болезни растёт ровно на эту величину.
     /// </summary>
@@ -23,6 +19,7 @@ public sealed partial class DiseaseSystem
 
     /// <summary>
     /// Носители, отобранные на текущий шаг. Поле переиспользуется, чтобы не выделять список каждый тик.
+    /// Плюс защита от модификации списка во время прохода.
     /// </summary>
     private readonly List<Entity<DiseaseCarrierComponent>> _updateBuffer = [];
 
@@ -34,8 +31,6 @@ public sealed partial class DiseaseSystem
 
         var curTime = _timing.CurTime;
 
-        // Сначала снимок носителей: симптомы заражают соседей, а новый компонент носителя
-        // ломает перебор запроса прямо посреди обхода.
         _updateBuffer.Clear();
         var query = EntityQueryEnumerator<DiseaseCarrierComponent>();
         while (query.MoveNext(out var uid, out var carrier))
@@ -121,12 +116,10 @@ public sealed partial class DiseaseSystem
         if (suppressed)
             instance.SuppressionRemaining = Decay(instance.SuppressionRemaining);
 
-        // Снятие симптомов глушит проявления, но не трогает ни развитие, ни заразность.
         var relieved = instance.Relieved;
         if (relieved)
             instance.ReliefRemaining = Decay(instance.ReliefRemaining);
 
-        // Подавление держит болезнь на месте, но не мешает выздоровлению.
         var paused = suppressed && proto.SuppressionPausesProgression && !instance.Recovering;
         if (!paused)
             instance.StageElapsed += UpdateInterval;
@@ -172,7 +165,7 @@ public sealed partial class DiseaseSystem
     {
         if (instance.Recovering)
         {
-            if (RollProgression(proto.Regression, instance.StageElapsed))
+            if (ShouldRegress(proto.Regression, instance.StageElapsed))
                 Regress(ent, instance);
 
             return;
@@ -206,6 +199,23 @@ public sealed partial class DiseaseSystem
             return true;
 
         return progression.Chance > 0f && _random.Prob(MathF.Min(progression.Chance, 1f));
+    }
+
+    /// <summary>
+    /// Пора ли отступать выздоравливающей болезни.
+    /// </summary>
+    /// <remarks>
+    /// Бросок с нулевым шансом и без потолка не сработает никогда: так описана болезнь, которая
+    /// сама не проходит. Но выздоровление уже началось, а начать его может только лечение,
+    /// поэтому после выдержки болезнь отступает без броска. Иначе законченный курс оставлял бы
+    /// носителя заражённым до конца раунда.
+    /// </remarks>
+    private bool ShouldRegress(DiseaseProgression regression, TimeSpan elapsed)
+    {
+        if (RollProgression(regression, elapsed))
+            return true;
+
+        return regression.Chance <= 0f && regression.MaxDuration == null && elapsed >= regression.MinDuration;
     }
 
     private void BeginRecovery(EntityUid uid, DiseaseInstance instance, DiseaseCureReason reason)
