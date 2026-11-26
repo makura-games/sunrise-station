@@ -231,7 +231,6 @@
       whitelist:
         tags:
         - NukeOpsUplink
-        - LoneOpsUplink # Sunrise-Edit
     - !type:BuyerWhitelistCondition
       blacklist:
         components:

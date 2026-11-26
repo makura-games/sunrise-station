@@ -22,3 +22,12 @@ ent-MagazineShotgunXL = xL ammo drum (.50 pellet)
     .desc = An extra-large drum magazine used by some military-grade automatic shotguns. Intended to hold general-purpose kinetic ammunition.
 ent-MagazineShotgunSlugXL = xL ammo drum (.50 slug)
     .desc = An extra-large drum magazine used by some military-grade automatic shotguns. Intended to hold long-ranged slug ammunition.
+
+ent-MagazineAsh13 = ash-13 magazine (13mm)
+    .desc = A 10-round magazine for 13x55 mm cartridges.
+
+ent-MagazineAsh13HP = ash-13 magazine (13mm HP)
+    .desc = { ent-MagazineAsh13.desc }
+
+ent-MagazineAsh13AP = ash-13 magazine (13mm AP)
+    .desc = { ent-MagazineAsh13.desc }

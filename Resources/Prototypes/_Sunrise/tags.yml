@@ -186,6 +186,18 @@
 
 # region Ammo / payloads
 - type: Tag
+  id: ShellShotgunHeavy
+
+- type: Tag
+  id: CartridgeLightRifleAuto
+
+- type: Tag
+  id: CartridgeRifleAuto
+
+- type: Tag
+  id: MagazinePistolLightRifleAuto
+
+- type: Tag
   id: ArtilleryShell
 
 - type: Tag
@@ -193,6 +205,9 @@
 
 - type: Tag
   id: CartridgeHeavyRifleR
+
+- type: Tag
+  id: CartridgeRifleHeavy13mm
 
 - type: Tag
   id: FireBomb
@@ -250,13 +265,10 @@
   id: LightAmmoBelt127
 
 - type: Tag
-  id: CartridgeRifleHeavy127mm
-
-- type: Tag
   id: MagazineAR18
 
 - type: Tag
-  id: MagazineAsh12
+  id: MagazineAsh13Rifle
 
 - type: Tag
   id: MagazineBauer127
@@ -395,6 +407,9 @@
   id: 120mmRocket
 
 # region Clothing / gear
+- type: Tag
+  id: SunriseHeavyShotgunBandolierCompatible
+
 - type: Tag
   id: FullBodyOuter
 

@@ -139,6 +139,87 @@
       map: ["enum.GunVisualLayers.Mag"]
     - state: uranium
 
+- type: entity
+  parent: BaseMagazineBoxHeavyRifle
+  id: MagazineBoxHeavyRifle13mm
+  name: ammunition box (13mm)
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 10
+    proto: CartridgeRifleHeavy13mm
+    whitelist:
+      tags:
+      - CartridgeRifleHeavy13mm
+  - type: Item
+    storedRotation: 180
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Boxes/anti_materiel.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: 13mm
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 3
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseMagazineBoxHeavyRifle
+  id: MagazineBoxHeavyRifle13mmHP
+  name: ammunition box (13mm HP)
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 10
+    proto: CartridgeRifleHeavy13mmHP
+    whitelist:
+      tags:
+      - CartridgeRifleHeavy13mm
+  - type: Item
+    storedRotation: 180
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Boxes/anti_materiel.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: 13mm
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 3
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseMagazineBoxHeavyRifle
+  id: MagazineBoxHeavyRifle13mmAP
+  name: ammunition box (13mm AP)
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 10
+    proto: CartridgeRifleHeavy13mmAP
+    whitelist:
+      tags:
+      - CartridgeRifleHeavy13mm
+  - type: Item
+    storedRotation: 180
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Boxes/anti_materiel.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: 13mm
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 3
+    zeroVisible: false
+  - type: Appearance
+
 # 7.62mmR RifleMachine
 - type: entity
   abstract: true

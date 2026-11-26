@@ -240,10 +240,10 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
 
-# region 12/7mm
+# region 13mm
 - type: entity
   id: BaseMagazineBoxBeltLight127
-  name: 12.7mm ammo belt
+  name: 13mm ammo belt
   parent: [ BaseItem, BaseSovietContraband ]
   abstract: true
   components:
@@ -252,11 +252,11 @@
     walkModifier: 0.95
     sprintModifier: 0.95
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleHeavy127mm
+    proto: CartridgeRifleHeavy13mm
     mayTransfer: true
     whitelist:
       tags:
-      - CartridgeRifleHeavy127mm
+      - CartridgeRifleHeavy13mm
     capacity: 50
     fillDelay: 0.1
   - type: ContainerContainer
@@ -290,7 +290,7 @@
 
 - type: entity
   id: MagazineBoxBeltLight127Empty
-  name: 12.7mm ammo belt
+  name: 13mm ammo belt
   suffix: empty
   parent: BaseMagazineBoxBeltLight127
   components:
@@ -305,11 +305,11 @@
 
 - type: entity
   id: MagazineBoxBeltLight127
-  name: 12.7mm ammo belt
+  name: 13mm ammo belt
   parent: BaseMagazineBoxBeltLight127
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleHeavy127mm
+    proto: CartridgeRifleHeavy13mm
   - type: Sprite
     layers:
     - state: base

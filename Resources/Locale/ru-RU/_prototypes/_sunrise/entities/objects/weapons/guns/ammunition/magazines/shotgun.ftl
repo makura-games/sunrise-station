@@ -22,3 +22,12 @@ ent-MagazineShotgunXL = XL барабан дроби 12 калибра
     .desc = { ent-BaseMagazineShotgunXL.desc }
 ent-MagazineShotgunSlugXL = XL барабан пуль 12 калибра
     .desc = { ent-BaseMagazineShotgunXL.desc }
+
+ent-MagazineAsh13 = магазин АШ-13 (13мм)
+    .desc = Магазин на 10 патронов калибра 13×55 мм.
+
+ent-MagazineAsh13HP = магазин АШ-13 (13мм эксп)
+    .desc = { ent-MagazineAsh13.desc }
+
+ent-MagazineAsh13AP = магазин АШ-13 (13мм ББ)
+    .desc = { ent-MagazineAsh13.desc }

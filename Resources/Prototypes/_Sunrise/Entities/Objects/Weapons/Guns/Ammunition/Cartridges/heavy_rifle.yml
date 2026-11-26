@@ -1,4 +1,4 @@
-﻿# region base cartridges
+# region base cartridges
 
 - type: entity
   id: BaseCartridgeRifleHeavy
@@ -137,27 +137,6 @@
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#65fe08"
 
-- type: entity
-  id: CartridgeRifleHeavy127mm
-  name: cartridge (12,7mm)
-  parent: BaseCartridgeRifleHeavy
-  components:
-  - type: Tag
-    tags:
-    - CartridgeHeavyRifle
-    - CartridgeRifleHeavy127mm
-  - type: CartridgeAmmo
-    proto: BulletRifleHeavy127mm
-  - type: Sprite
-    scale: 0.7, 0.7
-    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Casings/12.7x99.rsi
-    layers:
-    - state: base
-      map: [ "enum.AmmoVisualLayers.Base" ]
-    - state: tip
-      map: [ "enum.AmmoVisualLayers.Tip" ]
-      color: "#B68F0E"
-
 # 7.62mmR cartridges
 - type: entity
   id: CartridgeHeavyRifleRSP
@@ -248,6 +227,55 @@
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#65fe08"
+
+- type: entity
+  id: CartridgeRifleHeavy13mm
+  name: cartridge (13mm)
+  parent: BaseCartridgeRifleHeavy
+  components:
+  - type: Tag
+    tags:
+    - CartridgeRifleHeavy13mm
+  - type: CartridgeAmmo
+    proto: BulletRifleHeavy13mm
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Casings/13x55.rsi
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#977917"
+
+- type: entity
+  id: CartridgeRifleHeavy13mmHP
+  parent: CartridgeRifleHeavy13mm
+  name: cartridge (13mm HP)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRifleHeavy13mmHP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#b33220"
+
+- type: entity
+  id: CartridgeRifleHeavy13mmAP
+  parent: CartridgeRifleHeavy13mm
+  name: cartridge (13mm AP)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRifleHeavy13mmAP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#540000"
 
 # region speedloaders
 - type: entity

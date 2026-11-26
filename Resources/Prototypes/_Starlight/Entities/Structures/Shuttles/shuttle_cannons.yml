@@ -569,7 +569,7 @@
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: BatteryAmmoProvider
-    proto: CartridgeRifleHeavy127mm
+    proto: CartridgeRifleHeavy13mm
     fireCost: 1
   - type: Battery
     maxCharge: 80

@@ -30,3 +30,12 @@ ent-MagazineBoxRifleMachineIncendiary = коробка патронов (7,62к 
     .desc = Картонная коробка с патронами 7,62к. Предназначена для хранения самовоспламеняющихся зажигательных боеприпасов.
 ent-MagazineBoxRifleMachineUranium = коробка патронов (7,62к урановые)
     .desc = Картонная коробка с патронами 7,62к. Предназначена для хранения экзотических боеприпасов с урановым сердечником.
+
+ent-MagazineBoxHeavyRifle13mm = пачка патронов (13мм)
+    .desc = { ent-BaseItem.desc }
+
+ent-MagazineBoxHeavyRifle13mmHP = пачка патронов (13мм эксп)
+    .desc = { ent-BaseItem.desc }
+
+ent-MagazineBoxHeavyRifle13mmAP = пачка патронов (13мм ББ)
+    .desc = { ent-BaseItem.desc }

@@ -58,12 +58,6 @@
     # Rifle Heavy
     - MagazineRifleHeavySP
     - MagazineRifleHeavyEmpty
-    # Shotgun Speedloader
-    - SpeedLoaderShellShotgun
-    - SpeedLoaderShotgunBirdshot
-    - SpeedLoaderShotgunEmpty
-    - SpeedLoaderShotgunSlug
-    - SpeedLoaderShotgunBeanbag
 ####################################################
 
 - type: latheRecipePack
@@ -145,9 +139,8 @@
     - MagazineRifleHeavySP
     - MagazineRifleHeavyEmpty
     # Shotgun Speedloader
-    - SpeedLoaderShellShotgun
+    - SpeedLoaderShotgunBuck
     - SpeedLoaderShotgunBirdshot
-    - SpeedLoaderShotgunEmpty
     - SpeedLoaderShotgunSlug
     - SpeedLoaderShotgunBeanbag
     # Pirate cannon
@@ -194,6 +187,9 @@
     - WeaponSunriseLaserPistol
     - FlareGunSecurityUpgrade
     - EnergyBola
+    - BoxShotgunHeavy
+    - BoxShotgunBirdshotHeavy
+    - BoxShotgunFlechetteHeavy
 # Sunrise-TODO: Нужен ребаланс с учетом типов боеприпасов
 #    - BaseMagazinePistolCaselessRifleExtended
 #    - MagazinePPSH41Extended
@@ -295,6 +291,7 @@
     - RifleHeavyMagazineIncendiary
     - RifleHeavyMagazineUranium
   # Shotgun
+    - SpeedLoaderShotgunBeanbag
     - SpeedLoaderShotgunIncendiary
     - SpeedLoaderShotgunUranium
     - SpeedLoaderShotgunFlechette
@@ -357,7 +354,7 @@
     - MagazineRifleSP
     - MagazineRifleFMJ
     # Shotgun Speedloader
-    - SpeedLoaderShellShotgun
+    - SpeedLoaderShotgunBuck
     - SpeedLoaderShotgunBirdshot
     - SpeedLoaderShotgunSlug
     # Shuttle stuff

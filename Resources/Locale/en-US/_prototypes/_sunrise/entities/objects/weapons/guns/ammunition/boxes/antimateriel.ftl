@@ -21,7 +21,7 @@ ent-MagazineBoxAntiMaterielHP = ammunition box (15mm hollow point)
 ent-MagazineBoxAntiMaterielFrag = ammunition box (15mm frag)
     .desc = { ent-BaseSunriseMagazineBoxAntiMateriel.desc }
 
-ent-BaseMagazineBoxBeltLight127 = 12.7mm ammunition belt
+ent-BaseMagazineBoxBeltLight127 = 13mm ammunition belt
     .desc = A large ammunition belt for the mounted Kord machine gun.
 ent-MagazineBoxBeltLight127Empty = { ent-BaseMagazineBoxBeltLight127 }
     .desc = { ent-BaseMagazineBoxBeltLight127.desc }

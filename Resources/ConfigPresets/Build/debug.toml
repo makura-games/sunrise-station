@@ -6,3 +6,13 @@ enable = true
 
 [sponsor]
 enabled = true
+
+[playtest]
+all_damage_modifier = 1.0
+all_heal_modifier = 1.0
+
+[damage]
+positive_variance = 0.0
+negative_variance = 0.0
+damage_modifier = 1.0
+heal_modifier = 1.0

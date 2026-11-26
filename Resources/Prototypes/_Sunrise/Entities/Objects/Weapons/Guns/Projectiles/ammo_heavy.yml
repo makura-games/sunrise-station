@@ -1,0 +1,78 @@
+- type: entity
+  id: PelletGrapeshotHeavy
+  parent: PelletGrapeshot
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 20
+        Blunt: 5
+        Structural: 10
+
+- type: entity
+  id: PelletGrapeshotHeavySpread
+  parent: PelletGrapeshotSpread
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: PelletGrapeshotHeavy
+    spread: 15
+    count: 6
+
+- type: entity
+  id: PelletShotgunBirdshotHeavySpread
+  parent: PelletShotgunTraceSpread
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    count: 24
+    spread: 30
+
+- type: entity
+  id: PelletShotgunFlechetteHeavySpread
+  parent: PelletShotgunTraceFlechetteSpread
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    count: 16
+    spread: 20
+
+- type: entity
+  id: BulletLightRifleAuto
+  parent: [ BulletStoppingPowerSmall, BulletTrace ]
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    armorPenetration: 0.15
+    damage:
+      types:
+        Piercing: 13
+  - type: ProjectilePierce
+    chance: 0.6
+    deviation: 0.15
+    pierceLevel: HardenedMetal
+  - type: ProjectileRicochet
+    chance: 0.7
+
+- type: entity
+  id: BulletRifleAuto
+  parent: BulletLightRifleAuto
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: BulletRifleAutoAP
+  parent: BulletRifleTraceAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    armorPenetration: 0.5
+    damage:
+      types:
+        Piercing: 8
+  - type: ProjectilePierce
+    chance: 0.8
+    deviation: 0.15
+    pierceLevel: HardenedMetal
+  - type: ProjectileRicochet
+    chance: 0.8

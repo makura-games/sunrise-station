@@ -151,9 +151,9 @@
     proto: MisterBlueShit
 
 - type: loadout
-  id: BlueshieldAsh12
+  id: BlueshieldAsh13
   inhand:
-  - Ash12Box
+  - Ash13Box
   effects:
   - !type:GroupLoadoutEffect
     proto: MisterBlueShit50

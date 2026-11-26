@@ -40,7 +40,6 @@
     slots:
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
@@ -75,7 +74,6 @@
     slots:
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleIncendiary
         priority: 1
         whitelist:
           tags:
@@ -123,7 +121,6 @@
             - MagazineLightRiflePan
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeHeavyRifleRFMJ
         priority: 1
         whitelist:
           tags:

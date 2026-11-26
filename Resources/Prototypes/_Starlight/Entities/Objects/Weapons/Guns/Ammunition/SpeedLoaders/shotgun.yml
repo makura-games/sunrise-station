@@ -5,7 +5,11 @@
   abstract: true
   components:
   - type: Item
+    sprite: Objects/Tools/screwdriver.rsi
+    storedRotation: -90
     size: Normal
+    shape:
+    - 0,0,0,2
   - type: Tag
     tags:
       - SpeedLoaderShotgun
@@ -16,57 +20,42 @@
     whitelist:
       tags:
         - ShellShotgun
-    capacity: 7
+    capacity: 4
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
         ents: []
   - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
     layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
-      - state: base-7
+      - state: base-4
         map: [ "enum.GunVisualLayers.Mag" ]
-      - state: base-tip-7
+      - state: base-tip-4
         map: [ "enum.GunVisualLayers.Tip" ]
         color: "#F4001F"
   - type: MagazineVisuals
     magState: base
-    steps: 8
+    steps: 5
     zeroVisible: false
   - type: Appearance
 
 - type: entity
-  id: SpeedLoaderShotgunEmpty
-  name: "speed loader (.50 any)"
-  parent: [ BaseSpeedLoaderShotgun, BaseSecurityContraband ]
-  components:
-  - type: BallisticAmmoProvider
-    proto: null
-  - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
-    layers:
-      - state: base
-        map: [ "enum.GunVisualLayers.Base" ]
-      - state: base-1
-        map: [ "enum.GunVisualLayers.Mag" ]
-
-- type: entity
-  id: SpeedLoaderShellShotgun
-  name: "speed loader (.50 pellet)"
+  id: SpeedLoaderShotgunBuck
+  name: "speed loader (.50 buckshot)"
   parent: [ BaseSpeedLoaderShotgun, BaseSecurityContraband ]
   components:
   - type: BallisticAmmoProvider
     proto: ShellShotgun
   - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
     layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
-      - state: base-7
+      - state: base-4
         map: [ "enum.GunVisualLayers.Mag" ]
-      - state: base-tip-7
+      - state: base-tip-4
         map: [ "enum.GunVisualLayers.Tip" ]
         color: "#F4001F"
 
@@ -78,13 +67,13 @@
   - type: BallisticAmmoProvider
     proto: ShellShotgunBeanbag
   - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
     layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
-      - state: base-7
+      - state: base-4
         map: [ "enum.GunVisualLayers.Mag" ]
-      - state: base-tip-7
+      - state: base-tip-4
         map: [ "enum.GunVisualLayers.Tip" ]
         color: "#149A1E"
 
@@ -96,13 +85,13 @@
   - type: BallisticAmmoProvider
     proto: ShellShotgunSlug
   - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
     layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
-      - state: base-7
+      - state: base-4
         map: [ "enum.GunVisualLayers.Mag" ]
-      - state: base-tip-7
+      - state: base-tip-4
         map: [ "enum.GunVisualLayers.Tip" ]
         color: "#232323"
 
@@ -114,13 +103,13 @@
   - type: BallisticAmmoProvider
     proto: ShellShotgunFlechette
   - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
     layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
-      - state: base-7
+      - state: base-4
         map: [ "enum.GunVisualLayers.Mag" ]
-      - state: base-tip-7
+      - state: base-tip-4
         map: [ "enum.GunVisualLayers.Tip" ]
         color: "#5da0b5"
 
@@ -132,13 +121,13 @@
   - type: BallisticAmmoProvider
     proto: ShellShotgunUranium
   - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
     layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
-      - state: base-7
+      - state: base-4
         map: [ "enum.GunVisualLayers.Mag" ]
-      - state: base-tip-7
+      - state: base-tip-4
         map: [ "enum.GunVisualLayers.Tip" ]
         color: "#3bd22d"
 
@@ -150,13 +139,13 @@
   - type: BallisticAmmoProvider
     proto: ShellShotgunBirdshot
   - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
     layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
-      - state: base-7
+      - state: base-4
         map: [ "enum.GunVisualLayers.Mag" ]
-      - state: base-tip-7
+      - state: base-tip-4
         map: [ "enum.GunVisualLayers.Tip" ]
         color: "#B87333"
 
@@ -168,12 +157,12 @@
   - type: BallisticAmmoProvider
     proto: ShellShotgunIncendiary
   - type: Sprite
-    sprite: _Starlight/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Shotgun/shotgun_speed_loader.rsi
     layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
-      - state: base-7
+      - state: base-4
         map: [ "enum.GunVisualLayers.Mag" ]
-      - state: base-tip-7
+      - state: base-tip-4
         map: [ "enum.GunVisualLayers.Tip" ]
         color: "#f5f50a"

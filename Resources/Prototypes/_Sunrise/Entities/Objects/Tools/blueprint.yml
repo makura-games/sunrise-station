@@ -126,15 +126,26 @@
 # region security
 - type: entity
   parent: BaseBlueprintSecurity
-  id: BlueprintMagAsh12Basic
-  name: ash-12 magazine basic blueprint
-  description: A blueprint with a schematic of a ash-12 magazine with all basic variants. It can be inserted into an autolathe and security fabricator.
+  id: BlueprintMagazineBoxRifleAuto
+  name: P-90 ammunition blueprint
+  description: A blueprint for producing boxes of P-90 cartridges in an autolathe or security fabricator.
   components:
   - type: Blueprint
     providedRecipes:
-    - MagazineAsh12Slug
-    - MagazineAsh12Beanbag
-    - MagazineAsh12Flare
+    - MagazineBoxRifleAuto
+
+- type: entity
+  parent: BaseBlueprintSecurity
+  id: BlueprintAmmo13mm
+  name: 13mm ammunition blueprint
+  description: A blueprint for an ASH-13 magazine and three types of 13x55 mm ammunition boxes. It can be inserted into an autolathe and security fabricator.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - MagazineAsh13
+    - MagazineBoxHeavyRifle13mm
+    - MagazineBoxHeavyRifle13mmHP
+    - MagazineBoxHeavyRifle13mmAP
 
 - type: entity
   parent: BaseBlueprintSecurity

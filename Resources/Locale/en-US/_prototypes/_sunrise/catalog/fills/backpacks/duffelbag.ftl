@@ -67,4 +67,4 @@ ent-ClothingBackpackDuffelWeaponLightMachineGunM492 = m492 smartgun kit
 ent-ClothingBackpackDuffelWeaponLightMachineGunM492CBURN = m492 "Burner" kit
     .desc = An M492 kit with 3 incendiary machine gun belts, specially intended for CBRN units.
 ent-ClothingBackpackDuffelSyndicateSuperAmmoFilled = "arms Dealer" kit
-    .desc = A large supply of ammunition for the entire squad! The kit includes: a box of C-20r magazines, a box of Bulldog drums, a box of L6 SAW magazines and loose rounds, a box of Estoc magazines, a box of Dragunov magazines, and a box of caseless rounds.
+    .desc = A configurable ammunition supply for the entire squad. Choose five different ammunition kits after purchase.

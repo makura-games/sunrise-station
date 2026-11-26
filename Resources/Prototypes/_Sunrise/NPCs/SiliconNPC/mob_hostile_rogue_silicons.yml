@@ -1585,7 +1585,7 @@
     fuelCost: 25
     doAfterDelay: 10
   - type: BatteryAmmoProvider
-    proto: CartridgeRifleHeavy127mm
+    proto: CartridgeRifleHeavy13mm
     fireCost: 1
   - type: BatterySelfRecharger
     autoRechargePauseTime: 5

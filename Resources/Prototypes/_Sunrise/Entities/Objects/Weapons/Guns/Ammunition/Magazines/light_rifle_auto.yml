@@ -1,0 +1,27 @@
+- type: entity
+  id: MagazinePistolLightRifleAuto
+  name: APS magazine (7.62 Auto)
+  parent: MagazinePistol40Base
+  categories: []
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/762auto.rsi
+  - type: Tag
+    tags:
+    - MagazinePistolLightRifleAuto
+  - type: BallisticAmmoProvider
+    proto: CartridgeLightRifleAuto
+    capacity: 20
+    whitelist:
+      tags:
+      - CartridgeLightRifleAuto
+  - type: MagazineVisuals
+    steps: 7
+
+- type: entity
+  id: MagazinePistolLightRifleAutoEmpty
+  parent: MagazinePistolLightRifleAuto
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null

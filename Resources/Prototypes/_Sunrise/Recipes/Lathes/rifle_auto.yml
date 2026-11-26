@@ -1,0 +1,11 @@
+- type: latheRecipe
+  id: MagazineBoxRifleAuto
+  parent: BaseAmmoRecipe
+  result: MagazineBoxRifleAuto
+  materials:
+    Steel: 750
+
+- type: latheRecipePack
+  id: CentcomRifleAutoStatic
+  recipes:
+  - MagazineBoxRifleAuto

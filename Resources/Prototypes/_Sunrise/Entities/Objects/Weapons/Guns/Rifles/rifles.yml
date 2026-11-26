@@ -50,7 +50,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
@@ -135,7 +134,6 @@
           - MagazineRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleSP
         priority: 1
         whitelist:
           tags:
@@ -210,16 +208,15 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: null
         priority: 1
         whitelist:
           tags:
             - CartridgeRifle
 
 - type: entity
-  name: ASH-12
+  name: ASH-13
   parent: [GunLight, BaseWeaponRifle]
-  id: WeaponRifleAsh12
+  id: WeaponRifleAsh13
   components:
   - type: Sprite
     scale: 0.8,0.8
@@ -245,7 +242,7 @@
   - type: Gun
     minAngle: 15
     maxAngle: 30
-    angleIncrease: 3
+    angleIncrease: 2
     angleDecay: 15
     fireRate: 2.85
     soundGunshot:
@@ -256,20 +253,20 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineAsh12Slug
+        startingItem: MagazineAsh13
         insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/ash12/ash12_mag_in.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/ash12/ash12_mag_out.ogg
         priority: 3
         whitelist:
           tags:
-            - MagazineAsh12
+            - MagazineAsh13Rifle
       gun_chamber:
         name: Chamber
-        startingItem: ShellShotgunSlug
+        startingItem: CartridgeRifleHeavy13mm
         priority: 1
         whitelist:
           tags:
-            - ShotgunSlug
+            - CartridgeRifleHeavy13mm
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -336,7 +333,6 @@
           - MagazineLightRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleSP
         priority: 1
         whitelist:
           tags:
@@ -386,7 +382,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeLightRifleImprovised
         priority: 1
         whitelist:
           tags:
@@ -457,7 +452,6 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: null
         priority: 1
         whitelist:
           tags:
@@ -547,7 +541,6 @@
             - MagazineHeavyRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifleHeavySP
         priority: 1
         whitelist:
           tags:

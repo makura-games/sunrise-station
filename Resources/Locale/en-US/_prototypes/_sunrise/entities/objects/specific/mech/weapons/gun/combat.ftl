@@ -35,5 +35,5 @@ ent-WeaponMechCombatDuster = mounted EXP-220 Duster
     .desc = An  heavy Auto Cannon as a mech-mounted gun with Frag ammo.
     .suffix = Mech Weapon, Gun, Combat
 ent-WeaponMechCombatKord = kORD mounted machine gun
-    .desc = A rapid-fire machine gun chambered in 12.7 x 108 mm.
+    .desc = A rapid-fire machine gun chambered for 13 mm cartridges.
     .suffix = Mech Weapon, Ranged, Combat, Kord

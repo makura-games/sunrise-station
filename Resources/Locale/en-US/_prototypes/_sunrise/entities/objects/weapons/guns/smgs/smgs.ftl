@@ -1,5 +1,5 @@
 ent-WeaponSubMachineGunP90 = p-90
-    .desc = { ent-BaseWeaponSubMachineGun.desc }
+    .desc = A compact submachine gun that uses .224 auto cartridges.
 ent-WeaponSubMachineGunNewVector = new Vector
     .desc = A modern 30-round Vector by Waffle Corp chambered in .35 Auto. Its delayed-blowback system redirects the bolt assembly downward, helping control its high rate of fire.
 ent-WeaponSubMachineGunPPSH = pPSH 59 SMG

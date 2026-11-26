@@ -1,6 +1,6 @@
 - type: entity
   id: MagazineP90
-  name: P90 magazine (SP)
+  name: P90 magazine
   parent: BaseItem
   components:
   - type: Tag
@@ -8,10 +8,10 @@
     - MagazineP90
   - type: BallisticAmmoProvider
     mayTransfer: true
-    proto: CartridgePistolSP
+    proto: CartridgeRifleAuto
     whitelist:
       tags:
-      - CartridgePistol
+      - CartridgeRifleAuto
     capacity: 50
   - type: Item
     size: Small
@@ -32,36 +32,12 @@
   - type: Appearance
 
 - type: entity
-  id: MagazineP90HP
-  name: P90 magazine (HP)
-  parent: MagazineP90
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgePistolHP
-
-- type: entity
-  id: MagazineP90FMJ
-  name: P90 magazine (FMJ)
-  parent: MagazineP90
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgePistolFMJ
-
-- type: entity
-  id: MagazineP90Incendiary
-  name: P90 magazine (incendiary)
-  parent: MagazineP90
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgePistolIncendiary
-
-- type: entity
   id: MagazineP90AP
   name: P90 magazine (AP)
   parent: MagazineP90
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgePistolAP
+    proto: CartridgeRifleAutoAP
 
 - type: entity
   id: MagazineMP7
@@ -106,10 +82,10 @@
     - MagazineSMGPPSH
   - type: BallisticAmmoProvider
     mayTransfer: true
-    proto: CartridgePistolSP  # 57x28
+    proto: CartridgeLightRifleAuto
     whitelist:
       tags:
-      - CartridgePistol  # 57x28
+      - CartridgeLightRifleAuto
     capacity: 71
   - type: Item
     size: Normal
