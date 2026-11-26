@@ -9,18 +9,9 @@
   - type: EntityRemap
     mask:
       AsteroidRock: AsteroidRockCoalCrab
-      WallRockBasalt: WallRockBasaltCoalCrab
       WallRockChromite: WallRockChromiteCoalCrab
       WallRockSand: WallRockSandCoalCrab
       WallRockSnow: WallRockSnowCoalCrab
-  - type: OreVein
-    currentOre: OreCoalCrab
-
-- type: entity
-  id: WallRockBasaltCoalCrab
-  parent: WallRockCoal
-  suffix: Crab
-  components:
   - type: OreVein
     currentOre: OreCoalCrab
 
@@ -57,18 +48,9 @@
   - type: EntityRemap
     mask:
       AsteroidRock: AsteroidRockGoldCrab
-      WallRockBasalt: WallRockBasaltGoldCrab
       WallRockChromite: WallRockChromiteGoldCrab
       WallRockSand: WallRockSandGoldCrab
       WallRockSnow: WallRockSnowGoldCrab
-  - type: OreVein
-    currentOre: OreGoldCrab
-
-- type: entity
-  id: WallRockBasaltGoldCrab
-  parent: WallRockGold
-  suffix: Crab
-  components:
   - type: OreVein
     currentOre: OreGoldCrab
 
@@ -105,17 +87,8 @@
   - type: EntityRemap
     mask:
       AsteroidRock: AsteroidRockQuartzCrab
-      WallRockBasalt: WallRockBasaltQuartzCrab
       WallRockChromite: WallRockChromiteQuartzCrab
       WallRockSnow: WallRockSnowQuartzCrab
-  - type: OreVein
-    currentOre: OreQuartzCrab
-
-- type: entity
-  id: WallRockBasaltQuartzCrab
-  parent: WallRockQuartz
-  suffix: Crab
-  components:
   - type: OreVein
     currentOre: OreQuartzCrab
 
@@ -144,18 +117,9 @@
   - type: EntityRemap
     mask:
       AsteroidRock: AsteroidRockSilverCrab
-      WallRockBasalt: WallRockBasaltSilverCrab
       WallRockChromite: WallRockChromiteSilverCrab
       WallRockSand: WallRockSandSilverCrab
       WallRockSnow: WallRockSnowSilverCrab
-  - type: OreVein
-    currentOre: OreSilverCrab
-
-- type: entity
-  id: WallRockBasaltSilverCrab
-  parent: WallRockSilver
-  suffix: Crab
-  components:
   - type: OreVein
     currentOre: OreSilverCrab
 
@@ -192,18 +156,9 @@
   - type: EntityRemap
     mask:
       AsteroidRock: AsteroidRockTinCrab
-      WallRockBasalt: WallRockBasaltTinCrab
       WallRockChromite: WallRockChromiteTinCrab
       WallRockSand: WallRockSandTinCrab
       WallRockSnow: WallRockSnowTinCrab
-  - type: OreVein
-    currentOre: OreIronCrab
-
-- type: entity
-  id: WallRockBasaltTinCrab
-  parent: WallRockTin
-  suffix: Crab
-  components:
   - type: OreVein
     currentOre: OreIronCrab
 
@@ -240,18 +195,9 @@
   - type: EntityRemap
     mask:
       AsteroidRock: AsteroidRockUraniumCrab
-      WallRockBasalt: WallRockBasaltUraniumCrab
       WallRockChromite: WallRockChromiteUraniumCrab
       WallRockSand: WallRockSandUraniumCrab
       WallRockSnow: WallRockSnowUraniumCrab
-  - type: OreVein
-    currentOre: OreUraniumCrab
-
-- type: entity
-  id: WallRockBasaltUraniumCrab
-  parent: WallRockUranium
-  suffix: Crab
-  components:
   - type: OreVein
     currentOre: OreUraniumCrab
 
@@ -288,7 +234,6 @@
   - type: EntityRemap
     mask:
       AsteroidRock: AsteroidRockBananiumCrab
-      WallRockBasalt: WallRockBasaltBananiumCrab
       WallRockChromite: WallRockChromiteBananiumCrab
       WallRockSand: WallRockSandBananiumCrab
       WallRockSnow: WallRockSnowBananiumCrab
@@ -296,8 +241,24 @@
     currentOre: OreBananiumCrab
 
 - type: entity
-  id: WallRockBasaltBananiumCrab
-  parent: WallRockBasaltBananium
+  id: WallRockChromiteBananiumCrab
+  parent: WallRockChromiteBananium
+  suffix: Crab
+  components:
+  - type: OreVein
+    currentOre: OreBananiumCrab
+
+- type: entity
+  id: WallRockSandBananiumCrab
+  parent: WallRockSandBananium
+  suffix: Crab
+  components:
+  - type: OreVein
+    currentOre: OreBananiumCrab
+
+- type: entity
+  id: WallRockSnowBananiumCrab
+  parent: WallRockSnowBananium
   suffix: Crab
   components:
   - type: OreVein
@@ -312,19 +273,9 @@
   - type: EntityRemap
     mask:
       AsteroidRock: AsteroidRockSaltCrab
-      WallRockBasalt: WallRockBasaltSaltCrab
       WallRockChromite: WallRockChromiteSaltCrab
       WallRockSand: WallRockSandSaltCrab
       WallRockSnow: WallRockSnowSaltCrab
-      WallRockAndesite: WallRockAndesiteSaltCrab
-  - type: OreVein
-    currentOre: OreSaltCrab
-
-- type: entity
-  id: WallRockBasaltSaltCrab
-  parent: WallRockSalt
-  suffix: Crab
-  components:
   - type: OreVein
     currentOre: OreSaltCrab
 
@@ -353,14 +304,6 @@
     currentOre: OreSaltCrab
 
 - type: entity
-  id: WallRockAndesiteSaltCrab
-  parent: WallRockSalt
-  suffix: Crab
-  components:
-  - type: OreVein
-    currentOre: OreSaltCrab
-
-- type: entity
   id: WallRockPlasmaCrab
   parent: WallRockPlasma
   suffix: Crab
@@ -368,19 +311,9 @@
   - type: EntityRemap
     mask:
       AsteroidRock: AsteroidRockPlasmaCrab
-      WallRockBasalt: WallRockBasaltPlasmaCrab
       WallRockChromite: WallRockChromitePlasmaCrab
       WallRockSand: WallRockSandPlasmaCrab
       WallRockSnow: WallRockSnowPlasmaCrab
-      WallRockAndesite: WallRockAndesitePlasmaCrab
-  - type: OreVein
-    currentOre: OrePlasmaCrab
-
-- type: entity
-  id: WallRockBasaltPlasmaCrab
-  parent: WallRockPlasma
-  suffix: Crab
-  components:
   - type: OreVein
     currentOre: OrePlasmaCrab
 
@@ -409,14 +342,6 @@
     currentOre: OrePlasmaCrab
 
 - type: entity
-  id: WallRockAndesitePlasmaCrab
-  parent: WallRockPlasma
-  suffix: Crab
-  components:
-  - type: OreVein
-    currentOre: OrePlasmaCrab
-
-- type: entity
   id: WallRockDiamondCrab
   parent: WallRockDiamond
   suffix: Crab
@@ -424,19 +349,9 @@
   - type: EntityRemap
     mask:
       AsteroidRock: AsteroidRockDiamondCrab
-      WallRockBasalt: WallRockBasaltDiamondCrab
       WallRockChromite: WallRockChromiteDiamondCrab
       WallRockSand: WallRockSandDiamondCrab
       WallRockSnow: WallRockSnowDiamondCrab
-      WallRockAndesite: WallRockAndesiteDiamondCrab
-  - type: OreVein
-    currentOre: OreDiamondCrab
-
-- type: entity
-  id: WallRockBasaltDiamondCrab
-  parent: WallRockDiamond
-  suffix: Crab
-  components:
   - type: OreVein
     currentOre: OreDiamondCrab
 
@@ -463,36 +378,4 @@
   components:
   - type: OreVein
     currentOre: OreDiamondCrab
-
-- type: entity
-  id: WallRockAndesiteDiamondCrab
-  parent: WallRockDiamond
-  suffix: Crab
-  components:
-  - type: OreVein
-    currentOre: OreDiamondCrab
 #Sunrise-End
-
-- type: entity
-  id: WallRockChromiteBananiumCrab
-  parent: WallRockChromiteBananium
-  suffix: Crab
-  components:
-  - type: OreVein
-    currentOre: OreBananiumCrab
-
-- type: entity
-  id: WallRockSandBananiumCrab
-  parent: WallRockSandBananium
-  suffix: Crab
-  components:
-  - type: OreVein
-    currentOre: OreBananiumCrab
-
-- type: entity
-  id: WallRockSnowBananiumCrab
-  parent: WallRockSnowBananium
-  suffix: Crab
-  components:
-  - type: OreVein
-    currentOre: OreBananiumCrab

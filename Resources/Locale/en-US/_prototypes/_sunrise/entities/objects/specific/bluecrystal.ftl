@@ -1,12 +1,6 @@
 ent-Bluecrystal = bluespace crystal
-    .desc = It seems to shimmer with a attractive energy.
-    .suffix = 100 BC
+    .desc = It shimmers with bluespace energy. When split, it releases a spatial burst.
+    .suffix = 3 BC
 ent-Bluecrystal1 = bluespace crystal
-    .desc = It seems to shimmer with a attractive energy.
+    .desc = It shimmers with bluespace energy. When split, it releases a spatial burst.
     .suffix = 1 BC
-ent-Bluecrystal10 = bluespace crystal
-    .desc = It seems to shimmer with a attractive energy.
-    .suffix = 10 BC
-ent-Bluecrystal25 = bluespace crystal
-    .desc = It seems to shimmer with a attractive energy.
-    .suffix = 25 BC

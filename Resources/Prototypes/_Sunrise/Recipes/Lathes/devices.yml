@@ -33,6 +33,7 @@
     Silver: 750
     Plasma: 1000
     Uranium: 200
+    Bluecrystal: 100
 
 - type: latheRecipe
   id: SmallBluespaceAirTank
@@ -43,6 +44,7 @@
     Silver: 750
     Plasma: 500
     Uranium: 100
+    Bluecrystal: 100
 
 # region PKA
 - type: latheRecipe

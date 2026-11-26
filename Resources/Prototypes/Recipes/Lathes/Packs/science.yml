@@ -24,6 +24,7 @@
   - DeviceQuantumSpinInverter
   - DeviceDesynchronizer
   - ClothingBackpackHarmpack
+  - ArtificialBluecrystal # Sunrise-Add
   - TeleporterChipBlank
 
 - type: latheRecipePack

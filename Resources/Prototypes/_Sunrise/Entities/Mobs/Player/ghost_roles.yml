@@ -368,10 +368,10 @@
     back:
     - BoxErtBaseKit
     - AdvancedJetInjector
-    - JugPunctTranex
-    - JugPyraDerma
-    - JugDexPlusSaline
-    - JugTrico
+    - VialBluespacePunctTranex
+    - VialBluespacePyraDerma
+    - VialBluespaceDexPlusSaline
+    - VialBluespaceTrico
     - BeakerSmallArith
     - MedkitCombatFilled
     - ChemistryBottleOmnizine
@@ -399,10 +399,10 @@
   storage:
     back:
     - BoxErtBaseKit
-    - JugPunctTranex
-    - JugPyraDerma
-    - JugDexPlusSaline
-    - JugTrico
+    - VialBluespacePunctTranex
+    - VialBluespacePyraDerma
+    - VialBluespaceDexPlusSaline
+    - VialBluespaceTrico
     - BeakerSmallArith
     - DefibrillatorCompact
     - MedkitCombatFilled

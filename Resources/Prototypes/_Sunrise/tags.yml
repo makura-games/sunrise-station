@@ -418,6 +418,9 @@
 
 # region Materials / construction
 - type: Tag
+  id: OreBluecrystal
+
+- type: Tag
   id: Board
 
 - type: Tag

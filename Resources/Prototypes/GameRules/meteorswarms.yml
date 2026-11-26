@@ -51,6 +51,8 @@
     AsteroidRockPlasma: 2
     AsteroidRockDiamond: 2
     AsteroidRockUranium: 0.5
+    AsteroidRockBananium: 0.5 # Sunrise-Edit - сохраняем бананиумные метеориты Sunrise
+    AsteroidRockBluecrystal: 0.5 # Sunrise-Edit - сохраняем блюспейс-метеориты Sunrise
 
 # Event Schedulers
 

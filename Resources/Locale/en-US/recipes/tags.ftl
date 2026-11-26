@@ -160,3 +160,4 @@ construction-graph-tag-backpack = backpack
 
 # chemistry
 construction-graph-tag-centrifuge-compatible = centrifugable container
+construction-graph-tag-blue-crystal = bluespace crystal

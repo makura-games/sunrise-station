@@ -1,0 +1,9 @@
+- type: entity
+  abstract: true
+  parent: SolutionBeaker
+  id: Solution180
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      maxVol: 180

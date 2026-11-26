@@ -319,7 +319,7 @@
 
 - type: entity
   name: bluespace beaker
-  parent: [SolutionGinormous, BaseBeakerMetallic] # Bluespace items hold 8x the solution of regular items (240u a tile)
+  parent: [SolutionHuge, BaseBeakerMetallic] # Sunrise-Edit - сохраняем уменьшенный объём блюспейс-мензурки Sunrise
   description: Powered by experimental bluespace technology.
   id: BluespaceBeaker
   components:
