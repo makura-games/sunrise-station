@@ -244,6 +244,8 @@ public sealed partial class VisualBodySystem : SharedVisualBodySystem
                     _sprite.LayerSetColor(target, spriteLayer, marking.MarkingColors[i]);
                 else
                     _sprite.LayerSetColor(target, spriteLayer, Color.White);
+                    
+                _sprite.LayerSetScale(target, spriteLayer, proto.Scale); // Sunrise-Edit - скейл всякого
 
                 if (displacement != null && proto.CanBeDisplaced)
                 {
