@@ -10,7 +10,6 @@
   categories:
   - UplinkWearables
 
-
 - type: listing
   id: UplinkChestRig
   name: uplink-chest-rig-name
@@ -20,7 +19,6 @@
     Telecrystal: 1
   categories:
   - UplinkWearables
-
 
 - type: listing
   id: UplinkChameleon
@@ -36,7 +34,6 @@
   categories:
     - UplinkWearables
 
-
 - type: listing
   id: UplinkClothingNoSlipsShoes
   name: uplink-clothing-no-slips-shoes-name
@@ -50,7 +47,6 @@
     Telecrystal: 2
   categories:
   - UplinkWearables
-
 
 - type: listing
   id: UplinkClothingOuterVestWeb
@@ -72,7 +68,6 @@
       - AssaultOpsUplink
   #Sunrise-end
 
-
 - type: listing
   id: UplinkClothingOuterVestWebElite
   name: uplink-clothing-outer-vest-web-elite-name
@@ -93,7 +88,6 @@
       - AssaultOpsUplink
   #Sunrise-end
 
-
 - type: listing
   id: UplinkClothingShoesBootsMagSyndie
   name: uplink-clothing-shoes-boots-mag-syndie-name
@@ -107,7 +101,6 @@
   categories:
   - UplinkWearables
 
-
 - type: listing
   id: UplinkEVASyndie
   name: uplink-eva-syndie-name
@@ -118,7 +111,6 @@
     Telecrystal: 1
   categories:
   - UplinkWearables
-
 
 - type: listing
   id: UplinkHardsuitCarp
@@ -133,7 +125,6 @@
     Telecrystal: 3
   categories:
   - UplinkWearables
-
 
 - type: listing
   id: UplinkHardsuitSyndie
@@ -157,7 +148,6 @@
       - LoneOpsUplink
   #Sunrise-end
 
-
 - type: listing
   id: UplinkClothingOuterArmorRaid
   name: uplink-syndie-raid-name
@@ -174,7 +164,6 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink # Sunrise-Edit
-
 
 - type: listing
   id: UplinkHardsuitSyndieElite
@@ -193,7 +182,6 @@
       - NukeOpsUplink
       - LoneOpsUplink # Sunrise-Edit
 
-
 - type: listing
   id: UplinkClothingOuterHardsuitJuggernaut
   name: uplink-clothing-outer-hardsuit-juggernaut-name
@@ -211,7 +199,6 @@
       - NukeOpsUplink
       - LoneOpsUplink # Sunrise-Edit
 
-
 - type: listing
   id: UplinkClothingEyesHudSyndicate
   name: uplink-clothing-eyes-hud-syndicate-name
@@ -227,7 +214,6 @@
         tags:
           - NukeOpsUplink
           - LoneOpsUplink # Sunrise-Edit
-
 
 - type: listing
   id: UplinkBackpackSyndicate

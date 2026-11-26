@@ -14,7 +14,6 @@
   categories:
   - UplinkWeaponry
 
-
 # Inbuilt suppressor so it's sneaky + more expensive.
 - type: listing
   id: UplinkPistolCobra
@@ -28,7 +27,6 @@
     Telecrystal: 3 # Sunrise-Edit
   categories:
   - UplinkWeaponry
-
 
 # Poor accuracy, slow to fire, cheap option
 - type: listing
@@ -48,7 +46,6 @@
       - AssaultOpsUplink
   #Sunrise-end
 
-
 - type: listing
   id: UplinkEsword
   name: uplink-esword-name
@@ -63,7 +60,6 @@
   categories:
   - UplinkWeaponry
 
-
 - type: listing
   id: UplinkEnergyDagger
   name: uplink-edagger-name
@@ -77,7 +73,6 @@
     Telecrystal: 2
   categories:
   - UplinkWeaponry
-
 
 - type: listing
   id: UplinkEnergyCrossbow
@@ -95,7 +90,6 @@
   - !type:ListingLimitedStockCondition
     stock: 1
 
-
 - type: listing
   id: UplinkThrowingKnivesKit
   name: uplink-knives-kit-name
@@ -110,7 +104,6 @@
   categories:
     - UplinkWeaponry
 
-
 - type: listing
   id: UplinkGlovesNorthStar
   name: uplink-gloves-north-star-name
@@ -123,7 +116,6 @@
     Telecrystal: 8
   categories:
   - UplinkWeaponry
-
 
 - type: listing
   id: UplinkGlovesKnuckleDusters
@@ -138,7 +130,6 @@
     Telecrystal: 4
   categories:
   - UplinkWeaponry
-
 
 # Sunrise edit start - Перемещено в каталог _Sunrise
 # - type: listing
@@ -176,7 +167,6 @@
   categories:
   - UplinkWeaponry
 
-
 - type: listing
   id: UplinkSniperBundle
   name: uplink-sniper-bundle-name
@@ -199,7 +189,6 @@
       - LoneOpsUplink
   # Sunrise-end
 
-
 - type: listing
   id: UplinkHushpup
   name: uplink-hushpup-name
@@ -213,7 +202,6 @@
     Telecrystal: 10
   categories:
   - UplinkWeaponry
-
 
 - type: listing
   id: UplinkC20R
@@ -236,7 +224,6 @@
       - LoneOpsUplink # Sunrise-Add
       - AssaultOpsUplink # Sunrise-Add
 
-
 - type: listing
   id: UplinkC20RBundle
   name: uplink-c20r-bundle-name
@@ -256,7 +243,6 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink # Sunrise-Add
-
 
 - type: listing
   id: UplinkBulldog
@@ -278,7 +264,6 @@
       - NukeOpsUplink
       - LoneOpsUplink # Sunrise-Add
 
-
 - type: listing
   id: UplinkBulldogBundle
   name: uplink-bulldog-bundle-name
@@ -298,7 +283,6 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink # Sunrise-Add
-
 
 - type: listing
   id: UplinkEstocBundle
@@ -320,7 +304,6 @@
       - NukeOpsUplink
       - LoneOpsUplink # Sunrise-Add
 
-
 - type: listing
   id: UplinkGrenadeLauncher
   name: uplink-grenade-launcher-name
@@ -338,7 +321,6 @@
       - NukeOpsUplink
       - LoneOpsUplink # Sunrise-Edit
       - AssaultOpsUplink # Sunrise-Edit
-
 
 # Sunrise edit start - листинг заменён вариантом для China Lake в каталоге Sunrise
 #- type: listing

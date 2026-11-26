@@ -17,7 +17,6 @@
     whitelist:
     - Botanist
 
-
 - type: listing
   id: uplinkHolyHandGrenade
   name: uplink-holy-hand-grenade-name
@@ -34,7 +33,6 @@
   - !type:BuyerJobCondition
     whitelist:
     - Chaplain
-
 
 - type: listing
   id: uplinkRevolverCapGunFake
@@ -55,7 +53,6 @@
     - Mime
     - Clown
 
-
 - type: listing
   id: UplinkClusterBananaPeel
   name: uplink-cluster-banana-peel-name
@@ -74,7 +71,6 @@
     whitelist:
     - Clown
 
-
 - type: listing
   id: UplinkHoloclownKit
   name: uplink-holoclown-kit-name
@@ -92,7 +88,6 @@
   - !type:BuyerJobCondition
     whitelist:
     - Clown
-
 
 - type: listing
   id: uplinkHotPotato
@@ -114,7 +109,6 @@
     - Clown
     - Mime
 
-
 - type: listing
   id: UplinkChimpUpgradeKit
   name: uplink-chimp-upgrade-kit-name
@@ -131,7 +125,6 @@
     - !type:BuyerDepartmentCondition
       whitelist:
       - Science
-
 
 - type: listing
   id: uplinkProximityMine
@@ -154,7 +147,6 @@
       components:
       - SurplusBundle
 
-
 - type: listing
   id: UplinkSyndicateSpongeBox
   name: uplink-syndicate-sponge-box-name
@@ -176,7 +168,6 @@
     - ResearchDirector
     - Chef
 
-
 - type: listing
   id: UplinkCaneBlade
   name: uplink-cane-blade-name
@@ -194,7 +185,6 @@
   - !type:BuyerJobCondition
     whitelist:
     - Librarian
-
 
 - type: listing
   id: UplinkCombatBakery
@@ -215,7 +205,6 @@
     - Chef
     - Mime
 
-
 - type: listing
   id: UplinkAcolyteArmor
   name: uplink-acolyte-armor-name
@@ -234,7 +223,6 @@
     whitelist:
     - Chaplain
 
-
 - type: listing
   id: UplinkSawAdvanced
   name: uplink-saw-advanced-name
@@ -252,7 +240,6 @@
   - !type:BuyerJobCondition
     whitelist:
     - MedicalDoctor
-
 
 - type: listing
   id: uplinkBriefcaseGun

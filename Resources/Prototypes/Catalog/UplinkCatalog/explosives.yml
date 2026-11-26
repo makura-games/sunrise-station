@@ -18,7 +18,6 @@
       tags:
       - NukeOpsUplink
 
-
 - type: listing
   id: UplinkSmokeGrenade
   name: uplink-smoke-grenade-name
@@ -28,7 +27,6 @@
     Telecrystal: 1
   categories:
   - UplinkExplosives
-
 
 - type: listing
   id: UplinkSyndieMiniBomb
@@ -47,7 +45,6 @@
     blacklist:
       tags:
       - AssaultOpsUplink
-
 
 - type: listing
   id: UplinkGrenadePenguin
@@ -69,7 +66,6 @@
       - AssaultOpsUplink
   #Sunrise-end
 
-
 - type: listing
   id: UplinkC4
   name: uplink-c4-name
@@ -82,7 +78,6 @@
     Telecrystal: 2
   categories:
   - UplinkExplosives
-
 
 - type: listing
   id: UplinkGrenadierRig
@@ -103,7 +98,6 @@
       - NukeOpsUplink
       - LoneOpsUplink #Sunrise added
 
-
 - type: listing
   id: UplinkC4Bundle
   name: uplink-c4-bundle-name
@@ -116,7 +110,6 @@
     Telecrystal: 12 #you're buying bulk so its a 25% discount, so no additional random discount over it
   categories:
   - UplinkExplosives
-
 
 - type: listing
   id: UplinkEmpGrenade
@@ -131,7 +124,6 @@
   categories:
   - UplinkExplosives
 
-
 - type: listing
   id: UplinkExplodingPen
   name: uplink-exploding-pen-name
@@ -145,7 +137,6 @@
     Telecrystal: 4
   categories:
   - UplinkExplosives
-
 
 - type: listing
   id: UplinkSyndicateBomb
@@ -165,7 +156,6 @@
       - LoneOpsUplink
       - AssaultOpsUplink
 
-
 - type: listing
   id: UplinkSyndicateBombNukie
   name: uplink-exploding-syndicate-bomb-name
@@ -182,7 +172,6 @@
       - NukeOpsUplink
       - LoneOpsUplink
       - AssaultOpsUplink
-
 
 - type: listing
   id: UplinkGrenadeShrapnel
@@ -204,7 +193,6 @@
       - AssaultOpsUplink
   #Sunrise-end
 
-
 - type: listing
   id: UplinkGrenadeIncendiary
   name: uplink-incendiary-grenade-name
@@ -224,7 +212,6 @@
       tags:
       - AssaultOpsUplink
   #Sunrise-end
-
 
 - type: listing
   id: UplinkPowerSink

@@ -8,7 +8,6 @@
   categories:
   - UplinkPointless
 
-
 - type: listing
   id: UplinkClothingConductingGloves
   name: uplink-clothing-conducting-gloves-name
@@ -20,7 +19,6 @@
   categories:
   - UplinkPointless
 
-
 - type: listing
   id: UplinkRevolverCapGun
   name: uplink-revolver-cap-gun-name
@@ -30,7 +28,6 @@
     Telecrystal: 1
   categories:
   - UplinkPointless
-
 
 - type: listing
   id: UplinkSyndicateStamp
@@ -42,7 +39,6 @@
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
-
 
 - type: listing
   id: UplinkCatEars
@@ -59,7 +55,6 @@
       components:
       - SurplusBundle
 
-
 - type: listing
   id: UplinkOutlawHat
   name: uplink-outlaw-hat-name
@@ -71,7 +66,6 @@
   - !type:ListingLimitedStockCondition
     stock: 1
 
-
 - type: listing
   id: UplinkOutlawGlasses
   name: uplink-outlaw-glasses-name
@@ -81,7 +75,6 @@
     Telecrystal: 1
   categories:
   - UplinkPointless
-
 
 - type: listing
   id: UplinkCostumePyjama
@@ -93,7 +86,6 @@
   categories:
   - UplinkPointless
 
-
 - type: listing
   id: UplinkCostumeClown
   name: uplink-costume-clown-name
@@ -104,7 +96,6 @@
   categories:
   - UplinkPointless
 
-
 - type: listing
   id: UplinkCarpSuitBundle
   name: uplink-carp-suit-bundle-name
@@ -114,7 +105,6 @@
     Telecrystal: 2
   categories:
   - UplinkPointless
-
 
 - type: listing
   id: UplinkOperativeSuit
@@ -127,7 +117,6 @@
   - !type:ListingLimitedStockCondition
     stock: 1
 
-
 - type: listing
   id: UplinkOperativeSkirt
   name: uplink-operative-skirt-name
@@ -138,7 +127,6 @@
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
-
 
 - type: listing
   id: UplinkBalloon
@@ -155,7 +143,6 @@
       components:
       - SurplusBundle
 
-
 - type: listing
   id: UplinkScarfSyndieRed
   name: uplink-scarf-syndie-red-name
@@ -166,7 +153,6 @@
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
-
 
 - type: listing
   id: UplinkScarfSyndieGreen
@@ -179,7 +165,6 @@
   - !type:ListingLimitedStockCondition
     stock: 1
 
-
 - type: listing
   id: UplinkSyndicateBusinessCard
   name: uplink-business-card-name
@@ -191,7 +176,6 @@
   - !type:ListingLimitedStockCondition
     stock: 3
 
-
 - type: listing
   id: UplinkDecoyKit
   name: uplink-decoy-kit-name
@@ -202,7 +186,6 @@
     Telecrystal: 1
   categories:
   - UplinkPointless
-
 
 - type: listing
   id: UplinkContrabandLighter

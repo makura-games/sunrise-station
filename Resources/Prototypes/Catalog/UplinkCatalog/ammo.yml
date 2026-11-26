@@ -11,7 +11,6 @@
   categories:
   - UplinkAmmo
 
-
 # For the C20R
 - type: listing
   id: UplinkMagazinePistolSubMachineGun
@@ -31,7 +30,6 @@
       - AssaultOpsUplink
   #Sunrise-end
 
-
 # For the Bulldog
 - type: listing
   id: UplinkMagazineShotgunPellet
@@ -44,7 +42,6 @@
   categories:
   - UplinkAmmo
 
-
 - type: listing
   id: UplinkMagazineShotgunSlug
   #name: uplink-magazine-bulldog-slug-name # Sunrise-Edit
@@ -55,7 +52,6 @@
     Telecrystal: 2
   categories:
   - UplinkAmmo
-
 
 # For the Cobra
 - type: listing
@@ -68,7 +64,6 @@
     Telecrystal: 1
   categories:
   - UplinkAmmo
-
 
 # For the mosin
 - type: listing
@@ -88,7 +83,6 @@
       - AssaultOpsUplink
   #Sunrise-end
 
-
 # For the Estoc
 - type: listing
   id: UplinkEstocAmmo
@@ -99,7 +93,6 @@
     Telecrystal: 1 # Sunrise-Edit
   categories:
   - UplinkAmmo
-
 
 # for the hristov
 - type: listing
@@ -118,7 +111,6 @@
       tags:
       - AssaultOpsUplink
   #Sunrise-end
-
 
 - type: listing
   id: UplinkAmmoBundle
@@ -140,7 +132,6 @@
         components:
           - SurplusBundle
 
-
 # for the clake:
 - type: listing
   id: GrenadeFrag
@@ -151,7 +142,6 @@
     Telecrystal: 3
   categories:
   - UplinkAmmo
-
 
 - type: listing
   id: GrenadeBlast

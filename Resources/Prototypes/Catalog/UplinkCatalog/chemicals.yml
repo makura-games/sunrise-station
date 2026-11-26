@@ -14,7 +14,6 @@
   categories:
   - UplinkChemicals
 
-
 - type: listing
   id: UplinkHypoDart
   name: uplink-hypodart-name
@@ -29,7 +28,6 @@
   categories:
   - UplinkChemicals
 
-
 - type: listing
   id: UplinkChemistryKitBundle
   name: uplink-chemistry-kit-name
@@ -43,7 +41,6 @@
     Telecrystal: 3
   categories:
   - UplinkChemicals
-
 
 - type: listing
   id: UplinkZombieBundle
@@ -62,7 +59,6 @@
       - NukeOpsUplink
       - LoneOpsUplink
 
-
 - type: listing
   id: UplinkNocturineChemistryBottle
   name: uplink-nocturine-chemistry-bottle-name
@@ -75,7 +71,6 @@
     Telecrystal: 4
   categories:
   - UplinkChemicals
-
 
 - type: listing
   id: UplinkCombatMedkit
@@ -90,7 +85,6 @@
   categories:
   - UplinkChemicals
 
-
 - type: listing
   id: UplinkCombatMedipen
   name: uplink-combat-medipen-name
@@ -103,7 +97,6 @@
     Telecrystal: 3
   categories:
   - UplinkChemicals
-
 
 - type: listing
   id: UplinkStimpack
@@ -118,7 +111,6 @@
   categories:
   - UplinkChemicals
 
-
 - type: listing
   id: UplinkStimkit
   name: uplink-stimkit-name
@@ -132,7 +124,6 @@
   categories:
   - UplinkChemicals
 
-
 - type: listing
   id: UplinkCigarettes
   name: uplink-cigarettes-name
@@ -142,7 +133,6 @@
     Telecrystal: 1
   categories:
   - UplinkChemicals
-
 
 - type: listing
   id: UplinkMedsBundle

@@ -9,7 +9,6 @@
   categories:
   - UplinkDeception
 
-
 - type: listing
   id: UplinkAgentIDCard
   name: uplink-agent-id-card-name
@@ -24,7 +23,6 @@
   categories:
   - UplinkDeception
 
-
 - type: listing
   id: UplinkStealthBox
   name: uplink-stealth-box-name
@@ -38,7 +36,6 @@
   categories:
   - UplinkDeception
 
-
 - type: listing
   id: UplinkChameleonProjector
   name: uplink-chameleon-projector-name
@@ -51,7 +48,6 @@
     Telecrystal: 3
   categories:
   - UplinkDeception
-
 
 - type: listing
   id: UplinkHeadsetEncryptionKey
@@ -67,7 +63,6 @@
   categories:
   - UplinkDeception
 
-
 - type: listing
   id: UplinkBinaryTranslatorKey
   name: uplink-binary-translator-key-name
@@ -79,7 +74,6 @@
   categories:
   - UplinkDeception
 
-
 - type: listing
   id: UplinkCyberpen
   name: uplink-cyberpen-name
@@ -89,7 +83,6 @@
     Telecrystal: 1
   categories:
   - UplinkDeception
-
 
 - type: listing
   id: UplinkDecoyDisk
@@ -101,7 +94,6 @@
     Telecrystal: 1
   categories:
   - UplinkDeception
-
 
 - type: listing
   id: UplinkBribe
@@ -115,7 +107,6 @@
     Telecrystal: 4
   categories:
     - UplinkDeception
-
 
 # - type: listing
 #   id: UplinkGigacancerScanner
@@ -147,7 +138,6 @@
       tags:
       - NukeOpsUplink
 
-
 - type: listing
   id: UplinkSyndicateBombFakeNukie
   name: uplink-exploding-syndicate-bomb-fake-name
@@ -166,7 +156,6 @@
       tags:
       - NukeOpsUplink
 
-
 - type: listing
   id: UplinkTravelCamera
   name: uplink-travel-camera-name
@@ -176,7 +165,6 @@
     Telecrystal: 1
   categories:
   - UplinkDeception
-
 
 - type: listing
   id: UplinkSmugglerSatchel
