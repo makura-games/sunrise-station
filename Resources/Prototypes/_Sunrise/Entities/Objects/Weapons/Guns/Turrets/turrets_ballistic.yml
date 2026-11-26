@@ -809,7 +809,6 @@
     - !type:GroupSelector
       weight: 5
       children:
-      - id: MagazineBoxBelt127Blast
       - id: MagazineBoxBelt127Frag
 
 - type: entity

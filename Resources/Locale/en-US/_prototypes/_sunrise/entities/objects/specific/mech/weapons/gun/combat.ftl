@@ -1,6 +1,9 @@
 ent-WeaponMechCombatVindictor = mounted MG-100 Vindicator Minigun
     .suffix = Mech Weapon, Gun, Combat, Minigun
     .desc = { ent-BaseMechWeaponRange.desc }
+ent-SunriseWeaponMechCombatRpd = mounted RPD-M
+    .desc = A mech-mounted adaptation of the RPD-Sh fed directly by the mech's power supply.
+    .suffix = Mech Weapon, Combat, USSP
 ent-WeaponMechCombatChaingun = mounted Chaingun
     .suffix = Mech Weapon, Gun, Combat
     .desc = { ent-BaseMechWeaponRange.desc }

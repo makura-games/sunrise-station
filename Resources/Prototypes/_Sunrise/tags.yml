@@ -186,6 +186,18 @@
 
 # region Ammo / payloads
 - type: Tag
+  id: ShellShotgunHeavy
+
+- type: Tag
+  id: CartridgeLightRifleAuto
+
+- type: Tag
+  id: CartridgeRifleAuto
+
+- type: Tag
+  id: MagazinePistolLightRifleAuto
+
+- type: Tag
   id: ArtilleryShell
 
 - type: Tag
@@ -248,6 +260,12 @@
 # region Magazines
 - type: Tag
   id: HeavyAmmoBelt127
+
+- type: Tag
+  id: LightAmmoBelt127
+
+- type: Tag
+  id: CartridgeRifleHeavy127mm
 
 - type: Tag
   id: MagazineAR18
@@ -393,6 +411,9 @@
 
 # region Clothing / gear
 - type: Tag
+  id: SunriseHeavyShotgunBandolierCompatible
+
+- type: Tag
   id: FullBodyOuter
 
 - type: Tag
@@ -462,7 +483,40 @@
 # region TODO: Make medical mech
 
 - type: Tag
-  id: DollHouse
+  id: SunriseBlyashankaArmor
+
+- type: Tag
+  id: SunriseBlyashankaLLeg
+
+- type: Tag
+  id: SunriseBlyashankaLLeg2
+
+- type: Tag
+  id: SunriseBlyashankaRLeg
+
+- type: Tag
+  id: SunriseBlyashankaRLeg2
+
+- type: Tag
+  id: SunriseBlyashankaRpd
+
+- type: Tag
+  id: Kolobok
+
+- type: Tag
+  id: KolobokArmor
+
+- type: Tag
+  id: KolobokLArm
+
+- type: Tag
+  id: KolobokLLeg
+
+- type: Tag
+  id: KolobokRArm
+
+- type: Tag
+  id: KolobokRLeg
 
 - type: Tag
   id: Durand
@@ -788,17 +842,9 @@
 
 - type: Tag
   id: MedipenCase # Используется для whitelist у ClothingBeltMedical
-- type: Tag
-  id: ShellShotgunHeavy
 
 - type: Tag
-  id: SunriseHeavyShotgunBandolierCompatible
+  id: SunriseDiseaseVaccine # Используется для whitelist у многоразового вакцинного инжектора
 
 - type: Tag
-  id: CartridgeLightRifleAuto
-
-- type: Tag
-  id: CartridgeRifleAuto
-
-- type: Tag
-  id: MagazinePistolLightRifleAuto
+  id: SunriseDiseaseSerum # Используется в заданиях карго на сыворотку

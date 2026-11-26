@@ -1,0 +1,15 @@
+ent-SunriseCrateBiologicalSalvage = abandoned biocontainer
+    .desc = An old research container with a cracked seal and dried biological residue around the lid.
+ent-SunriseDiseaseSporeCloud = spore cloud
+    .desc = A thin cloud of drifting green spores.
+ent-SunriseDiseaseSporeGrowth = spore growth
+    .desc = A cluster of swollen fungal sacs growing out of the floor. Fine dust drifts around them.
+ent-SunriseDiseaseSporeGrowthSpawner = spore growth spawner
+    .desc = { ent-MarkerBase.desc }
+    .suffix = 15%
+ent-SunriseMobCarpSalvageInfected = { ent-BaseMobCarp }
+    .desc = { ent-BaseMobCarp.desc }
+    .suffix = Salvage, infected bites
+ent-SunriseMobSpiderSalvageInfected = { ent-MobSpiderSpace }
+    .desc = { ent-MobSpiderSpace.desc }
+    .suffix = Salvage, infected bites

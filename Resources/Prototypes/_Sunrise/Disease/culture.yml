@@ -1,0 +1,54 @@
+# Чашки Петри и лабораторные образцы штаммов
+
+- type: entity
+  parent: BaseItem
+  id: SunrisePetriDish
+  name: petri dish
+  description: A sterile dish with a thin layer of nutrient medium under the lid.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _Sunrise/Disease/petri_dish.rsi
+    layers:
+    - state: icon
+      map: [ "enum.DiseaseCultureVisualLayers.Base" ]
+  - type: Appearance
+  - type: Tag
+    tags:
+    - Recyclable
+    - Trash
+
+- type: entity
+  parent: BoxCardboard
+  id: SunrisePetriDishBox
+  name: petri dish box
+  description: A wide cardboard box with a laboratory glass pictogram on the label.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: SunrisePetriDish
+        amount: 5
+  - type: Sprite
+    layers:
+    - state: boxwide
+    - state: beaker
+
+- type: entity
+  parent: BaseItem
+  id: SunriseDiseaseStrainVial
+  name: strain sample
+  description: A sealed vial with a lab sample of a strain.
+  components:
+  - type: Item
+    size: Tiny
+    sprite: Objects/Specific/Chemistry/vial.rsi
+  - type: Sprite
+    sprite: _Sunrise/Disease/strain_vial.rsi
+    state: strain
+  - type: Label
+  - type: Tag
+    tags:
+    - Recyclable
+    - Trash
