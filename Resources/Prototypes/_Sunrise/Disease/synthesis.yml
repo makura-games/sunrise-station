@@ -28,8 +28,18 @@
 - type: entity
   parent: SunrisePetriDishBox
   id: SunriseDiseaseBlankSampleBox
-  name: strain blank dispenser
-  description: A dispenser box with sealed vials inside.
+  name: strain blank box
+  description: A wide cardboard box with a vial pictogram on the label.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: SunriseDiseaseBlankSample
+        amount: 5
+  - type: Sprite
+    layers:
+    - state: boxwide
+    - state: vials
 
 - type: entity
   parent: CrateMedicalSecure
