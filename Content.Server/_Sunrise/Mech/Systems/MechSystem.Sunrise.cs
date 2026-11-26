@@ -16,6 +16,7 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.Tag;
 using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
+using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 
 // ReSharper disable once CheckNamespace
@@ -29,6 +30,7 @@ public sealed partial class MechSystem
     [Dependency] private NpcFactionSystem _faction = default!;
     [Dependency] private TagSystem _tag = default!;
     [Dependency] private InstalledMechBatterySystem _installedMechBattery = default!;
+    [Dependency] private EntityWhitelistSystem _sunriseWhitelist = default!;
 
     private static readonly ProtoId<TagPrototype> PowerCageTag = "PowerCage";
 
@@ -116,7 +118,7 @@ public sealed partial class MechSystem
     private bool IsSunriseBatteryAllowed(MechComponent component, EntityUid battery)
     {
         if (component.BatteryWhitelist != null)
-            return _whitelistSystem.IsWhitelistPass(component.BatteryWhitelist, battery);
+            return _sunriseWhitelist.IsWhitelistPass(component.BatteryWhitelist, battery);
 
         return _tag.HasTag(battery, PowerCageTag);
     }

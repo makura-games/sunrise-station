@@ -44,7 +44,7 @@ public sealed partial class InstalledMechBatterySystem : EntitySystem
             RemComp<InstalledMechBatteryComponent>(args.Entity);
 
         SetMechEnergy(ent, 0f, 0f);
-        _movementSpeedModifier.RefreshMovementSpeedModifiers(ent);
+        _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
     private void OnChargeChanged(Entity<InstalledMechBatteryComponent> ent, ref ChargeChangedEvent args)
@@ -113,7 +113,7 @@ public sealed partial class InstalledMechBatterySystem : EntitySystem
         mech.Comp.MaxEnergy = maxEnergy;
 
         Dirty(mech);
-        _vehicle.RefreshCanRun(mech);
+        _vehicle.RefreshCanRun(mech.Owner);
         _mech.UpdateUserInterface(mech, mech.Comp);
     }
 }
