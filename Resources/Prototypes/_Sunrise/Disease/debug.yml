@@ -1,0 +1,6 @@
+- type: entity
+  parent: FoodDonutPlain
+  id: SunriseDiseaseDebugDonut
+  name: suspicious donut
+  description: It smells slightly off.
+  suffix: Debug

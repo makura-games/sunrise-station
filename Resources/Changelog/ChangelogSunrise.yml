@@ -5139,3 +5139,43 @@
     message: Добавлены коробки с волшебными свечами и маленькими волшебными свечами
   id: 2056
   url: https://github.com/makura-games/sunrise-station/pull/4604
+- author: ThereDrD
+  time: '2026-11-18T14:45:11.0000000+00:00'
+  changes:
+  - type: Fix
+    message: Исправлена техническая уязвимость в правах технической команды
+  id: 2057
+  url: https://github.com/makura-games/sunrise-station/pull/4894
+- author: dng-cher
+  time: '2026-11-24T20:24:46.0000000+00:00'
+  changes:
+  - type: Add
+    message: Добавлен тайл снега без обводки
+  id: 2058
+  url: https://github.com/makura-games/sunrise-station/pull/4901
+- author: KaiserMaus
+  time: '2026-11-26T15:49:48.0000000+00:00'
+  changes:
+  - type: Add
+    message: Добавлены спрайты и анимации передвижения для мехов СССП.
+  - type: Add
+    message: Добавлена возможность сборки мехов СССП а так же нахождения деталей и частей для его создания на экспедиции СССП.
+  - type: Add
+    message: Добавлен контрабандный плакат на тему Тяжелого меха СССП.
+  - type: Tweak
+    message: Корд больше не использует батарею меха для создания патронов, теперь необходимо физически менять патронные ленты на 50 12.7 патронов для перезарядки. Дополнительные ленты доступны к покупке в аплинке.
+  - type: Fix
+    message: Гномы-Лутокрады пойманы, лут с NPC экспедиций вновь спавнится.
+  id: 2059
+  url: https://github.com/makura-games/sunrise-station/pull/4797
+  media:
+  - url: https://github.com/user-attachments/assets/2a051c60-b7a3-4e16-9003-a863edffbbba
+    description: Колобок
+  - url: https://github.com/user-attachments/assets/cd236ff7-7027-429e-989d-10c7653215c6
+    description: dotnet_r5seEujhTU
+  - url: https://github.com/user-attachments/assets/3f2e5ceb-9302-4b67-9d8c-3f9dbdd53acd
+    description: Плакат
+  - url: https://github.com/user-attachments/assets/3d8e9390-fd2f-4c08-905b-868f5dcc1d78
+    description: Discord_4dJr5PGGXz
+  - url: https://github.com/user-attachments/assets/7b934b27-211a-4dd7-b88a-452bbf82e51a
+    description: Discord_H635vABCgr

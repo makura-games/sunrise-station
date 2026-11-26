@@ -1,0 +1,176 @@
+{
+  "copyright": "Sprited by .askal02 (discord) for SS14 Makura Games,",
+  "license": "CC-BY-SA-4.0",
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "banka_harness"
+    },
+    {
+      "name": "banka_harness+o"
+    },
+    {
+      "name": "banka_l_leg"
+    },
+    {
+      "name": "banka_l_leg+o"
+    },
+    {
+      "name": "banka_l_leg2"
+    },
+    {
+      "name": "banka_l_leg2+o"
+    },
+    {
+      "name": "banka_r_leg"
+    },
+    {
+      "name": "banka_r_leg+o"
+    },
+    {
+      "name": "banka_r_leg2"
+    },
+    {
+      "name": "banka_r_leg2+o"
+    },
+    {
+      "name": "banka_armor"
+    },
+    {
+      "name": "jar1"
+    },
+    {
+      "name": "jar2"
+    },
+    {
+      "name": "jar3"
+    },
+    {
+      "name": "jar4"
+    },
+    {
+      "name": "jar5"
+    },
+    {
+      "name": "jar6"
+    },
+    {
+      "name": "jar7"
+    },
+    {
+      "name": "jar8"
+    },
+    {
+      "name": "jar9"
+    },
+    {
+      "name": "jar10"
+    },
+    {
+      "name": "jar11"
+    },
+    {
+      "name": "jar12"
+    },
+    {
+      "name": "jar13"
+    },
+    {
+      "name": "jar14"
+    },
+    {
+      "name": "jar15"
+    },
+    {
+      "name": "jar16"
+    },
+    {
+      "name": "jar17"
+    },
+    {
+      "name": "jar18"
+    },
+    {
+      "name": "jar19"
+    },
+    {
+      "name": "jar20"
+    },
+    {
+      "name": "jar21"
+    },
+    {
+      "name": "jar22"
+    },
+    {
+      "name": "jar23"
+    },
+    {
+      "name": "jar24"
+    },
+    {
+      "name": "jar25"
+    },
+    {
+      "name": "jar26"
+    },
+    {
+      "name": "jar27"
+    },
+    {
+      "name": "jar28"
+    },
+    {
+      "name": "jar29"
+    },
+    {
+      "name": "jar30"
+    },
+    {
+      "name": "jar31"
+    },
+    {
+      "name": "jar32"
+    },
+    {
+      "name": "jar33"
+    },
+    {
+      "name": "jar34"
+    },
+    {
+      "name": "jar35"
+    },
+    {
+      "name": "jar36"
+    },
+    {
+      "name": "jar37"
+    },
+    {
+      "name": "jar38"
+    },
+    {
+      "name": "jar39"
+    },
+    {
+      "name": "jar40"
+    },
+    {
+      "name": "jar41"
+    },
+    {
+      "name": "jar42"
+    },
+    {
+      "name": "jar43"
+    },
+    {
+      "name": "jar44"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+- files: ["metalchain_pickup.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "metalchain_pickup.ogg by Jolindi"
+  source: "https://freesound.org/s/654282/"
+
+- files: ["metalchain_drop.ogg"]
+  license: "CC0-1.0"
+  copyright: "metalchain_drop.ogg by funkysandwich"
+  source: "https://freesound.org/s/871034/"

@@ -294,6 +294,6 @@ ent-MobPirateT1Boss = rusty Fist
 ent-MobPirateT2Boss = captain Golden Bolt
     .desc = A legend of space, equal parts terrifying and drunk.
 ent-MobPirateT3Boss = red Skull
-    .desc = A heavy combat exosuit of the SSSP, Duranda variant. Slow, but relentless. Armed with an old heavy machine gun. Can dash, unleash fire, or vanish into smoke, all accompanied by a horrible laugh.
+    .desc = A heavy combat exosuit of the USSP, Duranda variant. Slow, but relentless. Armed with an old heavy machine gun. Can dash, unleash fire, or vanish into smoke, all accompanied by a horrible laugh.
 ent-MobPirateT3Tachanka = tachanka
     .desc = Machine gun! Mounted and loaded!
