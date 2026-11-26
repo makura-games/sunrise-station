@@ -27,13 +27,6 @@
     Telecrystal: 1
   categories:
   - UplinkExplosives
-  # Sunrise added start - исключаем товар из аплинка штурмовых оперативников
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - AssaultOpsUplink
-  # Sunrise added end
 
 - type: listing
   id: UplinkSyndieMiniBomb
@@ -149,7 +142,7 @@
   id: UplinkSyndicateBomb
   name: uplink-exploding-syndicate-bomb-name
   description: uplink-exploding-syndicate-bomb-desc
-  productEntity: SyndicateBomb
+  productEntity: BoxSyndicateBomb # Sunrise-Edit
   cost:
     Telecrystal: 11
   categories:
@@ -167,7 +160,7 @@
   id: UplinkSyndicateBombNukie
   name: uplink-exploding-syndicate-bomb-name
   description: uplink-exploding-syndicate-bomb-desc
-  productEntity: SyndicateBomb
+  productEntity: BoxSyndicateBomb # Sunrise-Edit
   cost:
     Telecrystal: 11
   categories:
@@ -212,6 +205,13 @@
     Telecrystal: 4
   categories:
   - UplinkExplosives
+  #Sunrise-start
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - AssaultOpsUplink
+  #Sunrise-end
 
 - type: listing
   id: UplinkPowerSink

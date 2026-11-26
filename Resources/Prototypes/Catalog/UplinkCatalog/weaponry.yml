@@ -1,4 +1,5 @@
-# Weaponry
+# TODO: make more categories
+# Guns
 
 - type: listing
   id: UplinkPistolViper
@@ -14,7 +15,6 @@
   - UplinkWeaponry
 
 # Inbuilt suppressor so it's sneaky + more expensive.
-
 - type: listing
   id: UplinkPistolCobra
   name: uplink-pistol-cobra-name
@@ -29,7 +29,6 @@
   - UplinkWeaponry
 
 # Poor accuracy, slow to fire, cheap option
-
 - type: listing
   id: UplinkRifleMosin
   name: uplink-rifle-mosin-name
@@ -79,11 +78,17 @@
   id: UplinkEnergyCrossbow
   name: uplink-energycrossbow-name
   description: uplink-energycrossbow-desc
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 3
   productEntity: WeaponEnergyCrossbow
   cost:
     Telecrystal: 5
   categories:
   - UplinkWeaponry
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
 
 - type: listing
   id: UplinkThrowingKnivesKit
@@ -153,7 +158,7 @@
   name: uplink-rigged-boxing-gloves-name
   description: uplink-rigged-boxing-gloves-desc
   icon: { sprite: Clothing/Hands/Gloves/Boxing/boxingblue.rsi, state: icon }
-  productEntity: ClothingHandsGlovesBoxingRiggedBlue # TODO Replace this with the random spawner when it's not bugged
+  productEntity: BoxBoxingGlovesRigged # Sunrise-Edit
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 8
@@ -351,10 +356,10 @@
     Telecrystal: 25 # Sunrise-Edit
   categories:
   - UplinkWeaponry
-  # Sunrise added start - исключаем набор из аплинка штурмовых оперативников
+#Sunrise-start
   conditions:
   - !type:StoreWhitelistCondition
     blacklist:
       tags:
       - AssaultOpsUplink
-  # Sunrise added end
+#Sunrise-end

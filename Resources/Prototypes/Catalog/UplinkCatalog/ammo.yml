@@ -12,7 +12,6 @@
   - UplinkAmmo
 
 # For the C20R
-
 - type: listing
   id: UplinkMagazinePistolSubMachineGun
   # name: uplink-pistol-magazine-c20r-name # Sunrise-Edit
@@ -32,7 +31,6 @@
   #Sunrise-end
 
 # For the Bulldog
-
 - type: listing
   id: UplinkMagazineShotgunPellet
   #name: uplink-magazine-bulldog-pellet-name # Sunrise-Edit
@@ -56,7 +54,6 @@
   - UplinkAmmo
 
 # For the Cobra
-
 - type: listing
   id: UplinkMagazinePistolCaselessRifle
   name: uplink-pistol-magazine-caseless-name
@@ -68,8 +65,7 @@
   categories:
   - UplinkAmmo
 
-# For the Mosin
-
+# For the mosin
 - type: listing
   id: UplinkMosinAmmo
   name: uplink-mosin-ammo-name
@@ -88,7 +84,6 @@
   #Sunrise-end
 
 # For the Estoc
-
 - type: listing
   id: UplinkEstocAmmo
   #name: uplink-estoc-ammo-name # Sunrise-edit
@@ -99,8 +94,7 @@
   categories:
   - UplinkAmmo
 
-# For the Hristov
-
+# for the hristov
 - type: listing
   id: UplinkHristovAmmo
   name: uplink-sniper-ammo-name
@@ -157,4 +151,4 @@
   cost:
     Telecrystal: 3
   categories:
-    - UplinkAmmo
+  - UplinkAmmo

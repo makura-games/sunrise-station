@@ -1,5 +1,4 @@
 # Deception
-
 - type: listing
   id: UplinkSyndicateIDCard
   name: uplink-syndicate-id-card-name
@@ -14,7 +13,8 @@
   id: UplinkAgentIDCard
   name: uplink-agent-id-card-name
   description: uplink-agent-id-card-desc
-  productEntity: AgentIDCard
+  icon: { sprite: /Textures/Objects/Misc/id_cards.rsi, state: default } # Sunrise-Edit
+  productEntity: BoxAgentIDCard # Sunrise-Edit
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 1
@@ -88,7 +88,8 @@
   id: UplinkDecoyDisk
   name: uplink-decoy-disk-name
   description: uplink-decoy-disk-desc
-  productEntity: NukeDiskFake
+  icon: { sprite: Objects/Misc/nukedisk.rsi, state: icon } # Sunrise-Edit
+  productEntity: BoxNukeDiskFake # Sunrise-Edit
   cost:
     Telecrystal: 1
   categories:
@@ -121,7 +122,8 @@
   id: UplinkSyndicateBombFake
   name: uplink-exploding-syndicate-bomb-fake-name
   description: uplink-exploding-syndicate-bomb-fake-desc
-  productEntity: SyndicateBombFake
+  icon: { sprite: Structures/Machines/bomb.rsi, state: syndicate-bomb } # Sunrise-Edit
+  productEntity: BoxSyndicateBombFake # Sunrise-Edit
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 1
@@ -140,7 +142,7 @@
   id: UplinkSyndicateBombFakeNukie
   name: uplink-exploding-syndicate-bomb-fake-name
   description: uplink-exploding-syndicate-bomb-fake-desc
-  productEntity: SyndicateBombFake
+  productEntity: BoxSyndicateBombFake # Sunrise-Edit
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 1

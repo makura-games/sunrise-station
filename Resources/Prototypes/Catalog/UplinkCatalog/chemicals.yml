@@ -1,4 +1,4 @@
-# Chemicals
+#Chemicals
 
 - type: listing
   id: UplinkHypopen
@@ -151,4 +151,4 @@
     whitelist:
       tags:
       - NukeOpsUplink
-      - LoneOpsUplink # Sunrise-Edit
+      - LoneOpsUplink # Sunrise-Add

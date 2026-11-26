@@ -24,7 +24,7 @@
   id: UplinkChameleon
   name: uplink-chameleon-name
   description: uplink-chameleon-desc
-  productEntity: ClothingBackpackChameleonFillAgent
+  productEntity: BoxBackpackChameleon # Sunrise-Edit
   icon: { sprite: /Textures/Clothing/Uniforms/Jumpsuits/Color/rainbow.rsi, state: icon }
   discountCategory: usualDiscounts
   discountDownTo:
@@ -38,7 +38,8 @@
   id: UplinkClothingNoSlipsShoes
   name: uplink-clothing-no-slips-shoes-name
   description: uplink-clothing-no-slips-shoes-desc
-  productEntity: ClothingShoesChameleonNoSlips
+  icon: { sprite: /Textures/Clothing/Shoes/color.rsi, state: icon } # Sunrise-Edit
+  productEntity: BoxShoesChameleonNoSlips # Sunrise-Edit
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 1
@@ -223,3 +224,5 @@
     Telecrystal: 2
   categories:
     - UplinkWearables
+
+ # Pointless

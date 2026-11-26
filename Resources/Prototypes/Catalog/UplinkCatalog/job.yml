@@ -1,4 +1,4 @@
-# Job
+# Job Specific
 
 - type: listing
   id: uplinkGatfruitSeeds
@@ -38,7 +38,8 @@
   id: uplinkRevolverCapGunFake
   name: uplink-revolver-cap-gun-fake-name
   description: uplink-revolver-cap-gun-fake-desc
-  productEntity: RevolverCapGunFake
+  icon: { sprite: Objects/Fun/capgun.rsi, state: icon } # Sunrise-Edit
+  productEntity: BoxCapGunFake # Sunrise-Edit
   discountCategory: rareDiscounts
   discountDownTo:
     Telecrystal: 2
@@ -56,7 +57,8 @@
   id: UplinkClusterBananaPeel
   name: uplink-cluster-banana-peel-name
   description: uplink-cluster-banana-peel-desc
-  productEntity: ClusterBananaPeel
+  icon: { sprite: Objects/Specific/Hydroponics/banana.rsi, state: peel } # Sunrise-Edit
+  productEntity: BoxClusterBananaPeelExplosiveUnarmed # Sunrise-Edit
   discountCategory: rareDiscounts
   discountDownTo:
     Telecrystal: 3
@@ -171,7 +173,7 @@
   name: uplink-cane-blade-name
   description: uplink-cane-blade-desc
   icon: { sprite:  Objects/Weapons/Melee/cane.rsi, state: cane}
-  productEntity: CaneSheathFilled
+  productEntity: BoxCaneBlade # Sunrise-Edit
   discountCategory: rareDiscounts
   discountDownTo:
     Telecrystal: 2

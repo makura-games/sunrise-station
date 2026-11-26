@@ -54,7 +54,7 @@
       tags:
       - NukeOpsUplink
 
-# Sunrise edit start - листинг перенесён в каталог Sunrise
+# Move to _Sunrise
 #- type: listing
 #  id: UplinkReinforcementRadioSyndicateCyborgAssault
 #  name:  uplink-reinforcement-radio-cyborg-assault-name
@@ -70,7 +70,6 @@
 #      whitelist:
 #        tags:
 #          - NukeOpsUplink
-# Sunrise edit end
 
 - type: listing
   id: UplinkReinforcementRadioSyndicateAncestor

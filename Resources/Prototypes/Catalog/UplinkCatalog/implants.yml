@@ -4,7 +4,7 @@
   id: UplinkStorageImplanter
   name: uplink-storage-implanter-name
   description: uplink-storage-implanter-desc
-  icon: { sprite: /Textures/_Sunrise/Clothing/Back/Resprites/Backpacks/backpack.rsi, state: icon } # Sunrise-Edit
+  icon: { sprite: /Textures/Clothing/Back/Backpacks/backpack.rsi, state: icon }
   productEntity: StorageImplanter
   discountCategory: rareDiscounts
   discountDownTo:
