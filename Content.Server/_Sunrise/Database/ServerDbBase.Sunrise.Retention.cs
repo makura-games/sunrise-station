@@ -78,4 +78,42 @@ public abstract partial class ServerDbBase
 
         return result;
     }
+
+    public async Task<bool> TryAddNewPlayerOnboardingStepAsync(
+        Guid player,
+        int serverId,
+        string step,
+        DateTime reachedAt,
+        CancellationToken cancel)
+    {
+        await using var db = await GetDb(cancel);
+
+        var exists = await db.DbContext.NewPlayerOnboardingSteps
+            .AnyAsync(entry => entry.PlayerUserId == player &&
+                               entry.ServerId == serverId &&
+                               entry.Step == step,
+                cancel);
+
+        if (exists)
+            return false;
+
+        db.DbContext.NewPlayerOnboardingSteps.Add(new NewPlayerOnboardingStep
+        {
+            PlayerUserId = player,
+            ServerId = serverId,
+            Step = step,
+            ReachedAt = reachedAt,
+        });
+
+        try
+        {
+            await db.DbContext.SaveChangesAsync(cancel);
+            return true;
+        }
+        catch (DbUpdateException)
+        {
+            // Параллельная запись того же шага уже заняла первичный ключ.
+            return false;
+        }
+    }
 }

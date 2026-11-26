@@ -60,6 +60,17 @@ public partial interface IServerDbManager
         DateTime firstSeenFrom,
         DateTime firstSeenTo,
         CancellationToken cancel = default);
+
+    /// <summary>
+    /// Записывает шаг первого дня нового игрока на сервере.
+    /// Возвращает <c>false</c>, если этот шаг уже был записан раньше.
+    /// </summary>
+    Task<bool> TryAddNewPlayerOnboardingStepAsync(
+        Guid player,
+        int serverId,
+        string step,
+        DateTime reachedAt,
+        CancellationToken cancel = default);
 }
 
 public sealed partial class ServerDbManager
@@ -205,5 +216,17 @@ public sealed partial class ServerDbManager
         DbReadOpsMetric.Inc();
         return RunDbCommand(() =>
             _db.GetNewPlayerConnectionsAsync(serverId, firstSeenFrom, firstSeenTo, cancel));
+    }
+
+    public Task<bool> TryAddNewPlayerOnboardingStepAsync(
+        Guid player,
+        int serverId,
+        string step,
+        DateTime reachedAt,
+        CancellationToken cancel = default)
+    {
+        DbWriteOpsMetric.Inc();
+        return RunDbCommand(() =>
+            _db.TryAddNewPlayerOnboardingStepAsync(player, serverId, step, reachedAt, cancel));
     }
 }

@@ -388,11 +388,30 @@ public sealed partial class MetricsSystem
 
     private void AdvanceFunnel(NetUserId userId, NewPlayerFunnelStep step)
     {
+        // Флаги в памяти лишь экономят запросы, источник истины — таблица шагов в базе.
         if (!_newPlayerFunnel.TryGetValue(userId, out var progress) || (progress.Reached & step) != 0)
             return;
 
         progress.Reached |= step;
-        NewPlayerFunnelTotal.WithLabels(GetFunnelStepLabel(step), progress.Account).Inc();
+        RecordFunnelStep(userId, GetFunnelStepLabel(step), progress.Account);
+    }
+
+    private async void RecordFunnelStep(NetUserId userId, string step, string account)
+    {
+        try
+        {
+            var server = await _dbEntry.ServerEntity;
+
+            // Шаг уже был засчитан до перезапуска процесса сервера.
+            if (!await _db.TryAddNewPlayerOnboardingStepAsync(userId.UserId, server.Id, step, DateTime.UtcNow))
+                return;
+
+            NewPlayerFunnelTotal.WithLabels(step, account).Inc();
+        }
+        catch (Exception e)
+        {
+            Log.Warning($"Failed to record new player funnel step {step} for {userId}: {e}");
+        }
     }
 
     private string GetLeaveStage(ICommonSession session, PlayerRetentionState state)
