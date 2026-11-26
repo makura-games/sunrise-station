@@ -150,7 +150,19 @@
         - proto: PortableGeneratorSuperPacman
           cost: 3
         - proto: PowerCellAntiqueProto
-          prob: 0.5
+          prob: 0.3
+          cost: 5
+        - proto: SunriseMechReactorEmperor
+          prob: 0.3
+          cost: 5
+        - proto: SunriseMechReactorBurnout
+          prob: 0.8
+          cost: 5
+        - proto: SunriseMechReactorPaladin
+          prob: 0.3
+          cost: 5
+        - proto: SunriseMechReactorCavalier
+          prob: 0.3
           cost: 5
         - proto: ProtolatheMachineCircuitboard
         - proto: RandomArtifactSpawner
@@ -239,6 +251,18 @@
         - proto: ChemistryBottleOmnizine
           prob: 0.5
         - proto: PowerCellAntiqueProto
+          prob: 0.5
+          cost: 5
+        - proto: SunriseMechReactorEmperor
+          prob: 0.5
+          cost: 5
+        - proto: SunriseMechReactorBurnout
+          prob: 0.5
+          cost: 5
+        - proto: SunriseMechReactorPaladin
+          prob: 0.5
+          cost: 5
+        - proto: SunriseMechReactorCavalier
           prob: 0.5
           cost: 5
         - proto: ProtolatheMachineCircuitboard
@@ -538,6 +562,18 @@
         - proto: PowerCellAntiqueProto
           prob: 0.75
           cost: 5
+        - proto: SunriseMechReactorEmperor
+          prob: 0.75
+          cost: 5
+        - proto: SunriseMechReactorBurnout
+          prob: 0.75
+          cost: 5
+        - proto: SunriseMechReactorPaladin
+          prob: 0.75
+          cost: 5
+        - proto: SunriseMechReactorCavalier
+          prob: 0.75
+          cost: 5
 
 - type: salvageLoot
   id: SalvageLootImpossible
@@ -708,4 +744,12 @@
           cost: 8
         - proto: ChemistryBottleOmnizine
         - proto: PowerCellAntiqueProto
+          cost: 5
+        - proto: SunriseMechReactorEmperor
+          cost: 5
+        - proto: SunriseMechReactorBurnout
+          cost: 5
+        - proto: SunriseMechReactorPaladin
+          cost: 5
+        - proto: SunriseMechReactorCavalier
           cost: 5

@@ -15,7 +15,7 @@
       - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: SunriseMechHitscanPulse # Sunrise-Edit - удаляем предсказанную hitscan-сущность
     fireCost: 80
   - type: Appearance
@@ -38,9 +38,9 @@
       - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: SunriseMechHitscanIgnitionRedLaser # Sunrise-Edit - удаляем предсказанную hitscan-сущность
-    fireCost: 35
+    fireCost: 40 # Sunrise-Edit — баланс под самоохлаждаемые реакторы мехов
   - type: Appearance
   - type: AmmoCounter
 
@@ -61,7 +61,7 @@
       - SemiAuto
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Snipers/Bauer127/bauer127_shot.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: CartridgeAntiMateriel
     fireCost: 125
   - type: Appearance
@@ -84,7 +84,7 @@
       - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: SunriseMechHitscanRedHeavyLaser # Sunrise-Edit - удаляем предсказанную hitscan-сущность
     fireCost: 28
   - type: Appearance
@@ -92,9 +92,11 @@
   - type: Tag
     tags:
     - PaddyMech
-  - type: Battery
-    maxCharge: 240
-    startingCharge: 240
+  # Sunrise-Edit start — локальная батарея не нужна при прямом расходе энергии реактора
+  # - type: Battery
+  #   maxCharge: 240
+  #   startingCharge: 240
+  # Sunrise-Edit end
 
 - type: entity
   id: WeaponMechCombatFiredartLaser
@@ -113,7 +115,7 @@
       - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: SunriseMechHitscanRedLaser # Sunrise-Edit - удаляем предсказанную hitscan-сущность
     fireCost: 14
   - type: Appearance
@@ -143,7 +145,7 @@
       path: /Audio/Effects/Lightning/lightningshock.ogg
       params:
         variation: 0.2
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: TeslaGunBullet
     fireCost: 100
   - type: Appearance
@@ -166,7 +168,7 @@
       - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: BulletDisablerSmgSpread
     fireCost: 30
   - type: Appearance
@@ -197,7 +199,7 @@
       - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: BulletTaser # Sunrise-Edit - используем ванильный физический снаряд
     fireCost: 40
   - type: Appearance
@@ -223,9 +225,9 @@
       - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: ShellShotgunMech
-    fireCost: 75
+    fireCost: 80 # Sunrise-Edit — баланс под самоохлаждаемые реакторы мехов
   - type: Appearance
   - type: AmmoCounter
 
@@ -251,9 +253,9 @@
       - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: ShellShotgunMechIncendiary
-    fireCost: 75
+    fireCost: 80 # Sunrise-Edit — баланс под самоохлаждаемые реакторы мехов
   - type: Appearance
   - type: AmmoCounter
 
@@ -283,9 +285,9 @@
       - Burst
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Snipers/garand/garand.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: CartridgeHeavyRifleRFMJMech #CartridgeLightRifleSP
-    fireCost: 10
+    fireCost: 20 # Sunrise-Edit — баланс под самоохлаждаемые реакторы мехов
   - type: Appearance
   - type: AmmoCounter
 
@@ -309,15 +311,17 @@
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: BulletEMP # Sunrise-Edit - используем физический EMP-снаряд вместо hitscan
     fireCost: 400
   - type: Appearance
   - type: AmmoCounter
   - type: EmpImmune
-  - type: Battery
-    maxCharge: 400
-    startingCharge: 400
+  # Sunrise-Edit start — локальная батарея не нужна при прямом расходе энергии реактора
+  # - type: Battery
+  #   maxCharge: 400
+  #   startingCharge: 400
+  # Sunrise-Edit end
 
 - type: entity
   id: WeaponMechCombatAMLG90
@@ -347,7 +351,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: SunriseMechHitscanRedLaserBeam # Sunrise-Edit - удаляем предсказанную hitscan-сущность
     fireCost: 20
   - type: Appearance
@@ -378,14 +382,16 @@
       - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: CartridgeXrayBeam
-    fireCost: 50
+    fireCost: 48 # Sunrise-Edit — баланс под самоохлаждаемые реакторы мехов
   - type: Appearance
   - type: AmmoCounter
-  - type: Battery
-    maxCharge: 400
-    startingCharge: 400
+  # Sunrise-Edit start — локальная батарея не нужна при прямом расходе энергии реактора
+  # - type: Battery
+  #   maxCharge: 400
+  #   startingCharge: 400
+  # Sunrise-Edit end
 
 - type: entity
   id: WeaponMechCombatMissileRack8
@@ -413,14 +419,16 @@
       - Burst
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: BulletMechWeakRocket # Sunrise-Edit
-    fireCost: 100
+    fireCost: 80 # Sunrise-Edit — полный залп укладывается в запас реактора Thor
   - type: Appearance
   - type: AmmoCounter
-  - type: Battery
-    maxCharge: 900
-    startingCharge: 900
+  # Sunrise-Edit start — локальная батарея не нужна при прямом расходе энергии реактора
+  # - type: Battery
+  #   maxCharge: 900
+  #   startingCharge: 900
+  # Sunrise-Edit end
   # Sunrise-start
   - type: Item
     sprite: _Sunrise/Objects/Specific/Mech/mecha_inhand.rsi
@@ -445,14 +453,16 @@
       - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: GrenadeBlast
-    fireCost: 300
+    fireCost: 315 # Sunrise-Edit — баланс под самоохлаждаемые реакторы мехов
   - type: Appearance
   - type: AmmoCounter
-  - type: Battery
-    maxCharge: 1800
-    startingCharge: 1800
+  # Sunrise-Edit start — локальная батарея не нужна при прямом расходе энергии реактора
+  # - type: Battery
+  #   maxCharge: 1800
+  #   startingCharge: 1800
+  # Sunrise-Edit end
   # Sunrise-start
   - type: Item
     sprite: _Sunrise/Objects/Specific/Mech/mecha_inhand.rsi
@@ -478,7 +488,7 @@
       path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: BulletGrenadeFlashBang # Sunrise-Edit
     fireCost: 60
   - type: Appearance

@@ -517,9 +517,7 @@
           children:
           - id: WeaponRifleSKM24
           - id: WeaponRifleSKM24Syndi
-          - id: WeaponRifleSKM24White
           - id: WeaponRifleSKM24Nano
-          - id: WeaponRifleSKM24Green
         - id: MagazineLightRifleFMJ
         - id: MagazineLightRifleSP
         - id: MagazineLightRifleSP

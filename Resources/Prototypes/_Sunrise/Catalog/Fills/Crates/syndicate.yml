@@ -78,6 +78,7 @@
         children:
         - id: MechRoverSyndieFilled
         - id: ToolboxSyndicateFilledRepair
+        - id: RemoteSignaller
         - id: ToyDurand
 
 - type: entity

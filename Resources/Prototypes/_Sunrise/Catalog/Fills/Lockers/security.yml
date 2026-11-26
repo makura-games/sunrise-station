@@ -339,9 +339,15 @@
           children:
           - id: WeaponRifleSKM24
             weight: 0.33
-          - id: WeaponRifleSKM24White
-            weight: 0.33
-          - id: WeaponRifleSKM24Green
+          - id: WeaponRifleSKM24Scrap
+            weight: 0.05
+            amount: 3
+          - id: WeaponRifleSKM24Syndi
+            weight: 0.1
+          - id: WeaponRifleSKM24Nano
+        - !type:GroupSelector
+          children:
+          - id: WeaponRifleSKM24
             weight: 0.33
           - id: WeaponRifleSKM24Scrap
             weight: 0.05
@@ -353,22 +359,6 @@
           children:
           - id: WeaponRifleSKM24
             weight: 0.33
-          - id: WeaponRifleSKM24White
-            weight: 0.33
-          - id: WeaponRifleSKM24Green
-          - id: WeaponRifleSKM24Scrap
-            weight: 0.05
-            amount: 3
-          - id: WeaponRifleSKM24Syndi
-            weight: 0.1
-          - id: WeaponRifleSKM24Nano
-        - !type:GroupSelector
-          children:
-          - id: WeaponRifleSKM24
-            weight: 0.33
-          - id: WeaponRifleSKM24White
-            weight: 0.33
-          - id: WeaponRifleSKM24Green
           - id: WeaponRifleSKM24Scrap
             weight: 0.05
             amount: 3

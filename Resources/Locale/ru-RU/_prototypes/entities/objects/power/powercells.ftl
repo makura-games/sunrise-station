@@ -53,7 +53,3 @@ ent-PowerCageMediumEmpty = { ent-PowerCageMedium }
 ent-PowerCageHighEmpty = { ent-PowerCageHigh }
     .suffix = Пустой
     .desc = { ent-PowerCageHigh.desc }
-ent-PowerCageSyndicate = энергоячейка Синдиката
-    .desc = Перезаряжаемая энергоячейка для крупных устройств. Увеличенная ёмкость для повышенного уровня мощности.
-ent-PowerCageERT = боевая энергоячейка нанотрейзен
-    .desc = Перезаряжаемая энергоячейка для крупных устройств. Увеличенная ёмкость для повышенного уровня мощности. Устойчива к ЭМИ.

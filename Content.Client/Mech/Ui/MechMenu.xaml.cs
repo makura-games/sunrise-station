@@ -33,15 +33,18 @@ public sealed partial class MechMenu : FancyWindow
         if (!_ent.TryGetComponent<MechComponent>(_mech, out var mechComp))
             return;
 
-        var integrityPercent = (mechComp.MaxIntegrity - mechComp.Integrity) / mechComp.MaxIntegrity;
+        // Sunrise-Edit — отображаем оставшуюся целостность, а не накопленный урон
+        var integrityPercent = mechComp.Integrity / mechComp.MaxIntegrity;
         IntegrityDisplayBar.Value = integrityPercent.Float();
-        IntegrityDisplay.Text = Loc.GetString("mech-integrity-display", ("amount", (integrityPercent*100).Int()));
+        IntegrityDisplay.Text = Loc.GetString("mech-integrity-display", ("amount", (integrityPercent * 100).Int()));
 
         if (mechComp.MaxEnergy != 0f)
         {
-            var energyPercent = mechComp.Energy / mechComp.MaxEnergy;
-            EnergyDisplayBar.Value = energyPercent.Float();
-            EnergyDisplay.Text = Loc.GetString("mech-energy-display", ("amount", (energyPercent*100).Int()));
+            // Sunrise edit start — отображаем расход энергии реактора как накопленный перегрев
+            var heatPercent = 1 - mechComp.Energy / mechComp.MaxEnergy;
+            EnergyDisplayBar.Value = heatPercent.Float();
+            EnergyDisplay.Text = Loc.GetString("mech-heat-display", ("amount", (heatPercent * 100).Int()));
+            // Sunrise edit end
         }
         else
         {

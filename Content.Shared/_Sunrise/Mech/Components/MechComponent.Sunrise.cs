@@ -25,6 +25,12 @@ public sealed partial class MechComponent
     [DataField]
     public EntityWhitelist? PilotBlacklist;
 
+    /// <summary>
+    /// Сущности, которые разрешено устанавливать в слот питания меха.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist? BatteryWhitelist;
+
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public MechHealthState HealthState = MechHealthState.Normal;
 

@@ -173,11 +173,14 @@
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,4,1
+    - 0,0,4,2
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
         children:
         - id: WeaponSniperGarand
         - id: MagazineGarand
-        - id: BlueprintMagazineGarand
+        - id: MagazineGarand
+        - id: MagazineGarand
+        - id: MagazineBoxHeavyRifleBig
+        - id: MagazineBoxHeavyRiflePractice

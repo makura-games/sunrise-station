@@ -11,5 +11,5 @@
   - type: MultiHandedItem
   - type: ClothingSpeedModifier
     walkModifier: 0.5
-    sprintModifier: 0.5
+    sprintModifier: 0.3 # Sunrise-edit
   - type: HeldSpeedModifier

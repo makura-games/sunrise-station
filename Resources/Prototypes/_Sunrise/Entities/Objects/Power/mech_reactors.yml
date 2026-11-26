@@ -1,0 +1,284 @@
+- type: entity
+  id: BaseSunriseMechReactor
+  name: standard mech reactor
+  description: A miniaturized reactor core built for installation in a mech chassis.
+  parent: [BaseItem, MachineComponentSounds]
+  abstract: true
+  components:
+  - type: Item
+    size: Ginormous
+  - type: MultiHandedItem
+  - type: Sprite
+    sprite: _Sunrise/Objects/Power/mech_reactors.rsi
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: medium
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+      visible: false
+  - type: Appearance
+  - type: BatteryVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.BatteryVisuals.State:
+        enum.PowerCellVisualLayers.Unshaded:
+          Full: { visible: false }
+          Neither: { visible: true, state: o1 }
+          Empty: { visible: true, state: o2 }
+  - type: Battery
+    maxCharge: 720
+    startingCharge: 720
+    pricePerJoule: 0.15
+  - type: Tag
+    tags:
+    - MechReactor
+
+- type: entity
+  id: SunriseMechReactorStandard
+  name: standard mech reactor
+  description: A compact reactor with modest cooling and a long recovery cycle.
+  parent: BaseSunriseMechReactor
+  components:
+  - type: BatterySelfRecharger
+    autoRechargeRate: 8
+    autoRechargePauseTime: 15
+
+- type: entity
+  id: SunriseMechReactorWorkhorse
+  name: workhorse-class reactor
+  description: A reinforced reactor with additional heat capacity, designed for sustained operation.
+  parent: BaseSunriseMechReactor
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: high
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+      visible: false
+  - type: Battery
+    maxCharge: 1080
+    startingCharge: 1080
+  - type: BatterySelfRecharger
+    autoRechargeRate: 8
+    autoRechargePauseTime: 15
+
+- type: entity
+  id: SunriseMechReactorLonghaul
+  name: longhaul-class reactor
+  description: Deep heat sinks and an upgraded coolant loop allow this reactor to operate for extended periods.
+  parent: BaseSunriseMechReactor
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: hyper
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+      visible: false
+  - type: Battery
+    maxCharge: 1800
+    startingCharge: 1800
+  - type: BatterySelfRecharger
+    autoRechargeRate: 12
+    autoRechargePauseTime: 10
+
+- type: entity
+  id: SunriseMechReactorThor
+  name: thor-class reactor
+  description: An advanced cooling system gives this reactor a short recovery cycle at the cost of heat capacity.
+  parent: BaseSunriseMechReactor
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: microreactor
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+      visible: false
+  - type: BatterySelfRecharger
+    autoRechargeRate: 20
+    autoRechargePauseTime: 5
+
+- type: entity
+  id: SunriseMechReactorEmperor
+  name: emperor-class reactor
+  description: An antique reactor from a more refined age. Its cooling system appears almost flawless.
+  parent: BaseSunriseMechReactor
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: antique
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+      visible: false
+  - type: Battery
+    maxCharge: 1200
+    startingCharge: 1200
+  - type: BatterySelfRecharger
+    autoRechargeRate: 60
+    autoRechargePauseTime: 0
+
+- type: entity
+  id: SunriseMechReactorPaladin
+  name: paladin-class reactor
+  description: An antique reactor whose casing contains an integrated energy shield generator. The shield is activated using a signal transmitter.
+  parent: BaseSunriseMechReactor
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: paladin
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+      visible: false
+  - type: Battery
+    maxCharge: 1200
+    startingCharge: 1200
+  - type: BatterySelfRecharger
+    autoRechargeRate: 40
+    autoRechargePauseTime: 1
+  - type: EnergyDomeGenerator
+    damageEnergyDraw: 2
+    domePrototype: EnergyDomeSmallPink
+    canInteractUse: false
+    canDeviceNetworkUse: true
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 100
+  - type: DeviceLinkSink
+    ports:
+    - Toggle
+    - On
+    - Off
+
+- type: entity
+  id: SunriseMechReactorDurandale
+  name: durandale-class reactor
+  description: A reinforced reactor designed exclusively for DURAND-class mechs. Its integrated BR-40c "Turtle" energy barrier consumes very little power while idle. The shield is activated using a signal transmitter.
+  parent: BaseSunriseMechReactor
+  components:
+  - type: Transform
+    noRot: true
+  - type: Tag
+    tags:
+    - SunriseDurandMechReactor
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: paladin
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+      visible: false
+  - type: Battery
+    maxCharge: 1080
+    startingCharge: 1080
+  - type: BatterySelfRecharger
+    autoRechargeRate: 25
+    autoRechargePauseTime: 1
+  - type: EnergyDomeGenerator
+    damageEnergyDraw: 1
+    domePrototype: EnergyDomeSmallFullDirectedBlue
+    canInteractUse: false
+    canDeviceNetworkUse: true
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 100
+  - type: DeviceLinkSink
+    ports:
+    - Toggle
+    - On
+    - Off
+
+- type: entity
+  id: SunriseMechReactorRoland
+  name: roland-class reactor
+  description: A reinforced reactor designed exclusively for DURAND-class mechs. Its integrated blood-red energy barrier consumes very little power while idle. The shield is activated using a signal transmitter.
+  parent: BaseSunriseMechReactor
+  components:
+  - type: Transform
+    noRot: true
+  - type: Tag
+    tags:
+    - SunriseDurandMechReactor
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: paladin
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+      visible: false
+  - type: Battery
+    maxCharge: 1080
+    startingCharge: 1080
+  - type: BatterySelfRecharger
+    autoRechargeRate: 30
+    autoRechargePauseTime: 1
+  - type: EnergyDomeGenerator
+    damageEnergyDraw: 1
+    domePrototype: EnergyDomeSmallFullDirectedRed
+    canInteractUse: false
+    canDeviceNetworkUse: true
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 100
+  - type: DeviceLinkSink
+    ports:
+    - Toggle
+    - On
+    - Off
+
+- type: entity
+  id: SunriseMechReactorBurnout
+  name: burnout-class reactor
+  description: An oversized disposable reactor designed for an extreme burst of power. Its core cannot recover once depleted.
+  parent: BaseSunriseMechReactor
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: burnout
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+      visible: false
+  - type: Battery
+    maxCharge: 40000
+    startingCharge: 40000
+  - type: EmpImmune
+
+- type: entity
+  id: SunriseMechReactorCavalier
+  name: cavalier-class reactor
+  description: An overclocked reactor tuned for higher mech speed at the expense of heat capacity.
+  parent: BaseSunriseMechReactor
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: cavalier
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+      visible: false
+  - type: BatterySelfRecharger
+    autoRechargeRate: 20
+    autoRechargePauseTime: 5
+  - type: MechSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1.5

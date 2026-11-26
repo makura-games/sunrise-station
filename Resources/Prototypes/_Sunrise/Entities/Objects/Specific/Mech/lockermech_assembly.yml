@@ -153,10 +153,10 @@
           key: "enum.MechAssemblyVisuals.State"
           data: 11
 
-      - tag: PowerCage
-        name: step-lockermech-powercell
+      - tag: MechReactor
+        name: construction-graph-component-mech-reactor
         icon:
-          sprite: Objects/Power/power_cages.rsi
+          sprite: _Sunrise/Objects/Power/mech_reactors.rsi
           state: medium
         store: battery-container
         doAfter: 1.5

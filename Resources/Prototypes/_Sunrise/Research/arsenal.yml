@@ -212,7 +212,7 @@
   - DurandTargetingElectronics
   - WeaponMechCombatShotgun
   - WeaponMechCombatShotgunIncendiary
-  - PowerCageHigh
+  - SunriseMechReactorDurandale
   technologyPrerequisites:
   - Gygax
   - EnergyBarriers

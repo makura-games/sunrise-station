@@ -16,9 +16,9 @@
       - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/kinetic_accel.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider # Sunrise-Edit — прямой расход энергии реактора меха
     proto: BulletKineticShuttle
-    fireCost: 25
+    fireCost: 50 # Sunrise-Edit — баланс под самоохлаждаемые реакторы мехов
   - type: Appearance
   - type: AmmoCounter
   - type: UpgradeableGun

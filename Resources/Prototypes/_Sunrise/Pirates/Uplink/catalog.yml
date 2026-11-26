@@ -914,15 +914,6 @@
   - UplinkPirateAmmo
 
 - type: listing
-  id: UplinkPirateMagChainGunImprovised
-  name: uplink-pirate-ammo-chaingun-name
-  productEntity: CratePirateMagazineChainGunImprovised
-  cost:
-    Doubloon: 5
-  categories:
-  - UplinkPirateAmmo
-
-- type: listing
   id: UplinkPirateMagSMGAP
   name: uplink-pirate-ammo-smg-ap-name
   description: uplink-pistol-magazine-c20r-desc

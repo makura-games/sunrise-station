@@ -264,12 +264,17 @@
   id: VendorSalvageBriefcaseWeaponGarand
   productEntity: BriefcaseWeaponGarandFilled
   cost:
-    SalvageTicket: 750
+    SalvageTicket: 625
   categories:
   - SalvageWeapons
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 4
+
+- type: listing
+  id: VendorSalvageBlueprintMagazineGarand
+  productEntity: BlueprintMagazineGarand
+  cost:
+    SalvageTicket: 300
+  categories:
+  - SalvageWeapons
 
 - type: listing
   id: VendorSalvageCrateShelfMosin

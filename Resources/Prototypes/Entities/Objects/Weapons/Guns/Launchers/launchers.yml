@@ -76,8 +76,8 @@
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - Grenade
-    capacity: 3
+        - Grenade
+    capacity: 4 # Sunrise-Edit
     proto: GrenadeFrag
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg

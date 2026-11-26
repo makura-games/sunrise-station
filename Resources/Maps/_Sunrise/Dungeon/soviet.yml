@@ -12052,7 +12052,7 @@ entities:
     - type: Transform
       pos: 1.5889626,6.56071
       parent: 1
-- proto: WeaponRifleSKM24Green
+- proto: WeaponRifleSKM24
   entities:
   - uid: 1467
     components:

@@ -15,7 +15,7 @@
       - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ship_perforator.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider
     proto: BulletKineticTrash
     fireCost: 30
   - type: Appearance
@@ -41,7 +41,7 @@
       - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: BatteryAmmoProvider
+  - type: MechAmmoProvider
     proto: SunriseMechHitscanRedMediumLaser
     fireCost: 100
   - type: Appearance

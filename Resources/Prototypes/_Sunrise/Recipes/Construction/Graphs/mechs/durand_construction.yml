@@ -249,12 +249,12 @@
           key: "enum.MechAssemblyVisuals.State"
           data: 31
 
-      - tag: PowerCage
-        name: step-powercage-name
+      - tag: MechReactor
+        name: construction-graph-component-mech-reactor
         store: battery-container
         icon:
-          sprite: Objects/Power/power_cages.rsi
-          state: small
+          sprite: _Sunrise/Objects/Power/mech_reactors.rsi
+          state: medium
         completed:
         - !type:VisualizerDataInt
           key: "enum.MechAssemblyVisuals.State"

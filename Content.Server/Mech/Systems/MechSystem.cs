@@ -57,13 +57,13 @@ public sealed partial class MechSystem : SharedMechSystem
         if (TryComp<WiresPanelComponent>(uid, out var panel) && !panel.Open)
             return;
 
-        if (component.BatterySlot.ContainedEntity == null &&
-            TryComp<BatteryComponent>(args.Used, out var battery) &&
-            _tag.HasTag(args.Used, PowerCageTag)) // Sunrise-Edit - мехи используют только силовые ячейки
+        // Sunrise edit start — единый путь проверки и вставки реактора
+        if (TryComp<BatteryComponent>(args.Used, out var battery)
+            && TryInsertBattery((uid, component), (args.Used, battery)))
         {
-            InsertBattery(uid, args.Used, component, battery);
             return;
         }
+        // Sunrise edit end
 
         if (_toolSystem.HasQuality(args.Used, PryingQuality) && component.BatterySlot.ContainedEntity != null)
         {
@@ -88,6 +88,7 @@ public sealed partial class MechSystem : SharedMechSystem
 
         Dirty(uid, component);
         Vehicle.RefreshCanRun(uid);
+        AttachSunriseInstalledBattery(uid, component); // Sunrise-Edit — регистрируем реактор для синхронизации заряда
     }
 
     [SubscribeLocalEvent]
@@ -119,6 +120,7 @@ public sealed partial class MechSystem : SharedMechSystem
 
         Vehicle.RefreshCanRun(uid);
         Dirty(uid, component);
+        AttachSunriseInstalledBattery(uid, component); // Sunrise-Edit — восстанавливаем связь с предустановленным реактором
     }
 
     [SubscribeLocalEvent]
@@ -219,7 +221,7 @@ public sealed partial class MechSystem : SharedMechSystem
         if (!TryComp<BatteryComponent>(battery, out var batteryComp))
             return false;
 
-        _battery.SetCharge((battery.Value, batteryComp), _battery.GetCharge((battery.Value, batteryComp)) + delta.Float());
+        _battery.ChangeCharge((battery.Value, batteryComp), delta.Float()); // Sunrise-Edit — трата энергии запускает задержку автозарядки реактора
         // TODO: Power cells are predicted now, so no need to duplicate the charge level
         var charge = _battery.GetCharge((battery.Value, batteryComp));
         if (charge != component.Energy) //if there's a discrepency, we have to resync them
@@ -240,14 +242,9 @@ public sealed partial class MechSystem : SharedMechSystem
         if (!Resolve(toInsert, ref battery, false))
             return;
 
-        _container.Insert(toInsert, component.BatterySlot);
-        component.Energy = _battery.GetCharge((toInsert, battery));
-        component.MaxEnergy = battery.MaxCharge;
-
-        Vehicle.RefreshCanRun(uid);
-
-        Dirty(uid, component);
-        UpdateUserInterface(uid, component);
+        // Sunrise edit start — сохраняем совместимость API и направляем вставку через общую проверку whitelist
+        TryInsertBattery((uid, component), (toInsert, battery));
+        // Sunrise edit end
     }
 
     public void RemoveBattery(EntityUid uid, MechComponent? component = null)

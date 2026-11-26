@@ -3,9 +3,11 @@
   parent: BaseMechEquipment
   abstract: true
   components:
-  - type: Battery
-    maxCharge: 500 # Battery is charged by mech
-    startingCharge: 500
+  # Sunrise-Edit start — локальная батарея не нужна при прямом расходе энергии реактора
+  # - type: Battery
+  #   maxCharge: 500
+  #   startingCharge: 500
+  # Sunrise-Edit end
   - type: Appearance
   - type: StaticPrice
     price: 1

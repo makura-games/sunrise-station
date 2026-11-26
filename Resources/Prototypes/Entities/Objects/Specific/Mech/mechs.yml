@@ -71,6 +71,9 @@
   components:
   - type: MobMover
   - type: Mech
+    batteryWhitelist: # Sunrise-Edit — мехи используют отдельные реакторы вместо силовых ячеек
+      tags:
+      - MechReactor
   - type: MechAir
   - type: Vehicle
     canAttack: true
@@ -130,8 +133,9 @@
       # Sunrise edit end
   - type: MeleeWeapon
     hidden: true
-    animation: WeaponArcMechDisabled # Sunrise-Edit
-    wideAnimation: WeaponArcMechDisabled # Sunrise-Edit
+    angle: 0 # sunrise-edit
+    animation: WeaponArcFist # sunrise-edit
+    wideAnimation: WeaponArcFist # sunrise-edit
     attackRate: 0.75
     damage:
       types:
@@ -247,7 +251,7 @@
     bounds: "-0.6,-0.6, 0.6, 0.6"
   - type: PointLight
     enabled: false
-    mask: /Textures/Effects/LightMasks/cone.png
+    mask: /Textures/_Sunrise/Effects/LightMasks/mech_headlight_cone.png # Sunrise-Edit — единая маска прожектора мехов
     autoRot: true
     energy: 3 # Sunrise-edit
     radius: 18 # Sunrise-edit
@@ -327,7 +331,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageMedium
+      - SunriseMechReactorWorkhorse # Sunrise-Edit — предустановленный реактор меха
 
 # Ripley MK-II
 - type: entity
@@ -401,7 +405,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageMedium
+      - SunriseMechReactorWorkhorse # Sunrise-Edit — предустановленный реактор меха
 
 # Clarke
 - type: entity
@@ -450,7 +454,7 @@
     - NonEnergy
   - type: PointLight
     enabled: false
-    mask: /Textures/Effects/LightMasks/cone.png
+    mask: /Textures/_Sunrise/Effects/LightMasks/mech_headlight_cone.png # Sunrise-Edit — единая маска прожектора мехов
     autoRot: true
     radius: 8
     netsync: false
@@ -474,7 +478,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageMedium
+      - SunriseMechReactorWorkhorse # Sunrise-Edit — предустановленный реактор меха
 
 # H.O.N.K.
 - type: entity
@@ -539,7 +543,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageMedium
+      - SunriseMechReactorWorkhorse # Sunrise-Edit — предустановленный реактор меха
 
 - type: entity
   parent: MechHonkerBattery
@@ -619,7 +623,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageSmall
+      - SunriseMechReactorWorkhorse # Sunrise-Edit — предустановленный реактор меха
 
 # Vim!!!!!!!
 
@@ -714,7 +718,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageSmall
+      - SunriseMechReactorWorkhorse # Sunrise-Edit — предустановленный реактор меха
 
 # Combat-Station Mechs
 
@@ -783,7 +787,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageHigh
+      - SunriseMechReactorWorkhorse # Sunrise-Edit — предустановленный реактор меха
 
 # Durand
 - type: entity
@@ -827,6 +831,10 @@
     openState: base-open
     brokenState: base-broken
     airtight: true
+    batteryWhitelist: # Sunrise-Edit — допускает обычные реакторы и эксклюзивный реактор Дюранда
+      tags:
+      - MechReactor
+      - SunriseDurandMechReactor
   - type: Vehicle
     transferDamage: false # Sunrise-Edit - этот мех не передаёт урон пилоту
     operatorWhitelist:
@@ -867,7 +875,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageHigh
+      - SunriseMechReactorDurandale # Sunrise-Edit
 
 # Nanotrasen Combat Mechs
 
@@ -943,7 +951,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageERT
+      - SunriseMechReactorLonghaul # Sunrise-Edit — предустановленный реактор меха
 
 - type: entity
   id: MechMarauderFilled
@@ -1029,7 +1037,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageERT
+      - SunriseMechReactorEmperor # Sunrise-Edit — предустановленный реактор меха
 
 - type: entity
   id: MechSeraphFilled
@@ -1049,7 +1057,7 @@
 # Dark Gygax
 - type: entity
   id: MechGygaxSyndie
-  parent: [ MechBreakageGygax, BaseMech, CombatMech, BaseSyndicateContraband ] # Sunrise-edit
+  parent: [ SyndieMechLight, MechBreakageGygax, BaseMech, CombatMech, BaseSyndicateContraband ] # Sunrise-Edit — общий прожектор мехов Синдиката
   name: Dark Gygax
   description: A modified Gygax used for nefarious purposes. On the back of the armor plate there is an inscription "Cybersun Inc."
   components:
@@ -1122,7 +1130,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageSyndicate
+      - SunriseMechReactorThor # Sunrise-Edit — предустановленный реактор меха
 
 - type: entity
   id: MechGygaxSyndieFilled
@@ -1137,7 +1145,7 @@
 # Mauler
 - type: entity
   id: MechMaulerSyndie
-  parent: [ MechBreakageMarauderFamily, BaseMech, CombatMech, BaseSyndicateContraband ] # Sunrise-edit
+  parent: [ SyndieMechLight, MechBreakageMarauderFamily, BaseMech, CombatMech, BaseSyndicateContraband ] # Sunrise-Edit — общий прожектор мехов Синдиката
   name: Mauler
   description: A modified Marauder used by the Syndicate that's not as maneuverable as the Dark Gygax, but it makes up for that in armor and sheer firepower. On the back of the armor plate there is an inscription "Cybersun Inc."
   components:
@@ -1213,7 +1221,7 @@
   - type: ContainerFill
     containers:
       mech-battery-slot:
-      - PowerCageSyndicate
+      - SunriseMechReactorThor # Sunrise-Edit — предустановленный реактор меха
 
 - type: entity
   id: MechMaulerSyndieFilled

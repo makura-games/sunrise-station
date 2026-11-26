@@ -4,6 +4,7 @@
   - Boris
   - MechAirTank
   - MechThruster
+  - SunriseMechReactorStandard
 
 - type: latheRecipePack
   id: RoboticsDynamicSunrise
@@ -38,6 +39,10 @@
   # - PhazonRLeg
   - PowerCageHigh
   - PowerCageMedium
+  - SunriseMechReactorWorkhorse
+  - SunriseMechReactorDurandale
+  - SunriseMechReactorLonghaul
+  - SunriseMechReactorThor
   - MechEquipmentDrill
   - MechEquipmentDrillDiamond
   - MechEquipmentKineticAccelerator

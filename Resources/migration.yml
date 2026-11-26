@@ -1277,6 +1277,10 @@ MagazineBoxHeavyRifleHP: MagazineBoxHeavyRifleSP
 RifleHeavyMagazineHP: RifleHeavyMagazineSP
 MagazineDragunovHP: MagazineDragunovSP
 MagazineBoxRifleMachineHP: MagazineBoxRifleMachineSP
+# 2026-09-03
+PowerCageSyndicate: PowerCageOmega
+PowerCageERT: PowerCageOmega
+
 # 2026-09-06
 MechDollHouse: MechKolobok
 MechDollHouseBattery: MechKolobokBattery
@@ -1341,6 +1345,11 @@ ClothingOuterSuitCargo: null
 # 2026-11-21 - машины системы болезней
 DiseaseDiagnoser: SunriseDiseaseDiagnoser
 Vaccinator: SunriseVaccinator
+MechMiningPod: null
+MechMiningPodFlatpack: null
+SpawnMechMiningPodFilled: null
+MechEquipmentGrabberSmallMining: null
+
 # region Sunrise-End
 
 # 2026-07-16

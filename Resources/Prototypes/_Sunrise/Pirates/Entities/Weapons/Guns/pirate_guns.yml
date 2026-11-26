@@ -117,7 +117,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineChainGunImprovised
+        startingItem: MagazineChainGun
         insertSound: /Audio/_Sunrise/Weapons/Guns/LMGs/reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/LMGs/unload.ogg
         priority: 2
@@ -310,21 +310,6 @@
   components:
   - type: BallisticAmmoProvider
     capacity: 100
-
-- type: entity
-  id: MagazineChainGunImprovised
-  name: chaingun ammo drum (5.56mm improvised)
-  parent: MagazineChainGun
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeRifleImprovised
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-      color: "#9e9292"
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
   id: MagazineChainGunRandomSpawner

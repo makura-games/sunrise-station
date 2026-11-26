@@ -2752,8 +2752,8 @@
       - SurplusBundle
 
 - type: listing
-  id: UplinkPowerCageSyndicate
-  productEntity: PowerCageSyndicate
+  id: UplinkMechPower
+  productEntity: SunriseMechReactorBurnoutBox
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 3
