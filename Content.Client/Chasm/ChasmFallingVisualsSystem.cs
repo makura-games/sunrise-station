@@ -1,5 +1,3 @@
-using System.Numerics;
-using Content.Client._Sunrise.Animations.SpriteAnimation.Systems;
 using Content.Shared.Chasm;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
@@ -19,7 +17,6 @@ public sealed partial class ChasmFallingVisualsSystem : EntitySystem
 
     [Dependency] private EntityQuery<AnimationPlayerComponent> _animationPlayerQuery;
     */
-    [Dependency] private SpriteAnimationSystem _spriteAnimation = default!;
     // Sunrise edit end
     [Dependency] private EntityQuery<SpriteComponent> _spriteQuery;
 
@@ -53,12 +50,7 @@ public sealed partial class ChasmFallingVisualsSystem : EntitySystem
 
         _anim.Play((entity, player), GetFallingAnimation(entity.Comp), ChasmFallAnimationKey);
         */
-        var spriteEntity = (entity.Owner, sprite);
-        if (_spriteAnimation.IsPlaying(spriteEntity, ChasmFallAnimationKey))
-            return;
-
-        entity.Comp.OriginalScale = _spriteAnimation.GetBaseScale(spriteEntity);
-        _spriteAnimation.PlayScale(spriteEntity, GetFallingAnimation(entity.Comp), ChasmFallAnimationKey, hold: true);
+        StartFallingAnimation(entity, sprite);
         // Sunrise edit end
     }
 
@@ -81,10 +73,12 @@ public sealed partial class ChasmFallingVisualsSystem : EntitySystem
 
         _anim.Stop((entity, player), ChasmFallAnimationKey);
         */
-        _spriteAnimation.Stop((entity.Owner, sprite), ChasmFallAnimationKey);
+        StopFallingAnimation((entity.Owner, sprite));
         // Sunrise edit end
     }
 
+    // Sunrise edit start - относительные кадры строятся в Sunrise partial
+    /*
     private static Animation GetFallingAnimation(ChasmFallingComponent component)
     {
         return new Animation
@@ -98,21 +92,14 @@ public sealed partial class ChasmFallingVisualsSystem : EntitySystem
                     Property = nameof(SpriteComponent.Scale),
                     KeyFrames =
                     {
-                        // Sunrise edit start - нулевая ось базы остаётся нулевой
-                        /*
                         new AnimationTrackProperty.KeyFrame(component.OriginalScale, 0.0f),
                         new AnimationTrackProperty.KeyFrame(component.AnimationScale, component.AnimationTime.Seconds),
-                        */
-                        new AnimationTrackProperty.KeyFrame(Vector2.One, 0f),
-                        new AnimationTrackProperty.KeyFrame(new Vector2(
-                            component.OriginalScale.X == 0f ? 1f : component.AnimationScale.X / component.OriginalScale.X,
-                            component.OriginalScale.Y == 0f ? 1f : component.AnimationScale.Y / component.OriginalScale.Y),
-                            (float) component.AnimationTime.TotalSeconds),
-                        // Sunrise edit end
                     },
                     InterpolationMode = AnimationInterpolationMode.Cubic,
                 },
             },
         };
     }
+    */
+    // Sunrise edit end
 }

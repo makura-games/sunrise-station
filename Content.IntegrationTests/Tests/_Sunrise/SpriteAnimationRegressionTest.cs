@@ -123,6 +123,14 @@ public sealed class SpriteAnimationRegressionTest
                 Assert.That(controller.IsPlaying(uid, anomaly.AnimationKey), Is.True);
                 controller.FrameUpdate(anomaly.AnimationTime / 2f);
                 Assert.That(sprite.Offset, Is.Not.EqualTo(Vector2.Zero));
+                var previousDuration = anomaly.AnimationTime;
+#pragma warning disable RA0002
+                anomaly.FloatingOffset = Vector2.UnitX * 3f;
+                anomaly.AnimationTime = previousDuration / 2f;
+#pragma warning restore RA0002
+                controller.FrameUpdate(previousDuration * 1.5f);
+                controller.FrameUpdate(anomaly.AnimationTime / 2f);
+                Assert.That(sprite.Offset, Is.EqualTo(Vector2.UnitX * 1.5f));
                 entities.RemoveComponent<AnomalyComponent>(uid);
                 Assert.That(controller.IsLooping(uid, anomaly.AnimationKey), Is.False);
                 Assert.That(sprite.Offset, Is.EqualTo(Vector2.Zero));
@@ -135,8 +143,9 @@ public sealed class SpriteAnimationRegressionTest
         await pair.CleanReturnAsync();
     }
 
-    [Test]
-    public async Task SuspensionPreservesRotationWithoutExistingPose()
+    [TestCase(false)]
+    [TestCase(true)]
+    public async Task TemporaryPosePreservesRotationWithoutExistingPose(bool suspend)
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
         var client = pair.Client;
@@ -149,8 +158,17 @@ public sealed class SpriteAnimationRegressionTest
                 var sprite = entities.AddComponent<SpriteComponent>(uid);
                 client.System<SpriteSystem>().SetRotation((uid, sprite), Angle.FromDegrees(37));
                 var pose = client.System<SpritePoseSystem>();
-                pose.Suspend((uid, sprite), Direction.South);
-                pose.Resume((uid, sprite));
+                if (suspend)
+                {
+                    pose.Suspend((uid, sprite), Direction.South);
+                    pose.Resume((uid, sprite));
+                }
+                else
+                {
+                    pose.SetOverride((uid, sprite), Angle.FromDegrees(90), 0f);
+                    Assert.That(sprite.Rotation.Degrees, Is.EqualTo(90).Within(0.01));
+                    pose.ClearOverride((uid, sprite), 0f);
+                }
                 Assert.That(sprite.Rotation.Degrees, Is.EqualTo(37).Within(0.01));
             }
             finally

@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Client._Sunrise.Animations.SpriteAnimation.Systems;
+using Content.Shared.Anomaly.Components;
 using Content.Shared.Gravity;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
@@ -31,7 +32,20 @@ public sealed partial class FloatingVisualizerSystem
         _spriteAnimation.PlayLoop(uid, key, Play, CanPlay);
         return;
 
-        void Play(EntityUid target) => PlayAnimation(target, offset, key, duration);
+        void Play(EntityUid target)
+        {
+            if (TryComp<AnomalyComponent>(target, out var anomaly) && anomaly.AnimationKey == key)
+            {
+                if (anomaly.AnimationTime > 0f)
+                    PlayAnimation(target, anomaly.FloatingOffset, key, anomaly.AnimationTime);
+                else
+                    _spriteAnimation.Stop(target, key);
+                return;
+            }
+
+            PlayAnimation(target, offset, key, duration);
+        }
+
         bool CanPlay(EntityUid target) => !TryComp<FloatingVisualsComponent>(target, out var floating) || floating.CanFloat;
     }
 

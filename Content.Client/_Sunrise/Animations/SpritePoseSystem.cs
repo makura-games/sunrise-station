@@ -57,7 +57,7 @@ public sealed partial class SpritePoseSystem : EntitySystem
     /// </summary>
     public void SetOverride(Entity<SpriteComponent> ent, Angle rotation, float duration, Direction? direction = null)
     {
-        var pose = EnsureComp<SpritePoseComponent>(ent);
+        var pose = GetOrCreatePose(ent);
         pose.OverrideRotation = rotation;
         pose.Direction = direction;
         ApplyDirection(ent, pose);
@@ -84,11 +84,7 @@ public sealed partial class SpritePoseSystem : EntitySystem
     /// </summary>
     public void Suspend(Entity<SpriteComponent> ent, Direction? direction = null)
     {
-        if (!TryComp<SpritePoseComponent>(ent, out var pose))
-        {
-            pose = AddComp<SpritePoseComponent>(ent);
-            pose.BaseRotation = _spriteAnimation.GetBaseRotation(ent.AsNullable());
-        }
+        var pose = GetOrCreatePose(ent);
         pose.Suspended = true;
         pose.SuspendedDirection = direction;
         pose.HasPose = false;
@@ -108,6 +104,16 @@ public sealed partial class SpritePoseSystem : EntitySystem
         pose.SuspendedDirection = null;
         ApplyDirection(ent, pose);
         Animate(ent, pose.OverrideRotation ?? pose.BaseRotation, 0f, pose);
+    }
+
+    private SpritePoseComponent GetOrCreatePose(Entity<SpriteComponent> ent)
+    {
+        if (TryComp<SpritePoseComponent>(ent, out var pose))
+            return pose;
+
+        pose = AddComp<SpritePoseComponent>(ent);
+        pose.BaseRotation = _spriteAnimation.GetBaseRotation(ent.AsNullable());
+        return pose;
     }
 
     private static void ApplyDirection(Entity<SpriteComponent> ent, SpritePoseComponent pose)
