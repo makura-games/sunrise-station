@@ -265,9 +265,6 @@
   id: LightAmmoBelt127
 
 - type: Tag
-  id: CartridgeRifleHeavy127mm
-
-- type: Tag
   id: MagazineAR18
 
 - type: Tag
