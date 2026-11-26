@@ -6,7 +6,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
-using Content.Shared.Vehicle;
+using Content.Shared.Vehicle.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
