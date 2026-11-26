@@ -1,27 +1,25 @@
-using System.Linq;
+using Content.Server._Sunrise.Auth;
 using Content.Server.Cargo.Components;
+using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;
 using Content.Server.Mind;
 using Content.Server.Objectives;
+using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Preferences.Managers;
 using Content.Server.Roles;
 using Content.Server.Store.Systems;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Preferences;
 using Content.Shared.Roles.Jobs;
-using Content.Shared.Store.Components;
 using Prometheus;
-using Robust.Server.DataMetrics;
 using Robust.Server.Player;
-using Robust.Shared.Enums;
+using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -29,12 +27,18 @@ using Robust.Shared.Timing;
 namespace Content.Server._Sunrise.GameplayMetrics;
 
 /// <summary>
-/// Server-side system that reports gameplay metrics to Prometheus.
-/// Covers: retention, balance, general stats, job popularity.
+/// Серверная система, отдающая игровые метрики в Prometheus.
+/// Покрывает удержание, аудиторию, баланс, общую статистику и популярность профессий.
 /// </summary>
 public sealed partial class MetricsSystem : EntitySystem
 {
     [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IServerNetManager _net = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private ServerDbEntryManager _dbEntry = default!;
+    [Dependency] private PlayTimeTrackingManager _playTime = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private AccountCreationManager _accountCreation = default!;
     [Dependency] private MindSystem _minds = default!;
     [Dependency] private RoleSystem _roles = default!;
     [Dependency] private ObjectivesSystem _objectives = default!;
@@ -42,24 +46,6 @@ public sealed partial class MetricsSystem : EntitySystem
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private IServerPreferencesManager _prefs = default!;
     [Dependency] private SharedJobSystem _jobs = default!;
-
-    private static readonly Counter PlayerDisconnectsTotal = Metrics.CreateCounter(
-        "ss14_player_disconnect_total",
-        "Player disconnects with context labels.",
-        new CounterConfiguration
-        {
-            LabelNames = ["gamemode", "mob_state", "job", "is_antag"]
-        });
-
-    private static readonly Histogram PlayerSessionDurationSeconds = Metrics.CreateHistogram(
-        "ss14_player_session_duration_seconds",
-        "Player in-game session duration in seconds.",
-        new HistogramConfiguration
-        {
-            LabelNames = ["job", "is_antag"],
-            // 60 s → ~4 h, factor ×1.7, 15 buckets
-            Buckets = Histogram.ExponentialBuckets(60, 1.7, 15)
-        });
 
     private static readonly Histogram PlayerDeathsPerRound = Metrics.CreateHistogram(
         "ss14_player_deaths_per_round",
@@ -80,15 +66,6 @@ public sealed partial class MetricsSystem : EntitySystem
             // 30 s → ~1 h, factor ×1.8, 10 buckets
             Buckets = Histogram.ExponentialBuckets(30, 1.8, 10)
         });
-
-    // RETENTION: round-end snapshot gauges
-    private static readonly Gauge RoundEndSurvivalRateGauge = Metrics.CreateGauge(
-        "ss14_round_end_survival_rate",
-        "Fraction of non-observer players still alive at round end (0–1).");
-
-    private static readonly Gauge RoundEndConnectedRateGauge = Metrics.CreateGauge(
-        "ss14_round_end_connected_rate",
-        "Fraction of players still connected when the round ended (0–1).");
 
     // BALANCE: store / uplink
     private static readonly Counter StoreCurrencySpentTotal = Metrics.CreateCounter(
@@ -143,18 +120,14 @@ public sealed partial class MetricsSystem : EntitySystem
         "How many players had each job at each priority when the round started.",
         new CounterConfiguration { LabelNames = ["job_id", "priority"] });
 
-    // Session state tracking (per NetUserId)
-    private readonly Dictionary<NetUserId, PlayerSessionData> _sessions = new();
-
-
     public override void Initialize()
     {
         base.Initialize();
 
-        _player.PlayerStatusChanged += OnPlayerStatusChanged;
+        InitializeRetention();
+        InitializeAudience();
 
         SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEnd);
 
         // Damage / healing — MindContainerComponent is on every player body and is free
@@ -173,34 +146,13 @@ public sealed partial class MetricsSystem : EntitySystem
     public override void Shutdown()
     {
         base.Shutdown();
-        _player.PlayerStatusChanged -= OnPlayerStatusChanged;
-        _sessions.Clear();
-    }
 
-    private void OnPlayerStatusChanged(object? sender, SessionStatusEventArgs args)
-    {
-        var session = args.Session;
-
-        switch (args.NewStatus)
-        {
-            case SessionStatus.InGame:
-                _sessions[session.UserId] = new PlayerSessionData
-                {
-                    SessionStart = _gameTiming.CurTime
-                };
-                break;
-
-            case SessionStatus.Disconnected:
-                RecordDisconnect(session);
-                _sessions.Remove(session.UserId);
-                break;
-        }
+        ShutdownRetention();
+        ShutdownAudience();
     }
 
     private void OnRoundStarting(RoundStartingEvent ev)
     {
-        ResetRoundSessionData();
-
         // Count job priority votes from all ready players' preferences.
         foreach (var session in _player.Sessions)
         {
@@ -212,74 +164,18 @@ public sealed partial class MetricsSystem : EntitySystem
 
             foreach (var (jobId, priority) in profile.JobPriorities)
             {
-                var priorityLabel = priority switch
-                {
-                    JobPriority.High => "high",
-                    JobPriority.Medium => "medium",
-                    JobPriority.Low => "low",
-                    _ => "never"
-                };
-                JobPriorityVotesTotal.WithLabels(jobId.Id, priorityLabel).Inc();
+                JobPriorityVotesTotal.WithLabels(jobId.Id, GetPriorityLabel(priority)).Inc();
             }
-        }
-    }
-
-    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
-    {
-        ResetRoundSessionData();
-    }
-
-    private void ResetRoundSessionData()
-    {
-        _sessions.Clear();
-
-        var now = _gameTiming.CurTime;
-        foreach (var session in _player.Sessions)
-        {
-            _sessions[session.UserId] = new PlayerSessionData
-            {
-                SessionStart = now
-            };
         }
     }
 
     private void OnRoundEnd(RoundEndMessageEvent ev)
     {
-        var gamemode = _gameTicker.CurrentPreset?.ID ?? "unknown";
+        var gamemode = GetGamemodeLabel();
 
         RoundsByGamemodeTotal.WithLabels(gamemode).Inc();
 
-        // Survival / connection rate
-        var nonObservers = ev.AllPlayersEndInfo.Where(p => !p.Observer).ToArray();
-        double survivalRate = 0;
-        double connectedRate = 0;
-
-        if (nonObservers.Length > 0)
-        {
-            var alivePlayers = 0;
-            var connectedPlayers = 0;
-
-            foreach (var info in nonObservers)
-            {
-                if (info.Connected)
-                    connectedPlayers++;
-
-                if (info.PlayerNetEntity != null
-                    && TryGetEntity(info.PlayerNetEntity, out EntityUid? entityNullable)
-                    && entityNullable.HasValue
-                    && TryComp<MobStateComponent>(entityNullable.Value, out var mobState)
-                    && mobState.CurrentState == MobState.Alive)
-                {
-                    alivePlayers++;
-                }
-            }
-
-            survivalRate = (double)alivePlayers / nonObservers.Length;
-            connectedRate = (double)connectedPlayers / nonObservers.Length;
-        }
-
-        RoundEndSurvivalRateGauge.Set(survivalRate);
-        RoundEndConnectedRateGauge.Set(connectedRate);
+        RecordRoundEndRetention(ev);
 
         // Job assignment counts
         foreach (var info in ev.AllPlayersEndInfo)
@@ -309,7 +205,7 @@ public sealed partial class MetricsSystem : EntitySystem
 
             foreach (var objectiveUid in mind.Objectives)
             {
-                if (!TryComp<ObjectiveComponent>(objectiveUid, out _))
+                if (!HasComp<ObjectiveComponent>(objectiveUid))
                     continue;
 
                 AntagObjectivesTotalCount.WithLabels(antagLabel).Inc();
@@ -318,20 +214,6 @@ public sealed partial class MetricsSystem : EntitySystem
                 if (progress >= 0.999f)
                     AntagObjectivesCompletedTotal.WithLabels(antagLabel).Inc();
             }
-        }
-
-        // Deaths-per-round histogram (flush per-session data at round end)
-        foreach (var (userId, data) in _sessions)
-        {
-            if (!_minds.TryGetMind(userId, out var mId, out _) || mId == null)
-                continue;
-
-            var job = GetJobLabel(mId.Value);
-            var isAntag = _roles.MindIsAntagonist(mId.Value) ? "true" : "false";
-
-            var sessionSeconds = (_gameTiming.CurTime - data.SessionStart).TotalSeconds;
-            PlayerSessionDurationSeconds.WithLabels(job, isAntag).Observe(sessionSeconds);
-            PlayerDeathsPerRound.WithLabels(job).Observe(data.DeathCount);
         }
     }
 
@@ -349,13 +231,13 @@ public sealed partial class MetricsSystem : EntitySystem
 
     private void OnActorMobStateChanged(Entity<MindContainerComponent> ent, ref MobStateChangedEvent args)
     {
-        if (!HasComp<ActorComponent>(ent))
+        if (!TryComp<ActorComponent>(ent, out var actor))
             return;
 
         if (args.NewMobState != MobState.Dead || args.OldMobState == MobState.Dead)
             return;
 
-        var gamemode = _gameTicker.CurrentPreset?.ID ?? "unknown";
+        var gamemode = GetGamemodeLabel();
         var jobLabel = "unknown";
 
         if (_minds.TryGetMind(ent, out var mindId, out _))
@@ -363,19 +245,16 @@ public sealed partial class MetricsSystem : EntitySystem
 
         PlayerDeathsTotal.WithLabels(jobLabel, gamemode).Inc();
 
-        if (!TryComp<ActorComponent>(ent, out var actor))
+        if (!_retention.TryGetValue(actor.PlayerSession.UserId, out var state))
             return;
 
-        var userId = actor.PlayerSession.UserId;
-        if (!_sessions.TryGetValue(userId, out var data))
-            return;
+        state.RoundDeaths++;
+        state.LastDeathAt = _gameTiming.CurTime;
 
-        data.DeathCount++;
-
-        // Record time-to-first-death
-        if (!data.HasDied)
+        // Время до первой смерти в раунде
+        if (!state.HasDiedThisRound)
         {
-            data.HasDied = true;
+            state.HasDiedThisRound = true;
             var secondsSinceStart = (_gameTiming.CurTime - _gameTicker.RoundStartTimeSpan).TotalSeconds;
             PlayerTimeToFirstDeathSeconds.WithLabels(jobLabel, gamemode).Observe(secondsSinceStart);
         }
@@ -386,7 +265,6 @@ public sealed partial class MetricsSystem : EntitySystem
         StoreCurrencySpentTotal.WithLabels(args.Currency).Inc((double)args.Cost);
     }
 
-
     private void OnCargoFulfilled(ref FulfillCargoOrderEvent args)
     {
         CargoOrdersFulfilledTotal.WithLabels(args.Order.Product.Id).Inc(args.Order.OrderQuantity);
@@ -394,41 +272,9 @@ public sealed partial class MetricsSystem : EntitySystem
 
     // Helpers
 
-    private void RecordDisconnect(ICommonSession session)
+    private string GetGamemodeLabel()
     {
-        var gamemode = _gameTicker.CurrentPreset?.ID ?? "unknown";
-        var mobStateLabel = "unknown";
-        var jobLabel = "unknown";
-        var isAntagLabel = "false";
-
-        if (_minds.TryGetMind(session.UserId, out var mindId, out var mind))
-        {
-            isAntagLabel = _roles.MindIsAntagonist(mindId) ? "true" : "false";
-            jobLabel = GetJobLabel(mindId.Value);
-
-            // Mob state of the currently attached entity
-            if (mind.CurrentEntity.HasValue
-                && TryComp<MobStateComponent>(mind.CurrentEntity.Value, out var mobState))
-            {
-                mobStateLabel = mobState.CurrentState switch
-                {
-                    MobState.Alive => "alive",
-                    MobState.Critical => "critical",
-                    MobState.Dead => "dead",
-                    _ => "unknown"
-                };
-            }
-        }
-
-        PlayerDisconnectsTotal.WithLabels(gamemode, mobStateLabel, jobLabel, isAntagLabel).Inc();
-
-        // Session duration
-        if (_sessions.TryGetValue(session.UserId, out var data))
-        {
-            var durationSeconds = (_gameTiming.CurTime - data.SessionStart).TotalSeconds;
-            PlayerSessionDurationSeconds.WithLabels(jobLabel, isAntagLabel).Observe(durationSeconds);
-            PlayerDeathsPerRound.WithLabels(jobLabel).Observe(data.DeathCount);
-        }
+        return _gameTicker.CurrentPreset?.ID ?? "unknown";
     }
 
     private string GetJobLabel(EntityUid mindId)
@@ -438,12 +284,14 @@ public sealed partial class MetricsSystem : EntitySystem
             : "unknown";
     }
 
-    // Nested types
-
-    private sealed class PlayerSessionData
+    private static string GetPriorityLabel(JobPriority priority)
     {
-        public TimeSpan SessionStart;
-        public int DeathCount;
-        public bool HasDied;
+        return priority switch
+        {
+            JobPriority.High => "high",
+            JobPriority.Medium => "medium",
+            JobPriority.Low => "low",
+            _ => "never"
+        };
     }
 }

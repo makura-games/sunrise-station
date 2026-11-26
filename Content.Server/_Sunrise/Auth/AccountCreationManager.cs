@@ -1,68 +1,66 @@
-using System;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Threading;
-using System.Threading.Tasks;
-using Content.Server.Discord;
-using Content.Shared.CCVar;
-using Robust.Shared;
-using Robust.Shared.Configuration;
+using Robust.Server.Player;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 
 namespace Content.Server._Sunrise.Auth;
 
+/// <summary>
+/// Отдаёт дату создания аккаунта, которую auth-сервер прислал при подключении игрока.
+/// </summary>
 public sealed partial class AccountCreationManager
 {
-    [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private ILogManager _logManager = default!;
-    [Dependency] private DiscordWebhook _discord = default!;
-    private HttpClient _httpClient = default!;
-    private ISawmill _sawmill = default!;
-    private string _api = "api/query/userid?userid=";
-    public void Initialize()
+    [Dependency] private IPlayerManager _player = default!;
+
+    /// <summary>
+    /// Минимальная правдоподобная дата: auth-сервер без поля отдаёт <see cref="DateTime.MinValue"/>.
+    /// </summary>
+    private static readonly DateTime MinValidCreatedTime = new(2015, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+    /// <summary>
+    /// Пытается получить дату создания аккаунта подключённого игрока.
+    /// </summary>
+    public bool TryGetAccountCreatedTime(NetUserId userId, out DateTimeOffset createdTime)
     {
-        _sawmill = _logManager.GetSawmill("auth_created_time_api");
-        _httpClient = _discord.GetClient();
-    }
-    public async Task<DateTimeOffset?> TryGetAccountCreatedTimeAsync(NetUserId userId, CancellationToken cancel = default)
-    {
-        try
-        {
-            var authServer = _cfg.GetCVar(CVars.AuthServer);
-            var requestUri = $"{authServer}{_api}{WebUtility.UrlEncode(userId.UserId.ToString())}";
-            using var resp = await _httpClient.GetAsync(requestUri, cancel);
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                return null;
-
-            if (resp.StatusCode == HttpStatusCode.Unauthorized)
-            {
-                _sawmill.Error("Auth server token is invalid.");
-                return null;
-            }
-
-            if (!resp.IsSuccessStatusCode)
-            {
-                _sawmill.Error("Auth server returned bad response {StatusCode}!", resp.StatusCode);
-                return null;
-            }
-
-            var responseData = await resp.Content.ReadFromJsonAsync<UserDataResponse>(cancellationToken: cancel);
-            return responseData?.CreatedTime;
-        }
-        catch (HttpRequestException e)
-        {
-            _sawmill.Error($"Auth server request failed: {e}");
-        }
-
-        return null;
+        createdTime = default;
+        return _player.TryGetSessionById(userId, out var session) &&
+               TryGetAccountCreatedTime(session, out createdTime);
     }
 
-    private sealed record UserDataResponse(
-        string UserName,
-        Guid UserId,
-        int? PatronTier,
-        DateTimeOffset CreatedTime);
+    /// <summary>
+    /// Пытается получить дату создания аккаунта из данных сессии.
+    /// </summary>
+    public bool TryGetAccountCreatedTime(ICommonSession session, out DateTimeOffset createdTime)
+    {
+        createdTime = default;
+
+        if (session.Channel.UserData.CreatedTime is not { } created)
+            return false;
+
+        // Время из auth приходит в UTC, Unspecified появляется только у локальных и гостевых данных.
+        var utc = created.Kind == DateTimeKind.Unspecified
+            ? DateTime.SpecifyKind(created, DateTimeKind.Utc)
+            : created.ToUniversalTime();
+
+        if (utc < MinValidCreatedTime)
+            return false;
+
+        createdTime = new DateTimeOffset(utc);
+        return true;
+    }
+
+    /// <summary>
+    /// Пытается получить возраст аккаунта подключённого игрока.
+    /// </summary>
+    public bool TryGetAccountAge(ICommonSession session, out TimeSpan age)
+    {
+        age = default;
+        if (!TryGetAccountCreatedTime(session, out var createdTime))
+            return false;
+
+        age = DateTimeOffset.UtcNow - createdTime;
+        if (age < TimeSpan.Zero)
+            age = TimeSpan.Zero;
+
+        return true;
+    }
 }

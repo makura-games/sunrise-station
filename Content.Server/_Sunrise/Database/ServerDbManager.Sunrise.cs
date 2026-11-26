@@ -46,6 +46,20 @@ public partial interface IServerDbManager
     Task<int> PruneInvalidTutorialCompletionsAsync(
         IEnumerable<string> validTutorialIds,
         CancellationToken cancel = default);
+
+    /// <summary>
+    /// Считает уникальных и новых игроков, успешно подключавшихся к серверу начиная с <paramref name="since"/>.
+    /// </summary>
+    Task<AudienceCounts> GetAudienceCountsAsync(int serverId, DateTime since, CancellationToken cancel = default);
+
+    /// <summary>
+    /// Возвращает успешные подключения к серверу игроков, впервые появившихся в базе в указанном интервале.
+    /// </summary>
+    Task<List<NewPlayerConnection>> GetNewPlayerConnectionsAsync(
+        int serverId,
+        DateTime firstSeenFrom,
+        DateTime firstSeenTo,
+        CancellationToken cancel = default);
 }
 
 public sealed partial class ServerDbManager
@@ -171,5 +185,25 @@ public sealed partial class ServerDbManager
     {
         DbWriteOpsMetric.Inc();
         return RunDbCommand(() => _db.PruneInvalidTutorialCompletionsAsync(validTutorialIds, cancel));
+    }
+
+    public Task<AudienceCounts> GetAudienceCountsAsync(
+        int serverId,
+        DateTime since,
+        CancellationToken cancel = default)
+    {
+        DbReadOpsMetric.Inc();
+        return RunDbCommand(() => _db.GetAudienceCountsAsync(serverId, since, cancel));
+    }
+
+    public Task<List<NewPlayerConnection>> GetNewPlayerConnectionsAsync(
+        int serverId,
+        DateTime firstSeenFrom,
+        DateTime firstSeenTo,
+        CancellationToken cancel = default)
+    {
+        DbReadOpsMetric.Inc();
+        return RunDbCommand(() =>
+            _db.GetNewPlayerConnectionsAsync(serverId, firstSeenFrom, firstSeenTo, cancel));
     }
 }
