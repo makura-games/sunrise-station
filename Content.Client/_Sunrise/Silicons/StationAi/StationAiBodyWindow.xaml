@@ -1,0 +1,24 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'station-ai-body-window-title'}"
+                      MinWidth="360"
+                      MinHeight="320">
+    <BoxContainer Orientation="Vertical" Margin="8" VerticalExpand="True" HorizontalExpand="True">
+        <PanelContainer StyleClasses="LowDivider" Margin="0 0 0 6" />
+
+        <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
+            <BoxContainer Name="BodyList"
+                          Orientation="Vertical"
+                          VerticalExpand="True"
+                          HorizontalExpand="True"
+                          SeparationOverride="4" />
+        </ScrollContainer>
+
+        <PanelContainer StyleClasses="LowDivider" Margin="0 6 0 6" />
+
+        <Button Name="ExitBodyButton"
+                HorizontalExpand="True"
+                Text="{Loc 'station-ai-body-window-exit'}" />
+    </BoxContainer>
+</controls:FancyWindow>

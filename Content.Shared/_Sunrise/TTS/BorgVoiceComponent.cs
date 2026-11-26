@@ -25,4 +25,16 @@ public sealed partial class BorgVoiceComponent : Component
 
     [DataField]
     public List<ProtoId<TTSVoicePrototype>>? VoiceBlacklist;
+
+    /// <summary>
+    /// Whether this borg may open the voice change UI and change its selected voice.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool VoiceChangeEnabled = true;
+
+    /// <summary>
+    /// Voice change action removed while <see cref="VoiceChangeEnabled"/> is false.
+    /// </summary>
+    [NonSerialized, ViewVariables]
+    public EntityUid? VoiceChangeActionEntity;
 }

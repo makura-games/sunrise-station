@@ -824,3 +824,6 @@
 
 - type: Tag
   id: MedipenCase # Используется для whitelist у ClothingBeltMedical
+
+- type: Tag
+  id: StationAiCommunicationBoard

@@ -2,6 +2,7 @@
   id: RoboticsStaticSunrise
   recipes:
   - Boris
+  - SunriseStationAiCommunicationBoard
   - MechAirTank
   - MechThruster
 

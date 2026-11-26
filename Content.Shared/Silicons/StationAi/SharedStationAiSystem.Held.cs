@@ -124,9 +124,9 @@ public abstract partial class SharedStationAiSystem
         if (ev.Actor == ev.Target)
             return;
 
-        if (TryComp(ev.Actor, out StationAiHeldComponent? aiComp) &&
-           (!TryComp(ev.Target, out StationAiWhitelistComponent? whitelistComponent) ||
-            !ValidateAi((ev.Actor, aiComp))))
+        if (TryGetCoreForAiActor(ev.Actor, out _, out var stationAi) && // Sunrise edit - ограничиваем только активного актора ИИ, включая тело.
+            (!TryComp(ev.Target, out StationAiWhitelistComponent? whitelistComponent) ||
+             !ValidateAi(stationAi))) // Sunrise edit - проверяем мозг ИИ, связанный с активным актором.
         {
             // Don't allow the AI to interact with anything that isn't powered.
             if (!PowerReceiver.IsPowered(ev.Target))
@@ -164,7 +164,7 @@ public abstract partial class SharedStationAiSystem
             return;
 
         if (!args.CanComplexInteract
-            || !HasComp<StationAiHeldComponent>(args.User)
+            || !TryGetCoreForAiActor(args.User, out _, out _) // Sunrise edit - для поддержки тела ИИ
             || !args.CanInteract)
         {
             return;

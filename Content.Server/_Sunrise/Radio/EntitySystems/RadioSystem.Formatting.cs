@@ -1,5 +1,6 @@
 using System.Globalization;
 using Content.Server._Sunrise.Chat.Sanitization;
+using Content.Shared._Sunrise.Silicons.StationAi;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Chat;
@@ -85,7 +86,13 @@ public sealed partial class RadioSystem
     private string GetIdSprite(EntityUid sender)
     {
         if (HasComp<BorgChassisComponent>(sender))
+        {
+            if (TryComp<StationAiBodyComponent>(sender, out var stationAiBody) &&
+                stationAiBody.LinkedAi != null)
+                return StationAiIconPath;
+
             return BorgIconPath;
+        }
 
         if (HasComp<StationAiHeldComponent>(sender))
             return StationAiIconPath;

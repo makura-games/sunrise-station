@@ -15,3 +15,14 @@
   materials:
     Glass: 500
     Steel: 500
+
+- type: latheRecipe
+  parent: BaseRoboticsRecipe
+  id: SunriseStationAiCommunicationBoard
+  result: SunriseStationAiCommunicationBoard
+  materials:
+    Steel: 500
+    Plastic: 500
+    Gold: 100
+    Silver: 100
+    Plasma: 1000

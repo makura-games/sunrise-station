@@ -24,6 +24,9 @@ public abstract partial class SharedStationAiSystem
     /// </summary>
     private void OnAirlockBolt(EntityUid ent, DoorBoltComponent component, StationAiBoltEvent args)
     {
+        if (!TryGetCoreForAiActor(args.User, out _, out var stationAi)) // Sunrise-Edit
+            return;
+
         if (component.BoltWireCut || !PowerReceiver.IsPowered(ent) || HasComp<RunicDoorComponent>(ent)) // Sunrise-Edit
         {
             ShowDeviceNotRespondingPopup(args.User);
@@ -32,7 +35,7 @@ public abstract partial class SharedStationAiSystem
             return;
         }
 
-        if (!_access.IsAllowed(args.User, ent))
+        if (!_access.IsAllowed(stationAi, ent)) // Sunrise-Edit
         {
             ShowDeviceNoAccessPopup(args.User);
             _adminLogger.Add(LogType.Action,
@@ -58,6 +61,9 @@ public abstract partial class SharedStationAiSystem
     /// </summary>
     private void OnAirlockEmergencyAccess(EntityUid ent, AirlockComponent component, StationAiEmergencyAccessEvent args)
     {
+        if (!TryGetCoreForAiActor(args.User, out _, out var stationAi)) // Sunrise-Edit
+            return;
+
         if (!PowerReceiver.IsPowered(ent)
             || HasComp<RunicDoorComponent>(ent))
         {
@@ -67,7 +73,7 @@ public abstract partial class SharedStationAiSystem
             return;
         }
 
-        if (!_access.IsAllowed(args.User, ent))
+        if (!_access.IsAllowed(stationAi, ent)) // Sunrise-Edit
         {
             ShowDeviceNoAccessPopup(args.User);
             _adminLogger.Add(LogType.Action,
@@ -84,6 +90,9 @@ public abstract partial class SharedStationAiSystem
     /// </summary>
     private void OnElectrified(EntityUid ent, ElectrifiedComponent component, StationAiElectrifiedEvent args)
     {
+        if (!TryGetCoreForAiActor(args.User, out _, out var stationAi)) // Sunrise-Edit
+            return;
+
         if (
             component.IsWireCut
             || !PowerReceiver.IsPowered(ent)
@@ -96,7 +105,7 @@ public abstract partial class SharedStationAiSystem
             return;
         }
 
-        if (!_access.IsAllowed(args.User, ent))
+        if (!_access.IsAllowed(stationAi, ent)) // Sunrise-Edit
         {
             ShowDeviceNoAccessPopup(args.User);
             _adminLogger.Add(LogType.Action,

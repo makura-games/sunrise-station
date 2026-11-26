@@ -85,6 +85,7 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         InitializeHeld();
         InitializeLight();
         InitializeCustomization();
+        InitializeBody(); // Sunrise-Edit - доступы активного тела ИИ.
 
         SubscribeLocalEvent<StationAiWhitelistComponent, BoundUserInterfaceCheckRangeEvent>(OnAiBuiCheck);
 
@@ -169,7 +170,7 @@ public abstract partial class SharedStationAiSystem : EntitySystem
 
     private void OnAiBuiCheck(Entity<StationAiWhitelistComponent> ent, ref BoundUserInterfaceCheckRangeEvent args)
     {
-        if (!HasComp<StationAiHeldComponent>(args.Actor))
+        if (!TryGetCoreForAiActor(args.Actor, out var core, out _)) // Sunrise-Edit - проверяем активного актора ИИ, включая тело.
             return;
 
         args.Result = BoundUserInterfaceRangeResult.Fail;
@@ -178,10 +179,13 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         var targetXform = Transform(args.Target);
 
         // No cross-grid
-        if (targetXform.GridUid != args.Actor.Comp.GridUid)
+        // Sunrise edit start - тело ИИ держит BUI, но видимость двери проверяется от ядра ИИ.
+        var coreXform = Transform(core.Owner);
+        if (targetXform.GridUid != coreXform.GridUid)
         {
             return;
         }
+        // Sunrise edit end
 
         if (!_broadphaseQuery.TryComp(targetXform.GridUid, out var broadphase) || !_gridQuery.TryComp(targetXform.GridUid, out var grid))
         {
@@ -300,7 +304,7 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         if (TryGetHeld((args.Target.Value, targetHolder), out var held))
         {
             var ev = new ChatNotificationEvent(_downloadChatNotificationPrototype, args.Used, args.User);
-            RaiseLocalEvent(held.Value, ref ev);
+            RaiseLocalEvent(GetActiveAiActor(held.Value), ref ev); // Sunrise-Edit - отправляем уведомление активному актору ИИ.
         }
 
         var doAfterArgs = new DoAfterArgs(EntityManager, args.User, cardHasAi ? intelliComp.UploadTime : intelliComp.DownloadTime, new IntellicardDoAfterEvent(), args.Target, ent.Owner)

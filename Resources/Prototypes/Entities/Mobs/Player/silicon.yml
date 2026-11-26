@@ -62,6 +62,12 @@
         type: CommunicationsConsoleBoundUserInterface
       enum.BorgVoiceUiKey.Key:
         type: BorgVoiceBoundUserInterface # Sunrise-AIVoice-Edit
+      # Sunrise added start - интерфейс выбора тела ИИ в ядре.
+      enum.StationAiBodyUiKey.Key:
+        type: StationAiBodyBoundUserInterface
+        interactionRange: -1
+        requireInputValidation: false
+      # Sunrise added end
   - type: IntrinsicUI
     uis:
       enum.RadarConsoleUiKey.Key:
@@ -443,6 +449,7 @@
 - type: entity
   id: StationAiBrain
   parent: PositronicBrain
+  save: false # Sunrise-Edit - Дефолт ломает тест, мозг ИИ создается во время раунда и не должен сохраняться на карте.
   categories: [ HideSpawnMenu, DoNotMap ]
   components:
   - type: Sprite
@@ -454,11 +461,18 @@
   - type: ActionGrant
     actions:
     - ActionViewLaws
+  - type: StationAiBodyController # Sunrise-Edit - управление телами ИИ.
   - type: UserInterface
     interfaces:
       enum.SiliconLawsUiKey.Key:
         type: SiliconLawBoundUserInterface
         requireInputValidation: false
+      # Sunrise added start - интерфейс выбора тела ИИ.
+      enum.StationAiBodyUiKey.Key:
+        type: StationAiBodyBoundUserInterface
+        interactionRange: -1
+        requireInputValidation: false
+      # Sunrise added end
   - type: ComplexInteraction
   - type: Actions
   - type: Access

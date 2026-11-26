@@ -166,6 +166,14 @@ public abstract partial class SharedBorgSystem : EntitySystem
         if (args.Container != chassis.Comp.BrainContainer)
             return;
 
+        // Sunrise added start - хук для логики вставки мозга в борга.
+        if (HasComp<BorgBrainComponent>(args.Entity))
+        {
+            var insertedEv = new BorgBrainInsertedIntoChassisEvent(args.Entity);
+            RaiseLocalEvent(chassis, ref insertedEv);
+        }
+        // Sunrise added end
+
         if (HasComp<BorgBrainComponent>(args.Entity) && _mind.TryGetMind(args.Entity, out var mindId, out var mind))
         {
             _mind.TransferTo(mindId, chassis.Owner, mind: mind);
@@ -181,6 +189,14 @@ public abstract partial class SharedBorgSystem : EntitySystem
 
         if (args.Container != chassis.Comp.BrainContainer)
             return;
+
+        // Sunrise added start - хук для логики извлечения мозга из борга.
+        if (HasComp<BorgBrainComponent>(args.Entity))
+        {
+            var removedEv = new BorgBrainRemovedFromChassisEvent(args.Entity);
+            RaiseLocalEvent(chassis, ref removedEv);
+        }
+        // Sunrise added end
 
         if (HasComp<BorgBrainComponent>(args.Entity) && _mind.TryGetMind(chassis.Owner, out var mindId, out var mind))
         {

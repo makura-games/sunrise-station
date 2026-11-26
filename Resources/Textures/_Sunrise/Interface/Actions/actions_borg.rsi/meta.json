@@ -24,6 +24,10 @@
         },
         {
             "name":"paperwork-module"
+        },
+        {
+            "name":"ai_connection",
+            "copyright": "sileret_ from discord for Sunrise Station"
         }
     ]
 }

@@ -1,0 +1,34 @@
+- type: entity
+  parent: BaseMentalAction
+  id: ActionStationAiBodyMenu
+  name: Manage AI bodies
+  description: Open the list of available AI bodies.
+  components:
+  - type: Action
+    raiseOnUser: true
+    priority: -4
+    itemIconStyle: NoItem
+    useDelay: 0.5
+  - type: Sprite
+    sprite: _Sunrise/Interface/Actions/actions_borg.rsi
+    layers:
+    - state: ai_connection
+  - type: InstantAction
+    event: !type:StationAiBodyOpenUiActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionStationAiBodyExit
+  name: Leave AI body
+  description: Return your mind to the AI core.
+  components:
+  - type: Action
+    priority: -4
+    itemIconStyle: NoItem
+    useDelay: 0.5
+  - type: Sprite
+    sprite: Interface/Actions/actions_ai.rsi
+    layers:
+    - state: ai_core
+  - type: InstantAction
+    event: !type:StationAiBodyExitActionEvent
