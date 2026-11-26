@@ -1,0 +1,7 @@
+- type: !PartialOnly entity
+  id: PirateScoonerSpawner
+  categories: [ HideSpawnMenu ]
+
+- type: !PartialOnly entity
+  id: PirateCaptainScoonerSpawner
+  categories: [ HideSpawnMenu ]

@@ -3827,7 +3827,7 @@ entities:
     - type: Transform
       pos: 7.3133764,-11.500028
       parent: 1
-- proto: PirateCaptainScoonerSpawner
+- proto: SunrisePirateCaptainScoonerSpawner
   entities:
   - uid: 602
     components:
@@ -3873,7 +3873,7 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
-- proto: PirateScoonerSpawner
+- proto: SunrisePirateScoonerSpawner
   entities:
   - uid: 603
     components:

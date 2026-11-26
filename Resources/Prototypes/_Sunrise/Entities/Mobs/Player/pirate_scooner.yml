@@ -1,0 +1,45 @@
+- type: randomHumanoidSettings
+  id: SunrisePirateScooner
+  parent: PirateScooner
+  components:
+  - type: GhostRole
+    mindRoles:
+    - MindRolePirate
+
+- type: randomHumanoidSettings
+  id: SunrisePirateCaptainScooner
+  parent: PirateCaptainScooner
+  components:
+  - type: GhostRole
+    mindRoles:
+    - MindRolePirate
+
+- type: entity
+  id: SunriseRandomHumanoidPirateScooner
+  parent: RandomHumanoidPirateScooner
+  components:
+  - type: RandomHumanoidSpawner
+    settings: SunrisePirateScooner
+
+- type: entity
+  id: SunriseRandomHumanoidPirateCaptainScooner
+  parent: RandomHumanoidPirateCaptainScooner
+  components:
+  - type: RandomHumanoidSpawner
+    settings: SunrisePirateCaptainScooner
+
+- type: entity
+  id: SunrisePirateScoonerSpawner
+  parent: PirateScoonerSpawner
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - SunriseRandomHumanoidPirateScooner
+
+- type: entity
+  id: SunrisePirateCaptainScoonerSpawner
+  parent: PirateCaptainScoonerSpawner
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - SunriseRandomHumanoidPirateCaptainScooner

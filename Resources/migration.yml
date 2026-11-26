@@ -1637,3 +1637,7 @@ DrinkWaterJug: JugWater
 
 #2026-09-05
 AsimovCircuitBoard: CrewsimovCircuitBoard
+
+# Sunrise-Edit: замена пиратских спавнеров на Sunrise-прототипы
+PirateScoonerSpawner: SunrisePirateScoonerSpawner
+PirateCaptainScoonerSpawner: SunrisePirateCaptainScoonerSpawner
