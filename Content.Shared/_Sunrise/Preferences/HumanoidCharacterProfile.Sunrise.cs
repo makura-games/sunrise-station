@@ -69,6 +69,12 @@ public sealed partial class HumanoidCharacterProfile
         return voice.RoundStart && (sex == Sex.Unsexed || voice.Sex == sex || voice.Sex == Sex.Unsexed);
     }
 
+    public static bool CanHaveSpecies(SpeciesPrototype species, bool sponsorsEnabled, IEnumerable<string> sponsorPrototypes)
+    {
+        return species.RoundStart &&
+               (!sponsorsEnabled || !species.SponsorOnly || sponsorPrototypes.Contains(species.ID));
+    }
+
     private void AdaptSunriseRandomProfile(SpeciesPrototype species, IPrototypeManager prototype)
     {
         if (!SunriseHumanoidProfileDefaults.IsBodyTypeAllowed(species, SunriseProfile.BodyType, Sex, prototype))

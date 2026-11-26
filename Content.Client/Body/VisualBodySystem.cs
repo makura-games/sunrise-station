@@ -274,6 +274,7 @@ public sealed partial class VisualBodySystem : SharedVisualBodySystem
         }
         ent.Comp.AppliedMarkings = applied;
         ApplySunriseMarkingEffects(ent, target); // Sunrise-Edit
+        _moodVisuals.QueueUpdate(target.Owner); // Sunrise-Edit
     }
 
     private void RemoveMarkings(Entity<VisualOrganMarkingsComponent> ent, Entity<SpriteComponent?> target)

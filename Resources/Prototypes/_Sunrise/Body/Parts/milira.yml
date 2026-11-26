@@ -43,6 +43,7 @@
     hideableLayers:
     - enum.HumanoidVisualLayers.Hair
     - enum.HumanoidVisualLayers.FacialHair
+    - enum.HumanoidVisualLayers.HeadSide
     - enum.HumanoidVisualLayers.HeadTop
   - type: Extractable
     juiceSolution:
