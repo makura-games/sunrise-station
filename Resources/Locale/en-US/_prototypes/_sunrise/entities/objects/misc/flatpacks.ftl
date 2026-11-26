@@ -1,7 +1,5 @@
 ent-CopyMachineFlatpack = copy machine flatpack
     .desc = A flatpack used for constructing a document printer.
-ent-MechMiningPodFlatpack = mining pod flatpack
-    .desc = A flatpack used for constructing a Mining Pod.
 ent-ShuttleSecurityFlatpack = security shuttle console flatpack
     .desc = A flatpack that can be used to construct a console.
 ent-ShuttleGunKineticFlatpack = packed PTK-800 “Matter Dematerializer”
