@@ -77,6 +77,7 @@ namespace Content.Server.Storage.EntitySystems
             foreach (var proto in spawnEntities)
             {
                 entityToPlaceInHands = SpawnAtPosition(proto, xform.Coordinates); // Sunrise-Edit: создаём спавнер сразу на карте, чтобы его содержимое не попадало в nullspace.
+                _transform.PlaceNextTo(entityToPlaceInHands.Value, (args.User, xform)); // Sunrise-Edit: учитываем контейнер, в котором находится пользователь.
                 _adminLogger.Add(LogType.EntitySpawn, LogImpact.Low, $"{ToPrettyString(args.User)} used {ToPrettyString(uid)} which spawned {ToPrettyString(entityToPlaceInHands.Value)}");
             }
 

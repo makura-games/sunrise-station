@@ -513,10 +513,11 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 500
+        damage: 400
       behaviors:
       - !type:PlaySoundBehavior
         sound:
