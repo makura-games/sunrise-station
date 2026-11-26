@@ -6,3 +6,23 @@
   - type: SpawnItemsOnUse
     items:
     - id: NukeCodePaperStation
+
+- type: entity
+  id: SunriseBoxFolderCyborgClipboard
+  parent: BoxFolderClipboard
+  name: cyborg clipboard
+  description: A clipboard mounted to a cyborg chassis.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Storage
+    grid:
+    - 0,0,5,2
+    whitelist:
+      tags:
+      - Document
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Paper
+          amount: 6

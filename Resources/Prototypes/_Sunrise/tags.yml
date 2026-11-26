@@ -143,6 +143,9 @@
 - type: Tag
   id: BorgModulePirate
 
+- type: Tag
+  id: SunriseBorgModuleSyndicateStealth
+
 # region Tools / devices
 - type: Tag
   id: CreepyLaugh

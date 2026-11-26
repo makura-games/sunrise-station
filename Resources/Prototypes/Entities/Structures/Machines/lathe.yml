@@ -149,7 +149,6 @@
     emagStaticPacks:
     - SecurityStaticSunrise # Sunrise-Add
     - SyndicateAmmoStatic
-    - SyndicateBorgModulesEmagSunrise # Sunrise-Add
   - type: BlueprintReceiver
     whitelist:
       tags:
@@ -228,8 +227,6 @@
     - NightVisionDevice
     # Sunrise-End
   - type: EmagLatheRecipes
-    emagStaticPacks:
-    - SyndicateBorgModulesEmagSunrise # Sunrise-Add
     emagDynamicPacks:
     # - SecurityAmmo # Sunrise-edit
     - SecurityExplosives
@@ -349,6 +346,11 @@
     - MedicalCyberlimbDynamic
     - MedicalCyberOrgansDynamic
     # Sunrise-end
+  # Sunrise-Start
+  - type: EmagLatheRecipes
+    emagStaticPacks:
+    - SyndicateBorgModulesEmagSunrise
+  # Sunrise-End
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
   - type: OreSiloClient
@@ -442,7 +444,7 @@
   - type: EmagLatheRecipes
     emagStaticPacks:
     - SyndicateAmmoStatic
-    - SyndicateBorgModulesEmagSunrise # Sunrise-Add
+    - SyndicateBorgModulesEmagSecuritySunrise # Sunrise-Edit
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
   - type: OreSiloClient

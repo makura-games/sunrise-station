@@ -749,7 +749,7 @@
       prob: 1.0
     - id: BorgModuleSyndicateGeneric
       prob: 0.25
-    - id: BorgModuleSyndicateHypoAdvanced
+    - id: SunriseBorgModuleSyndicateAdvancedChemical
       prob: 0.15
     - id: BorgModuleSyndicatePenetration
       prob: 0.15
@@ -790,7 +790,7 @@
       prob: 0.25
     - id: BorgModuleSyndicateGeneric
       prob: 0.2
-    - id: BorgModuleSyndicateHypoAdvanced
+    - id: SunriseBorgModuleSyndicateAdvancedChemical
       prob: 0.12
     - id: SunriseBorgModuleAdvancedChemical
       prob: 0.1
