@@ -66,4 +66,7 @@
     containers:
       item:
       - ThrowingKnife
-
+  # Sunrise-start
+  - type: ClothingSlowOnDamageModifier
+    modifier: 0.65
+  # Sunrise-end
