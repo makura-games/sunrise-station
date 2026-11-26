@@ -61,6 +61,9 @@ public sealed partial class AudioTab : Control
         Control.AddOptionCheckBox(CCVars.EventMusicEnabled, EventMusicCheckBox);
         Control.AddOptionCheckBox(CCVars.AdminSoundsEnabled, AdminSoundsCheckBox);
         Control.AddOptionCheckBox(CCVars.BwoinkSoundEnabled, BwoinkSoundCheckBox);
+        // Sunrise edit start - связываем настройку звука боевого режима
+        Control.AddOptionCheckBox(SunriseCCVars.CombatModeToggleSoundEnabled, CombatModeToggleSoundCheckBox);
+        // Sunrise edit end
         Control.AddOptionCheckBox(CCVars.AudioHrtf, AudioHrtfCheckBox);
         Control.AddOptionCheckBox(CVars.AudioMuteUnfocused, MuteUnfocusedCheckBox);
 
