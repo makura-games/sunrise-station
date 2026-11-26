@@ -5,7 +5,4 @@ description: Strict naming standards in Space Station 14 for C#, YAML prototypes
 
 # Claude Bridge
 
-Canonical source skill file:
-../../../.agents/skills/ss14-naming-conventions/SKILL.md.
-
-Use that file as the canonical source of truth and load it before applying the skill guidance. Load resources from the same source skill directory.
+Use the [canonical skill](../../../.agents/skills/ss14-naming-conventions/SKILL.md) as the entrypoint. Resolve its resource paths from the canonical skill directory.

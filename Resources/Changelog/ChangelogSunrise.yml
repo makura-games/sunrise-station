@@ -5146,3 +5146,10 @@
     message: Исправлена техническая уязвимость в правах технической команды
   id: 2057
   url: https://github.com/makura-games/sunrise-station/pull/4894
+- author: dng-cher
+  time: '2026-11-24T20:24:46.0000000+00:00'
+  changes:
+  - type: Add
+    message: Добавлен тайл снега без обводки
+  id: 2058
+  url: https://github.com/makura-games/sunrise-station/pull/4901

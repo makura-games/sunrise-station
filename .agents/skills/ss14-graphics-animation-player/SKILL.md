@@ -321,7 +321,7 @@ private void UpdateTriggeredState(EntityUid uid, AnimationPlayerComponent player
 - Store animation keys as constants near the system.
 - Before `Play`, check `HasRunningAnimation` if the key may be repeated.
 - For replays, prefer `AnimationCompletedEvent` + `args.Finished`.
-- On `ComponentShutdown/Remove` return the original visual values ​​(scale/offset/color).
+- On `ComponentShutdown/Remove` return the original visual values (scale/offset/color).
 - Combine several tracks in one `Animation` if they need a common timeline.
 - Use `nameof(...)` for `Property` to avoid breaking during refactoring.
 
