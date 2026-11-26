@@ -15,3 +15,12 @@
   components:
   - type: BarSign
     current: rndmoment
+
+- type: entity
+  parent: BaseBarSign
+  id: SunriseBarSignDrunkenCherry
+  name: Drunken Cherry
+  description: A signature space liqueur made from the sweetest cherries in the galaxy!
+  components:
+  - type: BarSign
+    current: SunriseDrunkenCherry
