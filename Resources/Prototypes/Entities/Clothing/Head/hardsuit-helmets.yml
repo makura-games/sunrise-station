@@ -143,7 +143,7 @@
   description: Armored hardsuit helmet for security needs.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/security.rsi
+    sprite: _Sunrise/Clothing/Head/Hardsuits/security.rsi # Sunrise-Edit
   - type: PointLight
     color: "#ffeead"
   - type: PressureProtection
@@ -160,6 +160,7 @@
   - type: Tag
     tags:
     - WhitelistChameleon
+    - NoPaint
 
 #Brigmedic Hardsuit
 - type: entity
@@ -194,9 +195,9 @@
   description: A modified riot helmet. Oddly comfortable.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/security-warden.rsi
+    sprite: _Sunrise/Clothing/Head/Hardsuits/security-warden.rsi # Sunrise-Edit
   - type: PointLight
-    color: cyan # Sunrise-Edit - сохраняем цвет фонаря шлема.
+    color: "#ffeead"
   - type: PressureProtection
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000
@@ -295,7 +296,7 @@
   description: Security hardsuit helmet with the latest top secret NT-HUD software. Belongs to the HoS.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/security-red.rsi
+    sprite: _Sunrise/Clothing/Head/Hardsuits/security-red.rsi # Sunrise-Edit
   - type: PointLight
     color: "#ffeead"
   - type: PressureProtection

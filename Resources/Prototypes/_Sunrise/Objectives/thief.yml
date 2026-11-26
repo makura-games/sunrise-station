@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseThiefStealObjective
+  id: HOPSoftSuitStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Captain, HeadOfPersonnel, HeadOfSecurity, ResearchDirector, ChiefEngineer, ChiefMedicalOfficer, Quartermaster, NanoTrasenRepresentative, Magistrat, BlueShieldOfficer, BlueShieldEnsign ]
+  - type: StealCondition
+    stealGroup: HOPSoftSuit
+  - type: Objective
+    difficulty: 1.3

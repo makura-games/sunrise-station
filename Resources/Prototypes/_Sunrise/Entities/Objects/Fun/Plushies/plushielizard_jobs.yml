@@ -1,0 +1,19 @@
+- type: entity
+  parent: BasePlushieLizardJob
+  id: PlushieLizardJobSecuritySergeant
+  name: security sergeant lizard plushie
+  description: An adorable stuffed toy that resembles a lizardperson as a security sergeant.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Fun/plushielizard_jobs/secsergeant.rsi
+  - type: Item
+    sprite: _Sunrise/Objects/Fun/plushielizard_jobs/secsergeant.rsi
+  - type: Clothing
+    sprite: _Sunrise/Objects/Fun/plushielizard_jobs/secsergeant.rsi
+    slots:
+    - HEAD
+    quickEquip: false
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+        offset: "0, 0.06"

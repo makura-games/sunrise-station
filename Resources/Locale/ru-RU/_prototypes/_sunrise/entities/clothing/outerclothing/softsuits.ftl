@@ -25,3 +25,5 @@ ent-ClothingOuterEVASuitPirateArmoredAltDamaged = повреждённый аб�
 ent-ClothingOuterHardsuitScafDamaged = повреждённый скуфандр EVA
     .desc = Зелёно-коричневый EVA-костюм с разошедшимися швами и проколотыми гермослоями. Он больше не защищает владельца от космоса.
     .suffix = Пираты
+ent-ClothingOuterEVASuitHop = EVA главы персонала
+    .desc = Особый скафандр, защищающий от опасной среды с низким давлением и порезов бумагой. Разработан для главы персонала.

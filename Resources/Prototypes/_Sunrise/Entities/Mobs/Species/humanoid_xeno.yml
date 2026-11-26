@@ -161,7 +161,7 @@
     - id: FoodMeatXeno
       amount: 5
   - type: Inventory
-    speciesId: reptilian
+    speciesId: human
     templateId: humanoidxeno
     femaleDisplacements:
       jumpsuit:
@@ -289,7 +289,7 @@
   - type: SunriseHumanoidProfile
   - type: SunriseHumanoidBaseLayers
   - type: Inventory
-    speciesId: reptilian
+    speciesId: human
     templateId: humanoidxeno
     femaleDisplacements:
       jumpsuit:

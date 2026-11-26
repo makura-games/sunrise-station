@@ -94490,7 +94490,7 @@ entities:
     - type: AccessReader
       accessListsOriginal:
       - - Hydroponics
-- proto: LockerBrigmedicFilled
+- proto: SunriseLockerBrigmedicFilledHardsuit
   entities:
   - uid: 12111
     components:
