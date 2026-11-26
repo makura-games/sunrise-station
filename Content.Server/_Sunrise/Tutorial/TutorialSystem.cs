@@ -355,11 +355,9 @@ public sealed partial class TutorialSystem : SharedTutorialSystem
     {
         try
         {
-            var createdTime = await _accountCreation.TryGetAccountCreatedTimeAsync(userId);
-
             TimeSpan? accountAge = null;
-            if (createdTime.HasValue)
-                accountAge = DateTimeOffset.UtcNow - createdTime.Value;
+            if (_accountCreation.TryGetAccountCreatedTime(userId, out var createdTime))
+                accountAge = DateTimeOffset.UtcNow - createdTime;
 
             await _db.AddTutorial(userId.UserId, sequenceId, accountAge);
         }

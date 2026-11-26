@@ -15,6 +15,7 @@ public abstract partial class ServerDbContext
     public DbSet<MentorHelpMessage> MentorHelpMessages { get; set; } = default!;
     public DbSet<UiLike> UiLikes { get; set; } = default!;
     public DbSet<TutorialCompletion> TutorialCompletions { get; set; } = default!;
+    public DbSet<NewPlayerOnboardingStep> NewPlayerOnboardingSteps { get; set; } = default!;
 
     private static void ConfigureSunriseModel(ModelBuilder modelBuilder)
     {
@@ -204,4 +205,22 @@ public class TutorialCompletion
     public DateTimeOffset CompletedAt { get; set; }
     public int CompletionCount { get; set; } = 1;
     public double? AccountAgeDays { get; set; }
+}
+
+/// <summary>
+/// Шаг первого дня нового игрока на конкретном сервере. Каждый шаг записывается один раз,
+/// чтобы метрика воронки не дублировалась после перезапуска процесса сервера.
+/// </summary>
+[Table("new_player_onboarding_step"), Index(nameof(ReachedAt)),
+    PrimaryKey(nameof(PlayerUserId), nameof(ServerId), nameof(Step))]
+public class NewPlayerOnboardingStep
+{
+    public Guid PlayerUserId { get; set; }
+
+    public int ServerId { get; set; }
+
+    [MaxLength(32)]
+    public string Step { get; set; } = default!;
+
+    public DateTime ReachedAt { get; set; }
 }
