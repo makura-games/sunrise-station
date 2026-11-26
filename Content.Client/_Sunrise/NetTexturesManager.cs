@@ -107,6 +107,16 @@ public sealed partial class NetTexturesManager
     /// Вызывается после того, как сетевой ресурс готов к использованию потребителями.
     /// </summary>
     public event Action<string>? ResourceLoaded;
+
+    /// <summary>
+    /// Raised when a requested resource cannot be prepared for use.
+    /// </summary>
+    public event Action<string>? ResourceLoadFailed;
+
+    /// <summary>
+    /// Raised before session-owned textures are disposed.
+    /// </summary>
+    public event Action? ResourcesInvalidated;
     #endregion
 
     #region Lifecycle

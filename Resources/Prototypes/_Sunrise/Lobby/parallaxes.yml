@@ -19,6 +19,14 @@
   parallax: Default
 
 - type: lobbyParallax
+  id: SunriseMilkyWayEarth
+  parallax: SunriseMilkyWayEarth
+
+- type: lobbyParallax
+  id: SunriseMilkyWayDisk
+  parallax: SunriseMilkyWayDisk
+
+- type: lobbyParallax
   id: Bagel
   parallax: BagelStation
 

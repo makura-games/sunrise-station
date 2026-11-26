@@ -1,0 +1,29 @@
+- type: shader
+  id: SunriseParallaxStarsDim
+  kind: source
+  path: "/Textures/_Sunrise/Shaders/parallax_field.swsl"
+  params:
+    starGridSize: 1920, 1080
+    uvPixelSpan: 0.0005208333, 0.0009259259
+    seed: 3909.0
+    cutoffThreshold: 0.971
+    brightnessScale: 1.0
+    brightnessExponent: 26.0
+    twinkleSpeed: 1.6
+    twinkleAmount: 0.65
+    starColor: "#F2F4F8FF"
+
+- type: shader
+  id: SunriseParallaxStarsDimFar
+  kind: source
+  path: "/Textures/_Sunrise/Shaders/parallax_field.swsl"
+  params:
+    starGridSize: 1920, 1080
+    uvPixelSpan: 0.0005208333, 0.0009259259
+    seed: 4920.0
+    cutoffThreshold: 0.980
+    brightnessScale: 1.0
+    brightnessExponent: 26.0
+    twinkleSpeed: 1.6
+    twinkleAmount: 0.65
+    starColor: "#C9D0DCFF"

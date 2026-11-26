@@ -1,0 +1,88 @@
+// Плотное поле малых звёзд на основе TelescopeStarFieldShader из Wrath of the Gods.
+light_mode unshaded;
+
+uniform highp vec2 starGridSize;
+uniform highp vec2 uvPixelSpan;
+uniform highp float seed;
+uniform mediump float cutoffThreshold;
+uniform mediump float brightnessScale;
+uniform mediump float brightnessExponent;
+uniform mediump float twinkleSpeed;
+uniform mediump float twinkleAmount;
+uniform mediump vec4 starColor;
+
+highp float starHash(highp vec2 value)
+{
+    // Стабильный двумерный хеш не образует чередующихся ярких и тусклых полос.
+    highp vec2 cell = mod(floor(value), vec2(4096.0));
+    highp vec3 hashValue = fract(
+        vec3(cell.x, cell.y, cell.x) * vec3(0.1031, 0.1030, 0.0973)
+    );
+    hashValue += dot(hashValue, hashValue.yzx + vec3(33.33));
+    return fract((hashValue.x + hashValue.y) * hashValue.z);
+}
+
+mediump vec4 renderFieldStar(
+    highp vec2 starCoordinate,
+    highp vec2 starCell,
+    highp vec2 gridPixelSpan)
+{
+    // Замыкание по размеру сетки устраняет скачок на границе повторяющихся тайлов.
+    highp vec2 wrappedCell = mod(starCell, starGridSize);
+    highp vec2 seededCell = wrappedCell + vec2(seed, seed * 0.417);
+    highp float randomBrightness = starHash(seededCell);
+    if (randomBrightness < cutoffThreshold)
+        return vec4(0.0);
+
+    highp float normalizedBrightness =
+        (randomBrightness - cutoffThreshold) / (1.0 - cutoffThreshold);
+    mediump float baseBrightness = pow(normalizedBrightness, brightnessExponent);
+
+    // Частота, фаза и амплитуда соответствуют TelescopeStarFieldShader.
+    mediump float twinkle = 1.0 + cos(
+        TIME * twinkleSpeed + baseBrightness * 150.0
+    ) * twinkleAmount;
+    mediump float brightness = clamp(
+        baseBrightness * brightnessScale * twinkle,
+        0.0,
+        1.0
+    );
+    if (brightness <= 0.001)
+        return vec4(0.0);
+
+    // Центр закреплён в UV-сетке, а расстояние измеряется в экранных пикселях.
+    highp vec2 pixelOffset = (starCoordinate - starCell) / gridPixelSpan;
+    highp float distanceToCenter = length(pixelOffset);
+    // Круглый tent-фильтр сохраняет воспринимаемую яркость при субпиксельном движении.
+    mediump float profile = clamp(1.0 - distanceToCenter, 0.0, 1.0);
+    mediump float opacity = brightness * profile;
+
+    return opacity <= 0.001
+        ? vec4(0.0)
+        : vec4(starColor.rgb, starColor.a * opacity);
+}
+
+void fragment()
+{
+    highp vec2 safePixelSpan = max(uvPixelSpan, vec2(1.0 / 65536.0));
+    highp vec2 gridPixelSpan = max(safePixelSpan * starGridSize, vec2(1.0 / 65536.0));
+    highp vec2 starCoordinate = UV * starGridSize - vec2(0.5);
+    highp vec2 starCell = floor(starCoordinate);
+
+    mediump vec4 result = vec4(0.0);
+    for (lowp int y = 0; y <= 1; y++)
+    {
+        for (lowp int x = 0; x <= 1; x++)
+        {
+            mediump vec4 candidate = renderFieldStar(
+                starCoordinate,
+                starCell + vec2(float(x), float(y)),
+                gridPixelSpan
+            );
+            if (candidate.a > result.a)
+                result = candidate;
+        }
+    }
+
+    COLOR = result;
+}

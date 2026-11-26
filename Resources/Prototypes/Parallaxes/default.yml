@@ -4,37 +4,123 @@
 - type: parallax
   id: Default
   layers:
+    # Sunrise added start - редкие туманности из масок референса движутся независимо от звёзд.
     - texture:
         !type:ImageParallaxTextureSource
-        path: "/Textures/Parallaxes/layer1.png"
-      slowness: 0.998046875
-      scale: "1, 1"
+        path: "/NetTextures/Parallaxes/Nebula/fire_noise.png"
+      slowness: 0.9984
+      scrolling: "0.018, -0.007"
+      scale: "3.75, 2.109375"
+      shader: SunriseParallaxNebulaMagenta
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "hq_wizard_stars"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars.toml"
+        !type:ImageParallaxTextureSource
+        path: "/NetTextures/Parallaxes/Nebula/wavy_blotch_noise.png"
+      slowness: 0.9971
+      scrolling: "-0.012, 0.016"
+      scale: "3.75, 2.109375"
+      shader: SunriseParallaxNebulaCyan
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/NetTextures/Parallaxes/Nebula/dendritic_noise.png"
+      slowness: 0.9958
+      scrolling: "0.009, 0.021"
+      scale: "3.75, 2.109375"
+      shader: SunriseParallaxNebulaViolet
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/NetTextures/Parallaxes/Nebula/fire_noise.png"
+      slowness: 0.9947
+      scrolling: "-0.016, -0.011"
+      scale: "3.75, 2.109375"
+      shader: SunriseParallaxNebulaAzure
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/NetTextures/Parallaxes/Nebula/wavy_blotch_noise.png"
+      slowness: 0.9935
+      scrolling: "0.014, 0.013"
+      scale: "3.75, 2.109375"
+      shader: SunriseParallaxNebulaRose
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/NetTextures/Parallaxes/Nebula/dendritic_noise.png"
+      slowness: 0.9922
+      scrolling: "-0.008, 0.019"
+      scale: "3.75, 2.109375"
+      shader: SunriseParallaxNebulaTeal
+    # Sunrise added end
+    # Sunrise added start - процедурные звёзды заменяют обычные generated-слои.
+    - texture:
+        !type:ShaderParallaxTextureSource
       slowness: 0.996625
+      shader: SunriseParallaxStarsBright
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "hq_wizard_stars_dim"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.989375
+      shader: SunriseParallaxStarsDim
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "hq_wizard_stars_faster"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars-2.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.987265625
+      shader: SunriseParallaxStarsBrightFar
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "hq_wizard_stars_dim_faster"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim-2.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.984352
+      shader: SunriseParallaxStarsDimFar
+    # Sunrise added end
   layersLQ:
+    # Sunrise added start - сохраняем независимые туманности при упрощённом параллаксе.
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: ""
-        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+        !type:ImageParallaxTextureSource
+        path: "/NetTextures/Parallaxes/Nebula/fire_noise.png"
+      slowness: 0.9984
+      scrolling: "0.018, -0.007"
+      scale: "3.75, 2.109375"
+      shader: SunriseParallaxNebulaMagenta
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/NetTextures/Parallaxes/Nebula/wavy_blotch_noise.png"
+      slowness: 0.9971
+      scrolling: "-0.012, 0.016"
+      scale: "3.75, 2.109375"
+      shader: SunriseParallaxNebulaCyan
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/NetTextures/Parallaxes/Nebula/dendritic_noise.png"
+      slowness: 0.9958
+      scrolling: "0.009, 0.021"
+      scale: "3.75, 2.109375"
+      shader: SunriseParallaxNebulaViolet
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/NetTextures/Parallaxes/Nebula/fire_noise.png"
+      slowness: 0.9947
+      scrolling: "-0.016, -0.011"
+      scale: "3.75, 2.109375"
+      shader: SunriseParallaxNebulaAzure
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/NetTextures/Parallaxes/Nebula/wavy_blotch_noise.png"
+      slowness: 0.9935
+      scrolling: "0.014, 0.013"
+      scale: "3.75, 2.109375"
+      shader: SunriseParallaxNebulaRose
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/NetTextures/Parallaxes/Nebula/dendritic_noise.png"
+      slowness: 0.9922
+      scrolling: "-0.008, 0.019"
+      scale: "3.75, 2.109375"
+      shader: SunriseParallaxNebulaTeal
+    # Sunrise added end
+    # Sunrise added start - сохраняем разделение микрозвёзд и цветных звёзд в LQ без generated-слоя.
+    - texture:
+        !type:ShaderParallaxTextureSource
+      slowness: 0.95
+      shader: SunriseParallaxStarsDim
+    - texture:
+        !type:ShaderParallaxTextureSource
       slowness: 0.875
+      shader: SunriseParallaxStarsLowQuality
+    # Sunrise added end
   layersLQUseHQ: false
 
 # Because hyperspace and the menu need their own.
@@ -46,31 +132,30 @@
         path: "/Textures/Parallaxes/layer1.png"
       slowness: 0.5
       scale: "3, 3"
+    # Sunrise added start - меню и hyperspace используют только процедурные звёзды.
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "hq_wizard_stars"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.25
+      shader: SunriseParallaxStarsBright
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "hq_wizards_star_slower"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars-2.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.15
+      shader: SunriseParallaxStarsBrightFar
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "hq_wizard_stars_dim"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.375
+      shader: SunriseParallaxStarsDim
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "hq_wizard_stars_dim_faster"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim-2.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.125
+      shader: SunriseParallaxStarsDimFar
+    # Sunrise added end
   layersLQ:
+    # Sunrise added start - LQ-режим не запускает CPU-генератор обычных звёзд.
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: ""
-        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.5
+      shader: SunriseParallaxStarsLowQuality
+    # Sunrise added end
   layersLQUseHQ: false
 

@@ -2,15 +2,13 @@
   id: AngleStation
   layers:
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "hq_wizard_stars_dim"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.95
+      shader: SunriseParallaxStarsDim
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "hq_wizard_stars"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.94
+      shader: SunriseParallaxStarsBright
     - texture:
         !type:ImageParallaxTextureSource
         path: "/NetTextures/Parallaxes/Angle.png"

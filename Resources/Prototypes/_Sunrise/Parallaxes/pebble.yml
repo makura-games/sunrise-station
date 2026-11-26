@@ -7,12 +7,10 @@
       slowness: 0.98
       scale: 0.5,0.5
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "hq_wizard_stars_dim"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars_dim.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.97
+      shader: SunriseParallaxStarsDim
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: "hq_wizard_stars"
-        configPath: "/Prototypes/Parallaxes/parallax_config_stars.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.96
+      shader: SunriseParallaxStarsBright

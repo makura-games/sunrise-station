@@ -174,6 +174,7 @@ public sealed partial class NetTexturesManager
     /// </remarks>
     private void ResetState()
     {
+        ResourcesInvalidated?.Invoke();
         AdvanceSessionGeneration();
 
         _sessionCts.Cancel();

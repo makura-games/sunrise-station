@@ -1,0 +1,4 @@
+- files: ["fire_noise.png", "wavy_blotch_noise.png", "dendritic_noise.png"]
+  license: "All rights reserved"
+  copyright: "TheFifthCircle, Wrath of the Gods"
+  source: "https://github.com/TheFifthCircle/WrathOfTheGodsPublic/tree/main/Assets/Textures/Extra/Noise"

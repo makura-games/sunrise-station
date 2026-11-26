@@ -1,0 +1,121 @@
+// Локальная туманность, форму которой задаёт одна из масок Wrath of the Gods.
+light_mode unshaded;
+
+uniform highp vec2 center;
+uniform highp vec2 size;
+uniform highp vec2 maskScale;
+uniform highp vec2 maskOffset;
+uniform highp float rotation;
+uniform highp float detailScale;
+uniform highp vec2 detailOffset;
+uniform mediump float maskThreshold;
+uniform mediump float maskExponent;
+uniform mediump float edgeSoftness;
+uniform mediump float warpStrength;
+uniform mediump float detailStrength;
+uniform mediump float filamentStrength;
+uniform mediump float opacityScale;
+uniform lowp vec4 nebulaColor;
+uniform lowp vec4 secondaryColor;
+
+highp vec2 rotateNebulaPoint(highp vec2 value, highp float angle)
+{
+    highp float angleSin = sin(angle);
+    highp float angleCos = cos(angle);
+    return vec2(
+        value.x * angleCos - value.y * angleSin,
+        value.x * angleSin + value.y * angleCos
+    );
+}
+
+mediump float sampleNebulaMask(highp vec2 coordinate)
+{
+    return zTexture(clamp(coordinate, vec2(0.0), vec2(1.0))).r;
+}
+
+highp vec2 mirrorNebulaCoordinate(highp vec2 coordinate)
+{
+    highp vec2 repeated = fract(coordinate * 0.5) * 2.0;
+    return vec2(1.0) - abs(repeated - vec2(1.0));
+}
+
+void fragment()
+{
+    const highp float canvasAspect = 1.7777778;
+
+    highp vec2 fromCenter = (UV - center) * vec2(canvasAspect, 1.0);
+    highp vec2 localCoordinate = rotateNebulaPoint(fromCenter, rotation) / size;
+    highp float distanceToCenter = length(localCoordinate);
+
+    // Отбрасываем пиксели за пределами расширенной оболочки до выборок текстуры.
+    if (distanceToCenter > 1.0 + edgeSoftness + warpStrength * 2.0)
+    {
+        COLOR = vec4(0.0);
+        return;
+    }
+
+    highp vec2 maskCoordinate = localCoordinate * 0.5 * maskScale + vec2(0.5) + maskOffset;
+    highp vec2 warpCoordinate = mirrorNebulaCoordinate(maskCoordinate * detailScale + detailOffset);
+    mediump float warpX = sampleNebulaMask(warpCoordinate);
+    mediump float warpY = sampleNebulaMask(
+        mirrorNebulaCoordinate(warpCoordinate * 1.37 + detailOffset.yx + vec2(0.41, 0.73))
+    );
+    highp vec2 warpVector = vec2(warpX, warpY) - vec2(0.5);
+
+    // Шум искажает не только плотность, но и внешний силуэт туманности.
+    mediump float edgeWarp = (warpX + warpY - 1.0) * warpStrength * 1.4;
+    mediump float envelope = 1.0 - smoothstep(
+        1.0 - edgeSoftness,
+        1.0 + edgeSoftness,
+        distanceToCenter + edgeWarp
+    );
+    if (envelope <= 0.001)
+    {
+        COLOR = vec4(0.0);
+        return;
+    }
+
+    // Основная маска задаёт крупную форму, а повторные выборки той же текстуры
+    // разбивают её на облачные полости, мелкие прожилки и неоднородные края.
+    highp vec2 warpedMaskCoordinate = maskCoordinate + warpVector * warpStrength;
+    mediump float maskValue = sampleNebulaMask(warpedMaskCoordinate);
+    mediump float middleDetail = sampleNebulaMask(
+        mirrorNebulaCoordinate(warpedMaskCoordinate * detailScale + detailOffset.yx)
+    );
+    mediump float fineDetail = sampleNebulaMask(
+        mirrorNebulaCoordinate(
+            warpedMaskCoordinate * detailScale * 1.91 + detailOffset + vec2(0.19, 0.61)
+        )
+    );
+
+    mediump float broadDensity = pow(maskValue, maskExponent);
+    mediump float breakup = mix(
+        1.0 - detailStrength,
+        1.0 + detailStrength * 0.65,
+        middleDetail
+    );
+    mediump float filament = max(fineDetail - middleDetail, 0.0);
+    mediump float structuredDensity = broadDensity * breakup;
+    structuredDensity += filament * filament * filamentStrength * maskValue;
+    structuredDensity -= (1.0 - fineDetail) * detailStrength * broadDensity * 0.08;
+    mediump float maskDensity = smoothstep(
+        maskThreshold,
+        1.0,
+        clamp(structuredDensity, 0.0, 1.0)
+    );
+
+    mediump float opacityDetail = mix(0.72, 1.18, fineDetail);
+    mediump float opacity = envelope * maskDensity * opacityScale * opacityDetail;
+    if (opacity <= 0.001)
+    {
+        COLOR = vec4(0.0);
+        return;
+    }
+
+    // Два оттенка подчёркивают внутренние слои, а самые плотные прожилки слегка светлеют.
+    mediump float colorStructure = clamp(middleDetail * 0.65 + fineDetail * 0.35, 0.0, 1.0);
+    lowp vec3 color = mix(secondaryColor.rgb, nebulaColor.rgb, colorStructure);
+    mediump float luminousCore = pow(clamp(broadDensity * maskDensity, 0.0, 1.0), 3.0);
+    color = mix(color, vec3(1.0), luminousCore * 0.14);
+    COLOR = vec4(color, clamp(opacity, 0.0, 0.42));
+}

@@ -21,8 +21,7 @@
       scrolling: "-0.1, -0.1"
   layersLQ:
     - texture:
-        !type:GeneratedParallaxTextureSource
-        id: ""
-        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+        !type:ShaderParallaxTextureSource
       slowness: 0.875
+      shader: SunriseParallaxStarsLowQuality
   layersLQUseHQ: false
