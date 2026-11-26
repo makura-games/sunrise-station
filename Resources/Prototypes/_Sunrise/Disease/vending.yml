@@ -1,0 +1,23 @@
+# Автомат вирусолога: расходники и приборы
+
+- type: vendingMachineInventory
+  id: SunriseVirologyVendInventory
+  startingInventory:
+    SunriseDiseaseSwab: 6
+    SunrisePetriDish: 4
+    SunriseDiseaseBlankSample: 2
+    SunrisePillCanisterAntitussive: 2
+    SunriseDiseaseScanner: 2
+    SunriseDiseaseSprayer: 2
+    SunriseClothingEyesHudVirology: 2
+
+- type: entity
+  parent: VendingMachineMedical
+  id: SunriseVendingMachineVirology
+  name: ViroVend
+  description: A white vending machine with a teal band and a virus emblem on the screen.
+  components:
+  - type: VendingMachine
+    pack: SunriseVirologyVendInventory
+  - type: Sprite
+    sprite: _Sunrise/Disease/virology_vendor.rsi

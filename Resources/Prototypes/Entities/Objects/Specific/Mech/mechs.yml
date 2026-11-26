@@ -498,7 +498,7 @@
 
 # H.O.N.K.
 - type: entity
-  parent: [ BaseMech, SpecialMech, BaseCivilianContraband ]
+  parent: [ SunriseMechBreakageDefault, BaseMech, SpecialMech, BaseCivilianContraband ] # Sunrise-Edit
   id: MechHonker
   name: H.O.N.K.
   description: "Produced by \"Tyranny of Honk, INC\", this exosuit is designed as heavy clown-support. Used to spread the fun and joy of life. HONK!"
@@ -583,7 +583,7 @@
 
 # HAMTR
 - type: entity
-  parent: [ BaseMech, SmallMech ]
+  parent: [ SunriseMechBreakageDefault, BaseMech, SmallMech ] # Sunrise-Edit
   id: MechHamtr
   name: HAMTR
   description: "An experimental mech which uses a brain–computer interface to connect directly to a hamsters brain."
@@ -654,7 +654,7 @@
 # Vim!!!!!!!
 
 - type: entity
-  parent: BaseMech
+  parent: [ SunriseMechBreakageDefault, BaseMech ] # Sunrise-Edit
   id: MechVim
   name: Vim
   description: A miniature exosuit from Nanotrasen, developed to let the irreplaceable station pets live a little longer.

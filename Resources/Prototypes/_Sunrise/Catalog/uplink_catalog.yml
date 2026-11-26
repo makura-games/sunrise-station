@@ -568,24 +568,6 @@
       - AssaultOpsUplink
 
 - type: listing
-  id: UplinkMagazineBauer127Blast
-  description: uplink-magazine-127blast-desc
-  icon: { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/sr127_mag.rsi, state: blast }
-  productEntity: MagazineBauer127Blast
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 2
-  cost:
-    Telecrystal: 3
-  categories:
-  - UplinkAmmo
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-
-- type: listing
   id: UplinkMagazineBauer127HP
   description: uplink-magazine-127hp-desc
   icon: { sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/sr127_mag.rsi, state: base_icon }
@@ -637,20 +619,6 @@
   productEntity: MagazineBoxAntiMaterielEmp
   cost:
     Telecrystal: 3
-  categories:
-  - UplinkAmmo
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - AssaultOpsUplink
-
-- type: listing
-  id: UplinkBoxAntiMaterielBlast
-  description: uplink-sniper-ammo-blast-desc
-  productEntity: MagazineBoxAntiMaterielBlast
-  cost:
-    Telecrystal: 4
   categories:
   - UplinkAmmo
   conditions:

@@ -1,0 +1,33 @@
+# Аэрозольное снаряжение ядерных оперативников и диверсионного отряда.
+
+- type: entity
+  parent: [ VolatileGrenadeBase, TimerGrenadeBase, BaseSyndicateContraband ]
+  id: SunriseVirologyGrenade
+  name: biohazard canister
+  description: A sealed canister with a sprayer head. The label is a biohazard trefoil and nothing else.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Grenades/syndgrenade.rsi
+    color: "#8FBF6F"
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
+    sound:
+      path: /Audio/Effects/spray.ogg
+    positional: true
+  - type: DeleteOnTrigger
+    keysIn:
+    - timer
+  - type: TimerTriggerVisuals
+    primingSound:
+      path: /Audio/Items/smoke_grenade_prime.ogg
+
+- type: entity
+  parent: SunriseDiseaseCloud
+  id: SunriseSyndicateDiseaseCloud
+  name: infectious aerosol
+  description: A dense green haze carrying a persistent chemical smell.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 25

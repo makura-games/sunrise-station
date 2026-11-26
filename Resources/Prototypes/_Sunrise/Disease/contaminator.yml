@@ -1,0 +1,8 @@
+- type: entity
+  parent: [ SunriseDiseaseStrainVial, BaseSyndicateContraband ]
+  id: SunriseSyndicateDiseaseVial
+  name: unmarked vial
+  description: A mysterious vial with unknown contents.
+  components:
+  - type: Sprite
+    color: "#D9A7B8"

@@ -35,7 +35,7 @@
   parent: ClothingShoesBaseButcherable
   id: ClothingShoesUSSPBlack
   name: USSP leather boots
-  description: Old stuff, straight out of SSSP.
+  description: Old stuff, straight out of USSP.
   components:
   - type: Sprite
     sprite: _Sunrise/Clothing/Shoes/ussp.rsi

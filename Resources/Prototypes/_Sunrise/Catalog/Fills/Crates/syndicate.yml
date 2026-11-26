@@ -81,6 +81,21 @@
         - id: ToyDurand
 
 - type: entity
+  id: SunriseCrateSyndicateKordBundle
+  suffix: Filled
+  parent: CrateSyndicate
+  name: Kord weapon crate
+  description: Contains a mounted Kord machine gun and two spare 12.7mm ammunition belts.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponMechCombatKord
+        - id: MagazineBoxBeltLight127
+          amount: 2
+
+- type: entity
   id: CrateSyndicateSquadHardsuitBundle
   suffix: Filled
   parent: CrateSyndicateSecure
@@ -125,17 +140,31 @@
         - id: ToolboxSyndicateFilledRepair
 
 - type: entity
-  id: CratePirateMechDollHouseBundle
+  id: CratePirateMechKolobokBundle
   suffix: Filled
   parent: CrateLivestock
-  name: Blackmarket USSP mech bundle
-  description: Contains a set of Cybersun medium armored mechs.
+  name: USSP heavy mech crate
+  description: Contains a fully equipped heavy USSP mech and a repair kit.
   components:
   - type: EntityTableContainerFill
     containers:
       entity_storage: !type:AllSelector
         children:
-        - id: MechDollHouseFilled
+        - id: MechKolobokFilled
+        - id: ToolboxSyndicateFilledRepair
+
+- type: entity
+  id: CratePirateMechBlyashankaBundle
+  suffix: Filled
+  parent: CrateLivestock
+  name: USSP medium mech crate
+  description: Contains a fully equipped medium USSP mech and a repair kit.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: SunriseMechBlyashankaFilled
         - id: ToolboxSyndicateFilledRepair
 
 - type: entity
