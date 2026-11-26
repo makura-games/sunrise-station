@@ -20,7 +20,7 @@
     backgroundImagePath: "/Textures/_Sunrise/Interface/Paper/paper_background_holographic.svg.96pdi.png"
     backgroundPatchMargin: 16.0, 16.0, 16.0, 16.0
     contentMargin: 16.0, 16.0, 16.0, 16.0
-    fontAccentColor: "#ffffff"
+    defaultTextColor: "#ffffff"
   - type: Paper
     defaultColor: "#07edf5"
   - type: Sprite

@@ -28,7 +28,7 @@ AdminPanel.xaml.cs -> public sealed partial class AdminPanel : FancyWindow
 
 ## Statically retrieving data in XAML
 
-For static values ​​use `x:Static` and `x:Type`.
+For static values use `x:Static` and `x:Type`.
 
 When needed:
 - size/parameter constants from C#;
@@ -195,13 +195,10 @@ public sealed partial class ActionsWindow : DefaultWindow
 ### Example 3: Multiple style classes in XAML
 
 ```xml
-<Button Name="DoneButton" Text="{Loc 'nano-task-ui-done'}">
-    <Button.StyleClasses>
-        <!-- Combine button size and shape -->
-        <system:String>ButtonSmall</system:String>
-        <system:String>OpenLeft</system:String>
-    </Button.StyleClasses>
-</Button>
+<!-- Combine button size and shape -->
+<Button Name="DoneButton"
+        StyleClasses="ButtonSmall OpenLeft"
+        Text="{Loc 'nano-task-ui-done'}" />
 ```
 
 ### Example 4: Data and event binding after markup is loaded

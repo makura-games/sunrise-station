@@ -5,7 +5,4 @@ description: A practical documentation standard in Space Station 14 for C#, SWSL
 
 # Claude Bridge
 
-Canonical source skill file:
-../../../.agents/skills/ss14-documentation-writing/SKILL.md.
-
-Use that file as the entrypoint and load resources from the same source skill directory.
+Use the [canonical skill](../../../.agents/skills/ss14-documentation-writing/SKILL.md) as the entrypoint. Resolve its resource paths from the canonical skill directory.

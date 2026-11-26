@@ -24,7 +24,6 @@ public sealed partial class ArtifactRandomTransformationSystem : BaseXAESystem<A
     [Dependency] private TransformSystem _transform = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly HashSet<Entity<ItemComponent>> _items = [];
     private readonly HashSet<Entity<InventoryComponent>> _inventories = [];

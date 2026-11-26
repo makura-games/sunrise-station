@@ -13,3 +13,4 @@ construction-category-clothing = Одежда
 construction-category-favorites = Избранное
 construction-add-favorite-button = Добавить в избранное
 construction-remove-from-favorite-button = Удалить из избранного
+construction-category-atmospherics = Атмосферика

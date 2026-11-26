@@ -1,0 +1,1 @@
+disease-slot-vaccine = Вакцина

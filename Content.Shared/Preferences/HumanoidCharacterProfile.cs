@@ -4,11 +4,14 @@ using System.Text.RegularExpressions;
 using Content.Shared._Sunrise.Preferences;
 using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.CCVar;
+using Content.Shared.Chat.Prototypes;
+using Content.Shared.EntityEffects.Effects;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
+using Content.Shared.Speech.Components;
 using Content.Shared.Traits;
 using Content.Sunrise.Interfaces.Shared;
 using Robust.Shared.Collections;
@@ -34,6 +37,7 @@ namespace Content.Shared.Preferences
     public sealed partial class HumanoidCharacterProfile
     {
         public static readonly ProtoId<SpeciesPrototype> DefaultSpecies = "Human";
+        public static readonly ProtoId<EmoteSoundsPrototype> DefaultVoice = "MaleHuman";
         private static readonly Regex RestrictedNameRegex = new(@"[^А-Яа-яA-Za-zёЁ0-9, ,\-,'.]"); // Sunrise
         private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
 
@@ -94,6 +98,9 @@ namespace Content.Shared.Preferences
         public Sex Sex { get; private set; } = Sex.Male;
 
         [DataField]
+        public ProtoId<EmoteSoundsPrototype> Voice { get; set; } = DefaultVoice;
+
+        [DataField]
         public Gender Gender { get; private set; } = Gender.Male;
 
         /// <summary>
@@ -136,6 +143,7 @@ namespace Content.Shared.Preferences
             string species,
             int age,
             Sex sex,
+            ProtoId<EmoteSoundsPrototype> voice,
             Gender gender,
             HumanoidCharacterAppearance appearance,
             SpawnPriorityPreference spawnPriority,
@@ -150,6 +158,7 @@ namespace Content.Shared.Preferences
             Species = species;
             Age = age;
             Sex = sex;
+            Voice = voice;
             Gender = gender;
             Appearance = appearance;
             SpawnPriority = spawnPriority;
@@ -181,6 +190,7 @@ namespace Content.Shared.Preferences
                 other.Species,
                 other.Age,
                 other.Sex,
+                other.Voice,
                 other.Gender,
                 other.Appearance.Clone(),
                 other.SpawnPriority,
@@ -222,36 +232,90 @@ namespace Content.Shared.Preferences
             };
         }
 
-        // TODO: This should eventually not be a visual change only.
-        public static HumanoidCharacterProfile Random(HashSet<string>? ignoredSpecies = null)
+        /// <summary>
+        /// An enum defining randomizable values in character editor.
+        /// </summary>
+        [Flags]
+        public enum RandomizeCfg
         {
-            var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
-            var random = IoCManager.Resolve<IRobustRandom>();
-
-            var species = random.Pick(prototypeManager
-                .EnumeratePrototypes<SpeciesPrototype>()
-                .Where(x => ignoredSpecies == null ? x.RoundStart && !x.SponsorOnly : x.RoundStart && !x.SponsorOnly && !ignoredSpecies.Contains(x.ID)) // Sunrise-Edit
-                .ToArray()
-            ).ID;
-
-            return RandomWithSpecies(species);
+            // profile
+            None = 0,
+            Name = 1 << 0,
+            Species = 1 << 1,
+            Age = 1 << 2,
+            Sex = 1 << 3,
+            Gender = 1 << 4,
+            // appearance
+            Eyes = 1 << 5,
+            Skin = 1 << 6,
+            Markings = 1 << 7,
         }
 
-        public static HumanoidCharacterProfile RandomWithSpecies(string? species = null)
-        {
-            species ??= HumanoidCharacterProfile.DefaultSpecies;
+        /// <summary>
+        /// A randomize config that covers all possible values (including appearance).
+        /// </summary>
+        public const RandomizeCfg RandomizeConfigAll =
+            RandomizeCfg.Name
+            | RandomizeCfg.Species
+            | RandomizeCfg.Age
+            | RandomizeCfg.Sex
+            | RandomizeCfg.Gender
+            | RandomizeCfg.Eyes
+            | RandomizeCfg.Skin
+            | RandomizeCfg.Markings;
 
+        /// <summary>
+        /// Picks a random species from roundstart species.
+        /// <param name="ignoredSpecies">Species to exclude from randomizer.</param>
+        /// </summary>
+        public static SpeciesPrototype RandomSpecies(HashSet<string>? ignoredSpecies = null)
+        {
             var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
             var random = IoCManager.Resolve<IRobustRandom>();
 
-            var sex = Sex.Unsexed;
-            var age = 18;
-            if (prototypeManager.TryIndex<SpeciesPrototype>(species, out var speciesPrototype))
-            {
-                sex = random.Pick(speciesPrototype.Sexes);
-                age = random.Next(speciesPrototype.MinAge, speciesPrototype.OldAge); // people don't look and keep making 119 year old characters with zero rp, cap it at middle aged
-            }
+            var pool = prototypeManager.EnumeratePrototypes<SpeciesPrototype>()
+                .Where(x => x.RoundStart && !x.SponsorOnly && (ignoredSpecies == null || !ignoredSpecies.Contains(x.ID))) // Sunrise-Edit
+                .ToArray();
+            var species = random.Pick(pool);
+            return species;
+        }
 
+        /// <summary>
+        /// Picks a random name using species and gender.
+        /// </summary>
+        public static string RandomName(SpeciesPrototype species, Gender gender)
+        {
+            var name = GetName(species.ID, gender);
+            return name;
+        }
+
+        /// <summary>
+        /// Picks a random age using species.
+        /// </summary>
+        public static int RandomAge(SpeciesPrototype species)
+        {
+            var random = IoCManager.Resolve<IRobustRandom>();
+
+            var age = random.Next(species.MinAge, species.OldAge);
+            return age;
+        }
+
+        /// <summary>
+        /// Picks a random sex using species.
+        /// </summary>
+        public static Sex RandomSex(SpeciesPrototype species)
+        {
+            var random = IoCManager.Resolve<IRobustRandom>();
+
+            var sex = random.Pick(species.Sexes);
+            return sex;
+        }
+
+        /// <summary>
+        /// Picks a random gender using species sex;
+        /// </summary>
+        public static Gender RandomGender(Sex sex)
+        {
             var gender = Gender.Epicene;
 
             switch (sex)
@@ -263,19 +327,87 @@ namespace Content.Shared.Preferences
                     gender = Gender.Female;
                     break;
             }
+            return gender;
+        }
 
-            var name = GetName(species, gender);
-
-            return new HumanoidCharacterProfile()
+        /// <summary>
+        /// Generates a randomized character profile.
+        /// </summary>
+        /// <returns>A new character profile with values randomized</returns>
+        public static HumanoidCharacterProfile Random(HashSet<string>? ignoredSpecies = null)
+        {
+            var config = RandomizeConfigAll;
+            var baseProfile = new HumanoidCharacterProfile();
+            if (ignoredSpecies != null)
             {
-                Name = name,
-                Sex = sex,
-                Age = age,
-                Gender = gender,
-                Species = species,
-                Appearance = HumanoidCharacterAppearance.Random(species, sex),
-                SunriseProfile = SunriseCharacterProfile.RandomForSpecies(speciesPrototype, sex, random, prototypeManager), // Sunrise-Edit
-            };
+                baseProfile.Species = RandomSpecies(ignoredSpecies);
+                config &= ~RandomizeCfg.Species; // Sunrise-Edit - не выбираем повторно исключённую расу
+            }
+            var profile = Random(config, baseProfile);
+            return profile;
+        }
+
+        /// <summary>
+        /// Generates a randomized character profile with selective randomizing.
+        /// </summary>
+        /// <param name="randomizeCfg">Which values to randomize.</param>
+        /// <param name="baseProfile">Profile to base the new profile on. Values that are not randomized will be taken from this profile.</param>
+        /// <returns>A new character profile with selected values randomized</returns>
+        public static HumanoidCharacterProfile Random(RandomizeCfg randomizeCfg, HumanoidCharacterProfile baseProfile)
+        {
+            var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
+
+            var profile = new HumanoidCharacterProfile(baseProfile); // Sunrise-Edit - не теряем настройки при выборочной рандомизации
+            if ((randomizeCfg & RandomizeCfg.Species) != 0)
+            {
+                profile.Species = RandomSpecies();
+            }
+            else
+            {
+                profile.Species = DefaultSpecies;
+                if (prototypeManager.HasIndex(baseProfile.Species))
+                {
+                    profile.Species = baseProfile.Species;
+                }
+            }
+            var speciesProto = prototypeManager.Index(profile.Species);
+
+            profile.Sex = (randomizeCfg & RandomizeCfg.Sex) != 0 ? RandomSex(speciesProto) : baseProfile.Sex;
+            if (!speciesProto.Sexes.Contains(profile.Sex)) // Sunrise-Edit - пол должен подходить новой расе
+                profile.Sex = speciesProto.Sexes[0];
+            profile.Voice = profile.Species == baseProfile.Species && profile.Sex == baseProfile.Sex && speciesProto.Voices.Contains(baseProfile.Voice)
+                ? baseProfile.Voice
+                : speciesProto.DefaultSoundsBySex[(int)profile.Sex]; // Sunrise-Edit - выборочная рандомизация не меняет голос
+            profile.Gender = (randomizeCfg & RandomizeCfg.Gender) != 0 ? RandomGender(profile.Sex) : baseProfile.Gender;
+            profile.Name = (randomizeCfg & RandomizeCfg.Name) != 0 ? RandomName(speciesProto, profile.Gender) : baseProfile.Name;
+            profile.Age = (randomizeCfg & RandomizeCfg.Age) != 0 ? RandomAge(speciesProto) : baseProfile.Age;
+
+            profile.Appearance = HumanoidCharacterAppearance.Random(speciesProto, profile.Sex, randomizeCfg, baseProfile.Appearance);
+
+            // Sunrise edit start - сохраняем наши данные профиля при новом API рандомизации
+            var fullRandom = (randomizeCfg & (RandomizeConfigAll ^ RandomizeCfg.Species)) == (RandomizeConfigAll ^ RandomizeCfg.Species);
+            if (fullRandom)
+                profile.SunriseProfile = SunriseCharacterProfile.RandomForSpecies(speciesProto, profile.Sex, IoCManager.Resolve<IRobustRandom>(), prototypeManager);
+            else if (profile.Species != baseProfile.Species || profile.Sex != baseProfile.Sex)
+                profile.AdaptSunriseRandomProfile(speciesProto, prototypeManager);
+            // Sunrise edit end
+
+            return profile;
+        }
+
+        /// <summary>
+        /// Generates a randomized character profile.
+        /// </summary>
+        /// <param name="species">Species to constrain randomizer to.</param>
+        /// <returns>A new character profile</returns>
+        public static HumanoidCharacterProfile RandomWithSpecies(string? species = null)
+        {
+            species ??= DefaultSpecies;
+
+            return Random(
+                RandomizeConfigAll ^ RandomizeCfg.Species,
+                new HumanoidCharacterProfile().WithSpecies(species)
+            );
         }
 
         public HumanoidCharacterProfile WithName(string name)
@@ -296,6 +428,11 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithSex(Sex sex)
         {
             return new(this) { Sex = sex };
+        }
+
+        public HumanoidCharacterProfile WithVoice(ProtoId<EmoteSoundsPrototype> voice)
+        {
+            return new(this) { Voice = voice };
         }
 
         public HumanoidCharacterProfile WithGender(Gender gender)
@@ -340,6 +477,31 @@ namespace Content.Shared.Preferences
             return new(this)
             {
                 _jobPriorities = dictionary
+            };
+        }
+
+        /// <summary>
+        /// Return a HumanoidCharacterProfile with only the job priorities listed in the NewCharacterJobs cvar
+        /// </summary>
+        public HumanoidCharacterProfile WithJobFromCvar(IConfigurationManager cfg)
+        {
+            // This path should run only rarely, so the cvar does not need to be locally stored
+            var jobs = new HashSet<string>(cfg.GetCVar(CCVars.NewCharacterJobs).Split(","));
+            var priority = JobPriority.High;
+            Dictionary<ProtoId<JobPrototype>, JobPriority> priorities = new();
+
+            foreach (var job in jobs)
+            {
+                // Remove whitespaces in case the input contained any
+                priorities.Add(job.Trim(), priority);
+
+                // There can be only one High priority
+                priority = JobPriority.Medium;
+            }
+
+            return new(this)
+            {
+                _jobPriorities = priorities,
             };
         }
 
@@ -475,6 +637,7 @@ namespace Content.Shared.Preferences
             if (Name != other.Name) return false;
             if (Age != other.Age) return false;
             if (Sex != other.Sex) return false;
+            if (Voice != other.Voice) return false;
             if (Gender != other.Gender) return false;
             if (Species != other.Species) return false;
             if (!SunriseProfile.Equals(other.SunriseProfile)) return false; // Sunrise-Edit
@@ -508,6 +671,10 @@ namespace Content.Shared.Preferences
                 Sex.Unsexed => Sex.Unsexed,
                 _ => Sex.Male // Invalid enum values.
             };
+
+            var voice = Voice;
+            if (!speciesPrototype.Voices.Contains(voice))
+                voice = speciesPrototype.DefaultSoundsBySex[(int)sex];
 
             // ensure the species can be that sex and their age fits the founds
             if (!speciesPrototype.Sexes.Contains(sex))
@@ -631,6 +798,7 @@ namespace Content.Shared.Preferences
             FlavorText = flavortext;
             Age = age;
             Sex = sex;
+            Voice = voice;
             Gender = gender;
             Appearance = appearance;
             SpawnPriority = spawnPriority;
@@ -753,6 +921,7 @@ namespace Content.Shared.Preferences
             hashCode.Add(Species);
             hashCode.Add(Age);
             hashCode.Add((int)Sex);
+            hashCode.Add(Voice);
             hashCode.Add((int)Gender);
             hashCode.Add(Appearance);
             hashCode.Add(SunriseProfile); // Sunrise-Edit

@@ -38,3 +38,4 @@ materials-raw-uranium = руда урана
 materials-raw-bananium = руда бананиума
 materials-raw-salt = каменная соль
 materials-raw-diamond = необработанные алмазы
+materials-xenoborg-crystal = кристалл ксеноборга

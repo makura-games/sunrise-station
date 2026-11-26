@@ -1,0 +1,5 @@
+- type: !PartialOnly entity
+  id: BaseMech
+  parent: BaseStructureHealth
+  components:
+  - !Remove type: Destructible

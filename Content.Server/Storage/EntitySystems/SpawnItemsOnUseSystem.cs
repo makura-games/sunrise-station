@@ -70,19 +70,20 @@ namespace Content.Server.Storage.EntitySystems
             if (component.Uses <= 0)
                 return;
 
-            var coords = Transform(args.User).Coordinates;
+            var xform = Transform(args.User);
             var spawnEntities = GetSpawns(component.Items, _random);
             EntityUid? entityToPlaceInHands = null;
 
             foreach (var proto in spawnEntities)
             {
-                entityToPlaceInHands = Spawn(proto, coords);
+                entityToPlaceInHands = SpawnAtPosition(proto, xform.Coordinates); // Sunrise-Edit: создаём спавнер сразу на карте, чтобы его содержимое не попадало в nullspace.
+                _transform.PlaceNextTo(entityToPlaceInHands.Value, (args.User, xform)); // Sunrise-Edit: учитываем контейнер, в котором находится пользователь.
                 _adminLogger.Add(LogType.EntitySpawn, LogImpact.Low, $"{ToPrettyString(args.User)} used {ToPrettyString(uid)} which spawned {ToPrettyString(entityToPlaceInHands.Value)}");
             }
 
             // The entity is often deleted, so play the sound at its position rather than parenting
             if (component.Sound != null)
-                _audio.PlayPvs(component.Sound, coords);
+                _audio.PlayPvs(component.Sound, xform.Coordinates);
 
             component.Uses--;
 
@@ -97,7 +98,7 @@ namespace Content.Server.Storage.EntitySystems
 
             if (entityToPlaceInHands != null)
             {
-                _hands.PickupOrDrop(args.User, entityToPlaceInHands.Value);
+                _hands.TryPickupAnyHand(args.User, entityToPlaceInHands.Value);
                 _audio.PlayPvs(component.Sound, entityToPlaceInHands.Value);  // Sunrise-edit
             }
 

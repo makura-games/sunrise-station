@@ -1,22 +1,21 @@
 using Content.Server.Hands.Systems;
-using Content.Shared.Body.Events;
 
 namespace Content.Server._Sunrise.BloodCult.Juggernaut;
 
 public sealed partial class JuggernautSystem : EntitySystem
 {
-    [Dependency] private HandsSystem _handsSystem = default!;
+    [Dependency] private HandsSystem _hands = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<JuggernautComponent, BodyInitEvent>(OnBodyInit);
+        SubscribeLocalEvent<JuggernautComponent, MapInitEvent>(OnMapInit, after: [typeof(HandsSystem)]);
     }
 
-    private void OnBodyInit(EntityUid uid, JuggernautComponent component, BodyInitEvent args)
+    private void OnMapInit(Entity<JuggernautComponent> ent, ref MapInitEvent args)
     {
-        var hammer = Spawn(component.HummerSpawnId, Transform(uid).Coordinates);
-        _handsSystem.TryForcePickupAnyHand(uid, hammer);
+        var hammer = Spawn(ent.Comp.HummerSpawnId, Transform(ent).Coordinates);
+        _hands.TryForcePickupAnyHand(ent, hammer);
     }
 }

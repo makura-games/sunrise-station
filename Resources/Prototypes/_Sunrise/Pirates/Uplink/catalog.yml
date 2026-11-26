@@ -805,7 +805,7 @@
   id: UplinkPirateFireAxeFlaming
   name: uplink-fire-axe-flaming-name
   description: uplink-fire-axe-flaming-desc
-  icon: { sprite: Objects/Weapons/Melee/fireaxeflaming.rsi, state: icon }
+  icon: { sprite: _Sunrise/Objects/Weapons/Melee/fireaxeflaming.rsi, state: icon }
   productEntity: FireAxeFlaming
   cost:
     Doubloon: 27
@@ -1021,20 +1021,7 @@
   description: uplink-sniper-ammo-frag-desc
   productEntity: CratePirateMagazineBoxAntiMaterielFrag
   cost:
-    Doubloon: 10
-  categories:
-  - UplinkPirateAmmo
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 2
-
-- type: listing
-  id: UplinkPirateHristovAmmoBlast
-  name: uplink-pirate-ammo-hristov-blast-name
-  description: uplink-sniper-ammo-blast-desc
-  productEntity: CratePirateMagazineBoxAntiMaterielBlast
-  cost:
-    Doubloon: 12
+    Doubloon: 30
   categories:
   - UplinkPirateAmmo
   conditions:
@@ -2320,7 +2307,7 @@
   name: uplink-chameleon-name
   description: uplink-chameleon-desc
   productEntity: ClothingBackpackChameleonFill
-  icon: { sprite: /Textures/Clothing/Uniforms/Jumpsuit/rainbow.rsi, state: icon }
+  icon: { sprite: /Textures/_Sunrise/Clothing/Uniforms/Jumpsuit/rainbow.rsi, state: icon }
   cost:
     Doubloon: 12
   categories:
@@ -2568,10 +2555,13 @@
   id: UplinkPirateMurmilloHardsuitCrate
   productEntity: CratePirateMurmilloHardsuit
   cost:
-    Doubloon: 60
+    Doubloon: 150
   categories:
   - UplinkPirateArmor
   restockTime: 3600
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 2
 
 - type: listing
   id: UplinkPirateSwashbucklerHardsuitCrate
@@ -2840,11 +2830,30 @@
       - SurplusBundle
 
 - type: listing
-  id: UplinkPirateDollHouseBundle
+  id: UplinkPirateBlyashankaBundle
+  name: uplink-mech-teleporter-ussp-medium-name
+  description: uplink-mech-teleporter-ussp-medium-desc
+  icon: { sprite: /Textures/_Sunrise/Objects/Specific/Mech/blyashanka.rsi, state: base }
+  productEntity: CratePirateMechBlyashankaBundle
+  cost:
+    Doubloon: 175
+  categories:
+  - UplinkPirateMechs
+  restockTime: 3600
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
+
+- type: listing
+  id: UplinkPirateKolobokBundle
   name: uplink-mech-teleporter-ussp-name
   description: uplink-mech-teleporter-ussp-desc
-  icon: { sprite: /Textures/_Sunrise/Objects/Specific/Mech/durand.rsi, state: dollhouse }
-  productEntity: CratePirateMechDollHouseBundle
+  icon: { sprite: /Textures/_Sunrise/Objects/Specific/Mech/durand.rsi, state: kolobok }
+  productEntity: CratePirateMechKolobokBundle
   cost:
     Doubloon: 300
   categories:

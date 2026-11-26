@@ -43,7 +43,7 @@ public sealed partial class TapeRecorderSystem : SharedTapeRecorderSystem
 
     private void OnMapInit(Entity<TapeRecorderComponent> ent, ref MapInitEvent args)
     {
-        _itemSlots.AddItemSlot(ent, ent.Comp.CassetteSlotId, ent.Comp.CassetteSlot);
+        _itemSlots.AddItemSlot((ent.Owner, null), ent.Comp.CassetteSlotId, ent.Comp.CassetteSlot);
         ent.Comp.Cassette = ent.Comp.CassetteSlot.Item;
         Dirty(ent);
     }

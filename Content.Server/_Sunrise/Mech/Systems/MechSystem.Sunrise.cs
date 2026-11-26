@@ -2,8 +2,8 @@ using Content.Server.Chat.Systems;
 using Content.Server._Sunrise.Mech.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mech;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mobs;
@@ -11,32 +11,44 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Power.Components;
 using Robust.Shared.Containers;
+using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Systems;
+using Content.Shared.Tag;
+using Content.Shared.Vehicle;
+using Content.Shared.Vehicle.Components;
 using Robust.Shared.Prototypes;
 
+// ReSharper disable once CheckNamespace
 namespace Content.Server.Mech.Systems;
 
 public sealed partial class MechSystem
 {
-    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
+    [Dependency] private TagSystem _tag = default!;
     [Dependency] private InstalledMechBatterySystem _installedMechBattery = default!;
-    [Dependency] private MobThresholdSystem _mobThresholdSystem = default!;
 
-    private static readonly ProtoId<DamageTypePrototype> ManglenessDamageType = "Mangleness";
+    private static readonly ProtoId<TagPrototype> PowerCageTag = "PowerCage";
 
     private void InitializeSunrise()
     {
         SubscribeLocalEvent<MechComponent, MechSayEvent>(OnMechSay);
+        SubscribeLocalEvent<VehicleOperatorComponent, OnVehicleEnteredEvent>(OnSunriseVehicleEntered);
+        SubscribeLocalEvent<VehicleOperatorComponent, OnVehicleExitedEvent>(OnSunriseVehicleExited);
     }
 
     private void AttachSunriseInstalledBattery(EntityUid uid, MechComponent component)
     {
         var batteryUid = component.BatterySlot.ContainedEntity;
-        if (batteryUid == null || !TryComp<BatteryComponent>(batteryUid.Value, out var battery))
+        if (batteryUid == null || !batteryUid.Value.IsValid() || !TryComp<BatteryComponent>(batteryUid.Value, out var battery))
             return;
 
         _installedMechBattery.AttachBattery((uid, component), (batteryUid.Value, battery));
     }
 
+    [SubscribeLocalEvent]
     private void OnBatteryInsertAttempt(Entity<MechComponent> ent, ref ContainerIsInsertingAttemptEvent args)
     {
         if (args.Container != ent.Comp.BatterySlot)
@@ -51,10 +63,29 @@ public sealed partial class MechSystem
 
     private void OnMechSay(EntityUid uid, MechComponent component, MechSayEvent args)
     {
-        _chatSystem.TrySendInGameICMessage(uid,
+        _chat.TrySendInGameICMessage(uid,
             Loc.GetString(args.Message),
             InGameICChatType.Whisper,
             ChatTransmitRange.Normal);
+    }
+
+    private void OnSunriseVehicleEntered(Entity<VehicleOperatorComponent> ent, ref OnVehicleEnteredEvent args)
+    {
+        if (!HasComp<MechComponent>(args.Vehicle))
+            return;
+
+        foreach (var hand in _hands.EnumerateHands(ent.Owner))
+        {
+            _hands.DoDrop(ent.Owner, hand);
+        }
+
+        _faction.Up(ent, args.Vehicle);
+    }
+
+    private void OnSunriseVehicleExited(Entity<VehicleOperatorComponent> ent, ref OnVehicleExitedEvent args)
+    {
+        if (HasComp<MechComponent>(args.Vehicle))
+            RemComp<NpcFactionMemberComponent>(args.Vehicle);
     }
 
     /// <summary>
@@ -96,7 +127,7 @@ public sealed partial class MechSystem
     private void SetSunriseMaxIntegrity(EntityUid uid, MechComponent component)
     {
         if (TryComp<MobThresholdsComponent>(uid, out var thresholds)
-            && _mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var threshold, thresholds)
+            && _mobThreshold.TryGetThresholdForState(uid, MobState.Critical, out var threshold, thresholds)
             && threshold is { } maxIntegrity)
         {
             component.MaxIntegrity = maxIntegrity;
@@ -141,14 +172,10 @@ public sealed partial class MechSystem
             ? InGameICChatType.Speak
             : InGameICChatType.Whisper;
 
-        _chatSystem.TrySendInGameICMessage(uid,
+        _chat.TrySendInGameICMessage(uid,
             Loc.GetString(message),
             chatType,
             ChatTransmitRange.Normal);
     }
 
-    private static void RemoveSunrisePilotDamage(DamageSpecifier damage)
-    {
-        damage.DamageDict.Remove(ManglenessDamageType);
-    }
 }

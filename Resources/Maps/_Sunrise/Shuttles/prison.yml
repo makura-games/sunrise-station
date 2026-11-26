@@ -1906,31 +1906,26 @@ entities:
   - uid: 274
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 3.5,-6.5
       parent: 1
   - uid: 275
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 5.5,0.5
       parent: 1
   - uid: 276
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 5.5,4.5
       parent: 1
   - uid: 277
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 4.5,-6.5
       parent: 1
   - uid: 278
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -0.5,-4.5
       parent: 1
   - uid: 279
@@ -1941,31 +1936,26 @@ entities:
   - uid: 280
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -0.5,-3.5
       parent: 1
   - uid: 281
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 7.5,-3.5
       parent: 1
   - uid: 282
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 1.5,0.5
       parent: 1
   - uid: 283
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 7.5,-4.5
       parent: 1
   - uid: 284
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 2.5,-6.5
       parent: 1
 - proto: Gyroscope

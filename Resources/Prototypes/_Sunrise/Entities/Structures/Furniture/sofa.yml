@@ -2,7 +2,7 @@
   name: sofa
   id: SofaBaseMiddle
   abstract: true
-  parent: SeatBase
+  parent: [ SeatBase, StructureHealthFurniture ]
   description: Nap throne for the snack-powered royalty.
   placement:
     mode: SnapgridCenter
@@ -16,6 +16,8 @@
   - type: Physics
     bodyType: Static
     canCollide: false
+  - type: Damageable
+    damageModifierSet: SteelMod
 
 - type: entity
   name: sofa

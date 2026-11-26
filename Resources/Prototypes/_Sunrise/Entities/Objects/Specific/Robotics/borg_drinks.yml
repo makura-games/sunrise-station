@@ -167,7 +167,7 @@
       - ReagentId: JuiceLemon
         Quantity: 3
   - type: Label
-    currentLabel: reagent-name-juice-lemon
+    localizedLabel: reagent-name-juice-lemon
 
 - type: entity
   id: DrinkJuiceLimeCartonXLBorg
@@ -241,7 +241,7 @@
       - ReagentId: Milk
         Quantity: 3
   - type: Label
-    currentLabel: reagent-name-milk
+    localizedLabel: reagent-name-milk
 
 - type: entity
   id: DrinkRootBeerJugBorg
@@ -315,7 +315,7 @@
       - ReagentId: SolDry
         Quantity: 3
   - type: Label
-    currentLabel: reagent-name-sol-dry
+    localizedLabel: reagent-name-sol-dry
 
 - type: entity
   id: DrinkSpaceUpBottleFullBorg

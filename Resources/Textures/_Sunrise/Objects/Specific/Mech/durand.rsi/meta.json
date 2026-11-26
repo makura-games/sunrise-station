@@ -1,5 +1,5 @@
 {
-  "copyright" : "Sprited by .askal02 (discord) for SS14 Makura Games, Warboss states by KaiserMaus (github), dollhouse taken from tg",
+  "copyright" : "Sprited by .askal02 (discord) for SS14 Makura Games, Warboss states by KaiserMaus (github),",
   "license" : "CC-BY-SA-4.0",
   "version": 1,
   "size": {
@@ -105,6 +105,10 @@
       },
       {
         "name": "DamageOverlay_350",
+        "directions": 4
+      },
+      {
+        "name": "DamageOverlay_450",
         "directions": 4
       },
       {
@@ -230,24 +234,30 @@
       ]
     },
     {
-      "name": "dollhouse",
+      "name": "kolobok",
       "directions": 4
     },
     {
-      "name": "dollhouse-open",
+      "name": "kolobok-moving",
+      "directions": 4,
       "delays": [
-        [
-          0.5,
-          0.5,
-          0.5,
-          0.5,
-          0.5,
-          0.5
-        ]
+        [ 0.25, 0.25, 0.25, 0.25, 0.25, 0.25 ],
+        [ 0.25, 0.25, 0.25, 0.25, 0.25, 0.25 ],
+        [ 0.25, 0.25, 0.25, 0.25, 0.25, 0.25 ],
+        [ 0.25, 0.25, 0.25, 0.25, 0.25, 0.25 ]
       ]
     },
     {
-      "name": "dollhouse-broken"
+      "name": "kolobok-open",
+      "delays": [
+        [ 0.5, 0.5, 0.5, 0.5 ]
+      ]
+    },
+    {
+      "name": "kolobok-broken",
+      "delays": [
+        [ 0.5, 0.5, 0.5, 0.5, 0.5 ]
+      ]
     },
     {
         "name": "warboss",
@@ -276,13 +286,20 @@
           0.5,
           0.5,
           0.5,
+          0.5,
           0.5
         ]
       ]
     },
     {
-      "name": "dollhouse-unshaded",
-      "directions": 4
+      "name": "warboss-moving",
+      "directions": 4,
+      "delays": [
+        [ 0.25, 0.25, 0.25, 0.25, 0.25, 0.25 ],
+        [ 0.25, 0.25, 0.25, 0.25, 0.25, 0.25 ],
+        [ 0.25, 0.25, 0.25, 0.25, 0.25, 0.25 ],
+        [ 0.25, 0.25, 0.25, 0.25, 0.25, 0.25 ]
+      ]
     }
   ]
 }

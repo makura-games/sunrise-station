@@ -30,7 +30,6 @@
     - CratePirateChestGlassshot
     - CratePirateChestGrapeshot
     - CratePirateChestSecure
-    - CratePirateChestSun
     - CratePirateCombatMedkit
     - CratePirateCutlass
     - CratePirateDavyJones
@@ -55,7 +54,6 @@
     - CratePirateMagazineBatteryLr60
     - CratePirateMagazineBoxAntiMateriel
     - CratePirateMagazineBoxAntiMaterielAP
-    - CratePirateMagazineBoxAntiMaterielBlast
     - CratePirateMagazineBoxAntiMaterielFrag
     - CratePirateMagazineBoxImprovisedMagnum
     - CratePirateMagazineBoxImprovisedPistol
@@ -91,7 +89,8 @@
     - CratePirateMagnumAmmo
     - CratePirateMakeshiftLaser
     - CratePirateMassScanner
-    - CratePirateMechDollHouseBundle
+    - CratePirateMechBlyashankaBundle
+    - CratePirateMechKolobokBundle
     - CratePirateMechGunBundle
     - CratePirateMechYarrkeBundle
     - CratePirateMercenaryWebvest

@@ -123,6 +123,8 @@
   id: MobPirateBase
   suffix: AI, Pirate
   components:
+  - type: NameIdentifier
+    group: GenericNumber
   # Allows ghosts/admins to quickly warp to pirates from the ghost teleport panel
   - type: GhostPanelAntagonistMarker
     name: ghost-panel-antagonist-pirate-name
@@ -242,7 +244,6 @@
     defaultRotation: 90
     horizontalRotation: 90
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatHuman
       amount: 5
@@ -264,8 +265,11 @@
     interfaces:
       enum.StrippingUiKey.Key:
        type: StrippableBoundUserInterface
-  - type: ToggleableNightVision
-    effect: EffectNightVisionPirate
+  - type: NightVision
+    enabled: false
+    action: ActionToggleNightVision
+    prioritized: false
+    lightingColor: '#FF983326'
   - type: ComplexInteraction
   - type: AnomalyAccent
   - type: TTS
@@ -311,7 +315,6 @@
   - type: Stamina
     baseCritThreshold: 100
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeat
       amount: 5
@@ -910,7 +913,7 @@
     layers:
     - sprite: _Sunrise/Mobs/Species/Templates/human.rsi
       state: human
-    - sprite: Clothing/Uniforms/Jumpsuit/pirate.rsi
+    - sprite: Clothing/Uniforms/Jumpsuits/Special/pirate.rsi
       state: equipped-INNERCLOTHING
     - sprite: _Sunrise/Clothing/OuterClothing/Suits/pirateeva_armored.rsi
       state: equipped-OUTERCLOTHING-reptilian
@@ -1350,8 +1353,7 @@
     speechSounds: Parrot
     speechVerb: Parrot
   - type: Vocal
-    sounds:
-      Unsexed: Parrot
+    emoteSounds: Parrot
   - type: ActiveListener
   - type: Vocalizer
   - type: RadioVocalizer
@@ -2355,9 +2357,9 @@
     - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/pirate.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-      state: equipped-HELMET
+      state: equipped-head
     - sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-      state: equipped-HELMET-unshaded
+      state: equipped-head-unshaded
       shader: unshaded
   - type: BasicEntityAmmoProvider
     proto: Bola
@@ -2441,12 +2443,12 @@
     - sprite: _Sunrise/Clothing/Head/Helmets/pirate_eva_alt.rsi
       state: on-equipped-HELMET
       shader: unshaded
-    - sprite: Clothing/Uniforms/Jumpsuit/gladiator.rsi
+    - sprite: Clothing/Uniforms/Jumpsuits/Civilian/gladiator.rsi
       state: equipped-INNERCLOTHING
     - sprite: Clothing/Head/Hats/gladiator.rsi
       state: equipped-HELMET
   - type: BasicEntityAmmoProvider
-    proto: BolaSecurity
+    proto: EnergyBola
     capacity: 1
     count: 1
   - type: RechargeBasicEntityAmmo
@@ -2488,7 +2490,7 @@
     - sprite: Clothing/Head/Helmets/podwars_helmet.rsi
       state: equipped-HELMET
     - sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-      state: equipped-HELMET-unshaded
+      state: equipped-head-unshaded
       shader: unshaded
     - sprite: Clothing/Head/Hats/gladiator.rsi
       state: equipped-HELMET
@@ -2897,9 +2899,9 @@
     - sprite: Clothing/Shoes/Boots/jumpboots.rsi
       state: equipped-FEET-vox
     - sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-      state: equipped-HELMET-vox
+      state: equipped-head-vox
     - sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-      state: equipped-HELMET-unshaded-vox
+      state: equipped-head-unshaded-vox
       shader: unshaded
   - type: BasicEntityAmmoProvider
     proto: CannonBallGrapeshot
@@ -2942,9 +2944,9 @@
     - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/pirate.rsi
       state: equipped-OUTERCLOTHING-reptilian
     - sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-      state: equipped-HELMET-reptilian
+      state: equipped-head-reptilian
     - sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
-      state: equipped-HELMET-unshaded-reptilian
+      state: equipped-head-unshaded-reptilian
       shader: unshaded
   - type: BasicEntityAmmoProvider
     proto: CannonBall
@@ -2967,9 +2969,9 @@
     - sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
       state: equipped-OUTERCLOTHING-reptilian
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: equipped-HELMET
+      state: equipped-head
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: on-equipped-HELMET
+      state: equipped-head-unshaded
       shader: unshaded
     - sprite: Clothing/Belt/assault.rsi
       state: equipped-BELT
@@ -3012,9 +3014,9 @@
     - sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
       state: equipped-OUTERCLOTHING-reptilian
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: equipped-HELMET
+      state: equipped-head
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: on-equipped-HELMET
+      state: equipped-head-unshaded
       shader: unshaded
     - sprite: Clothing/Belt/assault.rsi
       state: equipped-BELT
@@ -3059,9 +3061,9 @@
     - sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: equipped-HELMET
+      state: equipped-head
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: on-equipped-HELMET
+      state: equipped-head-unshaded
       shader: unshaded
   - type: BasicEntityAmmoProvider
     proto: CannonBallGrapeshotMini
@@ -3088,9 +3090,9 @@
     - sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: equipped-HELMET
+      state: equipped-head
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: on-equipped-HELMET
+      state: equipped-head-unshaded
       shader: unshaded
   - type: BasicEntityAmmoProvider
     proto: CannonBallGlassshot
@@ -3110,9 +3112,9 @@
     - sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: equipped-HELMET
+      state: equipped-head
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: on-equipped-HELMET
+      state: equipped-head-unshaded
       shader: unshaded
   - type: BasicEntityAmmoProvider
     proto: CannonBallMini
@@ -3134,9 +3136,9 @@
     - sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
       state: equipped-OUTERCLOTHING-vox
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: equipped-HELMET-vox
+      state: equipped-head-vox
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: on-equipped-HELMET-vox
+      state: equipped-head-unshaded-vox
       shader: unshaded
   - type: RechargeBasicEntityAmmo
     rechargeCooldown: 8
@@ -3162,8 +3164,7 @@
     speechSounds: Parrot
     speechVerb: Parrot
   - type: Vocal
-    sounds:
-      Unsexed: Parrot
+    emoteSounds: Parrot
   - type: ActiveListener
   - type: Vocalizer
   - type: RadioVocalizer
@@ -3217,9 +3218,9 @@
     - sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: equipped-HELMET
+      state: equipped-head
     - sprite: Clothing/Head/Hardsuits/pirateeva.rsi
-      state: on-equipped-HELMET
+      state: equipped-head-unshaded
       shader: unshaded
     - sprite: Clothing/Belt/assault.rsi
       state: equipped-BELT
@@ -4137,7 +4138,7 @@
     - sprite: Clothing/OuterClothing/Hardsuits/maxim.rsi
       state: equipped-OUTERCLOTHING
     - sprite: Clothing/Head/Hardsuits/maxim.rsi
-      state: equipped-HELMET-reptilian
+      state: equipped-head-reptilian
     - sprite: Clothing/Shoes/Boots/jumpboots.rsi
       state: equipped-FEET
   - type: HellSpawnInvincibility
@@ -4228,7 +4229,7 @@
     layers:
     - sprite: _Sunrise/Mobs/Species/Templates/human.rsi
       state: human
-    - sprite: Clothing/Uniforms/Jumpsuit/color.rsi
+    - sprite: Clothing/Uniforms/Jumpsuits/Color/color.rsi
       state: equipped-INNERCLOTHING
       color: "#d3bf86"
     - sprite: _Sunrise/Clothing/OuterClothing/Hardsuits/piratecaptain.rsi
@@ -4289,11 +4290,18 @@
     sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
     scale: 1.08, 1.08
     layers:
-    - map: ["enum.DamageStateVisualLayers.Base"]
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: warboss
     - map: [ "enum.DamageStateVisualLayers.BaseUnshaded"]
       state: warboss-unshaded
       shader: unshaded
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: warboss-moving
+    noMovementLayers:
+      movement:
+        state: warboss
   - type: RotationVisuals
     defaultRotation: 0
     horizontalRotation: 0
@@ -4314,8 +4322,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      449: Critical
-      450: Dead
+      800: Critical
+      801: Dead
   - type: TriggerOnMobstateChange
     mobState:
     - Dead
@@ -4362,8 +4370,8 @@
   - type: Stamina
     baseCritThreshold: 9999
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.5
-    baseSprintSpeed: 2.25
+    baseWalkSpeed: 1
+    baseSprintSpeed: 1
   - type: Repairable
     fuelCost: 25
     doAfterDelay: 10
@@ -4411,7 +4419,6 @@
     maxOffset: 5
     pvsIncrease: 0.6
   - type: HellSpawnInvincibility
-  - type: HellSpawnSpiral
   - type: AutoImplant
     implants:
     - CreepyLaughImplant

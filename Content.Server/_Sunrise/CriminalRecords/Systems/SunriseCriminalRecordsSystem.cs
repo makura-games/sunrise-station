@@ -4,7 +4,8 @@ using Content.Shared._Sunrise.CriminalRecords.Systems;
 using Content.Shared.StationRecords;
 using Content.Shared._Sunrise.CriminalRecords.Components;
 using Content.Server._Sunrise.CriminalRecords.Components;
-using Content.Server.StationRecords.Systems;
+using Content.Shared.StationRecords.Events;
+using Content.Shared.StationRecords.Systems;
 using Content.Server.Station.Systems;
 using Content.Server._Sunrise.Laws.Systems;
 using Content.Shared.Access.Systems;
@@ -13,6 +14,7 @@ using Content.Shared.CriminalRecords;
 using Content.Shared.Security;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
+using Content.Shared.StationRecords.Components;
 
 namespace Content.Server._Sunrise.CriminalRecords.Systems;
 
@@ -50,7 +52,7 @@ public sealed partial class SunriseCriminalRecordsSystem : SharedSunriseCriminal
         SubscribeLocalEvent<SunriseCriminalRecordsConsoleComponent, BoundUIOpenedEvent>(OnOpened);
 
         SubscribeLocalEvent<SunriseCriminalRecordsConsoleComponent, RecordModifiedEvent>(OnRecordEvent);
-        SubscribeLocalEvent<SunriseCriminalRecordsConsoleComponent, AfterGeneralRecordCreatedEvent>(OnRecordEvent);
+        SubscribeLocalEvent<SunriseCriminalRecordsConsoleComponent, GeneralRecordCreatedEvent>(OnRecordEvent);
         SubscribeLocalEvent<SunriseCriminalRecordsConsoleComponent, RecordRemovedEvent>(OnRecordEvent);
     }
 
@@ -136,7 +138,7 @@ public sealed partial class SunriseCriminalRecordsSystem : SharedSunriseCriminal
         component.CurrentUIState = msg.State;
         UpdateUserInterface(uid, component);
     }
-    
+
     private void OnChangeStatus(EntityUid uid, SunriseCriminalRecordsConsoleComponent component, SunriseCriminalRecordsChangeStatusMessage msg)
     {
         if (!CheckAccess(uid, msg.Actor))
@@ -295,11 +297,11 @@ public sealed partial class SunriseCriminalRecordsSystem : SharedSunriseCriminal
             if (_stationRecords.TryGetRecord<GeneralStationRecord>(key, out var general))
             {
                 listingRecords.Add(new SunriseCriminalRecordListing(
-                    id, 
-                    general.Name, 
-                    general.DNA, 
-                    general.Fingerprint, 
-                    general.Species, 
+                    id,
+                    general.Name,
+                    general.DNA,
+                    general.Fingerprint,
+                    general.Species,
                     general.Gender.ToString(),
                     general.JobTitle));
             }

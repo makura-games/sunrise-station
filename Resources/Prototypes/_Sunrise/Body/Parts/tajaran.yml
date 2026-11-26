@@ -23,6 +23,13 @@
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
     state: "torso_m"
+  - type: VisualOrgan
+    data:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: "torso_m"
+    sexStateOverrides:
+      Male: torso_m
+      Female: torso_f
   - type: Extractable
     juiceSolution:
       reagents:
@@ -39,6 +46,13 @@
   - type: Sprite
     sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
     state: "head_m"
+  - type: VisualOrgan
+    data:
+      sprite: _Sunrise/Mobs/Species/Tajaran/parts.rsi
+      state: "head_m"
+    sexStateOverrides:
+      Male: head_m
+      Female: head_f
   - type: VisualOrganMarkings
     hideableLayers:
     - enum.HumanoidVisualLayers.Hair

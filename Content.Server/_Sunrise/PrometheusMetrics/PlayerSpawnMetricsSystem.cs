@@ -146,7 +146,7 @@ public sealed partial class PlayerSpawnMetricsSystem : EntitySystem
         var speciesProto = ev.Profile.Species.Id;
         var characterBodyType = GetBodyType(ev.Profile.BodyType);
         var characterGender = EnumToString(ev.Profile.Gender);
-        var voiceProto = ev.Profile.Voice.Id;
+        var voiceProto = ev.Profile.TtsVoice.Id;
 
         PlayerCharacterStatsOnSpawn
             .WithLabels(entityProto, speciesProto, characterBodyType, characterGender, voiceProto)

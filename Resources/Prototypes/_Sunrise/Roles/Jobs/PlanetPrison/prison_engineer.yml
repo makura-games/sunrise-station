@@ -10,13 +10,11 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 7200 # 2 hrs
-  weight: 7
   alwaysUseSpawner: true
   startingGear: PrisonEngineerGear
   icon: "JobIconPrisonEngineer"
   overrideConsoleVisibility: false
   supervisors: job-supervisors-head-of-prison
-  displayWeight: 70
   alternativeTitles:
   - job-alt-title-prison-technician
   access:

@@ -1,5 +1,3 @@
-// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/makura-games/sunrise-station/blob/master/CLA.txt
-
 using Content.Server._Sunrise.PlayerCache;
 using Content.Server._Sunrise.SponsorValidation;
 using Content.Shared._Sunrise.Pets;
@@ -10,7 +8,6 @@ namespace Content.Server._Sunrise.Pets;
 
 public sealed partial class PetSpawnSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SponsorValidationSystem _validationSystem = default!;
     [Dependency] private PlayerCacheManager _playerCache = default!;
     [Dependency] private SharedPettingSystem _pettingSystem = default!;
@@ -31,7 +28,7 @@ public sealed partial class PetSpawnSystem : EntitySystem
         if (!_validationSystem.ValidatePetSelection(petSelection, ev.Player.UserId))
             return;
 
-        if (!_prototypeManager.TryIndex<PetSelectionPrototype>(petSelection, out var petSelectionPrototype))
+        if (!ProtoMan.TryIndex<PetSelectionPrototype>(petSelection, out var petSelectionPrototype))
             return;
 
         if (string.IsNullOrEmpty(petSelectionPrototype.PetEntity))

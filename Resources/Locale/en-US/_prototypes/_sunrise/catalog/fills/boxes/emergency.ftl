@@ -27,3 +27,5 @@ ent-SunriseBoxSurvivalSyndicateNitrogen = { ent-BoxSurvivalSyndicate }
 ent-BoxSurvivalSyndicateWithoutGas = extended-capacity survival box
     .desc = It's a box with basic internals inside. This one is labelled to contain an extended-capacity tank.
     .suffix = Syndicate
+
+label-box-survival-without-gas = without gas cylinder

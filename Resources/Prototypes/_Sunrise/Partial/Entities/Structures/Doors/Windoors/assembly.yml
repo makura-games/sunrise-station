@@ -1,0 +1,16 @@
+- type: !PartialOnly entity
+  id: WindoorAssembly
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Doors/Windoors/windoor.rsi
+    layers: !Clear
+    - state: assembly
+
+- type: !PartialOnly entity
+  id: WindoorAssemblySecure
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Doors/Windoors/windoor.rsi
+    layers: !Clear
+    - state: secure_underlay
+    - state: assembly

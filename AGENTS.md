@@ -60,7 +60,7 @@ ss14-audio-system-core - слишком продвинуто, не нужно в
 
 ## Язык комментариев и словарь
 
-- Поясняющую часть inline-комментариев, комментариев у `using` и reason-фраз у `Sunrise-Edit`, `Sunrise edit start/end`, `Sunrise added start/end` писать по-русски.
+- Поясняющую часть inline-комментариев, комментариев у `using` и reason-фраз у маркеров `Sunrise edit`, `Sunrise added`, `Sunrise edit start/end`, `Sunrise added start/end` писать по-русски.
 - Английские идентификаторы, имена типов, API, loc-key, canonical markers и названия C#-символов не переводить.
 - В prose-описаниях рядом с кодом для `Sponsor*` использовать термин **«спонсор»**.
 - `donor` и `donator` считать нежелательной терминологией для новых комментариев, reason-фраз и поясняющих описаний.

@@ -17,3 +17,4 @@ store-preset-name-changeling = ДНК магазин
 store-preset-name-ntuplink = Визионер
 store-preset-name-exchanger = Обменник
 store-preset-name-blackmarket = Чёртный рынок
+store-listing-locked = Заперто

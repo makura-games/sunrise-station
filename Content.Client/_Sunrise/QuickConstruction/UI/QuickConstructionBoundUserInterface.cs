@@ -142,7 +142,7 @@ public sealed partial class QuickConstructionBoundUserInterface : BoundUserInter
                 IsTile = false,
                 PlacementOption = prototype.PlacementMode,
             },
-            new ConstructionPlacementHijack(constructionSystem, prototype));
+            new ConstructionPlacementHijack(prototype));
 
         _menu?.Close();
     }

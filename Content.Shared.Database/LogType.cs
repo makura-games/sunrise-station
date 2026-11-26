@@ -484,7 +484,15 @@ public enum LogType
     /// </summary>
     Connection = 104,
 
-    // Sunrise-Start
+    // Sunrise added start - сохраняем существующий тип журналирования и его номер в БД
+    /// <summary>
+    /// Sunrise interaction logs.
+    /// </summary>
     Interactions = 105,
-    // Sunrise-End
+    // Sunrise added end
+
+    /// <summary>
+    /// Silicon law changes.
+    /// </summary>
+    SiliconLaw = 106, // Sunrise-Edit - сохраняем числовое значение существующего Interactions для совместимости БД
 }

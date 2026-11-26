@@ -42,6 +42,11 @@
     factions:
     - NanoTrasen
   - type: Mech
+  - type: Vehicle
+    canAttack: true
+  - type: ContainerVehicle
+    containerId: mech-pilot-slot
+  - type: ContainerVehicleEntry
     entryDelay: 1
     batteryWhitelist:
       tags:
@@ -112,7 +117,6 @@
     - Alive
     - Critical
   - type: MobThresholds
-    currentThresholdState : Alive
     thresholds:
       0: Alive
       300: Critical
@@ -208,18 +212,19 @@
     baseState: sec_pod
     openState: sec_pod_open
     brokenState: sec_pod_broken
-    mechToPilotDamageMultiplier: 0.0
     maxEquipmentAmount: 2
     airtight: true
-    pilotWhitelist:
-      components:
-        - HumanoidProfile
     equipmentWhitelist:
       tags:
       - CombatMech
       - PaddyMech
     startingEquipment:
       - WeaponMechCombatSolarisLaser
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
+      components:
+      - HumanoidProfile
   - type: Reflect
     reflectProb: 0.05
     spread: 180
@@ -227,7 +232,6 @@
     reflects:
     - NonEnergy
   - type: MobThresholds
-    currentThresholdState: Alive
     thresholds:
       0: Alive
       225: Critical
@@ -242,6 +246,95 @@
   - type: RadarBlip
     color: "#ff1500"
     scale: 1.25
+    shape: Triangle
+    requireInSpace: false
+
+- type: entity
+  id: MechMiningPod
+  parent: [ BaseMechPod, BaseSalvageContraband ]
+  name: Mining Pod
+  description: Despite its size, the Mining Pod has incredible survability in space.
+  suffix: Filled
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Sunrise/Objects/Specific/Mech/mining_pod.rsi
+    scale: 1.08, 1.08
+    layers:
+    - state: mining_pod
+      map: ["enum.MechVisualLayers.Base"]
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 5
+    baseWeightlessModifier: 2
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.80
+        density: 100
+        mask:
+          - FlyingMobMask
+        layer:
+          - FlyingMobLayer
+  - type: AmbientSound
+    range: 4
+    volume: -4
+    sound:
+      path: /Audio/Effects/shuttle_thruster.ogg
+  - type: Mech
+    baseState: mining_pod
+    openState: mining_pod_open
+    brokenState: mining_pod_broken
+    maxEquipmentAmount: 4
+    airtight: true
+    equipmentWhitelist:
+      tags:
+      - IndustrialMech
+    startingEquipment:
+      - WeaponMechIndustrialPlasmaCutterLight #Нужно сделать улучшения WeaponMechIndustrialKineticAccelerator по аналогии с ручным для прогресса в раунде
+      - MechEquipmentGrabberSmallMining
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
+      components:
+      - HumanoidProfile
+  - type: Reflect
+    reflectProb: 0.05
+    spread: 180
+    soundOnReflect: /Audio/Weapons/block_metal1.ogg
+    reflects:
+    - NonEnergy
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Critical
+    showOverlays: false
+    allowRevives: true
+  - type: ContainerFill
+    containers:
+      mech-battery-slot:
+      - PowerCageMedium
+  - type: AccessReader
+    access: [["Mining"]]
+  - type: Storage
+    grid:
+    - 0,0,11,7
+    clickInsert: false
+    maxItemSize: Normal
+    storageOpenSound: /Audio/Effects/closetopen.ogg
+    storageCloseSound: /Audio/Effects/closetclose.ogg
+    whitelist:
+      tags:
+      - Ore
+  - type: Speech
+    speechSounds: Borg
+  - type: TTS
+    voice: Glados
+  - type: RadarBlip
+    color: "#4800ff"
+    scale: 1.1
     shape: Triangle
     requireInSpace: false
 
@@ -301,15 +394,16 @@
     baseState: death
     openState: death-open
     brokenState: death-broken
-    mechToPilotDamageMultiplier: 0.0
     airtight: true
-    pilotWhitelist:
-      components:
-        - HumanoidProfile
     equipmentWhitelist:
       tags:
       - IndustrialMech
       - CombatMech
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
+      components:
+      - HumanoidProfile
   - type: MeleeThrowOnHit
     distance: 1.5
     speed: 10
@@ -338,7 +432,6 @@
     - FootstepSound
     - Ripley
   - type: MobThresholds
-    currentThresholdState : Alive
     thresholds:
       0: Alive
       400: Critical
@@ -360,7 +453,7 @@
 # region Paddy
 - type: entity
   id: MechPaddy
-  parent: [ MechBreakageRipley, BaseMech, CombatMech, IndustrialMech, BaseSecurityContraband ] # Sunrise-edit
+  parent: [ MechBreakageRipley, BaseMech, CombatMech, IndustrialMech, BaseSecurityContraband ]
   name: Paddy
   description: Autonomous Power Loader Unit Subtype Paddy. A Modified MK-II Ripley design intended for light security use.
   components:
@@ -386,13 +479,14 @@
     baseState: paddy
     openState: paddy-open
     brokenState: paddy-broken
-    mechToPilotDamageMultiplier: 0.0
     airtight: true
     maxEquipmentAmount: 4
     #siren: true # Todo: port siren system from starlight
-    pilotWhitelist:
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
       components:
-        - HumanoidProfile
+      - HumanoidProfile
   - type: Reflect
     reflectProb: 0.05
     spread: 180
@@ -443,7 +537,7 @@
 # region Pirate Yarrk
 - type: entity
   id: MechBigYarrke
-  parent: [ BaseMech, IndustrialMech, CombatMech, BaseMajorContraband ]
+  parent: [ SunriseMechBreakageDefault, BaseMech, IndustrialMech, CombatMech, BaseMajorContraband ]
   name: Big Yarrke
   description: A heavy ancient mech for cold harsh realities of deep space. It has built-in trusts and Mining Industrial Drill.
   components:
@@ -463,15 +557,25 @@
     baseState: bigbrother
     openState: bigbrother-open
     brokenState: bigbrother-broken
-    mechToPilotDamageMultiplier: 0.05
     airtight: true
-    pilotWhitelist:
-      components:
-        - HumanoidProfile
     equipmentWhitelist:
       tags:
       - IndustrialMech
       - CombatMech
+  - type: Vehicle
+    transferDamageModifier:
+      coefficients:
+        Blunt: 0.05
+        Slash: 0.05
+        Piercing: 0.05
+        Heat: 0.05
+        Shock: 0.05
+        Caustic: 0.05
+        Structural: 0.05
+        Mangleness: 0
+    operatorWhitelist:
+      components:
+      - HumanoidProfile
   - type: Loadout
     prototypes: [ MechArmorMediumSyndiLoadout ]
   - type: MeleeWeapon
@@ -531,7 +635,7 @@
 # NT Gygax
 - type: entity
   id: MechNTGygax
-  parent: [ MechBreakageGygax, BaseMech, CombatMech, BaseSecurityScienceContraband ] # Sunrise-edit
+  parent: [ MechBreakageGygax, BaseMech, CombatMech, BaseSecurityScienceContraband ]
   name: Nanotrasen Special Gygax
   description: "Nanotrasen's trump card when solving problems. High durability, increased protection against shock, explosions, temperature, shots: conventional, laser and energy, as well as expanded equipment slots allow to turn the situation on the station upside down. Gas pedals consume a colossal amount of energy."
   components:
@@ -551,12 +655,13 @@
     baseState: ntgygax
     openState: ntgygax-open
     brokenState: ntgygax-broken
-    mechToPilotDamageMultiplier: 0.0
     airtight: true
     maxEquipmentAmount: 4
-    pilotWhitelist:
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
       components:
-        - HumanoidProfile
+      - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -616,14 +721,14 @@
 
 - type: entity
   id: MechPhazon
-  parent: [ BaseMech, CombatMech, BaseSecurityScienceContraband ]
+  parent: [ SunriseMechBreakageDefault, BaseMech, CombatMech, BaseSecurityScienceContraband ]
   name: Phazon
   description: The most advanced mech on the market, the pinnacle of technological development, extremely mobile and deadly.
   components:
   - type: Sprite
     drawdepth: Mobs
     noRot: true
-    sprite: _Sunrise/Objects/Specific/Mech/mecha.rsi # Sunrise-edit
+    sprite: _Sunrise/Objects/Specific/Mech/mecha.rsi
     scale: 1.08, 1.08
     layers:
     - map: [ "enum.MechVisualLayers.Base" ]
@@ -635,12 +740,13 @@
     baseState: phazon
     openState: phazon-open
     brokenState: phazon-broken
-    mechToPilotDamageMultiplier: 0.0
     maxEquipmentAmount: 5
     airtight: true
-    pilotWhitelist:
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
       components:
-        - HumanoidProfile
+      - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -659,7 +765,6 @@
     - NonEnergy
     - Energy
   - type: MobThresholds
-    currentThresholdState : Alive
     thresholds:
       0: Alive
       220: Critical
@@ -720,16 +825,17 @@
     baseState: darkdurand
     openState: darkdurand-open
     brokenState: darkdurand-broken
-    mechToPilotDamageMultiplier: 0.0
     airtight: true
     maxEquipmentAmount: 5
     batteryWhitelist:
       tags:
       - MechReactor
       - SunriseDurandMechReactor
-    pilotWhitelist:
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
       components:
-        - HumanoidProfile
+      - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -746,7 +852,6 @@
   - type: CanMoveInAir
   - type: MovementAlwaysTouching
   - type: MobThresholds
-    currentThresholdState : Alive
     thresholds:
       0: Alive
       500: Critical
@@ -774,12 +879,13 @@
       - WeaponMechCombatUltraRifle
 
 
-# Doll House
+# Kolobok
 - type: entity
-  id: MechDollHouse
-  parent: [ MechBreakageDurand, BaseMech, CombatMech, BaseMajorContraband ] # Sunrise-edit
-  name: Doll House
+  id: MechKolobok
+  parent: [ MechBreakageKolobok, BaseMech, CombatMech, BaseMajorContraband ] # Sunrise-edit
+  name: Kolobok
   description: The Heavy Mech USSP, a communist variant of the Durand, features stronger armor and a powerful machine gun.
+  suffix: Soviet Heavy Mech
   components:
   - type: FootprintEmitter # Sunrise-Add
     leftBareFootState: [ footprint-mech-heavy ]
@@ -790,58 +896,72 @@
     sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
     scale: 1.08, 1.08
     layers:
-    - map: [ "enum.MechVisualLayers.Base" ]
-      state: dollhouse
+    - map: [ "enum.MechVisualLayers.Base", "movement" ]
+      state: kolobok
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+      params:
+        pitch: 0.5
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: kolobok-moving
+    noMovementLayers:
+      movement:
+        state: kolobok
+  - type: DamageVisuals
+    thresholds: [ 50, 100, 150, 250, 350, 450 ]
+    trackAllDamage: true
+    damageOverlay:
+      sprite: _Sunrise/Objects/Specific/Mech/durand.rsi
   - type: Mech
-    baseState: dollhouse
-    openState: dollhouse-open
-    brokenState: dollhouse-broken
-    mechToPilotDamageMultiplier: 0.0
+    baseState: kolobok
+    openState: kolobok-open
+    brokenState: kolobok-broken
     airtight: true
     maxEquipmentAmount: 2
-    pilotWhitelist:
+  - type: Vehicle
+    transferDamage: false
+    operatorWhitelist:
       components:
-        - HumanoidProfile
+      - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
     damage:
       types:
-        Blunt: 40
-        Structural: 220
+        Blunt: 45
+        Structural: 300
     bluntStaminaDamageFactor: 1.5
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.5
-    baseSprintSpeed: 2
+    baseWalkSpeed: 1
+    baseSprintSpeed: 1.25
   - type: Loadout
     prototypes: [ MechArmorHeavySyndiLoadout ]
-  - type: CanMoveInAir
-  - type: MovementAlwaysTouching
   - type: Reflect
-    reflectProb: 0.15
+    reflectProb: 0.10
     spread: 180
     soundOnReflect: /Audio/_Starlight/Armor/Ricochet/ricochet1_1.ogg
     reflects:
     - NonEnergy
+  - type: CanMoveInAir
+  - type: MovementAlwaysTouching
   - type: Tag
     tags:
     - DoorBumpOpener
     - FootstepSound
-    - DollHouse
+    - Kolobok
   - type: AccessReader
-    access: [["NuclearOperative"]]
+    access: [[]]
   - type: MobThresholds
-    currentThresholdState : Alive
     thresholds:
       0: Alive
-      500: Critical
+      600: Critical
 
 - type: entity
-  id: MechDollHouseBattery
-  parent: MechDollHouse
+  id: MechKolobokBattery
+  parent: MechKolobok
   suffix: Battery
   components:
   - type: ContainerFill
@@ -850,10 +970,128 @@
       - SunriseMechReactorThor
 
 - type: entity
-  id: MechDollHouseFilled
-  parent: MechDollHouseBattery
+  id: MechKolobokFilled
+  parent: MechKolobokBattery
   suffix: Battery, Filled
   components:
   - type: Mech
     startingEquipment:
       - WeaponMechCombatMaxim
+
+# Blyashanka
+- type: entity
+  id: SunriseMechBlyashanka
+  parent: [ MechBreakageBlyashanka, BaseMech, CombatMech, BaseMajorContraband ]
+  name: Blyashanka
+  suffix: Soviet Medium Mech
+  description: A medium four-legged USSP walker protected by Syndicate armor plating.
+  components:
+  - type: FootprintEmitter
+    leftBareFootState: [ footprint-mech-fourfoot ]
+    rightBareFootState: [ footprint-mech-fourfoot ]
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: _Sunrise/Objects/Specific/Mech/blyashanka.rsi
+    scale: 1.05, 1.05
+    layers:
+    - map: [ "enum.MechVisualLayers.Base", "movement" ]
+      state: base
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+      params:
+        pitch: 0.7
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: base-moving
+    noMovementLayers:
+      movement:
+        state: base
+  - type: DamageVisuals
+    thresholds: [ 50, 100, 150, 250, 350, 450 ]
+    trackAllDamage: true
+    damageOverlay:
+      sprite: _Sunrise/Objects/Specific/Mech/blyashanka.rsi
+  - type: Mech
+    baseState: base
+    openState: base-open
+    brokenState: base-broken
+    airtight: true
+    maxEquipmentAmount: 2
+  - type: Vehicle
+    transferDamageModifier:
+      coefficients:
+        Blunt: 0.25
+        Slash: 0.25
+        Piercing: 0.25
+        Cold: 0.25
+        Heat: 0.25
+        Shock: 0.25
+        Radiation: 0.5
+    operatorWhitelist:
+      components:
+      - HumanoidProfile
+  - type: MeleeWeapon
+    hidden: true
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 30
+        Structural: 100
+    bluntStaminaDamageFactor: 0.5
+  - type: MeleeThrowOnHit
+    speed: 5
+    distance: 1
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.5
+    baseSprintSpeed: 4
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      125: 0.9
+      187: 0.7
+      225: 0.5
+  - type: Loadout
+    prototypes: [ MechArmorMediumSyndiLoadout ]
+  - type: CanMoveInAir
+  - type: MovementAlwaysTouching
+  - type: AccessReader
+    access: [[]]
+  - type: MobState
+    currentState: Alive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      250: Critical
+
+- type: entity
+  id: SunriseMechBlyashankaBattery
+  parent: SunriseMechBlyashanka
+  suffix: Battery
+  components:
+  - type: ContainerFill
+    containers:
+      mech-battery-slot:
+      - PowerCageSyndicate
+
+- type: entity
+  id: SunriseMechBlyashankaFilled
+  parent: SunriseMechBlyashankaBattery
+  suffix: Battery, Filled
+  components:
+  - type: Mech
+    startingEquipment:
+      - SunriseWeaponMechCombatRpd
+      - SunriseWeaponMechCombatRpd
+
+- type: entity
+  id: SunriseMechBlyashankaConstructed
+  parent: SunriseMechBlyashanka
+  categories: [ HideSpawnMenu ]
+  suffix: Constructed, Armed
+  components:
+  - type: Mech
+    startingEquipment:
+      - SunriseWeaponMechCombatRpd
+      - SunriseWeaponMechCombatRpd

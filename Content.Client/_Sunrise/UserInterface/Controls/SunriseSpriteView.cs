@@ -3,6 +3,8 @@ using System.Numerics;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
+using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Client._Sunrise.UserInterface.Controls;
@@ -14,7 +16,10 @@ public class SunriseStaticSpriteView : Control
     private readonly IEntityManager _entityMan;
 
     private SpriteComponent? _cachedSprite;
+    private EntityUid? _sourceEntity;
+    private EntityUid? _previewEntity;
     private Angle _rotation;
+    private readonly EntProtoId _previewEntityProtoId = "hoverentity";
 
     [ViewVariables]
     private Entity<SpriteComponent> Entity { get; set; }
@@ -97,20 +102,71 @@ public class SunriseStaticSpriteView : Control
 
     public void SetEntity(EntityUid uid)
     {
-        if (Entity.Owner == uid)
+        if (_sourceEntity == uid && !_entityMan.Deleted(_previewEntity))
+        {
+            return;
+        }
+
+        _sourceEntity = uid;
+
+        if (IsInsideTree)
+            RefreshPreviewEntity();
+    }
+
+    protected override void EnteredTree()
+    {
+        base.EnteredTree();
+        RefreshPreviewEntity();
+    }
+
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+        ClearPreviewEntity(false);
+    }
+
+    private void RefreshPreviewEntity()
+    {
+        if (_sourceEntity is not { } uid)
             return;
 
         if (!_entityMan.TryGetComponent(uid, out SpriteComponent? sprite))
+        {
+            ClearPreviewEntity(true);
             return;
+        }
 
-        // Создаем глубокую копию спрайта
-        _cachedSprite = _entityMan.ComponentFactory.GetComponent<SpriteComponent>();
-        _sprite.CopySprite((uid, sprite), (uid, _cachedSprite));
+        if (_entityMan.Deleted(_previewEntity))
+            _previewEntity = _entityMan.SpawnEntity(_previewEntityProtoId, MapCoordinates.Nullspace);
 
-        _rotation = sprite.Rotation;
+        if (!_entityMan.TryGetComponent(_previewEntity, out SpriteComponent? previewSprite))
+        {
+            ClearPreviewEntity(true);
+            return;
+        }
 
-        Entity = (uid, sprite);
+        // Создаем глубокую копию спрайта на отдельной клиентской сущности.
+        _sprite.CopySprite((uid, sprite), (_previewEntity.Value, previewSprite));
+
+        _rotation = previewSprite.Rotation;
+        _cachedSprite = previewSprite;
+        Entity = (_previewEntity.Value, previewSprite);
+        InvalidateMeasure();
     }
+
+    private void ClearPreviewEntity(bool clearSource)
+    {
+        _entityMan.TryQueueDeleteEntity(_previewEntity);
+        _previewEntity = null;
+        _cachedSprite = null;
+        Entity = default;
+        _spriteSize = Vector2.Zero;
+        InvalidateMeasure();
+
+        if (clearSource)
+            _sourceEntity = null;
+    }
+
     protected override Vector2 MeasureOverride(Vector2 availableSize)
     {
         // TODO Make this get called when sprite bounds/properties update?

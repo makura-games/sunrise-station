@@ -29,7 +29,6 @@ public sealed partial class SunriseThrownItemDamageSystem : EntitySystem
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private SharedCameraRecoilSystem _sharedCameraRecoil = default!;
     [Dependency] private SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private ThrownItemSystem _thrown = default!;
     [Dependency] private ThrowingSystem _throwing = default!;
@@ -52,7 +51,7 @@ public sealed partial class SunriseThrownItemDamageSystem : EntitySystem
         component.OriginalLinearDamping ??= physics.LinearDamping;
 
         float weight;
-        if (TryComp<ItemComponent>(uid, out var item) && _proto.TryIndex(item.Size, out var sizeProto))
+        if (TryComp<ItemComponent>(uid, out var item) && ProtoMan.TryIndex(item.Size, out var sizeProto))
         {
             weight = sizeProto.Weight;
         }
@@ -90,7 +89,7 @@ public sealed partial class SunriseThrownItemDamageSystem : EntitySystem
         // Try to get item/physics info
         TryComp<PhysicsComponent>(uid, out var physics);
         ItemSizePrototype? sizeProto = null;
-        var hasItem = TryComp<ItemComponent>(uid, out var item) && _proto.TryIndex(item.Size, out sizeProto);
+        var hasItem = TryComp<ItemComponent>(uid, out var item) && ProtoMan.TryIndex(item.Size, out sizeProto);
 
         float multiplier;
         float weight;
