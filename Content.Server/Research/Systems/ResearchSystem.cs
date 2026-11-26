@@ -35,6 +35,7 @@ namespace Content.Server.Research.Systems
             InitializeSource();
             InitializeServer();
             InitializePopulationScaling(); // Sunrise-Edit
+            InitializeResearchExpansion(); // Sunrise-Edit - Initialize research discipline expansion.
 
             SubscribeLocalEvent<TechnologyDatabaseComponent, ResearchRegistrationChangedEvent>(OnDatabaseRegistrationChanged);
         }

@@ -1,0 +1,9 @@
+- type: construction
+  id: SunriseImprovisedResearchServerCircuitboardConstruction
+  graph: SunriseImprovisedResearchServerCircuitboardGraph
+  startNode: start
+  targetNode: complete
+  category: construction-category-machines
+  objectType: Item
+  name: ent-SunriseImprovisedResearchAndDevelopmentServerMachineCircuitboard
+  description: ent-SunriseImprovisedResearchAndDevelopmentServerMachineCircuitboard.desc

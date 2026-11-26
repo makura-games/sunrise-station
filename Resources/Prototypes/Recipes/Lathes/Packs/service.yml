@@ -86,5 +86,5 @@
   # Sunrise-start
   - TelecomServerT2Circuitboard
   - TelecomServerT3Circuitboard
-  - ResearchAndDevelopmentServerMachineCircuitboard
+  # - ResearchAndDevelopmentServerMachineCircuitboard # Sunrise-Edit - Штатная плата сервера РнД больше не печатается.
   # Sunrise-end
