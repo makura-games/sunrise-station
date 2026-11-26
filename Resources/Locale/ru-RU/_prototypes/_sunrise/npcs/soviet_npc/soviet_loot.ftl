@@ -1,14 +1,6 @@
 ent-ClothingBeltWebbingSovietTier1PPSHSLSergeant = разгрузка советского бойца
     .desc = Разгрузка советского сержанта, наполненная боеприпасами для ППШ.
     .suffix = Сержант, ППШ
-ent-SovietDamagedIDCardSpawner = спавнер повреждённого ID
-    .desc = Случайно создаёт повреждённую советскую ID-карту.
-ent-SovietDamagedIDCardSpawnerCaptain = спавнер капитанского ID
-    .desc = Случайно создаёт повреждённую ID-карту советского капитана.
-ent-SovietDamagedIDCardSpawnerPartisan = спавнер партизанского ID
-    .desc = Случайно создаёт повреждённую ID-карту советского партизана.
-ent-SovietDamagedIDCardSpawnerSergeant = спавнер сержантского ID
-    .desc = Случайно создаёт повреждённую ID-карту советского сержанта.
 ent-SovietPinSpawnerT1 = спавнер значка T1
     .desc = Случайно создаёт обычный советский значок.
 ent-SovietPinSpawnerT2 = спавнер значка T2
