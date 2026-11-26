@@ -1,3 +1,4 @@
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -7,8 +8,9 @@ from unittest.mock import Mock, patch
 import requests
 
 from discord_notifications.config import load_config
-from discord_notifications.deliver import deliver_pending, enqueue
+from discord_notifications.deliver import collect, deliver_pending, enqueue
 from discord_notifications.formatting import format_event
+from discord_notifications.github import GitHubError
 from discord_notifications.state import (
     ARTIFACTS,
     prune,
@@ -59,7 +61,10 @@ class FakeGitHub:
 
     def artifact_json(self, artifact_id, filename):
         if artifact_id in self.documents:
-            return self.documents[artifact_id]
+            document = self.documents[artifact_id]
+            if isinstance(document, Exception):
+                raise document
+            return document
         artifact_data = next(
             item for item in self.artifacts if item["id"] == artifact_id
         )
@@ -160,6 +165,85 @@ class StateTests(unittest.TestCase):
             [(item["id"], item["_run_attempt"]) for item in result],
             [(100, 2), (200, 1)],
         )
+
+    def test_snapshots_ignores_unreadable_or_missing_artifacts(self):
+        github = FakeGitHub(
+            [
+                artifact(12518695125, ARTIFACTS[0], 1, "2026-09-12T00:00:01Z"),
+                artifact(12526209172, ARTIFACTS[1], 2, "2026-09-12T00:01:02Z"),
+            ],
+            {
+                1: run(1, "2026-09-12T00:00:00Z"),
+                2: run(2, "2026-09-12T00:01:00Z"),
+            },
+            documents={
+                12518695125: GitHubError("Не удалось скачать файл события"),
+            },
+        )
+
+        result = snapshots(github, {"workflow_id": 10})
+
+        self.assertEqual(
+            [item["id"] for item in result], [12526209172, 12518695125]
+        )
+        self.assertIsNotNone(result[0]["_document"])
+        self.assertIsNone(result[1]["_document"])
+
+    def test_restore_skips_unreadable_snapshot_and_uses_previous(self):
+        github = FakeGitHub(
+            [
+                artifact(100, ARTIFACTS[1], 2, "2026-09-12T00:02:00Z"),
+                artifact(200, ARTIFACTS[1], 1, "2026-09-12T00:01:00Z"),
+            ],
+            {
+                1: run(1, "2026-09-12T00:01:00Z"),
+                2: run(2, "2026-09-12T00:02:00Z"),
+            },
+            documents={
+                100: GitHubError("Повреждённый архив артефакта"),
+                200: {
+                    **state_document(1, 1),
+                    "pending": {"run:1": {"marker": "restored_from_200"}},
+                },
+            },
+        )
+
+        with tempfile.TemporaryDirectory() as directory:
+            target_path = Path(directory) / "state.json"
+            restore(
+                github,
+                {"id": 3, "run_attempt": 1, "workflow_id": 10},
+                target_path,
+                24,
+            )
+            saved = json.loads(target_path.read_text(encoding="utf-8"))
+            self.assertEqual(saved["checkpoint"]["run_id"], 3)
+            self.assertIn("run:1", saved["pending"])
+            self.assertEqual(
+                saved["pending"]["run:1"]["marker"], "restored_from_200"
+            )
+
+    def test_restore_fails_when_all_snapshots_unreadable(self):
+        github = FakeGitHub(
+            [
+                artifact(100, ARTIFACTS[1], 1, "2026-09-12T00:01:00Z"),
+            ],
+            {
+                1: run(1, "2026-09-12T00:01:00Z"),
+            },
+            documents={
+                100: GitHubError("Повреждённый архив"),
+            },
+        )
+
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaisesRegex(RuntimeError, "повреждены или недоступны"):
+                restore(
+                    github,
+                    {"id": 2, "run_attempt": 1, "workflow_id": 10},
+                    Path(directory) / "state.json",
+                    24,
+                )
 
     def test_restore_refuses_ambiguous_pre_send_snapshot(self):
         github = FakeGitHub(
@@ -297,6 +381,71 @@ class DeliveryTests(unittest.TestCase):
 
         self.assertEqual(failures, 0)
         send_message_mock.assert_not_called()
+
+    def test_collect_marks_seen_when_run_fails_to_load_and_cannot_rerun(self):
+        github = Mock()
+        github.root = "/repos/example/repository"
+        github.pages.return_value = [
+            {
+                "id": 42,
+                "created_at": "2099-01-01T00:01:00Z",
+                "status": "completed",
+                "conclusion": "success",
+                "run_attempt": 1,
+            }
+        ]
+        github.event_artifact.side_effect = GitHubError("Повреждён артефакт события")
+        state = SimpleNamespace(
+            github=github,
+            data={
+                "cursor": "2099-01-01T00:00:00Z",
+                "seen": {},
+                "pending": {},
+            },
+            save=Mock(),
+        )
+        log = Mock()
+
+        errors = collect(state, CONFIG, log, float("inf"))
+
+        self.assertEqual(errors, 1)
+        self.assertIn("run:42", state.data["seen"])
+        self.assertEqual(state.data["seen"]["run:42"], "2099-01-01T00:01:00Z")
+        github.json.assert_not_called()
+        state.save.assert_called_once()
+
+    def test_collect_reruns_and_does_not_mark_seen_when_rerun_possible(self):
+        github = Mock()
+        github.root = "/repos/example/repository"
+        github.pages.return_value = [
+            {
+                "id": 43,
+                "created_at": "2099-01-01T00:01:00Z",
+                "status": "completed",
+                "conclusion": "failure",
+                "run_attempt": 1,
+            }
+        ]
+        github.event_artifact.side_effect = GitHubError("Сбой скачивания")
+        state = SimpleNamespace(
+            github=github,
+            data={
+                "cursor": "2099-01-01T00:00:00Z",
+                "seen": {},
+                "pending": {},
+            },
+            save=Mock(),
+        )
+        log = Mock()
+
+        errors = collect(state, CONFIG, log, float("inf"))
+
+        self.assertEqual(errors, 1)
+        self.assertNotIn("run:43", state.data["seen"])
+        github.json.assert_called_once_with(
+            "POST", "/repos/example/repository/actions/runs/43/rerun"
+        )
+        state.save.assert_called_once()
 
     def test_comment_title_does_not_repeat_repository_name(self):
         account = {
