@@ -27,7 +27,11 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
 
     public void UpdateState(ShipyardConsoleInterfaceState state)
     {
-        if (_prototype.TryIndex(state.Account, out var account))
+        if (state.UseTickets)
+        {
+            AccountLabel.Text = Loc.GetString("shipyard-console-ticket-account");
+        }
+        else if (_prototype.TryIndex(state.Account, out var account))
         {
             AccountLabel.Text = Loc.GetString("shipyard-console-account-name-format",
                 ("color", account.Color),
@@ -38,7 +42,8 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
             AccountLabel.Text = Loc.GetString("shipyard-console-no-account");
         }
 
-        BalanceLabel.Text = Loc.GetString("shipyard-console-credits-amount", ("amount", state.Balance));
+        BalanceTitle.Text = Loc.GetString(state.UseTickets ? "shipyard-console-ticket-balance-label" : "shipyard-console-balance-label");
+        BalanceLabel.Text = Loc.GetString(state.UseTickets ? "shipyard-console-tickets-amount" : "shipyard-console-credits-amount", ("amount", state.Balance));
         var currentShuttleName = state.CurrentShuttle is { } currentShuttle &&
             _prototype.TryIndex(currentShuttle, out ShipyardVesselPrototype? currentPrototype)
                 ? Loc.GetString(currentPrototype.Name)
@@ -46,7 +51,7 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
         CurrentShuttleLabel.Text = currentShuttleName ?? Loc.GetString("shipyard-console-no-shuttle");
         SellValueLabel.Text = currentShuttleName == null
             ? string.Empty
-            : Loc.GetString("shipyard-console-sell-value", ("value", state.CurrentShuttleSellValue));
+            : Loc.GetString(state.UseTickets ? "shipyard-console-ticket-sell-value" : "shipyard-console-sell-value", ("value", state.CurrentShuttleSellValue));
         SellButton.Disabled = currentShuttleName == null || state.TransactionPending;
 
         Vessels.Children.Clear();
@@ -60,7 +65,12 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
         }
 
         vessels.Sort((left, right) =>
-            string.Compare(left.Name, right.Name, StringComparison.CurrentCultureIgnoreCase));
+        {
+            var priceOrder = left.Data.Price.CompareTo(right.Data.Price);
+            return priceOrder != 0
+                ? priceOrder
+                : string.Compare(left.Name, right.Name, StringComparison.CurrentCultureIgnoreCase);
+        });
 
         foreach (var (vessel, vesselPrototype, vesselName) in vessels)
         {
@@ -82,7 +92,7 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
 
             row.AddChild(new Label
             {
-                Text = Loc.GetString("shipyard-console-price", ("value", vessel.Price)),
+                Text = Loc.GetString(state.UseTickets ? "shipyard-console-ticket-price" : "shipyard-console-price", ("value", vessel.Price)),
                 MinWidth = 105,
                 HorizontalAlignment = HAlignment.Right,
                 VerticalAlignment = VAlignment.Center,

@@ -7,7 +7,7 @@
             <Label Text="{Loc 'shipyard-console-account-label'}" StyleClasses="LabelKeyText" />
             <RichTextLabel Name="AccountLabel" Text="{Loc 'shipyard-console-no-account'}" />
             <Label Text="  " />
-            <Label Text="{Loc 'shipyard-console-balance-label'}" StyleClasses="LabelKeyText" />
+            <Label Name="BalanceTitle" Text="{Loc 'shipyard-console-balance-label'}" StyleClasses="LabelKeyText" />
             <Label Name="BalanceLabel" Text="0" />
         </BoxContainer>
         <Control MinHeight="8" />

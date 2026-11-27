@@ -39,7 +39,9 @@ public sealed partial class ShipyardSystem
         if (stationUid is { } station &&
             TryComp<StationBankAccountComponent>(station, out var bank))
         {
-            balance = _cargo.GetBalanceFromAccount((station, bank), ent.Comp.Account);
+            balance = ent.Comp.UseTickets
+                ? GetTicketBalance(station)
+                : _cargo.GetBalanceFromAccount((station, bank), ent.Comp.Account);
         }
 
         var currentSellValue = 0;
@@ -60,7 +62,7 @@ public sealed partial class ShipyardSystem
             if (vessel.Group != ent.Comp.VesselGroup || !added.Add(vessel.ID))
                 continue;
 
-            vessels.Add(new ShipyardVesselData(vessel, vessel.Price));
+            vessels.Add(new ShipyardVesselData(vessel, GetPurchasePrice(ent.Comp, vessel.Price)));
         }
 
         foreach (var vesselId in ent.Comp.Vessels)
@@ -68,12 +70,13 @@ public sealed partial class ShipyardSystem
             if (!_prototype.TryIndex(vesselId, out ShipyardVesselPrototype? vessel) || !added.Add(vessel.ID))
                 continue;
 
-            vessels.Add(new ShipyardVesselData(vessel, vessel.Price));
+            vessels.Add(new ShipyardVesselData(vessel, GetPurchasePrice(ent.Comp, vessel.Price)));
         }
 
         _ui.SetUiState(ent.Owner, ShipyardConsoleUiKey.Key, new ShipyardConsoleInterfaceState(
             ent.Comp.Account,
             balance,
+            ent.Comp.UseTickets,
             ent.Comp.CurrentShuttleVessel,
             currentSellValue,
             HasPendingAction(ent.Owner),

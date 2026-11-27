@@ -17,6 +17,7 @@ using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.Interaction;
 using Content.Shared.Repairable;
+using Content.Shared.Stacks;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
@@ -50,6 +51,7 @@ public sealed partial class ShipyardSystem : EntitySystem
     [Dependency] private RadioSystem _radio = default!;
     [Dependency] private ShuttleSystem _shuttle = default!;
     [Dependency] private StationSystem _station = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
@@ -121,7 +123,16 @@ public sealed partial class ShipyardSystem : EntitySystem
 
     private void OnInteractUsing(Entity<ShipyardConsoleComponent> ent, ref InteractUsingEvent args)
     {
-        if (args.Handled || !HasComp<CashComponent>(args.Used))
+        if (args.Handled)
+            return;
+
+        if (ent.Comp.UseTickets)
+        {
+            args.Handled = TryDepositTicket(ent.AsNullable(), args.Used, args.User);
+            return;
+        }
+
+        if (!HasComp<CashComponent>(args.Used))
             return;
 
         args.Handled = TryDepositCash(
@@ -165,6 +176,12 @@ public sealed partial class ShipyardSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, false))
         {
             reason = "shipyard-console-unavailable";
+            return false;
+        }
+
+        if (ent.Comp.UseTickets)
+        {
+            reason = "shipyard-console-invalid-cash";
             return false;
         }
 

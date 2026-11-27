@@ -130,12 +130,24 @@
   - type: ShipyardConsole
     account: Cargo
     vesselGroup: salvage
+    useTickets: true
     priorityTag: DockMining
     announcementChannel: Supply
   - type: AccessReader
     access: [[ Salvage ], [ Quartermaster ]]
   - type: Computer
     board: ShipyardComputerCircuitboard
+
+- type: entity
+  parent: ComputerShipyard
+  id: SunriseComputerShipyardMining
+  name: mining shipyard console
+  description: Used to purchase and sell mining shuttles.
+  components:
+  - type: AccessReader
+    access: [[ Mining ], [ Quartermaster ]]
+  - type: Computer
+    board: SunriseShipyardMiningComputerCircuitboard
 
 - type: entity
   parent: BaseComputerShipyard

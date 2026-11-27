@@ -115,7 +115,7 @@ public sealed partial class ShipyardSystem
             return false;
         }
 
-        if (!_cargo.TryGetAccount((station, bank), ent.Comp.Account, out _))
+        if (!ent.Comp.UseTickets && !_cargo.TryGetAccount((station, bank), ent.Comp.Account, out _))
         {
             reason = "shipyard-console-account-not-found";
             return false;
@@ -196,7 +196,9 @@ public sealed partial class ShipyardSystem
         }
 
         var refund = GetCurrentSellValue(ent.Comp, shuttleUid);
-        if (!TryAdjustBankAccount((station, bank), ent.Comp.Account, refund))
+        if (!(ent.Comp.UseTickets
+                ? TryAdjustTicketBalance(station, refund)
+                : TryAdjustBankAccount((station, bank), ent.Comp.Account, refund)))
         {
             CancelAction(ent, action, "shipyard-console-transaction-failed");
             return;
@@ -206,12 +208,12 @@ public sealed partial class ShipyardSystem
             LogType.StoreRefund,
             LogImpact.Medium,
             $"{ToPrettyString(action.Actor):player} sold shuttle {ToPrettyString(shuttleUid):shuttle} "
-            + $"for {refund} credits to {ent.Comp.Account} using {ToPrettyString(ent):console}.");
+            + $"for {refund} {(ent.Comp.UseTickets ? "tickets" : "credits")} to {ent.Comp.Account} using {ToPrettyString(ent):console}.");
         QueueDel(shuttleUid);
         ClearShuttle(ent);
         _audio.PlayPvs(ent.Comp.ConfirmSound, ent);
         PopupActionActor(ent, action, "shipyard-console-sell-success");
-        Announce(ent, "shipyard-console-sale-announcement", ("ship", action.ShipName!), ("refund", refund));
+        Announce(ent, ent.Comp.UseTickets ? "shipyard-console-ticket-sale-announcement" : "shipyard-console-sale-announcement", ("ship", action.ShipName!), ("refund", refund));
         UpdateUi(ent);
     }
 
@@ -360,7 +362,15 @@ public sealed partial class ShipyardSystem
     // relative to the valuation at the time of purchase (for example, due to equipment removal).
     private int GetCurrentSellValue(ShipyardConsoleComponent component, EntityUid shuttleUid)
     {
-        var maximumRefund = component.CurrentShuttlePrice * Math.Clamp((double) component.SellRate, 0d, 1d);
+        var sellRate = component.SellRate;
+        if (component.CurrentShuttleVessel is { } vesselId &&
+            _prototype.TryIndex(vesselId, out ShipyardVesselPrototype? vessel) &&
+            vessel.SellRate is { } vesselSellRate)
+        {
+            sellRate = vesselSellRate;
+        }
+
+        var maximumRefund = component.CurrentShuttlePrice * Math.Clamp((double) sellRate, 0d, 1d);
         if (component.InitialShuttleAppraisal <= 0)
             return (int) Math.Round(maximumRefund);
 

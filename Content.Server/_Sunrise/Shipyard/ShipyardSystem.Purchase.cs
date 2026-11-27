@@ -59,7 +59,8 @@ public sealed partial class ShipyardSystem
             return;
         }
 
-        if (!_cargo.TryGetAccount((station, bank), ent.Comp.Account, out var balance))
+        var balance = GetTicketBalance(station);
+        if (!ent.Comp.UseTickets && !_cargo.TryGetAccount((station, bank), ent.Comp.Account, out balance))
         {
             Deny(ent, args.Actor, "shipyard-console-account-not-found");
             return;
@@ -71,9 +72,10 @@ public sealed partial class ShipyardSystem
             return;
         }
 
-        if (balance < vessel.Price)
+        var price = GetPurchasePrice(ent.Comp, vessel.Price);
+        if (balance < price)
         {
-            Deny(ent, args.Actor, "shipyard-console-insufficient-funds", ("cost", vessel.Price));
+            Deny(ent, args.Actor, ent.Comp.UseTickets ? "shipyard-console-insufficient-tickets" : "shipyard-console-insufficient-funds", ("cost", price));
             return;
         }
 
@@ -94,7 +96,9 @@ public sealed partial class ShipyardSystem
                 return;
             }
 
-            if (!TryAdjustBankAccount((station, bank), ent.Comp.Account, -vessel.Price))
+            if (!(ent.Comp.UseTickets
+                    ? TryAdjustTicketBalance(station, -price)
+                    : TryAdjustBankAccount((station, bank), ent.Comp.Account, -price)))
             {
                 Deny(ent, args.Actor, "shipyard-console-transaction-failed");
                 return;
@@ -108,8 +112,9 @@ public sealed partial class ShipyardSystem
                 stagingMapId,
                 shuttleUid,
                 vessel,
-                vessel.Price,
-                ent.Comp.Account));
+                price,
+                ent.Comp.Account,
+                ent.Comp.UseTickets));
             purchaseQueued = true;
             UpdateUi(ent);
         }
@@ -214,12 +219,12 @@ public sealed partial class ShipyardSystem
             LogType.StorePurchase,
             LogImpact.Medium,
             $"{ToPrettyString(purchase.Actor):player} purchased shuttle {ToPrettyString(purchase.Shuttle):shuttle} "
-            + $"({purchase.Vessel.ID}) for {purchase.Price} credits from {purchase.Account} using "
+            + $"({purchase.Vessel.ID}) for {purchase.Price} {(purchase.UseTickets ? "tickets" : "credits")} from {purchase.Account} using "
             + $"{ToPrettyString(ent):console}.");
         _audio.PlayPvs(ent.Comp.ConfirmSound, ent);
         if (Exists(purchase.Actor))
             _popup.PopupEntity(Loc.GetString("shipyard-console-purchase-success"), ent, purchase.Actor);
-        Announce(ent, "shipyard-console-purchase-announcement",
+        Announce(ent, purchase.UseTickets ? "shipyard-console-ticket-purchase-announcement" : "shipyard-console-purchase-announcement",
             ("ship", Loc.GetString(purchase.Vessel.Name)), ("cost", purchase.Price));
         UpdateUi(ent);
     }
@@ -239,18 +244,21 @@ public sealed partial class ShipyardSystem
 
     private bool RefundPendingPurchase(PendingShipyardPurchase purchase)
     {
-        if (!TryComp<StationBankAccountComponent>(purchase.Station, out var bank) ||
-            !TryAdjustBankAccount((purchase.Station, bank), purchase.Account, purchase.Price))
+        var refunded = purchase.UseTickets
+            ? TryAdjustTicketBalance(purchase.Station, purchase.Price)
+            : TryComp<StationBankAccountComponent>(purchase.Station, out var bank) &&
+              TryAdjustBankAccount((purchase.Station, bank), purchase.Account, purchase.Price);
+        if (!refunded)
         {
             Log.Error(
-                "Failed to refund {Price} credits for cancelled shipyard purchase {Vessel} at station {Station}",
+                "Failed to refund {Price} for cancelled shipyard purchase {Vessel} at station {Station}",
                 purchase.Price,
                 purchase.Vessel.ID,
                 ToPrettyString(purchase.Station));
             _adminLogger.Add(
                 LogType.StoreRefund,
                 LogImpact.High,
-                $"Failed to refund {purchase.Price} credits to {purchase.Account} for cancelled shipyard purchase "
+                $"Failed to refund {purchase.Price} {(purchase.UseTickets ? "tickets" : "credits")} to {purchase.Account} for cancelled shipyard purchase "
                 + $"{purchase.Vessel.ID} by {ToPrettyString(purchase.Actor):player}.");
             return false;
         }
@@ -258,7 +266,7 @@ public sealed partial class ShipyardSystem
         _adminLogger.Add(
             LogType.StoreRefund,
             LogImpact.Medium,
-            $"Refunded {purchase.Price} credits to {purchase.Account} for cancelled shipyard purchase "
+            $"Refunded {purchase.Price} {(purchase.UseTickets ? "tickets" : "credits")} to {purchase.Account} for cancelled shipyard purchase "
             + $"{purchase.Vessel.ID} by {ToPrettyString(purchase.Actor):player}.");
         return true;
     }
@@ -378,5 +386,6 @@ public sealed partial class ShipyardSystem
         EntityUid Shuttle,
         ShipyardVesselPrototype Vessel,
         int Price,
-        ProtoId<CargoAccountPrototype> Account);
+        ProtoId<CargoAccountPrototype> Account,
+        bool UseTickets);
 }

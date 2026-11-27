@@ -20,6 +20,12 @@ public sealed partial class ShipyardConsoleComponent : Component
     public ProtoId<CargoAccountPrototype> Account = "Cargo";
 
     /// <summary>
+    /// Whether purchases use the station's shipyard ticket balance.
+    /// </summary>
+    [DataField]
+    public bool UseTickets;
+
+    /// <summary>
     /// Group of vessel prototypes displayed by this console.
     /// </summary>
     [DataField]

@@ -260,6 +260,14 @@
 
 - type: entity
   parent: ShipyardComputerCircuitboard
+  id: SunriseShipyardMiningComputerCircuitboard
+  name: mining shipyard computer board
+  components:
+  - type: ComputerBoard
+    prototype: SunriseComputerShipyardMining
+
+- type: entity
+  parent: ShipyardComputerCircuitboard
   id: ShipyardSecurityComputerCircuitboard
   name: security shipyard computer board
   components:

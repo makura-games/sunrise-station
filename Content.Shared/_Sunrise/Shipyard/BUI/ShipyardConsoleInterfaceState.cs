@@ -13,6 +13,7 @@ public sealed class ShipyardConsoleInterfaceState : BoundUserInterfaceState
 {
     public readonly ProtoId<CargoAccountPrototype> Account;
     public readonly int Balance;
+    public readonly bool UseTickets;
     public readonly ProtoId<ShipyardVesselPrototype>? CurrentShuttle;
     public readonly int CurrentShuttleSellValue;
     public readonly bool TransactionPending;
@@ -21,6 +22,7 @@ public sealed class ShipyardConsoleInterfaceState : BoundUserInterfaceState
     public ShipyardConsoleInterfaceState(
         ProtoId<CargoAccountPrototype> account,
         int balance,
+        bool useTickets,
         ProtoId<ShipyardVesselPrototype>? currentShuttle,
         int currentShuttleSellValue,
         bool transactionPending,
@@ -28,6 +30,7 @@ public sealed class ShipyardConsoleInterfaceState : BoundUserInterfaceState
     {
         Account = account;
         Balance = balance;
+        UseTickets = useTickets;
         CurrentShuttle = currentShuttle;
         CurrentShuttleSellValue = currentShuttleSellValue;
         TransactionPending = transactionPending;

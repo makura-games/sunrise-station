@@ -27,6 +27,108 @@ public sealed class ShipyardSystemTest
 
     private static readonly ProtoId<CargoAccountPrototype> CargoAccount = "Cargo";
 
+    [Test]
+    public async Task VesselInheritsGroupAndSellRate()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        await pair.Server.WaitAssertion(() =>
+        {
+            var prototypes = pair.Server.ResolveDependency<IPrototypeManager>();
+            ProtoId<ShipyardVesselPrototype> vesselId = "ShipyardTestInheritedVessel";
+            ProtoId<ShipyardVesselPrototype> baseId = "ShipyardTestBaseVessel";
+            var vessel = prototypes.Index(vesselId);
+            Assert.That(vessel.Group, Is.EqualTo("test"));
+            Assert.That(vessel.SellRate, Is.EqualTo(0.25f));
+            Assert.That(prototypes.TryIndex(baseId, out _), Is.False);
+        });
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task TicketDepositDoesNotCreditCargoAccount()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var testMap = await pair.CreateTestMap();
+        var entities = server.ResolveDependency<IEntityManager>();
+        var shipyard = entities.System<ShipyardSystem>();
+        var cargo = entities.System<CargoSystem>();
+
+        await server.WaitAssertion(() =>
+        {
+            var station = entities.SpawnEntity("ShipyardTestStation", MapCoordinates.Nullspace);
+            entities.System<StationSystem>().AddGridToStation(station, testMap.Grid);
+            var console = entities.SpawnEntity("ShipyardTestConsole", testMap.GridCoords);
+            var actor = entities.SpawnEntity("MobHuman", testMap.GridCoords);
+            var ticket = entities.SpawnEntity("SalvageTicket10", testMap.GridCoords);
+            var bank = entities.GetComponent<StationBankAccountComponent>(station);
+            entities.GetComponent<ShipyardConsoleComponent>(console).UseTickets = true;
+            Assert.That(cargo.TrySetBankAccount((station, bank), CargoAccount, 123), Is.True);
+            Assert.That(shipyard.TryDepositTicket((console, null), ticket, actor), Is.True);
+            Assert.That(cargo.TryGetAccount((station, bank), CargoAccount, out var balance), Is.True);
+            Assert.That(balance, Is.EqualTo(123));
+            Assert.That(entities.GetComponent<ShipyardTicketAccountComponent>(station).Balance, Is.EqualTo(10));
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task TicketPurchaseAndSaleLeaveCargoAccountUntouched()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var testMap = await pair.CreateTestMap();
+        var entities = server.ResolveDependency<IEntityManager>();
+        var cargo = entities.System<CargoSystem>();
+        EntityUid station = default;
+        EntityUid console = default;
+        EntityUid actor = default;
+
+        await server.WaitAssertion(() =>
+        {
+            station = entities.SpawnEntity("ShipyardTestStation", MapCoordinates.Nullspace);
+            entities.System<StationSystem>().AddGridToStation(station, testMap.Grid);
+            console = entities.SpawnEntity("ShipyardTestConsole", testMap.GridCoords);
+            actor = entities.SpawnEntity("MobHuman", testMap.GridCoords);
+            var bank = entities.GetComponent<StationBankAccountComponent>(station);
+            Assert.That(cargo.TrySetBankAccount((station, bank), CargoAccount, 123), Is.True);
+            entities.AddComponent<ShipyardTicketAccountComponent>(station).Balance = 1000;
+            var component = entities.GetComponent<ShipyardConsoleComponent>(console);
+            component.UseTickets = true;
+            component.PurchaseDelay = TimeSpan.Zero;
+            component.SaleDelay = TimeSpan.Zero;
+            entities.EventBus.RaiseLocalEvent(console, new ShipyardConsolePurchaseMessage(TestVesselId)
+            {
+                Actor = actor,
+                UiKey = ShipyardConsoleUiKey.Key,
+            });
+            Assert.That(entities.GetComponent<ShipyardTicketAccountComponent>(station).Balance, Is.EqualTo(500));
+        });
+
+        await server.WaitRunTicks(1);
+        await server.WaitAssertion(() =>
+        {
+            var component = entities.GetComponent<ShipyardConsoleComponent>(console);
+            Assert.That(component.CurrentShuttle, Is.Not.Null);
+            Assert.That(component.CurrentShuttlePrice, Is.EqualTo(500));
+            entities.EventBus.RaiseLocalEvent(console, new ShipyardConsoleSellMessage
+            {
+                Actor = actor,
+                UiKey = ShipyardConsoleUiKey.Key,
+            });
+        });
+        await server.WaitRunTicks(1);
+        await server.WaitAssertion(() =>
+        {
+            var bank = entities.GetComponent<StationBankAccountComponent>(station);
+            Assert.That(cargo.TryGetAccount((station, bank), CargoAccount, out var balance), Is.True);
+            Assert.That(balance, Is.EqualTo(123));
+            Assert.That(entities.GetComponent<ShipyardTicketAccountComponent>(station).Balance, Is.EqualTo(750));
+        });
+        await pair.CleanReturnAsync();
+    }
+
     [TestPrototypes]
     private const string TestPrototypes = """
         - type: entity
@@ -46,16 +148,39 @@ public sealed class ShipyardSystemTest
             maxSellDistance: 10000
 
         - type: shipyardVessel
+          id: ShipyardTestBaseVessel
+          abstract: true
+          group: test
+          sellRate: 0.25
+
+        - type: shipyardVessel
+          id: ShipyardTestInheritedVessel
+          parent: ShipyardTestBaseVessel
+          name: shipyard-vessel-salvage-mining-name
+          price: 1000
+          gridPath: /Maps/Shuttles/shittle.yml
+
+        - type: shipyardVessel
           id: ShipyardTestVessel
           name: shipyard-vessel-salvage-mining-name
           description: shipyard-vessel-salvage-mining-description
           price: 1000
           group: test
           gridPath: /Maps/Shuttles/shittle.yml
+
+        - type: shipyardVessel
+          id: ShipyardTestVesselCustomRate
+          name: shipyard-vessel-salvage-mining-name
+          description: shipyard-vessel-salvage-mining-description
+          price: 1000
+          sellRate: 0.25
+          group: test
+          gridPath: /Maps/Shuttles/shittle.yml
         """;
 
-    [Test]
-    public async Task PurchaseAndSellShuttle()
+    [TestCase(TestVesselId, ExpectedSaleValue)]
+    [TestCase("ShipyardTestVesselCustomRate", 250)]
+    public async Task PurchaseAndSellShuttle(string vesselId, int expectedSaleValue)
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
@@ -64,7 +189,7 @@ public sealed class ShipyardSystemTest
         var entities = server.ResolveDependency<IEntityManager>();
         var cargo = entities.System<CargoSystem>();
         var stationSystem = entities.System<StationSystem>();
-        ProtoId<ShipyardVesselPrototype> testVessel = TestVesselId;
+        ProtoId<ShipyardVesselPrototype> testVessel = vesselId;
 
         EntityUid station = default;
         EntityUid console = default;
@@ -134,7 +259,7 @@ public sealed class ShipyardSystemTest
             Assert.That(cargo.TryGetAccount((station, bank), CargoAccount, out var balance), Is.True);
             Assert.Multiple(() =>
             {
-                Assert.That(balance, Is.EqualTo(InitialBalance - VesselPrice + ExpectedSaleValue));
+                Assert.That(balance, Is.EqualTo(InitialBalance - VesselPrice + expectedSaleValue));
                 Assert.That(entities.EntityExists(shuttle), Is.False);
                 Assert.That(consoleComponent.CurrentShuttle, Is.Null);
                 Assert.That(consoleComponent.CurrentShuttlePrice, Is.Zero);
