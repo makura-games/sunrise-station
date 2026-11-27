@@ -39,9 +39,7 @@ entities:
     components:
     - type: MetaData
       name: QL-SEC "Москит"
-      desc: SEC "Москит"
     - type: Transform
-      parent: invalid
       pos: -0.015106916,0.014866471
     - type: MapGrid
       chunks:

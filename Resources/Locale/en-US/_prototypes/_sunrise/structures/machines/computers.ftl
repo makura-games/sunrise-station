@@ -1,7 +1,11 @@
 ent-BaseComputerSunrise = computer
     .desc = { ent-BaseComputer.desc }
-ent-ComputerShipyard = shipyard console
-    .desc = Used to purchase and sell shuttles.
+ent-ComputerShipyard = salvage shipyard console
+    .desc = Used to purchase and sell salvage shuttles.
+ent-SunriseComputerShipyardMining = mining shipyard console
+    .desc = Used to purchase and sell mining shuttles.
+ent-ComputerShipyardSecurity = security shipyard console
+    .desc = Used to purchase and sell security shuttles.
 ent-ComputerSaleConsole = sale console
     .desc = Used to sell goods from linked teleport pods. Don't try to unscrew me, idiot.
     .suffix = Finance

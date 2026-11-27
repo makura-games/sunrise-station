@@ -1,7 +1,11 @@
 ent-BaseComputerSunrise = компьютер
     .desc = { ent-BaseComputer.desc }
-ent-ComputerShipyard = консоль верфи
-    .desc = Используется для покупки и продажи шаттлов.
+ent-ComputerShipyard = консоль верфи утилизаторов
+    .desc = Используется для покупки и продажи шаттлов утилизаторов.
+ent-SunriseComputerShipyardMining = консоль верфи шахтёров
+    .desc = Используется для покупки и продажи шахтёрских шаттлов.
+ent-ComputerShipyardSecurity = консоль верфи СБ
+    .desc = Используется для покупки и продажи шаттлов службы безопасности.
 ent-ComputerSaleConsole = консоль продажи
     .desc = Используется для продажи товаров из связанных телепортационных капсул. Не пытайся открутить меня, идиот.
     .suffix = Финансы

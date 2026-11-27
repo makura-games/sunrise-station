@@ -39,7 +39,7 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: QL-SEC "Stargaze" M2
+      name: QL-SEC "Звездочет" M2
     - type: Transform
       parent: invalid
       pos: -1.46875,0.65625

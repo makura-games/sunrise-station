@@ -1,0 +1,133 @@
+# region Salvage price on console in Ticket
+- type: shipyardVessel
+  id: BaseSalvageShip
+  abstract: true
+  group: salvage
+  sellRate: 0.8 # Возврат до 80% цены покупки
+
+- type: shipyardVessel
+  id: SalvageShipMining
+  parent: BaseSalvageShip
+  name: shipyard-vessel-salvage-mining-name
+  description: shipyard-vessel-salvage-mining-description
+  price: 12000
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/mining.yml
+
+- type: shipyardVessel
+  id: SalvageShipAsteroidcracker
+  parent: BaseSalvageShip
+  name: shipyard-vessel-salvage-asteroidcracker-name
+  description: shipyard-vessel-salvage-asteroidcracker-description
+  price: 15000
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/asteroidcracker.yml
+
+- type: shipyardVessel
+  id: SalvageShipBison
+  parent: BaseSalvageShip
+  name: shipyard-vessel-salvage-bison-name
+  description: shipyard-vessel-salvage-bison-description
+  price: 60000
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/bison.yml
+
+- type: shipyardVessel
+  id: SalvageShipChisel
+  parent: BaseSalvageShip
+  name: shipyard-vessel-salvage-chisel-name
+  description: shipyard-vessel-salvage-chisel-description
+  price: 12000
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/chisel.yml
+
+- type: shipyardVessel
+  id: SalvageShipExpeditioneer
+  parent: BaseSalvageShip
+  name: shipyard-vessel-salvage-expeditioneer-name
+  description: shipyard-vessel-salvage-expeditioneer-description
+  price: 18000
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/expeditioneer.yml
+
+- type: shipyardVessel
+  id: SalvageShipNomad
+  parent: BaseSalvageShip
+  name: shipyard-vessel-salvage-nomad-name
+  description: shipyard-vessel-salvage-nomad-description
+  price: 30000
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/nomad.yml
+
+- type: shipyardVessel
+  id: SalvageShipOredozer
+  parent: BaseSalvageShip
+  name: shipyard-vessel-salvage-oredozer-name
+  description: shipyard-vessel-salvage-oredozer-description
+  price: 50000
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/oredozer.yml
+
+- type: shipyardVessel
+  id: SalvageShipPickaxe
+  parent: BaseSalvageShip
+  name: shipyard-vessel-salvage-pickaxe-name
+  description: shipyard-vessel-salvage-pickaxe-description
+  price: 14000
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/pickaxe.yml
+
+- type: shipyardVessel
+  id: SalvageShipSiera
+  parent: BaseSalvageShip
+  name: shipyard-vessel-salvage-siera-name
+  description: shipyard-vessel-salvage-siera-description
+  price: 28000
+  gridPath: /Maps/_Sunrise/Shuttles/Salvage/siera.yml
+
+# region Security
+- type: shipyardVessel
+  id: BaseSecurityShip
+  abstract: true
+  group: security
+  sellRate: 0.5 # Возврат до 50%
+
+- type: shipyardVessel
+  id: SecurityShipPatrol
+  parent: BaseSecurityShip
+  name: shipyard-vessel-security-patrol-name
+  description: shipyard-vessel-security-patrol-description
+  price: 20000
+  gridPath: /Maps/_Sunrise/Shuttles/Security/security.yml
+
+- type: shipyardVessel
+  id: SecurityShipAvangard
+  parent: BaseSecurityShip
+  name: shipyard-vessel-security-avangard-name
+  description: shipyard-vessel-security-avangard-description
+  price: 45000
+  gridPath: /Maps/_Sunrise/Shuttles/Security/vanguard.yml
+
+- type: shipyardVessel
+  id: SunriseSecurityShipArrow
+  parent: BaseSecurityShip
+  name: shipyard-vessel-security-arrow-name
+  description: shipyard-vessel-security-arrow-description
+  price: 45000
+  gridPath: /Maps/_Sunrise/Shuttles/Security/arrow.yml
+
+- type: shipyardVessel
+  id: SecurityShipMosquitt
+  parent: BaseSecurityShip
+  name: shipyard-vessel-security-mosquitt-name
+  description: shipyard-vessel-security-mosquitt-description
+  price: 28000
+  gridPath: /Maps/_Sunrise/Shuttles/Security/mosquitt.yml
+
+- type: shipyardVessel
+  id: SecurityShipShitcurity
+  parent: BaseSecurityShip
+  name: shipyard-vessel-security-shitcurity-name
+  description: shipyard-vessel-security-shitcurity-description
+  price: 80000
+  gridPath: /Maps/_Sunrise/Shuttles/Security/shitcurity.yml
+
+- type: shipyardVessel
+  id: SecurityShipStargaze
+  parent: BaseSecurityShip
+  name: shipyard-vessel-security-stargaze-name
+  description: shipyard-vessel-security-stargaze-description
+  price: 60000
+  gridPath: /Maps/_Sunrise/Shuttles/Security/stargaze.yml
