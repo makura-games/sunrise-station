@@ -69,13 +69,13 @@ ent-PosterLegitOpenGift = открытый подарок
 ent-PosterLegitRedLight = красная гирлянда
     .desc = Новогодний постер с гирляндой. Для тех у кого не хватило денег на реальную гирлянду.
     .suffix = Новый Год
-ent-PosterLegitCandles = свечки
+ent-SunrisePosterLegitCandles = свечки
     .desc = Новогодний постер с свечками. Для тех у кого не хватило денег на реальные свечки.
     .suffix = Новый Год
-ent-PosterLegitStocking = носочки
+ent-SunrisePosterLegitStocking = носочки
     .desc = Новогодний постер с новогодними носками.
     .suffix = Новый Год
-ent-PosterLegitWreath = венок
+ent-SunrisePosterLegitWreath = венок
     .desc = Это венок.
     .suffix = Новый Год
 

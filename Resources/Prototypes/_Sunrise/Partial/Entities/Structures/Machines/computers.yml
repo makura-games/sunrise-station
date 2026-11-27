@@ -10,6 +10,6 @@
       enum.HolidayVisuals.Holiday:
         festiveSeason:
           festive:
-            sprite: _Sunrise/Holiday/Structures/Machines/computers.rsi
-            state: festive
+            sprite: _Sunrise/HolidayMarkings/festiveseason32.rsi
+            state: console_festive
             visible: true

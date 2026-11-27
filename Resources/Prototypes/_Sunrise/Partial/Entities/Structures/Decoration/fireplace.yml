@@ -6,6 +6,6 @@
       enum.HolidayVisuals.Holiday:
         christmas:
           festive:
-            sprite: _Sunrise/Holiday/Structures/Decoration/fireplace.rsi
-            state: festive
+            sprite: _Sunrise/HolidayMarkings/festiveseason64.rsi
+            state: fireplace_festive
             visible: true

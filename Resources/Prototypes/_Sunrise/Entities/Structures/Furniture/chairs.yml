@@ -76,7 +76,7 @@
     damageModifierSet: PlastitaniumMod
 
 - type: entity
-  id: ChairFatherFrost
+  id: SunriseChairFatherFrost
   parent: ComfyChair
   name: Father Frost's Chair
   suffix: NewYear

@@ -10,8 +10,8 @@
       enum.HolidayVisuals.Holiday:
         festiveSeason:
           festive:
-            sprite: _Sunrise/Holiday/Structures/Machines/VendingMachines/medical.rsi
-            state: festive
+            sprite: _Sunrise/HolidayMarkings/festiveseason32.rsi
+            state: nanomed_festive
             visible: true
 
 - type: !PartialOnly entity
@@ -26,6 +26,6 @@
       enum.HolidayVisuals.Holiday:
         festiveSeason:
           festive:
-            sprite: _Sunrise/Holiday/Structures/Machines/VendingMachines/boozeomat.rsi
-            state: festive
+            sprite: _Sunrise/HolidayMarkings/festiveseason32.rsi
+            state: boozeomat_festive
             visible: true

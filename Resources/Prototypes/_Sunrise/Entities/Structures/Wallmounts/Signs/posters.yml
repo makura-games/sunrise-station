@@ -58,7 +58,7 @@
 
 - type: entity # Sunrise-TODO: Руки прочь! Это на новый год! #NEWYEAR
   parent: PosterBase
-  id: PosterLegitNewYearTree
+  id: SunrisePosterLegitNewYearTree
   name: "tired tree"
   description: "A New Year's poster with a bald Christmas tree. In memory of all the affected Christmas trees after the first of January."
   suffix: NewYear
@@ -70,8 +70,8 @@
     state: christmas_tree_poster
 
 - type: entity
-  parent: PosterLegitNewYearTree
-  id: PosterLegitNewClosedGift
+  parent: SunrisePosterLegitNewYearTree
+  id: SunrisePosterLegitNewClosedGift
   name: "gift"
   description: "A New Year's poster with a closed gift. What's in it?"
   suffix: NewYear
@@ -80,8 +80,8 @@
     state: closedgiftposter
 
 - type: entity
-  parent: PosterLegitNewYearTree
-  id: PosterLegitNewGreenLight
+  parent: SunrisePosterLegitNewYearTree
+  id: SunrisePosterLegitNewGreenLight
   name: "green garland"
   description: "New Year's poster with a garland. For those who didn't have enough money for a real garland."
   suffix: NewYear
@@ -90,8 +90,8 @@
     state: greenlight
 
 - type: entity
-  parent: PosterLegitNewYearTree
-  id: PosterLegitGrueSomeSanta
+  parent: SunrisePosterLegitNewYearTree
+  id: SunrisePosterLegitGrueSomeSanta
   name: "suspicious Santa Claus"
   description: "A New Year's poster with a strange Santa Claus. Are you sure this is a poster from NanoTrasen?"
   suffix: NewYear
@@ -100,8 +100,8 @@
     state: gruesomesanta
 
 - type: entity
-  parent: PosterLegitNewYearTree
-  id: PosterLegitOpenGift
+  parent: SunrisePosterLegitNewYearTree
+  id: SunrisePosterLegitOpenGift
   name: "open gift"
   description: "A New Year's poster with an open gift. WHO HAS ALREADY OPENED THE GIFT?"
   suffix: NewYear
@@ -110,8 +110,8 @@
     state: opengiftposter
 
 - type: entity
-  parent: PosterLegitNewYearTree
-  id: PosterLegitRedLight
+  parent: SunrisePosterLegitNewYearTree
+  id: SunrisePosterLegitRedLight
   name: "red garland"
   description: "New Year's poster with a garland. For those who didn't have enough money for a real garland."
   suffix: NewYear
@@ -120,8 +120,8 @@
     state: redlight
 
 - type: entity
-  parent: PosterLegitNewYearTree
-  id: PosterLegitCandles
+  parent: SunrisePosterLegitNewYearTree
+  id: SunrisePosterLegitCandles
   name: "Candles"
   description: "New Year's poster with a candles. For those who didn't have enough money for a real candles."
   suffix: NewYear
@@ -130,9 +130,9 @@
     state: christmas_candles
 
 - type: entity
-  parent: PosterLegitNewYearTree
-  id: PosterLegitStocking
-  name: "Strocking"
+  parent: SunrisePosterLegitNewYearTree
+  id: SunrisePosterLegitStocking
+  name: "Stockings"
   description: "New Year's poster with a stocking. For those who didn't have enough money for a real stocking."
   suffix: NewYear
   components:
@@ -140,8 +140,8 @@
     state: christmas_stocking
 
 - type: entity
-  parent: PosterLegitNewYearTree
-  id: PosterLegitWreath
+  parent: SunrisePosterLegitNewYearTree
+  id: SunrisePosterLegitWreath
   name: "Wreath"
   description: "New Year's poster with a wreath. For those who didn't have enough money for a real wreath."
   suffix: NewYear

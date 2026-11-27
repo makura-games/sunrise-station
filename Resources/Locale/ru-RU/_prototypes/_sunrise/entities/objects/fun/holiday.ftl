@@ -1,8 +1,8 @@
-ent-FestiveDecor1 = праздничное украшение
+ent-SunriseFestiveDecor1 = праздничное украшение
     .desc = Праздничное украшение к Новому году.
-ent-FestiveDecor2 = праздничное украшение
+ent-SunriseFestiveDecor2 = праздничное украшение
     .desc = Праздничное украшение к Новому году.
-ent-FestiveToy1 = новогодняя игрушка
+ent-SunriseFestiveToy1 = новогодняя игрушка
     .desc = Новогодняя игрушка, которая пищит.
-ent-FestiveToy2 = новогодняя игрушка
+ent-SunriseFestiveToy2 = новогодняя игрушка
     .desc = Новогодняя игрушка, которая пищит.
