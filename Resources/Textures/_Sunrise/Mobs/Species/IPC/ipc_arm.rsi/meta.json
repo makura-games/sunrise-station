@@ -1,0 +1,24 @@
+﻿{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made by Ascal 0.2",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        { "name": "l_arm", "directions": 4 },
+        { "name": "l_arm_h", "directions": 4 },
+        { "name": "l_arm_l", "directions": 4 },
+        { "name": "l_hand", "directions": 4 },
+        { "name": "l_hand_h", "directions": 4 },
+        { "name": "l_hand_l", "directions": 4 },
+
+        { "name": "r_arm", "directions": 4 },
+        { "name": "r_arm_l", "directions": 4 },
+        { "name": "r_arm_h", "directions": 4 },
+        { "name": "r_hand", "directions": 4 },
+        { "name": "r_hand_h", "directions": 4 },
+        { "name": "r_hand_l", "directions": 4 }
+    ]
+}

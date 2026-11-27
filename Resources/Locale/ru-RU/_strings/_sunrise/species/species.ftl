@@ -7,3 +7,4 @@ species-name-resomi = Резоми
 species-name-demon = Аркана
 species-name-abductor = Абдуктор
 species-name-milira = Милира
+species-name-IPC = Машина

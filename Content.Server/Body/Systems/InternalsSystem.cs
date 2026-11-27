@@ -1,4 +1,5 @@
 using Content.Server.Atmos.EntitySystems;
+using Content.Server.Body.Components; // Sunrise-Edit
 using Content.Shared.Alert;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Components;
@@ -23,6 +24,8 @@ public sealed partial class InternalsSystem : SharedInternalsSystem
 
     private void OnStartingGear(EntityUid uid, InternalsComponent component, ref StartingGearEquippedEvent args)
     {
+        if (!HasComp<RespiratorComponent>(uid)) return; // Sunrise-Edit для кпб
+
         if (component.BreathTools.Count == 0)
             return;
 

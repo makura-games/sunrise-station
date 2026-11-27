@@ -1,0 +1,14 @@
+- type: entity
+  id: OrganIPCEyes
+  suffix: IPC
+  parent: OrganHumanEyes
+  name: eye
+  description: "I see you!"
+  components:
+  - type: FunctionalOrgan
+    comps:
+    - type: FlashModifier
+      modifier: 5
+  - type: Sprite
+    sprite: _Sunrise/Mobs/Species/IPC/organs.rsi
+    state: eyes

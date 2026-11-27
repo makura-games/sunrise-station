@@ -31,6 +31,10 @@
       name: roadmap-goal-blood-cult-name
       desc: roadmap-goal-blood-cult-desc
       state: Complete
+    - id: ipc-name
+      name: roadmap-goal-ipc-name
+      desc: roadmap-goal-ipc-desc
+      state: Complete
     - id: mechs-name
       name: roadmap-goal-mechs-name
       desc: roadmap-goal-mechs-desc
@@ -102,10 +106,6 @@
     - id: economy-name
       name: roadmap-goal-economy-name
       desc: roadmap-goal-economy-desc
-      state: Planned
-    - id: ipc-name
-      name: roadmap-goal-ipc-name
-      desc: roadmap-goal-ipc-desc
       state: Planned
     - id: blob-name
       name: roadmap-goal-blob-name

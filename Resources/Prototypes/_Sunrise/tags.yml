@@ -501,6 +501,9 @@
   id: KolobokRLeg
 
 - type: Tag
+  id: IPC # тег с которым существо будет получать урон от ЭМИ/EMP
+
+- type: Tag
   id: Durand
 
 - type: Tag
