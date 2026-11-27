@@ -50,3 +50,29 @@
     offset: 0,0.3
     layers:
     - state: sakura
+
+- type: entity
+  parent: DecoratedFirTree
+  id: DecoratedFirTreeVariant1
+  name: decorated fir tree
+  suffix: NewYear
+  description: A very festive tree for a very festive holiday.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _Sunrise/Structures/Decoration/decorated_fir_tree.rsi
+    layers:
+    - state: base_v1
+
+- type: entity
+  parent: DecoratedFirTree
+  id: DecoratedFirTreeVariant2
+  name: decorated fir tree
+  suffix: NewYear
+  description: A very festive tree for a very festive holiday.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _Sunrise/Structures/Decoration/decorated_fir_tree.rsi
+    layers:
+    - state: base_v2

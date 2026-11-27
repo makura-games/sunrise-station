@@ -74,3 +74,14 @@
     state: abductor_chair
   - type: Damageable
     damageModifierSet: PlastitaniumMod
+
+- type: entity
+  id: ChairFatherFrost
+  parent: ComfyChair
+  name: Father Frost's Chair
+  suffix: NewYear
+  description: chair of father frost
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Structures/Furniture/chairs.rsi
+    state: father-frost

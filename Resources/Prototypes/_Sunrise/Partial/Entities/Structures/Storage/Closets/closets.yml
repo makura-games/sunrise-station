@@ -1,0 +1,51 @@
+﻿- type: !PartialOnly entity
+  id: ClosetSteelBase
+  components:
+  - type: HolidayVisuals
+    holidays:
+      festive:
+      - FestiveSeason
+  - type: GenericVisualizer
+    visuals:
+      enum.HolidayVisuals.Holiday:
+        festiveSeason:
+          festive:
+            sprite: _Sunrise/Holiday/Structures/Storage/closet.rsi
+            state: festive
+            visible: true
+      enum.StorageVisuals.Open:
+        festiveDoor:
+          "True":
+            sprite: _Sunrise/Holiday/Structures/Storage/closet.rsi
+            state: festive_door
+            visible: false
+          "False":
+            sprite: _Sunrise/Holiday/Structures/Storage/closet.rsi
+            state: festive_door
+            visible: true
+
+#- type: !PartialOnly entity
+#  id: ClosetEmergencyN2
+#  components:
+#  - type: HolidayVisuals
+#    holidays:
+#      festive:
+#      - FestiveSeason
+#  - type: GenericVisualizer
+#    visuals:
+#      enum.HolidayVisuals.Holiday:
+#        festiveSeason:
+#          festive:
+#            sprite: _Sunrise/Holiday/Structures/Storage/closet.rsi
+#            state: festive
+#            visible: true
+#      enum.StorageVisuals.Open:
+#        festiveDoor:
+#          "True":
+#            sprite: _Sunrise/Holiday/Structures/Storage/closet.rsi
+#            state: festive_door
+#            visible: false
+#          "False":
+#            sprite: _Sunrise/Holiday/Structures/Storage/closet.rsi
+#            state: festive_door
+#            visible: true

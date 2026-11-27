@@ -1,0 +1,31 @@
+﻿- type: !PartialOnly entity
+  id: VendingMachineMedicalBase
+  components:
+  - type: HolidayVisuals
+    holidays:
+      festive:
+      - FestiveSeason
+  - type: GenericVisualizer
+    visuals:
+      enum.HolidayVisuals.Holiday:
+        festiveSeason:
+          festive:
+            sprite: _Sunrise/Holiday/Structures/Machines/VendingMachines/medical.rsi
+            state: festive
+            visible: true
+
+- type: !PartialOnly entity
+  id: VendingMachineBooze
+  components:
+  - type: HolidayVisuals
+    holidays:
+      festive:
+      - FestiveSeason
+  - type: GenericVisualizer
+    visuals:
+      enum.HolidayVisuals.Holiday:
+        festiveSeason:
+          festive:
+            sprite: _Sunrise/Holiday/Structures/Machines/VendingMachines/boozeomat.rsi
+            state: festive
+            visible: true

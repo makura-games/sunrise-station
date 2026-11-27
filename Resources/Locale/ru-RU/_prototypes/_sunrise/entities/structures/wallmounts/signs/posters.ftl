@@ -62,6 +62,16 @@ ent-PosterLegitOpenGift = открытый подарок
 ent-PosterLegitRedLight = красная гирлянда
     .desc = Новогодний постер с гирляндой. Для тех у кого не хватило денег на реальную гирлянду.
     .suffix = Новый Год
+ent-PosterLegitCandles = свечки
+    .desc = Новогодний постер с свечками. Для тех у кого не хватило денег на реальные свечки.
+    .suffix = Новый Год
+ent-PosterLegitStocking = носочки
+    .desc = Новогодний постер с новогодними носками.
+    .suffix = Новый Год
+ent-PosterLegitWreath = венок
+    .desc = Это венок.
+    .suffix = Новый Год
+
 ent-PosterJapanese1 = закат над Тории
     .desc = Плакат в японском стиле.
 ent-PosterJapanese2 = свиток Весенней сакуры

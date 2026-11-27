@@ -62,6 +62,15 @@ ent-PosterLegitOpenGift = open gift
 ent-PosterLegitRedLight = red garland
     .desc = New Year's poster with a garland. For those who didn't have enough money for a real garland.
     .suffix = NewYear
+ent-PosterLegitCandles = candles
+    .desc = A New Year's poster with candles. For those who couldn't afford real candles.
+    .suffix = NewYear
+ent-PosterLegitStocking = stockings
+    .desc = A New Year's poster with Christmas stockings.
+    .suffix = NewYear
+ent-PosterLegitWreath = wreath
+    .desc = It is a wreath.
+    .suffix = NewYear
 
 ent-PosterJapanese1 = sunset over Torii
     .desc = Japanese-style poster.

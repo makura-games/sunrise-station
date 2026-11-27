@@ -1,0 +1,64 @@
+﻿# Новогодние декорации
+- type: entity
+  parent: BaseItem
+  id: FestiveDecor1
+  suffix: NewYear, Decorative
+  name: festive-decoration
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Fun/festive_decoration.rsi
+    layers:
+    - state: festive_decor1
+
+- type: entity
+  parent: BaseItem
+  id: FestiveDecor2
+  suffix: NewYear, Decorative
+  name: festive-decoration
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Fun/festive_decoration.rsi
+    layers:
+    - state: festive_decor2
+
+# Новогодние игрушки
+- type: entity
+  parent: BaseItem
+  id: FestiveToy1
+  suffix: NewYear, Decorative
+  name: festive-toy
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Fun/festive_decoration.rsi
+    layers:
+    - state: festive_toy1
+  - type: EmitSoundOnActivate
+    sound: &BasePlushieSound
+      collection: ToySqueak
+      params:
+        volume: -4
+  - type: EmitSoundOnCollide
+    sound: *BasePlushieSound
+  - type: EmitSoundOnLand
+    sound: *BasePlushieSound
+  - type: EmitSoundOnTrigger
+    sound: *BasePlushieSound
+
+- type: entity
+  parent: BaseItem
+  id: FestiveToy2
+  suffix: NewYear, Decorative
+  name: festive-toy
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Fun/festive_decoration.rsi
+    layers:
+    - state: festive_toy2
+  - type: EmitSoundOnActivate
+    sound: *BasePlushieSound
+  - type: EmitSoundOnCollide
+    sound: *BasePlushieSound
+  - type: EmitSoundOnLand
+    sound: *BasePlushieSound
+  - type: EmitSoundOnTrigger
+    sound: *BasePlushieSound

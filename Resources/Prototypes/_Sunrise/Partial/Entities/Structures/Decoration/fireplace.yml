@@ -1,0 +1,11 @@
+﻿- type: !PartialOnly entity
+  id: Fireplace
+  components:
+  - type: GenericVisualizer
+    visuals:
+      enum.HolidayVisuals.Holiday:
+        christmas:
+          festive:
+            sprite: _Sunrise/Holiday/Structures/Decoration/fireplace.rsi
+            state: festive
+            visible: true
