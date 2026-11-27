@@ -29,6 +29,8 @@
   components:
   - type: Reactive
     groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
       Acidic: [Touch]
   - type: WiresPanel
   - type: Barotrauma
@@ -89,6 +91,7 @@
       Brute:
         sprite: Mobs/Effects/brute_damage.rsi
         color: "#000000"
+  - type: RespiratorImmunity
   - type: TypingIndicator
     proto: robot
   - type: Speech
