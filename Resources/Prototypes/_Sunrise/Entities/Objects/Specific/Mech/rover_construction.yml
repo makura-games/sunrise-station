@@ -9,6 +9,7 @@
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Mech/durand_construction.rsi
     state: darkdurand_armor
+    noRot: true
   - type: Tag
     tags:
     - SunriseRoverArmor

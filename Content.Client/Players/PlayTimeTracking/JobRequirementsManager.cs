@@ -158,17 +158,6 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
         if (!CheckRoleRequirements(reqs, job.ID, profile, out reason))
             return false;
 
-        // Sunrise-Start
-        if (profile != null)
-        {
-            if (job.SpeciesBlacklist.Contains(profile.Species))
-            {
-                reason = FormattedMessage.FromUnformatted(Loc.GetString("species-job-fail", ("name", Loc.GetString($"species-name-{profile.Species.Id.ToLower()}"))));
-                return false;
-            }
-        }
-        // Sunrise-End
-
         return true;
     }
 

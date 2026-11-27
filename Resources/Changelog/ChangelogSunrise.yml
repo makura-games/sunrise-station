@@ -5029,3 +5029,153 @@
     message: Генокрады, коляски, телепорты и многое другое!
   id: 2047
   url: https://github.com/makura-games/sunrise-station/pull/4819
+- author: KaiserMaus
+  time: '2026-11-02T04:59:58.0000000+00:00'
+  changes:
+  - type: Add
+    message: Добавлены новые варианты энергетического щита для СБ и ОБР.
+  - type: Add
+    message: Энергетический щит СБ добавлен в исследования арсенала. Для его открытия требуются продвинутые противодействия беспорядкам и энергетические барьеры.
+  - type: Remove
+    message: Удалена биокодированная версия экспериментального энергетического щита.
+  - type: Tweak
+    message: Экспериментальный энергетический щит теперь доступен без ограничений на всех аплинках синдиката, а его цена повышена с 8 до 12 телекристаллов.
+  - type: Tweak
+    message: Экспериментальный энергетический щит и щит ОБР теперь полностью ломаются после восьми циклов зарядки и разрядки.
+  - type: Tweak
+    message: Оптический термальный сканер в аплинке ОБР теперь поставляется вместе с батареей гиперъёмкости NanoTrasen.
+  - type: Fix
+    message: Исправлена локализация некоторых видов оружия.
+  id: 2048
+  url: https://github.com/makura-games/sunrise-station/pull/4768
+- author: KaiserMaus
+  time: '2026-11-02T19:11:49.0000000+00:00'
+  changes:
+  - type: Add
+    message: (Эксперементально) Добавлена покупка случайного оружейного сейфа в точности как в оружейной службы безопастности. НаноТрейзен может отправить как сейф мк58 так и вариант с интересными образцами.
+  - type: Tweak
+    message: Увеличена цена перстня для создания двойного лазерного меча 14>18 ТК.
+  - type: Tweak
+    message: Набор для постройки шаттла в аплинке теперь имеет плату для консоли управления.
+  id: 2049
+  url: https://github.com/makura-games/sunrise-station/pull/4864
+- author: KaiserMaus
+  time: '2026-11-02T21:31:51.0000000+00:00'
+  changes:
+  - type: Tweak
+    message: Время спавна карпов в разломе карпов сокращено с 50 > 30 секунд.
+  - type: Tweak
+    message: Уменьшено ХП всех драконих видов карпов до изначального уровня а так же их урон.
+  - type: Tweak
+    message: Сила лечения карпового разлома стала слабее 2.5 > 1 для всех типов урона кроме "уколы".
+  - type: Tweak
+    message: Так как было уменьшено количество экспансивных патронов, было уменьшено ХП дракона с 650 > 500.
+  - type: Fix
+    message: Исправлен хитбокс карпов, теперь их радиус в 3 раза больше.
+  - type: Fix
+    message: Исправлен молот синдиката, его вновь можно взять в обе руки.
+  id: 2050
+  url: https://github.com/makura-games/sunrise-station/pull/4763
+- author: Ligyb
+  time: '2026-11-07T00:24:16.0000000+00:00'
+  changes:
+  - type: Tweak
+    message: Спонсоры теперь обходят чёрный список рас на роль
+  id: 2051
+  url: https://github.com/makura-games/sunrise-station/pull/4830
+- author: KaiserMaus
+  time: '2026-11-08T21:07:05.0000000+00:00'
+  changes:
+  - type: Remove
+    message: НаноТрейзен отозвала у РнД станции технологию производства блюспейс коробок и грузовых костюмов, они были удалены.
+  id: 2052
+  url: https://github.com/makura-games/sunrise-station/pull/4884
+- author: kanopus7
+  time: '2026-11-15T08:07:20.0000000+00:00'
+  changes:
+  - type: Fix
+    message: Исправлено исчезновение декалей при сохранении карт.
+  - type: Fix
+    message: Исправлены спавн боргов на чужих станциях и обстрел дружественных боргов турелями.
+  - type: Fix
+    message: Исправлена выдача антагонистов посреди раунда и через админку.
+  - type: Fix
+    message: Восстановлены приоритеты спонсоров на антагонистов и дополнительные слоты персонажей.
+  - type: Fix
+    message: Устранён проход сквозь закрытые двери эвакуации.
+  - type: Fix
+    message: Исправлены сброс внешности резоми, отображение масок вульп и возвращена полная невидимость для ниндзи.
+  - type: Fix
+    message: Устранено получение лишних реагентов при изготовлении медипенов.
+  id: 2053
+  url: https://github.com/makura-games/sunrise-station/pull/4886
+- author: privett
+  time: '2026-11-16T02:23:02.0000000+00:00'
+  changes:
+  - type: Add
+    message: Добавлены шаттлы QLMX Personal Transport Shuttle и QLMX Landing Craft Utility для Центрального командования.
+  - type: Fix
+    message: Доступные игровые карты были изменены с учетом исправления ошибок.
+  - type: Fix
+    message: Большинство шлюзов за исключением некоторых закрытых помещений были заменены на стеклянные, что в случае их закрытия позволяет видеть происходящее в другом помещении.
+  - type: Fix
+    message: Произведена оптимизация избыточной численности службы безопасности на станции Delta.
+  id: 2054
+  url: https://github.com/makura-games/sunrise-station/pull/4887
+  media:
+  - url: https://github.com/user-attachments/assets/4bef7b28-19b7-4e0d-aecb-cb39ce79cadd
+    description: Новые шаттлы на станции ЦК.
+- author: KaiserMaus
+  time: '2026-11-16T18:40:43.0000000+00:00'
+  changes:
+  - type: Tweak
+    message: Консоль шаттлов теперь имеют встроенный динамик на манер громкоговорителя и сообщают глобальные уведомления, уведомления станции через консоль связи все ещё не слышно.
+  id: 2055
+  url: https://github.com/makura-games/sunrise-station/pull/4891
+- author: Nordstream17
+  time: '2026-11-16T18:46:04.0000000+00:00'
+  changes:
+  - type: Add
+    message: Добавлены коробки с волшебными свечами и маленькими волшебными свечами
+  id: 2056
+  url: https://github.com/makura-games/sunrise-station/pull/4604
+- author: ThereDrD
+  time: '2026-11-18T14:45:11.0000000+00:00'
+  changes:
+  - type: Fix
+    message: Исправлена техническая уязвимость в правах технической команды
+  id: 2057
+  url: https://github.com/makura-games/sunrise-station/pull/4894
+- author: dng-cher
+  time: '2026-11-24T20:24:46.0000000+00:00'
+  changes:
+  - type: Add
+    message: Добавлен тайл снега без обводки
+  id: 2058
+  url: https://github.com/makura-games/sunrise-station/pull/4901
+- author: KaiserMaus
+  time: '2026-11-26T15:49:48.0000000+00:00'
+  changes:
+  - type: Add
+    message: Добавлены спрайты и анимации передвижения для мехов СССП.
+  - type: Add
+    message: Добавлена возможность сборки мехов СССП а так же нахождения деталей и частей для его создания на экспедиции СССП.
+  - type: Add
+    message: Добавлен контрабандный плакат на тему Тяжелого меха СССП.
+  - type: Tweak
+    message: Корд больше не использует батарею меха для создания патронов, теперь необходимо физически менять патронные ленты на 50 12.7 патронов для перезарядки. Дополнительные ленты доступны к покупке в аплинке.
+  - type: Fix
+    message: Гномы-Лутокрады пойманы, лут с NPC экспедиций вновь спавнится.
+  id: 2059
+  url: https://github.com/makura-games/sunrise-station/pull/4797
+  media:
+  - url: https://github.com/user-attachments/assets/2a051c60-b7a3-4e16-9003-a863edffbbba
+    description: Колобок
+  - url: https://github.com/user-attachments/assets/cd236ff7-7027-429e-989d-10c7653215c6
+    description: dotnet_r5seEujhTU
+  - url: https://github.com/user-attachments/assets/3f2e5ceb-9302-4b67-9d8c-3f9dbdd53acd
+    description: Плакат
+  - url: https://github.com/user-attachments/assets/3d8e9390-fd2f-4c08-905b-868f5dcc1d78
+    description: Discord_4dJr5PGGXz
+  - url: https://github.com/user-attachments/assets/7b934b27-211a-4dd7-b88a-452bbf82e51a
+    description: Discord_H635vABCgr

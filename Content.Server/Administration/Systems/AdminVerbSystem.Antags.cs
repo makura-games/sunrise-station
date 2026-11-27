@@ -139,7 +139,7 @@ public sealed partial class AdminVerbSystem
             Icon = new SpriteSpecifier.Rsi(new("/Textures/Interface/Misc/job_icons.rsi"), "HeadRevolutionary"),
             Act = () =>
             {
-                _antag.ForceMakeAntag<RevolutionaryRuleComponent>(targetPlayer, DefaultRevsRule);
+                _antag.ForceMakeAntag<RevolutionaryRuleComponent>(targetPlayer, DefaultRevsRule, "HeadRev"); // Sunrise-Edit - назначаем главаря независимо от предпочтений и обычных революционеров.
             },
             Impact = LogImpact.High,
             Message = string.Join(": ", headRevName, Loc.GetString("admin-verb-make-head-rev")),

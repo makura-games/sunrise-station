@@ -46,9 +46,6 @@
     - proto: SalvageSpawnerMobShark
       cost: 8
       prob: 0.1
-    - proto: MobCarpRainbowDragon
-      cost: 3
-      prob: 0.15
     # Sunrise-End
     - proto: MobCarpRainbow # carp version of rouny...
       cost: 3

@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Access;
 using Content.Shared.Guidebook;
-using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
@@ -142,12 +141,6 @@ public sealed partial class JobPrototype : IPrototype
     public List<ProtoId<GuideEntryPrototype>>? Guides;
 
     // Sunrise added start - дополнительные настройки должностей
-    /// <summary>
-    /// Виды, которым недоступна должность.
-    /// </summary>
-    [DataField]
-    public List<ProtoId<SpeciesPrototype>> SpeciesBlacklist = [];
-
     /// <summary>
     /// Всегда использовать точку спавна должности, включая позднее присоединение.
     /// </summary>

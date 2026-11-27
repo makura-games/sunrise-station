@@ -1,6 +1,6 @@
 - type: entity
   id: MechLocker
-  parent: [ BaseMech, IndustrialMech ]
+  parent: [ SunriseMechBreakageDefault, BaseMech, IndustrialMech ]
   name: LockerMech
   description: Slow, but sealed mech. Assembled from trash.
   components:

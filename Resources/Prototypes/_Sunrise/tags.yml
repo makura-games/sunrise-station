@@ -247,6 +247,12 @@
   id: HeavyAmmoBelt127
 
 - type: Tag
+  id: LightAmmoBelt127
+
+- type: Tag
+  id: CartridgeRifleHeavy127mm
+
+- type: Tag
   id: MagazineAR18
 
 - type: Tag
@@ -459,7 +465,40 @@
 # region TODO: Make medical mech
 
 - type: Tag
-  id: DollHouse
+  id: SunriseBlyashankaArmor
+
+- type: Tag
+  id: SunriseBlyashankaLLeg
+
+- type: Tag
+  id: SunriseBlyashankaLLeg2
+
+- type: Tag
+  id: SunriseBlyashankaRLeg
+
+- type: Tag
+  id: SunriseBlyashankaRLeg2
+
+- type: Tag
+  id: SunriseBlyashankaRpd
+
+- type: Tag
+  id: Kolobok
+
+- type: Tag
+  id: KolobokArmor
+
+- type: Tag
+  id: KolobokLArm
+
+- type: Tag
+  id: KolobokLLeg
+
+- type: Tag
+  id: KolobokRArm
+
+- type: Tag
+  id: KolobokRLeg
 
 - type: Tag
   id: Durand
@@ -582,9 +621,6 @@
   id: SunriseRoverArmor
 
 # region Misc / fun
-- type: Tag
-  id: BluespaceBox
-
 - type: Tag
   id: ClownKudzu
 
@@ -788,3 +824,9 @@
 
 - type: Tag
   id: MedipenCase # Используется для whitelist у ClothingBeltMedical
+
+- type: Tag
+  id: SunriseDiseaseVaccine # Используется для whitelist у многоразового вакцинного инжектора
+
+- type: Tag
+  id: SunriseDiseaseSerum # Используется в заданиях карго на сыворотку

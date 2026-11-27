@@ -22,9 +22,7 @@
     PatchBurn: 1 # Sunrise-Edit
     PatchBrute: 1 # Sunrise-Edit
   emaggedInventory: # Sunrise Edit
-    StimpackMini: 1 # Sunrise Edit
-    PatchOmni: 5 # Sunrise Edit
-    PatchPack: 1 # Sunrise-Edit
+    PatchOmni: 1 # Sunrise Edit
 
 # All access version. Should reflect the stock of NanoMedInventory, but less powerful
 - type: vendingMachineInventory
@@ -55,8 +53,7 @@
     PatchPackHeat: 1 # Sunrise-Edit
     PatchPackBrute: 1 # Sunrise-Edit
   emaggedInventory: # Sunrise Edit
-    StimpackMini: 1 # Sunrise Edit
-    PatchOmni: 3 # Sunrise Edit
+    PatchOmni: 1 # Sunrise Edit
 
 # Core medical supply vendor
 - type: vendingMachineInventory
@@ -102,9 +99,8 @@
     PatchMedical: 6 # Sunrise-Edit
   emaggedInventory: # Sunrise Edit
     MedipenCaseSyndicate: 1 # Sunrise-Edit
-    Stimpack: 1 # Sunrise Edit
-    PatchOmni: 5 # Sunrise Edit
-    PatchPack: 1 # Sunrise-Edit
+    StimpackMini: 1 # Sunrise Edit
+    PatchOmni: 1 # Sunrise Edit
 
 # All access version. Should reflect NanoMedCivilianWallInventory, but with more stock
 - type: vendingMachineInventory
@@ -122,7 +118,6 @@
     PillCanisterIron: 1
     PillCanisterCopper: 1
     PillCanisterPotassiumIodide: 1
-    MedipenCaseMedic: 1 # Sunrise-Edit
     Ampula: 4 # Sunrise-Edit
     PillTricordrazine: 10
     PillIron: 5
@@ -138,8 +133,6 @@
     FoodApple: 1
     PatchPackBrute: 1 # Sunrise-Edit
     PatchPackHeat: 1 # Sunrise-Edit
+    MedipenCaseMedic: 1 # Sunrise-edit
   emaggedInventory: # Sunrise Edit
-    MedipenCaseSyndicate: 1 # Sunrise-edit
-    Stimpack: 1 # Sunrise Edit
-    PatchOmni: 5 # Sunrise Edit
-    PatchPack: 1 # Sunrise-Edit
+    StimpackMini: 1 # Sunrise Edit
