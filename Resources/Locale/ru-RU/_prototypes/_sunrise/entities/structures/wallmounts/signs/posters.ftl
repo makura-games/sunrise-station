@@ -4,6 +4,13 @@ ent-PosterContrabandSam300 = сам-300
     .desc = Плакат, рекламирующий САМ-300 от Киберсан Индастриз.
 ent-PosterContrabandSyndiMechs = синди мехи
     .desc = Плакат, рекламирующий Мехов от компании Киберсан Индастриз.
+ent-PosterContrabandSovietMechKolobokFortified = советский мех Колобок
+    .desc =
+    МЕДЛЕННЫЙ — НЕ ЗНАЧИТ СЛАБЫЙ.
+    СТАЛЬНАЯ БРОНЯ. ТЯЖЁЛЫЙ ШАГ. НЕОТВРАТИМЫЙ НАТИСК.
+
+    Советский мех Колобок.
+    Опора пехоты. Щит наступления.
 ent-PosterLegitAIOverseer = ИИ видит
     .desc = Автоматизировать можно всё, даже Службу Безопасности.
 ent-PosterLegitDejaVu = зона дежавю

@@ -414,8 +414,6 @@
   - type: ZombieImmune
   - type: Hands
   - type: Puller
-  - type: NameIdentifier
-    group: GenericNumber
   - type: SlowOnDamage
     speedModifierThresholds:
       45: 0.7

@@ -1,0 +1,16 @@
+ent-SunriseBlyashankaHarness = Blyashanka harness
+    .desc = The core of the Blyashanka.
+ent-SunriseBlyashankaLLeg = Blyashanka left leg
+    .desc = The left leg of the Blyashanka. It belongs on the chassis of the mech.
+ent-SunriseBlyashankaRLeg = Blyashanka right leg
+    .desc = The right leg of the Blyashanka. It belongs on the chassis of the mech.
+ent-SunriseBlyashankaLLeg2 = left rear leg
+    .desc = The second left leg of the Blyashanka. It belongs on the chassis of the mech.
+ent-SunriseBlyashankaRLeg2 = right rear leg
+    .desc = The second right leg of the Blyashanka. It belongs on the chassis of the mech.
+ent-SunriseBlyashankaChassis = Blyashanka chassis
+    .desc = An in-progress construction of the Blyashanka mech.
+ent-SunriseBlyashankaArmorPlate = Blyashanka armor plates
+    .desc = Armor plates for the Blyashanka exosuit.
+ent-SunriseMechBlyashankaConstructed = { ent-SunriseMechBlyashanka }
+    .desc = { ent-SunriseMechBlyashanka.desc }
