@@ -1,0 +1,23 @@
+- type: !PartialOnly entity
+  id: ClosetSteelBase
+  components:
+  - type: HolidayVisuals
+    holidays:
+      festive:
+      - FestiveSeason
+  - type: GenericVisualizer
+    visuals:
+      enum.HolidayVisuals.Holiday:
+        festiveSeason:
+          festive:
+            sprite: _Sunrise/HolidayMarkings/festiveseason32.rsi
+            state: closet_festive
+            visible: true
+        festiveDoor:
+          festive:
+            sprite: _Sunrise/HolidayMarkings/festiveseason32.rsi
+            state: closet_festive_door
+      enum.StorageVisuals.Open:
+        festiveDoor:
+          True: { visible: false }
+          False: { visible: true }

@@ -1,0 +1,15 @@
+﻿- type: !PartialOnly entity
+  id: BaseComputer
+  components:
+  - type: HolidayVisuals
+    holidays:
+      festive:
+      - FestiveSeason
+  - type: GenericVisualizer
+    visuals:
+      enum.HolidayVisuals.Holiday:
+        festiveSeason:
+          festive:
+            sprite: _Sunrise/HolidayMarkings/festiveseason32.rsi
+            state: console_festive
+            visible: true

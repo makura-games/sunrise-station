@@ -1,0 +1,23 @@
+﻿{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made by olya0523 (discord) https://discord.com/users/848159994511753257",
+    "states": [
+            {
+                "name": "festive_decor1"
+            },
+            {
+                "name": "festive_decor2"
+            },
+            {
+                "name": "festive_toy1"
+            },
+            {
+                "name": "festive_toy2"
+            }
+    ]
+}

@@ -5,7 +5,7 @@
       "y": 32
     },
     "license": "CC-BY-SA-3.0",
-    "copyright": " ",
+    "copyright": "{christmas_candles, christmas_stocking, christmas_wreath} => made by olya0523 (discord) https://discord.com/users/848159994511753257",
     "states": [
         {
             "name": "christmas_tree_poster"
@@ -24,6 +24,15 @@
         },
         {
             "name": "redlight"
+        },
+        {
+            "name": "christmas_candles"
+        },
+        {
+            "name": "christmas_stocking"
+        },
+        {
+            "name": "christmas_wreath"
         }
     ]
 }
