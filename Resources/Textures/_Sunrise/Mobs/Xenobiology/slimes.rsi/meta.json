@@ -1,0 +1,565 @@
+{
+    "version":  1,
+    "license":  "CC-BY-SA-4.0",
+    "copyright":  "Sprites by .askal02 (Discord)",
+    "size":  {
+                 "x":  32,
+                 "y":  32
+             },
+    "states":  [
+                   {
+                       "name":  "slime_gold_dead"
+                   },
+                   {
+                       "name":  "slime_quartz_dead"
+                   },
+                   {
+                       "name":  "slime_plasmaore_dead"
+                   },
+                   {
+                       "name":  "slime_diamondore_dead"
+                   },
+                   {
+                       "name":  "slime_salt_dead"
+                   },
+                   {
+                       "name":  "slime_silverore_dead"
+                   },
+                   {
+                       "name":  "slime_ironore_dead"
+                   },
+                   {
+                       "name":  "slime_pyrite_dead"
+                   },
+                   {
+                       "name":  "slime_sepia_dead"
+                   },
+                   {
+                       "name":  "slime_black_dead"
+                   },
+                   {
+                       "name":  "slime_azure_dead"
+                   },
+                   {
+                       "name":  "slime_oil_dead"
+                   },
+                   {
+                       "name":  "slime_pink_dead"
+                   },
+                   {
+                       "name":  "slime_blue_dead"
+                   },
+                   {
+                       "name":  "slime_orange_dead"
+                   },
+                   {
+                       "name":  "slime_purple_dead"
+                   },
+                   {
+                       "name":  "slime_bluespace_dead"
+                   },
+                   {
+                       "name":  "slime_gray_dead"
+                   },
+                   {
+                       "name":  "slime_iron_dead_variant_0"
+                   },
+                   {
+                       "name":  "slime_iron_dead_variant_1"
+                   },
+                   {
+                       "name":  "slime_iron_dead"
+                   },
+                   {
+                       "name":  "slime_yellow_dead"
+                   },
+                   {
+                       "name":  "slime_green_dead"
+                   },
+                   {
+                       "name":  "slime_uraniumore_dead"
+                   },
+                   {
+                       "name":  "slime_red_dead"
+                   },
+                   {
+                       "name":  "slime_meat_dead"
+                   },
+                   {
+                       "name":  "slime_silver_dead"
+                   },
+                   {
+                       "name":  "slime_darkblue_dead"
+                   },
+                   {
+                       "name":  "slime_darkpink_dead"
+                   },
+                   {
+                       "name":  "slime_lightpink_dead"
+                   },
+                   {
+                       "name":  "slime_bananium_dead"
+                   },
+                   {
+                       "name":  "slime_coal_dead"
+                   },
+                   {
+                       "name":  "slime_goldore_dead"
+                   },
+                   {
+                       "name":  "slime_gold_extract"
+                   },
+                   {
+                       "name":  "slime_quartz_extract"
+                   },
+                   {
+                       "name":  "slime_plasmaore_extract"
+                   },
+                   {
+                       "name":  "slime_diamondore_extract"
+                   },
+                   {
+                       "name":  "slime_salt_extract"
+                   },
+                   {
+                       "name":  "slime_silverore_extract"
+                   },
+                   {
+                       "name":  "slime_ironore_extract"
+                   },
+                   {
+                       "name":  "slime_pyrite_extract"
+                   },
+                   {
+                       "name":  "slime_sepia_extract"
+                   },
+                   {
+                       "name":  "slime_black_extract"
+                   },
+                   {
+                       "name":  "slime_azure_extract"
+                   },
+                   {
+                       "name":  "slime_oil_extract"
+                   },
+                   {
+                       "name":  "slime_pink_extract"
+                   },
+                   {
+                       "name":  "slime_blue_extract"
+                   },
+                   {
+                       "name":  "slime_orange_extract"
+                   },
+                   {
+                       "name":  "slime_purple_extract_variant_0"
+                   },
+                   {
+                       "name":  "slime_purple_extract_variant_1"
+                   },
+                   {
+                       "name":  "slime_purple_extract"
+                   },
+                   {
+                       "name":  "slime_bluespace_extract",
+                       "delays":  [
+                                      [
+                                          0.1,
+                                          0.1
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_gray_extract"
+                   },
+                   {
+                       "name":  "slime_iron_extract"
+                   },
+                   {
+                       "name":  "slime_yellow_extract"
+                   },
+                   {
+                       "name":  "slime_green_extract",
+                       "delays":  [
+                                      [
+                                          0.1,
+                                          0.1,
+                                          0.1
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_uraniumore_extract",
+                       "delays":  [
+                                      [
+                                          0.1,
+                                          0.1,
+                                          0.1
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_red_extract"
+                   },
+                   {
+                       "name":  "slime_meat_extract_variant_0"
+                   },
+                   {
+                       "name":  "slime_meat_extract_variant_1"
+                   },
+                   {
+                       "name":  "slime_meat_extract"
+                   },
+                   {
+                       "name":  "slime_silver_extract"
+                   },
+                   {
+                       "name":  "slime_darkblue_extract"
+                   },
+                   {
+                       "name":  "slime_darkpink_extract"
+                   },
+                   {
+                       "name":  "slime_lightpink_extract"
+                   },
+                   {
+                       "name":  "slime_bananium_extract"
+                   },
+                   {
+                       "name":  "slime_coal_extract"
+                   },
+                   {
+                       "name":  "slime_goldore_extract"
+                   },
+                   {
+                       "name":  "slime_gold",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_oil",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_quartz",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_plasmaore",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_diamondore",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_salt",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_silverore",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_ironore",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_pyrite",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_sepia",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_black",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_azure",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_pink",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_blue",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_orange",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_purple",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_bluespace",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_gray",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_iron_variant_0",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_iron_variant_1",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_iron",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_yellow",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_green",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_uraniumore",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_red",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_meat",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_silver",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_darkblue",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_darkpink",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_lightpink",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_bananium",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_coal",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   },
+                   {
+                       "name":  "slime_goldore",
+                       "delays":  [
+                                      [
+                                          0.3,
+                                          0.3,
+                                          0.3
+                                      ]
+                                  ]
+                   }
+               ]
+}
