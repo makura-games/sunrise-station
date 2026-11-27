@@ -41,6 +41,24 @@
       strippingWindowPos: 0,2
       displayName: Back
 
+    # `id` allows `IdBind` to associate an owner's name with a token without requiring a separate system. The Great Kostil xD
+    - name: id
+      stripTime: 4
+      slotTexture: neck
+      slotFlags: NECK
+      slotGroup: SecondHotbar
+      uiWindowPos: 0,2
+      strippingWindowPos: 0,3
+      displayName: Neck
+
+    - name: shoes
+      slotTexture: shoes
+      slotFlags: FEET
+      stripTime: 5
+      uiWindowPos: 3,0
+      strippingWindowPos: 1,2
+      displayName: Shoes
+
 # "Not strippable", "hidden"
 
     - name: gloves
@@ -50,11 +68,3 @@
       uiWindowPos: 3,0
       strippingWindowPos: 0,1
       displayName: Gloves
-
-    - name: shoes
-      slotTexture: shoes
-      slotFlags: FEET
-      stripTime: 999999
-      uiWindowPos: 3,0
-      strippingWindowPos: 0,1
-      displayName: Shoes

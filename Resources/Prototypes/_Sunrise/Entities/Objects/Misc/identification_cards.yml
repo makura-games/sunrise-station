@@ -616,64 +616,86 @@
     price: 500
 
 - type: entity
-  parent: USSPDamagedIDCard
-  id: USSPDamagedIDCard1
+  parent: [ BaseSovietContraband, USSPDamagedIDCard ]
+  id: USSPDogtagGreen
+  name: green USSP dog tag
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
+    sprite: _Sunrise/Clothing/Neck/Misc/dogtags.rsi
     layers:
-    - state: ussp-dmg-1
-    - state: department-side
-      color: *color-ussp-side
-    - sprite: *sunrise-icon-rsi
-      offset: *icon-offset
-      state: CrewUSSP
+    - state: icon
+      color: "#b2b663"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#b2b663"
+      right:
+      - state: inhand-right
+        color: "#b2b663"
+  - type: Clothing
+    slots:
+    - neck
+    sprite: _Sunrise/Clothing/Neck/Misc/dogtags.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#b2b663"
+      id:
+      - state: equipped-NECK
+        color: "#b2b663"
+  - type: IdCard
+    nameLocId: name-ussp-dogtag
+    fullNameLocId: name-format-ussp-dogtag
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Sunrise/Items/Handling/metalchain_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Sunrise/Items/Handling/metalchain_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Sunrise/Items/Handling/metalchain_drop.ogg
+  - type: StaticPrice
+    price: 300
 
 - type: entity
-  parent: USSPDamagedIDCard
-  id: USSPDamagedIDCard2
+  parent: USSPDogtagGreen
+  id: USSPDogtagRed
+  name: red USSP dog tag
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
+    sprite: _Sunrise/Clothing/Neck/Misc/dogtags.rsi
     layers:
-    - state: ussp-dmg-2
-    - state: department-side
-      color: *color-ussp-side
-    - sprite: *sunrise-icon-rsi
-      offset: *icon-offset
-      state: CrewUSSP
-
-- type: entity
-  parent: USSPDamagedIDCard
-  id: USSPDamagedIDCard3
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
-    layers:
-    - state: ussp-dmg-3
-    - state: department-side
-      color: *color-ussp-side
-    - sprite: *sunrise-icon-rsi
-      offset: *icon-offset
-      state: CrewUSSP
-
-- type: entity
-  parent: USSPDamagedIDCard
-  id: USSPDamagedIDCard4
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
-    layers:
-    - state: ussp-dmg-4
-    - state: department-side
-      color: *color-ussp-side
-    - sprite: *sunrise-icon-rsi
-      offset: *icon-offset
-      state: CrewUSSP
+    - state: icon
+      color: "#9B3A3A"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#9B3A3A"
+      right:
+      - state: inhand-right
+        color: "#9B3A3A"
+  - type: Clothing
+    slots:
+    - neck
+    sprite: _Sunrise/Clothing/Neck/Misc/dogtags.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#9B3A3A"
+      id:
+      - state: equipped-NECK
+        color: "#9B3A3A"
+  - type: Tag
+    tags:
+    - SovietDamagedIDCardExped
+    - SovietDamagedIDCardsOfficerExped
+  - type: StaticPrice
+    price: 1000
 
 - type: entity
   parent: USSPDamagedIDCard
@@ -686,6 +708,7 @@
     sprite: _Sunrise/Objects/Misc/id_cards.rsi
     layers:
     - state: ussp
+      map: [ "base" ]
     - state: department-side
       color: *color-ussp-side
     - sprite: *sunrise-icon-rsi
@@ -696,67 +719,15 @@
     - SovietDamagedIDCardExped
     - SovietDamagedIDCardsSoldierExped
   - type: StaticPrice
-    price: 2000
-
-- type: entity
-  parent: USSPSoldierDamagedIDCard
-  id: USSPSoldierDamagedIDCard1
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
-    layers:
-    - state: ussp-dmg-1
-    - state: department-side
-      color: *color-ussp-side
-    - sprite: *sunrise-icon-rsi
-      offset: *icon-offset
-      state: SoldierUSSP
-
-- type: entity
-  parent: USSPSoldierDamagedIDCard
-  id: USSPSoldierDamagedIDCard2
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
-    layers:
-    - state: ussp-dmg-2
-    - state: department-side
-      color: *color-ussp-side
-    - sprite: *sunrise-icon-rsi
-      offset: *icon-offset
-      state: SoldierUSSP
-
-- type: entity
-  parent: USSPSoldierDamagedIDCard
-  id: USSPSoldierDamagedIDCard3
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
-    layers:
-    - state: ussp-dmg-3
-    - state: department-side
-      color: *color-ussp-side
-    - sprite: *sunrise-icon-rsi
-      offset: *icon-offset
-      state: SoldierUSSP
-
-- type: entity
-  parent: USSPSoldierDamagedIDCard
-  id: USSPSoldierDamagedIDCard4
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
-    layers:
-    - state: ussp-dmg-4
-    - state: department-side
-      color: *color-ussp-side
-    - sprite: *sunrise-icon-rsi
-      offset: *icon-offset
-      state: SoldierUSSP
+    price: 500
+  - type: RandomSprite
+    available:
+    - base:
+        ussp: ""
+        ussp-dmg-1: ""
+        ussp-dmg-2: ""
+        ussp-dmg-3: ""
+        ussp-dmg-4: ""
 
 - type: entity
   parent: USSPDamagedIDCard
@@ -769,6 +740,7 @@
     sprite: _Sunrise/Objects/Misc/id_cards.rsi
     layers:
     - state: ussp
+      map: [ "base" ]
     - state: department-side
       color: *color-ussp-side
     - sprite: *sunrise-icon-rsi
@@ -779,67 +751,15 @@
     - SovietDamagedIDCardExped
     - SovietDamagedIDCardsOfficerExped
   - type: StaticPrice
-    price: 5000
-
-- type: entity
-  parent: USSPSoldierOfficerDamagedIDCard
-  id: USSPSoldierOfficerDamagedIDCard1
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
-    layers:
-    - state: ussp-dmg-1
-    - state: department-side
-      color: *color-ussp-side
-    - sprite: *sunrise-icon-rsi
-      offset: *icon-offset
-      state: OfficerAltUSSP
-
-- type: entity
-  parent: USSPSoldierOfficerDamagedIDCard
-  id: USSPSoldierOfficerDamagedIDCard2
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
-    layers:
-    - state: ussp-dmg-2
-    - state: department-side
-      color: *color-ussp-side
-    - sprite: *sunrise-icon-rsi
-      offset: *icon-offset
-      state: OfficerAltUSSP
-
-- type: entity
-  parent: USSPSoldierOfficerDamagedIDCard
-  id: USSPSoldierOfficerDamagedIDCard3
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
-    layers:
-    - state: ussp-dmg-3
-    - state: department-side
-      color: *color-ussp-side
-    - sprite: *sunrise-icon-rsi
-      offset: *icon-offset
-      state: OfficerAltUSSP
-
-- type: entity
-  parent: USSPSoldierOfficerDamagedIDCard
-  id: USSPSoldierOfficerDamagedIDCard4
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
-    layers:
-    - state: ussp-dmg-4
-    - state: department-side
-      color: *color-ussp-side
-    - sprite: *sunrise-icon-rsi
-      offset: *icon-offset
-      state: OfficerAltUSSP
+    price: 2500
+  - type: RandomSprite
+    available:
+    - base:
+        ussp: ""
+        ussp-dmg-1: ""
+        ussp-dmg-2: ""
+        ussp-dmg-3: ""
+        ussp-dmg-4: ""
 
 - type: entity
   parent: USSPDamagedIDCard
@@ -852,6 +772,7 @@
     sprite: _Sunrise/Objects/Misc/id_cards.rsi
     layers:
     - state: ussp
+      map: [ "base" ]
     - state: department-side
       color: *color-ussp-side
     - state: department-side-extra-gold-ussp
@@ -863,125 +784,14 @@
     - SovietDamagedIDCardExped
     - SovietDamagedIDCardsCaptainExped
   - type: StaticPrice
-    price: 25000
+    price: 7500
+  - type: RandomSprite
+    available:
+    - base:
+        ussp: ""
+        ussp-dmg-1: ""
+        ussp-dmg-2: ""
+        ussp-dmg-3: ""
+        ussp-dmg-4: ""
 
-- type: entity
-  parent: USSPCaptainDamagedIDCard
-  id: USSPCaptainDamagedIDCard1
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
-    layers:
-    - state: ussp-dmg-1
-    - state: department-side
-      color: *color-ussp-side
-    - state: department-side-extra-gold-ussp
-    - sprite: *sunrise-icon-rsi
-      offset: *icon-offset
-      state: CaptainUSSP
-
-- type: entity
-  parent: USSPCaptainDamagedIDCard
-  id: USSPCaptainDamagedIDCard2
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
-    layers:
-    - state: ussp-dmg-2
-    - state: department-side
-      color: *color-ussp-side
-    - state: department-side-extra-gold-ussp
-    - sprite: *sunrise-icon-rsi
-      offset: *icon-offset
-      state: CaptainUSSP
-
-- type: entity
-  parent: USSPCaptainDamagedIDCard
-  id: USSPCaptainDamagedIDCard3
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
-    layers:
-    - state: ussp-dmg-3
-    - state: department-side
-      color: *color-ussp-side
-    - state: department-side-extra-gold-ussp
-    - sprite: *sunrise-icon-rsi
-      offset: *icon-offset
-      state: CaptainUSSP
-
-- type: entity
-  parent: USSPCaptainDamagedIDCard
-  id: USSPCaptainDamagedIDCard4
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Misc/id_cards.rsi
-    layers:
-    - state: ussp-dmg-4
-    - state: department-side
-      color: *color-ussp-side
-    - state: department-side-extra-gold-ussp
-    - sprite: *sunrise-icon-rsi
-      offset: *icon-offset
-      state: CaptainUSSP
-
-- type: entity
-  id: USSPDamagedIDCardRandomSpawner
-  name: damaged USSP ID card
-  components:
-  - type: RandomSpawner
-    prototypes:
-    - USSPDamagedIDCard
-    - USSPDamagedIDCard1
-    - USSPDamagedIDCard2
-    - USSPDamagedIDCard3
-    - USSPDamagedIDCard4
-    offset: 0
-    deleteSpawnerAfterSpawn: true
-
-- type: entity
-  id: USSPSoldierDamagedIDCardRandomSpawner
-  name: damaged USSP soldier ID card
-  components:
-  - type: RandomSpawner
-    prototypes:
-    - USSPSoldierDamagedIDCard
-    - USSPSoldierDamagedIDCard1
-    - USSPSoldierDamagedIDCard2
-    - USSPSoldierDamagedIDCard3
-    - USSPSoldierDamagedIDCard4
-    offset: 0
-    deleteSpawnerAfterSpawn: true
-
-- type: entity
-  id: USSPSoldierOfficerDamagedIDCardRandomSpawner
-  name: damaged USSP soldier officer ID card
-  components:
-  - type: RandomSpawner
-    prototypes:
-    - USSPSoldierOfficerDamagedIDCard
-    - USSPSoldierOfficerDamagedIDCard1
-    - USSPSoldierOfficerDamagedIDCard2
-    - USSPSoldierOfficerDamagedIDCard3
-    - USSPSoldierOfficerDamagedIDCard4
-    offset: 0
-    deleteSpawnerAfterSpawn: true
-
-- type: entity
-  id: USSPCaptainDamagedIDCardRandomSpawner
-  name: damaged USSP captain ID card
-  components:
-  - type: RandomSpawner
-    prototypes:
-    - USSPCaptainDamagedIDCard
-    - USSPCaptainDamagedIDCard1
-    - USSPCaptainDamagedIDCard2
-    - USSPCaptainDamagedIDCard3
-    - USSPCaptainDamagedIDCard4
-    offset: 0
-    deleteSpawnerAfterSpawn: true
 # region End

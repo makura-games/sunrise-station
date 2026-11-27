@@ -1,0 +1,74 @@
+# Реагенты системы болезней. Ни один из них не лечит полностью: это задача вакцины или сыворотки.
+
+# Подавляет симптомы
+- type: reagent
+  id: SunriseAntitussive
+  name: reagent-name-sunrise-antitussive
+  group: Medicine
+  desc: reagent-desc-sunrise-antitussive
+  physicalDesc: reagent-physical-desc-sunrise-antitussive
+  flavor: medicine
+  color: "#C9A227"
+
+# Подавляет развитие и распространение болезни
+- type: reagent
+  id: SunriseAntimicrobial
+  name: reagent-name-sunrise-antimicrobial
+  group: Medicine
+  desc: reagent-desc-sunrise-antimicrobial
+  physicalDesc: reagent-physical-desc-sunrise-antimicrobial
+  flavor: bitter
+  color: "#4F8A8B"
+
+# Раствор для удаления заразы с объектов
+- type: reagent
+  id: SunriseDisinfectant
+  name: reagent-name-sunrise-disinfectant
+  group: Medicine
+  desc: reagent-desc-sunrise-disinfectant
+  physicalDesc: reagent-physical-desc-sunrise-disinfectant
+  flavor: bitter
+  color: "#AEE6E6"
+  metabolisms:
+    Bloodstream:
+      metabolismRate: 0.5
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 1
+- type: reaction
+  id: SunriseDisinfectant
+  reactants:
+    Ethanol:
+      amount: 1
+    Iodine:
+      amount: 1
+  products:
+    SunriseDisinfectant: 2
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: SunriseChemistryBottleDisinfectant
+  suffix: disinfectant
+  components:
+  - type: Label
+    localizedLabel: reagent-name-sunrise-disinfectant
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SunriseDisinfectant
+        Quantity: 30
+
+- type: entity
+  parent: Beaker
+  id: SunriseBeakerSmallDisinfectant
+  suffix: disinfectant
+  components:
+  - type: Label
+    localizedLabel: reagent-name-sunrise-disinfectant
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SunriseDisinfectant
+        Quantity: 60
