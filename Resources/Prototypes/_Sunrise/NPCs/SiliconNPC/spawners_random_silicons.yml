@@ -140,7 +140,6 @@
   - type: RandomSpawner
     prototypes:
     - MobRogueSiliconT3Tesla
-    - MobRogueSiliconT3Terminator
     - MobRogueSiliconT2DerelictBorgAssaultHeavy
     - MobRogueSiliconT3DerelictBorgSyndicateSaboteur
     chance: 1
@@ -271,4 +270,24 @@
     - WeaponTurretRogueSiliconBullfrog
     - WeaponTurretRogueSiliconVympel
     - WeaponTurretRogueSiliconQuadling
-    rareChance: 0.3
+    rareChance: 0.25
+
+- type: entity
+  name: tick swarm spawner
+  id: SunriseSalvageSpaceTickGroupSpawner
+  parent: MarkerBase
+  suffix: Salvage, 3-6
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Mobs/Aliens/Xenos/spacetick.rsi
+      state: icon
+  - type: EntityTableSpawner
+    offset: 1
+    table: !type:AllSelector
+      children:
+      - id: MobTickSalvage
+        amount: !type:RangeNumberSelector
+          range: 3, 6
+    deleteSpawnerAfterSpawn: true

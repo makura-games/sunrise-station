@@ -174,7 +174,7 @@ An entity is considered “in” PVS if:
 
 ```csharp
 // Inject the system
-[Dependency] private readonly SharedPvsOverrideSystem _pvsOverride = default!;
+[Dependency] private SharedPvsOverrideSystem _pvsOverride = default!;
 
 // === GlobalOverride ===
 // The entity and all the children are visible to everyone. Respects visibility mask and budget.
@@ -196,7 +196,7 @@ _pvsOverride.AddSessionOverrides(uid, filter);
 **Additional** methods are available on the server via `PvsOverrideSystem`:
 
 ```csharp
-[Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+[Dependency] private PvsOverrideSystem _pvsOverride = default!;
 
 // === ForceSend (global) ===
 // Critical entity - ignores budget and visibility mask.
@@ -347,9 +347,9 @@ For each pair (entity, client), the server stores:
 
 | Field | Description |
 |------|----------|
-| `LastSeen` | Tick ​​when the entity was last sent to the client |
-| `LastLeftView` | Tick ​​when the entity left the client's PVS |
-| `EntityLastAcked` | Tick ​​of the last state confirmed by the client that included this entity |
+| `LastSeen` | Tick when the entity was last sent to the client |
+| `LastLeftView` | Tick when the entity left the client's PVS |
+| `EntityLastAcked` | Tick of the last state confirmed by the client that included this entity |
 
 ### PvsSession (per-session)
 

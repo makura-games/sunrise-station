@@ -1,10 +1,22 @@
 - type: entity
+  id: SolutionExplosiveBananaBeaker
+  parent: Solution
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 40
+      canReact: false
+
+- type: entity
   name: explosive banana
   description: explosive banana
   parent: [FoodProduceBase, ItemHeftyBase]
   id: ExplosiveBanana
   components:
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: DamageOnHighSpeedImpact
     minimumSpeed: 0.1
@@ -31,22 +43,22 @@
     sprite: _Sunrise/Objects/Specific/Hydroponics/explosive_banana.rsi
     state: produce
   - type: Produce
-    seedId: ExplosiveBanana
-  - type: SolutionContainerManager
+    plantId: ExplosiveBananaPlants
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 5
+      canReact: false
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: Potassium
+        Quantity: 1
+      - ReagentId: Water
+        Quantity: 1
+  - type: SolutionManager
     solutions:
-      beaker:
-        maxVol: 40
-        canReact: false
-      food:
-        maxVol: 5
-        canReact: false
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Potassium
-          Quantity: 1
-        - ReagentId: Water
-          Quantity: 1
+    - SolutionExplosiveBananaBeaker
   - type: Tag
     tags:
     - Fruit
@@ -64,14 +76,14 @@
     sprite: _Sunrise/Objects/Specific/Hydroponics/coffee_arabica.rsi
     state: produce
   - type: Produce
-    seedId: CoffeeArabica
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: Grcoffee
-          Quantity: 1
+    plantId: CoffeeArabicaPlants
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: Grcoffee
+        Quantity: 1
   - type: Tag
     tags:
     - Fruit
@@ -89,16 +101,16 @@
     sprite: _Sunrise/Objects/Specific/Hydroponics/coffee_robust.rsi
     state: produce
   - type: Produce
-    seedId: CoffeeRobust
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Grcoffee
-          Quantity: 2
-        - ReagentId: Ephedrine
-          Quantity: 1
+    plantId: CoffeeRobustPlants
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 10
+      reagents:
+      - ReagentId: Grcoffee
+        Quantity: 2
+      - ReagentId: Ephedrine
+        Quantity: 1
   - type: Tag
     tags:
     - Fruit
@@ -116,19 +128,19 @@
   - type: FlavorProfile
     flavors:
     - medicine
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 22
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Lacerinol
-          Quantity: 20
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 22
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: Lacerinol
+        Quantity: 20
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/geranium.rsi
   - type: Produce
-    seedId: Geranium
+    plantId: GeraniumPlants
   - type: Extractable
     grindableSolutionName: food
   - type: Tag
@@ -139,43 +151,45 @@
   name: glasscap
   description: Glass doesn't grow on trees! It grows on mushrooms, of course.
   id: GlassLog
-  parent: [GlassSounds, ProduceBase] # Sunrise edit
+  parent: [GlassSounds, ProduceBase, BaseSlicingRefinable] # Sunrise edit
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/glasscap.rsi
-  - type: SolutionContainerManager
+  - type: SolutionManager
   - type: MeleeWeapon
     damage:
       types:
         Blunt: 10
   - type: Produce
-    seedId: glasscap
-  - type: Log
-    spawnedPrototype: SheetGlass1
-    spawnCount: 1
+    plantId: GlasscapPlants
+  - type: ToolRefinable
+    qualityNeeded: Sawing
+    refineResult:
+    - id: SheetGlass1
 
 - type: entity
   name: plaststeelcap
   description: Plaststeel doesn't grow on trees! It grows on mushrooms, of course.
   id: PlastSteelLog
-  parent: ProduceBase
+  parent: [ProduceBase, BaseSlicingRefinable]
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/plaststeelcap.rsi
-  - type: SolutionContainerManager
+  - type: SolutionManager
   - type: MeleeWeapon
     damage:
       types:
         Blunt: 12
   - type: Produce
-    seedId: plaststeelcap
-  - type: Log
-    spawnedPrototype: SheetPlasteel1
-    spawnCount: 1
+    plantId: PlaststeelcapPlants
+  - type: ToolRefinable
+    qualityNeeded: Sawing
+    refineResult:
+    - id: SheetPlasteel1
 
 - type: entity
   name: barrelmelon
-  parent: FoodProduceBase
+  parent: [FoodProduceBase, BaseSlicingRefinableFood]
   id: FoodBarrelmelon
   description: Round brown object that you can slice and eat.
   components:
@@ -184,25 +198,26 @@
   - type: FlavorProfile
     flavors:
     - watermelon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 25
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-        - ReagentId: Moonshine
-          Quantity: 15
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 25
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
+      - ReagentId: Moonshine
+        Quantity: 15
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/barrelmelon.rsi
   - type: Produce
-    seedId: Barrelmelon
+    plantId: BarrelmelonPlants
   - type: Extractable
     juiceSolution:
       reagents:
       - ReagentId: Moonshine
         Quantity: 20
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: DamageOnHighSpeedImpact
     minimumSpeed: 0.1
@@ -222,9 +237,10 @@
         solution: food
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: SliceableFood
-    count: 5
-    slice: FoodBarrelmelonSlice
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodBarrelmelonSlice
+      amount: 5
   - type: Tag
     tags:
     - Fruit
@@ -242,15 +258,15 @@
     - watermelon
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/barrelmelon.rsi
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Moonshine
-          Quantity: 3
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: Moonshine
+        Quantity: 3
   - type: Extractable
     juiceSolution:
       reagents:
@@ -279,18 +295,18 @@
     sprite: _Sunrise/Objects/Specific/Hydroponics/lanternfruit.rsi
     state: produce
   - type: Produce
-    seedId: Lanternfruit
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20
-        reagents:
-        - ReagentId: PulverizedLantern
-          Quantity: 5
-        - ReagentId: Sulfur
-          Quantity: 10
-        - ReagentId: Licoxide
-          Quantity: 5
+    plantId: LanternfruitPlants
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 20
+      reagents:
+      - ReagentId: PulverizedLantern
+        Quantity: 5
+      - ReagentId: Sulfur
+        Quantity: 10
+      - ReagentId: Licoxide
+        Quantity: 5
   - type: Tag
     tags:
     - Fruit
@@ -308,16 +324,16 @@
     sprite: _Sunrise/Objects/Specific/Hydroponics/redrose.rsi
     state: produce
   - type: Produce # TODO добавить флавор цветка когда офы сделают цветомат
-    seedId: Redrose
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 4
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Vitamin
-          Quantity: 2
+    plantId: RedrosePlants
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 4
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: Vitamin
+        Quantity: 2
   - type: Tag
     tags:
     - Fruit
@@ -334,19 +350,19 @@
   - type: Edible
     trash:
     - FoodCornTrash
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 45
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 35
-        - ReagentId: Water
-          Quantity: 10
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 45
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 35
+      - ReagentId: Water
+        Quantity: 10
   - type: Sprite
     sprite: _Sunrise/Objects/Specific/Hydroponics/snapcorn.rsi
   - type: Produce
-    seedId: Snapcorn
+    plantId: SnapcornPlants
 
 - type: entity
   name: white rose
@@ -361,16 +377,16 @@
     sprite: _Sunrise/Objects/Specific/Hydroponics/whiterose.rsi
     state: produce
   - type: Produce # TODO добавить флавор цветка когда офы сделают цветомат
-    seedId: Whiterose
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 4
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Vitamin
-          Quantity: 2
+    plantId: WhiterosePlants
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 4
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: Vitamin
+        Quantity: 2
   - type: Tag
     tags:
     - Fruit
@@ -388,18 +404,18 @@
     sprite: _Sunrise/Objects/Specific/Hydroponics/sunflower.rsi
     state: produce
   - type: Produce
-    seedId: Sunflower
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 6
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Vitamin
-          Quantity: 2
-        - ReagentId: Oil
-          Quantity: 2
+    plantId: SunflowerPlants
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 6
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: Vitamin
+        Quantity: 2
+      - ReagentId: Oil
+        Quantity: 2
   - type: Extractable
     juiceSolution:
       reagents:
@@ -423,16 +439,16 @@
     sprite: _Sunrise/Objects/Specific/Hydroponics/white_lily.rsi
     state: produce
   - type: Produce
-    seedId: WhiteLily
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 4
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Vitamin
-          Quantity: 2
+    plantId: WhiteLilyPlants
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 4
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: Vitamin
+        Quantity: 2
   - type: Tag
     tags:
     - Fruit

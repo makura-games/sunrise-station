@@ -5,21 +5,31 @@
   - MobAtmosExposed
   - MobCombat
   - MobBloodstream
+  - BaseSlicingRefinable
   id: BaseMobFleshCult
   name: flesh mob
   description: A shambling mass of flesh, animated through anomalous energy.
   abstract: true
   components:
     - type: Body
-      prototype: Animal
+    - type: EntityTableContainerFill
+      containers:
+        body_organs: !type:AllSelector
+          children:
+          - id: OrganAnimalLungs
+          - id: OrganAnimalHeart
+          - id: OrganAnimalStomach
+          - id: OrganAnimalLiver
+          - id: OrganAnimalKidneys
     - type: Climbing 
     - type: Reactive
       groups:
         Flammable: [Touch]
         Extinguish: [Touch]
     - type: Damageable
-      damageContainer: Biological
       damageModifierSet: FleshMob
+    - type: Injurable
+      damageContainer: Biological
     - type: HTN
       rootTask:
         task: SimpleHostileCompound
@@ -48,8 +58,8 @@
         0: Alive
         75: Dead
     - type: Appearance
-    - type: Butcherable
-      spawned:
+    - type: ToolRefinable
+      refineResult:
         - id: FoodMeat
           amount: 1
     - type: CombatMode
@@ -84,8 +94,8 @@
           false
         NavSmash: !type:Bool
           true
-    - type: Butcherable
-      spawned:
+    - type: ToolRefinable
+      refineResult:
         - id: FoodMeat
           amount: 2
     - type: FleshMob
@@ -97,8 +107,7 @@
         - map: [ "enum.DamageStateVisualLayers.Base" ]
           state: spider
     - type: Vocal
-      sounds:
-        Unsexed: FleshWormEmote
+      emoteSounds: FleshWormEmote
     - type: DamageStateVisuals
       states:
         Alive:
@@ -177,8 +186,8 @@
       speedModifier: 7
       useSound:
         path: /Audio/Items/crowbar.ogg
-    - type: Butcherable
-      spawned:
+    - type: ToolRefinable
+      refineResult:
         - id: FoodMeat
           amount: 5
     - type: FleshAbilities
@@ -187,8 +196,7 @@
         - FleshCultistAcidSpit
         - FleshCultistAbsorbBloodPool
     - type: Vocal
-      sounds:
-        Unsexed: FleshPudgeEmote
+      emoteSounds: FleshPudgeEmote
     - type: FleshMob
       deathMobSpawnCount: 3
       deathMobSpawnId: MobFleshWorm
@@ -372,8 +380,7 @@
         - ReagentId: Blood
           Quantity: 50
     - type: Vocal
-      sounds:
-        Unsexed: FleshWormEmote
+      emoteSounds: FleshWormEmote
     - type: Fixtures
       fixtures:
         fix1:
@@ -446,8 +453,7 @@
         Dead:
           Base: fleshhugger_dead
     - type: Vocal
-      sounds:
-        Unsexed: FleshWormEmote
+      emoteSounds: FleshWormEmote
     - type: Clothing
       quickEquip: false
       sprite: _Sunrise/FleshCult/flesh_cult_mobs.rsi
@@ -528,8 +534,7 @@
         Dead:
           Base: worm_dead
     - type: Vocal
-      sounds:
-        Unsexed: FleshWormEmote
+      emoteSounds: FleshWormEmote
     - type: Physics
       bodyType: KinematicController
     - type: Fixtures

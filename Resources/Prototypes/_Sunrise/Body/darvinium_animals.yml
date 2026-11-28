@@ -1,0 +1,52 @@
+- type: entity
+  id: SunrisePrimateDarviniumBody
+  abstract: true
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      body_organs: !type:AllSelector
+        children:
+        - id: OrganAnimalLungs
+        - id: OrganPrimateHeart
+        - id: OrganAnimalStomach
+        - id: OrganAnimalLiver
+        - id: OrganAnimalKidneys
+
+- type: entity
+  id: SunriseKoboldDarviniumBody
+  abstract: true
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      body_organs: !type:AllSelector
+        children:
+        - id: OrganAnimalLungs
+        - id: OrganKoboldHeart
+        - id: OrganAnimalStomach
+        - id: OrganAnimalLiver
+        - id: OrganAnimalKidneys
+
+- type: entity
+  id: SunriseWildSlimeDarviniumBody
+  abstract: true
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      body_organs: !type:AllSelector
+        children:
+        - id: SentientWildSlimeCore
+        - id: OrganSlimePersonLungs
+
+- type: entity
+  id: SunriseMothroachDarviniumBody
+  abstract: true
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      body_organs: !type:AllSelector
+        children:
+        - id: OrganAnimalLungs
+        - id: OrganMothroachHeart
+        - id: OrganMothStomach
+        - id: OrganAnimalLiver
+        - id: OrganAnimalKidneys

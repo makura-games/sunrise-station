@@ -16,3 +16,7 @@ ent-ShellTranquilizer = транквилизатор 12 калибра
     .desc = { ent-BaseShellShotgun.desc }
 ent-ShellShotgunUranium = урановая дробь 12 калибра
     .desc = { ent-BaseShellShotgun.desc }
+ent-BaseShellHitscanShotgun = патрон (.50)
+    .desc = { ent-BaseCartridge.desc }
+ent-ShellShotgunUraniumSlug = патрон (.50 урановый снаряд)
+    .desc = { ent-BaseShellHitscanShotgun.desc }

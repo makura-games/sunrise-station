@@ -4,7 +4,7 @@
   suffix: Security, Internal Affairs
   components:
   - type: Label
-    currentLabel: holopad-security-internal-affairs
+    localizedLabel: holopad-security-internal-affairs
 
 - type: entity
   id: HolopadServiceLawyer
@@ -12,4 +12,4 @@
   suffix: Service, Lawyer
   components:
   - type: Label
-    currentLabel: holopad-service-lawyer
+    localizedLabel: holopad-service-lawyer

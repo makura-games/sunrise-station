@@ -1,1 +1,1 @@
-getting-pulled-popup = { CAPITALIZE(THE($puller)) } начинает тащить вас.
+getting-pulled-popup = { CAPITALIZE($puller) } начинает тащить вас.

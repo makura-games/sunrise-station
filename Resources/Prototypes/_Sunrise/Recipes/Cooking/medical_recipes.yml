@@ -198,8 +198,8 @@
   solids:
     BlankMediPen: 1
   reagents:
-    Epinephrine: 12
-    TranexamicAcid: 3
+    Epinephrine: 15
+    TranexamicAcid: 5
   recipeType: MedicalAssembler
 
 - type: microwaveMealRecipe
@@ -210,7 +210,7 @@
   solids:
     BlankMediPen: 1
   reagents:
-    Ultravasculine: 10
+    Stellibinin: 15
     Epinephrine: 5
   recipeType: MedicalAssembler
 

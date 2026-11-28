@@ -119,16 +119,6 @@
   description: crafting-menu-text-MB
 
 - type: construction
-  name: crafting-menu-name-MSH
-  id: WeaponShotgunMakeshift
-  graph: MakeshiftShotgunGraph
-  startNode: start
-  targetNode: shotgun
-  category: construction-category-weapons
-  objectType: Item
-  description: crafting-menu-text-MSH
-
-- type: construction
   name: crafting-menu-name-MS
   id: WeaponSMGMakeshift
   graph: MakeshiftSMGGraph
@@ -267,6 +257,16 @@
   category: construction-category-weapons
   objectType: Item
   description: crafting-menu-text-IMGM
+
+- type: construction
+  name: crafting-menu-name-IMGR556
+  id: MagazineBoxImprovisedRifle556
+  graph: ImprovisedMagazineBoxGraph
+  startNode: startrifle556
+  targetNode: rifle556
+  category: construction-category-weapons
+  objectType: Item
+  description: crafting-menu-text-IMGR556
 
 - type: construction
   name: crafting-menu-name-IMGS

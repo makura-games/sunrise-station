@@ -7,7 +7,6 @@
   startingGear: CBURNGearEVA
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
@@ -29,7 +28,6 @@
   startingGear: CBURNLeaderGear
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security

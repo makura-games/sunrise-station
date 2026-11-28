@@ -1,4 +1,6 @@
 using Content.Shared._Sunrise.Tutorial.Components;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Weapons.Ranged.Events;
 
 namespace Content.Shared._Sunrise.Tutorial.Conditions;
@@ -8,6 +10,8 @@ namespace Content.Shared._Sunrise.Tutorial.Conditions;
 /// </summary>
 public sealed partial class GunShotListenedConditionSystem : EventListenedConditionSystemBase<GunShotListenedCondition>
 {
+    [Dependency] private SharedHandsSystem _hands = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -16,10 +20,26 @@ public sealed partial class GunShotListenedConditionSystem : EventListenedCondit
 
     private void OnAmmoShot(Entity<TutorialObservableComponent> ent, ref AmmoShotEvent args)
     {
-        if (args.Shooter is null || !ent.Comp.Observers.Contains(args.Shooter.Value))
-            return;
+        if (args.Shooter is { } shooter)
+        {
+            if (ent.Comp.Observers.Contains(shooter))
+                RecordEvent(shooter, DefaultKey, ent);
 
-        RecordEvent(args.Shooter.Value, DefaultKey, ent);
+            return;
+        }
+
+        // У серверного события выстрела стрелок сейчас не заполняется, а у hitscan-оружия
+        // нет выпущенного снаряда, по которому его можно было бы восстановить.
+        foreach (var observer in ent.Comp.Observers)
+        {
+            if (!TryComp<HandsComponent>(observer, out var hands) ||
+                !_hands.IsHolding((observer, hands), ent))
+            {
+                continue;
+            }
+
+            RecordEvent(observer, DefaultKey, ent);
+        }
     }
 }
 

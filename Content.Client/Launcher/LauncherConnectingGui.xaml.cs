@@ -21,7 +21,7 @@ namespace Content.Client.Launcher
     [GenerateTypedNameReferences]
     public sealed partial class LauncherConnectingGui : Control
     {
-        [Dependency] private readonly IUriOpener _uri = default!; // Sunrise-Edit
+        [Dependency] private IUriOpener _uri = default!; // Sunrise-Edit
 
         private const float RedialWaitTimeSeconds = 10f; // Sunrise-Edit
         private readonly LauncherConnecting _state;
@@ -194,7 +194,7 @@ namespace Content.Client.Launcher
             var tip = tipList[randomIndex];
             LoginTip.SetMessage(Loc.GetString(tip));
 
-            LoginTipTitle.Text = Loc.GetString("connecting-window-tip", ("numberTip", randomIndex));
+            LoginTipTitle.Text = Loc.GetString("connecting-window-tip", ("numberTip", randomIndex + 1));
         }
 
         protected override void FrameUpdate(FrameEventArgs args)

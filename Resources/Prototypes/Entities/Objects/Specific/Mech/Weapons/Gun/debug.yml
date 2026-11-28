@@ -52,7 +52,7 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: BatteryAmmoProvider
-    proto: RedMediumLaser
+    proto: SunriseMechHitscanRedMediumLaser # Sunrise-Edit
     fireCost: 19
   - type: MagazineVisuals
     magState: mag
@@ -91,7 +91,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
   - type: BatteryAmmoProvider
-    proto: DisablerBolt
+    proto: BulletDisabler
     fireCost: 19
   - type: MagazineVisuals
     magState: mag

@@ -1,10 +1,8 @@
 - type: marking
   id: MiliraEars
   bodyPart: HeadTop
-  markingCategory: HeadTop
   forcedColoring: true
-  followSkinColor: true
-  speciesRestriction: [Milira]
+  groupWhitelist: [ Milira ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Milira/milira_ears.rsi
     state: ears_standard
@@ -12,10 +10,8 @@
 - type: marking
   id: MiliraEarsShortened
   bodyPart: HeadTop
-  markingCategory: HeadTop
   forcedColoring: true
-  followSkinColor: true
-  speciesRestriction: [Milira]
+  groupWhitelist: [ Milira ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Milira/milira_ears.rsi
     state: ears_standard_shortened
@@ -23,10 +19,8 @@
 - type: marking
   id: MiliraEarsStraight
   bodyPart: HeadTop
-  markingCategory: HeadTop
   forcedColoring: true
-  followSkinColor: true
-  speciesRestriction: [Milira]
+  groupWhitelist: [ Milira ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Milira/milira_ears.rsi
     state: ears_straight
@@ -34,10 +28,8 @@
 - type: marking
   id: MiliraEarsCurved
   bodyPart: HeadTop
-  markingCategory: HeadTop
   forcedColoring: true
-  followSkinColor: true
-  speciesRestriction: [Milira]
+  groupWhitelist: [ Milira ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Milira/milira_ears.rsi
     state: ears_curved
@@ -45,10 +37,8 @@
 - type: marking
   id: MiliraEarsCurvedShortened
   bodyPart: HeadTop
-  markingCategory: HeadTop
   forcedColoring: true
-  followSkinColor: true
-  speciesRestriction: [Milira]
+  groupWhitelist: [ Milira ]
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Milira/milira_ears.rsi
     state: ears_curved_shortened

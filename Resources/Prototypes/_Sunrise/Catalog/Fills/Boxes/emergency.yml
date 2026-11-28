@@ -106,8 +106,11 @@
         - id: Flare
         - id: FoodSnackNutribrick
         - id: DrinkWaterBottleFull
+  - type: Storage
+    grid:
+    - 0,0,2,2
   - type: Label
-    currentLabel: без балона
+    localizedLabel: label-box-survival-without-gas
 
 - type: entity
   parent: BoxSurvivalBase
@@ -147,6 +150,9 @@
         - id: Flare
         - id: FoodBreadNutriBatard
         - id: DrinkWaterBottleFull
+  - type: Storage
+    grid:
+    - 0,0,2,2
 
 - type: entity
   parent: BoxSurvivalBase
@@ -186,6 +192,9 @@
         - id: DrinkMREFlask
         - id: FoodTinMRE
         - id: Flare
+  - type: Storage
+    grid:
+    - 0,0,2,2
   - type: Sprite
     layers:
     - state: internals
@@ -211,7 +220,7 @@
     - state: internals
     - state: nitrogentank
   - type: Label
-    currentLabel: reagent-name-nitrogen
+    localizedLabel: reagent-name-nitrogen
 
 - type: entity
   parent: BoxSurvivalBase
@@ -234,13 +243,12 @@
     - state: internals
     - state: extendedtank
 
-# With Beer
+# Mime survival boxes remain separate because Sunrise loadouts use nutribatards.
 
 - type: entity
-  parent: BoxSurvival
-  id: BoxSurvivalWithBeer
-  name: survival box
-  suffix: With beer
+  parent: BoxSurvivalDeluxeExtended
+  id: BoxMime
+  suffix: Mime, Emergency
   components:
   - type: EntityTableContainerFill
     containers:
@@ -248,141 +256,39 @@
         children:
         - id: ClothingMaskBreath
         - id: EmergencyOxygenTankFilled
-        - id: FoodSnackNutribrick
-        - id: DrinkBeerBottleFull
-        - id: Flare
         - id: EmergencyMedipen
-  - type: Label
-    currentLabel: без балона
-
-- type: entity
-  parent: BoxSurvivalBase
-  id: BoxSurvivalEngineeringWithBeer
-  name: extended-capacity survival box
-  description: It's a box with basic internals inside. This one is labelled to contain an extended-capacity tank.
-  suffix: Extended, With beer
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: ClothingMaskBreath
-        - id: ExtendedEmergencyOxygenTankFilled
-        - id: FoodSnackNutribrick
-        - id: DrinkBeerBottleFull
         - id: Flare
-        - id: EmergencyMedipen
-  - type: Sprite
-    layers:
-    - state: internals
-    - state: extendedtank
-
-
-- type: entity
-  parent: BoxSurvivalBase
-  id: BoxSurvivalMedicalWithBeer
-  name: survival box
-  description: It's a box with basic internals inside.
-  suffix: Medical, With beer
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: ClothingMaskBreathMedical
-        - id: EmergencyOxygenTankFilled
-        - id: FoodSnackNutribrick
-        - id: DrinkBeerBottleFull
-        - id: Flare
-        - id: EmergencyMedipen
-  - type: Sprite
-    layers:
-    - state: internals
-    - state: emergencytank
-
-- type: entity
-  parent: BoxSurvivalBase
-  id: BoxHugWithBeer
-  name: box of hugs
-  description: A special box for sensitive people.
-  suffix: Emergency, With beer
-  components:
-  - type: Sprite
-    layers:
-    - state: box_hug
-    - state: heart
-  - type: Item
-    heldPrefix: hug
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: ClothingMaskBreath
-        - id: EmergencyOxygenTankFilled
-        - id: FoodSnackNutribrick
-        - id: DrinkBeerBottleFull
-        - id: Flare
-        - id: EmergencyMedipen
-  - type: Tag
-    tags:
-    - BoxHug
-
-- type: entity
-  parent: BoxSurvival
-  id: BoxMimeWithBeer
-  suffix: Mime, Emergency, With beer
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: ClothingMaskBreath
-        - id: EmergencyOxygenTankFilled
         - id: FoodBreadNutriBatard
-        - id: DrinkBeerBottleFull
-        - id: Flare
-        - id: EmergencyMedipen
+        - id: DrinkWaterBottleFull
 
 - type: entity
-  parent: BoxSurvivalBase
-  id: BoxSurvivalSecurityWithBeer
-  name: survival box
-  description: It's a box with basic internals inside.
-  suffix: Security, With beer
+  parent: BoxSurvivalDeluxeExtendedNitrogen
+  id: BoxMimeNitrogen
+  suffix: Mime, Emergency N2
   components:
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: ClothingMaskGasSecurity
-        - id: ExtendedEmergencyOxygenTankFilled
-        - id: FoodSnackNutribrick
-        - id: DrinkBeerBottleFull
-        - id: Flare
+        - id: ClothingMaskBreath
+        - id: EmergencyNitrogenTankFilled
         - id: EmergencyMedipen
-  - type: Sprite
-    layers:
-    - state: internals
-    - state: emergencytank
+        - id: Flare
+        - id: FoodBreadNutriBatard
+        - id: DrinkWaterBottleFull
 
 - type: entity
-  parent: BoxSurvivalBase
-  id: BoxSurvivalSyndicateWithBeer
-  name: extended-capacity survival box
-  description: It's a box with basic internals inside. This one is labelled to contain an extended-capacity tank.
-  suffix: Syndicate, With beer
+  parent: BoxSurvivalDeluxeExtended
+  id: BoxMimeMoth
+  suffix: Mime, Emergency Moth
   components:
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: ClothingMaskGasSyndicate
-        - id: DoubleEmergencyOxygenTankFilled
-        - id: FoodTinMRE
-        - id: DrinkBeerBottleFull
+        - id: ClothingMaskBreath
+        - id: EmergencyOxygenTankFilled
         - id: EmergencyMedipen
         - id: Flare
-  - type: Sprite
-    layers:
-    - state: internals
-    - state: extendedtank
+        - id: FoodBreadCottonNutriBatard
+        - id: DrinkWaterBottleFull

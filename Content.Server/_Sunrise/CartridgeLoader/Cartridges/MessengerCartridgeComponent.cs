@@ -39,6 +39,12 @@ public sealed partial class MessengerCartridgeComponent : Component
     public EntityUid? LoaderUid;
 
     /// <summary>
+    /// Готов ли открытый UI fragment мессенджера принимать состояние.
+    /// </summary>
+    [ViewVariables]
+    public bool UiReady;
+
+    /// <summary>
     /// Список пользователей
     /// </summary>
     [ViewVariables]

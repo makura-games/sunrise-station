@@ -1,30 +1,21 @@
-second = { $count ->
-    [one] секунда
-    [few] секунды
-    [many] секунд
-   *[other] секунд
-}
-
-dead = { $count ->
-    [one] мёртвый
-    [few] мёртвых
-    [many] мёртвых
-   *[other] мёртвых
-}
--create-3rd-person =
-    { $chance ->
-        [1] Создаёт
-       *[other] создают
-    }
--cause-3rd-person =
+reagent-effect-guidebook-cause-flesh-cultist-infection =
     { $chance ->
         [1] Вызывает
        *[other] вызывают
+    } плотскую инфекцию культиста
+second =
+    { $count ->
+        [one] секунда
+        [few] секунды
+        [many] секунд
+       *[other] секунд
     }
--satiate-3rd-person =
-    { $chance ->
-        [1] Насыщает
-       *[other] насыщают
+dead =
+    { $count ->
+        [one] мёртвый
+        [few] мёртвых
+        [many] мёртвых
+       *[other] мёртвых
     }
 reagent-effect-guidebook-create-entity-reaction-effect =
     { $chance ->
@@ -371,16 +362,11 @@ reagent-effect-guidebook-plant-robust-harvest =
     } потенцию растения путём { $increase } до максимума в { $limit }. Приводит к тому, что растение теряет свои семена, когда потенция достигает { $seedlesstreshold }. Попытка повысить потенцию свыше { $limit } может вызвать снижение урожайности с вероятностью 10%.
 reagent-effect-guidebook-plant-seeds-add =
     { $chance ->
-        [1] Restores the
-       *[other] restore the
-    } seeds of the plant
+        [1] Восстанавливает
+       *[other] восстанавливает
+    } семена растения
 reagent-effect-guidebook-plant-seeds-remove =
     { $chance ->
-        [1] Removes the
-       *[other] remove the
-    } seeds of the plant
-reagent-effect-guidebook-cause-flesh-cultist-infection =
-    { $chance ->
-        [1] Вызывает
-       *[other] вызывают
-    } плотскую инфекцию культиста
+        [1] Удаляет
+       *[other] удаляет
+    } семена растения

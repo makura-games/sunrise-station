@@ -3,3 +3,10 @@
   name: base-tutorials
   tutorials:
   - IntroductionTutorial
+  - InventoryTutorial
+  - CommunicationTutorial
+  - AccessTutorial
+  - SurvivalTutorial
+  - MedicalTutorial
+  - FoodTutorial
+  - CombatTutorial

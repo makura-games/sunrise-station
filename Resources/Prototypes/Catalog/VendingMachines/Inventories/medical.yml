@@ -22,23 +22,21 @@
     PatchBurn: 1 # Sunrise-Edit
     PatchBrute: 1 # Sunrise-Edit
   emaggedInventory: # Sunrise Edit
-    StimpackMini: 1 # Sunrise Edit
-    PatchOmni: 5 # Sunrise Edit
-    PatchPack: 1 # Sunrise-Edit
+    PatchOmni: 1 # Sunrise Edit
 
+# All access version. Should reflect the stock of NanoMedInventory, but less powerful
 - type: vendingMachineInventory
   id: NanoMedCivilianWallInventory
   startingInventory:
     HandheldHealthAnalyzer: 1
-    AloeCream: 2
-    Gauze: 3
+    Tourniquet: 3
     Brutepack: 3
-    Ointment: 2
+    AloeCream: 3 # Currently just a reskin of Ointment but it's something
     Bloodpack: 3
-    ChemistryBottleEpinephrine: 3
+    ChemistryBottleInaprovaline: 3
     Ampula: 3 # Sunrise-add
     Syringe: 3
-    PillCanisterTricordrazine: 2
+    PillTricordrazine: 10
     # Sunrise-start
     PillCanisterIron: 1
     PillCanisterCopper: 1
@@ -55,34 +53,37 @@
     PatchPackHeat: 1 # Sunrise-Edit
     PatchPackBrute: 1 # Sunrise-Edit
   emaggedInventory: # Sunrise Edit
-    StimpackMini: 1 # Sunrise Edit
-    PatchOmni: 3 # Sunrise Edit
+    PatchOmni: 1 # Sunrise Edit
 
+# Core medical supply vendor
 - type: vendingMachineInventory
   id: NanoMedPlusInventory
   startingInventory:
+    # Medical Essential Gear
+    ClothingBeltMedicalFilled: 2
+    # Shared Essential
     HandheldHealthAnalyzer: 3
-    Gauze: 5
-    Brutepack: 5
-    Ointment: 5
-    Bloodpack: 5
-    Tourniquet: 2
-    ChemistryBottleEpinephrine: 3
-    ChemistryBottleBicaridine: 1
-    Syringe: 5
-    JetInjector: 2
+    JetInjector: 3
+    # Paramed Essential Gear
+    ClothingBeltMedicalEMTFilled: 1
+    EmergencyRollerBedSpawnFolded: 1
+    BoxBodyBag: 1
+    # Extra Expendable Gear
+    Gauze: 4
+    Brutepack: 4
+    Ointment: 4
+    Bloodpack: 4
+    # Optional / Situational Gear
     BoxBottle: 3
-    PillCanisterTricordrazine: 3
-    PillCanisterIron: 1
-    PillCanisterCopper: 1
-    PillCanisterPotassiumIodide: 1
-    SyringeIpecac: 1
-    ClothingEyesHudMedical: 2
-    ClothingEyesEyepatchHudMedical: 2
+    Defibrillator: 2 # Easily shared between several people
+    Syringe: 4
+    PillCanisterTricordrazine: 4
+    ClothingOuterHospitalGown: 2 # Not a popular item, so less stock
     # Sunrise-start
+    MedipenCaseMedic: 2
     Ampula: 5
     Dropper: 2
-    BaseChemistryEmptyVial: 2
+    ChemistryEmptyVial: 2
     PatchPack: 3
     PatchPackBrute: 1
     PatchPackHeat: 1
@@ -97,28 +98,30 @@
     FoodApple: 1
     PatchMedical: 6 # Sunrise-Edit
   emaggedInventory: # Sunrise Edit
-    Stimpack: 1 # Sunrise Edit
-    PatchOmni: 5 # Sunrise Edit
-    PatchPack: 1 # Sunrise-Edit
+    MedipenCaseSyndicate: 1 # Sunrise-Edit
+    StimpackMini: 1 # Sunrise Edit
+    PatchOmni: 1 # Sunrise Edit
 
+# All access version. Should reflect NanoMedCivilianWallInventory, but with more stock
 - type: vendingMachineInventory
   id: NanoMedCivilianInventory
   startingInventory:
     HandheldHealthAnalyzer: 3
-    AloeCream: 3
-    Gauze: 5
+    Tourniquet: 5
     Brutepack: 5
-    Ointment: 4
+    AloeCream: 5
     Bloodpack: 5
-    Tourniquet: 1
-    ChemistryBottleEpinephrine: 3
-    Ampula: 4 # Sunrise-Edit
+    ChemistryBottleInaprovaline: 5
     Syringe: 5
     BoxBottle: 3
     PillCanisterTricordrazine: 2
     PillCanisterIron: 1
     PillCanisterCopper: 1
     PillCanisterPotassiumIodide: 1
+    Ampula: 4 # Sunrise-Edit
+    PillTricordrazine: 10
+    PillIron: 5
+    PillCopper: 5
     PatchPack: 2 # Sunrise-Edit
     PatchBrute: 3 # Sunrise-Edit
     PatchBruteSmall: 5 # Sunrise-Edit
@@ -130,7 +133,6 @@
     FoodApple: 1
     PatchPackBrute: 1 # Sunrise-Edit
     PatchPackHeat: 1 # Sunrise-Edit
+    MedipenCaseMedic: 1 # Sunrise-edit
   emaggedInventory: # Sunrise Edit
-    Stimpack: 1 # Sunrise Edit
-    PatchOmni: 5 # Sunrise Edit
-    PatchPack: 1 # Sunrise-Edit
+    StimpackMini: 1 # Sunrise Edit

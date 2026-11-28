@@ -1,2 +1,2 @@
-ent-ActionKnock = Стук
+ent-ActionKnock = стук
     .desc = Это заклинание открывает ближайшие двери.

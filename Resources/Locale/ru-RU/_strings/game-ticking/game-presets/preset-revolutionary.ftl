@@ -30,7 +30,6 @@ rev-role-greeting =
     Избавьтесь от всего командного состава станции.
     Viva la revolución!
 rev-briefing = Помогите главам революции избавиться от командования станции, чтобы захватить её.
-rev-banned = You have been converted but are unable to play due to a ban for this role.
 
 ## General
 
@@ -40,13 +39,14 @@ rev-not-enough-ready-players = Недостаточно игроков гото�
 rev-no-one-ready = Нет готовых игроков! Нельзя запустить пресет Революционеры.
 rev-no-heads = Нет кандидатов на роль главы революции. Нельзя запустить пресет Революционеры.
 rev-won = Главы революции выжили и уничтожили весь командный состав станции.
+rev-lost = Члены командного состава станции выжили и уничтожили всех глав революции.
+rev-stalemate = Главы революции и командный состав станции погибли. Это ничья.
+rev-reverse-stalemate = Главы революции и командный состав станции выжили.
 rev-headrev-count =
     { $initialCount ->
         [one] Глава революции был один:
        *[other] Глав революции было { $initialCount }:
     }
-rev-lost = Члены командного состава станции выжили и уничтожили всех глав революции.
-rev-stalemate = Главы революции и командный состав станции погибли. Это ничья.
 rev-headrev-name-user = [color=#5e9cff]{ $name }[/color] ([color=gray]{ $username }[/color]) конвертировал { $count } { $count ->
         [one] члена
         [few] члена
@@ -57,10 +57,13 @@ rev-headrev-name = [color=#5e9cff]{ $name }[/color] конвертировал {
         [few] члена
        *[other] членов
     } экипажа
-rev-reverse-stalemate = Главы революции и командный состав станции выжили.
+
+## Deconverted window
+
 rev-deconverted-title = Разконвертированы!
 rev-deconverted-text =
     Со смертью последнего главы революции, революция оканчивается.
     
     Вы больше не революционер, так что ведите себя хорошо.
 rev-deconverted-confirm = Подтвердить
+rev-banned = Вы были обращены, но не можете играть из-за бана на эту роль.

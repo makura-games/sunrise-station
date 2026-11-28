@@ -152730,7 +152730,7 @@ entities:
     - pos: -126.5,30.5
       parent: 1
       type: Transform
-- proto: HeadHuman
+- proto: OrganHumanHead
   entities:
   - uid: 13639
     components:
@@ -154006,7 +154006,7 @@ entities:
     - pos: -33.22817,10.68714
       parent: 1
       type: Transform
-- proto: LeftLegSpider
+- proto: FoodMeatSpiderLeg
   entities:
   - uid: 13641
     components:
@@ -165132,7 +165132,6 @@ entities:
       type: Transform
     - powerLoad: 0
       type: ApcPowerReceiver
-    - type: Timer
   - uid: 13143
     components:
     - rot: -1.5707963267948966 rad
@@ -169031,7 +169030,6 @@ entities:
       type: Transform
     - powerLoad: 0
       type: ApcPowerReceiver
-    - type: Timer
   - uid: 15370
     components:
     - pos: -55.5,-10.5
@@ -183027,7 +183025,7 @@ entities:
       type: Transform
     - canCollide: False
       type: Physics
-- proto: RightLegSpider
+- proto: FoodMeatSpiderLeg
   entities:
   - uid: 13640
     components:
@@ -194400,7 +194398,7 @@ entities:
     - pos: -32.545147,-34.299477
       parent: 1
       type: Transform
-- proto: TorsoHuman
+- proto: OrganHumanTorso
   entities:
   - uid: 13633
     components:

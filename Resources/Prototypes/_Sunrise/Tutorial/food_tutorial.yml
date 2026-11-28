@@ -1,0 +1,466 @@
+- type: tutorialSequence
+  id: FoodTutorial
+  duration: 600
+  estimatedDuration:
+    minimum: 240
+    maximum: 480
+  priority: 6
+  name: food-tutorial-name
+  tooltip: food-tutorial-tooltip
+  grid: /Maps/_Sunrise/Tutorials/food_tutorial.yml
+  texture: /Textures/_Sunrise/Tutorial/food_tutorial.png
+  playerEntity: FoodTutorialPlayer
+  steps:
+  - FoodTutWelcome
+  - FoodTutReachBar
+  - FoodTutExplainHunger
+  - FoodTutExplainThirst
+  - FoodTutTakeDrink
+  - FoodTutDrink
+  - FoodTutPutDrinkDown
+  - FoodTutTakeMeal
+  - FoodTutEatMeal
+  - FoodTutReturnDish
+  - FoodTutReagentWarning
+  - FoodTutExamineSuspiciousDrink
+  - FoodTutUnsafeItems
+  - FoodTutFinish
+  - TutorialMHelp
+
+- type: tutorialStep
+  id: FoodTutWelcome
+  parent: BaseTutorialStepBase
+  bubble:
+    text: food-tut-welcome-bubble
+  chatMessage: food-tut-welcome-chat
+  ttsMessage: food-tut-welcome-tts
+  effects:
+  - !type:TutorialEntityEffect
+    effects:
+    - !type:Satiate
+      satiationType: Hunger
+      factor: -15
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 10
+
+- type: tutorialStep
+  id: FoodTutReachBar
+  parent: BaseTutorialStepBase
+  target: FoodTutorialBarMarker
+  bubble:
+    text: food-tut-reach-bar-bubble
+  chatMessage: food-tut-reach-bar-chat
+  ttsMessage: food-tut-reach-bar-tts
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:ReachMarkerCondition
+    marker: FoodTutorialBarMarker
+
+- type: tutorialStep
+  id: FoodTutExplainHunger
+  parent: BaseTutorialStepBase
+  bubble:
+    text: food-tut-explain-hunger-bubble
+  chatMessage: food-tut-explain-hunger-chat
+  ttsMessage: food-tut-explain-hunger-tts
+  uiHighlight:
+  - !type:UiByName
+    name: AlertContainer
+  - !type:UiByAlertPrototype
+    prototype: Peckish
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 10
+
+- type: tutorialStep
+  id: FoodTutExplainThirst
+  parent: BaseTutorialStepBase
+  bubble:
+    text: food-tut-explain-thirst-bubble
+  chatMessage: food-tut-explain-thirst-chat
+  ttsMessage: food-tut-explain-thirst-tts
+  uiHighlight:
+  - !type:UiByName
+    name: AlertContainer
+  - !type:UiByAlertPrototype
+    prototype: Thirsty
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+  conditions:
+  - !type:StepDelayCondition
+    delay: 10
+
+- type: tutorialStep
+  id: FoodTutTakeDrink
+  parent: BaseTutorialStepBase
+  target: DrinkLemonadeGlass
+  bubble:
+    text: food-tut-take-drink-bubble
+    attachToTarget: true
+  chatMessage: food-tut-take-drink-chat
+  ttsMessage: food-tut-take-drink-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: DrinkLemonadeGlass
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - DrinkLemonadeGlass
+      popup: food-tut-softlock-pickup-highlighted
+    - type: TutorialIngestSoftLock
+      targets:
+      - DrinkLemonadeGlass
+      popup: food-tut-softlock-ingest-blocked
+  conditions:
+  - !type:PickupListenedCondition
+    target: DrinkLemonadeGlass
+
+- type: tutorialStep
+  id: FoodTutDrink
+  parent: BaseTutorialStepBase
+  bubble:
+    text: food-tut-drink-bubble
+  chatMessage: food-tut-drink-chat
+  ttsMessage: food-tut-drink-tts
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: DrinkLemonadeGlass
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+    - type: TutorialDropSoftLock
+      popup: food-tut-softlock-keep-drink
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - DrinkLemonadeGlass
+      popup: food-tut-softlock-keep-drink
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - DrinkLemonadeGlass
+      blockAllSlots: true
+      popup: food-tut-softlock-keep-drink
+  preconditions:
+  - !type:HoldInHandsCondition
+    item: DrinkLemonadeGlass
+  preconditionFailStep: FoodTutTakeDrink
+  failures:
+  - conditions:
+    - !type:HoldInHandsCondition
+      item: DrinkLemonadeGlass
+      inverted: true
+    - !type:ConsumeListenedCondition
+      target: DrinkLemonadeGlass
+      inverted: true
+    repairStep: FoodTutTakeDrink
+  conditions:
+  - !type:ConsumeListenedCondition
+    target: DrinkLemonadeGlass
+
+- type: tutorialStep
+  id: FoodTutPutDrinkDown
+  parent: BaseTutorialStepBase
+  target: FoodTutorialDishReturnMarker
+  bubble:
+    text: food-tut-put-drink-down-bubble
+    attachToTarget: true
+  chatMessage: food-tut-put-drink-down-chat
+  ttsMessage: food-tut-put-drink-down-tts
+  observeRange: 14
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - DrinkLemonadeGlass
+      popup: food-tut-softlock-put-drink-down
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - DrinkLemonadeGlass
+      popup: food-tut-softlock-put-drink-down
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - DrinkLemonadeGlass
+      blockAllSlots: true
+      popup: food-tut-softlock-put-drink-down
+  conditions:
+  - !type:ItemPlacedNearMarkerCondition
+    target: DrinkLemonadeGlass
+    marker: FoodTutorialDishReturnMarker
+    distance: 1
+
+- type: tutorialStep
+  id: FoodTutTakeMeal
+  parent: BaseTutorialStepBase
+  target: FoodMealNachos
+  bubble:
+    text: food-tut-take-meal-bubble
+    attachToTarget: true
+  chatMessage: food-tut-take-meal-chat
+  ttsMessage: food-tut-take-meal-tts
+  observeRange: 14
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: FoodMealNachos
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - FoodMealNachos
+      popup: food-tut-softlock-pickup-highlighted
+    - type: TutorialIngestSoftLock
+      targets:
+      - FoodMealNachos
+      popup: food-tut-softlock-ingest-blocked
+    - type: TutorialDropSoftLock
+      popup: food-tut-softlock-keep-dishes
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - DrinkLemonadeGlass
+      - FoodMealNachos
+      popup: food-tut-softlock-keep-dishes
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - DrinkLemonadeGlass
+      - FoodMealNachos
+      blockAllSlots: true
+      popup: food-tut-softlock-keep-dishes
+  conditions:
+  - !type:PickupListenedCondition
+    target: FoodMealNachos
+
+- type: tutorialStep
+  id: FoodTutEatMeal
+  parent: BaseTutorialStepBase
+  bubble:
+    text: food-tut-eat-meal-bubble
+  chatMessage: food-tut-eat-meal-chat
+  ttsMessage: food-tut-eat-meal-tts
+  uiHighlight:
+  - !type:UiByEntityPrototype
+    prototype: FoodMealNachos
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - FoodPlateSmall
+      popup: food-tut-softlock-keep-meal
+    - type: TutorialDropSoftLock
+      popup: food-tut-softlock-keep-meal
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - DrinkLemonadeGlass
+      - FoodMealNachos
+      - FoodPlateSmall
+      popup: food-tut-softlock-keep-meal
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - DrinkLemonadeGlass
+      - FoodMealNachos
+      - FoodPlateSmall
+      blockAllSlots: true
+      popup: food-tut-softlock-keep-meal
+  failures:
+  - conditions:
+    - !type:HoldInHandsCondition
+      item: FoodMealNachos
+      inverted: true
+    - !type:ConsumeListenedCondition
+      target: FoodMealNachos
+      inverted: true
+    repairStep: FoodTutTakeMeal
+  conditions:
+  - !type:HoldInHandsCondition
+    item: FoodPlateSmall
+
+- type: tutorialStep
+  id: FoodTutReagentWarning
+  parent: BaseTutorialStepBase
+  target: DrinkPoisonBerryJuice
+  bubble:
+    text: food-tut-reagent-warning-bubble
+    attachToTarget: true
+  chatMessage: food-tut-reagent-warning-chat
+  ttsMessage: food-tut-reagent-warning-tts
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+    - type: TutorialDropSoftLock
+      popup: food-tut-softlock-keep-dishes
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - DrinkLemonadeGlass
+      - FoodPlateSmall
+      popup: food-tut-softlock-keep-dishes
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - DrinkLemonadeGlass
+      - FoodPlateSmall
+      blockAllSlots: true
+      popup: food-tut-softlock-keep-dishes
+  conditions:
+  - !type:StepDelayCondition
+    delay: 12
+
+- type: tutorialStep
+  id: FoodTutExamineSuspiciousDrink
+  parent: BaseTutorialStepBase
+  target: DrinkPoisonBerryJuice
+  bubble:
+    text: food-tut-examine-suspicious-drink-bubble
+    attachToTarget: true
+  chatMessage: food-tut-examine-suspicious-drink-chat
+  ttsMessage: food-tut-examine-suspicious-drink-tts
+  observeRange: 14
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+    - type: TutorialDropSoftLock
+      popup: food-tut-softlock-keep-dishes
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - DrinkLemonadeGlass
+      - FoodPlateSmall
+      popup: food-tut-softlock-keep-dishes
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - DrinkLemonadeGlass
+      - FoodPlateSmall
+      blockAllSlots: true
+      popup: food-tut-softlock-keep-dishes
+  conditions:
+  - !type:ExamineListenedCondition
+    target: DrinkPoisonBerryJuice
+
+- type: tutorialStep
+  id: FoodTutUnsafeItems
+  parent: BaseTutorialStepBase
+  bubble:
+    text: food-tut-unsafe-items-bubble
+  chatMessage: food-tut-unsafe-items-chat
+  ttsMessage: food-tut-unsafe-items-tts
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      blockAll: true
+    - type: TutorialDropSoftLock
+      popup: food-tut-softlock-keep-dishes
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - DrinkLemonadeGlass
+      - FoodPlateSmall
+      popup: food-tut-softlock-keep-dishes
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - DrinkLemonadeGlass
+      - FoodPlateSmall
+      blockAllSlots: true
+      popup: food-tut-softlock-keep-dishes
+  conditions:
+  - !type:StepDelayCondition
+    delay: 12
+
+- type: tutorialStep
+  id: FoodTutReturnDish
+  parent: BaseTutorialStepBase
+  target: FoodTutorialDishReturnMarker
+  bubble:
+    text: food-tut-return-dish-bubble
+    attachToTarget: true
+  chatMessage: food-tut-return-dish-chat
+  ttsMessage: food-tut-return-dish-tts
+  observeRange: 14
+  effects:
+  - !type:TutorialComponentEffect
+    components:
+    - type: TutorialPickupSoftLock
+      allowedItems:
+      - FoodPlateSmall
+      popup: food-tut-softlock-return-dish
+    - type: TutorialStorageInsertSoftLock
+      items:
+      - FoodPlateSmall
+      popup: food-tut-softlock-return-dish
+    - type: TutorialEquipBlockedSoftLock
+      items:
+      - FoodPlateSmall
+      blockAllSlots: true
+      popup: food-tut-softlock-return-dish
+  conditions:
+  - !type:ItemPlacedNearMarkerCondition
+    target: FoodPlateSmall
+    marker: FoodTutorialDishReturnMarker
+    distance: 1
+
+- type: tutorialStep
+  id: FoodTutFinish
+  parent: BaseTutorialStepBase
+  bubble:
+    text: food-tut-finish-bubble
+  chatMessage: food-tut-finish-chat
+  ttsMessage: food-tut-finish-tts
+  conditions:
+  - !type:StepDelayCondition
+    delay: 11
+
+- type: startingGear
+  id: FoodTutorialPlayerGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    shoes: ClothingShoesColorBlack
+
+- type: entity
+  parent: BaseTutorialPlayer
+  id: FoodTutorialPlayer
+  name: bar visitor
+  suffix: Tutorial
+  components:
+  - type: Loadout
+    prototypes: [FoodTutorialPlayerGear]
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: SunriseTutorialHunger
+      Thirst:
+        prototype: SunriseTutorialThirst
+  - type: Godmode
+
+- type: entity
+  parent: TutorialGoalMarker
+  id: FoodTutorialBarMarker
+  name: bar marker
+  suffix: Tutorial
+
+- type: entity
+  parent: TutorialGoalMarker
+  id: FoodTutorialDishReturnMarker
+  name: dish return marker
+  suffix: Tutorial

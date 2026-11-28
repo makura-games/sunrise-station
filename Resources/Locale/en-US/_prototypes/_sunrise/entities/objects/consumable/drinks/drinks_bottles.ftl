@@ -3,3 +3,6 @@ ent-DrinkCampariBottleFull = campari bottle
 
 ent-DrinkVodkizineBottleFull = vodkizine bottle
     .desc = The best cure for and cause of a hangover.
+
+ent-DrinkRedRumBottleFull = red rum bottle
+    .desc = A bottle of strong red rum.

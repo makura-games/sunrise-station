@@ -49,6 +49,11 @@
   - /Audio/_Sunrise/Weapons/Guns/Gunshots/m249-2.ogg
 
 - type: soundCollection
+  id: RPD
+  files:
+  - /Audio/_Sunrise/Weapons/Guns/LMGs/shot.ogg
+
+- type: soundCollection
   id: aug
   files:
   - /Audio/_Sunrise/Weapons/Guns/Gunshots/aug-1.ogg
@@ -63,12 +68,6 @@
   id: ump45
   files:
   - /Audio/_Sunrise/Weapons/Guns/Gunshots/ump45-1.ogg
-
-- type: soundCollection
-  id: mp5
-  files:
-  - /Audio/_Sunrise/Weapons/Guns/Gunshots/mp5-1.ogg
-  - /Audio/_Sunrise/Weapons/Guns/Gunshots/mp5-2.ogg
 
 - type: soundCollection
   id: p90

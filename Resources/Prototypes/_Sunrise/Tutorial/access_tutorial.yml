@@ -1,0 +1,231 @@
+- type: tutorialSequence
+  id: AccessTutorial
+  duration: 600
+  estimatedDuration:
+    minimum: 180
+    maximum: 420
+  priority: 3
+  name: access-tutorial-name
+  tooltip: access-tutorial-tooltip
+  grid: /Maps/_Sunrise/Tutorials/access_tutorial.yml
+  texture: /Textures/_Sunrise/Tutorial/access_tutorial.png
+  playerEntity: AccessTutorialPlayer
+  steps:
+  - AccessTutWelcome
+  - AccessTutIdCard
+  - AccessTutOpenNormalDoor
+  - AccessTutTryRestrictedDoor
+  - AccessTutOpenAuthorizedDoor
+  - AccessTutClosedRoute
+  - AccessTutFindDetour
+  - AccessTutTryBoltedDoor
+  - AccessTutPressSignalButton
+  - AccessTutOpenBoltedDoor
+  - AccessTutFinish
+  - TutorialMHelp
+
+- type: tutorialStep
+  id: AccessTutWelcome
+  parent: BaseTutorialStepBase
+  bubble:
+    text: access-tut-welcome-bubble
+  chatMessage: access-tut-welcome-chat
+  ttsMessage: access-tut-welcome-tts
+  conditions:
+  - !type:StepDelayCondition
+    delay: 15
+
+- type: tutorialStep
+  id: AccessTutIdCard
+  parent: BaseTutorialStepBase
+  bubble:
+    text: access-tut-id-card-bubble
+  chatMessage: access-tut-id-card-chat
+  ttsMessage: access-tut-id-card-tts
+  uiHighlight:
+  - !type:UiByName
+    name: Hotbar
+  - !type:UiByName
+    name: SecondHotbar
+  - !type:UiByName
+    name: SlotButton_id
+  conditions:
+  - !type:ExamineListenedCondition
+    target: TechnicalAssistantIDCard
+
+- type: tutorialStep
+  id: AccessTutOpenNormalDoor
+  parent: BaseTutorialStepBase
+  target: TripleGlassAirlock
+  bubble:
+    text: access-tut-open-normal-door-bubble
+    attachToTarget: true
+  chatMessage: access-tut-open-normal-door-chat
+  ttsMessage: access-tut-open-normal-door-tts
+  observeRange: 12
+  conditions:
+  - !type:DoorOpenListenedCondition
+    target: TripleGlassAirlock
+
+- type: tutorialStep
+  id: AccessTutTryRestrictedDoor
+  parent: BaseTutorialStepBase
+  target: AccessTutRestrictedDoor
+  bubble:
+    text: access-tut-try-restricted-door-bubble
+    attachToTarget: true
+  chatMessage: access-tut-try-restricted-door-chat
+  ttsMessage: access-tut-try-restricted-door-tts
+  observeRange: 12
+  conditions:
+  - !type:InteractListenedCondition
+    target: AccessTutRestrictedDoor
+
+- type: tutorialStep
+  id: AccessTutOpenAuthorizedDoor
+  parent: BaseTutorialStepBase
+  target: AccessTutAuthorizedDoor
+  bubble:
+    text: access-tut-open-authorized-door-bubble
+    attachToTarget: true
+  chatMessage: access-tut-open-authorized-door-chat
+  ttsMessage: access-tut-open-authorized-door-tts
+  observeRange: 12
+  conditions:
+  - !type:DoorOpenListenedCondition
+    target: AccessTutAuthorizedDoor
+
+- type: tutorialStep
+  id: AccessTutClosedRoute
+  parent: BaseTutorialReachStepBase
+  target: AccessTutClosedRouteMarker
+  bubble:
+    text: access-tut-closed-route-bubble
+    attachToTarget: true
+  chatMessage: access-tut-closed-route-chat
+  ttsMessage: access-tut-closed-route-tts
+  observeRange: 20
+  conditions:
+  - !type:ReachMarkerCondition
+    marker: AccessTutClosedRouteMarker
+    distance: 1.5
+
+- type: tutorialStep
+  id: AccessTutFindDetour
+  parent: BaseTutorialReachStepBase
+  target: AccessTutDetourMarker
+  bubble:
+    text: access-tut-find-detour-bubble
+    attachToTarget: true
+  chatMessage: access-tut-find-detour-chat
+  ttsMessage: access-tut-find-detour-tts
+  observeRange: 20
+  conditions:
+  - !type:ReachMarkerCondition
+    marker: AccessTutDetourMarker
+    distance: 1.5
+
+- type: tutorialStep
+  id: AccessTutTryBoltedDoor
+  parent: BaseTutorialStepBase
+  target: AccessTutBoltedDoor
+  bubble:
+    text: access-tut-try-bolted-door-bubble
+    attachToTarget: true
+  chatMessage: access-tut-try-bolted-door-chat
+  ttsMessage: access-tut-try-bolted-door-tts
+  observeRange: 12
+  conditions:
+  - !type:InteractListenedCondition
+    target: AccessTutBoltedDoor
+
+- type: tutorialStep
+  id: AccessTutPressSignalButton
+  parent: BaseTutorialStepBase
+  target: SignalButton
+  bubble:
+    text: access-tut-press-signal-button-bubble
+    attachToTarget: true
+  chatMessage: access-tut-press-signal-button-chat
+  ttsMessage: access-tut-press-signal-button-tts
+  observeRange: 12
+  conditions:
+  - !type:InteractListenedCondition
+    target: SignalButton
+
+- type: tutorialStep
+  id: AccessTutOpenBoltedDoor
+  parent: BaseTutorialStepBase
+  target: AccessTutBoltedDoor
+  bubble:
+    text: access-tut-open-bolted-door-bubble
+    attachToTarget: true
+  chatMessage: access-tut-open-bolted-door-chat
+  ttsMessage: access-tut-open-bolted-door-tts
+  observeRange: 12
+  conditions:
+  - !type:DoorOpenListenedCondition
+    target: AccessTutBoltedDoor
+
+- type: tutorialStep
+  id: AccessTutFinish
+  parent: BaseTutorialStepBase
+  bubble:
+    text: access-tut-finish-bubble
+  chatMessage: access-tut-finish-chat
+  ttsMessage: access-tut-finish-tts
+  conditions:
+  - !type:StepDelayCondition
+    delay: 13
+
+- type: startingGear
+  id: AccessTutorialPlayerGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitEngineering
+    shoes: ClothingShoesBootsWork
+    back: ClothingBackpack
+    id: TechnicalAssistantIDCard
+    ears: ClothingHeadsetEngineering
+
+- type: entity
+  parent: BaseTutorialPlayer
+  id: AccessTutorialPlayer
+  components:
+  - type: TutorialUnequipSoftLock
+    slots: IDCARD
+    items:
+    - TechnicalAssistantIDCard
+    popup: access-tut-softlock-keep-id-card
+  - type: Loadout
+    prototypes: [AccessTutorialPlayerGear]
+  - type: Godmode
+
+- type: entity
+  parent: Airlock
+  id: AccessTutNormalDoor
+
+- type: entity
+  parent: AirlockCommandLocked
+  id: AccessTutRestrictedDoor
+
+- type: entity
+  parent: AirlockEngineeringLocked
+  id: AccessTutAuthorizedDoor
+
+- type: entity
+  parent: AirlockEngineeringLocked
+  id: AccessTutAlternativeDoor
+
+- type: entity
+  parent: AirlockEngineeringLocked
+  id: AccessTutBoltedDoor
+
+- type: entity
+  name: access tutorial closed route marker
+  id: AccessTutClosedRouteMarker
+  parent: TutorialGoalMarker
+
+- type: entity
+  name: access tutorial detour marker
+  id: AccessTutDetourMarker
+  parent: TutorialGoalMarker

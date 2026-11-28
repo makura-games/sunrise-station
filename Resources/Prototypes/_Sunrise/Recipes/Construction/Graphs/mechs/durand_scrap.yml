@@ -1,0 +1,27 @@
+- type: constructionGraph
+  id: SunriseDurandCircuitBoardRepair
+  start: broken
+  graph:
+  - node: broken
+    entity: SunriseScrapDurandCircuitBoard
+    edges:
+    - to: result
+      steps:
+      - tag: RipleyCentralControlModule
+        name: construction-graph-tag-ripley-central-control-module
+        icon:
+          sprite: Objects/Misc/module.rsi
+          state: mainboard
+    - to: result
+      steps:
+      - tag: RipleyPeripheralsControlModule
+        name: construction-graph-tag-ripley-peripherals-control-module
+        icon:
+          sprite: Objects/Misc/module.rsi
+          state: id_mod
+
+  - node: result
+    actions:
+    - !type:SpawnPrototype
+      prototype: SunriseDurandCircuitBoardRepairResultSpawner
+    - !type:DeleteEntity {}

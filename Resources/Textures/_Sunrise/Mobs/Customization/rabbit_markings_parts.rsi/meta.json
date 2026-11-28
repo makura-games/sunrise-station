@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "draw by 4_ydo for ss14",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "ears_rabbit_inner",
+      "directions": 4
+    },
+    {
+      "name": "ears_rabbit_outer",
+      "directions": 4
+    },
+    {
+      "name": "ears_rabbit_inner_mir",
+      "directions": 4
+    },
+    {
+      "name": "ears_rabbit_outer_mir",
+      "directions": 4
+    },
+    {
+      "name": "tail_rabbit",
+      "directions": 4
+    }
+  ]
+}

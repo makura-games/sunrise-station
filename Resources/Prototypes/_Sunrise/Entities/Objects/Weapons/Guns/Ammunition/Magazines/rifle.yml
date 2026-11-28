@@ -27,32 +27,6 @@
         color: "#575EF5"
 
 - type: entity
-  id: MagazineRifleHP
-  name: "magazine (.20 rifle HP)"
-  parent: BaseMagazineRifle
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeRifleHP
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#F5514C"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#F5514C"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#F5514C"
-
-- type: entity
   id: MagazineRifleFMJ
   name: "magazine (.20 rifle FMJ)"
   parent: BaseMagazineRifle
@@ -91,6 +65,33 @@
       - state: inhand-right-mag
       - state: inhand-right-stripe
         color: "#540000"
+
+- type: entity
+  id: MagazineRifleImprovised
+  name: "magazine (.20 rifle improvised)"
+  parent: BaseMagazineRifle
+  description: 25-round double stack magazine for combat rifles. Intended to hold improvised ammunition.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifleImprovised
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#000000a3"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#000000a3"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#000000a3"
 
 # region M-52
 - type: entity
@@ -135,32 +136,6 @@
       - state: inhand-right-mag
       - state: inhand-right-stripe
         color: "#575EF5"
-
-- type: entity
-  id: MagazineRifleM52HP
-  name: "magazine (.20 rifle HP)"
-  parent: BaseMagazineRifleM52
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeRifleHP
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#F5514C"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#F5514C"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#F5514C"
 
 - type: entity
   id: MagazineRifleM52FMJ
@@ -315,15 +290,15 @@
 - type: entity
   id: MagazineRifleBoxSP
   name: "L6 SAW magazine box (.20 rifle SP)"
-  parent: BaseMagazineRifle
-  description: Box containing a 150-round belt of linked .20 rifle rounds, used by light machine guns such as the L6. Intended to hold general-purpose kinetic ammunition.
+  parent: [ BaseNonCycleableAmmoProvider, BaseMagazineRifle ]
+  description: Box containing a 200-round belt of linked .20 rifle rounds, used by light machine guns such as the L6. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: Tag
     tags:
       - MagazineLightRifleBox
   - type: BallisticAmmoProvider
     proto: CartridgeRifleSP
-    capacity: 150
+    capacity: 200
   - type: Item
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_box.rsi
@@ -337,7 +312,7 @@
   id: MagazineRifleBoxEmpty
   name: "L6 SAW magazine box (.20 rifle any)"
   parent: MagazineRifleBoxSP
-  description: Box containing a 150-round belt of linked .20 rifle rounds, used by light machine guns such as the L6.
+  description: Box containing a 200-round belt of linked .20 rifle rounds, used by light machine guns such as the L6.
   components:
   - type: Tag
     tags:
@@ -357,7 +332,7 @@
   id: MagazineRifleBoxFMJ
   name: "L6 SAW magazine box (.20 rifle FMJ)"
   parent: MagazineRifleBoxSP
-  description: Box containing a 150-round belt of linked .20 rifle rounds, used by light machine guns such as the L6. Intended to hold FMJ kinetic ammunition.
+  description: Box containing a 200-round belt of linked .20 rifle rounds, used by light machine guns such as the L6. Intended to hold FMJ kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleFMJ
@@ -366,7 +341,7 @@
   id: MagazineRifleBoxImprovised
   name: "L6 SAW magazine box (5.56mm improvised)"
   parent: MagazineRifleBoxSP
-  description: Box containing a 150-round belt of linked 5.56mm improvised rounds, used by light machine guns such as the L6.
+  description: Box containing a 200-round belt of linked 5.56mm improvised rounds, used by light machine guns such as the L6.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeRifleImprovised

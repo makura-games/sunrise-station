@@ -32,9 +32,11 @@ public sealed partial class HellSpawnRushComponent : Component
     [DataField]
     public DamageSpecifier ThrowHitDamageDict = new()
     {
-        DamageDict = new Dictionary<string, FixedPoint2>
+        DamageDict = new()
         {
-            { "Brute", 50 },
+            { "Blunt", 16.67 },
+            { "Slash", 16.67 },
+            { "Piercing", 16.66 },
             { "Structural", 190 }, // this ensures that structures like doors are destroyed
         },
     };

@@ -1,5 +1,5 @@
 ---
-name: SS14 ECS Systems
+name: ss14-ecs-systems
 description: Architecture guide for EntitySystem in Space Station 14 — lifecycle, events, queries, networking, prediction, and partial class decomposition patterns
 ---
 
@@ -23,7 +23,7 @@ public sealed class MySystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        // Event Subscriptions, EntityQuery Caching
+        // Event subscriptions and EntityQuery dependencies
     }
 
     public override void Shutdown()
@@ -51,11 +51,11 @@ Systems receive dependencies through the `[Dependency]` attribute. This works fo
 ```csharp
 public sealed class MySystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IRobustRandom _random = default!;
 }
 ```
 
@@ -83,8 +83,8 @@ Example:
 public sealed class ExampleSystem : EntitySystem
 {
     // 1) Dependencies
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     // 2) Constants + static readonly
     private const float TimeoutSeconds = 1.0f;
@@ -208,20 +208,45 @@ RaiseLocalEvent(ev);
 RaiseLocalEvent(uid, ref ev, broadcast: true);
 ```
 
-## EntityQuery - efficient access to components
+## EntityQuery — эффективный доступ к компонентам
 
-### Caching in Initialize
+### Dependency в EntitySystem
+
+`EntityQuery<T>` регистрируется лениво в `EntitySystemManager.SystemDependencyCollection`.
+Внутри `EntitySystem`, включая `GameRuleSystem` и partial-файлы системы, объявлять его как
+dependency и не инициализировать вручную в `Initialize()`:
 
 ```csharp
-private EntityQuery<TransformComponent> _xformQuery;
-private EntityQuery<PhysicsComponent> _physicsQuery;
+[Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
+[Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+```
 
-public override void Initialize()
+Перед добавлением query проверить другие partial-файлы: для одного типа компонента нужно
+переиспользовать одно поле системы.
+
+### Граница системной dependency-коллекции
+
+Не добавлять `[Dependency] EntityQuery<T>` в `IConsoleCommand`, HTN-операторы, UI-контролы,
+оверлеи и helper-классы. Глобальная IoC-коллекция не содержит эту регистрацию.
+
+Для единичных проверок использовать методы `IEntityManager`. Если вручную создаваемому объекту
+нужен часто используемый query, получить его через `IEntityManager.GetEntityQuery<T>()` в месте
+создания или передать готовый query из системы через конструктор.
+
+```csharp
+public sealed class MyCommand : IConsoleCommand
 {
-    _xformQuery = GetEntityQuery<TransformComponent>();
-    _physicsQuery = GetEntityQuery<PhysicsComponent>();
+    [Dependency] private IEntityManager _entityManager = default!;
+
+    private bool IsGrid(EntityUid uid)
+    {
+        return _entityManager.HasComponent<MapGridComponent>(uid);
+    }
 }
 ```
+
+Здесь `[Dependency] EntityQuery<MapGridComponent>` был бы ошибкой: команда инъектируется не из
+`SystemDependencyCollection`.
 
 ### Usage
 
@@ -382,13 +407,13 @@ Example structure:
 // SharedMySystem.cs
 public abstract partial class SharedMySystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
-    private EntityQuery<MyComponent> _query;
+    [Dependency] private EntityQuery<MyComponent> _query = default!;
 
     public override void Initialize()
     {
-        _query = GetEntityQuery<MyComponent>();
+        base.Initialize();
         InitializeActions();     // from Actions.cs
         InitializeTargets();     // from Target.cs
     }

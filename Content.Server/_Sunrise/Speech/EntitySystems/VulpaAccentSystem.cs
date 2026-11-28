@@ -1,14 +1,16 @@
 using System.Text.RegularExpressions;
 using Content.Server._Sunrise.Speech.Components;
-using Content.Server.Speech;
 using Content.Shared.Speech;
 using Robust.Shared.Random;
 
 namespace Content.Server._Sunrise.Speech.EntitySystems;
 
-public sealed class VulpaAccentSystem : EntitySystem
+public sealed partial class VulpaAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
+
+    private static readonly Regex LowerErRegex = new("р+");
+    private static readonly Regex UpperErRegex = new("Р+");
 
     public override void Initialize()
     {
@@ -16,21 +18,19 @@ public sealed class VulpaAccentSystem : EntitySystem
         SubscribeLocalEvent<VulpaAccentComponent, AccentGetEvent>(OnAccent);
     }
 
-    private void OnAccent(EntityUid uid, VulpaAccentComponent component, AccentGetEvent args)
+    private void OnAccent(Entity<VulpaAccentComponent> ent, ref AccentGetEvent args)
     {
         var message = args.Message;
 
         // р => ррр
-        message = Regex.Replace(
+        message = LowerErRegex.Replace(
             input: message,
-            "р+",
-            _random.Pick(new List<string> { "рр", "ррр" })
+            replacement: _random.Pick(new List<string> { "рр", "ррр" })
         );
         // Р => РРР
-        message = Regex.Replace(
+        message = UpperErRegex.Replace(
             input: message,
-            "Р+",
-            _random.Pick(new List<string> { "РР", "РРР" })
+            replacement: _random.Pick(new List<string> { "РР", "РРР" })
         );
 
         args.Message = message;

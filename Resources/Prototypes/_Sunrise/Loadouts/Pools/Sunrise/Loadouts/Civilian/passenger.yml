@@ -1,4 +1,16 @@
 - type: loadout
+  id: SunriseLizardPlushiePassengerLoadout
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobPassenger
+      time: 20h
+  storage:
+    back:
+    - PlushieLizardJobPassenger
+
+- type: loadout
   id: SunriseRubberStampPassenger
   effects:
   - !type:JobRequirementLoadoutEffect

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: AirlockGlassCult
   parent: Airlock
   name: runic airlock
@@ -74,8 +74,9 @@
       sprite: /Textures/_Sunrise/BloodCult/Structures/cult_girder.rsi
       state: cultgirder
     - type: Damageable
-      damageContainer: StructuralInorganic
       damageModifierSet: StructuralMetallic
+    - type: Injurable
+      damageContainer: StructuralInorganic
     - type: Destructible
       thresholds:
         - trigger:

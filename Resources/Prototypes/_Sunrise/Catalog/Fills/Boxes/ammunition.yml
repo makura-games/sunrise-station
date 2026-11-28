@@ -20,8 +20,6 @@
         - id: MagazineRifleFMJ
           amount: 2
         - id: MagazineRifleSP
-          amount: 1
-        - id: MagazineRifleHP
-          amount: 1
+          amount: 2
         - id: MagazineRifleAP
           amount: 1

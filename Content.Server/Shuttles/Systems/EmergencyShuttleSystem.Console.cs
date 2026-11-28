@@ -1,16 +1,14 @@
 using System.Threading;
 using Content.Server._Sunrise.TransitHub;
-using Content.Server.DeviceNetwork.Components;
-using Content.Server.Screens.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Shared.Access;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Emag.Systems;
-using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Popups;
+using Content.Shared.RoundEnd;
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Events;
@@ -19,17 +17,18 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Timer = Robust.Shared.Timing.Timer;
+using Robust.Shared.Audio;
 
 namespace Content.Server.Shuttles.Systems;
 
 // TODO full game saves
 // Move state data into the emergency shuttle component
+
+/// <summary>
+/// Handles the emergency shuttle's console and early launching.
+/// </summary>
 public sealed partial class EmergencyShuttleSystem
 {
-    /*
-     * Handles the emergency shuttle's console and early launching.
-     */
-
     /// <summary>
     /// Has the emergency shuttle arrived?
     /// </summary>
@@ -75,6 +74,7 @@ public sealed partial class EmergencyShuttleSystem
 
     private static readonly ProtoId<AccessLevelPrototype> EmergencyRepealAllAccess = "EmergencyShuttleRepealAll";
     private static readonly Color DangerColor = Color.Red;
+    private static readonly SoundPathSpecifier AnnounceStartSound = new SoundPathSpecifier("/Audio/Misc/notice1.ogg");
 
     /// <summary>
     /// Have the emergency shuttles been authorised to launch at CentCom?
@@ -228,21 +228,7 @@ public sealed partial class EmergencyShuttleSystem
 
         // All the others.
         if (_consoleAccumulator < minTime)
-        {
-            var query = AllEntityQuery<StationTransitHubComponent, TransformComponent>(); // Sunrise-Edit
-
-            // Guarantees that emergency shuttle arrives first before anyone else can FTL.
-            while (query.MoveNext(out var comp, out var centcommXform))
-            {
-                if (Deleted(comp.Entity))
-                    continue;
-
-                if (_shuttle.TryAddFTLDestination(centcommXform.MapID, true, out var ftlComp))
-                {
-                    _shuttle.SetFTLWhitelist((centcommXform.MapUid!.Value, ftlComp), null);
-                }
-            }
-        }
+            EnableTransitHubFtlDestination(); // Sunrise-Edit - открываем FTL именно на карте транзитного хаба.
     }
 
     private void OnEmergencyRepealAll(EntityUid uid, EmergencyShuttleConsoleComponent component, EmergencyShuttleRepealAllMessage args)
@@ -274,8 +260,7 @@ public sealed partial class EmergencyShuttleSystem
             return;
         }
 
-        // TODO: This is fucking bad
-        if (!component.AuthorizedEntities.Remove(MetaData(idCard).EntityName))
+        if (!component.AuthorizedEntities.Remove(idCard.Owner))
             return;
 
         _logger.Add(LogType.EmergencyShuttle, LogImpact.High, $"Emergency shuttle early launch REPEAL by {args.Actor:user}");
@@ -295,9 +280,12 @@ public sealed partial class EmergencyShuttleSystem
             return;
         }
 
-        // TODO: This is fucking bad
-        if (!component.AuthorizedEntities.Add(MetaData(idCard).EntityName))
+        var idCardUid = idCard.Owner;
+
+        if (component.AuthorizedEntities.ContainsKey(idCardUid))
             return;
+
+        component.AuthorizedEntities[idCardUid] = MetaData(idCard).EntityName;
 
         _logger.Add(LogType.EmergencyShuttle, LogImpact.High, $"Emergency shuttle early launch AUTH by {args.Actor:user}");
         var remaining = component.AuthorizationsRequired - component.AuthorizedEntities.Count;
@@ -308,7 +296,7 @@ public sealed partial class EmergencyShuttleSystem
                 playDefault: false, colorOverride: DangerColor);
 
         if (!CheckForLaunch(component))
-            _audio.PlayGlobal("/Audio/Misc/notice1.ogg", Filter.Broadcast(), recordReplay: true);
+            _audio.PlayGlobal(AnnounceStartSound, Filter.Broadcast(), recordReplay: true);
 
         UpdateAllEmergencyConsoles();
     }
@@ -341,7 +329,7 @@ public sealed partial class EmergencyShuttleSystem
     {
         var auths = new List<string>();
 
-        foreach (var auth in component.AuthorizedEntities)
+        foreach (var auth in component.AuthorizedEntities.Values)
         {
             auths.Add(auth);
         }
@@ -386,17 +374,17 @@ public sealed partial class EmergencyShuttleSystem
         var shuttle = GetShuttle();
         if (shuttle != null && TryComp<DeviceNetworkComponent>(shuttle, out var net))
         {
-            var payload = new NetworkPayload
+            var payload = new ScreenShuttlePayload
             {
-                [ShuttleTimerMasks.ShuttleMap] = shuttle,
-                [ShuttleTimerMasks.SourceMap] = _roundEnd.GetStation(),
-                [ShuttleTimerMasks.DestMap] = _roundEnd.GetTransitHub(), // Sunrise-Edit
-                [ShuttleTimerMasks.ShuttleTime] = time,
-                [ShuttleTimerMasks.SourceTime] = time,
-                [ShuttleTimerMasks.DestTime] = time + TimeSpan.FromSeconds(TransitTime),
-                [ShuttleTimerMasks.Docked] = true
+                Shuttle = shuttle,
+                SourceMap = _roundEnd.GetStation(),
+                DestinationMap = _roundEnd.GetCentcomm(), // Sunrise-Edit - метод возвращает карту транзитного хаба.
+                ShuttleTime = time,
+                SourceTime = time,
+                DestinationTime = time + TimeSpan.FromSeconds(TransitTime),
+                Docked = true,
             };
-            _deviceNetworkSystem.QueuePacket(shuttle.Value, null, payload, net.TransmitFrequency);
+            _deviceNetworkSystem.SendPacket(shuttle.Value, null, ref payload, net.TransmitFrequency);
         }
 
         return true;
@@ -412,7 +400,7 @@ public sealed partial class EmergencyShuttleSystem
             playDefault: false,
             colorOverride: DangerColor);
 
-        _audio.PlayGlobal("/Audio/Misc/notice1.ogg", Filter.Broadcast(), recordReplay: true);
+        _audio.PlayGlobal(AnnounceStartSound, Filter.Broadcast(), recordReplay: true);
     }
 
     public bool DelayEmergencyRoundEnd()

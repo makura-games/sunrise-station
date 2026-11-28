@@ -1,0 +1,73 @@
+- type: entity
+  parent: DiseaseDiagnoser
+  id: SunriseDiseaseMicroscope
+  name: disease microscope
+  description: A laboratory microscope with a sealed culture stage and two reagent pipettes.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Disease/Microscope/microscope.rsi
+    layers:
+    - state: icon
+      map: ["enum.DiseaseMachineVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.DiseaseMachineVisualLayers.IsOn"]
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.VisualState:
+        enum.DiseaseMachineVisualLayers.IsRunning:
+          True: { state: running }
+          False: { state: icon }
+        enum.DiseaseMachineVisualLayers.IsOn:
+          True: { state: unlit-running }
+          False: { state: unlit }
+  - type: Machine
+    board: SunriseDiseaseMicroscopeCircuitboard
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      microscopeSample: !type:ContainerSlot
+  - type: Solution
+    id: microscope
+    solution:
+      maxVol: 100
+      reagents:
+      - ReagentId: EZNutrient
+        Quantity: 40
+      - ReagentId: Phenol
+        Quantity: 40
+  - type: RefillableSolution
+    solution: microscope
+  - type: DrainableSolution
+    solution: microscope
+  - type: ExaminableSolution
+    solution: microscope
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: SunriseDiseaseMicroscopeCircuitboard
+  name: disease microscope board
+  description: A machine printed circuit board for a disease microscope.
+  components:
+  - type: Sprite
+    state: medical
+  - type: MachineBoard
+    prototype: SunriseDiseaseMicroscope
+    stackRequirements:
+      Manipulator: 2
+      Cable: 5
+    tagRequirements:
+      GlassBeaker:
+        amount: 1
+        defaultPrototype: Beaker
+
+- type: entity
+  parent: SunriseDiseaseStrainVial
+  id: SunriseDiseaseSelectedSample
+  name: designed strain sample
+  description: A sealed vial with a built-in injector and a handwritten label.
+  components:
+  - type: Sprite
+    state: designed

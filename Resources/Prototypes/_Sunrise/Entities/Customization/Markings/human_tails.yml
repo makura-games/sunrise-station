@@ -1,8 +1,7 @@
 - type: marking
   id: FoxTail
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Human, Dwarf, Felinid, Vulpkanin]
+  groupWhitelist: [ Human, Dwarf, Felinid, Vulpkanin ]
   sponsorOnly: false # Sunrise
   sprites:
   - sprite: _Sunrise/Mobs/Customization/Vulpkanin/tail_markings.rsi
@@ -13,8 +12,7 @@
 - type: marking
   id: BigFoxTail
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Human, Dwarf, Felinid, Vulpkanin]
+  groupWhitelist: [ Human, Dwarf, Felinid, Vulpkanin ]
   sponsorOnly: false # Sunrise
   coloring:
     default:
@@ -36,8 +34,7 @@
 - type: marking
   id: SharkTail
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Human, Dwarf, Felinid, Vulpkanin]
+  groupWhitelist: [ Human, Dwarf, Felinid, Vulpkanin ]
   sponsorOnly: false # Sunrise
   sprites:
   - sprite: _Sunrise/Mobs/Customization/human_tails.rsi
@@ -46,11 +43,19 @@
 - type: marking
   id: LizardTail
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Human, Dwarf, Felinid, Vulpkanin]
+  groupWhitelist: [ Human, Dwarf, Felinid, Vulpkanin ]
   sponsorOnly: false # Sunrise
   sprites:
   - sprite: _Sunrise/Mobs/Customization/human_tails.rsi
     state: lizard_tail_primary
   - sprite: _Sunrise/Mobs/Customization/human_tails.rsi
     state: lizard_tail_secondary
+
+- type: marking
+  id: RabbitTail
+  bodyPart: Tail
+  groupWhitelist: [ Human ]
+  sponsorOnly: false
+  sprites:
+  - sprite: _Sunrise/Mobs/Customization/rabbit_markings_parts.rsi
+    state: tail_rabbit

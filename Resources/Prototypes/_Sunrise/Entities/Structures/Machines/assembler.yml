@@ -39,7 +39,9 @@
       map: ["enum.MicrowaveVisualizerLayers.BaseUnlit"]
       visible: false
   - type: ApcPowerReceiver
-    powerLoad: 500
+    powerLoad: 5
+  - type: PowerState
+    workingPowerDraw: 500
   - type: Machine
     board: MedicalAssemblerMachineCircuitboard
   - type: ActivatableUI

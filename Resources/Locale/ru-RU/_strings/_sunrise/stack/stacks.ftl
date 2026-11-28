@@ -1,6 +1,7 @@
-stack-explosive-cord =
+stack-ticket =
     { $amount ->
-        [1] взрывной шнур
-       *[other] взрывные шнуры
+        [one] тикет
+        [few] тикета
+        [many] тикетов
+       *[other] тикета
     }
-

@@ -1,12 +1,14 @@
-﻿using Content.Server._Sunrise.BloodCult.Items.Components;
+using Content.Server._Sunrise.BloodCult.Items.Components;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Shared._Sunrise.BloodCult.Components;
 using Content.Shared._Sunrise.BloodCult.Items;
+using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
@@ -21,15 +23,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._Sunrise.BloodCult.Items.Systems;
 
-public sealed class BloodCultWeaponSystem : EntitySystem
+public sealed partial class BloodCultWeaponSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly StomachSystem _stomachSystem = default!;
-    [Dependency] private readonly SharedStunSystem _stunSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private SharedStunSystem _stunSystem = default!;
 
     public override void Initialize()
     {
@@ -52,9 +53,8 @@ public sealed class BloodCultWeaponSystem : EntitySystem
         if (HasComp<BloodCultistComponent>(args.Target))
         {
             if (_solutionContainer.TryGetInjectableSolution(args.Target, out var injectableSolution, out _))
-            {
-                injectableSolution.Value.Comp.Solution.AddReagent(ent.Comp.UnholyProto, ent.Comp.UnholyVolume);
-            }
+                _solutionContainer.TryAddReagent(injectableSolution.Value, ent.Comp.UnholyProto, ent.Comp.UnholyVolume, out _);
+
             return;
         }
         if (HasComp<MobStateComponent>(args.Target))
@@ -88,36 +88,22 @@ public sealed class BloodCultWeaponSystem : EntitySystem
             convert = true;
         }
 
-        if (_body.TryGetBodyOrganEntityComps<StomachComponent>((args.Target.Value, body), out var stomachs))
+        if (_body.TryGetOrganWithComponent<StomachComponent>((args.Target.Value, body), out var stomach))
         {
-            var highestAvailable = FixedPoint2.Zero;
-            Solution? stomachSol = null;
-            Entity<StomachComponent>? stomachToUse = null;
-            foreach (var ent in stomachs)
-            {
-                var owner = ent.Owner;
-                if (!_solutionContainer.ResolveSolution(owner, StomachSystem.DefaultSolutionName, ref ent.Comp1.Solution, out stomachSol))
-                    continue;
-
-                if (stomachSol.AvailableVolume <= highestAvailable)
-                    continue;
-
-                stomachToUse = ent;
-                highestAvailable = stomachSol.AvailableVolume;
-            }
-
-            if (stomachToUse == null || stomachSol == null)
-                return;
-
-            if (_stomachSystem.TryChangeReagent(stomachToUse.Value.Owner,
+            if (_solutionContainer.ResolveSolution(stomach.Owner,
+                    StomachSystem.DefaultSolutionName,
+                    ref stomach.Comp.Solution) &&
+                TryConvertHolyWater(stomach.Comp.Solution.Value,
                     component.ConvertedId,
                     component.ConvertedToId))
+            {
                 convert = true;
+            }
         }
 
         if (_solutionContainer.TryGetInjectableSolution(args.Target.Value, out var injectableSolution, out _))
         {
-            if (ConvertHolyWater(injectableSolution.Value.Comp.Solution, component.ConvertedId, component.ConvertedToId))
+            if (TryConvertHolyWater(injectableSolution.Value, component.ConvertedId, component.ConvertedToId))
                 convert = true;
         }
 
@@ -128,19 +114,27 @@ public sealed class BloodCultWeaponSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("holy-water-deconverted"), args.User, args.User);
     }
 
-    private bool ConvertHolyWater(Solution solution, string fromReagentId, string toReagentId)
+    private bool TryConvertHolyWater(Entity<SolutionComponent> solution, string fromReagentId, string toReagentId)
     {
-        foreach (var reagent in solution.Contents)
+        var contents = solution.Comp.Solution.Contents;
+
+        // Идём с конца: RemoveReagent использует RemoveSwap и меняет порядок списка.
+        for (var i = contents.Count - 1; i >= 0; i--)
         {
+            var reagent = contents[i];
             if (reagent.Reagent.Prototype != fromReagentId)
                 continue;
 
-            var amount = reagent.Quantity;
+            var amount = _solutionContainer.RemoveReagent(solution, reagent.Reagent, reagent.Quantity);
+            if (amount <= FixedPoint2.Zero)
+                continue;
 
-            solution.RemoveReagent(reagent.Reagent.Prototype, reagent.Quantity);
-            solution.AddReagent(toReagentId, amount);
+            var convertedReagent = new ReagentId(toReagentId, reagent.Reagent.Data);
+            _solutionContainer.TryAddReagent(solution, convertedReagent, amount, out var added);
+            if (added < amount)
+                _solutionContainer.TryAddReagent(solution, reagent.Reagent, amount - added, out _);
 
-            return true;
+            return added > FixedPoint2.Zero;
         }
 
         return false;

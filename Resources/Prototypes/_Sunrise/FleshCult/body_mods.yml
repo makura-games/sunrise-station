@@ -22,11 +22,11 @@
       params:
         volume: 15
   - type: HideLayerClothing
-    slots:
-      - RFoot
-      - LFoot
-      - RLeg
-      - LLeg
+    layers:
+      RFoot: FEET
+      LFoot: FEET
+      RLeg: FEET
+      LLeg: FEET
   - type: FleshBodyMod
 
 - type: entity
@@ -105,6 +105,9 @@
     sprite: _Sunrise/FleshCult/FleshBodyMods/heavy_flesh_helmet.rsi
   - type: Clothing
     sprite: _Sunrise/FleshCult/FleshBodyMods/heavy_flesh_helmet.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000

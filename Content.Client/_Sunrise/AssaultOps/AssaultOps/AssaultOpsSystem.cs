@@ -4,9 +4,8 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._Sunrise.AssaultOps.AssaultOps;
 
-public sealed class AssaultOpsSystem : EntitySystem
+public sealed partial class AssaultOpsSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {
@@ -17,7 +16,7 @@ public sealed class AssaultOpsSystem : EntitySystem
 
     private void GetAssaultOperativeIcon(EntityUid uid, AssaultOperativeComponent component, ref GetStatusIconsEvent args)
     {
-        var iconPrototype = _prototype.Index(component.StatusIcon);
+        var iconPrototype = ProtoMan.Index(component.StatusIcon);
         args.StatusIcons.Add(iconPrototype);
     }
 }

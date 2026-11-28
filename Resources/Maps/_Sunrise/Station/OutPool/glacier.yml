@@ -70759,7 +70759,7 @@ entities:
           - Quantity: 100
             ReagentId: Cryoxadone
       type: SolutionContainerManager
-- proto: LeftArmHuman
+- proto: OrganHumanArmLeft
   entities:
   - uid: 10201
     components:
@@ -70767,7 +70767,7 @@ entities:
       pos: -29.773567,38.976112
       parent: 2
       type: Transform
-- proto: LeftFootHuman
+- proto: OrganHumanFootLeft
   entities:
   - uid: 10202
     components:
@@ -70775,7 +70775,7 @@ entities:
       pos: -27.969921,52.315044
       parent: 2
       type: Transform
-- proto: LeftHandHuman
+- proto: OrganHumanHandLeft
   entities:
   - uid: 10203
     components:
@@ -70789,7 +70789,7 @@ entities:
       pos: -23.673046,53.658794
       parent: 2
       type: Transform
-- proto: LeftLegHuman
+- proto: OrganHumanLegLeft
   entities:
   - uid: 10205
     components:
@@ -80682,7 +80682,7 @@ entities:
     - pos: -25.52042,-4.1914105
       parent: 2
       type: Transform
-- proto: RightArmHuman
+- proto: OrganHumanArmRight
   entities:
   - uid: 13506
     components:
@@ -80690,7 +80690,7 @@ entities:
       pos: -26.161995,53.28645
       parent: 2
       type: Transform
-- proto: RightArmSkeleton
+- proto: OrganSkeletonPersonArmRight
   entities:
   - uid: 13507
     components:
@@ -80698,7 +80698,7 @@ entities:
       pos: -5.675356,-29.228287
       parent: 2
       type: Transform
-- proto: RightHandHuman
+- proto: OrganHumanHandRight
   entities:
   - uid: 13508
     components:
@@ -80712,7 +80712,7 @@ entities:
       pos: -26.027988,53.52976
       parent: 2
       type: Transform
-- proto: RightHandSkeleton
+- proto: OrganSkeletonPersonHandRight
   entities:
   - uid: 13510
     components:
@@ -80720,7 +80720,7 @@ entities:
       pos: -5.091732,-29.165787
       parent: 2
       type: Transform
-- proto: RightLegSkeleton
+- proto: OrganSkeletonPersonLegRight
   entities:
   - uid: 13511
     components:
@@ -86897,7 +86897,7 @@ entities:
     - pos: -8.070193,-14.296006
       parent: 2
       type: Transform
-- proto: TorsoSkeleton
+- proto: OrganSkeletonPersonTorso
   entities:
   - uid: 14577
     components:

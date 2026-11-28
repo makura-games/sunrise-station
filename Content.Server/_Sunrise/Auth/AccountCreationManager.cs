@@ -13,11 +13,11 @@ using Robust.Shared.Network;
 
 namespace Content.Server._Sunrise.Auth;
 
-public sealed class AccountCreationManager
+public sealed partial class AccountCreationManager
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly DiscordWebhook _discord = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private DiscordWebhook _discord = default!;
     private HttpClient _httpClient = default!;
     private ISawmill _sawmill = default!;
     private string _api = "api/query/userid?userid=";

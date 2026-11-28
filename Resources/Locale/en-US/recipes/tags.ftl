@@ -74,6 +74,7 @@ construction-graph-tag-apron = an apron
 construction-graph-tag-utility-belt = a utility belt
 soil-construction-graph-any-mushroom = any mushroom
 construction-graph-tag-mop-basic = mop
+construction-graph-tag-paper = office paper
 construction-graph-tag-core-pinpointer-piece = piece of core pinpointer
 
 # toys
@@ -157,4 +158,5 @@ construction-graph-tag-nvd = NVD
 # clothing
 construction-graph-tag-backpack = backpack
 
-construction-graph-tag-paper = paper
+# chemistry
+construction-graph-tag-centrifuge-compatible = centrifugable container

@@ -1,14 +1,12 @@
-using Content.Shared._Sunrise.SunriseCCVars;
 using Content.Shared.VoiceMask;
 using Robust.Client.UserInterface;
-using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client.VoiceMask;
 
-public sealed class VoiceMaskBoundUserInterface : BoundUserInterface
+public sealed partial class VoiceMaskBoundUserInterface : BoundUserInterface // Sunrise-Edit: интерфейс расширяется выбором TTS в partial.
 {
-    [Dependency] private readonly IPrototypeManager _protomanager = default!;
+    [Dependency] private IPrototypeManager _protomanager = default!;
 
     [ViewVariables]
     private VoiceMaskNameChangeWindow? _window;
@@ -24,18 +22,12 @@ public sealed class VoiceMaskBoundUserInterface : BoundUserInterface
         _window = this.CreateWindow<VoiceMaskNameChangeWindow>();
         _window.ReloadVerbs(_protomanager);
         _window.AddVerbs();
-        // Sunrise-Start
-        if (IoCManager.Resolve<IConfigurationManager>().GetCVar(SunriseCCVars.TTSEnabled))
-        {
-            _window.ReloadVoices(IoCManager.Resolve<IPrototypeManager>());
-        }
-        // Sunrise-End
+        InitializeSunriseVoiceMaskWindow(_window); // Sunrise-Edit
 
         _window.OnNameChange += OnNameSelected;
         _window.OnVerbChange += verb => SendMessage(new VoiceMaskChangeVerbMessage(verb));
         _window.OnToggle += OnToggle;
         _window.OnAccentToggle += OnAccentToggle;
-        _window.OnVoiceChange += voice => SendMessage(new VoiceMaskChangeVoiceMessage(voice)); // Sunrise-Edit
     }
 
     private void OnNameSelected(string name)
@@ -60,7 +52,8 @@ public sealed class VoiceMaskBoundUserInterface : BoundUserInterface
             return;
         }
 
-        _window.UpdateState(cast.Name, cast.Voice, cast.Verb, cast.Active, cast.AccentHide); // Sunrise-Edit
+        _window.UpdateState(cast.Name, cast.Verb, cast.Active, cast.AccentHide, cast.TitleText);
+        UpdateSunriseVoiceMaskState(_window, cast); // Sunrise-Edit
     }
 
     protected override void Dispose(bool disposing)

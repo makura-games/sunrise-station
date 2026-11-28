@@ -90,7 +90,7 @@
     color: white
     netsync: false
   - type: Appearance
-  - type: ToggleableLightVisuals
+  - type: ToggleableVisuals
     spriteLayer: blade
     inhandVisuals:
       left:
@@ -178,7 +178,7 @@
 - type: entity
   name: anomaly
   description: An incomprehensible joke in space. Should you really be standing this close to it?
-  id: FaketAnomalyIce # AnomalyIce
+  id: FaketAnomalyIce
   parent: BaseStructureDynamic
   components:
   - type: Anomaly
@@ -194,16 +194,11 @@
     sound:
       path: /Audio/Ambience/anomaly_drone.ogg
   - type: Sprite
-    sprite: _Sunrise/Structures/Specific/anomalies.rsi
-    scale: 0.9, 0.9
+    sprite: Structures/Specific/Anomalies/ice_anom.rsi
     layers:
-    - state: shadow-anomaly
-      shader: unshaded
-    - state: anomaly-ice-vfx
-      shader: unshaded
+    - state: anom
       map: ["enum.AnomalyVisualLayers.Base"]
-    - state: anomaly-ice-pulse
-      shader: unshaded
+    - state: pulse
       map: ["enum.AnomalyVisualLayers.Animated"]
       visible: false
   - type: PointLight

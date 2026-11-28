@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using Content.Server._Sunrise.Boss.Components;
@@ -17,7 +17,6 @@ using Content.Shared.Construction;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.ForceSay;
 using Content.Shared.GameTicking;
-using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Mech.Components;
@@ -36,27 +35,22 @@ using Robust.Shared.Utility;
 using System.Numerics;
 using Content.Shared.Gibbing;
 using Robust.Shared.Maths;
+using Content.Shared.Ghost.Components;
 
 namespace Content.Server._Sunrise.Boss.Systems;
 
 /// <inheritdoc />
-public sealed class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
+public sealed partial class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly IConsoleHost _console = default!;
-    [Dependency] private readonly MapLoaderSystem _loader = default!;
-    [Dependency] private readonly ILogManager _log = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly MapSystem _mapSystem = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly ShuttleSystem _shuttles = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly ConstructionSystem _construction = default!;
-    [Dependency] private readonly SharedConstructionSystem _shConstruction = default!;
+    [Dependency] private IConsoleHost _console = default!;
+    [Dependency] private MapLoaderSystem _loader = default!;
+    [Dependency] private ILogManager _log = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -107,7 +101,7 @@ public sealed class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
             UpdateArenaUi();
             await Task.Delay(1000);
             if (ArenaMap != null)
-                _mapManager.DeleteMap(ArenaMap.Value);
+                _map.DeleteMap(ArenaMap.Value);
         }
     }
 
@@ -146,8 +140,8 @@ public sealed class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
             return;
         TeleportFightersBack();
         await Task.Delay(1000);
-        if (ArenaMap != null && _mapManager.MapExists(ArenaMap))
-            _mapManager.DeleteMap(ArenaMap.Value);
+        if (ArenaMap != null && _map.MapExists(ArenaMap))
+            _map.DeleteMap(ArenaMap.Value);
     }
 
     private async void OnCultistGib(EntityUid uid, HellSpawnCultistComponent component, BeingGibbedEvent args)
@@ -157,7 +151,7 @@ public sealed class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
         TeleportFightersBack();
         await Task.Delay(1000);
         if (ArenaMap != null)
-            _mapManager.DeleteMap(ArenaMap.Value);
+            _map.DeleteMap(ArenaMap.Value);
     }
 
     private async void OnSpawnMobStateChanged(EntityUid uid, HellSpawnComponent component, MobStateChangedEvent args)
@@ -168,11 +162,11 @@ public sealed class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
         Status = HellSpawnBossStatus.Idle;
         UpdateArenaUi();
         if (AllEntityQuery<HellSpawnConsoleComponent, TransformComponent>()
-            .MoveNext(out var consoleUid, out _, out _) && consoleUid != null) // В идеальном случае в мире только один алтарь призыва
+            .MoveNext(out var consoleUid, out _, out _)) // В идеальном случае в мире только один алтарь призыва
             _transform.SetCoordinates(uid, Transform(consoleUid).Coordinates);
         await Task.Delay(1000);
         if (ArenaMap != null)
-            _mapManager.DeleteMap(ArenaMap.Value);
+            _map.DeleteMap(ArenaMap.Value);
     }
 
     /// <summary>
@@ -192,8 +186,7 @@ public sealed class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
             {
                 if (fighter.TeleportedFromCoordinates == null)
                 {
-                    if (consoleEntity != null)
-                        _transform.SetCoordinates(fighter.Owner, cnsXform.Coordinates);
+                    _transform.SetCoordinates(fighter.Owner, cnsXform.Coordinates);
                     continue;
                 }
 
@@ -304,7 +297,7 @@ public sealed class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
 
         var xform = Transform(console);
         // Серия выборов целей для телепорта
-        foreach (var ent in _lookup.GetEntitiesInRange<HumanoidAppearanceComponent>(xform.Coordinates, 2f))
+        foreach (var ent in _lookup.GetEntitiesInRange<HumanoidProfileComponent>(xform.Coordinates, 2f))
         {
             MarkedTargets.Add(ent);
         }
@@ -395,7 +388,7 @@ public sealed class HellSpawnArenaSystem : SharedHellSpawnArenaSystem
     public MapId? CreateMap()
     {
         var mapInt = 2000;
-        while (_mapManager.MapExists(new MapId(mapInt)))
+        while (_map.MapExists(new MapId(mapInt)))
         {
             mapInt += 1;
         }

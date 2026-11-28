@@ -12,10 +12,10 @@ namespace Content.Client._Sunrise.Abilities.Milira;
 /// <summary>
 /// Клиентская визуализация полёта милиры, плавное изменение масштаба наподобие как у броска предмета
 /// </summary>
-public sealed class WingFlightVisualizerSystem : EntitySystem
+public sealed partial class WingFlightVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
-    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private SpriteSystem _spriteSystem = default!;
 
     private const string AnimationKey = "wing-flight-scale";
 

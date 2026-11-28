@@ -156,6 +156,10 @@
   - type: Construction
     graph: Clarke
     node: start
+    # Sunrise edit start - готовое шасси начинает граф после сборки частей
+    edge: 0
+    step: 1
+    # Sunrise edit end
     defaultTarget: clarke
 
 # Durand
@@ -168,7 +172,7 @@
   - type: Sprite
     drawdepth: Items
     noRot: false
-    sprite: Objects/Specific/Mech/durand_construction.rsi
+    sprite: _Sunrise/Objects/Specific/Mech/durand_construction.rsi
 
 - type: entity
   id: BaseDurandPartItem
@@ -207,7 +211,7 @@
         whitelist:
           tags:
           - DurandRLeg
-    sprite: Objects/Specific/Mech/durand_construction.rsi
+    sprite: _Sunrise/Objects/Specific/Mech/durand_construction.rsi
   - type: ContainerContainer
     containers:
       mech-assembly-container: !type:Container
@@ -306,7 +310,7 @@
     state: durand0
   - type: Construction
     graph: Durand
-    node: start
+    node: chassis # Sunrise-Edit - готовое шасси начинает отдельный этап графа
     defaultTarget: durand
 
 # Gygax
@@ -458,6 +462,10 @@
   - type: Construction
     graph: Gygax
     node: start
+    # Sunrise edit start - готовое шасси начинает граф после сборки частей
+    edge: 0
+    step: 1
+    # Sunrise edit end
     defaultTarget: gygax
 
 # Ripley APLU
@@ -593,6 +601,10 @@
   - type: Construction
     graph: Ripley
     node: start
+    # Sunrise edit start - готовое шасси начинает граф после сборки частей
+    edge: 0
+    step: 1
+    # Sunrise edit end
     defaultTarget: ripley
 
 # Ripley MK-II
@@ -676,6 +688,10 @@
   - type: Construction
     graph: RipleyMKII
     node: start
+    # Sunrise edit start - готовое шасси начинает граф после сборки частей
+    edge: 0
+    step: 1
+    # Sunrise edit end
     defaultTarget: ripleymkii
 
 # H.O.N.K.
@@ -1119,4 +1135,8 @@
   - type: Construction
     graph: Phazon
     node: start
+    # Sunrise edit start - готовое шасси начинает граф после сборки частей
+    edge: 0
+    step: 1
+    # Sunrise edit end
     defaultTarget: phazon

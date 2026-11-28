@@ -1,5 +1,5 @@
 ent-SuitStorageEVA = { ent-SuitStorageBase }
-    .suffix = EVA
+    .suffix = ЕВА
     .desc = { ent-SuitStorageBase.desc }
 ent-SuitStorageEVAAlternate = { ent-SuitStorageBase }
     .suffix = EVA, Большой шлем
@@ -17,7 +17,7 @@ ent-SuitStorageEVAPirate = { ent-SuitStorageBase }
     .suffix = Древний EVA
     .desc = { ent-SuitStorageBase.desc }
 ent-SuitStorageNTSRA = { ent-SuitStorageBase }
-    .suffix = Ancient EVA
+    .suffix = Древний EVA
     .desc = { ent-SuitStorageBase.desc }
 ent-SuitStorageEngi = { ent-SuitStorageBase }
     .suffix = Инженер

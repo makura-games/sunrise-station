@@ -2,7 +2,6 @@
   id: BaseSunriseMarkingHumanHair
   abstract: true
   bodyPart: Hair
-  markingCategory: Hair
 
 - type: marking
   id: HumanHairAfricanPigtails
@@ -503,8 +502,6 @@
   sprites:
     - sprite: _Sunrise/Mobs/Customization/human_hair.rsi
       state: ziegler
-
-### NEW SUNRISE SPRITES LICENSED UNDER CLA:
 
 - type: marking
   id: HairBasarab

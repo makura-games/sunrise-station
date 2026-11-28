@@ -1,441 +1,496 @@
 using System.Linq;
 using System.Numerics;
-using Content.Client._Sunrise.StatsBoard;
 using Content.Client.Message;
-using Content.Shared._Sunrise.StatsBoard;
-using Content.Shared.GameTicking;
-using Content.Shared._Sunrise.Storyteller; // Sunrise-Edit
+using RoundEndPlayerInfo = Content.Shared.GameTicking.RoundEndMessageEvent.RoundEndPlayerInfo;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
-using Robust.Shared.Player;
 using Robust.Shared.Utility;
-using Robust.Client.Graphics;
-using Robust.Client.UserInterface;
-using Robust.Shared.Maths;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 
-namespace Content.Client.RoundEnd
+namespace Content.Client.RoundEnd;
+
+/// <summary>
+/// Window displaying round end information including player manifest.
+/// </summary>
+public sealed partial class RoundEndSummaryWindow : DefaultWindow
 {
-    public sealed class RoundEndSummaryWindow : DefaultWindow
+    [Dependency] private IEntityManager _entityManager = default!;
+
+    public int RoundId;
+    private readonly RoundEndPlayerInfo[] _playersInfo;
+    private GridContainer _playerGrid = null!;
+    private readonly List<SortButton> _sortButtons = [];
+    private string _searchText = string.Empty;
+
+    private enum SortField
     {
-        private readonly IEntityManager _entityManager;
-        private readonly ISharedPlayerManager _playerManager;
-        public int RoundId;
+        ICName,
+        Role,
+        PlayerType,
+        OOCName
+    }
 
-        public RoundEndSummaryWindow(string gm, string roundEnd, TimeSpan roundTimeSpan, int roundId,
-            RoundEndMessageEvent.RoundEndPlayerInfo[] info, string roundEndStats, SharedStatisticEntry[] statisticEntries, IEntityManager entityManager, ISharedPlayerManager playerManager,
-            string? storytellerName, StorytellerHistoryEntry[] storytellerHistory) // Sunrise-Edit
+    private SortField _currentSortField = SortField.PlayerType;
+    private bool _sortDescending;
+
+    public RoundEndSummaryWindow(string gm, string roundEnd, TimeSpan roundTimeSpan, int roundId, RoundEndPlayerInfo[] info)
+    {
+        IoCManager.InjectDependencies(this);
+        _playersInfo = info;
+
+        MinSize = SetSize = new Vector2(720, 580);
+
+        Title = Loc.GetString("round-end-summary-window-title");
+
+        // The round end window is split into two tabs, one about the round stats
+        // and the other is a list of RoundEndPlayerInfo for each player.
+        // This tab would be a good place for things like: "x many people died.",
+        // "clown slipped the crew x times.", "x shots were fired this round.", etc.
+        // Also, good for serious info.
+
+        RoundId = roundId;
+        var roundEndTabs = new TabContainer();
+        roundEndTabs.AddChild(MakeRoundEndSummaryTab(gm, roundEnd, roundTimeSpan, roundId));
+        roundEndTabs.AddChild(MakePlayerManifestTab());
+
+        ContentsContainer.AddChild(roundEndTabs);
+
+        OpenCenteredRight();
+        MoveToFront();
+    }
+
+    private static BoxContainer MakeRoundEndSummaryTab(string gamemode, string roundEnd, TimeSpan roundDuration, int roundId)
+    {
+        var roundEndSummaryTab = new BoxContainer
         {
-            _entityManager = entityManager;
-            _playerManager = playerManager; // Sunrise-Edit
+            Orientation = LayoutOrientation.Vertical,
+            Name = Loc.GetString("round-end-summary-window-round-end-summary-tab-title")
+        };
 
-            MinSize = SetSize = new Vector2(750, 650); // Sunrise-Edit
+        var roundEndSummaryContainerScrollbox = new ScrollContainer
+        {
+            VerticalExpand = true,
+            Margin = new Thickness(10)
+        };
+        var roundEndSummaryContainer = new BoxContainer
+        {
+            Orientation = LayoutOrientation.Vertical
+        };
 
-            Title = Loc.GetString("round-end-summary-window-title");
+        //Gamemode Name
+        var gamemodeLabel = new RichTextLabel();
+        var gamemodeMessage = new FormattedMessage();
+        gamemodeMessage.AddMarkupOrThrow(Loc.GetString("round-end-summary-window-round-id-label", ("roundId", roundId)));
+        gamemodeMessage.AddText(" ");
+        gamemodeMessage.AddMarkupOrThrow(Loc.GetString("round-end-summary-window-gamemode-name-label", ("gamemode", gamemode)));
+        gamemodeLabel.SetMessage(gamemodeMessage);
+        roundEndSummaryContainer.AddChild(gamemodeLabel);
 
-            RoundId = roundId;
-            var roundEndTabs = new TabContainer();
-            roundEndTabs.AddChild(MakeStorytellerHistoryTab(storytellerHistory)); // Sunrise-Edit
-            roundEndTabs.AddChild(MakeRoundEndStatsTab(roundEndStats)); // Sunrise-End
-            roundEndTabs.AddChild(MakeRoundEndMyStatsTab(statisticEntries)); // Sunrise-End
-            roundEndTabs.AddChild(MakeRoundEndSummaryTab(gm, roundEnd, roundTimeSpan, roundId, storytellerName)); // Sunrise-Edit
-            roundEndTabs.AddChild(MakePlayerManifestTab(info));
+        //Duration
+        var roundTimeLabel = new RichTextLabel();
+        roundTimeLabel.SetMarkup(Loc.GetString("round-end-summary-window-duration-label",
+                                               ("hours", roundDuration.Hours),
+                                               ("minutes", roundDuration.Minutes),
+                                               ("seconds", roundDuration.Seconds)));
+        roundEndSummaryContainer.AddChild(roundTimeLabel);
 
-            ContentsContainer.AddChild(roundEndTabs);
-
-            OpenCenteredRight();
-            MoveToFront();
+        //Round end text
+        if (!string.IsNullOrEmpty(roundEnd))
+        {
+            var roundEndLabel = new RichTextLabel();
+            roundEndLabel.SetMarkup(roundEnd);
+            roundEndSummaryContainer.AddChild(roundEndLabel);
         }
 
-        private BoxContainer MakeRoundEndSummaryTab(string gamemode, string roundEnd, TimeSpan roundDuration, int roundId, string? storytellerName) // Sunrise-Edit
+        roundEndSummaryContainerScrollbox.AddChild(roundEndSummaryContainer);
+        roundEndSummaryTab.AddChild(roundEndSummaryContainerScrollbox);
+
+        return roundEndSummaryTab;
+    }
+
+    private BoxContainer MakePlayerManifestTab()
+    {
+        var playerManifestTab = new BoxContainer
         {
-            var roundEndSummaryTab = new BoxContainer
-            {
-                Orientation = LayoutOrientation.Vertical,
-                Name = Loc.GetString("round-end-summary-window-round-end-summary-tab-title")
-            };
+            Orientation = LayoutOrientation.Vertical,
+            Name = Loc.GetString("round-end-summary-window-player-manifest-tab-title")
+        };
 
-            var roundEndSummaryContainerScrollbox = new ScrollContainer
-            {
-                VerticalExpand = true,
-                Margin = new Thickness(10)
-            };
-            var roundEndSummaryContainer = new BoxContainer
-            {
-                Orientation = LayoutOrientation.Vertical
-            };
+        // Search container
+        var searchContainer = new BoxContainer
+        {
+            Orientation = LayoutOrientation.Horizontal,
+            Margin = new Thickness(10, 10, 10, 5)
+        };
 
-            //Gamemode Name
-            var gamemodeLabel = new RichRichRichRichTextLabelHackForMarkup();
-            var gamemodeMessage = new FormattedMessage();
-            gamemodeMessage.AddMarkupOrThrow(Loc.GetString("round-end-summary-window-round-id-label", ("roundId", roundId)));
-            gamemodeMessage.AddText(" ");
-            gamemodeMessage.AddMarkupOrThrow(Loc.GetString("round-end-summary-window-gamemode-name-label", ("gamemode", gamemode)));
-            gamemodeLabel.SetMessage(gamemodeMessage);
-            roundEndSummaryContainer.AddChild(gamemodeLabel);
+        var searchLabel = new Label
+        {
+            Text = "Filter: ",
+            VerticalAlignment = VAlignment.Center,
+            MinSize = new Vector2(40, 1)
+        };
 
-            // Active Storyteller
-            if (!string.IsNullOrEmpty(storytellerName))
-            {
-                var storytellerLabel = new RichTextLabel();
-                storytellerLabel.SetMarkup(Loc.GetString("round-end-summary-window-storyteller-name-label", ("storyteller", storytellerName)));
-                roundEndSummaryContainer.AddChild(storytellerLabel);
-            }
+        var searchBar = new LineEdit
+        {
+            PlaceHolder = Loc.GetString("round-end-summary-window-player-manifest-tab-search-placeholder"),
+            HorizontalExpand = true,
+            MinSize = new Vector2(200, 1)
+        };
 
-            //Duration
-            var roundTimeLabel = new RichTextLabel();
-            roundTimeLabel.SetMarkup(Loc.GetString("round-end-summary-window-duration-label",
-                                                   ("hours", roundDuration.Hours),
-                                                   ("minutes", roundDuration.Minutes),
-                                                   ("seconds", roundDuration.Seconds)));
-            roundEndSummaryContainer.AddChild(roundTimeLabel);
+        searchBar.OnTextChanged += OnSearchTextChanged;
 
-            //Round end text
-            if (!string.IsNullOrEmpty(roundEnd))
-            {
-                var roundEndLabel = new RichTextLabel();
-                roundEndLabel.SetMarkup(roundEnd);
-                roundEndSummaryContainer.AddChild(roundEndLabel);
-            }
+        searchContainer.AddChild(searchLabel);
+        searchContainer.AddChild(searchBar);
+        playerManifestTab.AddChild(searchContainer);
 
-            roundEndSummaryContainerScrollbox.AddChild(roundEndSummaryContainer);
-            roundEndSummaryTab.AddChild(roundEndSummaryContainerScrollbox);
+        // Header with sort buttons
+        var headerContainer = new BoxContainer
+        {
+            Orientation = LayoutOrientation.Horizontal,
+            Margin = new Thickness(10, 5, 10, 5)
+        };
 
-            return roundEndSummaryTab;
+        var icNameButton = CreateSortButton("round-end-summary-window-player-manifest-tab-sort-character", SortField.ICName);
+        var roleButton = CreateSortButton("round-end-summary-window-player-manifest-tab-sort-role", SortField.Role);
+        var playerTypeButton = CreateSortButton("round-end-summary-window-player-manifest-tab-sort-player-type", SortField.PlayerType);
+        var oocNameButton = CreateSortButton("round-end-summary-window-player-manifest-tab-sort-player", SortField.OOCName);
+
+        playerTypeButton.SetSortIndicator(true);
+        headerContainer.AddChild(icNameButton);
+
+        // Add small spacer between buttons
+        headerContainer.AddChild(new Control
+        {
+            MinSize = new Vector2(5, 1),
+            HorizontalExpand = false
+        });
+
+        headerContainer.AddChild(roleButton);
+
+        // Add small spacer between buttons
+        headerContainer.AddChild(new Control
+        {
+            MinSize = new Vector2(5, 1),
+            HorizontalExpand = false
+        });
+
+        headerContainer.AddChild(playerTypeButton);
+
+        // Add small spacer between buttons
+        headerContainer.AddChild(new Control
+        {
+            MinSize = new Vector2(5, 1),
+            HorizontalExpand = false
+        });
+
+        headerContainer.AddChild(oocNameButton);
+
+        playerManifestTab.AddChild(headerContainer);
+
+        var scrollContainer = new ScrollContainer
+        {
+            VerticalExpand = true,
+            Margin = new Thickness(10, 0, 10, 10),
+        };
+
+        _playerGrid = new GridContainer
+        {
+            Columns = 6, // Player Sprite,IC Name,Role,Player Type,OOC Name
+            HorizontalExpand = true,
+        };
+
+        RefreshPlayerList();
+
+        scrollContainer.AddChild(_playerGrid);
+        playerManifestTab.AddChild(scrollContainer);
+
+        return playerManifestTab;
+    }
+
+    private SortButton CreateSortButton(string text, SortField field)
+    {
+        var button = new SortButton(Loc.GetString(text), field);
+        button.OnPressed += _ => SortBy(field);
+        _sortButtons.Add(button);
+        return button;
+    }
+
+    /// <summary>
+    /// Handles sorting by the specified field, toggling direction if the same field is clicked
+    /// </summary>
+    private void SortBy(SortField field)
+    {
+        if (_currentSortField == field)
+        {
+            _sortDescending = !_sortDescending;
+        }
+        else
+        {
+            _currentSortField = field;
+            _sortDescending = false;
         }
 
-        private BoxContainer MakePlayerManifestTab(RoundEndMessageEvent.RoundEndPlayerInfo[] playersInfo)
+        foreach (var button in _sortButtons)
         {
-            var playerManifestTab = new BoxContainer
-            {
-                Orientation = LayoutOrientation.Vertical,
-                Name = Loc.GetString("round-end-summary-window-player-manifest-tab-title")
-            };
-
-            var playerInfoContainerScrollbox = new ScrollContainer
-            {
-                VerticalExpand = true,
-                Margin = new Thickness(10)
-            };
-            var playerInfoContainer = new BoxContainer
-            {
-                Orientation = LayoutOrientation.Vertical
-            };
-
-            //Put observers at the bottom of the list. Put antags on top.
-            var sortedPlayersInfo = playersInfo.OrderBy(p => p.Observer).ThenBy(p => !p.Antag);
-
-            //Create labels for each player info.
-            foreach (var playerInfo in sortedPlayersInfo)
-            {
-                var hBox = new BoxContainer
-                {
-                    Orientation = LayoutOrientation.Horizontal,
-                };
-
-                var playerInfoText = new RichTextLabel
-                {
-                    VerticalAlignment = VAlignment.Center,
-                    VerticalExpand = true,
-                };
-
-                if (playerInfo.PlayerNetEntity != null)
-                {
-                    hBox.AddChild(new SpriteView(playerInfo.PlayerNetEntity.Value, _entityManager)
-                        {
-                            OverrideDirection = Direction.South,
-                            VerticalAlignment = VAlignment.Center,
-                            SetSize = new Vector2(32, 32),
-                            VerticalExpand = true,
-                        });
-                }
-
-                if (playerInfo.PlayerICName != null)
-                {
-                    if (playerInfo.Observer)
-                    {
-                        playerInfoText.SetMarkup(
-                            Loc.GetString("round-end-summary-window-player-info-if-observer-text",
-                                          ("playerOOCName", playerInfo.PlayerOOCName),
-                                          ("playerICName", playerInfo.PlayerICName)));
-                    }
-                    else
-                    {
-                        //TODO: On Hover display a popup detailing more play info.
-                        //For example: their antag goals and if they completed them sucessfully.
-                        var icNameColor = playerInfo.Antag ? "red" : "white";
-                        playerInfoText.SetMarkup(
-                            Loc.GetString("round-end-summary-window-player-info-if-not-observer-text",
-                                ("playerOOCName", playerInfo.PlayerOOCName),
-                                ("icNameColor", icNameColor),
-                                ("playerICName", playerInfo.PlayerICName),
-                                ("playerRole", Loc.GetString(playerInfo.Role))));
-                    }
-                }
-                hBox.AddChild(playerInfoText);
-                playerInfoContainer.AddChild(hBox);
-            }
-
-            playerInfoContainerScrollbox.AddChild(playerInfoContainer);
-            playerManifestTab.AddChild(playerInfoContainerScrollbox);
-
-            return playerManifestTab;
+            button.SetSortIndicator(button.Field == _currentSortField, _sortDescending);
         }
 
-        // Sunrise-Start
-        private BoxContainer MakeRoundEndStatsTab(string stats)
+        RefreshPlayerList();
+    }
+
+    /// <summary>
+    /// Refreshes the player list grid by clearing it and repopulating with sorted player data
+    /// </summary>
+    private void RefreshPlayerList()
+    {
+        _playerGrid.RemoveAllChildren();
+
+        var sortedPlayers = GetSortedPlayers();
+        foreach (var playerInfo in sortedPlayers)
         {
-            var roundEndSummaryTab = new BoxContainer
-            {
-                Orientation = LayoutOrientation.Vertical,
-                Name = Loc.GetString("round-end-summary-window-stats-tab-title")
-            };
+            AddPlayerRow(playerInfo);
+        }
+    }
 
-            var roundEndSummaryContainerScrollbox = new ScrollContainer
+    /// <summary>
+    /// Adds a single player row to the grid with all columns (sprite, IC name, role, player type, OOC name)
+    /// </summary>
+    private void AddPlayerRow(RoundEndPlayerInfo playerInfo)
+    {
+        // Player Sprite column
+        if (playerInfo.PlayerNetEntity != null)
+        {
+            _playerGrid.AddChild(new SpriteView(playerInfo.PlayerNetEntity.Value, _entityManager)
             {
-                VerticalExpand = true,
-                Margin = new Thickness(10)
-            };
-            var roundEndSummaryContainer = new BoxContainer
+                OverrideDirection = Direction.South,
+                VerticalAlignment = VAlignment.Center,
+                SetSize = new Vector2(32, 32),
+            });
+        }
+        else
+        {
+            _playerGrid.AddChild(new Control
             {
-                Orientation = LayoutOrientation.Vertical
-            };
-
-            //Round end text
-            if (!string.IsNullOrEmpty(stats))
-            {
-                var statsLabel = new RichTextLabel();
-                statsLabel.SetMarkup(stats);
-                roundEndSummaryContainer.AddChild(statsLabel);
-            }
-
-            roundEndSummaryContainerScrollbox.AddChild(roundEndSummaryContainer);
-            roundEndSummaryTab.AddChild(roundEndSummaryContainerScrollbox);
-
-            return roundEndSummaryTab;
+                SetSize = new Vector2(32, 32),
+            });
         }
 
-        private BoxContainer MakeRoundEndMyStatsTab(SharedStatisticEntry[] statisticEntries)
+        // IC Name column
+        var icNameLabel = new Label
         {
-            var roundEndSummaryTab = new BoxContainer
-            {
-                Orientation = LayoutOrientation.Vertical,
-                Name = Loc.GetString("round-end-summary-window-my-stats-tab-title")
-            };
+            Text = playerInfo.PlayerICName ?? playerInfo.PlayerOOCName,
+            VerticalAlignment = VAlignment.Center,
+            HorizontalExpand = true,
+            ClipText = true
+        };
 
-            var roundEndSummaryContainerScrollbox = new ScrollContainer
-            {
-                VerticalExpand = true,
-                Margin = new Thickness(10),
-            };
-
-            var statsEntries = new StatsEntries();
-            foreach (var statisticEntry in statisticEntries)
-            {
-                if (statisticEntry.FirstActor != _playerManager.LocalSession!.UserId)
-                    continue;
-
-                var statsEntry = new StatsEntry(statisticEntry.Name, statisticEntry.TotalTakeDamage,
-                    statisticEntry.TotalTakeHeal, statisticEntry.TotalInflictedDamage,
-                    statisticEntry.TotalInflictedHeal, statisticEntry.SlippedCount,
-                    statisticEntry.CreamedCount, statisticEntry.DoorEmagedCount, statisticEntry.ElectrocutedCount,
-                    statisticEntry.CuffedCount, statisticEntry.AbsorbedPuddleCount, statisticEntry.SpentTk ?? 0,
-                    statisticEntry.DeadCount, statisticEntry.HumanoidKillCount, statisticEntry.KilledMouseCount,
-                    statisticEntry.CuffedTime, statisticEntry.SpaceTime, statisticEntry.SleepTime,
-                    statisticEntry.IsInteractedCaptainCard ? Loc.GetString("accept-cloning-window-accept-button") : Loc.GetString("accept-cloning-window-deny-button"));
-                statsEntries.AddEntry(statsEntry);
-            }
-
-            roundEndSummaryContainerScrollbox.AddChild(statsEntries);
-            roundEndSummaryTab.AddChild(roundEndSummaryContainerScrollbox);
-
-            return roundEndSummaryTab;
-        }
-        // Sunrise-End
-
-        private Color GetEventTypeColor(StorytellerHistoryType type)
+        // Apply color coding for antagonists
+        if (playerInfo.Antag)
         {
-            return type switch
-            {
-                StorytellerHistoryType.HelpfulEvent => Color.FromHex("#2ecc71").WithAlpha(0.2f),
-                StorytellerHistoryType.NeutralEvent => Color.FromHex("#7f8c8d").WithAlpha(0.2f),
-                StorytellerHistoryType.MinorCalmEvent => Color.FromHex("#3498db").WithAlpha(0.2f),
-                StorytellerHistoryType.MajorCalmEvent => Color.FromHex("#9b59b6").WithAlpha(0.2f),
-                StorytellerHistoryType.MinorAntagEvent => Color.FromHex("#e67e22").WithAlpha(0.2f),
-                StorytellerHistoryType.MajorAntagEvent => Color.FromHex("#e74c3c").WithAlpha(0.2f),
-                StorytellerHistoryType.Death => Color.FromHex("#c0392b").WithAlpha(0.2f),
-                StorytellerHistoryType.AnomalyEngine => Color.FromHex("#e67e22").WithAlpha(0.2f),
-                StorytellerHistoryType.StationEvent => Color.FromHex("#34495e").WithAlpha(0.2f),
-                StorytellerHistoryType.Explosion => Color.FromHex("#d35400").WithAlpha(0.2f),
-                StorytellerHistoryType.Research => Color.FromHex("#9b59b6").WithAlpha(0.2f),
-                StorytellerHistoryType.Arrival => Color.FromHex("#2ecc71").WithAlpha(0.2f),
-                StorytellerHistoryType.Departure => Color.FromHex("#3498db").WithAlpha(0.2f),
-                _ => Color.FromHex("#95a5a6").WithAlpha(0.2f),
-            };
+            icNameLabel.FontColorOverride = Color.Red;
         }
 
-        private string GetEventTypeName(StorytellerHistoryType type)
+        _playerGrid.AddChild(icNameLabel);
+
+        _playerGrid.AddChild(new Control
         {
-            return type switch
-            {
-                StorytellerHistoryType.HelpfulEvent => "Положительные",
-                StorytellerHistoryType.NeutralEvent => "Нейтральные события",
-                StorytellerHistoryType.MinorCalmEvent => "Мелкие проишествия",
-                StorytellerHistoryType.MajorCalmEvent => "Крупные проишествия",
-                StorytellerHistoryType.MinorAntagEvent => "Антагонисты",
-                StorytellerHistoryType.MajorAntagEvent => "Крупные антагонисты",
-                StorytellerHistoryType.Death => "Смерти",
-                StorytellerHistoryType.AnomalyEngine => "Аномальные двигатели",
-                StorytellerHistoryType.Explosion => "Взрывы",
-                StorytellerHistoryType.Research => "Исследования",
-                StorytellerHistoryType.Arrival => "Прибытия",
-                StorytellerHistoryType.Departure => "Крио",
-                _ => type.ToString(),
-            };
+            SetSize = new Vector2(32, 32),
+        });
+
+        // Role column
+        var roleLabel = new Label
+        {
+            Text = playerInfo.Observer ? "-" : Loc.GetString(playerInfo.Role),
+            VerticalAlignment = VAlignment.Center,
+            HorizontalExpand = true,
+            ClipText = true
+        };
+        _playerGrid.AddChild(roleLabel);
+
+        // Player Type column
+        var playerTypeLabel = new Label
+        {
+            Text = GetPlayerTypeText(playerInfo),
+            VerticalAlignment = VAlignment.Center,
+            HorizontalExpand = true,
+            ClipText = true
+        };
+
+        // Apply color coding based on player type
+        if (playerInfo.Antag)
+        {
+            playerTypeLabel.FontColorOverride = Color.Red;
+        }
+        else if (playerInfo.Observer)
+        {
+            playerTypeLabel.FontColorOverride = Color.Gray;
         }
 
-        private BoxContainer MakeStorytellerHistoryTab(StorytellerHistoryEntry[] history)
-        {
-            var tab = new BoxContainer
-            {
-                Orientation = LayoutOrientation.Vertical,
-                Name = Loc.GetString("round-end-summary-window-storyteller-history-tab-title")
-            };
+        _playerGrid.AddChild(playerTypeLabel);
 
-            var scroll = new ScrollContainer
-            {
-                VerticalExpand = true,
-                Margin = new Thickness(10),
-                HScrollEnabled = false
-            };
+        // OOC Name column
+        var oocNameLabel = new Label
+        {
+            Text = playerInfo.PlayerOOCName,
+            VerticalAlignment = VAlignment.Center,
+            HorizontalExpand = true,
+            ClipText = true
+        };
+
+        _playerGrid.AddChild(oocNameLabel);
+    }
+
+    /// <summary>
+    /// Gets the player type text for a player based on their observer and antagonist flags
+    /// </summary>
+    private static string GetPlayerTypeText(RoundEndPlayerInfo playerInfo)
+    {
+        if (playerInfo.Observer)
+            return Loc.GetString("round-end-summary-window-player-manifest-tab-sort-player-type-observer");
+        if (playerInfo.Antag)
+            return Loc.GetString("round-end-summary-window-player-manifest-tab-sort-player-type-antag");
+
+        return Loc.GetString("round-end-summary-window-player-manifest-tab-sort-player-type-crew");
+    }
+
+    private IEnumerable<RoundEndPlayerInfo> GetSortedPlayers()
+    {
+        // First filter players based on search text
+        var filteredPlayers = string.IsNullOrEmpty(_searchText)
+            ? _playersInfo
+            : _playersInfo.Where(PlayerMatchesSearch);
+
+        static string GetIcKey(RoundEndPlayerInfo p) =>
+                (p.PlayerICName ?? p.PlayerOOCName).ToLowerInvariant();
+
+        static string GetOocKey(RoundEndPlayerInfo p) =>
+            p.PlayerOOCName.ToLowerInvariant();
+
+        static string GetRoleKey(RoundEndPlayerInfo p) =>
+            (p.Observer ? "zzz_observer" : p.Role).ToLowerInvariant();
+
+        static int GetPlayerTypeSortKey(RoundEndPlayerInfo p) =>
+            p.Antag ? 1 : p.Observer ? 3 : 2;
+
+        return _currentSortField switch
+        {
+            SortField.ICName => ApplySort(filteredPlayers, GetIcKey, _sortDescending),
+            SortField.OOCName => ApplySort(filteredPlayers, GetOocKey, _sortDescending),
+            SortField.Role => ApplySort(filteredPlayers, GetRoleKey, _sortDescending),
+            SortField.PlayerType => ApplySort(filteredPlayers, GetPlayerTypeSortKey, _sortDescending),
+            _ => filteredPlayers
+        };
+    }
+
+    private static IEnumerable<RoundEndPlayerInfo> ApplySort<TKey>(
+        IEnumerable<RoundEndPlayerInfo> players,
+        Func<RoundEndPlayerInfo, TKey> primaryKey,
+        bool descending)
+    {
+        static string SecondaryKey(RoundEndPlayerInfo p) =>
+            (p.PlayerICName ?? p.PlayerOOCName).ToLowerInvariant();
+
+        return descending
+            ? players.OrderByDescending(primaryKey).ThenByDescending(SecondaryKey)
+            : players.OrderBy(primaryKey).ThenBy(SecondaryKey);
+    }
+
+    /// <summary>
+    /// Gets a sort key for player type to ensure consistent ordering: Antagonist -> Crew -> Observer
+    /// </summary>
+
+    /// <summary>
+    /// Checks if a player matches the current search filter
+    /// </summary>
+    private bool PlayerMatchesSearch(RoundEndPlayerInfo playerInfo)
+    {
+        if (string.IsNullOrEmpty(_searchText))
+            return true;
+
+        // Search in character name (IC name)
+        if (!string.IsNullOrEmpty(playerInfo.PlayerICName) &&
+            playerInfo.PlayerICName.Contains(_searchText, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        // Search in player name (OOC name)
+        if (!string.IsNullOrEmpty(playerInfo.PlayerOOCName) &&
+            playerInfo.PlayerOOCName.Contains(_searchText, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        // Search in role
+        if (!string.IsNullOrEmpty(playerInfo.Role))
+        {
+            if (playerInfo.Role.Contains(_searchText, StringComparison.OrdinalIgnoreCase) ||
+                Loc.GetString(playerInfo.Role).Contains(_searchText, StringComparison.OrdinalIgnoreCase))
+                return true;
+        }
+
+        // Search in player type
+        var playerType = GetPlayerTypeText(playerInfo);
+        if (playerType.Contains(_searchText, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        // Search for "Observer" when they are observers
+        if (playerInfo.Observer && "observer".Contains(_searchText, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        return false;
+    }
+
+    /// <summary>
+    /// Handles search text changes and refreshes the player list
+    /// </summary>
+    private void OnSearchTextChanged(LineEdit.LineEditEventArgs args)
+    {
+        _searchText = args.Text;
+        RefreshPlayerList();
+    }
+
+    private sealed class SortButton : Button
+    {
+        public SortField Field { get; }
+        private readonly Label _sortIndicator;
+
+        public SortButton(string text, SortField field)
+        {
+            Field = field;
+            HorizontalExpand = true;
+
             var container = new BoxContainer
             {
-                Orientation = LayoutOrientation.Vertical,
-                SeparationOverride = 10
+                Orientation = LayoutOrientation.Horizontal,
+                HorizontalExpand = true
             };
 
-            var eventPanels = new List<(StorytellerHistoryType Type, Control Panel)>();
-
-            if (history == null || history.Length == 0)
+            var label = new Label
             {
-                var emptyLabel = new RichTextLabel();
-                emptyLabel.SetMarkup(Loc.GetString("round-end-summary-window-storyteller-history-empty"));
-                container.AddChild(emptyLabel);
-            }
-            else
+                Text = text,
+                HorizontalExpand = true
+            };
+
+            _sortIndicator = new Label
             {
-                var titleLabel = new RichTextLabel();
-                titleLabel.SetMarkup("[bold][size=14]Хронология событий раунда:[/size][/bold]\n");
-                container.AddChild(titleLabel);
+                Text = "",
+                HorizontalAlignment = HAlignment.Right,
+                MinSize = new Vector2(15, 1)
+            };
 
-                foreach (var entry in history)
-                {
-                    var panelColor = GetEventTypeColor(entry.EventType);
-                    var panel = new PanelContainer
-                    {
-                        PanelOverride = new StyleBoxFlat
-                        {
-                            BackgroundColor = panelColor,
-                            BorderColor = panelColor.WithAlpha(1f),
-                            BorderThickness = new Thickness(1),
-                            ContentMarginBottomOverride = 6,
-                            ContentMarginLeftOverride = 6,
-                            ContentMarginRightOverride = 6,
-                            ContentMarginTopOverride = 6
-                        }
-                    };
+            container.AddChild(label);
+            container.AddChild(_sortIndicator);
 
-                    var hBox = new BoxContainer
-                    {
-                        Orientation = LayoutOrientation.Horizontal,
-                        SeparationOverride = 12
-                    };
+            AddChild(container);
+        }
 
-                    var timeLabel = new RichTextLabel
-                    {
-                        SetWidth = 80,
-                    };
-                    var formattedTime = $"[color=#A9A9A9]({entry.RoundTime.ToString(@"hh\:mm\:ss")})[/color]";
-                    timeLabel.SetMarkup(formattedTime);
-
-                    var textLabel = new RichTextLabel
-                    {
-                        HorizontalExpand = true
-                    };
-                    textLabel.SetMarkupPermissive(entry.Description);
-
-                    hBox.AddChild(timeLabel);
-                    hBox.AddChild(textLabel);
-                    panel.AddChild(hBox);
-                    container.AddChild(panel);
-
-                    eventPanels.Add((entry.EventType, panel));
-                }
+        public void SetSortIndicator(bool active, bool descending = false)
+        {
+            if (!active)
+            {
+                _sortIndicator.Text = "";
+                return;
             }
 
-            scroll.AddChild(container);
-            tab.AddChild(scroll);
-
-            if (history != null && history.Length > 0)
-            {
-                var filtersGrid = new GridContainer
-                {
-                    Columns = 4,
-                    Margin = new Thickness(10, 0, 10, 10)
-                };
-
-                var categories = new Dictionary<string, List<StorytellerHistoryType>>
-                {
-                    { Loc.GetString("storyteller-history-filter-events"), new List<StorytellerHistoryType> { StorytellerHistoryType.HelpfulEvent, StorytellerHistoryType.NeutralEvent, StorytellerHistoryType.MinorCalmEvent, StorytellerHistoryType.MajorCalmEvent } },
-                    { Loc.GetString("storyteller-history-filter-antagonists"), new List<StorytellerHistoryType> { StorytellerHistoryType.MinorAntagEvent, StorytellerHistoryType.MajorAntagEvent } },
-                    { Loc.GetString("storyteller-history-filter-station"), new List<StorytellerHistoryType> { StorytellerHistoryType.StationEvent } },
-                    { Loc.GetString("storyteller-history-filter-deaths"), new List<StorytellerHistoryType> { StorytellerHistoryType.Death } },
-                    { Loc.GetString("storyteller-history-filter-anomalies"), new List<StorytellerHistoryType> { StorytellerHistoryType.AnomalyEngine } },
-                    { Loc.GetString("storyteller-history-filter-explosions"), new List<StorytellerHistoryType> { StorytellerHistoryType.Explosion } },
-                    { Loc.GetString("storyteller-history-filter-research"), new List<StorytellerHistoryType> { StorytellerHistoryType.Research } },
-                    { Loc.GetString("storyteller-history-filter-arrivals"), new List<StorytellerHistoryType> { StorytellerHistoryType.Arrival } },
-                    { Loc.GetString("storyteller-history-filter-cryo"), new List<StorytellerHistoryType> { StorytellerHistoryType.Departure } }
-                };
-
-                foreach (var kvp in categories)
-                {
-                    var isHiddenDefault = kvp.Value.Contains(StorytellerHistoryType.Arrival) || kvp.Value.Contains(StorytellerHistoryType.Departure);
-                    var cb = new CheckBox
-                    {
-                        Text = kvp.Key,
-                        Pressed = !isHiddenDefault
-                    };
-
-                    cb.OnToggled += args =>
-                    {
-                        foreach (var (pType, pControl) in eventPanels)
-                        {
-                            if (kvp.Value.Contains(pType))
-                                pControl.Visible = args.Pressed;
-                        }
-                    };
-
-                    // Initialize visibility
-                    foreach (var (pType, pControl) in eventPanels)
-                    {
-                        if (kvp.Value.Contains(pType))
-                            pControl.Visible = !isHiddenDefault;
-                    }
-
-                    filtersGrid.AddChild(cb);
-                }
-                tab.AddChild(filtersGrid);
-            }
-
-            return tab;
+            _sortIndicator.Text = descending ? "▼" : "▲";
         }
     }
-
-    // Sunrise-Start
-    // Simple helper class to allow compiling gamemodeLabel in the modified MakeRoundEndSummaryTab
-    internal sealed class RichRichRichRichTextLabelHackForMarkup : RichTextLabel
-    {
-    }
-    // Sunrise-End
-
 }

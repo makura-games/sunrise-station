@@ -1,6 +1,4 @@
-﻿// © SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt;
-
-using Content.Shared.Humanoid.Markings;
+﻿using Content.Shared.Humanoid.Markings;
 using Content.Shared._Sunrise.Razor;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;

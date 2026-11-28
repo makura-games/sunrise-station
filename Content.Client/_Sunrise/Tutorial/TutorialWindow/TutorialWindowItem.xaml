@@ -1,0 +1,50 @@
+<Control xmlns="https://spacestation14.io"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         x:Class="Content.Client._Sunrise.Tutorial.TutorialWindow.TutorialWindowItem"
+         xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+         xmlns:sunriseControls="clr-namespace:Content.Client._Sunrise.UserInterface.Controls"
+         HorizontalExpand="True"
+         VerticalExpand="True"
+         SetSize="410 370"
+         Margin="4">
+    <PanelContainer Name="MainPanel"
+                    VerticalExpand="True">
+        <BoxContainer Orientation="Vertical"
+                      HorizontalExpand="True"
+                      VerticalExpand="True"
+                      SeparationOverride="8"
+                      Margin="8">
+            <controls:StripeBack HorizontalExpand="True">
+                <Label Name="TitleLabel"
+                       StyleClasses="LabelHeading"
+                       HorizontalAlignment="Center"
+                       HorizontalExpand="True"/>
+            </controls:StripeBack>
+
+            <sunriseControls:AutoCropTextureRect Name="PreviewTexture"
+                                                 HorizontalExpand="True"
+                                                 SetHeight="150"
+                                                 MinHeight="150"
+                                                 MaxHeight="150"
+                                                 VerticalAlignment="Top"/>
+
+            <RichTextLabel Name="DescriptionLabel"
+                           HorizontalExpand="True"
+                           VerticalExpand="True"
+                           MinHeight="64"/>
+
+            <BoxContainer Orientation="Vertical"
+                          HorizontalExpand="True"
+                          SeparationOverride="2">
+                <RichTextLabel Name="StatusLabel"
+                               HorizontalExpand="True"/>
+                <RichTextLabel Name="TimeLabel"
+                               HorizontalExpand="True"/>
+            </BoxContainer>
+
+            <Button Name="StartButton"
+                    HorizontalExpand="True"
+                    MinHeight="30"/>
+        </BoxContainer>
+    </PanelContainer>
+</Control>

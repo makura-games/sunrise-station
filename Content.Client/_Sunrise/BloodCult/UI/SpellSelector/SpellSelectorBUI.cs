@@ -1,21 +1,13 @@
 ﻿using Content.Client._Sunrise.UserInterface.Radial;
 using Content.Shared._Sunrise.BloodCult.Components;
 using Content.Shared._Sunrise.BloodCult.Items;
-using Content.Shared.Actions;
-using Content.Shared.Actions.Components;
-using Robust.Client.Graphics;
-using Robust.Client.Input;
-using Robust.Client.Utility;
+using Robust.Client.GameObjects;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Client._Sunrise.BloodCult.UI.SpellSelector;
 
 public sealed class SpellSelectorBUI : BoundUserInterface
 {
-    [Dependency] private readonly IClyde _displayManager = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
-
     private RadialContainer? _menu;
 
     private bool _selected;
@@ -38,26 +30,14 @@ public sealed class SpellSelectorBUI : BoundUserInterface
         };
 
         var protoMan = IoCManager.Resolve<IPrototypeManager>();
+        var sprite = EntMan.System<SpriteSystem>();
 
         foreach (var action in BloodCultistComponent.CultistActions)
         {
             if (!protoMan.TryIndex(action, out var proto))
                 continue;
 
-            // Sunrise-TODO: Лютый щиткод, нужно нахуярить прототип cultAction и там хранить иконку и сам экшен.
-            // Sunrise-TODO: А здесь лишь енумерировать все эти прототипы
-            if (!proto.Components.TryGetComponent("Action", out var actionComp))
-                continue;
-
-            if (actionComp is not ActionComponent actionComponent)
-                continue;
-
-            var icon = actionComponent.Icon;
-
-            if (icon == null)
-                continue;
-
-            var texture = icon.Frame0();
+            var texture = sprite.GetPrototypeIcon(proto).Default;
             var button = _menu.AddButton(proto.Name, texture);
 
             button.Controller.OnPressed += _ =>

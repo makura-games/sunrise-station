@@ -13,7 +13,7 @@ If the naming example differs from `ss14-naming-conventions`, use `ss14-naming-c
 
 ## What is Prototype
 
-A prototype is a YAML data definition that the engine loads upon initialization. Prototypes describe entities, recipes, reagents, and other game objects. Entity prototypes determine what components and with what values ​​the entity will have when created.
+A prototype is a YAML data definition that the engine loads upon initialization. Prototypes describe entities, recipes, reagents, and other game objects. Entity prototypes determine what components and with what values the entity will have when created.
 
 ## ID format - quick reminder (see ss14-naming-conventions)
 
@@ -99,18 +99,20 @@ All prototype identifiers are **mandatory** recorded in CamelCase:
 - type: entity
   id: Scp096
   parent:
-  - BaseScp                # Inherits from multiple parents
+  - BaseScp                # First parent has the highest priority on conflicts
   - MobCombat
   - MobBloodstream
   - StripableInventoryBase
-  # The imposition of inheritance goes from the TOP TO THE DOWN!
-  # The bottom one has the highest priority, its components and values ​​will overwrite the others if there is a conflict
+  # Local fields and components have priority over every parent.
   components:
   - type: Scp096
     # ...specific fields
 ```
 
-The order of the parents matters - the data is applied in the order specified.
+The order of the parents matters. Parent compositions are applied in the listed order, while already
+composed values are treated as child values for the next parent. Therefore, when multiple parents define
+the same component field, the first parent wins. Fields and components declared directly on the child
+prototype have priority over all parents.
 
 ## Field inheritance system
 
@@ -301,7 +303,7 @@ public sealed partial class MyInheritingPrototype : IPrototype, IInheritingProto
 [Prototype(loadPriority: -1)]      // Download priority
 ```
 
-The type `type` in YAML is calculated from the class name: `MyTriggerPrototype` → `MyTrigger` (the `Prototype` suffix is ​​discarded).
+The type `type` in YAML is calculated from the class name: `MyTriggerPrototype` → `MyTrigger` (the `Prototype` suffix is discarded).
 
 ## Links to prototypes in code
 
@@ -315,7 +317,7 @@ public EntProtoId SpawnEntity = "DefaultEntity";
 public ProtoId<DamageModifierSetPrototype> DamageModifier = "Default";
 
 // Getting a prototype in the system
-[Dependency] private readonly IPrototypeManager _proto = default!;
+[Dependency] private IPrototypeManager _proto = default!;
 
 var proto = _proto.Index<MyPrototype>("protoId");
 if (_proto.TryIndex<MyPrototype>("protoId", out var proto))

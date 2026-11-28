@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Content.Server.Database;
 using Content.Server._Sunrise.TTS;
@@ -33,23 +34,24 @@ namespace Content.Server._Sunrise.Tutorial;
 /// <summary>
 /// Server-side tutorial controller for session creation, map loading, completion persistence, chat, and TTS.
 /// </summary>
-public sealed class TutorialSystem : SharedTutorialSystem
+public sealed partial class TutorialSystem : SharedTutorialSystem
 {
-    [Dependency] private readonly TTSSystem _tts = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly AccountCreationManager _accountCreation = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly EuiManager _eui = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly UserDbDataManager _userDb = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private TTSSystem _tts = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private AccountCreationManager _accountCreation = default!;
+    [Dependency] private TutorialMetricsSystem _tutorialMetrics = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private EuiManager _eui = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private MapLoaderSystem _mapLoader = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private UserDbDataManager _userDb = default!;
+    [Dependency] private IGameTiming _timing = default!;
+
     private TimeSpan _cooldown;
     private int _maxTutorials;
     private Dictionary<NetUserId, TimeSpan> _cooldownData = new();
@@ -57,6 +59,9 @@ public sealed class TutorialSystem : SharedTutorialSystem
     private readonly Dictionary<ICommonSession, TutorialCompletionEui> _completionEuis = new();
     private readonly Dictionary<NetUserId, int> _tutorialTtsRevisions = new();
     private readonly HashSet<NetUserId> _pendingCompletionRespawns = [];
+    private readonly HashSet<NetUserId> _activeTutorialTransitions = [];
+    private readonly Dictionary<NetUserId, EntityUid> _pendingDetachedTutorialLobbies = [];
+    private readonly List<DetachedTutorialLobbyRequest> _pendingDetachedTutorialLobbyBuffer = [];
 
     public override void Initialize()
     {
@@ -64,9 +69,9 @@ public sealed class TutorialSystem : SharedTutorialSystem
 
         Subs.CVar(_cfg, SunriseCCVars.TutorialCooldown, v => _cooldown = v, true);
         Subs.CVar(_cfg, SunriseCCVars.TutorialMaxActive, v => _maxTutorials = v, true);
-
         _player.PlayerStatusChanged += OnPlayerStatusChanged;
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
+        SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
         SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEnd);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
@@ -89,6 +94,16 @@ public sealed class TutorialSystem : SharedTutorialSystem
         _completionEuis.Clear();
         _tutorialTtsRevisions.Clear();
         _cooldownData.Clear();
+        _activeTutorialTransitions.Clear();
+        _pendingDetachedTutorialLobbies.Clear();
+        _pendingDetachedTutorialLobbyBuffer.Clear();
+    }
+
+    public override void Update(float frameTime)
+    {
+        ProcessPendingDetachedTutorialLobbies();
+
+        base.Update(frameTime);
     }
 
     private void OnPlayerStatusChanged(object? sender, SessionStatusEventArgs args)
@@ -104,14 +119,34 @@ public sealed class TutorialSystem : SharedTutorialSystem
         SchedulePendingRespawnAfterAttach(args.Player);
     }
 
+    private void OnPlayerDetached(PlayerDetachedEvent args)
+    {
+        if (_activeTutorialTransitions.Contains(args.Player.UserId))
+            return;
+
+        if (!TryComp(args.Entity, out TutorialPlayerComponent? tutorialPlayer) ||
+            !tutorialPlayer.TutorialInitialized)
+        {
+            return;
+        }
+
+        QueueDetachedTutorialLobby(args.Entity, args.Player);
+    }
+
     private void OnRoundEnd(RoundEndMessageEvent args)
     {
         _pendingCompletionRespawns.Clear();
+        _activeTutorialTransitions.Clear();
+        _pendingDetachedTutorialLobbies.Clear();
+        _pendingDetachedTutorialLobbyBuffer.Clear();
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent args)
     {
         _pendingCompletionRespawns.Clear();
+        _activeTutorialTransitions.Clear();
+        _pendingDetachedTutorialLobbies.Clear();
+        _pendingDetachedTutorialLobbyBuffer.Clear();
     }
 
     private void OnExpandPvs(Entity<TutorialPlayerComponent> ent, ref ExpandPvsEvent args)
@@ -243,9 +278,58 @@ public sealed class TutorialSystem : SharedTutorialSystem
         return true;
     }
 
+    private void QueueDetachedTutorialLobby(EntityUid uid, ICommonSession session)
+    {
+        _pendingDetachedTutorialLobbies[session.UserId] = uid;
+    }
+
+    private void ProcessPendingDetachedTutorialLobbies()
+    {
+        if (_pendingDetachedTutorialLobbies.Count == 0)
+            return;
+
+        _pendingDetachedTutorialLobbyBuffer.Clear();
+        foreach (var (userId, uid) in _pendingDetachedTutorialLobbies)
+        {
+            _pendingDetachedTutorialLobbyBuffer.Add(new DetachedTutorialLobbyRequest(userId, uid));
+        }
+
+        _pendingDetachedTutorialLobbies.Clear();
+
+        for (var i = 0; i < _pendingDetachedTutorialLobbyBuffer.Count; i++)
+        {
+            var pending = _pendingDetachedTutorialLobbyBuffer[i];
+
+            if (!_player.TryGetSessionById(pending.UserId, out var session))
+                continue;
+
+            SendDetachedTutorialPlayerToLobby(pending.TutorialEntity, session);
+        }
+
+        _pendingDetachedTutorialLobbyBuffer.Clear();
+    }
+
+    private void SendDetachedTutorialPlayerToLobby(EntityUid uid, ICommonSession session)
+    {
+        if (session.Status != SessionStatus.InGame)
+            return;
+
+        _pendingCompletionRespawns.Remove(session.UserId);
+        _cooldownData[session.UserId] = _timing.CurTime + _cooldown;
+        StopTutorialTts(session);
+        _tutorialTtsRevisions.Remove(session.UserId);
+        CloseCompletionEui(session);
+
+        if (TryComp(uid, out TutorialPlayerComponent? comp) && comp.TutorialInitialized)
+            EndTutorial((uid, comp));
+
+        _pendingCompletionRespawns.Remove(session.UserId);
+        _ticker.Respawn(session);
+    }
+
     private bool IsTutorialStepsCompleted(Entity<TutorialPlayerComponent> ent)
     {
-        return _proto.TryIndex(ent.Comp.SequenceId, out var sequence) &&
+        return ProtoMan.TryIndex(ent.Comp.SequenceId, out var sequence) &&
                ent.Comp.StepIndex >= sequence.Steps.Count;
     }
 
@@ -314,32 +398,78 @@ public sealed class TutorialSystem : SharedTutorialSystem
     /// <summary>
     /// Handles actions sent by the tutorial completion EUI.
     /// </summary>
-    public void HandleCompletionAction(EntityUid player, string actionId)
+    public bool HandleCompletionAction(EntityUid player, string actionId)
     {
+        if (actionId == TutorialCompletionActions.Stay)
+            return true;
+
+        if (actionId == TutorialCompletionActions.Next)
+            return TryStartNextTutorial(player);
+
         if (actionId != TutorialCompletionActions.Leave)
-            return;
+            return false;
 
         if (!TryComp(player, out TutorialPlayerComponent? comp))
-            return;
+            return false;
 
         EndTutorial((player, comp));
+        return true;
     }
 
-    private void OnTutorialQuitRequest(TutorialQuitRequestEvent msg, EntitySessionEventArgs args)
+    public bool TryGetNextTutorial(EntityUid player, out TutorialSequencePrototype? nextTutorial)
     {
-        if (args.SenderSession.AttachedEntity is not { } entity)
-            return;
+        nextTutorial = null;
 
-        if (!TryComp(entity, out TutorialPlayerComponent? comp))
-            return;
+        if (!TryComp(player, out TutorialPlayerComponent? comp))
+            return false;
 
-        EndTutorial((entity, comp));
+        return TutorialPrototypeOrdering.TryGetNextTutorial(ProtoMan, comp.SequenceId, out nextTutorial);
+    }
+
+    private bool TryStartNextTutorial(EntityUid player)
+    {
+        if (!TryGetNextTutorial(player, out var nextTutorial) || nextTutorial == null)
+            return false;
+
+        if (!_player.TryGetSessionByEntity(player, out var session) ||
+            session.Status != SessionStatus.InGame ||
+            !_mind.TryGetMind(player, out var mindId, out _))
+        {
+            return false;
+        }
+
+        if (!TryCreateNextTutorialPlayer(nextTutorial, out var nextPlayer, out var nextGrid))
+            return false;
+
+        if (!TryComp(player, out TutorialPlayerComponent? currentComp))
+            return false;
+
+        StopTutorialTts(session);
+        _activeTutorialTransitions.Add(session.UserId);
+        try
+        {
+            _mind.TransferTo(mindId, nextPlayer);
+        }
+        finally
+        {
+            _activeTutorialTransitions.Remove(session.UserId);
+        }
+
+        var tutorial = EnsureComp<TutorialPlayerComponent>(nextPlayer);
+        tutorial.SequenceId = nextTutorial.ID;
+        tutorial.Grid = nextGrid;
+        EnsureComp<TutorialProgressBarComponent>(nextPlayer);
+        InitializeTutorial((nextPlayer, tutorial));
+        _tutorialMetrics.RecordTutorialStarted(nextTutorial.ID);
+
+        QueueDel(currentComp.Grid);
+        QueueDel(player);
+        return true;
     }
 
     private async void OnWindowDataRequest(TutorialWindowDataRequestEvent msg, EntitySessionEventArgs args)
     {
         List<string>? completed = null;
-
         try
         {
             completed = await _db.GetTutorial(args.SenderSession.UserId.UserId);
@@ -349,40 +479,31 @@ public sealed class TutorialSystem : SharedTutorialSystem
             Log.Error($"Failed to fetch tutorial completion list for {args.SenderSession.UserId}: {e}");
         }
 
-        completed ??= [];
         RaiseNetworkEvent(
-            new TutorialWindowDataResponseEvent(completed),
+            new TutorialWindowDataResponseEvent(completed ?? []),
             Filter.SinglePlayer(args.SenderSession));
     }
 
     private void OnStartRequest(TutorialStartRequestEvent msg, EntitySessionEventArgs args)
     {
-        if (!_proto.TryIndex(msg.SequenceId, out var sequence))
+        if (!ProtoMan.TryIndex(msg.SequenceId, out var sequence))
             return;
 
         if (!CanStartTutorial(args.SenderSession, out var reason))
         {
-            RaiseNetworkEvent(
-                new TutorialStartDeniedEvent(reason),
-                Filter.SinglePlayer(args.SenderSession));
+            RaiseNetworkEvent(new TutorialStartDeniedEvent(reason), Filter.SinglePlayer(args.SenderSession));
             return;
         }
 
         TryCreateMap();
         var gridUid = LoadLocation(sequence.Grid);
-
         if (gridUid == EntityUid.Invalid)
             return;
 
         var spawnPoint = GetSpawnPoint(gridUid);
-
-        if (spawnPoint == EntityUid.Invalid)
-        {
-            QueueDel(gridUid);
-            return;
-        }
-
-        if (!TrySpawnNextTo(sequence.PlayerEntity, spawnPoint, out var uid))
+        if (spawnPoint == EntityUid.Invalid ||
+            !TrySpawnNextTo(sequence.PlayerEntity, spawnPoint, out var uid) ||
+            uid is not { } playerUid)
         {
             QueueDel(gridUid);
             return;
@@ -390,24 +511,71 @@ public sealed class TutorialSystem : SharedTutorialSystem
 
         var (mindId, _) = _mind.CreateMind(args.SenderSession.UserId);
         _mind.SetUserId(mindId, args.SenderSession.UserId);
-        _mind.TransferTo(mindId, uid);
+        _mind.TransferTo(mindId, playerUid);
         _ticker.PlayerJoinGame(args.SenderSession, true);
 
-        // ComponentInit runs before these fields are configured, so the shared
-        // system performs the actual setup after the server has assigned them.
-        var tutorial = EnsureComp<TutorialPlayerComponent>(uid.Value);
+        var tutorial = EnsureComp<TutorialPlayerComponent>(playerUid);
         tutorial.SequenceId = msg.SequenceId;
         tutorial.Grid = gridUid;
-        EnsureComp<TutorialProgressBarComponent>(uid.Value);
-        InitializeTutorial((uid.Value, tutorial));
+        EnsureComp<TutorialProgressBarComponent>(playerUid);
+        InitializeTutorial((playerUid, tutorial));
+        _tutorialMetrics.RecordTutorialStarted(sequence.ID);
+    }
+
+    private bool TryCreateNextTutorialPlayer(
+        TutorialSequencePrototype sequence,
+        out EntityUid player,
+        out EntityUid grid)
+    {
+        player = EntityUid.Invalid;
+        grid = EntityUid.Invalid;
+
+        TryCreateMap();
+        grid = LoadLocation(sequence.Grid);
+        if (grid == EntityUid.Invalid)
+            return false;
+
+        var spawnPoint = GetSpawnPoint(grid);
+        if (spawnPoint == EntityUid.Invalid ||
+            !TrySpawnNextTo(sequence.PlayerEntity, spawnPoint, out var spawned) ||
+            spawned is not { } spawnedPlayer)
+        {
+            QueueDel(grid);
+            return false;
+        }
+
+        player = spawnedPlayer;
+        return true;
+    }
+
+    private void OnTutorialQuitRequest(TutorialQuitRequestEvent msg, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession.AttachedEntity is not { } entity)
+            return;
+
+        if (TryComp(entity, out TutorialPlayerComponent? comp))
+        {
+            EndTutorial((entity, comp));
+            return;
+        }
+
+        return;
     }
 
     private bool CanStartTutorial(ICommonSession session, out string reason)
     {
         reason = string.Empty;
 
-        if (session.AttachedEntity != null)
+        if (_ticker.RunLevel != GameRunLevel.InRound)
+        {
+            reason = Loc.GetString("round-is-not-ready");
             return false;
+        }
+
+        if (session.AttachedEntity != null)
+        {
+            return false;
+        }
 
         var cooldown = _cooldownData.GetValueOrDefault(session.UserId);
 
@@ -448,7 +616,7 @@ public sealed class TutorialSystem : SharedTutorialSystem
             if (!TryGetCurrentStep((uid, comp), out var step))
                 return;
 
-            if (!_proto.TryIndex(step.VoiceId, out var voice))
+            if (!ProtoMan.TryIndex(step.VoiceId, out var voice))
                 return;
 
             var sequenceId = comp.SequenceId;
@@ -607,4 +775,6 @@ public sealed class TutorialSystem : SharedTutorialSystem
             comp.GridOffsets.Remove(grid);
         }
     }
+
+    private readonly record struct DetachedTutorialLobbyRequest(NetUserId UserId, EntityUid TutorialEntity);
 }

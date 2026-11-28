@@ -185,55 +185,6 @@
     deleteSpawnerAfterSpawn: true
 
 - type: entity
-  id: SovietDamagedIDCardSpawnerPartisan
-  name: soviet damaged id card spawner t1 cheap
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: RandomSpawner
-    prototypes:
-    - USSPDamagedIDCardRandomSpawner
-    chance: 0.7
-    offset: 0
-    deleteSpawnerAfterSpawn: true
-
-- type: entity
-  id: SovietDamagedIDCardSpawner
-  name: soviet damaged id card spawner t1 t2
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: RandomSpawner
-    prototypes:
-    - USSPSoldierDamagedIDCardRandomSpawner
-    chance: 0.7
-    offset: 0
-    deleteSpawnerAfterSpawn: true
-
-- type: entity
-  id: SovietDamagedIDCardSpawnerSergeant
-  name: soviet damaged id card spawner sergeant
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: RandomSpawner
-    prototypes:
-    - USSPSoldierOfficerDamagedIDCardRandomSpawner
-    chance: 1
-    offset: 0
-    deleteSpawnerAfterSpawn: true
-
-- type: entity
-  id: SovietDamagedIDCardSpawnerCaptain
-  name: soviet damaged id card spawner captain
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: RandomSpawner
-    prototypes:
-    - USSPCaptainDamagedIDCardRandomSpawner
-    chance: 1
-    offset: 0
-    deleteSpawnerAfterSpawn: true
-
-# MERCENARY NPC LOOT
-- type: entity
   parent: MercenaryWebbingBox
   id: SovietMarineWebbingBox
   name: ussp bundle
@@ -327,7 +278,8 @@
       prob: 0.1
     - id: ExShrapnelGrenade
       prob: 0.05
-    - id: SovietDamagedIDCardSpawnerSergeant
+    - id: USSPSoldierOfficerDamagedIDCard
+      prob: 0.75
     - id: SovietMedicalSupplyRandomSpawner
     - id: SovietSmokingSpawner
     sound:
@@ -359,7 +311,8 @@
       prob: 0.2
     - id: ExShrapnelGrenade
       prob: 0.05
-    - id: SovietDamagedIDCardSpawner
+    - id: USSPSoldierDamagedIDCard
+      prob: 0.75
     - id: SovietMedicalSupplyRandomSpawner
     - id: SovietSmokingSpawner
     sound:
@@ -391,7 +344,8 @@
       prob: 0.2
     - id: ExShrapnelGrenade
       prob: 0.05
-    - id: SovietDamagedIDCardSpawnerSergeant
+    - id: USSPSoldierOfficerDamagedIDCard
+      prob: 0.75
     - id: SovietMedicalSupplyRandomSpawner
     - id: SovietSmokingSpawner
     sound:
@@ -417,7 +371,8 @@
       prob: 0.2
     - id: MagazineLightRifleAP
       prob: 0.01
-    - id: SovietDamagedIDCardSpawner
+    - id: USSPSoldierDamagedIDCard
+      prob: 0.75
     - id: SovietMedicalSupplyRandomSpawner
     - id: SovietSmokingSpawner
     sound:
@@ -498,7 +453,8 @@
       prob: 0.1
     - id: NukeOpsMedkitSpawner
       prob: 0.1
-    - id: SovietDamagedIDCardSpawner
+    - id: USSPSoldierDamagedIDCard
+      prob: 0.75
     - id: SovietSmokingSpawner
     sound:
       path: /Audio/Items/jumpsuit_equip.ogg
@@ -547,7 +503,8 @@
       prob: 0.4
     - id: MagazineBoxPistolFMJ
       prob: 0.3
-    - id: SovietDamagedIDCardSpawner
+    - id: USSPSoldierDamagedIDCard
+      prob: 0.75
     - id: SovietSmokingSpawner
     sound:
       path: /Audio/Items/jumpsuit_equip.ogg
@@ -568,7 +525,7 @@
     - id: WeaponLightMachineGunDP28
       prob: 0.05
       orGroup: DP28Pool
-    - id: WeaponPistolHIB88M4
+    - id: WeaponPistolViper
       prob: 0.5
       orGroup: DP28Pool
     - id: CrateAmmunitionSmallLightRifle
@@ -610,7 +567,7 @@
     - id: WeaponLightMachineGunMG60Empty
       prob: 0.25
       orGroup: DP28Pool
-    - id: WeaponPistolHIB88M4
+    - id: WeaponPistolViper
       prob: 0.3
       orGroup: DP28Pool
     - id: CrateAmmunitionSmallLightRifle
@@ -653,7 +610,8 @@
       prob: 0.1
     - id: MagazineLightMachineGunMG60
       prob: 0.1
-    - id: SovietDamagedIDCardSpawner
+    - id: USSPSoldierDamagedIDCard
+      prob: 0.75
     - id: SovietSmokingSpawner
     sound:
       path: /Audio/Items/jumpsuit_equip.ogg
@@ -671,7 +629,7 @@
     - id: WeaponLightMachineGunRPD
       prob: 0.05
       orGroup: MgPool
-    - id: WeaponPistolHIB88M4
+    - id: WeaponPistolViper
       prob: 0.5
       orGroup: MgPool
     - id: MagazineLightRifleBeltBoxFMJ
@@ -714,7 +672,8 @@
       prob: 0.1
     - id: MagazineLightRifleMaxim
       prob: 0.1
-    - id: SovietDamagedIDCardSpawner
+    - id: USSPSoldierDamagedIDCard
+      prob: 0.75
     - id: SovietSmokingSpawner
     sound:
       path: /Audio/Items/jumpsuit_equip.ogg
@@ -737,7 +696,8 @@
       prob: 0.25
     - id: MagazineLightRifleBeltBoxFMJ
       prob: 0.15
-    - id: SovietDamagedIDCardSpawner
+    - id: USSPSoldierDamagedIDCard
+      prob: 0.75
     - id: SovietSmokingSpawner
     sound:
       path: /Audio/Items/jumpsuit_equip.ogg
@@ -797,7 +757,8 @@
       prob: 0.2
     - id: MagazineBoxRifleMachineBig
       prob: 0.1
-    - id: SovietDamagedIDCardSpawner
+    - id: USSPSoldierDamagedIDCard
+      prob: 0.75
     - id: SovietSmokingSpawner
     sound:
       path: /Audio/Items/jumpsuit_equip.ogg
@@ -858,7 +819,8 @@
       prob: 0.15
     - id: PirateMedSpawner01
     - id: SovietPinSpawnerT2
-    - id: SovietDamagedIDCardSpawner
+    - id: USSPSoldierDamagedIDCard
+      prob: 0.75
     - id: SovietMedicalSupplyRandomSpawner
     - id: SovietSmokingSpawner
     sound:
@@ -925,7 +887,8 @@
       prob: 0.9
     - id: MagazineBoxPistolFMJ
       prob: 0.2
-    - id: SovietDamagedIDCardSpawner
+    - id: USSPSoldierDamagedIDCard
+      prob: 0.75
     - id: SovietSmokingSpawner
     sound:
       path: /Audio/Items/jumpsuit_equip.ogg
@@ -944,7 +907,7 @@
     - id: WeaponShotgunGA12
       prob: 0.25
       orGroup: Weapons
-    - id: WeaponShotgunCombat
+    - id: WeaponShotgunEnforcer
       prob: 0.25
       orGroup: Weapons
     - id: WeaponShotgunBulldogBiocode
@@ -1008,7 +971,8 @@
       prob: 0.1
     - id: MagazineShotgunIncendiary
       prob: 0.1
-    - id: SovietDamagedIDCardSpawner
+    - id: USSPSoldierDamagedIDCard
+      prob: 0.75
     - id: SovietSmokingSpawner
     sound:
       path: /Audio/Items/jumpsuit_equip.ogg
@@ -1255,7 +1219,7 @@
       prob: 0.7
     - id: LootSpawnerArmoryGunsOnly
       prob: 0.3
-    - id: SovietDamagedIDCardSpawnerCaptain
+    - id: USSPCaptainDamagedIDCard
     - id: SovietMedicalSupplyRandomSpawner
     - id: SovietSmokingSpawner
     sound:
@@ -1316,20 +1280,18 @@
       prob: 0.4
     - id: LootSpawnerScienceMajor
       prob: 0.2
-    # durand
-    - id: GygaxArmorPlate
+    # Blyashanka
+    - id: SunriseBlyashankaArmorPlate
       prob: 0.1
-    - id: GygaxLArm
+    - id: SunriseBlyashankaLLeg2
       prob: 0.35
-    - id: GygaxRArm
+    - id: SunriseBlyashankaRLeg2
       prob: 0.35
-    - id: GygaxLLeg
+    - id: SunriseBlyashankaLLeg
       prob: 0.35
-    - id: GygaxRLeg
+    - id: SunriseBlyashankaRLeg
       prob: 0.35
-    - id: GygaxHarness
-      prob: 0.35
-    - id: GygaxHead
+    - id: SunriseBlyashankaHarness
       prob: 0.35
     - id: CratePirateSurplusBundle
       prob: 0.3

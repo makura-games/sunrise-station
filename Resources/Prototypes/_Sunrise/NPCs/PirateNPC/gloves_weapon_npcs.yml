@@ -558,14 +558,14 @@
 
 - type: entity
   parent: BaseSunriseHandsNoGlovesPiratePrivateer
-  id: ClothingHandsSMGC40
-  suffix: C40 SMG
+  id: ClothingHandsSMGVectorSuper
+  suffix: Vector Super
   categories: [ HideSpawnMenu ]
   components:
   - type: Clothing
     clothingVisuals:
       gloves:
-      - sprite: _Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi
+      - sprite: _Sunrise/Objects/Weapons/Guns/SMGs/vector_super.rsi
         state: wielded-inhand-right
 
 - type: entity
@@ -638,18 +638,6 @@
     clothingVisuals:
       gloves:
       - sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm24/Green/tiny.rsi
-        state: wielded-inhand-right
-
-- type: entity
-  parent: BaseSunriseHandsNoGlovesPirateEva
-  id: ClothingHandsMp38
-  suffix: mp38
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Clothing
-    clothingVisuals:
-      gloves:
-      - sprite: _Sunrise/Objects/Weapons/Guns/SMGs/mp38/tiny.rsi
         state: wielded-inhand-right
 
 - type: entity
@@ -925,9 +913,10 @@
       path: "/Audio/Items/drill_use.ogg"
     attackRate: 5
     damage:
-      groups:
-        Brute: 9
       types:
+        Blunt: 3
+        Slash: 3
+        Piercing: 3
         Structural: 25
     bluntStaminaDamageFactor: 1.5
 
@@ -1031,15 +1020,24 @@
 
 - type: entity
   parent: BaseSunriseHandsNoGlovesPirateMechArmor
-  id: ClothingHandsMechMaxim
-  suffix: Mech Maxim
+  id: ClothingHandsMechRPD
+  suffix: Mech RPD
   categories: [ HideSpawnMenu ]
   components:
-  - type: Clothing
-    clothingVisuals:
-      gloves:
-      - sprite: _Sunrise/Objects/Specific/Mech/mecha_wield.rsi
-        state: mech-wield
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.65
+        Slash: 0.65
+        Piercing: 0.5
+        Shock: 4
+        Heat: 0.8
+        Structural: 0.1
+      flatReductions:
+        Blunt: 5
+        Heat: 5
+        Slash: 5
+        Piercing: 1
   - type: MeleeThrowOnHit
     distance: 1
     speed: 14
@@ -1052,6 +1050,43 @@
       types:
         Blunt: 35
         Structural: 150
+    bluntStaminaDamageFactor: 1.5
+    soundHit:
+      collection: PunchHard
+  - type: FireProtection
+    reduction: 1
+
+- type: entity
+  parent: BaseSunriseHandsNoGlovesPirateMechArmorHeavy
+  id: ClothingHandsMechMaxim
+  suffix: Mech Maxim
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    clothingVisuals:
+      gloves:
+      - sprite: _Sunrise/Objects/Specific/Mech/mecha_wield.rsi
+        state: mech-wield
+  - type: MeleeThrowOnHit
+    distance: 1
+    speed: 14
+  - type: TriggerOnMeleeHit
+    targetIsUser: true
+    triggerEveryHit: true
+  - type: KnockdownOnTrigger
+    targetUser: true
+    knockdownAmount: 1
+    autoStand: true
+    drop: false
+  - type: MeleeWeapon
+    wideAnimation: WeaponArcInvisibleNPC
+    animation: WeaponArcInvisibleNPC
+    hidden: true
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 35
+        Structural: 250
     bluntStaminaDamageFactor: 1.5
     soundHit:
       collection: PunchHard
@@ -1252,11 +1287,6 @@
   categories: [ HideSpawnMenu ]
 
 - type: entity
-  parent: [SovietArmorNoArmor, ClothingHandsMp38, SovietMeleeNoArc]
-  id: ClothingHandsMp38SovietNoOuter
-  categories: [ HideSpawnMenu ]
-
-- type: entity
   parent: [ClothingHandsBottle, SovietArmorNoArmor, SovietMeleeNoArc]
   id: ClothingHandsBottleSovietNoOuter
   categories: [ HideSpawnMenu ]
@@ -1360,6 +1390,42 @@
         Heat: 5
         Slash: 5
         Piercing: 4
+
+- type: entity
+  abstract: true
+  id: PirateArmorMechArmorHeavySyndi
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.55
+        Slash: 0.55
+        Piercing: 0.2
+        Shock: 5
+        Heat: 0.75
+        Structural: 0.2
+      flatReductions:
+        Blunt: 10
+        Heat: 5
+        Slash: 10
+        Piercing: 5
+
+- type: entity
+  abstract: true
+  id: PirateArmorMurmilo
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.7
+        Piercing: 0.8
+        Heat: 0.8
+      flatReductions:
+        Blunt: 3
+        Heat: 3
+        Slash: 3
+        Piercing: 6
 
 - type: entity
   abstract: true
@@ -1555,6 +1621,16 @@
 
 - type: entity
   abstract: true
+  id: BaseSunriseHandsNoGlovesPirateMechArmorHeavy
+  parent: [ClothingHandsNoGloves, PirateArmorMechArmorHeavySyndi]
+
+- type: entity
+  abstract: true
+  id: BaseSunriseHandsNoGlovesPirateMurmilo
+  parent: [ClothingHandsNoGloves, PirateArmorMurmilo]
+
+- type: entity
+  abstract: true
   id: BaseSunriseHandsNoGlovesPiratePrivateer
   parent: [ClothingHandsNoGloves, PirateArmorPrivateer]
 
@@ -1625,7 +1701,12 @@
   categories: [ HideSpawnMenu ]
 
 - type: entity
-  parent: BaseSunriseHandsNoGlovesPirateMechArmor
+  parent: [ClothingHandsBaseNPC, PirateArmorMurmilo]
+  id: ClothingHandsPirateArmorMurmilo
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseSunriseHandsNoGlovesPirateMurmilo
   id: ClothingLightMachineGunPirateCannonJugg
   suffix: lmg pirate cannon
   categories: [ HideSpawnMenu ]

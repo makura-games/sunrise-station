@@ -1,9 +1,9 @@
 ent-PaintBase = баллончик краски
     .desc = Баночка аэрозольной краски.
 ent-FunnyPaint = весёлая краска
-    .desc = Баночка весёлой краски, производства Honk! Co.
+    .desc = Баночка весёлой краски, производства Хонк! Ко.
 ent-FunnyPaintYellow = весёлая краска
-    .desc = Баночка весёлой краски, производства Honk! Co.
+    .desc = Баночка весёлой краски, производства Хонк! Ко.
 ent-DeathPaint = { ent-PaintBase }
     .desc = { ent-PaintBase.desc }
 ent-DeathPaintTwo = { ent-PaintBase }

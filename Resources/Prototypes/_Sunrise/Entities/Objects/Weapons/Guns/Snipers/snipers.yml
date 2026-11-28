@@ -76,80 +76,6 @@
     price: 5000
 
 - type: entity
-  name: BR-64
-  parent: [ BaseWeaponRifle, BaseGunWieldable ]
-  id: WeaponRifleBR64
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/Snipers/br-64/big.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/Snipers/br-64/tiny.rsi
-  - type: Item
-    size: Huge
-    shape:
-    - 0,0,5,1
-    sprite: _Sunrise/Objects/Weapons/Guns/Snipers/br-64/tiny.rsi
-  - type: GunWieldBonus
-    minAngle: -24
-    maxAngle: -41
-  - type: Gun
-    minAngle: 25
-    maxAngle: 45
-    fireRate: 3
-    soundGunshot:
-      path: /Audio/_Sunrise/Weapons/Guns/Snipers/SR-64/SR64_shot.ogg
-      params:
-        volume: -3
-    soundEmpty:
-      path: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/empty.ogg
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineRifleHeavyFMJ
-        insertSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/reload.ogg
-        ejectSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazineHeavyRifle
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgeRifleHeavyFMJ
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgeHeavyRifle
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: Appearance
-  - type: GunRequiresWield
-  - type: Wieldable
-  - type: UseDelay
-    delay: 1
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.25
-    sprintModifier: 0.25
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 12
-    pvsIncrease: 1.2
-  - type: ChamberMagazineAmmoProvider
-    autoEject: true
-    boltClosed: null
-
-- type: entity
   name: SR-127 Bauer bolt action rifle
   parent: [ BaseWeaponRifle, BaseGunWieldable ]
   id: WeaponRifleBauer127
@@ -234,26 +160,96 @@
 
 - type: entity
   name: M1 Garand
-  parent: BaseWeaponSniper
+  parent: BaseItem
   id: WeaponSniperGarand
   components:
   - type: Sprite
+    scale: 0.8,0.8
     sprite: _Sunrise/Objects/Weapons/Guns/Snipers/garand/big.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
     sprite: _Sunrise/Objects/Weapons/Guns/Snipers/garand/tiny.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
   - type: Item
     size: Huge
     shape:
-    - 0,0,4,1
+    - 0,0,4,0
     sprite: _Sunrise/Objects/Weapons/Guns/Snipers/garand/tiny.rsi
+  - type: AmmoCounter
   - type: Gun
-    fireRate: 0.8
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    fireRate: 2.25
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Snipers/garand/garand.ogg
       params:
-        volume: 4
+        volume: 12
     soundEmpty:
       path: /Audio/_Sunrise/Weapons/Guns/Snipers/garand/garand_empty.ogg
+  - type: ChamberMagazineAmmoProvider
+    autoEject: true
+    boltClosed: null
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
+    soundAutoEject:
+      collection: ChurchBell
+      params:
+        variation: 0.03
+        pitch: 1.5
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineGarand
+        priority: 2
+        disableEject: true
+        swap: false
+        whitelist:
+          tags:
+          - MagazineGarand
+        whitelistFailPopup: gun-magazine-whitelist-fail
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/_Sunrise/Weapons/Guns/Snipers/garand/garand_empty.ogg
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeRifleHeavyFMJ
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeHeavyRifle
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: StaticPrice
+    price: 500
+  - type: EmitSoundOnPickup
+    sound:
+      collection: SnipersPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: SnipersDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: SnipersDrop
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 2
+    pvsIncrease: 0.2
+  - type: KnockbackByUserTag
+    doestContain:
+      Resomi:
+        knockback: 4
+        staminaMultiplier: 15
+      Felinid:
+        knockback: 2
+        staminaMultiplier: 15
   - type: Wieldable
   - type: UseDelay
     delay: 0.5

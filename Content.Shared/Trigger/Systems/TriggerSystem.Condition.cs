@@ -3,7 +3,6 @@ using Content.Shared.Random.Helpers;
 using Content.Shared.Trigger.Components;
 using Content.Shared.Trigger.Components.Conditions;
 using Content.Shared.Verbs;
-using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Random;
 
 namespace Content.Shared.Trigger.Systems;
@@ -23,10 +22,10 @@ public sealed partial class TriggerSystem
     }
 
     // Sunrise-Start
-    private void StartTimerOnShoot(EntityUid uid, StartTimerOnShootComponent component, ProjectileShotEvent args)
+    private void StartTimerOnShoot(Entity<StartTimerOnShootComponent> ent, ref ProjectileShotEvent args)
     {
-        if (TryComp<ProjectileComponent>(uid, out var projectile))
-            ActivateTimerTrigger(uid, projectile.Shooter);
+        if (TryComp<ProjectileComponent>(ent.Owner, out var projectile))
+            ActivateTimerTrigger(ent.Owner, projectile.Shooter);
     }
     // Sunrise-End
 
@@ -71,7 +70,7 @@ public sealed partial class TriggerSystem
     private void Toggle(Entity<ToggleTriggerConditionComponent> ent, EntityUid user)
     {
         var msg = ent.Comp.Enabled ? ent.Comp.ToggleOff : ent.Comp.ToggleOn;
-        _popup.PopupPredicted(Loc.GetString(msg), ent.Owner, user);
+        _popup.PopupEntity(Loc.GetString(msg), ent.Owner, user);
         ent.Comp.Enabled = !ent.Comp.Enabled;
         Dirty(ent);
     }
@@ -82,17 +81,8 @@ public sealed partial class TriggerSystem
         if (args.Key != null && !ent.Comp.Keys.Contains(args.Key))
             return;
 
-        // TODO: Replace with RandomPredicted once the engine PR is merged
-        var hash = new List<int>
-        {
-            (int)_timing.CurTick.Value,
-            GetNetEntity(ent).Id,
-            args.User == null ? 0 : GetNetEntity(args.User.Value).Id,
-        };
-        var seed = SharedRandomExtensions.HashCodeCombine(hash);
-        var rand = new System.Random(seed);
-
-        args.Cancelled |= !rand.Prob(ent.Comp.SuccessChance); // When not successful, Cancelled = true
+        // When not successful, Cancelled = true
+        args.Cancelled |= !SharedRandomExtensions.PredictedProb(_timing, ent.Comp.SuccessChance, GetNetEntity(ent), GetNetEntity(args.User));
     }
     private void OnMindRoleTriggerAttempt(Entity<MindRoleTriggerConditionComponent> ent, ref AttemptTriggerEvent args)
     {

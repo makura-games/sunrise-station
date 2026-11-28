@@ -18,7 +18,7 @@ public sealed partial class RandomPredictedSystem : EntitySystem
      * Основная часть системы.
      */
 
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

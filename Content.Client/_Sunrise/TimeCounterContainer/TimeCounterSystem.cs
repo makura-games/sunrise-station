@@ -1,5 +1,6 @@
 using Content.Client._Sunrise.Tutorial.Components;
 using Content.Shared._Sunrise.Tutorial.Components;
+using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Content.Client._Sunrise.TimeCounterContainer;
 using Content.Client.UserInterface.Screens;
@@ -8,10 +9,11 @@ using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client._Sunrise.Tutorial;
 
-public sealed class TimeCounterSystem : EntitySystem
+public sealed partial class TimeCounterSystem : EntitySystem
 {
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
-    private EntityQuery<TimeCounterUiComponent> _timeCounterUiQuery;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
+    [Dependency] private EntityQuery<TimeCounterUiComponent> _timeCounterUiQuery = default!;
     private LayoutContainer _timeCounterRoot = default!;
     /// <summary>
     /// Why? The in-game screen hierarchy is recreated after OnScreenChanged.
@@ -28,7 +30,6 @@ public sealed class TimeCounterSystem : EntitySystem
         SubscribeLocalEvent<LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<LocalPlayerDetachedEvent>(OnPlayerDetached);
 
-        _timeCounterUiQuery = GetEntityQuery<TimeCounterUiComponent>();
         _timeCounterRoot = new LayoutContainer();
         _ui.OnScreenChanged += OnScreenChanged;
     }
@@ -81,6 +82,12 @@ public sealed class TimeCounterSystem : EntitySystem
 
     private void UpdateTimeCounter(Entity<TimeCounterComponent> ent)
     {
+        if (_player.LocalEntity != ent.Owner)
+        {
+            RemoveTimeCounter(ent.Owner);
+            return;
+        }
+
         if (ent.Comp.EndTime == null || ent.Comp.EndTime == TimeSpan.Zero)
         {
             RemoveTimeCounter(ent.Owner);

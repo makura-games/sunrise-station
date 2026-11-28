@@ -321,9 +321,9 @@
   description: A seemingly simple business suit.. until the first bullet bounced..
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/lawyerblack.rsi
+    sprite: Clothing/Uniforms/Jumpsuits/Service/lawyerblack.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/lawyerblack.rsi
+    sprite: Clothing/Uniforms/Jumpsuits/Service/lawyerblack.rsi
   - type: Item
     size: Small
     shape:

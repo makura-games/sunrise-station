@@ -1,2 +1,2 @@
-ent-StatueDelta = Статуя дельты
+ent-StatueDelta = статуя дельты
     .desc = Статуя дельты. Большая и сильная.

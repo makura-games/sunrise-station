@@ -1,13 +1,13 @@
-﻿using Content.Shared._Sunrise.Interrogator;
+using Content.Shared._Sunrise.Interrogator;
 using Content.Shared.Verbs;
 using Robust.Client.GameObjects;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client._Sunrise.Interrogator;
 
-public sealed class InterrogatorSystem: SharedInterrogatorSystem
+public sealed partial class InterrogatorSystem: SharedInterrogatorSystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

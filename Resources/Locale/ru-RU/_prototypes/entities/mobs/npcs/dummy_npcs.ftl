@@ -1,3 +1,3 @@
-ent-MobHumanPathDummy = Манекен-путешественник
+ent-MobHumanPathDummy = манекен-путешественник
     .desc = Жалкая кучка тайн.
     .suffix = ИИ

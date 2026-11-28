@@ -26,6 +26,8 @@ ent-ClothingHeadHelmetHardsuitPirateCapSun = космический шлем к�
 ent-ClothingHeadHelmetHardsuitPrivateer = шлем скафандра фрилансера
     .desc = Потёртый шлем скафандра с оптикой ночного видения и следами долгих рейдов.
     .suffix = Пират
+ent-ClothingHeadHelmetHardsuitPrivateSec = шлем скафандра частной охраны
+    .desc = Специальный шлем скафандра для частной охраны.
 ent-ClothingHeadHelmetHardsuitPirateBlackbeard = шлем скафандра Чёрной Бороды
     .desc = Тяжело бронированный пиратский шлем.
     .suffix = Пират
@@ -45,7 +47,6 @@ ent-ClothingHeadHelmetHardsuitInfiltration = шлем скафандра для 
     .desc = { ent-ClothingHeadHardsuitBase.desc }
 ent-ClothingHeadHelmetHardsuitSalvageGoliath = шлем скафандра «Голиаф»
     .desc = Прочный шлем, украшенный глазами голиафа а так же его хитиновым панцирем. похоже фонарик шлема заменен на ПНВ.
-
 ent-ClothingHeadHelmetHardsuitSpaceHazard = шлем шахтёрской опасной среды
     .desc = Защищает от агрессивной и холодной космической среды.
 ent-ClothingHeadHelmetHardsuitAdvancedMining = шлем продвинутого шахтёрского скафандра

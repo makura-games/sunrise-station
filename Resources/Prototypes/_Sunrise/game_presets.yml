@@ -10,7 +10,6 @@
   description: event-description
   rules:
   - BasicRoundstartVariation
-  - SpaceTrafficControlFriendlyEventScheduler
 
 - type: gamePreset
   id: Extra

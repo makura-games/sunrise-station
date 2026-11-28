@@ -87,7 +87,7 @@
   - type: EntityTableSpawner
     table: !type:NestedSelector
       tableId: ScienceMajorTable
-      offset: 0.2
+    offset: 0.2
 
 # Borg Module Spawner
 # Use case: One or two in robotics or as valuable loot
